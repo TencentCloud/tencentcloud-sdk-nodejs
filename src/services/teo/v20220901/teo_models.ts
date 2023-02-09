@@ -750,6 +750,54 @@ export interface DeleteApplicationProxyRequest {
 }
 
 /**
+ * 加速域名源站信息。
+ */
+export interface OriginDetail {
+  /**
+      * 源站类型，取值有：
+<li>IP_DOMAIN：IPV4、IPV6或域名类型源站；</li>
+<li>COS：COS源。</li>
+<li>ORIGIN_GROUP：源站组类型源站。</li>
+<li>AWS_S3：AWS S3对象存储源站。</li>
+      */
+  OriginType?: string
+
+  /**
+   * 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。
+   */
+  Origin?: string
+
+  /**
+   * 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。
+   */
+  BackupOrigin?: string
+
+  /**
+   * 主源源站组名称，当OriginType参数指定为ORIGIN_GROUP时该参数生效。
+   */
+  OriginGroupName?: string
+
+  /**
+   * 备用源站源站组名称，当OriginType参数指定为ORIGIN_GROUP，且用户指定了被用源站时该参数生效。
+   */
+  BackOriginGroupName?: string
+
+  /**
+      * 指定是否允许访问私有对象存储源站。当源站类型OriginType=COS或AWS_S3时有效 取值有：
+<li>on：使用私有鉴权；</li>
+<li>off：不使用私有鉴权。</li>
+不填写，默认值为off。
+      */
+  PrivateAccess?: string
+
+  /**
+      * 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateParameters?: Array<PrivateParameter>
+}
+
+/**
  * DescribeDDoSAttackData返回参数结构体
  */
 export interface DescribeDDoSAttackDataResponse {
@@ -1128,38 +1176,25 @@ export interface ModifyOriginGroupResponse {
 }
 
 /**
- * 内容管理任务结果
+ * DeleteAccelerationDomains请求参数结构体
  */
-export interface Task {
+export interface DeleteAccelerationDomainsRequest {
   /**
-   * 任务 ID。
+   * 加速域名所属站点ID。
    */
-  JobId: string
+  ZoneId: string
 
   /**
-   * 状态。
+   * 需要删除的加速域名ID列表。
    */
-  Status: string
+  DomainNames: Array<string>
 
   /**
-   * 资源。
-   */
-  Target: string
-
-  /**
-   * 任务类型。
-   */
-  Type: string
-
-  /**
-   * 任务创建时间。
-   */
-  CreateTime: string
-
-  /**
-   * 任务完成时间。
-   */
-  UpdateTime: string
+      * 是否强制删除。当域名存在关联资源（如马甲域名、流量调度功能）时，是否强制删除该域名，取值有：
+<li> true：删除该域名及所有关联资源；</li>
+<li> false：当该加速域名存在关联资源时，不允许删除。</li>不填写，默认值为：false。
+      */
+  Force?: boolean
 }
 
 /**
@@ -1278,13 +1313,44 @@ export interface DistrictStatistics {
 }
 
 /**
- * ReclaimZone返回参数结构体
+ * 加速域名源站信息。
  */
-export interface ReclaimZoneResponse {
+export interface OriginInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 源站类型，取值有：
+<li>IP_DOMAIN：IPV4、IPV6或域名类型源站；</li>
+<li>COS：COS源。</li>
+<li>ORIGIN_GROUP：源站组类型源站。</li>
+<li>AWS_S3：AWS S3对象存储源站。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginType: string
+
+  /**
+      * 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Origin: string
+
+  /**
+      * 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupOrigin?: string
+
+  /**
+      * 指定是否允许访问私有对象存储源站，当源站类型OriginType=COS或AWS_S3时有效，取值有：
+<li>on：使用私有鉴权；</li>
+<li>off：不使用私有鉴权。</li>不填写，默认值为：off。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateAccess?: string
+
+  /**
+      * 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateParameters?: Array<PrivateParameter>
 }
 
 /**
@@ -2153,25 +2219,13 @@ export interface DescribeDnsDataResponse {
 }
 
 /**
- * ModifyAliasDomainStatus请求参数结构体
+ * ModifyAccelerationDomainStatuses返回参数结构体
  */
-export interface ModifyAliasDomainStatusRequest {
+export interface ModifyAccelerationDomainStatusesResponse {
   /**
-   * 站点 ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-
-  /**
-      * 别称域名状态，取值有：
-<li> false：开启别称域名；</li>
-<li> true：关闭别称域名。</li>
-      */
-  Paused: boolean
-
-  /**
-   * 待修改状态的别称域名名称。如果为空，则不执行修改状态操作。
-   */
-  AliasNames?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -2484,6 +2538,26 @@ export interface Ipv6 {
 }
 
 /**
+ * ModifyAccelerationDomain请求参数结构体
+ */
+export interface ModifyAccelerationDomainRequest {
+  /**
+   * 加速域名所属站点ID。
+   */
+  ZoneId: string
+
+  /**
+   * 加速域名名称。
+   */
+  DomainName: string
+
+  /**
+   * 源站信息。
+   */
+  OriginInfo: OriginInfo
+}
+
+/**
  * DescribeRules请求参数结构体
  */
 export interface DescribeRulesRequest {
@@ -2661,18 +2735,49 @@ export interface DescribeZonesResponse {
 }
 
 /**
- * 规则引擎嵌套规则
+ * 加速域名
  */
-export interface SubRuleItem {
+export interface AccelerationDomain {
   /**
-   * 嵌套规则信息。
-   */
-  Rules: Array<SubRule>
+      * 源站信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginDetail?: OriginDetail
 
   /**
-   * 规则标签。
+   * 创建时间。
    */
-  Tags?: Array<string>
+  CreatedOn?: string
+
+  /**
+   * 加速域名名称。
+   */
+  DomainName?: string
+
+  /**
+   * 修改时间。
+   */
+  ModifiedOn?: string
+
+  /**
+   * 站点 ID。
+   */
+  ZoneId?: string
+
+  /**
+      * 加速域名状态，取值有：
+<li>online：已生效；</li>
+<li>process：部署中；</li>
+<li>offline：已停用；</li>
+<li>forbidden：已封禁；</li>
+<li>init：未生效，待激活站点；</li>
+      */
+  DomainStatus?: string
+
+  /**
+   * CNAME 地址。
+   */
+  Cname?: string
 }
 
 /**
@@ -3137,6 +3242,26 @@ export interface FileAscriptionInfo {
    * 文件校验内容。
    */
   IdentifyContent: string
+}
+
+/**
+ * DescribeAccelerationDomains返回参数结构体
+ */
+export interface DescribeAccelerationDomainsResponse {
+  /**
+   * 加速域名总数。
+   */
+  TotalCount: number
+
+  /**
+   * 加速域名列表。
+   */
+  AccelerationDomains: Array<AccelerationDomain>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4587,6 +4712,21 @@ export interface ModifyApplicationProxyRequest {
 }
 
 /**
+ * 安全模板配置
+ */
+export interface TemplateConfig {
+  /**
+   * 模板ID。
+   */
+  TemplateId: string
+
+  /**
+   * 模板名称。
+   */
+  TemplateName: string
+}
+
+/**
  * 规则引擎带有状态码的动作
  */
 export interface CodeAction {
@@ -4774,6 +4914,28 @@ export interface DescribeTimingL7AnalysisDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAliasDomainStatus请求参数结构体
+ */
+export interface ModifyAliasDomainStatusRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+
+  /**
+      * 别称域名状态，取值有：
+<li> false：开启别称域名；</li>
+<li> true：关闭别称域名。</li>
+      */
+  Paused: boolean
+
+  /**
+   * 待修改状态的别称域名名称。如果为空，则不执行修改状态操作。
+   */
+  AliasNames?: Array<string>
 }
 
 /**
@@ -5788,38 +5950,13 @@ export interface Filter {
 }
 
 /**
- * DownloadL4Logs请求参数结构体
+ * CreateAccelerationDomain返回参数结构体
  */
-export interface DownloadL4LogsRequest {
+export interface CreateAccelerationDomainResponse {
   /**
-   * 开始时间。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-
-  /**
-   * 四层实例ID集合。
-   */
-  ProxyIds?: Array<string>
-
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -6102,6 +6239,16 @@ export interface ModifyApplicationProxyResponse {
 }
 
 /**
+ * ReclaimZone请求参数结构体
+ */
+export interface ReclaimZoneRequest {
+  /**
+   * 站点名称。
+   */
+  ZoneName: string
+}
+
+/**
  * 缓存键配置。
  */
 export interface CacheKey {
@@ -6289,6 +6436,30 @@ export interface DescribeTimingL7CacheDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能客户端过滤
+ */
+export interface RateLimitIntelligence {
+  /**
+      * 功能开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+      */
+  Switch: string
+
+  /**
+      * 执行动作，取值有：
+<li>monitor：观察；</li>
+<li>alg：挑战。</li>
+      */
+  Action: string
+
+  /**
+   * 规则id，仅出参使用。
+   */
+  RuleId?: number
 }
 
 /**
@@ -6692,13 +6863,23 @@ export interface BindZoneToPlanRequest {
 }
 
 /**
- * ReclaimZone请求参数结构体
+ * CreateAccelerationDomain请求参数结构体
  */
-export interface ReclaimZoneRequest {
+export interface CreateAccelerationDomainRequest {
   /**
-   * 站点名称。
+   * 加速域名所属站点ID。
    */
-  ZoneName: string
+  ZoneId: string
+
+  /**
+   * 加速域名名称。
+   */
+  DomainName: string
+
+  /**
+   * 源站信息。
+   */
+  OriginInfo: OriginInfo
 }
 
 /**
@@ -6973,6 +7154,27 @@ export interface DescribeTopL7AnalysisDataResponse {
 }
 
 /**
+ * DescribeOriginGroup请求参数结构体
+ */
+export interface DescribeOriginGroupRequest {
+  /**
+   * 分页查询偏移量，默认为0。
+   */
+  Offset: number
+
+  /**
+   * 分页查询限制数目，默认为10，取值：1-1000。
+   */
+  Limit: number
+
+  /**
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-20hzkd4rdmy0<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<li>origin-group-id<br>   按照【<strong>源站组ID</strong>】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<li>origin-group-name<br>   按照【<strong>源站组名称</strong>】进行过滤<br>   类型：String<br>   必选：否<br>   模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称
+      */
+  Filters?: Array<AdvancedFilter>
+}
+
+/**
  * ModifyApplicationProxyRule返回参数结构体
  */
 export interface ModifyApplicationProxyRuleResponse {
@@ -7233,6 +7435,16 @@ export interface ModifyApplicationProxyRuleRequest {
 }
 
 /**
+ * ModifyAccelerationDomain返回参数结构体
+ */
+export interface ModifyAccelerationDomainResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 失败原因
  */
 export interface FailReason {
@@ -7394,6 +7606,16 @@ export interface DescribeContentQuotaResponse {
       */
   PrefetchQuota: Array<Quota>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccelerationDomains返回参数结构体
+ */
+export interface DeleteAccelerationDomainsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7859,18 +8081,18 @@ export interface DescribeHostsSettingRequest {
 }
 
 /**
- * 安全模板配置
+ * 规则引擎嵌套规则
  */
-export interface TemplateConfig {
+export interface SubRuleItem {
   /**
-   * 模板ID。
+   * 嵌套规则信息。
    */
-  TemplateId: string
+  Rules: Array<SubRule>
 
   /**
-   * 模板名称。
+   * 规则标签。
    */
-  TemplateName: string
+  Tags?: Array<string>
 }
 
 /**
@@ -7930,6 +8152,51 @@ export interface DescribeWebManagedRulesLogRequest {
 <li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
       */
   Area?: string
+}
+
+/**
+ * 内容管理任务结果
+ */
+export interface Task {
+  /**
+   * 任务 ID。
+   */
+  JobId: string
+
+  /**
+   * 状态。
+   */
+  Status: string
+
+  /**
+   * 资源。
+   */
+  Target: string
+
+  /**
+   * 任务类型。
+   */
+  Type: string
+
+  /**
+   * 任务创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 任务完成时间。
+   */
+  UpdateTime: string
+}
+
+/**
+ * ReclaimZone返回参数结构体
+ */
+export interface ReclaimZoneResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8215,27 +8482,38 @@ export interface IdentifyZoneRequest {
 }
 
 /**
- * 智能客户端过滤
+ * DownloadL4Logs请求参数结构体
  */
-export interface RateLimitIntelligence {
+export interface DownloadL4LogsRequest {
   /**
-      * 功能开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
-      */
-  Switch: string
-
-  /**
-      * 执行动作，取值有：
-<li>monitor：观察；</li>
-<li>alg：挑战。</li>
-      */
-  Action: string
-
-  /**
-   * 规则id，仅出参使用。
+   * 开始时间。
    */
-  RuleId?: number
+  StartTime: string
+
+  /**
+   * 结束时间。
+   */
+  EndTime: string
+
+  /**
+   * 站点集合，不填默认选择全部站点。
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 四层实例ID集合。
+   */
+  ProxyIds?: Array<string>
+
+  /**
+   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
+   */
+  Limit?: number
+
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -8425,24 +8703,54 @@ export interface SecHitRuleInfo {
 }
 
 /**
- * DescribeOriginGroup请求参数结构体
+ * DescribeAccelerationDomains请求参数结构体
  */
-export interface DescribeOriginGroupRequest {
+export interface DescribeAccelerationDomainsRequest {
   /**
-   * 分页查询偏移量，默认为0。
+   * 加速域名所属站点ID。不填写该参数默认返回所有站点下的加速域名。
    */
-  Offset: number
-
-  /**
-   * 分页查询限制数目，默认为10，取值：1-1000。
-   */
-  Limit: number
+  ZoneId: string
 
   /**
       * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-20hzkd4rdmy0<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<li>origin-group-id<br>   按照【<strong>源站组ID</strong>】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<li>origin-group-name<br>   按照【<strong>源站组名称</strong>】进行过滤<br>   类型：String<br>   必选：否<br>   模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称
+<li>domain-name<br>   按照【<strong>加速域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>origin-type<br>   按照【<strong>源站类型</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>origin<br>   按照【<strong>主源站地址</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>backup-origin<br>   按照【<strong>备用源站地址</strong>】进行过滤。<br>   类型：String<br>   必选：否
       */
   Filters?: Array<AdvancedFilter>
+
+  /**
+      * 列表排序方式，取值有：
+<li>asc：升序排列；</li>
+<li>desc：降序排列。</li>默认值为asc。
+      */
+  Direction?: string
+
+  /**
+      * 匹配方式，取值有：
+<li>all：返回匹配所有查询条件的加速域名；</li>
+<li>any：返回匹配任意一个查询条件的加速域名。</li>默认值为all。
+      */
+  Match?: string
+
+  /**
+   * 分页查询限制数目，默认值：20，上限：200。
+   */
+  Limit?: number
+
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+      * 排序依据，取值有：
+<li>created_on：加速域名创建时间；</li>
+<li>domain-name：加速域名名称；</li>
+</li>默认根据domain-name属性排序。
+      */
+  Order?: string
 }
 
 /**
@@ -8614,6 +8922,35 @@ export interface SecRuleRelatedInfo {
    * 规则是否启用监控告警。
    */
   AlarmEnabled: boolean
+}
+
+/**
+ * ModifyAccelerationDomainStatuses请求参数结构体
+ */
+export interface ModifyAccelerationDomainStatusesRequest {
+  /**
+   * 加速域名所属站点ID。
+   */
+  ZoneId: string
+
+  /**
+   * 要执行状态变更的加速域名列表。
+   */
+  DomainNames: Array<string>
+
+  /**
+      * 加速域名状态，取值有：
+<li>online：启用；</li>
+<li>offline：停用。</li>
+      */
+  Status: string
+
+  /**
+      * 是否强制停用。当域名存在关联资源（如马甲域名、流量调度功能）时，是否强制停用该域名，取值有：
+<li> true：停用该域名及所有关联资源；</li>
+<li> false：当该加速域名存在关联资源时，不允许停用。</li>不填写，默认值为：false。
+      */
+  Force?: boolean
 }
 
 /**

@@ -18,9 +18,9 @@ const client = new tencentcloud.lcic.v20220817.Client({
 })
 describe("lcic.v20220817.test.js", function () {
 
-it("lcic.v20220817.DescribeAppDetail", async function () {
+it("lcic.v20220817.SetWatermark", async function () {
     try {
-       const data = await client.DescribeAppDetail({})
+       const data = await client.SetWatermark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,19 @@ it("lcic.v20220817.DescribeAppDetail", async function () {
     }
 })
 
-it("lcic.v20220817.CreateDocument", async function () {
+it("lcic.v20220817.DescribeDocumentsByRoom", async function () {
     try {
-       const data = await client.CreateDocument({})
+       const data = await client.DescribeDocumentsByRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.GetWatermark", async function () {
+    try {
+       const data = await client.GetWatermark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,46 +58,6 @@ it("lcic.v20220817.ModifyApp", async function () {
     }
 })
 
-it("lcic.v20220817.SetAppCustomContent", async function () {
-    try {
-       const data = await client.SetAppCustomContent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lcic.v20220817.DescribeRoomStatistics", async function () {
-    try {
-       const data = await client.DescribeRoomStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lcic.v20220817.DeleteRoom", async function () {
-    try {
-       const data = await client.DeleteRoom({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lcic.v20220817.ModifyRoom", async function () {
-    try {
-       const data = await client.ModifyRoom({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
     try {
        const data = await client.UnbindDocumentFromRoom({})
@@ -98,9 +68,9 @@ it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
     }
 })
 
-it("lcic.v20220817.BindDocumentToRoom", async function () {
+it("lcic.v20220817.DescribeSdkAppIdUsers", async function () {
     try {
-       const data = await client.BindDocumentToRoom({})
+       const data = await client.DescribeSdkAppIdUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +78,19 @@ it("lcic.v20220817.BindDocumentToRoom", async function () {
     }
 })
 
-it("lcic.v20220817.LoginOriginId", async function () {
+it("lcic.v20220817.CreateDocument", async function () {
     try {
-       const data = await client.LoginOriginId({})
+       const data = await client.CreateDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.ModifyRoom", async function () {
+    try {
+       const data = await client.ModifyRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +118,86 @@ it("lcic.v20220817.BatchRegister", async function () {
     }
 })
 
+it("lcic.v20220817.ModifyUserProfile", async function () {
+    try {
+       const data = await client.ModifyUserProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeRoom", async function () {
+    try {
+       const data = await client.DescribeRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DeleteRecord", async function () {
+    try {
+       const data = await client.DeleteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.BatchCreateRoom", async function () {
+    try {
+       const data = await client.BatchCreateRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.RegisterUser", async function () {
+    try {
+       const data = await client.RegisterUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeRoomStatistics", async function () {
+    try {
+       const data = await client.DescribeRoomStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.BindDocumentToRoom", async function () {
+    try {
+       const data = await client.BindDocumentToRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.LoginOriginId", async function () {
+    try {
+       const data = await client.LoginOriginId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.LoginUser", async function () {
     try {
        const data = await client.LoginUser({})
@@ -158,9 +218,9 @@ it("lcic.v20220817.CreateSupervisor", async function () {
     }
 })
 
-it("lcic.v20220817.RegisterUser", async function () {
+it("lcic.v20220817.SetAppCustomContent", async function () {
     try {
-       const data = await client.RegisterUser({})
+       const data = await client.SetAppCustomContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +228,49 @@ it("lcic.v20220817.RegisterUser", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeRoom", async function () {
+it("lcic.v20220817.DescribeAppDetail", async function () {
     try {
-       const data = await client.DescribeRoom({})
+       const data = await client.DescribeAppDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DeleteDocument", async function () {
+    try {
+       const data = await client.DeleteDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.BatchDeleteRecord", async function () {
+    try {
+       const data = await client.BatchDeleteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DeleteRoom", async function () {
+    try {
+       const data = await client.DeleteRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeDocument", async function () {
+    try {
+       const data = await client.DescribeDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

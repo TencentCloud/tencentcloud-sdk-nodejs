@@ -20,7 +20,8 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeResultDownloadResponse,
   DescribeTaskResultResponse,
-  AlterDMSTableResponse,
+  DescribeNotebookSessionStatementRequest,
+  CancelNotebookSessionStatementRequest,
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
@@ -28,10 +29,12 @@ import {
   Asset,
   CreateResultDownloadResponse,
   ModifyGovernEventRuleResponse,
+  DescribeNotebookSessionsRequest,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
   DescribeNotebookSessionResponse,
   DescribeDMSDatabaseResponse,
+  UnbindWorkGroupsFromUserResponse,
   DropDMSDatabaseRequest,
   CreateScriptResponse,
   CreateTasksInOrderResponse,
@@ -44,17 +47,22 @@ import {
   TableInfo,
   Task,
   DetachUserPolicyRequest,
-  DescribeSparkAppTasksResponse,
+  CrontabResumeSuspendStrategy,
+  AlterDMSTableResponse,
   DescribeTasksResponse,
   DescribeDMSTableResponse,
   DropDMSPartitionsRequest,
+  NotebookSessions,
+  CreateNotebookSessionStatementSupportBatchSQLRequest,
   CreateTasksInOrderRequest,
   AddDMSPartitionsResponse,
   DetachWorkGroupPolicyResponse,
+  GenerateCreateMangedTableSqlRequest,
   CSVSerde,
   ModifySparkAppRequest,
   StreamingStatistics,
   CreateDatabaseRequest,
+  GenerateCreateMangedTableSqlResponse,
   DescribeDMSTablesResponse,
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
@@ -64,7 +72,7 @@ import {
   CreateDatabaseResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
-  DeleteWorkGroupRequest,
+  CancelNotebookSessionStatementBatchResponse,
   KVPair,
   TableBaseInfo,
   UnlockMetaDataRequest,
@@ -73,34 +81,43 @@ import {
   ListTaskJobLogDetailRequest,
   TasksInfo,
   AttachWorkGroupPolicyRequest,
+  StatementOutput,
+  TagInfo,
   CreateUserResponse,
+  DescribeNotebookSessionStatementsRequest,
   DeleteUserResponse,
   DescribeDatabasesResponse,
   LockComponentInfo,
+  DescribeNotebookSessionsResponse,
   DescribeDMSPartitionsRequest,
   TPartition,
   DescribeSparkAppJobsRequest,
+  DeleteNotebookSessionRequest,
   CreateDMSTableResponse,
   CreateNotebookSessionRequest,
   Partition,
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
   CSV,
+  NotebookSessionStatementInfo,
   CreateTableRequest,
+  CreateNotebookSessionStatementRequest,
   DescribeWorkGroupsResponse,
   CreateImportTaskRequest,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
-  DeleteUsersFromWorkGroupResponse,
+  CreateExportTaskResponse,
   AddUsersToWorkGroupRequest,
   DescribeStoreLocationRequest,
   AddUsersToWorkGroupResponse,
+  DescribeNotebookSessionLogRequest,
   UserInfo,
   CreateExportTaskRequest,
+  DescribeNotebookSessionStatementResponse,
   ReportHeartbeatMetaDataResponse,
   ReportHeartbeatMetaDataRequest,
   CreateDMSTableRequest,
-  DropDMSTableRequest,
+  CancelNotebookSessionStatementResponse,
   DMSTable,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
@@ -112,24 +129,32 @@ import {
   TaskResponseInfo,
   TextFile,
   BindWorkGroupsToUserResponse,
+  CreateNotebookSessionStatementResponse,
   DescribeStoreLocationResponse,
   DeleteScriptRequest,
   AddDMSPartitionsRequest,
   Script,
+  NotebookSessionStatementBatchInformation,
+  DescribeNotebookSessionStatementSqlResultRequest,
+  ModifySparkAppResponse,
   AlterDMSTableRequest,
   CreateImportTaskResponse,
   NotebookSessionInfo,
   Execution,
   CreateTableResponse,
   WorkGroupInfo,
+  CreateNotebookSessionStatementSupportBatchSQLResponse,
   CreateScriptRequest,
   BindWorkGroupsToUserRequest,
   Column,
+  DeleteWorkGroupRequest,
   DescribeTaskResultRequest,
   Filter,
   DescribeUsersResponse,
   DataFormat,
+  DescribeNotebookSessionLogResponse,
   ViewResponseInfo,
+  NetworkConnection,
   CreateUserRequest,
   ModifyWorkGroupRequest,
   CancelTaskResponse,
@@ -141,14 +166,17 @@ import {
   CreateWorkGroupResponse,
   TaskResultInfo,
   DescribeTablesRequest,
-  ModifySparkAppResponse,
+  DeleteNotebookSessionResponse,
   CreateStoreLocationRequest,
   DMSTableInfo,
+  DescribeNotebookSessionStatementsResponse,
   AttachUserPolicyResponse,
+  DropDMSTableRequest,
+  DescribeNotebookSessionStatementSqlResultResponse,
   DMSPartition,
   DatabaseInfo,
   DescribeDMSPartitionsResponse,
-  CreateExportTaskResponse,
+  DeleteUsersFromWorkGroupResponse,
   UnbindWorkGroupsFromUserRequest,
   DescribeDMSDatabaseRequest,
   DescribeTableRequest,
@@ -167,6 +195,7 @@ import {
   SuspendResumeDataEngineRequest,
   DescribeTableResponse,
   DescribeSparkAppJobsResponse,
+  DescribeSparkAppTasksResponse,
   TableResponseInfo,
   DescribeViewsRequest,
   LockMetaDataRequest,
@@ -176,24 +205,27 @@ import {
   CreateTasksResponse,
   CreateNotebookSessionResponse,
   CreateSparkAppRequest,
-  UnbindWorkGroupsFromUserResponse,
+  DescribeDataEnginesRequest,
   DropDMSPartitionsResponse,
   AlterDMSDatabaseResponse,
   CreateWorkGroupRequest,
   CreateInternalTableResponse,
+  DataEngineInfo,
   DescribeSparkAppTasksRequest,
   LockMetaDataResponse,
   CheckLockMetaDataResponse,
   AlterDMSDatabaseRequest,
   SQLTask,
   UserMessage,
+  DescribeViewsResponse,
   Property,
   CreateResultDownloadRequest,
   CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
   DescribeDMSTableRequest,
   ModifyGovernEventRuleRequest,
-  DescribeViewsResponse,
+  CancelNotebookSessionStatementBatchRequest,
+  DescribeDataEnginesResponse,
   DescribeScriptsResponse,
   DatabaseResponseInfo,
   DMSColumn,
@@ -281,13 +313,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DMS元数据删除库
+   * 本接口（CancelNotebookSessionStatement）用于取消session statement
    */
-  async DropDMSDatabase(
-    req: DropDMSDatabaseRequest,
-    cb?: (error: string, rep: DropDMSDatabaseResponse) => void
-  ): Promise<DropDMSDatabaseResponse> {
-    return this.request("DropDMSDatabase", req, cb)
+  async CancelNotebookSessionStatement(
+    req: CancelNotebookSessionStatementRequest,
+    cb?: (error: string, rep: CancelNotebookSessionStatementResponse) => void
+  ): Promise<CancelNotebookSessionStatementResponse> {
+    return this.request("CancelNotebookSessionStatement", req, cb)
   }
 
   /**
@@ -341,13 +373,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateExportTask）用于创建导出任务
+   * 本接口（CancelNotebookSessionStatementBatch）用于按批取消Session statement。
    */
-  async CreateExportTask(
-    req: CreateExportTaskRequest,
-    cb?: (error: string, rep: CreateExportTaskResponse) => void
-  ): Promise<CreateExportTaskResponse> {
-    return this.request("CreateExportTask", req, cb)
+  async CancelNotebookSessionStatementBatch(
+    req: CancelNotebookSessionStatementBatchRequest,
+    cb?: (error: string, rep: CancelNotebookSessionStatementBatchResponse) => void
+  ): Promise<CancelNotebookSessionStatementBatchResponse> {
+    return this.request("CancelNotebookSessionStatementBatch", req, cb)
   }
 
   /**
@@ -431,6 +463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeDataEngines）用于获取DataEngines信息列表
+   */
+  async DescribeDataEngines(
+    req: DescribeDataEnginesRequest,
+    cb?: (error: string, rep: DescribeDataEnginesResponse) => void
+  ): Promise<DescribeDataEnginesResponse> {
+    return this.request("DescribeDataEngines", req, cb)
+  }
+
+  /**
    * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
    */
   async CreateStoreLocation(
@@ -481,13 +523,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+   * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建Statement批量运行SQL任务。
    */
-  async ListTaskJobLogDetail(
-    req: ListTaskJobLogDetailRequest,
-    cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void
-  ): Promise<ListTaskJobLogDetailResponse> {
-    return this.request("ListTaskJobLogDetail", req, cb)
+  async CreateNotebookSessionStatementSupportBatchSQL(
+    req: CreateNotebookSessionStatementSupportBatchSQLRequest,
+    cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void
+  ): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse> {
+    return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeNotebookSessionLog）用于获取notebook livy session日志
+   */
+  async DescribeNotebookSessionLog(
+    req: DescribeNotebookSessionLogRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionLogResponse) => void
+  ): Promise<DescribeNotebookSessionLogResponse> {
+    return this.request("DescribeNotebookSessionLog", req, cb)
   }
 
   /**
@@ -501,17 +553,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑用户上的用户组
+   * 更新spark应用
    */
-  async UnbindWorkGroupsFromUser(
-    req: UnbindWorkGroupsFromUserRequest,
-    cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void
-  ): Promise<UnbindWorkGroupsFromUserResponse> {
-    return this.request("UnbindWorkGroupsFromUser", req, cb)
+  async ModifySparkApp(
+    req: ModifySparkAppRequest,
+    cb?: (error: string, rep: ModifySparkAppResponse) => void
+  ): Promise<ModifySparkAppResponse> {
+    return this.request("ModifySparkApp", req, cb)
   }
 
   /**
-   * 创建托管存储内表
+   * 创建托管存储内表（该接口已废弃）
    */
   async CreateInternalTable(
     req: CreateInternalTableRequest,
@@ -521,13 +573,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户列表信息
+   * 本接口（DeleteNotebookSession）用于删除notebook livy session
    */
-  async DescribeUsers(
-    req: DescribeUsersRequest,
-    cb?: (error: string, rep: DescribeUsersResponse) => void
-  ): Promise<DescribeUsersResponse> {
-    return this.request("DescribeUsers", req, cb)
+  async DeleteNotebookSession(
+    req: DeleteNotebookSessionRequest,
+    cb?: (error: string, rep: DeleteNotebookSessionResponse) => void
+  ): Promise<DeleteNotebookSessionResponse> {
+    return this.request("DeleteNotebookSession", req, cb)
+  }
+
+  /**
+   * 生成创建托管表语句
+   */
+  async GenerateCreateMangedTableSql(
+    req?: GenerateCreateMangedTableSqlRequest,
+    cb?: (error: string, rep: GenerateCreateMangedTableSqlResponse) => void
+  ): Promise<GenerateCreateMangedTableSqlResponse> {
+    return this.request("GenerateCreateMangedTableSql", req, cb)
   }
 
   /**
@@ -538,6 +600,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void
   ): Promise<AttachWorkGroupPolicyResponse> {
     return this.request("AttachWorkGroupPolicy", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeNotebookSessions）用于获取notebook livy session列表
+   */
+  async DescribeNotebookSessions(
+    req: DescribeNotebookSessionsRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void
+  ): Promise<DescribeNotebookSessionsResponse> {
+    return this.request("DescribeNotebookSessions", req, cb)
   }
 
   /**
@@ -611,6 +683,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeNotebookSessionStatement）用于获取session statement信息
+   */
+  async DescribeNotebookSessionStatement(
+    req: DescribeNotebookSessionStatementRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionStatementResponse) => void
+  ): Promise<DescribeNotebookSessionStatementResponse> {
+    return this.request("DescribeNotebookSessionStatement", req, cb)
+  }
+
+  /**
+   * 解绑用户上的用户组
+   */
+  async UnbindWorkGroupsFromUser(
+    req: UnbindWorkGroupsFromUserRequest,
+    cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void
+  ): Promise<UnbindWorkGroupsFromUserResponse> {
+    return this.request("UnbindWorkGroupsFromUser", req, cb)
+  }
+
+  /**
+   * 获取spark应用列表
+   */
+  async DescribeSparkAppJobs(
+    req: DescribeSparkAppJobsRequest,
+    cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void
+  ): Promise<DescribeSparkAppJobsResponse> {
+    return this.request("DescribeSparkAppJobs", req, cb)
+  }
+
+  /**
    * 获取工作组列表
    */
   async DescribeWorkGroups(
@@ -631,13 +733,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新spark应用
+   * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
    */
-  async ModifySparkApp(
-    req: ModifySparkAppRequest,
-    cb?: (error: string, rep: ModifySparkAppResponse) => void
-  ): Promise<ModifySparkAppResponse> {
-    return this.request("ModifySparkApp", req, cb)
+  async ListTaskJobLogDetail(
+    req: ListTaskJobLogDetailRequest,
+    cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void
+  ): Promise<ListTaskJobLogDetailResponse> {
+    return this.request("ListTaskJobLogDetail", req, cb)
   }
 
   /**
@@ -658,6 +760,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableResponse) => void
   ): Promise<DescribeTableResponse> {
     return this.request("DescribeTable", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
+   */
+  async DescribeNotebookSessionStatements(
+    req: DescribeNotebookSessionStatementsRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionStatementsResponse) => void
+  ): Promise<DescribeNotebookSessionStatementsResponse> {
+    return this.request("DescribeNotebookSessionStatements", req, cb)
+  }
+
+  /**
+   * 获取用户列表信息
+   */
+  async DescribeUsers(
+    req: DescribeUsersRequest,
+    cb?: (error: string, rep: DescribeUsersResponse) => void
+  ): Promise<DescribeUsersResponse> {
+    return this.request("DescribeUsers", req, cb)
   }
 
   /**
@@ -841,13 +963,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取spark应用列表
+   * 本接口（DescribeNotebookSessionStatementSqlResult）用于获取statement运行结果。
    */
-  async DescribeSparkAppJobs(
-    req: DescribeSparkAppJobsRequest,
-    cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void
-  ): Promise<DescribeSparkAppJobsResponse> {
-    return this.request("DescribeSparkAppJobs", req, cb)
+  async DescribeNotebookSessionStatementSqlResult(
+    req: DescribeNotebookSessionStatementSqlResultRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionStatementSqlResultResponse) => void
+  ): Promise<DescribeNotebookSessionStatementSqlResultResponse> {
+    return this.request("DescribeNotebookSessionStatementSqlResult", req, cb)
+  }
+
+  /**
+   * DMS元数据删除库
+   */
+  async DropDMSDatabase(
+    req: DropDMSDatabaseRequest,
+    cb?: (error: string, rep: DropDMSDatabaseResponse) => void
+  ): Promise<DropDMSDatabaseResponse> {
+    return this.request("DropDMSDatabase", req, cb)
   }
 
   /**
@@ -858,6 +990,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserResponse) => void
   ): Promise<CreateUserResponse> {
     return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 本接口（CreateNotebookSessionStatement）用于创建session statement
+   */
+  async CreateNotebookSessionStatement(
+    req: CreateNotebookSessionStatementRequest,
+    cb?: (error: string, rep: CreateNotebookSessionStatementResponse) => void
+  ): Promise<CreateNotebookSessionStatementResponse> {
+    return this.request("CreateNotebookSessionStatement", req, cb)
   }
 
   /**
@@ -878,5 +1020,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTablesResponse) => void
   ): Promise<DescribeTablesResponse> {
     return this.request("DescribeTables", req, cb)
+  }
+
+  /**
+   * 该接口（CreateExportTask）用于创建导出任务
+   */
+  async CreateExportTask(
+    req: CreateExportTaskRequest,
+    cb?: (error: string, rep: CreateExportTaskResponse) => void
+  ): Promise<CreateExportTaskResponse> {
+    return this.request("CreateExportTask", req, cb)
   }
 }

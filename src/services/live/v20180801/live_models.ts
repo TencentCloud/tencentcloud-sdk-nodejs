@@ -1354,7 +1354,7 @@ export interface CommonMixOutputParams {
   OutputStreamType?: number
 
   /**
-      * 输出流比特率。取值范围[1，50000]。
+      * 输出流比特率。取值范围[1，10000]。
 不填的情况下，系统会自动判断。
       */
   OutputStreamBitRate?: number

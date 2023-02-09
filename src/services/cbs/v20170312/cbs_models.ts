@@ -952,6 +952,11 @@ export interface Disk {
   DeleteSnapshot: number
 
   /**
+   * 云硬盘备份点配额。表示最大可以保留的备份点数量。
+   */
+  DiskBackupQuota: number
+
+  /**
    * 云硬盘备份点已使用的数量。
    */
   DiskBackupCount: number

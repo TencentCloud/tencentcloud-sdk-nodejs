@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebookSession", req, cb);
     }
     /**
-     * DMS元数据删除库
+     * 本接口（CancelNotebookSessionStatement）用于取消session statement
      */
-    async DropDMSDatabase(req, cb) {
-        return this.request("DropDMSDatabase", req, cb);
+    async CancelNotebookSessionStatement(req, cb) {
+        return this.request("CancelNotebookSessionStatement", req, cb);
     }
     /**
      * DMS元数据新增分区
@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskResult", req, cb);
     }
     /**
-     * 该接口（CreateExportTask）用于创建导出任务
+     * 本接口（CancelNotebookSessionStatementBatch）用于按批取消Session statement。
      */
-    async CreateExportTask(req, cb) {
-        return this.request("CreateExportTask", req, cb);
+    async CancelNotebookSessionStatementBatch(req, cb) {
+        return this.request("CancelNotebookSessionStatementBatch", req, cb);
     }
     /**
      * 删除spark应用
@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResultDownload", req, cb);
     }
     /**
+     * 本接口（DescribeDataEngines）用于获取DataEngines信息列表
+     */
+    async DescribeDataEngines(req, cb) {
+        return this.request("DescribeDataEngines", req, cb);
+    }
+    /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     async CreateStoreLocation(req, cb) {
@@ -190,10 +196,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkGroup", req, cb);
     }
     /**
-     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建Statement批量运行SQL任务。
      */
-    async ListTaskJobLogDetail(req, cb) {
-        return this.request("ListTaskJobLogDetail", req, cb);
+    async CreateNotebookSessionStatementSupportBatchSQL(req, cb) {
+        return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
+    }
+    /**
+     * 本接口（DescribeNotebookSessionLog）用于获取notebook livy session日志
+     */
+    async DescribeNotebookSessionLog(req, cb) {
+        return this.request("DescribeNotebookSessionLog", req, cb);
     }
     /**
      * DMS元数据更新库
@@ -202,28 +214,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AlterDMSDatabase", req, cb);
     }
     /**
-     * 解绑用户上的用户组
+     * 更新spark应用
      */
-    async UnbindWorkGroupsFromUser(req, cb) {
-        return this.request("UnbindWorkGroupsFromUser", req, cb);
+    async ModifySparkApp(req, cb) {
+        return this.request("ModifySparkApp", req, cb);
     }
     /**
-     * 创建托管存储内表
+     * 创建托管存储内表（该接口已废弃）
      */
     async CreateInternalTable(req, cb) {
         return this.request("CreateInternalTable", req, cb);
     }
     /**
-     * 获取用户列表信息
+     * 本接口（DeleteNotebookSession）用于删除notebook livy session
      */
-    async DescribeUsers(req, cb) {
-        return this.request("DescribeUsers", req, cb);
+    async DeleteNotebookSession(req, cb) {
+        return this.request("DeleteNotebookSession", req, cb);
+    }
+    /**
+     * 生成创建托管表语句
+     */
+    async GenerateCreateMangedTableSql(req, cb) {
+        return this.request("GenerateCreateMangedTableSql", req, cb);
     }
     /**
      * 绑定鉴权策略到工作组
      */
     async AttachWorkGroupPolicy(req, cb) {
         return this.request("AttachWorkGroupPolicy", req, cb);
+    }
+    /**
+     * 本接口（DescribeNotebookSessions）用于获取notebook livy session列表
+     */
+    async DescribeNotebookSessions(req, cb) {
+        return this.request("DescribeNotebookSessions", req, cb);
     }
     /**
      * DMS元数据获取分区
@@ -268,6 +292,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabase", req, cb);
     }
     /**
+     * 本接口（DescribeNotebookSessionStatement）用于获取session statement信息
+     */
+    async DescribeNotebookSessionStatement(req, cb) {
+        return this.request("DescribeNotebookSessionStatement", req, cb);
+    }
+    /**
+     * 解绑用户上的用户组
+     */
+    async UnbindWorkGroupsFromUser(req, cb) {
+        return this.request("UnbindWorkGroupsFromUser", req, cb);
+    }
+    /**
+     * 获取spark应用列表
+     */
+    async DescribeSparkAppJobs(req, cb) {
+        return this.request("DescribeSparkAppJobs", req, cb);
+    }
+    /**
      * 获取工作组列表
      */
     async DescribeWorkGroups(req, cb) {
@@ -280,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWorkGroup", req, cb);
     }
     /**
-     * 更新spark应用
+     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
      */
-    async ModifySparkApp(req, cb) {
-        return this.request("ModifySparkApp", req, cb);
+    async ListTaskJobLogDetail(req, cb) {
+        return this.request("ListTaskJobLogDetail", req, cb);
     }
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
@@ -296,6 +338,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTable(req, cb) {
         return this.request("DescribeTable", req, cb);
+    }
+    /**
+     * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
+     */
+    async DescribeNotebookSessionStatements(req, cb) {
+        return this.request("DescribeNotebookSessionStatements", req, cb);
+    }
+    /**
+     * 获取用户列表信息
+     */
+    async DescribeUsers(req, cb) {
+        return this.request("DescribeUsers", req, cb);
     }
     /**
      * DMS元数据获取库
@@ -406,16 +460,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSparkAppTasks", req, cb);
     }
     /**
-     * 获取spark应用列表
+     * 本接口（DescribeNotebookSessionStatementSqlResult）用于获取statement运行结果。
      */
-    async DescribeSparkAppJobs(req, cb) {
-        return this.request("DescribeSparkAppJobs", req, cb);
+    async DescribeNotebookSessionStatementSqlResult(req, cb) {
+        return this.request("DescribeNotebookSessionStatementSqlResult", req, cb);
+    }
+    /**
+     * DMS元数据删除库
+     */
+    async DropDMSDatabase(req, cb) {
+        return this.request("DropDMSDatabase", req, cb);
     }
     /**
      * 创建用户
      */
     async CreateUser(req, cb) {
         return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 本接口（CreateNotebookSessionStatement）用于创建session statement
+     */
+    async CreateNotebookSessionStatement(req, cb) {
+        return this.request("CreateNotebookSessionStatement", req, cb);
     }
     /**
      * 解绑用户鉴权策略
@@ -428,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTables(req, cb) {
         return this.request("DescribeTables", req, cb);
+    }
+    /**
+     * 该接口（CreateExportTask）用于创建导出任务
+     */
+    async CreateExportTask(req, cb) {
+        return this.request("CreateExportTask", req, cb);
     }
 }
 exports.Client = Client;

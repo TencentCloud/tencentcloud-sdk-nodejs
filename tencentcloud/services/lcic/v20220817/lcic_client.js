@@ -28,16 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig);
     }
     /**
-     * 获取应用详情
+     * 设置水印
      */
-    async DescribeAppDetail(req, cb) {
-        return this.request("DescribeAppDetail", req, cb);
+    async SetWatermark(req, cb) {
+        return this.request("SetWatermark", req, cb);
     }
     /**
-     * 创建房间内可以使用的文档。
+     * 此接口获取指定房间下课件列表
      */
-    async CreateDocument(req, cb) {
-        return this.request("CreateDocument", req, cb);
+    async DescribeDocumentsByRoom(req, cb) {
+        return this.request("DescribeDocumentsByRoom", req, cb);
+    }
+    /**
+     * 获取水印设置
+     */
+    async GetWatermark(req, cb) {
+        return this.request("GetWatermark", req, cb);
     }
     /**
      * 修改应用
@@ -46,46 +52,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApp", req, cb);
     }
     /**
-     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
-     */
-    async SetAppCustomContent(req, cb) {
-        return this.request("SetAppCustomContent", req, cb);
-    }
-    /**
-     * 获取房间统计信息，仅可在房间结束后调用。
-     */
-    async DescribeRoomStatistics(req, cb) {
-        return this.request("DescribeRoomStatistics", req, cb);
-    }
-    /**
-     * 删除房间
-     */
-    async DeleteRoom(req, cb) {
-        return this.request("DeleteRoom", req, cb);
-    }
-    /**
-     * 修改房间
-     */
-    async ModifyRoom(req, cb) {
-        return this.request("ModifyRoom", req, cb);
-    }
-    /**
      * 文档从房间解绑
      */
     async UnbindDocumentFromRoom(req, cb) {
         return this.request("UnbindDocumentFromRoom", req, cb);
     }
     /**
-     * 绑定文档到房间
+     * 此接口用于获取指定应用ID下用户列表
      */
-    async BindDocumentToRoom(req, cb) {
-        return this.request("BindDocumentToRoom", req, cb);
+    async DescribeSdkAppIdUsers(req, cb) {
+        return this.request("DescribeSdkAppIdUsers", req, cb);
     }
     /**
-     * 使用源账号登录，源账号为注册时填入的originId
+     * 创建房间内可以使用的文档。
      */
-    async LoginOriginId(req, cb) {
-        return this.request("LoginOriginId", req, cb);
+    async CreateDocument(req, cb) {
+        return this.request("CreateDocument", req, cb);
+    }
+    /**
+     * 修改房间
+     */
+    async ModifyRoom(req, cb) {
+        return this.request("ModifyRoom", req, cb);
     }
     /**
      * 获取用户信息
@@ -100,6 +88,54 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchRegister", req, cb);
     }
     /**
+     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     */
+    async ModifyUserProfile(req, cb) {
+        return this.request("ModifyUserProfile", req, cb);
+    }
+    /**
+     * 获取房间信息
+     */
+    async DescribeRoom(req, cb) {
+        return this.request("DescribeRoom", req, cb);
+    }
+    /**
+     * 删除指定房间的录制文件
+     */
+    async DeleteRecord(req, cb) {
+        return this.request("DeleteRecord", req, cb);
+    }
+    /**
+     * 批量创建房间接口
+     */
+    async BatchCreateRoom(req, cb) {
+        return this.request("BatchCreateRoom", req, cb);
+    }
+    /**
+     * 注册用户
+     */
+    async RegisterUser(req, cb) {
+        return this.request("RegisterUser", req, cb);
+    }
+    /**
+     * 获取房间统计信息，仅可在房间结束后调用。
+     */
+    async DescribeRoomStatistics(req, cb) {
+        return this.request("DescribeRoomStatistics", req, cb);
+    }
+    /**
+     * 绑定文档到房间
+     */
+    async BindDocumentToRoom(req, cb) {
+        return this.request("BindDocumentToRoom", req, cb);
+    }
+    /**
+     * 使用源账号登录，源账号为注册时填入的originId
+     */
+    async LoginOriginId(req, cb) {
+        return this.request("LoginOriginId", req, cb);
+    }
+    /**
      * 登录
      */
     async LoginUser(req, cb) {
@@ -112,16 +148,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSupervisor", req, cb);
     }
     /**
-     * 注册用户
+     * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
      */
-    async RegisterUser(req, cb) {
-        return this.request("RegisterUser", req, cb);
+    async SetAppCustomContent(req, cb) {
+        return this.request("SetAppCustomContent", req, cb);
     }
     /**
-     * 获取房间信息
+     * 获取应用详情
      */
-    async DescribeRoom(req, cb) {
-        return this.request("DescribeRoom", req, cb);
+    async DescribeAppDetail(req, cb) {
+        return this.request("DescribeAppDetail", req, cb);
+    }
+    /**
+     * 删除文档
+     */
+    async DeleteDocument(req, cb) {
+        return this.request("DeleteDocument", req, cb);
+    }
+    /**
+     * 批量删除多个房间的录制文件
+     */
+    async BatchDeleteRecord(req, cb) {
+        return this.request("BatchDeleteRecord", req, cb);
+    }
+    /**
+     * 删除房间
+     */
+    async DeleteRoom(req, cb) {
+        return this.request("DeleteRoom", req, cb);
+    }
+    /**
+     * 获取文档信息
+     */
+    async DescribeDocument(req, cb) {
+        return this.request("DescribeDocument", req, cb);
     }
     /**
      * 创建房间

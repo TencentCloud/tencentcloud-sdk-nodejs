@@ -1336,6 +1336,11 @@ export interface Migration {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsRecovery: string;
+    /**
+      * 重命名的数据库名称集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DBRename: Array<DBRenameRes>;
 }
 /**
  * ModifyDBInstanceNetwork请求参数结构体
@@ -1943,40 +1948,23 @@ export interface DescribeDBSecurityGroupsRequest {
     InstanceId: string;
 }
 /**
- * 慢查询日志文件信息
+ * 冷备导入任务迁移步骤细节
  */
-export interface SlowlogInfo {
+export interface MigrationStep {
     /**
-      * 慢查询日志文件唯一标识
+      * 步骤序列
       */
-    Id: number;
+    StepNo: number;
     /**
-      * 文件生成的开始时间
+      * 步骤展现名称
       */
-    StartTime: string;
+    StepName: string;
     /**
-      * 文件生成的结束时间
+      * 英文ID标识
       */
-    EndTime: string;
+    StepId: string;
     /**
-      * 文件大小（KB）
-      */
-    Size: number;
-    /**
-      * 文件中log条数
-      */
-    Count: number;
-    /**
-      * 内网下载地址
-      */
-    InternalAddr: string;
-    /**
-      * 外网下载地址
-      */
-    ExternalAddr: string;
-    /**
-      * 状态（1成功 2失败）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
       */
     Status: number;
 }
@@ -2485,11 +2473,11 @@ export interface DescribeDBsNormalResponse {
     /**
       * 表示当前实例下的数据库总个数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 返回数据库的详细配置信息，例如：数据库是否开启CDC、CT等
       */
-    DBList: Array<DbNormalDetail>;
+    DBList?: Array<DbNormalDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2667,9 +2655,13 @@ export interface AccountPrivilege {
       */
     UserName: string;
     /**
-      * 数据库权限。ReadWrite表示可读写，ReadOnly表示只读
+      * 数据库权限。ReadWrite表示可读写，ReadOnly表示只读,Delete表示删除DB对该账户的权限，DBOwner所有者
       */
     Privilege: string;
+    /**
+      * 账户名称，L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限
+      */
+    AccountType?: string;
 }
 /**
  * StopMigration请求参数结构体
@@ -2742,7 +2734,7 @@ export interface DBPrivilegeModifyInfo {
       */
     DBName: string;
     /**
-      * 权限变更信息。ReadWrite表示可读写，ReadOnly表示只读，Delete表示删除账号对该DB的权限
+      * 权限变更信息。ReadWrite表示可读写，ReadOnly表示只读，Delete表示删除账号对该DB的权限，DBOwner所有者
       */
     Privilege: string;
 }
@@ -2912,7 +2904,7 @@ export interface DescribeBackupFilesRequest {
     OrderBy?: string;
 }
 /**
- * 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
+ * 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB、ModifyBackupMigration 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
  */
 export interface RenameRestoreDatabase {
     /**
@@ -3441,6 +3433,10 @@ export interface AccountDetail {
       * win-windows鉴权账户需要host
       */
     Host: string;
+    /**
+      * 账号类型。L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限
+      */
+    AccountType: string;
 }
 /**
  * ModifyDatabaseMdf返回参数结构体
@@ -3871,6 +3867,10 @@ export interface DbNormalDetail {
       * 用户类型
       */
     UserAccessDesc: string;
+    /**
+      * 数据库创建时间
+      */
+    CreateTime?: string;
 }
 /**
  * ModifyDBInstanceRenewFlag请求参数结构体
@@ -4103,9 +4103,13 @@ export interface AccountPrivilegeModifyInfo {
       */
     DBPrivileges: Array<DBPrivilegeModifyInfo>;
     /**
-      * 是否为管理员账户
+      * 是否为管理员账户,当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false时，表示删除管理员权限，默认false
       */
     IsAdmin?: boolean;
+    /**
+      * 账号类型，IsAdmin字段的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3
+      */
+    AccountType?: string;
 }
 /**
  * 实例详细信息
@@ -4349,13 +4353,17 @@ export interface AccountCreateInfo {
       */
     Remark?: string;
     /**
-      * 是否为管理员账户，默认为否
+      * 是否为管理员账户，当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false，等价于AccountType=L3
       */
     IsAdmin?: boolean;
     /**
       * win-windows鉴权,sql-sqlserver鉴权，不填默认值为sql-sqlserver鉴权
       */
     Authentication?: string;
+    /**
+      * 账号类型，IsAdmin的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3
+      */
+    AccountType?: string;
 }
 /**
  * RenewDBInstance返回参数结构体
@@ -4379,7 +4387,7 @@ export interface DBPrivilege {
       */
     DBName: string;
     /**
-      * 数据库权限，ReadWrite表示可读写，ReadOnly表示只读
+      * 数据库权限，ReadWrite表示可读写，ReadOnly表示只读，DBOwner所有者
       */
     Privilege: string;
 }
@@ -5358,25 +5366,17 @@ export interface StopMigrationResponse {
     RequestId?: string;
 }
 /**
- * 冷备导入任务迁移步骤细节
+ * 数据库重命名返回参数
  */
-export interface MigrationStep {
+export interface DBRenameRes {
     /**
-      * 步骤序列
+      * 新数据库名称
       */
-    StepNo: number;
+    NewName: string;
     /**
-      * 步骤展现名称
+      * 老数据库名称
       */
-    StepName: string;
-    /**
-      * 英文ID标识
-      */
-    StepId: string;
-    /**
-      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
-      */
-    Status: number;
+    OldName: string;
 }
 /**
  * CreatePublishSubscribe返回参数结构体
@@ -5517,6 +5517,44 @@ export interface DescribeReadOnlyGroupListRequest {
     InstanceId: string;
 }
 /**
+ * 慢查询日志文件信息
+ */
+export interface SlowlogInfo {
+    /**
+      * 慢查询日志文件唯一标识
+      */
+    Id: number;
+    /**
+      * 文件生成的开始时间
+      */
+    StartTime: string;
+    /**
+      * 文件生成的结束时间
+      */
+    EndTime: string;
+    /**
+      * 文件大小（KB）
+      */
+    Size: number;
+    /**
+      * 文件中log条数
+      */
+    Count: number;
+    /**
+      * 内网下载地址
+      */
+    InternalAddr: string;
+    /**
+      * 外网下载地址
+      */
+    ExternalAddr: string;
+    /**
+      * 状态（1成功 2失败）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+}
+/**
  * DescribeIncrementalMigration返回参数结构体
  */
 export interface DescribeIncrementalMigrationResponse {
@@ -5613,6 +5651,10 @@ export interface ModifyBackupMigrationRequest {
       * UploadType是COS_URL时这里时URL，COS_UPLOAD这里填备份文件的名字；只支持1个备份文件，但1个备份文件内可包含多个库
       */
     BackupFiles?: Array<string>;
+    /**
+      * 需要重命名的数据库名称集合
+      */
+    DBRename?: Array<RenameRestoreDatabase>;
 }
 /**
  * DeleteAccount返回参数结构体

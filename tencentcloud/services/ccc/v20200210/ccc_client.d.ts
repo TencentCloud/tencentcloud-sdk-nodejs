@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, HangUpCallRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, DeleteStaffResponse, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, DescribeExtensionsResponse, DeleteExtensionRequest, DescribeTelCallInfoResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, CreateStaffResponse, DescribeSkillGroupInfoListResponse, UnbindStaffSkillGroupListResponse, DescribeStaffInfoListResponse, CreateCarrierPrivilegeNumberApplicantRequest, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribeStaffInfoListRequest, ResetExtensionPasswordResponse, ModifyExtensionRequest, CreateAutoCalloutTaskResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateAutoCalloutTaskRequest, UnbindStaffSkillGroupListRequest, CreateCallOutSessionRequest, StopAutoCalloutTaskResponse, DescribeCCCBuyInfoListResponse, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, DescribeActiveCarrierPrivilegeNumberResponse, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, ResetExtensionPasswordRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, ModifyStaffResponse, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, HangUpCallResponse, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
+import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, HangUpCallRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, ResetExtensionPasswordRequest, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, DescribeExtensionsResponse, DeleteExtensionRequest, DescribeTelCallInfoResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, CreateStaffResponse, DescribeSkillGroupInfoListResponse, DescribeNumbersResponse, DescribeStaffInfoListResponse, UnbindNumberCallOutSkillGroupRequest, CreateCarrierPrivilegeNumberApplicantRequest, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribeStaffInfoListRequest, ResetExtensionPasswordResponse, ModifyExtensionRequest, DescribeNumbersRequest, BindNumberCallOutSkillGroupRequest, UnbindNumberCallOutSkillGroupResponse, CreateAutoCalloutTaskResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateAutoCalloutTaskRequest, UnbindStaffSkillGroupListRequest, BindNumberCallOutSkillGroupResponse, CreateCallOutSessionRequest, StopAutoCalloutTaskResponse, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, DescribeActiveCarrierPrivilegeNumberResponse, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, DeleteStaffResponse, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, ModifyStaffResponse, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, HangUpCallResponse, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 解绑号码外呼技能组
+     */
+    UnbindNumberCallOutSkillGroup(req: UnbindNumberCallOutSkillGroupRequest, cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void): Promise<UnbindNumberCallOutSkillGroupResponse>;
     /**
      * 查询话机列表信息
      */
@@ -36,9 +40,9 @@ export declare class Client extends AbstractClient {
      */
     BindStaffSkillGroupList(req: BindStaffSkillGroupListRequest, cb?: (error: string, rep: BindStaffSkillGroupListResponse) => void): Promise<BindStaffSkillGroupListResponse>;
     /**
-     * 用于无限频率地呼叫坐席手机
+     * 绑定号码外呼技能组
      */
-    CreateCarrierPrivilegeNumberApplicant(req: CreateCarrierPrivilegeNumberApplicantRequest, cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void): Promise<CreateCarrierPrivilegeNumberApplicantResponse>;
+    BindNumberCallOutSkillGroup(req: BindNumberCallOutSkillGroupRequest, cb?: (error: string, rep: BindNumberCallOutSkillGroupResponse) => void): Promise<BindNumberCallOutSkillGroupResponse>;
     /**
      * 获取包括全媒体和文本会话两种类型的服务记录。
      */
@@ -95,6 +99,10 @@ export declare class Client extends AbstractClient {
      * 停止自动外呼任务
      */
     StopAutoCalloutTask(req: StopAutoCalloutTaskRequest, cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void): Promise<StopAutoCalloutTaskResponse>;
+    /**
+     * 用于无限频率地呼叫坐席手机
+     */
+    CreateCarrierPrivilegeNumberApplicant(req: CreateCarrierPrivilegeNumberApplicantRequest, cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void): Promise<CreateCarrierPrivilegeNumberApplicantResponse>;
     /**
      * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
 
@@ -153,4 +161,8 @@ export declare class Client extends AbstractClient {
      * 查询生效运营商白名单规则
      */
     DescribeActiveCarrierPrivilegeNumber(req: DescribeActiveCarrierPrivilegeNumberRequest, cb?: (error: string, rep: DescribeActiveCarrierPrivilegeNumberResponse) => void): Promise<DescribeActiveCarrierPrivilegeNumberResponse>;
+    /**
+     * 查询号码列表
+     */
+    DescribeNumbers(req: DescribeNumbersRequest, cb?: (error: string, rep: DescribeNumbersResponse) => void): Promise<DescribeNumbersResponse>;
 }

@@ -51,13 +51,30 @@ export interface DescribeTaskResultResponse {
     RequestId?: string;
 }
 /**
- * AlterDMSTable返回参数结构体
+ * DescribeNotebookSessionStatement请求参数结构体
  */
-export interface AlterDMSTableResponse {
+export interface DescribeNotebookSessionStatementRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Session唯一标识
       */
-    RequestId?: string;
+    SessionId: string;
+    /**
+      * Session Statement唯一标识
+      */
+    StatementId: string;
+}
+/**
+ * CancelNotebookSessionStatement请求参数结构体
+ */
+export interface CancelNotebookSessionStatementRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * Session Statement唯一标识
+      */
+    StatementId: string;
 }
 /**
  * DescribeDatabases请求参数结构体
@@ -235,6 +252,35 @@ export interface ModifyGovernEventRuleResponse {
     RequestId?: string;
 }
 /**
+ * DescribeNotebookSessions请求参数结构体
+ */
+export interface DescribeNotebookSessionsRequest {
+    /**
+      * DLC Spark作业引擎名称
+      */
+    DataEngineName: string;
+    /**
+      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+      */
+    State?: Array<string>;
+    /**
+      * 排序字段（默认按创建时间）
+      */
+    SortFields?: Array<string>;
+    /**
+      * 排序字段：true：升序、false：降序（默认）
+      */
+    Asc?: boolean;
+    /**
+      * 分页字段
+      */
+    Limit?: number;
+    /**
+      * 分页字段
+      */
+    Offset?: number;
+}
+/**
  * CreateDMSDatabase返回参数结构体
  */
 export interface CreateDMSDatabaseResponse {
@@ -289,6 +335,15 @@ export interface DescribeDMSDatabaseResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Asset: Asset;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UnbindWorkGroupsFromUser返回参数结构体
+ */
+export interface UnbindWorkGroupsFromUserResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -606,23 +661,29 @@ export interface DetachUserPolicyRequest {
     PolicySet?: Array<Policy>;
 }
 /**
- * DescribeSparkAppTasks返回参数结构体
+ * 定时启停策略信息
  */
-export interface DescribeSparkAppTasksResponse {
+export interface CrontabResumeSuspendStrategy {
     /**
-      * 任务结果（该字段已废弃）
+      * 定时拉起时间：如：周一8点
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tasks: TaskResponseInfo;
+    ResumeTime?: string;
     /**
-      * 任务总数
-      */
-    TotalCount: number;
-    /**
-      * 任务结果列表
+      * 定时挂起时间：如：周一20点
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SparkAppTasks: Array<TaskResponseInfo>;
+    SuspendTime?: string;
+    /**
+      * 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuspendStrategy?: number;
+}
+/**
+ * AlterDMSTable返回参数结构体
+ */
+export interface AlterDMSTableResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -779,6 +840,80 @@ export interface DropDMSPartitionsRequest {
     DeleteData?: boolean;
 }
 /**
+ * notebook session列表信息。
+ */
+export interface NotebookSessions {
+    /**
+      * 类型，当前支持：spark、pyspark、sparkr、sql
+      */
+    Kind: string;
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * 代理用户，默认为root
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyUser: string;
+    /**
+      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+      */
+    State: string;
+    /**
+      * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkAppId: string;
+    /**
+      * Session名称
+      */
+    Name: string;
+    /**
+      * Session创建时间
+      */
+    CreateTime: string;
+    /**
+      * 引擎名称
+      */
+    DataEngineName: string;
+    /**
+      * 最新的运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastRunningTime: string;
+    /**
+      * 创建者
+      */
+    Creator: string;
+    /**
+      * spark ui地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkUiUrl: string;
+}
+/**
+ * CreateNotebookSessionStatementSupportBatchSQL请求参数结构体
+ */
+export interface CreateNotebookSessionStatementSupportBatchSQLRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * 执行的代码
+      */
+    Code: string;
+    /**
+      * 类型，当前支持：spark、pyspark、sparkr、sql
+      */
+    Kind: string;
+    /**
+      * 是否保存运行结果
+      */
+    SaveResult: boolean;
+}
+/**
  * CreateTasksInOrder请求参数结构体
  */
 export interface CreateTasksInOrderRequest {
@@ -821,6 +956,10 @@ export interface DetachWorkGroupPolicyResponse {
       */
     RequestId?: string;
 }
+/**
+ * GenerateCreateMangedTableSql请求参数结构体
+ */
+export declare type GenerateCreateMangedTableSqlRequest = null;
 /**
  * CSV序列化及反序列化数据结构
  */
@@ -1014,6 +1153,15 @@ export interface CreateDatabaseRequest {
     DatasourceConnectionName?: string;
 }
 /**
+ * GenerateCreateMangedTableSql返回参数结构体
+ */
+export interface GenerateCreateMangedTableSqlResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDMSTables返回参数结构体
  */
 export interface DescribeDMSTablesResponse {
@@ -1190,13 +1338,13 @@ export interface CreateSparkAppTaskRequest {
     CmdArgs?: string;
 }
 /**
- * DeleteWorkGroup请求参数结构体
+ * CancelNotebookSessionStatementBatch返回参数结构体
  */
-export interface DeleteWorkGroupRequest {
+export interface CancelNotebookSessionStatementBatchResponse {
     /**
-      * 要删除的工作组Id集合
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    WorkGroupIds: Array<number>;
+    RequestId?: string;
 }
 /**
  * 配置格式
@@ -1380,6 +1528,61 @@ export interface AttachWorkGroupPolicyRequest {
     PolicySet?: Array<Policy>;
 }
 /**
+ * notebook session statement输出信息。
+ */
+export interface StatementOutput {
+    /**
+      * 执行总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutionCount: number;
+    /**
+      * Statement数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<KVPair>;
+    /**
+      * Statement状态:ok,error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 错误名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorName: string;
+    /**
+      * 错误类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorValue: string;
+    /**
+      * 错误堆栈信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMessage: Array<string>;
+    /**
+      * SQL类型任务结果返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SQLResult?: string;
+}
+/**
+ * 标签对信息
+ */
+export interface TagInfo {
+    /**
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagKey?: string;
+    /**
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagValue?: string;
+}
+/**
  * CreateUser返回参数结构体
  */
 export interface CreateUserResponse {
@@ -1387,6 +1590,19 @@ export interface CreateUserResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeNotebookSessionStatements请求参数结构体
+ */
+export interface DescribeNotebookSessionStatementsRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * 批任务id
+      */
+    BatchId: string;
 }
 /**
  * DeleteUser返回参数结构体
@@ -1450,6 +1666,35 @@ export interface LockComponentInfo {
       * 是否动态分区写
       */
     IsDynamicPartitionWrite?: boolean;
+}
+/**
+ * DescribeNotebookSessions返回参数结构体
+ */
+export interface DescribeNotebookSessionsResponse {
+    /**
+      * session总数量
+      */
+    TotalElements: number;
+    /**
+      * 总页数
+      */
+    TotalPages: number;
+    /**
+      * 当前页码
+      */
+    Page: number;
+    /**
+      * 当前页数量
+      */
+    Size: number;
+    /**
+      * session列表信息
+      */
+    Sessions: Array<NotebookSessions>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDMSPartitions请求参数结构体
@@ -1573,6 +1818,15 @@ export interface DescribeSparkAppJobsRequest {
       * 查询列表限制数量
       */
     Limit?: number;
+}
+/**
+ * DeleteNotebookSession请求参数结构体
+ */
+export interface DeleteNotebookSessionRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
 }
 /**
  * CreateDMSTable返回参数结构体
@@ -1730,6 +1984,54 @@ export interface CSV {
     Format?: string;
 }
 /**
+ * NotebookSessionStatement详情。
+ */
+export interface NotebookSessionStatementInfo {
+    /**
+      * 完成时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Completed: number;
+    /**
+      * 开始时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Started: number;
+    /**
+      * 完成进度，百分制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Progress: number;
+    /**
+      * Session Statement唯一标识
+      */
+    StatementId: string;
+    /**
+      * Session Statement状态，包含：waiting（排队中）、running（运行中）、available（正常）、error（异常）、cancelling（取消中）、cancelled（已取消）
+      */
+    State: string;
+    /**
+      * Statement输出信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutPut: StatementOutput;
+    /**
+      * 批任务id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BatchId?: string;
+    /**
+      * 运行语句
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Code?: string;
+    /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId?: string;
+}
+/**
  * CreateTable请求参数结构体
  */
 export interface CreateTableRequest {
@@ -1737,6 +2039,23 @@ export interface CreateTableRequest {
       * 数据表配置信息
       */
     TableInfo: TableInfo;
+}
+/**
+ * CreateNotebookSessionStatement请求参数结构体
+ */
+export interface CreateNotebookSessionStatementRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * 执行的代码
+      */
+    Code: string;
+    /**
+      * 类型，当前支持：spark、pyspark、sparkr、sql
+      */
+    Kind: string;
 }
 /**
  * DescribeWorkGroups返回参数结构体
@@ -1822,9 +2141,13 @@ export interface DescribeSparkAppJobResponse {
     RequestId?: string;
 }
 /**
- * DeleteUsersFromWorkGroup返回参数结构体
+ * CreateExportTask返回参数结构体
  */
-export interface DeleteUsersFromWorkGroupResponse {
+export interface CreateExportTaskResponse {
+    /**
+      * 任务id
+      */
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1851,6 +2174,23 @@ export interface AddUsersToWorkGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeNotebookSessionLog请求参数结构体
+ */
+export interface DescribeNotebookSessionLogRequest {
+    /**
+      * Session唯一标识
+      */
+    SessionId: string;
+    /**
+      * 分页参数，默认200
+      */
+    Limit?: number;
+    /**
+      * 分页参数，默认0
+      */
+    Offset?: number;
 }
 /**
  * 授权用户信息
@@ -1919,6 +2259,19 @@ export interface CreateExportTaskRequest {
       * 目标数据源的类型，目前支持导出到cos
       */
     OutputType?: string;
+}
+/**
+ * DescribeNotebookSessionStatement返回参数结构体
+ */
+export interface DescribeNotebookSessionStatementResponse {
+    /**
+      * Session Statement详情
+      */
+    NotebookSessionStatement?: NotebookSessionStatementInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ReportHeartbeatMetaData返回参数结构体
@@ -2016,25 +2369,13 @@ export interface CreateDMSTableRequest {
     Name?: string;
 }
 /**
- * DropDMSTable请求参数结构体
+ * CancelNotebookSessionStatement返回参数结构体
  */
-export interface DropDMSTableRequest {
+export interface CancelNotebookSessionStatementResponse {
     /**
-      * 数据库名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DbName?: string;
-    /**
-      * 表名称
-      */
-    Name?: string;
-    /**
-      * 是否删除数据
-      */
-    DeleteData?: boolean;
-    /**
-      * 环境属性
-      */
-    EnvProps?: KVPair;
+    RequestId?: string;
 }
 /**
  * DMSTable基本信息
@@ -2489,6 +2830,19 @@ export interface BindWorkGroupsToUserResponse {
     RequestId?: string;
 }
 /**
+ * CreateNotebookSessionStatement返回参数结构体
+ */
+export interface CreateNotebookSessionStatementResponse {
+    /**
+      * Session Statement详情
+      */
+    NotebookSessionStatement?: NotebookSessionStatementInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeStoreLocation返回参数结构体
  */
 export interface DescribeStoreLocationResponse {
@@ -2554,6 +2908,57 @@ export interface Script {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime: number;
+}
+/**
+ * 按批提交Statement运行SQL任务。
+ */
+export interface NotebookSessionStatementBatchInformation {
+    /**
+      * 任务详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotebookSessionStatementBatch?: Array<NotebookSessionStatementInfo>;
+    /**
+      * 当前批任务是否运行完成
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAvailable?: boolean;
+    /**
+      * Session唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionId?: string;
+    /**
+      * Batch唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BatchId?: string;
+}
+/**
+ * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ */
+export interface DescribeNotebookSessionStatementSqlResultRequest {
+    /**
+      * 任务唯一ID
+      */
+    TaskId: string;
+    /**
+      * 返回结果的最大行数，范围0~1000，默认为1000.
+      */
+    MaxResults?: number;
+    /**
+      * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
+      */
+    NextToken?: string;
+}
+/**
+ * ModifySparkApp返回参数结构体
+ */
+export interface ModifySparkAppResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AlterDMSTable请求参数结构体
@@ -2807,6 +3212,19 @@ export interface WorkGroupInfo {
     CreateTime: string;
 }
 /**
+ * CreateNotebookSessionStatementSupportBatchSQL返回参数结构体
+ */
+export interface CreateNotebookSessionStatementSupportBatchSQLResponse {
+    /**
+      * Session Statement详情
+      */
+    NotebookSessionStatementBatches?: NotebookSessionStatementBatchInformation;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateScript请求参数结构体
  */
 export interface CreateScriptRequest {
@@ -2891,6 +3309,15 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
     IsPartition?: boolean;
 }
 /**
+ * DeleteWorkGroup请求参数结构体
+ */
+export interface DeleteWorkGroupRequest {
+    /**
+      * 要删除的工作组Id集合
+      */
+    WorkGroupIds: Array<number>;
+}
+/**
  * DescribeTaskResult请求参数结构体
  */
 export interface DescribeTaskResultRequest {
@@ -2973,6 +3400,27 @@ export interface DataFormat {
     AVRO: Other;
 }
 /**
+ * DescribeNotebookSessionLog返回参数结构体
+ */
+export interface DescribeNotebookSessionLogResponse {
+    /**
+      * 日志信息，默认获取最新的200条
+      */
+    Logs: Array<string>;
+    /**
+      * 分页参数，默认200
+      */
+    Limit: number;
+    /**
+      * 分页参数，默认0
+      */
+    Offset: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 查询视图信息对象
  */
 export interface ViewResponseInfo {
@@ -2998,6 +3446,101 @@ export interface ViewResponseInfo {
       * 视图更新时间。
       */
     ModifiedTime: string;
+}
+/**
+ * 网络配置
+ */
+export interface NetworkConnection {
+    /**
+      * 网络配置id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: number;
+    /**
+      * 网络配置唯一标志符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssociateId?: string;
+    /**
+      * 计算引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HouseId?: string;
+    /**
+      * 数据源id(已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionId?: string;
+    /**
+      * 网络配置状态（0-初始化，1-正常）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    State?: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: number;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: number;
+    /**
+      * 创建用户Appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Appid?: number;
+    /**
+      * 计算引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HouseName?: string;
+    /**
+      * 网络配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionName?: string;
+    /**
+      * 网络配置类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConnectionType?: number;
+    /**
+      * 创建用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin?: string;
+    /**
+      * 创建用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountUin?: string;
+    /**
+      * 网络配置描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConnectionDesc?: string;
+    /**
+      * 数据源vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionVpcId?: string;
+    /**
+      * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionSubnetId?: string;
+    /**
+      * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionCidrBlock?: string;
+    /**
+      * 数据源SubnetCidrBlock
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionSubnetCidrBlock?: string;
 }
 /**
  * CreateUser请求参数结构体
@@ -3244,9 +3787,9 @@ table-id - String - （过滤条件）table id形如：12342。
     TableFormat?: string;
 }
 /**
- * ModifySparkApp返回参数结构体
+ * DeleteNotebookSession返回参数结构体
  */
-export interface ModifySparkAppResponse {
+export interface DeleteNotebookSessionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3277,9 +3820,74 @@ export interface DMSTableInfo {
     Asset: Asset;
 }
 /**
+ * DescribeNotebookSessionStatements返回参数结构体
+ */
+export interface DescribeNotebookSessionStatementsResponse {
+    /**
+      * Session Statement详情
+      */
+    NotebookSessionStatements?: NotebookSessionStatementBatchInformation;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AttachUserPolicy返回参数结构体
  */
 export interface AttachUserPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DropDMSTable请求参数结构体
+ */
+export interface DropDMSTableRequest {
+    /**
+      * 数据库名称
+      */
+    DbName?: string;
+    /**
+      * 表名称
+      */
+    Name?: string;
+    /**
+      * 是否删除数据
+      */
+    DeleteData?: boolean;
+    /**
+      * 环境属性
+      */
+    EnvProps?: KVPair;
+}
+/**
+ * DescribeNotebookSessionStatementSqlResult返回参数结构体
+ */
+export interface DescribeNotebookSessionStatementSqlResultResponse {
+    /**
+      * 任务Id
+      */
+    TaskId?: string;
+    /**
+      * 结果数据
+      */
+    ResultSet?: string;
+    /**
+      * schema
+      */
+    ResultSchema?: Array<Column>;
+    /**
+      * 分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NextToken?: string;
+    /**
+      * 存储结果地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutputPath?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3384,13 +3992,9 @@ export interface DescribeDMSPartitionsResponse {
     RequestId?: string;
 }
 /**
- * CreateExportTask返回参数结构体
+ * DeleteUsersFromWorkGroup返回参数结构体
  */
-export interface CreateExportTaskResponse {
-    /**
-      * 任务id
-      */
-    TaskId: string;
+export interface DeleteUsersFromWorkGroupResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3726,6 +4330,29 @@ export interface DescribeSparkAppJobsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSparkAppTasks返回参数结构体
+ */
+export interface DescribeSparkAppTasksResponse {
+    /**
+      * 任务结果（该字段已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tasks: TaskResponseInfo;
+    /**
+      * 任务总数
+      */
+    TotalCount: number;
+    /**
+      * 任务结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkAppTasks: Array<TaskResponseInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 查询表信息对象
  */
 export interface TableResponseInfo {
@@ -4055,13 +4682,59 @@ export interface CreateSparkAppRequest {
     AppExecutorMaxNumbers?: number;
 }
 /**
- * UnbindWorkGroupsFromUser返回参数结构体
+ * DescribeDataEngines请求参数结构体
  */
-export interface UnbindWorkGroupsFromUserResponse {
+export interface DescribeDataEnginesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 偏移量，默认为0。
       */
-    RequestId?: string;
+    Offset?: number;
+    /**
+      * 滤类型，传参Name应为以下其中一个,
+data-engine-name - String
+engine-type - String
+state - String
+mode - String
+create-time - String
+message - String
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 排序字段，支持如下字段类型，create-time
+      */
+    SortBy?: string;
+    /**
+      * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+      */
+    Sorting?: string;
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 已废弃，请使用DatasourceConnectionNameSet
+      */
+    DatasourceConnectionName?: string;
+    /**
+      * 是否不返回共享引擎，true不返回共享引擎，false可以返回共享引擎
+      */
+    ExcludePublicEngine?: boolean;
+    /**
+      * 参数应该为引擎权限类型，有效类型："USE", "MODIFY", "OPERATE", "MONITOR", "DELETE"
+      */
+    AccessTypes?: Array<string>;
+    /**
+      * 引擎执行任务类型，有效值：SQL/BATCH
+      */
+    EngineExecType?: string;
+    /**
+      * 引擎类型，有效值：spark/presto
+      */
+    EngineType?: string;
+    /**
+      * 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎
+      */
+    DatasourceConnectionNameSet?: Array<string>;
 }
 /**
  * DropDMSPartitions返回参数结构体
@@ -4118,6 +4791,158 @@ export interface CreateInternalTableResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DataEngine详细信息
+ */
+export interface DataEngineInfo {
+    /**
+      * DataEngine名称
+      */
+    DataEngineName: string;
+    /**
+      * 引擎类型 spark/presto
+      */
+    EngineType: string;
+    /**
+      * 集群资源类型 spark_private/presto_private/presto_cu/spark_cu
+      */
+    ClusterType: string;
+    /**
+      * 引用ID
+      */
+    QuotaId?: string;
+    /**
+      * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
+      */
+    State?: number;
+    /**
+      * 创建时间
+      */
+    CreateTime?: number;
+    /**
+      * 更新时间
+      */
+    UpdateTime?: number;
+    /**
+      * 集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size?: number;
+    /**
+      * 计费模式 0共享模式 1按量计费 2包年包月
+      */
+    Mode?: number;
+    /**
+      * 最小集群数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinClusters?: number;
+    /**
+      * 最大集群数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxClusters?: number;
+    /**
+      * 是否自动恢复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoResume?: boolean;
+    /**
+      * 自动恢复时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpendAfter?: number;
+    /**
+      * 集群网段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CidrBlock?: string;
+    /**
+      * 是否为默认引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultDataEngine?: boolean;
+    /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message?: string;
+    /**
+      * 引擎id
+      */
+    DataEngineId?: string;
+    /**
+      * 操作者
+      */
+    SubAccountUin?: string;
+    /**
+      * 到期时间
+      */
+    ExpireTime?: string;
+    /**
+      * 隔离时间
+      */
+    IsolatedTime?: string;
+    /**
+      * 冲正时间
+      */
+    ReversalTime?: string;
+    /**
+      * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAlias?: string;
+    /**
+      * 标签对集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagList?: Array<TagInfo>;
+    /**
+      * 引擎拥有的权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Permissions?: Array<string>;
+    /**
+      * 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoSuspend?: boolean;
+    /**
+      * 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CrontabResumeSuspend?: number;
+    /**
+      * 定时启停策略，复杂类型：包含启停时间、挂起集群策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy;
+    /**
+      * 引擎执行任务类型，有效值：SQL/BATCH
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineExecType?: string;
+    /**
+      * 自动续费标志，0，初始状态，默认不自动续费，若用户有预付费不停服特权，自动续费。1：自动续费。2：明确不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag?: number;
+    /**
+      * 集群自动挂起时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoSuspendTime?: number;
+    /**
+      * 网络连接配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConnectionSet?: Array<NetworkConnection>;
+    /**
+      * ui的跳转地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UiURL?: string;
 }
 /**
  * DescribeSparkAppTasks请求参数结构体
@@ -4247,6 +5072,23 @@ export interface UserMessage {
     UserAlias: string;
 }
 /**
+ * DescribeViews返回参数结构体
+ */
+export interface DescribeViewsResponse {
+    /**
+      * 视图对象列表。
+      */
+    ViewList: Array<ViewResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数据库和数据表属性信息
  */
 export interface Property {
@@ -4348,15 +5190,30 @@ export interface DescribeDMSTableRequest {
  */
 export declare type ModifyGovernEventRuleRequest = null;
 /**
- * DescribeViews返回参数结构体
+ * CancelNotebookSessionStatementBatch请求参数结构体
  */
-export interface DescribeViewsResponse {
+export interface CancelNotebookSessionStatementBatchRequest {
     /**
-      * 视图对象列表。
+      * Session唯一标识
       */
-    ViewList: Array<ViewResponseInfo>;
+    SessionId: string;
     /**
-      * 实例总数。
+      * 批任务唯一标识
+      */
+    BatchId: string;
+}
+/**
+ * DescribeDataEngines返回参数结构体
+ */
+export interface DescribeDataEnginesResponse {
+    /**
+      * 数据引擎列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngines: Array<DataEngineInfo>;
+    /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalCount: number;
     /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeResultDownloadResponse, DescribeTaskResultResponse, AlterDMSTableResponse, DescribeDatabasesRequest, DeleteUserRequest, ListTaskJobLogDetailResponse, CreateResultDownloadResponse, ModifyGovernEventRuleResponse, CreateDMSDatabaseResponse, CreateStoreLocationResponse, DescribeNotebookSessionResponse, DescribeDMSDatabaseResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, SuspendResumeDataEngineResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DescribeSparkAppTasksResponse, DescribeTasksResponse, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, ModifySparkAppRequest, CreateDatabaseRequest, DescribeDMSTablesResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, DescribeSparkAppJobRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, DeleteWorkGroupRequest, UnlockMetaDataRequest, AttachUserPolicyRequest, CreateInternalTableRequest, ListTaskJobLogDetailRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, DescribeDatabasesResponse, DescribeDMSPartitionsRequest, DescribeSparkAppJobsRequest, CreateDMSTableResponse, CreateNotebookSessionRequest, CreateTaskRequest, DescribeNotebookSessionRequest, CreateTableRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, CreateExportTaskRequest, ReportHeartbeatMetaDataResponse, ReportHeartbeatMetaDataRequest, CreateDMSTableRequest, DropDMSTableRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, AddDMSPartitionsRequest, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeTaskResultRequest, DescribeUsersResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DropDMSTableResponse, CreateWorkGroupResponse, DescribeTablesRequest, ModifySparkAppResponse, CreateStoreLocationRequest, AttachUserPolicyResponse, DescribeDMSPartitionsResponse, CreateExportTaskResponse, UnbindWorkGroupsFromUserRequest, DescribeDMSDatabaseRequest, DescribeTableRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, SuspendResumeDataEngineRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeViewsRequest, LockMetaDataRequest, DetachUserPolicyResponse, DescribeWorkGroupsRequest, CreateTasksResponse, CreateNotebookSessionResponse, CreateSparkAppRequest, UnbindWorkGroupsFromUserResponse, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, CreateWorkGroupRequest, CreateInternalTableResponse, DescribeSparkAppTasksRequest, LockMetaDataResponse, CheckLockMetaDataResponse, AlterDMSDatabaseRequest, CreateResultDownloadRequest, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, ModifyGovernEventRuleRequest, DescribeViewsResponse, DescribeScriptsResponse, DescribeResultDownloadRequest } from "./dlc_models";
+import { DescribeResultDownloadResponse, DescribeTaskResultResponse, DescribeNotebookSessionStatementRequest, CancelNotebookSessionStatementRequest, DescribeDatabasesRequest, DeleteUserRequest, ListTaskJobLogDetailResponse, CreateResultDownloadResponse, ModifyGovernEventRuleResponse, DescribeNotebookSessionsRequest, CreateDMSDatabaseResponse, CreateStoreLocationResponse, DescribeNotebookSessionResponse, DescribeDMSDatabaseResponse, UnbindWorkGroupsFromUserResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, SuspendResumeDataEngineResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, AlterDMSTableResponse, DescribeTasksResponse, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateNotebookSessionStatementSupportBatchSQLRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, GenerateCreateMangedTableSqlRequest, ModifySparkAppRequest, CreateDatabaseRequest, GenerateCreateMangedTableSqlResponse, DescribeDMSTablesResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, DescribeSparkAppJobRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, CancelNotebookSessionStatementBatchResponse, UnlockMetaDataRequest, AttachUserPolicyRequest, CreateInternalTableRequest, ListTaskJobLogDetailRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DescribeNotebookSessionStatementsRequest, DeleteUserResponse, DescribeDatabasesResponse, DescribeNotebookSessionsResponse, DescribeDMSPartitionsRequest, DescribeSparkAppJobsRequest, DeleteNotebookSessionRequest, CreateDMSTableResponse, CreateNotebookSessionRequest, CreateTaskRequest, DescribeNotebookSessionRequest, CreateTableRequest, CreateNotebookSessionStatementRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, CreateExportTaskResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, DescribeNotebookSessionLogRequest, CreateExportTaskRequest, DescribeNotebookSessionStatementResponse, ReportHeartbeatMetaDataResponse, ReportHeartbeatMetaDataRequest, CreateDMSTableRequest, CancelNotebookSessionStatementResponse, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, CreateNotebookSessionStatementResponse, DescribeStoreLocationResponse, DeleteScriptRequest, AddDMSPartitionsRequest, DescribeNotebookSessionStatementSqlResultRequest, ModifySparkAppResponse, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateNotebookSessionStatementSupportBatchSQLResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DeleteWorkGroupRequest, DescribeTaskResultRequest, DescribeUsersResponse, DescribeNotebookSessionLogResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DropDMSTableResponse, CreateWorkGroupResponse, DescribeTablesRequest, DeleteNotebookSessionResponse, CreateStoreLocationRequest, DescribeNotebookSessionStatementsResponse, AttachUserPolicyResponse, DropDMSTableRequest, DescribeNotebookSessionStatementSqlResultResponse, DescribeDMSPartitionsResponse, DeleteUsersFromWorkGroupResponse, UnbindWorkGroupsFromUserRequest, DescribeDMSDatabaseRequest, DescribeTableRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, SuspendResumeDataEngineRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeSparkAppTasksResponse, DescribeViewsRequest, LockMetaDataRequest, DetachUserPolicyResponse, DescribeWorkGroupsRequest, CreateTasksResponse, CreateNotebookSessionResponse, CreateSparkAppRequest, DescribeDataEnginesRequest, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, CreateWorkGroupRequest, CreateInternalTableResponse, DescribeSparkAppTasksRequest, LockMetaDataResponse, CheckLockMetaDataResponse, AlterDMSDatabaseRequest, DescribeViewsResponse, CreateResultDownloadRequest, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, ModifyGovernEventRuleRequest, CancelNotebookSessionStatementBatchRequest, DescribeDataEnginesResponse, DescribeScriptsResponse, DescribeResultDownloadRequest } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNotebookSession(req: DescribeNotebookSessionRequest, cb?: (error: string, rep: DescribeNotebookSessionResponse) => void): Promise<DescribeNotebookSessionResponse>;
     /**
-     * DMS元数据删除库
+     * 本接口（CancelNotebookSessionStatement）用于取消session statement
      */
-    DropDMSDatabase(req: DropDMSDatabaseRequest, cb?: (error: string, rep: DropDMSDatabaseResponse) => void): Promise<DropDMSDatabaseResponse>;
+    CancelNotebookSessionStatement(req: CancelNotebookSessionStatementRequest, cb?: (error: string, rep: CancelNotebookSessionStatementResponse) => void): Promise<CancelNotebookSessionStatementResponse>;
     /**
      * DMS元数据新增分区
      */
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskResult(req: DescribeTaskResultRequest, cb?: (error: string, rep: DescribeTaskResultResponse) => void): Promise<DescribeTaskResultResponse>;
     /**
-     * 该接口（CreateExportTask）用于创建导出任务
+     * 本接口（CancelNotebookSessionStatementBatch）用于按批取消Session statement。
      */
-    CreateExportTask(req: CreateExportTaskRequest, cb?: (error: string, rep: CreateExportTaskResponse) => void): Promise<CreateExportTaskResponse>;
+    CancelNotebookSessionStatementBatch(req: CancelNotebookSessionStatementBatchRequest, cb?: (error: string, rep: CancelNotebookSessionStatementBatchResponse) => void): Promise<CancelNotebookSessionStatementBatchResponse>;
     /**
      * 删除spark应用
      */
@@ -96,6 +96,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeResultDownload(req: DescribeResultDownloadRequest, cb?: (error: string, rep: DescribeResultDownloadResponse) => void): Promise<DescribeResultDownloadResponse>;
     /**
+     * 本接口（DescribeDataEngines）用于获取DataEngines信息列表
+     */
+    DescribeDataEngines(req: DescribeDataEnginesRequest, cb?: (error: string, rep: DescribeDataEnginesResponse) => void): Promise<DescribeDataEnginesResponse>;
+    /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     CreateStoreLocation(req: CreateStoreLocationRequest, cb?: (error: string, rep: CreateStoreLocationResponse) => void): Promise<CreateStoreLocationResponse>;
@@ -116,29 +120,41 @@ export declare class Client extends AbstractClient {
      */
     CreateWorkGroup(req: CreateWorkGroupRequest, cb?: (error: string, rep: CreateWorkGroupResponse) => void): Promise<CreateWorkGroupResponse>;
     /**
-     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建Statement批量运行SQL任务。
      */
-    ListTaskJobLogDetail(req: ListTaskJobLogDetailRequest, cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void): Promise<ListTaskJobLogDetailResponse>;
+    CreateNotebookSessionStatementSupportBatchSQL(req: CreateNotebookSessionStatementSupportBatchSQLRequest, cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
+    /**
+     * 本接口（DescribeNotebookSessionLog）用于获取notebook livy session日志
+     */
+    DescribeNotebookSessionLog(req: DescribeNotebookSessionLogRequest, cb?: (error: string, rep: DescribeNotebookSessionLogResponse) => void): Promise<DescribeNotebookSessionLogResponse>;
     /**
      * DMS元数据更新库
      */
     AlterDMSDatabase(req: AlterDMSDatabaseRequest, cb?: (error: string, rep: AlterDMSDatabaseResponse) => void): Promise<AlterDMSDatabaseResponse>;
     /**
-     * 解绑用户上的用户组
+     * 更新spark应用
      */
-    UnbindWorkGroupsFromUser(req: UnbindWorkGroupsFromUserRequest, cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void): Promise<UnbindWorkGroupsFromUserResponse>;
+    ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
     /**
-     * 创建托管存储内表
+     * 创建托管存储内表（该接口已废弃）
      */
     CreateInternalTable(req: CreateInternalTableRequest, cb?: (error: string, rep: CreateInternalTableResponse) => void): Promise<CreateInternalTableResponse>;
     /**
-     * 获取用户列表信息
+     * 本接口（DeleteNotebookSession）用于删除notebook livy session
      */
-    DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
+    DeleteNotebookSession(req: DeleteNotebookSessionRequest, cb?: (error: string, rep: DeleteNotebookSessionResponse) => void): Promise<DeleteNotebookSessionResponse>;
+    /**
+     * 生成创建托管表语句
+     */
+    GenerateCreateMangedTableSql(req?: GenerateCreateMangedTableSqlRequest, cb?: (error: string, rep: GenerateCreateMangedTableSqlResponse) => void): Promise<GenerateCreateMangedTableSqlResponse>;
     /**
      * 绑定鉴权策略到工作组
      */
     AttachWorkGroupPolicy(req: AttachWorkGroupPolicyRequest, cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void): Promise<AttachWorkGroupPolicyResponse>;
+    /**
+     * 本接口（DescribeNotebookSessions）用于获取notebook livy session列表
+     */
+    DescribeNotebookSessions(req: DescribeNotebookSessionsRequest, cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void): Promise<DescribeNotebookSessionsResponse>;
     /**
      * DMS元数据获取分区
      */
@@ -168,6 +184,18 @@ export declare class Client extends AbstractClient {
      */
     CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
     /**
+     * 本接口（DescribeNotebookSessionStatement）用于获取session statement信息
+     */
+    DescribeNotebookSessionStatement(req: DescribeNotebookSessionStatementRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementResponse) => void): Promise<DescribeNotebookSessionStatementResponse>;
+    /**
+     * 解绑用户上的用户组
+     */
+    UnbindWorkGroupsFromUser(req: UnbindWorkGroupsFromUserRequest, cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void): Promise<UnbindWorkGroupsFromUserResponse>;
+    /**
+     * 获取spark应用列表
+     */
+    DescribeSparkAppJobs(req: DescribeSparkAppJobsRequest, cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void): Promise<DescribeSparkAppJobsResponse>;
+    /**
      * 获取工作组列表
      */
     DescribeWorkGroups(req: DescribeWorkGroupsRequest, cb?: (error: string, rep: DescribeWorkGroupsResponse) => void): Promise<DescribeWorkGroupsResponse>;
@@ -176,9 +204,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyWorkGroup(req: ModifyWorkGroupRequest, cb?: (error: string, rep: ModifyWorkGroupResponse) => void): Promise<ModifyWorkGroupResponse>;
     /**
-     * 更新spark应用
+     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
      */
-    ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
+    ListTaskJobLogDetail(req: ListTaskJobLogDetailRequest, cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void): Promise<ListTaskJobLogDetailResponse>;
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */
@@ -187,6 +215,14 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeTable），用于查询单个表的详细信息。
      */
     DescribeTable(req: DescribeTableRequest, cb?: (error: string, rep: DescribeTableResponse) => void): Promise<DescribeTableResponse>;
+    /**
+     * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
+     */
+    DescribeNotebookSessionStatements(req: DescribeNotebookSessionStatementsRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementsResponse) => void): Promise<DescribeNotebookSessionStatementsResponse>;
+    /**
+     * 获取用户列表信息
+     */
+    DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
     /**
      * DMS元数据获取库
      */
@@ -260,13 +296,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeSparkAppTasks(req: DescribeSparkAppTasksRequest, cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void): Promise<DescribeSparkAppTasksResponse>;
     /**
-     * 获取spark应用列表
+     * 本接口（DescribeNotebookSessionStatementSqlResult）用于获取statement运行结果。
      */
-    DescribeSparkAppJobs(req: DescribeSparkAppJobsRequest, cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void): Promise<DescribeSparkAppJobsResponse>;
+    DescribeNotebookSessionStatementSqlResult(req: DescribeNotebookSessionStatementSqlResultRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementSqlResultResponse) => void): Promise<DescribeNotebookSessionStatementSqlResultResponse>;
+    /**
+     * DMS元数据删除库
+     */
+    DropDMSDatabase(req: DropDMSDatabaseRequest, cb?: (error: string, rep: DropDMSDatabaseResponse) => void): Promise<DropDMSDatabaseResponse>;
     /**
      * 创建用户
      */
     CreateUser(req: CreateUserRequest, cb?: (error: string, rep: CreateUserResponse) => void): Promise<CreateUserResponse>;
+    /**
+     * 本接口（CreateNotebookSessionStatement）用于创建session statement
+     */
+    CreateNotebookSessionStatement(req: CreateNotebookSessionStatementRequest, cb?: (error: string, rep: CreateNotebookSessionStatementResponse) => void): Promise<CreateNotebookSessionStatementResponse>;
     /**
      * 解绑用户鉴权策略
      */
@@ -275,4 +319,8 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeTables）用于查询数据表列表。
      */
     DescribeTables(req: DescribeTablesRequest, cb?: (error: string, rep: DescribeTablesResponse) => void): Promise<DescribeTablesResponse>;
+    /**
+     * 该接口（CreateExportTask）用于创建导出任务
+     */
+    CreateExportTask(req: CreateExportTaskRequest, cb?: (error: string, rep: CreateExportTaskResponse) => void): Promise<CreateExportTaskResponse>;
 }

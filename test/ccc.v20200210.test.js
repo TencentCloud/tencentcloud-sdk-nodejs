@@ -18,6 +18,16 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.UnbindNumberCallOutSkillGroup", async function () {
+    try {
+       const data = await client.UnbindNumberCallOutSkillGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeExtensions", async function () {
     try {
        const data = await client.DescribeExtensions({})
@@ -88,9 +98,9 @@ it("ccc.v20200210.BindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
+it("ccc.v20200210.BindNumberCallOutSkillGroup", async function () {
     try {
-       const data = await client.CreateCarrierPrivilegeNumberApplicant({})
+       const data = await client.BindNumberCallOutSkillGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +248,16 @@ it("ccc.v20200210.StopAutoCalloutTask", async function () {
     }
 })
 
+it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
+    try {
+       const data = await client.CreateCarrierPrivilegeNumberApplicant({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeChatMessages", async function () {
     try {
        const data = await client.DescribeChatMessages({})
@@ -371,6 +391,16 @@ it("ccc.v20200210.CreateSDKLoginToken", async function () {
 it("ccc.v20200210.DescribeActiveCarrierPrivilegeNumber", async function () {
     try {
        const data = await client.DescribeActiveCarrierPrivilegeNumber({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeNumbers", async function () {
+    try {
+       const data = await client.DescribeNumbers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

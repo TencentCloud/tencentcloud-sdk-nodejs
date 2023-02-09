@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
+     * 解绑号码外呼技能组
+     */
+    async UnbindNumberCallOutSkillGroup(req, cb) {
+        return this.request("UnbindNumberCallOutSkillGroup", req, cb);
+    }
+    /**
      * 查询话机列表信息
      */
     async DescribeExtensions(req, cb) {
@@ -70,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindStaffSkillGroupList", req, cb);
     }
     /**
-     * 用于无限频率地呼叫坐席手机
+     * 绑定号码外呼技能组
      */
-    async CreateCarrierPrivilegeNumberApplicant(req, cb) {
-        return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb);
+    async BindNumberCallOutSkillGroup(req, cb) {
+        return this.request("BindNumberCallOutSkillGroup", req, cb);
     }
     /**
      * 获取包括全媒体和文本会话两种类型的服务记录。
@@ -160,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopAutoCalloutTask", req, cb);
     }
     /**
+     * 用于无限频率地呼叫坐席手机
+     */
+    async CreateCarrierPrivilegeNumberApplicant(req, cb) {
+        return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb);
+    }
+    /**
      * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
 
 文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
@@ -244,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeActiveCarrierPrivilegeNumber(req, cb) {
         return this.request("DescribeActiveCarrierPrivilegeNumber", req, cb);
+    }
+    /**
+     * 查询号码列表
+     */
+    async DescribeNumbers(req, cb) {
+        return this.request("DescribeNumbers", req, cb);
     }
 }
 exports.Client = Client;

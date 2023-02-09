@@ -131,19 +131,18 @@ export interface ModifyStaffRequest {
 }
 
 /**
- * DeleteStaff返回参数结构体
+ * ResetExtensionPassword请求参数结构体
  */
-export interface DeleteStaffResponse {
+export interface ResetExtensionPasswordRequest {
   /**
-      * 无法删除的状态为在线的客服列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OnlineStaffList: Array<string>
+   * TCCC 实例应用 ID
+   */
+  SdkAppId: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分机号
    */
-  RequestId?: string
+  ExtensionId: string
 }
 
 /**
@@ -727,9 +726,19 @@ export interface DescribeSkillGroupInfoListResponse {
 }
 
 /**
- * UnbindStaffSkillGroupList返回参数结构体
+ * DescribeNumbers返回参数结构体
  */
-export interface UnbindStaffSkillGroupListResponse {
+export interface DescribeNumbersResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+
+  /**
+   * 号码列表
+   */
+  Numbers?: Array<NumberInfo>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -754,6 +763,26 @@ export interface DescribeStaffInfoListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnbindNumberCallOutSkillGroup请求参数结构体
+ */
+export interface UnbindNumberCallOutSkillGroupRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+
+  /**
+   * 待解绑的号码
+   */
+  Number: string
+
+  /**
+   * 待解绑的技能组Id列表
+   */
+  SkillGroupIds: Array<number>
 }
 
 /**
@@ -1465,6 +1494,26 @@ export interface Message {
 }
 
 /**
+ * DescribeNumbers请求参数结构体
+ */
+export interface DescribeNumbersRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+
+  /**
+   * 页数，从0开始
+   */
+  PageNumber?: number
+
+  /**
+   * 分页大小，默认20
+   */
+  PageSize?: number
+}
+
+/**
  * 话机信息
  */
 export interface ExtensionInfo {
@@ -1525,6 +1574,26 @@ export interface ExtensionInfo {
 }
 
 /**
+ * BindNumberCallOutSkillGroup请求参数结构体
+ */
+export interface BindNumberCallOutSkillGroupRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+
+  /**
+   * 待绑定的号码
+   */
+  Number: string
+
+  /**
+   * 待绑定的技能组Id列表
+   */
+  SkillGroupIds: Array<number>
+}
+
+/**
  * ivr 按键信息
  */
 export interface IVRKeyPressedElement {
@@ -1539,6 +1608,16 @@ export interface IVRKeyPressedElement {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Label: string
+}
+
+/**
+ * UnbindNumberCallOutSkillGroup返回参数结构体
+ */
+export interface UnbindNumberCallOutSkillGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1830,6 +1909,27 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QueuedSkillGroupName?: string
+
+  /**
+      * 通话中语音留言录音URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VoicemailRecordURL?: Array<string>
+}
+
+/**
+ * 号码信息
+ */
+export interface NumberInfo {
+  /**
+   * 号码
+   */
+  Number?: string
+
+  /**
+   * 绑定的外呼技能组
+   */
+  CallOutSkillGroupIds?: Array<number>
 }
 
 /**
@@ -2085,6 +2185,16 @@ export interface UnbindStaffSkillGroupListRequest {
 }
 
 /**
+ * BindNumberCallOutSkillGroup返回参数结构体
+ */
+export interface BindNumberCallOutSkillGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCallOutSession请求参数结构体
  */
 export interface CreateCallOutSessionRequest {
@@ -2260,6 +2370,16 @@ export interface ActiveCarrierPrivilegeNumber {
 }
 
 /**
+ * UnbindStaffSkillGroupList返回参数结构体
+ */
+export interface UnbindStaffSkillGroupListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteExtension返回参数结构体
  */
 export interface DeleteExtensionResponse {
@@ -2419,18 +2539,19 @@ export interface DescribeStaffStatusMetricsRequest {
 }
 
 /**
- * ResetExtensionPassword请求参数结构体
+ * DeleteStaff返回参数结构体
  */
-export interface ResetExtensionPasswordRequest {
+export interface DeleteStaffResponse {
   /**
-   * TCCC 实例应用 ID
-   */
-  SdkAppId: number
+      * 无法删除的状态为在线的客服列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OnlineStaffList: Array<string>
 
   /**
-   * 分机号
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ExtensionId: string
+  RequestId?: string
 }
 
 /**

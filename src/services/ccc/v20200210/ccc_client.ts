@@ -23,7 +23,7 @@ import {
   HangUpCallRequest,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
-  DeleteStaffResponse,
+  ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
   DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTaskRequest,
@@ -44,8 +44,9 @@ import {
   SeatUserInfo,
   CreateStaffResponse,
   DescribeSkillGroupInfoListResponse,
-  UnbindStaffSkillGroupListResponse,
+  DescribeNumbersResponse,
   DescribeStaffInfoListResponse,
+  UnbindNumberCallOutSkillGroupRequest,
   CreateCarrierPrivilegeNumberApplicantRequest,
   CallInSkillGroupMetrics,
   CreateExtensionResponse,
@@ -68,11 +69,15 @@ import {
   ModifyExtensionRequest,
   PSTNSessionInfo,
   Message,
+  DescribeNumbersRequest,
   ExtensionInfo,
+  BindNumberCallOutSkillGroupRequest,
   IVRKeyPressedElement,
+  UnbindNumberCallOutSkillGroupResponse,
   StaffInfo,
   CreateAutoCalloutTaskResponse,
   TelCdrInfo,
+  NumberInfo,
   DeleteStaffRequest,
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
@@ -83,6 +88,7 @@ import {
   CreateAutoCalloutTaskRequest,
   Filter,
   UnbindStaffSkillGroupListRequest,
+  BindNumberCallOutSkillGroupResponse,
   CreateCallOutSessionRequest,
   StopAutoCalloutTaskResponse,
   SkillGroupItem,
@@ -90,6 +96,7 @@ import {
   PhoneNumBuyInfo,
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
+  UnbindStaffSkillGroupListResponse,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
@@ -98,7 +105,7 @@ import {
   IMSatisfaction,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
-  ResetExtensionPasswordRequest,
+  DeleteStaffResponse,
   StaffStatusExtra,
   CreateStaffRequest,
   DescribeChatMessagesResponse,
@@ -129,6 +136,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 解绑号码外呼技能组
+   */
+  async UnbindNumberCallOutSkillGroup(
+    req: UnbindNumberCallOutSkillGroupRequest,
+    cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void
+  ): Promise<UnbindNumberCallOutSkillGroupResponse> {
+    return this.request("UnbindNumberCallOutSkillGroup", req, cb)
   }
 
   /**
@@ -202,13 +219,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于无限频率地呼叫坐席手机
+   * 绑定号码外呼技能组
    */
-  async CreateCarrierPrivilegeNumberApplicant(
-    req: CreateCarrierPrivilegeNumberApplicantRequest,
-    cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void
-  ): Promise<CreateCarrierPrivilegeNumberApplicantResponse> {
-    return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb)
+  async BindNumberCallOutSkillGroup(
+    req: BindNumberCallOutSkillGroupRequest,
+    cb?: (error: string, rep: BindNumberCallOutSkillGroupResponse) => void
+  ): Promise<BindNumberCallOutSkillGroupResponse> {
+    return this.request("BindNumberCallOutSkillGroup", req, cb)
   }
 
   /**
@@ -352,6 +369,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于无限频率地呼叫坐席手机
+   */
+  async CreateCarrierPrivilegeNumberApplicant(
+    req: CreateCarrierPrivilegeNumberApplicantRequest,
+    cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void
+  ): Promise<CreateCarrierPrivilegeNumberApplicantResponse> {
+    return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb)
+  }
+
+  /**
      * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
 
 文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
@@ -491,5 +518,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeActiveCarrierPrivilegeNumberResponse) => void
   ): Promise<DescribeActiveCarrierPrivilegeNumberResponse> {
     return this.request("DescribeActiveCarrierPrivilegeNumber", req, cb)
+  }
+
+  /**
+   * 查询号码列表
+   */
+  async DescribeNumbers(
+    req: DescribeNumbersRequest,
+    cb?: (error: string, rep: DescribeNumbersResponse) => void
+  ): Promise<DescribeNumbersResponse> {
+    return this.request("DescribeNumbers", req, cb)
   }
 }

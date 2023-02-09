@@ -397,7 +397,7 @@ export interface CreateRecTaskResponse {
   /**
    * 录音文件识别的请求返回结果，包含结果查询需要的TaskId
    */
-  Data: Task
+  Data?: Task
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -572,9 +572,15 @@ export interface CreateRecTaskRequest {
   ReinforceHotword?: number
 
   /**
-   * 单标点最多字数，取值范围：[6，40]。默认为0，不开启该功能。该参数可用于字幕生成场景，控制单行字幕最大字数。
+   * 单标点最多字数，取值范围：[6，40]。默认为0，不开启该功能。该参数可用于字幕生成场景，控制单行字幕最大字数（设置ResTextFormat为3，解析返回的ResultDetail列表，通过结构中FinalSentence获取单个标点断句结果）。
    */
   SentenceMaxLength?: number
+
+  /**
+      * 情绪识别能力(目前支持16k_zh) 默认为0，不开启。 1：开启情绪识别但是不会在文本展示“情绪标签”， 2：开启情绪识别并且在文本展示“情绪标签”。（该功能需要设置ResTextFormat 大于0）
+注意：本功能为增值服务，购买对应套餐包后，将参数设置为1或2时方可按对应方式生效，并消耗套餐包对应资源。参数设置为0时无需购买套餐包，也不会消耗对应资源。
+      */
+  EmotionRecognition?: number
 }
 
 /**
@@ -993,6 +999,12 @@ export interface SentenceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SilenceTime: number
+
+  /**
+      * 情绪类型（可能为空）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EmotionType?: Array<string>
 }
 
 /**

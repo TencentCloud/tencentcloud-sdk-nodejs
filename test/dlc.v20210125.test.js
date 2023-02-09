@@ -88,9 +88,9 @@ it("dlc.v20210125.DescribeNotebookSession", async function () {
     }
 })
 
-it("dlc.v20210125.DropDMSDatabase", async function () {
+it("dlc.v20210125.CancelNotebookSessionStatement", async function () {
     try {
-       const data = await client.DropDMSDatabase({})
+       const data = await client.CancelNotebookSessionStatement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("dlc.v20210125.DescribeTaskResult", async function () {
     }
 })
 
-it("dlc.v20210125.CreateExportTask", async function () {
+it("dlc.v20210125.CancelNotebookSessionStatementBatch", async function () {
     try {
-       const data = await client.CreateExportTask({})
+       const data = await client.CancelNotebookSessionStatementBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +238,16 @@ it("dlc.v20210125.DescribeResultDownload", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeDataEngines", async function () {
+    try {
+       const data = await client.DescribeDataEngines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateStoreLocation", async function () {
     try {
        const data = await client.CreateStoreLocation({})
@@ -288,9 +298,19 @@ it("dlc.v20210125.CreateWorkGroup", async function () {
     }
 })
 
-it("dlc.v20210125.ListTaskJobLogDetail", async function () {
+it("dlc.v20210125.CreateNotebookSessionStatementSupportBatchSQL", async function () {
     try {
-       const data = await client.ListTaskJobLogDetail({})
+       const data = await client.CreateNotebookSessionStatementSupportBatchSQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeNotebookSessionLog", async function () {
+    try {
+       const data = await client.DescribeNotebookSessionLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +328,9 @@ it("dlc.v20210125.AlterDMSDatabase", async function () {
     }
 })
 
-it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
+it("dlc.v20210125.ModifySparkApp", async function () {
     try {
-       const data = await client.UnbindWorkGroupsFromUser({})
+       const data = await client.ModifySparkApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +348,19 @@ it("dlc.v20210125.CreateInternalTable", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeUsers", async function () {
+it("dlc.v20210125.DeleteNotebookSession", async function () {
     try {
-       const data = await client.DescribeUsers({})
+       const data = await client.DeleteNotebookSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GenerateCreateMangedTableSql", async function () {
+    try {
+       const data = await client.GenerateCreateMangedTableSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +371,16 @@ it("dlc.v20210125.DescribeUsers", async function () {
 it("dlc.v20210125.AttachWorkGroupPolicy", async function () {
     try {
        const data = await client.AttachWorkGroupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeNotebookSessions", async function () {
+    try {
+       const data = await client.DescribeNotebookSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +458,36 @@ it("dlc.v20210125.CreateDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeNotebookSessionStatement", async function () {
+    try {
+       const data = await client.DescribeNotebookSessionStatement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
+    try {
+       const data = await client.UnbindWorkGroupsFromUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeSparkAppJobs", async function () {
+    try {
+       const data = await client.DescribeSparkAppJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeWorkGroups", async function () {
     try {
        const data = await client.DescribeWorkGroups({})
@@ -438,9 +508,9 @@ it("dlc.v20210125.ModifyWorkGroup", async function () {
     }
 })
 
-it("dlc.v20210125.ModifySparkApp", async function () {
+it("dlc.v20210125.ListTaskJobLogDetail", async function () {
     try {
-       const data = await client.ModifySparkApp({})
+       const data = await client.ListTaskJobLogDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +531,26 @@ it("dlc.v20210125.DescribeViews", async function () {
 it("dlc.v20210125.DescribeTable", async function () {
     try {
        const data = await client.DescribeTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeNotebookSessionStatements", async function () {
+    try {
+       const data = await client.DescribeNotebookSessionStatements({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeUsers", async function () {
+    try {
+       const data = await client.DescribeUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +738,19 @@ it("dlc.v20210125.DescribeSparkAppTasks", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkAppJobs", async function () {
+it("dlc.v20210125.DescribeNotebookSessionStatementSqlResult", async function () {
     try {
-       const data = await client.DescribeSparkAppJobs({})
+       const data = await client.DescribeNotebookSessionStatementSqlResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DropDMSDatabase", async function () {
+    try {
+       const data = await client.DropDMSDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +761,16 @@ it("dlc.v20210125.DescribeSparkAppJobs", async function () {
 it("dlc.v20210125.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateNotebookSessionStatement", async function () {
+    try {
+       const data = await client.CreateNotebookSessionStatement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +791,16 @@ it("dlc.v20210125.DetachUserPolicy", async function () {
 it("dlc.v20210125.DescribeTables", async function () {
     try {
        const data = await client.DescribeTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateExportTask", async function () {
+    try {
+       const data = await client.CreateExportTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
