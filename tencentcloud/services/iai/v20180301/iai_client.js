@@ -197,7 +197,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyGroup", req, cb);
     }
     /**
-     * 升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
+     * 接口已经不使用了，需要下线掉，以免留在官网产生歧义
+
+升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
 单个人员库有且仅支持一次回滚操作。
 注：此处QPS限制为10。
      */
@@ -205,7 +207,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeGroupFaceModelVersion", req, cb);
     }
     /**
-     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+     * 此接口文档早已废弃，为了避免官网18版本存留歧义，需要下线
+
+本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
 
 回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
      */
@@ -222,7 +226,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePerson", req, cb);
     }
     /**
-     * 获取人员库升级任务列表
+     * 避免官网歧义
+
+获取人员库升级任务列表
 
      */
     async GetUpgradeGroupFaceModelVersionJobList(req, cb) {
@@ -305,7 +311,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectFaceAttributes", req, cb);
     }
     /**
-     * 人员库升级结果查询
+     * 避免官网歧义
+
+人员库升级结果查询
 
      */
     async GetUpgradeGroupFaceModelVersionResult(req, cb) {

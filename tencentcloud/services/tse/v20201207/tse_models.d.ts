@@ -74,6 +74,9 @@ export interface ApolloEnvParam {
     Name: string;
     /**
       * 环境内引擎的节点规格 ID
+-1C2G
+-2C4G
+兼容原spec-xxxxxx形式的规格ID
       */
     EngineResourceSpec: string;
     /**
@@ -92,6 +95,10 @@ export interface ApolloEnvParam {
       * 子网 ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址
       */
     SubnetId: string;
+    /**
+      * 环境描述
+      */
+    EnvDesc?: string;
 }
 /**
  * UpdateEngineInternetAccess返回参数结构体
@@ -131,7 +138,7 @@ export interface CreateEngineResponse {
     /**
       * 引擎实例 ID
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -700,12 +707,17 @@ export interface CreateEngineRequest {
 
 引擎各版本及可选择的规格、节点数说明：
 apollo - STANDARD版本
-规格列表：spec-qcr53kf1t（1C2G）,spec-qdr53kf2w（2C4G）
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
 节点数：1，2，3，4，5
 
 eureka - STANDARD版本
-规格列表：spec-qvj6k7t4q（1C2G）,spec-qcr53kfjt（2C4G）,spec-qvj6k7t4m（4G8G）,spec-qcr54kfjt（8C16G）,spec-qcr55kfjt（16C32G）
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
 节点数：3，4，5
+
+polarismesh - STANDARD版本
+规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000
+
+兼容原spec-xxxxxx形式的规格ID
       */
     EngineProductVersion: string;
     /**
@@ -738,7 +750,7 @@ eureka - STANDARD版本
     /**
       * 付费类型。参考值：
 - 0：后付费
-- 1：预付费
+- 1：预付费（接口暂不支持创建预付费实例）
       */
     TradeType: number;
     /**
@@ -986,6 +998,11 @@ export interface EnvAddressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ConfigIntranetAddress: string;
+    /**
+      * 是否开启config内网clb
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableConfigIntranet?: boolean;
 }
 /**
  * 引擎实例的标签信息

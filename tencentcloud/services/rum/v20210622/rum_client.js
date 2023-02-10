@@ -88,6 +88,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInstance", req, cb);
     }
     /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     */
+    async DescribeRumLogExport(req, cb) {
+        return this.request("DescribeRumLogExport", req, cb);
+    }
+    /**
+     * 获取项目下的日志导出列表
+     */
+    async DescribeRumLogExports(req, cb) {
+        return this.request("DescribeRumLogExports", req, cb);
+    }
+    /**
      * 删除用户名下的星标项目
      */
     async DeleteStarProject(req, cb) {
@@ -233,6 +245,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProjects(req, cb) {
         return this.request("DescribeProjects", req, cb);
+    }
+    /**
+     * 恢复应用使用与上报数据
+     */
+    async ResumeProject(req, cb) {
+        return this.request("ResumeProject", req, cb);
     }
     /**
      * 停止项目使用与上报数据

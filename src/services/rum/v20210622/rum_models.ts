@@ -332,6 +332,16 @@ export interface DeleteOfflineLogConfigResponse {
 }
 
 /**
+ * ResumeProject返回参数结构体
+ */
+export interface ResumeProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRumLogList返回参数结构体
  */
 export interface DescribeRumLogListResponse {
@@ -1508,6 +1518,41 @@ export interface DescribeDataFetchUrlRequest {
 }
 
 /**
+ * DescribeRumLogExport请求参数结构体
+ */
+export interface DescribeRumLogExportRequest {
+  /**
+   * 导出标识name
+   */
+  Name: string
+
+  /**
+   * 开始时间（必填）
+   */
+  StartTime: string
+
+  /**
+   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+   */
+  Query: string
+
+  /**
+   * 结束时间（必填）
+   */
+  EndTime: string
+
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
+
+  /**
+   * field条件
+   */
+  Fields?: Array<string>
+}
+
+/**
  * DescribeDataLogUrlStatistics返回参数结构体
  */
 export interface DescribeDataLogUrlStatisticsResponse {
@@ -1760,6 +1805,21 @@ export interface ModifyProjectLimitResponse {
 }
 
 /**
+ * DescribeRumLogExports返回参数结构体
+ */
+export interface DescribeRumLogExportsResponse {
+  /**
+   * 返回字符串
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataStaticProject请求参数结构体
  */
 export interface DescribeDataStaticProjectRequest {
@@ -1907,6 +1967,16 @@ export interface DescribeRumStatsLogListRequest {
    * 项目ID（必填）
    */
   ID: number
+}
+
+/**
+ * ResumeProject请求参数结构体
+ */
+export interface ResumeProjectRequest {
+  /**
+   * 项目 id
+   */
+  ProjectId: number
 }
 
 /**
@@ -3574,6 +3644,41 @@ export interface DescribeDataPerformanceProjectRequest {
    * 环境
    */
   Env?: string
+}
+
+/**
+ * DescribeRumLogExport返回参数结构体
+ */
+export interface DescribeRumLogExportResponse {
+  /**
+   * 返回字符串
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRumLogExports请求参数结构体
+ */
+export interface DescribeRumLogExportsRequest {
+  /**
+   * 页面大小
+   */
+  PageSize: number
+
+  /**
+   * 页数，第几页
+   */
+  PageNum: number
+
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
 }
 
 /**

@@ -1477,6 +1477,10 @@ export interface SourceServer {
       * 源站的回源权重，取值1~100
       */
     Weight: number;
+    /**
+      * 端口号：0~65535
+      */
+    Port?: number;
 }
 /**
  * CC分级策略
@@ -1973,6 +1977,14 @@ export interface Layer7Rule {
       * 规则所属的资源实例
       */
     InstanceDetailRule?: Array<RuleInstanceRelation>;
+    /**
+      * 协议
+      */
+    Protocol?: string;
+    /**
+      * 端口号
+      */
+    Vport?: number;
 }
 /**
  * ModifyPortAclConfig返回参数结构体

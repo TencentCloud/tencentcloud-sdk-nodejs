@@ -114,6 +114,7 @@ import {
   DescribeLanesResponse,
   StartGroupRequest,
   CreateNamespaceRequest,
+  DescribeDownloadInfoRequest,
   DescribeClusterInstancesRequest,
   DescribeGroupBindedGatewaysRequest,
   DescribeRepositoryRequest,
@@ -345,9 +346,10 @@ import {
   DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
   DescribeInstancesResponse,
+  DeleteFileConfigResponse,
   ContainerEvent,
   ModifyLaneResponse,
-  DescribeDownloadInfoRequest,
+  DeleteFileConfigRequest,
   DescribePublicConfigSummaryResponse,
   DescribePublicConfigReleaseLogsRequest,
   ShardArgument,
@@ -1261,6 +1263,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeleteMicroserviceResponse) => void
   ): Promise<DeleteMicroserviceResponse> {
     return this.request("DeleteMicroservice", req, cb)
+  }
+
+  /**
+   * 删除文件配置项
+   */
+  async DeleteFileConfig(
+    req: DeleteFileConfigRequest,
+    cb?: (error: string, rep: DeleteFileConfigResponse) => void
+  ): Promise<DeleteFileConfigResponse> {
+    return this.request("DeleteFileConfig", req, cb)
   }
 
   /**

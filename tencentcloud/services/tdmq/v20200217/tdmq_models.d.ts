@@ -449,7 +449,7 @@ export interface RocketMQVipInstance {
       */
     InstanceVersion: string;
     /**
-      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常
+      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
       */
     Status: number;
     /**
@@ -4217,39 +4217,44 @@ export interface RocketMQClusterConfig {
     /**
       * 单命名空间TPS上线
       */
-    MaxTpsPerNamespace: number;
+    MaxTpsPerNamespace?: number;
     /**
       * 最大命名空间数量
       */
-    MaxNamespaceNum: number;
+    MaxNamespaceNum?: number;
     /**
       * 已使用命名空间数量
       */
-    UsedNamespaceNum: number;
+    UsedNamespaceNum?: number;
     /**
       * 最大Topic数量
       */
-    MaxTopicNum: number;
+    MaxTopicNum?: number;
     /**
       * 已使用Topic数量
       */
-    UsedTopicNum: number;
+    UsedTopicNum?: number;
     /**
       * 最大Group数量
       */
-    MaxGroupNum: number;
+    MaxGroupNum?: number;
     /**
       * 已使用Group数量
       */
-    UsedGroupNum: number;
+    UsedGroupNum?: number;
     /**
       * 消息最大保留时间，以毫秒为单位
       */
-    MaxRetentionTime: number;
+    MaxRetentionTime?: number;
     /**
       * 消息最长延时，以毫秒为单位
       */
-    MaxLatencyTime: number;
+    MaxLatencyTime?: number;
+    /**
+      * 单个主题最大队列数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxQueuesPerTopic?: number;
 }
 /**
  * DescribeCmqDeadLetterSourceQueues返回参数结构体
@@ -4826,6 +4831,11 @@ export interface InternalTenant {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxRetentionSizeInMB: number;
+    /**
+      * public Access Enabled
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicAccessEnabled: boolean;
 }
 /**
  * DescribeEnvironmentAttributes请求参数结构体

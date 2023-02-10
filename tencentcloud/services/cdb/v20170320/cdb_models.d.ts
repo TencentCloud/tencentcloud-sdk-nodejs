@@ -5790,7 +5790,7 @@ export interface CreateBackupRequest {
       */
     InstanceId: string;
     /**
-      * 目标备份方法，可选的值：logical - 逻辑冷备，physical - 物理冷备。
+      * 目标备份方法，可选的值：logical - 逻辑冷备，physical - 物理冷备，snapshot - 快照备份。基础版实例仅支持快照备份。
       */
     BackupMethod: string;
     /**

@@ -804,6 +804,7 @@ export interface BriefDomain {
       * 加速服务状态
 rejected：域名审核未通过，域名备案过期/被注销导致
 processing：部署中
+closing：关闭中
 online：已启动
 offline：已关闭
       */
@@ -5738,6 +5739,7 @@ export interface DetailDomain {
       * 加速服务状态
 rejected：域名审核未通过，域名备案过期/被注销导致
 processing：部署中
+closing：关闭中
 online：已启动
 offline：已关闭
       */

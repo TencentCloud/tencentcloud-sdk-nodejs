@@ -959,7 +959,24 @@ export interface DetachWorkGroupPolicyResponse {
 /**
  * GenerateCreateMangedTableSql请求参数结构体
  */
-export declare type GenerateCreateMangedTableSqlRequest = null;
+export interface GenerateCreateMangedTableSqlRequest {
+    /**
+      * 表基本信息
+      */
+    TableBaseInfo: TableBaseInfo;
+    /**
+      * 表字段信息
+      */
+    Columns: Array<TColumn>;
+    /**
+      * 表分区信息
+      */
+    Partitions?: Array<TPartition>;
+    /**
+      * 表属性信息
+      */
+    Properties?: Array<Property>;
+}
 /**
  * CSV序列化及反序列化数据结构
  */
@@ -1156,6 +1173,10 @@ export interface CreateDatabaseRequest {
  * GenerateCreateMangedTableSql返回参数结构体
  */
 export interface GenerateCreateMangedTableSqlResponse {
+    /**
+      * 创建托管存储内表sql语句描述
+      */
+    Execution: Execution;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -2704,7 +2704,7 @@ export interface CreateListenerResponse {
     /**
       * 创建的监听器的唯一标识数组。
       */
-    ListenerIds: Array<string>;
+    ListenerIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3163,7 +3163,7 @@ export interface CreateListenerRequest {
       */
     Ports: Array<number>;
     /**
-      * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL（TCP_SSL 正在内测中，如需使用请通过工单申请）。
+      * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。
       */
     Protocol: string;
     /**

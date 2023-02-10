@@ -268,7 +268,7 @@ export interface CreateCcnResponse {
   /**
    * 云联网（CCN）对象。
    */
-  Ccn: CCN
+  Ccn?: CCN
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4405,7 +4405,7 @@ export interface DescribeCcnsRequest {
 
   /**
       * 过滤条件，参数不支持同时指定CcnIds和Filters。
-<li>ccn-id - String - （过滤条件）CCN唯一ID，形如：vpc-f49l6u0z。</li>
+<li>ccn-id - String - （过滤条件）CCN唯一ID，形如：`ccn-f49l6u0z`。</li>
 <li>ccn-name - String - （过滤条件）CCN名称。</li>
 <li>ccn-description - String - （过滤条件）CCN描述。</li>
 <li>state - String - （过滤条件）实例状态， 'ISOLATED': 隔离中（欠费停服），'AVAILABLE'：运行中。</li>
@@ -5031,12 +5031,12 @@ export interface DescribeCcnsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * CCN对象。
    */
-  CcnSet: Array<CCN>
+  CcnSet?: Array<CCN>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7063,17 +7063,17 @@ export interface CreateCcnRequest {
   CcnDescription?: string
 
   /**
-   * CCN服务质量，'PT'：白金，'AU'：金，'AG'：银，默认为‘AU’。
+   * CCN服务质量，`PT`：白金，`AU`：金，`AG`：银，默认为`AU`。
    */
   QosLevel?: string
 
   /**
-   * 计费模式，PREPAID：表示预付费，即包年包月，POSTPAID：表示后付费，即按量计费。默认：POSTPAID。
+   * 计费模式，`PREPAID`：表示预付费，即包年包月，`POSTPAID`：表示后付费，即按量计费。默认：`POSTPAID`。
    */
   InstanceChargeType?: string
 
   /**
-   * 限速类型，OUTER_REGION_LIMIT表示地域出口限速，INTER_REGION_LIMIT为地域间限速，默认为OUTER_REGION_LIMIT。预付费模式仅支持地域间限速，后付费模式支持地域间限速和地域出口限速。
+   * 限速类型，`OUTER_REGION_LIMIT`表示地域出口限速，`INTER_REGION_LIMIT`为地域间限速，默认为`OUTER_REGION_LIMIT`。预付费模式仅支持地域间限速，后付费模式支持地域间限速和地域出口限速。
    */
   BandwidthLimitType?: string
 
@@ -8737,12 +8737,12 @@ export interface RenewAddressesResponse {
  */
 export interface DescribeCcnRoutesRequest {
   /**
-   * CCN实例ID，形如：ccn-gree226l。
+   * CCN实例ID，形如：`ccn-gree226l`。
    */
   CcnId: string
 
   /**
-   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+   * CCN路由策略唯一ID，形如：`ccnr-f49l6u0z`。
    */
   RouteIds?: Array<string>
 
@@ -11810,22 +11810,22 @@ export interface ModifyVpnGatewayRoutesResponse {
  */
 export interface CrossBorderFlowMonitorData {
   /**
-   * 入带宽
+   * 入带宽，单位：`bps`。
    */
   InBandwidth: Array<number>
 
   /**
-   * 出带宽
+   * 出带宽，单位：`bps`。
    */
   OutBandwidth: Array<number>
 
   /**
-   * 入包
+   * 入包，单位：`pps`。
    */
   InPkg: Array<number>
 
   /**
-   * 出包
+   * 出包，单位：`pps`。
    */
   OutPkg: Array<number>
 }
@@ -12141,7 +12141,7 @@ export interface CCN {
   InstanceChargeType?: string
 
   /**
-      * 限速类型，INTER_REGION_LIMIT为地域间限速；OUTER_REGION_LIMIT为地域出口限速。
+      * 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BandwidthLimitType?: string
@@ -12152,7 +12152,7 @@ export interface CCN {
   TagSet?: Array<Tag>
 
   /**
-   * 是否支持云联网路由优先级的功能。False：不支持，True：支持。
+   * 是否支持云联网路由优先级的功能。`False`：不支持，`True`：支持。
    */
   RoutePriorityFlag?: boolean
 
@@ -12163,10 +12163,16 @@ export interface CCN {
   RouteTableCount?: number
 
   /**
-      * 是否开启云联网多路由表特性。False：未开启，True：开启。
+      * 是否开启云联网多路由表特性。`False`：未开启，`True`：开启。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RouteTableFlag?: boolean
+
+  /**
+      * `true`：实例已被封禁，流量不通，`false`:解封禁。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSecurityLock?: boolean
 
   /**
       * 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。
@@ -13884,12 +13890,12 @@ export interface DescribeCcnRoutesResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * CCN路由策略对象。
    */
-  RouteSet: Array<CcnRoute>
+  RouteSet?: Array<CcnRoute>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -26,6 +26,7 @@ import {
   DescribeProjectLimitsResponse,
   DescribeTawInstancesRequest,
   DeleteOfflineLogConfigResponse,
+  ResumeProjectResponse,
   DescribeRumLogListResponse,
   DescribeDataPvUrlInfoResponse,
   StopProjectResponse,
@@ -67,6 +68,7 @@ import {
   DeleteReleaseFileRequest,
   ResumeInstanceRequest,
   DescribeDataFetchUrlRequest,
+  DescribeRumLogExportRequest,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
   StopInstanceResponse,
@@ -77,8 +79,10 @@ import {
   DescribeDataPvUrlStatisticsRequest,
   ReleaseFile,
   ModifyProjectLimitResponse,
+  DescribeRumLogExportsResponse,
   DescribeDataStaticProjectRequest,
   DescribeRumStatsLogListRequest,
+  ResumeProjectRequest,
   ProjectLimit,
   DeleteLogExportRequest,
   DescribeRumGroupLogResponse,
@@ -133,6 +137,8 @@ import {
   DescribeLogExportsRequest,
   DescribeDataReportCountResponse,
   DescribeDataPerformanceProjectRequest,
+  DescribeRumLogExportResponse,
+  DescribeRumLogExportsRequest,
   ModifyProjectRequest,
   DescribeRumLogListRequest,
   DescribeDataStaticResourceRequest,
@@ -255,6 +261,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteInstanceResponse) => void
   ): Promise<DeleteInstanceResponse> {
     return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   */
+  async DescribeRumLogExport(
+    req: DescribeRumLogExportRequest,
+    cb?: (error: string, rep: DescribeRumLogExportResponse) => void
+  ): Promise<DescribeRumLogExportResponse> {
+    return this.request("DescribeRumLogExport", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志导出列表
+   */
+  async DescribeRumLogExports(
+    req: DescribeRumLogExportsRequest,
+    cb?: (error: string, rep: DescribeRumLogExportsResponse) => void
+  ): Promise<DescribeRumLogExportsResponse> {
+    return this.request("DescribeRumLogExports", req, cb)
   }
 
   /**
@@ -494,6 +520,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectsResponse) => void
   ): Promise<DescribeProjectsResponse> {
     return this.request("DescribeProjects", req, cb)
+  }
+
+  /**
+   * 恢复应用使用与上报数据
+   */
+  async ResumeProject(
+    req: ResumeProjectRequest,
+    cb?: (error: string, rep: ResumeProjectResponse) => void
+  ): Promise<ResumeProjectResponse> {
+    return this.request("ResumeProject", req, cb)
   }
 
   /**

@@ -1239,13 +1239,13 @@ export interface ModifySnapshotAttributeRequest {
       */
     SnapshotId: string;
     /**
-      * 新的快照名称。最长为60个字符。
-      */
-    SnapshotName?: string;
-    /**
       * 快照的保留方式，FALSE表示非永久保留，TRUE表示永久保留。
       */
     IsPermanent?: boolean;
+    /**
+      * 新的快照名称。最长为60个字符。
+      */
+    SnapshotName?: string;
     /**
       * 快照的到期时间；设置好快照将会被同时设置为非永久保留方式；超过到期时间后快照将会被自动删除。
       */

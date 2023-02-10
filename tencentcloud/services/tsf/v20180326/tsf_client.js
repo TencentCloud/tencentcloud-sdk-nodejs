@@ -419,6 +419,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteMicroservice", req, cb);
     }
     /**
+     * 删除文件配置项
+     */
+    async DeleteFileConfig(req, cb) {
+        return this.request("DeleteFileConfig", req, cb);
+    }
+    /**
      * 停止容器部署组
      */
     async StopContainerGroup(req, cb) {

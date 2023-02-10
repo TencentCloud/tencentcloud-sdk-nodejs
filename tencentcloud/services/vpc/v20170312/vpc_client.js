@@ -870,7 +870,6 @@ class Client extends abstract_client_1.AbstractClient {
      * 本接口（DeleteCcn）用于删除云联网。
 * 删除后，云联网关联的所有实例间路由将被删除，网络将会中断，请务必确认
 * 删除云联网是不可逆的操作，请谨慎处理。
-
      */
     async DeleteCcn(req, cb) {
         return this.request("DeleteCcn", req, cb);
@@ -1074,7 +1073,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableVpnGatewaySslClientCert", req, cb);
     }
     /**
-     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由
+     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由。
      */
     async DescribeCcnRoutes(req, cb) {
         return this.request("DescribeCcnRoutes", req, cb);
@@ -1269,7 +1268,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewVpnGateway", req, cb);
     }
     /**
-     * 本接口（DisableCcnRoutes）用于禁用已经启用的云联网（CCN）路由
+     * 本接口（DisableCcnRoutes）用于禁用已经启用的云联网（CCN）路由。
      */
     async DisableCcnRoutes(req, cb) {
         return this.request("DisableCcnRoutes", req, cb);

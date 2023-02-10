@@ -192,7 +192,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyGroup", req, cb);
     }
     /**
-     * 升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
+     * 避免官网歧义
+
+升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
 单个人员库有且仅支持一次回滚操作。
 
 升级是一个耗时的操作，执行时间与人员库的人脸数相关，升级的人员库中的人脸数越多，升级的耗时越长。升级接口是个异步任务，调用成功后返回JobId，通过GetUpgradeGroupFaceModelVersionResult查询升级进度和结果。如果升级成功，人员库版本将切换到新版本。如果想回滚到旧版本，可以调用RevertGroupFaceModelVersion进行回滚。
@@ -203,7 +205,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeGroupFaceModelVersion", req, cb);
     }
     /**
-     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+     * 同理
+
+本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
 
 回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
      */
@@ -230,7 +234,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CompareMaskFace", req, cb);
     }
     /**
-     * 获取人员库升级任务列表
+     * 避免官网歧义
+
+获取人员库升级任务列表
 
      */
     async GetUpgradeGroupFaceModelVersionJobList(req, cb) {
@@ -321,7 +327,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectLiveFaceAccurate", req, cb);
     }
     /**
-     * 人员库升级结果查询
+     * 避免官网歧义
+
+人员库升级结果查询
      */
     async GetUpgradeGroupFaceModelVersionResult(req, cb) {
         return this.request("GetUpgradeGroupFaceModelVersionResult", req, cb);

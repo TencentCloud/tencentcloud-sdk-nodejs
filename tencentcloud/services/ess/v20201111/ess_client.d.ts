@@ -145,7 +145,7 @@ export declare class Client extends AbstractClient {
     /**
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
-该接口需要开白后使用
+该接口不可直接调用，需要联系运营开通后方可调用。
      */
     CreateFlowReminds(req: CreateFlowRemindsRequest, cb?: (error: string, rep: CreateFlowRemindsResponse) => void): Promise<CreateFlowRemindsResponse>;
     /**

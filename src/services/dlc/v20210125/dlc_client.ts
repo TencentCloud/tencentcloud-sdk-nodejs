@@ -586,7 +586,7 @@ export class Client extends AbstractClient {
    * 生成创建托管表语句
    */
   async GenerateCreateMangedTableSql(
-    req?: GenerateCreateMangedTableSqlRequest,
+    req: GenerateCreateMangedTableSqlRequest,
     cb?: (error: string, rep: GenerateCreateMangedTableSqlResponse) => void
   ): Promise<GenerateCreateMangedTableSqlResponse> {
     return this.request("GenerateCreateMangedTableSql", req, cb)

@@ -146,7 +146,7 @@ export declare class Client extends AbstractClient {
     /**
      * 生成创建托管表语句
      */
-    GenerateCreateMangedTableSql(req?: GenerateCreateMangedTableSqlRequest, cb?: (error: string, rep: GenerateCreateMangedTableSqlResponse) => void): Promise<GenerateCreateMangedTableSqlResponse>;
+    GenerateCreateMangedTableSql(req: GenerateCreateMangedTableSqlRequest, cb?: (error: string, rep: GenerateCreateMangedTableSqlResponse) => void): Promise<GenerateCreateMangedTableSqlResponse>;
     /**
      * 绑定鉴权策略到工作组
      */

@@ -2199,6 +2199,27 @@ export interface CreateNamespaceRequest {
     ProgramIdList?: Array<string>;
 }
 /**
+ * DescribeDownloadInfo请求参数结构体
+ */
+export interface DescribeDownloadInfoRequest {
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 程序包ID
+      */
+    PkgId: string;
+    /**
+      * 程序包仓库ID
+      */
+    RepositoryId?: string;
+    /**
+      * 程序包仓库类型
+      */
+    RepositoryType?: string;
+}
+/**
  * DescribeClusterInstances请求参数结构体
  */
 export interface DescribeClusterInstancesRequest {
@@ -7789,6 +7810,20 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DeleteFileConfig返回参数结构体
+ */
+export interface DeleteFileConfigResponse {
+    /**
+      * 删除结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 返回容器的事件，比如 k8s deployment 或者 pod 的 events
  */
 export interface ContainerEvent {
@@ -7847,25 +7882,13 @@ export interface ModifyLaneResponse {
     RequestId?: string;
 }
 /**
- * DescribeDownloadInfo请求参数结构体
+ * DeleteFileConfig请求参数结构体
  */
-export interface DescribeDownloadInfoRequest {
+export interface DeleteFileConfigRequest {
     /**
-      * 应用ID
+      * 文件配置项ID
       */
-    ApplicationId: string;
-    /**
-      * 程序包ID
-      */
-    PkgId: string;
-    /**
-      * 程序包仓库ID
-      */
-    RepositoryId?: string;
-    /**
-      * 程序包仓库类型
-      */
-    RepositoryType?: string;
+    ConfigId: string;
 }
 /**
  * DescribePublicConfigSummary返回参数结构体
@@ -11182,7 +11205,7 @@ export interface DeleteGroupRequest {
     GroupId: string;
 }
 /**
- *  容器部署组详情
+ * 容器部署组详情
  */
 export interface ContainerGroupDetail {
     /**
@@ -11370,6 +11393,26 @@ export interface ContainerGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HealthCheckSettings: HealthCheckSettings;
+    /**
+      * 允许PlainYamlDeploy
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AllowPlainYamlDeploy?: boolean;
+    /**
+      * 是否不等于ServiceConfig
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsNotEqualServiceConfig?: boolean;
+    /**
+      * 仓库名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepoName?: string;
+    /**
+      * 别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias?: string;
 }
 /**
  * BindApiGroup请求参数结构体

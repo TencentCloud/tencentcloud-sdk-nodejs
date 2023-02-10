@@ -340,7 +340,7 @@ export interface CreateFlowRemindsResponse {
     /**
       * 签署连接过期时间字符串：年月日-时分秒
       */
-    RemindFlowRecords: Array<RemindFlowRecords>;
+    RemindFlowRecords?: Array<RemindFlowRecords>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

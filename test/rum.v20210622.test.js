@@ -118,6 +118,26 @@ it("rum.v20210622.DeleteInstance", async function () {
     }
 })
 
+it("rum.v20210622.DescribeRumLogExport", async function () {
+    try {
+       const data = await client.DescribeRumLogExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumLogExports", async function () {
+    try {
+       const data = await client.DescribeRumLogExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DeleteStarProject", async function () {
     try {
        const data = await client.DeleteStarProject({})
@@ -341,6 +361,16 @@ it("rum.v20210622.CreateWhitelist", async function () {
 it("rum.v20210622.DescribeProjects", async function () {
     try {
        const data = await client.DescribeProjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.ResumeProject", async function () {
+    try {
+       const data = await client.ResumeProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

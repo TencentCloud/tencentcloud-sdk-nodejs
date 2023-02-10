@@ -668,6 +668,16 @@ it("tsf.v20180326.DeleteMicroservice", async function () {
     }
 })
 
+it("tsf.v20180326.DeleteFileConfig", async function () {
+    try {
+       const data = await client.DeleteFileConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.StopContainerGroup", async function () {
     try {
        const data = await client.StopContainerGroup({})
