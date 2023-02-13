@@ -690,6 +690,11 @@ export interface TemplateInfo {
    * 不符合规范原因
    */
   InvalidReason: string
+
+  /**
+   * 是包含黑名单手机或邮箱
+   */
+  IsBlack?: boolean
 }
 
 /**

@@ -223,11 +223,11 @@ export interface DescribeNamespacesResponse {
     /**
       * 命名空间列表信息
       */
-    NamespaceList: Array<TcrNamespaceInfo>;
+    NamespaceList?: Array<TcrNamespaceInfo>;
     /**
       * 总个数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1972,6 +1972,22 @@ export interface TcrNamespaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Metadata: Array<KeyValueString>;
+    /**
+      * 漏洞白名单列表
+      */
+    CVEWhitelistItems?: Array<CVEWhitelistItem>;
+    /**
+      * 扫描级别，true为自动，false为手动
+      */
+    AutoScan?: boolean;
+    /**
+      * 安全阻断级别，true为开启，false为关闭
+      */
+    PreventVUL?: boolean;
+    /**
+      * 阻断漏洞等级，目前仅支持low、medium、high, 为""时表示没有设置
+      */
+    Severity?: string;
 }
 /**
  * DescribeImages返回参数结构体
@@ -2269,13 +2285,9 @@ export interface DescribeNamespacePersonalRequest {
     Offset: number;
 }
 /**
- * CreateWebhookTrigger返回参数结构体
+ * DeleteRepositoryPersonal返回参数结构体
  */
-export interface CreateWebhookTriggerResponse {
-    /**
-      * 新建的触发器
-      */
-    Trigger?: WebhookTrigger;
+export interface DeleteRepositoryPersonalResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2604,7 +2616,23 @@ export interface ModifyNamespaceRequest {
     /**
       * 访问级别，True为公开，False为私有
       */
-    IsPublic: boolean;
+    IsPublic?: boolean;
+    /**
+      * 扫描级别，True为自动，False为手动
+      */
+    IsAutoScan?: boolean;
+    /**
+      * 阻断开关，True为开放，False为关闭
+      */
+    IsPreventVUL?: boolean;
+    /**
+      * 阻断漏洞等级，目前仅支持 low、medium、high
+      */
+    Severity?: string;
+    /**
+      * 漏洞白名单列表
+      */
+    CVEWhitelistItems?: Array<CVEWhitelistItem>;
 }
 /**
  * DeleteImage请求参数结构体
@@ -2874,6 +2902,22 @@ export interface CreateNamespaceRequest {
       * 云标签描述
       */
     TagSpecification?: TagSpecification;
+    /**
+      * 自动扫描级别，true为自动，false为手动
+      */
+    IsAutoScan?: boolean;
+    /**
+      * 安全阻断级别，true为自动，false为手动
+      */
+    IsPreventVUL?: boolean;
+    /**
+      * 阻断漏洞等级，目前仅支持low、medium、high
+      */
+    Severity?: string;
+    /**
+      * 漏洞白名单列表
+      */
+    CVEWhitelistItems?: Array<CVEWhitelistItem>;
 }
 /**
  * BatchDeleteRepositoryPersonal请求参数结构体
@@ -3567,6 +3611,16 @@ export interface DeleteImageAccelerateServiceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 命名空间漏洞白名单列表
+ */
+export interface CVEWhitelistItem {
+    /**
+      * 漏洞白名单 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CVEID?: string;
 }
 /**
  * ModifyRepositoryInfoPersonal请求参数结构体
@@ -4419,9 +4473,13 @@ export interface DeleteImmutableTagRulesRequest {
     RuleId: number;
 }
 /**
- * DeleteRepositoryPersonal返回参数结构体
+ * CreateWebhookTrigger返回参数结构体
  */
-export interface DeleteRepositoryPersonalResponse {
+export interface CreateWebhookTriggerResponse {
+    /**
+      * 新建的触发器
+      */
+    Trigger?: WebhookTrigger;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

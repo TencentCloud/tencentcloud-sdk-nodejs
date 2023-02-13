@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcResourceDashboard", req, cb);
     }
     /**
-     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
+     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域。
      */
     async DescribeCcnRegionBandwidthLimits(req, cb) {
         return this.request("DescribeCcnRegionBandwidthLimits", req, cb);
@@ -387,7 +387,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpcEndPointServiceWhiteList", req, cb);
     }
     /**
-     * 查询跨境带宽监控数据，该接口特提供给联通使用
+     * 本接口（DescribeCrossBorderFlowMonitor）用于查询跨境带宽监控数据，该接口目前只提供给服务商联通使用。
      */
     async DescribeCrossBorderFlowMonitor(req, cb) {
         return this.request("DescribeCrossBorderFlowMonitor", req, cb);

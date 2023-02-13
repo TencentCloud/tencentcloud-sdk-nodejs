@@ -2918,7 +2918,24 @@ export interface DescribeFlowLogRequest {
 /**
  * DescribeTenantCcns请求参数结构体
  */
-export type DescribeTenantCcnsRequest = null
+export interface DescribeTenantCcnsRequest {
+  /**
+      * 过滤条件，目前`value`值个数只支持一个，允许可支持的字段有：
+<li>`ccn-ids` 云联网ID数组，值形如：`["ccn-12345678"]`</li> 
+<li>`user-account-id` 用户账号ID，值形如：`["12345678"]`</li><li>`is-security-lock` 是否锁定，值形如：`["true"]`</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认0。
+   */
+  Offset?: number
+
+  /**
+   * 单页返回数据量，可选值0到100之间的整数，默认20。
+   */
+  Limit?: number
+}
 
 /**
  * DescribeIp6Addresses请求参数结构体
@@ -3130,7 +3147,7 @@ export interface DisassociateNetworkAclSubnetsResponse {
  */
 export interface SetCcnRegionBandwidthLimitsRequest {
   /**
-   * CCN实例ID。形如：ccn-f49l6u0z。
+   * CCN实例ID，形如：ccn-f49l6u0z。
    */
   CcnId: string
 
@@ -4689,6 +4706,31 @@ export interface FlowLogStorage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StorageTopic?: string
+}
+
+/**
+ * AllocateIp6AddressesBandwidth请求参数结构体
+ */
+export interface AllocateIp6AddressesBandwidthRequest {
+  /**
+   * 需要开通公网访问能力的IPV6地址
+   */
+  Ip6Addresses: Array<string>
+
+  /**
+   * 带宽，单位Mbps。默认是1Mbps
+   */
+  InternetMaxBandwidthOut?: number
+
+  /**
+   * 网络计费模式。IPV6当前对标准账户类型支持"TRAFFIC_POSTPAID_BY_HOUR"，对传统账户类型支持"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
+   */
+  InternetChargeType?: string
+
+  /**
+   * 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入.
+   */
+  BandwidthPackageId?: string
 }
 
 /**
@@ -7963,6 +8005,17 @@ export interface ModifyVpcEndPointServiceWhiteListRequest {
  */
 export interface DescribeTenantCcnsResponse {
   /**
+      * 云联网（CCN）对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcnSet?: Array<CcnInstanceInfo>
+
+  /**
+   * 符合条件的对象总数。
+   */
+  TotalCount?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9990,37 +10043,37 @@ export interface AddressChargePrepaid {
  */
 export interface DescribeCrossBorderFlowMonitorRequest {
   /**
-   * 源地域
+   * 源地域。
    */
   SourceRegion: string
 
   /**
-   * 目的地域
+   * 目的地域。
    */
   DestinationRegion: string
 
   /**
-   * 云联网Id
+   * 云联网ID。
    */
   CcnId: string
 
   /**
-   * 云联网所属账号
+   * 云联网所属账号。
    */
   CcnUin: string
 
   /**
-   * 时间粒度
+   * 时间粒度。
    */
   Period: number
 
   /**
-   * 开始时间
+   * 开始时间。
    */
   StartTime: string
 
   /**
-   * 结束时间
+   * 结束时间。
    */
   EndTime: string
 }
@@ -13904,29 +13957,9 @@ export interface DescribeCcnRoutesResponse {
 }
 
 /**
- * AllocateIp6AddressesBandwidth请求参数结构体
+ * 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。
  */
-export interface AllocateIp6AddressesBandwidthRequest {
-  /**
-   * 需要开通公网访问能力的IPV6地址
-   */
-  Ip6Addresses: Array<string>
-
-  /**
-   * 带宽，单位Mbps。默认是1Mbps
-   */
-  InternetMaxBandwidthOut?: number
-
-  /**
-   * 网络计费模式。IPV6当前对标准账户类型支持"TRAFFIC_POSTPAID_BY_HOUR"，对传统账户类型支持"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
-   */
-  InternetChargeType?: string
-
-  /**
-   * 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入.
-   */
-  BandwidthPackageId?: string
-}
+export type CcnInstanceInfo = null
 
 /**
  * 安全组对象
@@ -14757,7 +14790,7 @@ export interface DisableCcnRoutesResponse {
  */
 export interface DescribeCcnRegionBandwidthLimitsRequest {
   /**
-   * CCN实例ID。形如：ccn-f49l6u0z。
+   * CCN实例ID，形如：ccn-f49l6u0z。
    */
   CcnId: string
 }
@@ -15271,7 +15304,7 @@ export interface DescribeCrossBorderFlowMonitorResponse {
       * 云联网跨境带宽监控数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CrossBorderFlowMonitorData: Array<CrossBorderFlowMonitorData>
+  CrossBorderFlowMonitorData?: Array<CrossBorderFlowMonitorData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

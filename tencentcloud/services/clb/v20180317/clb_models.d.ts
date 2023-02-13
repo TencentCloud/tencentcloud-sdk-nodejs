@@ -26,11 +26,11 @@ export interface DescribeTargetGroupListResponse {
     /**
       * 显示的结果数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 显示的目标组信息集合。
       */
-    TargetGroupSet: Array<TargetGroupInfo>;
+    TargetGroupSet?: Array<TargetGroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1190,11 +1190,11 @@ export interface DescribeTargetGroupsResponse {
     /**
       * 显示的结果数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 显示的目标组信息集合。
       */
-    TargetGroupSet: Array<TargetGroupInfo>;
+    TargetGroupSet?: Array<TargetGroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4051,15 +4051,15 @@ export interface DescribeTargetGroupInstancesResponse {
     /**
       * 本次查询的结果数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 绑定的服务器信息。
       */
-    TargetGroupInstanceSet: Array<TargetGroupBackend>;
+    TargetGroupInstanceSet?: Array<TargetGroupBackend>;
     /**
       * 实际统计数量，不受Limit、Offset、CAM的影响。
       */
-    RealCount: number;
+    RealCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4385,7 +4385,7 @@ export interface DescribeRewriteResponse {
     /**
       * 重定向转发规则构成的数组，若无重定向规则，则返回空数组。
       */
-    RewriteSet: Array<RuleOutput>;
+    RewriteSet?: Array<RuleOutput>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

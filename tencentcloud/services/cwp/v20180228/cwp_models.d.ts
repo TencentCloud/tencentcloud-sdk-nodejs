@@ -13166,7 +13166,11 @@ export interface DeleteAttackLogsRequest {
     /**
       * 日志ID数组，最大100条。
       */
-    Ids: Array<number>;
+    Ids?: Array<number>;
+    /**
+      * 是否全部删除
+      */
+    IsAll?: boolean;
 }
 /**
  * DescribeBaselineStrategyDetail返回参数结构体

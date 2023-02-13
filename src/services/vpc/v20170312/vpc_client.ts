@@ -227,6 +227,7 @@ import {
   CreateVpnGatewayResponse,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
   FlowLogStorage,
+  AllocateIp6AddressesBandwidthRequest,
   DescribeVpcIpv6AddressesResponse,
   ResetAttachCcnInstancesResponse,
   RejectAttachCcnInstancesRequest,
@@ -649,7 +650,7 @@ import {
   NetworkAclQuintupleEntries,
   AttachNetworkInterfaceRequest,
   DescribeCcnRoutesResponse,
-  AllocateIp6AddressesBandwidthRequest,
+  CcnInstanceInfo,
   SecurityGroup,
   UnlockCcnsResponse,
   DisableGatewayFlowMonitorResponse,
@@ -759,7 +760,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
+   * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域。
    */
   async DescribeCcnRegionBandwidthLimits(
     req: DescribeCcnRegionBandwidthLimitsRequest,
@@ -1335,7 +1336,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询跨境带宽监控数据，该接口特提供给联通使用
+   * 本接口（DescribeCrossBorderFlowMonitor）用于查询跨境带宽监控数据，该接口目前只提供给服务商联通使用。
    */
   async DescribeCrossBorderFlowMonitor(
     req: DescribeCrossBorderFlowMonitorRequest,
@@ -3538,7 +3539,7 @@ LimitTypes取值范围：
 如有需要, 可以封禁任意云联网实例, 可接入到内部运营系统
      */
   async DescribeTenantCcns(
-    req?: DescribeTenantCcnsRequest,
+    req: DescribeTenantCcnsRequest,
     cb?: (error: string, rep: DescribeTenantCcnsResponse) => void
   ): Promise<DescribeTenantCcnsResponse> {
     return this.request("DescribeTenantCcns", req, cb)

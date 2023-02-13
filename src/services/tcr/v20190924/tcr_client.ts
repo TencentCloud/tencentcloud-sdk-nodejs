@@ -150,7 +150,7 @@ import {
   RegistryStatus,
   SecurityPolicy,
   DescribeNamespacePersonalRequest,
-  CreateWebhookTriggerResponse,
+  DeleteRepositoryPersonalResponse,
   CreateInstanceTokenResponse,
   DescribeApplicationTriggerLogPersonalResp,
   DeleteImagePersonalRequest,
@@ -223,6 +223,7 @@ import {
   CreateSecurityPolicyRequest,
   CreateWebhookTriggerRequest,
   DeleteImageAccelerateServiceResponse,
+  CVEWhitelistItem,
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
   DescribeGCJobsResponse,
@@ -276,7 +277,7 @@ import {
   DescribeTagRetentionExecutionResponse,
   CreateNamespacePersonalRequest,
   DeleteImmutableTagRulesRequest,
-  DeleteRepositoryPersonalResponse,
+  CreateWebhookTriggerResponse,
   CreateSignaturePolicyRequest,
   DeleteTagRetentionRuleRequest,
   ReplicationFilter,
@@ -904,7 +905,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新命名空间信息，当前仅支持修改命名空间访问级别
+   * 更新命名空间信息
    */
   async ModifyNamespace(
     req: ModifyNamespaceRequest,

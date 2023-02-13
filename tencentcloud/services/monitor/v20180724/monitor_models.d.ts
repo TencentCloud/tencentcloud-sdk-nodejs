@@ -6304,7 +6304,7 @@ export interface DescribePrometheusZonesResponse {
       * 区域列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ZoneSet: Array<PrometheusZoneItem>;
+    ZoneSet?: Array<PrometheusZoneItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8378,9 +8378,13 @@ export interface PrometheusInstanceTenantUsage {
  */
 export interface DescribePrometheusZonesRequest {
     /**
-      * 地域 ID
+      * 地域 ID（RegionId 和 RegionName 只需要填一个）
       */
-    RegionId: number;
+    RegionId?: number;
+    /**
+      * 地域名（RegionId 和 RegionName 只需要填一个）
+      */
+    RegionName?: string;
 }
 /**
  * 修改告警策略组传入的指标阈值条件

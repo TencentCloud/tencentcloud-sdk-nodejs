@@ -388,7 +388,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceCustomizedDomain", req, cb);
     }
     /**
-     * 更新命名空间信息，当前仅支持修改命名空间访问级别
+     * 更新命名空间信息
      */
     async ModifyNamespace(req, cb) {
         return this.request("ModifyNamespace", req, cb);

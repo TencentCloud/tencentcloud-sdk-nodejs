@@ -654,11 +654,11 @@ export interface DescribeDBInstanceInterResponse {
     /**
       * 互通组内总条数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 互通组内实例信息详情
       */
-    InterInstanceSet: Array<InterInstance>;
+    InterInstanceSet?: Array<InterInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3598,7 +3598,7 @@ export interface DescribeDBInstanceInterRequest {
       */
     InstanceId?: string;
     /**
-      * 按照状态筛选 1-互通ip prot打开中；2-互通ip prot已经打开；3-加入到互通组中；4-已加入到互通组；5-互通ip prot回收中；6-互通ip prot已回收；7-从互通组移除中；8-已从互通组中移除
+      * 按照状态筛选 1-互通IP打开中；2-互通IP已经打开；3-加入到互通组中；4-已加入到互通组；5-互通IP回收中；6-互通IP已回收；7-从互通组移除中；8-已从互通组中移除
       */
     Status?: number;
     /**

@@ -4999,7 +4999,7 @@ export interface DescribeGroupUseDetailResponse {
     RequestId?: string;
 }
 /**
- *  获取部署组
+ * 获取部署组
  */
 export interface ContainerGroupDeploy {
     /**
@@ -8298,6 +8298,26 @@ export interface ApiDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApiMatchType: string;
+    /**
+      * RPC 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RpcExt?: string;
+    /**
+      * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayDeployGroupId?: string;
+    /**
+      * md5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Md5?: string;
+    /**
+      * RPC 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RpcType?: string;
 }
 /**
  * DeleteUnitRule返回参数结构体
