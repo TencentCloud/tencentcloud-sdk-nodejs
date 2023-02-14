@@ -150,6 +150,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCDBProxyDesc", req, cb);
     }
     /**
+     * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
+     */
+    async VerifyRootAccount(req, cb) {
+        return this.request("VerifyRootAccount", req, cb);
+    }
+    /**
      * 本接口(DescribeRollbackTaskDetail)用于查询云数据库实例回档任务详情。
      */
     async DescribeRollbackTaskDetail(req, cb) {
@@ -410,6 +416,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParams", req, cb);
     }
     /**
+     * 本接口(DescribeBackupEncryptionStatus)用于查询实例默认备份加密状态。
+     */
+    async DescribeBackupEncryptionStatus(req, cb) {
+        return this.request("DescribeBackupEncryptionStatus", req, cb);
+    }
+    /**
      * 查询代理规格配置
      */
     async DescribeProxyCustomConf(req, cb) {
@@ -434,7 +446,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccounts", req, cb);
     }
     /**
-     * 调整数据库代理配置
+     * 接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置
+
+调整数据库代理配置
      */
     async UpgradeCDBProxy(req, cb) {
         return this.request("UpgradeCDBProxy", req, cb);
@@ -649,10 +663,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReloadBalanceProxyNode", req, cb);
     }
     /**
-     * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
+     * 本接口(ModifyBackupEncryptionStatus)用于设置实例备份文件是否加密。
      */
-    async VerifyRootAccount(req, cb) {
-        return this.request("VerifyRootAccount", req, cb);
+    async ModifyBackupEncryptionStatus(req, cb) {
+        return this.request("ModifyBackupEncryptionStatus", req, cb);
     }
     /**
      * 该接口用户查询当前地域用户设置的默认备份下载来源限制。

@@ -5171,6 +5171,15 @@ export interface ModifyDBInstanceVipVportResponse {
     RequestId?: string;
 }
 /**
+ * DeleteAuditRule返回参数结构体
+ */
+export interface DeleteAuditRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeUploadedFiles请求参数结构体
  */
 export interface DescribeUploadedFilesRequest {
@@ -6014,6 +6023,15 @@ export interface CloseCDBProxyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBackupEncryptionStatus返回参数结构体
+ */
+export interface ModifyBackupEncryptionStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDataBackupOverview请求参数结构体
  */
 export interface DescribeDataBackupOverviewRequest {
@@ -6231,6 +6249,19 @@ export interface DescribeDBInstanceGTIDRequest {
       * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
       */
     InstanceId: string;
+}
+/**
+ * DescribeBackupEncryptionStatus返回参数结构体
+ */
+export interface DescribeBackupEncryptionStatusResponse {
+    /**
+      * 实例是否开启了物理备份加密。可能的值有 on, off 。
+      */
+    EncryptionStatus: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyAuditConfig请求参数结构体
@@ -6679,6 +6710,19 @@ export interface DescribeTasksRequest {
       * 单次请求返回的数量，默认值为20，最大值为100。
       */
     Limit?: number;
+}
+/**
+ * ModifyBackupEncryptionStatus请求参数结构体
+ */
+export interface ModifyBackupEncryptionStatusRequest {
+    /**
+      * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+    /**
+      * 设置实例新增的自动物理备份文件默认加密状态。可选值为 on或者off。
+      */
+    EncryptionStatus: string;
 }
 /**
  * DescribeRollbackTaskDetail返回参数结构体
@@ -7656,13 +7700,13 @@ export interface BaseGroupInfo {
     SupportUpgradeProxyVersion: string;
 }
 /**
- * DeleteAuditRule返回参数结构体
+ * DescribeBackupEncryptionStatus请求参数结构体
  */
-export interface DeleteAuditRuleResponse {
+export interface DescribeBackupEncryptionStatusRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
       */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * IsolateDBInstance请求参数结构体

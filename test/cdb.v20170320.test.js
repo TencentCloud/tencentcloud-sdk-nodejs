@@ -208,6 +208,16 @@ it("cdb.v20170320.ModifyCDBProxyDesc", async function () {
     }
 })
 
+it("cdb.v20170320.VerifyRootAccount", async function () {
+    try {
+       const data = await client.VerifyRootAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeRollbackTaskDetail", async function () {
     try {
        const data = await client.DescribeRollbackTaskDetail({})
@@ -608,6 +618,16 @@ it("cdb.v20170320.DescribeInstanceParams", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeBackupEncryptionStatus", async function () {
+    try {
+       const data = await client.DescribeBackupEncryptionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeProxyCustomConf", async function () {
     try {
        const data = await client.DescribeProxyCustomConf({})
@@ -998,9 +1018,9 @@ it("cdb.v20170320.ReloadBalanceProxyNode", async function () {
     }
 })
 
-it("cdb.v20170320.VerifyRootAccount", async function () {
+it("cdb.v20170320.ModifyBackupEncryptionStatus", async function () {
     try {
-       const data = await client.VerifyRootAccount({})
+       const data = await client.ModifyBackupEncryptionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -432,71 +432,71 @@ export interface CheckDomainResponse {
   /**
    * 所查询域名名称
    */
-  DomainName: string
+  DomainName?: string
 
   /**
    * 是否能够注册
    */
-  Available: boolean
+  Available?: boolean
 
   /**
    * 不能注册原因
    */
-  Reason: string
+  Reason?: string
 
   /**
    * 是否是溢价词
    */
-  Premium: boolean
+  Premium?: boolean
 
   /**
    * 域名价格
    */
-  Price: number
+  Price?: number
 
   /**
    * 是否是敏感词
    */
-  BlackWord: boolean
+  BlackWord?: boolean
 
   /**
       * 溢价词描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Describe: string
+  Describe?: string
 
   /**
       * 溢价词的续费价格
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FeeRenew: number
+  FeeRenew?: number
 
   /**
       * 域名真实价格, 溢价词时价格跟年限有关，非溢价词时价格为1年的价格
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RealPrice: number
+  RealPrice?: number
 
   /**
       * 溢价词的转入价格
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FeeTransfer: number
+  FeeTransfer?: number
 
   /**
    * 溢价词的赎回价格
    */
-  FeeRestore: number
+  FeeRestore?: number
 
   /**
    * 检测年限
    */
-  Period: number
+  Period?: number
 
   /**
    * 是否支持北京备案  true 支持  false 不支持
    */
-  RecordSupport: boolean
+  RecordSupport?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -913,7 +913,7 @@ export interface DescribeDomainPriceListResponse {
   /**
    * 域名价格列表
    */
-  PriceList: Array<PriceInfo>
+  PriceList?: Array<PriceInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

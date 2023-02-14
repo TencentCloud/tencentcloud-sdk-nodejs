@@ -161,7 +161,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachineGroup", req, cb);
     }
     /**
-     *  本接口用于获取日志主题列表，支持分页
+     * 本接口用于获取日志主题列表，支持分页
      */
     async DescribeTopics(req, cb) {
         return this.request("DescribeTopics", req, cb);

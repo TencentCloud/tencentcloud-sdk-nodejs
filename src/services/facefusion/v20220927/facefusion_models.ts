@@ -102,12 +102,12 @@ export interface MaterialFaces {
   /**
    * 人脸序号
    */
-  FaceId: string
+  FaceId?: string
 
   /**
    * 人脸框信息
    */
-  FaceInfo: FaceInfo
+  FaceInfo?: FaceInfo
 }
 
 /**

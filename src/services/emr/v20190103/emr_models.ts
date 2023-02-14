@@ -825,6 +825,12 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsMultiZoneCluster: boolean
+
+  /**
+      * 是否开通异常节点自动补偿
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsCvmReplace: boolean
 }
 
 /**

@@ -22,7 +22,7 @@ export interface CreateNetworkAclResponse {
   /**
    * 网络ACL实例。
    */
-  NetworkAcl: NetworkAcl
+  NetworkAcl?: NetworkAcl
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -157,12 +157,12 @@ export interface DescribeHaVipsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * `HAVIP`对象数组。
    */
-  HaVipSet: Array<HaVip>
+  HaVipSet?: Array<HaVip>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -230,7 +230,7 @@ export interface DeleteServiceTemplateResponse {
  */
 export interface CreateServiceTemplateRequest {
   /**
-   * 协议端口模板名称
+   * 协议端口模板名称。
    */
   ServiceTemplateName: string
 
@@ -401,14 +401,19 @@ export interface DescribeVpcIpv6AddressesRequest {
   Ipv6Addresses?: Array<string>
 
   /**
-   * 偏移量。
+   * 偏移量，默认为0。
    */
   Offset?: number
 
   /**
-   * 返回数量。
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
+
+  /**
+   * VPC下的子网ID。
+   */
+  SubnetId?: string
 }
 
 /**
@@ -659,9 +664,9 @@ export interface ServiceTemplateGroup {
  */
 export interface CreateDhcpIpResponse {
   /**
-   * 新创建的`DhcpIp`信息
+   * 新创建的`DhcpIp`信息。
    */
-  DhcpIpSet: Array<DhcpIp>
+  DhcpIpSet?: Array<DhcpIp>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1084,7 +1089,7 @@ export interface CreateVpcResponse {
   /**
    * Vpc对象。
    */
-  Vpc: Vpc
+  Vpc?: Vpc
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1861,26 +1866,6 @@ export interface CheckNetDetectStateRequest {
   DetectDestinationIp: Array<string>
 
   /**
-      * 下一跳类型，目前我们支持的类型有：
-VPN：VPN网关；
-DIRECTCONNECT：专线网关；
-PEERCONNECTION：对等连接；
-NAT：NAT网关；
-NORMAL_CVM：普通云服务器；
-      */
-  NextHopType: string
-
-  /**
-      * 下一跳目的网关，取值与“下一跳类型”相关：
-下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；
-下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；
-下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
-下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
-下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-      */
-  NextHopDestination: string
-
-  /**
    * 网络探测实例ID。形如：netd-12345678。该参数与（VpcId，SubnetId，NetDetectName），至少要有一个。当NetDetectId存在时，使用NetDetectId。
    */
   NetDetectId?: string
@@ -1899,6 +1884,30 @@ NORMAL_CVM：普通云服务器；
    * 网络探测名称，最大长度不能超过60个字节。该参数与（VpcId，SubnetId）配合使用，与NetDetectId至少要有一个。当NetDetectId存在时，使用NetDetectId。
    */
   NetDetectName?: string
+
+  /**
+      * 下一跳类型，目前我们支持的类型有：
+VPN：VPN网关；
+DIRECTCONNECT：专线网关；
+PEERCONNECTION：对等连接；
+NAT：NAT网关；
+NORMAL_CVM：普通云服务器；
+CCN：云联网网关；
+NONEXTHOP：无下一跳；
+      */
+  NextHopType?: string
+
+  /**
+      * 下一跳目的网关，取值与“下一跳类型”相关：
+下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；
+下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；
+下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
+下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
+下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
+下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
+下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
+      */
+  NextHopDestination?: string
 }
 
 /**
@@ -2348,7 +2357,7 @@ export interface DescribeVpcsRequest {
  */
 export interface DescribeRouteConflictsResponse {
   /**
-   * 路由策略冲突列表
+   * 路由策略冲突列表。
    */
   RouteConflictSet?: Array<RouteConflict>
 
@@ -2662,12 +2671,12 @@ export interface ModifyVpnGatewayRoutesRequest {
  */
 export interface HaVipAssociateAddressIpRequest {
   /**
-   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。必须是没有绑定`EIP`的`HAVIP`
+   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。必须是没有绑定`EIP`的`HAVIP`。
    */
   HaVipId: string
 
   /**
-   * 弹性公网`IP`。必须是没有绑定`HAVIP`的`EIP`
+   * 弹性公网`IP`。必须是没有绑定`HAVIP`的`EIP`。
    */
   AddressIp: string
 }
@@ -2815,7 +2824,7 @@ export interface ModifyAssistantCidrResponse {
       * 辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssistantCidrSet: Array<AssistantCidr>
+  AssistantCidrSet?: Array<AssistantCidr>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2989,7 +2998,7 @@ export interface AddIp6RulesRequest {
  */
 export interface DescribeAccountAttributesResponse {
   /**
-   * 用户账号属性对象
+   * 用户账号属性对象。
    */
   AccountAttributeSet?: Array<AccountAttribute>
 
@@ -3227,17 +3236,17 @@ export interface DisableVpnGatewaySslClientCertResponse {
  */
 export interface CreateLocalGatewayRequest {
   /**
-   * 本地网关名称
+   * 本地网关名称。
    */
   LocalGatewayName: string
 
   /**
-   * VPC实例ID
+   * VPC实例ID。
    */
   VpcId: string
 
   /**
-   * CDC实例ID
+   * CDC实例ID。
    */
   CdcId: string
 }
@@ -3371,6 +3380,11 @@ export interface ModifyCcnAttachedInstancesAttributeRequest {
    */
   Instances: Array<CcnInstance>
 }
+
+/**
+ * DescribeNetworkAccountType请求参数结构体
+ */
+export type DescribeNetworkAccountTypeRequest = null
 
 /**
  * DeleteAddressTemplate请求参数结构体
@@ -4908,7 +4922,7 @@ export interface AssociateNetworkAclSubnetsRequest {
   NetworkAclId: string
 
   /**
-   * 子网实例ID数组。例如：[subnet-12345678]
+   * 子网实例ID数组。例如：[subnet-12345678]。
    */
   SubnetIds: Array<string>
 }
@@ -5118,7 +5132,7 @@ export interface CreateSubnetResponse {
   /**
    * 子网对象。
    */
-  Subnet: Subnet
+  Subnet?: Subnet
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5619,7 +5633,7 @@ export interface CreateSubnetsResponse {
   /**
    * 新创建的子网列表。
    */
-  SubnetSet: Array<Subnet>
+  SubnetSet?: Array<Subnet>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5657,12 +5671,12 @@ export interface DescribeGatewayFlowMonitorDetailRequest {
   NatId?: string
 
   /**
-   * 偏移量。
+   * 偏移量，默认为0。
    */
   Offset?: number
 
   /**
-   * 返回数量。
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 
@@ -5976,7 +5990,7 @@ export interface AssignIpv6AddressesRequest {
   Ipv6Addresses?: Array<Ipv6Address>
 
   /**
-   * 自动分配`IPv6`地址个数，内网IP地址个数总和不能超过配数。与入参`Ipv6Addresses`合并计算配额。与Ipv6Addresses必填一个。
+   * 自动分配`IPv6`地址个数，内网IP地址个数总和不能超过配额数。与入参`Ipv6Addresses`合并计算配额。与Ipv6Addresses必填一个。
    */
   Ipv6AddressCount?: number
 }
@@ -6573,7 +6587,7 @@ export interface CreateVpnGatewaySslClientResponse {
  */
 export interface DescribeNetworkInterfaceLimitRequest {
   /**
-   * 要查询的CVM实例ID或弹性网卡ID
+   * 要查询的CVM实例ID或弹性网卡ID。
    */
   InstanceId: string
 }
@@ -6750,7 +6764,7 @@ export interface ModifyIp6AddressesBandwidthResponse {
  */
 export interface CreateSubnetsRequest {
   /**
-   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`。
    */
   VpcId: string
 
@@ -6760,7 +6774,7 @@ export interface CreateSubnetsRequest {
   Subnets: Array<SubnetInput>
 
   /**
-   * 指定绑定的标签列表，注意这里的标签集合为列表中所有子网对象所共享，不能为每个子网对象单独指定标签，例如：[{"Key": "city", "Value": "shanghai"}]
+   * 指定绑定的标签列表，注意这里的标签集合为列表中所有子网对象所共享，不能为每个子网对象单独指定标签，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
 
@@ -6903,7 +6917,7 @@ export interface CreateNetworkAclRequest {
   NetworkAclName: string
 
   /**
-   * 网络ACL类型，三元组(TRIPLE)或五元组(QUINTUPLE)
+   * 网络ACL类型，三元组(TRIPLE)或五元组(QUINTUPLE)。
    */
   NetworkAclType?: string
 
@@ -7036,38 +7050,38 @@ export interface DescribeVpcsResponse {
  */
 export interface DescribeNetworkInterfaceLimitResponse {
   /**
-   * 标准型弹性网卡配额
+   * 标准型弹性网卡配额。
    */
-  EniQuantity: number
+  EniQuantity?: number
 
   /**
-   * 每个标准型弹性网卡可以分配的IP配额
+   * 每个标准型弹性网卡可以分配的IP配额。
    */
-  EniPrivateIpAddressQuantity: number
+  EniPrivateIpAddressQuantity?: number
 
   /**
-      * 扩展型网卡配额
+      * 扩展型网卡配额。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ExtendEniQuantity: number
+  ExtendEniQuantity?: number
 
   /**
-      * 每个扩展型弹性网卡可以分配的IP配额
+      * 每个扩展型弹性网卡可以分配的IP配额。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ExtendEniPrivateIpAddressQuantity: number
+  ExtendEniPrivateIpAddressQuantity?: number
 
   /**
-      * 中继网卡配额
+      * 中继网卡配额。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SubEniQuantity: number
+  SubEniQuantity?: number
 
   /**
-      * 每个中继网卡可以分配的IP配额
+      * 每个中继网卡可以分配的IP配额。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SubEniPrivateIpAddressQuantity: number
+  SubEniPrivateIpAddressQuantity?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7080,7 +7094,7 @@ export interface DescribeNetworkInterfaceLimitResponse {
  */
 export interface AssignIpv6CidrBlockResponse {
   /**
-   * 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`
+   * 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。
    */
   Ipv6CidrBlock?: string
 
@@ -7658,14 +7672,14 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
  */
 export interface DescribeProductQuotaResponse {
   /**
-   * ProductQuota对象数组
+   * ProductQuota对象数组。
    */
-  ProductQuotaSet: Array<ProductQuota>
+  ProductQuotaSet?: Array<ProductQuota>
 
   /**
-   * 符合条件的产品类型个数
+   * 符合条件的产品类型个数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7890,7 +7904,7 @@ export interface DisassociateDirectConnectGatewayNatGatewayResponse {
  */
 export interface CreateServiceTemplateGroupRequest {
   /**
-   * 协议端口模板集合名称
+   * 协议端口模板集合名称。
    */
   ServiceTemplateGroupName: string
 
@@ -7922,12 +7936,12 @@ export interface DescribeClassicLinkInstancesResponse {
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 私有网络和基础网络互通设备。
    */
-  ClassicLinkInstanceSet: Array<ClassicLinkInstance>
+  ClassicLinkInstanceSet?: Array<ClassicLinkInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8178,6 +8192,21 @@ export interface SecurityPolicyDatabase {
    * 对端网段
    */
   RemoteCidrBlock: Array<string>
+}
+
+/**
+ * DescribeNetworkAccountType返回参数结构体
+ */
+export interface DescribeNetworkAccountTypeResponse {
+  /**
+   * 用户账号的网络类型，STANDARD为标准用户，LEGACY为传统用户
+   */
+  NetworkAccountType?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9254,7 +9283,7 @@ export interface CrossBorderCompliance {
  */
 export interface ModifyAssistantCidrRequest {
   /**
-   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`。
    */
   VpcId: string
 
@@ -9668,14 +9697,14 @@ export interface CcnInstance {
  */
 export interface DescribeLocalGatewayResponse {
   /**
-   * 本地网关信息集合
+   * 本地网关信息集合。
    */
-  LocalGatewaySet: Array<LocalGateway>
+  LocalGatewaySet?: Array<LocalGateway>
 
   /**
-   * 本地网关总数
+   * 本地网关总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9780,7 +9809,7 @@ export interface CreateVpcEndPointResponse {
   /**
    * 终端节点对象详细信息。
    */
-  EndPoint: EndPoint
+  EndPoint?: EndPoint
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9935,7 +9964,7 @@ export interface ModifyIpv6AddressesAttributeRequest {
   NetworkInterfaceId: string
 
   /**
-   * 指定的内网IPv6`地址信息。
+   * 指定的内网IPv6地址信息。
    */
   Ipv6Addresses: Array<Ipv6Address>
 }
@@ -9988,17 +10017,17 @@ export interface DetachSnapshotInstancesRequest {
  */
 export interface DeleteLocalGatewayRequest {
   /**
-   * 本地网关实例ID
+   * 本地网关实例ID。
    */
   LocalGatewayId: string
 
   /**
-   * CDC实例ID
+   * CDC实例ID。
    */
   CdcId: string
 
   /**
-   * VPC实例ID
+   * VPC实例ID。
    */
   VpcId?: string
 }
@@ -10513,7 +10542,7 @@ export interface CreateHaVipResponse {
  */
 export interface DescribeSecurityGroupReferencesRequest {
   /**
-   * 安全组实例ID数组。格式如：['sg-12345678']
+   * 安全组实例ID数组。格式如：['sg-12345678']。
    */
   SecurityGroupIds: Array<string>
 }
@@ -10921,12 +10950,12 @@ export interface DhcpIp {
  */
 export interface DeleteAssistantCidrRequest {
   /**
-   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+   * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`。
    */
   VpcId: string
 
   /**
-   * CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]
+   * CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。
    */
   CidrBlocks: Array<string>
 }
@@ -11292,7 +11321,7 @@ export interface CreateVpcEndPointServiceResponse {
   /**
    * 终端节点服务对象详细信息。
    */
-  EndPointService: EndPointService
+  EndPointService?: EndPointService
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11356,13 +11385,15 @@ export interface DescribeHaVipsRequest {
   Filters?: Array<Filter>
 
   /**
-   * 偏移量
-   */
+      * 偏移量，默认为0。
+
+      */
   Offset?: number
 
   /**
-   * 返回数量
-   */
+      * 返回数量，默认为20，最大值为100。
+
+      */
   Limit?: number
 }
 
@@ -11797,12 +11828,12 @@ export interface ModifyVpcAttributeRequest {
   EnableMulticast?: string
 
   /**
-   * DNS地址，最多支持4个，第1个默认为主，其余为备
+   * DNS地址，最多支持4个，第1个默认为主，其余为备。
    */
   DnsServers?: Array<string>
 
   /**
-   * 域名
+   * 域名。
    */
   DomainName?: string
 }
@@ -11930,7 +11961,7 @@ export interface CreateAddressTemplateGroupResponse {
   /**
    * IP地址模板集合对象。
    */
-  AddressTemplateGroup: AddressTemplateGroup
+  AddressTemplateGroup?: AddressTemplateGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12078,7 +12109,7 @@ export interface DisassociateNetworkAclSubnetsRequest {
   NetworkAclId: string
 
   /**
-   * 子网实例ID数组。例如：[subnet-12345678]
+   * 子网实例ID数组。例如：[subnet-12345678]。
    */
   SubnetIds: Array<string>
 }
@@ -12143,7 +12174,7 @@ export interface UnassignIpv6CidrBlockRequest {
   VpcId: string
 
   /**
-   * `IPv6`网段。形如：`3402:4e00:20:1000::/56`
+   * `IPv6`网段。形如：`3402:4e00:20:1000::/56`。
    */
   Ipv6CidrBlock?: string
 }
@@ -12381,12 +12412,12 @@ export interface CheckAssistantCidrRequest {
   VpcId: string
 
   /**
-   * 待添加的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
+   * 待添加的辅助CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
    */
   NewCidrBlocks?: Array<string>
 
   /**
-   * 待删除的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
+   * 待删除的辅助CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
    */
   OldCidrBlocks?: Array<string>
 }
@@ -12508,7 +12539,7 @@ export interface CheckAssistantCidrResponse {
   /**
    * 冲突资源信息数组。
    */
-  ConflictSourceSet: Array<ConflictSource>
+  ConflictSourceSet?: Array<ConflictSource>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12651,7 +12682,7 @@ export interface CheckNetDetectStateResponse {
   /**
    * 网络探测验证结果对象数组。
    */
-  NetDetectIpStateSet: Array<NetDetectIpState>
+  NetDetectIpStateSet?: Array<NetDetectIpState>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12934,22 +12965,22 @@ export interface ModifyNetworkInterfaceQosRequest {
  */
 export interface ModifyLocalGatewayRequest {
   /**
-   * 本地网关名称
+   * 本地网关名称。
    */
   LocalGatewayName: string
 
   /**
-   * CDC实例ID
+   * CDC实例ID。
    */
   CdcId: string
 
   /**
-   * 本地网关实例ID
+   * 本地网关实例ID。
    */
   LocalGatewayId: string
 
   /**
-   * VPC实例ID
+   * VPC实例ID。
    */
   VpcId?: string
 }
@@ -12999,9 +13030,9 @@ export interface DeleteHaVipRequest {
  */
 export interface CreateLocalGatewayResponse {
   /**
-   * 本地网关信息
+   * 本地网关信息。
    */
-  LocalGateway: LocalGateway
+  LocalGateway?: LocalGateway
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13208,12 +13239,12 @@ export interface DescribeVpcInstancesRequest {
   Filters: Array<Filter>
 
   /**
-   * 偏移量。
+   * 偏移量，默认为0。
    */
   Offset?: number
 
   /**
-   * 请求对象个数。
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -13235,12 +13266,12 @@ export interface DescribeServiceTemplatesResponse {
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 协议端口模板对象。
    */
-  ServiceTemplateSet: Array<ServiceTemplate>
+  ServiceTemplateSet?: Array<ServiceTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13535,7 +13566,7 @@ export interface AssignIpv6AddressesResponse {
   /**
    * 分配给弹性网卡的`IPv6`地址列表。
    */
-  Ipv6AddressSet: Array<Ipv6Address>
+  Ipv6AddressSet?: Array<Ipv6Address>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13865,7 +13896,7 @@ export interface DescribeRouteConflictsRequest {
   RouteTableId: string
 
   /**
-   * 要检查的与之冲突的目的端列表
+   * 要检查的与之冲突的目的端列表。
    */
   DestinationCidrBlocks: Array<string>
 }
@@ -14725,12 +14756,12 @@ export interface DescribeClassicLinkInstancesRequest {
   Filters?: Array<FilterObject>
 
   /**
-   * 偏移量
+   * 偏移量，默认值0。
    */
   Offset?: string
 
   /**
-   * 返回数量
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: string
 }
@@ -14757,7 +14788,7 @@ export interface CreateServiceTemplateResponse {
   /**
    * 协议端口模板对象。
    */
-  ServiceTemplate: ServiceTemplate
+  ServiceTemplate?: ServiceTemplate
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14833,7 +14864,7 @@ export interface CreateAssistantCidrResponse {
       * 辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssistantCidrSet: Array<AssistantCidr>
+  AssistantCidrSet?: Array<AssistantCidr>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14924,7 +14955,7 @@ export interface CreateDhcpIpRequest {
   DhcpIpName: string
 
   /**
-   * 新申请的内网IP地址个数。总数不能超过64个。
+   * 新申请的内网IP地址个数。总数不能超过64个，为了兼容性，当前参数必填。
    */
   SecondaryPrivateIpAddressCount?: number
 }
@@ -14966,12 +14997,12 @@ export interface DescribeAddressTemplatesResponse {
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * IP地址模板。
    */
-  AddressTemplateSet: Array<AddressTemplate>
+  AddressTemplateSet?: Array<AddressTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15369,12 +15400,12 @@ export interface DescribeVpcEndPointServiceWhiteListResponse {
   /**
    * 白名单对象数组。
    */
-  VpcEndpointServiceUserSet: Array<VpcEndPointServiceUser>
+  VpcEndpointServiceUserSet?: Array<VpcEndPointServiceUser>
 
   /**
    * 符合条件的白名单个数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

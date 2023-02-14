@@ -708,9 +708,9 @@ it("vpc.v20170312.DeleteDirectConnectGatewayCcnRoutes", async function () {
     }
 })
 
-it("vpc.v20170312.RejectAttachCcnInstances", async function () {
+it("vpc.v20170312.DescribeNetworkAccountType", async function () {
     try {
-       const data = await client.RejectAttachCcnInstances({})
+       const data = await client.DescribeNetworkAccountType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1281,16 @@ it("vpc.v20170312.ModifyVpnGatewayCcnRoutes", async function () {
 it("vpc.v20170312.DetachNetworkInterface", async function () {
     try {
        const data = await client.DetachNetworkInterface({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RejectAttachCcnInstances", async function () {
+    try {
+       const data = await client.RejectAttachCcnInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

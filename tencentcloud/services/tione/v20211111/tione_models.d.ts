@@ -3612,6 +3612,11 @@ export interface EngineVersion {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Image: string;
+    /**
+      * 是否支持int8量化
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSupportIntEightQuantization: boolean;
 }
 /**
  * DescribeBatchTasks请求参数结构体

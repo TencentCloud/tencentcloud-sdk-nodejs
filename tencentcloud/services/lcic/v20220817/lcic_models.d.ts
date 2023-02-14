@@ -606,6 +606,11 @@ coteaching 双师
       */
     RecordUrl?: string;
     /**
+      * 课堂状态。0为未开始，1为正在上课，2为已结束，3为已过期。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -772,19 +777,29 @@ export interface DescribeRoomStatisticsResponse {
     /**
       * 峰值在线成员人数。
       */
-    PeakMemberNumber: number;
+    PeakMemberNumber?: number;
     /**
       * 累计在线人数。
       */
-    MemberNumber: number;
+    MemberNumber?: number;
     /**
       * 记录总数。包含进入房间或者应到未到的。
       */
-    Total: number;
+    Total?: number;
     /**
       * 成员记录列表。
       */
-    MemberRecords: Array<MemberRecord>;
+    MemberRecords?: Array<MemberRecord>;
+    /**
+      * 秒级unix时间戳，实际房间开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RealStartTime?: number;
+    /**
+      * 秒级unix时间戳，实际房间结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RealEndTime?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

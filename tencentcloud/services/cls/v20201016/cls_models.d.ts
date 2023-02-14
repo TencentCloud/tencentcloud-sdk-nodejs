@@ -1155,11 +1155,11 @@ export interface DescribeTopicsResponse {
     /**
       * 日志主题列表
       */
-    Topics: Array<TopicInfo>;
+    Topics?: Array<TopicInfo>;
     /**
       * 总数目
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -426,7 +426,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  本接口用于获取日志主题列表，支持分页
+   * 本接口用于获取日志主题列表，支持分页
    */
   async DescribeTopics(
     req: DescribeTopicsRequest,

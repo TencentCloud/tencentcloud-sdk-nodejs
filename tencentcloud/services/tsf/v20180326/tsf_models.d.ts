@@ -1999,37 +1999,47 @@ export interface ScalableRule {
       * RuleId值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleId: string;
+    RuleId?: string;
     /**
       * Name值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
+    Name?: string;
     /**
       * ExpandVmCountLimit值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExpandVmCountLimit: number;
+    ExpandVmCountLimit?: number;
     /**
       * ShrinkVmCountLimit值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ShrinkVmCountLimit: number;
+    ShrinkVmCountLimit?: number;
     /**
       * GroupCount值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupCount: number;
+    GroupCount?: number;
     /**
       * 备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Desc: string;
+    Desc?: string;
     /**
       * 备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description: string;
+    Description?: string;
+    /**
+      * 是否关闭指标伸缩, 默认0, 0:打开指标伸缩 1:关闭指标伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisableMetricAS?: number;
+    /**
+      * 开启定时伸缩规则, 默认0, 0:关闭定时伸缩 1:开启定时伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableCronAS?: number;
 }
 /**
  * EnableUnitRule请求参数结构体
@@ -2717,6 +2727,11 @@ export interface ImageRepository {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApplicationNameReal: string;
+    /**
+      * 是否公共,1:公有,0:私有
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Public?: number;
 }
 /**
  * DescribeOverviewInvocation返回参数结构体
@@ -5649,6 +5664,11 @@ export interface KafkaDeliveryConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CustomRule: string;
+    /**
+      * KafkaAddress
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaAddress?: string;
 }
 /**
  * API 对象类型描述
@@ -12838,6 +12858,21 @@ export interface UnitNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Id?: string;
+    /**
+      * 网关实体ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayInstanceId?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime?: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime?: string;
 }
 /**
  * ModifyMicroservice返回参数结构体

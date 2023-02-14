@@ -97,7 +97,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteMachineGroup(req: DeleteMachineGroupRequest, cb?: (error: string, rep: DeleteMachineGroupResponse) => void): Promise<DeleteMachineGroupResponse>;
     /**
-     *  本接口用于获取日志主题列表，支持分页
+     * 本接口用于获取日志主题列表，支持分页
      */
     DescribeTopics(req: DescribeTopicsRequest, cb?: (error: string, rep: DescribeTopicsResponse) => void): Promise<DescribeTopicsResponse>;
     /**

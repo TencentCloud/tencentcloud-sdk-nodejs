@@ -2168,6 +2168,10 @@ export interface RecordListItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MX: number;
+    /**
+      * 是否是默认的ns记录
+      */
+    DefaultNS?: boolean;
 }
 /**
  * CreateDomainBatch返回参数结构体

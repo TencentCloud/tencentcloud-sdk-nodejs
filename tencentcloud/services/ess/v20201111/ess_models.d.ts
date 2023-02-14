@@ -380,9 +380,29 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
     Id?: string;
 }
 /**
- * 应用相关信息
+ * 主企业代子企业操作 或 渠道子客应用相关信息
  */
-export declare type Agent = null;
+export interface Agent {
+    /**
+      * 应用编号,32位字符串
+      */
+    AppId?: string;
+    /**
+      * 主组织的应用号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyAppId?: string;
+    /**
+      * 主组织在平台的机构编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOrganizationId?: string;
+    /**
+      * 主组织的操作人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOperator?: string;
+}
 /**
  * 签署人详情信息
  */
@@ -1495,11 +1515,11 @@ export interface DescribeFileUrlsResponse {
     /**
       * URL信息
       */
-    FileUrls: Array<FileUrl>;
+    FileUrls?: Array<FileUrl>;
     /**
       * URL数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2333,6 +2353,10 @@ ORGANIZATION_SEAL：企业印章(图片上传创建)；
 LEGAL_PERSON_SEAL：法定代表人章
       */
     SealTypes?: Array<string>;
+    /**
+      * 主企业代子企业操作 或 渠道子客应用相关信息
+      */
+    Agent?: Agent;
 }
 /**
  * CancelFlow请求参数结构体
