@@ -676,6 +676,23 @@ export interface DescribeDocumentsByRoomRequest {
     Owner?: string;
 }
 /**
+ * DescribeCurrentMemberList请求参数结构体
+ */
+export interface DescribeCurrentMemberListRequest {
+    /**
+      * 房间Id。
+      */
+    RoomId: number;
+    /**
+      * 分页查询当前页数，从1开始递增。
+      */
+    Page: number;
+    /**
+      * 每页数据量，最大1000。
+      */
+    Limit: number;
+}
+/**
  * DescribeSdkAppIdUsers返回参数结构体
  */
 export interface DescribeSdkAppIdUsersResponse {
@@ -1235,6 +1252,23 @@ export interface BatchRegisterResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Users?: Array<BatchUserInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCurrentMemberList返回参数结构体
+ */
+export interface DescribeCurrentMemberListResponse {
+    /**
+      * 记录总数。当前房间的总人数。
+      */
+    Total?: number;
+    /**
+      * 成员记录列表。
+      */
+    MemberRecords?: Array<MemberRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

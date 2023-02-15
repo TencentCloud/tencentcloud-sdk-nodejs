@@ -5013,6 +5013,46 @@ export interface GenHiveTableDDLSqlRequest {
       * 上游节点的字段信息
       */
     SourceFieldInfoList?: Array<SourceFieldInfo>;
+    /**
+      * 分区字段
+      */
+    Partitions?: Array<Partition>;
+    /**
+      * 建表属性
+      */
+    Properties?: Array<Property>;
+    /**
+      * 建表模式，0:向导模式，1:ddl
+      */
+    TableMode?: number;
+    /**
+      * DLC表版本，v1/v2
+      */
+    TableVersion?: string;
+    /**
+      * 是否upsert写入
+      */
+    UpsertFlag?: boolean;
+    /**
+      * 表描述信息
+      */
+    TableComment?: string;
+    /**
+      * 增加的文件数量阈值, 超过值将触发小文件合并
+      */
+    AddDataFiles?: number;
+    /**
+      * 增加的Equality delete数量阈值, 超过值将触发小文件合并
+      */
+    AddEqualityDeletes?: number;
+    /**
+      * 增加的Position delete数量阈值, 超过值将触发小文件合并
+      */
+    AddPositionDeletes?: number;
+    /**
+      * 增加的delete file数量阈值
+      */
+    AddDeleteFiles?: number;
 }
 /**
  * DescribeRuleExecResultsByPage请求参数结构体
@@ -10787,6 +10827,23 @@ export interface DeleteInLongAgentRequest {
     ProjectId: string;
 }
 /**
+ * 分区参数
+ */
+export interface Partition {
+    /**
+      * 分区转换策略
+      */
+    Transform?: string;
+    /**
+      * 分区字段名
+      */
+    Name?: string;
+    /**
+      * 策略参数
+      */
+    TransformArgs?: Array<string>;
+}
+/**
  * RuleDimCnt 规则维度统计
  */
 export interface RuleDimCnt {
@@ -10852,6 +10909,19 @@ export interface DescribeDimensionScoreRequest {
       * 数据来源id
       */
     DatasourceId?: string;
+}
+/**
+ * dlc建表属性
+ */
+export interface Property {
+    /**
+      * key值
+      */
+    Key: string;
+    /**
+      * value值
+      */
+    Value: string;
 }
 /**
  * 采集器关联的集成任务

@@ -358,10 +358,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcesByDealName", req, cb);
     }
     /**
-     * 批量授权账号权限
+     * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
-    async GrantAccountPrivileges(req, cb) {
-        return this.request("GrantAccountPrivileges", req, cb);
+    async ExportInstanceSlowQueries(req, cb) {
+        return this.request("ExportInstanceSlowQueries", req, cb);
     }
     /**
      * 暂停serverless集群
@@ -424,10 +424,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditLogFiles", req, cb);
     }
     /**
-     * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
+     * 本接口(DescribeZones)用于查询可售卖地域可用区信息。
      */
-    async ExportInstanceSlowQueries(req, cb) {
-        return this.request("ExportInstanceSlowQueries", req, cb);
+    async DescribeZones(req, cb) {
+        return this.request("DescribeZones", req, cb);
     }
     /**
      * SetRenewFlag设置实例的自动续费功能
@@ -446,6 +446,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAuditRuleTemplates(req, cb) {
         return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
+     * 批量授权账号权限
+     */
+    async GrantAccountPrivileges(req, cb) {
+        return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
      * 本接口(SearchClusterTables)搜索集群数据表列表

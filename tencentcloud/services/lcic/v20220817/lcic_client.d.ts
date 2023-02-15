@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, BatchCreateRoomResponse, SetAppCustomContentRequest, SetWatermarkResponse, ModifyRoomResponse, UnbindDocumentFromRoomResponse, DescribeUserRequest, ModifyRoomRequest, CreateDocumentResponse, DescribeAppDetailResponse, BindDocumentToRoomRequest, CreateDocumentRequest, DescribeDocumentsByRoomResponse, SetAppCustomContentResponse, LoginOriginIdResponse, BatchDeleteRecordRequest, LoginUserResponse, DescribeAppDetailRequest, ModifyAppResponse, BatchRegisterRequest, DescribeRoomResponse, DeleteRoomResponse, ModifyUserProfileRequest, DescribeDocumentsByRoomRequest, DescribeSdkAppIdUsersResponse, GetWatermarkResponse, DeleteDocumentResponse, DeleteRecordRequest, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSdkAppIdUsersRequest, DescribeUserResponse, DescribeDocumentResponse, ModifyUserProfileResponse, GetWatermarkRequest, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, DescribeRoomStatisticsRequest, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, BatchRegisterResponse, LoginUserRequest, BatchCreateRoomRequest, BindDocumentToRoomResponse, SetWatermarkRequest, CreateRoomResponse, DeleteRecordResponse, DescribeRoomRequest, DescribeDocumentRequest, RegisterUserRequest, BatchDeleteRecordResponse } from "./lcic_models";
+import { CreateRoomRequest, BatchCreateRoomResponse, SetAppCustomContentRequest, SetWatermarkResponse, ModifyRoomResponse, UnbindDocumentFromRoomResponse, DescribeUserRequest, ModifyRoomRequest, CreateDocumentResponse, DescribeAppDetailResponse, BindDocumentToRoomRequest, CreateDocumentRequest, DescribeDocumentsByRoomResponse, SetAppCustomContentResponse, LoginOriginIdResponse, BatchDeleteRecordRequest, LoginUserResponse, DescribeAppDetailRequest, ModifyAppResponse, BatchRegisterRequest, DescribeRoomResponse, DeleteRoomResponse, ModifyUserProfileRequest, DescribeDocumentsByRoomRequest, DescribeCurrentMemberListRequest, DescribeSdkAppIdUsersResponse, GetWatermarkResponse, DeleteDocumentResponse, DeleteRecordRequest, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSdkAppIdUsersRequest, DescribeUserResponse, DescribeDocumentResponse, ModifyUserProfileResponse, GetWatermarkRequest, CreateSupervisorResponse, DeleteRoomRequest, RegisterUserResponse, DescribeRoomStatisticsRequest, ModifyAppRequest, CreateSupervisorRequest, UnbindDocumentFromRoomRequest, LoginOriginIdRequest, BatchRegisterResponse, DescribeCurrentMemberListResponse, LoginUserRequest, BatchCreateRoomRequest, BindDocumentToRoomResponse, SetWatermarkRequest, CreateRoomResponse, DeleteRecordResponse, DescribeRoomRequest, DescribeDocumentRequest, RegisterUserRequest, BatchDeleteRecordResponse } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -91,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
      */
     SetAppCustomContent(req: SetAppCustomContentRequest, cb?: (error: string, rep: SetAppCustomContentResponse) => void): Promise<SetAppCustomContentResponse>;
+    /**
+     * 获取当前房间的成员列表，房间结束或过期后无法使用。
+     */
+    DescribeCurrentMemberList(req: DescribeCurrentMemberListRequest, cb?: (error: string, rep: DescribeCurrentMemberListResponse) => void): Promise<DescribeCurrentMemberListResponse>;
     /**
      * 获取应用详情
      */

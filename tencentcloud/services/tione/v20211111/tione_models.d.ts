@@ -1063,6 +1063,10 @@ export interface SpecPrice {
       * 优惠后的价格，单位：分
       */
     RealTotalCost: number;
+    /**
+      * 计费项数量
+      */
+    SpecCount?: number;
 }
 /**
  * DescribeTrainingMetrics请求参数结构体
@@ -2452,6 +2456,16 @@ export interface DatasetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatasetScope: string;
+    /**
+      * 数据集OCR子场景
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OcrScene: string;
+    /**
+      * 数据集字典修改状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnnotationKeyStatus: string;
 }
 /**
  * DescribeModelAccelerateTask返回参数结构体
@@ -3303,6 +3317,21 @@ export interface DatasetGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatasetScope: string;
+    /**
+      * 数据集OCR子场景
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OcrScene: string;
+    /**
+      * 数据集字典修改状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnnotationKeyStatus: string;
+    /**
+      * 文本数据集导入方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContentType?: string;
 }
 /**
  * DescribeTrainingModels请求参数结构体
@@ -5295,7 +5324,7 @@ export interface DescribeBillingSpecsPriceResponse {
     /**
       * 计费项价格，支持批量返回
       */
-    SpecsPrice: Array<SpecPrice>;
+    SpecsPrice?: Array<SpecPrice>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -345,7 +345,6 @@ export declare class Client extends AbstractClient {
      * 对点播中的音视频媒体发起审核任务，智能检测视频画面、画面中的文字、语音中的文字、声音出现的违规内容。
 
 如使用事件通知，事件通知的类型为 [音视频审核完成](https://cloud.tencent.com/document/product/266/81258)。
-
      */
     ReviewAudioVideo(req: ReviewAudioVideoRequest, cb?: (error: string, rep: ReviewAudioVideoResponse) => void): Promise<ReviewAudioVideoResponse>;
     /**

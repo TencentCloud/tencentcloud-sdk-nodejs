@@ -534,11 +534,11 @@ export interface DescribeShippersResponse {
       * 投递规则列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Shippers: Array<ShipperInfo>;
+    Shippers?: Array<ShipperInfo>;
     /**
       * 本次查询获取到的总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2420,7 +2420,7 @@ export interface CreateConfigRequest {
  */
 export interface CreateShipperResponse {
     /**
-      * 投递规则ID
+      * 投递任务ID
       */
     ShipperId?: string;
     /**

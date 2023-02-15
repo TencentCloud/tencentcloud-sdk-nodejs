@@ -45,6 +45,7 @@ import {
   DeleteRoomResponse,
   ModifyUserProfileRequest,
   DescribeDocumentsByRoomRequest,
+  DescribeCurrentMemberListRequest,
   DescribeSdkAppIdUsersResponse,
   GetWatermarkResponse,
   DeleteDocumentResponse,
@@ -73,6 +74,7 @@ import {
   LoginOriginIdRequest,
   AppConfig,
   BatchRegisterResponse,
+  DescribeCurrentMemberListResponse,
   LoginUserRequest,
   BatchCreateRoomRequest,
   BindDocumentToRoomResponse,
@@ -303,6 +305,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetAppCustomContentResponse) => void
   ): Promise<SetAppCustomContentResponse> {
     return this.request("SetAppCustomContent", req, cb)
+  }
+
+  /**
+   * 获取当前房间的成员列表，房间结束或过期后无法使用。
+   */
+  async DescribeCurrentMemberList(
+    req: DescribeCurrentMemberListRequest,
+    cb?: (error: string, rep: DescribeCurrentMemberListResponse) => void
+  ): Promise<DescribeCurrentMemberListResponse> {
+    return this.request("DescribeCurrentMemberList", req, cb)
   }
 
   /**

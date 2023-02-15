@@ -567,6 +567,21 @@ export interface DescribeInstancesResponse {
 }
 
 /**
+ * DescribeZones请求参数结构体
+ */
+export interface DescribeZonesRequest {
+  /**
+   * 是否包含虚拟区
+   */
+  IncludeVirtualZones?: boolean
+
+  /**
+   * 是否展示地域下所有可用区，并显示用户每个可用区权限
+   */
+  ShowPermission?: boolean
+}
+
+/**
  * 集群实例信息
  */
 export interface ClusterInstanceDetail {
@@ -3130,6 +3145,51 @@ export interface OpenAuditServiceRequest {
 }
 
 /**
+ * 安全组规则
+ */
+export interface PolicyRule {
+  /**
+   * 策略，ACCEPT或者DROP
+   */
+  Action: string
+
+  /**
+   * 来源Ip或Ip段，例如192.168.0.0/16
+   */
+  CidrIp: string
+
+  /**
+   * 端口
+   */
+  PortRange: string
+
+  /**
+   * 网络协议，支持udp、tcp等
+   */
+  IpProtocol: string
+
+  /**
+   * 协议端口ID或者协议端口组ID。
+   */
+  ServiceModule: string
+
+  /**
+   * IP地址ID或者ID地址组ID。
+   */
+  AddressModule: string
+
+  /**
+   * id
+   */
+  Id: string
+
+  /**
+   * 描述
+   */
+  Desc: string
+}
+
+/**
  * 网络信息
  */
 export interface NetAddr {
@@ -3927,6 +3987,21 @@ export interface CreateAuditRuleTemplateResponse {
 }
 
 /**
+ * DescribeZones返回参数结构体
+ */
+export interface DescribeZonesResponse {
+  /**
+   * 地域信息
+   */
+  RegionSet?: Array<SaleRegion>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateCluster返回参数结构体
  */
 export interface IsolateClusterResponse {
@@ -3949,19 +4024,53 @@ export interface IsolateClusterResponse {
 }
 
 /**
- * SearchClusterDatabases返回参数结构体
+ * 售卖可用区信息
  */
-export interface SearchClusterDatabasesResponse {
+export interface SaleZone {
   /**
-      * 数据库列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Databases: Array<string>
+   * 可用区英文名
+   */
+  Zone: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 可用区数字ID
    */
-  RequestId?: string
+  ZoneId: number
+
+  /**
+   * 可用区中文名
+   */
+  ZoneZh: string
+
+  /**
+      * 是否支持serverless集群<br>
+0:不支持<br>
+1:支持
+      */
+  IsSupportServerless: number
+
+  /**
+      * 是否支持普通集群<br>
+0:不支持<br>
+1:支持
+      */
+  IsSupportNormal: number
+
+  /**
+   * 物理区
+   */
+  PhysicalZone: string
+
+  /**
+      * 用户是否有可用区权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasPermission?: boolean
+
+  /**
+   * 是否为全链路RDMA可用区
+   */
+  IsWholeRdmaZone?: string
 }
 
 /**
@@ -4329,48 +4438,18 @@ export interface SearchClusterTablesResponse {
 }
 
 /**
- * 安全组规则
+ * 系统支持的模块
  */
-export interface PolicyRule {
+export interface Module {
   /**
-   * 策略，ACCEPT或者DROP
+   * 是否支持，可选值:yes,no
    */
-  Action: string
+  IsDisable: string
 
   /**
-   * 来源Ip或Ip段，例如192.168.0.0/16
+   * 模块名
    */
-  CidrIp: string
-
-  /**
-   * 端口
-   */
-  PortRange: string
-
-  /**
-   * 网络协议，支持udp、tcp等
-   */
-  IpProtocol: string
-
-  /**
-   * 协议端口ID或者协议端口组ID。
-   */
-  ServiceModule: string
-
-  /**
-   * IP地址ID或者ID地址组ID。
-   */
-  AddressModule: string
-
-  /**
-   * id
-   */
-  Id: string
-
-  /**
-   * 描述
-   */
-  Desc: string
+  ModuleName: string
 }
 
 /**
@@ -4446,6 +4525,41 @@ export interface DescribeBackupListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 售卖地域信息
+ */
+export interface SaleRegion {
+  /**
+   * 地域英文名
+   */
+  Region: string
+
+  /**
+   * 地域数字ID
+   */
+  RegionId: number
+
+  /**
+   * 地域中文名
+   */
+  RegionZh: string
+
+  /**
+   * 可售卖可用区列表
+   */
+  ZoneSet: Array<SaleZone>
+
+  /**
+   * 引擎类型
+   */
+  DbType: string
+
+  /**
+   * 地域模块支持情况
+   */
+  Modules: Array<Module>
 }
 
 /**
@@ -5338,6 +5452,22 @@ export interface ResetAccountPasswordRequest {
    * 主机，不填默认为"%"
    */
   Host?: string
+}
+
+/**
+ * SearchClusterDatabases返回参数结构体
+ */
+export interface SearchClusterDatabasesResponse {
+  /**
+      * 数据库列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Databases: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1741,6 +1741,12 @@ export interface BonusInfo {
    * 资源包创建时间
    */
   CreateTime: number
+
+  /**
+      * 资源包状态 0.未使用 1.使用中 2.已退款 3.已过期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
 }
 
 /**

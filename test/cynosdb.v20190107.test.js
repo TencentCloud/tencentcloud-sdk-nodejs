@@ -568,9 +568,9 @@ it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     }
 })
 
-it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
+it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
     try {
-       const data = await client.GrantAccountPrivileges({})
+       const data = await client.ExportInstanceSlowQueries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +678,9 @@ it("cynosdb.v20190107.DescribeAuditLogFiles", async function () {
     }
 })
 
-it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
+it("cynosdb.v20190107.DescribeZones", async function () {
     try {
-       const data = await client.ExportInstanceSlowQueries({})
+       const data = await client.DescribeZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +711,16 @@ it("cynosdb.v20190107.SearchClusterDatabases", async function () {
 it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

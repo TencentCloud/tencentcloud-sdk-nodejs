@@ -653,12 +653,12 @@ export interface DescribeSlowLogResponse {
   /**
    * 慢查询总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 慢查询详情。
    */
-  InstanceSlowlogDetail: Array<InstanceSlowlogDetail>
+  InstanceSlowlogDetail?: Array<InstanceSlowlogDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3779,7 +3779,7 @@ export interface DescribeSlowLogRequest {
   EndTime: string
 
   /**
-   * 慢查询平均执行时间阈值（单位：微秒）。
+   * 慢查询平均执行时间阈值（单位：毫秒）。
    */
   MinQueryTime?: number
 

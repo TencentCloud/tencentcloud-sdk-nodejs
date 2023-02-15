@@ -258,6 +258,36 @@ export interface DeleteDomainAliasResponse {
 }
 
 /**
+ * DescribeVASStatistic请求参数结构体
+ */
+export interface DescribeVASStatisticRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: number
+}
+
+/**
+ * DeleteDomainBatch返回参数结构体
+ */
+export interface DeleteDomainBatchResponse {
+  /**
+   * 任务 ID
+   */
+  JobId?: number
+
+  /**
+   * 任务详情数组
+   */
+  DetailList?: Array<DeleteDomainBatchDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 解析记录分组信息
  */
 export interface RecordGroupInfo {
@@ -461,6 +491,21 @@ export interface ModifyRecordGroupRequest {
 }
 
 /**
+ * DescribeVASStatistic返回参数结构体
+ */
+export interface DescribeVASStatisticResponse {
+  /**
+   * 增值服务用量列表
+   */
+  VASList: Array<VASStatisticItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBatchTask请求参数结构体
  */
 export interface DescribeBatchTaskRequest {
@@ -590,6 +635,26 @@ export interface DescribeSnapshotListRequest {
    * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
+}
+
+/**
+ * DescribePackageDetail返回参数结构体
+ */
+export interface DescribePackageDetailResponse {
+  /**
+   * 套餐配置详情
+   */
+  Info: Array<PackageDetailItem>
+
+  /**
+   * 套餐代码列表
+   */
+  LevelMap: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -903,6 +968,16 @@ export interface DomainListItem {
    * 域名所属账号
    */
   Owner: string
+}
+
+/**
+ * DeleteDomainBatch请求参数结构体
+ */
+export interface DeleteDomainBatchRequest {
+  /**
+   * 域名数组
+   */
+  DomainList: Array<string>
 }
 
 /**
@@ -1332,6 +1407,21 @@ export interface LineInfo {
 }
 
 /**
+ * DescribeRecordExistExceptDefaultNS请求参数结构体
+ */
+export interface DescribeRecordExistExceptDefaultNSRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeRecordLineList请求参数结构体
  */
 export interface DescribeRecordLineListRequest {
@@ -1503,23 +1593,13 @@ export interface ModifyDomainLockRequest {
 }
 
 /**
- * ModifyDomainStatus请求参数结构体
+ * DescribeDomainWhois请求参数结构体
  */
-export interface ModifyDomainStatusRequest {
+export interface DescribeDomainWhoisRequest {
   /**
    * 域名
    */
   Domain: string
-
-  /**
-   * 域名状态，”enable” 、”disable” 分别代表启用和暂停
-   */
-  Status: string
-
-  /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-   */
-  DomainId?: number
 }
 
 /**
@@ -1896,6 +1976,21 @@ export interface CheckRecordSnapshotRollbackResponse {
 }
 
 /**
+ * DescribeDomainPreview请求参数结构体
+ */
+export interface DescribeDomainPreviewRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+}
+
+/**
  * 批量添加记录返回结构
  */
 export interface CreateRecordBatchDetail {
@@ -1945,6 +2040,35 @@ export interface CreateRecordBatchDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DomainId: number
+}
+
+/**
+ * Whois联系信息
+ */
+export interface WhoisContact {
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Admin: WhoisContactAddress
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Billing: WhoisContactAddress
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Registrant: WhoisContactAddress
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tech: WhoisContactAddress
 }
 
 /**
@@ -2121,6 +2245,83 @@ export interface ModifyRecordBatchRequest {
    * MX记录优先级，仅当修改为 MX 记录时为必填参数。
    */
   MX?: string
+}
+
+/**
+ * Whois联系信息地址
+ */
+export interface WhoisContactAddress {
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Email: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Fax: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FaxExt: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Handle: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Organization: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Phone: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostalCode: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State: string
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Street: string
 }
 
 /**
@@ -2600,6 +2801,21 @@ export interface RecordListItem {
 }
 
 /**
+ * DescribeDomainPreview返回参数结构体
+ */
+export interface DescribeDomainPreviewResponse {
+  /**
+   * 域名概览信息
+   */
+  Domain?: PreviewDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDomainBatch返回参数结构体
  */
 export interface CreateDomainBatchResponse {
@@ -2764,6 +2980,37 @@ export interface DescribeUserDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量删除域名详情
+ */
+export interface DeleteDomainBatchDetail {
+  /**
+   * 域名 ID
+   */
+  DomainId?: number
+
+  /**
+   * 域名
+   */
+  Domain?: string
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Error?: string
+
+  /**
+   * 删除状态
+   */
+  Status?: string
+
+  /**
+   * 操作
+   */
+  Operation?: string
 }
 
 /**
@@ -2947,14 +3194,9 @@ export interface PayOrderWithBalanceRequest {
 }
 
 /**
- * ModifySnapshotConfig返回参数结构体
+ * DescribePackageDetail请求参数结构体
  */
-export interface ModifySnapshotConfigResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribePackageDetailRequest = null
 
 /**
  * DescribeRecord返回参数结构体
@@ -3315,6 +3557,31 @@ export interface DeleteShareDomainRequest {
 }
 
 /**
+ * 域名增值服务用量
+ */
+export interface VASStatisticItem {
+  /**
+   * 增值服务名称
+   */
+  Name?: string
+
+  /**
+   * 增值服务标识
+   */
+  Key?: string
+
+  /**
+   * 增值服务最大用量
+   */
+  LimitCount?: number
+
+  /**
+   * 增值服务已使用的用量
+   */
+  UseCount?: number
+}
+
+/**
  * 快照信息
  */
 export interface SnapshotInfo {
@@ -3475,6 +3742,16 @@ export interface ModifyRecordRemarkRequest {
 }
 
 /**
+ * ModifySnapshotConfig返回参数结构体
+ */
+export interface ModifySnapshotConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RollbackRecordSnapshot返回参数结构体
  */
 export interface RollbackRecordSnapshotResponse {
@@ -3493,6 +3770,26 @@ export interface RollbackRecordSnapshotResponse {
  * DescribeUserDetail请求参数结构体
  */
 export type DescribeUserDetailRequest = null
+
+/**
+ * ModifyDomainStatus请求参数结构体
+ */
+export interface ModifyDomainStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名状态，”enable” 、”disable” 分别代表启用和暂停
+   */
+  Status: string
+
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+}
 
 /**
  * ModifyRecordRemark返回参数结构体
@@ -3676,6 +3973,66 @@ export interface ModifyDomainLockResponse {
 }
 
 /**
+ * 套餐配置明细
+ */
+export interface PackageDetailItem {
+  /**
+   * 套餐原价
+   */
+  RealPrice: number
+
+  /**
+   * 可更换域名次数
+   */
+  ChangedTimes: number
+
+  /**
+   * 允许设置的最小 TTL 值
+   */
+  MinTtl: number
+
+  /**
+   * 负载均衡数量
+   */
+  RecordRoll: number
+
+  /**
+   * 子域名级数
+   */
+  SubDomainLevel: number
+
+  /**
+   * 泛解析级数
+   */
+  MaxWildcard: number
+
+  /**
+   * DNS 服务集群个数
+   */
+  DnsServerRegion: string
+
+  /**
+   * 套餐名称
+   */
+  DomainGradeCn: string
+
+  /**
+   * 套餐代号
+   */
+  GradeLevel: number
+
+  /**
+   * 套餐对应的 NS
+   */
+  Ns: Array<string>
+
+  /**
+   * 套餐代码
+   */
+  DomainGrade: string
+}
+
+/**
  * CreateDeal返回参数结构体
  */
 export interface CreateDealResponse {
@@ -3688,6 +4045,21 @@ export interface CreateDealResponse {
    * 子订单列表
    */
   DealList?: Array<Deals>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRecordExistExceptDefaultNS返回参数结构体
+ */
+export interface DescribeRecordExistExceptDefaultNSResponse {
+  /**
+   * true 是 false 否
+   */
+  Exist: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3711,6 +4083,71 @@ export interface ModifyVasAutoRenewStatusRequest {
 }
 
 /**
+ * Whois信息
+ */
+export interface WhoisInfo {
+  /**
+      * 联系信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Contacts: WhoisContact
+
+  /**
+      * 域名注册时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreationDate: string
+
+  /**
+      * 域名到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpirationDate: string
+
+  /**
+      * 是否是在腾讯云注册的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsQcloud: boolean
+
+  /**
+      * 是否当前操作帐号注册的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsQcloudOwner: boolean
+
+  /**
+      * 域名配置的NS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NameServers: Array<string>
+
+  /**
+      * Whois原始信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Raw: Array<string>
+
+  /**
+      * 域名注册商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Registrar: Array<string>
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: Array<string>
+
+  /**
+      * 更新日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedDate: string
+}
+
+/**
  * DownloadSnapshot返回参数结构体
  */
 export interface DownloadSnapshotResponse {
@@ -3718,6 +4155,81 @@ export interface DownloadSnapshotResponse {
    * 快照下载链接
    */
   CosUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 域名概览明细
+ */
+export interface PreviewDetail {
+  /**
+   * 域名
+   */
+  Name: string
+
+  /**
+   * 域名套餐代码
+   */
+  Grade: string
+
+  /**
+   * 域名套餐名称
+   */
+  GradeTitle: string
+
+  /**
+   * 域名记录数
+   */
+  Records: number
+
+  /**
+   * 域名停靠状态。0 未开启 1 已开启 2 已暂停
+   */
+  DomainParkingStatus: number
+
+  /**
+   * 自定义线路数量
+   */
+  LineCount: number
+
+  /**
+   * 自定义线路分组数量
+   */
+  LineGroupCount: number
+
+  /**
+   * 域名别名数量
+   */
+  AliasCount: number
+
+  /**
+   * 允许添加的最大域名别名数量
+   */
+  MaxAliasCount: number
+
+  /**
+   * 昨天的解析量
+   */
+  ResolveCount: number
+
+  /**
+   * 增值服务数量
+   */
+  VASCount: number
+}
+
+/**
+ * DescribeDomainWhois返回参数结构体
+ */
+export interface DescribeDomainWhoisResponse {
+  /**
+   * 域名Whois信息
+   */
+  Info?: WhoisInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

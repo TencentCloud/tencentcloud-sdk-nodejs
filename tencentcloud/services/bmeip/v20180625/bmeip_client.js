@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindHosted", req, cb);
     }
     /**
-     * 创建黑石弹性公网 EIPACL
+     * 创建黑石弹性公网 EIP ACL
      */
     async CreateEipAcl(req, cb) {
         return this.request("CreateEipAcl", req, cb);
@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEips", req, cb);
     }
     /**
-     * 黑石EIP绑定VPCIP
+     * 黑石EIP绑定VPC IP
      */
     async BindVpcIp(req, cb) {
         return this.request("BindVpcIp", req, cb);

@@ -45,6 +45,7 @@ import {
   AccountParam,
   DescribeBinlogsResponse,
   DescribeInstancesResponse,
+  DescribeZonesRequest,
   ClusterInstanceDetail,
   AddClusterSlaveZoneResponse,
   OldAddrInfo,
@@ -131,6 +132,7 @@ import {
   RollbackTimeRange,
   OfflineInstanceRequest,
   OpenAuditServiceRequest,
+  PolicyRule,
   NetAddr,
   TemplateParamInfo,
   AssociateSecurityGroupsResponse,
@@ -152,8 +154,9 @@ import {
   ModifyAccountParamsRequest,
   CynosdbCluster,
   CreateAuditRuleTemplateResponse,
+  DescribeZonesResponse,
   IsolateClusterResponse,
-  SearchClusterDatabasesResponse,
+  SaleZone,
   ObjectTask,
   OpenAuditServiceResponse,
   OfflineClusterResponse,
@@ -168,10 +171,11 @@ import {
   CreateBackupRequest,
   DescribeClusterParamLogsRequest,
   SearchClusterTablesResponse,
-  PolicyRule,
+  Module,
   DescribeMaintainPeriodResponse,
   SwitchProxyVpcRequest,
   DescribeBackupListResponse,
+  SaleRegion,
   RollBackClusterResponse,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
@@ -191,6 +195,7 @@ import {
   ExportInstanceSlowQueriesResponse,
   CynosdbClusterDetail,
   ResetAccountPasswordRequest,
+  SearchClusterDatabasesResponse,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
@@ -783,13 +788,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量授权账号权限
+   * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
    */
-  async GrantAccountPrivileges(
-    req: GrantAccountPrivilegesRequest,
-    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
-  ): Promise<GrantAccountPrivilegesResponse> {
-    return this.request("GrantAccountPrivileges", req, cb)
+  async ExportInstanceSlowQueries(
+    req: ExportInstanceSlowQueriesRequest,
+    cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void
+  ): Promise<ExportInstanceSlowQueriesResponse> {
+    return this.request("ExportInstanceSlowQueries", req, cb)
   }
 
   /**
@@ -893,13 +898,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
+   * 本接口(DescribeZones)用于查询可售卖地域可用区信息。
    */
-  async ExportInstanceSlowQueries(
-    req: ExportInstanceSlowQueriesRequest,
-    cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void
-  ): Promise<ExportInstanceSlowQueriesResponse> {
-    return this.request("ExportInstanceSlowQueries", req, cb)
+  async DescribeZones(
+    req: DescribeZonesRequest,
+    cb?: (error: string, rep: DescribeZonesResponse) => void
+  ): Promise<DescribeZonesResponse> {
+    return this.request("DescribeZones", req, cb)
   }
 
   /**
@@ -930,6 +935,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
   ): Promise<ModifyAuditRuleTemplatesResponse> {
     return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
+   * 批量授权账号权限
+   */
+  async GrantAccountPrivileges(
+    req: GrantAccountPrivilegesRequest,
+    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
+  ): Promise<GrantAccountPrivilegesResponse> {
+    return this.request("GrantAccountPrivileges", req, cb)
   }
 
   /**

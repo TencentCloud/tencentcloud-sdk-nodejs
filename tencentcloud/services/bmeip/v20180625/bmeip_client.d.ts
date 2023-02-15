@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     BindHosted(req: BindHostedRequest, cb?: (error: string, rep: BindHostedResponse) => void): Promise<BindHostedResponse>;
     /**
-     * 创建黑石弹性公网 EIPACL
+     * 创建黑石弹性公网 EIP ACL
      */
     CreateEipAcl(req: CreateEipAclRequest, cb?: (error: string, rep: CreateEipAclResponse) => void): Promise<CreateEipAclResponse>;
     /**
@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEips(req: DescribeEipsRequest, cb?: (error: string, rep: DescribeEipsResponse) => void): Promise<DescribeEipsResponse>;
     /**
-     * 黑石EIP绑定VPCIP
+     * 黑石EIP绑定VPC IP
      */
     BindVpcIp(req: BindVpcIpRequest, cb?: (error: string, rep: BindVpcIpResponse) => void): Promise<BindVpcIpResponse>;
     /**

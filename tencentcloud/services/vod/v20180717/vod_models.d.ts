@@ -2512,7 +2512,7 @@ export interface ReviewAudioVideoRequest {
     ReviewContents?: Array<string>;
     /**
       * 审核模板 ID，默认值为 10。取值范围：
-<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。</li>
+<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。</li>
       */
     Definition?: number;
     /**
@@ -3488,11 +3488,10 @@ export interface ReviewAudioVideoSegmentItem {
     /**
       * 嫌疑片段最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Ad：广告；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂；</li>
 <li>Moan：娇喘。</li>
       */
@@ -4582,11 +4581,10 @@ export interface ReviewImageSegmentItem {
     /**
       * 嫌疑片段最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Ad：广告；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂。</li>
       */
     Label?: string;
@@ -4780,10 +4778,9 @@ export interface CreateReviewTemplateRequest {
     /**
       * 需要返回的违规标签列表，可选值为：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂；</li>
 <li>Ad：广告；</li>
 <li>Moan：娇喘。</li>
@@ -6062,11 +6059,10 @@ export interface ReviewAudioVideoTaskOutput {
     /**
       * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Ad：广告；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂；</li>
 <li>Moan：娇喘。</li>
       */
@@ -6375,10 +6371,9 @@ export interface ModifyReviewTemplateRequest {
     /**
       * 需要返回的违规标签列表，可选值为：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂；</li>
 <li>Ad：广告；</li>
 <li>Moan：娇喘。</li>
@@ -8541,11 +8536,10 @@ export interface ReviewImageResult {
     /**
       * 当 Suggestion 为 review 或 block 时有效，表示最可能的违规的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Ad：广告；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂。</li>
       */
     Label?: string;
@@ -13815,7 +13809,7 @@ export interface ReviewAudioVideoResponse {
     /**
       * 任务 ID
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15351,11 +15345,10 @@ Form 表示违禁的形式，取值范围：
 <li>Voice：声音。</li>
 Label 表示违禁的标签，取值范围：
 <li>Porn：色情；</li>
-<li>Terror：暴恐；</li>
+<li>Terror：暴力；</li>
 <li>Polity：不适宜的信息；</li>
 <li>Ad：广告；</li>
 <li>Illegal：违法；</li>
-<li>Religion：宗教；</li>
 <li>Abuse：谩骂；</li>
 <li>Moan：娇喘。</li>
       */
@@ -15513,7 +15506,7 @@ export interface ReviewImageRequest {
     FileId: string;
     /**
       * 图片审核模板 ID，取值范围：
-<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。</li>
+<li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。</li>
       */
     Definition: number;
     /**

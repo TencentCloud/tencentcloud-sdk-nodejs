@@ -1700,6 +1700,11 @@ export interface GatewayPluginBoundParam {
  */
 export interface ModifyNamespaceResponse {
     /**
+      * Result
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -9925,6 +9930,11 @@ export interface VmGroupOther {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsNotEqualServiceConfig: boolean;
+    /**
+      * HealthCheckSettings
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthCheckSettings?: HealthCheckSettings;
 }
 /**
  * DescribeTaskLastStatus返回参数结构体

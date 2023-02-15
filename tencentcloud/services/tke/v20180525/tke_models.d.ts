@@ -2465,11 +2465,11 @@ export interface DescribePrometheusAlertHistoryResponse {
     /**
       * 告警历史
       */
-    Items: Array<PrometheusAlertHistoryItem>;
+    Items?: Array<PrometheusAlertHistoryItem>;
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3399,11 +3399,11 @@ export interface DescribePrometheusAlertRuleResponse {
     /**
       * 告警详情
       */
-    AlertRules: Array<PrometheusAlertRuleDetail>;
+    AlertRules?: Array<PrometheusAlertRuleDetail>;
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4753,37 +4753,37 @@ export interface DescribePrometheusInstanceResponse {
     /**
       * 实例id
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 实例名称
       */
-    Name: string;
+    Name?: string;
     /**
       * 私有网络id
       */
-    VpcId: string;
+    VpcId?: string;
     /**
       * 子网id
       */
-    SubnetId: string;
+    SubnetId?: string;
     /**
       * cos桶名称
       */
-    COSBucket: string;
+    COSBucket?: string;
     /**
       * 数据查询地址
       */
-    QueryAddress: string;
+    QueryAddress?: string;
     /**
       * 实例中grafana相关的信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Grafana: PrometheusGrafanaInfo;
+    Grafana?: PrometheusGrafanaInfo;
     /**
       * 用户自定义alertmanager
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AlertManagerUrl: string;
+    AlertManagerUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6630,7 +6630,7 @@ export interface CreatePrometheusAlertRuleResponse {
     /**
       * 告警id
       */
-    Id: string;
+    Id?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

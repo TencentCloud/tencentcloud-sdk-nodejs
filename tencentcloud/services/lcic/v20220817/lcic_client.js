@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetAppCustomContent", req, cb);
     }
     /**
+     * 获取当前房间的成员列表，房间结束或过期后无法使用。
+     */
+    async DescribeCurrentMemberList(req, cb) {
+        return this.request("DescribeCurrentMemberList", req, cb);
+    }
+    /**
      * 获取应用详情
      */
     async DescribeAppDetail(req, cb) {

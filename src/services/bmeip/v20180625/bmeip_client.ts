@@ -95,7 +95,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建黑石弹性公网 EIPACL
+   * 创建黑石弹性公网 EIP ACL
    */
   async CreateEipAcl(
     req: CreateEipAclRequest,
@@ -245,7 +245,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 黑石EIP绑定VPCIP
+   * 黑石EIP绑定VPC IP
    */
   async BindVpcIp(
     req: BindVpcIpRequest,

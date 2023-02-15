@@ -146,11 +146,6 @@ export class Client extends AbstractClient {
 
 该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
 
-腾讯AI Lab词向量相关资料：
-
-https://ai.tencent.com/ailab/zh/news/detial?id=22
-
-https://ai.tencent.com/ailab/nlp/zh/embedding.html
      */
   async WordEmbedding(
     req: WordEmbeddingRequest,

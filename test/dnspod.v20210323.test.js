@@ -128,6 +128,16 @@ it("dnspod.v20210323.ModifyRecordFields", async function () {
     }
 })
 
+it("dnspod.v20210323.DeleteDomainBatch", async function () {
+    try {
+       const data = await client.DeleteDomainBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DownloadSnapshot", async function () {
     try {
        const data = await client.DownloadSnapshot({})
@@ -151,6 +161,16 @@ it("dnspod.v20210323.CheckSnapshotRollback", async function () {
 it("dnspod.v20210323.ModifyRecord", async function () {
     try {
        const data = await client.ModifyRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.DescribeDomainWhois", async function () {
+    try {
+       const data = await client.DescribeDomainWhois({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +268,9 @@ it("dnspod.v20210323.DeleteShareDomain", async function () {
     }
 })
 
-it("dnspod.v20210323.DescribeDomain", async function () {
+it("dnspod.v20210323.ModifyVasAutoRenewStatus", async function () {
     try {
-       const data = await client.DescribeDomain({})
+       const data = await client.ModifyVasAutoRenewStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +298,9 @@ it("dnspod.v20210323.ModifyRecordStatus", async function () {
     }
 })
 
-it("dnspod.v20210323.CreateRecordGroup", async function () {
+it("dnspod.v20210323.DescribeDomain", async function () {
     try {
-       const data = await client.CreateRecordGroup({})
+       const data = await client.DescribeDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +368,39 @@ it("dnspod.v20210323.DescribeRecord", async function () {
     }
 })
 
+it("dnspod.v20210323.ModifySnapshotConfig", async function () {
+    try {
+       const data = await client.ModifySnapshotConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.DescribePackageDetail", async function () {
+    try {
+       const data = await client.DescribePackageDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeRecordLineList", async function () {
     try {
        const data = await client.DescribeRecordLineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.DescribeVASStatistic", async function () {
+    try {
+       const data = await client.DescribeVASStatistic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +468,16 @@ it("dnspod.v20210323.ModifyDomainRemark", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeRecordExistExceptDefaultNS", async function () {
+    try {
+       const data = await client.DescribeRecordExistExceptDefaultNS({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.ModifyDomainOwner", async function () {
     try {
        const data = await client.ModifyDomainOwner({})
@@ -438,9 +498,9 @@ it("dnspod.v20210323.CreateDomainGroup", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifySnapshotConfig", async function () {
+it("dnspod.v20210323.CreateRecordGroup", async function () {
     try {
-       const data = await client.ModifySnapshotConfig({})
+       const data = await client.CreateRecordGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +538,16 @@ it("dnspod.v20210323.CheckRecordSnapshotRollback", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainPreview", async function () {
+    try {
+       const data = await client.DescribeDomainPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.CreateDomain", async function () {
     try {
        const data = await client.CreateDomain({})
@@ -498,16 +568,6 @@ it("dnspod.v20210323.RollbackRecordSnapshot", async function () {
     }
 })
 
-it("dnspod.v20210323.PayOrderWithBalance", async function () {
-    try {
-       const data = await client.PayOrderWithBalance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dnspod.v20210323.ModifyRecordToGroup", async function () {
     try {
        const data = await client.ModifyRecordToGroup({})
@@ -518,9 +578,9 @@ it("dnspod.v20210323.ModifyRecordToGroup", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifyVasAutoRenewStatus", async function () {
+it("dnspod.v20210323.PayOrderWithBalance", async function () {
     try {
-       const data = await client.ModifyVasAutoRenewStatus({})
+       const data = await client.PayOrderWithBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
