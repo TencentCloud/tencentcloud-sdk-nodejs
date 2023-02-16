@@ -5019,6 +5019,10 @@ export interface EnableClusterAuditRequest {
       * CLS日志主题ID
       */
     TopicId?: string;
+    /**
+      * topic所在region，默认为集群当前region
+      */
+    TopicRegion?: string;
 }
 /**
  * CreateClusterRouteTable请求参数结构体
@@ -8436,6 +8440,10 @@ export interface EnableEventPersistenceRequest {
       * cls服务的topicID
       */
     TopicId?: string;
+    /**
+      * topic所在地域，默认为集群所在地域
+      */
+    TopicRegion?: string;
 }
 /**
  * ModifyClusterVirtualNodePool请求参数结构体

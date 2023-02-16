@@ -114,6 +114,7 @@ import {
   Component,
   GetDownloadFlowUrlRequest,
   ChannelBatchCancelFlowsRequest,
+  ChannelUpdateSealStatusRequest,
   SignUrl,
   ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
@@ -128,6 +129,7 @@ import {
   ChannelDescribeEmployeesResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
+  ChannelUpdateSealStatusResponse,
   ChannelCreateFlowSignUrlRequest,
   DescribeExtendedServiceAuthInfoResponse,
   CcInfo,
@@ -364,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
   ): Promise<CreateChannelFlowEvidenceReportResponse> {
     return this.request("CreateChannelFlowEvidenceReport", req, cb)
+  }
+
+  /**
+   * 本接口（ChannelUpdateSealStatus）由于渠道版更新印章状态
+   */
+  async ChannelUpdateSealStatus(
+    req: ChannelUpdateSealStatusRequest,
+    cb?: (error: string, rep: ChannelUpdateSealStatusResponse) => void
+  ): Promise<ChannelUpdateSealStatusResponse> {
+    return this.request("ChannelUpdateSealStatus", req, cb)
   }
 
   /**

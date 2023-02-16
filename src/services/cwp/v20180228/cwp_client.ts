@@ -190,6 +190,7 @@ import {
   DescribeSearchExportListRequest,
   ScanAssetRequest,
   DescribeBaselineRuleResponse,
+  ModifyMachineRemarkRequest,
   StopBaselineDetectResponse,
   DeleteMaliciousRequestsResponse,
   ExportBruteAttacksResponse,
@@ -262,6 +263,7 @@ import {
   BaselineHostTopList,
   DescribeReverseShellRulesResponse,
   DescribeBruteAttackListRequest,
+  ModifyMachineRemarkResponse,
   DescribeVulListResponse,
   DescribeUndoVulCountsRequest,
   ScanAssetResponse,
@@ -1608,13 +1610,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 定期扫描漏洞设置
+   * 修改主机备注信息
    */
-  async ScanVulSetting(
-    req: ScanVulSettingRequest,
-    cb?: (error: string, rep: ScanVulSettingResponse) => void
-  ): Promise<ScanVulSettingResponse> {
-    return this.request("ScanVulSetting", req, cb)
+  async ModifyMachineRemark(
+    req: ModifyMachineRemarkRequest,
+    cb?: (error: string, rep: ModifyMachineRemarkResponse) => void
+  ): Promise<ModifyMachineRemarkResponse> {
+    return this.request("ModifyMachineRemark", req, cb)
   }
 
   /**
@@ -2238,6 +2240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLicenseBindsResponse) => void
   ): Promise<ModifyLicenseBindsResponse> {
     return this.request("ModifyLicenseBinds", req, cb)
+  }
+
+  /**
+   * 定期扫描漏洞设置
+   */
+  async ScanVulSetting(
+    req: ScanVulSettingRequest,
+    cb?: (error: string, rep: ScanVulSettingResponse) => void
+  ): Promise<ScanVulSettingResponse> {
+    return this.request("ScanVulSetting", req, cb)
   }
 
   /**

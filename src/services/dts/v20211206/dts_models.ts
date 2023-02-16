@@ -33,13 +33,13 @@ export interface DescribeSyncJobsResponse {
       * 任务数目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 任务详情数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  JobList: Array<SyncJobInfo>
+  JobList?: Array<SyncJobInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1652,6 +1652,12 @@ export interface Endpoint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EncryptConn?: string
+
+  /**
+      * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatabaseNetEnv?: string
 }
 
 /**
@@ -1738,12 +1744,12 @@ export interface ConfigureSyncJobRequest {
   JobId: string
 
   /**
-   * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路
+   * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路
    */
   SrcAccessType: string
 
   /**
-   * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路
+   * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路
    */
   DstAccessType: string
 
@@ -1778,7 +1784,7 @@ export interface ConfigureSyncJobRequest {
   ExpectRunTime?: string
 
   /**
-   * 源端信息，单节点数据库使用
+   * 源端信息，单节点数据库使用，且SrcNodeType传single
    */
   SrcInfo?: Endpoint
 
@@ -2242,6 +2248,12 @@ export interface SyncDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StepInfos: Array<StepInfo>
+
+  /**
+      * 不能发起一致性校验的原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CauseOfCompareDisable?: string
 }
 
 /**

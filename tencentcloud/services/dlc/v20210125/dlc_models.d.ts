@@ -4964,6 +4964,26 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UiURL?: string;
+    /**
+      * 引擎的资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceType?: string;
+    /**
+      * 集群镜像版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageVersionId?: string;
+    /**
+      * 集群镜像小版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildImageVersionId?: string;
+    /**
+      * 集群镜像版本名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageVersionName?: string;
 }
 /**
  * DescribeSparkAppTasks请求参数结构体
@@ -5231,12 +5251,12 @@ export interface DescribeDataEnginesResponse {
       * 数据引擎列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DataEngines: Array<DataEngineInfo>;
+    DataEngines?: Array<DataEngineInfo>;
     /**
       * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

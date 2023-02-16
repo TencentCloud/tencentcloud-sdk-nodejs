@@ -621,6 +621,16 @@ export interface UpdateEventBusRequest {
    * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
    */
   EventBusName?: string
+
+  /**
+   * EB日志存储时长
+   */
+  SaveDays?: number
+
+  /**
+   * EB日志主题ID
+   */
+  LogTopicId?: string
 }
 
 /**
@@ -636,6 +646,11 @@ export interface CreateEventBusRequest {
    * 事件集描述，不限字符类型，200字符描述以内
    */
   Description?: string
+
+  /**
+   * EB存储时长
+   */
+  SaveDays?: number
 }
 
 /**
@@ -1179,7 +1194,7 @@ export interface CreateEventBusResponse {
   /**
    * 事件集ID
    */
-  EventBusId: string
+  EventBusId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

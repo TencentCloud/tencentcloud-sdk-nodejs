@@ -3919,6 +3919,19 @@ export interface DescribeBaselineRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyMachineRemark请求参数结构体
+ */
+export interface ModifyMachineRemarkRequest {
+    /**
+      * 主机Quuid
+      */
+    Quuid: string;
+    /**
+      * 备注信息
+      */
+    Remark?: string;
+}
+/**
  * StopBaselineDetect返回参数结构体
  */
 export interface StopBaselineDetectResponse {
@@ -5757,6 +5770,15 @@ export interface DescribeBruteAttackListRequest {
     By?: string;
 }
 /**
+ * ModifyMachineRemark返回参数结构体
+ */
+export interface ModifyMachineRemarkResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeVulList返回参数结构体
  */
 export interface DescribeVulListResponse {
@@ -5947,6 +5969,11 @@ export interface Machine {
       * 实例ID
       */
     InstanceId?: string;
+    /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
 }
 /**
  * 授权机器信息

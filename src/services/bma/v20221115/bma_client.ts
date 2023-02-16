@@ -19,13 +19,34 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateBPFakeAPPResponse,
-  CreateBPFakeAPPRequest,
-  CreateBPFakeAPPListRequest,
+  DeleteBPWhiteListResponse,
+  DescribeBPBrandsResponse,
+  DescribeBPBrandsRequest,
+  CreateBPBrandRequest,
+  DescribeBPFakeURLsRequest,
+  FakeAPPData,
+  WhiteListData,
+  TrademarkData,
+  DescribeBPFakeURLsResponse,
   CreateBPFakeURLRequest,
   CreateBPFakeAPPListResponse,
-  CreateBPFakeURLResponse,
-  CreateBPFakeURLsRequest,
+  DescribeBPWhiteListsResponse,
+  CreateBPFakeAPPListRequest,
+  Filter,
+  CreateBPWhiteListResponse,
+  ServiceData,
+  FakeURLData,
+  DeleteBPWhiteListRequest,
+  DescribeBPWhiteListsRequest,
   CreateBPFakeURLsResponse,
+  DescribeBPFakeAPPListRequest,
+  CreateBPFakeAPPRequest,
+  BrandData,
+  CreateBPBrandResponse,
+  CreateBPFakeURLResponse,
+  CreateBPWhiteListRequest,
+  CreateBPFakeURLsRequest,
+  DescribeBPFakeAPPListResponse,
 } from "./bma_models"
 
 /**
@@ -35,6 +56,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("bma.tencentcloudapi.com", "2022-11-15", clientConfig)
+  }
+
+  /**
+   * 查询白名单列表
+   */
+  async DescribeBPWhiteLists(
+    req: DescribeBPWhiteListsRequest,
+    cb?: (error: string, rep: DescribeBPWhiteListsResponse) => void
+  ): Promise<DescribeBPWhiteListsResponse> {
+    return this.request("DescribeBPWhiteLists", req, cb)
+  }
+
+  /**
+   * 添加白名单
+   */
+  async CreateBPWhiteList(
+    req: CreateBPWhiteListRequest,
+    cb?: (error: string, rep: CreateBPWhiteListResponse) => void
+  ): Promise<CreateBPWhiteListResponse> {
+    return this.request("CreateBPWhiteList", req, cb)
   }
 
   /**
@@ -48,13 +89,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 仿冒网址举报
+   * 删除白名单
    */
-  async CreateBPFakeURL(
-    req: CreateBPFakeURLRequest,
-    cb?: (error: string, rep: CreateBPFakeURLResponse) => void
-  ): Promise<CreateBPFakeURLResponse> {
-    return this.request("CreateBPFakeURL", req, cb)
+  async DeleteBPWhiteList(
+    req: DeleteBPWhiteListRequest,
+    cb?: (error: string, rep: DeleteBPWhiteListResponse) => void
+  ): Promise<DeleteBPWhiteListResponse> {
+    return this.request("DeleteBPWhiteList", req, cb)
   }
 
   /**
@@ -68,6 +109,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加品牌
+   */
+  async CreateBPBrand(
+    req: CreateBPBrandRequest,
+    cb?: (error: string, rep: CreateBPBrandResponse) => void
+  ): Promise<CreateBPBrandResponse> {
+    return this.request("CreateBPBrand", req, cb)
+  }
+
+  /**
+   * 查询品牌列表
+   */
+  async DescribeBPBrands(
+    req?: DescribeBPBrandsRequest,
+    cb?: (error: string, rep: DescribeBPBrandsResponse) => void
+  ): Promise<DescribeBPBrandsResponse> {
+    return this.request("DescribeBPBrands", req, cb)
+  }
+
+  /**
    * 批量仿冒应用举报
    */
   async CreateBPFakeAPPList(
@@ -75,5 +136,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBPFakeAPPListResponse) => void
   ): Promise<CreateBPFakeAPPListResponse> {
     return this.request("CreateBPFakeAPPList", req, cb)
+  }
+
+  /**
+   * 查询仿冒应用列表
+   */
+  async DescribeBPFakeAPPList(
+    req: DescribeBPFakeAPPListRequest,
+    cb?: (error: string, rep: DescribeBPFakeAPPListResponse) => void
+  ): Promise<DescribeBPFakeAPPListResponse> {
+    return this.request("DescribeBPFakeAPPList", req, cb)
+  }
+
+  /**
+   * 查询仿冒网址列表
+   */
+  async DescribeBPFakeURLs(
+    req: DescribeBPFakeURLsRequest,
+    cb?: (error: string, rep: DescribeBPFakeURLsResponse) => void
+  ): Promise<DescribeBPFakeURLsResponse> {
+    return this.request("DescribeBPFakeURLs", req, cb)
+  }
+
+  /**
+   * 仿冒网址举报
+   */
+  async CreateBPFakeURL(
+    req: CreateBPFakeURLRequest,
+    cb?: (error: string, rep: CreateBPFakeURLResponse) => void
+  ): Promise<CreateBPFakeURLResponse> {
+    return this.request("CreateBPFakeURL", req, cb)
   }
 }

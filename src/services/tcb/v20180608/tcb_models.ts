@@ -266,22 +266,22 @@ export interface DescribeEnvDealRegionResponse {
   /**
    * 下单region
    */
-  Region: string
+  Region?: string
 
   /**
    * 下单zone
    */
-  Zone: string
+  Zone?: string
 
   /**
    * 下单regionId
    */
-  RegionId: number
+  RegionId?: number
 
   /**
    * 下单zoneId
    */
-  ZoneId: number
+  ZoneId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1230,7 +1230,7 @@ export interface DescribeWxCloudBaseRunEnvsResponse {
   /**
    * env列表
    */
-  EnvList: Array<EnvInfo>
+  EnvList?: Array<EnvInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2042,6 +2042,16 @@ Activity：活动来源
    * 是否打开云调用
    */
   IsOpenCloudInvoke?: boolean
+
+  /**
+   * 创建来源：wechat | cloud
+   */
+  Source?: string
+
+  /**
+   * 渠道：wechat | cloud
+   */
+  Channel?: string
 }
 
 /**
@@ -2313,7 +2323,7 @@ export interface DescribeWxCloudBaseRunSubNetsResponse {
   /**
    * 子网Id列表
    */
-  SubNetIds: Array<string>
+  SubNetIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3189,12 +3199,12 @@ export interface CreateWxCloudBaseRunEnvResponse {
   /**
    * 环境Id
    */
-  EnvId: string
+  EnvId?: string
 
   /**
    * 后付费订单号
    */
-  TranId: string
+  TranId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4206,13 +4216,13 @@ export interface DescribeCloudBaseRunConfForGateWayResponse {
       * 最近更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LastUpTime: string
+  LastUpTime?: string
 
   /**
       * 配置信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: Array<CloudBaseRunForGatewayConf>
+  Data?: Array<CloudBaseRunForGatewayConf>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

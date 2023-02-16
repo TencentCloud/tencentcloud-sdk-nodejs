@@ -208,6 +208,16 @@ it("essbasic.v20210526.CreateChannelFlowEvidenceReport", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelUpdateSealStatus", async function () {
+    try {
+       const data = await client.ChannelUpdateSealStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelVerifyPdf", async function () {
     try {
        const data = await client.ChannelVerifyPdf({})

@@ -901,6 +901,12 @@ export interface ServiceVersionBrief {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateDate: string
+
+  /**
+      * 地域id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId?: string
 }
 
 /**
@@ -960,6 +966,18 @@ export interface LogConfigExtractRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UnMatchedKey?: string
+
+  /**
+      * tracking
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Backtracking?: string
+
+  /**
+      * 分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Delimiter?: string
 }
 
 /**
@@ -1828,6 +1846,18 @@ export interface TemServiceVersionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags?: Array<Tag>
+
+  /**
+      * 是否编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreStopEncoded?: string
+
+  /**
+      * 是否编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostStartEncoded?: string
 }
 
 /**
@@ -2527,6 +2557,12 @@ export interface TemEnvironmentStoppingStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StoppedApplicationNum?: number
+
+  /**
+      * 停止失败的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StopFailedApplicationNum?: number
 }
 
 /**
@@ -2912,6 +2948,12 @@ export interface TemEnvironmentStartingStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StartedApplicationNum?: number
+
+  /**
+      * 启动失败的应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartFailedApplicationNum?: number
 }
 
 /**

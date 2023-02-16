@@ -3351,6 +3351,23 @@ export interface StartBatchRollbackRequest {
     Instances: Array<RollbackInstancesInfo>;
 }
 /**
+ * OpenDBInstanceEncryption请求参数结构体
+ */
+export interface OpenDBInstanceEncryptionRequest {
+    /**
+      * 云数据库实例 ID。
+      */
+    InstanceId: string;
+    /**
+      * 用户自定义密钥ID，CMK唯一标识符。该值为空时，将使用腾讯云自动生成的密钥KMS-CDB。
+      */
+    KeyId?: string;
+    /**
+      * 用户自定义密钥的存储地域。如：ap-guangzhou 。KeyId不为空时，该参数必填。
+      */
+    KeyRegion?: string;
+}
+/**
  * DescribeDBInstanceCharset请求参数结构体
  */
 export interface DescribeDBInstanceCharsetRequest {
@@ -7482,6 +7499,15 @@ export interface OpenDBInstanceGTIDRequest {
       * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
     InstanceId: string;
+}
+/**
+ * OpenDBInstanceEncryption返回参数结构体
+ */
+export interface OpenDBInstanceEncryptionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 各地域可售卖的规格配置

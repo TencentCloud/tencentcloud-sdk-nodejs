@@ -5634,6 +5634,10 @@ export interface CreateBandwidthPackageRequest {
       * 带宽包协议类型。当前支持'ipv4'和'ipv6'协议带宽包，默认值是'ipv4'。
       */
     Protocol?: string;
+    /**
+      * 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。
+      */
+    TimeSpan?: number;
 }
 /**
  * DescribeIp6Addresses返回参数结构体
@@ -11322,11 +11326,11 @@ export interface CreateBandwidthPackageResponse {
     /**
       * 带宽包唯一ID。
       */
-    BandwidthPackageId: string;
+    BandwidthPackageId?: string;
     /**
       * 带宽包唯一ID列表(申请数量大于1时有效)。
       */
-    BandwidthPackageIds: Array<string>;
+    BandwidthPackageIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

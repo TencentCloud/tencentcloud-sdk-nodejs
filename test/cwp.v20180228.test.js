@@ -1008,9 +1008,9 @@ it("cwp.v20180228.UpdateBaselineStrategy", async function () {
     }
 })
 
-it("cwp.v20180228.ScanVulSetting", async function () {
+it("cwp.v20180228.ModifyMachineRemark", async function () {
     try {
-       const data = await client.ScanVulSetting({})
+       const data = await client.ModifyMachineRemark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1631,6 +1631,16 @@ it("cwp.v20180228.DescribeBruteAttackRules", async function () {
 it("cwp.v20180228.ModifyLicenseBinds", async function () {
     try {
        const data = await client.ModifyLicenseBinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ScanVulSetting", async function () {
+    try {
+       const data = await client.ScanVulSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -176,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateChannelFlowEvidenceReport", req, cb);
     }
     /**
+     * 本接口（ChannelUpdateSealStatus）由于渠道版更新印章状态
+     */
+    async ChannelUpdateSealStatus(req, cb) {
+        return this.request("ChannelUpdateSealStatus", req, cb);
+    }
+    /**
      * 合同文件验签
      */
     async ChannelVerifyPdf(req, cb) {

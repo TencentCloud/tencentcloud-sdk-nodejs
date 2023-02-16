@@ -3315,6 +3315,36 @@ export interface ChannelBatchCancelFlowsRequest {
 }
 
 /**
+ * ChannelUpdateSealStatus请求参数结构体
+ */
+export interface ChannelUpdateSealStatusRequest {
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+   */
+  Agent: Agent
+
+  /**
+   * 操作的印章状态，DISABLE-停用印章
+   */
+  Status: string
+
+  /**
+   * 印章ID
+   */
+  SealId: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+
+  /**
+   * 更新印章状态原因说明
+   */
+  Reason?: string
+}
+
+/**
  * 一码多扫签署二维码签署信息
  */
 export interface SignUrl {
@@ -3760,6 +3790,16 @@ export interface DescribeChannelFlowEvidenceReportResponse {
       */
   Status: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ChannelUpdateSealStatus返回参数结构体
+ */
+export interface ChannelUpdateSealStatusResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

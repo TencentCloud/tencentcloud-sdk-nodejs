@@ -2312,7 +2312,7 @@ export interface CreateGrafanaNotificationChannelResponse {
       * 通道 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelId: string;
+    ChannelId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3475,7 +3475,7 @@ export interface DescribeGrafanaWhiteListResponse {
     /**
       * 数组
       */
-    WhiteList: Array<string>;
+    WhiteList?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4113,7 +4113,7 @@ export interface DescribeGrafanaNotificationChannelsResponse {
     /**
       * 告警通道数组
       */
-    NotificationChannelSet: Array<GrafanaNotificationChannel>;
+    NotificationChannelSet?: Array<GrafanaNotificationChannel>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4213,7 +4213,7 @@ export interface DescribeDNSConfigResponse {
     /**
       * DNS 服务器数组
       */
-    NameServers: Array<string>;
+    NameServers?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

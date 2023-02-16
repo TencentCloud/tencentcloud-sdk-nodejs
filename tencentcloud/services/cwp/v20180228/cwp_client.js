@@ -622,10 +622,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateBaselineStrategy", req, cb);
     }
     /**
-     * 定期扫描漏洞设置
+     * 修改主机备注信息
      */
-    async ScanVulSetting(req, cb) {
-        return this.request("ScanVulSetting", req, cb);
+    async ModifyMachineRemark(req, cb) {
+        return this.request("ModifyMachineRemark", req, cb);
     }
     /**
      * 本接口 (DescribeAccountStatistics) 用于获取帐号统计列表数据。
@@ -1001,6 +1001,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyLicenseBinds(req, cb) {
         return this.request("ModifyLicenseBinds", req, cb);
+    }
+    /**
+     * 定期扫描漏洞设置
+     */
+    async ScanVulSetting(req, cb) {
+        return this.request("ScanVulSetting", req, cb);
     }
     /**
      * 查询资产管理环境变量列表

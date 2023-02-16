@@ -881,21 +881,21 @@ export interface SentenceRecognitionResponse {
     /**
       * 识别结果。
       */
-    Result: string;
+    Result?: string;
     /**
       * 请求的音频时长，单位为ms
       */
-    AudioDuration: number;
+    AudioDuration?: number;
     /**
       * 词时间戳列表的长度
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WordSize: number;
+    WordSize?: number;
     /**
       * 词时间戳列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WordList: Array<SentenceWord>;
+    WordList?: Array<SentenceWord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

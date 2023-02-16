@@ -1181,6 +1181,18 @@ export interface MemberRecord {
       * 奖励次数。
       */
     Rewords: number;
+    /**
+      * 用户IP。
+      */
+    IPAddress?: string;
+    /**
+      * 用户位置信息。
+      */
+    Location?: string;
+    /**
+      * 用户设备平台信息。0:unknown  1:windows  2:mac  3:android  4:ios  5:web   6:h5   7:miniprogram （小程序）
+      */
+    Device?: number;
 }
 /**
  * ModifyApp请求参数结构体

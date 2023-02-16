@@ -1381,6 +1381,15 @@ export interface FunctionInfo {
     FunctionQualifierType?: string;
 }
 /**
+ * ModifyFunctionTargets返回参数结构体
+ */
+export interface ModifyFunctionTargetsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeLoadBalancerListByCertId返回参数结构体
  */
 export interface DescribeLoadBalancerListByCertIdResponse {
@@ -4377,6 +4386,35 @@ export interface CreateLoadBalancerResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyFunctionTargets请求参数结构体
+ */
+export interface ModifyFunctionTargetsRequest {
+    /**
+      * 负载均衡实例ID。
+      */
+    LoadBalancerId: string;
+    /**
+      * 负载均衡监听器ID。
+      */
+    ListenerId: string;
+    /**
+      * 要修改的后端云函数服务列表。
+      */
+    FunctionTargets: Array<FunctionTarget>;
+    /**
+      * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+      */
+    LocationId?: string;
+    /**
+      * 目标规则的域名，提供LocationId参数时本参数不生效。
+      */
+    Domain?: string;
+    /**
+      * 目标规则的URL，提供LocationId参数时本参数不生效。
+      */
+    Url?: string;
 }
 /**
  * DescribeRewrite返回参数结构体

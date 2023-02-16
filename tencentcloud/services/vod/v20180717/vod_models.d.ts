@@ -829,6 +829,56 @@ export interface MediaSnapshotByTimeOffsetItem {
     PicInfoSet: Array<MediaSnapshotByTimePicInfoItem>;
 }
 /**
+ * 画质重生目标参数
+ */
+export interface RebuildMediaTargetInfo {
+    /**
+      * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+      */
+    MediaName?: string;
+    /**
+      * 描述信息，最长 128 个字符。缺省描述信息为空。
+      */
+    Description?: string;
+    /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+      */
+    ClassId?: number;
+    /**
+      * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ExpireTime?: string;
+    /**
+      * 输出文件封装格式，可选值：mp4、flv、hls。默认mp4。
+      */
+    Container?: string;
+    /**
+      * 输出的视频信息。
+      */
+    VideoStream?: RebuildMediaTargetVideoStream;
+    /**
+      * 输出的音频信息。
+      */
+    AudioStream?: RebuildMediaTargetAudioStream;
+    /**
+      * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+
+默认值：0。
+      */
+    RemoveVideo?: number;
+    /**
+      * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+
+默认值：0。
+      */
+    RemoveAudio?: number;
+}
+/**
  * ModifySampleSnapshotTemplate请求参数结构体
  */
 export interface ModifySampleSnapshotTemplateRequest {
@@ -1471,6 +1521,31 @@ export interface ComposeMediaResponse {
     RequestId?: string;
 }
 /**
+ * 轮播任务信息
+ */
+export interface RoundPlayInfo {
+    /**
+      * 轮播播单标识。
+      */
+    RoundPlayId: string;
+    /**
+      * 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    StartTime: string;
+    /**
+      * 轮播列表。
+      */
+    RoundPlaylist: Array<RoundPlayListItemInfo>;
+    /**
+      * 轮播播单名称，长度限制：64 个字符。
+      */
+    Name: string;
+    /**
+      * 轮播播单描述信息，长度限制：256 个字符。
+      */
+    Desc: string;
+}
+/**
  * DescribeLicenseUsageData返回参数结构体
  */
 export interface DescribeLicenseUsageDataResponse {
@@ -1500,17 +1575,15 @@ EncryptedKey 字符串的长度为8~40个字节，不能包含不可见字符。
     EncryptedKey?: string;
 }
 /**
- * DeleteSampleSnapshotTemplate请求参数结构体
+ * 智能分类任务控制参数
  */
-export interface DeleteSampleSnapshotTemplateRequest {
+export interface ClassificationConfigureInfo {
     /**
-      * 采样截图模板唯一标识。
+      * 智能分类任务开关，可选值：
+<li>ON：开启智能分类任务；</li>
+<li>OFF：关闭智能分类任务。</li>
       */
-    Definition: number;
-    /**
-      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
-      */
-    SubAppId?: number;
+    Switch: string;
 }
 /**
  * DescribeStorageData返回参数结构体
@@ -2599,6 +2672,22 @@ export interface TagConfigureInfo {
     Switch: string;
 }
 /**
+ * 细节增强控制
+ */
+export interface SharpEnhanceInfo {
+    /**
+      * 细节增强控制开关，可选值：
+<li>ON：开启细节增强；</li>
+<li>OFF：关闭细节增强。</li>
+      */
+    Switch: string;
+    /**
+      * 细节增强强度，仅当细节增强控制开关为 ON 时有效，取值范围：0.0~1.0。
+默认：0.0。
+      */
+    Intensity?: number;
+}
+/**
  * ModifySuperPlayerConfig返回参数结构体
  */
 export interface ModifySuperPlayerConfigResponse {
@@ -3634,6 +3723,25 @@ export interface ProductInstance {
     RenewStatus: string;
 }
 /**
+ * 画质修复控制参数
+ */
+export interface RepairInfo {
+    /**
+      * 画质修复控制开关，可选值：
+<li>ON：开启画质修复；</li>
+<li>OFF：关闭画质修复。</li>
+      */
+    Switch: string;
+    /**
+      * 画质修复类型，仅当画质修复控制开关为 ON 时有效，可选值：
+<li>weak：轻画质修复；</li>
+<li>normal：正常画质修复；</li>
+<li>strong：强画质修复。</li>
+默认值：weak。
+      */
+    Type?: string;
+}
+/**
  * CDN 日志信息
  */
 export interface CdnLogInfo {
@@ -3658,6 +3766,44 @@ export interface CdnLogInfo {
       * 日志结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
       */
     EndTime: string;
+}
+/**
+ * 降码率任务转码结果类型
+ */
+export interface ReduceMediaBitrateTranscodeResult {
+    /**
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      */
+    Status: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 转码任务的输入。
+      */
+    Input: TranscodeTaskInput;
+    /**
+      * 转码任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: MediaTranscodeItem;
+    /**
+      * 转码进度，取值范围 [0-100] 。
+      */
+    Progress: number;
+    /**
+      * 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime: string;
+    /**
+      * 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime: string;
 }
 /**
  * 简单加密加解密密钥对。
@@ -3840,6 +3986,30 @@ export interface DeleteRoundPlayRequest {
       * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
+}
+/**
+ * 画面超分控制参数
+ */
+export interface SuperResolutionInfo {
+    /**
+      * 画面超分控制开关，可选值：
+<li>ON：开启画面超分；</li>
+<li>OFF：关闭画面超分。</li>
+当开启画面超分时，默认2倍超分。
+      */
+    Switch: string;
+    /**
+      * 画面超分类型，仅当画面超分控制开关为 ON 时有效，可选值：
+<li>lq：针对低清晰度有较多噪声视频的超分；</li>
+<li>hq：针对高清晰度视频超分。</li>
+默认值：lq。
+      */
+    Type?: string;
+    /**
+      * 超分倍数，可选值：2。
+默认值：2。
+      */
+    Size?: number;
 }
 /**
  * 点播文件雪碧图信息
@@ -4354,6 +4524,25 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
     TextSet: Array<AiRecognitionTaskOcrFullTextSegmentTextItem>;
 }
 /**
+ * 色彩增强控制参数
+ */
+export interface ColorEnhanceInfo {
+    /**
+      * 色彩增强控制开关，可选值：
+<li>ON：开启综合增强；</li>
+<li>OFF：关闭综合增强。</li>
+      */
+    Switch: string;
+    /**
+      * 色彩增强类型，仅当色彩增强控制开关为 ON 时有效，可选值：
+<li>weak：轻色彩增强；</li>
+<li>normal：正常色彩增强；</li>
+<li>strong：强色彩增强。</li>
+默认值：weak。
+      */
+    Type?: string;
+}
+/**
  * 编辑视频的结果文件输出。
  */
 export interface EditMediaOutputConfig {
@@ -4488,6 +4677,21 @@ export interface DeleteAIAnalysisTemplateRequest {
     SubAppId?: number;
 }
 /**
+ * 智能插帧控制参数
+ */
+export interface VideoFrameInterpolationInfo {
+    /**
+      * 智能插帧控制开关，可选值：
+<li>ON：开启智能插帧；</li>
+<li>OFF：关闭智能插帧。</li>
+      */
+    Switch: string;
+    /**
+      * 智能插帧帧率，帧率范围为 (0, 60]，仅当智能插帧控制开关为 ON 时有效。默认跟源文件帧率一致。
+      */
+    Fps?: number;
+}
+/**
  * EditMedia请求参数结构体
  */
 export interface EditMediaRequest {
@@ -4565,51 +4769,51 @@ export interface LicenseUsageDataItem {
     Count: number;
 }
 /**
- * 图片审核片段。
+ * 画质重生输出的音频信息
  */
-export interface ReviewImageSegmentItem {
+export interface RebuildMediaTargetAudioStream {
     /**
-      * 嫌疑片段涉及令人反感的信息的分数。
+      * 音频流的编码格式。
+当外层参数 Container 为 mp3 时，可选值为：
+<li>libmp3lame。</li>
+当外层参数 Container 为 ogg 或 flac 时，可选值为：
+<li>flac。</li>
+当外层参数 Container 为 m4a 时，可选值为：
+<li>libfdk_aac；</li>
+<li>libmp3lame；</li>
+<li>ac3。</li>
+当外层参数 Container 为 mp4 或 flv 时，可选值为：
+<li>libfdk_aac：更适合 mp4；</li>
+<li>libmp3lame：更适合 flv；</li>
+<li>mp2。</li>
+当外层参数 Container 为 hls 时，可选值为：
+<li>libfdk_aac。</li>
       */
-    Confidence?: number;
+    Codec?: string;
     /**
-      * 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：
-<li>review：疑似违规，建议复审；</li>
-<li>block：确认违规，建议封禁。</li>
+      * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
+当取值为 0，表示音频码率和原始音频保持一致。
       */
-    Suggestion?: string;
+    Bitrate?: number;
     /**
-      * 嫌疑片段最可能的违规的标签，取值范围：
-<li>Porn：色情；</li>
-<li>Terror：暴力；</li>
-<li>Polity：不适宜的信息；</li>
-<li>Ad：广告；</li>
-<li>Illegal：违法；</li>
-<li>Abuse：谩骂。</li>
+      * 音频流的采样率，可选值：
+<li>32000</li>
+<li>44100</li>
+<li>48000</li>
+
+单位：Hz。
       */
-    Label?: string;
+    SampleRate?: number;
     /**
-      * 违规子标签。
+      * 音频通道方式，可选值：
+<li>1：单通道</li>
+<li>2：双通道</li>
+<li>6：立体声</li>
+
+当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
+默认值：2。
       */
-    SubLabel?: string;
-    /**
-      * 嫌疑片段违禁的形式，取值范围：
-<li>Image：画面上的人物或图标；</li>
-<li>OCR：画面上的文字。</li>
-      */
-    Form?: string;
-    /**
-      * 嫌疑人物、图标或文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-      */
-    AreaCoordSet?: Array<number>;
-    /**
-      * 当 Form 为 OCR 时有效，表示识别出来的 OCR 文本内容。
-      */
-    Text?: string;
-    /**
-      * 当 Form 为 OCR 时有效，表示嫌疑片段命中的违规关键词列表。
-      */
-    KeywordSet?: Array<string>;
+    AudioChannel?: number;
 }
 /**
  * 视频拼接源文件信息（2017 版）
@@ -5590,29 +5794,22 @@ export interface DescribeWatermarkTemplatesRequest {
     Limit?: number;
 }
 /**
- * 轮播任务信息
+ * 去伪影（毛刺）控制信息
  */
-export interface RoundPlayInfo {
+export interface ArtifactRepairInfo {
     /**
-      * 轮播播单标识。
+      * 去伪影（毛刺）控制开关，可选值：
+<li>ON：开启去伪影（毛刺）；</li>
+<li>OFF：关闭去伪影（毛刺）。</li>
       */
-    RoundPlayId: string;
+    Switch: string;
     /**
-      * 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      * 去伪影（毛刺）类型，仅当去伪影（毛刺）控制开关为 ON 时有效，可选值：
+<li>weak：轻去伪影（毛刺）；</li>
+<li>strong：强去伪影（毛刺）。</li>
+默认值：weak。
       */
-    StartTime: string;
-    /**
-      * 轮播列表。
-      */
-    RoundPlaylist: Array<RoundPlayListItemInfo>;
-    /**
-      * 轮播播单名称，长度限制：64 个字符。
-      */
-    Name: string;
-    /**
-      * 轮播播单描述信息，长度限制：256 个字符。
-      */
-    Desc: string;
+    Type?: string;
 }
 /**
  * 对视频截图做封面任务输入参数类型
@@ -5649,6 +5846,75 @@ export interface SegmentConfigureInfoForUpdate {
 <li>OFF：关闭智能视频拆条识别任务。</li>
       */
     Switch?: string;
+}
+/**
+ * 音画质重生任务的输入。
+ */
+export interface RebuildMediaTaskInput {
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+    /**
+      * 起始偏移时间，单位：秒，不填表示从视频开始截取。
+      */
+    StartTimeOffset: number;
+    /**
+      * 结束偏移时间，单位：秒，不填表示截取到视频末尾。
+      */
+    EndTimeOffset: number;
+    /**
+      * 画质修复控制参数。
+      */
+    RepairInfo: RepairInfo;
+    /**
+      * 智能插帧控制参数。
+      */
+    VideoFrameInterpolationInfo: VideoFrameInterpolationInfo;
+    /**
+      * 画面超分控制参数。
+      */
+    SuperResolutionInfo: SuperResolutionInfo;
+    /**
+      * 高动态范围类型控制参数。
+      */
+    HDRInfo?: HDRInfo;
+    /**
+      * 视频降噪控制参数。
+      */
+    VideoDenoiseInfo?: VideoDenoiseInfo;
+    /**
+      * 音频降噪控制参数。
+      */
+    AudioDenoiseInfo?: AudioDenoiseInfo;
+    /**
+      * 色彩增强控制参数。
+      */
+    ColorInfo?: ColorEnhanceInfo;
+    /**
+      * 细节增强控制参数。
+      */
+    SharpInfo?: SharpEnhanceInfo;
+    /**
+      * 人脸增强控制参数。
+      */
+    FaceInfo?: FaceEnhanceInfo;
+    /**
+      * 低光照控制参数。
+      */
+    LowLightInfo?: LowLightEnhanceInfo;
+    /**
+      * 去划痕控制参数。
+      */
+    ScratchRepairInfo?: ScratchRepairInfo;
+    /**
+      * 去伪影（毛刺）控制参数。
+      */
+    ArtifactRepairInfo?: ArtifactRepairInfo;
+    /**
+      * 音画质重生输出目标参数。
+      */
+    TargetInfo?: RebuildMediaTargetInfo;
 }
 /**
  * 用户自定义音视频审核任务控制参数
@@ -6176,6 +6442,53 @@ export interface AiAnalysisTaskHighlightOutput {
     HighlightSetFileUrlExpireTime: string;
 }
 /**
+ * 图片审核片段。
+ */
+export interface ReviewImageSegmentItem {
+    /**
+      * 嫌疑片段涉及令人反感的信息的分数。
+      */
+    Confidence?: number;
+    /**
+      * 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：
+<li>review：疑似违规，建议复审；</li>
+<li>block：确认违规，建议封禁。</li>
+      */
+    Suggestion?: string;
+    /**
+      * 嫌疑片段最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴力；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Abuse：谩骂。</li>
+      */
+    Label?: string;
+    /**
+      * 违规子标签。
+      */
+    SubLabel?: string;
+    /**
+      * 嫌疑片段违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字。</li>
+      */
+    Form?: string;
+    /**
+      * 嫌疑人物、图标或文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      */
+    AreaCoordSet?: Array<number>;
+    /**
+      * 当 Form 为 OCR 时有效，表示识别出来的 OCR 文本内容。
+      */
+    Text?: string;
+    /**
+      * 当 Form 为 OCR 时有效，表示嫌疑片段命中的违规关键词列表。
+      */
+    KeywordSet?: Array<string>;
+}
+/**
  * CreateRoundPlay返回参数结构体
  */
 export interface CreateRoundPlayResponse {
@@ -6271,6 +6584,22 @@ export interface ProcessMediaRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
+}
+/**
+ * 人脸增强控制
+ */
+export interface FaceEnhanceInfo {
+    /**
+      * 人脸增强控制开关，可选值：
+<li>ON：开启人脸增强；</li>
+<li>OFF：关闭人脸增强。</li>
+      */
+    Switch: string;
+    /**
+      * 人脸增强强度，仅当人脸增强控制开关为 ON 时有效，取值范围：0.0~1.0。
+默认：0.0。
+      */
+    Intensity?: number;
 }
 /**
  * 图片画面审核涉及令人反感的信息的任务结果类型
@@ -7222,6 +7551,23 @@ export interface DeleteImageSpriteTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 低光照增强控制
+ */
+export interface LowLightEnhanceInfo {
+    /**
+      * 低光照增强控制开关，可选值：
+<li>ON：开启低光照增强；</li>
+<li>OFF：关闭低光照增强。</li>
+      */
+    Switch: string;
+    /**
+      * 低光照增强类型，仅当低光照增强控制开关为 ON 时有效，可选值：
+<li>normal：正常低光照增强；</li>
+默认值：normal。
+      */
+    Type?: string;
 }
 /**
  * DescribeContentReviewTemplates返回参数结构体
@@ -9120,15 +9466,17 @@ export interface CreateAdaptiveDynamicStreamingTemplateResponse {
     RequestId?: string;
 }
 /**
- * 智能分类任务控制参数
+ * DeleteSampleSnapshotTemplate请求参数结构体
  */
-export interface ClassificationConfigureInfo {
+export interface DeleteSampleSnapshotTemplateRequest {
     /**
-      * 智能分类任务开关，可选值：
-<li>ON：开启智能分类任务；</li>
-<li>OFF：关闭智能分类任务。</li>
+      * 采样截图模板唯一标识。
       */
-    Switch: string;
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
 }
 /**
  * AI 视频智能分析输入参数类型
@@ -9281,6 +9629,28 @@ export interface SegmentConfigureInfo {
 <li>OFF：关闭智能视频拆条识别任务。</li>
       */
     Switch: string;
+}
+/**
+ * 去划痕控制信息
+ */
+export interface ScratchRepairInfo {
+    /**
+      * 去划痕控制开关，可选值：
+<li>ON：开启去划痕；</li>
+<li>OFF：关闭去划痕。</li>
+      */
+    Switch: string;
+    /**
+      * 去划痕强度，仅当去划痕控制开关为 ON 时有效，取值范围：0.0~1.0。
+默认：0.0。
+      */
+    Intensity?: number;
+    /**
+      * 去划痕类型，仅当去划痕控制开关为 ON 时有效，可选值：
+<li>normal：正常去划痕；</li>
+默认值：normal。
+      */
+    Type?: string;
 }
 /**
  * 文件删除结果信息
@@ -9689,6 +10059,69 @@ export interface ProcessMediaByProcedureRequest {
       * 保留字段，特殊用途时使用。
       */
     ExtInfo?: string;
+}
+/**
+ * 画质重生输出的视频信息
+ */
+export interface RebuildMediaTargetVideoStream {
+    /**
+      * 视频流的编码格式，可选值：
+<li>libx264：H.264 编码；</li>
+<li>libx265：H.265 编码；</li>
+<li>av1：AOMedia Video 1 编码。</li>
+默认视频流的编码格式为 H.264 编码。
+      */
+    Codec?: string;
+    /**
+      * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+当取值为 0，表示视频码率和原始视频保持一致。
+      */
+    Bitrate?: number;
+    /**
+      * 视频帧率，取值范围：[0, 100]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
+      */
+    Fps?: number;
+    /**
+      * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+
+默认值：open。
+      */
+    ResolutionAdaptive?: string;
+    /**
+      * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+
+默认值：0。
+      */
+    Width?: number;
+    /**
+      * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+
+默认值：0。
+      */
+    Height?: number;
+    /**
+      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li>stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+
+默认值：stretch 。
+      */
+    FillType?: string;
+    /**
+      * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
+当填 0 或不填时，系统将自动设置 gop 长度。
+      */
+    Gop?: number;
 }
 /**
  * 视频剪辑任务信息，该结构仅用于对 2017 版[视频剪辑](https://cloud.tencent.com/document/product/266/10156)接口发起的任务。
@@ -10799,13 +11232,14 @@ export interface EventContent {
 <li>NewFileUpload：视频上传完成；</li>
 <li>ProcedureStateChanged：任务流状态变更；</li>
 <li>FileDeleted：视频删除完成；</li>
+<li>RestoreMediaComplete：视频取回完成；</li>
 <li>PullComplete：视频转拉完成；</li>
 <li>EditMediaComplete：视频编辑完成；</li>
 <li>SplitMediaComplete：视频拆分完成；</li>
-<li>WechatPublishComplete：微信发布完成；</li>
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
-<li>FastClipMediaComplete：快速剪辑完成；</li>
+<li>RemoveWatermark：智能去除水印完成。</li>
+<li>RebuildMediaComplete：音画质重生完成事件。</li>
 <li>ReviewAudioVideoComplete：音视频审核完成；</li>
 <li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
 <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
@@ -10843,7 +11277,7 @@ export interface EventContent {
       */
     EditMediaCompleteEvent: EditMediaTask;
     /**
-      * 视频拆条完成事件，当事件类型为 SplitMediaComplete 时有效。
+      * 视频拆分完成事件，当事件类型为 SplitMediaComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SplitMediaCompleteEvent: SplitMediaTask;
@@ -10888,17 +11322,22 @@ export interface EventContent {
       */
     WechatMiniProgramPublishCompleteEvent: WechatMiniProgramPublishTask;
     /**
-      * 智能去除水印任务完成事件，当事件类型为 RemoveWatermark 有效。
+      * 智能去除水印完成事件，当事件类型为 RemoveWatermark 有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RemoveWatermarkCompleteEvent: RemoveWatermarkTask;
     /**
-      * 视频取回完成事件，当事件类型为RestoreMediaComplete 时有效。
+      * 视频取回完成事件，当事件类型为 RestoreMediaComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RestoreMediaCompleteEvent: RestoreMediaTask;
     /**
-      * 溯源水印提取完成事件，当事件类型为ExtractTraceWatermarkComplete 时有效。
+      * 音画质重生完成事件，当事件类型为 RebuildMediaComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RebuildMediaCompleteEvent: RebuildMediaTask;
+    /**
+      * 溯源水印提取完成事件，当事件类型为 ExtractTraceWatermarkComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtractTraceWatermarkCompleteEvent: ExtractTraceWatermarkTask;
@@ -12172,6 +12611,36 @@ export interface AiRecognitionTaskAsrWordsResultItem {
     SegmentSet: Array<AiRecognitionTaskAsrWordsSegmentItem>;
 }
 /**
+ * 音画质重生任务输出
+ */
+export interface RebuildMediaTaskOutput {
+    /**
+      * 文件类型，例如 mp4、flv 等。
+      */
+    FileType: string;
+    /**
+      * 媒体文件播放地址。
+      */
+    FileUrl: string;
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+    /**
+      * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+      */
+    MediaName: string;
+    /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+      */
+    ClassId: number;
+    /**
+      * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ExpireTime: string;
+}
+/**
  * 智能标签结果信息
  */
 export interface MediaAiAnalysisTagItem {
@@ -13263,6 +13732,25 @@ export interface CreateTranscodeTemplateResponse {
     RequestId?: string;
 }
 /**
+ * 音频降噪控制信息
+ */
+export interface AudioDenoiseInfo {
+    /**
+      * 音频降噪控制开关，可选值：
+<li>ON：开启音频降噪；</li>
+<li>OFF：关闭音频降噪。</li>
+      */
+    Switch: string;
+    /**
+      * 音频降噪类型，仅当音频降噪控制开关为 ON 时有效，可选值：
+<li>weak：轻音频降噪；</li>
+<li>normal：正常音频降噪；</li>
+<li>strong：强音频降噪。</li>
+默认值：weak。
+      */
+    Type?: string;
+}
+/**
  * 语音关键词识别输入。
  */
 export interface AiRecognitionTaskAsrWordsResultInput {
@@ -14143,6 +14631,63 @@ export interface ExecuteFunctionRequest {
     ExtInfo?: string;
 }
 /**
+ * 音画质重生任务
+ */
+export interface RebuildMediaTask {
+    /**
+      * 任务 ID。
+      */
+    TaskId: string;
+    /**
+      * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+    Status: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 音画质重生任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
+    /**
+      * 音画质重生任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Input: RebuildMediaTaskInput;
+    /**
+      * 音画质重生任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: RebuildMediaTaskOutput;
+    /**
+      * 音画质重生输出视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetaData: MediaMetaData;
+    /**
+      * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId: string;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext: string;
+}
+/**
  * ConfirmEvents返回参数结构体
  */
 export interface ConfirmEventsResponse {
@@ -14240,6 +14785,24 @@ export interface VideoTrackItem {
       * 对图像进行的操作，如图像旋转等。
       */
     ImageOperations?: Array<ImageTransform>;
+}
+/**
+ * 视频降噪控制参数
+ */
+export interface VideoDenoiseInfo {
+    /**
+      * 视频降噪控制开关，可选值：
+<li>ON：开启视频降噪；</li>
+<li>OFF：关闭视频降噪。</li>
+      */
+    Switch: string;
+    /**
+      * 视频降噪类型，仅当视频降噪控制开关为 ON 时有效，可选值：
+<li>weak：轻视频降噪；</li>
+<li>strong：强视频降噪。</li>
+默认值：weak。
+      */
+    Type?: string;
 }
 /**
  * DescribeLicenseUsageData请求参数结构体
@@ -16171,42 +16734,25 @@ export interface DescribeAIRecognitionTemplatesRequest {
     Limit?: number;
 }
 /**
- * 降码率任务转码结果类型
+ * 高动态范围类型控制参数。
  */
-export interface ReduceMediaBitrateTranscodeResult {
+export interface HDRInfo {
     /**
-      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      * 高动态范围类型控制开关，可选值：
+<li>ON：开启高动态范围类型转换；</li>
+<li>OFF：关闭高动态范围类型转换。</li>
       */
-    Status: string;
+    Switch: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 高动态范围类型，可选值：
+<li>hdr10：表示 hdr10 标准；</li>
+<li>hlg：表示 hlg 标准。</li>
+
+注意：
+<li> 仅当高动态范围类型控制开关为 ON 时有效；</li>
+<li>当画质重生目标参数中指定视频输出参数的视频流编码格式 Codec 为 libx265 时有效。</li>
       */
-    ErrCodeExt: string;
-    /**
-      * 错误信息。
-      */
-    Message: string;
-    /**
-      * 转码任务的输入。
-      */
-    Input: TranscodeTaskInput;
-    /**
-      * 转码任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Output: MediaTranscodeItem;
-    /**
-      * 转码进度，取值范围 [0-100] 。
-      */
-    Progress: number;
-    /**
-      * 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    BeginProcessTime: string;
-    /**
-      * 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    FinishTime: string;
+    Type?: string;
 }
 /**
  * 视频编辑极速高清参数配置。

@@ -6742,6 +6742,10 @@ export interface AddInstancesRequest {
       * 云主机导入方式，虚拟机集群必填，容器集群不填写此字段，R：重装TSF系统镜像，M：手动安装agent
       */
     InstanceImportMode?: string;
+    /**
+      * 安全组id
+      */
+    SecurityGroupIds?: string;
 }
 /**
  * 微服务网关插件实例对象

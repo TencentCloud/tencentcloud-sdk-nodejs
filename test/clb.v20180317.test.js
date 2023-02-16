@@ -218,9 +218,9 @@ it("clb.v20180317.DeleteLoadBalancerListeners", async function () {
     }
 })
 
-it("clb.v20180317.SetLoadBalancerSecurityGroups", async function () {
+it("clb.v20180317.ModifyFunctionTargets", async function () {
     try {
-       const data = await client.SetLoadBalancerSecurityGroups({})
+       const data = await client.ModifyFunctionTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,6 +481,16 @@ it("clb.v20180317.ModifyRule", async function () {
 it("clb.v20180317.DescribeClsLogSet", async function () {
     try {
        const data = await client.DescribeClsLogSet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.SetLoadBalancerSecurityGroups", async function () {
+    try {
+       const data = await client.SetLoadBalancerSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

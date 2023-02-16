@@ -288,6 +288,16 @@ it("cdb.v20170320.DescribeAuditPolicies", async function () {
     }
 })
 
+it("cdb.v20170320.OpenDBInstanceEncryption", async function () {
+    try {
+       const data = await client.OpenDBInstanceEncryption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeTagsOfInstanceIds", async function () {
     try {
        const data = await client.DescribeTagsOfInstanceIds({})
