@@ -438,6 +438,16 @@ it("cynosdb.v20190107.DescribeBackupDownloadUrl", async function () {
     }
 })
 
+it("cynosdb.v20190107.SwitchClusterVpc", async function () {
+    try {
+       const data = await client.SwitchClusterVpc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})

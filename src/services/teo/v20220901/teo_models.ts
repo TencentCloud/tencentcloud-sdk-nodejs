@@ -2340,6 +2340,14 @@ export interface Zone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AliasZoneName: string
+
+  /**
+      * 是否伪站点，取值有：
+<li> 0：非伪站点；</li>
+<li> 1：伪站点。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsFake: number
 }
 
 /**

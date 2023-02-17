@@ -478,6 +478,16 @@ it("vod.v20180717.CreateContentReviewTemplate", async function () {
     }
 })
 
+it("vod.v20180717.RebuildMedia", async function () {
+    try {
+       const data = await client.RebuildMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateSampleSnapshotTemplate", async function () {
     try {
        const data = await client.CreateSampleSnapshotTemplate({})

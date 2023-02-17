@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaTicketData", req, cb);
     }
     /**
+     * 查询全部验证的统计数据，包括：总请求量、总验证量、总验证通过量、总验证拦截量等数据。
+     */
+    async GetTotalRequestStatistics(req, cb) {
+        return this.request("GetTotalRequestStatistics", req, cb);
+    }
+    /**
      * 安全验证码查询请求数据概况，例如：按照时间段查询数据  昨日请求量、昨日恶意比例、昨日验证量、昨日通过量、昨日恶意拦截量……
      */
     async DescribeCaptchaDataSum(req, cb) {
@@ -104,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCaptchaUserAllAppId(req, cb) {
         return this.request("DescribeCaptchaUserAllAppId", req, cb);
+    }
+    /**
+     * 查询单个CaptchaAppID验证的统计数据，包括：请求量、验证量、验证通过量、验证拦截量。
+     */
+    async GetRequestStatistics(req, cb) {
+        return this.request("GetRequestStatistics", req, cb);
     }
     /**
      * 查询安全验证码应用APPId信息

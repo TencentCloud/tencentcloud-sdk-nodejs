@@ -24,7 +24,8 @@ import {
   DescribeCaptchaMiniOperDataResponse,
   GetTotalTicketStatisticsRequest,
   DescribeCaptchaMiniDataSumResponse,
-  UpdateCaptchaAppIdInfoRequest,
+  GetRequestStatisticsResponse,
+  GetRequestStatisticsRequest,
   OutputManageMarketingRiskValue,
   CaptchaOperDataRes,
   GetTicketStatisticsRequest,
@@ -47,12 +48,15 @@ import {
   DescribeCaptchaDataSumRequest,
   DescribeCaptchaMiniRiskResultResponse,
   GetTicketStatisticsResponse,
+  GetTotalRequestStatisticsRequest,
   TicketAmountUnit,
+  GetTotalRequestStatisticsResponse,
   CaptchaQueryData,
   RequestTrendObj,
   DescribeCaptchaDataResponse,
   DescribeCaptchaResultRequest,
   CaptchaStatisticObj,
+  UpdateCaptchaAppIdInfoRequest,
   CaptchaOperDataLoadTimeUnit,
   DescribeCaptchaMiniOperDataRequest,
   DescribeCaptchaAppIdInfoRequest,
@@ -93,6 +97,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCaptchaTicketDataResponse) => void
   ): Promise<DescribeCaptchaTicketDataResponse> {
     return this.request("DescribeCaptchaTicketData", req, cb)
+  }
+
+  /**
+   * 查询全部验证的统计数据，包括：总请求量、总验证量、总验证通过量、总验证拦截量等数据。
+   */
+  async GetTotalRequestStatistics(
+    req?: GetTotalRequestStatisticsRequest,
+    cb?: (error: string, rep: GetTotalRequestStatisticsResponse) => void
+  ): Promise<GetTotalRequestStatisticsResponse> {
+    return this.request("GetTotalRequestStatistics", req, cb)
   }
 
   /**
@@ -203,6 +217,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCaptchaUserAllAppIdResponse) => void
   ): Promise<DescribeCaptchaUserAllAppIdResponse> {
     return this.request("DescribeCaptchaUserAllAppId", req, cb)
+  }
+
+  /**
+   * 查询单个CaptchaAppID验证的统计数据，包括：请求量、验证量、验证通过量、验证拦截量。
+   */
+  async GetRequestStatistics(
+    req?: GetRequestStatisticsRequest,
+    cb?: (error: string, rep: GetRequestStatisticsResponse) => void
+  ): Promise<GetRequestStatisticsResponse> {
+    return this.request("GetRequestStatistics", req, cb)
   }
 
   /**

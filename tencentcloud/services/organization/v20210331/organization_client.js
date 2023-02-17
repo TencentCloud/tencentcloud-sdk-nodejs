@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
     }
     /**
-     * 获取可创建组织成员的认证主体关系列表
+     * 获取已设置管理员的互信主体关系列表
      */
     async DescribeOrganizationAuthNode(req, cb) {
         return this.request("DescribeOrganizationAuthNode", req, cb);

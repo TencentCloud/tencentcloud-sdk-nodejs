@@ -18,6 +18,16 @@ const client = new tencentcloud.lcic.v20220817.Client({
 })
 describe("lcic.v20220817.test.js", function () {
 
+it("lcic.v20220817.AddGroupMember", async function () {
+    try {
+       const data = await client.AddGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SetWatermark", async function () {
     try {
        const data = await client.SetWatermark({})
@@ -38,9 +48,29 @@ it("lcic.v20220817.DescribeDocumentsByRoom", async function () {
     }
 })
 
+it("lcic.v20220817.ModifyRoom", async function () {
+    try {
+       const data = await client.ModifyRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.GetWatermark", async function () {
     try {
        const data = await client.GetWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeGroup", async function () {
+    try {
+       const data = await client.DescribeGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +108,16 @@ it("lcic.v20220817.DescribeSdkAppIdUsers", async function () {
     }
 })
 
+it("lcic.v20220817.DeleteGroupMember", async function () {
+    try {
+       const data = await client.DeleteGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateDocument", async function () {
     try {
        const data = await client.CreateDocument({})
@@ -88,9 +128,9 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
-it("lcic.v20220817.ModifyRoom", async function () {
+it("lcic.v20220817.DeleteGroup", async function () {
     try {
-       const data = await client.ModifyRoom({})
+       const data = await client.DeleteGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +148,16 @@ it("lcic.v20220817.DescribeUser", async function () {
     }
 })
 
+it("lcic.v20220817.ModifyGroup", async function () {
+    try {
+       const data = await client.ModifyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.BatchRegister", async function () {
     try {
        const data = await client.BatchRegister({})
@@ -118,9 +168,19 @@ it("lcic.v20220817.BatchRegister", async function () {
     }
 })
 
-it("lcic.v20220817.ModifyUserProfile", async function () {
+it("lcic.v20220817.BatchAddGroupMember", async function () {
     try {
-       const data = await client.ModifyUserProfile({})
+       const data = await client.BatchAddGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.BatchDeleteGroupMember", async function () {
+    try {
+       const data = await client.BatchDeleteGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +201,26 @@ it("lcic.v20220817.DescribeRoom", async function () {
 it("lcic.v20220817.DeleteRecord", async function () {
     try {
        const data = await client.DeleteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeGroupList", async function () {
+    try {
+       const data = await client.DescribeGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.ModifyUserProfile", async function () {
+    try {
+       const data = await client.ModifyUserProfile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +288,16 @@ it("lcic.v20220817.LoginUser", async function () {
     }
 })
 
+it("lcic.v20220817.CreateGroupWithMembers", async function () {
+    try {
+       const data = await client.CreateGroupWithMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateSupervisor", async function () {
     try {
        const data = await client.CreateSupervisor({})
@@ -221,6 +311,16 @@ it("lcic.v20220817.CreateSupervisor", async function () {
 it("lcic.v20220817.SetAppCustomContent", async function () {
     try {
        const data = await client.SetAppCustomContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeGroupMemberList", async function () {
+    try {
+       const data = await client.DescribeGroupMemberList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +381,26 @@ it("lcic.v20220817.DeleteRoom", async function () {
 it("lcic.v20220817.DescribeDocument", async function () {
     try {
        const data = await client.DescribeDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.CreateGroupWithSubGroup", async function () {
+    try {
+       const data = await client.CreateGroupWithSubGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.BatchCreateGroupWithMembers", async function () {
+    try {
+       const data = await client.BatchCreateGroupWithMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

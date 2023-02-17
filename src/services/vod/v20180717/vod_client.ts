@@ -531,6 +531,7 @@ import {
   AiRecognitionTaskAsrWordsResultItem,
   RebuildMediaTaskOutput,
   MediaAiAnalysisTagItem,
+  RebuildMediaRequest,
   DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
   DeleteImageSpriteTemplateRequest,
@@ -539,6 +540,7 @@ import {
   UserDefineFaceReviewTemplateInfoForUpdate,
   ModifyRoundPlayResponse,
   CreateProcedureTemplateResponse,
+  RebuildMediaResponse,
   DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
   DescribeSuperPlayerConfigsRequest,
@@ -1232,6 +1234,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateContentReviewTemplateResponse) => void
   ): Promise<CreateContentReviewTemplateResponse> {
     return this.request("CreateContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 发起音画质重生
+   */
+  async RebuildMedia(
+    req: RebuildMediaRequest,
+    cb?: (error: string, rep: RebuildMediaResponse) => void
+  ): Promise<RebuildMediaResponse> {
+    return this.request("RebuildMedia", req, cb)
   }
 
   /**

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig);
     }
     /**
+     * 此接口用于添加成员列表到指定群组
+     */
+    async AddGroupMember(req, cb) {
+        return this.request("AddGroupMember", req, cb);
+    }
+    /**
      * 设置水印
      */
     async SetWatermark(req, cb) {
@@ -40,10 +46,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDocumentsByRoom", req, cb);
     }
     /**
+     * 修改房间
+     */
+    async ModifyRoom(req, cb) {
+        return this.request("ModifyRoom", req, cb);
+    }
+    /**
      * 获取水印设置
      */
     async GetWatermark(req, cb) {
         return this.request("GetWatermark", req, cb);
+    }
+    /**
+     * 此接口用于获取群组详情
+     */
+    async DescribeGroup(req, cb) {
+        return this.request("DescribeGroup", req, cb);
     }
     /**
      * 修改应用
@@ -64,16 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSdkAppIdUsers", req, cb);
     }
     /**
+     * 此接口用于删除群组中指定成员
+     */
+    async DeleteGroupMember(req, cb) {
+        return this.request("DeleteGroupMember", req, cb);
+    }
+    /**
      * 创建房间内可以使用的文档。
      */
     async CreateDocument(req, cb) {
         return this.request("CreateDocument", req, cb);
     }
     /**
-     * 修改房间
+     * 此接口用于删除指定群组，支持批量操作。
      */
-    async ModifyRoom(req, cb) {
-        return this.request("ModifyRoom", req, cb);
+    async DeleteGroup(req, cb) {
+        return this.request("DeleteGroup", req, cb);
     }
     /**
      * 获取用户信息
@@ -82,16 +106,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUser", req, cb);
     }
     /**
+     * 此接口修改群组信息
+     */
+    async ModifyGroup(req, cb) {
+        return this.request("ModifyGroup", req, cb);
+    }
+    /**
      * 如果批量注册的用户已存在，则会被覆盖。一次最多注册1000个用户。默认请求频率限制：10次/秒
      */
     async BatchRegister(req, cb) {
         return this.request("BatchRegister", req, cb);
     }
     /**
-     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     * 此接口用于批量添加成员列表到指定群组
      */
-    async ModifyUserProfile(req, cb) {
-        return this.request("ModifyUserProfile", req, cb);
+    async BatchAddGroupMember(req, cb) {
+        return this.request("BatchAddGroupMember", req, cb);
+    }
+    /**
+     * 此接口用于批量删除成员列表到指定群组列表
+     */
+    async BatchDeleteGroupMember(req, cb) {
+        return this.request("BatchDeleteGroupMember", req, cb);
     }
     /**
      * 获取房间信息
@@ -104,6 +140,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRecord(req, cb) {
         return this.request("DeleteRecord", req, cb);
+    }
+    /**
+     * 获取群组列表
+     */
+    async DescribeGroupList(req, cb) {
+        return this.request("DescribeGroupList", req, cb);
+    }
+    /**
+     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     */
+    async ModifyUserProfile(req, cb) {
+        return this.request("ModifyUserProfile", req, cb);
     }
     /**
      * 批量创建房间接口
@@ -142,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LoginUser", req, cb);
     }
     /**
+     * 此接口根据成员列表创建群组
+     */
+    async CreateGroupWithMembers(req, cb) {
+        return this.request("CreateGroupWithMembers", req, cb);
+    }
+    /**
      * 创建巡课
      */
     async CreateSupervisor(req, cb) {
@@ -152,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetAppCustomContent(req, cb) {
         return this.request("SetAppCustomContent", req, cb);
+    }
+    /**
+     * 此接口用于获取群组成员列表
+     */
+    async DescribeGroupMemberList(req, cb) {
+        return this.request("DescribeGroupMemberList", req, cb);
     }
     /**
      * 获取当前房间的成员列表，房间结束或过期后无法使用。
@@ -188,6 +248,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDocument(req, cb) {
         return this.request("DescribeDocument", req, cb);
+    }
+    /**
+     * 此接口会聚合子群组创建联合群组
+     */
+    async CreateGroupWithSubGroup(req, cb) {
+        return this.request("CreateGroupWithSubGroup", req, cb);
+    }
+    /**
+     * 此接口用于批量创建群组
+     */
+    async BatchCreateGroupWithMembers(req, cb) {
+        return this.request("BatchCreateGroupWithMembers", req, cb);
     }
     /**
      * 创建房间

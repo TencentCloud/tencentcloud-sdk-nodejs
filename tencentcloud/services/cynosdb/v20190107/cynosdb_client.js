@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadUrl", req, cb);
     }
     /**
+     * 更换集群vpc
+     */
+    async SwitchClusterVpc(req, cb) {
+        return this.request("SwitchClusterVpc", req, cb);
+    }
+    /**
      * 安全组批量绑定云资源
      */
     async AssociateSecurityGroups(req, cb) {

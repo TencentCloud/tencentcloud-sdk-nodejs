@@ -149,7 +149,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDiskBackups", req, cb);
     }
     /**
-     * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+
+查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
      */
     async DescribeDiskOperationLogs(req, cb) {
         return this.request("DescribeDiskOperationLogs", req, cb);
@@ -325,7 +327,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplySnapshot", req, cb);
     }
     /**
-     * 查询快照操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeSnapshotOperationLogs）即将下线，后续不再提供调用，请知悉。
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+
+查询快照操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeSnapshotOperationLogs）即将下线，后续不再提供调用，请知悉。
 
      */
     async DescribeSnapshotOperationLogs(req, cb) {

@@ -26,6 +26,7 @@ import {
   DescribeComplianceAssetListResponse,
   DataCheck,
   DescribeSocCheckResultListResponse,
+  SocCheckItem,
   DescribeVulDetailResponse,
   MappingResult,
   DescribeCheckConfigAssetListRequest,
@@ -50,6 +51,7 @@ import {
   DescribeAssetsMappingListResponse,
   DescribeSocAlertListResponse,
   SocComplianceItem,
+  QueryFilter,
   SecurityStatus,
   QuerySort,
   DescribeComplianceListRequest,
@@ -63,6 +65,7 @@ import {
   DescribeSafetyEventListRequest,
   AssetQueryFilter,
   AlertType,
+  SaEventPubRequest,
   DescribeSocAlertListRequest,
   ComplianceCheckDetail,
   SaDivulgeDataQueryPubResponse,
@@ -81,7 +84,7 @@ import {
   DescribeSocCheckItemListRequest,
   CheckConfigDetail,
   DescribeSocCheckItemListRspRsp,
-  SocCheckItem,
+  SaEventPubResponse,
   DescribeEventDetailRequest,
   CheckAssetItem,
   AssetTypeStatistic,
@@ -91,9 +94,10 @@ import {
   DescribeAssetsMappingListRequest,
   DataCompliance,
   Results,
+  ListDataSaEventPub,
   AssetDetail,
   DescribeComplianceAssetListRequest,
-  QueryFilter,
+  ObjDataSaEventPub,
   DescribeAssetDetailResponse,
   DescribeAssetDetailListRequest,
   DescribeSocCspmComplianceRequest,
@@ -198,6 +202,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetDetailResponse) => void
   ): Promise<DescribeAssetDetailResponse> {
     return this.request("DescribeAssetDetail", req, cb)
+  }
+
+  /**
+   * 安全事件通用字段
+   */
+  async SaEventPub(
+    req: SaEventPubRequest,
+    cb?: (error: string, rep: SaEventPubResponse) => void
+  ): Promise<SaEventPubResponse> {
+    return this.request("SaEventPub", req, cb)
   }
 
   /**

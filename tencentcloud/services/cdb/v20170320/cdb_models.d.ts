@@ -1138,20 +1138,6 @@ export interface DescribeCDBProxyResponse {
     RequestId?: string;
 }
 /**
- * UpgradeCDBProxy返回参数结构体
- */
-export interface UpgradeCDBProxyResponse {
-    /**
-      * 异步处理ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AsyncRequestId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 权重分配规则
  */
 export interface Rule {
@@ -4046,11 +4032,11 @@ export interface DescribeErrorLogDataRequest {
       */
     InstanceId: string;
     /**
-      * 开始时间戳。
+      * 开始时间戳。例如 1585142640 。
       */
     StartTime: number;
     /**
-      * 结束时间戳。
+      * 结束时间戳。例如 1585142640 。
       */
     EndTime: number;
     /**
@@ -7137,39 +7123,6 @@ export interface DescribeDBInstanceCharsetResponse {
     RequestId?: string;
 }
 /**
- * UpgradeCDBProxy请求参数结构体
- */
-export interface UpgradeCDBProxyRequest {
-    /**
-      * 实例ID
-      */
-    InstanceId: string;
-    /**
-      * 数据库代理ID
-      */
-    ProxyGroupId: string;
-    /**
-      * 代理节点个数
-      */
-    ProxyCount: number;
-    /**
-      * 代理节点核数
-      */
-    Cpu: number;
-    /**
-      * 代理节点内存大小
-      */
-    Mem: number;
-    /**
-      * 重新负载均衡：auto（自动），manual（手动）
-      */
-    ReloadBalance: string;
-    /**
-      * 升级时间 nowTime（升级完成时）timeWindow（实例维护时间）
-      */
-    UpgradeTime: string;
-}
-/**
  * DescribeDBFeatures请求参数结构体
  */
 export interface DescribeDBFeaturesRequest {
@@ -7840,11 +7793,11 @@ export interface DescribeSlowLogDataRequest {
       */
     InstanceId: string;
     /**
-      * 开始时间戳。
+      * 开始时间戳。例如 1585142640 。
       */
     StartTime: number;
     /**
-      * 结束时间戳。
+      * 结束时间戳。例如 1585142640 。
       */
     EndTime: number;
     /**

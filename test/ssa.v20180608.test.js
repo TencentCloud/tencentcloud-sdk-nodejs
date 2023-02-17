@@ -108,6 +108,16 @@ it("ssa.v20180608.DescribeAssetDetail", async function () {
     }
 })
 
+it("ssa.v20180608.SaEventPub", async function () {
+    try {
+       const data = await client.SaEventPub({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeSafetyEventList", async function () {
     try {
        const data = await client.DescribeSafetyEventList({})

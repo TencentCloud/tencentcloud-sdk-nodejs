@@ -197,74 +197,19 @@ export interface DescribeCaptchaMiniDataSumResponse {
 }
 
 /**
- * UpdateCaptchaAppIdInfo请求参数结构体
+ * GetRequestStatistics返回参数结构体
  */
-export interface UpdateCaptchaAppIdInfoRequest {
+export interface GetRequestStatisticsResponse {
   /**
-   * 验证码应用ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CaptchaAppId: number
-
-  /**
-   * 应用名
-   */
-  AppName: string
-
-  /**
-   * 域名限制
-   */
-  DomainLimit: string
-
-  /**
-   * 场景类型
-   */
-  SceneType: number
-
-  /**
-   * 验证码类型
-   */
-  CapType: number
-
-  /**
-   * 风险级别
-   */
-  EvilInterceptGrade: number
-
-  /**
-   * 智能检测
-   */
-  SmartVerify: number
-
-  /**
-   * 开启智能引擎
-   */
-  SmartEngine: number
-
-  /**
-   * web风格
-   */
-  SchemeColor: string
-
-  /**
-   * 语言
-   */
-  CaptchaLanguage: number
-
-  /**
-   * 告警邮箱
-   */
-  MailAlarm: string
-
-  /**
-   * 是否全屏
-   */
-  TopFullScreen: number
-
-  /**
-   * 流量限制
-   */
-  TrafficThreshold: number
+  RequestId?: string
 }
+
+/**
+ * GetRequestStatistics请求参数结构体
+ */
+export type GetRequestStatisticsRequest = null
 
 /**
  * 拦截策略返回信息
@@ -904,6 +849,11 @@ export interface GetTicketStatisticsResponse {
 }
 
 /**
+ * GetTotalRequestStatistics请求参数结构体
+ */
+export type GetTotalRequestStatisticsRequest = null
+
+/**
  * DescribeCaptchaTicketData 返回的数据结构
  */
 export interface TicketAmountUnit {
@@ -916,6 +866,16 @@ export interface TicketAmountUnit {
    * 票据验证总量
    */
   Amount: number
+}
+
+/**
+ * GetTotalRequestStatistics返回参数结构体
+ */
+export interface GetTotalRequestStatisticsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1106,6 +1066,76 @@ export interface CaptchaStatisticObj {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TicketCheckTrend: Array<TicketCheckTrendObj>
+}
+
+/**
+ * UpdateCaptchaAppIdInfo请求参数结构体
+ */
+export interface UpdateCaptchaAppIdInfoRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 应用名
+   */
+  AppName: string
+
+  /**
+   * 域名限制
+   */
+  DomainLimit: string
+
+  /**
+   * 场景类型
+   */
+  SceneType: number
+
+  /**
+   * 验证码类型
+   */
+  CapType: number
+
+  /**
+   * 风险级别
+   */
+  EvilInterceptGrade: number
+
+  /**
+   * 智能检测
+   */
+  SmartVerify: number
+
+  /**
+   * 开启智能引擎
+   */
+  SmartEngine: number
+
+  /**
+   * web风格
+   */
+  SchemeColor: string
+
+  /**
+   * 语言
+   */
+  CaptchaLanguage: number
+
+  /**
+   * 告警邮箱
+   */
+  MailAlarm: string
+
+  /**
+   * 是否全屏
+   */
+  TopFullScreen: number
+
+  /**
+   * 流量限制
+   */
+  TrafficThreshold: number
 }
 
 /**

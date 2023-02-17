@@ -1398,6 +1398,19 @@ export interface IsolateInstanceRequest {
     DbType?: string;
 }
 /**
+ * SwitchClusterVpc返回参数结构体
+ */
+export interface SwitchClusterVpcResponse {
+    /**
+      * 异步任务id。
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1730,6 +1743,27 @@ export interface SearchClusterDatabasesRequest {
 默认为0
       */
     MatchType?: number;
+}
+/**
+ * SwitchClusterVpc请求参数结构体
+ */
+export interface SwitchClusterVpcRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 字符串vpc id
+      */
+    UniqVpcId: string;
+    /**
+      * 字符串子网id
+      */
+    UniqSubnetId: string;
+    /**
+      * 旧地址回收时间
+      */
+    OldIpReserveHours: number;
 }
 /**
  * 实例信息

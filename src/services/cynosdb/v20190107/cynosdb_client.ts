@@ -89,6 +89,7 @@ import {
   UpgradeInstanceRequest,
   RollbackTable,
   IsolateInstanceRequest,
+  SwitchClusterVpcResponse,
   DescribeClusterDetailRequest,
   DeleteBackupResponse,
   Tag,
@@ -106,6 +107,7 @@ import {
   UpgradeInstanceResponse,
   DescribeBackupListRequest,
   SearchClusterDatabasesRequest,
+  SwitchClusterVpcRequest,
   CynosdbInstance,
   DescribeAuditRuleWithInstanceIdsRequest,
   DbTable,
@@ -655,6 +657,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupDownloadUrlResponse) => void
   ): Promise<DescribeBackupDownloadUrlResponse> {
     return this.request("DescribeBackupDownloadUrl", req, cb)
+  }
+
+  /**
+   * 更换集群vpc
+   */
+  async SwitchClusterVpc(
+    req: SwitchClusterVpcRequest,
+    cb?: (error: string, rep: SwitchClusterVpcResponse) => void
+  ): Promise<SwitchClusterVpcResponse> {
+    return this.request("SwitchClusterVpc", req, cb)
   }
 
   /**

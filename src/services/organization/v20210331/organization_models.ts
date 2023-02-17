@@ -23,13 +23,13 @@ export interface DescribeOrganizationAuthNodeResponse {
       * 总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total: number
+  Total?: number
 
   /**
       * 条目详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Items: Array<AuthNode>
+  Items?: Array<AuthNode>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -331,20 +331,26 @@ export interface ListOrganizationIdentityRequest {
 }
 
 /**
- * 认证主体主要信息
+ * 互信主体主要信息
  */
 export interface AuthNode {
   /**
-      * 主体关系ID
+      * 互信主体关系ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RelationId: number
 
   /**
-      * 主体名称
+      * 互信主体名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AuthName: string
+
+  /**
+      * 主体管理员
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Manager: MemberMainInfo
 }
 
 /**
@@ -758,6 +764,11 @@ export interface DescribeOrganizationAuthNodeRequest {
    * 限制数目。最大50
    */
   Limit: number
+
+  /**
+   * 互信主体名称。
+   */
+  AuthName?: string
 }
 
 /**
@@ -945,6 +956,23 @@ export interface OrgMemberAuthIdentity {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+}
+
+/**
+ * 成员主要信息
+ */
+export interface MemberMainInfo {
+  /**
+      * 成员uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MemberUin: number
+
+  /**
+      * 成员名称j
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MemberName: string
 }
 
 /**

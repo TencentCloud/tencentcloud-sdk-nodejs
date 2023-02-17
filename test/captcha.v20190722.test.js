@@ -38,6 +38,16 @@ it("captcha.v20190722.DescribeCaptchaTicketData", async function () {
     }
 })
 
+it("captcha.v20190722.GetTotalRequestStatistics", async function () {
+    try {
+       const data = await client.GetTotalRequestStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("captcha.v20190722.DescribeCaptchaDataSum", async function () {
     try {
        const data = await client.DescribeCaptchaDataSum({})
@@ -141,6 +151,16 @@ it("captcha.v20190722.GetTotalTicketStatistics", async function () {
 it("captcha.v20190722.DescribeCaptchaUserAllAppId", async function () {
     try {
        const data = await client.DescribeCaptchaUserAllAppId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("captcha.v20190722.GetRequestStatistics", async function () {
+    try {
+       const data = await client.GetRequestStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

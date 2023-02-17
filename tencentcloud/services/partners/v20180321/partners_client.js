@@ -28,6 +28,15 @@ class Client extends abstract_client_1.AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
+     * 为代客or申请中代客分派跟进人（业务员）
+- 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
+- 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
+- 业务员列表获取API：[DescribeSalesmans](https://cloud.tencent.com/document/product/563/35196)
+     */
+    async AssignClientsToSales(req, cb) {
+        return this.request("AssignClientsToSales", req, cb);
+    }
+    /**
      * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */
     async DescribeAgentDealsCache(req, cb) {

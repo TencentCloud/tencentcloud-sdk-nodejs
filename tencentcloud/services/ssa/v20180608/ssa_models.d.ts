@@ -150,6 +150,31 @@ export interface DescribeSocCheckResultListResponse {
     RequestId?: string;
 }
 /**
+ * SocCheckItem类型
+ */
+export interface SocCheckItem {
+    /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LevelId: string;
+    /**
+      * 成功数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessCount: number;
+    /**
+      * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailCount: number;
+}
+/**
  * DescribeVulDetail返回参数结构体
  */
 export interface DescribeVulDetailResponse {
@@ -1123,6 +1148,23 @@ export interface SocComplianceItem {
     CheckItems: Array<SocCheckItem>;
 }
 /**
+ * 过滤条件
+ */
+export interface QueryFilter {
+    /**
+      * 过滤key
+      */
+    FilterKey?: string;
+    /**
+      * 操作符(只支持32位)
+      */
+    FilterOperatorType?: number;
+    /**
+      * 过滤value
+      */
+    FilterValue?: string;
+}
+/**
  * 安全放回状态
  */
 export declare type SecurityStatus = null;
@@ -1470,6 +1512,55 @@ export interface AlertType {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VictimAssetSub: string;
+}
+/**
+ * SaEventPub请求参数结构体
+ */
+export interface SaEventPubRequest {
+    /**
+      * 受影响资产
+      */
+    Asset: string;
+    /**
+      * 安全事件名称
+      */
+    EventName: string;
+    /**
+      * 安全事件1级分类，-1:未知 0:全部 1:攻击事件 2:侦查事件 3:僵木蠕毒 4:违规策略
+      */
+    EventType1: number;
+    /**
+      * 安全事件2级分类，-1:未知 0:全部 1:DDOS事件 2:Web攻击 3:木马 4:异地登录 5:密码破解
+      */
+    EventType2: number;
+    /**
+      * 风险等级，-1:未知 0:全部 1:低危 2:中危 3:高危 4:严重，可多选，如：1,2
+      */
+    Level: string;
+    /**
+      * 安全事件状态，-1:未知 0:全部 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
+      */
+    Status: number;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 查询起始地址
+      */
+    Offset: number;
+    /**
+      * 查询个数
+      */
+    Limit: number;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 私有字段和公有字段映射的原始采集数据唯一标识的MD5值
+      */
+    OldIdMd5: string;
 }
 /**
  * DescribeSocAlertList请求参数结构体
@@ -2136,29 +2227,17 @@ export interface DescribeSocCheckItemListRspRsp {
     Total: number;
 }
 /**
- * SocCheckItem类型
+ * SaEventPub返回参数结构体
  */
-export interface SocCheckItem {
+export interface SaEventPubResponse {
     /**
-      * 名字
-注意：此字段可能返回 null，表示取不到有效值。
+      * DataSaEventPub
       */
-    Name: string;
+    DataSaEventPub?: ObjDataSaEventPub;
     /**
-      * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LevelId: string;
-    /**
-      * 成功数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SuccessCount: number;
-    /**
-      * 失败数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailCount: number;
+    RequestId?: string;
 }
 /**
  * DescribeEventDetail请求参数结构体
@@ -2467,6 +2546,55 @@ export interface Results {
     TaskMaxCount: number;
 }
 /**
+ * DataSaEventPub
+ */
+export interface ListDataSaEventPub {
+    /**
+      * 受影响资产
+      */
+    Time: string;
+    /**
+      * 安全事件名称
+      */
+    EventType1: number;
+    /**
+      * 安全事件1级分类
+      */
+    EventType2: number;
+    /**
+      * 安全事件2级分类
+      */
+    EventName: string;
+    /**
+      * 风险等级
+      */
+    Level: number;
+    /**
+      * 安全事件状态
+      */
+    Status: number;
+    /**
+      * 攻击源ip
+      */
+    SrcIp: string;
+    /**
+      * 攻击目标ip
+      */
+    DstIp: string;
+    /**
+      * 攻击目标端口
+      */
+    DstPort: number;
+    /**
+      * 受影响资产
+      */
+    Asset: string;
+    /**
+      * 私有字段和公有字段映射的原始采集数据唯一标识的MD5值
+      */
+    OldIdMd5: string;
+}
+/**
  * 资产详情信息
  */
 export interface AssetDetail {
@@ -2710,21 +2838,17 @@ export interface DescribeComplianceAssetListRequest {
     Search?: Array<Filter>;
 }
 /**
- * 过滤条件
+ * DataSaEventPub
  */
-export interface QueryFilter {
+export interface ObjDataSaEventPub {
     /**
-      * 过滤key
+      * Count
       */
-    FilterKey?: string;
+    Count: number;
     /**
-      * 操作符(只支持32位)
+      * List
       */
-    FilterOperatorType?: number;
-    /**
-      * 过滤value
-      */
-    FilterValue?: string;
+    List: Array<ListDataSaEventPub>;
 }
 /**
  * DescribeAssetDetail返回参数结构体

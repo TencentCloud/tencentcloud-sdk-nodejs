@@ -348,7 +348,7 @@ export interface DescribeRumLogListResponse {
   /**
    * 返回字符串
    */
-  Result: string
+  Result?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3741,7 +3741,7 @@ export interface DescribeRumLogListRequest {
   OrderBy: string
 
   /**
-   * 开始时间（必填）
+   * 开始时间（必填）格式为时间戳 毫秒
    */
   StartTime: string
 
@@ -3761,7 +3761,7 @@ export interface DescribeRumLogListRequest {
   Query: string
 
   /**
-   * 结束时间（必填）
+   * 结束时间（必填）格式为时间戳 毫秒
    */
   EndTime: string
 

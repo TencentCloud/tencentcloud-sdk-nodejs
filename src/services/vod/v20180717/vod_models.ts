@@ -335,7 +335,7 @@ export interface SvgWatermarkInput {
  */
 export interface CreateTranscodeTemplateRequest {
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
    */
   Container: string
 
@@ -1935,6 +1935,8 @@ export interface AudioTemplateInfoForUpdate {
 <li>libfdk_aac。</li>
 当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：
 <li>libfdk_aac。</li>
+当外层参数 Container 为 wav 时，可选值为：
+<li>pcm16。</li>
       */
   Codec?: string
 
@@ -1945,6 +1947,7 @@ export interface AudioTemplateInfoForUpdate {
 
   /**
       * 音频流的采样率，可选值：
+<li>16000，仅当 Codec 为 pcm16 时可选。</li>
 <li>32000</li>
 <li>44100</li>
 <li>48000</li>
@@ -2082,6 +2085,8 @@ export interface AudioTemplateInfo {
 <li>libfdk_aac。</li>
 当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：
 <li>libfdk_aac。</li>
+当外层参数 Container 为 wav 时，可选值为：
+<li>pcm16。</li>
       */
   Codec: string
 
@@ -2093,6 +2098,7 @@ export interface AudioTemplateInfo {
 
   /**
       * 音频流的采样率，可选值：
+<li>16000，仅当 Codec 为 pcm16 时可选。</li>
 <li>32000</li>
 <li>44100</li>
 <li>48000</li>
@@ -2572,7 +2578,7 @@ export interface ModifyTranscodeTemplateRequest {
   SubAppId?: number
 
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
    */
   Container?: string
 
@@ -14770,6 +14776,116 @@ export interface MediaAiAnalysisTagItem {
 }
 
 /**
+ * RebuildMedia请求参数结构体
+ */
+export interface RebuildMediaRequest {
+  /**
+   * 媒体文件 ID。
+   */
+  FileId: string
+
+  /**
+   * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
+   * 起始偏移时间，单位：秒，不填表示从视频开始截取。
+   */
+  StartTimeOffset?: number
+
+  /**
+   * 结束偏移时间，单位：秒，不填表示截取到视频末尾。
+   */
+  EndTimeOffset?: number
+
+  /**
+   * 画质修复控制参数。
+   */
+  RepairInfo?: RepairInfo
+
+  /**
+   * 智能插帧控制参数。
+   */
+  VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo
+
+  /**
+   * 画面超分控制参数。
+   */
+  SuperResolutionInfo?: SuperResolutionInfo
+
+  /**
+   * 高动态范围类型控制参数。
+   */
+  HDRInfo?: HDRInfo
+
+  /**
+   * 视频降噪控制参数。
+   */
+  VideoDenoiseInfo?: VideoDenoiseInfo
+
+  /**
+   * 音频降噪控制参数。
+   */
+  AudioDenoiseInfo?: AudioDenoiseInfo
+
+  /**
+   * 色彩增强控制参数。
+   */
+  ColorInfo?: ColorEnhanceInfo
+
+  /**
+   * 细节增强控制参数。
+   */
+  SharpInfo?: SharpEnhanceInfo
+
+  /**
+   * 人脸增强控制参数。
+   */
+  FaceInfo?: FaceEnhanceInfo
+
+  /**
+   * 低光照控制参数。
+   */
+  LowLightInfo?: LowLightEnhanceInfo
+
+  /**
+   * 去划痕控制参数。
+   */
+  ScratchRepairInfo?: ScratchRepairInfo
+
+  /**
+   * 去伪影（毛刺）控制参数。
+   */
+  ArtifactRepairInfo?: ArtifactRepairInfo
+
+  /**
+   * 音画质重生输出目标参数。
+   */
+  TargetInfo?: RebuildMediaTargetInfo
+
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -14785,9 +14901,10 @@ export interface DescribeTaskDetailResponse {
 <li>FastClipMedia：快速剪辑任务；</li>
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
 <li>DescribeFileAttributesTask：获取文件属性任务；</li>
-<li> ReviewAudioVideo：音视频审核任务。</li>
+<li>RebuildMedia：音画质重生任务；</li>
+<li>ReviewAudioVideo：音视频审核任务。</li>
       */
-  TaskType: string
+  TaskType?: string
 
   /**
       * 任务状态，取值：
@@ -14795,124 +14912,130 @@ export interface DescribeTaskDetailResponse {
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
       */
-  Status: string
+  Status?: string
 
   /**
    * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  BeginProcessTime: string
+  BeginProcessTime?: string
 
   /**
    * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  FinishTime: string
+  FinishTime?: string
 
   /**
       * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcedureTask: ProcedureTask
+  ProcedureTask?: ProcedureTask
 
   /**
       * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EditMediaTask: EditMediaTask
+  EditMediaTask?: EditMediaTask
 
   /**
       * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WechatPublishTask: WechatPublishTask
+  WechatPublishTask?: WechatPublishTask
 
   /**
       * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ComposeMediaTask: ComposeMediaTask
+  ComposeMediaTask?: ComposeMediaTask
 
   /**
       * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SplitMediaTask: SplitMediaTask
+  SplitMediaTask?: SplitMediaTask
 
   /**
       * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WechatMiniProgramPublishTask: WechatMiniProgramPublishTask
+  WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask
 
   /**
       * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PullUploadTask: PullUploadTask
+  PullUploadTask?: PullUploadTask
 
   /**
       * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranscodeTask: TranscodeTask2017
+  TranscodeTask?: TranscodeTask2017
 
   /**
       * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ConcatTask: ConcatTask2017
+  ConcatTask?: ConcatTask2017
 
   /**
       * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClipTask: ClipTask2017
+  ClipTask?: ClipTask2017
 
   /**
       * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateImageSpriteTask: CreateImageSpriteTask2017
+  CreateImageSpriteTask?: CreateImageSpriteTask2017
 
   /**
       * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SnapshotByTimeOffsetTask: SnapshotByTimeOffsetTask2017
+  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017
 
   /**
       * 智能去除水印任务信息，仅当 TaskType 为 RemoveWatermark，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RemoveWatermarkTask: RemoveWatermarkTask
+  RemoveWatermarkTask?: RemoveWatermarkTask
+
+  /**
+      * 音画质重生任务信息，仅当 TaskType 为 RebuildMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RebuildMediaTask?: RebuildMediaTask
 
   /**
       * 提取溯源水印任务信息，仅当 TaskType 为 ExtractTraceWatermark，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ExtractTraceWatermarkTask: ExtractTraceWatermarkTask
+  ExtractTraceWatermarkTask?: ExtractTraceWatermarkTask
 
   /**
       * 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReviewAudioVideoTask: ReviewAudioVideoTask
+  ReviewAudioVideoTask?: ReviewAudioVideoTask
 
   /**
       * 该字段已无效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReduceMediaBitrateTask: ReduceMediaBitrateTask
+  ReduceMediaBitrateTask?: ReduceMediaBitrateTask
 
   /**
       * 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DescribeFileAttributesTask: DescribeFileAttributesTask
+  DescribeFileAttributesTask?: DescribeFileAttributesTask
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15029,6 +15152,21 @@ export interface ModifyRoundPlayResponse {
  * CreateProcedureTemplate返回参数结构体
  */
 export interface CreateProcedureTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RebuildMedia返回参数结构体
+ */
+export interface RebuildMediaResponse {
+  /**
+   * 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。
+   */
+  TaskId?: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16025,7 +16163,7 @@ export interface CreateTranscodeTemplateResponse {
   /**
    * 转码模板唯一标识。
    */
-  Definition: number
+  Definition?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

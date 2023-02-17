@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetDetail", req, cb);
     }
     /**
+     * 安全事件通用字段
+     */
+    async SaEventPub(req, cb) {
+        return this.request("SaEventPub", req, cb);
+    }
+    /**
      * 获取安全事件列表
      */
     async DescribeSafetyEventList(req, cb) {

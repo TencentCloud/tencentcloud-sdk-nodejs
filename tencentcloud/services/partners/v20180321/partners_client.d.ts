@@ -1,12 +1,19 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeClientBalanceResponse, DescribeAgentSelfPayDealsResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeClientBalanceRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, DescribeAgentPayDealsRequest, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentPayDealsResponse, DescribeAgentDealsByCacheRequest, DescribeAgentSelfPayDealsRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AuditApplyClientResponse, DescribeAgentDealsCacheResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, DescribeClientBalanceNewResponse } from "./partners_models";
+import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeClientBalanceResponse, DescribeAgentSelfPayDealsResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeClientBalanceRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, DescribeAgentPayDealsRequest, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentPayDealsResponse, DescribeAgentDealsByCacheRequest, DescribeAgentSelfPayDealsRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AssignClientsToSalesResponse, AuditApplyClientResponse, DescribeAgentDealsCacheResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, AssignClientsToSalesRequest, DescribeClientBalanceNewResponse } from "./partners_models";
 /**
  * partners client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 为代客or申请中代客分派跟进人（业务员）
+- 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
+- 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
+- 业务员列表获取API：[DescribeSalesmans](https://cloud.tencent.com/document/product/563/35196)
+     */
+    AssignClientsToSales(req: AssignClientsToSalesRequest, cb?: (error: string, rep: AssignClientsToSalesResponse) => void): Promise<AssignClientsToSalesResponse>;
     /**
      * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */

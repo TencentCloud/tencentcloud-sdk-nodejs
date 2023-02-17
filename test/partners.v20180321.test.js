@@ -18,6 +18,16 @@ const client = new tencentcloud.partners.v20180321.Client({
 })
 describe("partners.v20180321.test.js", function () {
 
+it("partners.v20180321.AssignClientsToSales", async function () {
+    try {
+       const data = await client.AssignClientsToSales({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.DescribeAgentDealsCache", async function () {
     try {
        const data = await client.DescribeAgentDealsCache({})

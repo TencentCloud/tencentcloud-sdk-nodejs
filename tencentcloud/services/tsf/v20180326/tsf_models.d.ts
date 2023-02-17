@@ -2511,6 +2511,16 @@ export interface UnitRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitRuleItemList?: Array<UnitRuleItem>;
+    /**
+      * CreatedTime
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime?: string;
+    /**
+      * UpdatedTime
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime?: string;
 }
 /**
  * DescribePkgs返回参数结构体
@@ -3487,6 +3497,11 @@ export interface ContainGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KubeInjectEnable: boolean;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime?: string;
 }
 /**
  * DescribeGroupBusinessLogConfigs返回参数结构体
@@ -9758,6 +9773,11 @@ export interface ApplicationForPage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceConfigList: Array<ServiceConfig>;
+    /**
+      * IgnoreCreateImageRepository
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IgnoreCreateImageRepository?: boolean;
 }
 /**
  * DescribeInvocationMetricScatterPlot请求参数结构体
@@ -11754,6 +11774,61 @@ export interface DeliveryConfigBindGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
+    /**
+      * KafkaVIp
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaVIp?: string;
+    /**
+      * KafkaAddress
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaAddress?: string;
+    /**
+      * KafkaVPort
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaVPort?: string;
+    /**
+      * Topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Topic?: string;
+    /**
+      * LineRule
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LineRule?: string;
+    /**
+      * CustomRule
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomRule?: string;
+    /**
+      * EnableGlobalLineRule
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableGlobalLineRule?: boolean;
+    /**
+      * EnableAuth
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableAuth?: boolean;
+    /**
+      * Username
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Username?: string;
+    /**
+      * Password
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Password?: string;
+    /**
+      * KafkaInfos
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaInfos?: Array<DeliveryKafkaInfo>;
 }
 /**
  * DescribeConfigs请求参数结构体

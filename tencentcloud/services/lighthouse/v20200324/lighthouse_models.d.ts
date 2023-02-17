@@ -2203,6 +2203,11 @@ export interface Blueprint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SceneIdSet: Array<string>;
+    /**
+      * Docker版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DockerVersion?: string;
 }
 /**
  * InquirePriceCreateInstances返回参数结构体

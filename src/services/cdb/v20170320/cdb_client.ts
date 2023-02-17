@@ -67,7 +67,6 @@ import {
   ModifyCDBProxyDescRequest,
   BackupConfig,
   DescribeCDBProxyResponse,
-  UpgradeCDBProxyResponse,
   Rule,
   AuditPolicy,
   DescribeBackupTablesRequest,
@@ -337,7 +336,6 @@ import {
   CreateDBInstanceResponse,
   StartReplicationRequest,
   DescribeDBInstanceCharsetResponse,
-  UpgradeCDBProxyRequest,
   DescribeDBFeaturesRequest,
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
@@ -1092,18 +1090,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccountsResponse) => void
   ): Promise<CreateAccountsResponse> {
     return this.request("CreateAccounts", req, cb)
-  }
-
-  /**
-     * 接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置
-
-调整数据库代理配置
-     */
-  async UpgradeCDBProxy(
-    req: UpgradeCDBProxyRequest,
-    cb?: (error: string, rep: UpgradeCDBProxyResponse) => void
-  ): Promise<UpgradeCDBProxyResponse> {
-    return this.request("UpgradeCDBProxy", req, cb)
   }
 
   /**

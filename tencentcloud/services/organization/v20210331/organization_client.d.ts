@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationMemberAuthAccounts(req: DescribeOrganizationMemberAuthAccountsRequest, cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void): Promise<DescribeOrganizationMemberAuthAccountsResponse>;
     /**
-     * 获取可创建组织成员的认证主体关系列表
+     * 获取已设置管理员的互信主体关系列表
      */
     DescribeOrganizationAuthNode(req: DescribeOrganizationAuthNodeRequest, cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void): Promise<DescribeOrganizationAuthNodeResponse>;
     /**

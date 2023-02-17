@@ -410,12 +410,12 @@ export interface DescribeAgentSelfPayDealsResponse {
   /**
    * 订单数组
    */
-  AgentPayDealSet: Array<AgentDealElem>
+  AgentPayDealSet?: Array<AgentDealElem>
 
   /**
    * 符合条件的订单总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1159,12 +1159,12 @@ export interface DescribeAgentPayDealsResponse {
   /**
    * 订单数组
    */
-  AgentPayDealSet: Array<AgentDealElem>
+  AgentPayDealSet?: Array<AgentDealElem>
 
   /**
    * 符合条件的订单总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1363,6 +1363,28 @@ export interface DescribeAgentSelfPayDealsV2Response {
 }
 
 /**
+ * AssignClientsToSales返回参数结构体
+ */
+export interface AssignClientsToSalesResponse {
+  /**
+      * 处理成功的代客uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SucceedUins?: Array<string>
+
+  /**
+      * 处理失败的代客uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedUins?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 业务信息定义
  */
 export interface AgentBillElem {
@@ -1473,12 +1495,12 @@ export interface DescribeAgentDealsCacheResponse {
   /**
    * 订单数组
    */
-  AgentDealSet: Array<AgentDealElem>
+  AgentDealSet?: Array<AgentDealElem>
 
   /**
    * 符合条件的订单总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1762,12 +1784,12 @@ export interface DescribeRebateInfosResponse {
   /**
    * 返佣信息列表
    */
-  RebateInfoSet: Array<RebateInfoElem>
+  RebateInfoSet?: Array<RebateInfoElem>
 
   /**
    * 符合查询条件返佣信息数目
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1818,6 +1840,31 @@ export interface RebateInfoElemNew {
    * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
    */
   ExceptionFlag: string
+}
+
+/**
+ * AssignClientsToSales请求参数结构体
+ */
+export interface AssignClientsToSalesRequest {
+  /**
+   * 代客/申请中代客uin列表，最大50条
+   */
+  ClientUins: Array<string>
+
+  /**
+   * 业务员uin
+   */
+  SalesUin: string
+
+  /**
+   * 代客类型:normal-代客 apply-申请中代客
+   */
+  AssignClientStatus: string
+
+  /**
+   * 操作类型:assign-执行分派 cancel-取消分派
+   */
+  AssignActionType: string
 }
 
 /**

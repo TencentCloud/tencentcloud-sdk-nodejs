@@ -377,6 +377,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateContentReviewTemplate", req, cb);
     }
     /**
+     * 发起音画质重生
+     */
+    async RebuildMedia(req, cb) {
+        return this.request("RebuildMedia", req, cb);
+    }
+    /**
      * 创建用户自定义采样截图模板，数量上限：16。
      */
     async CreateSampleSnapshotTemplate(req, cb) {
