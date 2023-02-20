@@ -514,7 +514,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("StopRecordTask", req, cb);
     }
     /**
-     * 修改直播垫片模板。
+     * 修改直播时移模板。
      */
     async ModifyLiveTimeShiftTemplate(req, cb) {
         return this.request("ModifyLiveTimeShiftTemplate", req, cb);
@@ -778,7 +778,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveSnapshotRule", req, cb);
     }
     /**
-     * 创建直播垫片模板。
+     * 创建直播时移模板。
      */
     async CreateLiveTimeShiftTemplate(req, cb) {
         return this.request("CreateLiveTimeShiftTemplate", req, cb);

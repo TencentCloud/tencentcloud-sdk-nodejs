@@ -1698,7 +1698,7 @@ export interface Database {
       */
     NewDbName?: string;
     /**
-      * DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值。
+      * DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DbMode?: string;
@@ -1713,7 +1713,7 @@ export interface Database {
       */
     NewSchemaName?: string;
     /**
-      * 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填
+      * 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TableMode?: string;
@@ -1723,7 +1723,7 @@ export interface Database {
       */
     Tables?: Array<Table>;
     /**
-      * 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象
+      * 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ViewMode?: string;
@@ -1733,7 +1733,7 @@ export interface Database {
       */
     Views?: Array<View>;
     /**
-      * 选择要同步的模式，Partial为部分，all为整选
+      * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FunctionMode?: string;
@@ -1743,7 +1743,7 @@ export interface Database {
       */
     Functions?: Array<string>;
     /**
-      * 选择要同步的模式，Partial为部分，All为整选
+      * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProcedureMode?: string;
@@ -1753,7 +1753,7 @@ export interface Database {
       */
     Procedures?: Array<string>;
     /**
-      * 触发器迁移模式，all(为当前对象下的所有对象)，partial(部分对象)
+      * 触发器迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TriggerMode?: string;
@@ -1763,7 +1763,7 @@ export interface Database {
       */
     Triggers?: Array<string>;
     /**
-      * 事件迁移模式，all(为当前对象下的所有对象)，partial(部分对象)
+      * 事件迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EventMode?: string;

@@ -103,7 +103,7 @@ export class Client extends AbstractClient {
    * 查询全部验证的统计数据，包括：总请求量、总验证量、总验证通过量、总验证拦截量等数据。
    */
   async GetTotalRequestStatistics(
-    req?: GetTotalRequestStatisticsRequest,
+    req: GetTotalRequestStatisticsRequest,
     cb?: (error: string, rep: GetTotalRequestStatisticsResponse) => void
   ): Promise<GetTotalRequestStatisticsResponse> {
     return this.request("GetTotalRequestStatistics", req, cb)
@@ -223,7 +223,7 @@ export class Client extends AbstractClient {
    * 查询单个CaptchaAppID验证的统计数据，包括：请求量、验证量、验证通过量、验证拦截量。
    */
   async GetRequestStatistics(
-    req?: GetRequestStatisticsRequest,
+    req: GetRequestStatisticsRequest,
     cb?: (error: string, rep: GetRequestStatisticsResponse) => void
   ): Promise<GetRequestStatisticsResponse> {
     return this.request("GetRequestStatistics", req, cb)

@@ -118,6 +118,16 @@ it("cfw.v20190904.ModifyResourceGroup", async function () {
     }
 })
 
+it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
+    try {
+       const data = await client.ModifySecurityGroupItemRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeResourceGroupNew", async function () {
     try {
        const data = await client.DescribeResourceGroupNew({})
@@ -578,9 +588,9 @@ it("cfw.v20190904.DescribeTLogIpList", async function () {
     }
 })
 
-it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
+it("cfw.v20190904.DescribeBlockIgnoreList", async function () {
     try {
-       const data = await client.ModifySecurityGroupItemRuleStatus({})
+       const data = await client.DescribeBlockIgnoreList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

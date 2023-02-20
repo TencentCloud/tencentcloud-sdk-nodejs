@@ -18,7 +18,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询全部验证的统计数据，包括：总请求量、总验证量、总验证通过量、总验证拦截量等数据。
      */
-    GetTotalRequestStatistics(req?: GetTotalRequestStatisticsRequest, cb?: (error: string, rep: GetTotalRequestStatisticsResponse) => void): Promise<GetTotalRequestStatisticsResponse>;
+    GetTotalRequestStatistics(req: GetTotalRequestStatisticsRequest, cb?: (error: string, rep: GetTotalRequestStatisticsResponse) => void): Promise<GetTotalRequestStatisticsResponse>;
     /**
      * 安全验证码查询请求数据概况，例如：按照时间段查询数据  昨日请求量、昨日恶意比例、昨日验证量、昨日通过量、昨日恶意拦截量……
      */
@@ -66,7 +66,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询单个CaptchaAppID验证的统计数据，包括：请求量、验证量、验证通过量、验证拦截量。
      */
-    GetRequestStatistics(req?: GetRequestStatisticsRequest, cb?: (error: string, rep: GetRequestStatisticsResponse) => void): Promise<GetRequestStatisticsResponse>;
+    GetRequestStatistics(req: GetRequestStatisticsRequest, cb?: (error: string, rep: GetRequestStatisticsResponse) => void): Promise<GetRequestStatisticsResponse>;
     /**
      * 查询安全验证码应用APPId信息
      */

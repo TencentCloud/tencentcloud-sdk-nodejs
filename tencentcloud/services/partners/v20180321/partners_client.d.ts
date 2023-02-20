@@ -8,10 +8,10 @@ import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgent
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 为代客or申请中代客分派跟进人（业务员）
+     * 为代客or申请中代客分派跟进人（业务员），入参可从以下API获取
 - 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
 - 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
-- 业务员列表获取API：[DescribeSalesmans](https://cloud.tencent.com/document/product/563/35196)
+- 业务员列表获取API：[DescribeSalesmans](https://cloud.tencent.com/document/product/563/35196) <br><br>
      */
     AssignClientsToSales(req: AssignClientsToSalesRequest, cb?: (error: string, rep: AssignClientsToSalesResponse) => void): Promise<AssignClientsToSalesResponse>;
     /**

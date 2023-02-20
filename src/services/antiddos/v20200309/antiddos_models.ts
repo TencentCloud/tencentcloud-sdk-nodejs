@@ -4917,12 +4917,12 @@ export interface DescribeBizTrendResponse {
   /**
    * 曲线图各个时间点的值
    */
-  DataList: Array<number>
+  DataList?: Array<number>
 
   /**
    * 统计纬度
    */
-  MetricName: string
+  MetricName?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

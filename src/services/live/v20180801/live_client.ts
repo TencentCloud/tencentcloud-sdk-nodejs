@@ -1127,7 +1127,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 修改直播垫片模板。
+   * 修改直播时移模板。
    */
   async ModifyLiveTimeShiftTemplate(
     req: ModifyLiveTimeShiftTemplateRequest,
@@ -1555,7 +1555,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 创建直播垫片模板。
+   * 创建直播时移模板。
    */
   async CreateLiveTimeShiftTemplate(
     req: CreateLiveTimeShiftTemplateRequest,

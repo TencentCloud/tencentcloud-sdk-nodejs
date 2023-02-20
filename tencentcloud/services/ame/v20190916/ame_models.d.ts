@@ -1167,6 +1167,17 @@ export interface TRTCJoinRoomInput {
       * 用户唯一标识。
       */
     UserId: string;
+    /**
+      * 进房钥匙，若需要权限控制请携带该参数。
+ [privateMapKey 权限设置](/document/product/647/32240)
+      */
+    PrivateMapKey?: string;
+    /**
+      * 用户角色，目前支持两种角色：
+<li>anchor：主播</li>
+<li>audience：观众</li>
+      */
+    Role?: string;
 }
 /**
  * DescribePackageItems请求参数结构体
@@ -1360,9 +1371,14 @@ export interface SetPlaylistCommandInput {
       */
     ChangedIndex?: number;
     /**
-      * 歌曲 ID 列表，当 Type 取 Add 时，必填。
+      * 歌曲 ID 列表，当 Type 取 Add 时，与MusicURLs必填其中一项。
       */
     MusicIds?: Array<string>;
+    /**
+      * 歌曲 URL 列表，当 Type 取 Add 时，与MusicIds必填其中一项。
+注：URL必须以.mp3结尾且必须是mp3编码文件。
+      */
+    MusicURLs?: Array<string>;
 }
 /**
  * SyncKTVRobotCommand返回参数结构体

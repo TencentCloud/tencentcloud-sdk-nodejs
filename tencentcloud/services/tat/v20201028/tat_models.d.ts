@@ -110,6 +110,10 @@ export interface AutomationAgentInfo {
 <li> Windows：Windows实例
       */
     Environment: string;
+    /**
+      * Agent 支持的功能列表。
+      */
+    SupportFeatures?: Array<string>;
 }
 /**
  * RunCommand请求参数结构体
@@ -389,6 +393,14 @@ export interface CommandDocument {
       * 执行用户。
       */
     Username: string;
+    /**
+      * 保存输出的 COS Bucket 链接。
+      */
+    OutputCOSBucketUrl?: string;
+    /**
+      * 保存输出的文件名称前缀。
+      */
+    OutputCOSKeyPrefix?: string;
 }
 /**
  * DescribeInvokerRecords返回参数结构体

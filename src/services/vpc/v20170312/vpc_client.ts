@@ -1777,7 +1777,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+   * 本接口（DescribeFlowLogs）用于查询获取流日志集合。
    */
   async DescribeFlowLogs(
     req: DescribeFlowLogsRequest,
@@ -3986,7 +3986,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 查询终端节点列表。
+   * 本接口（DescribeVpcEndPoint）用于查询终端节点列表。
    */
   async DescribeVpcEndPoint(
     req: DescribeVpcEndPointRequest,

@@ -90,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourceGroup", req, cb);
     }
     /**
+     * 启用停用单条企业安全组规则
+     */
+    async ModifySecurityGroupItemRuleStatus(req, cb) {
+        return this.request("ModifySecurityGroupItemRuleStatus", req, cb);
+    }
+    /**
      * DescribeResourceGroupNew资产中心资产树信息
      */
     async DescribeResourceGroupNew(req, cb) {
@@ -373,10 +379,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTLogIpList", req, cb);
     }
     /**
-     * 启用停用单条企业安全组规则
+     * 查询入侵防御放通封禁列表
      */
-    async ModifySecurityGroupItemRuleStatus(req, cb) {
-        return this.request("ModifySecurityGroupItemRuleStatus", req, cb);
+    async DescribeBlockIgnoreList(req, cb) {
+        return this.request("DescribeBlockIgnoreList", req, cb);
     }
     /**
      * 访问控制列表

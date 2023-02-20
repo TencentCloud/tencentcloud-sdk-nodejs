@@ -88,6 +88,7 @@ import {
   ModifyRealServerAccessStrategyRequest,
   DescribeBackupTimeRequest,
   DescribeSaleInfoResponse,
+  ModifyDBEncryptAttributesResponse,
   DescribeDBEncryptAttributesResponse,
   DestroyDBInstanceRequest,
   DatabaseTable,
@@ -157,6 +158,7 @@ import {
   ActivateHourDBInstanceResponse,
   DescribeInstanceNodeInfoRequest,
   CreateHourDBInstanceResponse,
+  ModifyDBEncryptAttributesRequest,
   CreateAccountResponse,
   IsolateDedicatedDBInstanceResponse,
   DescribeLogFileRetentionPeriodResponse,
@@ -691,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTmpInstancesResponse) => void
   ): Promise<CreateTmpInstancesResponse> {
     return this.request("CreateTmpInstances", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
+   */
+  async ModifyDBEncryptAttributes(
+    req: ModifyDBEncryptAttributesRequest,
+    cb?: (error: string, rep: ModifyDBEncryptAttributesResponse) => void
+  ): Promise<ModifyDBEncryptAttributesResponse> {
+    return this.request("ModifyDBEncryptAttributes", req, cb)
   }
 
   /**

@@ -354,7 +354,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     StopRecordTask(req: StopRecordTaskRequest, cb?: (error: string, rep: StopRecordTaskResponse) => void): Promise<StopRecordTaskResponse>;
     /**
-     * 修改直播垫片模板。
+     * 修改直播时移模板。
      */
     ModifyLiveTimeShiftTemplate(req: ModifyLiveTimeShiftTemplateRequest, cb?: (error: string, rep: ModifyLiveTimeShiftTemplateResponse) => void): Promise<ModifyLiveTimeShiftTemplateResponse>;
     /**
@@ -536,7 +536,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     CreateLiveSnapshotRule(req: CreateLiveSnapshotRuleRequest, cb?: (error: string, rep: CreateLiveSnapshotRuleResponse) => void): Promise<CreateLiveSnapshotRuleResponse>;
     /**
-     * 创建直播垫片模板。
+     * 创建直播时移模板。
      */
     CreateLiveTimeShiftTemplate(req: CreateLiveTimeShiftTemplateRequest, cb?: (error: string, rep: CreateLiveTimeShiftTemplateResponse) => void): Promise<CreateLiveTimeShiftTemplateResponse>;
     /**

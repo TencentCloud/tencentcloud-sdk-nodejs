@@ -409,7 +409,7 @@ export interface DescribeClusterControllersResponse {
     /**
       * 描述集群中各个控制器的状态
       */
-    ControllerStatusSet: Array<ControllerStatus>;
+    ControllerStatusSet?: Array<ControllerStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2068,7 +2068,7 @@ export interface GetTkeAppChartListResponse {
       * 所支持的chart列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AppCharts: Array<AppChart>;
+    AppCharts?: Array<AppChart>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4534,12 +4534,12 @@ export interface DescribeClusterEndpointStatusResponse {
       * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: string;
+    Status?: string;
     /**
       * 开启访问入口失败信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6864,17 +6864,17 @@ export interface DescribeClusterAuthenticationOptionsResponse {
       * ServiceAccount认证配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceAccounts: ServiceAccountAuthenticationOptions;
+    ServiceAccounts?: ServiceAccountAuthenticationOptions;
     /**
       * 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LatestOperationState: string;
+    LatestOperationState?: string;
     /**
       * OIDC认证配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OIDCConfig: OIDCConfigAuthenticationOptions;
+    OIDCConfig?: OIDCConfigAuthenticationOptions;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7936,17 +7936,17 @@ export interface DeleteClusterInstancesResponse {
       * 删除成功的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SuccInstanceIds: Array<string>;
+    SuccInstanceIds?: Array<string>;
     /**
       * 删除失败的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FailedInstanceIds: Array<string>;
+    FailedInstanceIds?: Array<string>;
     /**
       * 未匹配到的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NotFoundInstanceIds: Array<string>;
+    NotFoundInstanceIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8765,12 +8765,12 @@ export interface DescribeImagesResponse {
       * 镜像数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 镜像信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageInstanceSet: Array<ImageInstance>;
+    ImageInstanceSet?: Array<ImageInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

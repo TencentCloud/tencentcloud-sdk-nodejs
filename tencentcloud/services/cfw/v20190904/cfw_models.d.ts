@@ -84,25 +84,21 @@ export interface CfwNatDnatRule {
     Description: string;
 }
 /**
- * DeleteAcRule请求参数结构体
+ * 防火墙网段信息
  */
-export interface DeleteAcRuleRequest {
+export interface FwCidrInfo {
     /**
-      * 删除规则对应的id值, 对应获取规则列表接口的Id 值
+      * 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义
       */
-    Id: number;
+    FwCidrType: string;
     /**
-      * 方向，0：出站，1：入站
+      * 为每个vpc指定防火墙的网段
       */
-    Direction: number;
+    FwCidrLst?: Array<FwVpcCidr>;
     /**
-      * EdgeId值两个vpc间的边id
+      * 其他防火墙占用网段，一般是防火墙需要独占vpc时指定的网段
       */
-    EdgeId?: string;
-    /**
-      * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
-      */
-    Area?: string;
+    ComFwCidr?: string;
 }
 /**
  * StaticInfo 告警柱形图统计信息
@@ -301,76 +297,84 @@ export interface IPDefendStatus {
     Status: number;
 }
 /**
- * 安全组规则
+ * 入侵防御放通封禁规则
  */
-export interface SecurityGroupRule {
+export interface BlockIgnoreRule {
     /**
-      * 访问源示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
-      */
-    SourceContent: string;
-    /**
-      * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
-      */
-    SourceType: string;
-    /**
-      * 访问目的示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
-      */
-    DestContent: string;
-    /**
-      * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
-      */
-    DestType: string;
-    /**
-      * 访问控制策略中设置的流量通过云防火墙的方式。取值：
-accept：放行
-drop：拒绝
-      */
-    RuleAction: string;
-    /**
-      * 描述
-      */
-    Description: string;
-    /**
-      * 规则顺序，-1表示最低，1表示最高
-      */
-    OrderIndex: string;
-    /**
-      * 协议；TCP/UDP/ICMP/ANY
+      * 域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Protocol?: string;
+    Domain: string;
     /**
-      * 访问控制策略的端口。取值：
--1/-1：全部端口
-80：80端口
+      * 规则ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Port?: string;
+    Ioc: string;
     /**
-      * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+      * 危险等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceTemplateId?: string;
+    Level: string;
     /**
-      * 规则对应的唯一id
+      * 来源事件名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id?: string;
+    EventName: string;
     /**
-      * 规则状态，true表示启用，false表示禁用
+      * 方向：1入站，0出站
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Enable?: string;
+    Direction: number;
+    /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 地理位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address: string;
+    /**
+      * 规则类型：1封禁，2放通
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Action: number;
+    /**
+      * 规则生效开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 规则生效结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 忽略原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IgnoreReason: string;
+    /**
+      * 安全事件来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Source: string;
+    /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqueId: string;
+    /**
+      * 规则命中次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchTimes: number;
+    /**
+      * 国家
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Country: string;
 }
 /**
  * ModifyNatFwVpcDnsSwitch请求参数结构体
@@ -831,6 +835,78 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
       * 是否延迟下发，1则延迟下发，否则立即下发
       */
     IsDelay?: number;
+}
+/**
+ * 安全组规则
+ */
+export interface SecurityGroupRule {
+    /**
+      * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+      */
+    SourceContent: string;
+    /**
+      * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+      */
+    SourceType: string;
+    /**
+      * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+      */
+    DestContent: string;
+    /**
+      * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+      */
+    DestType: string;
+    /**
+      * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+accept：放行
+drop：拒绝
+      */
+    RuleAction: string;
+    /**
+      * 描述
+      */
+    Description: string;
+    /**
+      * 规则顺序，-1表示最低，1表示最高
+      */
+    OrderIndex: string;
+    /**
+      * 协议；TCP/UDP/ICMP/ANY
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol?: string;
+    /**
+      * 访问控制策略的端口。取值：
+-1/-1：全部端口
+80：80端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: string;
+    /**
+      * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceTemplateId?: string;
+    /**
+      * 规则对应的唯一id
+      */
+    Id?: string;
+    /**
+      * 规则状态，true表示启用，false表示禁用
+      */
+    Enable?: string;
 }
 /**
  * DeleteSecurityGroupRule返回参数结构体
@@ -2387,6 +2463,10 @@ export interface DescribeAcListsRequest {
     InstanceId?: string;
 }
 /**
+ * DescribeGuideScanInfo请求参数结构体
+ */
+export declare type DescribeGuideScanInfoRequest = null;
+/**
  * 未处置事件详情
  */
 export interface UnHandleEvent {
@@ -2450,21 +2530,25 @@ export interface DescribeAssociatedInstanceListRequest {
     Type?: string;
 }
 /**
- * 防火墙网段信息
+ * DeleteAcRule请求参数结构体
  */
-export interface FwCidrInfo {
+export interface DeleteAcRuleRequest {
     /**
-      * 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义
+      * 删除规则对应的id值, 对应获取规则列表接口的Id 值
       */
-    FwCidrType: string;
+    Id: number;
     /**
-      * 为每个vpc指定防火墙的网段
+      * 方向，0：出站，1：入站
       */
-    FwCidrLst?: Array<FwVpcCidr>;
+    Direction: number;
     /**
-      * 其他防火墙占用网段，一般是防火墙需要独占vpc时指定的网段
+      * EdgeId值两个vpc间的边id
       */
-    ComFwCidr?: string;
+    EdgeId?: string;
+    /**
+      * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
+      */
+    Area?: string;
 }
 /**
  * DeleteAllAccessControlRule返回参数结构体
@@ -2895,9 +2979,38 @@ export interface StopSecurityGroupRuleDispatchRequest {
     StopType?: number;
 }
 /**
- * DescribeGuideScanInfo请求参数结构体
+ * DescribeBlockIgnoreList请求参数结构体
  */
-export declare type DescribeGuideScanInfoRequest = null;
+export interface DescribeBlockIgnoreListRequest {
+    /**
+      * 单页数量
+      */
+    Limit: number;
+    /**
+      * 页偏移量
+      */
+    Offset: number;
+    /**
+      * 方向：1互联网入站，0互联网出站，3内网，空 全部方向
+      */
+    Direction: string;
+    /**
+      * 规则类型：1封禁，2放通
+      */
+    RuleType: number;
+    /**
+      * 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数
+      */
+    Order: string;
+    /**
+      * 排序类型：desc降序，asc正序
+      */
+    By: string;
+    /**
+      * 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common
+      */
+    SearchValue?: string;
+}
 /**
  * ModifyBlockTop返回参数结构体
  */
@@ -3470,6 +3583,31 @@ export interface CreateAcRulesRequest {
       * NAT地域
       */
     Area?: string;
+}
+/**
+ * DescribeBlockIgnoreList返回参数结构体
+ */
+export interface DescribeBlockIgnoreListResponse {
+    /**
+      * 列表数据
+      */
+    Data: Array<BlockIgnoreRule>;
+    /**
+      * 查询结果总数，用于分页
+      */
+    Total: number;
+    /**
+      * 状态值，0：查询成功，非0：查询失败
+      */
+    ReturnCode: number;
+    /**
+      * 状态信息，success：查询成功，fail：查询失败
+      */
+    ReturnMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyTableStatus请求参数结构体

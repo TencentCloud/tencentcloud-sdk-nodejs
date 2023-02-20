@@ -666,7 +666,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAssistantCidr", req, cb);
     }
     /**
-     * 本接口（DescribeFlowLogs）用于查询获取流日志集合
+     * 本接口（DescribeFlowLogs）用于查询获取流日志集合。
      */
     async DescribeFlowLogs(req, cb) {
         return this.request("DescribeFlowLogs", req, cb);
@@ -2067,7 +2067,7 @@ LimitTypes取值范围：
         return this.request("ModifyVpcAttribute", req, cb);
     }
     /**
-     * 查询终端节点列表。
+     * 本接口（DescribeVpcEndPoint）用于查询终端节点列表。
      */
     async DescribeVpcEndPoint(req, cb) {
         return this.request("DescribeVpcEndPoint", req, cb);

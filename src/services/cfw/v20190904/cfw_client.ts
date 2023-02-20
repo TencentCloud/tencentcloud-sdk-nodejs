@@ -23,14 +23,14 @@ import {
   DescribeNatFwInstanceWithRegionRequest,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
-  DeleteAcRuleRequest,
+  FwCidrInfo,
   StaticInfo,
   ModifyPublicIPSwitchStatusResponse,
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   AddAcRuleRequest,
   IPDefendStatus,
-  SecurityGroupRule,
+  BlockIgnoreRule,
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteNatFwInstanceResponse,
   DeleteAllAccessControlRuleRequest,
@@ -53,6 +53,7 @@ import {
   ModifyAssetScanRequest,
   ModifyBlockIgnoreListRequest,
   AddEnterpriseSecurityGroupRulesRequest,
+  SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
   ModifySequenceRulesRequest,
   CreateNatFwInstanceRequest,
@@ -121,9 +122,10 @@ import {
   DescribeRuleOverviewRequest,
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
+  DescribeGuideScanInfoRequest,
   UnHandleEvent,
   DescribeAssociatedInstanceListRequest,
-  FwCidrInfo,
+  DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
   DescribeIPStatusListResponse,
@@ -141,7 +143,7 @@ import {
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   StopSecurityGroupRuleDispatchRequest,
-  DescribeGuideScanInfoRequest,
+  DescribeBlockIgnoreListRequest,
   ModifyBlockTopResponse,
   DeleteNatFwInstanceRequest,
   DescribeNatFwVpcDnsLstResponse,
@@ -171,6 +173,7 @@ import {
   DnsVpcSwitch,
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
+  DescribeBlockIgnoreListResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
   DescribeGuideScanInfoResponse,
@@ -285,6 +288,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceGroupResponse) => void
   ): Promise<ModifyResourceGroupResponse> {
     return this.request("ModifyResourceGroup", req, cb)
+  }
+
+  /**
+   * 启用停用单条企业安全组规则
+   */
+  async ModifySecurityGroupItemRuleStatus(
+    req: ModifySecurityGroupItemRuleStatusRequest,
+    cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void
+  ): Promise<ModifySecurityGroupItemRuleStatusResponse> {
+    return this.request("ModifySecurityGroupItemRuleStatus", req, cb)
   }
 
   /**
@@ -755,13 +768,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用停用单条企业安全组规则
+   * 查询入侵防御放通封禁列表
    */
-  async ModifySecurityGroupItemRuleStatus(
-    req: ModifySecurityGroupItemRuleStatusRequest,
-    cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void
-  ): Promise<ModifySecurityGroupItemRuleStatusResponse> {
-    return this.request("ModifySecurityGroupItemRuleStatus", req, cb)
+  async DescribeBlockIgnoreList(
+    req: DescribeBlockIgnoreListRequest,
+    cb?: (error: string, rep: DescribeBlockIgnoreListResponse) => void
+  ): Promise<DescribeBlockIgnoreListResponse> {
+    return this.request("DescribeBlockIgnoreList", req, cb)
   }
 
   /**
