@@ -464,6 +464,7 @@ import {
   DescribePrometheusGlobalConfigRequest,
   CreateECMInstancesResponse,
   ModifyPrometheusGlobalNotificationRequest,
+  UnavailableReason,
   GetUpgradeInstanceProgressRequest,
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
@@ -1288,7 +1289,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  查询集群下节点实例信息
+   * 查询集群下节点实例信息
    */
   async DescribeClusterInstances(
     req: DescribeClusterInstancesRequest,

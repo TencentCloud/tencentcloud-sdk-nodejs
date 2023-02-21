@@ -6489,6 +6489,13 @@ export interface DescribeAddableEntityListRequest {
 <li>web-bot：Bot管理日志。</li>
       */
   EntityType: string
+
+  /**
+      * 服务区域，取值有：
+<li>mainland：中国大陆境内；</li>
+<li>overseas：全球（不含中国大陆）。</li>若为国内站账号，则默认取值为mainland；若为国际站账号，则默认取值为overseas。
+      */
+  Area?: string
 }
 
 /**

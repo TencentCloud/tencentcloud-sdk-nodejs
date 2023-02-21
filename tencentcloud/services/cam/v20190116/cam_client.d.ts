@@ -334,7 +334,7 @@ export declare class Client extends AbstractClient {
      */
     AttachRolePolicy(req: AttachRolePolicyRequest, cb?: (error: string, rep: AttachRolePolicyResponse) => void): Promise<AttachRolePolicyResponse>;
     /**
-     * 查询安全设置
+     * 获取子账号安全设置
      */
     DescribeSafeAuthFlagColl(req: DescribeSafeAuthFlagCollRequest, cb?: (error: string, rep: DescribeSafeAuthFlagCollResponse) => void): Promise<DescribeSafeAuthFlagCollResponse>;
     /**

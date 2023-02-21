@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RecognizeOnlineTaxiItineraryOCRResponse, BankSlipOCRRequest, BusinessCardOCRResponse, HKIDCardOCRRequest, CarInvoiceOCRRequest, RecognizeTravelCardOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, RecognizePhilippinesDrivingLicenseOCRRequest, MLIDPassportOCRRequest, TextDetectResponse, TollInvoiceOCRResponse, VerifyBizLicenseResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, WaybillOCRResponse, VerifyBizLicenseRequest, PermitOCRResponse, InvoiceGeneralOCRRequest, HmtResidentPermitOCRResponse, VehicleLicenseOCRRequest, ImageEnhancementRequest, RecognizePhilippinesVoteIDOCRRequest, InstitutionOCRResponse, DriverLicenseOCRRequest, RecognizeTableOCRResponse, QrcodeOCRResponse, MainlandPermitOCRRequest, EnterpriseLicenseOCRRequest, BankCardOCRRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, SmartStructuralOCRRequest, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, RideHailingDriverLicenseOCRRequest, InsuranceBillOCRResponse, GeneralAccurateOCRResponse, HmtResidentPermitOCRRequest, QrcodeOCRRequest, TaxiInvoiceOCRResponse, GeneralBasicOCRResponse, RecognizeThaiIDCardOCRResponse, RecognizeMedicalInvoiceOCRResponse, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VatInvoiceVerifyNewRequest, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, IDCardOCRResponse, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, VatInvoiceVerifyNewResponse, TaxiInvoiceOCRRequest, PropOwnerCertOCRRequest, RecognizeContainerOCRRequest, TextDetectRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, TableOCRRequest, ImageEnhancementResponse, PassportOCRResponse, VerifyBasicBizLicenseResponse, VehicleRegCertOCRRequest, RecognizeTravelCardOCRResponse, LicensePlateOCRRequest, GeneralBasicOCRRequest, RecognizeIndonesiaIDCardOCRResponse, GeneralEfficientOCRRequest, AdvertiseOCRRequest, RideHailingDriverLicenseOCRResponse, EnglishOCRRequest, VatInvoiceVerifyResponse, SmartStructuralOCRResponse, VerifyEnterpriseFourFactorsRequest, RecognizeIndonesiaIDCardOCRRequest, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, MixedInvoiceDetectRequest, FlightInvoiceOCRResponse, InstitutionOCRRequest, QueryBarCodeResponse, ArithmeticOCRRequest, VerifyOfdVatInvoiceOCRRequest, FinanBillSliceOCRRequest, MLIDPassportOCRResponse, VatRollInvoiceOCRRequest, SealOCRResponse, FinanBillOCRResponse, RecognizeHealthCodeOCRRequest, BankSlipOCRResponse, VehicleRegCertOCRResponse, VinOCRResponse, EduPaperOCRRequest, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RecognizeHealthCodeOCRResponse, RecognizePhilippinesVoteIDOCRResponse, QueryBarCodeRequest, OrgCodeCertOCRResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, GeneralFastOCRRequest, ShipInvoiceOCRResponse, RecognizeMedicalInvoiceOCRRequest, GeneralEfficientOCRResponse, ShipInvoiceOCRRequest, SealOCRRequest, VerifyOfdVatInvoiceOCRResponse, ResidenceBookletOCRRequest, BusInvoiceOCRResponse, MainlandPermitOCRResponse, MLIDCardOCRRequest, EnglishOCRResponse, BusInvoiceOCRRequest, QuotaInvoiceOCRResponse, RideHailingTransportLicenseOCRResponse, RecognizeContainerOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, AdvertiseOCRResponse, RecognizeOnlineTaxiItineraryOCRRequest, IDCardOCRRequest, EnterpriseLicenseOCRResponse, WaybillOCRRequest, VinOCRRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, RecognizeTableOCRRequest, EstateCertOCRRequest, VerifyBasicBizLicenseRequest, BizLicenseOCRResponse, VatInvoiceOCRResponse, QuotaInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, RecognizePhilippinesDrivingLicenseOCRResponse, FinanBillOCRRequest, VerifyEnterpriseFourFactorsResponse, GeneralFastOCRResponse } from "./ocr_models";
+import { RecognizeOnlineTaxiItineraryOCRResponse, BankSlipOCRRequest, BusinessCardOCRResponse, HKIDCardOCRRequest, CarInvoiceOCRRequest, RecognizeTravelCardOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, RecognizePhilippinesDrivingLicenseOCRRequest, MLIDPassportOCRRequest, TextDetectResponse, TollInvoiceOCRResponse, VerifyBizLicenseResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, WaybillOCRResponse, CreateAIFormTaskRequest, VerifyBizLicenseRequest, PermitOCRResponse, InvoiceGeneralOCRRequest, HmtResidentPermitOCRResponse, VehicleLicenseOCRRequest, ImageEnhancementRequest, RecognizePhilippinesVoteIDOCRRequest, InstitutionOCRResponse, DriverLicenseOCRRequest, RecognizeTableOCRResponse, QrcodeOCRResponse, MainlandPermitOCRRequest, EnterpriseLicenseOCRRequest, BankCardOCRRequest, VehicleRegCertOCRRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, SmartStructuralOCRRequest, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, RideHailingDriverLicenseOCRRequest, InsuranceBillOCRResponse, GeneralAccurateOCRResponse, HmtResidentPermitOCRRequest, QrcodeOCRRequest, TaxiInvoiceOCRResponse, GeneralBasicOCRResponse, RecognizeThaiIDCardOCRResponse, RecognizeMedicalInvoiceOCRResponse, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VatInvoiceVerifyNewRequest, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, IDCardOCRResponse, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, OrgCodeCertOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, VatInvoiceVerifyNewResponse, TaxiInvoiceOCRRequest, PropOwnerCertOCRRequest, RecognizeContainerOCRRequest, EduPaperOCRRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, TableOCRRequest, ImageEnhancementResponse, PassportOCRResponse, VerifyBasicBizLicenseResponse, TextDetectRequest, RecognizeTravelCardOCRResponse, LicensePlateOCRRequest, GeneralBasicOCRRequest, RecognizeIndonesiaIDCardOCRResponse, GeneralEfficientOCRRequest, AdvertiseOCRRequest, RideHailingDriverLicenseOCRResponse, EnglishOCRRequest, VatInvoiceVerifyResponse, SmartStructuralOCRResponse, VerifyEnterpriseFourFactorsRequest, RecognizeIndonesiaIDCardOCRRequest, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, MixedInvoiceDetectRequest, FlightInvoiceOCRResponse, InstitutionOCRRequest, QueryBarCodeResponse, ArithmeticOCRRequest, VerifyOfdVatInvoiceOCRRequest, FinanBillSliceOCRRequest, MLIDPassportOCRResponse, VatRollInvoiceOCRRequest, RecognizeTableAccurateOCRRequest, SealOCRResponse, FinanBillOCRResponse, RecognizeHealthCodeOCRRequest, BankSlipOCRResponse, VinOCRResponse, GetTaskStateResponse, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RecognizeHealthCodeOCRResponse, RecognizePhilippinesVoteIDOCRResponse, QueryBarCodeRequest, CreateAIFormTaskResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, VehicleRegCertOCRResponse, GeneralFastOCRRequest, ShipInvoiceOCRResponse, GetTaskStateRequest, RecognizeMedicalInvoiceOCRRequest, GeneralEfficientOCRResponse, ShipInvoiceOCRRequest, SealOCRRequest, VerifyOfdVatInvoiceOCRResponse, RecognizeTableAccurateOCRResponse, ResidenceBookletOCRRequest, BusInvoiceOCRResponse, MainlandPermitOCRResponse, MLIDCardOCRRequest, EnglishOCRResponse, BusInvoiceOCRRequest, QuotaInvoiceOCRResponse, RideHailingTransportLicenseOCRResponse, RecognizeContainerOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, AdvertiseOCRResponse, RecognizeOnlineTaxiItineraryOCRRequest, IDCardOCRRequest, EnterpriseLicenseOCRResponse, WaybillOCRRequest, VinOCRRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, RecognizeTableOCRRequest, EstateCertOCRRequest, VerifyBasicBizLicenseRequest, BizLicenseOCRResponse, VatInvoiceOCRResponse, QuotaInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, RecognizePhilippinesDrivingLicenseOCRResponse, FinanBillOCRRequest, VerifyEnterpriseFourFactorsResponse, GeneralFastOCRResponse } from "./ocr_models";
 /**
  * ocr client
  * @class
@@ -180,6 +180,12 @@ export declare class Client extends AbstractClient {
      */
     RecognizeContainerOCR(req: RecognizeContainerOCRRequest, cb?: (error: string, rep: RecognizeContainerOCRResponse) => void): Promise<RecognizeContainerOCRResponse>;
     /**
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
+
+默认接口请求频率限制：2次/秒。
+     */
+    RecognizeTableAccurateOCR(req: RecognizeTableAccurateOCRRequest, cb?: (error: string, rep: RecognizeTableAccurateOCRResponse) => void): Promise<RecognizeTableAccurateOCRResponse>;
+    /**
      * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
      */
     MixedInvoiceDetect(req: MixedInvoiceDetectRequest, cb?: (error: string, rep: MixedInvoiceDetectResponse) => void): Promise<MixedInvoiceDetectResponse>;
@@ -248,10 +254,9 @@ export declare class Client extends AbstractClient {
      */
     InvoiceGeneralOCR(req: InvoiceGeneralOCRRequest, cb?: (error: string, rep: InvoiceGeneralOCRResponse) => void): Promise<InvoiceGeneralOCRResponse>;
     /**
-     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
-
+     * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */
-    RecognizeMedicalInvoiceOCR(req: RecognizeMedicalInvoiceOCRRequest, cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void): Promise<RecognizeMedicalInvoiceOCRResponse>;
+    GetTaskState(req: GetTaskStateRequest, cb?: (error: string, rep: GetTaskStateResponse) => void): Promise<GetTaskStateResponse>;
     /**
      * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
      */
@@ -267,13 +272,11 @@ export declare class Client extends AbstractClient {
      */
     RecognizeTableOCR(req: RecognizeTableOCRRequest, cb?: (error: string, rep: RecognizeTableOCRResponse) => void): Promise<RecognizeTableOCRResponse>;
     /**
-     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+     * 本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
 
-您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
-
-查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
+智能表单录入产品提供高准确率的表单识别技术和人工核对工具，支持自定义字段，将识别结果自动填入到自定义条目中，并提供人工操作工具，完成整个表单识别过程。适用性强，可对票据、合同、货单等文件的识别，适用于金融、货代、保险、档案等领域。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */
-    VerifyBizLicense(req: VerifyBizLicenseRequest, cb?: (error: string, rep: VerifyBizLicenseResponse) => void): Promise<VerifyBizLicenseResponse>;
+    CreateAIFormTask(req: CreateAIFormTaskRequest, cb?: (error: string, rep: CreateAIFormTaskResponse) => void): Promise<CreateAIFormTaskResponse>;
     /**
      * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
      */
@@ -368,6 +371,11 @@ export declare class Client extends AbstractClient {
      * 本接口支持识别公路汽车客票的发票代码、发票号码、日期、姓名、票价等字段。
      */
     BusInvoiceOCR(req: BusInvoiceOCRRequest, cb?: (error: string, rep: BusInvoiceOCRResponse) => void): Promise<BusInvoiceOCRResponse>;
+    /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+     */
+    RecognizeMedicalInvoiceOCR(req: RecognizeMedicalInvoiceOCRRequest, cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void): Promise<RecognizeMedicalInvoiceOCRResponse>;
     /**
      * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
 
@@ -571,6 +579,14 @@ export declare class Client extends AbstractClient {
      */
     PassportOCR(req: PassportOCRRequest, cb?: (error: string, rep: PassportOCRResponse) => void): Promise<PassportOCRResponse>;
     /**
+     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+
+您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
+
+查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
+     */
+    VerifyBizLicense(req: VerifyBizLicenseRequest, cb?: (error: string, rep: VerifyBizLicenseResponse) => void): Promise<VerifyBizLicenseResponse>;
+    /**
      * 本接口支持常见银行票据的自动分类和识别。整单识别包括支票（含现金支票、普通支票、转账支票），承兑汇票（含银行承兑汇票、商业承兑汇票）以及进账单等，适用于中国人民银行印发的 2010 版银行票据凭证版式（银发[2010]299 号）。
      */
     FinanBillOCR(req: FinanBillOCRRequest, cb?: (error: string, rep: FinanBillOCRResponse) => void): Promise<FinanBillOCRResponse>;
@@ -610,7 +626,6 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-
      */
     RecognizeThaiIDCardOCR(req: RecognizeThaiIDCardOCRRequest, cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void): Promise<RecognizeThaiIDCardOCRResponse>;
     /**

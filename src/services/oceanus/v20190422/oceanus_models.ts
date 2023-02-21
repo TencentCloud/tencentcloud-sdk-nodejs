@@ -922,6 +922,44 @@ export interface Tag {
 }
 
 /**
+ * 树状结构资源列表对象
+ */
+export interface DescribeTreeResourcesRsp {
+  /**
+   * 父节点ID
+   */
+  ParentId?: string
+
+  /**
+   * 文件夹ID
+   */
+  Id?: string
+
+  /**
+   * 文件夹名称
+   */
+  Name?: string
+
+  /**
+      * 文件夹下资源数字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items?: Array<TreeResourceItem>
+
+  /**
+      * 子节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Children?: Array<DescribeTreeResourcesRsp>
+
+  /**
+      * 资源总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+}
+
+/**
  * DescribeResources请求参数结构体
  */
 export interface DescribeResourcesRequest {
@@ -950,6 +988,45 @@ export interface DescribeResourcesRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * 树状结构资源对象
+ */
+export interface TreeResourceItem {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+   * 资源类型
+   */
+  ResourceType: number
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileName: string
+
+  /**
+      * 目录ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FolderId: string
 }
 
 /**
@@ -1121,6 +1198,42 @@ export interface DeleteJobsResponse {
  * DescribeTreeResources返回参数结构体
  */
 export interface DescribeTreeResourcesResponse {
+  /**
+      * 父节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParentId?: string
+
+  /**
+      * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: string
+
+  /**
+      * 文件夹名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 文件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items?: Array<TreeResourceItem>
+
+  /**
+      * 子目录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Children?: Array<DescribeTreeResourcesRsp>
+
+  /**
+      * 资源总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

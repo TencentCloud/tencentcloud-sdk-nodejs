@@ -292,16 +292,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqTopicDetail", req, cb);
     }
     /**
+     * 获取单个RocketMQ专享集群信息
+     */
+    async DescribeRocketMQVipInstanceDetail(req, cb) {
+        return this.request("DescribeRocketMQVipInstanceDetail", req, cb);
+    }
+    /**
      * 删除Amqp队列
      */
     async DeleteAMQPQueue(req, cb) {
         return this.request("DeleteAMQPQueue", req, cb);
     }
     /**
-     * 更新RocketMQ集群信息
+     * 删除Vhost
      */
-    async ModifyRocketMQCluster(req, cb) {
-        return this.request("ModifyRocketMQCluster", req, cb);
+    async DeleteAMQPVHost(req, cb) {
+        return this.request("DeleteAMQPVHost", req, cb);
     }
     /**
      * 更新集群信息
@@ -430,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQCluster", req, cb);
     }
     /**
-     * 删除Vhost
+     * 更新RocketMQ集群信息
      */
-    async DeleteAMQPVHost(req, cb) {
-        return this.request("DeleteAMQPVHost", req, cb);
+    async ModifyRocketMQCluster(req, cb) {
+        return this.request("ModifyRocketMQCluster", req, cb);
     }
     /**
      * 删除角色，支持批量。

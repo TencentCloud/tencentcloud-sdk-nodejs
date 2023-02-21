@@ -69,6 +69,7 @@ import {
   AddClusterSlaveZoneRequest,
   DescribeAccountAllGrantPrivilegesResponse,
   RollbackDatabase,
+  ModifyVipVportRequest,
   DatabasePrivileges,
   DescribeClustersRequest,
   ModifyClusterStorageResponse,
@@ -120,6 +121,7 @@ import {
   DescribeClustersResponse,
   QueryFilter,
   DescribeBackupConfigResponse,
+  ModifyVipVportResponse,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeParamTemplatesResponse,
   CloseAuditServiceRequest,
@@ -360,13 +362,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下线集群
+   * 修改实例组ip，端口
    */
-  async OfflineCluster(
-    req: OfflineClusterRequest,
-    cb?: (error: string, rep: OfflineClusterResponse) => void
-  ): Promise<OfflineClusterResponse> {
-    return this.request("OfflineCluster", req, cb)
+  async ModifyVipVport(
+    req: ModifyVipVportRequest,
+    cb?: (error: string, rep: ModifyVipVportResponse) => void
+  ): Promise<ModifyVipVportResponse> {
+    return this.request("ModifyVipVport", req, cb)
   }
 
   /**
@@ -930,13 +932,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterDatabases)搜索集群database列表
+   * 下线集群
    */
-  async SearchClusterDatabases(
-    req: SearchClusterDatabasesRequest,
-    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
-  ): Promise<SearchClusterDatabasesResponse> {
-    return this.request("SearchClusterDatabases", req, cb)
+  async OfflineCluster(
+    req: OfflineClusterRequest,
+    cb?: (error: string, rep: OfflineClusterResponse) => void
+  ): Promise<OfflineClusterResponse> {
+    return this.request("OfflineCluster", req, cb)
   }
 
   /**
@@ -987,6 +989,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(SearchClusterDatabases)搜索集群database列表
+   */
+  async SearchClusterDatabases(
+    req: SearchClusterDatabasesRequest,
+    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
+  ): Promise<SearchClusterDatabasesResponse> {
+    return this.request("SearchClusterDatabases", req, cb)
   }
 
   /**

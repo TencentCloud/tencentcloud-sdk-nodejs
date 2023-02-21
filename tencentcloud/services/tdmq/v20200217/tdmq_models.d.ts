@@ -168,6 +168,23 @@ export interface DescribeSubscriptionsRequest {
     ClusterId?: string;
 }
 /**
+ * 实例节点分布信息
+ */
+export interface InstanceNodeDistribution {
+    /**
+      * 可用区
+      */
+    ZoneName: string;
+    /**
+      * 可用区id
+      */
+    ZoneId: string;
+    /**
+      * 节点数
+      */
+    NodeCount: number;
+}
+/**
  * CreateRocketMQGroup请求参数结构体
  */
 export interface CreateRocketMQGroupRequest {
@@ -654,6 +671,55 @@ export interface DescribeNamespaceBundlesOptResponse {
     RequestId?: string;
 }
 /**
+ * RocketMQ专享集群实例配置
+ */
+export interface RocketMQInstanceConfig {
+    /**
+      * 单命名空间TPS上线
+      */
+    MaxTpsPerNamespace: number;
+    /**
+      * 最大命名空间数量
+      */
+    MaxNamespaceNum: number;
+    /**
+      * 已使用命名空间数量
+      */
+    UsedNamespaceNum: number;
+    /**
+      * 最大Topic数量
+      */
+    MaxTopicNum: number;
+    /**
+      * 已使用Topic数量
+      */
+    UsedTopicNum: number;
+    /**
+      * 最大Group数量
+      */
+    MaxGroupNum: number;
+    /**
+      * 已使用Group数量
+      */
+    UsedGroupNum: number;
+    /**
+      * 集群类型
+      */
+    ConfigDisplay: string;
+    /**
+      * 集群节点数
+      */
+    NodeCount: number;
+    /**
+      * 节点分布情况
+      */
+    NodeDistribution: Array<InstanceNodeDistribution>;
+    /**
+      * topic分布情况
+      */
+    TopicDistribution: Array<RocketMQTopicDistribution>;
+}
+/**
  * DescribeBindVpcs返回参数结构体
  */
 export interface DescribeBindVpcsResponse {
@@ -908,6 +974,15 @@ export interface AMQPClusterRecentStats {
       * Exchange数量
       */
     ExchangeNum: number;
+}
+/**
+ * DescribeRocketMQVipInstanceDetail请求参数结构体
+ */
+export interface DescribeRocketMQVipInstanceDetailRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
 }
 /**
  * DeleteCmqTopic返回参数结构体
@@ -2143,17 +2218,17 @@ export interface DeleteAMQPClusterRequest {
     ClusterId: string;
 }
 /**
- * DescribeTopics返回参数结构体
+ * DescribeRocketMQVipInstanceDetail返回参数结构体
  */
-export interface DescribeTopicsResponse {
+export interface DescribeRocketMQVipInstanceDetailResponse {
     /**
-      * 主题集合数组。
+      * 集群信息
       */
-    TopicSets: Array<Topic>;
+    ClusterInfo: RocketMQClusterInfo;
     /**
-      * 主题数量。
+      * 集群配置
       */
-    TotalCount: number;
+    InstanceConfig: RocketMQInstanceConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5127,6 +5202,32 @@ export interface DescribeRocketMQClustersResponse {
     RequestId?: string;
 }
 /**
+ * RocketMQtopic分布情况
+ */
+export interface RocketMQTopicDistribution {
+    /**
+      * topic类型
+      */
+    TopicType: string;
+    /**
+      * topic数量
+      */
+    Count: number;
+}
+/**
+ * 排序器
+ */
+export interface Sort {
+    /**
+      * 排序字段
+      */
+    Name: string;
+    /**
+      * 升序ASC，降序DESC
+      */
+    Order: string;
+}
+/**
  * CreateRole请求参数结构体
  */
 export interface CreateRoleRequest {
@@ -5240,17 +5341,21 @@ export interface ModifyAMQPClusterResponse {
     RequestId?: string;
 }
 /**
- * 排序器
+ * DescribeTopics返回参数结构体
  */
-export interface Sort {
+export interface DescribeTopicsResponse {
     /**
-      * 排序字段
+      * 主题集合数组。
       */
-    Name: string;
+    TopicSets: Array<Topic>;
     /**
-      * 升序ASC，降序DESC
+      * 主题数量。
       */
-    Order: string;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AMQP集群配置

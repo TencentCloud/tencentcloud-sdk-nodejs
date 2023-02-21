@@ -691,6 +691,23 @@ export interface WaybillOCRResponse {
     RequestId?: string;
 }
 /**
+ * CreateAIFormTask请求参数结构体
+ */
+export interface CreateAIFormTaskRequest {
+    /**
+      * 多个文件的URL列表
+      */
+    FileList: Array<SmartFormFileUrl>;
+    /**
+      * 备注信息1
+      */
+    FirstNotes?: string;
+    /**
+      * 备注信息2
+      */
+    SecondNotes?: string;
+}
+/**
  * 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence）
  */
 export interface Words {
@@ -1166,13 +1183,24 @@ export interface InvoiceGeneralInfo {
     Rect: Rect;
 }
 /**
- * 英文OCR识别出的单词在原图中的四点坐标数组
+ * 增值税发票识别结果
  */
-export interface WordCoordPoint {
+export interface TextVatInvoice {
     /**
-      * 英文OCR识别出的每个单词在原图中的四点坐标。
+      * 识别出的字段名称（关键字）。支持以下字段的识别：
+发票代码、 发票号码、 打印发票代码、 打印发票号码、 开票日期、 购买方识别号、 小写金额、 价税合计(大写)、 销售方识别号、 校验码、 购买方名称、 销售方名称、 税额、 复核、 联次名称、 备注、 联次、 密码区、 开票人、 收款人、 （货物或应税劳务、服务名称）、省、 市、 服务类型、 通行费标志、 是否代开、 是否收购、 合计金额、 是否有公司印章、 发票消费类型、 车船税、 机器编号、 成品油标志、 税率、 合计税额、 （购买方地址、电话）、 （销售方地址、电话）、 单价、 金额、 销售方开户行及账号、 购买方开户行及账号、 规格型号、 发票名称、 单位、 数量、 校验码备选、 校验码后六位备选、发票号码备选、车牌号、类型、通行日期起、通行日期止、发票类型。
       */
-    WordCoordinate: Array<Coord>;
+    Name: string;
+    /**
+      * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+      */
+    Value: string;
+    /**
+      * 字段在原图中的中的四点坐标。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Polygon: Polygon;
 }
 /**
  * InstitutionOCR返回参数结构体
@@ -1431,6 +1459,15 @@ export interface WaybillObj {
     Text: string;
 }
 /**
+ * 英文OCR识别出的单词在原图中的四点坐标数组
+ */
+export interface WordCoordPoint {
+    /**
+      * 英文OCR识别出的每个单词在原图中的四点坐标。
+      */
+    WordCoordinate: Array<Coord>;
+}
+/**
  * 票据检测结果
  */
 export interface InvoiceDetectInfo {
@@ -1594,6 +1631,26 @@ export interface OnlineTaxiItineraryInfo {
       * 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1
       */
     Row: number;
+}
+/**
+ * VehicleRegCertOCR请求参数结构体
+ */
+export interface VehicleRegCertOCRRequest {
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
 }
 /**
  * PropOwnerCertOCR返回参数结构体
@@ -1863,24 +1920,41 @@ ItemNames=["姓名","性别"]
     ReturnFullText?: boolean;
 }
 /**
- * 增值税发票识别结果
+ * 单元格数据
  */
-export interface TextVatInvoice {
+export interface TableCellInfo {
     /**
-      * 识别出的字段名称（关键字）。支持以下字段的识别：
-发票代码、 发票号码、 打印发票代码、 打印发票号码、 开票日期、 购买方识别号、 小写金额、 价税合计(大写)、 销售方识别号、 校验码、 购买方名称、 销售方名称、 税额、 复核、 联次名称、 备注、 联次、 密码区、 开票人、 收款人、 （货物或应税劳务、服务名称）、省、 市、 服务类型、 通行费标志、 是否代开、 是否收购、 合计金额、 是否有公司印章、 发票消费类型、 车船税、 机器编号、 成品油标志、 税率、 合计税额、 （购买方地址、电话）、 （销售方地址、电话）、 单价、 金额、 销售方开户行及账号、 购买方开户行及账号、 规格型号、 发票名称、 单位、 数量、 校验码备选、 校验码后六位备选、发票号码备选、车牌号、类型、通行日期起、通行日期止、发票类型。
+      * 单元格左上角的列索引
       */
-    Name: string;
+    ColTl: number;
     /**
-      * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+      * 单元格左上角的行索引
       */
-    Value: string;
+    RowTl: number;
     /**
-      * 字段在原图中的中的四点坐标。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 单元格右下角的列索引
       */
-    Polygon: Polygon;
+    ColBr: number;
+    /**
+      * 单元格右下角的行索引
+      */
+    RowBr: number;
+    /**
+      * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+      */
+    Text: string;
+    /**
+      * 单元格类型
+      */
+    Type: string;
+    /**
+      * 单元格置信度
+      */
+    Confidence: number;
+    /**
+      * 单元格在图像中的四点坐标
+      */
+    Polygon: Array<Coord>;
 }
 /**
  * GeneralHandwritingOCR请求参数结构体
@@ -2176,6 +2250,10 @@ export interface RecognizeThaiIDCardOCRResponse {
       * 英文姓名
       */
     EnLastName?: string;
+    /**
+      * 证件人像照片抠取
+      */
+    PortraitImage?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2640,6 +2718,31 @@ export interface VatInvoiceGoodsInfo {
     TaxAmount: string;
 }
 /**
+ * OrgCodeCertOCR返回参数结构体
+ */
+export interface OrgCodeCertOCRResponse {
+    /**
+      * 代码
+      */
+    OrgCode: string;
+    /**
+      * 机构名称
+      */
+    Name: string;
+    /**
+      * 地址
+      */
+    Address: string;
+    /**
+      * 有效期
+      */
+    ValidDate: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * PermitOCR请求参数结构体
  */
 export interface PermitOCRRequest {
@@ -2676,6 +2779,10 @@ export interface InvoiceGeneralOCRResponse {
       */
     RequestId?: string;
 }
+/**
+ * 智慧表单上传文件信息
+ */
+export declare type SmartFormFileUrl = null;
 /**
  * VatInvoiceVerifyNew返回参数结构体
  */
@@ -2770,9 +2877,9 @@ export interface RecognizeContainerOCRRequest {
     ImageUrl?: string;
 }
 /**
- * TextDetect请求参数结构体
+ * EduPaperOCR请求参数结构体
  */
-export interface TextDetectRequest {
+export interface EduPaperOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
@@ -2788,6 +2895,16 @@ export interface TextDetectRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 扩展配置信息。
+配置格式：{"option1":value1,"option2":value2}
+1. task_type：任务类型【0: 关闭版式分析与处理 1: 开启版式分析处理】可选参数，Int32类型，默认值为1
+2. is_structuralization：是否结构化输出【true：返回包体同时返回通用和结构化输出  false：返回包体返回通用输出】 可选参数，Bool类型，默认值为true
+3. if_readable_format：是否按照版式整合通用文本/公式输出结果 可选参数，Bool类型，默认值为false
+示例：
+{"task_type": 1,"is_structuralization": true,"if_readable_format": true}
+      */
+    Config?: string;
 }
 /**
  * VatRollInvoiceOCR返回参数结构体
@@ -2874,6 +2991,11 @@ export interface RecognizeThaiIDCardOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
       */
     ImageUrl?: string;
+    /**
+      * 图片开关。默认为false，不返回泰国身份证头像照片的base64编码。
+设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码
+      */
+    CropPortrait?: boolean;
 }
 /**
  * 名片识别结果
@@ -3225,9 +3347,9 @@ export interface VerifyBasicBizLicenseResponse {
     RequestId?: string;
 }
 /**
- * VehicleRegCertOCR请求参数结构体
+ * TextDetect请求参数结构体
  */
-export interface VehicleRegCertOCRRequest {
+export interface TextDetectRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
@@ -4292,6 +4414,27 @@ export interface TableTitle {
     Text: string;
 }
 /**
+ * RecognizeTableAccurateOCR请求参数结构体
+ */
+export interface RecognizeTableAccurateOCRRequest {
+    /**
+      * 图片/PDF的 Base64 值。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片/PDF的 Url 地址。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
+}
+/**
  * 坐标
  */
 export interface Coord {
@@ -4469,17 +4612,26 @@ export interface QuestionObj {
     QuestionImageCoords: Array<Rect>;
 }
 /**
- * VehicleRegCertOCR返回参数结构体
+ * 表格内容检测
  */
-export interface VehicleRegCertOCRResponse {
+export interface TableInfo {
     /**
-      * 机动车登记证书识别结果，具体内容请点击左侧链接。
+      * 单元格内容
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VehicleRegCertInfos: Array<VehicleRegCertInfo>;
+    Cells: Array<TableCellInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 图像中的文本块类型，0 为非表格文本，
+1 为有线表格，2 为无线表格
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Type: number;
+    /**
+      * 表格主体四个顶点坐标（依次为左上角，
+右上角，右下角，左下角）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableCoordPoint: Array<Coord>;
 }
 /**
  * VinOCR返回参数结构体
@@ -4495,34 +4647,22 @@ export interface VinOCRResponse {
     RequestId?: string;
 }
 /**
- * EduPaperOCR请求参数结构体
+ * GetTaskState返回参数结构体
  */
-export interface EduPaperOCRRequest {
+export interface GetTaskStateResponse {
     /**
-      * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      * 1:任务识别完成，还未提交
+2:任务已手动关闭
+3:任务已提交
+4:任务识别中
+5:超时：任务超过了可操作的24H时限
+6:任务识别失败
       */
-    ImageBase64?: string;
+    TaskState?: number;
     /**
-      * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ImageUrl?: string;
-    /**
-      * 扩展配置信息。
-配置格式：{"option1":value1,"option2":value2}
-1. task_type：任务类型【0: 关闭版式分析与处理 1: 开启版式分析处理】可选参数，Int32类型，默认值为1
-2. is_structuralization：是否结构化输出【true：返回包体同时返回通用和结构化输出  false：返回包体返回通用输出】 可选参数，Bool类型，默认值为true
-3. if_readable_format：是否按照版式整合通用文本/公式输出结果 可选参数，Bool类型，默认值为false
-示例：
-{"task_type": 1,"is_structuralization": true,"if_readable_format": true}
-      */
-    Config?: string;
+    RequestId?: string;
 }
 /**
  * FormulaOCR请求参数结构体
@@ -4717,25 +4857,19 @@ export interface ItemCoord {
     Height: number;
 }
 /**
- * OrgCodeCertOCR返回参数结构体
+ * CreateAIFormTask返回参数结构体
  */
-export interface OrgCodeCertOCRResponse {
+export interface CreateAIFormTaskResponse {
     /**
-      * 代码
+      * 本次识别任务的唯一身份ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OrgCode: string;
+    TaskId?: string;
     /**
-      * 机构名称
+      * 本次识别任务的操作URL，有效期自生成之时起共24小时
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
-    /**
-      * 地址
-      */
-    Address: string;
-    /**
-      * 有效期
-      */
-    ValidDate: string;
+    OperateUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4957,6 +5091,19 @@ export interface CarInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
+ * VehicleRegCertOCR返回参数结构体
+ */
+export interface VehicleRegCertOCRResponse {
+    /**
+      * 机动车登记证书识别结果，具体内容请点击左侧链接。
+      */
+    VehicleRegCertInfos: Array<VehicleRegCertInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GeneralFastOCR请求参数结构体
  */
 export interface GeneralFastOCRRequest {
@@ -5045,6 +5192,15 @@ export interface InsuranceBillInfo {
       * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
       */
     Value: string;
+}
+/**
+ * GetTaskState请求参数结构体
+ */
+export interface GetTaskStateRequest {
+    /**
+      * 智慧表单任务唯一身份ID
+      */
+    TaskId: string;
 }
 /**
  * RecognizeMedicalInvoiceOCR请求参数结构体
@@ -5281,6 +5437,34 @@ export interface TextTable {
       * 此字段为扩展字段
       */
     AdvancedInfo: string;
+}
+/**
+ * RecognizeTableAccurateOCR返回参数结构体
+ */
+export interface RecognizeTableAccurateOCRResponse {
+    /**
+      * 检测到的文本信息，具体内容请点击左侧链接。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableDetections?: Array<TableInfo>;
+    /**
+      * Base64 编码后的 Excel 数据。
+      */
+    Data?: string;
+    /**
+      * 图片为PDF时，返回PDF的总页数，默认为0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PdfPageSize?: number;
+    /**
+      * 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Angle?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ResidenceBookletOCR请求参数结构体

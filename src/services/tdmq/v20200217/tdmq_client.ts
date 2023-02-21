@@ -24,6 +24,7 @@ import {
   DescribeNamespaceBundlesOptRequest,
   RocketMQNamespace,
   DescribeSubscriptionsRequest,
+  InstanceNodeDistribution,
   CreateRocketMQGroupRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
@@ -44,6 +45,7 @@ import {
   DescribeAllTenantsResponse,
   DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
+  RocketMQInstanceConfig,
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
   DeleteClusterRequest,
@@ -54,6 +56,7 @@ import {
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
   AMQPClusterRecentStats,
+  DescribeRocketMQVipInstanceDetailRequest,
   DeleteCmqTopicResponse,
   ModifyAMQPVHostRequest,
   CreateSubscriptionRequest,
@@ -97,7 +100,7 @@ import {
   DescribeAMQPExchangesResponse,
   AcknowledgeMessageRequest,
   DeleteAMQPClusterRequest,
-  DescribeTopicsResponse,
+  DescribeRocketMQVipInstanceDetailResponse,
   PublishCmqMsgResponse,
   DescribePublishersRequest,
   CreateRocketMQClusterRequest,
@@ -233,12 +236,14 @@ import {
   DeleteCmqQueueRequest,
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQClustersResponse,
+  RocketMQTopicDistribution,
+  Sort,
   CreateRoleRequest,
   ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
   Role,
   ModifyAMQPClusterResponse,
-  Sort,
+  DescribeTopicsResponse,
   AMQPClusterConfig,
   DescribeAMQPExchangesRequest,
   CreateRocketMQNamespaceResponse,
@@ -718,6 +723,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取单个RocketMQ专享集群信息
+   */
+  async DescribeRocketMQVipInstanceDetail(
+    req: DescribeRocketMQVipInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeRocketMQVipInstanceDetailResponse) => void
+  ): Promise<DescribeRocketMQVipInstanceDetailResponse> {
+    return this.request("DescribeRocketMQVipInstanceDetail", req, cb)
+  }
+
+  /**
    * 删除Amqp队列
    */
   async DeleteAMQPQueue(
@@ -728,13 +743,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新RocketMQ集群信息
+   * 删除Vhost
    */
-  async ModifyRocketMQCluster(
-    req: ModifyRocketMQClusterRequest,
-    cb?: (error: string, rep: ModifyRocketMQClusterResponse) => void
-  ): Promise<ModifyRocketMQClusterResponse> {
-    return this.request("ModifyRocketMQCluster", req, cb)
+  async DeleteAMQPVHost(
+    req: DeleteAMQPVHostRequest,
+    cb?: (error: string, rep: DeleteAMQPVHostResponse) => void
+  ): Promise<DeleteAMQPVHostResponse> {
+    return this.request("DeleteAMQPVHost", req, cb)
   }
 
   /**
@@ -948,13 +963,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Vhost
+   * 更新RocketMQ集群信息
    */
-  async DeleteAMQPVHost(
-    req: DeleteAMQPVHostRequest,
-    cb?: (error: string, rep: DeleteAMQPVHostResponse) => void
-  ): Promise<DeleteAMQPVHostResponse> {
-    return this.request("DeleteAMQPVHost", req, cb)
+  async ModifyRocketMQCluster(
+    req: ModifyRocketMQClusterRequest,
+    cb?: (error: string, rep: ModifyRocketMQClusterResponse) => void
+  ): Promise<ModifyRocketMQClusterResponse> {
+    return this.request("ModifyRocketMQCluster", req, cb)
   }
 
   /**

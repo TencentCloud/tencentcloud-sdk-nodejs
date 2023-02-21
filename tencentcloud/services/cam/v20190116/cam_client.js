@@ -516,7 +516,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachRolePolicy", req, cb);
     }
     /**
-     * 查询安全设置
+     * 获取子账号安全设置
      */
     async DescribeSafeAuthFlagColl(req, cb) {
         return this.request("DescribeSafeAuthFlagColl", req, cb);

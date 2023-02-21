@@ -100,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGrps", req, cb);
     }
     /**
-     * 下线集群
+     * 修改实例组ip，端口
      */
-    async OfflineCluster(req, cb) {
-        return this.request("OfflineCluster", req, cb);
+    async ModifyVipVport(req, cb) {
+        return this.request("ModifyVipVport", req, cb);
     }
     /**
      * TDSQL-C for MySQL实例开通审计服务
@@ -442,10 +442,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetRenewFlag", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 下线集群
      */
-    async SearchClusterDatabases(req, cb) {
-        return this.request("SearchClusterDatabases", req, cb);
+    async OfflineCluster(req, cb) {
+        return this.request("OfflineCluster", req, cb);
     }
     /**
      * 修改审计规则模版
@@ -476,6 +476,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口(SearchClusterDatabases)搜索集群database列表
+     */
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
     }
     /**
      * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。

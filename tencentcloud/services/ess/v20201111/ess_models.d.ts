@@ -671,7 +671,7 @@ export interface DescribeIntegrationEmployeesRequest {
  */
 export interface CreateFlowRequest {
     /**
-      * 调用方用户信息，userId 必填
+      * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
       */
     Operator: UserInfo;
     /**
@@ -1100,7 +1100,7 @@ export interface FailedCreateStaffData {
  */
 export interface CreateFlowByFilesRequest {
     /**
-      * 调用方用户信息，userId 必填
+      * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
       */
     Operator: UserInfo;
     /**
@@ -1539,7 +1539,7 @@ export interface AuthorizedUser {
  */
 export interface CreateDocumentRequest {
     /**
-      * 调用方用户信息，userId 必填
+      * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
       */
     Operator: UserInfo;
     /**
@@ -2219,7 +2219,7 @@ export interface IntegrationMainOrganizationUser {
  */
 export interface StartFlowRequest {
     /**
-      * 调用方用户信息，userId 必填
+      * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
       */
     Operator: UserInfo;
     /**

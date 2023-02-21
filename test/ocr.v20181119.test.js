@@ -158,6 +158,16 @@ it("ocr.v20181119.RecognizeContainerOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeTableAccurateOCR", async function () {
+    try {
+       const data = await client.RecognizeTableAccurateOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.MixedInvoiceDetect", async function () {
     try {
        const data = await client.MixedInvoiceDetect({})
@@ -298,9 +308,9 @@ it("ocr.v20181119.InvoiceGeneralOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeMedicalInvoiceOCR", async function () {
+it("ocr.v20181119.GetTaskState", async function () {
     try {
-       const data = await client.RecognizeMedicalInvoiceOCR({})
+       const data = await client.GetTaskState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +348,9 @@ it("ocr.v20181119.RecognizeTableOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VerifyBizLicense", async function () {
+it("ocr.v20181119.CreateAIFormTask", async function () {
     try {
-       const data = await client.VerifyBizLicense({})
+       const data = await client.CreateAIFormTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +431,16 @@ it("ocr.v20181119.VerifyEnterpriseFourFactors", async function () {
 it("ocr.v20181119.BusInvoiceOCR", async function () {
     try {
        const data = await client.BusInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RecognizeMedicalInvoiceOCR", async function () {
+    try {
+       const data = await client.RecognizeMedicalInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +701,16 @@ it("ocr.v20181119.FormulaOCR", async function () {
 it("ocr.v20181119.PassportOCR", async function () {
     try {
        const data = await client.PassportOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.VerifyBizLicense", async function () {
+    try {
+       const data = await client.VerifyBizLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

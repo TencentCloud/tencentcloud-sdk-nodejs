@@ -33,7 +33,6 @@ export interface CreateRoomRequest {
       * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
-coteaching 双师
       */
     SubType: string;
     /**
@@ -1209,7 +1208,6 @@ export interface DescribeRoomResponse {
       * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
-coteaching 双师
       */
     SubType?: string;
     /**
@@ -1542,7 +1540,7 @@ export interface RoomInfo {
       */
     MaxMicNumber: number;
     /**
-      * 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频 coteaching 双师
+      * 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubType: string;

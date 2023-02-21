@@ -472,7 +472,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEKSContainerInstances", req, cb);
     }
     /**
-     *  查询集群下节点实例信息
+     * 查询集群下节点实例信息
      */
     async DescribeClusterInstances(req, cb) {
         return this.request("DescribeClusterInstances", req, cb);

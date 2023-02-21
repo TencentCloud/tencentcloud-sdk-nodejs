@@ -458,6 +458,16 @@ it("tdmq.v20200217.DescribeCmqTopicDetail", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQVipInstanceDetail", async function () {
+    try {
+       const data = await client.DescribeRocketMQVipInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DeleteAMQPQueue", async function () {
     try {
        const data = await client.DeleteAMQPQueue({})
@@ -468,9 +478,9 @@ it("tdmq.v20200217.DeleteAMQPQueue", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyRocketMQCluster", async function () {
+it("tdmq.v20200217.DeleteAMQPVHost", async function () {
     try {
-       const data = await client.ModifyRocketMQCluster({})
+       const data = await client.DeleteAMQPVHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +698,9 @@ it("tdmq.v20200217.DeleteRocketMQCluster", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteAMQPVHost", async function () {
+it("tdmq.v20200217.ModifyRocketMQCluster", async function () {
     try {
-       const data = await client.DeleteAMQPVHost({})
+       const data = await client.ModifyRocketMQCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

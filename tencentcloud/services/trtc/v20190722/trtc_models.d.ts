@@ -2582,6 +2582,11 @@ export interface RecordParams {
 Hls 格式录制此参数不生效。
       */
     MaxMediaFileDuration?: number;
+    /**
+      * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MediaId?: number;
 }
 /**
  * DescribeTRTCMarketScaleMetricData返回参数结构体

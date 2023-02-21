@@ -1042,7 +1042,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安全设置
+   * 获取子账号安全设置
    */
   async DescribeSafeAuthFlagColl(
     req: DescribeSafeAuthFlagCollRequest,

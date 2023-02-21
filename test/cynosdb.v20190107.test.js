@@ -138,9 +138,9 @@ it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
     }
 })
 
-it("cynosdb.v20190107.OfflineCluster", async function () {
+it("cynosdb.v20190107.ModifyVipVport", async function () {
     try {
-       const data = await client.OfflineCluster({})
+       const data = await client.ModifyVipVport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +708,9 @@ it("cynosdb.v20190107.SetRenewFlag", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+it("cynosdb.v20190107.OfflineCluster", async function () {
     try {
-       const data = await client.SearchClusterDatabases({})
+       const data = await client.OfflineCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,6 +761,16 @@ it("cynosdb.v20190107.SwitchClusterZone", async function () {
 it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+    try {
+       const data = await client.SearchClusterDatabases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -304,7 +304,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteEKSContainerInstances(req: DeleteEKSContainerInstancesRequest, cb?: (error: string, rep: DeleteEKSContainerInstancesResponse) => void): Promise<DeleteEKSContainerInstancesResponse>;
     /**
-     *  查询集群下节点实例信息
+     * 查询集群下节点实例信息
      */
     DescribeClusterInstances(req: DescribeClusterInstancesRequest, cb?: (error: string, rep: DescribeClusterInstancesResponse) => void): Promise<DescribeClusterInstancesResponse>;
     /**

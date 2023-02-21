@@ -228,6 +228,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecognizeContainerOCR", req, cb);
     }
     /**
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
+
+默认接口请求频率限制：2次/秒。
+     */
+    async RecognizeTableAccurateOCR(req, cb) {
+        return this.request("RecognizeTableAccurateOCR", req, cb);
+    }
+    /**
      * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
      */
     async MixedInvoiceDetect(req, cb) {
@@ -324,11 +332,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvoiceGeneralOCR", req, cb);
     }
     /**
-     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
-
+     * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */
-    async RecognizeMedicalInvoiceOCR(req, cb) {
-        return this.request("RecognizeMedicalInvoiceOCR", req, cb);
+    async GetTaskState(req, cb) {
+        return this.request("GetTaskState", req, cb);
     }
     /**
      * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
@@ -351,14 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecognizeTableOCR", req, cb);
     }
     /**
-     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+     * 本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
 
-您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
-
-查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
+智能表单录入产品提供高准确率的表单识别技术和人工核对工具，支持自定义字段，将识别结果自动填入到自定义条目中，并提供人工操作工具，完成整个表单识别过程。适用性强，可对票据、合同、货单等文件的识别，适用于金融、货代、保险、档案等领域。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */
-    async VerifyBizLicense(req, cb) {
-        return this.request("VerifyBizLicense", req, cb);
+    async CreateAIFormTask(req, cb) {
+        return this.request("CreateAIFormTask", req, cb);
     }
     /**
      * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
@@ -469,6 +474,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BusInvoiceOCR(req, cb) {
         return this.request("BusInvoiceOCR", req, cb);
+    }
+    /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+     */
+    async RecognizeMedicalInvoiceOCR(req, cb) {
+        return this.request("RecognizeMedicalInvoiceOCR", req, cb);
     }
     /**
      * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
@@ -725,6 +737,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PassportOCR", req, cb);
     }
     /**
+     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+
+您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
+
+查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
+     */
+    async VerifyBizLicense(req, cb) {
+        return this.request("VerifyBizLicense", req, cb);
+    }
+    /**
      * 本接口支持常见银行票据的自动分类和识别。整单识别包括支票（含现金支票、普通支票、转账支票），承兑汇票（含银行承兑汇票、商业承兑汇票）以及进账单等，适用于中国人民银行印发的 2010 版银行票据凭证版式（银发[2010]299 号）。
      */
     async FinanBillOCR(req, cb) {
@@ -780,7 +802,6 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-
      */
     async RecognizeThaiIDCardOCR(req, cb) {
         return this.request("RecognizeThaiIDCardOCR", req, cb);

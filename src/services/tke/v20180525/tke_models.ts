@@ -2480,6 +2480,16 @@ export interface UpgradeAbleInstancesItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LatestVersion: string
+
+  /**
+   * RuntimeVersion
+   */
+  RuntimeVersion?: string
+
+  /**
+   * RuntimeLatestVersion
+   */
+  RuntimeLatestVersion?: string
 }
 
 /**
@@ -8559,6 +8569,12 @@ export interface CheckInstancesUpgradeAbleResponse {
   Total?: number
 
   /**
+      * 不可升级原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnavailableVersionReason?: Array<UnavailableReason>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9135,6 +9151,30 @@ export interface DescribeTKEEdgeClusterCredentialResponse {
  */
 export interface InstanceAdvancedSettings {
   /**
+      * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredPodNumber: number
+
+  /**
+      * GPU驱动相关参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUArgs: GPUArgs
+
+  /**
+      * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreStartUserScript: string
+
+  /**
+      * 节点污点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Taints: Array<Taint>
+
+  /**
       * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
 注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9175,30 +9215,6 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExtraArgs?: InstanceExtraArgs
-
-  /**
-      * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DesiredPodNumber: number
-
-  /**
-      * GPU驱动相关参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GPUArgs: GPUArgs
-
-  /**
-      * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PreStartUserScript: string
-
-  /**
-      * 节点污点
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Taints: Array<Taint>
 }
 
 /**
@@ -9977,13 +9993,13 @@ export interface DescribeRegionsResponse {
       * 地域的数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 地域列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RegionInstanceSet: Array<RegionInstance>
+  RegionInstanceSet?: Array<RegionInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10822,6 +10838,23 @@ export interface ModifyPrometheusGlobalNotificationRequest {
    * 告警通知渠道
    */
   Notification: PrometheusNotificationItem
+}
+
+/**
+ * 不可用原因
+ */
+export interface UnavailableReason {
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason: string
 }
 
 /**
@@ -11894,12 +11927,12 @@ export interface DescribeClusterLevelChangeRecordsResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 集群规模
    */
-  Items: Array<ClusterLevelChangeRecord>
+  Items?: Array<ClusterLevelChangeRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

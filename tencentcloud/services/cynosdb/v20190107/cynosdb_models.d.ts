@@ -1059,6 +1059,36 @@ export interface RollbackDatabase {
     NewDatabase: string;
 }
 /**
+ * ModifyVipVport请求参数结构体
+ */
+export interface ModifyVipVportRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 实例组id
+      */
+    InstanceGrpId: string;
+    /**
+      * 需要修改的目的ip
+      */
+    Vip?: string;
+    /**
+      * 需要修改的目的端口
+      */
+    Vport?: number;
+    /**
+      * 数据库类型，取值范围:
+<li> MYSQL </li>
+      */
+    DbType?: string;
+    /**
+      * 旧ip回收前的保留时间，单位小时，0表示立即回收
+      */
+    OldIpReserveHours?: number;
+}
+/**
  * 数据库权限列表
  */
 export interface DatabasePrivileges {
@@ -2346,6 +2376,19 @@ export interface DescribeBackupConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BackupType: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVipVport返回参数结构体
+ */
+export interface ModifyVipVportResponse {
+    /**
+      * 异步任务id
+      */
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
