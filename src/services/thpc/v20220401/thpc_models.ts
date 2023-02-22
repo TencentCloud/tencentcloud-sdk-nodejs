@@ -915,14 +915,13 @@ export interface AddNodesRequest {
   ClientToken?: string
 
   /**
-      * 队列名称。不指定则为默认队列。<br><li>SLURM默认队列为：compute。<br>
-<li>SGE默认队列为：all.q。<br>
+      * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。<li>SGE默认队列为：all.q。
 
       */
   QueueName?: string
 
   /**
-   * 添加节点类型。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
+   * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
    */
   NodeRole?: string
 
@@ -934,6 +933,11 @@ true：发送检查请求，不会创建实例。检查项包括是否填写了�
 false（默认）：发送正常请求，通过检查后直接创建实例
       */
   DryRun?: boolean
+
+  /**
+   * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
+   */
+  NodeType?: string
 }
 
 /**

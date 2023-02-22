@@ -243,6 +243,18 @@ false：关闭60天内禁止转移注册商锁定
       * 是否开启转移锁：0=默认不开启，1=开启
       */
     TransferProhibition?: number;
+    /**
+      * 渠道来源，pc/miniprogram/h5等
+      */
+    ChannelFrom?: string;
+    /**
+      * 订单来源，common正常/dianshi_active点石活动等
+      */
+    OrderFrom?: string;
+    /**
+      * 活动id
+      */
+    ActivityId?: string;
 }
 /**
  * CreateDomainBatch返回参数结构体
@@ -490,7 +502,7 @@ export interface RenewDomainBatchRequest {
       */
     Domains: Array<string>;
     /**
-      * 付费模式 0手动在线付费，1使用余额付费。
+      * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包。
       */
     PayMode: number;
     /**
@@ -500,6 +512,22 @@ export interface RenewDomainBatchRequest {
 2 表示不处理，保留域名原有状态（默认值）
       */
     AutoRenewFlag?: number;
+    /**
+      * 特惠包ID
+      */
+    PackageResourceId?: string;
+    /**
+      * 渠道来源，pc/miniprogram/h5等
+      */
+    ChannelFrom?: string;
+    /**
+      * 订单来源，common正常/dianshi_active点石活动等
+      */
+    OrderFrom?: string;
+    /**
+      * 活动id
+      */
+    ActivityId?: string;
 }
 /**
  * BatchModifyDomainInfo返回参数结构体
@@ -996,6 +1024,18 @@ export interface CreateDomainBatchRequest {
       * 是否开启转移锁：0=默认不开启，1=开启
       */
     TransferProhibition?: number;
+    /**
+      * 渠道来源，pc/miniprogram/h5等
+      */
+    ChannelFrom?: string;
+    /**
+      * 订单来源，common正常/dianshi_active点石活动等
+      */
+    OrderFrom?: string;
+    /**
+      * 活动id
+      */
+    ActivityId?: string;
 }
 /**
  * DescribeDomainSimpleInfo返回参数结构体

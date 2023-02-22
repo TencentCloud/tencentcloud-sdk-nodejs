@@ -140,7 +140,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationTriggerPersonal(req: DescribeApplicationTriggerPersonalRequest, cb?: (error: string, rep: DescribeApplicationTriggerPersonalResponse) => void): Promise<DescribeApplicationTriggerPersonalResponse>;
     /**
-     * 查询全部实例信息
+     * 内部替换接口+DescribeInstanceAllForCoding
+
+查询全部实例信息
      */
     DescribeInstanceAll(req: DescribeInstanceAllRequest, cb?: (error: string, rep: DescribeInstanceAllResponse) => void): Promise<DescribeInstanceAllResponse>;
     /**

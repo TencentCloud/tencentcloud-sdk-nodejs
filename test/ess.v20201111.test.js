@@ -28,6 +28,16 @@ it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
     }
 })
 
+it("ess.v20201111.ModifyApplicationCallbackInfo", async function () {
+    try {
+       const data = await client.ModifyApplicationCallbackInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.StartFlow", async function () {
     try {
        const data = await client.StartFlow({})

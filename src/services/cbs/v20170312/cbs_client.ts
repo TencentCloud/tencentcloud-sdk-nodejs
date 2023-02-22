@@ -41,6 +41,7 @@ import {
   SnapshotCopyResult,
   RenewDiskRequest,
   InquirePriceModifyDiskExtraPerformanceResponse,
+  AdvancedRetentionPolicy,
   CreateDisksRequest,
   AttachDisksRequest,
   DescribeDiskAssociatedAutoSnapshotPolicyRequest,

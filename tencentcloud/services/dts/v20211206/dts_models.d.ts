@@ -704,6 +704,11 @@ export interface DBEndpointInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtraAttr?: Array<KeyValuePairOption>;
+    /**
+      * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatabaseNetEnv?: string;
 }
 /**
  * ContinueSyncJob返回参数结构体
@@ -2617,7 +2622,7 @@ export interface StartSyncJobResponse {
  */
 export interface Objects {
     /**
-      * 迁移对象类型 Partial(部分对象)
+      * 迁移对象类型 Partial(部分对象)，默认为Partial
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mode?: string;

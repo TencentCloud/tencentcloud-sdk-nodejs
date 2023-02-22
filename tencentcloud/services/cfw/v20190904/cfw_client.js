@@ -235,6 +235,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAllVPCSwitchStatus", req, cb);
     }
     /**
+     * 日志存储设置，可以修改存储时间和清空日志
+     */
+    async ModifyStorageSetting(req, cb) {
+        return this.request("ModifyStorageSetting", req, cb);
+    }
+    /**
      * 查询新企业安全组规则
      */
     async DescribeEnterpriseSecurityGroupRule(req, cb) {

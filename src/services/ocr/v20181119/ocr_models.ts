@@ -724,62 +724,62 @@ export interface DriverLicenseOCRResponse {
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
 
   /**
    * 性别
    */
-  Sex: string
+  Sex?: string
 
   /**
    * 国籍
    */
-  Nationality: string
+  Nationality?: string
 
   /**
    * 住址
    */
-  Address: string
+  Address?: string
 
   /**
    * 出生日期（YYYY-MM-DD）
    */
-  DateOfBirth: string
+  DateOfBirth?: string
 
   /**
    * 初次领证日期（YYYY-MM-DD）
    */
-  DateOfFirstIssue: string
+  DateOfFirstIssue?: string
 
   /**
    * 准驾车型
    */
-  Class: string
+  Class?: string
 
   /**
    * 有效期开始时间（YYYY-MM-DD）
    */
-  StartDate: string
+  StartDate?: string
 
   /**
    * 有效期截止时间（YYYY-MM-DD）
    */
-  EndDate: string
+  EndDate?: string
 
   /**
    * 证号
    */
-  CardCode: string
+  CardCode?: string
 
   /**
    * 档案编号
    */
-  ArchivesCode: string
+  ArchivesCode?: string
 
   /**
    * 记录
    */
-  Record: string
+  Record?: string
 
   /**
       * Code 告警码列表和释义：
@@ -788,7 +788,7 @@ export interface DriverLicenseOCRResponse {
 -9106  ps告警
 注：告警码可以同时存在多个
       */
-  RecognizeWarnCode: Array<number>
+  RecognizeWarnCode?: Array<number>
 
   /**
       * 告警码说明：
@@ -797,22 +797,22 @@ WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警
 WARN_DRIVER_LICENSE_PS_CARD ps告警
 注：告警信息可以同时存在多个
       */
-  RecognizeWarnMsg: Array<string>
+  RecognizeWarnMsg?: Array<string>
 
   /**
    * 发证单位
    */
-  IssuingAuthority: string
+  IssuingAuthority?: string
 
   /**
    * 状态（仅电子驾驶证支持返回该字段）
    */
-  State: string
+  State?: string
 
   /**
    * 累积记分（仅电子驾驶证支持返回该字段）
    */
-  CumulativeScore: string
+  CumulativeScore?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1440,27 +1440,27 @@ export interface InstitutionOCRResponse {
   /**
    * 注册号
    */
-  RegId: string
+  RegId?: string
 
   /**
    * 有效期
    */
-  ValidDate: string
+  ValidDate?: string
 
   /**
    * 住所
    */
-  Location: string
+  Location?: string
 
   /**
    * 名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 法定代表人
    */
-  LegalPerson: string
+  LegalPerson?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2464,12 +2464,12 @@ export interface GeneralAccurateOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
-  TextDetections: Array<TextDetection>
+  TextDetections?: Array<TextDetection>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel: number
+  Angel?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2602,22 +2602,22 @@ export interface GeneralBasicOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
-  TextDetections: Array<TextDetection>
+  TextDetections?: Array<TextDetection>
 
   /**
    * 检测到的语言类型，目前支持的语言类型参考入参LanguageType说明。
    */
-  Language: string
+  Language?: string
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel: number
+  Angel?: number
 
   /**
    * 图片为PDF时，返回PDF的总页数，默认为0
    */
-  PdfPageSize: number
+  PdfPageSize?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3045,27 +3045,27 @@ export interface LicensePlateOCRResponse {
   /**
    * 识别出的车牌号码。
    */
-  Number: string
+  Number?: string
 
   /**
    * 置信度，0 - 100 之间。
    */
-  Confidence: number
+  Confidence?: number
 
   /**
    * 文本行在原图片中的像素坐标框。
    */
-  Rect: Rect
+  Rect?: Rect
 
   /**
    * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。
    */
-  Color: string
+  Color?: string
 
   /**
    * 全部车牌信息。
    */
-  LicensePlateInfos: Array<LicensePlateInfo>
+  LicensePlateInfos?: Array<LicensePlateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3745,12 +3745,12 @@ export interface ImageEnhancementResponse {
 “origin”：原图
 “preprocess”:预处理后的图
       */
-  ImageTag: string
+  ImageTag?: string
 
   /**
    * 图片数据，返回预处理后图像或原图像base64字符
    */
-  Image: string
+  Image?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3987,27 +3987,27 @@ export interface RecognizeTravelCardOCRResponse {
   /**
    * 行程卡更新时间，格式为：XXXX.XX.XX XX:XX:XX
    */
-  Time: string
+  Time?: string
 
   /**
    * 行程卡颜色：绿色、黄色、红色
    */
-  Color: string
+  Color?: string
 
   /**
    * 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”）
    */
-  ReachedCity: Array<string>
+  ReachedCity?: Array<string>
 
   /**
    * 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值）
    */
-  RiskArea: Array<string>
+  RiskArea?: Array<string>
 
   /**
    * 电话号码
    */
-  Telephone: string
+  Telephone?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5576,52 +5576,52 @@ export interface RecognizeHealthCodeOCRResponse {
   /**
    * 持码人姓名，如：王*（允许返回空值）
    */
-  Name: string
+  Name?: string
 
   /**
    * 持码人身份证号，如：11**************01（允许返回空值）
    */
-  IDNumber: string
+  IDNumber?: string
 
   /**
    * 健康码更新时间（允许返回空值）
    */
-  Time: string
+  Time?: string
 
   /**
    * 健康码颜色：绿色、黄色、红色（允许返回空值）
    */
-  Color: string
+  Color?: string
 
   /**
    * 核酸检测间隔时长（允许返回空值）
    */
-  TestingInterval: string
+  TestingInterval?: string
 
   /**
    * 核酸检测结果：阴性、阳性、暂无核酸检测记录（允许返回空值）
    */
-  TestingResult: string
+  TestingResult?: string
 
   /**
    * 核酸检测时间（允许返回空值）
    */
-  TestingTime: string
+  TestingTime?: string
 
   /**
    * 疫苗接种信息，返回接种针数或接种情况（允许返回空值）
    */
-  Vaccination: string
+  Vaccination?: string
 
   /**
    * 场所名称（允许返回空值）
    */
-  SpotName: string
+  SpotName?: string
 
   /**
    * 疫苗接种时间
    */
-  VaccinationTime: string
+  VaccinationTime?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5839,142 +5839,142 @@ export interface ResidenceBookletOCRResponse {
   /**
    * 户号
    */
-  HouseholdNumber: string
+  HouseholdNumber?: string
 
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
 
   /**
    * 性别
    */
-  Sex: string
+  Sex?: string
 
   /**
    * 出生地
    */
-  BirthPlace: string
+  BirthPlace?: string
 
   /**
    * 民族
    */
-  Nation: string
+  Nation?: string
 
   /**
    * 籍贯
    */
-  NativePlace: string
+  NativePlace?: string
 
   /**
    * 出生日期
    */
-  BirthDate: string
+  BirthDate?: string
 
   /**
    * 公民身份证件编号
    */
-  IdCardNumber: string
+  IdCardNumber?: string
 
   /**
    * 文化程度
    */
-  EducationDegree: string
+  EducationDegree?: string
 
   /**
    * 服务处所
    */
-  ServicePlace: string
+  ServicePlace?: string
 
   /**
    * 户别
    */
-  Household: string
+  Household?: string
 
   /**
    * 住址
    */
-  Address: string
+  Address?: string
 
   /**
    * 承办人签章文字
    */
-  Signature: string
+  Signature?: string
 
   /**
    * 签发日期
    */
-  IssueDate: string
+  IssueDate?: string
 
   /**
    * 户主页编号
    */
-  HomePageNumber: string
+  HomePageNumber?: string
 
   /**
    * 户主姓名
    */
-  HouseholderName: string
+  HouseholderName?: string
 
   /**
    * 户主或与户主关系
    */
-  Relationship: string
+  Relationship?: string
 
   /**
    * 本市（县）其他住址
    */
-  OtherAddresses: string
+  OtherAddresses?: string
 
   /**
    * 宗教信仰
    */
-  ReligiousBelief: string
+  ReligiousBelief?: string
 
   /**
    * 身高
    */
-  Height: string
+  Height?: string
 
   /**
    * 血型
    */
-  BloodType: string
+  BloodType?: string
 
   /**
    * 婚姻状况
    */
-  MaritalStatus: string
+  MaritalStatus?: string
 
   /**
    * 兵役状况
    */
-  VeteranStatus: string
+  VeteranStatus?: string
 
   /**
    * 职业
    */
-  Profession: string
+  Profession?: string
 
   /**
    * 何时由何地迁来本市(县)
    */
-  MoveToCityInformation: string
+  MoveToCityInformation?: string
 
   /**
    * 何时由何地迁来本址
    */
-  MoveToSiteInformation: string
+  MoveToSiteInformation?: string
 
   /**
    * 登记日期
    */
-  RegistrationDate: string
+  RegistrationDate?: string
 
   /**
    * 曾用名
    */
-  FormerName: string
+  FormerName?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

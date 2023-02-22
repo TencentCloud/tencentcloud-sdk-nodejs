@@ -4703,19 +4703,19 @@ export interface ModifyBackupConfigRequest {
   ClusterId: string
 
   /**
+   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
+   */
+  ReserveDuration: number
+
+  /**
    * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
    */
-  BackupTimeBeg: number
+  BackupTimeBeg?: number
 
   /**
    * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
    */
-  BackupTimeEnd: number
-
-  /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
-   */
-  ReserveDuration: number
+  BackupTimeEnd?: number
 
   /**
    * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份

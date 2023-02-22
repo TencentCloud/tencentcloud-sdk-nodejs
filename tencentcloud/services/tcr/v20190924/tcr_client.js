@@ -226,7 +226,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationTriggerPersonal", req, cb);
     }
     /**
-     * 查询全部实例信息
+     * 内部替换接口+DescribeInstanceAllForCoding
+
+查询全部实例信息
      */
     async DescribeInstanceAll(req, cb) {
         return this.request("DescribeInstanceAll", req, cb);

@@ -2605,12 +2605,12 @@ export interface DescribeInstanceParamsResponse {
  */
 export interface InstanceDetail {
   /**
-   * 实例ID
+   * 实例ID。
    */
   InstanceId: string
 
   /**
-   * 实例名称
+   * 实例名称。
    */
   InstanceName: string
 
@@ -2620,22 +2620,22 @@ export interface InstanceDetail {
   PayMode: number
 
   /**
-   * 项目ID
+   * 项目ID。
    */
   ProjectId: number
 
   /**
-   * 集群类型，可能的返回值：0-副本集实例，1-分片实例，
+   * 集群类型，可能的返回值：0-副本集实例，1-分片实例。
    */
   ClusterType: number
 
   /**
-   * 地域信息
+   * 地域信息。
    */
   Region: string
 
   /**
-   * 可用区信息
+   * 可用区信息。
    */
   Zone: string
 
@@ -2645,137 +2645,137 @@ export interface InstanceDetail {
   NetType: number
 
   /**
-   * 私有网络的ID
+   * 私有网络的ID。
    */
   VpcId: string
 
   /**
-   * 私有网络的子网ID
+   * 私有网络的子网ID。
    */
   SubnetId: string
 
   /**
-   * 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期
+   * 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期。
    */
   Status: number
 
   /**
-   * 实例IP
+   * 实例IP。
    */
   Vip: string
 
   /**
-   * 端口号
+   * 端口号。
    */
   Vport: number
 
   /**
-   * 实例创建时间
+   * 实例创建时间。
    */
   CreateTime: string
 
   /**
-   * 实例到期时间
+   * 实例到期时间。
    */
   DeadLine: string
 
   /**
-   * 实例版本信息
+   * 实例版本信息。
    */
   MongoVersion: string
 
   /**
-   * 实例内存规格，单位为MB
+   * 实例内存规格，单位为MB。
    */
   Memory: number
 
   /**
-   * 实例磁盘规格，单位为MB
+   * 实例磁盘规格，单位为MB。
    */
   Volume: number
 
   /**
-   * 实例CPU核心数
+   * 实例CPU核心数。
    */
   CpuNum: number
 
   /**
-   * 实例机器类型
+   * 实例机器类型。
    */
   MachineType: string
 
   /**
-   * 实例从节点数
+   * 实例从节点数。
    */
   SecondaryNum: number
 
   /**
-   * 实例分片数
+   * 实例分片数。
    */
   ReplicationSetNum: number
 
   /**
-   * 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费
+   * 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费。
    */
   AutoRenewFlag: number
 
   /**
-   * 已用容量，单位MB
+   * 已用容量，单位MB。
    */
   UsedVolume: number
 
   /**
-   * 维护窗口起始时间
+   * 维护窗口起始时间。
    */
   MaintenanceStart: string
 
   /**
-   * 维护窗口结束时间
+   * 维护窗口结束时间。
    */
   MaintenanceEnd: string
 
   /**
-   * 分片信息
+   * 分片信息。
    */
   ReplicaSets: Array<ShardInfo>
 
   /**
-   * 只读实例信息
+   * 只读实例信息。
    */
   ReadonlyInstances: Array<DBInstanceInfo>
 
   /**
-   * 灾备实例信息
+   * 灾备实例信息。
    */
   StandbyInstances: Array<DBInstanceInfo>
 
   /**
-   * 临时实例信息
+   * 临时实例信息。
    */
   CloneInstances: Array<DBInstanceInfo>
 
   /**
-   * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息
+   * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息。
    */
   RelatedInstance: DBInstanceInfo
 
   /**
-   * 实例标签信息集合
+   * 实例标签信息集合。
    */
   Tags: Array<TagInfo>
 
   /**
-   * 实例版本标记
+   * 实例版本标记。
    */
   InstanceVer: number
 
   /**
-   * 实例版本标记
+   * 实例版本标记。
    */
   ClusterVer: number
 
   /**
-   * 协议信息，可能的返回值：1-mongodb，2-dynamodb
+   * 协议信息，可能的返回值：1-mongodb，2-dynamodb。
    */
   Protocol: number
 
@@ -2793,6 +2793,54 @@ export interface InstanceDetail {
    * 实例对应的物理实例id，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
    */
   RealInstanceId: string
+
+  /**
+      * mongos节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MongosNodeNum: number
+
+  /**
+      * mongos节点内存。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MongosMemory: number
+
+  /**
+      * mongos节点CPU核数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MongosCpuNum: number
+
+  /**
+      * Config Server节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigServerNodeNum: number
+
+  /**
+      * Config Server节点内存。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigServerMemory: number
+
+  /**
+      * Config Server节点磁盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigServerVolume: number
+
+  /**
+      * Config Server节点CPU核数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigServerCpuNum: number
+
+  /**
+      * readonly节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadonlyNodeNum: number
 }
 
 /**

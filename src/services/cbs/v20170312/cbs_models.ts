@@ -194,6 +194,24 @@ export interface AutoSnapshotPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceIdSet: Array<string>
+
+  /**
+      * 该定期快照创建的快照可以保留的月数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RetentionMonths: number
+
+  /**
+      * 该定期快照创建的快照最大保留数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RetentionAmount: number
+
+  /**
+      * 定期快照高级保留策略。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvancedRetentionPolicy: AdvancedRetentionPolicy
 }
 
 /**
@@ -495,6 +513,35 @@ export interface InquirePriceModifyDiskExtraPerformanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 定期快照高级保留策略，四个参数都为必选参数
+ */
+export interface AdvancedRetentionPolicy {
+  /**
+      * 保留最新快照Days天内的每天最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Days: number
+
+  /**
+      * 保留最新快照Weeks周内的每周最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Weeks: number
+
+  /**
+      * 保留最新快照Months月内的每月最新的一个快照， 取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Months: number
+
+  /**
+      * 保留最新快照Years年内的每年最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Years: number
 }
 
 /**
@@ -2083,7 +2130,7 @@ export interface DescribeDiskStoragePoolResponse {
 }
 
 /**
- * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的小时执行该条定期快照策略。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，仅可设置其中一条策略规则。
+ * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的时刻点执行该条定期快照策。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，仅可设置其中一条策略规则。
  */
 export interface Policy {
   /**
@@ -2095,6 +2142,16 @@ export interface Policy {
    * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
    */
   DayOfWeek?: Array<number>
+
+  /**
+   * 指定每月从月初到月底需要触发定期快照的日期,取值范围：[1, 31]，1-31分别表示每月的具体日期，比如5表示每月的5号。注：若设置29、30、31等部分月份不存在的日期，则对应不存在日期的月份会跳过不打定期快照。
+   */
+  DayOfMonth?: Array<number>
+
+  /**
+   * 指定创建定期快照的间隔天数，取值范围：[1, 365]，例如设置为5，则间隔5天即触发定期快照创建。注：当选择按天备份时，理论上第一次备份的时间为备份策略创建当天。如果当天备份策略创建的时间已经晚于设置的备份时间，那么将会等到第二个备份周期再进行第一次备份。
+   */
+  IntervalDays?: number
 }
 
 /**

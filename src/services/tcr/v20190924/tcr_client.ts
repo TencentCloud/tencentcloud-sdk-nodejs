@@ -635,8 +635,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询全部实例信息
-   */
+     * 内部替换接口+DescribeInstanceAllForCoding
+
+查询全部实例信息
+     */
   async DescribeInstanceAll(
     req: DescribeInstanceAllRequest,
     cb?: (error: string, rep: DescribeInstanceAllResponse) => void

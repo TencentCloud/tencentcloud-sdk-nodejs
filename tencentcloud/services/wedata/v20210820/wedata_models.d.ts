@@ -2846,7 +2846,12 @@ export interface DescribeTaskInstanceResponse {
     /**
       * 任务实例详情
       */
-    TaskInstanceDetail: TaskInstanceDetail;
+    TaskInstanceDetail?: TaskInstanceDetail;
+    /**
+      * 任务实例详情。与TaskInstanceDetail相同含义，优先取Data，Data为空时，取TaskInstanceDetail
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data?: TaskInstanceDetail;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10265,6 +10270,11 @@ export interface DescribeOfflineTaskTokenResponse {
       */
     Token: string;
     /**
+      * 长连接临时token。与Token相同含义，优先取Data，Data为空时，取Token。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -10994,6 +11004,10 @@ export interface DescribeRealTimeTaskSpeedResponse {
       * 同步速度字节/s列表
       */
     BytesSpeedList: Array<BytesSpeed>;
+    /**
+      * 同步速度，包括了RecordsSpeedList和BytesSpeedList
+      */
+    Data: RealTimeTaskSpeed;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11995,6 +12009,11 @@ export interface GenHiveTableDDLSqlResponse {
       */
     DDLSql: string;
     /**
+      * 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -12128,6 +12147,19 @@ export interface LogContent {
       * 日志内容
       */
     Log: string;
+}
+/**
+ * 实时任务同步速度趋势
+ */
+export interface RealTimeTaskSpeed {
+    /**
+      * 同步速度条/s列表
+      */
+    RecordsSpeedList: Array<RecordsSpeed>;
+    /**
+      * 同步速度字节/s列表
+      */
+    BytesSpeedList: Array<BytesSpeed>;
 }
 /**
  * DescribeTopTableStat请求参数结构体

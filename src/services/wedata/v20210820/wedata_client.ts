@@ -527,6 +527,7 @@ import {
   OfflineTaskAddParam,
   DescribeRuleExecExportResultResponse,
   LogContent,
+  RealTimeTaskSpeed,
   DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,

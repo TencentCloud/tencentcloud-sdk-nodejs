@@ -44,6 +44,7 @@ import {
   DescribeUnHandleEventTabListRequest,
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
+  ModifyStorageSettingResponse,
   RemoveAcRuleResponse,
   NatFwInstance,
   CreateSecurityGroupRulesResponse,
@@ -146,6 +147,7 @@ import {
   DescribeBlockIgnoreListRequest,
   ModifyBlockTopResponse,
   DeleteNatFwInstanceRequest,
+  ModifyStorageSettingRequest,
   DescribeNatFwVpcDnsLstResponse,
   CreateChooseVpcsRequest,
   ExpandCfwVerticalResponse,
@@ -529,6 +531,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void
   ): Promise<ModifyAllVPCSwitchStatusResponse> {
     return this.request("ModifyAllVPCSwitchStatus", req, cb)
+  }
+
+  /**
+   * 日志存储设置，可以修改存储时间和清空日志
+   */
+  async ModifyStorageSetting(
+    req?: ModifyStorageSettingRequest,
+    cb?: (error: string, rep: ModifyStorageSettingResponse) => void
+  ): Promise<ModifyStorageSettingResponse> {
+    return this.request("ModifyStorageSetting", req, cb)
   }
 
   /**

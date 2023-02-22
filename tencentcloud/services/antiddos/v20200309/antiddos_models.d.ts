@@ -4844,6 +4844,10 @@ export interface BGPInstance {
       * 弹性业务带宽开关
       */
     ElasticServiceBandwidth: number;
+    /**
+      * 赠送的业务带宽
+      */
+    GiftServiceBandWidth?: number;
 }
 /**
  * DescribeListPortAclList返回参数结构体

@@ -648,6 +648,15 @@ export interface AssociatedInstanceInfo {
     SecurityGroupCount: number;
 }
 /**
+ * ModifyStorageSetting返回参数结构体
+ */
+export interface ModifyStorageSettingResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RemoveAcRule返回参数结构体
  */
 export interface RemoveAcRuleResponse {
@@ -2690,6 +2699,16 @@ export interface NatInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ZoneZhBak: string;
+    /**
+      * 已使用规则数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleUsed?: number;
+    /**
+      * 实例的规则限制最大规格数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleMax?: number;
 }
 /**
  * Nat防火墙弹性公网ip列表
@@ -3029,6 +3048,10 @@ export interface DeleteNatFwInstanceRequest {
       */
     CfwInstance: string;
 }
+/**
+ * ModifyStorageSetting请求参数结构体
+ */
+export declare type ModifyStorageSettingRequest = null;
 /**
  * DescribeNatFwVpcDnsLst返回参数结构体
  */

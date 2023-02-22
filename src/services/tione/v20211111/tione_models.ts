@@ -476,6 +476,12 @@ export interface BatchTaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BillingInfo: string
+
+  /**
+      * 运行中的Pod的名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodList?: Array<string>
 }
 
 /**
@@ -1738,6 +1744,41 @@ export interface StopBatchTaskRequest {
 }
 
 /**
+ * 容器状态
+ */
+export interface ContainerStatus {
+  /**
+      * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RestartCount?: number
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State?: string
+
+  /**
+      * 是否就绪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ready?: boolean
+
+  /**
+      * 状态原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason?: string
+
+  /**
+      * 容器的错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message?: string
+}
+
+/**
  * ModifyModelService请求参数结构体
  */
 export interface ModifyModelServiceRequest {
@@ -1917,13 +1958,13 @@ export interface DescribeModelAccEngineVersionsResponse {
 }
 
 /**
- * DeleteModelAccelerateTask返回参数结构体
+ * DescribeModelServiceCallInfo请求参数结构体
  */
-export interface DeleteModelAccelerateTaskResponse {
+export interface DescribeModelServiceCallInfoRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 服务组id
    */
-  RequestId?: string
+  ServiceGroupId: string
 }
 
 /**
@@ -2163,23 +2204,25 @@ export interface DescribeAPIConfigsRequest {
 }
 
 /**
- * DescribeBillingSpecs请求参数结构体
+ * DescribeModelServiceGroups返回参数结构体
  */
-export interface DescribeBillingSpecsRequest {
+export interface DescribeModelServiceGroupsResponse {
   /**
-   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
-   */
-  TaskType: string
+      * 推理服务组数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 
   /**
-   * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
-   */
-  ChargeType: string
+      * 服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceGroups: Array<ServiceGroup>
 
   /**
-   * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceType?: string
+  RequestId?: string
 }
 
 /**
@@ -2423,16 +2466,6 @@ export interface Option {
 }
 
 /**
- * DescribeModelServiceCallInfo请求参数结构体
- */
-export interface DescribeModelServiceCallInfoRequest {
-  /**
-   * 服务组id
-   */
-  ServiceGroupId: string
-}
-
-/**
  * 资源组
  */
 export interface ResourceGroup {
@@ -2587,25 +2620,23 @@ export interface DescribeInferTemplatesResponse {
 }
 
 /**
- * DescribeModelServiceGroups返回参数结构体
+ * DescribeBillingSpecs请求参数结构体
  */
-export interface DescribeModelServiceGroupsResponse {
+export interface DescribeBillingSpecsRequest {
   /**
-      * 推理服务组数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-      * 服务组信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceGroups: Array<ServiceGroup>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
    */
-  RequestId?: string
+  TaskType: string
+
+  /**
+   * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
+   */
+  ChargeType: string
+
+  /**
+   * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
+   */
+  ResourceType?: string
 }
 
 /**
@@ -3304,6 +3335,12 @@ HYBRID_PAID:
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModelHotUpdateEnable: boolean
+
+  /**
+      * Pod列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pods?: Pod
 }
 
 /**
@@ -3792,6 +3829,16 @@ export interface CreateBatchTaskResponse {
 }
 
 /**
+ * DeleteModelService返回参数结构体
+ */
+export interface DeleteModelServiceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据集组
  */
 export interface DatasetGroup {
@@ -3998,6 +4045,11 @@ Filter.Fuzzy取值：true/false，是否支持模糊匹配
 }
 
 /**
+ * 训练数据
+ */
+export type TrainingDataPoint = null
+
+/**
  * 四级标签
  */
 export interface TextLabelDistributionDetailInfoFourthClass {
@@ -4027,9 +4079,51 @@ export interface TextLabelDistributionDetailInfoFourthClass {
 }
 
 /**
- * 训练数据
+ * Pod信息展示
  */
-export type TrainingDataPoint = null
+export interface Pod {
+  /**
+      * pod名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * pod的唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uid?: string
+
+  /**
+      * 服务付费模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeType?: string
+
+  /**
+      * pod的状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Phase?: string
+
+  /**
+      * pod的IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IP?: string
+
+  /**
+      * pod的创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+      * 容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Containers?: Container
+}
 
 /**
  * DescribeLatestTrainingMetrics请求参数结构体
@@ -4122,13 +4216,19 @@ export interface DescribeModelServiceCallInfoResponse {
       * 服务调用信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServiceCallInfo: ServiceCallInfo
+  ServiceCallInfo?: ServiceCallInfo
 
   /**
       * 升级网关调用信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InferGatewayCallInfo: InferGatewayCallInfo
+  InferGatewayCallInfo?: InferGatewayCallInfo
+
+  /**
+      * 默认nginx网关的调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4159,6 +4259,16 @@ export interface ScheduledAction {
    * 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00”
    */
   ScheduleStopTime?: string
+}
+
+/**
+ * DeleteModelAccelerateTask返回参数结构体
+ */
+export interface DeleteModelAccelerateTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4797,6 +4907,35 @@ export interface DescribeModelAccelerateTaskRequest {
    * 模型加速任务ID
    */
   ModelAccTaskId: string
+}
+
+/**
+ * 容器信息
+ */
+export interface Container {
+  /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerId?: string
+
+  /**
+      * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Image?: string
+
+  /**
+      * 容器状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: ContainerStatus
 }
 
 /**
@@ -5446,6 +5585,36 @@ STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING�
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModelHotUpdatePath: CosPathInfo
+
+  /**
+      * 推理环境id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReasoningEnvironmentId?: string
+
+  /**
+      * 训练任务版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrainingJobVersion?: string
+
+  /**
+      * 训练偏好
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrainingPreference?: string
+
+  /**
+      * 自动学习任务id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoMLTaskId?: string
+
+  /**
+      * 是否QAT模型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsQAT?: boolean
 }
 
 /**
@@ -5694,37 +5863,37 @@ export interface DataConfig {
   /**
    * 映射路径
    */
-  MappingPath: string
+  MappingPath?: string
 
   /**
       * DATASET、COS、CFS、HDFS、WEDATA_HDFS
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DataSourceType: string
+  DataSourceType?: string
 
   /**
       * 来自数据集的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DataSetSource: DataSetConfig
+  DataSetSource?: DataSetConfig
 
   /**
       * 来自cos的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  COSSource: CosPathInfo
+  COSSource?: CosPathInfo
 
   /**
       * 来自CFS的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CFSSource: CFSConfig
+  CFSSource?: CFSConfig
 
   /**
       * 来自HDFS的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HDFSSource: HDFSConfig
+  HDFSSource?: HDFSConfig
 }
 
 /**
@@ -6195,7 +6364,7 @@ export interface DescribeBatchTaskResponse {
       * 跑批任务详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BatchTaskDetail: BatchTaskDetail
+  BatchTaskDetail?: BatchTaskDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6204,13 +6373,14 @@ export interface DescribeBatchTaskResponse {
 }
 
 /**
- * DeleteModelService返回参数结构体
+ * 默认Nginx网关结构
  */
-export interface DeleteModelServiceResponse {
+export interface DefaultNginxGatewayCallInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * host
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Host?: string
 }
 
 /**

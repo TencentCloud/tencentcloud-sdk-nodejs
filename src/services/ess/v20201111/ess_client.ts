@@ -25,6 +25,7 @@ import {
   FileInfo,
   CreateFlowApproversResponse,
   DescribeIntegrationMainOrganizationUserRequest,
+  ModifyApplicationCallbackInfoResponse,
   CreateMultiFlowSignQRCodeResponse,
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
@@ -97,6 +98,7 @@ import {
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
+  ModifyApplicationCallbackInfoRequest,
   IntegrationMainOrganizationUser,
   StartFlowRequest,
   CreatePrepareFlowRequest,
@@ -144,6 +146,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
   ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
     return this.request("DescribeOrganizationGroupOrganizations", req, cb)
+  }
+
+  /**
+     * 新增/删除应用callbackinfo
+callbackinfo包含： 回调地址和签名key
+操作：新增/删除
+     */
+  async ModifyApplicationCallbackInfo(
+    req?: ModifyApplicationCallbackInfoRequest,
+    cb?: (error: string, rep: ModifyApplicationCallbackInfoResponse) => void
+  ): Promise<ModifyApplicationCallbackInfoResponse> {
+    return this.request("ModifyApplicationCallbackInfo", req, cb)
   }
 
   /**

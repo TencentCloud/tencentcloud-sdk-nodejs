@@ -2867,7 +2867,7 @@ export interface DescribeClusterKubeconfigResponse {
     /**
       * 子账户kubeconfig文件，可用于直接访问集群kube-apiserver
       */
-    Kubeconfig: string;
+    Kubeconfig?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
