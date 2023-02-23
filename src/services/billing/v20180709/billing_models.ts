@@ -1883,7 +1883,7 @@ export interface DescribeDosageCosDetailByDateResponse {
   /**
    * 用量数组
    */
-  DetailSets: Array<CosDetailSets>
+  DetailSets?: Array<CosDetailSets>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2960,12 +2960,12 @@ export interface CosDetailSets {
   DosageEndTime: string
 
   /**
-   * 一级产品类型名称
+   * 子产品名称
    */
   SubProductCodeName: string
 
   /**
-   * 二级产品类型名称
+   * 计费项名称
    */
   BillingItemCodeName: string
 
@@ -3108,12 +3108,12 @@ export interface DescribeCostDetailResponse {
  */
 export interface DescribeDosageCosDetailByDateRequest {
   /**
-   * 查询用量开始时间
+   * 查询用量开始时间，例如：2020-09-01
    */
   StartDate: string
 
   /**
-   * 查询用量结束时间（与开始时间同月，不支持跨月查询）
+   * 查询用量结束时间，例如：2020-09-30（与开始时间同月，不支持跨月查询）
    */
   EndDate: string
 

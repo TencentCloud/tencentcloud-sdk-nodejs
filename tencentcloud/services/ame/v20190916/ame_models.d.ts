@@ -149,6 +149,15 @@ export interface ModifyMusicOnShelvesRequest {
     AmeKey?: string;
 }
 /**
+ * 设置真实音量。
+ */
+export interface SetRealVolumeCommandInput {
+    /**
+      * 真实音量大小，取值范围为 0~100，默认值为 50。
+      */
+    RealVolume: number;
+}
+/**
  * 播放指令输入参数
  */
 export interface PlayCommandInput {
@@ -674,7 +683,8 @@ export interface SyncRobotCommand {
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
 <li>SetDestroyMode：设置销毁模式</li>
-<li>SetVolume：设置音量</li>
+<li><del>SetVolume：设置音量</del>（已废弃，请采用 SetRealVolume）</li>
+<li>SetRealVolume：设置真实音量</li>
       */
     Command: string;
     /**
@@ -706,9 +716,14 @@ export interface SyncRobotCommand {
       */
     SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
     /**
-      * 音量，当Command取SetVolume时，必填。
+      * <del>音量，当Command取SetVolume时，必填。</del>
+（已废弃，请采用 SetRealVolumeCommandInput）
       */
     SetVolumeCommandInput?: SetVolumeCommandInput;
+    /**
+      * 真实音量，当Command取SetRealVolume时，必填。
+      */
+    SetRealVolumeCommandInput?: SetRealVolumeCommandInput;
 }
 /**
  * DescribeKTVSingerMusics返回参数结构体
@@ -1641,7 +1656,8 @@ export interface SyncKTVRobotCommandRequest {
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
 <li>SetDestroyMode：设置销毁模式</li>
-<li>SetVolume：设置音量</li>
+<li><del>SetVolume：设置音量</del>（已废弃，请采用 SetRealVolume）</li>
+<li>SetRealVolume：设置真实音量</li>
       */
     Command: string;
     /**
@@ -1673,9 +1689,14 @@ export interface SyncKTVRobotCommandRequest {
       */
     SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
     /**
-      * 音量，当Command取SetVolume时，必填。
+      * <del>音量，当Command取SetVolume时，必填。</del>
+（已废弃，请采用 SetRealVolumeCommandInput ）
       */
     SetVolumeCommandInput?: SetVolumeCommandInput;
+    /**
+      * 真实音量，当Command取SetRealVolume时，必填。
+      */
+    SetRealVolumeCommandInput?: SetRealVolumeCommandInput;
 }
 /**
  * DescribeKTVSuggestions请求参数结构体
@@ -1901,9 +1922,13 @@ export interface KTVRobotInfo {
       */
     SetPlayModeInput: SetPlayModeCommandInput;
     /**
-      * 音量，范围 0~100，默认为 50。
+      * <del>音量，范围 0~100，默认为 50。</del>（已废弃，请采用 SetRealVolumeInput ）
       */
     SetVolumeInput: SetVolumeCommandInput;
+    /**
+      * 真实音量，范围 0~100，默认为 50。
+      */
+    SetRealVolumeInput: SetRealVolumeCommandInput;
 }
 /**
  * DescribeItems请求参数结构体

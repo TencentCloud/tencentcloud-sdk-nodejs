@@ -28,6 +28,7 @@ import {
   DescribeKTVSingerCategoriesRequest,
   KTVSingerBaseInfo,
   ModifyMusicOnShelvesRequest,
+  SetRealVolumeCommandInput,
   PlayCommandInput,
   DescribeMusicRequest,
   KTVMusicDetailInfo,

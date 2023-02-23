@@ -781,7 +781,7 @@ export interface DescribeInvocationMetricDataDimensionResponse {
     /**
       * 维度
       */
-    Result: TsfPageDimension;
+    Result?: TsfPageDimension;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4166,7 +4166,7 @@ export interface CreateContainGroupResponse {
     /**
       * 返回创建成功的部署组ID，返回null表示失败
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

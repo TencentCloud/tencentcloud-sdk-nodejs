@@ -170,12 +170,12 @@ export interface CreateMultiFlowSignQRCodeResponse {
   /**
    * 签署二维码对象
    */
-  QrCode: SignQrCode
+  QrCode?: SignQrCode
 
   /**
    * 签署链接对象
    */
-  SignUrls: SignUrl
+  SignUrls?: SignUrl
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3373,6 +3373,11 @@ export interface CreateMultiFlowSignQRCodeRequest {
    * 限制二维码用户条件
    */
   Restrictions?: Array<ApproverRestriction>
+
+  /**
+   * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
+   */
+  UserData?: string
 
   /**
       * 回调地址,最大长度1000字符串

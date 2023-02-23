@@ -334,7 +334,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplates", req, cb);
     }
     /**
-     * 查询 CRS 实例备份列表
+     * 本接口（DescribeInstanceBackups）用于查询实例备份列表。
      */
     async DescribeInstanceBackups(req, cb) {
         return this.request("DescribeInstanceBackups", req, cb);
@@ -448,7 +448,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMaintenanceWindow", req, cb);
     }
     /**
-     * 修改实例网络配置
+     * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
      */
     async ModifyNetworkConfig(req, cb) {
         return this.request("ModifyNetworkConfig", req, cb);

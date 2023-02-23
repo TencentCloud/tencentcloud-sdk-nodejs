@@ -4109,6 +4109,19 @@ export interface TopicDetailResponse {
     TotalCount: number;
 }
 /**
+ * Topic 副本及详情数据集合
+ */
+export interface TopicInSyncReplicaResult {
+    /**
+      * Topic详情及副本合集
+      */
+    TopicInSyncReplicaList: Array<TopicInSyncReplicaInfo>;
+    /**
+      * 总计个数
+      */
+    TotalCount: number;
+}
+/**
  * DeleteInstancePre请求参数结构体
  */
 export interface DeleteInstancePreRequest {
@@ -5453,6 +5466,11 @@ export interface ValueParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UrlDecode?: UrlDecodeParam;
+    /**
+      * 小写字符解析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Lowercase?: LowercaseParam;
 }
 /**
  * DescribeDatahubTasks返回参数结构体
@@ -5468,18 +5486,9 @@ export interface DescribeDatahubTasksResponse {
     RequestId?: string;
 }
 /**
- * Topic 副本及详情数据集合
+ * 小写字符解析
  */
-export interface TopicInSyncReplicaResult {
-    /**
-      * Topic详情及副本合集
-      */
-    TopicInSyncReplicaList: Array<TopicInSyncReplicaInfo>;
-    /**
-      * 总计个数
-      */
-    TotalCount: number;
-}
+export declare type LowercaseParam = null;
 /**
  * SendMessage返回参数结构体
  */

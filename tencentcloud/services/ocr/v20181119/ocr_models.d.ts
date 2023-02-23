@@ -441,139 +441,139 @@ export interface VerifyBizLicenseResponse {
     /**
       * 状态码
       */
-    ErrorCode: number;
+    ErrorCode?: number;
     /**
       * 统一社会信用代码
       */
-    CreditCode: string;
+    CreditCode?: string;
     /**
       * 组织机构代码
       */
-    OrgCode: string;
+    OrgCode?: string;
     /**
       * 经营期限自（YYYY-MM-DD）
       */
-    OpenFrom: string;
+    OpenFrom?: string;
     /**
       * 经营期限至（YYYY-MM-DD）
       */
-    OpenTo: string;
+    OpenTo?: string;
     /**
       * 法人姓名
       */
-    FrName: string;
+    FrName?: string;
     /**
       * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
       */
-    EnterpriseStatus: string;
+    EnterpriseStatus?: string;
     /**
       * 经营（业务）范围及方式
       */
-    OperateScopeAndForm: string;
+    OperateScopeAndForm?: string;
     /**
       * 注册资金（单位:万元）
       */
-    RegCap: string;
+    RegCap?: string;
     /**
       * 注册币种
       */
-    RegCapCur: string;
+    RegCapCur?: string;
     /**
       * 登记机关
       */
-    RegOrg: string;
+    RegOrg?: string;
     /**
       * 开业日期（YYYY-MM-DD）
       */
-    EsDate: string;
+    EsDate?: string;
     /**
       * 企业（机构）类型
       */
-    EnterpriseType: string;
+    EnterpriseType?: string;
     /**
       * 注销日期
       */
-    CancelDate: string;
+    CancelDate?: string;
     /**
       * 吊销日期
       */
-    RevokeDate: string;
+    RevokeDate?: string;
     /**
       * 许可经营项目
       */
-    AbuItem: string;
+    AbuItem?: string;
     /**
       * 一般经营项目
       */
-    CbuItem: string;
+    CbuItem?: string;
     /**
       * 核准时间
       */
-    ApprDate: string;
+    ApprDate?: string;
     /**
       * 省（返回空值）
       */
-    Province: string;
+    Province?: string;
     /**
       * 地级市（返回空值）
       */
-    City: string;
+    City?: string;
     /**
       * 区\县（返回空值）
       */
-    County: string;
+    County?: string;
     /**
       * 住所所在行政区划代码（返回空值）
       */
-    AreaCode: string;
+    AreaCode?: string;
     /**
       * 行业门类代码（返回空值）
       */
-    IndustryPhyCode: string;
+    IndustryPhyCode?: string;
     /**
       * 行业门类名称（返回空值）
       */
-    IndustryPhyName: string;
+    IndustryPhyName?: string;
     /**
       * 国民经济行业代码（返回空值）
       */
-    IndustryCode: string;
+    IndustryCode?: string;
     /**
       * 国民经济行业名称（返回空值）
       */
-    IndustryName: string;
+    IndustryName?: string;
     /**
       * 经营（业务）范围
       */
-    OperateScope: string;
+    OperateScope?: string;
     /**
       * 要核验的工商注册号
       */
-    VerifyRegNo: string;
+    VerifyRegNo?: string;
     /**
       * 工商注册号
       */
-    RegNo: string;
+    RegNo?: string;
     /**
       * 要核验的企业名称
       */
-    VerifyEnterpriseName: string;
+    VerifyEnterpriseName?: string;
     /**
       * 企业名称
       */
-    EnterpriseName: string;
+    EnterpriseName?: string;
     /**
       * 要核验的注册地址
       */
-    VerifyAddress: string;
+    VerifyAddress?: string;
     /**
       * 注册地址
       */
-    Address: string;
+    Address?: string;
     /**
       * 验证结果
       */
-    RegNumResult: BizLicenseVerifyResult;
+    RegNumResult?: BizLicenseVerifyResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1397,19 +1397,19 @@ export interface RecognizeTableOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TableDetections: Array<TableDetectInfo>;
+    TableDetections?: Array<TableDetectInfo>;
     /**
       * Base64 编码后的 Excel 数据。
       */
-    Data: string;
+    Data?: string;
     /**
       * 图片为PDF时，返回PDF的总页数，默认为0
       */
-    PdfPageSize: number;
+    PdfPageSize?: number;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。
       */
-    Angle: number;
+    Angle?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1836,11 +1836,11 @@ export interface ArithmeticOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TextDetections: Array<TextArithmetic>;
+    TextDetections?: Array<TextArithmetic>;
     /**
       * 图片横屏的角度(90度或270度)
       */
-    Angle: number;
+    Angle?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2790,19 +2790,19 @@ export interface VatInvoiceVerifyNewResponse {
     /**
       * 增值税发票信息，详情请点击左侧链接。
       */
-    Invoice: VatInvoice;
+    Invoice?: VatInvoice;
     /**
       * 机动车销售统一发票信息
       */
-    VehicleInvoiceInfo: VehicleInvoiceInfo;
+    VehicleInvoiceInfo?: VehicleInvoiceInfo;
     /**
       * 二手车销售统一发票信息
       */
-    UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
+    UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo;
     /**
       * 通行费发票信息
       */
-    PassInvoiceInfoList: Array<PassInvoiceInfo>;
+    PassInvoiceInfoList?: Array<PassInvoiceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3272,75 +3272,75 @@ export interface VerifyBasicBizLicenseResponse {
     /**
       * 状态码，成功时返回0
       */
-    ErrorCode: number;
+    ErrorCode?: number;
     /**
       * 统一社会信用代码
       */
-    CreditCode: string;
+    CreditCode?: string;
     /**
       * 经营期限自（YYYY-MM-DD）
       */
-    Opfrom: string;
+    Opfrom?: string;
     /**
       * 经营期限至（YYYY-MM-DD）
       */
-    Opto: string;
+    Opto?: string;
     /**
       * 法人姓名
       */
-    Frname: string;
+    Frname?: string;
     /**
       * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
       */
-    Entstatus: string;
+    Entstatus?: string;
     /**
       * 经营业务范围
       */
-    Zsopscope: string;
+    Zsopscope?: string;
     /**
       * 查询的状态信息
       */
-    Reason: string;
+    Reason?: string;
     /**
       * 原注册号
       */
-    Oriregno: string;
+    Oriregno?: string;
     /**
       * 要核验的工商注册号
       */
-    VerifyRegno: string;
+    VerifyRegno?: string;
     /**
       * 工商注册号
       */
-    Regno: string;
+    Regno?: string;
     /**
       * 要核验的企业名称
       */
-    VerifyEntname: string;
+    VerifyEntname?: string;
     /**
       * 企业名称
       */
-    Entname: string;
+    Entname?: string;
     /**
       * 要核验的住址
       */
-    VerifyDom: string;
+    VerifyDom?: string;
     /**
       * 住址
       */
-    Dom: string;
+    Dom?: string;
     /**
       * 验证结果
       */
-    RegNumResult: BizLicenseVerifyResult;
+    RegNumResult?: BizLicenseVerifyResult;
     /**
       * 注册资本（单位：万元）,只有输入参数regCapital为1的时候才输出
       */
-    RegCapital: string;
+    RegCapital?: string;
     /**
       * 成立/注册日期，只有输入参数EstablishTime为true时展示，默认为空
       */
-    EstablishTime: string;
+    EstablishTime?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3806,15 +3806,15 @@ export interface VatInvoiceVerifyResponse {
     /**
       * 增值税发票信息，详情请点击左侧链接。
       */
-    Invoice: VatInvoice;
+    Invoice?: VatInvoice;
     /**
       * 机动车销售统一发票信息
       */
-    VehicleInvoiceInfo: VehicleInvoiceInfo;
+    VehicleInvoiceInfo?: VehicleInvoiceInfo;
     /**
       * 二手车销售统一发票信息
       */
-    UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
+    UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4454,19 +4454,19 @@ export interface SealOCRResponse {
     /**
       * 印章内容
       */
-    SealBody: string;
+    SealBody?: string;
     /**
       * 印章坐标
       */
-    Location: Rect;
+    Location?: Rect;
     /**
       * 其它文本内容
       */
-    OtherTexts: Array<string>;
+    OtherTexts?: Array<string>;
     /**
       * 全部印章信息
       */
-    SealInfos: Array<SealInfo>;
+    SealInfos?: Array<SealInfo>;
     /**
       * 印章类型，表示为：
 圆形印章：0
@@ -4475,7 +4475,7 @@ export interface SealOCRResponse {
 菱形印章：3
 三角形印章：4
       */
-    SealShape: string;
+    SealShape?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6666,13 +6666,13 @@ export interface VerifyEnterpriseFourFactorsResponse {
     /**
       * 核验一致性（1:一致，2:不一致，3:查询无记录）
       */
-    State: number;
+    State?: number;
     /**
       * 核验结果明细，7：企业法人/负责人，6：企业股东，5：企
 业管理人员，-21：企业名称与企业标识不符，-22：姓名不一致，-23：证件号码不一致，-24：企业名称不一致，-25：企业标识不一致
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Detail: Detail;
+    Detail?: Detail;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

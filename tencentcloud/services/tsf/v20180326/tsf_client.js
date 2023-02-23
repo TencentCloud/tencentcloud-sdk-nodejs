@@ -238,7 +238,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeFileConfig", req, cb);
     }
     /**
-     * 创建容器部署组
+     * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
      */
     async CreateContainGroup(req, cb) {
         return this.request("CreateContainGroup", req, cb);

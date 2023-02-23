@@ -148,7 +148,7 @@ export declare class Client extends AbstractClient {
      */
     RevokeFileConfig(req: RevokeFileConfigRequest, cb?: (error: string, rep: RevokeFileConfigResponse) => void): Promise<RevokeFileConfigResponse>;
     /**
-     * 创建容器部署组
+     * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
      */
     CreateContainGroup(req: CreateContainGroupRequest, cb?: (error: string, rep: CreateContainGroupResponse) => void): Promise<CreateContainGroupResponse>;
     /**

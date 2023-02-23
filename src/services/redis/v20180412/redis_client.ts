@@ -100,6 +100,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
+  BackupLimitVpcItem,
   UpgradeProxyVersionResponse,
   ResetPasswordRequest,
   ModifyInstanceAccountResponse,
@@ -760,7 +761,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 CRS 实例备份列表
+   * 本接口（DescribeInstanceBackups）用于查询实例备份列表。
    */
   async DescribeInstanceBackups(
     req: DescribeInstanceBackupsRequest,
@@ -950,7 +951,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例网络配置
+   * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
    */
   async ModifyNetworkConfig(
     req: ModifyNetworkConfigRequest,

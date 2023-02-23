@@ -965,7 +965,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建容器部署组
+   * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
    */
   async CreateContainGroup(
     req: CreateContainGroupRequest,

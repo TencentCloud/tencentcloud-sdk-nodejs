@@ -5,7 +5,7 @@ export interface GetDeviceResponse {
     /**
       * 设备详细信息
       */
-    DeviceDetails: DeviceDetails;
+    DeviceDetails?: DeviceDetails;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -18,19 +18,19 @@ export interface GetFlowStatisticResponse {
     /**
       * 流量详细信息
       */
-    NetDetails: Array<NetDetails>;
+    NetDetails?: Array<NetDetails>;
     /**
       * 查找时间段流量使用最大值（单位：bit）
       */
-    MaxValue: number;
+    MaxValue?: number;
     /**
       * 查找时间段流量使用平均值（单位：bit）
       */
-    AvgValue: number;
+    AvgValue?: number;
     /**
       * 查找时间段流量使用总量（单位：bit）
       */
-    TotalValue: number;
+    TotalValue?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -54,7 +54,7 @@ export interface Capacity {
  */
 export interface GetFlowStatisticRequest {
     /**
-      * 设备ID，ID="-1"时默认查找所有设备
+      * 设备ID
       */
     DeviceId: string;
     /**
@@ -170,19 +170,29 @@ export interface DeviceNetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetInfoName: string;
+    /**
+      * 下行实时速率（浮点数类型代替上一版本DataRx的整型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownRate?: number;
+    /**
+      * 上行实时速率（浮点数类型代替上一版本TxRate的整型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpRate?: number;
 }
 /**
  * 网络详细信息
  */
 export interface NetDetails {
     /**
-      * 时间点，单位：s
-      */
-    Time: string;
-    /**
       * 流量值（bit）
       */
     Current: number;
+    /**
+      * 时间点，单位：s
+      */
+    Time: string;
 }
 /**
  * 移动网络加速源地址结构体
@@ -327,6 +337,21 @@ export interface DeviceDetails {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceNetInfo: Array<DeviceNetInfo>;
+    /**
+      * 聚合服务器地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewaySite?: string;
+    /**
+      * 业务下行速率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusinessDownRate?: number;
+    /**
+      * 业务上行速率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusinessUpRate?: number;
 }
 /**
  * CreateQos请求参数结构体
@@ -390,7 +415,7 @@ BU4M：带宽型保障 + 上行带宽保障4Mbps
  */
 export interface GetStatisticDataRequest {
     /**
-      * 设备ID，设备ID="-1"获取所有设备流量统计
+      * 设备ID
       */
     DeviceId: string;
     /**
@@ -616,7 +641,7 @@ export interface GetStatisticDataResponse {
     /**
       * 文件地址url
       */
-    FilePath: string;
+    FilePath?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

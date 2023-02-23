@@ -212,7 +212,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
-     * 查询 CRS 实例备份列表
+     * 本接口（DescribeInstanceBackups）用于查询实例备份列表。
      */
     DescribeInstanceBackups(req: DescribeInstanceBackupsRequest, cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void): Promise<DescribeInstanceBackupsResponse>;
     /**
@@ -288,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyMaintenanceWindow(req: ModifyMaintenanceWindowRequest, cb?: (error: string, rep: ModifyMaintenanceWindowResponse) => void): Promise<ModifyMaintenanceWindowResponse>;
     /**
-     * 修改实例网络配置
+     * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
      */
     ModifyNetworkConfig(req: ModifyNetworkConfigRequest, cb?: (error: string, rep: ModifyNetworkConfigResponse) => void): Promise<ModifyNetworkConfigResponse>;
     /**
