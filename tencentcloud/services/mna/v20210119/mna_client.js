@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEncryptedKey", req, cb);
     }
     /**
+     * 批量获取设备流量统计曲线
+     */
+    async GetMultiFlowStatistic(req, cb) {
+        return this.request("GetMultiFlowStatistic", req, cb);
+    }
+    /**
      * 删除设备信息
      */
     async DeleteDevice(req, cb) {

@@ -103,7 +103,7 @@ APP：第三方APP或小程序跳转电子签小程序的path。
   AutoJumpBack?: boolean
 
   /**
-   * 应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 }
@@ -331,7 +331,7 @@ export interface StartFlowResponse {
   /**
    * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
    */
-  Status: string
+  Status?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -476,28 +476,28 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
 }
 
 /**
- * 主企业代子企业操作 或 渠道子客应用相关信息
+ * 代理相关应用信息，如集团主企业代子企业操作
  */
 export interface Agent {
   /**
-   * 应用编号,32位字符串
+   * 代理机构的应用编号,32位字符串，一般不用传
    */
   AppId?: string
 
   /**
-      * 主组织的应用号
+      * 被代理机构的应用号，一般不用传
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyAppId?: string
 
   /**
-      * 主组织在平台的机构编号
+      * 被代理机构在电子签平台的机构编号，集团代理下场景必传
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyOrganizationId?: string
 
   /**
-      * 主组织的操作人
+      * 被代理机构的经办人，一般不用传
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyOperator?: string
@@ -600,12 +600,12 @@ export interface DescribeFlowTemplatesRequest {
   Operator: UserInfo
 
   /**
-   * 企业组织相关信息
+   * 企业组织相关信息，一般不用填
    */
   Organization?: OrganizationInfo
 
   /**
-   * 应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 
@@ -777,13 +777,13 @@ export interface CreateDocumentResponse {
   /**
    * 签署流程电子文档ID
    */
-  DocumentId: string
+  DocumentId?: string
 
   /**
       * 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PreviewFileUrl: string
+  PreviewFileUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -894,7 +894,7 @@ false：有序签
   CallbackUrl?: string
 
   /**
-   * 应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 
@@ -946,7 +946,7 @@ export interface DescribeFlowInfoRequest {
   Operator?: UserInfo
 
   /**
-   * 应用信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 }
@@ -1413,11 +1413,6 @@ false：有序签
   UserData?: string
 
   /**
-   * 应用号信息
-   */
-  Agent?: Agent
-
-  /**
       * 签署人校验方式
 VerifyCheck: 人脸识别（默认）
 MobileCheck：手机号验证
@@ -1434,6 +1429,11 @@ MobileCheck：手机号验证
    * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
    */
   SignBeanTag?: number
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -1868,7 +1868,7 @@ export interface CreateDocumentRequest {
   PreviewType?: number
 
   /**
-   * 应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 
@@ -2173,7 +2173,7 @@ export interface CreateFlowByFilesResponse {
 
 注：如入参 是否需要预览 NeedPreview 设置为 true，不会正式发起合同，此处不会有值返回；如入参 是否需要预览 NeedPreview 设置为 false，此处会正常返回签署流程编号 FlowId。
       */
-  FlowId: string
+  FlowId?: string
 
   /**
       * 合同预览链接。
@@ -2181,7 +2181,7 @@ export interface CreateFlowByFilesResponse {
 注：如入参 是否需要预览 NeedPreview 设置为 true，会开启“预览模式”，此处会返回预览链接；如入参 是否需要预览 NeedPreview 设置为 false，此处不会有值返回。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PreviewUrl: string
+  PreviewUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2466,7 +2466,7 @@ export interface CreateSchemeUrlResponse {
   /**
    * 小程序链接地址
    */
-  SchemeUrl: string
+  SchemeUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2654,7 +2654,7 @@ export interface StartFlowRequest {
   ClientToken?: string
 
   /**
-   * 应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 }
@@ -2801,7 +2801,7 @@ LEGAL_PERSON_SEAL：法定代表人章
   SealTypes?: Array<string>
 
   /**
-   * 主企业代子企业操作 或 渠道子客应用相关信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 }
@@ -3260,12 +3260,12 @@ export interface DescribeFlowTemplatesResponse {
   /**
    * 模板详情列表
    */
-  Templates: Array<TemplateInfo>
+  Templates?: Array<TemplateInfo>
 
   /**
    * 查询到的总个数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3429,7 +3429,7 @@ export interface CreateFlowResponse {
   /**
    * 签署流程编号
    */
-  FlowId: string
+  FlowId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

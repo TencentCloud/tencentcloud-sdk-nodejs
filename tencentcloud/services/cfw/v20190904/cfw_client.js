@@ -354,6 +354,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfwEips", req, cb);
     }
     /**
+     * 修改NAT访问控制规则
+     */
+    async ModifyNatAcRule(req, cb) {
+        return this.request("ModifyNatAcRule", req, cb);
+    }
+    /**
      * 修改规则
      */
     async ModifyAcRule(req, cb) {
@@ -391,6 +397,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockIgnoreList", req, cb);
     }
     /**
+     * 删除NAT访问控制规则
+     */
+    async RemoveNatAcRule(req, cb) {
+        return this.request("RemoveNatAcRule", req, cb);
+    }
+    /**
      * 访问控制列表
      */
     async DescribeAcLists(req, cb) {
@@ -401,6 +413,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyPublicIPSwitchStatus(req, cb) {
         return this.request("ModifyPublicIPSwitchStatus", req, cb);
+    }
+    /**
+     * 查询NAT访问控制列表
+     */
+    async DescribeNatAcRule(req, cb) {
+        return this.request("DescribeNatAcRule", req, cb);
+    }
+    /**
+     * 添加nat访问控制规则
+     */
+    async AddNatAcRule(req, cb) {
+        return this.request("AddNatAcRule", req, cb);
     }
     /**
      * 防火墙垂直扩容

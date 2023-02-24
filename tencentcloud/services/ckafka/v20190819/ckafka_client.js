@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeACL", req, cb);
     }
     /**
+     * 查询DIP主题列表
+     */
+    async DescribeDatahubTopics(req, cb) {
+        return this.request("DescribeDatahubTopics", req, cb);
+    }
+    /**
      * 取消授权token
      */
     async CancelAuthorizationToken(req, cb) {
@@ -377,6 +383,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AuthorizeToken", req, cb);
     }
     /**
+     * 设置实例属性
+     */
+    async ModifyInstanceAttributes(req, cb) {
+        return this.request("ModifyInstanceAttributes", req, cb);
+    }
+    /**
      * 查询topic 生产端连接信息
      */
     async DescribeTopicProduceConnection(req, cb) {
@@ -390,10 +402,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopic", req, cb);
     }
     /**
-     * 设置实例属性
+     * 获取Datahub主题属性
      */
-    async ModifyInstanceAttributes(req, cb) {
-        return this.request("ModifyInstanceAttributes", req, cb);
+    async DescribeDatahubTopic(req, cb) {
+        return this.request("DescribeDatahubTopic", req, cb);
     }
     /**
      * 用于查看ckafka的可用区列表

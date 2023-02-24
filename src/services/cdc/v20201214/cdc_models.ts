@@ -252,6 +252,31 @@ export interface CosInfo {
 }
 
 /**
+ * 可用区信息
+ */
+export interface ZoneInfo {
+  /**
+   * 可用区名称
+   */
+  Zone: string
+
+  /**
+   * 可用区描述
+   */
+  ZoneName: string
+
+  /**
+   * 可用区ID
+   */
+  ZoneId: number
+
+  /**
+   * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
+   */
+  ZoneState: string
+}
+
+/**
  * DescribeDedicatedClusterOverview返回参数结构体
  */
 export interface DescribeDedicatedClusterOverviewResponse {
@@ -264,6 +289,30 @@ export interface DescribeDedicatedClusterOverviewResponse {
    * 宿主机数量
    */
   HostCount: number
+
+  /**
+      * vpn通道状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpnConnectionState: string
+
+  /**
+      * vpn网关监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpngwBandwidthData: VpngwBandwidthData
+
+  /**
+      * 本地网关信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalNetInfo: LocalNetInfo
+
+  /**
+      * vpn网关通道监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpnConnectionBandwidthData: Array<VpngwBandwidthData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -716,6 +765,23 @@ export interface ModifyOrderStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 入带宽数据
+ */
+export interface InBandwidth {
+  /**
+      * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamps: Array<number>
+
+  /**
+      * 时间对应的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Values: Array<number>
 }
 
 /**
@@ -1216,6 +1282,35 @@ export interface DescribeDedicatedClusterHostsResponse {
 }
 
 /**
+ * 本地网络信息
+ */
+export interface LocalNetInfo {
+  /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 网络id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BGPRoute: string
+
+  /**
+      * 本地IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalIp: string
+}
+
+/**
  * DescribeDedicatedClusterInstanceTypes请求参数结构体
  */
 export interface DescribeDedicatedClusterInstanceTypesRequest {
@@ -1449,28 +1544,19 @@ export interface CosCapacity {
 }
 
 /**
- * 可用区信息
+ * VPN网关的流量监控数据。
  */
-export interface ZoneInfo {
+export interface VpngwBandwidthData {
   /**
-   * 可用区名称
-   */
-  Zone: string
+      * 出带宽流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutBandwidth: OutBandwidth
 
   /**
-   * 可用区描述
+   * 入带宽流量
    */
-  ZoneName: string
-
-  /**
-   * 可用区ID
-   */
-  ZoneId: number
-
-  /**
-   * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
-   */
-  ZoneState: string
+  InBandwidth: InBandwidth
 }
 
 /**
@@ -1660,6 +1746,23 @@ export interface DescribeDedicatedClusterHostStatisticsRequest {
    * 查询的专用集群id
    */
   DedicatedClusterId: string
+}
+
+/**
+ * 出带宽数据。
+ */
+export interface OutBandwidth {
+  /**
+      * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamps: Array<number>
+
+  /**
+      * 对应时间的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Values: Array<number>
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, DeleteQosRequest, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, GetPublicKeyResponse, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
+import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, DeleteQosRequest, GetMultiFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, GetPublicKeyResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
 /**
  * mna client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 通过此接口设置和更新预置密钥
      */
     CreateEncryptedKey(req?: CreateEncryptedKeyRequest, cb?: (error: string, rep: CreateEncryptedKeyResponse) => void): Promise<CreateEncryptedKeyResponse>;
+    /**
+     * 批量获取设备流量统计曲线
+     */
+    GetMultiFlowStatistic(req: GetMultiFlowStatisticRequest, cb?: (error: string, rep: GetMultiFlowStatisticResponse) => void): Promise<GetMultiFlowStatisticResponse>;
     /**
      * 删除设备信息
      */

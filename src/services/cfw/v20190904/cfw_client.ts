@@ -21,11 +21,14 @@ import {
   DescribeNatFwInstanceRequest,
   ModifyNatFwVpcDnsSwitchResponse,
   DescribeNatFwInstanceWithRegionRequest,
+  ModifyNatAcRuleResponse,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
   FwCidrInfo,
   StaticInfo,
+  DescribeNatAcRuleResponse,
   ModifyPublicIPSwitchStatusResponse,
+  ModifyNatAcRuleRequest,
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   AddAcRuleRequest,
@@ -37,7 +40,7 @@ import {
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
-  DatabaseWhiteListRuleData,
+  CreateChooseVpcsRequest,
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
@@ -47,7 +50,6 @@ import {
   ModifyStorageSettingResponse,
   RemoveAcRuleResponse,
   NatFwInstance,
-  CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
   DeleteVpcInstanceResponse,
@@ -57,18 +59,20 @@ import {
   SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
   ModifySequenceRulesRequest,
+  SequenceData,
   CreateNatFwInstanceRequest,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
   VpcDnsInfo,
   DescribeEnterpriseSecurityGroupRuleRequest,
   ModifyNatFwReSelectResponse,
-  DescribeSwitchListsRequest,
+  DeleteSecurityGroupRuleRequest,
   SetNatFwEipRequest,
   SetNatFwEipResponse,
   AcListsData,
   ModifyPublicIPSwitchStatusRequest,
-  SequenceData,
+  CreateNatRuleItem,
+  ModifySecurityGroupItemRuleStatusRequest,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
   DescribeSourceAssetResponse,
@@ -76,6 +80,7 @@ import {
   DescribeSecurityGroupListResponse,
   AssetZone,
   DescribeTLogIpListRequest,
+  CommonFilter,
   DescribeNatFwInstancesInfoRequest,
   DescribeTableStatusRequest,
   DescribeSecurityGroupListRequest,
@@ -85,13 +90,16 @@ import {
   DescribeNatFwInfoCountResponse,
   DescribeDefenseSwitchRequest,
   SecurityGroupListData,
+  RemoveNatAcRuleResponse,
   CreateNatFwInstanceWithDomainResponse,
   RemoveAcRuleRequest,
+  DatabaseWhiteListRuleData,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
   ModifyAllPublicIPSwitchStatusRequest,
   DescribeBlockStaticListResponse,
+  AddNatAcRuleRequest,
   ModifySecurityGroupSequenceRulesRequest,
   CreateDatabaseWhiteListRulesResponse,
   ScanInfo,
@@ -100,6 +108,7 @@ import {
   NatFwFilter,
   ScanResultInfo,
   ModifyRunSyncAssetResponse,
+  RemoveNatAcRuleRequest,
   ModifySecurityGroupSequenceRulesResponse,
   IpStatic,
   AddEnterpriseSecurityGroupRulesResponse,
@@ -149,9 +158,10 @@ import {
   DeleteNatFwInstanceRequest,
   ModifyStorageSettingRequest,
   DescribeNatFwVpcDnsLstResponse,
-  CreateChooseVpcsRequest,
+  DescAcItem,
+  CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalResponse,
-  DescribeBlockStaticListRequest,
+  DescribeNatAcRuleRequest,
   TLogInfo,
   CreateSecurityGroupRulesRequest,
   DeleteVpcInstanceRequest,
@@ -161,14 +171,15 @@ import {
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   DeleteResourceGroupResponse,
-  DeleteSecurityGroupRuleRequest,
-  ModifySecurityGroupItemRuleStatusRequest,
+  DescribeSwitchListsRequest,
+  DescribeBlockStaticListRequest,
   FwVpcCidr,
   ModifyRunSyncAssetRequest,
   CreateAcRulesResponse,
   ModifyAssetScanResponse,
   ModifyAcRuleRequest,
   DescribeNatFwInstancesInfoResponse,
+  AddNatAcRuleResponse,
   ModifyBlockIgnoreListResponse,
   DescribeNatFwInstanceResponse,
   ModifySecurityGroupRuleResponse,
@@ -729,6 +740,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改NAT访问控制规则
+   */
+  async ModifyNatAcRule(
+    req: ModifyNatAcRuleRequest,
+    cb?: (error: string, rep: ModifyNatAcRuleResponse) => void
+  ): Promise<ModifyNatAcRuleResponse> {
+    return this.request("ModifyNatAcRule", req, cb)
+  }
+
+  /**
    * 修改规则
    */
   async ModifyAcRule(
@@ -790,6 +811,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除NAT访问控制规则
+   */
+  async RemoveNatAcRule(
+    req: RemoveNatAcRuleRequest,
+    cb?: (error: string, rep: RemoveNatAcRuleResponse) => void
+  ): Promise<RemoveNatAcRuleResponse> {
+    return this.request("RemoveNatAcRule", req, cb)
+  }
+
+  /**
    * 访问控制列表
    */
   async DescribeAcLists(
@@ -807,6 +838,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void
   ): Promise<ModifyPublicIPSwitchStatusResponse> {
     return this.request("ModifyPublicIPSwitchStatus", req, cb)
+  }
+
+  /**
+   * 查询NAT访问控制列表
+   */
+  async DescribeNatAcRule(
+    req: DescribeNatAcRuleRequest,
+    cb?: (error: string, rep: DescribeNatAcRuleResponse) => void
+  ): Promise<DescribeNatAcRuleResponse> {
+    return this.request("DescribeNatAcRule", req, cb)
+  }
+
+  /**
+   * 添加nat访问控制规则
+   */
+  async AddNatAcRule(
+    req: AddNatAcRuleRequest,
+    cb?: (error: string, rep: AddNatAcRuleResponse) => void
+  ): Promise<AddNatAcRuleResponse> {
+    return this.request("AddNatAcRule", req, cb)
   }
 
   /**

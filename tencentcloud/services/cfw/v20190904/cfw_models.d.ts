@@ -21,6 +21,19 @@ export interface ModifyNatFwVpcDnsSwitchResponse {
  */
 export declare type DescribeNatFwInstanceWithRegionRequest = null;
 /**
+ * ModifyNatAcRule返回参数结构体
+ */
+export interface ModifyNatAcRuleResponse {
+    /**
+      * 编辑成功后返回新策略ID列表
+      */
+    RuleUuid?: Array<number>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRuleOverview返回参数结构体
  */
 export interface DescribeRuleOverviewResponse {
@@ -131,6 +144,28 @@ export interface StaticInfo {
     InsName: string;
 }
 /**
+ * DescribeNatAcRule返回参数结构体
+ */
+export interface DescribeNatAcRuleResponse {
+    /**
+      * 总条数
+      */
+    Total?: number;
+    /**
+      * nat访问控制列表数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data?: Array<DescAcItem>;
+    /**
+      * 未过滤的总条数
+      */
+    AllTotal?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyPublicIPSwitchStatus返回参数结构体
  */
 export interface ModifyPublicIPSwitchStatusResponse {
@@ -147,6 +182,15 @@ export interface ModifyPublicIPSwitchStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyNatAcRule请求参数结构体
+ */
+export interface ModifyNatAcRuleRequest {
+    /**
+      * 需要编辑的规则数组
+      */
+    Rules: Array<CreateNatRuleItem>;
 }
 /**
  * ModifyAcRule返回参数结构体
@@ -459,61 +503,17 @@ export interface VpcZoneData {
     Region: string;
 }
 /**
- * 数据库白名单规则数据
+ * CreateChooseVpcs请求参数结构体
  */
-export interface DatabaseWhiteListRuleData {
+export interface CreateChooseVpcsRequest {
     /**
-      * 访问源
+      * vpc列表
       */
-    SourceIp: string;
+    VpcList: Array<string>;
     /**
-      * 访问源类型，1 ip；6 实例；100 资源分组
+      * zone列表
       */
-    SourceType: number;
-    /**
-      * 访问目的
-      */
-    TargetIp: string;
-    /**
-      * 访问目的类型，1 ip；6 实例；100 资源分组
-      */
-    TargetType: number;
-    /**
-      * 规则描述
-      */
-    Detail: string;
-    /**
-      * 是否地域规则，0不是 1是
-      */
-    IsRegionRule: number;
-    /**
-      * 是否云厂商规则，0不是 1 时
-      */
-    IsCloudRule: number;
-    /**
-      * 是否启用，0 不启用，1启用
-      */
-    Enable: number;
-    /**
-      * 地域码1
-      */
-    FirstLevelRegionCode?: number;
-    /**
-      * 地域码2
-      */
-    SecondLevelRegionCode?: number;
-    /**
-      * 地域名称1
-      */
-    FirstLevelRegionName?: string;
-    /**
-      * 地域名称2
-      */
-    SecondLevelRegionName?: string;
-    /**
-      * 云厂商码
-      */
-    CloudCode?: string;
+    AllZoneList: Array<VpcZoneData>;
 }
 /**
  * DescribeNatFwVpcDnsLst请求参数结构体
@@ -711,19 +711,6 @@ export interface NatFwInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NatIp: string;
-}
-/**
- * CreateSecurityGroupRules返回参数结构体
- */
-export interface CreateSecurityGroupRulesResponse {
-    /**
-      * 状态值，0：添加成功，非0：添加失败
-      */
-    Status: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * ExpandCfwVertical请求参数结构体
@@ -957,6 +944,23 @@ export interface ModifySequenceRulesRequest {
     Direction?: number;
 }
 /**
+ * 执行顺序对象
+ */
+export interface SequenceData {
+    /**
+      * 规则Id值
+      */
+    Id: number;
+    /**
+      * 修改前执行顺序
+      */
+    OrderIndex: number;
+    /**
+      * 修改后执行顺序
+      */
+    NewOrderIndex: number;
+}
+/**
  * CreateNatFwInstance请求参数结构体
  */
 export interface CreateNatFwInstanceRequest {
@@ -1152,41 +1156,25 @@ export interface ModifyNatFwReSelectResponse {
     RequestId?: string;
 }
 /**
- * DescribeSwitchLists请求参数结构体
+ * DeleteSecurityGroupRule请求参数结构体
  */
-export interface DescribeSwitchListsRequest {
+export interface DeleteSecurityGroupRuleRequest {
     /**
-      * 防火墙状态  0: 关闭，1：开启
+      * 所需要删除规则的ID
       */
-    Status?: number;
+    Id: number;
     /**
-      * 资产类型 CVM/NAT/VPN/CLB/其它
+      * 腾讯云地域的英文简写
       */
-    Type?: string;
+    Area: string;
     /**
-      * 地域 上海/重庆/广州，等等
+      * 方向，0：出站，1：入站
       */
-    Area?: string;
+    Direction: number;
     /**
-      * 搜索值  例子："{"common":"106.54.189.45"}"
+      * 是否删除反向规则，0：否，1：是
       */
-    SearchValue?: string;
-    /**
-      * 条数  默认值:10
-      */
-    Limit?: number;
-    /**
-      * 偏移值 默认值: 0
-      */
-    Offset?: number;
-    /**
-      * 排序，desc：降序，asc：升序
-      */
-    Order?: string;
-    /**
-      * 排序字段 PortTimes(风险端口数)
-      */
-    By?: string;
+    IsDelReverse?: number;
 }
 /**
  * SetNatFwEip请求参数结构体
@@ -1280,21 +1268,86 @@ export interface ModifyPublicIPSwitchStatusRequest {
     Status: number;
 }
 /**
- * 执行顺序对象
+ * 创建NAT ACL规则参数结构
  */
-export interface SequenceData {
+export interface CreateNatRuleItem {
     /**
-      * 规则Id值
+      * 访问源示例： net：IP/CIDR(192.168.0.2)
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: number;
+    SourceContent: string;
     /**
-      * 修改前执行顺序
+      * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceType: string;
+    /**
+      * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetContent: string;
+    /**
+      * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetType: string;
+    /**
+      * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleAction: string;
+    /**
+      * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port: string;
+    /**
+      * 规则方向：1，入站；0，出站
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Direction: number;
+    /**
+      * 规则序号
+注意：此字段可能返回 null，表示取不到有效值。
       */
     OrderIndex: number;
     /**
-      * 修改后执行顺序
+      * 规则状态，true表示启用，false表示禁用
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    NewOrderIndex: number;
+    Enable: string;
+    /**
+      * 规则对应的唯一id，创建规则时无需填写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid?: number;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
+}
+/**
+ * ModifySecurityGroupItemRuleStatus请求参数结构体
+ */
+export interface ModifySecurityGroupItemRuleStatusRequest {
+    /**
+      * 方向，0：出站，1：入站，默认1
+      */
+    Direction: number;
+    /**
+      * 是否开关开启，0：未开启，1：开启
+      */
+    Status: number;
+    /**
+      * 更改的企业安全组规则的执行顺序
+      */
+    RuleSequence: number;
 }
 /**
  * DescribeSourceAsset请求参数结构体
@@ -1443,6 +1496,51 @@ export interface DescribeTLogIpListRequest {
       * 查询条件
       */
     SearchValue?: string;
+}
+/**
+ * 通用的列表检索过滤选项
+ */
+export interface CommonFilter {
+    /**
+      * 检索的键值
+      */
+    Name: string;
+    /**
+      * 检索的值
+      */
+    Values: Array<string>;
+    /**
+      * 枚举类型，代表name与values之间的匹配关系
+enum FilterOperatorType {
+    //INVALID
+    FILTER_OPERATOR_TYPE_INVALID = 0;
+    //等于
+    FILTER_OPERATOR_TYPE_EQUAL = 1;
+    //大于
+    FILTER_OPERATOR_TYPE_GREATER = 2;
+    //小于
+    FILTER_OPERATOR_TYPE_LESS = 3;
+    //大于等于
+    FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
+    //小于等于
+    FILTER_OPERATOR_TYPE_LESS_EQ = 5;
+    //不等于
+    FILTER_OPERATOR_TYPE_NO_EQ = 6;
+    //in，数组中包含
+    FILTER_OPERATOR_TYPE_IN = 7;
+    //not in
+    FILTER_OPERATOR_TYPE_NOT_IN = 8;
+    //模糊匹配
+    FILTER_OPERATOR_TYPE_FUZZINESS = 9;
+    //存在
+    FILTER_OPERATOR_TYPE_EXIST = 10;
+    //不存在
+    FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
+    //正则
+    FILTER_OPERATOR_TYPE_REGULAR = 12;
+}
+      */
+    OperatorType: number;
 }
 /**
  * DescribeNatFwInstancesInfo请求参数结构体
@@ -1701,6 +1799,19 @@ export interface SecurityGroupListData {
     ProtocolPortType?: number;
 }
 /**
+ * RemoveNatAcRule返回参数结构体
+ */
+export interface RemoveNatAcRuleResponse {
+    /**
+      * 删除成功后返回被删除策略的uuid列表
+      */
+    RuleUuid?: Array<number>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateNatFwInstanceWithDomain返回参数结构体
  */
 export interface CreateNatFwInstanceWithDomainResponse {
@@ -1722,6 +1833,63 @@ export interface RemoveAcRuleRequest {
       * 规则的uuid，可通过查询规则列表获取
       */
     RuleUuid: number;
+}
+/**
+ * 数据库白名单规则数据
+ */
+export interface DatabaseWhiteListRuleData {
+    /**
+      * 访问源
+      */
+    SourceIp: string;
+    /**
+      * 访问源类型，1 ip；6 实例；100 资源分组
+      */
+    SourceType: number;
+    /**
+      * 访问目的
+      */
+    TargetIp: string;
+    /**
+      * 访问目的类型，1 ip；6 实例；100 资源分组
+      */
+    TargetType: number;
+    /**
+      * 规则描述
+      */
+    Detail: string;
+    /**
+      * 是否地域规则，0不是 1是
+      */
+    IsRegionRule: number;
+    /**
+      * 是否云厂商规则，0不是 1 时
+      */
+    IsCloudRule: number;
+    /**
+      * 是否启用，0 不启用，1启用
+      */
+    Enable: number;
+    /**
+      * 地域码1
+      */
+    FirstLevelRegionCode?: number;
+    /**
+      * 地域码2
+      */
+    SecondLevelRegionCode?: number;
+    /**
+      * 地域名称1
+      */
+    FirstLevelRegionName?: string;
+    /**
+      * 地域名称2
+      */
+    SecondLevelRegionName?: string;
+    /**
+      * 云厂商码
+      */
+    CloudCode?: string;
 }
 /**
  * ModifyAllRuleStatus请求参数结构体
@@ -1874,6 +2042,19 @@ export interface DescribeBlockStaticListResponse {
     RequestId?: string;
 }
 /**
+ * AddNatAcRule请求参数结构体
+ */
+export interface AddNatAcRuleRequest {
+    /**
+      * 需要添加的nat访问控制规则列表
+      */
+    Rules: Array<CreateNatRuleItem>;
+    /**
+      * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+      */
+    From?: string;
+}
+/**
  * ModifySecurityGroupSequenceRules请求参数结构体
  */
 export interface ModifySecurityGroupSequenceRulesRequest {
@@ -2010,6 +2191,19 @@ export interface ModifyRunSyncAssetResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RemoveNatAcRule请求参数结构体
+ */
+export interface RemoveNatAcRuleRequest {
+    /**
+      * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+      */
+    RuleUuid: Array<number>;
+    /**
+      * 规则方向：1，入站；0，出站
+      */
+    Direction?: number;
 }
 /**
  * ModifySecurityGroupSequenceRules返回参数结构体
@@ -3077,17 +3271,140 @@ export interface DescribeNatFwVpcDnsLstResponse {
     RequestId?: string;
 }
 /**
- * CreateChooseVpcs请求参数结构体
+ * 访问控制列表对象
  */
-export interface CreateChooseVpcsRequest {
+export interface DescAcItem {
     /**
-      * vpc列表
+      * 访问源
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VpcList: Array<string>;
+    SourceContent: string;
     /**
-      * zone列表
+      * 访问目的
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    AllZoneList: Array<VpcZoneData>;
+    TargetContent: string;
+    /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port: string;
+    /**
+      * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleAction: string;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 命中次数
+      */
+    Count: number;
+    /**
+      * 执行顺序
+      */
+    OrderIndex: number;
+    /**
+      * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceType: string;
+    /**
+      * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetType: string;
+    /**
+      * 规则对应的唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid: number;
+    /**
+      * 规则有效性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Invalid: number;
+    /**
+      * 0为正常规则,1为地域规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsRegion: number;
+    /**
+      * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CountryCode: number;
+    /**
+      * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CityCode: number;
+    /**
+      * 国家名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CountryName: string;
+    /**
+      * 省名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CityName: string;
+    /**
+      * 云厂商code
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CloudCode: string;
+    /**
+      * 0为正常规则,1为云厂商规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsCloud: number;
+    /**
+      * 规则状态，true表示启用，false表示禁用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Enable: string;
+    /**
+      * 规则方向：1，入向；0，出向
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Direction?: number;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName?: string;
+    /**
+      * 内部使用的uuid，一般情况下不会使用到该字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternalUuid?: number;
+    /**
+      * 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+}
+/**
+ * CreateSecurityGroupRules返回参数结构体
+ */
+export interface CreateSecurityGroupRulesResponse {
+    /**
+      * 状态值，0：添加成功，非0：添加失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ExpandCfwVertical返回参数结构体
@@ -3099,29 +3416,41 @@ export interface ExpandCfwVerticalResponse {
     RequestId?: string;
 }
 /**
- * DescribeBlockStaticList请求参数结构体
+ * DescribeNatAcRule请求参数结构体
  */
-export interface DescribeBlockStaticListRequest {
+export interface DescribeNatAcRuleRequest {
     /**
-      * 开始时间
+      * 每页条数
       */
-    StartTime: string;
+    Limit: number;
     /**
-      * 结束时间
+      * 偏移值
       */
-    EndTime: string;
+    Offset: number;
     /**
-      * 列表类型，只能是下面三种之一：port、address、ip
+      * 需要查询的索引，特定场景使用，可不填
       */
-    QueryType: string;
+    Index?: string;
     /**
-      * top数
+      * 过滤条件组合
       */
-    Top: number;
+    Filters?: Array<CommonFilter>;
     /**
-      * 查询条件
+      * 检索的起始时间，可不传
       */
-    SearchValue?: string;
+    StartTime?: string;
+    /**
+      * 检索的截止时间，可不传
+      */
+    EndTime?: string;
+    /**
+      * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+      */
+    Order?: string;
+    /**
+      * 排序所用到的字段
+      */
+    By?: string;
 }
 /**
  * 告警中心概览数据
@@ -3357,42 +3686,66 @@ export interface DeleteResourceGroupResponse {
     RequestId?: string;
 }
 /**
- * DeleteSecurityGroupRule请求参数结构体
+ * DescribeSwitchLists请求参数结构体
  */
-export interface DeleteSecurityGroupRuleRequest {
+export interface DescribeSwitchListsRequest {
     /**
-      * 所需要删除规则的ID
+      * 防火墙状态  0: 关闭，1：开启
       */
-    Id: number;
+    Status?: number;
     /**
-      * 腾讯云地域的英文简写
+      * 资产类型 CVM/NAT/VPN/CLB/其它
       */
-    Area: string;
+    Type?: string;
     /**
-      * 方向，0：出站，1：入站
+      * 地域 上海/重庆/广州，等等
       */
-    Direction: number;
+    Area?: string;
     /**
-      * 是否删除反向规则，0：否，1：是
+      * 搜索值  例子："{"common":"106.54.189.45"}"
       */
-    IsDelReverse?: number;
+    SearchValue?: string;
+    /**
+      * 条数  默认值:10
+      */
+    Limit?: number;
+    /**
+      * 偏移值 默认值: 0
+      */
+    Offset?: number;
+    /**
+      * 排序，desc：降序，asc：升序
+      */
+    Order?: string;
+    /**
+      * 排序字段 PortTimes(风险端口数)
+      */
+    By?: string;
 }
 /**
- * ModifySecurityGroupItemRuleStatus请求参数结构体
+ * DescribeBlockStaticList请求参数结构体
  */
-export interface ModifySecurityGroupItemRuleStatusRequest {
+export interface DescribeBlockStaticListRequest {
     /**
-      * 方向，0：出站，1：入站，默认1
+      * 开始时间
       */
-    Direction: number;
+    StartTime: string;
     /**
-      * 是否开关开启，0：未开启，1：开启
+      * 结束时间
       */
-    Status: number;
+    EndTime: string;
     /**
-      * 更改的企业安全组规则的执行顺序
+      * 列表类型，只能是下面三种之一：port、address、ip
       */
-    RuleSequence: number;
+    QueryType: string;
+    /**
+      * top数
+      */
+    Top: number;
+    /**
+      * 查询条件
+      */
+    SearchValue?: string;
 }
 /**
  * vpc的防火墙网段
@@ -3492,6 +3845,19 @@ export interface DescribeNatFwInstancesInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AddNatAcRule返回参数结构体
+ */
+export interface AddNatAcRuleResponse {
+    /**
+      * 创建成功后返回新策略ID列表
+      */
+    RuleUuid?: Array<number>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

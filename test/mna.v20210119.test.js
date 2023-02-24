@@ -98,6 +98,16 @@ it("mna.v20210119.CreateEncryptedKey", async function () {
     }
 })
 
+it("mna.v20210119.GetMultiFlowStatistic", async function () {
+    try {
+       const data = await client.GetMultiFlowStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})

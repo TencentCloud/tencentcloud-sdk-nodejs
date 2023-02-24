@@ -51,6 +51,12 @@ export interface NacosReplica {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ZoneId: string
+
+  /**
+      * VPC ID	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
 }
 
 /**
@@ -298,6 +304,12 @@ export interface ZookeeperReplica {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AliasName: string
+
+  /**
+      * VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
 }
 
 /**
@@ -495,6 +507,24 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RegionInfos: Array<DescribeInstanceRegionInfo>
+
+  /**
+      * 所在EKS环境，分为common和yunti
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EKSType: string
+
+  /**
+      * 引擎的产品版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FeatureVersion?: string
+
+  /**
+      * 引擎实例是否开启客户端内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableClientIntranet?: boolean
 }
 
 /**
@@ -1196,6 +1226,12 @@ export interface EnvAddressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnableConfigIntranet?: boolean
+
+  /**
+      * 客户端公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InternetBandWidth?: number
 }
 
 /**

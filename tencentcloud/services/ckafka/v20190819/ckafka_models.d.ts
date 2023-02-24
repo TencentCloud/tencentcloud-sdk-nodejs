@@ -2315,6 +2315,19 @@ export interface ModifyGroupOffsetsRequest {
     Partitions?: Array<number>;
 }
 /**
+ * DescribeDatahubTopic返回参数结构体
+ */
+export interface DescribeDatahubTopicResponse {
+    /**
+      * 返回的结果对象
+      */
+    Result: DescribeDatahubTopicResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCkafkaZone请求参数结构体
  */
 export interface DescribeCkafkaZoneRequest {
@@ -3694,6 +3707,29 @@ export interface User {
     UpdateTime: string;
 }
 /**
+ * DescribeTopicSubscribeGroup接口出参
+ */
+export interface TopicSubscribeGroup {
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 消费分组状态数量信息
+      */
+    StatusCountInfo: string;
+    /**
+      * 消费分组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupsInfo: Array<GroupInfoResponse>;
+    /**
+      * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+}
+/**
  * DescribeUser返回参数结构体
  */
 export interface DescribeUserResponse {
@@ -4131,27 +4167,13 @@ export interface DeleteInstancePreRequest {
     InstanceId: string;
 }
 /**
- * DescribeTopicSubscribeGroup接口出参
+ * DescribeDatahubTopic请求参数结构体
  */
-export interface TopicSubscribeGroup {
+export interface DescribeDatahubTopicRequest {
     /**
-      * 总数
+      * 名称
       */
-    TotalCount: number;
-    /**
-      * 消费分组状态数量信息
-      */
-    StatusCountInfo: string;
-    /**
-      * 消费分组信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupsInfo: Array<GroupInfoResponse>;
-    /**
-      * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: number;
+    Name: string;
 }
 /**
  * 高级配置对象
@@ -4928,6 +4950,20 @@ export interface CreateInstancePostRequest {
     ClusterId?: number;
 }
 /**
+ * DescribeDatahubTopics返回参数结构体
+ */
+export interface DescribeDatahubTopicsResponse {
+    /**
+      * 主题列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: DescribeDatahubTopicsResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeConnectResource返回参数结构体
  */
 export interface DescribeConnectResourceResponse {
@@ -5215,6 +5251,53 @@ export interface FetchMessageByOffsetRequest {
     Offset?: number;
 }
 /**
+ * Datahub Topic详情
+ */
+export interface DescribeDatahubTopicResp {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * Topic名称
+      */
+    TopicName: string;
+    /**
+      * Topic Id
+      */
+    TopicId: string;
+    /**
+      * 分区数
+      */
+    PartitionNum: number;
+    /**
+      * 过期时间
+      */
+    RetentionMs: number;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Note: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 密码
+      */
+    Password: string;
+    /**
+      * 状态，1使用中，2删除中
+      */
+    Status: number;
+    /**
+      * 服务路由地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address: string;
+}
+/**
  * DescribeInstancesDetail请求参数结构体
  */
 export interface DescribeInstancesDetailRequest {
@@ -5254,6 +5337,10 @@ export interface DescribeInstancesDetailRequest {
       * 按照实例ID过滤
       */
     InstanceIdList?: Array<string>;
+    /**
+      * 根据标签列表过滤实例（取交集）
+      */
+    TagList?: Array<Tag>;
 }
 /**
  * 数据处理——Value处理参数——Jsonpath替换参数
@@ -5484,6 +5571,19 @@ export interface DescribeDatahubTasksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 购买硬盘参数
+ */
+export interface InquiryDiskParam {
+    /**
+      * 购买硬盘类型: SSD(SSD), CLOUD_SSD(SSD云硬盘), CLOUD_PREMIUM(高性能云硬盘), CLOUD_BASIC(云盘)
+      */
+    DiskType?: string;
+    /**
+      * 购买硬盘大小: 单位GB
+      */
+    DiskSize?: number;
 }
 /**
  * 小写字符解析
@@ -5811,6 +5911,39 @@ export interface InstanceResponse {
     TotalCount: number;
 }
 /**
+ * Datahub主题
+ */
+export interface DatahubTopicDTO {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * Topic名称
+      */
+    TopicName: string;
+    /**
+      * Topic Id
+      */
+    TopicId: string;
+    /**
+      * 分区数
+      */
+    PartitionNum: number;
+    /**
+      * 过期时间
+      */
+    RetentionMs: number;
+    /**
+      * 备注
+      */
+    Note: string;
+    /**
+      * 状态，1使用中，2删除中
+      */
+    Status: number;
+}
+/**
  * 操作型结果返回值
  */
 export interface JgwOperateResponse {
@@ -6095,6 +6228,23 @@ export interface InstanceChargeParam {
       * 购买时长: 包年包月时需要填写, 按量计费无需填写
       */
     InstanceChargePeriod?: number;
+}
+/**
+ * DescribeDatahubTopics请求参数结构体
+ */
+export interface DescribeDatahubTopicsRequest {
+    /**
+      * 查询值
+      */
+    SearchWord?: string;
+    /**
+      * 本次查询的偏移位置，默认为0
+      */
+    Offset?: number;
+    /**
+      * 本次返回结果的最大个数，默认为50，最大值为50
+      */
+    Limit?: number;
 }
 /**
  * CreateDatahubTask请求参数结构体
@@ -7001,17 +7151,18 @@ export interface DescribeUserRequest {
     Limit?: number;
 }
 /**
- * 购买硬盘参数
+ * Datahub主题列表
  */
-export interface InquiryDiskParam {
+export interface DescribeDatahubTopicsResp {
     /**
-      * 购买硬盘类型: SSD(SSD), CLOUD_SSD(SSD云硬盘), CLOUD_PREMIUM(高性能云硬盘), CLOUD_BASIC(云盘)
+      * 总数
       */
-    DiskType?: string;
+    TotalCount: number;
     /**
-      * 购买硬盘大小: 单位GB
+      * Topic列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiskSize?: number;
+    TopicList: Array<DatahubTopicDTO>;
 }
 /**
  * DescribeTopicSyncReplica请求参数结构体

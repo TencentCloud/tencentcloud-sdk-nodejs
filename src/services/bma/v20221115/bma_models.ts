@@ -528,6 +528,12 @@ export interface FakeURLData {
   FakeURL?: string
 
   /**
+      * 仿冒域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FakeDomain?: string
+
+  /**
       * 热度
 注意：此字段可能返回 null，表示取不到有效值。
       */

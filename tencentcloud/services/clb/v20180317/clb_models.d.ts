@@ -1138,6 +1138,12 @@ export interface DescribeTargetsRequest {
       * 监听器端口。
       */
     Port?: number;
+    /**
+      * 查询负载均衡绑定的后端服务列表，过滤条件如下：
+<li> location-id - String - 是否必填：否 - （过滤条件）按照 规则ID 过滤，如："loc-12345678"。</li>
+<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 后端服务内网IP 过滤，如："172.16.1.1"。</li>
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 可用区相关信息
@@ -1439,12 +1445,12 @@ export interface DescribeTaskStatusResponse {
     /**
       * 任务的当前状态。 0：成功，1：失败，2：进行中。
       */
-    Status: number;
+    Status?: number;
     /**
       * 由负载均衡实例唯一 ID 组成的数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LoadBalancerIds: Array<string>;
+    LoadBalancerIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1477,7 +1483,7 @@ export interface ModifyLoadBalancerAttributesRequest {
       */
     LoadBalancerName?: string;
     /**
-      * 负载均衡绑定的后端服务的地域信息
+      * 设置负载均衡跨地域绑定1.0的后端服务信息
       */
     TargetRegionInfo?: TargetRegionInfo;
     /**
@@ -1489,7 +1495,7 @@ export interface ModifyLoadBalancerAttributesRequest {
       */
     LoadBalancerPassToTarget?: boolean;
     /**
-      * 是否开启SnatPro
+      * 是否开启跨地域绑定2.0功能
       */
     SnatPro?: boolean;
     /**
@@ -1817,7 +1823,7 @@ export interface DescribeTargetsResponse {
       * 监听器后端绑定的机器信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Listeners: Array<ListenerBackend>;
+    Listeners?: Array<ListenerBackend>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2282,11 +2288,11 @@ export interface DescribeResourcesResponse {
     /**
       * 可用区支持的资源列表。
       */
-    ZoneResourceSet: Array<ZoneResource>;
+    ZoneResourceSet?: Array<ZoneResource>;
     /**
       * 可用区资源列表数目。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2486,7 +2492,7 @@ export interface CreateClsLogSetResponse {
     /**
       * 日志集的 ID。
       */
-    LogsetId: string;
+    LogsetId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2671,11 +2677,11 @@ export interface DescribeCustomizedConfigAssociateListResponse {
     /**
       * 绑定关系列表
       */
-    BindList: Array<BindDetailItem>;
+    BindList?: Array<BindDetailItem>;
     /**
       * 绑定关系总数目
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2907,7 +2913,7 @@ export interface CreateTopicResponse {
     /**
       * 日志主题的 ID。
       */
-    TopicId: string;
+    TopicId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1602,6 +1602,11 @@ export interface ServicePortMapping {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PortMappingItemList?: Array<ServicePortMappingItem>;
+    /**
+      * clb domain
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalDomain?: string;
 }
 /**
  * Ingress 配置
@@ -1664,6 +1669,11 @@ export interface IngressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RewriteType?: string;
+    /**
+      * clb 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain?: string;
 }
 /**
  * ModifyApplicationAutoscaler请求参数结构体
@@ -4221,6 +4231,11 @@ export interface EksService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AllIpDone?: boolean;
+    /**
+      * clb 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalDomain?: string;
 }
 /**
  * 键值对

@@ -18,14 +18,16 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  FlowDetails,
   GetDeviceResponse,
   GetFlowStatisticResponse,
   Capacity,
   GetFlowStatisticRequest,
   DestAddressInfo,
   DeleteQosRequest,
-  DeviceNetInfo,
   NetDetails,
+  DeviceNetInfo,
+  GetMultiFlowStatisticResponse,
   SrcAddressInfo,
   UpdateNetInfo,
   CreateQosResponse,
@@ -39,6 +41,7 @@ import {
   GetStatisticDataRequest,
   UpdateDeviceRequest,
   GetPublicKeyResponse,
+  GetMultiFlowStatisticRequest,
   DeviceBaseInfo,
   ExpectedThreshold,
   DeleteQosResponse,
@@ -143,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEncryptedKeyResponse) => void
   ): Promise<CreateEncryptedKeyResponse> {
     return this.request("CreateEncryptedKey", req, cb)
+  }
+
+  /**
+   * 批量获取设备流量统计曲线
+   */
+  async GetMultiFlowStatistic(
+    req: GetMultiFlowStatisticRequest,
+    cb?: (error: string, rep: GetMultiFlowStatisticResponse) => void
+  ): Promise<GetMultiFlowStatisticResponse> {
+    return this.request("GetMultiFlowStatistic", req, cb)
   }
 
   /**

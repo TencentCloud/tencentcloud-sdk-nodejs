@@ -1923,6 +1923,12 @@ export interface ServicePortMapping {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PortMappingItemList?: Array<ServicePortMappingItem>
+
+  /**
+      * clb domain
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalDomain?: string
 }
 
 /**
@@ -1997,6 +2003,12 @@ export interface IngressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RewriteType?: string
+
+  /**
+      * clb 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
 }
 
 /**
@@ -5025,6 +5037,12 @@ export interface EksService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AllIpDone?: boolean
+
+  /**
+      * clb 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalDomain?: string
 }
 
 /**

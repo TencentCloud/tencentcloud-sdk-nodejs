@@ -100,6 +100,7 @@ import {
   MongoDBModifyConnectParam,
   TdwParam,
   ModifyGroupOffsetsRequest,
+  DescribeDatahubTopicResponse,
   DescribeCkafkaZoneRequest,
   FetchDatahubMessageByOffsetResponse,
   CreateConsumerResponse,
@@ -161,6 +162,7 @@ import {
   BatchContent,
   DeleteRouteTriggerTimeResponse,
   User,
+  TopicSubscribeGroup,
   DescribeUserResponse,
   DtsConnectParam,
   DorisModifyConnectParam,
@@ -181,7 +183,7 @@ import {
   TopicDetailResponse,
   TopicInSyncReplicaResult,
   DeleteInstancePreRequest,
-  TopicSubscribeGroup,
+  DescribeDatahubTopicRequest,
   Config,
   ClickHouseSchema,
   CtsdbConnectParam,
@@ -209,6 +211,7 @@ import {
   DescribeInstancesRequest,
   InstanceAttributesResponse,
   CreateInstancePostRequest,
+  DescribeDatahubTopicsResponse,
   DescribeConnectResourceResponse,
   DescribeGroupRequest,
   Filter,
@@ -225,6 +228,7 @@ import {
   ConnectResourceResourceIdResp,
   CheckCdcClusterRequest,
   FetchMessageByOffsetRequest,
+  DescribeDatahubTopicResp,
   DescribeInstancesDetailRequest,
   JsonPathReplaceParam,
   SubstrParam,
@@ -236,6 +240,7 @@ import {
   DateParam,
   ValueParam,
   DescribeDatahubTasksResponse,
+  InquiryDiskParam,
   LowercaseParam,
   SendMessageResponse,
   DescribeDatahubGroupOffsetsRequest,
@@ -248,6 +253,7 @@ import {
   PrivateLinkParam,
   CreateRouteResponse,
   InstanceResponse,
+  DatahubTopicDTO,
   JgwOperateResponse,
   DescribeGroup,
   ClsParam,
@@ -261,6 +267,7 @@ import {
   EsModifyConnectParam,
   ModifyConnectResourceResponse,
   InstanceChargeParam,
+  DescribeDatahubTopicsRequest,
   CreateDatahubTaskRequest,
   InquiryPrice,
   TopicResult,
@@ -290,7 +297,7 @@ import {
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
   DescribeUserRequest,
-  InquiryDiskParam,
+  DescribeDatahubTopicsResp,
   DescribeTopicSyncReplicaRequest,
   ModifyDatahubTaskRequest,
   InstanceDetail,
@@ -560,6 +567,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeACLResponse) => void
   ): Promise<DescribeACLResponse> {
     return this.request("DescribeACL", req, cb)
+  }
+
+  /**
+   * 查询DIP主题列表
+   */
+  async DescribeDatahubTopics(
+    req: DescribeDatahubTopicsRequest,
+    cb?: (error: string, rep: DescribeDatahubTopicsResponse) => void
+  ): Promise<DescribeDatahubTopicsResponse> {
+    return this.request("DescribeDatahubTopics", req, cb)
   }
 
   /**
@@ -894,6 +911,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置实例属性
+   */
+  async ModifyInstanceAttributes(
+    req: ModifyInstanceAttributesRequest,
+    cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void
+  ): Promise<ModifyInstanceAttributesResponse> {
+    return this.request("ModifyInstanceAttributes", req, cb)
+  }
+
+  /**
    * 查询topic 生产端连接信息
    */
   async DescribeTopicProduceConnection(
@@ -915,13 +942,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置实例属性
+   * 获取Datahub主题属性
    */
-  async ModifyInstanceAttributes(
-    req: ModifyInstanceAttributesRequest,
-    cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void
-  ): Promise<ModifyInstanceAttributesResponse> {
-    return this.request("ModifyInstanceAttributes", req, cb)
+  async DescribeDatahubTopic(
+    req: DescribeDatahubTopicRequest,
+    cb?: (error: string, rep: DescribeDatahubTopicResponse) => void
+  ): Promise<DescribeDatahubTopicResponse> {
+    return this.request("DescribeDatahubTopic", req, cb)
   }
 
   /**

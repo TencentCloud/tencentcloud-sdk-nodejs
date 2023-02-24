@@ -548,6 +548,16 @@ it("cfw.v20190904.DescribeCfwEips", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyNatAcRule", async function () {
+    try {
+       const data = await client.ModifyNatAcRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyAcRule", async function () {
     try {
        const data = await client.ModifyAcRule({})
@@ -608,6 +618,16 @@ it("cfw.v20190904.DescribeBlockIgnoreList", async function () {
     }
 })
 
+it("cfw.v20190904.RemoveNatAcRule", async function () {
+    try {
+       const data = await client.RemoveNatAcRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeAcLists", async function () {
     try {
        const data = await client.DescribeAcLists({})
@@ -621,6 +641,26 @@ it("cfw.v20190904.DescribeAcLists", async function () {
 it("cfw.v20190904.ModifyPublicIPSwitchStatus", async function () {
     try {
        const data = await client.ModifyPublicIPSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeNatAcRule", async function () {
+    try {
+       const data = await client.DescribeNatAcRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.AddNatAcRule", async function () {
+    try {
+       const data = await client.AddNatAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

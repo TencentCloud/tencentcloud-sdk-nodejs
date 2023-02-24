@@ -1145,6 +1145,7 @@ export interface Disk {
   /**
       * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
 格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
       */
   CreatedTime: string
 
@@ -2496,8 +2497,9 @@ export interface Blueprint {
   DisplayVersion: string
 
   /**
-   * 镜像描述信息。
-   */
+      * 镜像描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Description: string
 
   /**
@@ -3060,8 +3062,9 @@ export interface Snapshot {
   LatestOperationRequestId: string
 
   /**
-   * 快照的创建时间。
-   */
+      * 快照的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   CreatedTime: string
 }
 

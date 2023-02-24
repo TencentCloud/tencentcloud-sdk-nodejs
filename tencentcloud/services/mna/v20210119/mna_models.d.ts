@@ -1,4 +1,34 @@
 /**
+ * 设备流量信息
+ */
+export interface FlowDetails {
+    /**
+      * 流量数据点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetDetails?: Array<NetDetails>;
+    /**
+      * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceId?: string;
+    /**
+      * 流量最大值（单位：bytes）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxValue?: number;
+    /**
+      * 流量平均值（单位：bytes）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AvgValue?: number;
+    /**
+      * 流量总值（单位：bytes）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalValue?: number;
+}
+/**
  * GetDevice返回参数结构体
  */
 export interface GetDeviceResponse {
@@ -93,6 +123,19 @@ export interface DeleteQosRequest {
     SessionId: string;
 }
 /**
+ * 网络详细信息
+ */
+export interface NetDetails {
+    /**
+      * 流量值（bit）
+      */
+    Current: number;
+    /**
+      * 时间点，单位：s
+      */
+    Time: string;
+}
+/**
  * 设备网络状态信息
  */
 export interface DeviceNetInfo {
@@ -182,17 +225,17 @@ export interface DeviceNetInfo {
     UpRate?: number;
 }
 /**
- * 网络详细信息
+ * GetMultiFlowStatistic返回参数结构体
  */
-export interface NetDetails {
+export interface GetMultiFlowStatisticResponse {
     /**
-      * 流量值（bit）
+      * 批量设备流量信息
       */
-    Current: number;
+    FlowDetails?: Array<FlowDetails>;
     /**
-      * 时间点，单位：s
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Time: string;
+    RequestId?: string;
 }
 /**
  * 移动网络加速源地址结构体
@@ -466,6 +509,31 @@ export interface GetPublicKeyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetMultiFlowStatistic请求参数结构体
+ */
+export interface GetMultiFlowStatisticRequest {
+    /**
+      * 设备id列表，单次最多请求10个设备
+      */
+    DeviceIds: Array<string>;
+    /**
+      * 1659514436
+      */
+    BeginTime: number;
+    /**
+      * 1659515000
+      */
+    EndTime: number;
+    /**
+      * 统计流量类型（1：上行流量，2：下行流量）
+      */
+    Type: number;
+    /**
+      * 统计时间粒度（1：按小时统计，2：按天统计）
+      */
+    TimeGranularity: number;
 }
 /**
  * 设备的基本信息

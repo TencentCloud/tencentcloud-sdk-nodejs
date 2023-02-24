@@ -861,7 +861,11 @@ export interface ZoneInfo {
       */
     ZoneId: number;
     /**
-      * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用，SELLOUT表示售罄
+      * 可用状态包含，
+UNAVAILABLE：不可用。
+AVAILABLE：可用。
+SELLOUT：售罄。
+SUPPORTMODIFYONLY：支持变配。
       */
     ZoneState: string;
     /**

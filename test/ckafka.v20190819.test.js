@@ -268,6 +268,16 @@ it("ckafka.v20190819.DescribeACL", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeDatahubTopics", async function () {
+    try {
+       const data = await client.DescribeDatahubTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.CancelAuthorizationToken", async function () {
     try {
        const data = await client.CancelAuthorizationToken({})
@@ -598,6 +608,16 @@ it("ckafka.v20190819.AuthorizeToken", async function () {
     }
 })
 
+it("ckafka.v20190819.ModifyInstanceAttributes", async function () {
+    try {
+       const data = await client.ModifyInstanceAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeTopicProduceConnection", async function () {
     try {
        const data = await client.DescribeTopicProduceConnection({})
@@ -618,9 +638,9 @@ it("ckafka.v20190819.DescribeTopic", async function () {
     }
 })
 
-it("ckafka.v20190819.ModifyInstanceAttributes", async function () {
+it("ckafka.v20190819.DescribeDatahubTopic", async function () {
     try {
-       const data = await client.ModifyInstanceAttributes({})
+       const data = await client.DescribeDatahubTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
