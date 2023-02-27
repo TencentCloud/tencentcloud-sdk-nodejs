@@ -294,6 +294,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseDBExtranetAccess", req, cb);
     }
     /**
+     * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
+     */
+    async ModifyDBEncryptAttributes(req, cb) {
+        return this.request("ModifyDBEncryptAttributes", req, cb);
+    }
+    /**
      * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
      */
     async DescribeAccounts(req, cb) {

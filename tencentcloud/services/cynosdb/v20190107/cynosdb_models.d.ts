@@ -795,27 +795,27 @@ export interface CreateClustersResponse {
       * 冻结流水ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TranId: string;
+    TranId?: string;
     /**
       * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
       * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResourceIds: Array<string>;
+    ResourceIds?: Array<string>;
     /**
       * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterIds: Array<string>;
+    ClusterIds?: Array<string>;
     /**
       * 大订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BigDealIds: Array<string>;
+    BigDealIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

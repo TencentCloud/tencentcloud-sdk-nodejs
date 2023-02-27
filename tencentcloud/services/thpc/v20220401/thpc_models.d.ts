@@ -90,6 +90,16 @@ export interface ClusterOverview {
     VpcId: string;
 }
 /**
+ * 队列信息概览。
+ */
+export interface QueueOverview {
+    /**
+      * 队列名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QueueName?: string;
+}
+/**
  * DescribeClusters请求参数结构体
  */
 export interface DescribeClustersRequest {
@@ -136,13 +146,65 @@ false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩
     DryRun?: boolean;
 }
 /**
- * 描述了实例登录相关配置与信息。
+ * 节点概览信息。
  */
-export interface LoginSettings {
+export interface NodeOverview {
     /**
-      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+      * 节点实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Password?: string;
+    InstanceId?: string;
+    /**
+      * 节点所在可用区信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone?: string;
+    /**
+      * 节点状态。<br><li>SUBMITTED：已完成提交。<br><li>CREATING：创建中。<br><li>CREATED：完成创建。<br><li>INITING：初始化中。<br><li>INIT_FAILED：初始化失败。<br><li>RUNNING：运行中。<br><li>DELETING：销毁中。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeState?: string;
+    /**
+      * 镜像ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageId?: string;
+    /**
+      * 节点所属队列名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QueueName?: string;
+    /**
+      * 节点角色。<br><li>Manager：管控节点。<br><li>Compute：计算节点。<br><li>Login：登录节点。<br><li>ManagerBackup：备用管控节点。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeRole?: string;
+    /**
+      * 节点类型。<br><li>STATIC：静态节点。<br><li>DYNAMIC：弹性节点。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeType?: string;
+}
+/**
+ * DescribeNodes请求参数结构体
+ */
+export interface DescribeNodesRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * <li><strong>queue-name</strong></li> <p style="padding-left: 30px;">按照【<strong>队列名称</strong>】进行过滤。队列名称形如：compute。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-role</strong></li> <p style="padding-left: 30px;">按照【<strong>节点角色</strong>】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-type</strong></li> <p style="padding-left: 30px;">按照【<strong>节点类型</strong>】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Limit?: number;
 }
 /**
  * DeleteNodes返回参数结构体
@@ -235,49 +297,59 @@ export interface NodeActivity {
     NodeActivityStatusReason: string;
 }
 /**
- * 扩容队列配置。
+ * 描述了实例的抽象位置
  */
-export interface QueueConfig {
+export interface Placement {
     /**
-      * 队列名称。
+      * 实例所属的可用区名称。该参数可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+      */
+    Zone: string;
+}
+/**
+ * AddQueue请求参数结构体
+ */
+export interface AddQueueRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 队列名称。<br><li>最多支持32个字符。
       */
     QueueName: string;
+}
+/**
+ * 登录节点概览。
+ */
+export interface LoginNodeOverview {
     /**
-      * 队列中弹性节点数量最小值。取值范围0～200。
+      * 登录节点ID。
       */
-    MinSize?: number;
+    NodeId: string;
+}
+/**
+ * 描述CFS文件系统版本和挂载信息
+ */
+export interface CFSOption {
     /**
-      * 队列中弹性节点数量最大值。取值范围0～200。
+      * 文件系统本地挂载路径。
       */
-    MaxSize?: number;
+    LocalPath: string;
     /**
-      * 是否开启自动扩容。
+      * 文件系统远程挂载ip及路径。
       */
-    EnableAutoExpansion?: boolean;
+    RemotePath: string;
     /**
-      * 是否开启自动缩容。
+      * 文件系统协议类型，默认值NFS 3.0。
+<li>NFS 3.0。
+<li>NFS 4.0。
+<li>TURBO。
       */
-    EnableAutoShrink?: boolean;
+    Protocol?: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
+      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
       */
-    ImageId?: string;
-    /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
-    SystemDisk?: SystemDisk;
-    /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
-    DataDisks?: Array<DataDisk>;
-    /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
-    InternetAccessible?: InternetAccessible;
-    /**
-      * 扩容节点配置信息。
-      */
-    ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
+    StorageType?: string;
 }
 /**
  * 符合条件的集群活动信息。
@@ -333,39 +405,6 @@ export interface ClusterActivity {
     EndTime: string;
 }
 /**
- * 登录节点概览。
- */
-export interface LoginNodeOverview {
-    /**
-      * 登录节点ID。
-      */
-    NodeId: string;
-}
-/**
- * 描述CFS文件系统版本和挂载信息
- */
-export interface CFSOption {
-    /**
-      * 文件系统本地挂载路径。
-      */
-    LocalPath: string;
-    /**
-      * 文件系统远程挂载ip及路径。
-      */
-    RemotePath: string;
-    /**
-      * 文件系统协议类型，默认值NFS 3.0。
-<li>NFS 3.0。
-<li>NFS 4.0。
-<li>TURBO。
-      */
-    Protocol?: string;
-    /**
-      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-      */
-    StorageType?: string;
-}
-/**
  * CreateCluster返回参数结构体
  */
 export interface CreateClusterResponse {
@@ -378,6 +417,23 @@ export interface CreateClusterResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeQueues请求参数结构体
+ */
+export interface DescribeQueuesRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Limit?: number;
 }
 /**
  * SetAutoScalingConfiguration返回参数结构体
@@ -475,6 +531,15 @@ false（默认）：发送正常请求，通过检查后直接创建实例
     AutoScalingType?: string;
 }
 /**
+ * AddQueue返回参数结构体
+ */
+export interface AddQueueResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeClusterStorageOption返回参数结构体
  */
 export interface DescribeClusterStorageOptionResponse {
@@ -482,6 +547,23 @@ export interface DescribeClusterStorageOptionResponse {
       * 集群存储选项信息概览。
       */
     StorageOption?: StorageOptionOverview;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeQueues返回参数结构体
+ */
+export interface DescribeQueuesResponse {
+    /**
+      * 队列概览信息列表。
+      */
+    QueueSet?: Array<QueueOverview>;
+    /**
+      * 符合条件的节点数量。
+      */
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -503,6 +585,51 @@ export interface GooseFSOptionOverview {
       * 文件系统master的ip和端口。
       */
     Masters: Array<string>;
+}
+/**
+ * 扩容队列配置。
+ */
+export interface QueueConfig {
+    /**
+      * 队列名称。
+      */
+    QueueName: string;
+    /**
+      * 队列中弹性节点数量最小值。取值范围0～200。
+      */
+    MinSize?: number;
+    /**
+      * 队列中弹性节点数量最大值。取值范围0～200。
+      */
+    MaxSize?: number;
+    /**
+      * 是否开启自动扩容。
+      */
+    EnableAutoExpansion?: boolean;
+    /**
+      * 是否开启自动缩容。
+      */
+    EnableAutoShrink?: boolean;
+    /**
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
+      */
+    ImageId?: string;
+    /**
+      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      */
+    DataDisks?: Array<DataDisk>;
+    /**
+      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+      */
+    InternetAccessible?: InternetAccessible;
+    /**
+      * 扩容节点配置信息。
+      */
+    ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
 }
 /**
  * 描述了实例的计费模式
@@ -668,13 +795,30 @@ CLOUD_PREMIUM：高性能云硬盘
     DiskSize?: number;
 }
 /**
- * 描述了实例的抽象位置
+ * 描述了实例登录相关配置与信息。
  */
-export interface Placement {
+export interface LoginSettings {
     /**
-      * 实例所属的可用区名称。该参数可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
       */
-    Zone: string;
+    Password?: string;
+}
+/**
+ * 描述GooseFS挂载信息
+ */
+export interface GooseFSOption {
+    /**
+      * 文件系统本地挂载路径。
+      */
+    LocalPath: string;
+    /**
+      * 文件系统远程挂载路径。
+      */
+    RemotePath: string;
+    /**
+      * 文件系统master的ip和端口。
+      */
+    Masters: Array<string>;
 }
 /**
  * DescribeClusterActivities请求参数结构体
@@ -692,6 +836,36 @@ export interface DescribeClusterActivitiesRequest {
       * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Limit?: number;
+}
+/**
+ * DeleteQueue请求参数结构体
+ */
+export interface DeleteQueueRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 队列名称。<br><li>最多支持32个字符。
+      */
+    QueueName: string;
+}
+/**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 字段的过滤值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Values: Array<string>;
 }
 /**
  * AddNodes请求参数结构体
@@ -1084,21 +1258,21 @@ export interface DeleteClusterStorageOptionResponse {
     RequestId?: string;
 }
 /**
- * 描述GooseFS挂载信息
+ * DescribeNodes返回参数结构体
  */
-export interface GooseFSOption {
+export interface DescribeNodesResponse {
     /**
-      * 文件系统本地挂载路径。
+      * 节点概览信息列表。
       */
-    LocalPath: string;
+    NodeSet?: Array<NodeOverview>;
     /**
-      * 文件系统远程挂载路径。
+      * 符合条件的节点数量。
       */
-    RemotePath: string;
+    TotalCount?: number;
     /**
-      * 文件系统master的ip和端口。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Masters: Array<string>;
+    RequestId?: string;
 }
 /**
  * DescribeClusterActivities返回参数结构体
@@ -1129,6 +1303,15 @@ export interface DataDisk {
       * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
       */
     DiskType?: string;
+}
+/**
+ * DeleteQueue返回参数结构体
+ */
+export interface DeleteQueueResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AddNodes返回参数结构体

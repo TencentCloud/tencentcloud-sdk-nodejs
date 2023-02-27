@@ -417,7 +417,7 @@ export interface DescribeBPWhiteListsResponse {
  */
 export interface CreateBPFakeAPPListRequest {
   /**
-   * 批量模版
+   * 批量模板
    */
   FakeAPPs: string
 }
@@ -849,7 +849,7 @@ export interface CreateBPWhiteListRequest {
  */
 export interface CreateBPFakeURLsRequest {
   /**
-   * 批量模版
+   * 批量模板
    */
   FakeURLs: string
 }

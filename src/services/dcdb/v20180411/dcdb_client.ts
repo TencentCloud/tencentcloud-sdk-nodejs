@@ -58,6 +58,7 @@ import {
   CreateDCDBInstanceResponse,
   BriefNodeInfo,
   ModifyDBInstancesProjectResponse,
+  ModifyDBEncryptAttributesResponse,
   DescribeDCDBInstanceNodeInfoRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
@@ -156,6 +157,7 @@ import {
   AddShardConfig,
   ModifyDBSyncModeRequest,
   DescribeProjectsResponse,
+  ModifyDBEncryptAttributesRequest,
   CreateAccountResponse,
   IsolateDedicatedDBInstanceResponse,
   RegionInfo,
@@ -626,6 +628,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void
   ): Promise<CloseDBExtranetAccessResponse> {
     return this.request("CloseDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
+   */
+  async ModifyDBEncryptAttributes(
+    req: ModifyDBEncryptAttributesRequest,
+    cb?: (error: string, rep: ModifyDBEncryptAttributesResponse) => void
+  ): Promise<ModifyDBEncryptAttributesResponse> {
+    return this.request("ModifyDBEncryptAttributes", req, cb)
   }
 
   /**

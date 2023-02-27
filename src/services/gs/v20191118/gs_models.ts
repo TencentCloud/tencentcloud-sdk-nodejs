@@ -130,11 +130,6 @@ export interface StartPublishStreamResponse {
  */
 export interface CreateSessionRequest {
   /**
-   * 客户端session信息，从JSSDK请求中获得
-   */
-  ClientSession: string
-
-  /**
    * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
@@ -153,6 +148,11 @@ export interface CreateSessionRequest {
    * 游戏参数
    */
   GameParas?: string
+
+  /**
+   * 客户端session信息，从JSSDK请求中获得。特殊的，当 RunMode 参数为 RunWithoutClient 时，该字段可以为空
+   */
+  ClientSession?: string
 
   /**
    * 分辨率,，可设置为1080p或720p或1920x1080格式
@@ -229,17 +229,17 @@ export interface CreateSessionResponse {
   /**
    * 服务端session信息，返回给JSSDK
    */
-  ServerSession: string
+  ServerSession?: string
 
   /**
    * 【已废弃】
    */
-  RoleNumber: string
+  RoleNumber?: string
 
   /**
    * 【互动云游】角色；Player表示玩家；Viewer表示观察者
    */
-  Role: string
+  Role?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

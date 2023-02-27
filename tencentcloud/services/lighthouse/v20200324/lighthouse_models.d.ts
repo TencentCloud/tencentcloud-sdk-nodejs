@@ -514,9 +514,9 @@ export interface InquirePriceRenewInstancesRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
       */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
+    InstanceChargePrepaid: InstanceChargePrepaid;
     /**
       * 是否续费数据盘。默认值: false, 即不续费。
       */
@@ -2218,7 +2218,7 @@ export interface InquirePriceCreateInstancesResponse {
     /**
       * 询价信息。
       */
-    Price: Price;
+    Price?: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3568,13 +3568,13 @@ export interface InquirePriceCreateInstancesRequest {
       */
     BundleId: string;
     /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
+      */
+    InstanceChargePrepaid: InstanceChargePrepaid;
+    /**
       * 创建数量，默认为 1。
       */
     InstanceCount?: number;
-    /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-      */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
       * 应用镜像 ID，使用收费应用镜像时必填。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
       */

@@ -518,6 +518,10 @@ export interface UpdateEventBusRequest {
       * EB日志主题ID
       */
     LogTopicId?: string;
+    /**
+      * 是否开启存储
+      */
+    EnableStore?: boolean;
 }
 /**
  * CreateEventBus请求参数结构体

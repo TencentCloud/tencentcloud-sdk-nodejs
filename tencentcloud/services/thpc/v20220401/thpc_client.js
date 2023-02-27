@@ -52,16 +52,42 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
-     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
-    async DeleteClusterStorageOption(req, cb) {
-        return this.request("DeleteClusterStorageOption", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
      */
     async SetAutoScalingConfiguration(req, cb) {
         return this.request("SetAutoScalingConfiguration", req, cb);
+    }
+    /**
+     * 本接口(AddQueue)用于添加队列到指定集群。
+     */
+    async AddQueue(req, cb) {
+        return this.request("AddQueue", req, cb);
+    }
+    /**
+     * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
+     */
+    async DescribeNodes(req, cb) {
+        return this.request("DescribeNodes", req, cb);
+    }
+    /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+    async DeleteQueue(req, cb) {
+        return this.request("DeleteQueue", req, cb);
+    }
+    /**
+     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     */
+    async DeleteClusterStorageOption(req, cb) {
+        return this.request("DeleteClusterStorageOption", req, cb);
     }
     /**
      * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
@@ -94,10 +120,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterActivities", req, cb);
     }
     /**
-     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async DescribeQueues(req, cb) {
+        return this.request("DescribeQueues", req, cb);
     }
 }
 exports.Client = Client;

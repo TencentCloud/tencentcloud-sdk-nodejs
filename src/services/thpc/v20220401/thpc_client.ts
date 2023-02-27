@@ -21,24 +21,31 @@ import {
   DescribeAutoScalingConfigurationResponse,
   DescribeClusterStorageOptionRequest,
   ClusterOverview,
+  QueueOverview,
   DescribeClustersRequest,
   SetAutoScalingConfigurationRequest,
-  LoginSettings,
+  NodeOverview,
+  DescribeNodesRequest,
   DeleteNodesResponse,
   AddClusterStorageOptionResponse,
   StorageOptionOverview,
   DeleteClusterResponse,
   ExpansionNodeConfig,
   NodeActivity,
-  QueueConfig,
-  ClusterActivity,
+  Placement,
+  AddQueueRequest,
   LoginNodeOverview,
   CFSOption,
+  ClusterActivity,
   CreateClusterResponse,
+  DescribeQueuesRequest,
   SetAutoScalingConfigurationResponse,
   CreateClusterRequest,
+  AddQueueResponse,
   DescribeClusterStorageOptionResponse,
+  DescribeQueuesResponse,
   GooseFSOptionOverview,
+  QueueConfig,
   InstanceChargePrepaid,
   Tag,
   LoginNode,
@@ -48,8 +55,11 @@ import {
   DeleteClusterRequest,
   ComputeNodeOverview,
   SystemDisk,
-  Placement,
+  LoginSettings,
+  GooseFSOption,
   DescribeClusterActivitiesRequest,
+  DeleteQueueRequest,
+  Filter,
   AddNodesRequest,
   CFSOptionOverview,
   DeleteClusterStorageOptionRequest,
@@ -65,9 +75,10 @@ import {
   DeleteNodesRequest,
   DescribeClustersResponse,
   DeleteClusterStorageOptionResponse,
-  GooseFSOption,
+  DescribeNodesResponse,
   DescribeClusterActivitiesResponse,
   DataDisk,
+  DeleteQueueResponse,
   AddNodesResponse,
 } from "./thpc_models"
 
@@ -121,13 +132,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+   * 本接口（DeleteCluster）用于删除一个指定的集群。
    */
-  async DeleteClusterStorageOption(
-    req: DeleteClusterStorageOptionRequest,
-    cb?: (error: string, rep: DeleteClusterStorageOptionResponse) => void
-  ): Promise<DeleteClusterStorageOptionResponse> {
-    return this.request("DeleteClusterStorageOption", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
@@ -138,6 +149,48 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetAutoScalingConfigurationResponse) => void
   ): Promise<SetAutoScalingConfigurationResponse> {
     return this.request("SetAutoScalingConfiguration", req, cb)
+  }
+
+  /**
+   * 本接口(AddQueue)用于添加队列到指定集群。
+   */
+  async AddQueue(
+    req: AddQueueRequest,
+    cb?: (error: string, rep: AddQueueResponse) => void
+  ): Promise<AddQueueResponse> {
+    return this.request("AddQueue", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
+   */
+  async DescribeNodes(
+    req: DescribeNodesRequest,
+    cb?: (error: string, rep: DescribeNodesResponse) => void
+  ): Promise<DescribeNodesResponse> {
+    return this.request("DescribeNodes", req, cb)
+  }
+
+  /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+  async DeleteQueue(
+    req: DeleteQueueRequest,
+    cb?: (error: string, rep: DeleteQueueResponse) => void
+  ): Promise<DeleteQueueResponse> {
+    return this.request("DeleteQueue", req, cb)
+  }
+
+  /**
+   * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+   */
+  async DeleteClusterStorageOption(
+    req: DeleteClusterStorageOptionRequest,
+    cb?: (error: string, rep: DeleteClusterStorageOptionResponse) => void
+  ): Promise<DeleteClusterStorageOptionResponse> {
+    return this.request("DeleteClusterStorageOption", req, cb)
   }
 
   /**
@@ -191,12 +244,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteCluster）用于删除一个指定的集群。
+   * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async DescribeQueues(
+    req: DescribeQueuesRequest,
+    cb?: (error: string, rep: DescribeQueuesResponse) => void
+  ): Promise<DescribeQueuesResponse> {
+    return this.request("DescribeQueues", req, cb)
   }
 }

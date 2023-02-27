@@ -674,6 +674,15 @@ export interface ModifyDBInstancesProjectResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBEncryptAttributes返回参数结构体
+ */
+export interface ModifyDBEncryptAttributesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDCDBInstanceNodeInfo请求参数结构体
  */
 export interface DescribeDCDBInstanceNodeInfoRequest {
@@ -3005,6 +3014,19 @@ export interface DescribeProjectsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyDBEncryptAttributes请求参数结构体
+ */
+export interface ModifyDBEncryptAttributesRequest {
+    /**
+      * 实例Id，形如：tdsqlshard-ow728lmc。
+      */
+    InstanceId: string;
+    /**
+      * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+      */
+    EncryptEnabled: number;
 }
 /**
  * CreateAccount返回参数结构体

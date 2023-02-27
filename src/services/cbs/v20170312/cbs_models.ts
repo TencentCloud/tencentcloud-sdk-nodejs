@@ -212,6 +212,88 @@ export interface AutoSnapshotPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AdvancedRetentionPolicy: AdvancedRetentionPolicy
+
+  /**
+      * 该复制快照策略的源端账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CopyFromAccountUin?: string
+
+  /**
+      * 标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<Tag>
+}
+
+/**
+ * 描述购买云盘时的费用明细。
+ */
+export interface DetailPrice {
+  /**
+      * 描述计费项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PriceTitle: string
+
+  /**
+   * 描述计费项目显示名称，用户控制台展示。
+   */
+  PriceName: string
+
+  /**
+      * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice: number
+
+  /**
+      * 预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPrice: number
+
+  /**
+      * 后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+      * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+      * 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeUnit: string
+
+  /**
+      * 高精度预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPriceHigh?: string
+
+  /**
+      * 高精度预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPriceHigh?: string
+
+  /**
+      * 高精度后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceHigh?: string
+
+  /**
+      * 高精度后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscountHigh?: string
 }
 
 /**
@@ -332,7 +414,7 @@ export interface CreateSnapshotResponse {
   /**
    * 新创建的快照ID。
    */
-  SnapshotId: string
+  SnapshotId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1012,6 +1094,18 @@ export interface Disk {
    * 云硬盘挂载实例的类型。取值范围：<br><li>CVM<br><li>EKS
    */
   InstanceType: string
+
+  /**
+      * 云硬盘最后一次挂载的实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastAttachInsId?: string
+
+  /**
+      * 云硬盘最后一次操作错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorPrompt?: string
 }
 
 /**
@@ -1263,6 +1357,12 @@ export interface Placement {
    * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
    */
   ProjectId?: number
+
+  /**
+      * 实例所属项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName?: string
 
   /**
       * 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。
@@ -1614,6 +1714,12 @@ export interface DiskConfig {
    * 最大可配置云盘大小，单位GB。
    */
   MaxDiskSize?: number
+
+  /**
+      * 描述预付费或后付费云盘的价格。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Price?: Price
 }
 
 /**
@@ -1858,7 +1964,7 @@ export interface Snapshot {
   /**
    * 快照绑定的标签列表。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2116,12 +2222,17 @@ export interface DescribeDiskStoragePoolResponse {
   /**
    * 符合条件的独享集群的数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 独享集群的详细信息列表
    */
-  DiskStoragePoolSet: Array<Cdc>
+  CdcSet?: Array<Cdc>
+
+  /**
+   * 独享集群的详细信息列表
+   */
+  DiskStoragePoolSet?: Array<Cdc>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2169,14 +2280,14 @@ export interface ModifyDiskExtraPerformanceResponse {
  */
 export interface InquirePriceModifyDiskExtraPerformanceRequest {
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-   */
-  DiskId: string
-
-  /**
    * 额外购买的云硬盘性能值，单位MB/s。
    */
   ThroughputPerformance: number
+
+  /**
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
 }
 
 /**
@@ -2184,14 +2295,14 @@ export interface InquirePriceModifyDiskExtraPerformanceRequest {
  */
 export interface InquiryPriceResizeDiskRequest {
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-   */
-  DiskId: string
-
-  /**
    * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
    */
   DiskSize: number
+
+  /**
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
 
   /**
    * 云盘所属项目ID。 如传入则仅用于鉴权。
@@ -2391,6 +2502,12 @@ export interface PrepayPrice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UnitPrice: number
+
+  /**
+      * 计费项目明细列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetailPrices?: Array<DetailPrice>
 }
 
 /**
@@ -2469,6 +2586,16 @@ export interface Cdc {
    * 独享集群到期时间。
    */
   ExpiredTime: string
+
+  /**
+   * 存储池创建时间。
+   */
+  CreatedTime: string
+
+  /**
+   * 当前集群中已创建的云盘数量。
+   */
+  DiskNumber: number
 }
 
 /**

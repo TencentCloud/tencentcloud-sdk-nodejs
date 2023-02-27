@@ -262,19 +262,19 @@ export interface DescribeLoadBalancerOverviewResponse {
     /**
       * 负载均衡总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 运行中的负载均衡数目
       */
-    RunningCount: number;
+    RunningCount?: number;
     /**
       * 隔离中的负载均衡数目
       */
-    IsolationCount: number;
+    IsolationCount?: number;
     /**
       * 即将到期的负载均衡数目
       */
-    WillExpireCount: number;
+    WillExpireCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

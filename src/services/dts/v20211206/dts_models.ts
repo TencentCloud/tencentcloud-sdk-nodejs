@@ -1760,11 +1760,6 @@ export interface ConfigureSyncJobRequest {
   DstAccessType: string
 
   /**
-   * 同步任务选项
-   */
-  Options: Options
-
-  /**
    * 同步库表对象信息
    */
   Objects: Objects
@@ -1798,6 +1793,11 @@ export interface ConfigureSyncJobRequest {
    * 目标端信息，单节点数据库使用
    */
   DstInfo?: Endpoint
+
+  /**
+   * 同步任务选项
+   */
+  Options?: Options
 
   /**
    * 自动重试的时间段、可设置5至720分钟、0表示不重试
@@ -2069,7 +2069,7 @@ export interface Database {
   Procedures?: Array<string>
 
   /**
-      * 触发器迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。
+      * 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TriggerMode?: string
@@ -2081,7 +2081,7 @@ export interface Database {
   Triggers?: Array<string>
 
   /**
-      * 事件迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。
+      * 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EventMode?: string

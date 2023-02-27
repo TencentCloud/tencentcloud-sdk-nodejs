@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, CreateClusterResponse, SetAutoScalingConfigurationResponse, CreateClusterRequest, DescribeClusterStorageOptionResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, BindAutoScalingGroupRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeClusterActivitiesResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, BindAutoScalingGroupRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -24,13 +24,31 @@ export declare class Client extends AbstractClient {
      */
     CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
     /**
-     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
-    DeleteClusterStorageOption(req: DeleteClusterStorageOptionRequest, cb?: (error: string, rep: DeleteClusterStorageOptionResponse) => void): Promise<DeleteClusterStorageOptionResponse>;
+    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
      */
     SetAutoScalingConfiguration(req: SetAutoScalingConfigurationRequest, cb?: (error: string, rep: SetAutoScalingConfigurationResponse) => void): Promise<SetAutoScalingConfigurationResponse>;
+    /**
+     * 本接口(AddQueue)用于添加队列到指定集群。
+     */
+    AddQueue(req: AddQueueRequest, cb?: (error: string, rep: AddQueueResponse) => void): Promise<AddQueueResponse>;
+    /**
+     * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
+     */
+    DescribeNodes(req: DescribeNodesRequest, cb?: (error: string, rep: DescribeNodesResponse) => void): Promise<DescribeNodesResponse>;
+    /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+    DeleteQueue(req: DeleteQueueRequest, cb?: (error: string, rep: DeleteQueueResponse) => void): Promise<DeleteQueueResponse>;
+    /**
+     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     */
+    DeleteClusterStorageOption(req: DeleteClusterStorageOptionRequest, cb?: (error: string, rep: DeleteClusterStorageOptionResponse) => void): Promise<DeleteClusterStorageOptionResponse>;
     /**
      * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
      */
@@ -52,7 +70,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterActivities(req: DescribeClusterActivitiesRequest, cb?: (error: string, rep: DescribeClusterActivitiesResponse) => void): Promise<DescribeClusterActivitiesResponse>;
     /**
-     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
      */
-    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
+    DescribeQueues(req: DescribeQueuesRequest, cb?: (error: string, rep: DescribeQueuesResponse) => void): Promise<DescribeQueuesResponse>;
 }

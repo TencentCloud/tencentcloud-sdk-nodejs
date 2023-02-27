@@ -58,9 +58,9 @@ it("thpc.v20220401.CreateCluster", async function () {
     }
 })
 
-it("thpc.v20220401.DeleteClusterStorageOption", async function () {
+it("thpc.v20220401.DeleteCluster", async function () {
     try {
-       const data = await client.DeleteClusterStorageOption({})
+       const data = await client.DeleteCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +71,46 @@ it("thpc.v20220401.DeleteClusterStorageOption", async function () {
 it("thpc.v20220401.SetAutoScalingConfiguration", async function () {
     try {
        const data = await client.SetAutoScalingConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.AddQueue", async function () {
+    try {
+       const data = await client.AddQueue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.DescribeNodes", async function () {
+    try {
+       const data = await client.DescribeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.DeleteQueue", async function () {
+    try {
+       const data = await client.DeleteQueue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20220401.DeleteClusterStorageOption", async function () {
+    try {
+       const data = await client.DeleteClusterStorageOption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +168,9 @@ it("thpc.v20220401.DescribeClusterActivities", async function () {
     }
 })
 
-it("thpc.v20220401.DeleteCluster", async function () {
+it("thpc.v20220401.DescribeQueues", async function () {
     try {
-       const data = await client.DeleteCluster({})
+       const data = await client.DescribeQueues({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

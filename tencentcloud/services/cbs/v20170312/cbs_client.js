@@ -73,8 +73,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（InquiryPriceResizeDisk）用于扩容云硬盘询价。
-
-* 只支持预付费模式的云硬盘扩容询价。
      */
     async InquiryPriceResizeDisk(req, cb) {
         return this.request("InquiryPriceResizeDisk", req, cb);
@@ -90,7 +88,6 @@ class Client extends abstract_client_1.AbstractClient {
 
 * 可以根据定期快照策略ID、名称或者状态等信息来查询定期快照策略的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
 * 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的定期快照策略表。
-
      */
     async DescribeAutoSnapshotPolicies(req, cb) {
         return this.request("DescribeAutoSnapshotPolicies", req, cb);

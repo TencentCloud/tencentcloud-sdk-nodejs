@@ -43,8 +43,6 @@ export declare class Client extends AbstractClient {
     DescribeInstancesDiskNum(req: DescribeInstancesDiskNumRequest, cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void): Promise<DescribeInstancesDiskNumResponse>;
     /**
      * 本接口（InquiryPriceResizeDisk）用于扩容云硬盘询价。
-
-* 只支持预付费模式的云硬盘扩容询价。
      */
     InquiryPriceResizeDisk(req: InquiryPriceResizeDiskRequest, cb?: (error: string, rep: InquiryPriceResizeDiskResponse) => void): Promise<InquiryPriceResizeDiskResponse>;
     /**
@@ -56,7 +54,6 @@ export declare class Client extends AbstractClient {
 
 * 可以根据定期快照策略ID、名称或者状态等信息来查询定期快照策略的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
 * 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的定期快照策略表。
-
      */
     DescribeAutoSnapshotPolicies(req: DescribeAutoSnapshotPoliciesRequest, cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void): Promise<DescribeAutoSnapshotPoliciesResponse>;
     /**
