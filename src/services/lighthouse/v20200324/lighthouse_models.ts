@@ -106,7 +106,7 @@ export interface DescribeDiskBackupsRequest {
 <li>disk-backup-state</li>按照【云硬盘备份点状态】进行过滤。
 类型：String
 必选：否
-取值：参考数据结构DiskBackup下的DiskBackupState取值。
+取值：参考数据结构[DiskBackup](https://cloud.tencent.com/document/product/1207/47576#DiskBackup)下的DiskBackupState取值。
 <li>disk-usage</li>按照【云硬盘类型】进行过滤。
 类型：String
 必选：否
@@ -595,7 +595,7 @@ false：表示不自动抵扣代金券
  */
 export interface DeleteDiskBackupsRequest {
   /**
-   * 云硬盘备份点ID列表，可通过 DescribeDiskBackups接口查询。
+   * 云硬盘备份点ID列表，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。
    */
   DiskBackupIds: Array<string>
 }
@@ -700,12 +700,12 @@ export interface DescribeDiskBackupsResponse {
   /**
    * 云硬盘备份点的数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 云硬盘备份点信息列表。
    */
-  DiskBackupSet: Array<DiskBackup>
+  DiskBackupSet?: Array<DiskBackup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2127,7 +2127,7 @@ export interface ApplyDiskBackupRequest {
   DiskId: string
 
   /**
-   * 云硬盘备份点ID，可通过 DescribeDiskBackups 接口查询。
+   * 云硬盘备份点ID，可通过[DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。
    */
   DiskBackupId: string
 }

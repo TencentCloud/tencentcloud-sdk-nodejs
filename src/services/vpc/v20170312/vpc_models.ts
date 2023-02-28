@@ -1778,12 +1778,12 @@ export interface DescribeIpGeolocationInfosResponse {
   /**
    * IP地址信息列表。
    */
-  AddressInfo: Array<IpGeolocationInfo>
+  AddressInfo?: Array<IpGeolocationInfo>
 
   /**
    * IP地址信息个数。
    */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2265,12 +2265,12 @@ export interface DescribeIpGeolocationDatabaseUrlResponse {
   /**
    * IP地理位置库下载链接地址。
    */
-  DownLoadUrl: string
+  DownLoadUrl?: string
 
   /**
    * 链接到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。
    */
-  ExpiredAt: string
+  ExpiredAt?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9393,14 +9393,24 @@ export interface AssociateDirectConnectGatewayNatGatewayRequest {
  */
 export interface AddressTemplateItem {
   /**
-   * 起始地址。
+   * ipm-xxxxxxxx
    */
-  From: string
+  AddressTemplateId?: string
 
   /**
-   * 结束地址。
+   * IP模板名称
    */
-  To: string
+  AddressTemplateName?: string
+
+  /**
+   * 废弃字段
+   */
+  From?: string
+
+  /**
+   * 废弃字段
+   */
+  To?: string
 }
 
 /**

@@ -22,7 +22,7 @@ export interface DescribeDedicatedClusterInstanceTypesResponse {
   /**
    * 支持的实例规格列表
    */
-  DedicatedClusterInstanceTypeSet: Array<DedicatedClusterInstanceType>
+  DedicatedClusterInstanceTypeSet?: Array<DedicatedClusterInstanceType>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -413,7 +413,7 @@ export interface CreateSiteResponse {
   /**
    * 创建Site生成的id
    */
-  SiteId: string
+  SiteId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -801,12 +801,12 @@ export interface DescribeSitesResponse {
   /**
    * 符合查询条件的站点列表
    */
-  SiteSet: Array<Site>
+  SiteSet?: Array<Site>
 
   /**
    * 符合条件的站点数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1011,7 +1011,7 @@ export interface CreateDedicatedClusterOrderResponse {
       * 专用集群订单id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DedicatedClusterOrderId: string
+  DedicatedClusterOrderId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1026,7 +1026,7 @@ export interface DescribeDedicatedClusterCosCapacityResponse {
   /**
    * 本集群内cos容量信息，单位：‘GB’
    */
-  CosCapacity: CosCapacity
+  CosCapacity?: CosCapacity
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1056,7 +1056,7 @@ export interface CreateDedicatedClusterResponse {
   /**
    * 创建的专用集群id
    */
-  DedicatedClusterId: string
+  DedicatedClusterId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1112,12 +1112,12 @@ export interface DescribeSitesDetailResponse {
   /**
    * 站点详情
    */
-  SiteDetailSet: Array<SiteDetail>
+  SiteDetailSet?: Array<SiteDetail>
 
   /**
    * 符合条件的站点总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1167,12 +1167,12 @@ export interface DescribeDedicatedClustersResponse {
   /**
    * 符合查询条件的专用集群列表
    */
-  DedicatedClusterSet: Array<DedicatedCluster>
+  DedicatedClusterSet?: Array<DedicatedCluster>
 
   /**
    * 符合条件的专用集群数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1654,7 +1654,7 @@ export interface DescribeDedicatedClusterHostStatisticsResponse {
   /**
    * 该集群内宿主机的统计信息列表
    */
-  HostStatisticSet: Array<HostStatistic>
+  HostStatisticSet?: Array<HostStatistic>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1725,12 +1725,12 @@ export interface DescribeDedicatedClusterOrdersResponse {
   /**
    * 专用集群订单列表
    */
-  DedicatedClusterOrderSet: Array<DedicatedClusterOrder>
+  DedicatedClusterOrderSet?: Array<DedicatedClusterOrder>
 
   /**
    * 符合条件的专用集群订单总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

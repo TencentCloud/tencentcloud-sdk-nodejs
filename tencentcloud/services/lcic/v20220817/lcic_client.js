@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddGroupMember", req, cb);
     }
     /**
+     * 获取房间历史消息(房间历史消息保存7天)
+     */
+    async GetRoomMessage(req, cb) {
+        return this.request("GetRoomMessage", req, cb);
+    }
+    /**
      * 设置水印
      */
     async SetWatermark(req, cb) {

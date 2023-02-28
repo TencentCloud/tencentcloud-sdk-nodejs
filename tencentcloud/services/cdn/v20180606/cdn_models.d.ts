@@ -2542,20 +2542,89 @@ overseas：指定查询中国境外 CDN 数据
     Product?: string;
 }
 /**
- * 自定义请求头配置，默认为关闭状态
+ * CDN HTTPS请求包。
  */
-export interface RequestHeader {
+export interface HttpsPackage {
     /**
-      * 自定义请求头配置开关
-on：开启
-off：关闭
+      * HTTPS请求包 Id
       */
-    Switch: string;
+    Id: number;
     /**
-      * 自定义请求头配置规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * HTTPS请求包类型
       */
-    HeaderRules?: Array<HttpHeaderPathRule>;
+    Type: string;
+    /**
+      * HTTPS请求包大小（单位为：次）
+      */
+    Size: number;
+    /**
+      * 已消耗HTTPS请求包（单位为：次）
+      */
+    SizeUsed: number;
+    /**
+      * HTTPS请求包状态
+enabled：已启用
+expired：已过期
+disabled：未启用
+      */
+    Status: string;
+    /**
+      * HTTPS请求包发放时间
+      */
+    CreateTime: string;
+    /**
+      * HTTPS请求包生效时间
+      */
+    EnableTime: string;
+    /**
+      * HTTPS请求包过期时间
+      */
+    ExpireTime: string;
+    /**
+      * HTTPS请求包来源
+      */
+    Channel: string;
+    /**
+      * HTTPS请求包生命周期月数
+      */
+    LifeTimeMonth: number;
+    /**
+      * HTTPS请求包是否支持退费
+      */
+    RefundAvailable: boolean;
+    /**
+      * HTTPS请求包类型id
+      */
+    ConfigId: number;
+    /**
+      * HTTPS请求包实际生效时间
+      */
+    TrueEnableTime: string;
+    /**
+      * HTTPS请求包实际过期时间
+      */
+    TrueExpireTime: string;
+    /**
+      * HTTPS请求包生效区域
+global：全球
+      */
+    Area: string;
+    /**
+      * HTTPS请求包是否续订
+      */
+    ContractExtension: boolean;
+    /**
+      * HTTPS请求包是否支持续订
+      */
+    ExtensionAvailable: boolean;
+    /**
+      * HTTPS请求包当前续订模式
+0：未续订
+1：到期续订
+2：用完续订
+3：到期或用完续订
+      */
+    ExtensionMode: number;
 }
 /**
  * ModifyPurgeFetchTaskStatus请求参数结构体
@@ -2953,7 +3022,7 @@ export interface ListScdnTopBotDataResponse {
     /**
       * 域名BOT次数列表
       */
-    Data: Array<BotStatisticsCount>;
+    Data?: Array<BotStatisticsCount>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3403,6 +3472,35 @@ export interface DeleteScdnDomainRequest {
       * 域名
       */
     Domain: string;
+}
+/**
+ * DescribeHttpsPackages返回参数结构体
+ */
+export interface DescribeHttpsPackagesResponse {
+    /**
+      * HTTPS请求包总个数
+      */
+    TotalCount: number;
+    /**
+      * HTTPS请求包详情
+      */
+    HttpsPackages: Array<HttpsPackage>;
+    /**
+      * 即将过期的HTTPS请求包个数（7天内）
+      */
+    ExpiringCount: number;
+    /**
+      * 有效HTTPS请求包个数
+      */
+    EnabledCount: number;
+    /**
+      * 付费HTTPS请求包个数
+      */
+    PaidCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 七牛元对象存储回源鉴权配置
@@ -4349,6 +4447,19 @@ export interface ScdnWafRule {
       * 防护措施，observe
       */
     Operate: string;
+}
+/**
+ * DescribeHttpsPackages请求参数结构体
+ */
+export interface DescribeHttpsPackagesRequest {
+    /**
+      * 分页查询起始地址，默认 0
+      */
+    Offset?: number;
+    /**
+      * 分页查询记录个数，默认100，最大1000
+      */
+    Limit?: number;
 }
 /**
  * IP 黑白名单配置，默认为关闭状态
@@ -6400,6 +6511,22 @@ export interface StatisticItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch?: string;
+}
+/**
+ * 自定义请求头配置，默认为关闭状态
+ */
+export interface RequestHeader {
+    /**
+      * 自定义请求头配置开关
+on：开启
+off：关闭
+      */
+    Switch: string;
+    /**
+      * 自定义请求头配置规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeaderRules?: Array<HttpHeaderPathRule>;
 }
 /**
  * HSTS 配置。

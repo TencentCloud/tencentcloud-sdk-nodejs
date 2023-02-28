@@ -113,7 +113,7 @@ import {
   RemoteAuthenticationRule,
   PurgePathCacheResponse,
   DescribeTopDataRequest,
-  RequestHeader,
+  HttpsPackage,
   ModifyPurgeFetchTaskStatusRequest,
   Referer,
   AdvanceCacheRule,
@@ -139,6 +139,7 @@ import {
   CacheConfigFollowOrigin,
   DescribePayTypeRequest,
   DeleteScdnDomainRequest,
+  DescribeHttpsPackagesResponse,
   QnPrivateAccess,
   MapInfo,
   DescribeCertDomainsResponse,
@@ -188,6 +189,7 @@ import {
   ListDiagnoseReportResponse,
   HeaderKey,
   ScdnWafRule,
+  DescribeHttpsPackagesRequest,
   IpFilter,
   DiagnoseUnit,
   DiagnoseInfo,
@@ -248,6 +250,7 @@ import {
   DescribeDDoSDataRequest,
   CreateEdgePackTaskRequest,
   StatisticItem,
+  RequestHeader,
   Hsts,
   ListTopClsLogDataRequest,
   DescribeTrafficPackagesResponse,
@@ -537,13 +540,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
+   * DescribeHttpsPackages 用于查询 CDN HTTPS请求包详情。
    */
-  async DisableCaches(
-    req: DisableCachesRequest,
-    cb?: (error: string, rep: DisableCachesResponse) => void
-  ): Promise<DisableCachesResponse> {
-    return this.request("DisableCaches", req, cb)
+  async DescribeHttpsPackages(
+    req: DescribeHttpsPackagesRequest,
+    cb?: (error: string, rep: DescribeHttpsPackagesResponse) => void
+  ): Promise<DescribeHttpsPackagesResponse> {
+    return this.request("DescribeHttpsPackages", req, cb)
   }
 
   /**
@@ -647,13 +650,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Bot攻击的Top数据列表
+   * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
    */
-  async ListScdnTopBotData(
-    req: ListScdnTopBotDataRequest,
-    cb?: (error: string, rep: ListScdnTopBotDataResponse) => void
-  ): Promise<ListScdnTopBotDataResponse> {
-    return this.request("ListScdnTopBotData", req, cb)
+  async DisableCaches(
+    req: DisableCachesRequest,
+    cb?: (error: string, rep: DisableCachesResponse) => void
+  ): Promise<DisableCachesResponse> {
+    return this.request("DisableCaches", req, cb)
   }
 
   /**
@@ -855,6 +858,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePurgeTasksResponse) => void
   ): Promise<DescribePurgeTasksResponse> {
     return this.request("DescribePurgeTasks", req, cb)
+  }
+
+  /**
+   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   */
+  async ListTopClsLogData(
+    req: ListTopClsLogDataRequest,
+    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
+  ): Promise<ListTopClsLogDataResponse> {
+    return this.request("ListTopClsLogData", req, cb)
   }
 
   /**
@@ -1216,12 +1229,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   * 获取Bot攻击的Top数据列表
    */
-  async ListTopClsLogData(
-    req: ListTopClsLogDataRequest,
-    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
-  ): Promise<ListTopClsLogDataResponse> {
-    return this.request("ListTopClsLogData", req, cb)
+  async ListScdnTopBotData(
+    req: ListScdnTopBotDataRequest,
+    cb?: (error: string, rep: ListScdnTopBotDataResponse) => void
+  ): Promise<ListScdnTopBotDataResponse> {
+    return this.request("ListScdnTopBotData", req, cb)
   }
 }

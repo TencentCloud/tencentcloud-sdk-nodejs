@@ -28,6 +28,16 @@ it("lcic.v20220817.AddGroupMember", async function () {
     }
 })
 
+it("lcic.v20220817.GetRoomMessage", async function () {
+    try {
+       const data = await client.GetRoomMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SetWatermark", async function () {
     try {
        const data = await client.SetWatermark({})

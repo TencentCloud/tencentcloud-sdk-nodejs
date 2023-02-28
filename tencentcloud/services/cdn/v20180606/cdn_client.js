@@ -129,10 +129,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdnData", req, cb);
     }
     /**
-     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
+     * DescribeHttpsPackages 用于查询 CDN HTTPS请求包详情。
      */
-    async DisableCaches(req, cb) {
-        return this.request("DisableCaches", req, cb);
+    async DescribeHttpsPackages(req, cb) {
+        return this.request("DescribeHttpsPackages", req, cb);
     }
     /**
      * 动态打包任务提交接口
@@ -195,10 +195,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSData", req, cb);
     }
     /**
-     * 获取Bot攻击的Top数据列表
+     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
      */
-    async ListScdnTopBotData(req, cb) {
-        return this.request("ListScdnTopBotData", req, cb);
+    async DisableCaches(req, cb) {
+        return this.request("DisableCaches", req, cb);
     }
     /**
      * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
@@ -328,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePurgeTasks(req, cb) {
         return this.request("DescribePurgeTasks", req, cb);
+    }
+    /**
+     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     */
+    async ListTopClsLogData(req, cb) {
+        return this.request("ListTopClsLogData", req, cb);
     }
     /**
      * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
@@ -552,10 +558,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableCaches", req, cb);
     }
     /**
-     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     * 获取Bot攻击的Top数据列表
      */
-    async ListTopClsLogData(req, cb) {
-        return this.request("ListTopClsLogData", req, cb);
+    async ListScdnTopBotData(req, cb) {
+        return this.request("ListScdnTopBotData", req, cb);
     }
 }
 exports.Client = Client;

@@ -1,38 +1,24 @@
 /**
- * 组信息，用于用户组、主机组
+ * ResetDeviceAccountPassword返回参数结构体
  */
-export interface Group {
-    /**
-      * 组ID
-      */
-    Id: number;
-    /**
-      * 组名称
-      */
-    Name: string;
-    /**
-      * 所属部门信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Department: Department;
-    /**
-      * 个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Count: number;
-}
-/**
- * CreateDeviceGroup返回参数结构体
- */
-export interface CreateDeviceGroupResponse {
-    /**
-      * 新建成功的资产组ID
-      */
-    Id: number;
+export interface ResetDeviceAccountPasswordResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * BindDeviceAccountPassword请求参数结构体
+ */
+export interface BindDeviceAccountPasswordRequest {
+    /**
+      * 主机账号ID
+      */
+    Id: number;
+    /**
+      * 主机账号密码
+      */
+    Password: string;
 }
 /**
  * DeleteAcls请求参数结构体
@@ -44,74 +30,44 @@ export interface DeleteAclsRequest {
     IdSet: Array<number>;
 }
 /**
- * AddDeviceGroupMembers返回参数结构体
+ * DeleteDeviceGroups返回参数结构体
  */
-export interface AddDeviceGroupMembersResponse {
+export interface DeleteDeviceGroupsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * ModifyUser请求参数结构体
+ * DescribeDeviceGroups返回参数结构体
  */
-export interface ModifyUserRequest {
+export interface DescribeDeviceGroupsResponse {
     /**
-      * 用户ID
+      * 资产组总数
       */
-    Id: number;
+    TotalCount: number;
     /**
-      * 用户姓名，最大长度20个字符，不能包含空格
+      * 资产组列表
       */
-    RealName: string;
+    GroupSet: Array<Group>;
     /**
-      * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Phone: string;
-    /**
-      * 电子邮件
-      */
-    Email: string;
-    /**
-      * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
-      */
-    ValidateFrom?: string;
-    /**
-      * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
-      */
-    ValidateTo?: string;
-    /**
-      * 所属用户组ID集合
-      */
-    GroupIdSet?: Array<number>;
-    /**
-      * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
-      */
-    AuthType?: number;
-    /**
-      * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
-      */
-    ValidateTime?: string;
-    /**
-      * 用户所属部门的ID，如1.2.3
-      */
-    DepartmentId?: string;
+    RequestId?: string;
 }
 /**
- * DeleteUsers请求参数结构体
+ * DeleteCmdTemplates返回参数结构体
  */
-export interface DeleteUsersRequest {
+export interface DeleteCmdTemplatesResponse {
     /**
-      * 待删除的用户ID集合
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    IdSet: Array<number>;
+    RequestId?: string;
 }
 /**
- * DeleteDeviceGroupMembers返回参数结构体
+ * DeleteDevices返回参数结构体
  */
-export interface DeleteDeviceGroupMembersResponse {
+export interface DeleteDevicesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -136,52 +92,47 @@ export interface Department {
     Managers: Array<string>;
 }
 /**
- * AddUserGroupMembers返回参数结构体
+ * 主机账号
  */
-export interface AddUserGroupMembersResponse {
+export interface DeviceAccount {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDasbImageIds返回参数结构体
- */
-export interface DescribeDasbImageIdsResponse {
-    /**
-      * 基础镜像ID
-      */
-    BaseImageId?: string;
-    /**
-      * AI镜像ID
-      */
-    AiImageId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateUser返回参数结构体
- */
-export interface CreateUserResponse {
-    /**
-      * 新建用户的ID
+      * 账号ID
       */
     Id: number;
     /**
+      * 主机ID
+      */
+    DeviceId: number;
+    /**
+      * 账号名
+      */
+    Account: string;
+    /**
+      * true-已托管密码，false-未托管密码
+      */
+    BoundPassword: boolean;
+    /**
+      * true-已托管私钥，false-未托管私钥
+      */
+    BoundPrivateKey: boolean;
+}
+/**
+ * BindDeviceAccountPassword返回参数结构体
+ */
+export interface BindDeviceAccountPasswordResponse {
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * ModifyUser返回参数结构体
+ * ResetDeviceAccountPassword请求参数结构体
  */
-export interface ModifyUserResponse {
+export interface ResetDeviceAccountPasswordRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * ID集合
       */
-    RequestId?: string;
+    IdSet: Array<number>;
 }
 /**
  * AddUserGroupMembers请求参数结构体
@@ -197,61 +148,6 @@ export interface AddUserGroupMembersRequest {
     MemberIdSet: Array<number>;
 }
 /**
- * DescribeUserGroups请求参数结构体
- */
-export interface DescribeUserGroupsRequest {
-    /**
-      * 用户组ID集合
-      */
-    IdSet?: Array<number>;
-    /**
-      * 用户组名，模糊查询,长度：0-64字符
-      */
-    Name?: string;
-    /**
-      * 分页偏移位置，默认值为0
-      */
-    Offset?: number;
-    /**
-      * 每页条目数量，缺省20，最大500
-      */
-    Limit?: number;
-    /**
-      * 部门ID，用于过滤属于某个部门的用户组
-      */
-    DepartmentId?: string;
-}
-/**
- * DescribeUserGroupMembers返回参数结构体
- */
-export interface DescribeUserGroupMembersResponse {
-    /**
-      * 用户组成员总数
-      */
-    TotalCount: number;
-    /**
-      * 用户组成员列表
-      */
-    UserSet: Array<User>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateUserGroup返回参数结构体
- */
-export interface CreateUserGroupResponse {
-    /**
-      * 新建成功的用户组ID
-      */
-    Id: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeDevices返回参数结构体
  */
 export interface DescribeDevicesResponse {
@@ -263,6 +159,137 @@ export interface DescribeDevicesResponse {
       * 资产信息列表
       */
     DeviceSet: Array<Device>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ResetUser返回参数结构体
+ */
+export interface ResetUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteUserGroupMembers请求参数结构体
+ */
+export interface DeleteUserGroupMembersRequest {
+    /**
+      * 用户组ID
+      */
+    Id: number;
+    /**
+      * 需删除的成员用户ID集合
+      */
+    MemberIdSet: Array<number>;
+}
+/**
+ * DeleteUserGroups返回参数结构体
+ */
+export interface DeleteUserGroupsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDevice请求参数结构体
+ */
+export interface ModifyDeviceRequest {
+    /**
+      * 资产记录ID
+      */
+    Id: number;
+    /**
+      * 管理端口
+      */
+    Port?: number;
+    /**
+      * 资产所属组ID集合
+      */
+    GroupIdSet?: Array<number>;
+    /**
+      * 资产所属部门ID
+      */
+    DepartmentId?: string;
+}
+/**
+ * ImportExternalDevice请求参数结构体
+ */
+export interface ImportExternalDeviceRequest {
+    /**
+      * 资产参数列表
+      */
+    DeviceSet: Array<ExternalDevice>;
+}
+/**
+ * BindDeviceResource返回参数结构体
+ */
+export interface BindDeviceResourceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteUserGroupMembers返回参数结构体
+ */
+export interface DeleteUserGroupMembersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 高危命令模板
+ */
+export interface CmdTemplate {
+    /**
+      * 高危命令模板ID
+      */
+    Id: number;
+    /**
+      * 高危命令模板名称
+      */
+    Name: string;
+    /**
+      * 命令列表，命令之间用换行符（"\n"）分隔
+      */
+    CmdList: string;
+}
+/**
+ * CreateUserGroup请求参数结构体
+ */
+export interface CreateUserGroupRequest {
+    /**
+      * 用户组名，最大长度32字符
+      */
+    Name: string;
+    /**
+      * 用户组所属部门的ID，如：1.2.3
+      */
+    DepartmentId?: string;
+}
+/**
+ * BindDeviceAccountPrivateKey返回参数结构体
+ */
+export interface BindDeviceAccountPrivateKeyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateDeviceGroup返回参数结构体
+ */
+export interface CreateDeviceGroupResponse {
+    /**
+      * 新建成功的资产组ID
+      */
+    Id: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -296,6 +323,32 @@ export interface DescribeUserGroupMembersRequest {
       * 所属部门ID
       */
     DepartmentId?: string;
+}
+/**
+ * CreateUser返回参数结构体
+ */
+export interface CreateUserResponse {
+    /**
+      * 新建用户的ID
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAssetSyncStatus返回参数结构体
+ */
+export interface DescribeAssetSyncStatusResponse {
+    /**
+      * 资产同步结果
+      */
+    Status: AssetSyncStatus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateAcl请求参数结构体
@@ -405,6 +458,481 @@ export interface CreateAclRequest {
     DepartmentId?: string;
 }
 /**
+ * DeleteDeviceGroupMembers请求参数结构体
+ */
+export interface DeleteDeviceGroupMembersRequest {
+    /**
+      * 资产组ID
+      */
+    Id: number;
+    /**
+      * 需要删除的资产ID集合
+      */
+    MemberIdSet: Array<number>;
+}
+/**
+ * CreateDeviceGroup请求参数结构体
+ */
+export interface CreateDeviceGroupRequest {
+    /**
+      * 资产组名，最大长度32字符
+      */
+    Name: string;
+    /**
+      * 资产组所属部门ID，如：1.2.3
+      */
+    DepartmentId?: string;
+}
+/**
+ * CreateAcl返回参数结构体
+ */
+export interface CreateAclResponse {
+    /**
+      * 新建成功的访问权限ID
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAcls返回参数结构体
+ */
+export interface DescribeAclsResponse {
+    /**
+      * 访问权限总数
+      */
+    TotalCount: number;
+    /**
+      * 访问权限列表
+      */
+    AclSet: Array<Acl>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCmdTemplate返回参数结构体
+ */
+export interface CreateCmdTemplateResponse {
+    /**
+      * 新建成功后返回的记录ID
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyAcl请求参数结构体
+ */
+export interface ModifyAclRequest {
+    /**
+      * 访问权限名称，最大32字符，不能包含空白字符
+      */
+    Name: string;
+    /**
+      * 是否开启磁盘映射
+      */
+    AllowDiskRedirect: boolean;
+    /**
+      * 是否允许任意账号登录
+      */
+    AllowAnyAccount: boolean;
+    /**
+      * 访问权限ID
+      */
+    Id: number;
+    /**
+      * 是否开启剪贴板文件上行
+      */
+    AllowClipFileUp?: boolean;
+    /**
+      * 是否开启剪贴板文件下行
+      */
+    AllowClipFileDown?: boolean;
+    /**
+      * 是否开启剪贴板文本（含图片）上行
+      */
+    AllowClipTextUp?: boolean;
+    /**
+      * 是否开启剪贴板文本（含图片）下行
+      */
+    AllowClipTextDown?: boolean;
+    /**
+      * 是否开启文件传输上传
+      */
+    AllowFileUp?: boolean;
+    /**
+      * 文件传输上传大小限制（预留参数，目前暂未使用）
+      */
+    MaxFileUpSize?: number;
+    /**
+      * 是否开启文件传输下载
+      */
+    AllowFileDown?: boolean;
+    /**
+      * 文件传输下载大小限制（预留参数，目前暂未使用）
+      */
+    MaxFileDownSize?: number;
+    /**
+      * 关联的用户ID
+      */
+    UserIdSet?: Array<number>;
+    /**
+      * 关联的用户组ID
+      */
+    UserGroupIdSet?: Array<number>;
+    /**
+      * 关联的资产ID
+      */
+    DeviceIdSet?: Array<number>;
+    /**
+      * 关联的资产组ID
+      */
+    DeviceGroupIdSet?: Array<number>;
+    /**
+      * 关联的账号
+      */
+    AccountSet?: Array<string>;
+    /**
+      * 关联的高危命令模板ID
+      */
+    CmdTemplateIdSet?: Array<number>;
+    /**
+      * 是否开启 RDP 磁盘映射文件上传
+      */
+    AllowDiskFileUp?: boolean;
+    /**
+      * 是否开启 RDP 磁盘映射文件下载
+      */
+    AllowDiskFileDown?: boolean;
+    /**
+      * 是否开启rz sz文件上传
+      */
+    AllowShellFileUp?: boolean;
+    /**
+      * 是否开启rz sz文件下载
+      */
+    AllowShellFileDown?: boolean;
+    /**
+      * 是否开启 SFTP 文件删除
+      */
+    AllowFileDel?: boolean;
+    /**
+      * 访问权限生效时间，如:"2021-09-22T00:00:00+00:00"
+生效、失效时间不填则访问权限长期有效
+      */
+    ValidateFrom?: string;
+    /**
+      * 访问权限失效时间，如:"2021-09-23T00:00:00+00:00"
+生效、失效时间不填则访问权限长期有效
+      */
+    ValidateTo?: string;
+    /**
+      * 权限所属部门的ID，如：1.2.3
+      */
+    DepartmentId?: string;
+}
+/**
+ * 资产标签
+ */
+export interface TagFilter {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue?: Array<string>;
+}
+/**
+ * DeleteUsers返回参数结构体
+ */
+export interface DeleteUsersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 资产同步状态
+ */
+export interface AssetSyncStatus {
+    /**
+      * 上一次同步完成的时间
+      */
+    LastTime: string;
+    /**
+      * 上一次同步的结果。 0 - 从未进行, 1 - 成功， 2 - 失败
+      */
+    LastStatus: number;
+    /**
+      * 同步任务是否正在进行中
+      */
+    InProcess: boolean;
+}
+/**
+ * DescribeResources返回参数结构体
+ */
+export interface DescribeResourcesResponse {
+    /**
+      * 堡垒机资源列表
+      */
+    ResourceSet: Array<Resource>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUsers请求参数结构体
+ */
+export interface DescribeUsersRequest {
+    /**
+      * 如果IdSet不为空，则忽略其他参数
+      */
+    IdSet?: Array<number>;
+    /**
+      * 模糊查询，IdSet、UserName、Phone为空时才生效，对用户名和姓名进行模糊查询
+      */
+    Name?: string;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 每页条目数量，默认20, 最大500
+      */
+    Limit?: number;
+    /**
+      * 精确查询，IdSet为空时才生效
+      */
+    UserName?: string;
+    /**
+      * 精确查询，IdSet、UserName为空时才生效。
+大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      */
+    Phone?: string;
+    /**
+      * 查询具有指定资产ID访问权限的用户
+      */
+    AuthorizedDeviceIdSet?: Array<number>;
+    /**
+      * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
+      */
+    AuthTypeSet?: Array<number>;
+    /**
+      * 部门ID，用于过滤属于某个部门的用户
+      */
+    DepartmentId?: string;
+}
+/**
+ * DeployResource请求参数结构体
+ */
+export interface DeployResourceRequest {
+    /**
+      * 需要开通服务的资源ID
+      */
+    ResourceId: string;
+    /**
+      * 需要开通服务的地域
+      */
+    ApCode: string;
+    /**
+      * 子网所在可用区
+      */
+    Zone: string;
+    /**
+      * 需要开通服务的VPC
+      */
+    VpcId: string;
+    /**
+      * 需要开通服务的子网ID
+      */
+    SubnetId: string;
+    /**
+      * 需要开通服务的子网网段
+      */
+    CidrBlock: string;
+    /**
+      * 需要开通服务的VPC名称
+      */
+    VpcName?: string;
+    /**
+      * 需要开通服务的VPC对应的网段
+      */
+    VpcCidrBlock?: string;
+    /**
+      * 需要开通服务的子网名称
+      */
+    SubnetName?: string;
+}
+/**
+ * CreateCmdTemplate请求参数结构体
+ */
+export interface CreateCmdTemplateRequest {
+    /**
+      * 模板名，最大长度32字符，不能包含空白字符
+      */
+    Name: string;
+    /**
+      * 命令列表，\n分隔，最大长度32768字节
+      */
+    CmdList: string;
+}
+/**
+ * ResetDeviceAccountPrivateKey请求参数结构体
+ */
+export interface ResetDeviceAccountPrivateKeyRequest {
+    /**
+      * ID集合
+      */
+    IdSet: Array<number>;
+}
+/**
+ * CreateAssetSyncJob返回参数结构体
+ */
+export interface CreateAssetSyncJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BindDeviceAccountPrivateKey请求参数结构体
+ */
+export interface BindDeviceAccountPrivateKeyRequest {
+    /**
+      * 主机账号ID
+      */
+    Id: number;
+    /**
+      * 主机账号私钥，最新长度128字节，最大长度8192字节
+      */
+    PrivateKey: string;
+    /**
+      * 主机账号私钥口令，最大长度256字节
+      */
+    PrivateKeyPassword?: string;
+}
+/**
+ * CreateAssetSyncJob请求参数结构体
+ */
+export interface CreateAssetSyncJobRequest {
+    /**
+      * 同步资产类别，1 - 主机资产, 2 - 数据库资产
+      */
+    Category: number;
+}
+/**
+ * 组信息，用于用户组、主机组
+ */
+export interface Group {
+    /**
+      * 组ID
+      */
+    Id: number;
+    /**
+      * 组名称
+      */
+    Name: string;
+    /**
+      * 所属部门信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Department: Department;
+    /**
+      * 个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+}
+/**
+ * DescribeAssetSyncStatus请求参数结构体
+ */
+export interface DescribeAssetSyncStatusRequest {
+    /**
+      * 查询的资产同步类型。1 -主机资产， 2 - 数据库资产
+      */
+    Category: number;
+}
+/**
+ * ResetDeviceAccountPrivateKey返回参数结构体
+ */
+export interface ResetDeviceAccountPrivateKeyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteUsers请求参数结构体
+ */
+export interface DeleteUsersRequest {
+    /**
+      * 待删除的用户ID集合
+      */
+    IdSet: Array<number>;
+}
+/**
+ * DeleteDeviceAccounts请求参数结构体
+ */
+export interface DeleteDeviceAccountsRequest {
+    /**
+      * 待删除的ID集合
+      */
+    IdSet: Array<number>;
+}
+/**
+ * DeleteDeviceGroupMembers返回参数结构体
+ */
+export interface DeleteDeviceGroupMembersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDeviceGroup返回参数结构体
+ */
+export interface ModifyDeviceGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUserGroupMembers返回参数结构体
+ */
+export interface DescribeUserGroupMembersResponse {
+    /**
+      * 用户组成员总数
+      */
+    TotalCount: number;
+    /**
+      * 用户组成员列表
+      */
+    UserSet: Array<User>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ImportExternalDevice返回参数结构体
+ */
+export interface ImportExternalDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteUserGroups请求参数结构体
  */
 export interface DeleteUserGroupsRequest {
@@ -471,13 +999,13 @@ export interface User {
     DepartmentId?: string;
 }
 /**
- * ModifyAcl返回参数结构体
+ * ResetUser请求参数结构体
  */
-export interface ModifyAclResponse {
+export interface ResetUserRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户ID集合
       */
-    RequestId?: string;
+    IdSet: Array<number>;
 }
 /**
  * 资产信息
@@ -547,15 +1075,271 @@ export interface Device {
     Department: Department;
 }
 /**
- * DescribeAcls请求参数结构体
+ * DescribeDasbImageIds请求参数结构体
  */
-export interface DescribeAclsRequest {
+export declare type DescribeDasbImageIdsRequest = null;
+/**
+ * CreateDeviceAccount返回参数结构体
+ */
+export interface CreateDeviceAccountResponse {
     /**
-      * 访问权限ID集合
+      * 新建成功后返回的记录ID
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDeviceGroup请求参数结构体
+ */
+export interface ModifyDeviceGroupRequest {
+    /**
+      * 资产组名，最大长度32字符，不能为空
+      */
+    Name: string;
+    /**
+      * 资产组ID
+      */
+    Id: number;
+    /**
+      * 资产组所属部门ID，如：1.2.3
+      */
+    DepartmentId?: string;
+}
+/**
+ * 描述键值对过滤器，用于条件过滤查询
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+      */
+    Name: string;
+    /**
+      * 字段的过滤值。
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      */
+    Values: Array<string>;
+}
+/**
+ * DescribeUsers返回参数结构体
+ */
+export interface DescribeUsersResponse {
+    /**
+      * 用户总数
+      */
+    TotalCount: number;
+    /**
+      * 用户列表
+      */
+    UserSet: Array<User>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeployResource返回参数结构体
+ */
+export interface DeployResourceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateUser请求参数结构体
+ */
+export interface CreateUserRequest {
+    /**
+      * 用户名, 3-20个字符, 必须以英文字母开头，且不能包含字母、数字、.、_、-以外的字符
+      */
+    UserName: string;
+    /**
+      * 用户姓名，最大长度20个字符，不能包含空白字符
+      */
+    RealName: string;
+    /**
+      * 大陆手机号直接填写，如果是其他国家、地区号码， 按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      */
+    Phone: string;
+    /**
+      * 电子邮件
+      */
+    Email?: string;
+    /**
+      * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
+      */
+    ValidateFrom?: string;
+    /**
+      * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
+      */
+    ValidateTo?: string;
+    /**
+      * 所属用户组ID集合
+      */
+    GroupIdSet?: Array<number>;
+    /**
+      * 认证方式，0 - 本地， 1 - LDAP， 2 - OAuth 不传则默认为0
+      */
+    AuthType?: number;
+    /**
+      * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
+      */
+    ValidateTime?: string;
+    /**
+      * 所属部门ID，如：“1.2.3”
+      */
+    DepartmentId?: string;
+}
+/**
+ * DescribeUserGroups返回参数结构体
+ */
+export interface DescribeUserGroupsResponse {
+    /**
+      * 用户组总数
+      */
+    TotalCount: number;
+    /**
+      * 用户组列表
+      */
+    GroupSet: Array<Group>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyUser返回参数结构体
+ */
+export interface ModifyUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCmdTemplates返回参数结构体
+ */
+export interface DescribeCmdTemplatesResponse {
+    /**
+      * 命令模板列表
+      */
+    CmdTemplateSet: Array<CmdTemplate>;
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateDeviceAccount请求参数结构体
+ */
+export interface CreateDeviceAccountRequest {
+    /**
+      * 主机记录ID
+      */
+    DeviceId: number;
+    /**
+      * 账号名
+      */
+    Account: string;
+}
+/**
+ * AddDeviceGroupMembers返回参数结构体
+ */
+export interface AddDeviceGroupMembersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteCmdTemplates请求参数结构体
+ */
+export interface DeleteCmdTemplatesRequest {
+    /**
+      * 待删除的ID集合
+      */
+    IdSet: Array<number>;
+}
+/**
+ * ModifyDevice返回参数结构体
+ */
+export interface ModifyDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AddUserGroupMembers返回参数结构体
+ */
+export interface AddUserGroupMembersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceAccounts请求参数结构体
+ */
+export interface DescribeDeviceAccountsRequest {
+    /**
+      * 主机账号ID集合，非必需，如果使用IdSet则忽略其他过滤参数
       */
     IdSet?: Array<number>;
     /**
-      * 访问权限名称，模糊查询，最长64字符
+      * 主机账号名，模糊查询，不能单独出现，必须于DeviceId一起提交
+      */
+    Account?: string;
+    /**
+      * 主机ID，未使用IdSet时必须携带
+      */
+    DeviceId?: number;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 每页条目数量，默认20
+      */
+    Limit?: number;
+}
+/**
+ * DescribeDasbImageIds返回参数结构体
+ */
+export interface DescribeDasbImageIdsResponse {
+    /**
+      * 基础镜像ID
+      */
+    BaseImageId?: string;
+    /**
+      * AI镜像ID
+      */
+    AiImageId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCmdTemplates请求参数结构体
+ */
+export interface DescribeCmdTemplatesRequest {
+    /**
+      * 命令模板ID集合，非必需
+      */
+    IdSet?: Array<number>;
+    /**
+      * 命令模板名，模糊查询，最大长度64字符
       */
     Name?: string;
     /**
@@ -563,29 +1347,120 @@ export interface DescribeAclsRequest {
       */
     Offset?: number;
     /**
-      * 每页条目数量，默认20，最大500
+      * 每页条目数量，默认20
+      */
+    Limit?: number;
+}
+/**
+ * DeleteAcls返回参数结构体
+ */
+export interface DeleteAclsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateUserGroup返回参数结构体
+ */
+export interface CreateUserGroupResponse {
+    /**
+      * 新建成功的用户组ID
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteDevices请求参数结构体
+ */
+export interface DeleteDevicesRequest {
+    /**
+      * 待删除的ID集合
+      */
+    IdSet: Array<number>;
+}
+/**
+ * DescribeDeviceAccounts返回参数结构体
+ */
+export interface DescribeDeviceAccountsResponse {
+    /**
+      * 记录总数
+      */
+    TotalCount: number;
+    /**
+      * 账号信息列表
+      */
+    DeviceAccountSet: Array<DeviceAccount>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceGroupMembers请求参数结构体
+ */
+export interface DescribeDeviceGroupMembersRequest {
+    /**
+      * 资产组ID
+      */
+    Id: number;
+    /**
+      * true - 查询已在该资产组的资产，false - 查询未在该资产组的资产
+      */
+    Bound: boolean;
+    /**
+      * 资产名或资产IP，模糊查询
+      */
+    Name?: string;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 每页条目数，默认20, 最大500
       */
     Limit?: number;
     /**
-      * 是否根据Name进行精确查询，默认值false
+      * 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
       */
-    Exact?: boolean;
+    Kind?: number;
     /**
-      * 有访问权限的用户ID集合
-      */
-    AuthorizedUserIdSet?: Array<number>;
-    /**
-      * 有访问权限的资产ID集合
-      */
-    AuthorizedDeviceIdSet?: Array<number>;
-    /**
-      * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
-      */
-    Status?: number;
-    /**
-      * 部门ID，用于过滤属于某个部门的访问权限
+      * 所属部门ID
       */
     DepartmentId?: string;
+    /**
+      * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
+      */
+    TagFilters?: Array<TagFilter>;
+}
+/**
+ * ModifyAcl返回参数结构体
+ */
+export interface ModifyAclResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeResources请求参数结构体
+ */
+export interface DescribeResourcesRequest {
+    /**
+      * 地域码, 如: ap-guangzhou
+      */
+    ApCode?: string;
+    /**
+      * 按照堡垒机开通的 VPC 实例ID查询
+      */
+    VpcId?: string;
+    /**
+      * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
+      */
+    ResourceIds?: Array<string>;
 }
 /**
  * DeleteDeviceGroups请求参数结构体
@@ -597,34 +1472,21 @@ export interface DeleteDeviceGroupsRequest {
     IdSet: Array<number>;
 }
 /**
- * DeleteUserGroupMembers请求参数结构体
+ * DescribeDeviceGroupMembers返回参数结构体
  */
-export interface DeleteUserGroupMembersRequest {
+export interface DescribeDeviceGroupMembersResponse {
     /**
-      * 用户组ID
+      * 资产组成员总数
       */
-    Id: number;
+    TotalCount: number;
     /**
-      * 需删除的成员用户ID集合
+      * 资产组成员列表
       */
-    MemberIdSet: Array<number>;
-}
-/**
- * DescribeDasbImageIds请求参数结构体
- */
-export declare type DescribeDasbImageIdsRequest = null;
-/**
- * DeleteDeviceGroupMembers请求参数结构体
- */
-export interface DeleteDeviceGroupMembersRequest {
+    DeviceSet: Array<Device>;
     /**
-      * 资产组ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Id: number;
-    /**
-      * 需要删除的资产ID集合
-      */
-    MemberIdSet: Array<number>;
+    RequestId?: string;
 }
 /**
  * 堡垒机服务信息
@@ -744,15 +1606,6 @@ export interface Resource {
     PackageNode: number;
 }
 /**
- * DeleteUserGroups返回参数结构体
- */
-export interface DeleteUserGroupsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * BindDeviceResource请求参数结构体
  */
 export interface BindDeviceResourceRequest {
@@ -764,66 +1617,6 @@ export interface BindDeviceResourceRequest {
       * 堡垒机服务ID
       */
     ResourceId: string;
-}
-/**
- * CreateDeviceGroup请求参数结构体
- */
-export interface CreateDeviceGroupRequest {
-    /**
-      * 资产组名，最大长度32字符
-      */
-    Name: string;
-    /**
-      * 资产组所属部门ID，如：1.2.3
-      */
-    DepartmentId?: string;
-}
-/**
- * CreateAcl返回参数结构体
- */
-export interface CreateAclResponse {
-    /**
-      * 新建成功的访问权限ID
-      */
-    Id: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeAcls返回参数结构体
- */
-export interface DescribeAclsResponse {
-    /**
-      * 访问权限总数
-      */
-    TotalCount: number;
-    /**
-      * 访问权限列表
-      */
-    AclSet: Array<Acl>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeUsers返回参数结构体
- */
-export interface DescribeUsersResponse {
-    /**
-      * 用户总数
-      */
-    TotalCount: number;
-    /**
-      * 用户列表
-      */
-    UserSet: Array<User>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 访问权限
@@ -942,21 +1735,6 @@ export interface Acl {
     Department: Department;
 }
 /**
- * 描述键值对过滤器，用于条件过滤查询
- */
-export interface Filter {
-    /**
-      * 需要过滤的字段。
-      */
-    Name: string;
-    /**
-      * 字段的过滤值。
-若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
-      */
-    Values: Array<string>;
-}
-/**
  * DescribeDevices请求参数结构体
  */
 export interface DescribeDevicesRequest {
@@ -1040,162 +1818,75 @@ export interface DescribeDeviceGroupsRequest {
     DepartmentId?: string;
 }
 /**
- * ModifyAcl请求参数结构体
+ * 主机参数，导入外部主机时使用
  */
-export interface ModifyAclRequest {
+export interface ExternalDevice {
     /**
-      * 访问权限名称，最大32字符，不能包含空白字符
+      * 操作系统名称，只能是Linux、Windows或MySQL
       */
-    Name: string;
+    OsName: string;
     /**
-      * 是否开启磁盘映射
+      * IP地址
       */
-    AllowDiskRedirect: boolean;
+    Ip: string;
     /**
-      * 是否允许任意账号登录
+      * 管理端口
       */
-    AllowAnyAccount: boolean;
+    Port: number;
     /**
-      * 访问权限ID
+      * 主机名，可为空
       */
-    Id: number;
+    Name?: string;
     /**
-      * 是否开启剪贴板文件上行
-      */
-    AllowClipFileUp?: boolean;
-    /**
-      * 是否开启剪贴板文件下行
-      */
-    AllowClipFileDown?: boolean;
-    /**
-      * 是否开启剪贴板文本（含图片）上行
-      */
-    AllowClipTextUp?: boolean;
-    /**
-      * 是否开启剪贴板文本（含图片）下行
-      */
-    AllowClipTextDown?: boolean;
-    /**
-      * 是否开启文件传输上传
-      */
-    AllowFileUp?: boolean;
-    /**
-      * 文件传输上传大小限制（预留参数，目前暂未使用）
-      */
-    MaxFileUpSize?: number;
-    /**
-      * 是否开启文件传输下载
-      */
-    AllowFileDown?: boolean;
-    /**
-      * 文件传输下载大小限制（预留参数，目前暂未使用）
-      */
-    MaxFileDownSize?: number;
-    /**
-      * 关联的用户ID
-      */
-    UserIdSet?: Array<number>;
-    /**
-      * 关联的用户组ID
-      */
-    UserGroupIdSet?: Array<number>;
-    /**
-      * 关联的资产ID
-      */
-    DeviceIdSet?: Array<number>;
-    /**
-      * 关联的资产组ID
-      */
-    DeviceGroupIdSet?: Array<number>;
-    /**
-      * 关联的账号
-      */
-    AccountSet?: Array<string>;
-    /**
-      * 关联的高危命令模板ID
-      */
-    CmdTemplateIdSet?: Array<number>;
-    /**
-      * 是否开启 RDP 磁盘映射文件上传
-      */
-    AllowDiskFileUp?: boolean;
-    /**
-      * 是否开启 RDP 磁盘映射文件下载
-      */
-    AllowDiskFileDown?: boolean;
-    /**
-      * 是否开启rz sz文件上传
-      */
-    AllowShellFileUp?: boolean;
-    /**
-      * 是否开启rz sz文件下载
-      */
-    AllowShellFileDown?: boolean;
-    /**
-      * 是否开启 SFTP 文件删除
-      */
-    AllowFileDel?: boolean;
-    /**
-      * 访问权限生效时间，如:"2021-09-22T00:00:00+00:00"
-生效、失效时间不填则访问权限长期有效
-      */
-    ValidateFrom?: string;
-    /**
-      * 访问权限失效时间，如:"2021-09-23T00:00:00+00:00"
-生效、失效时间不填则访问权限长期有效
-      */
-    ValidateTo?: string;
-    /**
-      * 权限所属部门的ID，如：1.2.3
+      * 资产所属的部门ID
       */
     DepartmentId?: string;
 }
 /**
- * DescribeResources请求参数结构体
+ * DescribeUserGroups请求参数结构体
  */
-export interface DescribeResourcesRequest {
+export interface DescribeUserGroupsRequest {
     /**
-      * 地域码, 如: ap-guangzhou
+      * 用户组ID集合
       */
-    ApCode?: string;
+    IdSet?: Array<number>;
     /**
-      * 按照堡垒机开通的 VPC 实例ID查询
+      * 用户组名，模糊查询,长度：0-64字符
       */
-    VpcId?: string;
+    Name?: string;
     /**
-      * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
+      * 分页偏移位置，默认值为0
       */
-    ResourceIds?: Array<string>;
+    Offset?: number;
+    /**
+      * 每页条目数量，缺省20，最大500
+      */
+    Limit?: number;
+    /**
+      * 部门ID，用于过滤属于某个部门的用户组
+      */
+    DepartmentId?: string;
 }
 /**
- * BindDeviceResource返回参数结构体
+ * ModifyUser请求参数结构体
  */
-export interface BindDeviceResourceResponse {
+export interface ModifyUserRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户ID
       */
-    RequestId?: string;
-}
-/**
- * CreateUser请求参数结构体
- */
-export interface CreateUserRequest {
+    Id: number;
     /**
-      * 用户名, 3-20个字符, 必须以英文字母开头，且不能包含字母、数字、.、_、-以外的字符
-      */
-    UserName: string;
-    /**
-      * 用户姓名，最大长度20个字符，不能包含空白字符
+      * 用户姓名，最大长度20个字符，不能包含空格
       */
     RealName: string;
     /**
-      * 大陆手机号直接填写，如果是其他国家、地区号码， 按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
       */
     Phone: string;
     /**
       * 电子邮件
       */
-    Email?: string;
+    Email: string;
     /**
       * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
 生效、失效时间不填则用户长期有效
@@ -1211,7 +1902,7 @@ export interface CreateUserRequest {
       */
     GroupIdSet?: Array<number>;
     /**
-      * 认证方式，0 - 本地， 1 - LDAP， 2 - OAuth 不传则默认为0
+      * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
       */
     AuthType?: number;
     /**
@@ -1219,72 +1910,20 @@ export interface CreateUserRequest {
       */
     ValidateTime?: string;
     /**
-      * 所属部门ID，如：“1.2.3”
+      * 用户所属部门的ID，如1.2.3
       */
     DepartmentId?: string;
 }
 /**
- * 资产标签
+ * DescribeAcls请求参数结构体
  */
-export interface TagFilter {
+export interface DescribeAclsRequest {
     /**
-      * 标签键
-      */
-    TagKey: string;
-    /**
-      * 标签值
-      */
-    TagValue?: Array<string>;
-}
-/**
- * DeleteUsers返回参数结构体
- */
-export interface DeleteUsersResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDeviceGroups返回参数结构体
- */
-export interface DescribeDeviceGroupsResponse {
-    /**
-      * 资产组总数
-      */
-    TotalCount: number;
-    /**
-      * 资产组列表
-      */
-    GroupSet: Array<Group>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeResources返回参数结构体
- */
-export interface DescribeResourcesResponse {
-    /**
-      * 堡垒机资源列表
-      */
-    ResourceSet: Array<Resource>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeUsers请求参数结构体
- */
-export interface DescribeUsersRequest {
-    /**
-      * 如果IdSet不为空，则忽略其他参数
+      * 访问权限ID集合
       */
     IdSet?: Array<number>;
     /**
-      * 模糊查询，IdSet、UserName、Phone为空时才生效，对用户名和姓名进行模糊查询
+      * 访问权限名称，模糊查询，最长64字符
       */
     Name?: string;
     /**
@@ -1292,156 +1931,27 @@ export interface DescribeUsersRequest {
       */
     Offset?: number;
     /**
-      * 每页条目数量，默认20, 最大500
+      * 每页条目数量，默认20，最大500
       */
     Limit?: number;
     /**
-      * 精确查询，IdSet为空时才生效
+      * 是否根据Name进行精确查询，默认值false
       */
-    UserName?: string;
+    Exact?: boolean;
     /**
-      * 精确查询，IdSet、UserName为空时才生效。
-大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      * 有访问权限的用户ID集合
       */
-    Phone?: string;
+    AuthorizedUserIdSet?: Array<number>;
     /**
-      * 查询具有指定资产ID访问权限的用户
+      * 有访问权限的资产ID集合
       */
     AuthorizedDeviceIdSet?: Array<number>;
     /**
-      * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
+      * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
       */
-    AuthTypeSet?: Array<number>;
+    Status?: number;
     /**
-      * 部门ID，用于过滤属于某个部门的用户
-      */
-    DepartmentId?: string;
-}
-/**
- * DeleteUserGroupMembers返回参数结构体
- */
-export interface DeleteUserGroupMembersResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeUserGroups返回参数结构体
- */
-export interface DescribeUserGroupsResponse {
-    /**
-      * 用户组总数
-      */
-    TotalCount: number;
-    /**
-      * 用户组列表
-      */
-    GroupSet: Array<Group>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDeviceGroupMembers返回参数结构体
- */
-export interface DescribeDeviceGroupMembersResponse {
-    /**
-      * 资产组成员总数
-      */
-    TotalCount: number;
-    /**
-      * 资产组成员列表
-      */
-    DeviceSet: Array<Device>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 高危命令模板
- */
-export interface CmdTemplate {
-    /**
-      * 高危命令模板ID
-      */
-    Id: number;
-    /**
-      * 高危命令模板名称
-      */
-    Name: string;
-    /**
-      * 命令列表，命令之间用换行符（"\n"）分隔
-      */
-    CmdList: string;
-}
-/**
- * DeleteAcls返回参数结构体
- */
-export interface DeleteAclsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDeviceGroupMembers请求参数结构体
- */
-export interface DescribeDeviceGroupMembersRequest {
-    /**
-      * 资产组ID
-      */
-    Id: number;
-    /**
-      * true - 查询已在该资产组的资产，false - 查询未在该资产组的资产
-      */
-    Bound: boolean;
-    /**
-      * 资产名或资产IP，模糊查询
-      */
-    Name?: string;
-    /**
-      * 分页偏移位置，默认值为0
-      */
-    Offset?: number;
-    /**
-      * 每页条目数，默认20, 最大500
-      */
-    Limit?: number;
-    /**
-      * 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
-      */
-    Kind?: number;
-    /**
-      * 所属部门ID
-      */
-    DepartmentId?: string;
-    /**
-      * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
-      */
-    TagFilters?: Array<TagFilter>;
-}
-/**
- * DeleteDeviceGroups返回参数结构体
- */
-export interface DeleteDeviceGroupsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateUserGroup请求参数结构体
- */
-export interface CreateUserGroupRequest {
-    /**
-      * 用户组名，最大长度32字符
-      */
-    Name: string;
-    /**
-      * 用户组所属部门的ID，如：1.2.3
+      * 部门ID，用于过滤属于某个部门的访问权限
       */
     DepartmentId?: string;
 }
@@ -1457,4 +1967,13 @@ export interface AddDeviceGroupMembersRequest {
       * 需要添加到资产组的资产ID集合
       */
     MemberIdSet: Array<number>;
+}
+/**
+ * DeleteDeviceAccounts返回参数结构体
+ */
+export interface DeleteDeviceAccountsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }

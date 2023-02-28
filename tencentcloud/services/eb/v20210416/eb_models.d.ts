@@ -51,35 +51,59 @@ export interface GetEventBusResponse {
     /**
       * 更新时间
       */
-    ModTime: string;
+    ModTime?: string;
     /**
       * 事件集描述
       */
-    Description: string;
+    Description?: string;
     /**
       * 日志主题ID
       */
-    ClsTopicId: string;
+    ClsTopicId?: string;
     /**
       * 创建时间
       */
-    AddTime: string;
+    AddTime?: string;
     /**
       * 日志集ID
       */
-    ClsLogsetId: string;
+    ClsLogsetId?: string;
     /**
       * 事件集名称
       */
-    EventBusName: string;
+    EventBusName?: string;
     /**
       * 事件集ID
       */
-    EventBusId: string;
+    EventBusId?: string;
     /**
       * （已废弃）事件集类型
       */
-    Type: string;
+    Type?: string;
+    /**
+      * 计费模式
+      */
+    PayMode?: string;
+    /**
+      * EB日志存储时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SaveDays?: number;
+    /**
+      * EB日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogTopicId?: string;
+    /**
+      * 是否开启存储
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableStore?: boolean;
+    /**
+      * 消息序列，是否有序
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LinkMode?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -220,6 +244,10 @@ export interface TargetBrief {
     Type: string;
 }
 /**
+ * Data Transfer Service参数
+ */
+export declare type DTSParams = null;
+/**
  * ListRules返回参数结构体
  */
 export interface ListRulesResponse {
@@ -260,39 +288,39 @@ export interface GetRuleResponse {
     /**
       * 事件集id
       */
-    EventBusId: string;
+    EventBusId?: string;
     /**
       * 事件规则id
       */
-    RuleId: string;
+    RuleId?: string;
     /**
       * 事件规则名称
       */
-    RuleName: string;
+    RuleName?: string;
     /**
       * 事件规则状态
       */
-    Status: string;
+    Status?: string;
     /**
       * 使能开关
       */
-    Enable: boolean;
+    Enable?: boolean;
     /**
       * 事件规则描述
       */
-    Description: string;
+    Description?: string;
     /**
       * 事件模式
       */
-    EventPattern: string;
+    EventPattern?: string;
     /**
       * 创建时间
       */
-    AddTime: string;
+    AddTime?: string;
     /**
       * 更新时间
       */
-    ModTime: string;
+    ModTime?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -339,6 +367,21 @@ export interface EventBus {
       * 事件集类型
       */
     Type: string;
+    /**
+      * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayMode?: string;
+    /**
+      * 连接器基础信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectionBriefs?: Array<ConnectionBrief>;
+    /**
+      * 目标简要信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetBriefs?: Array<TargetBrief>;
 }
 /**
  * ListTargets请求参数结构体
@@ -539,6 +582,10 @@ export interface CreateEventBusRequest {
       * EB存储时长
       */
     SaveDays?: number;
+    /**
+      * EB是否开启存储
+      */
+    EnableStore?: boolean;
 }
 /**
  * PutEvents返回参数结构体
@@ -743,11 +790,11 @@ export interface ListEventBusesResponse {
     /**
       * 事件集信息
       */
-    EventBuses: Array<EventBus>;
+    EventBuses?: Array<EventBus>;
     /**
       * 事件集总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -780,6 +827,11 @@ export interface ConnectionDescription {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CkafkaParams?: CkafkaParams;
+    /**
+      * data transfer service (DTS)参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DTSParams?: DTSParams;
 }
 /**
  * 用来描述需要投递到kafka topic的参数
@@ -889,14 +941,19 @@ export interface CreateTransformationResponse {
     RequestId?: string;
 }
 /**
- * 描述如何数据转换
-
+ * 连接器基础信息
  */
-export interface Transform {
+export interface ConnectionBrief {
     /**
-      * 描述如何数据转换
+      * 连接器类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OutputStructs: Array<OutputStructParam>;
+    Type?: string;
+    /**
+      * 连接器状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
 }
 /**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
@@ -1213,6 +1270,16 @@ export interface OutputStructParam {
       * value的数据类型, 可选值: STRING, NUMBER,BOOLEAN,NULL,SYS_VARIABLE,JSONPATH
       */
     ValueType: string;
+}
+/**
+ * 描述如何数据转换
+
+ */
+export interface Transform {
+    /**
+      * 描述如何数据转换
+      */
+    OutputStructs: Array<OutputStructParam>;
 }
 /**
  * CheckTransformation请求参数结构体

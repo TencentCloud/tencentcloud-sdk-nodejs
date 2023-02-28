@@ -204,6 +204,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIPStatusList", req, cb);
     }
     /**
+     * 编辑新企业安全组规则
+     */
+    async ModifyEnterpriseSecurityGroupRule(req, cb) {
+        return this.request("ModifyEnterpriseSecurityGroupRule", req, cb);
+    }
+    /**
      * 获取入侵防御按钮列表
      */
     async DescribeDefenseSwitch(req, cb) {
@@ -221,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRunSyncAsset(req, cb) {
         return this.request("ModifyRunSyncAsset", req, cb);
+    }
+    /**
+     * NAT防火墙规则快速排序
+     */
+    async ModifyNatSequenceRules(req, cb) {
+        return this.request("ModifyNatSequenceRules", req, cb);
     }
     /**
      * nat 防火墙VPC DNS 开关切换
@@ -273,6 +285,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUnHandleEventTabList(req, cb) {
         return this.request("DescribeUnHandleEventTabList", req, cb);
+    }
+    /**
+     * 修改NAT防火墙开关
+     */
+    async ModifyNatFwSwitch(req, cb) {
+        return this.request("ModifyNatFwSwitch", req, cb);
     }
     /**
      * DescribeSourceAsset-查询资产组全部资产信息
@@ -378,10 +396,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySecurityGroupSequenceRules", req, cb);
     }
     /**
-     * 修改NAT防火墙开关
+     * 修改企业安全组下发状态
      */
-    async ModifyNatFwSwitch(req, cb) {
-        return this.request("ModifyNatFwSwitch", req, cb);
+    async ModifyEnterpriseSecurityDispatchStatus(req, cb) {
+        return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb);
     }
     /**
      * DescribeTLogIpList告警中心IP柱形图

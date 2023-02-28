@@ -308,6 +308,16 @@ it("cfw.v20190904.DescribeIPStatusList", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyEnterpriseSecurityGroupRule", async function () {
+    try {
+       const data = await client.ModifyEnterpriseSecurityGroupRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeDefenseSwitch", async function () {
     try {
        const data = await client.DescribeDefenseSwitch({})
@@ -331,6 +341,16 @@ it("cfw.v20190904.DescribeTLogInfo", async function () {
 it("cfw.v20190904.ModifyRunSyncAsset", async function () {
     try {
        const data = await client.ModifyRunSyncAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyNatSequenceRules", async function () {
+    try {
+       const data = await client.ModifyNatSequenceRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +431,16 @@ it("cfw.v20190904.DescribeGuideScanInfo", async function () {
 it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     try {
        const data = await client.DescribeUnHandleEventTabList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyNatFwSwitch", async function () {
+    try {
+       const data = await client.ModifyNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +618,9 @@ it("cfw.v20190904.ModifySecurityGroupSequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyNatFwSwitch", async function () {
+it("cfw.v20190904.ModifyEnterpriseSecurityDispatchStatus", async function () {
     try {
-       const data = await client.ModifyNatFwSwitch({})
+       const data = await client.ModifyEnterpriseSecurityDispatchStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

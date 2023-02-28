@@ -266,6 +266,21 @@ export interface ModifyAcRuleResponse {
 }
 
 /**
+ * ModifyNatSequenceRules请求参数结构体
+ */
+export interface ModifyNatSequenceRulesRequest {
+  /**
+   * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+   */
+  RuleChangeItems: Array<RuleChangeItem>
+
+  /**
+   * 规则方向：1，入站；0，出站
+   */
+  Direction: number
+}
+
+/**
  * DescribeTableStatus返回参数结构体
  */
 export interface DescribeTableStatusResponse {
@@ -1745,6 +1760,21 @@ export interface AssetZone {
 }
 
 /**
+ * 规则顺序变更项，由原始id值变为新的id值。
+ */
+export interface RuleChangeItem {
+  /**
+   * 原始sequence 值
+   */
+  OrderIndex: number
+
+  /**
+   * 新的sequence 值
+   */
+  NewOrderIndex: number
+}
+
+/**
  * DescribeTLogIpList请求参数结构体
  */
 export interface DescribeTLogIpListRequest {
@@ -1840,6 +1870,16 @@ export interface DescribeNatFwInstancesInfoRequest {
    * 每页长度
    */
   Limit?: number
+}
+
+/**
+ * ModifyNatSequenceRules返回参数结构体
+ */
+export interface ModifyNatSequenceRulesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2000,6 +2040,22 @@ export interface DescribeNatFwInfoCountResponse {
  * DescribeDefenseSwitch请求参数结构体
  */
 export type DescribeDefenseSwitchRequest = null
+
+/**
+ * ModifyEnterpriseSecurityDispatchStatus返回参数结构体
+ */
+export interface ModifyEnterpriseSecurityDispatchStatusResponse {
+  /**
+      * 0: 修改成功, 其他: 修改失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 安全组列表数据
@@ -2238,6 +2294,21 @@ export interface DatabaseWhiteListRuleData {
    * 云厂商码
    */
   CloudCode?: string
+}
+
+/**
+ * RemoveNatAcRule请求参数结构体
+ */
+export interface RemoveNatAcRuleRequest {
+  /**
+   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   */
+  RuleUuid: Array<number>
+
+  /**
+   * 规则方向：1，入站；0，出站
+   */
+  Direction?: number
 }
 
 /**
@@ -2598,18 +2669,23 @@ export interface ModifyRunSyncAssetResponse {
 }
 
 /**
- * RemoveNatAcRule请求参数结构体
+ * ModifyEnterpriseSecurityGroupRule返回参数结构体
  */
-export interface RemoveNatAcRuleRequest {
+export interface ModifyEnterpriseSecurityGroupRuleResponse {
   /**
-   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   * 状态值，0：编辑成功，非0：编辑失败
    */
-  RuleUuid: Array<number>
+  Status: number
 
   /**
-   * 规则方向：1，入站；0，出站
+   * 编辑后新生成规则的Id
    */
-  Direction?: number
+  NewRuleUuid: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2761,6 +2837,31 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyEnterpriseSecurityGroupRule请求参数结构体
+ */
+export interface ModifyEnterpriseSecurityGroupRuleRequest {
+  /**
+   * 规则的uuid，可通过查询规则列表获取
+   */
+  RuleUuid: number
+
+  /**
+   * 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态
+   */
+  ModifyType: number
+
+  /**
+   * 编辑后的企业安全组规则数据；修改规则状态不用填该字段
+   */
+  Data?: SecurityGroupRule
+
+  /**
+   * 0是关闭,1是开启
+   */
+  Enable?: number
 }
 
 /**
@@ -4703,6 +4804,16 @@ export interface CreateAcRulesRequest {
    * NAT地域
    */
   Area?: string
+}
+
+/**
+ * ModifyEnterpriseSecurityDispatchStatus请求参数结构体
+ */
+export interface ModifyEnterpriseSecurityDispatchStatusRequest {
+  /**
+   * 状态，0：立即下发，1：停止下发
+   */
+  Status: number
 }
 
 /**

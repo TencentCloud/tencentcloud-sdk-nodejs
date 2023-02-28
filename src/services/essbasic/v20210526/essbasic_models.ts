@@ -3765,7 +3765,7 @@ export interface ChannelCreateReleaseFlowResponse {
   /**
    * 解除协议流程编号
    */
-  FlowId: string
+  FlowId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

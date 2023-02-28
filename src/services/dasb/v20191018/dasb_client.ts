@@ -18,63 +18,102 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  Group,
-  CreateDeviceGroupResponse,
+  ResetDeviceAccountPasswordResponse,
+  BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
-  AddDeviceGroupMembersResponse,
-  ModifyUserRequest,
-  DeleteUsersRequest,
-  DeleteDeviceGroupMembersResponse,
+  DeleteDeviceGroupsResponse,
+  DescribeDeviceGroupsResponse,
+  DeleteCmdTemplatesResponse,
+  DeleteDevicesResponse,
   Department,
-  AddUserGroupMembersResponse,
-  DescribeDasbImageIdsResponse,
-  CreateUserResponse,
-  ModifyUserResponse,
+  DeviceAccount,
+  BindDeviceAccountPasswordResponse,
+  ResetDeviceAccountPasswordRequest,
   AddUserGroupMembersRequest,
-  DescribeUserGroupsRequest,
-  DescribeUserGroupMembersResponse,
-  CreateUserGroupResponse,
   DescribeDevicesResponse,
-  DescribeUserGroupMembersRequest,
-  CreateAclRequest,
-  DeleteUserGroupsRequest,
-  User,
-  ModifyAclResponse,
-  Device,
-  DescribeAclsRequest,
-  DeleteDeviceGroupsRequest,
+  ResetUserResponse,
   DeleteUserGroupMembersRequest,
-  DescribeDasbImageIdsRequest,
-  DeleteDeviceGroupMembersRequest,
-  Resource,
   DeleteUserGroupsResponse,
-  BindDeviceResourceRequest,
+  ModifyDeviceRequest,
+  ImportExternalDeviceRequest,
+  BindDeviceResourceResponse,
+  DeleteUserGroupMembersResponse,
+  CmdTemplate,
+  CreateUserGroupRequest,
+  BindDeviceAccountPrivateKeyResponse,
+  CreateDeviceGroupResponse,
+  DescribeUserGroupMembersRequest,
+  CreateUserResponse,
+  DescribeAssetSyncStatusResponse,
+  CreateAclRequest,
+  DeleteDeviceGroupMembersRequest,
   CreateDeviceGroupRequest,
   CreateAclResponse,
   DescribeAclsResponse,
-  DescribeUsersResponse,
-  Acl,
-  Filter,
-  DescribeDevicesRequest,
-  DescribeDeviceGroupsRequest,
+  CreateCmdTemplateResponse,
   ModifyAclRequest,
-  DescribeResourcesRequest,
-  BindDeviceResourceResponse,
-  CreateUserRequest,
   TagFilter,
   DeleteUsersResponse,
-  DescribeDeviceGroupsResponse,
+  AssetSyncStatus,
   DescribeResourcesResponse,
   DescribeUsersRequest,
-  DeleteUserGroupMembersResponse,
+  DeployResourceRequest,
+  CreateCmdTemplateRequest,
+  ResetDeviceAccountPrivateKeyRequest,
+  CreateAssetSyncJobResponse,
+  BindDeviceAccountPrivateKeyRequest,
+  CreateAssetSyncJobRequest,
+  Group,
+  DescribeAssetSyncStatusRequest,
+  ResetDeviceAccountPrivateKeyResponse,
+  DeleteUsersRequest,
+  DeleteDeviceAccountsRequest,
+  DeleteDeviceGroupMembersResponse,
+  ModifyDeviceGroupResponse,
+  DescribeUserGroupMembersResponse,
+  ImportExternalDeviceResponse,
+  DeleteUserGroupsRequest,
+  User,
+  ResetUserRequest,
+  Device,
+  DescribeDasbImageIdsRequest,
+  CreateDeviceAccountResponse,
+  ModifyDeviceGroupRequest,
+  Filter,
+  DescribeUsersResponse,
+  DeployResourceResponse,
+  CreateUserRequest,
   DescribeUserGroupsResponse,
-  DescribeDeviceGroupMembersResponse,
-  CmdTemplate,
+  ModifyUserResponse,
+  DescribeCmdTemplatesResponse,
+  CreateDeviceAccountRequest,
+  AddDeviceGroupMembersResponse,
+  DeleteCmdTemplatesRequest,
+  ModifyDeviceResponse,
+  AddUserGroupMembersResponse,
+  DescribeDeviceAccountsRequest,
+  DescribeDasbImageIdsResponse,
+  DescribeCmdTemplatesRequest,
   DeleteAclsResponse,
+  CreateUserGroupResponse,
+  DeleteDevicesRequest,
+  DescribeDeviceAccountsResponse,
   DescribeDeviceGroupMembersRequest,
-  DeleteDeviceGroupsResponse,
-  CreateUserGroupRequest,
+  ModifyAclResponse,
+  DescribeResourcesRequest,
+  DeleteDeviceGroupsRequest,
+  DescribeDeviceGroupMembersResponse,
+  Resource,
+  BindDeviceResourceRequest,
+  Acl,
+  DescribeDevicesRequest,
+  DescribeDeviceGroupsRequest,
+  ExternalDevice,
+  DescribeUserGroupsRequest,
+  ModifyUserRequest,
+  DescribeAclsRequest,
   AddDeviceGroupMembersRequest,
+  DeleteDeviceAccountsResponse,
 } from "./dasb_models"
 
 /**
@@ -84,6 +123,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dasb.tencentcloudapi.com", "2019-10-18", clientConfig)
+  }
+
+  /**
+   * 修改资产组
+   */
+  async ModifyDeviceGroup(
+    req: ModifyDeviceGroupRequest,
+    cb?: (error: string, rep: ModifyDeviceGroupResponse) => void
+  ): Promise<ModifyDeviceGroupResponse> {
+    return this.request("ModifyDeviceGroup", req, cb)
   }
 
   /**
@@ -107,6 +156,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询主机账号列表
+   */
+  async DescribeDeviceAccounts(
+    req: DescribeDeviceAccountsRequest,
+    cb?: (error: string, rep: DescribeDeviceAccountsResponse) => void
+  ): Promise<DescribeDeviceAccountsResponse> {
+    return this.request("DescribeDeviceAccounts", req, cb)
+  }
+
+  /**
+   * 重置用户
+   */
+  async ResetUser(
+    req: ResetUserRequest,
+    cb?: (error: string, rep: ResetUserResponse) => void
+  ): Promise<ResetUserResponse> {
+    return this.request("ResetUser", req, cb)
+  }
+
+  /**
+   * 删除主机
+   */
+  async DeleteDevices(
+    req: DeleteDevicesRequest,
+    cb?: (error: string, rep: DeleteDevicesResponse) => void
+  ): Promise<DeleteDevicesResponse> {
+    return this.request("DeleteDevices", req, cb)
+  }
+
+  /**
    * 添加用户组成员
    */
   async AddUserGroupMembers(
@@ -117,13 +196,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户列表
+   * 查询用户组列表
    */
-  async DescribeUsers(
-    req: DescribeUsersRequest,
-    cb?: (error: string, rep: DescribeUsersResponse) => void
-  ): Promise<DescribeUsersResponse> {
-    return this.request("DescribeUsers", req, cb)
+  async DescribeUserGroups(
+    req: DescribeUserGroupsRequest,
+    cb?: (error: string, rep: DescribeUserGroupsResponse) => void
+  ): Promise<DescribeUserGroupsResponse> {
+    return this.request("DescribeUserGroups", req, cb)
+  }
+
+  /**
+   * 开通服务，初始化资源，只针对新购资源
+   */
+  async DeployResource(
+    req: DeployResourceRequest,
+    cb?: (error: string, rep: DeployResourceResponse) => void
+  ): Promise<DeployResourceResponse> {
+    return this.request("DeployResource", req, cb)
+  }
+
+  /**
+   * 修改资产信息
+   */
+  async ModifyDevice(
+    req: ModifyDeviceRequest,
+    cb?: (error: string, rep: ModifyDeviceResponse) => void
+  ): Promise<ModifyDeviceResponse> {
+    return this.request("ModifyDevice", req, cb)
   }
 
   /**
@@ -137,6 +236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 绑定主机账号密码
+   */
+  async BindDeviceAccountPassword(
+    req: BindDeviceAccountPasswordRequest,
+    cb?: (error: string, rep: BindDeviceAccountPasswordResponse) => void
+  ): Promise<BindDeviceAccountPasswordResponse> {
+    return this.request("BindDeviceAccountPassword", req, cb)
+  }
+
+  /**
    * 删除访问权限
    */
   async DeleteAcls(
@@ -144,16 +253,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAclsResponse) => void
   ): Promise<DeleteAclsResponse> {
     return this.request("DeleteAcls", req, cb)
-  }
-
-  /**
-   * 查询用户组列表
-   */
-  async DescribeUserGroups(
-    req: DescribeUserGroupsRequest,
-    cb?: (error: string, rep: DescribeUserGroupsResponse) => void
-  ): Promise<DescribeUserGroupsResponse> {
-    return this.request("DescribeUserGroups", req, cb)
   }
 
   /**
@@ -174,6 +273,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserGroupMembersResponse) => void
   ): Promise<DeleteUserGroupMembersResponse> {
     return this.request("DeleteUserGroupMembers", req, cb)
+  }
+
+  /**
+   * 创建手工资产同步任务
+   */
+  async CreateAssetSyncJob(
+    req: CreateAssetSyncJobRequest,
+    cb?: (error: string, rep: CreateAssetSyncJobResponse) => void
+  ): Promise<CreateAssetSyncJobResponse> {
+    return this.request("CreateAssetSyncJob", req, cb)
+  }
+
+  /**
+   * 查询访问权限列表
+   */
+  async DescribeAcls(
+    req: DescribeAclsRequest,
+    cb?: (error: string, rep: DescribeAclsResponse) => void
+  ): Promise<DescribeAclsResponse> {
+    return this.request("DescribeAcls", req, cb)
+  }
+
+  /**
+   * 清除设备账号绑定密码
+   */
+  async ResetDeviceAccountPassword(
+    req: ResetDeviceAccountPasswordRequest,
+    cb?: (error: string, rep: ResetDeviceAccountPasswordResponse) => void
+  ): Promise<ResetDeviceAccountPasswordResponse> {
+    return this.request("ResetDeviceAccountPassword", req, cb)
   }
 
   /**
@@ -227,13 +356,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询访问权限列表
+   * 新建主机账号
    */
-  async DescribeAcls(
-    req: DescribeAclsRequest,
-    cb?: (error: string, rep: DescribeAclsResponse) => void
-  ): Promise<DescribeAclsResponse> {
-    return this.request("DescribeAcls", req, cb)
+  async CreateDeviceAccount(
+    req: CreateDeviceAccountRequest,
+    cb?: (error: string, rep: CreateDeviceAccountResponse) => void
+  ): Promise<CreateDeviceAccountResponse> {
+    return this.request("CreateDeviceAccount", req, cb)
   }
 
   /**
@@ -247,6 +376,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除主机账号
+   */
+  async DeleteDeviceAccounts(
+    req: DeleteDeviceAccountsRequest,
+    cb?: (error: string, rep: DeleteDeviceAccountsResponse) => void
+  ): Promise<DeleteDeviceAccountsResponse> {
+    return this.request("DeleteDeviceAccounts", req, cb)
+  }
+
+  /**
    * 删除用户组
    */
   async DeleteUserGroups(
@@ -254,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserGroupsResponse) => void
   ): Promise<DeleteUserGroupsResponse> {
     return this.request("DeleteUserGroups", req, cb)
+  }
+
+  /**
+   * 新建高危命令模板
+   */
+  async CreateCmdTemplate(
+    req: CreateCmdTemplateRequest,
+    cb?: (error: string, rep: CreateCmdTemplateResponse) => void
+  ): Promise<CreateCmdTemplateResponse> {
+    return this.request("CreateCmdTemplate", req, cb)
   }
 
   /**
@@ -267,6 +416,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询命令模板列表
+   */
+  async DescribeCmdTemplates(
+    req: DescribeCmdTemplatesRequest,
+    cb?: (error: string, rep: DescribeCmdTemplatesResponse) => void
+  ): Promise<DescribeCmdTemplatesResponse> {
+    return this.request("DescribeCmdTemplates", req, cb)
+  }
+
+  /**
+   * 删除高危命令模板
+   */
+  async DeleteCmdTemplates(
+    req: DeleteCmdTemplatesRequest,
+    cb?: (error: string, rep: DeleteCmdTemplatesResponse) => void
+  ): Promise<DeleteCmdTemplatesResponse> {
+    return this.request("DeleteCmdTemplates", req, cb)
+  }
+
+  /**
+   * 查询资产同步状态
+   */
+  async DescribeAssetSyncStatus(
+    req: DescribeAssetSyncStatusRequest,
+    cb?: (error: string, rep: DescribeAssetSyncStatusResponse) => void
+  ): Promise<DescribeAssetSyncStatusResponse> {
+    return this.request("DescribeAssetSyncStatus", req, cb)
+  }
+
+  /**
    * 查询资产组列表
    */
   async DescribeDeviceGroups(
@@ -274,6 +453,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceGroupsResponse) => void
   ): Promise<DescribeDeviceGroupsResponse> {
     return this.request("DescribeDeviceGroups", req, cb)
+  }
+
+  /**
+   * 查询用户列表
+   */
+  async DescribeUsers(
+    req: DescribeUsersRequest,
+    cb?: (error: string, rep: DescribeUsersResponse) => void
+  ): Promise<DescribeUsersResponse> {
+    return this.request("DescribeUsers", req, cb)
   }
 
   /**
@@ -297,6 +486,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 导入外部资产信息
+   */
+  async ImportExternalDevice(
+    req: ImportExternalDeviceRequest,
+    cb?: (error: string, rep: ImportExternalDeviceResponse) => void
+  ): Promise<ImportExternalDeviceResponse> {
+    return this.request("ImportExternalDevice", req, cb)
+  }
+
+  /**
    * 添加资产组成员
    */
   async AddDeviceGroupMembers(
@@ -317,6 +516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 清除设备账号绑定的密钥
+   */
+  async ResetDeviceAccountPrivateKey(
+    req: ResetDeviceAccountPrivateKeyRequest,
+    cb?: (error: string, rep: ResetDeviceAccountPrivateKeyResponse) => void
+  ): Promise<ResetDeviceAccountPrivateKeyResponse> {
+    return this.request("ResetDeviceAccountPrivateKey", req, cb)
+  }
+
+  /**
    * 新建用户
    */
   async CreateUser(
@@ -324,5 +533,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserResponse) => void
   ): Promise<CreateUserResponse> {
     return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 绑定主机账号私钥
+   */
+  async BindDeviceAccountPrivateKey(
+    req: BindDeviceAccountPrivateKeyRequest,
+    cb?: (error: string, rep: BindDeviceAccountPrivateKeyResponse) => void
+  ): Promise<BindDeviceAccountPrivateKeyResponse> {
+    return this.request("BindDeviceAccountPrivateKey", req, cb)
   }
 }

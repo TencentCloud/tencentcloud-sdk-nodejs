@@ -50,6 +50,7 @@ import {
   DeleteGroupRequest,
   AddGroupMemberRequest,
   DescribeGroupListRequest,
+  GetRoomMessageRequest,
   DocumentInfo,
   GetWatermarkResponse,
   DeleteDocumentResponse,
@@ -71,9 +72,10 @@ import {
   WatermarkConfig,
   SetAppCustomContentRequest,
   DescribeUserRequest,
-  BatchCreateGroupWithMembersRequest,
+  RegisterUserResponse,
   BindDocumentToRoomRequest,
   CreateDocumentRequest,
+  GetRoomMessageResponse,
   BatchUserInfo,
   BatchAddGroupMemberRequest,
   DescribeRoomResponse,
@@ -81,6 +83,7 @@ import {
   DescribeSdkAppIdUsersResponse,
   DescribeRoomStatisticsResponse,
   DeleteDocumentRequest,
+  MessageList,
   DeleteGroupMemberRequest,
   GetWatermarkRequest,
   MemberRecord,
@@ -99,10 +102,11 @@ import {
   AppCustomContent,
   DeleteGroupResponse,
   DescribeSdkAppIdUsersRequest,
+  MessageItem,
   CreateSupervisorResponse,
   SceneItem,
   DeleteRoomRequest,
-  RegisterUserResponse,
+  BatchCreateGroupWithMembersRequest,
   DescribeGroupRequest,
   CreateSupervisorRequest,
   BackgroundPictureConfig,
@@ -131,6 +135,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddGroupMemberResponse) => void
   ): Promise<AddGroupMemberResponse> {
     return this.request("AddGroupMember", req, cb)
+  }
+
+  /**
+   * 获取房间历史消息(房间历史消息保存7天)
+   */
+  async GetRoomMessage(
+    req: GetRoomMessageRequest,
+    cb?: (error: string, rep: GetRoomMessageResponse) => void
+  ): Promise<GetRoomMessageResponse> {
+    return this.request("GetRoomMessage", req, cb)
   }
 
   /**

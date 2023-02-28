@@ -718,6 +718,31 @@ export interface DescribeGroupListRequest {
 }
 
 /**
+ * GetRoomMessage请求参数结构体
+ */
+export interface GetRoomMessageRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 房间Id。
+   */
+  RoomId: number
+
+  /**
+   * 消息序列。获取该序列以前前的消息(不包含该seq消息)
+   */
+  Seq?: number
+
+  /**
+   * 消息拉取的条数。最大数量不能超过套餐包限制。
+   */
+  Limit?: number
+}
+
+/**
  * 文档信息
  */
 export interface DocumentInfo {
@@ -1240,23 +1265,23 @@ export interface DescribeUserRequest {
 }
 
 /**
- * BatchCreateGroupWithMembers请求参数结构体
+ * RegisterUser返回参数结构体
  */
-export interface BatchCreateGroupWithMembersRequest {
+export interface RegisterUserResponse {
   /**
-   * 低代码平台应用ID
+   * 用户Id。
    */
-  SdkAppId: number
+  UserId: string
 
   /**
-   * 批量创建群组基础信息，最大长度限制256
+   * 登录/注册成功后返回登录态token。有效期7天。
    */
-  GroupBaseInfos: Array<GroupBaseInfo>
+  Token: string
 
   /**
-   * 群组绑定的成员列表，一次性最多200个
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MemberIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1328,6 +1353,21 @@ export interface CreateDocumentRequest {
    * 文档大小，单位 字节
    */
   DocumentSize?: number
+}
+
+/**
+ * GetRoomMessage返回参数结构体
+ */
+export interface GetRoomMessageResponse {
+  /**
+   * 消息列表
+   */
+  Messages?: Array<MessageList>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1552,6 +1592,16 @@ export interface DescribeRoomStatisticsResponse {
   RealEndTime?: number
 
   /**
+   * 房间消息总数。
+   */
+  MessageCount?: number
+
+  /**
+   * 房间连麦总数。
+   */
+  MicCount?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1565,6 +1615,35 @@ export interface DeleteDocumentRequest {
    * 文档ID。
    */
   DocumentId: string
+}
+
+/**
+ * 历史消息列表
+ */
+export interface MessageList {
+  /**
+      * 消息时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp?: number
+
+  /**
+      * 消息发送者
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FromAccount?: string
+
+  /**
+      * 消息序列号，当前课堂内唯一且单调递增
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Seq?: number
+
+  /**
+      * 历史消息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MessageBody?: Array<MessageItem>
 }
 
 /**
@@ -1671,6 +1750,17 @@ export interface MemberRecord {
    * 用户设备平台信息。0:unknown  1:windows  2:mac  3:android  4:ios  5:web   6:h5   7:miniprogram （小程序）
    */
   Device?: number
+
+  /**
+   * 每个成员上麦次数。
+   */
+  PerMemberMicCount?: number
+
+  /**
+      * 每个成员发送消息数量。
+
+      */
+  PerMemberMessageCount?: number
 }
 
 /**
@@ -2106,6 +2196,29 @@ export interface DescribeSdkAppIdUsersRequest {
 }
 
 /**
+ * 单条消息体内容
+ */
+export interface MessageItem {
+  /**
+      * 消息类型。0表示文本消息，1表示图片消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MessageType?: number
+
+  /**
+      * 文本消息内容。message type为0时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TextMessage?: string
+
+  /**
+      * 图片消息URL。 message type为1时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageMessage?: string
+}
+
+/**
  * CreateSupervisor返回参数结构体
  */
 export interface CreateSupervisorResponse {
@@ -2131,23 +2244,23 @@ export interface DeleteRoomRequest {
 }
 
 /**
- * RegisterUser返回参数结构体
+ * BatchCreateGroupWithMembers请求参数结构体
  */
-export interface RegisterUserResponse {
+export interface BatchCreateGroupWithMembersRequest {
   /**
-   * 用户Id。
+   * 低代码平台应用ID
    */
-  UserId: string
+  SdkAppId: number
 
   /**
-   * 登录/注册成功后返回登录态token。有效期7天。
+   * 批量创建群组基础信息，最大长度限制256
    */
-  Token: string
+  GroupBaseInfos: Array<GroupBaseInfo>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 群组绑定的成员列表，一次性最多200个
    */
-  RequestId?: string
+  MemberIds?: Array<string>
 }
 
 /**

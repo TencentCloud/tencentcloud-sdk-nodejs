@@ -364,7 +364,8 @@ export interface ClusterActivity {
       */
     ActivityId: string;
     /**
-      * 集群活动类型。
+      * 集群活动类型。取值范围：<br><li>CreateAndAddNodes：创建实例并添加进集群<br><li>RemoveNodesFromCluster：从集群移除实例<br><li>TerminateNodes：销毁实例<br><li>MountStorageOption：增加挂载选项并进行挂载<br><li>UmountStorageOption：删除集群挂载存储选项并解挂载
+
       */
     ActivityType: string;
     /**

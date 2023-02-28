@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("dasb.tencentcloudapi.com", "2019-10-18", clientConfig);
     }
     /**
+     * 修改资产组
+     */
+    async ModifyDeviceGroup(req, cb) {
+        return this.request("ModifyDeviceGroup", req, cb);
+    }
+    /**
      * 查询资产组成员列表
      */
     async DescribeDeviceGroupMembers(req, cb) {
@@ -40,16 +46,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeviceGroup", req, cb);
     }
     /**
+     * 查询主机账号列表
+     */
+    async DescribeDeviceAccounts(req, cb) {
+        return this.request("DescribeDeviceAccounts", req, cb);
+    }
+    /**
+     * 重置用户
+     */
+    async ResetUser(req, cb) {
+        return this.request("ResetUser", req, cb);
+    }
+    /**
+     * 删除主机
+     */
+    async DeleteDevices(req, cb) {
+        return this.request("DeleteDevices", req, cb);
+    }
+    /**
      * 添加用户组成员
      */
     async AddUserGroupMembers(req, cb) {
         return this.request("AddUserGroupMembers", req, cb);
     }
     /**
-     * 查询用户列表
+     * 查询用户组列表
      */
-    async DescribeUsers(req, cb) {
-        return this.request("DescribeUsers", req, cb);
+    async DescribeUserGroups(req, cb) {
+        return this.request("DescribeUserGroups", req, cb);
+    }
+    /**
+     * 开通服务，初始化资源，只针对新购资源
+     */
+    async DeployResource(req, cb) {
+        return this.request("DeployResource", req, cb);
+    }
+    /**
+     * 修改资产信息
+     */
+    async ModifyDevice(req, cb) {
+        return this.request("ModifyDevice", req, cb);
     }
     /**
      * 修改资产绑定的堡垒机服务
@@ -58,16 +94,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindDeviceResource", req, cb);
     }
     /**
+     * 绑定主机账号密码
+     */
+    async BindDeviceAccountPassword(req, cb) {
+        return this.request("BindDeviceAccountPassword", req, cb);
+    }
+    /**
      * 删除访问权限
      */
     async DeleteAcls(req, cb) {
         return this.request("DeleteAcls", req, cb);
-    }
-    /**
-     * 查询用户组列表
-     */
-    async DescribeUserGroups(req, cb) {
-        return this.request("DescribeUserGroups", req, cb);
     }
     /**
      * 查询用户购买的堡垒机服务信息，包括资源ID、授权点数、VPC、过期时间等。
@@ -80,6 +116,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteUserGroupMembers(req, cb) {
         return this.request("DeleteUserGroupMembers", req, cb);
+    }
+    /**
+     * 创建手工资产同步任务
+     */
+    async CreateAssetSyncJob(req, cb) {
+        return this.request("CreateAssetSyncJob", req, cb);
+    }
+    /**
+     * 查询访问权限列表
+     */
+    async DescribeAcls(req, cb) {
+        return this.request("DescribeAcls", req, cb);
+    }
+    /**
+     * 清除设备账号绑定密码
+     */
+    async ResetDeviceAccountPassword(req, cb) {
+        return this.request("ResetDeviceAccountPassword", req, cb);
     }
     /**
      * 删除资产组
@@ -112,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDasbImageIds", req, cb);
     }
     /**
-     * 查询访问权限列表
+     * 新建主机账号
      */
-    async DescribeAcls(req, cb) {
-        return this.request("DescribeAcls", req, cb);
+    async CreateDeviceAccount(req, cb) {
+        return this.request("CreateDeviceAccount", req, cb);
     }
     /**
      * 删除资产组成员
@@ -124,10 +178,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDeviceGroupMembers", req, cb);
     }
     /**
+     * 删除主机账号
+     */
+    async DeleteDeviceAccounts(req, cb) {
+        return this.request("DeleteDeviceAccounts", req, cb);
+    }
+    /**
      * 删除用户组
      */
     async DeleteUserGroups(req, cb) {
         return this.request("DeleteUserGroups", req, cb);
+    }
+    /**
+     * 新建高危命令模板
+     */
+    async CreateCmdTemplate(req, cb) {
+        return this.request("CreateCmdTemplate", req, cb);
     }
     /**
      * 修改用户信息
@@ -136,10 +202,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUser", req, cb);
     }
     /**
+     * 查询命令模板列表
+     */
+    async DescribeCmdTemplates(req, cb) {
+        return this.request("DescribeCmdTemplates", req, cb);
+    }
+    /**
+     * 删除高危命令模板
+     */
+    async DeleteCmdTemplates(req, cb) {
+        return this.request("DeleteCmdTemplates", req, cb);
+    }
+    /**
+     * 查询资产同步状态
+     */
+    async DescribeAssetSyncStatus(req, cb) {
+        return this.request("DescribeAssetSyncStatus", req, cb);
+    }
+    /**
      * 查询资产组列表
      */
     async DescribeDeviceGroups(req, cb) {
         return this.request("DescribeDeviceGroups", req, cb);
+    }
+    /**
+     * 查询用户列表
+     */
+    async DescribeUsers(req, cb) {
+        return this.request("DescribeUsers", req, cb);
     }
     /**
      * 查询资产列表
@@ -154,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroupMembers", req, cb);
     }
     /**
+     * 导入外部资产信息
+     */
+    async ImportExternalDevice(req, cb) {
+        return this.request("ImportExternalDevice", req, cb);
+    }
+    /**
      * 添加资产组成员
      */
     async AddDeviceGroupMembers(req, cb) {
@@ -166,10 +262,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserGroup", req, cb);
     }
     /**
+     * 清除设备账号绑定的密钥
+     */
+    async ResetDeviceAccountPrivateKey(req, cb) {
+        return this.request("ResetDeviceAccountPrivateKey", req, cb);
+    }
+    /**
      * 新建用户
      */
     async CreateUser(req, cb) {
         return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 绑定主机账号私钥
+     */
+    async BindDeviceAccountPrivateKey(req, cb) {
+        return this.request("BindDeviceAccountPrivateKey", req, cb);
     }
 }
 exports.Client = Client;
