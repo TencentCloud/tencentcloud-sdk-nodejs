@@ -159,7 +159,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageClsTopicDomains", req, cb);
     }
     /**
-     * CreateDiagnoseUrl 用于添加域名诊断任务URL
+     * CreateDiagnoseUrl 用于添加域名诊断任务URL， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     async CreateDiagnoseUrl(req, cb) {
         return this.request("CreateDiagnoseUrl", req, cb);
@@ -183,7 +183,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopScdnDomain", req, cb);
     }
     /**
-     * DescribeDiagnoseReport 用于获取指定报告id的内容
+     * DescribeDiagnoseReport 用于获取指定报告id的内容， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     async DescribeDiagnoseReport(req, cb) {
         return this.request("DescribeDiagnoseReport", req, cb);
@@ -201,7 +201,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableCaches", req, cb);
     }
     /**
-     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     async ListDiagnoseReport(req, cb) {
         return this.request("ListDiagnoseReport", req, cb);

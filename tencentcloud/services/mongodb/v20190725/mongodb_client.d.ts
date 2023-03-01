@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAccountUser(req: CreateAccountUserRequest, cb?: (error: string, rep: CreateAccountUserResponse) => void): Promise<CreateAccountUserResponse>;
     /**
-     * 本接口(CreateDBInstanceHour)用于创建按量计费的MongoDB云数据库实例。
+     * 本接口（CreateDBInstanceHour）用于创建按量计费的MongoDB云数据库实例。
      */
     CreateDBInstanceHour(req: CreateDBInstanceHourRequest, cb?: (error: string, rep: CreateDBInstanceHourResponse) => void): Promise<CreateDBInstanceHourResponse>;
     /**

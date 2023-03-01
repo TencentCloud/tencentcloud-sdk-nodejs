@@ -101,7 +101,7 @@ export declare class Client extends AbstractClient {
      */
     ManageClsTopicDomains(req: ManageClsTopicDomainsRequest, cb?: (error: string, rep: ManageClsTopicDomainsResponse) => void): Promise<ManageClsTopicDomainsResponse>;
     /**
-     * CreateDiagnoseUrl 用于添加域名诊断任务URL
+     * CreateDiagnoseUrl 用于添加域名诊断任务URL， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     CreateDiagnoseUrl(req: CreateDiagnoseUrlRequest, cb?: (error: string, rep: CreateDiagnoseUrlResponse) => void): Promise<CreateDiagnoseUrlResponse>;
     /**
@@ -117,7 +117,7 @@ export declare class Client extends AbstractClient {
      */
     StopScdnDomain(req: StopScdnDomainRequest, cb?: (error: string, rep: StopScdnDomainResponse) => void): Promise<StopScdnDomainResponse>;
     /**
-     * DescribeDiagnoseReport 用于获取指定报告id的内容
+     * DescribeDiagnoseReport 用于获取指定报告id的内容， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     DescribeDiagnoseReport(req: DescribeDiagnoseReportRequest, cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void): Promise<DescribeDiagnoseReportResponse>;
     /**
@@ -129,7 +129,7 @@ export declare class Client extends AbstractClient {
      */
     DisableCaches(req: DisableCachesRequest, cb?: (error: string, rep: DisableCachesResponse) => void): Promise<DisableCachesResponse>;
     /**
-     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情， <font color=red>将于 **2023年5月31日** 下线</font><br>
      */
     ListDiagnoseReport(req: ListDiagnoseReportRequest, cb?: (error: string, rep: ListDiagnoseReportResponse) => void): Promise<ListDiagnoseReportResponse>;
     /**

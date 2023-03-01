@@ -136,7 +136,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteEKSCluster(req: DeleteEKSClusterRequest, cb?: (error: string, rep: DeleteEKSClusterResponse) => void): Promise<DeleteEKSClusterResponse>;
     /**
-     * 获取事件、审计和日志的状态接口
+     * 获取事件、审计和日志的状态
      */
     DescribeEdgeLogSwitches(req: DescribeEdgeLogSwitchesRequest, cb?: (error: string, rep: DescribeEdgeLogSwitchesResponse) => void): Promise<DescribeEdgeLogSwitchesResponse>;
     /**

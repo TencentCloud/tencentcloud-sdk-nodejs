@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccountUser", req, cb);
     }
     /**
-     * 本接口(CreateDBInstanceHour)用于创建按量计费的MongoDB云数据库实例。
+     * 本接口（CreateDBInstanceHour）用于创建按量计费的MongoDB云数据库实例。
      */
     async CreateDBInstanceHour(req, cb) {
         return this.request("CreateDBInstanceHour", req, cb);

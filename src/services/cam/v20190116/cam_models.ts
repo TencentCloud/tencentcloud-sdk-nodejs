@@ -1396,43 +1396,55 @@ export interface GetUserResponse {
   /**
    * 子用户用户 UIN
    */
-  Uin: number
+  Uin?: number
 
   /**
    * 子用户用户名
    */
-  Name: string
+  Name?: string
 
   /**
    * 子用户 UID
    */
-  Uid: number
+  Uid?: number
 
   /**
       * 子用户备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
    * 子用户能否登录控制台 0-无法登录控制台，1-可以登录控制台
    */
-  ConsoleLogin: number
+  ConsoleLogin?: number
 
   /**
    * 手机号
    */
-  PhoneNum: string
+  PhoneNum?: string
 
   /**
    * 区号
    */
-  CountryCode: string
+  CountryCode?: string
 
   /**
    * 邮箱
    */
-  Email: string
+  Email?: string
+
+  /**
+      * 最近一次登录ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecentlyLoginIP?: string
+
+  /**
+      * 最近一次登录时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecentlyLoginTime?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

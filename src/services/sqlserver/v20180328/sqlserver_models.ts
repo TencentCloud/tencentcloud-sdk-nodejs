@@ -5388,12 +5388,12 @@ export interface ResourceTag {
   /**
    * 标签key
    */
-  TagKey: string
+  TagKey?: string
 
   /**
    * 标签value
    */
-  TagValue: string
+  TagValue?: string
 }
 
 /**

@@ -4502,11 +4502,11 @@ export interface ResourceTag {
     /**
       * 标签key
       */
-    TagKey: string;
+    TagKey?: string;
     /**
       * 标签value
       */
-    TagValue: string;
+    TagValue?: string;
 }
 /**
  * CreateBackupMigration返回参数结构体

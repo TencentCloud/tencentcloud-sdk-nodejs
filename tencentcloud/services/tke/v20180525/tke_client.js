@@ -220,7 +220,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEKSCluster", req, cb);
     }
     /**
-     * 获取事件、审计和日志的状态接口
+     * 获取事件、审计和日志的状态
      */
     async DescribeEdgeLogSwitches(req, cb) {
         return this.request("DescribeEdgeLogSwitches", req, cb);

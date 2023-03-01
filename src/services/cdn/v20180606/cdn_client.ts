@@ -590,7 +590,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * CreateDiagnoseUrl 用于添加域名诊断任务URL
+   * CreateDiagnoseUrl 用于添加域名诊断任务URL， <font color=red>将于 **2023年5月31日** 下线</font><br>
    */
   async CreateDiagnoseUrl(
     req: CreateDiagnoseUrlRequest,
@@ -630,7 +630,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeDiagnoseReport 用于获取指定报告id的内容
+   * DescribeDiagnoseReport 用于获取指定报告id的内容， <font color=red>将于 **2023年5月31日** 下线</font><br>
    */
   async DescribeDiagnoseReport(
     req: DescribeDiagnoseReportRequest,
@@ -660,7 +660,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+   * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情， <font color=red>将于 **2023年5月31日** 下线</font><br>
    */
   async ListDiagnoseReport(
     req: ListDiagnoseReportRequest,

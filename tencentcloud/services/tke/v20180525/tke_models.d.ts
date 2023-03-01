@@ -2785,6 +2785,16 @@ export interface EdgeCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Level?: string;
+    /**
+      * 是否支持自动提升集群配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoUpgradeClusterLevel?: boolean;
+    /**
+      * 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChargeType?: string;
 }
 /**
  * DescribeClusterNodePoolDetail返回参数结构体
@@ -4055,7 +4065,7 @@ export interface DescribeEdgeLogSwitchesResponse {
       * 集群日志开关集合
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SwitchSet: Array<string>;
+    SwitchSet?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7744,35 +7754,35 @@ export interface DescribeTKEEdgeClusterCredentialResponse {
       * 集群的接入地址信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Addresses: Array<IPAddress>;
+    Addresses?: Array<IPAddress>;
     /**
       * 集群的认证信息
       */
-    Credential: ClusterCredential;
+    Credential?: ClusterCredential;
     /**
       * 集群的公网访问信息
       */
-    PublicLB: EdgeClusterPublicLB;
+    PublicLB?: EdgeClusterPublicLB;
     /**
       * 集群的内网访问信息
       */
-    InternalLB: EdgeClusterInternalLB;
+    InternalLB?: EdgeClusterInternalLB;
     /**
       * 集群的CoreDns部署信息
       */
-    CoreDns: string;
+    CoreDns?: string;
     /**
       * 集群的健康检查多地域部署信息
       */
-    HealthRegion: string;
+    HealthRegion?: string;
     /**
       * 集群的健康检查部署信息
       */
-    Health: string;
+    Health?: string;
     /**
       * 是否部署GridDaemon以支持headless service
       */
-    GridDaemon: string;
+    GridDaemon?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

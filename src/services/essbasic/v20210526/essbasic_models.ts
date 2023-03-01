@@ -1000,8 +1000,9 @@ ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
   SignComponents?: Array<Component>
 
   /**
-   * 个人签署方指定签署控件类型，目前仅支持：OCR_ESIGN(AI智慧手写签名)
-   */
+      * 个人签署方指定签署控件类型，目前支持：OCR_ESIGN -AI智慧手写签名
+HANDWRITE -手写签名
+      */
   ComponentLimitType?: Array<string>
 
   /**

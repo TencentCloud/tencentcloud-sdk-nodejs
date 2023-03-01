@@ -18,6 +18,16 @@ const client = new tencentcloud.ims.v20201229.Client({
 })
 describe("ims.v20201229.test.js", function () {
 
+it("ims.v20201229.CreateImageModerationAsyncTask", async function () {
+    try {
+       const data = await client.CreateImageModerationAsyncTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ims.v20201229.ImageModeration", async function () {
     try {
        const data = await client.ImageModeration({})

@@ -869,7 +869,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取事件、审计和日志的状态接口
+   * 获取事件、审计和日志的状态
    */
   async DescribeEdgeLogSwitches(
     req: DescribeEdgeLogSwitchesRequest,
