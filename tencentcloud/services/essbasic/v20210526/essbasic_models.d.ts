@@ -14,7 +14,7 @@ export interface ChannelCreateConvertTaskApiResponse {
     /**
       * 任务id
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -38,7 +38,7 @@ export interface ChannelCreateFlowRemindsResponse {
  */
 export interface ChannelDeleteSealPoliciesRequest {
     /**
-      * 渠道信息
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -50,13 +50,13 @@ export interface ChannelDeleteSealPoliciesRequest {
       */
     UserIds: Array<string>;
     /**
-      * 操作人（用户）信息
-      */
-    Operator?: UserInfo;
-    /**
-      * 组织机构信息
+      * 组织机构信息，不用传
       */
     Organization?: OrganizationInfo;
+    /**
+      * 操作人（用户）信息，不用传
+      */
+    Operator?: UserInfo;
 }
 /**
  * ChannelBatchCancelFlows返回参数结构体
@@ -65,7 +65,7 @@ export interface ChannelBatchCancelFlowsResponse {
     /**
       * 签署流程批量撤销失败原因，错误信息与流程Id一一对应，成功为“”,失败则对应失败消息
       */
-    FailMessages: Array<string>;
+    FailMessages?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -91,7 +91,7 @@ export interface Department {
  */
 export interface ChannelCreateFlowSignReviewRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -133,7 +133,7 @@ export interface AuthFailMessage {
  */
 export interface DescribeFlowDetailInfoRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -142,20 +142,20 @@ export interface DescribeFlowDetailInfoRequest {
       */
     FlowIds?: Array<string>;
     /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
       * 合同组编号（备注：该参数和合同(流程)编号数组必须二选一）
       */
     FlowGroupId?: string;
+    /**
+      * 暂未开放
+      */
+    Operator?: UserInfo;
 }
 /**
  * ModifyExtendedService请求参数结构体
  */
 export interface ModifyExtendedServiceRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 
 注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId
       */
@@ -181,7 +181,7 @@ CLOSE:关闭
  */
 export interface DescribeResourceUrlsByFlowsRequest {
     /**
-      * 渠道应用相关信息。
+      * 应用相关信息。
 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
@@ -190,7 +190,7 @@ export interface DescribeResourceUrlsByFlowsRequest {
       */
     FlowIds?: Array<string>;
     /**
-      * 操作者的信息
+      * 操作者的信息，不用传
       */
     Operator?: UserInfo;
 }
@@ -218,7 +218,7 @@ export interface ChannelCreateFlowSignUrlResponse {
     /**
       * 签署人签署链接信息
       */
-    FlowApproverUrlInfos: Array<FlowApproverUrlInfo>;
+    FlowApproverUrlInfos?: Array<FlowApproverUrlInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -231,7 +231,7 @@ export interface CreateSealByImageResponse {
     /**
       * 印章id
       */
-    SealId: string;
+    SealId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -245,32 +245,32 @@ export interface OperateChannelTemplateResponse {
       * 腾讯电子签颁发给渠道的应用ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AppId: string;
+    AppId?: string;
     /**
       * 渠道方模板库模板唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TemplateId: string;
+    TemplateId?: string;
     /**
       * 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OperateResult: string;
+    OperateResult?: string;
     /**
       * 模板可见性, 全部可见-"all", 部分可见-"part"
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AuthTag: string;
+    AuthTag?: string;
     /**
       * 合作企业方第三方机构唯一标识数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyOrganizationOpenIds: Array<string>;
+    ProxyOrganizationOpenIds?: Array<string>;
     /**
       * 操作失败信息数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FailMessageList: Array<AuthFailMessage>;
+    FailMessageList?: Array<AuthFailMessage>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -337,15 +337,15 @@ export interface CreateConsoleLoginUrlResponse {
 4. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）
 5. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义
       */
-    ConsoleUrl: string;
+    ConsoleUrl?: string;
     /**
       * 渠道子客企业是否已开通腾讯电子签
       */
-    IsActivated: boolean;
+    IsActivated?: boolean;
     /**
       * 当前经办人是否已认证（false:未认证 true:已认证）
       */
-    ProxyOperatorIsVerified: boolean;
+    ProxyOperatorIsVerified?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -377,7 +377,7 @@ export interface SyncProxyOrganizationRequest {
       */
     ProxyLegalName?: string;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -386,7 +386,7 @@ export interface SyncProxyOrganizationRequest {
  */
 export interface CreateSealByImageRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -407,7 +407,7 @@ export interface CreateSealByImageRequest {
  */
 export interface ChannelCreateFlowRemindsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -476,7 +476,7 @@ export interface FlowApproverUrlInfo {
  */
 export interface ChannelCreateConvertTaskApiRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -492,7 +492,7 @@ export interface ChannelCreateConvertTaskApiRequest {
       */
     ResourceId: string;
     /**
-      * 调用方用户信息，userId 必填
+      * 调用方用户信息，不用传
       */
     Operator?: UserInfo;
     /**
@@ -505,7 +505,7 @@ export interface ChannelCreateConvertTaskApiRequest {
  */
 export interface ChannelCreateFlowByFilesRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent?: Agent;
     /**
@@ -557,10 +557,6 @@ export interface ChannelCreateFlowByFilesRequest {
       */
     NeedSignReview?: boolean;
     /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
       * 签署人校验方式
 VerifyCheck: 人脸识别（默认）
 MobileCheck：手机号验证
@@ -571,6 +567,10 @@ MobileCheck：手机号验证
       * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
       */
     SignBeanTag?: number;
+    /**
+      * 操作者的信息，不用传
+      */
+    Operator?: UserInfo;
 }
 /**
  * 应用相关信息
@@ -689,7 +689,7 @@ export interface ChannelCreateFlowGroupByFilesRequest {
       */
     FlowGroupName: string;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent?: Agent;
     /**
@@ -700,7 +700,7 @@ MobileCheck：手机号验证
       */
     ApproverVerifyType?: string;
     /**
-      * 操作者的信息
+      * 操作者的信息，此参数不用传
       */
     Operator?: UserInfo;
 }
@@ -711,26 +711,26 @@ export interface DescribeFlowDetailInfoResponse {
     /**
       * 渠道侧应用号Id
       */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
       * 渠道侧企业第三方Id
       */
-    ProxyOrganizationOpenId: string;
+    ProxyOrganizationOpenId?: string;
     /**
       * 合同(签署流程)的具体详细描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowInfo: Array<FlowDetailInfo>;
+    FlowInfo?: Array<FlowDetailInfo>;
     /**
       * 合同组编号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowGroupId: string;
+    FlowGroupId?: string;
     /**
       * 合同组名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowGroupName: string;
+    FlowGroupName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -860,7 +860,7 @@ export interface PrepareFlowsResponse {
     /**
       * 待发起文件确认页
       */
-    ConfirmUrl: string;
+    ConfirmUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -947,7 +947,7 @@ export interface GetDownloadFlowUrlResponse {
     /**
       * 合同（流程）下载地址
       */
-    DownLoadUrl: string;
+    DownLoadUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1001,19 +1001,19 @@ export interface DescribeTemplatesResponse {
     /**
       * 模板详情
       */
-    Templates: Array<TemplateInfo>;
+    Templates?: Array<TemplateInfo>;
     /**
       * 查询总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 查询数量
       */
-    Limit: number;
+    Limit?: number;
     /**
       * 查询起始偏移
       */
-    Offset: number;
+    Offset?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1043,11 +1043,11 @@ export interface ChannelVerifyPdfRequest {
       */
     FlowId: string;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent?: Agent;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1056,15 +1056,15 @@ export interface ChannelVerifyPdfRequest {
  */
 export interface CreateChannelFlowEvidenceReportRequest {
     /**
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      */
+    Agent: Agent;
+    /**
       * 签署流程编号
       */
     FlowId: string;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
-      */
-    Agent: Agent;
-    /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1075,12 +1075,12 @@ export interface ChannelVerifyPdfResponse {
     /**
       * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
       */
-    VerifyResult: number;
+    VerifyResult?: number;
     /**
       * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
 ；5-文件签名格式错误
       */
-    PdfVerifyResults: Array<PdfVerifyResult>;
+    PdfVerifyResults?: Array<PdfVerifyResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1128,13 +1128,13 @@ export interface CreateConsoleLoginUrlRequest {
       */
     AutoJumpBackEvent?: string;
     /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-    /**
       * 支持的授权方式,授权方式: "1" - 上传授权书认证  "2" - 法定代表人认证
       */
     AuthorizationTypes?: Array<number>;
+    /**
+      * 暂未开放
+      */
+    Operator?: UserInfo;
 }
 /**
  * 机构信息
@@ -1227,7 +1227,7 @@ export interface PdfVerifyResult {
  */
 export interface ChannelCancelMultiFlowSignQRCodeRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1235,7 +1235,7 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
       */
     QrCodeId: string;
     /**
-      * 用户信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1267,7 +1267,7 @@ export interface UploadFilesRequest {
  */
 export interface ChannelDescribeOrganizationSealsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1329,7 +1329,7 @@ export interface DescribeUsageRequest {
       */
     Offset?: number;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1338,7 +1338,7 @@ export interface DescribeUsageRequest {
  */
 export interface DescribeExtendedServiceAuthInfoRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
 
 注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId
 
@@ -1589,12 +1589,12 @@ export interface DescribeUsageResponse {
     /**
       * 用量明细条数
       */
-    Total: number;
+    Total?: number;
     /**
       * 用量明细
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Details: Array<UsageDetail>;
+    Details?: Array<UsageDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1680,7 +1680,7 @@ export interface ChannelDescribeEmployeesRequest {
       */
     Limit: number;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent?: Agent;
     /**
@@ -1694,7 +1694,7 @@ export interface ChannelDescribeEmployeesRequest {
       */
     Offset?: number;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1714,12 +1714,12 @@ export interface DescribeResourceUrlsByFlowsResponse {
     /**
       * 签署流程资源对应链接信息
       */
-    FlowResourceUrlInfos: Array<FlowResourceUrlInfo>;
+    FlowResourceUrlInfos?: Array<FlowResourceUrlInfo>;
     /**
       * 创建消息，对应多个合同ID，
 成功为“”,创建失败则对应失败消息
       */
-    ErrorMessages: Array<string>;
+    ErrorMessages?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1730,7 +1730,7 @@ export interface DescribeResourceUrlsByFlowsResponse {
  */
 export interface SyncProxyOrganizationOperatorsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。
+      * 应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。
       */
     Agent: Agent;
     /**
@@ -1742,7 +1742,7 @@ export interface SyncProxyOrganizationOperatorsRequest {
       */
     ProxyOrganizationOperators: Array<ProxyOrganizationOperator>;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1751,7 +1751,7 @@ export interface SyncProxyOrganizationOperatorsRequest {
  */
 export interface CreateSignUrlsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1793,7 +1793,7 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
       */
     OrganizationOpenId?: string;
     /**
-      * 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人
+      * 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息
       */
     OpenId?: string;
     /**
@@ -1805,7 +1805,7 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
       */
     JumpUrl?: string;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1814,7 +1814,7 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
  */
 export interface ChannelCreateMultiFlowSignQRCodeRequest {
     /**
-      * 渠道应用相关信息。
+      * 应用相关信息。
 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
       */
     Agent: Agent;
@@ -1849,13 +1849,13 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
       */
     CallbackUrl?: string;
     /**
-      * 用户信息
-      */
-    Operator?: UserInfo;
-    /**
       * 限制二维码用户条件（已弃用）
       */
     ApproverRestrictions?: ApproverRestriction;
+    /**
+      * 暂未开放
+      */
+    Operator?: UserInfo;
 }
 /**
  * 一码多扫签署二维码对象
@@ -1879,7 +1879,7 @@ export interface SignQrCode {
  */
 export interface ChannelGetTaskResultApiRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -1887,7 +1887,7 @@ export interface ChannelGetTaskResultApiRequest {
       */
     TaskId: string;
     /**
-      * 操作者的信息
+      * 操作者的信息，不用传
       */
     Operator?: UserInfo;
     /**
@@ -1943,25 +1943,25 @@ export interface CreateFlowsByTemplatesResponse {
     /**
       * 多个合同ID
       */
-    FlowIds: Array<string>;
+    FlowIds?: Array<string>;
     /**
       * 渠道的业务信息，限制1024字符
       */
-    CustomerData: Array<string>;
+    CustomerData?: Array<string>;
     /**
       * 创建消息，对应多个合同ID，
 成功为“”,创建失败则对应失败消息
       */
-    ErrorMessages: Array<string>;
+    ErrorMessages?: Array<string>;
     /**
       * 预览模式下返回的预览文件url数组
       */
-    PreviewUrls: Array<string>;
+    PreviewUrls?: Array<string>;
     /**
       * 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；
 如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
       */
-    TaskInfos: Array<TaskInfo>;
+    TaskInfos?: Array<TaskInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1972,7 +1972,7 @@ export interface CreateFlowsByTemplatesResponse {
  */
 export interface DescribeChannelFlowEvidenceReportRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
       */
     Agent: Agent;
     /**
@@ -1980,7 +1980,7 @@ export interface DescribeChannelFlowEvidenceReportRequest {
       */
     ReportId: string;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -1994,12 +1994,12 @@ export interface SyncProxyOrganizationOperatorsResponse {
 2-部分成功
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: number;
+    Status?: number;
     /**
       * 同步失败经办人及其失败原因
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FailedList: Array<SyncFailReason>;
+    FailedList?: Array<SyncFailReason>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2212,11 +2212,11 @@ export interface CreateSignUrlsResponse {
     /**
       * 签署参与者签署H5链接信息数组
       */
-    SignUrlInfos: Array<SignUrlInfo>;
+    SignUrlInfos?: Array<SignUrlInfo>;
     /**
       * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
       */
-    ErrorMessages: Array<string>;
+    ErrorMessages?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2248,7 +2248,7 @@ export interface UploadFilesResponse {
  */
 export interface ChannelCreateBatchCancelFlowUrlRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2256,7 +2256,7 @@ export interface ChannelCreateBatchCancelFlowUrlRequest {
       */
     FlowIds: Array<string>;
     /**
-      * 操作人信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -2286,7 +2286,7 @@ export interface ApproverRestriction {
  */
 export interface PrepareFlowsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2298,7 +2298,7 @@ export interface PrepareFlowsRequest {
       */
     JumpUrl: string;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -2310,7 +2310,7 @@ export interface ChannelCreateFlowByFilesResponse {
       * 合同签署流程ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowId: string;
+    FlowId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2356,7 +2356,7 @@ export interface ChannelCancelMultiFlowSignQRCodeResponse {
  */
 export interface ChannelCreateReleaseFlowRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2376,11 +2376,11 @@ export interface ChannelCreateReleaseFlowRequest {
       */
     CallbackUrl?: string;
     /**
-      * 机构信息
+      * 暂未开放
       */
     Organization?: OrganizationInfo;
     /**
-      * 用户信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -2392,12 +2392,12 @@ export interface ChannelCreateFlowGroupByFilesResponse {
       * 合同组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowGroupId: string;
+    FlowGroupId?: string;
     /**
       * 子合同ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowIds: Array<string>;
+    FlowIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2410,11 +2410,11 @@ export interface ChannelCreateMultiFlowSignQRCodeResponse {
     /**
       * 签署二维码对象
       */
-    QrCode: SignQrCode;
+    QrCode?: SignQrCode;
     /**
       * 签署链接对象
       */
-    SignUrls: SignUrl;
+    SignUrls?: SignUrl;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2490,7 +2490,7 @@ export interface ChannelGetTaskResultApiResponse {
     /**
       * 任务Id
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 任务状态，需要关注的状态
 0  :NeedTranform   - 任务已提交
@@ -2500,7 +2500,7 @@ export interface ChannelGetTaskResultApiResponse {
 -6 :ProcessFailed  - 转换失败
 -13:ProcessTimeout - 转换文件超时
       */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
       * 状态描述，需要关注的状态
 NeedTranform   - 任务已提交
@@ -2510,16 +2510,16 @@ DownloadFailed - 下载失败
 ProcessFailed  - 转换失败
 ProcessTimeout - 转换文件超时
       */
-    TaskMessage: string;
+    TaskMessage?: string;
     /**
       * 资源Id，也是FileId，用于文件发起使用
       */
-    ResourceId: string;
+    ResourceId?: string;
     /**
       * 预览文件Url，有效期30分钟
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PreviewUrl: string;
+    PreviewUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2783,7 +2783,7 @@ SIGN_PAGING_SEAL - 可以指定印章ID
  */
 export interface GetDownloadFlowUrlRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2791,7 +2791,7 @@ export interface GetDownloadFlowUrlRequest {
       */
     DownLoadFlows?: Array<DownloadFlowInfo>;
     /**
-      * 操作者的信息
+      * 操作者的信息，不用传
       */
     Operator?: UserInfo;
 }
@@ -2800,7 +2800,7 @@ export interface GetDownloadFlowUrlRequest {
  */
 export interface ChannelBatchCancelFlowsRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2820,7 +2820,7 @@ export interface ChannelBatchCancelFlowsRequest {
       */
     CancelMessageFormat?: number;
     /**
-      * 操作人信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -2829,7 +2829,7 @@ export interface ChannelBatchCancelFlowsRequest {
  */
 export interface ChannelUpdateSealStatusRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2875,17 +2875,13 @@ export interface ChannelCancelFlowRequest {
       */
     FlowId: string;
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent?: Agent;
     /**
       * 撤回原因，最大不超过200字符
       */
     CancelMessage?: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
     /**
       * 撤销理由自定义格式；选项：
 0 默认格式
@@ -2894,13 +2890,17 @@ export interface ChannelCancelFlowRequest {
 3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】
       */
     CancelMessageFormat?: number;
+    /**
+      * 暂未开放
+      */
+    Operator?: UserInfo;
 }
 /**
  * DescribeTemplates请求参数结构体
  */
 export interface DescribeTemplatesRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -2949,11 +2949,11 @@ export interface DescribeTemplatesRequest {
  */
 export interface ChannelCreateSealPolicyRequest {
     /**
-      * 用户渠道信息
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
-      * 指定印章
+      * 指定印章ID
       */
     SealId: string;
     /**
@@ -2961,11 +2961,11 @@ export interface ChannelCreateSealPolicyRequest {
       */
     UserIds: Array<string>;
     /**
-      * 企业机构信息
+      * 企业机构信息，不用传
       */
     Organization?: OrganizationInfo;
     /**
-      * 操作人（用户）信息
+      * 操作人（用户）信息，不用传
       */
     Operator?: UserInfo;
 }
@@ -3024,7 +3024,7 @@ export interface OccupiedSeal {
  */
 export interface CreateFlowsByTemplatesRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -3042,7 +3042,7 @@ export interface CreateFlowsByTemplatesRequest {
       */
     PreviewType?: number;
     /**
-      * 操作者的信息
+      * 操作者的信息，不用传
       */
     Operator?: UserInfo;
 }
@@ -3086,15 +3086,15 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
     /**
       * 批量撤销url
       */
-    BatchCancelFlowUrl: string;
+    BatchCancelFlowUrl?: string;
     /**
       * 签署流程批量撤销失败原因
       */
-    FailMessages: Array<string>;
+    FailMessages?: Array<string>;
     /**
       * 签署撤销url过期时间-年月日-时分秒
       */
-    UrlExpireOn: string;
+    UrlExpireOn?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3105,7 +3105,7 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
  */
 export interface OperateChannelTemplateRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
       */
     Agent: Agent;
     /**
@@ -3125,7 +3125,7 @@ export interface OperateChannelTemplateRequest {
       */
     AuthTag?: string;
     /**
-      * 操作者的信息
+      * 暂未开放
       */
     Operator?: UserInfo;
 }
@@ -3137,18 +3137,18 @@ export interface CreateChannelFlowEvidenceReportResponse {
       * 出证报告 ID，用于查询出证报告接口DescribeChannelFlowEvidenceReport时用到
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportId: string;
+    ReportId?: string;
     /**
       * 执行中：EvidenceStatusExecuting
 成功：EvidenceStatusSuccess
 失败：EvidenceStatusFailed
       */
-    Status: string;
+    Status?: string;
     /**
       * 废除，字段无效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportUrl: string;
+    ReportUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3177,20 +3177,20 @@ export interface ChannelDescribeEmployeesResponse {
       * 员工数据列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Employees: Array<Staff>;
+    Employees?: Array<Staff>;
     /**
       * 偏移量，默认为0，最大为20000
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset: number;
+    Offset?: number;
     /**
       * 返回最大数量，最大为20
       */
-    Limit: number;
+    Limit?: number;
     /**
       * 符合条件的员工数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3217,13 +3217,13 @@ export interface DescribeChannelFlowEvidenceReportResponse {
       * 出证报告 URL
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportUrl: string;
+    ReportUrl?: string;
     /**
       * 执行中：EvidenceStatusExecuting
 成功：EvidenceStatusSuccess
 失败：EvidenceStatusFailed
       */
-    Status: string;
+    Status?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3243,7 +3243,7 @@ export interface ChannelUpdateSealStatusResponse {
  */
 export interface ChannelCreateFlowSignUrlRequest {
     /**
-      * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
       */
     Agent: Agent;
     /**

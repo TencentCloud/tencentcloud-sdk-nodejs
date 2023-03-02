@@ -287,6 +287,11 @@ FailedOperation.UnKnowError：表示识别失败；
    * 识别到的内容。
    */
   SingleInvoiceInfos: Array<SingleInvoiceInfo>
+
+  /**
+   * 发票处于识别图片或PDF文件中的页教，默认从1开始。
+   */
+  Page?: number
 }
 
 /**
@@ -509,12 +514,12 @@ export interface TollInvoiceOCRResponse {
   /**
    * 过路过桥费发票识别结果，具体内容请点击左侧链接。
    */
-  TollInvoiceInfos: Array<TollInvoiceInfo>
+  TollInvoiceInfos?: Array<TollInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2029,102 +2034,102 @@ export interface TrainTicketOCRResponse {
   /**
    * 编号
    */
-  TicketNum: string
+  TicketNum?: string
 
   /**
    * 出发站
    */
-  StartStation: string
+  StartStation?: string
 
   /**
    * 到达站
    */
-  DestinationStation: string
+  DestinationStation?: string
 
   /**
    * 出发时间
    */
-  Date: string
+  Date?: string
 
   /**
    * 车次
    */
-  TrainNum: string
+  TrainNum?: string
 
   /**
    * 座位号
    */
-  Seat: string
+  Seat?: string
 
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
 
   /**
    * 票价
    */
-  Price: string
+  Price?: string
 
   /**
    * 席别
    */
-  SeatCategory: string
+  SeatCategory?: string
 
   /**
    * 身份证号
    */
-  ID: string
+  ID?: string
 
   /**
    * 发票消费类型：交通
    */
-  InvoiceType: string
+  InvoiceType?: string
 
   /**
    * 序列号
    */
-  SerialNumber: string
+  SerialNumber?: string
 
   /**
    * 加收票价
    */
-  AdditionalCost: string
+  AdditionalCost?: string
 
   /**
    * 手续费
    */
-  HandlingFee: string
+  HandlingFee?: string
 
   /**
    * 大写金额（票面有大写金额该字段才有值）
    */
-  LegalAmount: string
+  LegalAmount?: string
 
   /**
    * 售票站
    */
-  TicketStation: string
+  TicketStation?: string
 
   /**
    * 原票价（一般有手续费的才有原始票价字段）
    */
-  OriginalPrice: string
+  OriginalPrice?: string
 
   /**
    * 发票类型：火车票、火车票补票、火车票退票凭证
    */
-  InvoiceStyle: string
+  InvoiceStyle?: string
 
   /**
    * 收据号码
    */
-  ReceiptNumber: string
+  ReceiptNumber?: string
 
   /**
    * 仅供报销使用：1为是，0为否
    */
-  IsReceipt: string
+  IsReceipt?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2530,64 +2535,64 @@ export interface TaxiInvoiceOCRResponse {
   /**
    * 发票代码
    */
-  InvoiceNum: string
+  InvoiceNum?: string
 
   /**
    * 发票号码
    */
-  InvoiceCode: string
+  InvoiceCode?: string
 
   /**
    * 日期
    */
-  Date: string
+  Date?: string
 
   /**
    * 金额
    */
-  Fare: string
+  Fare?: string
 
   /**
    * 上车时间
    */
-  GetOnTime: string
+  GetOnTime?: string
 
   /**
    * 下车时间
    */
-  GetOffTime: string
+  GetOffTime?: string
 
   /**
    * 里程
    */
-  Distance: string
+  Distance?: string
 
   /**
    * 发票所在地
    */
-  Location: string
+  Location?: string
 
   /**
    * 车牌号
    */
-  PlateNumber: string
+  PlateNumber?: string
 
   /**
    * 发票消费类型
    */
-  InvoiceType: string
+  InvoiceType?: string
 
   /**
       * 省
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Province: string
+  Province?: string
 
   /**
       * 市
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  City: string
+  City?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2704,12 +2709,12 @@ export interface RecognizeMedicalInvoiceOCRResponse {
   /**
    * 识别出的字段信息
    */
-  MedicalInvoiceInfos: Array<MedicalInvoiceInfo>
+  MedicalInvoiceInfos?: Array<MedicalInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2724,7 +2729,7 @@ export interface MixedInvoiceOCRResponse {
   /**
    * 混贴票据识别结果，具体内容请点击左侧链接。
    */
-  MixedInvoiceItems: Array<MixedInvoiceItem>
+  MixedInvoiceItems?: Array<MixedInvoiceItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2993,12 +2998,12 @@ export interface DutyPaidProofOCRResponse {
   /**
    * 完税证明识别结果，具体内容请点击左侧链接。
    */
-  DutyPaidProofInfos: Array<DutyPaidProofInfo>
+  DutyPaidProofInfos?: Array<DutyPaidProofInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3273,12 +3278,12 @@ export interface InvoiceGeneralOCRResponse {
   /**
    * 通用机打发票识别结果，具体内容请点击左侧链接。
    */
-  InvoiceGeneralInfos: Array<InvoiceGeneralInfo>
+  InvoiceGeneralInfos?: Array<InvoiceGeneralInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3437,12 +3442,12 @@ export interface VatRollInvoiceOCRResponse {
   /**
    * 增值税发票（卷票）识别结果，具体内容请点击左侧链接。
    */
-  VatRollInvoiceInfos: Array<VatRollInvoiceInfo>
+  VatRollInvoiceInfos?: Array<VatRollInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4760,7 +4765,7 @@ export interface FlightInvoiceOCRResponse {
   /**
    * 机票行程单识别结果，具体内容请点击左侧链接。
    */
-  FlightInvoiceInfos: Array<FlightInvoiceInfo>
+  FlightInvoiceInfos?: Array<FlightInvoiceInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5351,12 +5356,12 @@ export interface BankSlipOCRResponse {
   /**
    * 银行回单识别结果，具体内容请点击左侧链接。
    */
-  BankSlipInfos: Array<BankSlipInfo>
+  BankSlipInfos?: Array<BankSlipInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5778,7 +5783,7 @@ export interface MixedInvoiceOCRRequest {
 15：非税发票
 16：全电发票
 ----------------------
--1：其他发票,（仅返回，本参数不支持传入-1，请在ReturnOther中控制是否返回）
+-1：其他发票,（只传入此类型时，图片均采用其他票类型进行识别）
       */
   Types?: Array<number>
 
@@ -5798,6 +5803,11 @@ No：不识别其他类型发票
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
+
+  /**
+   * 是否开启PDF多页识别，默认值为false，开启后可同时支持多页PDF的识别返回，仅支持返回文件前30页。开启后IsPDF和PdfPageNumber入参不进行控制。
+   */
+  ReturnMultiplePage?: boolean
 }
 
 /**
@@ -6079,12 +6089,12 @@ export interface ShipInvoiceOCRResponse {
   /**
    * 轮船票识别结果，具体内容请点击左侧链接。
    */
-  ShipInvoiceInfos: Array<ShipInvoiceInfo>
+  ShipInvoiceInfos?: Array<ShipInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6468,12 +6478,12 @@ export interface BusInvoiceOCRResponse {
   /**
    * 汽车票识别结果，具体内容请点击左侧链接。
    */
-  BusInvoiceInfos: Array<BusInvoiceInfo>
+  BusInvoiceInfos?: Array<BusInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6795,45 +6805,45 @@ export interface QuotaInvoiceOCRResponse {
   /**
    * 发票号码
    */
-  InvoiceNum: string
+  InvoiceNum?: string
 
   /**
    * 发票代码
    */
-  InvoiceCode: string
+  InvoiceCode?: string
 
   /**
    * 大写金额
    */
-  Rate: string
+  Rate?: string
 
   /**
    * 小写金额
    */
-  RateNum: string
+  RateNum?: string
 
   /**
    * 发票消费类型
    */
-  InvoiceType: string
+  InvoiceType?: string
 
   /**
       * 省
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Province: string
+  Province?: string
 
   /**
       * 市
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  City: string
+  City?: string
 
   /**
       * 是否有公司印章（1有 0无 空为识别不出）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HasStamp: string
+  HasStamp?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

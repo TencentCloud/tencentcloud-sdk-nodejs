@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     ChannelCreateMultiFlowSignQRCode(req: ChannelCreateMultiFlowSignQRCodeRequest, cb?: (error: string, rep: ChannelCreateMultiFlowSignQRCodeResponse) => void): Promise<ChannelCreateMultiFlowSignQRCodeResponse>;
     /**
-     * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建签署流程。此接口静默签能力不可直接使用，需要运营申请
+     * 接口（ChannelCreateFlowByFiles）用于通过文件创建签署流程。此接口静默签能力不可直接使用，需要运营申请
      */
     ChannelCreateFlowByFiles(req: ChannelCreateFlowByFilesRequest, cb?: (error: string, rep: ChannelCreateFlowByFilesResponse) => void): Promise<ChannelCreateFlowByFilesResponse>;
     /**
@@ -44,7 +44,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyExtendedService(req: ModifyExtendedServiceRequest, cb?: (error: string, rep: ModifyExtendedServiceResponse) => void): Promise<ModifyExtendedServiceResponse>;
     /**
-     * 渠道创建文件转换任务
+     * 创建文件转换任务
      */
     ChannelCreateConvertTaskApi(req: ChannelCreateConvertTaskApiRequest, cb?: (error: string, rep: ChannelCreateConvertTaskApiResponse) => void): Promise<ChannelCreateConvertTaskApiResponse>;
     /**
@@ -53,18 +53,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeUsage(req: DescribeUsageRequest, cb?: (error: string, rep: DescribeUsageResponse) => void): Promise<DescribeUsageResponse>;
     /**
-     * 渠道版撤销签署流程接口，可以撤回：未全部签署完成；不可以撤回（终态）：已全部签署完成、已拒签、已过期、已撤回。
+     * 撤销签署流程接口，可以撤回：未全部签署完成；不可以撤回（终态）：已全部签署完成、已拒签、已过期、已撤回。
 注意:
 能撤回合同的只能是合同的发起人或者发起企业的超管、法人
-
      */
     ChannelCancelFlow(req: ChannelCancelFlowRequest, cb?: (error: string, rep: ChannelCancelFlowResponse) => void): Promise<ChannelCancelFlowResponse>;
     /**
-     * 将指定印章授权给企业下的某些员工
+     * 将指定印章授权给子客企业下的某些员工
      */
     ChannelCreateSealPolicy(req: ChannelCreateSealPolicyRequest, cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void): Promise<ChannelCreateSealPolicyResponse>;
     /**
-     * 查询渠道子客企业电子印章，需要操作者具有管理印章权限
+     * 查询子客企业电子印章，需要操作者具有管理印章权限
 客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
      */
     ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
@@ -96,7 +95,7 @@ export declare class Client extends AbstractClient {
      */
     CreateConsoleLoginUrl(req: CreateConsoleLoginUrlRequest, cb?: (error: string, rep: CreateConsoleLoginUrlResponse) => void): Promise<CreateConsoleLoginUrlResponse>;
     /**
-     * 此接口（ChannelCreateBoundFlows）用于渠道子客领取合同，经办人需要有相应的角色，领取后的合同不能重复领取。
+     * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，领取后的合同不能重复领取。
      */
     ChannelCreateBoundFlows(req: ChannelCreateBoundFlowsRequest, cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void): Promise<ChannelCreateBoundFlowsResponse>;
     /**
@@ -109,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     ChannelCreateBatchCancelFlowUrl(req: ChannelCreateBatchCancelFlowUrlRequest, cb?: (error: string, rep: ChannelCreateBatchCancelFlowUrlResponse) => void): Promise<ChannelCreateBatchCancelFlowUrlResponse>;
     /**
-     * 渠道版查询转换任务状态
+     * 查询转换任务状态
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
@@ -118,7 +117,7 @@ export declare class Client extends AbstractClient {
      */
     CreateChannelFlowEvidenceReport(req: CreateChannelFlowEvidenceReportRequest, cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void): Promise<CreateChannelFlowEvidenceReportResponse>;
     /**
-     * 本接口（ChannelUpdateSealStatus）由于渠道版更新印章状态
+     * 本接口（ChannelUpdateSealStatus）用于渠道为子客企业更新印章状态
      */
     ChannelUpdateSealStatus(req: ChannelUpdateSealStatusRequest, cb?: (error: string, rep: ChannelUpdateSealStatusResponse) => void): Promise<ChannelUpdateSealStatusResponse>;
     /**
@@ -128,15 +127,14 @@ export declare class Client extends AbstractClient {
     /**
      * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
 当前接口限制最多合同（流程）50个.
-
      */
     GetDownloadFlowUrl(req: GetDownloadFlowUrlRequest, cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void): Promise<GetDownloadFlowUrlResponse>;
     /**
-     * 渠道版创建签署链接，需要联系运营人员开白后才可使用
+     * 创建签署链接，需要联系运营人员开白后才可使用
      */
     ChannelCreateFlowSignUrl(req: ChannelCreateFlowSignUrlRequest, cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void): Promise<ChannelCreateFlowSignUrlResponse>;
     /**
-     * 渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+     * 发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
 合同发起人必须在电子签已经进行实名。
      */
     ChannelCreateReleaseFlow(req: ChannelCreateReleaseFlowRequest, cb?: (error: string, rep: ChannelCreateReleaseFlowResponse) => void): Promise<ChannelCreateReleaseFlowResponse>;
@@ -197,7 +195,6 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     SyncProxyOrganizationOperators(req: SyncProxyOrganizationOperatorsRequest, cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void): Promise<SyncProxyOrganizationOperatorsResponse>;
     /**
      * 查询出证报告，返回报告 URL。
-
      */
     DescribeChannelFlowEvidenceReport(req: DescribeChannelFlowEvidenceReportRequest, cb?: (error: string, rep: DescribeChannelFlowEvidenceReportResponse) => void): Promise<DescribeChannelFlowEvidenceReportResponse>;
     /**

@@ -3795,6 +3795,7 @@ PEERCONNECTION：对等连接；
 NAT：NAT网关；
 NORMAL_CVM：普通云服务器；
 CCN：云联网网关；
+NONEXTHOP：无下一跳；
       */
   NextHopType?: string
 
@@ -3805,7 +3806,8 @@ CCN：云联网网关；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云联网ID，形如：ccn-44csczop；
+下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination?: string
 
@@ -3868,13 +3870,13 @@ export interface DescribeNetDetectStatesResponse {
       * 符合条件的网络探测验证结果对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NetDetectStateSet: Array<NetDetectState>
+  NetDetectStateSet?: Array<NetDetectState>
 
   /**
       * 符合条件的网络探测验证结果对象数量。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3917,13 +3919,13 @@ export interface AllocateIp6AddressesBandwidthResponse {
  */
 export interface DescribeNetDetectStatesRequest {
   /**
-   * 网络探测实例`ID`数组。形如：[`netd-12345678`]
+   * 网络探测实例`ID`数组。形如：[`netd-12345678`]。
    */
   NetDetectIds?: Array<string>
 
   /**
       * 过滤条件，参数不支持同时指定NetDetectIds和Filters。
-<li>net-detect-id - String - （过滤条件）网络探测实例ID，形如：netd-12345678</li>
+<li>net-detect-id - String - （过滤条件）网络探测实例ID，形如：netd-12345678。</li>
       */
   Filters?: Array<Filter>
 
@@ -4483,7 +4485,7 @@ export interface ModifyNatGatewayAttributeResponse {
  */
 export interface DescribeNetDetectsRequest {
   /**
-   * 网络探测实例`ID`数组。形如：[`netd-12345678`]
+   * 网络探测实例`ID`数组。形如：[`netd-12345678`]。
    */
   NetDetectIds?: Array<string>
 
@@ -5589,14 +5591,29 @@ export interface CreateFlowLogResponse {
  */
 export interface DefaultVpcSubnet {
   /**
-   * 默认VpcId
+   * 默认VpcId。
    */
   VpcId: string
 
   /**
-   * 默认SubnetId
+   * 默认SubnetId。
    */
   SubnetId: string
+
+  /**
+   * 默认Vpc名字。
+   */
+  VpcName?: string
+
+  /**
+   * 默认Subnet名字。
+   */
+  SubnetName?: string
+
+  /**
+   * 默认子网网段。
+   */
+  CidrBlock?: string
 }
 
 /**
@@ -6064,6 +6081,7 @@ PEERCONNECTION：对等连接；
 NAT：NAT网关；
 NORMAL_CVM：普通云服务器；
 CCN：云联网网关；
+NONEXTHOP：无下一跳；
       */
   NextHopType: string
 
@@ -6074,7 +6092,8 @@ CCN：云联网网关；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云联网网关，形如：ccn-12345678；
+下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination: string
 
@@ -6482,7 +6501,7 @@ export interface CreateVpnGatewayRoutesResponse {
  */
 export interface CreateNetDetectRequest {
   /**
-   * `VPC`实例`ID`。形如：`vpc-12345678`
+   * `VPC`实例`ID`。形如：`vpc-12345678`。
    */
   VpcId: string
 
@@ -6509,6 +6528,7 @@ PEERCONNECTION：对等连接；
 NAT：NAT网关；
 NORMAL_CVM：普通云服务器；
 CCN：云联网网关；
+NONEXTHOP：无下一跳；
       */
   NextHopType?: string
 
@@ -6519,7 +6539,8 @@ CCN：云联网网关；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
+下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination?: string
 
@@ -7015,7 +7036,7 @@ export interface CreateSecurityGroupResponse {
   /**
    * 安全组对象。
    */
-  SecurityGroup: SecurityGroup
+  SecurityGroup?: SecurityGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10187,7 +10208,7 @@ export interface AttachCcnInstancesResponse {
  */
 export interface CreateDefaultVpcResponse {
   /**
-   * 默认VPC和子网ID
+   * 默认VPC和子网ID。
    */
   Vpc?: DefaultVpcSubnet
 
@@ -11076,7 +11097,7 @@ export interface CreateNetDetectResponse {
   /**
    * 网络探测（NetDetect）对象。
    */
-  NetDetect: NetDetect
+  NetDetect?: NetDetect
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11214,7 +11235,7 @@ export interface CreateNatGatewayRequest {
  */
 export interface DeleteNetDetectRequest {
   /**
-   * 网络探测实例`ID`。形如：`netd-12345678`
+   * 网络探测实例`ID`。形如：`netd-12345678`。
    */
   NetDetectId: string
 }
@@ -14758,7 +14779,7 @@ export interface CreateSecurityGroupRequest {
   ProjectId?: string
 
   /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
 }

@@ -1700,6 +1700,11 @@ export interface CreateFlowApproversRequest {
    * 补充签署人信息
    */
   Approvers: Array<FillApproverInfo>
+
+  /**
+   * 企微消息中的发起人
+   */
+  Initiator?: string
 }
 
 /**

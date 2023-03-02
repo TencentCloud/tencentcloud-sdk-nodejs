@@ -3185,7 +3185,7 @@ export interface CreateLiveTranscodeRuleRequest {
       */
     DomainName: string;
     /**
-      * 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填空。
+      * 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填""。
       */
     AppName: string;
     /**

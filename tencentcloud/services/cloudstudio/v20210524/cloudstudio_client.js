@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkspaceByTemplate", req, cb);
     }
     /**
+     * 为工作空间创建临时访问凭证，重复调用会创建新的 Token，旧的 Token 将会自动失效
+     */
+    async CreateWorkspaceTemporaryToken(req, cb) {
+        return this.request("CreateWorkspaceTemporaryToken", req, cb);
+    }
+    /**
      * 修改模板默认代码仓库
      */
     async ModifyCustomizeTemplateVersionControl(req, cb) {

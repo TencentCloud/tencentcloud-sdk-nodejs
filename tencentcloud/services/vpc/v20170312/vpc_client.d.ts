@@ -226,7 +226,7 @@ export declare class Client extends AbstractClient {
      */
     DisassociateVpcEndPointSecurityGroups(req: DisassociateVpcEndPointSecurityGroupsRequest, cb?: (error: string, rep: DisassociateVpcEndPointSecurityGroupsResponse) => void): Promise<DisassociateVpcEndPointSecurityGroupsResponse>;
     /**
-     * 删除路由表
+     * 本接口（DeleteRouteTable）用于删除路由表。
      */
     DeleteRouteTable(req: DeleteRouteTableRequest, cb?: (error: string, rep: DeleteRouteTableResponse) => void): Promise<DeleteRouteTableResponse>;
     /**
@@ -776,7 +776,7 @@ export declare class Client extends AbstractClient {
 * 支持基础网络、VPC，返回VpcId为0
 * 只支持VPC，返回默认VPC信息
 
-您也可以通过 Force 参数，强制返回默认VPC
+您也可以通过 Force 参数，强制返回默认VPC。
      */
     CreateDefaultVpc(req: CreateDefaultVpcRequest, cb?: (error: string, rep: CreateDefaultVpcResponse) => void): Promise<CreateDefaultVpcResponse>;
     /**
@@ -808,7 +808,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeNetworkAclQuintupleEntries(req: DescribeNetworkAclQuintupleEntriesRequest, cb?: (error: string, rep: DescribeNetworkAclQuintupleEntriesResponse) => void): Promise<DescribeNetworkAclQuintupleEntriesResponse>;
     /**
-     * 本接口(DeleteNetDetect)用于删除网络探测实例。
+     * 本接口（DeleteNetDetect）用于删除网络探测实例。
      */
     DeleteNetDetect(req: DeleteNetDetectRequest, cb?: (error: string, rep: DeleteNetDetectResponse) => void): Promise<DeleteNetDetectResponse>;
     /**
@@ -1319,7 +1319,7 @@ LimitTypes取值范围：
      */
     CreateRoutes(req: CreateRoutesRequest, cb?: (error: string, rep: CreateRoutesResponse) => void): Promise<CreateRoutesResponse>;
     /**
-     * 本接口(CreateNetDetect)用于创建网络探测。
+     * 本接口（CreateNetDetect）用于创建网络探测。
      */
     CreateNetDetect(req: CreateNetDetectRequest, cb?: (error: string, rep: CreateNetDetectResponse) => void): Promise<CreateNetDetectResponse>;
     /**

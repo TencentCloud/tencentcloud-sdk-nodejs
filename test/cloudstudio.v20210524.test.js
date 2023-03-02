@@ -58,6 +58,16 @@ it("cloudstudio.v20210524.CreateWorkspaceByTemplate", async function () {
     }
 })
 
+it("cloudstudio.v20210524.CreateWorkspaceTemporaryToken", async function () {
+    try {
+       const data = await client.CreateWorkspaceTemporaryToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudstudio.v20210524.ModifyCustomizeTemplateVersionControl", async function () {
     try {
        const data = await client.ModifyCustomizeTemplateVersionControl({})

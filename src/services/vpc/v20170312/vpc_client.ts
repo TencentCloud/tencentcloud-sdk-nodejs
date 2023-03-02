@@ -1273,7 +1273,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除路由表
+   * 本接口（DeleteRouteTable）用于删除路由表。
    */
   async DeleteRouteTable(
     req: DeleteRouteTableRequest,
@@ -2471,7 +2471,7 @@ export class Client extends AbstractClient {
 * 支持基础网络、VPC，返回VpcId为0
 * 只支持VPC，返回默认VPC信息
 
-您也可以通过 Force 参数，强制返回默认VPC
+您也可以通过 Force 参数，强制返回默认VPC。
      */
   async CreateDefaultVpc(
     req: CreateDefaultVpcRequest,
@@ -2539,7 +2539,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteNetDetect)用于删除网络探测实例。
+   * 本接口（DeleteNetDetect）用于删除网络探测实例。
    */
   async DeleteNetDetect(
     req: DeleteNetDetectRequest,
@@ -3686,7 +3686,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口(CreateNetDetect)用于创建网络探测。
+   * 本接口（CreateNetDetect）用于创建网络探测。
    */
   async CreateNetDetect(
     req: CreateNetDetectRequest,

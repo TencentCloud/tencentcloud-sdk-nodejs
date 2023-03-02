@@ -346,7 +346,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateVpcEndPointSecurityGroups", req, cb);
     }
     /**
-     * 删除路由表
+     * 本接口（DeleteRouteTable）用于删除路由表。
      */
     async DeleteRouteTable(req, cb) {
         return this.request("DeleteRouteTable", req, cb);
@@ -1112,7 +1112,7 @@ class Client extends abstract_client_1.AbstractClient {
 * 支持基础网络、VPC，返回VpcId为0
 * 只支持VPC，返回默认VPC信息
 
-您也可以通过 Force 参数，强制返回默认VPC
+您也可以通过 Force 参数，强制返回默认VPC。
      */
     async CreateDefaultVpc(req, cb) {
         return this.request("CreateDefaultVpc", req, cb);
@@ -1156,7 +1156,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkAclQuintupleEntries", req, cb);
     }
     /**
-     * 本接口(DeleteNetDetect)用于删除网络探测实例。
+     * 本接口（DeleteNetDetect）用于删除网络探测实例。
      */
     async DeleteNetDetect(req, cb) {
         return this.request("DeleteNetDetect", req, cb);
@@ -1879,7 +1879,7 @@ LimitTypes取值范围：
         return this.request("CreateRoutes", req, cb);
     }
     /**
-     * 本接口(CreateNetDetect)用于创建网络探测。
+     * 本接口（CreateNetDetect）用于创建网络探测。
      */
     async CreateNetDetect(req, cb) {
         return this.request("CreateNetDetect", req, cb);

@@ -29,6 +29,7 @@ import {
   ModifyCustomizeTemplateVersionControlRequest,
   WorkspaceResourceDTO,
   CreateCustomizeTemplatesResponse,
+  WorkspaceTokenInfoV0,
   ImageUserDTO,
   RunWorkspaceRequest,
   DescribeWorkspaceStatusResponse,
@@ -45,6 +46,7 @@ import {
   UserInfoRsp,
   DescribeWorkspaceEnvListRequest,
   ModifyWorkspaceAttributesResponse,
+  WorkspaceStatusInfo,
   DescribeCustomizeTemplatesPresetsRequest,
   StopWorkspaceResponse,
   DescribeWorkspaceNameExistRequest,
@@ -54,21 +56,23 @@ import {
   CustomizeTemplatesPresetsInfo,
   RunWorkspaceResponse,
   DescribeCustomizeTemplatesByIdResponse,
-  DescribeCustomizeTemplatesPresetsResponse,
+  DescribeWorkspaceNameExistResponse,
   CreateWorkspaceByTemplateResponse,
   CreateWorkspaceByAgentResponse,
-  WorkspaceInfo,
+  RemoveWorkspaceResponse,
+  CreateWorkspaceTemporaryTokenRequest,
   WorkspaceDTO,
   ModifyCustomizeTemplatesFullByIdResponse,
   DescribeCustomizeTemplatesResponse,
   CreateWorkspaceByVersionControlResponse,
   ModifyCustomizeTemplatesPartByIdRequest,
+  WorkspaceTokenDTO,
   UserDefinedTemplateParams,
   DeleteCustomizeTemplatesByIdResponse,
-  WorkspaceStatusInfo,
-  RemoveWorkspaceResponse,
+  WorkspaceInfo,
+  CreateWorkspaceTemporaryTokenResponse,
   AgentSpaceDTO,
-  DescribeWorkspaceNameExistResponse,
+  DescribeCustomizeTemplatesPresetsResponse,
   CreateWorkspaceByTemplateRequest,
   ModifyCustomizeTemplatesPartByIdResponse,
   ModifyWorkspaceAttributesRequest,
@@ -121,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkspaceByTemplateResponse) => void
   ): Promise<CreateWorkspaceByTemplateResponse> {
     return this.request("CreateWorkspaceByTemplate", req, cb)
+  }
+
+  /**
+   * 为工作空间创建临时访问凭证，重复调用会创建新的 Token，旧的 Token 将会自动失效
+   */
+  async CreateWorkspaceTemporaryToken(
+    req: CreateWorkspaceTemporaryTokenRequest,
+    cb?: (error: string, rep: CreateWorkspaceTemporaryTokenResponse) => void
+  ): Promise<CreateWorkspaceTemporaryTokenResponse> {
+    return this.request("CreateWorkspaceTemporaryToken", req, cb)
   }
 
   /**

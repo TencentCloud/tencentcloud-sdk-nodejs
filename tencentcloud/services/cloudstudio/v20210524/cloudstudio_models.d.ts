@@ -188,6 +188,20 @@ export interface CreateCustomizeTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * 获取工作空间临时访问 token 出参
+ */
+export interface WorkspaceTokenInfoV0 {
+    /**
+      * 访问工作空间临时凭证
+      */
+    Token: string;
+    /**
+      * token 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpiredTime: string;
+}
+/**
  * 可用镜像模板列表
  */
 export interface ImageUserDTO {
@@ -608,6 +622,116 @@ export interface ModifyWorkspaceAttributesResponse {
     RequestId?: string;
 }
 /**
+ * 获取用户工作空间返回信息
+ */
+export interface WorkspaceStatusInfo {
+    /**
+      * 空间ID
+      */
+    Id: number;
+    /**
+      * 空间名称
+      */
+    Name: string;
+    /**
+      * 所属人
+      */
+    Owner: UserInfoRsp;
+    /**
+      * 空间标识
+      */
+    SpaceKey: string;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 最后操作时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastOpsDate: string;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 共享状态
+      */
+    Share: WorkspaceShareInfo;
+    /**
+      * 空间类型
+      */
+    WorkspaceType: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Label: string;
+    /**
+      * 空间版本
+      */
+    WorkspaceVersion: number;
+    /**
+      * 图标地址
+      */
+    ImageIcon: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateDate: string;
+    /**
+      * 版本控制地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionControlUrl: string;
+    /**
+      * 版本控制描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionControlDesc: string;
+    /**
+      * 版本控制引用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionControlRef: string;
+    /**
+      * 版本控制引用类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionControlRefType: string;
+    /**
+      * 版本控制类型
+      */
+    VersionControlType: string;
+    /**
+      * 模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TemplateId: number;
+    /**
+      * 快照ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SnapshotUid: string;
+    /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpecDesc: string;
+    /**
+      * CPU数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cpu: number;
+    /**
+      * 内存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Memory: number;
+}
+/**
  * DescribeCustomizeTemplatesPresets请求参数结构体
  */
 export interface DescribeCustomizeTemplatesPresetsRequest {
@@ -725,14 +849,9 @@ export interface DescribeCustomizeTemplatesByIdResponse {
     RequestId?: string;
 }
 /**
- * DescribeCustomizeTemplatesPresets返回参数结构体
+ * DescribeWorkspaceNameExist返回参数结构体
  */
-export interface DescribeCustomizeTemplatesPresetsResponse {
-    /**
-      * 无
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: CustomizeTemplatesPresetsInfo;
+export interface DescribeWorkspaceNameExistResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -766,19 +885,22 @@ export interface CreateWorkspaceByAgentResponse {
     RequestId?: string;
 }
 /**
- * 工作空间信息
+ * RemoveWorkspace返回参数结构体
  */
-export interface WorkspaceInfo {
+export interface RemoveWorkspaceResponse {
     /**
-      * 工作空间ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    WorkspaceId: number;
+    RequestId?: string;
+}
+/**
+ * CreateWorkspaceTemporaryToken请求参数结构体
+ */
+export interface CreateWorkspaceTemporaryTokenRequest {
     /**
-      * 工作空间标识
-注意：此字段可能返回 null，表示取不到有效值。
+      * 创建工作空间凭证 DTO
       */
-    SpaceKey: string;
+    WorkspaceTokenDTO: WorkspaceTokenDTO;
 }
 /**
  * 工作空间结构
@@ -904,6 +1026,21 @@ export interface ModifyCustomizeTemplatesPartByIdRequest {
     UserDefinedTemplatePatchedParams: UserDefinedTemplatePatchedParams;
 }
 /**
+ * 创建临时工作空间凭证 DTO
+ */
+export interface WorkspaceTokenDTO {
+    /**
+      * 工作空间 SpaceKey
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpaceKey?: string;
+    /**
+      * token过期时间，单位是秒，默认 3600
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TokenExpiredLimitSec?: number;
+}
+/**
  * 用户自定义模板参数
  */
 export interface UserDefinedTemplateParams {
@@ -953,119 +1090,28 @@ export interface DeleteCustomizeTemplatesByIdResponse {
     RequestId?: string;
 }
 /**
- * 获取用户工作空间返回信息
+ * 工作空间信息
  */
-export interface WorkspaceStatusInfo {
+export interface WorkspaceInfo {
     /**
-      * 空间ID
+      * 工作空间ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: number;
+    WorkspaceId: number;
     /**
-      * 空间名称
-      */
-    Name: string;
-    /**
-      * 所属人
-      */
-    Owner: UserInfoRsp;
-    /**
-      * 空间标识
+      * 工作空间标识
+注意：此字段可能返回 null，表示取不到有效值。
       */
     SpaceKey: string;
-    /**
-      * 状态
-      */
-    Status: string;
-    /**
-      * 最后操作时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastOpsDate: string;
-    /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * 共享状态
-      */
-    Share: WorkspaceShareInfo;
-    /**
-      * 空间类型
-      */
-    WorkspaceType: string;
-    /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Label: string;
-    /**
-      * 空间版本
-      */
-    WorkspaceVersion: number;
-    /**
-      * 图标地址
-      */
-    ImageIcon: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateDate: string;
-    /**
-      * 版本控制地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VersionControlUrl: string;
-    /**
-      * 版本控制描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VersionControlDesc: string;
-    /**
-      * 版本控制引用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VersionControlRef: string;
-    /**
-      * 版本控制引用类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VersionControlRefType: string;
-    /**
-      * 版本控制类型
-      */
-    VersionControlType: string;
-    /**
-      * 模板ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TemplateId: number;
-    /**
-      * 快照ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SnapshotUid: string;
-    /**
-      * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SpecDesc: string;
-    /**
-      * CPU数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Cpu: number;
-    /**
-      * 内存
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Memory: number;
 }
 /**
- * RemoveWorkspace返回参数结构体
+ * CreateWorkspaceTemporaryToken返回参数结构体
  */
-export interface RemoveWorkspaceResponse {
+export interface CreateWorkspaceTemporaryTokenResponse {
+    /**
+      * 工作空间临时访问 token 信息
+      */
+    Data?: WorkspaceTokenInfoV0;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1117,9 +1163,14 @@ export interface AgentSpaceDTO {
     Description?: string;
 }
 /**
- * DescribeWorkspaceNameExist返回参数结构体
+ * DescribeCustomizeTemplatesPresets返回参数结构体
  */
-export interface DescribeWorkspaceNameExistResponse {
+export interface DescribeCustomizeTemplatesPresetsResponse {
+    /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: CustomizeTemplatesPresetsInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

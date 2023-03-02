@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RecoverWorkspaceResponse, DescribeWorkspaceStatusRequest, CreateCustomizeTemplatesRequest, RecoverWorkspaceRequest, DescribeCustomizeTemplatesByIdRequest, CreateWorkspaceByVersionControlRequest, ModifyCustomizeTemplateVersionControlRequest, CreateCustomizeTemplatesResponse, RunWorkspaceRequest, DescribeWorkspaceStatusResponse, CreateWorkspaceByAgentRequest, DeleteCustomizeTemplatesByIdRequest, StopWorkspaceRequest, DescribeWorkspaceEnvListResponse, DescribeWorkspaceStatusListResponse, ModifyCustomizeTemplatesFullByIdRequest, ModifyCustomizeTemplateVersionControlResponse, DescribeWorkspaceEnvListRequest, ModifyWorkspaceAttributesResponse, DescribeCustomizeTemplatesPresetsRequest, StopWorkspaceResponse, DescribeWorkspaceNameExistRequest, DescribeWorkspaceStatusListRequest, RemoveWorkspaceRequest, DescribeCustomizeTemplatesRequest, RunWorkspaceResponse, DescribeCustomizeTemplatesByIdResponse, DescribeCustomizeTemplatesPresetsResponse, CreateWorkspaceByTemplateResponse, CreateWorkspaceByAgentResponse, ModifyCustomizeTemplatesFullByIdResponse, DescribeCustomizeTemplatesResponse, CreateWorkspaceByVersionControlResponse, ModifyCustomizeTemplatesPartByIdRequest, DeleteCustomizeTemplatesByIdResponse, RemoveWorkspaceResponse, DescribeWorkspaceNameExistResponse, CreateWorkspaceByTemplateRequest, ModifyCustomizeTemplatesPartByIdResponse, ModifyWorkspaceAttributesRequest } from "./cloudstudio_models";
+import { RecoverWorkspaceResponse, DescribeWorkspaceStatusRequest, CreateCustomizeTemplatesRequest, RecoverWorkspaceRequest, DescribeCustomizeTemplatesByIdRequest, CreateWorkspaceByVersionControlRequest, ModifyCustomizeTemplateVersionControlRequest, CreateCustomizeTemplatesResponse, RunWorkspaceRequest, DescribeWorkspaceStatusResponse, CreateWorkspaceByAgentRequest, DeleteCustomizeTemplatesByIdRequest, StopWorkspaceRequest, DescribeWorkspaceEnvListResponse, DescribeWorkspaceStatusListResponse, ModifyCustomizeTemplatesFullByIdRequest, ModifyCustomizeTemplateVersionControlResponse, DescribeWorkspaceEnvListRequest, ModifyWorkspaceAttributesResponse, DescribeCustomizeTemplatesPresetsRequest, StopWorkspaceResponse, DescribeWorkspaceNameExistRequest, DescribeWorkspaceStatusListRequest, RemoveWorkspaceRequest, DescribeCustomizeTemplatesRequest, RunWorkspaceResponse, DescribeCustomizeTemplatesByIdResponse, DescribeWorkspaceNameExistResponse, CreateWorkspaceByTemplateResponse, CreateWorkspaceByAgentResponse, RemoveWorkspaceResponse, CreateWorkspaceTemporaryTokenRequest, ModifyCustomizeTemplatesFullByIdResponse, DescribeCustomizeTemplatesResponse, CreateWorkspaceByVersionControlResponse, ModifyCustomizeTemplatesPartByIdRequest, DeleteCustomizeTemplatesByIdResponse, CreateWorkspaceTemporaryTokenResponse, DescribeCustomizeTemplatesPresetsResponse, CreateWorkspaceByTemplateRequest, ModifyCustomizeTemplatesPartByIdResponse, ModifyWorkspaceAttributesRequest } from "./cloudstudio_models";
 /**
  * cloudstudio client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 快速开始, 基于模板创建工作空间
      */
     CreateWorkspaceByTemplate(req: CreateWorkspaceByTemplateRequest, cb?: (error: string, rep: CreateWorkspaceByTemplateResponse) => void): Promise<CreateWorkspaceByTemplateResponse>;
+    /**
+     * 为工作空间创建临时访问凭证，重复调用会创建新的 Token，旧的 Token 将会自动失效
+     */
+    CreateWorkspaceTemporaryToken(req: CreateWorkspaceTemporaryTokenRequest, cb?: (error: string, rep: CreateWorkspaceTemporaryTokenResponse) => void): Promise<CreateWorkspaceTemporaryTokenResponse>;
     /**
      * 修改模板默认代码仓库
      */

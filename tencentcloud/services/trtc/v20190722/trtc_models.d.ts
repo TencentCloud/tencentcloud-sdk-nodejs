@@ -112,7 +112,7 @@ export interface MixLayout {
       */
     ImageLayer?: number;
     /**
-      * 下载的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。
+      * 图片的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。
       */
     SubBackgroundImage?: string;
 }
@@ -1464,7 +1464,6 @@ export interface DescribeScaleInfoResponse {
 }
 /**
  * 录制的混流布局参数。
-
  */
 export interface MixLayoutParams {
     /**
@@ -1503,7 +1502,7 @@ export interface MixLayoutParams {
       */
     MediaId?: number;
     /**
-      * 下载的url地址， 只支持jpg， png，大小限制不超过5M。
+      * 图片的url地址， 只支持jpg， png，大小限制不超过5M，url不可包含中文。
       */
     BackgroundImageUrl?: string;
     /**

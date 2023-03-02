@@ -1296,6 +1296,16 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Message?: string;
+    /**
+      * test-project
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectName?: string;
+    /**
+      * test-scenario
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScenarioName?: string;
 }
 /**
  * DescribeAvailableMetrics请求参数结构体
@@ -2985,6 +2995,11 @@ export interface Scenario {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Owner?: string;
+    /**
+      * 场景所在的项目的名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectName?: string;
 }
 /**
  * DescribeProjects返回参数结构体
