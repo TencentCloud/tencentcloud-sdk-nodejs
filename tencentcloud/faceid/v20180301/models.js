@@ -92,10 +92,16 @@ class GetDetectInfoEnhancedRequest extends  AbstractModel {
         this.IsNeedIdCardAvatar = null;
 
         /**
-         * 是否需要对返回中的敏感信息进行加密。其中敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName
+         * 已弃用。
          * @type {boolean || null}
          */
         this.IsEncrypt = null;
+
+        /**
+         * 是否需要对返回中的敏感信息进行加密。仅指定加密算法Algorithm即可，其余字段传入默认值。其中敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName
+         * @type {Encryption || null}
+         */
+        this.Encryption = null;
 
     }
 
@@ -113,6 +119,12 @@ class GetDetectInfoEnhancedRequest extends  AbstractModel {
         this.IsCutIdCardImage = 'IsCutIdCardImage' in params ? params.IsCutIdCardImage : null;
         this.IsNeedIdCardAvatar = 'IsNeedIdCardAvatar' in params ? params.IsNeedIdCardAvatar : null;
         this.IsEncrypt = 'IsEncrypt' in params ? params.IsEncrypt : null;
+
+        if (params.Encryption) {
+            let obj = new Encryption();
+            obj.deserialize(params.Encryption)
+            this.Encryption = obj;
+        }
 
     }
 }
@@ -138,7 +150,7 @@ class GetFaceIdTokenRequest extends  AbstractModel {
         this.IdCard = null;
 
         /**
-         * CompareLib为商业库库时必传。
+         * CompareLib为商业库时必传。
          * @type {string || null}
          */
         this.Name = null;
@@ -169,6 +181,12 @@ class GetFaceIdTokenRequest extends  AbstractModel {
          */
         this.UseCos = null;
 
+        /**
+         * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+         * @type {Encryption || null}
+         */
+        this.Encryption = null;
+
     }
 
     /**
@@ -185,6 +203,12 @@ class GetFaceIdTokenRequest extends  AbstractModel {
         this.Meta = 'Meta' in params ? params.Meta : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.UseCos = 'UseCos' in params ? params.UseCos : null;
+
+        if (params.Encryption) {
+            let obj = new Encryption();
+            obj.deserialize(params.Encryption)
+            this.Encryption = obj;
+        }
 
     }
 }
@@ -246,30 +270,18 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * 敏感数据加密
+ * RuleId相关配置
  * @class
  */
-class Encryption extends  AbstractModel {
+class RuleIdConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅<a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
-         * @type {string || null}
+         * 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。
+         * @type {boolean || null}
          */
-        this.CiphertextBlob = null;
-
-        /**
-         * 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的一个或多个字段
-         * @type {Array.<string> || null}
-         */
-        this.EncryptList = null;
-
-        /**
-         * 有加密需求的用户，传入CBC加密的初始向量
-         * @type {string || null}
-         */
-        this.Iv = null;
+        this.IntentionRecognition = null;
 
     }
 
@@ -280,9 +292,63 @@ class Encryption extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.IntentionRecognition = 'IntentionRecognition' in params ? params.IntentionRecognition : null;
+
+    }
+}
+
+/**
+ * 敏感数据加密
+ * @class
+ */
+class Encryption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的一个或多个字段
+         * @type {Array.<string> || null}
+         */
+        this.EncryptList = null;
+
+        /**
+         * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅<a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
+         * @type {string || null}
+         */
+        this.CiphertextBlob = null;
+
+        /**
+         * 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。
+         * @type {string || null}
+         */
+        this.Iv = null;
+
+        /**
+         * 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC'
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * SM4-GCM算法生成的消息摘要（校验消息完整性时使用）
+         * @type {Array.<string> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.EncryptList = 'EncryptList' in params ? params.EncryptList : null;
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.Iv = 'Iv' in params ? params.Iv : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.TagList = 'TagList' in params ? params.TagList : null;
 
     }
 }
@@ -579,7 +645,7 @@ class CheckBankCardInformationResponse extends  AbstractModel {
 收费结果码：
 0: 查询成功
 -1: 未查到信息
-不收费结果码
+不收费结果码：
 -2：验证中心服务繁忙
 -3：银行卡不存在
          * @type {string || null}
@@ -742,6 +808,36 @@ class GetEidTokenConfig extends  AbstractModel {
          */
         this.InputType = null;
 
+        /**
+         * 是否使用意愿核身，默认不使用。注意：如开启使用，则计费标签按【意愿核身】计费标签计价；如不开启，则计费标签按【E证通】计费标签计价，价格详见：[价格说明](https://cloud.tencent.com/document/product/1007/56804)。
+         * @type {boolean || null}
+         */
+        this.UseIntentionVerify = null;
+
+        /**
+         * 意愿核身模式。枚举值：1( 朗读模式)，2（问答模式） 。默认值1
+         * @type {string || null}
+         */
+        this.IntentionMode = null;
+
+        /**
+         * 意愿核身朗读模式使用的文案，若未使用意愿核身朗读功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
+         * @type {string || null}
+         */
+        this.IntentionVerifyText = null;
+
+        /**
+         * 意愿核身问答模式的配置列表。当前仅支持一个问答。
+         * @type {Array.<IntentionQuestion> || null}
+         */
+        this.IntentionQuestions = null;
+
+        /**
+         * 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。
+         * @type {boolean || null}
+         */
+        this.IntentionRecognition = null;
+
     }
 
     /**
@@ -752,6 +848,19 @@ class GetEidTokenConfig extends  AbstractModel {
             return;
         }
         this.InputType = 'InputType' in params ? params.InputType : null;
+        this.UseIntentionVerify = 'UseIntentionVerify' in params ? params.UseIntentionVerify : null;
+        this.IntentionMode = 'IntentionMode' in params ? params.IntentionMode : null;
+        this.IntentionVerifyText = 'IntentionVerifyText' in params ? params.IntentionVerifyText : null;
+
+        if (params.IntentionQuestions) {
+            this.IntentionQuestions = new Array();
+            for (let z in params.IntentionQuestions) {
+                let obj = new IntentionQuestion();
+                obj.deserialize(params.IntentionQuestions[z]);
+                this.IntentionQuestions.push(obj);
+            }
+        }
+        this.IntentionRecognition = 'IntentionRecognition' in params ? params.IntentionRecognition : null;
 
     }
 }
@@ -941,6 +1050,13 @@ class GetDetectInfoEnhancedResponse extends  AbstractModel {
         this.IntentionVerifyData = null;
 
         /**
+         * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {IntentionQuestionResult || null}
+         */
+        this.IntentionQuestionResult = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -990,6 +1106,12 @@ class GetDetectInfoEnhancedResponse extends  AbstractModel {
             let obj = new IntentionVerifyData();
             obj.deserialize(params.IntentionVerifyData)
             this.IntentionVerifyData = obj;
+        }
+
+        if (params.IntentionQuestionResult) {
+            let obj = new IntentionQuestionResult();
+            obj.deserialize(params.IntentionQuestionResult)
+            this.IntentionQuestionResult = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1128,7 +1250,7 @@ class GetEidResultRequest extends  AbstractModel {
         this.EidToken = null;
 
         /**
-         * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息）。
+         * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息；5：意愿核身朗读模式相关结果；6：意愿核身问答模式相关结果）。
 如 13表示拉取文本类、最佳截图信息。
 默认值：0
          * @type {string || null}
@@ -1293,7 +1415,7 @@ class GetEidTokenRequest extends  AbstractModel {
         this.Extra = null;
 
         /**
-         * 小程序模式配置，包括如何传入姓名身份证的配置。
+         * 小程序模式配置，包括如何传入姓名身份证的配置，以及是否使用意愿核身。
          * @type {GetEidTokenConfig || null}
          */
         this.Config = null;
@@ -1341,49 +1463,56 @@ class GetEidTokenRequest extends  AbstractModel {
 }
 
 /**
- * IdCardOCRVerification请求参数结构体
+ * 意愿核身问答模式结果
  * @class
  */
-class IdCardOCRVerificationRequest extends  AbstractModel {
+class IntentionQuestionResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 身份证号
-姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
+         * 意愿核身最终结果：
+0：认证通过，-1：认证未通过，-2：浏览器内核不兼容，无法进行意愿校验
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.IdCard = null;
+        this.FinalResultCode = null;
 
         /**
-         * 姓名
+         * 视频base64（其中包含全程问题和回答音频，mp4格式）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Name = null;
+        this.Video = null;
 
         /**
-         * 身份证人像面的 Base64 值
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-         * @type {string || null}
+         * 屏幕截图base64列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.ImageBase64 = null;
+        this.ScreenShot = null;
 
         /**
-         * 身份证人像面的 Url 地址
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-         * @type {string || null}
+         * 和答案匹配结果列表
+0：成功，-1：不匹配
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.ImageUrl = null;
+        this.ResultCode = null;
 
         /**
-         * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
-         * @type {Encryption || null}
+         * 回答问题语音识别结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.Encryption = null;
+        this.AsrResult = null;
+
+        /**
+         * 答案录音音频
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Audios = null;
 
     }
 
@@ -1394,16 +1523,12 @@ class IdCardOCRVerificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-
-        if (params.Encryption) {
-            let obj = new Encryption();
-            obj.deserialize(params.Encryption)
-            this.Encryption = obj;
-        }
+        this.FinalResultCode = 'FinalResultCode' in params ? params.FinalResultCode : null;
+        this.Video = 'Video' in params ? params.Video : null;
+        this.ScreenShot = 'ScreenShot' in params ? params.ScreenShot : null;
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.AsrResult = 'AsrResult' in params ? params.AsrResult : null;
+        this.Audios = 'Audios' in params ? params.Audios : null;
 
     }
 }
@@ -1618,27 +1743,96 @@ class MobileStatusRequest extends  AbstractModel {
 }
 
 /**
- * DetectReflectLivenessAndCompare返回参数结构体
+ * IdCardOCRVerification请求参数结构体
  * @class
  */
-class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
+class IdCardOCRVerificationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 验证通过后的视频最佳截图资源临时地址，jpg格式，资源和链接有效期2小时，务必在有效期内下载。
+         * 身份证号
+姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
          * @type {string || null}
          */
-        this.BestFrameUrl = null;
+        this.IdCard = null;
 
         /**
-         * 验证通过后的视频最佳截图资源MD5（32位，用于校验BestFrame的一致性）。
+         * 姓名
          * @type {string || null}
          */
-        this.BestFrameMd5 = null;
+        this.Name = null;
 
         /**
-         * 业务错误码，成功情况返回Success，错误情况请参考下方错误码 列表中FailedOperation部分。
+         * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+         * @type {Encryption || null}
+         */
+        this.Encryption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+        if (params.Encryption) {
+            let obj = new Encryption();
+            obj.deserialize(params.Encryption)
+            this.Encryption = obj;
+        }
+
+    }
+}
+
+/**
+ * LivenessRecognition返回参数结构体
+ * @class
+ */
+class LivenessRecognitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
          * @type {string || null}
          */
         this.Result = null;
@@ -1650,10 +1844,11 @@ class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
-         * @type {number || null}
+         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.Sim = null;
+        this.BestFrameList = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1670,54 +1865,12 @@ class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameUrl = 'BestFrameUrl' in params ? params.BestFrameUrl : null;
-        this.BestFrameMd5 = 'BestFrameMd5' in params ? params.BestFrameMd5 : null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetRealNameAuthToken请求参数结构体
- * @class
- */
-class GetRealNameAuthTokenRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 姓名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 身份证号
-         * @type {string || null}
-         */
-        this.IDCard = null;
-
-        /**
-         * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方。仅支持http或https协议。
-         * @type {string || null}
-         */
-        this.CallbackURL = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.IDCard = 'IDCard' in params ? params.IDCard : null;
-        this.CallbackURL = 'CallbackURL' in params ? params.CallbackURL : null;
 
     }
 }
@@ -2193,55 +2346,6 @@ class GetFaceIdTokenResponse extends  AbstractModel {
         }
         this.FaceIdToken = 'FaceIdToken' in params ? params.FaceIdToken : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DetectReflectLivenessAndCompare请求参数结构体
- * @class
- */
-class DetectReflectLivenessAndCompareRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SDK生成的活体检测数据包的资源地址。
-         * @type {string || null}
-         */
-        this.LiveDataUrl = null;
-
-        /**
-         * SDK生成的活体检测数据包的资源内容MD5（32位，用于校验LiveData的一致性）。
-         * @type {string || null}
-         */
-        this.LiveDataMd5 = null;
-
-        /**
-         * 用于比对的目标图片的资源地址。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 用于比对的目标图片的资源MD5（32位，用于校验Image的一致性）。
-         * @type {string || null}
-         */
-        this.ImageMd5 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LiveDataUrl = 'LiveDataUrl' in params ? params.LiveDataUrl : null;
-        this.LiveDataMd5 = 'LiveDataMd5' in params ? params.LiveDataMd5 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageMd5 = 'ImageMd5' in params ? params.ImageMd5 : null;
 
     }
 }
@@ -2894,60 +2998,68 @@ class DetectInfoText extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Ocr识别结果。民族。
+         * 身份校验环节识别结果：民族。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrNation = null;
 
         /**
-         * Ocr识别结果。家庭住址。
+         * 身份校验环节识别结果：家庭住址。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrAddress = null;
 
         /**
-         * Ocr识别结果。生日。
+         * 身份校验环节识别结果：生日。格式为：YYYY/M/D
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrBirth = null;
 
         /**
-         * Ocr识别结果。签发机关。
+         * 身份校验环节识别结果：签发机关。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrAuthority = null;
 
         /**
-         * Ocr识别结果。有效日期。
+         * 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrValidDate = null;
 
         /**
-         * Ocr识别结果。姓名。
+         * 身份校验环节识别结果：姓名。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrName = null;
 
         /**
-         * Ocr识别结果。身份证号。
+         * 身份校验环节识别结果：身份证号。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrIdCard = null;
 
         /**
-         * Ocr识别结果。性别。
+         * 身份校验环节识别结果：性别。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OcrGender = null;
+
+        /**
+         * 身份校验环节采用的信息上传方式。
+取值有"NFC"、"OCR"、"手动输入"、"其他"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IdInfoFrom = null;
 
         /**
          * 本次流程最终活体结果。0为成功
@@ -3023,6 +3135,18 @@ class DetectInfoText extends  AbstractModel {
          */
         this.CompareLibType = null;
 
+        /**
+         * 本次流程最终活体类型。包括：
+0：未知
+1：数字活体
+2：动作活体
+3：静默活体
+4：一闪活体（动作+光线）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LivenessMode = null;
+
     }
 
     /**
@@ -3044,6 +3168,7 @@ class DetectInfoText extends  AbstractModel {
         this.OcrName = 'OcrName' in params ? params.OcrName : null;
         this.OcrIdCard = 'OcrIdCard' in params ? params.OcrIdCard : null;
         this.OcrGender = 'OcrGender' in params ? params.OcrGender : null;
+        this.IdInfoFrom = 'IdInfoFrom' in params ? params.IdInfoFrom : null;
         this.LiveStatus = 'LiveStatus' in params ? params.LiveStatus : null;
         this.LiveMsg = 'LiveMsg' in params ? params.LiveMsg : null;
         this.Comparestatus = 'Comparestatus' in params ? params.Comparestatus : null;
@@ -3062,6 +3187,7 @@ class DetectInfoText extends  AbstractModel {
         }
         this.Mobile = 'Mobile' in params ? params.Mobile : null;
         this.CompareLibType = 'CompareLibType' in params ? params.CompareLibType : null;
+        this.LivenessMode = 'LivenessMode' in params ? params.LivenessMode : null;
 
     }
 }
@@ -3125,10 +3251,22 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
         this.Encryption = null;
 
         /**
-         * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
+         * 意愿核身（朗读模式）使用的文案，若未使用意愿核身（朗读模式），则该字段无需传入。默认为空，最长可接受120的字符串长度。
          * @type {string || null}
          */
         this.IntentionVerifyText = null;
+
+        /**
+         * 意愿核身（问答模式）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持一个播报文本+回答文本。
+         * @type {Array.<IntentionQuestion> || null}
+         */
+        this.IntentionQuestions = null;
+
+        /**
+         * RuleId相关配置
+         * @type {RuleIdConfig || null}
+         */
+        this.Config = null;
 
     }
 
@@ -3153,6 +3291,21 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
             this.Encryption = obj;
         }
         this.IntentionVerifyText = 'IntentionVerifyText' in params ? params.IntentionVerifyText : null;
+
+        if (params.IntentionQuestions) {
+            this.IntentionQuestions = new Array();
+            for (let z in params.IntentionQuestions) {
+                let obj = new IntentionQuestion();
+                obj.deserialize(params.IntentionQuestions[z]);
+                this.IntentionQuestions.push(obj);
+            }
+        }
+
+        if (params.Config) {
+            let obj = new RuleIdConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
 
     }
 }
@@ -3329,6 +3482,20 @@ class GetEidResultResponse extends  AbstractModel {
         this.EidInfo = null;
 
         /**
+         * 意愿核身朗读模式相关信息。若未使用意愿核身朗读功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {IntentionVerifyData || null}
+         */
+        this.IntentionVerifyData = null;
+
+        /**
+         * 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {IntentionQuestionResult || null}
+         */
+        this.IntentionQuestionResult = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3367,35 +3534,19 @@ class GetEidResultResponse extends  AbstractModel {
             obj.deserialize(params.EidInfo)
             this.EidInfo = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * GetRealNameAuthResult请求参数结构体
- * @class
- */
-class GetRealNameAuthResultRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实名认证凭证
-         * @type {string || null}
-         */
-        this.AuthToken = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.IntentionVerifyData) {
+            let obj = new IntentionVerifyData();
+            obj.deserialize(params.IntentionVerifyData)
+            this.IntentionVerifyData = obj;
         }
-        this.AuthToken = 'AuthToken' in params ? params.AuthToken : null;
+
+        if (params.IntentionQuestionResult) {
+            let obj = new IntentionQuestionResult();
+            obj.deserialize(params.IntentionQuestionResult)
+            this.IntentionQuestionResult = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3758,71 +3909,6 @@ class GetActionSequenceResponse extends  AbstractModel {
             return;
         }
         this.ActionSequence = 'ActionSequence' in params ? params.ActionSequence : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * LivenessRecognition返回参数结构体
- * @class
- */
-class LivenessRecognitionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.BestFrameBase64 = null;
-
-        /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务结果描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.BestFrameList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4416,14 +4502,34 @@ class DetectInfoIdCardData extends  AbstractModel {
         this.Avatar = null;
 
         /**
-         * 开启身份证防翻拍告警功能后才会返回，返回数组中可能出现的告警码如下：
--9102 身份证复印件告警。
--9103 身份证翻拍告警。
--9106 身份证 PS 告警。
+         * 身份证人像面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
+-9100 身份证有效日期不合法告警，
+-9101 身份证边框不完整告警，
+-9102 身份证复印件告警，
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证 PS 告警，
+-9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<number> || null}
          */
         this.WarnInfos = null;
+
+        /**
+         * 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
+-9100 身份证有效日期不合法告警，
+-9101 身份证边框不完整告警，
+-9102 身份证复印件告警，
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证 PS 告警，
+-9107 身份证反光告警。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.BackWarnInfos = null;
 
     }
 
@@ -4440,6 +4546,7 @@ class DetectInfoIdCardData extends  AbstractModel {
         this.ProcessedBackImage = 'ProcessedBackImage' in params ? params.ProcessedBackImage : null;
         this.Avatar = 'Avatar' in params ? params.Avatar : null;
         this.WarnInfos = 'WarnInfos' in params ? params.WarnInfos : null;
+        this.BackWarnInfos = 'BackWarnInfos' in params ? params.BackWarnInfos : null;
 
     }
 }
@@ -4798,6 +4905,18 @@ class DetectDetail extends  AbstractModel {
          */
         this.CompareLibType = null;
 
+        /**
+         * 枚举活体检测类型：
+0：未知
+1：数字活体
+2：动作活体
+3：静默活体
+4：一闪活体（动作+光线）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LivenessMode = null;
+
     }
 
     /**
@@ -4820,6 +4939,7 @@ class DetectDetail extends  AbstractModel {
         this.Comparestatus = 'Comparestatus' in params ? params.Comparestatus : null;
         this.Comparemsg = 'Comparemsg' in params ? params.Comparemsg : null;
         this.CompareLibType = 'CompareLibType' in params ? params.CompareLibType : null;
+        this.LivenessMode = 'LivenessMode' in params ? params.LivenessMode : null;
 
     }
 }
@@ -4988,30 +5108,24 @@ class EncryptedPhoneVerificationRequest extends  AbstractModel {
 }
 
 /**
- * GetRealNameAuthToken返回参数结构体
+ * 意愿核身过程中播报的问题文本、用户回答的标准文本。
  * @class
  */
-class GetRealNameAuthTokenResponse extends  AbstractModel {
+class IntentionQuestion extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询实名认证结果的唯一凭证
+         * 系统播报的问题文本，问题最大长度为150个字符。
          * @type {string || null}
          */
-        this.AuthToken = null;
+        this.Question = null;
 
         /**
-         * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
-         * @type {string || null}
+         * 用户答案的标准文本列表，用于识别用户回答的语音与标准文本是否一致。列表长度最大为50，单个答案长度限制10个字符。
+         * @type {Array.<string> || null}
          */
-        this.RedirectURL = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Answers = null;
 
     }
 
@@ -5022,52 +5136,8 @@ class GetRealNameAuthTokenResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuthToken = 'AuthToken' in params ? params.AuthToken : null;
-        this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetRealNameAuthResult返回参数结构体
- * @class
- */
-class GetRealNameAuthResultResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 认证结果码，收费情况如下：
-
-收费码：
-0:  姓名和身份证号一致
--1: 姓名和身份证号不一致
--2: 姓名和微信实名姓名不一致
-
-不收费码：
--3: 微信号未实名
-         * @type {string || null}
-         */
-        this.ResultType = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResultType = 'ResultType' in params ? params.ResultType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answers = 'Answers' in params ? params.Answers : null;
 
     }
 }
@@ -5102,6 +5172,13 @@ class EncryptedPhoneVerificationResponse extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 运营商名称。
+取值范围为["移动","联通","电信",""]
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5118,6 +5195,7 @@ class EncryptedPhoneVerificationResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5128,6 +5206,7 @@ module.exports = {
     GetDetectInfoEnhancedRequest: GetDetectInfoEnhancedRequest,
     GetFaceIdTokenRequest: GetFaceIdTokenRequest,
     LivenessRequest: LivenessRequest,
+    RuleIdConfig: RuleIdConfig,
     Encryption: Encryption,
     CheckBankCardInformationRequest: CheckBankCardInformationRequest,
     MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
@@ -5147,20 +5226,19 @@ module.exports = {
     DetectAuthResponse: DetectAuthResponse,
     PhoneVerificationResponse: PhoneVerificationResponse,
     GetEidTokenRequest: GetEidTokenRequest,
-    IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
+    IntentionQuestionResult: IntentionQuestionResult,
     GetWeChatBillDetailsResponse: GetWeChatBillDetailsResponse,
     CheckPhoneAndNameResponse: CheckPhoneAndNameResponse,
     BankCard4EVerificationResponse: BankCard4EVerificationResponse,
     MobileStatusRequest: MobileStatusRequest,
-    DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
-    GetRealNameAuthTokenRequest: GetRealNameAuthTokenRequest,
+    IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
+    LivenessRecognitionResponse: LivenessRecognitionResponse,
     ParseNfcDataResponse: ParseNfcDataResponse,
     CheckIdNameDateRequest: CheckIdNameDateRequest,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     LivenessRecognitionRequest: LivenessRecognitionRequest,
     EidInfo: EidInfo,
     GetFaceIdTokenResponse: GetFaceIdTokenResponse,
-    DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     PhoneVerificationCMCCResponse: PhoneVerificationCMCCResponse,
     CheckEidTokenStatusResponse: CheckEidTokenStatusResponse,
     PhoneVerificationCTCCResponse: PhoneVerificationCTCCResponse,
@@ -5177,7 +5255,6 @@ module.exports = {
     GetWeChatBillDetailsRequest: GetWeChatBillDetailsRequest,
     CheckEidTokenStatusRequest: CheckEidTokenStatusRequest,
     GetEidResultResponse: GetEidResultResponse,
-    GetRealNameAuthResultRequest: GetRealNameAuthResultRequest,
     ImageRecognitionRequest: ImageRecognitionRequest,
     PhoneVerificationCUCCRequest: PhoneVerificationCUCCRequest,
     BankCard4EVerificationRequest: BankCard4EVerificationRequest,
@@ -5185,7 +5262,6 @@ module.exports = {
     GetFaceIdResultRequest: GetFaceIdResultRequest,
     PhoneVerificationCUCCResponse: PhoneVerificationCUCCResponse,
     GetActionSequenceResponse: GetActionSequenceResponse,
-    LivenessRecognitionResponse: LivenessRecognitionResponse,
     BankCardVerificationResponse: BankCardVerificationResponse,
     MinorsVerificationRequest: MinorsVerificationRequest,
     ImageRecognitionResponse: ImageRecognitionResponse,
@@ -5204,8 +5280,7 @@ module.exports = {
     DetectDetail: DetectDetail,
     GetFaceIdResultResponse: GetFaceIdResultResponse,
     EncryptedPhoneVerificationRequest: EncryptedPhoneVerificationRequest,
-    GetRealNameAuthTokenResponse: GetRealNameAuthTokenResponse,
-    GetRealNameAuthResultResponse: GetRealNameAuthResultResponse,
+    IntentionQuestion: IntentionQuestion,
     EncryptedPhoneVerificationResponse: EncryptedPhoneVerificationResponse,
 
 }

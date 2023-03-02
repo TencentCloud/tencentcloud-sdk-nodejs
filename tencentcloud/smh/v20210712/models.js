@@ -532,22 +532,22 @@ class SendSmsCodeRequest extends  AbstractModel {
         super();
 
         /**
-         * 验证码目的，当前仅支持换绑超级管理员账号，固定填写 BindSuperAdmin。
+         * 验证码目的，当前支持换绑超级管理员账号， BindSuperAdmin；体验版企业升级，ChannelUpdateVerify等
          * @type {string || null}
          */
         this.Purpose = null;
-
-        /**
-         * 官方云盘实例 ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
         /**
          * 将作为超级管理员账号的手机号码
          * @type {string || null}
          */
         this.PhoneNumber = null;
+
+        /**
+         * 官方云盘实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
         /**
          * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
@@ -565,8 +565,8 @@ class SendSmsCodeRequest extends  AbstractModel {
             return;
         }
         this.Purpose = 'Purpose' in params ? params.Purpose : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
 
     }
@@ -1046,16 +1046,10 @@ class VerifySmsCodeRequest extends  AbstractModel {
         super();
 
         /**
-         * 验证码目的，当前仅支持换绑超级管理员账号，固定填写 BindSuperAdmin。
+         * 验证码目的，当前支持换绑超级管理员账号，BindSuperAdmin；体验版企业升级验证ChannelUpdateVerify，等
          * @type {string || null}
          */
         this.Purpose = null;
-
-        /**
-         * 官方云盘实例 ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
         /**
          * 将作为超级管理员账号的手机号码
@@ -1068,6 +1062,12 @@ class VerifySmsCodeRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Code = null;
+
+        /**
+         * 官方云盘实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
         /**
          * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
@@ -1085,9 +1085,9 @@ class VerifySmsCodeRequest extends  AbstractModel {
             return;
         }
         this.Purpose = 'Purpose' in params ? params.Purpose : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.Code = 'Code' in params ? params.Code : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
 
     }

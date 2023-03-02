@@ -20,7 +20,9 @@ const AgentClientElem = models.AgentClientElem;
 const DescribeAgentDealsCacheRequest = models.DescribeAgentDealsCacheRequest;
 const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
+const DescribeRebateInfosNewRequest = models.DescribeRebateInfosNewRequest;
 const RemovePayRelationForClientRequest = models.RemovePayRelationForClientRequest;
+const DescribeRebateInfosNewResponse = models.DescribeRebateInfosNewResponse;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
 const DescribeAgentClientGradeResponse = models.DescribeAgentClientGradeResponse;
 const DescribeAgentDealsByCacheResponse = models.DescribeAgentDealsByCacheResponse;
@@ -57,6 +59,7 @@ const CreatePayRelationForClientRequest = models.CreatePayRelationForClientReque
 const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
 const DescribeUnbindClientListResponse = models.DescribeUnbindClientListResponse;
 const DescribeAgentSelfPayDealsV2Response = models.DescribeAgentSelfPayDealsV2Response;
+const AssignClientsToSalesResponse = models.AssignClientsToSalesResponse;
 const AgentBillElem = models.AgentBillElem;
 const AuditApplyClientResponse = models.AuditApplyClientResponse;
 const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
@@ -68,6 +71,8 @@ const DescribeClientBalanceNewRequest = models.DescribeClientBalanceNewRequest;
 const DealGoodsPriceNewElem = models.DealGoodsPriceNewElem;
 const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 const DescribeAgentClientGradeRequest = models.DescribeAgentClientGradeRequest;
+const RebateInfoElemNew = models.RebateInfoElemNew;
+const AssignClientsToSalesRequest = models.AssignClientsToSalesRequest;
 const DescribeClientBalanceNewResponse = models.DescribeClientBalanceNewResponse;
 
 
@@ -82,18 +87,21 @@ class PartnersClient extends AbstractClient {
     }
     
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
-     * @param {DescribeAgentSelfPayDealsRequest} req
-     * @param {function(string, DescribeAgentSelfPayDealsResponse):void} cb
+     * 为代客or申请中代客分派跟进人（业务员），入参可从以下API获取
+- 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
+- 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
+- 业务员列表获取API：[DescribeSalesmans](https://cloud.tencent.com/document/product/563/35196) <br><br>
+     * @param {AssignClientsToSalesRequest} req
+     * @param {function(string, AssignClientsToSalesResponse):void} cb
      * @public
      */
-    DescribeAgentSelfPayDeals(req, cb) {
-        let resp = new DescribeAgentSelfPayDealsResponse();
-        this.request("DescribeAgentSelfPayDeals", req, resp, cb);
+    AssignClientsToSales(req, cb) {
+        let resp = new AssignClientsToSalesResponse();
+        this.request("AssignClientsToSales", req, resp, cb);
     }
 
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
+     * 【该接口已下线，请使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      * @param {DescribeAgentDealsCacheRequest} req
      * @param {function(string, DescribeAgentDealsCacheResponse):void} cb
      * @public
@@ -101,39 +109,6 @@ class PartnersClient extends AbstractClient {
     DescribeAgentDealsCache(req, cb) {
         let resp = new DescribeAgentDealsCacheResponse();
         this.request("DescribeAgentDealsCache", req, resp, cb);
-    }
-
-    /**
-     * 代理商可以对名下客户添加备注、修改备注
-     * @param {ModifyClientRemarkRequest} req
-     * @param {function(string, ModifyClientRemarkResponse):void} cb
-     * @public
-     */
-    ModifyClientRemark(req, cb) {
-        let resp = new ModifyClientRemarkResponse();
-        this.request("ModifyClientRemark", req, resp, cb);
-    }
-
-    /**
-     * 查询代理商名下指定代客的自付订单
-     * @param {DescribeAgentSelfPayDealsV2Request} req
-     * @param {function(string, DescribeAgentSelfPayDealsV2Response):void} cb
-     * @public
-     */
-    DescribeAgentSelfPayDealsV2(req, cb) {
-        let resp = new DescribeAgentSelfPayDealsV2Response();
-        this.request("DescribeAgentSelfPayDealsV2", req, resp, cb);
-    }
-
-    /**
-     * 代理商支付订单接口，支持自付/代付
-     * @param {AgentPayDealsRequest} req
-     * @param {function(string, AgentPayDealsResponse):void} cb
-     * @public
-     */
-    AgentPayDeals(req, cb) {
-        let resp = new AgentPayDealsResponse();
-        this.request("AgentPayDeals", req, resp, cb);
     }
 
     /**
@@ -159,7 +134,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 代理商可查询自己名下全部返佣信息
+     * 【该接口已下线，请切换使用升级版本DescribeRebateInfosNew】代理商可查询自己名下全部返佣信息
      * @param {DescribeRebateInfosRequest} req
      * @param {function(string, DescribeRebateInfosResponse):void} cb
      * @public
@@ -167,17 +142,6 @@ class PartnersClient extends AbstractClient {
     DescribeRebateInfos(req, cb) {
         let resp = new DescribeRebateInfosResponse();
         this.request("DescribeRebateInfos", req, resp, cb);
-    }
-
-    /**
-     * 代理商查询名下业务员列表信息
-     * @param {DescribeSalesmansRequest} req
-     * @param {function(string, DescribeSalesmansResponse):void} cb
-     * @public
-     */
-    DescribeSalesmans(req, cb) {
-        let resp = new DescribeSalesmansResponse();
-        this.request("DescribeSalesmans", req, resp, cb);
     }
 
     /**
@@ -192,47 +156,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
-     * @param {DescribeClientBalanceNewRequest} req
-     * @param {function(string, DescribeClientBalanceNewResponse):void} cb
+     * 代理商可以对名下客户添加备注、修改备注
+     * @param {ModifyClientRemarkRequest} req
+     * @param {function(string, ModifyClientRemarkResponse):void} cb
      * @public
      */
-    DescribeClientBalanceNew(req, cb) {
-        let resp = new DescribeClientBalanceNewResponse();
-        this.request("DescribeClientBalanceNew", req, resp, cb);
-    }
-
-    /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
-     * @param {DescribeAgentPayDealsRequest} req
-     * @param {function(string, DescribeAgentPayDealsResponse):void} cb
-     * @public
-     */
-    DescribeAgentPayDeals(req, cb) {
-        let resp = new DescribeAgentPayDealsResponse();
-        this.request("DescribeAgentPayDeals", req, resp, cb);
-    }
-
-    /**
-     * 代理商名下客户解绑记录查询接口
-     * @param {DescribeUnbindClientListRequest} req
-     * @param {function(string, DescribeUnbindClientListResponse):void} cb
-     * @public
-     */
-    DescribeUnbindClientList(req, cb) {
-        let resp = new DescribeUnbindClientListResponse();
-        this.request("DescribeUnbindClientList", req, resp, cb);
-    }
-
-    /**
-     * 代理商可查询自己名下待审核客户列表
-     * @param {DescribeAgentClientsRequest} req
-     * @param {function(string, DescribeAgentClientsResponse):void} cb
-     * @public
-     */
-    DescribeAgentClients(req, cb) {
-        let resp = new DescribeAgentClientsResponse();
-        this.request("DescribeAgentClients", req, resp, cb);
+    ModifyClientRemark(req, cb) {
+        let resp = new ModifyClientRemarkResponse();
+        this.request("ModifyClientRemark", req, resp, cb);
     }
 
     /**
@@ -247,6 +178,17 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
+     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     * @param {DescribeClientBalanceNewRequest} req
+     * @param {function(string, DescribeClientBalanceNewResponse):void} cb
+     * @public
+     */
+    DescribeClientBalanceNew(req, cb) {
+        let resp = new DescribeClientBalanceNewResponse();
+        this.request("DescribeClientBalanceNew", req, resp, cb);
+    }
+
+    /**
      * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
      * @param {DescribeAgentClientGradeRequest} req
      * @param {function(string, DescribeAgentClientGradeResponse):void} cb
@@ -258,7 +200,51 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 可以查询代理商代付的所有订单
+     * 代理商名下客户解绑记录查询接口
+     * @param {DescribeUnbindClientListRequest} req
+     * @param {function(string, DescribeUnbindClientListResponse):void} cb
+     * @public
+     */
+    DescribeUnbindClientList(req, cb) {
+        let resp = new DescribeUnbindClientListResponse();
+        this.request("DescribeUnbindClientList", req, resp, cb);
+    }
+
+    /**
+     * 代理商支付订单接口，支持自付/代付
+     * @param {AgentPayDealsRequest} req
+     * @param {function(string, AgentPayDealsResponse):void} cb
+     * @public
+     */
+    AgentPayDeals(req, cb) {
+        let resp = new AgentPayDealsResponse();
+        this.request("AgentPayDeals", req, resp, cb);
+    }
+
+    /**
+     * 代理商查询名下业务员列表信息
+     * @param {DescribeSalesmansRequest} req
+     * @param {function(string, DescribeSalesmansResponse):void} cb
+     * @public
+     */
+    DescribeSalesmans(req, cb) {
+        let resp = new DescribeSalesmansResponse();
+        this.request("DescribeSalesmans", req, resp, cb);
+    }
+
+    /**
+     * 【该接口已下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
+     * @param {DescribeAgentPayDealsRequest} req
+     * @param {function(string, DescribeAgentPayDealsResponse):void} cb
+     * @public
+     */
+    DescribeAgentPayDeals(req, cb) {
+        let resp = new DescribeAgentPayDealsResponse();
+        this.request("DescribeAgentPayDeals", req, resp, cb);
+    }
+
+    /**
+     * 可以查询代理商代付的预付费订单
      * @param {DescribeAgentPayDealsV2Request} req
      * @param {function(string, DescribeAgentPayDealsV2Response):void} cb
      * @public
@@ -280,14 +266,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 合作伙伴为客户创建强代付关系
-     * @param {CreatePayRelationForClientRequest} req
-     * @param {function(string, CreatePayRelationForClientResponse):void} cb
+     * 查询代理商名下指定代客的自付订单（预付费）
+     * @param {DescribeAgentSelfPayDealsV2Request} req
+     * @param {function(string, DescribeAgentSelfPayDealsV2Response):void} cb
      * @public
      */
-    CreatePayRelationForClient(req, cb) {
-        let resp = new CreatePayRelationForClientResponse();
-        this.request("CreatePayRelationForClient", req, resp, cb);
+    DescribeAgentSelfPayDealsV2(req, cb) {
+        let resp = new DescribeAgentSelfPayDealsV2Response();
+        this.request("DescribeAgentSelfPayDealsV2", req, resp, cb);
     }
 
     /**
@@ -302,7 +288,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 供代理商拉取缓存的全量客户订单
+     * 供代理商拉取缓存的全量预付费客户订单
      * @param {DescribeAgentDealsByCacheRequest} req
      * @param {function(string, DescribeAgentDealsByCacheResponse):void} cb
      * @public
@@ -310,6 +296,50 @@ class PartnersClient extends AbstractClient {
     DescribeAgentDealsByCache(req, cb) {
         let resp = new DescribeAgentDealsByCacheResponse();
         this.request("DescribeAgentDealsByCache", req, resp, cb);
+    }
+
+    /**
+     * 【该接口已下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
+     * @param {DescribeAgentSelfPayDealsRequest} req
+     * @param {function(string, DescribeAgentSelfPayDealsResponse):void} cb
+     * @public
+     */
+    DescribeAgentSelfPayDeals(req, cb) {
+        let resp = new DescribeAgentSelfPayDealsResponse();
+        this.request("DescribeAgentSelfPayDeals", req, resp, cb);
+    }
+
+    /**
+     * 代理商可查询自己名下全部返佣信息
+     * @param {DescribeRebateInfosNewRequest} req
+     * @param {function(string, DescribeRebateInfosNewResponse):void} cb
+     * @public
+     */
+    DescribeRebateInfosNew(req, cb) {
+        let resp = new DescribeRebateInfosNewResponse();
+        this.request("DescribeRebateInfosNew", req, resp, cb);
+    }
+
+    /**
+     * 代理商可查询自己名下待审核客户列表
+     * @param {DescribeAgentClientsRequest} req
+     * @param {function(string, DescribeAgentClientsResponse):void} cb
+     * @public
+     */
+    DescribeAgentClients(req, cb) {
+        let resp = new DescribeAgentClientsResponse();
+        this.request("DescribeAgentClients", req, resp, cb);
+    }
+
+    /**
+     * 合作伙伴为客户创建强代付关系
+     * @param {CreatePayRelationForClientRequest} req
+     * @param {function(string, CreatePayRelationForClientResponse):void} cb
+     * @public
+     */
+    CreatePayRelationForClient(req, cb) {
+        let resp = new CreatePayRelationForClientResponse();
+        this.request("CreatePayRelationForClient", req, resp, cb);
     }
 
 

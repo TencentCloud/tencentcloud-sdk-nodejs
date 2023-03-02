@@ -42,6 +42,7 @@ const CreateTaskFromTemplateResponse = models.CreateTaskFromTemplateResponse;
 const DeleteTaskResponse = models.DeleteTaskResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const Task = models.Task;
+const TaskReportInfo = models.TaskReportInfo;
 const CreateTaskFromTemplateRequest = models.CreateTaskFromTemplateRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const TaskListItem = models.TaskListItem;

@@ -26,9 +26,12 @@ const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const SpecConfig = models.SpecConfig;
+const UpgradeHourDCDBInstanceResponse = models.UpgradeHourDCDBInstanceResponse;
 const ModifyRealServerAccessStrategyResponse = models.ModifyRealServerAccessStrategyResponse;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
+const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
+const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const FlushBinlogResponse = models.FlushBinlogResponse;
@@ -44,28 +47,32 @@ const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
+const UpgradeHourDCDBInstanceRequest = models.UpgradeHourDCDBInstanceRequest;
 const CloneAccountResponse = models.CloneAccountResponse;
+const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
 const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const CreateDedicatedClusterDCDBInstanceRequest = models.CreateDedicatedClusterDCDBInstanceRequest;
 const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
 const DescribeDCDBRenewalPriceRequest = models.DescribeDCDBRenewalPriceRequest;
-const ParamModifyResult = models.ParamModifyResult;
+const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const DescribeDCDBPriceRequest = models.DescribeDCDBPriceRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
+const ParamModifyResult = models.ParamModifyResult;
+const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
@@ -102,6 +109,7 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
+const ColumnPrivilege = models.ColumnPrivilege;
 const SplitShardConfig = models.SplitShardConfig;
 const RenewDCDBInstanceResponse = models.RenewDCDBInstanceResponse;
 const DescribeShardSpecResponse = models.DescribeShardSpecResponse;
@@ -115,7 +123,9 @@ const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
+const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const DatabasePrivilege = models.DatabasePrivilege;
 const DescribeDCDBSaleInfoResponse = models.DescribeDCDBSaleInfoResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
@@ -125,6 +135,7 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const ViewPrivileges = models.ViewPrivileges;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
@@ -133,19 +144,24 @@ const ResourceTag = models.ResourceTag;
 const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const DescribeFlowRequest = models.DescribeFlowRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
+const Account = models.Account;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DescribeDCDBUpgradePriceRequest = models.DescribeDCDBUpgradePriceRequest;
-const CreateDedicatedClusterDCDBInstanceResponse = models.CreateDedicatedClusterDCDBInstanceResponse;
 const UserTaskInfo = models.UserTaskInfo;
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const UpgradeDCDBInstanceRequest = models.UpgradeDCDBInstanceRequest;
+const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
@@ -159,6 +175,7 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const Project = models.Project;
+const ModifyInstanceVportRequest = models.ModifyInstanceVportRequest;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
 const FlushBinlogRequest = models.FlushBinlogRequest;
@@ -298,17 +315,6 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
-     * @param {DescribeOrdersRequest} req
-     * @param {function(string, DescribeOrdersResponse):void} cb
-     * @public
-     */
-    DescribeOrders(req, cb) {
-        let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
-    }
-
-    /**
      * 本接口（DescribeUserTasks）用于拉取用户任务列表
      * @param {DescribeUserTasksRequest} req
      * @param {function(string, DescribeUserTasksResponse):void} cb
@@ -397,14 +403,25 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 创建独享集群DCDB实例
-     * @param {CreateDedicatedClusterDCDBInstanceRequest} req
-     * @param {function(string, CreateDedicatedClusterDCDBInstanceResponse):void} cb
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     * @param {IsolateDedicatedDBInstanceRequest} req
+     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
      * @public
      */
-    CreateDedicatedClusterDCDBInstance(req, cb) {
-        let resp = new CreateDedicatedClusterDCDBInstanceResponse();
-        this.request("CreateDedicatedClusterDCDBInstance", req, resp, cb);
+    IsolateDedicatedDBInstance(req, cb) {
+        let resp = new IsolateDedicatedDBInstanceResponse();
+        this.request("IsolateDedicatedDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
+     * @public
+     */
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
     }
 
     /**
@@ -452,6 +469,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     * @param {ModifyInstanceVipRequest} req
+     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVip(req, cb) {
+        let resp = new ModifyInstanceVipResponse();
+        this.request("ModifyInstanceVip", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
      * @param {DescribeSqlLogsRequest} req
      * @param {function(string, DescribeSqlLogsResponse):void} cb
@@ -482,6 +510,17 @@ class DcdbClient extends AbstractClient {
     IsolateHourDCDBInstance(req, cb) {
         let resp = new IsolateHourDCDBInstanceResponse();
         this.request("IsolateHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpgradeHourDCDBInstance）用于升级后付费分布式数据库实例。
+     * @param {UpgradeHourDCDBInstanceRequest} req
+     * @param {function(string, UpgradeHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeHourDCDBInstance(req, cb) {
+        let resp = new UpgradeHourDCDBInstanceResponse();
+        this.request("UpgradeHourDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -529,6 +568,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyInstanceNetwork）用于修改实例所属网络。
+     * @param {ModifyInstanceNetworkRequest} req
+     * @param {function(string, ModifyInstanceNetworkResponse):void} cb
+     * @public
+     */
+    ModifyInstanceNetwork(req, cb) {
+        let resp = new ModifyInstanceNetworkResponse();
+        this.request("ModifyInstanceNetwork", req, resp, cb);
+    }
+
+    /**
      * 本接口（KillSession）用于杀死指定会话。
      * @param {KillSessionRequest} req
      * @param {function(string, KillSessionResponse):void} cb
@@ -548,6 +598,22 @@ class DcdbClient extends AbstractClient {
     OpenDBExtranetAccess(req, cb) {
         let resp = new OpenDBExtranetAccessResponse();
         this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+
+**注意**
+- 系统保留库："mysql"，只开放["SELECT"]权限
+- 只读账号授予读写权限会报错
+- 不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组
+     * @param {ModifyAccountPrivilegesRequest} req
+     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivileges(req, cb) {
+        let resp = new ModifyAccountPrivilegesResponse();
+        this.request("ModifyAccountPrivileges", req, resp, cb);
     }
 
     /**
@@ -603,6 +669,17 @@ class DcdbClient extends AbstractClient {
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
         this.request("CloseDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
+     * @param {ModifyDBEncryptAttributesRequest} req
+     * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDBEncryptAttributes(req, cb) {
+        let resp = new ModifyDBEncryptAttributesResponse();
+        this.request("ModifyDBEncryptAttributes", req, resp, cb);
     }
 
     /**
@@ -707,6 +784,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     * @param {ModifyInstanceVportRequest} req
+     * @param {function(string, ModifyInstanceVportResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVport(req, cb) {
+        let resp = new ModifyInstanceVportResponse();
+        this.request("ModifyInstanceVport", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -740,7 +828,7 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（IsolateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
+     * 本接口（TerminateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
      * @param {TerminateDedicatedDBInstanceRequest} req
      * @param {function(string, TerminateDedicatedDBInstanceResponse):void} cb
      * @public

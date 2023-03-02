@@ -19,21 +19,26 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const EksCiVolume = models.EksCiVolume;
+const GetTkeAppChartListRequest = models.GetTkeAppChartListRequest;
 const DescribeEdgeCVMInstancesRequest = models.DescribeEdgeCVMInstancesRequest;
 const InstallLogAgentRequest = models.InstallLogAgentRequest;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const ContainerState = models.ContainerState;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
+const SubnetInfos = models.SubnetInfos;
 const CbsVolume = models.CbsVolume;
 const DescribeEKSClustersRequest = models.DescribeEKSClustersRequest;
 const DescribePrometheusInstancesOverviewRequest = models.DescribePrometheusInstancesOverviewRequest;
 const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
-const DescribeEdgeClusterInstancesResponse = models.DescribeEdgeClusterInstancesResponse;
+const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
+const UpgradeClusterReleaseRequest = models.UpgradeClusterReleaseRequest;
+const DescribeEdgeClusterUpgradeInfoRequest = models.DescribeEdgeClusterUpgradeInfoRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
 const DisableVpcCniNetworkTypeResponse = models.DisableVpcCniNetworkTypeResponse;
 const DescribeClusterControllersResponse = models.DescribeClusterControllersResponse;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
+const DeletePrometheusClusterAgentRequest = models.DeletePrometheusClusterAgentRequest;
 const ClusterLevelChangeRecord = models.ClusterLevelChangeRecord;
 const ModifyPrometheusAlertRuleResponse = models.ModifyPrometheusAlertRuleResponse;
 const DescribeEKSContainerInstanceEventResponse = models.DescribeEKSContainerInstanceEventResponse;
@@ -58,50 +63,64 @@ const Label = models.Label;
 const PodLimitsByType = models.PodLimitsByType;
 const DeletePrometheusTemplateSyncRequest = models.DeletePrometheusTemplateSyncRequest;
 const DisableVpcCniNetworkTypeRequest = models.DisableVpcCniNetworkTypeRequest;
+const DescribeClusterReleaseDetailsResponse = models.DescribeClusterReleaseDetailsResponse;
 const SyncPrometheusTempResponse = models.SyncPrometheusTempResponse;
+const CreateEdgeLogConfigRequest = models.CreateEdgeLogConfigRequest;
 const CreatePrometheusDashboardResponse = models.CreatePrometheusDashboardResponse;
+const CancelClusterReleaseRequest = models.CancelClusterReleaseRequest;
 const DescribeTKEEdgeClusterStatusResponse = models.DescribeTKEEdgeClusterStatusResponse;
+const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const PrometheusConfigItem = models.PrometheusConfigItem;
 const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DescribeEKSClusterCredentialResponse = models.DescribeEKSClusterCredentialResponse;
 const CheckInstancesUpgradeAbleRequest = models.CheckInstancesUpgradeAbleRequest;
 const ModifyPrometheusTemplateRequest = models.ModifyPrometheusTemplateRequest;
-const DeleteEdgeClusterInstancesRequest = models.DeleteEdgeClusterInstancesRequest;
+const DeleteClusterVirtualNodePoolRequest = models.DeleteClusterVirtualNodePoolRequest;
 const DescribeImageCachesRequest = models.DescribeImageCachesRequest;
 const DescribePrometheusAlertRuleRequest = models.DescribePrometheusAlertRuleRequest;
 const DescribeEdgeAvailableExtraArgsRequest = models.DescribeEdgeAvailableExtraArgsRequest;
 const ExistedInstance = models.ExistedInstance;
 const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
 const PrometheusInstancesOverview = models.PrometheusInstancesOverview;
+const DescribePrometheusInstanceInitStatusResponse = models.DescribePrometheusInstanceInitStatusResponse;
 const DisableEventPersistenceResponse = models.DisableEventPersistenceResponse;
 const UpdateEKSContainerInstanceRequest = models.UpdateEKSContainerInstanceRequest;
+const CUDNN = models.CUDNN;
 const GetMostSuitableImageCacheResponse = models.GetMostSuitableImageCacheResponse;
 const DescribeEdgeAvailableExtraArgsResponse = models.DescribeEdgeAvailableExtraArgsResponse;
+const CreatePrometheusRecordRuleYamlRequest = models.CreatePrometheusRecordRuleYamlRequest;
 const DescribeEnableVpcCniProgressRequest = models.DescribeEnableVpcCniProgressRequest;
 const Instance = models.Instance;
-const DescribePrometheusAgentInstancesResponse = models.DescribePrometheusAgentInstancesResponse;
+const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const CreateClusterResponse = models.CreateClusterResponse;
+const PrometheusClusterAgentPodConfig = models.PrometheusClusterAgentPodConfig;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ImageCache = models.ImageCache;
 const DeletePrometheusAlertRuleResponse = models.DeletePrometheusAlertRuleResponse;
+const DescribeClusterPendingReleasesRequest = models.DescribeClusterPendingReleasesRequest;
+const DeletePrometheusConfigResponse = models.DeletePrometheusConfigResponse;
 const DescribeEksContainerInstanceLogRequest = models.DescribeEksContainerInstanceLogRequest;
+const CreatePrometheusRecordRuleYamlResponse = models.CreatePrometheusRecordRuleYamlResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const PodLimitsInstance = models.PodLimitsInstance;
 const ModifyPrometheusTempRequest = models.ModifyPrometheusTempRequest;
 const ControllerStatus = models.ControllerStatus;
 const DeletePrometheusTempSyncResponse = models.DeletePrometheusTempSyncResponse;
 const DescribePrometheusRecordRulesRequest = models.DescribePrometheusRecordRulesRequest;
+const VirtualNodePool = models.VirtualNodePool;
 const DescribeTKEEdgeClusterStatusRequest = models.DescribeTKEEdgeClusterStatusRequest;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
+const DescribeEdgeClusterInstancesResponse = models.DescribeEdgeClusterInstancesResponse;
+const UpdateEdgeClusterVersionRequest = models.UpdateEdgeClusterVersionRequest;
 const GetTkeAppChartListResponse = models.GetTkeAppChartListResponse;
 const DescribePrometheusTemplateSyncRequest = models.DescribePrometheusTemplateSyncRequest;
-const DeleteTKEEdgeClusterResponse = models.DeleteTKEEdgeClusterResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
+const CustomDriver = models.CustomDriver;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
-const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
+const DescribePrometheusAgentInstancesResponse = models.DescribePrometheusAgentInstancesResponse;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const DeletePrometheusTempResponse = models.DeletePrometheusTempResponse;
@@ -110,10 +129,13 @@ const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesReque
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
+const DeleteClusterVirtualNodeRequest = models.DeleteClusterVirtualNodeRequest;
 const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
 const DescribePrometheusTempSyncRequest = models.DescribePrometheusTempSyncRequest;
-const DescribePrometheusClusterAgentsResponse = models.DescribePrometheusClusterAgentsResponse;
+const DescribePrometheusGlobalConfigResponse = models.DescribePrometheusGlobalConfigResponse;
+const DescribeClusterReleaseHistoryResponse = models.DescribeClusterReleaseHistoryResponse;
 const DescribeImagesRequest = models.DescribeImagesRequest;
+const UninstallEdgeLogAgentResponse = models.UninstallEdgeLogAgentResponse;
 const AddVpcCniSubnetsRequest = models.AddVpcCniSubnetsRequest;
 const DescribePrometheusAlertHistoryResponse = models.DescribePrometheusAlertHistoryResponse;
 const ExistedInstancesPara = models.ExistedInstancesPara;
@@ -121,6 +143,7 @@ const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOption
 const CreateTKEEdgeClusterResponse = models.CreateTKEEdgeClusterResponse;
 const DescribeEdgeClusterExtraArgsResponse = models.DescribeEdgeClusterExtraArgsResponse;
 const ResourceDeleteOption = models.ResourceDeleteOption;
+const InstallEdgeLogAgentRequest = models.InstallEdgeLogAgentRequest;
 const CheckEdgeClusterCIDRRequest = models.CheckEdgeClusterCIDRRequest;
 const CreateImageCacheRequest = models.CreateImageCacheRequest;
 const UpdateClusterVersionRequest = models.UpdateClusterVersionRequest;
@@ -130,12 +153,14 @@ const EdgeCluster = models.EdgeCluster;
 const DescribeClusterNodePoolDetailResponse = models.DescribeClusterNodePoolDetailResponse;
 const DescribeEKSContainerInstanceEventRequest = models.DescribeEKSContainerInstanceEventRequest;
 const ScaleOutClusterMasterResponse = models.ScaleOutClusterMasterResponse;
+const Toleration = models.Toleration;
 const CreateEKSContainerInstancesResponse = models.CreateEKSContainerInstancesResponse;
+const DeleteEdgeCVMInstancesResponse = models.DeleteEdgeCVMInstancesResponse;
 const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
 const DescribeClusterCommonNamesRequest = models.DescribeClusterCommonNamesRequest;
 const NfsVolume = models.NfsVolume;
 const PrometheusNotification = models.PrometheusNotification;
-const EdgeClusterPublicLB = models.EdgeClusterPublicLB;
+const ClusterCondition = models.ClusterCondition;
 const NodePool = models.NodePool;
 const DescribeEKSClustersResponse = models.DescribeEKSClustersResponse;
 const VolumeMount = models.VolumeMount;
@@ -158,20 +183,33 @@ const DescribePrometheusRecordRulesResponse = models.DescribePrometheusRecordRul
 const DescribePrometheusGlobalNotificationResponse = models.DescribePrometheusGlobalNotificationResponse;
 const HttpGet = models.HttpGet;
 const ResourceUsage = models.ResourceUsage;
+const CreateClusterVirtualNodeRequest = models.CreateClusterVirtualNodeRequest;
 const DescribeTKEEdgeClustersRequest = models.DescribeTKEEdgeClustersRequest;
 const DescribePrometheusAlertHistoryRequest = models.DescribePrometheusAlertHistoryRequest;
 const SetNodePoolNodeProtectionResponse = models.SetNodePoolNodeProtectionResponse;
 const DeletePrometheusAlertPolicyRequest = models.DeletePrometheusAlertPolicyRequest;
-const RouteTableConflict = models.RouteTableConflict;
+const ModifyPrometheusAgentExternalLabelsResponse = models.ModifyPrometheusAgentExternalLabelsResponse;
+const RollbackClusterReleaseRequest = models.RollbackClusterReleaseRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
+const DriverVersion = models.DriverVersion;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const Taint = models.Taint;
 const ModifyNodePoolInstanceTypesRequest = models.ModifyNodePoolInstanceTypesRequest;
 const AddClusterCIDRRequest = models.AddClusterCIDRRequest;
+const OIDCConfigAuthenticationOptions = models.OIDCConfigAuthenticationOptions;
+const CreateClusterRequest = models.CreateClusterRequest;
+const CreateEdgeCVMInstancesRequest = models.CreateEdgeCVMInstancesRequest;
+const DescribeClusterReleaseHistoryRequest = models.DescribeClusterReleaseHistoryRequest;
+const NodePoolOption = models.NodePoolOption;
 const DescribeEdgeClusterExtraArgsRequest = models.DescribeEdgeClusterExtraArgsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const DeleteClusterVirtualNodeResponse = models.DeleteClusterVirtualNodeResponse;
+const PrometheusAgentInfo = models.PrometheusAgentInfo;
+const CreateEdgeCVMInstancesResponse = models.CreateEdgeCVMInstancesResponse;
+const DescribeEdgeLogSwitchesResponse = models.DescribeEdgeLogSwitchesResponse;
+const CreatePrometheusClusterAgentResponse = models.CreatePrometheusClusterAgentResponse;
 const DescribePrometheusTemplatesResponse = models.DescribePrometheusTemplatesResponse;
 const UpdateEKSContainerInstanceResponse = models.UpdateEKSContainerInstanceResponse;
 const DnsServerConf = models.DnsServerConf;
@@ -183,11 +221,14 @@ const DescribeResourceUsageResponse = models.DescribeResourceUsageResponse;
 const EdgeClusterInternalLB = models.EdgeClusterInternalLB;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeAvailableClusterVersionRequest = models.DescribeAvailableClusterVersionRequest;
+const UpgradeClusterReleaseResponse = models.UpgradeClusterReleaseResponse;
 const DescribePrometheusAlertPolicyRequest = models.DescribePrometheusAlertPolicyRequest;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const RegionInstance = models.RegionInstance;
-const NodePoolOption = models.NodePoolOption;
+const DescribePrometheusConfigRequest = models.DescribePrometheusConfigRequest;
+const DescribeEdgeLogSwitchesRequest = models.DescribeEdgeLogSwitchesRequest;
 const DeletePrometheusTemplateRequest = models.DeletePrometheusTemplateRequest;
+const DeletePrometheusRecordRuleYamlResponse = models.DeletePrometheusRecordRuleYamlResponse;
 const DescribePrometheusTempSyncResponse = models.DescribePrometheusTempSyncResponse;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
@@ -198,11 +239,13 @@ const DisableClusterDeletionProtectionResponse = models.DisableClusterDeletionPr
 const EnableVpcCniNetworkTypeRequest = models.EnableVpcCniNetworkTypeRequest;
 const Container = models.Container;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
+const Exec = models.Exec;
 const DescribePrometheusInstanceResponse = models.DescribePrometheusInstanceResponse;
 const Capabilities = models.Capabilities;
 const UpdateTKEEdgeClusterRequest = models.UpdateTKEEdgeClusterRequest;
 const DescribeTKEEdgeExternalKubeconfigResponse = models.DescribeTKEEdgeExternalKubeconfigResponse;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const ModifyClusterVirtualNodePoolResponse = models.ModifyClusterVirtualNodePoolResponse;
 const InstanceUpgradeClusterStatus = models.InstanceUpgradeClusterStatus;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteECMInstancesRequest = models.DeleteECMInstancesRequest;
@@ -212,17 +255,20 @@ const SetNodePoolNodeProtectionRequest = models.SetNodePoolNodeProtectionRequest
 const EnableClusterAuditRequest = models.EnableClusterAuditRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DisableClusterAuditResponse = models.DisableClusterAuditResponse;
+const DescribeClusterEndpointsResponse = models.DescribeClusterEndpointsResponse;
 const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
+const UninstallEdgeLogAgentRequest = models.UninstallEdgeLogAgentRequest;
 const DescribeClusterLevelChangeRecordsRequest = models.DescribeClusterLevelChangeRecordsRequest;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
 const InstanceUpgradePreCheckResultItem = models.InstanceUpgradePreCheckResultItem;
-const ModifyNodePoolDesiredCapacityAboutAsgRequest = models.ModifyNodePoolDesiredCapacityAboutAsgRequest;
+const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const DeleteImageCachesRequest = models.DeleteImageCachesRequest;
+const ReleaseValues = models.ReleaseValues;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const Filter = models.Filter;
 const UpdateTKEEdgeClusterResponse = models.UpdateTKEEdgeClusterResponse;
 const EipAttribute = models.EipAttribute;
-const InstanceUpgradePreCheckResult = models.InstanceUpgradePreCheckResult;
+const DescribeEKSContainerInstancesRequest = models.DescribeEKSContainerInstancesRequest;
 const DescribeClusterControllersRequest = models.DescribeClusterControllersRequest;
 const ModifyPrometheusAlertRuleRequest = models.ModifyPrometheusAlertRuleRequest;
 const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
@@ -232,40 +278,58 @@ const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const PrometheusTemplateModify = models.PrometheusTemplateModify;
+const RollbackClusterReleaseResponse = models.RollbackClusterReleaseResponse;
 const ClusterVersion = models.ClusterVersion;
 const InstanceUpgradeProgressItem = models.InstanceUpgradeProgressItem;
+const DescribeClusterVirtualNodePoolsRequest = models.DescribeClusterVirtualNodePoolsRequest;
 const GetMostSuitableImageCacheRequest = models.GetMostSuitableImageCacheRequest;
 const SecurityContext = models.SecurityContext;
 const DNSConfig = models.DNSConfig;
+const ModifyPrometheusConfigResponse = models.ModifyPrometheusConfigResponse;
 const DescribeTKEEdgeExternalKubeconfigRequest = models.DescribeTKEEdgeExternalKubeconfigRequest;
 const CreatePrometheusAlertPolicyResponse = models.CreatePrometheusAlertPolicyResponse;
 const DNSConfigOption = models.DNSConfigOption;
+const DescribeClusterVirtualNodeRequest = models.DescribeClusterVirtualNodeRequest;
+const DescribeClusterReleasesResponse = models.DescribeClusterReleasesResponse;
 const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
 const DescribeExternalClusterSpecRequest = models.DescribeExternalClusterSpecRequest;
 const ModifyPrometheusGlobalNotificationResponse = models.ModifyPrometheusGlobalNotificationResponse;
+const UninstallClusterReleaseRequest = models.UninstallClusterReleaseRequest;
+const VirtualNode = models.VirtualNode;
+const ForwardTKEEdgeApplicationRequestV3Response = models.ForwardTKEEdgeApplicationRequestV3Response;
+const CreateClusterVirtualNodePoolRequest = models.CreateClusterVirtualNodePoolRequest;
+const ModifyPrometheusConfigRequest = models.ModifyPrometheusConfigRequest;
 const AutoScalingGroupRange = models.AutoScalingGroupRange;
 const DescribePrometheusGlobalNotificationRequest = models.DescribePrometheusGlobalNotificationRequest;
 const ClusterPublicLB = models.ClusterPublicLB;
 const DescribePrometheusTemplateSyncResponse = models.DescribePrometheusTemplateSyncResponse;
 const ModifyPrometheusTemplateResponse = models.ModifyPrometheusTemplateResponse;
 const ModifyPrometheusAlertPolicyResponse = models.ModifyPrometheusAlertPolicyResponse;
+const DescribePrometheusClusterAgentsResponse = models.DescribePrometheusClusterAgentsResponse;
+const CreatePrometheusConfigResponse = models.CreatePrometheusConfigResponse;
 const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
 const DescribeEksContainerInstanceLogResponse = models.DescribeEksContainerInstanceLogResponse;
 const DeleteEKSClusterResponse = models.DeleteEKSClusterResponse;
 const VersionInstance = models.VersionInstance;
 const EksCi = models.EksCi;
 const UpdateImageCacheResponse = models.UpdateImageCacheResponse;
+const CreatePrometheusConfigRequest = models.CreatePrometheusConfigRequest;
+const CreateClusterVirtualNodeResponse = models.CreateClusterVirtualNodeResponse;
 const ImageCacheEvent = models.ImageCacheEvent;
-const DeleteEKSContainerInstancesResponse = models.DeleteEKSContainerInstancesResponse;
+const CreatePrometheusClusterAgentRequest = models.CreatePrometheusClusterAgentRequest;
+const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
 const DescribePrometheusInstancesOverviewResponse = models.DescribePrometheusInstancesOverviewResponse;
 const DescribeEKSClusterCredentialRequest = models.DescribeEKSClusterCredentialRequest;
 const EnableClusterDeletionProtectionRequest = models.EnableClusterDeletionProtectionRequest;
 const RestartEKSContainerInstancesRequest = models.RestartEKSContainerInstancesRequest;
+const DrainClusterVirtualNodeRequest = models.DrainClusterVirtualNodeRequest;
 const DescribeClusterLevelAttributeRequest = models.DescribeClusterLevelAttributeRequest;
-const DisableClusterDeletionProtectionRequest = models.DisableClusterDeletionProtectionRequest;
-const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
+const DescribeClusterReleaseDetailsRequest = models.DescribeClusterReleaseDetailsRequest;
+const CreateECMInstancesRequest = models.CreateECMInstancesRequest;
+const DescribeClusterReleasesRequest = models.DescribeClusterReleasesRequest;
 const ClusterCredential = models.ClusterCredential;
 const DescribePrometheusOverviewsRequest = models.DescribePrometheusOverviewsRequest;
+const DescribeClusterPendingReleasesResponse = models.DescribeClusterPendingReleasesResponse;
 const DataDisk = models.DataDisk;
 const DeleteEKSClusterRequest = models.DeleteEKSClusterRequest;
 const GetUpgradeInstanceProgressResponse = models.GetUpgradeInstanceProgressResponse;
@@ -275,10 +339,10 @@ const DescribeEKSContainerInstancesResponse = models.DescribeEKSContainerInstanc
 const CreatePrometheusAlertRuleResponse = models.CreatePrometheusAlertRuleResponse;
 const ECMEnhancedService = models.ECMEnhancedService;
 const ModifyClusterAuthenticationOptionsResponse = models.ModifyClusterAuthenticationOptionsResponse;
-const ClusterCondition = models.ClusterCondition;
+const EdgeClusterPublicLB = models.EdgeClusterPublicLB;
 const EnableEventPersistenceResponse = models.EnableEventPersistenceResponse;
 const EnhancedService = models.EnhancedService;
-const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
+const DeleteEKSContainerInstancesResponse = models.DeleteEKSContainerInstancesResponse;
 const UninstallLogAgentRequest = models.UninstallLogAgentRequest;
 const TcpSocket = models.TcpSocket;
 const TagSpecification = models.TagSpecification;
@@ -287,15 +351,19 @@ const DeleteEdgeClusterInstancesResponse = models.DeleteEdgeClusterInstancesResp
 const DeleteTKEEdgeClusterRequest = models.DeleteTKEEdgeClusterRequest;
 const CreatePrometheusGlobalNotificationResponse = models.CreatePrometheusGlobalNotificationResponse;
 const DescribeClusterAuthenticationOptionsResponse = models.DescribeClusterAuthenticationOptionsResponse;
+const DeletePrometheusClusterAgentResponse = models.DeletePrometheusClusterAgentResponse;
+const CreateClusterReleaseRequest = models.CreateClusterReleaseRequest;
 const DescribePrometheusAgentsRequest = models.DescribePrometheusAgentsRequest;
 const AddClusterCIDRResponse = models.AddClusterCIDRResponse;
+const ReleaseDetails = models.ReleaseDetails;
+const DescribePrometheusInstanceInitStatusRequest = models.DescribePrometheusInstanceInitStatusRequest;
 const DescribeClusterLevelAttributeResponse = models.DescribeClusterLevelAttributeResponse;
 const PrometheusGrafanaInfo = models.PrometheusGrafanaInfo;
 const ImageInstance = models.ImageInstance;
 const CreatePrometheusAlertPolicyRequest = models.CreatePrometheusAlertPolicyRequest;
-const GetTkeAppChartListRequest = models.GetTkeAppChartListRequest;
+const DescribeImageCachesResponse = models.DescribeImageCachesResponse;
 const ResourceUsageDetail = models.ResourceUsageDetail;
-const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
+const DescribeClusterVirtualNodePoolsResponse = models.DescribeClusterVirtualNodePoolsResponse;
 const CheckEdgeClusterCIDRResponse = models.CheckEdgeClusterCIDRResponse;
 const DescribePrometheusClusterAgentsRequest = models.DescribePrometheusClusterAgentsRequest;
 const EdgeArgsFlag = models.EdgeArgsFlag;
@@ -303,13 +371,15 @@ const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleRespon
 const CreatePrometheusTempRequest = models.CreatePrometheusTempRequest;
 const CreatePrometheusDashboardRequest = models.CreatePrometheusDashboardRequest;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
-const DescribeImageCachesResponse = models.DescribeImageCachesResponse;
+const DisableClusterDeletionProtectionRequest = models.DisableClusterDeletionProtectionRequest;
 const PrometheusJobTargets = models.PrometheusJobTargets;
 const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
 const UninstallLogAgentResponse = models.UninstallLogAgentResponse;
-const CreateECMInstancesRequest = models.CreateECMInstancesRequest;
+const PrometheusClusterAgentBasic = models.PrometheusClusterAgentBasic;
+const DeleteTKEEdgeClusterResponse = models.DeleteTKEEdgeClusterResponse;
 const CreatePrometheusTempResponse = models.CreatePrometheusTempResponse;
 const DescribePrometheusTargetsRequest = models.DescribePrometheusTargetsRequest;
+const RunPrometheusInstanceResponse = models.RunPrometheusInstanceResponse;
 const DeletePrometheusTemplateSyncResponse = models.DeletePrometheusTemplateSyncResponse;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const ECMRunMonitorServiceEnabled = models.ECMRunMonitorServiceEnabled;
@@ -317,28 +387,37 @@ const SyncPrometheusTempRequest = models.SyncPrometheusTempRequest;
 const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
 const ECMRunSecurityServiceEnabled = models.ECMRunSecurityServiceEnabled;
 const SyncPrometheusTemplateResponse = models.SyncPrometheusTemplateResponse;
+const UninstallClusterReleaseResponse = models.UninstallClusterReleaseResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
+const ForwardTKEEdgeApplicationRequestV3Request = models.ForwardTKEEdgeApplicationRequestV3Request;
 const DisableEventPersistenceRequest = models.DisableEventPersistenceRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const CreateEKSContainerInstancesRequest = models.CreateEKSContainerInstancesRequest;
 const DescribeTKEEdgeClusterCredentialResponse = models.DescribeTKEEdgeClusterCredentialResponse;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const CancelClusterReleaseResponse = models.CancelClusterReleaseResponse;
+const UpdateEdgeClusterVersionResponse = models.UpdateEdgeClusterVersionResponse;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const DescribeClusterAsGroupsResponse = models.DescribeClusterAsGroupsResponse;
+const DescribePrometheusConfigResponse = models.DescribePrometheusConfigResponse;
 const ScaleOutClusterMasterRequest = models.ScaleOutClusterMasterRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const CreatePrometheusGlobalNotificationRequest = models.CreatePrometheusGlobalNotificationRequest;
 const ModifyPrometheusTempResponse = models.ModifyPrometheusTempResponse;
 const PrometheusAlertRuleDetail = models.PrometheusAlertRuleDetail;
+const ReleaseHistory = models.ReleaseHistory;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const CreatePrometheusAlertRuleRequest = models.CreatePrometheusAlertRuleRequest;
 const UpdateEKSClusterRequest = models.UpdateEKSClusterRequest;
 const CreateTKEEdgeClusterRequest = models.CreateTKEEdgeClusterRequest;
+const CreateClusterVirtualNodePoolResponse = models.CreateClusterVirtualNodePoolResponse;
 const CreateEKSClusterResponse = models.CreateEKSClusterResponse;
 const CreateImageCacheResponse = models.CreateImageCacheResponse;
-const Exec = models.Exec;
+const CreateEdgeLogConfigResponse = models.CreateEdgeLogConfigResponse;
 const DescribeAvailableTKEEdgeVersionResponse = models.DescribeAvailableTKEEdgeVersionResponse;
+const ModifyPrometheusRecordRuleYamlRequest = models.ModifyPrometheusRecordRuleYamlRequest;
 const DeletePrometheusAlertPolicyResponse = models.DeletePrometheusAlertPolicyResponse;
+const InstallEdgeLogAgentResponse = models.InstallEdgeLogAgentResponse;
 const EdgeAvailableExtraArgs = models.EdgeAvailableExtraArgs;
 const IPAddress = models.IPAddress;
 const DescribeTKEEdgeClusterCredentialRequest = models.DescribeTKEEdgeClusterCredentialRequest;
@@ -346,20 +425,23 @@ const AutoUpgradeClusterLevel = models.AutoUpgradeClusterLevel;
 const CreateEKSClusterRequest = models.CreateEKSClusterRequest;
 const CommonName = models.CommonName;
 const EnableEventPersistenceRequest = models.EnableEventPersistenceRequest;
+const ModifyClusterVirtualNodePoolRequest = models.ModifyClusterVirtualNodePoolRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const CreateClusterRouteResponse = models.CreateClusterRouteResponse;
-const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
+const Release = models.Release;
 const DescribeEKSContainerInstanceRegionsRequest = models.DescribeEKSContainerInstanceRegionsRequest;
 const DescribeECMInstancesRequest = models.DescribeECMInstancesRequest;
+const DrainClusterVirtualNodeResponse = models.DrainClusterVirtualNodeResponse;
 const DescribeVpcCniPodLimitsResponse = models.DescribeVpcCniPodLimitsResponse;
 const DescribeVersionsResponse = models.DescribeVersionsResponse;
 const ScaleInClusterMasterRequest = models.ScaleInClusterMasterRequest;
-const CreateClusterNodePoolFromExistingAsgRequest = models.CreateClusterNodePoolFromExistingAsgRequest;
+const DeleteEdgeClusterInstancesRequest = models.DeleteEdgeClusterInstancesRequest;
 const PrometheusAlertRule = models.PrometheusAlertRule;
+const VirtualNodeSpec = models.VirtualNodeSpec;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ClusterExtraArgs = models.ClusterExtraArgs;
-const EdgeClusterAdvancedSettings = models.EdgeClusterAdvancedSettings;
+const DeleteClusterVirtualNodePoolResponse = models.DeleteClusterVirtualNodePoolResponse;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const TaskStepInfo = models.TaskStepInfo;
 const ECMZoneInstanceCountISP = models.ECMZoneInstanceCountISP;
@@ -377,17 +459,22 @@ const DeletePrometheusTempSyncRequest = models.DeletePrometheusTempSyncRequest;
 const CreatePrometheusTemplateResponse = models.CreatePrometheusTemplateResponse;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const ClusterInternalLB = models.ClusterInternalLB;
+const DescribePrometheusGlobalConfigRequest = models.DescribePrometheusGlobalConfigRequest;
 const CreateECMInstancesResponse = models.CreateECMInstancesResponse;
 const ModifyPrometheusGlobalNotificationRequest = models.ModifyPrometheusGlobalNotificationRequest;
+const UnavailableReason = models.UnavailableReason;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
 const UpdateEKSClusterResponse = models.UpdateEKSClusterResponse;
 const DescribeEdgeCVMInstancesResponse = models.DescribeEdgeCVMInstancesResponse;
 const Event = models.Event;
-const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
+const ModifyNodePoolDesiredCapacityAboutAsgRequest = models.ModifyNodePoolDesiredCapacityAboutAsgRequest;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
-const DeleteEdgeCVMInstancesResponse = models.DeleteEdgeCVMInstancesResponse;
+const DeletePrometheusConfigRequest = models.DeletePrometheusConfigRequest;
+const DescribeEdgeClusterUpgradeInfoResponse = models.DescribeEdgeClusterUpgradeInfoResponse;
 const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
 const PrometheusAlertPolicyItem = models.PrometheusAlertPolicyItem;
+const ModifyPrometheusAgentExternalLabelsRequest = models.ModifyPrometheusAgentExternalLabelsRequest;
+const EdgeClusterAdvancedSettings = models.EdgeClusterAdvancedSettings;
 const PrometheusTarget = models.PrometheusTarget;
 const LoginSettings = models.LoginSettings;
 const DescribePrometheusTempResponse = models.DescribePrometheusTempResponse;
@@ -399,13 +486,14 @@ const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsRe
 const DescribeVersionsRequest = models.DescribeVersionsRequest;
 const DescribePrometheusTempRequest = models.DescribePrometheusTempRequest;
 const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
-const CreateClusterRequest = models.CreateClusterRequest;
+const DescribeClusterEndpointsRequest = models.DescribeClusterEndpointsRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
 const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const DeletePrometheusTemplateResponse = models.DeletePrometheusTemplateResponse;
 const DescribeECMInstancesResponse = models.DescribeECMInstancesResponse;
 const DescribePrometheusInstanceRequest = models.DescribePrometheusInstanceRequest;
 const DeletePrometheusAlertRuleRequest = models.DeletePrometheusAlertRuleRequest;
+const CreateClusterReleaseResponse = models.CreateClusterReleaseResponse;
 const EdgeClusterExtraArgs = models.EdgeClusterExtraArgs;
 const DescribePrometheusTargetsResponse = models.DescribePrometheusTargetsResponse;
 const DescribeEnableVpcCniProgressResponse = models.DescribeEnableVpcCniProgressResponse;
@@ -427,19 +515,26 @@ const DescribePrometheusAgentsResponse = models.DescribePrometheusAgentsResponse
 const DescribeVpcCniPodLimitsRequest = models.DescribeVpcCniPodLimitsRequest;
 const DeleteImageCachesResponse = models.DeleteImageCachesResponse;
 const DescribeEKSContainerInstanceRegionsResponse = models.DescribeEKSContainerInstanceRegionsResponse;
+const ModifyPrometheusRecordRuleYamlResponse = models.ModifyPrometheusRecordRuleYamlResponse;
 const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
 const AddVpcCniSubnetsResponse = models.AddVpcCniSubnetsResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const DescribePrometheusOverviewsResponse = models.DescribePrometheusOverviewsResponse;
-const DescribeEKSContainerInstancesRequest = models.DescribeEKSContainerInstancesRequest;
+const DeletePrometheusRecordRuleYamlRequest = models.DeletePrometheusRecordRuleYamlRequest;
+const InstanceUpgradePreCheckResult = models.InstanceUpgradePreCheckResult;
 const ScaleInClusterMasterResponse = models.ScaleInClusterMasterResponse;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
 const DeleteEKSContainerInstancesRequest = models.DeleteEKSContainerInstancesRequest;
 const DescribeClusterCommonNamesResponse = models.DescribeClusterCommonNamesResponse;
 const DeleteECMInstancesResponse = models.DeleteECMInstancesResponse;
 const PrometheusTemplate = models.PrometheusTemplate;
+const GPUArgs = models.GPUArgs;
+const RouteTableConflict = models.RouteTableConflict;
 const PrometheusInstanceOverview = models.PrometheusInstanceOverview;
+const DescribeClusterVirtualNodeResponse = models.DescribeClusterVirtualNodeResponse;
 const ScaleInMaster = models.ScaleInMaster;
+const RunPrometheusInstanceRequest = models.RunPrometheusInstanceRequest;
+const PendingRelease = models.PendingRelease;
 
 
 /**
@@ -453,6 +548,17 @@ class TkeClient extends AbstractClient {
     }
     
     /**
+     * 解除TMP实例的集群关联
+     * @param {DeletePrometheusClusterAgentRequest} req
+     * @param {function(string, DeletePrometheusClusterAgentResponse):void} cb
+     * @public
+     */
+    DeletePrometheusClusterAgent(req, cb) {
+        let resp = new DeletePrometheusClusterAgentResponse();
+        this.request("DeletePrometheusClusterAgent", req, resp, cb);
+    }
+
+    /**
      * 创建边缘计算ECM机器
      * @param {CreateECMInstancesRequest} req
      * @param {function(string, CreateECMInstancesResponse):void} cb
@@ -464,14 +570,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 更新镜像缓存接口
-     * @param {UpdateImageCacheRequest} req
-     * @param {function(string, UpdateImageCacheResponse):void} cb
+     * 查看虚拟节点列表
+     * @param {DescribeClusterVirtualNodeRequest} req
+     * @param {function(string, DescribeClusterVirtualNodeResponse):void} cb
      * @public
      */
-    UpdateImageCache(req, cb) {
-        let resp = new UpdateImageCacheResponse();
-        this.request("UpdateImageCache", req, resp, cb);
+    DescribeClusterVirtualNode(req, cb) {
+        let resp = new DescribeClusterVirtualNodeResponse();
+        this.request("DescribeClusterVirtualNode", req, resp, cb);
     }
 
     /**
@@ -483,6 +589,28 @@ class TkeClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * 在tke@edge集群的边缘节点上安装日志采集组件
+     * @param {InstallEdgeLogAgentRequest} req
+     * @param {function(string, InstallEdgeLogAgentResponse):void} cb
+     * @public
+     */
+    InstallEdgeLogAgent(req, cb) {
+        let resp = new InstallEdgeLogAgentResponse();
+        this.request("InstallEdgeLogAgent", req, resp, cb);
+    }
+
+    /**
+     * 创建虚拟节点池
+     * @param {CreateClusterVirtualNodePoolRequest} req
+     * @param {function(string, CreateClusterVirtualNodePoolResponse):void} cb
+     * @public
+     */
+    CreateClusterVirtualNodePool(req, cb) {
+        let resp = new CreateClusterVirtualNodePoolResponse();
+        this.request("CreateClusterVirtualNodePool", req, resp, cb);
     }
 
     /**
@@ -519,6 +647,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 从tke@edge集群边缘节点上卸载日志采集组件
+     * @param {UninstallEdgeLogAgentRequest} req
+     * @param {function(string, UninstallEdgeLogAgentResponse):void} cb
+     * @public
+     */
+    UninstallEdgeLogAgent(req, cb) {
+        let resp = new UninstallEdgeLogAgentResponse();
+        this.request("UninstallEdgeLogAgent", req, resp, cb);
+    }
+
+    /**
      * 删除边缘计算实例
      * @param {DeleteEdgeClusterInstancesRequest} req
      * @param {function(string, DeleteEdgeClusterInstancesResponse):void} cb
@@ -530,7 +669,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 修改告警规则 
+     * 修改告警规则
      * @param {ModifyPrometheusAlertRuleRequest} req
      * @param {function(string, ModifyPrometheusAlertRuleResponse):void} cb
      * @public
@@ -607,17 +746,6 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 获取边缘计算集群的认证信息
-     * @param {DescribeTKEEdgeClusterCredentialRequest} req
-     * @param {function(string, DescribeTKEEdgeClusterCredentialResponse):void} cb
-     * @public
-     */
-    DescribeTKEEdgeClusterCredential(req, cb) {
-        let resp = new DescribeTKEEdgeClusterCredentialResponse();
-        this.request("DescribeTKEEdgeClusterCredential", req, resp, cb);
-    }
-
-    /**
      * 创建集群路由表
      * @param {CreateClusterRouteTableRequest} req
      * @param {function(string, CreateClusterRouteTableResponse):void} cb
@@ -629,7 +757,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 获得节点升级当前的进度 
+     * 获得节点升级当前的进度
      * @param {GetUpgradeInstanceProgressRequest} req
      * @param {function(string, GetUpgradeInstanceProgressResponse):void} cb
      * @public
@@ -673,7 +801,29 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 边缘计算支持的k8s版本
+     * 删除虚拟节点
+     * @param {DeleteClusterVirtualNodeRequest} req
+     * @param {function(string, DeleteClusterVirtualNodeResponse):void} cb
+     * @public
+     */
+    DeleteClusterVirtualNode(req, cb) {
+        let resp = new DeleteClusterVirtualNodeResponse();
+        this.request("DeleteClusterVirtualNode", req, resp, cb);
+    }
+
+    /**
+     * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+     * @param {DescribeTKEEdgeScriptRequest} req
+     * @param {function(string, DescribeTKEEdgeScriptResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeScript(req, cb) {
+        let resp = new DescribeTKEEdgeScriptResponse();
+        this.request("DescribeTKEEdgeScript", req, resp, cb);
+    }
+
+    /**
+     * 边缘计算支持版本和k8s版本
      * @param {DescribeAvailableTKEEdgeVersionRequest} req
      * @param {function(string, DescribeAvailableTKEEdgeVersionResponse):void} cb
      * @public
@@ -728,6 +878,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 修改被关联集群的external labels
+     * @param {ModifyPrometheusAgentExternalLabelsRequest} req
+     * @param {function(string, ModifyPrometheusAgentExternalLabelsResponse):void} cb
+     * @public
+     */
+    ModifyPrometheusAgentExternalLabels(req, cb) {
+        let resp = new ModifyPrometheusAgentExternalLabelsResponse();
+        this.request("ModifyPrometheusAgentExternalLabels", req, resp, cb);
+    }
+
+    /**
      * 删除弹性集群(yunapiv3)
      * @param {DeleteEKSClusterRequest} req
      * @param {function(string, DeleteEKSClusterResponse):void} cb
@@ -736,6 +897,28 @@ class TkeClient extends AbstractClient {
     DeleteEKSCluster(req, cb) {
         let resp = new DeleteEKSClusterResponse();
         this.request("DeleteEKSCluster", req, resp, cb);
+    }
+
+    /**
+     * 获取事件、审计和日志的状态
+     * @param {DescribeEdgeLogSwitchesRequest} req
+     * @param {function(string, DescribeEdgeLogSwitchesResponse):void} cb
+     * @public
+     */
+    DescribeEdgeLogSwitches(req, cb) {
+        let resp = new DescribeEdgeLogSwitchesResponse();
+        this.request("DescribeEdgeLogSwitches", req, resp, cb);
+    }
+
+    /**
+     * 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
+     * @param {UpdateEdgeClusterVersionRequest} req
+     * @param {function(string, UpdateEdgeClusterVersionResponse):void} cb
+     * @public
+     */
+    UpdateEdgeClusterVersion(req, cb) {
+        let resp = new UpdateEdgeClusterVersionResponse();
+        this.request("UpdateEdgeClusterVersion", req, resp, cb);
     }
 
     /**
@@ -772,14 +955,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询镜像缓存信息接口
-     * @param {DescribeImageCachesRequest} req
-     * @param {function(string, DescribeImageCachesResponse):void} cb
+     * 修改虚拟节点池
+     * @param {ModifyClusterVirtualNodePoolRequest} req
+     * @param {function(string, ModifyClusterVirtualNodePoolResponse):void} cb
      * @public
      */
-    DescribeImageCaches(req, cb) {
-        let resp = new DescribeImageCachesResponse();
-        this.request("DescribeImageCaches", req, resp, cb);
+    ModifyClusterVirtualNodePool(req, cb) {
+        let resp = new ModifyClusterVirtualNodePoolResponse();
+        this.request("ModifyClusterVirtualNodePool", req, resp, cb);
+    }
+
+    /**
+     * 查询节点池列表
+     * @param {DescribeClusterNodePoolsRequest} req
+     * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodePools(req, cb) {
+        let resp = new DescribeClusterNodePoolsResponse();
+        this.request("DescribeClusterNodePools", req, resp, cb);
     }
 
     /**
@@ -791,6 +985,28 @@ class TkeClient extends AbstractClient {
     UpdateClusterVersion(req, cb) {
         let resp = new UpdateClusterVersionResponse();
         this.request("UpdateClusterVersion", req, resp, cb);
+    }
+
+    /**
+     * 在应用市场中查询正在安装中的应用列表
+     * @param {DescribeClusterPendingReleasesRequest} req
+     * @param {function(string, DescribeClusterPendingReleasesResponse):void} cb
+     * @public
+     */
+    DescribeClusterPendingReleases(req, cb) {
+        let resp = new DescribeClusterPendingReleasesResponse();
+        this.request("DescribeClusterPendingReleases", req, resp, cb);
+    }
+
+    /**
+     * 以Yaml的方式创建聚合规则
+     * @param {CreatePrometheusRecordRuleYamlRequest} req
+     * @param {function(string, CreatePrometheusRecordRuleYamlResponse):void} cb
+     * @public
+     */
+    CreatePrometheusRecordRuleYaml(req, cb) {
+        let resp = new CreatePrometheusRecordRuleYamlResponse();
+        this.request("CreatePrometheusRecordRuleYaml", req, resp, cb);
     }
 
     /**
@@ -926,6 +1142,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 在应用市场中集群删除某个应用
+     * @param {UninstallClusterReleaseRequest} req
+     * @param {function(string, UninstallClusterReleaseResponse):void} cb
+     * @public
+     */
+    UninstallClusterRelease(req, cb) {
+        let resp = new UninstallClusterReleaseResponse();
+        this.request("UninstallClusterRelease", req, resp, cb);
+    }
+
+    /**
      * 针对VPC-CNI模式的集群，增加集群容器网络可使用的子网
      * @param {AddVpcCniSubnetsRequest} req
      * @param {function(string, AddVpcCniSubnetsResponse):void} cb
@@ -934,6 +1161,17 @@ class TkeClient extends AbstractClient {
     AddVpcCniSubnets(req, cb) {
         let resp = new AddVpcCniSubnetsResponse();
         this.request("AddVpcCniSubnets", req, resp, cb);
+    }
+
+    /**
+     * 获取镜像信息
+     * @param {DescribeImagesRequest} req
+     * @param {function(string, DescribeImagesResponse):void} cb
+     * @public
+     */
+    DescribeImages(req, cb) {
+        let resp = new DescribeImagesResponse();
+        this.request("DescribeImages", req, resp, cb);
     }
 
     /**
@@ -948,18 +1186,29 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 获取弹性容器集群的接入认证信息
-     * @param {DescribeEKSClusterCredentialRequest} req
-     * @param {function(string, DescribeEKSClusterCredentialResponse):void} cb
+     * 获取2.0实例初始化任务状态
+     * @param {DescribePrometheusInstanceInitStatusRequest} req
+     * @param {function(string, DescribePrometheusInstanceInitStatusResponse):void} cb
      * @public
      */
-    DescribeEKSClusterCredential(req, cb) {
-        let resp = new DescribeEKSClusterCredentialResponse();
-        this.request("DescribeEKSClusterCredential", req, resp, cb);
+    DescribePrometheusInstanceInitStatus(req, cb) {
+        let resp = new DescribePrometheusInstanceInitStatusResponse();
+        this.request("DescribePrometheusInstanceInitStatus", req, resp, cb);
     }
 
     /**
-     * 给集群的一批work节点进行升级 
+     * 获取边缘计算集群的认证信息
+     * @param {DescribeTKEEdgeClusterCredentialRequest} req
+     * @param {function(string, DescribeTKEEdgeClusterCredentialResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeClusterCredential(req, cb) {
+        let resp = new DescribeTKEEdgeClusterCredentialResponse();
+        this.request("DescribeTKEEdgeClusterCredential", req, resp, cb);
+    }
+
+    /**
+     * 给集群的一批work节点进行升级
      * @param {UpgradeClusterInstancesRequest} req
      * @param {function(string, UpgradeClusterInstancesResponse):void} cb
      * @public
@@ -1025,6 +1274,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 更新镜像缓存接口
+     * @param {UpdateImageCacheRequest} req
+     * @param {function(string, UpdateImageCacheResponse):void} cb
+     * @public
+     */
+    UpdateImageCache(req, cb) {
+        let resp = new UpdateImageCacheResponse();
+        this.request("UpdateImageCache", req, resp, cb);
+    }
+
+    /**
      * 获取容器服务支持的所有地域
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -1033,6 +1293,17 @@ class TkeClient extends AbstractClient {
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
         this.request("DescribeRegions", req, resp, cb);
+    }
+
+    /**
+     * 同步模板到实例或者集群
+     * @param {SyncPrometheusTemplateRequest} req
+     * @param {function(string, SyncPrometheusTemplateResponse):void} cb
+     * @public
+     */
+    SyncPrometheusTemplate(req, cb) {
+        let resp = new SyncPrometheusTemplateResponse();
+        this.request("SyncPrometheusTemplate", req, resp, cb);
     }
 
     /**
@@ -1091,7 +1362,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     *  查询集群下节点实例信息 
+     * 查询集群下节点实例信息
      * @param {DescribeClusterInstancesRequest} req
      * @param {function(string, DescribeClusterInstancesResponse):void} cb
      * @public
@@ -1146,14 +1417,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询容器实例中容器日志
-     * @param {DescribeEksContainerInstanceLogRequest} req
-     * @param {function(string, DescribeEksContainerInstanceLogResponse):void} cb
+     * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
+     * @param {CreateImageCacheRequest} req
+     * @param {function(string, CreateImageCacheResponse):void} cb
      * @public
      */
-    DescribeEksContainerInstanceLog(req, cb) {
-        let resp = new DescribeEksContainerInstanceLogResponse();
-        this.request("DescribeEksContainerInstanceLog", req, resp, cb);
+    CreateImageCache(req, cb) {
+        let resp = new CreateImageCacheResponse();
+        this.request("CreateImageCache", req, resp, cb);
+    }
+
+    /**
+     * 删除虚拟节点池
+     * @param {DeleteClusterVirtualNodePoolRequest} req
+     * @param {function(string, DeleteClusterVirtualNodePoolResponse):void} cb
+     * @public
+     */
+    DeleteClusterVirtualNodePool(req, cb) {
+        let resp = new DeleteClusterVirtualNodePoolResponse();
+        this.request("DeleteClusterVirtualNodePool", req, resp, cb);
     }
 
     /**
@@ -1190,6 +1472,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 驱逐虚拟节点
+     * @param {DrainClusterVirtualNodeRequest} req
+     * @param {function(string, DrainClusterVirtualNodeResponse):void} cb
+     * @public
+     */
+    DrainClusterVirtualNode(req, cb) {
+        let resp = new DrainClusterVirtualNodeResponse();
+        this.request("DrainClusterVirtualNode", req, resp, cb);
+    }
+
+    /**
      * 重启弹性容器实例，支持批量操作
      * @param {RestartEKSContainerInstancesRequest} req
      * @param {function(string, RestartEKSContainerInstancesResponse):void} cb
@@ -1201,14 +1494,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 获取边缘脚本链接
-     * @param {DescribeTKEEdgeScriptRequest} req
-     * @param {function(string, DescribeTKEEdgeScriptResponse):void} cb
+     * 删除Prometheus配置，如果目标不存在，将返回成功
+     * @param {DeletePrometheusConfigRequest} req
+     * @param {function(string, DeletePrometheusConfigResponse):void} cb
      * @public
      */
-    DescribeTKEEdgeScript(req, cb) {
-        let resp = new DescribeTKEEdgeScriptResponse();
-        this.request("DescribeTKEEdgeScript", req, resp, cb);
+    DeletePrometheusConfig(req, cb) {
+        let resp = new DeletePrometheusConfigResponse();
+        this.request("DeletePrometheusConfig", req, resp, cb);
     }
 
     /**
@@ -1220,6 +1513,17 @@ class TkeClient extends AbstractClient {
     ModifyNodePoolDesiredCapacityAboutAsg(req, cb) {
         let resp = new ModifyNodePoolDesiredCapacityAboutAsgResponse();
         this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, resp, cb);
+    }
+
+    /**
+     * 修改集群认证配置
+     * @param {ModifyClusterAuthenticationOptionsRequest} req
+     * @param {function(string, ModifyClusterAuthenticationOptionsResponse):void} cb
+     * @public
+     */
+    ModifyClusterAuthenticationOptions(req, cb) {
+        let resp = new ModifyClusterAuthenticationOptionsResponse();
+        this.request("ModifyClusterAuthenticationOptions", req, resp, cb);
     }
 
     /**
@@ -1275,17 +1579,6 @@ class TkeClient extends AbstractClient {
     CreatePrometheusTemp(req, cb) {
         let resp = new CreatePrometheusTempResponse();
         this.request("CreatePrometheusTemp", req, resp, cb);
-    }
-
-    /**
-     * 集群关联的伸缩组列表
-     * @param {DescribeClusterAsGroupsRequest} req
-     * @param {function(string, DescribeClusterAsGroupsResponse):void} cb
-     * @public
-     */
-    DescribeClusterAsGroups(req, cb) {
-        let resp = new DescribeClusterAsGroupsResponse();
-        this.request("DescribeClusterAsGroups", req, resp, cb);
     }
 
     /**
@@ -1399,6 +1692,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 查询集群在应用市场中某个已安装应用的版本历史
+     * @param {DescribeClusterReleaseHistoryRequest} req
+     * @param {function(string, DescribeClusterReleaseHistoryResponse):void} cb
+     * @public
+     */
+    DescribeClusterReleaseHistory(req, cb) {
+        let resp = new DescribeClusterReleaseHistoryResponse();
+        this.request("DescribeClusterReleaseHistory", req, resp, cb);
+    }
+
+    /**
      * 编辑节点池
      * @param {ModifyClusterNodePoolRequest} req
      * @param {function(string, ModifyClusterNodePoolResponse):void} cb
@@ -1454,6 +1758,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 缩容独立集群master节点
+     * @param {ScaleInClusterMasterRequest} req
+     * @param {function(string, ScaleInClusterMasterResponse):void} cb
+     * @public
+     */
+    ScaleInClusterMaster(req, cb) {
+        let resp = new ScaleInClusterMasterResponse();
+        this.request("ScaleInClusterMaster", req, resp, cb);
+    }
+
+    /**
      * 查询集群变配记录
      * @param {DescribeClusterLevelChangeRecordsRequest} req
      * @param {function(string, DescribeClusterLevelChangeRecordsResponse):void} cb
@@ -1465,7 +1780,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 创建集群访问端口
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
      * @public
@@ -1531,6 +1846,28 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 删除聚合实例
+     * @param {DeletePrometheusRecordRuleYamlRequest} req
+     * @param {function(string, DeletePrometheusRecordRuleYamlResponse):void} cb
+     * @public
+     */
+    DeletePrometheusRecordRuleYaml(req, cb) {
+        let resp = new DeletePrometheusRecordRuleYamlResponse();
+        this.request("DeletePrometheusRecordRuleYaml", req, resp, cb);
+    }
+
+    /**
+     * 修改prometheus配置，如果配置项不存在，则会新增
+     * @param {ModifyPrometheusConfigRequest} req
+     * @param {function(string, ModifyPrometheusConfigResponse):void} cb
+     * @public
+     */
+    ModifyPrometheusConfig(req, cb) {
+        let resp = new ModifyPrometheusConfigResponse();
+        this.request("ModifyPrometheusConfig", req, resp, cb);
+    }
+
+    /**
      * 修改模板内容
      * @param {ModifyPrometheusTempRequest} req
      * @param {function(string, ModifyPrometheusTempResponse):void} cb
@@ -1539,6 +1876,17 @@ class TkeClient extends AbstractClient {
     ModifyPrometheusTemp(req, cb) {
         let resp = new ModifyPrometheusTempResponse();
         this.request("ModifyPrometheusTemp", req, resp, cb);
+    }
+
+    /**
+     * 通过yaml的方式修改Prometheus聚合实例
+     * @param {ModifyPrometheusRecordRuleYamlRequest} req
+     * @param {function(string, ModifyPrometheusRecordRuleYamlResponse):void} cb
+     * @public
+     */
+    ModifyPrometheusRecordRuleYaml(req, cb) {
+        let resp = new ModifyPrometheusRecordRuleYamlResponse();
+        this.request("ModifyPrometheusRecordRuleYaml", req, resp, cb);
     }
 
     /**
@@ -1564,7 +1912,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 获取2.0实例关联集群列表
+     * 获取TMP实例关联集群列表
      * @param {DescribePrometheusClusterAgentsRequest} req
      * @param {function(string, DescribePrometheusClusterAgentsResponse):void} cb
      * @public
@@ -1641,25 +1989,58 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询节点池列表
-     * @param {DescribeClusterNodePoolsRequest} req
-     * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
+     * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
+     * @param {DescribeClusterEndpointsRequest} req
+     * @param {function(string, DescribeClusterEndpointsResponse):void} cb
      * @public
      */
-    DescribeClusterNodePools(req, cb) {
-        let resp = new DescribeClusterNodePoolsResponse();
-        this.request("DescribeClusterNodePools", req, resp, cb);
+    DescribeClusterEndpoints(req, cb) {
+        let resp = new DescribeClusterEndpointsResponse();
+        this.request("DescribeClusterEndpoints", req, resp, cb);
     }
 
     /**
-     * 获取镜像信息
-     * @param {DescribeImagesRequest} req
-     * @param {function(string, DescribeImagesResponse):void} cb
+     * 与云监控融合的2.0实例关联集群
+     * @param {CreatePrometheusClusterAgentRequest} req
+     * @param {function(string, CreatePrometheusClusterAgentResponse):void} cb
      * @public
      */
-    DescribeImages(req, cb) {
-        let resp = new DescribeImagesResponse();
-        this.request("DescribeImages", req, resp, cb);
+    CreatePrometheusClusterAgent(req, cb) {
+        let resp = new CreatePrometheusClusterAgentResponse();
+        this.request("CreatePrometheusClusterAgent", req, resp, cb);
+    }
+
+    /**
+     * 删除2.0实例告警策略
+     * @param {DeletePrometheusAlertPolicyRequest} req
+     * @param {function(string, DeletePrometheusAlertPolicyResponse):void} cb
+     * @public
+     */
+    DeletePrometheusAlertPolicy(req, cb) {
+        let resp = new DeletePrometheusAlertPolicyResponse();
+        this.request("DeletePrometheusAlertPolicy", req, resp, cb);
+    }
+
+    /**
+     * 获取弹性容器集群的接入认证信息
+     * @param {DescribeEKSClusterCredentialRequest} req
+     * @param {function(string, DescribeEKSClusterCredentialResponse):void} cb
+     * @public
+     */
+    DescribeEKSClusterCredential(req, cb) {
+        let resp = new DescribeEKSClusterCredentialResponse();
+        this.request("DescribeEKSClusterCredential", req, resp, cb);
+    }
+
+    /**
+     * 查询通过应用市场安装的某个应用详情
+     * @param {DescribeClusterReleaseDetailsRequest} req
+     * @param {function(string, DescribeClusterReleaseDetailsResponse):void} cb
+     * @public
+     */
+    DescribeClusterReleaseDetails(req, cb) {
+        let resp = new DescribeClusterReleaseDetailsResponse();
+        this.request("DescribeClusterReleaseDetails", req, resp, cb);
     }
 
     /**
@@ -1674,14 +2055,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 修改集群认证配置
-     * @param {ModifyClusterAuthenticationOptionsRequest} req
-     * @param {function(string, ModifyClusterAuthenticationOptionsResponse):void} cb
+     * 创建边缘容器CVM机器
+     * @param {CreateEdgeCVMInstancesRequest} req
+     * @param {function(string, CreateEdgeCVMInstancesResponse):void} cb
      * @public
      */
-    ModifyClusterAuthenticationOptions(req, cb) {
-        let resp = new ModifyClusterAuthenticationOptionsResponse();
-        this.request("ModifyClusterAuthenticationOptions", req, resp, cb);
+    CreateEdgeCVMInstances(req, cb) {
+        let resp = new CreateEdgeCVMInstancesResponse();
+        this.request("CreateEdgeCVMInstances", req, resp, cb);
     }
 
     /**
@@ -1696,6 +2077,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 获得实例级别抓取配置
+     * @param {DescribePrometheusGlobalConfigRequest} req
+     * @param {function(string, DescribePrometheusGlobalConfigResponse):void} cb
+     * @public
+     */
+    DescribePrometheusGlobalConfig(req, cb) {
+        let resp = new DescribePrometheusGlobalConfigResponse();
+        this.request("DescribePrometheusGlobalConfig", req, resp, cb);
+    }
+
+    /**
      * 同步模板到实例或者集群，针对V2版本实例
      * @param {SyncPrometheusTempRequest} req
      * @param {function(string, SyncPrometheusTempResponse):void} cb
@@ -1707,18 +2099,18 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
-     * @param {CreateImageCacheRequest} req
-     * @param {function(string, CreateImageCacheResponse):void} cb
+     * 查询容器实例中容器日志
+     * @param {DescribeEksContainerInstanceLogRequest} req
+     * @param {function(string, DescribeEksContainerInstanceLogResponse):void} cb
      * @public
      */
-    CreateImageCache(req, cb) {
-        let resp = new CreateImageCacheResponse();
-        this.request("CreateImageCache", req, resp, cb);
+    DescribeEksContainerInstanceLog(req, cb) {
+        let resp = new DescribeEksContainerInstanceLogResponse();
+        this.request("DescribeEksContainerInstanceLog", req, resp, cb);
     }
 
     /**
-     * 检查给定节点列表中哪些是可升级的 
+     * 检查给定节点列表中哪些是可升级的
      * @param {CheckInstancesUpgradeAbleRequest} req
      * @param {function(string, CheckInstancesUpgradeAbleResponse):void} cb
      * @public
@@ -1817,7 +2209,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 删除集群访问端口
      * @param {DeleteClusterEndpointRequest} req
      * @param {function(string, DeleteClusterEndpointResponse):void} cb
      * @public
@@ -1825,6 +2217,28 @@ class TkeClient extends AbstractClient {
     DeleteClusterEndpoint(req, cb) {
         let resp = new DeleteClusterEndpointResponse();
         this.request("DeleteClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * 在应用市场中给集群创建应用
+     * @param {CreateClusterReleaseRequest} req
+     * @param {function(string, CreateClusterReleaseResponse):void} cb
+     * @public
+     */
+    CreateClusterRelease(req, cb) {
+        let resp = new CreateClusterReleaseResponse();
+        this.request("CreateClusterRelease", req, resp, cb);
+    }
+
+    /**
+     * 查看虚拟节点池列表
+     * @param {DescribeClusterVirtualNodePoolsRequest} req
+     * @param {function(string, DescribeClusterVirtualNodePoolsResponse):void} cb
+     * @public
+     */
+    DescribeClusterVirtualNodePools(req, cb) {
+        let resp = new DescribeClusterVirtualNodePoolsResponse();
+        this.request("DescribeClusterVirtualNodePools", req, resp, cb);
     }
 
     /**
@@ -1850,17 +2264,6 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 从伸缩组创建节点池
-     * @param {CreateClusterNodePoolFromExistingAsgRequest} req
-     * @param {function(string, CreateClusterNodePoolFromExistingAsgResponse):void} cb
-     * @public
-     */
-    CreateClusterNodePoolFromExistingAsg(req, cb) {
-        let resp = new CreateClusterNodePoolFromExistingAsgResponse();
-        this.request("CreateClusterNodePoolFromExistingAsg", req, resp, cb);
-    }
-
-    /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
      * @param {DescribeClusterKubeconfigRequest} req
      * @param {function(string, DescribeClusterKubeconfigResponse):void} cb
@@ -1869,6 +2272,50 @@ class TkeClient extends AbstractClient {
     DescribeClusterKubeconfig(req, cb) {
         let resp = new DescribeClusterKubeconfigResponse();
         this.request("DescribeClusterKubeconfig", req, resp, cb);
+    }
+
+    /**
+     * 可以查询边缘集群升级信息，包含可以升级的组件，当前升级状态和升级错误信息
+     * @param {DescribeEdgeClusterUpgradeInfoRequest} req
+     * @param {function(string, DescribeEdgeClusterUpgradeInfoResponse):void} cb
+     * @public
+     */
+    DescribeEdgeClusterUpgradeInfo(req, cb) {
+        let resp = new DescribeEdgeClusterUpgradeInfoResponse();
+        this.request("DescribeEdgeClusterUpgradeInfo", req, resp, cb);
+    }
+
+    /**
+     * 在应用市场中集群回滚应用至某个历史版本
+     * @param {RollbackClusterReleaseRequest} req
+     * @param {function(string, RollbackClusterReleaseResponse):void} cb
+     * @public
+     */
+    RollbackClusterRelease(req, cb) {
+        let resp = new RollbackClusterReleaseResponse();
+        this.request("RollbackClusterRelease", req, resp, cb);
+    }
+
+    /**
+     * 拉取Prometheus配置
+     * @param {DescribePrometheusConfigRequest} req
+     * @param {function(string, DescribePrometheusConfigResponse):void} cb
+     * @public
+     */
+    DescribePrometheusConfig(req, cb) {
+        let resp = new DescribePrometheusConfigResponse();
+        this.request("DescribePrometheusConfig", req, resp, cb);
+    }
+
+    /**
+     * 在应用市场中取消安装失败的应用
+     * @param {CancelClusterReleaseRequest} req
+     * @param {function(string, CancelClusterReleaseResponse):void} cb
+     * @public
+     */
+    CancelClusterRelease(req, cb) {
+        let resp = new CancelClusterReleaseResponse();
+        this.request("CancelClusterRelease", req, resp, cb);
     }
 
     /**
@@ -1894,17 +2341,6 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 缩容独立集群master节点
-     * @param {ScaleInClusterMasterRequest} req
-     * @param {function(string, ScaleInClusterMasterResponse):void} cb
-     * @public
-     */
-    ScaleInClusterMaster(req, cb) {
-        let resp = new ScaleInClusterMasterResponse();
-        this.request("ScaleInClusterMaster", req, resp, cb);
-    }
-
-    /**
      * 查询弹性集群列表
      * @param {DescribeEKSClustersRequest} req
      * @param {function(string, DescribeEKSClustersResponse):void} cb
@@ -1916,6 +2352,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 集群关联的伸缩组列表
+     * @param {DescribeClusterAsGroupsRequest} req
+     * @param {function(string, DescribeClusterAsGroupsResponse):void} cb
+     * @public
+     */
+    DescribeClusterAsGroups(req, cb) {
+        let resp = new DescribeClusterAsGroupsResponse();
+        this.request("DescribeClusterAsGroups", req, resp, cb);
+    }
+
+    /**
      * 创建节点池
      * @param {CreateClusterNodePoolRequest} req
      * @param {function(string, CreateClusterNodePoolResponse):void} cb
@@ -1924,6 +2371,17 @@ class TkeClient extends AbstractClient {
     CreateClusterNodePool(req, cb) {
         let resp = new CreateClusterNodePoolResponse();
         this.request("CreateClusterNodePool", req, resp, cb);
+    }
+
+    /**
+     * 创建边缘集群日志采集配置
+     * @param {CreateEdgeLogConfigRequest} req
+     * @param {function(string, CreateEdgeLogConfigResponse):void} cb
+     * @public
+     */
+    CreateEdgeLogConfig(req, cb) {
+        let resp = new CreateEdgeLogConfigResponse();
+        this.request("CreateEdgeLogConfig", req, resp, cb);
     }
 
     /**
@@ -1960,14 +2418,47 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 同步模板到实例或者集群
-     * @param {SyncPrometheusTemplateRequest} req
-     * @param {function(string, SyncPrometheusTemplateResponse):void} cb
+     * 操作TKEEdge集群的addon
+     * @param {ForwardTKEEdgeApplicationRequestV3Request} req
+     * @param {function(string, ForwardTKEEdgeApplicationRequestV3Response):void} cb
      * @public
      */
-    SyncPrometheusTemplate(req, cb) {
-        let resp = new SyncPrometheusTemplateResponse();
-        this.request("SyncPrometheusTemplate", req, resp, cb);
+    ForwardTKEEdgeApplicationRequestV3(req, cb) {
+        let resp = new ForwardTKEEdgeApplicationRequestV3Response();
+        this.request("ForwardTKEEdgeApplicationRequestV3", req, resp, cb);
+    }
+
+    /**
+     * 查询镜像缓存信息接口
+     * @param {DescribeImageCachesRequest} req
+     * @param {function(string, DescribeImageCachesResponse):void} cb
+     * @public
+     */
+    DescribeImageCaches(req, cb) {
+        let resp = new DescribeImageCachesResponse();
+        this.request("DescribeImageCaches", req, resp, cb);
+    }
+
+    /**
+     * 查询集群在应用市场中已安装应用列表
+     * @param {DescribeClusterReleasesRequest} req
+     * @param {function(string, DescribeClusterReleasesResponse):void} cb
+     * @public
+     */
+    DescribeClusterReleases(req, cb) {
+        let resp = new DescribeClusterReleasesResponse();
+        this.request("DescribeClusterReleases", req, resp, cb);
+    }
+
+    /**
+     * 升级集群中已安装的应用
+     * @param {UpgradeClusterReleaseRequest} req
+     * @param {function(string, UpgradeClusterReleaseResponse):void} cb
+     * @public
+     */
+    UpgradeClusterRelease(req, cb) {
+        let resp = new UpgradeClusterReleaseResponse();
+        this.request("UpgradeClusterRelease", req, resp, cb);
     }
 
     /**
@@ -2048,14 +2539,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除2.0实例告警策略
-     * @param {DeletePrometheusAlertPolicyRequest} req
-     * @param {function(string, DeletePrometheusAlertPolicyResponse):void} cb
+     * 创建prometheus配置
+     * @param {CreatePrometheusConfigRequest} req
+     * @param {function(string, CreatePrometheusConfigResponse):void} cb
      * @public
      */
-    DeletePrometheusAlertPolicy(req, cb) {
-        let resp = new DeletePrometheusAlertPolicyResponse();
-        this.request("DeletePrometheusAlertPolicy", req, resp, cb);
+    CreatePrometheusConfig(req, cb) {
+        let resp = new CreatePrometheusConfigResponse();
+        this.request("CreatePrometheusConfig", req, resp, cb);
+    }
+
+    /**
+     * 初始化TMP实例，开启集成中心时调用
+     * @param {RunPrometheusInstanceRequest} req
+     * @param {function(string, RunPrometheusInstanceResponse):void} cb
+     * @public
+     */
+    RunPrometheusInstance(req, cb) {
+        let resp = new RunPrometheusInstanceResponse();
+        this.request("RunPrometheusInstance", req, resp, cb);
     }
 
     /**
@@ -2078,6 +2580,17 @@ class TkeClient extends AbstractClient {
     GetTkeAppChartList(req, cb) {
         let resp = new GetTkeAppChartListResponse();
         this.request("GetTkeAppChartList", req, resp, cb);
+    }
+
+    /**
+     * 创建虚拟节点
+     * @param {CreateClusterVirtualNodeRequest} req
+     * @param {function(string, CreateClusterVirtualNodeResponse):void} cb
+     * @public
+     */
+    CreateClusterVirtualNode(req, cb) {
+        let resp = new CreateClusterVirtualNodeResponse();
+        this.request("CreateClusterVirtualNode", req, resp, cb);
     }
 
     /**

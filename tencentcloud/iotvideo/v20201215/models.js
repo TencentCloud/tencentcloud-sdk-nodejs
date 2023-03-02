@@ -4508,7 +4508,7 @@ class DescribeCloudStorageEventsRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * 单次获取的历史数据项目的最大数量, 缺省10
+         * 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。
          * @type {number || null}
          */
         this.Size = null;

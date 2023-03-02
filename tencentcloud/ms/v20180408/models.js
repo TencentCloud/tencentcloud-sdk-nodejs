@@ -1414,6 +1414,34 @@ class DescribeScanInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeUrlDetectionResult请求参数结构体
+ * @class
+ */
+class DescribeUrlDetectionResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的网址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * 漏洞信息
  * @class
  */
@@ -1534,6 +1562,70 @@ class AppInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeShieldPlanInstance返回参数结构体
+ * @class
+ */
+class DescribeShieldPlanInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 绑定资源信息
+         * @type {BindInfo || null}
+         */
+        this.BindInfo = null;
+
+        /**
+         * 加固策略信息
+         * @type {ShieldPlanInfo || null}
+         */
+        this.ShieldPlanInfo = null;
+
+        /**
+         * 加固资源信息
+         * @type {ResourceServiceInfo || null}
+         */
+        this.ResourceServiceInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BindInfo) {
+            let obj = new BindInfo();
+            obj.deserialize(params.BindInfo)
+            this.BindInfo = obj;
+        }
+
+        if (params.ShieldPlanInfo) {
+            let obj = new ShieldPlanInfo();
+            obj.deserialize(params.ShieldPlanInfo)
+            this.ShieldPlanInfo = obj;
+        }
+
+        if (params.ResourceServiceInfo) {
+            let obj = new ResourceServiceInfo();
+            obj.deserialize(params.ResourceServiceInfo)
+            this.ResourceServiceInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 提交app加固的服务信息
  * @class
  */
@@ -1611,70 +1703,6 @@ class SoInfo extends  AbstractModel {
 }
 
 /**
- * DescribeShieldPlanInstance返回参数结构体
- * @class
- */
-class DescribeShieldPlanInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 绑定资源信息
-         * @type {BindInfo || null}
-         */
-        this.BindInfo = null;
-
-        /**
-         * 加固策略信息
-         * @type {ShieldPlanInfo || null}
-         */
-        this.ShieldPlanInfo = null;
-
-        /**
-         * 加固资源信息
-         * @type {ResourceServiceInfo || null}
-         */
-        this.ResourceServiceInfo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BindInfo) {
-            let obj = new BindInfo();
-            obj.deserialize(params.BindInfo)
-            this.BindInfo = obj;
-        }
-
-        if (params.ShieldPlanInfo) {
-            let obj = new ShieldPlanInfo();
-            obj.deserialize(params.ShieldPlanInfo)
-            this.ShieldPlanInfo = obj;
-        }
-
-        if (params.ResourceServiceInfo) {
-            let obj = new ResourceServiceInfo();
-            obj.deserialize(params.ResourceServiceInfo)
-            this.ResourceServiceInfo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 安全扫描敏感词
  * @class
  */
@@ -1712,6 +1740,268 @@ class ScanSensitiveInfo extends  AbstractModel {
         this.WordList = 'WordList' in params ? params.WordList : null;
         this.FilePath = 'FilePath' in params ? params.FilePath : null;
         this.FileSha = 'FileSha' in params ? params.FileSha : null;
+
+    }
+}
+
+/**
+ * APK检测服务：广告插件结果结构体
+ * @class
+ */
+class PluginListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数字类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * 广告插件名称
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 广告插件描述
+         * @type {string || null}
+         */
+        this.PluginDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginDesc = 'PluginDesc' in params ? params.PluginDesc : null;
+
+    }
+}
+
+/**
+ * DescribeApkDetectionResult请求参数结构体
+ * @class
+ */
+class DescribeApkDetectionResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 软件包的下载链接
+         * @type {string || null}
+         */
+        this.ApkUrl = null;
+
+        /**
+         * 软件包的md5值，具有唯一性。腾讯APK云检测服务会根据md5值来判断该包是否为库中已收集的样本，已存在，则返回检测结果，反之，需要一定时间检测该样本。
+         * @type {string || null}
+         */
+        this.ApkMd5 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApkUrl = 'ApkUrl' in params ? params.ApkUrl : null;
+        this.ApkMd5 = 'ApkMd5' in params ? params.ApkMd5 : null;
+
+    }
+}
+
+/**
+ * APK检测服务参数返回具体信息
+ * @class
+ */
+class ResultListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * banner广告软件标记，分别为-1-不确定，0-否，1-是
+         * @type {string || null}
+         */
+        this.Banner = null;
+
+        /**
+         * 精品推荐列表广告标记，分别为-1-不确定，0-否，1-是
+         * @type {string || null}
+         */
+        this.BoutiqueRecommand = null;
+
+        /**
+         * 悬浮窗图标广告标记,分别为-1-不确定，0-否，1-是
+         * @type {string || null}
+         */
+        this.FloatWindows = null;
+
+        /**
+         * 积分墙广告软件标记，分别为 -1 -不确定，0-否，1-是
+         * @type {string || null}
+         */
+        this.IntegralWall = null;
+
+        /**
+         * 安装包的md5
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * 通知栏广告软件标记，分别为-1-不确定，0-否，1-是
+         * @type {string || null}
+         */
+        this.NotifyBar = null;
+
+        /**
+         * 1表示官方，0表示非官方
+         * @type {string || null}
+         */
+        this.Official = null;
+
+        /**
+         * 广告插件结果列表
+         * @type {Array.<PluginListItem> || null}
+         */
+        this.PluginList = null;
+
+        /**
+         * 非广告插件结果列表(SDK、风险插件等)
+         * @type {Array.<OptPluginListItem> || null}
+         */
+        this.OptPluginList = null;
+
+        /**
+         * 数字类型，分别为0-未知， 1-安全软件，2-风险软件，3-病毒软件
+         * @type {string || null}
+         */
+        this.SafeType = null;
+
+        /**
+         * Session id，合作方可以用来区分回调数据，需要唯一。
+         * @type {string || null}
+         */
+        this.Sid = null;
+
+        /**
+         * 安装包名称
+         * @type {string || null}
+         */
+        this.SoftName = null;
+
+        /**
+         * 插播广告软件标记，取值：-1 不确定，0否， 1 是
+         * @type {string || null}
+         */
+        this.Spot = null;
+
+        /**
+         * 病毒名称，utf8编码
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 病毒描述，utf8编码
+         * @type {string || null}
+         */
+        this.VirusDesc = null;
+
+        /**
+         * 二次打包状态：0-表示默认；1-表示二次
+         * @type {string || null}
+         */
+        this.RepackageStatus = null;
+
+        /**
+         * 应用错误码：0、1-表示正常；                  
+
+2表示System Error(engine analysis error).
+
+3表示App analysis error, please confirm it.
+
+4表示App have not cert, please confirm it.
+
+5表示App size is zero, please confirm it.
+
+6表示App have not package name, please confirm it.
+
+7表示App build time is empty, please confirm it.
+
+8表示App have not valid cert, please confirm it.
+
+99表示Other error.
+
+1000表示App downloadlink download fail, please confirm it.
+
+1001表示APP md5 different between real md5, please confirm it.
+
+1002表示App md5 uncollect, please offer downloadlink.
+         * @type {string || null}
+         */
+        this.Errno = null;
+
+        /**
+         * 对应errno的错误信息描述
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Banner = 'Banner' in params ? params.Banner : null;
+        this.BoutiqueRecommand = 'BoutiqueRecommand' in params ? params.BoutiqueRecommand : null;
+        this.FloatWindows = 'FloatWindows' in params ? params.FloatWindows : null;
+        this.IntegralWall = 'IntegralWall' in params ? params.IntegralWall : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.NotifyBar = 'NotifyBar' in params ? params.NotifyBar : null;
+        this.Official = 'Official' in params ? params.Official : null;
+
+        if (params.PluginList) {
+            this.PluginList = new Array();
+            for (let z in params.PluginList) {
+                let obj = new PluginListItem();
+                obj.deserialize(params.PluginList[z]);
+                this.PluginList.push(obj);
+            }
+        }
+
+        if (params.OptPluginList) {
+            this.OptPluginList = new Array();
+            for (let z in params.OptPluginList) {
+                let obj = new OptPluginListItem();
+                obj.deserialize(params.OptPluginList[z]);
+                this.OptPluginList.push(obj);
+            }
+        }
+        this.SafeType = 'SafeType' in params ? params.SafeType : null;
+        this.Sid = 'Sid' in params ? params.Sid : null;
+        this.SoftName = 'SoftName' in params ? params.SoftName : null;
+        this.Spot = 'Spot' in params ? params.Spot : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.VirusDesc = 'VirusDesc' in params ? params.VirusDesc : null;
+        this.RepackageStatus = 'RepackageStatus' in params ? params.RepackageStatus : null;
+        this.Errno = 'Errno' in params ? params.Errno : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
 
     }
 }
@@ -1767,13 +2057,7 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
-         * @type {Array.<number> || null}
-         */
-        this.Pids = null;
-
-        /**
-         * 支持通过资源id，pid进行查询
+         * 支持CreateTime、ExpireTime、AppName、AppPkgName、BindValue、IsBind过滤
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1789,6 +2073,12 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
+         * @type {Array.<number> || null}
+         */
+        this.Pids = null;
 
         /**
          * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
@@ -1811,7 +2101,6 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pids = 'Pids' in params ? params.Pids : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1823,6 +2112,7 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Pids = 'Pids' in params ? params.Pids : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
@@ -1941,6 +2231,138 @@ class AdInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeUrlDetectionResult返回参数结构体
+ * @class
+ */
+class DescribeUrlDetectionResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [查询结果]查询结果；枚举值：0 查询成功，否则查询失败
+         * @type {number || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * [固定信息]响应协议版本号
+         * @type {number || null}
+         */
+        this.RespVer = null;
+
+        /**
+         * [查询结果]url恶意状态
+枚举值：
+0-1：未知，访问暂无风险。
+2 ：	风险网址，具体的恶意类型定义参考恶意大类EvilClass字段。
+3-4：安全，访问无风险。
+
+注意：查询结果EvilClass字段在Urltype=2时，才有意义。
+         * @type {number || null}
+         */
+        this.UrlType = null;
+
+        /**
+         * [查询结果]url恶意类型大类:{
+    "1": "社工欺诈（仿冒、账号钓鱼、中奖诈骗）",
+    "2": "信息诈骗（虚假充值、虚假兼职、虚假金融投资、虚假信用卡代办、网络赌博诈骗）",
+    "3": "虚假销售（男女保健美容减肥产品、电子产品、虚假广告、违法销售）",
+    "4": "恶意文件（病毒文件，木马文件，恶意apk文件的下载链接以及站点，挂马网站）",
+    "5": "博彩网站（博彩网站，在线赌博网站）",
+    "6": "色情网站（涉嫌传播色情内容，提供色情服务的网站）"
+  }
+         * @type {number || null}
+         */
+        this.EvilClass = null;
+
+        /**
+         * 该字段暂为空
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 该字段暂为空
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * [查询详情]url检出时间；时间戳
+         * @type {number || null}
+         */
+        this.DetectTime = null;
+
+        /**
+         * 该字段暂为空
+         * @type {string || null}
+         */
+        this.Wording = null;
+
+        /**
+         * 该字段暂为空
+         * @type {string || null}
+         */
+        this.WordingTitle = null;
+
+        /**
+         * [查询结果]url恶意状态说明；为UrlType字段值对应的说明
+         * @type {string || null}
+         */
+        this.UrlTypeDesc = null;
+
+        /**
+         * [查询结果]url恶意大类说明；为EvilClass字段值对应的说明
+         * @type {string || null}
+         */
+        this.EvilClassDesc = null;
+
+        /**
+         * 该字段暂为空
+         * @type {string || null}
+         */
+        this.EvilTypeDesc = null;
+
+        /**
+         * 该字段暂为空
+         * @type {string || null}
+         */
+        this.LevelDesc = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.RespVer = 'RespVer' in params ? params.RespVer : null;
+        this.UrlType = 'UrlType' in params ? params.UrlType : null;
+        this.EvilClass = 'EvilClass' in params ? params.EvilClass : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.DetectTime = 'DetectTime' in params ? params.DetectTime : null;
+        this.Wording = 'Wording' in params ? params.Wording : null;
+        this.WordingTitle = 'WordingTitle' in params ? params.WordingTitle : null;
+        this.UrlTypeDesc = 'UrlTypeDesc' in params ? params.UrlTypeDesc : null;
+        this.EvilClassDesc = 'EvilClassDesc' in params ? params.EvilClassDesc : null;
+        this.EvilTypeDesc = 'EvilTypeDesc' in params ? params.EvilTypeDesc : null;
+        this.LevelDesc = 'LevelDesc' in params ? params.LevelDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeShieldPlanInstance请求参数结构体
  * @class
  */
@@ -2046,18 +2468,12 @@ class ShieldInfo extends  AbstractModel {
 }
 
 /**
- * 安全扫描系统权限信息
+ * DescribeUserBaseInfoInstance请求参数结构体
  * @class
  */
-class ScanPermissionList extends  AbstractModel {
+class DescribeUserBaseInfoInstanceRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 系统权限信息
-         * @type {Array.<ScanPermissionInfo> || null}
-         */
-        this.PermissionList = null;
 
     }
 
@@ -2067,15 +2483,6 @@ class ScanPermissionList extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.PermissionList) {
-            this.PermissionList = new Array();
-            for (let z in params.PermissionList) {
-                let obj = new ScanPermissionInfo();
-                obj.deserialize(params.PermissionList[z]);
-                this.PermissionList.push(obj);
-            }
         }
 
     }
@@ -2363,12 +2770,36 @@ class DescribeScanInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUserBaseInfoInstance请求参数结构体
+ * DescribeApkDetectionResult返回参数结构体
  * @class
  */
-class DescribeUserBaseInfoInstanceRequest extends  AbstractModel {
+class DescribeApkDetectionResultResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 响应结果，ok表示正常，error表示错误
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Result为error错误时的原因说明
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * APK检测结果数组
+         * @type {Array.<ResultListItem> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2379,6 +2810,18 @@ class DescribeUserBaseInfoInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new ResultListItem();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2988,6 +3431,84 @@ class BindInfo extends  AbstractModel {
 }
 
 /**
+ * 安全扫描系统权限信息
+ * @class
+ */
+class ScanPermissionList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统权限信息
+         * @type {Array.<ScanPermissionInfo> || null}
+         */
+        this.PermissionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PermissionList) {
+            this.PermissionList = new Array();
+            for (let z in params.PermissionList) {
+                let obj = new ScanPermissionInfo();
+                obj.deserialize(params.PermissionList[z]);
+                this.PermissionList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * APK检测服务：非广告插件结果列表(SDK、风险插件等)
+ * @class
+ */
+class OptPluginListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 非广告类型
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * 非广告插件名称
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 非广告插件描述
+         * @type {string || null}
+         */
+        this.PluginDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginDesc = 'PluginDesc' in params ? params.PluginDesc : null;
+
+    }
+}
+
+/**
  * DeleteScanInstances请求参数结构体
  * @class
  */
@@ -3041,25 +3562,30 @@ module.exports = {
     DescribeShieldInstancesRequest: DescribeShieldInstancesRequest,
     CreateScanInstancesResponse: CreateScanInstancesResponse,
     DescribeScanInstancesResponse: DescribeScanInstancesResponse,
+    DescribeUrlDetectionResultRequest: DescribeUrlDetectionResultRequest,
     VulInfo: VulInfo,
     AppInfo: AppInfo,
+    DescribeShieldPlanInstanceResponse: DescribeShieldPlanInstanceResponse,
     ServiceInfo: ServiceInfo,
     SoInfo: SoInfo,
-    DescribeShieldPlanInstanceResponse: DescribeShieldPlanInstanceResponse,
     ScanSensitiveInfo: ScanSensitiveInfo,
+    PluginListItem: PluginListItem,
+    DescribeApkDetectionResultRequest: DescribeApkDetectionResultRequest,
+    ResultListItem: ResultListItem,
     ResourceServiceInfo: ResourceServiceInfo,
     DescribeResourceInstancesRequest: DescribeResourceInstancesRequest,
     AdInfo: AdInfo,
+    DescribeUrlDetectionResultResponse: DescribeUrlDetectionResultResponse,
     DescribeShieldPlanInstanceRequest: DescribeShieldPlanInstanceRequest,
     ShieldInfo: ShieldInfo,
-    ScanPermissionList: ScanPermissionList,
+    DescribeUserBaseInfoInstanceRequest: DescribeUserBaseInfoInstanceRequest,
     CreateResourceInstancesResponse: CreateResourceInstancesResponse,
     AppDetailInfo: AppDetailInfo,
     DeleteScanInstancesResponse: DeleteScanInstancesResponse,
     Filter: Filter,
     DeleteShieldInstancesResponse: DeleteShieldInstancesResponse,
     DescribeScanInstancesRequest: DescribeScanInstancesRequest,
-    DescribeUserBaseInfoInstanceRequest: DescribeUserBaseInfoInstanceRequest,
+    DescribeApkDetectionResultResponse: DescribeApkDetectionResultResponse,
     DescribeResourceInstancesResponse: DescribeResourceInstancesResponse,
     DescribeScanResultsRequest: DescribeScanResultsRequest,
     CreateCosSecKeyInstanceResponse: CreateCosSecKeyInstanceResponse,
@@ -3070,6 +3596,8 @@ module.exports = {
     CreateBindInstanceResponse: CreateBindInstanceResponse,
     VulList: VulList,
     BindInfo: BindInfo,
+    ScanPermissionList: ScanPermissionList,
+    OptPluginListItem: OptPluginListItem,
     DeleteScanInstancesRequest: DeleteScanInstancesRequest,
 
 }

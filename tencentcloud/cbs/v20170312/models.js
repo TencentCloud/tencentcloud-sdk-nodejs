@@ -17,6 +17,80 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 快照操作日志，已废弃。
+ * @class
+ */
+class SnapshotOperationLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作的状态。取值范围：
+SUCCESS :表示操作成功 
+FAILED :表示操作失败 
+PROCESSING :表示操作中。
+         * @type {string || null}
+         */
+        this.OperationState = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 操作者的UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 操作的快照ID。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 操作类型。取值范围：
+SNAP_OPERATION_DELETE：删除快照
+SNAP_OPERATION_ROLLBACK：回滚快照
+SNAP_OPERATION_MODIFY：修改快照属性
+SNAP_OPERATION_CREATE：创建快照
+SNAP_OPERATION_COPY：跨地域复制快照
+ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
+ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OperationState = 'OperationState' in params ? params.OperationState : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * ModifyDiskExtraPerformance请求参数结构体
  * @class
  */
@@ -75,6 +149,79 @@ class ModifyDiskAttributesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDiskBackups请求参数结构体
+ * @class
+ */
+class DescribeDiskBackupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+        /**
+         * 过滤条件，参数不支持同时指定 DiskBackupIds 和 Filters。过滤条件：<br><li>disk-backup-id - Array of String - 是否必填：否 -（过滤条件）按照备份点的ID过滤。备份点ID形如：dbp-11112222。
+<br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建备份点的云硬盘ID过滤。
+<br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建备份点的云硬盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 输出云硬盘备份点列表的排列顺序。取值范围：<br><li>ASC：升序排列<br><li>DESC：降序排列。
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 云硬盘备份点列表排序的依据字段。取值范围：<br><li>CREATE_TIME：依据云硬盘备份点的创建时间排序<br>默认按创建时间排序。
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
@@ -168,6 +315,41 @@ class AutoSnapshotPolicy extends  AbstractModel {
          */
         this.InstanceIdSet = null;
 
+        /**
+         * 该定期快照创建的快照可以保留的月数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetentionMonths = null;
+
+        /**
+         * 该定期快照创建的快照最大保留数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetentionAmount = null;
+
+        /**
+         * 定期快照高级保留策略。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AdvancedRetentionPolicy || null}
+         */
+        this.AdvancedRetentionPolicy = null;
+
+        /**
+         * 该复制快照策略的源端账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CopyFromAccountUin = null;
+
+        /**
+         * 标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -198,6 +380,132 @@ class AutoSnapshotPolicy extends  AbstractModel {
         this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
         this.CopyToAccountUin = 'CopyToAccountUin' in params ? params.CopyToAccountUin : null;
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RetentionMonths = 'RetentionMonths' in params ? params.RetentionMonths : null;
+        this.RetentionAmount = 'RetentionAmount' in params ? params.RetentionAmount : null;
+
+        if (params.AdvancedRetentionPolicy) {
+            let obj = new AdvancedRetentionPolicy();
+            obj.deserialize(params.AdvancedRetentionPolicy)
+            this.AdvancedRetentionPolicy = obj;
+        }
+        this.CopyFromAccountUin = 'CopyFromAccountUin' in params ? params.CopyFromAccountUin : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 描述购买云盘时的费用明细。
+ * @class
+ */
+class DetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述计费项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PriceTitle = null;
+
+        /**
+         * 描述计费项目显示名称，用户控制台展示。
+         * @type {string || null}
+         */
+        this.PriceName = null;
+
+        /**
+         * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * 高精度预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * 高精度预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * 高精度后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
+         * 高精度后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PriceTitle = 'PriceTitle' in params ? params.PriceTitle : null;
+        this.PriceName = 'PriceName' in params ? params.PriceName : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
 
     }
 }
@@ -218,16 +526,16 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
          * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
+         * @type {string || null}
+         */
+        this.BeginTime = null;
 
     }
 
@@ -247,8 +555,50 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+
+    }
+}
+
+/**
+ * ModifySnapshotsSharePermission请求参数结构体
+ * @class
+ */
+class ModifySnapshotsSharePermissionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。
+         * @type {Array.<string> || null}
+         */
+        this.AccountIds = null;
+
+        /**
+         * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
+         * @type {string || null}
+         */
+        this.Permission = null;
+
+        /**
+         * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
+         * @type {Array.<string> || null}
+         */
+        this.SnapshotIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountIds = 'AccountIds' in params ? params.AccountIds : null;
+        this.Permission = 'Permission' in params ? params.Permission : null;
+        this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
 
     }
 }
@@ -320,6 +670,41 @@ class ModifyAutoSnapshotPolicyAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDiskBackupQuota请求参数结构体
+ * @class
+ */
+class ModifyDiskBackupQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘ID。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 调整之后的云硬盘备份点配额。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -534,10 +919,66 @@ class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteDiskBackups请求参数结构体
+ * @class
+ */
+class DeleteDiskBackupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的云硬盘备份点ID。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
+
+    }
+}
+
+/**
  * InitializeDisks返回参数结构体
  * @class
  */
 class InitializeDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteDiskBackups返回参数结构体
+ * @class
+ */
+class DeleteDiskBackupsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -619,59 +1060,30 @@ class DescribeDiskStoragePoolRequest extends  AbstractModel {
 }
 
 /**
- * 快照操作日志。
+ * DescribeDiskBackups返回参数结构体
  * @class
  */
-class SnapshotOperationLog extends  AbstractModel {
+class DescribeDiskBackupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作者的UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 符合条件的云硬盘备份点数量。
+         * @type {number || null}
          */
-        this.Operator = null;
+        this.TotalCount = null;
 
         /**
-         * 操作类型。取值范围：
-SNAP_OPERATION_DELETE：删除快照
-SNAP_OPERATION_ROLLBACK：回滚快照
-SNAP_OPERATION_MODIFY：修改快照属性
-SNAP_OPERATION_CREATE：创建快照
-SNAP_OPERATION_COPY：跨地域复制快照
-ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
-ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
-         * @type {string || null}
+         * 云硬盘备份点的详细信息列表。
+         * @type {Array.<DiskBackup> || null}
          */
-        this.Operation = null;
+        this.DiskBackupSet = null;
 
         /**
-         * 操作的快照ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SnapshotId = null;
-
-        /**
-         * 操作的状态。取值范围：
-SUCCESS :表示操作成功 
-FAILED :表示操作失败 
-PROCESSING :表示操作中。
-         * @type {string || null}
-         */
-        this.OperationState = null;
-
-        /**
-         * 开始时间。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间。
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -682,12 +1094,17 @@ PROCESSING :表示操作中。
         if (!params) {
             return;
         }
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-        this.OperationState = 'OperationState' in params ? params.OperationState : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DiskBackupSet) {
+            this.DiskBackupSet = new Array();
+            for (let z in params.DiskBackupSet) {
+                let obj = new DiskBackup();
+                obj.deserialize(params.DiskBackupSet[z]);
+                this.DiskBackupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -822,6 +1239,59 @@ class InquirePriceModifyDiskExtraPerformanceResponse extends  AbstractModel {
 }
 
 /**
+ * 定期快照高级保留策略，四个参数都为必选参数
+ * @class
+ */
+class AdvancedRetentionPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 保留最新快照Days天内的每天最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Days = null;
+
+        /**
+         * 保留最新快照Weeks周内的每周最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Weeks = null;
+
+        /**
+         * 保留最新快照Months月内的每月最新的一个快照， 取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Months = null;
+
+        /**
+         * 保留最新快照Years年内的每年最新的一个快照，取值范围：[0, 100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Years = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Days = 'Days' in params ? params.Days : null;
+        this.Weeks = 'Weeks' in params ? params.Weeks : null;
+        this.Months = 'Months' in params ? params.Months : null;
+        this.Years = 'Years' in params ? params.Years : null;
+
+    }
+}
+
+/**
  * CreateDisks请求参数结构体
  * @class
  */
@@ -842,7 +1312,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskChargeType = null;
 
         /**
-         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
+         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_BSSD：表示通用型SSD云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1142,18 +1612,6 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
         this.AutoSnapshotPolicyId = null;
 
         /**
-         * 定期快照的执行策略。
-         * @type {Array.<Policy> || null}
-         */
-        this.Policy = null;
-
-        /**
-         * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyName = null;
-
-        /**
          * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
          * @type {boolean || null}
          */
@@ -1166,7 +1624,19 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
         this.IsPermanent = null;
 
         /**
-         * 通过该定期快照策略创建的快照保留天数，该参数不可与`IsPermanent`参数冲突，即若定期快照策略设置为永久保留，`RetentionDays`应置0。
+         * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
+
+        /**
+         * 定期快照的执行策略。
+         * @type {Array.<Policy> || null}
+         */
+        this.Policy = null;
+
+        /**
+         * 通过该定期快照策略创建的快照保留天数。如果指定本参数，则IsPermanent入参不可指定为TRUE，否则会产生冲突。
          * @type {number || null}
          */
         this.RetentionDays = null;
@@ -1181,6 +1651,9 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
             return;
         }
         this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
+        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
 
         if (params.Policy) {
             this.Policy = new Array();
@@ -1190,9 +1663,6 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
                 this.Policy.push(obj);
             }
         }
-        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
-        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
-        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
         this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
 
     }
@@ -1235,6 +1705,34 @@ class DescribeDiskConfigQuotaResponse extends  AbstractModel {
                 obj.deserialize(params.DiskConfigSet[z]);
                 this.DiskConfigSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyDiskBackup返回参数结构体
+ * @class
+ */
+class ApplyDiskBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1367,7 +1865,7 @@ class Disk extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
+         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_BSSD：表示通用型SSD云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1582,6 +2080,12 @@ class Disk extends  AbstractModel {
         this.DeleteSnapshot = null;
 
         /**
+         * 云硬盘备份点配额。表示最大可以保留的备份点数量。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
+        /**
          * 云硬盘备份点已使用的数量。
          * @type {number || null}
          */
@@ -1592,6 +2096,20 @@ class Disk extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceType = null;
+
+        /**
+         * 云硬盘最后一次挂载的实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastAttachInsId = null;
+
+        /**
+         * 云硬盘最后一次操作错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorPrompt = null;
 
     }
 
@@ -1651,8 +2169,11 @@ class Disk extends  AbstractModel {
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
         this.DiskBackupCount = 'DiskBackupCount' in params ? params.DiskBackupCount : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.LastAttachInsId = 'LastAttachInsId' in params ? params.LastAttachInsId : null;
+        this.ErrorPrompt = 'ErrorPrompt' in params ? params.ErrorPrompt : null;
 
     }
 }
@@ -1912,30 +2433,18 @@ class DescribeSnapshotSharePermissionResponse extends  AbstractModel {
 }
 
 /**
- * CopySnapshotCrossRegions请求参数结构体
+ * ModifyDiskBackupQuota返回参数结构体
  * @class
  */
-class CopySnapshotCrossRegionsRequest extends  AbstractModel {
+class ModifyDiskBackupQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。
-         * @type {Array.<string> || null}
-         */
-        this.DestinationRegions = null;
-
-        /**
-         * 需要跨地域复制的源快照ID，可通过[DescribeSnapshots](/document/product/362/15647)查询。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SnapshotId = null;
-
-        /**
-         * 新复制快照的名称，如果不传，则默认取值为“Copied 源快照ID from 地域名”。
-         * @type {string || null}
-         */
-        this.SnapshotName = null;
+        this.RequestId = null;
 
     }
 
@@ -1946,9 +2455,7 @@ class CopySnapshotCrossRegionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DestinationRegions = 'DestinationRegions' in params ? params.DestinationRegions : null;
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2034,6 +2541,41 @@ class DescribeSnapshotSharePermissionRequest extends  AbstractModel {
             return;
         }
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+
+    }
+}
+
+/**
+ * InquirePriceModifyDiskBackupQuota请求参数结构体
+ * @class
+ */
+class InquirePriceModifyDiskBackupQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘ID， 通过DescribeDisks（查询云硬盘信息）接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 修改后的云硬盘备份点配额，即云盘可以拥有的备份点数量，单位为个。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -2250,6 +2792,13 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
+         * 实例所属项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
          * 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -2281,6 +2830,7 @@ class Placement extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.CdcName = 'CdcName' in params ? params.CdcName : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
@@ -2352,6 +2902,34 @@ class ModifyDisksRenewFlagRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySnapshotAttribute返回参数结构体
+ * @class
+ */
+class ModifySnapshotAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDiskAttributes请求参数结构体
  * @class
  */
@@ -2366,12 +2944,6 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * 新的云硬盘项目ID，只支持修改弹性云盘的项目ID。通过[DescribeProject](/document/api/378/4400)接口查询可用项目及其ID。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
          * 新的云硬盘名称。
          * @type {string || null}
          */
@@ -2382,6 +2954,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
          * @type {boolean || null}
          */
         this.Portable = null;
+
+        /**
+         * 新的云硬盘项目ID，只支持修改弹性云盘的项目ID。通过[DescribeProject](/document/api/378/4400)接口查询可用项目及其ID。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
         /**
          * 成功挂载到云主机后该云硬盘是否随云主机销毁，TRUE表示随云主机销毁，FALSE表示不随云主机销毁。仅支持按量计费云硬盘数据盘。
@@ -2405,9 +2983,9 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
             return;
         }
         this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DiskName = 'DiskName' in params ? params.DiskName : null;
         this.Portable = 'Portable' in params ? params.Portable : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
@@ -2635,16 +3213,16 @@ class ResizeDiskRequest extends  AbstractModel {
         super();
 
         /**
-         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-        /**
          * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
          * @type {number || null}
          */
         this.DiskSize = null;
+
+        /**
+         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
 
     }
 
@@ -2655,8 +3233,43 @@ class ResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+
+    }
+}
+
+/**
+ * ApplyDiskBackup请求参数结构体
+ * @class
+ */
+class ApplyDiskBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点ID，可通过 DescribeDiskBackups 查询。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * 云硬盘备份点原云硬盘ID，可通过DescribeDisks接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -2676,13 +3289,13 @@ class ModifyDisksChargeTypeRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
+         * 设置为预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
          * @type {DiskChargePrepaid || null}
          */
         this.DiskChargePrepaid = null;
 
         /**
-         * 后付费模式
+         * 设置为后付费模式
          * @type {boolean || null}
          */
         this.DiskChargePostpaid = null;
@@ -2793,16 +3406,16 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.SnapshotId = null;
 
         /**
-         * 新的快照名称。最长为60个字符。
-         * @type {string || null}
-         */
-        this.SnapshotName = null;
-
-        /**
          * 快照的保留方式，FALSE表示非永久保留，TRUE表示永久保留。
          * @type {boolean || null}
          */
         this.IsPermanent = null;
+
+        /**
+         * 新的快照名称。最长为60个字符。
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
 
         /**
          * 快照的到期时间；设置好快照将会被同时设置为非永久保留方式；超过到期时间后快照将会被自动删除。
@@ -2820,8 +3433,8 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
             return;
         }
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
         this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
@@ -2877,40 +3490,43 @@ class DiskConfig extends  AbstractModel {
         this.Available = null;
 
         /**
-         * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
-         * @type {string || null}
-         */
-        this.DiskUsage = null;
-
-        /**
          * 付费模式。取值范围：<br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费。
          * @type {string || null}
          */
         this.DiskChargeType = null;
 
         /**
-         * 最大可配置云盘大小，单位GB。
-         * @type {number || null}
-         */
-        this.MaxDiskSize = null;
-
-        /**
-         * 最小可配置云盘大小，单位GB。
-         * @type {number || null}
-         */
-        this.MinDiskSize = null;
-
-        /**
          * 云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。
          * @type {string || null}
          */
         this.Zone = null;
+
+        /**
+         * 实例机型系列。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 云盘大小变化的最小步长，单位GB。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StepSize = null;
+
+        /**
+         * 额外的性能区间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ExtraPerformanceRange = null;
 
         /**
          * 实例机型。
@@ -2920,11 +3536,29 @@ class DiskConfig extends  AbstractModel {
         this.DeviceClass = null;
 
         /**
-         * 实例机型系列。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
-注意：此字段可能返回 null，表示取不到有效值。
+         * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
          * @type {string || null}
          */
-        this.InstanceFamily = null;
+        this.DiskUsage = null;
+
+        /**
+         * 最小可配置云盘大小，单位GB。
+         * @type {number || null}
+         */
+        this.MinDiskSize = null;
+
+        /**
+         * 最大可配置云盘大小，单位GB。
+         * @type {number || null}
+         */
+        this.MaxDiskSize = null;
+
+        /**
+         * 描述预付费或后付费云盘的价格。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Price || null}
+         */
+        this.Price = null;
 
     }
 
@@ -2936,14 +3570,97 @@ class DiskConfig extends  AbstractModel {
             return;
         }
         this.Available = 'Available' in params ? params.Available : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
-        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
-        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
         this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.StepSize = 'StepSize' in params ? params.StepSize : null;
+        this.ExtraPerformanceRange = 'ExtraPerformanceRange' in params ? params.ExtraPerformanceRange : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateDiskBackup返回参数结构体
+ * @class
+ */
+class CreateDiskBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点的ID。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquirePriceModifyDiskBackupQuota返回参数结构体
+ * @class
+ */
+class InquirePriceModifyDiskBackupQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述了修改云硬盘备份点之后的云盘价格。
+         * @type {Price || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new Price();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3431,30 +4148,24 @@ class AttachDisksResponse extends  AbstractModel {
 }
 
 /**
- * ModifySnapshotsSharePermission请求参数结构体
+ * CreateDiskBackup请求参数结构体
  * @class
  */
-class ModifySnapshotsSharePermissionRequest extends  AbstractModel {
+class CreateDiskBackupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。
-         * @type {Array.<string> || null}
-         */
-        this.AccountIds = null;
-
-        /**
-         * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
+         * 要创建备份点的云硬盘名称。
          * @type {string || null}
          */
-        this.Permission = null;
+        this.DiskId = null;
 
         /**
-         * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
-         * @type {Array.<string> || null}
+         * 云硬盘备份点名称。长度不能超过100个字符。
+         * @type {string || null}
          */
-        this.SnapshotIds = null;
+        this.DiskBackupName = null;
 
     }
 
@@ -3465,9 +4176,8 @@ class ModifySnapshotsSharePermissionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountIds = 'AccountIds' in params ? params.AccountIds : null;
-        this.Permission = 'Permission' in params ? params.Permission : null;
-        this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
 
     }
 }
@@ -3622,6 +4332,90 @@ class DescribeDiskOperationLogsRequest extends  AbstractModel {
         }
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+
+    }
+}
+
+/**
+ * 云硬盘备份点。
+ * @class
+ */
+class DiskBackup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点的ID。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * 云硬盘备份点关联的云硬盘ID。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 云硬盘大小，单位GB。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 云硬盘类型。取值范围：<br><li>SYSTEM_DISK：系统盘<br><li>DATA_DISK：数据盘。
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * 备份点名称。
+         * @type {string || null}
+         */
+        this.DiskBackupName = null;
+
+        /**
+         * 云硬盘备份点状态。取值范围：<br><li>NORMAL：正常<br><li>CREATING：创建中<br><li>ROLLBACKING：回滚中
+         * @type {string || null}
+         */
+        this.DiskBackupState = null;
+
+        /**
+         * 云硬盘创建进度百分比。
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 云硬盘备份点的创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 云盘是否为加密盘。取值范围：<br><li>false:表示非加密盘<br><li>true:表示加密盘。
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
+        this.DiskBackupState = 'DiskBackupState' in params ? params.DiskBackupState : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }
@@ -3825,6 +4619,12 @@ class DescribeDiskStoragePoolResponse extends  AbstractModel {
          * 独享集群的详细信息列表
          * @type {Array.<Cdc> || null}
          */
+        this.CdcSet = null;
+
+        /**
+         * 独享集群的详细信息列表
+         * @type {Array.<Cdc> || null}
+         */
         this.DiskStoragePoolSet = null;
 
         /**
@@ -3844,6 +4644,15 @@ class DescribeDiskStoragePoolResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
+        if (params.CdcSet) {
+            this.CdcSet = new Array();
+            for (let z in params.CdcSet) {
+                let obj = new Cdc();
+                obj.deserialize(params.CdcSet[z]);
+                this.CdcSet.push(obj);
+            }
+        }
+
         if (params.DiskStoragePoolSet) {
             this.DiskStoragePoolSet = new Array();
             for (let z in params.DiskStoragePoolSet) {
@@ -3858,12 +4667,18 @@ class DescribeDiskStoragePoolResponse extends  AbstractModel {
 }
 
 /**
- * 描述了定期快照的执行策略。可理解为在DayOfWeek指定的那几天中，在Hour指定的小时执行该条定期快照策略。
+ * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的时刻点执行该条定期快照策。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，仅可设置其中一条策略规则。
  * @class
  */
 class Policy extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 指定定期快照策略的触发时间。单位为小时，取值范围：[0, 23]。00:00 ~ 23:00 共 24 个时间点可选，1表示 01:00，依此类推。
+         * @type {Array.<number> || null}
+         */
+        this.Hour = null;
 
         /**
          * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
@@ -3872,10 +4687,16 @@ class Policy extends  AbstractModel {
         this.DayOfWeek = null;
 
         /**
-         * 指定定期快照策略的触发时间。单位为小时，取值范围：[0, 23]。00:00 ~ 23:00 共 24 个时间点可选，1表示 01:00，依此类推。
+         * 指定每月从月初到月底需要触发定期快照的日期,取值范围：[1, 31]，1-31分别表示每月的具体日期，比如5表示每月的5号。注：若设置29、30、31等部分月份不存在的日期，则对应不存在日期的月份会跳过不打定期快照。
          * @type {Array.<number> || null}
          */
-        this.Hour = null;
+        this.DayOfMonth = null;
+
+        /**
+         * 指定创建定期快照的间隔天数，取值范围：[1, 365]，例如设置为5，则间隔5天即触发定期快照创建。注：当选择按天备份时，理论上第一次备份的时间为备份策略创建当天。如果当天备份策略创建的时间已经晚于设置的备份时间，那么将会等到第二个备份周期再进行第一次备份。
+         * @type {number || null}
+         */
+        this.IntervalDays = null;
 
     }
 
@@ -3886,82 +4707,27 @@ class Policy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
         this.Hour = 'Hour' in params ? params.Hour : null;
+        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
+        this.DayOfMonth = 'DayOfMonth' in params ? params.DayOfMonth : null;
+        this.IntervalDays = 'IntervalDays' in params ? params.IntervalDays : null;
 
     }
 }
 
 /**
- * 描述预付费或后付费云盘的价格。
+ * ModifyDiskExtraPerformance返回参数结构体
  * @class
  */
-class Price extends  AbstractModel {
+class ModifyDiskExtraPerformanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UnitPriceDiscount = null;
-
-        /**
-         * 预付费云盘预支费用的折扣价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
-
-        /**
-         * 后付费云盘原单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UnitPrice = null;
-
-        /**
-         * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.UnitPriceHigh = null;
-
-        /**
-         * 高精度预付费云盘预支费用的原价, 单位：元	。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OriginalPriceHigh = null;
-
-        /**
-         * 预付费云盘预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 高精度预付费云盘预支费用的折扣价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DiscountPriceHigh = null;
-
-        /**
-         * 高精度后付费云盘折扣单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UnitPriceDiscountHigh = null;
-
-        /**
-         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ChargeUnit = null;
+        this.RequestId = null;
 
     }
 
@@ -3972,15 +4738,7 @@ class Price extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
-        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
-        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
-        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3994,16 +4752,16 @@ class InquirePriceModifyDiskExtraPerformanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-        /**
          * 额外购买的云硬盘性能值，单位MB/s。
          * @type {number || null}
          */
         this.ThroughputPerformance = null;
+
+        /**
+         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
 
     }
 
@@ -4014,8 +4772,8 @@ class InquirePriceModifyDiskExtraPerformanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -4029,16 +4787,16 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         super();
 
         /**
-         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-        /**
          * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
          * @type {number || null}
          */
         this.DiskSize = null;
+
+        /**
+         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
 
         /**
          * 云盘所属项目ID。 如传入则仅用于鉴权。
@@ -4055,8 +4813,8 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
@@ -4077,28 +4835,10 @@ class DescribeDiskConfigQuotaRequest extends  AbstractModel {
         this.InquiryType = null;
 
         /**
-         * 查询一个或多个[可用区](/document/product/213/15753#ZoneInfo)下的配置。
-         * @type {Array.<string> || null}
-         */
-        this.Zones = null;
-
-        /**
          * 付费模式。取值范围：<br><li>PREPAID：预付费<br><li>POSTPAID_BY_HOUR：后付费。
          * @type {string || null}
          */
         this.DiskChargeType = null;
-
-        /**
-         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
-         * @type {Array.<string> || null}
-         */
-        this.DiskTypes = null;
-
-        /**
-         * 系统盘或数据盘。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
-         * @type {string || null}
-         */
-        this.DiskUsage = null;
 
         /**
          * 按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。详见[实例类型](https://cloud.tencent.com/document/product/213/11518)
@@ -4107,16 +4847,34 @@ class DescribeDiskConfigQuotaRequest extends  AbstractModel {
         this.InstanceFamilies = null;
 
         /**
-         * 实例CPU核数。
-         * @type {number || null}
+         * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
+         * @type {Array.<string> || null}
          */
-        this.CPU = null;
+        this.DiskTypes = null;
+
+        /**
+         * 查询一个或多个[可用区](/document/product/213/15753#ZoneInfo)下的配置。
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
 
         /**
          * 实例内存大小。
          * @type {number || null}
          */
         this.Memory = null;
+
+        /**
+         * 系统盘或数据盘。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * 实例CPU核数。
+         * @type {number || null}
+         */
+        this.CPU = null;
 
     }
 
@@ -4128,13 +4886,13 @@ class DescribeDiskConfigQuotaRequest extends  AbstractModel {
             return;
         }
         this.InquiryType = 'InquiryType' in params ? params.InquiryType : null;
-        this.Zones = 'Zones' in params ? params.Zones : null;
         this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
-        this.DiskTypes = 'DiskTypes' in params ? params.DiskTypes : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.InstanceFamilies = 'InstanceFamilies' in params ? params.InstanceFamilies : null;
-        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.DiskTypes = 'DiskTypes' in params ? params.DiskTypes : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.CPU = 'CPU' in params ? params.CPU : null;
 
     }
 }
@@ -4288,18 +5046,30 @@ class AutoMountConfiguration extends  AbstractModel {
 }
 
 /**
- * ModifySnapshotAttribute返回参数结构体
+ * CopySnapshotCrossRegions请求参数结构体
  * @class
  */
-class ModifySnapshotAttributeResponse extends  AbstractModel {
+class CopySnapshotCrossRegionsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。
+         * @type {Array.<string> || null}
+         */
+        this.DestinationRegions = null;
+
+        /**
+         * 需要跨地域复制的源快照ID，可通过[DescribeSnapshots](/document/product/362/15647)查询。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SnapshotId = null;
+
+        /**
+         * 新复制快照的名称，如果不传，则默认取值为“Copied 源快照ID from 地域名”。
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
 
     }
 
@@ -4310,7 +5080,9 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DestinationRegions = 'DestinationRegions' in params ? params.DestinationRegions : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
 
     }
 }
@@ -4324,13 +5096,6 @@ class PrepayPrice extends  AbstractModel {
         super();
 
         /**
-         * 预付费云盘或快照预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
          * 预付费云盘或快照预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
@@ -4338,11 +5103,46 @@ class PrepayPrice extends  AbstractModel {
         this.DiscountPrice = null;
 
         /**
+         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
          * 高精度预付费云盘或快照预支费用的原价，单位：元
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OriginalPriceHigh = null;
+
+        /**
+         * 预付费云盘或快照预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
 
         /**
          * 高精度预付费云盘或快照预支费用的折扣价，单位：元
@@ -4359,32 +5159,11 @@ class PrepayPrice extends  AbstractModel {
         this.UnitPrice = null;
 
         /**
-         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+         * 计费项目明细列表。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<DetailPrice> || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UnitPriceDiscount = null;
-
-        /**
-         * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UnitPriceHigh = null;
-
-        /**
-         * 高精度后付费云盘折扣单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UnitPriceDiscountHigh = null;
+        this.DetailPrices = null;
 
     }
 
@@ -4395,15 +5174,24 @@ class PrepayPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
         this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
         this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
-        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
-        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
-        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
+
+        if (params.DetailPrices) {
+            this.DetailPrices = new Array();
+            for (let z in params.DetailPrices) {
+                let obj = new DetailPrice();
+                obj.deserialize(params.DetailPrices[z]);
+                this.DetailPrices.push(obj);
+            }
+        }
 
     }
 }
@@ -4545,6 +5333,18 @@ class Cdc extends  AbstractModel {
          */
         this.ExpiredTime = null;
 
+        /**
+         * 存储池创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 当前集群中已创建的云盘数量。
+         * @type {number || null}
+         */
+        this.DiskNumber = null;
+
     }
 
     /**
@@ -4567,6 +5367,8 @@ class Cdc extends  AbstractModel {
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DiskNumber = 'DiskNumber' in params ? params.DiskNumber : null;
 
     }
 }
@@ -4656,16 +5458,22 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
         this.Policy = null;
 
         /**
-         * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
-         * @type {string || null}
+         * 是否创建定期快照的执行策略。TRUE表示只需获取首次开始备份的时间，不实际创建定期快照策略，FALSE表示创建，默认为FALSE。
+         * @type {boolean || null}
          */
-        this.AutoSnapshotPolicyName = null;
+        this.DryRun = null;
 
         /**
          * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
          * @type {boolean || null}
          */
         this.IsActivated = null;
+
+        /**
+         * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
 
         /**
          * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
@@ -4678,12 +5486,6 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.RetentionDays = null;
-
-        /**
-         * 是否创建定期快照的执行策略。TRUE表示只需获取首次开始备份的时间，不实际创建定期快照策略，FALSE表示创建，默认为FALSE。
-         * @type {boolean || null}
-         */
-        this.DryRun = null;
 
     }
 
@@ -4703,28 +5505,85 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
                 this.Policy.push(obj);
             }
         }
-        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
         this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
-        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
 
 /**
- * ModifyDiskExtraPerformance返回参数结构体
+ * 描述预付费或后付费云盘的价格。
  * @class
  */
-class ModifyDiskExtraPerformanceResponse extends  AbstractModel {
+class Price extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UnitPriceHigh = null;
+
+        /**
+         * 高精度预付费云盘预支费用的原价, 单位：元	。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 高精度预付费云盘预支费用的折扣价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
+
+        /**
+         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
 
     }
 
@@ -4735,7 +5594,15 @@ class ModifyDiskExtraPerformanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
 
     }
 }
@@ -4790,29 +5657,38 @@ class ApplySnapshotRequest extends  AbstractModel {
 }
 
 module.exports = {
+    SnapshotOperationLog: SnapshotOperationLog,
     ModifyDiskExtraPerformanceRequest: ModifyDiskExtraPerformanceRequest,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
+    DescribeDiskBackupsRequest: DescribeDiskBackupsRequest,
     AutoSnapshotPolicy: AutoSnapshotPolicy,
+    DetailPrice: DetailPrice,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
+    ModifySnapshotsSharePermissionRequest: ModifySnapshotsSharePermissionRequest,
     CopySnapshotCrossRegionsResponse: CopySnapshotCrossRegionsResponse,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
+    ModifyDiskBackupQuotaRequest: ModifyDiskBackupQuotaRequest,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
     BindAutoSnapshotPolicyRequest: BindAutoSnapshotPolicyRequest,
     CreateSnapshotResponse: CreateSnapshotResponse,
     DescribeAutoSnapshotPoliciesRequest: DescribeAutoSnapshotPoliciesRequest,
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
+    DeleteDiskBackupsRequest: DeleteDiskBackupsRequest,
     InitializeDisksResponse: InitializeDisksResponse,
+    DeleteDiskBackupsResponse: DeleteDiskBackupsResponse,
     DescribeDiskStoragePoolRequest: DescribeDiskStoragePoolRequest,
-    SnapshotOperationLog: SnapshotOperationLog,
+    DescribeDiskBackupsResponse: DescribeDiskBackupsResponse,
     SnapshotCopyResult: SnapshotCopyResult,
     RenewDiskRequest: RenewDiskRequest,
     InquirePriceModifyDiskExtraPerformanceResponse: InquirePriceModifyDiskExtraPerformanceResponse,
+    AdvancedRetentionPolicy: AdvancedRetentionPolicy,
     CreateDisksRequest: CreateDisksRequest,
     AttachDisksRequest: AttachDisksRequest,
     DescribeDiskAssociatedAutoSnapshotPolicyRequest: DescribeDiskAssociatedAutoSnapshotPolicyRequest,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     ModifyAutoSnapshotPolicyAttributeRequest: ModifyAutoSnapshotPolicyAttributeRequest,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
+    ApplyDiskBackupResponse: ApplyDiskBackupResponse,
     InquiryPriceResizeDiskResponse: InquiryPriceResizeDiskResponse,
     Tag: Tag,
     ResizeDiskResponse: ResizeDiskResponse,
@@ -4824,9 +5700,10 @@ module.exports = {
     CreateSnapshotRequest: CreateSnapshotRequest,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     DescribeSnapshotSharePermissionResponse: DescribeSnapshotSharePermissionResponse,
-    CopySnapshotCrossRegionsRequest: CopySnapshotCrossRegionsRequest,
+    ModifyDiskBackupQuotaResponse: ModifyDiskBackupQuotaResponse,
     InquiryPriceRenewDisksRequest: InquiryPriceRenewDisksRequest,
     DescribeSnapshotSharePermissionRequest: DescribeSnapshotSharePermissionRequest,
+    InquirePriceModifyDiskBackupQuotaRequest: InquirePriceModifyDiskBackupQuotaRequest,
     DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
     ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
@@ -4835,6 +5712,7 @@ module.exports = {
     Placement: Placement,
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
+    ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
     ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,
     GetSnapOverviewRequest: GetSnapOverviewRequest,
     Image: Image,
@@ -4843,12 +5721,15 @@ module.exports = {
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
+    ApplyDiskBackupRequest: ApplyDiskBackupRequest,
     ModifyDisksChargeTypeRequest: ModifyDisksChargeTypeRequest,
     InitializeDisksRequest: InitializeDisksRequest,
     CreateAutoSnapshotPolicyResponse: CreateAutoSnapshotPolicyResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     UnbindAutoSnapshotPolicyRequest: UnbindAutoSnapshotPolicyRequest,
     DiskConfig: DiskConfig,
+    CreateDiskBackupResponse: CreateDiskBackupResponse,
+    InquirePriceModifyDiskBackupQuotaResponse: InquirePriceModifyDiskBackupQuotaResponse,
     DeleteAutoSnapshotPoliciesRequest: DeleteAutoSnapshotPoliciesRequest,
     DiskChargePrepaid: DiskChargePrepaid,
     Filter: Filter,
@@ -4857,24 +5738,25 @@ module.exports = {
     Snapshot: Snapshot,
     CreateDisksResponse: CreateDisksResponse,
     AttachDisksResponse: AttachDisksResponse,
-    ModifySnapshotsSharePermissionRequest: ModifySnapshotsSharePermissionRequest,
+    CreateDiskBackupRequest: CreateDiskBackupRequest,
     DiskOperationLog: DiskOperationLog,
     BindAutoSnapshotPolicyResponse: BindAutoSnapshotPolicyResponse,
     DescribeDiskOperationLogsRequest: DescribeDiskOperationLogsRequest,
+    DiskBackup: DiskBackup,
     DescribeDisksRequest: DescribeDisksRequest,
     DetachDisksResponse: DetachDisksResponse,
     InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     SharePermission: SharePermission,
     DescribeDiskStoragePoolResponse: DescribeDiskStoragePoolResponse,
     Policy: Policy,
-    Price: Price,
+    ModifyDiskExtraPerformanceResponse: ModifyDiskExtraPerformanceResponse,
     InquirePriceModifyDiskExtraPerformanceRequest: InquirePriceModifyDiskExtraPerformanceRequest,
     InquiryPriceResizeDiskRequest: InquiryPriceResizeDiskRequest,
     DescribeDiskConfigQuotaRequest: DescribeDiskConfigQuotaRequest,
     DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
     GetSnapOverviewResponse: GetSnapOverviewResponse,
     AutoMountConfiguration: AutoMountConfiguration,
-    ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
+    CopySnapshotCrossRegionsRequest: CopySnapshotCrossRegionsRequest,
     PrepayPrice: PrepayPrice,
     RenewDiskResponse: RenewDiskResponse,
     DescribeAutoSnapshotPoliciesResponse: DescribeAutoSnapshotPoliciesResponse,
@@ -4882,7 +5764,7 @@ module.exports = {
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
     AttachDetail: AttachDetail,
     CreateAutoSnapshotPolicyRequest: CreateAutoSnapshotPolicyRequest,
-    ModifyDiskExtraPerformanceResponse: ModifyDiskExtraPerformanceResponse,
+    Price: Price,
     ApplySnapshotRequest: ApplySnapshotRequest,
 
 }

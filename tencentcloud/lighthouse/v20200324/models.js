@@ -175,30 +175,51 @@ class DescribeDisksDeniedActionsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstancesTrafficPackages返回参数结构体
+ * DescribeDiskBackups请求参数结构体
  * @class
  */
-class DescribeInstancesTrafficPackagesResponse extends  AbstractModel {
+class DescribeDiskBackupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合条件的实例流量包详情数量。
+         * 要查询云硬盘备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+        /**
+         * 过滤器列表。
+<li>disk-backup-id</li>按照【云硬盘备份点 ID】进行过滤。
+类型：String
+必选：否
+<li>disk-id</li>按照【云硬盘 ID】进行过滤。
+类型：String
+必选：否
+<li>disk-backup-state</li>按照【云硬盘备份点状态】进行过滤。
+类型：String
+必选：否
+取值：参考数据结构[DiskBackup](https://cloud.tencent.com/document/product/1207/47576#DiskBackup)下的DiskBackupState取值。
+<li>disk-usage</li>按照【云硬盘类型】进行过滤。
+类型：String
+必选：否
+取值：SYSTEM_DISK或DATA_DISK
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为 0。
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Offset = null;
 
         /**
-         * 实例流量包详情列表。
-         * @type {Array.<InstanceTrafficPackage> || null}
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
          */
-        this.InstanceTrafficPackageSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Limit = null;
 
     }
 
@@ -209,17 +230,18 @@ class DescribeInstancesTrafficPackagesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
 
-        if (params.InstanceTrafficPackageSet) {
-            this.InstanceTrafficPackageSet = new Array();
-            for (let z in params.InstanceTrafficPackageSet) {
-                let obj = new InstanceTrafficPackage();
-                obj.deserialize(params.InstanceTrafficPackageSet[z]);
-                this.InstanceTrafficPackageSet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -644,6 +666,12 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
          */
         this.DiskCount = null;
 
+        /**
+         * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
     }
 
     /**
@@ -662,6 +690,7 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
             this.DiskChargePrepaid = obj;
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -758,18 +787,73 @@ class DetachCcnResponse extends  AbstractModel {
 }
 
 /**
- * CreateInstanceSnapshot返回参数结构体
+ * BlueprintPrice	自定义镜像的价格参数。
  * @class
  */
-class CreateInstanceSnapshotResponse extends  AbstractModel {
+class BlueprintPrice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 快照 ID。
-         * @type {string || null}
+         * 镜像单价，原价。单位元。
+         * @type {number || null}
          */
-        this.SnapshotId = null;
+        this.OriginalBlueprintPrice = null;
+
+        /**
+         * 镜像总价，原价。单位元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 镜像折扣后总价。单位元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalBlueprintPrice = 'OriginalBlueprintPrice' in params ? params.OriginalBlueprintPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
+ * DescribeScenes返回参数结构体
+ * @class
+ */
+class DescribeScenesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用场景列表。
+         * @type {Array.<Scene> || null}
+         */
+        this.SceneSet = null;
+
+        /**
+         * 使用场景总数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -786,7 +870,16 @@ class CreateInstanceSnapshotResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+
+        if (params.SceneSet) {
+            this.SceneSet = new Array();
+            for (let z in params.SceneSet) {
+                let obj = new Scene();
+                obj.deserialize(params.SceneSet[z]);
+                this.SceneSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -801,7 +894,7 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 询价信息。
+         * 询价信息。默认为列表中第一个实例的价格信息。
          * @type {Price || null}
          */
         this.Price = null;
@@ -812,6 +905,19 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
          * @type {Array.<DataDiskPrice> || null}
          */
         this.DataDiskPriceSet = null;
+
+        /**
+         * 待续费实例价格列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstancePriceDetail> || null}
+         */
+        this.InstancePriceDetailSet = null;
+
+        /**
+         * 总计价格。
+         * @type {TotalPrice || null}
+         */
+        this.TotalPrice = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -842,6 +948,21 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
                 obj.deserialize(params.DataDiskPriceSet[z]);
                 this.DataDiskPriceSet.push(obj);
             }
+        }
+
+        if (params.InstancePriceDetailSet) {
+            this.InstancePriceDetailSet = new Array();
+            for (let z in params.InstancePriceDetailSet) {
+                let obj = new InstancePriceDetail();
+                obj.deserialize(params.InstancePriceDetailSet[z]);
+                this.InstancePriceDetailSet.push(obj);
+            }
+        }
+
+        if (params.TotalPrice) {
+            let obj = new TotalPrice();
+            obj.deserialize(params.TotalPrice)
+            this.TotalPrice = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1121,6 +1242,79 @@ class DescribeBundlesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstancesBundle请求参数结构体
+ * @class
+ */
+class ModifyInstancesBundleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为30。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 待变更的套餐Id。可通过[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口返回值中的BundleId获取。
+         * @type {string || null}
+         */
+        this.BundleId = null;
+
+        /**
+         * 是否自动抵扣代金券。取值范围：
+true：表示自动抵扣代金券
+false：表示不自动抵扣代金券
+默认取值：false。
+         * @type {boolean || null}
+         */
+        this.AutoVoucher = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+
+    }
+}
+
+/**
+ * DeleteDiskBackups请求参数结构体
+ * @class
+ */
+class DeleteDiskBackupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点ID列表，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
+
+    }
+}
+
+/**
  * InquirePriceRenewInstances请求参数结构体
  * @class
  */
@@ -1129,25 +1323,25 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待续费的实例。
+         * 待续费的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573 )接口返回值中的InstanceId获取。每次请求批量实例的上限为50。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * 是否续费数据盘
+         * 是否续费数据盘。默认值: false, 即不续费。
          * @type {boolean || null}
          */
         this.RenewDataDisk = null;
 
         /**
-         * 数据盘是否对齐实例到期时间
+         * 数据盘是否对齐实例到期时间。默认值: false, 即不对齐。
          * @type {boolean || null}
          */
         this.AlignInstanceExpiredTime = null;
@@ -1332,6 +1526,56 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDiskBackups返回参数结构体
+ * @class
+ */
+class DescribeDiskBackupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点的数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 云硬盘备份点信息列表。
+         * @type {Array.<DiskBackup> || null}
+         */
+        this.DiskBackupSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DiskBackupSet) {
+            this.DiskBackupSet = new Array();
+            for (let z in params.DiskBackupSet) {
+                let obj = new DiskBackup();
+                obj.deserialize(params.DiskBackupSet[z]);
+                this.DiskBackupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AssociateInstancesKeyPairs请求参数结构体
  * @class
  */
@@ -1362,6 +1606,41 @@ class AssociateInstancesKeyPairsRequest extends  AbstractModel {
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * ModifyDiskBackupsAttribute请求参数结构体
+ * @class
+ */
+class ModifyDiskBackupsAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+        /**
+         * 云硬盘备份点名称，最大长度90。
+         * @type {string || null}
+         */
+        this.DiskBackupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
 
     }
 }
@@ -1622,6 +1901,190 @@ class TerminateDisksResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述了云硬盘备份点相关信息。
+ * @class
+ */
+class DiskBackup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点ID。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * 创建此云硬盘备份点的云硬盘类型。取值：<li>DATA_DISK：数据盘</li>
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * 创建此云硬盘备份点的云硬盘 ID。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 创建此云硬盘备份点的云硬盘大小，单位 GB。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 云硬盘备份点名称，用户自定义的云硬盘备份点别名。
+         * @type {string || null}
+         */
+        this.DiskBackupName = null;
+
+        /**
+         * 云硬盘备份点的状态。取值范围：
+<li>NORMAL：正常。 </li>
+<li>CREATING：创建中。</li>
+<li>ROLLBACKING：回滚中。</li>
+<li>DELETING：删除中。</li>
+         * @type {string || null}
+         */
+        this.DiskBackupState = null;
+
+        /**
+         * 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 上一次操作
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperation = null;
+
+        /**
+         * 上一次操作状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * 上一次请求ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationRequestId = null;
+
+        /**
+         * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
+        this.DiskBackupState = 'DiskBackupState' in params ? params.DiskBackupState : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesTrafficPackages返回参数结构体
+ * @class
+ */
+class DescribeInstancesTrafficPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例流量包详情数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例流量包详情列表。
+         * @type {Array.<InstanceTrafficPackage> || null}
+         */
+        this.InstanceTrafficPackageSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceTrafficPackageSet) {
+            this.InstanceTrafficPackageSet = new Array();
+            for (let z in params.InstanceTrafficPackageSet) {
+                let obj = new InstanceTrafficPackage();
+                obj.deserialize(params.InstanceTrafficPackageSet[z]);
+                this.InstanceTrafficPackageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDiskBackupsDeniedActions请求参数结构体
+ * @class
+ */
+class DescribeDiskBackupsDeniedActionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点 ID 列表, 可通过 DescribeDiskBackups 接口查询。
+         * @type {Array.<string> || null}
+         */
+        this.DiskBackupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupIds = 'DiskBackupIds' in params ? params.DiskBackupIds : null;
 
     }
 }
@@ -1908,7 +2371,17 @@ class Disk extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * 磁盘状态
+         * 磁盘状态，取值范围：
+<li>PENDING：创建中。 </li>
+<li>UNATTACHED：未挂载。</li>
+<li>ATTACHING：挂载中。</li>
+<li>ATTACHED：已挂载。</li>
+<li>DETACHING：卸载中。 </li>
+<li> SHUTDOWN：已隔离。</li>
+<li> CREATED_FAILED：创建失败。</li>
+<li>TERMINATING：销毁中。</li>
+<li> DELETING：删除中。</li>
+<li> FREEZING：冻结中。</li>
          * @type {string || null}
          */
         this.DiskState = null;
@@ -1944,24 +2417,40 @@ class Disk extends  AbstractModel {
         this.LatestOperationRequestId = null;
 
         /**
-         * 创建时间
+         * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * 到期时间
+         * 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * 隔离时间
+         * 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.IsolatedTime = null;
+
+        /**
+         * 云硬盘的已有备份点数量。
+         * @type {number || null}
+         */
+        this.DiskBackupCount = null;
+
+        /**
+         * 云硬盘的备份点配额数量。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
 
     }
 
@@ -1990,6 +2479,8 @@ class Disk extends  AbstractModel {
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
         this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.DiskBackupCount = 'DiskBackupCount' in params ? params.DiskBackupCount : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -2381,18 +2872,24 @@ class InstanceTrafficPackage extends  AbstractModel {
 }
 
 /**
- * StartInstances返回参数结构体
+ * 快照操作限制列表。
  * @class
  */
-class StartInstancesResponse extends  AbstractModel {
+class SnapshotDeniedActions extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 快照 ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SnapshotId = null;
+
+        /**
+         * 操作限制列表。
+         * @type {Array.<DeniedAction> || null}
+         */
+        this.DeniedActions = null;
 
     }
 
@@ -2403,7 +2900,16 @@ class StartInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+
+        if (params.DeniedActions) {
+            this.DeniedActions = new Array();
+            for (let z in params.DeniedActions) {
+                let obj = new DeniedAction();
+                obj.deserialize(params.DeniedActions[z]);
+                this.DeniedActions.push(obj);
+            }
+        }
 
     }
 }
@@ -2557,6 +3063,92 @@ class DescribeInstancesDiskNumRequest extends  AbstractModel {
 }
 
 /**
+ * 计费项目明细。
+ * @class
+ */
+class DetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述计费项目名称，目前取值
+<li>"DiskSpace"代表云硬盘空间收费项。</li>
+<li>"DiskBackupQuota"代表云硬盘备份点配额收费项。</li>
+         * @type {string || null}
+         */
+        this.PriceName = null;
+
+        /**
+         * 云硬盘计费项维度单价。
+         * @type {number || null}
+         */
+        this.OriginUnitPrice = null;
+
+        /**
+         * 云硬盘计费项维度总价。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 云硬盘在计费项维度折扣。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 云硬盘在计费项维度折后总价。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PriceName = 'PriceName' in params ? params.PriceName : null;
+        this.OriginUnitPrice = 'OriginUnitPrice' in params ? params.OriginUnitPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
+ * ApplyDiskBackup返回参数结构体
+ * @class
+ */
+class ApplyDiskBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBlueprints请求参数结构体
  * @class
  */
@@ -2588,7 +3180,7 @@ class DescribeBlueprintsRequest extends  AbstractModel {
 类型：String
 必选：否
 <li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。
+取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。
 类型：String
 必选：否
 <li>platform-type</li>按照【镜像平台类型】进行过滤。
@@ -2601,8 +3193,11 @@ class DescribeBlueprintsRequest extends  AbstractModel {
 <li>blueprint-state</li>按照【镜像状态】进行过滤。
 类型：String
 必选：否
+<li>scene-id</li>按照【使用场景Id】进行过滤。
+类型：String
+必选：否
 
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2854,6 +3449,48 @@ class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeScenes请求参数结构体
+ * @class
+ */
+class DescribeScenesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用场景ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.SceneIds = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SceneIds = 'SceneIds' in params ? params.SceneIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * StartInstances请求参数结构体
  * @class
  */
@@ -2882,24 +3519,18 @@ class StartInstancesRequest extends  AbstractModel {
 }
 
 /**
- * 快照操作限制列表。
+ * DeleteDiskBackups返回参数结构体
  * @class
  */
-class SnapshotDeniedActions extends  AbstractModel {
+class DeleteDiskBackupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 快照 ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SnapshotId = null;
-
-        /**
-         * 操作限制列表。
-         * @type {Array.<DeniedAction> || null}
-         */
-        this.DeniedActions = null;
+        this.RequestId = null;
 
     }
 
@@ -2910,16 +3541,7 @@ class SnapshotDeniedActions extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-
-        if (params.DeniedActions) {
-            this.DeniedActions = new Array();
-            for (let z in params.DeniedActions) {
-                let obj = new DeniedAction();
-                obj.deserialize(params.DeniedActions[z]);
-                this.DeniedActions.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3011,6 +3633,34 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         }
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+
+    }
+}
+
+/**
+ * DeleteSnapshots返回参数结构体
+ * @class
+ */
+class DeleteSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3116,18 +3766,30 @@ class DescribeBundleDiscountResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSnapshots返回参数结构体
+ * DescribeAllScenes请求参数结构体
  * @class
  */
-class DeleteSnapshotsResponse extends  AbstractModel {
+class DescribeAllScenesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 使用场景ID列表。
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.SceneIds = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3138,7 +3800,9 @@ class DeleteSnapshotsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SceneIds = 'SceneIds' in params ? params.SceneIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3251,6 +3915,13 @@ class DataDiskPrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * 数据盘挂载的实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -3265,6 +3936,49 @@ class DataDiskPrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 使用场景详细信息
+ * @class
+ */
+class SceneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用场景Id。
+         * @type {string || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * 使用场景展示名称。
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * 使用场景描述信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3499,30 +4213,52 @@ class ModifyBlueprintAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFirewallRulesTemplate返回参数结构体
+ * DescribeModifyInstanceBundles请求参数结构体
  * @class
  */
-class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
+class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合条件的防火墙规则数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 防火墙规则详细信息列表。
-         * @type {Array.<FirewallRuleInfo> || null}
-         */
-        this.FirewallRuleSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例 ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 过滤器列表。
+<li>bundle-id</li>按照【套餐 ID】进行过滤。
+类型：String
+必选：否
+<li>support-platform-type</li>按照【系统类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
+类型：String
+必选：否
+<li>bundle-type</li>按照 【套餐类型进行过滤】。
+取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);
+类型：String
+必选：否
+<li>bundle-state</li>按照【套餐状态】进行过滤。
+取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3533,17 +4269,18 @@ class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.FirewallRuleSet) {
-            this.FirewallRuleSet = new Array();
-            for (let z in params.FirewallRuleSet) {
-                let obj = new FirewallRuleInfo();
-                obj.deserialize(params.FirewallRuleSet[z]);
-                this.FirewallRuleSet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3831,7 +4568,7 @@ class DescribeKeyPairsRequest extends  AbstractModel {
 <li>key-id</li>按照【密钥对ID】进行过滤。
 类型：String
 必选：否
-<li>key-name</li>按照【密钥对名称】进行过滤。
+<li>key-name</li>按照【密钥对名称】进行过滤（支持模糊匹配）。
 类型：String
 必选：否
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。
@@ -3886,10 +4623,73 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ApplyDiskBackup请求参数结构体
+ * @class
+ */
+class ApplyDiskBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘ID，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 云硬盘备份点ID，可通过[DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+
+    }
+}
+
+/**
  * ResetInstancesPassword返回参数结构体
  * @class
  */
 class ResetInstancesPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartInstances返回参数结构体
+ * @class
+ */
+class StartInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4034,7 +4834,7 @@ NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费 。
 
         /**
          * 实例状态。取值范围： 
-<li>PENDING：表示创建中</li><li>LAUNCH_FAILED：表示创建失败</li><li>RUNNING：表示运行中</li><li>STOPPED：表示关机</li><li>STARTING：表示开机中</li><li>STOPPING：表示关机中</li><li>REBOOTING：表示重启中</li><li>SHUTDOWN：表示停止待销毁</li><li>TERMINATING：表示销毁中</li><li>DELETING：表示删除中</li><li>FREEZING：表示冻结中</li>
+<li>PENDING：表示创建中</li><li>LAUNCH_FAILED：表示创建失败</li><li>RUNNING：表示运行中</li><li>STOPPED：表示关机</li><li>STARTING：表示开机中</li><li>STOPPING：表示关机中</li><li>REBOOTING：表示重启中</li><li>SHUTDOWN：表示停止待销毁</li><li>TERMINATING：表示销毁中</li><li>DELETING：表示删除中</li><li>FREEZING：表示冻结中</li><li>ENTER_RESCUE_MODE：表示进入救援模式中</li><li>RESCUE_MODE：表示救援模式</li><li>EXIT_RESCUE_MODE：表示退出救援模式中</li>
          * @type {string || null}
          */
         this.InstanceState = null;
@@ -4390,6 +5190,12 @@ class DiskPrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * 计费项目明细列表。
+         * @type {Array.<DetailPrice> || null}
+         */
+        this.DetailPrices = null;
+
     }
 
     /**
@@ -4403,6 +5209,15 @@ class DiskPrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+        if (params.DetailPrices) {
+            this.DetailPrices = new Array();
+            for (let z in params.DetailPrices) {
+                let obj = new DetailPrice();
+                obj.deserialize(params.DetailPrices[z]);
+                this.DetailPrices.push(obj);
+            }
+        }
 
     }
 }
@@ -4486,6 +5301,14 @@ class DescribeBundlesRequest extends  AbstractModel {
 取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
 类型：String
 必选：否
+<li>bundle-type</li>按照 【套餐类型进行过滤】。
+取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);
+类型：String
+必选：否
+<li>bundle-state</li>按照【套餐状态】进行过滤。
+取值: ‘ONLINE’(在线); ‘OFFLINE’(下线);
+类型：String
+必选：否
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。
          * @type {Array.<Filter> || null}
          */
@@ -4551,6 +5374,7 @@ class Blueprint extends  AbstractModel {
 
         /**
          * 镜像描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Description = null;
@@ -4630,6 +5454,32 @@ class Blueprint extends  AbstractModel {
          */
         this.ImageId = null;
 
+        /**
+         * 官方网站Url。
+         * @type {string || null}
+         */
+        this.CommunityUrl = null;
+
+        /**
+         * 指导文章Url。
+         * @type {string || null}
+         */
+        this.GuideUrl = null;
+
+        /**
+         * 镜像关联使用场景Id列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SceneIdSet = null;
+
+        /**
+         * Docker版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DockerVersion = null;
+
     }
 
     /**
@@ -4655,6 +5505,87 @@ class Blueprint extends  AbstractModel {
         this.SupportAutomationTools = 'SupportAutomationTools' in params ? params.SupportAutomationTools : null;
         this.RequiredMemorySize = 'RequiredMemorySize' in params ? params.RequiredMemorySize : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.CommunityUrl = 'CommunityUrl' in params ? params.CommunityUrl : null;
+        this.GuideUrl = 'GuideUrl' in params ? params.GuideUrl : null;
+        this.SceneIdSet = 'SceneIdSet' in params ? params.SceneIdSet : null;
+        this.DockerVersion = 'DockerVersion' in params ? params.DockerVersion : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreateInstances返回参数结构体
+ * @class
+ */
+class InquirePriceCreateInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 询价信息。
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 总计价格信息
+ * @class
+ */
+class TotalPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原始总计价格。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣总计价格。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -4697,6 +5628,56 @@ class DeniedAction extends  AbstractModel {
         this.Action = 'Action' in params ? params.Action : null;
         this.Code = 'Code' in params ? params.Code : null;
         this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * DescribeAllScenes返回参数结构体
+ * @class
+ */
+class DescribeAllScenesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用场景详细信息列表。
+         * @type {Array.<SceneInfo> || null}
+         */
+        this.SceneInfoSet = null;
+
+        /**
+         * 使用场景详细信息总数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SceneInfoSet) {
+            this.SceneInfoSet = new Array();
+            for (let z in params.SceneInfoSet) {
+                let obj = new SceneInfo();
+                obj.deserialize(params.SceneInfoSet[z]);
+                this.SceneInfoSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4965,18 +5946,18 @@ class DiskConfig extends  AbstractModel {
 }
 
 /**
- * InquirePriceCreateInstances返回参数结构体
+ * CreateDiskBackup返回参数结构体
  * @class
  */
-class InquirePriceCreateInstancesResponse extends  AbstractModel {
+class CreateDiskBackupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 询价信息。
-         * @type {Price || null}
+         * 备份点ID。
+         * @type {string || null}
          */
-        this.Price = null;
+        this.DiskBackupId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4993,12 +5974,7 @@ class InquirePriceCreateInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
-        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5473,6 +6449,7 @@ class Snapshot extends  AbstractModel {
 
         /**
          * 快照的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -5549,6 +6526,12 @@ class DescribeDiskDiscountRequest extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
     }
 
     /**
@@ -5560,6 +6543,7 @@ class DescribeDiskDiscountRequest extends  AbstractModel {
         }
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -5616,6 +6600,84 @@ class AttachDisksResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云硬盘备份点操作限制列表。
+ * @class
+ */
+class DiskBackupDeniedActions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘备份点ID。
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * 操作限制列表。
+         * @type {Array.<DeniedAction> || null}
+         */
+        this.DeniedActions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+
+        if (params.DeniedActions) {
+            this.DeniedActions = new Array();
+            for (let z in params.DeniedActions) {
+                let obj = new DeniedAction();
+                obj.deserialize(params.DeniedActions[z]);
+                this.DeniedActions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateDiskBackup请求参数结构体
+ * @class
+ */
+class CreateDiskBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘 ID。当前只支持数据盘创建备份点。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 云硬盘备份点名称，最大长度90。
+         * @type {string || null}
+         */
+        this.DiskBackupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
 
     }
 }
@@ -6087,11 +7149,13 @@ disk-usage
 按照【云硬盘类型】进行过滤。
 类型：String
 必选：否
+取值：SYSTEM_DISK或DATA_DISK
 disk-state
 按照【云硬盘状态】进行过滤。
 类型：String
 必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 DiskIds 和 Filters。
+取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576#Disk)中DiskState取值。
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6308,6 +7372,21 @@ class PolicyDetail extends  AbstractModel {
          */
         this.FinalDiscount = null;
 
+        /**
+         * 活动折扣。取值为null，表示无有效值，即没有折扣。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ActivityDiscount = null;
+
+        /**
+         * 折扣类型。
+user：用户折扣; common：官网折扣; activity：活动折扣。 取值为null，表示无有效值，即没有折扣。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiscountType = null;
+
     }
 
     /**
@@ -6320,6 +7399,8 @@ class PolicyDetail extends  AbstractModel {
         this.UserDiscount = 'UserDiscount' in params ? params.UserDiscount : null;
         this.CommonDiscount = 'CommonDiscount' in params ? params.CommonDiscount : null;
         this.FinalDiscount = 'FinalDiscount' in params ? params.FinalDiscount : null;
+        this.ActivityDiscount = 'ActivityDiscount' in params ? params.ActivityDiscount : null;
+        this.DiscountType = 'DiscountType' in params ? params.DiscountType : null;
 
     }
 }
@@ -6903,6 +7984,64 @@ class InternetAccessible extends  AbstractModel {
 }
 
 /**
+ * 实例价格详细信息
+ * @class
+ */
+class InstancePriceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 询价信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstancePrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DiscountDetail> || null}
+         */
+        this.DiscountDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.InstancePrice) {
+            let obj = new InstancePrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.DiscountDetail) {
+            this.DiscountDetail = new Array();
+            for (let z in params.DiscountDetail) {
+                let obj = new DiscountDetail();
+                obj.deserialize(params.DiscountDetail[z]);
+                this.DiscountDetail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * RebootInstances返回参数结构体
  * @class
  */
@@ -6931,18 +8070,18 @@ class RebootInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDisksDeniedActions返回参数结构体
+ * DescribeDiskBackupsDeniedActions返回参数结构体
  * @class
  */
-class DescribeDisksDeniedActionsResponse extends  AbstractModel {
+class DescribeDiskBackupsDeniedActionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云硬盘操作限制列表详细信息。
-         * @type {Array.<DiskDeniedActions> || null}
+         * 云硬盘备份点操作限制列表详细信息。
+         * @type {Array.<DiskBackupDeniedActions> || null}
          */
-        this.DiskDeniedActionSet = null;
+        this.DiskBackupDeniedActionSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6960,12 +8099,12 @@ class DescribeDisksDeniedActionsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DiskDeniedActionSet) {
-            this.DiskDeniedActionSet = new Array();
-            for (let z in params.DiskDeniedActionSet) {
-                let obj = new DiskDeniedActions();
-                obj.deserialize(params.DiskDeniedActionSet[z]);
-                this.DiskDeniedActionSet.push(obj);
+        if (params.DiskBackupDeniedActionSet) {
+            this.DiskBackupDeniedActionSet = new Array();
+            for (let z in params.DiskBackupDeniedActionSet) {
+                let obj = new DiskBackupDeniedActions();
+                obj.deserialize(params.DiskBackupDeniedActionSet[z]);
+                this.DiskBackupDeniedActionSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -7113,36 +8252,18 @@ class DescribeDisksReturnableResponse extends  AbstractModel {
 }
 
 /**
- * BlueprintPrice	自定义镜像的价格参数。
+ * ModifyDiskBackupsAttribute返回参数结构体
  * @class
  */
-class BlueprintPrice extends  AbstractModel {
+class ModifyDiskBackupsAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像单价，原价。单位元。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.OriginalBlueprintPrice = null;
-
-        /**
-         * 镜像总价，原价。单位元。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 折扣。
-         * @type {number || null}
-         */
-        this.Discount = null;
-
-        /**
-         * 镜像折扣后总价。单位元。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
+        this.RequestId = null;
 
     }
 
@@ -7153,10 +8274,70 @@ class BlueprintPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalBlueprintPrice = 'OriginalBlueprintPrice' in params ? params.OriginalBlueprintPrice : null;
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.Discount = 'Discount' in params ? params.Discount : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateInstanceSnapshot返回参数结构体
+ * @class
+ */
+class CreateInstanceSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照 ID。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstancesBundle返回参数结构体
+ * @class
+ */
+class ModifyInstancesBundleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7371,6 +8552,13 @@ class InstancePrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * 价格货币单位。取值范围CNY:人民币。USD:美元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Currency = null;
+
     }
 
     /**
@@ -7384,6 +8572,7 @@ class InstancePrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
 
     }
 }
@@ -7558,44 +8747,30 @@ class StopInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeModifyInstanceBundles请求参数结构体
+ * DescribeFirewallRulesTemplate返回参数结构体
  * @class
  */
-class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
+class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID。
+         * 符合条件的防火墙规则数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 防火墙规则详细信息列表。
+         * @type {Array.<FirewallRuleInfo> || null}
+         */
+        this.FirewallRuleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 过滤器列表。
-<li>bundle-id</li>按照【套餐 ID】进行过滤。
-类型：String
-必选：否
-<li>support-platform-type</li>按照【系统类型】进行过滤。
-取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -7606,18 +8781,17 @@ class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.FirewallRuleSet) {
+            this.FirewallRuleSet = new Array();
+            for (let z in params.FirewallRuleSet) {
+                let obj = new FirewallRuleInfo();
+                obj.deserialize(params.FirewallRuleSet[z]);
+                this.FirewallRuleSet.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7644,6 +8818,49 @@ class RenewInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDisksDeniedActions返回参数结构体
+ * @class
+ */
+class DescribeDisksDeniedActionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘操作限制列表详细信息。
+         * @type {Array.<DiskDeniedActions> || null}
+         */
+        this.DiskDeniedActionSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskDeniedActionSet) {
+            this.DiskDeniedActionSet = new Array();
+            for (let z in params.DiskDeniedActionSet) {
+                let obj = new DiskDeniedActions();
+                obj.deserialize(params.DiskDeniedActionSet[z]);
+                this.DiskDeniedActionSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7778,16 +8995,16 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
         this.BundleId = null;
 
         /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
          * 创建数量，默认为 1。
          * @type {number || null}
          */
         this.InstanceCount = null;
-
-        /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
 
         /**
          * 应用镜像 ID，使用收费应用镜像时必填。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
@@ -7805,14 +9022,56 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
             return;
         }
         this.BundleId = 'BundleId' in params ? params.BundleId : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+
+    }
+}
+
+/**
+ * 使用场景信息
+ * @class
+ */
+class Scene extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用场景Id
+         * @type {string || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * 使用场景展示名称
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * 使用场景描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -8237,7 +9496,7 @@ module.exports = {
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     RenewInstancesRequest: RenewInstancesRequest,
     DescribeDisksDeniedActionsRequest: DescribeDisksDeniedActionsRequest,
-    DescribeInstancesTrafficPackagesResponse: DescribeInstancesTrafficPackagesResponse,
+    DescribeDiskBackupsRequest: DescribeDiskBackupsRequest,
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     AttachCcnRequest: AttachCcnRequest,
@@ -8249,7 +9508,8 @@ module.exports = {
     InquirePriceCreateDisksRequest: InquirePriceCreateDisksRequest,
     ModifyBundle: ModifyBundle,
     DetachCcnResponse: DetachCcnResponse,
-    CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
+    BlueprintPrice: BlueprintPrice,
+    DescribeScenesResponse: DescribeScenesResponse,
     InquirePriceRenewInstancesResponse: InquirePriceRenewInstancesResponse,
     DeleteFirewallRulesResponse: DeleteFirewallRulesResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
@@ -8258,11 +9518,15 @@ module.exports = {
     SystemDisk: SystemDisk,
     ResetInstanceBlueprint: ResetInstanceBlueprint,
     DescribeBundlesResponse: DescribeBundlesResponse,
+    ModifyInstancesBundleRequest: ModifyInstancesBundleRequest,
+    DeleteDiskBackupsRequest: DeleteDiskBackupsRequest,
     InquirePriceRenewInstancesRequest: InquirePriceRenewInstancesRequest,
     DiscountDetail: DiscountDetail,
     DescribeDiskConfigsRequest: DescribeDiskConfigsRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    DescribeDiskBackupsResponse: DescribeDiskBackupsResponse,
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
+    ModifyDiskBackupsAttributeRequest: ModifyDiskBackupsAttributeRequest,
     AttachCcnResponse: AttachCcnResponse,
     RebootInstancesRequest: RebootInstancesRequest,
     ResetAttachCcnRequest: ResetAttachCcnRequest,
@@ -8270,6 +9534,9 @@ module.exports = {
     ImportKeyPairResponse: ImportKeyPairResponse,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TerminateDisksResponse: TerminateDisksResponse,
+    DiskBackup: DiskBackup,
+    DescribeInstancesTrafficPackagesResponse: DescribeInstancesTrafficPackagesResponse,
+    DescribeDiskBackupsDeniedActionsRequest: DescribeDiskBackupsDeniedActionsRequest,
     KeyPair: KeyPair,
     DescribeFirewallRulesTemplateRequest: DescribeFirewallRulesTemplateRequest,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
@@ -8286,27 +9553,32 @@ module.exports = {
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyFirewallRuleDescriptionRequest: ModifyFirewallRuleDescriptionRequest,
     InstanceTrafficPackage: InstanceTrafficPackage,
-    StartInstancesResponse: StartInstancesResponse,
+    SnapshotDeniedActions: SnapshotDeniedActions,
     TerminateInstancesResponse: TerminateInstancesResponse,
     TrafficPackage: TrafficPackage,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
+    DetailPrice: DetailPrice,
+    ApplyDiskBackupResponse: ApplyDiskBackupResponse,
     DescribeBlueprintsRequest: DescribeBlueprintsRequest,
     InstanceReturnable: InstanceReturnable,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,
     ModifyDisksAttributeRequest: ModifyDisksAttributeRequest,
     DockerContainerPublishPort: DockerContainerPublishPort,
     DescribeSnapshotsDeniedActionsResponse: DescribeSnapshotsDeniedActionsResponse,
+    DescribeScenesRequest: DescribeScenesRequest,
     StartInstancesRequest: StartInstancesRequest,
-    SnapshotDeniedActions: SnapshotDeniedActions,
+    DeleteDiskBackupsResponse: DeleteDiskBackupsResponse,
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
     ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
+    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     DescribeDisksResponse: DescribeDisksResponse,
     DescribeBundleDiscountResponse: DescribeBundleDiscountResponse,
-    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
+    DescribeAllScenesRequest: DescribeAllScenesRequest,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DataDiskPrice: DataDiskPrice,
+    SceneInfo: SceneInfo,
     ImportKeyPairRequest: ImportKeyPairRequest,
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
@@ -8314,7 +9586,7 @@ module.exports = {
     StopInstancesResponse: StopInstancesResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
-    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
+    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     InquirePriceCreateBlueprintResponse: InquirePriceCreateBlueprintResponse,
@@ -8323,7 +9595,9 @@ module.exports = {
     DescribeBlueprintsResponse: DescribeBlueprintsResponse,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
+    ApplyDiskBackupRequest: ApplyDiskBackupRequest,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
+    StartInstancesResponse: StartInstancesResponse,
     LoginSettings: LoginSettings,
     Instance: Instance,
     DockerContainerVolume: DockerContainerVolume,
@@ -8335,12 +9609,15 @@ module.exports = {
     DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DescribeBundlesRequest: DescribeBundlesRequest,
     Blueprint: Blueprint,
+    InquirePriceCreateInstancesResponse: InquirePriceCreateInstancesResponse,
+    TotalPrice: TotalPrice,
     DeniedAction: DeniedAction,
+    DescribeAllScenesResponse: DescribeAllScenesResponse,
     ModifyInstancesLoginKeyPairAttributeResponse: ModifyInstancesLoginKeyPairAttributeResponse,
     InquirePriceRenewDisksResponse: InquirePriceRenewDisksResponse,
     Bundle: Bundle,
     DiskConfig: DiskConfig,
-    InquirePriceCreateInstancesResponse: InquirePriceCreateInstancesResponse,
+    CreateDiskBackupResponse: CreateDiskBackupResponse,
     DescribeSnapshotsDeniedActionsRequest: DescribeSnapshotsDeniedActionsRequest,
     DescribeDiskDiscountResponse: DescribeDiskDiscountResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
@@ -8355,6 +9632,8 @@ module.exports = {
     DescribeDiskDiscountRequest: DescribeDiskDiscountRequest,
     InquirePriceCreateBlueprintRequest: InquirePriceCreateBlueprintRequest,
     AttachDisksResponse: AttachDisksResponse,
+    DiskBackupDeniedActions: DiskBackupDeniedActions,
+    CreateDiskBackupRequest: CreateDiskBackupRequest,
     CreateFirewallRulesRequest: CreateFirewallRulesRequest,
     Software: Software,
     DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
@@ -8383,13 +9662,16 @@ module.exports = {
     ResetInstanceRequest: ResetInstanceRequest,
     DescribeDiskConfigsResponse: DescribeDiskConfigsResponse,
     InternetAccessible: InternetAccessible,
+    InstancePriceDetail: InstancePriceDetail,
     RebootInstancesResponse: RebootInstancesResponse,
-    DescribeDisksDeniedActionsResponse: DescribeDisksDeniedActionsResponse,
+    DescribeDiskBackupsDeniedActionsResponse: DescribeDiskBackupsDeniedActionsResponse,
     DescribeInstanceLoginKeyPairAttributeRequest: DescribeInstanceLoginKeyPairAttributeRequest,
     DescribeBundleDiscountRequest: DescribeBundleDiscountRequest,
     Price: Price,
     DescribeDisksReturnableResponse: DescribeDisksReturnableResponse,
-    BlueprintPrice: BlueprintPrice,
+    ModifyDiskBackupsAttributeResponse: ModifyDiskBackupsAttributeResponse,
+    CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
+    ModifyInstancesBundleResponse: ModifyInstancesBundleResponse,
     GeneralResourceQuota: GeneralResourceQuota,
     DescribeResetInstanceBlueprintsResponse: DescribeResetInstanceBlueprintsResponse,
     DescribeDisksReturnableRequest: DescribeDisksReturnableRequest,
@@ -8400,12 +9682,14 @@ module.exports = {
     DescribeGeneralResourceQuotasResponse: DescribeGeneralResourceQuotasResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     StopInstancesRequest: StopInstancesRequest,
-    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
+    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     RenewInstancesResponse: RenewInstancesResponse,
+    DescribeDisksDeniedActionsResponse: DescribeDisksDeniedActionsResponse,
     ResetInstanceResponse: ResetInstanceResponse,
     DescribeFirewallRulesRequest: DescribeFirewallRulesRequest,
     DiskDeniedActions: DiskDeniedActions,
     InquirePriceCreateInstancesRequest: InquirePriceCreateInstancesRequest,
+    Scene: Scene,
     CcnAttachedInstance: CcnAttachedInstance,
     DescribeModifyInstanceBundlesResponse: DescribeModifyInstanceBundlesResponse,
     AttachDetail: AttachDetail,

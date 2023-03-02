@@ -3631,7 +3631,7 @@ class DescribeLiveStreamRequest extends  AbstractModel {
         this.LiveChannelId = null;
 
         /**
-         * 过期时间
+         * 过期时间 秒级unix时间戳
          * @type {number || null}
          */
         this.ExpireTime = null;

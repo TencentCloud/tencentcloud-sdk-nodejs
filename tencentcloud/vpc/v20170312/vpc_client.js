@@ -40,14 +40,17 @@ const SourceIpTranslationNatRule = models.SourceIpTranslationNatRule;
 const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
 const ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const ModifyIp6RuleResponse = models.ModifyIp6RuleResponse;
+const SetVpnGatewaysRenewFlagRequest = models.SetVpnGatewaysRenewFlagRequest;
 const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwidthLimitsTypeResponse;
 const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
+const ModifyNetworkAclQuintupleEntriesRequest = models.ModifyNetworkAclQuintupleEntriesRequest;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
 const CreateDhcpIpResponse = models.CreateDhcpIpResponse;
 const DeleteVpnGatewaySslServerResponse = models.DeleteVpnGatewaySslServerResponse;
 const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
 const AddTemplateMemberResponse = models.AddTemplateMemberResponse;
 const CreateDefaultSecurityGroupRequest = models.CreateDefaultSecurityGroupRequest;
+const CreateSnapshotPoliciesResponse = models.CreateSnapshotPoliciesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
 const DescribeVpcEndPointRequest = models.DescribeVpcEndPointRequest;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
@@ -97,18 +100,20 @@ const RouteTableAssociation = models.RouteTableAssociation;
 const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const DeleteVpcEndPointServiceWhiteListRequest = models.DeleteVpcEndPointServiceWhiteListRequest;
+const DetachSnapshotInstancesResponse = models.DetachSnapshotInstancesResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const DeleteVpcEndPointServiceRequest = models.DeleteVpcEndPointServiceRequest;
 const DeleteCcnResponse = models.DeleteCcnResponse;
 const ServiceTemplate = models.ServiceTemplate;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const AttachSnapshotInstancesResponse = models.AttachSnapshotInstancesResponse;
 const DescribeNatGatewaySourceIpTranslationNatRulesRequest = models.DescribeNatGatewaySourceIpTranslationNatRulesRequest;
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const DisableVpnGatewaySslClientCertRequest = models.DisableVpnGatewaySslClientCertRequest;
-const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
+const AttachSnapshotInstancesRequest = models.AttachSnapshotInstancesRequest;
 const ModifyIp6TranslatorResponse = models.ModifyIp6TranslatorResponse;
 const CreateVpcEndPointServiceWhiteListResponse = models.CreateVpcEndPointServiceWhiteListResponse;
 const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDatabaseUrlResponse;
@@ -118,16 +123,19 @@ const DescribeNatGatewaySourceIpTranslationNatRulesResponse = models.DescribeNat
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
 const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
+const CreateNetworkAclQuintupleEntriesResponse = models.CreateNetworkAclQuintupleEntriesResponse;
 const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
 const IpGeolocationInfo = models.IpGeolocationInfo;
 const DeleteFlowLogRequest = models.DeleteFlowLogRequest;
 const NetDetectState = models.NetDetectState;
+const DescribeSnapshotFilesRequest = models.DescribeSnapshotFilesRequest;
 const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
 const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const ModifyAddressInternetChargeTypeResponse = models.ModifyAddressInternetChargeTypeResponse;
 const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
 const DeleteVpcEndPointServiceResponse = models.DeleteVpcEndPointServiceResponse;
+const ModifyNetworkAclQuintupleEntriesResponse = models.ModifyNetworkAclQuintupleEntriesResponse;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
 const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
 const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
@@ -152,6 +160,7 @@ const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const RefreshDirectConnectGatewayRouteToNatGatewayRequest = models.RefreshDirectConnectGatewayRouteToNatGatewayRequest;
 const DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest;
+const ReturnNormalAddressesRequest = models.ReturnNormalAddressesRequest;
 const ModifyNetworkAclAttributeResponse = models.ModifyNetworkAclAttributeResponse;
 const CreateVpnGatewayRoutesRequest = models.CreateVpnGatewayRoutesRequest;
 const DisassociateNetworkAclSubnetsResponse = models.DisassociateNetworkAclSubnetsResponse;
@@ -165,9 +174,11 @@ const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResources
 const Ip6RuleInfo = models.Ip6RuleInfo;
 const CreateSecurityGroupWithPoliciesResponse = models.CreateSecurityGroupWithPoliciesResponse;
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
+const ResumeSnapshotInstanceResponse = models.ResumeSnapshotInstanceResponse;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ResetNatGatewayConnectionRequest = models.ResetNatGatewayConnectionRequest;
 const ModifyCcnAttachedInstancesAttributeRequest = models.ModifyCcnAttachedInstancesAttributeRequest;
+const DescribeNetworkAccountTypeRequest = models.DescribeNetworkAccountTypeRequest;
 const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
 const CreateNatGatewaySourceIpTranslationNatRuleRequest = models.CreateNatGatewaySourceIpTranslationNatRuleRequest;
 const NetworkInterface = models.NetworkInterface;
@@ -177,10 +188,13 @@ const ReferredSecurityGroup = models.ReferredSecurityGroup;
 const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
 const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
 const DescribeVpnGatewaySslClientsRequest = models.DescribeVpnGatewaySslClientsRequest;
+const VpcEndPointServiceUser = models.VpcEndPointServiceUser;
 const DescribeIp6TranslatorQuotaRequest = models.DescribeIp6TranslatorQuotaRequest;
+const CreateTrafficPackagesResponse = models.CreateTrafficPackagesResponse;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const DescribeVpnGatewaySslServersRequest = models.DescribeVpnGatewaySslServersRequest;
 const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
+const DescribeSgSnapshotFileContentResponse = models.DescribeSgSnapshotFileContentResponse;
 const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
 const DeleteVpnGatewaySslServerRequest = models.DeleteVpnGatewaySslServerRequest;
 const AllocateIp6AddressesBandwidthResponse = models.AllocateIp6AddressesBandwidthResponse;
@@ -191,10 +205,12 @@ const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGate
 const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
 const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
 const DescribeAssistantCidrResponse = models.DescribeAssistantCidrResponse;
+const BackupPolicy = models.BackupPolicy;
 const InstanceStatistic = models.InstanceStatistic;
 const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
 const CcnRoute = models.CcnRoute;
 const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
+const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const VpnConnection = models.VpnConnection;
 const DescribeCcnsRequest = models.DescribeCcnsRequest;
@@ -205,10 +221,12 @@ const DescribeNatGatewayDirectConnectGatewayRouteRequest = models.DescribeNatGat
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
 const RouteConflict = models.RouteConflict;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
+const EnableSnapshotPoliciesResponse = models.EnableSnapshotPoliciesResponse;
 const Vpc = models.Vpc;
 const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
 const DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse;
 const FlowLogStorage = models.FlowLogStorage;
+const AllocateIp6AddressesBandwidthRequest = models.AllocateIp6AddressesBandwidthRequest;
 const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
@@ -218,9 +236,10 @@ const DescribeVpcResourceDashboardRequest = models.DescribeVpcResourceDashboardR
 const ModifyIp6RuleRequest = models.ModifyIp6RuleRequest;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const AssociateNetworkAclSubnetsRequest = models.AssociateNetworkAclSubnetsRequest;
-const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
+const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const DescribeSnapshotPoliciesRequest = models.DescribeSnapshotPoliciesRequest;
 const NotifyRoutesRequest = models.NotifyRoutesRequest;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
@@ -234,7 +253,9 @@ const NatGateway = models.NatGateway;
 const AssociateDhcpIpWithAddressIpRequest = models.AssociateDhcpIpWithAddressIpRequest;
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
+const TrafficPackage = models.TrafficPackage;
 const WithdrawNotifyRoutesRequest = models.WithdrawNotifyRoutesRequest;
+const VpcTaskResultDetailInfo = models.VpcTaskResultDetailInfo;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const NetworkAclEntrySet = models.NetworkAclEntrySet;
@@ -267,10 +288,13 @@ const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
 const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
 const NetDetect = models.NetDetect;
 const VpnGatewayRouteModify = models.VpnGatewayRouteModify;
+const DisableSnapshotPoliciesRequest = models.DisableSnapshotPoliciesRequest;
 const MemberInfo = models.MemberInfo;
+const ResumeSnapshotInstanceRequest = models.ResumeSnapshotInstanceRequest;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const ModifyVpcEndPointServiceAttributeResponse = models.ModifyVpcEndPointServiceAttributeResponse;
 const ResourceDashboard = models.ResourceDashboard;
+const DescribeSnapshotFilesResponse = models.DescribeSnapshotFilesResponse;
 const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
@@ -290,8 +314,10 @@ const NetDetectIpState = models.NetDetectIpState;
 const ModifyIp6AddressesBandwidthResponse = models.ModifyIp6AddressesBandwidthResponse;
 const CreateSubnetsRequest = models.CreateSubnetsRequest;
 const DescribeVpcEndPointServiceRequest = models.DescribeVpcEndPointServiceRequest;
+const DisableSnapshotPoliciesResponse = models.DisableSnapshotPoliciesResponse;
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
 const AssociateAddressResponse = models.AssociateAddressResponse;
+const AccessPolicy = models.AccessPolicy;
 const ModifyCcnAttachedInstancesAttributeResponse = models.ModifyCcnAttachedInstancesAttributeResponse;
 const CreateNetworkAclRequest = models.CreateNetworkAclRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
@@ -308,6 +334,8 @@ const ModifyNatGatewaySourceIpTranslationNatRuleRequest = models.ModifyNatGatewa
 const RemoveIp6RulesRequest = models.RemoveIp6RulesRequest;
 const DescribeIpGeolocationDatabaseUrlRequest = models.DescribeIpGeolocationDatabaseUrlRequest;
 const DescribeVpcEndPointResponse = models.DescribeVpcEndPointResponse;
+const DescribeNetworkAclQuintupleEntriesRequest = models.DescribeNetworkAclQuintupleEntriesRequest;
+const DescribeSnapshotPoliciesResponse = models.DescribeSnapshotPoliciesResponse;
 const DisableGatewayFlowMonitorRequest = models.DisableGatewayFlowMonitorRequest;
 const EnableRoutesResponse = models.EnableRoutesResponse;
 const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
@@ -323,6 +351,7 @@ const DirectConnectGateway = models.DirectConnectGateway;
 const DescribeProductQuotaResponse = models.DescribeProductQuotaResponse;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const ReturnNormalAddressesResponse = models.ReturnNormalAddressesResponse;
 const DisableFlowLogsResponse = models.DisableFlowLogsResponse;
 const DescribeBandwidthPackageResourcesResponse = models.DescribeBandwidthPackageResourcesResponse;
 const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
@@ -333,6 +362,7 @@ const DescribeVpcResourceDashboardResponse = models.DescribeVpcResourceDashboard
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayResponse = models.DisassociateDirectConnectGatewayNatGatewayResponse;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
+const CreateNetworkAclQuintupleEntriesRequest = models.CreateNetworkAclQuintupleEntriesRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
 const EnableVpnGatewaySslClientCertRequest = models.EnableVpnGatewaySslClientCertRequest;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
@@ -346,6 +376,7 @@ const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatew
 const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
+const DescribeNetworkAccountTypeResponse = models.DescribeNetworkAccountTypeResponse;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
 const CreateVpcEndPointServiceRequest = models.CreateVpcEndPointServiceRequest;
 const Ipv6Address = models.Ipv6Address;
@@ -356,6 +387,7 @@ const DescribeFlowLogsResponse = models.DescribeFlowLogsResponse;
 const VpcPrivateIpAddress = models.VpcPrivateIpAddress;
 const CvmInstance = models.CvmInstance;
 const DescribeNetworkAclsRequest = models.DescribeNetworkAclsRequest;
+const DescribeNetworkAclQuintupleEntriesResponse = models.DescribeNetworkAclQuintupleEntriesResponse;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
 const CreateSubnetRequest = models.CreateSubnetRequest;
 const AddressTemplateGroup = models.AddressTemplateGroup;
@@ -366,6 +398,7 @@ const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse
 const LocalGateway = models.LocalGateway;
 const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
+const ModifySnapshotPoliciesResponse = models.ModifySnapshotPoliciesResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const RenewAddressesResponse = models.RenewAddressesResponse;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
@@ -392,6 +425,7 @@ const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
 const CreateVpnGatewaySslClientRequest = models.CreateVpnGatewaySslClientRequest;
 const UnlockCcnsRequest = models.UnlockCcnsRequest;
 const DescribeVpnGatewaySslServersResponse = models.DescribeVpnGatewaySslServersResponse;
+const Subnet = models.Subnet;
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
 const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
@@ -409,14 +443,19 @@ const CreateVpcEndPointResponse = models.CreateVpcEndPointResponse;
 const DeleteAssistantCidrResponse = models.DeleteAssistantCidrResponse;
 const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
 const ModifyTemplateMemberRequest = models.ModifyTemplateMemberRequest;
+const EnableSnapshotPoliciesRequest = models.EnableSnapshotPoliciesRequest;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const GatewayQos = models.GatewayQos;
+const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
 const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
 const DescribeCustomerGatewayVendorsRequest = models.DescribeCustomerGatewayVendorsRequest;
+const CcnFlowLock = models.CcnFlowLock;
+const DetachSnapshotInstancesRequest = models.DetachSnapshotInstancesRequest;
 const DeleteLocalGatewayRequest = models.DeleteLocalGatewayRequest;
 const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
 const LockCcnBandwidthsRequest = models.LockCcnBandwidthsRequest;
 const AddressChargePrepaid = models.AddressChargePrepaid;
+const DescribeCrossBorderFlowMonitorRequest = models.DescribeCrossBorderFlowMonitorRequest;
 const DescribeVpnGatewayRoutesResponse = models.DescribeVpnGatewayRoutesResponse;
 const DescribeNetworkAclsResponse = models.DescribeNetworkAclsResponse;
 const DeleteFlowLogResponse = models.DeleteFlowLogResponse;
@@ -437,13 +476,15 @@ const CreateFlowLogRequest = models.CreateFlowLogRequest;
 const InquirePriceCreateDirectConnectGatewayRequest = models.InquirePriceCreateDirectConnectGatewayRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DisassociateNatGatewayAddressRequest = models.DisassociateNatGatewayAddressRequest;
-const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
+const DescribeTrafficPackagesResponse = models.DescribeTrafficPackagesResponse;
+const CreateSnapshotPoliciesRequest = models.CreateSnapshotPoliciesRequest;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
 const DescribeTemplateLimitsResponse = models.DescribeTemplateLimitsResponse;
 const CheckDefaultSubnetResponse = models.CheckDefaultSubnetResponse;
+const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const DisableRoutesRequest = models.DisableRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const EnableRoutesRequest = models.EnableRoutesRequest;
@@ -458,6 +499,7 @@ const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
 const RenewAddressesRequest = models.RenewAddressesRequest;
 const ProductQuota = models.ProductQuota;
 const DisableRoutesResponse = models.DisableRoutesResponse;
+const ModifySnapshotPoliciesRequest = models.ModifySnapshotPoliciesRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const DhcpIp = models.DhcpIp;
 const DeleteAssistantCidrRequest = models.DeleteAssistantCidrRequest;
@@ -476,14 +518,17 @@ const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
+const CreateTrafficPackagesRequest = models.CreateTrafficPackagesRequest;
 const CreateAndAttachNetworkInterfaceResponse = models.CreateAndAttachNetworkInterfaceResponse;
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
 const DisassociateDhcpIpWithAddressIpResponse = models.DisassociateDhcpIpWithAddressIpResponse;
 const CreateVpcEndPointServiceResponse = models.CreateVpcEndPointServiceResponse;
 const ModifyNetworkAclAttributeRequest = models.ModifyNetworkAclAttributeRequest;
+const SetVpnGatewaysRenewFlagResponse = models.SetVpnGatewaysRenewFlagResponse;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
+const SnapshotPolicy = models.SnapshotPolicy;
 const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
 const Address = models.Address;
 const VpnGateway = models.VpnGateway;
@@ -497,13 +542,16 @@ const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const DescribeIp6TranslatorsResponse = models.DescribeIp6TranslatorsResponse;
 const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
 const ModifyVpnGatewayRoutesResponse = models.ModifyVpnGatewayRoutesResponse;
+const CrossBorderFlowMonitorData = models.CrossBorderFlowMonitorData;
 const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
 const DescribeSecurityGroupReferencesResponse = models.DescribeSecurityGroupReferencesResponse;
 const AddIp6RulesResponse = models.AddIp6RulesResponse;
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
+const SslClientConfig = models.SslClientConfig;
 const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const DeleteNatGatewayResponse = models.DeleteNatGatewayResponse;
+const AdjustPublicAddressRequest = models.AdjustPublicAddressRequest;
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
 const ModifyVpcEndPointAttributeRequest = models.ModifyVpcEndPointAttributeRequest;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
@@ -513,25 +561,30 @@ const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateG
 const DeleteVpcEndPointRequest = models.DeleteVpcEndPointRequest;
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const CCN = models.CCN;
-const VpcEndPointServiceUser = models.VpcEndPointServiceUser;
+const NetworkAclQuintupleEntry = models.NetworkAclQuintupleEntry;
 const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
 const DeleteIp6TranslatorsRequest = models.DeleteIp6TranslatorsRequest;
 const Ip6Translator = models.Ip6Translator;
+const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
+const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
 const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
+const DeleteSnapshotPoliciesRequest = models.DeleteSnapshotPoliciesRequest;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
 const CheckAssistantCidrResponse = models.CheckAssistantCidrResponse;
+const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
 const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
 const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
 const ModifyServiceTemplateGroupAttributeResponse = models.ModifyServiceTemplateGroupAttributeResponse;
+const DeleteNetworkAclQuintupleEntriesRequest = models.DeleteNetworkAclQuintupleEntriesRequest;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
 const CheckNetDetectStateResponse = models.CheckNetDetectStateResponse;
 const DisassociateVpcEndPointSecurityGroupsResponse = models.DisassociateVpcEndPointSecurityGroupsResponse;
-const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
+const DeleteSnapshotPoliciesResponse = models.DeleteSnapshotPoliciesResponse;
 const AssociateNatGatewayAddressResponse = models.AssociateNatGatewayAddressResponse;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
 const VpngwCcnRoutes = models.VpngwCcnRoutes;
@@ -548,12 +601,16 @@ const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const CreateLocalGatewayResponse = models.CreateLocalGatewayResponse;
 const ServicesInfo = models.ServicesInfo;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
-const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
+const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
+const DescribeSnapshotAttachedInstancesResponse = models.DescribeSnapshotAttachedInstancesResponse;
 const RefreshDirectConnectGatewayRouteToNatGatewayResponse = models.RefreshDirectConnectGatewayRouteToNatGatewayResponse;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
+const SnapshotInstance = models.SnapshotInstance;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
 const DescribeVpcInstancesRequest = models.DescribeVpcInstancesRequest;
 const DeleteVpcEndPointServiceWhiteListResponse = models.DeleteVpcEndPointServiceWhiteListResponse;
+const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
+const DescribeSgSnapshotFileContentRequest = models.DescribeSgSnapshotFileContentRequest;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
@@ -570,7 +627,7 @@ const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const LockCcnsResponse = models.LockCcnsResponse;
-const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
+const BatchModifySnapshotPolicy = models.BatchModifySnapshotPolicy;
 const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
 const CreateRoutesResponse = models.CreateRoutesResponse;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
@@ -581,6 +638,7 @@ const DescribeGatewayFlowQosRequest = models.DescribeGatewayFlowQosRequest;
 const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest;
+const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const Ip6Rule = models.Ip6Rule;
@@ -589,10 +647,10 @@ const DownloadVpnGatewaySslClientCertRequest = models.DownloadVpnGatewaySslClien
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
 const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
 const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
-const Subnet = models.Subnet;
+const NetworkAclQuintupleEntries = models.NetworkAclQuintupleEntries;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
-const AllocateIp6AddressesBandwidthRequest = models.AllocateIp6AddressesBandwidthRequest;
+const CcnInstanceInfo = models.CcnInstanceInfo;
 const SecurityGroup = models.SecurityGroup;
 const UnlockCcnsResponse = models.UnlockCcnsResponse;
 const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
@@ -608,6 +666,7 @@ const CreateDefaultSecurityGroupResponse = models.CreateDefaultSecurityGroupResp
 const ClassicLinkInstance = models.ClassicLinkInstance;
 const DeleteLocalGatewayResponse = models.DeleteLocalGatewayResponse;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const SnapshotFileInfo = models.SnapshotFileInfo;
 const ModifyNetworkInterfaceAttributeRequest = models.ModifyNetworkInterfaceAttributeRequest;
 const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
 const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
@@ -628,7 +687,7 @@ const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const DescribeDhcpIpsResponse = models.DescribeDhcpIpsResponse;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const DescribeCrossBorderCcnRegionBandwidthLimitsRequest = models.DescribeCrossBorderCcnRegionBandwidthLimitsRequest;
-const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
+const DescribeSnapshotAttachedInstancesRequest = models.DescribeSnapshotAttachedInstancesRequest;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
@@ -656,7 +715,7 @@ const Quota = models.Quota;
 const WithdrawNotifyRoutesResponse = models.WithdrawNotifyRoutesResponse;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const DeleteNetworkAclResponse = models.DeleteNetworkAclResponse;
-const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
+const DeleteNetworkAclQuintupleEntriesResponse = models.DeleteNetworkAclQuintupleEntriesResponse;
 const DescribeServiceTemplateGroupsRequest = models.DescribeServiceTemplateGroupsRequest;
 const CreateSecurityGroupWithPoliciesRequest = models.CreateSecurityGroupWithPoliciesRequest;
 const CreateVpcRequest = models.CreateVpcRequest;
@@ -668,6 +727,7 @@ const Route = models.Route;
 const EnableVpnGatewaySslClientCertResponse = models.EnableVpnGatewaySslClientCertResponse;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const ModifyVpcEndPointServiceWhiteListResponse = models.ModifyVpcEndPointServiceWhiteListResponse;
+const DescribeCrossBorderFlowMonitorResponse = models.DescribeCrossBorderFlowMonitorResponse;
 const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
@@ -702,7 +762,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
+     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域。
      * @param {DescribeCcnRegionBandwidthLimitsRequest} req
      * @param {function(string, DescribeCcnRegionBandwidthLimitsResponse):void} cb
      * @public
@@ -733,6 +793,18 @@ class VpcClient extends AbstractClient {
     ReplaceSecurityGroupPolicy(req, cb) {
         let resp = new ReplaceSecurityGroupPolicyResponse();
         this.request("ReplaceSecurityGroupPolicy", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (AdjustPublicAddress) 用于更换IP地址，支持更换CVM实例的普通公网IP和包月带宽的EIP。
+
+     * @param {AdjustPublicAddressRequest} req
+     * @param {function(string, AdjustPublicAddressResponse):void} cb
+     * @public
+     */
+    AdjustPublicAddress(req, cb) {
+        let resp = new AdjustPublicAddressResponse();
+        this.request("AdjustPublicAddress", req, resp, cb);
     }
 
     /**
@@ -781,7 +853,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeServiceTemplateGroups）用于查询协议端口模板集合
+     * 本接口（DescribeServiceTemplateGroups）用于查询协议端口模板集合。
      * @param {DescribeServiceTemplateGroupsRequest} req
      * @param {function(string, DescribeServiceTemplateGroupsResponse):void} cb
      * @public
@@ -840,7 +912,7 @@ class VpcClient extends AbstractClient {
     /**
      * 本接口（AssignIpv6CidrBlock）用于分配IPv6网段。
 * 使用本接口前，您需要已有VPC实例，如果没有可通过接口<a href="https://cloud.tencent.com/document/api/215/15774" title="CreateVpc" target="_blank">CreateVpc</a>创建。
-* 每个VPC只能申请一个IPv6网段
+* 每个VPC只能申请一个IPv6网段。
      * @param {AssignIpv6CidrBlockRequest} req
      * @param {function(string, AssignIpv6CidrBlockResponse):void} cb
      * @public
@@ -862,7 +934,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除终端节点服务白名单。
+     * 本接口（DeleteVpcEndPointServiceWhiteList）用于删除终端节点服务白名单。
      * @param {DeleteVpcEndPointServiceWhiteListRequest} req
      * @param {function(string, DeleteVpcEndPointServiceWhiteListResponse):void} cb
      * @public
@@ -895,7 +967,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改弹性网卡服务质量。
+     * 本接口（ModifyNetworkInterfaceQos）用于修改弹性网卡服务质量。
      * @param {ModifyNetworkInterfaceQosRequest} req
      * @param {function(string, ModifyNetworkInterfaceQosResponse):void} cb
      * @public
@@ -964,7 +1036,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID或弹性网卡ID查询弹性网卡配额，返回该CVM实例或弹性网卡能绑定的弹性网卡配额，以及弹性网卡可以分配的IP配额
+     * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID或弹性网卡ID查询弹性网卡配额，返回该CVM实例或弹性网卡能绑定的弹性网卡配额，以及弹性网卡可以分配的IP配额。
      * @param {DescribeNetworkInterfaceLimitRequest} req
      * @param {function(string, DescribeNetworkInterfaceLimitResponse):void} cb
      * @public
@@ -972,6 +1044,17 @@ class VpcClient extends AbstractClient {
     DescribeNetworkInterfaceLimit(req, cb) {
         let resp = new DescribeNetworkInterfaceLimitResponse();
         this.request("DescribeNetworkInterfaceLimit", req, resp, cb);
+    }
+
+    /**
+     * 本接口（EnableSnapshotPolicies）用于启用快照策略。
+     * @param {EnableSnapshotPoliciesRequest} req
+     * @param {function(string, EnableSnapshotPoliciesResponse):void} cb
+     * @public
+     */
+    EnableSnapshotPolicies(req, cb) {
+        let resp = new EnableSnapshotPoliciesResponse();
+        this.request("EnableSnapshotPolicies", req, resp, cb);
     }
 
     /**
@@ -983,6 +1066,17 @@ class VpcClient extends AbstractClient {
     DescribeNetDetects(req, cb) {
         let resp = new DescribeNetDetectsResponse();
         this.request("DescribeNetDetects", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+     * @param {ModifyNetworkAclQuintupleEntriesRequest} req
+     * @param {function(string, ModifyNetworkAclQuintupleEntriesResponse):void} cb
+     * @public
+     */
+    ModifyNetworkAclQuintupleEntries(req, cb) {
+        let resp = new ModifyNetworkAclQuintupleEntriesResponse();
+        this.request("ModifyNetworkAclQuintupleEntries", req, resp, cb);
     }
 
     /**
@@ -1011,14 +1105,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
-     * @param {EnableGatewayFlowMonitorRequest} req
-     * @param {function(string, EnableGatewayFlowMonitorResponse):void} cb
+     * 本接口（AttachSnapshotInstances）用于快照策略关联实例。
+     * @param {AttachSnapshotInstancesRequest} req
+     * @param {function(string, AttachSnapshotInstancesResponse):void} cb
      * @public
      */
-    EnableGatewayFlowMonitor(req, cb) {
-        let resp = new EnableGatewayFlowMonitorResponse();
-        this.request("EnableGatewayFlowMonitor", req, resp, cb);
+    AttachSnapshotInstances(req, cb) {
+        let resp = new AttachSnapshotInstancesResponse();
+        this.request("AttachSnapshotInstances", req, resp, cb);
     }
 
     /**
@@ -1056,7 +1150,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 是否接受终端节点连接请求。
+     * 本接口（DeleteSnapshotPolicies）用于删除快照策略。
+     * @param {DeleteSnapshotPoliciesRequest} req
+     * @param {function(string, DeleteSnapshotPoliciesResponse):void} cb
+     * @public
+     */
+    DeleteSnapshotPolicies(req, cb) {
+        let resp = new DeleteSnapshotPoliciesResponse();
+        this.request("DeleteSnapshotPolicies", req, resp, cb);
+    }
+
+    /**
+     * 本接口（EnableVpcEndPointConnect）用于是否接受终端节点连接请求。
      * @param {EnableVpcEndPointConnectRequest} req
      * @param {function(string, EnableVpcEndPointConnectResponse):void} cb
      * @public
@@ -1067,7 +1172,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合
+     * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合。
      * @param {ModifyAddressTemplateGroupAttributeRequest} req
      * @param {function(string, ModifyAddressTemplateGroupAttributeResponse):void} cb
      * @public
@@ -1112,7 +1217,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于删除CDC的本地网关。
+     * 本接口（DeleteLocalGateway）用于删除CDC的本地网关。
      * @param {DeleteLocalGatewayRequest} req
      * @param {function(string, DeleteLocalGatewayResponse):void} cb
      * @public
@@ -1170,7 +1275,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改终端节点属性。
+     * 本接口（ModifyVpcEndPointAttribute）用于修改终端节点属性。
      * @param {ModifyVpcEndPointAttributeRequest} req
      * @param {function(string, ModifyVpcEndPointAttributeResponse):void} cb
      * @public
@@ -1203,7 +1308,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 终端节点解绑安全组。
+     * 本接口（DisassociateVpcEndPointSecurityGroups）用于终端节点解绑安全组。
      * @param {DisassociateVpcEndPointSecurityGroupsRequest} req
      * @param {function(string, DisassociateVpcEndPointSecurityGroupsResponse):void} cb
      * @public
@@ -1214,14 +1319,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
-     * @param {CreateDirectConnectGatewayCcnRoutesRequest} req
-     * @param {function(string, CreateDirectConnectGatewayCcnRoutesResponse):void} cb
+     * 本接口（DeleteRouteTable）用于删除路由表。
+     * @param {DeleteRouteTableRequest} req
+     * @param {function(string, DeleteRouteTableResponse):void} cb
      * @public
      */
-    CreateDirectConnectGatewayCcnRoutes(req, cb) {
-        let resp = new CreateDirectConnectGatewayCcnRoutesResponse();
-        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, cb);
+    DeleteRouteTable(req, cb) {
+        let resp = new DeleteRouteTableResponse();
+        this.request("DeleteRouteTable", req, resp, cb);
     }
 
     /**
@@ -1274,6 +1379,28 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyVpcEndPointServiceWhiteList）用于修改终端节点服务白名单属性。
+     * @param {ModifyVpcEndPointServiceWhiteListRequest} req
+     * @param {function(string, ModifyVpcEndPointServiceWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyVpcEndPointServiceWhiteList(req, cb) {
+        let resp = new ModifyVpcEndPointServiceWhiteListResponse();
+        this.request("ModifyVpcEndPointServiceWhiteList", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeCrossBorderFlowMonitor）用于查询跨境带宽监控数据，该接口目前只提供给服务商联通使用。
+     * @param {DescribeCrossBorderFlowMonitorRequest} req
+     * @param {function(string, DescribeCrossBorderFlowMonitorResponse):void} cb
+     * @public
+     */
+    DescribeCrossBorderFlowMonitor(req, cb) {
+        let resp = new DescribeCrossBorderFlowMonitorResponse();
+        this.request("DescribeCrossBorderFlowMonitor", req, resp, cb);
+    }
+
+    /**
      * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
 本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      * @param {EnableRoutesRequest} req
@@ -1304,14 +1431,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改终端节点服务白名单属性。
-     * @param {ModifyVpcEndPointServiceWhiteListRequest} req
-     * @param {function(string, ModifyVpcEndPointServiceWhiteListResponse):void} cb
+     * 本接口（ModifySnapshotPolicies）用于修改快照策略。
+     * @param {ModifySnapshotPoliciesRequest} req
+     * @param {function(string, ModifySnapshotPoliciesResponse):void} cb
      * @public
      */
-    ModifyVpcEndPointServiceWhiteList(req, cb) {
-        let resp = new ModifyVpcEndPointServiceWhiteListResponse();
-        this.request("ModifyVpcEndPointServiceWhiteList", req, resp, cb);
+    ModifySnapshotPolicies(req, cb) {
+        let resp = new ModifySnapshotPoliciesResponse();
+        this.request("ModifySnapshotPolicies", req, resp, cb);
     }
 
     /**
@@ -1326,7 +1453,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateSubnets)用于批量创建子网。
+     * 本接口（CreateSubnets）用于批量创建子网。
 * 创建子网前必须创建好 VPC。
 * 子网创建成功后，子网网段不能修改。子网网段必须在VPC网段内，可以和VPC网段相同（VPC有且只有一个子网时），建议子网网段在VPC网段内，预留网段给其他子网使用。
 * 您可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址）。
@@ -1354,7 +1481,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ReplaceRouteTableAssociation)用于修改子网（Subnet）关联的路由表（RouteTable）。
+     * 本接口（ReplaceRouteTableAssociation）用于修改子网（Subnet）关联的路由表（RouteTable）。
 * 一个子网只能关联一个路由表。
      * @param {ReplaceRouteTableAssociationRequest} req
      * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
@@ -1377,7 +1504,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CheckNetDetectState)用于验证网络探测。
+     * 本接口（CheckNetDetectState）用于验证网络探测。
      * @param {CheckNetDetectStateRequest} req
      * @param {function(string, CheckNetDetectStateResponse):void} cb
      * @public
@@ -1421,15 +1548,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RejectAttachCcnInstances）用于跨账号关联实例时，云联网所有者拒绝关联操作。
-
-     * @param {RejectAttachCcnInstancesRequest} req
-     * @param {function(string, RejectAttachCcnInstancesResponse):void} cb
+     * 判断用户在网络侧的用户类型，如标准（带宽上移），传统（非上移）。
+     * @param {DescribeNetworkAccountTypeRequest} req
+     * @param {function(string, DescribeNetworkAccountTypeResponse):void} cb
      * @public
      */
-    RejectAttachCcnInstances(req, cb) {
-        let resp = new RejectAttachCcnInstancesResponse();
-        this.request("RejectAttachCcnInstances", req, resp, cb);
+    DescribeNetworkAccountType(req, cb) {
+        let resp = new DescribeNetworkAccountTypeResponse();
+        this.request("DescribeNetworkAccountType", req, resp, cb);
     }
 
     /**
@@ -1467,7 +1593,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateSubnet)用于创建子网。
+     * 本接口（CreateSubnet）用于创建子网。
 * 创建子网前必须创建好 VPC。
 * 子网创建成功后，子网网段不能修改。子网网段必须在VPC网段内，可以和VPC网段相同（VPC有且只有一个子网时），建议子网网段在VPC网段内，预留网段给其他子网使用。
 * 您可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址）。
@@ -1532,7 +1658,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板
+     * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板。
      * @param {ModifyAddressTemplateAttributeRequest} req
      * @param {function(string, ModifyAddressTemplateAttributeResponse):void} cb
      * @public
@@ -1565,7 +1691,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合
+     * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合。
      * @param {DeleteServiceTemplateGroupRequest} req
      * @param {function(string, DeleteServiceTemplateGroupResponse):void} cb
      * @public
@@ -1632,6 +1758,17 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性。
+     * @param {ModifyHaVipAttributeRequest} req
+     * @param {function(string, ModifyHaVipAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHaVipAttribute(req, cb) {
+        let resp = new ModifyHaVipAttributeResponse();
+        this.request("ModifyHaVipAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
 * SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
      * @param {DeleteSecurityGroupPoliciesRequest} req
@@ -1644,8 +1781,8 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateVpc)用于创建私有网络(VPC)。
-* 用户可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址），如果需要规划VPC网段请参见[网络规划](https://cloud.tencent.com/document/product/215/30313)。
+     * 本接口（CreateVpc）用于创建私有网络（VPC）。
+* 用户可以创建的最小网段子网掩码为28（有16个IP地址），10.0.0.0/12，172.16.0.0/12最大网段子网掩码为12（1,048,576个IP地址），192.168.0.0/16最大网段子网掩码为16（65,536个IP地址）如果需要规划VPC网段请参见[网络规划](https://cloud.tencent.com/document/product/215/30313)。
 * 同一个地域能创建的VPC资源个数也是有限制的，详见 <a href="https://cloud.tencent.com/doc/product/215/537" title="VPC使用限制">VPC使用限制</a>，如果需要申请更多资源，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。
 * 创建VPC同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateVpcRequest} req
@@ -1718,7 +1855,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CheckAssistantCidr)用于检查辅助CIDR是否与存量路由、对等连接（对端VPC的CIDR）等资源存在冲突。如果存在重叠，则返回重叠的资源。（接口灰度中，如需使用请提工单。）
+     * 本接口（CheckAssistantCidr）用于检查辅助CIDR是否与存量路由、对等连接（对端VPC的CIDR）等资源存在冲突。如果存在重叠，则返回重叠的资源。
 * 检测辅助CIDR是否与当前VPC的主CIDR和辅助CIDR存在重叠。
 * 检测辅助CIDR是否与当前VPC的路由的目的端存在重叠。
 * 检测辅助CIDR是否与当前VPC的对等连接，对端VPC下的主CIDR或辅助CIDR存在重叠。
@@ -1729,6 +1866,17 @@ class VpcClient extends AbstractClient {
     CheckAssistantCidr(req, cb) {
         let resp = new CheckAssistantCidrResponse();
         this.request("CheckAssistantCidr", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeFlowLogs）用于查询获取流日志集合。
+     * @param {DescribeFlowLogsRequest} req
+     * @param {function(string, DescribeFlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeFlowLogs(req, cb) {
+        let resp = new DescribeFlowLogsResponse();
+        this.request("DescribeFlowLogs", req, resp, cb);
     }
 
     /**
@@ -1766,6 +1914,28 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 设置VPNGW续费标记
+     * @param {SetVpnGatewaysRenewFlagRequest} req
+     * @param {function(string, SetVpnGatewaysRenewFlagResponse):void} cb
+     * @public
+     */
+    SetVpnGatewaysRenewFlag(req, cb) {
+        let resp = new SetVpnGatewaysRenewFlagResponse();
+        this.request("SetVpnGatewaysRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DisableSnapshotPolicies）用于停用快照策略。
+     * @param {DisableSnapshotPoliciesRequest} req
+     * @param {function(string, DisableSnapshotPoliciesResponse):void} cb
+     * @public
+     */
+    DisableSnapshotPolicies(req, cb) {
+        let resp = new DisableSnapshotPoliciesResponse();
+        this.request("DisableSnapshotPolicies", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
      * @param {DescribeDhcpIpsRequest} req
      * @param {function(string, DescribeDhcpIpsResponse):void} cb
@@ -1793,6 +1963,7 @@ class VpcClient extends AbstractClient {
 * 将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 * 将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
 * 将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
+* 将EIP绑定到绑定内网型CLB实例的功能处于内测阶段，如需使用，请提交内测申请。
 * 将 EIP 绑定到NAT网关，请使用接口[AssociateNatGatewayAddress](https://cloud.tencent.com/document/product/215/36722)
 * EIP 如果欠费或被封堵，则不能被绑定。
 * 只有状态为 UNBIND 的 EIP 才能够被绑定。
@@ -1817,8 +1988,8 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteSubnet）用于用于删除子网(Subnet)。
-* 删除子网前，请清理该子网下所有资源，包括云服务器、负载均衡、云数据、noSql、弹性网卡等资源。
+     * 本接口（DeleteSubnet）用于用于删除子网（Subnet）。
+* 删除子网前，请清理该子网下所有资源，包括云服务器、负载均衡、云数据、NoSQL、弹性网卡等资源。
      * @param {DeleteSubnetRequest} req
      * @param {function(string, DeleteSubnetResponse):void} cb
      * @public
@@ -1855,7 +2026,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于查询CDC的本地网关。
+     * 本接口（DescribeLocalGateway）用于查询CDC的本地网关。
      * @param {DescribeLocalGatewayRequest} req
      * @param {function(string, DescribeLocalGatewayResponse):void} cb
      * @public
@@ -1892,14 +2063,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeFlowLogs）用于查询获取流日志集合
-     * @param {DescribeFlowLogsRequest} req
-     * @param {function(string, DescribeFlowLogsResponse):void} cb
+     * 本接口（DeleteNetworkAclQuintupleEntries）用于删除网络ACL五元组指定的入站规则和出站规则（但不是全量删除该ACL下的所有条目）。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+     * @param {DeleteNetworkAclQuintupleEntriesRequest} req
+     * @param {function(string, DeleteNetworkAclQuintupleEntriesResponse):void} cb
      * @public
      */
-    DescribeFlowLogs(req, cb) {
-        let resp = new DescribeFlowLogsResponse();
-        this.request("DescribeFlowLogs", req, resp, cb);
+    DeleteNetworkAclQuintupleEntries(req, cb) {
+        let resp = new DeleteNetworkAclQuintupleEntriesResponse();
+        this.request("DeleteNetworkAclQuintupleEntries", req, resp, cb);
     }
 
     /**
@@ -1914,6 +2085,17 @@ class VpcClient extends AbstractClient {
     DeleteDirectConnectGateway(req, cb) {
         let resp = new DeleteDirectConnectGatewayResponse();
         this.request("DeleteDirectConnectGateway", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSnapshotAttachedInstances）用于查询快照策略关联实例列表。
+     * @param {DescribeSnapshotAttachedInstancesRequest} req
+     * @param {function(string, DescribeSnapshotAttachedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotAttachedInstances(req, cb) {
+        let resp = new DescribeSnapshotAttachedInstancesResponse();
+        this.request("DescribeSnapshotAttachedInstances", req, resp, cb);
     }
 
     /**
@@ -2020,7 +2202,6 @@ class VpcClient extends AbstractClient {
      * 本接口（DeleteCcn）用于删除云联网。
 * 删除后，云联网关联的所有实例间路由将被删除，网络将会中断，请务必确认
 * 删除云联网是不可逆的操作，请谨慎处理。
-
      * @param {DeleteCcnRequest} req
      * @param {function(string, DeleteCcnResponse):void} cb
      * @public
@@ -2031,7 +2212,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateVpcEndPointService)用于创建终端节点服务。
+     * 本接口（CreateVpcEndPointService）用于创建终端节点服务。
      * @param {CreateVpcEndPointServiceRequest} req
      * @param {function(string, CreateVpcEndPointServiceResponse):void} cb
      * @public
@@ -2077,6 +2258,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（RejectAttachCcnInstances）用于跨账号关联实例时，云联网所有者拒绝关联操作。
+
+     * @param {RejectAttachCcnInstancesRequest} req
+     * @param {function(string, RejectAttachCcnInstancesResponse):void} cb
+     * @public
+     */
+    RejectAttachCcnInstances(req, cb) {
+        let resp = new RejectAttachCcnInstancesResponse();
+        this.request("RejectAttachCcnInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
      * @param {ModifyServiceTemplateGroupAttributeRequest} req
      * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
@@ -2088,7 +2281,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteAssistantCidr)用于删除辅助CIDR。（接口灰度中，如需使用请提工单。）
+     * 本接口（DeleteAssistantCidr）用于删除辅助CIDR。
      * @param {DeleteAssistantCidrRequest} req
      * @param {function(string, DeleteAssistantCidrResponse):void} cb
      * @public
@@ -2181,7 +2374,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于修改CDC的本地网关。
+     * 本接口（ModifyLocalGateway）用于修改CDC的本地网关。
      * @param {ModifyLocalGatewayRequest} req
      * @param {function(string, ModifyLocalGatewayResponse):void} cb
      * @public
@@ -2211,6 +2404,17 @@ class VpcClient extends AbstractClient {
     RenewAddresses(req, cb) {
         let resp = new RenewAddressesResponse();
         this.request("RenewAddresses", req, resp, cb);
+    }
+
+    /**
+     * 本接口（EnableGatewayFlowMonitor）用于开启网关流量监控。
+     * @param {EnableGatewayFlowMonitorRequest} req
+     * @param {function(string, EnableGatewayFlowMonitorResponse):void} cb
+     * @public
+     */
+    EnableGatewayFlowMonitor(req, cb) {
+        let resp = new EnableGatewayFlowMonitorResponse();
+        this.request("EnableGatewayFlowMonitor", req, resp, cb);
     }
 
     /**
@@ -2248,7 +2452,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeRouteConflicts）用于查询自定义路由策略与云联网路由策略冲突列表
+     * 本接口（DescribeRouteConflicts）用于查询自定义路由策略与云联网路由策略冲突列表。
      * @param {DescribeRouteConflictsRequest} req
      * @param {function(string, DescribeRouteConflictsResponse):void} cb
      * @public
@@ -2310,7 +2514,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteServiceTemplate）用于删除协议端口模板
+     * 本接口（DeleteServiceTemplate）用于删除协议端口模板。
      * @param {DeleteServiceTemplateRequest} req
      * @param {function(string, DeleteServiceTemplateResponse):void} cb
      * @public
@@ -2346,7 +2550,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合
+     * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合。
      * @param {DeleteAddressTemplateGroupRequest} req
      * @param {function(string, DeleteAddressTemplateGroupResponse):void} cb
      * @public
@@ -2368,7 +2572,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由
+     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由。
      * @param {DescribeCcnRoutesRequest} req
      * @param {function(string, DescribeCcnRoutesResponse):void} cb
      * @public
@@ -2402,7 +2606,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateAssistantCidr)用于批量创建辅助CIDR。（接口灰度中，如需使用请提工单。）
+     * 本接口（CreateAssistantCidr）用于批量创建辅助CIDR。
      * @param {CreateAssistantCidrRequest} req
      * @param {function(string, CreateAssistantCidrResponse):void} cb
      * @public
@@ -2421,7 +2625,7 @@ class VpcClient extends AbstractClient {
 * 支持基础网络、VPC，返回VpcId为0
 * 只支持VPC，返回默认VPC信息
 
-您也可以通过 Force 参数，强制返回默认VPC
+您也可以通过 Force 参数，强制返回默认VPC。
      * @param {CreateDefaultVpcRequest} req
      * @param {function(string, CreateDefaultVpcResponse):void} cb
      * @public
@@ -2484,7 +2688,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteNetDetect)用于删除网络探测实例。
+     * 本接口（DescribeNetworkAclQuintupleEntries）查询入方向或出方向网络ACL五元组条目列表。
+     * @param {DescribeNetworkAclQuintupleEntriesRequest} req
+     * @param {function(string, DescribeNetworkAclQuintupleEntriesResponse):void} cb
+     * @public
+     */
+    DescribeNetworkAclQuintupleEntries(req, cb) {
+        let resp = new DescribeNetworkAclQuintupleEntriesResponse();
+        this.request("DescribeNetworkAclQuintupleEntries", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteNetDetect）用于删除网络探测实例。
      * @param {DeleteNetDetectRequest} req
      * @param {function(string, DeleteNetDetectResponse):void} cb
      * @public
@@ -2517,7 +2732,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteAddressTemplate）用于删除IP地址模板
+     * 本接口（DeleteAddressTemplate）用于删除IP地址模板。
      * @param {DeleteAddressTemplateRequest} req
      * @param {function(string, DeleteAddressTemplateResponse):void} cb
      * @public
@@ -2539,9 +2754,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除终端节点服务。
-
-
+     * 本接口（DeleteVpcEndPointService）用于删除终端节点服务。
      * @param {DeleteVpcEndPointServiceRequest} req
      * @param {function(string, DeleteVpcEndPointServiceResponse):void} cb
      * @public
@@ -2552,18 +2765,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
-     * @param {ModifyAssistantCidrRequest} req
-     * @param {function(string, ModifyAssistantCidrResponse):void} cb
+     * 本接口（CreateNetworkAclQuintupleEntries）用于增量网络ACL五元组的入站规则和出站规则。
+     * @param {CreateNetworkAclQuintupleEntriesRequest} req
+     * @param {function(string, CreateNetworkAclQuintupleEntriesResponse):void} cb
      * @public
      */
-    ModifyAssistantCidr(req, cb) {
-        let resp = new ModifyAssistantCidrResponse();
-        this.request("ModifyAssistantCidr", req, resp, cb);
+    CreateNetworkAclQuintupleEntries(req, cb) {
+        let resp = new CreateNetworkAclQuintupleEntriesResponse();
+        this.request("CreateNetworkAclQuintupleEntries", req, resp, cb);
     }
 
     /**
-     * 删除终端节点。
+     * 本接口（DeleteVpcEndPoint）用于删除终端节点。
      * @param {DeleteVpcEndPointRequest} req
      * @param {function(string, DeleteVpcEndPointResponse):void} cb
      * @public
@@ -2585,7 +2798,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateServiceTemplate）用于创建协议端口模板
+     * 本接口（CreateServiceTemplate）用于创建协议端口模板。
      * @param {CreateServiceTemplateRequest} req
      * @param {function(string, CreateServiceTemplateResponse):void} cb
      * @public
@@ -2593,6 +2806,29 @@ class VpcClient extends AbstractClient {
     CreateServiceTemplate(req, cb) {
         let resp = new CreateServiceTemplateResponse();
         this.request("CreateServiceTemplate", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     * @param {ReturnNormalAddressesRequest} req
+     * @param {function(string, ReturnNormalAddressesResponse):void} cb
+     * @public
+     */
+    ReturnNormalAddresses(req, cb) {
+        let resp = new ReturnNormalAddressesResponse();
+        this.request("ReturnNormalAddresses", req, resp, cb);
+    }
+
+    /**
+     * 本接口（WithdrawNotifyRoutes）用于撤销已发布到云联网的路由。路由表列表页操作增加“从云联网撤销”。
+     * @param {WithdrawNotifyRoutesRequest} req
+     * @param {function(string, WithdrawNotifyRoutesResponse):void} cb
+     * @public
+     */
+    WithdrawNotifyRoutes(req, cb) {
+        let resp = new WithdrawNotifyRoutesResponse();
+        this.request("WithdrawNotifyRoutes", req, resp, cb);
     }
 
     /**
@@ -2641,6 +2877,17 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeSgSnapshotFileContent）用于查询安全组快照文件内容。
+     * @param {DescribeSgSnapshotFileContentRequest} req
+     * @param {function(string, DescribeSgSnapshotFileContentResponse):void} cb
+     * @public
+     */
+    DescribeSgSnapshotFileContent(req, cb) {
+        let resp = new DescribeSgSnapshotFileContentResponse();
+        this.request("DescribeSgSnapshotFileContent", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeNetworkInterfaces）用于查询弹性网卡列表。
      * @param {DescribeNetworkInterfacesRequest} req
      * @param {function(string, DescribeNetworkInterfacesResponse):void} cb
@@ -2663,7 +2910,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DisableCcnRoutes）用于禁用已经启用的云联网（CCN）路由
+     * 本接口（DisableCcnRoutes）用于禁用已经启用的云联网（CCN）路由。
      * @param {DisableCcnRoutesRequest} req
      * @param {function(string, DisableCcnRoutesResponse):void} cb
      * @public
@@ -2674,7 +2921,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 查询终端节点服务的服务白名单列表。
+     * 本接口（DescribeVpcEndPointServiceWhiteList）用于查询终端节点服务的服务白名单列表。
      * @param {DescribeVpcEndPointServiceWhiteListRequest} req
      * @param {function(string, DescribeVpcEndPointServiceWhiteListResponse):void} cb
      * @public
@@ -2719,7 +2966,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合
+     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合。
      * @param {CreateAddressTemplateGroupRequest} req
      * @param {function(string, CreateAddressTemplateGroupResponse):void} cb
      * @public
@@ -2770,7 +3017,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（AssociateNetworkAclSubnets）用于网络ACL关联vpc下的子网。
+     * 本接口（AssociateNetworkAclSubnets）用于网络ACL关联VPC下的子网。
      * @param {AssociateNetworkAclSubnetsRequest} req
      * @param {function(string, AssociateNetworkAclSubnetsResponse):void} cb
      * @public
@@ -2825,7 +3072,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     *  本接口（DescribeVpcInstances）用于查询VPC下的云主机实例列表。
+     * 本接口（DescribeVpcInstances）用于查询VPC下的云主机实例列表。
      * @param {DescribeVpcInstancesRequest} req
      * @param {function(string, DescribeVpcInstancesResponse):void} cb
      * @public
@@ -2858,14 +3105,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除路由表
-     * @param {DeleteRouteTableRequest} req
-     * @param {function(string, DeleteRouteTableResponse):void} cb
+     * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
+     * @param {CreateDirectConnectGatewayCcnRoutesRequest} req
+     * @param {function(string, CreateDirectConnectGatewayCcnRoutesResponse):void} cb
      * @public
      */
-    DeleteRouteTable(req, cb) {
-        let resp = new DeleteRouteTableResponse();
-        this.request("DeleteRouteTable", req, resp, cb);
+    CreateDirectConnectGatewayCcnRoutes(req, cb) {
+        let resp = new CreateDirectConnectGatewayCcnRoutesResponse();
+        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -2895,14 +3142,16 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
-     * @param {WithdrawNotifyRoutesRequest} req
-     * @param {function(string, WithdrawNotifyRoutesResponse):void} cb
+     * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
+* 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+* 只有状态为 UNBIND 的 EIP 才能进行释放操作。
+     * @param {ReleaseAddressesRequest} req
+     * @param {function(string, ReleaseAddressesResponse):void} cb
      * @public
      */
-    WithdrawNotifyRoutes(req, cb) {
-        let resp = new WithdrawNotifyRoutesResponse();
-        this.request("WithdrawNotifyRoutes", req, resp, cb);
+    ReleaseAddresses(req, cb) {
+        let resp = new ReleaseAddressesResponse();
+        this.request("ReleaseAddresses", req, resp, cb);
     }
 
     /**
@@ -2989,7 +3238,7 @@ class VpcClient extends AbstractClient {
 
     /**
      * 本接口（DescribeIpGeolocationInfos）用于查询IP地址信息，包括地理位置信息和网络信息。
-本接口目前处于内测中，如需使用，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2)。
+<font color="#FF0000">本接口即将下线，仅供存量客户使用，暂停新增用户。</font>
      * @param {DescribeIpGeolocationInfosRequest} req
      * @param {function(string, DescribeIpGeolocationInfosResponse):void} cb
      * @public
@@ -3000,7 +3249,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeServiceTemplates）用于查询协议端口模板
+     * 本接口（DetachSnapshotInstances）用于快照策略解关联实例。
+     * @param {DetachSnapshotInstancesRequest} req
+     * @param {function(string, DetachSnapshotInstancesResponse):void} cb
+     * @public
+     */
+    DetachSnapshotInstances(req, cb) {
+        let resp = new DetachSnapshotInstancesResponse();
+        this.request("DetachSnapshotInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeServiceTemplates）用于查询协议端口模板。
      * @param {DescribeServiceTemplatesRequest} req
      * @param {function(string, DescribeServiceTemplatesResponse):void} cb
      * @public
@@ -3045,36 +3305,38 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 获取私有网络配额，部分私有网络的配额有地域属性。
+     * 本接口（DescribeVpcLimits）用于获取私有网络配额，部分私有网络的配额有地域属性。
 LimitTypes取值范围：
-* appid-max-vpcs （每个开发商每个地域可创建的VPC数）
-* vpc-max-subnets（每个VPC可创建的子网数）
-* vpc-max-route-tables（每个VPC可创建的路由表数）
-* route-table-max-policies（每个路由表可添加的策略数）
-* vpc-max-vpn-gateways（每个VPC可创建的VPN网关数）
-* appid-max-custom-gateways（每个开发商可创建的对端网关数）
-* appid-max-vpn-connections（每个开发商可创建的VPN通道数）
-* custom-gateway-max-vpn-connections（每个对端网关可创建的VPN通道数）
-* vpn-gateway-max-custom-gateways（每个VPNGW可以创建的通道数）
-* vpc-max-network-acls（每个VPC可创建的网络ACL数）
-* network-acl-max-inbound-policies（每个网络ACL可添加的入站规则数）
-* network-acl-max-outbound-policies（每个网络ACL可添加的出站规则数）
-* vpc-max-vpcpeers（每个VPC可创建的对等连接数）
-* vpc-max-available-vpcpeers（每个VPC可创建的有效对等连接数）
-* vpc-max-basic-network-interconnections（每个VPC可创建的基础网络云主机与VPC互通数）
-* direct-connection-max-snats（每个专线网关可创建的SNAT数）
-* direct-connection-max-dnats（每个专线网关可创建的DNAT数）
-* direct-connection-max-snapts（每个专线网关可创建的SNAPT数）
-* direct-connection-max-dnapts（每个专线网关可创建的DNAPT数）
-* vpc-max-nat-gateways（每个VPC可创建的NAT网关数）
-* nat-gateway-max-eips（每个NAT可以购买的外网IP数量）
-* vpc-max-enis（每个VPC可创建弹性网卡数）
-* vpc-max-havips（每个VPC可创建HAVIP数）
-* eni-max-private-ips（每个ENI可以绑定的内网IP数（ENI未绑定子机））
-* nat-gateway-max-dnapts（每个NAT网关可创建的DNAPT数）
-* vpc-max-ipv6s（每个VPC可分配的IPv6地址数）
-* eni-max-ipv6s（每个ENI可分配的IPv6地址数）
-* vpc-max-assistant_cidrs（每个VPC可分配的辅助CIDR数）
+* appid-max-vpcs （每个开发商每个地域可创建的VPC数）。
+* vpc-max-subnets（每个VPC可创建的子网数）。
+* vpc-max-route-tables（每个VPC可创建的路由表数）。
+* route-table-max-policies（每个路由表可添加的策略数）。
+* vpc-max-vpn-gateways（每个VPC可创建的VPN网关数）。
+* appid-max-custom-gateways（每个开发商可创建的对端网关数）。
+* appid-max-vpn-connections（每个开发商可创建的VPN通道数）。
+* custom-gateway-max-vpn-connections（每个对端网关可创建的VPN通道数）。
+* vpn-gateway-max-custom-gateways（每个VPNGW可以创建的通道数）。
+* vpc-max-network-acls（每个VPC可创建的网络ACL数）。
+* network-acl-max-inbound-policies（每个网络ACL可添加的入站规则数）。
+* network-acl-max-outbound-policies（每个网络ACL可添加的出站规则数）。
+* vpc-max-vpcpeers（每个VPC可创建的对等连接数）。
+* vpc-max-available-vpcpeers（每个VPC可创建的有效对等连接数）。
+* vpc-max-basic-network-interconnections（每个VPC可创建的基础网络云主机与VPC互通数）。
+* direct-connection-max-snats（每个专线网关可创建的SNAT数）。
+* direct-connection-max-dnats（每个专线网关可创建的DNAT数）。
+* direct-connection-max-snapts（每个专线网关可创建的SNAPT数）。
+* direct-connection-max-dnapts（每个专线网关可创建的DNAPT数）。
+* vpc-max-nat-gateways（每个VPC可创建的NAT网关数）。
+* nat-gateway-max-eips（每个NAT可以购买的外网IP数量）。
+* vpc-max-enis（每个VPC可创建弹性网卡数）。
+* vpc-max-havips（每个VPC可创建HAVIP数）。
+* eni-max-private-ips（每个ENI可以绑定的内网IP数（ENI未绑定子机））。
+* nat-gateway-max-dnapts（每个NAT网关可创建的DNAPT数）。
+* vpc-max-ipv6s（每个VPC可分配的IPv6地址数）。
+* eni-max-ipv6s（每个ENI可分配的IPv6地址数）。
+* vpc-max-assistant_cidrs（每个VPC可分配的辅助CIDR数）。
+* appid-max-end-point-services （每个开发商每个地域可创建的终端节点服务个数）。
+* appid-max-end-point-service-white-lists （每个开发商每个地域可创建的终端节点服务白名单个数）。
      * @param {DescribeVpcLimitsRequest} req
      * @param {function(string, DescribeVpcLimitsResponse):void} cb
      * @public
@@ -3170,7 +3432,19 @@ LimitTypes取值范围：
     }
 
     /**
-     * 该接口用于创建用于CDC的本地网关。
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     * @param {UnassignIpv6SubnetCidrBlockRequest} req
+     * @param {function(string, UnassignIpv6SubnetCidrBlockResponse):void} cb
+     * @public
+     */
+    UnassignIpv6SubnetCidrBlock(req, cb) {
+        let resp = new UnassignIpv6SubnetCidrBlockResponse();
+        this.request("UnassignIpv6SubnetCidrBlock", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateLocalGateway）用于创建用于CDC的本地网关。
      * @param {CreateLocalGatewayRequest} req
      * @param {function(string, CreateLocalGatewayResponse):void} cb
      * @public
@@ -3204,7 +3478,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口用于查询网络产品的配额信息
+     * 本接口（DescribeProductQuota）用于查询网络产品的配额信息。
      * @param {DescribeProductQuotaRequest} req
      * @param {function(string, DescribeProductQuotaResponse):void} cb
      * @public
@@ -3318,7 +3592,7 @@ LimitTypes取值范围：
     /**
      * 本接口（CreateCcn）用于创建云联网（CCN）。<br />
 * 创建云联网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
-每个账号能创建的云联网实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
+* 每个账号能创建的云联网实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
      * @param {CreateCcnRequest} req
      * @param {function(string, CreateCcnResponse):void} cb
      * @public
@@ -3384,6 +3658,17 @@ LimitTypes取值范围：
     }
 
     /**
+     * 本接口 (DescribeTrafficPackages)  用于查询共享流量包详细信息，包括共享流量包唯一标识ID，名称，流量使用信息等
+     * @param {DescribeTrafficPackagesRequest} req
+     * @param {function(string, DescribeTrafficPackagesResponse):void} cb
+     * @public
+     */
+    DescribeTrafficPackages(req, cb) {
+        let resp = new DescribeTrafficPackagesResponse();
+        this.request("DescribeTrafficPackages", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeSecurityGroupPolicies）用于查询安全组规则。
      * @param {DescribeSecurityGroupPoliciesRequest} req
      * @param {function(string, DescribeSecurityGroupPoliciesResponse):void} cb
@@ -3395,7 +3680,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（DescribeAssistantCidr）用于查询辅助CIDR列表。（接口灰度中，如需使用请提工单。）
+     * 本接口（DescribeAssistantCidr）用于查询辅助CIDR列表。
      * @param {DescribeAssistantCidrRequest} req
      * @param {function(string, DescribeAssistantCidrResponse):void} cb
      * @public
@@ -3428,7 +3713,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口(DescribeClassicLinkInstances)用于查询私有网络和基础网络设备互通列表。
+     * 本接口（DescribeClassicLinkInstances）用于查询私有网络和基础网络设备互通列表。
      * @param {DescribeClassicLinkInstancesRequest} req
      * @param {function(string, DescribeClassicLinkInstancesResponse):void} cb
      * @public
@@ -3489,7 +3774,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（ModifyServiceTemplateAttribute）用于修改协议端口模板
+     * 本接口（ModifyServiceTemplateAttribute）用于修改协议端口模板。
      * @param {ModifyServiceTemplateAttributeRequest} req
      * @param {function(string, ModifyServiceTemplateAttributeResponse):void} cb
      * @public
@@ -3527,7 +3812,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（DisassociateNetworkAclSubnets）用于网络ACL解关联vpc下的子网。
+     * 本接口（DisassociateNetworkAclSubnets）用于网络ACL解关联VPC下的子网。
      * @param {DisassociateNetworkAclSubnetsRequest} req
      * @param {function(string, DisassociateNetworkAclSubnetsResponse):void} cb
      * @public
@@ -3583,6 +3868,17 @@ LimitTypes取值范围：
     }
 
     /**
+     * 本接口（ModifyAssistantCidr）用于批量修改辅助CIDR，支持新增和删除。
+     * @param {ModifyAssistantCidrRequest} req
+     * @param {function(string, ModifyAssistantCidrResponse):void} cb
+     * @public
+     */
+    ModifyAssistantCidr(req, cb) {
+        let resp = new ModifyAssistantCidrResponse();
+        this.request("ModifyAssistantCidr", req, resp, cb);
+    }
+
+    /**
      * 本接口(ModifyNetDetect)用于修改网络探测参数。
      * @param {ModifyNetDetectRequest} req
      * @param {function(string, ModifyNetDetectResponse):void} cb
@@ -3633,6 +3929,17 @@ LimitTypes取值范围：
     }
 
     /**
+     * 本接口 (CreateTrafficPackages) 用于创建共享流量包。
+     * @param {CreateTrafficPackagesRequest} req
+     * @param {function(string, CreateTrafficPackagesResponse):void} cb
+     * @public
+     */
+    CreateTrafficPackages(req, cb) {
+        let resp = new CreateTrafficPackagesResponse();
+        this.request("CreateTrafficPackages", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateRoutes)用于创建路由策略。
 * 向指定路由表批量新增路由策略。
      * @param {CreateRoutesRequest} req
@@ -3645,7 +3952,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口(CreateNetDetect)用于创建网络探测。
+     * 本接口（CreateNetDetect）用于创建网络探测。
      * @param {CreateNetDetectRequest} req
      * @param {function(string, CreateNetDetectResponse):void} cb
      * @public
@@ -3656,27 +3963,25 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
-     * @param {ModifyHaVipAttributeRequest} req
-     * @param {function(string, ModifyHaVipAttributeResponse):void} cb
+     * 本接口（CreateSnapshotPolicies）用于创建快照策略。
+     * @param {CreateSnapshotPoliciesRequest} req
+     * @param {function(string, CreateSnapshotPoliciesResponse):void} cb
      * @public
      */
-    ModifyHaVipAttribute(req, cb) {
-        let resp = new ModifyHaVipAttributeResponse();
-        this.request("ModifyHaVipAttribute", req, resp, cb);
+    CreateSnapshotPolicies(req, cb) {
+        let resp = new CreateSnapshotPoliciesResponse();
+        this.request("CreateSnapshotPolicies", req, resp, cb);
     }
 
     /**
-     * 本接口 (ReleaseAddresses) 用于释放一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
-* 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
-* 只有状态为 UNBIND 的 EIP 才能进行释放操作。
-     * @param {ReleaseAddressesRequest} req
-     * @param {function(string, ReleaseAddressesResponse):void} cb
+     * 本接口（DescribeSnapshotFiles）用于查询快照文件。
+     * @param {DescribeSnapshotFilesRequest} req
+     * @param {function(string, DescribeSnapshotFilesResponse):void} cb
      * @public
      */
-    ReleaseAddresses(req, cb) {
-        let resp = new ReleaseAddressesResponse();
-        this.request("ReleaseAddresses", req, resp, cb);
+    DescribeSnapshotFiles(req, cb) {
+        let resp = new DescribeSnapshotFilesResponse();
+        this.request("DescribeSnapshotFiles", req, resp, cb);
     }
 
     /**
@@ -3704,7 +4009,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（CreateServiceTemplateGroup）用于创建协议端口模板集合
+     * 本接口（CreateServiceTemplateGroup）用于创建协议端口模板集合。
      * @param {CreateServiceTemplateGroupRequest} req
      * @param {function(string, CreateServiceTemplateGroupResponse):void} cb
      * @public
@@ -3726,7 +4031,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（CreateDhcpIp）用于创建DhcpIp
+     * 本接口（CreateDhcpIp）用于创建DhcpIp。
      * @param {CreateDhcpIpRequest} req
      * @param {function(string, CreateDhcpIpResponse):void} cb
      * @public
@@ -3759,6 +4064,17 @@ LimitTypes取值范围：
     }
 
     /**
+     * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
+     * @param {ResumeSnapshotInstanceRequest} req
+     * @param {function(string, ResumeSnapshotInstanceResponse):void} cb
+     * @public
+     */
+    ResumeSnapshotInstance(req, cb) {
+        let resp = new ResumeSnapshotInstanceResponse();
+        this.request("ResumeSnapshotInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeSecurityGroupReferences）用于查询安全组被引用信息。
      * @param {DescribeSecurityGroupReferencesRequest} req
      * @param {function(string, DescribeSecurityGroupReferencesResponse):void} cb
@@ -3781,15 +4097,14 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
-子网段如果还有IP占用且未回收，则子网段无法释放。
-     * @param {UnassignIpv6SubnetCidrBlockRequest} req
-     * @param {function(string, UnassignIpv6SubnetCidrBlockResponse):void} cb
+     * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
+     * @param {DescribeSnapshotPoliciesRequest} req
+     * @param {function(string, DescribeSnapshotPoliciesResponse):void} cb
      * @public
      */
-    UnassignIpv6SubnetCidrBlock(req, cb) {
-        let resp = new UnassignIpv6SubnetCidrBlockResponse();
-        this.request("UnassignIpv6SubnetCidrBlock", req, resp, cb);
+    DescribeSnapshotPolicies(req, cb) {
+        let resp = new DescribeSnapshotPoliciesResponse();
+        this.request("DescribeSnapshotPolicies", req, resp, cb);
     }
 
     /**
@@ -3805,6 +4120,7 @@ LimitTypes取值范围：
 
     /**
      * 本接口（DescribeIpGeolocationDatabaseUrl）用于获取IP地理位置库下载链接。
+<font color="#FF0000">本接口即将下线，仅供存量用户使用，暂停新增用户。</font>
      * @param {DescribeIpGeolocationDatabaseUrlRequest} req
      * @param {function(string, DescribeIpGeolocationDatabaseUrlResponse):void} cb
      * @public
@@ -3826,7 +4142,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（DescribeAddressTemplates）用于查询IP地址模板
+     * 本接口（DescribeAddressTemplates）用于查询IP地址模板。
      * @param {DescribeAddressTemplatesRequest} req
      * @param {function(string, DescribeAddressTemplatesResponse):void} cb
      * @public
@@ -3861,7 +4177,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（DescribeAddressTemplateGroups）用于查询IP地址模板集合
+     * 本接口（DescribeAddressTemplateGroups）用于查询IP地址模板集合。
      * @param {DescribeAddressTemplateGroupsRequest} req
      * @param {function(string, DescribeAddressTemplateGroupsResponse):void} cb
      * @public
@@ -3872,7 +4188,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 创建终端节点。
+     * 本接口（CreateVpcEndPoint）用于创建终端节点。
      * @param {CreateVpcEndPointRequest} req
      * @param {function(string, CreateVpcEndPointResponse):void} cb
      * @public
@@ -3896,27 +4212,14 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
-* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
-
-安全组规则说明：
-* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
-* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
-* Action字段只允许输入ACCEPT或DROP。
-* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
-* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
-     * @param {CreateSecurityGroupWithPoliciesRequest} req
-     * @param {function(string, CreateSecurityGroupWithPoliciesResponse):void} cb
+     * 创建路由型VPN网关的目的路由
+     * @param {CreateVpnGatewayRoutesRequest} req
+     * @param {function(string, CreateVpnGatewayRoutesResponse):void} cb
      * @public
      */
-    CreateSecurityGroupWithPolicies(req, cb) {
-        let resp = new CreateSecurityGroupWithPoliciesResponse();
-        this.request("CreateSecurityGroupWithPolicies", req, resp, cb);
+    CreateVpnGatewayRoutes(req, cb) {
+        let resp = new CreateVpnGatewayRoutesResponse();
+        this.request("CreateVpnGatewayRoutes", req, resp, cb);
     }
 
     /**
@@ -3932,7 +4235,7 @@ LimitTypes取值范围：
 <li>SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个 ID 所关联的云服务器变化而变化，不需要重新修改。</li>
 <li>Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受，即 Protocol 字段不是 TCP 或 UDP 时，Protocol 和 Port 排他关系，不允许同时输入，否则会接口报错。</li>
 <li>Action 字段只允许输入 ACCEPT 或 DROP。</li>
-<li>CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。</li>
+<li>CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。IPv6CidrBlock和ICMP是排他关系，如需使用，请输入ICMPV6。</li>
 <li>一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。如想在规则最前面插入一条，则填0即可，如果想在最后追加，该字段可不填。</li>
 </ul></li></ul>
      * @param {CreateSecurityGroupPoliciesRequest} req
@@ -3978,7 +4281,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 查询终端节点列表。
+     * 本接口（DescribeVpcEndPoint）用于查询终端节点列表。
      * @param {DescribeVpcEndPointRequest} req
      * @param {function(string, DescribeVpcEndPointResponse):void} cb
      * @public
@@ -3989,18 +4292,31 @@ LimitTypes取值范围：
     }
 
     /**
-     * 创建路由型VPN网关的目的路由
-     * @param {CreateVpnGatewayRoutesRequest} req
-     * @param {function(string, CreateVpnGatewayRoutesResponse):void} cb
+     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
+* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+
+安全组规则说明：
+* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
+* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
+* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
+* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
+* Action字段只允许输入ACCEPT或DROP。
+* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
+* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     * @param {CreateSecurityGroupWithPoliciesRequest} req
+     * @param {function(string, CreateSecurityGroupWithPoliciesResponse):void} cb
      * @public
      */
-    CreateVpnGatewayRoutes(req, cb) {
-        let resp = new CreateVpnGatewayRoutesResponse();
-        this.request("CreateVpnGatewayRoutes", req, resp, cb);
+    CreateSecurityGroupWithPolicies(req, cb) {
+        let resp = new CreateSecurityGroupWithPoliciesResponse();
+        this.request("CreateSecurityGroupWithPolicies", req, resp, cb);
     }
 
     /**
-     * 创建终端服务白名单。
+     * 本接口（CreateVpcEndPointServiceWhiteList）创建终端服务白名单。
      * @param {CreateVpcEndPointServiceWhiteListRequest} req
      * @param {function(string, CreateVpcEndPointServiceWhiteListResponse):void} cb
      * @public

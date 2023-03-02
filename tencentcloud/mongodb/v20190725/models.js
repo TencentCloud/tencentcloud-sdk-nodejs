@@ -131,7 +131,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+         * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。 自定义密码格式为8-32个字符长度，至少包含字母、数字和字符（!@#%^*()_）中的两种
          * @type {string || null}
          */
         this.Password = null;
@@ -208,6 +208,24 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.MongosNodeNum = null;
 
+        /**
+         * 只读节点数量，最大不超过7个
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
+
+        /**
+         * 只读节点部署可用区
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeAvailabilityZoneList = null;
+
+        /**
+         * Hidden节点所在的可用区，跨可用区实例必传
+         * @type {string || null}
+         */
+        this.HiddenZone = null;
+
     }
 
     /**
@@ -251,6 +269,9 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
         this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
         this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
+        this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
+        this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
 
     }
 }
@@ -301,6 +322,34 @@ class DescribeCurrentOpResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccountUsers请求参数结构体
+ * @class
+ */
+class DescribeAccountUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1100,13 +1149,13 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         super();
 
         /**
-         * 订单ID
+         * 订单ID。
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * 创建的实例ID列表
+         * 创建的实例ID列表。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1129,6 +1178,86 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         this.DealId = 'DealId' in params ? params.DealId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceNodeProperty请求参数结构体
+ * @class
+ */
+class DescribeDBInstanceNodePropertyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点ID。
+         * @type {Array.<string> || null}
+         */
+        this.NodeIds = null;
+
+        /**
+         * 节点角色。可选值包括：
+<ul><li>PRIMARY：主节点。</li><li>SECONDARY：从节点。</li><li>READONLY：只读节点。</li><li>ARBITER：仲裁节点。</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * 该参数指定节点是否为Hidden节点，默认为false。
+         * @type {boolean || null}
+         */
+        this.OnlyHidden = null;
+
+        /**
+         * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 该参数指定节点投票权。
+<ul><li>1：具有投票权。</li><li>0：无投票权。</li></ul>
+         * @type {number || null}
+         */
+        this.Votes = null;
+
+        /**
+         * 节点标签。
+         * @type {Array.<NodeTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
+        this.Roles = 'Roles' in params ? params.Roles : null;
+        this.OnlyHidden = 'OnlyHidden' in params ? params.OnlyHidden : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Votes = 'Votes' in params ? params.Votes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new NodeTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1366,6 +1495,41 @@ class ModifyDBInstanceNetworkAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAccountUser返回参数结构体
+ * @class
+ */
+class CreateAccountUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建任务ID。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1937,16 +2101,17 @@ class Auth extends  AbstractModel {
         super();
 
         /**
-         * *表示所有数据库,db.name表示特定的name数据库。
-         * @type {string || null}
-         */
-        this.NameSpace = null;
-
-        /**
-         * 用于控制权限,0无权限，1只读，2只写，3读写。
+         * 当前账号具有的权限信息。<ul><li>0：无权限。</li><li>1：只读。</li><li>2：只写。</li><li>3：读写。</li></ul>
          * @type {number || null}
          */
         this.Mask = null;
+
+        /**
+         * 指具有当前账号权限的数据库名。
+<ul><li>* ：表示所有数据库。</li><li>db.name：表示特定name的数据库。</li></ul>
+         * @type {string || null}
+         */
+        this.NameSpace = null;
 
     }
 
@@ -1957,8 +2122,8 @@ class Auth extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NameSpace = 'NameSpace' in params ? params.NameSpace : null;
         this.Mask = 'Mask' in params ? params.Mask : null;
+        this.NameSpace = 'NameSpace' in params ? params.NameSpace : null;
 
     }
 }
@@ -2209,6 +2374,77 @@ class CreateDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAccountUser请求参数结构体
+ * @class
+ */
+class CreateAccountUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 新账号名称。其格式要求如下：<ul><li>字符范围[1,32]。</li><li>可输入[A,Z]、[a,z]、[1,9]范围的字符以及下划线“_”与短划线“-”。</li></ul>
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 新账号密码。密码复杂度要求如下：<ul><li>字符长度范围[8,32]。</li><li>至少包含字母、数字和特殊字符（叹号“!”、at"@"、井号“#”、百分号“%”、插入符“^”、星号“*”、小括号“()”、下划线“_”）中的两种。</li></ul>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * mongouser 账号对应的密码。mongouser 为系统默认账号，即为创建实例时，设置的密码。
+         * @type {string || null}
+         */
+        this.MongoUserPassword = null;
+
+        /**
+         * 账号备注信息。
+         * @type {string || null}
+         */
+        this.UserDesc = null;
+
+        /**
+         * 账号的读写权限信息。
+         * @type {Array.<Auth> || null}
+         */
+        this.AuthRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.MongoUserPassword = 'MongoUserPassword' in params ? params.MongoUserPassword : null;
+        this.UserDesc = 'UserDesc' in params ? params.UserDesc : null;
+
+        if (params.AuthRole) {
+            this.AuthRole = new Array();
+            for (let z in params.AuthRole) {
+                let obj = new Auth();
+                obj.deserialize(params.AuthRole[z]);
+                this.AuthRole.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 实例可修改参数text类型集合。
  * @class
  */
@@ -2316,6 +2552,49 @@ class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * DescribeAccountUsers返回参数结构体
+ * @class
+ */
+class DescribeAccountUsersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例账号列表。
+         * @type {Array.<UserInfo> || null}
+         */
+        this.Users = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Users) {
+            this.Users = new Array();
+            for (let z in params.Users) {
+                let obj = new UserInfo();
+                obj.deserialize(params.Users[z]);
+                this.Users.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2455,6 +2734,34 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
 }
 
 /**
+ * TerminateDBInstances请求参数结构体
+ * @class
+ */
+class TerminateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定预隔离实例ID。格式如：cmgo-p8vnipr5。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDBBackups返回参数结构体
  * @class
  */
@@ -2533,6 +2840,70 @@ class ModifyDBInstanceSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
+ * 账户基本信息
+ * @class
+ */
+class UserInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账号名。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 账号权限详情。
+         * @type {Array.<Auth> || null}
+         */
+        this.AuthRole = null;
+
+        /**
+         * 账号创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 账号更新时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 备注信息。
+         * @type {string || null}
+         */
+        this.UserDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+        if (params.AuthRole) {
+            this.AuthRole = new Array();
+            for (let z in params.AuthRole) {
+                let obj = new Auth();
+                obj.deserialize(params.AuthRole[z]);
+                this.AuthRole.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.UserDesc = 'UserDesc' in params ? params.UserDesc : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParams请求参数结构体
  * @class
  */
@@ -2556,6 +2927,43 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 节点Tag
+ * @class
+ */
+class NodeTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点Tag key
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 节点Tag Value
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -2730,63 +3138,6 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
- * DescribeBackupAccess返回参数结构体
- * @class
- */
-class DescribeBackupAccessResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例所属地域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 备份文件所在存储桶
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * 备份文件的存储信息
-         * @type {Array.<BackupFile> || null}
-         */
-        this.Files = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new BackupFile();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 分片信息
  * @class
  */
@@ -2887,6 +3238,43 @@ class ClientConnection extends  AbstractModel {
         this.IP = 'IP' in params ? params.IP : null;
         this.Count = 'Count' in params ? params.Count : null;
         this.InternalService = 'InternalService' in params ? params.InternalService : null;
+
+    }
+}
+
+/**
+ * 副本集信息
+ * @class
+ */
+class ReplicateSetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodeProperty> || null}
+         */
+        this.Nodes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new NodeProperty();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
 
     }
 }
@@ -3112,6 +3500,65 @@ class SecurityGroupBound extends  AbstractModel {
         this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
         this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceNodeProperty返回参数结构体
+ * @class
+ */
+class DescribeDBInstanceNodePropertyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mongos节点属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodeProperty> || null}
+         */
+        this.Mongos = null;
+
+        /**
+         * 副本集节点信息。
+         * @type {Array.<ReplicateSetInfo> || null}
+         */
+        this.ReplicateSets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Mongos) {
+            this.Mongos = new Array();
+            for (let z in params.Mongos) {
+                let obj = new NodeProperty();
+                obj.deserialize(params.Mongos[z]);
+                this.Mongos.push(obj);
+            }
+        }
+
+        if (params.ReplicateSets) {
+            this.ReplicateSets = new Array();
+            for (let z in params.ReplicateSets) {
+                let obj = new ReplicateSetInfo();
+                obj.deserialize(params.ReplicateSets[z]);
+                this.ReplicateSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3469,24 +3916,18 @@ class ShardInfo extends  AbstractModel {
 }
 
 /**
- * DescribeBackupAccess请求参数结构体
+ * TerminateDBInstances返回参数结构体
  * @class
  */
-class DescribeBackupAccessRequest extends  AbstractModel {
+class TerminateDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 需要获取下载授权的备份文件名
-         * @type {string || null}
-         */
-        this.BackupName = null;
+        this.RequestId = null;
 
     }
 
@@ -3497,8 +3938,7 @@ class DescribeBackupAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3722,19 +4162,19 @@ class SetAccountUserPrivilegeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID
+         * 实例ID。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 账号名称
+         * 账号名称。
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * 权限信息
+         * 权限信息。
          * @type {Array.<Auth> || null}
          */
         this.AuthRole = null;
@@ -3759,6 +4199,123 @@ class SetAccountUserPrivilegeRequest extends  AbstractModel {
                 this.AuthRole.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 节点属性
+ * @class
+ */
+class NodeProperty extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点所在的可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 节点名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 节点访问地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 角色。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 是否为Hidden节点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Hidden = null;
+
+        /**
+         * 节点状态，包括：ORMAL/STARTUP/RECOVERING/STARTUP2/UNKNOWN/DOWN/ROLLBACK/REMOVED等。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 主从延迟，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SlaveDelay = null;
+
+        /**
+         * 节点优先级。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 节点投票权。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Votes = null;
+
+        /**
+         * 节点标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodeTag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 副本集Id。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReplicateSetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SlaveDelay = 'SlaveDelay' in params ? params.SlaveDelay : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Votes = 'Votes' in params ? params.Votes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new NodeTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
 
     }
 }
@@ -3828,142 +4385,189 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例内存大小，单位：GB
+         * 实例内存大小，单位：GB。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例硬盘大小，单位：GB
+         * 实例硬盘大小，单位：GB。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数
+         * 指副本集数量。
+- 创建副本集实例，该参数只能为1。
+- 创建分片实例，指分片的数量。具体售卖规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
 
         /**
-         * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
+         * 指每个副本集内节点个数。具体售卖规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本
+         * 指版本信息。具体售卖规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。
+- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。
+- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。
+- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * 机器类型，HIO：高IO型；HIO10G：高IO万兆
+         * 机器类型。
+- HIO：高IO型。
+- HIO10G：高IO万兆。
          * @type {string || null}
          */
         this.MachineCode = null;
 
         /**
-         * 实例数量，最小值1，最大值为10
+         * 实例数量，最小值1，最大值为10。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 可用区信息，格式如：ap-guangzhou-2。注：此参数填写的是主可用区，如果选择多可用区部署，Zone必须是AvailabilityZoneList中的一个
+         * 可用区信息，输入格式如：ap-guangzhou-2。
+- 具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+- 该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 实例类型，REPLSET-副本集，SHARD-分片集群
+         * 实例架构类型。
+- REPLSET：副本集。
+- SHARD：分片集群。
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         * 私有网络ID，如果不设置该参数则默认选择基础网络
+         * 私有网络ID，如果不设置该参数，则默认选择基础网络。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 私有网络下的子网ID，如果设置了 VpcId，则 SubnetId必填
+         * 私有网络下的子网 ID，如果配置参数 VpcId，则 SubnetId必须配置。
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+         * 实例密码。
+- 不设置该参数，则默认密码格式为：实例ID+@+主账户uin。例如：实例 ID 为cmgo-higv73ed，UIN 为100000001，则默认密码为：cmgo-higv73ed@100000001。 
+- 自定义密码长度为8-32个字符，至少包含字母、数字和字符（!@#%^*()_）中的两种。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * 项目ID，不设置为默认项目
+         * 项目ID。若不设置该参数，则为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 实例标签信息
+         * 实例标签信息。
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * 1:正式实例,2:临时实例,3:只读实例,4:灾备实例,5:克隆实例
+         * 实例类型。
+- 1：正式实例。
+- 3：只读实例。
+- 4：灾备实例。
          * @type {number || null}
          */
         this.Clone = null;
 
         /**
-         * 父实例Id，当Clone为3或者4时，这个必须填
+         * 父实例 ID。当参数**Clone**为3或者4时，即实例为只读或灾备实例时，该参数必须配置。
          * @type {string || null}
          */
         this.Father = null;
 
         /**
-         * 安全组
+         * 安全组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
 
         /**
-         * 克隆实例回档时间。若是克隆实例，则必须填写，示例：2021-08-13 16:30:00。注：只能回档7天内的时间点
+         * 克隆实例回档时间。
+- 若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。
+- 回档时间范围：仅能回档7天内时间点的数据。
          * @type {string || null}
          */
         this.RestoreTime = null;
 
         /**
-         * 实例名称。注：名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符-
+         * 实例名称。仅支持长度为60个字符的中文、英文、数字、下划线_、分隔符- 。
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 多可用区部署的节点列表，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：1、多可用区部署节点只能部署在3个不同可用区；2、为了保障跨可用区切换，不支持将集群的大多数节点部署在同一个可用区（如3节点集群不支持2个节点部署在同一个区）；3、不支持4.2及以上版本；4、不支持只读灾备实例；5、不能选择基础网络
+         * 多可用区部署的节点列表。具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)获取。
+- 多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。
+- 不支持4.2及以上版本。
+- 不支持只读灾备实例。
+- 不能选择基础网络。
          * @type {Array.<string> || null}
          */
         this.AvailabilityZoneList = null;
 
         /**
-         * mongos cpu数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+         * Mongos CPU 核数。
+- 购买MongoDB 3.6 WiredTiger存储引擎版本以上的分片集群时，可选择性配置该参数。
+- 若不配置该参数，则根据Mongod节点规格默认适配 Mongos 规格，默认规格免费。
          * @type {number || null}
          */
         this.MongosCpu = null;
 
         /**
-         * mongos 内存大小，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+         * Mongos 内存大小。
+- 购买MongoDB 3.6 WiredTiger存储引擎版本以上的分片集群时，可选择性配置该参数。
+- 若不配置该参数，则根据Mongod节点规格默认适配 Mongos 规格，默认规格免费。
          * @type {number || null}
          */
         this.MongosMemory = null;
 
         /**
-         * mongos 数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：为了保障高可用，最低需要购买3个mongos，上限为32个
+         * Mongos 数量。
+- 购买MongoDB 3.6 WiredTiger存储引擎版本以上的分片集群时，可选择性配置该参数。
+- 若不配置该参数，则根据Mongod节点规格默认适配 Mongos 规格，默认规格免费。
          * @type {number || null}
          */
         this.MongosNodeNum = null;
+
+        /**
+         * 只读节点数量，最大不超过7个。
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
+
+        /**
+         * 指只读节点所属可用区。跨可用区部署实例，参数**ReadonlyNodeNum**不为**0**时，必须配置该参数。
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeAvailabilityZoneList = null;
+
+        /**
+         * Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。
+         * @type {string || null}
+         */
+        this.HiddenZone = null;
 
     }
 
@@ -4005,41 +4609,9 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
         this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
         this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
-
-    }
-}
-
-/**
- * 备份文件存储信息
- * @class
- */
-class BackupFile extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 备份文件所属的副本集/分片ID
-         * @type {string || null}
-         */
-        this.ReplicateSetId = null;
-
-        /**
-         * 备份文件保存路径
-         * @type {string || null}
-         */
-        this.File = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
-        this.File = 'File' in params ? params.File : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
+        this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
+        this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
 
     }
 }
@@ -4148,6 +4720,12 @@ class SpecificationInfo extends  AbstractModel {
          */
         this.SpecItems = null;
 
+        /**
+         * 是否支持跨可用区部署 1-支持，0-不支持
+         * @type {number || null}
+         */
+        this.SupportMultiAZ = null;
+
     }
 
     /**
@@ -4168,6 +4746,7 @@ class SpecificationInfo extends  AbstractModel {
                 this.SpecItems.push(obj);
             }
         }
+        this.SupportMultiAZ = 'SupportMultiAZ' in params ? params.SupportMultiAZ : null;
 
     }
 }
@@ -4447,64 +5026,106 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所属区域名称，格式如：ap-guangzhou-2
+         * 实例所属区域及可用区信息。格式：ap-guangzhou-2。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
+         * 每个分片的主从节点数量。<br>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinNodeNum与MaxNodeNum分别对应其最小值与最大值。</li></ul>
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * 实例内存大小，单位：GB
+         * 实例内存大小。<ul><li>单位：GB。</li><li>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。</li></ul>
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例硬盘大小，单位：GB
+         * 实例硬盘大小。<ul><li>单位：GB。</li><li>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。</br>
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
+         * 实例版本信息。<ul><li>具体支持的版本，请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。</li><li>版本信息与版本号对应关系如下：<ul><li>MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。</li><li>MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。</li><li>MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。</li><li>MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。</li><li>MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。</li><li>MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。</li></ul>
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；
+         * 机器类型。<ul><li>HIO：高IO型。</li><li>HIO10G：高IO万兆型。</li></ul>
          * @type {string || null}
          */
         this.MachineCode = null;
 
         /**
-         * 实例数量, 最小值1，最大值为10
+         * 实例数量，取值范围为[1,10]。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
+         * 实例类型。<ul><li>REPLSET：副本集。</li><li>SHARD：分片集群。</li><li>STANDALONE：单节点。</li></ul>
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
+         * 副本集个数。<ul><li>创建副本集实例时，该参数固定设置为1。</li><li>创建分片集群时，指分片数量，请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。</li><li>若为单节点实例，该参数固定设置为0。</li></ul>
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
+
+        /**
+         * 选择包年包月计费模式时，您需要设定购买实例的时长。即<b>InstanceChargeType</b>设定为<b>PREPAID</b>时，该参数必须配置。<ul><li>单位：月。</li><li>可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]。</li></ul>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例付费方式。<ul><li>PREPAID：包年包月计费。</li><li>POSTPAID_BY_HOUR：按量计费。</li></ul>
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 分片实例询价必填参数，指 Mongos CPU核数，取值范围为[1,16]。
+         * @type {number || null}
+         */
+        this.MongosCpu = null;
+
+        /**
+         * 分片实例询价必填参数，指 Mongos 内存，取值范围为[2,32]，单位：GB。
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * 分片实例询价必填参数，指 Mongos 个数，取值范围为[3,32]。
+         * @type {number || null}
+         */
+        this.MongosNum = null;
+
+        /**
+         * 分片实例询价必填参数，指 ConfigServer CPU核数，取值为1，单位：GB。
+         * @type {number || null}
+         */
+        this.ConfigServerCpu = null;
+
+        /**
+         * 分片实例询价必填参数，指 ConfigServer 内存大小，取值为2，单位：GB。
+         * @type {number || null}
+         */
+        this.ConfigServerMemory = null;
+
+        /**
+         * 分片实例询价必填参数，指 ConfigServer 磁盘大小，取值为 20，单位：GB。
+         * @type {number || null}
+         */
+        this.ConfigServerVolume = null;
 
     }
 
@@ -4522,9 +5143,16 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
         this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Period = 'Period' in params ? params.Period : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosNum = 'MongosNum' in params ? params.MongosNum : null;
+        this.ConfigServerCpu = 'ConfigServerCpu' in params ? params.ConfigServerCpu : null;
+        this.ConfigServerMemory = 'ConfigServerMemory' in params ? params.ConfigServerMemory : null;
+        this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
 
     }
 }
@@ -4633,13 +5261,13 @@ class InstanceDetail extends  AbstractModel {
         super();
 
         /**
-         * 实例ID
+         * 实例ID。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 实例名称
+         * 实例名称。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -4651,25 +5279,25 @@ class InstanceDetail extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 项目ID
+         * 项目ID。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 集群类型，可能的返回值：0-副本集实例，1-分片实例，
+         * 集群类型，可能的返回值：0-副本集实例，1-分片实例。
          * @type {number || null}
          */
         this.ClusterType = null;
 
         /**
-         * 地域信息
+         * 地域信息。
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 可用区信息
+         * 可用区信息。
          * @type {string || null}
          */
         this.Zone = null;
@@ -4681,163 +5309,163 @@ class InstanceDetail extends  AbstractModel {
         this.NetType = null;
 
         /**
-         * 私有网络的ID
+         * 私有网络的ID。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 私有网络的子网ID
+         * 私有网络的子网ID。
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期
+         * 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期。
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 实例IP
+         * 实例IP。
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * 端口号
+         * 端口号。
          * @type {number || null}
          */
         this.Vport = null;
 
         /**
-         * 实例创建时间
+         * 实例创建时间。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 实例到期时间
+         * 实例到期时间。
          * @type {string || null}
          */
         this.DeadLine = null;
 
         /**
-         * 实例版本信息
+         * 实例版本信息。
          * @type {string || null}
          */
         this.MongoVersion = null;
 
         /**
-         * 实例内存规格，单位为MB
+         * 实例内存规格，单位为MB。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例磁盘规格，单位为MB
+         * 实例磁盘规格，单位为MB。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 实例CPU核心数
+         * 实例CPU核心数。
          * @type {number || null}
          */
         this.CpuNum = null;
 
         /**
-         * 实例机器类型
+         * 实例机器类型。
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * 实例从节点数
+         * 实例从节点数。
          * @type {number || null}
          */
         this.SecondaryNum = null;
 
         /**
-         * 实例分片数
+         * 实例分片数。
          * @type {number || null}
          */
         this.ReplicationSetNum = null;
 
         /**
-         * 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费
+         * 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费。
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * 已用容量，单位MB
+         * 已用容量，单位MB。
          * @type {number || null}
          */
         this.UsedVolume = null;
 
         /**
-         * 维护窗口起始时间
+         * 维护窗口起始时间。
          * @type {string || null}
          */
         this.MaintenanceStart = null;
 
         /**
-         * 维护窗口结束时间
+         * 维护窗口结束时间。
          * @type {string || null}
          */
         this.MaintenanceEnd = null;
 
         /**
-         * 分片信息
+         * 分片信息。
          * @type {Array.<ShardInfo> || null}
          */
         this.ReplicaSets = null;
 
         /**
-         * 只读实例信息
+         * 只读实例信息。
          * @type {Array.<DBInstanceInfo> || null}
          */
         this.ReadonlyInstances = null;
 
         /**
-         * 灾备实例信息
+         * 灾备实例信息。
          * @type {Array.<DBInstanceInfo> || null}
          */
         this.StandbyInstances = null;
 
         /**
-         * 临时实例信息
+         * 临时实例信息。
          * @type {Array.<DBInstanceInfo> || null}
          */
         this.CloneInstances = null;
 
         /**
-         * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息
+         * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息。
          * @type {DBInstanceInfo || null}
          */
         this.RelatedInstance = null;
 
         /**
-         * 实例标签信息集合
+         * 实例标签信息集合。
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * 实例版本标记
+         * 实例版本标记。
          * @type {number || null}
          */
         this.InstanceVer = null;
 
         /**
-         * 实例版本标记
+         * 实例版本标记。
          * @type {number || null}
          */
         this.ClusterVer = null;
 
         /**
-         * 协议信息，可能的返回值：1-mongodb，2-dynamodb
+         * 协议信息，可能的返回值：1-mongodb，2-dynamodb。
          * @type {number || null}
          */
         this.Protocol = null;
@@ -4859,6 +5487,62 @@ class InstanceDetail extends  AbstractModel {
          * @type {string || null}
          */
         this.RealInstanceId = null;
+
+        /**
+         * mongos节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MongosNodeNum = null;
+
+        /**
+         * mongos节点内存。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * mongos节点CPU核数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MongosCpuNum = null;
+
+        /**
+         * Config Server节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigServerNodeNum = null;
+
+        /**
+         * Config Server节点内存。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigServerMemory = null;
+
+        /**
+         * Config Server节点磁盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigServerVolume = null;
+
+        /**
+         * Config Server节点CPU核数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigServerCpuNum = null;
+
+        /**
+         * readonly节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
 
     }
 
@@ -4952,6 +5636,14 @@ class InstanceDetail extends  AbstractModel {
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.InstanceStatusDesc = 'InstanceStatusDesc' in params ? params.InstanceStatusDesc : null;
         this.RealInstanceId = 'RealInstanceId' in params ? params.RealInstanceId : null;
+        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosCpuNum = 'MongosCpuNum' in params ? params.MongosCpuNum : null;
+        this.ConfigServerNodeNum = 'ConfigServerNodeNum' in params ? params.ConfigServerNodeNum : null;
+        this.ConfigServerMemory = 'ConfigServerMemory' in params ? params.ConfigServerMemory : null;
+        this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
+        this.ConfigServerCpuNum = 'ConfigServerCpuNum' in params ? params.ConfigServerCpuNum : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
 
     }
 }
@@ -5077,6 +5769,7 @@ module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeCurrentOpResponse: DescribeCurrentOpResponse,
+    DescribeAccountUsersRequest: DescribeAccountUsersRequest,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
     KillOpsRequest: KillOpsRequest,
@@ -5096,9 +5789,11 @@ module.exports = {
     SetAccountUserPrivilegeResponse: SetAccountUserPrivilegeResponse,
     ModifyDBInstanceNetworkAddressRequest: ModifyDBInstanceNetworkAddressRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    DescribeDBInstanceNodePropertyRequest: DescribeDBInstanceNodePropertyRequest,
     Operation: Operation,
     SpecItem: SpecItem,
     ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
+    CreateAccountUserResponse: CreateAccountUserResponse,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     BackupDownloadTaskStatus: BackupDownloadTaskStatus,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
@@ -5113,41 +5808,47 @@ module.exports = {
     ModifyNetworkAddress: ModifyNetworkAddress,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
+    CreateAccountUserRequest: CreateAccountUserRequest,
     InstanceTextParam: InstanceTextParam,
     ModifyDBInstanceSecurityGroupRequest: ModifyDBInstanceSecurityGroupRequest,
+    DescribeAccountUsersResponse: DescribeAccountUsersResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
+    TerminateDBInstancesRequest: TerminateDBInstancesRequest,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     ModifyDBInstanceSecurityGroupResponse: ModifyDBInstanceSecurityGroupResponse,
+    UserInfo: UserInfo,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
+    NodeTag: NodeTag,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
     SecurityGroup: SecurityGroup,
-    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     ReplicaSetInfo: ReplicaSetInfo,
     ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     ClientConnection: ClientConnection,
+    ReplicateSetInfo: ReplicateSetInfo,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
     SecurityGroupBound: SecurityGroupBound,
+    DescribeDBInstanceNodePropertyResponse: DescribeDBInstanceNodePropertyResponse,
     DescribeCurrentOpRequest: DescribeCurrentOpRequest,
     BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     ShardInfo: ShardInfo,
-    DescribeBackupAccessRequest: DescribeBackupAccessRequest,
+    TerminateDBInstancesResponse: TerminateDBInstancesResponse,
     RenameInstanceRequest: RenameInstanceRequest,
     RenewDBInstancesResponse: RenewDBInstancesResponse,
     InstanceEnumParam: InstanceEnumParam,
     RenameInstanceResponse: RenameInstanceResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     SetAccountUserPrivilegeRequest: SetAccountUserPrivilegeRequest,
+    NodeProperty: NodeProperty,
     KillOpsResponse: KillOpsResponse,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
-    BackupFile: BackupFile,
     AssignProjectRequest: AssignProjectRequest,
     CreateBackupDownloadTaskResponse: CreateBackupDownloadTaskResponse,
     SpecificationInfo: SpecificationInfo,

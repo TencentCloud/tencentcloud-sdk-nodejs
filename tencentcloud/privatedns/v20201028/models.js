@@ -477,6 +477,55 @@ class DescribePrivateZoneRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRecordsStatus返回参数结构体
+ * @class
+ */
+class ModifyRecordsStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有域ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 解析记录ID列表
+         * @type {Array.<number> || null}
+         */
+        this.RecordIds = null;
+
+        /**
+         * enabled：生效，disabled：失效
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RecordIds = 'RecordIds' in params ? params.RecordIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 时间统计值
  * @class
  */
@@ -665,6 +714,13 @@ class PrivateZoneRecord extends  AbstractModel {
          */
         this.Extra = null;
 
+        /**
+         * 0暂停，1启用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Enabled = null;
+
     }
 
     /**
@@ -686,6 +742,7 @@ class PrivateZoneRecord extends  AbstractModel {
         this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
         this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -943,6 +1000,12 @@ class ModifyPrivateZoneRequest extends  AbstractModel {
          */
         this.DnsForwardStatus = null;
 
+        /**
+         * 是否开启CNAME加速：ENABLED， DISABLED
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
+
     }
 
     /**
@@ -955,6 +1018,7 @@ class ModifyPrivateZoneRequest extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.DnsForwardStatus = 'DnsForwardStatus' in params ? params.DnsForwardStatus : null;
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
 
     }
 }
@@ -1076,7 +1140,7 @@ class CreatePrivateZoneRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 是否开启子域名递归, ENABLED， DISABLED。默认值为DISABLED
+         * 是否开启子域名递归, ENABLED， DISABLED。默认值为ENABLED
          * @type {string || null}
          */
         this.DnsForwardStatus = null;
@@ -1092,6 +1156,12 @@ class CreatePrivateZoneRequest extends  AbstractModel {
          * @type {Array.<AccountVpcInfo> || null}
          */
         this.AccountVpcSet = null;
+
+        /**
+         * 是否CNAME加速：ENABLED，DISABLED，默认值为ENABLED
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
 
     }
 
@@ -1141,6 +1211,7 @@ class CreatePrivateZoneRequest extends  AbstractModel {
                 this.AccountVpcSet.push(obj);
             }
         }
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
 
     }
 }
@@ -1975,6 +2046,48 @@ class DeletePrivateZoneResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyRecordsStatus请求参数结构体
+ * @class
+ */
+class ModifyRecordsStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有域ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 解析记录ID列表
+         * @type {Array.<number> || null}
+         */
+        this.RecordIds = null;
+
+        /**
+         * enabled：生效，disabled：失效
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RecordIds = 'RecordIds' in params ? params.RecordIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * CreatePrivateDNSAccount请求参数结构体
  * @class
  */
@@ -2033,6 +2146,13 @@ class MetricData extends  AbstractModel {
          */
         this.DataSet = null;
 
+        /**
+         * 查询范围内的请求总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MetricCount = null;
+
     }
 
     /**
@@ -2053,6 +2173,7 @@ class MetricData extends  AbstractModel {
                 this.DataSet.push(obj);
             }
         }
+        this.MetricCount = 'MetricCount' in params ? params.MetricCount : null;
 
     }
 }
@@ -2196,6 +2317,40 @@ class PrivateZone extends  AbstractModel {
          */
         this.IsCustomTld = null;
 
+        /**
+         * CNAME加速状态：开通：ENABLED, 关闭，DISABLED
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
+
+        /**
+         * 转发规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ForwardRuleName = null;
+
+        /**
+         * 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ForwardRuleType = null;
+
+        /**
+         * 转发的地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ForwardAddress = null;
+
+        /**
+         * 终端节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndPointName = null;
+
     }
 
     /**
@@ -2242,6 +2397,11 @@ class PrivateZone extends  AbstractModel {
             }
         }
         this.IsCustomTld = 'IsCustomTld' in params ? params.IsCustomTld : null;
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
+        this.ForwardRuleName = 'ForwardRuleName' in params ? params.ForwardRuleName : null;
+        this.ForwardRuleType = 'ForwardRuleType' in params ? params.ForwardRuleType : null;
+        this.ForwardAddress = 'ForwardAddress' in params ? params.ForwardAddress : null;
+        this.EndPointName = 'EndPointName' in params ? params.EndPointName : null;
 
     }
 }
@@ -2588,6 +2748,7 @@ module.exports = {
     DescribePrivateZoneListResponse: DescribePrivateZoneListResponse,
     AccountVpcInfoOutput: AccountVpcInfoOutput,
     DescribePrivateZoneRequest: DescribePrivateZoneRequest,
+    ModifyRecordsStatusResponse: ModifyRecordsStatusResponse,
     DatePoint: DatePoint,
     DescribeAccountVpcListResponse: DescribeAccountVpcListResponse,
     DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
@@ -2622,6 +2783,7 @@ module.exports = {
     DeletePrivateZoneRecordRequest: DeletePrivateZoneRecordRequest,
     Filter: Filter,
     DeletePrivateZoneResponse: DeletePrivateZoneResponse,
+    ModifyRecordsStatusRequest: ModifyRecordsStatusRequest,
     CreatePrivateDNSAccountRequest: CreatePrivateDNSAccountRequest,
     MetricData: MetricData,
     DescribePrivateDNSAccountListRequest: DescribePrivateDNSAccountListRequest,

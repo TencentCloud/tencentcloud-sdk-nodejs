@@ -132,19 +132,19 @@ class DescribeAgentDealsCacheRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大200
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 下单时间范围起始点
+         * 下单时间范围起始点【请保持时间范围最大90天】
          * @type {string || null}
          */
         this.CreatTimeRangeStart = null;
 
         /**
-         * 下单时间范围终止点
+         * 下单时间范围终止点【请保持时间范围最大90天】
          * @type {string || null}
          */
         this.CreatTimeRangeEnd = null;
@@ -320,7 +320,7 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 客户类型：可以为new(新拓)/assign(指定)/old(存量已关联)/old_newchecking(存量-新关联考核中)/old_newnotpass(存量-新关联未达标)/direct(直销)/direct_newopp(直销(新商机))/空
+         * 可以为new(自拓)/assign(指派)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
          * @type {string || null}
          */
         this.ClientType = null;
@@ -370,6 +370,48 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRebateInfosNew请求参数结构体
+ * @class
+ */
+class DescribeRebateInfosNewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返佣月份，如2018-02
+         * @type {string || null}
+         */
+        this.RebateMonth = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * RemovePayRelationForClient请求参数结构体
  * @class
  */
@@ -393,6 +435,56 @@ class RemovePayRelationForClientRequest extends  AbstractModel {
             return;
         }
         this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
+ * DescribeRebateInfosNew返回参数结构体
+ * @class
+ */
+class DescribeRebateInfosNewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返佣信息列表
+         * @type {Array.<RebateInfoElemNew> || null}
+         */
+        this.RebateInfoSet = null;
+
+        /**
+         * 符合查询条件返佣信息数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RebateInfoSet) {
+            this.RebateInfoSet = new Array();
+            for (let z in params.RebateInfoSet) {
+                let obj = new RebateInfoElemNew();
+                obj.deserialize(params.RebateInfoSet[z]);
+                this.RebateInfoSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -617,7 +709,7 @@ class DescribeClientBalanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
+         * 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）  【注：该数据准确性存疑，请切换至DescribeClientBalanceNew取值】
          * @type {number || null}
          */
         this.Balance = null;
@@ -828,7 +920,7 @@ class DescribeAgentPayDealsV2Request extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大100
          * @type {number || null}
          */
         this.Limit = null;
@@ -1203,7 +1295,7 @@ class DescribeAgentPayDealsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大100
          * @type {number || null}
          */
         this.Limit = null;
@@ -1502,7 +1594,7 @@ class AgentDealNewElem extends  AbstractModel {
         this.ClientRemark = null;
 
         /**
-         * 订单操作类型，purchase（新购），renew（续费），modify（配置变更）
+         * 订单操作类型，"purchase":"新购","upgrade":"升配","upConvertExpire":"升配","downgrade":"降配","downConvertExpire":"降配","renew":"续费","refund":"退货","modifyNetworkMode":"调整带宽模式","modifyNetworkSize":"调整带宽大小","preMoveOut":"资源迁出","preMoveIn":"资源迁入","preToPost":"包年包月转按量","modify":"变配","postMoveOut":"资源迁出","postMoveIn":"资源迁入","recoverRefundForward":"调账补偿","recoverPayReserve":"调账补偿","recoverPayForward":"调账扣费","recoverRefundReserve":"调账扣费"
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1737,7 +1829,7 @@ class DescribeAgentSelfPayDealsV2Request extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大100
          * @type {number || null}
          */
         this.Limit = null;
@@ -1895,7 +1987,7 @@ class AgentAuditedClient extends  AbstractModel {
         this.ClientName = null;
 
         /**
-         * 认证类型, 0：个人，1：企业；其他：未认证
+         * 认证类型, 0：个人，1：企业；其他：未认证或无效值
          * @type {string || null}
          */
         this.AuthType = null;
@@ -2156,19 +2248,19 @@ class DescribeAgentDealsByCacheRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大200
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 下单时间范围起始点
+         * 下单时间范围起始点【请保持时间范围最大90天】
          * @type {string || null}
          */
         this.CreatTimeRangeStart = null;
 
         /**
-         * 下单时间范围终止点
+         * 下单时间范围终止点【请保持时间范围最大90天】
          * @type {string || null}
          */
         this.CreatTimeRangeEnd = null;
@@ -2253,7 +2345,7 @@ class DescribeAgentSelfPayDealsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 限制数目 最大100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2501,6 +2593,50 @@ class DescribeAgentSelfPayDealsV2Response extends  AbstractModel {
 }
 
 /**
+ * AssignClientsToSales返回参数结构体
+ * @class
+ */
+class AssignClientsToSalesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理成功的代客uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SucceedUins = null;
+
+        /**
+         * 处理失败的代客uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedUins = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SucceedUins = 'SucceedUins' in params ? params.SucceedUins : null;
+        this.FailedUins = 'FailedUins' in params ? params.FailedUins : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 业务信息定义
  * @class
  */
@@ -2643,6 +2779,7 @@ class AuditApplyClientResponse extends  AbstractModel {
 
         /**
          * 关联时间对应的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.AgentTime = null;
@@ -3264,6 +3401,118 @@ class DescribeAgentClientGradeRequest extends  AbstractModel {
 }
 
 /**
+ * 返佣信息定义
+ * @class
+ */
+class RebateInfoElemNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代理商账号ID
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 返佣月份，如2018-02
+         * @type {string || null}
+         */
+        this.RebateMonth = null;
+
+        /**
+         * 返佣金额，单位分
+         * @type {number || null}
+         */
+        this.Amt = null;
+
+        /**
+         * 月度业绩，单位分
+         * @type {number || null}
+         */
+        this.MonthSales = null;
+
+        /**
+         * 季度业绩，单位分
+         * @type {number || null}
+         */
+        this.QuarterSales = null;
+
+        /**
+         * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
+         * @type {string || null}
+         */
+        this.ExceptionFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
+        this.Amt = 'Amt' in params ? params.Amt : null;
+        this.MonthSales = 'MonthSales' in params ? params.MonthSales : null;
+        this.QuarterSales = 'QuarterSales' in params ? params.QuarterSales : null;
+        this.ExceptionFlag = 'ExceptionFlag' in params ? params.ExceptionFlag : null;
+
+    }
+}
+
+/**
+ * AssignClientsToSales请求参数结构体
+ * @class
+ */
+class AssignClientsToSalesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代客/申请中代客uin列表，最大50条
+         * @type {Array.<string> || null}
+         */
+        this.ClientUins = null;
+
+        /**
+         * 业务员uin
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * 代客类型:normal-代客 apply-申请中代客
+         * @type {string || null}
+         */
+        this.AssignClientStatus = null;
+
+        /**
+         * 操作类型:assign-执行分派 cancel-取消分派
+         * @type {string || null}
+         */
+        this.AssignActionType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUins = 'ClientUins' in params ? params.ClientUins : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.AssignClientStatus = 'AssignClientStatus' in params ? params.AssignClientStatus : null;
+        this.AssignActionType = 'AssignActionType' in params ? params.AssignActionType : null;
+
+    }
+}
+
+/**
  * DescribeClientBalanceNew返回参数结构体
  * @class
  */
@@ -3310,7 +3559,9 @@ module.exports = {
     DescribeAgentDealsCacheRequest: DescribeAgentDealsCacheRequest,
     DescribeSalesmansRequest: DescribeSalesmansRequest,
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
+    DescribeRebateInfosNewRequest: DescribeRebateInfosNewRequest,
     RemovePayRelationForClientRequest: RemovePayRelationForClientRequest,
+    DescribeRebateInfosNewResponse: DescribeRebateInfosNewResponse,
     AgentPayDealsRequest: AgentPayDealsRequest,
     DescribeAgentClientGradeResponse: DescribeAgentClientGradeResponse,
     DescribeAgentDealsByCacheResponse: DescribeAgentDealsByCacheResponse,
@@ -3347,6 +3598,7 @@ module.exports = {
     AgentTransferMoneyResponse: AgentTransferMoneyResponse,
     DescribeUnbindClientListResponse: DescribeUnbindClientListResponse,
     DescribeAgentSelfPayDealsV2Response: DescribeAgentSelfPayDealsV2Response,
+    AssignClientsToSalesResponse: AssignClientsToSalesResponse,
     AgentBillElem: AgentBillElem,
     AuditApplyClientResponse: AuditApplyClientResponse,
     DescribeAgentDealsCacheResponse: DescribeAgentDealsCacheResponse,
@@ -3358,6 +3610,8 @@ module.exports = {
     DealGoodsPriceNewElem: DealGoodsPriceNewElem,
     DescribeRebateInfosResponse: DescribeRebateInfosResponse,
     DescribeAgentClientGradeRequest: DescribeAgentClientGradeRequest,
+    RebateInfoElemNew: RebateInfoElemNew,
+    AssignClientsToSalesRequest: AssignClientsToSalesRequest,
     DescribeClientBalanceNewResponse: DescribeClientBalanceNewResponse,
 
 }

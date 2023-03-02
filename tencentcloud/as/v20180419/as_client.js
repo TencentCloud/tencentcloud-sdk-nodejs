@@ -77,11 +77,13 @@ const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
 const ModifyLoadBalancerTargetAttributesResponse = models.ModifyLoadBalancerTargetAttributesResponse;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
+const InvocationResult = models.InvocationResult;
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
 const InstanceTag = models.InstanceTag;
 const ModifyLifecycleHookResponse = models.ModifyLifecycleHookResponse;
+const LifecycleCommand = models.LifecycleCommand;
 const DescribeAutoScalingAdvicesResponse = models.DescribeAutoScalingAdvicesResponse;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
@@ -96,7 +98,9 @@ const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const EnhancedService = models.EnhancedService;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
+const IPv6InternetAccessible = models.IPv6InternetAccessible;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
@@ -611,7 +615,9 @@ class AsClient extends AbstractClient {
     /**
      * 本接口（CreateLifecycleHook）用于创建生命周期挂钩。
 
-* 您可以为生命周期挂钩配置消息通知，弹性伸缩会通知您的CMQ消息队列，通知内容形如：
+* 您可以为生命周期挂钩配置消息通知或执行自动化助手命令。
+
+如果您配置了通知消息，弹性伸缩会通知您的TDMQ消息队列，通知内容形如：
 
 ```
 {

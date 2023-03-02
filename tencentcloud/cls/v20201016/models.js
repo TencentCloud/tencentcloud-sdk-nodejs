@@ -350,12 +350,6 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         super();
 
         /**
-         * 要查询的日志主题ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
          * 要查询的日志的起始时间，Unix时间戳，单位ms
          * @type {number || null}
          */
@@ -374,7 +368,13 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         this.Query = null;
 
         /**
-         * 时间间隔: 单位ms
+         * 要查询的日志主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 时间间隔: 单位ms  限制性条件：(To-From) / interval <= 200
          * @type {number || null}
          */
         this.Interval = null;
@@ -388,10 +388,10 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
         this.Query = 'Query' in params ? params.Query : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
 
     }
@@ -533,7 +533,7 @@ class ModifyTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = null;
 
         /**
-         * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
+         * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
          * @type {number || null}
          */
         this.Period = null;
@@ -773,56 +773,6 @@ class ModifyConfigExtraResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLogset请求参数结构体
- * @class
- */
-class ModifyLogsetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 日志集ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * 日志集名称
-         * @type {string || null}
-         */
-        this.LogsetName = null;
-
-        /**
-         * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * CreateLogset请求参数结构体
  * @class
  */
@@ -859,70 +809,6 @@ class CreateLogsetRequest extends  AbstractModel {
                 let obj = new Tag();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * ModifyDataTransform请求参数结构体
- * @class
- */
-class ModifyDataTransformRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 加工任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 加工任务名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 加工逻辑函数
-         * @type {string || null}
-         */
-        this.EtlContent = null;
-
-        /**
-         * 任务启动状态. 默认为1，正常开启,  2关闭
-         * @type {number || null}
-         */
-        this.EnableFlag = null;
-
-        /**
-         * 加工任务目的topic_id以及别名
-         * @type {Array.<DataTransformResouceInfo> || null}
-         */
-        this.DstResources = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
-        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
-
-        if (params.DstResources) {
-            this.DstResources = new Array();
-            for (let z in params.DstResources) {
-                let obj = new DataTransformResouceInfo();
-                obj.deserialize(params.DstResources[z]);
-                this.DstResources.push(obj);
             }
         }
 
@@ -1888,6 +1774,47 @@ class DescribeConfigsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteMachineGroupInfo请求参数结构体
+ * @class
+ */
+class DeleteMachineGroupInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 机器组类型
+目前type支持 ip 和 label
+         * @type {MachineGroupTypeInfo || null}
+         */
+        this.MachineGroupType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.MachineGroupType) {
+            let obj = new MachineGroupTypeInfo();
+            obj.deserialize(params.MachineGroupType)
+            this.MachineGroupType = obj;
+        }
+
+    }
+}
+
+/**
  * CreateLogset返回参数结构体
  * @class
  */
@@ -2105,6 +2032,46 @@ class ExtractRuleInfo extends  AbstractModel {
          */
         this.Backtracking = null;
 
+        /**
+         * 是否为Gbk编码.   0: 否, 1: 是
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsGBK = null;
+
+        /**
+         * 是否为标准json.   0: 否, 1: 是
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JsonStandard = null;
+
+        /**
+         * syslog传输协议，取值为tcp或者udp。
+该字段适用于：创建采集规则配置、修改采集规则配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]。举例：127.0.0.1:9000
+该字段适用于：创建采集规则配置、修改采集规则配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * rfc3164：指定系统日志采集使用RFC3164协议解析日志。
+rfc5424：指定系统日志采集使用RFC5424协议解析日志。
+auto：自动匹配rfc3164或者rfc5424其中一种协议
+该字段适用于：创建采集规则配置、修改采集规则配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ParseProtocol = null;
+
     }
 
     /**
@@ -2132,6 +2099,11 @@ class ExtractRuleInfo extends  AbstractModel {
         this.UnMatchUpLoadSwitch = 'UnMatchUpLoadSwitch' in params ? params.UnMatchUpLoadSwitch : null;
         this.UnMatchLogKey = 'UnMatchLogKey' in params ? params.UnMatchLogKey : null;
         this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
+        this.IsGBK = 'IsGBK' in params ? params.IsGBK : null;
+        this.JsonStandard = 'JsonStandard' in params ? params.JsonStandard : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ParseProtocol = 'ParseProtocol' in params ? params.ParseProtocol : null;
 
     }
 }
@@ -2173,6 +2145,13 @@ class TopicInfo extends  AbstractModel {
          * @type {boolean || null}
          */
         this.Index = null;
+
+        /**
+         * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssumerName = null;
 
         /**
          * 创建时间
@@ -2221,6 +2200,20 @@ class TopicInfo extends  AbstractModel {
          */
         this.Period = null;
 
+        /**
+         * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubAssumerName = null;
+
+        /**
+         * 日志主题描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Describes = null;
+
     }
 
     /**
@@ -2235,6 +2228,7 @@ class TopicInfo extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
         this.Index = 'Index' in params ? params.Index : null;
+        this.AssumerName = 'AssumerName' in params ? params.AssumerName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Status = 'Status' in params ? params.Status : null;
 
@@ -2250,23 +2244,25 @@ class TopicInfo extends  AbstractModel {
         this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.SubAssumerName = 'SubAssumerName' in params ? params.SubAssumerName : null;
+        this.Describes = 'Describes' in params ? params.Describes : null;
 
     }
 }
 
 /**
- * DeleteDataTransform返回参数结构体
+ * DescribeConsumer请求参数结构体
  * @class
  */
-class DeleteDataTransformResponse extends  AbstractModel {
+class DescribeConsumerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 投递任务绑定的日志主题 ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TopicId = null;
 
     }
 
@@ -2277,7 +2273,7 @@ class DeleteDataTransformResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -2348,6 +2344,12 @@ class ModifyConsumerRequest extends  AbstractModel {
          */
         this.Ckafka = null;
 
+        /**
+         * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -2372,6 +2374,7 @@ class ModifyConsumerRequest extends  AbstractModel {
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -2489,24 +2492,34 @@ class ModifyMachineGroupResponse extends  AbstractModel {
 }
 
 /**
- * 数据加工的资源信息
+ * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
+
  * @class
  */
-class DataTransformResouceInfo extends  AbstractModel {
+class RuleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 目标主题id
-         * @type {string || null}
+         * 全文索引配置, 如果为空时代表未开启全文索引
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FullTextInfo || null}
          */
-        this.TopicId = null;
+        this.FullText = null;
 
         /**
-         * 别名
-         * @type {string || null}
+         * 键值索引配置，如果为空时代表未开启键值索引
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RuleKeyValueInfo || null}
          */
-        this.Alias = null;
+        this.KeyValue = null;
+
+        /**
+         * 元字段索引配置，如果为空时代表未开启元字段索引
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RuleTagInfo || null}
+         */
+        this.Tag = null;
 
     }
 
@@ -2517,8 +2530,24 @@ class DataTransformResouceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
+
+        if (params.FullText) {
+            let obj = new FullTextInfo();
+            obj.deserialize(params.FullText)
+            this.FullText = obj;
+        }
+
+        if (params.KeyValue) {
+            let obj = new RuleKeyValueInfo();
+            obj.deserialize(params.KeyValue)
+            this.KeyValue = obj;
+        }
+
+        if (params.Tag) {
+            let obj = new RuleTagInfo();
+            obj.deserialize(params.Tag)
+            this.Tag = obj;
+        }
 
     }
 }
@@ -2567,8 +2596,8 @@ class FullTextInfo extends  AbstractModel {
 
         /**
          * 全文索引的分词符，其中的每个字符代表一个分词符；
-仅支持英文符号及\n\t\r；
-推荐使用 @&?|#()='",;:<>[]{}/ \n\t\r\ 作为分词符；
+仅支持英文符号、\n\t\r及转义符\；
+注意：\n\t\r本身已被转义，直接使用双引号包裹即可作为入参，无需再次转义
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -2990,7 +3019,7 @@ class RuleKeyValueInfo extends  AbstractModel {
         this.CaseSensitive = null;
 
         /**
-         * 需要建立索引的键值对信息；最大只能配置100个键值对
+         * 需要建立索引的键值对信息
          * @type {Array.<KeyValueInfo> || null}
          */
         this.KeyValues = null;
@@ -3955,13 +3984,18 @@ class CreateIndexRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+         * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true
+* false:不包含
+* true:包含
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+         * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1
+* 0:仅包含开启键值索引的元数据字段
+* 1:包含所有元数据字段
+* 2:不包含任何元数据字段
          * @type {number || null}
          */
         this.MetadataFlag = null;
@@ -3985,6 +4019,56 @@ class CreateIndexRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.IncludeInternalFields = 'IncludeInternalFields' in params ? params.IncludeInternalFields : null;
         this.MetadataFlag = 'MetadataFlag' in params ? params.MetadataFlag : null;
+
+    }
+}
+
+/**
+ * DescribeLogsets返回参数结构体
+ * @class
+ */
+class DescribeLogsetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页的总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 日志集列表
+         * @type {Array.<LogsetInfo> || null}
+         */
+        this.Logsets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Logsets) {
+            this.Logsets = new Array();
+            for (let z in params.Logsets) {
+                let obj = new LogsetInfo();
+                obj.deserialize(params.Logsets[z]);
+                this.Logsets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4231,7 +4315,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.StorageType = null;
 
         /**
-         * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
+         * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存
          * @type {number || null}
          */
         this.Period = null;
@@ -4422,6 +4506,12 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
          */
         this.FromTopicId = null;
 
+        /**
+         * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -4432,6 +4522,7 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
             return;
         }
         this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -4582,6 +4673,13 @@ class DescribeConsumerResponse extends  AbstractModel {
         this.Ckafka = null;
 
         /**
+         * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Compression = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4610,6 +4708,7 @@ class DescribeConsumerResponse extends  AbstractModel {
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4784,6 +4883,13 @@ class LogsetInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
+         * 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssumerName = null;
+
+        /**
          * 日志集绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Tag> || null}
@@ -4797,7 +4903,7 @@ class LogsetInfo extends  AbstractModel {
         this.TopicCount = null;
 
         /**
-         * 若AssumerUin非空，则表示创建该日志集的服务方角色
+         * 若AssumerName非空，则表示创建该日志集的服务方角色
          * @type {string || null}
          */
         this.RoleName = null;
@@ -4814,6 +4920,7 @@ class LogsetInfo extends  AbstractModel {
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AssumerName = 'AssumerName' in params ? params.AssumerName : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -4825,34 +4932,6 @@ class LogsetInfo extends  AbstractModel {
         }
         this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
-
-    }
-}
-
-/**
- * DescribeConsumer请求参数结构体
- * @class
- */
-class DescribeConsumerRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 投递任务绑定的日志主题 ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -4900,7 +4979,7 @@ class AnalysisDimensional extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 分析类型：query，field
+         * 分析类型：query，field ，original
          * @type {string || null}
          */
         this.Type = null;
@@ -4910,6 +4989,12 @@ class AnalysisDimensional extends  AbstractModel {
          * @type {string || null}
          */
         this.Content = null;
+
+        /**
+         * 配置
+         * @type {Array.<AlarmAnalysisConfig> || null}
+         */
+        this.ConfigInfo = null;
 
     }
 
@@ -4923,6 +5008,15 @@ class AnalysisDimensional extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+        if (params.ConfigInfo) {
+            this.ConfigInfo = new Array();
+            for (let z in params.ConfigInfo) {
+                let obj = new AlarmAnalysisConfig();
+                obj.deserialize(params.ConfigInfo[z]);
+                this.ConfigInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -5161,18 +5255,31 @@ class DescribeAlarmNoticesResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDataTransform请求参数结构体
+ * DescribeMachineGroups返回参数结构体
  * @class
  */
-class DeleteDataTransformRequest extends  AbstractModel {
+class DescribeMachineGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据加工任务id
+         * 机器组信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MachineGroupInfo> || null}
+         */
+        this.MachineGroups = null;
+
+        /**
+         * 分页的总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.RequestId = null;
 
     }
 
@@ -5183,7 +5290,17 @@ class DeleteDataTransformRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.MachineGroups) {
+            this.MachineGroups = new Array();
+            for (let z in params.MachineGroups) {
+                let obj = new MachineGroupInfo();
+                obj.deserialize(params.MachineGroups[z]);
+                this.MachineGroups.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5307,30 +5424,25 @@ class ModifyConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLogsets返回参数结构体
+ * AddMachineGroupInfo请求参数结构体
  * @class
  */
-class DescribeLogsetsResponse extends  AbstractModel {
+class AddMachineGroupInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分页的总数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 日志集列表
-         * @type {Array.<LogsetInfo> || null}
-         */
-        this.Logsets = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 机器组ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.GroupId = null;
+
+        /**
+         * 机器组类型
+目前type支持 ip 和 label
+         * @type {MachineGroupTypeInfo || null}
+         */
+        this.MachineGroupType = null;
 
     }
 
@@ -5341,17 +5453,13 @@ class DescribeLogsetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
-        if (params.Logsets) {
-            this.Logsets = new Array();
-            for (let z in params.Logsets) {
-                let obj = new LogsetInfo();
-                obj.deserialize(params.Logsets[z]);
-                this.Logsets.push(obj);
-            }
+        if (params.MachineGroupType) {
+            let obj = new MachineGroupTypeInfo();
+            obj.deserialize(params.MachineGroupType)
+            this.MachineGroupType = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5371,7 +5479,7 @@ class JsonInfo extends  AbstractModel {
         this.EnableTag = null;
 
         /**
-         * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__。
+         * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -5460,6 +5568,12 @@ class CreateShipperRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -5497,6 +5611,7 @@ class CreateShipperRequest extends  AbstractModel {
             obj.deserialize(params.Content)
             this.Content = obj;
         }
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }
@@ -5842,7 +5957,7 @@ class CreateShipperResponse extends  AbstractModel {
         super();
 
         /**
-         * 投递规则ID
+         * 投递任务ID
          * @type {string || null}
          */
         this.ShipperId = null;
@@ -5897,6 +6012,41 @@ class DeleteIndexResponse extends  AbstractModel {
 }
 
 /**
+ * 告警多维分析一些配置信息
+ * @class
+ */
+class AlarmAnalysisConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ModifyIndex请求参数结构体
  * @class
  */
@@ -5923,13 +6073,18 @@ class ModifyIndexRequest extends  AbstractModel {
         this.Rule = null;
 
         /**
-         * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+         * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true
+* false:不包含
+* true:包含
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+         * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1
+* 0:仅包含开启键值索引的元数据字段
+* 1:包含所有元数据字段
+* 2:不包含任何元数据字段
          * @type {number || null}
          */
         this.MetadataFlag = null;
@@ -5993,18 +6148,39 @@ class Column extends  AbstractModel {
 }
 
 /**
- * 投递日志的压缩配置
+ * 投递日志的内容格式配置
  * @class
  */
-class CompressInfo extends  AbstractModel {
+class ContentInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 压缩格式，支持gzip、lzop和none不压缩
+         * 内容格式，支持json、csv
          * @type {string || null}
          */
         this.Format = null;
+
+        /**
+         * csv格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CsvInfo || null}
+         */
+        this.Csv = null;
+
+        /**
+         * json格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {JsonInfo || null}
+         */
+        this.Json = null;
+
+        /**
+         * parquet格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ParquetInfo || null}
+         */
+        this.Parquet = null;
 
     }
 
@@ -6016,6 +6192,24 @@ class CompressInfo extends  AbstractModel {
             return;
         }
         this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.Csv) {
+            let obj = new CsvInfo();
+            obj.deserialize(params.Csv)
+            this.Csv = obj;
+        }
+
+        if (params.Json) {
+            let obj = new JsonInfo();
+            obj.deserialize(params.Json)
+            this.Json = obj;
+        }
+
+        if (params.Parquet) {
+            let obj = new ParquetInfo();
+            obj.deserialize(params.Parquet)
+            this.Parquet = obj;
+        }
 
     }
 }
@@ -6036,9 +6230,9 @@ class ValueInfo extends  AbstractModel {
 
         /**
          * 字段的分词符，其中的每个字符代表一个分词符；
-仅支持英文符号及\n\t\r；
+仅支持英文符号、\n\t\r及转义符\；
 long及double类型字段需为空；
-text类型字段推荐使用 @&?|#()='",;:<>[]{}/ \n\t\r\\ 作为分词符；
+注意：\n\t\r本身已被转义，直接使用双引号包裹即可作为入参，无需再次转义
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -6050,7 +6244,7 @@ text类型字段推荐使用 @&?|#()='",;:<>[]{}/ \n\t\r\\ 作为分词符；
         this.SqlFlag = null;
 
         /**
-         * 是否包含中文
+         * 是否包含中文，long及double类型字段需为false
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -6074,56 +6268,54 @@ text类型字段推荐使用 @&?|#()='",;:<>[]{}/ \n\t\r\\ 作为分词符；
 }
 
 /**
- * DescribeDataTransformInfo请求参数结构体
+ * GetAlarmLog请求参数结构体
  * @class
  */
-class DescribeDataTransformInfoRequest extends  AbstractModel {
+class GetAlarmLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <br><li> taskName
-
-按照【加工任务名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> taskId
-
-按照【加工任务id】进行过滤。
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为100。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 分页的偏移量，默认值为0。
+         * 要查询的日志的起始时间，Unix时间戳，单位ms
          * @type {number || null}
          */
-        this.Offset = null;
+        this.From = null;
 
         /**
-         * 分页单页限制数目，默认值为20，最大值100。
+         * 要查询的日志的结束时间，Unix时间戳，单位ms
+         * @type {number || null}
+         */
+        this.To = null;
+
+        /**
+         * 查询语句，语句长度最大为1024
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 单次查询返回的日志条数，最大值为1000
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 默认值为2.   1: 获取单个任务的详细信息 2：获取任务列表
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Type为1， 此参数必填
+         * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.Context = null;
+
+        /**
+         * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+        /**
+         * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
+         * @type {boolean || null}
+         */
+        this.UseNewAnalysis = null;
 
     }
 
@@ -6134,19 +6326,13 @@ class DescribeDataTransformInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.Query = 'Query' in params ? params.Query : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
 
     }
 }
@@ -6236,7 +6422,7 @@ class ExportInfo extends  AbstractModel {
         this.Count = null;
 
         /**
-         * 日志下载状态。Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期）。
+         * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
          * @type {string || null}
          */
         this.Status = null;
@@ -6363,6 +6549,13 @@ class ConfigInfo extends  AbstractModel {
         this.ConfigId = null;
 
         /**
+         * 采集规则配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
          * 日志格式化方式
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -6433,6 +6626,7 @@ class ConfigInfo extends  AbstractModel {
             return;
         }
         this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.Name = 'Name' in params ? params.Name : null;
         this.LogFormat = 'LogFormat' in params ? params.LogFormat : null;
         this.Path = 'Path' in params ? params.Path : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
@@ -6525,41 +6719,6 @@ class SplitPartitionResponse extends  AbstractModel {
                 this.Partitions.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateDataTransform返回参数结构体
- * @class
- */
-class CreateDataTransformResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6710,6 +6869,12 @@ class ModifyShipperRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -6748,66 +6913,7 @@ class ModifyShipperRequest extends  AbstractModel {
             obj.deserialize(params.Content)
             this.Content = obj;
         }
-
-    }
-}
-
-/**
- * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
- * @class
- */
-class RuleInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 全文索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {FullTextInfo || null}
-         */
-        this.FullText = null;
-
-        /**
-         * 键值索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RuleKeyValueInfo || null}
-         */
-        this.KeyValue = null;
-
-        /**
-         * 元字段索引配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RuleTagInfo || null}
-         */
-        this.Tag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.FullText) {
-            let obj = new FullTextInfo();
-            obj.deserialize(params.FullText)
-            this.FullText = obj;
-        }
-
-        if (params.KeyValue) {
-            let obj = new RuleKeyValueInfo();
-            obj.deserialize(params.KeyValue)
-            this.KeyValue = obj;
-        }
-
-        if (params.Tag) {
-            let obj = new RuleTagInfo();
-            obj.deserialize(params.Tag)
-            this.Tag = obj;
-        }
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }
@@ -7012,6 +7118,12 @@ class CreateConsumerRequest extends  AbstractModel {
          */
         this.Ckafka = null;
 
+        /**
+         * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -7035,6 +7147,7 @@ class CreateConsumerRequest extends  AbstractModel {
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -7190,126 +7303,6 @@ class ModifyAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
- * 数据加工任务基本详情
- * @class
- */
-class DataTransformTaskInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据加工任务名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 数据加工任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 任务启用状态，默认为1，正常开启,  2关闭
-         * @type {number || null}
-         */
-        this.EnableFlag = null;
-
-        /**
-         * 加工任务类型，1： DSL， 2：SQL
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 源日志主题
-         * @type {string || null}
-         */
-        this.SrcTopicId = null;
-
-        /**
-         * 当前加工任务状态（1准备中/2运行中/3停止中/4已停止）
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 加工任务创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最近修改时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 最后启用时间，如果需要重建集群，修改该时间
-         * @type {string || null}
-         */
-        this.LastEnableTime = null;
-
-        /**
-         * 日志主题名称
-         * @type {string || null}
-         */
-        this.SrcTopicName = null;
-
-        /**
-         * 日志集id
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * 加工任务目的topic_id以及别名
-         * @type {Array.<DataTransformResouceInfo> || null}
-         */
-        this.DstResources = null;
-
-        /**
-         * 加工逻辑函数
-         * @type {string || null}
-         */
-        this.EtlContent = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SrcTopicId = 'SrcTopicId' in params ? params.SrcTopicId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.LastEnableTime = 'LastEnableTime' in params ? params.LastEnableTime : null;
-        this.SrcTopicName = 'SrcTopicName' in params ? params.SrcTopicName : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-
-        if (params.DstResources) {
-            this.DstResources = new Array();
-            for (let z in params.DstResources) {
-                let obj = new DataTransformResouceInfo();
-                obj.deserialize(params.DstResources[z]);
-                this.DstResources.push(obj);
-            }
-        }
-        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
-
-    }
-}
-
-/**
  * DescribeMachines返回参数结构体
  * @class
  */
@@ -7388,103 +7381,18 @@ class DescribeMachinesResponse extends  AbstractModel {
 }
 
 /**
- * 预览数据详情
+ * 投递日志的压缩配置
  * @class
  */
-class PreviewLogStatistic extends  AbstractModel {
+class CompressInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日志内容
-         * @type {string || null}
-         */
-        this.LogContent = null;
-
-        /**
-         * 行号
-         * @type {number || null}
-         */
-        this.LineNum = null;
-
-        /**
-         * 目标日志主题
-         * @type {string || null}
-         */
-        this.DstTopicId = null;
-
-        /**
-         * 失败错误码， 空字符串""表示正常
-         * @type {string || null}
-         */
-        this.FailReason = null;
-
-        /**
-         * 日志时间戳
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * 目标topic-name
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DstTopicName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LogContent = 'LogContent' in params ? params.LogContent : null;
-        this.LineNum = 'LineNum' in params ? params.LineNum : null;
-        this.DstTopicId = 'DstTopicId' in params ? params.DstTopicId : null;
-        this.FailReason = 'FailReason' in params ? params.FailReason : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.DstTopicName = 'DstTopicName' in params ? params.DstTopicName : null;
-
-    }
-}
-
-/**
- * 投递日志的内容格式配置
- * @class
- */
-class ContentInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 内容格式，支持json、csv
+         * 压缩格式，支持gzip、lzop、snappy和none不压缩
          * @type {string || null}
          */
         this.Format = null;
-
-        /**
-         * csv格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CsvInfo || null}
-         */
-        this.Csv = null;
-
-        /**
-         * json格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {JsonInfo || null}
-         */
-        this.Json = null;
-
-        /**
-         * parquet格式内容描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ParquetInfo || null}
-         */
-        this.Parquet = null;
 
     }
 
@@ -7496,24 +7404,6 @@ class ContentInfo extends  AbstractModel {
             return;
         }
         this.Format = 'Format' in params ? params.Format : null;
-
-        if (params.Csv) {
-            let obj = new CsvInfo();
-            obj.deserialize(params.Csv)
-            this.Csv = obj;
-        }
-
-        if (params.Json) {
-            let obj = new JsonInfo();
-            obj.deserialize(params.Json)
-            this.Json = obj;
-        }
-
-        if (params.Parquet) {
-            let obj = new ParquetInfo();
-            obj.deserialize(params.Parquet)
-            this.Parquet = obj;
-        }
 
     }
 }
@@ -7768,6 +7658,13 @@ class ShipperInfo extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -7808,6 +7705,7 @@ class ShipperInfo extends  AbstractModel {
             this.Content = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }
@@ -7821,7 +7719,13 @@ class KeyValueInfo extends  AbstractModel {
         super();
 
         /**
-         * 需要配置键值或者元字段索引的字段，元字段Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀
+         * 需要配置键值或者元字段索引的字段名称，仅支持字母、数字、下划线和-./@，且不能以下划线开头
+
+注意：
+1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀
+2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过300
+3，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k
+4，不允许同时包含json父子级字段，例如a及a.b
          * @type {string || null}
          */
         this.Key = null;
@@ -7848,6 +7752,34 @@ class KeyValueInfo extends  AbstractModel {
             obj.deserialize(params.Value)
             this.Value = obj;
         }
+
+    }
+}
+
+/**
+ * AddMachineGroupInfo返回参数结构体
+ * @class
+ */
+class AddMachineGroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8377,12 +8309,6 @@ class SearchLogRequest extends  AbstractModel {
         super();
 
         /**
-         * 要检索分析的日志主题ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
          * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
          * @type {number || null}
          */
@@ -8397,9 +8323,16 @@ class SearchLogRequest extends  AbstractModel {
         /**
          * 检索分析语句，最大长度为12KB
 语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
+使用*或空字符串可查询所有日志
          * @type {string || null}
          */
         this.Query = null;
+
+        /**
+         * 要检索分析的日志主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
 
         /**
          * 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数
@@ -8413,6 +8346,7 @@ class SearchLogRequest extends  AbstractModel {
         /**
          * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
 注意：
+* 透传该参数时，请勿修改除该参数外的其它参数
 * 仅当检索分析语句(Query)不包含SQL时有效
 * SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
          * @type {string || null}
@@ -8436,6 +8370,16 @@ class SearchLogRequest extends  AbstractModel {
          */
         this.UseNewAnalysis = null;
 
+        /**
+         * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
+0：自动采样;
+0～1：按指定采样率采样，例如0.02;
+1：不采样，即精确分析
+默认值为1
+         * @type {number || null}
+         */
+        this.SamplingRate = null;
+
     }
 
     /**
@@ -8445,14 +8389,15 @@ class SearchLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
         this.Query = 'Query' in params ? params.Query : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Context = 'Context' in params ? params.Context : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
+        this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
 
     }
 }
@@ -8621,76 +8566,6 @@ class ApplyConfigToMachineGroupRequest extends  AbstractModel {
         }
         this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * GetAlarmLog请求参数结构体
- * @class
- */
-class GetAlarmLogRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 要查询的日志的起始时间，Unix时间戳，单位ms
-         * @type {number || null}
-         */
-        this.From = null;
-
-        /**
-         * 要查询的日志的结束时间，Unix时间戳，单位ms
-         * @type {number || null}
-         */
-        this.To = null;
-
-        /**
-         * 查询语句，语句长度最大为1024
-         * @type {string || null}
-         */
-        this.Query = null;
-
-        /**
-         * 单次查询返回的日志条数，最大值为1000
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
-         * @type {string || null}
-         */
-        this.Context = null;
-
-        /**
-         * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-         * @type {string || null}
-         */
-        this.Sort = null;
-
-        /**
-         * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
-         * @type {boolean || null}
-         */
-        this.UseNewAnalysis = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
-        this.Query = 'Query' in params ? params.Query : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
-        this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
 
     }
 }
@@ -8990,14 +8865,19 @@ class DescribeIndexResponse extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+         * 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引
+* false:不包含
+* true:包含
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+         * 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引
+* 0:仅包含开启键值索引的元数据字段
+* 1:包含所有元数据字段
+* 2:不包含任何元数据字段
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -9266,60 +9146,30 @@ class ModifyConfigExtraRequest extends  AbstractModel {
 }
 
 /**
- * CreateDataTransform请求参数结构体
+ * ModifyLogset请求参数结构体
  * @class
  */
-class CreateDataTransformRequest extends  AbstractModel {
+class ModifyLogsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 函数类型. DSL:1 SQL:2
-         * @type {number || null}
-         */
-        this.FuncType = null;
-
-        /**
-         * 源日志主题
+         * 日志集ID
          * @type {string || null}
          */
-        this.SrcTopicId = null;
+        this.LogsetId = null;
 
         /**
-         * 加工任务名称
+         * 日志集名称
          * @type {string || null}
          */
-        this.Name = null;
+        this.LogsetName = null;
 
         /**
-         * 加工逻辑函数
-         * @type {string || null}
+         * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+         * @type {Array.<Tag> || null}
          */
-        this.EtlContent = null;
-
-        /**
-         * 加工任务目的topic_id以及别名
-         * @type {Array.<DataTransformResouceInfo> || null}
-         */
-        this.DstResources = null;
-
-        /**
-         * 任务类型.  以SrcTopicId为数据源建立预览任务:1，以PreviewLogStatistics为数据源建立预览任务:2  真实任务:3
-         * @type {number || null}
-         */
-        this.TaskType = null;
-
-        /**
-         * 任务启动状态.   默认为1，正常开启,  2关闭
-         * @type {number || null}
-         */
-        this.EnableFlag = null;
-
-        /**
-         * 测试数据
-         * @type {Array.<PreviewLogStatistic> || null}
-         */
-        this.PreviewLogStatistics = null;
+        this.Tags = null;
 
     }
 
@@ -9330,28 +9180,15 @@ class CreateDataTransformRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FuncType = 'FuncType' in params ? params.FuncType : null;
-        this.SrcTopicId = 'SrcTopicId' in params ? params.SrcTopicId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
 
-        if (params.DstResources) {
-            this.DstResources = new Array();
-            for (let z in params.DstResources) {
-                let obj = new DataTransformResouceInfo();
-                obj.deserialize(params.DstResources[z]);
-                this.DstResources.push(obj);
-            }
-        }
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
-
-        if (params.PreviewLogStatistics) {
-            this.PreviewLogStatistics = new Array();
-            for (let z in params.PreviewLogStatistics) {
-                let obj = new PreviewLogStatistic();
-                obj.deserialize(params.PreviewLogStatistics[z]);
-                this.PreviewLogStatistics.push(obj);
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -9359,25 +9196,12 @@ class CreateDataTransformRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMachineGroups返回参数结构体
+ * DeleteMachineGroupInfo返回参数结构体
  * @class
  */
-class DescribeMachineGroupsResponse extends  AbstractModel {
+class DeleteMachineGroupInfoResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 机器组信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MachineGroupInfo> || null}
-         */
-        this.MachineGroups = null;
-
-        /**
-         * 分页的总数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9394,16 +9218,6 @@ class DescribeMachineGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.MachineGroups) {
-            this.MachineGroups = new Array();
-            for (let z in params.MachineGroups) {
-                let obj = new MachineGroupInfo();
-                obj.deserialize(params.MachineGroups[z]);
-                this.MachineGroups.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9589,84 +9403,6 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * ModifyDataTransform返回参数结构体
- * @class
- */
-class ModifyDataTransformResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDataTransformInfo返回参数结构体
- * @class
- */
-class DescribeDataTransformInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据加工任务列表信息
-         * @type {Array.<DataTransformTaskInfo> || null}
-         */
-        this.DataTransformTaskInfos = null;
-
-        /**
-         * 任务总次数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DataTransformTaskInfos) {
-            this.DataTransformTaskInfos = new Array();
-            for (let z in params.DataTransformTaskInfos) {
-                let obj = new DataTransformTaskInfo();
-                obj.deserialize(params.DataTransformTaskInfos[z]);
-                this.DataTransformTaskInfos.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 投递任务出入参 Content
  * @class
  */
@@ -9682,7 +9418,7 @@ class ConsumerContent extends  AbstractModel {
         this.EnableTag = null;
 
         /**
-         * 需要投递的元数据列表，目前仅支持：__SOURCE__，__FILENAME__和__TIMESTAMP__
+         * 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_，\_\_TIMESTAMP\_\_，\_\_HOSTNAME\_\_和\_\_PKGID\_\_
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -9694,6 +9430,13 @@ class ConsumerContent extends  AbstractModel {
          * @type {boolean || null}
          */
         this.TagJsonNotTiled = null;
+
+        /**
+         * 投递时间戳精度，可选项 [1:秒；2:毫秒] ，默认是秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimestampAccuracy = null;
 
     }
 
@@ -9707,6 +9450,7 @@ class ConsumerContent extends  AbstractModel {
         this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
         this.TagJsonNotTiled = 'TagJsonNotTiled' in params ? params.TagJsonNotTiled : null;
+        this.TimestampAccuracy = 'TimestampAccuracy' in params ? params.TimestampAccuracy : null;
 
     }
 }
@@ -9883,9 +9627,7 @@ module.exports = {
     CreateMachineGroupResponse: CreateMachineGroupResponse,
     DescribeConfigMachineGroupsRequest: DescribeConfigMachineGroupsRequest,
     ModifyConfigExtraResponse: ModifyConfigExtraResponse,
-    ModifyLogsetRequest: ModifyLogsetRequest,
     CreateLogsetRequest: CreateLogsetRequest,
-    ModifyDataTransformRequest: ModifyDataTransformRequest,
     LogItem: LogItem,
     SearchLogResponse: SearchLogResponse,
     DeleteTopicRequest: DeleteTopicRequest,
@@ -9906,20 +9648,21 @@ module.exports = {
     AlarmTargetInfo: AlarmTargetInfo,
     DescribeIndexRequest: DescribeIndexRequest,
     DescribeConfigsResponse: DescribeConfigsResponse,
+    DeleteMachineGroupInfoRequest: DeleteMachineGroupInfoRequest,
     CreateLogsetResponse: CreateLogsetResponse,
     DeleteMachineGroupResponse: DeleteMachineGroupResponse,
     Tag: Tag,
     DescribeExportsRequest: DescribeExportsRequest,
     ExtractRuleInfo: ExtractRuleInfo,
     TopicInfo: TopicInfo,
-    DeleteDataTransformResponse: DeleteDataTransformResponse,
+    DescribeConsumerRequest: DescribeConsumerRequest,
     DeleteConfigExtraResponse: DeleteConfigExtraResponse,
     ModifyConsumerRequest: ModifyConsumerRequest,
     CreateIndexResponse: CreateIndexResponse,
     DeleteConfigFromMachineGroupResponse: DeleteConfigFromMachineGroupResponse,
     CreateConsumerResponse: CreateConsumerResponse,
     ModifyMachineGroupResponse: ModifyMachineGroupResponse,
-    DataTransformResouceInfo: DataTransformResouceInfo,
+    RuleInfo: RuleInfo,
     DeleteMachineGroupRequest: DeleteMachineGroupRequest,
     FullTextInfo: FullTextInfo,
     DescribePartitionsResponse: DescribePartitionsResponse,
@@ -9944,6 +9687,7 @@ module.exports = {
     CloseKafkaConsumerResponse: CloseKafkaConsumerResponse,
     RuleTagInfo: RuleTagInfo,
     CreateIndexRequest: CreateIndexRequest,
+    DescribeLogsetsResponse: DescribeLogsetsResponse,
     DeleteConsumerResponse: DeleteConsumerResponse,
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
@@ -9960,17 +9704,16 @@ module.exports = {
     ModifyConsumerResponse: ModifyConsumerResponse,
     DescribeConfigsRequest: DescribeConfigsRequest,
     LogsetInfo: LogsetInfo,
-    DescribeConsumerRequest: DescribeConsumerRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
     ShipperTaskInfo: ShipperTaskInfo,
     CloseKafkaConsumerRequest: CloseKafkaConsumerRequest,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
-    DeleteDataTransformRequest: DeleteDataTransformRequest,
+    DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
     DeleteConfigExtraRequest: DeleteConfigExtraRequest,
     ModifyConfigRequest: ModifyConfigRequest,
-    DescribeLogsetsResponse: DescribeLogsetsResponse,
+    AddMachineGroupInfoRequest: AddMachineGroupInfoRequest,
     JsonInfo: JsonInfo,
     CreateShipperRequest: CreateShipperRequest,
     CreateTopicResponse: CreateTopicResponse,
@@ -9982,30 +9725,27 @@ module.exports = {
     CreateConfigRequest: CreateConfigRequest,
     CreateShipperResponse: CreateShipperResponse,
     DeleteIndexResponse: DeleteIndexResponse,
+    AlarmAnalysisConfig: AlarmAnalysisConfig,
     ModifyIndexRequest: ModifyIndexRequest,
     Column: Column,
-    CompressInfo: CompressInfo,
+    ContentInfo: ContentInfo,
     ValueInfo: ValueInfo,
-    DescribeDataTransformInfoRequest: DescribeDataTransformInfoRequest,
+    GetAlarmLogRequest: GetAlarmLogRequest,
     DeleteShipperResponse: DeleteShipperResponse,
     ExportInfo: ExportInfo,
     DescribeLogContextResponse: DescribeLogContextResponse,
     ConfigInfo: ConfigInfo,
     DeleteExportRequest: DeleteExportRequest,
     SplitPartitionResponse: SplitPartitionResponse,
-    CreateDataTransformResponse: CreateDataTransformResponse,
     LogContextInfo: LogContextInfo,
     ModifyShipperRequest: ModifyShipperRequest,
-    RuleInfo: RuleInfo,
     CreateConfigExtraRequest: CreateConfigExtraRequest,
     CreateConsumerRequest: CreateConsumerRequest,
     AlarmNotice: AlarmNotice,
     ModifyConfigResponse: ModifyConfigResponse,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
-    DataTransformTaskInfo: DataTransformTaskInfo,
     DescribeMachinesResponse: DescribeMachinesResponse,
-    PreviewLogStatistic: PreviewLogStatistic,
-    ContentInfo: ContentInfo,
+    CompressInfo: CompressInfo,
     ApplyConfigToMachineGroupResponse: ApplyConfigToMachineGroupResponse,
     DeleteAlarmRequest: DeleteAlarmRequest,
     CreateConfigResponse: CreateConfigResponse,
@@ -10013,6 +9753,7 @@ module.exports = {
     DeleteConfigFromMachineGroupRequest: DeleteConfigFromMachineGroupRequest,
     ShipperInfo: ShipperInfo,
     KeyValueInfo: KeyValueInfo,
+    AddMachineGroupInfoResponse: AddMachineGroupInfoResponse,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     NoticeReceiver: NoticeReceiver,
@@ -10027,7 +9768,6 @@ module.exports = {
     CreateMachineGroupRequest: CreateMachineGroupRequest,
     DescribeExportsResponse: DescribeExportsResponse,
     ApplyConfigToMachineGroupRequest: ApplyConfigToMachineGroupRequest,
-    GetAlarmLogRequest: GetAlarmLogRequest,
     ContainerFileInfo: ContainerFileInfo,
     CsvInfo: CsvInfo,
     DescribeConfigExtrasRequest: DescribeConfigExtrasRequest,
@@ -10036,14 +9776,12 @@ module.exports = {
     HistogramInfo: HistogramInfo,
     DescribeMachineGroupConfigsRequest: DescribeMachineGroupConfigsRequest,
     ModifyConfigExtraRequest: ModifyConfigExtraRequest,
-    CreateDataTransformRequest: CreateDataTransformRequest,
-    DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
+    ModifyLogsetRequest: ModifyLogsetRequest,
+    DeleteMachineGroupInfoResponse: DeleteMachineGroupInfoResponse,
     DescribeLogsetsRequest: DescribeLogsetsRequest,
     ParquetInfo: ParquetInfo,
     DeleteTopicResponse: DeleteTopicResponse,
     Filter: Filter,
-    ModifyDataTransformResponse: ModifyDataTransformResponse,
-    DescribeDataTransformInfoResponse: DescribeDataTransformInfoResponse,
     ConsumerContent: ConsumerContent,
     CreateExportResponse: CreateExportResponse,
     HostFileInfo: HostFileInfo,

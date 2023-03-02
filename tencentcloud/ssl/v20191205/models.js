@@ -403,6 +403,41 @@ class ModifyCertificateAliasRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyCertificatesExpiringNotificationSwitch返回参数结构体
+ * @class
+ */
+class ModifyCertificatesExpiringNotificationSwitchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID列表
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CommitCertificateInformation请求参数结构体
  * @class
  */
@@ -505,6 +540,114 @@ class ReplaceCertificateResponse extends  AbstractModel {
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 权益包基本信息
+ * @class
+ */
+class PackageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 权益包ID。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 权益包内权益点总量。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 权益包内权益点余量。
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 权益包名称。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 权益点是转入时，来源信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SourceUin = null;
+
+        /**
+         * 权益点状态。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 过期时间。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 更新时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 生成时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 来源类型。
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 转移信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PackageTransferOutInfo> || null}
+         */
+        this.TransferOutInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SourceUin = 'SourceUin' in params ? params.SourceUin : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+
+        if (params.TransferOutInfos) {
+            this.TransferOutInfos = new Array();
+            for (let z in params.TransferOutInfos) {
+                let obj = new PackageTransferOutInfo();
+                obj.deserialize(params.TransferOutInfos[z]);
+                this.TransferOutInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -709,7 +852,7 @@ class Certificates extends  AbstractModel {
         this.Alias = null;
 
         /**
-         * 状态值 0：审核中，1：已通过，2：审核失败，3：已过期，4：已添加 DNS 解析记录，5：OV/EV 证书，待提交资料，6：订单取消中，7：已取消，8：已提交资料， 待上传确认函。
+         * 状态。0：审核中，1：已通过，2：审核失败，3：已过期，4：验证方式为 DNS_AUTO 类型的证书， 已添加DNS记录，5：企业证书，待提交，6：订单取消中，7：已取消，8：已提交资料， 待上传确认函，9：证书吊销中，10：已吊销，11：重颁发中，12：待上传吊销确认函，13：免费证书待提交资料状态，14：已退款，
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -862,6 +1005,62 @@ class Certificates extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 是否已忽略到期通知
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsIgnore = null;
+
+        /**
+         * 是否国密证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsSM = null;
+
+        /**
+         * 证书算法
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EncryptAlgorithm = null;
+
+        /**
+         * 上传CA证书的加密算法
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CAEncryptAlgorithms = null;
+
+        /**
+         * 上传CA证书的过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CAEndTimes = null;
+
+        /**
+         * 上传CA证书的通用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CACommonNames = null;
+
+        /**
+         * 证书预审核信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PreAuditInfo || null}
+         */
+        this.PreAuditInfo = null;
+
+        /**
+         * 是否自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -919,6 +1118,19 @@ class Certificates extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.IsIgnore = 'IsIgnore' in params ? params.IsIgnore : null;
+        this.IsSM = 'IsSM' in params ? params.IsSM : null;
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
+        this.CAEncryptAlgorithms = 'CAEncryptAlgorithms' in params ? params.CAEncryptAlgorithms : null;
+        this.CAEndTimes = 'CAEndTimes' in params ? params.CAEndTimes : null;
+        this.CACommonNames = 'CACommonNames' in params ? params.CACommonNames : null;
+
+        if (params.PreAuditInfo) {
+            let obj = new PreAuditInfo();
+            obj.deserialize(params.PreAuditInfo)
+            this.PreAuditInfo = obj;
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1112,6 +1324,27 @@ class RootCertificates extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 国密签名证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Sign = null;
+
+        /**
+         * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * 标准证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Standard = null;
+
     }
 
     /**
@@ -1121,6 +1354,9 @@ class RootCertificates extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Sign = 'Sign' in params ? params.Sign : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.Standard = 'Standard' in params ? params.Standard : null;
 
     }
 }
@@ -1508,6 +1744,100 @@ class UploadConfirmLetterRequest extends  AbstractModel {
 }
 
 /**
+ * 权益包转出详情
+ * @class
+ */
+class PackageTransferOutInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 权益包ID。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 转移码。
+         * @type {string || null}
+         */
+        this.TransferCode = null;
+
+        /**
+         * 本次转移点数。
+         * @type {number || null}
+         */
+        this.TransferCount = null;
+
+        /**
+         * 转入的PackageID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReceivePackageId = null;
+
+        /**
+         * 本次转移过期时间。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 本次转移生成时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 本次转移更新时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 转移状态。
+         * @type {string || null}
+         */
+        this.TransferStatus = null;
+
+        /**
+         * 接收者uin。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReceiverUin = null;
+
+        /**
+         * 接收时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReceiveTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.TransferCode = 'TransferCode' in params ? params.TransferCode : null;
+        this.TransferCount = 'TransferCount' in params ? params.TransferCount : null;
+        this.ReceivePackageId = 'ReceivePackageId' in params ? params.ReceivePackageId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.TransferStatus = 'TransferStatus' in params ? params.TransferStatus : null;
+        this.ReceiverUin = 'ReceiverUin' in params ? params.ReceiverUin : null;
+        this.ReceiveTime = 'ReceiveTime' in params ? params.ReceiveTime : null;
+
+    }
+}
+
+/**
  * 证书操作日志。
  * @class
  */
@@ -1776,6 +2106,18 @@ class ApplyCertificateRequest extends  AbstractModel {
          */
         this.OldCertificateId = null;
 
+        /**
+         * 权益包ID，用于免费证书扩容包使用
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 签发后是否删除自动域名验证记录， 默认为否；仅域名为DNS_AUTO验证类型支持传参
+         * @type {boolean || null}
+         */
+        this.DeleteDnsAutoRecord = null;
+
     }
 
     /**
@@ -1797,6 +2139,8 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.CsrKeyPassword = 'CsrKeyPassword' in params ? params.CsrKeyPassword : null;
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.DeleteDnsAutoRecord = 'DeleteDnsAutoRecord' in params ? params.DeleteDnsAutoRecord : null;
 
     }
 }
@@ -2124,11 +2468,18 @@ class DeployedResources extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 关联资源ID或关联域名
+         * 不建议使用。字段返回和Resources相同。本字段后续只返回null
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
+
+        /**
+         * 关联资源ID或关联域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Resources = null;
 
     }
 
@@ -2143,6 +2494,7 @@ class DeployedResources extends  AbstractModel {
         this.Count = 'Count' in params ? params.Count : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.Resources = 'Resources' in params ? params.Resources : null;
 
     }
 }
@@ -2415,6 +2767,27 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.EncryptPrivateKey = null;
 
         /**
+         * 签名证书 SHA1指纹
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CertFingerprint = null;
+
+        /**
+         * 加密证书 SHA1指纹 （国密证书特有）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EncryptCertFingerprint = null;
+
+        /**
+         * 证书算法
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EncryptAlgorithm = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2494,6 +2867,9 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         }
         this.EncryptCert = 'EncryptCert' in params ? params.EncryptCert : null;
         this.EncryptPrivateKey = 'EncryptPrivateKey' in params ? params.EncryptPrivateKey : null;
+        this.CertFingerprint = 'CertFingerprint' in params ? params.CertFingerprint : null;
+        this.EncryptCertFingerprint = 'EncryptCertFingerprint' in params ? params.EncryptCertFingerprint : null;
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2956,6 +3332,41 @@ class ProjectInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
+ * @class
+ */
+class ModifyCertificatesExpiringNotificationSwitchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID列表。最多50个
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIds = null;
+
+        /**
+         * 0:不忽略通知。1:忽略通知
+         * @type {number || null}
+         */
+        this.SwitchStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
+        this.SwitchStatus = 'SwitchStatus' in params ? params.SwitchStatus : null;
+
+    }
+}
+
+/**
  * DescribeDeployedResources返回参数结构体
  * @class
  */
@@ -3324,6 +3735,41 @@ class VerifyManagerRequest extends  AbstractModel {
 }
 
 /**
+ * UploadCertificate返回参数结构体
+ * @class
+ */
+class UploadCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 返回参数键为 RevokeDomainValidateAuths 的内容。
  * @class
  */
@@ -3377,24 +3823,54 @@ class RevokeDomainValidateAuths extends  AbstractModel {
 }
 
 /**
- * UploadCertificate返回参数结构体
+ * DescribePackages请求参数结构体
  * @class
  */
-class UploadCertificateResponse extends  AbstractModel {
+class DescribePackagesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 证书 ID。
-         * @type {string || null}
+         * 偏移量，默认0。
+         * @type {number || null}
          */
-        this.CertificateId = null;
+        this.Offset = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 限制数目，默认20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按状态筛选。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Status = null;
+
+        /**
+         * 按过期时间升序或降序排列。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 按权益包ID搜索。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 按权益包类型搜索。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 子产品编号
+         * @type {number || null}
+         */
+        this.Pid = null;
 
     }
 
@@ -3405,8 +3881,13 @@ class UploadCertificateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -3874,7 +4355,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 每页数量，默认20。
+         * 每页数量，默认20。最大1000
          * @type {number || null}
          */
         this.Limit = null;
@@ -3904,7 +4385,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.ExpirationSort = null;
 
         /**
-         * 证书状态。
+         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。
          * @type {Array.<number> || null}
          */
         this.CertificateStatus = null;
@@ -3933,6 +4414,18 @@ class DescribeCertificatesRequest extends  AbstractModel {
          */
         this.FilterSource = null;
 
+        /**
+         * 是否筛选国密证书。1:筛选  0:不筛选
+         * @type {number || null}
+         */
+        this.IsSM = null;
+
+        /**
+         * 筛选证书是否即将过期，传1是筛选，0不筛选
+         * @type {number || null}
+         */
+        this.FilterExpiring = null;
+
     }
 
     /**
@@ -3953,6 +4446,65 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Upload = 'Upload' in params ? params.Upload : null;
         this.Renew = 'Renew' in params ? params.Renew : null;
         this.FilterSource = 'FilterSource' in params ? params.FilterSource : null;
+        this.IsSM = 'IsSM' in params ? params.IsSM : null;
+        this.FilterExpiring = 'FilterExpiring' in params ? params.FilterExpiring : null;
+
+    }
+}
+
+/**
+ * DescribePackages返回参数结构体
+ * @class
+ */
+class DescribePackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 权益包列表。
+         * @type {Array.<PackageInfo> || null}
+         */
+        this.Packages = null;
+
+        /**
+         * 总条数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 权益点总余额。
+         * @type {number || null}
+         */
+        this.TotalBalance = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Packages) {
+            this.Packages = new Array();
+            for (let z in params.Packages) {
+                let obj = new PackageInfo();
+                obj.deserialize(params.Packages[z]);
+                this.Packages.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalBalance = 'TotalBalance' in params ? params.TotalBalance : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4135,6 +4687,51 @@ class RevokeCertificateRequest extends  AbstractModel {
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * 预审核信息列表
+ * @class
+ */
+class PreAuditInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书总年限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalPeriod = null;
+
+        /**
+         * 证书当前年限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NowPeriod = null;
+
+        /**
+         * 证书预审核管理人ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalPeriod = 'TotalPeriod' in params ? params.TotalPeriod : null;
+        this.NowPeriod = 'NowPeriod' in params ? params.NowPeriod : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
 
     }
 }
@@ -4368,9 +4965,11 @@ module.exports = {
     DeleteCertificateRequest: DeleteCertificateRequest,
     DescribeCertificateOperateLogsResponse: DescribeCertificateOperateLogsResponse,
     ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
+    ModifyCertificatesExpiringNotificationSwitchResponse: ModifyCertificatesExpiringNotificationSwitchResponse,
     CommitCertificateInformationRequest: CommitCertificateInformationRequest,
     DownloadCertificateResponse: DownloadCertificateResponse,
     ReplaceCertificateResponse: ReplaceCertificateResponse,
+    PackageInfo: PackageInfo,
     SubmitAuditManagerResponse: SubmitAuditManagerResponse,
     DownloadCertificateRequest: DownloadCertificateRequest,
     CancelCertificateOrderRequest: CancelCertificateOrderRequest,
@@ -4383,6 +4982,7 @@ module.exports = {
     DescribeCertificateResponse: DescribeCertificateResponse,
     HostCertificateResponse: HostCertificateResponse,
     UploadConfirmLetterRequest: UploadConfirmLetterRequest,
+    PackageTransferOutInfo: PackageTransferOutInfo,
     OperationLog: OperationLog,
     VerifyManagerResponse: VerifyManagerResponse,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
@@ -4408,6 +5008,7 @@ module.exports = {
     DescribeManagerDetailRequest: DescribeManagerDetailRequest,
     DvAuthDetail: DvAuthDetail,
     ProjectInfo: ProjectInfo,
+    ModifyCertificatesExpiringNotificationSwitchRequest: ModifyCertificatesExpiringNotificationSwitchRequest,
     DescribeDeployedResourcesResponse: DescribeDeployedResourcesResponse,
     DescribeCertificateOperateLogsRequest: DescribeCertificateOperateLogsRequest,
     CancelCertificateOrderResponse: CancelCertificateOrderResponse,
@@ -4417,18 +5018,21 @@ module.exports = {
     UploadConfirmLetterResponse: UploadConfirmLetterResponse,
     DeleteManagerResponse: DeleteManagerResponse,
     VerifyManagerRequest: VerifyManagerRequest,
-    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
     UploadCertificateResponse: UploadCertificateResponse,
+    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
+    DescribePackagesRequest: DescribePackagesRequest,
     CheckCertificateChainRequest: CheckCertificateChainRequest,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     DescribeManagerDetailResponse: DescribeManagerDetailResponse,
     ManagerStatusInfo: ManagerStatusInfo,
     SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
+    DescribePackagesResponse: DescribePackagesResponse,
     DescribeManagersRequest: DescribeManagersRequest,
     CompleteCertificateResponse: CompleteCertificateResponse,
     SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
     RevokeCertificateRequest: RevokeCertificateRequest,
+    PreAuditInfo: PreAuditInfo,
     SubmittedData: SubmittedData,
 
 }

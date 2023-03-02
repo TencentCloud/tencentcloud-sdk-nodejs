@@ -24,7 +24,10 @@ const DeleteProjectRequest = models.DeleteProjectRequest;
 const DescribeProjectLimitsResponse = models.DescribeProjectLimitsResponse;
 const DescribeTawInstancesRequest = models.DescribeTawInstancesRequest;
 const DeleteOfflineLogConfigResponse = models.DeleteOfflineLogConfigResponse;
+const ResumeProjectResponse = models.ResumeProjectResponse;
+const DescribeRumLogListResponse = models.DescribeRumLogListResponse;
 const DescribeDataPvUrlInfoResponse = models.DescribeDataPvUrlInfoResponse;
+const StopProjectResponse = models.StopProjectResponse;
 const DescribeDataFetchUrlResponse = models.DescribeDataFetchUrlResponse;
 const DescribeErrorRequest = models.DescribeErrorRequest;
 const StopInstanceRequest = models.StopInstanceRequest;
@@ -55,6 +58,7 @@ const DescribeLogExportsResponse = models.DescribeLogExportsResponse;
 const DescribeUvListRequest = models.DescribeUvListRequest;
 const DescribeTawAreasResponse = models.DescribeTawAreasResponse;
 const DescribeDataRequest = models.DescribeDataRequest;
+const StopProjectRequest = models.StopProjectRequest;
 const CreateOfflineLogConfigResponse = models.CreateOfflineLogConfigResponse;
 const ModifyProjectLimitRequest = models.ModifyProjectLimitRequest;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
@@ -62,6 +66,7 @@ const DescribeDataPerformancePageRequest = models.DescribeDataPerformancePageReq
 const DeleteReleaseFileRequest = models.DeleteReleaseFileRequest;
 const ResumeInstanceRequest = models.ResumeInstanceRequest;
 const DescribeDataFetchUrlRequest = models.DescribeDataFetchUrlRequest;
+const DescribeRumLogExportRequest = models.DescribeRumLogExportRequest;
 const DescribeDataLogUrlStatisticsResponse = models.DescribeDataLogUrlStatisticsResponse;
 const CreateProjectResponse = models.CreateProjectResponse;
 const StopInstanceResponse = models.StopInstanceResponse;
@@ -72,10 +77,14 @@ const DescribeOfflineLogRecordsRequest = models.DescribeOfflineLogRecordsRequest
 const DescribeDataPvUrlStatisticsRequest = models.DescribeDataPvUrlStatisticsRequest;
 const ReleaseFile = models.ReleaseFile;
 const ModifyProjectLimitResponse = models.ModifyProjectLimitResponse;
+const DescribeRumLogExportsResponse = models.DescribeRumLogExportsResponse;
 const DescribeDataStaticProjectRequest = models.DescribeDataStaticProjectRequest;
+const DescribeRumStatsLogListRequest = models.DescribeRumStatsLogListRequest;
+const ResumeProjectRequest = models.ResumeProjectRequest;
 const ProjectLimit = models.ProjectLimit;
 const DeleteLogExportRequest = models.DeleteLogExportRequest;
-const DescribeWhitelistsResponse = models.DescribeWhitelistsResponse;
+const DescribeRumGroupLogResponse = models.DescribeRumGroupLogResponse;
+const DescribeRumStatsLogListResponse = models.DescribeRumStatsLogListResponse;
 const CreateWhitelistRequest = models.CreateWhitelistRequest;
 const DescribeDataPvUrlStatisticsResponse = models.DescribeDataPvUrlStatisticsResponse;
 const DescribeDataLogUrlInfoRequest = models.DescribeDataLogUrlInfoRequest;
@@ -118,13 +127,18 @@ const DescribeDataWebVitalsPageResponse = models.DescribeDataWebVitalsPageRespon
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDataEventUrlRequest = models.DescribeDataEventUrlRequest;
 const DescribeOfflineLogConfigsRequest = models.DescribeOfflineLogConfigsRequest;
+const DescribeRumGroupLogRequest = models.DescribeRumGroupLogRequest;
 const DeleteOfflineLogConfigRequest = models.DeleteOfflineLogConfigRequest;
+const DescribeWhitelistsResponse = models.DescribeWhitelistsResponse;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DescribeDataReportCountResponse = models.DescribeDataReportCountResponse;
 const DescribeDataPerformanceProjectRequest = models.DescribeDataPerformanceProjectRequest;
+const DescribeRumLogExportResponse = models.DescribeRumLogExportResponse;
+const DescribeRumLogExportsRequest = models.DescribeRumLogExportsRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
+const DescribeRumLogListRequest = models.DescribeRumLogListRequest;
 const DescribeDataStaticResourceRequest = models.DescribeDataStaticResourceRequest;
 const DescribeTawInstancesResponse = models.DescribeTawInstancesResponse;
 const DescribePvListRequest = models.DescribePvListRequest;
@@ -160,6 +174,17 @@ class RumClient extends AbstractClient {
     }
 
     /**
+     * 获取项目下的日志列表，分钟级
+     * @param {DescribeRumStatsLogListRequest} req
+     * @param {function(string, DescribeRumStatsLogListResponse):void} cb
+     * @public
+     */
+    DescribeRumStatsLogList(req, cb) {
+        let resp = new DescribeRumStatsLogListResponse();
+        this.request("DescribeRumStatsLogList", req, resp, cb);
+    }
+
+    /**
      * 创建对应项目的文件记录
      * @param {CreateReleaseFileRequest} req
      * @param {function(string, CreateReleaseFileResponse):void} cb
@@ -179,6 +204,17 @@ class RumClient extends AbstractClient {
     DescribeScores(req, cb) {
         let resp = new DescribeScoresResponse();
         this.request("DescribeScores", req, resp, cb);
+    }
+
+    /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     * @param {DescribeRumLogListRequest} req
+     * @param {function(string, DescribeRumLogListResponse):void} cb
+     * @public
+     */
+    DescribeRumLogList(req, cb) {
+        let resp = new DescribeRumLogListResponse();
+        this.request("DescribeRumLogList", req, resp, cb);
     }
 
     /**
@@ -215,7 +251,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 获取DescribeDataFetchProject信息
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      * @param {DescribeDataFetchProjectRequest} req
      * @param {function(string, DescribeDataFetchProjectResponse):void} cb
      * @public
@@ -237,6 +273,28 @@ class RumClient extends AbstractClient {
     }
 
     /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     * @param {DescribeRumLogExportRequest} req
+     * @param {function(string, DescribeRumLogExportResponse):void} cb
+     * @public
+     */
+    DescribeRumLogExport(req, cb) {
+        let resp = new DescribeRumLogExportResponse();
+        this.request("DescribeRumLogExport", req, resp, cb);
+    }
+
+    /**
+     * 获取项目下的日志导出列表
+     * @param {DescribeRumLogExportsRequest} req
+     * @param {function(string, DescribeRumLogExportsResponse):void} cb
+     * @public
+     */
+    DescribeRumLogExports(req, cb) {
+        let resp = new DescribeRumLogExportsResponse();
+        this.request("DescribeRumLogExports", req, resp, cb);
+    }
+
+    /**
      * 删除用户名下的星标项目
      * @param {DeleteStarProjectRequest} req
      * @param {function(string, DeleteStarProjectResponse):void} cb
@@ -248,7 +306,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 恢复实例
+     * 恢复 RUM 业务系统，恢复后，用户可以正常使用和上报数据
      * @param {ResumeInstanceRequest} req
      * @param {function(string, ResumeInstanceResponse):void} cb
      * @public
@@ -281,7 +339,18 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     * 获取项目下的日志聚合信息
+     * @param {DescribeRumGroupLogRequest} req
+     * @param {function(string, DescribeRumGroupLogResponse):void} cb
+     * @public
+     */
+    DescribeRumGroupLog(req, cb) {
+        let resp = new DescribeRumGroupLogResponse();
+        this.request("DescribeRumGroupLog", req, resp, cb);
+    }
+
+    /**
+     * (已下线，请用DescribeRumLogList)
      * @param {DescribeLogListRequest} req
      * @param {function(string, DescribeLogListResponse):void} cb
      * @public
@@ -303,7 +372,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 创建Rum实例
+     * 创建 RUM 业务系统
      * @param {CreateTawInstanceRequest} req
      * @param {function(string, CreateTawInstanceResponse):void} cb
      * @public
@@ -422,7 +491,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 修改实例信息
+     * 修改 RUM 业务系统
      * @param {ModifyInstanceRequest} req
      * @param {function(string, ModifyInstanceResponse):void} cb
      * @public
@@ -444,7 +513,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 获取项目上报率列表
+     * 获取应用上报抽样信息
      * @param {DescribeProjectLimitsRequest} req
      * @param {function(string, DescribeProjectLimitsResponse):void} cb
      * @public
@@ -485,6 +554,28 @@ class RumClient extends AbstractClient {
     DescribeProjects(req, cb) {
         let resp = new DescribeProjectsResponse();
         this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
+     * 恢复应用使用与上报数据
+     * @param {ResumeProjectRequest} req
+     * @param {function(string, ResumeProjectResponse):void} cb
+     * @public
+     */
+    ResumeProject(req, cb) {
+        let resp = new ResumeProjectResponse();
+        this.request("ResumeProject", req, resp, cb);
+    }
+
+    /**
+     * 停止项目使用与上报数据
+     * @param {StopProjectRequest} req
+     * @param {function(string, StopProjectResponse):void} cb
+     * @public
+     */
+    StopProject(req, cb) {
+        let resp = new StopProjectResponse();
+        this.request("StopProject", req, resp, cb);
     }
 
     /**
@@ -532,7 +623,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 修改 rum 项目信息
+     * 修改 RUM 应用信息
      * @param {ModifyProjectRequest} req
      * @param {function(string, ModifyProjectResponse):void} cb
      * @public
@@ -543,7 +634,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 获取项目对应sourcemap文件列表
+     * 获取应用对应sourcemap文件列表
      * @param {DescribeReleaseFilesRequest} req
      * @param {function(string, DescribeReleaseFilesResponse):void} cb
      * @public
@@ -624,7 +715,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * 创建项目（归属于某个团队）
+     * 创建 RUM 应用（归属于某个团队）
      * @param {CreateProjectRequest} req
      * @param {function(string, CreateProjectResponse):void} cb
      * @public

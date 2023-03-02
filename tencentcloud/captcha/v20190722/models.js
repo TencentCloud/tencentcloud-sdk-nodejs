@@ -213,6 +213,51 @@ class DescribeCaptchaMiniOperDataResponse extends  AbstractModel {
 }
 
 /**
+ * GetTotalTicketStatistics请求参数结构体
+ * @class
+ */
+class GetTotalTicketStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTimeStr = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTimeStr = null;
+
+        /**
+         * 查询粒度
+分钟：“1”
+小时：“2”
+天：“3”
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeStr = 'StartTimeStr' in params ? params.StartTimeStr : null;
+        this.EndTimeStr = 'EndTimeStr' in params ? params.EndTimeStr : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaMiniDataSum返回参数结构体
  * @class
  */
@@ -313,90 +358,91 @@ class DescribeCaptchaMiniDataSumResponse extends  AbstractModel {
 }
 
 /**
- * UpdateCaptchaAppIdInfo请求参数结构体
+ * GetRequestStatistics返回参数结构体
  * @class
  */
-class UpdateCaptchaAppIdInfoRequest extends  AbstractModel {
+class GetRequestStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 验证码应用ID
+         * 查询后数据块
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CaptchaStatisticObj || null}
+         */
+        this.Data = null;
+
+        /**
+         * 验证码返回码
          * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 验证码返回信息
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CaptchaStatisticObj();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetRequestStatistics请求参数结构体
+ * @class
+ */
+class GetRequestStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证码AppId
+         * @type {string || null}
          */
         this.CaptchaAppId = null;
 
         /**
-         * 应用名
+         * 开始时间字符串
          * @type {string || null}
          */
-        this.AppName = null;
+        this.StartTimeStr = null;
 
         /**
-         * 域名限制
+         * 结束时间字符串
          * @type {string || null}
          */
-        this.DomainLimit = null;
+        this.EndTimeStr = null;
 
         /**
-         * 场景类型
-         * @type {number || null}
-         */
-        this.SceneType = null;
-
-        /**
-         * 验证码类型
-         * @type {number || null}
-         */
-        this.CapType = null;
-
-        /**
-         * 风险级别
-         * @type {number || null}
-         */
-        this.EvilInterceptGrade = null;
-
-        /**
-         * 智能检测
-         * @type {number || null}
-         */
-        this.SmartVerify = null;
-
-        /**
-         * 开启智能引擎
-         * @type {number || null}
-         */
-        this.SmartEngine = null;
-
-        /**
-         * web风格
+         * 查询粒度
          * @type {string || null}
          */
-        this.SchemeColor = null;
-
-        /**
-         * 语言
-         * @type {number || null}
-         */
-        this.CaptchaLanguage = null;
-
-        /**
-         * 告警邮箱
-         * @type {string || null}
-         */
-        this.MailAlarm = null;
-
-        /**
-         * 是否全屏
-         * @type {number || null}
-         */
-        this.TopFullScreen = null;
-
-        /**
-         * 流量限制
-         * @type {number || null}
-         */
-        this.TrafficThreshold = null;
+        this.Dimension = null;
 
     }
 
@@ -408,18 +454,9 @@ class UpdateCaptchaAppIdInfoRequest extends  AbstractModel {
             return;
         }
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.DomainLimit = 'DomainLimit' in params ? params.DomainLimit : null;
-        this.SceneType = 'SceneType' in params ? params.SceneType : null;
-        this.CapType = 'CapType' in params ? params.CapType : null;
-        this.EvilInterceptGrade = 'EvilInterceptGrade' in params ? params.EvilInterceptGrade : null;
-        this.SmartVerify = 'SmartVerify' in params ? params.SmartVerify : null;
-        this.SmartEngine = 'SmartEngine' in params ? params.SmartEngine : null;
-        this.SchemeColor = 'SchemeColor' in params ? params.SchemeColor : null;
-        this.CaptchaLanguage = 'CaptchaLanguage' in params ? params.CaptchaLanguage : null;
-        this.MailAlarm = 'MailAlarm' in params ? params.MailAlarm : null;
-        this.TopFullScreen = 'TopFullScreen' in params ? params.TopFullScreen : null;
-        this.TrafficThreshold = 'TrafficThreshold' in params ? params.TrafficThreshold : null;
+        this.StartTimeStr = 'StartTimeStr' in params ? params.StartTimeStr : null;
+        this.EndTimeStr = 'EndTimeStr' in params ? params.EndTimeStr : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
 
     }
 }
@@ -610,6 +647,55 @@ class CaptchaOperDataRes extends  AbstractModel {
 }
 
 /**
+ * GetTicketStatistics请求参数结构体
+ * @class
+ */
+class GetTicketStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证码AppId
+         * @type {string || null}
+         */
+        this.CaptchaAppId = null;
+
+        /**
+         * 开始时间字符串
+         * @type {string || null}
+         */
+        this.StartTimeStr = null;
+
+        /**
+         * 结束时间字符串
+         * @type {string || null}
+         */
+        this.EndTimeStr = null;
+
+        /**
+         * 查询粒度
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
+        this.StartTimeStr = 'StartTimeStr' in params ? params.StartTimeStr : null;
+        this.EndTimeStr = 'EndTimeStr' in params ? params.EndTimeStr : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaTicketData 返回的数据结构
  * @class
  */
@@ -661,6 +747,110 @@ class DescribeCaptchaUserAllAppIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * GetTotalTicketStatistics返回参数结构体
+ * @class
+ */
+class GetTotalTicketStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CaptchaStatisticObj || null}
+         */
+        this.Data = null;
+
+        /**
+         * 返回码
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 返回信息
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CaptchaStatisticObj();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 验证码票据校验趋势obj
+ * @class
+ */
+class TicketCheckTrendObj extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间参数
+         * @type {string || null}
+         */
+        this.Ftime = null;
+
+        /**
+         * 票据校验量
+         * @type {number || null}
+         */
+        this.TicketCount = null;
+
+        /**
+         * 票据通过量
+         * @type {number || null}
+         */
+        this.TicketThroughput = null;
+
+        /**
+         * 票据拦截量
+         * @type {number || null}
+         */
+        this.TicketIntercept = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ftime = 'Ftime' in params ? params.Ftime : null;
+        this.TicketCount = 'TicketCount' in params ? params.TicketCount : null;
+        this.TicketThroughput = 'TicketThroughput' in params ? params.TicketThroughput : null;
+        this.TicketIntercept = 'TicketIntercept' in params ? params.TicketIntercept : null;
 
     }
 }
@@ -725,31 +915,36 @@ class DescribeCaptchaMiniDataResponse extends  AbstractModel {
 }
 
 /**
- * UpdateCaptchaAppIdInfo返回参数结构体
+ * 拦截率趋势obj
  * @class
  */
-class UpdateCaptchaAppIdInfoResponse extends  AbstractModel {
+class InterceptPerTrendObj extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回码 0 成功，其它失败
+         * 时间参数
+         * @type {string || null}
+         */
+        this.Ftime = null;
+
+        /**
+         * 拦截率
          * @type {number || null}
          */
-        this.CaptchaCode = null;
+        this.RequestInterceptPer = null;
 
         /**
-         * 返回操作信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 答案拦截率
+         * @type {number || null}
          */
-        this.CaptchaMsg = null;
+        this.AnswerInterceptPer = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 策略拦截率
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.PolicyInterceptPer = null;
 
     }
 
@@ -760,9 +955,10 @@ class UpdateCaptchaAppIdInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
-        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ftime = 'Ftime' in params ? params.Ftime : null;
+        this.RequestInterceptPer = 'RequestInterceptPer' in params ? params.RequestInterceptPer : null;
+        this.AnswerInterceptPer = 'AnswerInterceptPer' in params ? params.AnswerInterceptPer : null;
+        this.PolicyInterceptPer = 'PolicyInterceptPer' in params ? params.PolicyInterceptPer : null;
 
     }
 }
@@ -866,6 +1062,49 @@ class DescribeCaptchaMiniRiskResultRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateCaptchaAppIdInfo返回参数结构体
+ * @class
+ */
+class UpdateCaptchaAppIdInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回码 0 成功，其它失败
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 返回操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 用户注册的APPID和应用名称对象
  * @class
  */
@@ -960,10 +1199,22 @@ class DescribeCaptchaDataSumResponse extends  AbstractModel {
         this.CaptchaCode = null;
 
         /**
-         * 票据校验量
+         * 票据校验总量
          * @type {number || null}
          */
         this.CheckTicketSum = null;
+
+        /**
+         * 票据验证通过量
+         * @type {number || null}
+         */
+        this.TicketThroughputSum = null;
+
+        /**
+         * 票据验证拦截量
+         * @type {number || null}
+         */
+        this.TicketInterceptSum = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -987,7 +1238,44 @@ class DescribeCaptchaDataSumResponse extends  AbstractModel {
         this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
         this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
         this.CheckTicketSum = 'CheckTicketSum' in params ? params.CheckTicketSum : null;
+        this.TicketThroughputSum = 'TicketThroughputSum' in params ? params.TicketThroughputSum : null;
+        this.TicketInterceptSum = 'TicketInterceptSum' in params ? params.TicketInterceptSum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCaptchaTicketData 返回的数据结构
+ * @class
+ */
+class TicketThroughUnit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.DateKey = null;
+
+        /**
+         * 票据验证的通过量
+         * @type {number || null}
+         */
+        this.Through = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DateKey = 'DateKey' in params ? params.DateKey : null;
+        this.Through = 'Through' in params ? params.Through : null;
 
     }
 }
@@ -1030,6 +1318,74 @@ class DescribeCaptchaTicketDataRequest extends  AbstractModel {
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.Start = 'Start' in params ? params.Start : null;
         this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
+ * DescribeCaptchaResult返回参数结构体
+ * @class
+ */
+class DescribeCaptchaResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1 OK 验证通过
+7 captcha no match 传入的Randstr不合法，请检查Randstr是否与前端返回的Randstr一致
+8 ticket expired 传入的Ticket已过期（Ticket有效期5分钟），请重新生成Ticket、Randstr进行校验
+9 ticket reused 传入的Ticket被重复使用，请重新生成Ticket、Randstr进行校验
+15 decrypt fail 传入的Ticket不合法，请检查Ticket是否与前端返回的Ticket一致
+16 appid-ticket mismatch 传入的CaptchaAppId错误，请检查CaptchaAppId是否与前端传入的CaptchaAppId一致，并且保障CaptchaAppId是从验证码控制台【验证管理】->【基础配置】中获取
+21 diff 票据校验异常，可能的原因是（1）若Ticket包含terror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含terror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。
+100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 无感验证模式下，该参数返回验证结果：
+EvilLevel=0 请求无恶意
+EvilLevel=100 请求有恶意
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EvilLevel = null;
+
+        /**
+         * 前端获取验证码时间，时间戳格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GetCaptchaTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.EvilLevel = 'EvilLevel' in params ? params.EvilLevel : null;
+        this.GetCaptchaTime = 'GetCaptchaTime' in params ? params.GetCaptchaTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1277,6 +1633,103 @@ class DescribeCaptchaMiniRiskResultResponse extends  AbstractModel {
 }
 
 /**
+ * GetTicketStatistics返回参数结构体
+ * @class
+ */
+class GetTicketStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询后数据块
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CaptchaStatisticObj || null}
+         */
+        this.Data = null;
+
+        /**
+         * 验证码返回码
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 验证码返回信息
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CaptchaStatisticObj();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetTotalRequestStatistics请求参数结构体
+ * @class
+ */
+class GetTotalRequestStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间字符串
+         * @type {string || null}
+         */
+        this.StartTimeStr = null;
+
+        /**
+         * 结束时间字符串
+         * @type {string || null}
+         */
+        this.EndTimeStr = null;
+
+        /**
+         * 查询粒度
+         * @type {string || null}
+         */
+        this.Dimension = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeStr = 'StartTimeStr' in params ? params.StartTimeStr : null;
+        this.EndTimeStr = 'EndTimeStr' in params ? params.EndTimeStr : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaTicketData 返回的数据结构
  * @class
  */
@@ -1307,6 +1760,61 @@ class TicketAmountUnit extends  AbstractModel {
         }
         this.DateKey = 'DateKey' in params ? params.DateKey : null;
         this.Amount = 'Amount' in params ? params.Amount : null;
+
+    }
+}
+
+/**
+ * GetTotalRequestStatistics返回参数结构体
+ * @class
+ */
+class GetTotalRequestStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询后数据块
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CaptchaStatisticObj || null}
+         */
+        this.Data = null;
+
+        /**
+         * 验证码返回码
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 验证码返回信息
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CaptchaStatisticObj();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1347,24 +1855,42 @@ class CaptchaQueryData extends  AbstractModel {
 }
 
 /**
- * DescribeCaptchaTicketData 返回的数据结构
+ * 验证码请求趋势图obj
  * @class
  */
-class TicketThroughUnit extends  AbstractModel {
+class RequestTrendObj extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 时间
+         * 时间参数
          * @type {string || null}
          */
-        this.DateKey = null;
+        this.Ftime = null;
 
         /**
-         * 票据验证的通过量
+         * 请求量
          * @type {number || null}
          */
-        this.Through = null;
+        this.RequestAction = null;
+
+        /**
+         * 验证量
+         * @type {number || null}
+         */
+        this.RequestVerify = null;
+
+        /**
+         * 通过量
+         * @type {number || null}
+         */
+        this.RequestThroughput = null;
+
+        /**
+         * 拦截量
+         * @type {number || null}
+         */
+        this.RequestIntercept = null;
 
     }
 
@@ -1375,8 +1901,11 @@ class TicketThroughUnit extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DateKey = 'DateKey' in params ? params.DateKey : null;
-        this.Through = 'Through' in params ? params.Through : null;
+        this.Ftime = 'Ftime' in params ? params.Ftime : null;
+        this.RequestAction = 'RequestAction' in params ? params.RequestAction : null;
+        this.RequestVerify = 'RequestVerify' in params ? params.RequestVerify : null;
+        this.RequestThroughput = 'RequestThroughput' in params ? params.RequestThroughput : null;
+        this.RequestIntercept = 'RequestIntercept' in params ? params.RequestIntercept : null;
 
     }
 }
@@ -1539,68 +2068,75 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCaptchaResult返回参数结构体
+ * 验证码统计图Obj
  * @class
  */
-class DescribeCaptchaResultResponse extends  AbstractModel {
+class CaptchaStatisticObj extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 1 OK 验证通过
-6 user code len error 验证码长度不匹配，请检查请求是否带Randstr参数，Randstr参数大小写是否有误
-7 captcha no match 验证码答案不匹配/Randstr参数不匹配，请重新生成Randstr、Ticket进行校验
-8 verify timeout 验证码签名超时，票据已过期，请重新生成Randstr、Ticket票进行校验
-9 Sequnce repeat 验证码签名重放，票据重复使用，请重新生成Randstr、Ticket进行校验
-10 Sequnce invalid 验证码签名序列
-11 Cookie invalid 验证码cookie信息不合法，非法请求，可能存在不规范接入
-12 sig len error 签名长度错误
-13 verify ip no match ip不匹配，非法请求，可能存在不规范接入
-15 decrypt fail 验证码签名解密失败，票据校验失败，请检查Ticket票据是否与前端返回Ticket一致
-16 appid no match 验证码强校验appid错误，前端代码 data-appid 和后端 CaptchaAppId 所填写的值，必须和 验证码控制台 中【验证详情】>【基础配置】内的 AppID 一致,请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
-17 cmd no much 验证码系统命令不匹配
-18 uin no match 号码不匹配
-19 seq redirect 重定向验证
-20 opt no vcode 操作使用pt免验证码校验错误
-21 diff 差别，验证错误 
-该情况出现原因一般为，当验证码前端生成terror格式票据并进行后端票据校验时，用户网络较差，该情况下仍会返回可用票据，业务侧可以自行根据需要，进行票据生成或做其他处理。详情参见 [验证码Web前端接入-异常处理文档](https://cloud.tencent.com/document/product/1110/36841#.E5.BC.82.E5.B8.B8.E5.A4.84.E7.90.86)。
-22 captcha type not match 验证码类型与拉取时不一致
-23 verify type error 验证类型错误
-24 invalid pkg 非法请求包
-25 bad visitor 策略拦截
-26 system busy 系统内部错误
-100 param err appsecretkey 参数校验错误，CaptchaAppId 与对应 AppSecretKey 不一致，需检查 AppSecretKey 参数是否有误。其中 CaptchaAppId、 AppSecretKey 在 验证码控制台 的【验证详情】>【基础配置】中获取
-104 Ticket Reuse 票据重复使用，同个票据验证多次，请重新生成Randstr、Ticket进行校验
+         * 请求总量
          * @type {number || null}
          */
-        this.CaptchaCode = null;
+        this.ActionTotal = null;
 
         /**
-         * 状态描述及验证错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CaptchaMsg = null;
-
-        /**
-         * [0,100]，恶意等级
-注意：此字段可能返回 null，表示取不到有效值。
+         * 验证总量
          * @type {number || null}
          */
-        this.EvilLevel = null;
+        this.VerifyTotal = null;
 
         /**
-         * 前端获取验证码时间，时间戳格式
-注意：此字段可能返回 null，表示取不到有效值。
+         * 验证通过总量
          * @type {number || null}
          */
-        this.GetCaptchaTime = null;
+        this.VerifyThroughTotal = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 验证拦截总量
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.VerifyInterceptTotal = null;
+
+        /**
+         * 票据校验总量
+         * @type {number || null}
+         */
+        this.TicketTotal = null;
+
+        /**
+         * 票据通过总量
+         * @type {number || null}
+         */
+        this.TicketThroughTotal = null;
+
+        /**
+         * 票据拦截总量
+         * @type {number || null}
+         */
+        this.TicketInterceptTotal = null;
+
+        /**
+         * 请求趋势图
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RequestTrendObj> || null}
+         */
+        this.RequestTrend = null;
+
+        /**
+         * 拦截率趋势图
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InterceptPerTrendObj> || null}
+         */
+        this.InterceptPerTrend = null;
+
+        /**
+         * 票据校验趋势图
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TicketCheckTrendObj> || null}
+         */
+        this.TicketCheckTrend = null;
 
     }
 
@@ -1611,11 +2147,152 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
-        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
-        this.EvilLevel = 'EvilLevel' in params ? params.EvilLevel : null;
-        this.GetCaptchaTime = 'GetCaptchaTime' in params ? params.GetCaptchaTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ActionTotal = 'ActionTotal' in params ? params.ActionTotal : null;
+        this.VerifyTotal = 'VerifyTotal' in params ? params.VerifyTotal : null;
+        this.VerifyThroughTotal = 'VerifyThroughTotal' in params ? params.VerifyThroughTotal : null;
+        this.VerifyInterceptTotal = 'VerifyInterceptTotal' in params ? params.VerifyInterceptTotal : null;
+        this.TicketTotal = 'TicketTotal' in params ? params.TicketTotal : null;
+        this.TicketThroughTotal = 'TicketThroughTotal' in params ? params.TicketThroughTotal : null;
+        this.TicketInterceptTotal = 'TicketInterceptTotal' in params ? params.TicketInterceptTotal : null;
+
+        if (params.RequestTrend) {
+            this.RequestTrend = new Array();
+            for (let z in params.RequestTrend) {
+                let obj = new RequestTrendObj();
+                obj.deserialize(params.RequestTrend[z]);
+                this.RequestTrend.push(obj);
+            }
+        }
+
+        if (params.InterceptPerTrend) {
+            this.InterceptPerTrend = new Array();
+            for (let z in params.InterceptPerTrend) {
+                let obj = new InterceptPerTrendObj();
+                obj.deserialize(params.InterceptPerTrend[z]);
+                this.InterceptPerTrend.push(obj);
+            }
+        }
+
+        if (params.TicketCheckTrend) {
+            this.TicketCheckTrend = new Array();
+            for (let z in params.TicketCheckTrend) {
+                let obj = new TicketCheckTrendObj();
+                obj.deserialize(params.TicketCheckTrend[z]);
+                this.TicketCheckTrend.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * UpdateCaptchaAppIdInfo请求参数结构体
+ * @class
+ */
+class UpdateCaptchaAppIdInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证码应用ID
+         * @type {number || null}
+         */
+        this.CaptchaAppId = null;
+
+        /**
+         * 应用名
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 域名限制
+         * @type {string || null}
+         */
+        this.DomainLimit = null;
+
+        /**
+         * 场景类型
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * 验证码类型
+         * @type {number || null}
+         */
+        this.CapType = null;
+
+        /**
+         * 风险级别
+         * @type {number || null}
+         */
+        this.EvilInterceptGrade = null;
+
+        /**
+         * 智能检测
+         * @type {number || null}
+         */
+        this.SmartVerify = null;
+
+        /**
+         * 开启智能引擎
+         * @type {number || null}
+         */
+        this.SmartEngine = null;
+
+        /**
+         * web风格
+         * @type {string || null}
+         */
+        this.SchemeColor = null;
+
+        /**
+         * 语言
+         * @type {number || null}
+         */
+        this.CaptchaLanguage = null;
+
+        /**
+         * 告警邮箱
+         * @type {string || null}
+         */
+        this.MailAlarm = null;
+
+        /**
+         * 是否全屏
+         * @type {number || null}
+         */
+        this.TopFullScreen = null;
+
+        /**
+         * 流量限制
+         * @type {number || null}
+         */
+        this.TrafficThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainLimit = 'DomainLimit' in params ? params.DomainLimit : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.CapType = 'CapType' in params ? params.CapType : null;
+        this.EvilInterceptGrade = 'EvilInterceptGrade' in params ? params.EvilInterceptGrade : null;
+        this.SmartVerify = 'SmartVerify' in params ? params.SmartVerify : null;
+        this.SmartEngine = 'SmartEngine' in params ? params.SmartEngine : null;
+        this.SchemeColor = 'SchemeColor' in params ? params.SchemeColor : null;
+        this.CaptchaLanguage = 'CaptchaLanguage' in params ? params.CaptchaLanguage : null;
+        this.MailAlarm = 'MailAlarm' in params ? params.MailAlarm : null;
+        this.TopFullScreen = 'TopFullScreen' in params ? params.TopFullScreen : null;
+        this.TrafficThreshold = 'TrafficThreshold' in params ? params.TrafficThreshold : null;
 
     }
 }
@@ -2206,6 +2883,7 @@ class DescribeCaptchaMiniResultResponse extends  AbstractModel {
 21     ticket error     票据验证错误
 25     invalid ticket     无效票据
 26     system internal error     系统内部错误
+31 	   UnauthorizedOperation.Unauthorized	无有效套餐包/账户已欠费
 100   param err     参数校验错误
          * @type {number || null}
          */
@@ -2294,29 +2972,41 @@ module.exports = {
     CaptchaOperDataInterceptUnit: CaptchaOperDataInterceptUnit,
     CaptchaOperDataTryTimesDistributeUnit: CaptchaOperDataTryTimesDistributeUnit,
     DescribeCaptchaMiniOperDataResponse: DescribeCaptchaMiniOperDataResponse,
+    GetTotalTicketStatisticsRequest: GetTotalTicketStatisticsRequest,
     DescribeCaptchaMiniDataSumResponse: DescribeCaptchaMiniDataSumResponse,
-    UpdateCaptchaAppIdInfoRequest: UpdateCaptchaAppIdInfoRequest,
+    GetRequestStatisticsResponse: GetRequestStatisticsResponse,
+    GetRequestStatisticsRequest: GetRequestStatisticsRequest,
     OutputManageMarketingRiskValue: OutputManageMarketingRiskValue,
     CaptchaOperDataRes: CaptchaOperDataRes,
+    GetTicketStatisticsRequest: GetTicketStatisticsRequest,
     TicketInterceptUnit: TicketInterceptUnit,
     DescribeCaptchaUserAllAppIdRequest: DescribeCaptchaUserAllAppIdRequest,
+    GetTotalTicketStatisticsResponse: GetTotalTicketStatisticsResponse,
+    TicketCheckTrendObj: TicketCheckTrendObj,
     DescribeCaptchaMiniDataResponse: DescribeCaptchaMiniDataResponse,
-    UpdateCaptchaAppIdInfoResponse: UpdateCaptchaAppIdInfoResponse,
+    InterceptPerTrendObj: InterceptPerTrendObj,
     DescribeCaptchaMiniRiskResultRequest: DescribeCaptchaMiniRiskResultRequest,
+    UpdateCaptchaAppIdInfoResponse: UpdateCaptchaAppIdInfoResponse,
     CaptchaUserAllAppId: CaptchaUserAllAppId,
     DescribeCaptchaDataSumResponse: DescribeCaptchaDataSumResponse,
+    TicketThroughUnit: TicketThroughUnit,
     DescribeCaptchaTicketDataRequest: DescribeCaptchaTicketDataRequest,
+    DescribeCaptchaResultResponse: DescribeCaptchaResultResponse,
     DescribeCaptchaMiniDataSumRequest: DescribeCaptchaMiniDataSumRequest,
     CaptchaOperDataTryTimesUnit: CaptchaOperDataTryTimesUnit,
     DescribeCaptchaOperDataRequest: DescribeCaptchaOperDataRequest,
     DescribeCaptchaDataSumRequest: DescribeCaptchaDataSumRequest,
     DescribeCaptchaMiniRiskResultResponse: DescribeCaptchaMiniRiskResultResponse,
+    GetTicketStatisticsResponse: GetTicketStatisticsResponse,
+    GetTotalRequestStatisticsRequest: GetTotalRequestStatisticsRequest,
     TicketAmountUnit: TicketAmountUnit,
+    GetTotalRequestStatisticsResponse: GetTotalRequestStatisticsResponse,
     CaptchaQueryData: CaptchaQueryData,
-    TicketThroughUnit: TicketThroughUnit,
+    RequestTrendObj: RequestTrendObj,
     DescribeCaptchaDataResponse: DescribeCaptchaDataResponse,
     DescribeCaptchaResultRequest: DescribeCaptchaResultRequest,
-    DescribeCaptchaResultResponse: DescribeCaptchaResultResponse,
+    CaptchaStatisticObj: CaptchaStatisticObj,
+    UpdateCaptchaAppIdInfoRequest: UpdateCaptchaAppIdInfoRequest,
     CaptchaOperDataLoadTimeUnit: CaptchaOperDataLoadTimeUnit,
     DescribeCaptchaMiniOperDataRequest: DescribeCaptchaMiniOperDataRequest,
     DescribeCaptchaAppIdInfoRequest: DescribeCaptchaAppIdInfoRequest,

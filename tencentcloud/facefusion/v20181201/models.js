@@ -350,7 +350,7 @@ class FaceFusionRequest extends  AbstractModel {
         this.CelebrityIdentify = null;
 
         /**
-         * 图片Url地址，目前Url方式还不支持，后续会支持，可以使用FuseFace接口
+         * 图片Url地址
          * @type {string || null}
          */
         this.Url = null;

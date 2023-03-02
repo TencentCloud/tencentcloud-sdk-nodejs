@@ -661,12 +661,6 @@ class CreateClusterRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 数据库版本，目前仅支持 10.17
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
          * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种
          * @type {string || null}
          */
@@ -697,7 +691,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 集群付费模式
+         * 实例付费模式
  - PREPAID：预付费，即包年包月
  - POSTPAID_BY_HOUR：按小时后付费
          * @type {string || null}
@@ -709,6 +703,14 @@ class CreateClusterRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClusterName = null;
+
+        /**
+         * TDSQL-C PostgreSQL 合入的社区版本号。
+支持入参值为：10.17。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+注：该参数与DBMajorVersion、DBKernelVersion只能传递一个，且需要传递一个。
+         * @type {string || null}
+         */
+        this.DBVersion = null;
 
         /**
          * 项目Id，默认为0表示默认项目
@@ -741,6 +743,37 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * TDSQL-C PostgreSQL 合入的社区主要版本号。
+支持入参值为：10。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+注：该参数和DBVersion、DBKernelVersion只能传递一个，且需要传递一个。
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * TDSQL-C PostgreSQL 内核版本号。
+支持入参值为：v10.17_r1.4。当输入该参数时，会创建此版本号对应的数据库内核。
+注：该参数和DBVersion、DBMajorVersion只能传递一个，且需要传递一个。
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+         * @type {string || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+         * @type {number || null}
+         */
+        this.Storage = null;
+
     }
 
     /**
@@ -751,7 +784,6 @@ class CreateClusterRequest extends  AbstractModel {
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.MasterUserPassword = 'MasterUserPassword' in params ? params.MasterUserPassword : null;
         this.CPU = 'CPU' in params ? params.CPU : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
@@ -759,11 +791,16 @@ class CreateClusterRequest extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
 
     }
 }
@@ -2053,6 +2090,18 @@ class Instance extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * TDSQL-C PostgreSQL 合入的社区主要版本号
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * TDSQL-C PostgreSQL 内核版本号
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
     }
 
     /**
@@ -2077,6 +2126,8 @@ class Instance extends  AbstractModel {
         this.CPU = 'CPU' in params ? params.CPU : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
 
     }
 }
@@ -2303,7 +2354,7 @@ class Cluster extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 数据库版本
+         * TDSQL-C PostgreSQL 合入的社区版本号
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -2391,6 +2442,27 @@ class Cluster extends  AbstractModel {
          */
         this.EndpointSet = null;
 
+        /**
+         * TDSQL-C PostgreSQL 合入的社区主要版本号
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * TDSQL-C PostgreSQL 内核版本号
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StoragePayMode = null;
+
     }
 
     /**
@@ -2425,6 +2497,9 @@ class Cluster extends  AbstractModel {
                 this.EndpointSet.push(obj);
             }
         }
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
 
     }
 }
@@ -2623,6 +2698,21 @@ class CloneClusterToPointInTimeRequest extends  AbstractModel {
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * 存储付费模式
+ - PREPAID：预付费，即包年包月
+ - POSTPAID_BY_HOUR：按小时后付费
+默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+         * @type {string || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+         * @type {number || null}
+         */
+        this.Storage = null;
+
     }
 
     /**
@@ -2647,6 +2737,8 @@ class CloneClusterToPointInTimeRequest extends  AbstractModel {
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
 
     }
 }

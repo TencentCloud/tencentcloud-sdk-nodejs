@@ -25,7 +25,11 @@ class Item extends  AbstractModel {
         super();
 
         /**
-         * 识别的算式是否正确，算式运算结果: ‘YES’:正确 ‘NO’: 错误 ‘NA’: 非法参数
+         * 识别的算式是否正确，算式运算结果:
+‘YES’:正确 
+‘NO’: 错误 
+‘NA’: 非法参数
+‘EMPTY’: 未作答
          * @type {string || null}
          */
         this.Item = null;
@@ -44,6 +48,7 @@ class Item extends  AbstractModel {
 
         /**
          * 错题推荐答案，算式运算结果正确返回为 ""，算式运算结果错误返回推荐答案 (注:暂不支持多个关系运算符(如 1<10<7)、 无关系运算符(如 frac(1,2)+frac(2,3))、单 位换算(如 1 元=100 角)错题的推荐答案 返回)
+(注:使用@@标记答案填写区域)
          * @type {string || null}
          */
         this.Answer = null;

@@ -17,58 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeVpcRuleOverview返回参数结构体
- * @class
- */
-class DescribeVpcRuleOverviewResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 阻断策略规则数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.StrategyNum = null;
-
-        /**
-         * 启用规则数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.StartRuleNum = null;
-
-        /**
-         * 规则总量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StrategyNum = 'StrategyNum' in params ? params.StrategyNum : null;
-        this.StartRuleNum = 'StartRuleNum' in params ? params.StartRuleNum : null;
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeNatFwInstance请求参数结构体
  * @class
  */
@@ -142,6 +90,41 @@ class DescribeNatFwInstanceWithRegionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyNatAcRule返回参数结构体
+ * @class
+ */
+class ModifyNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 编辑成功后返回新策略ID列表
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -278,6 +261,56 @@ class CfwNatDnatRule extends  AbstractModel {
 }
 
 /**
+ * 防火墙网段信息
+ * @class
+ */
+class FwCidrInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义
+         * @type {string || null}
+         */
+        this.FwCidrType = null;
+
+        /**
+         * 为每个vpc指定防火墙的网段
+         * @type {Array.<FwVpcCidr> || null}
+         */
+        this.FwCidrLst = null;
+
+        /**
+         * 其他防火墙占用网段，一般是防火墙需要独占vpc时指定的网段
+         * @type {string || null}
+         */
+        this.ComFwCidr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FwCidrType = 'FwCidrType' in params ? params.FwCidrType : null;
+
+        if (params.FwCidrLst) {
+            this.FwCidrLst = new Array();
+            for (let z in params.FwCidrLst) {
+                let obj = new FwVpcCidr();
+                obj.deserialize(params.FwCidrLst[z]);
+                this.FwCidrLst.push(obj);
+            }
+        }
+        this.ComFwCidr = 'ComFwCidr' in params ? params.ComFwCidr : null;
+
+    }
+}
+
+/**
  * StaticInfo 告警柱形图统计信息
  
  * @class
@@ -342,6 +375,64 @@ class StaticInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeNatAcRule返回参数结构体
+ * @class
+ */
+class DescribeNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * nat访问控制列表数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescAcItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 未过滤的总条数
+         * @type {number || null}
+         */
+        this.AllTotal = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DescAcItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.AllTotal = 'AllTotal' in params ? params.AllTotal : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyPublicIPSwitchStatus返回参数结构体
  * @class
  */
@@ -385,6 +476,42 @@ class ModifyPublicIPSwitchStatusResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyNatAcRule请求参数结构体
+ * @class
+ */
+class ModifyNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要编辑的规则数组
+         * @type {Array.<CreateNatRuleItem> || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CreateNatRuleItem();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyAcRule返回参数结构体
  * @class
  */
@@ -423,6 +550,49 @@ class ModifyAcRuleResponse extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Info = 'Info' in params ? params.Info : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNatSequenceRules请求参数结构体
+ * @class
+ */
+class ModifyNatSequenceRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+         * @type {Array.<RuleChangeItem> || null}
+         */
+        this.RuleChangeItems = null;
+
+        /**
+         * 规则方向：1，入站；0，出站
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleChangeItems) {
+            this.RuleChangeItems = new Array();
+            for (let z in params.RuleChangeItems) {
+                let obj = new RuleChangeItem();
+                obj.deserialize(params.RuleChangeItems[z]);
+                this.RuleChangeItems.push(obj);
+            }
+        }
+        this.Direction = 'Direction' in params ? params.Direction : null;
 
     }
 }
@@ -516,7 +686,7 @@ vendor：云厂商
 当SourceType为net时，SourceContent为源IP地址或者CIDR地址。
 例如：1.1.1.0/24
 
-当SourceType为template时，SourceContent为源地址模板名称。
+当SourceType为template时，SourceContent为源地址模板id。
 
 当SourceType为location时，SourceContent为源区域。
 例如["BJ11", "ZB"]
@@ -547,7 +717,7 @@ domain: 域名或者ip
 当DestType为net时，DestContent为源IP地址或者CIDR地址。
 例如：1.1.1.0/24
 
-当DestType为template时，DestContent为源地址模板名称。
+当DestType为template时，DestContent为源地址模板id。
 
 当DestType为location时，DestContent为源区域。
 例如["BJ11", "ZB"]
@@ -654,103 +824,117 @@ class IPDefendStatus extends  AbstractModel {
 }
 
 /**
- * 安全组规则
+ * 入侵防御放通封禁规则
  * @class
  */
-class SecurityGroupRule extends  AbstractModel {
+class BlockIgnoreRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 访问源示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
+         * 域名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SourceContent = null;
+        this.Domain = null;
 
         /**
-         * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+         * 规则ip
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SourceType = null;
+        this.Ioc = null;
 
         /**
-         * 访问目的示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
+         * 危险等级
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.DestContent = null;
+        this.Level = null;
 
         /**
-         * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+         * 来源事件名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.DestType = null;
+        this.EventName = null;
 
         /**
-         * 访问控制策略中设置的流量通过云防火墙的方式。取值：
-accept：放行
-drop：拒绝
-         * @type {string || null}
+         * 方向：1入站，0出站
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RuleAction = null;
+        this.Direction = null;
 
         /**
-         * 描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 规则顺序，-1表示最低，1表示最高
-         * @type {string || null}
-         */
-        this.OrderIndex = null;
-
-        /**
-         * 协议；TCP/UDP/ICMP/ANY
+         * 协议
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 访问控制策略的端口。取值：
--1/-1：全部端口
-80：80端口
+         * 地理位置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Port = null;
+        this.Address = null;
 
         /**
-         * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+         * 规则类型：1封禁，2放通
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Action = null;
+
+        /**
+         * 规则生效开始时间
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ServiceTemplateId = null;
+        this.StartTime = null;
 
         /**
-         * 规则对应的唯一id
+         * 规则生效结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Id = null;
+        this.EndTime = null;
 
         /**
-         * 规则状态，true表示启用，false表示禁用
+         * 忽略原因
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Enable = null;
+        this.IgnoreReason = null;
+
+        /**
+         * 安全事件来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqueId = null;
+
+        /**
+         * 规则命中次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MatchTimes = null;
+
+        /**
+         * 国家
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Country = null;
 
     }
 
@@ -761,18 +945,21 @@ drop：拒绝
         if (!params) {
             return;
         }
-        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.DestContent = 'DestContent' in params ? params.DestContent : null;
-        this.DestType = 'DestType' in params ? params.DestType : null;
-        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ioc = 'Ioc' in params ? params.Ioc : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IgnoreReason = 'IgnoreReason' in params ? params.IgnoreReason : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+        this.MatchTimes = 'MatchTimes' in params ? params.MatchTimes : null;
+        this.Country = 'Country' in params ? params.Country : null;
 
     }
 }
@@ -816,90 +1003,6 @@ class ModifyNatFwVpcDnsSwitchRequest extends  AbstractModel {
                 this.DnsVpcSwitchLst.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * 添加安全组Api规则对象
- * @class
- */
-class SecurityGroupApiRuleData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 访问源，入站时为Ip/Cidr，默认为0.0.0.0/0； 出站时当RuleType为1时，支持内网Ip/Cidr, 当RuleType为2时，填实例ID
-         * @type {string || null}
-         */
-        this.SourceId = null;
-
-        /**
-         * 访问目的，出站时为Ip/Cidr，默认为0.0.0.0/0；入站时当RuleType为1时，支持内网Ip/Cidr, 当RuleType为2时，填实例ID
-         * @type {string || null}
-         */
-        this.TargetId = null;
-
-        /**
-         * 协议，支持ANY/TCP/UDP/ICMP
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 端口, 当Protocol为ANY或ICMP时，Port为-1/-1
-         * @type {string || null}
-         */
-        this.Port = null;
-
-        /**
-         * 策略, 1：阻断，2：放行
-         * @type {string || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * 描述
-         * @type {string || null}
-         */
-        this.Detail = null;
-
-        /**
-         * 规则类型，1：VpcId+Ip/Cidr, 2: 实例ID，入站时为访问目的类型，出站时为访问源类型
-         * @type {number || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * 执行顺序，中间插入必传，前插、后插非必传
-         * @type {number || null}
-         */
-        this.OrderIndex = null;
-
-        /**
-         * 私有网络ID，当RuleType为1时必传
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SourceId = 'SourceId' in params ? params.SourceId : null;
-        this.TargetId = 'TargetId' in params ? params.TargetId : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.Detail = 'Detail' in params ? params.Detail : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -1095,24 +1198,24 @@ class VpcZoneData extends  AbstractModel {
 }
 
 /**
- * CreateSecurityGroupRules返回参数结构体
+ * CreateChooseVpcs请求参数结构体
  * @class
  */
-class CreateSecurityGroupRulesResponse extends  AbstractModel {
+class CreateChooseVpcsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 状态值，0：添加成功，非0：添加失败
-         * @type {number || null}
+         * vpc列表
+         * @type {Array.<string> || null}
          */
-        this.Status = null;
+        this.VpcList = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * zone列表
+         * @type {Array.<VpcZoneData> || null}
          */
-        this.RequestId = null;
+        this.AllZoneList = null;
 
     }
 
@@ -1123,8 +1226,16 @@ class CreateSecurityGroupRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VpcList = 'VpcList' in params ? params.VpcList : null;
+
+        if (params.AllZoneList) {
+            this.AllZoneList = new Array();
+            for (let z in params.AllZoneList) {
+                let obj = new VpcZoneData();
+                obj.deserialize(params.AllZoneList[z]);
+                this.AllZoneList.push(obj);
+            }
+        }
 
     }
 }
@@ -1187,7 +1298,7 @@ class DescribeCfwEipsRequest extends  AbstractModel {
         super();
 
         /**
-         * 0：cfw新增模式，1：cfw接入模式
+         * 1：cfw接入模式，目前仅支持接入模式实例
          * @type {number || null}
          */
         this.Mode = null;
@@ -1199,7 +1310,7 @@ class DescribeCfwEipsRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * 防火墙实例id
+         * 防火墙实例id，当前仅支持接入模式的实例
          * @type {string || null}
          */
         this.CfwInstance = null;
@@ -1256,62 +1367,6 @@ class DescribeTLogInfoResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyAllSwitchStatus请求参数结构体
- * @class
- */
-class ModifyAllSwitchStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 状态，0：关闭，1：开启
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 0: 互联网边界防火墙开关，1：vpc防火墙开关
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 选中的防火墙开关Id
-         * @type {Array.<string> || null}
-         */
-        this.Ids = null;
-
-        /**
-         * NAT开关切换类型，1,单个子网，2，同开同关，3，全部
-         * @type {number || null}
-         */
-        this.ChangeType = null;
-
-        /**
-         * NAT实例所在地域
-         * @type {string || null}
-         */
-        this.Area = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Ids = 'Ids' in params ? params.Ids : null;
-        this.ChangeType = 'ChangeType' in params ? params.ChangeType : null;
-        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -1411,101 +1466,68 @@ class DescribeAssociatedInstanceListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeResourceGroup返回参数结构体
+ * 企业安全组关联实例信息
  * @class
  */
-class DescribeResourceGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回树形结构
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeNatRuleOverview返回参数结构体
- * @class
- */
-class DescribeNatRuleOverviewResponse extends  AbstractModel {
+class AssociatedInstanceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
          * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 弹性IP列表
-         * @type {Array.<string> || null}
-         */
-        this.EipList = null;
-
-        /**
-         * 端口转发规则数量
+         * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.DnatNum = null;
+        this.Type = null;
 
         /**
-         * 访问控制规则总数
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * 访问控制规则剩余配额
-         * @type {number || null}
-         */
-        this.RemainNum = null;
-
-        /**
-         * 阻断规则条数
-         * @type {number || null}
-         */
-        this.BlockNum = null;
-
-        /**
-         * 启用规则条数
-         * @type {number || null}
-         */
-        this.EnableNum = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.VpcId = null;
+
+        /**
+         * 私有网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 关联安全组数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SecurityGroupCount = null;
 
     }
 
@@ -1518,12 +1540,39 @@ class DescribeNatRuleOverviewResponse extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.EipList = 'EipList' in params ? params.EipList : null;
-        this.DnatNum = 'DnatNum' in params ? params.DnatNum : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.RemainNum = 'RemainNum' in params ? params.RemainNum : null;
-        this.BlockNum = 'BlockNum' in params ? params.BlockNum : null;
-        this.EnableNum = 'EnableNum' in params ? params.EnableNum : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.SecurityGroupCount = 'SecurityGroupCount' in params ? params.SecurityGroupCount : null;
+
+    }
+}
+
+/**
+ * ModifyStorageSetting返回参数结构体
+ * @class
+ */
+class ModifyStorageSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1643,34 +1692,6 @@ class NatFwInstance extends  AbstractModel {
         this.FwMode = 'FwMode' in params ? params.FwMode : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.NatIp = 'NatIp' in params ? params.NatIp : null;
-
-    }
-}
-
-/**
- * DeleteNatFwInstance请求参数结构体
- * @class
- */
-class DeleteNatFwInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 防火墙实例id
-         * @type {string || null}
-         */
-        this.CfwInstance = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
 
     }
 }
@@ -1861,7 +1882,7 @@ class ModifyBlockIgnoreListRequest extends  AbstractModel {
         super();
 
         /**
-         * 1拦截列表 2 忽略列表
+         * 1封禁列表 2 放通列表
          * @type {number || null}
          */
         this.RuleType = null;
@@ -1879,13 +1900,13 @@ class ModifyBlockIgnoreListRequest extends  AbstractModel {
         this.IocAction = null;
 
         /**
-         * 时间格式：yyyy-MM-dd HH:mm:ss
+         * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 时间格式：yyyy-MM-dd HH:mm:ss
+         * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1974,6 +1995,130 @@ class AddEnterpriseSecurityGroupRulesRequest extends  AbstractModel {
 }
 
 /**
+ * 安全组规则
+ * @class
+ */
+class SecurityGroupRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+         * @type {string || null}
+         */
+        this.SourceContent = null;
+
+        /**
+         * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+         * @type {string || null}
+         */
+        this.DestContent = null;
+
+        /**
+         * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+         * @type {string || null}
+         */
+        this.DestType = null;
+
+        /**
+         * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+accept：放行
+drop：拒绝
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * 描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 规则顺序，-1表示最低，1表示最高
+         * @type {string || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * 协议；TCP/UDP/ICMP/ANY
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 访问控制策略的端口。取值：
+-1/-1：全部端口
+80：80端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceTemplateId = null;
+
+        /**
+         * 规则对应的唯一id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 规则状态，true表示启用，false表示禁用
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.DestContent = 'DestContent' in params ? params.DestContent : null;
+        this.DestType = 'DestType' in params ? params.DestType : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
  * DeleteSecurityGroupRule返回参数结构体
  * @class
  */
@@ -2012,55 +2157,6 @@ class DeleteSecurityGroupRuleResponse extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Info = 'Info' in params ? params.Info : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifySecurityGroupAllRuleStatus请求参数结构体
- * @class
- */
-class ModifySecurityGroupAllRuleStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 列表规则状态，0：全部停用，1：全部启用
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 方向，0：出站，1：入站
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * Edge ID值
-         * @type {string || null}
-         */
-        this.EdgeId = null;
-
-        /**
-         * NAT地域, 腾讯云地域的英文简写
-         * @type {string || null}
-         */
-        this.Area = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
-        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -2123,42 +2219,30 @@ class ModifySequenceRulesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAddrTemplateList请求参数结构体
+ * 执行顺序对象
  * @class
  */
-class DescribeAddrTemplateListRequest extends  AbstractModel {
+class SequenceData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移量，分页用
+         * 规则Id值
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Id = null;
 
         /**
-         * 条数，分页用
+         * 修改前执行顺序
          * @type {number || null}
          */
-        this.Limit = null;
+        this.OrderIndex = null;
 
         /**
-         * 排序字段，取值 'UpdateTime' | 'RulesNum'
-         * @type {string || null}
+         * 修改后执行顺序
+         * @type {number || null}
          */
-        this.By = null;
-
-        /**
-         * 排序，取值 'asc'|'desc'
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * 搜索值
-         * @type {string || null}
-         */
-        this.SearchValue = null;
+        this.NewOrderIndex = null;
 
     }
 
@@ -2169,11 +2253,9 @@ class DescribeAddrTemplateListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.By = 'By' in params ? params.By : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
 
     }
 }
@@ -2234,6 +2316,12 @@ class CreateNatFwInstanceRequest extends  AbstractModel {
          */
         this.CrossAZone = null;
 
+        /**
+         * 指定防火墙使用网段信息
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -2256,6 +2344,12 @@ class CreateNatFwInstanceRequest extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ZoneBak = 'ZoneBak' in params ? params.ZoneBak : null;
         this.CrossAZone = 'CrossAZone' in params ? params.CrossAZone : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -2553,41 +2647,6 @@ true为启用，false为不启用
 }
 
 /**
- * ModifyItemSwitchStatus返回参数结构体
- * @class
- */
-class ModifyItemSwitchStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 修改成功与否状态值 0：修改成功，非 0：修改失败
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyNatFwReSelect返回参数结构体
  * @class
  */
@@ -2868,66 +2927,96 @@ class ModifyPublicIPSwitchStatusRequest extends  AbstractModel {
 }
 
 /**
- * 执行顺序对象
+ * 创建NAT ACL规则参数结构
  * @class
  */
-class SequenceData extends  AbstractModel {
+class CreateNatRuleItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则Id值
-         * @type {number || null}
+         * 访问源示例： net：IP/CIDR(192.168.0.2)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Id = null;
+        this.SourceContent = null;
 
         /**
-         * 修改前执行顺序
+         * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetContent = null;
+
+        /**
+         * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 规则方向：1，入站；0，出站
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * 规则序号
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OrderIndex = null;
 
         /**
-         * 修改后执行顺序
-         * @type {number || null}
-         */
-        this.NewOrderIndex = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
-        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
-
-    }
-}
-
-/**
- * CreateSecurityGroupApiRules返回参数结构体
- * @class
- */
-class CreateSecurityGroupApiRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 状态值，0:添加成功，非0：添加失败
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 规则状态，true表示启用，false表示禁用
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Enable = null;
+
+        /**
+         * 规则对应的唯一id，创建规则时无需填写
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -2938,8 +3027,18 @@ class CreateSecurityGroupApiRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.TargetContent = 'TargetContent' in params ? params.TargetContent : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3299,36 +3398,24 @@ class AssetZone extends  AbstractModel {
 }
 
 /**
- * DescribeAddrTemplateList返回参数结构体
+ * 规则顺序变更项，由原始id值变为新的id值。
  * @class
  */
-class DescribeAddrTemplateListResponse extends  AbstractModel {
+class RuleChangeItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板总数
+         * 原始sequence 值
          * @type {number || null}
          */
-        this.Total = null;
+        this.OrderIndex = null;
 
         /**
-         * 模板列表数据
-         * @type {Array.<TemplateListInfo> || null}
+         * 新的sequence 值
+         * @type {number || null}
          */
-        this.Data = null;
-
-        /**
-         * 模板名称列表
-         * @type {Array.<string> || null}
-         */
-        this.NameList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.NewOrderIndex = null;
 
     }
 
@@ -3339,46 +3426,8 @@ class DescribeAddrTemplateListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new TemplateListInfo();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.NameList = 'NameList' in params ? params.NameList : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * RunSyncAsset请求参数结构体
- * @class
- */
-class RunSyncAssetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 0: 互联网防火墙开关，1：vpc 防火墙开关
-         * @type {number || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
 
     }
 }
@@ -3440,6 +3489,76 @@ class DescribeTLogIpListRequest extends  AbstractModel {
 }
 
 /**
+ * 通用的列表检索过滤选项
+ * @class
+ */
+class CommonFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检索的键值
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 检索的值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 枚举类型，代表name与values之间的匹配关系
+enum FilterOperatorType {
+    //INVALID
+    FILTER_OPERATOR_TYPE_INVALID = 0;
+    //等于
+    FILTER_OPERATOR_TYPE_EQUAL = 1;
+    //大于
+    FILTER_OPERATOR_TYPE_GREATER = 2;
+    //小于
+    FILTER_OPERATOR_TYPE_LESS = 3;
+    //大于等于
+    FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
+    //小于等于
+    FILTER_OPERATOR_TYPE_LESS_EQ = 5;
+    //不等于
+    FILTER_OPERATOR_TYPE_NO_EQ = 6;
+    //in，数组中包含
+    FILTER_OPERATOR_TYPE_IN = 7;
+    //not in
+    FILTER_OPERATOR_TYPE_NOT_IN = 8;
+    //模糊匹配
+    FILTER_OPERATOR_TYPE_FUZZINESS = 9;
+    //存在
+    FILTER_OPERATOR_TYPE_EXIST = 10;
+    //不存在
+    FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
+    //正则
+    FILTER_OPERATOR_TYPE_REGULAR = 12;
+}
+         * @type {number || null}
+         */
+        this.OperatorType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.OperatorType = 'OperatorType' in params ? params.OperatorType : null;
+
+    }
+}
+
+/**
  * DescribeNatFwInstancesInfo请求参数结构体
  * @class
  */
@@ -3485,6 +3604,34 @@ class DescribeNatFwInstancesInfoRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyNatSequenceRules返回参数结构体
+ * @class
+ */
+class ModifyNatSequenceRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3686,41 +3833,6 @@ class CreateNatFwInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAllSwitchStatus返回参数结构体
- * @class
- */
-class ModifyAllSwitchStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 修改成功与否的状态值 0：修改成功，非 0：修改失败
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 新增模式传递参数
  * @class
  */
@@ -3817,6 +3929,63 @@ class DescribeNatFwInfoCountResponse extends  AbstractModel {
         this.NatFwInsCount = 'NatFwInsCount' in params ? params.NatFwInsCount : null;
         this.SubnetCount = 'SubnetCount' in params ? params.SubnetCount : null;
         this.OpenSwitchCount = 'OpenSwitchCount' in params ? params.OpenSwitchCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDefenseSwitch请求参数结构体
+ * @class
+ */
+class DescribeDefenseSwitchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * ModifyEnterpriseSecurityDispatchStatus返回参数结构体
+ * @class
+ */
+class ModifyEnterpriseSecurityDispatchStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0: 修改成功, 其他: 修改失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4021,6 +4190,41 @@ class SecurityGroupListData extends  AbstractModel {
 }
 
 /**
+ * RemoveNatAcRule返回参数结构体
+ * @class
+ */
+class RemoveNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除成功后返回被删除策略的uuid列表
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateNatFwInstanceWithDomain返回参数结构体
  * @class
  */
@@ -4192,6 +4396,41 @@ class DatabaseWhiteListRuleData extends  AbstractModel {
         this.FirstLevelRegionName = 'FirstLevelRegionName' in params ? params.FirstLevelRegionName : null;
         this.SecondLevelRegionName = 'SecondLevelRegionName' in params ? params.SecondLevelRegionName : null;
         this.CloudCode = 'CloudCode' in params ? params.CloudCode : null;
+
+    }
+}
+
+/**
+ * RemoveNatAcRule请求参数结构体
+ * @class
+ */
+class RemoveNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * 规则方向：1，入站；0，出站
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
 
     }
 }
@@ -4536,6 +4775,49 @@ class DescribeBlockStaticListResponse extends  AbstractModel {
 }
 
 /**
+ * AddNatAcRule请求参数结构体
+ * @class
+ */
+class AddNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要添加的nat访问控制规则列表
+         * @type {Array.<CreateNatRuleItem> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+         * @type {string || null}
+         */
+        this.From = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CreateNatRuleItem();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.From = 'From' in params ? params.From : null;
+
+    }
+}
+
+/**
  * ModifySecurityGroupSequenceRules请求参数结构体
  * @class
  */
@@ -4799,7 +5081,7 @@ class ScanResultInfo extends  AbstractModel {
         super();
 
         /**
-         * 暴漏漏洞数量
+         * 暴露漏洞数量
          * @type {number || null}
          */
         this.LeakNum = null;
@@ -4811,7 +5093,7 @@ class ScanResultInfo extends  AbstractModel {
         this.IPNum = null;
 
         /**
-         * 暴漏端口数量
+         * 暴露端口数量
          * @type {number || null}
          */
         this.PortNum = null;
@@ -4883,6 +5165,48 @@ class ModifyRunSyncAssetResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyEnterpriseSecurityGroupRule返回参数结构体
+ * @class
+ */
+class ModifyEnterpriseSecurityGroupRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态值，0：编辑成功，非0：编辑失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 编辑后新生成规则的Id
+         * @type {number || null}
+         */
+        this.NewRuleUuid = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NewRuleUuid = 'NewRuleUuid' in params ? params.NewRuleUuid : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5169,49 +5493,6 @@ class DescribeBlockByIpTimesListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVPCSwitchStatus返回参数结构体
- * @class
- */
-class ModifyVPCSwitchStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 接口返回信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ReturnMsg = null;
-
-        /**
-         * 接口返回错误码，0请求成功  非0失败
-         * @type {number || null}
-         */
-        this.ReturnCode = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * RemoveEnterpriseSecurityGroupRule返回参数结构体
  * @class
  */
@@ -5255,24 +5536,36 @@ class RemoveEnterpriseSecurityGroupRuleResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAllVPCSwitchStatus请求参数结构体
+ * ModifyEnterpriseSecurityGroupRule请求参数结构体
  * @class
  */
-class ModifyAllVPCSwitchStatusRequest extends  AbstractModel {
+class ModifyEnterpriseSecurityGroupRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 状态，0：关闭，1：开启
+         * 规则的uuid，可通过查询规则列表获取
          * @type {number || null}
          */
-        this.Status = null;
+        this.RuleUuid = null;
 
         /**
-         * 选中的防火墙开关Id
-         * @type {Array.<string> || null}
+         * 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态
+         * @type {number || null}
          */
-        this.FireWallVpcIds = null;
+        this.ModifyType = null;
+
+        /**
+         * 编辑后的企业安全组规则数据；修改规则状态不用填该字段
+         * @type {SecurityGroupRule || null}
+         */
+        this.Data = null;
+
+        /**
+         * 0是关闭,1是开启
+         * @type {number || null}
+         */
+        this.Enable = null;
 
     }
 
@@ -5283,8 +5576,15 @@ class ModifyAllVPCSwitchStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FireWallVpcIds = 'FireWallVpcIds' in params ? params.FireWallVpcIds : null;
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+
+        if (params.Data) {
+            let obj = new SecurityGroupRule();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -5320,49 +5620,6 @@ class ModifySequenceRulesResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteSecurityGroupAllRule返回参数结构体
- * @class
- */
-class DeleteSecurityGroupAllRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 0: 操作成功，非0：操作失败
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 返回数据的json字符串
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Info = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Info = 'Info' in params ? params.Info : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5827,41 +6084,6 @@ class ModifyNatFwSwitchResponse extends  AbstractModel {
 }
 
 /**
- * RunSyncAsset返回参数结构体
- * @class
- */
-class RunSyncAssetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 0：同步成功，1：资产更新中，2：后台同步调用失败
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeBlockByIpTimesList返回参数结构体
  * @class
  */
@@ -5961,6 +6183,83 @@ class DescribeRuleOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDefenseSwitch返回参数结构体
+ * @class
+ */
+class DescribeDefenseSwitchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基础防御开关
+         * @type {number || null}
+         */
+        this.BasicRuleSwitch = null;
+
+        /**
+         * 安全基线开关
+         * @type {number || null}
+         */
+        this.BaselineAllSwitch = null;
+
+        /**
+         * 威胁情报开关
+         * @type {number || null}
+         */
+        this.TiSwitch = null;
+
+        /**
+         * 虚拟补丁开关
+         * @type {number || null}
+         */
+        this.VirtualPatchSwitch = null;
+
+        /**
+         * 是否历史开启
+         * @type {number || null}
+         */
+        this.HistoryOpen = null;
+
+        /**
+         * 状态值，0：查询成功，非0：查询失败
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * 状态信息，success：查询成功，fail：查询失败
+         * @type {string || null}
+         */
+        this.ReturnMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BasicRuleSwitch = 'BasicRuleSwitch' in params ? params.BasicRuleSwitch : null;
+        this.BaselineAllSwitch = 'BaselineAllSwitch' in params ? params.BaselineAllSwitch : null;
+        this.TiSwitch = 'TiSwitch' in params ? params.TiSwitch : null;
+        this.VirtualPatchSwitch = 'VirtualPatchSwitch' in params ? params.VirtualPatchSwitch : null;
+        this.HistoryOpen = 'HistoryOpen' in params ? params.HistoryOpen : null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAcLists请求参数结构体
  * @class
  */
@@ -6052,18 +6351,12 @@ class DescribeAcListsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVpcRuleOverview请求参数结构体
+ * DescribeGuideScanInfo请求参数结构体
  * @class
  */
-class DescribeVpcRuleOverviewRequest extends  AbstractModel {
+class DescribeGuideScanInfoRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * EdgeId值两个vpc间的边id  不是必填项可以为空，就是所有vpc间的访问控制规则
-         * @type {string || null}
-         */
-        this.EdgeId = null;
 
     }
 
@@ -6074,7 +6367,6 @@ class DescribeVpcRuleOverviewRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
 
     }
 }
@@ -6279,7 +6571,7 @@ class DeleteAllAccessControlRuleResponse extends  AbstractModel {
         super();
 
         /**
-         * 状态值 0: 修改成功, !0: 修改失败
+         * 状态值 0: 修改成功, 非0: 修改失败
          * @type {number || null}
          */
         this.Status = null;
@@ -6420,56 +6712,6 @@ class DescribeIPStatusListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeNatRuleOverview请求参数结构体
- * @class
- */
-class DescribeNatRuleOverviewRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 方向，0：出站，1：入站 默认值：0
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * NAT地域  这个是必填项，填入相关的英文，'ap-beijing-fsi': '北京金融',
-        'ap-beijing': '北京',
-        'ap-changsha-ec': '长沙EC',
-        'ap-chengdu': '成都',
-        'ap-chongqing': '重庆',
-        'ap-fuzhou-ec': '福州EC',
-        'ap-guangzhou-open': '广州Open',
-        'ap-guangzhou': '广州',
-        'ap-hangzhou-ec': '杭州EC',
-        'ap-jinan-ec': '济南EC',
-        'ap-nanjing': '南京',
-        'ap-shanghai-fsi': '上海金融',
-        'ap-shanghai': '上海',
-        'ap-shenzhen-fsi': '深圳金融',
-        'ap-shenzhen': '深圳',
-        'ap-wuhan-ec': '武汉EC'
-         * @type {string || null}
-         */
-        this.Area = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.Area = 'Area' in params ? params.Area : null;
-
-    }
-}
-
-/**
  * CreateDatabaseWhiteListRules请求参数结构体
  * @class
  */
@@ -6501,41 +6743,6 @@ class CreateDatabaseWhiteListRulesRequest extends  AbstractModel {
                 this.DatabaseWhiteListRuleData.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * DescribeResourceGroup请求参数结构体
- * @class
- */
-class DescribeResourceGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
-         * @type {string || null}
-         */
-        this.QueryType = null;
-
-        /**
-         * 资产组id  全部传0
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6624,6 +6831,41 @@ class NatInstanceInfo extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 地域区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionDetail = null;
+
+        /**
+         * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneZh = null;
+
+        /**
+         * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneZhBak = null;
+
+        /**
+         * 已使用规则数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleUsed = null;
+
+        /**
+         * 实例的规则限制最大规格数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleMax = null;
+
     }
 
     /**
@@ -6645,6 +6887,11 @@ class NatInstanceInfo extends  AbstractModel {
         this.VpcIp = 'VpcIp' in params ? params.VpcIp : null;
         this.Subnets = 'Subnets' in params ? params.Subnets : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.RegionDetail = 'RegionDetail' in params ? params.RegionDetail : null;
+        this.ZoneZh = 'ZoneZh' in params ? params.ZoneZh : null;
+        this.ZoneZhBak = 'ZoneZhBak' in params ? params.ZoneZhBak : null;
+        this.RuleUsed = 'RuleUsed' in params ? params.RuleUsed : null;
+        this.RuleMax = 'RuleMax' in params ? params.RuleMax : null;
 
     }
 }
@@ -6694,24 +6941,24 @@ class NatFwEipsInfo extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityGroupAllRule请求参数结构体
+ * DescribeResourceGroup返回参数结构体
  * @class
  */
-class DeleteSecurityGroupAllRuleRequest extends  AbstractModel {
+class DescribeResourceGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 方向，0：出站，1：入站
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * 腾讯云地域的英文简写
+         * 返回树形结构
          * @type {string || null}
          */
-        this.Area = null;
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6722,8 +6969,8 @@ class DeleteSecurityGroupAllRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.Area = 'Area' in params ? params.Area : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6909,6 +7156,12 @@ class ModifyNatFwReSelectRequest extends  AbstractModel {
          */
         this.VpcList = null;
 
+        /**
+         * 指定防火墙使用网段信息
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -6922,6 +7175,12 @@ class ModifyNatFwReSelectRequest extends  AbstractModel {
         this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
         this.NatGwList = 'NatGwList' in params ? params.NatGwList : null;
         this.VpcList = 'VpcList' in params ? params.VpcList : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -7008,24 +7267,24 @@ class SetNatFwDnatRuleRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSyncAssetStatus返回参数结构体
+ * ModifyAllVPCSwitchStatus请求参数结构体
  * @class
  */
-class DescribeSyncAssetStatusResponse extends  AbstractModel {
+class ModifyAllVPCSwitchStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 1-更新中 2-更新完成 3、4-更新失败
+         * 状态，0：关闭，1：开启
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 选中的防火墙开关Id
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.FireWallVpcIds = null;
 
     }
 
@@ -7037,7 +7296,7 @@ class DescribeSyncAssetStatusResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FireWallVpcIds = 'FireWallVpcIds' in params ? params.FireWallVpcIds : null;
 
     }
 }
@@ -7302,12 +7561,54 @@ class StopSecurityGroupRuleDispatchRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGuideScanInfo请求参数结构体
+ * DescribeBlockIgnoreList请求参数结构体
  * @class
  */
-class DescribeGuideScanInfoRequest extends  AbstractModel {
+class DescribeBlockIgnoreListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 单页数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 方向：1互联网入站，0互联网出站，3内网，空 全部方向
+         * @type {string || null}
+         */
+        this.Direction = null;
+
+        /**
+         * 规则类型：1封禁，2放通
+         * @type {number || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序类型：desc降序，asc正序
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common
+         * @type {string || null}
+         */
+        this.SearchValue = null;
 
     }
 
@@ -7318,6 +7619,13 @@ class DescribeGuideScanInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
 
     }
 }
@@ -7351,68 +7659,18 @@ class ModifyBlockTopResponse extends  AbstractModel {
 }
 
 /**
- * 地址模版列表数据
+ * DeleteNatFwInstance请求参数结构体
  * @class
  */
-class TemplateListInfo extends  AbstractModel {
+class DeleteNatFwInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模版ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 防火墙实例id
          * @type {string || null}
          */
-        this.Uuid = null;
-
-        /**
-         * 模版名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Detail = null;
-
-        /**
-         * IP模版
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IpString = null;
-
-        /**
-         * 插入时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InsertTime = null;
-
-        /**
-         * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 模版类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 关联规则条数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RulesNum = null;
+        this.CfwInstance = null;
 
     }
 
@@ -7423,49 +7681,18 @@ class TemplateListInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Detail = 'Detail' in params ? params.Detail : null;
-        this.IpString = 'IpString' in params ? params.IpString : null;
-        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.RulesNum = 'RulesNum' in params ? params.RulesNum : null;
+        this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
 
     }
 }
 
 /**
- * CreateSecurityGroupApiRules请求参数结构体
+ * ModifyStorageSetting请求参数结构体
  * @class
  */
-class CreateSecurityGroupApiRulesRequest extends  AbstractModel {
+class ModifyStorageSettingRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 创建规则数据
-         * @type {Array.<SecurityGroupApiRuleData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 方向，0：出站，1：入站
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * 插入类型，0：后插，1：前插，2：中插
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 腾讯云地域的英文简写
-         * @type {string || null}
-         */
-        this.Area = null;
 
     }
 
@@ -7476,18 +7703,6 @@ class CreateSecurityGroupApiRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SecurityGroupApiRuleData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -7553,24 +7768,178 @@ class DescribeNatFwVpcDnsLstResponse extends  AbstractModel {
 }
 
 /**
- * CreateChooseVpcs请求参数结构体
+ * 访问控制列表对象
  * @class
  */
-class CreateChooseVpcsRequest extends  AbstractModel {
+class DescAcItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * vpc列表
-         * @type {Array.<string> || null}
+         * 访问源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.VpcList = null;
+        this.SourceContent = null;
 
         /**
-         * zone列表
-         * @type {Array.<VpcZoneData> || null}
+         * 访问目的
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.AllZoneList = null;
+        this.TargetContent = null;
+
+        /**
+         * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 命中次数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 执行顺序
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * 规则对应的唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 规则有效性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Invalid = null;
+
+        /**
+         * 0为正常规则,1为地域规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsRegion = null;
+
+        /**
+         * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CityCode = null;
+
+        /**
+         * 国家名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CountryName = null;
+
+        /**
+         * 省名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CityName = null;
+
+        /**
+         * 云厂商code
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CloudCode = null;
+
+        /**
+         * 0为正常规则,1为云厂商规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * 规则状态，true表示启用，false表示禁用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 规则方向：1，入向；0，出向
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 内部使用的uuid，一般情况下不会使用到该字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InternalUuid = null;
+
+        /**
+         * 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -7581,16 +7950,65 @@ class CreateChooseVpcsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcList = 'VpcList' in params ? params.VpcList : null;
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.TargetContent = 'TargetContent' in params ? params.TargetContent : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Invalid = 'Invalid' in params ? params.Invalid : null;
+        this.IsRegion = 'IsRegion' in params ? params.IsRegion : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.CityCode = 'CityCode' in params ? params.CityCode : null;
+        this.CountryName = 'CountryName' in params ? params.CountryName : null;
+        this.CityName = 'CityName' in params ? params.CityName : null;
+        this.CloudCode = 'CloudCode' in params ? params.CloudCode : null;
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InternalUuid = 'InternalUuid' in params ? params.InternalUuid : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
-        if (params.AllZoneList) {
-            this.AllZoneList = new Array();
-            for (let z in params.AllZoneList) {
-                let obj = new VpcZoneData();
-                obj.deserialize(params.AllZoneList[z]);
-                this.AllZoneList.push(obj);
-            }
+    }
+}
+
+/**
+ * CreateSecurityGroupRules返回参数结构体
+ * @class
+ */
+class CreateSecurityGroupRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态值，0：添加成功，非0：添加失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7624,42 +8042,60 @@ class ExpandCfwVerticalResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBlockStaticList请求参数结构体
+ * DescribeNatAcRule请求参数结构体
  * @class
  */
-class DescribeBlockStaticListRequest extends  AbstractModel {
+class DescribeNatAcRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始时间
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移值
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要查询的索引，特定场景使用，可不填
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * 过滤条件组合
+         * @type {Array.<CommonFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 检索的起始时间，可不传
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 检索的截止时间，可不传
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 类型
+         * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
          * @type {string || null}
          */
-        this.QueryType = null;
+        this.Order = null;
 
         /**
-         * top数
-         * @type {number || null}
-         */
-        this.Top = null;
-
-        /**
-         * 查询条件
+         * 排序所用到的字段
          * @type {string || null}
          */
-        this.SearchValue = null;
+        this.By = null;
 
     }
 
@@ -7670,11 +8106,22 @@ class DescribeBlockStaticListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Index = 'Index' in params ? params.Index : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new CommonFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.Top = 'Top' in params ? params.Top : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -8011,6 +8458,12 @@ class CreateNatFwInstanceWithDomainRequest extends  AbstractModel {
          */
         this.Domain = null;
 
+        /**
+         * 指定防火墙使用网段信息
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -8035,6 +8488,12 @@ class CreateNatFwInstanceWithDomainRequest extends  AbstractModel {
         this.CrossAZone = 'CrossAZone' in params ? params.CrossAZone : null;
         this.IsCreateDomain = 'IsCreateDomain' in params ? params.IsCreateDomain : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -8108,34 +8567,6 @@ class DescribeSwitchListsResponse extends  AbstractModel {
         this.OnNum = 'OnNum' in params ? params.OnNum : null;
         this.OffNum = 'OffNum' in params ? params.OffNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeSyncAssetStatus请求参数结构体
- * @class
- */
-class DescribeSyncAssetStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 0: 互联网防火墙开关，1：vpc 防火墙开关
-         * @type {number || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -8317,30 +8748,42 @@ class DescribeSwitchListsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyItemSwitchStatus请求参数结构体
+ * DescribeBlockStaticList请求参数结构体
  * @class
  */
-class ModifyItemSwitchStatusRequest extends  AbstractModel {
+class DescribeBlockStaticListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * id值
-         * @type {number || null}
+         * 开始时间
+         * @type {string || null}
          */
-        this.Id = null;
+        this.StartTime = null;
 
         /**
-         * 状态值，0: 关闭 ,1:开启
-         * @type {number || null}
+         * 结束时间
+         * @type {string || null}
          */
-        this.Status = null;
+        this.EndTime = null;
 
         /**
-         * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+         * 列表类型，只能是下面三种之一：port、address、ip
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+        /**
+         * top数
          * @type {number || null}
          */
-        this.Type = null;
+        this.Top = null;
+
+        /**
+         * 查询条件
+         * @type {string || null}
+         */
+        this.SearchValue = null;
 
     }
 
@@ -8351,9 +8794,46 @@ class ModifyItemSwitchStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
+ * vpc的防火墙网段
+ * @class
+ */
+class FwVpcCidr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * vpc的id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 防火墙网段，最少/24的网段
+         * @type {string || null}
+         */
+        this.FwCidr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.FwCidr = 'FwCidr' in params ? params.FwCidr : null;
 
     }
 }
@@ -8590,24 +9070,24 @@ class DescribeNatFwInstancesInfoResponse extends  AbstractModel {
 }
 
 /**
- * ModifyVPCSwitchStatus请求参数结构体
+ * AddNatAcRule返回参数结构体
  * @class
  */
-class ModifyVPCSwitchStatusRequest extends  AbstractModel {
+class AddNatAcRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 公网IP
-         * @type {string || null}
+         * 创建成功后返回新策略ID列表
+         * @type {Array.<number> || null}
          */
-        this.FirewallVpcId = null;
+        this.RuleUuid = null;
 
         /**
-         * 状态值，0: 关闭 ,1:开启
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -8618,8 +9098,8 @@ class ModifyVPCSwitchStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FirewallVpcId = 'FirewallVpcId' in params ? params.FirewallVpcId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8752,42 +9232,6 @@ class ModifySecurityGroupRuleResponse extends  AbstractModel {
 }
 
 /**
- * ModifySecurityGroupAllRuleStatus返回参数结构体
- * @class
- */
-class ModifySecurityGroupAllRuleStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 0: 修改成功, 其他: 修改失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 设置nat防火墙的vpc dns 接入开关 
  * @class
  */
@@ -8823,68 +9267,24 @@ class DnsVpcSwitch extends  AbstractModel {
 }
 
 /**
- * 企业安全组关联实例信息
+ * DescribeResourceGroup请求参数结构体
  * @class
  */
-class AssociatedInstanceInfo extends  AbstractModel {
+class DescribeResourceGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.QueryType = null;
 
         /**
-         * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 资产组id  全部传0
          * @type {string || null}
          */
-        this.InstanceName = null;
-
-        /**
-         * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 私有网络名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * 公网IP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PublicIp = null;
-
-        /**
-         * 内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 关联安全组数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SecurityGroupCount = null;
+        this.GroupId = null;
 
     }
 
@@ -8895,14 +9295,8 @@ class AssociatedInstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.SecurityGroupCount = 'SecurityGroupCount' in params ? params.SecurityGroupCount : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8988,6 +9382,98 @@ class CreateAcRulesRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.From = 'From' in params ? params.From : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * ModifyEnterpriseSecurityDispatchStatus请求参数结构体
+ * @class
+ */
+class ModifyEnterpriseSecurityDispatchStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态，0：立即下发，1：停止下发
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeBlockIgnoreList返回参数结构体
+ * @class
+ */
+class DescribeBlockIgnoreListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 列表数据
+         * @type {Array.<BlockIgnoreRule> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 查询结果总数，用于分页
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 状态值，0：查询成功，非0：查询失败
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * 状态信息，success：查询成功，fail：查询失败
+         * @type {string || null}
+         */
+        this.ReturnMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new BlockIgnoreRule();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9118,62 +9604,61 @@ class DescribeGuideScanInfoResponse extends  AbstractModel {
 }
 
 module.exports = {
-    DescribeVpcRuleOverviewResponse: DescribeVpcRuleOverviewResponse,
     DescribeNatFwInstanceRequest: DescribeNatFwInstanceRequest,
     ModifyNatFwVpcDnsSwitchResponse: ModifyNatFwVpcDnsSwitchResponse,
     DescribeNatFwInstanceWithRegionRequest: DescribeNatFwInstanceWithRegionRequest,
+    ModifyNatAcRuleResponse: ModifyNatAcRuleResponse,
     DescribeRuleOverviewResponse: DescribeRuleOverviewResponse,
     CfwNatDnatRule: CfwNatDnatRule,
+    FwCidrInfo: FwCidrInfo,
     StaticInfo: StaticInfo,
+    DescribeNatAcRuleResponse: DescribeNatAcRuleResponse,
     ModifyPublicIPSwitchStatusResponse: ModifyPublicIPSwitchStatusResponse,
+    ModifyNatAcRuleRequest: ModifyNatAcRuleRequest,
     ModifyAcRuleResponse: ModifyAcRuleResponse,
+    ModifyNatSequenceRulesRequest: ModifyNatSequenceRulesRequest,
     DescribeTableStatusResponse: DescribeTableStatusResponse,
     AddAcRuleRequest: AddAcRuleRequest,
     IPDefendStatus: IPDefendStatus,
-    SecurityGroupRule: SecurityGroupRule,
+    BlockIgnoreRule: BlockIgnoreRule,
     ModifyNatFwVpcDnsSwitchRequest: ModifyNatFwVpcDnsSwitchRequest,
-    SecurityGroupApiRuleData: SecurityGroupApiRuleData,
     DeleteNatFwInstanceResponse: DeleteNatFwInstanceResponse,
     DeleteAllAccessControlRuleRequest: DeleteAllAccessControlRuleRequest,
     ModifySecurityGroupRuleRequest: ModifySecurityGroupRuleRequest,
     ModifyAllVPCSwitchStatusResponse: ModifyAllVPCSwitchStatusResponse,
     VpcZoneData: VpcZoneData,
-    CreateSecurityGroupRulesResponse: CreateSecurityGroupRulesResponse,
+    CreateChooseVpcsRequest: CreateChooseVpcsRequest,
     DescribeNatFwVpcDnsLstRequest: DescribeNatFwVpcDnsLstRequest,
     DescribeCfwEipsRequest: DescribeCfwEipsRequest,
     DescribeTLogInfoResponse: DescribeTLogInfoResponse,
-    ModifyAllSwitchStatusRequest: ModifyAllSwitchStatusRequest,
     DescribeUnHandleEventTabListRequest: DescribeUnHandleEventTabListRequest,
     DescribeAssociatedInstanceListResponse: DescribeAssociatedInstanceListResponse,
-    DescribeResourceGroupResponse: DescribeResourceGroupResponse,
-    DescribeNatRuleOverviewResponse: DescribeNatRuleOverviewResponse,
+    AssociatedInstanceInfo: AssociatedInstanceInfo,
+    ModifyStorageSettingResponse: ModifyStorageSettingResponse,
     RemoveAcRuleResponse: RemoveAcRuleResponse,
     NatFwInstance: NatFwInstance,
-    DeleteNatFwInstanceRequest: DeleteNatFwInstanceRequest,
     ExpandCfwVerticalRequest: ExpandCfwVerticalRequest,
     ModifyAllPublicIPSwitchStatusResponse: ModifyAllPublicIPSwitchStatusResponse,
     DeleteVpcInstanceResponse: DeleteVpcInstanceResponse,
     ModifyAssetScanRequest: ModifyAssetScanRequest,
     ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
     AddEnterpriseSecurityGroupRulesRequest: AddEnterpriseSecurityGroupRulesRequest,
+    SecurityGroupRule: SecurityGroupRule,
     DeleteSecurityGroupRuleResponse: DeleteSecurityGroupRuleResponse,
-    ModifySecurityGroupAllRuleStatusRequest: ModifySecurityGroupAllRuleStatusRequest,
     ModifySequenceRulesRequest: ModifySequenceRulesRequest,
-    DescribeAddrTemplateListRequest: DescribeAddrTemplateListRequest,
+    SequenceData: SequenceData,
     CreateNatFwInstanceRequest: CreateNatFwInstanceRequest,
     ModifySecurityGroupItemRuleStatusResponse: ModifySecurityGroupItemRuleStatusResponse,
     DescribeEnterpriseSecurityGroupRuleResponse: DescribeEnterpriseSecurityGroupRuleResponse,
     VpcDnsInfo: VpcDnsInfo,
     DescribeEnterpriseSecurityGroupRuleRequest: DescribeEnterpriseSecurityGroupRuleRequest,
-    ModifyItemSwitchStatusResponse: ModifyItemSwitchStatusResponse,
     ModifyNatFwReSelectResponse: ModifyNatFwReSelectResponse,
     DeleteSecurityGroupRuleRequest: DeleteSecurityGroupRuleRequest,
     SetNatFwEipRequest: SetNatFwEipRequest,
     SetNatFwEipResponse: SetNatFwEipResponse,
     AcListsData: AcListsData,
     ModifyPublicIPSwitchStatusRequest: ModifyPublicIPSwitchStatusRequest,
-    SequenceData: SequenceData,
-    CreateSecurityGroupApiRulesResponse: CreateSecurityGroupApiRulesResponse,
+    CreateNatRuleItem: CreateNatRuleItem,
     ModifySecurityGroupItemRuleStatusRequest: ModifySecurityGroupItemRuleStatusRequest,
     DescribeSourceAssetRequest: DescribeSourceAssetRequest,
     SecurityGroupOrderIndexData: SecurityGroupOrderIndexData,
@@ -9181,26 +9666,31 @@ module.exports = {
     DescribeTLogInfoRequest: DescribeTLogInfoRequest,
     DescribeSecurityGroupListResponse: DescribeSecurityGroupListResponse,
     AssetZone: AssetZone,
-    DescribeAddrTemplateListResponse: DescribeAddrTemplateListResponse,
-    RunSyncAssetRequest: RunSyncAssetRequest,
+    RuleChangeItem: RuleChangeItem,
     DescribeTLogIpListRequest: DescribeTLogIpListRequest,
+    CommonFilter: CommonFilter,
     DescribeNatFwInstancesInfoRequest: DescribeNatFwInstancesInfoRequest,
+    ModifyNatSequenceRulesResponse: ModifyNatSequenceRulesResponse,
     DescribeTableStatusRequest: DescribeTableStatusRequest,
     DescribeSecurityGroupListRequest: DescribeSecurityGroupListRequest,
     ModifyResourceGroupRequest: ModifyResourceGroupRequest,
     CreateNatFwInstanceResponse: CreateNatFwInstanceResponse,
-    ModifyAllSwitchStatusResponse: ModifyAllSwitchStatusResponse,
     NewModeItems: NewModeItems,
     DescribeNatFwInfoCountResponse: DescribeNatFwInfoCountResponse,
+    DescribeDefenseSwitchRequest: DescribeDefenseSwitchRequest,
+    ModifyEnterpriseSecurityDispatchStatusResponse: ModifyEnterpriseSecurityDispatchStatusResponse,
     SecurityGroupListData: SecurityGroupListData,
+    RemoveNatAcRuleResponse: RemoveNatAcRuleResponse,
     CreateNatFwInstanceWithDomainResponse: CreateNatFwInstanceWithDomainResponse,
     RemoveAcRuleRequest: RemoveAcRuleRequest,
     DatabaseWhiteListRuleData: DatabaseWhiteListRuleData,
+    RemoveNatAcRuleRequest: RemoveNatAcRuleRequest,
     ModifyAllRuleStatusRequest: ModifyAllRuleStatusRequest,
     RuleInfoData: RuleInfoData,
     DescribeAcListsResponse: DescribeAcListsResponse,
     ModifyAllPublicIPSwitchStatusRequest: ModifyAllPublicIPSwitchStatusRequest,
     DescribeBlockStaticListResponse: DescribeBlockStaticListResponse,
+    AddNatAcRuleRequest: AddNatAcRuleRequest,
     ModifySecurityGroupSequenceRulesRequest: ModifySecurityGroupSequenceRulesRequest,
     CreateDatabaseWhiteListRulesResponse: CreateDatabaseWhiteListRulesResponse,
     ScanInfo: ScanInfo,
@@ -9209,6 +9699,7 @@ module.exports = {
     NatFwFilter: NatFwFilter,
     ScanResultInfo: ScanResultInfo,
     ModifyRunSyncAssetResponse: ModifyRunSyncAssetResponse,
+    ModifyEnterpriseSecurityGroupRuleResponse: ModifyEnterpriseSecurityGroupRuleResponse,
     ModifySecurityGroupSequenceRulesResponse: ModifySecurityGroupSequenceRulesResponse,
     IpStatic: IpStatic,
     AddEnterpriseSecurityGroupRulesResponse: AddEnterpriseSecurityGroupRulesResponse,
@@ -9216,11 +9707,9 @@ module.exports = {
     RemoveEnterpriseSecurityGroupRuleRequest: RemoveEnterpriseSecurityGroupRuleRequest,
     DeleteResourceGroupRequest: DeleteResourceGroupRequest,
     DescribeBlockByIpTimesListRequest: DescribeBlockByIpTimesListRequest,
-    ModifyVPCSwitchStatusResponse: ModifyVPCSwitchStatusResponse,
     RemoveEnterpriseSecurityGroupRuleResponse: RemoveEnterpriseSecurityGroupRuleResponse,
-    ModifyAllVPCSwitchStatusRequest: ModifyAllVPCSwitchStatusRequest,
+    ModifyEnterpriseSecurityGroupRuleRequest: ModifyEnterpriseSecurityGroupRuleRequest,
     ModifySequenceRulesResponse: ModifySequenceRulesResponse,
-    DeleteSecurityGroupAllRuleResponse: DeleteSecurityGroupAllRuleResponse,
     DescribeResourceGroupNewResponse: DescribeResourceGroupNewResponse,
     DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
     DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
@@ -9230,67 +9719,67 @@ module.exports = {
     InstanceInfo: InstanceInfo,
     DescribeIPStatusListRequest: DescribeIPStatusListRequest,
     ModifyNatFwSwitchResponse: ModifyNatFwSwitchResponse,
-    RunSyncAssetResponse: RunSyncAssetResponse,
     DescribeBlockByIpTimesListResponse: DescribeBlockByIpTimesListResponse,
     SetNatFwDnatRuleResponse: SetNatFwDnatRuleResponse,
     DescribeRuleOverviewRequest: DescribeRuleOverviewRequest,
+    DescribeDefenseSwitchResponse: DescribeDefenseSwitchResponse,
     DescribeAcListsRequest: DescribeAcListsRequest,
-    DescribeVpcRuleOverviewRequest: DescribeVpcRuleOverviewRequest,
+    DescribeGuideScanInfoRequest: DescribeGuideScanInfoRequest,
     UnHandleEvent: UnHandleEvent,
     DescribeAssociatedInstanceListRequest: DescribeAssociatedInstanceListRequest,
     DeleteAcRuleRequest: DeleteAcRuleRequest,
     DeleteAllAccessControlRuleResponse: DeleteAllAccessControlRuleResponse,
     ModifyNatFwSwitchRequest: ModifyNatFwSwitchRequest,
     DescribeIPStatusListResponse: DescribeIPStatusListResponse,
-    DescribeNatRuleOverviewRequest: DescribeNatRuleOverviewRequest,
     CreateDatabaseWhiteListRulesRequest: CreateDatabaseWhiteListRulesRequest,
-    DescribeResourceGroupRequest: DescribeResourceGroupRequest,
     NatInstanceInfo: NatInstanceInfo,
     NatFwEipsInfo: NatFwEipsInfo,
-    DeleteSecurityGroupAllRuleRequest: DeleteSecurityGroupAllRuleRequest,
+    DescribeResourceGroupResponse: DescribeResourceGroupResponse,
     DescribeTLogIpListResponse: DescribeTLogIpListResponse,
     StopSecurityGroupRuleDispatchResponse: StopSecurityGroupRuleDispatchResponse,
     DescribeNatFwInfoCountRequest: DescribeNatFwInfoCountRequest,
     AddAcRuleResponse: AddAcRuleResponse,
     ModifyNatFwReSelectRequest: ModifyNatFwReSelectRequest,
     SetNatFwDnatRuleRequest: SetNatFwDnatRuleRequest,
-    DescribeSyncAssetStatusResponse: DescribeSyncAssetStatusResponse,
+    ModifyAllVPCSwitchStatusRequest: ModifyAllVPCSwitchStatusRequest,
     SecurityGroupBothWayInfo: SecurityGroupBothWayInfo,
     ModifyAllRuleStatusResponse: ModifyAllRuleStatusResponse,
     StopSecurityGroupRuleDispatchRequest: StopSecurityGroupRuleDispatchRequest,
-    DescribeGuideScanInfoRequest: DescribeGuideScanInfoRequest,
+    DescribeBlockIgnoreListRequest: DescribeBlockIgnoreListRequest,
     ModifyBlockTopResponse: ModifyBlockTopResponse,
-    TemplateListInfo: TemplateListInfo,
-    CreateSecurityGroupApiRulesRequest: CreateSecurityGroupApiRulesRequest,
+    DeleteNatFwInstanceRequest: DeleteNatFwInstanceRequest,
+    ModifyStorageSettingRequest: ModifyStorageSettingRequest,
     DescribeNatFwVpcDnsLstResponse: DescribeNatFwVpcDnsLstResponse,
-    CreateChooseVpcsRequest: CreateChooseVpcsRequest,
+    DescAcItem: DescAcItem,
+    CreateSecurityGroupRulesResponse: CreateSecurityGroupRulesResponse,
     ExpandCfwVerticalResponse: ExpandCfwVerticalResponse,
-    DescribeBlockStaticListRequest: DescribeBlockStaticListRequest,
+    DescribeNatAcRuleRequest: DescribeNatAcRuleRequest,
     TLogInfo: TLogInfo,
     CreateSecurityGroupRulesRequest: CreateSecurityGroupRulesRequest,
     DeleteVpcInstanceRequest: DeleteVpcInstanceRequest,
     SwitchListsData: SwitchListsData,
     CreateNatFwInstanceWithDomainRequest: CreateNatFwInstanceWithDomainRequest,
     DescribeSwitchListsResponse: DescribeSwitchListsResponse,
-    DescribeSyncAssetStatusRequest: DescribeSyncAssetStatusRequest,
     DescribeCfwEipsResponse: DescribeCfwEipsResponse,
     ModifyResourceGroupResponse: ModifyResourceGroupResponse,
     DeleteResourceGroupResponse: DeleteResourceGroupResponse,
     DescribeSwitchListsRequest: DescribeSwitchListsRequest,
-    ModifyItemSwitchStatusRequest: ModifyItemSwitchStatusRequest,
+    DescribeBlockStaticListRequest: DescribeBlockStaticListRequest,
+    FwVpcCidr: FwVpcCidr,
     ModifyRunSyncAssetRequest: ModifyRunSyncAssetRequest,
     CreateAcRulesResponse: CreateAcRulesResponse,
     ModifyAssetScanResponse: ModifyAssetScanResponse,
     ModifyAcRuleRequest: ModifyAcRuleRequest,
     DescribeNatFwInstancesInfoResponse: DescribeNatFwInstancesInfoResponse,
-    ModifyVPCSwitchStatusRequest: ModifyVPCSwitchStatusRequest,
+    AddNatAcRuleResponse: AddNatAcRuleResponse,
     ModifyBlockIgnoreListResponse: ModifyBlockIgnoreListResponse,
     DescribeNatFwInstanceResponse: DescribeNatFwInstanceResponse,
     ModifySecurityGroupRuleResponse: ModifySecurityGroupRuleResponse,
-    ModifySecurityGroupAllRuleStatusResponse: ModifySecurityGroupAllRuleStatusResponse,
     DnsVpcSwitch: DnsVpcSwitch,
-    AssociatedInstanceInfo: AssociatedInstanceInfo,
+    DescribeResourceGroupRequest: DescribeResourceGroupRequest,
     CreateAcRulesRequest: CreateAcRulesRequest,
+    ModifyEnterpriseSecurityDispatchStatusRequest: ModifyEnterpriseSecurityDispatchStatusRequest,
+    DescribeBlockIgnoreListResponse: DescribeBlockIgnoreListResponse,
     ModifyTableStatusRequest: ModifyTableStatusRequest,
     ModifyTableStatusResponse: ModifyTableStatusResponse,
     DescribeGuideScanInfoResponse: DescribeGuideScanInfoResponse,

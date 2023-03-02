@@ -298,6 +298,41 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
 }
 
 /**
+ * 转化率上报响应。
+ * @class
+ */
+class ReportConversionStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误码。上报成功返回 ok。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 错误码描述。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * AddSmsSign请求参数结构体
  * @class
  */
@@ -559,6 +594,46 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ReportConversion返回参数结构体
+ * @class
+ */
+class ReportConversionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转化率上报响应包体。
+         * @type {ReportConversionStatus || null}
+         */
+        this.ReportConversionStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReportConversionStatus) {
+            let obj = new ReportConversionStatus();
+            obj.deserialize(params.ReportConversionStatus)
+            this.ReportConversionStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1666,7 +1741,7 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
         this.International = null;
 
         /**
-         * 模板 ID 数组。数组为空时默认查询模板列表信息（仅允许主账号使用），请使用 Limit 和 Offset 字段设置查询范围。
+         * 模板 ID 数组。数组为空时默认查询模板列表信息，请使用 Limit 和 Offset 字段设置查询范围。
 <dx-alert infotype="notice" title="注意">默认数组长度最大100</dx-alert>
          * @type {Array.<number> || null}
          */
@@ -2271,6 +2346,48 @@ class ModifySmsSignResponse extends  AbstractModel {
 }
 
 /**
+ * ReportConversion请求参数结构体
+ * @class
+ */
+class ReportConversionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信应用ID。在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * 发送短信返回的流水号。
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * 用户回填时间，UNIX 时间戳（单位：秒）。
+         * @type {number || null}
+         */
+        this.ConversionTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ConversionTime = 'ConversionTime' in params ? params.ConversionTime : null;
+
+    }
+}
+
+/**
  * 添加签名响应 
  * @class
  */
@@ -2496,11 +2613,13 @@ module.exports = {
     ModifySmsTemplateResponse: ModifySmsTemplateResponse,
     ModifySmsSignRequest: ModifySmsSignRequest,
     SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
+    ReportConversionStatus: ReportConversionStatus,
     AddSmsSignRequest: AddSmsSignRequest,
     AddTemplateStatus: AddTemplateStatus,
     DescribeSmsTemplateListResponse: DescribeSmsTemplateListResponse,
     DescribePhoneNumberInfoRequest: DescribePhoneNumberInfoRequest,
     PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    ReportConversionResponse: ReportConversionResponse,
     AddSmsTemplateRequest: AddSmsTemplateRequest,
     ModifySmsTemplateRequest: ModifySmsTemplateRequest,
     PullSmsReplyStatus: PullSmsReplyStatus,
@@ -2534,6 +2653,7 @@ module.exports = {
     DeleteSmsSignRequest: DeleteSmsSignRequest,
     PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
     ModifySmsSignResponse: ModifySmsSignResponse,
+    ReportConversionRequest: ReportConversionRequest,
     AddSignStatus: AddSignStatus,
     ModifyTemplateStatus: ModifyTemplateStatus,
     PullSmsSendStatusResponse: PullSmsSendStatusResponse,

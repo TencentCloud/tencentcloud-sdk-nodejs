@@ -25,6 +25,7 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DeleteReadOnlyGroupResponse = models.DeleteReadOnlyGroupResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const SpecItemInfo = models.SpecItemInfo;
+const ParameterTemplate = models.ParameterTemplate;
 const CreateDBInstanceNetworkAccessResponse = models.CreateDBInstanceNetworkAccessResponse;
 const DescribeAvailableRecoveryTimeResponse = models.DescribeAvailableRecoveryTimeResponse;
 const ModifyDBInstanceReadOnlyGroupResponse = models.ModifyDBInstanceReadOnlyGroupResponse;
@@ -37,7 +38,9 @@ const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResp
 const ModifyReadOnlyGroupConfigRequest = models.ModifyReadOnlyGroupConfigRequest;
 const AddDBInstanceToReadOnlyGroupRequest = models.AddDBInstanceToReadOnlyGroupRequest;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
+const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeDefaultParametersRequest = models.DescribeDefaultParametersRequest;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const RebalanceReadOnlyGroupRequest = models.RebalanceReadOnlyGroupRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
@@ -59,30 +62,36 @@ const DurationAnalysis = models.DurationAnalysis;
 const DescribeDBInstanceParametersRequest = models.DescribeDBInstanceParametersRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
+const ModifyParameterTemplateRequest = models.ModifyParameterTemplateRequest;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const CreateDBInstanceNetworkAccessRequest = models.CreateDBInstanceNetworkAccessRequest;
 const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
-const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
+const DescribeDefaultParametersResponse = models.DescribeDefaultParametersResponse;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
 const DescribeBackupPlansResponse = models.DescribeBackupPlansResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const ReadOnlyGroup = models.ReadOnlyGroup;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const SpecInfo = models.SpecInfo;
+const ParamVersionRelation = models.ParamVersionRelation;
 const DescribeReadOnlyGroupsResponse = models.DescribeReadOnlyGroupsResponse;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
 const NetworkAccess = models.NetworkAccess;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromReadOnlyGroupResponse;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
-const ReadOnlyGroup = models.ReadOnlyGroup;
+const DescribeParameterTemplatesResponse = models.DescribeParameterTemplatesResponse;
+const ParamSpecRelation = models.ParamSpecRelation;
 const PgDeal = models.PgDeal;
 const DeleteReadOnlyGroupNetworkAccessResponse = models.DeleteReadOnlyGroupNetworkAccessResponse;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
-const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
+const DBBackup = models.DBBackup;
 const ServerlessDBAccount = models.ServerlessDBAccount;
 const ModifyDBInstanceDeploymentResponse = models.ModifyDBInstanceDeploymentResponse;
+const DeleteParameterTemplateRequest = models.DeleteParameterTemplateRequest;
 const DescribeParamsEventRequest = models.DescribeParamsEventRequest;
 const EventInfo = models.EventInfo;
 const CreateInstancesResponse = models.CreateInstancesResponse;
@@ -96,11 +105,15 @@ const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
 const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
 const DescribeParamsEventResponse = models.DescribeParamsEventResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const EventItem = models.EventItem;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const DescribeDBInstanceSecurityGroupsResponse = models.DescribeDBInstanceSecurityGroupsResponse;
+const CreateParameterTemplateResponse = models.CreateParameterTemplateResponse;
 const ParamInfo = models.ParamInfo;
 const Detail = models.Detail;
+const SecurityGroup = models.SecurityGroup;
 const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
@@ -112,10 +125,11 @@ const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest
 const ErrLogDetail = models.ErrLogDetail;
 const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
+const DescribeParameterTemplatesRequest = models.DescribeParameterTemplatesRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const DeleteDBInstanceNetworkAccessRequest = models.DeleteDBInstanceNetworkAccessRequest;
 const DBInstance = models.DBInstance;
-const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
+const DeleteParameterTemplateResponse = models.DeleteParameterTemplateResponse;
 const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const Filter = models.Filter;
@@ -123,7 +137,7 @@ const DisIsolateDBInstancesResponse = models.DisIsolateDBInstancesResponse;
 const ModifyDBInstanceParametersResponse = models.ModifyDBInstanceParametersResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const SlowlogDetail = models.SlowlogDetail;
-const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DBNode = models.DBNode;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
@@ -132,11 +146,13 @@ const DescribeCloneDBInstanceSpecResponse = models.DescribeCloneDBInstanceSpecRe
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
-const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const ModifyParameterTemplateResponse = models.ModifyParameterTemplateResponse;
 const DescribeEncryptionKeysRequest = models.DescribeEncryptionKeysRequest;
 const ModifyBackupPlanResponse = models.ModifyBackupPlanResponse;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const CreateReadOnlyGroupResponse = models.CreateReadOnlyGroupResponse;
@@ -144,18 +160,21 @@ const DeleteDBInstanceNetworkAccessResponse = models.DeleteDBInstanceNetworkAcce
 const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
 const ModifyReadOnlyGroupConfigResponse = models.ModifyReadOnlyGroupConfigResponse;
 const AccountInfo = models.AccountInfo;
-const DBBackup = models.DBBackup;
+const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
+const DescribeParameterTemplateAttributesRequest = models.DescribeParameterTemplateAttributesRequest;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const ModifyBackupPlanRequest = models.ModifyBackupPlanRequest;
 const ParamEntry = models.ParamEntry;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const CreateParameterTemplateRequest = models.CreateParameterTemplateRequest;
 const ModifySwitchTimePeriodRequest = models.ModifySwitchTimePeriodRequest;
 const DescribeSlowQueryListRequest = models.DescribeSlowQueryListRequest;
 const DescribeDBInstanceParametersResponse = models.DescribeDBInstanceParametersResponse;
 const RegionInfo = models.RegionInfo;
+const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromReadOnlyGroupResponse;
+const DescribeDBInstanceSecurityGroupsRequest = models.DescribeDBInstanceSecurityGroupsRequest;
 const DescribeBackupPlansRequest = models.DescribeBackupPlansRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisResponse;
@@ -163,11 +182,13 @@ const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersReque
 const RawSlowQuery = models.RawSlowQuery;
 const DescribeReadOnlyGroupsRequest = models.DescribeReadOnlyGroupsRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeParameterTemplateAttributesResponse = models.DescribeParameterTemplateAttributesResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
+const PolicyRule = models.PolicyRule;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeEncryptionKeysResponse = models.DescribeEncryptionKeysResponse;
@@ -252,6 +273,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeDefaultParameters）主要用于查询某个数据库版本和引擎支持的所有参数。
+     * @param {DescribeDefaultParametersRequest} req
+     * @param {function(string, DescribeDefaultParametersResponse):void} cb
+     * @public
+     */
+    DescribeDefaultParameters(req, cb) {
+        let resp = new DescribeDefaultParametersResponse();
+        this.request("DescribeDefaultParameters", req, resp, cb);
+    }
+
+    /**
      * 本接口（UpgradeDBInstance）用于升级实例配置。
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
@@ -274,7 +306,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
+     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，只能销毁隔离中的实例。
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
@@ -282,6 +314,17 @@ class PostgresClient extends AbstractClient {
     DestroyDBInstance(req, cb) {
         let resp = new DestroyDBInstanceResponse();
         this.request("DestroyDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SetAutoRenewFlag）用于设置自动续费。
+     * @param {SetAutoRenewFlagRequest} req
+     * @param {function(string, SetAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    SetAutoRenewFlag(req, cb) {
+        let resp = new SetAutoRenewFlagResponse();
+        this.request("SetAutoRenewFlag", req, resp, cb);
     }
 
     /**
@@ -340,14 +383,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
-     * @param {DescribeSlowQueryAnalysisRequest} req
-     * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
+     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * @param {DescribeReadOnlyGroupsRequest} req
+     * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
      * @public
      */
-    DescribeSlowQueryAnalysis(req, cb) {
-        let resp = new DescribeSlowQueryAnalysisResponse();
-        this.request("DescribeSlowQueryAnalysis", req, resp, cb);
+    DescribeReadOnlyGroups(req, cb) {
+        let resp = new DescribeReadOnlyGroupsResponse();
+        this.request("DescribeReadOnlyGroups", req, resp, cb);
     }
 
     /**
@@ -373,6 +416,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组信息。
+     * @param {DescribeDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceSecurityGroups(req, cb) {
+        let resp = new DescribeDBInstanceSecurityGroupsResponse();
+        this.request("DescribeDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口（OpenDBExtranetAccess）用于开通外网。
      * @param {OpenDBExtranetAccessRequest} req
      * @param {function(string, OpenDBExtranetAccessResponse):void} cb
@@ -384,6 +438,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeParameterTemplateAttributes）用于查询某个参数模板的具体内容，包括基本信息和参数信息。
+     * @param {DescribeParameterTemplateAttributesRequest} req
+     * @param {function(string, DescribeParameterTemplateAttributesResponse):void} cb
+     * @public
+     */
+    DescribeParameterTemplateAttributes(req, cb) {
+        let resp = new DescribeParameterTemplateAttributesResponse();
+        this.request("DescribeParameterTemplateAttributes", req, resp, cb);
+    }
+
+    /**
      * 可对实例进行网络的删除操作。
      * @param {DeleteDBInstanceNetworkAccessRequest} req
      * @param {function(string, DeleteDBInstanceNetworkAccessResponse):void} cb
@@ -392,6 +457,17 @@ class PostgresClient extends AbstractClient {
     DeleteDBInstanceNetworkAccess(req, cb) {
         let resp = new DeleteDBInstanceNetworkAccessResponse();
         this.request("DeleteDBInstanceNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RestartDBInstance）用于重启实例。
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * @public
+     */
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
     }
 
     /**
@@ -450,14 +526,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（SetAutoRenewFlag）用于设置自动续费。
-     * @param {SetAutoRenewFlagRequest} req
-     * @param {function(string, SetAutoRenewFlagResponse):void} cb
+     * 开通serverlessDB实例外网
+     * @param {OpenServerlessDBExtranetAccessRequest} req
+     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
      * @public
      */
-    SetAutoRenewFlag(req, cb) {
-        let resp = new SetAutoRenewFlagResponse();
-        this.request("SetAutoRenewFlag", req, resp, cb);
+    OpenServerlessDBExtranetAccess(req, cb) {
+        let resp = new OpenServerlessDBExtranetAccessResponse();
+        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
     }
 
     /**
@@ -483,7 +559,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
      * @param {InquiryPriceUpgradeDBInstanceRequest} req
      * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
      * @public
@@ -513,6 +589,17 @@ class PostgresClient extends AbstractClient {
     CreateDBInstances(req, cb) {
         let resp = new CreateDBInstancesResponse();
         this.request("CreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     * @param {RebalanceReadOnlyGroupRequest} req
+     * @param {function(string, RebalanceReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RebalanceReadOnlyGroup(req, cb) {
+        let resp = new RebalanceReadOnlyGroupResponse();
+        this.request("RebalanceReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -549,14 +636,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
+     * @param {DeleteParameterTemplateRequest} req
+     * @param {function(string, DeleteParameterTemplateResponse):void} cb
      * @public
      */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+    DeleteParameterTemplate(req, cb) {
+        let resp = new DeleteParameterTemplateResponse();
+        this.request("DeleteParameterTemplate", req, resp, cb);
     }
 
     /**
@@ -747,14 +834,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
-     * @param {RebalanceReadOnlyGroupRequest} req
-     * @param {function(string, RebalanceReadOnlyGroupResponse):void} cb
+     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述，修改，添加和删除参数模板参数。
+     * @param {ModifyParameterTemplateRequest} req
+     * @param {function(string, ModifyParameterTemplateResponse):void} cb
      * @public
      */
-    RebalanceReadOnlyGroup(req, cb) {
-        let resp = new RebalanceReadOnlyGroupResponse();
-        this.request("RebalanceReadOnlyGroup", req, resp, cb);
+    ModifyParameterTemplate(req, cb) {
+        let resp = new ModifyParameterTemplateResponse();
+        this.request("ModifyParameterTemplate", req, resp, cb);
     }
 
     /**
@@ -766,6 +853,28 @@ class PostgresClient extends AbstractClient {
     DescribeCloneDBInstanceSpec(req, cb) {
         let resp = new DescribeCloneDBInstanceSpecResponse();
         this.request("DescribeCloneDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (CreateParameterTemplate) 用于创建参数模板。
+     * @param {CreateParameterTemplateRequest} req
+     * @param {function(string, CreateParameterTemplateResponse):void} cb
+     * @public
+     */
+    CreateParameterTemplate(req, cb) {
+        let resp = new CreateParameterTemplateResponse();
+        this.request("CreateParameterTemplate", req, resp, cb);
+    }
+
+    /**
+     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
+     * @param {DescribeSlowQueryAnalysisRequest} req
+     * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
+     * @public
+     */
+    DescribeSlowQueryAnalysis(req, cb) {
+        let resp = new DescribeSlowQueryAnalysisResponse();
+        this.request("DescribeSlowQueryAnalysis", req, resp, cb);
     }
 
     /**
@@ -791,14 +900,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
-     * @param {DescribeReadOnlyGroupsRequest} req
-     * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
+     * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
+     * @param {DescribeParameterTemplatesRequest} req
+     * @param {function(string, DescribeParameterTemplatesResponse):void} cb
      * @public
      */
-    DescribeReadOnlyGroups(req, cb) {
-        let resp = new DescribeReadOnlyGroupsResponse();
-        this.request("DescribeReadOnlyGroups", req, resp, cb);
+    DescribeParameterTemplates(req, cb) {
+        let resp = new DescribeParameterTemplatesResponse();
+        this.request("DescribeParameterTemplates", req, resp, cb);
     }
 
     /**
@@ -868,14 +977,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 开通serverlessDB实例外网
-     * @param {OpenServerlessDBExtranetAccessRequest} req
-     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
      * @public
      */
-    OpenServerlessDBExtranetAccess(req, cb) {
-        let resp = new OpenServerlessDBExtranetAccessResponse();
-        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
 

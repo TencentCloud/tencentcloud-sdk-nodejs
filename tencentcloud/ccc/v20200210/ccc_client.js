@@ -16,78 +16,115 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeExtensionRequest = models.DescribeExtensionRequest;
 const StopAutoCalloutTaskRequest = models.StopAutoCalloutTaskRequest;
-const BindStaffSkillGroupListRequest = models.BindStaffSkillGroupListRequest;
-const DescribePSTNActiveSessionListRequest = models.DescribePSTNActiveSessionListRequest;
-const IVRKeyPressedElement = models.IVRKeyPressedElement;
-const CreateAutoCalloutTaskRequest = models.CreateAutoCalloutTaskRequest;
+const HangUpCallRequest = models.HangUpCallRequest;
 const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
-const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
-const CallInSkillGroupMetrics = models.CallInSkillGroupMetrics;
+const ModifyStaffRequest = models.ModifyStaffRequest;
+const ResetExtensionPasswordRequest = models.ResetExtensionPasswordRequest;
+const DisableCCCPhoneNumberResponse = models.DisableCCCPhoneNumberResponse;
+const DescribeProtectedTelCdrResponse = models.DescribeProtectedTelCdrResponse;
+const DescribeAutoCalloutTaskRequest = models.DescribeAutoCalloutTaskRequest;
+const CreateUserSigResponse = models.CreateUserSigResponse;
+const DescribeIMCdrsResponse = models.DescribeIMCdrsResponse;
+const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
+const DescribeCarrierPrivilegeNumberApplicantsRequest = models.DescribeCarrierPrivilegeNumberApplicantsRequest;
+const DisableCCCPhoneNumberRequest = models.DisableCCCPhoneNumberRequest;
+const ServeParticipant = models.ServeParticipant;
+const DescribeExtensionsResponse = models.DescribeExtensionsResponse;
+const DeleteExtensionRequest = models.DeleteExtensionRequest;
+const DescribeTelCallInfoResponse = models.DescribeTelCallInfoResponse;
+const StaffStatusMetrics = models.StaffStatusMetrics;
+const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
+const DescribeAutoCalloutTasksResponse = models.DescribeAutoCalloutTasksResponse;
+const PackageBuyInfo = models.PackageBuyInfo;
+const ModifyExtensionResponse = models.ModifyExtensionResponse;
+const SeatUserInfo = models.SeatUserInfo;
+const CreateStaffResponse = models.CreateStaffResponse;
+const DescribeSkillGroupInfoListResponse = models.DescribeSkillGroupInfoListResponse;
+const DescribeNumbersResponse = models.DescribeNumbersResponse;
 const DescribeStaffInfoListResponse = models.DescribeStaffInfoListResponse;
+const UnbindNumberCallOutSkillGroupRequest = models.UnbindNumberCallOutSkillGroupRequest;
+const CreateCarrierPrivilegeNumberApplicantRequest = models.CreateCarrierPrivilegeNumberApplicantRequest;
+const CallInSkillGroupMetrics = models.CallInSkillGroupMetrics;
+const CreateExtensionResponse = models.CreateExtensionResponse;
+const CreateUserSigRequest = models.CreateUserSigRequest;
+const CreateCCCSkillGroupRequest = models.CreateCCCSkillGroupRequest;
+const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
+const CreateCCCSkillGroupResponse = models.CreateCCCSkillGroupResponse;
+const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
+const DescribeIMCdrsRequest = models.DescribeIMCdrsRequest;
+const DescribeSkillGroupInfoListRequest = models.DescribeSkillGroupInfoListRequest;
+const CreateCarrierPrivilegeNumberApplicantResponse = models.CreateCarrierPrivilegeNumberApplicantResponse;
+const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
+const CarrierPrivilegeNumberApplicant = models.CarrierPrivilegeNumberApplicant;
+const ErrStaffItem = models.ErrStaffItem;
+const PSTNSession = models.PSTNSession;
+const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
+const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
+const SkillGroupInfoItem = models.SkillGroupInfoItem;
+const ResetExtensionPasswordResponse = models.ResetExtensionPasswordResponse;
+const ModifyExtensionRequest = models.ModifyExtensionRequest;
+const PSTNSessionInfo = models.PSTNSessionInfo;
+const Message = models.Message;
+const DescribeNumbersRequest = models.DescribeNumbersRequest;
+const ExtensionInfo = models.ExtensionInfo;
+const BindNumberCallOutSkillGroupRequest = models.BindNumberCallOutSkillGroupRequest;
+const IVRKeyPressedElement = models.IVRKeyPressedElement;
+const UnbindNumberCallOutSkillGroupResponse = models.UnbindNumberCallOutSkillGroupResponse;
+const StaffInfo = models.StaffInfo;
 const CreateAutoCalloutTaskResponse = models.CreateAutoCalloutTaskResponse;
 const TelCdrInfo = models.TelCdrInfo;
-const CreateUserSigRequest = models.CreateUserSigRequest;
-const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
-const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
-const DescribeIMCdrsRequest = models.DescribeIMCdrsRequest;
-const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
-const DescribeStaffStatusMetricsRequest = models.DescribeStaffStatusMetricsRequest;
-const DescribeAutoCalloutTaskRequest = models.DescribeAutoCalloutTaskRequest;
-const SkillGroupItem = models.SkillGroupItem;
-const CreateUserSigResponse = models.CreateUserSigResponse;
+const NumberInfo = models.NumberInfo;
 const DeleteStaffRequest = models.DeleteStaffRequest;
-const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
 const CallInMetrics = models.CallInMetrics;
 const DescribeCCCBuyInfoListRequest = models.DescribeCCCBuyInfoListRequest;
+const DescribeTelCallInfoRequest = models.DescribeTelCallInfoRequest;
+const Variable = models.Variable;
+const CallInNumberMetrics = models.CallInNumberMetrics;
+const CreateExtensionRequest = models.CreateExtensionRequest;
+const CreateAutoCalloutTaskRequest = models.CreateAutoCalloutTaskRequest;
+const Filter = models.Filter;
+const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
+const BindNumberCallOutSkillGroupResponse = models.BindNumberCallOutSkillGroupResponse;
+const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
+const StopAutoCalloutTaskResponse = models.StopAutoCalloutTaskResponse;
+const SkillGroupItem = models.SkillGroupItem;
+const MessageBody = models.MessageBody;
+const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
+const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
+const ActiveCarrierPrivilegeNumber = models.ActiveCarrierPrivilegeNumber;
+const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
+const DeleteExtensionResponse = models.DeleteExtensionResponse;
+const BindStaffSkillGroupListRequest = models.BindStaffSkillGroupListRequest;
+const DescribePSTNActiveSessionListRequest = models.DescribePSTNActiveSessionListRequest;
+const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
+const DescribeActiveCarrierPrivilegeNumberResponse = models.DescribeActiveCarrierPrivilegeNumberResponse;
+const IMSatisfaction = models.IMSatisfaction;
+const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
+const DescribeStaffStatusMetricsRequest = models.DescribeStaffStatusMetricsRequest;
 const DeleteStaffResponse = models.DeleteStaffResponse;
-const ErrStaffItem = models.ErrStaffItem;
 const StaffStatusExtra = models.StaffStatusExtra;
-const DescribeSkillGroupInfoListRequest = models.DescribeSkillGroupInfoListRequest;
 const CreateStaffRequest = models.CreateStaffRequest;
 const DescribeChatMessagesResponse = models.DescribeChatMessagesResponse;
 const SdkAppIdBuyInfo = models.SdkAppIdBuyInfo;
-const CallInNumberMetrics = models.CallInNumberMetrics;
-const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
 const DescribePSTNActiveSessionListResponse = models.DescribePSTNActiveSessionListResponse;
-const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
 const IMCdrInfo = models.IMCdrInfo;
-const StaffBuyInfo = models.StaffBuyInfo;
-const DescribeProtectedTelCdrResponse = models.DescribeProtectedTelCdrResponse;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeChatMessagesRequest = models.DescribeChatMessagesRequest;
-const PSTNSession = models.PSTNSession;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
-const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
-const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
-const StaffInfo = models.StaffInfo;
-const PSTNSessionInfo = models.PSTNSessionInfo;
-const ServeParticipant = models.ServeParticipant;
-const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
+const ModifyStaffResponse = models.ModifyStaffResponse;
 const DescribeStaffStatusMetricsResponse = models.DescribeStaffStatusMetricsResponse;
-const DescribeTelCallInfoResponse = models.DescribeTelCallInfoResponse;
-const SkillGroupInfoItem = models.SkillGroupInfoItem;
-const StopAutoCalloutTaskResponse = models.StopAutoCalloutTaskResponse;
-const DescribeSeatUserListResponse = models.DescribeSeatUserListResponse;
-const DescribeSeatUserListRequest = models.DescribeSeatUserListRequest;
-const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
-const StaffStatusMetrics = models.StaffStatusMetrics;
+const DescribeCarrierPrivilegeNumberApplicantsResponse = models.DescribeCarrierPrivilegeNumberApplicantsResponse;
+const HangUpCallResponse = models.HangUpCallResponse;
 const BindStaffSkillGroupListResponse = models.BindStaffSkillGroupListResponse;
-const DescribeAutoCalloutTasksResponse = models.DescribeAutoCalloutTasksResponse;
-const PackageBuyInfo = models.PackageBuyInfo;
-const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
+const DescribeExtensionsRequest = models.DescribeExtensionsRequest;
 const DescribeProtectedTelCdrRequest = models.DescribeProtectedTelCdrRequest;
-const MessageBody = models.MessageBody;
 const CreateSDKLoginTokenRequest = models.CreateSDKLoginTokenRequest;
-const DescribeTelCallInfoRequest = models.DescribeTelCallInfoRequest;
-const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
-const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
-const SeatUserInfo = models.SeatUserInfo;
+const DescribeActiveCarrierPrivilegeNumberRequest = models.DescribeActiveCarrierPrivilegeNumberRequest;
+const StaffBuyInfo = models.StaffBuyInfo;
 const DescribeCallInMetricsRequest = models.DescribeCallInMetricsRequest;
-const CreateStaffResponse = models.CreateStaffResponse;
-const Message = models.Message;
-const DescribeSkillGroupInfoListResponse = models.DescribeSkillGroupInfoListResponse;
-const DescribeIMCdrsResponse = models.DescribeIMCdrsResponse;
+const DescribeExtensionResponse = models.DescribeExtensionResponse;
 
 
 /**
@@ -101,6 +138,39 @@ class CccClient extends AbstractClient {
     }
     
     /**
+     * 解绑号码外呼技能组
+     * @param {UnbindNumberCallOutSkillGroupRequest} req
+     * @param {function(string, UnbindNumberCallOutSkillGroupResponse):void} cb
+     * @public
+     */
+    UnbindNumberCallOutSkillGroup(req, cb) {
+        let resp = new UnbindNumberCallOutSkillGroupResponse();
+        this.request("UnbindNumberCallOutSkillGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询话机列表信息
+     * @param {DescribeExtensionsRequest} req
+     * @param {function(string, DescribeExtensionsResponse):void} cb
+     * @public
+     */
+    DescribeExtensions(req, cb) {
+        let resp = new DescribeExtensionsResponse();
+        this.request("DescribeExtensions", req, resp, cb);
+    }
+
+    /**
+     * 创建话机账号
+     * @param {CreateExtensionRequest} req
+     * @param {function(string, CreateExtensionResponse):void} cb
+     * @public
+     */
+    CreateExtension(req, cb) {
+        let resp = new CreateExtensionResponse();
+        this.request("CreateExtension", req, resp, cb);
+    }
+
+    /**
      * 获取坐席信息列表
      * @param {DescribeStaffInfoListRequest} req
      * @param {function(string, DescribeStaffInfoListResponse):void} cb
@@ -109,6 +179,17 @@ class CccClient extends AbstractClient {
     DescribeStaffInfoList(req, cb) {
         let resp = new DescribeStaffInfoListResponse();
         this.request("DescribeStaffInfoList", req, resp, cb);
+    }
+
+    /**
+     * 挂断电话
+     * @param {HangUpCallRequest} req
+     * @param {function(string, HangUpCallResponse):void} cb
+     * @public
+     */
+    HangUpCall(req, cb) {
+        let resp = new HangUpCallResponse();
+        this.request("HangUpCall", req, resp, cb);
     }
 
     /**
@@ -123,6 +204,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * 删除话机账号
+     * @param {DeleteExtensionRequest} req
+     * @param {function(string, DeleteExtensionResponse):void} cb
+     * @public
+     */
+    DeleteExtension(req, cb) {
+        let resp = new DeleteExtensionResponse();
+        this.request("DeleteExtension", req, resp, cb);
+    }
+
+    /**
      * 绑定坐席所属技能组
      * @param {BindStaffSkillGroupListRequest} req
      * @param {function(string, BindStaffSkillGroupListResponse):void} cb
@@ -134,18 +226,18 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * 包括具体聊天内容
-     * @param {DescribeChatMessagesRequest} req
-     * @param {function(string, DescribeChatMessagesResponse):void} cb
+     * 绑定号码外呼技能组
+     * @param {BindNumberCallOutSkillGroupRequest} req
+     * @param {function(string, BindNumberCallOutSkillGroupResponse):void} cb
      * @public
      */
-    DescribeChatMessages(req, cb) {
-        let resp = new DescribeChatMessagesResponse();
-        this.request("DescribeChatMessages", req, resp, cb);
+    BindNumberCallOutSkillGroup(req, cb) {
+        let resp = new BindNumberCallOutSkillGroupResponse();
+        this.request("BindNumberCallOutSkillGroup", req, resp, cb);
     }
 
     /**
-     * 包括全媒体和文本两种类型
+     * 获取包括全媒体和文本会话两种类型的服务记录。
      * @param {DescribeIMCdrsRequest} req
      * @param {function(string, DescribeIMCdrsResponse):void} cb
      * @public
@@ -167,6 +259,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * 修改客服账号
+     * @param {ModifyStaffRequest} req
+     * @param {function(string, ModifyStaffResponse):void} cb
+     * @public
+     */
+    ModifyStaff(req, cb) {
+        let resp = new ModifyStaffResponse();
+        this.request("ModifyStaff", req, resp, cb);
+    }
+
+    /**
      * 批量查询自动任务外呼
      * @param {DescribeAutoCalloutTasksRequest} req
      * @param {function(string, DescribeAutoCalloutTasksResponse):void} cb
@@ -178,25 +281,47 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * 创建客服账号。
-     * @param {CreateStaffRequest} req
-     * @param {function(string, CreateStaffResponse):void} cb
+     * 重置话机注册密码
+     * @param {ResetExtensionPasswordRequest} req
+     * @param {function(string, ResetExtensionPasswordResponse):void} cb
      * @public
      */
-    CreateStaff(req, cb) {
-        let resp = new CreateStaffResponse();
-        this.request("CreateStaff", req, resp, cb);
+    ResetExtensionPassword(req, cb) {
+        let resp = new ResetExtensionPasswordResponse();
+        this.request("ResetExtensionPassword", req, resp, cb);
     }
 
     /**
-     * 获取 PSTN 会话信息
-     * @param {DescribeTelSessionRequest} req
-     * @param {function(string, DescribeTelSessionResponse):void} cb
+     * 按实例获取电话消耗统计
+     * @param {DescribeTelCallInfoRequest} req
+     * @param {function(string, DescribeTelCallInfoResponse):void} cb
      * @public
      */
-    DescribeTelSession(req, cb) {
-        let resp = new DescribeTelSessionResponse();
-        this.request("DescribeTelSession", req, resp, cb);
+    DescribeTelCallInfo(req, cb) {
+        let resp = new DescribeTelCallInfoResponse();
+        this.request("DescribeTelCallInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取话机信息
+     * @param {DescribeExtensionRequest} req
+     * @param {function(string, DescribeExtensionResponse):void} cb
+     * @public
+     */
+    DescribeExtension(req, cb) {
+        let resp = new DescribeExtensionResponse();
+        this.request("DescribeExtension", req, resp, cb);
+    }
+
+    /**
+     * 查询单状态
+     * @param {DescribeCarrierPrivilegeNumberApplicantsRequest} req
+     * @param {function(string, DescribeCarrierPrivilegeNumberApplicantsResponse):void} cb
+     * @public
+     */
+    DescribeCarrierPrivilegeNumberApplicants(req, cb) {
+        let resp = new DescribeCarrierPrivilegeNumberApplicantsResponse();
+        this.request("DescribeCarrierPrivilegeNumberApplicants", req, resp, cb);
     }
 
     /**
@@ -208,6 +333,17 @@ class CccClient extends AbstractClient {
     CreateCallOutSession(req, cb) {
         let resp = new CreateCallOutSessionResponse();
         this.request("CreateCallOutSession", req, resp, cb);
+    }
+
+    /**
+     * 获取 PSTN 会话信息
+     * @param {DescribeTelSessionRequest} req
+     * @param {function(string, DescribeTelSessionResponse):void} cb
+     * @public
+     */
+    DescribeTelSession(req, cb) {
+        let resp = new DescribeTelSessionResponse();
+        this.request("DescribeTelSession", req, resp, cb);
     }
 
     /**
@@ -255,6 +391,30 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * 用于无限频率地呼叫坐席手机
+     * @param {CreateCarrierPrivilegeNumberApplicantRequest} req
+     * @param {function(string, CreateCarrierPrivilegeNumberApplicantResponse):void} cb
+     * @public
+     */
+    CreateCarrierPrivilegeNumberApplicant(req, cb) {
+        let resp = new CreateCarrierPrivilegeNumberApplicantResponse();
+        this.request("CreateCarrierPrivilegeNumberApplicant", req, resp, cb);
+    }
+
+    /**
+     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
+
+文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     * @param {DescribeChatMessagesRequest} req
+     * @param {function(string, DescribeChatMessagesResponse):void} cb
+     * @public
+     */
+    DescribeChatMessages(req, cb) {
+        let resp = new DescribeChatMessagesResponse();
+        this.request("DescribeChatMessages", req, resp, cb);
+    }
+
+    /**
      * 获取用户购买信息列表
      * @param {DescribeCCCBuyInfoListRequest} req
      * @param {function(string, DescribeCCCBuyInfoListResponse):void} cb
@@ -263,6 +423,17 @@ class CccClient extends AbstractClient {
     DescribeCCCBuyInfoList(req, cb) {
         let resp = new DescribeCCCBuyInfoListResponse();
         this.request("DescribeCCCBuyInfoList", req, resp, cb);
+    }
+
+    /**
+     * 创建技能组
+     * @param {CreateCCCSkillGroupRequest} req
+     * @param {function(string, CreateCCCSkillGroupResponse):void} cb
+     * @public
+     */
+    CreateCCCSkillGroup(req, cb) {
+        let resp = new CreateCCCSkillGroupResponse();
+        this.request("CreateCCCSkillGroup", req, resp, cb);
     }
 
     /**
@@ -277,6 +448,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * 停用号码
+     * @param {DisableCCCPhoneNumberRequest} req
+     * @param {function(string, DisableCCCPhoneNumberResponse):void} cb
+     * @public
+     */
+    DisableCCCPhoneNumber(req, cb) {
+        let resp = new DisableCCCPhoneNumberResponse();
+        this.request("DisableCCCPhoneNumber", req, resp, cb);
+    }
+
+    /**
      * 获取坐席实时状态统计指标
      * @param {DescribeStaffStatusMetricsRequest} req
      * @param {function(string, DescribeStaffStatusMetricsResponse):void} cb
@@ -288,14 +470,14 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * 按实例获取电话消耗统计
-     * @param {DescribeTelCallInfoRequest} req
-     * @param {function(string, DescribeTelCallInfoResponse):void} cb
+     * 创建客服账号。
+     * @param {CreateStaffRequest} req
+     * @param {function(string, CreateStaffResponse):void} cb
      * @public
      */
-    DescribeTelCallInfo(req, cb) {
-        let resp = new DescribeTelCallInfoResponse();
-        this.request("DescribeTelCallInfo", req, resp, cb);
+    CreateStaff(req, cb) {
+        let resp = new CreateStaffResponse();
+        this.request("CreateStaff", req, resp, cb);
     }
 
     /**
@@ -307,6 +489,17 @@ class CccClient extends AbstractClient {
     CreateAutoCalloutTask(req, cb) {
         let resp = new CreateAutoCalloutTaskResponse();
         this.request("CreateAutoCalloutTask", req, resp, cb);
+    }
+
+    /**
+     * 修改话机账号(绑定技能组、绑定坐席账号)
+     * @param {ModifyExtensionRequest} req
+     * @param {function(string, ModifyExtensionResponse):void} cb
+     * @public
+     */
+    ModifyExtension(req, cb) {
+        let resp = new ModifyExtensionResponse();
+        this.request("ModifyExtension", req, resp, cb);
     }
 
     /**
@@ -354,16 +547,25 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * 废弃接口下架
-
-获取坐席用户列表（废弃）
-     * @param {DescribeSeatUserListRequest} req
-     * @param {function(string, DescribeSeatUserListResponse):void} cb
+     * 查询生效运营商白名单规则
+     * @param {DescribeActiveCarrierPrivilegeNumberRequest} req
+     * @param {function(string, DescribeActiveCarrierPrivilegeNumberResponse):void} cb
      * @public
      */
-    DescribeSeatUserList(req, cb) {
-        let resp = new DescribeSeatUserListResponse();
-        this.request("DescribeSeatUserList", req, resp, cb);
+    DescribeActiveCarrierPrivilegeNumber(req, cb) {
+        let resp = new DescribeActiveCarrierPrivilegeNumberResponse();
+        this.request("DescribeActiveCarrierPrivilegeNumber", req, resp, cb);
+    }
+
+    /**
+     * 查询号码列表
+     * @param {DescribeNumbersRequest} req
+     * @param {function(string, DescribeNumbersResponse):void} cb
+     * @public
+     */
+    DescribeNumbers(req, cb) {
+        let resp = new DescribeNumbersResponse();
+        this.request("DescribeNumbers", req, resp, cb);
     }
 
 

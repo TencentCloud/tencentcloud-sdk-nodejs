@@ -420,12 +420,10 @@ class DescribeDosageDetailByDateRequest extends  AbstractModel {
 10195   互动直播-边缘机房
 
 cdn业务：
-10180：CDN静态加速流量(国内)
-10181：CDN静态加速带宽(国内)
-10182：CDN静态加速普通流量
-10183：CDN静态加速普通带宽
-10231：CDN静态加速流量(海外)
-10232：CDN静态加速带宽(海外)
+102383：CDN静态加速流量(国内)
+102384：CDN静态加速带宽(国内)
+102385：CDN静态加速流量(海外)
+102386：CDN静态加速带宽(海外)
 
 100967：弹性公网IP-按流量计费
 101065：公网负载均衡-按流量计费
@@ -533,6 +531,12 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 分成金金额
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -551,6 +555,7 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -1134,6 +1139,38 @@ class BillResourceSummary extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * 资源包、预留实例、节省计划、竞价实例这四类特殊实例本身的扣费行为，此字段体现对应的实例类型。枚举值如下：
+
+ri=Standard RI
+
+svp=Savings Plan
+
+si=Spot Instances
+
+rp=Resource Pack
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 按组件原价的口径换算的预留实例抵扣金额
+         * @type {string || null}
+         */
+        this.OriginalCostWithRI = null;
+
+        /**
+         * 节省计划抵扣的SP包面值
+         * @type {string || null}
+         */
+        this.SPDeduction = null;
+
+        /**
+         * 按组件原价的口径换算的节省计划抵扣金额
+         * @type {string || null}
+         */
+        this.OriginalCostWithSP = null;
+
     }
 
     /**
@@ -1184,6 +1221,10 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OriginalCostWithRI = 'OriginalCostWithRI' in params ? params.OriginalCostWithRI : null;
+        this.SPDeduction = 'SPDeduction' in params ? params.SPDeduction : null;
+        this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
 
     }
 }
@@ -1958,7 +1999,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * 查询交易类型，如下：
+         * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
 包年包月新购
 包年包月续费
 包年包月配置变更
@@ -1983,10 +2024,6 @@ class DescribeBillDetailRequest extends  AbstractModel {
 预付费用
 小时费用
 预留实例退款
-按量计费冲正
-按量计费冲正
-按量计费冲正
-按量计费冲正
 按量计费冲正
 包年包月转按量
          * @type {string || null}
@@ -2164,6 +2201,12 @@ class RegionSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 分成金金额
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2182,6 +2225,7 @@ class RegionSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2725,6 +2769,12 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 分成金金额
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2743,6 +2793,7 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2872,6 +2923,55 @@ class BillDetailComponent extends  AbstractModel {
          */
         this.ContractPrice = null;
 
+        /**
+         * 资源包、预留实例、节省计划、竞价实例这四类特殊实例本身的扣费行为，此字段体现对应的实例类型。枚举值如下：
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 预留实例抵扣的使用时长，时长单位与被抵扣的时长单位保持一致
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiTimeSpan = null;
+
+        /**
+         * 按组件原价的口径换算的预留实例抵扣金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalCostWithRI = null;
+
+        /**
+         * 节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SPDeductionRate = null;
+
+        /**
+         * 节省计划抵扣的SP包面值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SPDeduction = null;
+
+        /**
+         * 按组件原价的口径换算的节省计划抵扣金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalCostWithSP = null;
+
+        /**
+         * 综合了官网折扣、预留实例抵扣、节省计划抵扣的混合折扣率。若没有预留实例抵扣、节省计划抵扣,混合折扣率等于折扣率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BlendedDiscount = null;
+
     }
 
     /**
@@ -2900,6 +3000,13 @@ class BillDetailComponent extends  AbstractModel {
         this.ItemCode = 'ItemCode' in params ? params.ItemCode : null;
         this.ComponentCode = 'ComponentCode' in params ? params.ComponentCode : null;
         this.ContractPrice = 'ContractPrice' in params ? params.ContractPrice : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.RiTimeSpan = 'RiTimeSpan' in params ? params.RiTimeSpan : null;
+        this.OriginalCostWithRI = 'OriginalCostWithRI' in params ? params.OriginalCostWithRI : null;
+        this.SPDeductionRate = 'SPDeductionRate' in params ? params.SPDeductionRate : null;
+        this.SPDeduction = 'SPDeduction' in params ? params.SPDeduction : null;
+        this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
+        this.BlendedDiscount = 'BlendedDiscount' in params ? params.BlendedDiscount : null;
 
     }
 }
@@ -3822,10 +3929,6 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
 小时费用
 预留实例退款
 按量计费冲正
-按量计费冲正
-按量计费冲正
-按量计费冲正
-按量计费冲正
 包年包月转按量
          * @type {string || null}
          */
@@ -4410,6 +4513,34 @@ class TagSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 现金金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 分成金金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -4423,6 +4554,10 @@ class TagSummaryOverviewItem extends  AbstractModel {
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -5129,13 +5264,13 @@ class CosDetailSets extends  AbstractModel {
         this.DosageEndTime = null;
 
         /**
-         * 一级产品类型名称
+         * 子产品名称
          * @type {string || null}
          */
         this.SubProductCodeName = null;
 
         /**
-         * 二级产品类型名称
+         * 计费项名称
          * @type {string || null}
          */
         this.BillingItemCodeName = null;
@@ -5443,13 +5578,13 @@ class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询用量开始时间
+         * 查询用量开始时间，例如：2020-09-01
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * 查询用量结束时间（与开始时间同月，不支持跨月查询）
+         * 查询用量结束时间，例如：2020-09-30（与开始时间同月，不支持跨月查询）
          * @type {string || null}
          */
         this.EndDate = null;
@@ -5573,6 +5708,12 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 分成金金额
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -5599,6 +5740,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -5641,6 +5783,12 @@ class BusinessSummaryTotal extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 分成金金额
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -5655,6 +5803,7 @@ class BusinessSummaryTotal extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }

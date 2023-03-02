@@ -16,29 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeImageStatRequest = models.DescribeImageStatRequest;
-const TrendCount = models.TrendCount;
-const Location = models.Location;
-const LabelDetailItem = models.LabelDetailItem;
-const ImageModerationResponse = models.ImageModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
-const DescribeImsListResponse = models.DescribeImsListResponse;
-const OcrResult = models.OcrResult;
-const User = models.User;
-const LabelResult = models.LabelResult;
-const Device = models.Device;
-const ImsDetail = models.ImsDetail;
-const EvilCount = models.EvilCount;
 const ObjectResult = models.ObjectResult;
 const OcrTextDetail = models.OcrTextDetail;
 const ObjectDetail = models.ObjectDetail;
-const Filter = models.Filter;
-const DescribeImageStatResponse = models.DescribeImageStatResponse;
-const DescribeImsListRequest = models.DescribeImsListRequest;
-const LibResult = models.LibResult;
-const Overview = models.Overview;
+const OcrResult = models.OcrResult;
 const LibDetail = models.LibDetail;
-const Filters = models.Filters;
+const Location = models.Location;
+const LabelResult = models.LabelResult;
+const LabelDetailItem = models.LabelDetailItem;
+const Device = models.Device;
+const LibResult = models.LibResult;
+const ImageModerationResponse = models.ImageModerationResponse;
+const User = models.User;
 
 
 /**
@@ -52,7 +42,7 @@ class ImsClient extends AbstractClient {
     }
     
     /**
-     * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别可能令人反感、不安全或不适宜的内容，同时支持用户配置图片黑名单，打击自定义识别类型的图片。
+     * 图片同步检测服务（Image Moderation, IM）能自动扫描图片，识别可能令人反感、不安全或不适宜的内容，同时支持用户配置图片黑名单，打击自定义识别类型的图片。
 
 <div class="rno-api-explorer" style="margin-bottom:20px">
     <div class="rno-api-explorer-inner">
@@ -76,28 +66,6 @@ class ImsClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
-    }
-
-    /**
-     * 图片机器审核明细
-     * @param {DescribeImsListRequest} req
-     * @param {function(string, DescribeImsListResponse):void} cb
-     * @public
-     */
-    DescribeImsList(req, cb) {
-        let resp = new DescribeImsListResponse();
-        this.request("DescribeImsList", req, resp, cb);
-    }
-
-    /**
-     * 控制台识别统计
-     * @param {DescribeImageStatRequest} req
-     * @param {function(string, DescribeImageStatResponse):void} cb
-     * @public
-     */
-    DescribeImageStat(req, cb) {
-        let resp = new DescribeImageStatResponse();
-        this.request("DescribeImageStat", req, resp, cb);
     }
 
 

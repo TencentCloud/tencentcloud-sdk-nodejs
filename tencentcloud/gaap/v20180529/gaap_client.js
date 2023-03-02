@@ -16,14 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DisableGlobalDomainRequest = models.DisableGlobalDomainRequest;
 const RegionDetail = models.RegionDetail;
 const DestAddressInfo = models.DestAddressInfo;
 const DescribeUDPListenersRequest = models.DescribeUDPListenersRequest;
+const DescribeGlobalDomainsRequest = models.DescribeGlobalDomainsRequest;
 const DeleteProxyGroupRequest = models.DeleteProxyGroupRequest;
+const OpenSecurityPolicyResponse = models.OpenSecurityPolicyResponse;
+const ModifyGlobalDomainAttributeRequest = models.ModifyGlobalDomainAttributeRequest;
 const DescribeResourcesByTagRequest = models.DescribeResourcesByTagRequest;
 const DescribeListenerStatisticsRequest = models.DescribeListenerStatisticsRequest;
 const DescribeProxyAndStatisticsListenersResponse = models.DescribeProxyAndStatisticsListenersResponse;
 const DeleteRuleRequest = models.DeleteRuleRequest;
+const DescribeCrossBorderProxiesRequest = models.DescribeCrossBorderProxiesRequest;
 const BindRuleRealServersRequest = models.BindRuleRealServersRequest;
 const DescribeHTTPSListenersResponse = models.DescribeHTTPSListenersResponse;
 const ModifyProxiesProjectRequest = models.ModifyProxiesProjectRequest;
@@ -33,6 +38,7 @@ const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest
 const TagResourceInfo = models.TagResourceInfo;
 const SetAuthenticationResponse = models.SetAuthenticationResponse;
 const DescribeProxyGroupStatisticsResponse = models.DescribeProxyGroupStatisticsResponse;
+const DisableGlobalDomainResponse = models.DisableGlobalDomainResponse;
 const DescribeResourcesByTagResponse = models.DescribeResourcesByTagResponse;
 const ModifyGroupDomainConfigRequest = models.ModifyGroupDomainConfigRequest;
 const BandwidthPriceGradient = models.BandwidthPriceGradient;
@@ -57,6 +63,7 @@ const CreateRuleResponse = models.CreateRuleResponse;
 const ModifyRealServerNameRequest = models.ModifyRealServerNameRequest;
 const ModifyGroupDomainConfigResponse = models.ModifyGroupDomainConfigResponse;
 const DeleteProxyGroupResponse = models.DeleteProxyGroupResponse;
+const CreateGlobalDomainDnsResponse = models.CreateGlobalDomainDnsResponse;
 const CreateDomainErrorPageInfoResponse = models.CreateDomainErrorPageInfoResponse;
 const BindListenerRealServersRequest = models.BindListenerRealServersRequest;
 const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
@@ -77,54 +84,61 @@ const CreateFirstLinkSessionRequest = models.CreateFirstLinkSessionRequest;
 const ModifyCertificateAttributesResponse = models.ModifyCertificateAttributesResponse;
 const DescribeSecurityPolicyDetailResponse = models.DescribeSecurityPolicyDetailResponse;
 const CreateHTTPListenerResponse = models.CreateHTTPListenerResponse;
-const ModifyUDPListenerAttributeResponse = models.ModifyUDPListenerAttributeResponse;
+const DeleteGlobalDomainDnsResponse = models.DeleteGlobalDomainDnsResponse;
 const CreateProxyGroupRequest = models.CreateProxyGroupRequest;
 const RuleInfo = models.RuleInfo;
 const RealServerStatus = models.RealServerStatus;
 const DescribeTCPListenersResponse = models.DescribeTCPListenersResponse;
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeCountryAreaMappingResponse = models.DescribeCountryAreaMappingResponse;
+const DescribeCrossBorderProxiesResponse = models.DescribeCrossBorderProxiesResponse;
 const DescribeRealServersResponse = models.DescribeRealServersResponse;
 const ModifyHTTPListenerAttributeResponse = models.ModifyHTTPListenerAttributeResponse;
 const DescribeRealServerStatisticsRequest = models.DescribeRealServerStatisticsRequest;
 const DeleteFirstLinkSessionRequest = models.DeleteFirstLinkSessionRequest;
 const BindRealServerInfo = models.BindRealServerInfo;
+const ModifyGlobalDomainAttributeResponse = models.ModifyGlobalDomainAttributeResponse;
 const DescribeProxyAndStatisticsListenersRequest = models.DescribeProxyAndStatisticsListenersRequest;
 const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const DeleteListenersRequest = models.DeleteListenersRequest;
 const DescribeSecurityRulesRequest = models.DescribeSecurityRulesRequest;
 const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
+const ProxyAccessInfo = models.ProxyAccessInfo;
 const DescribeDomainErrorPageInfoByIdsResponse = models.DescribeDomainErrorPageInfoByIdsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const DescribeAccessRegionsByDestRegionResponse = models.DescribeAccessRegionsByDestRegionResponse;
 const ModifyProxyGroupAttributeResponse = models.ModifyProxyGroupAttributeResponse;
+const CreateGlobalDomainResponse = models.CreateGlobalDomainResponse;
 const ListenerInfo = models.ListenerInfo;
 const DescribeUDPListenersResponse = models.DescribeUDPListenersResponse;
 const CreateUDPListenersRequest = models.CreateUDPListenersRequest;
-const ModifyRuleAttributeRequest = models.ModifyRuleAttributeRequest;
+const CreateGlobalDomainRequest = models.CreateGlobalDomainRequest;
 const CreateSecurityPolicyResponse = models.CreateSecurityPolicyResponse;
 const TCPListener = models.TCPListener;
+const EnableGlobalDomainResponse = models.EnableGlobalDomainResponse;
 const CreateSecurityRulesResponse = models.CreateSecurityRulesResponse;
 const DescribeAccessRegionsRequest = models.DescribeAccessRegionsRequest;
 const CreateCertificateRequest = models.CreateCertificateRequest;
-const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
+const CreateProxyGroupDomainResponse = models.CreateProxyGroupDomainResponse;
 const DescribeCustomHeaderRequest = models.DescribeCustomHeaderRequest;
 const DescribeProxyGroupListResponse = models.DescribeProxyGroupListResponse;
+const DescribeGlobalDomainDnsRequest = models.DescribeGlobalDomainDnsRequest;
 const DescribeDomainErrorPageInfoRequest = models.DescribeDomainErrorPageInfoRequest;
-const HTTPSListener = models.HTTPSListener;
-const DomainAccessRegionDict = models.DomainAccessRegionDict;
+const Domain = models.Domain;
+const BanAndRecoverProxyRequest = models.BanAndRecoverProxyRequest;
 const CloseSecurityPolicyRequest = models.CloseSecurityPolicyRequest;
 const ModifyCertificateAttributesRequest = models.ModifyCertificateAttributesRequest;
-const ModifyProxyConfigurationRequest = models.ModifyProxyConfigurationRequest;
+const ModifyGlobalDomainDnsRequest = models.ModifyGlobalDomainDnsRequest;
 const CreateSecurityRulesRequest = models.CreateSecurityRulesRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
 const DescribeProxiesStatusRequest = models.DescribeProxiesStatusRequest;
 const ModifyTCPListenerAttributeRequest = models.ModifyTCPListenerAttributeRequest;
 const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateDomainResponse = models.CreateDomainResponse;
-const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
+const EnableGlobalDomainRequest = models.EnableGlobalDomainRequest;
+const ModifyGlobalDomainDnsResponse = models.ModifyGlobalDomainDnsResponse;
 const ModifyDomainRequest = models.ModifyDomainRequest;
-const ModifySecurityRuleRequest = models.ModifySecurityRuleRequest;
+const DeleteGlobalDomainDnsRequest = models.DeleteGlobalDomainDnsRequest;
 const CreateCustomHeaderResponse = models.CreateCustomHeaderResponse;
 const DescribeAccessRegionsByDestRegionRequest = models.DescribeAccessRegionsByDestRegionRequest;
 const RealServer = models.RealServer;
@@ -133,11 +147,12 @@ const StatisticsDataInfo = models.StatisticsDataInfo;
 const CreateCustomHeaderRequest = models.CreateCustomHeaderRequest;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const Capacity = models.Capacity;
-const CreateProxyGroupDomainResponse = models.CreateProxyGroupDomainResponse;
+const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
 const Certificate = models.Certificate;
 const DescribeDomainErrorPageInfoResponse = models.DescribeDomainErrorPageInfoResponse;
 const DestroyProxiesResponse = models.DestroyProxiesResponse;
 const DescribeRuleRealServersResponse = models.DescribeRuleRealServersResponse;
+const BanAndRecoverProxyResponse = models.BanAndRecoverProxyResponse;
 const DescribeRealServersStatusRequest = models.DescribeRealServersStatusRequest;
 const ModifyHTTPListenerAttributeRequest = models.ModifyHTTPListenerAttributeRequest;
 const CreateProxyRequest = models.CreateProxyRequest;
@@ -147,6 +162,8 @@ const DescribeProxiesStatusResponse = models.DescribeProxiesStatusResponse;
 const RemoveRealServersRequest = models.RemoveRealServersRequest;
 const CreateDomainRequest = models.CreateDomainRequest;
 const CreateRuleRequest = models.CreateRuleRequest;
+const ModifyProxyConfigurationRequest = models.ModifyProxyConfigurationRequest;
+const CreateGlobalDomainDnsRequest = models.CreateGlobalDomainDnsRequest;
 const ProxySimpleInfo = models.ProxySimpleInfo;
 const DeleteSecurityPolicyRequest = models.DeleteSecurityPolicyRequest;
 const HTTPListener = models.HTTPListener;
@@ -160,12 +177,15 @@ const DeleteCertificateResponse = models.DeleteCertificateResponse;
 const SecurityPolicyRuleIn = models.SecurityPolicyRuleIn;
 const DescribeBlackHeaderResponse = models.DescribeBlackHeaderResponse;
 const DescribeDestRegionsRequest = models.DescribeDestRegionsRequest;
+const HTTPSListener = models.HTTPSListener;
 const ModifyRuleAttributeResponse = models.ModifyRuleAttributeResponse;
 const CreateTCPListenersResponse = models.CreateTCPListenersResponse;
 const DescribeSecurityPolicyDetailRequest = models.DescribeSecurityPolicyDetailRequest;
 const ModifyDomainResponse = models.ModifyDomainResponse;
 const DescribeRulesByRuleIdsResponse = models.DescribeRulesByRuleIdsResponse;
 const SetAuthenticationRequest = models.SetAuthenticationRequest;
+const DomainAccessRegionDict = models.DomainAccessRegionDict;
+const GlobalDns = models.GlobalDns;
 const InquiryPriceCreateProxyResponse = models.InquiryPriceCreateProxyResponse;
 const NewRealServer = models.NewRealServer;
 const DescribeFirstLinkSessionResponse = models.DescribeFirstLinkSessionResponse;
@@ -188,8 +208,11 @@ const TagPair = models.TagPair;
 const CreateProxyGroupResponse = models.CreateProxyGroupResponse;
 const CreateHTTPSListenerResponse = models.CreateHTTPSListenerResponse;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const ModifyRuleAttributeRequest = models.ModifyRuleAttributeRequest;
 const DescribeFirstLinkSessionRequest = models.DescribeFirstLinkSessionRequest;
 const BindRuleRealServersResponse = models.BindRuleRealServersResponse;
+const DescribeGlobalDomainDnsResponse = models.DescribeGlobalDomainDnsResponse;
+const ModifyUDPListenerAttributeResponse = models.ModifyUDPListenerAttributeResponse;
 const DescribeGroupAndStatisticsProxyRequest = models.DescribeGroupAndStatisticsProxyRequest;
 const SrcAddressInfo = models.SrcAddressInfo;
 const ModifyUDPListenerAttributeRequest = models.ModifyUDPListenerAttributeRequest;
@@ -209,6 +232,7 @@ const DescribeBlackHeaderRequest = models.DescribeBlackHeaderRequest;
 const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
+const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
 const CloseProxyGroupResponse = models.CloseProxyGroupResponse;
 const DeleteFirstLinkSessionResponse = models.DeleteFirstLinkSessionResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
@@ -223,6 +247,7 @@ const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const OpenProxyGroupResponse = models.OpenProxyGroupResponse;
+const ModifySecurityRuleRequest = models.ModifySecurityRuleRequest;
 const NationCountryInnerInfo = models.NationCountryInnerInfo;
 const ProxyIdDict = models.ProxyIdDict;
 const Filter = models.Filter;
@@ -233,12 +258,14 @@ const DescribeProxyGroupDetailsResponse = models.DescribeProxyGroupDetailsRespon
 const OpenProxyGroupRequest = models.OpenProxyGroupRequest;
 const DeviceInfo = models.DeviceInfo;
 const UDPListener = models.UDPListener;
+const DeleteGlobalDomainRequest = models.DeleteGlobalDomainRequest;
 const ProxyInfo = models.ProxyInfo;
 const RemoveRealServersResponse = models.RemoveRealServersResponse;
 const DescribeRulesByRuleIdsRequest = models.DescribeRulesByRuleIdsRequest;
-const OpenSecurityPolicyResponse = models.OpenSecurityPolicyResponse;
+const DeleteGlobalDomainResponse = models.DeleteGlobalDomainResponse;
 const RealServerBindSetReq = models.RealServerBindSetReq;
 const CloseProxyGroupRequest = models.CloseProxyGroupRequest;
+const DescribeGlobalDomainsResponse = models.DescribeGlobalDomainsResponse;
 const OpenProxiesResponse = models.OpenProxiesResponse;
 const ModifyProxyConfigurationResponse = models.ModifyProxyConfigurationResponse;
 const CreateDomainErrorPageInfoRequest = models.CreateDomainErrorPageInfoRequest;
@@ -254,6 +281,17 @@ class GaapClient extends AbstractClient {
         super("gaap.tencentcloudapi.com", "2018-05-29", credential, region, profile);
     }
     
+    /**
+     * 修改域名解析记录
+     * @param {ModifyGlobalDomainDnsRequest} req
+     * @param {function(string, ModifyGlobalDomainDnsResponse):void} cb
+     * @public
+     */
+    ModifyGlobalDomainDns(req, cb) {
+        let resp = new ModifyGlobalDomainDnsResponse();
+        this.request("ModifyGlobalDomainDns", req, resp, cb);
+    }
+
     /**
      * 本接口（DescribeCertificates）用来查询可以使用的证书列表。
      * @param {DescribeCertificatesRequest} req
@@ -344,6 +382,28 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 查询域名解析列表
+     * @param {DescribeGlobalDomainDnsRequest} req
+     * @param {function(string, DescribeGlobalDomainDnsResponse):void} cb
+     * @public
+     */
+    DescribeGlobalDomainDns(req, cb) {
+        let resp = new DescribeGlobalDomainDnsResponse();
+        this.request("DescribeGlobalDomainDns", req, resp, cb);
+    }
+
+    /**
+     * 用来创建统一域名
+     * @param {CreateGlobalDomainRequest} req
+     * @param {function(string, CreateGlobalDomainResponse):void} cb
+     * @public
+     */
+    CreateGlobalDomain(req, cb) {
+        let resp = new CreateGlobalDomainResponse();
+        this.request("CreateGlobalDomain", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateCustomHeader）用于创建HTTP/HTTPS监听器的自定义header，客户端请求通过访问该监听器时，会将监听器中配置的header信息发送到源站。
      * @param {CreateCustomHeaderRequest} req
      * @param {function(string, CreateCustomHeaderResponse):void} cb
@@ -352,6 +412,17 @@ class GaapClient extends AbstractClient {
     CreateCustomHeader(req, cb) {
         let resp = new CreateCustomHeaderResponse();
         this.request("CreateCustomHeader", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeCrossBorderProxies）用于查询跨境通道实例列表。
+     * @param {DescribeCrossBorderProxiesRequest} req
+     * @param {function(string, DescribeCrossBorderProxiesResponse):void} cb
+     * @public
+     */
+    DescribeCrossBorderProxies(req, cb) {
+        let resp = new DescribeCrossBorderProxiesResponse();
+        this.request("DescribeCrossBorderProxies", req, resp, cb);
     }
 
     /**
@@ -418,6 +489,17 @@ class GaapClient extends AbstractClient {
     DescribeRuleRealServers(req, cb) {
         let resp = new DescribeRuleRealServersResponse();
         this.request("DescribeRuleRealServers", req, resp, cb);
+    }
+
+    /**
+     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     * @param {DescribeUDPListenersRequest} req
+     * @param {function(string, DescribeUDPListenersResponse):void} cb
+     * @public
+     */
+    DescribeUDPListeners(req, cb) {
+        let resp = new DescribeUDPListenersResponse();
+        this.request("DescribeUDPListeners", req, resp, cb);
     }
 
     /**
@@ -609,14 +691,14 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
-     * @param {CreateHTTPListenerRequest} req
-     * @param {function(string, CreateHTTPListenerResponse):void} cb
+     * 修改域名属性
+     * @param {ModifyGlobalDomainAttributeRequest} req
+     * @param {function(string, ModifyGlobalDomainAttributeResponse):void} cb
      * @public
      */
-    CreateHTTPListener(req, cb) {
-        let resp = new CreateHTTPListenerResponse();
-        this.request("CreateHTTPListener", req, resp, cb);
+    ModifyGlobalDomainAttribute(req, cb) {
+        let resp = new ModifyGlobalDomainAttributeResponse();
+        this.request("ModifyGlobalDomainAttribute", req, resp, cb);
     }
 
     /**
@@ -664,6 +746,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 该接口（CreateHTTPListener）用于在通道实例下创建HTTP协议类型的监听器。
+     * @param {CreateHTTPListenerRequest} req
+     * @param {function(string, CreateHTTPListenerResponse):void} cb
+     * @public
+     */
+    CreateHTTPListener(req, cb) {
+        let resp = new CreateHTTPListenerResponse();
+        this.request("CreateHTTPListener", req, resp, cb);
+    }
+
+    /**
      * 该接口（DescribeRealServerStatistics）用于查询源站健康检查结果的统计数据。源站状态展示位为1：正常或者0：异常。查询的源站需要在监听器或者规则上进行了绑定，查询时需指定绑定的监听器或者规则ID。该接口支持1分钟细粒度的源站状态统计数据展示。
      * @param {DescribeRealServerStatisticsRequest} req
      * @param {function(string, DescribeRealServerStatisticsResponse):void} cb
@@ -675,14 +768,14 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
-     * @param {DescribeUDPListenersRequest} req
-     * @param {function(string, DescribeUDPListenersResponse):void} cb
+     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
+     * @param {DescribeHTTPListenersRequest} req
+     * @param {function(string, DescribeHTTPListenersResponse):void} cb
      * @public
      */
-    DescribeUDPListeners(req, cb) {
-        let resp = new DescribeUDPListenersResponse();
-        this.request("DescribeUDPListeners", req, resp, cb);
+    DescribeHTTPListeners(req, cb) {
+        let resp = new DescribeHTTPListenersResponse();
+        this.request("DescribeHTTPListeners", req, resp, cb);
     }
 
     /**
@@ -719,14 +812,14 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
-     * @param {ModifyProxiesAttributeRequest} req
-     * @param {function(string, ModifyProxiesAttributeResponse):void} cb
+     * 删除域名的某条解析记录
+     * @param {DeleteGlobalDomainDnsRequest} req
+     * @param {function(string, DeleteGlobalDomainDnsResponse):void} cb
      * @public
      */
-    ModifyProxiesAttribute(req, cb) {
-        let resp = new ModifyProxiesAttributeResponse();
-        this.request("ModifyProxiesAttribute", req, resp, cb);
+    DeleteGlobalDomainDns(req, cb) {
+        let resp = new DeleteGlobalDomainDnsResponse();
+        this.request("DeleteGlobalDomainDns", req, resp, cb);
     }
 
     /**
@@ -782,6 +875,17 @@ class GaapClient extends AbstractClient {
     RemoveRealServers(req, cb) {
         let resp = new RemoveRealServersResponse();
         this.request("RemoveRealServers", req, resp, cb);
+    }
+
+    /**
+     * 删除统一域名
+     * @param {DeleteGlobalDomainRequest} req
+     * @param {function(string, DeleteGlobalDomainResponse):void} cb
+     * @public
+     */
+    DeleteGlobalDomain(req, cb) {
+        let resp = new DeleteGlobalDomainResponse();
+        this.request("DeleteGlobalDomain", req, resp, cb);
     }
 
     /**
@@ -848,17 +952,6 @@ class GaapClient extends AbstractClient {
     OpenProxies(req, cb) {
         let resp = new OpenProxiesResponse();
         this.request("OpenProxies", req, resp, cb);
-    }
-
-    /**
-     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
-     * @param {DescribeHTTPListenersRequest} req
-     * @param {function(string, DescribeHTTPListenersResponse):void} cb
-     * @public
-     */
-    DescribeHTTPListeners(req, cb) {
-        let resp = new DescribeHTTPListenersResponse();
-        this.request("DescribeHTTPListeners", req, resp, cb);
     }
 
     /**
@@ -973,6 +1066,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 暂停域名解析
+     * @param {DisableGlobalDomainRequest} req
+     * @param {function(string, DisableGlobalDomainResponse):void} cb
+     * @public
+     */
+    DisableGlobalDomain(req, cb) {
+        let resp = new DisableGlobalDomainResponse();
+        this.request("DisableGlobalDomain", req, resp, cb);
+    }
+
+    /**
      * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格
      * @param {DescribeRegionAndPriceRequest} req
      * @param {function(string, DescribeRegionAndPriceResponse):void} cb
@@ -981,6 +1085,17 @@ class GaapClient extends AbstractClient {
     DescribeRegionAndPrice(req, cb) {
         let resp = new DescribeRegionAndPriceResponse();
         this.request("DescribeRegionAndPrice", req, resp, cb);
+    }
+
+    /**
+     * 查询域名列表
+     * @param {DescribeGlobalDomainsRequest} req
+     * @param {function(string, DescribeGlobalDomainsResponse):void} cb
+     * @public
+     */
+    DescribeGlobalDomains(req, cb) {
+        let resp = new DescribeGlobalDomainsResponse();
+        this.request("DescribeGlobalDomains", req, resp, cb);
     }
 
     /**
@@ -1003,6 +1118,17 @@ class GaapClient extends AbstractClient {
     DescribeRules(req, cb) {
         let resp = new DescribeRulesResponse();
         this.request("DescribeRules", req, resp, cb);
+    }
+
+    /**
+     * 开启域名解析
+     * @param {EnableGlobalDomainRequest} req
+     * @param {function(string, EnableGlobalDomainResponse):void} cb
+     * @public
+     */
+    EnableGlobalDomain(req, cb) {
+        let resp = new EnableGlobalDomainResponse();
+        this.request("EnableGlobalDomain", req, resp, cb);
     }
 
     /**
@@ -1094,6 +1220,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyProxiesAttribute）用于修改实例的属性（目前只支持修改通道的名称）。
+     * @param {ModifyProxiesAttributeRequest} req
+     * @param {function(string, ModifyProxiesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyProxiesAttribute(req, cb) {
+        let resp = new ModifyProxiesAttributeResponse();
+        this.request("ModifyProxiesAttribute", req, resp, cb);
+    }
+
+    /**
      * 该接口（ModifyHTTPSListenerAttribute）用于修改HTTPS监听器配置，当前不支持通道组和v1版本通道。
      * @param {ModifyHTTPSListenerAttributeRequest} req
      * @param {function(string, ModifyHTTPSListenerAttributeResponse):void} cb
@@ -1149,6 +1286,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 本接口（BanAndRecoverProxy）用于联通封禁解封GAAP跨境通道实例，支持按照客户UIN维度下发请求。被封禁的实例带宽上限将会被限制到0Mbps，无法正常处理客户端和源站之间的请求。
+     * @param {BanAndRecoverProxyRequest} req
+     * @param {function(string, BanAndRecoverProxyResponse):void} cb
+     * @public
+     */
+    BanAndRecoverProxy(req, cb) {
+        let resp = new BanAndRecoverProxyResponse();
+        this.request("BanAndRecoverProxy", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称。
      * @param {ModifyProxyGroupAttributeRequest} req
      * @param {function(string, ModifyProxyGroupAttributeResponse):void} cb
@@ -1168,6 +1316,17 @@ class GaapClient extends AbstractClient {
     InquiryPriceCreateProxy(req, cb) {
         let resp = new InquiryPriceCreateProxyResponse();
         this.request("InquiryPriceCreateProxy", req, resp, cb);
+    }
+
+    /**
+     * 创建域名解析记录
+     * @param {CreateGlobalDomainDnsRequest} req
+     * @param {function(string, CreateGlobalDomainDnsResponse):void} cb
+     * @public
+     */
+    CreateGlobalDomainDns(req, cb) {
+        let resp = new CreateGlobalDomainDnsResponse();
+        this.request("CreateGlobalDomainDns", req, resp, cb);
     }
 
     /**

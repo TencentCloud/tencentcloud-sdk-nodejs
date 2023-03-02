@@ -108,6 +108,43 @@ class SentenceEmbeddingRequest extends  AbstractModel {
 }
 
 /**
+ * TextClassification请求参数结构体
+ * @class
+ */
+class TextClassificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 领域分类体系（默认取1值）：
+1、通用领域，二分类
+2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+
+    }
+}
+
+/**
  * WordSimilarity请求参数结构体
  * @class
  */
@@ -1240,26 +1277,36 @@ class DescribeWordItemsRequest extends  AbstractModel {
 }
 
 /**
- * TextClassification请求参数结构体
+ * GenerateCouplet返回参数结构体
  * @class
  */
-class TextClassificationRequest extends  AbstractModel {
+class GenerateCoupletResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+         * 横批。
          * @type {string || null}
          */
-        this.Text = null;
+        this.TopScroll = null;
 
         /**
-         * 领域分类体系（默认取1值）：
-1、通用领域，二分类
-2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
-         * @type {number || null}
+         * 上联与下联。
+         * @type {Array.<string> || null}
          */
-        this.Flag = null;
+        this.Content = null;
+
+        /**
+         * 当对联随机生成时，展示随机生成原因。
+         * @type {string || null}
+         */
+        this.RandomCause = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1270,8 +1317,10 @@ class TextClassificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.TopScroll = 'TopScroll' in params ? params.TopScroll : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.RandomCause = 'RandomCause' in params ? params.RandomCause : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1595,40 +1644,24 @@ class PosToken extends  AbstractModel {
 }
 
 /**
- * SentimentAnalysis返回参数结构体
+ * GeneratePoetry返回参数结构体
  * @class
  */
-class SentimentAnalysisResponse extends  AbstractModel {
+class GeneratePoetryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 正面情感概率
-         * @type {number || null}
-         */
-        this.Positive = null;
-
-        /**
-         * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Neutral = null;
-
-        /**
-         * 负面情感概率
-         * @type {number || null}
-         */
-        this.Negative = null;
-
-        /**
-         * 情感分类结果：
-1、positive，表示正面情感
-2、negative，表示负面情感
-3、neutral，表示中性、无情感
+         * 诗题，即输入的生成诗词的关键词。
          * @type {string || null}
          */
-        this.Sentiment = null;
+        this.Title = null;
+
+        /**
+         * 诗的内容。
+         * @type {Array.<string> || null}
+         */
+        this.Content = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1645,10 +1678,8 @@ class SentimentAnalysisResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Positive = 'Positive' in params ? params.Positive : null;
-        this.Neutral = 'Neutral' in params ? params.Neutral : null;
-        this.Negative = 'Negative' in params ? params.Negative : null;
-        this.Sentiment = 'Sentiment' in params ? params.Sentiment : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Content = 'Content' in params ? params.Content : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1971,6 +2002,41 @@ class DeleteDictRequest extends  AbstractModel {
 }
 
 /**
+ * 文本相似度
+ * @class
+ */
+class Similarity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标文本句子
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 相似度分数
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
  * 命名实体识别结果  
  * @class
  */
@@ -2020,18 +2086,40 @@ class NerToken extends  AbstractModel {
 }
 
 /**
- * SimilarWords返回参数结构体
+ * SentimentAnalysis返回参数结构体
  * @class
  */
-class SimilarWordsResponse extends  AbstractModel {
+class SentimentAnalysisResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 相似词数组
-         * @type {Array.<string> || null}
+         * 正面情感概率
+         * @type {number || null}
          */
-        this.SimilarWords = null;
+        this.Positive = null;
+
+        /**
+         * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Neutral = null;
+
+        /**
+         * 负面情感概率
+         * @type {number || null}
+         */
+        this.Negative = null;
+
+        /**
+         * 情感分类结果：
+1、positive，表示正面情感
+2、negative，表示负面情感
+3、neutral，表示中性、无情感
+         * @type {string || null}
+         */
+        this.Sentiment = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2048,7 +2136,10 @@ class SimilarWordsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SimilarWords = 'SimilarWords' in params ? params.SimilarWords : null;
+        this.Positive = 'Positive' in params ? params.Positive : null;
+        this.Neutral = 'Neutral' in params ? params.Neutral : null;
+        this.Negative = 'Negative' in params ? params.Negative : null;
+        this.Sentiment = 'Sentiment' in params ? params.Sentiment : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2113,24 +2204,59 @@ class DependencyParsingResponse extends  AbstractModel {
 }
 
 /**
- * 文本相似度
+ * SimilarWords返回参数结构体
  * @class
  */
-class Similarity extends  AbstractModel {
+class SimilarWordsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 目标文本句子
+         * 相似词数组
+         * @type {Array.<string> || null}
+         */
+        this.SimilarWords = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SimilarWords = 'SimilarWords' in params ? params.SimilarWords : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GenerateCouplet请求参数结构体
+ * @class
+ */
+class GenerateCoupletRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * 相似度分数
+         * 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。
          * @type {number || null}
          */
-        this.Score = null;
+        this.TargetType = null;
 
     }
 
@@ -2142,7 +2268,7 @@ class Similarity extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
-        this.Score = 'Score' in params ? params.Score : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
 
     }
 }
@@ -2229,6 +2355,48 @@ class LexicalAnalysisRequest extends  AbstractModel {
         this.Text = 'Text' in params ? params.Text : null;
         this.DictId = 'DictId' in params ? params.DictId : null;
         this.Flag = 'Flag' in params ? params.Flag : null;
+
+    }
+}
+
+/**
+ * GeneratePoetry请求参数结构体
+ * @class
+ */
+class GeneratePoetryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成诗词的关键词。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。
+         * @type {number || null}
+         */
+        this.PoetryType = null;
+
+        /**
+         * 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。
+         * @type {number || null}
+         */
+        this.Genre = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.PoetryType = 'PoetryType' in params ? params.PoetryType : null;
+        this.Genre = 'Genre' in params ? params.Genre : null;
 
     }
 }
@@ -2434,6 +2602,7 @@ class CreateDictRequest extends  AbstractModel {
 module.exports = {
     LexicalAnalysisResponse: LexicalAnalysisResponse,
     SentenceEmbeddingRequest: SentenceEmbeddingRequest,
+    TextClassificationRequest: TextClassificationRequest,
     WordSimilarityRequest: WordSimilarityRequest,
     SearchWordItemsResponse: SearchWordItemsResponse,
     DpToken: DpToken,
@@ -2461,7 +2630,7 @@ module.exports = {
     UpdateDictRequest: UpdateDictRequest,
     DeleteDictResponse: DeleteDictResponse,
     DescribeWordItemsRequest: DescribeWordItemsRequest,
-    TextClassificationRequest: TextClassificationRequest,
+    GenerateCoupletResponse: GenerateCoupletResponse,
     CreateDictResponse: CreateDictResponse,
     TextSimilarityRequest: TextSimilarityRequest,
     AutoSummarizationResponse: AutoSummarizationResponse,
@@ -2470,7 +2639,7 @@ module.exports = {
     SimilarWordsRequest: SimilarWordsRequest,
     DescribeDictRequest: DescribeDictRequest,
     PosToken: PosToken,
-    SentimentAnalysisResponse: SentimentAnalysisResponse,
+    GeneratePoetryResponse: GeneratePoetryResponse,
     DeleteWordItemsRequest: DeleteWordItemsRequest,
     DescribeDictResponse: DescribeDictResponse,
     TextCorrectionProRequest: TextCorrectionProRequest,
@@ -2479,12 +2648,15 @@ module.exports = {
     DescribeDictsResponse: DescribeDictsResponse,
     DependencyParsingRequest: DependencyParsingRequest,
     DeleteDictRequest: DeleteDictRequest,
-    NerToken: NerToken,
-    SimilarWordsResponse: SimilarWordsResponse,
-    DependencyParsingResponse: DependencyParsingResponse,
     Similarity: Similarity,
+    NerToken: NerToken,
+    SentimentAnalysisResponse: SentimentAnalysisResponse,
+    DependencyParsingResponse: DependencyParsingResponse,
+    SimilarWordsResponse: SimilarWordsResponse,
+    GenerateCoupletRequest: GenerateCoupletRequest,
     CCIToken: CCIToken,
     LexicalAnalysisRequest: LexicalAnalysisRequest,
+    GeneratePoetryRequest: GeneratePoetryRequest,
     CreateWordItemsResponse: CreateWordItemsResponse,
     SentimentAnalysisRequest: SentimentAnalysisRequest,
     SearchWordItemsRequest: SearchWordItemsRequest,

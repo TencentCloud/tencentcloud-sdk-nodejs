@@ -79,7 +79,9 @@ class GpmClient extends AbstractClient {
     }
     
     /**
-     * 取消匹配。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+取消匹配。
      * @param {CancelMatchingRequest} req
      * @param {function(string, CancelMatchingResponse):void} cb
      * @public
@@ -90,7 +92,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 修改匹配Token。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改匹配Token。
      * @param {ModifyTokenRequest} req
      * @param {function(string, ModifyTokenResponse):void} cb
      * @public
@@ -101,7 +105,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 查询匹配进度。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配进度。
      * @param {DescribeMatchingProgressRequest} req
      * @param {function(string, DescribeMatchingProgressResponse):void} cb
      * @public
@@ -112,7 +118,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 创建匹配
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+创建匹配
      * @param {CreateMatchRequest} req
      * @param {function(string, CreateMatchResponse):void} cb
      * @public
@@ -123,7 +131,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 修改匹配
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改匹配
      * @param {ModifyMatchRequest} req
      * @param {function(string, ModifyMatchResponse):void} cb
      * @public
@@ -134,7 +144,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 查询匹配Token，Token用于push消息验证。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配Token，Token用于push消息验证。
      * @param {DescribeTokenRequest} req
      * @param {function(string, DescribeTokenResponse):void} cb
      * @public
@@ -145,7 +157,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 查询规则详情
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询规则详情
      * @param {DescribeRuleRequest} req
      * @param {function(string, DescribeRuleResponse):void} cb
      * @public
@@ -156,7 +170,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
      * @param {StartMatchingBackfillRequest} req
      * @param {function(string, StartMatchingBackfillResponse):void} cb
      * @public
@@ -167,7 +183,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 查询匹配详情
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+查询匹配详情
      * @param {DescribeMatchRequest} req
      * @param {function(string, DescribeMatchResponse):void} cb
      * @public
@@ -178,7 +196,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 删除规则
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+删除规则
      * @param {DeleteRuleRequest} req
      * @param {function(string, DeleteRuleResponse):void} cb
      * @public
@@ -189,7 +209,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 删除匹配
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+删除匹配
      * @param {DeleteMatchRequest} req
      * @param {function(string, DeleteMatchResponse):void} cb
      * @public
@@ -200,7 +222,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 分页查询规则集列表
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询规则集列表
      * @param {DescribeRulesRequest} req
      * @param {function(string, DescribeRulesResponse):void} cb
      * @public
@@ -211,7 +235,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 修改规则（描述、标签）
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+修改规则（描述、标签）
      * @param {ModifyRuleRequest} req
      * @param {function(string, ModifyRuleResponse):void} cb
      * @public
@@ -222,7 +248,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 创建规则
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+创建规则
      * @param {CreateRuleRequest} req
      * @param {function(string, CreateRuleResponse):void} cb
      * @public
@@ -233,7 +261,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 支持传入一个玩家或多个玩家发起匹配，在同一个请求内的玩家将被分到同一个对局。
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+支持传入一个玩家或多个玩家发起匹配，在同一个请求内的玩家将被分到同一个对局。
      * @param {StartMatchingRequest} req
      * @param {function(string, StartMatchingResponse):void} cb
      * @public
@@ -244,7 +274,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 分页查询匹配列表
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询匹配列表
      * @param {DescribeMatchesRequest} req
      * @param {function(string, DescribeMatchesResponse):void} cb
      * @public
@@ -255,7 +287,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 分页查询匹配Code
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+分页查询匹配Code
      * @param {DescribeMatchCodesRequest} req
      * @param {function(string, DescribeMatchCodesResponse):void} cb
      * @public
@@ -266,7 +300,9 @@ class GpmClient extends AbstractClient {
     }
 
     /**
-     * 统计数据
+     * 此接口无法使用，游戏玩家匹配GPM已于6.1正式下架，感谢您的支持
+
+统计数据
      * @param {DescribeDataRequest} req
      * @param {function(string, DescribeDataResponse):void} cb
      * @public

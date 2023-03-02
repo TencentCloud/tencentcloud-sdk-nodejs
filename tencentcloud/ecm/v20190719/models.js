@@ -4103,6 +4103,13 @@ class LoadBalancer extends  AbstractModel {
          */
         this.LoadBalancerPassToTarget = null;
 
+        /**
+         * 负载均衡实例的IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIPv6 = null;
+
     }
 
     /**
@@ -4145,6 +4152,7 @@ class LoadBalancer extends  AbstractModel {
         }
         this.SecureGroups = 'SecureGroups' in params ? params.SecureGroups : null;
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
 
     }
 }
@@ -6679,7 +6687,7 @@ class ModifyModuleNetworkRequest extends  AbstractModel {
 }
 
 /**
- * IP地址模版
+ * IP地址模板
  * @class
  */
 class AddressTemplateSpecification extends  AbstractModel {
@@ -6745,6 +6753,15 @@ class AssignIpv6AddressesRequest extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * ipv6运营商如下：
+CTCC：中国电信
+CUCC：中国联通
+CMCC：中国移动
+         * @type {string || null}
+         */
+        this.Ipv6ISP = null;
+
     }
 
     /**
@@ -6766,6 +6783,7 @@ class AssignIpv6AddressesRequest extends  AbstractModel {
             }
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.Ipv6ISP = 'Ipv6ISP' in params ? params.Ipv6ISP : null;
 
     }
 }
@@ -12230,6 +12248,16 @@ class DescribePriceRunInstanceRequest extends  AbstractModel {
          */
         this.DataDisk = null;
 
+        /**
+         * 实例计费类型。其中：
+0，按资源维度后付费，计算当日用量峰值，例如CPU，内存，硬盘等，仅适用于非GNR系列机型；
+1，按小时后付费，单价：xx元/实例/小时，仅适用于GNR机型，如需开通该计费方式请提工单申请；
+2，按月后付费，单价：xx元/实例/月，仅适用于GNR机型；
+该字段不填时，非GNR机型会默认选择0；GNR机型默认选择2。
+         * @type {number || null}
+         */
+        this.InstanceChargeType = null;
+
     }
 
     /**
@@ -12256,6 +12284,7 @@ class DescribePriceRunInstanceRequest extends  AbstractModel {
                 this.DataDisk.push(obj);
             }
         }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
     }
 }
@@ -13412,6 +13441,18 @@ class CreateLoadBalancerRequest extends  AbstractModel {
          */
         this.SecurityGroups = null;
 
+        /**
+         * 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPv6FullChain，默认值 IPV4。说明：取值为IPv6FullChain，表示为IPv6版本。
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * 在购买IPV6负载均衡实例的情况下，必须指定子网 ID, 此参数必填。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -13443,6 +13484,8 @@ class CreateLoadBalancerRequest extends  AbstractModel {
             }
         }
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -15328,7 +15371,7 @@ class ModifySecurityGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * 协议端口模版
+ * 协议端口模板
  * @class
  */
 class ServiceTemplateSpecification extends  AbstractModel {

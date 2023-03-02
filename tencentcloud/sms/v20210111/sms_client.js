@@ -21,11 +21,13 @@ const DeleteSmsTemplateResponse = models.DeleteSmsTemplateResponse;
 const ModifySmsTemplateResponse = models.ModifySmsTemplateResponse;
 const ModifySmsSignRequest = models.ModifySmsSignRequest;
 const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
+const ReportConversionStatus = models.ReportConversionStatus;
 const AddSmsSignRequest = models.AddSmsSignRequest;
 const AddTemplateStatus = models.AddTemplateStatus;
 const DescribeSmsTemplateListResponse = models.DescribeSmsTemplateListResponse;
 const DescribePhoneNumberInfoRequest = models.DescribePhoneNumberInfoRequest;
 const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
+const ReportConversionResponse = models.ReportConversionResponse;
 const AddSmsTemplateRequest = models.AddSmsTemplateRequest;
 const ModifySmsTemplateRequest = models.ModifySmsTemplateRequest;
 const PullSmsReplyStatus = models.PullSmsReplyStatus;
@@ -59,6 +61,7 @@ const AddSmsSignResponse = models.AddSmsSignResponse;
 const DeleteSmsSignRequest = models.DeleteSmsSignRequest;
 const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
 const ModifySmsSignResponse = models.ModifySmsSignResponse;
+const ReportConversionRequest = models.ReportConversionRequest;
 const AddSignStatus = models.AddSignStatus;
 const ModifyTemplateStatus = models.ModifyTemplateStatus;
 const PullSmsSendStatusResponse = models.PullSmsSendStatusResponse;
@@ -247,6 +250,18 @@ class SmsClient extends AbstractClient {
     PullSmsSendStatusByPhoneNumber(req, cb) {
         let resp = new PullSmsSendStatusByPhoneNumberResponse();
         this.request("PullSmsSendStatusByPhoneNumber", req, resp, cb);
+    }
+
+    /**
+     * 短信转化率上报。将已接收到短信的流水号上报到腾讯云短信服务。
+>- 注：当前接口以白名单方式对外开放，如有需要请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通。
+     * @param {ReportConversionRequest} req
+     * @param {function(string, ReportConversionResponse):void} cb
+     * @public
+     */
+    ReportConversion(req, cb) {
+        let resp = new ReportConversionResponse();
+        this.request("ReportConversion", req, resp, cb);
     }
 
     /**

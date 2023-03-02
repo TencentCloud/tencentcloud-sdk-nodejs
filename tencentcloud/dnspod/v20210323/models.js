@@ -115,6 +115,166 @@ class CreateRecordRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshotRollbackResult返回参数结构体
+ * @class
+ */
+class DescribeSnapshotRollbackResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照所属域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 回滚剩余时间（分钟）
+         * @type {number || null}
+         */
+        this.LeftMinutes = null;
+
+        /**
+         * 回滚进度百分比
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 快照 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 回滚状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 快照回滚任务 ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 成功数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Success = null;
+
+        /**
+         * 失败数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Failed = null;
+
+        /**
+         * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 失败详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SnapshotRecord> || null}
+         */
+        this.FailedRecordList = null;
+
+        /**
+         * 快照的下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.LeftMinutes = 'LeftMinutes' in params ? params.LeftMinutes : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Success = 'Success' in params ? params.Success : null;
+        this.Failed = 'Failed' in params ? params.Failed : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.FailedRecordList) {
+            this.FailedRecordList = new Array();
+            for (let z in params.FailedRecordList) {
+                let obj = new SnapshotRecord();
+                obj.deserialize(params.FailedRecordList[z]);
+                this.FailedRecordList.push(obj);
+            }
+        }
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadSnapshot请求参数结构体
+ * @class
+ */
+class DownloadSnapshotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * 查看任务详情返回结构
  * @class
  */
@@ -207,6 +367,76 @@ class DescribeBatchTaskDetail extends  AbstractModel {
 }
 
 /**
+ * ModifyVasAutoRenewStatus返回参数结构体
+ * @class
+ */
+class ModifyVasAutoRenewStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RollbackSnapshot请求参数结构体
+ * @class
+ */
+class RollbackSnapshotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * DeleteDomainAlias返回参数结构体
  * @class
  */
@@ -230,6 +460,126 @@ class DeleteDomainAliasResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVASStatistic请求参数结构体
+ * @class
+ */
+class DescribeVASStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名ID
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DeleteDomainBatch返回参数结构体
+ * @class
+ */
+class DeleteDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务详情数组
+         * @type {Array.<DeleteDomainBatchDetail> || null}
+         */
+        this.DetailList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+        if (params.DetailList) {
+            this.DetailList = new Array();
+            for (let z in params.DetailList) {
+                let obj = new DeleteDomainBatchDetail();
+                obj.deserialize(params.DetailList[z]);
+                this.DetailList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 解析记录分组信息
+ * @class
+ */
+class RecordGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 分组类型：system-系统；user-用户
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
 
     }
 }
@@ -261,7 +611,7 @@ class ModifySubdomainStatusRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -335,6 +685,61 @@ class CreateRecordBatchResponse extends  AbstractModel {
             }
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotList返回参数结构体
+ * @class
+ */
+class DescribeSnapshotListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页信息
+         * @type {SnapshotPageInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 快照列表
+         * @type {Array.<SnapshotInfo> || null}
+         */
+        this.SnapshotList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new SnapshotPageInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.SnapshotList) {
+            this.SnapshotList = new Array();
+            for (let z in params.SnapshotList) {
+                let obj = new SnapshotInfo();
+                obj.deserialize(params.SnapshotList[z]);
+                this.SnapshotList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -433,6 +838,154 @@ class CreateDomainBatchRecord extends  AbstractModel {
 }
 
 /**
+ * 域名解析量统计查询信息
+ * @class
+ */
+class DomainAnalyticsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DATE:按天维度统计 HOUR:按小时维度统计
+         * @type {string || null}
+         */
+        this.DnsFormat = null;
+
+        /**
+         * 当前统计周期解析量总计
+         * @type {number || null}
+         */
+        this.DnsTotal = null;
+
+        /**
+         * 当前查询的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 当前统计周期开始时间
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 当前统计周期结束时间
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DnsFormat = 'DnsFormat' in params ? params.DnsFormat : null;
+        this.DnsTotal = 'DnsTotal' in params ? params.DnsTotal : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+
+    }
+}
+
+/**
+ * ModifyRecordGroup请求参数结构体
+ * @class
+ */
+class ModifyRecordGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 要修改的分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribeVASStatistic返回参数结构体
+ * @class
+ */
+class DescribeVASStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 增值服务用量列表
+         * @type {Array.<VASStatisticItem> || null}
+         */
+        this.VASList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VASList) {
+            this.VASList = new Array();
+            for (let z in params.VASList) {
+                let obj = new VASStatisticItem();
+                obj.deserialize(params.VASList[z]);
+                this.VASList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBatchTask请求参数结构体
  * @class
  */
@@ -441,7 +994,7 @@ class DescribeBatchTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务ID
+         * 任务ID。操作批量接口时会返回JobId
          * @type {number || null}
          */
         this.JobId = null;
@@ -456,6 +1009,204 @@ class DescribeBatchTaskRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * 当前统计维度解析量小计
+ * @class
+ */
+class DomainAnalyticsDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前统计维度解析量小计
+         * @type {number || null}
+         */
+        this.Num = null;
+
+        /**
+         * 按天统计时，为统计日期
+         * @type {string || null}
+         */
+        this.DateKey = null;
+
+        /**
+         * 按小时统计时，为统计的当前时间的小时数(0-23)，例：HourKey为23时，统计周期为22点-23点的解析量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HourKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Num = 'Num' in params ? params.Num : null;
+        this.DateKey = 'DateKey' in params ? params.DateKey : null;
+        this.HourKey = 'HourKey' in params ? params.HourKey : null;
+
+    }
+}
+
+/**
+ * CreateSnapshot返回参数结构体
+ * @class
+ */
+class CreateSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 键值对
+ * @class
+ */
+class KeyValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DeleteRecordGroup请求参数结构体
+ * @class
+ */
+class DeleteRecordGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * PayOrderWithBalance返回参数结构体
+ * @class
+ */
+class PayOrderWithBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 此次操作支付成功的订单id数组
+         * @type {Array.<string> || null}
+         */
+        this.DealIdList = null;
+
+        /**
+         * 此次操作支付成功的大订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIdList = null;
+
+        /**
+         * 此次操作支付成功的订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.DealNameList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealIdList = 'DealIdList' in params ? params.DealIdList : null;
+        this.BigDealIdList = 'BigDealIdList' in params ? params.BigDealIdList : null;
+        this.DealNameList = 'DealNameList' in params ? params.DealNameList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -495,6 +1246,91 @@ class DescribeDomainResponse extends  AbstractModel {
             obj.deserialize(params.DomainInfo)
             this.DomainInfo = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotList请求参数结构体
+ * @class
+ */
+class DescribeSnapshotListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribePackageDetail返回参数结构体
+ * @class
+ */
+class DescribePackageDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐配置详情
+         * @type {Array.<PackageDetailItem> || null}
+         */
+        this.Info = null;
+
+        /**
+         * 套餐代码列表
+         * @type {Array.<string> || null}
+         */
+        this.LevelMap = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            this.Info = new Array();
+            for (let z in params.Info) {
+                let obj = new PackageDetailItem();
+                obj.deserialize(params.Info[z]);
+                this.Info.push(obj);
+            }
+        }
+        this.LevelMap = 'LevelMap' in params ? params.LevelMap : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -554,6 +1390,34 @@ class DescribeRecordLineListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 快照列表分页信息
+ * @class
+ */
+class SnapshotPageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
 
     }
 }
@@ -779,6 +1643,41 @@ class CreateDomainBatchRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRecordGroup返回参数结构体
+ * @class
+ */
+class ModifyRecordGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改的分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDomainShareInfo请求参数结构体
  * @class
  */
@@ -793,7 +1692,7 @@ class DescribeDomainShareInfoRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -989,6 +1888,34 @@ class DomainListItem extends  AbstractModel {
 }
 
 /**
+ * DeleteDomainBatch请求参数结构体
+ * @class
+ */
+class DeleteDomainBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名数组
+         * @type {Array.<string> || null}
+         */
+        this.DomainList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainList = 'DomainList' in params ? params.DomainList : null;
+
+    }
+}
+
+/**
  * DescribeRecordType返回参数结构体
  * @class
  */
@@ -1052,6 +1979,48 @@ class ModifyDomainRemarkResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteSnapshot请求参数结构体
+ * @class
+ */
+class DeleteSnapshotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * DescribeDomainAliasList返回参数结构体
  * @class
  */
@@ -1088,6 +2057,159 @@ class DescribeDomainAliasListResponse extends  AbstractModel {
                 obj.deserialize(params.DomainAliasList[z]);
                 this.DomainAliasList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RollbackRecordSnapshot请求参数结构体
+ * @class
+ */
+class RollbackRecordSnapshotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 解析记录信息
+         * @type {Array.<SnapshotRecord> || null}
+         */
+        this.RecordList = null;
+
+        /**
+         * 之前的快照回滚任务 ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+
+        if (params.RecordList) {
+            this.RecordList = new Array();
+            for (let z in params.RecordList) {
+                let obj = new SnapshotRecord();
+                obj.deserialize(params.RecordList[z]);
+                this.RecordList.push(obj);
+            }
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * ModifyRecordToGroup请求参数结构体
+ * @class
+ */
+class ModifyRecordToGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 记录 ID，多个 ID 用竖线“|”分割
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotConfig返回参数结构体
+ * @class
+ */
+class DescribeSnapshotConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解析快照配置
+         * @type {SnapshotConfig || null}
+         */
+        this.SnapshotConfig = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SnapshotConfig) {
+            let obj = new SnapshotConfig();
+            obj.deserialize(params.SnapshotConfig)
+            this.SnapshotConfig = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1197,13 +2319,13 @@ class ModifyRecordRequest extends  AbstractModel {
         this.Value = null;
 
         /**
-         * 记录 ID 。
+         * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1449,7 +2571,7 @@ class DeleteDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1490,7 +2612,7 @@ class ModifyDomainOwnerRequest extends  AbstractModel {
         this.Account = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1507,6 +2629,41 @@ class ModifyDomainOwnerRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Account = 'Account' in params ? params.Account : null;
         this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * ModifyPackageAutoRenew请求参数结构体
+ * @class
+ */
+class ModifyPackageAutoRenewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID。可以在控制台查看所有的资源
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * enable 开启自动续费；disable 关闭自动续费
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1554,6 +2711,111 @@ class DomainShareInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshotConfig请求参数结构体
+ * @class
+ */
+class DescribeSnapshotConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * 解析线路信息
+ * @class
+ */
+class LineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 线路名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 线路ID
+         * @type {string || null}
+         */
+        this.LineId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LineId = 'LineId' in params ? params.LineId : null;
+
+    }
+}
+
+/**
+ * DescribeRecordExistExceptDefaultNS请求参数结构体
+ * @class
+ */
+class DescribeRecordExistExceptDefaultNSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * DescribeRecordLineList请求参数结构体
  * @class
  */
@@ -1576,7 +2838,7 @@ class DescribeRecordLineListRequest extends  AbstractModel {
         this.DomainGrade = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1704,7 +2966,7 @@ class DeleteDomainAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名别名ID
+         * 域名别名ID。可以通过接口DescribeDomainAliasList查到所有的域名别名列表以及对应的ID
          * @type {number || null}
          */
         this.DomainAliasId = null;
@@ -1716,7 +2978,7 @@ class DeleteDomainAliasRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+         * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1773,6 +3035,97 @@ class DomainAliasInfo extends  AbstractModel {
 }
 
 /**
+ * CreateDeal请求参数结构体
+ * @class
+ */
+class CreateDealRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购）
+         * @type {number || null}
+         */
+        this.DealType = null;
+
+        /**
+         * 商品类型，1 域名套餐 2 增值服务
+         * @type {number || null}
+         */
+        this.GoodsType = null;
+
+        /**
+         * 套餐类型：
+DP_PLUS：专业版
+DP_EXPERT：企业版
+DP_ULTRA：尊享版
+
+增值服务类型
+LB：负载均衡
+URL：URL转发
+DMONITOR_TASKS：D监控任务数
+DMONITOR_IP：D监控备用 IP 数
+CUSTOMLINE：自定义线路数
+         * @type {string || null}
+         */
+        this.GoodsChildType = null;
+
+        /**
+         * 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：
+负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等）
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * 需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 套餐时长：
+1. 套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）
+2. 升级套餐时不需要传。
+3. 增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10）
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 套餐类型，需要升级到的套餐类型，只有升级时需要。
+         * @type {string || null}
+         */
+        this.NewPackageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealType = 'DealType' in params ? params.DealType : null;
+        this.GoodsType = 'GoodsType' in params ? params.GoodsType : null;
+        this.GoodsChildType = 'GoodsChildType' in params ? params.GoodsChildType : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.NewPackageType = 'NewPackageType' in params ? params.NewPackageType : null;
+
+    }
+}
+
+/**
  * ModifyDomainLock请求参数结构体
  * @class
  */
@@ -1793,7 +3146,7 @@ class ModifyDomainLockRequest extends  AbstractModel {
         this.LockDays = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1815,10 +3168,10 @@ class ModifyDomainLockRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainStatus请求参数结构体
+ * DescribeDomainWhois请求参数结构体
  * @class
  */
-class ModifyDomainStatusRequest extends  AbstractModel {
+class DescribeDomainWhoisRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1827,18 +3180,6 @@ class ModifyDomainStatusRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Domain = null;
-
-        /**
-         * 域名状态，”enable” 、”disable” 分别代表启用和暂停
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
-         * @type {number || null}
-         */
-        this.DomainId = null;
 
     }
 
@@ -1850,8 +3191,54 @@ class ModifyDomainStatusRequest extends  AbstractModel {
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * 子域名别名解析量统计信息
+ * @class
+ */
+class SubdomainAliasAnalyticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子域名解析量统计查询信息
+         * @type {SubdomainAnalyticsInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 当前统计维度解析量小计
+         * @type {Array.<DomainAnalyticsDetail> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new SubdomainAnalyticsInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DomainAnalyticsDetail();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
 
     }
 }
@@ -1991,13 +3378,13 @@ class DescribeRecordRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 记录 ID 。
+         * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -2054,6 +3441,69 @@ class CreateDomainGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSubdomainAnalytics请求参数结构体
+ * @class
+ */
+class DescribeSubdomainAnalyticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询解析量的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 查询的开始时间，格式：YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 查询的结束时间，格式：YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 要查询解析量的子域名
+         * @type {string || null}
+         */
+        this.Subdomain = null;
+
+        /**
+         * DATE:按天维度统计 HOUR:按小时维度统计
+         * @type {string || null}
+         */
+        this.DnsFormat = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
+        this.DnsFormat = 'DnsFormat' in params ? params.DnsFormat : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * DeleteRecord请求参数结构体
  * @class
  */
@@ -2068,13 +3518,13 @@ class DeleteRecordRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 记录 ID 。
+         * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -2110,7 +3560,7 @@ class DescribeDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -2131,6 +3581,55 @@ class DescribeDomainRequest extends  AbstractModel {
 }
 
 /**
+ * 域名分组列表
+ * @class
+ */
+class GroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 分组类型
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * 该分组中域名个数
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
  * ModifyRecordStatus请求参数结构体
  * @class
  */
@@ -2145,7 +3644,7 @@ class ModifyRecordStatusRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 记录 ID 。
+         * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
@@ -2157,7 +3656,7 @@ class ModifyRecordStatusRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -2215,18 +3714,12 @@ class CreateRecordResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRecord返回参数结构体
+ * DeleteRecordGroup返回参数结构体
  * @class
  */
-class DescribeRecordResponse extends  AbstractModel {
+class DeleteRecordGroupResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 记录信息
-         * @type {RecordInfo || null}
-         */
-        this.RecordInfo = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2242,12 +3735,6 @@ class DescribeRecordResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.RecordInfo) {
-            let obj = new RecordInfo();
-            obj.deserialize(params.RecordInfo)
-            this.RecordInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2380,6 +3867,112 @@ class RecordInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshotRollbackTask请求参数结构体
+ * @class
+ */
+class DescribeSnapshotRollbackTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * CheckRecordSnapshotRollback返回参数结构体
+ * @class
+ */
+class CheckRecordSnapshotRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainPreview请求参数结构体
+ * @class
+ */
+class DescribeDomainPreviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * 批量添加记录返回结构
  * @class
  */
@@ -2472,6 +4065,149 @@ class CreateRecordBatchDetail extends  AbstractModel {
 }
 
 /**
+ * Whois联系信息
+ * @class
+ */
+class WhoisContact extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WhoisContactAddress || null}
+         */
+        this.Admin = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WhoisContactAddress || null}
+         */
+        this.Billing = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WhoisContactAddress || null}
+         */
+        this.Registrant = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WhoisContactAddress || null}
+         */
+        this.Tech = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Admin) {
+            let obj = new WhoisContactAddress();
+            obj.deserialize(params.Admin)
+            this.Admin = obj;
+        }
+
+        if (params.Billing) {
+            let obj = new WhoisContactAddress();
+            obj.deserialize(params.Billing)
+            this.Billing = obj;
+        }
+
+        if (params.Registrant) {
+            let obj = new WhoisContactAddress();
+            obj.deserialize(params.Registrant)
+            this.Registrant = obj;
+        }
+
+        if (params.Tech) {
+            let obj = new WhoisContactAddress();
+            obj.deserialize(params.Tech)
+            this.Tech = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeSubdomainAnalytics返回参数结构体
+ * @class
+ */
+class DescribeSubdomainAnalyticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前统计维度解析量小计
+         * @type {Array.<DomainAnalyticsDetail> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 子域名解析量统计查询信息
+         * @type {SubdomainAnalyticsInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 子域名别名解析量统计信息
+         * @type {Array.<SubdomainAliasAnalyticsItem> || null}
+         */
+        this.AliasData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DomainAnalyticsDetail();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.Info) {
+            let obj = new SubdomainAnalyticsInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.AliasData) {
+            this.AliasData = new Array();
+            for (let z in params.AliasData) {
+                let obj = new SubdomainAliasAnalyticsItem();
+                obj.deserialize(params.AliasData[z]);
+                this.AliasData.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyRecord返回参数结构体
  * @class
  */
@@ -2502,6 +4238,105 @@ class ModifyRecordResponse extends  AbstractModel {
         }
         this.RecordId = 'RecordId' in params ? params.RecordId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRecordToGroup返回参数结构体
+ * @class
+ */
+class ModifyRecordToGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 快照解析记录
+ * @class
+ */
+class SnapshotRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子域名
+         * @type {string || null}
+         */
+        this.SubDomain = null;
+
+        /**
+         * 记录类型
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 解析线路
+         * @type {string || null}
+         */
+        this.RecordLine = null;
+
+        /**
+         * 解析值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * TTL(秒)
+         * @type {string || null}
+         */
+        this.TTL = null;
+
+        /**
+         * 解析记录 ID
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * MX优先级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MX = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RecordLine = 'RecordLine' in params ? params.RecordLine : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.MX = 'MX' in params ? params.MX : null;
 
     }
 }
@@ -2549,7 +4384,7 @@ class DescribeDomainLogListRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -2647,7 +4482,7 @@ class ModifyRecordBatchRequest extends  AbstractModel {
         super();
 
         /**
-         * 记录ID数组
+         * 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {Array.<number> || null}
          */
         this.RecordIdList = null;
@@ -2690,6 +4525,193 @@ class ModifyRecordBatchRequest extends  AbstractModel {
         this.ChangeTo = 'ChangeTo' in params ? params.ChangeTo : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.MX = 'MX' in params ? params.MX : null;
+
+    }
+}
+
+/**
+ * Whois联系信息地址
+ * @class
+ */
+class WhoisContactAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Country = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Fax = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FaxExt = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Handle = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Organization = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PostalCode = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 无
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Street = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.City = 'City' in params ? params.City : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.Fax = 'Fax' in params ? params.Fax : null;
+        this.FaxExt = 'FaxExt' in params ? params.FaxExt : null;
+        this.Handle = 'Handle' in params ? params.Handle : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Organization = 'Organization' in params ? params.Organization : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Street = 'Street' in params ? params.Street : null;
+
+    }
+}
+
+/**
+ * 域名解析快照配置
+ * @class
+ */
+class SnapshotConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置类型：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * 添加时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 所属域名 ID
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 配置 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 快照数量
+         * @type {number || null}
+         */
+        this.SnapshotCount = null;
+
+        /**
+         * 状态：enable-启用，disable-禁用
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Config = 'Config' in params ? params.Config : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
 
     }
 }
@@ -3041,6 +5063,12 @@ class UserInfo extends  AbstractModel {
          */
         this.Uin = null;
 
+        /**
+         * 所属 DNS 服务器
+         * @type {Array.<string> || null}
+         */
+        this.FreeNs = null;
+
     }
 
     /**
@@ -3061,6 +5089,7 @@ class UserInfo extends  AbstractModel {
         this.RealName = 'RealName' in params ? params.RealName : null;
         this.WechatBinded = 'WechatBinded' in params ? params.WechatBinded : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
+        this.FreeNs = 'FreeNs' in params ? params.FreeNs : null;
 
     }
 }
@@ -3116,31 +5145,99 @@ class ModifyRecordBatchResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDomainLogList返回参数结构体
+ * CheckSnapshotRollback请求参数结构体
  * @class
  */
-class DescribeDomainLogListResponse extends  AbstractModel {
+class CheckSnapshotRollbackRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名信息
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * CheckSnapshotRollback返回参数结构体
+ * @class
+ */
+class CheckSnapshotRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 回滚时长（分钟）
+         * @type {number || null}
+         */
+        this.CostMinutes = null;
+
+        /**
+         * 快照所属域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 解析记录总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 值为 1，表示超时
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.LogList = null;
-
-        /**
-         * 分页大小
          * @type {number || null}
          */
-        this.PageSize = null;
+        this.Timeout = null;
 
         /**
-         * 日志总条数
+         * 检查失败数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Failed = null;
+
+        /**
+         * 失败记录信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SnapshotRecord> || null}
+         */
+        this.FailedRecordList = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3157,9 +5254,21 @@ class DescribeDomainLogListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogList = 'LogList' in params ? params.LogList : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.CostMinutes = 'CostMinutes' in params ? params.CostMinutes : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.Failed = 'Failed' in params ? params.Failed : null;
+
+        if (params.FailedRecordList) {
+            this.FailedRecordList = new Array();
+            for (let z in params.FailedRecordList) {
+                let obj = new SnapshotRecord();
+                obj.deserialize(params.FailedRecordList[z]);
+                this.FailedRecordList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3191,6 +5300,76 @@ class DescribeRecordTypeRequest extends  AbstractModel {
             return;
         }
         this.DomainGrade = 'DomainGrade' in params ? params.DomainGrade : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotRollbackTask返回参数结构体
+ * @class
+ */
+class DescribeSnapshotRollbackTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照所属域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 回滚状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 快照回滚任务 ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 开始回滚时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3283,6 +5462,12 @@ class RecordListItem extends  AbstractModel {
          */
         this.MX = null;
 
+        /**
+         * 是否是默认的ns记录
+         * @type {boolean || null}
+         */
+        this.DefaultNS = null;
+
     }
 
     /**
@@ -3305,6 +5490,47 @@ class RecordListItem extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.TTL = 'TTL' in params ? params.TTL : null;
         this.MX = 'MX' in params ? params.MX : null;
+        this.DefaultNS = 'DefaultNS' in params ? params.DefaultNS : null;
+
+    }
+}
+
+/**
+ * DescribeDomainPreview返回参数结构体
+ * @class
+ */
+class DescribeDomainPreviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名概览信息
+         * @type {PreviewDetail || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Domain) {
+            let obj = new PreviewDetail();
+            obj.deserialize(params.Domain)
+            this.Domain = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3360,6 +5586,91 @@ class CreateDomainBatchResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDomainGroupList返回参数结构体
+ * @class
+ */
+class DescribeDomainGroupListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组列表
+         * @type {Array.<GroupInfo> || null}
+         */
+        this.GroupList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GroupList) {
+            this.GroupList = new Array();
+            for (let z in params.GroupList) {
+                let obj = new GroupInfo();
+                obj.deserialize(params.GroupList[z]);
+                this.GroupList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 域名锁定信息
+ * @class
+ */
+class LockInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名 ID
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 域名解锁码
+         * @type {string || null}
+         */
+        this.LockCode = null;
+
+        /**
+         * 域名自动解锁日期
+         * @type {string || null}
+         */
+        this.LockEnd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.LockCode = 'LockCode' in params ? params.LockCode : null;
+        this.LockEnd = 'LockEnd' in params ? params.LockEnd : null;
+
+    }
+}
+
+/**
  * ModifyDomainOwner返回参数结构体
  * @class
  */
@@ -3383,6 +5694,69 @@ class ModifyDomainOwnerResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 子域名解析量统计查询信息
+ * @class
+ */
+class SubdomainAnalyticsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DATE:按天维度统计 HOUR:按小时维度统计
+         * @type {string || null}
+         */
+        this.DnsFormat = null;
+
+        /**
+         * 当前统计周期解析量总计
+         * @type {number || null}
+         */
+        this.DnsTotal = null;
+
+        /**
+         * 当前查询的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 当前统计周期开始时间
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 当前统计周期结束时间
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 当前统计的子域名
+         * @type {string || null}
+         */
+        this.Subdomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DnsFormat = 'DnsFormat' in params ? params.DnsFormat : null;
+        this.DnsTotal = 'DnsTotal' in params ? params.DnsTotal : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
 
     }
 }
@@ -3520,6 +5894,63 @@ class DescribeUserDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 批量删除域名详情
+ * @class
+ */
+class DeleteDomainBatchDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名 ID
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Error = null;
+
+        /**
+         * 删除状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 操作
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Error = 'Error' in params ? params.Error : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+
+    }
+}
+
+/**
  * CreateDomain请求参数结构体
  * @class
  */
@@ -3534,7 +5965,7 @@ class CreateDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名分组ID
+         * 域名分组ID。可以通过接口DescribeDomainGroupList查看当前域名分组信息
          * @type {number || null}
          */
         this.GroupId = null;
@@ -3557,6 +5988,82 @@ class CreateDomainRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.IsMark = 'IsMark' in params ? params.IsMark : null;
+
+    }
+}
+
+/**
+ * ModifyPackageAutoRenew返回参数结构体
+ * @class
+ */
+class ModifyPackageAutoRenewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 域名别名解析量统计信息
+ * @class
+ */
+class DomainAliasAnalyticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名解析量统计查询信息
+         * @type {DomainAnalyticsInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 当前统计维度解析量小计
+         * @type {Array.<DomainAnalyticsDetail> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new DomainAnalyticsInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DomainAnalyticsDetail();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
 
     }
 }
@@ -3626,7 +6133,7 @@ class ModifyDomainRemarkRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -3703,7 +6210,7 @@ class DescribeRecordListRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 要获取的解析记录所属的域名Id，如果传了DomainId，系统将会忽略Domain参数
+         * 要获取的解析记录所属的域名Id，如果传了DomainId，系统将会忽略Domain参数。 可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -3721,19 +6228,19 @@ class DescribeRecordListRequest extends  AbstractModel {
         this.RecordType = null;
 
         /**
-         * 获取某条线路名称的解析记录
+         * 获取某条线路名称的解析记录。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
          * @type {string || null}
          */
         this.RecordLine = null;
 
         /**
-         * 获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数
+         * 获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
          * @type {string || null}
          */
         this.RecordLineId = null;
 
         /**
-         * 获取某个分组下的解析记录时，传这个分组Id
+         * 获取某个分组下的解析记录时，传这个分组Id。
          * @type {number || null}
          */
         this.GroupId = null;
@@ -3794,6 +6301,187 @@ class DescribeRecordListRequest extends  AbstractModel {
 }
 
 /**
+ * PayOrderWithBalance请求参数结构体
+ * @class
+ */
+class PayOrderWithBalanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要支付的大订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIdList = null;
+
+        /**
+         * 代金券ID数组。可以从控制台查到拥有的代金券
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BigDealIdList = 'BigDealIdList' in params ? params.BigDealIdList : null;
+        this.VoucherIdList = 'VoucherIdList' in params ? params.VoucherIdList : null;
+
+    }
+}
+
+/**
+ * DescribePackageDetail请求参数结构体
+ * @class
+ */
+class DescribePackageDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeRecord返回参数结构体
+ * @class
+ */
+class DescribeRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录信息
+         * @type {RecordInfo || null}
+         */
+        this.RecordInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RecordInfo) {
+            let obj = new RecordInfo();
+            obj.deserialize(params.RecordInfo)
+            this.RecordInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRecordFields请求参数结构体
+ * @class
+ */
+class ModifyRecordFieldsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 记录 ID 。
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * 要修改的记录属性和值，支持：sub_domain，record_line，record_line_id，record_type，value，ttl，status，mx，weight
+         * @type {Array.<KeyValue> || null}
+         */
+        this.FieldList = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+
+        if (params.FieldList) {
+            this.FieldList = new Array();
+            for (let z in params.FieldList) {
+                let obj = new KeyValue();
+                obj.deserialize(params.FieldList[z]);
+                this.FieldList.push(obj);
+            }
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DeleteSnapshot返回参数结构体
+ * @class
+ */
+class DeleteSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDomainPurview返回参数结构体
  * @class
  */
@@ -3837,6 +6525,41 @@ class DescribeDomainPurviewResponse extends  AbstractModel {
 }
 
 /**
+ * 子订单号列表
+ * @class
+ */
+class Deals extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子订单ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * 子订单号
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+
+    }
+}
+
+/**
  * ModifySubdomainStatus返回参数结构体
  * @class
  */
@@ -3858,6 +6581,76 @@ class ModifySubdomainStatusResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainAnalytics返回参数结构体
+ * @class
+ */
+class DescribeDomainAnalyticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前统计维度解析量小计
+         * @type {Array.<DomainAnalyticsDetail> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 域名解析量统计查询信息
+         * @type {DomainAnalyticsInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 域名别名解析量统计信息
+         * @type {Array.<DomainAliasAnalyticsItem> || null}
+         */
+        this.AliasData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DomainAnalyticsDetail();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.Info) {
+            let obj = new DomainAnalyticsInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.AliasData) {
+            this.AliasData = new Array();
+            for (let z in params.AliasData) {
+                let obj = new DomainAliasAnalyticsItem();
+                obj.deserialize(params.AliasData[z]);
+                this.AliasData.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3900,6 +6693,126 @@ class ModifyRecordStatusResponse extends  AbstractModel {
 }
 
 /**
+ * CreateRecordGroup请求参数结构体
+ * @class
+ */
+class CreateRecordGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * RollbackSnapshot返回参数结构体
+ * @class
+ */
+class RollbackSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回滚任务 ID，用来查询回滚状态
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRecordGroupList返回参数结构体
+ * @class
+ */
+class DescribeRecordGroupListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组列表
+         * @type {Array.<RecordGroupInfo> || null}
+         */
+        this.GroupList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GroupList) {
+            this.GroupList = new Array();
+            for (let z in params.GroupList) {
+                let obj = new RecordGroupInfo();
+                obj.deserialize(params.GroupList[z]);
+                this.GroupList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDomainGroup请求参数结构体
  * @class
  */
@@ -3928,24 +6841,24 @@ class CreateDomainGroupRequest extends  AbstractModel {
 }
 
 /**
- * 解析线路信息
+ * CreateSnapshot请求参数结构体
  * @class
  */
-class LineInfo extends  AbstractModel {
+class CreateSnapshotRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 线路名称
+         * 域名
          * @type {string || null}
          */
-        this.Name = null;
+        this.Domain = null;
 
         /**
-         * 线路ID
-         * @type {string || null}
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
          */
-        this.LineId = null;
+        this.DomainId = null;
 
     }
 
@@ -3956,8 +6869,8 @@ class LineInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.LineId = 'LineId' in params ? params.LineId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
 
     }
 }
@@ -3991,6 +6904,162 @@ class DeleteDomainResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordSnapshotRollbackResult返回参数结构体
+ * @class
+ */
+class DescribeRecordSnapshotRollbackResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回滚任务 ID
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 回滚状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 失败的记录信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SnapshotRecord> || null}
+         */
+        this.FailedRecordList = null;
+
+        /**
+         * 所属域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 回滚进度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 回滚剩余时间（单位：分钟）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LeftMinutes = null;
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 失败记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Failed = null;
+
+        /**
+         * 成功记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Success = null;
+
+        /**
+         * 快照下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.FailedRecordList) {
+            this.FailedRecordList = new Array();
+            for (let z in params.FailedRecordList) {
+                let obj = new SnapshotRecord();
+                obj.deserialize(params.FailedRecordList[z]);
+                this.FailedRecordList.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.LeftMinutes = 'LeftMinutes' in params ? params.LeftMinutes : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Failed = 'Failed' in params ? params.Failed : null;
+        this.Success = 'Success' in params ? params.Success : null;
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySnapshotConfig请求参数结构体
+ * @class
+ */
+class ModifySnapshotConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 备件间隔：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月
+         * @type {string || null}
+         */
+        this.Period = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * DescribeDomainAliasList请求参数结构体
  * @class
  */
@@ -4005,7 +7074,7 @@ class DescribeDomainAliasListRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+         * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4046,7 +7115,7 @@ class CreateDomainAliasRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+         * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4088,7 +7157,7 @@ class DeleteShareDomainRequest extends  AbstractModel {
         this.Account = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4110,6 +7179,118 @@ class DeleteShareDomainRequest extends  AbstractModel {
 }
 
 /**
+ * 域名增值服务用量
+ * @class
+ */
+class VASStatisticItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 增值服务名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 增值服务标识
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 增值服务最大用量
+         * @type {number || null}
+         */
+        this.LimitCount = null;
+
+        /**
+         * 增值服务已使用的用量
+         * @type {number || null}
+         */
+        this.UseCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.LimitCount = 'LimitCount' in params ? params.LimitCount : null;
+        this.UseCount = 'UseCount' in params ? params.UseCount : null;
+
+    }
+}
+
+/**
+ * 快照信息
+ * @class
+ */
+class SnapshotInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照的对象存储地址
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * 添加时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 所属域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照记录 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 域名解析记录数
+         * @type {string || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 状态：normal-正常，create-备份中
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * ModifyDynamicDNS请求参数结构体
  * @class
  */
@@ -4124,7 +7305,7 @@ class ModifyDynamicDNSRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 记录ID。
+         * 记录ID。 可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
@@ -4142,7 +7323,7 @@ class ModifyDynamicDNSRequest extends  AbstractModel {
         this.Value = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4182,6 +7363,90 @@ class ModifyDynamicDNSRequest extends  AbstractModel {
         this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
         this.RecordLineId = 'RecordLineId' in params ? params.RecordLineId : null;
         this.Ttl = 'Ttl' in params ? params.Ttl : null;
+
+    }
+}
+
+/**
+ * DescribeRecordGroupList请求参数结构体
+ * @class
+ */
+class DescribeRecordGroupListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 分页开始位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页每页数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyRecordFields返回参数结构体
+ * @class
+ */
+class ModifyRecordFieldsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录ID
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4236,13 +7501,13 @@ class ModifyRecordRemarkRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 记录 ID 。
+         * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4271,6 +7536,69 @@ class ModifyRecordRemarkRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySnapshotConfig返回参数结构体
+ * @class
+ */
+class ModifySnapshotConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RollbackRecordSnapshot返回参数结构体
+ * @class
+ */
+class RollbackRecordSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回滚任务 ID
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeUserDetail请求参数结构体
  * @class
  */
@@ -4287,6 +7615,48 @@ class DescribeUserDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyDomainStatus请求参数结构体
+ * @class
+ */
+class ModifyDomainStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名状态，”enable” 、”disable” 分别代表启用和暂停
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
 
     }
 }
@@ -4439,7 +7809,7 @@ class DescribeDomainPurviewRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4564,7 +7934,7 @@ class ModifyDomainUnlockRequest extends  AbstractModel {
         this.LockCode = null;
 
         /**
-         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
          * @type {number || null}
          */
         this.DomainId = null;
@@ -4580,6 +7950,48 @@ class ModifyDomainUnlockRequest extends  AbstractModel {
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.LockCode = 'LockCode' in params ? params.LockCode : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribeRecordSnapshotRollbackResult请求参数结构体
+ * @class
+ */
+class DescribeRecordSnapshotRollbackResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 回滚任务 ID
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.DomainId = 'DomainId' in params ? params.DomainId : null;
 
     }
@@ -4626,30 +8038,78 @@ class ModifyDomainLockResponse extends  AbstractModel {
 }
 
 /**
- * 域名锁定信息
+ * 套餐配置明细
  * @class
  */
-class LockInfo extends  AbstractModel {
+class PackageDetailItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名 ID
+         * 套餐原价
          * @type {number || null}
          */
-        this.DomainId = null;
+        this.RealPrice = null;
 
         /**
-         * 域名解锁码
-         * @type {string || null}
+         * 可更换域名次数
+         * @type {number || null}
          */
-        this.LockCode = null;
+        this.ChangedTimes = null;
 
         /**
-         * 域名自动解锁日期
+         * 允许设置的最小 TTL 值
+         * @type {number || null}
+         */
+        this.MinTtl = null;
+
+        /**
+         * 负载均衡数量
+         * @type {number || null}
+         */
+        this.RecordRoll = null;
+
+        /**
+         * 子域名级数
+         * @type {number || null}
+         */
+        this.SubDomainLevel = null;
+
+        /**
+         * 泛解析级数
+         * @type {number || null}
+         */
+        this.MaxWildcard = null;
+
+        /**
+         * DNS 服务集群个数
          * @type {string || null}
          */
-        this.LockEnd = null;
+        this.DnsServerRegion = null;
+
+        /**
+         * 套餐名称
+         * @type {string || null}
+         */
+        this.DomainGradeCn = null;
+
+        /**
+         * 套餐代号
+         * @type {number || null}
+         */
+        this.GradeLevel = null;
+
+        /**
+         * 套餐对应的 NS
+         * @type {Array.<string> || null}
+         */
+        this.Ns = null;
+
+        /**
+         * 套餐代码
+         * @type {string || null}
+         */
+        this.DomainGrade = null;
 
     }
 
@@ -4660,9 +8120,472 @@ class LockInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainId = 'DomainId' in params ? params.DomainId : null;
-        this.LockCode = 'LockCode' in params ? params.LockCode : null;
-        this.LockEnd = 'LockEnd' in params ? params.LockEnd : null;
+        this.RealPrice = 'RealPrice' in params ? params.RealPrice : null;
+        this.ChangedTimes = 'ChangedTimes' in params ? params.ChangedTimes : null;
+        this.MinTtl = 'MinTtl' in params ? params.MinTtl : null;
+        this.RecordRoll = 'RecordRoll' in params ? params.RecordRoll : null;
+        this.SubDomainLevel = 'SubDomainLevel' in params ? params.SubDomainLevel : null;
+        this.MaxWildcard = 'MaxWildcard' in params ? params.MaxWildcard : null;
+        this.DnsServerRegion = 'DnsServerRegion' in params ? params.DnsServerRegion : null;
+        this.DomainGradeCn = 'DomainGradeCn' in params ? params.DomainGradeCn : null;
+        this.GradeLevel = 'GradeLevel' in params ? params.GradeLevel : null;
+        this.Ns = 'Ns' in params ? params.Ns : null;
+        this.DomainGrade = 'DomainGrade' in params ? params.DomainGrade : null;
+
+    }
+}
+
+/**
+ * CreateDeal返回参数结构体
+ * @class
+ */
+class CreateDealResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * 子订单列表
+         * @type {Array.<Deals> || null}
+         */
+        this.DealList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+
+        if (params.DealList) {
+            this.DealList = new Array();
+            for (let z in params.DealList) {
+                let obj = new Deals();
+                obj.deserialize(params.DealList[z]);
+                this.DealList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRecordExistExceptDefaultNS返回参数结构体
+ * @class
+ */
+class DescribeRecordExistExceptDefaultNSResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true 是 false 否
+         * @type {boolean || null}
+         */
+        this.Exist = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Exist = 'Exist' in params ? params.Exist : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVasAutoRenewStatus请求参数结构体
+ * @class
+ */
+class ModifyVasAutoRenewStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID。可以从控制台查看所有的资源
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * enable 开启自动续费；disable 关闭自动续费
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Whois信息
+ * @class
+ */
+class WhoisInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 联系信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WhoisContact || null}
+         */
+        this.Contacts = null;
+
+        /**
+         * 域名注册时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationDate = null;
+
+        /**
+         * 域名到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * 是否是在腾讯云注册的域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsQcloud = null;
+
+        /**
+         * 是否当前操作帐号注册的域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsQcloudOwner = null;
+
+        /**
+         * 域名配置的NS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.NameServers = null;
+
+        /**
+         * Whois原始信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Raw = null;
+
+        /**
+         * 域名注册商
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Registrar = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 更新日期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdatedDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Contacts) {
+            let obj = new WhoisContact();
+            obj.deserialize(params.Contacts)
+            this.Contacts = obj;
+        }
+        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.IsQcloud = 'IsQcloud' in params ? params.IsQcloud : null;
+        this.IsQcloudOwner = 'IsQcloudOwner' in params ? params.IsQcloudOwner : null;
+        this.NameServers = 'NameServers' in params ? params.NameServers : null;
+        this.Raw = 'Raw' in params ? params.Raw : null;
+        this.Registrar = 'Registrar' in params ? params.Registrar : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdatedDate = 'UpdatedDate' in params ? params.UpdatedDate : null;
+
+    }
+}
+
+/**
+ * DownloadSnapshot返回参数结构体
+ * @class
+ */
+class DownloadSnapshotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照下载链接
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 域名概览明细
+ * @class
+ */
+class PreviewDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 域名套餐代码
+         * @type {string || null}
+         */
+        this.Grade = null;
+
+        /**
+         * 域名套餐名称
+         * @type {string || null}
+         */
+        this.GradeTitle = null;
+
+        /**
+         * 域名记录数
+         * @type {number || null}
+         */
+        this.Records = null;
+
+        /**
+         * 域名停靠状态。0 未开启 1 已开启 2 已暂停
+         * @type {number || null}
+         */
+        this.DomainParkingStatus = null;
+
+        /**
+         * 自定义线路数量
+         * @type {number || null}
+         */
+        this.LineCount = null;
+
+        /**
+         * 自定义线路分组数量
+         * @type {number || null}
+         */
+        this.LineGroupCount = null;
+
+        /**
+         * 域名别名数量
+         * @type {number || null}
+         */
+        this.AliasCount = null;
+
+        /**
+         * 允许添加的最大域名别名数量
+         * @type {number || null}
+         */
+        this.MaxAliasCount = null;
+
+        /**
+         * 昨天的解析量
+         * @type {number || null}
+         */
+        this.ResolveCount = null;
+
+        /**
+         * 增值服务数量
+         * @type {number || null}
+         */
+        this.VASCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Grade = 'Grade' in params ? params.Grade : null;
+        this.GradeTitle = 'GradeTitle' in params ? params.GradeTitle : null;
+        this.Records = 'Records' in params ? params.Records : null;
+        this.DomainParkingStatus = 'DomainParkingStatus' in params ? params.DomainParkingStatus : null;
+        this.LineCount = 'LineCount' in params ? params.LineCount : null;
+        this.LineGroupCount = 'LineGroupCount' in params ? params.LineGroupCount : null;
+        this.AliasCount = 'AliasCount' in params ? params.AliasCount : null;
+        this.MaxAliasCount = 'MaxAliasCount' in params ? params.MaxAliasCount : null;
+        this.ResolveCount = 'ResolveCount' in params ? params.ResolveCount : null;
+        this.VASCount = 'VASCount' in params ? params.VASCount : null;
+
+    }
+}
+
+/**
+ * DescribeDomainWhois返回参数结构体
+ * @class
+ */
+class DescribeDomainWhoisResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名Whois信息
+         * @type {WhoisInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new WhoisInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRecordGroup返回参数结构体
+ * @class
+ */
+class CreateRecordGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新增的分组 ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainGroupList请求参数结构体
+ * @class
+ */
+class DescribeDomainGroupListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -4746,6 +8669,116 @@ class DescribeBatchTaskResponse extends  AbstractModel {
 }
 
 /**
+ * CheckRecordSnapshotRollback请求参数结构体
+ * @class
+ */
+class CheckRecordSnapshotRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照 ID
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 解析记录信息
+         * @type {SnapshotRecord || null}
+         */
+        this.Record = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+
+        if (params.Record) {
+            let obj = new SnapshotRecord();
+            obj.deserialize(params.Record)
+            this.Record = obj;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainAnalytics请求参数结构体
+ * @class
+ */
+class DescribeDomainAnalyticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询解析量的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 查询的开始时间，格式：YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 查询的结束时间，格式：YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * DATE:按天维度统计 HOUR:按小时维度统计
+         * @type {string || null}
+         */
+        this.DnsFormat = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.DnsFormat = 'DnsFormat' in params ? params.DnsFormat : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
  * ModifyDynamicDNS返回参数结构体
  * @class
  */
@@ -4780,23 +8813,140 @@ class ModifyDynamicDNSResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeSnapshotRollbackResult请求参数结构体
+ * @class
+ */
+class DescribeSnapshotRollbackResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 快照回滚任务 ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainLogList返回参数结构体
+ * @class
+ */
+class DescribeDomainLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.LogList = null;
+
+        /**
+         * 分页大小
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 日志总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogList = 'LogList' in params ? params.LogList : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     CreateRecordRequest: CreateRecordRequest,
+    DescribeSnapshotRollbackResultResponse: DescribeSnapshotRollbackResultResponse,
+    DownloadSnapshotRequest: DownloadSnapshotRequest,
     DescribeBatchTaskDetail: DescribeBatchTaskDetail,
+    ModifyVasAutoRenewStatusResponse: ModifyVasAutoRenewStatusResponse,
+    RollbackSnapshotRequest: RollbackSnapshotRequest,
     DeleteDomainAliasResponse: DeleteDomainAliasResponse,
+    DescribeVASStatisticRequest: DescribeVASStatisticRequest,
+    DeleteDomainBatchResponse: DeleteDomainBatchResponse,
+    RecordGroupInfo: RecordGroupInfo,
     ModifySubdomainStatusRequest: ModifySubdomainStatusRequest,
     CreateRecordBatchResponse: CreateRecordBatchResponse,
+    DescribeSnapshotListResponse: DescribeSnapshotListResponse,
     CreateDomainBatchRecord: CreateDomainBatchRecord,
+    DomainAnalyticsInfo: DomainAnalyticsInfo,
+    ModifyRecordGroupRequest: ModifyRecordGroupRequest,
+    DescribeVASStatisticResponse: DescribeVASStatisticResponse,
     DescribeBatchTaskRequest: DescribeBatchTaskRequest,
+    DomainAnalyticsDetail: DomainAnalyticsDetail,
+    CreateSnapshotResponse: CreateSnapshotResponse,
+    KeyValue: KeyValue,
+    DeleteRecordGroupRequest: DeleteRecordGroupRequest,
+    PayOrderWithBalanceResponse: PayOrderWithBalanceResponse,
     DescribeDomainResponse: DescribeDomainResponse,
+    DescribeSnapshotListRequest: DescribeSnapshotListRequest,
+    DescribePackageDetailResponse: DescribePackageDetailResponse,
     DescribeRecordLineListResponse: DescribeRecordLineListResponse,
+    SnapshotPageInfo: SnapshotPageInfo,
     DomainInfo: DomainInfo,
     CreateDomainBatchRequest: CreateDomainBatchRequest,
+    ModifyRecordGroupResponse: ModifyRecordGroupResponse,
     DescribeDomainShareInfoRequest: DescribeDomainShareInfoRequest,
     DomainListItem: DomainListItem,
+    DeleteDomainBatchRequest: DeleteDomainBatchRequest,
     DescribeRecordTypeResponse: DescribeRecordTypeResponse,
     ModifyDomainRemarkResponse: ModifyDomainRemarkResponse,
+    DeleteSnapshotRequest: DeleteSnapshotRequest,
     DescribeDomainAliasListResponse: DescribeDomainAliasListResponse,
+    RollbackRecordSnapshotRequest: RollbackRecordSnapshotRequest,
+    ModifyRecordToGroupRequest: ModifyRecordToGroupRequest,
+    DescribeSnapshotConfigResponse: DescribeSnapshotConfigResponse,
     RecordCountInfo: RecordCountInfo,
     DeleteShareDomainResponse: DeleteShareDomainResponse,
     ModifyRecordRequest: ModifyRecordRequest,
@@ -4804,70 +8954,129 @@ module.exports = {
     LineGroupInfo: LineGroupInfo,
     DeleteDomainRequest: DeleteDomainRequest,
     ModifyDomainOwnerRequest: ModifyDomainOwnerRequest,
+    ModifyPackageAutoRenewRequest: ModifyPackageAutoRenewRequest,
     DomainShareInfo: DomainShareInfo,
+    DescribeSnapshotConfigRequest: DescribeSnapshotConfigRequest,
+    LineInfo: LineInfo,
+    DescribeRecordExistExceptDefaultNSRequest: DescribeRecordExistExceptDefaultNSRequest,
     DescribeRecordLineListRequest: DescribeRecordLineListRequest,
     DescribeRecordListResponse: DescribeRecordListResponse,
     CreateRecordBatchRequest: CreateRecordBatchRequest,
     DeleteDomainAliasRequest: DeleteDomainAliasRequest,
     DomainAliasInfo: DomainAliasInfo,
+    CreateDealRequest: CreateDealRequest,
     ModifyDomainLockRequest: ModifyDomainLockRequest,
-    ModifyDomainStatusRequest: ModifyDomainStatusRequest,
+    DescribeDomainWhoisRequest: DescribeDomainWhoisRequest,
+    SubdomainAliasAnalyticsItem: SubdomainAliasAnalyticsItem,
     ModifyDomainStatusResponse: ModifyDomainStatusResponse,
     AddRecordBatch: AddRecordBatch,
     DescribeRecordRequest: DescribeRecordRequest,
     CreateDomainGroupResponse: CreateDomainGroupResponse,
+    DescribeSubdomainAnalyticsRequest: DescribeSubdomainAnalyticsRequest,
     DeleteRecordRequest: DeleteRecordRequest,
     DescribeDomainRequest: DescribeDomainRequest,
+    GroupInfo: GroupInfo,
     ModifyRecordStatusRequest: ModifyRecordStatusRequest,
     CreateRecordResponse: CreateRecordResponse,
-    DescribeRecordResponse: DescribeRecordResponse,
+    DeleteRecordGroupResponse: DeleteRecordGroupResponse,
     RecordInfo: RecordInfo,
+    DescribeSnapshotRollbackTaskRequest: DescribeSnapshotRollbackTaskRequest,
+    CheckRecordSnapshotRollbackResponse: CheckRecordSnapshotRollbackResponse,
+    DescribeDomainPreviewRequest: DescribeDomainPreviewRequest,
     CreateRecordBatchDetail: CreateRecordBatchDetail,
+    WhoisContact: WhoisContact,
+    DescribeSubdomainAnalyticsResponse: DescribeSubdomainAnalyticsResponse,
     ModifyRecordResponse: ModifyRecordResponse,
+    ModifyRecordToGroupResponse: ModifyRecordToGroupResponse,
+    SnapshotRecord: SnapshotRecord,
     ModifyDomainUnlockResponse: ModifyDomainUnlockResponse,
     DescribeDomainLogListRequest: DescribeDomainLogListRequest,
     DescribeDomainListResponse: DescribeDomainListResponse,
     ModifyRecordBatchRequest: ModifyRecordBatchRequest,
+    WhoisContactAddress: WhoisContactAddress,
+    SnapshotConfig: SnapshotConfig,
     DeleteRecordResponse: DeleteRecordResponse,
     CreateRecordBatchRecord: CreateRecordBatchRecord,
     CreateDomainResponse: CreateDomainResponse,
     DomainCountInfo: DomainCountInfo,
     UserInfo: UserInfo,
     ModifyRecordBatchResponse: ModifyRecordBatchResponse,
-    DescribeDomainLogListResponse: DescribeDomainLogListResponse,
+    CheckSnapshotRollbackRequest: CheckSnapshotRollbackRequest,
+    CheckSnapshotRollbackResponse: CheckSnapshotRollbackResponse,
     DescribeRecordTypeRequest: DescribeRecordTypeRequest,
+    DescribeSnapshotRollbackTaskResponse: DescribeSnapshotRollbackTaskResponse,
     RecordListItem: RecordListItem,
+    DescribeDomainPreviewResponse: DescribeDomainPreviewResponse,
     CreateDomainBatchResponse: CreateDomainBatchResponse,
+    DescribeDomainGroupListResponse: DescribeDomainGroupListResponse,
+    LockInfo: LockInfo,
     ModifyDomainOwnerResponse: ModifyDomainOwnerResponse,
+    SubdomainAnalyticsInfo: SubdomainAnalyticsInfo,
     ModifyRecordBatchDetail: ModifyRecordBatchDetail,
     DescribeUserDetailResponse: DescribeUserDetailResponse,
+    DeleteDomainBatchDetail: DeleteDomainBatchDetail,
     CreateDomainRequest: CreateDomainRequest,
+    ModifyPackageAutoRenewResponse: ModifyPackageAutoRenewResponse,
+    DomainAliasAnalyticsItem: DomainAliasAnalyticsItem,
     DescribeDomainShareInfoResponse: DescribeDomainShareInfoResponse,
     ModifyDomainRemarkRequest: ModifyDomainRemarkRequest,
     CreateDomainAliasResponse: CreateDomainAliasResponse,
     DescribeRecordListRequest: DescribeRecordListRequest,
+    PayOrderWithBalanceRequest: PayOrderWithBalanceRequest,
+    DescribePackageDetailRequest: DescribePackageDetailRequest,
+    DescribeRecordResponse: DescribeRecordResponse,
+    ModifyRecordFieldsRequest: ModifyRecordFieldsRequest,
+    DeleteSnapshotResponse: DeleteSnapshotResponse,
     DescribeDomainPurviewResponse: DescribeDomainPurviewResponse,
+    Deals: Deals,
     ModifySubdomainStatusResponse: ModifySubdomainStatusResponse,
+    DescribeDomainAnalyticsResponse: DescribeDomainAnalyticsResponse,
     ModifyRecordStatusResponse: ModifyRecordStatusResponse,
+    CreateRecordGroupRequest: CreateRecordGroupRequest,
+    RollbackSnapshotResponse: RollbackSnapshotResponse,
+    DescribeRecordGroupListResponse: DescribeRecordGroupListResponse,
     CreateDomainGroupRequest: CreateDomainGroupRequest,
-    LineInfo: LineInfo,
+    CreateSnapshotRequest: CreateSnapshotRequest,
     DeleteDomainResponse: DeleteDomainResponse,
+    DescribeRecordSnapshotRollbackResultResponse: DescribeRecordSnapshotRollbackResultResponse,
+    ModifySnapshotConfigRequest: ModifySnapshotConfigRequest,
     DescribeDomainAliasListRequest: DescribeDomainAliasListRequest,
     CreateDomainAliasRequest: CreateDomainAliasRequest,
     DeleteShareDomainRequest: DeleteShareDomainRequest,
+    VASStatisticItem: VASStatisticItem,
+    SnapshotInfo: SnapshotInfo,
     ModifyDynamicDNSRequest: ModifyDynamicDNSRequest,
+    DescribeRecordGroupListRequest: DescribeRecordGroupListRequest,
+    ModifyRecordFieldsResponse: ModifyRecordFieldsResponse,
     PurviewInfo: PurviewInfo,
     ModifyRecordRemarkRequest: ModifyRecordRemarkRequest,
+    ModifySnapshotConfigResponse: ModifySnapshotConfigResponse,
+    RollbackRecordSnapshotResponse: RollbackRecordSnapshotResponse,
     DescribeUserDetailRequest: DescribeUserDetailRequest,
+    ModifyDomainStatusRequest: ModifyDomainStatusRequest,
     ModifyRecordRemarkResponse: ModifyRecordRemarkResponse,
     DescribeDomainListRequest: DescribeDomainListRequest,
     DomainCreateInfo: DomainCreateInfo,
     DescribeDomainPurviewRequest: DescribeDomainPurviewRequest,
     CreateDomainBatchDetail: CreateDomainBatchDetail,
     ModifyDomainUnlockRequest: ModifyDomainUnlockRequest,
+    DescribeRecordSnapshotRollbackResultRequest: DescribeRecordSnapshotRollbackResultRequest,
     ModifyDomainLockResponse: ModifyDomainLockResponse,
-    LockInfo: LockInfo,
+    PackageDetailItem: PackageDetailItem,
+    CreateDealResponse: CreateDealResponse,
+    DescribeRecordExistExceptDefaultNSResponse: DescribeRecordExistExceptDefaultNSResponse,
+    ModifyVasAutoRenewStatusRequest: ModifyVasAutoRenewStatusRequest,
+    WhoisInfo: WhoisInfo,
+    DownloadSnapshotResponse: DownloadSnapshotResponse,
+    PreviewDetail: PreviewDetail,
+    DescribeDomainWhoisResponse: DescribeDomainWhoisResponse,
+    CreateRecordGroupResponse: CreateRecordGroupResponse,
+    DescribeDomainGroupListRequest: DescribeDomainGroupListRequest,
     DescribeBatchTaskResponse: DescribeBatchTaskResponse,
+    CheckRecordSnapshotRollbackRequest: CheckRecordSnapshotRollbackRequest,
+    DescribeDomainAnalyticsRequest: DescribeDomainAnalyticsRequest,
     ModifyDynamicDNSResponse: ModifyDynamicDNSResponse,
+    DescribeSnapshotRollbackResultRequest: DescribeSnapshotRollbackResultRequest,
+    DescribeDomainLogListResponse: DescribeDomainLogListResponse,
 
 }

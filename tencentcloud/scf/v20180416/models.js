@@ -1610,12 +1610,14 @@ class GetFunctionRequest extends  AbstractModel {
 
         /**
          * 函数的版本号
+默认值: $LATEST
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
          * 函数所属命名空间
+默认值: default
          * @type {string || null}
          */
         this.Namespace = null;
@@ -2145,6 +2147,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
 
         /**
          * 函数所属命名空间
+默认值: default
          * @type {string || null}
          */
         this.Namespace = null;
@@ -2227,6 +2230,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.ProtocolParams = null;
 
+        /**
+         * 单实例多并发配置。只支持Web函数。
+         * @type {InstanceConcurrencyConfig || null}
+         */
+        this.InstanceConcurrencyConfig = null;
+
     }
 
     /**
@@ -2293,6 +2302,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             let obj = new ProtocolParams();
             obj.deserialize(params.ProtocolParams)
             this.ProtocolParams = obj;
+        }
+
+        if (params.InstanceConcurrencyConfig) {
+            let obj = new InstanceConcurrencyConfig();
+            obj.deserialize(params.InstanceConcurrencyConfig)
+            this.InstanceConcurrencyConfig = obj;
         }
 
     }
@@ -2740,6 +2755,13 @@ class TriggerCount extends  AbstractModel {
          */
         this.Vod = null;
 
+        /**
+         * Eb触发器数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Eb = null;
+
     }
 
     /**
@@ -2760,6 +2782,7 @@ class TriggerCount extends  AbstractModel {
         this.Mps = 'Mps' in params ? params.Mps : null;
         this.Cm = 'Cm' in params ? params.Cm : null;
         this.Vod = 'Vod' in params ? params.Vod : null;
+        this.Eb = 'Eb' in params ? params.Eb : null;
 
     }
 }
@@ -3814,6 +3837,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.ProtocolParams = null;
 
+        /**
+         * 单实例多并发配置。只支持Web函数。
+         * @type {InstanceConcurrencyConfig || null}
+         */
+        this.InstanceConcurrencyConfig = null;
+
     }
 
     /**
@@ -3899,6 +3928,12 @@ class CreateFunctionRequest extends  AbstractModel {
             let obj = new ProtocolParams();
             obj.deserialize(params.ProtocolParams)
             this.ProtocolParams = obj;
+        }
+
+        if (params.InstanceConcurrencyConfig) {
+            let obj = new InstanceConcurrencyConfig();
+            obj.deserialize(params.InstanceConcurrencyConfig)
+            this.InstanceConcurrencyConfig = obj;
         }
 
     }
@@ -6108,6 +6143,43 @@ class CfsInsInfo extends  AbstractModel {
 }
 
 /**
+ * 多并发执行配置描述
+ * @class
+ */
+class InstanceConcurrencyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启智能动态并发。'FALSE'时是静态并发。''时取消多并发配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DynamicEnabled = null;
+
+        /**
+         * 单实例并发数最大值。取值范围 [1,100]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxConcurrency = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DynamicEnabled = 'DynamicEnabled' in params ? params.DynamicEnabled : null;
+        this.MaxConcurrency = 'MaxConcurrency' in params ? params.MaxConcurrency : null;
+
+    }
+}
+
+/**
  * 预置定时任务动作
  * @class
  */
@@ -7315,6 +7387,13 @@ class ImageConfig extends  AbstractModel {
          */
         this.Args = null;
 
+        /**
+         * 镜像加速开关，默认False
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ContainerImageAccelerate = null;
+
     }
 
     /**
@@ -7330,6 +7409,7 @@ class ImageConfig extends  AbstractModel {
         this.EntryPoint = 'EntryPoint' in params ? params.EntryPoint : null;
         this.Command = 'Command' in params ? params.Command : null;
         this.Args = 'Args' in params ? params.Args : null;
+        this.ContainerImageAccelerate = 'ContainerImageAccelerate' in params ? params.ContainerImageAccelerate : null;
 
     }
 }
@@ -7436,7 +7516,7 @@ class DeleteTriggerRequest extends  AbstractModel {
         this.TriggerDesc = null;
 
         /**
-         * 函数的版本信息
+         * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -7816,6 +7896,7 @@ module.exports = {
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
+    InstanceConcurrencyConfig: InstanceConcurrencyConfig,
     TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,

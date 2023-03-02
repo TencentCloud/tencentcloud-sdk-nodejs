@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const VideoSuperResolution = models.VideoSuperResolution;
+const DynamicImageInfo = models.DynamicImageInfo;
 const MediaJoiningTaskResult = models.MediaJoiningTaskResult;
 const Denoise = models.Denoise;
 const StripTaskResultItem = models.StripTaskResultItem;
@@ -63,6 +64,7 @@ const SubtitleRec = models.SubtitleRec;
 const ResultVideoInfo = models.ResultVideoInfo;
 const PicMarkInfoItem = models.PicMarkInfoItem;
 const MediaJoiningInfo = models.MediaJoiningInfo;
+const MediaCuttingWatermarkText = models.MediaCuttingWatermarkText;
 const DescribeMediaQualityRestorationTaskRusultRequest = models.DescribeMediaQualityRestorationTaskRusultRequest;
 const ColorEnhance = models.ColorEnhance;
 const SegmentInfo = models.SegmentInfo;
@@ -102,6 +104,7 @@ const CoverTaskResult = models.CoverTaskResult;
 const TagTaskResult = models.TagTaskResult;
 const AudioEnhance = models.AudioEnhance;
 const CosInfo = models.CosInfo;
+const MediaCuttingWatermarkImage = models.MediaCuttingWatermarkImage;
 const MediaResultInfo = models.MediaResultInfo;
 const FrameTagResult = models.FrameTagResult;
 const TextMarkInfoItem = models.TextMarkInfoItem;
@@ -116,6 +119,7 @@ const StopMediaProcessTaskRequest = models.StopMediaProcessTaskRequest;
 const CoverEditingInfo = models.CoverEditingInfo;
 const SubtitleItem = models.SubtitleItem;
 const DescribeMediaProcessTaskResultRequest = models.DescribeMediaProcessTaskResultRequest;
+const SpriteImageInfo = models.SpriteImageInfo;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const EditingTaskResult = models.EditingTaskResult;
 const MediaProcessInfo = models.MediaProcessInfo;
@@ -123,6 +127,7 @@ const ClassificationTaskResult = models.ClassificationTaskResult;
 const TagItem = models.TagItem;
 const DescribeMediaProcessTaskResultResponse = models.DescribeMediaProcessTaskResultResponse;
 const HighlightsTaskResultItemSegment = models.HighlightsTaskResultItemSegment;
+const MediaCuttingWatermark = models.MediaCuttingWatermark;
 
 
 /**

@@ -26,6 +26,7 @@ const DescribePrivateZoneRecordListResponse = models.DescribePrivateZoneRecordLi
 const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
 const DescribePrivateZoneRequest = models.DescribePrivateZoneRequest;
+const ModifyRecordsStatusResponse = models.ModifyRecordsStatusResponse;
 const DatePoint = models.DatePoint;
 const DescribeAccountVpcListResponse = models.DescribeAccountVpcListResponse;
 const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
@@ -60,6 +61,7 @@ const DeletePrivateDNSAccountRequest = models.DeletePrivateDNSAccountRequest;
 const DeletePrivateZoneRecordRequest = models.DeletePrivateZoneRecordRequest;
 const Filter = models.Filter;
 const DeletePrivateZoneResponse = models.DeletePrivateZoneResponse;
+const ModifyRecordsStatusRequest = models.ModifyRecordsStatusRequest;
 const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
 const MetricData = models.MetricData;
 const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
@@ -191,6 +193,17 @@ class PrivatednsClient extends AbstractClient {
     CreatePrivateZoneRecord(req, cb) {
         let resp = new CreatePrivateZoneRecordResponse();
         this.request("CreatePrivateZoneRecord", req, resp, cb);
+    }
+
+    /**
+     * 修改解析记录状态
+     * @param {ModifyRecordsStatusRequest} req
+     * @param {function(string, ModifyRecordsStatusResponse):void} cb
+     * @public
+     */
+    ModifyRecordsStatus(req, cb) {
+        let resp = new ModifyRecordsStatusResponse();
+        this.request("ModifyRecordsStatus", req, resp, cb);
     }
 
     /**

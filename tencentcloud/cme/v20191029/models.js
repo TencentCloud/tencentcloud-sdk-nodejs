@@ -611,7 +611,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.TaskType = null;
 
         /**
-         * 导出项目输出信息。
+         * 导出项目输出信息。仅当 TaskType 为 VIDEO_EDIT_PROJECT_EXPORT 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {VideoEditProjectOutput || null}
          */
@@ -760,6 +760,92 @@ class ExportVideoEditProjectRequest extends  AbstractModel {
 }
 
 /**
+ * 云转推输入断流信息。
+ * @class
+ */
+class StreamConnectInputInterruptInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云转推输入源标识，取值有：
+<li>Main：主源；</li>
+<li>Backup：备源。</li>
+         * @type {string || null}
+         */
+        this.EndPoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndPoint = 'EndPoint' in params ? params.EndPoint : null;
+
+    }
+}
+
+/**
+ * 团队信息
+ * @class
+ */
+class TeamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 团队 ID。
+         * @type {string || null}
+         */
+        this.TeamId = null;
+
+        /**
+         * 团队名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 团队成员个数
+         * @type {number || null}
+         */
+        this.MemberCount = null;
+
+        /**
+         * 团队创建时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 团队最后更新时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TeamId = 'TeamId' in params ? params.TeamId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * 分类信息
  * @class
  */
@@ -800,18 +886,26 @@ class ClassInfo extends  AbstractModel {
 }
 
 /**
- * ModifyProject返回参数结构体
+ * 点播转直播输出断流信息。
  * @class
  */
-class ModifyProjectResponse extends  AbstractModel {
+class MediaCastDestinationInterruptInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 发生断流的输出源信息。
+         * @type {MediaCastDestinationInfo || null}
+         */
+        this.DestinationInfo = null;
+
+        /**
+         * 输出源断流原因，取值有：
+<li>SystemError：系统错误；</li>
+<li>Unknown：未知错误。</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Reason = null;
 
     }
 
@@ -822,7 +916,13 @@ class ModifyProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.DestinationInfo) {
+            let obj = new MediaCastDestinationInfo();
+            obj.deserialize(params.DestinationInfo)
+            this.DestinationInfo = obj;
+        }
+        this.Reason = 'Reason' in params ? params.Reason : null;
 
     }
 }
@@ -1263,6 +1363,93 @@ class SearchMaterialRequest extends  AbstractModel {
 }
 
 /**
+ * 新文件生成事件
+ * @class
+ */
+class StorageNewFileCreatedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云点播文件  Id。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 媒体 Id。
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+        /**
+         * 操作者 Id。（废弃，请勿使用）
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 操作类型，可取值有：
+<li>Upload：本地上传；</li>
+<li>PullUpload：拉取上传；</li>
+<li>VideoEdit：视频剪辑；</li>
+<li>LiveStreamClip：直播流剪辑；</li>
+<li>LiveStreamRecord：直播流录制。</li>
+         * @type {string || null}
+         */
+        this.OperationType = null;
+
+        /**
+         * 媒体归属。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 媒体分类路径。
+         * @type {string || null}
+         */
+        this.ClassPath = null;
+
+        /**
+         * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+    }
+}
+
+/**
  * DeleteTeam返回参数结构体
  * @class
  */
@@ -1443,6 +1630,41 @@ class SearchScope extends  AbstractModel {
 }
 
 /**
+ * 点播文件播放信息，包含当前在播地址和该地址已播时长 。
+ * @class
+ */
+class VodPullInputPlayInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前正在播放文件 Url 。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 点播文件已播放时长，单位：秒。
+         * @type {number || null}
+         */
+        this.TimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
+
+    }
+}
+
+/**
  * RevokeResourceAuthorization返回参数结构体
  * @class
  */
@@ -1577,16 +1799,23 @@ class ProjectInfo extends  AbstractModel {
         this.StreamConnectProjectInfo = null;
 
         /**
-         * 项目创建时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
+         * 点播转直播项目信息，仅当项目类别取值为 MEDIA_CAST 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MediaCastProjectInfo || null}
          */
-        this.CreateTime = null;
+        this.MediaCastProjectInfo = null;
 
         /**
          * 项目更新时间，格式按照 ISO 8601 标准表示。
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * 项目创建时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -1614,8 +1843,14 @@ class ProjectInfo extends  AbstractModel {
             obj.deserialize(params.StreamConnectProjectInfo)
             this.StreamConnectProjectInfo = obj;
         }
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.MediaCastProjectInfo) {
+            let obj = new MediaCastProjectInfo();
+            obj.deserialize(params.MediaCastProjectInfo)
+            this.MediaCastProjectInfo = obj;
+        }
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2264,42 +2499,36 @@ class Entity extends  AbstractModel {
 }
 
 /**
- * 团队信息
+ * 点播转直播视频配置
  * @class
  */
-class TeamInfo extends  AbstractModel {
+class MediaCastVideoSetting extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 团队 ID。
-         * @type {string || null}
-         */
-        this.TeamId = null;
-
-        /**
-         * 团队名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 团队成员个数
+         * 视频宽度，单位：px，默认值为1280。
          * @type {number || null}
          */
-        this.MemberCount = null;
+        this.Width = null;
 
         /**
-         * 团队创建时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
+         * 视频高度，单位：px，默认值为720。支持的视频分辨率最大为1920*1080。
+         * @type {number || null}
          */
-        this.CreateTime = null;
+        this.Height = null;
 
         /**
-         * 团队最后更新时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
+         * 视频码率，单位：kbps，默认值为2500。最大值为10000 kbps。
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.Bitrate = null;
+
+        /**
+         * 视频帧率，单位：Hz，默认值为25。最大值为60。
+         * @type {number || null}
+         */
+        this.FrameRate = null;
 
     }
 
@@ -2310,11 +2539,10 @@ class TeamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TeamId = 'TeamId' in params ? params.TeamId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.FrameRate = 'FrameRate' in params ? params.FrameRate : null;
 
     }
 }
@@ -2351,7 +2579,7 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
         this.ExportDestination = null;
 
         /**
-         * 在线编辑轨道数据。轨道数据相关介绍，请查看 [视频合成协议](https://cloud.tencent.com/document/product/1156/51225)。
+         * 轨道数据，用于描述待导出视频的内容。关于轨道数据的格式请查看 [视频合成协议](https://cloud.tencent.com/document/product/1156/51225)。文档中也描述了如何在页面上查看一个剪辑项目的轨道数据，该能力可以帮助开发者更方便地构造自己的轨道数据。
          * @type {string || null}
          */
         this.TrackData = null;
@@ -2912,6 +3140,69 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
+ *  点播转直播项目状态变更事件。
+ * @class
+ */
+class ProjectMediaCastStatusChangedEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目 Id。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目状态，取值有：
+<li>Started：点播转直播开始；</li>
+<li>Stopped：点播转直播结束；</li>
+<li>SourceInterrupted：点播转直播输入断流；</li>
+<li>DestinationInterrupted：点播转直播输出断流。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 点播转直播输入断流信息，仅当 Status 取值 SourceInterrupted 时有效。
+         * @type {MediaCastSourceInterruptInfo || null}
+         */
+        this.SourceInterruptInfo = null;
+
+        /**
+         * 点播转直播输出断流信息，仅当 Status 取值 DestinationInterrupted 时有效。
+         * @type {MediaCastDestinationInterruptInfo || null}
+         */
+        this.DestinationInterruptInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.SourceInterruptInfo) {
+            let obj = new MediaCastSourceInterruptInfo();
+            obj.deserialize(params.SourceInterruptInfo)
+            this.SourceInterruptInfo = obj;
+        }
+
+        if (params.DestinationInterruptInfo) {
+            let obj = new MediaCastDestinationInterruptInfo();
+            obj.deserialize(params.DestinationInterruptInfo)
+            this.DestinationInterruptInfo = obj;
+        }
+
+    }
+}
+
+/**
  * 媒体轨道的片段信息
  * @class
  */
@@ -2993,65 +3284,30 @@ class MediaTrackItem extends  AbstractModel {
 }
 
 /**
- * 新文件生成事件
+ * 点播转直播输出信息。
  * @class
  */
-class StorageNewFileCreatedEvent extends  AbstractModel {
+class MediaCastDestinationInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云点播文件  Id。
-         * @type {string || null}
+         * 输出源序号。由系统进行分配。
+         * @type {number || null}
          */
-        this.FileId = null;
+        this.Index = null;
 
         /**
-         * 媒体 Id。
+         * 输出源的名称。
          * @type {string || null}
          */
-        this.MaterialId = null;
+        this.Name = null;
 
         /**
-         * 操作者 Id。（废弃，请勿使用）
+         * 输出直播流地址。支持的直播流类型为 RTMP 和 SRT。
          * @type {string || null}
          */
-        this.Operator = null;
-
-        /**
-         * 操作类型，可取值有：
-<li>Upload：本地上传；</li>
-<li>PullUpload：拉取上传；</li>
-<li>VideoEdit：视频剪辑；</li>
-<li>LiveStreamClip：直播流剪辑；</li>
-<li>LiveStreamRecord：直播流录制。</li>
-         * @type {string || null}
-         */
-        this.OperationType = null;
-
-        /**
-         * 媒体归属。
-         * @type {Entity || null}
-         */
-        this.Owner = null;
-
-        /**
-         * 媒体分类路径。
-         * @type {string || null}
-         */
-        this.ClassPath = null;
-
-        /**
-         * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
-         * @type {string || null}
-         */
-        this.SourceContext = null;
+        this.PushUrl = null;
 
     }
 
@@ -3062,19 +3318,9 @@ class StorageNewFileCreatedEvent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.OperationType = 'OperationType' in params ? params.OperationType : null;
-
-        if (params.Owner) {
-            let obj = new Entity();
-            obj.deserialize(params.Owner)
-            this.Owner = obj;
-        }
-        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PushUrl = 'PushUrl' in params ? params.PushUrl : null;
 
     }
 }
@@ -3236,26 +3482,38 @@ class WeiboPublishInfo extends  AbstractModel {
 }
 
 /**
- * 用于描述资源
+ * 点播转直播输入源信息。
  * @class
  */
-class Resource extends  AbstractModel {
+class MediaCastSourceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 类型，取值有：
-<li>MATERIAL：素材。</li>
-<li>CLASS：分类。</li>
+         * 输入源的媒体类型，取值有：
+<li>CME：多媒体创作引擎的媒体文件；</li>
+<li>VOD：云点播的媒资文件。</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 资源 Id，当 Type 为 MATERIAL 时，取值为素材 Id；当 Type 为 CLASS 时，取值为分类路径 ClassPath。
+         * 多媒体创作引擎的媒体 ID。当 Type = CME  时必填。
          * @type {string || null}
          */
-        this.Id = null;
+        this.MaterialId = null;
+
+        /**
+         * 云点播媒体文件 ID。当 Type = VOD 时必填。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 序号，位于输入源列表中的序号，由系统分配。
+         * @type {number || null}
+         */
+        this.Index = null;
 
     }
 
@@ -3267,7 +3525,9 @@ class Resource extends  AbstractModel {
             return;
         }
         this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Index = 'Index' in params ? params.Index : null;
 
     }
 }
@@ -3860,6 +4120,48 @@ class DescribeJoinTeamsRequest extends  AbstractModel {
 }
 
 /**
+ * 点播转直播输入断流信息。
+ * @class
+ */
+class MediaCastSourceInterruptInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发生断流的输入源信息。
+         * @type {MediaCastSourceInfo || null}
+         */
+        this.SourceInfo = null;
+
+        /**
+         * 输入源断开原因。取值有：
+<li>SystemError：系统错误；</li>
+<li>Unknown：未知错误。</li>
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceInfo) {
+            let obj = new MediaCastSourceInfo();
+            obj.deserialize(params.SourceInfo)
+            this.SourceInfo = obj;
+        }
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
  * 视频拆条项目的输入信息。
  * @class
  */
@@ -3942,6 +4244,34 @@ class DeleteMaterialRequest extends  AbstractModel {
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * ModifyProject返回参数结构体
+ * @class
+ */
+class ModifyProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4599,6 +4929,43 @@ class SwitcherPgmOutputConfig extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.BitRate = 'BitRate' in params ? params.BitRate : null;
+
+    }
+}
+
+/**
+ * 用于描述资源
+ * @class
+ */
+class Resource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 类型，取值有：
+<li>MATERIAL：素材。</li>
+<li>CLASS：分类。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 资源 Id，当 Type 为 MATERIAL 时，取值为素材 Id；当 Type 为 CLASS 时，取值为分类路径 ClassPath。
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -6067,6 +6434,48 @@ class MediaPreprocessOperation extends  AbstractModel {
 }
 
 /**
+ * 云转推输出断流信息
+ * @class
+ */
+class StreamConnectOutputInterruptInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云转推输出标识。
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云转推输出名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 云转推输出地址。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * 加入的团队信息
  * @class
  */
@@ -6680,13 +7089,15 @@ class TimeRange extends  AbstractModel {
         super();
 
         /**
-         * 开始时间，使用 ISO 日期格式。
+         * 开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间，使用 ISO 日期格式。
+         * 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -7121,6 +7532,13 @@ class HandleStreamConnectProjectResponse extends  AbstractModel {
         this.StreamInputRtmpPushUrl = null;
 
         /**
+         * 点播输入源播放进度信息，当 Operation 取值 DescribeInputPlayInfo 且 InputType 为 VodPull 类型时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VodPullInputPlayInfo || null}
+         */
+        this.VodPullInputPlayInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7136,6 +7554,12 @@ class HandleStreamConnectProjectResponse extends  AbstractModel {
             return;
         }
         this.StreamInputRtmpPushUrl = 'StreamInputRtmpPushUrl' in params ? params.StreamInputRtmpPushUrl : null;
+
+        if (params.VodPullInputPlayInfo) {
+            let obj = new VodPullInputPlayInfo();
+            obj.deserialize(params.VodPullInputPlayInfo)
+            this.VodPullInputPlayInfo = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7186,6 +7610,104 @@ class DeleteTeamMembersRequest extends  AbstractModel {
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
         this.MemberIds = 'MemberIds' in params ? params.MemberIds : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 点播转直播项目信息。
+ * @class
+ */
+class MediaCastProjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 点播转直播项目状态，取值有：
+<li>Working ：运行中；</li>
+<li>Idle ：空闲。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 输入源列表。
+         * @type {Array.<MediaCastSourceInfo> || null}
+         */
+        this.SourceInfos = null;
+
+        /**
+         * 输出源列表。
+         * @type {Array.<MediaCastDestinationInfo> || null}
+         */
+        this.DestinationInfos = null;
+
+        /**
+         * 输出媒体配置。
+         * @type {MediaCastOutputMediaSetting || null}
+         */
+        this.OutputMediaSetting = null;
+
+        /**
+         * 播放参数。
+         * @type {MediaCastPlaySetting || null}
+         */
+        this.PlaySetting = null;
+
+        /**
+         * 项目启动时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 项目结束时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如果项目还在运行中，改字段为空。
+         * @type {string || null}
+         */
+        this.StopTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.SourceInfos) {
+            this.SourceInfos = new Array();
+            for (let z in params.SourceInfos) {
+                let obj = new MediaCastSourceInfo();
+                obj.deserialize(params.SourceInfos[z]);
+                this.SourceInfos.push(obj);
+            }
+        }
+
+        if (params.DestinationInfos) {
+            this.DestinationInfos = new Array();
+            for (let z in params.DestinationInfos) {
+                let obj = new MediaCastDestinationInfo();
+                obj.deserialize(params.DestinationInfos[z]);
+                this.DestinationInfos.push(obj);
+            }
+        }
+
+        if (params.OutputMediaSetting) {
+            let obj = new MediaCastOutputMediaSetting();
+            obj.deserialize(params.OutputMediaSetting)
+            this.OutputMediaSetting = obj;
+        }
+
+        if (params.PlaySetting) {
+            let obj = new MediaCastPlaySetting();
+            obj.deserialize(params.PlaySetting)
+            this.PlaySetting = obj;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.StopTime = 'StopTime' in params ? params.StopTime : null;
 
     }
 }
@@ -7395,7 +7917,8 @@ class EventContent extends  AbstractModel {
 <li>Class.Created：分类新增事件；</li>
 <li>Class.Moved：分类移动事件；</li>
 <li>Class.Deleted：分类删除事件；</li>
-<li>Task.VideoExportCompleted：视频导出完成事件。 </li>
+<li>Task.VideoExportCompleted：视频导出完成事件； </li>
+<li>Project.MediaCast.StatusChanged：点播转直播项目状态变更事件。 </li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -7488,6 +8011,13 @@ class EventContent extends  AbstractModel {
          */
         this.VideoExportCompletedEvent = null;
 
+        /**
+         * 点播转直播项目状态变更事件。仅当 EventType 为 Project.MediaCast.StatusChanged 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProjectMediaCastStatusChangedEvent || null}
+         */
+        this.ProjectMediaCastStatusChangedEvent = null;
+
     }
 
     /**
@@ -7570,6 +8100,12 @@ class EventContent extends  AbstractModel {
             let obj = new VideoExportCompletedEvent();
             obj.deserialize(params.VideoExportCompletedEvent)
             this.VideoExportCompletedEvent = obj;
+        }
+
+        if (params.ProjectMediaCastStatusChangedEvent) {
+            let obj = new ProjectMediaCastStatusChangedEvent();
+            obj.deserialize(params.ProjectMediaCastStatusChangedEvent)
+            this.ProjectMediaCastStatusChangedEvent = obj;
         }
 
     }
@@ -8031,6 +8567,41 @@ class DescribeLoginStatusResponse extends  AbstractModel {
 }
 
 /**
+ * 播放控制参数。
+ * @class
+ */
+class MediaCastPlaySetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 循环播放次数。LoopCount 和 EndTime 同时只能有一个生效。默认循环播放次数为一次。如果同时设置了 LoopCount 和 EndTime 参数，优先使用 LoopCount 参数。
+         * @type {number || null}
+         */
+        this.LoopCount = null;
+
+        /**
+         * 结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoopCount = 'LoopCount' in params ? params.LoopCount : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 媒体添加事件。
  * @class
  */
@@ -8183,10 +8754,26 @@ class ProjectStreamConnectStatusChangedEvent extends  AbstractModel {
         /**
          * 项目状态，取值有：
 <li>Working：云转推推流开始；</li>
-<li>Stopped：云转推推流结束。</li>
+<li>Stopped：云转推推流结束；</li>
+<li>InputInterrupted：云转推输入断流；</li>
+<li>OutputInterrupted：云转推输出断流。</li>
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * 云转推输入断流信息，仅当 Status 取值 InputInterrupted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StreamConnectInputInterruptInfo || null}
+         */
+        this.InputInterruptInfo = null;
+
+        /**
+         * 云转推输出断流信息，仅当 Status 取值 OutputInterrupted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StreamConnectOutputInterruptInfo || null}
+         */
+        this.OutputInterruptInfo = null;
 
     }
 
@@ -8199,6 +8786,18 @@ class ProjectStreamConnectStatusChangedEvent extends  AbstractModel {
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.InputInterruptInfo) {
+            let obj = new StreamConnectInputInterruptInfo();
+            obj.deserialize(params.InputInterruptInfo)
+            this.InputInterruptInfo = obj;
+        }
+
+        if (params.OutputInterruptInfo) {
+            let obj = new StreamConnectOutputInterruptInfo();
+            obj.deserialize(params.OutputInterruptInfo)
+            this.OutputInterruptInfo = obj;
+        }
 
     }
 }
@@ -9966,6 +10565,39 @@ class ExportVideoByEditorTrackDataResponse extends  AbstractModel {
 }
 
 /**
+ * 点播转直播输出媒体配置。
+ * @class
+ */
+class MediaCastOutputMediaSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频配置。
+         * @type {MediaCastVideoSetting || null}
+         */
+        this.VideoSetting = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoSetting) {
+            let obj = new MediaCastVideoSetting();
+            obj.deserialize(params.VideoSetting)
+            this.VideoSetting = obj;
+        }
+
+    }
+}
+
+/**
  * 分类创建事件。
  * @class
  */
@@ -10326,18 +10958,22 @@ module.exports = {
     DescribeTeamsResponse: DescribeTeamsResponse,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     ExportVideoEditProjectRequest: ExportVideoEditProjectRequest,
+    StreamConnectInputInterruptInfo: StreamConnectInputInterruptInfo,
+    TeamInfo: TeamInfo,
     ClassInfo: ClassInfo,
-    ModifyProjectResponse: ModifyProjectResponse,
+    MediaCastDestinationInterruptInfo: MediaCastDestinationInterruptInfo,
     AudioTrackItem: AudioTrackItem,
     StreamConnectProjectInfo: StreamConnectProjectInfo,
     VideoEncodingPresetAudioSettingForUpdate: VideoEncodingPresetAudioSettingForUpdate,
     VideoEncodingPresetAudioSetting: VideoEncodingPresetAudioSetting,
     IntegerRange: IntegerRange,
     SearchMaterialRequest: SearchMaterialRequest,
+    StorageNewFileCreatedEvent: StorageNewFileCreatedEvent,
     DeleteTeamResponse: DeleteTeamResponse,
     StreamConnectOutput: StreamConnectOutput,
     CopyProjectRequest: CopyProjectRequest,
     SearchScope: SearchScope,
+    VodPullInputPlayInfo: VodPullInputPlayInfo,
     RevokeResourceAuthorizationResponse: RevokeResourceAuthorizationResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     ProjectInfo: ProjectInfo,
@@ -10352,7 +10988,7 @@ module.exports = {
     AudioMaterial: AudioMaterial,
     AddMemberInfo: AddMemberInfo,
     Entity: Entity,
-    TeamInfo: TeamInfo,
+    MediaCastVideoSetting: MediaCastVideoSetting,
     ExportVideoByEditorTrackDataRequest: ExportVideoByEditorTrackDataRequest,
     MaterialTagInfo: MaterialTagInfo,
     VideoEditProjectOutput: VideoEditProjectOutput,
@@ -10361,13 +10997,14 @@ module.exports = {
     Authorizer: Authorizer,
     DescribePlatformsResponse: DescribePlatformsResponse,
     DescribeTasksRequest: DescribeTasksRequest,
+    ProjectMediaCastStatusChangedEvent: ProjectMediaCastStatusChangedEvent,
     MediaTrackItem: MediaTrackItem,
-    StorageNewFileCreatedEvent: StorageNewFileCreatedEvent,
+    MediaCastDestinationInfo: MediaCastDestinationInfo,
     DescribeLoginStatusRequest: DescribeLoginStatusRequest,
     MediaTrack: MediaTrack,
     DeleteLoginStatusResponse: DeleteLoginStatusResponse,
     WeiboPublishInfo: WeiboPublishInfo,
-    Resource: Resource,
+    MediaCastSourceInfo: MediaCastSourceInfo,
     CreateLinkResponse: CreateLinkResponse,
     ExportVideoByTemplateResponse: ExportVideoByTemplateResponse,
     StreamInputInfo: StreamInputInfo,
@@ -10381,8 +11018,10 @@ module.exports = {
     MaterialImportedEvent: MaterialImportedEvent,
     ModifyVideoEncodingPresetResponse: ModifyVideoEncodingPresetResponse,
     DescribeJoinTeamsRequest: DescribeJoinTeamsRequest,
+    MediaCastSourceInterruptInfo: MediaCastSourceInterruptInfo,
     VideoSegmentationProjectInput: VideoSegmentationProjectInput,
     DeleteMaterialRequest: DeleteMaterialRequest,
+    ModifyProjectResponse: ModifyProjectResponse,
     CreateProjectResponse: CreateProjectResponse,
     VideoEditProjectInput: VideoEditProjectInput,
     DeleteProjectResponse: DeleteProjectResponse,
@@ -10396,6 +11035,7 @@ module.exports = {
     VideoEncodingPresetVideoSettingForUpdate: VideoEncodingPresetVideoSettingForUpdate,
     GrantResourceAuthorizationResponse: GrantResourceAuthorizationResponse,
     SwitcherPgmOutputConfig: SwitcherPgmOutputConfig,
+    Resource: Resource,
     CMEExportInfo: CMEExportInfo,
     MoveResourceRequest: MoveResourceRequest,
     LivePullInputInfo: LivePullInputInfo,
@@ -10425,6 +11065,7 @@ module.exports = {
     VideoExportCompletedEvent: VideoExportCompletedEvent,
     ResourceInfo: ResourceInfo,
     MediaPreprocessOperation: MediaPreprocessOperation,
+    StreamConnectOutputInterruptInfo: StreamConnectOutputInterruptInfo,
     JoinTeamInfo: JoinTeamInfo,
     DescribeResourceAuthorizationRequest: DescribeResourceAuthorizationRequest,
     CreateClassResponse: CreateClassResponse,
@@ -10447,6 +11088,7 @@ module.exports = {
     MaterialModifiedEvent: MaterialModifiedEvent,
     HandleStreamConnectProjectResponse: HandleStreamConnectProjectResponse,
     DeleteTeamMembersRequest: DeleteTeamMembersRequest,
+    MediaCastProjectInfo: MediaCastProjectInfo,
     ExportVideoByTemplateRequest: ExportVideoByTemplateRequest,
     DescribePlatformsRequest: DescribePlatformsRequest,
     OtherMaterial: OtherMaterial,
@@ -10458,6 +11100,7 @@ module.exports = {
     AccountInfo: AccountInfo,
     DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeLoginStatusResponse: DescribeLoginStatusResponse,
+    MediaCastPlaySetting: MediaCastPlaySetting,
     MaterialAddedEvent: MaterialAddedEvent,
     CreateVideoEncodingPresetRequest: CreateVideoEncodingPresetRequest,
     ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent,
@@ -10494,6 +11137,7 @@ module.exports = {
     ExternalMediaInfo: ExternalMediaInfo,
     LinkMaterialInfo: LinkMaterialInfo,
     ExportVideoByEditorTrackDataResponse: ExportVideoByEditorTrackDataResponse,
+    MediaCastOutputMediaSetting: MediaCastOutputMediaSetting,
     ClassCreatedEvent: ClassCreatedEvent,
     VideoEncodingPreset: VideoEncodingPreset,
     ImportMaterialRequest: ImportMaterialRequest,

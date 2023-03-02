@@ -17,77 +17,99 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateAccessExportRequest = models.CreateAccessExportRequest;
-const DescribeWafAutoDenyRulesResponse = models.DescribeWafAutoDenyRulesResponse;
+const CdcCluster = models.CdcCluster;
 const DescribeIpHitItemsResponse = models.DescribeIpHitItemsResponse;
-const DescribeCustomRulesRspRuleListItem = models.DescribeCustomRulesRspRuleListItem;
-const DescribeUserClbWafRegionsResponse = models.DescribeUserClbWafRegionsResponse;
+const DescribeUserCdcClbWafRegionsRequest = models.DescribeUserCdcClbWafRegionsRequest;
 const IpHitItemsData = models.IpHitItemsData;
 const DeleteAttackDownloadRecordResponse = models.DeleteAttackDownloadRecordResponse;
 const DescribeFlowTrendRequest = models.DescribeFlowTrendRequest;
 const DescribeWafAutoDenyStatusRequest = models.DescribeWafAutoDenyStatusRequest;
 const AccessLogItems = models.AccessLogItems;
-const AddDomainWhiteRuleResponse = models.AddDomainWhiteRuleResponse;
+const DescribeWafAutoDenyRulesResponse = models.DescribeWafAutoDenyRulesResponse;
 const DescribeIpAccessControlResponse = models.DescribeIpAccessControlResponse;
+const LoadBalancerPackageNew = models.LoadBalancerPackageNew;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const ModifyDomainWhiteRuleRequest = models.ModifyDomainWhiteRuleRequest;
 const AccessRuleTagInfo = models.AccessRuleTagInfo;
 const DescribeAccessIndexRequest = models.DescribeAccessIndexRequest;
 const DomainInfo = models.DomainInfo;
 const AccessLogItem = models.AccessLogItem;
-const DescribeCustomRulesResponse = models.DescribeCustomRulesResponse;
 const DeleteSessionRequest = models.DeleteSessionRequest;
 const DescribeWafAutoDenyRulesRequest = models.DescribeWafAutoDenyRulesRequest;
+const SearchAttackLogRequest = models.SearchAttackLogRequest;
 const AddCustomRuleResponse = models.AddCustomRuleResponse;
 const DescribeFlowTrendResponse = models.DescribeFlowTrendResponse;
+const GetAttackDownloadRecordsRequest = models.GetAttackDownloadRecordsRequest;
 const UpsertIpAccessControlRequest = models.UpsertIpAccessControlRequest;
-const DescribeCustomRulesPagingInfo = models.DescribeCustomRulesPagingInfo;
 const DeleteDownloadRecordRequest = models.DeleteDownloadRecordRequest;
-const RuleList = models.RuleList;
-const DescribeAccessExportsRequest = models.DescribeAccessExportsRequest;
-const ResponseCode = models.ResponseCode;
-const ModifyAccessPeriodResponse = models.ModifyAccessPeriodResponse;
+const DescribeUserCdcClbWafRegionsResponse = models.DescribeUserCdcClbWafRegionsResponse;
 const DeleteAccessExportResponse = models.DeleteAccessExportResponse;
+const DescribeAccessExportsRequest = models.DescribeAccessExportsRequest;
+const DescribeUserClbWafRegionsResponse = models.DescribeUserClbWafRegionsResponse;
+const ModifyWafAutoDenyStatusRequest = models.ModifyWafAutoDenyStatusRequest;
+const ModifyAccessPeriodResponse = models.ModifyAccessPeriodResponse;
+const QPSPackageNew = models.QPSPackageNew;
 const FiltersItemNew = models.FiltersItemNew;
 const DescribeAutoDenyIPResponse = models.DescribeAutoDenyIPResponse;
+const SwitchDomainRulesResponse = models.SwitchDomainRulesResponse;
 const SearchAccessLogResponse = models.SearchAccessLogResponse;
 const IpAccessControlItem = models.IpAccessControlItem;
+const SwitchDomainRulesRequest = models.SwitchDomainRulesRequest;
+const DomainsPartInfo = models.DomainsPartInfo;
 const DescribeAutoDenyIPRequest = models.DescribeAutoDenyIPRequest;
 const DescribeIpAccessControlRequest = models.DescribeIpAccessControlRequest;
+const ModifyAreaBanStatusRequest = models.ModifyAreaBanStatusRequest;
 const AddSpartaProtectionRequest = models.AddSpartaProtectionRequest;
+const PostAttackDownloadTaskRequest = models.PostAttackDownloadTaskRequest;
 const DescribeAccessFastAnalysisRequest = models.DescribeAccessFastAnalysisRequest;
 const DeleteIpAccessControlRequest = models.DeleteIpAccessControlRequest;
+const AttackLogInfo = models.AttackLogInfo;
 const DeleteDomainWhiteRulesResponse = models.DeleteDomainWhiteRulesResponse;
-const CreateAttackDownloadTaskRequest = models.CreateAttackDownloadTaskRequest;
+const ModifyWafAutoDenyStatusResponse = models.ModifyWafAutoDenyStatusResponse;
 const DescribeWafAutoDenyStatusResponse = models.DescribeWafAutoDenyStatusResponse;
 const DeleteDomainWhiteRulesRequest = models.DeleteDomainWhiteRulesRequest;
+const DomainPackageNew = models.DomainPackageNew;
+const RuleList = models.RuleList;
+const PostAttackDownloadTaskResponse = models.PostAttackDownloadTaskResponse;
+const DescribeDomainDetailsSaasRequest = models.DescribeDomainDetailsSaasRequest;
 const ModifyCustomRuleStatusResponse = models.ModifyCustomRuleStatusResponse;
 const AddSpartaProtectionResponse = models.AddSpartaProtectionResponse;
 const IpAccessControlData = models.IpAccessControlData;
 const PortItem = models.PortItem;
-const CreateAttackDownloadTaskResponse = models.CreateAttackDownloadTaskResponse;
 const WafThreatenIntelligenceDetails = models.WafThreatenIntelligenceDetails;
 const DescribeDomainWhiteRulesRequest = models.DescribeDomainWhiteRulesRequest;
+const AddDomainWhiteRuleResponse = models.AddDomainWhiteRuleResponse;
 const ModifyCustomRuleStatusRequest = models.ModifyCustomRuleStatusRequest;
 const DeleteDownloadRecordResponse = models.DeleteDownloadRecordResponse;
 const ModifyAccessPeriodRequest = models.ModifyAccessPeriodRequest;
+const BotQPS = models.BotQPS;
 const ModifyWafAutoDenyRulesResponse = models.ModifyWafAutoDenyRulesResponse;
+const SearchAttackLogResponse = models.SearchAttackLogResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const CdcRegion = models.CdcRegion;
 const AccessValueInfo = models.AccessValueInfo;
 const DeleteIpAccessControlResponse = models.DeleteIpAccessControlResponse;
-const SearchAccessLogRequest = models.SearchAccessLogRequest;
+const AccessLogInfo = models.AccessLogInfo;
+const InstanceInfo = models.InstanceInfo;
+const PortInfo = models.PortInfo;
+const DescribeDomainDetailsSaasResponse = models.DescribeDomainDetailsSaasResponse;
 const AccessKeyValueInfo = models.AccessKeyValueInfo;
 const AddCustomRuleRequest = models.AddCustomRuleRequest;
-const DescribeCustomRulesRequest = models.DescribeCustomRulesRequest;
+const FraudPkg = models.FraudPkg;
+const ModifyAreaBanStatusResponse = models.ModifyAreaBanStatusResponse;
 const ModifyDomainWhiteRuleResponse = models.ModifyDomainWhiteRuleResponse;
 const ExportAccessInfo = models.ExportAccessInfo;
 const ModifyWafAutoDenyRulesRequest = models.ModifyWafAutoDenyRulesRequest;
 const DescribeAccessFastAnalysisResponse = models.DescribeAccessFastAnalysisResponse;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const AutoDenyDetail = models.AutoDenyDetail;
-const ModifyWafAutoDenyStatusRequest = models.ModifyWafAutoDenyStatusRequest;
+const ResponseCode = models.ResponseCode;
 const ModifyWafThreatenIntelligenceRequest = models.ModifyWafThreatenIntelligenceRequest;
 const Strategy = models.Strategy;
 const AccessFullTextInfo = models.AccessFullTextInfo;
 const DescribeIpHitItemsRequest = models.DescribeIpHitItemsRequest;
 const AccessRuleInfo = models.AccessRuleInfo;
+const GetAttackDownloadRecordsResponse = models.GetAttackDownloadRecordsResponse;
 const DeleteAccessExportRequest = models.DeleteAccessExportRequest;
 const DescribeUserClbWafRegionsRequest = models.DescribeUserClbWafRegionsRequest;
 const DescribeDomainWhiteRulesResponse = models.DescribeDomainWhiteRulesResponse;
@@ -97,15 +119,16 @@ const AddDomainWhiteRuleRequest = models.AddDomainWhiteRuleRequest;
 const UpsertIpAccessControlResponse = models.UpsertIpAccessControlResponse;
 const IpHitItem = models.IpHitItem;
 const DeleteSessionResponse = models.DeleteSessionResponse;
-const ModifyWafAutoDenyStatusResponse = models.ModifyWafAutoDenyStatusResponse;
+const DownloadAttackRecordInfo = models.DownloadAttackRecordInfo;
 const DescribeWafThreatenIntelligenceRequest = models.DescribeWafThreatenIntelligenceRequest;
 const DescribeAccessIndexResponse = models.DescribeAccessIndexResponse;
 const DescribeAccessExportsResponse = models.DescribeAccessExportsResponse;
 const CreateAccessExportResponse = models.CreateAccessExportResponse;
 const BotStatPointItem = models.BotStatPointItem;
-const AccessLogInfo = models.AccessLogInfo;
+const SearchAccessLogRequest = models.SearchAccessLogRequest;
 const AccessRuleKeyValueInfo = models.AccessRuleKeyValueInfo;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const BotPkg = models.BotPkg;
 const ModifyWafThreatenIntelligenceResponse = models.ModifyWafThreatenIntelligenceResponse;
 
 
@@ -131,18 +154,7 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * 获取防护配置中的自定义策略列表
-     * @param {DescribeCustomRulesRequest} req
-     * @param {function(string, DescribeCustomRulesResponse):void} cb
-     * @public
-     */
-    DescribeCustomRules(req, cb) {
-        let resp = new DescribeCustomRulesResponse();
-        this.request("DescribeCustomRules", req, resp, cb);
-    }
-
-    /**
-     * 开启或禁用自定义策略
+     * 开启或禁用访问控制（自定义策略）
      * @param {ModifyCustomRuleStatusRequest} req
      * @param {function(string, ModifyCustomRuleStatusResponse):void} cb
      * @public
@@ -177,6 +189,17 @@ class WafClient extends AbstractClient {
     }
 
     /**
+     * 修改防护域名的地域封禁状态
+     * @param {ModifyAreaBanStatusRequest} req
+     * @param {function(string, ModifyAreaBanStatusResponse):void} cb
+     * @public
+     */
+    ModifyAreaBanStatus(req, cb) {
+        let resp = new ModifyAreaBanStatusResponse();
+        this.request("ModifyAreaBanStatus", req, resp, cb);
+    }
+
+    /**
      * 查询用户所有域名的详细信息
      * @param {DescribeDomainsRequest} req
      * @param {function(string, DescribeDomainsResponse):void} cb
@@ -207,6 +230,39 @@ class WafClient extends AbstractClient {
     CreateAccessExport(req, cb) {
         let resp = new CreateAccessExportResponse();
         this.request("CreateAccessExport", req, resp, cb);
+    }
+
+    /**
+     * 新版本CLS接口存在参数变化，query改成了query_string支持lucence语法接口搜索查询。
+     * @param {SearchAttackLogRequest} req
+     * @param {function(string, SearchAttackLogResponse):void} cb
+     * @public
+     */
+    SearchAttackLog(req, cb) {
+        let resp = new SearchAttackLogResponse();
+        this.request("SearchAttackLog", req, resp, cb);
+    }
+
+    /**
+     * 查询单个saas域名详情
+     * @param {DescribeDomainDetailsSaasRequest} req
+     * @param {function(string, DescribeDomainDetailsSaasResponse):void} cb
+     * @public
+     */
+    DescribeDomainDetailsSaas(req, cb) {
+        let resp = new DescribeDomainDetailsSaasResponse();
+        this.request("DescribeDomainDetailsSaas", req, resp, cb);
+    }
+
+    /**
+     * 查询用户所有实例的详细信息
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -254,14 +310,14 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * 创建攻击日志下载任务
-     * @param {CreateAttackDownloadTaskRequest} req
-     * @param {function(string, CreateAttackDownloadTaskResponse):void} cb
+     * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
+     * @param {DescribeUserCdcClbWafRegionsRequest} req
+     * @param {function(string, DescribeUserCdcClbWafRegionsResponse):void} cb
      * @public
      */
-    CreateAttackDownloadTask(req, cb) {
-        let resp = new CreateAttackDownloadTaskResponse();
-        this.request("CreateAttackDownloadTask", req, resp, cb);
+    DescribeUserCdcClbWafRegions(req, cb) {
+        let resp = new DescribeUserCdcClbWafRegionsResponse();
+        this.request("DescribeUserCdcClbWafRegions", req, resp, cb);
     }
 
     /**
@@ -309,7 +365,18 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * 增加自定义策略
+     * 查询下载攻击日志任务记录列表
+     * @param {GetAttackDownloadRecordsRequest} req
+     * @param {function(string, GetAttackDownloadRecordsResponse):void} cb
+     * @public
+     */
+    GetAttackDownloadRecords(req, cb) {
+        let resp = new GetAttackDownloadRecordsResponse();
+        this.request("GetAttackDownloadRecords", req, resp, cb);
+    }
+
+    /**
+     * 增加访问控制（自定义策略）
      * @param {AddCustomRuleRequest} req
      * @param {function(string, AddCustomRuleResponse):void} cb
      * @public
@@ -328,6 +395,28 @@ class WafClient extends AbstractClient {
     DescribeIpAccessControl(req, cb) {
         let resp = new DescribeIpAccessControlResponse();
         this.request("DescribeIpAccessControl", req, resp, cb);
+    }
+
+    /**
+     * 创建搜索下载攻击日志任务，使用CLS新版本的搜索下载getlog接口
+     * @param {PostAttackDownloadTaskRequest} req
+     * @param {function(string, PostAttackDownloadTaskResponse):void} cb
+     * @public
+     */
+    PostAttackDownloadTask(req, cb) {
+        let resp = new PostAttackDownloadTaskResponse();
+        this.request("PostAttackDownloadTask", req, resp, cb);
+    }
+
+    /**
+     * 切换域名的规则开关
+     * @param {SwitchDomainRulesRequest} req
+     * @param {function(string, SwitchDomainRulesResponse):void} cb
+     * @public
+     */
+    SwitchDomainRules(req, cb) {
+        let resp = new SwitchDomainRulesResponse();
+        this.request("SwitchDomainRules", req, resp, cb);
     }
 
     /**
@@ -409,8 +498,6 @@ class WafClient extends AbstractClient {
 
     /**
      * 获取域名的规则白名单
-
-
      * @param {DescribeDomainWhiteRulesRequest} req
      * @param {function(string, DescribeDomainWhiteRulesResponse):void} cb
      * @public

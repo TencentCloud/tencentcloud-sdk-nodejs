@@ -87,42 +87,25 @@ class CreateAccessExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeWafAutoDenyRules返回参数结构体
+ * CDC场景下负载均衡WAF的集群信息
  * @class
  */
-class DescribeWafAutoDenyRulesResponse extends  AbstractModel {
+class CdcCluster extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 攻击次数阈值
-         * @type {number || null}
-         */
-        this.AttackThreshold = null;
-
-        /**
-         * 攻击时间阈值
-         * @type {number || null}
-         */
-        this.TimeThreshold = null;
-
-        /**
-         * 自动封禁时间
-         * @type {number || null}
-         */
-        this.DenyTimeThreshold = null;
-
-        /**
-         * 自动封禁状态
-         * @type {number || null}
-         */
-        this.DefenseStatus = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * cdc的集群id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Id = null;
+
+        /**
+         * cdc的集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
 
     }
 
@@ -133,11 +116,8 @@ class DescribeWafAutoDenyRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttackThreshold = 'AttackThreshold' in params ? params.AttackThreshold : null;
-        this.TimeThreshold = 'TimeThreshold' in params ? params.TimeThreshold : null;
-        this.DenyTimeThreshold = 'DenyTimeThreshold' in params ? params.DenyTimeThreshold : null;
-        this.DefenseStatus = 'DefenseStatus' in params ? params.DefenseStatus : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -184,72 +164,12 @@ class DescribeIpHitItemsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCustomRules接口回包中的复杂类型
+ * DescribeUserCdcClbWafRegions请求参数结构体
  * @class
  */
-class DescribeCustomRulesRspRuleListItem extends  AbstractModel {
+class DescribeUserCdcClbWafRegionsRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 动作类型
-         * @type {string || null}
-         */
-        this.ActionType = null;
-
-        /**
-         * 跳过的策略
-         * @type {string || null}
-         */
-        this.Bypass = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 过期时间
-         * @type {string || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * 策略名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 重定向地址
-         * @type {string || null}
-         */
-        this.Redirect = null;
-
-        /**
-         * 策略ID
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 优先级
-         * @type {string || null}
-         */
-        this.SortId = null;
-
-        /**
-         * 状态
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 策略详情
-         * @type {Array.<Strategy> || null}
-         */
-        this.Strategies = null;
 
     }
 
@@ -260,60 +180,6 @@ class DescribeCustomRulesRspRuleListItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
-        this.Bypass = 'Bypass' in params ? params.Bypass : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Redirect = 'Redirect' in params ? params.Redirect : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.SortId = 'SortId' in params ? params.SortId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-        if (params.Strategies) {
-            this.Strategies = new Array();
-            for (let z in params.Strategies) {
-                let obj = new Strategy();
-                obj.deserialize(params.Strategies[z]);
-                this.Strategies.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeUserClbWafRegions返回参数结构体
- * @class
- */
-class DescribeUserClbWafRegionsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 地域（标准的ap-格式）列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -490,18 +356,36 @@ class AccessLogItems extends  AbstractModel {
 }
 
 /**
- * AddDomainWhiteRule返回参数结构体
+ * DescribeWafAutoDenyRules返回参数结构体
  * @class
  */
-class AddDomainWhiteRuleResponse extends  AbstractModel {
+class DescribeWafAutoDenyRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则id
+         * 攻击次数阈值
          * @type {number || null}
          */
-        this.Id = null;
+        this.AttackThreshold = null;
+
+        /**
+         * 攻击时间阈值
+         * @type {number || null}
+         */
+        this.TimeThreshold = null;
+
+        /**
+         * 自动封禁时间
+         * @type {number || null}
+         */
+        this.DenyTimeThreshold = null;
+
+        /**
+         * 自动封禁状态
+         * @type {number || null}
+         */
+        this.DefenseStatus = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -518,7 +402,10 @@ class AddDomainWhiteRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.AttackThreshold = 'AttackThreshold' in params ? params.AttackThreshold : null;
+        this.TimeThreshold = 'TimeThreshold' in params ? params.TimeThreshold : null;
+        this.DenyTimeThreshold = 'DenyTimeThreshold' in params ? params.DenyTimeThreshold : null;
+        this.DefenseStatus = 'DefenseStatus' in params ? params.DefenseStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -559,6 +446,165 @@ class DescribeIpAccessControlResponse extends  AbstractModel {
             let obj = new IpAccessControlData();
             obj.deserialize(params.Data)
             this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 负载均衡算法
+ * @class
+ */
+class LoadBalancerPackageNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 监听id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 监听名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * 负载均衡id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 地区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 接入IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 接入端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * VPCID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NumericalVpcId = null;
+
+        /**
+         * CLB类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalancerType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NumericalVpcId = 'NumericalVpcId' in params ? params.NumericalVpcId : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+
+    }
+}
+
+/**
+ * DescribeInstances返回参数结构体
+ * @class
+ */
+class DescribeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * instance列表
+         * @type {Array.<InstanceInfo> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new InstanceInfo();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -702,6 +748,157 @@ class DomainInfo extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名ID
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * cname地址
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+        /**
+         * 实例类型
+         * @type {string || null}
+         */
+        this.Edition = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例名
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 日志包
+         * @type {number || null}
+         */
+        this.ClsStatus = null;
+
+        /**
+         * clb模式
+         * @type {number || null}
+         */
+        this.FlowMode = null;
+
+        /**
+         * waf开关
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 防御模式
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * AI防御模式
+         * @type {number || null}
+         */
+        this.Engine = null;
+
+        /**
+         * CC列表
+         * @type {Array.<string> || null}
+         */
+        this.CCList = null;
+
+        /**
+         * 回源ip
+         * @type {Array.<string> || null}
+         */
+        this.RsList = null;
+
+        /**
+         * 服务端口配置
+         * @type {Array.<PortInfo> || null}
+         */
+        this.Ports = null;
+
+        /**
+         * 负载均衡器
+         * @type {Array.<LoadBalancerPackageNew> || null}
+         */
+        this.LoadBalancerSet = null;
+
+        /**
+         * 用户id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * clb状态
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 0关闭 1开启
+         * @type {number || null}
+         */
+        this.Ipv6Status = null;
+
+        /**
+         * 0关闭 1开启
+         * @type {number || null}
+         */
+        this.BotStatus = null;
+
+        /**
+         * 版本信息
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 是否开启投递CLS功能
+         * @type {number || null}
+         */
+        this.PostCLSStatus = null;
+
+        /**
+         * 是否开启投递CKafka功能
+         * @type {number || null}
+         */
+        this.PostCKafkaStatus = null;
+
+        /**
+         * 应用型负载均衡类型: clb或者apisix，默认clb
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlbType = null;
+
     }
 
     /**
@@ -711,6 +908,47 @@ class DomainInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.Edition = 'Edition' in params ? params.Edition : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ClsStatus = 'ClsStatus' in params ? params.ClsStatus : null;
+        this.FlowMode = 'FlowMode' in params ? params.FlowMode : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.CCList = 'CCList' in params ? params.CCList : null;
+        this.RsList = 'RsList' in params ? params.RsList : null;
+
+        if (params.Ports) {
+            this.Ports = new Array();
+            for (let z in params.Ports) {
+                let obj = new PortInfo();
+                obj.deserialize(params.Ports[z]);
+                this.Ports.push(obj);
+            }
+        }
+
+        if (params.LoadBalancerSet) {
+            this.LoadBalancerSet = new Array();
+            for (let z in params.LoadBalancerSet) {
+                let obj = new LoadBalancerPackageNew();
+                obj.deserialize(params.LoadBalancerSet[z]);
+                this.LoadBalancerSet.push(obj);
+            }
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Ipv6Status = 'Ipv6Status' in params ? params.Ipv6Status : null;
+        this.BotStatus = 'BotStatus' in params ? params.BotStatus : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.PostCLSStatus = 'PostCLSStatus' in params ? params.PostCLSStatus : null;
+        this.PostCKafkaStatus = 'PostCKafkaStatus' in params ? params.PostCKafkaStatus : null;
+        this.AlbType = 'AlbType' in params ? params.AlbType : null;
 
     }
 }
@@ -748,56 +986,6 @@ class AccessLogItem extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * DescribeCustomRules返回参数结构体
- * @class
- */
-class DescribeCustomRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则详情
-         * @type {Array.<DescribeCustomRulesRspRuleListItem> || null}
-         */
-        this.RuleList = null;
-
-        /**
-         * 规则条数
-         * @type {string || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.RuleList) {
-            this.RuleList = new Array();
-            for (let z in params.RuleList) {
-                let obj = new DescribeCustomRulesRspRuleListItem();
-                obj.deserialize(params.RuleList[z]);
-                this.RuleList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -861,6 +1049,76 @@ class DescribeWafAutoDenyRulesRequest extends  AbstractModel {
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * SearchAttackLog请求参数结构体
+ * @class
+ */
+class SearchAttackLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的域名，所有域名使用all
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 查询起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询的游标。第一次请求使用空字符串即可，后续请求使用上一次请求返回的最后一条记录的context的值即可。
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * Lucene语法
+         * @type {string || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * 查询的数量，默认10条，最多100条
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 默认为desc，可以取值desc和asc
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.QueryString = 'QueryString' in params ? params.QueryString : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -957,6 +1215,27 @@ class DescribeFlowTrendResponse extends  AbstractModel {
 }
 
 /**
+ * GetAttackDownloadRecords请求参数结构体
+ * @class
+ */
+class GetAttackDownloadRecordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * UpsertIpAccessControl请求参数结构体
  * @class
  */
@@ -977,10 +1256,16 @@ class UpsertIpAccessControlRequest extends  AbstractModel {
         this.Items = null;
 
         /**
-         * clb-waf或者sparta-waf
+         * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
          * @type {string || null}
          */
         this.Edition = null;
+
+        /**
+         * 是否为多域名黑白名单
+         * @type {string || null}
+         */
+        this.SourceType = null;
 
     }
 
@@ -994,41 +1279,7 @@ class UpsertIpAccessControlRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Items = 'Items' in params ? params.Items : null;
         this.Edition = 'Edition' in params ? params.Edition : null;
-
-    }
-}
-
-/**
- * DescribeCustomRules接口的翻页参数
- * @class
- */
-class DescribeCustomRulesPagingInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 当前页码
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 当前页的最大数据条数
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
 
     }
 }
@@ -1062,48 +1313,25 @@ class DeleteDownloadRecordRequest extends  AbstractModel {
 }
 
 /**
- * 规则白名单
+ * DescribeUserCdcClbWafRegions返回参数结构体
  * @class
  */
-class RuleList extends  AbstractModel {
+class DescribeUserCdcClbWafRegionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则Id
-         * @type {number || null}
+         * CdcRegion的类型描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CdcRegion> || null}
          */
-        this.Id = null;
+        this.Data = null;
 
         /**
-         * 规则列表的id
-         * @type {Array.<number> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * 请求url
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * 请求的方法
-         * @type {string || null}
-         */
-        this.Function = null;
-
-        /**
-         * 时间戳
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * 开关状态
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -1114,12 +1342,44 @@ class RuleList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Rules = 'Rules' in params ? params.Rules : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Function = 'Function' in params ? params.Function : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CdcRegion();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAccessExport返回参数结构体
+ * @class
+ */
+class DeleteAccessExportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1167,24 +1427,25 @@ class DescribeAccessExportsRequest extends  AbstractModel {
 }
 
 /**
- * 响应体的返回码
+ * DescribeUserClbWafRegions返回参数结构体
  * @class
  */
-class ResponseCode extends  AbstractModel {
+class DescribeUserClbWafRegionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 如果成功则返回Success，失败则返回yunapi定义的错误码
-         * @type {string || null}
+         * 地域（标准的ap-格式）列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.Code = null;
+        this.Data = null;
 
         /**
-         * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Message = null;
+        this.RequestId = null;
 
     }
 
@@ -1195,8 +1456,41 @@ class ResponseCode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyWafAutoDenyStatus请求参数结构体
+ * @class
+ */
+class ModifyWafAutoDenyStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WAF 自动封禁配置项
+         * @type {AutoDenyDetail || null}
+         */
+        this.WafAutoDenyDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WafAutoDenyDetails) {
+            let obj = new AutoDenyDetail();
+            obj.deserialize(params.WafAutoDenyDetails)
+            this.WafAutoDenyDetails = obj;
+        }
 
     }
 }
@@ -1230,18 +1524,42 @@ class ModifyAccessPeriodResponse extends  AbstractModel {
 }
 
 /**
- * DeleteAccessExport返回参数结构体
+ * clb-waf QPS套餐 New
  * @class
  */
-class DeleteAccessExportResponse extends  AbstractModel {
+class QPSPackageNew extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 资源ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ResourceIds = null;
+
+        /**
+         * 过期时间
+         * @type {string || null}
+         */
+        this.ValidTime = null;
+
+        /**
+         * 是否自动续费，1：自动续费，0：不自动续费
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 套餐购买个数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 套餐购买地域，clb-waf暂时没有用到
+         * @type {string || null}
+         */
+        this.Region = null;
 
     }
 
@@ -1252,7 +1570,11 @@ class DeleteAccessExportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.ValidTime = 'ValidTime' in params ? params.ValidTime : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -1340,6 +1662,34 @@ class DescribeAutoDenyIPResponse extends  AbstractModel {
 }
 
 /**
+ * SwitchDomainRules返回参数结构体
+ * @class
+ */
+class SwitchDomainRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SearchAccessLog返回参数结构体
  * @class
  */
@@ -1354,13 +1704,13 @@ class SearchAccessLogResponse extends  AbstractModel {
         this.Context = null;
 
         /**
-         * 日志查询结果是否全部返回
+         * 日志查询结果是否全部返回，其中，“true”表示结果返回，“false”表示结果为返回
          * @type {boolean || null}
          */
         this.ListOver = null;
 
         /**
-         * 返回的是否为分析结果
+         * 返回的是否为分析结果，其中，“true”表示返回分析结果，“false”表示未返回分析结果
          * @type {boolean || null}
          */
         this.Analysis = null;
@@ -1496,6 +1846,265 @@ class IpAccessControlItem extends  AbstractModel {
 }
 
 /**
+ * SwitchDomainRules请求参数结构体
+ * @class
+ */
+class SwitchDomainRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 规则列表
+         * @type {Array.<number> || null}
+         */
+        this.Ids = null;
+
+        /**
+         * 开关状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 设置为观察模式原因
+         * @type {number || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * saas域名详情
+ * @class
+ */
+class DomainsPartInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启httpRewrite
+         * @type {number || null}
+         */
+        this.HttpsRewrite = null;
+
+        /**
+         * https回源端口
+         * @type {string || null}
+         */
+        this.HttpsUpstreamPort = null;
+
+        /**
+         * 是否是cdn
+         * @type {number || null}
+         */
+        this.IsCdn = null;
+
+        /**
+         * 是否开启gray
+         * @type {number || null}
+         */
+        this.IsGray = null;
+
+        /**
+         * 是否是http2
+         * @type {number || null}
+         */
+        this.IsHttp2 = null;
+
+        /**
+         * 是否开启websocket
+         * @type {number || null}
+         */
+        this.IsWebsocket = null;
+
+        /**
+         * 负载均衡
+         * @type {number || null}
+         */
+        this.LoadBalance = null;
+
+        /**
+         * 防御模式
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 私钥
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
+
+        /**
+         * ssl id
+         * @type {string || null}
+         */
+        this.SSLId = null;
+
+        /**
+         * 回源域名
+         * @type {string || null}
+         */
+        this.UpstreamDomain = null;
+
+        /**
+         * 回源类型
+         * @type {number || null}
+         */
+        this.UpstreamType = null;
+
+        /**
+         * 回源ip
+         * @type {Array.<string> || null}
+         */
+        this.SrcList = null;
+
+        /**
+         * 服务端口配置
+         * @type {Array.<PortInfo> || null}
+         */
+        this.Ports = null;
+
+        /**
+         * 证书类型
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * 回源方式
+         * @type {string || null}
+         */
+        this.UpstreamScheme = null;
+
+        /**
+         * 日志包
+         * @type {number || null}
+         */
+        this.Cls = null;
+
+        /**
+         * 一级cname
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+        /**
+         * 是否长连接
+         * @type {number || null}
+         */
+        this.IsKeepAlive = null;
+
+        /**
+         * 是否开启主动健康检测，1表示开启，0表示不开启
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ActiveCheck = null;
+
+        /**
+         * TLS版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TLSVersion = null;
+
+        /**
+         * 加密套件信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Ciphers = null;
+
+        /**
+         * 模版
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CipherTemplate = null;
+
+        /**
+         * 300s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProxyReadTimeout = null;
+
+        /**
+         * 300s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProxySendTimeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HttpsRewrite = 'HttpsRewrite' in params ? params.HttpsRewrite : null;
+        this.HttpsUpstreamPort = 'HttpsUpstreamPort' in params ? params.HttpsUpstreamPort : null;
+        this.IsCdn = 'IsCdn' in params ? params.IsCdn : null;
+        this.IsGray = 'IsGray' in params ? params.IsGray : null;
+        this.IsHttp2 = 'IsHttp2' in params ? params.IsHttp2 : null;
+        this.IsWebsocket = 'IsWebsocket' in params ? params.IsWebsocket : null;
+        this.LoadBalance = 'LoadBalance' in params ? params.LoadBalance : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
+        this.SSLId = 'SSLId' in params ? params.SSLId : null;
+        this.UpstreamDomain = 'UpstreamDomain' in params ? params.UpstreamDomain : null;
+        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
+        this.SrcList = 'SrcList' in params ? params.SrcList : null;
+
+        if (params.Ports) {
+            this.Ports = new Array();
+            for (let z in params.Ports) {
+                let obj = new PortInfo();
+                obj.deserialize(params.Ports[z]);
+                this.Ports.push(obj);
+            }
+        }
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.UpstreamScheme = 'UpstreamScheme' in params ? params.UpstreamScheme : null;
+        this.Cls = 'Cls' in params ? params.Cls : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.IsKeepAlive = 'IsKeepAlive' in params ? params.IsKeepAlive : null;
+        this.ActiveCheck = 'ActiveCheck' in params ? params.ActiveCheck : null;
+        this.TLSVersion = 'TLSVersion' in params ? params.TLSVersion : null;
+        this.Ciphers = 'Ciphers' in params ? params.Ciphers : null;
+        this.CipherTemplate = 'CipherTemplate' in params ? params.CipherTemplate : null;
+        this.ProxyReadTimeout = 'ProxyReadTimeout' in params ? params.ProxyReadTimeout : null;
+        this.ProxySendTimeout = 'ProxySendTimeout' in params ? params.ProxySendTimeout : null;
+
+    }
+}
+
+/**
  * DescribeAutoDenyIP请求参数结构体
  * @class
  */
@@ -1621,43 +2230,43 @@ class DescribeIpAccessControlRequest extends  AbstractModel {
         this.Count = null;
 
         /**
-         * 动作
+         * 动作，40表示查询白名单，42表示查询黑名单
          * @type {number || null}
          */
         this.ActionType = null;
 
         /**
-         * 有效时间最小时间戳
+         * 最小有效时间的时间戳
          * @type {number || null}
          */
         this.VtsMin = null;
 
         /**
-         * 有效时间最大时间戳
+         * 最大有效时间的时间戳
          * @type {number || null}
          */
         this.VtsMax = null;
 
         /**
-         * 创建时间最小时间戳
+         * 最小创建时间的时间戳
          * @type {number || null}
          */
         this.CtsMin = null;
 
         /**
-         * 创建时间最大时间戳
+         * 最大创建时间的时间戳
          * @type {number || null}
          */
         this.CtsMax = null;
 
         /**
-         * 偏移
+         * 分页开始条数
          * @type {number || null}
          */
         this.OffSet = null;
 
         /**
-         * 限制
+         * 每页的条数
          * @type {number || null}
          */
         this.Limit = null;
@@ -1701,6 +2310,41 @@ class DescribeIpAccessControlRequest extends  AbstractModel {
         this.Source = 'Source' in params ? params.Source : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
+
+    }
+}
+
+/**
+ * ModifyAreaBanStatus请求参数结构体
+ * @class
+ */
+class ModifyAreaBanStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修要修改的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 状态值，0表示关闭，1表示开启
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1857,6 +2501,42 @@ class AddSpartaProtectionRequest extends  AbstractModel {
          */
         this.Weights = null;
 
+        /**
+         * 是否开启主动健康检测，1表示开启，0表示不开启
+         * @type {number || null}
+         */
+        this.ActiveCheck = null;
+
+        /**
+         * TLS版本信息
+         * @type {number || null}
+         */
+        this.TLSVersion = null;
+
+        /**
+         * 加密套件信息
+         * @type {Array.<number> || null}
+         */
+        this.Ciphers = null;
+
+        /**
+         * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
+         * @type {number || null}
+         */
+        this.CipherTemplate = null;
+
+        /**
+         * 300s
+         * @type {number || null}
+         */
+        this.ProxyReadTimeout = null;
+
+        /**
+         * 300s
+         * @type {number || null}
+         */
+        this.ProxySendTimeout = null;
+
     }
 
     /**
@@ -1898,6 +2578,75 @@ class AddSpartaProtectionRequest extends  AbstractModel {
         this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
         this.Anycast = 'Anycast' in params ? params.Anycast : null;
         this.Weights = 'Weights' in params ? params.Weights : null;
+        this.ActiveCheck = 'ActiveCheck' in params ? params.ActiveCheck : null;
+        this.TLSVersion = 'TLSVersion' in params ? params.TLSVersion : null;
+        this.Ciphers = 'Ciphers' in params ? params.Ciphers : null;
+        this.CipherTemplate = 'CipherTemplate' in params ? params.CipherTemplate : null;
+        this.ProxyReadTimeout = 'ProxyReadTimeout' in params ? params.ProxyReadTimeout : null;
+        this.ProxySendTimeout = 'ProxySendTimeout' in params ? params.ProxySendTimeout : null;
+
+    }
+}
+
+/**
+ * PostAttackDownloadTask请求参数结构体
+ * @class
+ */
+class PostAttackDownloadTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的域名，所有域名使用all
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 查询起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Lucene语法
+         * @type {string || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 默认为desc，可以取值desc和asc
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.QueryString = 'QueryString' in params ? params.QueryString : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -1979,10 +2728,16 @@ class DeleteIpAccessControlRequest extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 删除对应的域名下的所有黑/白IP名额单
+         * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单
          * @type {boolean || null}
          */
         this.DeleteAll = null;
+
+        /**
+         * 是否为多域名黑白名单
+         * @type {string || null}
+         */
+        this.SourceType = null;
 
     }
 
@@ -1996,6 +2751,56 @@ class DeleteIpAccessControlRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Items = 'Items' in params ? params.Items : null;
         this.DeleteAll = 'DeleteAll' in params ? params.DeleteAll : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+
+    }
+}
+
+/**
+ * 攻击日志详情
+ * @class
+ */
+class AttackLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 攻击日志的详情内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * CLS返回内容
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * CLS返回内容
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * CLS返回内容
+         * @type {string || null}
+         */
+        this.TimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.TimeStamp = 'TimeStamp' in params ? params.TimeStamp : null;
 
     }
 }
@@ -2037,66 +2842,24 @@ class DeleteDomainWhiteRulesResponse extends  AbstractModel {
 }
 
 /**
- * CreateAttackDownloadTask请求参数结构体
+ * ModifyWafAutoDenyStatus返回参数结构体
  * @class
  */
-class CreateAttackDownloadTaskRequest extends  AbstractModel {
+class ModifyWafAutoDenyStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名，所有域名填写all
+         * WAF 自动封禁配置项
+         * @type {AutoDenyDetail || null}
+         */
+        this.WafAutoDenyDetails = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Domain = null;
-
-        /**
-         * 查询起始时间
-         * @type {string || null}
-         */
-        this.FromTime = null;
-
-        /**
-         * 查询结束时间
-         * @type {string || null}
-         */
-        this.ToTime = null;
-
-        /**
-         * 下载任务名字
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 风险等级
-         * @type {number || null}
-         */
-        this.RiskLevel = null;
-
-        /**
-         * 拦截状态
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 自定义策略ID
-         * @type {number || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 攻击者IP
-         * @type {string || null}
-         */
-        this.AttackIp = null;
-
-        /**
-         * 攻击类型
-         * @type {string || null}
-         */
-        this.AttackType = null;
+        this.RequestId = null;
 
     }
 
@@ -2107,15 +2870,13 @@ class CreateAttackDownloadTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.FromTime = 'FromTime' in params ? params.FromTime : null;
-        this.ToTime = 'ToTime' in params ? params.ToTime : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.AttackIp = 'AttackIp' in params ? params.AttackIp : null;
-        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+
+        if (params.WafAutoDenyDetails) {
+            let obj = new AutoDenyDetail();
+            obj.deserialize(params.WafAutoDenyDetails)
+            this.WafAutoDenyDetails = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2191,6 +2952,202 @@ class DeleteDomainWhiteRulesRequest extends  AbstractModel {
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Ids = 'Ids' in params ? params.Ids : null;
+
+    }
+}
+
+/**
+ * clb-waf 域名扩展套餐
+ * @class
+ */
+class DomainPackageNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 过期时间
+         * @type {string || null}
+         */
+        this.ValidTime = null;
+
+        /**
+         * 是否自动续费，1：自动续费，0：不自动续费
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 套餐购买个数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 套餐购买地域，clb-waf暂时没有用到
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.ValidTime = 'ValidTime' in params ? params.ValidTime : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * 规则白名单
+ * @class
+ */
+class RuleList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 规则列表的id
+         * @type {Array.<number> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * 请求url
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 请求的方法
+         * @type {string || null}
+         */
+        this.Function = null;
+
+        /**
+         * 时间戳
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 开关状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Rules = 'Rules' in params ? params.Rules : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Function = 'Function' in params ? params.Function : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * PostAttackDownloadTask返回参数结构体
+ * @class
+ */
+class PostAttackDownloadTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务task id
+         * @type {string || null}
+         */
+        this.Flow = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Flow = 'Flow' in params ? params.Flow : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainDetailsSaas请求参数结构体
+ * @class
+ */
+class DescribeDomainDetailsSaasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名id
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2364,41 +3321,6 @@ class PortItem extends  AbstractModel {
 }
 
 /**
- * CreateAttackDownloadTask返回参数结构体
- * @class
- */
-class CreateAttackDownloadTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务ID
-         * @type {string || null}
-         */
-        this.Flow = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Flow = 'Flow' in params ? params.Flow : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Waf 威胁情报封禁模块配置详情
  * @class
  */
@@ -2474,7 +3396,7 @@ class DescribeDomainWhiteRulesRequest extends  AbstractModel {
         this.Count = null;
 
         /**
-         * 排序方式
+         * 排序方式,desc表示降序，asc表示升序
          * @type {string || null}
          */
         this.Sort = null;
@@ -2500,6 +3422,41 @@ class DescribeDomainWhiteRulesRequest extends  AbstractModel {
         this.Count = 'Count' in params ? params.Count : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * AddDomainWhiteRule返回参数结构体
+ * @class
+ */
+class AddDomainWhiteRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2617,6 +3574,62 @@ class ModifyAccessPeriodRequest extends  AbstractModel {
 }
 
 /**
+ * bot的qps详情
+ * @class
+ */
+class BotQPS extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源id
+         * @type {string || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 有效时间
+         * @type {string || null}
+         */
+        this.ValidTime = null;
+
+        /**
+         * 资源数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 资源所在地区
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 使用qps的最大值
+         * @type {number || null}
+         */
+        this.MaxBotQPS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.ValidTime = 'ValidTime' in params ? params.ValidTime : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.MaxBotQPS = 'MaxBotQPS' in params ? params.MaxBotQPS : null;
+
+    }
+}
+
+/**
  * ModifyWafAutoDenyRules返回参数结构体
  * @class
  */
@@ -2652,6 +3665,171 @@ class ModifyWafAutoDenyRulesResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchAttackLog返回参数结构体
+ * @class
+ */
+class SearchAttackLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前返回的攻击日志条数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 翻页游标，如果没有下一页了，这个参数为空""
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 攻击日志数组条目内容
+         * @type {Array.<AttackLogInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * CLS接口返回内容
+         * @type {boolean || null}
+         */
+        this.ListOver = null;
+
+        /**
+         * CLS接口返回内容，标志是否启动新版本索引
+         * @type {boolean || null}
+         */
+        this.SqlFlag = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Context = 'Context' in params ? params.Context : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AttackLogInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.ListOver = 'ListOver' in params ? params.ListOver : null;
+        this.SqlFlag = 'SqlFlag' in params ? params.SqlFlag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 容量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤数组
+         * @type {Array.<FiltersItemNew> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new FiltersItemNew();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CDC场景下负载均衡WAF的地域信息
+ * @class
+ */
+class CdcRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 该地域对应的集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CdcCluster> || null}
+         */
+        this.Clusters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.Clusters) {
+            this.Clusters = new Array();
+            for (let z in params.Clusters) {
+                let obj = new CdcCluster();
+                obj.deserialize(params.Clusters[z]);
+                this.Clusters.push(obj);
+            }
+        }
 
     }
 }
@@ -2755,54 +3933,69 @@ class DeleteIpAccessControlResponse extends  AbstractModel {
 }
 
 /**
- * SearchAccessLog请求参数结构体
+ * 单条日志数据描述
  * @class
  */
-class SearchAccessLogRequest extends  AbstractModel {
+class AccessLogInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+         * 日志时间，单位ms
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 要查询的日志的起始时间，Unix时间戳，单位ms
-         * @type {number || null}
-         */
-        this.From = null;
-
-        /**
-         * 要查询的日志的结束时间，Unix时间戳，单位ms
-         * @type {number || null}
-         */
-        this.To = null;
-
-        /**
-         * 查询语句，语句长度最大为4096
+         * 日志主题名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Query = null;
+        this.TopicName = null;
 
         /**
-         * 单次查询返回的日志条数，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+         * 日志来源IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Context = null;
+        this.Source = null;
 
         /**
-         * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+         * 日志文件名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Sort = null;
+        this.FileName = null;
+
+        /**
+         * 日志上报请求包的ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 请求包内日志的ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgLogId = null;
+
+        /**
+         * 日志内容的Json序列化字符串
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogJson = null;
 
     }
 
@@ -2813,13 +4006,302 @@ class SearchAccessLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Time = 'Time' in params ? params.Time : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
-        this.Query = 'Query' in params ? params.Query : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
+        this.LogJson = 'LogJson' in params ? params.LogJson : null;
+
+    }
+}
+
+/**
+ * 一个实例的详细信息
+ * @class
+ */
+class InstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 资源id
+         * @type {string || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 付费模式
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 自动续费
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 弹性计费
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 套餐版本
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 过期时间
+         * @type {string || null}
+         */
+        this.ValidTime = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 已用
+         * @type {number || null}
+         */
+        this.DomainCount = null;
+
+        /**
+         * 上限
+         * @type {number || null}
+         */
+        this.SubDomainLimit = null;
+
+        /**
+         * 已用
+         * @type {number || null}
+         */
+        this.MainDomainCount = null;
+
+        /**
+         * 上限
+         * @type {number || null}
+         */
+        this.MainDomainLimit = null;
+
+        /**
+         * 峰值
+         * @type {number || null}
+         */
+        this.MaxQPS = null;
+
+        /**
+         * qps套餐
+         * @type {QPSPackageNew || null}
+         */
+        this.QPS = null;
+
+        /**
+         * 域名套餐
+         * @type {DomainPackageNew || null}
+         */
+        this.DomainPkg = null;
+
+        /**
+         * 用户appid
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * clb或saas
+         * @type {string || null}
+         */
+        this.Edition = null;
+
+        /**
+         * 业务安全包
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FraudPkg || null}
+         */
+        this.FraudPkg = null;
+
+        /**
+         * Bot资源包
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BotPkg || null}
+         */
+        this.BotPkg = null;
+
+        /**
+         * bot的qps详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BotQPS || null}
+         */
+        this.BotQPS = null;
+
+        /**
+         * qps弹性计费上限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ElasticBilling = null;
+
+        /**
+         * 攻击日志投递开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AttackLogPost = null;
+
+        /**
+         * 带宽峰值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.ValidTime = 'ValidTime' in params ? params.ValidTime : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.DomainCount = 'DomainCount' in params ? params.DomainCount : null;
+        this.SubDomainLimit = 'SubDomainLimit' in params ? params.SubDomainLimit : null;
+        this.MainDomainCount = 'MainDomainCount' in params ? params.MainDomainCount : null;
+        this.MainDomainLimit = 'MainDomainLimit' in params ? params.MainDomainLimit : null;
+        this.MaxQPS = 'MaxQPS' in params ? params.MaxQPS : null;
+
+        if (params.QPS) {
+            let obj = new QPSPackageNew();
+            obj.deserialize(params.QPS)
+            this.QPS = obj;
+        }
+
+        if (params.DomainPkg) {
+            let obj = new DomainPackageNew();
+            obj.deserialize(params.DomainPkg)
+            this.DomainPkg = obj;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Edition = 'Edition' in params ? params.Edition : null;
+
+        if (params.FraudPkg) {
+            let obj = new FraudPkg();
+            obj.deserialize(params.FraudPkg)
+            this.FraudPkg = obj;
+        }
+
+        if (params.BotPkg) {
+            let obj = new BotPkg();
+            obj.deserialize(params.BotPkg)
+            this.BotPkg = obj;
+        }
+
+        if (params.BotQPS) {
+            let obj = new BotQPS();
+            obj.deserialize(params.BotQPS)
+            this.BotQPS = obj;
+        }
+        this.ElasticBilling = 'ElasticBilling' in params ? params.ElasticBilling : null;
+        this.AttackLogPost = 'AttackLogPost' in params ? params.AttackLogPost : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+
+    }
+}
+
+/**
+ * 防护域名端口配置信息
+ * @class
+ */
+class PortInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeDomainDetailsSaas返回参数结构体
+ * @class
+ */
+class DescribeDomainDetailsSaasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名详情
+         * @type {DomainsPartInfo || null}
+         */
+        this.DomainsPartInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainsPartInfo) {
+            let obj = new DomainsPartInfo();
+            obj.deserialize(params.DomainsPartInfo)
+            this.DomainsPartInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2905,7 +4387,7 @@ class AddCustomRuleRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 动作类型
+         * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向
          * @type {string || null}
          */
         this.ActionType = null;
@@ -2917,7 +4399,7 @@ class AddCustomRuleRequest extends  AbstractModel {
         this.Redirect = null;
 
         /**
-         * "clb-waf"或者"sparta-waf"
+         * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
          * @type {string || null}
          */
         this.Edition = null;
@@ -2927,6 +4409,12 @@ class AddCustomRuleRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Bypass = null;
+
+        /**
+         * 添加规则的来源，默认为空
+         * @type {string || null}
+         */
+        this.EventId = null;
 
     }
 
@@ -2954,47 +4442,67 @@ class AddCustomRuleRequest extends  AbstractModel {
         this.Redirect = 'Redirect' in params ? params.Redirect : null;
         this.Edition = 'Edition' in params ? params.Edition : null;
         this.Bypass = 'Bypass' in params ? params.Bypass : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
 
 /**
- * DescribeCustomRules请求参数结构体
+ * 业务安全资源信息
  * @class
  */
-class DescribeCustomRulesRequest extends  AbstractModel {
+class FraudPkg extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名
+         * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Domain = null;
+        this.ResourceIds = null;
 
         /**
-         * 分页参数
-         * @type {DescribeCustomRulesPagingInfo || null}
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Paging = null;
+        this.Status = null;
 
         /**
-         * clb-waf或者sparta-waf
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Region = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Edition = null;
+        this.BeginTime = null;
 
         /**
-         * 过滤参数：动作类型：0放行，1阻断，2人机识别，3观察，4重定向
+         * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ActionType = null;
+        this.EndTime = null;
 
         /**
-         * 过滤参数：规则名称过滤条件
-         * @type {string || null}
+         * 申请数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Search = null;
+        this.InquireNum = null;
+
+        /**
+         * 使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UsedNum = null;
 
     }
 
@@ -3005,16 +4513,41 @@ class DescribeCustomRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InquireNum = 'InquireNum' in params ? params.InquireNum : null;
+        this.UsedNum = 'UsedNum' in params ? params.UsedNum : null;
 
-        if (params.Paging) {
-            let obj = new DescribeCustomRulesPagingInfo();
-            obj.deserialize(params.Paging)
-            this.Paging = obj;
+    }
+}
+
+/**
+ * ModifyAreaBanStatus返回参数结构体
+ * @class
+ */
+class ModifyAreaBanStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Edition = 'Edition' in params ? params.Edition : null;
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
-        this.Search = 'Search' in params ? params.Search : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3173,19 +4706,19 @@ class ModifyWafAutoDenyRulesRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 攻击次数阈值
+         * 触发IP封禁的攻击次数阈值，范围为2~100次
          * @type {number || null}
          */
         this.AttackThreshold = null;
 
         /**
-         * 攻击时间阈值
+         * IP封禁统计时间，范围为1-60分钟
          * @type {number || null}
          */
         this.TimeThreshold = null;
 
         /**
-         * 自动封禁时间
+         * 触发IP封禁后的封禁时间，范围为5~360分钟
          * @type {number || null}
          */
         this.DenyTimeThreshold = null;
@@ -3357,18 +4890,24 @@ class AutoDenyDetail extends  AbstractModel {
 }
 
 /**
- * ModifyWafAutoDenyStatus请求参数结构体
+ * 响应体的返回码
  * @class
  */
-class ModifyWafAutoDenyStatusRequest extends  AbstractModel {
+class ResponseCode extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * WAF 自动封禁配置项
-         * @type {AutoDenyDetail || null}
+         * 如果成功则返回Success，失败则返回yunapi定义的错误码
+         * @type {string || null}
          */
-        this.WafAutoDenyDetails = null;
+        this.Code = null;
+
+        /**
+         * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -3379,12 +4918,8 @@ class ModifyWafAutoDenyStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.WafAutoDenyDetails) {
-            let obj = new AutoDenyDetail();
-            obj.deserialize(params.WafAutoDenyDetails)
-            this.WafAutoDenyDetails = obj;
-        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -3681,6 +5216,49 @@ class AccessRuleInfo extends  AbstractModel {
             obj.deserialize(params.Tag)
             this.Tag = obj;
         }
+
+    }
+}
+
+/**
+ * GetAttackDownloadRecords返回参数结构体
+ * @class
+ */
+class GetAttackDownloadRecordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载攻击日志记录数组
+         * @type {Array.<DownloadAttackRecordInfo> || null}
+         */
+        this.Records = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new DownloadAttackRecordInfo();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4059,24 +5637,78 @@ class DeleteSessionResponse extends  AbstractModel {
 }
 
 /**
- * ModifyWafAutoDenyStatus返回参数结构体
+ * 下载攻击日志记录数据项
  * @class
  */
-class ModifyWafAutoDenyStatusResponse extends  AbstractModel {
+class DownloadAttackRecordInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * WAF 自动封禁配置项
-         * @type {AutoDenyDetail || null}
+         * 记录ID
+         * @type {number || null}
          */
-        this.WafAutoDenyDetails = null;
+        this.Id = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 下载任务名
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskName = null;
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * 当前下载任务的日志条数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 下载文件URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最后更新修改时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 过期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 下载任务需下载的日志总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
     }
 
@@ -4087,13 +5719,17 @@ class ModifyWafAutoDenyStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.WafAutoDenyDetails) {
-            let obj = new AutoDenyDetail();
-            obj.deserialize(params.WafAutoDenyDetails)
-            this.WafAutoDenyDetails = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -4128,7 +5764,7 @@ class DescribeAccessIndexResponse extends  AbstractModel {
         super();
 
         /**
-         * 是否生效
+         * 是否生效，true表示生效，false表示未生效
          * @type {boolean || null}
          */
         this.Status = null;
@@ -4311,69 +5947,54 @@ class BotStatPointItem extends  AbstractModel {
 }
 
 /**
- * 单条日志数据描述
+ * SearchAccessLog请求参数结构体
  * @class
  */
-class AccessLogInfo extends  AbstractModel {
+class SearchAccessLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日志时间，单位ms
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 客户要查询的日志主题ID，每个客户都有对应的一个主题
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 日志主题名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 要查询的日志的起始时间，Unix时间戳，单位ms
+         * @type {number || null}
          */
-        this.TopicName = null;
+        this.From = null;
 
         /**
-         * 日志来源IP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 要查询的日志的结束时间，Unix时间戳，单位ms
+         * @type {number || null}
          */
-        this.Source = null;
+        this.To = null;
 
         /**
-         * 日志文件名称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询语句，语句长度最大为4096
          * @type {string || null}
          */
-        this.FileName = null;
+        this.Query = null;
 
         /**
-         * 日志上报请求包的ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 单次查询返回的日志条数，最大值为100
+         * @type {number || null}
          */
-        this.PkgId = null;
+        this.Limit = null;
 
         /**
-         * 请求包内日志的ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
          * @type {string || null}
          */
-        this.PkgLogId = null;
+        this.Context = null;
 
         /**
-         * 日志内容的Json序列化字符串
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
          * @type {string || null}
          */
-        this.LogJson = null;
+        this.Sort = null;
 
     }
 
@@ -4384,14 +6005,13 @@ class AccessLogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
-        this.LogJson = 'LogJson' in params ? params.LogJson : null;
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -4450,13 +6070,13 @@ class DescribeDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * 偏移
+         * 数据偏移量，从1开始。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 容量
+         * 返回域名的数量
          * @type {number || null}
          */
         this.Limit = null;
@@ -4487,6 +6107,91 @@ class DescribeDomainsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Bot资源信息
+ * @class
+ */
+class BotPkg extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Region = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 申请数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InquireNum = null;
+
+        /**
+         * 使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UsedNum = null;
+
+        /**
+         * 子产品code
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InquireNum = 'InquireNum' in params ? params.InquireNum : null;
+        this.UsedNum = 'UsedNum' in params ? params.UsedNum : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -4533,77 +6238,99 @@ class ModifyWafThreatenIntelligenceResponse extends  AbstractModel {
 
 module.exports = {
     CreateAccessExportRequest: CreateAccessExportRequest,
-    DescribeWafAutoDenyRulesResponse: DescribeWafAutoDenyRulesResponse,
+    CdcCluster: CdcCluster,
     DescribeIpHitItemsResponse: DescribeIpHitItemsResponse,
-    DescribeCustomRulesRspRuleListItem: DescribeCustomRulesRspRuleListItem,
-    DescribeUserClbWafRegionsResponse: DescribeUserClbWafRegionsResponse,
+    DescribeUserCdcClbWafRegionsRequest: DescribeUserCdcClbWafRegionsRequest,
     IpHitItemsData: IpHitItemsData,
     DeleteAttackDownloadRecordResponse: DeleteAttackDownloadRecordResponse,
     DescribeFlowTrendRequest: DescribeFlowTrendRequest,
     DescribeWafAutoDenyStatusRequest: DescribeWafAutoDenyStatusRequest,
     AccessLogItems: AccessLogItems,
-    AddDomainWhiteRuleResponse: AddDomainWhiteRuleResponse,
+    DescribeWafAutoDenyRulesResponse: DescribeWafAutoDenyRulesResponse,
     DescribeIpAccessControlResponse: DescribeIpAccessControlResponse,
+    LoadBalancerPackageNew: LoadBalancerPackageNew,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     ModifyDomainWhiteRuleRequest: ModifyDomainWhiteRuleRequest,
     AccessRuleTagInfo: AccessRuleTagInfo,
     DescribeAccessIndexRequest: DescribeAccessIndexRequest,
     DomainInfo: DomainInfo,
     AccessLogItem: AccessLogItem,
-    DescribeCustomRulesResponse: DescribeCustomRulesResponse,
     DeleteSessionRequest: DeleteSessionRequest,
     DescribeWafAutoDenyRulesRequest: DescribeWafAutoDenyRulesRequest,
+    SearchAttackLogRequest: SearchAttackLogRequest,
     AddCustomRuleResponse: AddCustomRuleResponse,
     DescribeFlowTrendResponse: DescribeFlowTrendResponse,
+    GetAttackDownloadRecordsRequest: GetAttackDownloadRecordsRequest,
     UpsertIpAccessControlRequest: UpsertIpAccessControlRequest,
-    DescribeCustomRulesPagingInfo: DescribeCustomRulesPagingInfo,
     DeleteDownloadRecordRequest: DeleteDownloadRecordRequest,
-    RuleList: RuleList,
-    DescribeAccessExportsRequest: DescribeAccessExportsRequest,
-    ResponseCode: ResponseCode,
-    ModifyAccessPeriodResponse: ModifyAccessPeriodResponse,
+    DescribeUserCdcClbWafRegionsResponse: DescribeUserCdcClbWafRegionsResponse,
     DeleteAccessExportResponse: DeleteAccessExportResponse,
+    DescribeAccessExportsRequest: DescribeAccessExportsRequest,
+    DescribeUserClbWafRegionsResponse: DescribeUserClbWafRegionsResponse,
+    ModifyWafAutoDenyStatusRequest: ModifyWafAutoDenyStatusRequest,
+    ModifyAccessPeriodResponse: ModifyAccessPeriodResponse,
+    QPSPackageNew: QPSPackageNew,
     FiltersItemNew: FiltersItemNew,
     DescribeAutoDenyIPResponse: DescribeAutoDenyIPResponse,
+    SwitchDomainRulesResponse: SwitchDomainRulesResponse,
     SearchAccessLogResponse: SearchAccessLogResponse,
     IpAccessControlItem: IpAccessControlItem,
+    SwitchDomainRulesRequest: SwitchDomainRulesRequest,
+    DomainsPartInfo: DomainsPartInfo,
     DescribeAutoDenyIPRequest: DescribeAutoDenyIPRequest,
     DescribeIpAccessControlRequest: DescribeIpAccessControlRequest,
+    ModifyAreaBanStatusRequest: ModifyAreaBanStatusRequest,
     AddSpartaProtectionRequest: AddSpartaProtectionRequest,
+    PostAttackDownloadTaskRequest: PostAttackDownloadTaskRequest,
     DescribeAccessFastAnalysisRequest: DescribeAccessFastAnalysisRequest,
     DeleteIpAccessControlRequest: DeleteIpAccessControlRequest,
+    AttackLogInfo: AttackLogInfo,
     DeleteDomainWhiteRulesResponse: DeleteDomainWhiteRulesResponse,
-    CreateAttackDownloadTaskRequest: CreateAttackDownloadTaskRequest,
+    ModifyWafAutoDenyStatusResponse: ModifyWafAutoDenyStatusResponse,
     DescribeWafAutoDenyStatusResponse: DescribeWafAutoDenyStatusResponse,
     DeleteDomainWhiteRulesRequest: DeleteDomainWhiteRulesRequest,
+    DomainPackageNew: DomainPackageNew,
+    RuleList: RuleList,
+    PostAttackDownloadTaskResponse: PostAttackDownloadTaskResponse,
+    DescribeDomainDetailsSaasRequest: DescribeDomainDetailsSaasRequest,
     ModifyCustomRuleStatusResponse: ModifyCustomRuleStatusResponse,
     AddSpartaProtectionResponse: AddSpartaProtectionResponse,
     IpAccessControlData: IpAccessControlData,
     PortItem: PortItem,
-    CreateAttackDownloadTaskResponse: CreateAttackDownloadTaskResponse,
     WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails,
     DescribeDomainWhiteRulesRequest: DescribeDomainWhiteRulesRequest,
+    AddDomainWhiteRuleResponse: AddDomainWhiteRuleResponse,
     ModifyCustomRuleStatusRequest: ModifyCustomRuleStatusRequest,
     DeleteDownloadRecordResponse: DeleteDownloadRecordResponse,
     ModifyAccessPeriodRequest: ModifyAccessPeriodRequest,
+    BotQPS: BotQPS,
     ModifyWafAutoDenyRulesResponse: ModifyWafAutoDenyRulesResponse,
+    SearchAttackLogResponse: SearchAttackLogResponse,
+    DescribeInstancesRequest: DescribeInstancesRequest,
+    CdcRegion: CdcRegion,
     AccessValueInfo: AccessValueInfo,
     DeleteIpAccessControlResponse: DeleteIpAccessControlResponse,
-    SearchAccessLogRequest: SearchAccessLogRequest,
+    AccessLogInfo: AccessLogInfo,
+    InstanceInfo: InstanceInfo,
+    PortInfo: PortInfo,
+    DescribeDomainDetailsSaasResponse: DescribeDomainDetailsSaasResponse,
     AccessKeyValueInfo: AccessKeyValueInfo,
     AddCustomRuleRequest: AddCustomRuleRequest,
-    DescribeCustomRulesRequest: DescribeCustomRulesRequest,
+    FraudPkg: FraudPkg,
+    ModifyAreaBanStatusResponse: ModifyAreaBanStatusResponse,
     ModifyDomainWhiteRuleResponse: ModifyDomainWhiteRuleResponse,
     ExportAccessInfo: ExportAccessInfo,
     ModifyWafAutoDenyRulesRequest: ModifyWafAutoDenyRulesRequest,
     DescribeAccessFastAnalysisResponse: DescribeAccessFastAnalysisResponse,
     DescribeDomainsResponse: DescribeDomainsResponse,
     AutoDenyDetail: AutoDenyDetail,
-    ModifyWafAutoDenyStatusRequest: ModifyWafAutoDenyStatusRequest,
+    ResponseCode: ResponseCode,
     ModifyWafThreatenIntelligenceRequest: ModifyWafThreatenIntelligenceRequest,
     Strategy: Strategy,
     AccessFullTextInfo: AccessFullTextInfo,
     DescribeIpHitItemsRequest: DescribeIpHitItemsRequest,
     AccessRuleInfo: AccessRuleInfo,
+    GetAttackDownloadRecordsResponse: GetAttackDownloadRecordsResponse,
     DeleteAccessExportRequest: DeleteAccessExportRequest,
     DescribeUserClbWafRegionsRequest: DescribeUserClbWafRegionsRequest,
     DescribeDomainWhiteRulesResponse: DescribeDomainWhiteRulesResponse,
@@ -4613,15 +6340,16 @@ module.exports = {
     UpsertIpAccessControlResponse: UpsertIpAccessControlResponse,
     IpHitItem: IpHitItem,
     DeleteSessionResponse: DeleteSessionResponse,
-    ModifyWafAutoDenyStatusResponse: ModifyWafAutoDenyStatusResponse,
+    DownloadAttackRecordInfo: DownloadAttackRecordInfo,
     DescribeWafThreatenIntelligenceRequest: DescribeWafThreatenIntelligenceRequest,
     DescribeAccessIndexResponse: DescribeAccessIndexResponse,
     DescribeAccessExportsResponse: DescribeAccessExportsResponse,
     CreateAccessExportResponse: CreateAccessExportResponse,
     BotStatPointItem: BotStatPointItem,
-    AccessLogInfo: AccessLogInfo,
+    SearchAccessLogRequest: SearchAccessLogRequest,
     AccessRuleKeyValueInfo: AccessRuleKeyValueInfo,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    BotPkg: BotPkg,
     ModifyWafThreatenIntelligenceResponse: ModifyWafThreatenIntelligenceResponse,
 
 }

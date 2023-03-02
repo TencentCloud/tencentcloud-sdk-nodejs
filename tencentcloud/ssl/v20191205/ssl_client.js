@@ -23,9 +23,11 @@ const UploadCertificateRequest = models.UploadCertificateRequest;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
+const ModifyCertificatesExpiringNotificationSwitchResponse = models.ModifyCertificatesExpiringNotificationSwitchResponse;
 const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
 const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
+const PackageInfo = models.PackageInfo;
 const SubmitAuditManagerResponse = models.SubmitAuditManagerResponse;
 const DownloadCertificateRequest = models.DownloadCertificateRequest;
 const CancelCertificateOrderRequest = models.CancelCertificateOrderRequest;
@@ -38,6 +40,7 @@ const RootCertificates = models.RootCertificates;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const HostCertificateResponse = models.HostCertificateResponse;
 const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
+const PackageTransferOutInfo = models.PackageTransferOutInfo;
 const OperationLog = models.OperationLog;
 const VerifyManagerResponse = models.VerifyManagerResponse;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
@@ -63,6 +66,7 @@ const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const DescribeManagerDetailRequest = models.DescribeManagerDetailRequest;
 const DvAuthDetail = models.DvAuthDetail;
 const ProjectInfo = models.ProjectInfo;
+const ModifyCertificatesExpiringNotificationSwitchRequest = models.ModifyCertificatesExpiringNotificationSwitchRequest;
 const DescribeDeployedResourcesResponse = models.DescribeDeployedResourcesResponse;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
@@ -72,18 +76,21 @@ const CommitCertificateInformationResponse = models.CommitCertificateInformation
 const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
 const DeleteManagerResponse = models.DeleteManagerResponse;
 const VerifyManagerRequest = models.VerifyManagerRequest;
-const RevokeDomainValidateAuths = models.RevokeDomainValidateAuths;
 const UploadCertificateResponse = models.UploadCertificateResponse;
+const RevokeDomainValidateAuths = models.RevokeDomainValidateAuths;
+const DescribePackagesRequest = models.DescribePackagesRequest;
 const CheckCertificateChainRequest = models.CheckCertificateChainRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const DescribeManagerDetailResponse = models.DescribeManagerDetailResponse;
 const ManagerStatusInfo = models.ManagerStatusInfo;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const DescribePackagesResponse = models.DescribePackagesResponse;
 const DescribeManagersRequest = models.DescribeManagersRequest;
 const CompleteCertificateResponse = models.CompleteCertificateResponse;
 const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const RevokeCertificateRequest = models.RevokeCertificateRequest;
+const PreAuditInfo = models.PreAuditInfo;
 const SubmittedData = models.SubmittedData;
 
 
@@ -106,6 +113,17 @@ class SslClient extends AbstractClient {
     DescribeCertificates(req, cb) {
         let resp = new DescribeCertificatesResponse();
         this.request("DescribeCertificates", req, resp, cb);
+    }
+
+    /**
+     * 获得权益包列表
+     * @param {DescribePackagesRequest} req
+     * @param {function(string, DescribePackagesResponse):void} cb
+     * @public
+     */
+    DescribePackages(req, cb) {
+        let resp = new DescribePackagesResponse();
+        this.request("DescribePackages", req, resp, cb);
     }
 
     /**
@@ -260,6 +278,17 @@ class SslClient extends AbstractClient {
     DescribeCertificateDetail(req, cb) {
         let resp = new DescribeCertificateDetailResponse();
         this.request("DescribeCertificateDetail", req, resp, cb);
+    }
+
+    /**
+     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     * @param {ModifyCertificatesExpiringNotificationSwitchRequest} req
+     * @param {function(string, ModifyCertificatesExpiringNotificationSwitchResponse):void} cb
+     * @public
+     */
+    ModifyCertificatesExpiringNotificationSwitch(req, cb) {
+        let resp = new ModifyCertificatesExpiringNotificationSwitchResponse();
+        this.request("ModifyCertificatesExpiringNotificationSwitch", req, resp, cb);
     }
 
     /**

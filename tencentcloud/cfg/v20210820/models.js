@@ -162,6 +162,27 @@ class TaskGroupAction extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * 是否可重试
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsExecuteRedo = null;
+
+        /**
+         * 动作风险级别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionRisk = null;
+
+        /**
+         * 动作运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskGroupActionExecuteTime = null;
+
     }
 
     /**
@@ -196,6 +217,9 @@ class TaskGroupAction extends  AbstractModel {
         this.ActionApiType = 'ActionApiType' in params ? params.ActionApiType : null;
         this.ActionAttribute = 'ActionAttribute' in params ? params.ActionAttribute : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.IsExecuteRedo = 'IsExecuteRedo' in params ? params.IsExecuteRedo : null;
+        this.ActionRisk = 'ActionRisk' in params ? params.ActionRisk : null;
+        this.TaskGroupActionExecuteTime = 'TaskGroupActionExecuteTime' in params ? params.TaskGroupActionExecuteTime : null;
 
     }
 }
@@ -266,7 +290,7 @@ class TaskMonitor extends  AbstractModel {
 }
 
 /**
- * 从经验模版创建演练时需要配置的任务参数
+ * 从经验模板创建演练时需要配置的任务参数
  * @class
  */
 class TaskConfig extends  AbstractModel {
@@ -779,6 +803,13 @@ class DescribeTaskResponse extends  AbstractModel {
         this.Task = null;
 
         /**
+         * 任务对应的演练报告信息，null表示未导出报告
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TaskReportInfo || null}
+         */
+        this.ReportInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -798,6 +829,12 @@ class DescribeTaskResponse extends  AbstractModel {
             let obj = new Task();
             obj.deserialize(params.Task)
             this.Task = obj;
+        }
+
+        if (params.ReportInfo) {
+            let obj = new TaskReportInfo();
+            obj.deserialize(params.ReportInfo)
+            this.ReportInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1100,6 +1137,20 @@ class TaskGroupInstance extends  AbstractModel {
          */
         this.TaskGroupInstanceEndTime = null;
 
+        /**
+         * 实例是否可重试
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.TaskGroupInstanceIsRedo = null;
+
+        /**
+         * 动作实例执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskGroupInstanceExecuteTime = null;
+
     }
 
     /**
@@ -1118,6 +1169,8 @@ class TaskGroupInstance extends  AbstractModel {
         this.TaskGroupInstanceStatusType = 'TaskGroupInstanceStatusType' in params ? params.TaskGroupInstanceStatusType : null;
         this.TaskGroupInstanceStartTime = 'TaskGroupInstanceStartTime' in params ? params.TaskGroupInstanceStartTime : null;
         this.TaskGroupInstanceEndTime = 'TaskGroupInstanceEndTime' in params ? params.TaskGroupInstanceEndTime : null;
+        this.TaskGroupInstanceIsRedo = 'TaskGroupInstanceIsRedo' in params ? params.TaskGroupInstanceIsRedo : null;
+        this.TaskGroupInstanceExecuteTime = 'TaskGroupInstanceExecuteTime' in params ? params.TaskGroupInstanceExecuteTime : null;
 
     }
 }
@@ -1711,6 +1764,71 @@ class Task extends  AbstractModel {
 }
 
 /**
+ * 演练报告状态信息
+ * @class
+ */
+class TaskReportInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0--未开始，1--正在导出，2--导出成功，3--导出失败
+         * @type {number || null}
+         */
+        this.Stage = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 有效期截止时间
+         * @type {string || null}
+         */
+        this.ExpirationTime = null;
+
+        /**
+         * 是否有效
+         * @type {boolean || null}
+         */
+        this.Expired = null;
+
+        /**
+         * 演练报告cos文件地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * 演练报告导出日志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Log = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Stage = 'Stage' in params ? params.Stage : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ExpirationTime = 'ExpirationTime' in params ? params.ExpirationTime : null;
+        this.Expired = 'Expired' in params ? params.Expired : null;
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.Log = 'Log' in params ? params.Log : null;
+
+    }
+}
+
+/**
  * CreateTaskFromTemplate请求参数结构体
  * @class
  */
@@ -1719,7 +1837,7 @@ class CreateTaskFromTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 从经验库中查询到的经验模版ID
+         * 从经验库中查询到的经验模板ID
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1886,6 +2004,20 @@ class TaskListItem extends  AbstractModel {
          */
         this.TaskUpdateTime = null;
 
+        /**
+         * 0--未开始，1--进行中，2--已完成
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskPreCheckStatus = null;
+
+        /**
+         * 环境检查是否通过
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.TaskPreCheckSuccess = null;
+
     }
 
     /**
@@ -1902,6 +2034,8 @@ class TaskListItem extends  AbstractModel {
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.TaskCreateTime = 'TaskCreateTime' in params ? params.TaskCreateTime : null;
         this.TaskUpdateTime = 'TaskUpdateTime' in params ? params.TaskUpdateTime : null;
+        this.TaskPreCheckStatus = 'TaskPreCheckStatus' in params ? params.TaskPreCheckStatus : null;
+        this.TaskPreCheckSuccess = 'TaskPreCheckSuccess' in params ? params.TaskPreCheckSuccess : null;
 
     }
 }
@@ -2407,6 +2541,7 @@ module.exports = {
     DeleteTaskResponse: DeleteTaskResponse,
     DescribeTaskRequest: DescribeTaskRequest,
     Task: Task,
+    TaskReportInfo: TaskReportInfo,
     CreateTaskFromTemplateRequest: CreateTaskFromTemplateRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
     TaskListItem: TaskListItem,

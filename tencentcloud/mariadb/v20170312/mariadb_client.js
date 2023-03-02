@@ -22,19 +22,21 @@ const ZonesInfo = models.ZonesInfo;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
-const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
+const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const ProcedurePrivilege = models.ProcedurePrivilege;
 const DescribeRenewalPriceResponse = models.DescribeRenewalPriceResponse;
+const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const CreateDedicatedClusterDBInstanceResponse = models.CreateDedicatedClusterDBInstanceResponse;
+const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
 const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
+const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeUpgradePriceRequest = models.DescribeUpgradePriceRequest;
+const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const FlushBinlogResponse = models.FlushBinlogResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
-const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
 const DescribeDBInstanceSpecsResponse = models.DescribeDBInstanceSpecsResponse;
 const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
 const Account = models.Account;
@@ -42,30 +44,29 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const IsolateHourDBInstanceRequest = models.IsolateHourDBInstanceRequest;
-const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
-const PerformanceMonitorSet = models.PerformanceMonitorSet;
+const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ZoneChooseInfo = models.ZoneChooseInfo;
+const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DBBackupTimeConfig = models.DBBackupTimeConfig;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
-const DescribeRenewalPriceRequest = models.DescribeRenewalPriceRequest;
 const NodeInfo = models.NodeInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
 const DcnDetailItem = models.DcnDetailItem;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
-const ModifyRealServerAccessStrategyResponse = models.ModifyRealServerAccessStrategyResponse;
+const DCNReplicaStatus = models.DCNReplicaStatus;
 const CloneAccountRequest = models.CloneAccountRequest;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const SlowLogData = models.SlowLogData;
@@ -76,21 +77,22 @@ const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeSaleInfoRequest = models.DescribeSaleInfoRequest;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const CreateTmpInstancesRequest = models.CreateTmpInstancesRequest;
-const TablePrivilege = models.TablePrivilege;
+const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
-const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const DescribeDBInstanceSpecsRequest = models.DescribeDBInstanceSpecsRequest;
 const DescribePriceRequest = models.DescribePriceRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const ModifyRealServerAccessStrategyRequest = models.ModifyRealServerAccessStrategyRequest;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
-const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeSaleInfoResponse = models.DescribeSaleInfoResponse;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
+const DescribeDBEncryptAttributesResponse = models.DescribeDBEncryptAttributesResponse;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const DatabaseTable = models.DatabaseTable;
+const DescribeDBEncryptAttributesRequest = models.DescribeDBEncryptAttributesRequest;
 const Deal = models.Deal;
-const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
+const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const CreateDedicatedClusterDBInstanceRequest = models.CreateDedicatedClusterDBInstanceRequest;
 const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
@@ -105,6 +107,7 @@ const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const KillSessionRequest = models.KillSessionRequest;
+const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DeleteAccountRequest = models.DeleteAccountRequest;
@@ -124,6 +127,7 @@ const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
+const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
@@ -132,7 +136,6 @@ const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const FunctionPrivilege = models.FunctionPrivilege;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
-const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
 const ActivateHourDBInstanceRequest = models.ActivateHourDBInstanceRequest;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
@@ -142,45 +145,48 @@ const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const ResourceTag = models.ResourceTag;
-const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const InstanceSpec = models.InstanceSpec;
 const DescribeFlowRequest = models.DescribeFlowRequest;
+const DCNReplicaConfig = models.DCNReplicaConfig;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
-const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const ActivateHourDBInstanceResponse = models.ActivateHourDBInstanceResponse;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CreateHourDBInstanceResponse = models.CreateHourDBInstanceResponse;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const RegionInfo = models.RegionInfo;
+const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
-const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
+const DescribeRenewalPriceRequest = models.DescribeRenewalPriceRequest;
 const LogFileInfo = models.LogFileInfo;
+const ModifyRealServerAccessStrategyResponse = models.ModifyRealServerAccessStrategyResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
-const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
+const ProcedurePrivilege = models.ProcedurePrivilege;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
 const CreateHourDBInstanceRequest = models.CreateHourDBInstanceRequest;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
-const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
+const TablePrivilege = models.TablePrivilege;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const DescribeDBInstanceSpecsRequest = models.DescribeDBInstanceSpecsRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const FlushBinlogRequest = models.FlushBinlogRequest;
-const MonitorData = models.MonitorData;
+const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
+const ModifyInstanceVportRequest = models.ModifyInstanceVportRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
 
 
@@ -251,17 +257,6 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（KillSession）用于杀死指定会话。
-     * @param {KillSessionRequest} req
-     * @param {function(string, KillSessionResponse):void} cb
-     * @public
-     */
-    KillSession(req, cb) {
-        let resp = new KillSessionResponse();
-        this.request("KillSession", req, resp, cb);
-    }
-
-    /**
      * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
      * @param {ModifyBackupTimeRequest} req
      * @param {function(string, ModifyBackupTimeResponse):void} cb
@@ -296,19 +291,14 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyRealServerAccessStrategy)用于修改云数据库的VPCGW到RS的访问策略。
-
-**注意**
-- 修改策略后只对新建立的连接生效，老连接不受影响
-- 就近访问只针对实例是跨可用区部署有用，单可用区部署实例就近与否并无作用
-- DB每个Node对应一个proxy，如果开启就近访问，将会把连接集中到对应可用区的proxy上，可能造成热点问题，这种情况下如果是线上业务，请务必根据自己的业务请求量测试符合预期后再进行就近策略变更
-     * @param {ModifyRealServerAccessStrategyRequest} req
-     * @param {function(string, ModifyRealServerAccessStrategyResponse):void} cb
+     * 本接口(DestroyDBInstance)用于销毁已隔离的包年包月实例。
+     * @param {DestroyDBInstanceRequest} req
+     * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
      */
-    ModifyRealServerAccessStrategy(req, cb) {
-        let resp = new ModifyRealServerAccessStrategyResponse();
-        this.request("ModifyRealServerAccessStrategy", req, resp, cb);
+    DestroyDBInstance(req, cb) {
+        let resp = new DestroyDBInstanceResponse();
+        this.request("DestroyDBInstance", req, resp, cb);
     }
 
     /**
@@ -342,17 +332,6 @@ class MariadbClient extends AbstractClient {
     DescribeBackupTime(req, cb) {
         let resp = new DescribeBackupTimeResponse();
         this.request("DescribeBackupTime", req, resp, cb);
-    }
-
-    /**
-     * 本接口(DescribeDBResourceUsageDetails)用于查看数据库实例当前性能数据。
-     * @param {DescribeDBResourceUsageDetailsRequest} req
-     * @param {function(string, DescribeDBResourceUsageDetailsResponse):void} cb
-     * @public
-     */
-    DescribeDBResourceUsageDetails(req, cb) {
-        let resp = new DescribeDBResourceUsageDetailsResponse();
-        this.request("DescribeDBResourceUsageDetails", req, resp, cb);
     }
 
     /**
@@ -390,25 +369,25 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
-     * @param {DescribeSqlLogsRequest} req
-     * @param {function(string, DescribeSqlLogsResponse):void} cb
+     * 本接口（KillSession）用于杀死指定会话。
+     * @param {KillSessionRequest} req
+     * @param {function(string, KillSessionResponse):void} cb
      * @public
      */
-    DescribeSqlLogs(req, cb) {
-        let resp = new DescribeSqlLogsResponse();
-        this.request("DescribeSqlLogs", req, resp, cb);
+    KillSession(req, cb) {
+        let resp = new KillSessionResponse();
+        this.request("KillSession", req, resp, cb);
     }
 
     /**
-     * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
-     * @param {DescribeDBPerformanceDetailsRequest} req
-     * @param {function(string, DescribeDBPerformanceDetailsResponse):void} cb
+     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+     * @param {DescribeDBSlowLogsRequest} req
+     * @param {function(string, DescribeDBSlowLogsResponse):void} cb
      * @public
      */
-    DescribeDBPerformanceDetails(req, cb) {
-        let resp = new DescribeDBPerformanceDetailsResponse();
-        this.request("DescribeDBPerformanceDetails", req, resp, cb);
+    DescribeDBSlowLogs(req, cb) {
+        let resp = new DescribeDBSlowLogsResponse();
+        this.request("DescribeDBSlowLogs", req, resp, cb);
     }
 
     /**
@@ -445,14 +424,14 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RestartDBInstances）用于重启数据库实例
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     * @param {IsolateDedicatedDBInstanceRequest} req
+     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
      * @public
      */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
+    IsolateDedicatedDBInstance(req, cb) {
+        let resp = new IsolateDedicatedDBInstanceResponse();
+        this.request("IsolateDedicatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -464,6 +443,17 @@ class MariadbClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+     * @param {ModifySyncTaskAttributeRequest} req
+     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
+     * @public
+     */
+    ModifySyncTaskAttribute(req, cb) {
+        let resp = new ModifySyncTaskAttributeResponse();
+        this.request("ModifySyncTaskAttribute", req, resp, cb);
     }
 
     /**
@@ -500,14 +490,36 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
-     * @param {DescribeDBSlowLogsRequest} req
-     * @param {function(string, DescribeDBSlowLogsResponse):void} cb
+     * 本接口（RestartDBInstances）用于重启数据库实例
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
      * @public
      */
-    DescribeDBSlowLogs(req, cb) {
-        let resp = new DescribeDBSlowLogsResponse();
-        this.request("DescribeDBSlowLogs", req, resp, cb);
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyInstanceVip）用于修改实例VIP
+     * @param {ModifyInstanceVipRequest} req
+     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVip(req, cb) {
+        let resp = new ModifyInstanceVipResponse();
+        this.request("ModifyInstanceVip", req, resp, cb);
+    }
+
+    /**
+     * 本接口(IsolateDBInstance)用于隔离云数据库实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
+     * @param {IsolateDBInstanceRequest} req
+     * @param {function(string, IsolateDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDBInstance(req, cb) {
+        let resp = new IsolateDBInstanceResponse();
+        this.request("IsolateDBInstance", req, resp, cb);
     }
 
     /**
@@ -522,14 +534,30 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
-     * @param {ModifySyncTaskAttributeRequest} req
-     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
+     * 本接口(ModifyRealServerAccessStrategy)用于修改云数据库的VPCGW到RS的访问策略。
+
+**注意**
+- 修改策略后只对新建立的连接生效，老连接不受影响
+- 就近访问只针对实例是跨可用区部署有用，单可用区部署实例就近与否并无作用
+- DB每个Node对应一个proxy，如果开启就近访问，将会把连接集中到对应可用区的proxy上，可能造成热点问题，这种情况下如果是线上业务，请务必根据自己的业务请求量测试符合预期后再进行就近策略变更
+     * @param {ModifyRealServerAccessStrategyRequest} req
+     * @param {function(string, ModifyRealServerAccessStrategyResponse):void} cb
      * @public
      */
-    ModifySyncTaskAttribute(req, cb) {
-        let resp = new ModifySyncTaskAttributeResponse();
-        this.request("ModifySyncTaskAttribute", req, resp, cb);
+    ModifyRealServerAccessStrategy(req, cb) {
+        let resp = new ModifyRealServerAccessStrategyResponse();
+        this.request("ModifyRealServerAccessStrategy", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyInstanceNetwork）用于修改实例所属网络
+     * @param {ModifyInstanceNetworkRequest} req
+     * @param {function(string, ModifyInstanceNetworkResponse):void} cb
+     * @public
+     */
+    ModifyInstanceNetwork(req, cb) {
+        let resp = new ModifyInstanceNetworkResponse();
+        this.request("ModifyInstanceNetwork", req, resp, cb);
     }
 
     /**
@@ -715,6 +743,17 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
+     * @param {ModifyDBEncryptAttributesRequest} req
+     * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDBEncryptAttributes(req, cb) {
+        let resp = new ModifyDBEncryptAttributesResponse();
+        this.request("ModifyDBEncryptAttributes", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
@@ -805,6 +844,17 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     * @param {ModifyInstanceVportRequest} req
+     * @param {function(string, ModifyInstanceVportResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVport(req, cb) {
+        let resp = new ModifyInstanceVportResponse();
+        this.request("ModifyInstanceVport", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -838,6 +888,17 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（TerminateDedicatedDBInstance）用于销毁已隔离的独享云数据库实例。
+     * @param {TerminateDedicatedDBInstanceRequest} req
+     * @param {function(string, TerminateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDedicatedDBInstance(req, cb) {
+        let resp = new TerminateDedicatedDBInstanceResponse();
+        this.request("TerminateDedicatedDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口（CloneAccount）用于克隆实例账户。
      * @param {CloneAccountRequest} req
      * @param {function(string, CloneAccountResponse):void} cb
@@ -860,17 +921,6 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeDBPerformance)用于查看数据库实例当前性能数据。
-     * @param {DescribeDBPerformanceRequest} req
-     * @param {function(string, DescribeDBPerformanceResponse):void} cb
-     * @public
-     */
-    DescribeDBPerformance(req, cb) {
-        let resp = new DescribeDBPerformanceResponse();
-        this.request("DescribeDBPerformance", req, resp, cb);
-    }
-
-    /**
      * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
      * @param {DescribeLogFileRetentionPeriodRequest} req
      * @param {function(string, DescribeLogFileRetentionPeriodResponse):void} cb
@@ -882,17 +932,6 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeDBResourceUsage)用于查看数据库实例资源的使用情况。
-     * @param {DescribeDBResourceUsageRequest} req
-     * @param {function(string, DescribeDBResourceUsageResponse):void} cb
-     * @public
-     */
-    DescribeDBResourceUsage(req, cb) {
-        let resp = new DescribeDBResourceUsageResponse();
-        this.request("DescribeDBResourceUsage", req, resp, cb);
-    }
-
-    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -901,6 +940,17 @@ class MariadbClient extends AbstractClient {
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBEncryptAttributes)用于查询实例数据加密状态。
+     * @param {DescribeDBEncryptAttributesRequest} req
+     * @param {function(string, DescribeDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    DescribeDBEncryptAttributes(req, cb) {
+        let resp = new DescribeDBEncryptAttributesResponse();
+        this.request("DescribeDBEncryptAttributes", req, resp, cb);
     }
 
     /**

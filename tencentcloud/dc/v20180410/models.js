@@ -1281,6 +1281,13 @@ REJECTED:拒绝
          */
         this.JumboEnable = null;
 
+        /**
+         * 专用通道是否支持高精度BFD。1支持，0不支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HighPrecisionBFDEnable = null;
+
     }
 
     /**
@@ -1370,6 +1377,7 @@ REJECTED:拒绝
         }
         this.CustomerIPv6Address = 'CustomerIPv6Address' in params ? params.CustomerIPv6Address : null;
         this.JumboEnable = 'JumboEnable' in params ? params.JumboEnable : null;
+        this.HighPrecisionBFDEnable = 'HighPrecisionBFDEnable' in params ? params.HighPrecisionBFDEnable : null;
 
     }
 }

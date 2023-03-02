@@ -43,7 +43,7 @@ class ImageModerationRequest extends  AbstractModel {
         this.FileContent = null;
 
         /**
-         * 该字段表示待检测图片文件的访问链接，图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，**大小不超过5MB**，建议**分辨率不低于256x256**；图片下载时间限制为3秒，超过则会返回下载超时。<br>备注：**该字段与FileContent必须选择输入其中一个**。
+         * 该字段表示待检测图片文件的访问链接，图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，**大小不超过5MB**，建议**分辨率不低于256x256**；图片下载时间限制为3秒，超过则会返回下载超时；由于网络安全策略，**送审带重定向的链接，可能引起下载失败**，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError。<br>备注：**该字段与FileContent必须选择输入其中一个**。
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -98,6 +98,51 @@ class ImageModerationRequest extends  AbstractModel {
             let obj = new Device();
             obj.deserialize(params.Device)
             this.Device = obj;
+        }
+
+    }
+}
+
+/**
+ * 识别类型标签结果信息
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前可能的取值：Scene（图片场景模型）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * Label对应模型下的识别标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RecognitionTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RecognitionTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -274,6 +319,91 @@ class OcrTextDetail extends  AbstractModel {
 }
 
 /**
+ * CreateImageModerationAsyncTask返回参数结构体
+ * @class
+ */
+class CreateImageModerationAsyncTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该字段用于返回检测对象对应请求参数中的DataId。
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 识别类型标签信息
+ * @class
+ */
+class RecognitionTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 标签位置信息，若模型无位置信息，则可能为零值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+
+    }
+}
+
+/**
  * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
  * @class
  */
@@ -337,6 +467,84 @@ class ObjectDetail extends  AbstractModel {
             this.Location = obj;
         }
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+    }
+}
+
+/**
+ * 用于表示业务用户对应的设备信息
+ * @class
+ */
+class Device extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该字段表示业务用户对应设备的IP地址，同时**支持IPv4和IPv6**地址的记录；需要与IpType参数配合使用。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 该字段表示业务用户对应的MAC地址，以方便设备识别与管理；其格式与取值与标准MAC地址一致。
+         * @type {string || null}
+         */
+        this.Mac = null;
+
+        /**
+         * *内测中，敬请期待。*
+         * @type {string || null}
+         */
+        this.TokenId = null;
+
+        /**
+         * *内测中，敬请期待。*
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * 该字段表示业务用户对应设备的**IMEI码**（国际移动设备识别码），该识别码可用于识别每一部独立的手机等移动通信设备，方便设备识别与管理。<br>备注：格式为**15-17位纯数字**。
+         * @type {string || null}
+         */
+        this.IMEI = null;
+
+        /**
+         * **iOS设备专用**，该字段表示业务用户对应的**IDFA**(广告标识符),这是由苹果公司提供的用于标识用户的广告标识符，由一串16进制的32位数字和字母组成。<br>
+备注：苹果公司自2021年iOS14更新后允许用户手动关闭或者开启IDFA，故此字符串标记有效性可能有所降低。
+         * @type {string || null}
+         */
+        this.IDFA = null;
+
+        /**
+         * **iOS设备专用**，该字段表示业务用户对应的**IDFV**(应用开发商标识符),这是由苹果公司提供的用于标注应用开发商的标识符，由一串16进制的32位数字和字母组成，可被用于唯一标识设备。
+         * @type {string || null}
+         */
+        this.IDFV = null;
+
+        /**
+         * 该字段表示记录的IP地址的类型，取值：**0**（代表IPv4地址）、**1**（代表IPv6地址）；需要与IpType参数配合使用。
+         * @type {number || null}
+         */
+        this.IpType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Mac = 'Mac' in params ? params.Mac : null;
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.IMEI = 'IMEI' in params ? params.IMEI : null;
+        this.IDFA = 'IDFA' in params ? params.IDFA : null;
+        this.IDFV = 'IDFV' in params ? params.IDFV : null;
+        this.IpType = 'IpType' in params ? params.IpType : null;
 
     }
 }
@@ -666,61 +874,66 @@ class LabelDetailItem extends  AbstractModel {
 }
 
 /**
- * 用于表示业务用户对应的设备信息
+ * CreateImageModerationAsyncTask请求参数结构体
  * @class
  */
-class Device extends  AbstractModel {
+class CreateImageModerationAsyncTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 该字段表示业务用户对应设备的IP地址，同时**支持IPv4和IPv6**地址的记录；需要与IpType参数配合使用。
+         * 接收审核信息回调地址，审核过程中产生的所有结果发送至此地址。
          * @type {string || null}
          */
-        this.Ip = null;
+        this.CallbackUrl = null;
 
         /**
-         * 该字段表示业务用户对应的MAC地址，以方便设备识别与管理；其格式与取值与标准MAC地址一致。
+         * 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。<br>备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
          * @type {string || null}
          */
-        this.Mac = null;
+        this.BizType = null;
 
         /**
-         * *内测中，敬请期待。*
+         * 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。<br>取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**。
          * @type {string || null}
          */
-        this.TokenId = null;
+        this.DataId = null;
 
         /**
-         * *内测中，敬请期待。*
+         * 该字段表示待检测图片文件内容的Base64编码，图片**大小不超过5MB**，建议**分辨率不低于256x256**，否则可能会影响识别效果。<br>备注： **该字段与FileUrl必须选择输入其中一个**。
          * @type {string || null}
          */
-        this.DeviceId = null;
+        this.FileContent = null;
 
         /**
-         * 该字段表示业务用户对应设备的**IMEI码**（国际移动设备识别码），该识别码可用于识别每一部独立的手机等移动通信设备，方便设备识别与管理。<br>备注：格式为**15-17位纯数字**。
+         * 该字段表示待检测图片文件的访问链接，图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，**大小不超过5MB**，建议**分辨率不低于256x256**；图片下载时间限制为3秒，超过则会返回下载超时；由于网络安全策略，**送审带重定向的链接，可能引起下载失败**，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError。<br>备注：**该字段与FileContent必须选择输入其中一个**。
          * @type {string || null}
          */
-        this.IMEI = null;
+        this.FileUrl = null;
 
         /**
-         * **iOS设备专用**，该字段表示业务用户对应的**IDFA**(广告标识符),这是由苹果公司提供的用于标识用户的广告标识符，由一串16进制的32位数字和字母组成。<br>
-备注：苹果公司自2021年iOS14更新后允许用户手动关闭或者开启IDFA，故此字符串标记有效性可能有所降低。
-         * @type {string || null}
-         */
-        this.IDFA = null;
-
-        /**
-         * **iOS设备专用**，该字段表示业务用户对应的**IDFV**(应用开发商标识符),这是由苹果公司提供的用于标注应用开发商的标识符，由一串16进制的32位数字和字母组成，可被用于唯一标识设备。
-         * @type {string || null}
-         */
-        this.IDFV = null;
-
-        /**
-         * 该字段表示记录的IP地址的类型，取值：**0**（代表IPv4地址）、**1**（代表IPv6地址）；需要与IpType参数配合使用。
+         * **GIF/长图检测专用**，用于表示GIF截帧频率（每隔多少张图片抽取一帧进行检测），长图则按照长边：短边取整计算要切割的总图数；默认值为0，此时只会检测GIF的第一帧或对长图不进行切分处理。<br>备注：Interval与MaxFrames参数需要组合使用。例如，Interval=3, MaxFrames=400，则代表在检测GIF/长图时，将每间隔2帧检测一次且最多检测400帧。
          * @type {number || null}
          */
-        this.IpType = null;
+        this.Interval = null;
+
+        /**
+         * **GIF/长图检测专用**，用于标识最大截帧数量；默认值为1，此时只会检测输入GIF的第一帧或对长图不进行切分处理（可能会造成处理超时）。<br>备注：Interval与MaxFrames参数需要组合使用。例如，Interval=3, MaxFrames=400，则代表在检测GIF/长图时，将每间隔2帧检测一次且最多检测400帧。
+         * @type {number || null}
+         */
+        this.MaxFrames = null;
+
+        /**
+         * 该字段表示待检测对象对应的用户相关信息，若填入则可甄别相应违规风险用户。
+         * @type {User || null}
+         */
+        this.User = null;
+
+        /**
+         * 该字段表示待检测对象对应的设备相关信息，若填入则可甄别相应违规风险设备。
+         * @type {Device || null}
+         */
+        this.Device = null;
 
     }
 
@@ -731,14 +944,25 @@ class Device extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Mac = 'Mac' in params ? params.Mac : null;
-        this.TokenId = 'TokenId' in params ? params.TokenId : null;
-        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
-        this.IMEI = 'IMEI' in params ? params.IMEI : null;
-        this.IDFA = 'IDFA' in params ? params.IDFA : null;
-        this.IDFV = 'IDFV' in params ? params.IDFV : null;
-        this.IpType = 'IpType' in params ? params.IpType : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.MaxFrames = 'MaxFrames' in params ? params.MaxFrames : null;
+
+        if (params.User) {
+            let obj = new User();
+            obj.deserialize(params.User)
+            this.User = obj;
+        }
+
+        if (params.Device) {
+            let obj = new Device();
+            obj.deserialize(params.Device)
+            this.Device = obj;
+        }
 
     }
 }
@@ -902,6 +1126,13 @@ class ImageModerationResponse extends  AbstractModel {
         this.FileMD5 = null;
 
         /**
+         * 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -960,6 +1191,15 @@ class ImageModerationResponse extends  AbstractModel {
         this.BizType = 'BizType' in params ? params.BizType : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1057,15 +1297,19 @@ class User extends  AbstractModel {
 
 module.exports = {
     ImageModerationRequest: ImageModerationRequest,
+    RecognitionResult: RecognitionResult,
     ObjectResult: ObjectResult,
     OcrTextDetail: OcrTextDetail,
+    CreateImageModerationAsyncTaskResponse: CreateImageModerationAsyncTaskResponse,
+    RecognitionTag: RecognitionTag,
     ObjectDetail: ObjectDetail,
+    Device: Device,
     OcrResult: OcrResult,
     LibDetail: LibDetail,
     Location: Location,
     LabelResult: LabelResult,
     LabelDetailItem: LabelDetailItem,
-    Device: Device,
+    CreateImageModerationAsyncTaskRequest: CreateImageModerationAsyncTaskRequest,
     LibResult: LibResult,
     ImageModerationResponse: ImageModerationResponse,
     User: User,

@@ -38,6 +38,7 @@ const DescribeNoPrimaryKeyTablesResponse = models.DescribeNoPrimaryKeyTablesResp
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
 const DescribeProxySessionKillTasksRequest = models.DescribeProxySessionKillTasksRequest;
 const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
+const SessionItem = models.SessionItem;
 const HealthStatus = models.HealthStatus;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 const TaskInfo = models.TaskInfo;
@@ -50,6 +51,7 @@ const TimeSlice = models.TimeSlice;
 const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
 const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
 const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
+const ProcessStatistic = models.ProcessStatistic;
 const CreateMailProfileResponse = models.CreateMailProfileResponse;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
 const CancelKillTaskRequest = models.CancelKillTaskRequest;
@@ -60,6 +62,7 @@ const DeleteSqlFiltersResponse = models.DeleteSqlFiltersResponse;
 const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
 const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
 const CreateKillTaskRequest = models.CreateKillTaskRequest;
+const DescribeProxyProcessStatisticsResponse = models.DescribeProxyProcessStatisticsResponse;
 const SlowLogHost = models.SlowLogHost;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
 const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
@@ -74,6 +77,7 @@ const KillMySqlThreadsRequest = models.KillMySqlThreadsRequest;
 const DescribeSqlFiltersResponse = models.DescribeSqlFiltersResponse;
 const CreateDBDiagReportUrlRequest = models.CreateDBDiagReportUrlRequest;
 const DescribeSecurityAuditLogExportTasksResponse = models.DescribeSecurityAuditLogExportTasksResponse;
+const DescribeRedisTopKeyPrefixListRequest = models.DescribeRedisTopKeyPrefixListRequest;
 const DescribeSqlTemplateResponse = models.DescribeSqlTemplateResponse;
 const HealthScoreInfo = models.HealthScoreInfo;
 const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
@@ -113,13 +117,16 @@ const DescribeSlowLogUserHostStatsRequest = models.DescribeSlowLogUserHostStatsR
 const DescribeTopSpaceSchemasResponse = models.DescribeTopSpaceSchemasResponse;
 const CreateProxySessionKillTaskResponse = models.CreateProxySessionKillTaskResponse;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
+const DescribeProxyProcessStatisticsRequest = models.DescribeProxyProcessStatisticsRequest;
 const MonitorFloatMetric = models.MonitorFloatMetric;
+const DescribeRedisTopKeyPrefixListResponse = models.DescribeRedisTopKeyPrefixListResponse;
 const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
 const SQLFilter = models.SQLFilter;
 const GroupItem = models.GroupItem;
+const RedisPreKeySpaceData = models.RedisPreKeySpaceData;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
 const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
@@ -378,6 +385,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 更改实例限流任务状态，目前仅用于终止限流。
+     * @param {ModifySqlFiltersRequest} req
+     * @param {function(string, ModifySqlFiltersResponse):void} cb
+     * @public
+     */
+    ModifySqlFilters(req, cb) {
+        let resp = new ModifySqlFiltersResponse();
+        this.request("ModifySqlFilters", req, resp, cb);
+    }
+
+    /**
      * 查询redis实例大key列表。
      * @param {DescribeRedisTopBigKeysRequest} req
      * @param {function(string, DescribeRedisTopBigKeysResponse):void} cb
@@ -411,6 +429,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * 查询redis实例top key前缀列表。
+     * @param {DescribeRedisTopKeyPrefixListRequest} req
+     * @param {function(string, DescribeRedisTopKeyPrefixListResponse):void} cb
+     * @public
+     */
+    DescribeRedisTopKeyPrefixList(req, cb) {
+        let resp = new DescribeRedisTopKeyPrefixListResponse();
+        this.request("DescribeRedisTopKeyPrefixList", req, resp, cb);
+    }
+
+    /**
      * 获取实例异常诊断事件的详情信息。
      * @param {DescribeDBDiagEventRequest} req
      * @param {function(string, DescribeDBDiagEventResponse):void} cb
@@ -433,14 +462,14 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 更改实例限流任务状态，目前仅用于终止限流。
-     * @param {ModifySqlFiltersRequest} req
-     * @param {function(string, ModifySqlFiltersResponse):void} cb
+     * 获取当前实例下的单个proxy的会话统计详情信息， 返回数据为单个 proxy 的会话统计信息。【注意】该接口仅限部分环境调用。
+     * @param {DescribeProxyProcessStatisticsRequest} req
+     * @param {function(string, DescribeProxyProcessStatisticsResponse):void} cb
      * @public
      */
-    ModifySqlFilters(req, cb) {
-        let resp = new ModifySqlFiltersResponse();
-        this.request("ModifySqlFilters", req, resp, cb);
+    DescribeProxyProcessStatistics(req, cb) {
+        let resp = new DescribeProxyProcessStatisticsResponse();
+        this.request("DescribeProxyProcessStatistics", req, resp, cb);
     }
 
     /**

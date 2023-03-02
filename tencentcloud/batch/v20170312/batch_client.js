@@ -127,6 +127,7 @@ const DescribeTaskRequest = models.DescribeTaskRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeComputeEnvsRequest = models.DescribeComputeEnvsRequest;
 const DescribeCvmZoneInstanceConfigInfosResponse = models.DescribeCvmZoneInstanceConfigInfosResponse;
+const OutputMappingOption = models.OutputMappingOption;
 const DescribeJobsResponse = models.DescribeJobsResponse;
 const Activity = models.Activity;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;

@@ -52,6 +52,93 @@ class OtherModelScores extends  AbstractModel {
 }
 
 /**
+ * 天御信鸽取数平台接口入参
+ * @class
+ */
+class TransportGeneralInterfaceInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公证处请求接口名
+         * @type {string || null}
+         */
+        this.InterfaceName = null;
+
+        /**
+         * 公证处业务详情二层入参
+         * @type {string || null}
+         */
+        this.NotarizationInput = null;
+
+        /**
+         * 业务二层详情入参的哈希签名
+         * @type {string || null}
+         */
+        this.NotarizationSign = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InterfaceName = 'InterfaceName' in params ? params.InterfaceName : null;
+        this.NotarizationInput = 'NotarizationInput' in params ? params.NotarizationInput : null;
+        this.NotarizationSign = 'NotarizationSign' in params ? params.NotarizationSign : null;
+
+    }
+}
+
+/**
+ * 天御信鸽取数平台接口出参
+ * @class
+ */
+class TransportGeneralInterfaceOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 回包信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 公证处业务回包
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NotarizationData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.NotarizationData = 'NotarizationData' in params ? params.NotarizationData : null;
+
+    }
+}
+
+/**
  * QueryAntiFraudVip返回参数结构体
  * @class
  */
@@ -153,6 +240,39 @@ class RiskDetail extends  AbstractModel {
 }
 
 /**
+ * TransportGeneralInterface请求参数结构体
+ * @class
+ */
+class TransportGeneralInterfaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务入参
+         * @type {TransportGeneralInterfaceInput || null}
+         */
+        this.BusinessSecurityData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BusinessSecurityData) {
+            let obj = new TransportGeneralInterfaceInput();
+            obj.deserialize(params.BusinessSecurityData)
+            this.BusinessSecurityData = obj;
+        }
+
+    }
+}
+
+/**
  * 扩展字段，对风险类型的说明
  * @class
  */
@@ -221,6 +341,47 @@ class GetAntiFraudVipResponse extends  AbstractModel {
 
         if (params.Data) {
             let obj = new AntiFraudVipRecord();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TransportGeneralInterface返回参数结构体
+ * @class
+ */
+class TransportGeneralInterfaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TransportGeneralInterfaceOutput || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TransportGeneralInterfaceOutput();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -883,10 +1044,14 @@ class AntiFraudVipRecord extends  AbstractModel {
 
 module.exports = {
     OtherModelScores: OtherModelScores,
+    TransportGeneralInterfaceInput: TransportGeneralInterfaceInput,
+    TransportGeneralInterfaceOutput: TransportGeneralInterfaceOutput,
     QueryAntiFraudVipResponse: QueryAntiFraudVipResponse,
     RiskDetail: RiskDetail,
+    TransportGeneralInterfaceRequest: TransportGeneralInterfaceRequest,
     SimpleKindRiskDetail: SimpleKindRiskDetail,
     GetAntiFraudVipResponse: GetAntiFraudVipResponse,
+    TransportGeneralInterfaceResponse: TransportGeneralInterfaceResponse,
     AntiFraudVipCryptoFilter: AntiFraudVipCryptoFilter,
     AntiFraudVipFilter: AntiFraudVipFilter,
     QueryAntiFraudVipRequest: QueryAntiFraudVipRequest,

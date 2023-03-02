@@ -296,6 +296,76 @@ class DeleteAPIDocRequest extends  AbstractModel {
 }
 
 /**
+ * 已绑定的插件信息。
+ * @class
+ */
+class AttachedPluginInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 插件ID。
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * 环境信息。
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * 绑定时间。
+         * @type {string || null}
+         */
+        this.AttachedTime = null;
+
+        /**
+         * 插件名称。
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 插件类型。
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * 插件描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 插件定义语句。
+         * @type {string || null}
+         */
+        this.PluginData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PluginData = 'PluginData' in params ? params.PluginData : null;
+
+    }
+}
+
+/**
  * api绑定使用计划列表
  * @class
  */
@@ -516,6 +586,46 @@ class DeleteUsagePlanResponse extends  AbstractModel {
 }
 
 /**
+ * ImportOpenApi返回参数结构体
+ * @class
+ */
+class ImportOpenApiResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导入OpenApi返回参数。
+         * @type {CreateApiRspSet || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CreateApiRspSet();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableApiKey返回参数结构体
  * @class
  */
@@ -634,36 +744,24 @@ class UnReleaseServiceRequest extends  AbstractModel {
 }
 
 /**
- * DetachPlugin请求参数结构体
+ * DescribeExclusiveInstancesStatus返回参数结构体
  * @class
  */
-class DetachPluginRequest extends  AbstractModel {
+class DescribeExclusiveInstancesStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要解绑的API网关插件ID。
-         * @type {string || null}
+         * 独享实例列表查询结果
+         * @type {InstanceSummary || null}
          */
-        this.PluginId = null;
+        this.Result = null;
 
         /**
-         * 要操作的服务ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ServiceId = null;
-
-        /**
-         * 要操作API的环境。
-         * @type {string || null}
-         */
-        this.EnvironmentName = null;
-
-        /**
-         * 要解绑的API ID。
-         * @type {string || null}
-         */
-        this.ApiId = null;
+        this.RequestId = null;
 
     }
 
@@ -674,10 +772,13 @@ class DetachPluginRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PluginId = 'PluginId' in params ? params.PluginId : null;
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
-        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+
+        if (params.Result) {
+            let obj = new InstanceSummary();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1046,6 +1147,49 @@ class ServiceEnvironmentStrategy extends  AbstractModel {
         this.VersionName = 'VersionName' in params ? params.VersionName : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.MaxStrategy = 'MaxStrategy' in params ? params.MaxStrategy : null;
+
+    }
+}
+
+/**
+ * CreateApiRsp  返回加TotalCount
+ * @class
+ */
+class CreateApiRspSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的数组
+         * @type {Array.<CreateApiRsp> || null}
+         */
+        this.ApiSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ApiSet) {
+            this.ApiSet = new Array();
+            for (let z in params.ApiSet) {
+                let obj = new CreateApiRsp();
+                obj.deserialize(params.ApiSet[z]);
+                this.ApiSet.push(obj);
+            }
+        }
 
     }
 }
@@ -2441,6 +2585,46 @@ class DescribeUpstreamBindApisRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribePluginsByApi返回参数结构体
+ * @class
+ */
+class DescribePluginsByApiResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 插件可绑定的API列表信息。
+         * @type {AttachedPluginSummary || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AttachedPluginSummary();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4150,7 +4334,7 @@ class DescribeApisStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * API过滤条件。支持ApiId、ApiName、ApiPath、ApiType、AuthRelationApiId、AuthType、ApiBuniessType、NotUsagePlanId、Environment、Tags (values为 $tag_key:tag_value的列表)、TagKeys （values 为 tag key的列表）。
+         * API过滤条件。支持ApiId、ApiName、ApiPath、ApiType、AuthRelationApiId、AuthType、ApiBuniessType、NotUsagePlanId、 Environment、Tags (values为 $tag_key:tag_value的列表)、TagKeys （values 为 tag key的列表），其中NotUsagePlanId和Environment必须同时使用，不能单独使用一个。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4425,24 +4609,36 @@ class DescribePluginRequest extends  AbstractModel {
 }
 
 /**
- * api文档下载
+ * DetachPlugin请求参数结构体
  * @class
  */
-class DocumentSDK extends  AbstractModel {
+class DetachPluginRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+         * 要解绑的API网关插件ID。
          * @type {string || null}
          */
-        this.DocumentURL = null;
+        this.PluginId = null;
 
         /**
-         * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+         * 要操作的服务ID。
          * @type {string || null}
          */
-        this.SdkURL = null;
+        this.ServiceId = null;
+
+        /**
+         * 要操作API的环境。
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * 要解绑的API ID。
+         * @type {string || null}
+         */
+        this.ApiId = null;
 
     }
 
@@ -4453,8 +4649,10 @@ class DocumentSDK extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DocumentURL = 'DocumentURL' in params ? params.DocumentURL : null;
-        this.SdkURL = 'SdkURL' in params ? params.SdkURL : null;
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
 
     }
 }
@@ -5823,6 +6021,51 @@ class ResponseErrorCodeReq extends  AbstractModel {
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.ConvertedCode = 'ConvertedCode' in params ? params.ConvertedCode : null;
         this.NeedConvert = 'NeedConvert' in params ? params.NeedConvert : null;
+
+    }
+}
+
+/**
+ * 专享查询列表
+ * @class
+ */
+class InstanceSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专享实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 专享实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstanceInfo> || null}
+         */
+        this.InstanceSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new InstanceInfo();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
 
     }
 }
@@ -8737,6 +8980,62 @@ class DescribeAPIDocsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePluginsByApi请求参数结构体
+ * @class
+ */
+class DescribePluginsByApiRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询的API ID。
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * 要查询的服务ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 环境信息。
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * 用于使用计划列表展示
  * @class
  */
@@ -10840,24 +11139,42 @@ class UnBindSecretIdsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeApi请求参数结构体
+ * api环境绑定策略
  * @class
  */
-class DescribeApiRequest extends  AbstractModel {
+class ApiEnvironmentStrategy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API 所在的服务唯一 ID。
-         * @type {string || null}
-         */
-        this.ServiceId = null;
-
-        /**
-         * API 接口唯一 ID。
+         * API唯一ID。
          * @type {string || null}
          */
         this.ApiId = null;
+
+        /**
+         * 用户自定义API名称。
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API的路径。如/path。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * API的方法。如GET。
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 环境的限流信息。
+         * @type {Array.<EnvironmentStrategy> || null}
+         */
+        this.EnvironmentStrategySet = null;
 
     }
 
@@ -10868,8 +11185,19 @@ class DescribeApiRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Method = 'Method' in params ? params.Method : null;
+
+        if (params.EnvironmentStrategySet) {
+            this.EnvironmentStrategySet = new Array();
+            for (let z in params.EnvironmentStrategySet) {
+                let obj = new EnvironmentStrategy();
+                obj.deserialize(params.EnvironmentStrategySet[z]);
+                this.EnvironmentStrategySet.push(obj);
+            }
+        }
 
     }
 }
@@ -11333,6 +11661,41 @@ class ModifyServiceEnvironmentStrategyRequest extends  AbstractModel {
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.EnvironmentNames = 'EnvironmentNames' in params ? params.EnvironmentNames : null;
+
+    }
+}
+
+/**
+ * api文档下载
+ * @class
+ */
+class DocumentSDK extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+         * @type {string || null}
+         */
+        this.DocumentURL = null;
+
+        /**
+         * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+         * @type {string || null}
+         */
+        this.SdkURL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocumentURL = 'DocumentURL' in params ? params.DocumentURL : null;
+        this.SdkURL = 'SdkURL' in params ? params.SdkURL : null;
 
     }
 }
@@ -12328,48 +12691,30 @@ class ServiceEnvironmentStrategyStatus extends  AbstractModel {
 }
 
 /**
- * 请求参数
+ * API绑定的微服务信息。
  * @class
  */
-class ReqParameter extends  AbstractModel {
+class MicroService extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API 的前端参数名称。
+         * 微服务集群ID。
          * @type {string || null}
          */
-        this.Name = null;
+        this.ClusterId = null;
 
         /**
-         * API 的前端参数位置，如 header。目前支持 header、query、path。
+         * 微服务命名空间ID。
          * @type {string || null}
          */
-        this.Position = null;
+        this.NamespaceId = null;
 
         /**
-         * API 的前端参数类型，如 String、int。
+         * 微服务名称。
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * API 的前端参数默认值。
-         * @type {string || null}
-         */
-        this.DefaultValue = null;
-
-        /**
-         * API 的前端参数是否必填，True：表示必填，False：表示可选。
-         * @type {boolean || null}
-         */
-        this.Required = null;
-
-        /**
-         * API 的前端参数备注。
-         * @type {string || null}
-         */
-        this.Desc = null;
+        this.MicroServiceName = null;
 
     }
 
@@ -12380,12 +12725,9 @@ class ReqParameter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Position = 'Position' in params ? params.Position : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
-        this.Required = 'Required' in params ? params.Required : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
 
     }
 }
@@ -12432,30 +12774,24 @@ class DescribeApiEnvironmentStrategyResponse extends  AbstractModel {
 }
 
 /**
- * API绑定的微服务信息。
+ * DescribeApi请求参数结构体
  * @class
  */
-class MicroService extends  AbstractModel {
+class DescribeApiRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 微服务集群ID。
+         * API 所在的服务唯一 ID。
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.ServiceId = null;
 
         /**
-         * 微服务命名空间ID。
+         * API 接口唯一 ID。
          * @type {string || null}
          */
-        this.NamespaceId = null;
-
-        /**
-         * 微服务名称。
-         * @type {string || null}
-         */
-        this.MicroServiceName = null;
+        this.ApiId = null;
 
     }
 
@@ -12466,9 +12802,8 @@ class MicroService extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
 
     }
 }
@@ -12970,6 +13305,69 @@ class DescribeUsagePlanResponse extends  AbstractModel {
 }
 
 /**
+ * 请求参数
+ * @class
+ */
+class ReqParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API 的前端参数名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * API 的前端参数位置，如 header。目前支持 header、query、path。
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * API 的前端参数类型，如 String、int。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * API 的前端参数默认值。
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * API 的前端参数是否必填，True：表示必填，False：表示可选。
+         * @type {boolean || null}
+         */
+        this.Required = null;
+
+        /**
+         * API 的前端参数备注。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.Required = 'Required' in params ? params.Required : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
  * UnBindEnvironment请求参数结构体
  * @class
  */
@@ -13391,6 +13789,55 @@ class DescribeUsagePlanEnvironmentsRequest extends  AbstractModel {
         this.BindType = 'BindType' in params ? params.BindType : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ImportOpenApi请求参数结构体
+ * @class
+ */
+class ImportOpenApiRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API所在的服务唯一ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * openAPI正文内容。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Content格式，只能是YAML或者JSON，默认是YAML。
+         * @type {string || null}
+         */
+        this.EncodeType = null;
+
+        /**
+         * Content版本，默认是openAPI，目前只支持openAPI。
+         * @type {string || null}
+         */
+        this.ContentVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.EncodeType = 'EncodeType' in params ? params.EncodeType : null;
+        this.ContentVersion = 'ContentVersion' in params ? params.ContentVersion : null;
 
     }
 }
@@ -14794,42 +15241,24 @@ class UnBindSubDomainRequest extends  AbstractModel {
 }
 
 /**
- * api环境绑定策略
+ * 已绑定的插件信息。
  * @class
  */
-class ApiEnvironmentStrategy extends  AbstractModel {
+class AttachedPluginSummary extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API唯一ID。
-         * @type {string || null}
+         * 已绑定的插件总数。
+         * @type {number || null}
          */
-        this.ApiId = null;
+        this.TotalCount = null;
 
         /**
-         * 用户自定义API名称。
-         * @type {string || null}
+         * 已绑定的插件信息。
+         * @type {Array.<AttachedPluginInfo> || null}
          */
-        this.ApiName = null;
-
-        /**
-         * API的路径。如/path。
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * API的方法。如GET。
-         * @type {string || null}
-         */
-        this.Method = null;
-
-        /**
-         * 环境的限流信息。
-         * @type {Array.<EnvironmentStrategy> || null}
-         */
-        this.EnvironmentStrategySet = null;
+        this.PluginSummary = null;
 
     }
 
@@ -14840,17 +15269,14 @@ class ApiEnvironmentStrategy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApiId = 'ApiId' in params ? params.ApiId : null;
-        this.ApiName = 'ApiName' in params ? params.ApiName : null;
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Method = 'Method' in params ? params.Method : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.EnvironmentStrategySet) {
-            this.EnvironmentStrategySet = new Array();
-            for (let z in params.EnvironmentStrategySet) {
-                let obj = new EnvironmentStrategy();
-                obj.deserialize(params.EnvironmentStrategySet[z]);
-                this.EnvironmentStrategySet.push(obj);
+        if (params.PluginSummary) {
+            this.PluginSummary = new Array();
+            for (let z in params.PluginSummary) {
+                let obj = new AttachedPluginInfo();
+                obj.deserialize(params.PluginSummary[z]);
+                this.PluginSummary.push(obj);
             }
         }
 
@@ -14930,6 +15356,56 @@ class UpdateApiAppKeyResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExclusiveInstancesStatus请求参数结构体
+ * @class
+ */
+class DescribeExclusiveInstancesStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页查询，limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页查询，offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -15620,16 +16096,18 @@ module.exports = {
     UpdateApiKeyRequest: UpdateApiKeyRequest,
     Service: Service,
     DeleteAPIDocRequest: DeleteAPIDocRequest,
+    AttachedPluginInfo: AttachedPluginInfo,
     ApiUsagePlanSet: ApiUsagePlanSet,
     DescribeAPIDocDetailRequest: DescribeAPIDocDetailRequest,
     ModifyAPIDocResponse: ModifyAPIDocResponse,
     AttachedApiSummary: AttachedApiSummary,
     DescribeUsagePlanRequest: DescribeUsagePlanRequest,
     DeleteUsagePlanResponse: DeleteUsagePlanResponse,
+    ImportOpenApiResponse: ImportOpenApiResponse,
     DisableApiKeyResponse: DisableApiKeyResponse,
     DescribeApiResponse: DescribeApiResponse,
     UnReleaseServiceRequest: UnReleaseServiceRequest,
-    DetachPluginRequest: DetachPluginRequest,
+    DescribeExclusiveInstancesStatusResponse: DescribeExclusiveInstancesStatusResponse,
     ModifySubDomainRequest: ModifySubDomainRequest,
     DescribeApiAppsStatusRequest: DescribeApiAppsStatusRequest,
     DescribeServiceUsagePlanRequest: DescribeServiceUsagePlanRequest,
@@ -15637,6 +16115,7 @@ module.exports = {
     DescribeApiAppBindApisStatusRequest: DescribeApiAppBindApisStatusRequest,
     ModifyApiResponse: ModifyApiResponse,
     ServiceEnvironmentStrategy: ServiceEnvironmentStrategy,
+    CreateApiRspSet: CreateApiRspSet,
     ApiInfo: ApiInfo,
     TargetServicesReq: TargetServicesReq,
     DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
@@ -15654,6 +16133,7 @@ module.exports = {
     DescribeApiAppRequest: DescribeApiAppRequest,
     DescribePluginResponse: DescribePluginResponse,
     DescribeUpstreamBindApisRequest: DescribeUpstreamBindApisRequest,
+    DescribePluginsByApiResponse: DescribePluginsByApiResponse,
     DescribeExclusiveInstancesResponse: DescribeExclusiveInstancesResponse,
     K8sService: K8sService,
     DeleteUsagePlanRequest: DeleteUsagePlanRequest,
@@ -15690,7 +16170,7 @@ module.exports = {
     IPStrategyApi: IPStrategyApi,
     DescribeIPStrategyResponse: DescribeIPStrategyResponse,
     DescribePluginRequest: DescribePluginRequest,
-    DocumentSDK: DocumentSDK,
+    DetachPluginRequest: DetachPluginRequest,
     AttachedApiInfo: AttachedApiInfo,
     CreateApiResponse: CreateApiResponse,
     DescribeIPStrategyApisStatusRequest: DescribeIPStrategyApisStatusRequest,
@@ -15717,6 +16197,7 @@ module.exports = {
     DescribeUpstreamsResponse: DescribeUpstreamsResponse,
     DescribePluginApisRequest: DescribePluginApisRequest,
     ResponseErrorCodeReq: ResponseErrorCodeReq,
+    InstanceSummary: InstanceSummary,
     CreateServiceRequest: CreateServiceRequest,
     DescribeIPStrategysStatusRequest: DescribeIPStrategysStatusRequest,
     DemoteServiceUsagePlanResponse: DemoteServiceUsagePlanResponse,
@@ -15759,6 +16240,7 @@ module.exports = {
     DescribeServiceEnvironmentReleaseHistoryResponse: DescribeServiceEnvironmentReleaseHistoryResponse,
     Environment: Environment,
     DescribeAPIDocsRequest: DescribeAPIDocsRequest,
+    DescribePluginsByApiRequest: DescribePluginsByApiRequest,
     UsagePlanStatusInfo: UsagePlanStatusInfo,
     ServiceReleaseHistoryInfo: ServiceReleaseHistoryInfo,
     CreatePluginResponse: CreatePluginResponse,
@@ -15801,7 +16283,7 @@ module.exports = {
     ModifyIPStrategyRequest: ModifyIPStrategyRequest,
     ModifyPluginResponse: ModifyPluginResponse,
     UnBindSecretIdsRequest: UnBindSecretIdsRequest,
-    DescribeApiRequest: DescribeApiRequest,
+    ApiEnvironmentStrategy: ApiEnvironmentStrategy,
     VpcConfig: VpcConfig,
     CreateUpstreamResponse: CreateUpstreamResponse,
     ResetAPIDocPasswordRequest: ResetAPIDocPasswordRequest,
@@ -15812,6 +16294,7 @@ module.exports = {
     DeletePluginResponse: DeletePluginResponse,
     DescribeUpstreamBindApis: DescribeUpstreamBindApis,
     ModifyServiceEnvironmentStrategyRequest: ModifyServiceEnvironmentStrategyRequest,
+    DocumentSDK: DocumentSDK,
     CreateAPIDocRequest: CreateAPIDocRequest,
     DescribeApiAppBindApisStatusResponse: DescribeApiAppBindApisStatusResponse,
     DescribeServiceSubDomainsRequest: DescribeServiceSubDomainsRequest,
@@ -15834,9 +16317,9 @@ module.exports = {
     ErrorCodes: ErrorCodes,
     DescribeServiceEnvironmentListRequest: DescribeServiceEnvironmentListRequest,
     ServiceEnvironmentStrategyStatus: ServiceEnvironmentStrategyStatus,
-    ReqParameter: ReqParameter,
-    DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
     MicroService: MicroService,
+    DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
+    DescribeApiRequest: DescribeApiRequest,
     ApiEnvironmentStrategyStataus: ApiEnvironmentStrategyStataus,
     PluginSummary: PluginSummary,
     ApiAppInfo: ApiAppInfo,
@@ -15846,6 +16329,7 @@ module.exports = {
     BindApiInfo: BindApiInfo,
     ApiAppApiInfo: ApiAppApiInfo,
     DescribeUsagePlanResponse: DescribeUsagePlanResponse,
+    ReqParameter: ReqParameter,
     UnBindEnvironmentRequest: UnBindEnvironmentRequest,
     AttachPluginResponse: AttachPluginResponse,
     BindEnvironmentRequest: BindEnvironmentRequest,
@@ -15855,6 +16339,7 @@ module.exports = {
     EnvironmentStrategy: EnvironmentStrategy,
     InstanceParameterInput: InstanceParameterInput,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
+    ImportOpenApiRequest: ImportOpenApiRequest,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
     UpstreamNode: UpstreamNode,
     ApiAppApiInfos: ApiAppApiInfos,
@@ -15879,9 +16364,10 @@ module.exports = {
     CreateApiAppResponse: CreateApiAppResponse,
     DescribeApiUsagePlanRequest: DescribeApiUsagePlanRequest,
     UnBindSubDomainRequest: UnBindSubDomainRequest,
-    ApiEnvironmentStrategy: ApiEnvironmentStrategy,
+    AttachedPluginSummary: AttachedPluginSummary,
     DescribeIPStrategysStatusResponse: DescribeIPStrategysStatusResponse,
     UpdateApiAppKeyResponse: UpdateApiAppKeyResponse,
+    DescribeExclusiveInstancesStatusRequest: DescribeExclusiveInstancesStatusRequest,
     InstanceDetail: InstanceDetail,
     UnBindSecretIdsResponse: UnBindSecretIdsResponse,
     CreateApiAppRequest: CreateApiAppRequest,

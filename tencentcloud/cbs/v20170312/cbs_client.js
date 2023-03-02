@@ -16,29 +16,38 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SnapshotOperationLog = models.SnapshotOperationLog;
 const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
+const DescribeDiskBackupsRequest = models.DescribeDiskBackupsRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
+const DetailPrice = models.DetailPrice;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
+const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermissionRequest;
 const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
+const ModifyDiskBackupQuotaRequest = models.ModifyDiskBackupQuotaRequest;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
 const CreateSnapshotResponse = models.CreateSnapshotResponse;
 const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const DeleteDiskBackupsRequest = models.DeleteDiskBackupsRequest;
 const InitializeDisksResponse = models.InitializeDisksResponse;
+const DeleteDiskBackupsResponse = models.DeleteDiskBackupsResponse;
 const DescribeDiskStoragePoolRequest = models.DescribeDiskStoragePoolRequest;
-const SnapshotOperationLog = models.SnapshotOperationLog;
+const DescribeDiskBackupsResponse = models.DescribeDiskBackupsResponse;
 const SnapshotCopyResult = models.SnapshotCopyResult;
 const RenewDiskRequest = models.RenewDiskRequest;
 const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
+const AdvancedRetentionPolicy = models.AdvancedRetentionPolicy;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
 const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssociatedAutoSnapshotPolicyRequest;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
 const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
+const ApplyDiskBackupResponse = models.ApplyDiskBackupResponse;
 const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
 const Tag = models.Tag;
 const ResizeDiskResponse = models.ResizeDiskResponse;
@@ -50,9 +59,10 @@ const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
 const CreateSnapshotRequest = models.CreateSnapshotRequest;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
-const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
+const ModifyDiskBackupQuotaResponse = models.ModifyDiskBackupQuotaResponse;
 const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
 const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
+const InquirePriceModifyDiskBackupQuotaRequest = models.InquirePriceModifyDiskBackupQuotaRequest;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
@@ -61,6 +71,7 @@ const DescribeDisksResponse = models.DescribeDisksResponse;
 const Placement = models.Placement;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
+const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
 const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const Image = models.Image;
@@ -69,12 +80,15 @@ const CdcSize = models.CdcSize;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
+const ApplyDiskBackupRequest = models.ApplyDiskBackupRequest;
 const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
 const InitializeDisksRequest = models.InitializeDisksRequest;
 const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const DiskConfig = models.DiskConfig;
+const CreateDiskBackupResponse = models.CreateDiskBackupResponse;
+const InquirePriceModifyDiskBackupQuotaResponse = models.InquirePriceModifyDiskBackupQuotaResponse;
 const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
 const DiskChargePrepaid = models.DiskChargePrepaid;
 const Filter = models.Filter;
@@ -83,24 +97,25 @@ const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
-const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermissionRequest;
+const CreateDiskBackupRequest = models.CreateDiskBackupRequest;
 const DiskOperationLog = models.DiskOperationLog;
 const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
 const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
+const DiskBackup = models.DiskBackup;
 const DescribeDisksRequest = models.DescribeDisksRequest;
 const DetachDisksResponse = models.DetachDisksResponse;
 const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const SharePermission = models.SharePermission;
 const DescribeDiskStoragePoolResponse = models.DescribeDiskStoragePoolResponse;
 const Policy = models.Policy;
-const Price = models.Price;
+const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
 const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
 const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const AutoMountConfiguration = models.AutoMountConfiguration;
-const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
+const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
 const PrepayPrice = models.PrepayPrice;
 const RenewDiskResponse = models.RenewDiskResponse;
 const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
@@ -108,7 +123,7 @@ const Cdc = models.Cdc;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const AttachDetail = models.AttachDetail;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
-const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
+const Price = models.Price;
 const ApplySnapshotRequest = models.ApplySnapshotRequest;
 
 
@@ -150,6 +165,21 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ApplyDiskBackup）用于回滚备份点到原云硬盘。
+
+* 仅支持回滚到原云硬盘上。对于数据盘备份点，如果您需要复制备份点数据到其它云硬盘上，请先使用 CreateSnapshot 将备份点转换为快照，然后使用 CreateDisks 接口创建新的弹性云硬盘，将快照数据复制到新购云硬盘上。
+* 用于回滚的备份点必须处于NORMAL状态。备份点状态可以通过DescribeDiskBackups接口查询，见输出参数中BackupState字段解释。
+* 如果是弹性云硬盘，则云硬盘必须处于未挂载状态，云硬盘挂载状态可以通过DescribeDisks接口查询，见Attached字段解释；如果是随实例一起购买的非弹性云硬盘，则实例必须处于关机状态，实例状态可以通过DescribeInstancesStatus接口查询。
+     * @param {ApplyDiskBackupRequest} req
+     * @param {function(string, ApplyDiskBackupResponse):void} cb
+     * @public
+     */
+    ApplyDiskBackup(req, cb) {
+        let resp = new ApplyDiskBackupResponse();
+        this.request("ApplyDiskBackup", req, resp, cb);
+    }
+
+    /**
      * 本接口（CopySnapshotCrossRegions）用于快照跨地域复制。
 
 * 本接口为异步接口，当跨地域复制的请求下发成功后会返回一个新的快照ID，此时快照未立即复制到目标地域，可请求目标地域的[DescribeSnapshots](/document/product/362/15647)接口查询新快照的状态，判断是否复制完成。如果快照的状态为“NORMAL”，表示快照复制完成。
@@ -178,8 +208,6 @@ class CbsClient extends AbstractClient {
 
     /**
      * 本接口（InquiryPriceResizeDisk）用于扩容云硬盘询价。
-
-* 只支持预付费模式的云硬盘扩容询价。
      * @param {InquiryPriceResizeDiskRequest} req
      * @param {function(string, InquiryPriceResizeDiskResponse):void} cb
      * @public
@@ -205,7 +233,6 @@ class CbsClient extends AbstractClient {
 
 * 可以根据定期快照策略ID、名称或者状态等信息来查询定期快照策略的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
 * 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的定期快照策略表。
-
      * @param {DescribeAutoSnapshotPoliciesRequest} req
      * @param {function(string, DescribeAutoSnapshotPoliciesResponse):void} cb
      * @public
@@ -241,6 +268,28 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（InquirePricePriceModifyDiskBackupQuota）用于修改云硬盘备份点配额询价。
+     * @param {InquirePriceModifyDiskBackupQuotaRequest} req
+     * @param {function(string, InquirePriceModifyDiskBackupQuotaResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDiskBackupQuota(req, cb) {
+        let resp = new InquirePriceModifyDiskBackupQuotaResponse();
+        this.request("InquirePriceModifyDiskBackupQuota", req, resp, cb);
+    }
+
+    /**
+     * 批量删除指定的云硬盘备份点。
+     * @param {DeleteDiskBackupsRequest} req
+     * @param {function(string, DeleteDiskBackupsResponse):void} cb
+     * @public
+     */
+    DeleteDiskBackups(req, cb) {
+        let resp = new DeleteDiskBackupsResponse();
+        this.request("DeleteDiskBackups", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyAutoSnapshotPolicyAttribute）用于修改定期快照策略属性。
 
 * 可通过该接口修改定期快照策略的执行策略、名称、是否激活等属性。
@@ -268,7 +317,23 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
+     * 本接口（DescribeDiskBackups）用于查询备份点的详细信息。
+
+根据备份点ID、创建备份点的云硬盘ID、创建备份点的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器Filter。
+如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的备份点列表。
+     * @param {DescribeDiskBackupsRequest} req
+     * @param {function(string, DescribeDiskBackupsResponse):void} cb
+     * @public
+     */
+    DescribeDiskBackups(req, cb) {
+        let resp = new DescribeDiskBackupsResponse();
+        this.request("DescribeDiskBackups", req, resp, cb);
+    }
+
+    /**
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+
+查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
      * @param {DescribeDiskOperationLogsRequest} req
      * @param {function(string, DescribeDiskOperationLogsResponse):void} cb
      * @public
@@ -292,17 +357,18 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
-
-* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
-* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
-     * @param {CreateAutoSnapshotPolicyRequest} req
-     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
+1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
+2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
+3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
+4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
+     * @param {InitializeDisksRequest} req
+     * @param {function(string, InitializeDisksResponse):void} cb
      * @public
      */
-    CreateAutoSnapshotPolicy(req, cb) {
-        let resp = new CreateAutoSnapshotPolicyResponse();
-        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    InitializeDisks(req, cb) {
+        let resp = new InitializeDisksResponse();
+        this.request("InitializeDisks", req, resp, cb);
     }
 
     /**
@@ -317,6 +383,17 @@ class CbsClient extends AbstractClient {
     DescribeDisks(req, cb) {
         let resp = new DescribeDisksResponse();
         this.request("DescribeDisks", req, resp, cb);
+    }
+
+    /**
+     * 此接口 (ModifyDiskBackupQuota) 用于修改云硬盘备份点配额。
+     * @param {ModifyDiskBackupQuotaRequest} req
+     * @param {function(string, ModifyDiskBackupQuotaResponse):void} cb
+     * @public
+     */
+    ModifyDiskBackupQuota(req, cb) {
+        let resp = new ModifyDiskBackupQuotaResponse();
+        this.request("ModifyDiskBackupQuota", req, resp, cb);
     }
 
     /**
@@ -426,18 +503,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
-1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
-2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
-3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
-4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
-     * @param {InitializeDisksRequest} req
-     * @param {function(string, InitializeDisksResponse):void} cb
+     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
+
+* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
+* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     * @param {CreateAutoSnapshotPolicyRequest} req
+     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
      * @public
      */
-    InitializeDisks(req, cb) {
-        let resp = new InitializeDisksResponse();
-        this.request("InitializeDisks", req, resp, cb);
+    CreateAutoSnapshotPolicy(req, cb) {
+        let resp = new CreateAutoSnapshotPolicyResponse();
+        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
     }
 
     /**
@@ -445,7 +521,6 @@ class CbsClient extends AbstractClient {
 
 本接口 (ModifyDisksChargeType) 用于切换云盘的计费模式。
 
-只支持从 POSTPAID_BY_HOUR 计费模式切换为PREPAID计费模式。
 非弹性云盘不支持此接口，请通过修改实例计费模式接口将实例连同非弹性云盘一起转换。
 默认接口请求频率限制：10次/秒。
 
@@ -463,7 +538,7 @@ class CbsClient extends AbstractClient {
 
 * 不再使用的云盘，可通过本接口主动退还。
 * 本接口支持退还预付费云盘和按小时后付费云盘。按小时后付费云盘可直接退还，预付费云盘需符合退还规则。
-* 支持批量操作，每次请求批量云硬盘的上限为50。如果批量云盘存在不允许操作的，请求会以特定错误码返回。
+* 支持批量操作，每次请求批量云硬盘的上限为100。如果批量云盘存在不允许操作的，请求会以特定错误码返回。
      * @param {TerminateDisksRequest} req
      * @param {function(string, TerminateDisksResponse):void} cb
      * @public
@@ -499,6 +574,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 为云硬盘创建一个备份点。
+     * @param {CreateDiskBackupRequest} req
+     * @param {function(string, CreateDiskBackupResponse):void} cb
+     * @public
+     */
+    CreateDiskBackup(req, cb) {
+        let resp = new CreateDiskBackupResponse();
+        this.request("CreateDiskBackup", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDiskStoragePool）查询用户的云硬盘独享集群列表。
 
 * 可以根据独享集群ID(CdcId)、可用区(zone)等信息来查询和过滤云硬盘独享集群详细信息，不同的过滤条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
@@ -528,9 +614,9 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeSnapshotOperationLogs）用于查询快照操作日志列表。
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
 
-可根据快照ID过滤。快照ID形如：snap-a1kmcp13。
+查询快照操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeSnapshotOperationLogs）即将下线，后续不再提供调用，请知悉。
 
      * @param {DescribeSnapshotOperationLogsRequest} req
      * @param {function(string, DescribeSnapshotOperationLogsResponse):void} cb
@@ -559,18 +645,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
+     * 本接口（DetachDisks）用于卸载云硬盘。
 
-* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
-* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
-* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
-     * @param {CreateSnapshotRequest} req
-     * @param {function(string, CreateSnapshotResponse):void} cb
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+     * @param {DetachDisksRequest} req
+     * @param {function(string, DetachDisksResponse):void} cb
      * @public
      */
-    CreateSnapshot(req, cb) {
-        let resp = new CreateSnapshotResponse();
-        this.request("CreateSnapshot", req, resp, cb);
+    DetachDisks(req, cb) {
+        let resp = new DetachDisksResponse();
+        this.request("DetachDisks", req, resp, cb);
     }
 
     /**
@@ -599,17 +684,18 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DetachDisks）用于卸载云硬盘。
+     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
 
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
-     * @param {DetachDisksRequest} req
-     * @param {function(string, DetachDisksResponse):void} cb
+* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
+* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
+     * @param {CreateSnapshotRequest} req
+     * @param {function(string, CreateSnapshotResponse):void} cb
      * @public
      */
-    DetachDisks(req, cb) {
-        let resp = new DetachDisksResponse();
-        this.request("DetachDisks", req, resp, cb);
+    CreateSnapshot(req, cb) {
+        let resp = new CreateSnapshotResponse();
+        this.request("CreateSnapshot", req, resp, cb);
     }
 
     /**

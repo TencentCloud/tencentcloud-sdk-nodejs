@@ -18,26 +18,24 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PeerDetailForUser = models.PeerDetailForUser;
 const GetBcosTransListRequest = models.GetBcosTransListRequest;
-const QueryRequest = models.QueryRequest;
+const QueryChainMakerDemoBlockTransactionResponse = models.QueryChainMakerDemoBlockTransactionResponse;
 const QueryChainMakerContractRequest = models.QueryChainMakerContractRequest;
 const DeployDynamicBcosContractResponse = models.DeployDynamicBcosContractResponse;
 const GetClusterListForUserResponse = models.GetClusterListForUserResponse;
-const SendTransactionHandlerRequest = models.SendTransactionHandlerRequest;
 const GetBlockTransactionListForUserResponse = models.GetBlockTransactionListForUserResponse;
-const SendTransactionHandlerResponse = models.SendTransactionHandlerResponse;
+const ApplyChainMakerBatchUserCertResponse = models.ApplyChainMakerBatchUserCertResponse;
 const ApplyUserCertRequest = models.ApplyUserCertRequest;
-const TransByDynamicContractHandlerRequest = models.TransByDynamicContractHandlerRequest;
-const GetTransListHandlerResponse = models.GetTransListHandlerResponse;
-const InvokeBcosTransRequest = models.InvokeBcosTransRequest;
+const SrvInvokeRequest = models.SrvInvokeRequest;
+const SrvInvokeResponse = models.SrvInvokeResponse;
 const GetChaincodeInitializeResultForUserRequest = models.GetChaincodeInitializeResultForUserRequest;
 const InitializeChaincodeForUserRequest = models.InitializeChaincodeForUserRequest;
-const DeployDynamicContractHandlerResponse = models.DeployDynamicContractHandlerResponse;
-const SrvInvokeRequest = models.SrvInvokeRequest;
+const GetTransactionDetailForUserResponse = models.GetTransactionDetailForUserResponse;
+const InvokeChainMakerDemoContractRequest = models.InvokeChainMakerDemoContractRequest;
 const ApplyUserCertResponse = models.ApplyUserCertResponse;
 const GetChaincodeCompileLogForUserRequest = models.GetChaincodeCompileLogForUserRequest;
-const GetBcosBlockByNumberRequest = models.GetBcosBlockByNumberRequest;
-const GetPeerLogForUserResponse = models.GetPeerLogForUserResponse;
+const GetInvokeTxRequest = models.GetInvokeTxRequest;
 const GetBcosBlockListResponse = models.GetBcosBlockListResponse;
+const SignCertCsr = models.SignCertCsr;
 const DownloadUserCertResponse = models.DownloadUserCertResponse;
 const QueryChainMakerBlockTransactionRequest = models.QueryChainMakerBlockTransactionRequest;
 const GetChaincodeLogForUserRequest = models.GetChaincodeLogForUserRequest;
@@ -49,26 +47,26 @@ const GetBlockTransactionListForUserRequest = models.GetBlockTransactionListForU
 const QueryChainMakerBlockTransactionResponse = models.QueryChainMakerBlockTransactionResponse;
 const GetBcosBlockListRequest = models.GetBcosBlockListRequest;
 const GetClusterSummaryRequest = models.GetClusterSummaryRequest;
-const BlockByNumberHandlerResponse = models.BlockByNumberHandlerResponse;
-const GetTransListHandlerRequest = models.GetTransListHandlerRequest;
+const InvokeBcosTransRequest = models.InvokeBcosTransRequest;
 const InvokeChainMakerContractResponse = models.InvokeChainMakerContractResponse;
-const GetTransByHashHandlerResponse = models.GetTransByHashHandlerResponse;
-const GetInvokeTxRequest = models.GetInvokeTxRequest;
-const DeployDynamicContractHandlerRequest = models.DeployDynamicContractHandlerRequest;
+const QueryChainMakerDemoBlockTransactionRequest = models.QueryChainMakerDemoBlockTransactionRequest;
 const ClusterDetailForUser = models.ClusterDetailForUser;
 const GetPeerLogForUserRequest = models.GetPeerLogForUserRequest;
 const GetLatesdTransactionListResponse = models.GetLatesdTransactionListResponse;
 const QueryChainMakerTransactionResponse = models.QueryChainMakerTransactionResponse;
 const DownloadUserCertRequest = models.DownloadUserCertRequest;
 const GetClusterSummaryResponse = models.GetClusterSummaryResponse;
-const TransByDynamicContractHandlerResponse = models.TransByDynamicContractHandlerResponse;
 const PeerSet = models.PeerSet;
 const ChainMakerTransactionResult = models.ChainMakerTransactionResult;
 const CreateChaincodeAndInstallForUserRequest = models.CreateChaincodeAndInstallForUserRequest;
-const SrvInvokeResponse = models.SrvInvokeResponse;
+const EndorserGroup = models.EndorserGroup;
 const GetBcosTransByHashResponse = models.GetBcosTransByHashResponse;
-const GetBlockListHandlerRequest = models.GetBlockListHandlerRequest;
+const GetPeerLogForUserResponse = models.GetPeerLogForUserResponse;
+const QueryChainMakerDemoContractRequest = models.QueryChainMakerDemoContractRequest;
+const QueryChainMakerDemoTransactionResponse = models.QueryChainMakerDemoTransactionResponse;
+const ApplyChainMakerBatchUserCertRequest = models.ApplyChainMakerBatchUserCertRequest;
 const GetChaincodeLogForUserResponse = models.GetChaincodeLogForUserResponse;
+const QueryChainMakerDemoTransactionRequest = models.QueryChainMakerDemoTransactionRequest;
 const LogDetailForUser = models.LogDetailForUser;
 const InvokeBcosTransResponse = models.InvokeBcosTransResponse;
 const InitializeChaincodeForUserResponse = models.InitializeChaincodeForUserResponse;
@@ -77,29 +75,28 @@ const GetBcosBlockByNumberResponse = models.GetBcosBlockByNumberResponse;
 const ChainMakerContractResult = models.ChainMakerContractResult;
 const GetClusterListForUserRequest = models.GetClusterListForUserRequest;
 const Block = models.Block;
+const QueryChainMakerDemoContractResponse = models.QueryChainMakerDemoContractResponse;
 const GetBlockListRequest = models.GetBlockListRequest;
 const BcosTransInfo = models.BcosTransInfo;
 const GetChaincodeInitializeResultForUserResponse = models.GetChaincodeInitializeResultForUserResponse;
 const InvokeRequest = models.InvokeRequest;
 const GetInvokeTxResponse = models.GetInvokeTxResponse;
-const GetBlockListHandlerResponse = models.GetBlockListHandlerResponse;
-const GetTransactionDetailForUserResponse = models.GetTransactionDetailForUserResponse;
+const GetChannelListForUserResponse = models.GetChannelListForUserResponse;
 const QueryChainMakerContractResponse = models.QueryChainMakerContractResponse;
 const GetBcosTransByHashRequest = models.GetBcosTransByHashRequest;
-const GetChannelListForUserResponse = models.GetChannelListForUserResponse;
-const QueryChainMakerTransactionRequest = models.QueryChainMakerTransactionRequest;
 const GetChaincodeCompileLogForUserResponse = models.GetChaincodeCompileLogForUserResponse;
 const DeployDynamicBcosContractRequest = models.DeployDynamicBcosContractRequest;
 const InvokeChainMakerContractRequest = models.InvokeChainMakerContractRequest;
 const GetBcosTransListResponse = models.GetBcosTransListResponse;
-const BlockByNumberHandlerRequest = models.BlockByNumberHandlerRequest;
+const QueryChainMakerTransactionRequest = models.QueryChainMakerTransactionRequest;
 const BcosBlockObj = models.BcosBlockObj;
 const ChannelDetailForUser = models.ChannelDetailForUser;
-const GetTransByHashHandlerRequest = models.GetTransByHashHandlerRequest;
+const QueryRequest = models.QueryRequest;
 const CreateChaincodeAndInstallForUserResponse = models.CreateChaincodeAndInstallForUserResponse;
 const GetChannelListForUserRequest = models.GetChannelListForUserRequest;
+const InvokeChainMakerDemoContractResponse = models.InvokeChainMakerDemoContractResponse;
 const QueryResponse = models.QueryResponse;
-const EndorserGroup = models.EndorserGroup;
+const GetBcosBlockByNumberRequest = models.GetBcosBlockByNumberRequest;
 const TransactionItem = models.TransactionItem;
 
 
@@ -147,14 +144,14 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * 调用长安链合约查询
-     * @param {QueryChainMakerContractRequest} req
-     * @param {function(string, QueryChainMakerContractResponse):void} cb
+     * 批量申请长安链用户签名证书
+     * @param {ApplyChainMakerBatchUserCertRequest} req
+     * @param {function(string, ApplyChainMakerBatchUserCertResponse):void} cb
      * @public
      */
-    QueryChainMakerContract(req, cb) {
-        let resp = new QueryChainMakerContractResponse();
-        this.request("QueryChainMakerContract", req, resp, cb);
+    ApplyChainMakerBatchUserCert(req, cb) {
+        let resp = new ApplyChainMakerBatchUserCertResponse();
+        this.request("ApplyChainMakerBatchUserCert", req, resp, cb);
     }
 
     /**
@@ -202,27 +199,25 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * 获取交易详情
-     * @param {GetTransactionDetailForUserRequest} req
-     * @param {function(string, GetTransactionDetailForUserResponse):void} cb
+     * 调用长安链合约查询
+     * @param {QueryChainMakerContractRequest} req
+     * @param {function(string, QueryChainMakerContractResponse):void} cb
      * @public
      */
-    GetTransactionDetailForUser(req, cb) {
-        let resp = new GetTransactionDetailForUserResponse();
-        this.request("GetTransactionDetailForUser", req, resp, cb);
+    QueryChainMakerContract(req, cb) {
+        let resp = new QueryChainMakerContractResponse();
+        this.request("QueryChainMakerContract", req, resp, cb);
     }
 
     /**
-     * 版本升级
-
-Bcos分页查询当前群组的交易信息列表
-     * @param {GetTransListHandlerRequest} req
-     * @param {function(string, GetTransListHandlerResponse):void} cb
+     * 查询长安链体验网络指定高度区块的交易
+     * @param {QueryChainMakerDemoBlockTransactionRequest} req
+     * @param {function(string, QueryChainMakerDemoBlockTransactionResponse):void} cb
      * @public
      */
-    GetTransListHandler(req, cb) {
-        let resp = new GetTransListHandlerResponse();
-        this.request("GetTransListHandler", req, resp, cb);
+    QueryChainMakerDemoBlockTransaction(req, cb) {
+        let resp = new QueryChainMakerDemoBlockTransactionResponse();
+        this.request("QueryChainMakerDemoBlockTransaction", req, resp, cb);
     }
 
     /**
@@ -292,16 +287,14 @@ Bcos分页查询当前群组的交易信息列表
     }
 
     /**
-     * 版本升级
-
-Bcos根据交易哈希查看交易详细信息
-     * @param {GetTransByHashHandlerRequest} req
-     * @param {function(string, GetTransByHashHandlerResponse):void} cb
+     * 通过交易ID查询长安链体验网络交易
+     * @param {QueryChainMakerDemoTransactionRequest} req
+     * @param {function(string, QueryChainMakerDemoTransactionResponse):void} cb
      * @public
      */
-    GetTransByHashHandler(req, cb) {
-        let resp = new GetTransByHashHandlerResponse();
-        this.request("GetTransByHashHandler", req, resp, cb);
+    QueryChainMakerDemoTransaction(req, cb) {
+        let resp = new QueryChainMakerDemoTransactionResponse();
+        this.request("QueryChainMakerDemoTransaction", req, resp, cb);
     }
 
     /**
@@ -335,19 +328,6 @@ Bcos根据交易哈希查看交易详细信息
     InvokeChainMakerContract(req, cb) {
         let resp = new InvokeChainMakerContractResponse();
         this.request("InvokeChainMakerContract", req, resp, cb);
-    }
-
-    /**
-     * 版本升级
-
-Bcos根据块高查询区块信息
-     * @param {BlockByNumberHandlerRequest} req
-     * @param {function(string, BlockByNumberHandlerResponse):void} cb
-     * @public
-     */
-    BlockByNumberHandler(req, cb) {
-        let resp = new BlockByNumberHandlerResponse();
-        this.request("BlockByNumberHandler", req, resp, cb);
     }
 
     /**
@@ -406,16 +386,25 @@ Bcos根据块高查询区块信息
     }
 
     /**
-     * 版本升级
-
-动态部署合约
-     * @param {DeployDynamicContractHandlerRequest} req
-     * @param {function(string, DeployDynamicContractHandlerResponse):void} cb
+     * 调用长安链体验网络合约查询
+     * @param {QueryChainMakerDemoContractRequest} req
+     * @param {function(string, QueryChainMakerDemoContractResponse):void} cb
      * @public
      */
-    DeployDynamicContractHandler(req, cb) {
-        let resp = new DeployDynamicContractHandlerResponse();
-        this.request("DeployDynamicContractHandler", req, resp, cb);
+    QueryChainMakerDemoContract(req, cb) {
+        let resp = new QueryChainMakerDemoContractResponse();
+        this.request("QueryChainMakerDemoContract", req, resp, cb);
+    }
+
+    /**
+     * 获取交易详情
+     * @param {GetTransactionDetailForUserRequest} req
+     * @param {function(string, GetTransactionDetailForUserResponse):void} cb
+     * @public
+     */
+    GetTransactionDetailForUser(req, cb) {
+        let resp = new GetTransactionDetailForUserResponse();
+        this.request("GetTransactionDetailForUser", req, resp, cb);
     }
 
     /**
@@ -441,29 +430,14 @@ Bcos根据块高查询区块信息
     }
 
     /**
-     * 版本升级
-
-根据动态部署的合约发送交易
-     * @param {TransByDynamicContractHandlerRequest} req
-     * @param {function(string, TransByDynamicContractHandlerResponse):void} cb
+     * 调用长安链体验网络合约执行交易
+     * @param {InvokeChainMakerDemoContractRequest} req
+     * @param {function(string, InvokeChainMakerDemoContractResponse):void} cb
      * @public
      */
-    TransByDynamicContractHandler(req, cb) {
-        let resp = new TransByDynamicContractHandlerResponse();
-        this.request("TransByDynamicContractHandler", req, resp, cb);
-    }
-
-    /**
-     * 版本升级
-
-Bcos发送交易
-     * @param {SendTransactionHandlerRequest} req
-     * @param {function(string, SendTransactionHandlerResponse):void} cb
-     * @public
-     */
-    SendTransactionHandler(req, cb) {
-        let resp = new SendTransactionHandlerResponse();
-        this.request("SendTransactionHandler", req, resp, cb);
+    InvokeChainMakerDemoContract(req, cb) {
+        let resp = new InvokeChainMakerDemoContractResponse();
+        this.request("InvokeChainMakerDemoContract", req, resp, cb);
     }
 
     /**
@@ -508,19 +482,6 @@ Bcos发送交易
     Query(req, cb) {
         let resp = new QueryResponse();
         this.request("Query", req, resp, cb);
-    }
-
-    /**
-     * 版本升级
-
-Bcos分页查询当前群组下的区块列表
-     * @param {GetBlockListHandlerRequest} req
-     * @param {function(string, GetBlockListHandlerResponse):void} cb
-     * @public
-     */
-    GetBlockListHandler(req, cb) {
-        let resp = new GetBlockListHandlerResponse();
-        this.request("GetBlockListHandler", req, resp, cb);
     }
 
 

@@ -16,25 +16,31 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const SendMultiSmsResponse = models.SendMultiSmsResponse;
-const AppInfo = models.AppInfo;
-const RenewCardsResponse = models.RenewCardsResponse;
-const CardList = models.CardList;
 const DescribeCardsResponse = models.DescribeCardsResponse;
-const ModifyUserCardRemarkRequest = models.ModifyUserCardRemarkRequest;
 const DescribeCardResponse = models.DescribeCardResponse;
 const CardInfo = models.CardInfo;
-const DescribeAppResponse = models.DescribeAppResponse;
-const DescribeCardRequest = models.DescribeCardRequest;
 const DescribeAppRequest = models.DescribeAppRequest;
-const SendSmsResponse = models.SendSmsResponse;
-const ModifyUserCardRemarkResponse = models.ModifyUserCardRemarkResponse;
-const SendSmsRequest = models.SendSmsRequest;
-const DescribeCardsRequest = models.DescribeCardsRequest;
+const PayForExtendDataResponse = models.PayForExtendDataResponse;
+const ModifyUserCardRemarkRequest = models.ModifyUserCardRemarkRequest;
 const SendMultiSmsRequest = models.SendMultiSmsRequest;
 const ResRenew = models.ResRenew;
+const ResOrderIds = models.ResOrderIds;
+const DescribeSmsResponse = models.DescribeSmsResponse;
+const ResSms = models.ResSms;
+const DescribeAppResponse = models.DescribeAppResponse;
+const DescribeCardRequest = models.DescribeCardRequest;
+const SendSmsResponse = models.SendSmsResponse;
+const SendSmsRequest = models.SendSmsRequest;
 const SmsRet = models.SmsRet;
+const AppInfo = models.AppInfo;
+const RenewCardsResponse = models.RenewCardsResponse;
+const PayForExtendDataRequest = models.PayForExtendDataRequest;
 const SmsSid = models.SmsSid;
+const SendMultiSmsResponse = models.SendMultiSmsResponse;
+const CardList = models.CardList;
+const DescribeSmsRequest = models.DescribeSmsRequest;
+const ModifyUserCardRemarkResponse = models.ModifyUserCardRemarkResponse;
+const DescribeCardsRequest = models.DescribeCardsRequest;
 const RenewCardsRequest = models.RenewCardsRequest;
 
 
@@ -101,6 +107,28 @@ class IcClient extends AbstractClient {
     ModifyUserCardRemark(req, cb) {
         let resp = new ModifyUserCardRemarkResponse();
         this.request("ModifyUserCardRemark", req, resp, cb);
+    }
+
+    /**
+     * 查询短信列表
+     * @param {DescribeSmsRequest} req
+     * @param {function(string, DescribeSmsResponse):void} cb
+     * @public
+     */
+    DescribeSms(req, cb) {
+        let resp = new DescribeSmsResponse();
+        this.request("DescribeSms", req, resp, cb);
+    }
+
+    /**
+     * 购买套外流量包
+     * @param {PayForExtendDataRequest} req
+     * @param {function(string, PayForExtendDataResponse):void} cb
+     * @public
+     */
+    PayForExtendData(req, cb) {
+        let resp = new PayForExtendDataResponse();
+        this.request("PayForExtendData", req, resp, cb);
     }
 
     /**

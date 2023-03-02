@@ -33,18 +33,20 @@ const CloneLoadBalancerRequest = models.CloneLoadBalancerRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
+const MultiCertInfo = models.MultiCertInfo;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeCustomizedConfigListResponse = models.DescribeCustomizedConfigListResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
-const SetCustomizedConfigForLoadBalancerResponse = models.SetCustomizedConfigForLoadBalancerResponse;
+const DescribeIdleLoadBalancersResponse = models.DescribeIdleLoadBalancersResponse;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const ListenerItem = models.ListenerItem;
 const RsWeightRule = models.RsWeightRule;
+const RegisterFunctionTargetsRequest = models.RegisterFunctionTargetsRequest;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
 const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
@@ -57,6 +59,8 @@ const CreateRuleResponse = models.CreateRuleResponse;
 const CrossTargets = models.CrossTargets;
 const RuleHealth = models.RuleHealth;
 const DescribeExclusiveClustersResponse = models.DescribeExclusiveClustersResponse;
+const ModifyDomainRequest = models.ModifyDomainRequest;
+const IdleLoadBalancer = models.IdleLoadBalancer;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -69,9 +73,12 @@ const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersReq
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
+const DeregisterFunctionTargetsResponse = models.DeregisterFunctionTargetsResponse;
 const DescribeCustomizedConfigListRequest = models.DescribeCustomizedConfigListRequest;
 const AutoRewriteRequest = models.AutoRewriteRequest;
 const DescribeCrossTargetsResponse = models.DescribeCrossTargetsResponse;
+const FunctionInfo = models.FunctionInfo;
+const ModifyFunctionTargetsResponse = models.ModifyFunctionTargetsResponse;
 const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
@@ -106,8 +113,11 @@ const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const MigrateClassicalLoadBalancersRequest = models.MigrateClassicalLoadBalancersRequest;
 const DescribeLoadBalancersDetailRequest = models.DescribeLoadBalancersDetailRequest;
 const TargetGroupBackend = models.TargetGroupBackend;
+const DeregisterFunctionTargetsRequest = models.DeregisterFunctionTargetsRequest;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
+const FunctionTarget = models.FunctionTarget;
 const DescribeResourcesResponse = models.DescribeResourcesResponse;
+const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
 const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
 const DescribeClusterResourcesResponse = models.DescribeClusterResourcesResponse;
@@ -115,13 +125,14 @@ const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const DescribeClusterResourcesRequest = models.DescribeClusterResourcesRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
-const ModifyDomainRequest = models.ModifyDomainRequest;
+const DescribeListenersRequest = models.DescribeListenersRequest;
 const CreateClsLogSetResponse = models.CreateClsLogSetResponse;
 const DescribeCrossTargetsRequest = models.DescribeCrossTargetsRequest;
 const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
+const ResourceAvailability = models.ResourceAvailability;
 const DescribeCustomizedConfigAssociateListResponse = models.DescribeCustomizedConfigAssociateListResponse;
 const SetCustomizedConfigForLoadBalancerRequest = models.SetCustomizedConfigForLoadBalancerRequest;
 const CreateListenerResponse = models.CreateListenerResponse;
@@ -131,6 +142,7 @@ const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsRespon
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const RuleOutput = models.RuleOutput;
+const RegisterFunctionTargetsResponse = models.RegisterFunctionTargetsResponse;
 const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
@@ -141,7 +153,7 @@ const DeregisterTargetGroupInstancesRequest = models.DeregisterTargetGroupInstan
 const ManualRewriteRequest = models.ManualRewriteRequest;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
-const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
+const CertInfo = models.CertInfo;
 const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
 const ClusterItem = models.ClusterItem;
 const BindDetailItem = models.BindDetailItem;
@@ -154,6 +166,7 @@ const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
 const ClustersZone = models.ClustersZone;
+const SetCustomizedConfigForLoadBalancerResponse = models.SetCustomizedConfigForLoadBalancerResponse;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
@@ -180,7 +193,7 @@ const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const ModifyLoadBalancerMixIpTargetResponse = models.ModifyLoadBalancerMixIpTargetResponse;
 const InternetAccessible = models.InternetAccessible;
 const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
-const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
+const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
 const DescribeQuotaResponse = models.DescribeQuotaResponse;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
@@ -198,13 +211,14 @@ const ModifyLoadBalancerSlaRequest = models.ModifyLoadBalancerSlaRequest;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const Resource = models.Resource;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const ModifyFunctionTargetsRequest = models.ModifyFunctionTargetsRequest;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
 const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const LBItem = models.LBItem;
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
-const DescribeListenersRequest = models.DescribeListenersRequest;
+const DescribeIdleLoadBalancersRequest = models.DescribeIdleLoadBalancersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
@@ -306,6 +320,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyTargetWeightRequest} req
+     * @param {function(string, ModifyTargetWeightResponse):void} cb
+     * @public
+     */
+    ModifyTargetWeight(req, cb) {
+        let resp = new ModifyTargetWeightResponse();
+        this.request("ModifyTargetWeight", req, resp, cb);
+    }
+
+    /**
      * 创建主题，默认开启全文索引和键值索引。如果不存在CLB专有日志集，则创建失败。
      * @param {CreateTopicRequest} req
      * @param {function(string, CreateTopicResponse):void} cb
@@ -352,7 +378,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。
+     * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。只支持VPC网络负载均衡。
      * @param {BatchDeregisterTargetsRequest} req
      * @param {function(string, BatchDeregisterTargetsResponse):void} cb
      * @public
@@ -456,16 +482,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
-绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
-解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
-     * @param {SetLoadBalancerSecurityGroupsRequest} req
-     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * 修改负载均衡转发规则上所绑定的云函数。
+     * @param {ModifyFunctionTargetsRequest} req
+     * @param {function(string, ModifyFunctionTargetsResponse):void} cb
      * @public
      */
-    SetLoadBalancerSecurityGroups(req, cb) {
-        let resp = new SetLoadBalancerSecurityGroupsResponse();
-        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    ModifyFunctionTargets(req, cb) {
+        let resp = new ModifyFunctionTargetsResponse();
+        this.request("ModifyFunctionTargets", req, resp, cb);
     }
 
     /**
@@ -480,7 +504,12 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
+     * 本接口（ModifyLoadBalancerSla）用于将按量计费模式的共享型实例升级为性能容量型实例。<br/>
+限制条件：
+- 本接口只支持升级按量计费的CLB实例，包年包月的CLB实例升级请通过控制台进行升级。
+- 升级为性能容量型实例后，不支持再回退到共享型实例。
+- 目前性能容量型实例处于内测中，如需升级为性能容量型实例，请提交 [内测申请](https://cloud.tencent.com/apply/p/hf45esx99lf)。
+- 传统型负载均衡实例不支持升级为性能容量型实例。
      * @param {ModifyLoadBalancerSlaRequest} req
      * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb
      * @public
@@ -724,7 +753,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。
+     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。批量绑定的资源数量上限为500。只支持VPC网络负载均衡。
      * @param {BatchRegisterTargetsRequest} req
      * @param {function(string, BatchRegisterTargetsResponse):void} cb
      * @public
@@ -732,6 +761,27 @@ class ClbClient extends AbstractClient {
     BatchRegisterTargets(req, cb) {
         let resp = new BatchRegisterTargetsResponse();
         this.request("BatchRegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * RegisterFunctionTargets 接口用来将一个云函数绑定到负载均衡的7层转发规则，在此之前您需要先行创建相关的7层监听器（HTTP、HTTPS）和转发规则。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。<br/>
+限制说明：
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。 
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
+     * @param {RegisterFunctionTargetsRequest} req
+     * @param {function(string, RegisterFunctionTargetsResponse):void} cb
+     * @public
+     */
+    RegisterFunctionTargets(req, cb) {
+        let resp = new RegisterFunctionTargetsResponse();
+        this.request("RegisterFunctionTargets", req, resp, cb);
     }
 
     /**
@@ -758,6 +808,19 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
+绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
+解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 拉取个性化配置列表，返回用户 AppId 下指定类型的配置。
      * @param {DescribeCustomizedConfigListRequest} req
      * @param {function(string, DescribeCustomizedConfigListResponse):void} cb
@@ -769,15 +832,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ModifyTargetWeightRequest} req
-     * @param {function(string, ModifyTargetWeightResponse):void} cb
+     * 修改目标组的名称或者默认端口属性
+     * @param {ModifyTargetGroupAttributeRequest} req
+     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
      * @public
      */
-    ModifyTargetWeight(req, cb) {
-        let resp = new ModifyTargetWeightResponse();
-        this.request("ModifyTargetWeight", req, resp, cb);
+    ModifyTargetGroupAttribute(req, cb) {
+        let resp = new ModifyTargetGroupAttributeResponse();
+        this.request("ModifyTargetGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -926,14 +988,25 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 修改目标组的名称或者默认端口属性
-     * @param {ModifyTargetGroupAttributeRequest} req
-     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
+     * DeregisterFunctionTargets 接口用来将一个云函数从负载均衡的转发规则上解绑，对于七层监听器，还需通过 LocationId 或 Domain+Url 指定转发规则。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
+<br/>限制说明：
+
+- 仅广州、深圳金融、上海、上海金融、北京、成都、中国香港、新加坡、孟买、东京、硅谷地域支持绑定 SCF。
+- 仅标准账户类型支持绑定 SCF，传统账户类型不支持。建议升级为标准账户类型，详情可参见 [账户类型升级说明](https://cloud.tencent.com/document/product/1199/49090)。
+- 传统型负载均衡不支持绑定 SCF。
+- 基础网络类型不支持绑定 SCF。
+- CLB 默认支持绑定同地域下的所有 SCF，可支持跨 VPC 绑定 SCF，不支持跨地域绑定。
+- 目前仅 IPv4、IPv6 NAT64 版本的负载均衡支持绑定 SCF，IPv6 版本的暂不支持。
+- 仅七层（HTTP、HTTPS）监听器支持绑定 SCF，四层（TCP、UDP、TCP SSL）监听器和七层 QUIC 监听器不支持。
+- CLB 绑定 SCF 仅支持绑定“Event 函数”类型的云函数。
+     * @param {DeregisterFunctionTargetsRequest} req
+     * @param {function(string, DeregisterFunctionTargetsResponse):void} cb
      * @public
      */
-    ModifyTargetGroupAttribute(req, cb) {
-        let resp = new ModifyTargetGroupAttributeResponse();
-        this.request("ModifyTargetGroupAttribute", req, resp, cb);
+    DeregisterFunctionTargets(req, cb) {
+        let resp = new DeregisterFunctionTargetsResponse();
+        this.request("DeregisterFunctionTargets", req, resp, cb);
     }
 
     /**
@@ -1087,6 +1160,18 @@ BGP带宽包必须传带宽包id
     }
 
     /**
+     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ManualRewriteRequest} req
+     * @param {function(string, ManualRewriteResponse):void} cb
+     * @public
+     */
+    ManualRewrite(req, cb) {
+        let resp = new ManualRewriteResponse();
+        this.request("ManualRewrite", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateLoadBalancer)用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
 注意：(1)指定可用区申请负载均衡、跨zone容灾(仅香港支持)【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】；(2)目前只有北京、上海、广州支持IPv6；(3)一个账号在每个地域的默认购买配额为：公网100个，内网100个。
 本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
@@ -1100,15 +1185,14 @@ BGP带宽包必须传带宽包id
     }
 
     /**
-     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ManualRewriteRequest} req
-     * @param {function(string, ManualRewriteResponse):void} cb
+     * 闲置实例是指创建超过7天后付费实例，且没有创建规则或创建规则没有绑定子机的负载均衡实例。
+     * @param {DescribeIdleLoadBalancersRequest} req
+     * @param {function(string, DescribeIdleLoadBalancersResponse):void} cb
      * @public
      */
-    ManualRewrite(req, cb) {
-        let resp = new ManualRewriteResponse();
-        this.request("ManualRewrite", req, resp, cb);
+    DescribeIdleLoadBalancers(req, cb) {
+        let resp = new DescribeIdleLoadBalancersResponse();
+        this.request("DescribeIdleLoadBalancers", req, resp, cb);
     }
 
 

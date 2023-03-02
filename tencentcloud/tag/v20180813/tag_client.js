@@ -21,22 +21,23 @@ const TagWithDelete = models.TagWithDelete;
 const DetachResourcesTagRequest = models.DetachResourcesTagRequest;
 const GetTagValuesResponse = models.GetTagValuesResponse;
 const AttachResourcesTagResponse = models.AttachResourcesTagResponse;
-const GetTagKeysResponse = models.GetTagKeysResponse;
+const AddProjectResponse = models.AddProjectResponse;
 const GetResourcesRequest = models.GetResourcesRequest;
 const DeleteTagRequest = models.DeleteTagRequest;
 const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
 const DescribeResourceTagsByTagKeysRequest = models.DescribeResourceTagsByTagKeysRequest;
 const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagsRequest = models.DescribeTagsRequest;
-const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
+const UpdateProjectRequest = models.UpdateProjectRequest;
 const DescribeResourcesByTagsUnionRequest = models.DescribeResourcesByTagsUnionRequest;
 const DeleteTagsResponse = models.DeleteTagsResponse;
 const ModifyResourcesTagValueResponse = models.ModifyResourcesTagValueResponse;
 const DescribeTagsResponse = models.DescribeTagsResponse;
 const DeleteTagsRequest = models.DeleteTagsRequest;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
-const GetTagsRequest = models.GetTagsRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const UnTagResourcesRequest = models.UnTagResourcesRequest;
 const DescribeTagsSeqResponse = models.DescribeTagsSeqResponse;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
@@ -47,7 +48,7 @@ const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByR
 const GetTagsResponse = models.GetTagsResponse;
 const ModifyResourcesTagValueRequest = models.ModifyResourcesTagValueRequest;
 const TagResource = models.TagResource;
-const GetTagKeysRequest = models.GetTagKeysRequest;
+const AddProjectRequest = models.AddProjectRequest;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const AddResourceTagRequest = models.AddResourceTagRequest;
@@ -56,28 +57,34 @@ const CreateTagRequest = models.CreateTagRequest;
 const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
 const DescribeTagsSeqRequest = models.DescribeTagsSeqRequest;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
+const ResourceIdTag = models.ResourceIdTag;
 const TagFilter = models.TagFilter;
+const Project = models.Project;
 const Tag = models.Tag;
 const AttachResourcesTagRequest = models.AttachResourcesTagRequest;
 const CreateTagResponse = models.CreateTagResponse;
 const FailedResource = models.FailedResource;
 const ResourceTagMapping = models.ResourceTagMapping;
+const GetTagKeysRequest = models.GetTagKeysRequest;
 const DetachResourcesTagResponse = models.DetachResourcesTagResponse;
 const GetResourcesResponse = models.GetResourcesResponse;
 const DescribeResourceTagsByResourceIdsSeqResponse = models.DescribeResourceTagsByResourceIdsSeqResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
-const ResourceIdTag = models.ResourceIdTag;
+const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesSeqRequest = models.DescribeTagValuesSeqRequest;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
+const GetTagKeysResponse = models.GetTagKeysResponse;
 const TagResourcesResponse = models.TagResourcesResponse;
 const CreateTagsRequest = models.CreateTagsRequest;
 const CreateTagsResponse = models.CreateTagsResponse;
+const GetTagsRequest = models.GetTagsRequest;
 const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 const TagResourcesRequest = models.TagResourcesRequest;
 const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
 const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
+const UpdateProjectResponse = models.UpdateProjectResponse;
 const DescribeResourceTagsByResourceIdsSeqRequest = models.DescribeResourceTagsByResourceIdsSeqRequest;
 const GetTagValuesRequest = models.GetTagValuesRequest;
 const ResourceTag = models.ResourceTag;
@@ -94,7 +101,7 @@ class TagClient extends AbstractClient {
     }
     
     /**
-     * 本接口用于删除一对标签键和标签值
+     * 本接口用于批量删除标签键和标签值。
      * @param {DeleteTagsRequest} req
      * @param {function(string, DeleteTagsResponse):void} cb
      * @public
@@ -226,14 +233,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * 查询标签键列表。
-     * @param {GetTagKeysRequest} req
-     * @param {function(string, GetTagKeysResponse):void} cb
+     * 创建项目
+     * @param {AddProjectRequest} req
+     * @param {function(string, AddProjectResponse):void} cb
      * @public
      */
-    GetTagKeys(req, cb) {
-        let resp = new GetTagKeysResponse();
-        this.request("GetTagKeys", req, resp, cb);
+    AddProject(req, cb) {
+        let resp = new AddProjectResponse();
+        this.request("AddProject", req, resp, cb);
     }
 
     /**
@@ -338,6 +345,17 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * 获取项目列表
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
      * 用于查询已建立的标签列表中的标签键。
 
      * @param {DescribeTagKeysRequest} req
@@ -394,6 +412,17 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * 修改项目
+     * @param {UpdateProjectRequest} req
+     * @param {function(string, UpdateProjectResponse):void} cb
+     * @public
+     */
+    UpdateProject(req, cb) {
+        let resp = new UpdateProjectResponse();
+        this.request("UpdateProject", req, resp, cb);
+    }
+
+    /**
      * 本接口用于修改资源关联的所有标签
      * @param {ModifyResourceTagsRequest} req
      * @param {function(string, ModifyResourceTagsResponse):void} cb
@@ -402,6 +431,17 @@ class TagClient extends AbstractClient {
     ModifyResourceTags(req, cb) {
         let resp = new ModifyResourceTagsResponse();
         this.request("ModifyResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 查询标签键列表。
+     * @param {GetTagKeysRequest} req
+     * @param {function(string, GetTagKeysResponse):void} cb
+     * @public
+     */
+    GetTagKeys(req, cb) {
+        let resp = new GetTagKeysResponse();
+        this.request("GetTagKeys", req, resp, cb);
     }
 
 

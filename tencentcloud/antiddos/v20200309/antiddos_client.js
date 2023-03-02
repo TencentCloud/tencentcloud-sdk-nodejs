@@ -55,22 +55,25 @@ const ModifyCCLevelPolicyResponse = models.ModifyCCLevelPolicyResponse;
 const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigRequest;
 const CreateCcBlackWhiteIpListResponse = models.CreateCcBlackWhiteIpListResponse;
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
+const CreateNewL7RulesResponse = models.CreateNewL7RulesResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
 const DescribeListProtectThresholdConfigRequest = models.DescribeListProtectThresholdConfigRequest;
 const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const CcBlackWhiteIpPolicy = models.CcBlackWhiteIpPolicy;
 const DescribeDDoSConnectLimitListResponse = models.DescribeDDoSConnectLimitListResponse;
+const L7RuleHealth = models.L7RuleHealth;
 const ModifyPacketFilterConfigResponse = models.ModifyPacketFilterConfigResponse;
 const DescribeCCLevelPolicyRequest = models.DescribeCCLevelPolicyRequest;
 const CreateWaterPrintConfigResponse = models.CreateWaterPrintConfigResponse;
 const DescribeOverviewAttackTrendRequest = models.DescribeOverviewAttackTrendRequest;
 const DescribeListBGPIPInstancesRequest = models.DescribeListBGPIPInstancesRequest;
+const DescribeNewL7RulesResponse = models.DescribeNewL7RulesResponse;
 const StaticPackRelation = models.StaticPackRelation;
 const CreatePortAclConfigRequest = models.CreatePortAclConfigRequest;
 const DescribeCCThresholdListResponse = models.DescribeCCThresholdListResponse;
 const DescribeL7RulesBySSLCertIdRequest = models.DescribeL7RulesBySSLCertIdRequest;
+const TagFilter = models.TagFilter;
 const DescribeListPacketFilterConfigResponse = models.DescribeListPacketFilterConfigResponse;
-const DeleteBlackWhiteIpListResponse = models.DeleteBlackWhiteIpListResponse;
 const CreateSchedulingDomainRequest = models.CreateSchedulingDomainRequest;
 const ModifyPortAclConfigRequest = models.ModifyPortAclConfigRequest;
 const BoundIpInfo = models.BoundIpInfo;
@@ -78,8 +81,9 @@ const CreateDDoSBlackWhiteIpListRequest = models.CreateDDoSBlackWhiteIpListReque
 const ModifyCCReqLimitPolicyRequest = models.ModifyCCReqLimitPolicyRequest;
 const DescribeOverviewDDoSTrendRequest = models.DescribeOverviewDDoSTrendRequest;
 const DisassociateDDoSEipAddressResponse = models.DisassociateDDoSEipAddressResponse;
+const DescribeBgpBizTrendRequest = models.DescribeBgpBizTrendRequest;
 const DeleteCCThresholdPolicyResponse = models.DeleteCCThresholdPolicyResponse;
-const DeleteBlackWhiteIpListRequest = models.DeleteBlackWhiteIpListRequest;
+const DescribeBizHttpStatusRequest = models.DescribeBizHttpStatusRequest;
 const SourceServer = models.SourceServer;
 const CCLevelPolicy = models.CCLevelPolicy;
 const DescribeOverviewIndexResponse = models.DescribeOverviewIndexResponse;
@@ -92,6 +96,7 @@ const DeleteWaterPrintKeyResponse = models.DeleteWaterPrintKeyResponse;
 const EipAddressPackRelation = models.EipAddressPackRelation;
 const CreateDDoSBlackWhiteIpListResponse = models.CreateDDoSBlackWhiteIpListResponse;
 const ModifyCcBlackWhiteIpListResponse = models.ModifyCcBlackWhiteIpListResponse;
+const DescribeNewL7RulesRequest = models.DescribeNewL7RulesRequest;
 const ProtocolBlockRelation = models.ProtocolBlockRelation;
 const DescribeListPacketFilterConfigRequest = models.DescribeListPacketFilterConfigRequest;
 const DescribeOverviewIndexRequest = models.DescribeOverviewIndexRequest;
@@ -101,6 +106,7 @@ const DescribeListDDoSGeoIPBlockConfigRequest = models.DescribeListDDoSGeoIPBloc
 const DescribeOverviewDDoSEventListResponse = models.DescribeOverviewDDoSEventListResponse;
 const CreateCcGeoIPBlockConfigResponse = models.CreateCcGeoIPBlockConfigResponse;
 const DescribeOverviewAttackTrendResponse = models.DescribeOverviewAttackTrendResponse;
+const HttpStatusMap = models.HttpStatusMap;
 const Layer7Rule = models.Layer7Rule;
 const ModifyPortAclConfigResponse = models.ModifyPortAclConfigResponse;
 const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
@@ -119,12 +125,13 @@ const DescribeBlackWhiteIpListRequest = models.DescribeBlackWhiteIpListRequest;
 const CreateCcGeoIPBlockConfigRequest = models.CreateCcGeoIPBlockConfigRequest;
 const DeletePortAclConfigResponse = models.DeletePortAclConfigResponse;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
+const DescribeNewL7RulesErrHealthResponse = models.DescribeNewL7RulesErrHealthResponse;
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
-const ModifyL7RulesEdgeRequest = models.ModifyL7RulesEdgeRequest;
 const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlockConfigResponse;
 const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
-const WaterPrintConfig = models.WaterPrintConfig;
+const DescribeBgpBizTrendResponse = models.DescribeBgpBizTrendResponse;
 const L4RuleSource = models.L4RuleSource;
+const DescribePendingRiskInfoResponse = models.DescribePendingRiskInfoResponse;
 const ProtocolBlockConfig = models.ProtocolBlockConfig;
 const DeleteCCPrecisionPolicyRequest = models.DeleteCCPrecisionPolicyRequest;
 const BGPIPInstance = models.BGPIPInstance;
@@ -152,30 +159,32 @@ const EipAddressRelation = models.EipAddressRelation;
 const DeleteDDoSBlackWhiteIpListRequest = models.DeleteDDoSBlackWhiteIpListRequest;
 const PackInfo = models.PackInfo;
 const CreateDDoSConnectLimitResponse = models.CreateDDoSConnectLimitResponse;
+const WaterPrintRelation = models.WaterPrintRelation;
 const IPLineInfo = models.IPLineInfo;
 const DescribeCcBlackWhiteIpListRequest = models.DescribeCcBlackWhiteIpListRequest;
 const DescribeListListenerResponse = models.DescribeListListenerResponse;
 const DeletePortAclConfigRequest = models.DeletePortAclConfigRequest;
-const ProtectThresholdRelation = models.ProtectThresholdRelation;
+const DescribePendingRiskInfoRequest = models.DescribePendingRiskInfoRequest;
 const CreatePortAclConfigResponse = models.CreatePortAclConfigResponse;
 const ModifyDDoSLevelResponse = models.ModifyDDoSLevelResponse;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
 const CreateCCPrecisionPolicyRequest = models.CreateCCPrecisionPolicyRequest;
 const ConnectLimitConfig = models.ConnectLimitConfig;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
-const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
+const AnycastOutPackRelation = models.AnycastOutPackRelation;
+const ProtectThresholdRelation = models.ProtectThresholdRelation;
 const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const IpSegment = models.IpSegment;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
 const ModifyDDoSThresholdRequest = models.ModifyDDoSThresholdRequest;
 const ModifyDDoSLevelRequest = models.ModifyDDoSLevelRequest;
+const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
 const DescribeListIPAlarmConfigResponse = models.DescribeListIPAlarmConfigResponse;
 const CcGeoIpPolicyNew = models.CcGeoIpPolicyNew;
 const ModifyDDoSBlackWhiteIpListResponse = models.ModifyDDoSBlackWhiteIpListResponse;
 const CCReqLimitPolicy = models.CCReqLimitPolicy;
 const DescribeCCPrecisionPlyListRequest = models.DescribeCCPrecisionPlyListRequest;
-const ModifyL7RulesEdgeResponse = models.ModifyL7RulesEdgeResponse;
 const ProtocolPort = models.ProtocolPort;
 const DescribeCCLevelListRequest = models.DescribeCCLevelListRequest;
 const ModifyCCThresholdPolicyRequest = models.ModifyCCThresholdPolicyRequest;
@@ -183,6 +192,7 @@ const DeleteDDoSGeoIPBlockConfigResponse = models.DeleteDDoSGeoIPBlockConfigResp
 const DescribeListDDoSAIRequest = models.DescribeListDDoSAIRequest;
 const DescribeListIPAlarmConfigRequest = models.DescribeListIPAlarmConfigRequest;
 const PortSegment = models.PortSegment;
+const CreateNewL7RulesRequest = models.CreateNewL7RulesRequest;
 const DescribeOverviewCCTrendResponse = models.DescribeOverviewCCTrendResponse;
 const ModifyCCReqLimitPolicyResponse = models.ModifyCCReqLimitPolicyResponse;
 const DefaultAlarmThreshold = models.DefaultAlarmThreshold;
@@ -191,10 +201,11 @@ const BGPInstanceSpecification = models.BGPInstanceSpecification;
 const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
 const CreateDDoSConnectLimitRequest = models.CreateDDoSConnectLimitRequest;
 const CreateWaterPrintKeyRequest = models.CreateWaterPrintKeyRequest;
-const WaterPrintRelation = models.WaterPrintRelation;
+const DescribeBizHttpStatusResponse = models.DescribeBizHttpStatusResponse;
 const InsL7Rules = models.InsL7Rules;
 const DescribeCCReqLimitPolicyListResponse = models.DescribeCCReqLimitPolicyListResponse;
 const DescribeListDDoSAIResponse = models.DescribeListDDoSAIResponse;
+const DescribeNewL7RulesErrHealthRequest = models.DescribeNewL7RulesErrHealthRequest;
 const ModifyCCPrecisionPolicyResponse = models.ModifyCCPrecisionPolicyResponse;
 const CcGeoIPBlockConfig = models.CcGeoIPBlockConfig;
 const ModifyDDoSSpeedLimitConfigRequest = models.ModifyDDoSSpeedLimitConfigRequest;
@@ -210,10 +221,11 @@ const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimitConfigRequest;
 const SpeedValue = models.SpeedValue;
 const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
-const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
+const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
 const ModifyCCPrecisionPolicyRequest = models.ModifyCCPrecisionPolicyRequest;
 const DeleteDDoSBlackWhiteIpListResponse = models.DeleteDDoSBlackWhiteIpListResponse;
 const CCThresholdPolicy = models.CCThresholdPolicy;
+const WaterPrintConfig = models.WaterPrintConfig;
 const ModifyDomainUsrNameResponse = models.ModifyDomainUsrNameResponse;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const CreateSchedulingDomainResponse = models.CreateSchedulingDomainResponse;
@@ -224,6 +236,7 @@ const CreateDDoSAIResponse = models.CreateDDoSAIResponse;
 const DDoSGeoIPBlockConfigRelation = models.DDoSGeoIPBlockConfigRelation;
 const DescribeListProtocolBlockConfigRequest = models.DescribeListProtocolBlockConfigRequest;
 const DescribeListBGPInstancesResponse = models.DescribeListBGPInstancesResponse;
+const TagInfo = models.TagInfo;
 const DescribeDDoSTrendRequest = models.DescribeDDoSTrendRequest;
 const DeleteCCRequestLimitPolicyResponse = models.DeleteCCRequestLimitPolicyResponse;
 const CreateCcBlackWhiteIpListRequest = models.CreateCcBlackWhiteIpListRequest;
@@ -293,6 +306,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * 查询账号维度待处理风险信息，包括是否为付费用户，查询攻击中、封堵中、过期资源数量等
+     * @param {DescribePendingRiskInfoRequest} req
+     * @param {function(string, DescribePendingRiskInfoResponse):void} cb
+     * @public
+     */
+    DescribePendingRiskInfo(req, cb) {
+        let resp = new DescribePendingRiskInfoResponse();
+        this.request("DescribePendingRiskInfo", req, resp, cb);
+    }
+
+    /**
      * 查询与证书ID对于域名匹配的七层规则
      * @param {DescribeL7RulesBySSLCertIdRequest} req
      * @param {function(string, DescribeL7RulesBySSLCertIdResponse):void} cb
@@ -337,6 +361,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * 获取L7转发规则健康检查异常结果列表
+     * @param {DescribeNewL7RulesErrHealthRequest} req
+     * @param {function(string, DescribeNewL7RulesErrHealthResponse):void} cb
+     * @public
+     */
+    DescribeNewL7RulesErrHealth(req, cb) {
+        let resp = new DescribeNewL7RulesErrHealthResponse();
+        this.request("DescribeNewL7RulesErrHealth", req, resp, cb);
+    }
+
+    /**
      * 获取CC四层黑白名单列表
      * @param {DescribeCcBlackWhiteIpListRequest} req
      * @param {function(string, DescribeCcBlackWhiteIpListResponse):void} cb
@@ -359,7 +394,7 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * 获取CC防护等级列表
+     * 获取边界防护CC防护等级列表
      * @param {DescribeCCLevelListRequest} req
      * @param {function(string, DescribeCCLevelListResponse):void} cb
      * @public
@@ -444,6 +479,17 @@ class AntiddosClient extends AbstractClient {
     AssociateDDoSEipLoadBalancer(req, cb) {
         let resp = new AssociateDDoSEipLoadBalancerResponse();
         this.request("AssociateDDoSEipLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * 添加7层转发规则
+     * @param {CreateNewL7RulesRequest} req
+     * @param {function(string, CreateNewL7RulesResponse):void} cb
+     * @public
+     */
+    CreateNewL7Rules(req, cb) {
+        let resp = new CreateNewL7RulesResponse();
+        this.request("CreateNewL7Rules", req, resp, cb);
     }
 
     /**
@@ -590,6 +636,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * 高防IP获取7层规则
+     * @param {DescribeNewL7RulesRequest} req
+     * @param {function(string, DescribeNewL7RulesResponse):void} cb
+     * @public
+     */
+    DescribeNewL7Rules(req, cb) {
+        let resp = new DescribeNewL7RulesResponse();
+        this.request("DescribeNewL7Rules", req, resp, cb);
+    }
+
+    /**
      * 修改CC防护等级
      * @param {ModifyCCLevelPolicyRequest} req
      * @param {function(string, ModifyCCLevelPolicyResponse):void} cb
@@ -668,6 +725,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * 获取高防包流量折线图
+     * @param {DescribeBgpBizTrendRequest} req
+     * @param {function(string, DescribeBgpBizTrendResponse):void} cb
+     * @public
+     */
+    DescribeBgpBizTrend(req, cb) {
+        let resp = new DescribeBgpBizTrendResponse();
+        this.request("DescribeBgpBizTrend", req, resp, cb);
+    }
+
+    /**
      * 获取CC频率限制策略列表
      * @param {DescribeCCReqLimitPolicyListRequest} req
      * @param {function(string, DescribeCCReqLimitPolicyListResponse):void} cb
@@ -712,8 +780,18 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * 获取高防包资产实例列表
+     * 获取业务流量状态码统计列表
+     * @param {DescribeBizHttpStatusRequest} req
+     * @param {function(string, DescribeBizHttpStatusResponse):void} cb
+     * @public
+     */
+    DescribeBizHttpStatus(req, cb) {
+        let resp = new DescribeBizHttpStatusResponse();
+        this.request("DescribeBizHttpStatus", req, resp, cb);
+    }
 
+    /**
+     * 获取高防包资产实例列表
      * @param {DescribeListBGPInstancesRequest} req
      * @param {function(string, DescribeListBGPInstancesResponse):void} cb
      * @public
@@ -721,17 +799,6 @@ class AntiddosClient extends AbstractClient {
     DescribeListBGPInstances(req, cb) {
         let resp = new DescribeListBGPInstancesResponse();
         this.request("DescribeListBGPInstances", req, resp, cb);
-    }
-
-    /**
-     * 删除DDoS防护的IP黑白名单
-     * @param {DeleteBlackWhiteIpListRequest} req
-     * @param {function(string, DeleteBlackWhiteIpListResponse):void} cb
-     * @public
-     */
-    DeleteBlackWhiteIpList(req, cb) {
-        let resp = new DeleteBlackWhiteIpListResponse();
-        this.request("DeleteBlackWhiteIpList", req, resp, cb);
     }
 
     /**
@@ -952,17 +1019,6 @@ class AntiddosClient extends AbstractClient {
     DescribeDDoSTrend(req, cb) {
         let resp = new DescribeDDoSTrendResponse();
         this.request("DescribeDDoSTrend", req, resp, cb);
-    }
-
-    /**
-     * 修改边界防护L7转发规则
-     * @param {ModifyL7RulesEdgeRequest} req
-     * @param {function(string, ModifyL7RulesEdgeResponse):void} cb
-     * @public
-     */
-    ModifyL7RulesEdge(req, cb) {
-        let resp = new ModifyL7RulesEdgeResponse();
-        this.request("ModifyL7RulesEdge", req, resp, cb);
     }
 
     /**

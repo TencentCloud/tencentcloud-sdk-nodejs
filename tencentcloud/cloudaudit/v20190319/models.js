@@ -143,12 +143,73 @@ class GetAttributeKeyRequest extends  AbstractModel {
 }
 
 /**
+ * 跟踪集存储信息
+ * @class
+ */
+class Storage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储类型（目前支持 cos、cls）
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * 存储所在地域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 存储名称(cos：存储名称为用户自定义的存储桶名称，不包含"-APPID"，仅支持小写字母、数字以及中划线"-"的组合，不能超过50字符，且不支持中划线"-"开头或结尾； cls：存储名称为日志主题id，字符长度为1-50个字符)
+         * @type {string || null}
+         */
+        this.StorageName = null;
+
+        /**
+         * 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符
+         * @type {string || null}
+         */
+        this.StoragePrefix = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.StorageName = 'StorageName' in params ? params.StorageName : null;
+        this.StoragePrefix = 'StoragePrefix' in params ? params.StoragePrefix : null;
+
+    }
+}
+
+/**
  * DescribeAuditTracks返回参数结构体
  * @class
  */
 class DescribeAuditTracksResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 跟踪集列表
+         * @type {Array.<Tracks> || null}
+         */
+        this.Tracks = null;
+
+        /**
+         * 总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -165,7 +226,45 @@ class DescribeAuditTracksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Tracks) {
+            this.Tracks = new Array();
+            for (let z in params.Tracks) {
+                let obj = new Tracks();
+                obj.deserialize(params.Tracks[z]);
+                this.Tracks.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartLogging请求参数结构体
+ * @class
+ */
+class StartLoggingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 跟踪集名称
+         * @type {string || null}
+         */
+        this.AuditName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
 
     }
 }
@@ -263,7 +362,7 @@ class DescribeEventsResponse extends  AbstractModel {
         super();
 
         /**
-         * 日志集合是否结束
+         * 日志集合是否结束。true表示结束，无需进行翻页。
          * @type {boolean || null}
          */
         this.ListOver = null;
@@ -282,7 +381,7 @@ class DescribeEventsResponse extends  AbstractModel {
         this.Events = null;
 
         /**
-         * 总数
+         * 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -435,18 +534,18 @@ class LookUpEventsRequest extends  AbstractModel {
 }
 
 /**
- * StartLogging请求参数结构体
+ * DescribeAuditTrack请求参数结构体
  * @class
  */
-class StartLoggingRequest extends  AbstractModel {
+class DescribeAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 跟踪集名称
-         * @type {string || null}
+         * 跟踪集 ID
+         * @type {number || null}
          */
-        this.AuditName = null;
+        this.TrackId = null;
 
     }
 
@@ -457,7 +556,7 @@ class StartLoggingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -582,6 +681,18 @@ class DescribeAuditTracksRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 页码
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * 每页数目
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -591,6 +702,90 @@ class DescribeAuditTracksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * 跟踪集列表
+ * @class
+ */
+class Tracks extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 跟踪集名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 跟踪事件类型（读：Read；写：Write；全部：*）
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 跟踪事件所属产品（如：cos，全部：*）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 跟踪集状态（未开启：0；开启：1）
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 跟踪事件接口名列表（全部：[*]）
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * 数据投递存储（目前支持 cos、cls）
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 跟踪集创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 跟踪集 ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -638,6 +833,12 @@ class DeleteAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 跟踪集 ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
     }
 
     /**
@@ -647,6 +848,7 @@ class DeleteAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -829,6 +1031,12 @@ class CreateAuditTrackResponse extends  AbstractModel {
         super();
 
         /**
+         * 跟踪集 ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -843,6 +1051,7 @@ class CreateAuditTrackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -913,6 +1122,54 @@ class ModifyAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 跟踪集 ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+        /**
+         * 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 跟踪事件类型（读：Read；写：Write；全部：*）
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 跟踪集状态（未开启：0；开启：1）
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个）
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * 数据投递存储（目前支持 cos、cls）
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能)
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
     }
 
     /**
@@ -922,6 +1179,19 @@ class ModifyAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
 
     }
 }
@@ -969,6 +1239,48 @@ class CreateAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 跟踪事件类型（读：Read；写：Write；全部：*）
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 跟踪集状态（未开启：0；开启：1）
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个）
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * 数据投递存储（目前支持 cos、cls）
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能)
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
     }
 
     /**
@@ -978,6 +1290,18 @@ class CreateAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
 
     }
 }
@@ -1652,6 +1976,96 @@ class CosRegionInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditTrack返回参数结构体
+ * @class
+ */
+class DescribeAuditTrackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 跟踪集名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 跟踪事件类型（读：Read；写：Write；全部：*）
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 跟踪事件所属产品（如：cos，全部：*）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 跟踪集状态（未开启：0；开启：1）
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 跟踪事件接口名列表（全部：[*]）
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * 数据投递存储（目前支持 cos、cls）
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 跟踪集创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAudit返回参数结构体
  * @class
  */
@@ -1971,16 +2385,19 @@ module.exports = {
     StopLoggingRequest: StopLoggingRequest,
     CmqRegionInfo: CmqRegionInfo,
     GetAttributeKeyRequest: GetAttributeKeyRequest,
+    Storage: Storage,
     DescribeAuditTracksResponse: DescribeAuditTracksResponse,
+    StartLoggingRequest: StartLoggingRequest,
     DeleteAuditResponse: DeleteAuditResponse,
     ModifyAuditTrackResponse: ModifyAuditTrackResponse,
     InquireAuditCreditRequest: InquireAuditCreditRequest,
     DescribeEventsResponse: DescribeEventsResponse,
     ListCosEnableRegionResponse: ListCosEnableRegionResponse,
     LookUpEventsRequest: LookUpEventsRequest,
-    StartLoggingRequest: StartLoggingRequest,
+    DescribeAuditTrackRequest: DescribeAuditTrackRequest,
     UpdateAuditRequest: UpdateAuditRequest,
     DescribeAuditTracksRequest: DescribeAuditTracksRequest,
+    Tracks: Tracks,
     CreateAuditResponse: CreateAuditResponse,
     DeleteAuditTrackRequest: DeleteAuditTrackRequest,
     StartLoggingResponse: StartLoggingResponse,
@@ -2008,6 +2425,7 @@ module.exports = {
     LookUpEventsResponse: LookUpEventsResponse,
     DeleteAuditTrackResponse: DeleteAuditTrackResponse,
     CosRegionInfo: CosRegionInfo,
+    DescribeAuditTrackResponse: DescribeAuditTrackResponse,
     DescribeAuditResponse: DescribeAuditResponse,
     Event: Event,
     AuditSummary: AuditSummary,

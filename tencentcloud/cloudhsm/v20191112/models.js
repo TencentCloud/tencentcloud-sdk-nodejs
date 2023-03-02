@@ -118,13 +118,13 @@ class DescribeSubnetRequest extends  AbstractModel {
         super();
 
         /**
-         * 返回数量。
+         * 返回数量。Limit需要在[1, 100]之间。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 偏移量。
+         * 偏移量。偏移量最小为0。
          * @type {number || null}
          */
         this.Offset = null;
@@ -219,6 +219,7 @@ class DescribeSupportedHsmResponse extends  AbstractModel {
 
         /**
          * 当前地域所支持的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DeviceInfo> || null}
          */
         this.DeviceTypes = null;
@@ -273,7 +274,7 @@ class InquiryPriceBuyVsmRequest extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 商品的时间大小
+         * 商品的时间大小，整型参数，举例：当TimeSpan为1，TImeUnit为m时，表示询价购买时长为1个月时的价格
          * @type {string || null}
          */
         this.TimeSpan = null;
@@ -296,6 +297,12 @@ class InquiryPriceBuyVsmRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * Hsm服务类型，可选值virtualization、physical、GHSM、EHSM、SHSM
+         * @type {string || null}
+         */
+        this.HsmType = null;
+
     }
 
     /**
@@ -311,6 +318,7 @@ class InquiryPriceBuyVsmRequest extends  AbstractModel {
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.HsmType = 'HsmType' in params ? params.HsmType : null;
 
     }
 }
@@ -526,6 +534,12 @@ class DescribeSupportedHsmRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Hsm类型，可选值all、virtulization、GHSM、EHSM、SHSM
+         * @type {string || null}
+         */
+        this.HsmType = null;
+
     }
 
     /**
@@ -535,6 +549,7 @@ class DescribeSupportedHsmRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.HsmType = 'HsmType' in params ? params.HsmType : null;
 
     }
 }
@@ -744,7 +759,7 @@ class ResourceInfo extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * 资源状态
+         * 资源状态，1-正常，2-隔离，3-销毁
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -779,7 +794,7 @@ class ResourceInfo extends  AbstractModel {
         this.Model = null;
 
         /**
-         * 资源类型
+         * 云加密机类型id
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -800,7 +815,7 @@ class ResourceInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 过期时间
+         * 过期时间（Epoch Unix Timestamp）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -943,13 +958,13 @@ class DescribeVpcRequest extends  AbstractModel {
         super();
 
         /**
-         * 返回偏移量。
+         * 返回偏移量。Offset最小为0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量。
+         * 返回数量。Limit需要在[1, 100]之间。
          * @type {number || null}
          */
         this.Limit = null;
@@ -1140,7 +1155,7 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 过期时间
+         * 资源过期时间，以时间戳形式展示。
          * @type {number || null}
          */
         this.ExpireTime = null;
@@ -1453,7 +1468,7 @@ class InquiryPriceBuyVsmResponse extends  AbstractModel {
         super();
 
         /**
-         * 原始总金额
+         * 原始总金额，浮点型参数，精确到小数点后两位，如：2000.99
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1467,21 +1482,21 @@ class InquiryPriceBuyVsmResponse extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * 商品的时间大小
+         * 商品的时间大小，整型参数，举例：当TimeSpan为1，TImeUnit为m时，表示询价购买时长为1个月时的价格
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TimeSpan = null;
 
         /**
-         * 商品的时间单位
+         * 商品的时间单位，m表示月，y表示年
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * 应付总金额
+         * 应付总金额，浮点型参数，精确到小数点后两位，如：2000.99
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1714,6 +1729,12 @@ class DescribeVsmsRequest extends  AbstractModel {
          */
         this.Manufacturer = null;
 
+        /**
+         * Hsm服务类型，可选virtualization、physical、GHSM、EHSM、SHSM、all
+         * @type {string || null}
+         */
+        this.HsmType = null;
+
     }
 
     /**
@@ -1736,6 +1757,7 @@ class DescribeVsmsRequest extends  AbstractModel {
             }
         }
         this.Manufacturer = 'Manufacturer' in params ? params.Manufacturer : null;
+        this.HsmType = 'HsmType' in params ? params.HsmType : null;
 
     }
 }

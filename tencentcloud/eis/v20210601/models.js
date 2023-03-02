@@ -68,7 +68,7 @@ class RuntimeMC extends  AbstractModel {
         super();
 
         /**
-         * 运行时id
+         * 环境id
          * @type {number || null}
          */
         this.RuntimeId = null;
@@ -80,19 +80,19 @@ class RuntimeMC extends  AbstractModel {
         this.Uin = null;
 
         /**
-         * 运行时名称，用户输入，同一uin内唯一
+         * 环境名称，用户输入，同一uin内唯一
          * @type {string || null}
          */
         this.DisplayName = null;
 
         /**
-         * 运行时所在地域，tianjin，beijiing，guangzhou等
+         * 环境所在地域，tianjin，beijiing，guangzhou等
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 运行时类型：0: sandbox, 1:shared, 2:private
+         * 环境类型：0: sandbox, 1:shared, 2:private 3: trial
          * @type {number || null}
          */
         this.Type = null;
@@ -104,25 +104,25 @@ class RuntimeMC extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 运行时创建时间
+         * 环境创建时间
          * @type {number || null}
          */
         this.CreatedAt = null;
 
         /**
-         * 运行时更新时间
+         * 环境更新时间
          * @type {number || null}
          */
         this.UpdatedAt = null;
 
         /**
-         * 运行时资源配置，worker总配额，0:0vCore0G, 1:1vCore2G, 2:2vCore4G, 4:4vCore8G, 8:8vCore16G, 12:12vCore24G, 16:16vCore32G, 100:unlimited
+         * 环境资源配置，worker总配额，0:0vCore0G, 1:1vCore2G, 2:2vCore4G, 4:4vCore8G, 8:8vCore16G, 12:12vCore24G, 16:16vCore32G, 100:unlimited
          * @type {number || null}
          */
         this.WorkerSize = null;
 
         /**
-         * 运行时资源配置，worker副本数
+         * 环境资源配置，worker副本数
          * @type {number || null}
          */
         this.WorkerReplica = null;
@@ -157,6 +157,69 @@ class RuntimeMC extends  AbstractModel {
          */
         this.MemoryLimit = null;
 
+        /**
+         * 环境过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExpiredAt = null;
+
+        /**
+         * 收费类型：0:缺省，1:自助下单页购买(支持续费/升配等操作)，2:代销下单页购买
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * 资源限制类型：0:无限制，1:有限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ResourceLimitType = null;
+
+        /**
+         * 是否开启自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AutoRenewal = null;
+
+        /**
+         * 扩展组件列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RuntimeExtensionMC> || null}
+         */
+        this.WorkerExtensions = null;
+
+        /**
+         * 环境类型：0: sandbox, 1:shared, 2:private 3: trial
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuntimeType = null;
+
+        /**
+         * 环境运行类型：0:运行时类型、1:api类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuntimeClass = null;
+
+        /**
+         * 已使用出带宽 Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BandwidthOutUsed = null;
+
+        /**
+         * 出带宽上限 Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BandwidthOutLimit = null;
+
     }
 
     /**
@@ -181,6 +244,23 @@ class RuntimeMC extends  AbstractModel {
         this.CpuLimit = 'CpuLimit' in params ? params.CpuLimit : null;
         this.MemoryUsed = 'MemoryUsed' in params ? params.MemoryUsed : null;
         this.MemoryLimit = 'MemoryLimit' in params ? params.MemoryLimit : null;
+        this.ExpiredAt = 'ExpiredAt' in params ? params.ExpiredAt : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.ResourceLimitType = 'ResourceLimitType' in params ? params.ResourceLimitType : null;
+        this.AutoRenewal = 'AutoRenewal' in params ? params.AutoRenewal : null;
+
+        if (params.WorkerExtensions) {
+            this.WorkerExtensions = new Array();
+            for (let z in params.WorkerExtensions) {
+                let obj = new RuntimeExtensionMC();
+                obj.deserialize(params.WorkerExtensions[z]);
+                this.WorkerExtensions.push(obj);
+            }
+        }
+        this.RuntimeType = 'RuntimeType' in params ? params.RuntimeType : null;
+        this.RuntimeClass = 'RuntimeClass' in params ? params.RuntimeClass : null;
+        this.BandwidthOutUsed = 'BandwidthOutUsed' in params ? params.BandwidthOutUsed : null;
+        this.BandwidthOutLimit = 'BandwidthOutLimit' in params ? params.BandwidthOutLimit : null;
 
     }
 }
@@ -279,6 +359,27 @@ class ListRuntimeDeployedInstancesMCRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 1:3.0版本新控制台传1；否则传0
+         * @type {number || null}
+         */
+        this.ApiVersion = null;
+
+        /**
+         * -1:不按项目筛选，获取所有
+>=0: 按项目id筛选
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * -2: 不按状态筛选，获取所有
+0: 运行中
+2: 已停止
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -294,6 +395,79 @@ class ListRuntimeDeployedInstancesMCRequest extends  AbstractModel {
         this.SortType = 'SortType' in params ? params.SortType : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ApiVersion = 'ApiVersion' in params ? params.ApiVersion : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 运行环境扩展组件
+ * @class
+ */
+class RuntimeExtensionMC extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩展组件类型：0:cdc
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 部署规格vcore数
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 副本数
+         * @type {number || null}
+         */
+        this.Replica = null;
+
+        /**
+         * 扩展组件名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 状态 1:未启用 2:已启用
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 修改时间
+         * @type {number || null}
+         */
+        this.UpdatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Replica = 'Replica' in params ? params.Replica : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
     }
 }
@@ -410,6 +584,12 @@ class ListRuntimesMCRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 环境运行类型：0:运行时类型、1:api类型
+         * @type {number || null}
+         */
+        this.RuntimeClass = null;
+
     }
 
     /**
@@ -419,6 +599,7 @@ class ListRuntimesMCRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RuntimeClass = 'RuntimeClass' in params ? params.RuntimeClass : null;
 
     }
 }
@@ -432,16 +613,22 @@ class GetRuntimeMCRequest extends  AbstractModel {
         super();
 
         /**
-         * 运行时id
+         * 环境id
          * @type {number || null}
          */
         this.RuntimeId = null;
 
         /**
-         * 运行时地域
+         * 环境地域
          * @type {string || null}
          */
         this.Zone = null;
+
+        /**
+         * 环境运行类型：0:运行时类型、1:api类型
+         * @type {number || null}
+         */
+        this.RuntimeClass = null;
 
     }
 
@@ -454,6 +641,7 @@ class GetRuntimeMCRequest extends  AbstractModel {
         }
         this.RuntimeId = 'RuntimeId' in params ? params.RuntimeId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.RuntimeClass = 'RuntimeClass' in params ? params.RuntimeClass : null;
 
     }
 }
@@ -539,6 +727,12 @@ class GetRuntimeResourceMonitorMetricMCRequest extends  AbstractModel {
          */
         this.Interval = null;
 
+        /**
+         * 环境运行类型：0:运行时类型、1:api类型
+         * @type {number || null}
+         */
+        this.RuntimeClass = null;
+
     }
 
     /**
@@ -554,6 +748,7 @@ class GetRuntimeResourceMonitorMetricMCRequest extends  AbstractModel {
         this.MetricType = 'MetricType' in params ? params.MetricType : null;
         this.RateType = 'RateType' in params ? params.RateType : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
+        this.RuntimeClass = 'RuntimeClass' in params ? params.RuntimeClass : null;
 
     }
 }
@@ -567,40 +762,65 @@ class AbstractRuntimeMC extends  AbstractModel {
         super();
 
         /**
-         * 运行时id
+         * 环境id
          * @type {number || null}
          */
         this.RuntimeId = null;
 
         /**
-         * 运行时名称，用户输入，同一uin内唯一
+         * 环境名称，用户输入，同一uin内唯一
          * @type {string || null}
          */
         this.DisplayName = null;
 
         /**
-         * 运行时类型：0: sandbox, 1:shared, 2:private
+         * 环境类型：0: sandbox, 1:shared, 2:private
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 运行时所在地域，tianjin，beijiing，guangzhou等
+         * 环境所在地域，tianjin，beijiing，guangzhou等
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 运行时所在地域，tianjin，beijiing，guangzhou等（同Zone）
+         * 环境所在地域，tianjin，beijiing，guangzhou等（同Zone）
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 运行时应用listener地址后缀
+         * 环境应用listener地址后缀
          * @type {string || null}
          */
         this.Addr = null;
+
+        /**
+         * 环境状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 环境过期时间
+         * @type {number || null}
+         */
+        this.ExpiredAt = null;
+
+        /**
+         * 环境运行类型：0:运行时类型、1:api类型
+         * @type {number || null}
+         */
+        this.RuntimeClass = null;
+
+        /**
+         * 是否已在当前环境发布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Deployed = null;
 
     }
 
@@ -617,6 +837,10 @@ class AbstractRuntimeMC extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Addr = 'Addr' in params ? params.Addr : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExpiredAt = 'ExpiredAt' in params ? params.ExpiredAt : null;
+        this.RuntimeClass = 'RuntimeClass' in params ? params.RuntimeClass : null;
+        this.Deployed = 'Deployed' in params ? params.Deployed : null;
 
     }
 }
@@ -745,6 +969,12 @@ class RuntimeDeployedInstanceMC extends  AbstractModel {
          */
         this.ProjectType = null;
 
+        /**
+         * 应用版本：0:旧版 1:3.0新控制台
+         * @type {number || null}
+         */
+        this.ProjectVersion = null;
+
     }
 
     /**
@@ -765,6 +995,7 @@ class RuntimeDeployedInstanceMC extends  AbstractModel {
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
+        this.ProjectVersion = 'ProjectVersion' in params ? params.ProjectVersion : null;
 
     }
 }
@@ -774,6 +1005,7 @@ module.exports = {
     RuntimeMC: RuntimeMC,
     GetRuntimeResourceMonitorMetricMCResponse: GetRuntimeResourceMonitorMetricMCResponse,
     ListRuntimeDeployedInstancesMCRequest: ListRuntimeDeployedInstancesMCRequest,
+    RuntimeExtensionMC: RuntimeExtensionMC,
     ListDeployableRuntimesMCResponse: ListDeployableRuntimesMCResponse,
     GetRuntimeMCResponse: GetRuntimeMCResponse,
     ListDeployableRuntimesMCRequest: ListDeployableRuntimesMCRequest,

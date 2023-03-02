@@ -172,30 +172,40 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * 用于表示数据存储的相关信息
+ * 音频说话人声纹识别返回结果
  * @class
  */
-class StorageInfo extends  AbstractModel {
+class AudioResultDetailSpeakerResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)；该字段应当与传入的访问类型相对应，可用于强校验并方便系统快速识别访问地址；若不传入此参数，则默认值为URL，此时系统将自动判定访问地址类型。
+         * 该字段用于返回检测结果需要检测的内容类型。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Type = null;
+        this.Label = null;
 
         /**
-         * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空，该参数与BucketInfo参数须传入其中之一
-         * @type {string || null}
+         * 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Url = null;
+        this.Score = null;
 
         /**
-         * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空，该参数与Url参数须传入其中之一。
-         * @type {BucketInfo || null}
+         * 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.BucketInfo = null;
+        this.StartTime = null;
+
+        /**
+         * 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -206,14 +216,10 @@ class StorageInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.BucketInfo) {
-            let obj = new BucketInfo();
-            obj.deserialize(params.BucketInfo)
-            this.BucketInfo = obj;
-        }
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -239,7 +245,7 @@ class CreateAudioModerationSyncTaskRequest extends  AbstractModel {
         this.DataId = null;
 
         /**
-         * 音频文件资源格式，当前为mp3，wav，请按照实际文件格式填入
+         * 音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。
          * @type {string || null}
          */
         this.FileFormat = null;
@@ -252,15 +258,15 @@ class CreateAudioModerationSyncTaskRequest extends  AbstractModel {
 
         /**
          * 数据Base64编码，短音频同步接口仅传入可音频内容；
-支持范围：文件大小不能超过5M，时长不可超过60s，码率范围为8-16Kbps；
-支持格式：wav、mp3
+支持范围：文件大小不能超过5M，时长不可超过60s；
+支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。
          * @type {string || null}
          */
         this.FileContent = null;
 
         /**
          * 音频资源访问链接，与FileContent参数必须二选一输入；
-支持范围：同FileContent；
+支持范围及格式：同FileContent；
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -511,7 +517,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TaskLabel> || null}
          */
@@ -567,6 +573,13 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.UpdatedAt = null;
 
         /**
+         * 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -617,6 +630,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.ErrorDescription = 'ErrorDescription' in params ? params.ErrorDescription : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -734,6 +748,53 @@ class TaskInput extends  AbstractModel {
 }
 
 /**
+ * 用于表示数据存储的相关信息
+ * @class
+ */
+class StorageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)；该字段应当与传入的访问类型相对应，可用于强校验并方便系统快速识别访问地址；若不传入此参数，则默认值为URL，此时系统将自动判定访问地址类型。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空，该参数与BucketInfo参数须传入其中之一
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空，该参数与Url参数须传入其中之一。
+         * @type {BucketInfo || null}
+         */
+        this.BucketInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.BucketInfo) {
+            let obj = new BucketInfo();
+            obj.deserialize(params.BucketInfo)
+            this.BucketInfo = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeTaskDetail请求参数结构体
  * @class
  */
@@ -836,6 +897,42 @@ Block 建议屏蔽；
         this.MoanResults = null;
 
         /**
+         * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AudioResultDetailLanguageResult> || null}
+         */
+        this.LanguageResults = null;
+
+        /**
+         * 音频中说话人识别返回结果；
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AudioResultDetailSpeakerResult> || null}
+         */
+        this.SpeakerResults = null;
+
+        /**
+         * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
+        /**
+         * 识别音频时长，单位为毫秒；
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Duration = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -874,6 +971,35 @@ Block 建议屏蔽；
                 this.MoanResults.push(obj);
             }
         }
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.LanguageResults) {
+            this.LanguageResults = new Array();
+            for (let z in params.LanguageResults) {
+                let obj = new AudioResultDetailLanguageResult();
+                obj.deserialize(params.LanguageResults[z]);
+                this.LanguageResults.push(obj);
+            }
+        }
+
+        if (params.SpeakerResults) {
+            this.SpeakerResults = new Array();
+            for (let z in params.SpeakerResults) {
+                let obj = new AudioResultDetailSpeakerResult();
+                obj.deserialize(params.SpeakerResults[z]);
+                this.SpeakerResults.push(obj);
+            }
+        }
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1114,14 +1240,14 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
         this.Score = null;
 
         /**
-         * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为毫秒。
+         * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为毫秒。
+         * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1148,6 +1274,51 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
+
+    }
+}
+
+/**
+ * 识别类标签结果信息
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可能的取值有：Teenager 、Gender
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 识别标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1182,13 +1353,13 @@ class MoanResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 违规事件开始时间，单位为毫秒（ms）；
+         * 违规事件开始时间，单位为秒（s）；
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 违规事件结束时间，单位为毫秒（ms）；
+         * 违规事件结束时间，单位为秒（s）；
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1421,6 +1592,13 @@ class AudioResult extends  AbstractModel {
          */
         this.SubLabel = null;
 
+        /**
+         * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
     }
 
     /**
@@ -1467,6 +1645,15 @@ class AudioResult extends  AbstractModel {
         }
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
 
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
+
     }
 }
 
@@ -1492,13 +1679,13 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         this.Score = null;
 
         /**
-         * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。
+         * 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为秒。
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。
+         * 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为秒。
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1516,6 +1703,12 @@ class AudioResultDetailMoanResult extends  AbstractModel {
          */
         this.SubLabel = null;
 
+        /**
+         * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
     }
 
     /**
@@ -1531,6 +1724,7 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
     }
 }
@@ -1712,6 +1906,61 @@ class MediaInfo extends  AbstractModel {
 }
 
 /**
+ * 音频切片识别标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 根据Label字段确定具体名称：
+当Label 为Teenager 时 Name可能取值有：Teenager 
+当Label 为Gender 时 Name可能取值有：Male 、Female
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 识别开始偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 识别结束偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 表示声音段信息
  * @class
  */
@@ -1756,7 +2005,7 @@ class AudioSegments extends  AbstractModel {
 module.exports = {
     TextResult: TextResult,
     DescribeTasksRequest: DescribeTasksRequest,
-    StorageInfo: StorageInfo,
+    AudioResultDetailSpeakerResult: AudioResultDetailSpeakerResult,
     CreateAudioModerationSyncTaskRequest: CreateAudioModerationSyncTaskRequest,
     BucketInfo: BucketInfo,
     CreateAudioModerationTaskResponse: CreateAudioModerationTaskResponse,
@@ -1765,6 +2014,7 @@ module.exports = {
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     CreateAudioModerationTaskRequest: CreateAudioModerationTaskRequest,
     TaskInput: TaskInput,
+    StorageInfo: StorageInfo,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     CreateAudioModerationSyncTaskResponse: CreateAudioModerationSyncTaskResponse,
     TaskLabel: TaskLabel,
@@ -1772,6 +2022,7 @@ module.exports = {
     InputInfo: InputInfo,
     DescribeTasksResponse: DescribeTasksResponse,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
+    RecognitionResult: RecognitionResult,
     MoanResult: MoanResult,
     CancelTaskResponse: CancelTaskResponse,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
@@ -1779,6 +2030,7 @@ module.exports = {
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,
     TaskData: TaskData,
     MediaInfo: MediaInfo,
+    Tag: Tag,
     AudioSegments: AudioSegments,
 
 }

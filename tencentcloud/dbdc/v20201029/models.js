@@ -17,40 +17,72 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 集群设备组信息。
+ * 集群容量信息。
  * @class
  */
-class InstanceDeviceInfo extends  AbstractModel {
+class InstanceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 集群状态，0：运行中，1：不在运行
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.Status = null;
 
         /**
-         * 读写设备组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DeviceInfo> || null}
+         * 读写集群剩余内存容量，单位GB
+         * @type {number || null}
          */
-        this.ReadWriteDevice = null;
+        this.ReadWriteTotalLeaveMemory = null;
 
         /**
-         * 只读设备组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DeviceInfo> || null}
+         * 读写集群剩余磁盘容量，单位GB
+         * @type {number || null}
          */
-        this.ReadOnlyDevice = null;
+        this.ReadWriteTotalLeaveDisk = null;
 
         /**
-         * 空闲设备组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DeviceInfo> || null}
+         * 读写集群总内存容量，单位GB
+         * @type {number || null}
          */
-        this.FreeDevice = null;
+        this.ReadWriteTotalMemory = null;
+
+        /**
+         * 读写集群总磁盘容量，单位GB
+         * @type {number || null}
+         */
+        this.ReadWriteTotalDisk = null;
+
+        /**
+         * 只读集群剩余内存容量，单位GB
+         * @type {number || null}
+         */
+        this.ReadOnlyTotalLeaveMemory = null;
+
+        /**
+         * 只读集群剩余磁盘容量，单位GB
+         * @type {number || null}
+         */
+        this.ReadOnlyTotalLeaveDisk = null;
+
+        /**
+         * 只读集群总内存容量，单位GB
+         * @type {number || null}
+         */
+        this.ReadOnlyTotalMemory = null;
+
+        /**
+         * 只读集群总磁盘容量，单位GB
+         * @type {number || null}
+         */
+        this.ReadOnlyTotalDisk = null;
+
+        /**
+         * 集群设备详情
+         * @type {Array.<InstanceDeviceInfo> || null}
+         */
+        this.InstanceDeviceInfos = null;
 
     }
 
@@ -61,32 +93,22 @@ class InstanceDeviceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ReadWriteTotalLeaveMemory = 'ReadWriteTotalLeaveMemory' in params ? params.ReadWriteTotalLeaveMemory : null;
+        this.ReadWriteTotalLeaveDisk = 'ReadWriteTotalLeaveDisk' in params ? params.ReadWriteTotalLeaveDisk : null;
+        this.ReadWriteTotalMemory = 'ReadWriteTotalMemory' in params ? params.ReadWriteTotalMemory : null;
+        this.ReadWriteTotalDisk = 'ReadWriteTotalDisk' in params ? params.ReadWriteTotalDisk : null;
+        this.ReadOnlyTotalLeaveMemory = 'ReadOnlyTotalLeaveMemory' in params ? params.ReadOnlyTotalLeaveMemory : null;
+        this.ReadOnlyTotalLeaveDisk = 'ReadOnlyTotalLeaveDisk' in params ? params.ReadOnlyTotalLeaveDisk : null;
+        this.ReadOnlyTotalMemory = 'ReadOnlyTotalMemory' in params ? params.ReadOnlyTotalMemory : null;
+        this.ReadOnlyTotalDisk = 'ReadOnlyTotalDisk' in params ? params.ReadOnlyTotalDisk : null;
 
-        if (params.ReadWriteDevice) {
-            this.ReadWriteDevice = new Array();
-            for (let z in params.ReadWriteDevice) {
-                let obj = new DeviceInfo();
-                obj.deserialize(params.ReadWriteDevice[z]);
-                this.ReadWriteDevice.push(obj);
-            }
-        }
-
-        if (params.ReadOnlyDevice) {
-            this.ReadOnlyDevice = new Array();
-            for (let z in params.ReadOnlyDevice) {
-                let obj = new DeviceInfo();
-                obj.deserialize(params.ReadOnlyDevice[z]);
-                this.ReadOnlyDevice.push(obj);
-            }
-        }
-
-        if (params.FreeDevice) {
-            this.FreeDevice = new Array();
-            for (let z in params.FreeDevice) {
-                let obj = new DeviceInfo();
-                obj.deserialize(params.FreeDevice[z]);
-                this.FreeDevice.push(obj);
+        if (params.InstanceDeviceInfos) {
+            this.InstanceDeviceInfos = new Array();
+            for (let z in params.InstanceDeviceInfos) {
+                let obj = new InstanceDeviceInfo();
+                obj.deserialize(params.InstanceDeviceInfos[z]);
+                this.InstanceDeviceInfos.push(obj);
             }
         }
 
@@ -246,11 +268,18 @@ class DescribeInstanceDetailResponse extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 围笼ID
+         * 金融围笼ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FenceId = null;
+
+        /**
+         * 所属集群ID(默认集群为空)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -292,36 +321,177 @@ class DescribeInstanceDetailResponse extends  AbstractModel {
         this.DiskAssignable = 'DiskAssignable' in params ? params.DiskAssignable : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.FenceId = 'FenceId' in params ? params.FenceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeInstanceList返回参数结构体
+ * 独享集群详情
  * @class
  */
-class DescribeInstanceListResponse extends  AbstractModel {
+class DescribeInstanceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 独享集群列表
-         * @type {Array.<DescribeInstanceDetail> || null}
-         */
-        this.Instances = null;
-
-        /**
-         * 独享集群实例总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 独享集群实例Id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 独享集群实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 产品ID, 0:CDB, 1:TDSQL
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 集群类型, 0:公有云, 1:金融围笼, 2:CDC集群
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 主机类型, 0:物理机, 1:CVM机型, 2:CDC机型
+         * @type {number || null}
+         */
+        this.HostType = null;
+
+        /**
+         * 自动续费标志, 0:未设置, 1:自动续费, 2:到期不续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 集群状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 集群状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 到期时间
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * 主机数
+         * @type {number || null}
+         */
+        this.HostNum = null;
+
+        /**
+         * DB实例数
+         * @type {number || null}
+         */
+        this.DbNum = null;
+
+        /**
+         * 分配策略, 0:紧凑, 1:均匀
+         * @type {number || null}
+         */
+        this.AssignStrategy = null;
+
+        /**
+         * 总主机CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuSpec = null;
+
+        /**
+         * 总已分配CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuAssigned = null;
+
+        /**
+         * 总可分配CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuAssignable = null;
+
+        /**
+         * 总主机内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemorySpec = null;
+
+        /**
+         * 总已分配内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemoryAssigned = null;
+
+        /**
+         * 总可分配内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemoryAssignable = null;
+
+        /**
+         * 总机器磁盘(单位:GB)
+         * @type {number || null}
+         */
+        this.DiskSpec = null;
+
+        /**
+         * 总已分配磁盘(单位:GB)
+         * @type {number || null}
+         */
+        this.DiskAssigned = null;
+
+        /**
+         * 总可分配磁盘(单位:GB)
+         * @type {number || null}
+         */
+        this.DiskAssignable = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 金融围笼ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FenceId = null;
+
+        /**
+         * 所属集群ID(默认集群为空)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
 
     }
 
@@ -332,17 +502,32 @@ class DescribeInstanceListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new DescribeInstanceDetail();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.HostType = 'HostType' in params ? params.HostType : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.HostNum = 'HostNum' in params ? params.HostNum : null;
+        this.DbNum = 'DbNum' in params ? params.DbNum : null;
+        this.AssignStrategy = 'AssignStrategy' in params ? params.AssignStrategy : null;
+        this.CpuSpec = 'CpuSpec' in params ? params.CpuSpec : null;
+        this.CpuAssigned = 'CpuAssigned' in params ? params.CpuAssigned : null;
+        this.CpuAssignable = 'CpuAssignable' in params ? params.CpuAssignable : null;
+        this.MemorySpec = 'MemorySpec' in params ? params.MemorySpec : null;
+        this.MemoryAssigned = 'MemoryAssigned' in params ? params.MemoryAssigned : null;
+        this.MemoryAssignable = 'MemoryAssignable' in params ? params.MemoryAssignable : null;
+        this.DiskSpec = 'DiskSpec' in params ? params.DiskSpec : null;
+        this.DiskAssigned = 'DiskAssigned' in params ? params.DiskAssigned : null;
+        this.DiskAssignable = 'DiskAssignable' in params ? params.DiskAssignable : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.FenceId = 'FenceId' in params ? params.FenceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -427,6 +612,272 @@ class DescribeInstanceDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 主机详情
+ * @class
+ */
+class HostDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机Id
+         * @type {string || null}
+         */
+        this.HostId = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 主机状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 分配DB实例状态,0:可分配,1:不可分配
+         * @type {number || null}
+         */
+        this.AssignStatus = null;
+
+        /**
+         * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
+         * @type {number || null}
+         */
+        this.HostType = null;
+
+        /**
+         * DB实例数
+         * @type {number || null}
+         */
+        this.DbNum = null;
+
+        /**
+         * 主机CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuSpec = null;
+
+        /**
+         * 已分配CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuAssigned = null;
+
+        /**
+         * 可分配CPU(单位:核数)
+         * @type {number || null}
+         */
+        this.CpuAssignable = null;
+
+        /**
+         * 主机内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemorySpec = null;
+
+        /**
+         * 已分配内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemoryAssigned = null;
+
+        /**
+         * 可分配内存(单位:GB)
+         * @type {number || null}
+         */
+        this.MemoryAssignable = null;
+
+        /**
+         * 主机磁盘(单位:GB)
+         * @type {number || null}
+         */
+        this.DiskSpec = null;
+
+        /**
+         * 已分配磁盘(单位:GB)
+         * @type {number || null}
+         */
+        this.DiskAssigned = null;
+
+        /**
+         * 可分配磁盘(GB)
+         * @type {number || null}
+         */
+        this.DiskAssignable = null;
+
+        /**
+         * CPU分配比
+         * @type {number || null}
+         */
+        this.CpuRatio = null;
+
+        /**
+         * 内存分配比
+         * @type {number || null}
+         */
+        this.MemoryRatio = null;
+
+        /**
+         * 磁盘分配比
+         * @type {number || null}
+         */
+        this.DiskRatio = null;
+
+        /**
+         * 机型名称
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 机型类别
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 计费标签
+         * @type {string || null}
+         */
+        this.PidTag = null;
+
+        /**
+         * 计费ID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 独享集群实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostId = 'HostId' in params ? params.HostId : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AssignStatus = 'AssignStatus' in params ? params.AssignStatus : null;
+        this.HostType = 'HostType' in params ? params.HostType : null;
+        this.DbNum = 'DbNum' in params ? params.DbNum : null;
+        this.CpuSpec = 'CpuSpec' in params ? params.CpuSpec : null;
+        this.CpuAssigned = 'CpuAssigned' in params ? params.CpuAssigned : null;
+        this.CpuAssignable = 'CpuAssignable' in params ? params.CpuAssignable : null;
+        this.MemorySpec = 'MemorySpec' in params ? params.MemorySpec : null;
+        this.MemoryAssigned = 'MemoryAssigned' in params ? params.MemoryAssigned : null;
+        this.MemoryAssignable = 'MemoryAssignable' in params ? params.MemoryAssignable : null;
+        this.DiskSpec = 'DiskSpec' in params ? params.DiskSpec : null;
+        this.DiskAssigned = 'DiskAssigned' in params ? params.DiskAssigned : null;
+        this.DiskAssignable = 'DiskAssignable' in params ? params.DiskAssignable : null;
+        this.CpuRatio = 'CpuRatio' in params ? params.CpuRatio : null;
+        this.MemoryRatio = 'MemoryRatio' in params ? params.MemoryRatio : null;
+        this.DiskRatio = 'DiskRatio' in params ? params.DiskRatio : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.PidTag = 'PidTag' in params ? params.PidTag : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 集群设备组信息。
+ * @class
+ */
+class InstanceDeviceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 读写设备组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.ReadWriteDevice = null;
+
+        /**
+         * 只读设备组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.ReadOnlyDevice = null;
+
+        /**
+         * 空闲设备组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.FreeDevice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.ReadWriteDevice) {
+            this.ReadWriteDevice = new Array();
+            for (let z in params.ReadWriteDevice) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.ReadWriteDevice[z]);
+                this.ReadWriteDevice.push(obj);
+            }
+        }
+
+        if (params.ReadOnlyDevice) {
+            this.ReadOnlyDevice = new Array();
+            for (let z in params.ReadOnlyDevice) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.ReadOnlyDevice[z]);
+                this.ReadOnlyDevice.push(obj);
+            }
+        }
+
+        if (params.FreeDevice) {
+            this.FreeDevice = new Array();
+            for (let z in params.FreeDevice) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.FreeDevice[z]);
+                this.FreeDevice.push(obj);
+            }
+        }
 
     }
 }
@@ -705,6 +1156,12 @@ class DBInstanceDetail extends  AbstractModel {
         this.ShardNum = null;
 
         /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
          * 可用区
          * @type {string || null}
          */
@@ -727,6 +1184,12 @@ class DBInstanceDetail extends  AbstractModel {
          * @type {string || null}
          */
         this.DbEngine = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -752,10 +1215,12 @@ class DBInstanceDetail extends  AbstractModel {
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Disk = 'Disk' in params ? params.Disk : null;
         this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.Region = 'Region' in params ? params.Region : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.DbHosts = 'DbHosts' in params ? params.DbHosts : null;
         this.HostRole = 'HostRole' in params ? params.HostRole : null;
         this.DbEngine = 'DbEngine' in params ? params.DbEngine : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -906,72 +1371,30 @@ class InstanceExpand extends  AbstractModel {
 }
 
 /**
- * 集群容量信息。
+ * DescribeHostList返回参数结构体
  * @class
  */
-class InstanceDetail extends  AbstractModel {
+class DescribeHostListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群状态，0：运行中，1：不在运行
+         * 主机总数
          * @type {number || null}
          */
-        this.Status = null;
+        this.TotalCount = null;
 
         /**
-         * 读写集群剩余内存容量，单位GB
-         * @type {number || null}
+         * 主机详情
+         * @type {Array.<HostDetail> || null}
          */
-        this.ReadWriteTotalLeaveMemory = null;
+        this.Hosts = null;
 
         /**
-         * 读写集群剩余磁盘容量，单位GB
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.ReadWriteTotalLeaveDisk = null;
-
-        /**
-         * 读写集群总内存容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadWriteTotalMemory = null;
-
-        /**
-         * 读写集群总磁盘容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadWriteTotalDisk = null;
-
-        /**
-         * 只读集群剩余内存容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadOnlyTotalLeaveMemory = null;
-
-        /**
-         * 只读集群剩余磁盘容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadOnlyTotalLeaveDisk = null;
-
-        /**
-         * 只读集群总内存容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadOnlyTotalMemory = null;
-
-        /**
-         * 只读集群总磁盘容量，单位GB
-         * @type {number || null}
-         */
-        this.ReadOnlyTotalDisk = null;
-
-        /**
-         * 集群设备详情
-         * @type {Array.<InstanceDeviceInfo> || null}
-         */
-        this.InstanceDeviceInfos = null;
+        this.RequestId = null;
 
     }
 
@@ -982,24 +1405,67 @@ class InstanceDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ReadWriteTotalLeaveMemory = 'ReadWriteTotalLeaveMemory' in params ? params.ReadWriteTotalLeaveMemory : null;
-        this.ReadWriteTotalLeaveDisk = 'ReadWriteTotalLeaveDisk' in params ? params.ReadWriteTotalLeaveDisk : null;
-        this.ReadWriteTotalMemory = 'ReadWriteTotalMemory' in params ? params.ReadWriteTotalMemory : null;
-        this.ReadWriteTotalDisk = 'ReadWriteTotalDisk' in params ? params.ReadWriteTotalDisk : null;
-        this.ReadOnlyTotalLeaveMemory = 'ReadOnlyTotalLeaveMemory' in params ? params.ReadOnlyTotalLeaveMemory : null;
-        this.ReadOnlyTotalLeaveDisk = 'ReadOnlyTotalLeaveDisk' in params ? params.ReadOnlyTotalLeaveDisk : null;
-        this.ReadOnlyTotalMemory = 'ReadOnlyTotalMemory' in params ? params.ReadOnlyTotalMemory : null;
-        this.ReadOnlyTotalDisk = 'ReadOnlyTotalDisk' in params ? params.ReadOnlyTotalDisk : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InstanceDeviceInfos) {
-            this.InstanceDeviceInfos = new Array();
-            for (let z in params.InstanceDeviceInfos) {
-                let obj = new InstanceDeviceInfo();
-                obj.deserialize(params.InstanceDeviceInfos[z]);
-                this.InstanceDeviceInfos.push(obj);
+        if (params.Hosts) {
+            this.Hosts = new Array();
+            for (let z in params.Hosts) {
+                let obj = new HostDetail();
+                obj.deserialize(params.Hosts[z]);
+                this.Hosts.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceList返回参数结构体
+ * @class
+ */
+class DescribeInstanceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 独享集群列表
+         * @type {Array.<DescribeInstanceDetail> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 独享集群实例总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new DescribeInstanceDetail();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1055,10 +1521,10 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 独享集群详情
+ * DescribeHostList请求参数结构体
  * @class
  */
-class DescribeInstanceDetail extends  AbstractModel {
+class DescribeHostListRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1069,149 +1535,22 @@ class DescribeInstanceDetail extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 独享集群实例名称
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 地域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 产品ID, 0:CDB, 1:TDSQL
+         * 分页返回数量
          * @type {number || null}
          */
-        this.ProductId = null;
+        this.Limit = null;
 
         /**
-         * 集群类型, 0:公有云, 1:金融围笼
+         * 分页偏移量
          * @type {number || null}
          */
-        this.Type = null;
+        this.Offset = null;
 
         /**
-         * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
-         * @type {number || null}
+         * 分配状态过滤，0-可分配，1-禁止分配
+         * @type {Array.<number> || null}
          */
-        this.HostType = null;
-
-        /**
-         * 自动续费标志, 0:未设置, 1:自动续费, 2:到期不续费
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * 集群状态
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 集群状态描述
-         * @type {string || null}
-         */
-        this.StatusDesc = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 到期时间
-         * @type {string || null}
-         */
-        this.PeriodEndTime = null;
-
-        /**
-         * 主机数
-         * @type {number || null}
-         */
-        this.HostNum = null;
-
-        /**
-         * DB实例数
-         * @type {number || null}
-         */
-        this.DbNum = null;
-
-        /**
-         * 分配策略, 0:紧凑, 1:均匀
-         * @type {number || null}
-         */
-        this.AssignStrategy = null;
-
-        /**
-         * 总主机CPU(单位:核数)
-         * @type {number || null}
-         */
-        this.CpuSpec = null;
-
-        /**
-         * 总已分配CPU(单位:核数)
-         * @type {number || null}
-         */
-        this.CpuAssigned = null;
-
-        /**
-         * 总可分配CPU(单位:核数)
-         * @type {number || null}
-         */
-        this.CpuAssignable = null;
-
-        /**
-         * 总主机内存(单位:GB)
-         * @type {number || null}
-         */
-        this.MemorySpec = null;
-
-        /**
-         * 总已分配内存(单位:GB)
-         * @type {number || null}
-         */
-        this.MemoryAssigned = null;
-
-        /**
-         * 总可分配内存(单位:GB)
-         * @type {number || null}
-         */
-        this.MemoryAssignable = null;
-
-        /**
-         * 总机器磁盘(单位:GB)
-         * @type {number || null}
-         */
-        this.DiskSpec = null;
-
-        /**
-         * 总已分配磁盘(单位:GB)
-         * @type {number || null}
-         */
-        this.DiskAssigned = null;
-
-        /**
-         * 总可分配磁盘(单位:GB)
-         * @type {number || null}
-         */
-        this.DiskAssignable = null;
-
-        /**
-         * 可用区
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 围笼ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FenceId = null;
+        this.AssignStatus = null;
 
     }
 
@@ -1223,30 +1562,9 @@ class DescribeInstanceDetail extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.HostType = 'HostType' in params ? params.HostType : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
-        this.HostNum = 'HostNum' in params ? params.HostNum : null;
-        this.DbNum = 'DbNum' in params ? params.DbNum : null;
-        this.AssignStrategy = 'AssignStrategy' in params ? params.AssignStrategy : null;
-        this.CpuSpec = 'CpuSpec' in params ? params.CpuSpec : null;
-        this.CpuAssigned = 'CpuAssigned' in params ? params.CpuAssigned : null;
-        this.CpuAssignable = 'CpuAssignable' in params ? params.CpuAssignable : null;
-        this.MemorySpec = 'MemorySpec' in params ? params.MemorySpec : null;
-        this.MemoryAssigned = 'MemoryAssigned' in params ? params.MemoryAssigned : null;
-        this.MemoryAssignable = 'MemoryAssignable' in params ? params.MemoryAssignable : null;
-        this.DiskSpec = 'DiskSpec' in params ? params.DiskSpec : null;
-        this.DiskAssigned = 'DiskAssigned' in params ? params.DiskAssigned : null;
-        this.DiskAssignable = 'DiskAssignable' in params ? params.DiskAssignable : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.FenceId = 'FenceId' in params ? params.FenceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.AssignStatus = 'AssignStatus' in params ? params.AssignStatus : null;
 
     }
 }
@@ -1363,6 +1681,12 @@ class DescribeInstanceListRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 按所属集群ID过滤
+         * @type {Array.<string> || null}
+         */
+        this.ClusterId = null;
+
     }
 
     /**
@@ -1381,6 +1705,7 @@ class DescribeInstanceListRequest extends  AbstractModel {
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.FenceId = 'FenceId' in params ? params.FenceId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1421,19 +1746,22 @@ class ModifyInstanceNameRequest extends  AbstractModel {
 }
 
 module.exports = {
-    InstanceDeviceInfo: InstanceDeviceInfo,
+    InstanceDetail: InstanceDetail,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
-    DescribeInstanceListResponse: DescribeInstanceListResponse,
+    DescribeInstanceDetail: DescribeInstanceDetail,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
+    HostDetail: HostDetail,
+    InstanceDeviceInfo: InstanceDeviceInfo,
     DescribeInstancesRequest: DescribeInstancesRequest,
     DeviceInfo: DeviceInfo,
     DBInstanceDetail: DBInstanceDetail,
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
     InstanceExpand: InstanceExpand,
-    InstanceDetail: InstanceDetail,
+    DescribeHostListResponse: DescribeHostListResponse,
+    DescribeInstanceListResponse: DescribeInstanceListResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    DescribeInstanceDetail: DescribeInstanceDetail,
+    DescribeHostListRequest: DescribeHostListRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceListRequest: DescribeInstanceListRequest,
     ModifyInstanceNameRequest: ModifyInstanceNameRequest,

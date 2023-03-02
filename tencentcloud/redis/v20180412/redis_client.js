@@ -30,6 +30,7 @@ const CreateInstancesRequest = models.CreateInstancesRequest;
 const CreateReplicationGroupRequest = models.CreateReplicationGroupRequest;
 const ModifyInstanceReadOnlyResponse = models.ModifyInstanceReadOnlyResponse;
 const DescribeInstanceZoneInfoRequest = models.DescribeInstanceZoneInfoRequest;
+const ModifyConnectionConfigResponse = models.ModifyConnectionConfigResponse;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
@@ -74,6 +75,7 @@ const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
+const ChangeMasterInstanceResponse = models.ChangeMasterInstanceResponse;
 const AddReplicationInstanceResponse = models.AddReplicationInstanceResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
@@ -83,7 +85,7 @@ const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const ChangeMasterInstanceRequest = models.ChangeMasterInstanceRequest;
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
@@ -96,6 +98,7 @@ const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceRespon
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
+const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const UpgradeProxyVersionResponse = models.UpgradeProxyVersionResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
@@ -112,8 +115,10 @@ const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
+const CloseSSLRequest = models.CloseSSLRequest;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
+const SwitchProxyRequest = models.SwitchProxyRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
@@ -147,6 +152,7 @@ const ProductConf = models.ProductConf;
 const ModifyConnectionConfigRequest = models.ModifyConnectionConfigRequest;
 const InstanceNode = models.InstanceNode;
 const TendisNodes = models.TendisNodes;
+const SwitchProxyResponse = models.SwitchProxyResponse;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const TradeDealDetail = models.TradeDealDetail;
@@ -167,7 +173,9 @@ const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
+const ChangeInstanceRoleRequest = models.ChangeInstanceRoleRequest;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
+const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
@@ -176,7 +184,7 @@ const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
-const ModifyConnectionConfigResponse = models.ModifyConnectionConfigResponse;
+const CloseSSLResponse = models.CloseSSLResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
 const CreateReplicationGroupResponse = models.CreateReplicationGroupResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
@@ -186,6 +194,7 @@ const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesRespon
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const UpgradeSmallVersionResponse = models.UpgradeSmallVersionResponse;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const OpenSSLRequest = models.OpenSSLRequest;
 const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
@@ -214,7 +223,9 @@ const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceRe
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
+const OpenSSLResponse = models.OpenSSLResponse;
 const TendisSlowLogDetail = models.TendisSlowLogDetail;
+const ChangeInstanceRoleResponse = models.ChangeInstanceRoleResponse;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
@@ -239,39 +250,6 @@ class RedisClient extends AbstractClient {
     }
     
     /**
-     * 启用读写分离
-     * @param {EnableReplicaReadonlyRequest} req
-     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
-     * @public
-     */
-    EnableReplicaReadonly(req, cb) {
-        let resp = new EnableReplicaReadonlyResponse();
-        this.request("EnableReplicaReadonly", req, resp, cb);
-    }
-
-    /**
-     * 查询复制组
-     * @param {DescribeReplicationGroupRequest} req
-     * @param {function(string, DescribeReplicationGroupResponse):void} cb
-     * @public
-     */
-    DescribeReplicationGroup(req, cb) {
-        let resp = new DescribeReplicationGroupResponse();
-        this.request("DescribeReplicationGroup", req, resp, cb);
-    }
-
-    /**
-     * 查询实例节点信息
-     * @param {DescribeInstanceNodeInfoRequest} req
-     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
-     * @public
-     */
-    DescribeInstanceNodeInfo(req, cb) {
-        let resp = new DescribeInstanceNodeInfoResponse();
-        this.request("DescribeInstanceNodeInfo", req, resp, cb);
-    }
-
-    /**
      * 设置实例输入模式
      * @param {ModifyInstanceReadOnlyRequest} req
      * @param {function(string, ModifyInstanceReadOnlyResponse):void} cb
@@ -283,7 +261,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询实例大Key大小分布
+     * 腾讯云数据库 Redis 已经于2022年10月31日下线查询实例大 Key 接口。具体公告，请参见 [查询实例大 Key 接口下线公告](https://cloud.tencent.com/document/product/239/81005)。
      * @param {DescribeInstanceMonitorBigKeySizeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeySizeDistResponse):void} cb
      * @public
@@ -291,61 +269,6 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorBigKeySizeDist(req, cb) {
         let resp = new DescribeInstanceMonitorBigKeySizeDistResponse();
         this.request("DescribeInstanceMonitorBigKeySizeDist", req, resp, cb);
-    }
-
-    /**
-     * 创建实例子账号
-     * @param {CreateInstanceAccountRequest} req
-     * @param {function(string, CreateInstanceAccountResponse):void} cb
-     * @public
-     */
-    CreateInstanceAccount(req, cb) {
-        let resp = new CreateInstanceAccountResponse();
-        this.request("CreateInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
-     * @param {ModifyMaintenanceWindowRequest} req
-     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
-     * @public
-     */
-    ModifyMaintenanceWindow(req, cb) {
-        let resp = new ModifyMaintenanceWindowResponse();
-        this.request("ModifyMaintenanceWindow", req, resp, cb);
-    }
-
-    /**
-     * 查询参数模板列表
-     * @param {DescribeParamTemplatesRequest} req
-     * @param {function(string, DescribeParamTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeParamTemplates(req, cb) {
-        let resp = new DescribeParamTemplatesResponse();
-        this.request("DescribeParamTemplates", req, resp, cb);
-    }
-
-    /**
-     * 关闭外网
-     * @param {ReleaseWanAddressRequest} req
-     * @param {function(string, ReleaseWanAddressResponse):void} cb
-     * @public
-     */
-    ReleaseWanAddress(req, cb) {
-        let resp = new ReleaseWanAddressResponse();
-        this.request("ReleaseWanAddress", req, resp, cb);
-    }
-
-    /**
-     * 查询实例慢查询记录
-     * @param {DescribeSlowLogRequest} req
-     * @param {function(string, DescribeSlowLogResponse):void} cb
-     * @public
-     */
-    DescribeSlowLog(req, cb) {
-        let resp = new DescribeSlowLogResponse();
-        this.request("DescribeSlowLog", req, resp, cb);
     }
 
     /**
@@ -382,17 +305,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询参数模板详情。
-     * @param {DescribeParamTemplateInfoRequest} req
-     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
-     * @public
-     */
-    DescribeParamTemplateInfo(req, cb) {
-        let resp = new DescribeParamTemplateInfoResponse();
-        this.request("DescribeParamTemplateInfo", req, resp, cb);
-    }
-
-    /**
      * 查看实例子账号信息
      * @param {DescribeInstanceAccountRequest} req
      * @param {function(string, DescribeInstanceAccountResponse):void} cb
@@ -401,28 +313,6 @@ class RedisClient extends AbstractClient {
     DescribeInstanceAccount(req, cb) {
         let resp = new DescribeInstanceAccountResponse();
         this.request("DescribeInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * 获取备份配置
-     * @param {DescribeAutoBackupConfigRequest} req
-     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
-     * @public
-     */
-    DescribeAutoBackupConfig(req, cb) {
-        let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * 查询实例CPU耗时
-     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmdTook(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
-        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
     }
 
     /**
@@ -437,6 +327,215 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 查询实例访问命令
+     * @param {DescribeInstanceMonitorTopNCmdRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmd(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdResponse();
+        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
+    }
+
+    /**
+     * 将原本实例升级到高版本实例，或者将主从版实例升级到集群版实例
+     * @param {UpgradeInstanceVersionRequest} req
+     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
+     * @public
+     */
+    UpgradeInstanceVersion(req, cb) {
+        let resp = new UpgradeInstanceVersionResponse();
+        this.request("UpgradeInstanceVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeProductInfo）用于查询全地域 Redis 的售卖规格。
+     * @param {DescribeProductInfoRequest} req
+     * @param {function(string, DescribeProductInfoResponse):void} cb
+     * @public
+     */
+    DescribeProductInfo(req, cb) {
+        let resp = new DescribeProductInfoResponse();
+        this.request("DescribeProductInfo", req, resp, cb);
+    }
+
+    /**
+     * 用于查询任务结果
+     * @param {DescribeTaskInfoRequest} req
+     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeTaskInfo(req, cb) {
+        let resp = new DescribeTaskInfoResponse();
+        this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 修改实例子账号
+     * @param {ModifyInstanceAccountRequest} req
+     * @param {function(string, ModifyInstanceAccountResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAccount(req, cb) {
+        let resp = new ModifyInstanceAccountResponse();
+        this.request("ModifyInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 查询实例安全组信息
+     * @param {DescribeInstanceSecurityGroupRequest} req
+     * @param {function(string, DescribeInstanceSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeInstanceSecurityGroup(req, cb) {
+        let resp = new DescribeInstanceSecurityGroupResponse();
+        this.request("DescribeInstanceSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 升级实例支持多AZ
+     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
+     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
+     * @public
+     */
+    UpgradeVersionToMultiAvailabilityZones(req, cb) {
+        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
+        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
+     * @param {ModifyInstanceParamsRequest} req
+     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParams(req, cb) {
+        let resp = new ModifyInstanceParamsResponse();
+        this.request("ModifyInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * 清空Redis实例的实例数据。
+     * @param {ClearInstanceRequest} req
+     * @param {function(string, ClearInstanceResponse):void} cb
+     * @public
+     */
+    ClearInstance(req, cb) {
+        let resp = new ClearInstanceResponse();
+        this.request("ClearInstance", req, resp, cb);
+    }
+
+    /**
+     * 开通外网
+     * @param {AllocateWanAddressRequest} req
+     * @param {function(string, AllocateWanAddressResponse):void} cb
+     * @public
+     */
+    AllocateWanAddress(req, cb) {
+        let resp = new AllocateWanAddressResponse();
+        this.request("AllocateWanAddress", req, resp, cb);
+    }
+
+    /**
+     * 删除实例子账号
+     * @param {DeleteInstanceAccountRequest} req
+     * @param {function(string, DeleteInstanceAccountResponse):void} cb
+     * @public
+     */
+    DeleteInstanceAccount(req, cb) {
+        let resp = new DeleteInstanceAccountResponse();
+        this.request("DeleteInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 修改实例的连接配置，包括带宽和最大连接数。
+     * @param {ModifyConnectionConfigRequest} req
+     * @param {function(string, ModifyConnectionConfigResponse):void} cb
+     * @public
+     */
+    ModifyConnectionConfig(req, cb) {
+        let resp = new ModifyConnectionConfigResponse();
+        this.request("ModifyConnectionConfig", req, resp, cb);
+    }
+
+    /**
+     * 修改实例相关信息
+     * @param {ModifyInstanceRequest} req
+     * @param {function(string, ModifyInstanceResponse):void} cb
+     * @public
+     */
+    ModifyInstance(req, cb) {
+        let resp = new ModifyInstanceResponse();
+        this.request("ModifyInstance", req, resp, cb);
+    }
+
+    /**
+     * 复制组实例更换角色
+     * @param {ChangeInstanceRoleRequest} req
+     * @param {function(string, ChangeInstanceRoleResponse):void} cb
+     * @public
+     */
+    ChangeInstanceRole(req, cb) {
+        let resp = new ChangeInstanceRoleResponse();
+        this.request("ChangeInstanceRole", req, resp, cb);
+    }
+
+    /**
+     * 查询实例节点信息
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
+    }
+
+    /**
+     * 创建实例子账号
+     * @param {CreateInstanceAccountRequest} req
+     * @param {function(string, CreateInstanceAccountResponse):void} cb
+     * @public
+     */
+    CreateInstanceAccount(req, cb) {
+        let resp = new CreateInstanceAccountResponse();
+        this.request("CreateInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 实例proxy版本升级
+     * @param {UpgradeProxyVersionRequest} req
+     * @param {function(string, UpgradeProxyVersionResponse):void} cb
+     * @public
+     */
+    UpgradeProxyVersion(req, cb) {
+        let resp = new UpgradeProxyVersionResponse();
+        this.request("UpgradeProxyVersion", req, resp, cb);
+    }
+
+    /**
+     * 查询实例CPU耗时
+     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmdTook(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
+        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
+    }
+
+    /**
      * 设置自动备份配置
      * @param {ModifyAutoBackupConfigRequest} req
      * @param {function(string, ModifyAutoBackupConfigResponse):void} cb
@@ -445,50 +544,6 @@ class RedisClient extends AbstractClient {
     ModifyAutoBackupConfig(req, cb) {
         let resp = new ModifyAutoBackupConfigResponse();
         this.request("ModifyAutoBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * 获取集群版实例分片信息
-     * @param {DescribeInstanceShardsRequest} req
-     * @param {function(string, DescribeInstanceShardsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceShards(req, cb) {
-        let resp = new DescribeInstanceShardsResponse();
-        this.request("DescribeInstanceShards", req, resp, cb);
-    }
-
-    /**
-     * 升级实例
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
-    }
-
-    /**
-     * 恢复 CRS 实例
-     * @param {RestoreInstanceRequest} req
-     * @param {function(string, RestoreInstanceResponse):void} cb
-     * @public
-     */
-    RestoreInstance(req, cb) {
-        let resp = new RestoreInstanceResponse();
-        this.request("RestoreInstance", req, resp, cb);
-    }
-
-    /**
-     * 查询Redis实例列表
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
-     * @public
-     */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -511,28 +566,6 @@ class RedisClient extends AbstractClient {
     AddReplicationInstance(req, cb) {
         let resp = new AddReplicationInstanceResponse();
         this.request("AddReplicationInstance", req, resp, cb);
-    }
-
-    /**
-     * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
-     * @param {DescribeMaintenanceWindowRequest} req
-     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
-     * @public
-     */
-    DescribeMaintenanceWindow(req, cb) {
-        let resp = new DescribeMaintenanceWindowResponse();
-        this.request("DescribeMaintenanceWindow", req, resp, cb);
-    }
-
-    /**
-     * 查询实例访问命令
-     * @param {DescribeInstanceMonitorTopNCmdRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmd(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdResponse();
-        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
     }
 
     /**
@@ -569,83 +602,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 修改实例网络配置
-     * @param {ModifyNetworkConfigRequest} req
-     * @param {function(string, ModifyNetworkConfigResponse):void} cb
-     * @public
-     */
-    ModifyNetworkConfig(req, cb) {
-        let resp = new ModifyNetworkConfigResponse();
-        this.request("ModifyNetworkConfig", req, resp, cb);
-    }
-
-    /**
-     * 创建复制组
-     * @param {CreateReplicationGroupRequest} req
-     * @param {function(string, CreateReplicationGroupResponse):void} cb
-     * @public
-     */
-    CreateReplicationGroup(req, cb) {
-        let resp = new CreateReplicationGroupResponse();
-        this.request("CreateReplicationGroup", req, resp, cb);
-    }
-
-    /**
-     * 查询实例访问来源信息
-     * @param {DescribeInstanceMonitorSIPRequest} req
-     * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorSIP(req, cb) {
-        let resp = new DescribeInstanceMonitorSIPResponse();
-        this.request("DescribeInstanceMonitorSIP", req, resp, cb);
-    }
-
-    /**
-     * 本接口(CreateInstances)用于创建redis实例。
-     * @param {CreateInstancesRequest} req
-     * @param {function(string, CreateInstancesResponse):void} cb
-     * @public
-     */
-    CreateInstances(req, cb) {
-        let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, cb);
-    }
-
-    /**
-     * 修改实例子账号
-     * @param {ModifyInstanceAccountRequest} req
-     * @param {function(string, ModifyInstanceAccountResponse):void} cb
-     * @public
-     */
-    ModifyInstanceAccount(req, cb) {
-        let resp = new ModifyInstanceAccountResponse();
-        this.request("ModifyInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * 将原本实例升级到高版本实例，或者将主从版实例升级到集群版实例
-     * @param {UpgradeInstanceVersionRequest} req
-     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
-     * @public
-     */
-    UpgradeInstanceVersion(req, cb) {
-        let resp = new UpgradeInstanceVersionResponse();
-        this.request("UpgradeInstanceVersion", req, resp, cb);
-    }
-
-    /**
-     * 查询实例续费价格（包年包月）
-     * @param {InquiryPriceRenewInstanceRequest} req
-     * @param {function(string, InquiryPriceRenewInstanceResponse):void} cb
-     * @public
-     */
-    InquiryPriceRenewInstance(req, cb) {
-        let resp = new InquiryPriceRenewInstanceResponse();
-        this.request("InquiryPriceRenewInstance", req, resp, cb);
-    }
-
-    /**
      * 查询实例扩容价格
      * @param {InquiryPriceUpgradeInstanceRequest} req
      * @param {function(string, InquiryPriceUpgradeInstanceResponse):void} cb
@@ -657,58 +613,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询项目安全组信息
-     * @param {DescribeProjectSecurityGroupRequest} req
-     * @param {function(string, DescribeProjectSecurityGroupResponse):void} cb
+     * 本接口（RenewInstance）可用于为实例续费。
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
      * @public
      */
-    DescribeProjectSecurityGroup(req, cb) {
-        let resp = new DescribeProjectSecurityGroupResponse();
-        this.request("DescribeProjectSecurityGroup", req, resp, cb);
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
-     * 查询实例热Key
-     * @param {DescribeInstanceMonitorHotKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
+     * @param {DescribeBackupUrlRequest} req
+     * @param {function(string, DescribeBackupUrlResponse):void} cb
      * @public
      */
-    DescribeInstanceMonitorHotKey(req, cb) {
-        let resp = new DescribeInstanceMonitorHotKeyResponse();
-        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
-    }
-
-    /**
-     * 用于查询任务结果
-     * @param {DescribeTaskInfoRequest} req
-     * @param {function(string, DescribeTaskInfoResponse):void} cb
-     * @public
-     */
-    DescribeTaskInfo(req, cb) {
-        let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, cb);
-    }
-
-    /**
-     * 开通外网
-     * @param {AllocateWanAddressRequest} req
-     * @param {function(string, AllocateWanAddressResponse):void} cb
-     * @public
-     */
-    AllocateWanAddress(req, cb) {
-        let resp = new AllocateWanAddressResponse();
-        this.request("AllocateWanAddress", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
-     * @param {DescribeProxySlowLogRequest} req
-     * @param {function(string, DescribeProxySlowLogResponse):void} cb
-     * @public
-     */
-    DescribeProxySlowLog(req, cb) {
-        let resp = new DescribeProxySlowLogResponse();
-        this.request("DescribeProxySlowLog", req, resp, cb);
+    DescribeBackupUrl(req, cb) {
+        let resp = new DescribeBackupUrlResponse();
+        this.request("DescribeBackupUrl", req, resp, cb);
     }
 
     /**
@@ -734,39 +657,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 本接口(ModifyInstanceParams)用于修改实例参数。
-     * @param {ModifyInstanceParamsRequest} req
-     * @param {function(string, ModifyInstanceParamsResponse):void} cb
-     * @public
-     */
-    ModifyInstanceParams(req, cb) {
-        let resp = new ModifyInstanceParamsResponse();
-        this.request("ModifyInstanceParams", req, resp, cb);
-    }
-
-    /**
-     * 实例proxy版本升级
-     * @param {UpgradeProxyVersionRequest} req
-     * @param {function(string, UpgradeProxyVersionResponse):void} cb
-     * @public
-     */
-    UpgradeProxyVersion(req, cb) {
-        let resp = new UpgradeProxyVersionResponse();
-        this.request("UpgradeProxyVersion", req, resp, cb);
-    }
-
-    /**
      * 修改参数模板
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
@@ -789,193 +679,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 按量计费实例销毁
-     * @param {DestroyPostpaidInstanceRequest} req
-     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
-     * @public
-     */
-    DestroyPostpaidInstance(req, cb) {
-        let resp = new DestroyPostpaidInstanceResponse();
-        this.request("DestroyPostpaidInstance", req, resp, cb);
-    }
-
-    /**
-     * 查询实例大Key
-     * @param {DescribeInstanceMonitorBigKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorBigKey(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyResponse();
-        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
-    }
-
-    /**
-     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
-     * @param {SwitchInstanceVipRequest} req
-     * @param {function(string, SwitchInstanceVipResponse):void} cb
-     * @public
-     */
-    SwitchInstanceVip(req, cb) {
-        let resp = new SwitchInstanceVipResponse();
-        this.request("SwitchInstanceVip", req, resp, cb);
-    }
-
-    /**
-     * 查询实例安全组信息
-     * @param {DescribeInstanceSecurityGroupRequest} req
-     * @param {function(string, DescribeInstanceSecurityGroupResponse):void} cb
-     * @public
-     */
-    DescribeInstanceSecurityGroup(req, cb) {
-        let resp = new DescribeInstanceSecurityGroupResponse();
-        this.request("DescribeInstanceSecurityGroup", req, resp, cb);
-    }
-
-    /**
-     * 查询实例大Key类型分布
-     * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
-        this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
-    }
-
-    /**
-     * 重置密码
-     * @param {ResetPasswordRequest} req
-     * @param {function(string, ResetPasswordResponse):void} cb
-     * @public
-     */
-    ResetPassword(req, cb) {
-        let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, cb);
-    }
-
-    /**
-     * 模拟故障
-     * @param {KillMasterGroupRequest} req
-     * @param {function(string, KillMasterGroupResponse):void} cb
-     * @public
-     */
-    KillMasterGroup(req, cb) {
-        let resp = new KillMasterGroupResponse();
-        this.request("KillMasterGroup", req, resp, cb);
-    }
-
-    /**
-     * 修改实例的连接配置，包括带宽和最大连接数。
-     * @param {ModifyConnectionConfigRequest} req
-     * @param {function(string, ModifyConnectionConfigResponse):void} cb
-     * @public
-     */
-    ModifyConnectionConfig(req, cb) {
-        let resp = new ModifyConnectionConfigResponse();
-        this.request("ModifyConnectionConfig", req, resp, cb);
-    }
-
-    /**
-     * 升级实例支持多AZ
-     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
-     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
-     * @public
-     */
-    UpgradeVersionToMultiAvailabilityZones(req, cb) {
-        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
-        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
-    }
-
-    /**
-     * 查询Redis实例列表信息。该接口已废弃。
-     * @param {DescribeCommonDBInstancesRequest} req
-     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
-     * @public
-     */
-    DescribeCommonDBInstances(req, cb) {
-        let resp = new DescribeCommonDBInstancesResponse();
-        this.request("DescribeCommonDBInstances", req, resp, cb);
-    }
-
-    /**
-     * 本接口查询指定可用区和实例类型下 Redis 的售卖规格， 如果用户不在购买白名单中，将不能查询该可用区或该类型的售卖规格详情。申请购买某地域白名单可以提交工单
-     * @param {DescribeProductInfoRequest} req
-     * @param {function(string, DescribeProductInfoResponse):void} cb
-     * @public
-     */
-    DescribeProductInfo(req, cb) {
-        let resp = new DescribeProductInfoResponse();
-        this.request("DescribeProductInfo", req, resp, cb);
-    }
-
-    /**
-     * 续费实例
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
-     * @public
-     */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
-    }
-
-    /**
-     * 实例小版本升级
-     * @param {UpgradeSmallVersionRequest} req
-     * @param {function(string, UpgradeSmallVersionResponse):void} cb
-     * @public
-     */
-    UpgradeSmallVersion(req, cb) {
-        let resp = new UpgradeSmallVersionResponse();
-        this.request("UpgradeSmallVersion", req, resp, cb);
-    }
-
-    /**
-     * 手动备份Redis实例
-     * @param {ManualBackupInstanceRequest} req
-     * @param {function(string, ManualBackupInstanceResponse):void} cb
-     * @public
-     */
-    ManualBackupInstance(req, cb) {
-        let resp = new ManualBackupInstanceResponse();
-        this.request("ManualBackupInstance", req, resp, cb);
-    }
-
-    /**
-     * 修改redis密码
-     * @param {ModfiyInstancePasswordRequest} req
-     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
-     * @public
-     */
-    ModfiyInstancePassword(req, cb) {
-        let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, cb);
-    }
-
-    /**
-     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
-     * @param {DescribeDBSecurityGroupsRequest} req
-     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeDBSecurityGroups(req, cb) {
-        let resp = new DescribeDBSecurityGroupsResponse();
-        this.request("DescribeDBSecurityGroups", req, resp, cb);
-    }
-
-    /**
      * 查询实例参数列表
      * @param {DescribeInstanceParamsRequest} req
      * @param {function(string, DescribeInstanceParamsResponse):void} cb
@@ -987,91 +690,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 应用参数模板到实例
-     * @param {ApplyParamsTemplateRequest} req
-     * @param {function(string, ApplyParamsTemplateResponse):void} cb
+     * 腾讯云数据库 Redis 已经于2022年10月31日下线查询实例大 Key 接口。具体公告，请参见 [查询实例大 Key 接口下线公告](https://cloud.tencent.com/document/product/239/81005)。
+     * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
      * @public
      */
-    ApplyParamsTemplate(req, cb) {
-        let resp = new ApplyParamsTemplateResponse();
-        this.request("ApplyParamsTemplate", req, resp, cb);
+    DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
+        this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
     }
 
     /**
-     * 包年包月实例退还
-     * @param {DestroyPrepaidInstanceRequest} req
-     * @param {function(string, DestroyPrepaidInstanceResponse):void} cb
+     * 关闭外网
+     * @param {ReleaseWanAddressRequest} req
+     * @param {function(string, ReleaseWanAddressResponse):void} cb
      * @public
      */
-    DestroyPrepaidInstance(req, cb) {
-        let resp = new DestroyPrepaidInstanceResponse();
-        this.request("DestroyPrepaidInstance", req, resp, cb);
-    }
-
-    /**
-     * 查询参数修改历史列表
-     * @param {DescribeInstanceParamRecordsRequest} req
-     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceParamRecords(req, cb) {
-        let resp = new DescribeInstanceParamRecordsResponse();
-        this.request("DescribeInstanceParamRecords", req, resp, cb);
-    }
-
-    /**
-     * 清空Redis实例的实例数据。
-     * @param {ClearInstanceRequest} req
-     * @param {function(string, ClearInstanceResponse):void} cb
-     * @public
-     */
-    ClearInstance(req, cb) {
-        let resp = new ClearInstanceResponse();
-        this.request("ClearInstance", req, resp, cb);
-    }
-
-    /**
-     * 查询Redis节点详细信息
-     * @param {DescribeInstanceZoneInfoRequest} req
-     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
-     * @public
-     */
-    DescribeInstanceZoneInfo(req, cb) {
-        let resp = new DescribeInstanceZoneInfoResponse();
-        this.request("DescribeInstanceZoneInfo", req, resp, cb);
-    }
-
-    /**
-     * 查询订单信息
-     * @param {DescribeInstanceDealDetailRequest} req
-     * @param {function(string, DescribeInstanceDealDetailResponse):void} cb
-     * @public
-     */
-    DescribeInstanceDealDetail(req, cb) {
-        let resp = new DescribeInstanceDealDetailResponse();
-        this.request("DescribeInstanceDealDetail", req, resp, cb);
-    }
-
-    /**
-     * 删除实例子账号
-     * @param {DeleteInstanceAccountRequest} req
-     * @param {function(string, DeleteInstanceAccountResponse):void} cb
-     * @public
-     */
-    DeleteInstanceAccount(req, cb) {
-        let resp = new DeleteInstanceAccountResponse();
-        this.request("DeleteInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * 查询 CRS 实例备份列表
-     * @param {DescribeInstanceBackupsRequest} req
-     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceBackups(req, cb) {
-        let resp = new DescribeInstanceBackupsResponse();
-        this.request("DescribeInstanceBackups", req, resp, cb);
+    ReleaseWanAddress(req, cb) {
+        let resp = new ReleaseWanAddressResponse();
+        this.request("ReleaseWanAddress", req, resp, cb);
     }
 
     /**
@@ -1086,25 +723,69 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 实例解隔离
-     * @param {StartupInstanceRequest} req
-     * @param {function(string, StartupInstanceResponse):void} cb
+     * 手动备份Redis实例
+     * @param {ManualBackupInstanceRequest} req
+     * @param {function(string, ManualBackupInstanceResponse):void} cb
      * @public
      */
-    StartupInstance(req, cb) {
-        let resp = new StartupInstanceResponse();
-        this.request("StartupInstance", req, resp, cb);
+    ManualBackupInstance(req, cb) {
+        let resp = new ManualBackupInstanceResponse();
+        this.request("ManualBackupInstance", req, resp, cb);
     }
 
     /**
-     * 修改实例相关信息
-     * @param {ModifyInstanceRequest} req
-     * @param {function(string, ModifyInstanceResponse):void} cb
+     * Proxy模拟故障接口
+     * @param {SwitchProxyRequest} req
+     * @param {function(string, SwitchProxyResponse):void} cb
      * @public
      */
-    ModifyInstance(req, cb) {
-        let resp = new ModifyInstanceResponse();
-        this.request("ModifyInstance", req, resp, cb);
+    SwitchProxy(req, cb) {
+        let resp = new SwitchProxyResponse();
+        this.request("SwitchProxy", req, resp, cb);
+    }
+
+    /**
+     * 恢复 CRS 实例
+     * @param {RestoreInstanceRequest} req
+     * @param {function(string, RestoreInstanceResponse):void} cb
+     * @public
+     */
+    RestoreInstance(req, cb) {
+        let resp = new RestoreInstanceResponse();
+        this.request("RestoreInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询参数修改历史列表
+     * @param {DescribeInstanceParamRecordsRequest} req
+     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParamRecords(req, cb) {
+        let resp = new DescribeInstanceParamRecordsResponse();
+        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    }
+
+    /**
+     * 查询参数模板详情。
+     * @param {DescribeParamTemplateInfoRequest} req
+     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplateInfo(req, cb) {
+        let resp = new DescribeParamTemplateInfoResponse();
+        this.request("DescribeParamTemplateInfo", req, resp, cb);
+    }
+
+    /**
+     * 按量计费实例销毁
+     * @param {DestroyPostpaidInstanceRequest} req
+     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
+     * @public
+     */
+    DestroyPostpaidInstance(req, cb) {
+        let resp = new DestroyPostpaidInstanceResponse();
+        this.request("DestroyPostpaidInstance", req, resp, cb);
     }
 
     /**
@@ -1119,14 +800,399 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
-     * @param {DescribeBackupUrlRequest} req
-     * @param {function(string, DescribeBackupUrlResponse):void} cb
+     * 查询参数模板列表
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
      */
-    DescribeBackupUrl(req, cb) {
-        let resp = new DescribeBackupUrlResponse();
-        this.request("DescribeBackupUrl", req, resp, cb);
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeInstanceBackups）用于查询实例备份列表。
+     * @param {DescribeInstanceBackupsRequest} req
+     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceBackups(req, cb) {
+        let resp = new DescribeInstanceBackupsResponse();
+        this.request("DescribeInstanceBackups", req, resp, cb);
+    }
+
+    /**
+     * 重置密码
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
+    }
+
+    /**
+     * 实例小版本升级
+     * @param {UpgradeSmallVersionRequest} req
+     * @param {function(string, UpgradeSmallVersionResponse):void} cb
+     * @public
+     */
+    UpgradeSmallVersion(req, cb) {
+        let resp = new UpgradeSmallVersionResponse();
+        this.request("UpgradeSmallVersion", req, resp, cb);
+    }
+
+    /**
+     * 创建复制组
+     * @param {CreateReplicationGroupRequest} req
+     * @param {function(string, CreateReplicationGroupResponse):void} cb
+     * @public
+     */
+    CreateReplicationGroup(req, cb) {
+        let resp = new CreateReplicationGroupResponse();
+        this.request("CreateReplicationGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询实例访问来源信息
+     * @param {DescribeInstanceMonitorSIPRequest} req
+     * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorSIP(req, cb) {
+        let resp = new DescribeInstanceMonitorSIPResponse();
+        this.request("DescribeInstanceMonitorSIP", req, resp, cb);
+    }
+
+    /**
+     * 查询项目安全组信息
+     * @param {DescribeProjectSecurityGroupRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroup(req, cb) {
+        let resp = new DescribeProjectSecurityGroupResponse();
+        this.request("DescribeProjectSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询实例热Key
+     * @param {DescribeInstanceMonitorHotKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorHotKey(req, cb) {
+        let resp = new DescribeInstanceMonitorHotKeyResponse();
+        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
+    }
+
+    /**
+     * 修改redis密码
+     * @param {ModfiyInstancePasswordRequest} req
+     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * @public
+     */
+    ModfiyInstancePassword(req, cb) {
+        let resp = new ModfiyInstancePasswordResponse();
+        this.request("ModfiyInstancePassword", req, resp, cb);
+    }
+
+    /**
+     * 启用读写分离
+     * @param {EnableReplicaReadonlyRequest} req
+     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
+     * @public
+     */
+    EnableReplicaReadonly(req, cb) {
+        let resp = new EnableReplicaReadonlyResponse();
+        this.request("EnableReplicaReadonly", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 腾讯云数据库 Redis 已经于2022年10月31日下线查询实例大 Key 接口。具体公告，请参见[查询实例大 Key 接口下线公告](https://cloud.tencent.com/document/product/239/81005)。
+     * @param {DescribeInstanceMonitorBigKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKey(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyResponse();
+        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
+    }
+
+    /**
+     * 模拟故障
+     * @param {KillMasterGroupRequest} req
+     * @param {function(string, KillMasterGroupResponse):void} cb
+     * @public
+     */
+    KillMasterGroup(req, cb) {
+        let resp = new KillMasterGroupResponse();
+        this.request("KillMasterGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis实例列表信息。该接口已废弃。
+     * @param {DescribeCommonDBInstancesRequest} req
+     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCommonDBInstances(req, cb) {
+        let resp = new DescribeCommonDBInstancesResponse();
+        this.request("DescribeCommonDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSlowLog）查询实例慢查询记录。
+     * @param {DescribeSlowLogRequest} req
+     * @param {function(string, DescribeSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeSlowLog(req, cb) {
+        let resp = new DescribeSlowLogResponse();
+        this.request("DescribeSlowLog", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis节点详细信息
+     * @param {DescribeInstanceZoneInfoRequest} req
+     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceZoneInfo(req, cb) {
+        let resp = new DescribeInstanceZoneInfoResponse();
+        this.request("DescribeInstanceZoneInfo", req, resp, cb);
+    }
+
+    /**
+     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * @param {SwitchInstanceVipRequest} req
+     * @param {function(string, SwitchInstanceVipResponse):void} cb
+     * @public
+     */
+    SwitchInstanceVip(req, cb) {
+        let resp = new SwitchInstanceVipResponse();
+        this.request("SwitchInstanceVip", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeReplicationGroup）查询复制组。
+     * @param {DescribeReplicationGroupRequest} req
+     * @param {function(string, DescribeReplicationGroupResponse):void} cb
+     * @public
+     */
+    DescribeReplicationGroup(req, cb) {
+        let resp = new DescribeReplicationGroupResponse();
+        this.request("DescribeReplicationGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询实例续费价格（包年包月）
+     * @param {InquiryPriceRenewInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewInstance(req, cb) {
+        let resp = new InquiryPriceRenewInstanceResponse();
+        this.request("InquiryPriceRenewInstance", req, resp, cb);
+    }
+
+    /**
+     * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
+     * @param {ModifyMaintenanceWindowRequest} req
+     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceWindow(req, cb) {
+        let resp = new ModifyMaintenanceWindowResponse();
+        this.request("ModifyMaintenanceWindow", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
+     * @param {ModifyNetworkConfigRequest} req
+     * @param {function(string, ModifyNetworkConfigResponse):void} cb
+     * @public
+     */
+    ModifyNetworkConfig(req, cb) {
+        let resp = new ModifyNetworkConfigResponse();
+        this.request("ModifyNetworkConfig", req, resp, cb);
+    }
+
+    /**
+     * 获取集群版实例分片信息
+     * @param {DescribeInstanceShardsRequest} req
+     * @param {function(string, DescribeInstanceShardsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceShards(req, cb) {
+        let resp = new DescribeInstanceShardsResponse();
+        this.request("DescribeInstanceShards", req, resp, cb);
+    }
+
+    /**
+     * 包年包月实例退还
+     * @param {DestroyPrepaidInstanceRequest} req
+     * @param {function(string, DestroyPrepaidInstanceResponse):void} cb
+     * @public
+     */
+    DestroyPrepaidInstance(req, cb) {
+        let resp = new DestroyPrepaidInstanceResponse();
+        this.request("DestroyPrepaidInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis实例列表
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 开启SSL
+     * @param {OpenSSLRequest} req
+     * @param {function(string, OpenSSLResponse):void} cb
+     * @public
+     */
+    OpenSSL(req, cb) {
+        let resp = new OpenSSLResponse();
+        this.request("OpenSSL", req, resp, cb);
+    }
+
+    /**
+     * 获取备份配置
+     * @param {DescribeAutoBackupConfigRequest} req
+     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeAutoBackupConfig(req, cb) {
+        let resp = new DescribeAutoBackupConfigResponse();
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 实例解隔离
+     * @param {StartupInstanceRequest} req
+     * @param {function(string, StartupInstanceResponse):void} cb
+     * @public
+     */
+    StartupInstance(req, cb) {
+        let resp = new StartupInstanceResponse();
+        this.request("StartupInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
+     * @param {DescribeProxySlowLogRequest} req
+     * @param {function(string, DescribeProxySlowLogResponse):void} cb
+     * @public
+     */
+    DescribeProxySlowLog(req, cb) {
+        let resp = new DescribeProxySlowLogResponse();
+        this.request("DescribeProxySlowLog", req, resp, cb);
+    }
+
+    /**
+     * 复制组实例切主
+     * @param {ChangeMasterInstanceRequest} req
+     * @param {function(string, ChangeMasterInstanceResponse):void} cb
+     * @public
+     */
+    ChangeMasterInstance(req, cb) {
+        let resp = new ChangeMasterInstanceResponse();
+        this.request("ChangeMasterInstance", req, resp, cb);
+    }
+
+    /**
+     * 变更实例配置
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 应用参数模板到实例
+     * @param {ApplyParamsTemplateRequest} req
+     * @param {function(string, ApplyParamsTemplateResponse):void} cb
+     * @public
+     */
+    ApplyParamsTemplate(req, cb) {
+        let resp = new ApplyParamsTemplateResponse();
+        this.request("ApplyParamsTemplate", req, resp, cb);
+    }
+
+    /**
+     * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
+     * @param {DescribeMaintenanceWindowRequest} req
+     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    DescribeMaintenanceWindow(req, cb) {
+        let resp = new DescribeMaintenanceWindowResponse();
+        this.request("DescribeMaintenanceWindow", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateInstances)用于创建redis实例。
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
+     * @public
+     */
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询订单信息
+     * @param {DescribeInstanceDealDetailRequest} req
+     * @param {function(string, DescribeInstanceDealDetailResponse):void} cb
+     * @public
+     */
+    DescribeInstanceDealDetail(req, cb) {
+        let resp = new DescribeInstanceDealDetailResponse();
+        this.request("DescribeInstanceDealDetail", req, resp, cb);
+    }
+
+    /**
+     * 关闭SSL
+     * @param {CloseSSLRequest} req
+     * @param {function(string, CloseSSLResponse):void} cb
+     * @public
+     */
+    CloseSSL(req, cb) {
+        let resp = new CloseSSLResponse();
+        this.request("CloseSSL", req, resp, cb);
     }
 
 

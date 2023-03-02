@@ -75,7 +75,7 @@ class DescribeTaskStrategyRisksRequest extends  AbstractModel {
         this.StrategyId = null;
 
         /**
-         * 限制数量,默认100
+         * 返回数量,默认值为100,最大值为200
          * @type {number || null}
          */
         this.Limit = null;
@@ -85,6 +85,18 @@ class DescribeTaskStrategyRisksRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * 环境
+         * @type {string || null}
+         */
+        this.Env = null;
+
+        /**
+         * 任务类型
+         * @type {string || null}
+         */
+        this.TaskType = null;
 
     }
 
@@ -98,6 +110,8 @@ class DescribeTaskStrategyRisksRequest extends  AbstractModel {
         this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Env = 'Env' in params ? params.Env : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
 
     }
 }
@@ -241,6 +255,13 @@ class DescribeTaskStrategyRisksResponse extends  AbstractModel {
         this.Risks = null;
 
         /**
+         * 巡检资源数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ResourceCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -267,6 +288,7 @@ class DescribeTaskStrategyRisksResponse extends  AbstractModel {
         this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
         this.RiskTotalCount = 'RiskTotalCount' in params ? params.RiskTotalCount : null;
         this.Risks = 'Risks' in params ? params.Risks : null;
+        this.ResourceCount = 'ResourceCount' in params ? params.ResourceCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

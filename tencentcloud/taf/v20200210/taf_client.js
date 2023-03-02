@@ -16,37 +16,17 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const OutputRecognizeEffectiveFlowValue = models.OutputRecognizeEffectiveFlowValue;
-const OutputKolData = models.OutputKolData;
-const InputKolBspData = models.InputKolBspData;
-const RecognizeEffectiveFlowRequest = models.RecognizeEffectiveFlowRequest;
-const EnhanceTaDegreeRequest = models.EnhanceTaDegreeRequest;
-const OutputRecognizeTargetAudienceValue = models.OutputRecognizeTargetAudienceValue;
-const SendTrafficSecuritySmsMessageRequest = models.SendTrafficSecuritySmsMessageRequest;
-const DetectFraudKOLResponse = models.DetectFraudKOLResponse;
-const RecognizeCustomizedAudienceResponse = models.RecognizeCustomizedAudienceResponse;
-const OutputKolValue = models.OutputKolValue;
-const EnhanceTaDegreeResponse = models.EnhanceTaDegreeResponse;
-const InputTaBspData = models.InputTaBspData;
-const Device = models.Device;
-const OutputSendTrafficSecuritySmsMsg = models.OutputSendTrafficSecuritySmsMsg;
-const RecognizeEffectiveFlowResponse = models.RecognizeEffectiveFlowResponse;
-const SendTrafficSecuritySmsMessageResponse = models.SendTrafficSecuritySmsMessageResponse;
-const DetectFraudKOLRequest = models.DetectFraudKOLRequest;
-const RecognizeCustomizedAudienceRequest = models.RecognizeCustomizedAudienceRequest;
-const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
-const RecognizeTargetAudienceResponse = models.RecognizeTargetAudienceResponse;
-const OutputRecognizeEffectiveFlow = models.OutputRecognizeEffectiveFlow;
-const InputRecognizeTargetAudience = models.InputRecognizeTargetAudience;
-const OutputTaData = models.OutputTaData;
-const OutputTaValue = models.OutputTaValue;
-const RecognizePreciseTargetAudienceRequest = models.RecognizePreciseTargetAudienceRequest;
-const InputKolDataList = models.InputKolDataList;
-const RecognizePreciseTargetAudienceResponse = models.RecognizePreciseTargetAudienceResponse;
-const InputRecognizeEffectiveFlow = models.InputRecognizeEffectiveFlow;
 const InputBusinessEncryptData = models.InputBusinessEncryptData;
+const RecognizeCustomizedAudienceRequest = models.RecognizeCustomizedAudienceRequest;
+const RecognizeTargetAudienceResponse = models.RecognizeTargetAudienceResponse;
+const OutputRecognizeTargetAudienceValue = models.OutputRecognizeTargetAudienceValue;
 const OutputRecognizeTargetAudience = models.OutputRecognizeTargetAudience;
-const InputSendTrafficSecuritySmsMsg = models.InputSendTrafficSecuritySmsMsg;
+const RecognizeCustomizedAudienceResponse = models.RecognizeCustomizedAudienceResponse;
+const InputRecognizeTargetAudience = models.InputRecognizeTargetAudience;
+const Device = models.Device;
+const RecognizePreciseTargetAudienceRequest = models.RecognizePreciseTargetAudienceRequest;
+const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
+const RecognizePreciseTargetAudienceResponse = models.RecognizePreciseTargetAudienceResponse;
 
 
 /**
@@ -60,41 +40,6 @@ class TafClient extends AbstractClient {
     }
     
     /**
-     * 流量反欺诈-虚假TA识别
-     * @param {EnhanceTaDegreeRequest} req
-     * @param {function(string, EnhanceTaDegreeResponse):void} cb
-     * @public
-     */
-    EnhanceTaDegree(req, cb) {
-        let resp = new EnhanceTaDegreeResponse();
-        this.request("EnhanceTaDegree", req, resp, cb);
-    }
-
-    /**
-     * 流量反欺诈-流量验准
-     * @param {RecognizeTargetAudienceRequest} req
-     * @param {function(string, RecognizeTargetAudienceResponse):void} cb
-     * @public
-     */
-    RecognizeTargetAudience(req, cb) {
-        let resp = new RecognizeTargetAudienceResponse();
-        this.request("RecognizeTargetAudience", req, resp, cb);
-    }
-
-    /**
-     * 该服务已不再对外提供能力
-
-筛选敏感易骚扰人群
-     * @param {RecognizeEffectiveFlowRequest} req
-     * @param {function(string, RecognizeEffectiveFlowResponse):void} cb
-     * @public
-     */
-    RecognizeEffectiveFlow(req, cb) {
-        let resp = new RecognizeEffectiveFlowResponse();
-        this.request("RecognizeEffectiveFlow", req, resp, cb);
-    }
-
-    /**
      * 流量反欺诈-流量验准定制版
      * @param {RecognizeCustomizedAudienceRequest} req
      * @param {function(string, RecognizeCustomizedAudienceResponse):void} cb
@@ -103,17 +48,6 @@ class TafClient extends AbstractClient {
     RecognizeCustomizedAudience(req, cb) {
         let resp = new RecognizeCustomizedAudienceResponse();
         this.request("RecognizeCustomizedAudience", req, resp, cb);
-    }
-
-    /**
-     * 流量反欺诈-KOL欺诈识别
-     * @param {DetectFraudKOLRequest} req
-     * @param {function(string, DetectFraudKOLResponse):void} cb
-     * @public
-     */
-    DetectFraudKOL(req, cb) {
-        let resp = new DetectFraudKOLResponse();
-        this.request("DetectFraudKOL", req, resp, cb);
     }
 
     /**
@@ -128,14 +62,14 @@ class TafClient extends AbstractClient {
     }
 
     /**
-     * 流量安选产品，短信发送接口
-     * @param {SendTrafficSecuritySmsMessageRequest} req
-     * @param {function(string, SendTrafficSecuritySmsMessageResponse):void} cb
+     * 流量反欺诈-流量验准
+     * @param {RecognizeTargetAudienceRequest} req
+     * @param {function(string, RecognizeTargetAudienceResponse):void} cb
      * @public
      */
-    SendTrafficSecuritySmsMessage(req, cb) {
-        let resp = new SendTrafficSecuritySmsMessageResponse();
-        this.request("SendTrafficSecuritySmsMessage", req, resp, cb);
+    RecognizeTargetAudience(req, cb) {
+        let resp = new RecognizeTargetAudienceResponse();
+        this.request("RecognizeTargetAudience", req, resp, cb);
     }
 
 

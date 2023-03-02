@@ -399,10 +399,10 @@ class DescribeSocCheckResultListResponse extends  AbstractModel {
 }
 
 /**
- * soc产品购买信息
+ * SocCheckItem类型
  * @class
  */
-class SocProductionItem extends  AbstractModel {
+class SocCheckItem extends  AbstractModel {
     constructor(){
         super();
 
@@ -414,18 +414,25 @@ class SocProductionItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 标识
+         * 唯一id
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
-        this.Index = null;
+        this.LevelId = null;
 
         /**
-         * 状态
+         * 成功数
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Status = null;
+        this.SuccessCount = null;
+
+        /**
+         * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailCount = null;
 
     }
 
@@ -437,8 +444,213 @@ class SocProductionItem extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.Index = 'Index' in params ? params.Index : null;
+        this.LevelId = 'LevelId' in params ? params.LevelId : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+
+    }
+}
+
+/**
+ * DescribeVulDetail返回参数结构体
+ * @class
+ */
+class DescribeVulDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VulType = null;
+
+        /**
+         * 漏洞子类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubVulType = null;
+
+        /**
+         * cvss分数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CvssScore = null;
+
+        /**
+         * cvss值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cvss = null;
+
+        /**
+         * cve编号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cve = null;
+
+        /**
+         * cnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cnvd = null;
+
+        /**
+         * cnnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cnnvd = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 参考
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reference = null;
+
+        /**
+         * 修复意见
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Repair = null;
+
+        /**
+         * 披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 漏洞名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 受影响资产唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImpactAsset = null;
+
+        /**
+         * 受影响资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImpactAssetName = null;
+
+        /**
+         * 受影响资产是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsAssetDeleted = null;
+
+        /**
+         * 漏洞来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 漏洞URL
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VulUrl = null;
+
+        /**
+         * 资产归属
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SsaAssetCategory = null;
+
+        /**
+         * 资产文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VulPath = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.SubVulType = 'SubVulType' in params ? params.SubVulType : null;
+        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
+        this.Cvss = 'Cvss' in params ? params.Cvss : null;
+        this.Cve = 'Cve' in params ? params.Cve : null;
+        this.Cnvd = 'Cnvd' in params ? params.Cnvd : null;
+        this.Cnnvd = 'Cnnvd' in params ? params.Cnnvd : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.Repair = 'Repair' in params ? params.Repair : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ImpactAsset = 'ImpactAsset' in params ? params.ImpactAsset : null;
+        this.ImpactAssetName = 'ImpactAssetName' in params ? params.ImpactAssetName : null;
+        this.IsAssetDeleted = 'IsAssetDeleted' in params ? params.IsAssetDeleted : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.VulUrl = 'VulUrl' in params ? params.VulUrl : null;
+        this.SsaAssetCategory = 'SsaAssetCategory' in params ? params.SsaAssetCategory : null;
+        this.VulPath = 'VulPath' in params ? params.VulPath : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2063,6 +2275,51 @@ class DescribeComplianceDetailResponse extends  AbstractModel {
 }
 
 /**
+ * soc产品购买信息
+ * @class
+ */
+class SocProductionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeAssetsMappingList返回参数结构体
  * @class
  */
@@ -2257,6 +2514,48 @@ class SocComplianceItem extends  AbstractModel {
                 this.CheckItems.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 过滤条件
+ * @class
+ */
+class QueryFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤key
+         * @type {string || null}
+         */
+        this.FilterKey = null;
+
+        /**
+         * 操作符(只支持32位)
+         * @type {number || null}
+         */
+        this.FilterOperatorType = null;
+
+        /**
+         * 过滤value
+         * @type {string || null}
+         */
+        this.FilterValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterKey = 'FilterKey' in params ? params.FilterKey : null;
+        this.FilterOperatorType = 'FilterOperatorType' in params ? params.FilterOperatorType : null;
+        this.FilterValue = 'FilterValue' in params ? params.FilterValue : null;
 
     }
 }
@@ -3065,6 +3364,104 @@ class AlertType extends  AbstractModel {
 }
 
 /**
+ * SaEventPub请求参数结构体
+ * @class
+ */
+class SaEventPubRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 受影响资产
+         * @type {string || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 安全事件名称
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 安全事件1级分类，-1:未知 0:全部 1:攻击事件 2:侦查事件 3:僵木蠕毒 4:违规策略
+         * @type {number || null}
+         */
+        this.EventType1 = null;
+
+        /**
+         * 安全事件2级分类，-1:未知 0:全部 1:DDOS事件 2:Web攻击 3:木马 4:异地登录 5:密码破解
+         * @type {number || null}
+         */
+        this.EventType2 = null;
+
+        /**
+         * 风险等级，-1:未知 0:全部 1:低危 2:中危 3:高危 4:严重，可多选，如：1,2
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 安全事件状态，-1:未知 0:全部 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询起始地址
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询个数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 私有字段和公有字段映射的原始采集数据唯一标识的MD5值
+         * @type {string || null}
+         */
+        this.OldIdMd5 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Asset = 'Asset' in params ? params.Asset : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.EventType1 = 'EventType1' in params ? params.EventType1 : null;
+        this.EventType2 = 'EventType2' in params ? params.EventType2 : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.OldIdMd5 = 'OldIdMd5' in params ? params.OldIdMd5 : null;
+
+    }
+}
+
+/**
  * DescribeSocAlertList请求参数结构体
  * @class
  */
@@ -3085,7 +3482,7 @@ class DescribeSocAlertListRequest extends  AbstractModel {
         this.PageIndex = null;
 
         /**
-         * 业务场景 参考ScenesType
+         * 1:急需关注 2.重保监控 3.全量告警
          * @type {number || null}
          */
         this.Scenes = null;
@@ -3916,6 +4313,58 @@ class DescribeLeakDetectionListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAssetDetailList返回参数结构体
+ * @class
+ */
+class DescribeAssetDetailListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AssetDetail> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new AssetDetail();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 事件列表对象
  * @class
  */
@@ -4444,40 +4893,24 @@ class DescribeSocCheckItemListRspRsp extends  AbstractModel {
 }
 
 /**
- * SocCheckItem类型
+ * SaEventPub返回参数结构体
  * @class
  */
-class SocCheckItem extends  AbstractModel {
+class SaEventPubResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 名字
-注意：此字段可能返回 null，表示取不到有效值。
+         * DataSaEventPub
+         * @type {ObjDataSaEventPub || null}
+         */
+        this.DataSaEventPub = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LevelId = null;
-
-        /**
-         * 成功数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SuccessCount = null;
-
-        /**
-         * 失败数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FailCount = null;
+        this.RequestId = null;
 
     }
 
@@ -4488,10 +4921,13 @@ class SocCheckItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.LevelId = 'LevelId' in params ? params.LevelId : null;
-        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
-        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+
+        if (params.DataSaEventPub) {
+            let obj = new ObjDataSaEventPub();
+            obj.deserialize(params.DataSaEventPub)
+            this.DataSaEventPub = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5148,6 +5584,104 @@ class Results extends  AbstractModel {
 }
 
 /**
+ * DataSaEventPub
+ * @class
+ */
+class ListDataSaEventPub extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 安全事件1级分类
+         * @type {number || null}
+         */
+        this.EventType1 = null;
+
+        /**
+         * 安全事件2级分类
+         * @type {number || null}
+         */
+        this.EventType2 = null;
+
+        /**
+         * 安全事件名称
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 风险等级
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 安全事件状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 攻击源ip
+         * @type {string || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * 攻击目标ip
+         * @type {string || null}
+         */
+        this.DstIp = null;
+
+        /**
+         * 攻击目标端口
+         * @type {number || null}
+         */
+        this.DstPort = null;
+
+        /**
+         * 受影响资产
+         * @type {string || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 私有字段和公有字段映射的原始采集数据唯一标识的MD5值
+         * @type {string || null}
+         */
+        this.OldIdMd5 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventType1 = 'EventType1' in params ? params.EventType1 : null;
+        this.EventType2 = 'EventType2' in params ? params.EventType2 : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+        this.Asset = 'Asset' in params ? params.Asset : null;
+        this.OldIdMd5 = 'OldIdMd5' in params ? params.OldIdMd5 : null;
+
+    }
+}
+
+/**
  * 资产详情信息
  * @class
  */
@@ -5597,30 +6131,24 @@ class DescribeComplianceAssetListRequest extends  AbstractModel {
 }
 
 /**
- * 查询参数
+ * DataSaEventPub
  * @class
  */
-class QueryFilter extends  AbstractModel {
+class ObjDataSaEventPub extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询的字段
-         * @type {string || null}
-         */
-        this.FilterKey = null;
-
-        /**
-         * 查询的值
-         * @type {string || null}
-         */
-        this.FilterValue = null;
-
-        /**
-         * 匹配类型，1等于；2大于；3小于；4大于等于；5小于等于；6不等于；7in；8not in；9模糊匹配
+         * Count
          * @type {number || null}
          */
-        this.FilterOperatorType = null;
+        this.Count = null;
+
+        /**
+         * List
+         * @type {Array.<ListDataSaEventPub> || null}
+         */
+        this.List = null;
 
     }
 
@@ -5631,9 +6159,16 @@ class QueryFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FilterKey = 'FilterKey' in params ? params.FilterKey : null;
-        this.FilterValue = 'FilterValue' in params ? params.FilterValue : null;
-        this.FilterOperatorType = 'FilterOperatorType' in params ? params.FilterOperatorType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ListDataSaEventPub();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
 
     }
 }
@@ -5680,172 +6215,49 @@ class DescribeAssetDetailResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVulDetail返回参数结构体
+ * DescribeAssetDetailList请求参数结构体
  * @class
  */
-class DescribeVulDetailResponse extends  AbstractModel {
+class DescribeAssetDetailListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞类型
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询条件，可支持的查询字段：AssetUniqid,AssetName,AssetIpAll,AssetVpcid,Tag
+         * @type {Array.<AssetQueryFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 排序条件，可支持的排序字段：
+AssetCspmRiskNum,AssetVulNum,AssetEventNum,SsaAssetDiscoverTime
+         * @type {Array.<QuerySort> || null}
+         */
+        this.Sorter = null;
+
+        /**
+         * 风险标签
+         * @type {Array.<string> || null}
+         */
+        this.RiskTags = null;
+
+        /**
+         * 标签
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 页
          * @type {number || null}
          */
-        this.VulType = null;
+        this.PageIndex = null;
 
         /**
-         * 漏洞子类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubVulType = null;
-
-        /**
-         * cvss分数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CvssScore = null;
-
-        /**
-         * cvss值
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Cvss = null;
-
-        /**
-         * cve编号
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Cve = null;
-
-        /**
-         * cnvd编号
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Cnvd = null;
-
-        /**
-         * cnnvd编号
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Cnnvd = null;
-
-        /**
-         * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Desc = null;
-
-        /**
-         * 参考
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Reference = null;
-
-        /**
-         * 修复意见
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Repair = null;
-
-        /**
-         * 披露时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ReleaseTime = null;
-
-        /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 漏洞名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 等级
-注意：此字段可能返回 null，表示取不到有效值。
+         * 页大小
          * @type {number || null}
          */
-        this.Level = null;
-
-        /**
-         * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 受影响资产唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ImpactAsset = null;
-
-        /**
-         * 受影响资产名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ImpactAssetName = null;
-
-        /**
-         * 受影响资产是否已删除
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsAssetDeleted = null;
-
-        /**
-         * 漏洞来源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * 漏洞URL
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VulUrl = null;
-
-        /**
-         * 资产归属
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SsaAssetCategory = null;
-
-        /**
-         * 资产文件路径
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VulPath = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.PageSize = null;
 
     }
 
@@ -5856,29 +6268,28 @@ class DescribeVulDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulType = 'VulType' in params ? params.VulType : null;
-        this.SubVulType = 'SubVulType' in params ? params.SubVulType : null;
-        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
-        this.Cvss = 'Cvss' in params ? params.Cvss : null;
-        this.Cve = 'Cve' in params ? params.Cve : null;
-        this.Cnvd = 'Cnvd' in params ? params.Cnvd : null;
-        this.Cnnvd = 'Cnnvd' in params ? params.Cnnvd : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
-        this.Reference = 'Reference' in params ? params.Reference : null;
-        this.Repair = 'Repair' in params ? params.Repair : null;
-        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ImpactAsset = 'ImpactAsset' in params ? params.ImpactAsset : null;
-        this.ImpactAssetName = 'ImpactAssetName' in params ? params.ImpactAssetName : null;
-        this.IsAssetDeleted = 'IsAssetDeleted' in params ? params.IsAssetDeleted : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.VulUrl = 'VulUrl' in params ? params.VulUrl : null;
-        this.SsaAssetCategory = 'SsaAssetCategory' in params ? params.SsaAssetCategory : null;
-        this.VulPath = 'VulPath' in params ? params.VulPath : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new AssetQueryFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+        if (params.Sorter) {
+            this.Sorter = new Array();
+            for (let z in params.Sorter) {
+                let obj = new QuerySort();
+                obj.deserialize(params.Sorter[z]);
+                this.Sorter.push(obj);
+            }
+        }
+        this.RiskTags = 'RiskTags' in params ? params.RiskTags : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -5983,7 +6394,8 @@ module.exports = {
     DescribeComplianceAssetListResponse: DescribeComplianceAssetListResponse,
     DataCheck: DataCheck,
     DescribeSocCheckResultListResponse: DescribeSocCheckResultListResponse,
-    SocProductionItem: SocProductionItem,
+    SocCheckItem: SocCheckItem,
+    DescribeVulDetailResponse: DescribeVulDetailResponse,
     MappingResult: MappingResult,
     DescribeCheckConfigAssetListRequest: DescribeCheckConfigAssetListRequest,
     Asset: Asset,
@@ -6003,9 +6415,11 @@ module.exports = {
     SocComplianceInfoResp: SocComplianceInfoResp,
     DescribeAssetListRequest: DescribeAssetListRequest,
     DescribeComplianceDetailResponse: DescribeComplianceDetailResponse,
+    SocProductionItem: SocProductionItem,
     DescribeAssetsMappingListResponse: DescribeAssetsMappingListResponse,
     DescribeSocAlertListResponse: DescribeSocAlertListResponse,
     SocComplianceItem: SocComplianceItem,
+    QueryFilter: QueryFilter,
     SecurityStatus: SecurityStatus,
     QuerySort: QuerySort,
     DescribeComplianceListRequest: DescribeComplianceListRequest,
@@ -6019,6 +6433,7 @@ module.exports = {
     DescribeSafetyEventListRequest: DescribeSafetyEventListRequest,
     AssetQueryFilter: AssetQueryFilter,
     AlertType: AlertType,
+    SaEventPubRequest: SaEventPubRequest,
     DescribeSocAlertListRequest: DescribeSocAlertListRequest,
     ComplianceCheckDetail: ComplianceCheckDetail,
     SaDivulgeDataQueryPubResponse: SaDivulgeDataQueryPubResponse,
@@ -6032,11 +6447,12 @@ module.exports = {
     DescribeCheckConfigDetailRequest: DescribeCheckConfigDetailRequest,
     VulList: VulList,
     DescribeLeakDetectionListResponse: DescribeLeakDetectionListResponse,
+    DescribeAssetDetailListResponse: DescribeAssetDetailListResponse,
     DataEvent: DataEvent,
     DescribeSocCheckItemListRequest: DescribeSocCheckItemListRequest,
     CheckConfigDetail: CheckConfigDetail,
     DescribeSocCheckItemListRspRsp: DescribeSocCheckItemListRspRsp,
-    SocCheckItem: SocCheckItem,
+    SaEventPubResponse: SaEventPubResponse,
     DescribeEventDetailRequest: DescribeEventDetailRequest,
     CheckAssetItem: CheckAssetItem,
     AssetTypeStatistic: AssetTypeStatistic,
@@ -6046,11 +6462,12 @@ module.exports = {
     DescribeAssetsMappingListRequest: DescribeAssetsMappingListRequest,
     DataCompliance: DataCompliance,
     Results: Results,
+    ListDataSaEventPub: ListDataSaEventPub,
     AssetDetail: AssetDetail,
     DescribeComplianceAssetListRequest: DescribeComplianceAssetListRequest,
-    QueryFilter: QueryFilter,
+    ObjDataSaEventPub: ObjDataSaEventPub,
     DescribeAssetDetailResponse: DescribeAssetDetailResponse,
-    DescribeVulDetailResponse: DescribeVulDetailResponse,
+    DescribeAssetDetailListRequest: DescribeAssetDetailListRequest,
     DescribeSocCspmComplianceRequest: DescribeSocCspmComplianceRequest,
     AlertDetail: AlertDetail,
     DescribeComplianceDetailRequest: DescribeComplianceDetailRequest,

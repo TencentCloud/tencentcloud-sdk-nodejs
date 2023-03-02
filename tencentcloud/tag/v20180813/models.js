@@ -238,24 +238,24 @@ class AttachResourcesTagResponse extends  AbstractModel {
 }
 
 /**
- * GetTagKeys返回参数结构体
+ * AddProject返回参数结构体
  * @class
  */
-class GetTagKeysResponse extends  AbstractModel {
+class AddProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 获取的下一页的Token值
-         * @type {string || null}
+         * 项目Id
+         * @type {number || null}
          */
-        this.PaginationToken = null;
+        this.ProjectId = null;
 
         /**
-         * 标签键信息。
-         * @type {Array.<string> || null}
+         * 是否为新项目
+         * @type {number || null}
          */
-        this.TagKeys = null;
+        this.IsNew = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -272,8 +272,8 @@ class GetTagKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
-        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -576,42 +576,30 @@ class DescribeTagsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTagKeys返回参数结构体
+ * DescribeProjects请求参数结构体
  * @class
  */
-class DescribeTagKeysResponse extends  AbstractModel {
+class DescribeProjectsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 结果总数
+         * 传1拉取所有项目（包括隐藏项目），传0拉取显示项目
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.AllList = null;
 
         /**
-         * 数据位移偏量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页大小
+         * 分页条数，固定值1000。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 标签列表
-         * @type {Array.<string> || null}
+         * 分页偏移量。
+         * @type {number || null}
          */
-        this.Tags = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Offset = null;
 
     }
 
@@ -622,11 +610,9 @@ class DescribeTagKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.AllList = 'AllList' in params ? params.AllList : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -676,6 +662,55 @@ class DescribeTagValuesRequest extends  AbstractModel {
         this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * UpdateProject请求参数结构体
+ * @class
+ */
+class UpdateProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 禁用项目，1，禁用，0，启用
+         * @type {number || null}
+         */
+        this.Disable = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Info = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Disable = 'Disable' in params ? params.Disable : null;
+        this.Info = 'Info' in params ? params.Info : null;
 
     }
 }
@@ -972,34 +1007,30 @@ class DescribeTagKeysRequest extends  AbstractModel {
 }
 
 /**
- * GetTags请求参数结构体
+ * DescribeProjects返回参数结构体
  * @class
  */
-class GetTagsRequest extends  AbstractModel {
+class DescribeProjectsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 从上一页的响应中获取的下一页的Token值。
-如果是第一次请求，设置为空。
-         * @type {string || null}
-         */
-        this.PaginationToken = null;
-
-        /**
-         * 每一页返回的数据最大条数，最大1000。
-缺省值：50。
+         * 数据总条数
          * @type {number || null}
          */
-        this.MaxResults = null;
+        this.Total = null;
 
         /**
-         * 标签键。
-返回所有标签键列表对应的标签。
-最大长度：20
-         * @type {Array.<string> || null}
+         * 项目列表
+         * @type {Array.<Project> || null}
          */
-        this.TagKeys = null;
+        this.Projects = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1010,9 +1041,17 @@ class GetTagsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
-        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
-        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new Project();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1027,7 +1066,7 @@ class UnTagResourcesRequest extends  AbstractModel {
 
         /**
          * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
-例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}。
 N取值范围：0~9
          * @type {Array.<string> || null}
          */
@@ -1611,26 +1650,24 @@ class TagResource extends  AbstractModel {
 }
 
 /**
- * GetTagKeys请求参数结构体
+ * AddProject请求参数结构体
  * @class
  */
-class GetTagKeysRequest extends  AbstractModel {
+class AddProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 从上一页的响应中获取的下一页的Token值。
-如果是第一次请求，设置为空。
+         * 项目名称
          * @type {string || null}
          */
-        this.PaginationToken = null;
+        this.ProjectName = null;
 
         /**
-         * 每一页返回的数据最大条数，最大1000。
-缺省值：50。
-         * @type {number || null}
+         * 项目描述
+         * @type {string || null}
          */
-        this.MaxResults = null;
+        this.Info = null;
 
     }
 
@@ -1641,8 +1678,8 @@ class GetTagKeysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
-        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Info = 'Info' in params ? params.Info : null;
 
     }
 }
@@ -2080,6 +2117,51 @@ class DescribeTagValuesResponse extends  AbstractModel {
 }
 
 /**
+ * 资源标签键值
+ * @class
+ */
+class ResourceIdTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 标签键值对
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagKeyValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+        if (params.TagKeyValues) {
+            this.TagKeyValues = new Array();
+            for (let z in params.TagKeyValues) {
+                let obj = new Tag();
+                obj.deserialize(params.TagKeyValues[z]);
+                this.TagKeyValues.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * tag过滤数组多个是与的关系
  * @class
  */
@@ -2110,6 +2192,62 @@ class TagFilter extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 项目信息
+ * @class
+ */
+class Project extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 创建人uin
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * 项目描述
+         * @type {string || null}
+         */
+        this.ProjectInfo = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.ProjectInfo = 'ProjectInfo' in params ? params.ProjectInfo : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2328,6 +2466,43 @@ class ResourceTagMapping extends  AbstractModel {
 }
 
 /**
+ * GetTagKeys请求参数结构体
+ * @class
+ */
+class GetTagKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+
+    }
+}
+
+/**
  * DetachResourcesTag返回参数结构体
  * @class
  */
@@ -2498,26 +2673,42 @@ class DeleteTagResponse extends  AbstractModel {
 }
 
 /**
- * 资源标签键值
+ * DescribeTagKeys返回参数结构体
  * @class
  */
-class ResourceIdTag extends  AbstractModel {
+class DescribeTagKeysResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 结果总数
+         * @type {number || null}
          */
-        this.ResourceId = null;
+        this.TotalCount = null;
 
         /**
-         * 标签键值对
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
+         * 数据位移偏量
+         * @type {number || null}
          */
-        this.TagKeyValues = null;
+        this.Offset = null;
+
+        /**
+         * 每页大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 标签列表
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2528,16 +2719,11 @@ class ResourceIdTag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-
-        if (params.TagKeyValues) {
-            this.TagKeyValues = new Array();
-            for (let z in params.TagKeyValues) {
-                let obj = new Tag();
-                obj.deserialize(params.TagKeyValues[z]);
-                this.TagKeyValues.push(obj);
-            }
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2629,6 +2815,48 @@ class UpdateResourceTagValueRequest extends  AbstractModel {
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
         this.Resource = 'Resource' in params ? params.Resource : null;
+
+    }
+}
+
+/**
+ * GetTagKeys返回参数结构体
+ * @class
+ */
+class GetTagKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 获取的下一页的Token值
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * 标签键信息。
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2744,6 +2972,52 @@ class CreateTagsResponse extends  AbstractModel {
 }
 
 /**
+ * GetTags请求参数结构体
+ * @class
+ */
+class GetTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+        /**
+         * 标签键。
+返回所有标签键列表对应的标签。
+最大长度：20
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+
+    }
+}
+
+/**
  * DescribeResourcesByTags请求参数结构体
  * @class
  */
@@ -2838,7 +3112,7 @@ class TagResourcesRequest extends  AbstractModel {
 
         /**
          * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
-例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}。
 N取值范围：0~9
          * @type {Array.<string> || null}
          */
@@ -3046,6 +3320,34 @@ class DescribeResourceTagsRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateProject返回参数结构体
+ * @class
+ */
+class UpdateProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeResourceTagsByResourceIdsSeq请求参数结构体
  * @class
  */
@@ -3229,22 +3531,23 @@ module.exports = {
     DetachResourcesTagRequest: DetachResourcesTagRequest,
     GetTagValuesResponse: GetTagValuesResponse,
     AttachResourcesTagResponse: AttachResourcesTagResponse,
-    GetTagKeysResponse: GetTagKeysResponse,
+    AddProjectResponse: AddProjectResponse,
     GetResourcesRequest: GetResourcesRequest,
     DeleteTagRequest: DeleteTagRequest,
     DeleteResourceTagResponse: DeleteResourceTagResponse,
     DescribeResourceTagsByTagKeysRequest: DescribeResourceTagsByTagKeysRequest,
     ModifyResourceTagsResponse: ModifyResourceTagsResponse,
     DescribeTagsRequest: DescribeTagsRequest,
-    DescribeTagKeysResponse: DescribeTagKeysResponse,
+    DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeTagValuesRequest: DescribeTagValuesRequest,
+    UpdateProjectRequest: UpdateProjectRequest,
     DescribeResourcesByTagsUnionRequest: DescribeResourcesByTagsUnionRequest,
     DeleteTagsResponse: DeleteTagsResponse,
     ModifyResourcesTagValueResponse: ModifyResourcesTagValueResponse,
     DescribeTagsResponse: DescribeTagsResponse,
     DeleteTagsRequest: DeleteTagsRequest,
     DescribeTagKeysRequest: DescribeTagKeysRequest,
-    GetTagsRequest: GetTagsRequest,
+    DescribeProjectsResponse: DescribeProjectsResponse,
     UnTagResourcesRequest: UnTagResourcesRequest,
     DescribeTagsSeqResponse: DescribeTagsSeqResponse,
     ModifyResourceTagsRequest: ModifyResourceTagsRequest,
@@ -3255,7 +3558,7 @@ module.exports = {
     GetTagsResponse: GetTagsResponse,
     ModifyResourcesTagValueRequest: ModifyResourcesTagValueRequest,
     TagResource: TagResource,
-    GetTagKeysRequest: GetTagKeysRequest,
+    AddProjectRequest: AddProjectRequest,
     AddResourceTagResponse: AddResourceTagResponse,
     DescribeResourcesByTagsResponse: DescribeResourcesByTagsResponse,
     AddResourceTagRequest: AddResourceTagRequest,
@@ -3264,28 +3567,34 @@ module.exports = {
     DescribeResourceTagsByTagKeysResponse: DescribeResourceTagsByTagKeysResponse,
     DescribeTagsSeqRequest: DescribeTagsSeqRequest,
     DescribeTagValuesResponse: DescribeTagValuesResponse,
+    ResourceIdTag: ResourceIdTag,
     TagFilter: TagFilter,
+    Project: Project,
     Tag: Tag,
     AttachResourcesTagRequest: AttachResourcesTagRequest,
     CreateTagResponse: CreateTagResponse,
     FailedResource: FailedResource,
     ResourceTagMapping: ResourceTagMapping,
+    GetTagKeysRequest: GetTagKeysRequest,
     DetachResourcesTagResponse: DetachResourcesTagResponse,
     GetResourcesResponse: GetResourcesResponse,
     DescribeResourceTagsByResourceIdsSeqResponse: DescribeResourceTagsByResourceIdsSeqResponse,
     DeleteTagResponse: DeleteTagResponse,
-    ResourceIdTag: ResourceIdTag,
+    DescribeTagKeysResponse: DescribeTagKeysResponse,
     DescribeTagValuesSeqRequest: DescribeTagValuesSeqRequest,
     UpdateResourceTagValueRequest: UpdateResourceTagValueRequest,
+    GetTagKeysResponse: GetTagKeysResponse,
     TagResourcesResponse: TagResourcesResponse,
     CreateTagsRequest: CreateTagsRequest,
     CreateTagsResponse: CreateTagsResponse,
+    GetTagsRequest: GetTagsRequest,
     DescribeResourcesByTagsRequest: DescribeResourcesByTagsRequest,
     TagResourcesRequest: TagResourcesRequest,
     DeleteResourceTagRequest: DeleteResourceTagRequest,
     UpdateResourceTagValueResponse: UpdateResourceTagValueResponse,
     TagKeyObject: TagKeyObject,
     DescribeResourceTagsRequest: DescribeResourceTagsRequest,
+    UpdateProjectResponse: UpdateProjectResponse,
     DescribeResourceTagsByResourceIdsSeqRequest: DescribeResourceTagsByResourceIdsSeqRequest,
     GetTagValuesRequest: GetTagValuesRequest,
     ResourceTag: ResourceTag,

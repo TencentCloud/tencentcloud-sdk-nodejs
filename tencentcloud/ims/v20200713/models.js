@@ -17,24 +17,60 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeImageStat请求参数结构体
+ * ImageModeration请求参数结构体
  * @class
  */
-class DescribeImageStatRequest extends  AbstractModel {
+class ImageModerationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 审核类型 1: 机器审核; 2: 人工审核
-         * @type {number || null}
+         * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略。 -- 该字段暂未开放。
+         * @type {string || null}
          */
-        this.AuditType = null;
+        this.BizType = null;
 
         /**
-         * 查询条件
-         * @type {Array.<Filters> || null}
+         * 数据ID，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.DataId = null;
+
+        /**
+         * 数据Base64编码，图片检测接口为图片文件内容，大小不能超过5M
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * 图片资源访问链接，__与FileContent参数必须二选一输入__ 。由于网络安全策略，送审带重定向的链接，可能引起下载失败，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * 截帧频率，GIF图/长图检测专用，默认值为0，表示只会检测GIF图/长图的第一帧
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * GIF图/长图检测专用，代表均匀最大截帧数量，默认值为1（即只取GIF第一张，或长图不做切分处理（可能会造成处理超时））。
+         * @type {number || null}
+         */
+        this.MaxFrames = null;
+
+        /**
+         * 账号相关信息字段，填入后可识别违规风险账号。
+         * @type {User || null}
+         */
+        this.User = null;
+
+        /**
+         * 设备相关信息字段，填入后可识别违规风险设备。
+         * @type {Device || null}
+         */
+        this.Device = null;
 
     }
 
@@ -45,14 +81,105 @@ class DescribeImageStatRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditType = 'AuditType' in params ? params.AuditType : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.MaxFrames = 'MaxFrames' in params ? params.MaxFrames : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.User) {
+            let obj = new User();
+            obj.deserialize(params.User)
+            this.User = obj;
+        }
+
+        if (params.Device) {
+            let obj = new Device();
+            obj.deserialize(params.Device)
+            this.Device = obj;
+        }
+
+    }
+}
+
+/**
+ * 实体检测结果详情：实体、广告台标、二维码
+ * @class
+ */
+class ObjectResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景识别结果
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 子标签检测结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 实体名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * 实体检测结果明细
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ObjectDetail> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Names = 'Names' in params ? params.Names : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new ObjectDetail();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
             }
         }
 
@@ -60,75 +187,67 @@ class DescribeImageStatRequest extends  AbstractModel {
 }
 
 /**
- * 识别量统计
+ * OCR文本结果详情
  * @class
  */
-class TrendCount extends  AbstractModel {
+class OcrTextDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总调用量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 总调用时长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalHour = null;
-
-        /**
-         * 通过量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PassCount = null;
-
-        /**
-         * 通过时长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PassHour = null;
-
-        /**
-         * 违规量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EvilCount = null;
-
-        /**
-         * 违规时长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EvilHour = null;
-
-        /**
-         * 疑似违规量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SuspectCount = null;
-
-        /**
-         * 疑似违规时长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SuspectHour = null;
-
-        /**
-         * 日期
-注意：此字段可能返回 null，表示取不到有效值。
+         * OCR文本内容
          * @type {string || null}
          */
-        this.Date = null;
+        this.Text = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义库id
+         * @type {string || null}
+         */
+        this.LibId = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
+         * @type {string || null}
+         */
+        this.LibName = null;
+
+        /**
+         * 该标签下命中的关键词
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * OCR位置
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+        /**
+         * OCR文本识别置信度
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * OCR文本命中的二级标签
+         * @type {string || null}
+         */
+        this.SubLabel = null;
 
     }
 
@@ -139,15 +258,249 @@ class TrendCount extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
-        this.PassCount = 'PassCount' in params ? params.PassCount : null;
-        this.PassHour = 'PassHour' in params ? params.PassHour : null;
-        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
-        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
-        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
-        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
-        this.Date = 'Date' in params ? params.Date : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.LibId = 'LibId' in params ? params.LibId : null;
+        this.LibName = 'LibName' in params ? params.LibName : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+    }
+}
+
+/**
+ * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
+ * @class
+ */
+class ObjectDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 序号
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 标签名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 标签值，
+当标签为二维码时，表示URL地址，如Name为QrCode时，Value为"http//abc.com/aaa"
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 分数
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 检测框坐标
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+        /**
+         * 二级标签名称
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+    }
+}
+
+/**
+ * OCR结果检测详情
+ * @class
+ */
+class OcrResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景识别结果
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 子标签检测结果
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * ocr结果详情
+         * @type {Array.<OcrTextDetail> || null}
+         */
+        this.Details = null;
+
+        /**
+         * ocr识别出的文本结果
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 是否命中结果，0 未命中 1命中
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new OcrTextDetail();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+
+    }
+}
+
+/**
+ * 自定义库/黑白库明细
+ * @class
+ */
+class LibDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 序号
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义库id
+         * @type {string || null}
+         */
+        this.LibId = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LibName = null;
+
+        /**
+         * 图片ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及其他令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 自定义标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 命中的模型分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.LibId = 'LibId' in params ? params.LibId : null;
+        this.LibName = 'LibName' in params ? params.LibName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -209,6 +562,81 @@ class Location extends  AbstractModel {
 }
 
 /**
+ * 分类模型命中结果
+ * @class
+ */
+class LabelResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景识别结果
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 子标签检测结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 分类模型命中子标签结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LabelDetailItem> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new LabelDetailItem();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 分类模型命中子标签结果
  * @class
  */
@@ -249,6 +677,158 @@ class LabelDetailItem extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
+ * Device结果
+ * @class
+ */
+class Device extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发表消息设备IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Mac地址
+         * @type {string || null}
+         */
+        this.Mac = null;
+
+        /**
+         * 设备指纹Token
+         * @type {string || null}
+         */
+        this.TokenId = null;
+
+        /**
+         * 设备指纹ID
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * 设备序列号
+         * @type {string || null}
+         */
+        this.IMEI = null;
+
+        /**
+         * IOS设备，Identifier For Advertising（广告标识符）
+         * @type {string || null}
+         */
+        this.IDFA = null;
+
+        /**
+         * IOS设备，IDFV - Identifier For Vendor（应用开发商标识符）
+         * @type {string || null}
+         */
+        this.IDFV = null;
+
+        /**
+         * IP地址类型 0 代表ipv4 1 代表ipv6
+         * @type {number || null}
+         */
+        this.IpType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Mac = 'Mac' in params ? params.Mac : null;
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.IMEI = 'IMEI' in params ? params.IMEI : null;
+        this.IDFA = 'IDFA' in params ? params.IDFA : null;
+        this.IDFV = 'IDFV' in params ? params.IDFV : null;
+        this.IpType = 'IpType' in params ? params.IpType : null;
+
+    }
+}
+
+/**
+ * 黑白库结果明细
+ * @class
+ */
+class LibResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景识别结果
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 子标签检测结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 黑白库结果明细
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LibDetail> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new LibDetail();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
+        }
 
     }
 }
@@ -409,224 +989,6 @@ class ImageModerationResponse extends  AbstractModel {
 }
 
 /**
- * ImageModeration请求参数结构体
- * @class
- */
-class ImageModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略。 -- 该字段暂未开放。
-         * @type {string || null}
-         */
-        this.BizType = null;
-
-        /**
-         * 数据ID，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符
-         * @type {string || null}
-         */
-        this.DataId = null;
-
-        /**
-         * 数据Base64编码，图片检测接口为图片文件内容，大小不能超过5M
-         * @type {string || null}
-         */
-        this.FileContent = null;
-
-        /**
-         * 图片资源访问链接，__与FileContent参数必须二选一输入__
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-        /**
-         * 截帧频率，GIF图/长图检测专用，默认值为0，表示只会检测GIF图/长图的第一帧
-         * @type {number || null}
-         */
-        this.Interval = null;
-
-        /**
-         * GIF图/长图检测专用，代表均匀最大截帧数量，默认值为1（即只取GIF第一张，或长图不做切分处理（可能会造成处理超时））。
-         * @type {number || null}
-         */
-        this.MaxFrames = null;
-
-        /**
-         * 账号相关信息字段，填入后可识别违规风险账号。
-         * @type {User || null}
-         */
-        this.User = null;
-
-        /**
-         * 设备相关信息字段，填入后可识别违规风险设备。
-         * @type {Device || null}
-         */
-        this.Device = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizType = 'BizType' in params ? params.BizType : null;
-        this.DataId = 'DataId' in params ? params.DataId : null;
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.MaxFrames = 'MaxFrames' in params ? params.MaxFrames : null;
-
-        if (params.User) {
-            let obj = new User();
-            obj.deserialize(params.User)
-            this.User = obj;
-        }
-
-        if (params.Device) {
-            let obj = new Device();
-            obj.deserialize(params.Device)
-            this.Device = obj;
-        }
-
-    }
-}
-
-/**
- * DescribeImsList返回参数结构体
- * @class
- */
-class DescribeImsListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回列表数据----非必选，该参数暂未对外开放
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ImsDetail> || null}
-         */
-        this.ImsDetailSet = null;
-
-        /**
-         * 总条数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ImsDetailSet) {
-            this.ImsDetailSet = new Array();
-            for (let z in params.ImsDetailSet) {
-                let obj = new ImsDetail();
-                obj.deserialize(params.ImsDetailSet[z]);
-                this.ImsDetailSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * OCR结果检测详情
- * @class
- */
-class OcrResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 场景识别结果
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * 建议您拿到判断结果后的执行操作。
-建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
-以及令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 子标签检测结果
-         * @type {string || null}
-         */
-        this.SubLabel = null;
-
-        /**
-         * 该标签模型命中的分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * ocr结果详情
-         * @type {Array.<OcrTextDetail> || null}
-         */
-        this.Details = null;
-
-        /**
-         * ocr识别出的文本结果
-         * @type {string || null}
-         */
-        this.Text = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-        if (params.Details) {
-            this.Details = new Array();
-            for (let z in params.Details) {
-                let obj = new OcrTextDetail();
-                obj.deserialize(params.Details[z]);
-                this.Details.push(obj);
-            }
-        }
-        this.Text = 'Text' in params ? params.Text : null;
-
-    }
-}
-
-/**
  * User结果
  * @class
  */
@@ -710,940 +1072,19 @@ class User extends  AbstractModel {
     }
 }
 
-/**
- * 分类模型命中结果
- * @class
- */
-class LabelResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 场景识别结果
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * 建议您拿到判断结果后的执行操作。
-建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
-以及令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 子标签检测结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubLabel = null;
-
-        /**
-         * 该标签模型命中的分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 分类模型命中子标签结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<LabelDetailItem> || null}
-         */
-        this.Details = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-        if (params.Details) {
-            this.Details = new Array();
-            for (let z in params.Details) {
-                let obj = new LabelDetailItem();
-                obj.deserialize(params.Details[z]);
-                this.Details.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Device结果
- * @class
- */
-class Device extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 发表消息设备IP
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Mac地址
-         * @type {string || null}
-         */
-        this.Mac = null;
-
-        /**
-         * 设备指纹Token
-         * @type {string || null}
-         */
-        this.TokenId = null;
-
-        /**
-         * 设备指纹ID
-         * @type {string || null}
-         */
-        this.DeviceId = null;
-
-        /**
-         * 设备序列号
-         * @type {string || null}
-         */
-        this.IMEI = null;
-
-        /**
-         * IOS设备，Identifier For Advertising（广告标识符）
-         * @type {string || null}
-         */
-        this.IDFA = null;
-
-        /**
-         * IOS设备，IDFV - Identifier For Vendor（应用开发商标识符）
-         * @type {string || null}
-         */
-        this.IDFV = null;
-
-        /**
-         * IP地址类型 0 代表ipv4 1 代表ipv6
-         * @type {number || null}
-         */
-        this.IpType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Mac = 'Mac' in params ? params.Mac : null;
-        this.TokenId = 'TokenId' in params ? params.TokenId : null;
-        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
-        this.IMEI = 'IMEI' in params ? params.IMEI : null;
-        this.IDFA = 'IDFA' in params ? params.IDFA : null;
-        this.IDFV = 'IDFV' in params ? params.IDFV : null;
-        this.IpType = 'IpType' in params ? params.IpType : null;
-
-    }
-}
-
-/**
- * 机器审核详情列表数据项
- * @class
- */
-class ImsDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文本内容
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * 数据方式， 0：我审，1：人审
-         * @type {number || null}
-         */
-        this.DataSource = null;
-
-        /**
-         * 最后更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * ----非必选，该参数暂未对外开放
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 机器审核时间
-         * @type {string || null}
-         */
-        this.ModerationTime = null;
-
-        /**
-         * 最后更新人
-         * @type {string || null}
-         */
-        this.UpdateUser = null;
-
-        /**
-         * 内容RequestId
-         * @type {string || null}
-         */
-        this.ContentId = null;
-
-        /**
-         * 自主审核结果
-         * @type {number || null}
-         */
-        this.OperEvilType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.DataSource = 'DataSource' in params ? params.DataSource : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.ModerationTime = 'ModerationTime' in params ? params.ModerationTime : null;
-        this.UpdateUser = 'UpdateUser' in params ? params.UpdateUser : null;
-        this.ContentId = 'ContentId' in params ? params.ContentId : null;
-        this.OperEvilType = 'OperEvilType' in params ? params.OperEvilType : null;
-
-    }
-}
-
-/**
- * 违规数据分布
- * @class
- */
-class EvilCount extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ----非必选，该参数功能暂未对外开放
-         * @type {string || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 分布类型总量
-         * @type {number || null}
-         */
-        this.Count = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.Count = 'Count' in params ? params.Count : null;
-
-    }
-}
-
-/**
- * 实体检测结果详情：实体、广告台标、二维码
- * @class
- */
-class ObjectResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 场景识别结果
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * 建议您拿到判断结果后的执行操作。
-建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
-以及令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 子标签检测结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubLabel = null;
-
-        /**
-         * 该标签模型命中的分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 实体名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Names = null;
-
-        /**
-         * 实体检测结果明细
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ObjectDetail> || null}
-         */
-        this.Details = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.Names = 'Names' in params ? params.Names : null;
-
-        if (params.Details) {
-            this.Details = new Array();
-            for (let z in params.Details) {
-                let obj = new ObjectDetail();
-                obj.deserialize(params.Details[z]);
-                this.Details.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * OCR文本结果详情
- * @class
- */
-class OcrTextDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * OCR文本内容
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
-以及令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 仅当Label为Custom自定义关键词时有效，表示自定义库id
-         * @type {string || null}
-         */
-        this.LibId = null;
-
-        /**
-         * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
-         * @type {string || null}
-         */
-        this.LibName = null;
-
-        /**
-         * 该标签下命中的关键词
-         * @type {Array.<string> || null}
-         */
-        this.Keywords = null;
-
-        /**
-         * 该标签模型命中的分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * OCR位置
-         * @type {Location || null}
-         */
-        this.Location = null;
-
-        /**
-         * OCR文本识别置信度
-         * @type {number || null}
-         */
-        this.Rate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.LibId = 'LibId' in params ? params.LibId : null;
-        this.LibName = 'LibName' in params ? params.LibName : null;
-        this.Keywords = 'Keywords' in params ? params.Keywords : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-        if (params.Location) {
-            let obj = new Location();
-            obj.deserialize(params.Location)
-            this.Location = obj;
-        }
-        this.Rate = 'Rate' in params ? params.Rate : null;
-
-    }
-}
-
-/**
- * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
- * @class
- */
-class ObjectDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 序号
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 标签名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 标签值，
-当标签为二维码时，表示URL地址，如Name为QrCode时，Value为"http//abc.com/aaa"
-         * @type {string || null}
-         */
-        this.Value = null;
-
-        /**
-         * 分数
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 检测框坐标
-         * @type {Location || null}
-         */
-        this.Location = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-        if (params.Location) {
-            let obj = new Location();
-            obj.deserialize(params.Location)
-            this.Location = obj;
-        }
-
-    }
-}
-
-/**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
- * @class
- */
-class Filter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 过滤键的名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 一个或者多个过滤值。
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
-/**
- * DescribeImageStat返回参数结构体
- * @class
- */
-class DescribeImageStatResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 识别结果统计
-         * @type {Overview || null}
-         */
-        this.Overview = null;
-
-        /**
-         * 识别量统计
-         * @type {Array.<TrendCount> || null}
-         */
-        this.TrendCount = null;
-
-        /**
-         * 违规数据分布
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<EvilCount> || null}
-         */
-        this.EvilCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Overview) {
-            let obj = new Overview();
-            obj.deserialize(params.Overview)
-            this.Overview = obj;
-        }
-
-        if (params.TrendCount) {
-            this.TrendCount = new Array();
-            for (let z in params.TrendCount) {
-                let obj = new TrendCount();
-                obj.deserialize(params.TrendCount[z]);
-                this.TrendCount.push(obj);
-            }
-        }
-
-        if (params.EvilCount) {
-            this.EvilCount = new Array();
-            for (let z in params.EvilCount) {
-                let obj = new EvilCount();
-                obj.deserialize(params.EvilCount[z]);
-                this.EvilCount.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeImsList请求参数结构体
- * @class
- */
-class DescribeImsListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 分页 页索引
-         * @type {number || null}
-         */
-        this.PageIndex = null;
-
-        /**
-         * 分页条数
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * 过滤条件
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 黑白库结果明细
- * @class
- */
-class LibResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 场景识别结果
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * 建议您拿到判断结果后的执行操作。
-建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
-以及令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 子标签检测结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubLabel = null;
-
-        /**
-         * 该标签模型命中的分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 黑白库结果明细
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<LibDetail> || null}
-         */
-        this.Details = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-        if (params.Details) {
-            this.Details = new Array();
-            for (let z in params.Details) {
-                let obj = new LibDetail();
-                obj.deserialize(params.Details[z]);
-                this.Details.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 识别结果统计
- * @class
- */
-class Overview extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 总调用量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 总调用时长
-         * @type {number || null}
-         */
-        this.TotalHour = null;
-
-        /**
-         * 通过量
-         * @type {number || null}
-         */
-        this.PassCount = null;
-
-        /**
-         * 通过时长
-         * @type {number || null}
-         */
-        this.PassHour = null;
-
-        /**
-         * 违规量
-         * @type {number || null}
-         */
-        this.EvilCount = null;
-
-        /**
-         * 违规时长
-         * @type {number || null}
-         */
-        this.EvilHour = null;
-
-        /**
-         * 疑似违规量
-         * @type {number || null}
-         */
-        this.SuspectCount = null;
-
-        /**
-         * 疑似违规时长
-         * @type {number || null}
-         */
-        this.SuspectHour = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
-        this.PassCount = 'PassCount' in params ? params.PassCount : null;
-        this.PassHour = 'PassHour' in params ? params.PassHour : null;
-        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
-        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
-        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
-        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
-
-    }
-}
-
-/**
- * 自定义库/黑白库明细
- * @class
- */
-class LibDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 序号
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 仅当Label为Custom自定义关键词时有效，表示自定义库id
-         * @type {string || null}
-         */
-        this.LibId = null;
-
-        /**
-         * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LibName = null;
-
-        /**
-         * 图片ID
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
-以及其他令人反感、不安全或不适宜的内容类型。
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 自定义标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Tag = null;
-
-        /**
-         * 命中的模型分值
-         * @type {number || null}
-         */
-        this.Score = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.LibId = 'LibId' in params ? params.LibId : null;
-        this.LibName = 'LibName' in params ? params.LibName : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-    }
-}
-
-/**
- * 图片过滤条件
- * @class
- */
-class Filters extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询字段：
-策略BizType
-子账号SubUin
-日期区间DateRange
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 查询值
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
 module.exports = {
-    DescribeImageStatRequest: DescribeImageStatRequest,
-    TrendCount: TrendCount,
-    Location: Location,
-    LabelDetailItem: LabelDetailItem,
-    ImageModerationResponse: ImageModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
-    DescribeImsListResponse: DescribeImsListResponse,
-    OcrResult: OcrResult,
-    User: User,
-    LabelResult: LabelResult,
-    Device: Device,
-    ImsDetail: ImsDetail,
-    EvilCount: EvilCount,
     ObjectResult: ObjectResult,
     OcrTextDetail: OcrTextDetail,
     ObjectDetail: ObjectDetail,
-    Filter: Filter,
-    DescribeImageStatResponse: DescribeImageStatResponse,
-    DescribeImsListRequest: DescribeImsListRequest,
-    LibResult: LibResult,
-    Overview: Overview,
+    OcrResult: OcrResult,
     LibDetail: LibDetail,
-    Filters: Filters,
+    Location: Location,
+    LabelResult: LabelResult,
+    LabelDetailItem: LabelDetailItem,
+    Device: Device,
+    LibResult: LibResult,
+    ImageModerationResponse: ImageModerationResponse,
+    User: User,
 
 }

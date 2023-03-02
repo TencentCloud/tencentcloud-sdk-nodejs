@@ -20,6 +20,7 @@ const ListRuntimesMCResponse = models.ListRuntimesMCResponse;
 const RuntimeMC = models.RuntimeMC;
 const GetRuntimeResourceMonitorMetricMCResponse = models.GetRuntimeResourceMonitorMetricMCResponse;
 const ListRuntimeDeployedInstancesMCRequest = models.ListRuntimeDeployedInstancesMCRequest;
+const RuntimeExtensionMC = models.RuntimeExtensionMC;
 const ListDeployableRuntimesMCResponse = models.ListDeployableRuntimesMCResponse;
 const GetRuntimeMCResponse = models.GetRuntimeMCResponse;
 const ListDeployableRuntimesMCRequest = models.ListDeployableRuntimesMCRequest;

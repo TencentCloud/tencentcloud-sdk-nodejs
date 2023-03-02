@@ -1396,6 +1396,48 @@ class DescribeMySqlProcessListResponse extends  AbstractModel {
 }
 
 /**
+ * 实时会话访问来源详情。
+ * @class
+ */
+class SessionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问来源。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 当前访问来源活跃连接数
+         * @type {string || null}
+         */
+        this.ActiveConn = null;
+
+        /**
+         * 当前访问来源总连接数
+         * @type {number || null}
+         */
+        this.AllConn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.ActiveConn = 'ActiveConn' in params ? params.ActiveConn : null;
+        this.AllConn = 'AllConn' in params ? params.AllConn : null;
+
+    }
+}
+
+/**
  * 实例健康详情。
  * @class
  */
@@ -1985,6 +2027,56 @@ class CreateDBDiagReportTaskResponse extends  AbstractModel {
 }
 
 /**
+ * 实时会话统计详情。
+ * @class
+ */
+class ProcessStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 会话详情数组。
+         * @type {Array.<SessionItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 总连接数。
+         * @type {number || null}
+         */
+        this.AllConnSum = null;
+
+        /**
+         * 总活跃连接数。
+         * @type {number || null}
+         */
+        this.ActiveConnSum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SessionItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.AllConnSum = 'AllConnSum' in params ? params.AllConnSum : null;
+        this.ActiveConnSum = 'ActiveConnSum' in params ? params.ActiveConnSum : null;
+
+    }
+}
+
+/**
  * CreateMailProfile返回参数结构体
  * @class
  */
@@ -2470,6 +2562,46 @@ class CreateKillTaskRequest extends  AbstractModel {
         this.User = 'User' in params ? params.User : null;
         this.Time = 'Time' in params ? params.Time : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * DescribeProxyProcessStatistics返回参数结构体
+ * @class
+ */
+class DescribeProxyProcessStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实时会话统计详情。
+         * @type {ProcessStatistic || null}
+         */
+        this.ProcessStatistics = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProcessStatistics) {
+            let obj = new ProcessStatistic();
+            obj.deserialize(params.ProcessStatistics)
+            this.ProcessStatistics = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3235,6 +3367,55 @@ class DescribeSecurityAuditLogExportTasksResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRedisTopKeyPrefixList请求参数结构体
+ * @class
+ */
+class DescribeRedisTopKeyPrefixListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 查询日期，如2021-05-27，最早可为前30天的日期。
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 查询数目，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4133,7 +4314,7 @@ class DescribeNoPrimaryKeyTablesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+         * 服务产品类型，支持值："mysql" - 云数据库 MySQL，默认为"mysql"。
          * @type {string || null}
          */
         this.Product = null;
@@ -5386,6 +5567,76 @@ class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeProxyProcessStatistics请求参数结构体
+ * @class
+ */
+class DescribeProxyProcessStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 该实例下需要查询的某一个 ProxyID 。
+         * @type {string || null}
+         */
+        this.InstanceProxyId = null;
+
+        /**
+         * 返回数量。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 偏移量，默认0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 排序方向。支持值包括："DESC"，"ASC"。
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceProxyId = 'InstanceProxyId' in params ? params.InstanceProxyId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+    }
+}
+
+/**
  * 监控数据（浮点型）
  * @class
  */
@@ -5424,6 +5675,56 @@ class MonitorFloatMetric extends  AbstractModel {
         this.Metric = 'Metric' in params ? params.Metric : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DescribeRedisTopKeyPrefixList返回参数结构体
+ * @class
+ */
+class DescribeRedisTopKeyPrefixListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * top key前缀列表。
+         * @type {Array.<RedisPreKeySpaceData> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 采集时间戳（秒）。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new RedisPreKeySpaceData();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5776,6 +6077,69 @@ class GroupItem extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
+
+    }
+}
+
+/**
+ * redis key前缀空间信息
+ * @class
+ */
+class RedisPreKeySpaceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平均元素长度。
+         * @type {number || null}
+         */
+        this.AveElementSize = null;
+
+        /**
+         * 总占用内存（Byte）。
+         * @type {number || null}
+         */
+        this.Length = null;
+
+        /**
+         * key前缀。
+         * @type {string || null}
+         */
+        this.KeyPreIndex = null;
+
+        /**
+         * 元素数量。
+         * @type {number || null}
+         */
+        this.ItemCount = null;
+
+        /**
+         * key个数。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 最大元素长度。
+         * @type {number || null}
+         */
+        this.MaxElementSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AveElementSize = 'AveElementSize' in params ? params.AveElementSize : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.KeyPreIndex = 'KeyPreIndex' in params ? params.KeyPreIndex : null;
+        this.ItemCount = 'ItemCount' in params ? params.ItemCount : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.MaxElementSize = 'MaxElementSize' in params ? params.MaxElementSize : null;
 
     }
 }
@@ -6617,6 +6981,7 @@ module.exports = {
     DiagHistoryEventItem: DiagHistoryEventItem,
     DescribeProxySessionKillTasksRequest: DescribeProxySessionKillTasksRequest,
     DescribeMySqlProcessListResponse: DescribeMySqlProcessListResponse,
+    SessionItem: SessionItem,
     HealthStatus: HealthStatus,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
     TaskInfo: TaskInfo,
@@ -6629,6 +6994,7 @@ module.exports = {
     ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
     DescribeSecurityAuditLogDownloadUrlsRequest: DescribeSecurityAuditLogDownloadUrlsRequest,
     CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
+    ProcessStatistic: ProcessStatistic,
     CreateMailProfileResponse: CreateMailProfileResponse,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
     CancelKillTaskRequest: CancelKillTaskRequest,
@@ -6639,6 +7005,7 @@ module.exports = {
     DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
     CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
     CreateKillTaskRequest: CreateKillTaskRequest,
+    DescribeProxyProcessStatisticsResponse: DescribeProxyProcessStatisticsResponse,
     SlowLogHost: SlowLogHost,
     CreateMailProfileRequest: CreateMailProfileRequest,
     MonitorFloatMetricSeriesData: MonitorFloatMetricSeriesData,
@@ -6653,6 +7020,7 @@ module.exports = {
     DescribeSqlFiltersResponse: DescribeSqlFiltersResponse,
     CreateDBDiagReportUrlRequest: CreateDBDiagReportUrlRequest,
     DescribeSecurityAuditLogExportTasksResponse: DescribeSecurityAuditLogExportTasksResponse,
+    DescribeRedisTopKeyPrefixListRequest: DescribeRedisTopKeyPrefixListRequest,
     DescribeSqlTemplateResponse: DescribeSqlTemplateResponse,
     HealthScoreInfo: HealthScoreInfo,
     DescribeTopSpaceTableTimeSeriesResponse: DescribeTopSpaceTableTimeSeriesResponse,
@@ -6692,13 +7060,16 @@ module.exports = {
     DescribeTopSpaceSchemasResponse: DescribeTopSpaceSchemasResponse,
     CreateProxySessionKillTaskResponse: CreateProxySessionKillTaskResponse,
     DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
+    DescribeProxyProcessStatisticsRequest: DescribeProxyProcessStatisticsRequest,
     MonitorFloatMetric: MonitorFloatMetric,
+    DescribeRedisTopKeyPrefixListResponse: DescribeRedisTopKeyPrefixListResponse,
     DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
     DescribeUserSqlAdviceResponse: DescribeUserSqlAdviceResponse,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
     SQLFilter: SQLFilter,
     GroupItem: GroupItem,
+    RedisPreKeySpaceData: RedisPreKeySpaceData,
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,
     MonitorMetricSeriesData: MonitorMetricSeriesData,

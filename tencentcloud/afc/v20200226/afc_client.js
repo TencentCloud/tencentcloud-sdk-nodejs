@@ -17,10 +17,14 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const OtherModelScores = models.OtherModelScores;
+const TransportGeneralInterfaceInput = models.TransportGeneralInterfaceInput;
+const TransportGeneralInterfaceOutput = models.TransportGeneralInterfaceOutput;
 const QueryAntiFraudVipResponse = models.QueryAntiFraudVipResponse;
 const RiskDetail = models.RiskDetail;
+const TransportGeneralInterfaceRequest = models.TransportGeneralInterfaceRequest;
 const SimpleKindRiskDetail = models.SimpleKindRiskDetail;
 const GetAntiFraudVipResponse = models.GetAntiFraudVipResponse;
+const TransportGeneralInterfaceResponse = models.TransportGeneralInterfaceResponse;
 const AntiFraudVipCryptoFilter = models.AntiFraudVipCryptoFilter;
 const AntiFraudVipFilter = models.AntiFraudVipFilter;
 const QueryAntiFraudVipRequest = models.QueryAntiFraudVipRequest;
@@ -60,6 +64,17 @@ class AfcClient extends AbstractClient {
     GetAntiFraudVip(req, cb) {
         let resp = new GetAntiFraudVipResponse();
         this.request("GetAntiFraudVip", req, resp, cb);
+    }
+
+    /**
+     * 天御信鸽取数平台接口
+     * @param {TransportGeneralInterfaceRequest} req
+     * @param {function(string, TransportGeneralInterfaceResponse):void} cb
+     * @public
+     */
+    TransportGeneralInterface(req, cb) {
+        let resp = new TransportGeneralInterfaceResponse();
+        this.request("TransportGeneralInterface", req, resp, cb);
     }
 
 

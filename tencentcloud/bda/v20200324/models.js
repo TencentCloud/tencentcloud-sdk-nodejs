@@ -25,16 +25,39 @@ class SegmentPortraitPicResponse extends  AbstractModel {
         super();
 
         /**
-         * 处理后的图片 base64 数据，透明背景图
+         * 处理后的图片 base64 数据，透明背景图。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultImage = null;
 
         /**
-         * 一个通过 Base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）
+         * 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultMask = null;
+
+        /**
+         * 图片是否存在前景。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.HasForeground = null;
+
+        /**
+         * 支持将处理过的图片 base64 数据，透明背景图以Url的形式返回值，Url有效期为30分钟。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultImageUrl = null;
+
+        /**
+         * 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以Url形式的返回值；Url有效期为30分钟。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultMaskUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -53,6 +76,9 @@ class SegmentPortraitPicResponse extends  AbstractModel {
         }
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
         this.ResultMask = 'ResultMask' in params ? params.ResultMask : null;
+        this.HasForeground = 'HasForeground' in params ? params.HasForeground : null;
+        this.ResultImageUrl = 'ResultImageUrl' in params ? params.ResultImageUrl : null;
+        this.ResultMaskUrl = 'ResultMaskUrl' in params ? params.ResultMaskUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1675,6 +1701,12 @@ class KeyPointInfo extends  AbstractModel {
          */
         this.Y = null;
 
+        /**
+         * 关键点坐标置信度，分数取值在0-1之间，阈值建议为0.25，小于0.25认为在图中无人体关键点。
+         * @type {number || null}
+         */
+        this.BodyScore = null;
+
     }
 
     /**
@@ -1687,6 +1719,7 @@ class KeyPointInfo extends  AbstractModel {
         this.KeyPointType = 'KeyPointType' in params ? params.KeyPointType : null;
         this.X = 'X' in params ? params.X : null;
         this.Y = 'Y' in params ? params.Y : null;
+        this.BodyScore = 'BodyScore' in params ? params.BodyScore : null;
 
     }
 }
@@ -1972,6 +2005,14 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.Url = null;
 
+        /**
+         * 人体局部关键点识别，开启后对人体局部图（例如部分身体部位）进行关键点识别，输出人体关键点坐标，默认不开启
+
+注意：若开启人体局部图片关键点识别，则BoundBox、Confidence返回为空。
+         * @type {boolean || null}
+         */
+        this.LocalBodySwitch = null;
+
     }
 
     /**
@@ -1983,6 +2024,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.LocalBodySwitch = 'LocalBodySwitch' in params ? params.LocalBodySwitch : null;
 
     }
 }
@@ -2014,6 +2056,21 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.Url = null;
 
+        /**
+         * 返回图像方式（base64 或 Url ) ，二选一。url有效期为30分钟。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+        /**
+         * 适用场景类型。
+
+取值：GEN/GS。GEN为通用场景模式；GS为绿幕场景模式，针对绿幕场景下的人像分割效果更好。
+两种模式选择一种传入，默认为GEN。
+         * @type {string || null}
+         */
+        this.Scene = null;
+
     }
 
     /**
@@ -2025,6 +2082,8 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
 
     }
 }

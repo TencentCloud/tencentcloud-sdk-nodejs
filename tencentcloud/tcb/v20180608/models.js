@@ -555,6 +555,57 @@ class DeleteCloudBaseRunServerVersionResponse extends  AbstractModel {
 }
 
 /**
+ * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ * @class
+ */
+class RollUpdateCloudBaseRunServerVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * succ为成功
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 滚动更新的VersionName
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * 操作记录id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RunId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.RunId = 'RunId' in params ? params.RunId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SearchClsLog返回参数结构体
  * @class
  */
@@ -588,6 +639,34 @@ class SearchClsLogResponse extends  AbstractModel {
             let obj = new LogResObject();
             obj.deserialize(params.LogResults)
             this.LogResults = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyClsTopic返回参数结构体
+ * @class
+ */
+class ModifyClsTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1140,42 +1219,18 @@ class DescribeEndUsersRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCloudBaseBuildService请求参数结构体
+ * DescribeCloudBaseRunPodList返回参数结构体
  * @class
  */
-class DescribeCloudBaseBuildServiceRequest extends  AbstractModel {
+class DescribeCloudBaseRunPodListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境id
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EnvId = null;
-
-        /**
-         * 服务名
-         * @type {string || null}
-         */
-        this.ServiceName = null;
-
-        /**
-         * build类型,枚举值有: cloudbaserun, framework-ci
-         * @type {string || null}
-         */
-        this.CIBusiness = null;
-
-        /**
-         * 服务版本
-         * @type {string || null}
-         */
-        this.ServiceVersion = null;
-
-        /**
-         * 文件后缀
-         * @type {string || null}
-         */
-        this.Suffix = null;
+        this.RequestId = null;
 
     }
 
@@ -1186,11 +1241,7 @@ class DescribeCloudBaseBuildServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
-        this.CIBusiness = 'CIBusiness' in params ? params.CIBusiness : null;
-        this.ServiceVersion = 'ServiceVersion' in params ? params.ServiceVersion : null;
-        this.Suffix = 'Suffix' in params ? params.Suffix : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1698,18 +1749,76 @@ class DescribeSpecialCostItemsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCloudBaseRunResourceForExtend请求参数结构体
+ * CreatePostpayPackage请求参数结构体
  * @class
  */
-class DescribeCloudBaseRunResourceForExtendRequest extends  AbstractModel {
+class CreatePostpayPackageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境ID
+         * 环境ID，需要系统自动创建环境时，此字段不传
          * @type {string || null}
          */
         this.EnvId = null;
+
+        /**
+         * 微信 AppId，微信必传
+         * @type {string || null}
+         */
+        this.WxAppId = null;
+
+        /**
+         * 付费来源
+<li>miniapp</li>
+<li>qcloud</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+         * @type {string || null}
+         */
+        this.FreeQuota = null;
+
+        /**
+         * 环境创建来源，取值：
+<li>miniapp</li>
+<li>qcloud</li>
+用法同CreateEnv接口的Source参数
+和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
+         * @type {string || null}
+         */
+        this.EnvSource = null;
+
+        /**
+         * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 如果envsource为miniapp, channel可以为ide或api;
+如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
+和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 扩展ID
+         * @type {string || null}
+         */
+        this.ExtensionId = null;
+
+        /**
+         * 订单标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+         * @type {string || null}
+         */
+        this.Flag = null;
 
     }
 
@@ -1721,6 +1830,14 @@ class DescribeCloudBaseRunResourceForExtendRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.EnvSource = 'EnvSource' in params ? params.EnvSource : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }
@@ -1849,6 +1966,12 @@ class DescribeCurveDataResponse extends  AbstractModel {
         this.Time = null;
 
         /**
+         * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
+         * @type {number || null}
+         */
+        this.NewValues = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1869,44 +1992,73 @@ class DescribeCurveDataResponse extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.Values = 'Values' in params ? params.Values : null;
         this.Time = 'Time' in params ? params.Time : null;
+        this.NewValues = 'NewValues' in params ? params.NewValues : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ * DescribeBaasPackageList请求参数结构体
  * @class
  */
-class RollUpdateCloudBaseRunServerVersionResponse extends  AbstractModel {
+class DescribeBaasPackageListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * succ为成功
+         * tcb产品套餐ID，不填拉取全量package信息。
          * @type {string || null}
          */
-        this.Result = null;
+        this.PackageName = null;
 
         /**
-         * 滚动更新的VersionName
-注意：此字段可能返回 null，表示取不到有效值。
+         * 环境ID
          * @type {string || null}
          */
-        this.VersionName = null;
+        this.EnvId = null;
 
         /**
-         * 操作记录id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 套餐归属方，填写后只返回对应的套餐 包含miniapp与qcloud两种 默认为miniapp
          * @type {string || null}
          */
-        this.RunId = null;
+        this.Source = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 套餐归属环境渠道
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvChannel = null;
+
+        /**
+         * 拉取套餐用途：
+1）new 新购
+2）modify变配
+3）renew续费
+         * @type {string || null}
+         */
+        this.TargetAction = null;
+
+        /**
+         * 预留字段，同一商品会对应多个类型套餐，对指标有不同侧重。
+计算型calculation
+流量型flux
+容量型capactiy
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 类型分组过滤。默认为["default"]
+         * @type {Array.<string> || null}
+         */
+        this.PackageTypeList = null;
+
+        /**
+         * 付费渠道，与回包billTags中的计费参数相关，不填返回默认值。
+         * @type {string || null}
+         */
+        this.PaymentChannel = null;
 
     }
 
@@ -1917,10 +2069,14 @@ class RollUpdateCloudBaseRunServerVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.VersionName = 'VersionName' in params ? params.VersionName : null;
-        this.RunId = 'RunId' in params ? params.RunId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.EnvChannel = 'EnvChannel' in params ? params.EnvChannel : null;
+        this.TargetAction = 'TargetAction' in params ? params.TargetAction : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.PackageTypeList = 'PackageTypeList' in params ? params.PackageTypeList : null;
+        this.PaymentChannel = 'PaymentChannel' in params ? params.PaymentChannel : null;
 
     }
 }
@@ -2076,6 +2232,41 @@ class DescribeCloudBaseRunOneClickTaskExternalRequest extends  AbstractModel {
             return;
         }
         this.ExternalId = 'ExternalId' in params ? params.ExternalId : null;
+
+    }
+}
+
+/**
+ * ModifyClsTopic请求参数结构体
+ * @class
+ */
+class ModifyClsTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 日志生命周期，单位天，可取值范围1~3600，取值为3640时代表永久保存
+         * @type {number || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -2854,6 +3045,20 @@ class DescribeCloudBaseRunServerVersionResponse extends  AbstractModel {
         this.PolicyDetail = null;
 
         /**
+         * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TkeClusterInfo || null}
+         */
+        this.TkeClusterInfo = null;
+
+        /**
+         * 版本工作负载类型；deployment/deamonset
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TkeWorkloadType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2913,6 +3118,13 @@ class DescribeCloudBaseRunServerVersionResponse extends  AbstractModel {
                 this.PolicyDetail.push(obj);
             }
         }
+
+        if (params.TkeClusterInfo) {
+            let obj = new TkeClusterInfo();
+            obj.deserialize(params.TkeClusterInfo)
+            this.TkeClusterInfo = obj;
+        }
+        this.TkeWorkloadType = 'TkeWorkloadType' in params ? params.TkeWorkloadType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3131,6 +3343,102 @@ class FreezeCloudBaseRunServersRequest extends  AbstractModel {
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.ServerNameList = 'ServerNameList' in params ? params.ServerNameList : null;
+
+    }
+}
+
+/**
+ * 新套餐套餐详情
+ * @class
+ */
+class BaasPackageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DAU产品套餐ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * DAU套餐中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageTitle = null;
+
+        /**
+         * 套餐分组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 套餐分组中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupTitle = null;
+
+        /**
+         * json格式化计费标签，例如：
+{"pid":2, "cids":{"create": 2, "renew": 2, "modify": 2}, "productCode":"p_tcb_mp", "subProductCode":"sp_tcb_mp_cloudbase_dau"}
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BillTags = null;
+
+        /**
+         * json格式化用户资源限制，例如：
+{"Qps":1000,"InvokeNum":{"TimeUnit":"m", "Unit":"万次", "MaxSize": 100},"Capacity":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "Cdn":{"Flux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "BackFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}},"Scf":{"Concurrency":1000,"OutFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100},"MemoryUse":{"TimeUnit":"m", "Unit":"WGBS", "MaxSize": 100000}}}
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceLimit = null;
+
+        /**
+         * json格式化高级限制，例如：
+{"CMSEnable":false,"ProvisionedConcurrencyMem":512000, "PictureProcessing":false, "SecurityAudit":false, "RealTimePush":false, "TemplateMessageBatchPush":false, "Payment":false}
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdvanceLimit = null;
+
+        /**
+         * 套餐描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageDescription = null;
+
+        /**
+         * 是否对外展示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsExternal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageTitle = 'PackageTitle' in params ? params.PackageTitle : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupTitle = 'GroupTitle' in params ? params.GroupTitle : null;
+        this.BillTags = 'BillTags' in params ? params.BillTags : null;
+        this.ResourceLimit = 'ResourceLimit' in params ? params.ResourceLimit : null;
+        this.AdvanceLimit = 'AdvanceLimit' in params ? params.AdvanceLimit : null;
+        this.PackageDescription = 'PackageDescription' in params ? params.PackageDescription : null;
+        this.IsExternal = 'IsExternal' in params ? params.IsExternal : null;
 
     }
 }
@@ -3509,6 +3817,18 @@ Activity：活动来源
          */
         this.IsOpenCloudInvoke = null;
 
+        /**
+         * 创建来源：wechat | cloud
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 渠道：wechat | cloud
+         * @type {string || null}
+         */
+        this.Channel = null;
+
     }
 
     /**
@@ -3525,6 +3845,8 @@ Activity：活动来源
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubNetIds = 'SubNetIds' in params ? params.SubNetIds : null;
         this.IsOpenCloudInvoke = 'IsOpenCloudInvoke' in params ? params.IsOpenCloudInvoke : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -3637,6 +3959,34 @@ class DescribeActivityRecordResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
+ * @class
+ */
+class DescribeCloudBaseRunVersionRsByConditionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateStaticStore请求参数结构体
  * @class
  */
@@ -3703,6 +4053,14 @@ class CreateWxCloudBaseRunServerDBClusterRequest extends  AbstractModel {
          */
         this.DbVersion = null;
 
+        /**
+         * 0: 非大小写敏感
+1: 大小写敏感
+默认 0
+         * @type {string || null}
+         */
+        this.LowerCaseTableName = null;
+
     }
 
     /**
@@ -3716,6 +4074,7 @@ class CreateWxCloudBaseRunServerDBClusterRequest extends  AbstractModel {
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
         this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.LowerCaseTableName = 'LowerCaseTableName' in params ? params.LowerCaseTableName : null;
 
     }
 }
@@ -4221,6 +4580,42 @@ class DescribeEndUserLoginStatisticResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExtensionUploadInfo请求参数结构体
+ * @class
+ */
+class DescribeExtensionUploadInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待上传的文件
+         * @type {Array.<ExtensionFile> || null}
+         */
+        this.ExtensionFiles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ExtensionFiles) {
+            this.ExtensionFiles = new Array();
+            for (let z in params.ExtensionFiles) {
+                let obj = new ExtensionFile();
+                obj.deserialize(params.ExtensionFiles[z]);
+                this.ExtensionFiles.push(obj);
+            }
+        }
 
     }
 }
@@ -4883,6 +5278,13 @@ class EstablishCloudBaseRunServerResponse extends  AbstractModel {
         super();
 
         /**
+         * 创建服务是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4897,6 +5299,7 @@ class EstablishCloudBaseRunServerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5061,6 +5464,13 @@ class EnvInfo extends  AbstractModel {
          */
         this.IsDauPackage = null;
 
+        /**
+         * 套餐类型:空\baas\tcbr
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -5148,6 +5558,7 @@ class EnvInfo extends  AbstractModel {
         }
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.IsDauPackage = 'IsDauPackage' in params ? params.IsDauPackage : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -5563,6 +5974,12 @@ class DescribeEnvsResponse extends  AbstractModel {
         this.EnvList = null;
 
         /**
+         * 环境个数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5586,6 +6003,7 @@ class DescribeEnvsResponse extends  AbstractModel {
                 this.EnvList.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5650,6 +6068,51 @@ class CreateHostingDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * tke集群信息
+ * @class
+ */
+class TkeClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 版本内网CLB所在子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionClbSubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VersionClbSubnetId = 'VersionClbSubnetId' in params ? params.VersionClbSubnetId : null;
 
     }
 }
@@ -6390,18 +6853,24 @@ class CreatePostpayPackageResponse extends  AbstractModel {
 }
 
 /**
- * DescribeExtensionUploadInfo请求参数结构体
+ * DescribeBaasPackageList返回参数结构体
  * @class
  */
-class DescribeExtensionUploadInfoRequest extends  AbstractModel {
+class DescribeBaasPackageListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待上传的文件
-         * @type {Array.<ExtensionFile> || null}
+         * 套餐列表
+         * @type {Array.<BaasPackageInfo> || null}
          */
-        this.ExtensionFiles = null;
+        this.PackageList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6413,14 +6882,15 @@ class DescribeExtensionUploadInfoRequest extends  AbstractModel {
             return;
         }
 
-        if (params.ExtensionFiles) {
-            this.ExtensionFiles = new Array();
-            for (let z in params.ExtensionFiles) {
-                let obj = new ExtensionFile();
-                obj.deserialize(params.ExtensionFiles[z]);
-                this.ExtensionFiles.push(obj);
+        if (params.PackageList) {
+            this.PackageList = new Array();
+            for (let z in params.PackageList) {
+                let obj = new BaasPackageInfo();
+                obj.deserialize(params.PackageList[z]);
+                this.PackageList.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8519,18 +8989,12 @@ class DescribeWxCloudBaseRunEnvsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
+ * 主机路径挂载参数
  * @class
  */
-class DescribeCloudBaseRunVersionRsByConditionResponse extends  AbstractModel {
+class CloudBaseRunServiceVolumeHostPath extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -8541,7 +9005,6 @@ class DescribeCloudBaseRunVersionRsByConditionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8581,6 +9044,11 @@ class DescribeCurveDataRequest extends  AbstractModel {
 <li> TkeCpuUsed: 容器CPU使用量 </li>
 <li> TkeMemUsed: 容器内存使用量 </li>
 <li> TkeInvokeNum: 调用量 </li>
+<li> FunctionConcurrentExecutions: 云函数并发执行个数</li>
+<li> FunctionIdleProvisioned: 云函数预置并发闲置量 </li>
+<li> FunctionConcurrencyMemoryMB: 云函数并发执行内存量 </li>
+<li> FunctionThrottle: 云函数受限次数 </li>
+<li> FunctionProvisionedConcurrency: 云函数预置并发 </li>
          * @type {string || null}
          */
         this.MetricName = null;
@@ -9598,6 +10066,13 @@ class LogServiceInfo extends  AbstractModel {
          */
         this.Region = null;
 
+        /**
+         * topic保存时长 默认7天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Period = null;
+
     }
 
     /**
@@ -9612,6 +10087,7 @@ class LogServiceInfo extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Region = 'Region' in params ? params.Region : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -9797,6 +10273,20 @@ class EnvBillingInfoItem extends  AbstractModel {
          */
         this.FreeQuota = null;
 
+        /**
+         * 是否开启 `超过套餐额度部分转按量付费`
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableOverrun = null;
+
+        /**
+         * 环境套餐类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExtPackageType = null;
+
     }
 
     /**
@@ -9824,6 +10314,8 @@ class EnvBillingInfoItem extends  AbstractModel {
             this.OrderInfo = obj;
         }
         this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.EnableOverrun = 'EnableOverrun' in params ? params.EnableOverrun : null;
+        this.ExtPackageType = 'ExtPackageType' in params ? params.ExtPackageType : null;
 
     }
 }
@@ -10119,6 +10611,27 @@ class DescribeCloudBaseRunVersionResponse extends  AbstractModel {
         this.MemSize = null;
 
         /**
+         * 扩缩容策略详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<HpaPolicy> || null}
+         */
+        this.PolicyDetail = null;
+
+        /**
+         * Cpu的Request值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Mem的Request值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -10163,82 +10676,35 @@ class DescribeCloudBaseRunVersionResponse extends  AbstractModel {
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
+
+        if (params.PolicyDetail) {
+            this.PolicyDetail = new Array();
+            for (let z in params.PolicyDetail) {
+                let obj = new HpaPolicy();
+                obj.deserialize(params.PolicyDetail[z]);
+                this.PolicyDetail.push(obj);
+            }
+        }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * CreatePostpayPackage请求参数结构体
+ * DescribeCloudBaseRunResourceForExtend请求参数结构体
  * @class
  */
-class CreatePostpayPackageRequest extends  AbstractModel {
+class DescribeCloudBaseRunResourceForExtendRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境ID，需要系统自动创建环境时，此字段不传
+         * 环境ID
          * @type {string || null}
          */
         this.EnvId = null;
-
-        /**
-         * 微信 AppId，微信必传
-         * @type {string || null}
-         */
-        this.WxAppId = null;
-
-        /**
-         * 付费来源
-<li>miniapp</li>
-<li>qcloud</li>
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
-         * @type {string || null}
-         */
-        this.FreeQuota = null;
-
-        /**
-         * 环境创建来源，取值：
-<li>miniapp</li>
-<li>qcloud</li>
-用法同CreateEnv接口的Source参数
-和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
-         * @type {string || null}
-         */
-        this.EnvSource = null;
-
-        /**
-         * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
-         * 如果envsource为miniapp, channel可以为ide或api;
-如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
-和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
-         * @type {string || null}
-         */
-        this.Channel = null;
-
-        /**
-         * 扩展ID
-         * @type {string || null}
-         */
-        this.ExtensionId = null;
-
-        /**
-         * 订单标记。建议使用方统一转大小写之后再判断。
-<li>QuickStart：快速启动来源</li>
-<li>Activity：活动来源</li>
-         * @type {string || null}
-         */
-        this.Flag = null;
 
     }
 
@@ -10250,31 +10716,47 @@ class CreatePostpayPackageRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
-        this.EnvSource = 'EnvSource' in params ? params.EnvSource : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
-        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
-        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }
 
 /**
- * DescribeCloudBaseRunPodList返回参数结构体
+ * DescribeCloudBaseBuildService请求参数结构体
  * @class
  */
-class DescribeCloudBaseRunPodListResponse extends  AbstractModel {
+class DescribeCloudBaseBuildServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 环境id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvId = null;
+
+        /**
+         * 服务名
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * build类型,枚举值有: cloudbaserun, framework-ci
+         * @type {string || null}
+         */
+        this.CIBusiness = null;
+
+        /**
+         * 服务版本
+         * @type {string || null}
+         */
+        this.ServiceVersion = null;
+
+        /**
+         * 文件后缀
+         * @type {string || null}
+         */
+        this.Suffix = null;
 
     }
 
@@ -10285,7 +10767,11 @@ class DescribeCloudBaseRunPodListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.CIBusiness = 'CIBusiness' in params ? params.CIBusiness : null;
+        this.ServiceVersion = 'ServiceVersion' in params ? params.ServiceVersion : null;
+        this.Suffix = 'Suffix' in params ? params.Suffix : null;
 
     }
 }
@@ -10885,6 +11371,13 @@ class CloudRunServiceVolume extends  AbstractModel {
          */
         this.EmptyDir = null;
 
+        /**
+         * 主机路径挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CloudBaseRunServiceVolumeHostPath || null}
+         */
+        this.HostPath = null;
+
     }
 
     /**
@@ -10908,6 +11401,12 @@ class CloudRunServiceVolume extends  AbstractModel {
             let obj = new CloudBaseRunEmptyDirVolumeSource();
             obj.deserialize(params.EmptyDir)
             this.EmptyDir = obj;
+        }
+
+        if (params.HostPath) {
+            let obj = new CloudBaseRunServiceVolumeHostPath();
+            obj.deserialize(params.HostPath)
+            this.HostPath = obj;
         }
 
     }
@@ -12242,7 +12741,9 @@ module.exports = {
     DescribeEnvLimitRequest: DescribeEnvLimitRequest,
     DescribeEnvDealRegionResponse: DescribeEnvDealRegionResponse,
     DeleteCloudBaseRunServerVersionResponse: DeleteCloudBaseRunServerVersionResponse,
+    RollUpdateCloudBaseRunServerVersionResponse: RollUpdateCloudBaseRunServerVersionResponse,
     SearchClsLogResponse: SearchClsLogResponse,
+    ModifyClsTopicResponse: ModifyClsTopicResponse,
     StandaloneGatewayInfo: StandaloneGatewayInfo,
     CloudBaseRunSideSpec: CloudBaseRunSideSpec,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
@@ -12252,7 +12753,7 @@ module.exports = {
     DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     DescribeCloudBaseBuildServiceResponse: DescribeCloudBaseBuildServiceResponse,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
-    DescribeCloudBaseBuildServiceRequest: DescribeCloudBaseBuildServiceRequest,
+    DescribeCloudBaseRunPodListResponse: DescribeCloudBaseRunPodListResponse,
     DescribeCloudBaseRunServerDomainNameResponse: DescribeCloudBaseRunServerDomainNameResponse,
     LogResObject: LogResObject,
     DestroyStandaloneGatewayRequest: DestroyStandaloneGatewayRequest,
@@ -12260,15 +12761,16 @@ module.exports = {
     CreateWxCloudBaseRunServerDBClusterResponse: CreateWxCloudBaseRunServerDBClusterResponse,
     ReplaceActivityRecordResponse: ReplaceActivityRecordResponse,
     DescribeSpecialCostItemsRequest: DescribeSpecialCostItemsRequest,
-    DescribeCloudBaseRunResourceForExtendRequest: DescribeCloudBaseRunResourceForExtendRequest,
+    CreatePostpayPackageRequest: CreatePostpayPackageRequest,
     DescribeWxCloudBaseRunSubNetsRequest: DescribeWxCloudBaseRunSubNetsRequest,
     ModifyEndUserRequest: ModifyEndUserRequest,
     DescribeCurveDataResponse: DescribeCurveDataResponse,
-    RollUpdateCloudBaseRunServerVersionResponse: RollUpdateCloudBaseRunServerVersionResponse,
+    DescribeBaasPackageListRequest: DescribeBaasPackageListRequest,
     ClsInfo: ClsInfo,
     DescribeCloudBaseRunOperationTypesRequest: DescribeCloudBaseRunOperationTypesRequest,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
     DescribeCloudBaseRunOneClickTaskExternalRequest: DescribeCloudBaseRunOneClickTaskExternalRequest,
+    ModifyClsTopicRequest: ModifyClsTopicRequest,
     DescribeStandaloneGatewayResponse: DescribeStandaloneGatewayResponse,
     DescribeWxCloudBaseRunEnvsResponse: DescribeWxCloudBaseRunEnvsResponse,
     CreateHostingDomainRequest: CreateHostingDomainRequest,
@@ -12286,6 +12788,7 @@ module.exports = {
     DeleteEndUserRequest: DeleteEndUserRequest,
     DescribeHostingDomainTaskRequest: DescribeHostingDomainTaskRequest,
     FreezeCloudBaseRunServersRequest: FreezeCloudBaseRunServersRequest,
+    BaasPackageInfo: BaasPackageInfo,
     DescribeQuotaDataResponse: DescribeQuotaDataResponse,
     ActivityInfoItem: ActivityInfoItem,
     KVPair: KVPair,
@@ -12296,6 +12799,7 @@ module.exports = {
     CreateWxCloudBaseRunEnvRequest: CreateWxCloudBaseRunEnvRequest,
     ModifyCloudBaseRunServerFlowConfRequest: ModifyCloudBaseRunServerFlowConfRequest,
     DescribeActivityRecordResponse: DescribeActivityRecordResponse,
+    DescribeCloudBaseRunVersionRsByConditionResponse: DescribeCloudBaseRunVersionRsByConditionResponse,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CreateWxCloudBaseRunServerDBClusterRequest: CreateWxCloudBaseRunServerDBClusterRequest,
     DeleteCloudBaseProjectLatestVersionResponse: DeleteCloudBaseProjectLatestVersionResponse,
@@ -12311,6 +12815,7 @@ module.exports = {
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     CloudBaseCapabilities: CloudBaseCapabilities,
     DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
+    DescribeExtensionUploadInfoRequest: DescribeExtensionUploadInfoRequest,
     DescribeEnvPostpaidDeductResponse: DescribeEnvPostpaidDeductResponse,
     HpaPolicy: HpaPolicy,
     CloudBaseRunImageSecretInfo: CloudBaseRunImageSecretInfo,
@@ -12336,6 +12841,7 @@ module.exports = {
     DescribeEnvsResponse: DescribeEnvsResponse,
     CreateAuthDomainRequest: CreateAuthDomainRequest,
     CreateHostingDomainResponse: CreateHostingDomainResponse,
+    TkeClusterInfo: TkeClusterInfo,
     DescribeActivityRecordRequest: DescribeActivityRecordRequest,
     CreateWxCloudBaseRunEnvResponse: CreateWxCloudBaseRunEnvResponse,
     DeleteCloudBaseRunServerVersionRequest: DeleteCloudBaseRunServerVersionRequest,
@@ -12344,7 +12850,7 @@ module.exports = {
     DescribeCloudBaseRunServerDomainNameRequest: DescribeCloudBaseRunServerDomainNameRequest,
     DescribeCloudBaseRunAllVpcsRequest: DescribeCloudBaseRunAllVpcsRequest,
     CreatePostpayPackageResponse: CreatePostpayPackageResponse,
-    DescribeExtensionUploadInfoRequest: DescribeExtensionUploadInfoRequest,
+    DescribeBaasPackageListResponse: DescribeBaasPackageListResponse,
     ReplaceActivityRecordRequest: ReplaceActivityRecordRequest,
     DeleteWxGatewayRouteResponse: DeleteWxGatewayRouteResponse,
     CloudBaseRunKVPriority: CloudBaseRunKVPriority,
@@ -12384,7 +12890,7 @@ module.exports = {
     CloudBaseRunNfsVolumeSource: CloudBaseRunNfsVolumeSource,
     DescribeSmsQuotasResponse: DescribeSmsQuotasResponse,
     DescribeWxCloudBaseRunEnvsRequest: DescribeWxCloudBaseRunEnvsRequest,
-    DescribeCloudBaseRunVersionRsByConditionResponse: DescribeCloudBaseRunVersionRsByConditionResponse,
+    CloudBaseRunServiceVolumeHostPath: CloudBaseRunServiceVolumeHostPath,
     DescribeCurveDataRequest: DescribeCurveDataRequest,
     DescribeActivityInfoRequest: DescribeActivityInfoRequest,
     BindEnvGatewayRequest: BindEnvGatewayRequest,
@@ -12411,8 +12917,8 @@ module.exports = {
     DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
     DescribeSmsQuotasRequest: DescribeSmsQuotasRequest,
     DescribeCloudBaseRunVersionResponse: DescribeCloudBaseRunVersionResponse,
-    CreatePostpayPackageRequest: CreatePostpayPackageRequest,
-    DescribeCloudBaseRunPodListResponse: DescribeCloudBaseRunPodListResponse,
+    DescribeCloudBaseRunResourceForExtendRequest: DescribeCloudBaseRunResourceForExtendRequest,
+    DescribeCloudBaseBuildServiceRequest: DescribeCloudBaseBuildServiceRequest,
     SearchClsLogRequest: SearchClsLogRequest,
     CloudBaseCodeRepoDetail: CloudBaseCodeRepoDetail,
     CheckTcbServiceRequest: CheckTcbServiceRequest,

@@ -18,165 +18,294 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
+const CreateInstancePostResponse = models.CreateInstancePostResponse;
+const DropCls = models.DropCls;
+const PostgreSQLModifyConnectParam = models.PostgreSQLModifyConnectParam;
 const GroupInfoMember = models.GroupInfoMember;
+const RowParam = models.RowParam;
+const EsConnectParam = models.EsConnectParam;
 const BatchCreateAclRequest = models.BatchCreateAclRequest;
+const DescribeDatahubTaskResponse = models.DescribeDatahubTaskResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
-const DescribeACLRequest = models.DescribeACLRequest;
+const SQLServerConnectParam = models.SQLServerConnectParam;
+const CreateConnectResourceResponse = models.CreateConnectResourceResponse;
+const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const BatchModifyTopicResultDTO = models.BatchModifyTopicResultDTO;
+const SubscribedInfo = models.SubscribedInfo;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
-const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
+const DescribeDatahubGroupOffsetsResponse = models.DescribeDatahubGroupOffsetsResponse;
+const SplitParam = models.SplitParam;
 const ConsumerGroup = models.ConsumerGroup;
 const Assignment = models.Assignment;
+const DescribeConnectResourceResp = models.DescribeConnectResourceResp;
 const AuthorizeTokenResponse = models.AuthorizeTokenResponse;
-const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
+const DescribeDatahubTaskRequest = models.DescribeDatahubTaskRequest;
+const UrlDecodeParam = models.UrlDecodeParam;
+const FetchLatestDatahubMessageListResponse = models.FetchLatestDatahubMessageListResponse;
+const EsParam = models.EsParam;
+const DescribeConnectResource = models.DescribeConnectResource;
+const DtsParam = models.DtsParam;
+const GroupOffsetPartition = models.GroupOffsetPartition;
+const CancelAuthorizationTokenRequest = models.CancelAuthorizationTokenRequest;
 const CancelAuthorizationTokenResponse = models.CancelAuthorizationTokenResponse;
+const MySQLConnectParam = models.MySQLConnectParam;
+const InquireCkafkaPriceResp = models.InquireCkafkaPriceResp;
 const CreateRouteRequest = models.CreateRouteRequest;
+const SQLServerModifyConnectParam = models.SQLServerModifyConnectParam;
 const DeleteTopicRequest = models.DeleteTopicRequest;
+const DescribeDatahubTasksRequest = models.DescribeDatahubTasksRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
+const DatahubResource = models.DatahubResource;
 const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResponse;
+const ClickHouseParam = models.ClickHouseParam;
+const FilterMapParam = models.FilterMapParam;
 const CreateInstancePreResp = models.CreateInstancePreResp;
+const ModifyDatahubTaskResponse = models.ModifyDatahubTaskResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
-const TopicResult = models.TopicResult;
+const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
 const Region = models.Region;
 const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
 const CreateTokenResponse = models.CreateTokenResponse;
+const TransformsParam = models.TransformsParam;
+const ClickHouseModifyConnectParam = models.ClickHouseModifyConnectParam;
+const DescribeDatahubTasksRes = models.DescribeDatahubTasksRes;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const CreateInstancePreData = models.CreateInstancePreData;
+const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
 const AclRule = models.AclRule;
+const SMTParam = models.SMTParam;
+const CheckCdcClusterResponse = models.CheckCdcClusterResponse;
+const CtsdbModifyConnectParam = models.CtsdbModifyConnectParam;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
-const JgwOperateResponse = models.JgwOperateResponse;
+const DorisConnectParam = models.DorisConnectParam;
 const ZoneInfo = models.ZoneInfo;
 const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;
-const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
-const SaleInfo = models.SaleInfo;
+const DeleteAclRuleRequest = models.DeleteAclRuleRequest;
+const DescribeConnectResourcesRequest = models.DescribeConnectResourcesRequest;
 const Topic = models.Topic;
 const Tag = models.Tag;
+const ModifyConnectResourceRequest = models.ModifyConnectResourceRequest;
+const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
+const RecordMapping = models.RecordMapping;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
+const InstanceDetailResponse = models.InstanceDetailResponse;
+const GroupOffsetResponse = models.GroupOffsetResponse;
 const CreateTokenRequest = models.CreateTokenRequest;
-const DeleteAclRuleRequest = models.DeleteAclRuleRequest;
+const DescribeTopicResponse = models.DescribeTopicResponse;
+const MongoDBModifyConnectParam = models.MongoDBModifyConnectParam;
+const TdwParam = models.TdwParam;
+const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
+const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
+const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
+const FetchDatahubMessageByOffsetResponse = models.FetchDatahubMessageByOffsetResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
-const RouteResponse = models.RouteResponse;
+const CreateCdcClusterResponse = models.CreateCdcClusterResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
+const CdcClusterResponse = models.CdcClusterResponse;
+const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
+const FetchDatahubMessageByOffsetRequest = models.FetchDatahubMessageByOffsetRequest;
 const AuthorizeTokenRequest = models.AuthorizeTokenRequest;
 const OperateResponseData = models.OperateResponseData;
+const DescribeACLRequest = models.DescribeACLRequest;
 const CreateUserResponse = models.CreateUserResponse;
-const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
+const DescribeDatahubTaskRes = models.DescribeDatahubTaskRes;
 const CreatePartitionResponse = models.CreatePartitionResponse;
+const MongoDBConnectParam = models.MongoDBConnectParam;
+const MySQLParam = models.MySQLParam;
+const BatchAnalyseParam = models.BatchAnalyseParam;
 const ClusterInfo = models.ClusterInfo;
 const DeleteGroupRequest = models.DeleteGroupRequest;
+const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
+const DescribeConnectResourceRequest = models.DescribeConnectResourceRequest;
+const DescribeTopicProduceConnectionRequest = models.DescribeTopicProduceConnectionRequest;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
-const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
+const CreateConnectResourceRequest = models.CreateConnectResourceRequest;
+const MariaDBParam = models.MariaDBParam;
+const Route = models.Route;
 const DeleteRouteResponse = models.DeleteRouteResponse;
 const Partitions = models.Partitions;
-const DescribeTopicResponse = models.DescribeTopicResponse;
+const CreateDatahubTaskRes = models.CreateDatahubTaskRes;
 const ConsumerGroupResponse = models.ConsumerGroupResponse;
 const CreateTopicIpWhiteListResponse = models.CreateTopicIpWhiteListResponse;
 const GroupOffsetTopic = models.GroupOffsetTopic;
 const ModifyGroupOffsetsResponse = models.ModifyGroupOffsetsResponse;
+const DescribeConnectInfoResultDTO = models.DescribeConnectInfoResultDTO;
 const Partition = models.Partition;
 const CreateAclResponse = models.CreateAclResponse;
+const FailureParam = models.FailureParam;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
+const TransformParam = models.TransformParam;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DeleteInstancePreResponse = models.DeleteInstancePreResponse;
-const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const TableMapping = models.TableMapping;
+const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
+const InquiryPublicNetworkParam = models.InquiryPublicNetworkParam;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
+const DeleteConnectResourceResponse = models.DeleteConnectResourceResponse;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const DeleteAclRuleResponse = models.DeleteAclRuleResponse;
 const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
-const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
+const DescribeConnectResourcesResp = models.DescribeConnectResourcesResp;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
 const BatchContent = models.BatchContent;
 const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
+const User = models.User;
+const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const DescribeUserResponse = models.DescribeUserResponse;
+const DtsConnectParam = models.DtsConnectParam;
+const DorisModifyConnectParam = models.DorisModifyConnectParam;
+const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
+const DeleteConnectResourceRequest = models.DeleteConnectResourceRequest;
 const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
 const GroupInfoResponse = models.GroupInfoResponse;
 const DescribeAppInfoResponse = models.DescribeAppInfoResponse;
+const CosParam = models.CosParam;
 const AclResponse = models.AclResponse;
 const ZoneResponse = models.ZoneResponse;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
-const ModifyPasswordResponse = models.ModifyPasswordResponse;
+const MapParam = models.MapParam;
 const TopicDetailResponse = models.TopicDetailResponse;
+const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const DeleteInstancePreRequest = models.DeleteInstancePreRequest;
-const TopicSubscribeGroup = models.TopicSubscribeGroup;
+const DescribeDatahubTopicRequest = models.DescribeDatahubTopicRequest;
 const Config = models.Config;
+const ClickHouseSchema = models.ClickHouseSchema;
+const CtsdbConnectParam = models.CtsdbConnectParam;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
+const MariaDBModifyConnectParam = models.MariaDBModifyConnectParam;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
+const DeleteDatahubTopicRequest = models.DeleteDatahubTopicRequest;
 const DescribeRegionResponse = models.DescribeRegionResponse;
-const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
+const CreateTopicResponse = models.CreateTopicResponse;
 const VipEntity = models.VipEntity;
+const DescribeTopicProduceConnectionResponse = models.DescribeTopicProduceConnectionResponse;
+const FetchLatestDatahubMessageListRequest = models.FetchLatestDatahubMessageListRequest;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
-const User = models.User;
-const GroupOffsetPartition = models.GroupOffsetPartition;
+const DatahubTaskInfo = models.DatahubTaskInfo;
+const FieldParam = models.FieldParam;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
-const CancelAuthorizationTokenRequest = models.CancelAuthorizationTokenRequest;
-const DeleteTopicResponse = models.DeleteTopicResponse;
+const DeleteDatahubTopicResponse = models.DeleteDatahubTopicResponse;
+const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
+const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
+const InquiryDetailPrice = models.InquiryDetailPrice;
+const DeleteDatahubTaskRequest = models.DeleteDatahubTaskRequest;
+const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
+const DeleteDatahubTaskResponse = models.DeleteDatahubTaskResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
+const CreateInstancePostRequest = models.CreateInstancePostRequest;
+const DescribeDatahubTopicsResponse = models.DescribeDatahubTopicsResponse;
+const DescribeConnectResourceResponse = models.DescribeConnectResourceResponse;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
-const GroupOffsetResponse = models.GroupOffsetResponse;
+const Connection = models.Connection;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const ModifyInstancePreResponse = models.ModifyInstancePreResponse;
 const CreateUserRequest = models.CreateUserRequest;
-const InstanceDetailResponse = models.InstanceDetailResponse;
+const RouteResponse = models.RouteResponse;
+const DtsModifyConnectParam = models.DtsModifyConnectParam;
 const DeleteRouteRequest = models.DeleteRouteRequest;
+const CreateCdcClusterRequest = models.CreateCdcClusterRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const CreateInstancePreResponse = models.CreateInstancePreResponse;
+const ConnectResourceResourceIdResp = models.ConnectResourceResourceIdResp;
+const CheckCdcClusterRequest = models.CheckCdcClusterRequest;
+const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const DescribeDatahubTopicResp = models.DescribeDatahubTopicResp;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
+const JsonPathReplaceParam = models.JsonPathReplaceParam;
+const SubstrParam = models.SubstrParam;
+const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const CreateConsumerRequest = models.CreateConsumerRequest;
+const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
-const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
+const InquireCkafkaPriceRequest = models.InquireCkafkaPriceRequest;
+const DateParam = models.DateParam;
+const ValueParam = models.ValueParam;
+const DescribeDatahubTasksResponse = models.DescribeDatahubTasksResponse;
+const InquiryDiskParam = models.InquiryDiskParam;
+const LowercaseParam = models.LowercaseParam;
 const SendMessageResponse = models.SendMessageResponse;
+const DescribeDatahubGroupOffsetsRequest = models.DescribeDatahubGroupOffsetsRequest;
+const InquiryBasePrice = models.InquiryBasePrice;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
 const TopicAttributesResponse = models.TopicAttributesResponse;
+const KafkaParam = models.KafkaParam;
+const RegexReplaceParam = models.RegexReplaceParam;
+const PrivateLinkParam = models.PrivateLinkParam;
 const CreateRouteResponse = models.CreateRouteResponse;
 const InstanceResponse = models.InstanceResponse;
+const DatahubTopicDTO = models.DatahubTopicDTO;
+const JgwOperateResponse = models.JgwOperateResponse;
 const DescribeGroup = models.DescribeGroup;
+const ClsParam = models.ClsParam;
+const EventBusParam = models.EventBusParam;
+const DatahubTaskIdRes = models.DatahubTaskIdRes;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
+const AnalyseParam = models.AnalyseParam;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const EsModifyConnectParam = models.EsModifyConnectParam;
+const ModifyConnectResourceResponse = models.ModifyConnectResourceResponse;
+const InstanceChargeParam = models.InstanceChargeParam;
+const DescribeDatahubTopicsRequest = models.DescribeDatahubTopicsRequest;
+const CreateDatahubTaskRequest = models.CreateDatahubTaskRequest;
+const InquiryPrice = models.InquiryPrice;
+const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
+const CtsdbParam = models.CtsdbParam;
 const SendMessageRequest = models.SendMessageRequest;
 const ConsumerRecord = models.ConsumerRecord;
-const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
+const PostgreSQLConnectParam = models.PostgreSQLConnectParam;
+const KVParam = models.KVParam;
 const BatchModifyTopicAttributesRequest = models.BatchModifyTopicAttributesRequest;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
-const Route = models.Route;
+const PostgreSQLParam = models.PostgreSQLParam;
+const MariaDBConnectParam = models.MariaDBConnectParam;
 const AclRuleInfo = models.AclRuleInfo;
 const Acl = models.Acl;
-const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
+const MongoDBParam = models.MongoDBParam;
+const TopicParam = models.TopicParam;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
-const CreateTopicResponse = models.CreateTopicResponse;
+const SecondaryAnalyseParam = models.SecondaryAnalyseParam;
 const CreateInstancePreRequest = models.CreateInstancePreRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
-const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
+const SaleInfo = models.SaleInfo;
+const DeleteTopicResponse = models.DeleteTopicResponse;
+const ScfParam = models.ScfParam;
+const CreateDatahubTaskResponse = models.CreateDatahubTaskResponse;
+const ClickHouseConnectParam = models.ClickHouseConnectParam;
 const DescribeUserRequest = models.DescribeUserRequest;
+const DescribeDatahubTopicsResp = models.DescribeDatahubTopicsResp;
 const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
+const ModifyDatahubTaskRequest = models.ModifyDatahubTaskRequest;
 const InstanceDetail = models.InstanceDetail;
 const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
-const SubscribedInfo = models.SubscribedInfo;
+const MySQLModifyConnectParam = models.MySQLModifyConnectParam;
+const SQLServerParam = models.SQLServerParam;
+const ReplaceParam = models.ReplaceParam;
 const Price = models.Price;
+const DescribeConnectResourcesResponse = models.DescribeConnectResourcesResponse;
 
 
 /**
@@ -234,6 +363,28 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 查询Datahub连接源
+     * @param {DescribeConnectResourceRequest} req
+     * @param {function(string, DescribeConnectResourceResponse):void} cb
+     * @public
+     */
+    DescribeConnectResource(req, cb) {
+        let resp = new DescribeConnectResourceResponse();
+        this.request("DescribeConnectResource", req, resp, cb);
+    }
+
+    /**
+     * 创建按量计费实例
+     * @param {CreateInstancePostRequest} req
+     * @param {function(string, CreateInstancePostResponse):void} cb
+     * @public
+     */
+    CreateInstancePost(req, cb) {
+        let resp = new CreateInstancePostResponse();
+        this.request("CreateInstancePost", req, resp, cb);
+    }
+
+    /**
      * 查询订阅某主题消息分组信息
      * @param {DescribeTopicSubscribeGroupRequest} req
      * @param {function(string, DescribeTopicSubscribeGroupResponse):void} cb
@@ -253,6 +404,17 @@ class CkafkaClient extends AbstractClient {
     ModifyInstancePre(req, cb) {
         let resp = new ModifyInstancePreResponse();
         this.request("ModifyInstancePre", req, resp, cb);
+    }
+
+    /**
+     * 获取主题列表详情（仅控制台调用）
+     * @param {DescribeTopicDetailRequest} req
+     * @param {function(string, DescribeTopicDetailResponse):void} cb
+     * @public
+     */
+    DescribeTopicDetail(req, cb) {
+        let resp = new DescribeTopicDetailResponse();
+        this.request("DescribeTopicDetail", req, resp, cb);
     }
 
     /**
@@ -311,6 +473,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 删除Datahub连接源
+     * @param {DeleteConnectResourceRequest} req
+     * @param {function(string, DeleteConnectResourceResponse):void} cb
+     * @public
+     */
+    DeleteConnectResource(req, cb) {
+        let resp = new DeleteConnectResourceResponse();
+        this.request("DeleteConnectResource", req, resp, cb);
+    }
+
+    /**
      * 枚举消费分组(精简版)
      * @param {DescribeGroupRequest} req
      * @param {function(string, DescribeGroupResponse):void} cb
@@ -322,14 +495,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * 设置Groups 消费分组offset
-     * @param {ModifyGroupOffsetsRequest} req
-     * @param {function(string, ModifyGroupOffsetsResponse):void} cb
+     * 修改Datahub任务
+     * @param {ModifyDatahubTaskRequest} req
+     * @param {function(string, ModifyDatahubTaskResponse):void} cb
      * @public
      */
-    ModifyGroupOffsets(req, cb) {
-        let resp = new ModifyGroupOffsetsResponse();
-        this.request("ModifyGroupOffsets", req, resp, cb);
+    ModifyDatahubTask(req, cb) {
+        let resp = new ModifyDatahubTaskResponse();
+        this.request("ModifyDatahubTask", req, resp, cb);
+    }
+
+    /**
+     * 查询Datahub任务列表 
+     * @param {DescribeDatahubTasksRequest} req
+     * @param {function(string, DescribeDatahubTasksResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTasks(req, cb) {
+        let resp = new DescribeDatahubTasksResponse();
+        this.request("DescribeDatahubTasks", req, resp, cb);
     }
 
     /**
@@ -355,6 +539,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 删除Datahub任务
+     * @param {DeleteDatahubTaskRequest} req
+     * @param {function(string, DeleteDatahubTaskResponse):void} cb
+     * @public
+     */
+    DeleteDatahubTask(req, cb) {
+        let resp = new DeleteDatahubTaskResponse();
+        this.request("DeleteDatahubTask", req, resp, cb);
+    }
+
+    /**
      * 删除消费组
      * @param {DeleteGroupRequest} req
      * @param {function(string, DeleteGroupResponse):void} cb
@@ -377,6 +572,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 根据位点查询消息列表
+     * @param {FetchMessageListByOffsetRequest} req
+     * @param {function(string, FetchMessageListByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageListByOffset(req, cb) {
+        let resp = new FetchMessageListByOffsetResponse();
+        this.request("FetchMessageListByOffset", req, resp, cb);
+    }
+
+    /**
      * 枚举ACL
      * @param {DescribeACLRequest} req
      * @param {function(string, DescribeACLResponse):void} cb
@@ -385,6 +591,17 @@ class CkafkaClient extends AbstractClient {
     DescribeACL(req, cb) {
         let resp = new DescribeACLResponse();
         this.request("DescribeACL", req, resp, cb);
+    }
+
+    /**
+     * 查询DIP主题列表
+     * @param {DescribeDatahubTopicsRequest} req
+     * @param {function(string, DescribeDatahubTopicsResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTopics(req, cb) {
+        let resp = new DescribeDatahubTopicsResponse();
+        this.request("DescribeDatahubTopics", req, resp, cb);
     }
 
     /**
@@ -421,6 +638,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 删除Datahub主题
+     * @param {DeleteDatahubTopicRequest} req
+     * @param {function(string, DeleteDatahubTopicResponse):void} cb
+     * @public
+     */
+    DeleteDatahubTopic(req, cb) {
+        let resp = new DeleteDatahubTopicResponse();
+        this.request("DeleteDatahubTopic", req, resp, cb);
+    }
+
+    /**
      * 删除主题IP白名单
      * @param {DeleteTopicIpWhiteListRequest} req
      * @param {function(string, DeleteTopicIpWhiteListResponse):void} cb
@@ -432,14 +660,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * 修改密码
-     * @param {ModifyPasswordRequest} req
-     * @param {function(string, ModifyPasswordResponse):void} cb
+     * 枚举地域,只支持广州地域
+     * @param {DescribeRegionRequest} req
+     * @param {function(string, DescribeRegionResponse):void} cb
      * @public
      */
-    ModifyPassword(req, cb) {
-        let resp = new ModifyPasswordResponse();
-        this.request("ModifyPassword", req, resp, cb);
+    DescribeRegion(req, cb) {
+        let resp = new DescribeRegionResponse();
+        this.request("DescribeRegion", req, resp, cb);
+    }
+
+    /**
+     * 设置Groups 消费分组offset
+     * @param {ModifyGroupOffsetsRequest} req
+     * @param {function(string, ModifyGroupOffsetsResponse):void} cb
+     * @public
+     */
+    ModifyGroupOffsets(req, cb) {
+        let resp = new ModifyGroupOffsetsResponse();
+        this.request("ModifyGroupOffsets", req, resp, cb);
     }
 
     /**
@@ -465,6 +704,39 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 创建Datahub连接源
+     * @param {CreateConnectResourceRequest} req
+     * @param {function(string, CreateConnectResourceResponse):void} cb
+     * @public
+     */
+    CreateConnectResource(req, cb) {
+        let resp = new CreateConnectResourceResponse();
+        this.request("CreateConnectResource", req, resp, cb);
+    }
+
+    /**
+     * 查询Datahub任务信息
+     * @param {DescribeDatahubTaskRequest} req
+     * @param {function(string, DescribeDatahubTaskResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTask(req, cb) {
+        let resp = new DescribeDatahubTaskResponse();
+        this.request("DescribeDatahubTask", req, resp, cb);
+    }
+
+    /**
+     * 用于查询cdc-ckafka任务状态
+     * @param {CheckCdcClusterRequest} req
+     * @param {function(string, CheckCdcClusterResponse):void} cb
+     * @public
+     */
+    CheckCdcCluster(req, cb) {
+        let resp = new CheckCdcClusterResponse();
+        this.request("CheckCdcCluster", req, resp, cb);
+    }
+
+    /**
      * 本接口用于增加主题中的分区
      * @param {CreatePartitionRequest} req
      * @param {function(string, CreatePartitionResponse):void} cb
@@ -473,6 +745,17 @@ class CkafkaClient extends AbstractClient {
     CreatePartition(req, cb) {
         let resp = new CreatePartitionResponse();
         this.request("CreatePartition", req, resp, cb);
+    }
+
+    /**
+     * 查询最新消息列表
+     * @param {FetchLatestDatahubMessageListRequest} req
+     * @param {function(string, FetchLatestDatahubMessageListResponse):void} cb
+     * @public
+     */
+    FetchLatestDatahubMessageList(req, cb) {
+        let resp = new FetchLatestDatahubMessageListResponse();
+        this.request("FetchLatestDatahubMessageList", req, resp, cb);
     }
 
     /**
@@ -487,6 +770,28 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 编辑Datahub连接源
+     * @param {ModifyConnectResourceRequest} req
+     * @param {function(string, ModifyConnectResourceResponse):void} cb
+     * @public
+     */
+    ModifyConnectResource(req, cb) {
+        let resp = new ModifyConnectResourceResponse();
+        this.request("ModifyConnectResource", req, resp, cb);
+    }
+
+    /**
+     * 根据指定offset位置的消息
+     * @param {FetchDatahubMessageByOffsetRequest} req
+     * @param {function(string, FetchDatahubMessageByOffsetResponse):void} cb
+     * @public
+     */
+    FetchDatahubMessageByOffset(req, cb) {
+        let resp = new FetchDatahubMessageByOffsetResponse();
+        this.request("FetchDatahubMessageByOffset", req, resp, cb);
+    }
+
+    /**
      * 创建最高权限的token
      * @param {CreateTokenRequest} req
      * @param {function(string, CreateTokenResponse):void} cb
@@ -498,14 +803,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * 获取主题列表详情（仅控制台调用）
-     * @param {DescribeTopicDetailRequest} req
-     * @param {function(string, DescribeTopicDetailResponse):void} cb
+     * 获取Datahub消费分组offset
+     * @param {DescribeDatahubGroupOffsetsRequest} req
+     * @param {function(string, DescribeDatahubGroupOffsetsResponse):void} cb
      * @public
      */
-    DescribeTopicDetail(req, cb) {
-        let resp = new DescribeTopicDetailResponse();
-        this.request("DescribeTopicDetail", req, resp, cb);
+    DescribeDatahubGroupOffsets(req, cb) {
+        let resp = new DescribeDatahubGroupOffsetsResponse();
+        this.request("DescribeDatahubGroupOffsets", req, resp, cb);
     }
 
     /**
@@ -587,6 +892,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 创建DIP转储任务
+     * @param {CreateDatahubTaskRequest} req
+     * @param {function(string, CreateDatahubTaskResponse):void} cb
+     * @public
+     */
+    CreateDatahubTask(req, cb) {
+        let resp = new CreateDatahubTaskResponse();
+        this.request("CreateDatahubTask", req, resp, cb);
+    }
+
+    /**
      * 删除ACL规则
      * @param {DeleteAclRuleRequest} req
      * @param {function(string, DeleteAclRuleResponse):void} cb
@@ -653,6 +969,28 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 设置实例属性
+     * @param {ModifyInstanceAttributesRequest} req
+     * @param {function(string, ModifyInstanceAttributesResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAttributes(req, cb) {
+        let resp = new ModifyInstanceAttributesResponse();
+        this.request("ModifyInstanceAttributes", req, resp, cb);
+    }
+
+    /**
+     * 查询topic 生产端连接信息
+     * @param {DescribeTopicProduceConnectionRequest} req
+     * @param {function(string, DescribeTopicProduceConnectionResponse):void} cb
+     * @public
+     */
+    DescribeTopicProduceConnection(req, cb) {
+        let resp = new DescribeTopicProduceConnectionResponse();
+        this.request("DescribeTopicProduceConnection", req, resp, cb);
+    }
+
+    /**
      * 接口请求域名：https://ckafka.tencentcloudapi.com
 本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
      * @param {DescribeTopicRequest} req
@@ -665,14 +1003,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * 设置实例属性
-     * @param {ModifyInstanceAttributesRequest} req
-     * @param {function(string, ModifyInstanceAttributesResponse):void} cb
+     * 获取Datahub主题属性
+     * @param {DescribeDatahubTopicRequest} req
+     * @param {function(string, DescribeDatahubTopicResponse):void} cb
      * @public
      */
-    ModifyInstanceAttributes(req, cb) {
-        let resp = new ModifyInstanceAttributesResponse();
-        this.request("ModifyInstanceAttributes", req, resp, cb);
+    DescribeDatahubTopic(req, cb) {
+        let resp = new DescribeDatahubTopicResponse();
+        this.request("DescribeDatahubTopic", req, resp, cb);
     }
 
     /**
@@ -687,14 +1025,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * 枚举地域,只支持广州地域
-     * @param {DescribeRegionRequest} req
-     * @param {function(string, DescribeRegionResponse):void} cb
+     * 查询Datahub连接源列表
+     * @param {DescribeConnectResourcesRequest} req
+     * @param {function(string, DescribeConnectResourcesResponse):void} cb
      * @public
      */
-    DescribeRegion(req, cb) {
-        let resp = new DescribeRegionResponse();
-        this.request("DescribeRegion", req, resp, cb);
+    DescribeConnectResources(req, cb) {
+        let resp = new DescribeConnectResourcesResponse();
+        this.request("DescribeConnectResources", req, resp, cb);
+    }
+
+    /**
+     * 用于cdc的专用ckafka集群
+     * @param {CreateCdcClusterRequest} req
+     * @param {function(string, CreateCdcClusterResponse):void} cb
+     * @public
+     */
+    CreateCdcCluster(req, cb) {
+        let resp = new CreateCdcClusterResponse();
+        this.request("CreateCdcCluster", req, resp, cb);
     }
 
     /**
@@ -717,6 +1066,28 @@ class CkafkaClient extends AbstractClient {
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * 修改密码
+     * @param {ModifyPasswordRequest} req
+     * @param {function(string, ModifyPasswordResponse):void} cb
+     * @public
+     */
+    ModifyPassword(req, cb) {
+        let resp = new ModifyPasswordResponse();
+        this.request("ModifyPassword", req, resp, cb);
+    }
+
+    /**
+     * Ckafka实例购买/续费询价
+     * @param {InquireCkafkaPriceRequest} req
+     * @param {function(string, InquireCkafkaPriceResponse):void} cb
+     * @public
+     */
+    InquireCkafkaPrice(req, cb) {
+        let resp = new InquireCkafkaPriceResponse();
+        this.request("InquireCkafkaPrice", req, resp, cb);
     }
 
 

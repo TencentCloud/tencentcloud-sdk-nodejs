@@ -67,6 +67,69 @@ class HorizontalPodAutoscalerSpec extends  AbstractModel {
 }
 
 /**
+ * 第三方 Prometheus 配置参数
+ * @class
+ */
+class CustomPromConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prometheus 访问地址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 认证方式
+         * @type {string || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 是否公网地址，缺省为 false
+         * @type {boolean || null}
+         */
+        this.IsPublicAddr = null;
+
+        /**
+         * 虚拟网络id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Prometheus 用户名（用于 basic 认证方式）
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Prometheus 密码（用于 basic 认证方式）
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.IsPublicAddr = 'IsPublicAddr' in params ? params.IsPublicAddr : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * Service信息
  * @class
  */
@@ -205,6 +268,34 @@ class MeshConfig extends  AbstractModel {
 }
 
 /**
+ * UnlinkPrometheus返回参数结构体
+ * @class
+ */
+class UnlinkPrometheusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 负载均衡状态信息
  * @class
  */
@@ -230,6 +321,13 @@ class LoadBalancerStatus extends  AbstractModel {
          */
         this.LoadBalancerVip = null;
 
+        /**
+         * 负载均衡实例 Hostname
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalancerHostname = null;
+
     }
 
     /**
@@ -242,6 +340,70 @@ class LoadBalancerStatus extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
         this.LoadBalancerVip = 'LoadBalancerVip' in params ? params.LoadBalancerVip : null;
+        this.LoadBalancerHostname = 'LoadBalancerHostname' in params ? params.LoadBalancerHostname : null;
+
+    }
+}
+
+/**
+ * ModifyTracingConfig返回参数结构体
+ * @class
+ */
+class ModifyTracingConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ * @class
+ */
+class PodsMetricSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标名
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 目标值
+         * @type {string || null}
+         */
+        this.TargetAverageValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.TargetAverageValue = 'TargetAverageValue' in params ? params.TargetAverageValue : null;
 
     }
 }
@@ -287,6 +449,107 @@ class DescribeMeshResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAccessLogConfig请求参数结构体
+ * @class
+ */
+class ModifyAccessLogConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * mesh ID
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+        /**
+         * 选中的范围
+         * @type {SelectedRange || null}
+         */
+        this.SelectedRange = null;
+
+        /**
+         * 采用的模板，可选值：istio（默认）、trace、custom
+         * @type {string || null}
+         */
+        this.Template = null;
+
+        /**
+         * 是否启用
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 腾讯云日志服务相关参数
+         * @type {CLS || null}
+         */
+        this.CLS = null;
+
+        /**
+         * 编码格式，可选值：TEXT、JSON
+         * @type {string || null}
+         */
+        this.Encoding = null;
+
+        /**
+         * 日志格式
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 是否启用标准输出
+         * @type {boolean || null}
+         */
+        this.EnableStdout = null;
+
+        /**
+         * 是否启动GRPC第三方服务器
+         * @type {boolean || null}
+         */
+        this.EnableServer = null;
+
+        /**
+         * GRPC第三方服务器地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+
+        if (params.SelectedRange) {
+            let obj = new SelectedRange();
+            obj.deserialize(params.SelectedRange)
+            this.SelectedRange = obj;
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+        if (params.CLS) {
+            let obj = new CLS();
+            obj.deserialize(params.CLS)
+            this.CLS = obj;
+        }
+        this.Encoding = 'Encoding' in params ? params.Encoding : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.EnableStdout = 'EnableStdout' in params ? params.EnableStdout : null;
+        this.EnableServer = 'EnableServer' in params ? params.EnableServer : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+    }
+}
+
+/**
  * 描述某一网格在特定命名空间下的自动注入状态
  * @class
  */
@@ -323,6 +586,90 @@ class AutoInjectionNamespaceState extends  AbstractModel {
 }
 
 /**
+ * UnlinkCluster返回参数结构体
+ * @class
+ */
+class UnlinkClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * LinkClusterList返回参数结构体
+ * @class
+ */
+class LinkClusterListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccessLogConfig返回参数结构体
+ * @class
+ */
+class ModifyAccessLogConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IngressGateway状态
  * @class
  */
@@ -335,6 +682,24 @@ class IngressGatewayStatus extends  AbstractModel {
          * @type {LoadBalancerStatus || null}
          */
         this.LoadBalancer = null;
+
+        /**
+         * ingress gateway 当前的版本
+         * @type {string || null}
+         */
+        this.CurrentVersion = null;
+
+        /**
+         * ingress gateway 目标的版本
+         * @type {string || null}
+         */
+        this.DesiredVersion = null;
+
+        /**
+         * ingress gateway的状态，取值running, upgrading, rollbacking
+         * @type {string || null}
+         */
+        this.State = null;
 
     }
 
@@ -351,6 +716,9 @@ class IngressGatewayStatus extends  AbstractModel {
             obj.deserialize(params.LoadBalancer)
             this.LoadBalancer = obj;
         }
+        this.CurrentVersion = 'CurrentVersion' in params ? params.CurrentVersion : null;
+        this.DesiredVersion = 'DesiredVersion' in params ? params.DesiredVersion : null;
+        this.State = 'State' in params ? params.State : null;
 
     }
 }
@@ -398,30 +766,24 @@ class ResourceMetricSource extends  AbstractModel {
 }
 
 /**
- * DescribeMeshList请求参数结构体
+ * CreateMesh返回参数结构体
  * @class
  */
-class DescribeMeshListRequest extends  AbstractModel {
+class CreateMeshResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件
-         * @type {Array.<Filter> || null}
+         * 创建的Mesh的Id
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.MeshId = null;
 
         /**
-         * 分页限制
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 分页偏移
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -432,17 +794,51 @@ class DescribeMeshListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+    }
+}
+
+/**
+ * LinkClusterList请求参数结构体
+ * @class
+ */
+class LinkClusterListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网格Id
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+        /**
+         * 关联集群
+         * @type {Array.<Cluster> || null}
+         */
+        this.ClusterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new Cluster();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
             }
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -546,6 +942,34 @@ class ClusterConfig extends  AbstractModel {
 }
 
 /**
+ * UnlinkPrometheus请求参数结构体
+ * @class
+ */
+class UnlinkPrometheusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网格ID
+         * @type {string || null}
+         */
+        this.MeshID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshID = 'MeshID' in params ? params.MeshID : null;
+
+    }
+}
+
+/**
  * MetricSpec 描述如何通过指定指标进行自动扩缩容
  * @class
  */
@@ -629,6 +1053,16 @@ class WorkloadConfig extends  AbstractModel {
          */
         this.SelectedNodeList = null;
 
+        /**
+         * 组件的部署模式，取值说明：
+IN_GENERAL_NODE：常规节点
+IN_EKLET：eklet 节点
+IN_SHARED_NODE_POOL：共享节电池
+IN_EXCLUSIVE_NODE_POOL：独占节点池
+         * @type {string || null}
+         */
+        this.DeployMode = null;
+
     }
 
     /**
@@ -652,6 +1086,7 @@ class WorkloadConfig extends  AbstractModel {
             this.HorizontalPodAutoscaler = obj;
         }
         this.SelectedNodeList = 'SelectedNodeList' in params ? params.SelectedNodeList : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
 
     }
 }
@@ -682,6 +1117,12 @@ class EgressGateway extends  AbstractModel {
          */
         this.Workload = null;
 
+        /**
+         * 工作负载的状态
+         * @type {EgressGatewayStatus || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -698,6 +1139,117 @@ class EgressGateway extends  AbstractModel {
             let obj = new WorkloadConfig();
             obj.deserialize(params.Workload)
             this.Workload = obj;
+        }
+
+        if (params.Status) {
+            let obj = new EgressGatewayStatus();
+            obj.deserialize(params.Status)
+            this.Status = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeMesh请求参数结构体
+ * @class
+ */
+class DescribeMeshRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的网格 Id
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+
+    }
+}
+
+/**
+ * Istio配置
+ * @class
+ */
+class IstioConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 外部流量策略
+         * @type {string || null}
+         */
+        this.OutboundTrafficPolicy = null;
+
+        /**
+         * 调用链配置（Deprecated，请使用 MeshConfig.Tracing 进行配置）
+         * @type {TracingConfig || null}
+         */
+        this.Tracing = null;
+
+        /**
+         * 禁用策略检查功能
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DisablePolicyChecks = null;
+
+        /**
+         * 支持HTTP1.0协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnablePilotHTTP = null;
+
+        /**
+         * 禁用HTTP重试策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DisableHTTPRetry = null;
+
+        /**
+         * SmartDNS策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SmartDNSConfig || null}
+         */
+        this.SmartDNS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutboundTrafficPolicy = 'OutboundTrafficPolicy' in params ? params.OutboundTrafficPolicy : null;
+
+        if (params.Tracing) {
+            let obj = new TracingConfig();
+            obj.deserialize(params.Tracing)
+            this.Tracing = obj;
+        }
+        this.DisablePolicyChecks = 'DisablePolicyChecks' in params ? params.DisablePolicyChecks : null;
+        this.EnablePilotHTTP = 'EnablePilotHTTP' in params ? params.EnablePilotHTTP : null;
+        this.DisableHTTPRetry = 'DisableHTTPRetry' in params ? params.DisableHTTPRetry : null;
+
+        if (params.SmartDNS) {
+            let obj = new SmartDNSConfig();
+            obj.deserialize(params.SmartDNS)
+            this.SmartDNS = obj;
         }
 
     }
@@ -792,6 +1344,12 @@ class Mesh extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -829,6 +1387,165 @@ class Mesh extends  AbstractModel {
             let obj = new MeshStatus();
             obj.deserialize(params.Status)
             this.Status = obj;
+        }
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeAccessLogConfig返回参数结构体
+ * @class
+ */
+class DescribeAccessLogConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问日志输出路径。默认 /dev/stdout
+         * @type {string || null}
+         */
+        this.File = null;
+
+        /**
+         * 访问日志的格式。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 访问日志输出编码，可取值为 "TEXT" 或 "JSON"，默认 TEXT"
+         * @type {string || null}
+         */
+        this.Encoding = null;
+
+        /**
+         * 选中的范围
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SelectedRange || null}
+         */
+        this.SelectedRange = null;
+
+        /**
+         * 采用的模板，可取值为"istio" 或 "trace"，默认为"istio"
+         * @type {string || null}
+         */
+        this.Template = null;
+
+        /**
+         * 腾讯云日志服务相关参数
+         * @type {CLS || null}
+         */
+        this.CLS = null;
+
+        /**
+         * GRPC第三方服务器地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 是否启用GRPC第三方服务器
+         * @type {boolean || null}
+         */
+        this.EnableServer = null;
+
+        /**
+         * 是否启用标准输出
+         * @type {boolean || null}
+         */
+        this.EnableStdout = null;
+
+        /**
+         * 是否启用访问日志采集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.File = 'File' in params ? params.File : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Encoding = 'Encoding' in params ? params.Encoding : null;
+
+        if (params.SelectedRange) {
+            let obj = new SelectedRange();
+            obj.deserialize(params.SelectedRange)
+            this.SelectedRange = obj;
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+
+        if (params.CLS) {
+            let obj = new CLS();
+            obj.deserialize(params.CLS)
+            this.CLS = obj;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+        this.EnableServer = 'EnableServer' in params ? params.EnableServer : null;
+        this.EnableStdout = 'EnableStdout' in params ? params.EnableStdout : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * LinkPrometheus请求参数结构体
+ * @class
+ */
+class LinkPrometheusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网格ID
+         * @type {string || null}
+         */
+        this.MeshID = null;
+
+        /**
+         * 配置
+         * @type {PrometheusConfig || null}
+         */
+        this.Prometheus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshID = 'MeshID' in params ? params.MeshID : null;
+
+        if (params.Prometheus) {
+            let obj = new PrometheusConfig();
+            obj.deserialize(params.Prometheus)
+            this.Prometheus = obj;
         }
 
     }
@@ -889,6 +1606,34 @@ class GrafanaInfo extends  AbstractModel {
         this.PublicURL = 'PublicURL' in params ? params.PublicURL : null;
         this.PublicFailedReason = 'PublicFailedReason' in params ? params.PublicFailedReason : null;
         this.PublicFailedMessage = 'PublicFailedMessage' in params ? params.PublicFailedMessage : null;
+
+    }
+}
+
+/**
+ * DeleteMesh返回参数结构体
+ * @class
+ */
+class DeleteMeshResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1061,24 +1806,42 @@ class InjectConfig extends  AbstractModel {
 }
 
 /**
- * PodsMetricSource 定义了如何根据特定指标进行扩缩容
+ * DeleteMesh请求参数结构体
  * @class
  */
-class PodsMetricSource extends  AbstractModel {
+class DeleteMeshRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指标名
+         * 需要删除的MeshId
          * @type {string || null}
          */
-        this.MetricName = null;
+        this.MeshId = null;
 
         /**
-         * 目标值
-         * @type {string || null}
+         * CLS组件是否被删除
+         * @type {boolean || null}
          */
-        this.TargetAverageValue = null;
+        this.NeedDeleteCLS = null;
+
+        /**
+         * TMP组件是否被删除
+         * @type {boolean || null}
+         */
+        this.NeedDeleteTMP = null;
+
+        /**
+         * APM组件是否被删除
+         * @type {boolean || null}
+         */
+        this.NeedDeleteAPM = null;
+
+        /**
+         * Grafana组件是否被删除
+         * @type {boolean || null}
+         */
+        this.NeedDeleteGrafana = null;
 
     }
 
@@ -1089,8 +1852,39 @@ class PodsMetricSource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
-        this.TargetAverageValue = 'TargetAverageValue' in params ? params.TargetAverageValue : null;
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+        this.NeedDeleteCLS = 'NeedDeleteCLS' in params ? params.NeedDeleteCLS : null;
+        this.NeedDeleteTMP = 'NeedDeleteTMP' in params ? params.NeedDeleteTMP : null;
+        this.NeedDeleteAPM = 'NeedDeleteAPM' in params ? params.NeedDeleteAPM : null;
+        this.NeedDeleteGrafana = 'NeedDeleteGrafana' in params ? params.NeedDeleteGrafana : null;
+
+    }
+}
+
+/**
+ * LinkPrometheus返回参数结构体
+ * @class
+ */
+class LinkPrometheusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1168,15 +1962,15 @@ class DeployConfig extends  AbstractModel {
 }
 
 /**
- * DescribeMesh请求参数结构体
+ * DescribeAccessLogConfig请求参数结构体
  * @class
  */
-class DescribeMeshRequest extends  AbstractModel {
+class DescribeAccessLogConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要查询的网格 Id
+         * mesh名字
          * @type {string || null}
          */
         this.MeshId = null;
@@ -1230,6 +2024,91 @@ class ActiveOperation extends  AbstractModel {
         }
         this.OperationId = 'OperationId' in params ? params.OperationId : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * CreateMesh请求参数结构体
+ * @class
+ */
+class CreateMeshRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mesh名称
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * Mesh版本
+         * @type {string || null}
+         */
+        this.MeshVersion = null;
+
+        /**
+         * Mesh类型，取值范围：
+- HOSTED：托管网格
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Mesh配置
+         * @type {MeshConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * 关联集群
+         * @type {Array.<Cluster> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * 标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.MeshVersion = 'MeshVersion' in params ? params.MeshVersion : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Config) {
+            let obj = new MeshConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new Cluster();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -1319,6 +2198,27 @@ class PrometheusStatus extends  AbstractModel {
 }
 
 /**
+ * 负载均衡跨域设置
+ * @class
+ */
+class CrossRegionConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * 键值对过滤器，用于条件过滤查询。例如过滤ID、名称等
  * @class
  */
@@ -1385,6 +2285,13 @@ class PrometheusConfig extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 第三方 Prometheus
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CustomPromConfig || null}
+         */
+        this.CustomProm = null;
+
     }
 
     /**
@@ -1399,35 +2306,36 @@ class PrometheusConfig extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
+        if (params.CustomProm) {
+            let obj = new CustomPromConfig();
+            obj.deserialize(params.CustomProm)
+            this.CustomProm = obj;
+        }
+
     }
 }
 
 /**
- * Istio配置
+ * 内网独占集群配置
  * @class
  */
-class IstioConfig extends  AbstractModel {
+class ExtensiveCluster extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 外部流量策略
+         * Cluster ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.OutboundTrafficPolicy = null;
+        this.ClusterId = null;
 
         /**
-         * 调用链配置（Deprecated，请使用 MeshConfig.Tracing 进行配置）
-         * @type {TracingConfig || null}
-         */
-        this.Tracing = null;
-
-        /**
-         * 禁用策略检查功能
+         * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * @type {string || null}
          */
-        this.DisablePolicyChecks = null;
+        this.Zone = null;
 
     }
 
@@ -1438,14 +2346,158 @@ class IstioConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OutboundTrafficPolicy = 'OutboundTrafficPolicy' in params ? params.OutboundTrafficPolicy : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
-        if (params.Tracing) {
-            let obj = new TracingConfig();
-            obj.deserialize(params.Tracing)
-            this.Tracing = obj;
+    }
+}
+
+/**
+ * 智能DNS配置
+ * @class
+ */
+class SmartDNSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开启DNS代理
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IstioMetaDNSCapture = null;
+
+        /**
+         * 开启自动地址分配
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IstioMetaDNSAutoAllocate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.DisablePolicyChecks = 'DisablePolicyChecks' in params ? params.DisablePolicyChecks : null;
+        this.IstioMetaDNSCapture = 'IstioMetaDNSCapture' in params ? params.IstioMetaDNSCapture : null;
+        this.IstioMetaDNSAutoAllocate = 'IstioMetaDNSAutoAllocate' in params ? params.IstioMetaDNSAutoAllocate : null;
+
+    }
+}
+
+/**
+ * DescribeMeshList请求参数结构体
+ * @class
+ */
+class DescribeMeshListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 分页限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ModifyMesh返回参数结构体
+ * @class
+ */
+class ModifyMeshResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UnlinkCluster请求参数结构体
+ * @class
+ */
+class UnlinkClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网格Id
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+        /**
+         * 取消关联的集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1476,6 +2528,12 @@ class CLS extends  AbstractModel {
          */
         this.Topic = null;
 
+        /**
+         * 是否删除
+         * @type {boolean || null}
+         */
+        this.NeedDelete = null;
+
     }
 
     /**
@@ -1488,6 +2546,7 @@ class CLS extends  AbstractModel {
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.LogSet = 'LogSet' in params ? params.LogSet : null;
         this.Topic = 'Topic' in params ? params.Topic : null;
+        this.NeedDelete = 'NeedDelete' in params ? params.NeedDelete : null;
 
     }
 }
@@ -1650,6 +2709,101 @@ class IngressGateway extends  AbstractModel {
 }
 
 /**
+ * egress gateway 的状态
+ * @class
+ */
+class EgressGatewayStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * egress gateway的当前版本
+         * @type {string || null}
+         */
+        this.CurrentVersion = null;
+
+        /**
+         * egress gateway的目标版本
+         * @type {string || null}
+         */
+        this.DesiredVersion = null;
+
+        /**
+         * egress gateway的状态，取值：running，upgrading，rollbacking
+         * @type {string || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentVersion = 'CurrentVersion' in params ? params.CurrentVersion : null;
+        this.DesiredVersion = 'DesiredVersion' in params ? params.DesiredVersion : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * 内网独占集群配置列表
+ * @class
+ */
+class ExtensiveClusters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 4层集群配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ExtensiveCluster> || null}
+         */
+        this.L4Clusters = null;
+
+        /**
+         * 7层集群配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ExtensiveCluster> || null}
+         */
+        this.L7Clusters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.L4Clusters) {
+            this.L4Clusters = new Array();
+            for (let z in params.L4Clusters) {
+                let obj = new ExtensiveCluster();
+                obj.deserialize(params.L4Clusters[z]);
+                this.L4Clusters.push(obj);
+            }
+        }
+
+        if (params.L7Clusters) {
+            this.L7Clusters = new Array();
+            for (let z in params.L7Clusters) {
+                let obj = new ExtensiveCluster();
+                obj.deserialize(params.L7Clusters[z]);
+                this.L7Clusters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 选中的项目
  * @class
  */
@@ -1694,6 +2848,134 @@ class SelectedItems extends  AbstractModel {
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.ItemName = 'ItemName' in params ? params.ItemName : null;
         this.Gateways = 'Gateways' in params ? params.Gateways : null;
+
+    }
+}
+
+/**
+ * ModifyTracingConfig请求参数结构体
+ * @class
+ */
+class ModifyTracingConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * mesh名字
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+        /**
+         * 是否启用调用跟踪
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 腾讯云 APM 服务相关参数
+         * @type {APM || null}
+         */
+        this.APM = null;
+
+        /**
+         * 调用跟踪采样值
+         * @type {number || null}
+         */
+        this.Sampling = null;
+
+        /**
+         * 调用追踪Zipkin相关配置
+         * @type {TracingZipkin || null}
+         */
+        this.Zipkin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+        if (params.APM) {
+            let obj = new APM();
+            obj.deserialize(params.APM)
+            this.APM = obj;
+        }
+        this.Sampling = 'Sampling' in params ? params.Sampling : null;
+
+        if (params.Zipkin) {
+            let obj = new TracingZipkin();
+            obj.deserialize(params.Zipkin)
+            this.Zipkin = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyMesh请求参数结构体
+ * @class
+ */
+class ModifyMeshRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要修改的网格Id
+         * @type {string || null}
+         */
+        this.MeshId = null;
+
+        /**
+         * 修改的网格名称
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * 修改的网格配置
+         * @type {MeshConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * 修改的集群配置
+         * @type {Array.<Cluster> || null}
+         */
+        this.ClusterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MeshId = 'MeshId' in params ? params.MeshId : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+
+        if (params.Config) {
+            let obj = new MeshConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new Cluster();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
 
     }
 }
@@ -1776,6 +3058,12 @@ class Cluster extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 集群关联的 Namespace 列表
+         * @type {Array.<string> || null}
+         */
+        this.HostedNamespaces = null;
+
     }
 
     /**
@@ -1806,6 +3094,49 @@ class Cluster extends  AbstractModel {
             this.Status = obj;
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.HostedNamespaces = 'HostedNamespaces' in params ? params.HostedNamespaces : null;
+
+    }
+}
+
+/**
+ * 标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 是否透传给其他关联产品
+         * @type {boolean || null}
+         */
+        this.Passthrough = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Passthrough = 'Passthrough' in params ? params.Passthrough : null;
 
     }
 }
@@ -2112,6 +3443,24 @@ class AccessLogConfig extends  AbstractModel {
          */
         this.Format = null;
 
+        /**
+         * GRPC第三方服务器地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 是否启用GRPC第三方服务器
+         * @type {boolean || null}
+         */
+        this.EnableServer = null;
+
+        /**
+         * 是否启用标准输出
+         * @type {boolean || null}
+         */
+        this.EnableStdout = null;
+
     }
 
     /**
@@ -2137,6 +3486,9 @@ class AccessLogConfig extends  AbstractModel {
         }
         this.Encoding = 'Encoding' in params ? params.Encoding : null;
         this.Format = 'Format' in params ? params.Format : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.EnableServer = 'EnableServer' in params ? params.EnableServer : null;
+        this.EnableStdout = 'EnableStdout' in params ? params.EnableStdout : null;
 
     }
 }
@@ -2170,10 +3522,59 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.InternetChargeType = null;
 
         /**
-         * 最大出带宽，单位Mbps，范围支持0到2048，仅对公网属性的LB生效，默认值 10
+         * 最大出带宽，单位Mbps，仅对公网属性的LB生效，默认值 10
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 可用区 ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneID = null;
+
+        /**
+         * 运营商类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VipIsp = null;
+
+        /**
+         * TGW Group 名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TgwGroupName = null;
+
+        /**
+         * IP 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 内网独占集群配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ExtensiveClusters || null}
+         */
+        this.ExtensiveClusters = null;
+
+        /**
+         * 负载均衡跨地域配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CrossRegionConfig || null}
+         */
+        this.CrossRegionConfig = null;
 
     }
 
@@ -2188,43 +3589,95 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.ZoneID = 'ZoneID' in params ? params.ZoneID : null;
+        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
+        this.TgwGroupName = 'TgwGroupName' in params ? params.TgwGroupName : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.ExtensiveClusters) {
+            let obj = new ExtensiveClusters();
+            obj.deserialize(params.ExtensiveClusters)
+            this.ExtensiveClusters = obj;
+        }
+
+        if (params.CrossRegionConfig) {
+            let obj = new CrossRegionConfig();
+            obj.deserialize(params.CrossRegionConfig)
+            this.CrossRegionConfig = obj;
+        }
 
     }
 }
 
 module.exports = {
     HorizontalPodAutoscalerSpec: HorizontalPodAutoscalerSpec,
+    CustomPromConfig: CustomPromConfig,
     Service: Service,
     MeshConfig: MeshConfig,
+    UnlinkPrometheusResponse: UnlinkPrometheusResponse,
     LoadBalancerStatus: LoadBalancerStatus,
+    ModifyTracingConfigResponse: ModifyTracingConfigResponse,
+    PodsMetricSource: PodsMetricSource,
     DescribeMeshResponse: DescribeMeshResponse,
+    ModifyAccessLogConfigRequest: ModifyAccessLogConfigRequest,
     AutoInjectionNamespaceState: AutoInjectionNamespaceState,
+    UnlinkClusterResponse: UnlinkClusterResponse,
+    LinkClusterListResponse: LinkClusterListResponse,
+    ModifyAccessLogConfigResponse: ModifyAccessLogConfigResponse,
     IngressGatewayStatus: IngressGatewayStatus,
     ResourceMetricSource: ResourceMetricSource,
-    DescribeMeshListRequest: DescribeMeshListRequest,
+    CreateMeshResponse: CreateMeshResponse,
+    LinkClusterListRequest: LinkClusterListRequest,
     ClusterConfig: ClusterConfig,
+    UnlinkPrometheusRequest: UnlinkPrometheusRequest,
     MetricSpec: MetricSpec,
     WorkloadConfig: WorkloadConfig,
     EgressGateway: EgressGateway,
+    DescribeMeshRequest: DescribeMeshRequest,
+    IstioConfig: IstioConfig,
     Mesh: Mesh,
+    DescribeAccessLogConfigResponse: DescribeAccessLogConfigResponse,
+    LinkPrometheusRequest: LinkPrometheusRequest,
     GrafanaInfo: GrafanaInfo,
+    DeleteMeshResponse: DeleteMeshResponse,
     MeshStatus: MeshStatus,
     IstiodConfig: IstiodConfig,
     InjectConfig: InjectConfig,
-    PodsMetricSource: PodsMetricSource,
+    DeleteMeshRequest: DeleteMeshRequest,
+    LinkPrometheusResponse: LinkPrometheusResponse,
     Resource: Resource,
     DeployConfig: DeployConfig,
-    DescribeMeshRequest: DescribeMeshRequest,
+    DescribeAccessLogConfigRequest: DescribeAccessLogConfigRequest,
     ActiveOperation: ActiveOperation,
+    CreateMeshRequest: CreateMeshRequest,
     PrometheusStatus: PrometheusStatus,
+    CrossRegionConfig: CrossRegionConfig,
     Filter: Filter,
     PrometheusConfig: PrometheusConfig,
-    IstioConfig: IstioConfig,
+    ExtensiveCluster: ExtensiveCluster,
+    SmartDNSConfig: SmartDNSConfig,
+    DescribeMeshListRequest: DescribeMeshListRequest,
+    ModifyMeshResponse: ModifyMeshResponse,
+    UnlinkClusterRequest: UnlinkClusterRequest,
     CLS: CLS,
     TracingConfig: TracingConfig,
     IngressGateway: IngressGateway,
+    EgressGatewayStatus: EgressGatewayStatus,
+    ExtensiveClusters: ExtensiveClusters,
     SelectedItems: SelectedItems,
+    ModifyTracingConfigRequest: ModifyTracingConfigRequest,
+    ModifyMeshRequest: ModifyMeshRequest,
     Cluster: Cluster,
+    Tag: Tag,
     DescribeMeshListResponse: DescribeMeshListResponse,
     TracingZipkin: TracingZipkin,
     APM: APM,

@@ -20,6 +20,7 @@ const DetectInfoVideoData = models.DetectInfoVideoData;
 const GetDetectInfoEnhancedRequest = models.GetDetectInfoEnhancedRequest;
 const GetFaceIdTokenRequest = models.GetFaceIdTokenRequest;
 const LivenessRequest = models.LivenessRequest;
+const RuleIdConfig = models.RuleIdConfig;
 const Encryption = models.Encryption;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
@@ -39,20 +40,19 @@ const GetEidResultRequest = models.GetEidResultRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const GetEidTokenRequest = models.GetEidTokenRequest;
-const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
+const IntentionQuestionResult = models.IntentionQuestionResult;
 const GetWeChatBillDetailsResponse = models.GetWeChatBillDetailsResponse;
 const CheckPhoneAndNameResponse = models.CheckPhoneAndNameResponse;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const MobileStatusRequest = models.MobileStatusRequest;
-const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
-const GetRealNameAuthTokenRequest = models.GetRealNameAuthTokenRequest;
+const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const ParseNfcDataResponse = models.ParseNfcDataResponse;
 const CheckIdNameDateRequest = models.CheckIdNameDateRequest;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 const EidInfo = models.EidInfo;
 const GetFaceIdTokenResponse = models.GetFaceIdTokenResponse;
-const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const PhoneVerificationCMCCResponse = models.PhoneVerificationCMCCResponse;
 const CheckEidTokenStatusResponse = models.CheckEidTokenStatusResponse;
 const PhoneVerificationCTCCResponse = models.PhoneVerificationCTCCResponse;
@@ -69,7 +69,6 @@ const MinorsVerificationResponse = models.MinorsVerificationResponse;
 const GetWeChatBillDetailsRequest = models.GetWeChatBillDetailsRequest;
 const CheckEidTokenStatusRequest = models.CheckEidTokenStatusRequest;
 const GetEidResultResponse = models.GetEidResultResponse;
-const GetRealNameAuthResultRequest = models.GetRealNameAuthResultRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const PhoneVerificationCUCCRequest = models.PhoneVerificationCUCCRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
@@ -77,7 +76,6 @@ const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificatio
 const GetFaceIdResultRequest = models.GetFaceIdResultRequest;
 const PhoneVerificationCUCCResponse = models.PhoneVerificationCUCCResponse;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
-const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
@@ -96,8 +94,7 @@ const LivenessCompareRequest = models.LivenessCompareRequest;
 const DetectDetail = models.DetectDetail;
 const GetFaceIdResultResponse = models.GetFaceIdResultResponse;
 const EncryptedPhoneVerificationRequest = models.EncryptedPhoneVerificationRequest;
-const GetRealNameAuthTokenResponse = models.GetRealNameAuthTokenResponse;
-const GetRealNameAuthResultResponse = models.GetRealNameAuthResultResponse;
+const IntentionQuestion = models.IntentionQuestion;
 const EncryptedPhoneVerificationResponse = models.EncryptedPhoneVerificationResponse;
 
 
@@ -245,18 +242,6 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
-
-     * @param {GetRealNameAuthTokenRequest} req
-     * @param {function(string, GetRealNameAuthTokenResponse):void} cb
-     * @public
-     */
-    GetRealNameAuthToken(req, cb) {
-        let resp = new GetRealNameAuthTokenResponse();
-        this.request("GetRealNameAuthToken", req, resp, cb);
-    }
-
-    /**
      * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
      * @param {IdCardOCRVerificationRequest} req
      * @param {function(string, IdCardOCRVerificationResponse):void} cb
@@ -342,18 +327,6 @@ class FaceidClient extends AbstractClient {
     MinorsVerification(req, cb) {
         let resp = new MinorsVerificationResponse();
         this.request("MinorsVerification", req, resp, cb);
-    }
-
-    /**
-     * 使用活体比对（光线）SDK生成的数据包检测活体，并和传入的图片进行比对。
-图片和SDK生成的数据内容必须存储在腾讯云COS，COS Bucket所在的Region需要和本接口请求的Region保持一致，推荐使用生成上传链接接口来完成资源传递。
-     * @param {DetectReflectLivenessAndCompareRequest} req
-     * @param {function(string, DetectReflectLivenessAndCompareResponse):void} cb
-     * @public
-     */
-    DetectReflectLivenessAndCompare(req, cb) {
-        let resp = new DetectReflectLivenessAndCompareResponse();
-        this.request("DetectReflectLivenessAndCompare", req, resp, cb);
     }
 
     /**
@@ -497,17 +470,6 @@ class FaceidClient extends AbstractClient {
     PhoneVerificationCTCC(req, cb) {
         let resp = new PhoneVerificationCTCCResponse();
         this.request("PhoneVerificationCTCC", req, resp, cb);
-    }
-
-    /**
-     * 获取微信实名认证结果
-     * @param {GetRealNameAuthResultRequest} req
-     * @param {function(string, GetRealNameAuthResultResponse):void} cb
-     * @public
-     */
-    GetRealNameAuthResult(req, cb) {
-        let resp = new GetRealNameAuthResultResponse();
-        this.request("GetRealNameAuthResult", req, resp, cb);
     }
 
 

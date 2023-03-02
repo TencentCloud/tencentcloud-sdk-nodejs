@@ -20,16 +20,18 @@ const UnBindSubDomainResponse = models.UnBindSubDomainResponse;
 const UpdateApiKeyRequest = models.UpdateApiKeyRequest;
 const Service = models.Service;
 const DeleteAPIDocRequest = models.DeleteAPIDocRequest;
+const AttachedPluginInfo = models.AttachedPluginInfo;
 const ApiUsagePlanSet = models.ApiUsagePlanSet;
 const DescribeAPIDocDetailRequest = models.DescribeAPIDocDetailRequest;
 const ModifyAPIDocResponse = models.ModifyAPIDocResponse;
 const AttachedApiSummary = models.AttachedApiSummary;
 const DescribeUsagePlanRequest = models.DescribeUsagePlanRequest;
 const DeleteUsagePlanResponse = models.DeleteUsagePlanResponse;
+const ImportOpenApiResponse = models.ImportOpenApiResponse;
 const DisableApiKeyResponse = models.DisableApiKeyResponse;
 const DescribeApiResponse = models.DescribeApiResponse;
 const UnReleaseServiceRequest = models.UnReleaseServiceRequest;
-const DetachPluginRequest = models.DetachPluginRequest;
+const DescribeExclusiveInstancesStatusResponse = models.DescribeExclusiveInstancesStatusResponse;
 const ModifySubDomainRequest = models.ModifySubDomainRequest;
 const DescribeApiAppsStatusRequest = models.DescribeApiAppsStatusRequest;
 const DescribeServiceUsagePlanRequest = models.DescribeServiceUsagePlanRequest;
@@ -37,6 +39,7 @@ const DescribeServiceEnvironmentListResponse = models.DescribeServiceEnvironment
 const DescribeApiAppBindApisStatusRequest = models.DescribeApiAppBindApisStatusRequest;
 const ModifyApiResponse = models.ModifyApiResponse;
 const ServiceEnvironmentStrategy = models.ServiceEnvironmentStrategy;
+const CreateApiRspSet = models.CreateApiRspSet;
 const ApiInfo = models.ApiInfo;
 const TargetServicesReq = models.TargetServicesReq;
 const DescribeUsagePlansStatusRequest = models.DescribeUsagePlansStatusRequest;
@@ -54,6 +57,7 @@ const DeleteIPStrategyRequest = models.DeleteIPStrategyRequest;
 const DescribeApiAppRequest = models.DescribeApiAppRequest;
 const DescribePluginResponse = models.DescribePluginResponse;
 const DescribeUpstreamBindApisRequest = models.DescribeUpstreamBindApisRequest;
+const DescribePluginsByApiResponse = models.DescribePluginsByApiResponse;
 const DescribeExclusiveInstancesResponse = models.DescribeExclusiveInstancesResponse;
 const K8sService = models.K8sService;
 const DeleteUsagePlanRequest = models.DeleteUsagePlanRequest;
@@ -90,7 +94,7 @@ const BindApiAppRequest = models.BindApiAppRequest;
 const IPStrategyApi = models.IPStrategyApi;
 const DescribeIPStrategyResponse = models.DescribeIPStrategyResponse;
 const DescribePluginRequest = models.DescribePluginRequest;
-const DocumentSDK = models.DocumentSDK;
+const DetachPluginRequest = models.DetachPluginRequest;
 const AttachedApiInfo = models.AttachedApiInfo;
 const CreateApiResponse = models.CreateApiResponse;
 const DescribeIPStrategyApisStatusRequest = models.DescribeIPStrategyApisStatusRequest;
@@ -117,6 +121,7 @@ const UnBindIPStrategyRequest = models.UnBindIPStrategyRequest;
 const DescribeUpstreamsResponse = models.DescribeUpstreamsResponse;
 const DescribePluginApisRequest = models.DescribePluginApisRequest;
 const ResponseErrorCodeReq = models.ResponseErrorCodeReq;
+const InstanceSummary = models.InstanceSummary;
 const CreateServiceRequest = models.CreateServiceRequest;
 const DescribeIPStrategysStatusRequest = models.DescribeIPStrategysStatusRequest;
 const DemoteServiceUsagePlanResponse = models.DemoteServiceUsagePlanResponse;
@@ -159,6 +164,7 @@ const DeleteServiceResponse = models.DeleteServiceResponse;
 const DescribeServiceEnvironmentReleaseHistoryResponse = models.DescribeServiceEnvironmentReleaseHistoryResponse;
 const Environment = models.Environment;
 const DescribeAPIDocsRequest = models.DescribeAPIDocsRequest;
+const DescribePluginsByApiRequest = models.DescribePluginsByApiRequest;
 const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
 const ServiceReleaseHistoryInfo = models.ServiceReleaseHistoryInfo;
 const CreatePluginResponse = models.CreatePluginResponse;
@@ -201,7 +207,7 @@ const UsagePlanEnvironment = models.UsagePlanEnvironment;
 const ModifyIPStrategyRequest = models.ModifyIPStrategyRequest;
 const ModifyPluginResponse = models.ModifyPluginResponse;
 const UnBindSecretIdsRequest = models.UnBindSecretIdsRequest;
-const DescribeApiRequest = models.DescribeApiRequest;
+const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
 const VpcConfig = models.VpcConfig;
 const CreateUpstreamResponse = models.CreateUpstreamResponse;
 const ResetAPIDocPasswordRequest = models.ResetAPIDocPasswordRequest;
@@ -212,6 +218,7 @@ const DetachPluginResponse = models.DetachPluginResponse;
 const DeletePluginResponse = models.DeletePluginResponse;
 const DescribeUpstreamBindApis = models.DescribeUpstreamBindApis;
 const ModifyServiceEnvironmentStrategyRequest = models.ModifyServiceEnvironmentStrategyRequest;
+const DocumentSDK = models.DocumentSDK;
 const CreateAPIDocRequest = models.CreateAPIDocRequest;
 const DescribeApiAppBindApisStatusResponse = models.DescribeApiAppBindApisStatusResponse;
 const DescribeServiceSubDomainsRequest = models.DescribeServiceSubDomainsRequest;
@@ -234,9 +241,9 @@ const BuildAPIDocResponse = models.BuildAPIDocResponse;
 const ErrorCodes = models.ErrorCodes;
 const DescribeServiceEnvironmentListRequest = models.DescribeServiceEnvironmentListRequest;
 const ServiceEnvironmentStrategyStatus = models.ServiceEnvironmentStrategyStatus;
-const ReqParameter = models.ReqParameter;
-const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
 const MicroService = models.MicroService;
+const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
+const DescribeApiRequest = models.DescribeApiRequest;
 const ApiEnvironmentStrategyStataus = models.ApiEnvironmentStrategyStataus;
 const PluginSummary = models.PluginSummary;
 const ApiAppInfo = models.ApiAppInfo;
@@ -246,6 +253,7 @@ const ApiKey = models.ApiKey;
 const BindApiInfo = models.BindApiInfo;
 const ApiAppApiInfo = models.ApiAppApiInfo;
 const DescribeUsagePlanResponse = models.DescribeUsagePlanResponse;
+const ReqParameter = models.ReqParameter;
 const UnBindEnvironmentRequest = models.UnBindEnvironmentRequest;
 const AttachPluginResponse = models.AttachPluginResponse;
 const BindEnvironmentRequest = models.BindEnvironmentRequest;
@@ -255,6 +263,7 @@ const DescribeApiForApiAppResponse = models.DescribeApiForApiAppResponse;
 const EnvironmentStrategy = models.EnvironmentStrategy;
 const InstanceParameterInput = models.InstanceParameterInput;
 const DescribeUsagePlanEnvironmentsRequest = models.DescribeUsagePlanEnvironmentsRequest;
+const ImportOpenApiRequest = models.ImportOpenApiRequest;
 const DescribeServiceReleaseVersionResponse = models.DescribeServiceReleaseVersionResponse;
 const UpstreamNode = models.UpstreamNode;
 const ApiAppApiInfos = models.ApiAppApiInfos;
@@ -279,9 +288,10 @@ const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse
 const CreateApiAppResponse = models.CreateApiAppResponse;
 const DescribeApiUsagePlanRequest = models.DescribeApiUsagePlanRequest;
 const UnBindSubDomainRequest = models.UnBindSubDomainRequest;
-const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
+const AttachedPluginSummary = models.AttachedPluginSummary;
 const DescribeIPStrategysStatusResponse = models.DescribeIPStrategysStatusResponse;
 const UpdateApiAppKeyResponse = models.UpdateApiAppKeyResponse;
+const DescribeExclusiveInstancesStatusRequest = models.DescribeExclusiveInstancesStatusRequest;
 const InstanceDetail = models.InstanceDetail;
 const UnBindSecretIdsResponse = models.UnBindSecretIdsResponse;
 const CreateApiAppRequest = models.CreateApiAppRequest;
@@ -416,6 +426,17 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
     DeleteApiApp(req, cb) {
         let resp = new DeleteApiAppResponse();
         this.request("DeleteApiApp", req, resp, cb);
+    }
+
+    /**
+     * 展示API上已绑定的插件列表。
+     * @param {DescribePluginsByApiRequest} req
+     * @param {function(string, DescribePluginsByApiResponse):void} cb
+     * @public
+     */
+    DescribePluginsByApi(req, cb) {
+        let resp = new DescribePluginsByApiResponse();
+        this.request("DescribePluginsByApi", req, resp, cb);
     }
 
     /**
@@ -811,14 +832,15 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     }
 
     /**
-     * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
-     * @param {ModifyServiceRequest} req
-     * @param {function(string, ModifyServiceResponse):void} cb
+     * 本接口（ReleaseService）用于发布服务。
+API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
+     * @param {ReleaseServiceRequest} req
+     * @param {function(string, ReleaseServiceResponse):void} cb
      * @public
      */
-    ModifyService(req, cb) {
-        let resp = new ModifyServiceResponse();
-        this.request("ModifyService", req, resp, cb);
+    ReleaseService(req, cb) {
+        let resp = new ReleaseServiceResponse();
+        this.request("ReleaseService", req, resp, cb);
     }
 
     /**
@@ -1135,15 +1157,25 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     }
 
     /**
-     * 本接口（ReleaseService）用于发布服务。
-API 网关的服务创建后，需要发布到某个环境方生效后，使用者才能进行调用，此接口用于发布服务到环境，如 release 环境。
-     * @param {ReleaseServiceRequest} req
-     * @param {function(string, ReleaseServiceResponse):void} cb
+     * 本接口（ImportOpenApi）用于将OpenAPI规范定义的API导入到API网关。 
+     * @param {ImportOpenApiRequest} req
+     * @param {function(string, ImportOpenApiResponse):void} cb
      * @public
      */
-    ReleaseService(req, cb) {
-        let resp = new ReleaseServiceResponse();
-        this.request("ReleaseService", req, resp, cb);
+    ImportOpenApi(req, cb) {
+        let resp = new ImportOpenApiResponse();
+        this.request("ImportOpenApi", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyService）用于修改服务的相关信息。当服务创建后，服务的名称、描述和服务类型均可被修改。
+     * @param {ModifyServiceRequest} req
+     * @param {function(string, ModifyServiceResponse):void} cb
+     * @public
+     */
+    ModifyService(req, cb) {
+        let resp = new ModifyServiceResponse();
+        this.request("ModifyService", req, resp, cb);
     }
 
     /**
@@ -1315,6 +1347,17 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     DeleteAPIDoc(req, cb) {
         let resp = new DeleteAPIDocResponse();
         this.request("DeleteAPIDoc", req, resp, cb);
+    }
+
+    /**
+     * 查询专享实例列表（新）
+     * @param {DescribeExclusiveInstancesStatusRequest} req
+     * @param {function(string, DescribeExclusiveInstancesStatusResponse):void} cb
+     * @public
+     */
+    DescribeExclusiveInstancesStatus(req, cb) {
+        let resp = new DescribeExclusiveInstancesStatusResponse();
+        this.request("DescribeExclusiveInstancesStatus", req, resp, cb);
     }
 
     /**

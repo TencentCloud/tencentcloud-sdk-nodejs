@@ -59,7 +59,7 @@ class ApmInstanceDetail extends  AbstractModel {
         this.CreateUin = null;
 
         /**
-         * 该实例已上报的服务数
+         * 该实例已上报的服务端应用数量
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -176,6 +176,20 @@ class ApmInstanceDetail extends  AbstractModel {
          */
         this.LogTopicID = null;
 
+        /**
+         * 该实例已上报的客户端应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClientCount = null;
+
+        /**
+         * 该实例已上报的总应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
     }
 
     /**
@@ -215,6 +229,8 @@ class ApmInstanceDetail extends  AbstractModel {
         this.LogSource = 'LogSource' in params ? params.LogSource : null;
         this.IsRelatedLog = 'IsRelatedLog' in params ? params.IsRelatedLog : null;
         this.LogTopicID = 'LogTopicID' in params ? params.LogTopicID : null;
+        this.ClientCount = 'ClientCount' in params ? params.ClientCount : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -721,6 +737,13 @@ class ApmField extends  AbstractModel {
          */
         this.Key = null;
 
+        /**
+         * 同环比上周期具体数值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<APMKV> || null}
+         */
+        this.LastPeriodValue = null;
+
     }
 
     /**
@@ -743,6 +766,15 @@ class ApmField extends  AbstractModel {
         this.Value = 'Value' in params ? params.Value : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
         this.Key = 'Key' in params ? params.Key : null;
+
+        if (params.LastPeriodValue) {
+            this.LastPeriodValue = new Array();
+            for (let z in params.LastPeriodValue) {
+                let obj = new APMKV();
+                obj.deserialize(params.LastPeriodValue[z]);
+                this.LastPeriodValue.push(obj);
+            }
+        }
 
     }
 }
@@ -901,6 +933,13 @@ class DescribeMetricRecordsResponse extends  AbstractModel {
         this.Records = null;
 
         /**
+         * 查询指标结果集条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -924,6 +963,7 @@ class DescribeMetricRecordsResponse extends  AbstractModel {
                 this.Records.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1007,6 +1047,43 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * APM浮点数类型键值对
+ * @class
+ */
+class APMKV extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key值定义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value值定义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeApmAgent请求参数结构体
  * @class
  */
@@ -1038,6 +1115,12 @@ class DescribeApmAgentRequest extends  AbstractModel {
          */
         this.LanguageEnvironment = null;
 
+        /**
+         * 上报方式
+         * @type {string || null}
+         */
+        this.ReportMethod = null;
+
     }
 
     /**
@@ -1051,6 +1134,7 @@ class DescribeApmAgentRequest extends  AbstractModel {
         this.AgentType = 'AgentType' in params ? params.AgentType : null;
         this.NetworkMode = 'NetworkMode' in params ? params.NetworkMode : null;
         this.LanguageEnvironment = 'LanguageEnvironment' in params ? params.LanguageEnvironment : null;
+        this.ReportMethod = 'ReportMethod' in params ? params.ReportMethod : null;
 
     }
 }
@@ -1123,6 +1207,18 @@ class DescribeMetricRecordsRequest extends  AbstractModel {
          */
         this.BusinessName = null;
 
+        /**
+         * 页码
+         * @type {number || null}
+         */
+        this.PageIndex = null;
+
+        /**
+         * 页长
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -1163,6 +1259,8 @@ class DescribeMetricRecordsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.BusinessName = 'BusinessName' in params ? params.BusinessName : null;
+        this.PageIndex = 'PageIndex' in params ? params.PageIndex : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -1176,38 +1274,44 @@ class DescribeGeneralMetricDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 要过滤的维度信息，支持：service.name（服务名）、span.kind（客户端/服务端视角）为维度进行过滤。
-
+         * 要过滤的维度信息：
+service_metric视图支持：service.name（服务名）、span.kind（客户端/服务端视角）为维度进行过滤，service.name（服务名）必填。
 span.kind:
-
-       server:服务端视角
-       client:客户端视角
-
+	server:服务端视角
+	client:客户端视角
 默认为服务端视角进行查询。
+runtime_metric视图支持：service.name（服务名）维度进行过滤，service.name（服务名）必填。
+sql_metric视图支持：service.name（服务名）、db.instance（数据库名称）、db.ip（数据库实例ip）维度进行过滤，查询service_slow_sql_count（慢sql）指标时service.name必填，查询sql_duration_avg（耗时）指标时db.instance（数据库名称）必填。
          * @type {Array.<GeneralFilter> || null}
          */
         this.Filters = null;
 
         /**
-         * 需要查询的指标，不可自定义输入。支持：service_request_count（总请求）、service_duration（平均响应时间）的指标数据。
+         * 需要查询的指标，不可自定义输入。
+service_metric视图支持：service_request_count（总请求）、service_duration（平均响应时间）、service_error_req_rate（平均错误率）、service_slow_call_count（慢调用）、service_error_request_count（异常数量）。
+runtime_metric视图支持：service_gc_full_count（Full GC）。
+sql_metric视图支持：service_slow_sql_count（慢sql）、sql_duration_avg（耗时）。
          * @type {Array.<string> || null}
          */
         this.Metrics = null;
 
         /**
-         * 实例ID
+         * 业务系统ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 视图名称
+         * 视图名称，不可自定义输入。支持：service_metric、runtime_metric、sql_metric。
          * @type {string || null}
          */
         this.ViewName = null;
 
         /**
-         * 聚合维度，支持：service.name（服务名）、span.kind （客户端/服务端视角）维度进行聚合。
+         * 聚合维度：
+service_metric视图支持：service.name（服务名）、span.kind （客户端/服务端视角）维度进行聚合，service.name（服务名）必填。
+runtime_metric视图支持：service.name（服务名）维度进行聚合，service.name（服务名）必填。
+sql_metric视图支持：service.name（服务名）、db.statement（sql语句）维度进行聚合，查询service_slow_sql_count（慢sql）时service.name（服务名）必填，查询sql_duration_avg（耗时）指标时service.name（服务名）、db.statement（sql语句）必填。
          * @type {Array.<string> || null}
          */
         this.GroupBy = null;
@@ -1229,6 +1333,23 @@ span.kind:
          * @type {number || null}
          */
         this.Period = null;
+
+        /**
+         * 对查询指标进行排序：
+service_metric视图支持：service_request_count（总请求）、service_duration（平均响应时间）、service_error_req_rate（平均错误率）、service_slow_call_count（慢调用）、service_error_request_count（异常数量）。
+runtime_metric视图支持：service_gc_full_count（Full GC）。
+sql_metric视图支持：service_slow_sql_count（慢sql）、sql_duration_avg（耗时）。
+asc:对查询指标进行升序排序
+desc：对查询指标进行降序排序
+         * @type {OrderBy || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 查询指标的限制条数，目前最多展示50条数据，PageSize取值为1-50，上送PageSize则根据PageSize的值展示限制条数。
+         * @type {number || null}
+         */
+        this.PageSize = null;
 
     }
 
@@ -1255,6 +1376,13 @@ span.kind:
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Period = 'Period' in params ? params.Period : null;
+
+        if (params.OrderBy) {
+            let obj = new OrderBy();
+            obj.deserialize(params.OrderBy)
+            this.OrderBy = obj;
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -1448,6 +1576,7 @@ module.exports = {
     DescribeMetricRecordsResponse: DescribeMetricRecordsResponse,
     ApmTag: ApmTag,
     Filter: Filter,
+    APMKV: APMKV,
     DescribeApmAgentRequest: DescribeApmAgentRequest,
     DescribeMetricRecordsRequest: DescribeMetricRecordsRequest,
     DescribeGeneralMetricDataRequest: DescribeGeneralMetricDataRequest,

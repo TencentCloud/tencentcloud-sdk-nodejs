@@ -16,62 +16,61 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeVpcRuleOverviewResponse = models.DescribeVpcRuleOverviewResponse;
 const DescribeNatFwInstanceRequest = models.DescribeNatFwInstanceRequest;
 const ModifyNatFwVpcDnsSwitchResponse = models.ModifyNatFwVpcDnsSwitchResponse;
 const DescribeNatFwInstanceWithRegionRequest = models.DescribeNatFwInstanceWithRegionRequest;
+const ModifyNatAcRuleResponse = models.ModifyNatAcRuleResponse;
 const DescribeRuleOverviewResponse = models.DescribeRuleOverviewResponse;
 const CfwNatDnatRule = models.CfwNatDnatRule;
+const FwCidrInfo = models.FwCidrInfo;
 const StaticInfo = models.StaticInfo;
+const DescribeNatAcRuleResponse = models.DescribeNatAcRuleResponse;
 const ModifyPublicIPSwitchStatusResponse = models.ModifyPublicIPSwitchStatusResponse;
+const ModifyNatAcRuleRequest = models.ModifyNatAcRuleRequest;
 const ModifyAcRuleResponse = models.ModifyAcRuleResponse;
+const ModifyNatSequenceRulesRequest = models.ModifyNatSequenceRulesRequest;
 const DescribeTableStatusResponse = models.DescribeTableStatusResponse;
 const AddAcRuleRequest = models.AddAcRuleRequest;
 const IPDefendStatus = models.IPDefendStatus;
-const SecurityGroupRule = models.SecurityGroupRule;
+const BlockIgnoreRule = models.BlockIgnoreRule;
 const ModifyNatFwVpcDnsSwitchRequest = models.ModifyNatFwVpcDnsSwitchRequest;
-const SecurityGroupApiRuleData = models.SecurityGroupApiRuleData;
 const DeleteNatFwInstanceResponse = models.DeleteNatFwInstanceResponse;
 const DeleteAllAccessControlRuleRequest = models.DeleteAllAccessControlRuleRequest;
 const ModifySecurityGroupRuleRequest = models.ModifySecurityGroupRuleRequest;
 const ModifyAllVPCSwitchStatusResponse = models.ModifyAllVPCSwitchStatusResponse;
 const VpcZoneData = models.VpcZoneData;
-const CreateSecurityGroupRulesResponse = models.CreateSecurityGroupRulesResponse;
+const CreateChooseVpcsRequest = models.CreateChooseVpcsRequest;
 const DescribeNatFwVpcDnsLstRequest = models.DescribeNatFwVpcDnsLstRequest;
 const DescribeCfwEipsRequest = models.DescribeCfwEipsRequest;
 const DescribeTLogInfoResponse = models.DescribeTLogInfoResponse;
-const ModifyAllSwitchStatusRequest = models.ModifyAllSwitchStatusRequest;
 const DescribeUnHandleEventTabListRequest = models.DescribeUnHandleEventTabListRequest;
 const DescribeAssociatedInstanceListResponse = models.DescribeAssociatedInstanceListResponse;
-const DescribeResourceGroupResponse = models.DescribeResourceGroupResponse;
-const DescribeNatRuleOverviewResponse = models.DescribeNatRuleOverviewResponse;
+const AssociatedInstanceInfo = models.AssociatedInstanceInfo;
+const ModifyStorageSettingResponse = models.ModifyStorageSettingResponse;
 const RemoveAcRuleResponse = models.RemoveAcRuleResponse;
 const NatFwInstance = models.NatFwInstance;
-const DeleteNatFwInstanceRequest = models.DeleteNatFwInstanceRequest;
 const ExpandCfwVerticalRequest = models.ExpandCfwVerticalRequest;
 const ModifyAllPublicIPSwitchStatusResponse = models.ModifyAllPublicIPSwitchStatusResponse;
 const DeleteVpcInstanceResponse = models.DeleteVpcInstanceResponse;
 const ModifyAssetScanRequest = models.ModifyAssetScanRequest;
 const ModifyBlockIgnoreListRequest = models.ModifyBlockIgnoreListRequest;
 const AddEnterpriseSecurityGroupRulesRequest = models.AddEnterpriseSecurityGroupRulesRequest;
+const SecurityGroupRule = models.SecurityGroupRule;
 const DeleteSecurityGroupRuleResponse = models.DeleteSecurityGroupRuleResponse;
-const ModifySecurityGroupAllRuleStatusRequest = models.ModifySecurityGroupAllRuleStatusRequest;
 const ModifySequenceRulesRequest = models.ModifySequenceRulesRequest;
-const DescribeAddrTemplateListRequest = models.DescribeAddrTemplateListRequest;
+const SequenceData = models.SequenceData;
 const CreateNatFwInstanceRequest = models.CreateNatFwInstanceRequest;
 const ModifySecurityGroupItemRuleStatusResponse = models.ModifySecurityGroupItemRuleStatusResponse;
 const DescribeEnterpriseSecurityGroupRuleResponse = models.DescribeEnterpriseSecurityGroupRuleResponse;
 const VpcDnsInfo = models.VpcDnsInfo;
 const DescribeEnterpriseSecurityGroupRuleRequest = models.DescribeEnterpriseSecurityGroupRuleRequest;
-const ModifyItemSwitchStatusResponse = models.ModifyItemSwitchStatusResponse;
 const ModifyNatFwReSelectResponse = models.ModifyNatFwReSelectResponse;
 const DeleteSecurityGroupRuleRequest = models.DeleteSecurityGroupRuleRequest;
 const SetNatFwEipRequest = models.SetNatFwEipRequest;
 const SetNatFwEipResponse = models.SetNatFwEipResponse;
 const AcListsData = models.AcListsData;
 const ModifyPublicIPSwitchStatusRequest = models.ModifyPublicIPSwitchStatusRequest;
-const SequenceData = models.SequenceData;
-const CreateSecurityGroupApiRulesResponse = models.CreateSecurityGroupApiRulesResponse;
+const CreateNatRuleItem = models.CreateNatRuleItem;
 const ModifySecurityGroupItemRuleStatusRequest = models.ModifySecurityGroupItemRuleStatusRequest;
 const DescribeSourceAssetRequest = models.DescribeSourceAssetRequest;
 const SecurityGroupOrderIndexData = models.SecurityGroupOrderIndexData;
@@ -79,26 +78,31 @@ const DescribeSourceAssetResponse = models.DescribeSourceAssetResponse;
 const DescribeTLogInfoRequest = models.DescribeTLogInfoRequest;
 const DescribeSecurityGroupListResponse = models.DescribeSecurityGroupListResponse;
 const AssetZone = models.AssetZone;
-const DescribeAddrTemplateListResponse = models.DescribeAddrTemplateListResponse;
-const RunSyncAssetRequest = models.RunSyncAssetRequest;
+const RuleChangeItem = models.RuleChangeItem;
 const DescribeTLogIpListRequest = models.DescribeTLogIpListRequest;
+const CommonFilter = models.CommonFilter;
 const DescribeNatFwInstancesInfoRequest = models.DescribeNatFwInstancesInfoRequest;
+const ModifyNatSequenceRulesResponse = models.ModifyNatSequenceRulesResponse;
 const DescribeTableStatusRequest = models.DescribeTableStatusRequest;
 const DescribeSecurityGroupListRequest = models.DescribeSecurityGroupListRequest;
 const ModifyResourceGroupRequest = models.ModifyResourceGroupRequest;
 const CreateNatFwInstanceResponse = models.CreateNatFwInstanceResponse;
-const ModifyAllSwitchStatusResponse = models.ModifyAllSwitchStatusResponse;
 const NewModeItems = models.NewModeItems;
 const DescribeNatFwInfoCountResponse = models.DescribeNatFwInfoCountResponse;
+const DescribeDefenseSwitchRequest = models.DescribeDefenseSwitchRequest;
+const ModifyEnterpriseSecurityDispatchStatusResponse = models.ModifyEnterpriseSecurityDispatchStatusResponse;
 const SecurityGroupListData = models.SecurityGroupListData;
+const RemoveNatAcRuleResponse = models.RemoveNatAcRuleResponse;
 const CreateNatFwInstanceWithDomainResponse = models.CreateNatFwInstanceWithDomainResponse;
 const RemoveAcRuleRequest = models.RemoveAcRuleRequest;
 const DatabaseWhiteListRuleData = models.DatabaseWhiteListRuleData;
+const RemoveNatAcRuleRequest = models.RemoveNatAcRuleRequest;
 const ModifyAllRuleStatusRequest = models.ModifyAllRuleStatusRequest;
 const RuleInfoData = models.RuleInfoData;
 const DescribeAcListsResponse = models.DescribeAcListsResponse;
 const ModifyAllPublicIPSwitchStatusRequest = models.ModifyAllPublicIPSwitchStatusRequest;
 const DescribeBlockStaticListResponse = models.DescribeBlockStaticListResponse;
+const AddNatAcRuleRequest = models.AddNatAcRuleRequest;
 const ModifySecurityGroupSequenceRulesRequest = models.ModifySecurityGroupSequenceRulesRequest;
 const CreateDatabaseWhiteListRulesResponse = models.CreateDatabaseWhiteListRulesResponse;
 const ScanInfo = models.ScanInfo;
@@ -107,6 +111,7 @@ const DescribeUnHandleEventTabListResponse = models.DescribeUnHandleEventTabList
 const NatFwFilter = models.NatFwFilter;
 const ScanResultInfo = models.ScanResultInfo;
 const ModifyRunSyncAssetResponse = models.ModifyRunSyncAssetResponse;
+const ModifyEnterpriseSecurityGroupRuleResponse = models.ModifyEnterpriseSecurityGroupRuleResponse;
 const ModifySecurityGroupSequenceRulesResponse = models.ModifySecurityGroupSequenceRulesResponse;
 const IpStatic = models.IpStatic;
 const AddEnterpriseSecurityGroupRulesResponse = models.AddEnterpriseSecurityGroupRulesResponse;
@@ -114,11 +119,9 @@ const UnHandleEventDetail = models.UnHandleEventDetail;
 const RemoveEnterpriseSecurityGroupRuleRequest = models.RemoveEnterpriseSecurityGroupRuleRequest;
 const DeleteResourceGroupRequest = models.DeleteResourceGroupRequest;
 const DescribeBlockByIpTimesListRequest = models.DescribeBlockByIpTimesListRequest;
-const ModifyVPCSwitchStatusResponse = models.ModifyVPCSwitchStatusResponse;
 const RemoveEnterpriseSecurityGroupRuleResponse = models.RemoveEnterpriseSecurityGroupRuleResponse;
-const ModifyAllVPCSwitchStatusRequest = models.ModifyAllVPCSwitchStatusRequest;
+const ModifyEnterpriseSecurityGroupRuleRequest = models.ModifyEnterpriseSecurityGroupRuleRequest;
 const ModifySequenceRulesResponse = models.ModifySequenceRulesResponse;
-const DeleteSecurityGroupAllRuleResponse = models.DeleteSecurityGroupAllRuleResponse;
 const DescribeResourceGroupNewResponse = models.DescribeResourceGroupNewResponse;
 const DescribeNatFwInstanceWithRegionResponse = models.DescribeNatFwInstanceWithRegionResponse;
 const DescribeResourceGroupNewRequest = models.DescribeResourceGroupNewRequest;
@@ -128,67 +131,67 @@ const IocListData = models.IocListData;
 const InstanceInfo = models.InstanceInfo;
 const DescribeIPStatusListRequest = models.DescribeIPStatusListRequest;
 const ModifyNatFwSwitchResponse = models.ModifyNatFwSwitchResponse;
-const RunSyncAssetResponse = models.RunSyncAssetResponse;
 const DescribeBlockByIpTimesListResponse = models.DescribeBlockByIpTimesListResponse;
 const SetNatFwDnatRuleResponse = models.SetNatFwDnatRuleResponse;
 const DescribeRuleOverviewRequest = models.DescribeRuleOverviewRequest;
+const DescribeDefenseSwitchResponse = models.DescribeDefenseSwitchResponse;
 const DescribeAcListsRequest = models.DescribeAcListsRequest;
-const DescribeVpcRuleOverviewRequest = models.DescribeVpcRuleOverviewRequest;
+const DescribeGuideScanInfoRequest = models.DescribeGuideScanInfoRequest;
 const UnHandleEvent = models.UnHandleEvent;
 const DescribeAssociatedInstanceListRequest = models.DescribeAssociatedInstanceListRequest;
 const DeleteAcRuleRequest = models.DeleteAcRuleRequest;
 const DeleteAllAccessControlRuleResponse = models.DeleteAllAccessControlRuleResponse;
 const ModifyNatFwSwitchRequest = models.ModifyNatFwSwitchRequest;
 const DescribeIPStatusListResponse = models.DescribeIPStatusListResponse;
-const DescribeNatRuleOverviewRequest = models.DescribeNatRuleOverviewRequest;
 const CreateDatabaseWhiteListRulesRequest = models.CreateDatabaseWhiteListRulesRequest;
-const DescribeResourceGroupRequest = models.DescribeResourceGroupRequest;
 const NatInstanceInfo = models.NatInstanceInfo;
 const NatFwEipsInfo = models.NatFwEipsInfo;
-const DeleteSecurityGroupAllRuleRequest = models.DeleteSecurityGroupAllRuleRequest;
+const DescribeResourceGroupResponse = models.DescribeResourceGroupResponse;
 const DescribeTLogIpListResponse = models.DescribeTLogIpListResponse;
 const StopSecurityGroupRuleDispatchResponse = models.StopSecurityGroupRuleDispatchResponse;
 const DescribeNatFwInfoCountRequest = models.DescribeNatFwInfoCountRequest;
 const AddAcRuleResponse = models.AddAcRuleResponse;
 const ModifyNatFwReSelectRequest = models.ModifyNatFwReSelectRequest;
 const SetNatFwDnatRuleRequest = models.SetNatFwDnatRuleRequest;
-const DescribeSyncAssetStatusResponse = models.DescribeSyncAssetStatusResponse;
+const ModifyAllVPCSwitchStatusRequest = models.ModifyAllVPCSwitchStatusRequest;
 const SecurityGroupBothWayInfo = models.SecurityGroupBothWayInfo;
 const ModifyAllRuleStatusResponse = models.ModifyAllRuleStatusResponse;
 const StopSecurityGroupRuleDispatchRequest = models.StopSecurityGroupRuleDispatchRequest;
-const DescribeGuideScanInfoRequest = models.DescribeGuideScanInfoRequest;
+const DescribeBlockIgnoreListRequest = models.DescribeBlockIgnoreListRequest;
 const ModifyBlockTopResponse = models.ModifyBlockTopResponse;
-const TemplateListInfo = models.TemplateListInfo;
-const CreateSecurityGroupApiRulesRequest = models.CreateSecurityGroupApiRulesRequest;
+const DeleteNatFwInstanceRequest = models.DeleteNatFwInstanceRequest;
+const ModifyStorageSettingRequest = models.ModifyStorageSettingRequest;
 const DescribeNatFwVpcDnsLstResponse = models.DescribeNatFwVpcDnsLstResponse;
-const CreateChooseVpcsRequest = models.CreateChooseVpcsRequest;
+const DescAcItem = models.DescAcItem;
+const CreateSecurityGroupRulesResponse = models.CreateSecurityGroupRulesResponse;
 const ExpandCfwVerticalResponse = models.ExpandCfwVerticalResponse;
-const DescribeBlockStaticListRequest = models.DescribeBlockStaticListRequest;
+const DescribeNatAcRuleRequest = models.DescribeNatAcRuleRequest;
 const TLogInfo = models.TLogInfo;
 const CreateSecurityGroupRulesRequest = models.CreateSecurityGroupRulesRequest;
 const DeleteVpcInstanceRequest = models.DeleteVpcInstanceRequest;
 const SwitchListsData = models.SwitchListsData;
 const CreateNatFwInstanceWithDomainRequest = models.CreateNatFwInstanceWithDomainRequest;
 const DescribeSwitchListsResponse = models.DescribeSwitchListsResponse;
-const DescribeSyncAssetStatusRequest = models.DescribeSyncAssetStatusRequest;
 const DescribeCfwEipsResponse = models.DescribeCfwEipsResponse;
 const ModifyResourceGroupResponse = models.ModifyResourceGroupResponse;
 const DeleteResourceGroupResponse = models.DeleteResourceGroupResponse;
 const DescribeSwitchListsRequest = models.DescribeSwitchListsRequest;
-const ModifyItemSwitchStatusRequest = models.ModifyItemSwitchStatusRequest;
+const DescribeBlockStaticListRequest = models.DescribeBlockStaticListRequest;
+const FwVpcCidr = models.FwVpcCidr;
 const ModifyRunSyncAssetRequest = models.ModifyRunSyncAssetRequest;
 const CreateAcRulesResponse = models.CreateAcRulesResponse;
 const ModifyAssetScanResponse = models.ModifyAssetScanResponse;
 const ModifyAcRuleRequest = models.ModifyAcRuleRequest;
 const DescribeNatFwInstancesInfoResponse = models.DescribeNatFwInstancesInfoResponse;
-const ModifyVPCSwitchStatusRequest = models.ModifyVPCSwitchStatusRequest;
+const AddNatAcRuleResponse = models.AddNatAcRuleResponse;
 const ModifyBlockIgnoreListResponse = models.ModifyBlockIgnoreListResponse;
 const DescribeNatFwInstanceResponse = models.DescribeNatFwInstanceResponse;
 const ModifySecurityGroupRuleResponse = models.ModifySecurityGroupRuleResponse;
-const ModifySecurityGroupAllRuleStatusResponse = models.ModifySecurityGroupAllRuleStatusResponse;
 const DnsVpcSwitch = models.DnsVpcSwitch;
-const AssociatedInstanceInfo = models.AssociatedInstanceInfo;
+const DescribeResourceGroupRequest = models.DescribeResourceGroupRequest;
 const CreateAcRulesRequest = models.CreateAcRulesRequest;
+const ModifyEnterpriseSecurityDispatchStatusRequest = models.ModifyEnterpriseSecurityDispatchStatusRequest;
+const DescribeBlockIgnoreListResponse = models.DescribeBlockIgnoreListResponse;
 const ModifyTableStatusRequest = models.ModifyTableStatusRequest;
 const ModifyTableStatusResponse = models.ModifyTableStatusResponse;
 const DescribeGuideScanInfoResponse = models.DescribeGuideScanInfoResponse;
@@ -213,17 +216,6 @@ class CfwClient extends AbstractClient {
     DescribeNatFwInfoCount(req, cb) {
         let resp = new DescribeNatFwInfoCountResponse();
         this.request("DescribeNatFwInfoCount", req, resp, cb);
-    }
-
-    /**
-     * nat规则列表概况
-     * @param {DescribeNatRuleOverviewRequest} req
-     * @param {function(string, DescribeNatRuleOverviewResponse):void} cb
-     * @public
-     */
-    DescribeNatRuleOverview(req, cb) {
-        let resp = new DescribeNatRuleOverviewResponse();
-        this.request("DescribeNatRuleOverview", req, resp, cb);
     }
 
     /**
@@ -293,17 +285,6 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * vpc规则列表概况
-     * @param {DescribeVpcRuleOverviewRequest} req
-     * @param {function(string, DescribeVpcRuleOverviewResponse):void} cb
-     * @public
-     */
-    DescribeVpcRuleOverview(req, cb) {
-        let resp = new DescribeVpcRuleOverviewResponse();
-        this.request("DescribeVpcRuleOverview", req, resp, cb);
-    }
-
-    /**
      * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
      * @param {DescribeNatFwInstanceWithRegionRequest} req
      * @param {function(string, DescribeNatFwInstanceWithRegionResponse):void} cb
@@ -339,14 +320,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 创建安全组API规则
-     * @param {CreateSecurityGroupApiRulesRequest} req
-     * @param {function(string, CreateSecurityGroupApiRulesResponse):void} cb
+     * 启用停用单条企业安全组规则
+     * @param {ModifySecurityGroupItemRuleStatusRequest} req
+     * @param {function(string, ModifySecurityGroupItemRuleStatusResponse):void} cb
      * @public
      */
-    CreateSecurityGroupApiRules(req, cb) {
-        let resp = new CreateSecurityGroupApiRulesResponse();
-        this.request("CreateSecurityGroupApiRules", req, resp, cb);
+    ModifySecurityGroupItemRuleStatus(req, cb) {
+        let resp = new ModifySecurityGroupItemRuleStatusResponse();
+        this.request("ModifySecurityGroupItemRuleStatus", req, resp, cb);
     }
 
     /**
@@ -438,7 +419,7 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 创建防火墙实例和接入域名
+     * 创建防火墙实例和接入域名（Region参数必填）
      * @param {CreateNatFwInstanceWithDomainRequest} req
      * @param {function(string, CreateNatFwInstanceWithDomainResponse):void} cb
      * @public
@@ -449,14 +430,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 删除全部规则
-     * @param {DeleteSecurityGroupAllRuleRequest} req
-     * @param {function(string, DeleteSecurityGroupAllRuleResponse):void} cb
+     * 修改规则执行顺序
+     * @param {ModifySequenceRulesRequest} req
+     * @param {function(string, ModifySequenceRulesResponse):void} cb
      * @public
      */
-    DeleteSecurityGroupAllRule(req, cb) {
-        let resp = new DeleteSecurityGroupAllRuleResponse();
-        this.request("DeleteSecurityGroupAllRule", req, resp, cb);
+    ModifySequenceRules(req, cb) {
+        let resp = new ModifySequenceRulesResponse();
+        this.request("ModifySequenceRules", req, resp, cb);
     }
 
     /**
@@ -482,7 +463,7 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 创建规则
+     * 创建访问控制规则
      * @param {CreateAcRulesRequest} req
      * @param {function(string, CreateAcRulesResponse):void} cb
      * @public
@@ -493,25 +474,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 启用停用全部规则
-     * @param {ModifySecurityGroupAllRuleStatusRequest} req
-     * @param {function(string, ModifySecurityGroupAllRuleStatusResponse):void} cb
+     * 销毁防火墙实例
+     * @param {DeleteNatFwInstanceRequest} req
+     * @param {function(string, DeleteNatFwInstanceResponse):void} cb
      * @public
      */
-    ModifySecurityGroupAllRuleStatus(req, cb) {
-        let resp = new ModifySecurityGroupAllRuleStatusResponse();
-        this.request("ModifySecurityGroupAllRuleStatus", req, resp, cb);
-    }
-
-    /**
-     * 访问控制列表
-     * @param {DescribeAcListsRequest} req
-     * @param {function(string, DescribeAcListsResponse):void} cb
-     * @public
-     */
-    DescribeAcLists(req, cb) {
-        let resp = new DescribeAcListsResponse();
-        this.request("DescribeAcLists", req, resp, cb);
+    DeleteNatFwInstance(req, cb) {
+        let resp = new DeleteNatFwInstanceResponse();
+        this.request("DeleteNatFwInstance", req, resp, cb);
     }
 
     /**
@@ -559,6 +529,28 @@ class CfwClient extends AbstractClient {
     }
 
     /**
+     * 编辑新企业安全组规则
+     * @param {ModifyEnterpriseSecurityGroupRuleRequest} req
+     * @param {function(string, ModifyEnterpriseSecurityGroupRuleResponse):void} cb
+     * @public
+     */
+    ModifyEnterpriseSecurityGroupRule(req, cb) {
+        let resp = new ModifyEnterpriseSecurityGroupRuleResponse();
+        this.request("ModifyEnterpriseSecurityGroupRule", req, resp, cb);
+    }
+
+    /**
+     * 获取入侵防御按钮列表
+     * @param {DescribeDefenseSwitchRequest} req
+     * @param {function(string, DescribeDefenseSwitchResponse):void} cb
+     * @public
+     */
+    DescribeDefenseSwitch(req, cb) {
+        let resp = new DescribeDefenseSwitchResponse();
+        this.request("DescribeDefenseSwitch", req, resp, cb);
+    }
+
+    /**
      * DescribeTLogInfo告警中心概况
 
      * @param {DescribeTLogInfoRequest} req
@@ -582,6 +574,17 @@ class CfwClient extends AbstractClient {
     }
 
     /**
+     * NAT防火墙规则快速排序
+     * @param {ModifyNatSequenceRulesRequest} req
+     * @param {function(string, ModifyNatSequenceRulesResponse):void} cb
+     * @public
+     */
+    ModifyNatSequenceRules(req, cb) {
+        let resp = new ModifyNatSequenceRulesResponse();
+        this.request("ModifyNatSequenceRules", req, resp, cb);
+    }
+
+    /**
      * nat 防火墙VPC DNS 开关切换
      * @param {ModifyNatFwVpcDnsSwitchRequest} req
      * @param {function(string, ModifyNatFwVpcDnsSwitchResponse):void} cb
@@ -590,17 +593,6 @@ class CfwClient extends AbstractClient {
     ModifyNatFwVpcDnsSwitch(req, cb) {
         let resp = new ModifyNatFwVpcDnsSwitchResponse();
         this.request("ModifyNatFwVpcDnsSwitch", req, resp, cb);
-    }
-
-    /**
-     * 单个修改VPC火墙开关
-     * @param {ModifyVPCSwitchStatusRequest} req
-     * @param {function(string, ModifyVPCSwitchStatusResponse):void} cb
-     * @public
-     */
-    ModifyVPCSwitchStatus(req, cb) {
-        let resp = new ModifyVPCSwitchStatusResponse();
-        this.request("ModifyVPCSwitchStatus", req, resp, cb);
     }
 
     /**
@@ -615,6 +607,17 @@ class CfwClient extends AbstractClient {
     }
 
     /**
+     * 日志存储设置，可以修改存储时间和清空日志
+     * @param {ModifyStorageSettingRequest} req
+     * @param {function(string, ModifyStorageSettingResponse):void} cb
+     * @public
+     */
+    ModifyStorageSetting(req, cb) {
+        let resp = new ModifyStorageSettingResponse();
+        this.request("ModifyStorageSetting", req, resp, cb);
+    }
+
+    /**
      * 查询新企业安全组规则
      * @param {DescribeEnterpriseSecurityGroupRuleRequest} req
      * @param {function(string, DescribeEnterpriseSecurityGroupRuleResponse):void} cb
@@ -626,10 +629,10 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 支持对拦截列表、忽略列表如下操作：
-批量增加拦截IP、忽略IP/域名
-批量删除拦截IP、忽略IP/域名
-批量修改拦截IP、忽略IP/域名生效事件
+     * 支持对封禁列表、放通列表如下操作：
+批量增加封禁IP、放通IP/域名
+批量删除封禁IP、放通IP/域名
+批量修改封禁IP、放通IP/域名生效事件
      * @param {ModifyBlockIgnoreListRequest} req
      * @param {function(string, ModifyBlockIgnoreListResponse):void} cb
      * @public
@@ -674,14 +677,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
-     * @param {SetNatFwEipRequest} req
-     * @param {function(string, SetNatFwEipResponse):void} cb
+     * 修改NAT防火墙开关
+     * @param {ModifyNatFwSwitchRequest} req
+     * @param {function(string, ModifyNatFwSwitchResponse):void} cb
      * @public
      */
-    SetNatFwEip(req, cb) {
-        let resp = new SetNatFwEipResponse();
-        this.request("SetNatFwEip", req, resp, cb);
+    ModifyNatFwSwitch(req, cb) {
+        let resp = new ModifyNatFwSwitchResponse();
+        this.request("ModifyNatFwSwitch", req, resp, cb);
     }
 
     /**
@@ -708,7 +711,7 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 创建防火墙实例
+     * 创建NAT防火墙实例（Region参数必填）
      * @param {CreateNatFwInstanceRequest} req
      * @param {function(string, CreateNatFwInstanceResponse):void} cb
      * @public
@@ -741,17 +744,6 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 修改规则执行顺序
-     * @param {ModifySequenceRulesRequest} req
-     * @param {function(string, ModifySequenceRulesResponse):void} cb
-     * @public
-     */
-    ModifySequenceRules(req, cb) {
-        let resp = new ModifySequenceRulesResponse();
-        this.request("ModifySequenceRules", req, resp, cb);
-    }
-
-    /**
      * 删除互联网边界规则
      * @param {RemoveAcRuleRequest} req
      * @param {function(string, RemoveAcRuleResponse):void} cb
@@ -760,6 +752,17 @@ class CfwClient extends AbstractClient {
     RemoveAcRule(req, cb) {
         let resp = new RemoveAcRuleResponse();
         this.request("RemoveAcRule", req, resp, cb);
+    }
+
+    /**
+     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     * @param {SetNatFwEipRequest} req
+     * @param {function(string, SetNatFwEipResponse):void} cb
+     * @public
+     */
+    SetNatFwEip(req, cb) {
+        let resp = new SetNatFwEipResponse();
+        this.request("SetNatFwEip", req, resp, cb);
     }
 
     /**
@@ -829,14 +832,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 同步资产-互联网&VPC
-     * @param {RunSyncAssetRequest} req
-     * @param {function(string, RunSyncAssetResponse):void} cb
+     * 修改NAT访问控制规则
+     * @param {ModifyNatAcRuleRequest} req
+     * @param {function(string, ModifyNatAcRuleResponse):void} cb
      * @public
      */
-    RunSyncAsset(req, cb) {
-        let resp = new RunSyncAssetResponse();
-        this.request("RunSyncAsset", req, resp, cb);
+    ModifyNatAcRule(req, cb) {
+        let resp = new ModifyNatAcRuleResponse();
+        this.request("ModifyNatAcRule", req, resp, cb);
     }
 
     /**
@@ -873,14 +876,14 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 修改NAT防火墙开关
-     * @param {ModifyNatFwSwitchRequest} req
-     * @param {function(string, ModifyNatFwSwitchResponse):void} cb
+     * 修改企业安全组下发状态
+     * @param {ModifyEnterpriseSecurityDispatchStatusRequest} req
+     * @param {function(string, ModifyEnterpriseSecurityDispatchStatusResponse):void} cb
      * @public
      */
-    ModifyNatFwSwitch(req, cb) {
-        let resp = new ModifyNatFwSwitchResponse();
-        this.request("ModifyNatFwSwitch", req, resp, cb);
+    ModifyEnterpriseSecurityDispatchStatus(req, cb) {
+        let resp = new ModifyEnterpriseSecurityDispatchStatusResponse();
+        this.request("ModifyEnterpriseSecurityDispatchStatus", req, resp, cb);
     }
 
     /**
@@ -896,36 +899,36 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 启用停用单条企业安全组规则
-     * @param {ModifySecurityGroupItemRuleStatusRequest} req
-     * @param {function(string, ModifySecurityGroupItemRuleStatusResponse):void} cb
+     * 查询入侵防御放通封禁列表
+     * @param {DescribeBlockIgnoreListRequest} req
+     * @param {function(string, DescribeBlockIgnoreListResponse):void} cb
      * @public
      */
-    ModifySecurityGroupItemRuleStatus(req, cb) {
-        let resp = new ModifySecurityGroupItemRuleStatusResponse();
-        this.request("ModifySecurityGroupItemRuleStatus", req, resp, cb);
+    DescribeBlockIgnoreList(req, cb) {
+        let resp = new DescribeBlockIgnoreListResponse();
+        this.request("DescribeBlockIgnoreList", req, resp, cb);
     }
 
     /**
-     * 一键开启和关闭
-     * @param {ModifyAllSwitchStatusRequest} req
-     * @param {function(string, ModifyAllSwitchStatusResponse):void} cb
+     * 删除NAT访问控制规则
+     * @param {RemoveNatAcRuleRequest} req
+     * @param {function(string, RemoveNatAcRuleResponse):void} cb
      * @public
      */
-    ModifyAllSwitchStatus(req, cb) {
-        let resp = new ModifyAllSwitchStatusResponse();
-        this.request("ModifyAllSwitchStatus", req, resp, cb);
+    RemoveNatAcRule(req, cb) {
+        let resp = new RemoveNatAcRuleResponse();
+        this.request("RemoveNatAcRule", req, resp, cb);
     }
 
     /**
-     * 销毁防火墙实例
-     * @param {DeleteNatFwInstanceRequest} req
-     * @param {function(string, DeleteNatFwInstanceResponse):void} cb
+     * 访问控制列表
+     * @param {DescribeAcListsRequest} req
+     * @param {function(string, DescribeAcListsResponse):void} cb
      * @public
      */
-    DeleteNatFwInstance(req, cb) {
-        let resp = new DeleteNatFwInstanceResponse();
-        this.request("DeleteNatFwInstance", req, resp, cb);
+    DescribeAcLists(req, cb) {
+        let resp = new DescribeAcListsResponse();
+        this.request("DescribeAcLists", req, resp, cb);
     }
 
     /**
@@ -940,14 +943,25 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 同步资产状态查询-互联网&VPC
-     * @param {DescribeSyncAssetStatusRequest} req
-     * @param {function(string, DescribeSyncAssetStatusResponse):void} cb
+     * 查询NAT访问控制列表
+     * @param {DescribeNatAcRuleRequest} req
+     * @param {function(string, DescribeNatAcRuleResponse):void} cb
      * @public
      */
-    DescribeSyncAssetStatus(req, cb) {
-        let resp = new DescribeSyncAssetStatusResponse();
-        this.request("DescribeSyncAssetStatus", req, resp, cb);
+    DescribeNatAcRule(req, cb) {
+        let resp = new DescribeNatAcRuleResponse();
+        this.request("DescribeNatAcRule", req, resp, cb);
+    }
+
+    /**
+     * 添加nat访问控制规则
+     * @param {AddNatAcRuleRequest} req
+     * @param {function(string, AddNatAcRuleResponse):void} cb
+     * @public
+     */
+    AddNatAcRule(req, cb) {
+        let resp = new AddNatAcRuleResponse();
+        this.request("AddNatAcRule", req, resp, cb);
     }
 
     /**
@@ -974,17 +988,6 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * 获取地址模板列表
-     * @param {DescribeAddrTemplateListRequest} req
-     * @param {function(string, DescribeAddrTemplateListResponse):void} cb
-     * @public
-     */
-    DescribeAddrTemplateList(req, cb) {
-        let resp = new DescribeAddrTemplateListResponse();
-        this.request("DescribeAddrTemplateList", req, resp, cb);
-    }
-
-    /**
      * DescribeBlockStaticList 告警中心柱形图
 
      * @param {DescribeBlockStaticListRequest} req
@@ -994,17 +997,6 @@ class CfwClient extends AbstractClient {
     DescribeBlockStaticList(req, cb) {
         let resp = new DescribeBlockStaticListResponse();
         this.request("DescribeBlockStaticList", req, resp, cb);
-    }
-
-    /**
-     * 修改单个防火墙开关
-     * @param {ModifyItemSwitchStatusRequest} req
-     * @param {function(string, ModifyItemSwitchStatusResponse):void} cb
-     * @public
-     */
-    ModifyItemSwitchStatus(req, cb) {
-        let resp = new ModifyItemSwitchStatusResponse();
-        this.request("ModifyItemSwitchStatus", req, resp, cb);
     }
 
 

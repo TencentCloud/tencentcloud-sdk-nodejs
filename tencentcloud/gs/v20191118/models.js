@@ -291,12 +291,6 @@ class CreateSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * 客户端session信息，从JSSDK请求中获得
-         * @type {string || null}
-         */
-        this.ClientSession = null;
-
-        /**
          * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
          * @type {string || null}
          */
@@ -319,6 +313,12 @@ class CreateSessionRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.GameParas = null;
+
+        /**
+         * 客户端session信息，从JSSDK请求中获得。特殊的，当 RunMode 参数为 RunWithoutClient 时，该字段可以为空
+         * @type {string || null}
+         */
+        this.ClientSession = null;
 
         /**
          * 分辨率,，可设置为1080p或720p或1920x1080格式
@@ -363,7 +363,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.Fps = null;
 
         /**
-         * 【已废弃】只在TrylockWorker时生效
+         * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
          * @type {string || null}
          */
         this.UserIp = null;
@@ -409,11 +409,11 @@ RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运�
         if (!params) {
             return;
         }
-        this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.GameId = 'GameId' in params ? params.GameId : null;
         this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
         this.GameParas = 'GameParas' in params ? params.GameParas : null;
+        this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.SetNo = 'SetNo' in params ? params.SetNo : null;
@@ -500,6 +500,20 @@ class DescribeInstancesCountRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 游戏区域
+         * @type {string || null}
+         */
+        this.GameRegion = null;
+
+        /**
+         * 游戏类型。
+MOBILE：手游
+PC：默认值，端游
+         * @type {string || null}
+         */
+        this.GameType = null;
+
     }
 
     /**
@@ -511,6 +525,8 @@ class DescribeInstancesCountRequest extends  AbstractModel {
         }
         this.GameId = 'GameId' in params ? params.GameId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
+        this.GameType = 'GameType' in params ? params.GameType : null;
 
     }
 }
@@ -583,7 +599,7 @@ class TrylockWorkerRequest extends  AbstractModel {
         this.SetNo = null;
 
         /**
-         * 【必选】用户IP，用于就近调度，不填将严重影响用户体验
+         * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
          * @type {string || null}
          */
         this.UserIp = null;

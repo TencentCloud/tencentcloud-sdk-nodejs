@@ -205,6 +205,48 @@ class ZoneInfo extends  AbstractModel {
          */
         this.ZoneState = null;
 
+        /**
+         * 父级zone
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ParentZone = null;
+
+        /**
+         * 父级可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ParentZoneId = null;
+
+        /**
+         * 父级可用区描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ParentZoneName = null;
+
+        /**
+         * zone类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneType = null;
+
+        /**
+         * 控制台类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachineRoomTypeMC = null;
+
+        /**
+         * 和ZoneId一样，适用于控制台调用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneIdMC = null;
+
     }
 
     /**
@@ -218,6 +260,12 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.ParentZone = 'ParentZone' in params ? params.ParentZone : null;
+        this.ParentZoneId = 'ParentZoneId' in params ? params.ParentZoneId : null;
+        this.ParentZoneName = 'ParentZoneName' in params ? params.ParentZoneName : null;
+        this.ZoneType = 'ZoneType' in params ? params.ZoneType : null;
+        this.MachineRoomTypeMC = 'MachineRoomTypeMC' in params ? params.MachineRoomTypeMC : null;
+        this.ZoneIdMC = 'ZoneIdMC' in params ? params.ZoneIdMC : null;
 
     }
 }
@@ -231,7 +279,7 @@ class DescribeZonesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询产品的名称，例如cvm
+         * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
          * @type {string || null}
          */
         this.Product = null;
@@ -326,6 +374,34 @@ class RegionInfo extends  AbstractModel {
          */
         this.RegionState = null;
 
+        /**
+         * 控制台类型，api调用时默认null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionTypeMC = null;
+
+        /**
+         * 不同语言的地区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LocationMC = null;
+
+        /**
+         * 控制台展示的地域描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionNameMC = null;
+
+        /**
+         * 控制台展示的RegionId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionIdMC = null;
+
     }
 
     /**
@@ -338,6 +414,10 @@ class RegionInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.RegionState = 'RegionState' in params ? params.RegionState : null;
+        this.RegionTypeMC = 'RegionTypeMC' in params ? params.RegionTypeMC : null;
+        this.LocationMC = 'LocationMC' in params ? params.LocationMC : null;
+        this.RegionNameMC = 'RegionNameMC' in params ? params.RegionNameMC : null;
+        this.RegionIdMC = 'RegionIdMC' in params ? params.RegionIdMC : null;
 
     }
 }
@@ -401,7 +481,7 @@ class DescribeRegionsRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询产品的名称，例如cvm
+         * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
          * @type {string || null}
          */
         this.Product = null;

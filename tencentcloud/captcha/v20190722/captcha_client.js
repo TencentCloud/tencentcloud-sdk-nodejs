@@ -20,29 +20,41 @@ const DescribeCaptchaOperDataResponse = models.DescribeCaptchaOperDataResponse;
 const CaptchaOperDataInterceptUnit = models.CaptchaOperDataInterceptUnit;
 const CaptchaOperDataTryTimesDistributeUnit = models.CaptchaOperDataTryTimesDistributeUnit;
 const DescribeCaptchaMiniOperDataResponse = models.DescribeCaptchaMiniOperDataResponse;
+const GetTotalTicketStatisticsRequest = models.GetTotalTicketStatisticsRequest;
 const DescribeCaptchaMiniDataSumResponse = models.DescribeCaptchaMiniDataSumResponse;
-const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
+const GetRequestStatisticsResponse = models.GetRequestStatisticsResponse;
+const GetRequestStatisticsRequest = models.GetRequestStatisticsRequest;
 const OutputManageMarketingRiskValue = models.OutputManageMarketingRiskValue;
 const CaptchaOperDataRes = models.CaptchaOperDataRes;
+const GetTicketStatisticsRequest = models.GetTicketStatisticsRequest;
 const TicketInterceptUnit = models.TicketInterceptUnit;
 const DescribeCaptchaUserAllAppIdRequest = models.DescribeCaptchaUserAllAppIdRequest;
+const GetTotalTicketStatisticsResponse = models.GetTotalTicketStatisticsResponse;
+const TicketCheckTrendObj = models.TicketCheckTrendObj;
 const DescribeCaptchaMiniDataResponse = models.DescribeCaptchaMiniDataResponse;
-const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
+const InterceptPerTrendObj = models.InterceptPerTrendObj;
 const DescribeCaptchaMiniRiskResultRequest = models.DescribeCaptchaMiniRiskResultRequest;
+const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
 const CaptchaUserAllAppId = models.CaptchaUserAllAppId;
 const DescribeCaptchaDataSumResponse = models.DescribeCaptchaDataSumResponse;
+const TicketThroughUnit = models.TicketThroughUnit;
 const DescribeCaptchaTicketDataRequest = models.DescribeCaptchaTicketDataRequest;
+const DescribeCaptchaResultResponse = models.DescribeCaptchaResultResponse;
 const DescribeCaptchaMiniDataSumRequest = models.DescribeCaptchaMiniDataSumRequest;
 const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
 const DescribeCaptchaOperDataRequest = models.DescribeCaptchaOperDataRequest;
 const DescribeCaptchaDataSumRequest = models.DescribeCaptchaDataSumRequest;
 const DescribeCaptchaMiniRiskResultResponse = models.DescribeCaptchaMiniRiskResultResponse;
+const GetTicketStatisticsResponse = models.GetTicketStatisticsResponse;
+const GetTotalRequestStatisticsRequest = models.GetTotalRequestStatisticsRequest;
 const TicketAmountUnit = models.TicketAmountUnit;
+const GetTotalRequestStatisticsResponse = models.GetTotalRequestStatisticsResponse;
 const CaptchaQueryData = models.CaptchaQueryData;
-const TicketThroughUnit = models.TicketThroughUnit;
+const RequestTrendObj = models.RequestTrendObj;
 const DescribeCaptchaDataResponse = models.DescribeCaptchaDataResponse;
 const DescribeCaptchaResultRequest = models.DescribeCaptchaResultRequest;
-const DescribeCaptchaResultResponse = models.DescribeCaptchaResultResponse;
+const CaptchaStatisticObj = models.CaptchaStatisticObj;
+const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
 const CaptchaOperDataLoadTimeUnit = models.CaptchaOperDataLoadTimeUnit;
 const DescribeCaptchaMiniOperDataRequest = models.DescribeCaptchaMiniOperDataRequest;
 const DescribeCaptchaAppIdInfoRequest = models.DescribeCaptchaAppIdInfoRequest;
@@ -67,7 +79,7 @@ class CaptchaClient extends AbstractClient {
     }
     
     /**
-     * 核查验证码小程序插件票据接入风控结果(Beta)
+     * 核查验证码小程序插件票据接入风控结果(已停用)
      * @param {DescribeCaptchaMiniRiskResultRequest} req
      * @param {function(string, DescribeCaptchaMiniRiskResultResponse):void} cb
      * @public
@@ -86,6 +98,17 @@ class CaptchaClient extends AbstractClient {
     DescribeCaptchaTicketData(req, cb) {
         let resp = new DescribeCaptchaTicketDataResponse();
         this.request("DescribeCaptchaTicketData", req, resp, cb);
+    }
+
+    /**
+     * 查询全部验证的统计数据，包括：总请求量、总验证量、总验证通过量、总验证拦截量等数据。
+     * @param {GetTotalRequestStatisticsRequest} req
+     * @param {function(string, GetTotalRequestStatisticsResponse):void} cb
+     * @public
+     */
+    GetTotalRequestStatistics(req, cb) {
+        let resp = new GetTotalRequestStatisticsResponse();
+        this.request("GetTotalRequestStatistics", req, resp, cb);
     }
 
     /**
@@ -155,6 +178,17 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
+     * 查询单个CaptchaAppID票据校验数据，包括：票据校验量、票据校验通过量、票据校验拦截量。
+     * @param {GetTicketStatisticsRequest} req
+     * @param {function(string, GetTicketStatisticsResponse):void} cb
+     * @public
+     */
+    GetTicketStatistics(req, cb) {
+        let resp = new GetTicketStatisticsResponse();
+        this.request("GetTicketStatistics", req, resp, cb);
+    }
+
+    /**
      * 核查验证码票据结果(小程序插件) 
      * @param {DescribeCaptchaMiniResultRequest} req
      * @param {function(string, DescribeCaptchaMiniResultResponse):void} cb
@@ -177,6 +211,17 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
+     * 查询全部票据校验的统计数据，包括：总票据校验量、总票据校验通过量、总票据校验拦截量。
+     * @param {GetTotalTicketStatisticsRequest} req
+     * @param {function(string, GetTotalTicketStatisticsResponse):void} cb
+     * @public
+     */
+    GetTotalTicketStatistics(req, cb) {
+        let resp = new GetTotalTicketStatisticsResponse();
+        this.request("GetTotalTicketStatistics", req, resp, cb);
+    }
+
+    /**
      * 安全验证码获取用户注册所有APPId和应用名称
      * @param {DescribeCaptchaUserAllAppIdRequest} req
      * @param {function(string, DescribeCaptchaUserAllAppIdResponse):void} cb
@@ -185,6 +230,17 @@ class CaptchaClient extends AbstractClient {
     DescribeCaptchaUserAllAppId(req, cb) {
         let resp = new DescribeCaptchaUserAllAppIdResponse();
         this.request("DescribeCaptchaUserAllAppId", req, resp, cb);
+    }
+
+    /**
+     * 查询单个CaptchaAppID验证的统计数据，包括：请求量、验证量、验证通过量、验证拦截量。
+     * @param {GetRequestStatisticsRequest} req
+     * @param {function(string, GetRequestStatisticsResponse):void} cb
+     * @public
+     */
+    GetRequestStatistics(req, cb) {
+        let resp = new GetRequestStatisticsResponse();
+        this.request("GetRequestStatistics", req, resp, cb);
     }
 
     /**

@@ -31,9 +31,7 @@ const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
 const ModifyConfigExtraResponse = models.ModifyConfigExtraResponse;
-const ModifyLogsetRequest = models.ModifyLogsetRequest;
 const CreateLogsetRequest = models.CreateLogsetRequest;
-const ModifyDataTransformRequest = models.ModifyDataTransformRequest;
 const LogItem = models.LogItem;
 const SearchLogResponse = models.SearchLogResponse;
 const DeleteTopicRequest = models.DeleteTopicRequest;
@@ -54,20 +52,21 @@ const OpenKafkaConsumerResponse = models.OpenKafkaConsumerResponse;
 const AlarmTargetInfo = models.AlarmTargetInfo;
 const DescribeIndexRequest = models.DescribeIndexRequest;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
+const DeleteMachineGroupInfoRequest = models.DeleteMachineGroupInfoRequest;
 const CreateLogsetResponse = models.CreateLogsetResponse;
 const DeleteMachineGroupResponse = models.DeleteMachineGroupResponse;
 const Tag = models.Tag;
 const DescribeExportsRequest = models.DescribeExportsRequest;
 const ExtractRuleInfo = models.ExtractRuleInfo;
 const TopicInfo = models.TopicInfo;
-const DeleteDataTransformResponse = models.DeleteDataTransformResponse;
+const DescribeConsumerRequest = models.DescribeConsumerRequest;
 const DeleteConfigExtraResponse = models.DeleteConfigExtraResponse;
 const ModifyConsumerRequest = models.ModifyConsumerRequest;
 const CreateIndexResponse = models.CreateIndexResponse;
 const DeleteConfigFromMachineGroupResponse = models.DeleteConfigFromMachineGroupResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
 const ModifyMachineGroupResponse = models.ModifyMachineGroupResponse;
-const DataTransformResouceInfo = models.DataTransformResouceInfo;
+const RuleInfo = models.RuleInfo;
 const DeleteMachineGroupRequest = models.DeleteMachineGroupRequest;
 const FullTextInfo = models.FullTextInfo;
 const DescribePartitionsResponse = models.DescribePartitionsResponse;
@@ -92,6 +91,7 @@ const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
 const CloseKafkaConsumerResponse = models.CloseKafkaConsumerResponse;
 const RuleTagInfo = models.RuleTagInfo;
 const CreateIndexRequest = models.CreateIndexRequest;
+const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
@@ -108,17 +108,16 @@ const UploadLogRequest = models.UploadLogRequest;
 const ModifyConsumerResponse = models.ModifyConsumerResponse;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const LogsetInfo = models.LogsetInfo;
-const DescribeConsumerRequest = models.DescribeConsumerRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
 const ShipperTaskInfo = models.ShipperTaskInfo;
 const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
-const DeleteDataTransformRequest = models.DeleteDataTransformRequest;
+const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
 const DeleteConfigExtraRequest = models.DeleteConfigExtraRequest;
 const ModifyConfigRequest = models.ModifyConfigRequest;
-const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
+const AddMachineGroupInfoRequest = models.AddMachineGroupInfoRequest;
 const JsonInfo = models.JsonInfo;
 const CreateShipperRequest = models.CreateShipperRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -130,30 +129,27 @@ const ModifyTopicResponse = models.ModifyTopicResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
 const CreateShipperResponse = models.CreateShipperResponse;
 const DeleteIndexResponse = models.DeleteIndexResponse;
+const AlarmAnalysisConfig = models.AlarmAnalysisConfig;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const Column = models.Column;
-const CompressInfo = models.CompressInfo;
+const ContentInfo = models.ContentInfo;
 const ValueInfo = models.ValueInfo;
-const DescribeDataTransformInfoRequest = models.DescribeDataTransformInfoRequest;
+const GetAlarmLogRequest = models.GetAlarmLogRequest;
 const DeleteShipperResponse = models.DeleteShipperResponse;
 const ExportInfo = models.ExportInfo;
 const DescribeLogContextResponse = models.DescribeLogContextResponse;
 const ConfigInfo = models.ConfigInfo;
 const DeleteExportRequest = models.DeleteExportRequest;
 const SplitPartitionResponse = models.SplitPartitionResponse;
-const CreateDataTransformResponse = models.CreateDataTransformResponse;
 const LogContextInfo = models.LogContextInfo;
 const ModifyShipperRequest = models.ModifyShipperRequest;
-const RuleInfo = models.RuleInfo;
 const CreateConfigExtraRequest = models.CreateConfigExtraRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const AlarmNotice = models.AlarmNotice;
 const ModifyConfigResponse = models.ModifyConfigResponse;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
-const DataTransformTaskInfo = models.DataTransformTaskInfo;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
-const PreviewLogStatistic = models.PreviewLogStatistic;
-const ContentInfo = models.ContentInfo;
+const CompressInfo = models.CompressInfo;
 const ApplyConfigToMachineGroupResponse = models.ApplyConfigToMachineGroupResponse;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
 const CreateConfigResponse = models.CreateConfigResponse;
@@ -161,6 +157,7 @@ const MachineGroupTypeInfo = models.MachineGroupTypeInfo;
 const DeleteConfigFromMachineGroupRequest = models.DeleteConfigFromMachineGroupRequest;
 const ShipperInfo = models.ShipperInfo;
 const KeyValueInfo = models.KeyValueInfo;
+const AddMachineGroupInfoResponse = models.AddMachineGroupInfoResponse;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const NoticeReceiver = models.NoticeReceiver;
@@ -175,7 +172,6 @@ const SearchLogRequest = models.SearchLogRequest;
 const CreateMachineGroupRequest = models.CreateMachineGroupRequest;
 const DescribeExportsResponse = models.DescribeExportsResponse;
 const ApplyConfigToMachineGroupRequest = models.ApplyConfigToMachineGroupRequest;
-const GetAlarmLogRequest = models.GetAlarmLogRequest;
 const ContainerFileInfo = models.ContainerFileInfo;
 const CsvInfo = models.CsvInfo;
 const DescribeConfigExtrasRequest = models.DescribeConfigExtrasRequest;
@@ -184,14 +180,12 @@ const DescribeIndexResponse = models.DescribeIndexResponse;
 const HistogramInfo = models.HistogramInfo;
 const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsRequest;
 const ModifyConfigExtraRequest = models.ModifyConfigExtraRequest;
-const CreateDataTransformRequest = models.CreateDataTransformRequest;
-const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
+const ModifyLogsetRequest = models.ModifyLogsetRequest;
+const DeleteMachineGroupInfoResponse = models.DeleteMachineGroupInfoResponse;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const ParquetInfo = models.ParquetInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
-const ModifyDataTransformResponse = models.ModifyDataTransformResponse;
-const DescribeDataTransformInfoResponse = models.DescribeDataTransformInfoResponse;
 const ConsumerContent = models.ConsumerContent;
 const CreateExportResponse = models.CreateExportResponse;
 const HostFileInfo = models.HostFileInfo;
@@ -221,14 +215,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 获取机器组信息列表
-     * @param {DescribeMachineGroupsRequest} req
-     * @param {function(string, DescribeMachineGroupsResponse):void} cb
+     * 用于删除机器组信息
+     * @param {DeleteMachineGroupInfoRequest} req
+     * @param {function(string, DeleteMachineGroupInfoResponse):void} cb
      * @public
      */
-    DescribeMachineGroups(req, cb) {
-        let resp = new DescribeMachineGroupsResponse();
-        this.request("DescribeMachineGroups", req, resp, cb);
+    DeleteMachineGroupInfo(req, cb) {
+        let resp = new DeleteMachineGroupInfoResponse();
+        this.request("DeleteMachineGroupInfo", req, resp, cb);
     }
 
     /**
@@ -309,7 +303,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于修改索引配置
+     * 本接口用于修改索引配置，该接口除受默认接口请求频率限制外，针对单个日志主题，并发数不能超过1，即同一时间同一个日志主题只能有一个正在执行的索引配置修改操作。
 
      * @param {ModifyIndexRequest} req
      * @param {function(string, ModifyIndexResponse):void} cb
@@ -321,7 +315,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于修改特殊采集配置任务
+     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      * @param {ModifyConfigExtraRequest} req
      * @param {function(string, ModifyConfigExtraResponse):void} cb
      * @public
@@ -376,7 +370,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于获取特殊采集配置
+     * 本接口用于获取特殊采集配置，特殊采集配置应用于自建K8S环境的采集Agent
      * @param {DescribeConfigExtrasRequest} req
      * @param {function(string, DescribeConfigExtrasResponse):void} cb
      * @public
@@ -387,7 +381,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 创建新的投递规则，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
+     * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
      * @param {CreateShipperRequest} req
      * @param {function(string, CreateShipperResponse):void} cb
      * @public
@@ -453,7 +447,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     *  本接口用于获取日志主题列表，支持分页
+     * 本接口用于获取日志主题列表，支持分页
      * @param {DescribeTopicsRequest} req
      * @param {function(string, DescribeTopicsResponse):void} cb
      * @public
@@ -475,7 +469,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 获取投递规则信息列表
+     * 获取投递到COS的任务配置信息
      * @param {DescribeShippersRequest} req
      * @param {function(string, DescribeShippersResponse):void} cb
      * @public
@@ -508,18 +502,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于删除数据加工任务
-     * @param {DeleteDataTransformRequest} req
-     * @param {function(string, DeleteDataTransformResponse):void} cb
-     * @public
-     */
-    DeleteDataTransform(req, cb) {
-        let resp = new DeleteDataTransformResponse();
-        this.request("DeleteDataTransform", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于删除特殊采集规则配置
+     * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
      * @param {DeleteConfigExtraRequest} req
      * @param {function(string, DeleteConfigExtraResponse):void} cb
      * @public
@@ -530,25 +513,25 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于创建数据加工任务。
-     * @param {CreateDataTransformRequest} req
-     * @param {function(string, CreateDataTransformResponse):void} cb
+     * 本接口用于获取告警策略列表。
+     * @param {DescribeAlarmsRequest} req
+     * @param {function(string, DescribeAlarmsResponse):void} cb
      * @public
      */
-    CreateDataTransform(req, cb) {
-        let resp = new CreateDataTransformResponse();
-        this.request("CreateDataTransform", req, resp, cb);
+    DescribeAlarms(req, cb) {
+        let resp = new DescribeAlarmsResponse();
+        this.request("DescribeAlarms", req, resp, cb);
     }
 
     /**
-     * 本接口用于获取数据加工任务列表基本信息
-     * @param {DescribeDataTransformInfoRequest} req
-     * @param {function(string, DescribeDataTransformInfoResponse):void} cb
+     * 用于添加机器组信息
+     * @param {AddMachineGroupInfoRequest} req
+     * @param {function(string, AddMachineGroupInfoResponse):void} cb
      * @public
      */
-    DescribeDataTransformInfo(req, cb) {
-        let resp = new DescribeDataTransformInfoResponse();
-        this.request("DescribeDataTransformInfo", req, resp, cb);
+    AddMachineGroupInfo(req, cb) {
+        let resp = new AddMachineGroupInfoResponse();
+        this.request("AddMachineGroupInfo", req, resp, cb);
     }
 
     /**
@@ -607,7 +590,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于构建直方图
+     * 本接口用于构建日志数量直方图
      * @param {DescribeLogHistogramRequest} req
      * @param {function(string, DescribeLogHistogramResponse):void} cb
      * @public
@@ -663,7 +646,7 @@ class ClsClient extends AbstractClient {
 
     /**
      * ## 提示
-为了保障您日志数据的可靠性以及更高效地使用日志服务，建议您使用CLS优化后的接口[上传结构化日志](https://cloud.tencent.com/document/api/614/16873)上传日志。
+为了保障您日志数据的可靠性以及更高效地使用日志服务，建议您使用CLS优化后的接口[上传结构化日志](https://cloud.tencent.com/document/product/614/16873)上传日志。
 
 同时我们给此接口专门优化定制了多个语言版本的SDK供您选择，SDK提供统一的异步发送、资源控制、自动重试、优雅关闭、感知上报等功能，使上报日志功能更完善，详情请参考[SDK采集](https://cloud.tencent.com/document/product/614/67157)。
 
@@ -893,17 +876,6 @@ cls.pb.cc cls.pb.h cls.proto
     }
 
     /**
-     * 本接口用于修改数据加工任务
-     * @param {ModifyDataTransformRequest} req
-     * @param {function(string, ModifyDataTransformResponse):void} cb
-     * @public
-     */
-    ModifyDataTransform(req, cb) {
-        let resp = new ModifyDataTransformResponse();
-        this.request("ModifyDataTransform", req, resp, cb);
-    }
-
-    /**
      * 本接口用于删除告警策略。
      * @param {DeleteAlarmRequest} req
      * @param {function(string, DeleteAlarmResponse):void} cb
@@ -959,6 +931,17 @@ cls.pb.cc cls.pb.h cls.proto
     }
 
     /**
+     * 获取机器组信息列表
+     * @param {DescribeMachineGroupsRequest} req
+     * @param {function(string, DescribeMachineGroupsResponse):void} cb
+     * @public
+     */
+    DescribeMachineGroups(req, cb) {
+        let resp = new DescribeMachineGroupsResponse();
+        this.request("DescribeMachineGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口用于合并一个读写态的主题分区，合并时指定一个主题分区 ID，日志服务会自动合并范围右相邻的分区。
      * @param {MergePartitionRequest} req
      * @param {function(string, MergePartitionResponse):void} cb
@@ -970,7 +953,7 @@ cls.pb.cc cls.pb.h cls.proto
     }
 
     /**
-     * 本接口用于创建特殊采集配置任务
+     * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      * @param {CreateConfigExtraRequest} req
      * @param {function(string, CreateConfigExtraResponse):void} cb
      * @public
@@ -1055,17 +1038,6 @@ cls.pb.cc cls.pb.h cls.proto
     CloseKafkaConsumer(req, cb) {
         let resp = new CloseKafkaConsumerResponse();
         this.request("CloseKafkaConsumer", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于获取告警策略列表。
-     * @param {DescribeAlarmsRequest} req
-     * @param {function(string, DescribeAlarmsResponse):void} cb
-     * @public
-     */
-    DescribeAlarms(req, cb) {
-        let resp = new DescribeAlarmsResponse();
-        this.request("DescribeAlarms", req, resp, cb);
     }
 
 

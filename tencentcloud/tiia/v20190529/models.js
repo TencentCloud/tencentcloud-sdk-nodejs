@@ -91,6 +91,116 @@ class DetectProductBetaResponse extends  AbstractModel {
 }
 
 /**
+ * DetectChefDress返回参数结构体
+ * @class
+ */
+class DetectChefDressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AttributesForBody> || null}
+         */
+        this.Bodies = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Bodies) {
+            this.Bodies = new Array();
+            for (let z in params.Bodies) {
+                let obj = new AttributesForBody();
+                obj.deserialize(params.Bodies[z]);
+                this.Bodies.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchImage返回参数结构体
+ * @class
+ */
+class SearchImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果数量。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 图片信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageInfo> || null}
+         */
+        this.ImageInfos = null;
+
+        /**
+         * 输入图的主体信息。
+若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ObjectInfo || null}
+         */
+        this.Object = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.ImageInfos) {
+            this.ImageInfos = new Array();
+            for (let z in params.ImageInfos) {
+                let obj = new ImageInfo();
+                obj.deserialize(params.ImageInfos[z]);
+                this.ImageInfos.push(obj);
+            }
+        }
+
+        if (params.Object) {
+            let obj = new ObjectInfo();
+            obj.deserialize(params.Object)
+            this.Object = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetectDisgust请求参数结构体
  * @class
  */
@@ -134,40 +244,30 @@ class DetectDisgustRequest extends  AbstractModel {
 }
 
 /**
- * SearchImage返回参数结构体
+ * 宠物具体信息
  * @class
  */
-class SearchImageResponse extends  AbstractModel {
+class Pet extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果数量。
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * 图片信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ImageInfo> || null}
-         */
-        this.ImageInfos = null;
-
-        /**
-         * 输入图的主体信息。
-若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
-注意：此字段可能返回 null，表示取不到有效值。服务类型为商品图像搜索时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ObjectInfo || null}
-         */
-        this.Object = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 识别出的宠物类型（猫或者狗，暂不支持识别猫狗品种）。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 识别服务给识别目标打出的置信度，范围在0-100之间。值越高，表示目标为相应结果的可能性越高。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 识别目标在图片中的坐标。
+         * @type {Rect || null}
+         */
+        this.Location = null;
 
     }
 
@@ -178,52 +278,38 @@ class SearchImageResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
-        if (params.ImageInfos) {
-            this.ImageInfos = new Array();
-            for (let z in params.ImageInfos) {
-                let obj = new ImageInfo();
-                obj.deserialize(params.ImageInfos[z]);
-                this.ImageInfos.push(obj);
-            }
+        if (params.Location) {
+            let obj = new Rect();
+            obj.deserialize(params.Location)
+            this.Location = obj;
         }
-
-        if (params.Object) {
-            let obj = new ObjectInfo();
-            obj.deserialize(params.Object)
-            this.Object = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * RecognizeCarPro请求参数结构体
+ * DetectPet请求参数结构体
  * @class
  */
-class RecognizeCarProRequest extends  AbstractModel {
+class DetectPetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * 图片的URL地址。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+图片大小的限制为4M，图片像素的限制为4k。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+         * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。 
+图片大小的限制为4M，图片像素的限制为4k。
 **注意：图片需要base64编码，并且要去掉编码头部。**
-支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -318,41 +404,43 @@ class CreateImageRequest extends  AbstractModel {
 
         /**
          * 物品ID，最多支持64个字符。 
-若EntityId已存在，则对其追加图片。
+一个物品ID可以包含多张图片，若EntityId已存在，则对其追加图片。同一个EntityId，最大支持10张图。
          * @type {string || null}
          */
         this.EntityId = null;
 
         /**
          * 图片名称，最多支持64个字符， 
-同一个EntityId，最大支持10张图。
+PicName唯一确定一张图片，具有唯一性。
          * @type {string || null}
          */
         this.PicName = null;
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。  
-Url、Image必须提供一个，如果都提供，只使用 Url。 
-图片分辨率不超过4096\*4096。
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
+ImageUrl和ImageBase64必须提供一个，如果都提供，只使用ImageUrl。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过4096\*4096。
+• 如果在商品图像搜索中开启主体识别，分辨率不超过2000\*2000，图片长宽比小于10。
+建议：
+• 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的Url速度和稳定性可能受一定影响。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 用户自定义的内容，最多支持4096个字符，查询时原样带回。
+         * 图片自定义备注内容，最多支持4096个字符，查询时原样带回。
          * @type {string || null}
          */
         this.CustomContent = null;
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。 
-图片分辨率不超过4096\*4096。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+• 图片大小：base64 编码后大小不可超过5M。图片分辨率不超过4096\*4096。
+• 如果在商品图像搜索中开启主体识别，分辨率不超过2000\*2000，图片长宽比小于10。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -365,24 +453,24 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 
         /**
          * 是否需要启用主体识别，默认为**TRUE**。
-1.  为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体创建图片并进行主体识别。主体识别结果可在**Response**中获取。
-2. 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图创建图片。
-注意：服务类型为商品图像搜索时生效。
+• 为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体创建图片并进行主体识别。主体识别结果可在**Response**中获取。
+• 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图创建图片。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
          * @type {boolean || null}
          */
         this.EnableDetect = null;
 
         /**
          * 图像类目ID。
-若设置类目ID，提取对应类目的主体创建图片。
-注意：服务类型为商品图像搜索时生效。
-类目信息：
+若设置类目ID，提取以下类目的主体创建图片。
+类目取值说明：
 0：上衣。
 1：裙装。
 2：下装。
 3：包。
 4：鞋。
 5：配饰。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
          * @type {number || null}
          */
         this.CategoryId = null;
@@ -423,47 +511,33 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 }
 
 /**
- * DetectLabelBeta请求参数结构体
+ * 属性列表。
  * @class
  */
-class DetectLabelBetaRequest extends  AbstractModel {
+class BodyAttributes extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * 属性值。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.Label = null;
 
         /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
+         * 置信度，取值0-1之间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 属性名称。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ImageBase64 = null;
-
-        /**
-         * 本次调用支持的识别场景，可选值如下：
-WEB，针对网络图片优化;
-CAMERA，针对手机摄像头拍摄图片优化;
-ALBUM，针对手机相册、网盘产品优化;
-NEWS，针对新闻、资讯、广电等行业优化；
-NONECAM，非实拍图；
-LOCATION，主体位置识别；
-如果不传此参数，则默认为WEB。
-
-支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
-         * @type {Array.<string> || null}
-         */
-        this.Scenes = null;
+        this.Name = null;
 
     }
 
@@ -474,9 +548,9 @@ LOCATION，主体位置识别；
         if (!params) {
             return;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -518,17 +592,17 @@ class CropImageRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要裁剪区域的宽度，与Height共同组成所需裁剪的图片宽高比例；
-输入数字请大于0、小于图片宽度的像素值；
+         * 需要裁剪区域的宽度，与Height共同组成所需裁剪的图片宽高比例。
+输入数字请大于0、小于图片宽度的像素值。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 需要裁剪区域的高度，与Width共同组成所需裁剪的图片宽高比例；
-输入数字请请大于0、小于图片高度的像素值；
+         * 需要裁剪区域的高度，与Width共同组成所需裁剪的图片宽高比例。
+输入数字请大于0、小于图片高度的像素值。
 宽高比例（Width : Height）会简化为最简分数，即如果Width输入10、Height输入20，会简化为1：2。
-Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响效果；
+Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响效果。
          * @type {number || null}
          */
         this.Height = null;
@@ -539,16 +613,16 @@ Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响�
 • 图片格式：PNG、JPG、JPEG。 
 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
 建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
+• 图片像素：大于50*50像素，否则影响识别效果。
+• 长宽比：长边：短边<5。 
 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
+         * 图片经过Base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要Base64编码，并且要去掉编码头部。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -614,36 +688,106 @@ class DetectProductRequest extends  AbstractModel {
 }
 
 /**
- * 图像的主体信息。
+ * DetectLabelBeta请求参数结构体
  * @class
  */
-class ObjectInfo extends  AbstractModel {
+class DetectLabelBetaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图像主体区域。
-         * @type {Box || null}
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
          */
-        this.Box = null;
+        this.ImageUrl = null;
 
         /**
-         * 主体类别ID。
-         * @type {number || null}
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
          */
-        this.CategoryId = null;
+        this.ImageBase64 = null;
 
         /**
-         * 整张图颜色信息。
-         * @type {Array.<ColorInfo> || null}
+         * 本次调用支持的识别场景，可选值如下：
+WEB，针对网络图片优化;
+CAMERA，针对手机摄像头拍摄图片优化;
+ALBUM，针对手机相册、网盘产品优化;
+NEWS，针对新闻、资讯、广电等行业优化；
+NONECAM，非实拍图；
+LOCATION，主体位置识别；
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+         * @type {Array.<string> || null}
          */
-        this.Colors = null;
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+
+    }
+}
+
+/**
+ * DetectLabel返回参数结构体
+ * @class
+ */
+class DetectLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 属性信息。
-         * @type {Array.<Attribute> || null}
+         * Web网络版标签结果数组。如未选择WEB场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
          */
-        this.Attributes = null;
+        this.Labels = null;
+
+        /**
+         * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.CameraLabels = null;
+
+        /**
+         * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.AlbumLabels = null;
+
+        /**
+         * News新闻版标签结果数组。如未选择NEWS场景，则为空。
+新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.NewsLabels = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -655,30 +799,42 @@ class ObjectInfo extends  AbstractModel {
             return;
         }
 
-        if (params.Box) {
-            let obj = new Box();
-            obj.deserialize(params.Box)
-            this.Box = obj;
-        }
-        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
-
-        if (params.Colors) {
-            this.Colors = new Array();
-            for (let z in params.Colors) {
-                let obj = new ColorInfo();
-                obj.deserialize(params.Colors[z]);
-                this.Colors.push(obj);
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
             }
         }
 
-        if (params.Attributes) {
-            this.Attributes = new Array();
-            for (let z in params.Attributes) {
-                let obj = new Attribute();
-                obj.deserialize(params.Attributes[z]);
-                this.Attributes.push(obj);
+        if (params.CameraLabels) {
+            this.CameraLabels = new Array();
+            for (let z in params.CameraLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.CameraLabels[z]);
+                this.CameraLabels.push(obj);
             }
         }
+
+        if (params.AlbumLabels) {
+            this.AlbumLabels = new Array();
+            for (let z in params.AlbumLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.AlbumLabels[z]);
+                this.AlbumLabels.push(obj);
+            }
+        }
+
+        if (params.NewsLabels) {
+            this.NewsLabels = new Array();
+            for (let z in params.NewsLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.NewsLabels[z]);
+                this.NewsLabels.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -937,6 +1093,68 @@ class DetectDisgustResponse extends  AbstractModel {
 }
 
 /**
+ * DetectChefDress请求参数结构体
+ * @class
+ */
+class DetectChefDressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Url 。
+ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过 3840 x 2160pixel。
+建议：
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要base64编码，并且要去掉编码头部。
+支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。
+支持的图片大小：所下载图片经Base64编码后不超过5M。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 人体检测模型开关，“true”为开启，“false”为关闭
+默认为开启，开启后可先对图片中的人体进行检测之后再进行属性识别
+         * @type {boolean || null}
+         */
+        this.EnableDetect = null;
+
+        /**
+         * 人体优选开关，“true”为开启，“false”为关闭
+开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。
+默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭
+人体优选开启时，检测到的人体分辨率不超过1920*1080 pixel
+         * @type {boolean || null}
+         */
+        this.EnablePreferred = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.EnableDetect = 'EnableDetect' in params ? params.EnableDetect : null;
+        this.EnablePreferred = 'EnablePreferred' in params ? params.EnablePreferred : null;
+
+    }
+}
+
+/**
  * SearchImage请求参数结构体
  * @class
  */
@@ -951,46 +1169,60 @@ class SearchImageRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。 
-图片分辨率不超4096\*4096。 
-Url、Image必须提供一个，如果都提供，只使用 Url。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
+         * 图片的 Url 。
+ImageUrl和ImageBase64必须提供一个，如果都提供，只使用ImageUrl。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过4096\*4096。
+• 如果在商品图像搜索中开启主体识别，分辨率不超过2000\*2000，图片长宽比小于10。
+建议：
+• 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的Url速度和稳定性可能受一定影响。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 图片 base64 数据，base64 编码后大小不可超过5M。 
-图片分辨率不超过4096\*4096。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
+         * 图片 base64 数据。
+ImageUrl和ImageBase64必须提供一个，如果都提供，只使用ImageUrl。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+• 图片大小：base64 编码后大小不可超过5M。图片分辨率不超过4096\*4096。
+• 如果在商品图像搜索中开启主体识别，分辨率不超过2000\*2000，图片长宽比小于10。
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * 返回数量，默认值为10，最大值为100。
+         * 返回结果的数量，默认值为10，最大值为100。
+按照相似度分数由高到低排序。
+**<font color=#1E90FF>服务类型为图案花纹搜索时Limit = 1，最多只能返回1个结果。</font>**
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 起始序号，默认值为0。
+         * 返回结果的起始序号，默认值为0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 出参Score中，只有超过**MatchThreshold**值的结果才会返回。默认为0
+         * 匹配阈值。
+只有图片相似度分数超过匹配阈值的结果才会返回。
+当MatchThreshold为0（默认值）时，各服务类型将按照以下默认的匹配阈值进行结果过滤：
+• 通用图像搜索1.0版：50。
+• 商品图像搜索2.0升级版：45。
+• 商品图像搜索1.0版：28。
+• 图案花纹搜索1.0版：56。
+建议：
+可以手动调整MatchThreshold值来控制输出结果的范围。如果发现无检索结果，可能是因为图片相似度较低导致检索结果被匹配阈值过滤，建议调整为较低的阈值后再次尝试检索。
          * @type {number || null}
          */
         this.MatchThreshold = null;
 
         /**
-         * 针对入库时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
+         * 标签过滤条件。
+针对创建图片时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
          * @type {string || null}
          */
         this.Filter = null;
@@ -1004,24 +1236,24 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 
         /**
          * 是否需要启用主体识别，默认为**TRUE** 。
-1. 为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体进行检索并进行主体识别。主体识别结果可在**Response中**获取。
-2. 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图检索图片。
-注意：服务类型为商品图像搜索时生效。
+• 为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体进行检索并进行主体识别。主体识别结果可在**Response中**获取。
+• 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图检索图片。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
          * @type {boolean || null}
          */
         this.EnableDetect = null;
 
         /**
          * 图像类目ID。
-若设置类目ID，提取对应类目的主体进行检索。
-注意：服务类型为商品图像搜索时生效。
-类目信息：
+若设置类目ID，提取以下类目的主体进行检索。
+类目取值说明：
 0：上衣。
 1：裙装。
 2：下装。
 3：包。
 4：鞋。
 5：配饰。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
          * @type {number || null}
          */
         this.CategoryId = null;
@@ -1050,6 +1282,125 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         }
         this.EnableDetect = 'EnableDetect' in params ? params.EnableDetect : null;
         this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+    }
+}
+
+/**
+ * 属性检测到的人体
+ * @class
+ */
+class AttributesForBody extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体框。当不开启人体检测时，内部参数默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ImageRect || null}
+         */
+        this.Rect = null;
+
+        /**
+         * 人体检测置信度。取值0-1之间，当不开启人体检测开关时默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DetectConfidence = null;
+
+        /**
+         * 属性信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BodyAttributes> || null}
+         */
+        this.Attributes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rect) {
+            let obj = new ImageRect();
+            obj.deserialize(params.Rect)
+            this.Rect = obj;
+        }
+        this.DetectConfidence = 'DetectConfidence' in params ? params.DetectConfidence : null;
+
+        if (params.Attributes) {
+            this.Attributes = new Array();
+            for (let z in params.Attributes) {
+                let obj = new BodyAttributes();
+                obj.deserialize(params.Attributes[z]);
+                this.Attributes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DetectLabel请求参数结构体
+ * @class
+ */
+class DetectLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 Base64 编码数据。
+与ImageUrl同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：PNG、JPG、JPEG、BMP。 
+• 图片大小：经Base64编码后不超过4M。
+**<font color=#1E90FF>注意：图片需要Base64编码，并且要去掉编码头部。</font>**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片 URL 地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG、BMP。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边:短边<5； 
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 本次调用支持的识别场景，可选值如下：
+• WEB，针对网络图片优化;
+• CAMERA，针对手机摄像头拍摄图片优化;
+• ALBUM，针对手机相册、网盘产品优化;
+• NEWS，针对新闻、资讯、广电等行业优化；
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -1113,98 +1464,19 @@ class RecognizeCarResponse extends  AbstractModel {
 }
 
 /**
- * DetectLabel请求参数结构体
+ * DetectLabelPro返回参数结构体
  * @class
  */
-class DetectLabelRequest extends  AbstractModel {
+class DetectLabelProResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-        /**
-         * 本次调用支持的识别场景，可选值如下：
-WEB，针对网络图片优化;
-CAMERA，针对手机摄像头拍摄图片优化;
-ALBUM，针对手机相册、网盘产品优化;
-NEWS，针对新闻、资讯、广电等行业优化；
-如果不传此参数，则默认为WEB。
-
-支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
-         * @type {Array.<string> || null}
-         */
-        this.Scenes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
-
-    }
-}
-
-/**
- * DetectLabel返回参数结构体
- * @class
- */
-class DetectLabelResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Web网络版标签结果数组。如未选择WEB场景，则为空。
+         * 返回标签数组。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DetectLabelItem> || null}
          */
         this.Labels = null;
-
-        /**
-         * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DetectLabelItem> || null}
-         */
-        this.CameraLabels = null;
-
-        /**
-         * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DetectLabelItem> || null}
-         */
-        this.AlbumLabels = null;
-
-        /**
-         * News新闻版标签结果数组。如未选择NEWS场景，则为空。
-新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DetectLabelItem> || null}
-         */
-        this.NewsLabels = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1228,33 +1500,6 @@ class DetectLabelResponse extends  AbstractModel {
                 let obj = new DetectLabelItem();
                 obj.deserialize(params.Labels[z]);
                 this.Labels.push(obj);
-            }
-        }
-
-        if (params.CameraLabels) {
-            this.CameraLabels = new Array();
-            for (let z in params.CameraLabels) {
-                let obj = new DetectLabelItem();
-                obj.deserialize(params.CameraLabels[z]);
-                this.CameraLabels.push(obj);
-            }
-        }
-
-        if (params.AlbumLabels) {
-            this.AlbumLabels = new Array();
-            for (let z in params.AlbumLabels) {
-                let obj = new DetectLabelItem();
-                obj.deserialize(params.AlbumLabels[z]);
-                this.AlbumLabels.push(obj);
-            }
-        }
-
-        if (params.NewsLabels) {
-            this.NewsLabels = new Array();
-            for (let z in params.NewsLabels) {
-                let obj = new DetectLabelItem();
-                obj.deserialize(params.NewsLabels[z]);
-                this.NewsLabels.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1414,16 +1659,16 @@ class AssessQualityRequest extends  AbstractModel {
 • 图片格式：PNG、JPG、JPEG。 
 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
 建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
+• 图片像素：大于50*50像素，否则影响识别效果。 
+• 长宽比：长边：短边<5。
 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
+         * 图片经过Base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要Base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1506,13 +1751,15 @@ class CreateGroupRequest extends  AbstractModel {
         this.GroupName = null;
 
         /**
-         * 图库可容纳的最大图片数量。
+         * 图片库可容纳的最大图片特征条数，一张图片对应一条图片特征数据，不支持修改。
+单个图片库容量最大可达亿级，达到容量限制后继续创建图片将会报错。
+注意，包月计费下支持绑定的最小库容量为500万。
          * @type {number || null}
          */
         this.MaxCapacity = null;
 
         /**
-         * 简介。
+         * 图库简介。
          * @type {string || null}
          */
         this.Brief = null;
@@ -1524,11 +1771,14 @@ class CreateGroupRequest extends  AbstractModel {
         this.MaxQps = null;
 
         /**
-         * 图库类型，对应不同服务类型，默认为4。1～3为历史版本，不推荐。
-参数值：
-4：在自建图库中搜索相同原图，可支持裁剪、翻转、调色、加水印后的图片搜索，适用于图片版权保护、原图查询等场景。
-5：在自建图库中搜索相同或相似的商品图片，适用于商品分类、检索、推荐等电商场景。
-6：在自建图片库中搜索与输入图片高度相似的图片，适用于相似图案、logo、纹理等图像元素的搜索。
+         * 图库类型，用于决定图像搜索的服务类型和算法版本，默认为4。
+GroupType不支持修改，若不确定适用的服务类型，建议先对不同类型分别小规模测试后再开始正式使用。
+参数取值：
+4：通用图像搜索1.0版。
+7：商品图像搜索2.0升级版。
+5：商品图像搜索1.0版。
+6：图案花纹搜索1.0版。
+1 - 3：通用图像搜索旧版，不推荐使用。
          * @type {number || null}
          */
         this.GroupType = null;
@@ -1548,6 +1798,55 @@ class CreateGroupRequest extends  AbstractModel {
         this.Brief = 'Brief' in params ? params.Brief : null;
         this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
         this.GroupType = 'GroupType' in params ? params.GroupType : null;
+
+    }
+}
+
+/**
+ * UpdateImage请求参数结构体
+ * @class
+ */
+class UpdateImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图库ID。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 物品ID，最多支持64个字符。
+         * @type {string || null}
+         */
+        this.EntityId = null;
+
+        /**
+         * 图片名称，最多支持64个字符。
+         * @type {string || null}
+         */
+        this.PicName = null;
+
+        /**
+         * 新的自定义标签，最多不超过10个，格式为JSON。
+         * @type {string || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EntityId = 'EntityId' in params ? params.EntityId : null;
+        this.PicName = 'PicName' in params ? params.PicName : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
     }
 }
@@ -1707,6 +2006,12 @@ class Box extends  AbstractModel {
          */
         this.Score = null;
 
+        /**
+         * 主体区域类目ID
+         * @type {number || null}
+         */
+        this.CategoryId = null;
+
     }
 
     /**
@@ -1723,6 +2028,51 @@ class Box extends  AbstractModel {
             this.Rect = obj;
         }
         this.Score = 'Score' in params ? params.Score : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+    }
+}
+
+/**
+ * DetectSecurity返回参数结构体
+ * @class
+ */
+class DetectSecurityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AttributesForBody> || null}
+         */
+        this.Bodies = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Bodies) {
+            this.Bodies = new Array();
+            for (let z in params.Bodies) {
+                let obj = new AttributesForBody();
+                obj.deserialize(params.Bodies[z]);
+                this.Bodies.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1785,16 +2135,16 @@ class EnhanceImageRequest extends  AbstractModel {
 • 图片格式：PNG、JPG、JPEG。 
 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
 建议：
-• 图片像素：大于50*50像素，最大不超过250万像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
+• 图片像素：大于50*50像素，最大不超过250万像素，否则影响识别效果。 
+• 长宽比：长边：短边<5。 
 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
+         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过Base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要Base64编码，并且要去掉编码头部。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1988,32 +2338,43 @@ class CropImageResponse extends  AbstractModel {
 }
 
 /**
- * DetectCelebrity请求参数结构体
+ * 图像的主体信息。
  * @class
  */
-class DetectCelebrityRequest extends  AbstractModel {
+class ObjectInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-         * @type {string || null}
+         * 图像主体区域。
+         * @type {Box || null}
          */
-        this.ImageUrl = null;
+        this.Box = null;
 
         /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
-         * @type {string || null}
+         * 主体类别ID。
+         * @type {number || null}
          */
-        this.ImageBase64 = null;
+        this.CategoryId = null;
+
+        /**
+         * 整张图颜色信息。
+         * @type {Array.<ColorInfo> || null}
+         */
+        this.Colors = null;
+
+        /**
+         * 属性信息。
+         * @type {Array.<Attribute> || null}
+         */
+        this.Attributes = null;
+
+        /**
+         * 图像的所有主体区域，置信度，以及主体区域类别ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Box> || null}
+         */
+        this.AllBox = null;
 
     }
 
@@ -2024,8 +2385,110 @@ class DetectCelebrityRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+        if (params.Box) {
+            let obj = new Box();
+            obj.deserialize(params.Box)
+            this.Box = obj;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+        if (params.Colors) {
+            this.Colors = new Array();
+            for (let z in params.Colors) {
+                let obj = new ColorInfo();
+                obj.deserialize(params.Colors[z]);
+                this.Colors.push(obj);
+            }
+        }
+
+        if (params.Attributes) {
+            this.Attributes = new Array();
+            for (let z in params.Attributes) {
+                let obj = new Attribute();
+                obj.deserialize(params.Attributes[z]);
+                this.Attributes.push(obj);
+            }
+        }
+
+        if (params.AllBox) {
+            this.AllBox = new Array();
+            for (let z in params.AllBox) {
+                let obj = new Box();
+                obj.deserialize(params.AllBox[z]);
+                this.AllBox.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 检测到的单个商品结构体
+ * @class
+ */
+class Product extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
+         * @type {string || null}
+         */
+        this.Parents = null;
+
+        /**
+         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 商品坐标X轴的最小值
+         * @type {number || null}
+         */
+        this.XMin = null;
+
+        /**
+         * 商品坐标Y轴的最小值
+         * @type {number || null}
+         */
+        this.YMin = null;
+
+        /**
+         * 商品坐标X轴的最大值
+         * @type {number || null}
+         */
+        this.XMax = null;
+
+        /**
+         * 商品坐标Y轴的最大值
+         * @type {number || null}
+         */
+        this.YMax = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Parents = 'Parents' in params ? params.Parents : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.XMin = 'XMin' in params ? params.XMin : null;
+        this.YMin = 'YMin' in params ? params.YMin : null;
+        this.XMax = 'XMax' in params ? params.XMax : null;
+        this.YMax = 'YMax' in params ? params.YMax : null;
 
     }
 }
@@ -2066,67 +2529,50 @@ class Coord extends  AbstractModel {
 }
 
 /**
- * 公众人物识别人脸信息
+ * DetectSecurity请求参数结构体
  * @class
  */
-class Face extends  AbstractModel {
+class DetectSecurityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 与图片中人脸最相似的公众人物的名字。
+         * 图片的 Url 。
+ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。
+• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过3840 x 2160 pixel。
+建议：
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
-        this.Name = null;
+        this.ImageUrl = null;
 
         /**
-         * 公众人物身份标签的数组，一个公众人物可能有多个身份标签。
-         * @type {Array.<Labels> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * 对人物的简介。
+         * 图片经过base64编码的内容。
+最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+注意：图片需要base64编码，并且要去掉编码头部。
+支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。
+支持的图片大小：所下载图片经Base64编码后不超过5M。
          * @type {string || null}
          */
-        this.BasicInfo = null;
+        this.ImageBase64 = null;
 
         /**
-         * 算法对于Name的置信度（图像中人脸与公众人物的相似度），0-100之间，值越高，表示对于Name越确定。
-         * @type {number || null}
+         * 人体检测模型开关，“true”为开启，“false”为关闭
+开启后可先对图片中的人体进行检测之后再进行属性识别，默认为开启
+         * @type {boolean || null}
          */
-        this.Confidence = null;
+        this.EnableDetect = null;
 
         /**
-         * 人脸区域左上角横坐标。
-         * @type {number || null}
+         * 人体优选开关，“true”为开启，“false”为关闭
+开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。
+默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭
+如开启人体优选，检测到的人体分辨率需不大于1920*1080 pixel
+         * @type {boolean || null}
          */
-        this.X = null;
-
-        /**
-         * 人脸区域左上角纵坐标。
-         * @type {number || null}
-         */
-        this.Y = null;
-
-        /**
-         * 人脸区域宽度。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 人脸区域高度。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 公众人物的唯一编号，可以用于区分同名人物、一个人物不同称呼等情况。唯一编号为8个字符构成的字符串。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ID = null;
+        this.EnablePreferred = null;
 
     }
 
@@ -2137,23 +2583,92 @@ class Face extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.EnableDetect = 'EnableDetect' in params ? params.EnableDetect : null;
+        this.EnablePreferred = 'EnablePreferred' in params ? params.EnablePreferred : null;
 
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Labels();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
+    }
+}
+
+/**
+ * DetectEnvelope请求参数结构体
+ * @class
+ */
+class DetectEnvelopeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的URL地址。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+图片大小的限制为4M，图片像素的限制为4k。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。 
+图片大小的限制为4M，图片像素的限制为4k。
+**注意：图片需要base64编码，并且要去掉编码头部。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * DetectPet返回参数结构体
+ * @class
+ */
+class DetectPetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出图片中的宠物信息列表。
+         * @type {Array.<Pet> || null}
+         */
+        this.Pets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Pets) {
+            this.Pets = new Array();
+            for (let z in params.Pets) {
+                let obj = new Pet();
+                obj.deserialize(params.Pets[z]);
+                this.Pets.push(obj);
             }
         }
-        this.BasicInfo = 'BasicInfo' in params ? params.BasicInfo : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ID = 'ID' in params ? params.ID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2303,7 +2818,7 @@ class CreateImageResponse extends  AbstractModel {
         /**
          * 输入图的主体信息。
 若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
-注意：此字段可能返回 null，表示取不到有效值。服务类型为商品图像搜索时生效。
+**<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ObjectInfo || null}
          */
@@ -2456,7 +2971,10 @@ class CarPlateContent extends  AbstractModel {
         this.Color = null;
 
         /**
-         * 车牌类型；渣土车车牌遮挡时,该值为枚举值“异常”。
+         * 车牌类型，包含：0普通蓝牌，1双层黄牌，2单层黄牌，3新能源车牌，4使馆车牌，5领馆车牌，6澳门车牌，7香港车牌，8警用车牌，9教练车牌，10武警车牌，11军用车牌   -2遮挡污损模糊车牌/异常   其他无牌
+注意：
+此字段可能返回 null，表示取不到有效值。
+此字段结果遮挡污损模糊车牌/异常：包含PlateStatus参数的“遮挡污损模糊车牌”，针对车牌异常，建议参考此字段，更全面
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2468,6 +2986,27 @@ class CarPlateContent extends  AbstractModel {
          * @type {Array.<Coord> || null}
          */
         this.PlateLocation = null;
+
+        /**
+         * 判断车牌是否遮挡：“遮挡污损模糊车牌”和"正常车牌"。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PlateStatus = null;
+
+        /**
+         * 车牌遮挡的置信度，0-100。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PlateStatusConfidence = null;
+
+        /**
+         * 车牌角度。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PlateAngle = null;
 
     }
 
@@ -2490,6 +3029,56 @@ class CarPlateContent extends  AbstractModel {
                 this.PlateLocation.push(obj);
             }
         }
+        this.PlateStatus = 'PlateStatus' in params ? params.PlateStatus : null;
+        this.PlateStatusConfidence = 'PlateStatusConfidence' in params ? params.PlateStatusConfidence : null;
+        this.PlateAngle = 'PlateAngle' in params ? params.PlateAngle : null;
+
+    }
+}
+
+/**
+ * DetectLabelPro请求参数结构体
+ * @class
+ */
+class DetectLabelProRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 URL 地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG、BMP。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边:短边<5； 
+• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片 Base64 编码数据。
+与ImageUrl同时存在时优先使用ImageUrl字段。
+图片限制：
+• 图片格式：PNG、JPG、JPEG、BMP。 
+• 图片大小：经Base64编码后不超过4M。
+**<font color=#1E90FF>注意：图片需要Base64编码，并且要去掉编码头部。</font>**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -2620,6 +3209,136 @@ class DetectLabelBetaResponse extends  AbstractModel {
 }
 
 /**
+ * DetectEnvelope返回参数结构体
+ * @class
+ */
+class DetectEnvelopeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一级标签结果数组。识别是否文件封。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageTag> || null}
+         */
+        this.FirstTags = null;
+
+        /**
+         * 二级标签结果数组。识别文件封正反面。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageTag> || null}
+         */
+        this.SecondTags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FirstTags) {
+            this.FirstTags = new Array();
+            for (let z in params.FirstTags) {
+                let obj = new ImageTag();
+                obj.deserialize(params.FirstTags[z]);
+                this.FirstTags.push(obj);
+            }
+        }
+
+        if (params.SecondTags) {
+            this.SecondTags = new Array();
+            for (let z in params.SecondTags) {
+                let obj = new ImageTag();
+                obj.deserialize(params.SecondTags[z]);
+                this.SecondTags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图片标签。
+ * @class
+ */
+class ImageTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签内容。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 置信度范围在0-100之间。值越高，表示目标为相应结果的可能性越高。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * 属性
+ * @class
+ */
+class Attribute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 属性
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 属性详情
+         * @type {string || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Details = 'Details' in params ? params.Details : null;
+
+    }
+}
+
+/**
  * 图片信息
  * @class
  */
@@ -2676,24 +3395,33 @@ class ImageInfo extends  AbstractModel {
 }
 
 /**
- * 属性
+ * RecognizeCarPro请求参数结构体
  * @class
  */
-class Attribute extends  AbstractModel {
+class RecognizeCarProRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 属性
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
-        this.Type = null;
+        this.ImageUrl = null;
 
         /**
-         * 属性详情
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
          * @type {string || null}
          */
-        this.Details = null;
+        this.ImageBase64 = null;
 
     }
 
@@ -2704,174 +3432,8 @@ class Attribute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Details = 'Details' in params ? params.Details : null;
-
-    }
-}
-
-/**
- * 名人识别的标签
- * @class
- */
-class Labels extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 公众人物身份标签的一级分类，例如体育明星、娱乐明星等；
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FirstLabel = null;
-
-        /**
-         * 公众人物身份标签的二级分类，例如歌手（对应一级标签为“娱乐明星”）；
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecondLabel = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FirstLabel = 'FirstLabel' in params ? params.FirstLabel : null;
-        this.SecondLabel = 'SecondLabel' in params ? params.SecondLabel : null;
-
-    }
-}
-
-/**
- * DetectCelebrity返回参数结构体
- * @class
- */
-class DetectCelebrityResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 公众人物识别结果数组。如果检测不到人脸，返回为空；最多可以返回10个人脸识别结果。
-         * @type {Array.<Face> || null}
-         */
-        this.Faces = null;
-
-        /**
-         * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。 
-FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。 
-因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
- 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Threshold || null}
-         */
-        this.Threshold = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Faces) {
-            this.Faces = new Array();
-            for (let z in params.Faces) {
-                let obj = new Face();
-                obj.deserialize(params.Faces[z]);
-                this.Faces.push(obj);
-            }
-        }
-
-        if (params.Threshold) {
-            let obj = new Threshold();
-            obj.deserialize(params.Threshold)
-            this.Threshold = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 检测到的单个商品结构体
- * @class
- */
-class Product extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
-         * @type {string || null}
-         */
-        this.Parents = null;
-
-        /**
-         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 商品坐标X轴的最小值
-         * @type {number || null}
-         */
-        this.XMin = null;
-
-        /**
-         * 商品坐标Y轴的最小值
-         * @type {number || null}
-         */
-        this.YMin = null;
-
-        /**
-         * 商品坐标X轴的最大值
-         * @type {number || null}
-         */
-        this.XMax = null;
-
-        /**
-         * 商品坐标Y轴的最大值
-         * @type {number || null}
-         */
-        this.YMax = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Parents = 'Parents' in params ? params.Parents : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.XMin = 'XMin' in params ? params.XMin : null;
-        this.YMin = 'YMin' in params ? params.YMin : null;
-        this.XMax = 'XMax' in params ? params.XMax : null;
-        this.YMax = 'YMax' in params ? params.YMax : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -2953,7 +3515,7 @@ class CarTagItem extends  AbstractModel {
         this.Color = null;
 
         /**
-         * 置信度，0-100
+         * 车系置信度，0-100
          * @type {number || null}
          */
         this.Confidence = null;
@@ -2971,11 +3533,46 @@ class CarTagItem extends  AbstractModel {
         this.CarLocation = null;
 
         /**
-         * 车牌信息
+         * 车牌信息，仅车辆识别（增强版）支持
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {CarPlateContent || null}
          */
         this.PlateContent = null;
+
+        /**
+         * 车牌信息置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PlateConfidence = null;
+
+        /**
+         * 车辆类型置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TypeConfidence = null;
+
+        /**
+         * 车辆颜色置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ColorConfidence = null;
+
+        /**
+         * 车辆朝向，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Orientation = null;
+
+        /**
+         * 车辆朝向置信度，0-100，仅车辆识别（增强版）支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OrientationConfidence = null;
 
     }
 
@@ -3007,51 +3604,11 @@ class CarTagItem extends  AbstractModel {
             obj.deserialize(params.PlateContent)
             this.PlateContent = obj;
         }
-
-    }
-}
-
-/**
- * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
-{FalseRate1Percent, FalseRate5Permil, FalseRate1Permil}分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
-因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
-例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
- * @class
- */
-class Threshold extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 误识率在百分之一时的推荐阈值。
-         * @type {number || null}
-         */
-        this.FalseRate1Percent = null;
-
-        /**
-         * 误识率在千分之五时的推荐阈值。
-         * @type {number || null}
-         */
-        this.FalseRate5Permil = null;
-
-        /**
-         * 误识率在千分之一时的推荐阈值。
-         * @type {number || null}
-         */
-        this.FalseRate1Permil = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FalseRate1Percent = 'FalseRate1Percent' in params ? params.FalseRate1Percent : null;
-        this.FalseRate5Permil = 'FalseRate5Permil' in params ? params.FalseRate5Permil : null;
-        this.FalseRate1Permil = 'FalseRate1Permil' in params ? params.FalseRate1Permil : null;
+        this.PlateConfidence = 'PlateConfidence' in params ? params.PlateConfidence : null;
+        this.TypeConfidence = 'TypeConfidence' in params ? params.TypeConfidence : null;
+        this.ColorConfidence = 'ColorConfidence' in params ? params.ColorConfidence : null;
+        this.Orientation = 'Orientation' in params ? params.Orientation : null;
+        this.OrientationConfidence = 'OrientationConfidence' in params ? params.OrientationConfidence : null;
 
     }
 }
@@ -3202,6 +3759,34 @@ class DetectMisbehaviorRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateImage返回参数结构体
+ * @class
+ */
+class UpdateImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateGroup返回参数结构体
  * @class
  */
@@ -3231,41 +3816,51 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     DetectProductBetaResponse: DetectProductBetaResponse,
-    DetectDisgustRequest: DetectDisgustRequest,
+    DetectChefDressResponse: DetectChefDressResponse,
     SearchImageResponse: SearchImageResponse,
-    RecognizeCarProRequest: RecognizeCarProRequest,
+    DetectDisgustRequest: DetectDisgustRequest,
+    Pet: Pet,
+    DetectPetRequest: DetectPetRequest,
     RecognizeCarProResponse: RecognizeCarProResponse,
     CreateImageRequest: CreateImageRequest,
-    DetectLabelBetaRequest: DetectLabelBetaRequest,
+    BodyAttributes: BodyAttributes,
     DeleteImagesResponse: DeleteImagesResponse,
     CropImageRequest: CropImageRequest,
     DetectProductRequest: DetectProductRequest,
-    ObjectInfo: ObjectInfo,
+    DetectLabelBetaRequest: DetectLabelBetaRequest,
+    DetectLabelResponse: DetectLabelResponse,
     RegionDetected: RegionDetected,
     DescribeGroupsRequest: DescribeGroupsRequest,
     DetectMisbehaviorResponse: DetectMisbehaviorResponse,
     AssessQualityResponse: AssessQualityResponse,
     DetectDisgustResponse: DetectDisgustResponse,
+    DetectChefDressRequest: DetectChefDressRequest,
     SearchImageRequest: SearchImageRequest,
-    RecognizeCarResponse: RecognizeCarResponse,
+    AttributesForBody: AttributesForBody,
     DetectLabelRequest: DetectLabelRequest,
-    DetectLabelResponse: DetectLabelResponse,
+    RecognizeCarResponse: RecognizeCarResponse,
+    DetectLabelProResponse: DetectLabelProResponse,
     EnhanceImageResponse: EnhanceImageResponse,
     ProductInfo: ProductInfo,
     AssessQualityRequest: AssessQualityRequest,
     DeleteImagesRequest: DeleteImagesRequest,
     CreateGroupRequest: CreateGroupRequest,
+    UpdateImageRequest: UpdateImageRequest,
     DescribeImagesRequest: DescribeImagesRequest,
     Rect: Rect,
     DetectProductBetaRequest: DetectProductBetaRequest,
     Box: Box,
+    DetectSecurityResponse: DetectSecurityResponse,
     RecognizeCarRequest: RecognizeCarRequest,
     EnhanceImageRequest: EnhanceImageRequest,
     GroupInfo: GroupInfo,
     CropImageResponse: CropImageResponse,
-    DetectCelebrityRequest: DetectCelebrityRequest,
+    ObjectInfo: ObjectInfo,
+    Product: Product,
     Coord: Coord,
-    Face: Face,
+    DetectSecurityRequest: DetectSecurityRequest,
+    DetectEnvelopeRequest: DetectEnvelopeRequest,
+    DetectPetResponse: DetectPetResponse,
     DetectProductResponse: DetectProductResponse,
     ColorInfo: ColorInfo,
     ImageRect: ImageRect,
@@ -3273,18 +3868,19 @@ module.exports = {
     DetectLabelItem: DetectLabelItem,
     Location: Location,
     CarPlateContent: CarPlateContent,
+    DetectLabelProRequest: DetectLabelProRequest,
     DetectLabelBetaResponse: DetectLabelBetaResponse,
-    ImageInfo: ImageInfo,
+    DetectEnvelopeResponse: DetectEnvelopeResponse,
+    ImageTag: ImageTag,
     Attribute: Attribute,
-    Labels: Labels,
-    DetectCelebrityResponse: DetectCelebrityResponse,
-    Product: Product,
+    ImageInfo: ImageInfo,
+    RecognizeCarProRequest: RecognizeCarProRequest,
     DescribeGroupsResponse: DescribeGroupsResponse,
     CarTagItem: CarTagItem,
-    Threshold: Threshold,
     LemmaInfo: LemmaInfo,
     DescribeImagesResponse: DescribeImagesResponse,
     DetectMisbehaviorRequest: DetectMisbehaviorRequest,
+    UpdateImageResponse: UpdateImageResponse,
     CreateGroupResponse: CreateGroupResponse,
 
 }

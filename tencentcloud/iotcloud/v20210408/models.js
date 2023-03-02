@@ -151,6 +151,34 @@ class DescribeProductCAResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteDeviceShadow返回参数结构体
+ * @class
+ */
+class DeleteDeviceShadowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateProductPrivateCA请求参数结构体
  * @class
  */
@@ -763,6 +791,41 @@ class DescribeDevicesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteDeviceShadow请求参数结构体
+ * @class
+ */
+class DeleteDeviceShadowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }
@@ -7997,6 +8060,7 @@ module.exports = {
     PublishMessageRequest: PublishMessageRequest,
     UpdateDevicesEnableStateResponse: UpdateDevicesEnableStateResponse,
     DescribeProductCAResponse: DescribeProductCAResponse,
+    DeleteDeviceShadowResponse: DeleteDeviceShadowResponse,
     UpdateProductPrivateCARequest: UpdateProductPrivateCARequest,
     UnbindDevicesRequest: UnbindDevicesRequest,
     DescribeDeviceResourcesRequest: DescribeDeviceResourcesRequest,
@@ -8009,6 +8073,7 @@ module.exports = {
     PayloadLogItem: PayloadLogItem,
     BindProductInfo: BindProductInfo,
     DescribeDevicesResponse: DescribeDevicesResponse,
+    DeleteDeviceShadowRequest: DeleteDeviceShadowRequest,
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
     DescribeProductCARequest: DescribeProductCARequest,
     DeviceLabel: DeviceLabel,

@@ -192,11 +192,21 @@ class IaiClient extends AbstractClient {
 >     
 - 图片的宽高比请接近3：4，不符合宽高比的图片返回的分值不具备参考意义。本接口适用于类手机自拍场景，非类手机自拍照返回的分值不具备参考意义。
 
->
+>     
 - 使用过程中建议正对摄像头，不要距离太远，使面部可以完整地显示在识别的框内，识别过程中不要移动设备或遮挡面部。不要选择光线过强或过弱的环境进行面部识别，识别时不要添加任何滤镜。
 
 >     
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+
+## 调用次数计费（资源包）
+|资源包规格|100万次|1000万次|5000万次|1亿次|
+|-|-|-|-|-|
+|人脸静态活体检测|1800元|17400元|75000元|110000元|
+
+## 调用次数计费（后付费）
+|月接口调用总量|0<调用量≤300万|300万<调用量≤1500万|调用量>1500万|
+|-|-|-|-|
+|人脸静态活体检测|0.0019元/次|0.0017元/次|0.0013元/次|
      * @param {DetectLiveFaceRequest} req
      * @param {function(string, DetectLiveFaceResponse):void} cb
      * @public
@@ -367,7 +377,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
+     * 接口已经不使用了，需要下线掉，以免留在官网产生歧义
+
+升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
 单个人员库有且仅支持一次回滚操作。
 注：此处QPS限制为10。
      * @param {UpgradeGroupFaceModelVersionRequest} req
@@ -380,7 +392,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+     * 此接口文档早已废弃，为了避免官网18版本存留歧义，需要下线
+
+本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
 
 回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
      * @param {RevertGroupFaceModelVersionRequest} req
@@ -407,7 +421,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 获取人员库升级任务列表
+     * 避免官网歧义
+
+获取人员库升级任务列表
 
      * @param {GetUpgradeGroupFaceModelVersionJobListRequest} req
      * @param {function(string, GetUpgradeGroupFaceModelVersionJobListResponse):void} cb
@@ -520,7 +536,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 人员库升级结果查询
+     * 避免官网歧义
+
+人员库升级结果查询
 
      * @param {GetUpgradeGroupFaceModelVersionResultRequest} req
      * @param {function(string, GetUpgradeGroupFaceModelVersionResultResponse):void} cb

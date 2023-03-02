@@ -434,6 +434,34 @@ class ModifyMusicOnShelvesRequest extends  AbstractModel {
 }
 
 /**
+ * 设置真实音量。
+ * @class
+ */
+class SetRealVolumeCommandInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 真实音量大小，取值范围为 0~100，默认值为 50。
+         * @type {number || null}
+         */
+        this.RealVolume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealVolume = 'RealVolume' in params ? params.RealVolume : null;
+
+    }
+}
+
+/**
  * 播放指令输入参数
  * @class
  */
@@ -1756,7 +1784,8 @@ class SyncRobotCommand extends  AbstractModel {
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
 <li>SetDestroyMode：设置销毁模式</li>
-<li>SetVolume：设置音量</li>
+<li><del>SetVolume：设置音量</del>（已废弃，请采用 SetRealVolume）</li>
+<li>SetRealVolume：设置真实音量</li>
          * @type {string || null}
          */
         this.Command = null;
@@ -1804,10 +1833,17 @@ class SyncRobotCommand extends  AbstractModel {
         this.SetDestroyModeCommandInput = null;
 
         /**
-         * 音量，当Command取SetVolume时，必填。
+         * <del>音量，当Command取SetVolume时，必填。</del>
+（已废弃，请采用 SetRealVolumeCommandInput）
          * @type {SetVolumeCommandInput || null}
          */
         this.SetVolumeCommandInput = null;
+
+        /**
+         * 真实音量，当Command取SetRealVolume时，必填。
+         * @type {SetRealVolumeCommandInput || null}
+         */
+        this.SetRealVolumeCommandInput = null;
 
     }
 
@@ -1866,6 +1902,12 @@ class SyncRobotCommand extends  AbstractModel {
             let obj = new SetVolumeCommandInput();
             obj.deserialize(params.SetVolumeCommandInput)
             this.SetVolumeCommandInput = obj;
+        }
+
+        if (params.SetRealVolumeCommandInput) {
+            let obj = new SetRealVolumeCommandInput();
+            obj.deserialize(params.SetRealVolumeCommandInput)
+            this.SetRealVolumeCommandInput = obj;
         }
 
     }
@@ -3023,6 +3065,21 @@ class TRTCJoinRoomInput extends  AbstractModel {
          */
         this.UserId = null;
 
+        /**
+         * 进房钥匙，若需要权限控制请携带该参数。
+ [privateMapKey 权限设置](/document/product/647/32240) 
+         * @type {string || null}
+         */
+        this.PrivateMapKey = null;
+
+        /**
+         * 用户角色，目前支持两种角色：
+<li>anchor：主播</li>
+<li>audience：观众</li>
+         * @type {string || null}
+         */
+        this.Role = null;
+
     }
 
     /**
@@ -3036,6 +3093,8 @@ class TRTCJoinRoomInput extends  AbstractModel {
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PrivateMapKey = 'PrivateMapKey' in params ? params.PrivateMapKey : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }
@@ -3489,10 +3548,17 @@ class SetPlaylistCommandInput extends  AbstractModel {
         this.ChangedIndex = null;
 
         /**
-         * 歌曲 ID 列表，当 Type 取 Add 时，必填。
+         * 歌曲 ID 列表，当 Type 取 Add 时，与MusicURLs必填其中一项。
          * @type {Array.<string> || null}
          */
         this.MusicIds = null;
+
+        /**
+         * 歌曲 URL 列表，当 Type 取 Add 时，与MusicIds必填其中一项。
+注：URL必须以.mp3结尾且必须是mp3编码文件。
+         * @type {Array.<string> || null}
+         */
+        this.MusicURLs = null;
 
     }
 
@@ -3507,6 +3573,7 @@ class SetPlaylistCommandInput extends  AbstractModel {
         this.Index = 'Index' in params ? params.Index : null;
         this.ChangedIndex = 'ChangedIndex' in params ? params.ChangedIndex : null;
         this.MusicIds = 'MusicIds' in params ? params.MusicIds : null;
+        this.MusicURLs = 'MusicURLs' in params ? params.MusicURLs : null;
 
     }
 }
@@ -4172,7 +4239,8 @@ class SyncKTVRobotCommandRequest extends  AbstractModel {
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
 <li>SetDestroyMode：设置销毁模式</li>
-<li>SetVolume：设置音量</li>
+<li><del>SetVolume：设置音量</del>（已废弃，请采用 SetRealVolume）</li>
+<li>SetRealVolume：设置真实音量</li>
          * @type {string || null}
          */
         this.Command = null;
@@ -4220,10 +4288,17 @@ class SyncKTVRobotCommandRequest extends  AbstractModel {
         this.SetDestroyModeCommandInput = null;
 
         /**
-         * 音量，当Command取SetVolume时，必填。
+         * <del>音量，当Command取SetVolume时，必填。</del>
+（已废弃，请采用 SetRealVolumeCommandInput ）
          * @type {SetVolumeCommandInput || null}
          */
         this.SetVolumeCommandInput = null;
+
+        /**
+         * 真实音量，当Command取SetRealVolume时，必填。
+         * @type {SetRealVolumeCommandInput || null}
+         */
+        this.SetRealVolumeCommandInput = null;
 
     }
 
@@ -4283,6 +4358,12 @@ class SyncKTVRobotCommandRequest extends  AbstractModel {
             let obj = new SetVolumeCommandInput();
             obj.deserialize(params.SetVolumeCommandInput)
             this.SetVolumeCommandInput = obj;
+        }
+
+        if (params.SetRealVolumeCommandInput) {
+            let obj = new SetRealVolumeCommandInput();
+            obj.deserialize(params.SetRealVolumeCommandInput)
+            this.SetRealVolumeCommandInput = obj;
         }
 
     }
@@ -4797,10 +4878,16 @@ class KTVRobotInfo extends  AbstractModel {
         this.SetPlayModeInput = null;
 
         /**
-         * 音量，范围 0~100，默认为 50。
+         * <del>音量，范围 0~100，默认为 50。</del>（已废弃，请采用 SetRealVolumeInput ）
          * @type {SetVolumeCommandInput || null}
          */
         this.SetVolumeInput = null;
+
+        /**
+         * 真实音量，范围 0~100，默认为 50。
+         * @type {SetRealVolumeCommandInput || null}
+         */
+        this.SetRealVolumeInput = null;
 
     }
 
@@ -4840,6 +4927,12 @@ class KTVRobotInfo extends  AbstractModel {
             let obj = new SetVolumeCommandInput();
             obj.deserialize(params.SetVolumeInput)
             this.SetVolumeInput = obj;
+        }
+
+        if (params.SetRealVolumeInput) {
+            let obj = new SetRealVolumeCommandInput();
+            obj.deserialize(params.SetRealVolumeInput)
+            this.SetRealVolumeInput = obj;
         }
 
     }
@@ -5305,6 +5398,7 @@ module.exports = {
     DescribeKTVSingerCategoriesRequest: DescribeKTVSingerCategoriesRequest,
     KTVSingerBaseInfo: KTVSingerBaseInfo,
     ModifyMusicOnShelvesRequest: ModifyMusicOnShelvesRequest,
+    SetRealVolumeCommandInput: SetRealVolumeCommandInput,
     PlayCommandInput: PlayCommandInput,
     DescribeMusicRequest: DescribeMusicRequest,
     KTVMusicDetailInfo: KTVMusicDetailInfo,

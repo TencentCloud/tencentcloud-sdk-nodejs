@@ -104,7 +104,7 @@ class Candidate extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 人脸ID
+         * 人脸ID，仅在SearchFaces/SearchFacesReturnsByGroup接口返回时有效。人员搜索类接口采用融合特征方式检索，该字段无意义
          * @type {string || null}
          */
         this.FaceId = null;
@@ -3153,7 +3153,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
 
         /**
          * 被检测到的人脸，对应最多返回的最相似人员数目。默认值为5，最大值为10。  
-例，设MaxFaceNum为3，MaxPersonNum为5，则最多可能返回3*5=15个人员。
+例，设MaxFaceNum为3，MaxPersonNumPerGroup为5，GroupIds长度为3，则最多可能返回3*5*3=45个人员。
          * @type {number || null}
          */
         this.MaxPersonNumPerGroup = null;
@@ -3808,7 +3808,7 @@ class VerifyFaceResponse extends  AbstractModel {
         this.Score = null;
 
         /**
-         * 是否为同一人的判断。
+         * 是否为同一人判断，固定阈值分数为60分，若想更灵活地调整阈值可取Score参数返回进行判断
          * @type {boolean || null}
          */
         this.IsMatch = null;
@@ -4739,7 +4739,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          * 是否返回年龄、性别、情绪等属性。 
 合法值为（大小写不敏感）：None、Age、Beauty、Emotion、Eye、Eyebrow、 
 Gender、Hair、Hat、Headpose、Mask、Mouth、Moustache、Nose、Shape、Skin、Smile。 
-None为不需要返回。默认为 None。 
+None为不需要返回。默认为 None。即FaceAttributesType属性为空时，各属性返回值为0。
 需要将属性组成一个用逗号分隔的字符串，属性之间的顺序没有要求。 
 关于各属性的详细描述，参见下文出参。 
 最多返回面积最大的 5 张人脸属性信息，超过 5 张人脸（第 6 张及以后的人脸）的 AttributesInfo 不具备参考意义。

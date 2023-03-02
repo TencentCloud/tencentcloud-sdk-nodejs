@@ -135,6 +135,12 @@ class EnableKeyRotationRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。
+         * @type {number || null}
+         */
+        this.RotateDays = null;
+
     }
 
     /**
@@ -145,6 +151,7 @@ class EnableKeyRotationRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RotateDays = 'RotateDays' in params ? params.RotateDays : null;
 
     }
 }
@@ -158,13 +165,13 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
         super();
 
         /**
-         * 白盒密钥信息列表
+         * 白盒密钥信息列表。
          * @type {Array.<WhiteboxKeyInfo> || null}
          */
         this.KeyInfos = null;
 
         /**
-         * key总数量
+         * 白盒密钥总数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2642,7 +2649,7 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.UserLevel = null;
 
         /**
-         * 旗舰版到期时间
+         * 旗舰版到期时间（Epoch Unix Timestamp）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */

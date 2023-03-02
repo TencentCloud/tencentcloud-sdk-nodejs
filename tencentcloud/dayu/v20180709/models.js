@@ -2788,6 +2788,12 @@ class IpBlockData extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * 高防标记，0：非高防，1：高防
+         * @type {number || null}
+         */
+        this.ProtectFlag = null;
+
     }
 
     /**
@@ -2802,6 +2808,7 @@ class IpBlockData extends  AbstractModel {
         this.BlockTime = 'BlockTime' in params ? params.BlockTime : null;
         this.UnBlockTime = 'UnBlockTime' in params ? params.UnBlockTime : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ProtectFlag = 'ProtectFlag' in params ? params.ProtectFlag : null;
 
     }
 }

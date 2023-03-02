@@ -31,7 +31,7 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.AreaId = null;
 
         /**
-         * 计费类型, (1=体验，2=预付费，3=后付费)
+         * 计费类型, (1=后付费)
          * @type {number || null}
          */
         this.ChargeType = null;
@@ -78,6 +78,18 @@ class CreateTawInstanceRequest extends  AbstractModel {
          */
         this.BuyingChannel = null;
 
+        /**
+         * 预付费资源包类型(仅预付费需要)
+         * @type {number || null}
+         */
+        this.ResourcePackageType = null;
+
+        /**
+         * 预付费资源包数量(仅预付费需要)
+         * @type {number || null}
+         */
+        this.ResourcePackageNum = null;
+
     }
 
     /**
@@ -104,6 +116,8 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.CountNum = 'CountNum' in params ? params.CountNum : null;
         this.PeriodRetain = 'PeriodRetain' in params ? params.PeriodRetain : null;
         this.BuyingChannel = 'BuyingChannel' in params ? params.BuyingChannel : null;
+        this.ResourcePackageType = 'ResourcePackageType' in params ? params.ResourcePackageType : null;
+        this.ResourcePackageNum = 'ResourcePackageNum' in params ? params.ResourcePackageNum : null;
 
     }
 }
@@ -254,6 +268,18 @@ class DescribeDataFetchProjectRequest extends  AbstractModel {
          */
         this.Env = null;
 
+        /**
+         * httpcode响应码
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * retcode
+         * @type {string || null}
+         */
+        this.Ret = null;
+
     }
 
     /**
@@ -286,6 +312,8 @@ class DescribeDataFetchProjectRequest extends  AbstractModel {
         this.CostType = 'CostType' in params ? params.CostType : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Env = 'Env' in params ? params.Env : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ret = 'Ret' in params ? params.Ret : null;
 
     }
 }
@@ -340,6 +368,13 @@ class CreateTawInstanceResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
+         * 预付费订单 id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -355,6 +390,7 @@ class CreateTawInstanceResponse extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -470,13 +506,13 @@ class DescribeTawInstancesRequest extends  AbstractModel {
         this.AreaIds = null;
 
         /**
-         * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁)
+         * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
          * @type {Array.<number> || null}
          */
         this.InstanceStatuses = null;
 
         /**
-         * 实例Id
+         * 实例Id, 该参数已废弃，请在Filters内注明
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -559,6 +595,69 @@ class DeleteOfflineLogConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ResumeProject返回参数结构体
+ * @class
+ */
+class ResumeProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogList返回参数结构体
+ * @class
+ */
+class DescribeRumLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回字符串
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataPvUrlInfo返回参数结构体
  * @class
  */
@@ -588,6 +687,34 @@ class DescribeDataPvUrlInfoResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopProject返回参数结构体
+ * @class
+ */
+class StopProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -742,31 +869,31 @@ class DescribeLogListRequest extends  AbstractModel {
         super();
 
         /**
-         * 排序方式  desc  asc
+         * 排序方式  desc  asc（必填）
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * searchlog  histogram
+         * searchlog  histogram（必填）
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * 项目ID
+         * 项目ID（必填）
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * 开始时间
+         * 开始时间（必填）
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 单次查询返回的原始日志条数，最大值为100
+         * 单次查询返回的原始日志条数，最大值为100（必填）
          * @type {number || null}
          */
         this.Limit = null;
@@ -778,13 +905,13 @@ class DescribeLogListRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * 查询语句，参考控制台请求参数，语句长度最大为4096
+         * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）例："id:120001 AND type:\"log\""
          * @type {string || null}
          */
         this.Query = null;
 
         /**
-         * 结束时间
+         * 结束时间（必填）
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2168,6 +2295,34 @@ class DescribeDataRequest extends  AbstractModel {
 }
 
 /**
+ * StopProject请求参数结构体
+ * @class
+ */
+class StopProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目 id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * CreateOfflineLogConfig返回参数结构体
  * @class
  */
@@ -2426,6 +2581,12 @@ class DescribeDataPerformancePageRequest extends  AbstractModel {
          */
         this.Env = null;
 
+        /**
+         * 网络状态
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
     }
 
     /**
@@ -2457,6 +2618,7 @@ class DescribeDataPerformancePageRequest extends  AbstractModel {
         this.From = 'From' in params ? params.From : null;
         this.CostType = 'CostType' in params ? params.CostType : null;
         this.Env = 'Env' in params ? params.Env : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
 
     }
 }
@@ -2663,6 +2825,24 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
          */
         this.Env = null;
 
+        /**
+         * httpcode响应码
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * retcode
+         * @type {string || null}
+         */
+        this.Ret = null;
+
+        /**
+         * 网络状态
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
     }
 
     /**
@@ -2695,6 +2875,72 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
         this.CostType = 'CostType' in params ? params.CostType : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Env = 'Env' in params ? params.Env : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ret = 'Ret' in params ? params.Ret : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogExport请求参数结构体
+ * @class
+ */
+class DescribeRumLogExportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出标识name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 开始时间（必填）
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 结束时间（必填）
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 项目ID（必填）
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * field条件
+         * @type {Array.<string> || null}
+         */
+        this.Fields = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Fields = 'Fields' in params ? params.Fields : null;
 
     }
 }
@@ -3192,6 +3438,41 @@ class ModifyProjectLimitResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRumLogExports返回参数结构体
+ * @class
+ */
+class DescribeRumLogExportsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回字符串
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataStaticProject请求参数结构体
  * @class
  */
@@ -3374,6 +3655,90 @@ class DescribeDataStaticProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumStatsLogList请求参数结构体
+ * @class
+ */
+class DescribeRumStatsLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间（必填）
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 单次查询返回的原始日志条数，最大值为100（必填）
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 结束时间（必填）
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 项目ID（必填）
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * ResumeProject请求参数结构体
+ * @class
+ */
+class ResumeProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目 id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * 项目接口限制类型
  * @class
  */
@@ -3465,18 +3830,18 @@ class DeleteLogExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeWhitelists返回参数结构体
+ * DescribeRumGroupLog返回参数结构体
  * @class
  */
-class DescribeWhitelistsResponse extends  AbstractModel {
+class DescribeRumGroupLogResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 白名单列表
-         * @type {Array.<Whitelist> || null}
+         * 返回字符串
+         * @type {string || null}
          */
-        this.WhitelistSet = null;
+        this.Result = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3493,15 +3858,42 @@ class DescribeWhitelistsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.WhitelistSet) {
-            this.WhitelistSet = new Array();
-            for (let z in params.WhitelistSet) {
-                let obj = new Whitelist();
-                obj.deserialize(params.WhitelistSet[z]);
-                this.WhitelistSet.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeRumStatsLogList返回参数结构体
+ * @class
+ */
+class DescribeRumStatsLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回字符串
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3700,6 +4092,24 @@ class RumAreaInfo extends  AbstractModel {
          */
         this.AreaKey = null;
 
+        /**
+         * 地域码表 id
+         * @type {string || null}
+         */
+        this.AreaRegionID = null;
+
+        /**
+         * 地域码表 code 如 ap-xxx（xxx 为地域词）
+         * @type {string || null}
+         */
+        this.AreaRegionCode = null;
+
+        /**
+         * 地域缩写
+         * @type {string || null}
+         */
+        this.AreaAbbr = null;
+
     }
 
     /**
@@ -3713,6 +4123,9 @@ class RumAreaInfo extends  AbstractModel {
         this.AreaStatus = 'AreaStatus' in params ? params.AreaStatus : null;
         this.AreaName = 'AreaName' in params ? params.AreaName : null;
         this.AreaKey = 'AreaKey' in params ? params.AreaKey : null;
+        this.AreaRegionID = 'AreaRegionID' in params ? params.AreaRegionID : null;
+        this.AreaRegionCode = 'AreaRegionCode' in params ? params.AreaRegionCode : null;
+        this.AreaAbbr = 'AreaAbbr' in params ? params.AreaAbbr : null;
 
     }
 }
@@ -3857,6 +4270,12 @@ class DescribeDataSetUrlStatisticsRequest extends  AbstractModel {
          */
         this.Env = null;
 
+        /**
+         * 获取package
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -3888,6 +4307,7 @@ class DescribeDataSetUrlStatisticsRequest extends  AbstractModel {
         this.Browser = 'Browser' in params ? params.Browser : null;
         this.CostType = 'CostType' in params ? params.CostType : null;
         this.Env = 'Env' in params ? params.Env : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -5518,6 +5938,12 @@ class CreateWhitelistResponse extends  AbstractModel {
         this.Msg = null;
 
         /**
+         * 白名单ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5533,6 +5959,7 @@ class CreateWhitelistResponse extends  AbstractModel {
             return;
         }
         this.Msg = 'Msg' in params ? params.Msg : null;
+        this.ID = 'ID' in params ? params.ID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5624,6 +6051,13 @@ class ScoreInfo extends  AbstractModel {
          */
         this.PageDuration = null;
 
+        /**
+         * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -5646,6 +6080,7 @@ class ScoreInfo extends  AbstractModel {
         this.StaticNum = 'StaticNum' in params ? params.StaticNum : null;
         this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
         this.PageDuration = 'PageDuration' in params ? params.PageDuration : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5946,6 +6381,83 @@ class DescribeOfflineLogConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumGroupLog请求参数结构体
+ * @class
+ */
+class DescribeRumGroupLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序方式  desc  asc（必填）
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 开始时间（必填）
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 单次查询返回的原始日志条数，最大值为100（必填）
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页数，第几页
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 结束时间（必填）
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 项目ID（必填）
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 聚合字段
+         * @type {string || null}
+         */
+        this.GroupField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.GroupField = 'GroupField' in params ? params.GroupField : null;
+
+    }
+}
+
+/**
  * DeleteOfflineLogConfig请求参数结构体
  * @class
  */
@@ -5976,6 +6488,49 @@ class DeleteOfflineLogConfigRequest extends  AbstractModel {
         }
         this.ProjectKey = 'ProjectKey' in params ? params.ProjectKey : null;
         this.UniqueID = 'UniqueID' in params ? params.UniqueID : null;
+
+    }
+}
+
+/**
+ * DescribeWhitelists返回参数结构体
+ * @class
+ */
+class DescribeWhitelistsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白名单列表
+         * @type {Array.<Whitelist> || null}
+         */
+        this.WhitelistSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WhitelistSet) {
+            this.WhitelistSet = new Array();
+            for (let z in params.WhitelistSet) {
+                let obj = new Whitelist();
+                obj.deserialize(params.WhitelistSet[z]);
+                this.WhitelistSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6311,6 +6866,83 @@ class DescribeDataPerformanceProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumLogExport返回参数结构体
+ * @class
+ */
+class DescribeRumLogExportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回字符串
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogExports请求参数结构体
+ * @class
+ */
+class DescribeRumLogExportsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 页面大小
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 页数，第几页
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * 项目ID（必填）
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
  * ModifyProject请求参数结构体
  * @class
  */
@@ -6390,6 +7022,76 @@ class ModifyProjectRequest extends  AbstractModel {
         this.EnableURLGroup = 'EnableURLGroup' in params ? params.EnableURLGroup : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogList请求参数结构体
+ * @class
+ */
+class DescribeRumLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序方式  desc  asc（必填）
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 开始时间（必填）格式为时间戳 毫秒
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 单次查询返回的原始日志条数，最大值为100（必填）
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页数，第几页
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 结束时间（必填）格式为时间戳 毫秒
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 项目ID（必填）
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
 
     }
 }
@@ -7320,7 +8022,10 @@ module.exports = {
     DescribeProjectLimitsResponse: DescribeProjectLimitsResponse,
     DescribeTawInstancesRequest: DescribeTawInstancesRequest,
     DeleteOfflineLogConfigResponse: DeleteOfflineLogConfigResponse,
+    ResumeProjectResponse: ResumeProjectResponse,
+    DescribeRumLogListResponse: DescribeRumLogListResponse,
     DescribeDataPvUrlInfoResponse: DescribeDataPvUrlInfoResponse,
+    StopProjectResponse: StopProjectResponse,
     DescribeDataFetchUrlResponse: DescribeDataFetchUrlResponse,
     DescribeErrorRequest: DescribeErrorRequest,
     StopInstanceRequest: StopInstanceRequest,
@@ -7351,6 +8056,7 @@ module.exports = {
     DescribeUvListRequest: DescribeUvListRequest,
     DescribeTawAreasResponse: DescribeTawAreasResponse,
     DescribeDataRequest: DescribeDataRequest,
+    StopProjectRequest: StopProjectRequest,
     CreateOfflineLogConfigResponse: CreateOfflineLogConfigResponse,
     ModifyProjectLimitRequest: ModifyProjectLimitRequest,
     DeleteInstanceResponse: DeleteInstanceResponse,
@@ -7358,6 +8064,7 @@ module.exports = {
     DeleteReleaseFileRequest: DeleteReleaseFileRequest,
     ResumeInstanceRequest: ResumeInstanceRequest,
     DescribeDataFetchUrlRequest: DescribeDataFetchUrlRequest,
+    DescribeRumLogExportRequest: DescribeRumLogExportRequest,
     DescribeDataLogUrlStatisticsResponse: DescribeDataLogUrlStatisticsResponse,
     CreateProjectResponse: CreateProjectResponse,
     StopInstanceResponse: StopInstanceResponse,
@@ -7368,10 +8075,14 @@ module.exports = {
     DescribeDataPvUrlStatisticsRequest: DescribeDataPvUrlStatisticsRequest,
     ReleaseFile: ReleaseFile,
     ModifyProjectLimitResponse: ModifyProjectLimitResponse,
+    DescribeRumLogExportsResponse: DescribeRumLogExportsResponse,
     DescribeDataStaticProjectRequest: DescribeDataStaticProjectRequest,
+    DescribeRumStatsLogListRequest: DescribeRumStatsLogListRequest,
+    ResumeProjectRequest: ResumeProjectRequest,
     ProjectLimit: ProjectLimit,
     DeleteLogExportRequest: DeleteLogExportRequest,
-    DescribeWhitelistsResponse: DescribeWhitelistsResponse,
+    DescribeRumGroupLogResponse: DescribeRumGroupLogResponse,
+    DescribeRumStatsLogListResponse: DescribeRumStatsLogListResponse,
     CreateWhitelistRequest: CreateWhitelistRequest,
     DescribeDataPvUrlStatisticsResponse: DescribeDataPvUrlStatisticsResponse,
     DescribeDataLogUrlInfoRequest: DescribeDataLogUrlInfoRequest,
@@ -7414,13 +8125,18 @@ module.exports = {
     DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDataEventUrlRequest: DescribeDataEventUrlRequest,
     DescribeOfflineLogConfigsRequest: DescribeOfflineLogConfigsRequest,
+    DescribeRumGroupLogRequest: DescribeRumGroupLogRequest,
     DeleteOfflineLogConfigRequest: DeleteOfflineLogConfigRequest,
+    DescribeWhitelistsResponse: DescribeWhitelistsResponse,
     DescribeProjectsResponse: DescribeProjectsResponse,
     ModifyProjectResponse: ModifyProjectResponse,
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DescribeDataReportCountResponse: DescribeDataReportCountResponse,
     DescribeDataPerformanceProjectRequest: DescribeDataPerformanceProjectRequest,
+    DescribeRumLogExportResponse: DescribeRumLogExportResponse,
+    DescribeRumLogExportsRequest: DescribeRumLogExportsRequest,
     ModifyProjectRequest: ModifyProjectRequest,
+    DescribeRumLogListRequest: DescribeRumLogListRequest,
     DescribeDataStaticResourceRequest: DescribeDataStaticResourceRequest,
     DescribeTawInstancesResponse: DescribeTawInstancesResponse,
     DescribePvListRequest: DescribePvListRequest,

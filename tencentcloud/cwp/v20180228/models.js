@@ -569,16 +569,10 @@ class DescribeAssetProcessInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -605,10 +599,16 @@ class DescribeAssetProcessInfoListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
          */
-        this.Quuid = null;
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
 
         /**
          * 排序方式，asc升序 或 desc降序
@@ -617,7 +617,7 @@ class DescribeAssetProcessInfoListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 排序方式：StartTime
+         * 排序方式：[FirstTime|StartTime]
          * @type {string || null}
          */
         this.By = null;
@@ -631,8 +631,7 @@ class DescribeAssetProcessInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -642,7 +641,8 @@ class DescribeAssetProcessInfoListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
 
@@ -774,16 +774,10 @@ class DescribeAssetWebFrameListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -810,22 +804,28 @@ class DescribeAssetWebFrameListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 可选排序：JarCount
+         * 可选排序：[FirstTime|JarCount]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -836,8 +836,7 @@ class DescribeAssetWebFrameListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -847,9 +846,10 @@ class DescribeAssetWebFrameListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -1043,6 +1043,183 @@ class ExportVulListResponse extends  AbstractModel {
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 资产指纹中服务器列表的基本信息
+ * @class
+ */
+class AssetMachineBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器Quuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 服务器uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 服务器内网IP
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 服务器名称
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 操作系统名称
+         * @type {string || null}
+         */
+        this.OsInfo = null;
+
+        /**
+         * CPU信息
+         * @type {string || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存容量：单位G
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 内存使用率百分比
+         * @type {string || null}
+         */
+        this.MemLoad = null;
+
+        /**
+         * 硬盘容量：单位G
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 硬盘使用率百分比
+         * @type {string || null}
+         */
+        this.DiskLoad = null;
+
+        /**
+         * 分区数
+         * @type {number || null}
+         */
+        this.PartitionCount = null;
+
+        /**
+         * 主机外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * 业务组ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Cpu数量
+         * @type {number || null}
+         */
+        this.CpuSize = null;
+
+        /**
+         * Cpu使用率百分比
+         * @type {string || null}
+         */
+        this.CpuLoad = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MachineTag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemLoad = 'MemLoad' in params ? params.MemLoad : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskLoad = 'DiskLoad' in params ? params.DiskLoad : null;
+        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
+        this.CpuLoad = 'CpuLoad' in params ? params.CpuLoad : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new MachineTag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -1360,6 +1537,27 @@ class DescribeVulInfoCvssResponse extends  AbstractModel {
         this.Labels = null;
 
         /**
+         * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenseAttackCount = null;
+
+        /**
+         * 全网修复成功次数, 不支持自动修复的漏洞默认返回0
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessFixCount = null;
+
+        /**
+         * 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FixSwitch = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1388,6 +1586,9 @@ class DescribeVulInfoCvssResponse extends  AbstractModel {
         this.CveInfo = 'CveInfo' in params ? params.CveInfo : null;
         this.CvssScoreFloat = 'CvssScoreFloat' in params ? params.CvssScoreFloat : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
+        this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
+        this.SuccessFixCount = 'SuccessFixCount' in params ? params.SuccessFixCount : null;
+        this.FixSwitch = 'FixSwitch' in params ? params.FixSwitch : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1417,6 +1618,55 @@ class DescribeBaselineStrategyDetailRequest extends  AbstractModel {
             return;
         }
         this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+
+    }
+}
+
+/**
+ * ModifyLicenseBinds请求参数结构体
+ * @class
+ */
+class ModifyLicenseBindsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 授权类型
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+         * @type {boolean || null}
+         */
+        this.IsAll = null;
+
+        /**
+         * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数. 最大长度=2000
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.IsAll = 'IsAll' in params ? params.IsAll : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -1454,7 +1704,7 @@ class MalWareList extends  AbstractModel {
         this.VirusName = null;
 
         /**
-         * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除
+         * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理
          * @type {number || null}
          */
         this.Status = null;
@@ -1529,6 +1779,25 @@ class MalWareList extends  AbstractModel {
          */
         this.FileExists = null;
 
+        /**
+         * cvm quuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 木马样本md5
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -1554,6 +1823,14 @@ class MalWareList extends  AbstractModel {
         this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
         this.ProcessExists = 'ProcessExists' in params ? params.ProcessExists : null;
         this.FileExists = 'FileExists' in params ? params.FileExists : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -1636,6 +1913,69 @@ class Tag extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * DescribeServersAndRiskAndFirstInfo返回参数结构体
+ * @class
+ */
+class DescribeServersAndRiskAndFirstInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 风险文件数
+         * @type {number || null}
+         */
+        this.RiskFileCount = null;
+
+        /**
+         * 今日新增风险文件数
+         * @type {number || null}
+         */
+        this.AddRiskFileCount = null;
+
+        /**
+         * 受影响服务器台数
+         * @type {number || null}
+         */
+        this.ServersCount = null;
+
+        /**
+         * 是否试用：true-是，false-否
+         * @type {boolean || null}
+         */
+        this.IsFirstCheck = null;
+
+        /**
+         * 木马最近检测时间
+         * @type {string || null}
+         */
+        this.ScanTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RiskFileCount = 'RiskFileCount' in params ? params.RiskFileCount : null;
+        this.AddRiskFileCount = 'AddRiskFileCount' in params ? params.AddRiskFileCount : null;
+        this.ServersCount = 'ServersCount' in params ? params.ServersCount : null;
+        this.IsFirstCheck = 'IsFirstCheck' in params ? params.IsFirstCheck : null;
+        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1758,6 +2098,62 @@ class TrustMalwaresRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+
+    }
+}
+
+/**
+ * 授权订单对象内容
+ * @class
+ */
+class LicenseOrder extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权ID
+         * @type {number || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * 授权类型
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 授权订单资源状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单类型
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -1893,6 +2289,55 @@ class DescribeVulCountByDatesRequest extends  AbstractModel {
         this.LastDays = 'LastDays' in params ? params.LastDays : null;
         this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
         this.IfEmergency = 'IfEmergency' in params ? params.IfEmergency : null;
+
+    }
+}
+
+/**
+ * CreateLicenseOrder返回参数结构体
+ * @class
+ */
+class CreateLicenseOrderResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号列表
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * 资源ID列表,预付费订单该字段空值
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 大订单号 , 后付费该字段空值
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2041,6 +2486,13 @@ class DefendAttackLog extends  AbstractModel {
          */
         this.HttpContent = null;
 
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -2065,35 +2517,50 @@ class DefendAttackLog extends  AbstractModel {
         this.DstPort = 'DstPort' in params ? params.DstPort : null;
         this.HttpContent = 'HttpContent' in params ? params.HttpContent : null;
 
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+
     }
 }
 
 /**
- * DescribeAssetEnvList返回参数结构体
+ * 基线检测项TOP信息
  * @class
  */
-class DescribeAssetEnvListResponse extends  AbstractModel {
+class BaselineRuleTopInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 列表
+         * 基线检测项名
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<AssetEnvBaseInfo> || null}
-         */
-        this.Envs = null;
-
-        /**
-         * 总数量
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RuleName = null;
+
+        /**
+         * 检测项危害等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * 检测项id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -2104,17 +2571,10 @@ class DescribeAssetEnvListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Envs) {
-            this.Envs = new Array();
-            for (let z in params.Envs) {
-                let obj = new AssetEnvBaseInfo();
-                obj.deserialize(params.Envs[z]);
-                this.Envs.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -2828,6 +3288,18 @@ class ExportAssetCoreModuleListRequest extends  AbstractModel {
         super();
 
         /**
+         * 服务器Uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 服务器Quuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
          * 过滤条件。
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>User- string - 是否必填：否 - 用户</li>
@@ -2842,22 +3314,10 @@ class ExportAssetCoreModuleListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 排序依据:Size,ProcessCount,ModuleCount
+         * 排序依据[FirstTime|Size|ProcessCount|ModuleCount]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 服务器Uuid
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 服务器Quuid
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -2868,6 +3328,8 @@ class ExportAssetCoreModuleListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2879,8 +3341,6 @@ class ExportAssetCoreModuleListRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -2993,6 +3453,50 @@ class DescribeSearchExportListResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulLevelCount返回参数结构体
+ * @class
+ */
+class DescribeVulLevelCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 统计结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VulLevelInfo> || null}
+         */
+        this.VulLevelList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulLevelList) {
+            this.VulLevelList = new Array();
+            for (let z in params.VulLevelList) {
+                let obj = new VulLevelInfo();
+                obj.deserialize(params.VulLevelList[z]);
+                this.VulLevelList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3471,24 +3975,30 @@ class DescribeOverviewStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * 操作系统名称
+ * DeleteScanTask请求参数结构体
  * @class
  */
-class OsName extends  AbstractModel {
+class DeleteScanTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 系统名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 操作系统类型枚举值
+         * 任务Id
          * @type {number || null}
          */
-        this.MachineOSType = null;
+        this.TaskId = null;
+
+        /**
+         * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
+         * @type {string || null}
+         */
+        this.ModuleType = null;
+
+        /**
+         * 自选服务器时生效，主机quuid的string数组
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
 
     }
 
@@ -3499,8 +4009,9 @@ class OsName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.MachineOSType = 'MachineOSType' in params ? params.MachineOSType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ModuleType = 'ModuleType' in params ? params.ModuleType : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -3560,6 +4071,13 @@ class AssetKeyVal extends  AbstractModel {
          */
         this.Desc = null;
 
+        /**
+         * 今日新增数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NewCount = null;
+
     }
 
     /**
@@ -3572,6 +4090,143 @@ class AssetKeyVal extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.NewCount = 'NewCount' in params ? params.NewCount : null;
+
+    }
+}
+
+/**
+ * DescribeLicenseList返回参数结构体
+ * @class
+ */
+class DescribeLicenseListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 授权数列表信息
+         * @type {Array.<LicenseDetail> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new LicenseDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeJavaMemShellList返回参数结构体
+ * @class
+ */
+class DescribeJavaMemShellListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<JavaMemShellInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new JavaMemShellInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 授权解绑信息
+ * @class
+ */
+class LicenseUnBindRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * QUUID 云服务器uuid,轻量服务器uuid,边缘计算 uuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 失败原因
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
 
     }
 }
@@ -3592,6 +4247,18 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 自动加购/扩容授权开关,默认 1, 0关闭, 1开启
+         * @type {number || null}
+         */
+        this.AutoRepurchaseSwitch = null;
+
+        /**
+         * 自动加购的订单是否自动续费,默认0 ,0关闭, 1开启
+         * @type {number || null}
+         */
+        this.AutoRepurchaseRenewSwitch = null;
+
     }
 
     /**
@@ -3602,6 +4269,8 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.AutoRepurchaseSwitch = 'AutoRepurchaseSwitch' in params ? params.AutoRepurchaseSwitch : null;
+        this.AutoRepurchaseRenewSwitch = 'AutoRepurchaseRenewSwitch' in params ? params.AutoRepurchaseRenewSwitch : null;
 
     }
 }
@@ -3937,6 +4606,20 @@ class EmergencyVul extends  AbstractModel {
          */
         this.HostCount = null;
 
+        /**
+         * 是否支持防御， 0:不支持 1:支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsSupportDefense = null;
+
+        /**
+         * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenseAttackCount = null;
+
     }
 
     /**
@@ -3958,6 +4641,8 @@ class EmergencyVul extends  AbstractModel {
         this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.IsSupportDefense = 'IsSupportDefense' in params ? params.IsSupportDefense : null;
+        this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
 
     }
 }
@@ -3993,6 +4678,187 @@ class ExportReverseShellEventsRequest extends  AbstractModel {
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * 高危命令数据(新)
+ * @class
+ */
+class BashEventNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云镜ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机ID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 主机内网IP
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 执行用户名
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 平台类型
+         * @type {number || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 执行命令
+         * @type {string || null}
+         */
+        this.BashCmd = null;
+
+        /**
+         * 规则ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 规则等级：1-高 2-中 3-低
+         * @type {number || null}
+         */
+        this.RuleLevel = null;
+
+        /**
+         * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 发生时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 主机名
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 0: bash日志 1: 实时监控(雷霆版)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DetectBy = null;
+
+        /**
+         * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Exe = null;
+
+        /**
+         * 处理时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 规则类别  0=系统规则，1=用户规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleCategory = null;
+
+        /**
+         * 自动生成的正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegexBashCmd = null;
+
+        /**
+         * 0:普通 1:专业版 2:旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.BashCmd = 'BashCmd' in params ? params.BashCmd : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.RuleLevel = 'RuleLevel' in params ? params.RuleLevel : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.DetectBy = 'DetectBy' in params ? params.DetectBy : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Exe = 'Exe' in params ? params.Exe : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.RuleCategory = 'RuleCategory' in params ? params.RuleCategory : null;
+        this.RegexBashCmd = 'RegexBashCmd' in params ? params.RegexBashCmd : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
         }
 
     }
@@ -4114,16 +4980,16 @@ class DescribeAssetInitServiceListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 服务器Uuid
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Uuid = null;
 
         /**
-         * 偏移量，默认为0。
-         * @type {number || null}
+         * 服务器Quuid
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -4151,16 +5017,28 @@ class DescribeAssetInitServiceListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 服务器Uuid
-         * @type {string || null}
+         * 偏移量，默认为0。
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.Offset = null;
 
         /**
-         * 服务器Quuid
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
-        this.Quuid = null;
+        this.Order = null;
+
+        /**
+         * 排序方式：[FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -4171,8 +5049,8 @@ class DescribeAssetInitServiceListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -4182,8 +5060,10 @@ class DescribeAssetInitServiceListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -4343,7 +5223,7 @@ class DescribeTagsRequest extends  AbstractModel {
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
 <li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
-每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -4410,7 +5290,7 @@ class DescribeRiskDnsListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 排序字段：AccessCount-请求次数
+         * 排序字段：AccessCount-请求次数。MergeTime-最近请求时间
          * @type {string || null}
          */
         this.By = null;
@@ -4865,6 +5745,29 @@ class HostLoginList extends  AbstractModel {
          */
         this.Location = null;
 
+        /**
+         * 主机quuid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 高危信息说明：
+ABROAD - 海外IP；
+XTI - 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -4892,6 +5795,14 @@ class HostLoginList extends  AbstractModel {
         this.IsRiskSrcIp = 'IsRiskSrcIp' in params ? params.IsRiskSrcIp : null;
         this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
         this.Location = 'Location' in params ? params.Location : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -5147,30 +6058,18 @@ class DescribeScanVulSettingRequest extends  AbstractModel {
 }
 
 /**
- * DescribeESHits请求参数结构体
+ * StartBaselineDetect请求参数结构体
  * @class
  */
-class DescribeESHitsRequest extends  AbstractModel {
+class StartBaselineDetectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ES查询条件JSON
-         * @type {string || null}
+         * 基线检测参数
+         * @type {BaselineDetectParam || null}
          */
-        this.Query = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.Param = null;
 
     }
 
@@ -5181,9 +6080,12 @@ class DescribeESHitsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Query = 'Query' in params ? params.Query : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Param) {
+            let obj = new BaselineDetectParam();
+            obj.deserialize(params.Param)
+            this.Param = obj;
+        }
 
     }
 }
@@ -5563,18 +6465,24 @@ class DeleteReverseShellEventsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBanRegions请求参数结构体
+ * DescribeSearchLogs返回参数结构体
  * @class
  */
-class DescribeBanRegionsRequest extends  AbstractModel {
+class DescribeSearchLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+         * 历史搜索记录 保留最新的10条
+         * @type {Array.<string> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Mode = null;
+        this.RequestId = null;
 
     }
 
@@ -5585,18 +6493,31 @@ class DescribeBanRegionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeServersAndRiskAndFirstInfo请求参数结构体
+ * DescribeMachineOsList返回参数结构体
  * @class
  */
-class DescribeServersAndRiskAndFirstInfoRequest extends  AbstractModel {
+class DescribeMachineOsListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 操作系统列表
+         * @type {Array.<OsName> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5607,6 +6528,16 @@ class DescribeServersAndRiskAndFirstInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new OsName();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5925,6 +6856,34 @@ class AssetUserDetail extends  AbstractModel {
 }
 
 /**
+ * ModifyOrderAttribute返回参数结构体
+ * @class
+ */
+class ModifyOrderAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMachines请求参数结构体
  * @class
  */
@@ -5963,13 +6922,16 @@ Other 混合云专区
 
         /**
          * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+<li>Ips - String - 是否必填：否 - 通过ip查询 </li>
+<li>Names - String - 是否必填：否 - 通过实例名查询 </li>
+<li>InstanceIds - String - 是否必填：否 - 通过实例id查询 </li>
 <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
 <li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
 <li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
+<li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6034,11 +6996,13 @@ class DescribeVulEffectHostListRequest extends  AbstractModel {
         this.VulId = null;
 
         /**
-         * 过滤条件。
+         * 过滤条件：
 <li>AliasName - String - 主机名筛选</li>
-<li>TagIds - String - 主机标签id串，多个用英文逗号分隔</li>
-<li>Status - String - 状态,0: 待处理 1:忽略  3:已修复  5:检测中  6:修复中  8=:修复失败.</li>
+<li>TagIds - String - 主机标签id串，多个用英文用逗号分隔</li>
+<li>Status - String - 状态：0-待处理 1-忽略  3-已修复  5-检测中  6-修复中  8-修复失败</li>
 <li>Uuid - String数组 - Uuid串数组</li>
+<li>Version - String数组 - 付费版本数组："Flagship"-旗舰版 "PRO_VERSION"-专业版 "BASIC_VERSION"-基础版</li>
+<li>InstanceState - String数组 - 实例状态数组："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景） </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6064,6 +7028,73 @@ class DescribeVulEffectHostListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ExportLicenseDetail请求参数结构体
+ * @class
+ */
+class ExportLicenseDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+<li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
+<li>ResourceId 资源ID</li>
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 是否导出全部授权详情
+         * @type {boolean || null}
+         */
+        this.IsHistory = null;
+
+        /**
+         * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 导出月份, 该参数仅在IsHistory 时可选.
+         * @type {string || null}
+         */
+        this.ExportMonth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.IsHistory = 'IsHistory' in params ? params.IsHistory : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ExportMonth = 'ExportMonth' in params ? params.ExportMonth : null;
 
     }
 }
@@ -6141,6 +7172,63 @@ class DeletePrivilegeRulesRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+
+    }
+}
+
+/**
+ * DescribeLicenseBindSchedule返回参数结构体
+ * @class
+ */
+class DescribeLicenseBindScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 进度
+         * @type {number || null}
+         */
+        this.Schedule = null;
+
+        /**
+         * 绑定任务详情
+         * @type {Array.<LicenseBindTaskDetail> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Schedule = 'Schedule' in params ? params.Schedule : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new LicenseBindTaskDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6293,6 +7381,34 @@ class UsualPlace extends  AbstractModel {
 }
 
 /**
+ * ModifyBaselinePolicy返回参数结构体
+ * @class
+ */
+class ModifyBaselinePolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeReverseShellEvents请求参数结构体
  * @class
  */
@@ -6319,6 +7435,18 @@ class DescribeReverseShellEventsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：CreateTime-发生时间
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -6339,6 +7467,8 @@ class DescribeReverseShellEventsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -6471,6 +7601,13 @@ class ReverseShell extends  AbstractModel {
          */
         this.DetectBy = null;
 
+        /**
+         *  主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -6500,6 +7637,12 @@ class ReverseShell extends  AbstractModel {
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.ProcTree = 'ProcTree' in params ? params.ProcTree : null;
         this.DetectBy = 'DetectBy' in params ? params.DetectBy : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -6547,24 +7690,18 @@ class DescribeLogStorageStatisticRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAssetRecentMachineInfo请求参数结构体
+ * DeleteBaselinePolicy请求参数结构体
  * @class
  */
-class DescribeAssetRecentMachineInfoRequest extends  AbstractModel {
+class DeleteBaselinePolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始时间，如：2020-09-22
-         * @type {string || null}
+         * 策略Id
+         * @type {Array.<number> || null}
          */
-        this.BeginDate = null;
-
-        /**
-         * 结束时间，如：2020-09-22
-         * @type {string || null}
-         */
-        this.EndDate = null;
+        this.PolicyIds = null;
 
     }
 
@@ -6575,8 +7712,57 @@ class DescribeAssetRecentMachineInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+
+    }
+}
+
+/**
+ * DescribeBaselinePolicyList返回参数结构体
+ * @class
+ */
+class DescribeBaselinePolicyListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+         * @type {Array.<BaselinePolicy> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new BaselinePolicy();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6619,6 +7805,48 @@ class CheckBashRuleParamsResponse extends  AbstractModel {
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteLicenseRecord请求参数结构体
+ * @class
+ */
+class DeleteLicenseRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权ID ,可以用授权订单列表获取.
+         * @type {number || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * 授权类型
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -6866,6 +8094,8 @@ class DescribeVulListRequest extends  AbstractModel {
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>VulName- string -</li>
 <li>VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
+<li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
+<li>Labels- string- 是否必填：否 - 标签搜索</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -6909,140 +8139,24 @@ class DescribeVulListRequest extends  AbstractModel {
 }
 
 /**
- * 漏洞详细信息
+ * DescribeLicenseBindList返回参数结构体
  * @class
  */
-class VulDetailInfo extends  AbstractModel {
+class DescribeLicenseBindListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞ID
+         * 总条数
          * @type {number || null}
          */
-        this.VulId = null;
+        this.TotalCount = null;
 
         /**
-         * 漏洞级别
-         * @type {number || null}
+         * 绑定机器列表信息
+         * @type {Array.<LicenseBindDetail> || null}
          */
-        this.Level = null;
-
-        /**
-         * 漏洞名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * cve编号
-         * @type {string || null}
-         */
-        this.CveId = null;
-
-        /**
-         * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
-         * @type {number || null}
-         */
-        this.VulCategory = null;
-
-        /**
-         * 漏洞描述
-         * @type {string || null}
-         */
-        this.Descript = null;
-
-        /**
-         * 修复建议
-         * @type {string || null}
-         */
-        this.Fix = null;
-
-        /**
-         * 参考链接
-         * @type {string || null}
-         */
-        this.Reference = null;
-
-        /**
-         * CVSS评分
-         * @type {number || null}
-         */
-        this.CvssScore = null;
-
-        /**
-         * CVSS详情
-         * @type {string || null}
-         */
-        this.Cvss = null;
-
-        /**
-         * 发布时间
-         * @type {string || null}
-         */
-        this.PublishTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CveId = 'CveId' in params ? params.CveId : null;
-        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
-        this.Descript = 'Descript' in params ? params.Descript : null;
-        this.Fix = 'Fix' in params ? params.Fix : null;
-        this.Reference = 'Reference' in params ? params.Reference : null;
-        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
-        this.Cvss = 'Cvss' in params ? params.Cvss : null;
-        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
-
-    }
-}
-
-/**
- * DescribeServersAndRiskAndFirstInfo返回参数结构体
- * @class
- */
-class DescribeServersAndRiskAndFirstInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 风险文件数
-         * @type {number || null}
-         */
-        this.RiskFileCount = null;
-
-        /**
-         * 今日新增风险文件数
-         * @type {number || null}
-         */
-        this.AddRiskFileCount = null;
-
-        /**
-         * 受影响服务器台数
-         * @type {number || null}
-         */
-        this.ServersCount = null;
-
-        /**
-         * 是否试用：true-是，false-否
-         * @type {boolean || null}
-         */
-        this.IsFirstCheck = null;
-
-        /**
-         * 木马最近检测时间
-         * @type {string || null}
-         */
-        this.ScanTime = null;
+        this.List = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7059,12 +8173,110 @@ class DescribeServersAndRiskAndFirstInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RiskFileCount = 'RiskFileCount' in params ? params.RiskFileCount : null;
-        this.AddRiskFileCount = 'AddRiskFileCount' in params ? params.AddRiskFileCount : null;
-        this.ServersCount = 'ServersCount' in params ? params.ServersCount : null;
-        this.IsFirstCheck = 'IsFirstCheck' in params ? params.IsFirstCheck : null;
-        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new LicenseBindDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 基线信息
+ * @class
+ */
+class BaselineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基线名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 危害等级：1-低危；2-中危；3-高危；4-严重
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 检测项数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleCount = null;
+
+        /**
+         * 影响服务器数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 通过状态:0:未通过,1:已通过
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 基线id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * 最后检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * 检测中状态: 5
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxStatus = null;
+
+        /**
+         * 基线风险项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BaselineFailCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.RuleCount = 'RuleCount' in params ? params.RuleCount : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.MaxStatus = 'MaxStatus' in params ? params.MaxStatus : null;
+        this.BaselineFailCount = 'BaselineFailCount' in params ? params.BaselineFailCount : null;
 
     }
 }
@@ -7084,16 +8296,16 @@ class AssetAppBaseInfo extends  AbstractModel {
         this.MachineIp = null;
 
         /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
          * 主机外网IP
          * @type {string || null}
          */
         this.MachineWanIp = null;
-
-        /**
-         * 主机Quuid
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
         /**
          * 主机Uuid
@@ -7102,10 +8314,10 @@ class AssetAppBaseInfo extends  AbstractModel {
         this.Uuid = null;
 
         /**
-         * 操作系统信息
+         * 主机Quuid
          * @type {string || null}
          */
-        this.OsInfo = null;
+        this.Quuid = null;
 
         /**
          * 主机业务组ID
@@ -7147,10 +8359,10 @@ class AssetAppBaseInfo extends  AbstractModel {
         this.BinPath = null;
 
         /**
-         * 配置文件路径
+         * 操作系统信息
          * @type {string || null}
          */
-        this.ConfigPath = null;
+        this.OsInfo = null;
 
         /**
          * 关联进程数
@@ -7171,11 +8383,37 @@ class AssetAppBaseInfo extends  AbstractModel {
         this.Version = null;
 
         /**
+         * 配置文件路径
+         * @type {string || null}
+         */
+        this.ConfigPath = null;
+
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
          * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
 
     }
 
@@ -7187,10 +8425,10 @@ class AssetAppBaseInfo extends  AbstractModel {
             return;
         }
         this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
         if (params.Tag) {
@@ -7204,11 +8442,20 @@ class AssetAppBaseInfo extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.BinPath = 'BinPath' in params ? params.BinPath : null;
-        this.ConfigPath = 'ConfigPath' in params ? params.ConfigPath : null;
+        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
         this.ProcessCount = 'ProcessCount' in params ? params.ProcessCount : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.Version = 'Version' in params ? params.Version : null;
+        this.ConfigPath = 'ConfigPath' in params ? params.ConfigPath : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -7265,30 +8512,36 @@ class DescribePrivilegeRulesRequest extends  AbstractModel {
 }
 
 /**
- * 专家服务-月巡检报告
+ * ModifyOrderAttribute请求参数结构体
  * @class
  */
-class MonthInspectionReport extends  AbstractModel {
+class ModifyOrderAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 巡检报告名称
-         * @type {string || null}
+         * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+         * @type {number || null}
          */
-        this.ReportName = null;
+        this.LicenseType = null;
 
         /**
-         * 巡检报告下载地址
+         * 资源ID
          * @type {string || null}
          */
-        this.ReportPath = null;
+        this.ResourceId = null;
 
         /**
-         * 巡检报告更新时间
+         * 可编辑的属性名称 ,当前支持的有: alias 资源别名
          * @type {string || null}
          */
-        this.ModifyTime = null;
+        this.AttrName = null;
+
+        /**
+         * 属性值
+         * @type {string || null}
+         */
+        this.AttrValue = null;
 
     }
 
@@ -7299,9 +8552,109 @@ class MonthInspectionReport extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReportName = 'ReportName' in params ? params.ReportName : null;
-        this.ReportPath = 'ReportPath' in params ? params.ReportPath : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.AttrName = 'AttrName' in params ? params.AttrName : null;
+        this.AttrValue = 'AttrValue' in params ? params.AttrValue : null;
+
+    }
+}
+
+/**
+ * java内存马事件信息
+ * @class
+ */
+class JavaMemShellInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 服务器名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 服务器IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 内存马类型  0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 说明
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 首次发现时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近检测时间
+         * @type {string || null}
+         */
+        this.RecentFoundTime = null;
+
+        /**
+         * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略  4 - 已手动处理
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 服务器quuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RecentFoundTime = 'RecentFoundTime' in params ? params.RecentFoundTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -7350,6 +8703,56 @@ class DescribeAssetSystemPackageListResponse extends  AbstractModel {
                 let obj = new AssetSystemPackageInfo();
                 obj.deserialize(params.Packages[z]);
                 this.Packages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClientException返回参数结构体
+ * @class
+ */
+class DescribeClientExceptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 事件详情
+         * @type {Array.<RecordInfo> || null}
+         */
+        this.Records = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new RecordInfo();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -7430,48 +8833,18 @@ class DescribeWebPageGeneralizeRequest extends  AbstractModel {
 }
 
 /**
- * 资产管理磁盘分区信息
+ * DescribeBaselineDetail请求参数结构体
  * @class
  */
-class AssetDiskPartitionInfo extends  AbstractModel {
+class DescribeBaselineDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分区名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 分区大小：单位G
+         * 基线id
          * @type {number || null}
          */
-        this.Size = null;
-
-        /**
-         * 分区使用率
-         * @type {number || null}
-         */
-        this.Percent = null;
-
-        /**
-         * 文件系统类型
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 挂载目录
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * 已使用空间：单位G
-         * @type {number || null}
-         */
-        this.Used = null;
+        this.BaselineId = null;
 
     }
 
@@ -7482,12 +8855,7 @@ class AssetDiskPartitionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Percent = 'Percent' in params ? params.Percent : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Used = 'Used' in params ? params.Used : null;
+        this.BaselineId = 'BaselineId' in params ? params.BaselineId : null;
 
     }
 }
@@ -7651,16 +9019,10 @@ class DescribeAssetAppListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -7683,10 +9045,16 @@ class DescribeAssetAppListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 排序方式：ProcessCount
-         * @type {string || null}
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
          */
-        this.By = null;
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
 
         /**
          * 排序方式，asc升序 或 desc降序
@@ -7695,10 +9063,10 @@ class DescribeAssetAppListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 查询指定Quuid主机的信息
+         * 排序方式：[FirstTime|ProcessCount]
          * @type {string || null}
          */
-        this.Quuid = null;
+        this.By = null;
 
     }
 
@@ -7709,8 +9077,7 @@ class DescribeAssetAppListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -7720,9 +9087,10 @@ class DescribeAssetAppListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.By = 'By' in params ? params.By : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -7978,6 +9346,69 @@ class DescribeBaselineRuleResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyMachineRemark请求参数结构体
+ * @class
+ */
+class ModifyMachineRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机Quuid
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * StopBaselineDetect返回参数结构体
+ * @class
+ */
+class StopBaselineDetectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteMaliciousRequests返回参数结构体
  * @class
  */
@@ -8006,18 +9437,24 @@ class DeleteMaliciousRequestsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeESHits返回参数结构体
+ * ExportBruteAttacks返回参数结构体
  * @class
  */
-class DescribeESHitsResponse extends  AbstractModel {
+class ExportBruteAttacksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ES查询结果JSON
+         * 导出文件下载链接地址。
          * @type {string || null}
          */
-        this.Data = null;
+        this.DownloadUrl = null;
+
+        /**
+         * 导出任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8034,7 +9471,8 @@ class DescribeESHitsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Data = 'Data' in params ? params.Data : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8126,6 +9564,13 @@ class ProtectDirRelatedServer extends  AbstractModel {
          */
         this.ExceptionMessage = null;
 
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -8148,6 +9593,12 @@ class ProtectDirRelatedServer extends  AbstractModel {
         this.Exception = 'Exception' in params ? params.Exception : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.ExceptionMessage = 'ExceptionMessage' in params ? params.ExceptionMessage : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -8282,6 +9733,58 @@ class ScanVulRequest extends  AbstractModel {
         this.VulEmergency = 'VulEmergency' in params ? params.VulEmergency : null;
         this.TimeoutPeriod = 'TimeoutPeriod' in params ? params.TimeoutPeriod : null;
         this.VulIds = 'VulIds' in params ? params.VulIds : null;
+
+    }
+}
+
+/**
+ * DescribeBruteAttackList返回参数结构体
+ * @class
+ */
+class DescribeBruteAttackListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 密码破解列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BruteAttackInfo> || null}
+         */
+        this.BruteAttackList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BruteAttackList) {
+            this.BruteAttackList = new Array();
+            for (let z in params.BruteAttackList) {
+                let obj = new BruteAttackInfo();
+                obj.deserialize(params.BruteAttackList[z]);
+                this.BruteAttackList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8433,16 +9936,16 @@ class DescribeAssetEnvListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 服务器Uuid
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Uuid = null;
 
         /**
-         * 偏移量，默认为0。
-         * @type {number || null}
+         * 服务器Quuid
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 该字段已废弃，由Filters代替
@@ -8460,16 +9963,28 @@ class DescribeAssetEnvListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 服务器Uuid
-         * @type {string || null}
+         * 偏移量，默认为0。
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.Offset = null;
 
         /**
-         * 服务器Quuid
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
-        this.Quuid = null;
+        this.Order = null;
+
+        /**
+         * 排序方式：[FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -8480,8 +9995,8 @@ class DescribeAssetEnvListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Type = 'Type' in params ? params.Type : null;
 
         if (params.Filters) {
@@ -8492,8 +10007,10 @@ class DescribeAssetEnvListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -8541,116 +10058,36 @@ class DescribeScanMalwareScheduleRequest extends  AbstractModel {
 }
 
 /**
- * 资产指纹中服务器列表的基本信息
+ * 基线扫描参数
  * @class
  */
-class AssetMachineBaseInfo extends  AbstractModel {
+class BaselineDetectParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器Quuid
-         * @type {string || null}
+         * 检测的策略集合
+         * @type {Array.<number> || null}
          */
-        this.Quuid = null;
+        this.PolicyIds = null;
 
         /**
-         * 服务器uuid
-         * @type {string || null}
+         * 检测的规则集合
+         * @type {Array.<number> || null}
          */
-        this.Uuid = null;
+        this.RuleIds = null;
 
         /**
-         * 服务器内网IP
-         * @type {string || null}
+         * 检测项集合
+         * @type {Array.<number> || null}
          */
-        this.MachineIp = null;
+        this.ItemIds = null;
 
         /**
-         * 服务器名称
-         * @type {string || null}
+         * 检测的主机ID集合
+         * @type {Array.<string> || null}
          */
-        this.MachineName = null;
-
-        /**
-         * 操作系统名称
-         * @type {string || null}
-         */
-        this.OsInfo = null;
-
-        /**
-         * CPU信息
-         * @type {string || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 内存容量：单位G
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * 内存使用率百分比
-         * @type {string || null}
-         */
-        this.MemLoad = null;
-
-        /**
-         * 硬盘容量：单位G
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 硬盘使用率百分比
-         * @type {string || null}
-         */
-        this.DiskLoad = null;
-
-        /**
-         * 分区数
-         * @type {number || null}
-         */
-        this.PartitionCount = null;
-
-        /**
-         * 主机外网IP
-         * @type {string || null}
-         */
-        this.MachineWanIp = null;
-
-        /**
-         * 业务组ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Cpu数量
-         * @type {number || null}
-         */
-        this.CpuSize = null;
-
-        /**
-         * Cpu使用率百分比
-         * @type {string || null}
-         */
-        this.CpuLoad = null;
-
-        /**
-         * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MachineTag> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * 数据更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.HostIds = null;
 
     }
 
@@ -8661,31 +10098,10 @@ class AssetMachineBaseInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.MemLoad = 'MemLoad' in params ? params.MemLoad : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskLoad = 'DiskLoad' in params ? params.DiskLoad : null;
-        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
-        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
-        this.CpuLoad = 'CpuLoad' in params ? params.CpuLoad : null;
-
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new MachineTag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
-            }
-        }
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+        this.RuleIds = 'RuleIds' in params ? params.RuleIds : null;
+        this.ItemIds = 'ItemIds' in params ? params.ItemIds : null;
+        this.HostIds = 'HostIds' in params ? params.HostIds : null;
 
     }
 }
@@ -8795,6 +10211,18 @@ class DescribeBashEventsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -8815,6 +10243,8 @@ class DescribeBashEventsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -8899,6 +10329,127 @@ class DescribeAssetWebLocationListResponse extends  AbstractModel {
 }
 
 /**
+ * 客户端异常信息结构
+ * @class
+ */
+class RecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机ip
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机实例id
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 客户端离线时间
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * 客户端卸载时间
+         * @type {string || null}
+         */
+        this.UninstallTime = null;
+
+        /**
+         * 客户端卸载调用链
+         * @type {string || null}
+         */
+        this.UninstallCmd = null;
+
+        /**
+         * 客户端uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.UninstallTime = 'UninstallTime' in params ? params.UninstallTime : null;
+        this.UninstallCmd = 'UninstallCmd' in params ? params.UninstallCmd : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * DescribeAssetHostTotalCount返回参数结构体
+ * @class
+ */
+class DescribeAssetHostTotalCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 各项资源数量
+system : 资源监控
+account: 账号
+port: 端口
+process: 进程
+app: 应用软件
+database:数据库
+webapp: Web应用
+webframe: Web框架
+webservice: Web服务
+weblocation: Web站点
+systempackage: 系统安装包
+jar: jar包
+initservice:启动服务
+env: 环境变量
+coremodule: 内核模块
+         * @type {Array.<AssetKeyVal> || null}
+         */
+        this.Types = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Types) {
+            this.Types = new Array();
+            for (let z in params.Types) {
+                let obj = new AssetKeyVal();
+                obj.deserialize(params.Types[z]);
+                this.Types.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetJarList请求参数结构体
  * @class
  */
@@ -8907,16 +10458,16 @@ class DescribeAssetJarListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 服务器Uuid
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Uuid = null;
 
         /**
-         * 偏移量，默认为0。
-         * @type {number || null}
+         * 服务器Quuid
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -8933,16 +10484,28 @@ class DescribeAssetJarListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 服务器Uuid
-         * @type {string || null}
+         * 偏移量，默认为0。
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.Offset = null;
 
         /**
-         * 服务器Quuid
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
-        this.Quuid = null;
+        this.Order = null;
+
+        /**
+         * 排序方式：[FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -8953,8 +10516,8 @@ class DescribeAssetJarListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -8964,8 +10527,10 @@ class DescribeAssetJarListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -9086,6 +10651,13 @@ class PrivilegeEscalationProcess extends  AbstractModel {
          */
         this.MachineName = null;
 
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -9113,6 +10685,12 @@ class PrivilegeEscalationProcess extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -9415,7 +10993,7 @@ class AssetMachineDetail extends  AbstractModel {
         this.CpuLoad = null;
 
         /**
-         * 防护级别：0基础版，1专业版
+         * 防护级别：0基础版，1专业版，2旗舰版，3普惠版
          * @type {number || null}
          */
         this.ProtectLevel = null;
@@ -9543,6 +11121,13 @@ class AssetMachineDetail extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 主机二外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -9603,6 +11188,12 @@ class AssetMachineDetail extends  AbstractModel {
         this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -9755,6 +11346,31 @@ class AssetDatabaseBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -9795,6 +11411,15 @@ class AssetDatabaseBaseInfo extends  AbstractModel {
         this.Param = 'Param' in params ? params.Param : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -10043,6 +11668,49 @@ class DescribeIndexListResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTagMachines返回参数结构体
+ * @class
+ */
+class DescribeTagMachinesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 列表数据
+         * @type {Array.<TagMachine> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new TagMachine();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10771,6 +12439,26 @@ class AssetUserBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 
+ 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -10806,29 +12494,43 @@ class AssetUserBaseInfo extends  AbstractModel {
         this.PasswordLockDays = 'PasswordLockDays' in params ? params.PasswordLockDays : null;
         this.PasswordStatus = 'PasswordStatus' in params ? params.PasswordStatus : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
 
 /**
- * DescribeMachineOsList返回参数结构体
+ * 授权绑定任务详情
  * @class
  */
-class DescribeMachineOsListResponse extends  AbstractModel {
+class LicenseBindTaskDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作系统列表
-         * @type {Array.<OsName> || null}
-         */
-        this.List = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 云服务器UUID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Quuid = null;
+
+        /**
+         * 错误信息
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 0 执行中, 1 成功,2失败
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -10839,16 +12541,9 @@ class DescribeMachineOsListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new OsName();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -10959,6 +12654,34 @@ class EffectiveMachineInfo extends  AbstractModel {
          */
         this.MachineStatus = null;
 
+        /**
+         * 授权订单对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LicenseOrder || null}
+         */
+        this.LicenseOrder = null;
+
+        /**
+         * 漏洞数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VulNum = null;
+
+        /**
+         * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tags> || null}
+         */
+        this.CloudTags = null;
+
+        /**
+         * 机器instance ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
     }
 
     /**
@@ -10984,6 +12707,23 @@ class EffectiveMachineInfo extends  AbstractModel {
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.KernelVersion = 'KernelVersion' in params ? params.KernelVersion : null;
         this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+
+        if (params.LicenseOrder) {
+            let obj = new LicenseOrder();
+            obj.deserialize(params.LicenseOrder)
+            this.LicenseOrder = obj;
+        }
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+
+        if (params.CloudTags) {
+            this.CloudTags = new Array();
+            for (let z in params.CloudTags) {
+                let obj = new Tags();
+                obj.deserialize(params.CloudTags[z]);
+                this.CloudTags.push(obj);
+            }
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
 
     }
 }
@@ -11032,24 +12772,12 @@ class DescribeVulCountByDatesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTagMachines返回参数结构体
+ * DescribeServersAndRiskAndFirstInfo请求参数结构体
  * @class
  */
-class DescribeTagMachinesResponse extends  AbstractModel {
+class DescribeServersAndRiskAndFirstInfoRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 列表数据
-         * @type {Array.<TagMachine> || null}
-         */
-        this.List = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -11060,16 +12788,6 @@ class DescribeTagMachinesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new TagMachine();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11600,7 +13318,7 @@ class VulEffectHostList extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 版本信息 0=普通版本 1=专业版 2=旗舰版
+         * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -11619,6 +13337,41 @@ class VulEffectHostList extends  AbstractModel {
          * @type {string || null}
          */
         this.FixStatusMsg = null;
+
+        /**
+         * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstDiscoveryTime = null;
+
+        /**
+         * 实例状态："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 "
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tags> || null}
+         */
+        this.CloudTags = null;
+
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
 
     }
 
@@ -11642,6 +13395,24 @@ class VulEffectHostList extends  AbstractModel {
         this.HostVersion = 'HostVersion' in params ? params.HostVersion : null;
         this.IsSupportAutoFix = 'IsSupportAutoFix' in params ? params.IsSupportAutoFix : null;
         this.FixStatusMsg = 'FixStatusMsg' in params ? params.FixStatusMsg : null;
+        this.FirstDiscoveryTime = 'FirstDiscoveryTime' in params ? params.FirstDiscoveryTime : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+
+        if (params.CloudTags) {
+            this.CloudTags = new Array();
+            for (let z in params.CloudTags) {
+                let obj = new Tags();
+                obj.deserialize(params.CloudTags[z]);
+                this.CloudTags.push(obj);
+            }
+        }
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -11850,6 +13621,18 @@ class DescribeBruteAttackListRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：CreateTime-首次攻击时间
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -11870,6 +13653,36 @@ class DescribeBruteAttackListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * ModifyMachineRemark返回参数结构体
+ * @class
+ */
+class ModifyMachineRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12163,10 +13976,58 @@ class Machine extends  AbstractModel {
         this.KernelVersion = null;
 
         /**
-         * 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版.
+         * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
          * @type {string || null}
          */
         this.ProtectType = null;
+
+        /**
+         * 云标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tags> || null}
+         */
+        this.CloudTags = null;
+
+        /**
+         * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAddedOnTheFifteen = null;
+
+        /**
+         * 主机ip列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpList = null;
+
+        /**
+         * 所属网络
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
 
     }
 
@@ -12214,6 +14075,26 @@ class Machine extends  AbstractModel {
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
         this.KernelVersion = 'KernelVersion' in params ? params.KernelVersion : null;
         this.ProtectType = 'ProtectType' in params ? params.ProtectType : null;
+
+        if (params.CloudTags) {
+            this.CloudTags = new Array();
+            for (let z in params.CloudTags) {
+                let obj = new Tags();
+                obj.deserialize(params.CloudTags[z]);
+                this.CloudTags.push(obj);
+            }
+        }
+        this.IsAddedOnTheFifteen = 'IsAddedOnTheFifteen' in params ? params.IsAddedOnTheFifteen : null;
+        this.IpList = 'IpList' in params ? params.IpList : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -12291,6 +14172,129 @@ class DescribeMalwareFileRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeLicenseList请求参数结构体
+ * @class
+ */
+class DescribeLicenseListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+<li> LicenseStatus 授权状态信息,0 未使用,1 部分使用, 2 已用完, 3 不可用  4 可使用</li>
+<li> BuyTime 购买时间</li>
+<li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
+<li>DeadlineStatus 到期状态 NotExpired 未过期, Expire 已过期(包含已销毁) NearExpiry 即将到期</li>
+<li>ResourceId 资源ID</li>
+<li>Keywords IP筛选</li>
+<li>PayMode 付费模式 0 按量计费 , 1 包年包月</li>
+<li>OrderStatus 订单状态 1 正常 2 隔离 3 销毁</li>
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyLicenseUnBinds请求参数结构体
+ * @class
+ */
+class ModifyLicenseUnBindsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 授权类型
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+         * @type {boolean || null}
+         */
+        this.IsAll = null;
+
+        /**
+         * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.
+最大长度=100
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.IsAll = 'IsAll' in params ? params.IsAll : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -12571,6 +14575,13 @@ class ProtectEventLists extends  AbstractModel {
          */
         this.FileType = null;
 
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -12589,6 +14600,174 @@ class ProtectEventLists extends  AbstractModel {
         this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.FileType = 'FileType' in params ? params.FileType : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 基线策略信息
+ * @class
+ */
+class BaselinePolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略名称,长度不超过128英文字符
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 检测间隔[1:1天|3:3天|5:5天|7:7天]
+         * @type {number || null}
+         */
+        this.DetectInterval = null;
+
+        /**
+         * 检测时间
+         * @type {string || null}
+         */
+        this.DetectTime = null;
+
+        /**
+         * 是否开启[0:未开启|1:开启]
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 资产类型[0:所有专业版旗舰版|1:id|2:ip]
+         * @type {number || null}
+         */
+        this.AssetType = null;
+
+        /**
+         * 策略Id
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 关联基线项数目
+         * @type {number || null}
+         */
+        this.RuleCount = null;
+
+        /**
+         * 关联基线项数目
+         * @type {number || null}
+         */
+        this.ItemCount = null;
+
+        /**
+         * 关联基线主机数目
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 规则Id
+         * @type {Array.<number> || null}
+         */
+        this.RuleIds = null;
+
+        /**
+         * 主机Id
+         * @type {Array.<string> || null}
+         */
+        this.HostIds = null;
+
+        /**
+         * 主机Ip
+         * @type {Array.<string> || null}
+         */
+        this.HostIps = null;
+
+        /**
+         * 是否是系统默认
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.DetectInterval = 'DetectInterval' in params ? params.DetectInterval : null;
+        this.DetectTime = 'DetectTime' in params ? params.DetectTime : null;
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RuleCount = 'RuleCount' in params ? params.RuleCount : null;
+        this.ItemCount = 'ItemCount' in params ? params.ItemCount : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.RuleIds = 'RuleIds' in params ? params.RuleIds : null;
+        this.HostIds = 'HostIds' in params ? params.HostIds : null;
+        this.HostIps = 'HostIps' in params ? params.HostIps : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+
+    }
+}
+
+/**
+ * DescribeJavaMemShellList请求参数结构体
+ * @class
+ */
+class DescribeJavaMemShellListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -12680,72 +14859,12 @@ class DescribeProcessStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAssetInfo返回参数结构体
+ * CreateScanMalwareSetting返回参数结构体
  * @class
  */
-class DescribeAssetInfoResponse extends  AbstractModel {
+class CreateScanMalwareSettingResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 主机数
-         * @type {number || null}
-         */
-        this.MachineCount = null;
-
-        /**
-         * 账号数
-         * @type {number || null}
-         */
-        this.AccountCount = null;
-
-        /**
-         * 端口数
-         * @type {number || null}
-         */
-        this.PortCount = null;
-
-        /**
-         * 进程数
-         * @type {number || null}
-         */
-        this.ProcessCount = null;
-
-        /**
-         * 软件数
-         * @type {number || null}
-         */
-        this.SoftwareCount = null;
-
-        /**
-         * 数据库数
-         * @type {number || null}
-         */
-        this.DatabaseCount = null;
-
-        /**
-         * Web应用数
-         * @type {number || null}
-         */
-        this.WebAppCount = null;
-
-        /**
-         * Web框架数
-         * @type {number || null}
-         */
-        this.WebFrameCount = null;
-
-        /**
-         * Web服务数
-         * @type {number || null}
-         */
-        this.WebServiceCount = null;
-
-        /**
-         * Web站点数
-         * @type {number || null}
-         */
-        this.WebLocationCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12762,16 +14881,6 @@ class DescribeAssetInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineCount = 'MachineCount' in params ? params.MachineCount : null;
-        this.AccountCount = 'AccountCount' in params ? params.AccountCount : null;
-        this.PortCount = 'PortCount' in params ? params.PortCount : null;
-        this.ProcessCount = 'ProcessCount' in params ? params.ProcessCount : null;
-        this.SoftwareCount = 'SoftwareCount' in params ? params.SoftwareCount : null;
-        this.DatabaseCount = 'DatabaseCount' in params ? params.DatabaseCount : null;
-        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
-        this.WebFrameCount = 'WebFrameCount' in params ? params.WebFrameCount : null;
-        this.WebServiceCount = 'WebServiceCount' in params ? params.WebServiceCount : null;
-        this.WebLocationCount = 'WebLocationCount' in params ? params.WebLocationCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12949,6 +15058,25 @@ class AssetWebFrameBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -12979,6 +15107,14 @@ class AssetWebFrameBaseInfo extends  AbstractModel {
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -13137,6 +15273,109 @@ class ExportVulListRequest extends  AbstractModel {
 }
 
 /**
+ * CreateLicenseOrder请求参数结构体
+ * @class
+ */
+class CreateLicenseOrderRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签数组, 空则表示不需要绑定标签
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+默认为0
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 授权数量 , 需要购买的数量.
+默认为1
+         * @type {number || null}
+         */
+        this.LicenseNum = null;
+
+        /**
+         * 购买订单地域,这里仅支持 1 广州,9 新加坡. 推荐选择广州. 新加坡地域为白名单用户购买.
+默认为1
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 项目ID .
+默认为0
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 购买时间长度,默认1 , 可选值为1,2,3,4,5,6,7,8,9,10,11,12,24,36
+该参数仅包年包月生效
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 是否自动续费, 默认不自动续费.
+该参数仅包年包月生效
+         * @type {boolean || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 该字段作废
+         * @type {string || null}
+         */
+        this.AutoProtectOpenConfig = null;
+
+        /**
+         * 变配参数
+         * @type {OrderModifyObject || null}
+         */
+        this.ModifyConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.LicenseNum = 'LicenseNum' in params ? params.LicenseNum : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoProtectOpenConfig = 'AutoProtectOpenConfig' in params ? params.AutoProtectOpenConfig : null;
+
+        if (params.ModifyConfig) {
+            let obj = new OrderModifyObject();
+            obj.deserialize(params.ModifyConfig)
+            this.ModifyConfig = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeBaselineScanSchedule请求参数结构体
  * @class
  */
@@ -13219,6 +15458,34 @@ class DescribeEmergencyVulListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.ExistsRisk = 'ExistsRisk' in params ? params.ExistsRisk : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyOrder返回参数结构体
+ * @class
+ */
+class DestroyOrderResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13805,6 +16072,48 @@ class DescribeAssetDatabaseInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 专家服务-月巡检报告
+ * @class
+ */
+class MonthInspectionReport extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 巡检报告名称
+         * @type {string || null}
+         */
+        this.ReportName = null;
+
+        /**
+         * 巡检报告下载地址
+         * @type {string || null}
+         */
+        this.ReportPath = null;
+
+        /**
+         * 巡检报告更新时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReportName = 'ReportName' in params ? params.ReportName : null;
+        this.ReportPath = 'ReportPath' in params ? params.ReportPath : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * SetBashEventsStatus请求参数结构体
  * @class
  */
@@ -14138,6 +16447,12 @@ class ExportAssetWebServiceInfoListRequest extends  AbstractModel {
         super();
 
         /**
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
          * 过滤条件。
 <li>User- string - 是否必填：否 - 运行用户</li>
 <li>Name- string - 是否必填：否 - Web服务名：
@@ -14163,16 +16478,10 @@ class ExportAssetWebServiceInfoListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 可选排序：ProcessCount
+         * 可选排序：[FirstTime|ProcessCount]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -14183,6 +16492,7 @@ class ExportAssetWebServiceInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -14194,7 +16504,6 @@ class ExportAssetWebServiceInfoListRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -14278,13 +16587,13 @@ class DescribeAssetUserInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务器Quuid
+         * 云服务器UUID
          * @type {string || null}
          */
         this.Quuid = null;
 
         /**
-         * 服务器Uuid
+         * 主机安全UUID
          * @type {string || null}
          */
         this.Uuid = null;
@@ -14413,6 +16722,75 @@ class ExportPrivilegeEventsRequest extends  AbstractModel {
 }
 
 /**
+ * 服务器基础信息
+ * @class
+ */
+class MachineExtraInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanIP = null;
+
+        /**
+         * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PrivateIP = null;
+
+        /**
+         * 网络类型，1:vpc网络 2:基础网络 3:非腾讯云网络
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 网络名，vpc网络情况下会返回vpc_id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkName = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WanIP = 'WanIP' in params ? params.WanIP : null;
+        this.PrivateIP = 'PrivateIP' in params ? params.PrivateIP : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkName = 'NetworkName' in params ? params.NetworkName : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+
+    }
+}
+
+/**
  * DescribeMalwareFile返回参数结构体
  * @class
  */
@@ -14443,6 +16821,34 @@ class DescribeMalwareFileResponse extends  AbstractModel {
         }
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopBaselineDetect请求参数结构体
+ * @class
+ */
+class StopBaselineDetectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 取消任务ID集合
+         * @type {Array.<number> || null}
+         */
+        this.TaskIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
 
     }
 }
@@ -14679,6 +17085,19 @@ class ScanTaskDetails extends  AbstractModel {
          */
         this.FailType = null;
 
+        /**
+         * 外网ip
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -14700,6 +17119,13 @@ class ScanTaskDetails extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.FailType = 'FailType' in params ? params.FailType : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -14951,18 +17377,48 @@ class DeleteMachineTagRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBaselineDetail请求参数结构体
+ * 资产管理磁盘分区信息
  * @class
  */
-class DescribeBaselineDetailRequest extends  AbstractModel {
+class AssetDiskPartitionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 基线id
+         * 分区名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 分区大小：单位G
          * @type {number || null}
          */
-        this.BaselineId = null;
+        this.Size = null;
+
+        /**
+         * 分区使用率
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 文件系统类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 挂载目录
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 已使用空间：单位G
+         * @type {number || null}
+         */
+        this.Used = null;
 
     }
 
@@ -14973,7 +17429,12 @@ class DescribeBaselineDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BaselineId = 'BaselineId' in params ? params.BaselineId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Used = 'Used' in params ? params.Used : null;
 
     }
 }
@@ -15289,6 +17750,56 @@ class DescribeWebPageEventListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBashEventsNew返回参数结构体
+ * @class
+ */
+class DescribeBashEventsNewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 高危命令事件列表
+         * @type {Array.<BashEventNew> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new BashEventNew();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProtectDir返回参数结构体
  * @class
  */
@@ -15340,6 +17851,41 @@ class ModifyBanStatusRequest extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 操作系统名称
+ * @class
+ */
+class OsName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 操作系统类型枚举值
+         * @type {number || null}
+         */
+        this.MachineOSType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MachineOSType = 'MachineOSType' in params ? params.MachineOSType : null;
 
     }
 }
@@ -15403,6 +17949,139 @@ class DescribeLogStorageStatisticResponse extends  AbstractModel {
         this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
         this.UsedSize = 'UsedSize' in params ? params.UsedSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 基线检测项
+ * @class
+ */
+class BaselineItemDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ItemId = null;
+
+        /**
+         * 项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ItemName = null;
+
+        /**
+         * 项描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ItemDesc = null;
+
+        /**
+         * 修复方法
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FixMethod = null;
+
+        /**
+         * 所属规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 0:未通过 1:忽略 3:通过 5:检测中
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DetectStatus = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 影响服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 首次检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 最后检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * 检测结果,Json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DetectResult = null;
+
+        /**
+         * 所属规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 通过的服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PassedHostCount = null;
+
+        /**
+         * 未通过的服务器数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NotPassedHostCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.ItemName = 'ItemName' in params ? params.ItemName : null;
+        this.ItemDesc = 'ItemDesc' in params ? params.ItemDesc : null;
+        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.DetectStatus = 'DetectStatus' in params ? params.DetectStatus : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.DetectResult = 'DetectResult' in params ? params.DetectResult : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.PassedHostCount = 'PassedHostCount' in params ? params.PassedHostCount : null;
+        this.NotPassedHostCount = 'NotPassedHostCount' in params ? params.NotPassedHostCount : null;
 
     }
 }
@@ -15556,6 +18235,118 @@ class DescribeScanStateResponse extends  AbstractModel {
         this.RiskEventCount = 'RiskEventCount' in params ? params.RiskEventCount : null;
         this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 基线主机检测
+ * @class
+ */
+class BaselineHostDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机Id
+         * @type {string || null}
+         */
+        this.HostId = null;
+
+        /**
+         * 内网Ip
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 外网Ip
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * 0:未通过 1:忽略 3:通过 5:检测中
+         * @type {number || null}
+         */
+        this.DetectStatus = null;
+
+        /**
+         * 检测通过数
+         * @type {number || null}
+         */
+        this.PassedItemCount = null;
+
+        /**
+         * 关联检测项数
+         * @type {number || null}
+         */
+        this.ItemCount = null;
+
+        /**
+         * 检测未通过数
+         * @type {number || null}
+         */
+        this.NotPassedItemCount = null;
+
+        /**
+         * 首次检测时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 最后检测时间
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * 主机安全UUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostId = 'HostId' in params ? params.HostId : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.DetectStatus = 'DetectStatus' in params ? params.DetectStatus : null;
+        this.PassedItemCount = 'PassedItemCount' in params ? params.PassedItemCount : null;
+        this.ItemCount = 'ItemCount' in params ? params.ItemCount : null;
+        this.NotPassedItemCount = 'NotPassedItemCount' in params ? params.NotPassedItemCount : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -16111,6 +18902,41 @@ class ExportIgnoreRuleEffectHostListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAssetRecentMachineInfo请求参数结构体
+ * @class
+ */
+class DescribeAssetRecentMachineInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间，如：2020-09-22
+         * @type {string || null}
+         */
+        this.BeginDate = null;
+
+        /**
+         * 结束时间，如：2020-09-22
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+
+    }
+}
+
+/**
  * DescribeAssetWebAppPluginList请求参数结构体
  * @class
  */
@@ -16461,8 +19287,8 @@ class DescribeImportMachineInfoRequest extends  AbstractModel {
         this.IsQueryProMachine = null;
 
         /**
-         * 过滤条件。
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
+         * 过滤条件：
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：普惠版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+普惠版</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -16523,6 +19349,41 @@ class VulLevelInfo extends  AbstractModel {
         }
         this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * StartBaselineDetect返回参数结构体
+ * @class
+ */
+class StartBaselineDetectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扫描任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17174,6 +20035,26 @@ class AssetWebLocationBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -17210,6 +20091,14 @@ class AssetWebLocationBaseInfo extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -17360,6 +20249,41 @@ class BashRule extends  AbstractModel {
         this.Uuids = 'Uuids' in params ? params.Uuids : null;
         this.White = 'White' in params ? params.White : null;
         this.DealOldEvents = 'DealOldEvents' in params ? params.DealOldEvents : null;
+
+    }
+}
+
+/**
+ * 平台标签
+ * @class
+ */
+class Tags extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -17640,6 +20564,18 @@ class AssetSystemPackageInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
     }
 
     /**
@@ -17658,6 +20594,8 @@ class AssetSystemPackageInfo extends  AbstractModel {
         this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
         this.OsInfo = 'OsInfo' in params ? params.OsInfo : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
 
     }
 }
@@ -17688,6 +20626,7 @@ class DescribeEmergencyVulListRequest extends  AbstractModel {
 <li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
 <li>VulName- String - 是否必填：否 - 漏洞名称搜索</li>
 <li>Uuids- String - 是否必填：否 - 主机uuid</li>
+<li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -17699,7 +20638,7 @@ class DescribeEmergencyVulListRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * 排序字段 PublishDate
+         * 排序字段 PublishDate  LastScanTime HostCount
          * @type {string || null}
          */
         this.By = null;
@@ -17804,6 +20743,103 @@ class DeleteReverseShellEventsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 授权绑定详情信息
+ * @class
+ */
+class LicenseBindDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器别名
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 机器公网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * 机器内网IP
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 云服务器UUID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 云镜客户端UUID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 标签信息
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
+         * @type {string || null}
+         */
+        this.AgentStatus = null;
+
+        /**
+         * 是否允许解绑,false 不允许解绑
+         * @type {boolean || null}
+         */
+        this.IsUnBind = null;
+
+        /**
+         * 是否允许换绑,false 不允许换绑
+         * @type {boolean || null}
+         */
+        this.IsSwitchBind = null;
+
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.AgentStatus = 'AgentStatus' in params ? params.AgentStatus : null;
+        this.IsUnBind = 'IsUnBind' in params ? params.IsUnBind : null;
+        this.IsSwitchBind = 'IsSwitchBind' in params ? params.IsSwitchBind : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -17926,6 +20962,25 @@ class AssetWebServiceBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -17961,6 +21016,14 @@ class AssetWebServiceBaseInfo extends  AbstractModel {
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -18090,6 +21153,13 @@ class DescribeScanTaskDetailsResponse extends  AbstractModel {
         this.StoppingAll = null;
 
         /**
+         * 扫描出漏洞个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -18134,6 +21204,7 @@ class DescribeScanTaskDetailsResponse extends  AbstractModel {
         this.RiskEventCount = 'RiskEventCount' in params ? params.RiskEventCount : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.StoppingAll = 'StoppingAll' in params ? params.StoppingAll : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -18295,6 +21366,32 @@ class AssetInitServiceBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 服务器外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -18315,6 +21412,15 @@ class AssetInitServiceBaseInfo extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -18334,10 +21440,16 @@ class DescribeVulHostTopRequest extends  AbstractModel {
         this.Top = null;
 
         /**
-         * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+         * 1:web-cms 漏洞，2.应用漏洞   4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
          * @type {number || null}
          */
         this.VulCategory = null;
+
+        /**
+         * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+         * @type {number || null}
+         */
+        this.IsFollowVul = null;
 
     }
 
@@ -18350,6 +21462,7 @@ class DescribeVulHostTopRequest extends  AbstractModel {
         }
         this.Top = 'Top' in params ? params.Top : null;
         this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.IsFollowVul = 'IsFollowVul' in params ? params.IsFollowVul : null;
 
     }
 }
@@ -18616,6 +21729,104 @@ class DescribeMalwareInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 漏洞详细信息
+ * @class
+ */
+class VulDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * 漏洞级别
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * cve编号
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
+         * @type {number || null}
+         */
+        this.VulCategory = null;
+
+        /**
+         * 漏洞描述
+         * @type {string || null}
+         */
+        this.Descript = null;
+
+        /**
+         * 修复建议
+         * @type {string || null}
+         */
+        this.Fix = null;
+
+        /**
+         * 参考链接
+         * @type {string || null}
+         */
+        this.Reference = null;
+
+        /**
+         * CVSS评分
+         * @type {number || null}
+         */
+        this.CvssScore = null;
+
+        /**
+         * CVSS详情
+         * @type {string || null}
+         */
+        this.Cvss = null;
+
+        /**
+         * 发布时间
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.Descript = 'Descript' in params ? params.Descript : null;
+        this.Fix = 'Fix' in params ? params.Fix : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
+        this.Cvss = 'Cvss' in params ? params.Cvss : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+
+    }
+}
+
+/**
  * DescribeAssetJarInfo请求参数结构体
  * @class
  */
@@ -18684,6 +21895,18 @@ class DescribePrivilegeEventsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：CreateTime-发现时间
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -18704,80 +21927,38 @@ class DescribePrivilegeEventsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
 
 /**
- * 基线信息
+ * DescribeAssetEnvList返回参数结构体
  * @class
  */
-class BaselineInfo extends  AbstractModel {
+class DescribeAssetEnvListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 基线名
+         * 列表
 注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AssetEnvBaseInfo> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 危害等级：1-低危；2-中危；3-高危；4-严重
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * 检测项数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RuleCount = null;
-
-        /**
-         * 影响服务器数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.HostCount = null;
-
-        /**
-         * 通过状态:0:未通过,1:已通过
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 基线id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CategoryId = null;
-
-        /**
-         * 最后检测时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * 检测中状态: 5
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxStatus = null;
-
-        /**
-         * 基线风险项
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.BaselineFailCount = null;
+        this.RequestId = null;
 
     }
 
@@ -18788,15 +21969,17 @@ class BaselineInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.RuleCount = 'RuleCount' in params ? params.RuleCount : null;
-        this.HostCount = 'HostCount' in params ? params.HostCount : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
-        this.MaxStatus = 'MaxStatus' in params ? params.MaxStatus : null;
-        this.BaselineFailCount = 'BaselineFailCount' in params ? params.BaselineFailCount : null;
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new AssetEnvBaseInfo();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18991,25 +22174,37 @@ class DeleteWebPageEventLogResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVulLevelCount返回参数结构体
+ * DescribeLicenseBindSchedule请求参数结构体
  * @class
  */
-class DescribeVulLevelCountResponse extends  AbstractModel {
+class DescribeLicenseBindScheduleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 统计结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<VulLevelInfo> || null}
+         * 任务ID
+         * @type {number || null}
          */
-        this.VulLevelList = null;
+        this.TaskId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 限制条数,默认10.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤参数
+Status 绑定进度状态 0 进行中 1 已完成 2 失败
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -19020,16 +22215,18 @@ class DescribeVulLevelCountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
-        if (params.VulLevelList) {
-            this.VulLevelList = new Array();
-            for (let z in params.VulLevelList) {
-                let obj = new VulLevelInfo();
-                obj.deserialize(params.VulLevelList[z]);
-                this.VulLevelList.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19061,6 +22258,12 @@ class DescribeVersionStatisticsResponse extends  AbstractModel {
         this.UltimateVersionNum = null;
 
         /**
+         * 普惠版数量
+         * @type {number || null}
+         */
+        this.GeneralVersionNum = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -19078,6 +22281,7 @@ class DescribeVersionStatisticsResponse extends  AbstractModel {
         this.BasicVersionNum = 'BasicVersionNum' in params ? params.BasicVersionNum : null;
         this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
         this.UltimateVersionNum = 'UltimateVersionNum' in params ? params.UltimateVersionNum : null;
+        this.GeneralVersionNum = 'GeneralVersionNum' in params ? params.GeneralVersionNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19762,6 +22966,31 @@ class AssetPlanTask extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 服务器外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -19782,6 +23011,43 @@ class AssetPlanTask extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteBaselinePolicy返回参数结构体
+ * @class
+ */
+class DeleteBaselinePolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19990,6 +23256,12 @@ class CreateScanMalwareSettingRequest extends  AbstractModel {
          */
         this.EngineType = null;
 
+        /**
+         * 是否开启恶意进程查杀[0:未开启,1:开启]
+         * @type {number || null}
+         */
+        this.EnableMemShellScan = null;
+
     }
 
     /**
@@ -20004,6 +23276,7 @@ class CreateScanMalwareSettingRequest extends  AbstractModel {
         this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
         this.TimeoutPeriod = 'TimeoutPeriod' in params ? params.TimeoutPeriod : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.EnableMemShellScan = 'EnableMemShellScan' in params ? params.EnableMemShellScan : null;
 
     }
 }
@@ -20102,6 +23375,18 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
         this.EngineType = null;
 
         /**
+         * 启发引擎 0 关闭 1开启
+         * @type {number || null}
+         */
+        this.EnableInspiredEngine = null;
+
+        /**
+         * 是否开启恶意进程查杀[0:未开启,1:开启]
+         * @type {number || null}
+         */
+        this.EnableMemShellScan = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -20130,6 +23415,8 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
         this.ClickTimeout = 'ClickTimeout' in params ? params.ClickTimeout : null;
         this.KillProcess = 'KillProcess' in params ? params.KillProcess : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.EnableInspiredEngine = 'EnableInspiredEngine' in params ? params.EnableInspiredEngine : null;
+        this.EnableMemShellScan = 'EnableMemShellScan' in params ? params.EnableMemShellScan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -20170,6 +23457,18 @@ class DescribeHostLoginListRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：LoginTime-发生时间
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -20190,6 +23489,50 @@ class DescribeHostLoginListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * 订单变配参数对象
+ * @class
+ */
+class OrderModifyObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 新产品标识,这里支持PRO_VERSION 专业版,FLAGSHIP 旗舰版
+         * @type {string || null}
+         */
+        this.NewSubProductCode = null;
+
+        /**
+         * 扩容/缩容数,变配子产品忽略该参数
+         * @type {number || null}
+         */
+        this.InquireNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.NewSubProductCode = 'NewSubProductCode' in params ? params.NewSubProductCode : null;
+        this.InquireNum = 'InquireNum' in params ? params.InquireNum : null;
 
     }
 }
@@ -20281,6 +23624,142 @@ class DescribeAssetWebServiceProcessListRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 授权订单列表对象
+ * @class
+ */
+class LicenseDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权ID
+         * @type {number || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * 授权类型,0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 授权状态 0 未使用,1 部分使用, 2 已用完, 3 不可用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LicenseStatus = null;
+
+        /**
+         * 总授权数
+         * @type {number || null}
+         */
+        this.LicenseCnt = null;
+
+        /**
+         * 已使用授权数
+         * @type {number || null}
+         */
+        this.UsedLicenseCnt = null;
+
+        /**
+         * 订单状态 1 正常 2隔离, 3销毁
+         * @type {number || null}
+         */
+        this.OrderStatus = null;
+
+        /**
+         * 截止日期
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * 订单资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 0 初始化,1 自动续费,2 不自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 任务ID ,默认0 ,查询绑定进度用
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 购买时间
+         * @type {string || null}
+         */
+        this.BuyTime = null;
+
+        /**
+         * 是否试用订单.
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 资源别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 平台标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.LicenseStatus = 'LicenseStatus' in params ? params.LicenseStatus : null;
+        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
+        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
+        this.OrderStatus = 'OrderStatus' in params ? params.OrderStatus : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -20684,6 +24163,77 @@ class AssetCoreModuleDetail extends  AbstractModel {
 }
 
 /**
+ * DescribeBaselineItemDetectList请求参数结构体
+ * @class
+ */
+class DescribeBaselineItemDetectListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>HostId - string - 是否必填：否 - 主机Id</li>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>PolicyId - int64 - 是否必填：否 - 规则Id</li>
+<li>ItemName - string - 是否必填：否 - 项名称</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开始时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10,最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式: [ASC:升序|DESC:降序]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 可选排序列: [HostCount|FirstTime|LastTime]
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeBanStatus请求参数结构体
  * @class
  */
@@ -20797,6 +24347,170 @@ class DescribeAssetRecentMachineInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 基线项
+ * @class
+ */
+class BaselineItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项Id
+         * @type {number || null}
+         */
+        this.ItemId = null;
+
+        /**
+         * 项名称
+         * @type {string || null}
+         */
+        this.ItemName = null;
+
+        /**
+         * 检测项分类
+         * @type {number || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * 项描述
+         * @type {string || null}
+         */
+        this.ItemDesc = null;
+
+        /**
+         * 修复方法
+         * @type {string || null}
+         */
+        this.FixMethod = null;
+
+        /**
+         * 所属规则
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 检测结果描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DetectResultDesc = null;
+
+        /**
+         * 危险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 检测状态：0 未通过，1：忽略，3：通过，5：检测中
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DetectStatus = null;
+
+        /**
+         * 主机ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostId = null;
+
+        /**
+         * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 主机IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * 第一次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 最近出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * 是否可以修复
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CanBeFixed = null;
+
+        /**
+         * 主机安全uuid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.ItemName = 'ItemName' in params ? params.ItemName : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.ItemDesc = 'ItemDesc' in params ? params.ItemDesc : null;
+        this.FixMethod = 'FixMethod' in params ? params.FixMethod : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.DetectResultDesc = 'DetectResultDesc' in params ? params.DetectResultDesc : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.DetectStatus = 'DetectStatus' in params ? params.DetectStatus : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.CanBeFixed = 'CanBeFixed' in params ? params.CanBeFixed : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeMalWareList返回参数结构体
  * @class
  */
@@ -20842,6 +24556,50 @@ class DescribeMalWareListResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLicenseUnBinds返回参数结构体
+ * @class
+ */
+class ModifyLicenseUnBindsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只有解绑失败的才有该值.
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LicenseUnBindRsp> || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrMsg) {
+            this.ErrMsg = new Array();
+            for (let z in params.ErrMsg) {
+                let obj = new LicenseUnBindRsp();
+                obj.deserialize(params.ErrMsg[z]);
+                this.ErrMsg.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -20996,6 +24754,70 @@ class DescribeMaliciousRequestWhiteListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBaselinePolicyList请求参数结构体
+ * @class
+ */
+class DescribeBaselinePolicyListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>PolicyName - String - 是否必填：否 - 策略名称</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10,最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式: [ASC:升序|DESC:降序]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 可选排序列: [RuleCount|ItemCount|HostCount]
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -21171,6 +24993,13 @@ class DescribeMalwareRiskWarningResponse extends  AbstractModel {
         this.IsPop = null;
 
         /**
+         * 异常进程列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MalwareRisk> || null}
+         */
+        this.ProcessList = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -21196,6 +25025,15 @@ class DescribeMalwareRiskWarningResponse extends  AbstractModel {
             }
         }
         this.IsPop = 'IsPop' in params ? params.IsPop : null;
+
+        if (params.ProcessList) {
+            this.ProcessList = new Array();
+            for (let z in params.ProcessList) {
+                let obj = new MalwareRisk();
+                obj.deserialize(params.ProcessList[z]);
+                this.ProcessList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -21255,6 +25093,48 @@ class DescribeBashRulesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ExportLicenseDetail返回参数结构体
+ * @class
+ */
+class ExportLicenseDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载地址,该字段废弃
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 任务ID,可通过任务ID去查下载任务
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21686,16 +25566,10 @@ class DescribeAssetDatabaseListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -21723,10 +25597,28 @@ class DescribeAssetDatabaseListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 查询指定Quuid主机的信息
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
-        this.Quuid = null;
+        this.Order = null;
+
+        /**
+         * 排序方式：[FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -21737,8 +25629,7 @@ class DescribeAssetDatabaseListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -21748,7 +25639,10 @@ class DescribeAssetDatabaseListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -21790,18 +25684,6 @@ class DescribeAssetMachineListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
          * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>OsType - String - 是否必填：否 - windows或linux</li>
@@ -21823,16 +25705,28 @@ class DescribeAssetMachineListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 可选排序：PartitionCount
-         * @type {string || null}
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
          */
-        this.By = null;
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
 
         /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
+
+        /**
+         * 可选排序[FirstTime|PartitionCount]
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -21843,8 +25737,6 @@ class DescribeAssetMachineListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -21854,8 +25746,10 @@ class DescribeAssetMachineListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.By = 'By' in params ? params.By : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -22202,6 +26096,31 @@ class AssetCoreModuleBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 服务器外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -22225,6 +26144,15 @@ class AssetCoreModuleBaseInfo extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -22482,158 +26410,52 @@ class DescribeReverseShellEventsResponse extends  AbstractModel {
 }
 
 /**
- * 密码破解列表实体
+ * DescribeBashEventsNew请求参数结构体
  * @class
  */
-class BruteAttackInfo extends  AbstractModel {
+class DescribeBashEventsNewRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一Id
+         * 返回数量，默认为10，最大值为100。
          * @type {number || null}
          */
-        this.Id = null;
+        this.Limit = null;
 
         /**
-         * 云镜客户端唯一标识UUID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 过滤条件。
+<li>HostName - String - 是否必填：否 - 主机名</li>
+<li>Hostip - String - 是否必填：否 - 主机内网IP</li>
+<li>HostIp - String - 是否必填：否 - 主机内网IP</li>
+<li>RuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)</li>
+<li>RuleName - String - 是否必填：否 - 策略名称</li>
+<li>RuleLevel - Int - 是否必填：否 - 威胁等级,可以多选</li>
+<li>Status - Int - 是否必填：否 - 处理状态,可多选(0:待处理 1:已处理 2:已加白  3:已忽略 4:已删除 5:已拦截)</li>
+<li>DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)</li>
+<li>StartTime - String - 是否必填：否 - 开始时间</li>
+<li>EndTime - String - 是否必填：否 - 结束时间</li>
+         * @type {Array.<Filter> || null}
          */
-        this.Uuid = null;
+        this.Filters = null;
 
         /**
-         * 主机ip
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MachineIp = null;
-
-        /**
-         * 主机名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * 来源ip
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * SUCCESS：破解成功；FAILED：破解失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 国家id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.Country = null;
+        this.Offset = null;
 
         /**
-         * 城市id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.City = null;
-
-        /**
-         * 省份id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Province = null;
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 排序方式：根据请求次数排序：asc-升序/desc-降序
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.Order = null;
 
         /**
-         * 阻断状态：1-阻断成功；非1-阻断失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.BanStatus = null;
-
-        /**
-         * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EventType = null;
-
-        /**
-         * 发生次数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * 机器UUID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
          * @type {string || null}
          */
-        this.Quuid = null;
-
-        /**
-         * 是否为专业版（true/false）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsProVersion = null;
-
-        /**
-         * 被攻击的服务的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 端口
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 最近攻击时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 0：待处理，1：忽略，5：已处理，6：加入白名单
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DataStatus = null;
+        this.By = null;
 
     }
 
@@ -22644,27 +26466,19 @@ class BruteAttackInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Country = 'Country' in params ? params.Country : null;
-        this.City = 'City' in params ? params.City : null;
-        this.Province = 'Province' in params ? params.Province : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.Count = 'Count' in params ? params.Count : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DataStatus = 'DataStatus' in params ? params.DataStatus : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -22736,16 +26550,10 @@ class DescribeAssetPortInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -22766,22 +26574,28 @@ class DescribeAssetPortInfoListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 排序方式：StartTime
+         * 排序方式：[FirstTime|StartTime]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -22792,8 +26606,7 @@ class DescribeAssetPortInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -22803,9 +26616,10 @@ class DescribeAssetPortInfoListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -22923,12 +26737,132 @@ class DescribeExportMachinesRequest extends  AbstractModel {
 }
 
 /**
- * CreateScanMalwareSetting返回参数结构体
+ * DescribeAssetInfo返回参数结构体
  * @class
  */
-class CreateScanMalwareSettingResponse extends  AbstractModel {
+class DescribeAssetInfoResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 主机数
+         * @type {number || null}
+         */
+        this.MachineCount = null;
+
+        /**
+         * 账号数
+         * @type {number || null}
+         */
+        this.AccountCount = null;
+
+        /**
+         * 端口数
+         * @type {number || null}
+         */
+        this.PortCount = null;
+
+        /**
+         * 进程数
+         * @type {number || null}
+         */
+        this.ProcessCount = null;
+
+        /**
+         * 软件数
+         * @type {number || null}
+         */
+        this.SoftwareCount = null;
+
+        /**
+         * 数据库数
+         * @type {number || null}
+         */
+        this.DatabaseCount = null;
+
+        /**
+         * Web应用数
+         * @type {number || null}
+         */
+        this.WebAppCount = null;
+
+        /**
+         * Web框架数
+         * @type {number || null}
+         */
+        this.WebFrameCount = null;
+
+        /**
+         * Web服务数
+         * @type {number || null}
+         */
+        this.WebServiceCount = null;
+
+        /**
+         * Web站点数
+         * @type {number || null}
+         */
+        this.WebLocationCount = null;
+
+        /**
+         * 账号今日新增
+         * @type {number || null}
+         */
+        this.AccountNewCount = null;
+
+        /**
+         * 端口今日新增
+         * @type {number || null}
+         */
+        this.PortNewCount = null;
+
+        /**
+         * 进程今日新增
+         * @type {number || null}
+         */
+        this.ProcessNewCount = null;
+
+        /**
+         * 软件今日新增
+         * @type {number || null}
+         */
+        this.SoftwareNewCount = null;
+
+        /**
+         * 数据库今日新增
+         * @type {number || null}
+         */
+        this.DatabaseNewCount = null;
+
+        /**
+         * Web应用今日新增
+         * @type {number || null}
+         */
+        this.WebAppNewCount = null;
+
+        /**
+         * Web框架今日新增
+         * @type {number || null}
+         */
+        this.WebFrameNewCount = null;
+
+        /**
+         * Web服务今日新增
+         * @type {number || null}
+         */
+        this.WebServiceNewCount = null;
+
+        /**
+         * Web站点今日新增
+         * @type {number || null}
+         */
+        this.WebLocationNewCount = null;
+
+        /**
+         * 主机今日新增
+         * @type {number || null}
+         */
+        this.MachineNewCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -22945,6 +26879,26 @@ class CreateScanMalwareSettingResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MachineCount = 'MachineCount' in params ? params.MachineCount : null;
+        this.AccountCount = 'AccountCount' in params ? params.AccountCount : null;
+        this.PortCount = 'PortCount' in params ? params.PortCount : null;
+        this.ProcessCount = 'ProcessCount' in params ? params.ProcessCount : null;
+        this.SoftwareCount = 'SoftwareCount' in params ? params.SoftwareCount : null;
+        this.DatabaseCount = 'DatabaseCount' in params ? params.DatabaseCount : null;
+        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
+        this.WebFrameCount = 'WebFrameCount' in params ? params.WebFrameCount : null;
+        this.WebServiceCount = 'WebServiceCount' in params ? params.WebServiceCount : null;
+        this.WebLocationCount = 'WebLocationCount' in params ? params.WebLocationCount : null;
+        this.AccountNewCount = 'AccountNewCount' in params ? params.AccountNewCount : null;
+        this.PortNewCount = 'PortNewCount' in params ? params.PortNewCount : null;
+        this.ProcessNewCount = 'ProcessNewCount' in params ? params.ProcessNewCount : null;
+        this.SoftwareNewCount = 'SoftwareNewCount' in params ? params.SoftwareNewCount : null;
+        this.DatabaseNewCount = 'DatabaseNewCount' in params ? params.DatabaseNewCount : null;
+        this.WebAppNewCount = 'WebAppNewCount' in params ? params.WebAppNewCount : null;
+        this.WebFrameNewCount = 'WebFrameNewCount' in params ? params.WebFrameNewCount : null;
+        this.WebServiceNewCount = 'WebServiceNewCount' in params ? params.WebServiceNewCount : null;
+        this.WebLocationNewCount = 'WebLocationNewCount' in params ? params.WebLocationNewCount : null;
+        this.MachineNewCount = 'MachineNewCount' in params ? params.MachineNewCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -22959,7 +26913,7 @@ class WarningObject extends  AbstractModel {
         super();
 
         /**
-         * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线
+         * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线，14：恶意请求，15: 网络攻击，16：Windows系统漏洞，17：Linux软件漏洞
          * @type {number || null}
          */
         this.Type = null;
@@ -22988,6 +26942,13 @@ class WarningObject extends  AbstractModel {
          */
         this.ControlBits = null;
 
+        /**
+         * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostRange = null;
+
     }
 
     /**
@@ -23002,6 +26963,7 @@ class WarningObject extends  AbstractModel {
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ControlBits = 'ControlBits' in params ? params.ControlBits : null;
+        this.HostRange = 'HostRange' in params ? params.HostRange : null;
 
     }
 }
@@ -23142,7 +27104,7 @@ class RiskDnsList extends  AbstractModel {
         this.MachineWanIp = null;
 
         /**
-         * 主机在线状态 OFFLINE  ONLINE
+         * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -23670,26 +27632,114 @@ class EditBashRulesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBruteAttackList返回参数结构体
+ * DescribeLicenseGeneral返回参数结构体
  * @class
  */
-class DescribeBruteAttackListResponse extends  AbstractModel {
+class DescribeLicenseGeneralResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 总授权数 (包含隔离,过期等不可用状态)
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.LicenseCnt = null;
 
         /**
-         * 密码破解列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<BruteAttackInfo> || null}
+         * 可用授权数
+         * @type {number || null}
          */
-        this.BruteAttackList = null;
+        this.AvailableLicenseCnt = null;
+
+        /**
+         * 可用专业版授权数(包含后付费).
+         * @type {number || null}
+         */
+        this.AvailableProVersionLicenseCnt = null;
+
+        /**
+         * 可用旗舰版授权数
+         * @type {number || null}
+         */
+        this.AvailableFlagshipVersionLicenseCnt = null;
+
+        /**
+         * 即将到期授权数 (15天内到期的)
+         * @type {number || null}
+         */
+        this.NearExpiryLicenseCnt = null;
+
+        /**
+         * 已到期授权数(不包含已删除的记录)
+         * @type {number || null}
+         */
+        this.ExpireLicenseCnt = null;
+
+        /**
+         * 自动升级开关状态,默认 false,  true 开启, false 关闭
+         * @type {boolean || null}
+         */
+        this.AutoOpenStatus = null;
+
+        /**
+         * PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费
+         * @type {string || null}
+         */
+        this.ProtectType = null;
+
+        /**
+         * 历史是否开通过自动升级开关
+         * @type {boolean || null}
+         */
+        this.IsOpenStatusHistory = null;
+
+        /**
+         * 已使用授权数
+         * @type {number || null}
+         */
+        this.UsedLicenseCnt = null;
+
+        /**
+         * 未到期授权数
+         * @type {number || null}
+         */
+        this.NotExpiredLicenseCnt = null;
+
+        /**
+         * 旗舰版总授权数(有效订单)
+         * @type {number || null}
+         */
+        this.FlagshipVersionLicenseCnt = null;
+
+        /**
+         * 专业版总授权数(有效订单)
+         * @type {number || null}
+         */
+        this.ProVersionLicenseCnt = null;
+
+        /**
+         * 普惠版总授权数(有效订单的授权数)
+         * @type {number || null}
+         */
+        this.CwpVersionLicenseCnt = null;
+
+        /**
+         * 可用惠普版授权数
+         * @type {number || null}
+         */
+        this.AvailableLHLicenseCnt = null;
+
+        /**
+         * 自动加购开关, true 开启, false 关闭
+         * @type {boolean || null}
+         */
+        this.AutoRepurchaseSwitch = null;
+
+        /**
+         * 自动加购订单是否自动续费 ,true 开启, false 关闭
+         * @type {boolean || null}
+         */
+        this.AutoRepurchaseRenewSwitch = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -23706,16 +27756,23 @@ class DescribeBruteAttackListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.BruteAttackList) {
-            this.BruteAttackList = new Array();
-            for (let z in params.BruteAttackList) {
-                let obj = new BruteAttackInfo();
-                obj.deserialize(params.BruteAttackList[z]);
-                this.BruteAttackList.push(obj);
-            }
-        }
+        this.LicenseCnt = 'LicenseCnt' in params ? params.LicenseCnt : null;
+        this.AvailableLicenseCnt = 'AvailableLicenseCnt' in params ? params.AvailableLicenseCnt : null;
+        this.AvailableProVersionLicenseCnt = 'AvailableProVersionLicenseCnt' in params ? params.AvailableProVersionLicenseCnt : null;
+        this.AvailableFlagshipVersionLicenseCnt = 'AvailableFlagshipVersionLicenseCnt' in params ? params.AvailableFlagshipVersionLicenseCnt : null;
+        this.NearExpiryLicenseCnt = 'NearExpiryLicenseCnt' in params ? params.NearExpiryLicenseCnt : null;
+        this.ExpireLicenseCnt = 'ExpireLicenseCnt' in params ? params.ExpireLicenseCnt : null;
+        this.AutoOpenStatus = 'AutoOpenStatus' in params ? params.AutoOpenStatus : null;
+        this.ProtectType = 'ProtectType' in params ? params.ProtectType : null;
+        this.IsOpenStatusHistory = 'IsOpenStatusHistory' in params ? params.IsOpenStatusHistory : null;
+        this.UsedLicenseCnt = 'UsedLicenseCnt' in params ? params.UsedLicenseCnt : null;
+        this.NotExpiredLicenseCnt = 'NotExpiredLicenseCnt' in params ? params.NotExpiredLicenseCnt : null;
+        this.FlagshipVersionLicenseCnt = 'FlagshipVersionLicenseCnt' in params ? params.FlagshipVersionLicenseCnt : null;
+        this.ProVersionLicenseCnt = 'ProVersionLicenseCnt' in params ? params.ProVersionLicenseCnt : null;
+        this.CwpVersionLicenseCnt = 'CwpVersionLicenseCnt' in params ? params.CwpVersionLicenseCnt : null;
+        this.AvailableLHLicenseCnt = 'AvailableLHLicenseCnt' in params ? params.AvailableLHLicenseCnt : null;
+        this.AutoRepurchaseSwitch = 'AutoRepurchaseSwitch' in params ? params.AutoRepurchaseSwitch : null;
+        this.AutoRepurchaseRenewSwitch = 'AutoRepurchaseRenewSwitch' in params ? params.AutoRepurchaseRenewSwitch : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -23963,40 +28020,18 @@ class ModifyBanModeResponse extends  AbstractModel {
 }
 
 /**
- * 基线检测项TOP信息
+ * DeleteLicenseRecord返回参数结构体
  * @class
  */
-class BaselineRuleTopInfo extends  AbstractModel {
+class DeleteLicenseRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 基线检测项名
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RuleName = null;
-
-        /**
-         * 检测项危害等级
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * 事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EventCount = null;
-
-        /**
-         * 检测项id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RuleId = null;
+        this.RequestId = null;
 
     }
 
@@ -24007,10 +28042,7 @@ class BaselineRuleTopInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.EventCount = 'EventCount' in params ? params.EventCount : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24181,6 +28213,27 @@ class AssetProcessBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 
+ 附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -24224,6 +28277,14 @@ class AssetProcessBaseInfo extends  AbstractModel {
         this.PackageName = 'PackageName' in params ? params.PackageName : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -24303,6 +28364,80 @@ class DescribeAssetCoreModuleListResponse extends  AbstractModel {
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBaselineItemList请求参数结构体
+ * @class
+ */
+class DescribeBaselineItemListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>HostId - string - 是否必填：否 - 主机Id</li>
+<li>HostName - string - 是否必填：否 - 主机名</li>
+<li>HostIp - string - 是否必填：否 - 主机IP</li>
+<li>ItemId - String - 是否必填：否 - 检测项Id</li>
+<li>ItemName - String - 是否必填：否 - 项名称</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态[0:未通过|3:通过|5:检测中]</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开始时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10,最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式: [ASC:升序|DESC:降序]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 可选排序列
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -24520,7 +28655,7 @@ class DescribeScanStateRequest extends  AbstractModel {
 
         /**
          * 过滤参数;
-<li>StrategyId 基线策略ID ,仅ModuleType 为 Baseline 时需要<li/>
+<li>StrategyId 基线策略ID ,仅ModuleType 为 Baseline 时需要</li>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -24544,6 +28679,90 @@ class DescribeScanStateRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * SyncBaselineDetectSummary返回参数结构体
+ * @class
+ */
+class SyncBaselineDetectSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理进度
+         * @type {number || null}
+         */
+        this.ProgressRate = null;
+
+        /**
+         * 未通过策略总数
+         * @type {number || null}
+         */
+        this.NotPassPolicyCount = null;
+
+        /**
+         * 主机总数
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 1:即将进行首次扫描   0:已经扫描过了
+         * @type {number || null}
+         */
+        this.WillFirstScan = null;
+
+        /**
+         * 正在检测的任务ID
+         * @type {Array.<number> || null}
+         */
+        this.DetectingTaskIds = null;
+
+        /**
+         * 扫描中剩余时间(分钟)
+         * @type {number || null}
+         */
+        this.LeftMins = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProgressRate = 'ProgressRate' in params ? params.ProgressRate : null;
+        this.NotPassPolicyCount = 'NotPassPolicyCount' in params ? params.NotPassPolicyCount : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.WillFirstScan = 'WillFirstScan' in params ? params.WillFirstScan : null;
+        this.DetectingTaskIds = 'DetectingTaskIds' in params ? params.DetectingTaskIds : null;
+        this.LeftMins = 'LeftMins' in params ? params.LeftMins : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24628,6 +28847,18 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
          */
         this.EngineType = null;
 
+        /**
+         * 启发引擎开关 0 关闭 1开启
+         * @type {number || null}
+         */
+        this.EnableInspiredEngine = null;
+
+        /**
+         * 是否开启恶意进程查杀[0:未开启,1:开启]
+         * @type {number || null}
+         */
+        this.EnableMemShellScan = null;
+
     }
 
     /**
@@ -24649,6 +28880,8 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
         this.AutoIsolation = 'AutoIsolation' in params ? params.AutoIsolation : null;
         this.KillProcess = 'KillProcess' in params ? params.KillProcess : null;
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.EnableInspiredEngine = 'EnableInspiredEngine' in params ? params.EnableInspiredEngine : null;
+        this.EnableMemShellScan = 'EnableMemShellScan' in params ? params.EnableMemShellScan : null;
 
     }
 }
@@ -24724,6 +28957,32 @@ class AssetEnvBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 服务器外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -24743,6 +29002,15 @@ class AssetEnvBaseInfo extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -24976,6 +29244,27 @@ class MalwareInfo extends  AbstractModel {
          */
         this.Uuid = null;
 
+        /**
+         * 最近修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 最近访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StrFileAccessTime = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -25012,6 +29301,14 @@ class MalwareInfo extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.StrFileAccessTime = 'StrFileAccessTime' in params ? params.StrFileAccessTime : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -25061,6 +29358,27 @@ class Place extends  AbstractModel {
         this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
         this.CountryId = 'CountryId' in params ? params.CountryId : null;
         this.Location = 'Location' in params ? params.Location : null;
+
+    }
+}
+
+/**
+ * SyncBaselineDetectSummary请求参数结构体
+ * @class
+ */
+class SyncBaselineDetectSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -25152,27 +29470,6 @@ class DescribeAssetPlanTaskListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-<li>User- string - 是否必填：否 - 用户</li>
-<li>Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 </li>
-         * @type {Array.<AssetFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
          * 服务器Uuid
          * @type {string || null}
          */
@@ -25184,6 +29481,39 @@ class DescribeAssetPlanTaskListRequest extends  AbstractModel {
          */
         this.Quuid = null;
 
+        /**
+         * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>User- string - 是否必填：否 - 用户</li>
+<li>Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 </li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序方式：[FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -25193,8 +29523,8 @@ class DescribeAssetPlanTaskListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -25204,8 +29534,10 @@ class DescribeAssetPlanTaskListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -25346,18 +29678,24 @@ class DescribeProtectDirRelatedServerRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSearchLogs返回参数结构体
+ * DescribeBaselineItemList返回参数结构体
  * @class
  */
-class DescribeSearchLogsResponse extends  AbstractModel {
+class DescribeBaselineItemListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 历史搜索记录 保留最新的10条
-         * @type {Array.<string> || null}
+         * 无
+         * @type {Array.<BaselineItem> || null}
          */
-        this.Data = null;
+        this.List = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -25374,8 +29712,101 @@ class DescribeSearchLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Data = 'Data' in params ? params.Data : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new BaselineItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClientException请求参数结构体
+ * @class
+ */
+class DescribeClientExceptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端异常类型 1:客户端离线，2:客户端卸载
+         * @type {number || null}
+         */
+        this.ExceptionType = null;
+
+        /**
+         * 分页的偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页单页限制数目，不为0，最大值100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 起始时间 `2006-01-02 15:04:05` 格式
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间 `2006-01-02 15:04:05` 格式
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExceptionType = 'ExceptionType' in params ? params.ExceptionType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DescribeBanRegions请求参数结构体
+ * @class
+ */
+class DescribeBanRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
     }
 }
@@ -25610,6 +30041,34 @@ class BanWhiteListDetail extends  AbstractModel {
 }
 
 /**
+ * DeleteScanTask返回参数结构体
+ * @class
+ */
+class DeleteScanTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMachineRegions返回参数结构体
  * @class
  */
@@ -25723,6 +30182,41 @@ class DescribeMachineRegionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyOrder请求参数结构体
+ * @class
+ */
+class DestroyOrderRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
 
     }
 }
@@ -25845,6 +30339,25 @@ class AssetWebAppBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -25880,6 +30393,14 @@ class AssetWebAppBaseInfo extends  AbstractModel {
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -26034,6 +30555,32 @@ class AssetJarBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         * 服务器外网IP
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         *  附加信息
+
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -26056,6 +30603,15 @@ class AssetJarBaseInfo extends  AbstractModel {
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -26146,7 +30702,7 @@ class VulInfoList extends  AbstractModel {
         this.HostCount = null;
 
         /**
-         * 漏洞等级 1:低 2:中 3:高 4:提示
+         * 漏洞等级 1:低 2:中 3:高 4:严重
          * @type {number || null}
          */
         this.Level = null;
@@ -26228,6 +30784,34 @@ class VulInfoList extends  AbstractModel {
          */
         this.TaskId = null;
 
+        /**
+         * 是否支持防御， 0:不支持 1:支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsSupportDefense = null;
+
+        /**
+         * 已防御的攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenseAttackCount = null;
+
+        /**
+         * 首次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstAppearTime = null;
+
+        /**
+         * 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VulCategory = null;
+
     }
 
     /**
@@ -26256,6 +30840,10 @@ class VulInfoList extends  AbstractModel {
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.FixSwitch = 'FixSwitch' in params ? params.FixSwitch : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.IsSupportDefense = 'IsSupportDefense' in params ? params.IsSupportDefense : null;
+        this.DefenseAttackCount = 'DefenseAttackCount' in params ? params.DefenseAttackCount : null;
+        this.FirstAppearTime = 'FirstAppearTime' in params ? params.FirstAppearTime : null;
+        this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
 
     }
 }
@@ -26343,6 +30931,18 @@ class DescribeVulHostCountScanTimeResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
+         * 最后一次修复漏洞的时间
+         * @type {string || null}
+         */
+        this.LastFixTime = null;
+
+        /**
+         * 是否有支持自动修复的漏洞事件
+         * @type {boolean || null}
+         */
+        this.hadAutoFixVul = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -26362,6 +30962,8 @@ class DescribeVulHostCountScanTimeResponse extends  AbstractModel {
         this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
         this.IfFirstScan = 'IfFirstScan' in params ? params.IfFirstScan : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.LastFixTime = 'LastFixTime' in params ? params.LastFixTime : null;
+        this.hadAutoFixVul = 'hadAutoFixVul' in params ? params.hadAutoFixVul : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -26376,39 +30978,6 @@ class DescribeAssetCoreModuleListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-<li>Name- string - 是否必填：否 - 包名</li>
-<li>User- string - 是否必填：否 - 用户</li>
-         * @type {Array.<AssetFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 排序方式，asc升序 或 desc降序
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * 排序依据:Size,ProcessCount,ModuleCount
-         * @type {string || null}
-         */
-        this.By = null;
-
-        /**
          * 服务器Uuid
          * @type {string || null}
          */
@@ -26420,6 +30989,39 @@ class DescribeAssetCoreModuleListRequest extends  AbstractModel {
          */
         this.Quuid = null;
 
+        /**
+         * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Name- string - 是否必填：否 - 包名</li>
+<li>User- string - 是否必填：否 - 用户</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，asc升序 或 desc降序
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序依据[Size|FirstTime|ProcessCount|ModuleCount]
+         * @type {string || null}
+         */
+        this.By = null;
+
     }
 
     /**
@@ -26429,8 +31031,8 @@ class DescribeAssetCoreModuleListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -26440,10 +31042,10 @@ class DescribeAssetCoreModuleListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -26462,6 +31064,12 @@ class DeleteAttackLogsRequest extends  AbstractModel {
          */
         this.Ids = null;
 
+        /**
+         * 是否全部删除
+         * @type {boolean || null}
+         */
+        this.IsAll = null;
+
     }
 
     /**
@@ -26472,6 +31080,7 @@ class DeleteAttackLogsRequest extends  AbstractModel {
             return;
         }
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.IsAll = 'IsAll' in params ? params.IsAll : null;
 
     }
 }
@@ -26646,6 +31255,41 @@ class DescribeBaselineListRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyLicenseBinds返回参数结构体
+ * @class
+ */
+class ModifyLicenseBindsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBaselineTop请求参数结构体
  * @class
  */
@@ -26732,6 +31376,77 @@ class DescribeAssetAppProcessListRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeLicenseBindList请求参数结构体
+ * @class
+ */
+class DescribeLicenseBindListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权ID
+         * @type {number || null}
+         */
+        this.LicenseId = null;
+
+        /**
+         * 授权类型
+         * @type {number || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * <li>Keywords 机器别名/公私IP 模糊查询</li>
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseId = 'LicenseId' in params ? params.LicenseId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -26837,48 +31552,6 @@ class DescribeAccountStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * ExportBruteAttacks返回参数结构体
- * @class
- */
-class ExportBruteAttacksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 导出文件下载链接地址。
-         * @type {string || null}
-         */
-        this.DownloadUrl = null;
-
-        /**
-         * 导出任务ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 安全管家列表信息
  * @class
  */
@@ -26965,6 +31638,56 @@ class SecurityButlerInfo extends  AbstractModel {
         this.HostIp = 'HostIp' in params ? params.HostIp : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.RiskCount = 'RiskCount' in params ? params.RiskCount : null;
+
+    }
+}
+
+/**
+ * DescribeBaselineHostDetectList返回参数结构体
+ * @class
+ */
+class DescribeBaselineHostDetectListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+         * @type {Array.<BaselineHostDetect> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new BaselineHostDetect();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -27225,16 +31948,10 @@ class DescribeAssetWebAppListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -27259,22 +31976,28 @@ class DescribeAssetWebAppListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 可选排序：PluginCount
+         * 可选排序：[FirstTime|PluginCount]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -27285,8 +32008,7 @@ class DescribeAssetWebAppListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -27296,9 +32018,10 @@ class DescribeAssetWebAppListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -27369,6 +32092,27 @@ class ExpertServiceOrderInfo extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ServiceTime = 'ServiceTime' in params ? params.ServiceTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeLicenseGeneral请求参数结构体
+ * @class
+ */
+class DescribeLicenseGeneralRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -27509,16 +32253,10 @@ class DescribeAssetWebLocationListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -27545,19 +32283,72 @@ class DescribeAssetWebLocationListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 可选排序：PathCount
+         * 可选排序：[FirstTime|PathCount]
          * @type {string || null}
          */
         this.By = null;
 
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeAssetHostTotalCount请求参数结构体
+ * @class
+ */
+class DescribeAssetHostTotalCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
         /**
-         * 查询指定Quuid主机的信息
+         * 主机Uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机Quuid
          * @type {string || null}
          */
         this.Quuid = null;
@@ -27571,19 +32362,7 @@ class DescribeAssetWebLocationListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
@@ -27598,10 +32377,16 @@ class DescribeVulLevelCountRequest extends  AbstractModel {
         super();
 
         /**
-         * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+         * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
          * @type {number || null}
          */
         this.VulCategory = null;
+
+        /**
+         * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+         * @type {number || null}
+         */
+        this.IsFollowVul = null;
 
     }
 
@@ -27613,6 +32398,7 @@ class DescribeVulLevelCountRequest extends  AbstractModel {
             return;
         }
         this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.IsFollowVul = 'IsFollowVul' in params ? params.IsFollowVul : null;
 
     }
 }
@@ -27826,10 +32612,16 @@ class DescribeVulTopRequest extends  AbstractModel {
         this.Top = null;
 
         /**
-         * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
+         * 1:web-cms 漏洞，2.应用漏洞 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
          * @type {number || null}
          */
         this.VulCategory = null;
+
+        /**
+         * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
+         * @type {number || null}
+         */
+        this.IsFollowVul = null;
 
     }
 
@@ -27842,6 +32634,7 @@ class DescribeVulTopRequest extends  AbstractModel {
         }
         this.Top = 'Top' in params ? params.Top : null;
         this.VulCategory = 'VulCategory' in params ? params.VulCategory : null;
+        this.IsFollowVul = 'IsFollowVul' in params ? params.IsFollowVul : null;
 
     }
 }
@@ -28047,6 +32840,13 @@ class DescribeGeneralStatResponse extends  AbstractModel {
         this.ProtectDays = null;
 
         /**
+         * 15天内新增的主机数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AddedOnTheFifteen = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -28074,6 +32874,7 @@ class DescribeGeneralStatResponse extends  AbstractModel {
         this.Offline = 'Offline' in params ? params.Offline : null;
         this.FlagshipMachineCnt = 'FlagshipMachineCnt' in params ? params.FlagshipMachineCnt : null;
         this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
+        this.AddedOnTheFifteen = 'AddedOnTheFifteen' in params ? params.AddedOnTheFifteen : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -28136,116 +32937,165 @@ class DeleteMachineTagResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityEventsCnt返回参数结构体
+ * 密码破解列表实体
  * @class
  */
-class DescribeSecurityEventsCntResponse extends  AbstractModel {
+class BruteAttackInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 木马文件相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.Malware = null;
-
-        /**
-         * 登录审计相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.HostLogin = null;
-
-        /**
-         * 密码破解相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.BruteAttack = null;
-
-        /**
-         * 恶意请求相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.RiskDns = null;
-
-        /**
-         * 高危命令相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.Bash = null;
-
-        /**
-         * 本地提权相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.PrivilegeRules = null;
-
-        /**
-         * 反弹Shell相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.ReverseShell = null;
-
-        /**
-         * 应用漏洞风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.SysVul = null;
-
-        /**
-         * Web应用漏洞相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.WebVul = null;
-
-        /**
-         * 应急漏洞相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.EmergencyVul = null;
-
-        /**
-         * 安全基线相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.BaseLine = null;
-
-        /**
-         * 攻击检测相关风险事件
-         * @type {SecurityEventInfo || null}
-         */
-        this.AttackLogs = null;
-
-        /**
-         * 受影响机器数
+         * 唯一Id
          * @type {number || null}
          */
-        this.EffectMachineCount = null;
+        this.Id = null;
 
         /**
-         * 所有事件总数
-         * @type {number || null}
-         */
-        this.EventsCount = null;
-
-        /**
-         * window 系统漏洞事件总数
+         * 云镜客户端唯一标识UUID
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {SecurityEventInfo || null}
-         */
-        this.WindowVul = null;
-
-        /**
-         * linux系统漏洞事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {SecurityEventInfo || null}
-         */
-        this.LinuxVul = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Uuid = null;
+
+        /**
+         * 主机ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 来源ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * SUCCESS：破解成功；FAILED：破解失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Country = null;
+
+        /**
+         * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.City = null;
+
+        /**
+         * 省份id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Province = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 阻断状态：1-阻断成功；非1-阻断失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BanStatus = null;
+
+        /**
+         * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 发生次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 机器UUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 是否为专业版（true/false）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsProVersion = null;
+
+        /**
+         * 被攻击的服务的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 最近攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 0：待处理，1：忽略，5：已处理，6：加入白名单
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DataStatus = null;
+
+        /**
+         * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
 
     }
 
@@ -28256,93 +33106,33 @@ class DescribeSecurityEventsCntResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DataStatus = 'DataStatus' in params ? params.DataStatus : null;
 
-        if (params.Malware) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.Malware)
-            this.Malware = obj;
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
         }
-
-        if (params.HostLogin) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.HostLogin)
-            this.HostLogin = obj;
-        }
-
-        if (params.BruteAttack) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.BruteAttack)
-            this.BruteAttack = obj;
-        }
-
-        if (params.RiskDns) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.RiskDns)
-            this.RiskDns = obj;
-        }
-
-        if (params.Bash) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.Bash)
-            this.Bash = obj;
-        }
-
-        if (params.PrivilegeRules) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.PrivilegeRules)
-            this.PrivilegeRules = obj;
-        }
-
-        if (params.ReverseShell) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.ReverseShell)
-            this.ReverseShell = obj;
-        }
-
-        if (params.SysVul) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.SysVul)
-            this.SysVul = obj;
-        }
-
-        if (params.WebVul) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.WebVul)
-            this.WebVul = obj;
-        }
-
-        if (params.EmergencyVul) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.EmergencyVul)
-            this.EmergencyVul = obj;
-        }
-
-        if (params.BaseLine) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.BaseLine)
-            this.BaseLine = obj;
-        }
-
-        if (params.AttackLogs) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.AttackLogs)
-            this.AttackLogs = obj;
-        }
-        this.EffectMachineCount = 'EffectMachineCount' in params ? params.EffectMachineCount : null;
-        this.EventsCount = 'EventsCount' in params ? params.EventsCount : null;
-
-        if (params.WindowVul) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.WindowVul)
-            this.WindowVul = obj;
-        }
-
-        if (params.LinuxVul) {
-            let obj = new SecurityEventInfo();
-            obj.deserialize(params.LinuxVul)
-            this.LinuxVul = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -28397,6 +33187,20 @@ class WarningInfoObj extends  AbstractModel {
          */
         this.ControlBits = null;
 
+        /**
+         * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostRange = null;
+
+        /**
+         * 配置的告警范围主机个数，前端用此判断展示提示信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
     }
 
     /**
@@ -28413,6 +33217,8 @@ class WarningInfoObj extends  AbstractModel {
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
         this.ControlBit = 'ControlBit' in params ? params.ControlBit : null;
         this.ControlBits = 'ControlBits' in params ? params.ControlBits : null;
+        this.HostRange = 'HostRange' in params ? params.HostRange : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -28462,6 +33268,56 @@ class UpdateMachineTagsRequest extends  AbstractModel {
         this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
         this.MachineArea = 'MachineArea' in params ? params.MachineArea : null;
         this.TagIds = 'TagIds' in params ? params.TagIds : null;
+
+    }
+}
+
+/**
+ * DescribeBaselineItemDetectList返回参数结构体
+ * @class
+ */
+class DescribeBaselineItemDetectListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 无
+         * @type {Array.<BaselineItemDetect> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new BaselineItemDetect();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -28788,6 +33644,25 @@ class AssetPortBaseInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 首次采集时间
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * 是否新增[0:否|1:是]
+         * @type {number || null}
+         */
+        this.IsNew = null;
+
+        /**
+         *  附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MachineExtraInfo || null}
+         */
+        this.MachineExtraInfo = null;
+
     }
 
     /**
@@ -28829,6 +33704,14 @@ class AssetPortBaseInfo extends  AbstractModel {
         this.BindIp = 'BindIp' in params ? params.BindIp : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.IsNew = 'IsNew' in params ? params.IsNew : null;
+
+        if (params.MachineExtraInfo) {
+            let obj = new MachineExtraInfo();
+            obj.deserialize(params.MachineExtraInfo)
+            this.MachineExtraInfo = obj;
+        }
 
     }
 }
@@ -28927,6 +33810,135 @@ class DescribeAssetInitServiceListResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBaselinePolicy请求参数结构体
+ * @class
+ */
+class ModifyBaselinePolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+         * @type {BaselinePolicy || null}
+         */
+        this.Data = null;
+
+        /**
+         * <li>RuleName - String - 是否必填：否 - 规则名称</li>
+<li>CategoryId - int64 - 是否必填：否 自定义筛选为-1 - 规则分类</li>
+<li>RuleType - int - 是否必填：否 0:系统 1:自定义 - 规则类型</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 是否按照过滤的全选
+         * @type {number || null}
+         */
+        this.SelectAll = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new BaselinePolicy();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SelectAll = 'SelectAll' in params ? params.SelectAll : null;
+
+    }
+}
+
+/**
+ * DescribeBaselineHostDetectList请求参数结构体
+ * @class
+ */
+class DescribeBaselineHostDetectListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+<li>HostName - string - 是否必填：否 - 主机名称</i>
+<li>HostIp - string - 是否必填：否 - 主机Ip</i>
+<li>ItemId - int64 - 是否必填：否 - 项Id</i>
+<li>RuleId - int64 - 是否必填：否 - 规则Id</li>
+<li>DetectStatus - int - 是否必填：否 - 检测状态</li>
+<li>Level - int - 是否必填：否 - 风险等级</li>
+<li>StartTime - string - 是否必填：否 - 开时时间</li>
+<li>EndTime - string - 是否必填：否 - 结束时间</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 限制条数,默认10,最大100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式: [ASC:升序|DESC:降序]
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 可选排序列: [LastTime|ItemCount|PassedItemCount|NotPassedItemCount|FirstTime]
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeAssetWebFrameList返回参数结构体
  * @class
  */
@@ -28986,16 +33998,10 @@ class DescribeAssetUserListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -29022,26 +34028,29 @@ class DescribeAssetUserListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 可选排序：
-LoginTime
-PasswordChangeTime
-PasswordDuaTime
+         * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]
 PasswordLockDays
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -29052,8 +34061,7 @@ PasswordLockDays
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -29063,9 +34071,10 @@ PasswordLockDays
                 this.Filters.push(obj);
             }
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -29119,18 +34128,6 @@ class DescribeAssetSystemPackageListRequest extends  AbstractModel {
         this.Quuid = null;
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
          * 过滤条件。
 <li>Name - String - 是否必填：否 - 包 名</li>
 <li>StartTime - String - 是否必填：否 - 安装开始时间</li>
@@ -29145,13 +34142,25 @@ class DescribeAssetSystemPackageListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 排序方式，asc-升序 或 desc-降序。默认：desc-降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 排序方式可选：InstallTime 安装时间
+         * 排序方式可选：[FistTime|InstallTime:安装时间]
          * @type {string || null}
          */
         this.By = null;
@@ -29167,8 +34176,6 @@ class DescribeAssetSystemPackageListRequest extends  AbstractModel {
         }
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -29178,6 +34185,8 @@ class DescribeAssetSystemPackageListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
 
@@ -29222,6 +34231,218 @@ class MachineTag extends  AbstractModel {
         this.Rid = 'Rid' in params ? params.Rid : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.TagId = 'TagId' in params ? params.TagId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityEventsCnt返回参数结构体
+ * @class
+ */
+class DescribeSecurityEventsCntResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 木马文件相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.Malware = null;
+
+        /**
+         * 登录审计相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.HostLogin = null;
+
+        /**
+         * 密码破解相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.BruteAttack = null;
+
+        /**
+         * 恶意请求相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.RiskDns = null;
+
+        /**
+         * 高危命令相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.Bash = null;
+
+        /**
+         * 本地提权相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.PrivilegeRules = null;
+
+        /**
+         * 反弹Shell相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.ReverseShell = null;
+
+        /**
+         * 应用漏洞风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.SysVul = null;
+
+        /**
+         * Web应用漏洞相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.WebVul = null;
+
+        /**
+         * 应急漏洞相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.EmergencyVul = null;
+
+        /**
+         * 安全基线相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.BaseLine = null;
+
+        /**
+         * 攻击检测相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.AttackLogs = null;
+
+        /**
+         * 受影响机器数
+         * @type {number || null}
+         */
+        this.EffectMachineCount = null;
+
+        /**
+         * 所有事件总数
+         * @type {number || null}
+         */
+        this.EventsCount = null;
+
+        /**
+         * window 系统漏洞事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SecurityEventInfo || null}
+         */
+        this.WindowVul = null;
+
+        /**
+         * linux系统漏洞事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SecurityEventInfo || null}
+         */
+        this.LinuxVul = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Malware) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.Malware)
+            this.Malware = obj;
+        }
+
+        if (params.HostLogin) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.HostLogin)
+            this.HostLogin = obj;
+        }
+
+        if (params.BruteAttack) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.BruteAttack)
+            this.BruteAttack = obj;
+        }
+
+        if (params.RiskDns) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.RiskDns)
+            this.RiskDns = obj;
+        }
+
+        if (params.Bash) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.Bash)
+            this.Bash = obj;
+        }
+
+        if (params.PrivilegeRules) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.PrivilegeRules)
+            this.PrivilegeRules = obj;
+        }
+
+        if (params.ReverseShell) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.ReverseShell)
+            this.ReverseShell = obj;
+        }
+
+        if (params.SysVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.SysVul)
+            this.SysVul = obj;
+        }
+
+        if (params.WebVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.WebVul)
+            this.WebVul = obj;
+        }
+
+        if (params.EmergencyVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.EmergencyVul)
+            this.EmergencyVul = obj;
+        }
+
+        if (params.BaseLine) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.BaseLine)
+            this.BaseLine = obj;
+        }
+
+        if (params.AttackLogs) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.AttackLogs)
+            this.AttackLogs = obj;
+        }
+        this.EffectMachineCount = 'EffectMachineCount' in params ? params.EffectMachineCount : null;
+        this.EventsCount = 'EventsCount' in params ? params.EventsCount : null;
+
+        if (params.WindowVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.WindowVul)
+            this.WindowVul = obj;
+        }
+
+        if (params.LinuxVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.LinuxVul)
+            this.LinuxVul = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -29280,17 +34501,10 @@ class DescribeAssetWebServiceInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 查询指定Quuid主机的信息
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Quuid = null;
 
         /**
          * 过滤条件。
@@ -29313,22 +34527,29 @@ class DescribeAssetWebServiceInfoListRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * 偏移量，默认为0。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 排序方式，asc升序 或 desc降序
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 可选排序：ProcessCount
+         * 可选排序：[FirstTime|ProcessCount]
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 查询指定Quuid主机的信息
-         * @type {string || null}
-         */
-        this.Quuid = null;
 
     }
 
@@ -29339,8 +34560,7 @@ class DescribeAssetWebServiceInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -29350,9 +34570,10 @@ class DescribeAssetWebServiceInfoListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
-        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -29471,24 +34692,29 @@ module.exports = {
     DescribeBaselineHostTopResponse: DescribeBaselineHostTopResponse,
     DeleteBashRulesResponse: DeleteBashRulesResponse,
     ExportVulListResponse: ExportVulListResponse,
+    AssetMachineBaseInfo: AssetMachineBaseInfo,
     DescribeHistoryServiceResponse: DescribeHistoryServiceResponse,
     BaselineEffectHost: BaselineEffectHost,
     ModifyWebPageProtectSettingResponse: ModifyWebPageProtectSettingResponse,
     DescribeVulInfoCvssResponse: DescribeVulInfoCvssResponse,
     DescribeBaselineStrategyDetailRequest: DescribeBaselineStrategyDetailRequest,
+    ModifyLicenseBindsRequest: ModifyLicenseBindsRequest,
     MalWareList: MalWareList,
     DescribeAssetUserInfoResponse: DescribeAssetUserInfoResponse,
     Tag: Tag,
+    DescribeServersAndRiskAndFirstInfoResponse: DescribeServersAndRiskAndFirstInfoResponse,
     ExportAttackLogsResponse: ExportAttackLogsResponse,
     DescribeBaselineEffectHostListResponse: DescribeBaselineEffectHostListResponse,
     TrustMalwaresRequest: TrustMalwaresRequest,
+    LicenseOrder: LicenseOrder,
     ExportVulEffectHostListRequest: ExportVulEffectHostListRequest,
     DescribeBaselineBasicInfoRequest: DescribeBaselineBasicInfoRequest,
     DescribeProVersionInfoRequest: DescribeProVersionInfoRequest,
     DescribeVulCountByDatesRequest: DescribeVulCountByDatesRequest,
+    CreateLicenseOrderResponse: CreateLicenseOrderResponse,
     DescribeBaselineStrategyListResponse: DescribeBaselineStrategyListResponse,
     DefendAttackLog: DefendAttackLog,
-    DescribeAssetEnvListResponse: DescribeAssetEnvListResponse,
+    BaselineRuleTopInfo: BaselineRuleTopInfo,
     DescribeAttackLogInfoResponse: DescribeAttackLogInfoResponse,
     DescribePrivilegeEventsResponse: DescribePrivilegeEventsResponse,
     DescribeOverviewStatisticsResponse: DescribeOverviewStatisticsResponse,
@@ -29503,6 +34729,7 @@ module.exports = {
     DescribeComponentStatisticsResponse: DescribeComponentStatisticsResponse,
     DescribeMachineRegionsRequest: DescribeMachineRegionsRequest,
     DescribeSearchExportListResponse: DescribeSearchExportListResponse,
+    DescribeVulLevelCountResponse: DescribeVulLevelCountResponse,
     BruteAttackRule: BruteAttackRule,
     DescribeAvailableExpertServiceDetailRequest: DescribeAvailableExpertServiceDetailRequest,
     DescribeServerRelatedDirInfoResponse: DescribeServerRelatedDirInfoResponse,
@@ -29513,9 +34740,12 @@ module.exports = {
     LoginWhiteLists: LoginWhiteLists,
     ScanVulResponse: ScanVulResponse,
     DescribeOverviewStatisticsRequest: DescribeOverviewStatisticsRequest,
-    OsName: OsName,
+    DeleteScanTaskRequest: DeleteScanTaskRequest,
     DescribeTagMachinesRequest: DescribeTagMachinesRequest,
     AssetKeyVal: AssetKeyVal,
+    DescribeLicenseListResponse: DescribeLicenseListResponse,
+    DescribeJavaMemShellListResponse: DescribeJavaMemShellListResponse,
+    LicenseUnBindRsp: LicenseUnBindRsp,
     ModifyAutoOpenProVersionConfigRequest: ModifyAutoOpenProVersionConfigRequest,
     DeletePrivilegeEventsRequest: DeletePrivilegeEventsRequest,
     ExportAttackLogsRequest: ExportAttackLogsRequest,
@@ -29525,6 +34755,7 @@ module.exports = {
     DeleteSearchTemplateRequest: DeleteSearchTemplateRequest,
     EmergencyVul: EmergencyVul,
     ExportReverseShellEventsRequest: ExportReverseShellEventsRequest,
+    BashEventNew: BashEventNew,
     DeleteLoginWhiteListResponse: DeleteLoginWhiteListResponse,
     DescribeAttackLogsResponse: DescribeAttackLogsResponse,
     DeleteMalwaresResponse: DeleteMalwaresResponse,
@@ -29547,7 +34778,7 @@ module.exports = {
     ExportVulDetectionReportRequest: ExportVulDetectionReportRequest,
     ExportMalwaresResponse: ExportMalwaresResponse,
     DescribeScanVulSettingRequest: DescribeScanVulSettingRequest,
-    DescribeESHitsRequest: DescribeESHitsRequest,
+    StartBaselineDetectRequest: StartBaselineDetectRequest,
     DescribeAssetPlanTaskListResponse: DescribeAssetPlanTaskListResponse,
     DescribeBaselineRuleRequest: DescribeBaselineRuleRequest,
     DescribeHistoryAccountsRequest: DescribeHistoryAccountsRequest,
@@ -29557,40 +34788,48 @@ module.exports = {
     DescribeAssetMachineDetailResponse: DescribeAssetMachineDetailResponse,
     DescribeStrategyExistResponse: DescribeStrategyExistResponse,
     DeleteReverseShellEventsRequest: DeleteReverseShellEventsRequest,
-    DescribeBanRegionsRequest: DescribeBanRegionsRequest,
-    DescribeServersAndRiskAndFirstInfoRequest: DescribeServersAndRiskAndFirstInfoRequest,
+    DescribeSearchLogsResponse: DescribeSearchLogsResponse,
+    DescribeMachineOsListResponse: DescribeMachineOsListResponse,
     DescribeAssetWebServiceProcessListResponse: DescribeAssetWebServiceProcessListResponse,
     IgnoreImpactedHostsRequest: IgnoreImpactedHostsRequest,
     AssetUserDetail: AssetUserDetail,
+    ModifyOrderAttributeResponse: ModifyOrderAttributeResponse,
     DescribeMachinesRequest: DescribeMachinesRequest,
     DescribeVulEffectHostListRequest: DescribeVulEffectHostListRequest,
+    ExportLicenseDetailRequest: ExportLicenseDetailRequest,
     AssetWebAppPluginInfo: AssetWebAppPluginInfo,
     DeletePrivilegeRulesRequest: DeletePrivilegeRulesRequest,
+    DescribeLicenseBindScheduleResponse: DescribeLicenseBindScheduleResponse,
     DescribeMalwareInfoRequest: DescribeMalwareInfoRequest,
     DescribeVersionStatisticsRequest: DescribeVersionStatisticsRequest,
     ExportPrivilegeEventsResponse: ExportPrivilegeEventsResponse,
     UsualPlace: UsualPlace,
+    ModifyBaselinePolicyResponse: ModifyBaselinePolicyResponse,
     DescribeReverseShellEventsRequest: DescribeReverseShellEventsRequest,
     ReverseShell: ReverseShell,
     DescribeAttackVulTypeListRequest: DescribeAttackVulTypeListRequest,
     DescribeLogStorageStatisticRequest: DescribeLogStorageStatisticRequest,
-    DescribeAssetRecentMachineInfoRequest: DescribeAssetRecentMachineInfoRequest,
+    DeleteBaselinePolicyRequest: DeleteBaselinePolicyRequest,
+    DescribeBaselinePolicyListResponse: DescribeBaselinePolicyListResponse,
     CheckBashRuleParamsResponse: CheckBashRuleParamsResponse,
+    DeleteLicenseRecordRequest: DeleteLicenseRecordRequest,
     ExportBaselineListRequest: ExportBaselineListRequest,
     DeleteProtectDirRequest: DeleteProtectDirRequest,
     ExportIgnoreBaselineRuleResponse: ExportIgnoreBaselineRuleResponse,
     BruteAttackRuleList: BruteAttackRuleList,
     DescribeBanStatusResponse: DescribeBanStatusResponse,
     DescribeVulListRequest: DescribeVulListRequest,
-    VulDetailInfo: VulDetailInfo,
-    DescribeServersAndRiskAndFirstInfoResponse: DescribeServersAndRiskAndFirstInfoResponse,
+    DescribeLicenseBindListResponse: DescribeLicenseBindListResponse,
+    BaselineInfo: BaselineInfo,
     AssetAppBaseInfo: AssetAppBaseInfo,
     DescribePrivilegeRulesRequest: DescribePrivilegeRulesRequest,
-    MonthInspectionReport: MonthInspectionReport,
+    ModifyOrderAttributeRequest: ModifyOrderAttributeRequest,
+    JavaMemShellInfo: JavaMemShellInfo,
     DescribeAssetSystemPackageListResponse: DescribeAssetSystemPackageListResponse,
+    DescribeClientExceptionResponse: DescribeClientExceptionResponse,
     DescribeAssetMachineListResponse: DescribeAssetMachineListResponse,
     DescribeWebPageGeneralizeRequest: DescribeWebPageGeneralizeRequest,
-    AssetDiskPartitionInfo: AssetDiskPartitionInfo,
+    DescribeBaselineDetailRequest: DescribeBaselineDetailRequest,
     ModifyWarningSettingRequest: ModifyWarningSettingRequest,
     DescribeMalwareRiskWarningRequest: DescribeMalwareRiskWarningRequest,
     DescribeAssetInfoRequest: DescribeAssetInfoRequest,
@@ -29603,24 +34842,29 @@ module.exports = {
     DescribeSearchExportListRequest: DescribeSearchExportListRequest,
     ScanAssetRequest: ScanAssetRequest,
     DescribeBaselineRuleResponse: DescribeBaselineRuleResponse,
+    ModifyMachineRemarkRequest: ModifyMachineRemarkRequest,
+    StopBaselineDetectResponse: StopBaselineDetectResponse,
     DeleteMaliciousRequestsResponse: DeleteMaliciousRequestsResponse,
-    DescribeESHitsResponse: DescribeESHitsResponse,
+    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
     ProtectDirRelatedServer: ProtectDirRelatedServer,
     ExportBruteAttacksRequest: ExportBruteAttacksRequest,
     DeleteMachineResponse: DeleteMachineResponse,
     ScanVulRequest: ScanVulRequest,
+    DescribeBruteAttackListResponse: DescribeBruteAttackListResponse,
     RecoverMalwaresRequest: RecoverMalwaresRequest,
     TagMachine: TagMachine,
     DescribeAssetCoreModuleInfoResponse: DescribeAssetCoreModuleInfoResponse,
     DescribeAssetEnvListRequest: DescribeAssetEnvListRequest,
     StopNoticeBanTipsRequest: StopNoticeBanTipsRequest,
     DescribeScanMalwareScheduleRequest: DescribeScanMalwareScheduleRequest,
-    AssetMachineBaseInfo: AssetMachineBaseInfo,
+    BaselineDetectParam: BaselineDetectParam,
     DescribeBashEventsResponse: DescribeBashEventsResponse,
     UpdateMachineTagsResponse: UpdateMachineTagsResponse,
     DescribeBashEventsRequest: DescribeBashEventsRequest,
     DeleteMachineRequest: DeleteMachineRequest,
     DescribeAssetWebLocationListResponse: DescribeAssetWebLocationListResponse,
+    RecordInfo: RecordInfo,
+    DescribeAssetHostTotalCountResponse: DescribeAssetHostTotalCountResponse,
     DescribeAssetJarListRequest: DescribeAssetJarListRequest,
     PrivilegeEscalationProcess: PrivilegeEscalationProcess,
     DescribeProtectNetListResponse: DescribeProtectNetListResponse,
@@ -29635,6 +34879,7 @@ module.exports = {
     CreateEmergencyVulScanResponse: CreateEmergencyVulScanResponse,
     DescribeAssetCoreModuleInfoRequest: DescribeAssetCoreModuleInfoRequest,
     DescribeIndexListResponse: DescribeIndexListResponse,
+    DescribeTagMachinesResponse: DescribeTagMachinesResponse,
     ModifyWebPageProtectDirRequest: ModifyWebPageProtectDirRequest,
     DescribeWebPageGeneralizeResponse: DescribeWebPageGeneralizeResponse,
     DescribeBanWhiteListResponse: DescribeBanWhiteListResponse,
@@ -29647,11 +34892,11 @@ module.exports = {
     DeleteTagsResponse: DeleteTagsResponse,
     DescribeSecurityEventsCntRequest: DescribeSecurityEventsCntRequest,
     AssetUserBaseInfo: AssetUserBaseInfo,
-    DescribeMachineOsListResponse: DescribeMachineOsListResponse,
+    LicenseBindTaskDetail: LicenseBindTaskDetail,
     ExportMaliciousRequestsResponse: ExportMaliciousRequestsResponse,
     EffectiveMachineInfo: EffectiveMachineInfo,
     DescribeVulCountByDatesResponse: DescribeVulCountByDatesResponse,
-    DescribeTagMachinesResponse: DescribeTagMachinesResponse,
+    DescribeServersAndRiskAndFirstInfoRequest: DescribeServersAndRiskAndFirstInfoRequest,
     DescribeIndexListRequest: DescribeIndexListRequest,
     ProtectDirInfo: ProtectDirInfo,
     DeleteBashRulesRequest: DeleteBashRulesRequest,
@@ -29670,20 +34915,25 @@ module.exports = {
     BaselineHostTopList: BaselineHostTopList,
     DescribeReverseShellRulesResponse: DescribeReverseShellRulesResponse,
     DescribeBruteAttackListRequest: DescribeBruteAttackListRequest,
+    ModifyMachineRemarkResponse: ModifyMachineRemarkResponse,
     DescribeVulListResponse: DescribeVulListResponse,
     DescribeUndoVulCountsRequest: DescribeUndoVulCountsRequest,
     ScanAssetResponse: ScanAssetResponse,
     Machine: Machine,
     ProtectMachineInfo: ProtectMachineInfo,
     DescribeMalwareFileRequest: DescribeMalwareFileRequest,
+    DescribeLicenseListRequest: DescribeLicenseListRequest,
+    ModifyLicenseUnBindsRequest: ModifyLicenseUnBindsRequest,
     DeleteMaliciousRequestsRequest: DeleteMaliciousRequestsRequest,
     DescribeBanWhiteListRequest: DescribeBanWhiteListRequest,
     DescribeWebPageServiceInfoResponse: DescribeWebPageServiceInfoResponse,
     DescribeUsualLoginPlacesRequest: DescribeUsualLoginPlacesRequest,
     ProtectEventLists: ProtectEventLists,
+    BaselinePolicy: BaselinePolicy,
+    DescribeJavaMemShellListRequest: DescribeJavaMemShellListRequest,
     SwitchBashRulesRequest: SwitchBashRulesRequest,
     DescribeProcessStatisticsRequest: DescribeProcessStatisticsRequest,
-    DescribeAssetInfoResponse: DescribeAssetInfoResponse,
+    CreateScanMalwareSettingResponse: CreateScanMalwareSettingResponse,
     MalwareRisk: MalwareRisk,
     ExportProtectDirListResponse: ExportProtectDirListResponse,
     AssetWebFrameBaseInfo: AssetWebFrameBaseInfo,
@@ -29691,8 +34941,10 @@ module.exports = {
     DescribeAssetWebLocationInfoResponse: DescribeAssetWebLocationInfoResponse,
     ModifyBruteAttackRulesRequest: ModifyBruteAttackRulesRequest,
     ExportVulListRequest: ExportVulListRequest,
+    CreateLicenseOrderRequest: CreateLicenseOrderRequest,
     DescribeBaselineScanScheduleRequest: DescribeBaselineScanScheduleRequest,
     DescribeEmergencyVulListResponse: DescribeEmergencyVulListResponse,
+    DestroyOrderResponse: DestroyOrderResponse,
     DescribeAssetUserListResponse: DescribeAssetUserListResponse,
     StandardModeConfig: StandardModeConfig,
     BashEvent: BashEvent,
@@ -29703,6 +34955,7 @@ module.exports = {
     DescribeScanVulSettingResponse: DescribeScanVulSettingResponse,
     AssetFilters: AssetFilters,
     DescribeAssetDatabaseInfoResponse: DescribeAssetDatabaseInfoResponse,
+    MonthInspectionReport: MonthInspectionReport,
     SetBashEventsStatusRequest: SetBashEventsStatusRequest,
     AssetAppProcessInfo: AssetAppProcessInfo,
     DescribeBaselineStrategyListRequest: DescribeBaselineStrategyListRequest,
@@ -29715,7 +34968,9 @@ module.exports = {
     DescribeAssetUserInfoRequest: DescribeAssetUserInfoRequest,
     DescribeProtectDirListRequest: DescribeProtectDirListRequest,
     ExportPrivilegeEventsRequest: ExportPrivilegeEventsRequest,
+    MachineExtraInfo: MachineExtraInfo,
     DescribeMalwareFileResponse: DescribeMalwareFileResponse,
+    StopBaselineDetectRequest: StopBaselineDetectRequest,
     TaskStatus: TaskStatus,
     DescribeRiskDnsListResponse: DescribeRiskDnsListResponse,
     DescribeAssetWebAppListResponse: DescribeAssetWebAppListResponse,
@@ -29724,19 +34979,23 @@ module.exports = {
     DescribeScanTaskStatusRequest: DescribeScanTaskStatusRequest,
     ExportIgnoreBaselineRuleRequest: ExportIgnoreBaselineRuleRequest,
     DeleteMachineTagRequest: DeleteMachineTagRequest,
-    DescribeBaselineDetailRequest: DescribeBaselineDetailRequest,
+    AssetDiskPartitionInfo: AssetDiskPartitionInfo,
     ZoneInfo: ZoneInfo,
     BaselineRuleInfo: BaselineRuleInfo,
     DescribeExportMachinesResponse: DescribeExportMachinesResponse,
     DescribeScanTaskStatusResponse: DescribeScanTaskStatusResponse,
     DescribeProtectNetListRequest: DescribeProtectNetListRequest,
     DescribeWebPageEventListResponse: DescribeWebPageEventListResponse,
+    DescribeBashEventsNewResponse: DescribeBashEventsNewResponse,
     DeleteProtectDirResponse: DeleteProtectDirResponse,
     ModifyBanStatusRequest: ModifyBanStatusRequest,
+    OsName: OsName,
     DescribeWebPageServiceInfoRequest: DescribeWebPageServiceInfoRequest,
     DescribeLogStorageStatisticResponse: DescribeLogStorageStatisticResponse,
+    BaselineItemDetect: BaselineItemDetect,
     DescribeEmergencyResponseListRequest: DescribeEmergencyResponseListRequest,
     DescribeScanStateResponse: DescribeScanStateResponse,
+    BaselineHostDetect: BaselineHostDetect,
     EditTagsRequest: EditTagsRequest,
     DeleteReverseShellRulesRequest: DeleteReverseShellRulesRequest,
     DescribeBaselineEffectHostListRequest: DescribeBaselineEffectHostListRequest,
@@ -29751,12 +35010,14 @@ module.exports = {
     DeleteMalwareScanTaskResponse: DeleteMalwareScanTaskResponse,
     DescribeBaselineDetailResponse: DescribeBaselineDetailResponse,
     ExportIgnoreRuleEffectHostListResponse: ExportIgnoreRuleEffectHostListResponse,
+    DescribeAssetRecentMachineInfoRequest: DescribeAssetRecentMachineInfoRequest,
     DescribeAssetWebAppPluginListRequest: DescribeAssetWebAppPluginListRequest,
     DeletePrivilegeEventsResponse: DeletePrivilegeEventsResponse,
     DescribeMachineInfoResponse: DescribeMachineInfoResponse,
     VulHostTopInfo: VulHostTopInfo,
     DescribeImportMachineInfoRequest: DescribeImportMachineInfoRequest,
     VulLevelInfo: VulLevelInfo,
+    StartBaselineDetectResponse: StartBaselineDetectResponse,
     ProtectStat: ProtectStat,
     DescribeVulEffectHostListResponse: DescribeVulEffectHostListResponse,
     SwitchBashRulesResponse: SwitchBashRulesResponse,
@@ -29774,12 +35035,14 @@ module.exports = {
     AssetWebLocationBaseInfo: AssetWebLocationBaseInfo,
     DescribeMalwareTimingScanSettingRequest: DescribeMalwareTimingScanSettingRequest,
     BashRule: BashRule,
+    Tags: Tags,
     CreateSearchLogResponse: CreateSearchLogResponse,
     DescribeSecurityTrendsResponse: DescribeSecurityTrendsResponse,
     AssetSystemPackageInfo: AssetSystemPackageInfo,
     DescribeEmergencyVulListRequest: DescribeEmergencyVulListRequest,
     DescribeSecurityDynamicsResponse: DescribeSecurityDynamicsResponse,
     DeleteReverseShellEventsResponse: DeleteReverseShellEventsResponse,
+    LicenseBindDetail: LicenseBindDetail,
     AssetWebServiceBaseInfo: AssetWebServiceBaseInfo,
     DescribeProVersionStatusResponse: DescribeProVersionStatusResponse,
     DescribeScanTaskDetailsResponse: DescribeScanTaskDetailsResponse,
@@ -29791,16 +35054,17 @@ module.exports = {
     ModifyWarningSettingResponse: ModifyWarningSettingResponse,
     LoginWhiteCombinedInfo: LoginWhiteCombinedInfo,
     DescribeMalwareInfoResponse: DescribeMalwareInfoResponse,
+    VulDetailInfo: VulDetailInfo,
     DescribeAssetJarInfoRequest: DescribeAssetJarInfoRequest,
     DescribePrivilegeEventsRequest: DescribePrivilegeEventsRequest,
-    BaselineInfo: BaselineInfo,
+    DescribeAssetEnvListResponse: DescribeAssetEnvListResponse,
     DescribeVulHostCountScanTimeRequest: DescribeVulHostCountScanTimeRequest,
     ExportScanTaskDetailsResponse: ExportScanTaskDetailsResponse,
     ExportBashEventsResponse: ExportBashEventsResponse,
     EventStat: EventStat,
     DeleteLoginWhiteListRequest: DeleteLoginWhiteListRequest,
     DeleteWebPageEventLogResponse: DeleteWebPageEventLogResponse,
-    DescribeVulLevelCountResponse: DescribeVulLevelCountResponse,
+    DescribeLicenseBindScheduleRequest: DescribeLicenseBindScheduleRequest,
     DescribeVersionStatisticsResponse: DescribeVersionStatisticsResponse,
     DescribeBruteAttackRulesRequest: DescribeBruteAttackRulesRequest,
     DescribeProcessStatisticsResponse: DescribeProcessStatisticsResponse,
@@ -29816,14 +35080,17 @@ module.exports = {
     DescribeEmergencyResponseListResponse: DescribeEmergencyResponseListResponse,
     ProtectHostConfig: ProtectHostConfig,
     AssetPlanTask: AssetPlanTask,
+    DeleteBaselinePolicyResponse: DeleteBaselinePolicyResponse,
     HistoryAccount: HistoryAccount,
     DescribeAssetAppListResponse: DescribeAssetAppListResponse,
     ModifyWebPageProtectSwitchRequest: ModifyWebPageProtectSwitchRequest,
     CreateScanMalwareSettingRequest: CreateScanMalwareSettingRequest,
     DescribeMalwareTimingScanSettingResponse: DescribeMalwareTimingScanSettingResponse,
     DescribeHostLoginListRequest: DescribeHostLoginListRequest,
+    OrderModifyObject: OrderModifyObject,
     SecurityTrend: SecurityTrend,
     DescribeAssetWebServiceProcessListRequest: DescribeAssetWebServiceProcessListRequest,
+    LicenseDetail: LicenseDetail,
     PrivilegeRule: PrivilegeRule,
     ExportVulDetectionExcelRequest: ExportVulDetectionExcelRequest,
     CreateEmergencyVulScanRequest: CreateEmergencyVulScanRequest,
@@ -29831,18 +35098,23 @@ module.exports = {
     ModifyAutoOpenProVersionConfigResponse: ModifyAutoOpenProVersionConfigResponse,
     ExportBaselineEffectHostListRequest: ExportBaselineEffectHostListRequest,
     AssetCoreModuleDetail: AssetCoreModuleDetail,
+    DescribeBaselineItemDetectListRequest: DescribeBaselineItemDetectListRequest,
     DescribeBanStatusRequest: DescribeBanStatusRequest,
     DescribeAssetRecentMachineInfoResponse: DescribeAssetRecentMachineInfoResponse,
+    BaselineItem: BaselineItem,
     DescribeMalWareListResponse: DescribeMalWareListResponse,
+    ModifyLicenseUnBindsResponse: ModifyLicenseUnBindsResponse,
     DescribeAssetPortInfoListResponse: DescribeAssetPortInfoListResponse,
     DescribeProtectDirListResponse: DescribeProtectDirListResponse,
     DescribeMaliciousRequestWhiteListResponse: DescribeMaliciousRequestWhiteListResponse,
+    DescribeBaselinePolicyListRequest: DescribeBaselinePolicyListRequest,
     DeleteBruteAttacksResponse: DeleteBruteAttacksResponse,
     ExportTasksResponse: ExportTasksResponse,
     DescribeIgnoreBaselineRuleResponse: DescribeIgnoreBaselineRuleResponse,
     DescribeMachineOsListRequest: DescribeMachineOsListRequest,
     DescribeMalwareRiskWarningResponse: DescribeMalwareRiskWarningResponse,
     DescribeBashRulesRequest: DescribeBashRulesRequest,
+    ExportLicenseDetailResponse: ExportLicenseDetailResponse,
     BaselineBasicInfo: BaselineBasicInfo,
     DescribeBanModeResponse: DescribeBanModeResponse,
     DescribeImportMachineInfoResponse: DescribeImportMachineInfoResponse,
@@ -29861,12 +35133,12 @@ module.exports = {
     DescribeAttackVulTypeListResponse: DescribeAttackVulTypeListResponse,
     DescribePrivilegeRulesResponse: DescribePrivilegeRulesResponse,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
-    BruteAttackInfo: BruteAttackInfo,
+    DescribeBashEventsNewRequest: DescribeBashEventsNewRequest,
     DescribeWebPageProtectStatResponse: DescribeWebPageProtectStatResponse,
     DescribeAssetPortInfoListRequest: DescribeAssetPortInfoListRequest,
     VulLevelCountInfo: VulLevelCountInfo,
     DescribeExportMachinesRequest: DescribeExportMachinesRequest,
-    CreateScanMalwareSettingResponse: CreateScanMalwareSettingResponse,
+    DescribeAssetInfoResponse: DescribeAssetInfoResponse,
     WarningObject: WarningObject,
     RiskDnsList: RiskDnsList,
     DeleteMalwareScanTaskRequest: DeleteMalwareScanTaskRequest,
@@ -29880,38 +35152,45 @@ module.exports = {
     ExportVulDetectionReportResponse: ExportVulDetectionReportResponse,
     DescribeScanScheduleRequest: DescribeScanScheduleRequest,
     EditBashRulesRequest: EditBashRulesRequest,
-    DescribeBruteAttackListResponse: DescribeBruteAttackListResponse,
+    DescribeLicenseGeneralResponse: DescribeLicenseGeneralResponse,
     ScanVulSettingRequest: ScanVulSettingRequest,
     ExportScanTaskDetailsRequest: ExportScanTaskDetailsRequest,
     ExportBaselineListResponse: ExportBaselineListResponse,
     DescribeBruteAttackRulesResponse: DescribeBruteAttackRulesResponse,
     ModifyBanModeResponse: ModifyBanModeResponse,
-    BaselineRuleTopInfo: BaselineRuleTopInfo,
+    DeleteLicenseRecordResponse: DeleteLicenseRecordResponse,
     AssetProcessBaseInfo: AssetProcessBaseInfo,
     DeleteBruteAttacksRequest: DeleteBruteAttacksRequest,
     DescribeAssetCoreModuleListResponse: DescribeAssetCoreModuleListResponse,
+    DescribeBaselineItemListRequest: DescribeBaselineItemListRequest,
     DescribeLoginWhiteCombinedListResponse: DescribeLoginWhiteCombinedListResponse,
     ExportVulDetectionExcelResponse: ExportVulDetectionExcelResponse,
     DescribeWarningListResponse: DescribeWarningListResponse,
     CreateSearchTemplateRequest: CreateSearchTemplateRequest,
     DeleteTagsRequest: DeleteTagsRequest,
     DescribeScanStateRequest: DescribeScanStateRequest,
+    SyncBaselineDetectSummaryResponse: SyncBaselineDetectSummaryResponse,
     ModifyMalwareTimingScanSettingsRequest: ModifyMalwareTimingScanSettingsRequest,
     AssetEnvBaseInfo: AssetEnvBaseInfo,
     DescribeMachineListResponse: DescribeMachineListResponse,
     MalwareInfo: MalwareInfo,
     Place: Place,
+    SyncBaselineDetectSummaryRequest: SyncBaselineDetectSummaryRequest,
     DescribeExpertServiceOrderListResponse: DescribeExpertServiceOrderListResponse,
     DeleteReverseShellRulesResponse: DeleteReverseShellRulesResponse,
     DescribeAssetPlanTaskListRequest: DescribeAssetPlanTaskListRequest,
     DescribeScanTaskDetailsRequest: DescribeScanTaskDetailsRequest,
     DescribeProtectDirRelatedServerRequest: DescribeProtectDirRelatedServerRequest,
-    DescribeSearchLogsResponse: DescribeSearchLogsResponse,
+    DescribeBaselineItemListResponse: DescribeBaselineItemListResponse,
+    DescribeClientExceptionRequest: DescribeClientExceptionRequest,
+    DescribeBanRegionsRequest: DescribeBanRegionsRequest,
     SecurityEventInfo: SecurityEventInfo,
     DescribeBaselineAnalysisDataResponse: DescribeBaselineAnalysisDataResponse,
     ModifyBanModeRequest: ModifyBanModeRequest,
     BanWhiteListDetail: BanWhiteListDetail,
+    DeleteScanTaskResponse: DeleteScanTaskResponse,
     DescribeMachineRegionsResponse: DescribeMachineRegionsResponse,
+    DestroyOrderRequest: DestroyOrderRequest,
     AssetWebAppBaseInfo: AssetWebAppBaseInfo,
     AssetCoreModuleParam: AssetCoreModuleParam,
     DeleteBashEventsRequest: DeleteBashEventsRequest,
@@ -29924,12 +35203,14 @@ module.exports = {
     DeleteAttackLogsRequest: DeleteAttackLogsRequest,
     DescribeBaselineStrategyDetailResponse: DescribeBaselineStrategyDetailResponse,
     DescribeBaselineListRequest: DescribeBaselineListRequest,
+    ModifyLicenseBindsResponse: ModifyLicenseBindsResponse,
     DescribeBaselineTopRequest: DescribeBaselineTopRequest,
     DescribeAssetAppProcessListRequest: DescribeAssetAppProcessListRequest,
+    DescribeLicenseBindListRequest: DescribeLicenseBindListRequest,
     Filter: Filter,
     DescribeAccountStatisticsRequest: DescribeAccountStatisticsRequest,
-    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
     SecurityButlerInfo: SecurityButlerInfo,
+    DescribeBaselineHostDetectListResponse: DescribeBaselineHostDetectListResponse,
     DescribeSaveOrUpdateWarningsRequest: DescribeSaveOrUpdateWarningsRequest,
     DescribeAssetProcessInfoListResponse: DescribeAssetProcessInfoListResponse,
     ProcessStatistics: ProcessStatistics,
@@ -29938,10 +35219,12 @@ module.exports = {
     ModifyWebPageProtectDirResponse: ModifyWebPageProtectDirResponse,
     DescribeAssetWebAppListRequest: DescribeAssetWebAppListRequest,
     ExpertServiceOrderInfo: ExpertServiceOrderInfo,
+    DescribeLicenseGeneralRequest: DescribeLicenseGeneralRequest,
     AccountStatistics: AccountStatistics,
     AssetUserKeyInfo: AssetUserKeyInfo,
     DescribeMachinesResponse: DescribeMachinesResponse,
     DescribeAssetWebLocationListRequest: DescribeAssetWebLocationListRequest,
+    DescribeAssetHostTotalCountRequest: DescribeAssetHostTotalCountRequest,
     DescribeVulLevelCountRequest: DescribeVulLevelCountRequest,
     DeleteWebPageEventLogRequest: DeleteWebPageEventLogRequest,
     DescribeProVersionStatusRequest: DescribeProVersionStatusRequest,
@@ -29954,20 +35237,24 @@ module.exports = {
     DescribeGeneralStatResponse: DescribeGeneralStatResponse,
     EditTagsResponse: EditTagsResponse,
     DeleteMachineTagResponse: DeleteMachineTagResponse,
-    DescribeSecurityEventsCntResponse: DescribeSecurityEventsCntResponse,
+    BruteAttackInfo: BruteAttackInfo,
     WarningInfoObj: WarningInfoObj,
     UpdateMachineTagsRequest: UpdateMachineTagsRequest,
+    DescribeBaselineItemDetectListResponse: DescribeBaselineItemDetectListResponse,
     UpdateBaselineStrategyRequest: UpdateBaselineStrategyRequest,
     DescribeHostLoginListResponse: DescribeHostLoginListResponse,
     DescribeBaselineAnalysisDataRequest: DescribeBaselineAnalysisDataRequest,
     AssetPortBaseInfo: AssetPortBaseInfo,
     DescribeAssetWebLocationInfoRequest: DescribeAssetWebLocationInfoRequest,
     DescribeAssetInitServiceListResponse: DescribeAssetInitServiceListResponse,
+    ModifyBaselinePolicyRequest: ModifyBaselinePolicyRequest,
+    DescribeBaselineHostDetectListRequest: DescribeBaselineHostDetectListRequest,
     DescribeAssetWebFrameListResponse: DescribeAssetWebFrameListResponse,
     DescribeAssetUserListRequest: DescribeAssetUserListRequest,
     DeleteBaselineStrategyRequest: DeleteBaselineStrategyRequest,
     DescribeAssetSystemPackageListRequest: DescribeAssetSystemPackageListRequest,
     MachineTag: MachineTag,
+    DescribeSecurityEventsCntResponse: DescribeSecurityEventsCntResponse,
     Filters: Filters,
     DescribeAssetWebServiceInfoListRequest: DescribeAssetWebServiceInfoListRequest,
     CreateSearchLogRequest: CreateSearchLogRequest,

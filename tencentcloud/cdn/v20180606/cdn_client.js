@@ -19,342 +19,356 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeWafDataRequest = models.DescribeWafDataRequest;
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
 const ScdnTopUrlData = models.ScdnTopUrlData;
-const ScdnLogTaskDetail = models.ScdnLogTaskDetail;
-const AdvancedAuthentication = models.AdvancedAuthentication;
-const AdvanceHttps = models.AdvanceHttps;
-const Revalidate = models.Revalidate;
-const ResourceData = models.ResourceData;
-const UrlRecord = models.UrlRecord;
-const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
-const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
-const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
-const ScdnSevenLayerRules = models.ScdnSevenLayerRules;
-const Authentication = models.Authentication;
-const DescribeScdnTopDataResponse = models.DescribeScdnTopDataResponse;
+const Compression = models.Compression;
 const ImageOptimization = models.ImageOptimization;
-const Https = models.Https;
-const RangeOriginPullRule = models.RangeOriginPullRule;
-const RuleCache = models.RuleCache;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const CcTopData = models.CcTopData;
-const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
-const RemoteAuthenticationRule = models.RemoteAuthenticationRule;
-const Compression = models.Compression;
-const PurgePathCacheResponse = models.PurgePathCacheResponse;
-const RangeOriginPull = models.RangeOriginPull;
-const DomainFilter = models.DomainFilter;
-const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const ListTopBotDataResponse = models.ListTopBotDataResponse;
 const SpecificConfig = models.SpecificConfig;
-const DescribeTopDataRequest = models.DescribeTopDataRequest;
-const DescribeScdnBotDataResponse = models.DescribeScdnBotDataResponse;
-const RequestHeader = models.RequestHeader;
-const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
-const DisableCachesResponse = models.DisableCachesResponse;
-const Referer = models.Referer;
-const StartScdnDomainRequest = models.StartScdnDomainRequest;
-const PostSize = models.PostSize;
-const ListTopWafDataRequest = models.ListTopWafDataRequest;
-const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
-const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
+const RuleCache = models.RuleCache;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const UserAgentFilter = models.UserAgentFilter;
+const DescribeScdnTopDataResponse = models.DescribeScdnTopDataResponse;
 const ScdnDomain = models.ScdnDomain;
 const CacheConfigNoCache = models.CacheConfigNoCache;
-const ListTopDDoSDataRequest = models.ListTopDDoSDataRequest;
-const DescribeDistrictIspDataRequest = models.DescribeDistrictIspDataRequest;
-const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const BotRecord = models.BotRecord;
-const DescribeEventLogDataRequest = models.DescribeEventLogDataRequest;
-const ForceRedirect = models.ForceRedirect;
 const ListScdnTopBotDataRequest = models.ListScdnTopBotDataRequest;
-const PathRule = models.PathRule;
-const ListTopDataRequest = models.ListTopDataRequest;
-const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
-const DescribeDomainsResponse = models.DescribeDomainsResponse;
-const DescribePayTypeRequest = models.DescribePayTypeRequest;
-const DescribeCcDataResponse = models.DescribeCcDataResponse;
-const UpdateImageConfigRequest = models.UpdateImageConfigRequest;
-const DisableCachesRequest = models.DisableCachesRequest;
-const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
-const StartCdnDomainResponse = models.StartCdnDomainResponse;
-const UrlRedirect = models.UrlRedirect;
-const CompressionRule = models.CompressionRule;
-const GuetzliAdapter = models.GuetzliAdapter;
+const RedirectConfig = models.RedirectConfig;
 const UpdateScdnDomainResponse = models.UpdateScdnDomainResponse;
 const Origin = models.Origin;
-const ViolationUrl = models.ViolationUrl;
-const ScdnIpStrategyFilter = models.ScdnIpStrategyFilter;
-const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
-const TopData = models.TopData;
-const EnableCachesRequest = models.EnableCachesRequest;
-const ClsLogIpData = models.ClsLogIpData;
-const CreateScdnDomainRequest = models.CreateScdnDomainRequest;
-const HeaderKey = models.HeaderKey;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
-const SimpleCache = models.SimpleCache;
-const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
-const ListTopBotDataRequest = models.ListTopBotDataRequest;
-const ListTopCcDataRequest = models.ListTopCcDataRequest;
-const ReportData = models.ReportData;
-const DeleteScdnDomainRequest = models.DeleteScdnDomainRequest;
-const DescribeDistrictIspDataResponse = models.DescribeDistrictIspDataResponse;
-const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
-const TopDetailDataMore = models.TopDetailDataMore;
-const TopicInfo = models.TopicInfo;
-const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
-const AdvancedCCRules = models.AdvancedCCRules;
-const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
-const DescribeDiagnoseReportRequest = models.DescribeDiagnoseReportRequest;
-const ResourceBillingData = models.ResourceBillingData;
-const BriefDomain = models.BriefDomain;
-const TimestampData = models.TimestampData;
-const TpgAdapter = models.TpgAdapter;
-const CacheConfigCache = models.CacheConfigCache;
-const ListScdnTopBotDataResponse = models.ListScdnTopBotDataResponse;
-const DescribeReportDataResponse = models.DescribeReportDataResponse;
-const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
-const RuleCacheConfig = models.RuleCacheConfig;
-const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
-const TrafficPackage = models.TrafficPackage;
-const BotCookie = models.BotCookie;
-const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
-const Ipv6 = models.Ipv6;
-const BotStats = models.BotStats;
-const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
-const StatusCodeCache = models.StatusCodeCache;
-const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
-const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
-const ModifyPurgeFetchTaskStatusRequest = models.ModifyPurgeFetchTaskStatusRequest;
-const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
-const OverseaConfig = models.OverseaConfig;
-const AddCdnDomainRequest = models.AddCdnDomainRequest;
-const UserAgentFilterRule = models.UserAgentFilterRule;
-const ListTopBotDataResponse = models.ListTopBotDataResponse;
-const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const Tag = models.Tag;
-const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
-const MaxAgeRule = models.MaxAgeRule;
+const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
+const DescribeDiagnoseReportRequest = models.DescribeDiagnoseReportRequest;
+const BriefDomain = models.BriefDomain;
+const RuleCacheConfig = models.RuleCacheConfig;
+const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
+const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
+const VerifyDomainRecordResponse = models.VerifyDomainRecordResponse;
 const AdvancedAuthenticationTypeE = models.AdvancedAuthenticationTypeE;
 const AdvancedAuthenticationTypeD = models.AdvancedAuthenticationTypeD;
 const AdvancedAuthenticationTypeF = models.AdvancedAuthenticationTypeF;
 const AdvancedAuthenticationTypeA = models.AdvancedAuthenticationTypeA;
-const AdvancedCache = models.AdvancedCache;
-const AdvancedAuthenticationTypeC = models.AdvancedAuthenticationTypeC;
+const ListTopCcDataRequest = models.ListTopCcDataRequest;
 const AdvancedAuthenticationTypeB = models.AdvancedAuthenticationTypeB;
-const SearchClsLogResponse = models.SearchClsLogResponse;
 const CreateScdnLogTaskResponse = models.CreateScdnLogTaskResponse;
-const ScdnEventLogConditions = models.ScdnEventLogConditions;
+const AuthenticationTypeC = models.AuthenticationTypeC;
+const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
+const DescribeScdnIpStrategyResponse = models.DescribeScdnIpStrategyResponse;
+const DDoSAttackIPTopData = models.DDoSAttackIPTopData;
+const CreateDiagnoseUrlResponse = models.CreateDiagnoseUrlResponse;
+const ListScdnDomainsResponse = models.ListScdnDomainsResponse;
+const CreateScdnLogTaskRequest = models.CreateScdnLogTaskRequest;
+const DescribeEdgePackTaskStatusResponse = models.DescribeEdgePackTaskStatusResponse;
+const HeuristicCache = models.HeuristicCache;
+const SummarizedData = models.SummarizedData;
+const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
+const DomainBotCount = models.DomainBotCount;
+const PostSize = models.PostSize;
+const ForceRedirect = models.ForceRedirect;
+const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
+const DescribeReportDataRequest = models.DescribeReportDataRequest;
+const DownstreamCapping = models.DownstreamCapping;
+const CacheOptResult = models.CacheOptResult;
+const StopCdnDomainRequest = models.StopCdnDomainRequest;
+const EnableCachesResponse = models.EnableCachesResponse;
+const ScdnTopDomainData = models.ScdnTopDomainData;
+const StartScdnDomainResponse = models.StartScdnDomainResponse;
+const ResponseHeader = models.ResponseHeader;
+const DisableCachesResponse = models.DisableCachesResponse;
+const EventLogStatsData = models.EventLogStatsData;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
+const DescribeDistrictIspDataRequest = models.DescribeDistrictIspDataRequest;
+const DeleteScdnDomainResponse = models.DeleteScdnDomainResponse;
+const CreateVerifyRecordRequest = models.CreateVerifyRecordRequest;
+const PurgePathCacheRequest = models.PurgePathCacheRequest;
+const DDoSAttackBandwidthData = models.DDoSAttackBandwidthData;
+const OriginPullOptimization = models.OriginPullOptimization;
+const PushTask = models.PushTask;
+const SecurityConfig = models.SecurityConfig;
+const QueryStringKey = models.QueryStringKey;
+const MaxAge = models.MaxAge;
+const LogSetInfo = models.LogSetInfo;
+const AdvanceConfig = models.AdvanceConfig;
+const AwsPrivateAccess = models.AwsPrivateAccess;
+const VideoSeek = models.VideoSeek;
+const Compatibility = models.Compatibility;
+const ClsSearchLogs = models.ClsSearchLogs;
+const OriginIp = models.OriginIp;
+const DescribeScdnBotDataRequest = models.DescribeScdnBotDataRequest;
+const ScdnConfig = models.ScdnConfig;
+const CdnIp = models.CdnIp;
+const ExtraLogset = models.ExtraLogset;
+const OfflineCache = models.OfflineCache;
+const TopDataMore = models.TopDataMore;
+const DiagnoseList = models.DiagnoseList;
+const HTTPHeader = models.HTTPHeader;
+const IpFilterPathRule = models.IpFilterPathRule;
+const ReportData = models.ReportData;
+const AdvanceHttps = models.AdvanceHttps;
+const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
+const AvifAdapter = models.AvifAdapter;
+const RemoteAuthenticationRule = models.RemoteAuthenticationRule;
+const PurgePathCacheResponse = models.PurgePathCacheResponse;
+const DescribeTopDataRequest = models.DescribeTopDataRequest;
+const HttpsPackage = models.HttpsPackage;
+const ModifyPurgeFetchTaskStatusRequest = models.ModifyPurgeFetchTaskStatusRequest;
+const Referer = models.Referer;
+const AdvanceCacheRule = models.AdvanceCacheRule;
+const ListTopDDoSDataRequest = models.ListTopDDoSDataRequest;
+const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
+const DescribeEventLogDataRequest = models.DescribeEventLogDataRequest;
+const PathRule = models.PathRule;
+const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const DescribeScdnConfigRequest = models.DescribeScdnConfigRequest;
+const DescribeCcDataResponse = models.DescribeCcDataResponse;
+const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
+const TopicInfo = models.TopicInfo;
+const AdvancedCCRules = models.AdvancedCCRules;
+const CacheConfigCache = models.CacheConfigCache;
+const ListScdnTopBotDataResponse = models.ListScdnTopBotDataResponse;
+const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
+const TrafficPackage = models.TrafficPackage;
+const BotCookie = models.BotCookie;
+const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
+const StatusCodeCache = models.StatusCodeCache;
+const ScdnCCRules = models.ScdnCCRules;
+const AddCdnDomainRequest = models.AddCdnDomainRequest;
+const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
+const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const DeleteScdnDomainRequest = models.DeleteScdnDomainRequest;
+const DescribeHttpsPackagesResponse = models.DescribeHttpsPackagesResponse;
 const QnPrivateAccess = models.QnPrivateAccess;
-const WebSocket = models.WebSocket;
 const MapInfo = models.MapInfo;
 const DescribeCertDomainsResponse = models.DescribeCertDomainsResponse;
 const ScdnBotConfig = models.ScdnBotConfig;
-const DuplicateDomainConfigRequest = models.DuplicateDomainConfigRequest;
-const AuthenticationTypeD = models.AuthenticationTypeD;
-const AuthenticationTypeC = models.AuthenticationTypeC;
-const AuthenticationTypeB = models.AuthenticationTypeB;
-const AuthenticationTypeA = models.AuthenticationTypeA;
-const DescribeScdnIpStrategyResponse = models.DescribeScdnIpStrategyResponse;
-const ResponseHeader = models.ResponseHeader;
-const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
-const SecurityConfig = models.SecurityConfig;
-const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
-const DDoSAttackIPTopData = models.DDoSAttackIPTopData;
-const AddCdnDomainResponse = models.AddCdnDomainResponse;
-const ListScdnDomainsResponse = models.ListScdnDomainsResponse;
-const VerifyDomainRecordResponse = models.VerifyDomainRecordResponse;
-const DomainAreaConfig = models.DomainAreaConfig;
 const ListScdnDomainsRequest = models.ListScdnDomainsRequest;
-const ServerCert = models.ServerCert;
-const AccessControlRule = models.AccessControlRule;
-const HttpHeaderPathRule = models.HttpHeaderPathRule;
-const CreateScdnLogTaskRequest = models.CreateScdnLogTaskRequest;
-const Quota = models.Quota;
-const DistrictIspInfo = models.DistrictIspInfo;
-const ScdnAclRule = models.ScdnAclRule;
-const SimpleCacheRule = models.SimpleCacheRule;
-const ModifyPurgeFetchTaskStatusResponse = models.ModifyPurgeFetchTaskStatusResponse;
-const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
-const Hsts = models.Hsts;
+const DisableCachesRequest = models.DisableCachesRequest;
+const AddCLSTopicDomainsResponse = models.AddCLSTopicDomainsResponse;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
-const DetailDomain = models.DetailDomain;
-const RuleEngine = models.RuleEngine;
-const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
-const Ipv6Access = models.Ipv6Access;
-const HeuristicCache = models.HeuristicCache;
-const DuplicateDomainConfigResponse = models.DuplicateDomainConfigResponse;
-const CdnIpHistory = models.CdnIpHistory;
-const ErrorPageRule = models.ErrorPageRule;
-const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
-const BotSortBy = models.BotSortBy;
-const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
-const ListDiagnoseReportRequest = models.ListDiagnoseReportRequest;
-const OriginAuthentication = models.OriginAuthentication;
-const DomainBotCount = models.DomainBotCount;
 const CreateScdnFailedLogTaskRequest = models.CreateScdnFailedLogTaskRequest;
-const Cache = models.Cache;
-const DiagnoseData = models.DiagnoseData;
-const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
-const DescribeScdnBotRecordsRequest = models.DescribeScdnBotRecordsRequest;
-const FollowRedirect = models.FollowRedirect;
-const ListScdnLogTasksRequest = models.ListScdnLogTasksRequest;
-const ListTopCcDataResponse = models.ListTopCcDataResponse;
+const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
+const RangeOriginPull = models.RangeOriginPull;
+const ViolationUrl = models.ViolationUrl;
+const SearchClsLogResponse = models.SearchClsLogResponse;
 const PathBasedOriginRule = models.PathBasedOriginRule;
-const IpStatus = models.IpStatus;
-const MainlandConfig = models.MainlandConfig;
-const DescribeReportDataRequest = models.DescribeReportDataRequest;
-const DescribePushTasksRequest = models.DescribePushTasksRequest;
-const DescribeDDoSDataRequest = models.DescribeDDoSDataRequest;
+const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
 const DescribeScdnIpStrategyRequest = models.DescribeScdnIpStrategyRequest;
-const ScdnCCRules = models.ScdnCCRules;
 const IpFreqLimit = models.IpFreqLimit;
-const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
-const CreateDiagnoseUrlResponse = models.CreateDiagnoseUrlResponse;
-const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
-const ScdnAclConfig = models.ScdnAclConfig;
-const CacheOptResult = models.CacheOptResult;
-const DescribeScdnTopDataRequest = models.DescribeScdnTopDataRequest;
-const ListTopClsLogDataRequest = models.ListTopClsLogDataRequest;
-const CreateVerifyRecordResponse = models.CreateVerifyRecordResponse;
-const StopCdnDomainRequest = models.StopCdnDomainRequest;
-const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
-const DescribeTrafficPackagesResponse = models.DescribeTrafficPackagesResponse;
-const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
-const EnableCachesResponse = models.EnableCachesResponse;
-const ScdnIpStrategy = models.ScdnIpStrategy;
-const RuleQueryString = models.RuleQueryString;
-const AdvancedScdnAclRule = models.AdvancedScdnAclRule;
+const EdgePackTaskFilter = models.EdgePackTaskFilter;
+const TopDetailDataMore = models.TopDetailDataMore;
 const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
-const HttpHeaderRule = models.HttpHeaderRule;
-const ScdnTopDomainData = models.ScdnTopDomainData;
-const CreateScdnDomainResponse = models.CreateScdnDomainResponse;
-const ScdnTopData = models.ScdnTopData;
-const ScdnConfig = models.ScdnConfig;
-const DomainLog = models.DomainLog;
-const StopScdnDomainResponse = models.StopScdnDomainResponse;
-const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
-const CreateDiagnoseUrlRequest = models.CreateDiagnoseUrlRequest;
-const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
-const StartScdnDomainResponse = models.StartScdnDomainResponse;
-const BotJavaScript = models.BotJavaScript;
-const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
-const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
-const BotStatisticsCount = models.BotStatisticsCount;
-const EventLogStatsData = models.EventLogStatsData;
-const SchemeKey = models.SchemeKey;
-const StatisticItem = models.StatisticItem;
-const DescribeImageConfigRequest = models.DescribeImageConfigRequest;
-const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
-const AdvanceCacheRule = models.AdvanceCacheRule;
-const DescribeCcDataRequest = models.DescribeCcDataRequest;
-const AccessControl = models.AccessControl;
-const ListScdnLogTasksResponse = models.ListScdnLogTasksResponse;
-const ScdnErrorPage = models.ScdnErrorPage;
-const CacheKey = models.CacheKey;
-const ScdnDdosConfig = models.ScdnDdosConfig;
-const DownstreamCapping = models.DownstreamCapping;
-const CookieKey = models.CookieKey;
-const ListTopClsLogDataResponse = models.ListTopClsLogDataResponse;
 const StatusCodeCacheRule = models.StatusCodeCacheRule;
-const RemoteAuthentication = models.RemoteAuthentication;
-const ExtraLogset = models.ExtraLogset;
-const KeyRule = models.KeyRule;
+const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
+const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
+const BotStatisticsCount = models.BotStatisticsCount;
+const RangeOriginPullRule = models.RangeOriginPullRule;
+const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
+const ScdnErrorPage = models.ScdnErrorPage;
+const UpdateImageConfigRequest = models.UpdateImageConfigRequest;
+const TopData = models.TopData;
+const ListTopClsLogDataResponse = models.ListTopClsLogDataResponse;
 const ClientCert = models.ClientCert;
-const CappingRule = models.CappingRule;
 const ShareCname = models.ShareCname;
-const DeleteScdnDomainResponse = models.DeleteScdnDomainResponse;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
-const BandwidthAlert = models.BandwidthAlert;
-const CreateVerifyRecordRequest = models.CreateVerifyRecordRequest;
-const ClsLogObject = models.ClsLogObject;
-const WebpAdapter = models.WebpAdapter;
-const DescribeWafDataResponse = models.DescribeWafDataResponse;
-const RegionMapRelation = models.RegionMapRelation;
-const PurgePathCacheRequest = models.PurgePathCacheRequest;
-const DescribeDiagnoseReportResponse = models.DescribeDiagnoseReportResponse;
-const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
-const CdnData = models.CdnData;
+const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
-const DDoSAttackBandwidthData = models.DDoSAttackBandwidthData;
-const OriginPullOptimization = models.OriginPullOptimization;
-const ErrorPage = models.ErrorPage;
-const StartCdnDomainRequest = models.StartCdnDomainRequest;
-const PushTask = models.PushTask;
-const CreateEdgePackTaskResponse = models.CreateEdgePackTaskResponse;
-const BotStatsDetailData = models.BotStatsDetailData;
 const DescribeScdnConfigResponse = models.DescribeScdnConfigResponse;
 const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
-const TopDetailData = models.TopDetailData;
-const ResponseHeaderCache = models.ResponseHeaderCache;
-const ListTopWafDataResponse = models.ListTopWafDataResponse;
-const DescribePayTypeResponse = models.DescribePayTypeResponse;
-const Sort = models.Sort;
-const ClientInfo = models.ClientInfo;
-const DescribeEventLogDataResponse = models.DescribeEventLogDataResponse;
-const HwPrivateAccess = models.HwPrivateAccess;
+const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const CreateDiagnoseUrlRequest = models.CreateDiagnoseUrlRequest;
 const CacheConfig = models.CacheConfig;
-const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
-const OriginCombine = models.OriginCombine;
-const QueryStringKey = models.QueryStringKey;
 const ListTopDataResponse = models.ListTopDataResponse;
-const MaxAge = models.MaxAge;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
-const WafSubRuleStatus = models.WafSubRuleStatus;
-const OssPrivateAccess = models.OssPrivateAccess;
-const LogSetInfo = models.LogSetInfo;
 const ListDiagnoseReportResponse = models.ListDiagnoseReportResponse;
-const SearchClsLogRequest = models.SearchClsLogRequest;
-const AdvanceConfig = models.AdvanceConfig;
-const AwsPrivateAccess = models.AwsPrivateAccess;
-const AdvancedScdnAclGroup = models.AdvancedScdnAclGroup;
-const VideoSeek = models.VideoSeek;
-const Compatibility = models.Compatibility;
-const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
-const ScdnAclGroup = models.ScdnAclGroup;
+const HeaderKey = models.HeaderKey;
 const ScdnWafRule = models.ScdnWafRule;
-const ClsSearchLogs = models.ClsSearchLogs;
-const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
+const DescribeHttpsPackagesRequest = models.DescribeHttpsPackagesRequest;
 const IpFilter = models.IpFilter;
-const DescribeScdnBotDataRequest = models.DescribeScdnBotDataRequest;
-const UserAgentFilter = models.UserAgentFilter;
 const DiagnoseUnit = models.DiagnoseUnit;
 const DiagnoseInfo = models.DiagnoseInfo;
 const DescribeScdnBotRecordsResponse = models.DescribeScdnBotRecordsResponse;
-const ScdnWafConfig = models.ScdnWafConfig;
-const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const DDoSStatsData = models.DDoSStatsData;
-const SummarizedData = models.SummarizedData;
-const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
-const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
-const PurgeTask = models.PurgeTask;
-const DDoSTopData = models.DDoSTopData;
-const OriginPullTimeout = models.OriginPullTimeout;
-const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
-const ListTopDDoSDataResponse = models.ListTopDDoSDataResponse;
-const OriginIp = models.OriginIp;
-const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const DescribeImageConfigResponse = models.DescribeImageConfigResponse;
-const DescribeScdnConfigRequest = models.DescribeScdnConfigRequest;
-const CacheTagKey = models.CacheTagKey;
+const Cache = models.Cache;
 const StopScdnDomainRequest = models.StopScdnDomainRequest;
+const AdvancedAuthentication = models.AdvancedAuthentication;
+const Revalidate = models.Revalidate;
+const UrlRecord = models.UrlRecord;
+const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
+const Authentication = models.Authentication;
+const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
+const MaxAgeCodeRule = models.MaxAgeCodeRule;
+const ScdnAclRule = models.ScdnAclRule;
+const DomainFilter = models.DomainFilter;
+const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
+const StopScdnDomainResponse = models.StopScdnDomainResponse;
+const DescribePayTypeResponse = models.DescribePayTypeResponse;
+const ListTopDataRequest = models.ListTopDataRequest;
+const CacheKey = models.CacheKey;
+const DuplicateDomainConfigResponse = models.DuplicateDomainConfigResponse;
+const CompressionRule = models.CompressionRule;
+const GuetzliAdapter = models.GuetzliAdapter;
+const OriginCombine = models.OriginCombine;
+const EnableCachesRequest = models.EnableCachesRequest;
+const ClsLogIpData = models.ClsLogIpData;
+const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
+const AdvancedAuthenticationTypeC = models.AdvancedAuthenticationTypeC;
 const VerifyDomainRecordRequest = models.VerifyDomainRecordRequest;
+const CreateVerifyRecordResponse = models.CreateVerifyRecordResponse;
+const DescribeReportDataResponse = models.DescribeReportDataResponse;
+const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
+const Ipv6 = models.Ipv6;
+const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
+const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
+const OverseaConfig = models.OverseaConfig;
+const AdvancedCache = models.AdvancedCache;
+const StartCdnDomainRequest = models.StartCdnDomainRequest;
+const DescribePushTasksResponse = models.DescribePushTasksResponse;
+const AddCdnDomainResponse = models.AddCdnDomainResponse;
+const HttpHeaderRule = models.HttpHeaderRule;
+const AccessControlRule = models.AccessControlRule;
+const DistrictIspInfo = models.DistrictIspInfo;
+const SimpleCacheRule = models.SimpleCacheRule;
+const ModifyPurgeFetchTaskStatusResponse = models.ModifyPurgeFetchTaskStatusResponse;
+const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
+const TpgAdapter = models.TpgAdapter;
+const DetailDomain = models.DetailDomain;
+const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
+const Ipv6Access = models.Ipv6Access;
+const BotSortBy = models.BotSortBy;
+const AddCLSTopicDomainsRequest = models.AddCLSTopicDomainsRequest;
+const EdgePackTaskStatus = models.EdgePackTaskStatus;
+const MainlandConfig = models.MainlandConfig;
+const DescribeDDoSDataRequest = models.DescribeDDoSDataRequest;
+const CreateEdgePackTaskRequest = models.CreateEdgePackTaskRequest;
+const StatisticItem = models.StatisticItem;
+const RequestHeader = models.RequestHeader;
+const Hsts = models.Hsts;
+const ListTopClsLogDataRequest = models.ListTopClsLogDataRequest;
+const DescribeTrafficPackagesResponse = models.DescribeTrafficPackagesResponse;
+const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
+const RuleQueryString = models.RuleQueryString;
+const AdvancedScdnAclRule = models.AdvancedScdnAclRule;
+const DescribeEdgePackTaskStatusRequest = models.DescribeEdgePackTaskStatusRequest;
+const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
+const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
+const DescribeImageConfigRequest = models.DescribeImageConfigRequest;
+const ScdnTopData = models.ScdnTopData;
+const OssPrivateAccess = models.OssPrivateAccess;
+const ListScdnLogTasksResponse = models.ListScdnLogTasksResponse;
+const UrlRedirect = models.UrlRedirect;
+const CookieKey = models.CookieKey;
+const BandwidthAlert = models.BandwidthAlert;
+const ClsLogObject = models.ClsLogObject;
+const DescribeWafDataResponse = models.DescribeWafDataResponse;
+const RegionMapRelation = models.RegionMapRelation;
+const DescribeDiagnoseReportResponse = models.DescribeDiagnoseReportResponse;
+const SimpleCache = models.SimpleCache;
+const BotStatsDetailData = models.BotStatsDetailData;
+const Sort = models.Sort;
+const DescribeEventLogDataResponse = models.DescribeEventLogDataResponse;
+const ScdnLogTaskDetail = models.ScdnLogTaskDetail;
+const ResourceBillingData = models.ResourceBillingData;
+const SearchClsLogRequest = models.SearchClsLogRequest;
+const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
+const AdvancedScdnAclGroup = models.AdvancedScdnAclGroup;
+const ScdnAclGroup = models.ScdnAclGroup;
+const WafSubRuleStatus = models.WafSubRuleStatus;
+const ScdnAclConfig = models.ScdnAclConfig;
+const OriginAuthentication = models.OriginAuthentication;
+const PurgeTask = models.PurgeTask;
+const SchemeKey = models.SchemeKey;
+const DescribeCcDataRequest = models.DescribeCcDataRequest;
+const CacheTagKey = models.CacheTagKey;
 const ScdnTypeData = models.ScdnTypeData;
+const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const ResourceData = models.ResourceData;
+const ScdnSevenLayerRules = models.ScdnSevenLayerRules;
+const Https = models.Https;
+const ScdnEventLogConditions = models.ScdnEventLogConditions;
+const FollowRedirect = models.FollowRedirect;
+const DescribeScdnBotDataResponse = models.DescribeScdnBotDataResponse;
+const StartScdnDomainRequest = models.StartScdnDomainRequest;
+const ListTopWafDataRequest = models.ListTopWafDataRequest;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
+const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const ScdnIpStrategyFilter = models.ScdnIpStrategyFilter;
+const CreateScdnDomainRequest = models.CreateScdnDomainRequest;
+const TopDetailData = models.TopDetailData;
+const DescribeDistrictIspDataResponse = models.DescribeDistrictIspDataResponse;
+const RuleEngine = models.RuleEngine;
+const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
+const HttpsBilling = models.HttpsBilling;
+const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
+const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const UserAgentFilterRule = models.UserAgentFilterRule;
+const ErrorPage = models.ErrorPage;
+const MaxAgeRule = models.MaxAgeRule;
+const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
+const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
+const ListTopDDoSDataResponse = models.ListTopDDoSDataResponse;
+const WebpAdapter = models.WebpAdapter;
+const WebSocket = models.WebSocket;
+const AuthenticationTypeD = models.AuthenticationTypeD;
+const DuplicateDomainConfigRequest = models.DuplicateDomainConfigRequest;
+const AuthenticationTypeB = models.AuthenticationTypeB;
+const AuthenticationTypeA = models.AuthenticationTypeA;
+const IpStatus = models.IpStatus;
+const ServerCert = models.ServerCert;
+const CdnIpHistory = models.CdnIpHistory;
+const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const ListDiagnoseReportRequest = models.ListDiagnoseReportRequest;
+const ScdnWafConfig = models.ScdnWafConfig;
+const DiagnoseData = models.DiagnoseData;
+const DescribeScdnBotRecordsRequest = models.DescribeScdnBotRecordsRequest;
+const ListScdnLogTasksRequest = models.ListScdnLogTasksRequest;
+const ListTopCcDataResponse = models.ListTopCcDataResponse;
+const DescribePushTasksRequest = models.DescribePushTasksRequest;
+const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
+const DomainAreaConfig = models.DomainAreaConfig;
+const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
+const CreateScdnDomainResponse = models.CreateScdnDomainResponse;
+const DomainLog = models.DomainLog;
+const ListTopBotDataRequest = models.ListTopBotDataRequest;
+const BotJavaScript = models.BotJavaScript;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
+const ResponseHeaderCache = models.ResponseHeaderCache;
+const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
+const AccessControl = models.AccessControl;
+const RemoteAuthentication = models.RemoteAuthentication;
+const KeyRule = models.KeyRule;
+const CappingRule = models.CappingRule;
 const Quic = models.Quic;
+const CdnData = models.CdnData;
+const CreateEdgePackTaskResponse = models.CreateEdgePackTaskResponse;
+const TimestampData = models.TimestampData;
+const StartCdnDomainResponse = models.StartCdnDomainResponse;
+const ListTopWafDataResponse = models.ListTopWafDataResponse;
+const ClientInfo = models.ClientInfo;
+const ErrorPageRule = models.ErrorPageRule;
+const HwPrivateAccess = models.HwPrivateAccess;
+const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
+const StopCdnDomainResponse = models.StopCdnDomainResponse;
+const Quota = models.Quota;
+const BotStats = models.BotStats;
+const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
+const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const ScdnDdosConfig = models.ScdnDdosConfig;
+const DDoSTopData = models.DDoSTopData;
+const OriginPullTimeout = models.OriginPullTimeout;
+const DescribeScdnTopDataRequest = models.DescribeScdnTopDataRequest;
+const ScdnIpStrategy = models.ScdnIpStrategy;
 const DescribeDDoSDataResponse = models.DescribeDDoSDataResponse;
 const DescribeTopDataResponse = models.DescribeTopDataResponse;
-const DescribeDomainsRequest = models.DescribeDomainsRequest;
-const OfflineCache = models.OfflineCache;
-const CreateEdgePackTaskRequest = models.CreateEdgePackTaskRequest;
-const StopCdnDomainResponse = models.StopCdnDomainResponse;
 const UrlRedirectRule = models.UrlRedirectRule;
-const TopDataMore = models.TopDataMore;
-const DiagnoseList = models.DiagnoseList;
-const IpFilterPathRule = models.IpFilterPathRule;
 
 
 /**
@@ -368,18 +382,18 @@ class CdnClient extends AbstractClient {
     }
     
     /**
-     * 动态打包任务提交接口
-     * @param {CreateEdgePackTaskRequest} req
-     * @param {function(string, CreateEdgePackTaskResponse):void} cb
+     * AddCLSTopicDomains 用于新增域名到某日志主题下
+     * @param {AddCLSTopicDomainsRequest} req
+     * @param {function(string, AddCLSTopicDomainsResponse):void} cb
      * @public
      */
-    CreateEdgePackTask(req, cb) {
-        let resp = new CreateEdgePackTaskResponse();
-        this.request("CreateEdgePackTask", req, resp, cb);
+    AddCLSTopicDomains(req, cb) {
+        let resp = new AddCLSTopicDomainsResponse();
+        this.request("AddCLSTopicDomains", req, resp, cb);
     }
 
     /**
-     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：边缘节点（edge）尚未全量开放，未在内测名单中的账号不支持调用。
+     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：暂不支持查询边缘节点信息并且数据会存在一定延迟。
 
 >?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41954"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      * @param {DescribeIpStatusRequest} req
@@ -436,14 +450,14 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
-     * @param {DescribePurgeTasksRequest} req
-     * @param {function(string, DescribePurgeTasksResponse):void} cb
+     * DescribeEdgePackTaskStatus 用于查询动态打包任务状态列表
+     * @param {DescribeEdgePackTaskStatusRequest} req
+     * @param {function(string, DescribeEdgePackTaskStatusResponse):void} cb
      * @public
      */
-    DescribePurgeTasks(req, cb) {
-        let resp = new DescribePurgeTasksResponse();
-        this.request("DescribePurgeTasks", req, resp, cb);
+    DescribeEdgePackTaskStatus(req, cb) {
+        let resp = new DescribeEdgePackTaskStatusResponse();
+        this.request("DescribeEdgePackTaskStatus", req, resp, cb);
     }
 
     /**
@@ -539,25 +553,25 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
-     * @param {DisableCachesRequest} req
-     * @param {function(string, DisableCachesResponse):void} cb
+     * DescribeHttpsPackages 用于查询 CDN HTTPS请求包详情。
+     * @param {DescribeHttpsPackagesRequest} req
+     * @param {function(string, DescribeHttpsPackagesResponse):void} cb
      * @public
      */
-    DisableCaches(req, cb) {
-        let resp = new DisableCachesResponse();
-        this.request("DisableCaches", req, resp, cb);
+    DescribeHttpsPackages(req, cb) {
+        let resp = new DescribeHttpsPackagesResponse();
+        this.request("DescribeHttpsPackages", req, resp, cb);
     }
 
     /**
-     * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
-     * @param {DescribeDomainsRequest} req
-     * @param {function(string, DescribeDomainsResponse):void} cb
+     * 动态打包任务提交接口
+     * @param {CreateEdgePackTaskRequest} req
+     * @param {function(string, CreateEdgePackTaskResponse):void} cb
      * @public
      */
-    DescribeDomains(req, cb) {
-        let resp = new DescribeDomainsResponse();
-        this.request("DescribeDomains", req, resp, cb);
+    CreateEdgePackTask(req, cb) {
+        let resp = new CreateEdgePackTaskResponse();
+        this.request("CreateEdgePackTask", req, resp, cb);
     }
 
     /**
@@ -594,7 +608,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * CreateDiagnoseUrl 用于添加域名诊断任务URL
+     * CreateDiagnoseUrl 用于添加域名诊断任务URL， <font color=red>将于 **2023年5月31日** 下线</font><br>
      * @param {CreateDiagnoseUrlRequest} req
      * @param {function(string, CreateDiagnoseUrlResponse):void} cb
      * @public
@@ -638,7 +652,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * DescribeDiagnoseReport 用于获取指定报告id的内容
+     * DescribeDiagnoseReport 用于获取指定报告id的内容， <font color=red>将于 **2023年5月31日** 下线</font><br>
      * @param {DescribeDiagnoseReportRequest} req
      * @param {function(string, DescribeDiagnoseReportResponse):void} cb
      * @public
@@ -660,18 +674,18 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * 获取Bot攻击的Top数据列表
-     * @param {ListScdnTopBotDataRequest} req
-     * @param {function(string, ListScdnTopBotDataResponse):void} cb
+     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
+     * @param {DisableCachesRequest} req
+     * @param {function(string, DisableCachesResponse):void} cb
      * @public
      */
-    ListScdnTopBotData(req, cb) {
-        let resp = new ListScdnTopBotDataResponse();
-        this.request("ListScdnTopBotData", req, resp, cb);
+    DisableCaches(req, cb) {
+        let resp = new DisableCachesResponse();
+        this.request("DisableCaches", req, resp, cb);
     }
 
     /**
-     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情， <font color=red>将于 **2023年5月31日** 下线</font><br>
      * @param {ListDiagnoseReportRequest} req
      * @param {function(string, ListDiagnoseReportResponse):void} cb
      * @public
@@ -759,7 +773,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG 和 Guetzli。 
+     * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG、 Guetzli 和 Avif。 
      * @param {DescribeImageConfigRequest} req
      * @param {function(string, DescribeImageConfigResponse):void} cb
      * @public
@@ -879,6 +893,28 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
+     * @param {DescribePurgeTasksRequest} req
+     * @param {function(string, DescribePurgeTasksResponse):void} cb
+     * @public
+     */
+    DescribePurgeTasks(req, cb) {
+        let resp = new DescribePurgeTasksResponse();
+        this.request("DescribePurgeTasks", req, resp, cb);
+    }
+
+    /**
+     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     * @param {ListTopClsLogDataRequest} req
+     * @param {function(string, ListTopClsLogDataResponse):void} cb
+     * @public
+     */
+    ListTopClsLogData(req, cb) {
+        let resp = new ListTopClsLogDataResponse();
+        this.request("ListTopClsLogData", req, resp, cb);
+    }
+
+    /**
      * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
 对应内容分发网络控制台【图片鉴黄】页面。
      * @param {DescribeUrlViolationsRequest} req
@@ -913,6 +949,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
+     * @param {DescribeDomainsRequest} req
+     * @param {function(string, DescribeDomainsResponse):void} cb
+     * @public
+     */
+    DescribeDomains(req, cb) {
+        let resp = new DescribeDomainsResponse();
+        this.request("DescribeDomains", req, resp, cb);
+    }
+
+    /**
      * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日 URL 刷新额度各为 10000 条，每次最多可提交 1000 条。
      * @param {PurgeUrlsCacheRequest} req
@@ -938,6 +985,7 @@ class CdnClient extends AbstractClient {
     /**
      * UpdateDomainConfig 用于修改内容分发网络加速域名配置信息
 注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值，建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
+云审计相关：接口的入参可能包含密钥等敏感信息，所以此接口的入参不会上报到云审计。
      * @param {UpdateDomainConfigRequest} req
      * @param {function(string, UpdateDomainConfigResponse):void} cb
      * @public
@@ -1026,7 +1074,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG 和 Guetzli。 
+     * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG、 Guetzli 和 Avif。 
      * @param {UpdateImageConfigRequest} req
      * @param {function(string, UpdateImageConfigResponse):void} cb
      * @public
@@ -1259,14 +1307,14 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * 通过CLS日志计算Top信息。支持近7天的日志数据。
-     * @param {ListTopClsLogDataRequest} req
-     * @param {function(string, ListTopClsLogDataResponse):void} cb
+     * 获取Bot攻击的Top数据列表
+     * @param {ListScdnTopBotDataRequest} req
+     * @param {function(string, ListScdnTopBotDataResponse):void} cb
      * @public
      */
-    ListTopClsLogData(req, cb) {
-        let resp = new ListTopClsLogDataResponse();
-        this.request("ListTopClsLogData", req, resp, cb);
+    ListScdnTopBotData(req, cb) {
+        let resp = new ListScdnTopBotDataResponse();
+        this.request("ListScdnTopBotData", req, resp, cb);
     }
 
 

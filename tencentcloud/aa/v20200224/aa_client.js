@@ -16,26 +16,8 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CrowdAntiRushInfo = models.CrowdAntiRushInfo;
 const QueryActivityAntiRushResponse = models.QueryActivityAntiRushResponse;
-const OutputActivityAntiRushAdvancedValue = models.OutputActivityAntiRushAdvancedValue;
-const QQAccountInfo = models.QQAccountInfo;
-const ManageMarketingRiskRequest = models.ManageMarketingRiskRequest;
-const OutputManageMarketingRisk = models.OutputManageMarketingRisk;
-const OnlineScamInfo = models.OnlineScamInfo;
-const InputManageMarketingRisk = models.InputManageMarketingRisk;
-const InputActivityAntiRushAdvanced = models.InputActivityAntiRushAdvanced;
-const OtherAccountInfo = models.OtherAccountInfo;
-const AccountInfo = models.AccountInfo;
-const QueryActivityAntiRushAdvancedResponse = models.QueryActivityAntiRushAdvancedResponse;
-const ManageMarketingRiskResponse = models.ManageMarketingRiskResponse;
-const WeChatAccountInfo = models.WeChatAccountInfo;
-const SponsorInfo = models.SponsorInfo;
 const QueryActivityAntiRushRequest = models.QueryActivityAntiRushRequest;
-const InputDetails = models.InputDetails;
-const OutputManageMarketingRiskValue = models.OutputManageMarketingRiskValue;
-const OutputActivityAntiRushAdvanced = models.OutputActivityAntiRushAdvanced;
-const QueryActivityAntiRushAdvancedRequest = models.QueryActivityAntiRushAdvancedRequest;
 
 
 /**
@@ -57,28 +39,6 @@ class AaClient extends AbstractClient {
     QueryActivityAntiRush(req, cb) {
         let resp = new QueryActivityAntiRushResponse();
         this.request("QueryActivityAntiRush", req, resp, cb);
-    }
-
-    /**
-     * 活动防刷、注册保护、登录保护等营销产品的高级版本
-     * @param {ManageMarketingRiskRequest} req
-     * @param {function(string, ManageMarketingRiskResponse):void} cb
-     * @public
-     */
-    ManageMarketingRisk(req, cb) {
-        let resp = new ManageMarketingRiskResponse();
-        this.request("ManageMarketingRisk", req, resp, cb);
-    }
-
-    /**
-     * 活动防刷高级版，支持对网赚众包、网赚防刷、引流反诈骗场景的检测识别
-     * @param {QueryActivityAntiRushAdvancedRequest} req
-     * @param {function(string, QueryActivityAntiRushAdvancedResponse):void} cb
-     * @public
-     */
-    QueryActivityAntiRushAdvanced(req, cb) {
-        let resp = new QueryActivityAntiRushAdvancedResponse();
-        this.request("QueryActivityAntiRushAdvanced", req, resp, cb);
     }
 
 

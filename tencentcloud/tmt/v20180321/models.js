@@ -176,6 +176,13 @@ class GetFileTranslateData extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * 翻译进度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -189,6 +196,7 @@ class GetFileTranslateData extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.FileData = 'FileData' in params ? params.FileData : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -523,7 +531,7 @@ hi：印地语
         this.ProjectId = null;
 
         /**
-         * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000。
+         * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000字符。
          * @type {Array.<string> || null}
          */
         this.SourceTextList = null;
@@ -898,7 +906,7 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000。
+         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。
          * @type {string || null}
          */
         this.SourceText = null;

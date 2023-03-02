@@ -461,6 +461,55 @@ class CosInfo extends  AbstractModel {
 }
 
 /**
+ * 可用区信息
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区名称
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可用区描述
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
+         * @type {string || null}
+         */
+        this.ZoneState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+
+    }
+}
+
+/**
  * DescribeDedicatedClusterOverview返回参数结构体
  * @class
  */
@@ -481,6 +530,34 @@ class DescribeDedicatedClusterOverviewResponse extends  AbstractModel {
         this.HostCount = null;
 
         /**
+         * vpn通道状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpnConnectionState = null;
+
+        /**
+         * vpn网关监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VpngwBandwidthData || null}
+         */
+        this.VpngwBandwidthData = null;
+
+        /**
+         * 本地网关信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LocalNetInfo || null}
+         */
+        this.LocalNetInfo = null;
+
+        /**
+         * vpn网关通道监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VpngwBandwidthData> || null}
+         */
+        this.VpnConnectionBandwidthData = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -497,6 +574,28 @@ class DescribeDedicatedClusterOverviewResponse extends  AbstractModel {
         }
         this.CvmCount = 'CvmCount' in params ? params.CvmCount : null;
         this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.VpnConnectionState = 'VpnConnectionState' in params ? params.VpnConnectionState : null;
+
+        if (params.VpngwBandwidthData) {
+            let obj = new VpngwBandwidthData();
+            obj.deserialize(params.VpngwBandwidthData)
+            this.VpngwBandwidthData = obj;
+        }
+
+        if (params.LocalNetInfo) {
+            let obj = new LocalNetInfo();
+            obj.deserialize(params.LocalNetInfo)
+            this.LocalNetInfo = obj;
+        }
+
+        if (params.VpnConnectionBandwidthData) {
+            this.VpnConnectionBandwidthData = new Array();
+            for (let z in params.VpnConnectionBandwidthData) {
+                let obj = new VpngwBandwidthData();
+                obj.deserialize(params.VpnConnectionBandwidthData[z]);
+                this.VpnConnectionBandwidthData.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -619,6 +718,13 @@ class HostInfo extends  AbstractModel {
          */
         this.ExpireTime = null;
 
+        /**
+         * 宿主机id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostId = null;
+
     }
 
     /**
@@ -638,6 +744,7 @@ class HostInfo extends  AbstractModel {
         this.MemTotal = 'MemTotal' in params ? params.MemTotal : null;
         this.RunTime = 'RunTime' in params ? params.RunTime : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
 }
@@ -982,6 +1089,20 @@ class DedicatedClusterOrderItem extends  AbstractModel {
          */
         this.ComputeFormat = null;
 
+        /**
+         * 规格类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TypeFamily = null;
+
+        /**
+         * 0未支付，1已支付
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SubOrderPayStatus = null;
+
     }
 
     /**
@@ -1008,6 +1129,8 @@ class DedicatedClusterOrderItem extends  AbstractModel {
         this.TotalGpu = 'TotalGpu' in params ? params.TotalGpu : null;
         this.TypeName = 'TypeName' in params ? params.TypeName : null;
         this.ComputeFormat = 'ComputeFormat' in params ? params.ComputeFormat : null;
+        this.TypeFamily = 'TypeFamily' in params ? params.TypeFamily : null;
+        this.SubOrderPayStatus = 'SubOrderPayStatus' in params ? params.SubOrderPayStatus : null;
 
     }
 }
@@ -1294,6 +1417,43 @@ class ModifyOrderStatusResponse extends  AbstractModel {
 }
 
 /**
+ * 入带宽数据
+ * @class
+ */
+class InBandwidth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Timestamps = null;
+
+        /**
+         * 时间对应的值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamps = 'Timestamps' in params ? params.Timestamps : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * DescribeDedicatedClusterCosCapacity请求参数结构体
  * @class
  */
@@ -1529,6 +1689,34 @@ class DedicatedClusterOrder extends  AbstractModel {
          */
         this.PayStatus = null;
 
+        /**
+         * 支付方式，一次性、按月、按年
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 购买时长的单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 订单类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
     }
 
     /**
@@ -1562,6 +1750,10 @@ class DedicatedClusterOrder extends  AbstractModel {
         this.Mem = 'Mem' in params ? params.Mem : null;
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
         this.PayStatus = 'PayStatus' in params ? params.PayStatus : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
 
     }
 }
@@ -2272,6 +2464,59 @@ class DescribeDedicatedClusterHostsResponse extends  AbstractModel {
 }
 
 /**
+ * 本地网络信息
+ * @class
+ */
+class LocalNetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 网络id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BGPRoute = null;
+
+        /**
+         * 本地IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LocalIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.BGPRoute = 'BGPRoute' in params ? params.BGPRoute : null;
+        this.LocalIp = 'LocalIp' in params ? params.LocalIp : null;
+
+    }
+}
+
+/**
  * DescribeDedicatedClusterInstanceTypes请求参数结构体
  * @class
  */
@@ -2679,36 +2924,25 @@ class CosCapacity extends  AbstractModel {
 }
 
 /**
- * 可用区信息
+ * VPN网关的流量监控数据。
  * @class
  */
-class ZoneInfo extends  AbstractModel {
+class VpngwBandwidthData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可用区名称
-         * @type {string || null}
+         * 出带宽流量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutBandwidth || null}
          */
-        this.Zone = null;
+        this.OutBandwidth = null;
 
         /**
-         * 可用区描述
-         * @type {string || null}
+         * 入带宽流量
+         * @type {InBandwidth || null}
          */
-        this.ZoneName = null;
-
-        /**
-         * 可用区ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
-         * @type {string || null}
-         */
-        this.ZoneState = null;
+        this.InBandwidth = null;
 
     }
 
@@ -2719,10 +2953,18 @@ class ZoneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+
+        if (params.OutBandwidth) {
+            let obj = new OutBandwidth();
+            obj.deserialize(params.OutBandwidth)
+            this.OutBandwidth = obj;
+        }
+
+        if (params.InBandwidth) {
+            let obj = new InBandwidth();
+            obj.deserialize(params.InBandwidth)
+            this.InBandwidth = obj;
+        }
 
     }
 }
@@ -3089,6 +3331,43 @@ class DescribeDedicatedClusterHostStatisticsRequest extends  AbstractModel {
 }
 
 /**
+ * 出带宽数据。
+ * @class
+ */
+class OutBandwidth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Timestamps = null;
+
+        /**
+         * 对应时间的值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamps = 'Timestamps' in params ? params.Timestamps : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * DescribeDedicatedClusterOverview请求参数结构体
  * @class
  */
@@ -3180,6 +3459,7 @@ module.exports = {
     DedicatedClusterType: DedicatedClusterType,
     DeleteSitesRequest: DeleteSitesRequest,
     CosInfo: CosInfo,
+    ZoneInfo: ZoneInfo,
     DescribeDedicatedClusterOverviewResponse: DescribeDedicatedClusterOverviewResponse,
     DescribeSitesRequest: DescribeSitesRequest,
     HostInfo: HostInfo,
@@ -3193,6 +3473,7 @@ module.exports = {
     DescribeDedicatedSupportedZonesRequest: DescribeDedicatedSupportedZonesRequest,
     DedicatedClusterTypeInfo: DedicatedClusterTypeInfo,
     ModifyOrderStatusResponse: ModifyOrderStatusResponse,
+    InBandwidth: InBandwidth,
     DescribeDedicatedClusterCosCapacityRequest: DescribeDedicatedClusterCosCapacityRequest,
     DescribeSitesResponse: DescribeSitesResponse,
     DescribeSitesDetailRequest: DescribeSitesDetailRequest,
@@ -3212,19 +3493,21 @@ module.exports = {
     ModifySiteDeviceInfoResponse: ModifySiteDeviceInfoResponse,
     CreateDedicatedClusterRequest: CreateDedicatedClusterRequest,
     DescribeDedicatedClusterHostsResponse: DescribeDedicatedClusterHostsResponse,
+    LocalNetInfo: LocalNetInfo,
     DescribeDedicatedClusterInstanceTypesRequest: DescribeDedicatedClusterInstanceTypesRequest,
     ModifyDedicatedClusterInfoResponse: ModifyDedicatedClusterInfoResponse,
     ModifySiteInfoRequest: ModifySiteInfoRequest,
     SiteDetail: SiteDetail,
     DeleteSitesResponse: DeleteSitesResponse,
     CosCapacity: CosCapacity,
-    ZoneInfo: ZoneInfo,
+    VpngwBandwidthData: VpngwBandwidthData,
     ModifySiteDeviceInfoRequest: ModifySiteDeviceInfoRequest,
     DescribeDedicatedClusterHostStatisticsResponse: DescribeDedicatedClusterHostStatisticsResponse,
     Site: Site,
     DescribeDedicatedClusterTypesRequest: DescribeDedicatedClusterTypesRequest,
     DescribeDedicatedClusterOrdersResponse: DescribeDedicatedClusterOrdersResponse,
     DescribeDedicatedClusterHostStatisticsRequest: DescribeDedicatedClusterHostStatisticsRequest,
+    OutBandwidth: OutBandwidth,
     DescribeDedicatedClusterOverviewRequest: DescribeDedicatedClusterOverviewRequest,
     DeleteDedicatedClustersRequest: DeleteDedicatedClustersRequest,
     DeleteDedicatedClustersResponse: DeleteDedicatedClustersResponse,

@@ -20,16 +20,19 @@ const InquireAuditCreditResponse = models.InquireAuditCreditResponse;
 const StopLoggingRequest = models.StopLoggingRequest;
 const CmqRegionInfo = models.CmqRegionInfo;
 const GetAttributeKeyRequest = models.GetAttributeKeyRequest;
+const Storage = models.Storage;
 const DescribeAuditTracksResponse = models.DescribeAuditTracksResponse;
+const StartLoggingRequest = models.StartLoggingRequest;
 const DeleteAuditResponse = models.DeleteAuditResponse;
 const ModifyAuditTrackResponse = models.ModifyAuditTrackResponse;
 const InquireAuditCreditRequest = models.InquireAuditCreditRequest;
 const DescribeEventsResponse = models.DescribeEventsResponse;
 const ListCosEnableRegionResponse = models.ListCosEnableRegionResponse;
 const LookUpEventsRequest = models.LookUpEventsRequest;
-const StartLoggingRequest = models.StartLoggingRequest;
+const DescribeAuditTrackRequest = models.DescribeAuditTrackRequest;
 const UpdateAuditRequest = models.UpdateAuditRequest;
 const DescribeAuditTracksRequest = models.DescribeAuditTracksRequest;
+const Tracks = models.Tracks;
 const CreateAuditResponse = models.CreateAuditResponse;
 const DeleteAuditTrackRequest = models.DeleteAuditTrackRequest;
 const StartLoggingResponse = models.StartLoggingResponse;
@@ -57,6 +60,7 @@ const ListCmqEnableRegionResponse = models.ListCmqEnableRegionResponse;
 const LookUpEventsResponse = models.LookUpEventsResponse;
 const DeleteAuditTrackResponse = models.DeleteAuditTrackResponse;
 const CosRegionInfo = models.CosRegionInfo;
+const DescribeAuditTrackResponse = models.DescribeAuditTrackResponse;
 const DescribeAuditResponse = models.DescribeAuditResponse;
 const Event = models.Event;
 const AuditSummary = models.AuditSummary;
@@ -95,14 +99,14 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * 查询云审计支持的cos可用区
-     * @param {ListCosEnableRegionRequest} req
-     * @param {function(string, ListCosEnableRegionResponse):void} cb
+     * 查询云审计跟踪集详情
+     * @param {DescribeAuditTrackRequest} req
+     * @param {function(string, DescribeAuditTrackResponse):void} cb
      * @public
      */
-    ListCosEnableRegion(req, cb) {
-        let resp = new ListCosEnableRegionResponse();
-        this.request("ListCosEnableRegion", req, resp, cb);
+    DescribeAuditTrack(req, cb) {
+        let resp = new DescribeAuditTrackResponse();
+        this.request("DescribeAuditTrack", req, resp, cb);
     }
 
     /**
@@ -169,6 +173,17 @@ class CloudauditClient extends AbstractClient {
     StopLogging(req, cb) {
         let resp = new StopLoggingResponse();
         this.request("StopLogging", req, resp, cb);
+    }
+
+    /**
+     * 查询云审计支持的cos可用区
+     * @param {ListCosEnableRegionRequest} req
+     * @param {function(string, ListCosEnableRegionResponse):void} cb
+     * @public
+     */
+    ListCosEnableRegion(req, cb) {
+        let resp = new ListCosEnableRegionResponse();
+        this.request("ListCosEnableRegion", req, resp, cb);
     }
 
     /**

@@ -228,7 +228,9 @@ class GseClient extends AbstractClient {
     }
     
     /**
-     * 本接口（UpdateBucketCORSOpt）用于设置cos跨域访问。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateBucketCORSOpt）用于设置cos跨域访问。
      * @param {UpdateBucketCORSOptRequest} req
      * @param {function(string, UpdateBucketCORSOptResponse):void} cb
      * @public
@@ -239,7 +241,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteFleet）用于删除服务器舰队。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteFleet）用于删除服务器舰队。
      * @param {DeleteFleetRequest} req
      * @param {function(string, DeleteFleetResponse):void} cb
      * @public
@@ -250,7 +254,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateFleetCapacity）用于更新服务器舰队容量配置。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateFleetCapacity）用于更新服务器舰队容量配置。
      * @param {UpdateFleetCapacityRequest} req
      * @param {function(string, UpdateFleetCapacityResponse):void} cb
      * @public
@@ -261,7 +267,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeFleetRelatedResources）用于获取与游戏服务器舰队关联的资源信息，如别名、队列
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetRelatedResources）用于获取与游戏服务器舰队关联的资源信息，如别名、队列
      * @param {DescribeFleetRelatedResourcesRequest} req
      * @param {function(string, DescribeFleetRelatedResourcesResponse):void} cb
      * @public
@@ -272,7 +280,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeRuntimeConfiguration）用于获取服务器舰队运行配置。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeRuntimeConfiguration）用于获取服务器舰队运行配置。
      * @param {DescribeRuntimeConfigurationRequest} req
      * @param {function(string, DescribeRuntimeConfigurationResponse):void} cb
      * @public
@@ -283,7 +293,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateAlias）用于更新别名的属性。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateAlias）用于更新别名的属性。
      * @param {UpdateAliasRequest} req
      * @param {function(string, UpdateAliasResponse):void} cb
      * @public
@@ -294,7 +306,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeGameServerSessionPlacement）用于查询游戏服务器会话的放置。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeGameServerSessionPlacement）用于查询游戏服务器会话的放置。
      * @param {DescribeGameServerSessionPlacementRequest} req
      * @param {function(string, DescribeGameServerSessionPlacementResponse):void} cb
      * @public
@@ -305,7 +319,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeGameServerSessionDetails）用于查询游戏服务器会话详情列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeGameServerSessionDetails）用于查询游戏服务器会话详情列表。
      * @param {DescribeGameServerSessionDetailsRequest} req
      * @param {function(string, DescribeGameServerSessionDetailsResponse):void} cb
      * @public
@@ -316,7 +332,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateAsset）用于创建生成包。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateAsset）用于创建生成包。
 通过获取上传cos的临时密钥，将文件上传至cos，然后将生成包的zip名称下发给本接口完成资源创建。  
 
 上传文件至 cos支持俩种方式：
@@ -340,7 +358,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（SetServerReserved）用于将异常的实例标记为保留，用于问题排查。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（SetServerReserved）用于将异常的实例标记为保留，用于问题排查。
 
 字段ReserveValue：0默认值，不保留；1 保留
 
@@ -354,7 +374,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。
      * @param {CreateGameServerSessionQueueRequest} req
      * @param {function(string, CreateGameServerSessionQueueResponse):void} cb
      * @public
@@ -365,7 +387,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeInstanceLimit）用于查询用户实例数限额。
      * @param {DescribeInstanceLimitRequest} req
      * @param {function(string, DescribeInstanceLimitResponse):void} cb
      * @public
@@ -376,7 +400,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteAsset）用于删除生成包。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteAsset）用于删除生成包。
      * @param {DeleteAssetRequest} req
      * @param {function(string, DeleteAssetResponse):void} cb
      * @public
@@ -387,7 +413,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ListFleets）用于获取服务器舰队列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（ListFleets）用于获取服务器舰队列表。
      * @param {ListFleetsRequest} req
      * @param {function(string, ListFleetsResponse):void} cb
      * @public
@@ -398,7 +426,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（GetGameServerSessionLogUrl）用于获取游戏服务器会话的日志URL。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（GetGameServerSessionLogUrl）用于获取游戏服务器会话的日志URL。
      * @param {GetGameServerSessionLogUrlRequest} req
      * @param {function(string, GetGameServerSessionLogUrlResponse):void} cb
      * @public
@@ -409,7 +439,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateRuntimeConfiguration）用于更新服务器舰队配置。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateRuntimeConfiguration）用于更新服务器舰队配置。
      * @param {UpdateRuntimeConfigurationRequest} req
      * @param {function(string, UpdateRuntimeConfigurationResponse):void} cb
      * @public
@@ -420,7 +452,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeFleetCapacity）用于查询服务部署容量配置。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetCapacity）用于查询服务部署容量配置。
      * @param {DescribeFleetCapacityRequest} req
      * @param {function(string, DescribeFleetCapacityResponse):void} cb
      * @public
@@ -431,7 +465,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
      * @param {StopGameServerSessionPlacementRequest} req
      * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
      * @public
@@ -442,7 +478,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
      * @param {UpdateBucketAccelerateOptRequest} req
      * @param {function(string, UpdateBucketAccelerateOptResponse):void} cb
      * @public
@@ -453,7 +491,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteGameServerSessionQueue）用于删除游戏服务器会话队列。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteGameServerSessionQueue）用于删除游戏服务器会话队列。
      * @param {DeleteGameServerSessionQueueRequest} req
      * @param {function(string, DeleteGameServerSessionQueueResponse):void} cb
      * @public
@@ -464,7 +504,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeGameServerSessionQueues）用于查询游戏服务器会话队列。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeGameServerSessionQueues）用于查询游戏服务器会话队列。
      * @param {DescribeGameServerSessionQueuesRequest} req
      * @param {function(string, DescribeGameServerSessionQueuesResponse):void} cb
      * @public
@@ -475,7 +517,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeCcnInstances）用于查询云联网实例。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeCcnInstances）用于查询云联网实例。
      * @param {DescribeCcnInstancesRequest} req
      * @param {function(string, DescribeCcnInstancesResponse):void} cb
      * @public
@@ -486,7 +530,9 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（PutScalingPolicy）用于设置服务器舰队的动态扩缩容策略。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（PutScalingPolicy）用于设置服务器舰队的动态扩缩容策略。
 
 通过此接口可以增加或者更新服务器舰队的扩缩容策略。
 服务器舰队可以有多个扩缩容策略，但是只有一个TargetBased基于目标的策略。
@@ -594,7 +640,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeScalingPolicies）用于查询服务器舰队的动态扩缩容策略列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeScalingPolicies）用于查询服务器舰队的动态扩缩容策略列表。
      * @param {DescribeScalingPoliciesRequest} req
      * @param {function(string, DescribeScalingPoliciesResponse):void} cb
      * @public
@@ -605,7 +653,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（CopyFleet）用于复制服务器舰队。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CopyFleet）用于复制服务器舰队。
      * @param {CopyFleetRequest} req
      * @param {function(string, CopyFleetResponse):void} cb
      * @public
@@ -616,7 +666,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeGameServerSessions）用于查询游戏服务器会话列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeGameServerSessions）用于查询游戏服务器会话列表。
      * @param {DescribeGameServerSessionsRequest} req
      * @param {function(string, DescribeGameServerSessionsResponse):void} cb
      * @public
@@ -627,7 +679,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
      * @param {StartGameServerSessionPlacementRequest} req
      * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
      * @public
@@ -638,7 +692,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（JoinGameServerSession）用于加入游戏服务器会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（JoinGameServerSession）用于加入游戏服务器会话。
      * @param {JoinGameServerSessionRequest} req
      * @param {function(string, JoinGameServerSessionResponse):void} cb
      * @public
@@ -649,7 +705,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（JoinGameServerSessionBatch）用于批量加入游戏服务器会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（JoinGameServerSessionBatch）用于批量加入游戏服务器会话。
      * @param {JoinGameServerSessionBatchRequest} req
      * @param {function(string, JoinGameServerSessionBatchResponse):void} cb
      * @public
@@ -660,7 +718,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetStatisticSummary）用于查询服务部署统计汇总信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetStatisticSummary）用于查询服务部署统计汇总信息。
      * @param {DescribeFleetStatisticSummaryRequest} req
      * @param {function(string, DescribeFleetStatisticSummaryResponse):void} cb
      * @public
@@ -671,7 +731,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（ResolveAlias）用于获取别名当前指向的fleetId。
      * @param {ResolveAliasRequest} req
      * @param {function(string, ResolveAliasResponse):void} cb
      * @public
@@ -682,7 +744,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DeleteAlias）用于删除别名。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteAlias）用于删除别名。
      * @param {DeleteAliasRequest} req
      * @param {function(string, DeleteAliasResponse):void} cb
      * @public
@@ -693,7 +757,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DeleteTimerScalingPolicy）用于删除fleet下的定时器。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteTimerScalingPolicy）用于删除fleet下的定时器。
 
      * @param {DeleteTimerScalingPolicyRequest} req
      * @param {function(string, DeleteTimerScalingPolicyResponse):void} cb
@@ -705,7 +771,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateAsset）用于修改生成包信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateAsset）用于修改生成包信息。
      * @param {UpdateAssetRequest} req
      * @param {function(string, UpdateAssetResponse):void} cb
      * @public
@@ -716,7 +784,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
      * @param {StartFleetActionsRequest} req
      * @param {function(string, StartFleetActionsResponse):void} cb
      * @public
@@ -727,7 +797,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetPortSettings）用于获取服务器舰队安全组信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetPortSettings）用于获取服务器舰队安全组信息。
      * @param {DescribeFleetPortSettingsRequest} req
      * @param {function(string, DescribeFleetPortSettingsResponse):void} cb
      * @public
@@ -738,7 +810,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（GetUploadCredentials）获取上传文件授权信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（GetUploadCredentials）获取上传文件授权信息。
 通过 [GetUploadCredentials](https://cloud.tencent.com/document/product/1165/48727) 接口获取临时授权信息后，调用 COS API将数据上传，根据上传的 BucketKey 信息进行生成包 [CreateAsset](https://cloud.tencent.com/document/product/1165/48731) 的创建。参考下面的示例部分。
      * @param {GetUploadCredentialsRequest} req
      * @param {function(string, GetUploadCredentialsResponse):void} cb
@@ -750,7 +824,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（AttachCcnInstances）用于关联云联网实例。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（AttachCcnInstances）用于关联云联网实例。
      * @param {AttachCcnInstancesRequest} req
      * @param {function(string, AttachCcnInstancesResponse):void} cb
      * @public
@@ -761,7 +837,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DetachCcnInstances）用于解关联云联网实例。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DetachCcnInstances）用于解关联云联网实例。
      * @param {DetachCcnInstancesRequest} req
      * @param {function(string, DetachCcnInstancesResponse):void} cb
      * @public
@@ -772,7 +850,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DeleteScalingPolicy）用于删除服务器舰队的扩缩容策略。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DeleteScalingPolicy）用于删除服务器舰队的扩缩容策略。
 通过服务器舰队ID和策略名称删除服务器舰队的扩缩容策略，只传递服务器舰队ID时，会将这个服务器舰队下的所有策略都删除。
 传递策略名称时，单独删除策略名称对应的策略。
      * @param {DeleteScalingPolicyRequest} req
@@ -785,7 +865,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（CreateAlias）用于创建别名。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateAlias）用于创建别名。
      * @param {CreateAliasRequest} req
      * @param {function(string, CreateAliasResponse):void} cb
      * @public
@@ -796,7 +878,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetStatisticFlows）用于查询服务部署统计用量。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetStatisticFlows）用于查询服务部署统计用量。
      * @param {DescribeFleetStatisticFlowsRequest} req
      * @param {function(string, DescribeFleetStatisticFlowsResponse):void} cb
      * @public
@@ -807,7 +891,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（CreateGameServerSession）用于创建游戏服务会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateGameServerSession）用于创建游戏服务会话。
      * @param {CreateGameServerSessionRequest} req
      * @param {function(string, CreateGameServerSessionResponse):void} cb
      * @public
@@ -818,7 +904,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribePlayerSessions）用于获取玩家会话列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribePlayerSessions）用于获取玩家会话列表。
      * @param {DescribePlayerSessionsRequest} req
      * @param {function(string, DescribePlayerSessionsResponse):void} cb
      * @public
@@ -829,7 +917,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeAsset）获取生成包信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeAsset）获取生成包信息。
      * @param {DescribeAssetRequest} req
      * @param {function(string, DescribeAssetResponse):void} cb
      * @public
@@ -840,7 +930,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeAssetSystems）用于获取生成包支持的操作系统。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeAssetSystems）用于获取生成包支持的操作系统。
      * @param {DescribeAssetSystemsRequest} req
      * @param {function(string, DescribeAssetSystemsResponse):void} cb
      * @public
@@ -851,7 +943,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（CreateFleet）用于创建服务器舰队。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateFleet）用于创建服务器舰队。
      * @param {CreateFleetRequest} req
      * @param {function(string, CreateFleetResponse):void} cb
      * @public
@@ -862,7 +956,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeTimerScalingPolicies）用于查询fleet下的定时器列表。可以通过fleetid，定时器名称分页查询。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeTimerScalingPolicies）用于查询fleet下的定时器列表。可以通过fleetid，定时器名称分页查询。
 
      * @param {DescribeTimerScalingPoliciesRequest} req
      * @param {function(string, DescribeTimerScalingPoliciesResponse):void} cb
@@ -874,7 +970,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateGameServerSessionQueue）用于修改游戏服务器会话队列。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateGameServerSessionQueue）用于修改游戏服务器会话队列。
      * @param {UpdateGameServerSessionQueueRequest} req
      * @param {function(string, UpdateGameServerSessionQueueResponse):void} cb
      * @public
@@ -885,7 +983,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（GetInstanceAccess）用于获取实例登录所需要的凭据。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（GetInstanceAccess）用于获取实例登录所需要的凭据。
      * @param {GetInstanceAccessRequest} req
      * @param {function(string, GetInstanceAccessResponse):void} cb
      * @public
@@ -896,7 +996,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateFleetAttributes）用于更新服务器舰队属性。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateFleetAttributes）用于更新服务器舰队属性。
      * @param {UpdateFleetAttributesRequest} req
      * @param {function(string, UpdateFleetAttributesResponse):void} cb
      * @public
@@ -907,7 +1009,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeUserQuota）获取用户单个模块配额。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeUserQuota）获取用户单个模块配额。
      * @param {DescribeUserQuotaRequest} req
      * @param {function(string, DescribeUserQuotaResponse):void} cb
      * @public
@@ -918,7 +1022,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetAttributes）用于查询服务器舰队属性。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetAttributes）用于查询服务器舰队属性。
      * @param {DescribeFleetAttributesRequest} req
      * @param {function(string, DescribeFleetAttributesResponse):void} cb
      * @public
@@ -929,7 +1035,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateGameServerSession）用于更新游戏服务器会话。
      * @param {UpdateGameServerSessionRequest} req
      * @param {function(string, UpdateGameServerSessionResponse):void} cb
      * @public
@@ -940,7 +1048,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（GetUploadFederationToken）用于 获取生成包上传所需要的临时密钥。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（GetUploadFederationToken）用于 获取生成包上传所需要的临时密钥。
      * @param {GetUploadFederationTokenRequest} req
      * @param {function(string, GetUploadFederationTokenResponse):void} cb
      * @public
@@ -951,7 +1061,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口用于获取游戏服务器实例的日志URL。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口用于获取游戏服务器实例的日志URL。
      * @param {GetGameServerInstanceLogUrlRequest} req
      * @param {function(string, GetGameServerInstanceLogUrlResponse):void} cb
      * @public
@@ -962,7 +1074,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（SearchGameServerSessions）用于搜索游戏服务器会话列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（SearchGameServerSessions）用于搜索游戏服务器会话列表。
      * @param {SearchGameServerSessionsRequest} req
      * @param {function(string, SearchGameServerSessionsResponse):void} cb
      * @public
@@ -973,7 +1087,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
      * @param {DescribeFleetStatisticDetailsRequest} req
      * @param {function(string, DescribeFleetStatisticDetailsResponse):void} cb
      * @public
@@ -984,7 +1100,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeAssets）用于获取生成包列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeAssets）用于获取生成包列表。
      * @param {DescribeAssetsRequest} req
      * @param {function(string, DescribeAssetsResponse):void} cb
      * @public
@@ -995,7 +1113,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（CreateAssetWithImage）用于创建生成包镜像信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（CreateAssetWithImage）用于创建生成包镜像信息。
      * @param {CreateAssetWithImageRequest} req
      * @param {function(string, CreateAssetWithImageResponse):void} cb
      * @public
@@ -1006,7 +1126,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（StopFleetActions）用于停止服务器舰队自动扩缩容，改为手动扩缩容。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（StopFleetActions）用于停止服务器舰队自动扩缩容，改为手动扩缩容。
      * @param {StopFleetActionsRequest} req
      * @param {function(string, StopFleetActionsResponse):void} cb
      * @public
@@ -1017,7 +1139,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeInstancesExtend）用于查询实例扩展信息列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeInstancesExtend）用于查询实例扩展信息列表。
      * @param {DescribeInstancesExtendRequest} req
      * @param {function(string, DescribeInstancesExtendResponse):void} cb
      * @public
@@ -1028,7 +1152,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeAlias）用于获取别名详情。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeAlias）用于获取别名详情。
      * @param {DescribeAliasRequest} req
      * @param {function(string, DescribeAliasResponse):void} cb
      * @public
@@ -1039,7 +1165,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（ListAliases）用于检索帐户下的所有别名。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（ListAliases）用于检索帐户下的所有别名。
      * @param {ListAliasesRequest} req
      * @param {function(string, ListAliasesResponse):void} cb
      * @public
@@ -1050,7 +1178,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
      * @param {UpdateFleetPortSettingsRequest} req
      * @param {function(string, UpdateFleetPortSettingsResponse):void} cb
      * @public
@@ -1061,7 +1191,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeUserQuotas）用于获取用户配额
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeUserQuotas）用于获取用户配额
      * @param {DescribeUserQuotasRequest} req
      * @param {function(string, DescribeUserQuotasResponse):void} cb
      * @public
@@ -1072,7 +1204,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeInstanceTypes）用于获取服务器实例类型列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeInstanceTypes）用于获取服务器实例类型列表。
      * @param {DescribeInstanceTypesRequest} req
      * @param {function(string, DescribeInstanceTypesResponse):void} cb
      * @public
@@ -1083,7 +1217,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetEvents）用于查询服务器舰队相关的事件列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetEvents）用于查询服务器舰队相关的事件列表。
      * @param {DescribeFleetEventsRequest} req
      * @param {function(string, DescribeFleetEventsResponse):void} cb
      * @public
@@ -1094,7 +1230,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（SetServerWeight）用于设置服务器权重。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（SetServerWeight）用于设置服务器权重。
      * @param {SetServerWeightRequest} req
      * @param {function(string, SetServerWeightResponse):void} cb
      * @public
@@ -1105,7 +1243,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateFleetName）用于更新服务器舰队名称。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（UpdateFleetName）用于更新服务器舰队名称。
      * @param {UpdateFleetNameRequest} req
      * @param {function(string, UpdateFleetNameResponse):void} cb
      * @public
@@ -1116,7 +1256,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetUtilization）用于查询服务器舰队的利用率信息。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeFleetUtilization）用于查询服务器舰队的利用率信息。
      * @param {DescribeFleetUtilizationRequest} req
      * @param {function(string, DescribeFleetUtilizationResponse):void} cb
      * @public
@@ -1127,7 +1269,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeInstances）用于查询服务器实例列表。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（DescribeInstances）用于查询服务器实例列表。
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
@@ -1138,7 +1282,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程，适用于时限保护和不保护。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程，适用于时限保护和不保护。
      * @param {EndGameServerSessionAndProcessRequest} req
      * @param {function(string, EndGameServerSessionAndProcessResponse):void} cb
      * @public
@@ -1149,7 +1295,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。
+     * 此接口无法使用，游戏服务器引擎GSE已于6.1正式下架，感谢您的支持
+
+本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。
 
 填写字段timer_id，表示更新；不填字段timer_id表示新增。
 

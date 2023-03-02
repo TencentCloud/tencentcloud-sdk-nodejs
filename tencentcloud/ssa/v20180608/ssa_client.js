@@ -24,7 +24,8 @@ const DescribeSocAlertDetailsRequest = models.DescribeSocAlertDetailsRequest;
 const DescribeComplianceAssetListResponse = models.DescribeComplianceAssetListResponse;
 const DataCheck = models.DataCheck;
 const DescribeSocCheckResultListResponse = models.DescribeSocCheckResultListResponse;
-const SocProductionItem = models.SocProductionItem;
+const SocCheckItem = models.SocCheckItem;
+const DescribeVulDetailResponse = models.DescribeVulDetailResponse;
 const MappingResult = models.MappingResult;
 const DescribeCheckConfigAssetListRequest = models.DescribeCheckConfigAssetListRequest;
 const Asset = models.Asset;
@@ -44,9 +45,11 @@ const SaDivulgeDataQueryPub = models.SaDivulgeDataQueryPub;
 const SocComplianceInfoResp = models.SocComplianceInfoResp;
 const DescribeAssetListRequest = models.DescribeAssetListRequest;
 const DescribeComplianceDetailResponse = models.DescribeComplianceDetailResponse;
+const SocProductionItem = models.SocProductionItem;
 const DescribeAssetsMappingListResponse = models.DescribeAssetsMappingListResponse;
 const DescribeSocAlertListResponse = models.DescribeSocAlertListResponse;
 const SocComplianceItem = models.SocComplianceItem;
+const QueryFilter = models.QueryFilter;
 const SecurityStatus = models.SecurityStatus;
 const QuerySort = models.QuerySort;
 const DescribeComplianceListRequest = models.DescribeComplianceListRequest;
@@ -60,6 +63,7 @@ const DescribeSocCheckResultListRequest = models.DescribeSocCheckResultListReque
 const DescribeSafetyEventListRequest = models.DescribeSafetyEventListRequest;
 const AssetQueryFilter = models.AssetQueryFilter;
 const AlertType = models.AlertType;
+const SaEventPubRequest = models.SaEventPubRequest;
 const DescribeSocAlertListRequest = models.DescribeSocAlertListRequest;
 const ComplianceCheckDetail = models.ComplianceCheckDetail;
 const SaDivulgeDataQueryPubResponse = models.SaDivulgeDataQueryPubResponse;
@@ -73,11 +77,12 @@ const DataAssetMapping = models.DataAssetMapping;
 const DescribeCheckConfigDetailRequest = models.DescribeCheckConfigDetailRequest;
 const VulList = models.VulList;
 const DescribeLeakDetectionListResponse = models.DescribeLeakDetectionListResponse;
+const DescribeAssetDetailListResponse = models.DescribeAssetDetailListResponse;
 const DataEvent = models.DataEvent;
 const DescribeSocCheckItemListRequest = models.DescribeSocCheckItemListRequest;
 const CheckConfigDetail = models.CheckConfigDetail;
 const DescribeSocCheckItemListRspRsp = models.DescribeSocCheckItemListRspRsp;
-const SocCheckItem = models.SocCheckItem;
+const SaEventPubResponse = models.SaEventPubResponse;
 const DescribeEventDetailRequest = models.DescribeEventDetailRequest;
 const CheckAssetItem = models.CheckAssetItem;
 const AssetTypeStatistic = models.AssetTypeStatistic;
@@ -87,11 +92,12 @@ const ConcernInfo = models.ConcernInfo;
 const DescribeAssetsMappingListRequest = models.DescribeAssetsMappingListRequest;
 const DataCompliance = models.DataCompliance;
 const Results = models.Results;
+const ListDataSaEventPub = models.ListDataSaEventPub;
 const AssetDetail = models.AssetDetail;
 const DescribeComplianceAssetListRequest = models.DescribeComplianceAssetListRequest;
-const QueryFilter = models.QueryFilter;
+const ObjDataSaEventPub = models.ObjDataSaEventPub;
 const DescribeAssetDetailResponse = models.DescribeAssetDetailResponse;
-const DescribeVulDetailResponse = models.DescribeVulDetailResponse;
+const DescribeAssetDetailListRequest = models.DescribeAssetDetailListRequest;
 const DescribeSocCspmComplianceRequest = models.DescribeSocCspmComplianceRequest;
 const AlertDetail = models.AlertDetail;
 const DescribeComplianceDetailRequest = models.DescribeComplianceDetailRequest;
@@ -108,14 +114,14 @@ class SsaClient extends AbstractClient {
     }
     
     /**
-     * 合规管理总览页检查项列表
-     * @param {DescribeComplianceListRequest} req
-     * @param {function(string, DescribeComplianceListResponse):void} cb
+     * 资产条件查询
+     * @param {DescribeAssetDetailListRequest} req
+     * @param {function(string, DescribeAssetDetailListResponse):void} cb
      * @public
      */
-    DescribeComplianceList(req, cb) {
-        let resp = new DescribeComplianceListResponse();
-        this.request("DescribeComplianceList", req, resp, cb);
+    DescribeAssetDetailList(req, cb) {
+        let resp = new DescribeAssetDetailListResponse();
+        this.request("DescribeAssetDetailList", req, resp, cb);
     }
 
     /**
@@ -130,14 +136,25 @@ class SsaClient extends AbstractClient {
     }
 
     /**
-     * 资产安全资产列表
-     * @param {DescribeAssetListRequest} req
-     * @param {function(string, DescribeAssetListResponse):void} cb
+     * 获取泄露列表
+     * @param {DescribeLeakDetectionListRequest} req
+     * @param {function(string, DescribeLeakDetectionListResponse):void} cb
      * @public
      */
-    DescribeAssetList(req, cb) {
-        let resp = new DescribeAssetListResponse();
-        this.request("DescribeAssetList", req, resp, cb);
+    DescribeLeakDetectionList(req, cb) {
+        let resp = new DescribeLeakDetectionListResponse();
+        this.request("DescribeLeakDetectionList", req, resp, cb);
+    }
+
+    /**
+     * 获取测绘列表
+     * @param {DescribeMappingResultsRequest} req
+     * @param {function(string, DescribeMappingResultsResponse):void} cb
+     * @public
+     */
+    DescribeMappingResults(req, cb) {
+        let resp = new DescribeMappingResultsResponse();
+        this.request("DescribeMappingResults", req, resp, cb);
     }
 
     /**
@@ -174,6 +191,72 @@ class SsaClient extends AbstractClient {
     }
 
     /**
+     * 云安全配置检查项列表
+     * @param {DescribeSocCheckItemListRequest} req
+     * @param {function(string, DescribeSocCheckItemListResponse):void} cb
+     * @public
+     */
+    DescribeSocCheckItemList(req, cb) {
+        let resp = new DescribeSocCheckItemListResponse();
+        this.request("DescribeSocCheckItemList", req, resp, cb);
+    }
+
+    /**
+     * 资产安全页资产详情
+     * @param {DescribeAssetDetailRequest} req
+     * @param {function(string, DescribeAssetDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetDetail(req, cb) {
+        let resp = new DescribeAssetDetailResponse();
+        this.request("DescribeAssetDetail", req, resp, cb);
+    }
+
+    /**
+     * 安全事件通用字段
+     * @param {SaEventPubRequest} req
+     * @param {function(string, SaEventPubResponse):void} cb
+     * @public
+     */
+    SaEventPub(req, cb) {
+        let resp = new SaEventPubResponse();
+        this.request("SaEventPub", req, resp, cb);
+    }
+
+    /**
+     * 获取安全事件列表
+     * @param {DescribeSafetyEventListRequest} req
+     * @param {function(string, DescribeSafetyEventListResponse):void} cb
+     * @public
+     */
+    DescribeSafetyEventList(req, cb) {
+        let resp = new DescribeSafetyEventListResponse();
+        this.request("DescribeSafetyEventList", req, resp, cb);
+    }
+
+    /**
+     * 合规管理总览页检查项列表
+     * @param {DescribeComplianceListRequest} req
+     * @param {function(string, DescribeComplianceListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceList(req, cb) {
+        let resp = new DescribeComplianceListResponse();
+        this.request("DescribeComplianceList", req, resp, cb);
+    }
+
+    /**
+     * 资产安全资产列表
+     * @param {DescribeAssetListRequest} req
+     * @param {function(string, DescribeAssetListResponse):void} cb
+     * @public
+     */
+    DescribeAssetList(req, cb) {
+        let resp = new DescribeAssetListResponse();
+        this.request("DescribeAssetList", req, resp, cb);
+    }
+
+    /**
      * 云安全配置管理资产组列表
      * @param {DescribeCheckConfigAssetListRequest} req
      * @param {function(string, DescribeCheckConfigAssetListResponse):void} cb
@@ -182,17 +265,6 @@ class SsaClient extends AbstractClient {
     DescribeCheckConfigAssetList(req, cb) {
         let resp = new DescribeCheckConfigAssetListResponse();
         this.request("DescribeCheckConfigAssetList", req, resp, cb);
-    }
-
-    /**
-     * 获取泄露列表
-     * @param {DescribeLeakDetectionListRequest} req
-     * @param {function(string, DescribeLeakDetectionListResponse):void} cb
-     * @public
-     */
-    DescribeLeakDetectionList(req, cb) {
-        let resp = new DescribeLeakDetectionListResponse();
-        this.request("DescribeLeakDetectionList", req, resp, cb);
     }
 
     /**
@@ -207,39 +279,6 @@ class SsaClient extends AbstractClient {
     }
 
     /**
-     * 合规详情项
-     * @param {DescribeSocCspmComplianceRequest} req
-     * @param {function(string, DescribeSocCspmComplianceResponse):void} cb
-     * @public
-     */
-    DescribeSocCspmCompliance(req, cb) {
-        let resp = new DescribeSocCspmComplianceResponse();
-        this.request("DescribeSocCspmCompliance", req, resp, cb);
-    }
-
-    /**
-     * 获取测绘列表
-     * @param {DescribeMappingResultsRequest} req
-     * @param {function(string, DescribeMappingResultsResponse):void} cb
-     * @public
-     */
-    DescribeMappingResults(req, cb) {
-        let resp = new DescribeMappingResultsResponse();
-        this.request("DescribeMappingResults", req, resp, cb);
-    }
-
-    /**
-     * 云安全配置检查项列表
-     * @param {DescribeSocCheckItemListRequest} req
-     * @param {function(string, DescribeSocCheckItemListResponse):void} cb
-     * @public
-     */
-    DescribeSocCheckItemList(req, cb) {
-        let resp = new DescribeSocCheckItemListResponse();
-        this.request("DescribeSocCheckItemList", req, resp, cb);
-    }
-
-    /**
      * 漏洞管理页，获取漏洞列表
      * @param {DescribeVulListRequest} req
      * @param {function(string, DescribeVulListResponse):void} cb
@@ -251,14 +290,47 @@ class SsaClient extends AbstractClient {
     }
 
     /**
-     * 资产安全页资产详情
-     * @param {DescribeAssetDetailRequest} req
-     * @param {function(string, DescribeAssetDetailResponse):void} cb
+     * 云安全配置检查项结果列表
+     * @param {DescribeSocCheckResultListRequest} req
+     * @param {function(string, DescribeSocCheckResultListResponse):void} cb
      * @public
      */
-    DescribeAssetDetail(req, cb) {
-        let resp = new DescribeAssetDetailResponse();
-        this.request("DescribeAssetDetail", req, resp, cb);
+    DescribeSocCheckResultList(req, cb) {
+        let resp = new DescribeSocCheckResultListResponse();
+        this.request("DescribeSocCheckResultList", req, resp, cb);
+    }
+
+    /**
+     * 返回告警详情
+     * @param {DescribeSocAlertDetailsRequest} req
+     * @param {function(string, DescribeSocAlertDetailsResponse):void} cb
+     * @public
+     */
+    DescribeSocAlertDetails(req, cb) {
+        let resp = new DescribeSocAlertDetailsResponse();
+        this.request("DescribeSocAlertDetails", req, resp, cb);
+    }
+
+    /**
+     * 合规详情项
+     * @param {DescribeSocCspmComplianceRequest} req
+     * @param {function(string, DescribeSocCspmComplianceResponse):void} cb
+     * @public
+     */
+    DescribeSocCspmCompliance(req, cb) {
+        let resp = new DescribeSocCspmComplianceResponse();
+        this.request("DescribeSocCspmCompliance", req, resp, cb);
+    }
+
+    /**
+     * 拉取告警列表
+     * @param {DescribeSocAlertListRequest} req
+     * @param {function(string, DescribeSocAlertListResponse):void} cb
+     * @public
+     */
+    DescribeSocAlertList(req, cb) {
+        let resp = new DescribeSocAlertListResponse();
+        this.request("DescribeSocAlertList", req, resp, cb);
     }
 
     /**
@@ -284,39 +356,6 @@ class SsaClient extends AbstractClient {
     }
 
     /**
-     * 获取安全事件列表
-     * @param {DescribeSafetyEventListRequest} req
-     * @param {function(string, DescribeSafetyEventListResponse):void} cb
-     * @public
-     */
-    DescribeSafetyEventList(req, cb) {
-        let resp = new DescribeSafetyEventListResponse();
-        this.request("DescribeSafetyEventList", req, resp, cb);
-    }
-
-    /**
-     * 返回告警详情
-     * @param {DescribeSocAlertDetailsRequest} req
-     * @param {function(string, DescribeSocAlertDetailsResponse):void} cb
-     * @public
-     */
-    DescribeSocAlertDetails(req, cb) {
-        let resp = new DescribeSocAlertDetailsResponse();
-        this.request("DescribeSocAlertDetails", req, resp, cb);
-    }
-
-    /**
-     * 拉取告警列表
-     * @param {DescribeSocAlertListRequest} req
-     * @param {function(string, DescribeSocAlertListResponse):void} cb
-     * @public
-     */
-    DescribeSocAlertList(req, cb) {
-        let resp = new DescribeSocAlertListResponse();
-        this.request("DescribeSocAlertList", req, resp, cb);
-    }
-
-    /**
      * 漏洞列表页，获取漏洞详情信息
      * @param {DescribeVulDetailRequest} req
      * @param {function(string, DescribeVulDetailResponse):void} cb
@@ -325,17 +364,6 @@ class SsaClient extends AbstractClient {
     DescribeVulDetail(req, cb) {
         let resp = new DescribeVulDetailResponse();
         this.request("DescribeVulDetail", req, resp, cb);
-    }
-
-    /**
-     * 云安全配置检查项结果列表
-     * @param {DescribeSocCheckResultListRequest} req
-     * @param {function(string, DescribeSocCheckResultListResponse):void} cb
-     * @public
-     */
-    DescribeSocCheckResultList(req, cb) {
-        let resp = new DescribeSocCheckResultListResponse();
-        this.request("DescribeSocCheckResultList", req, resp, cb);
     }
 
 

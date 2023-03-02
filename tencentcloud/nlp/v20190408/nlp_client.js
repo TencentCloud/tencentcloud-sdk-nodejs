@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
 const SentenceEmbeddingRequest = models.SentenceEmbeddingRequest;
+const TextClassificationRequest = models.TextClassificationRequest;
 const WordSimilarityRequest = models.WordSimilarityRequest;
 const SearchWordItemsResponse = models.SearchWordItemsResponse;
 const DpToken = models.DpToken;
@@ -45,7 +46,7 @@ const SentenceEmbeddingResponse = models.SentenceEmbeddingResponse;
 const UpdateDictRequest = models.UpdateDictRequest;
 const DeleteDictResponse = models.DeleteDictResponse;
 const DescribeWordItemsRequest = models.DescribeWordItemsRequest;
-const TextClassificationRequest = models.TextClassificationRequest;
+const GenerateCoupletResponse = models.GenerateCoupletResponse;
 const CreateDictResponse = models.CreateDictResponse;
 const TextSimilarityRequest = models.TextSimilarityRequest;
 const AutoSummarizationResponse = models.AutoSummarizationResponse;
@@ -54,7 +55,7 @@ const DescribeWordItemsResponse = models.DescribeWordItemsResponse;
 const SimilarWordsRequest = models.SimilarWordsRequest;
 const DescribeDictRequest = models.DescribeDictRequest;
 const PosToken = models.PosToken;
-const SentimentAnalysisResponse = models.SentimentAnalysisResponse;
+const GeneratePoetryResponse = models.GeneratePoetryResponse;
 const DeleteWordItemsRequest = models.DeleteWordItemsRequest;
 const DescribeDictResponse = models.DescribeDictResponse;
 const TextCorrectionProRequest = models.TextCorrectionProRequest;
@@ -63,12 +64,15 @@ const TextSimilarityProResponse = models.TextSimilarityProResponse;
 const DescribeDictsResponse = models.DescribeDictsResponse;
 const DependencyParsingRequest = models.DependencyParsingRequest;
 const DeleteDictRequest = models.DeleteDictRequest;
-const NerToken = models.NerToken;
-const SimilarWordsResponse = models.SimilarWordsResponse;
-const DependencyParsingResponse = models.DependencyParsingResponse;
 const Similarity = models.Similarity;
+const NerToken = models.NerToken;
+const SentimentAnalysisResponse = models.SentimentAnalysisResponse;
+const DependencyParsingResponse = models.DependencyParsingResponse;
+const SimilarWordsResponse = models.SimilarWordsResponse;
+const GenerateCoupletRequest = models.GenerateCoupletRequest;
 const CCIToken = models.CCIToken;
 const LexicalAnalysisRequest = models.LexicalAnalysisRequest;
+const GeneratePoetryRequest = models.GeneratePoetryRequest;
 const CreateWordItemsResponse = models.CreateWordItemsResponse;
 const SentimentAnalysisRequest = models.SentimentAnalysisRequest;
 const SearchWordItemsRequest = models.SearchWordItemsRequest;
@@ -146,11 +150,6 @@ class NlpClient extends AbstractClient {
 
 该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
 
-腾讯AI Lab词向量相关资料：
-
-https://ai.tencent.com/ailab/zh/news/detial?id=22
-
-https://ai.tencent.com/ailab/nlp/zh/embedding.html
      * @param {WordEmbeddingRequest} req
      * @param {function(string, WordEmbeddingResponse):void} cb
      * @public
@@ -180,6 +179,17 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     CreateDict(req, cb) {
         let resp = new CreateDictResponse();
         this.request("CreateDict", req, resp, cb);
+    }
+
+    /**
+     * 根据用户输入的命题关键词自动生成一首七言律诗或五言律诗。（如需开通请联系商务）
+     * @param {GeneratePoetryRequest} req
+     * @param {function(string, GeneratePoetryResponse):void} cb
+     * @public
+     */
+    GeneratePoetry(req, cb) {
+        let resp = new GeneratePoetryResponse();
+        this.request("GeneratePoetry", req, resp, cb);
     }
 
     /**
@@ -245,6 +255,17 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     TextCorrection(req, cb) {
         let resp = new TextCorrectionResponse();
         this.request("TextCorrection", req, resp, cb);
+    }
+
+    /**
+     * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
+     * @param {GenerateCoupletRequest} req
+     * @param {function(string, GenerateCoupletResponse):void} cb
+     * @public
+     */
+    GenerateCouplet(req, cb) {
+        let resp = new GenerateCoupletResponse();
+        this.request("GenerateCouplet", req, resp, cb);
     }
 
     /**

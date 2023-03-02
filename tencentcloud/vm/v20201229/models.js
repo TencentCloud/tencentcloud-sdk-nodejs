@@ -432,7 +432,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+         * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TaskLabel> || null}
          */
@@ -495,6 +495,13 @@ class DescribeTaskDetailResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.ErrorDescription = null;
+
+        /**
+         * 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -561,6 +568,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         }
         this.ErrorType = 'ErrorType' in params ? params.ErrorType : null;
         this.ErrorDescription = 'ErrorDescription' in params ? params.ErrorDescription : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1158,6 +1166,51 @@ class TaskFilter extends  AbstractModel {
 }
 
 /**
+ * 识别类标签结果信息
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可能的取值有：Teenager 、Gender
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 识别标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CancelTask返回参数结构体
  * @class
  */
@@ -1364,6 +1417,13 @@ class AudioResult extends  AbstractModel {
          */
         this.SubLabel = null;
 
+        /**
+         * 识别类标签结果信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
     }
 
     /**
@@ -1409,6 +1469,15 @@ class AudioResult extends  AbstractModel {
             }
         }
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
 
     }
 }
@@ -1459,6 +1528,12 @@ class AudioResultDetailMoanResult extends  AbstractModel {
          */
         this.SubLabel = null;
 
+        /**
+         * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
     }
 
     /**
@@ -1474,6 +1549,7 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
     }
 }
@@ -1561,6 +1637,13 @@ class TaskData extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InputInfo || null}
+         */
+        this.InputInfo = null;
+
     }
 
     /**
@@ -1595,6 +1678,12 @@ class TaskData extends  AbstractModel {
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
+        if (params.InputInfo) {
+            let obj = new InputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
     }
 }
 
@@ -1622,6 +1711,61 @@ class MediaInfo extends  AbstractModel {
             return;
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
+ * 音频切片识别标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 根据Label字段确定具体名称：
+当Label 为Teenager 时 Name可能取值有：Teenager 
+当Label 为Gender 时 Name可能取值有：Male 、Female
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 识别开始偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 识别结束偏移时间，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1842,12 +1986,14 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
     TaskFilter: TaskFilter,
+    RecognitionResult: RecognitionResult,
     CancelTaskResponse: CancelTaskResponse,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
     AudioResult: AudioResult,
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,
     TaskData: TaskData,
     MediaInfo: MediaInfo,
+    Tag: Tag,
     AudioSegments: AudioSegments,
     ImageResultsResultDetailLocation: ImageResultsResultDetailLocation,
     ImageResult: ImageResult,

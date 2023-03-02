@@ -343,6 +343,42 @@ class DescribeStructCompareDataRequest extends  AbstractModel {
 }
 
 /**
+ * 位置信息
+ * @class
+ */
+class Location extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 位置信息
+         * @type {Array.<Point> || null}
+         */
+        this.Points = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Points) {
+            this.Points = new Array();
+            for (let z in params.Points) {
+                let obj = new Point();
+                obj.deserialize(params.Points[z]);
+                this.Points.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * AddSubStructureTasks返回参数结构体
  * @class
  */
@@ -1885,6 +1921,67 @@ class DescribeMachineUnderwriteResponse extends  AbstractModel {
 }
 
 /**
+ * Ocr识别结果
+ * @class
+ */
+class OcrRecognise extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原文字段
+         * @type {string || null}
+         */
+        this.OriginalField = null;
+
+        /**
+         * 识别结果
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 置信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 位置信息
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+        /**
+         * 字段名
+         * @type {string || null}
+         */
+        this.Field = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalField = 'OriginalField' in params ? params.OriginalField : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.Field = 'Field' in params ? params.Field : null;
+
+    }
+}
+
+/**
  * CreateAutoClassifyStructureTask返回参数结构体
  * @class
  */
@@ -1915,6 +2012,48 @@ class CreateAutoClassifyStructureTaskResponse extends  AbstractModel {
         }
         this.MainTaskId = 'MainTaskId' in params ? params.MainTaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 点信息
+ * @class
+ */
+class Point extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * x坐标
+         * @type {number || null}
+         */
+        this.XCoordinate = null;
+
+        /**
+         * y坐标
+         * @type {number || null}
+         */
+        this.YCoordinate = null;
+
+        /**
+         * 页码
+         * @type {number || null}
+         */
+        this.Page = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.XCoordinate = 'XCoordinate' in params ? params.XCoordinate : null;
+        this.YCoordinate = 'YCoordinate' in params ? params.YCoordinate : null;
+        this.Page = 'Page' in params ? params.Page : null;
 
     }
 }
@@ -2035,6 +2174,13 @@ class StructureResultObject extends  AbstractModel {
          */
         this.TaskFiles = null;
 
+        /**
+         * 结构化字段结果数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OcrRecognise> || null}
+         */
+        this.ResultFields = null;
+
     }
 
     /**
@@ -2049,6 +2195,15 @@ class StructureResultObject extends  AbstractModel {
         this.StructureResult = 'StructureResult' in params ? params.StructureResult : null;
         this.SubTaskId = 'SubTaskId' in params ? params.SubTaskId : null;
         this.TaskFiles = 'TaskFiles' in params ? params.TaskFiles : null;
+
+        if (params.ResultFields) {
+            this.ResultFields = new Array();
+            for (let z in params.ResultFields) {
+                let obj = new OcrRecognise();
+                obj.deserialize(params.ResultFields[z]);
+                this.ResultFields.push(obj);
+            }
+        }
 
     }
 }
@@ -2260,6 +2415,7 @@ module.exports = {
     CreateStructureTaskRequest: CreateStructureTaskRequest,
     UnderwriteOutput: UnderwriteOutput,
     DescribeStructCompareDataRequest: DescribeStructCompareDataRequest,
+    Location: Location,
     AddSubStructureTasksResponse: AddSubStructureTasksResponse,
     InsuranceResult: InsuranceResult,
     UnderwriteConclusion: UnderwriteConclusion,
@@ -2289,7 +2445,9 @@ module.exports = {
     DescribeStructureTaskResultResponse: DescribeStructureTaskResultResponse,
     ClassifiedReports: ClassifiedReports,
     DescribeMachineUnderwriteResponse: DescribeMachineUnderwriteResponse,
+    OcrRecognise: OcrRecognise,
     CreateAutoClassifyStructureTaskResponse: CreateAutoClassifyStructureTaskResponse,
+    Point: Point,
     DescribeReportClassifyResponse: DescribeReportClassifyResponse,
     CreateUnderwriteTaskByIdResponse: CreateUnderwriteTaskByIdResponse,
     StructureResultObject: StructureResultObject,

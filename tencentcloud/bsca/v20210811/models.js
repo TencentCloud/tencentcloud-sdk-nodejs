@@ -17,6 +17,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * MatchKBPURLList返回参数结构体
+ * @class
+ */
+class MatchKBPURLListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件列表。
+         * @type {Array.<PURL> || null}
+         */
+        this.PURLList = null;
+
+        /**
+         * 是否命中数据库。
+         * @type {boolean || null}
+         */
+        this.Hit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PURLList) {
+            this.PURLList = new Array();
+            for (let z in params.PURLList) {
+                let obj = new PURL();
+                obj.deserialize(params.PURLList[z]);
+                this.PURLList.push(obj);
+            }
+        }
+        this.Hit = 'Hit' in params ? params.Hit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeKBComponentVulnerability请求参数结构体
  * @class
  */
@@ -560,6 +610,34 @@ class DescribeKBLicenseResponse extends  AbstractModel {
         }
         this.NormalizedLicenseExpression = 'NormalizedLicenseExpression' in params ? params.NormalizedLicenseExpression : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MatchKBPURLList请求参数结构体
+ * @class
+ */
+class MatchKBPURLListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SHA1。
+         * @type {string || null}
+         */
+        this.SHA1 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SHA1 = 'SHA1' in params ? params.SHA1 : null;
 
     }
 }
@@ -1284,6 +1362,7 @@ class PURL extends  AbstractModel {
 }
 
 module.exports = {
+    MatchKBPURLListResponse: MatchKBPURLListResponse,
     DescribeKBComponentVulnerabilityRequest: DescribeKBComponentVulnerabilityRequest,
     ComponentVulnerabilityUnion: ComponentVulnerabilityUnion,
     LicenseUnion: LicenseUnion,
@@ -1294,6 +1373,7 @@ module.exports = {
     Component: Component,
     DescribeKBVulnerabilityResponse: DescribeKBVulnerabilityResponse,
     DescribeKBLicenseResponse: DescribeKBLicenseResponse,
+    MatchKBPURLListRequest: MatchKBPURLListRequest,
     VulnerabilityUnion: VulnerabilityUnion,
     LicenseDetail: LicenseDetail,
     DescribeKBVulnerabilityRequest: DescribeKBVulnerabilityRequest,

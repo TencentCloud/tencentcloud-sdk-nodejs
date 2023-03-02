@@ -32,6 +32,7 @@ const OrderBy = models.OrderBy;
 const DescribeMetricRecordsResponse = models.DescribeMetricRecordsResponse;
 const ApmTag = models.ApmTag;
 const Filter = models.Filter;
+const APMKV = models.APMKV;
 const DescribeApmAgentRequest = models.DescribeApmAgentRequest;
 const DescribeMetricRecordsRequest = models.DescribeMetricRecordsRequest;
 const DescribeGeneralMetricDataRequest = models.DescribeGeneralMetricDataRequest;

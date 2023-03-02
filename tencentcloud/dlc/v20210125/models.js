@@ -17,6 +17,81 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeResultDownload返回参数结构体
+ * @class
+ */
+class DescribeResultDownloadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 任务状态 init | queue | format | compress | success|  timeout | error
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务异常原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 临时AK
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * 临时SK
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 临时Token
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTaskResult返回参数结构体
  * @class
  */
@@ -53,6 +128,76 @@ class DescribeTaskResultResponse extends  AbstractModel {
             this.TaskInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionStatement请求参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Session Statement唯一标识
+         * @type {string || null}
+         */
+        this.StatementId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.StatementId = 'StatementId' in params ? params.StatementId : null;
+
+    }
+}
+
+/**
+ * CancelNotebookSessionStatement请求参数结构体
+ * @class
+ */
+class CancelNotebookSessionStatementRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Session Statement唯一标识
+         * @type {string || null}
+         */
+        this.StatementId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.StatementId = 'StatementId' in params ? params.StatementId : null;
 
     }
 }
@@ -206,24 +351,39 @@ class DeleteUserRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSparkAppJob请求参数结构体
+ * ListTaskJobLogDetail返回参数结构体
  * @class
  */
-class DescribeSparkAppJobRequest extends  AbstractModel {
+class ListTaskJobLogDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * spark作业Id，与JobName同时存在时，JobName无效
+         * 下一次分页参数
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.JobId = null;
+        this.Context = null;
 
         /**
-         * spark作业名
+         * 是否获取完结
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ListOver = null;
+
+        /**
+         * 日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<JobLogResult> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.JobName = null;
+        this.RequestId = null;
 
     }
 
@@ -234,8 +394,319 @@ class DescribeSparkAppJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.ListOver = 'ListOver' in params ? params.ListOver : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new JobLogResult();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 元数据基本对象
+ * @class
+ */
+class Asset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 对象GUID值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Guid = null;
+
+        /**
+         * 数据目录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Catalog = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 对象owner
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 对象owner账户
+         * @type {string || null}
+         */
+        this.OwnerAccount = null;
+
+        /**
+         * 权限
+         * @type {Array.<KVPair> || null}
+         */
+        this.PermValues = null;
+
+        /**
+         * 附加属性
+         * @type {Array.<KVPair> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 附加业务属性
+         * @type {Array.<KVPair> || null}
+         */
+        this.BizParams = null;
+
+        /**
+         * 数据版本
+         * @type {number || null}
+         */
+        this.DataVersion = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * 数据源主键
+         * @type {number || null}
+         */
+        this.DatasourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Guid = 'Guid' in params ? params.Guid : null;
+        this.Catalog = 'Catalog' in params ? params.Catalog : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.OwnerAccount = 'OwnerAccount' in params ? params.OwnerAccount : null;
+
+        if (params.PermValues) {
+            this.PermValues = new Array();
+            for (let z in params.PermValues) {
+                let obj = new KVPair();
+                obj.deserialize(params.PermValues[z]);
+                this.PermValues.push(obj);
+            }
+        }
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new KVPair();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+
+        if (params.BizParams) {
+            this.BizParams = new Array();
+            for (let z in params.BizParams) {
+                let obj = new KVPair();
+                obj.deserialize(params.BizParams[z]);
+                this.BizParams.push(obj);
+            }
+        }
+        this.DataVersion = 'DataVersion' in params ? params.DataVersion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.DatasourceId = 'DatasourceId' in params ? params.DatasourceId : null;
+
+    }
+}
+
+/**
+ * CreateResultDownload返回参数结构体
+ * @class
+ */
+class CreateResultDownloadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载任务Id
+         * @type {string || null}
+         */
+        this.DownloadId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadId = 'DownloadId' in params ? params.DownloadId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyGovernEventRule返回参数结构体
+ * @class
+ */
+class ModifyGovernEventRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessions请求参数结构体
+ * @class
+ */
+class DescribeNotebookSessionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DLC Spark作业引擎名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+         * @type {Array.<string> || null}
+         */
+        this.State = null;
+
+        /**
+         * 排序字段（默认按创建时间）
+         * @type {Array.<string> || null}
+         */
+        this.SortFields = null;
+
+        /**
+         * 排序字段：true：升序、false：降序（默认）
+         * @type {boolean || null}
+         */
+        this.Asc = null;
+
+        /**
+         * 分页字段
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页字段
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.SortFields = 'SortFields' in params ? params.SortFields : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * CreateDMSDatabase返回参数结构体
+ * @class
+ */
+class CreateDMSDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -264,6 +735,181 @@ class CreateStoreLocationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSession返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session详情信息
+         * @type {NotebookSessionInfo || null}
+         */
+        this.Session = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Session) {
+            let obj = new NotebookSessionInfo();
+            obj.deserialize(params.Session)
+            this.Session = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDMSDatabase返回参数结构体
+ * @class
+ */
+class DescribeDMSDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 存储地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 数据对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UnbindWorkGroupsFromUser返回参数结构体
+ * @class
+ */
+class UnbindWorkGroupsFromUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DropDMSDatabase请求参数结构体
+ * @class
+ */
+class DropDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 是否删除数据
+         * @type {boolean || null}
+         */
+        this.DeleteData = null;
+
+        /**
+         * 是否级联删除
+         * @type {boolean || null}
+         */
+        this.Cascade = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DeleteData = 'DeleteData' in params ? params.DeleteData : null;
+        this.Cascade = 'Cascade' in params ? params.Cascade : null;
 
     }
 }
@@ -389,7 +1035,7 @@ class DescribeTablesResponse extends  AbstractModel {
 }
 
 /**
- * spark作业详情
+ * spark作业详情。
  * @class
  */
 class SparkJobInfo extends  AbstractModel {
@@ -562,11 +1208,60 @@ class SparkJobInfo extends  AbstractModel {
         this.IsLocalPythonFiles = null;
 
         /**
-         * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+         * 注：该返回值已废弃
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AppPythonFiles = null;
+
+        /**
+         * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsLocalArchives = null;
+
+        /**
+         * archives：依赖资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JobArchives = null;
+
+        /**
+         * Spark Image 版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkImage = null;
+
+        /**
+         * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JobPythonFiles = null;
+
+        /**
+         * 当前job正在运行或准备运行的任务个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskNum = null;
+
+        /**
+         * 引擎状态：-100（默认：未知状态），-2~11：引擎正常状态；
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DataEngineStatus = null;
+
+        /**
+         * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JobExecutorMaxNumbers = null;
 
     }
 
@@ -610,6 +1305,48 @@ class SparkJobInfo extends  AbstractModel {
         this.DataSource = 'DataSource' in params ? params.DataSource : null;
         this.IsLocalPythonFiles = 'IsLocalPythonFiles' in params ? params.IsLocalPythonFiles : null;
         this.AppPythonFiles = 'AppPythonFiles' in params ? params.AppPythonFiles : null;
+        this.IsLocalArchives = 'IsLocalArchives' in params ? params.IsLocalArchives : null;
+        this.JobArchives = 'JobArchives' in params ? params.JobArchives : null;
+        this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
+        this.JobPythonFiles = 'JobPythonFiles' in params ? params.JobPythonFiles : null;
+        this.TaskNum = 'TaskNum' in params ? params.TaskNum : null;
+        this.DataEngineStatus = 'DataEngineStatus' in params ? params.DataEngineStatus : null;
+        this.JobExecutorMaxNumbers = 'JobExecutorMaxNumbers' in params ? params.JobExecutorMaxNumbers : null;
+
+    }
+}
+
+/**
+ * SuspendResumeDataEngine返回参数结构体
+ * @class
+ */
+class SuspendResumeDataEngineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟集群详细信息
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -876,25 +1613,57 @@ class DetachUserPolicyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSparkAppTasks返回参数结构体
+ * 定时启停策略信息
  * @class
  */
-class DescribeSparkAppTasksResponse extends  AbstractModel {
+class CrontabResumeSuspendStrategy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务列表
+         * 定时拉起时间：如：周一8点
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TaskResponseInfo || null}
+         * @type {string || null}
          */
-        this.Tasks = null;
+        this.ResumeTime = null;
 
         /**
-         * 任务总数
+         * 定时挂起时间：如：周一20点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SuspendTime = null;
+
+        /**
+         * 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.SuspendStrategy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+        this.SuspendTime = 'SuspendTime' in params ? params.SuspendTime : null;
+        this.SuspendStrategy = 'SuspendStrategy' in params ? params.SuspendStrategy : null;
+
+    }
+}
+
+/**
+ * AlterDMSTable返回参数结构体
+ * @class
+ */
+class AlterDMSTableResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -911,13 +1680,6 @@ class DescribeSparkAppTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Tasks) {
-            let obj = new TaskResponseInfo();
-            obj.deserialize(params.Tasks)
-            this.Tasks = obj;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -944,6 +1706,13 @@ class DescribeTasksResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
+         * 任务概览信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TasksOverview || null}
+         */
+        this.TasksOverview = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -968,7 +1737,433 @@ class DescribeTasksResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TasksOverview) {
+            let obj = new TasksOverview();
+            obj.deserialize(params.TasksOverview)
+            this.TasksOverview = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDMSTable返回参数结构体
+ * @class
+ */
+class DescribeDMSTableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基础对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ViewOriginalText = null;
+
+        /**
+         * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ViewExpandedText = null;
+
+        /**
+         * hive维护版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Retention = null;
+
+        /**
+         * 存储对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DMSSds || null}
+         */
+        this.Sds = null;
+
+        /**
+         * 分区列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.PartitionKeys = null;
+
+        /**
+         * 分区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Schame名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * 记录数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LifeTime = null;
+
+        /**
+         * 最后访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DataUpdateTime = null;
+
+        /**
+         * 结构更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StructUpdateTime = null;
+
+        /**
+         * 列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.ViewOriginalText = 'ViewOriginalText' in params ? params.ViewOriginalText : null;
+        this.ViewExpandedText = 'ViewExpandedText' in params ? params.ViewExpandedText : null;
+        this.Retention = 'Retention' in params ? params.Retention : null;
+
+        if (params.Sds) {
+            let obj = new DMSSds();
+            obj.deserialize(params.Sds)
+            this.Sds = obj;
+        }
+
+        if (params.PartitionKeys) {
+            this.PartitionKeys = new Array();
+            for (let z in params.PartitionKeys) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.PartitionKeys[z]);
+                this.PartitionKeys.push(obj);
+            }
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.LifeTime = 'LifeTime' in params ? params.LifeTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+        this.DataUpdateTime = 'DataUpdateTime' in params ? params.DataUpdateTime : null;
+        this.StructUpdateTime = 'StructUpdateTime' in params ? params.StructUpdateTime : null;
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DropDMSPartitions请求参数结构体
+ * @class
+ */
+class DropDMSPartitionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 数据库Schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 数据表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 分区名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 单个分区名称
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 是否删除分区数据
+         * @type {boolean || null}
+         */
+        this.DeleteData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.DeleteData = 'DeleteData' in params ? params.DeleteData : null;
+
+    }
+}
+
+/**
+ * notebook session列表信息。
+ * @class
+ */
+class NotebookSessions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 类型，当前支持：spark、pyspark、sparkr、sql
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 代理用户，默认为root
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProxyUser = null;
+
+        /**
+         * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkAppId = null;
+
+        /**
+         * Session名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Session创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 引擎名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * 最新的运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastRunningTime = null;
+
+        /**
+         * 创建者
+         * @type {string || null}
+         */
+        this.Creator = null;
+
+        /**
+         * spark ui地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkUiUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ProxyUser = 'ProxyUser' in params ? params.ProxyUser : null;
+        this.State = 'State' in params ? params.State : null;
+        this.SparkAppId = 'SparkAppId' in params ? params.SparkAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.LastRunningTime = 'LastRunningTime' in params ? params.LastRunningTime : null;
+        this.Creator = 'Creator' in params ? params.Creator : null;
+        this.SparkUiUrl = 'SparkUiUrl' in params ? params.SparkUiUrl : null;
+
+    }
+}
+
+/**
+ * CreateNotebookSessionStatementSupportBatchSQL请求参数结构体
+ * @class
+ */
+class CreateNotebookSessionStatementSupportBatchSQLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 执行的代码
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 类型，当前支持：spark、pyspark、sparkr、sql
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * 是否保存运行结果
+         * @type {boolean || null}
+         */
+        this.SaveResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.SaveResult = 'SaveResult' in params ? params.SaveResult : null;
 
     }
 }
@@ -1021,6 +2216,56 @@ class CreateTasksInOrderRequest extends  AbstractModel {
 }
 
 /**
+ * AddDMSPartitions返回参数结构体
+ * @class
+ */
+class AddDMSPartitionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功数量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 分区值
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetachWorkGroupPolicy返回参数结构体
  * @class
  */
@@ -1044,6 +2289,84 @@ class DetachWorkGroupPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GenerateCreateMangedTableSql请求参数结构体
+ * @class
+ */
+class GenerateCreateMangedTableSqlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表基本信息
+         * @type {TableBaseInfo || null}
+         */
+        this.TableBaseInfo = null;
+
+        /**
+         * 表字段信息
+         * @type {Array.<TColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 表分区信息
+         * @type {Array.<TPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 表属性信息
+         * @type {Array.<Property> || null}
+         */
+        this.Properties = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TableBaseInfo) {
+            let obj = new TableBaseInfo();
+            obj.deserialize(params.TableBaseInfo)
+            this.TableBaseInfo = obj;
+        }
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new TColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new TPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+
+        if (params.Properties) {
+            this.Properties = new Array();
+            for (let z in params.Properties) {
+                let obj = new Property();
+                obj.deserialize(params.Properties[z]);
+                this.Properties.push(obj);
+            }
+        }
 
     }
 }
@@ -1177,7 +2500,7 @@ class ModifySparkAppRequest extends  AbstractModel {
         this.AppConf = null;
 
         /**
-         * 是否本地上传，可去cos,lakefs
+         * jar资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
          * @type {string || null}
          */
         this.IsLocalJars = null;
@@ -1189,7 +2512,7 @@ class ModifySparkAppRequest extends  AbstractModel {
         this.AppJars = null;
 
         /**
-         * 是否本地上传，可去cos,lakefs
+         * file资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
          * @type {string || null}
          */
         this.IsLocalFiles = null;
@@ -1230,6 +2553,36 @@ class ModifySparkAppRequest extends  AbstractModel {
          */
         this.DataSource = null;
 
+        /**
+         * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+         * @type {string || null}
+         */
+        this.IsLocalArchives = null;
+
+        /**
+         * archives：依赖资源
+         * @type {string || null}
+         */
+        this.AppArchives = null;
+
+        /**
+         * Spark Image 版本
+         * @type {string || null}
+         */
+        this.SparkImage = null;
+
+        /**
+         * Spark Image 版本名称
+         * @type {string || null}
+         */
+        this.SparkImageVersion = null;
+
+        /**
+         * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
+         * @type {number || null}
+         */
+        this.AppExecutorMaxNumbers = null;
+
     }
 
     /**
@@ -1261,6 +2614,109 @@ class ModifySparkAppRequest extends  AbstractModel {
         this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
         this.MaxRetries = 'MaxRetries' in params ? params.MaxRetries : null;
         this.DataSource = 'DataSource' in params ? params.DataSource : null;
+        this.IsLocalArchives = 'IsLocalArchives' in params ? params.IsLocalArchives : null;
+        this.AppArchives = 'AppArchives' in params ? params.AppArchives : null;
+        this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
+        this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
+        this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
+
+    }
+}
+
+/**
+ * spark流任务统计信息
+ * @class
+ */
+class StreamingStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 数据接收器数
+         * @type {number || null}
+         */
+        this.Receivers = null;
+
+        /**
+         * 运行中的接收器数
+         * @type {number || null}
+         */
+        this.NumActiveReceivers = null;
+
+        /**
+         * 不活跃的接收器数
+         * @type {number || null}
+         */
+        this.NumInactiveReceivers = null;
+
+        /**
+         * 运行中的批数
+         * @type {number || null}
+         */
+        this.NumActiveBatches = null;
+
+        /**
+         * 待处理的批数
+         * @type {number || null}
+         */
+        this.NumRetainedCompletedBatches = null;
+
+        /**
+         * 已完成的批数
+         * @type {number || null}
+         */
+        this.NumTotalCompletedBatches = null;
+
+        /**
+         * 平均输入速率
+         * @type {number || null}
+         */
+        this.AverageInputRate = null;
+
+        /**
+         * 平均等待时长
+         * @type {number || null}
+         */
+        this.AverageSchedulingDelay = null;
+
+        /**
+         * 平均处理时长
+         * @type {number || null}
+         */
+        this.AverageProcessingTime = null;
+
+        /**
+         * 平均延时
+         * @type {number || null}
+         */
+        this.AverageTotalDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Receivers = 'Receivers' in params ? params.Receivers : null;
+        this.NumActiveReceivers = 'NumActiveReceivers' in params ? params.NumActiveReceivers : null;
+        this.NumInactiveReceivers = 'NumInactiveReceivers' in params ? params.NumInactiveReceivers : null;
+        this.NumActiveBatches = 'NumActiveBatches' in params ? params.NumActiveBatches : null;
+        this.NumRetainedCompletedBatches = 'NumRetainedCompletedBatches' in params ? params.NumRetainedCompletedBatches : null;
+        this.NumTotalCompletedBatches = 'NumTotalCompletedBatches' in params ? params.NumTotalCompletedBatches : null;
+        this.AverageInputRate = 'AverageInputRate' in params ? params.AverageInputRate : null;
+        this.AverageSchedulingDelay = 'AverageSchedulingDelay' in params ? params.AverageSchedulingDelay : null;
+        this.AverageProcessingTime = 'AverageProcessingTime' in params ? params.AverageProcessingTime : null;
+        this.AverageTotalDelay = 'AverageTotalDelay' in params ? params.AverageTotalDelay : null;
 
     }
 }
@@ -1306,6 +2762,98 @@ class CreateDatabaseRequest extends  AbstractModel {
 }
 
 /**
+ * GenerateCreateMangedTableSql返回参数结构体
+ * @class
+ */
+class GenerateCreateMangedTableSqlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建托管存储内表sql语句描述
+         * @type {Execution || null}
+         */
+        this.Execution = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Execution) {
+            let obj = new Execution();
+            obj.deserialize(params.Execution)
+            this.Execution = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDMSTables返回参数结构体
+ * @class
+ */
+class DescribeDMSTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DMS元数据列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSTableInfo> || null}
+         */
+        this.TableList = null;
+
+        /**
+         * 统计值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TableList) {
+            this.TableList = new Array();
+            for (let z in params.TableList) {
+                let obj = new DMSTableInfo();
+                obj.deserialize(params.TableList[z]);
+                this.TableList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 绑定到同一个工作组的用户Id的集合
  * @class
  */
@@ -1341,6 +2889,60 @@ class UserIdSetOfWorkGroupId extends  AbstractModel {
 }
 
 /**
+ * AlterDMSPartition请求参数结构体
+ * @class
+ */
+class AlterDMSPartitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前名称，变更前db名称
+         * @type {string || null}
+         */
+        this.CurrentDbName = null;
+
+        /**
+         * 当前名称，变更前table名称
+         * @type {string || null}
+         */
+        this.CurrentTableName = null;
+
+        /**
+         * 当前名称，变更前Part名称
+         * @type {string || null}
+         */
+        this.CurrentValues = null;
+
+        /**
+         * 分区
+         * @type {DMSPartition || null}
+         */
+        this.Partition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentDbName = 'CurrentDbName' in params ? params.CurrentDbName : null;
+        this.CurrentTableName = 'CurrentTableName' in params ? params.CurrentTableName : null;
+        this.CurrentValues = 'CurrentValues' in params ? params.CurrentValues : null;
+
+        if (params.Partition) {
+            let obj = new DMSPartition();
+            obj.deserialize(params.Partition)
+            this.Partition = obj;
+        }
+
+    }
+}
+
+/**
  * 视图基本配置信息
  * @class
  */
@@ -1360,6 +2962,18 @@ class ViewBaseInfo extends  AbstractModel {
          */
         this.ViewName = null;
 
+        /**
+         * 视图创建人昵称
+         * @type {string || null}
+         */
+        this.UserAlias = null;
+
+        /**
+         * 视图创建人ID
+         * @type {string || null}
+         */
+        this.UserSubUin = null;
+
     }
 
     /**
@@ -1371,6 +2985,92 @@ class ViewBaseInfo extends  AbstractModel {
         }
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
+        this.UserSubUin = 'UserSubUin' in params ? params.UserSubUin : null;
+
+    }
+}
+
+/**
+ * CheckLockMetaData请求参数结构体
+ * @class
+ */
+class CheckLockMetaDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 锁ID
+         * @type {number || null}
+         */
+        this.LockId = null;
+
+        /**
+         * 数据源名称
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 事务ID
+         * @type {number || null}
+         */
+        this.TxnId = null;
+
+        /**
+         * 过期时间ms
+         * @type {number || null}
+         */
+        this.ElapsedMs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockId = 'LockId' in params ? params.LockId : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.TxnId = 'TxnId' in params ? params.TxnId : null;
+        this.ElapsedMs = 'ElapsedMs' in params ? params.ElapsedMs : null;
+
+    }
+}
+
+/**
+ * DescribeSparkAppJob请求参数结构体
+ * @class
+ */
+class DescribeSparkAppJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * spark作业Id，与JobName同时存在时，JobName无效
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * spark作业名
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
     }
 }
@@ -1541,18 +3241,18 @@ class CreateSparkAppTaskRequest extends  AbstractModel {
 }
 
 /**
- * DeleteWorkGroup请求参数结构体
+ * CancelNotebookSessionStatementBatch返回参数结构体
  * @class
  */
-class DeleteWorkGroupRequest extends  AbstractModel {
+class CancelNotebookSessionStatementBatchResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要删除的工作组Id集合
-         * @type {Array.<number> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.WorkGroupIds = null;
+        this.RequestId = null;
 
     }
 
@@ -1563,7 +3263,7 @@ class DeleteWorkGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WorkGroupIds = 'WorkGroupIds' in params ? params.WorkGroupIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1653,6 +3353,27 @@ class TableBaseInfo extends  AbstractModel {
          */
         this.TableFormat = null;
 
+        /**
+         * 建表用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserAlias = null;
+
+        /**
+         * 建表用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserSubUin = null;
+
+        /**
+         * 数据治理配置项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DataGovernPolicy || null}
+         */
+        this.GovernPolicy = null;
+
     }
 
     /**
@@ -1668,6 +3389,49 @@ class TableBaseInfo extends  AbstractModel {
         this.TableComment = 'TableComment' in params ? params.TableComment : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.TableFormat = 'TableFormat' in params ? params.TableFormat : null;
+        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
+        this.UserSubUin = 'UserSubUin' in params ? params.UserSubUin : null;
+
+        if (params.GovernPolicy) {
+            let obj = new DataGovernPolicy();
+            obj.deserialize(params.GovernPolicy)
+            this.GovernPolicy = obj;
+        }
+
+    }
+}
+
+/**
+ * UnlockMetaData请求参数结构体
+ * @class
+ */
+class UnlockMetaDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 锁ID
+         * @type {number || null}
+         */
+        this.LockId = null;
+
+        /**
+         * 数据源名称
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockId = 'LockId' in params ? params.LockId : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
 
     }
 }
@@ -1709,6 +3473,162 @@ class AttachUserPolicyRequest extends  AbstractModel {
                 let obj = new Policy();
                 obj.deserialize(params.PolicySet[z]);
                 this.PolicySet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateInternalTable请求参数结构体
+ * @class
+ */
+class CreateInternalTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表基本信息
+         * @type {TableBaseInfo || null}
+         */
+        this.TableBaseInfo = null;
+
+        /**
+         * 表字段信息
+         * @type {Array.<TColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 表分区信息
+         * @type {Array.<TPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 表属性信息
+         * @type {Array.<Property> || null}
+         */
+        this.Properties = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TableBaseInfo) {
+            let obj = new TableBaseInfo();
+            obj.deserialize(params.TableBaseInfo)
+            this.TableBaseInfo = obj;
+        }
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new TColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new TPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+
+        if (params.Properties) {
+            this.Properties = new Array();
+            for (let z in params.Properties) {
+                let obj = new Property();
+                obj.deserialize(params.Properties[z]);
+                this.Properties.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ListTaskJobLogDetail请求参数结构体
+ * @class
+ */
+class ListTaskJobLogDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 列表返回的Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 开始运行时间，unix时间戳（毫秒）
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束运行时间，unix时间戳（毫秒）
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 分页大小，最大1000，配合Context一起使用
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 下一次分页参数，第一次传空
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 最近1000条日志是否升序排列，true:升序排序，false:倒序，默认false，倒序排列
+         * @type {boolean || null}
+         */
+        this.Asc = null;
+
+        /**
+         * 预览日志的通用过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
 
@@ -1831,6 +3751,128 @@ class AttachWorkGroupPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * notebook session statement输出信息。
+ * @class
+ */
+class StatementOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 执行总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExecutionCount = null;
+
+        /**
+         * Statement数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Statement状态:ok,error
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorName = null;
+
+        /**
+         * 错误类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorValue = null;
+
+        /**
+         * 错误堆栈信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * SQL类型任务结果返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SQLResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExecutionCount = 'ExecutionCount' in params ? params.ExecutionCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new KVPair();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorName = 'ErrorName' in params ? params.ErrorName : null;
+        this.ErrorValue = 'ErrorValue' in params ? params.ErrorValue : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.SQLResult = 'SQLResult' in params ? params.SQLResult : null;
+
+    }
+}
+
+/**
+ * 标签对信息
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * CreateUser返回参数结构体
  * @class
  */
@@ -1854,6 +3896,41 @@ class CreateUserResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionStatements请求参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 批任务id
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
 
     }
 }
@@ -1887,18 +3964,30 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
- * CreateStoreLocation请求参数结构体
+ * DescribeDatabases返回参数结构体
  * @class
  */
-class CreateStoreLocationRequest extends  AbstractModel {
+class DescribeDatabasesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 计算结果存储cos路径，如：cosn://bucketname/
+         * 数据库对象列表。
+         * @type {Array.<DatabaseResponseInfo> || null}
+         */
+        this.DatabaseList = null;
+
+        /**
+         * 实例总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StoreLocation = null;
+        this.RequestId = null;
 
     }
 
@@ -1909,7 +3998,347 @@ class CreateStoreLocationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StoreLocation = 'StoreLocation' in params ? params.StoreLocation : null;
+
+        if (params.DatabaseList) {
+            this.DatabaseList = new Array();
+            for (let z in params.DatabaseList) {
+                let obj = new DatabaseResponseInfo();
+                obj.deserialize(params.DatabaseList[z]);
+                this.DatabaseList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 元数据加锁内容
+ * @class
+ */
+class LockComponentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 分区
+         * @type {string || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+         * @type {string || null}
+         */
+        this.LockType = null;
+
+        /**
+         * 锁级别：DB、TABLE、PARTITION
+         * @type {string || null}
+         */
+        this.LockLevel = null;
+
+        /**
+         * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+         * @type {string || null}
+         */
+        this.DataOperationType = null;
+
+        /**
+         * 是否保持Acid
+         * @type {boolean || null}
+         */
+        this.IsAcid = null;
+
+        /**
+         * 是否动态分区写
+         * @type {boolean || null}
+         */
+        this.IsDynamicPartitionWrite = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.LockType = 'LockType' in params ? params.LockType : null;
+        this.LockLevel = 'LockLevel' in params ? params.LockLevel : null;
+        this.DataOperationType = 'DataOperationType' in params ? params.DataOperationType : null;
+        this.IsAcid = 'IsAcid' in params ? params.IsAcid : null;
+        this.IsDynamicPartitionWrite = 'IsDynamicPartitionWrite' in params ? params.IsDynamicPartitionWrite : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessions返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * session总数量
+         * @type {number || null}
+         */
+        this.TotalElements = null;
+
+        /**
+         * 总页数
+         * @type {number || null}
+         */
+        this.TotalPages = null;
+
+        /**
+         * 当前页码
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * 当前页数量
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * session列表信息
+         * @type {Array.<NotebookSessions> || null}
+         */
+        this.Sessions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalElements = 'TotalElements' in params ? params.TotalElements : null;
+        this.TotalPages = 'TotalPages' in params ? params.TotalPages : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+        if (params.Sessions) {
+            this.Sessions = new Array();
+            for (let z in params.Sessions) {
+                let obj = new NotebookSessions();
+                obj.deserialize(params.Sessions[z]);
+                this.Sessions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDMSPartitions请求参数结构体
+ * @class
+ */
+class DescribeDMSPartitionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 单个分区名称，精准匹配
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 多个分区名称，精准匹配
+         * @type {Array.<string> || null}
+         */
+        this.PartitionNames = null;
+
+        /**
+         * 多个分区字段的匹配，模糊匹配
+         * @type {Array.<string> || null}
+         */
+        this.PartValues = null;
+
+        /**
+         * 过滤SQL
+         * @type {string || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 最大分区数量
+         * @type {number || null}
+         */
+        this.MaxParts = null;
+
+        /**
+         * 翻页跳过数量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 页面数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 表达式
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.PartitionNames = 'PartitionNames' in params ? params.PartitionNames : null;
+        this.PartValues = 'PartValues' in params ? params.PartValues : null;
+        this.Filter = 'Filter' in params ? params.Filter : null;
+        this.MaxParts = 'MaxParts' in params ? params.MaxParts : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Expression = 'Expression' in params ? params.Expression : null;
+
+    }
+}
+
+/**
+ * 表分区字段信息
+ * @class
+ */
+class TPartition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 字段名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 字段类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 字段描述
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 分区类型
+         * @type {string || null}
+         */
+        this.PartitionType = null;
+
+        /**
+         * 分区格式
+         * @type {string || null}
+         */
+        this.PartitionFormat = null;
+
+        /**
+         * 分区分隔数
+         * @type {number || null}
+         */
+        this.PartitionDot = null;
+
+        /**
+         * 分区转换策略
+         * @type {string || null}
+         */
+        this.Transform = null;
+
+        /**
+         * 策略参数
+         * @type {Array.<string> || null}
+         */
+        this.TransformArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
+        this.PartitionFormat = 'PartitionFormat' in params ? params.PartitionFormat : null;
+        this.PartitionDot = 'PartitionDot' in params ? params.PartitionDot : null;
+        this.Transform = 'Transform' in params ? params.Transform : null;
+        this.TransformArgs = 'TransformArgs' in params ? params.TransformArgs : null;
 
     }
 }
@@ -1935,7 +4364,7 @@ class DescribeSparkAppJobsRequest extends  AbstractModel {
         this.Sorting = null;
 
         /**
-         * 按照该参数过滤
+         * 按照该参数过滤,支持spark-job-name
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1988,6 +4417,189 @@ class DescribeSparkAppJobsRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DeleteNotebookSession请求参数结构体
+ * @class
+ */
+class DeleteNotebookSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
+ * CreateDMSTable返回参数结构体
+ * @class
+ */
+class CreateDMSTableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNotebookSession请求参数结构体
+ * @class
+ */
+class CreateNotebookSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 类型，当前支持：spark、pyspark、sparkr、sql
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * DLC Spark作业引擎名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * session文件地址，当前支持：cosn://和lakefs://两种路径
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentFiles = null;
+
+        /**
+         * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentJars = null;
+
+        /**
+         * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentPython = null;
+
+        /**
+         * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+         * @type {Array.<string> || null}
+         */
+        this.ProgramArchives = null;
+
+        /**
+         * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+         * @type {string || null}
+         */
+        this.DriverSize = null;
+
+        /**
+         * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+         * @type {string || null}
+         */
+        this.ExecutorSize = null;
+
+        /**
+         * 指定的Executor数量，默认为1
+         * @type {number || null}
+         */
+        this.ExecutorNumbers = null;
+
+        /**
+         * Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填；
+         * @type {Array.<KVPair> || null}
+         */
+        this.Arguments = null;
+
+        /**
+         * 代理用户，默认为root
+         * @type {string || null}
+         */
+        this.ProxyUser = null;
+
+        /**
+         * 指定的Session超时时间，单位秒，默认3600秒
+         * @type {number || null}
+         */
+        this.TimeoutInSecond = null;
+
+        /**
+         * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+         * @type {number || null}
+         */
+        this.ExecutorMaxNumbers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.ProgramDependentFiles = 'ProgramDependentFiles' in params ? params.ProgramDependentFiles : null;
+        this.ProgramDependentJars = 'ProgramDependentJars' in params ? params.ProgramDependentJars : null;
+        this.ProgramDependentPython = 'ProgramDependentPython' in params ? params.ProgramDependentPython : null;
+        this.ProgramArchives = 'ProgramArchives' in params ? params.ProgramArchives : null;
+        this.DriverSize = 'DriverSize' in params ? params.DriverSize : null;
+        this.ExecutorSize = 'ExecutorSize' in params ? params.ExecutorSize : null;
+        this.ExecutorNumbers = 'ExecutorNumbers' in params ? params.ExecutorNumbers : null;
+
+        if (params.Arguments) {
+            this.Arguments = new Array();
+            for (let z in params.Arguments) {
+                let obj = new KVPair();
+                obj.deserialize(params.Arguments[z]);
+                this.Arguments.push(obj);
+            }
+        }
+        this.ProxyUser = 'ProxyUser' in params ? params.ProxyUser : null;
+        this.TimeoutInSecond = 'TimeoutInSecond' in params ? params.TimeoutInSecond : null;
+        this.ExecutorMaxNumbers = 'ExecutorMaxNumbers' in params ? params.ExecutorMaxNumbers : null;
 
     }
 }
@@ -2113,18 +4725,18 @@ class CreateTaskRequest extends  AbstractModel {
 }
 
 /**
- * ModifySparkApp返回参数结构体
+ * DescribeNotebookSession请求参数结构体
  * @class
  */
-class ModifySparkAppResponse extends  AbstractModel {
+class DescribeNotebookSessionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * Session唯一标识
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SessionId = null;
 
     }
 
@@ -2135,7 +4747,7 @@ class ModifySparkAppResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -2197,6 +4809,102 @@ class CSV extends  AbstractModel {
 }
 
 /**
+ * NotebookSessionStatement详情。
+ * @class
+ */
+class NotebookSessionStatementInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 完成时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Completed = null;
+
+        /**
+         * 开始时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Started = null;
+
+        /**
+         * 完成进度，百分制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Session Statement唯一标识
+         * @type {string || null}
+         */
+        this.StatementId = null;
+
+        /**
+         * Session Statement状态，包含：waiting（排队中）、running（运行中）、available（正常）、error（异常）、cancelling（取消中）、cancelled（已取消）
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Statement输出信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StatementOutput || null}
+         */
+        this.OutPut = null;
+
+        /**
+         * 批任务id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 运行语句
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Completed = 'Completed' in params ? params.Completed : null;
+        this.Started = 'Started' in params ? params.Started : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.StatementId = 'StatementId' in params ? params.StatementId : null;
+        this.State = 'State' in params ? params.State : null;
+
+        if (params.OutPut) {
+            let obj = new StatementOutput();
+            obj.deserialize(params.OutPut)
+            this.OutPut = obj;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * CreateTable请求参数结构体
  * @class
  */
@@ -2225,6 +4933,48 @@ class CreateTableRequest extends  AbstractModel {
             obj.deserialize(params.TableInfo)
             this.TableInfo = obj;
         }
+
+    }
+}
+
+/**
+ * CreateNotebookSessionStatement请求参数结构体
+ * @class
+ */
+class CreateNotebookSessionStatementRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 执行的代码
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 类型，当前支持：spark、pyspark、sparkr、sql
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
 
     }
 }
@@ -2280,48 +5030,36 @@ class DescribeWorkGroupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeUsers请求参数结构体
+ * CreateImportTask请求参数结构体
  * @class
  */
-class DescribeUsersRequest extends  AbstractModel {
+class CreateImportTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定查询的子用户uin，用户需要通过CreateUser接口创建。
+         * 数据来源，cos
          * @type {string || null}
          */
-        this.UserId = null;
+        this.InputType = null;
 
         /**
-         * 偏移量，默认为0
-         * @type {number || null}
+         * 输入配置
+         * @type {Array.<KVPair> || null}
          */
-        this.Offset = null;
+        this.InputConf = null;
 
         /**
-         * 返回数量，默认20，最大值100
-         * @type {number || null}
+         * 输出配置
+         * @type {Array.<KVPair> || null}
          */
-        this.Limit = null;
+        this.OutputConf = null;
 
         /**
-         * 排序字段，支持如下字段类型，create-time
+         * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
          * @type {string || null}
          */
-        this.SortBy = null;
-
-        /**
-         * 排序方式，desc表示正序，asc表示反序， 默认为asc
-         * @type {string || null}
-         */
-        this.Sorting = null;
-
-        /**
-         * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.OutputType = null;
 
     }
 
@@ -2332,20 +5070,26 @@ class DescribeUsersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SortBy = 'SortBy' in params ? params.SortBy : null;
-        this.Sorting = 'Sorting' in params ? params.Sorting : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.InputConf) {
+            this.InputConf = new Array();
+            for (let z in params.InputConf) {
+                let obj = new KVPair();
+                obj.deserialize(params.InputConf[z]);
+                this.InputConf.push(obj);
             }
         }
+
+        if (params.OutputConf) {
+            this.OutputConf = new Array();
+            for (let z in params.OutputConf) {
+                let obj = new KVPair();
+                obj.deserialize(params.OutputConf[z]);
+                this.OutputConf.push(obj);
+            }
+        }
+        this.OutputType = 'OutputType' in params ? params.OutputType : null;
 
     }
 }
@@ -2377,7 +5121,7 @@ class DescribeScriptsRequest extends  AbstractModel {
         this.SortBy = null;
 
         /**
-         * 排序方式，desc表示正序，asc表示反序
+         * 排序方式，desc表示正序，asc表示反序，默认asc
          * @type {string || null}
          */
         this.Sorting = null;
@@ -2465,12 +5209,18 @@ class DescribeSparkAppJobResponse extends  AbstractModel {
 }
 
 /**
- * DeleteUsersFromWorkGroup返回参数结构体
+ * CreateExportTask返回参数结构体
  * @class
  */
-class DeleteUsersFromWorkGroupResponse extends  AbstractModel {
+class CreateExportTaskResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2487,6 +5237,7 @@ class DeleteUsersFromWorkGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2547,68 +5298,18 @@ class DescribeStoreLocationRequest extends  AbstractModel {
 }
 
 /**
- * DescribeViews请求参数结构体
+ * AddUsersToWorkGroup返回参数结构体
  * @class
  */
-class DescribeViewsRequest extends  AbstractModel {
+class AddUsersToWorkGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 列出该数据库下所属数据表。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DatabaseName = null;
-
-        /**
-         * 返回数量，默认为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 数据偏移量，从0开始，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件，如下支持的过滤类型，传参Name应为其一
-view-name - String - （过滤条件）数据表名称,形如：view-001。
-view-id - String - （过滤条件）view id形如：12342。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 数据库所属的数据源名称
-         * @type {string || null}
-         */
-        this.DatasourceConnectionName = null;
-
-        /**
-         * 排序字段
-         * @type {string || null}
-         */
-        this.Sort = null;
-
-        /**
-         * 排序规则
-         * @type {boolean || null}
-         */
-        this.Asc = null;
-
-        /**
-         * 开始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2619,23 +5320,49 @@ view-id - String - （过滤条件）view id形如：12342。
         if (!params) {
             return;
         }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionLog请求参数结构体
+ * @class
+ */
+class DescribeNotebookSessionLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 分页参数，默认200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页参数，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
-        this.Asc = 'Asc' in params ? params.Asc : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2812,6 +5539,497 @@ class CreateExportTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeNotebookSessionStatement返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session Statement详情
+         * @type {NotebookSessionStatementInfo || null}
+         */
+        this.NotebookSessionStatement = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotebookSessionStatement) {
+            let obj = new NotebookSessionStatementInfo();
+            obj.deserialize(params.NotebookSessionStatement)
+            this.NotebookSessionStatement = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReportHeartbeatMetaData返回参数结构体
+ * @class
+ */
+class ReportHeartbeatMetaDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReportHeartbeatMetaData请求参数结构体
+ * @class
+ */
+class ReportHeartbeatMetaDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据源名称
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 锁ID
+         * @type {number || null}
+         */
+        this.LockId = null;
+
+        /**
+         * 事务ID
+         * @type {number || null}
+         */
+        this.TxnId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.LockId = 'LockId' in params ? params.LockId : null;
+        this.TxnId = 'TxnId' in params ? params.TxnId : null;
+
+    }
+}
+
+/**
+ * CreateDMSTable请求参数结构体
+ * @class
+ */
+class CreateDMSTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基础对象
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 表类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 存储大小
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * 记录数量
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 生命周期
+         * @type {number || null}
+         */
+        this.LifeTime = null;
+
+        /**
+         * 数据更新时间
+         * @type {string || null}
+         */
+        this.DataUpdateTime = null;
+
+        /**
+         * 结构更新时间
+         * @type {string || null}
+         */
+        this.StructUpdateTime = null;
+
+        /**
+         * 最后访问时间
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * 存储对象
+         * @type {DMSSds || null}
+         */
+        this.Sds = null;
+
+        /**
+         * 列
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 分区键值
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.PartitionKeys = null;
+
+        /**
+         * 视图文本
+         * @type {string || null}
+         */
+        this.ViewOriginalText = null;
+
+        /**
+         * 视图文本
+         * @type {string || null}
+         */
+        this.ViewExpandedText = null;
+
+        /**
+         * 分区
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.LifeTime = 'LifeTime' in params ? params.LifeTime : null;
+        this.DataUpdateTime = 'DataUpdateTime' in params ? params.DataUpdateTime : null;
+        this.StructUpdateTime = 'StructUpdateTime' in params ? params.StructUpdateTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+
+        if (params.Sds) {
+            let obj = new DMSSds();
+            obj.deserialize(params.Sds)
+            this.Sds = obj;
+        }
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+
+        if (params.PartitionKeys) {
+            this.PartitionKeys = new Array();
+            for (let z in params.PartitionKeys) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.PartitionKeys[z]);
+                this.PartitionKeys.push(obj);
+            }
+        }
+        this.ViewOriginalText = 'ViewOriginalText' in params ? params.ViewOriginalText : null;
+        this.ViewExpandedText = 'ViewExpandedText' in params ? params.ViewExpandedText : null;
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * CancelNotebookSessionStatement返回参数结构体
+ * @class
+ */
+class CancelNotebookSessionStatementResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DMSTable基本信息
+ * @class
+ */
+class DMSTable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ViewOriginalText = null;
+
+        /**
+         * 视图文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ViewExpandedText = null;
+
+        /**
+         * hive维护版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Retention = null;
+
+        /**
+         * 存储对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DMSSds || null}
+         */
+        this.Sds = null;
+
+        /**
+         * 分区列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.PartitionKeys = null;
+
+        /**
+         * 分区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * 记录数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LifeTime = null;
+
+        /**
+         * 最后访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * 数据更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DataUpdateTime = null;
+
+        /**
+         * 结构更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StructUpdateTime = null;
+
+        /**
+         * 列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 表名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ViewOriginalText = 'ViewOriginalText' in params ? params.ViewOriginalText : null;
+        this.ViewExpandedText = 'ViewExpandedText' in params ? params.ViewExpandedText : null;
+        this.Retention = 'Retention' in params ? params.Retention : null;
+
+        if (params.Sds) {
+            let obj = new DMSSds();
+            obj.deserialize(params.Sds)
+            this.Sds = obj;
+        }
+
+        if (params.PartitionKeys) {
+            this.PartitionKeys = new Array();
+            for (let z in params.PartitionKeys) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.PartitionKeys[z]);
+                this.PartitionKeys.push(obj);
+            }
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.LifeTime = 'LifeTime' in params ? params.LifeTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+        this.DataUpdateTime = 'DataUpdateTime' in params ? params.DataUpdateTime : null;
+        this.StructUpdateTime = 'StructUpdateTime' in params ? params.StructUpdateTime : null;
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * AttachWorkGroupPolicy返回参数结构体
  * @class
  */
@@ -2868,6 +6086,118 @@ class ModifyWorkGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDMSTables请求参数结构体
+ * @class
+ */
+class DescribeDMSTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 数据库schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 数据目录
+         * @type {string || null}
+         */
+        this.Catalog = null;
+
+        /**
+         * 查询关键词
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * 查询模式
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 表类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 筛选参数：更新开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 筛选参数：更新结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 分页参数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页参数
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段：create_time：创建时间
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+        /**
+         * 排序字段：true：升序（默认），false：降序
+         * @type {boolean || null}
+         */
+        this.Asc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Catalog = 'Catalog' in params ? params.Catalog : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+
+    }
+}
+
+/**
  * ModifyUser请求参数结构体
  * @class
  */
@@ -2903,78 +6233,110 @@ class ModifyUserRequest extends  AbstractModel {
 }
 
 /**
- * spark流任务统计信息
+ * 元数据存储描述属性
  * @class
  */
-class StreamingStatistics extends  AbstractModel {
+class DMSSds extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务开始时间
+         * 存储地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.Location = null;
 
         /**
-         * 数据接收器数
-         * @type {number || null}
+         * 输入格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Receivers = null;
+        this.InputFormat = null;
 
         /**
-         * 运行中的接收器数
-         * @type {number || null}
+         * 输出格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.NumActiveReceivers = null;
+        this.OutputFormat = null;
 
         /**
-         * 不活跃的接收器数
+         * bucket数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.NumInactiveReceivers = null;
+        this.NumBuckets = null;
 
         /**
-         * 运行中的批数
-         * @type {number || null}
+         * 是是否压缩
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
          */
-        this.NumActiveBatches = null;
+        this.Compressed = null;
 
         /**
-         * 待处理的批数
-         * @type {number || null}
+         * 是否有子目录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
          */
-        this.NumRetainedCompletedBatches = null;
+        this.StoredAsSubDirectories = null;
 
         /**
-         * 已完成的批数
-         * @type {number || null}
+         * 序列化lib
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.NumTotalCompletedBatches = null;
+        this.SerdeLib = null;
 
         /**
-         * 平均输入速率
-         * @type {number || null}
+         * 序列化名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.AverageInputRate = null;
+        this.SerdeName = null;
 
         /**
-         * 平均等待时长
-         * @type {number || null}
+         * 桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.AverageSchedulingDelay = null;
+        this.BucketCols = null;
 
         /**
-         * 平均处理时长
-         * @type {number || null}
+         * 序列化参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
          */
-        this.AverageProcessingTime = null;
+        this.SerdeParams = null;
 
         /**
-         * 平均延时
-         * @type {number || null}
+         * 附加参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
          */
-        this.AverageTotalDelay = null;
+        this.Params = null;
+
+        /**
+         * 列排序(Expired)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DMSColumnOrder || null}
+         */
+        this.SortCols = null;
+
+        /**
+         * 列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.Cols = null;
+
+        /**
+         * 列排序字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DMSColumnOrder> || null}
+         */
+        this.SortColumns = null;
 
     }
 
@@ -2985,17 +6347,57 @@ class StreamingStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.Receivers = 'Receivers' in params ? params.Receivers : null;
-        this.NumActiveReceivers = 'NumActiveReceivers' in params ? params.NumActiveReceivers : null;
-        this.NumInactiveReceivers = 'NumInactiveReceivers' in params ? params.NumInactiveReceivers : null;
-        this.NumActiveBatches = 'NumActiveBatches' in params ? params.NumActiveBatches : null;
-        this.NumRetainedCompletedBatches = 'NumRetainedCompletedBatches' in params ? params.NumRetainedCompletedBatches : null;
-        this.NumTotalCompletedBatches = 'NumTotalCompletedBatches' in params ? params.NumTotalCompletedBatches : null;
-        this.AverageInputRate = 'AverageInputRate' in params ? params.AverageInputRate : null;
-        this.AverageSchedulingDelay = 'AverageSchedulingDelay' in params ? params.AverageSchedulingDelay : null;
-        this.AverageProcessingTime = 'AverageProcessingTime' in params ? params.AverageProcessingTime : null;
-        this.AverageTotalDelay = 'AverageTotalDelay' in params ? params.AverageTotalDelay : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.InputFormat = 'InputFormat' in params ? params.InputFormat : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.NumBuckets = 'NumBuckets' in params ? params.NumBuckets : null;
+        this.Compressed = 'Compressed' in params ? params.Compressed : null;
+        this.StoredAsSubDirectories = 'StoredAsSubDirectories' in params ? params.StoredAsSubDirectories : null;
+        this.SerdeLib = 'SerdeLib' in params ? params.SerdeLib : null;
+        this.SerdeName = 'SerdeName' in params ? params.SerdeName : null;
+        this.BucketCols = 'BucketCols' in params ? params.BucketCols : null;
+
+        if (params.SerdeParams) {
+            this.SerdeParams = new Array();
+            for (let z in params.SerdeParams) {
+                let obj = new KVPair();
+                obj.deserialize(params.SerdeParams[z]);
+                this.SerdeParams.push(obj);
+            }
+        }
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new KVPair();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+
+        if (params.SortCols) {
+            let obj = new DMSColumnOrder();
+            obj.deserialize(params.SortCols)
+            this.SortCols = obj;
+        }
+
+        if (params.Cols) {
+            this.Cols = new Array();
+            for (let z in params.Cols) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.Cols[z]);
+                this.Cols.push(obj);
+            }
+        }
+
+        if (params.SortColumns) {
+            this.SortColumns = new Array();
+            for (let z in params.SortColumns) {
+                let obj = new DMSColumnOrder();
+                obj.deserialize(params.SortColumns[z]);
+                this.SortColumns.push(obj);
+            }
+        }
 
     }
 }
@@ -3071,7 +6473,7 @@ class CancelTaskRequest extends  AbstractModel {
 }
 
 /**
- * 任务实例
+ * 任务实例。
  * @class
  */
 class TaskResponseInfo extends  AbstractModel {
@@ -3097,7 +6499,7 @@ class TaskResponseInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 计算时长，单位： ms。
+         * 计算耗时，单位： ms
          * @type {number || null}
          */
         this.UsedTime = null;
@@ -3273,6 +6675,20 @@ class TaskResponseInfo extends  AbstractModel {
          */
         this.UiUrl = null;
 
+        /**
+         * 任务耗时，单位： ms
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+        /**
+         * spark app job执行task的程序入口参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CmdArgs = null;
+
     }
 
     /**
@@ -3312,6 +6728,8 @@ class TaskResponseInfo extends  AbstractModel {
         this.SparkJobId = 'SparkJobId' in params ? params.SparkJobId : null;
         this.SparkJobFile = 'SparkJobFile' in params ? params.SparkJobFile : null;
         this.UiUrl = 'UiUrl' in params ? params.UiUrl : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+        this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
 
     }
 }
@@ -3381,6 +6799,46 @@ class BindWorkGroupsToUserResponse extends  AbstractModel {
 }
 
 /**
+ * CreateNotebookSessionStatement返回参数结构体
+ * @class
+ */
+class CreateNotebookSessionStatementResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session Statement详情
+         * @type {NotebookSessionStatementInfo || null}
+         */
+        this.NotebookSessionStatement = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotebookSessionStatement) {
+            let obj = new NotebookSessionStatementInfo();
+            obj.deserialize(params.NotebookSessionStatement)
+            this.NotebookSessionStatement = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStoreLocation返回参数结构体
  * @class
  */
@@ -3440,6 +6898,42 @@ class DeleteScriptRequest extends  AbstractModel {
             return;
         }
         this.ScriptIds = 'ScriptIds' in params ? params.ScriptIds : null;
+
+    }
+}
+
+/**
+ * AddDMSPartitions请求参数结构体
+ * @class
+ */
+class AddDMSPartitionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分区
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
 
     }
 }
@@ -3514,6 +7008,318 @@ class Script extends  AbstractModel {
 }
 
 /**
+ * 按批提交Statement运行SQL任务。
+ * @class
+ */
+class NotebookSessionStatementBatchInformation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NotebookSessionStatementInfo> || null}
+         */
+        this.NotebookSessionStatementBatch = null;
+
+        /**
+         * 当前批任务是否运行完成
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsAvailable = null;
+
+        /**
+         * Session唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Batch唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotebookSessionStatementBatch) {
+            this.NotebookSessionStatementBatch = new Array();
+            for (let z in params.NotebookSessionStatementBatch) {
+                let obj = new NotebookSessionStatementInfo();
+                obj.deserialize(params.NotebookSessionStatementBatch[z]);
+                this.NotebookSessionStatementBatch.push(obj);
+            }
+        }
+        this.IsAvailable = 'IsAvailable' in params ? params.IsAvailable : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementSqlResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务唯一ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 返回结果的最大行数，范围0~1000，默认为1000.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+        /**
+         * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+
+    }
+}
+
+/**
+ * ModifySparkApp返回参数结构体
+ * @class
+ */
+class ModifySparkAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AlterDMSTable请求参数结构体
+ * @class
+ */
+class AlterDMSTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前名称
+         * @type {string || null}
+         */
+        this.CurrentName = null;
+
+        /**
+         * 当前数据库名称
+         * @type {string || null}
+         */
+        this.CurrentDbName = null;
+
+        /**
+         * 基础对象
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+        /**
+         * 表类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 存储大小
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * 记录数量
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 生命周期
+         * @type {number || null}
+         */
+        this.LifeTime = null;
+
+        /**
+         * 数据更新时间
+         * @type {string || null}
+         */
+        this.DataUpdateTime = null;
+
+        /**
+         * 结构更新时间
+         * @type {string || null}
+         */
+        this.StructUpdateTime = null;
+
+        /**
+         * 最后访问时间
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * 存储对象
+         * @type {DMSSds || null}
+         */
+        this.Sds = null;
+
+        /**
+         * 列
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * 分区键值
+         * @type {Array.<DMSColumn> || null}
+         */
+        this.PartitionKeys = null;
+
+        /**
+         * 视图文本
+         * @type {string || null}
+         */
+        this.ViewOriginalText = null;
+
+        /**
+         * 视图文本
+         * @type {string || null}
+         */
+        this.ViewExpandedText = null;
+
+        /**
+         * 分区
+         * @type {Array.<DMSPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 当前表名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentName = 'CurrentName' in params ? params.CurrentName : null;
+        this.CurrentDbName = 'CurrentDbName' in params ? params.CurrentDbName : null;
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.LifeTime = 'LifeTime' in params ? params.LifeTime : null;
+        this.DataUpdateTime = 'DataUpdateTime' in params ? params.DataUpdateTime : null;
+        this.StructUpdateTime = 'StructUpdateTime' in params ? params.StructUpdateTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+
+        if (params.Sds) {
+            let obj = new DMSSds();
+            obj.deserialize(params.Sds)
+            this.Sds = obj;
+        }
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+
+        if (params.PartitionKeys) {
+            this.PartitionKeys = new Array();
+            for (let z in params.PartitionKeys) {
+                let obj = new DMSColumn();
+                obj.deserialize(params.PartitionKeys[z]);
+                this.PartitionKeys.push(obj);
+            }
+        }
+        this.ViewOriginalText = 'ViewOriginalText' in params ? params.ViewOriginalText : null;
+        this.ViewExpandedText = 'ViewExpandedText' in params ? params.ViewExpandedText : null;
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * CreateImportTask返回参数结构体
  * @class
  */
@@ -3544,6 +7350,197 @@ class CreateImportTaskResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Notebook Session详细信息。
+ * @class
+ */
+class NotebookSessionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 类型，当前支持：spark、pyspark、sparkr、sql
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * DLC Spark作业引擎名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * Session相关配置，当前支持：eni、roleArn以及用户指定的配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
+         */
+        this.Arguments = null;
+
+        /**
+         * 运行程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentFiles = null;
+
+        /**
+         * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentJars = null;
+
+        /**
+         * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ProgramDependentPython = null;
+
+        /**
+         * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ProgramArchives = null;
+
+        /**
+         * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DriverSize = null;
+
+        /**
+         * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExecutorSize = null;
+
+        /**
+         * 指定的Executor数量，默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExecutorNumbers = null;
+
+        /**
+         * 代理用户，默认为root
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProxyUser = null;
+
+        /**
+         * 指定的Session超时时间，单位秒，默认3600秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeoutInSecond = null;
+
+        /**
+         * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkAppId = null;
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Session创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 其它信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
+         */
+        this.AppInfo = null;
+
+        /**
+         * Spark ui地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkUiUrl = null;
+
+        /**
+         * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExecutorMaxNumbers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+
+        if (params.Arguments) {
+            this.Arguments = new Array();
+            for (let z in params.Arguments) {
+                let obj = new KVPair();
+                obj.deserialize(params.Arguments[z]);
+                this.Arguments.push(obj);
+            }
+        }
+        this.ProgramDependentFiles = 'ProgramDependentFiles' in params ? params.ProgramDependentFiles : null;
+        this.ProgramDependentJars = 'ProgramDependentJars' in params ? params.ProgramDependentJars : null;
+        this.ProgramDependentPython = 'ProgramDependentPython' in params ? params.ProgramDependentPython : null;
+        this.ProgramArchives = 'ProgramArchives' in params ? params.ProgramArchives : null;
+        this.DriverSize = 'DriverSize' in params ? params.DriverSize : null;
+        this.ExecutorSize = 'ExecutorSize' in params ? params.ExecutorSize : null;
+        this.ExecutorNumbers = 'ExecutorNumbers' in params ? params.ExecutorNumbers : null;
+        this.ProxyUser = 'ProxyUser' in params ? params.ProxyUser : null;
+        this.TimeoutInSecond = 'TimeoutInSecond' in params ? params.TimeoutInSecond : null;
+        this.SparkAppId = 'SparkAppId' in params ? params.SparkAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.AppInfo) {
+            this.AppInfo = new Array();
+            for (let z in params.AppInfo) {
+                let obj = new KVPair();
+                obj.deserialize(params.AppInfo[z]);
+                this.AppInfo.push(obj);
+            }
+        }
+        this.SparkUiUrl = 'SparkUiUrl' in params ? params.SparkUiUrl : null;
+        this.ExecutorMaxNumbers = 'ExecutorMaxNumbers' in params ? params.ExecutorMaxNumbers : null;
 
     }
 }
@@ -3713,6 +7710,46 @@ class WorkGroupInfo extends  AbstractModel {
 }
 
 /**
+ * CreateNotebookSessionStatementSupportBatchSQL返回参数结构体
+ * @class
+ */
+class CreateNotebookSessionStatementSupportBatchSQLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session Statement详情
+         * @type {NotebookSessionStatementBatchInformation || null}
+         */
+        this.NotebookSessionStatementBatches = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotebookSessionStatementBatches) {
+            let obj = new NotebookSessionStatementBatchInformation();
+            obj.deserialize(params.NotebookSessionStatementBatches)
+            this.NotebookSessionStatementBatches = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateScript请求参数结构体
  * @class
  */
@@ -3864,6 +7901,13 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
          */
         this.ModifiedTime = null;
 
+        /**
+         * 是否为分区字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsPartition = null;
+
     }
 
     /**
@@ -3882,6 +7926,35 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
         this.Position = 'Position' in params ? params.Position : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.IsPartition = 'IsPartition' in params ? params.IsPartition : null;
+
+    }
+}
+
+/**
+ * DeleteWorkGroup请求参数结构体
+ * @class
+ */
+class DeleteWorkGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的工作组Id集合
+         * @type {Array.<number> || null}
+         */
+        this.WorkGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WorkGroupIds = 'WorkGroupIds' in params ? params.WorkGroupIds : null;
 
     }
 }
@@ -3901,7 +7974,7 @@ class DescribeTaskResultRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回1000行数据。
+         * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
          * @type {string || null}
          */
         this.NextToken = null;
@@ -4014,25 +8087,129 @@ class DescribeUsersResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScripts返回参数结构体
+ * 数据表数据格式。
  * @class
  */
-class DescribeScriptsResponse extends  AbstractModel {
+class DataFormat extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Script列表
+         * 文本格式，TextFile。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Script> || null}
+         * @type {TextFile || null}
          */
-        this.Scripts = null;
+        this.TextFile = null;
 
         /**
-         * 实例总数
+         * 文本格式，CSV。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CSV || null}
+         */
+        this.CSV = null;
+
+        /**
+         * 文本格式，Json。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Other || null}
+         */
+        this.Json = null;
+
+        /**
+         * Parquet格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Other || null}
+         */
+        this.Parquet = null;
+
+        /**
+         * ORC格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Other || null}
+         */
+        this.ORC = null;
+
+        /**
+         * AVRO格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Other || null}
+         */
+        this.AVRO = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TextFile) {
+            let obj = new TextFile();
+            obj.deserialize(params.TextFile)
+            this.TextFile = obj;
+        }
+
+        if (params.CSV) {
+            let obj = new CSV();
+            obj.deserialize(params.CSV)
+            this.CSV = obj;
+        }
+
+        if (params.Json) {
+            let obj = new Other();
+            obj.deserialize(params.Json)
+            this.Json = obj;
+        }
+
+        if (params.Parquet) {
+            let obj = new Other();
+            obj.deserialize(params.Parquet)
+            this.Parquet = obj;
+        }
+
+        if (params.ORC) {
+            let obj = new Other();
+            obj.deserialize(params.ORC)
+            this.ORC = obj;
+        }
+
+        if (params.AVRO) {
+            let obj = new Other();
+            obj.deserialize(params.AVRO)
+            this.AVRO = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionLog返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志信息，默认获取最新的200条
+         * @type {Array.<string> || null}
+         */
+        this.Logs = null;
+
+        /**
+         * 分页参数，默认200
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Limit = null;
+
+        /**
+         * 分页参数，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4049,16 +8226,9 @@ class DescribeScriptsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Scripts) {
-            this.Scripts = new Array();
-            for (let z in params.Scripts) {
-                let obj = new Script();
-                obj.deserialize(params.Scripts[z]);
-                this.Scripts.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Logs = 'Logs' in params ? params.Logs : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4139,6 +8309,171 @@ class ViewResponseInfo extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+
+    }
+}
+
+/**
+ * 网络配置
+ * @class
+ */
+class NetworkConnection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络配置id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 网络配置唯一标志符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssociateId = null;
+
+        /**
+         * 计算引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HouseId = null;
+
+        /**
+         * 数据源id(已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionId = null;
+
+        /**
+         * 网络配置状态（0-初始化，1-正常）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建用户Appid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 计算引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HouseName = null;
+
+        /**
+         * 网络配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 网络配置类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NetworkConnectionType = null;
+
+        /**
+         * 创建用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 创建用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubAccountUin = null;
+
+        /**
+         * 网络配置描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkConnectionDesc = null;
+
+        /**
+         * 数据源vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionVpcId = null;
+
+        /**
+         * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionSubnetId = null;
+
+        /**
+         * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionCidrBlock = null;
+
+        /**
+         * 数据源SubnetCidrBlock
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatasourceConnectionSubnetCidrBlock = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.AssociateId = 'AssociateId' in params ? params.AssociateId : null;
+        this.HouseId = 'HouseId' in params ? params.HouseId : null;
+        this.DatasourceConnectionId = 'DatasourceConnectionId' in params ? params.DatasourceConnectionId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.HouseName = 'HouseName' in params ? params.HouseName : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.NetworkConnectionType = 'NetworkConnectionType' in params ? params.NetworkConnectionType : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.SubAccountUin = 'SubAccountUin' in params ? params.SubAccountUin : null;
+        this.NetworkConnectionDesc = 'NetworkConnectionDesc' in params ? params.NetworkConnectionDesc : null;
+        this.DatasourceConnectionVpcId = 'DatasourceConnectionVpcId' in params ? params.DatasourceConnectionVpcId : null;
+        this.DatasourceConnectionSubnetId = 'DatasourceConnectionSubnetId' in params ? params.DatasourceConnectionSubnetId : null;
+        this.DatasourceConnectionCidrBlock = 'DatasourceConnectionCidrBlock' in params ? params.DatasourceConnectionCidrBlock : null;
+        this.DatasourceConnectionSubnetCidrBlock = 'DatasourceConnectionSubnetCidrBlock' in params ? params.DatasourceConnectionSubnetCidrBlock : null;
 
     }
 }
@@ -4278,10 +8613,87 @@ class CancelTaskResponse extends  AbstractModel {
 }
 
 /**
+ * 数据治理规则
+ * @class
+ */
+class DataGovernPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * UnlockMetaData返回参数结构体
+ * @class
+ */
+class UnlockMetaDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteWorkGroup返回参数结构体
  * @class
  */
 class DeleteWorkGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DropDMSTable返回参数结构体
+ * @class
+ */
+class DropDMSTableResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4376,7 +8788,7 @@ class CreateWorkGroupResponse extends  AbstractModel {
 }
 
 /**
- * 任务结果信息
+ * 任务结果信息。
  * @class
  */
 class TaskResultInfo extends  AbstractModel {
@@ -4428,7 +8840,7 @@ class TaskResultInfo extends  AbstractModel {
         this.DataAmount = null;
 
         /**
-         * 任务执行耗时，单位秒
+         * 计算耗时，单位： ms
          * @type {number || null}
          */
         this.UsedTime = null;
@@ -4495,6 +8907,12 @@ class TaskResultInfo extends  AbstractModel {
          */
         this.DisplayFormat = null;
 
+        /**
+         * 任务耗时，单位： ms
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
     }
 
     /**
@@ -4530,6 +8948,7 @@ class TaskResultInfo extends  AbstractModel {
         this.Percentage = 'Percentage' in params ? params.Percentage : null;
         this.ProgressDetail = 'ProgressDetail' in params ? params.ProgressDetail : null;
         this.DisplayFormat = 'DisplayFormat' in params ? params.DisplayFormat : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
 
     }
 }
@@ -4587,13 +9006,13 @@ table-id - String - （过滤条件）table id形如：12342。
         this.EndTime = null;
 
         /**
-         * 排序字段，支持：ModifiedTime（默认）；CreateTime
+         * 排序字段，支持：CreateTime、UpdateTime、StorageSize、RecordCount、Name（不传则默认按name升序）
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * 排序字段，false：降序（默认）；true
+         * 排序字段，false：降序（默认）；true：升序
          * @type {boolean || null}
          */
         this.Asc = null;
@@ -4643,24 +9062,121 @@ table-id - String - （过滤条件）table id形如：12342。
 }
 
 /**
- * DescribeDatabases返回参数结构体
+ * DeleteNotebookSession返回参数结构体
  * @class
  */
-class DescribeDatabasesResponse extends  AbstractModel {
+class DeleteNotebookSessionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据库对象列表。
-         * @type {Array.<DatabaseResponseInfo> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.DatabaseList = null;
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateStoreLocation请求参数结构体
+ * @class
+ */
+class CreateStoreLocationRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 实例总数。
-         * @type {number || null}
+         * 计算结果存储cos路径，如：cosn://bucketname/
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.StoreLocation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StoreLocation = 'StoreLocation' in params ? params.StoreLocation : null;
+
+    }
+}
+
+/**
+ * DMSTable信息
+ * @class
+ */
+class DMSTableInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DMS表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DMSTable || null}
+         */
+        this.Table = null;
+
+        /**
+         * 基础对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Table) {
+            let obj = new DMSTable();
+            obj.deserialize(params.Table)
+            this.Table = obj;
+        }
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionStatements返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session Statement详情
+         * @type {NotebookSessionStatementBatchInformation || null}
+         */
+        this.NotebookSessionStatements = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4678,16 +9194,292 @@ class DescribeDatabasesResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DatabaseList) {
-            this.DatabaseList = new Array();
-            for (let z in params.DatabaseList) {
-                let obj = new DatabaseResponseInfo();
-                obj.deserialize(params.DatabaseList[z]);
-                this.DatabaseList.push(obj);
+        if (params.NotebookSessionStatements) {
+            let obj = new NotebookSessionStatementBatchInformation();
+            obj.deserialize(params.NotebookSessionStatements)
+            this.NotebookSessionStatements = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AttachUserPolicy返回参数结构体
+ * @class
+ */
+class AttachUserPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DropDMSTable请求参数结构体
+ * @class
+ */
+class DropDMSTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 是否删除数据
+         * @type {boolean || null}
+         */
+        this.DeleteData = null;
+
+        /**
+         * 环境属性
+         * @type {KVPair || null}
+         */
+        this.EnvProps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DeleteData = 'DeleteData' in params ? params.DeleteData : null;
+
+        if (params.EnvProps) {
+            let obj = new KVPair();
+            obj.deserialize(params.EnvProps)
+            this.EnvProps = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeNotebookSessionStatementSqlResult返回参数结构体
+ * @class
+ */
+class DescribeNotebookSessionStatementSqlResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 结果数据
+         * @type {string || null}
+         */
+        this.ResultSet = null;
+
+        /**
+         * schema
+         * @type {Array.<Column> || null}
+         */
+        this.ResultSchema = null;
+
+        /**
+         * 分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 存储结果地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OutputPath = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ResultSet = 'ResultSet' in params ? params.ResultSet : null;
+
+        if (params.ResultSchema) {
+            this.ResultSchema = new Array();
+            for (let z in params.ResultSchema) {
+                let obj = new Column();
+                obj.deserialize(params.ResultSchema[z]);
+                this.ResultSchema.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.OutputPath = 'OutputPath' in params ? params.OutputPath : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 迁移元数据分区对象
+ * @class
+ */
+class DMSPartition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 数据目录名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 数据版本
+         * @type {number || null}
+         */
+        this.DataVersion = null;
+
+        /**
+         * 分区名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 值列表
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 存储大小
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * 记录数量
+         * @type {number || null}
+         */
+        this.RecordCount = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * 最后访问时间
+         * @type {string || null}
+         */
+        this.LastAccessTime = null;
+
+        /**
+         * 附件属性
+         * @type {Array.<KVPair> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 存储对象
+         * @type {DMSSds || null}
+         */
+        this.Sds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.DataVersion = 'DataVersion' in params ? params.DataVersion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.RecordCount = 'RecordCount' in params ? params.RecordCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.LastAccessTime = 'LastAccessTime' in params ? params.LastAccessTime : null;
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new KVPair();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+
+        if (params.Sds) {
+            let obj = new DMSSds();
+            obj.deserialize(params.Sds)
+            this.Sds = obj;
+        }
 
     }
 }
@@ -4753,83 +9545,24 @@ class DatabaseInfo extends  AbstractModel {
 }
 
 /**
- * CreateImportTask请求参数结构体
+ * DescribeDMSPartitions返回参数结构体
  * @class
  */
-class CreateImportTaskRequest extends  AbstractModel {
+class DescribeDMSPartitionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据来源，cos
-         * @type {string || null}
+         * 分区信息
+         * @type {Array.<DMSPartition> || null}
          */
-        this.InputType = null;
+        this.Partitions = null;
 
         /**
-         * 输入配置
-         * @type {Array.<KVPair> || null}
+         * 总数
+         * @type {number || null}
          */
-        this.InputConf = null;
-
-        /**
-         * 输出配置
-         * @type {Array.<KVPair> || null}
-         */
-        this.OutputConf = null;
-
-        /**
-         * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
-         * @type {string || null}
-         */
-        this.OutputType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InputType = 'InputType' in params ? params.InputType : null;
-
-        if (params.InputConf) {
-            this.InputConf = new Array();
-            for (let z in params.InputConf) {
-                let obj = new KVPair();
-                obj.deserialize(params.InputConf[z]);
-                this.InputConf.push(obj);
-            }
-        }
-
-        if (params.OutputConf) {
-            this.OutputConf = new Array();
-            for (let z in params.OutputConf) {
-                let obj = new KVPair();
-                obj.deserialize(params.OutputConf[z]);
-                this.OutputConf.push(obj);
-            }
-        }
-        this.OutputType = 'OutputType' in params ? params.OutputType : null;
-
-    }
-}
-
-/**
- * CreateExportTask返回参数结构体
- * @class
- */
-class CreateExportTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
+        this.Total = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4846,7 +9579,44 @@ class CreateExportTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new DMSPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteUsersFromWorkGroup返回参数结构体
+ * @class
+ */
+class DeleteUsersFromWorkGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4881,6 +9651,48 @@ class UnbindWorkGroupsFromUserRequest extends  AbstractModel {
             obj.deserialize(params.AddInfo)
             this.AddInfo = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeDMSDatabase请求参数结构体
+ * @class
+ */
+class DescribeDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 匹配规则
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
 
     }
 }
@@ -4923,67 +9735,6 @@ class DescribeTableRequest extends  AbstractModel {
         this.TableName = 'TableName' in params ? params.TableName : null;
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
-
-    }
-}
-
-/**
- * 数据格式其它类型。
- * @class
- */
-class Other extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
-         * @type {string || null}
-         */
-        this.Format = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Format = 'Format' in params ? params.Format : null;
-
-    }
-}
-
-/**
- * DeleteUsersFromWorkGroup请求参数结构体
- * @class
- */
-class DeleteUsersFromWorkGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 要删除的用户信息
-         * @type {UserIdSetOfWorkGroupId || null}
-         */
-        this.AddInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.AddInfo) {
-            let obj = new UserIdSetOfWorkGroupId();
-            obj.deserialize(params.AddInfo)
-            this.AddInfo = obj;
-        }
 
     }
 }
@@ -5133,10 +9884,91 @@ class Policy extends  AbstractModel {
 }
 
 /**
- * CreateSparkApp返回参数结构体
+ * 日志详情
  * @class
  */
-class CreateSparkAppResponse extends  AbstractModel {
+class JobLogResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志时间戳，毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * 日志topic id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 日志topic name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 日志内容，json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogJson = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogJson = 'LogJson' in params ? params.LogJson : null;
+
+    }
+}
+
+/**
+ * 数据格式其它类型。
+ * @class
+ */
+class Other extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+
+    }
+}
+
+/**
+ * DropDMSDatabase返回参数结构体
+ * @class
+ */
+class DropDMSDatabaseResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5155,6 +9987,183 @@ class CreateSparkAppResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUsers请求参数结构体
+ * @class
+ */
+class DescribeUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定查询的子用户uin，用户需要通过CreateUser接口创建。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认20，最大值100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序字段，支持如下字段类型，create-time
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 排序方式，desc表示正序，asc表示反序， 默认为asc
+         * @type {string || null}
+         */
+        this.Sorting = null;
+
+        /**
+         * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.Sorting = 'Sorting' in params ? params.Sorting : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteUsersFromWorkGroup请求参数结构体
+ * @class
+ */
+class DeleteUsersFromWorkGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的用户信息
+         * @type {UserIdSetOfWorkGroupId || null}
+         */
+        this.AddInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddInfo) {
+            let obj = new UserIdSetOfWorkGroupId();
+            obj.deserialize(params.AddInfo)
+            this.AddInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 列排序对象
+ * @class
+ */
+class DMSColumnOrder extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 列名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Col = null;
+
+        /**
+         * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Col = 'Col' in params ? params.Col : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * CreateSparkApp返回参数结构体
+ * @class
+ */
+class CreateSparkAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * App唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkAppId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SparkAppId = 'SparkAppId' in params ? params.SparkAppId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5201,6 +10210,34 @@ class CreateTaskResponse extends  AbstractModel {
  * @class
  */
 class DeleteSparkAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AlterDMSPartition返回参数结构体
+ * @class
+ */
+class AlterDMSPartitionResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5274,6 +10311,41 @@ class CreateTasksRequest extends  AbstractModel {
         }
         this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
         this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+
+    }
+}
+
+/**
+ * SuspendResumeDataEngine请求参数结构体
+ * @class
+ */
+class SuspendResumeDataEngineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟集群名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * 操作类型 suspend/resume
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -5363,6 +10435,70 @@ class DescribeSparkAppJobsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSparkAppTasks返回参数结构体
+ * @class
+ */
+class DescribeSparkAppTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务结果（该字段已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TaskResponseInfo || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * 任务总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TaskResponseInfo> || null}
+         */
+        this.SparkAppTasks = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tasks) {
+            let obj = new TaskResponseInfo();
+            obj.deserialize(params.Tasks)
+            this.Tasks = obj;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SparkAppTasks) {
+            this.SparkAppTasks = new Array();
+            for (let z in params.SparkAppTasks) {
+                let obj = new TaskResponseInfo();
+                obj.deserialize(params.SparkAppTasks[z]);
+                this.SparkAppTasks.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5498,18 +10634,68 @@ class TableResponseInfo extends  AbstractModel {
 }
 
 /**
- * AddUsersToWorkGroup返回参数结构体
+ * DescribeViews请求参数结构体
  * @class
  */
-class AddUsersToWorkGroupResponse extends  AbstractModel {
+class DescribeViewsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 列出该数据库下所属数据表。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DatabaseName = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 数据偏移量，从0开始，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件，如下支持的过滤类型，传参Name应为其一
+view-name - String - （过滤条件）数据表名称,形如：view-001。
+view-id - String - （过滤条件）view id形如：12342。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 数据库所属的数据源名称
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+        /**
+         * 排序规则，true:升序；false:降序
+         * @type {boolean || null}
+         */
+        this.Asc = null;
+
+        /**
+         * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -5520,7 +10706,87 @@ class AddUsersToWorkGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * LockMetaData请求参数结构体
+ * @class
+ */
+class LockMetaDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加锁内容
+         * @type {Array.<LockComponentInfo> || null}
+         */
+        this.LockComponentList = null;
+
+        /**
+         * 数据源名称
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 事务id
+         * @type {number || null}
+         */
+        this.TxnId = null;
+
+        /**
+         * 客户端信息
+         * @type {string || null}
+         */
+        this.AgentInfo = null;
+
+        /**
+         * 主机名
+         * @type {string || null}
+         */
+        this.Hostname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LockComponentList) {
+            this.LockComponentList = new Array();
+            for (let z in params.LockComponentList) {
+                let obj = new LockComponentInfo();
+                obj.deserialize(params.LockComponentList[z]);
+                this.LockComponentList.push(obj);
+            }
+        }
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.TxnId = 'TxnId' in params ? params.TxnId : null;
+        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
+        this.Hostname = 'Hostname' in params ? params.Hostname : null;
 
     }
 }
@@ -5625,6 +10891,55 @@ class DescribeWorkGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * 任务概览
+ * @class
+ */
+class TasksOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 正在排队的任务个数
+         * @type {number || null}
+         */
+        this.TaskQueuedCount = null;
+
+        /**
+         * 初始化的任务个数
+         * @type {number || null}
+         */
+        this.TaskInitCount = null;
+
+        /**
+         * 正在执行的任务个数
+         * @type {number || null}
+         */
+        this.TaskRunningCount = null;
+
+        /**
+         * 当前时间范围的总任务个数
+         * @type {number || null}
+         */
+        this.TotalTaskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskQueuedCount = 'TaskQueuedCount' in params ? params.TaskQueuedCount : null;
+        this.TaskInitCount = 'TaskInitCount' in params ? params.TaskInitCount : null;
+        this.TaskRunningCount = 'TaskRunningCount' in params ? params.TaskRunningCount : null;
+        this.TotalTaskCount = 'TotalTaskCount' in params ? params.TotalTaskCount : null;
+
+    }
+}
+
+/**
  * CreateTasks返回参数结构体
  * @class
  */
@@ -5661,6 +10976,56 @@ class CreateTasksResponse extends  AbstractModel {
         }
         this.BatchId = 'BatchId' in params ? params.BatchId : null;
         this.TaskIdSet = 'TaskIdSet' in params ? params.TaskIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNotebookSession返回参数结构体
+ * @class
+ */
+class CreateNotebookSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Spark任务返回的AppId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SparkAppId = null;
+
+        /**
+         * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SparkAppId = 'SparkAppId' in params ? params.SparkAppId : null;
+        this.State = 'State' in params ? params.State : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5800,6 +11165,36 @@ class CreateSparkAppRequest extends  AbstractModel {
          */
         this.AppPythonFiles = null;
 
+        /**
+         * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+         * @type {string || null}
+         */
+        this.IsLocalArchives = null;
+
+        /**
+         * archives：依赖资源
+         * @type {string || null}
+         */
+        this.AppArchives = null;
+
+        /**
+         * Spark Image 版本
+         * @type {string || null}
+         */
+        this.SparkImage = null;
+
+        /**
+         * Spark Image 版本名称
+         * @type {string || null}
+         */
+        this.SparkImageVersion = null;
+
+        /**
+         * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
+         * @type {number || null}
+         */
+        this.AppExecutorMaxNumbers = null;
+
     }
 
     /**
@@ -5830,15 +11225,167 @@ class CreateSparkAppRequest extends  AbstractModel {
         this.DataSource = 'DataSource' in params ? params.DataSource : null;
         this.IsLocalPythonFiles = 'IsLocalPythonFiles' in params ? params.IsLocalPythonFiles : null;
         this.AppPythonFiles = 'AppPythonFiles' in params ? params.AppPythonFiles : null;
+        this.IsLocalArchives = 'IsLocalArchives' in params ? params.IsLocalArchives : null;
+        this.AppArchives = 'AppArchives' in params ? params.AppArchives : null;
+        this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
+        this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
+        this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
 
     }
 }
 
 /**
- * UnbindWorkGroupsFromUser返回参数结构体
+ * DescribeDataEngines请求参数结构体
  * @class
  */
-class UnbindWorkGroupsFromUserResponse extends  AbstractModel {
+class DescribeDataEnginesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 滤类型，传参Name应为以下其中一个,
+data-engine-name - String 
+engine-type - String
+state - String 
+mode - String 
+create-time - String 
+message - String
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段，支持如下字段类型，create-time
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+         * @type {string || null}
+         */
+        this.Sorting = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 已废弃，请使用DatasourceConnectionNameSet
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * 是否不返回共享引擎，true不返回共享引擎，false可以返回共享引擎
+         * @type {boolean || null}
+         */
+        this.ExcludePublicEngine = null;
+
+        /**
+         * 参数应该为引擎权限类型，有效类型："USE", "MODIFY", "OPERATE", "MONITOR", "DELETE"
+         * @type {Array.<string> || null}
+         */
+        this.AccessTypes = null;
+
+        /**
+         * 引擎执行任务类型，有效值：SQL/BATCH
+         * @type {string || null}
+         */
+        this.EngineExecType = null;
+
+        /**
+         * 引擎类型，有效值：spark/presto
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎
+         * @type {Array.<string> || null}
+         */
+        this.DatasourceConnectionNameSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.Sorting = 'Sorting' in params ? params.Sorting : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.ExcludePublicEngine = 'ExcludePublicEngine' in params ? params.ExcludePublicEngine : null;
+        this.AccessTypes = 'AccessTypes' in params ? params.AccessTypes : null;
+        this.EngineExecType = 'EngineExecType' in params ? params.EngineExecType : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.DatasourceConnectionNameSet = 'DatasourceConnectionNameSet' in params ? params.DatasourceConnectionNameSet : null;
+
+    }
+}
+
+/**
+ * DropDMSPartitions返回参数结构体
+ * @class
+ */
+class DropDMSPartitionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AlterDMSDatabase返回参数结构体
+ * @class
+ */
+class AlterDMSDatabaseResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5920,6 +11467,358 @@ class CreateWorkGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreateInternalTable返回参数结构体
+ * @class
+ */
+class CreateInternalTableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建托管存储内表sql语句描述
+         * @type {string || null}
+         */
+        this.Execution = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Execution = 'Execution' in params ? params.Execution : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DataEngine详细信息
+ * @class
+ */
+class DataEngineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DataEngine名称
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * 引擎类型 spark/presto
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * 集群资源类型 spark_private/presto_private/presto_cu/spark_cu
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 引用ID
+         * @type {string || null}
+         */
+        this.QuotaId = null;
+
+        /**
+         * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 计费模式 0共享模式 1按量计费 2包年包月
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 最小集群数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinClusters = null;
+
+        /**
+         * 最大集群数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxClusters = null;
+
+        /**
+         * 是否自动恢复
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AutoResume = null;
+
+        /**
+         * 自动恢复时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SpendAfter = null;
+
+        /**
+         * 集群网段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 是否为默认引擎
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DefaultDataEngine = null;
+
+        /**
+         * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 引擎id
+         * @type {string || null}
+         */
+        this.DataEngineId = null;
+
+        /**
+         * 操作者
+         * @type {string || null}
+         */
+        this.SubAccountUin = null;
+
+        /**
+         * 到期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 隔离时间
+         * @type {string || null}
+         */
+        this.IsolatedTime = null;
+
+        /**
+         * 冲正时间
+         * @type {string || null}
+         */
+        this.ReversalTime = null;
+
+        /**
+         * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserAlias = null;
+
+        /**
+         * 标签对集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * 引擎拥有的权限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AutoSuspend = null;
+
+        /**
+         * 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CrontabResumeSuspend = null;
+
+        /**
+         * 定时启停策略，复杂类型：包含启停时间、挂起集群策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CrontabResumeSuspendStrategy || null}
+         */
+        this.CrontabResumeSuspendStrategy = null;
+
+        /**
+         * 引擎执行任务类型，有效值：SQL/BATCH
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EngineExecType = null;
+
+        /**
+         * 自动续费标志，0，初始状态，默认不自动续费，若用户有预付费不停服特权，自动续费。1：自动续费。2：明确不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 集群自动挂起时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AutoSuspendTime = null;
+
+        /**
+         * 网络连接配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NetworkConnection> || null}
+         */
+        this.NetworkConnectionSet = null;
+
+        /**
+         * ui的跳转地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UiURL = null;
+
+        /**
+         * 引擎的资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 集群镜像版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageVersionId = null;
+
+        /**
+         * 集群镜像小版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChildImageVersionId = null;
+
+        /**
+         * 集群镜像版本名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageVersionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.MinClusters = 'MinClusters' in params ? params.MinClusters : null;
+        this.MaxClusters = 'MaxClusters' in params ? params.MaxClusters : null;
+        this.AutoResume = 'AutoResume' in params ? params.AutoResume : null;
+        this.SpendAfter = 'SpendAfter' in params ? params.SpendAfter : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.DefaultDataEngine = 'DefaultDataEngine' in params ? params.DefaultDataEngine : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.DataEngineId = 'DataEngineId' in params ? params.DataEngineId : null;
+        this.SubAccountUin = 'SubAccountUin' in params ? params.SubAccountUin : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.ReversalTime = 'ReversalTime' in params ? params.ReversalTime : null;
+        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.AutoSuspend = 'AutoSuspend' in params ? params.AutoSuspend : null;
+        this.CrontabResumeSuspend = 'CrontabResumeSuspend' in params ? params.CrontabResumeSuspend : null;
+
+        if (params.CrontabResumeSuspendStrategy) {
+            let obj = new CrontabResumeSuspendStrategy();
+            obj.deserialize(params.CrontabResumeSuspendStrategy)
+            this.CrontabResumeSuspendStrategy = obj;
+        }
+        this.EngineExecType = 'EngineExecType' in params ? params.EngineExecType : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.AutoSuspendTime = 'AutoSuspendTime' in params ? params.AutoSuspendTime : null;
+
+        if (params.NetworkConnectionSet) {
+            this.NetworkConnectionSet = new Array();
+            for (let z in params.NetworkConnectionSet) {
+                let obj = new NetworkConnection();
+                obj.deserialize(params.NetworkConnectionSet[z]);
+                this.NetworkConnectionSet.push(obj);
+            }
+        }
+        this.UiURL = 'UiURL' in params ? params.UiURL : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ImageVersionId = 'ImageVersionId' in params ? params.ImageVersionId : null;
+        this.ChildImageVersionId = 'ChildImageVersionId' in params ? params.ChildImageVersionId : null;
+        this.ImageVersionName = 'ImageVersionName' in params ? params.ImageVersionName : null;
+
+    }
+}
+
+/**
  * DescribeSparkAppTasks请求参数结构体
  * @class
  */
@@ -5945,6 +11844,30 @@ class DescribeSparkAppTasksRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 执行实例id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 更新时间起始点
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 更新时间截止点
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 按照该参数过滤,支持task-state
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -5957,6 +11880,156 @@ class DescribeSparkAppTasksRequest extends  AbstractModel {
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * LockMetaData返回参数结构体
+ * @class
+ */
+class LockMetaDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 锁id
+         * @type {number || null}
+         */
+        this.LockId = null;
+
+        /**
+         * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+         * @type {string || null}
+         */
+        this.LockState = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockId = 'LockId' in params ? params.LockId : null;
+        this.LockState = 'LockState' in params ? params.LockState : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckLockMetaData返回参数结构体
+ * @class
+ */
+class CheckLockMetaDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 锁ID
+         * @type {number || null}
+         */
+        this.LockId = null;
+
+        /**
+         * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+         * @type {string || null}
+         */
+        this.LockState = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockId = 'LockId' in params ? params.LockId : null;
+        this.LockState = 'LockState' in params ? params.LockState : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AlterDMSDatabase请求参数结构体
+ * @class
+ */
+class AlterDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前名称
+         * @type {string || null}
+         */
+        this.CurrentName = null;
+
+        /**
+         * schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 路径
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 基础对象
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentName = 'CurrentName' in params ? params.CurrentName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
 
     }
 }
@@ -6062,112 +12135,6 @@ class UserMessage extends  AbstractModel {
 }
 
 /**
- * 数据库和数据表属性信息
- * @class
- */
-class Property extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 属性key名称。
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * 属性key对应的value。
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * AttachUserPolicy返回参数结构体
- * @class
- */
-class AttachUserPolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DetachWorkGroupPolicy请求参数结构体
- * @class
- */
-class DetachWorkGroupPolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 工作组Id
-         * @type {number || null}
-         */
-        this.WorkGroupId = null;
-
-        /**
-         * 解绑的权限集合
-         * @type {Array.<Policy> || null}
-         */
-        this.PolicySet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.WorkGroupId = 'WorkGroupId' in params ? params.WorkGroupId : null;
-
-        if (params.PolicySet) {
-            this.PolicySet = new Array();
-            for (let z in params.PolicySet) {
-                let obj = new Policy();
-                obj.deserialize(params.PolicySet[z]);
-                this.PolicySet.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DescribeViews返回参数结构体
  * @class
  */
@@ -6218,54 +12185,113 @@ class DescribeViewsResponse extends  AbstractModel {
 }
 
 /**
- * 数据表数据格式。
+ * 数据库和数据表属性信息
  * @class
  */
-class DataFormat extends  AbstractModel {
+class Property extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本格式，TextFile。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TextFile || null}
+         * 属性key名称。
+         * @type {string || null}
          */
-        this.TextFile = null;
+        this.Key = null;
 
         /**
-         * 文本格式，CSV。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CSV || null}
+         * 属性key对应的value。
+         * @type {string || null}
          */
-        this.CSV = null;
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreateResultDownload请求参数结构体
+ * @class
+ */
+class CreateResultDownloadRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 文本格式，Json。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Other || null}
+         * 查询结果任务Id
+         * @type {string || null}
          */
-        this.Json = null;
+        this.TaskId = null;
 
         /**
-         * Parquet格式
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Other || null}
+         * 下载格式
+         * @type {string || null}
          */
-        this.Parquet = null;
+        this.Format = null;
 
         /**
-         * ORC格式
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Other || null}
+         * 是否重新生成下载文件，仅当之前任务为 Timout | Error 时有效
+         * @type {boolean || null}
          */
-        this.ORC = null;
+        this.Force = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Force = 'Force' in params ? params.Force : null;
+
+    }
+}
+
+/**
+ * CreateDMSDatabase请求参数结构体
+ * @class
+ */
+class CreateDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * AVRO格式
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Other || null}
+         * 基础元数据对象
+         * @type {Asset || null}
          */
-        this.AVRO = null;
+        this.Asset = null;
+
+        /**
+         * Schema目录
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * Db存储路径
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.Name = null;
 
     }
 
@@ -6277,41 +12303,286 @@ class DataFormat extends  AbstractModel {
             return;
         }
 
-        if (params.TextFile) {
-            let obj = new TextFile();
-            obj.deserialize(params.TextFile)
-            this.TextFile = obj;
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DetachWorkGroupPolicy请求参数结构体
+ * @class
+ */
+class DetachWorkGroupPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作组Id
+         * @type {number || null}
+         */
+        this.WorkGroupId = null;
+
+        /**
+         * 解绑的权限集合
+         * @type {Array.<Policy> || null}
+         */
+        this.PolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WorkGroupId = 'WorkGroupId' in params ? params.WorkGroupId : null;
+
+        if (params.PolicySet) {
+            this.PolicySet = new Array();
+            for (let z in params.PolicySet) {
+                let obj = new Policy();
+                obj.deserialize(params.PolicySet[z]);
+                this.PolicySet.push(obj);
+            }
         }
 
-        if (params.CSV) {
-            let obj = new CSV();
-            obj.deserialize(params.CSV)
-            this.CSV = obj;
+    }
+}
+
+/**
+ * DescribeDMSTable请求参数结构体
+ * @class
+ */
+class DescribeDMSTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 数据库schema名称
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 数据目录
+         * @type {string || null}
+         */
+        this.Catalog = null;
+
+        /**
+         * 查询关键词
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * 查询模式
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 表类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Catalog = 'Catalog' in params ? params.Catalog : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * ModifyGovernEventRule请求参数结构体
+ * @class
+ */
+class ModifyGovernEventRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
-        if (params.Json) {
-            let obj = new Other();
-            obj.deserialize(params.Json)
-            this.Json = obj;
+    }
+}
+
+/**
+ * CancelNotebookSessionStatementBatch请求参数结构体
+ * @class
+ */
+class CancelNotebookSessionStatementBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session唯一标识
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 批任务唯一标识
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
+ * DescribeDataEngines返回参数结构体
+ * @class
+ */
+class DescribeDataEnginesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据引擎列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DataEngineInfo> || null}
+         */
+        this.DataEngines = null;
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
-        if (params.Parquet) {
-            let obj = new Other();
-            obj.deserialize(params.Parquet)
-            this.Parquet = obj;
+        if (params.DataEngines) {
+            this.DataEngines = new Array();
+            for (let z in params.DataEngines) {
+                let obj = new DataEngineInfo();
+                obj.deserialize(params.DataEngines[z]);
+                this.DataEngines.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeScripts返回参数结构体
+ * @class
+ */
+class DescribeScriptsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Script列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Script> || null}
+         */
+        this.Scripts = null;
+
+        /**
+         * 实例总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
-        if (params.ORC) {
-            let obj = new Other();
-            obj.deserialize(params.ORC)
-            this.ORC = obj;
+        if (params.Scripts) {
+            this.Scripts = new Array();
+            for (let z in params.Scripts) {
+                let obj = new Script();
+                obj.deserialize(params.Scripts[z]);
+                this.Scripts.push(obj);
+            }
         }
-
-        if (params.AVRO) {
-            let obj = new Other();
-            obj.deserialize(params.AVRO)
-            this.AVRO = obj;
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6358,6 +12629,41 @@ class DatabaseResponseInfo extends  AbstractModel {
          */
         this.ModifiedTime = null;
 
+        /**
+         * cos存储路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 建库用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserAlias = null;
+
+        /**
+         * 建库用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserSubUin = null;
+
+        /**
+         * 数据治理配置项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DataGovernPolicy || null}
+         */
+        this.GovernPolicy = null;
+
+        /**
+         * 数据库ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatabaseId = null;
+
     }
 
     /**
@@ -6380,127 +12686,410 @@ class DatabaseResponseInfo extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
+        this.UserSubUin = 'UserSubUin' in params ? params.UserSubUin : null;
+
+        if (params.GovernPolicy) {
+            let obj = new DataGovernPolicy();
+            obj.deserialize(params.GovernPolicy)
+            this.GovernPolicy = obj;
+        }
+        this.DatabaseId = 'DatabaseId' in params ? params.DatabaseId : null;
+
+    }
+}
+
+/**
+ * 迁移列对象
+ * @class
+ */
+class DMSColumn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Position = null;
+
+        /**
+         * 附加参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 业务参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KVPair> || null}
+         */
+        this.BizParams = null;
+
+        /**
+         * 是否分区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsPartition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Position = 'Position' in params ? params.Position : null;
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new KVPair();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+
+        if (params.BizParams) {
+            this.BizParams = new Array();
+            for (let z in params.BizParams) {
+                let obj = new KVPair();
+                obj.deserialize(params.BizParams[z]);
+                this.BizParams.push(obj);
+            }
+        }
+        this.IsPartition = 'IsPartition' in params ? params.IsPartition : null;
+
+    }
+}
+
+/**
+ * 表字段描述信息
+ * @class
+ */
+class TColumn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 字段名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 字段类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 字段描述
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 字段默认值
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * 字段是否是非空
+         * @type {boolean || null}
+         */
+        this.NotNull = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.NotNull = 'NotNull' in params ? params.NotNull : null;
+
+    }
+}
+
+/**
+ * DescribeResultDownload请求参数结构体
+ * @class
+ */
+class DescribeResultDownloadRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询任务Id
+         * @type {string || null}
+         */
+        this.DownloadId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadId = 'DownloadId' in params ? params.DownloadId : null;
 
     }
 }
 
 module.exports = {
+    DescribeResultDownloadResponse: DescribeResultDownloadResponse,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
+    DescribeNotebookSessionStatementRequest: DescribeNotebookSessionStatementRequest,
+    CancelNotebookSessionStatementRequest: CancelNotebookSessionStatementRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     WorkGroupMessage: WorkGroupMessage,
     DeleteUserRequest: DeleteUserRequest,
-    DescribeSparkAppJobRequest: DescribeSparkAppJobRequest,
+    ListTaskJobLogDetailResponse: ListTaskJobLogDetailResponse,
+    Asset: Asset,
+    CreateResultDownloadResponse: CreateResultDownloadResponse,
+    ModifyGovernEventRuleResponse: ModifyGovernEventRuleResponse,
+    DescribeNotebookSessionsRequest: DescribeNotebookSessionsRequest,
+    CreateDMSDatabaseResponse: CreateDMSDatabaseResponse,
     CreateStoreLocationResponse: CreateStoreLocationResponse,
+    DescribeNotebookSessionResponse: DescribeNotebookSessionResponse,
+    DescribeDMSDatabaseResponse: DescribeDMSDatabaseResponse,
+    UnbindWorkGroupsFromUserResponse: UnbindWorkGroupsFromUserResponse,
+    DropDMSDatabaseRequest: DropDMSDatabaseRequest,
     CreateScriptResponse: CreateScriptResponse,
     CreateTasksInOrderResponse: CreateTasksInOrderResponse,
     DescribeTablesResponse: DescribeTablesResponse,
     SparkJobInfo: SparkJobInfo,
+    SuspendResumeDataEngineResponse: SuspendResumeDataEngineResponse,
     DeleteSparkAppRequest: DeleteSparkAppRequest,
     ModifyUserResponse: ModifyUserResponse,
     DeleteScriptResponse: DeleteScriptResponse,
     TableInfo: TableInfo,
     Task: Task,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
-    DescribeSparkAppTasksResponse: DescribeSparkAppTasksResponse,
+    CrontabResumeSuspendStrategy: CrontabResumeSuspendStrategy,
+    AlterDMSTableResponse: AlterDMSTableResponse,
     DescribeTasksResponse: DescribeTasksResponse,
+    DescribeDMSTableResponse: DescribeDMSTableResponse,
+    DropDMSPartitionsRequest: DropDMSPartitionsRequest,
+    NotebookSessions: NotebookSessions,
+    CreateNotebookSessionStatementSupportBatchSQLRequest: CreateNotebookSessionStatementSupportBatchSQLRequest,
     CreateTasksInOrderRequest: CreateTasksInOrderRequest,
+    AddDMSPartitionsResponse: AddDMSPartitionsResponse,
     DetachWorkGroupPolicyResponse: DetachWorkGroupPolicyResponse,
+    GenerateCreateMangedTableSqlRequest: GenerateCreateMangedTableSqlRequest,
     CSVSerde: CSVSerde,
     ModifySparkAppRequest: ModifySparkAppRequest,
+    StreamingStatistics: StreamingStatistics,
     CreateDatabaseRequest: CreateDatabaseRequest,
+    GenerateCreateMangedTableSqlResponse: GenerateCreateMangedTableSqlResponse,
+    DescribeDMSTablesResponse: DescribeDMSTablesResponse,
     UserIdSetOfWorkGroupId: UserIdSetOfWorkGroupId,
+    AlterDMSPartitionRequest: AlterDMSPartitionRequest,
     ViewBaseInfo: ViewBaseInfo,
+    CheckLockMetaDataRequest: CheckLockMetaDataRequest,
+    DescribeSparkAppJobRequest: DescribeSparkAppJobRequest,
     CreateDatabaseResponse: CreateDatabaseResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     CreateSparkAppTaskRequest: CreateSparkAppTaskRequest,
-    DeleteWorkGroupRequest: DeleteWorkGroupRequest,
+    CancelNotebookSessionStatementBatchResponse: CancelNotebookSessionStatementBatchResponse,
     KVPair: KVPair,
     TableBaseInfo: TableBaseInfo,
+    UnlockMetaDataRequest: UnlockMetaDataRequest,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
+    CreateInternalTableRequest: CreateInternalTableRequest,
+    ListTaskJobLogDetailRequest: ListTaskJobLogDetailRequest,
     TasksInfo: TasksInfo,
     AttachWorkGroupPolicyRequest: AttachWorkGroupPolicyRequest,
+    StatementOutput: StatementOutput,
+    TagInfo: TagInfo,
     CreateUserResponse: CreateUserResponse,
+    DescribeNotebookSessionStatementsRequest: DescribeNotebookSessionStatementsRequest,
     DeleteUserResponse: DeleteUserResponse,
-    CreateStoreLocationRequest: CreateStoreLocationRequest,
+    DescribeDatabasesResponse: DescribeDatabasesResponse,
+    LockComponentInfo: LockComponentInfo,
+    DescribeNotebookSessionsResponse: DescribeNotebookSessionsResponse,
+    DescribeDMSPartitionsRequest: DescribeDMSPartitionsRequest,
+    TPartition: TPartition,
     DescribeSparkAppJobsRequest: DescribeSparkAppJobsRequest,
+    DeleteNotebookSessionRequest: DeleteNotebookSessionRequest,
+    CreateDMSTableResponse: CreateDMSTableResponse,
+    CreateNotebookSessionRequest: CreateNotebookSessionRequest,
     Partition: Partition,
     CreateTaskRequest: CreateTaskRequest,
-    ModifySparkAppResponse: ModifySparkAppResponse,
+    DescribeNotebookSessionRequest: DescribeNotebookSessionRequest,
     CSV: CSV,
+    NotebookSessionStatementInfo: NotebookSessionStatementInfo,
     CreateTableRequest: CreateTableRequest,
+    CreateNotebookSessionStatementRequest: CreateNotebookSessionStatementRequest,
     DescribeWorkGroupsResponse: DescribeWorkGroupsResponse,
-    DescribeUsersRequest: DescribeUsersRequest,
+    CreateImportTaskRequest: CreateImportTaskRequest,
     DescribeScriptsRequest: DescribeScriptsRequest,
     DescribeSparkAppJobResponse: DescribeSparkAppJobResponse,
-    DeleteUsersFromWorkGroupResponse: DeleteUsersFromWorkGroupResponse,
+    CreateExportTaskResponse: CreateExportTaskResponse,
     AddUsersToWorkGroupRequest: AddUsersToWorkGroupRequest,
     DescribeStoreLocationRequest: DescribeStoreLocationRequest,
-    DescribeViewsRequest: DescribeViewsRequest,
+    AddUsersToWorkGroupResponse: AddUsersToWorkGroupResponse,
+    DescribeNotebookSessionLogRequest: DescribeNotebookSessionLogRequest,
     UserInfo: UserInfo,
     CreateExportTaskRequest: CreateExportTaskRequest,
+    DescribeNotebookSessionStatementResponse: DescribeNotebookSessionStatementResponse,
+    ReportHeartbeatMetaDataResponse: ReportHeartbeatMetaDataResponse,
+    ReportHeartbeatMetaDataRequest: ReportHeartbeatMetaDataRequest,
+    CreateDMSTableRequest: CreateDMSTableRequest,
+    CancelNotebookSessionStatementResponse: CancelNotebookSessionStatementResponse,
+    DMSTable: DMSTable,
     AttachWorkGroupPolicyResponse: AttachWorkGroupPolicyResponse,
     ModifyWorkGroupResponse: ModifyWorkGroupResponse,
+    DescribeDMSTablesRequest: DescribeDMSTablesRequest,
     ModifyUserRequest: ModifyUserRequest,
-    StreamingStatistics: StreamingStatistics,
+    DMSSds: DMSSds,
     CreateSparkAppTaskResponse: CreateSparkAppTaskResponse,
     CancelTaskRequest: CancelTaskRequest,
     TaskResponseInfo: TaskResponseInfo,
     TextFile: TextFile,
     BindWorkGroupsToUserResponse: BindWorkGroupsToUserResponse,
+    CreateNotebookSessionStatementResponse: CreateNotebookSessionStatementResponse,
     DescribeStoreLocationResponse: DescribeStoreLocationResponse,
     DeleteScriptRequest: DeleteScriptRequest,
+    AddDMSPartitionsRequest: AddDMSPartitionsRequest,
     Script: Script,
+    NotebookSessionStatementBatchInformation: NotebookSessionStatementBatchInformation,
+    DescribeNotebookSessionStatementSqlResultRequest: DescribeNotebookSessionStatementSqlResultRequest,
+    ModifySparkAppResponse: ModifySparkAppResponse,
+    AlterDMSTableRequest: AlterDMSTableRequest,
     CreateImportTaskResponse: CreateImportTaskResponse,
+    NotebookSessionInfo: NotebookSessionInfo,
     Execution: Execution,
     CreateTableResponse: CreateTableResponse,
     WorkGroupInfo: WorkGroupInfo,
+    CreateNotebookSessionStatementSupportBatchSQLResponse: CreateNotebookSessionStatementSupportBatchSQLResponse,
     CreateScriptRequest: CreateScriptRequest,
     BindWorkGroupsToUserRequest: BindWorkGroupsToUserRequest,
     Column: Column,
+    DeleteWorkGroupRequest: DeleteWorkGroupRequest,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
     Filter: Filter,
     DescribeUsersResponse: DescribeUsersResponse,
-    DescribeScriptsResponse: DescribeScriptsResponse,
+    DataFormat: DataFormat,
+    DescribeNotebookSessionLogResponse: DescribeNotebookSessionLogResponse,
     ViewResponseInfo: ViewResponseInfo,
+    NetworkConnection: NetworkConnection,
     CreateUserRequest: CreateUserRequest,
     ModifyWorkGroupRequest: ModifyWorkGroupRequest,
     CancelTaskResponse: CancelTaskResponse,
+    DataGovernPolicy: DataGovernPolicy,
+    UnlockMetaDataResponse: UnlockMetaDataResponse,
     DeleteWorkGroupResponse: DeleteWorkGroupResponse,
+    DropDMSTableResponse: DropDMSTableResponse,
     WorkGroupIdSetOfUserId: WorkGroupIdSetOfUserId,
     CreateWorkGroupResponse: CreateWorkGroupResponse,
     TaskResultInfo: TaskResultInfo,
     DescribeTablesRequest: DescribeTablesRequest,
-    DescribeDatabasesResponse: DescribeDatabasesResponse,
+    DeleteNotebookSessionResponse: DeleteNotebookSessionResponse,
+    CreateStoreLocationRequest: CreateStoreLocationRequest,
+    DMSTableInfo: DMSTableInfo,
+    DescribeNotebookSessionStatementsResponse: DescribeNotebookSessionStatementsResponse,
+    AttachUserPolicyResponse: AttachUserPolicyResponse,
+    DropDMSTableRequest: DropDMSTableRequest,
+    DescribeNotebookSessionStatementSqlResultResponse: DescribeNotebookSessionStatementSqlResultResponse,
+    DMSPartition: DMSPartition,
     DatabaseInfo: DatabaseInfo,
-    CreateImportTaskRequest: CreateImportTaskRequest,
-    CreateExportTaskResponse: CreateExportTaskResponse,
+    DescribeDMSPartitionsResponse: DescribeDMSPartitionsResponse,
+    DeleteUsersFromWorkGroupResponse: DeleteUsersFromWorkGroupResponse,
     UnbindWorkGroupsFromUserRequest: UnbindWorkGroupsFromUserRequest,
+    DescribeDMSDatabaseRequest: DescribeDMSDatabaseRequest,
     DescribeTableRequest: DescribeTableRequest,
-    Other: Other,
-    DeleteUsersFromWorkGroupRequest: DeleteUsersFromWorkGroupRequest,
     Policy: Policy,
+    JobLogResult: JobLogResult,
+    Other: Other,
+    DropDMSDatabaseResponse: DropDMSDatabaseResponse,
+    DescribeUsersRequest: DescribeUsersRequest,
+    DeleteUsersFromWorkGroupRequest: DeleteUsersFromWorkGroupRequest,
+    DMSColumnOrder: DMSColumnOrder,
     CreateSparkAppResponse: CreateSparkAppResponse,
     CreateTaskResponse: CreateTaskResponse,
     DeleteSparkAppResponse: DeleteSparkAppResponse,
+    AlterDMSPartitionResponse: AlterDMSPartitionResponse,
     CreateTasksRequest: CreateTasksRequest,
+    SuspendResumeDataEngineRequest: SuspendResumeDataEngineRequest,
     DescribeTableResponse: DescribeTableResponse,
     DescribeSparkAppJobsResponse: DescribeSparkAppJobsResponse,
+    DescribeSparkAppTasksResponse: DescribeSparkAppTasksResponse,
     TableResponseInfo: TableResponseInfo,
-    AddUsersToWorkGroupResponse: AddUsersToWorkGroupResponse,
+    DescribeViewsRequest: DescribeViewsRequest,
+    LockMetaDataRequest: LockMetaDataRequest,
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     DescribeWorkGroupsRequest: DescribeWorkGroupsRequest,
+    TasksOverview: TasksOverview,
     CreateTasksResponse: CreateTasksResponse,
+    CreateNotebookSessionResponse: CreateNotebookSessionResponse,
     CreateSparkAppRequest: CreateSparkAppRequest,
-    UnbindWorkGroupsFromUserResponse: UnbindWorkGroupsFromUserResponse,
+    DescribeDataEnginesRequest: DescribeDataEnginesRequest,
+    DropDMSPartitionsResponse: DropDMSPartitionsResponse,
+    AlterDMSDatabaseResponse: AlterDMSDatabaseResponse,
     CreateWorkGroupRequest: CreateWorkGroupRequest,
+    CreateInternalTableResponse: CreateInternalTableResponse,
+    DataEngineInfo: DataEngineInfo,
     DescribeSparkAppTasksRequest: DescribeSparkAppTasksRequest,
+    LockMetaDataResponse: LockMetaDataResponse,
+    CheckLockMetaDataResponse: CheckLockMetaDataResponse,
+    AlterDMSDatabaseRequest: AlterDMSDatabaseRequest,
     SQLTask: SQLTask,
     UserMessage: UserMessage,
-    Property: Property,
-    AttachUserPolicyResponse: AttachUserPolicyResponse,
-    DetachWorkGroupPolicyRequest: DetachWorkGroupPolicyRequest,
     DescribeViewsResponse: DescribeViewsResponse,
-    DataFormat: DataFormat,
+    Property: Property,
+    CreateResultDownloadRequest: CreateResultDownloadRequest,
+    CreateDMSDatabaseRequest: CreateDMSDatabaseRequest,
+    DetachWorkGroupPolicyRequest: DetachWorkGroupPolicyRequest,
+    DescribeDMSTableRequest: DescribeDMSTableRequest,
+    ModifyGovernEventRuleRequest: ModifyGovernEventRuleRequest,
+    CancelNotebookSessionStatementBatchRequest: CancelNotebookSessionStatementBatchRequest,
+    DescribeDataEnginesResponse: DescribeDataEnginesResponse,
+    DescribeScriptsResponse: DescribeScriptsResponse,
     DatabaseResponseInfo: DatabaseResponseInfo,
+    DMSColumn: DMSColumn,
+    TColumn: TColumn,
+    DescribeResultDownloadRequest: DescribeResultDownloadRequest,
 
 }

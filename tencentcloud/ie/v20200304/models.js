@@ -56,6 +56,36 @@ hq: 针对高清晰度视频超分;
 }
 
 /**
+ * 动图参数
+ * @class
+ */
+class DynamicImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 画面质量，范围：1~100。
+<li>对于webp格式，默认：75</li>
+<li>对于gif格式，小于10为低质量，大于50为高质量，其它为普通。默认：低质量。</li>
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quality = 'Quality' in params ? params.Quality : null;
+
+    }
+}
+
+/**
  * 编辑处理/拼接任务/处理结果
  * @class
  */
@@ -322,6 +352,16 @@ class MediaCuttingTaskResult extends  AbstractModel {
          */
         this.LastFile = null;
 
+        /**
+         * 任务结果包含的图片总数。
+静态图：总数即为文件数；
+雪碧图：所有小图总数；
+动图、视频：不计算图片数，为 0。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ImageCount = null;
+
     }
 
     /**
@@ -350,6 +390,7 @@ class MediaCuttingTaskResult extends  AbstractModel {
             obj.deserialize(params.LastFile)
             this.LastFile = obj;
         }
+        this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
 
     }
 }
@@ -390,7 +431,8 @@ class CoverTaskResultItem extends  AbstractModel {
 }
 
 /**
- * 编辑处理/剪切任务信息
+ * 编辑处理/剪切任务信息。
+截图结果默认存在 SaveInfoSet 的第一个存储位置。
  * @class
  */
 class MediaCuttingInfo extends  AbstractModel {
@@ -417,11 +459,24 @@ class MediaCuttingInfo extends  AbstractModel {
 
         /**
          * 列表文件形式，存储到用户存储服务中，可选值：
-UseSaveInfo：默认，结果列表和结果存储同一位置；
-NoListFile：不存储结果列表。
+<li>NoListFile：不存储结果列表; </li>
+<li>UseSaveInfo：默认，结果列表和结果存储同一位置（即SaveInfoSet 的第一个存储位置）；</li>
+<li>SaveInfoSet 存储的Id：存储在指定的存储位置。</li>
          * @type {string || null}
          */
         this.ResultListSaveType = null;
+
+        /**
+         * 水印信息，最多支持 10 个水印。
+         * @type {Array.<MediaCuttingWatermark> || null}
+         */
+        this.WatermarkInfoSet = null;
+
+        /**
+         * 是否去除纯色截图，如果值为 True ，对应时间点的截图如果是纯色，将略过。
+         * @type {string || null}
+         */
+        this.DropPureColor = null;
 
     }
 
@@ -451,6 +506,16 @@ NoListFile：不存储结果列表。
             this.OutForm = obj;
         }
         this.ResultListSaveType = 'ResultListSaveType' in params ? params.ResultListSaveType : null;
+
+        if (params.WatermarkInfoSet) {
+            this.WatermarkInfoSet = new Array();
+            for (let z in params.WatermarkInfoSet) {
+                let obj = new MediaCuttingWatermark();
+                obj.deserialize(params.WatermarkInfoSet[z]);
+                this.WatermarkInfoSet.push(obj);
+            }
+        }
+        this.DropPureColor = 'DropPureColor' in params ? params.DropPureColor : null;
 
     }
 }
@@ -562,13 +627,13 @@ class TargetVideoInfo extends  AbstractModel {
         super();
 
         /**
-         * 视频宽度，单位像素
+         * 视频宽度，单位像素，一般要求是偶数，否则会向下对齐。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 视频高度，单位像素
+         * 视频高度，单位像素，一般要求是偶数，否则会向下对齐。
          * @type {number || null}
          */
         this.Height = null;
@@ -1380,6 +1445,13 @@ class SaveInfo extends  AbstractModel {
          */
         this.CosInfo = null;
 
+        /**
+         * 存储信息ID标记，用于多个输出场景。部分任务支持多输出时，一般要求必选。
+ID只能包含字母、数字、下划线、中划线，长读不能超过128。
+         * @type {string || null}
+         */
+        this.Id = null;
+
     }
 
     /**
@@ -1396,6 +1468,7 @@ class SaveInfo extends  AbstractModel {
             obj.deserialize(params.CosInfo)
             this.CosInfo = obj;
         }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1844,6 +1917,13 @@ class TaskResultFile extends  AbstractModel {
          */
         this.MediaInfo = null;
 
+        /**
+         * 文件对应的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
     }
 
     /**
@@ -1861,6 +1941,7 @@ class TaskResultFile extends  AbstractModel {
             obj.deserialize(params.MediaInfo)
             this.MediaInfo = obj;
         }
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -2136,7 +2217,7 @@ class ResultVideoInfo extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 视频帧率
+         * 视频帧率，如果高于原始帧率，部分服务将无效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2257,6 +2338,14 @@ class MediaJoiningInfo extends  AbstractModel {
          */
         this.TargetInfo = null;
 
+        /**
+         * 拼接模式：
+Fast：快速；
+Normal：正常；
+         * @type {string || null}
+         */
+        this.Mode = null;
+
     }
 
     /**
@@ -2272,6 +2361,94 @@ class MediaJoiningInfo extends  AbstractModel {
             obj.deserialize(params.TargetInfo)
             this.TargetInfo = obj;
         }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+    }
+}
+
+/**
+ * 媒体剪切文字水印参数。
+ * @class
+ */
+class MediaCuttingWatermarkText extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印文字。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 文字大小
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * 水印水平坐标，单位像素，默认：0。
+         * @type {number || null}
+         */
+        this.PosX = null;
+
+        /**
+         * 水印垂直坐标，单位像素，默认：0。
+         * @type {number || null}
+         */
+        this.PosY = null;
+
+        /**
+         * 文字颜色，格式为：#RRGGBBAA，默认值：#000000。
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * 文字透明度，范围：0~100，默认值：100。
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+        /**
+         * 指定坐标原点，可选值：
+<li>LeftTop：PosXY 表示水印左上点到图片左上点的相对位置</li>
+<li>RightTop：PosXY 表示水印右上点到图片右上点的相对位置</li>
+<li>LeftBottom：PosXY 表示水印左下点到图片左下点的相对位置</li>
+<li>RightBottom：PosXY 表示水印右下点到图片右下点的相对位置</li>
+<li>Center：PosXY 表示水印中心点到图片中心点的相对位置</li>
+默认：LeftTop。
+         * @type {string || null}
+         */
+        this.PosOriginType = null;
+
+        /**
+         * 字体，可选值：
+<li>SimHei</li>
+<li>SimKai</li>
+<li>Arial</li>
+默认 SimHei。
+         * @type {string || null}
+         */
+        this.Font = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.PosX = 'PosX' in params ? params.PosX : null;
+        this.PosY = 'PosY' in params ? params.PosY : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+        this.PosOriginType = 'PosOriginType' in params ? params.PosOriginType : null;
+        this.Font = 'Font' in params ? params.Font : null;
 
     }
 }
@@ -2447,9 +2624,7 @@ index：序号；
         this.TargetVideoInfo = null;
 
         /**
-         * 【不再使用】 对于多输出任务，部分子服务推荐结果信息以列表文件形式，存储到用户存储服务中，可选值：
-UseSaveInfo：默认，结果列表和结果存储同一位置；
-NoListFile：不存储结果列表。
+         * 【不再使用】
          * @type {string || null}
          */
         this.ResultListSaveType = null;
@@ -3391,16 +3566,28 @@ Gaussian：高斯模糊；
         this.FillType = null;
 
         /**
-         * Type=Sprite时有效，表示雪碧图行数，范围为 [1,200]，默认100。
+         * 【废弃】参考SpriteInfo
          * @type {number || null}
          */
         this.SpriteRowCount = null;
 
         /**
-         * Type=Sprite时有效，表示雪碧图列数，范围为 [1,200]，默认100。
+         * 【废弃】参考SpriteInfo
          * @type {number || null}
          */
         this.SpriteColumnCount = null;
+
+        /**
+         * Type=Sprite时有效，表示雪碧图参数信息。
+         * @type {SpriteImageInfo || null}
+         */
+        this.SpriteInfo = null;
+
+        /**
+         * Type=Dynamic时有效，表示动图参数信息。
+         * @type {DynamicImageInfo || null}
+         */
+        this.DynamicInfo = null;
 
     }
 
@@ -3415,6 +3602,18 @@ Gaussian：高斯模糊；
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.SpriteRowCount = 'SpriteRowCount' in params ? params.SpriteRowCount : null;
         this.SpriteColumnCount = 'SpriteColumnCount' in params ? params.SpriteColumnCount : null;
+
+        if (params.SpriteInfo) {
+            let obj = new SpriteImageInfo();
+            obj.deserialize(params.SpriteInfo)
+            this.SpriteInfo = obj;
+        }
+
+        if (params.DynamicInfo) {
+            let obj = new DynamicImageInfo();
+            obj.deserialize(params.DynamicInfo)
+            this.DynamicInfo = obj;
+        }
 
     }
 }
@@ -4521,6 +4720,82 @@ class CosInfo extends  AbstractModel {
 }
 
 /**
+ * 媒体剪切图像水印参数。
+ * @class
+ */
+class MediaCuttingWatermarkImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印源的ID，对应SourceInfoSet内的源。
+注意1：对应的 MediaSourceInfo.Type需要为Image。
+注意2：对于动图，只取第一帧图像作为水印源。
+         * @type {string || null}
+         */
+        this.SourceId = null;
+
+        /**
+         * 水印水平坐标，单位像素，默认：0。
+         * @type {number || null}
+         */
+        this.PosX = null;
+
+        /**
+         * 水印垂直坐标，单位像素，默认：0。
+         * @type {number || null}
+         */
+        this.PosY = null;
+
+        /**
+         * 水印宽度，单位像素，默认：0。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印高度，单位像素，默认：0。
+注意：对于宽高符合以下规则：
+1、Width>0 且 Height>0，按指定宽高拉伸；
+2、Width=0 且 Height>0，以Height为基准等比缩放；
+3、Width>0 且 Height=0，以Width为基准等比缩放；
+4、Width=0 且 Height=0，采用源的宽高。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 指定坐标原点，可选值：
+<li>LeftTop：PosXY 表示水印左上点到图片左上点的相对位置</li>
+<li>RightTop：PosXY 表示水印右上点到图片右上点的相对位置</li>
+<li>LeftBottom：PosXY 表示水印左下点到图片左下点的相对位置</li>
+<li>RightBottom：PosXY 表示水印右下点到图片右下点的相对位置</li>
+<li>Center：PosXY 表示水印中心点到图片中心点的相对位置</li>
+默认：LeftTop。
+         * @type {string || null}
+         */
+        this.PosOriginType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceId = 'SourceId' in params ? params.SourceId : null;
+        this.PosX = 'PosX' in params ? params.PosX : null;
+        this.PosY = 'PosY' in params ? params.PosY : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.PosOriginType = 'PosOriginType' in params ? params.PosOriginType : null;
+
+    }
+}
+
+/**
  * 结果文件媒体信息
  * @class
  */
@@ -4824,6 +5099,12 @@ class CreateMediaQualityRestorationTaskRequest extends  AbstractModel {
          */
         this.CallbackInfo = null;
 
+        /**
+         * 极速高清体验馆渠道标志。
+         * @type {number || null}
+         */
+        this.TopSpeedCodecChannel = null;
+
     }
 
     /**
@@ -4860,6 +5141,7 @@ class CreateMediaQualityRestorationTaskRequest extends  AbstractModel {
             obj.deserialize(params.CallbackInfo)
             this.CallbackInfo = obj;
         }
+        this.TopSpeedCodecChannel = 'TopSpeedCodecChannel' in params ? params.TopSpeedCodecChannel : null;
 
     }
 }
@@ -5275,6 +5557,105 @@ class DescribeMediaProcessTaskResultRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 雪碧图参数信息
+注意：雪碧图大图整体的宽和高都不能大于 65000 像素。
+ * @class
+ */
+class SpriteImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表示雪碧图行数，默认：10。
+         * @type {number || null}
+         */
+        this.RowCount = null;
+
+        /**
+         * 表示雪碧图列数，默认：10。
+         * @type {number || null}
+         */
+        this.ColumnCount = null;
+
+        /**
+         * 第一行元素与顶部像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.MarginTop = null;
+
+        /**
+         * 最后一行元素与底部像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.MarginBottom = null;
+
+        /**
+         * 最左一行元素与左边像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.MarginLeft = null;
+
+        /**
+         * 最右一行元素与右边像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.MarginRight = null;
+
+        /**
+         * 小图与元素顶部像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.PaddingTop = null;
+
+        /**
+         * 小图与元素底部像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.PaddingBottom = null;
+
+        /**
+         * 小图与元素左边像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.PaddingLeft = null;
+
+        /**
+         * 小图与元素右边像素距离，默认：0。
+         * @type {number || null}
+         */
+        this.PaddingRight = null;
+
+        /**
+         * 背景颜色，格式：#RRGGBB，默认：#FFFFFF。
+         * @type {string || null}
+         */
+        this.BackgroundColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RowCount = 'RowCount' in params ? params.RowCount : null;
+        this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
+        this.MarginTop = 'MarginTop' in params ? params.MarginTop : null;
+        this.MarginBottom = 'MarginBottom' in params ? params.MarginBottom : null;
+        this.MarginLeft = 'MarginLeft' in params ? params.MarginLeft : null;
+        this.MarginRight = 'MarginRight' in params ? params.MarginRight : null;
+        this.PaddingTop = 'PaddingTop' in params ? params.PaddingTop : null;
+        this.PaddingBottom = 'PaddingBottom' in params ? params.PaddingBottom : null;
+        this.PaddingLeft = 'PaddingLeft' in params ? params.PaddingLeft : null;
+        this.PaddingRight = 'PaddingRight' in params ? params.PaddingRight : null;
+        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
 
     }
 }
@@ -5771,8 +6152,63 @@ class HighlightsTaskResultItemSegment extends  AbstractModel {
     }
 }
 
+/**
+ * 媒体剪切水印信息。
+ * @class
+ */
+class MediaCuttingWatermark extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印类型，可选值：
+<li>Image：图像水印；</li>
+<li>Text：文字水印。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 图像水印信息，当 Type=Image 时必选。
+         * @type {MediaCuttingWatermarkImage || null}
+         */
+        this.Image = null;
+
+        /**
+         * 文字水印信息，当 Type=Text 时必选。
+         * @type {MediaCuttingWatermarkText || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Image) {
+            let obj = new MediaCuttingWatermarkImage();
+            obj.deserialize(params.Image)
+            this.Image = obj;
+        }
+
+        if (params.Text) {
+            let obj = new MediaCuttingWatermarkText();
+            obj.deserialize(params.Text)
+            this.Text = obj;
+        }
+
+    }
+}
+
 module.exports = {
     VideoSuperResolution: VideoSuperResolution,
+    DynamicImageInfo: DynamicImageInfo,
     MediaJoiningTaskResult: MediaJoiningTaskResult,
     Denoise: Denoise,
     StripTaskResultItem: StripTaskResultItem,
@@ -5819,6 +6255,7 @@ module.exports = {
     ResultVideoInfo: ResultVideoInfo,
     PicMarkInfoItem: PicMarkInfoItem,
     MediaJoiningInfo: MediaJoiningInfo,
+    MediaCuttingWatermarkText: MediaCuttingWatermarkText,
     DescribeMediaQualityRestorationTaskRusultRequest: DescribeMediaQualityRestorationTaskRusultRequest,
     ColorEnhance: ColorEnhance,
     SegmentInfo: SegmentInfo,
@@ -5858,6 +6295,7 @@ module.exports = {
     TagTaskResult: TagTaskResult,
     AudioEnhance: AudioEnhance,
     CosInfo: CosInfo,
+    MediaCuttingWatermarkImage: MediaCuttingWatermarkImage,
     MediaResultInfo: MediaResultInfo,
     FrameTagResult: FrameTagResult,
     TextMarkInfoItem: TextMarkInfoItem,
@@ -5872,6 +6310,7 @@ module.exports = {
     CoverEditingInfo: CoverEditingInfo,
     SubtitleItem: SubtitleItem,
     DescribeMediaProcessTaskResultRequest: DescribeMediaProcessTaskResultRequest,
+    SpriteImageInfo: SpriteImageInfo,
     MediaProcessTaskResult: MediaProcessTaskResult,
     EditingTaskResult: EditingTaskResult,
     MediaProcessInfo: MediaProcessInfo,
@@ -5879,5 +6318,6 @@ module.exports = {
     TagItem: TagItem,
     DescribeMediaProcessTaskResultResponse: DescribeMediaProcessTaskResultResponse,
     HighlightsTaskResultItemSegment: HighlightsTaskResultItemSegment,
+    MediaCuttingWatermark: MediaCuttingWatermark,
 
 }

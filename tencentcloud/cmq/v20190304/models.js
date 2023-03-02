@@ -1146,16 +1146,16 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * 过滤参数的名字
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
          * 数值
          * @type {Array.<string> || null}
          */
         this.Values = null;
+
+        /**
+         * 过滤参数的名字
+         * @type {string || null}
+         */
+        this.Name = null;
 
     }
 
@@ -1166,8 +1166,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }

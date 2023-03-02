@@ -17,213 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * SendMultiSms返回参数结构体
- * @class
- */
-class SendMultiSmsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 短信流水数组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SmsRet> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SmsRet();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 物联网卡应用信息详情
- * @class
- */
-class AppInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用ID
-         * @type {string || null}
-         */
-        this.Sdkappid = null;
-
-        /**
-         * 应用key
-         * @type {string || null}
-         */
-        this.Appkey = null;
-
-        /**
-         * 用户appid
-         * @type {string || null}
-         */
-        this.CloudAppid = null;
-
-        /**
-         * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 应用描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 应用类型
-         * @type {number || null}
-         */
-        this.BizType = null;
-
-        /**
-         * 用户Uin
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
-        this.Appkey = 'Appkey' in params ? params.Appkey : null;
-        this.CloudAppid = 'CloudAppid' in params ? params.CloudAppid : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.BizType = 'BizType' in params ? params.BizType : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-
-    }
-}
-
-/**
- * RenewCards返回参数结构体
- * @class
- */
-class RenewCardsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 续费成功的订单id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ResRenew || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new ResRenew();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 卡片列表数据
- * @class
- */
-class CardList extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 卡片总数
-         * @type {string || null}
-         */
-        this.Total = null;
-
-        /**
-         * 卡片列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<CardInfo> || null}
-         */
-        this.List = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new CardInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DescribeCards返回参数结构体
  * @class
  */
@@ -259,48 +52,6 @@ class DescribeCardsResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyUserCardRemark请求参数结构体
- * @class
- */
-class ModifyUserCardRemarkRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用ID
-         * @type {number || null}
-         */
-        this.Sdkappid = null;
-
-        /**
-         * 物联卡ICCID
-         * @type {string || null}
-         */
-        this.Iccid = null;
-
-        /**
-         * 备注信息，限50字
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
-        this.Iccid = 'Iccid' in params ? params.Iccid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -583,82 +334,6 @@ class CardInfo extends  AbstractModel {
 }
 
 /**
- * DescribeApp返回参数结构体
- * @class
- */
-class DescribeAppResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用信息详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {AppInfo || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new AppInfo();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCard请求参数结构体
- * @class
- */
-class DescribeCardRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用ID
-         * @type {number || null}
-         */
-        this.Sdkappid = null;
-
-        /**
-         * 卡片ID
-         * @type {string || null}
-         */
-        this.Iccid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
-        this.Iccid = 'Iccid' in params ? params.Iccid : null;
-
-    }
-}
-
-/**
  * DescribeApp请求参数结构体
  * @class
  */
@@ -687,17 +362,16 @@ class DescribeAppRequest extends  AbstractModel {
 }
 
 /**
- * SendSms返回参数结构体
+ * PayForExtendData返回参数结构体
  * @class
  */
-class SendSmsResponse extends  AbstractModel {
+class PayForExtendDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 短信流水信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {SmsSid || null}
+         * 订单号
+         * @type {ResOrderIds || null}
          */
         this.Data = null;
 
@@ -718,7 +392,7 @@ class SendSmsResponse extends  AbstractModel {
         }
 
         if (params.Data) {
-            let obj = new SmsSid();
+            let obj = new ResOrderIds();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -728,38 +402,10 @@ class SendSmsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyUserCardRemark返回参数结构体
+ * ModifyUserCardRemark请求参数结构体
  * @class
  */
-class ModifyUserCardRemarkResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendSms请求参数结构体
- * @class
- */
-class SendSmsRequest extends  AbstractModel {
+class ModifyUserCardRemarkRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -770,16 +416,16 @@ class SendSmsRequest extends  AbstractModel {
         this.Sdkappid = null;
 
         /**
-         * 卡片ID
+         * 物联卡ICCID
          * @type {string || null}
          */
         this.Iccid = null;
 
         /**
-         * 短信内容长度70限制
+         * 备注信息，限50字
          * @type {string || null}
          */
-        this.Content = null;
+        this.Remark = null;
 
     }
 
@@ -792,49 +438,7 @@ class SendSmsRequest extends  AbstractModel {
         }
         this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
         this.Iccid = 'Iccid' in params ? params.Iccid : null;
-        this.Content = 'Content' in params ? params.Content : null;
-
-    }
-}
-
-/**
- * DescribeCards请求参数结构体
- * @class
- */
-class DescribeCardsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用ID
-         * @type {string || null}
-         */
-        this.Sdkappid = null;
-
-        /**
-         * 偏移值
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 列表限制
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -911,6 +515,339 @@ class ResRenew extends  AbstractModel {
 }
 
 /**
+ * 订单ID集合
+ * @class
+ */
+class ResOrderIds extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每一张续费卡片的订单ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
+
+    }
+}
+
+/**
+ * DescribeSms返回参数结构体
+ * @class
+ */
+class DescribeSmsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 短信列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ResSms> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ResSms();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 查询短信列表
+ * @class
+ */
+class ResSms extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卡片ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+        /**
+         * 卡片号码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Msisdn = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SdkAppid = null;
+
+        /**
+         * 短信内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 短信类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * 发送时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SendTime = null;
+
+        /**
+         * 推送时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReportTime = null;
+
+        /**
+         * SUCC：成功  FAIL 失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 回执状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+        this.Msisdn = 'Msisdn' in params ? params.Msisdn : null;
+        this.SdkAppid = 'SdkAppid' in params ? params.SdkAppid : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.SendTime = 'SendTime' in params ? params.SendTime : null;
+        this.ReportTime = 'ReportTime' in params ? params.ReportTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeApp返回参数结构体
+ * @class
+ */
+class DescribeAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AppInfo || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new AppInfo();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCard请求参数结构体
+ * @class
+ */
+class DescribeCardRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 卡片ID
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+
+    }
+}
+
+/**
+ * SendSms返回参数结构体
+ * @class
+ */
+class SendSmsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信流水信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SmsSid || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new SmsSid();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendSms请求参数结构体
+ * @class
+ */
+class SendSmsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 卡片ID
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+        /**
+         * 短信内容长度70限制
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
  * 短信流水信息
  * @class
  */
@@ -960,6 +897,167 @@ class SmsRet extends  AbstractModel {
 }
 
 /**
+ * 物联网卡应用信息详情
+ * @class
+ */
+class AppInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 应用key
+         * @type {string || null}
+         */
+        this.Appkey = null;
+
+        /**
+         * 用户appid
+         * @type {string || null}
+         */
+        this.CloudAppid = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 应用描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 应用类型
+         * @type {number || null}
+         */
+        this.BizType = null;
+
+        /**
+         * 用户Uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Appkey = 'Appkey' in params ? params.Appkey : null;
+        this.CloudAppid = 'CloudAppid' in params ? params.CloudAppid : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+
+    }
+}
+
+/**
+ * RenewCards返回参数结构体
+ * @class
+ */
+class RenewCardsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 续费成功的订单id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ResRenew || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ResRenew();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PayForExtendData请求参数结构体
+ * @class
+ */
+class PayForExtendDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卡片ICCID
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+        /**
+         * 套外流量,单位MB
+         * @type {number || null}
+         */
+        this.ExtentData = null;
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+        this.ExtentData = 'ExtentData' in params ? params.ExtentData : null;
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+
+    }
+}
+
+/**
  * 短信流水信息
  * @class
  */
@@ -991,6 +1089,241 @@ class SmsSid extends  AbstractModel {
         }
         this.Iccid = 'Iccid' in params ? params.Iccid : null;
         this.Sid = 'Sid' in params ? params.Sid : null;
+
+    }
+}
+
+/**
+ * SendMultiSms返回参数结构体
+ * @class
+ */
+class SendMultiSmsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信流水数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SmsRet> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SmsRet();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 卡片列表数据
+ * @class
+ */
+class CardList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卡片总数
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * 卡片列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CardInfo> || null}
+         */
+        this.List = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new CardInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeSms请求参数结构体
+ * @class
+ */
+class DescribeSmsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 卡片ID
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+        /**
+         * 卡片号码
+         * @type {string || null}
+         */
+        this.Msisdn = null;
+
+        /**
+         * 短信类型
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * 开始时间  YYYY-MM-DD HH:mm:ss
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间  YYYY-MM-DD HH:mm:ss
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 小于200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+        this.Msisdn = 'Msisdn' in params ? params.Msisdn : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyUserCardRemark返回参数结构体
+ * @class
+ */
+class ModifyUserCardRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCards请求参数结构体
+ * @class
+ */
+class DescribeCardsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 偏移值
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 列表限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1038,25 +1371,31 @@ class RenewCardsRequest extends  AbstractModel {
 }
 
 module.exports = {
-    SendMultiSmsResponse: SendMultiSmsResponse,
-    AppInfo: AppInfo,
-    RenewCardsResponse: RenewCardsResponse,
-    CardList: CardList,
     DescribeCardsResponse: DescribeCardsResponse,
-    ModifyUserCardRemarkRequest: ModifyUserCardRemarkRequest,
     DescribeCardResponse: DescribeCardResponse,
     CardInfo: CardInfo,
-    DescribeAppResponse: DescribeAppResponse,
-    DescribeCardRequest: DescribeCardRequest,
     DescribeAppRequest: DescribeAppRequest,
-    SendSmsResponse: SendSmsResponse,
-    ModifyUserCardRemarkResponse: ModifyUserCardRemarkResponse,
-    SendSmsRequest: SendSmsRequest,
-    DescribeCardsRequest: DescribeCardsRequest,
+    PayForExtendDataResponse: PayForExtendDataResponse,
+    ModifyUserCardRemarkRequest: ModifyUserCardRemarkRequest,
     SendMultiSmsRequest: SendMultiSmsRequest,
     ResRenew: ResRenew,
+    ResOrderIds: ResOrderIds,
+    DescribeSmsResponse: DescribeSmsResponse,
+    ResSms: ResSms,
+    DescribeAppResponse: DescribeAppResponse,
+    DescribeCardRequest: DescribeCardRequest,
+    SendSmsResponse: SendSmsResponse,
+    SendSmsRequest: SendSmsRequest,
     SmsRet: SmsRet,
+    AppInfo: AppInfo,
+    RenewCardsResponse: RenewCardsResponse,
+    PayForExtendDataRequest: PayForExtendDataRequest,
     SmsSid: SmsSid,
+    SendMultiSmsResponse: SendMultiSmsResponse,
+    CardList: CardList,
+    DescribeSmsRequest: DescribeSmsRequest,
+    ModifyUserCardRemarkResponse: ModifyUserCardRemarkResponse,
+    DescribeCardsRequest: DescribeCardsRequest,
     RenewCardsRequest: RenewCardsRequest,
 
 }

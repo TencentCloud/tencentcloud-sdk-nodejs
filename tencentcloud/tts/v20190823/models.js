@@ -37,6 +37,12 @@ class TextToVoiceResponse extends  AbstractModel {
         this.SessionId = null;
 
         /**
+         * 时间戳信息，若未开启时间戳，则返回空数组。
+         * @type {Array.<Subtitle> || null}
+         */
+        this.Subtitles = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -53,6 +59,15 @@ class TextToVoiceResponse extends  AbstractModel {
         }
         this.Audio = 'Audio' in params ? params.Audio : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+        if (params.Subtitles) {
+            this.Subtitles = new Array();
+            for (let z in params.Subtitles) {
+                let obj = new Subtitle();
+                obj.deserialize(params.Subtitles[z]);
+                this.Subtitles.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -223,6 +238,62 @@ class DescribeTtsTaskStatusRespData extends  AbstractModel {
 }
 
 /**
+ * 时间戳信息。
+ * @class
+ */
+class Subtitle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ⽂本信息。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * ⽂本对应tts语⾳开始时间戳，单位ms。
+         * @type {number || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * ⽂本对应tts语⾳结束时间戳，单位ms。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 该字在整句中的开始位置，从0开始。
+         * @type {number || null}
+         */
+        this.BeginIndex = null;
+
+        /**
+         * 该字在整句中的结束位置，从0开始。
+         * @type {number || null}
+         */
+        this.EndIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.BeginIndex = 'BeginIndex' in params ? params.BeginIndex : null;
+        this.EndIndex = 'EndIndex' in params ? params.EndIndex : null;
+
+    }
+}
+
+/**
  * DescribeTtsTaskStatus请求参数结构体
  * @class
  */
@@ -289,7 +360,11 @@ class CreateTtsTaskRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 标准音色<li>10510000-智逍遥，旁对白阅读风格男声</li><li>1001-智瑜，情感女声</li><li>1002-智聆，通用女声</li><li>1003-智美，客服女声</li><li>1004-智云，通用男声</li><li>1005-智莉，通用女声</li><li>1007-智娜，客服女声</li><li>1008-智琪，客服女声</li><li>1009-智芸，知性女声</li><li>1010-智华，通用男声</li><li>1017-智蓉，情感女声</li><li>1018-智靖，情感男声</li><li>1050-WeJack，英文男声</li><li>1051-WeRose，英文女声</li>精品音色<br>精品音色拟真度更高，价格不同于标准音色，查看[购买指南](https://cloud.tencent.com/product/tts/pricing)<br><li>100510000-智逍遥，旁对白阅读风格男声（精品）</li><li>101001-智瑜，情感女声（精品）</li><li>101002-智聆，通用女声（精品）</li><li>101003-智美，客服女声（精品）</li><li>101004-智云，通用男声（精品）</li><li>101005-智莉，通用女声（精品）</li><li>101006-智言，助手女声</li><li>101007-智娜，客服女声（精品）</li><li>101008-智琪，客服女声（精品）</li><li>101009-智芸，知性女声（精品）</li><li>101010-智华，通用男声（精品）</li><li>101011-智燕，新闻女声</li><li>101012-智丹，新闻女声</li><li>101013-智辉，新闻男声</li><li>101014-智宁，新闻男声</li><li>101015-智萌，男童声</li><li>101016-智甜，女童声</li><li>101017-智蓉，情感女声（精品）</li><li>101018-智靖，情感男声（精品）</li><li>101019-智彤，粤语女声</li><li>101050-WeJack，英文男声（精品）</li><li>101051-WeRose，英文女声（精品）</li>
+         * 标准音色<li>10510000-智逍遥，旁对白阅读风格男声</li><li>1001-智瑜，情感女声</li><li>1002-智聆，通用女声</li><li>1003-智美，客服女声</li><li>1004-智云，通用男声</li><li>1005-智莉，通用女声</li><li>1007-智娜，客服女声</li><li>1008-智琪，客服女声</li><li>1009-智芸，知性女声</li><li>1010-智华，通用男声</li><li>1017-智蓉，情感女声</li><li>1018-智靖，情感男声</li><li>1050-WeJack，英文男声</li><li>1051-WeRose，英文女声</li>精品音色<br>精品音色拟真度更高，价格不同于标准音色，查看[购买指南](https://cloud.tencent.com/document/product/1073/34112)<br><li>100510000-智逍遥，阅读男声</li><li>101001-智瑜，情感女声</li><li>101002-智聆，通用女声</li><li>101003-智美，客服女声</li><li>101004-智云，通用男声</li><li>101005-智莉，通用女声</li><li>101006-智言，助手女声</li><li>101007-智娜，客服女声</li><li>101008-智琪，客服女声</li><li>101009-智芸，知性女声</li><li>101010-智华，通用男声</li><li>101011-智燕，新闻女声</li><li>101012-智丹，新闻女声</li><li>101013-智辉，新闻男声</li><li>101014-智宁，新闻男声</li><li>101015-智萌，男童声</li><li>101016-智甜，女童声</li><li>101017-智蓉，情感女声</li><li>101018-智靖，情感男声</li><li>101019-智彤，粤语女声</li><li>101020-智刚，新闻男声</li><li>101021-智瑞，新闻男声</li><li>101022-智虹，新闻女声</li><li>101023-智萱，聊天女声</li><li>101024-智皓，聊天男声</li><li>101025-智薇，聊天女声</li><li>101026-智希，通用女声</li><li>101027-智梅，通用女声</li><li>101028-智洁，通用女声</li><li>101029-智凯，通用男声</li><li>101030-智柯，通用男声</li><li>101031-智奎，通用男声</li><li>101032-智芳，通用女声</li><li>101033-智蓓，客服女声</li><li>101034-智莲，通用女声</li><li>101035-智依，通用女声</li><li>101040-智川，四川女声</li><li>101050-WeJack，英文男声</li><li>101051-WeRose，英文女声</li><li>101052-智味，通用男声</li>
+<li>101053-智方，通用男声</li>
+<li>101054-智友，通用男声</li>
+<li>101055-智付，通用女声</li>
+<li>101056-智林，东北男声</li>
          * @type {number || null}
          */
         this.VoiceType = null;
@@ -394,7 +469,11 @@ class TextToVoiceRequest extends  AbstractModel {
         this.ModelType = null;
 
         /**
-         * 标准音色<li>10510000-智逍遥，阅读男声</li><li>1001-智瑜，情感女声</li><li>1002-智聆，通用女声</li><li>1003-智美，客服女声</li><li>1004-智云，通用男声</li><li>1005-智莉，通用女声</li><li>1007-智娜，客服女声</li><li>1008-智琪，客服女声</li><li>1009-智芸，知性女声</li><li>1010-智华，通用男声</li><li>1017-智蓉，情感女声</li><li>1018-智靖，情感男声</li><li>1050-WeJack，英文男声</li><li>1051-WeRose，英文女声</li>精品音色<br>精品音色拟真度更高，价格不同于标准音色，查看[购买指南](https://cloud.tencent.com/product/tts/pricing)<br><li>100510000-智逍遥，阅读男声</li><li>101001-智瑜，情感女声</li><li>101002-智聆，通用女声</li><li>101003-智美，客服女声</li><li>101004-智云，通用男声</li><li>101005-智莉，通用女声</li><li>101006-智言，助手女声</li><li>101007-智娜，客服女声</li><li>101008-智琪，客服女声</li><li>101009-智芸，知性女声</li><li>101010-智华，通用男声</li><li>101011-智燕，新闻女声</li><li>101012-智丹，新闻女声</li><li>101013-智辉，新闻男声</li><li>101014-智宁，新闻男声</li><li>101015-智萌，男童声</li><li>101016-智甜，女童声</li><li>101017-智蓉，情感女声</li><li>101018-智靖，情感男声</li><li>101019-智彤，粤语女声</li><li>101020-智刚，新闻男声</li><li>101021-智瑞，新闻男声</li><li>101022-智虹，新闻女声</li><li>101023-智萱，聊天女声</li><li>101024-智皓，聊天男声</li><li>101025-智薇，聊天女声</li><li>101026-智希，通用女声</li><li>101027-智梅，通用女声</li><li>101028-智洁，通用女声</li><li>101029-智凯，通用男声</li><li>101030-智柯，通用男声</li><li>101031-智奎，通用男声</li><li>101032-智芳，通用女声</li><li>101033-智蓓，客服女声</li><li>101034-智莲，通用女声</li><li>101035-智依，通用女声</li><li>101040-智川，四川女声</li><li>101050-WeJack，英文男声</li><li>101051-WeRose，英文女声</li>
+         * 标准音色<li>10510000-智逍遥，阅读男声</li><li>1001-智瑜，情感女声</li><li>1002-智聆，通用女声</li><li>1003-智美，客服女声</li><li>1004-智云，通用男声</li><li>1005-智莉，通用女声</li><li>1007-智娜，客服女声</li><li>1008-智琪，客服女声</li><li>1009-智芸，知性女声</li><li>1010-智华，通用男声</li><li>1017-智蓉，情感女声</li><li>1018-智靖，情感男声</li><li>1050-WeJack，英文男声</li><li>1051-WeRose，英文女声</li>精品音色<br>精品音色拟真度更高，价格不同于标准音色，查看[购买指南](https://cloud.tencent.com/document/product/1073/34112)<br><li>100510000-智逍遥，阅读男声</li><li>101001-智瑜，情感女声</li><li>101002-智聆，通用女声</li><li>101003-智美，客服女声</li><li>101004-智云，通用男声</li><li>101005-智莉，通用女声</li><li>101006-智言，助手女声</li><li>101007-智娜，客服女声</li><li>101008-智琪，客服女声</li><li>101009-智芸，知性女声</li><li>101010-智华，通用男声</li><li>101011-智燕，新闻女声</li><li>101012-智丹，新闻女声</li><li>101013-智辉，新闻男声</li><li>101014-智宁，新闻男声</li><li>101015-智萌，男童声</li><li>101016-智甜，女童声</li><li>101017-智蓉，情感女声</li><li>101018-智靖，情感男声</li><li>101019-智彤，粤语女声</li><li>101020-智刚，新闻男声</li><li>101021-智瑞，新闻男声</li><li>101022-智虹，新闻女声</li><li>101023-智萱，聊天女声</li><li>101024-智皓，聊天男声</li><li>101025-智薇，聊天女声</li><li>101026-智希，通用女声</li><li>101027-智梅，通用女声</li><li>101028-智洁，通用女声</li><li>101029-智凯，通用男声</li><li>101030-智柯，通用男声</li><li>101031-智奎，通用男声</li><li>101032-智芳，通用女声</li><li>101033-智蓓，客服女声</li><li>101034-智莲，通用女声</li><li>101035-智依，通用女声</li><li>101040-智川，四川女声</li><li>101050-WeJack，英文男声</li><li>101051-WeRose，英文女声</li><li>101052-智味，通用男声</li>
+<li>101053-智方，通用男声</li>
+<li>101054-智友，通用男声</li>
+<li>101055-智付，通用女声</li>
+<li>101056-智林，东北男声</li>
          * @type {number || null}
          */
         this.VoiceType = null;
@@ -417,6 +496,18 @@ class TextToVoiceRequest extends  AbstractModel {
          */
         this.Codec = null;
 
+        /**
+         * 是否开启时间戳功能，默认为false。
+         * @type {boolean || null}
+         */
+        this.EnableSubtitle = null;
+
+        /**
+         * 断句敏感阈值，默认值为：0，取值范围：[0,1,2]。该值越大越不容易断句，模型会更倾向于仅按照标点符号断句。此参数建议不要随意调整，可能会影响合成效果。
+         * @type {number || null}
+         */
+        this.SegmentRate = null;
+
     }
 
     /**
@@ -436,6 +527,8 @@ class TextToVoiceRequest extends  AbstractModel {
         this.PrimaryLanguage = 'PrimaryLanguage' in params ? params.PrimaryLanguage : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
+        this.EnableSubtitle = 'EnableSubtitle' in params ? params.EnableSubtitle : null;
+        this.SegmentRate = 'SegmentRate' in params ? params.SegmentRate : null;
 
     }
 }
@@ -446,6 +539,7 @@ module.exports = {
     DescribeTtsTaskStatusResponse: DescribeTtsTaskStatusResponse,
     CreateTtsTaskRespData: CreateTtsTaskRespData,
     DescribeTtsTaskStatusRespData: DescribeTtsTaskStatusRespData,
+    Subtitle: Subtitle,
     DescribeTtsTaskStatusRequest: DescribeTtsTaskStatusRequest,
     CreateTtsTaskRequest: CreateTtsTaskRequest,
     TextToVoiceRequest: TextToVoiceRequest,

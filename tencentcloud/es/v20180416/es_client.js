@@ -16,82 +16,117 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const WebNodeTypeInfo = models.WebNodeTypeInfo;
-const InstanceLog = models.InstanceLog;
-const LocalDiskInfo = models.LocalDiskInfo;
-const IndexPolicyField = models.IndexPolicyField;
-const NodeInfo = models.NodeInfo;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const UpdateJdkRequest = models.UpdateJdkRequest;
-const DescribeIndexMetaResponse = models.DescribeIndexMetaResponse;
-const UpdateInstanceResponse = models.UpdateInstanceResponse;
+const TaskDetail = models.TaskDetail;
+const RestartLogstashInstanceRequest = models.RestartLogstashInstanceRequest;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
-const CreateIndexResponse = models.CreateIndexResponse;
+const LogstashInstanceInfo = models.LogstashInstanceInfo;
 const OperationDetail = models.OperationDetail;
-const DiagnoseInstanceResponse = models.DiagnoseInstanceResponse;
-const KibanaView = models.KibanaView;
+const StartLogstashPipelinesRequest = models.StartLogstashPipelinesRequest;
 const EsPublicAcl = models.EsPublicAcl;
-const BackingIndexMetaField = models.BackingIndexMetaField;
 const DictInfo = models.DictInfo;
-const RestartInstanceResponse = models.RestartInstanceResponse;
-const RestartKibanaRequest = models.RestartKibanaRequest;
+const DescribeLogstashInstanceLogsResponse = models.DescribeLogstashInstanceLogsResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const IndexSettingsField = models.IndexSettingsField;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
-const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
-const ZoneDetail = models.ZoneDetail;
-const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
-const NodeView = models.NodeView;
-const DescribeIndexListRequest = models.DescribeIndexListRequest;
-const CosBackup = models.CosBackup;
-const TagInfo = models.TagInfo;
+const DeleteLogstashPipelinesResponse = models.DeleteLogstashPipelinesResponse;
 const KeyValue = models.KeyValue;
-const CreateInstanceRequest = models.CreateInstanceRequest;
-const UpdateDictionariesResponse = models.UpdateDictionariesResponse;
-const InstanceInfo = models.InstanceInfo;
-const DeleteInstanceResponse = models.DeleteInstanceResponse;
+const UpdateLogstashPipelineDescResponse = models.UpdateLogstashPipelineDescResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
 const IndexMetaField = models.IndexMetaField;
-const UpdatePluginsResponse = models.UpdatePluginsResponse;
 const DiagnoseInstanceRequest = models.DiagnoseInstanceRequest;
-const RestartInstanceRequest = models.RestartInstanceRequest;
-const RestartKibanaResponse = models.RestartKibanaResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const CreateIndexRequest = models.CreateIndexRequest;
-const ClusterView = models.ClusterView;
-const UpdateInstanceRequest = models.UpdateInstanceRequest;
-const EsDictionaryInfo = models.EsDictionaryInfo;
+const LogstashBindedES = models.LogstashBindedES;
+const UpdateDiagnoseSettingsRequest = models.UpdateDiagnoseSettingsRequest;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
-const RestartNodesRequest = models.RestartNodesRequest;
+const IndexOptionsField = models.IndexOptionsField;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const DeleteLogstashInstanceResponse = models.DeleteLogstashInstanceResponse;
+const LogstashPipeline = models.LogstashPipeline;
+const SubTaskDetail = models.SubTaskDetail;
+const EsConfigSetInfo = models.EsConfigSetInfo;
+const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
+const Operation = models.Operation;
+const InstanceLog = models.InstanceLog;
+const NodeInfo = models.NodeInfo;
+const DescribeIndexMetaResponse = models.DescribeIndexMetaResponse;
+const DiagnoseInstanceResponse = models.DiagnoseInstanceResponse;
+const LogstashNodeInfo = models.LogstashNodeInfo;
+const IndexSettingsField = models.IndexSettingsField;
+const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
+const LogstashExtendedFile = models.LogstashExtendedFile;
+const UpdateLogstashInstanceRequest = models.UpdateLogstashInstanceRequest;
+const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
+const DescribeLogstashInstancesResponse = models.DescribeLogstashInstancesResponse;
+const DeleteInstanceResponse = models.DeleteInstanceResponse;
+const DescribeLogstashInstanceOperationsResponse = models.DescribeLogstashInstanceOperationsResponse;
+const CreateIndexRequest = models.CreateIndexRequest;
+const LogstashPipelineInfo = models.LogstashPipelineInfo;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
+const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
+const UpdateJdkResponse = models.UpdateJdkResponse;
+const UpdateInstanceResponse = models.UpdateInstanceResponse;
+const DeleteIndexRequest = models.DeleteIndexRequest;
+const DescribeViewsRequest = models.DescribeViewsRequest;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
+const StartLogstashPipelinesResponse = models.StartLogstashPipelinesResponse;
+const DescribeLogstashInstanceOperationsRequest = models.DescribeLogstashInstanceOperationsRequest;
+const CreateLogstashInstanceResponse = models.CreateLogstashInstanceResponse;
+const SaveAndDeployLogstashPipelineRequest = models.SaveAndDeployLogstashPipelineRequest;
+const ClusterView = models.ClusterView;
+const CreateIndexResponse = models.CreateIndexResponse;
+const DeleteLogstashPipelinesRequest = models.DeleteLogstashPipelinesRequest;
+const RestartKibanaRequest = models.RestartKibanaRequest;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
+const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
+const CosBackup = models.CosBackup;
+const SaveAndDeployLogstashPipelineResponse = models.SaveAndDeployLogstashPipelineResponse;
+const OperationDuration = models.OperationDuration;
+const DescribeLogstashPipelinesResponse = models.DescribeLogstashPipelinesResponse;
+const OperationDurationUpdated = models.OperationDurationUpdated;
+const CreateInstanceRequest = models.CreateInstanceRequest;
+const CreateLogstashInstanceRequest = models.CreateLogstashInstanceRequest;
+const UpdateDictionariesResponse = models.UpdateDictionariesResponse;
+const InstanceInfo = models.InstanceInfo;
+const DeleteIndexResponse = models.DeleteIndexResponse;
+const UpdatePluginsResponse = models.UpdatePluginsResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const EsDictionaryInfo = models.EsDictionaryInfo;
+const DescribeLogstashPipelinesRequest = models.DescribeLogstashPipelinesRequest;
+const RestartNodesRequest = models.RestartNodesRequest;
 const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
+const DescribeLogstashInstancesRequest = models.DescribeLogstashInstancesRequest;
+const MasterNodeInfo = models.MasterNodeInfo;
+const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const DescribeIndexMetaRequest = models.DescribeIndexMetaRequest;
+const RestartKibanaResponse = models.RestartKibanaResponse;
+const UpdateIndexRequest = models.UpdateIndexRequest;
+const UpdateIndexResponse = models.UpdateIndexResponse;
+const WebNodeTypeInfo = models.WebNodeTypeInfo;
+const LocalDiskInfo = models.LocalDiskInfo;
+const IndexPolicyField = models.IndexPolicyField;
+const UpdateJdkRequest = models.UpdateJdkRequest;
+const UpdateLogstashInstanceResponse = models.UpdateLogstashInstanceResponse;
+const StopLogstashPipelinesRequest = models.StopLogstashPipelinesRequest;
+const KibanaView = models.KibanaView;
+const RestartInstanceResponse = models.RestartInstanceResponse;
+const BackingIndexMetaField = models.BackingIndexMetaField;
+const UpdateLogstashPipelineDescRequest = models.UpdateLogstashPipelineDescRequest;
+const NodeView = models.NodeView;
+const TagInfo = models.TagInfo;
+const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const DescribeLogstashInstanceLogsRequest = models.DescribeLogstashInstanceLogsRequest;
+const RestartInstanceRequest = models.RestartInstanceRequest;
+const ZoneDetail = models.ZoneDetail;
+const StopLogstashPipelinesResponse = models.StopLogstashPipelinesResponse;
 const KibanaNodeInfo = models.KibanaNodeInfo;
 const UpdateDiagnoseSettingsResponse = models.UpdateDiagnoseSettingsResponse;
-const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
-const UpdateIndexRequest = models.UpdateIndexRequest;
-const MasterNodeInfo = models.MasterNodeInfo;
-const IndexOptionsField = models.IndexOptionsField;
-const TaskDetail = models.TaskDetail;
-const DeleteInstanceRequest = models.DeleteInstanceRequest;
-const DescribeViewsResponse = models.DescribeViewsResponse;
-const UpdateJdkResponse = models.UpdateJdkResponse;
 const RestartNodesResponse = models.RestartNodesResponse;
-const SubTaskDetail = models.SubTaskDetail;
-const DescribeIndexMetaRequest = models.DescribeIndexMetaRequest;
+const DeleteLogstashInstanceRequest = models.DeleteLogstashInstanceRequest;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
-const DeleteIndexResponse = models.DeleteIndexResponse;
-const DeleteIndexRequest = models.DeleteIndexRequest;
-const EsConfigSetInfo = models.EsConfigSetInfo;
-const DescribeViewsRequest = models.DescribeViewsRequest;
-const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
-const UpdateDiagnoseSettingsRequest = models.UpdateDiagnoseSettingsRequest;
-const DescribeIndexListResponse = models.DescribeIndexListResponse;
-const Operation = models.Operation;
-const UpdateIndexResponse = models.UpdateIndexResponse;
-const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
-const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const DescribeViewsResponse = models.DescribeViewsResponse;
+const RestartLogstashInstanceResponse = models.RestartLogstashInstanceResponse;
+const OptionalWebServiceInfo = models.OptionalWebServiceInfo;
 
 
 /**
@@ -116,6 +151,28 @@ class EsClient extends AbstractClient {
     }
 
     /**
+     * 用于删除Logstash实例
+     * @param {DeleteLogstashInstanceRequest} req
+     * @param {function(string, DeleteLogstashInstanceResponse):void} cb
+     * @public
+     */
+    DeleteLogstashInstance(req, cb) {
+        let resp = new DeleteLogstashInstanceResponse();
+        this.request("DeleteLogstashInstance", req, resp, cb);
+    }
+
+    /**
+     * 更新索引
+     * @param {UpdateIndexRequest} req
+     * @param {function(string, UpdateIndexResponse):void} cb
+     * @public
+     */
+    UpdateIndex(req, cb) {
+        let resp = new UpdateIndexResponse();
+        this.request("UpdateIndex", req, resp, cb);
+    }
+
+    /**
      * 获取接收客户端请求的节点类型
      * @param {GetRequestTargetNodeTypesRequest} req
      * @param {function(string, GetRequestTargetNodeTypesResponse):void} cb
@@ -124,6 +181,17 @@ class EsClient extends AbstractClient {
     GetRequestTargetNodeTypes(req, cb) {
         let resp = new GetRequestTargetNodeTypesResponse();
         this.request("GetRequestTargetNodeTypes", req, resp, cb);
+    }
+
+    /**
+     * 用于批量停止Logstash管道
+     * @param {StopLogstashPipelinesRequest} req
+     * @param {function(string, StopLogstashPipelinesResponse):void} cb
+     * @public
+     */
+    StopLogstashPipelines(req, cb) {
+        let resp = new StopLogstashPipelinesResponse();
+        this.request("StopLogstashPipelines", req, resp, cb);
     }
 
     /**
@@ -160,6 +228,17 @@ class EsClient extends AbstractClient {
     }
 
     /**
+     * 更新接收客户端请求的节点类型
+     * @param {UpdateRequestTargetNodeTypesRequest} req
+     * @param {function(string, UpdateRequestTargetNodeTypesResponse):void} cb
+     * @public
+     */
+    UpdateRequestTargetNodeTypes(req, cb) {
+        let resp = new UpdateRequestTargetNodeTypesResponse();
+        this.request("UpdateRequestTargetNodeTypes", req, resp, cb);
+    }
+
+    /**
      * 更新智能运维配置
      * @param {UpdateDiagnoseSettingsRequest} req
      * @param {function(string, UpdateDiagnoseSettingsResponse):void} cb
@@ -193,6 +272,22 @@ class EsClient extends AbstractClient {
     }
 
     /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，等操作。参数中InstanceId为必传参数，参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeNum: 修改实例节点数量（节点横向扩缩容，纵向扩缩容等）
+- YMLConfig: 修改实例YML配置
+- BindedES：修改绑定的ES集群配置
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     * @param {UpdateLogstashInstanceRequest} req
+     * @param {function(string, UpdateLogstashInstanceResponse):void} cb
+     * @public
+     */
+    UpdateLogstashInstance(req, cb) {
+        let resp = new UpdateLogstashInstanceResponse();
+        this.request("UpdateLogstashInstance", req, resp, cb);
+    }
+
+    /**
      * 更新实例Jdk配置
      * @param {UpdateJdkRequest} req
      * @param {function(string, UpdateJdkResponse):void} cb
@@ -219,6 +314,17 @@ class EsClient extends AbstractClient {
     UpdateInstance(req, cb) {
         let resp = new UpdateInstanceResponse();
         this.request("UpdateInstance", req, resp, cb);
+    }
+
+    /**
+     * 用于创建Logstash实例
+     * @param {CreateLogstashInstanceRequest} req
+     * @param {function(string, CreateLogstashInstanceResponse):void} cb
+     * @public
+     */
+    CreateLogstashInstance(req, cb) {
+        let resp = new CreateLogstashInstanceResponse();
+        this.request("CreateLogstashInstance", req, resp, cb);
     }
 
     /**
@@ -255,25 +361,36 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * 更新ES集群词典
-     * @param {UpdateDictionariesRequest} req
-     * @param {function(string, UpdateDictionariesResponse):void} cb
+     * 用于下发并且部署管道
+     * @param {SaveAndDeployLogstashPipelineRequest} req
+     * @param {function(string, SaveAndDeployLogstashPipelineResponse):void} cb
      * @public
      */
-    UpdateDictionaries(req, cb) {
-        let resp = new UpdateDictionariesResponse();
-        this.request("UpdateDictionaries", req, resp, cb);
+    SaveAndDeployLogstashPipeline(req, cb) {
+        let resp = new SaveAndDeployLogstashPipelineResponse();
+        this.request("SaveAndDeployLogstashPipeline", req, resp, cb);
     }
 
     /**
-     * 更新接收客户端请求的节点类型
-     * @param {UpdateRequestTargetNodeTypesRequest} req
-     * @param {function(string, UpdateRequestTargetNodeTypesResponse):void} cb
+     * 查询实例指定条件下的操作记录
+     * @param {DescribeLogstashInstanceOperationsRequest} req
+     * @param {function(string, DescribeLogstashInstanceOperationsResponse):void} cb
      * @public
      */
-    UpdateRequestTargetNodeTypes(req, cb) {
-        let resp = new UpdateRequestTargetNodeTypesResponse();
-        this.request("UpdateRequestTargetNodeTypes", req, resp, cb);
+    DescribeLogstashInstanceOperations(req, cb) {
+        let resp = new DescribeLogstashInstanceOperationsResponse();
+        this.request("DescribeLogstashInstanceOperations", req, resp, cb);
+    }
+
+    /**
+     * 用于启动Logstash管道
+     * @param {StartLogstashPipelinesRequest} req
+     * @param {function(string, StartLogstashPipelinesResponse):void} cb
+     * @public
+     */
+    StartLogstashPipelines(req, cb) {
+        let resp = new StartLogstashPipelinesResponse();
+        this.request("StartLogstashPipelines", req, resp, cb);
     }
 
     /**
@@ -285,6 +402,39 @@ class EsClient extends AbstractClient {
     DescribeInstanceOperations(req, cb) {
         let resp = new DescribeInstanceOperationsResponse();
         this.request("DescribeInstanceOperations", req, resp, cb);
+    }
+
+    /**
+     * 用于获取Logstash实例管道列表
+     * @param {DescribeLogstashPipelinesRequest} req
+     * @param {function(string, DescribeLogstashPipelinesResponse):void} cb
+     * @public
+     */
+    DescribeLogstashPipelines(req, cb) {
+        let resp = new DescribeLogstashPipelinesResponse();
+        this.request("DescribeLogstashPipelines", req, resp, cb);
+    }
+
+    /**
+     * 查询用户该地域下符合条件的所有Logstash实例
+     * @param {DescribeLogstashInstancesRequest} req
+     * @param {function(string, DescribeLogstashInstancesResponse):void} cb
+     * @public
+     */
+    DescribeLogstashInstances(req, cb) {
+        let resp = new DescribeLogstashInstancesResponse();
+        this.request("DescribeLogstashInstances", req, resp, cb);
+    }
+
+    /**
+     * 用于更新管道描述信息
+     * @param {UpdateLogstashPipelineDescRequest} req
+     * @param {function(string, UpdateLogstashPipelineDescResponse):void} cb
+     * @public
+     */
+    UpdateLogstashPipelineDesc(req, cb) {
+        let resp = new UpdateLogstashPipelineDescResponse();
+        this.request("UpdateLogstashPipelineDesc", req, resp, cb);
     }
 
     /**
@@ -310,14 +460,25 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * 更新索引
-     * @param {UpdateIndexRequest} req
-     * @param {function(string, UpdateIndexResponse):void} cb
+     * 升级ES集群版本
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
      * @public
      */
-    UpdateIndex(req, cb) {
-        let resp = new UpdateIndexResponse();
-        this.request("UpdateIndex", req, resp, cb);
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
+    }
+
+    /**
+     * 用于批量删除Logstash管道
+     * @param {DeleteLogstashPipelinesRequest} req
+     * @param {function(string, DeleteLogstashPipelinesResponse):void} cb
+     * @public
+     */
+    DeleteLogstashPipelines(req, cb) {
+        let resp = new DeleteLogstashPipelinesResponse();
+        this.request("DeleteLogstashPipelines", req, resp, cb);
     }
 
     /**
@@ -343,14 +504,36 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * 升级ES集群版本
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * 用于重启Logstash实例
+     * @param {RestartLogstashInstanceRequest} req
+     * @param {function(string, RestartLogstashInstanceResponse):void} cb
      * @public
      */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
+    RestartLogstashInstance(req, cb) {
+        let resp = new RestartLogstashInstanceResponse();
+        this.request("RestartLogstashInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询用户该地域下符合条件的Logstash实例的日志
+     * @param {DescribeLogstashInstanceLogsRequest} req
+     * @param {function(string, DescribeLogstashInstanceLogsResponse):void} cb
+     * @public
+     */
+    DescribeLogstashInstanceLogs(req, cb) {
+        let resp = new DescribeLogstashInstanceLogsResponse();
+        this.request("DescribeLogstashInstanceLogs", req, resp, cb);
+    }
+
+    /**
+     * 更新ES集群词典
+     * @param {UpdateDictionariesRequest} req
+     * @param {function(string, UpdateDictionariesResponse):void} cb
+     * @public
+     */
+    UpdateDictionaries(req, cb) {
+        let resp = new UpdateDictionariesResponse();
+        this.request("UpdateDictionaries", req, resp, cb);
     }
 
     /**

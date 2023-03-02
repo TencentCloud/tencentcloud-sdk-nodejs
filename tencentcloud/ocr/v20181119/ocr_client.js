@@ -28,28 +28,33 @@ const RecognizeTravelCardOCRRequest = models.RecognizeTravelCardOCRRequest;
 const TrainTicketOCRRequest = models.TrainTicketOCRRequest;
 const EstateCertOCRResponse = models.EstateCertOCRResponse;
 const FlightInvoiceOCRRequest = models.FlightInvoiceOCRRequest;
+const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const TextDetectResponse = models.TextDetectResponse;
 const TollInvoiceOCRResponse = models.TollInvoiceOCRResponse;
 const VerifyBizLicenseResponse = models.VerifyBizLicenseResponse;
 const FinanBillSliceOCRResponse = models.FinanBillSliceOCRResponse;
 const DriverLicenseOCRResponse = models.DriverLicenseOCRResponse;
+const WaybillOCRResponse = models.WaybillOCRResponse;
+const CreateAIFormTaskRequest = models.CreateAIFormTaskRequest;
 const Words = models.Words;
 const VerifyBizLicenseRequest = models.VerifyBizLicenseRequest;
 const TextDetectionEn = models.TextDetectionEn;
 const PermitOCRResponse = models.PermitOCRResponse;
 const InvoiceGeneralOCRRequest = models.InvoiceGeneralOCRRequest;
 const Rect = models.Rect;
-const WaybillOCRResponse = models.WaybillOCRResponse;
+const LicensePlateInfo = models.LicensePlateInfo;
 const SingleInvoiceInfo = models.SingleInvoiceInfo;
 const TextFormula = models.TextFormula;
-const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
+const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const VatInvoiceItem = models.VatInvoiceItem;
 const VehicleRegCertInfo = models.VehicleRegCertInfo;
 const VehicleLicenseOCRRequest = models.VehicleLicenseOCRRequest;
-const EnterpriseLicenseOCRResponse = models.EnterpriseLicenseOCRResponse;
+const ImageEnhancementRequest = models.ImageEnhancementRequest;
+const SealInfo = models.SealInfo;
+const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const InvoiceGeneralInfo = models.InvoiceGeneralInfo;
-const WordCoordPoint = models.WordCoordPoint;
+const TextVatInvoice = models.TextVatInvoice;
 const InstitutionOCRResponse = models.InstitutionOCRResponse;
 const VehicleInvoiceInfo = models.VehicleInvoiceInfo;
 const DriverLicenseOCRRequest = models.DriverLicenseOCRRequest;
@@ -59,12 +64,14 @@ const RecognizeTableOCRResponse = models.RecognizeTableOCRResponse;
 const TextEduPaper = models.TextEduPaper;
 const QrcodeOCRResponse = models.QrcodeOCRResponse;
 const WaybillObj = models.WaybillObj;
+const WordCoordPoint = models.WordCoordPoint;
 const InvoiceDetectInfo = models.InvoiceDetectInfo;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
 const EnterpriseLicenseOCRRequest = models.EnterpriseLicenseOCRRequest;
 const BankCardOCRRequest = models.BankCardOCRRequest;
 const StructuralItem = models.StructuralItem;
 const OnlineTaxiItineraryInfo = models.OnlineTaxiItineraryInfo;
+const VehicleRegCertOCRRequest = models.VehicleRegCertOCRRequest;
 const PropOwnerCertOCRResponse = models.PropOwnerCertOCRResponse;
 const FinanBillInfo = models.FinanBillInfo;
 const TrainTicketOCRResponse = models.TrainTicketOCRResponse;
@@ -74,10 +81,11 @@ const ArithmeticOCRResponse = models.ArithmeticOCRResponse;
 const FormulaOCRResponse = models.FormulaOCRResponse;
 const BusInvoiceInfo = models.BusInvoiceInfo;
 const SmartStructuralOCRRequest = models.SmartStructuralOCRRequest;
-const TextVatInvoice = models.TextVatInvoice;
+const TableCellInfo = models.TableCellInfo;
 const GeneralHandwritingOCRRequest = models.GeneralHandwritingOCRRequest;
 const BizLicenseOCRRequest = models.BizLicenseOCRRequest;
 const MixedInvoiceDetectResponse = models.MixedInvoiceDetectResponse;
+const RideHailingDriverLicenseOCRRequest = models.RideHailingDriverLicenseOCRRequest;
 const VatInvoiceUserInfo = models.VatInvoiceUserInfo;
 const InsuranceBillOCRResponse = models.InsuranceBillOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
@@ -87,6 +95,7 @@ const TaxiInvoiceOCRResponse = models.TaxiInvoiceOCRResponse;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const CellContent = models.CellContent;
+const RecognizeMedicalInvoiceOCRResponse = models.RecognizeMedicalInvoiceOCRResponse;
 const MixedInvoiceOCRResponse = models.MixedInvoiceOCRResponse;
 const ClassifyDetectOCRResponse = models.ClassifyDetectOCRResponse;
 const VatInvoiceVerifyNewRequest = models.VatInvoiceVerifyNewRequest;
@@ -98,14 +107,17 @@ const DutyPaidProofOCRResponse = models.DutyPaidProofOCRResponse;
 const TollInvoiceOCRRequest = models.TollInvoiceOCRRequest;
 const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
+const MedicalInvoiceInfo = models.MedicalInvoiceInfo;
 const VatInvoiceGoodsInfo = models.VatInvoiceGoodsInfo;
+const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
 const PermitOCRRequest = models.PermitOCRRequest;
 const InvoiceGeneralOCRResponse = models.InvoiceGeneralOCRResponse;
+const SmartFormFileUrl = models.SmartFormFileUrl;
 const VatInvoiceVerifyNewResponse = models.VatInvoiceVerifyNewResponse;
 const TaxiInvoiceOCRRequest = models.TaxiInvoiceOCRRequest;
 const PropOwnerCertOCRRequest = models.PropOwnerCertOCRRequest;
 const RecognizeContainerOCRRequest = models.RecognizeContainerOCRRequest;
-const TextDetectRequest = models.TextDetectRequest;
+const EduPaperOCRRequest = models.EduPaperOCRRequest;
 const VatRollInvoiceOCRResponse = models.VatRollInvoiceOCRResponse;
 const VatInvoiceVerifyRequest = models.VatInvoiceVerifyRequest;
 const EduPaperOCRResponse = models.EduPaperOCRResponse;
@@ -114,15 +126,17 @@ const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const TableOCRRequest = models.TableOCRRequest;
 const UsedVehicleInvoiceInfo = models.UsedVehicleInvoiceInfo;
+const ImageEnhancementResponse = models.ImageEnhancementResponse;
 const QrcodeImgSize = models.QrcodeImgSize;
 const PassportOCRResponse = models.PassportOCRResponse;
 const VerifyBasicBizLicenseResponse = models.VerifyBasicBizLicenseResponse;
-const VehicleRegCertOCRRequest = models.VehicleRegCertOCRRequest;
+const TextDetectRequest = models.TextDetectRequest;
 const RecognizeTravelCardOCRResponse = models.RecognizeTravelCardOCRResponse;
 const ProductDataRecord = models.ProductDataRecord;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const TextVehicleBack = models.TextVehicleBack;
+const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
 const GeneralEfficientOCRRequest = models.GeneralEfficientOCRRequest;
 const AdvertiseOCRRequest = models.AdvertiseOCRRequest;
 const RideHailingDriverLicenseOCRResponse = models.RideHailingDriverLicenseOCRResponse;
@@ -132,10 +146,14 @@ const VatInvoiceVerifyResponse = models.VatInvoiceVerifyResponse;
 const SmartStructuralOCRResponse = models.SmartStructuralOCRResponse;
 const DetectedWords = models.DetectedWords;
 const VerifyEnterpriseFourFactorsRequest = models.VerifyEnterpriseFourFactorsRequest;
+const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
 const ShipInvoiceInfo = models.ShipInvoiceInfo;
+const Polygon = models.Polygon;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const OrgCodeCertOCRRequest = models.OrgCodeCertOCRRequest;
+const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
 const FlightInvoiceOCRResponse = models.FlightInvoiceOCRResponse;
+const TextDetectionResult = models.TextDetectionResult;
 const InstitutionOCRRequest = models.InstitutionOCRRequest;
 const CarInvoiceInfo = models.CarInvoiceInfo;
 const FlightInvoiceInfo = models.FlightInvoiceInfo;
@@ -149,6 +167,7 @@ const FinanBillSliceOCRRequest = models.FinanBillSliceOCRRequest;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const VatRollInvoiceOCRRequest = models.VatRollInvoiceOCRRequest;
 const TableTitle = models.TableTitle;
+const RecognizeTableAccurateOCRRequest = models.RecognizeTableAccurateOCRRequest;
 const Coord = models.Coord;
 const SealOCRResponse = models.SealOCRResponse;
 const DutyPaidProofInfo = models.DutyPaidProofInfo;
@@ -157,37 +176,41 @@ const RecognizeHealthCodeOCRRequest = models.RecognizeHealthCodeOCRRequest;
 const BankSlipOCRResponse = models.BankSlipOCRResponse;
 const PassInvoiceInfo = models.PassInvoiceInfo;
 const QuestionObj = models.QuestionObj;
+const TableInfo = models.TableInfo;
 const VinOCRResponse = models.VinOCRResponse;
-const EduPaperOCRRequest = models.EduPaperOCRRequest;
+const GetTaskStateResponse = models.GetTaskStateResponse;
 const FormulaOCRRequest = models.FormulaOCRRequest;
 const PassportOCRRequest = models.PassportOCRRequest;
 const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
 const RecognizeHealthCodeOCRResponse = models.RecognizeHealthCodeOCRResponse;
-const RideHailingDriverLicenseOCRRequest = models.RideHailingDriverLicenseOCRRequest;
+const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const QueryBarCodeRequest = models.QueryBarCodeRequest;
 const ItemCoord = models.ItemCoord;
-const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
+const CreateAIFormTaskResponse = models.CreateAIFormTaskResponse;
 const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
 const TableDetectInfo = models.TableDetectInfo;
 const ResidenceBookletOCRResponse = models.ResidenceBookletOCRResponse;
 const CarInvoiceOCRResponse = models.CarInvoiceOCRResponse;
+const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
-const Polygon = models.Polygon;
+const MedicalInvoiceItem = models.MedicalInvoiceItem;
 const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
-const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
+const GetTaskStateRequest = models.GetTaskStateRequest;
+const RecognizeMedicalInvoiceOCRRequest = models.RecognizeMedicalInvoiceOCRRequest;
 const ClassifyDetectInfo = models.ClassifyDetectInfo;
 const GeneralEfficientOCRResponse = models.GeneralEfficientOCRResponse;
 const ShipInvoiceOCRRequest = models.ShipInvoiceOCRRequest;
 const SealOCRRequest = models.SealOCRRequest;
 const VerifyOfdVatInvoiceOCRResponse = models.VerifyOfdVatInvoiceOCRResponse;
 const TextTable = models.TextTable;
+const RecognizeTableAccurateOCRResponse = models.RecognizeTableAccurateOCRResponse;
 const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
 const QrcodeResultsInfo = models.QrcodeResultsInfo;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
 const VatInvoice = models.VatInvoice;
-const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
+const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const EnglishOCRResponse = models.EnglishOCRResponse;
 const BusInvoiceOCRRequest = models.BusInvoiceOCRRequest;
 const QuotaInvoiceOCRResponse = models.QuotaInvoiceOCRResponse;
@@ -205,7 +228,7 @@ const AdvertiseOCRResponse = models.AdvertiseOCRResponse;
 const VatRollInvoiceInfo = models.VatRollInvoiceInfo;
 const RecognizeOnlineTaxiItineraryOCRRequest = models.RecognizeOnlineTaxiItineraryOCRRequest;
 const IDCardOCRRequest = models.IDCardOCRRequest;
-const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
+const EnterpriseLicenseOCRResponse = models.EnterpriseLicenseOCRResponse;
 const WaybillOCRRequest = models.WaybillOCRRequest;
 const VinOCRRequest = models.VinOCRRequest;
 const RideHailingTransportLicenseOCRRequest = models.RideHailingTransportLicenseOCRRequest;
@@ -218,6 +241,7 @@ const VatInvoiceOCRResponse = models.VatInvoiceOCRResponse;
 const QuotaInvoiceOCRRequest = models.QuotaInvoiceOCRRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const BusinessCardOCRRequest = models.BusinessCardOCRRequest;
+const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
 const FinanBillOCRRequest = models.FinanBillOCRRequest;
 const VerifyEnterpriseFourFactorsResponse = models.VerifyEnterpriseFourFactorsResponse;
 const GeneralFastOCRResponse = models.GeneralFastOCRResponse;
@@ -259,14 +283,14 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。
-     * @param {VatInvoiceVerifyRequest} req
-     * @param {function(string, VatInvoiceVerifyResponse):void} cb
+     * 文本图像增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度。
+     * @param {ImageEnhancementRequest} req
+     * @param {function(string, ImageEnhancementResponse):void} cb
      * @public
      */
-    VatInvoiceVerify(req, cb) {
-        let resp = new VatInvoiceVerifyResponse();
-        this.request("VatInvoiceVerify", req, resp, cb);
+    ImageEnhancement(req, cb) {
+        let resp = new ImageEnhancementResponse();
+        this.request("ImageEnhancement", req, resp, cb);
     }
 
     /**
@@ -351,6 +375,8 @@ class OcrClient extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：20次/秒。
      * @param {IDCardOCRRequest} req
      * @param {function(string, IDCardOCRResponse):void} cb
      * @public
@@ -362,6 +388,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持对过路过桥费发票的发票代码、发票号码、日期、小写金额等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {TollInvoiceOCRRequest} req
      * @param {function(string, TollInvoiceOCRResponse):void} cb
      * @public
@@ -385,7 +413,9 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。
+     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票、通用机打电子发票（广东和浙江）。
+
+默认接口请求频率限制：20次/秒。
      * @param {VatInvoiceVerifyNewRequest} req
      * @param {function(string, VatInvoiceVerifyNewResponse):void} cb
      * @public
@@ -468,6 +498,8 @@ class OcrClient extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：10次/秒。
      * @param {GeneralAccurateOCRRequest} req
      * @param {function(string, GeneralAccurateOCRResponse):void} cb
      * @public
@@ -479,6 +511,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
+
+默认接口请求频率限制：5次/秒。
      * @param {FlightInvoiceOCRRequest} req
      * @param {function(string, FlightInvoiceOCRResponse):void} cb
      * @public
@@ -501,6 +535,17 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
+     * @param {RecognizeTableAccurateOCRRequest} req
+     * @param {function(string, RecognizeTableAccurateOCRResponse):void} cb
+     * @public
+     */
+    RecognizeTableAccurateOCR(req, cb) {
+        let resp = new RecognizeTableAccurateOCRResponse();
+        this.request("RecognizeTableAccurateOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
      * @param {MixedInvoiceDetectRequest} req
      * @param {function(string, MixedInvoiceDetectResponse):void} cb
@@ -513,6 +558,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持识别轮船票的发票代码、发票号码、日期、姓名、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种字段。
+
+默认接口请求频率限制：5次/秒。
      * @param {ShipInvoiceOCRRequest} req
      * @param {function(string, ShipInvoiceOCRResponse):void} cb
      * @public
@@ -525,6 +572,8 @@ class OcrClient extends AbstractClient {
     /**
      * 本接口支持中国港澳台地区以及其他国家、地区的护照识别。识别字段包括护照ID、姓名、出生日期、性别、有效期、发行国、国籍，具备护照人像照片的裁剪功能和翻拍、复印件告警功能。
 
+默认接口请求频率限制：5次/秒。
+
      * @param {MLIDPassportOCRRequest} req
      * @param {function(string, MLIDPassportOCRResponse):void} cb
      * @public
@@ -536,6 +585,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持对增值税发票（卷票）的发票代码、发票号码、日期、校验码、合计金额（小写）等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {VatRollInvoiceOCRRequest} req
      * @param {function(string, VatRollInvoiceOCRResponse):void} cb
      * @public
@@ -547,6 +598,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持定额发票的发票号码、发票代码、金额(大小写)、发票消费类型、地区及是否有公司印章等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {QuotaInvoiceOCRRequest} req
      * @param {function(string, QuotaInvoiceOCRResponse):void} cb
      * @public
@@ -569,6 +622,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
+
+默认接口请求频率限制：10次/秒。
      * @param {GeneralFastOCRRequest} req
      * @param {function(string, GeneralFastOCRResponse):void} cb
      * @public
@@ -592,6 +647,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持快速精准识别营业执照上的字段，包括统一社会信用代码、公司名称、经营场所、主体类型、法定代表人、注册资金、组成形式、成立日期、营业期限和经营范围等字段。
+
+默认接口请求频率限制：10次/秒。
      * @param {BizLicenseOCRRequest} req
      * @param {function(string, BizLicenseOCRResponse):void} cb
      * @public
@@ -603,6 +660,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持图片内手写体文字的检测和识别，针对手写字体无规则、字迹潦草、模糊等特点进行了识别能力的增强。
+
+默认接口请求频率限制：10次/秒。
      * @param {GeneralHandwritingOCRRequest} req
      * @param {function(string, GeneralHandwritingOCRResponse):void} cb
      * @public
@@ -614,6 +673,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段，精度均处于业界领先水平，识别准确率达到99%以上。
+
+默认接口请求频率限制：10次/秒。
      * @param {WaybillOCRRequest} req
      * @param {function(string, WaybillOCRResponse):void} cb
      * @public
@@ -624,7 +685,22 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。
+
+默认接口请求频率限制：20次/秒。
+     * @param {VatInvoiceVerifyRequest} req
+     * @param {function(string, VatInvoiceVerifyResponse):void} cb
+     * @public
+     */
+    VatInvoiceVerify(req, cb) {
+        let resp = new VatInvoiceVerifyResponse();
+        this.request("VatInvoiceVerify", req, resp, cb);
+    }
+
+    /**
      * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
+
+默认接口请求频率限制：5次/秒。
      * @param {TaxiInvoiceOCRRequest} req
      * @param {function(string, TaxiInvoiceOCRResponse):void} cb
      * @public
@@ -636,6 +712,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持对通用机打发票的发票代码、发票号码、日期、购买方识别号、销售方识别号、校验码、小写金额等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {InvoiceGeneralOCRRequest} req
      * @param {function(string, InvoiceGeneralOCRResponse):void} cb
      * @public
@@ -643,6 +721,17 @@ class OcrClient extends AbstractClient {
     InvoiceGeneralOCR(req, cb) {
         let resp = new InvoiceGeneralOCRResponse();
         this.request("InvoiceGeneralOCR", req, resp, cb);
+    }
+
+    /**
+     * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
+     * @param {GetTaskStateRequest} req
+     * @param {function(string, GetTaskStateResponse):void} cb
+     * @public
+     */
+    GetTaskState(req, cb) {
+        let resp = new GetTaskStateResponse();
+        this.request("GetTaskState", req, resp, cb);
     }
 
     /**
@@ -658,8 +747,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备防伪识别、人像照片裁剪等扩展功能。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
 
+默认接口请求频率限制：5次/秒。
      * @param {HKIDCardOCRRequest} req
      * @param {function(string, HKIDCardOCRResponse):void} cb
      * @public
@@ -681,22 +770,22 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+     * 本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
 
-您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
-
-查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
-     * @param {VerifyBizLicenseRequest} req
-     * @param {function(string, VerifyBizLicenseResponse):void} cb
+智能表单录入产品提供高准确率的表单识别技术和人工核对工具，支持自定义字段，将识别结果自动填入到自定义条目中，并提供人工操作工具，完成整个表单识别过程。适用性强，可对票据、合同、货单等文件的识别，适用于金融、货代、保险、档案等领域。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
+     * @param {CreateAIFormTaskRequest} req
+     * @param {function(string, CreateAIFormTaskResponse):void} cb
      * @public
      */
-    VerifyBizLicense(req, cb) {
-        let resp = new VerifyBizLicenseResponse();
-        this.request("VerifyBizLicense", req, resp, cb);
+    CreateAIFormTask(req, cb) {
+        let resp = new CreateAIFormTaskResponse();
+        this.request("CreateAIFormTask", req, resp, cb);
     }
 
     /**
      * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {DutyPaidProofOCRRequest} req
      * @param {function(string, DutyPaidProofOCRResponse):void} cb
      * @public
@@ -768,6 +857,8 @@ class OcrClient extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：20次/秒。
      * @param {GeneralBasicOCRRequest} req
      * @param {function(string, GeneralBasicOCRResponse):void} cb
      * @public
@@ -834,6 +925,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持识别公路汽车客票的发票代码、发票号码、日期、姓名、票价等字段。
+
+默认接口请求频率限制：5次/秒。
      * @param {BusInvoiceOCRRequest} req
      * @param {function(string, BusInvoiceOCRResponse):void} cb
      * @public
@@ -844,7 +937,22 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 医疗发票识别目前支持全国统一门诊发票、全国统一住院发票、以及部分地方的门诊和住院发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     * @param {RecognizeMedicalInvoiceOCRRequest} req
+     * @param {function(string, RecognizeMedicalInvoiceOCRResponse):void} cb
+     * @public
+     */
+    RecognizeMedicalInvoiceOCR(req, cb) {
+        let resp = new RecognizeMedicalInvoiceOCRResponse();
+        this.request("RecognizeMedicalInvoiceOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+
+默认接口请求频率限制：10次/秒。
      * @param {VatInvoiceOCRRequest} req
      * @param {function(string, VatInvoiceOCRResponse):void} cb
      * @public
@@ -893,6 +1001,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+
+默认接口请求频率限制：5次/秒。
      * @param {SmartStructuralOCRRequest} req
      * @param {function(string, SmartStructuralOCRResponse):void} cb
      * @public
@@ -915,6 +1025,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。
+
+默认接口请求频率限制：10次/秒。
      * @param {LicensePlateOCRRequest} req
      * @param {function(string, LicensePlateOCRResponse):void} cb
      * @public
@@ -951,7 +1063,9 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 印章识别已支持各类印章，包括发票章，财务章等，适用于公文，票据等场景。
+     * 本接口支持各类印章识别，包括发票章，财务章等，适用于公文，票据等场景。
+
+默认接口请求频率限制：5次/秒。
      * @param {SealOCRRequest} req
      * @param {function(string, SealOCRResponse):void} cb
      * @public
@@ -962,8 +1076,20 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 菲律宾VoteID识别
+     * @param {RecognizePhilippinesVoteIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesVoteIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesVoteIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesVoteIDOCRResponse();
+        this.request("RecognizePhilippinesVoteIDOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持火车票全字段的识别，包括编号、票价、姓名、座位号、出发时间、出发站、到达站、车次、席别、发票类型及序列号等。
 
+默认接口请求频率限制：5次/秒。
      * @param {TrainTicketOCRRequest} req
      * @param {function(string, TrainTicketOCRResponse):void} cb
      * @public
@@ -975,7 +1101,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持银行回单全字段的识别，包括付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
-           
+
+默认接口请求频率限制：10次/秒。
      * @param {BankSlipOCRRequest} req
      * @param {function(string, BankSlipOCRResponse):void} cb
      * @public
@@ -1047,6 +1174,8 @@ class OcrClient extends AbstractClient {
         </tr>
       </tbody>
     </table>
+
+默认接口请求频率限制：10次/秒。
      * @param {GeneralEfficientOCRRequest} req
      * @param {function(string, GeneralEfficientOCRResponse):void} cb
      * @public
@@ -1082,6 +1211,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持通信大数据行程卡识别，包括行程卡颜色、更新时间、途经地、存在中高风险地区的城市、电话号码，五个字段的识别结果输出。
+
+默认接口请求频率限制：20次/秒。
      * @param {RecognizeTravelCardOCRRequest} req
      * @param {function(string, RecognizeTravelCardOCRResponse):void} cb
      * @public
@@ -1104,6 +1235,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持图像英文文字的检测和识别，返回文字框位置与文字内容。支持多场景、任意版面下的英文、字母、数字和常见字符的识别，同时覆盖英文印刷体和英文手写体识别。
+
+默认接口请求频率限制：10次/秒。
      * @param {EnglishOCRRequest} req
      * @param {function(string, EnglishOCRResponse):void} cb
      * @public
@@ -1126,6 +1259,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
+
+默认接口请求频率限制：10次/秒。
      * @param {BankCardOCRRequest} req
      * @param {function(string, BankCardOCRResponse):void} cb
      * @public
@@ -1156,6 +1291,8 @@ class OcrClient extends AbstractClient {
 另外，本接口还支持复印件、翻拍和PS告警功能。同时支持识别交管12123APP发放的电子驾驶证正页。
 
 电子驾驶证正页：包括证号、姓名、性别、国籍、出生日期、初次领证日期、准驾车型、有效期开始时间、有效期截止时间、档案编号、状态、累积记分。
+
+默认接口请求频率限制：10次/秒。
      * @param {DriverLicenseOCRRequest} req
      * @param {function(string, DriverLicenseOCRResponse):void} cb
      * @public
@@ -1199,6 +1336,21 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+
+您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
+
+查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
+     * @param {VerifyBizLicenseRequest} req
+     * @param {function(string, VerifyBizLicenseResponse):void} cb
+     * @public
+     */
+    VerifyBizLicense(req, cb) {
+        let resp = new VerifyBizLicenseResponse();
+        this.request("VerifyBizLicense", req, resp, cb);
+    }
+
+    /**
      * 本接口支持常见银行票据的自动分类和识别。整单识别包括支票（含现金支票、普通支票、转账支票），承兑汇票（含银行承兑汇票、商业承兑汇票）以及进账单等，适用于中国人民银行印发的 2010 版银行票据凭证版式（银发[2010]299 号）。
      * @param {FinanBillOCRRequest} req
      * @param {function(string, FinanBillOCRResponse):void} cb
@@ -1207,6 +1359,17 @@ class OcrClient extends AbstractClient {
     FinanBillOCR(req, cb) {
         let resp = new FinanBillOCRResponse();
         this.request("FinanBillOCR", req, resp, cb);
+    }
+
+    /**
+     * 菲律宾驾驶证识别
+     * @param {RecognizePhilippinesDrivingLicenseOCRRequest} req
+     * @param {function(string, RecognizePhilippinesDrivingLicenseOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesDrivingLicenseOCR(req, cb) {
+        let resp = new RecognizePhilippinesDrivingLicenseOCRResponse();
+        this.request("RecognizePhilippinesDrivingLicenseOCR", req, resp, cb);
     }
 
     /**
@@ -1221,7 +1384,9 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持多张、多类型票据的混合识别，系统自动实现分割、分类和识别，同时支持自选需要识别的票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共11种票据。
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+
+默认接口请求频率限制：5次/秒。
      * @param {MixedInvoiceOCRRequest} req
      * @param {function(string, MixedInvoiceOCRResponse):void} cb
      * @public
@@ -1232,7 +1397,20 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持北京、上海、广东、江苏、吉林、黑龙江省市健康码的识别，包括持码人姓名、持码人身份证号、健康码更新时间、健康码颜色、核酸检测结果、核酸检测间隔时长、核酸检测时间，七个字段的识别结果输出。不同省市健康码显示的字段信息有所不同，上述字段的识别结果可能为空，以图片上具体展示的信息为准。
+     * 印尼身份证识别
+     * @param {RecognizeIndonesiaIDCardOCRRequest} req
+     * @param {function(string, RecognizeIndonesiaIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeIndonesiaIDCardOCR(req, cb) {
+        let resp = new RecognizeIndonesiaIDCardOCRResponse();
+        this.request("RecognizeIndonesiaIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持北京、上海、广东、江苏、吉林、黑龙江、天津、辽宁、浙江、河南、四川、贵州、山东、安徽、福建、江西、湖北、湖南等省份健康码的识别，包括持码人姓名、持码人身份证号、健康码更新时间、健康码颜色、核酸检测结果、核酸检测间隔时长、核酸检测时间，疫苗接种信息，八个字段的识别结果输出。不同省市健康码显示的字段信息有所不同，上述字段的识别结果可能为空，以图片上具体展示的信息为准。
+
+默认接口请求频率限制：10次/秒。
      * @param {RecognizeHealthCodeOCRRequest} req
      * @param {function(string, RecognizeHealthCodeOCRResponse):void} cb
      * @public
@@ -1268,7 +1446,6 @@ class OcrClient extends AbstractClient {
     /**
      * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-
      * @param {RecognizeThaiIDCardOCRRequest} req
      * @param {function(string, RecognizeThaiIDCardOCRResponse):void} cb
      * @public
@@ -1286,6 +1463,8 @@ class OcrClient extends AbstractClient {
 行驶证副页：号牌号码、档案编号、核定载人数、总质量、整备质量、核定载质量、外廓尺寸、准牵引总质量、备注、检验记录。
 
 另外，本接口还支持复印件、翻拍和PS告警功能。
+
+默认接口请求频率限制：10次/秒。
      * @param {VehicleLicenseOCRRequest} req
      * @param {function(string, VehicleLicenseOCRResponse):void} cb
      * @public

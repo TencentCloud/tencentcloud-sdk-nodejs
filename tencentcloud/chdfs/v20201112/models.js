@@ -226,6 +226,20 @@ class DescribeFileSystemResponse extends  AbstractModel {
         this.DegradeCapacityUsed = null;
 
         /**
+         * 已使用COS深度归档存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DeepArchiveCapacityUsed = null;
+
+        /**
+         * 已使用COS智能分层存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IntelligentCapacityUsed = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -250,6 +264,8 @@ class DescribeFileSystemResponse extends  AbstractModel {
         this.ArchiveCapacityUsed = 'ArchiveCapacityUsed' in params ? params.ArchiveCapacityUsed : null;
         this.StandardCapacityUsed = 'StandardCapacityUsed' in params ? params.StandardCapacityUsed : null;
         this.DegradeCapacityUsed = 'DegradeCapacityUsed' in params ? params.DegradeCapacityUsed : null;
+        this.DeepArchiveCapacityUsed = 'DeepArchiveCapacityUsed' in params ? params.DeepArchiveCapacityUsed : null;
+        this.IntelligentCapacityUsed = 'IntelligentCapacityUsed' in params ? params.IntelligentCapacityUsed : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1321,6 +1337,13 @@ class CreateAccessRulesResponse extends  AbstractModel {
         super();
 
         /**
+         * 权限规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccessRule> || null}
+         */
+        this.AccessRules = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1334,6 +1357,15 @@ class CreateAccessRulesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.AccessRules) {
+            this.AccessRules = new Array();
+            for (let z in params.AccessRules) {
+                let obj = new AccessRule();
+                obj.deserialize(params.AccessRules[z]);
+                this.AccessRules.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1716,7 +1748,7 @@ class Transition extends  AbstractModel {
         this.Days = null;
 
         /**
-         * 转换类型（1：归档；2：删除；3：低频）
+         * 转换类型（1：归档；2：删除；3：低频；4：深度归档；5：智能分层）
          * @type {number || null}
          */
         this.Type = null;

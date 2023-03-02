@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpdateDevicesEnableStateResponse = models.UpdateDevicesEnableStateResponse;
+const DescribeDeviceLocationSolveRequest = models.DescribeDeviceLocationSolveRequest;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const DevicesItem = models.DevicesItem;
 const DeleteFenceBindRequest = models.DeleteFenceBindRequest;
@@ -71,6 +72,7 @@ const DescribeProjectResponse = models.DescribeProjectResponse;
 const UnbindProductsRequest = models.UnbindProductsRequest;
 const SearchStudioProductResponse = models.SearchStudioProductResponse;
 const DeviceData = models.DeviceData;
+const WifiInfo = models.WifiInfo;
 const GetTopicRuleListRequest = models.GetTopicRuleListRequest;
 const FenceBindDeviceItem = models.FenceBindDeviceItem;
 const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
@@ -79,7 +81,7 @@ const BindDeviceInfo = models.BindDeviceInfo;
 const ProjectEntryEx = models.ProjectEntryEx;
 const DescribeBatchProductionResponse = models.DescribeBatchProductionResponse;
 const ListTopicPolicyRequest = models.ListTopicPolicyRequest;
-const DescribeLoRaFrequencyRequest = models.DescribeLoRaFrequencyRequest;
+const BatchProductionInfo = models.BatchProductionInfo;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteLoRaFrequencyRequest = models.DeleteLoRaFrequencyRequest;
 const ControlDeviceDataRequest = models.ControlDeviceDataRequest;
@@ -114,7 +116,7 @@ const DescribeFirmwareTaskResponse = models.DescribeFirmwareTaskResponse;
 const FirmwareInfo = models.FirmwareInfo;
 const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
 const TopicRuleInfo = models.TopicRuleInfo;
-const GetCOSURLRequest = models.GetCOSURLRequest;
+const DescribeDeviceLocationSolveResponse = models.DescribeDeviceLocationSolveResponse;
 const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
 const CreateFenceBindRequest = models.CreateFenceBindRequest;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
@@ -199,7 +201,8 @@ const DeleteDevicesRequest = models.DeleteDevicesRequest;
 const AppDeviceInfo = models.AppDeviceInfo;
 const BindProductsResponse = models.BindProductsResponse;
 const ModifyProjectResponse = models.ModifyProjectResponse;
-const BatchProductionInfo = models.BatchProductionInfo;
+const GetCOSURLRequest = models.GetCOSURLRequest;
+const DescribeLoRaFrequencyRequest = models.DescribeLoRaFrequencyRequest;
 const DescribeGatewayBindDevicesRequest = models.DescribeGatewayBindDevicesRequest;
 const DescribeGatewaySubProductsRequest = models.DescribeGatewaySubProductsRequest;
 const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
@@ -316,6 +319,17 @@ class IotexplorerClient extends AbstractClient {
     DirectBindDeviceInFamily(req, cb) {
         let resp = new DirectBindDeviceInFamilyResponse();
         this.request("DirectBindDeviceInFamily", req, resp, cb);
+    }
+
+    /**
+     * 获取实时位置解析
+     * @param {DescribeDeviceLocationSolveRequest} req
+     * @param {function(string, DescribeDeviceLocationSolveResponse):void} cb
+     * @public
+     */
+    DescribeDeviceLocationSolve(req, cb) {
+        let resp = new DescribeDeviceLocationSolveResponse();
+        this.request("DescribeDeviceLocationSolve", req, resp, cb);
     }
 
     /**

@@ -16,19 +16,22 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InstanceDeviceInfo = models.InstanceDeviceInfo;
+const InstanceDetail = models.InstanceDetail;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
-const DescribeInstanceListResponse = models.DescribeInstanceListResponse;
+const DescribeInstanceDetail = models.DescribeInstanceDetail;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
+const HostDetail = models.HostDetail;
+const InstanceDeviceInfo = models.InstanceDeviceInfo;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DeviceInfo = models.DeviceInfo;
 const DBInstanceDetail = models.DBInstanceDetail;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const InstanceExpand = models.InstanceExpand;
-const InstanceDetail = models.InstanceDetail;
+const DescribeHostListResponse = models.DescribeHostListResponse;
+const DescribeInstanceListResponse = models.DescribeInstanceListResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const DescribeInstanceDetail = models.DescribeInstanceDetail;
+const DescribeHostListRequest = models.DescribeHostListRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceListRequest = models.DescribeInstanceListRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
@@ -45,6 +48,17 @@ class DbdcClient extends AbstractClient {
     }
     
     /**
+     * 本接口用于查询独享集群实例列表
+     * @param {DescribeInstanceListRequest} req
+     * @param {function(string, DescribeInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeInstanceList(req, cb) {
+        let resp = new DescribeInstanceListResponse();
+        this.request("DescribeInstanceList", req, resp, cb);
+    }
+
+    /**
      * 根据不同地域不同用户，获取集群列表信息
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
@@ -56,14 +70,25 @@ class DbdcClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于查询独享集群实例列表
-     * @param {DescribeInstanceListRequest} req
-     * @param {function(string, DescribeInstanceListResponse):void} cb
+     * 本接口用于查询主机列表
+     * @param {DescribeHostListRequest} req
+     * @param {function(string, DescribeHostListResponse):void} cb
      * @public
      */
-    DescribeInstanceList(req, cb) {
-        let resp = new DescribeInstanceListResponse();
-        this.request("DescribeInstanceList", req, resp, cb);
+    DescribeHostList(req, cb) {
+        let resp = new DescribeHostListResponse();
+        this.request("DescribeHostList", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于修改集群名称
+     * @param {ModifyInstanceNameRequest} req
+     * @param {function(string, ModifyInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyInstanceName(req, cb) {
+        let resp = new ModifyInstanceNameResponse();
+        this.request("ModifyInstanceName", req, resp, cb);
     }
 
     /**
@@ -86,17 +111,6 @@ class DbdcClient extends AbstractClient {
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
         this.request("DescribeDBInstances", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于修改集群名称
-     * @param {ModifyInstanceNameRequest} req
-     * @param {function(string, ModifyInstanceNameResponse):void} cb
-     * @public
-     */
-    ModifyInstanceName(req, cb) {
-        let resp = new ModifyInstanceNameResponse();
-        this.request("ModifyInstanceName", req, resp, cb);
     }
 
 

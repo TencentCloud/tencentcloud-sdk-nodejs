@@ -26,6 +26,7 @@ const KTVMusicTopInfo = models.KTVMusicTopInfo;
 const DescribeKTVSingerCategoriesRequest = models.DescribeKTVSingerCategoriesRequest;
 const KTVSingerBaseInfo = models.KTVSingerBaseInfo;
 const ModifyMusicOnShelvesRequest = models.ModifyMusicOnShelvesRequest;
+const SetRealVolumeCommandInput = models.SetRealVolumeCommandInput;
 const PlayCommandInput = models.PlayCommandInput;
 const DescribeMusicRequest = models.DescribeMusicRequest;
 const KTVMusicDetailInfo = models.KTVMusicDetailInfo;

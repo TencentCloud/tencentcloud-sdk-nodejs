@@ -511,12 +511,14 @@ class BeautifyPicResponse extends  AbstractModel {
 
         /**
          * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultImage = null;
 
         /**
          * RspImgType 为 url 时，返回处理后的图片 url 数据。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultUrl = null;

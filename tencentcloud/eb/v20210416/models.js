@@ -67,6 +67,69 @@ class ListConnectionsResponse extends  AbstractModel {
 }
 
 /**
+ * 描述Es规则目标
+ * @class
+ */
+class ESTargetParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络连接类型
+         * @type {string || null}
+         */
+        this.NetMode = null;
+
+        /**
+         * 索引前缀
+         * @type {string || null}
+         */
+        this.IndexPrefix = null;
+
+        /**
+         * es日志轮换粒度
+         * @type {string || null}
+         */
+        this.RotationInterval = null;
+
+        /**
+         * DTS事件配置
+         * @type {string || null}
+         */
+        this.OutputMode = null;
+
+        /**
+         * DTS索引配置
+         * @type {string || null}
+         */
+        this.IndexSuffixMode = null;
+
+        /**
+         * es模版类型
+         * @type {string || null}
+         */
+        this.IndexTemplateType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetMode = 'NetMode' in params ? params.NetMode : null;
+        this.IndexPrefix = 'IndexPrefix' in params ? params.IndexPrefix : null;
+        this.RotationInterval = 'RotationInterval' in params ? params.RotationInterval : null;
+        this.OutputMode = 'OutputMode' in params ? params.OutputMode : null;
+        this.IndexSuffixMode = 'IndexSuffixMode' in params ? params.IndexSuffixMode : null;
+        this.IndexTemplateType = 'IndexTemplateType' in params ? params.IndexTemplateType : null;
+
+    }
+}
+
+/**
  * GetEventBus返回参数结构体
  * @class
  */
@@ -123,6 +186,40 @@ class GetEventBusResponse extends  AbstractModel {
         this.Type = null;
 
         /**
+         * 计费模式
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * EB日志存储时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * EB日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+        /**
+         * 是否开启存储
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
+        /**
+         * 消息序列，是否有序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LinkMode = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -145,6 +242,11 @@ class GetEventBusResponse extends  AbstractModel {
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
+        this.LinkMode = 'LinkMode' in params ? params.LinkMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -510,6 +612,27 @@ class TargetBrief extends  AbstractModel {
 }
 
 /**
+ * Data Transfer Service参数
+ * @class
+ */
+class DTSParams extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ListRules返回参数结构体
  * @class
  */
@@ -785,6 +908,27 @@ class EventBus extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 连接器基础信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConnectionBrief> || null}
+         */
+        this.ConnectionBriefs = null;
+
+        /**
+         * 目标简要信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TargetBrief> || null}
+         */
+        this.TargetBriefs = null;
+
     }
 
     /**
@@ -800,6 +944,25 @@ class EventBus extends  AbstractModel {
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+        if (params.ConnectionBriefs) {
+            this.ConnectionBriefs = new Array();
+            for (let z in params.ConnectionBriefs) {
+                let obj = new ConnectionBrief();
+                obj.deserialize(params.ConnectionBriefs[z]);
+                this.ConnectionBriefs.push(obj);
+            }
+        }
+
+        if (params.TargetBriefs) {
+            this.TargetBriefs = new Array();
+            for (let z in params.TargetBriefs) {
+                let obj = new TargetBrief();
+                obj.deserialize(params.TargetBriefs[z]);
+                this.TargetBriefs.push(obj);
+            }
+        }
 
     }
 }
@@ -813,12 +976,6 @@ class ListTargetsRequest extends  AbstractModel {
         super();
 
         /**
-         * 事件规则ID
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
          * 事件集ID
          * @type {string || null}
          */
@@ -829,6 +986,12 @@ class ListTargetsRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.OrderBy = null;
+
+        /**
+         * 事件规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
 
         /**
          * 返回数量，默认为20，最大值为100。
@@ -857,9 +1020,9 @@ class ListTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
@@ -1205,6 +1368,24 @@ class UpdateEventBusRequest extends  AbstractModel {
          */
         this.EventBusName = null;
 
+        /**
+         * EB日志存储时长
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * EB日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+        /**
+         * 是否开启存储
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
     }
 
     /**
@@ -1217,6 +1398,9 @@ class UpdateEventBusRequest extends  AbstractModel {
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
 
     }
 }
@@ -1241,6 +1425,18 @@ class CreateEventBusRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * EB存储时长
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * EB是否开启存储
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
     }
 
     /**
@@ -1252,6 +1448,8 @@ class CreateEventBusRequest extends  AbstractModel {
         }
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
 
     }
 }
@@ -1894,6 +2092,13 @@ class ConnectionDescription extends  AbstractModel {
          */
         this.CkafkaParams = null;
 
+        /**
+         * data transfer service (DTS)参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DTSParams || null}
+         */
+        this.DTSParams = null;
+
     }
 
     /**
@@ -1915,6 +2120,12 @@ class ConnectionDescription extends  AbstractModel {
             let obj = new CkafkaParams();
             obj.deserialize(params.CkafkaParams)
             this.CkafkaParams = obj;
+        }
+
+        if (params.DTSParams) {
+            let obj = new DTSParams();
+            obj.deserialize(params.DTSParams)
+            this.DTSParams = obj;
         }
 
     }
@@ -2207,19 +2418,26 @@ class CreateTransformationResponse extends  AbstractModel {
 }
 
 /**
- * 描述如何数据转换
-
+ * 连接器基础信息
  * @class
  */
-class Transform extends  AbstractModel {
+class ConnectionBrief extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 描述如何数据转换
-         * @type {Array.<OutputStructParam> || null}
+         * 连接器类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.OutputStructs = null;
+        this.Type = null;
+
+        /**
+         * 连接器状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2230,15 +2448,8 @@ class Transform extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.OutputStructs) {
-            this.OutputStructs = new Array();
-            for (let z in params.OutputStructs) {
-                let obj = new OutputStructParam();
-                obj.deserialize(params.OutputStructs[z]);
-                this.OutputStructs.push(obj);
-            }
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2677,6 +2888,12 @@ class TargetDescription extends  AbstractModel {
          */
         this.CkafkaTargetParams = null;
 
+        /**
+         * ElasticSearch参数
+         * @type {ESTargetParams || null}
+         */
+        this.ESTargetParams = null;
+
     }
 
     /**
@@ -2698,6 +2915,12 @@ class TargetDescription extends  AbstractModel {
             let obj = new CkafkaTargetParams();
             obj.deserialize(params.CkafkaTargetParams)
             this.CkafkaTargetParams = obj;
+        }
+
+        if (params.ESTargetParams) {
+            let obj = new ESTargetParams();
+            obj.deserialize(params.ESTargetParams)
+            this.ESTargetParams = obj;
         }
 
     }
@@ -2967,6 +3190,12 @@ class UpdateRuleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+         * @type {string || null}
+         */
+        this.EventPattern = null;
+
+        /**
          * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
          * @type {string || null}
          */
@@ -2985,6 +3214,7 @@ class UpdateRuleRequest extends  AbstractModel {
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.EventPattern = 'EventPattern' in params ? params.EventPattern : null;
         this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }
@@ -3028,6 +3258,43 @@ class OutputStructParam extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.ValueType = 'ValueType' in params ? params.ValueType : null;
+
+    }
+}
+
+/**
+ * 描述如何数据转换
+
+ * @class
+ */
+class Transform extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述如何数据转换
+         * @type {Array.<OutputStructParam> || null}
+         */
+        this.OutputStructs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OutputStructs) {
+            this.OutputStructs = new Array();
+            for (let z in params.OutputStructs) {
+                let obj = new OutputStructParam();
+                obj.deserialize(params.OutputStructs[z]);
+                this.OutputStructs.push(obj);
+            }
+        }
 
     }
 }
@@ -3323,6 +3590,7 @@ class APIGWParams extends  AbstractModel {
 
 module.exports = {
     ListConnectionsResponse: ListConnectionsResponse,
+    ESTargetParams: ESTargetParams,
     GetEventBusResponse: GetEventBusResponse,
     RetryPolicy: RetryPolicy,
     CkafkaTargetParams: CkafkaTargetParams,
@@ -3333,6 +3601,7 @@ module.exports = {
     DeleteTargetResponse: DeleteTargetResponse,
     Extraction: Extraction,
     TargetBrief: TargetBrief,
+    DTSParams: DTSParams,
     ListRulesResponse: ListRulesResponse,
     CreateTargetResponse: CreateTargetResponse,
     CheckRuleRequest: CheckRuleRequest,
@@ -3370,7 +3639,7 @@ module.exports = {
     ListEventBusesRequest: ListEventBusesRequest,
     PublishEventResponse: PublishEventResponse,
     CreateTransformationResponse: CreateTransformationResponse,
-    Transform: Transform,
+    ConnectionBrief: ConnectionBrief,
     Filter: Filter,
     Connection: Connection,
     PutEventsRequest: PutEventsRequest,
@@ -3389,6 +3658,7 @@ module.exports = {
     CkafkaParams: CkafkaParams,
     UpdateRuleRequest: UpdateRuleRequest,
     OutputStructParam: OutputStructParam,
+    Transform: Transform,
     CheckTransformationRequest: CheckTransformationRequest,
     UpdateConnectionResponse: UpdateConnectionResponse,
     GetRuleRequest: GetRuleRequest,

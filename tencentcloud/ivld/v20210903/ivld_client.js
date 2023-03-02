@@ -16,81 +16,92 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const L1Tag = models.L1Tag;
-const DeleteMediaResponse = models.DeleteMediaResponse;
-const UpdateCustomPersonRequest = models.UpdateCustomPersonRequest;
-const ShowInfo = models.ShowInfo;
 const MultiLevelTag = models.MultiLevelTag;
-const MediaFilter = models.MediaFilter;
 const AddCustomPersonImageRequest = models.AddCustomPersonImageRequest;
-const ModifyCallbackRequest = models.ModifyCallbackRequest;
-const DeleteCustomPersonResponse = models.DeleteCustomPersonResponse;
 const L2Tag = models.L2Tag;
-const DeleteTaskRequest = models.DeleteTaskRequest;
-const DescribeCustomCategoriesRequest = models.DescribeCustomCategoriesRequest;
-const ImportMediaRequest = models.ImportMediaRequest;
-const CreateCustomCategoryRequest = models.CreateCustomCategoryRequest;
-const DescribeMediaRequest = models.DescribeMediaRequest;
-const DescribeMediasRequest = models.DescribeMediasRequest;
-const VideoAppearInfo = models.VideoAppearInfo;
-const DescribeTaskResponse = models.DescribeTaskResponse;
-const CreateDefaultCategoriesResponse = models.CreateDefaultCategoriesResponse;
-const AppearIndexPair = models.AppearIndexPair;
-const CreateTaskResponse = models.CreateTaskResponse;
-const DeleteCustomCategoryRequest = models.DeleteCustomCategoryRequest;
-const DescribeTasksRequest = models.DescribeTasksRequest;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
-const PersonImageInfo = models.PersonImageInfo;
-const ClassifiedPersonInfo = models.ClassifiedPersonInfo;
-const CreateCustomGroupRequest = models.CreateCustomGroupRequest;
+const DeleteCustomCategoryRequest = models.DeleteCustomCategoryRequest;
+const MediaFilter = models.MediaFilter;
+const CustomCategory = models.CustomCategory;
+const DescribeCustomCategoriesRequest = models.DescribeCustomCategoriesRequest;
+const DescribeTasksResponse = models.DescribeTasksResponse;
+const CustomPersonFilter = models.CustomPersonFilter;
+const CreateCustomPersonResponse = models.CreateCustomPersonResponse;
+const ImportMediaResponse = models.ImportMediaResponse;
+const QueryCallbackRequest = models.QueryCallbackRequest;
+const DescribeMediaRequest = models.DescribeMediaRequest;
+const TaskInfo = models.TaskInfo;
+const ShowInfo = models.ShowInfo;
+const DescribeTasksRequest = models.DescribeTasksRequest;
 const DescribeCustomPersonsResponse = models.DescribeCustomPersonsResponse;
+const TextData = models.TextData;
+const ImageMetadata = models.ImageMetadata;
+const CreateCustomGroupRequest = models.CreateCustomGroupRequest;
+const TextMetadata = models.TextMetadata;
 const AddCustomPersonImageResponse = models.AddCustomPersonImageResponse;
 const CreateDefaultCategoriesRequest = models.CreateDefaultCategoriesRequest;
 const TaskFilter = models.TaskFilter;
 const TextAppearInfo = models.TextAppearInfo;
-const DescribeMediaResponse = models.DescribeMediaResponse;
-const CustomCategory = models.CustomCategory;
-const Data = models.Data;
-const DeleteTaskResponse = models.DeleteTaskResponse;
-const DescribeTaskRequest = models.DescribeTaskRequest;
-const DescribeCustomPersonDetailRequest = models.DescribeCustomPersonDetailRequest;
+const MediaPreknownInfo = models.MediaPreknownInfo;
 const CustomPersonInfo = models.CustomPersonInfo;
 const UpdateCustomPersonResponse = models.UpdateCustomPersonResponse;
-const DescribeCustomGroupResponse = models.DescribeCustomGroupResponse;
-const ModifyCallbackResponse = models.ModifyCallbackResponse;
-const DescribeCustomPersonsRequest = models.DescribeCustomPersonsRequest;
-const DescribeTasksResponse = models.DescribeTasksResponse;
-const PersonInfo = models.PersonInfo;
-const TextInfo = models.TextInfo;
-const AudioInfo = models.AudioInfo;
-const CustomPersonFilter = models.CustomPersonFilter;
-const CreateTaskRequest = models.CreateTaskRequest;
-const L3Tag = models.L3Tag;
-const QueryCallbackResponse = models.QueryCallbackResponse;
-const DescribeCustomPersonDetailResponse = models.DescribeCustomPersonDetailResponse;
-const DeleteCustomPersonImageResponse = models.DeleteCustomPersonImageResponse;
-const MediaPreknownInfo = models.MediaPreknownInfo;
-const DescribeCustomCategoriesResponse = models.DescribeCustomCategoriesResponse;
-const CreateCustomCategoryResponse = models.CreateCustomCategoryResponse;
-const CreateCustomPersonResponse = models.CreateCustomPersonResponse;
-const AppearInfo = models.AppearInfo;
 const UpdateCustomCategoryRequest = models.UpdateCustomCategoryRequest;
-const DescribeCustomGroupRequest = models.DescribeCustomGroupRequest;
-const UpdateCustomCategoryResponse = models.UpdateCustomCategoryResponse;
-const DeleteMediaRequest = models.DeleteMediaRequest;
-const CreateCustomGroupResponse = models.CreateCustomGroupResponse;
-const ImportMediaResponse = models.ImportMediaResponse;
-const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
-const DescribeMediasResponse = models.DescribeMediasResponse;
-const MediaInfo = models.MediaInfo;
-const QueryCallbackRequest = models.QueryCallbackRequest;
+const CreateTaskRequest = models.CreateTaskRequest;
+const DescribeCustomCategoriesResponse = models.DescribeCustomCategoriesResponse;
+const DescribeCustomGroupResponse = models.DescribeCustomGroupResponse;
+const PersonImageInfo = models.PersonImageInfo;
 const SortBy = models.SortBy;
+const DeleteCustomPersonImageRequest = models.DeleteCustomPersonImageRequest;
+const DeleteMediaResponse = models.DeleteMediaResponse;
+const Rectf = models.Rectf;
+const ModifyCallbackRequest = models.ModifyCallbackRequest;
+const DeleteCustomPersonResponse = models.DeleteCustomPersonResponse;
+const DeleteTaskRequest = models.DeleteTaskRequest;
+const ImportMediaRequest = models.ImportMediaRequest;
+const DescribeMediasRequest = models.DescribeMediasRequest;
+const CreateDefaultCategoriesResponse = models.CreateDefaultCategoriesResponse;
+const ClassifiedPersonInfo = models.ClassifiedPersonInfo;
+const DescribeCustomPersonsRequest = models.DescribeCustomPersonsRequest;
+const DescribeMediaResponse = models.DescribeMediaResponse;
+const Data = models.Data;
+const AppearInfo = models.AppearInfo;
+const PersonInfo = models.PersonInfo;
+const AudioInfo = models.AudioInfo;
+const ImageOcr = models.ImageOcr;
+const DeleteCustomPersonImageResponse = models.DeleteCustomPersonImageResponse;
+const TextInfo = models.TextInfo;
+const CreateCustomCategoryResponse = models.CreateCustomCategoryResponse;
+const QueryCallbackResponse = models.QueryCallbackResponse;
+const MultiLevelPersonInfo = models.MultiLevelPersonInfo;
+const CreateCustomGroupResponse = models.CreateCustomGroupResponse;
+const UpdateCustomCategoryResponse = models.UpdateCustomCategoryResponse;
+const DescribeMediasResponse = models.DescribeMediasResponse;
+const UnknownPerson = models.UnknownPerson;
 const MediaMetadata = models.MediaMetadata;
 const DeleteCustomPersonRequest = models.DeleteCustomPersonRequest;
-const DeleteCustomCategoryResponse = models.DeleteCustomCategoryResponse;
-const DeleteCustomPersonImageRequest = models.DeleteCustomPersonImageRequest;
+const AudioMetadata = models.AudioMetadata;
+const DescribeCustomPersonDetailResponse = models.DescribeCustomPersonDetailResponse;
+const DeleteMediaRequest = models.DeleteMediaRequest;
+const CreateCustomCategoryRequest = models.CreateCustomCategoryRequest;
+const VideoAppearInfo = models.VideoAppearInfo;
+const DescribeTaskResponse = models.DescribeTaskResponse;
+const AppearIndexPair = models.AppearIndexPair;
+const CreateTaskResponse = models.CreateTaskResponse;
+const DescribeCustomPersonDetailRequest = models.DescribeCustomPersonDetailRequest;
+const ImageData = models.ImageData;
+const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const DeleteTaskResponse = models.DeleteTaskResponse;
+const DescribeTaskRequest = models.DescribeTaskRequest;
+const UpdateCustomPersonRequest = models.UpdateCustomPersonRequest;
+const L1Tag = models.L1Tag;
+const ModifyCallbackResponse = models.ModifyCallbackResponse;
+const ImageLogo = models.ImageLogo;
+const L3Tag = models.L3Tag;
+const AudioData = models.AudioData;
 const CreateCustomPersonRequest = models.CreateCustomPersonRequest;
-const TaskInfo = models.TaskInfo;
+const MediaInfo = models.MediaInfo;
+const DeleteCustomCategoryResponse = models.DeleteCustomCategoryResponse;
+const DescribeCustomGroupRequest = models.DescribeCustomGroupRequest;
 
 
 /**
@@ -120,9 +131,11 @@ class IvldClient extends AbstractClient {
     /**
      * 将URL指向的媒资视频文件导入系统之中。
 
-**请注意，本接口为异步接口**。接口返回MediaId仅代表导入视频任务发起，不代表任务完成，您可调用读接口(DescribeMedia/DescribeMedias)接口查询MediaId对应的媒资文件的状态。
+**请注意，本接口为异步接口**。接口返回MediaId仅代表导入视频任务发起，不代表任务完成，您可调用读接口(DescribeMedia/DescribeMedias)接口查询MediaId
 
-当前URL只支持COS地址，其形式为`https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${ObjectKey}`，其中`${Bucket}`为您的COS桶名称，Region为COS桶所在[可用区](https://cloud.tencent.com/document/product/213/6091)，`${ObjectKey}`为指向存储在COS桶内的待分析的视频的[ObjectKey](https://cloud.tencent.com/document/product/436/13324)
+URL字段推荐您使用COS地址，其形式为`https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${ObjectKey}`，其中`${Bucket}`为您的COS桶名称，Region为COS桶所在[可用区](https://cloud.tencent.com/document/product/213/6091)，`${ObjectKey}`为指向存储在COS桶内的待分析的视频的[ObjectKey](https://cloud.tencent.com/document/product/436/13324)
+
+另外，目前产品也支持使用外部URL地址，但是当传入URL为非COS地址时，需要您指定额外的WriteBackCosPath以供产品回写结果数据。
 
 分析完成后，本产品将在您的`${Bucket}`桶内创建名为`${ObjectKey}_${task-create-time}`的目录(`task-create-time`形式为1970-01-01T08:08:08)并将分析结果将回传回该目录，也即，结构化分析结果(包括图片，JSON等数据)将会写回`https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${ObjectKey}_${task-create-time}`目录
 

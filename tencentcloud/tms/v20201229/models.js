@@ -180,6 +180,13 @@ class DetailResults extends  AbstractModel {
          */
         this.SubLabel = null;
 
+        /**
+         * 该字段用于返回当前一级标签（Label）下的关键词、子标签及分数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -197,6 +204,60 @@ class DetailResults extends  AbstractModel {
         this.LibId = 'LibId' in params ? params.LibId : null;
         this.LibName = 'LibName' in params ? params.LibName : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 该字段用于返回审核结果明细字段的标签及分数
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该字段用于返回命中的关键词
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * 该字段用于返回子标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * 该字段用于返回子标签对应的分数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -270,6 +331,24 @@ class User extends  AbstractModel {
          */
         this.Desc = null;
 
+        /**
+         * 该字段表示业务群聊场景时的房间ID。
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 该字段表示消息接受者ID
+         * @type {string || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * 消息生成时间，精确到毫秒
+         * @type {number || null}
+         */
+        this.SendTime = null;
+
     }
 
     /**
@@ -288,6 +367,9 @@ class User extends  AbstractModel {
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.HeadUrl = 'HeadUrl' in params ? params.HeadUrl : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.SendTime = 'SendTime' in params ? params.SendTime : null;
 
     }
 }
@@ -439,6 +521,13 @@ class TextModerationResponse extends  AbstractModel {
         this.SubLabel = null;
 
         /**
+         * 该字段用于返回上下文关联文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContextText = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -479,6 +568,7 @@ class TextModerationResponse extends  AbstractModel {
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.DataId = 'DataId' in params ? params.DataId : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.ContextText = 'ContextText' in params ? params.ContextText : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -488,6 +578,7 @@ module.exports = {
     RiskDetails: RiskDetails,
     TextModerationRequest: TextModerationRequest,
     DetailResults: DetailResults,
+    Tag: Tag,
     User: User,
     Device: Device,
     TextModerationResponse: TextModerationResponse,

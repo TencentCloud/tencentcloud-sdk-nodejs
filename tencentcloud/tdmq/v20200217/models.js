@@ -397,6 +397,48 @@ class DescribeSubscriptionsRequest extends  AbstractModel {
 }
 
 /**
+ * 实例节点分布信息
+ * @class
+ */
+class InstanceNodeDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 可用区id
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 节点数
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+
+    }
+}
+
+/**
  * CreateRocketMQGroup请求参数结构体
  * @class
  */
@@ -440,6 +482,18 @@ class CreateRocketMQGroupRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * Group类型（TCP/HTTP）
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * Group最大重试次数
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -455,6 +509,8 @@ class CreateRocketMQGroupRequest extends  AbstractModel {
         this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -474,7 +530,7 @@ class ModifyEnvironmentAttributesRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * 未消费消息过期时间，单位：秒，最大1296000。
+         * 未消费消息过期时间，单位：秒，范围60秒~15天。
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -960,6 +1016,41 @@ class ModifyClusterResponse extends  AbstractModel {
 }
 
 /**
+ * VPC配置信息
+ * @class
+ */
+class VpcConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * vpc的id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * RocketMQ近期使用量
  * @class
  */
@@ -1004,6 +1095,256 @@ class RocketMQClusterRecentStats extends  AbstractModel {
         this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
         this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
         this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+
+    }
+}
+
+/**
+ * RocketMQ专享实例信息
+ * @class
+ */
+class RocketMQVipInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 节点数量
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 实例配置规格名称
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * 峰值TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * 峰值带宽，Mbps为单位
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * 存储容量，GB为单位
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * 实例到期时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 0-后付费，1-预付费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 实例配置ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+
+    }
+}
+
+/**
+ * RabbitMQ专享实例信息
+ * @class
+ */
+class RabbitMQVipInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 节点数量
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 实例配置规格名称
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * 峰值TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * 峰值带宽，Mbps为单位
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * 存储容量，GB为单位
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * 实例到期时间，毫秒为单位
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 0-后付费，1-预付费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 实例配置ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * 集群异常。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExceptionInformation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.ExceptionInformation = 'ExceptionInformation' in params ? params.ExceptionInformation : null;
 
     }
 }
@@ -1110,6 +1451,90 @@ class DescribeAllTenantsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRabbitMQNodeList请求参数结构体
+ * @class
+ */
+class DescribeRabbitMQNodeListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * rabbitmq集群ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 一页限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 模糊搜索节点名字
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 过滤参数的名字和数值
+现在只有一个nodeStatus
+running/down
+数组类型，兼容后续添加过滤参数
+
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 按指定元素排序，现在只有2个
+cpuUsage/diskUsage
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * 升序/降序
+ascend/descend
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+    }
+}
+
+/**
  * DescribeNamespaceBundlesOpt返回参数结构体
  * @class
  */
@@ -1155,6 +1580,120 @@ class DescribeNamespaceBundlesOptResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RocketMQ专享集群实例配置
+ * @class
+ */
+class RocketMQInstanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单命名空间TPS上线
+         * @type {number || null}
+         */
+        this.MaxTpsPerNamespace = null;
+
+        /**
+         * 最大命名空间数量
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * 已使用命名空间数量
+         * @type {number || null}
+         */
+        this.UsedNamespaceNum = null;
+
+        /**
+         * 最大Topic数量
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * 已使用Topic数量
+         * @type {number || null}
+         */
+        this.UsedTopicNum = null;
+
+        /**
+         * 最大Group数量
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * 已使用Group数量
+         * @type {number || null}
+         */
+        this.UsedGroupNum = null;
+
+        /**
+         * 集群类型
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * 集群节点数
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 节点分布情况
+         * @type {Array.<InstanceNodeDistribution> || null}
+         */
+        this.NodeDistribution = null;
+
+        /**
+         * topic分布情况
+         * @type {Array.<RocketMQTopicDistribution> || null}
+         */
+        this.TopicDistribution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+
+        if (params.NodeDistribution) {
+            this.NodeDistribution = new Array();
+            for (let z in params.NodeDistribution) {
+                let obj = new InstanceNodeDistribution();
+                obj.deserialize(params.NodeDistribution[z]);
+                this.NodeDistribution.push(obj);
+            }
+        }
+
+        if (params.TopicDistribution) {
+            this.TopicDistribution = new Array();
+            for (let z in params.TopicDistribution) {
+                let obj = new RocketMQTopicDistribution();
+                obj.deserialize(params.TopicDistribution[z]);
+                this.TopicDistribution.push(obj);
+            }
+        }
 
     }
 }
@@ -1645,6 +2184,20 @@ class RocketMQGroup extends  AbstractModel {
          */
         this.BroadcastEnabled = null;
 
+        /**
+         * Group类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -1667,6 +2220,8 @@ class RocketMQGroup extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ConsumerType = 'ConsumerType' in params ? params.ConsumerType : null;
         this.BroadcastEnabled = 'BroadcastEnabled' in params ? params.BroadcastEnabled : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -1716,6 +2271,34 @@ class AMQPClusterRecentStats extends  AbstractModel {
         this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
         this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
         this.ExchangeNum = 'ExchangeNum' in params ? params.ExchangeNum : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstanceDetail请求参数结构体
+ * @class
+ */
+class DescribeRocketMQVipInstanceDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1818,7 +2401,7 @@ class CreateSubscriptionRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 订阅者名称，不支持中字以及除了短线和下划线外的特殊字符且不超过150个字符。
+         * 订阅者名称，不超过128个字符。
          * @type {string || null}
          */
         this.SubscriptionName = null;
@@ -3387,7 +3970,7 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * 未消费消息过期时间，单位：秒，最小60，最大1296000，（15天）。
+         * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -3703,6 +4286,18 @@ class RocketMQTopic extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 主题的类别，为枚举类型，Normal，GlobalOrder，PartitionedOrder，Transaction，Retry及DeadLetter
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 订阅组数量
+         * @type {number || null}
+         */
+        this.GroupNum = null;
+
+        /**
          * 说明
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -3737,6 +4332,8 @@ class RocketMQTopic extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
@@ -4440,24 +5037,24 @@ class DeleteAMQPClusterRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTopics返回参数结构体
+ * DescribeRocketMQVipInstanceDetail返回参数结构体
  * @class
  */
-class DescribeTopicsResponse extends  AbstractModel {
+class DescribeRocketMQVipInstanceDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题集合数组。
-         * @type {Array.<Topic> || null}
+         * 集群信息
+         * @type {RocketMQClusterInfo || null}
          */
-        this.TopicSets = null;
+        this.ClusterInfo = null;
 
         /**
-         * 主题数量。
-         * @type {number || null}
+         * 集群配置
+         * @type {RocketMQInstanceConfig || null}
          */
-        this.TotalCount = null;
+        this.InstanceConfig = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4475,15 +5072,17 @@ class DescribeTopicsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
+        if (params.ClusterInfo) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceConfig) {
+            let obj = new RocketMQInstanceConfig();
+            obj.deserialize(params.InstanceConfig)
+            this.InstanceConfig = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5085,6 +5684,56 @@ class ModifyCmqTopicAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRabbitMQVipInstances返回参数结构体
+ * @class
+ */
+class DescribeRabbitMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 未分页的总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例信息列表
+         * @type {Array.<RabbitMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RabbitMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRoles请求参数结构体
  * @class
  */
@@ -5324,6 +5973,57 @@ class ModifyRoleRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRabbitMQNodeList返回参数结构体
+ * @class
+ */
+class DescribeRabbitMQNodeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群列表数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RabbitMQPrivateNode> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new RabbitMQPrivateNode();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendMessages返回参数结构体
  * @class
  */
@@ -5394,10 +6094,28 @@ class ReceiveMessageRequest extends  AbstractModel {
         this.ReceiverQueueSize = null;
 
         /**
-         * 默认值为：Latest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
+         * 默认值为：Earliest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
          * @type {string || null}
          */
         this.SubInitialPosition = null;
+
+        /**
+         * 用于设置BatchReceivePolicy，指在一次batch中最多接收多少条消息，默认是 0。即不开启BatchReceivePolicy
+         * @type {number || null}
+         */
+        this.MaxNumMessages = null;
+
+        /**
+         * 用于设置BatchReceivePolicy，指在一次batch中最多接收的消息体有多大，单位是 bytes。默认是 0，即不开启BatchReceivePolicy
+         * @type {number || null}
+         */
+        this.MaxNumBytes = null;
+
+        /**
+         * 用于设置BatchReceivePolicy，指在一次batch消息的接收z中最多等待的超时时间，单位是毫秒。默认是 0，即不开启BatchReceivePolicy
+         * @type {number || null}
+         */
+        this.Timeout = null;
 
     }
 
@@ -5412,6 +6130,9 @@ class ReceiveMessageRequest extends  AbstractModel {
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
         this.ReceiverQueueSize = 'ReceiverQueueSize' in params ? params.ReceiverQueueSize : null;
         this.SubInitialPosition = 'SubInitialPosition' in params ? params.SubInitialPosition : null;
+        this.MaxNumMessages = 'MaxNumMessages' in params ? params.MaxNumMessages : null;
+        this.MaxNumBytes = 'MaxNumBytes' in params ? params.MaxNumBytes : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -5437,7 +6158,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 0：非分区topic，无分区；非0：具体分区topic的分区数，最大不允许超过128。
+         * 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过128。
          * @type {number || null}
          */
         this.Partitions = null;
@@ -5449,7 +6170,8 @@ class CreateTopicRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 0： 普通消息；
+         * 该入参将逐步弃用，可切换至PulsarTopicType参数
+0： 普通消息；
 1 ：全局顺序消息；
 2 ：局部顺序消息；
 3 ：重试队列；
@@ -5528,12 +6250,10 @@ class DescribeTopicsRequest extends  AbstractModel {
 
         /**
          * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
+0：非持久非分区主题类型；
+1：非持久分区主题类型；
+2：持久非分区主题类型；
+3：持久分区主题类型；
          * @type {number || null}
          */
         this.TopicType = null;
@@ -5552,6 +6272,14 @@ class DescribeTopicsRequest extends  AbstractModel {
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * 创建来源：
+1：用户创建
+2：系统创建
+         * @type {number || null}
+         */
+        this.TopicCreator = null;
 
     }
 
@@ -5577,6 +6305,7 @@ class DescribeTopicsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.TopicCreator = 'TopicCreator' in params ? params.TopicCreator : null;
 
     }
 }
@@ -5815,6 +6544,12 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
          */
         this.BroadcastEnable = null;
 
+        /**
+         * 最大重试次数
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -5830,6 +6565,7 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
         this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -6077,6 +6813,13 @@ FilterType = 2表示用户使用 BindingKey 过滤。
          */
         this.Status = null;
 
+        /**
+         * 0表示pulsar，1表示rocketmq
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BrokerType = null;
+
     }
 
     /**
@@ -6109,6 +6852,7 @@ FilterType = 2表示用户使用 BindingKey 过滤。
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.BrokerType = 'BrokerType' in params ? params.BrokerType : null;
 
     }
 }
@@ -6450,6 +7194,20 @@ class ReceiveMessageResponse extends  AbstractModel {
         this.SubName = null;
 
         /**
+         * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MessageIDList = null;
+
+        /**
+         * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MessagesPayload = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6469,6 +7227,8 @@ class ReceiveMessageResponse extends  AbstractModel {
         this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.SubName = 'SubName' in params ? params.SubName : null;
+        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
+        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6992,6 +7752,55 @@ class RocketMQClusterInfo extends  AbstractModel {
          */
         this.SupportNamespaceEndpoint = null;
 
+        /**
+         * VPC信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VpcConfig> || null}
+         */
+        this.Vpcs = null;
+
+        /**
+         * 是否为专享实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsVip = null;
+
+        /**
+         * Rocketmq集群标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.RocketMQFlag = null;
+
+        /**
+         * 计费状态，1表示正常，2表示已停服，3表示已销毁
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 欠费停服时间，毫秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * HTTP协议公网接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HttpPublicEndpoint = null;
+
+        /**
+         * HTTP协议VPC接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HttpVpcEndpoint = null;
+
     }
 
     /**
@@ -7009,6 +7818,21 @@ class RocketMQClusterInfo extends  AbstractModel {
         this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
         this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
         this.SupportNamespaceEndpoint = 'SupportNamespaceEndpoint' in params ? params.SupportNamespaceEndpoint : null;
+
+        if (params.Vpcs) {
+            this.Vpcs = new Array();
+            for (let z in params.Vpcs) {
+                let obj = new VpcConfig();
+                obj.deserialize(params.Vpcs[z]);
+                this.Vpcs.push(obj);
+            }
+        }
+        this.IsVip = 'IsVip' in params ? params.IsVip : null;
+        this.RocketMQFlag = 'RocketMQFlag' in params ? params.RocketMQFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.HttpPublicEndpoint = 'HttpPublicEndpoint' in params ? params.HttpPublicEndpoint : null;
+        this.HttpVpcEndpoint = 'HttpVpcEndpoint' in params ? params.HttpVpcEndpoint : null;
 
     }
 }
@@ -7823,7 +8647,7 @@ class CreateTopicResponse extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 0：非分区topic，无分区；非0：具体分区topic的分区数。
+         * 0或1：非分区topic，无分区；大于1：具体分区topic的分区数。（存量非分区主题返回0，增量非分区主题返回1）
          * @type {number || null}
          */
         this.Partitions = null;
@@ -7841,7 +8665,6 @@ class CreateTopicResponse extends  AbstractModel {
 2 ：局部顺序消息；
 3 ：重试队列；
 4 ：死信队列；
-5 ：事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -8297,6 +9120,56 @@ class CreateAMQPClusterResponse extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstances请求参数结构体
+ * @class
+ */
+class DescribeRocketMQVipInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询条件过滤器
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 查询数目上限，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询起始位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -9220,6 +10093,13 @@ class RocketMQClusterConfig extends  AbstractModel {
          */
         this.MaxLatencyTime = null;
 
+        /**
+         * 单个主题最大队列数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxQueuesPerTopic = null;
+
     }
 
     /**
@@ -9238,6 +10118,7 @@ class RocketMQClusterConfig extends  AbstractModel {
         this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
         this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
         this.MaxLatencyTime = 'MaxLatencyTime' in params ? params.MaxLatencyTime : null;
+        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
 
     }
 }
@@ -10218,7 +11099,7 @@ class CreateRocketMQTopicRequest extends  AbstractModel {
         this.Namespaces = null;
 
         /**
-         * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder
+         * 主题类型，可选值为Normal, PartitionedOrder, Transaction, DelayScheduled。
          * @type {string || null}
          */
         this.Type = null;
@@ -10475,6 +11356,13 @@ class InternalTenant extends  AbstractModel {
          */
         this.MaxRetentionSizeInMB = null;
 
+        /**
+         * public Access Enabled
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
     }
 
     /**
@@ -10505,6 +11393,7 @@ class InternalTenant extends  AbstractModel {
         this.MaxDispatchRateInBytes = 'MaxDispatchRateInBytes' in params ? params.MaxDispatchRateInBytes : null;
         this.MaxPublishRateInBytes = 'MaxPublishRateInBytes' in params ? params.MaxPublishRateInBytes : null;
         this.MaxRetentionSizeInMB = 'MaxRetentionSizeInMB' in params ? params.MaxRetentionSizeInMB : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
 
     }
 }
@@ -10973,7 +11862,7 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+         * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
          * @type {number || null}
          */
         this.RetentionSizeInMB = null;
@@ -11134,6 +12023,12 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
          */
         this.FilterOneGroup = null;
 
+        /**
+         * group类型
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
     }
 
     /**
@@ -11152,6 +12047,7 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
         this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
         this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
         this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
+        this.Types = 'Types' in params ? params.Types : null;
 
     }
 }
@@ -11203,6 +12099,76 @@ class DescribeRocketMQClustersResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RocketMQtopic分布情况
+ * @class
+ */
+class RocketMQTopicDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * topic类型
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * topic数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * 排序器
+ * @class
+ */
+class Sort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 升序ASC，降序DESC
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -11467,24 +12433,30 @@ class ModifyAMQPClusterResponse extends  AbstractModel {
 }
 
 /**
- * 排序器
+ * DescribeTopics返回参数结构体
  * @class
  */
-class Sort extends  AbstractModel {
+class DescribeTopicsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 排序字段
-         * @type {string || null}
+         * 主题集合数组。
+         * @type {Array.<Topic> || null}
          */
-        this.Name = null;
+        this.TopicSets = null;
 
         /**
-         * 升序ASC，降序DESC
+         * 主题数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Order = null;
+        this.RequestId = null;
 
     }
 
@@ -11495,8 +12467,17 @@ class Sort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11985,13 +12966,13 @@ class PublishCmqMsgRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 消息内容
+         * 消息内容，消息总大小需不大于1024K
          * @type {string || null}
          */
         this.MsgContent = null;
 
         /**
-         * 消息标签
+         * 消息标签，支持传递多标签或单路由，单个标签、路由长度不能超过64个字符。
          * @type {Array.<string> || null}
          */
         this.MsgTag = null;
@@ -12106,6 +13087,75 @@ class CreateAMQPRouteRelationRequest extends  AbstractModel {
         this.DestValue = 'DestValue' in params ? params.DestValue : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+
+    }
+}
+
+/**
+ * RabbitMQ节点信息
+ * @class
+ */
+class RabbitMQPrivateNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 节点状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeStatus = null;
+
+        /**
+         * CPU使用率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CPUUsage = null;
+
+        /**
+         * 内存使用情况，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 磁盘使用率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Rabbitmq的Erlang进程数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProcessNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeStatus = 'NodeStatus' in params ? params.NodeStatus : null;
+        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.ProcessNumber = 'ProcessNumber' in params ? params.ProcessNumber : null;
 
     }
 }
@@ -12378,7 +13428,7 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.Transaction = null;
 
         /**
-         * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+         * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
          * @type {number || null}
          */
         this.RetentionSizeInMB = null;
@@ -12436,6 +13486,106 @@ class ModifyRocketMQGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstances返回参数结构体
+ * @class
+ */
+class DescribeRocketMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 未分页的总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例信息列表
+         * @type {Array.<RocketMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RocketMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstances请求参数结构体
+ * @class
+ */
+class DescribeRabbitMQVipInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询条件过滤器
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 查询数目上限，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询起始位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -12576,7 +13726,8 @@ class SendMessagesRequest extends  AbstractModel {
         this.StringToken = null;
 
         /**
-         * 设置 producer 的名字，要求全局唯一，用户不配置，系统会随机生成
+         * 设置 producer 的名字，要求全局唯一。该参数建议用户无需手动配置，此时系统会随机生成，如果手动设置有可能会造成创建 Producer 失败进而导致消息发送失败。
+该参数主要用于某些特定场景下，只允许特定的 Producer 生产消息时设置，用户的大部分场景使用不到该特性。
          * @type {string || null}
          */
         this.ProducerName = null;
@@ -12780,6 +13931,7 @@ module.exports = {
     DescribeNamespaceBundlesOptRequest: DescribeNamespaceBundlesOptRequest,
     RocketMQNamespace: RocketMQNamespace,
     DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
+    InstanceNodeDistribution: InstanceNodeDistribution,
     CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
     ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
     DeleteClusterResponse: DeleteClusterResponse,
@@ -12792,10 +13944,15 @@ module.exports = {
     DescribeBindClustersResponse: DescribeBindClustersResponse,
     BindCluster: BindCluster,
     ModifyClusterResponse: ModifyClusterResponse,
+    VpcConfig: VpcConfig,
     RocketMQClusterRecentStats: RocketMQClusterRecentStats,
+    RocketMQVipInstance: RocketMQVipInstance,
+    RabbitMQVipInstance: RabbitMQVipInstance,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
     DescribeAllTenantsResponse: DescribeAllTenantsResponse,
+    DescribeRabbitMQNodeListRequest: DescribeRabbitMQNodeListRequest,
     DescribeNamespaceBundlesOptResponse: DescribeNamespaceBundlesOptResponse,
+    RocketMQInstanceConfig: RocketMQInstanceConfig,
     DescribeBindVpcsResponse: DescribeBindVpcsResponse,
     RewindCmqQueueResponse: RewindCmqQueueResponse,
     DeleteClusterRequest: DeleteClusterRequest,
@@ -12806,6 +13963,7 @@ module.exports = {
     DeleteRocketMQGroupRequest: DeleteRocketMQGroupRequest,
     RocketMQGroup: RocketMQGroup,
     AMQPClusterRecentStats: AMQPClusterRecentStats,
+    DescribeRocketMQVipInstanceDetailRequest: DescribeRocketMQVipInstanceDetailRequest,
     DeleteCmqTopicResponse: DeleteCmqTopicResponse,
     ModifyAMQPVHostRequest: ModifyAMQPVHostRequest,
     CreateSubscriptionRequest: CreateSubscriptionRequest,
@@ -12849,7 +14007,7 @@ module.exports = {
     DescribeAMQPExchangesResponse: DescribeAMQPExchangesResponse,
     AcknowledgeMessageRequest: AcknowledgeMessageRequest,
     DeleteAMQPClusterRequest: DeleteAMQPClusterRequest,
-    DescribeTopicsResponse: DescribeTopicsResponse,
+    DescribeRocketMQVipInstanceDetailResponse: DescribeRocketMQVipInstanceDetailResponse,
     PublishCmqMsgResponse: PublishCmqMsgResponse,
     DescribePublishersRequest: DescribePublishersRequest,
     CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
@@ -12865,12 +14023,14 @@ module.exports = {
     DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
     DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
     ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
+    DescribeRabbitMQVipInstancesResponse: DescribeRabbitMQVipInstancesResponse,
     DeleteRolesRequest: DeleteRolesRequest,
     ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
     DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
     DescribeSubscriptionsResponse: DescribeSubscriptionsResponse,
     ModifyRoleRequest: ModifyRoleRequest,
+    DescribeRabbitMQNodeListResponse: DescribeRabbitMQNodeListResponse,
     SendMessagesResponse: SendMessagesResponse,
     ReceiveMessageRequest: ReceiveMessageRequest,
     CreateTopicRequest: CreateTopicRequest,
@@ -12928,6 +14088,7 @@ module.exports = {
     DescribeAMQPRouteRelationsResponse: DescribeAMQPRouteRelationsResponse,
     DeleteTopicsResponse: DeleteTopicsResponse,
     CreateAMQPClusterResponse: CreateAMQPClusterResponse,
+    DescribeRocketMQVipInstancesRequest: DescribeRocketMQVipInstancesRequest,
     DeleteAMQPExchangeRequest: DeleteAMQPExchangeRequest,
     DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
     CreateCmqTopicResponse: CreateCmqTopicResponse,
@@ -12982,12 +14143,14 @@ module.exports = {
     DeleteCmqQueueRequest: DeleteCmqQueueRequest,
     DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
     DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
+    RocketMQTopicDistribution: RocketMQTopicDistribution,
+    Sort: Sort,
     CreateRoleRequest: CreateRoleRequest,
     ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
     DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
     Role: Role,
     ModifyAMQPClusterResponse: ModifyAMQPClusterResponse,
-    Sort: Sort,
+    DescribeTopicsResponse: DescribeTopicsResponse,
     AMQPClusterConfig: AMQPClusterConfig,
     DescribeAMQPExchangesRequest: DescribeAMQPExchangesRequest,
     CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
@@ -13000,12 +14163,15 @@ module.exports = {
     PublishCmqMsgRequest: PublishCmqMsgRequest,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
     CreateAMQPRouteRelationRequest: CreateAMQPRouteRelationRequest,
+    RabbitMQPrivateNode: RabbitMQPrivateNode,
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
     DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
     SendCmqMsgRequest: SendCmqMsgRequest,
     ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
+    DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
+    DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,
     AMQPClusterDetail: AMQPClusterDetail,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     SendMessagesRequest: SendMessagesRequest,

@@ -486,6 +486,24 @@ false：关闭60天内禁止转移注册商锁定
          */
         this.TransferProhibition = null;
 
+        /**
+         * 渠道来源，pc/miniprogram/h5等
+         * @type {string || null}
+         */
+        this.ChannelFrom = null;
+
+        /**
+         * 订单来源，common正常/dianshi_active点石活动等
+         * @type {string || null}
+         */
+        this.OrderFrom = null;
+
+        /**
+         * 活动id
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -503,6 +521,9 @@ false：关闭60天内禁止转移注册商锁定
         this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
         this.UpdateProhibition = 'UpdateProhibition' in params ? params.UpdateProhibition : null;
         this.TransferProhibition = 'TransferProhibition' in params ? params.TransferProhibition : null;
+        this.ChannelFrom = 'ChannelFrom' in params ? params.ChannelFrom : null;
+        this.OrderFrom = 'OrderFrom' in params ? params.OrderFrom : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1081,7 +1102,7 @@ class RenewDomainBatchRequest extends  AbstractModel {
         this.Domains = null;
 
         /**
-         * 付费模式 0手动在线付费，1使用余额付费。
+         * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包。
          * @type {number || null}
          */
         this.PayMode = null;
@@ -1094,6 +1115,30 @@ class RenewDomainBatchRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
+
+        /**
+         * 特惠包ID
+         * @type {string || null}
+         */
+        this.PackageResourceId = null;
+
+        /**
+         * 渠道来源，pc/miniprogram/h5等
+         * @type {string || null}
+         */
+        this.ChannelFrom = null;
+
+        /**
+         * 订单来源，common正常/dianshi_active点石活动等
+         * @type {string || null}
+         */
+        this.OrderFrom = null;
+
+        /**
+         * 活动id
+         * @type {string || null}
+         */
+        this.ActivityId = null;
 
     }
 
@@ -1108,6 +1153,10 @@ class RenewDomainBatchRequest extends  AbstractModel {
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PackageResourceId = 'PackageResourceId' in params ? params.PackageResourceId : null;
+        this.ChannelFrom = 'ChannelFrom' in params ? params.ChannelFrom : null;
+        this.OrderFrom = 'OrderFrom' in params ? params.OrderFrom : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1256,6 +1305,12 @@ class TemplateInfo extends  AbstractModel {
          */
         this.InvalidReason = null;
 
+        /**
+         * 是包含黑名单手机或邮箱
+         * @type {boolean || null}
+         */
+        this.IsBlack = null;
+
     }
 
     /**
@@ -1286,6 +1341,7 @@ class TemplateInfo extends  AbstractModel {
         }
         this.IsValidTemplate = 'IsValidTemplate' in params ? params.IsValidTemplate : null;
         this.InvalidReason = 'InvalidReason' in params ? params.InvalidReason : null;
+        this.IsBlack = 'IsBlack' in params ? params.IsBlack : null;
 
     }
 }
@@ -2056,6 +2112,7 @@ false 不是
          * 是否已设置自动续费 。
 0：未设置 
 1：已设置
+2：设置后，关闭
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -2224,6 +2281,24 @@ class CreateDomainBatchRequest extends  AbstractModel {
          */
         this.TransferProhibition = null;
 
+        /**
+         * 渠道来源，pc/miniprogram/h5等
+         * @type {string || null}
+         */
+        this.ChannelFrom = null;
+
+        /**
+         * 订单来源，common正常/dianshi_active点石活动等
+         * @type {string || null}
+         */
+        this.OrderFrom = null;
+
+        /**
+         * 活动id
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -2241,6 +2316,9 @@ class CreateDomainBatchRequest extends  AbstractModel {
         this.PackageResourceId = 'PackageResourceId' in params ? params.PackageResourceId : null;
         this.UpdateProhibition = 'UpdateProhibition' in params ? params.UpdateProhibition : null;
         this.TransferProhibition = 'TransferProhibition' in params ? params.TransferProhibition : null;
+        this.ChannelFrom = 'ChannelFrom' in params ? params.ChannelFrom : null;
+        this.OrderFrom = 'OrderFrom' in params ? params.OrderFrom : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -2452,6 +2530,8 @@ serverDeleteProhibited：注册局禁止删除
 clientTransferProhibited：注册商禁止转移
 clientUpdateProhibited：注册商禁止更新
 clientDeleteProhibited：注册商禁止删除
+serverRenewProhibited: 注册局禁止续费
+clientRenewProhobited: 注册商禁止续费
          * @type {Array.<string> || null}
          */
         this.DomainStatus = null;

@@ -122,7 +122,7 @@ class ApplyConcurrentRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * 用户IP
+         * 用户IP，用户客户端的公网IP，用于就近调度
          * @type {string || null}
          */
         this.UserIp = null;
@@ -139,6 +139,12 @@ class ApplyConcurrentRequest extends  AbstractModel {
          */
         this.ApplicationVersionId = null;
 
+        /**
+         * 应用ID。如果是独享项目，将忽略该参数，使用项目绑定的应用。如果是共享项目，使用该参数来指定应用。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
     }
 
     /**
@@ -152,6 +158,7 @@ class ApplyConcurrentRequest extends  AbstractModel {
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -199,7 +206,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * 用户IP
+         * 用户IP，用户客户端的公网IP，用于就近调度
          * @type {string || null}
          */
         this.UserIp = null;
@@ -209,6 +216,14 @@ class CreateSessionRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClientSession = null;
+
+        /**
+         * 云端运行模式。
+RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行
+默认值（空）：要求必须有客户端连接才会保持云端 App 运行。
+         * @type {string || null}
+         */
+        this.RunMode = null;
 
     }
 
@@ -222,6 +237,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
 
     }
 }

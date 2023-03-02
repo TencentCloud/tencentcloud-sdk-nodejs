@@ -16,14 +16,17 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const UploadTaxPaymentRequest = models.UploadTaxPaymentRequest;
+const QueryFlexPaymentOrderStatusRequest = models.QueryFlexPaymentOrderStatusRequest;
 const QueryAcctBindingRequest = models.QueryAcctBindingRequest;
+const QueryCompanyTitleResponse = models.QueryCompanyTitleResponse;
 const ReviseMbrPropertyResponse = models.ReviseMbrPropertyResponse;
 const ApplyPayerInfoResponse = models.ApplyPayerInfoResponse;
-const RevokeRechargeByThirdPayRequest = models.RevokeRechargeByThirdPayRequest;
+const QueryOpenBankProfitSharePayeeResult = models.QueryOpenBankProfitSharePayeeResult;
 const UnifiedOrderResponse = models.UnifiedOrderResponse;
+const ApplyOpenBankSettleOrderResponse = models.ApplyOpenBankSettleOrderResponse;
 const CreatePayRollTokenResponse = models.CreatePayRollTokenResponse;
 const ApplyPayerinfoResult = models.ApplyPayerinfoResult;
+const FreezeFlexBalanceResult = models.FreezeFlexBalanceResult;
 const BindAcctRequest = models.BindAcctRequest;
 const QueryOpenBankBankBranchListResponse = models.QueryOpenBankBankBranchListResponse;
 const MigrateOrderRefundQueryResponse = models.MigrateOrderRefundQueryResponse;
@@ -32,13 +35,15 @@ const QueryOpenBankBindExternalSubMerchantBankAccountResponse = models.QueryOpen
 const UploadOrgFileRequest = models.UploadOrgFileRequest;
 const GetPayRollAuthResultRequest = models.GetPayRollAuthResultRequest;
 const RefundTlinxOrderResponse = models.RefundTlinxOrderResponse;
-const QueryItem = models.QueryItem;
+const CreatePayMerchantRequest = models.CreatePayMerchantRequest;
 const QueryContractPayWayListResponse = models.QueryContractPayWayListResponse;
 const QueryContractPayWayListRequest = models.QueryContractPayWayListRequest;
+const GetBillDownloadUrlResponse = models.GetBillDownloadUrlResponse;
 const QueryAssignmentRequest = models.QueryAssignmentRequest;
 const ApplyTradeResult = models.ApplyTradeResult;
 const RefundOutSubOrderRefundList = models.RefundOutSubOrderRefundList;
 const UnbindRelateAcctRequest = models.UnbindRelateAcctRequest;
+const UnifiedTlinxOrderResponse = models.UnifiedTlinxOrderResponse;
 const CreateMerchantRequest = models.CreateMerchantRequest;
 const QueryContractRelateShopResponse = models.QueryContractRelateShopResponse;
 const CreateOpenBankExternalSubMerchantRegistrationResult = models.CreateOpenBankExternalSubMerchantRegistrationResult;
@@ -50,61 +55,81 @@ const CreateInvoiceItem = models.CreateInvoiceItem;
 const ApplyOutwardOrderData = models.ApplyOutwardOrderData;
 const MerchantPayWayData = models.MerchantPayWayData;
 const QueryOpenBankDownLoadUrlResult = models.QueryOpenBankDownLoadUrlResult;
+const QueryOpenBankSubMerchantSignOnlineResponse = models.QueryOpenBankSubMerchantSignOnlineResponse;
 const BindAccountResponse = models.BindAccountResponse;
 const CreateInvoiceResultData = models.CreateInvoiceResultData;
 const CloudClientInfo = models.CloudClientInfo;
-const FileItem = models.FileItem;
+const QueryFundsTransactionDetailsResult = models.QueryFundsTransactionDetailsResult;
 const UnbindOpenBankExternalSubMerchantBankAccountRequest = models.UnbindOpenBankExternalSubMerchantBankAccountRequest;
 const CreateRedInvoiceItem = models.CreateRedInvoiceItem;
 const AddMerchantResult = models.AddMerchantResult;
+const CloudExternalUserInfo = models.CloudExternalUserInfo;
 const QueryOpenBankExternalSubMerchantRegistrationRequest = models.QueryOpenBankExternalSubMerchantRegistrationRequest;
+const RevokeRechargeByThirdPayRequest = models.RevokeRechargeByThirdPayRequest;
 const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
 const CreateTransferBatchResponse = models.CreateTransferBatchResponse;
 const BindAccountRequest = models.BindAccountRequest;
+const QueryOpenBankSubMerchantRateConfigureResult = models.QueryOpenBankSubMerchantRateConfigureResult;
 const QueryCloudChannelDataResponse = models.QueryCloudChannelDataResponse;
-const QuerySinglePayResponse = models.QuerySinglePayResponse;
+const UploadExternalAnchorInfoResponse = models.UploadExternalAnchorInfoResponse;
 const QueryCustAcctIdBalanceResponse = models.QueryCustAcctIdBalanceResponse;
+const QueryOpenBankSubMerchantSignOnlineRequest = models.QueryOpenBankSubMerchantSignOnlineRequest;
 const CreateRedInvoiceRequest = models.CreateRedInvoiceRequest;
 const QueryAcctInfoListResponse = models.QueryAcctInfoListResponse;
 const ContractInfo = models.ContractInfo;
 const QueryOpenBankExternalSubMerchantBankAccountRequest = models.QueryOpenBankExternalSubMerchantBankAccountRequest;
+const SettlementOrders = models.SettlementOrders;
 const ExternalReturnContractInfo = models.ExternalReturnContractInfo;
 const ExecuteMemberTransactionResponse = models.ExecuteMemberTransactionResponse;
 const OrganizationInfo = models.OrganizationInfo;
-const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
+const FlexFundingAccountInfo = models.FlexFundingAccountInfo;
 const ConfirmOrderRequest = models.ConfirmOrderRequest;
 const CloudExternalPromptGroup = models.CloudExternalPromptGroup;
+const ModifyFlexPayeeAccountRightStatusResponse = models.ModifyFlexPayeeAccountRightStatusResponse;
 const ModifyMerchantResponse = models.ModifyMerchantResponse;
 const ReturnContractInfo = models.ReturnContractInfo;
+const VerifyOpenBankAccountRequest = models.VerifyOpenBankAccountRequest;
 const QuerySmallAmountTransferResponse = models.QuerySmallAmountTransferResponse;
 const CityCodeResult = models.CityCodeResult;
-const QueryMerchantClassificationRequest = models.QueryMerchantClassificationRequest;
+const CreateFlexPayeeResponse = models.CreateFlexPayeeResponse;
 const UnbindOpenBankExternalSubMerchantBankAccountResult = models.UnbindOpenBankExternalSubMerchantBankAccountResult;
 const QuerySingleTransactionStatusResponse = models.QuerySingleTransactionStatusResponse;
 const CreateOpenBankMerchantResponse = models.CreateOpenBankMerchantResponse;
 const ApplyDeclareData = models.ApplyDeclareData;
 const TransferDetailResponse = models.TransferDetailResponse;
+const QueryOpenBankSubMerchantSignOnlineResult = models.QueryOpenBankSubMerchantSignOnlineResult;
 const QueryOrderRequest = models.QueryOrderRequest;
 const RevokeMemberRechargeThirdPayResponse = models.RevokeMemberRechargeThirdPayResponse;
 const DistributeAccreditTlinxRequest = models.DistributeAccreditTlinxRequest;
+const QueryOpenBankBillData = models.QueryOpenBankBillData;
 const QueryContractRelateShopRequest = models.QueryContractRelateShopRequest;
+const PlatformAccountBalanceResult = models.PlatformAccountBalanceResult;
 const CreateOpenBankRechargeOrderRequest = models.CreateOpenBankRechargeOrderRequest;
-const QueryContractPayFeeResult = models.QueryContractPayFeeResult;
+const CloudExternalAttachmentData = models.CloudExternalAttachmentData;
 const QueryExceedingInfoResponse = models.QueryExceedingInfoResponse;
 const AddContractRequest = models.AddContractRequest;
 const CreateAcctResponse = models.CreateAcctResponse;
+const CreateOpenBankVerificationOrderResponse = models.CreateOpenBankVerificationOrderResponse;
+const PaymentOrderResult = models.PaymentOrderResult;
 const DistributeAddReceiverRequest = models.DistributeAddReceiverRequest;
+const QueryFinancialDataUrlRequest = models.QueryFinancialDataUrlRequest;
 const QueryExchangerateData = models.QueryExchangerateData;
-const WithdrawBill = models.WithdrawBill;
+const ServiceProviderAccountBalanceResult = models.ServiceProviderAccountBalanceResult;
 const QueryOpenBankDailyReceiptDownloadUrlResponse = models.QueryOpenBankDailyReceiptDownloadUrlResponse;
 const QueryPayerInfoResponse = models.QueryPayerInfoResponse;
+const QueryMerchantBalanceResponse = models.QueryMerchantBalanceResponse;
 const BindOpenBankExternalSubMerchantBankAccountResponse = models.BindOpenBankExternalSubMerchantBankAccountResponse;
-const QueryMemberTransactionDetailsResponse = models.QueryMemberTransactionDetailsResponse;
-const QueryInvoiceResultData = models.QueryInvoiceResultData;
+const QueryTradeData = models.QueryTradeData;
+const QueryOpenBankSettleOrderResponse = models.QueryOpenBankSettleOrderResponse;
+const QueryContractPayFeeResult = models.QueryContractPayFeeResult;
+const ApplyFlexPaymentResult = models.ApplyFlexPaymentResult;
 const FundsTransactionItem = models.FundsTransactionItem;
+const BindOpenBankProfitSharePayeeRequest = models.BindOpenBankProfitSharePayeeRequest;
 const AddMerchantResponse = models.AddMerchantResponse;
+const QueryFlexSettlementOrderListRequest = models.QueryFlexSettlementOrderListRequest;
 const RefundCloudOrderRequest = models.RefundCloudOrderRequest;
-const RegisterBillResponse = models.RegisterBillResponse;
+const CreateOpenBankAggregatedSubMerchantRegistrationResponse = models.CreateOpenBankAggregatedSubMerchantRegistrationResponse;
+const QueryFlexPlatformAccountBalanceResponse = models.QueryFlexPlatformAccountBalanceResponse;
 const ApplyReWithdrawalRequest = models.ApplyReWithdrawalRequest;
 const DownloadFileResult = models.DownloadFileResult;
 const RechargeByThirdPayResponse = models.RechargeByThirdPayResponse;
@@ -112,11 +137,11 @@ const QueryOutwardOrderRequest = models.QueryOutwardOrderRequest;
 const ViewMerchantRequest = models.ViewMerchantRequest;
 const CloseCloudOrderResponse = models.CloseCloudOrderResponse;
 const QueryOpenBankPaymentOrderResult = models.QueryOpenBankPaymentOrderResult;
+const RefundRequest = models.RefundRequest;
+const OutSubMerchantExtensionInfo = models.OutSubMerchantExtensionInfo;
 const QueryTradeResult = models.QueryTradeResult;
-const ClearItem = models.ClearItem;
 const PayFeeDataResult = models.PayFeeDataResult;
 const CreateInvoiceV2Response = models.CreateInvoiceV2Response;
-const QuerySinglePayItem = models.QuerySinglePayItem;
 const QueryInvoiceV2Response = models.QueryInvoiceV2Response;
 const QueryAgentStatementsResponse = models.QueryAgentStatementsResponse;
 const QueryOutwardOrderResponse = models.QueryOutwardOrderResponse;
@@ -127,9 +152,11 @@ const CreateOpenBankOrderPaymentResult = models.CreateOpenBankOrderPaymentResult
 const CloseOpenBankPaymentOrderResponse = models.CloseOpenBankPaymentOrderResponse;
 const TerminateContractRequest = models.TerminateContractRequest;
 const OpenBankSceneInfo = models.OpenBankSceneInfo;
-const CreatePayMerchantRequest = models.CreatePayMerchantRequest;
+const ModifyFlexPayeeAccountRightStatusRequest = models.ModifyFlexPayeeAccountRightStatusRequest;
 const QueryMaliciousRegistrationResponse = models.QueryMaliciousRegistrationResponse;
+const OpenBankSettlementRulesInfo = models.OpenBankSettlementRulesInfo;
 const RefundCloudOrderResponse = models.RefundCloudOrderResponse;
+const QueryPayerinfoResult = models.QueryPayerinfoResult;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const QueryInvoiceRequest = models.QueryInvoiceRequest;
 const CreatePayRollPreOrderResponse = models.CreatePayRollPreOrderResponse;
@@ -139,27 +166,39 @@ const QueryOpenBankUnbindExternalSubMerchantBankAccountResponse = models.QueryOp
 const QueryOpenBankDownLoadUrlRequest = models.QueryOpenBankDownLoadUrlRequest;
 const DownloadBillRequest = models.DownloadBillRequest;
 const RevokeMemberRechargeThirdPayRequest = models.RevokeMemberRechargeThirdPayRequest;
-const QuerySinglePayRequest = models.QuerySinglePayRequest;
 const ApplyTradeResponse = models.ApplyTradeResponse;
+const QueryOpenBankSettleOrderRequest = models.QueryOpenBankSettleOrderRequest;
+const OpenBankPayLimitInfo = models.OpenBankPayLimitInfo;
 const ViewMerchantResult = models.ViewMerchantResult;
 const QueryOpenBankSupportBankListRequest = models.QueryOpenBankSupportBankListRequest;
+const QueryFlexPayeeAccountBalanceRequest = models.QueryFlexPayeeAccountBalanceRequest;
 const ContractOrderRequest = models.ContractOrderRequest;
 const QueryContractPayFeeResponse = models.QueryContractPayFeeResponse;
+const BindOpenBankProfitSharePayeeResponse = models.BindOpenBankProfitSharePayeeResponse;
+const QueryFlexServiceProviderAccountBalanceRequest = models.QueryFlexServiceProviderAccountBalanceRequest;
 const BindRelateAcctSmallAmountResponse = models.BindRelateAcctSmallAmountResponse;
-const QueryBalanceRequest = models.QueryBalanceRequest;
+const PayeeAccountBalanceResult = models.PayeeAccountBalanceResult;
+const OpenBankStoreInfo = models.OpenBankStoreInfo;
 const QueryOpenBankSupportBankListResult = models.QueryOpenBankSupportBankListResult;
-const BindRelateAcctSmallAmountRequest = models.BindRelateAcctSmallAmountRequest;
+const FreezeOrderResult = models.FreezeOrderResult;
+const PayeeTaxInfo = models.PayeeTaxInfo;
 const QueryTransferDetailResponse = models.QueryTransferDetailResponse;
+const OldSubRefund = models.OldSubRefund;
 const QueryTransferBatchResponse = models.QueryTransferBatchResponse;
-const QueryDeclareData = models.QueryDeclareData;
+const ModifyFlexFundingAccountResponse = models.ModifyFlexFundingAccountResponse;
 const QueryContractPayFeeRequest = models.QueryContractPayFeeRequest;
 const QueryOrderResponse = models.QueryOrderResponse;
 const CreateOpenBankExternalSubMerchantRegistrationResponse = models.CreateOpenBankExternalSubMerchantRegistrationResponse;
+const PayeeFundingAccountResult = models.PayeeFundingAccountResult;
+const QueryFlexSettlementOrderListResponse = models.QueryFlexSettlementOrderListResponse;
+const QueryFlexPayeeInfoResponse = models.QueryFlexPayeeInfoResponse;
 const RefundOrderResult = models.RefundOrderResult;
 const QueryBatchPaymentResultDataInfo = models.QueryBatchPaymentResultDataInfo;
 const ContractOrderInSubOrder = models.ContractOrderInSubOrder;
+const QueryMemberTransactionDetailsRequest = models.QueryMemberTransactionDetailsRequest;
 const RegisterBehaviorRequest = models.RegisterBehaviorRequest;
-const UnifiedCloudOrderResponse = models.UnifiedCloudOrderResponse;
+const ApplyFlexSettlementResult = models.ApplyFlexSettlementResult;
+const CreateOpenBankExternalAggregatedSubMerchantRegistrationResult = models.CreateOpenBankExternalAggregatedSubMerchantRegistrationResult;
 const UnbindOpenBankExternalSubMerchantBankAccountResponse = models.UnbindOpenBankExternalSubMerchantBankAccountResponse;
 const QueryTradeRequest = models.QueryTradeRequest;
 const CloudOrderReturn = models.CloudOrderReturn;
@@ -167,6 +206,7 @@ const QueryBankWithdrawCashDetailsRequest = models.QueryBankWithdrawCashDetailsR
 const QueryOpenBankBindExternalSubMerchantBankAccountResult = models.QueryOpenBankBindExternalSubMerchantBankAccountResult;
 const QueryExceedingInfoResult = models.QueryExceedingInfoResult;
 const QueryMerchantPayWayListRequest = models.QueryMerchantPayWayListRequest;
+const QueryOpenBankRefundOrderRequest = models.QueryOpenBankRefundOrderRequest;
 const WithdrawCashMembershipRequest = models.WithdrawCashMembershipRequest;
 const RevResigterBillSupportWithdrawRequest = models.RevResigterBillSupportWithdrawRequest;
 const CreateInvoiceResponse = models.CreateInvoiceResponse;
@@ -174,24 +214,28 @@ const AddMerchantRequest = models.AddMerchantRequest;
 const CreateRedInvoiceResultV2 = models.CreateRedInvoiceResultV2;
 const QueryAnchorContractInfoRequest = models.QueryAnchorContractInfoRequest;
 const CreateRedInvoiceResult = models.CreateRedInvoiceResult;
+const CompanyTitleResult = models.CompanyTitleResult;
 const CreateOpenBankPaymentOrderRequest = models.CreateOpenBankPaymentOrderRequest;
 const QueryOpenBankOrderDetailReceiptInfoResult = models.QueryOpenBankOrderDetailReceiptInfoResult;
 const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
+const CreateOpenBankUnifiedOrderResponse = models.CreateOpenBankUnifiedOrderResponse;
 const QueryOpenBankExternalSubMerchantBankAccountData = models.QueryOpenBankExternalSubMerchantBankAccountData;
 const DeleteAgentTaxPaymentInfoRequest = models.DeleteAgentTaxPaymentInfoRequest;
 const CreateOpenBankExternalSubMerchantRegistrationRequest = models.CreateOpenBankExternalSubMerchantRegistrationRequest;
 const GetDistributeBillDownloadUrlResponse = models.GetDistributeBillDownloadUrlResponse;
 const ViewContractResponse = models.ViewContractResponse;
+const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
 const CreateOpenBankMerchantRequest = models.CreateOpenBankMerchantRequest;
 const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const ModifyAgentTaxPaymentInfoResponse = models.ModifyAgentTaxPaymentInfoResponse;
 const QueryBatchPaymentResultResponse = models.QueryBatchPaymentResultResponse;
 const CloudAttachmentInfo = models.CloudAttachmentInfo;
-const RevokeRechargeByThirdPayResponse = models.RevokeRechargeByThirdPayResponse;
+const FreezeFlexBalanceResponse = models.FreezeFlexBalanceResponse;
 const QueryOpenBankDailyReceiptDownloadUrlRequest = models.QueryOpenBankDailyReceiptDownloadUrlRequest;
+const UploadExternalAnchorInfoRequest = models.UploadExternalAnchorInfoRequest;
 const CreateAcctRequest = models.CreateAcctRequest;
 const CreateAgentTaxPaymentInfosRequest = models.CreateAgentTaxPaymentInfosRequest;
-const QueryReconciliationFileApplyInfoRequest = models.QueryReconciliationFileApplyInfoRequest;
+const OpenBankRefundOrderApplyResult = models.OpenBankRefundOrderApplyResult;
 const CreatePayRollPreOrderWithAuthRequest = models.CreatePayRollPreOrderWithAuthRequest;
 const QueryMerchantBalanceRequest = models.QueryMerchantBalanceRequest;
 const QueryOutwardOrderResult = models.QueryOutwardOrderResult;
@@ -209,17 +253,26 @@ const QueryTradeResponse = models.QueryTradeResponse;
 const QueryMerchantOrderRequest = models.QueryMerchantOrderRequest;
 const DistributeQueryResponse = models.DistributeQueryResponse;
 const CreateInvoiceV2Request = models.CreateInvoiceV2Request;
-const UploadExternalAnchorInfoResponse = models.UploadExternalAnchorInfoResponse;
+const QueryFlexPayeeAccountListResponse = models.QueryFlexPayeeAccountListResponse;
 const UploadTaxListResponse = models.UploadTaxListResponse;
 const QueryReconciliationFileApplyInfoResponse = models.QueryReconciliationFileApplyInfoResponse;
+const SettlementOrderResult = models.SettlementOrderResult;
 const BindRelateAcctUnionPayRequest = models.BindRelateAcctUnionPayRequest;
-const QueryFundsTransactionDetailsResult = models.QueryFundsTransactionDetailsResult;
+const FileItem = models.FileItem;
 const QueryCloudOrderResponse = models.QueryCloudOrderResponse;
+const CreateOpenBankVerificationOrderRequest = models.CreateOpenBankVerificationOrderRequest;
+const QueryFlexFreezeOrderListResponse = models.QueryFlexFreezeOrderListResponse;
+const OpenBankShippingInfo = models.OpenBankShippingInfo;
+const PayeeTaxTemplateInfo = models.PayeeTaxTemplateInfo;
+const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
+const QueryItem = models.QueryItem;
 const Paging = models.Paging;
 const CreateOpenBankExternalSubMerchantAccountBookRequest = models.CreateOpenBankExternalSubMerchantAccountBookRequest;
+const QueryFlexPayeeInfoRequest = models.QueryFlexPayeeInfoRequest;
 const RegisterBehaviorResponse = models.RegisterBehaviorResponse;
 const GetPayRollAuthListRequest = models.GetPayRollAuthListRequest;
 const QueryBillDownloadURLData = models.QueryBillDownloadURLData;
+const QueryBalanceRequest = models.QueryBalanceRequest;
 const ApplyWithdrawalResponse = models.ApplyWithdrawalResponse;
 const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
 const UnifiedTlinxOrderRequest = models.UnifiedTlinxOrderRequest;
@@ -228,31 +281,43 @@ const QueryMerchantBalanceData = models.QueryMerchantBalanceData;
 const RechargeMemberThirdPayResponse = models.RechargeMemberThirdPayResponse;
 const QueryExceedingInfoData = models.QueryExceedingInfoData;
 const QueryExchangerateResult = models.QueryExchangerateResult;
-const QueryMemberTransactionDetailsRequest = models.QueryMemberTransactionDetailsRequest;
+const UploadOpenBankSubMerchantCredentialResult = models.UploadOpenBankSubMerchantCredentialResult;
+const CloudSettleInfo = models.CloudSettleInfo;
 const QueryBatchPaymentResultRequest = models.QueryBatchPaymentResultRequest;
 const BindAcctResponse = models.BindAcctResponse;
-const UploadExternalAnchorInfoRequest = models.UploadExternalAnchorInfoRequest;
+const BindRelateAcctSmallAmountRequest = models.BindRelateAcctSmallAmountRequest;
+const QueryOpenBankBillDataPageResult = models.QueryOpenBankBillDataPageResult;
+const QueryFlexPaymentOrderListRequest = models.QueryFlexPaymentOrderListRequest;
+const FreezeFlexBalanceRequest = models.FreezeFlexBalanceRequest;
 const BindRelateAccReUnionPayRequest = models.BindRelateAccReUnionPayRequest;
-const CreateSinglePayResult = models.CreateSinglePayResult;
 const QueryAcctInfoResponse = models.QueryAcctInfoResponse;
 const MigrateOrderRefundQueryRequest = models.MigrateOrderRefundQueryRequest;
+const SettleInfo = models.SettleInfo;
 const CloudSubOrder = models.CloudSubOrder;
 const AnchorExtendInfo = models.AnchorExtendInfo;
-const QueryOpenBankExternalSubMerchantRegistrationResponse = models.QueryOpenBankExternalSubMerchantRegistrationResponse;
+const QueryDeclareData = models.QueryDeclareData;
+const VerifyOpenBankAccountResponse = models.VerifyOpenBankAccountResponse;
 const GetBillDownloadUrlRequest = models.GetBillDownloadUrlRequest;
 const CreatePayMerchantResponse = models.CreatePayMerchantResponse;
 const UnbindRelateAcctResponse = models.UnbindRelateAcctResponse;
 const GetDistributeBillDownloadUrlRequest = models.GetDistributeBillDownloadUrlRequest;
 const AgentTaxPaymentBatch = models.AgentTaxPaymentBatch;
-const SyncContractDataRequest = models.SyncContractDataRequest;
+const LegalPersonInfo = models.LegalPersonInfo;
 const GetPayRollAuthListResponse = models.GetPayRollAuthListResponse;
+const CreateOpenBankSubMerchantRateConfigureRequest = models.CreateOpenBankSubMerchantRateConfigureRequest;
 const QueryRefundRequest = models.QueryRefundRequest;
+const ApplyOpenBankSettleOrderResult = models.ApplyOpenBankSettleOrderResult;
 const CreateCustAcctIdRequest = models.CreateCustAcctIdRequest;
+const ApplyFlexPaymentRequest = models.ApplyFlexPaymentRequest;
+const OpenBankBillingInfo = models.OpenBankBillingInfo;
 const CloudExternalChannelData = models.CloudExternalChannelData;
+const SyncContractDataRequest = models.SyncContractDataRequest;
 const DistributeApplyResponse = models.DistributeApplyResponse;
 const CreateBatchPaymentData = models.CreateBatchPaymentData;
+const AddFlexPhoneNoResponse = models.AddFlexPhoneNoResponse;
 const DistributeQueryRequest = models.DistributeQueryRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
+const QueryFlexPayeeAccountBalanceResponse = models.QueryFlexPayeeAccountBalanceResponse;
 const ViewShopResult = models.ViewShopResult;
 const QueryOutwardOrderData = models.QueryOutwardOrderData;
 const QueryOpenBankExternalSubMerchantRegistrationResult = models.QueryOpenBankExternalSubMerchantRegistrationResult;
@@ -260,28 +325,35 @@ const OpenBankRedirectInfo = models.OpenBankRedirectInfo;
 const ViewContractRequest = models.ViewContractRequest;
 const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsRequest;
 const CloudSubOrderReturn = models.CloudSubOrderReturn;
+const QueryFinancialDataUrlResponse = models.QueryFinancialDataUrlResponse;
 const QueryExchangeRateRequest = models.QueryExchangeRateRequest;
-const AddContractResponse = models.AddContractResponse;
+const OrderSummaryResult = models.OrderSummaryResult;
 const QueryBillDownloadURLRequest = models.QueryBillDownloadURLRequest;
+const PaymentOrders = models.PaymentOrders;
 const CloudSubRefundItem = models.CloudSubRefundItem;
 const QueryOpenBankDownLoadUrlResponse = models.QueryOpenBankDownLoadUrlResponse;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
+const QueryOpenBankVerificationOrderResponse = models.QueryOpenBankVerificationOrderResponse;
 const ApplyApplicationMaterialResponse = models.ApplyApplicationMaterialResponse;
 const DistributeQueryResult = models.DistributeQueryResult;
+const QueryFlexPlatformAccountBalanceRequest = models.QueryFlexPlatformAccountBalanceRequest;
+const OrderSummaries = models.OrderSummaries;
 const ExecuteMemberTransactionRequest = models.ExecuteMemberTransactionRequest;
-const QueryBankClearResponse = models.QueryBankClearResponse;
+const CreateExternalAnchorData = models.CreateExternalAnchorData;
 const DescribeOrderStatusResponse = models.DescribeOrderStatusResponse;
 const CreateMerchantResponse = models.CreateMerchantResponse;
 const CreateSinglePaymentResponse = models.CreateSinglePaymentResponse;
 const CloseOpenBankPaymentOrderRequest = models.CloseOpenBankPaymentOrderRequest;
+const QueryCompanyTitleRequest = models.QueryCompanyTitleRequest;
 const GetPayRollAuthRequest = models.GetPayRollAuthRequest;
 const ViewContractResult = models.ViewContractResult;
 const QueryAcctItem = models.QueryAcctItem;
+const QueryOpenBankBillDataPageRequest = models.QueryOpenBankBillDataPageRequest;
 const OpenBankRechargePayeeInfo = models.OpenBankRechargePayeeInfo;
 const QueryContractRelateShopResult = models.QueryContractRelateShopResult;
-const RefundRequest = models.RefundRequest;
+const QueryOpenBankSubMerchantCredentialResult = models.QueryOpenBankSubMerchantCredentialResult;
 const ApplyWithdrawalRequest = models.ApplyWithdrawalRequest;
-const QueryAssignmentResponse = models.QueryAssignmentResponse;
+const ApplyFlexSettlementResponse = models.ApplyFlexSettlementResponse;
 const QuerySinglePaymentResultResponse = models.QuerySinglePaymentResultResponse;
 const QueryMemberBindResponse = models.QueryMemberBindResponse;
 const QueryMemberBindRequest = models.QueryMemberBindRequest;
@@ -297,40 +369,55 @@ const BankCardItem = models.BankCardItem;
 const DistributeAccreditResult = models.DistributeAccreditResult;
 const ViewShopResponse = models.ViewShopResponse;
 const ApplyTradeRequest = models.ApplyTradeRequest;
+const QueryOpenBankProfitSharePayeeResponse = models.QueryOpenBankProfitSharePayeeResponse;
 const QueryExchangeRateResponse = models.QueryExchangeRateResponse;
+const AddFlexFundingAccountRequest = models.AddFlexFundingAccountRequest;
+const OldAttachmentInfo = models.OldAttachmentInfo;
+const ModifyFlexFundingAccountRequest = models.ModifyFlexFundingAccountRequest;
 const QuerySmallAmountTransferRequest = models.QuerySmallAmountTransferRequest;
 const SupportBankInfo = models.SupportBankInfo;
 const ModifyMntMbrBindRelateAcctBankCodeRequest = models.ModifyMntMbrBindRelateAcctBankCodeRequest;
-const QueryMerchantPayWayListResponse = models.QueryMerchantPayWayListResponse;
+const FeeRangInfo = models.FeeRangInfo;
 const PayRollAuthResult = models.PayRollAuthResult;
 const CloudGlobalPayTimeInfo = models.CloudGlobalPayTimeInfo;
+const OpenBankProfitShareRespInfo = models.OpenBankProfitShareRespInfo;
 const QueryCustAcctIdBalanceRequest = models.QueryCustAcctIdBalanceRequest;
 const QueryExternalAccountBookResult = models.QueryExternalAccountBookResult;
 const ReviseMbrPropertyRequest = models.ReviseMbrPropertyRequest;
+const QueryOpenBankSubMerchantRateConfigureResponse = models.QueryOpenBankSubMerchantRateConfigureResponse;
 const AgentTaxPayment = models.AgentTaxPayment;
 const UploadFileRequest = models.UploadFileRequest;
 const QueryBankWithdrawCashDetailsResponse = models.QueryBankWithdrawCashDetailsResponse;
 const UploadTaxPaymentResponse = models.UploadTaxPaymentResponse;
 const QueryCloudRefundOrderResponse = models.QueryCloudRefundOrderResponse;
 const AgencyClientInfo = models.AgencyClientInfo;
-const QueryTradeData = models.QueryTradeData;
+const QueryFlexOrderSummaryListResponse = models.QueryFlexOrderSummaryListResponse;
 const QueryOpenBankUnbindExternalSubMerchantBankAccountResult = models.QueryOpenBankUnbindExternalSubMerchantBankAccountResult;
 const ApplyDeclareResult = models.ApplyDeclareResult;
+const QueryOpenBankSettleOrderResult = models.QueryOpenBankSettleOrderResult;
 const DistributeAccreditQueryResponse = models.DistributeAccreditQueryResponse;
-const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
+const QueryOpenBankSubMerchantCredentialResponse = models.QueryOpenBankSubMerchantCredentialResponse;
+const UnifiedCloudOrderResponse = models.UnifiedCloudOrderResponse;
+const PayeeAccountInfoResult = models.PayeeAccountInfoResult;
+const PayeeAccountUserInfo = models.PayeeAccountUserInfo;
 const QueryShopOpenIdResult = models.QueryShopOpenIdResult;
+const QueryFlexOrderSummaryListRequest = models.QueryFlexOrderSummaryListRequest;
 const ApplyReWithdrawalResponse = models.ApplyReWithdrawalResponse;
 const GetPayRollAuthResultResponse = models.GetPayRollAuthResultResponse;
 const RegisterBillRequest = models.RegisterBillRequest;
 const OpenBankGoodsInfo = models.OpenBankGoodsInfo;
 const QueryOrderOutSubOrderList = models.QueryOrderOutSubOrderList;
 const CreateBatchPaymentResponse = models.CreateBatchPaymentResponse;
+const ApplyFlexSettlementRequest = models.ApplyFlexSettlementRequest;
+const QueryFlexPayeeAccountInfoRequest = models.QueryFlexPayeeAccountInfoRequest;
+const QueryOpenBankBillDataPageResponse = models.QueryOpenBankBillDataPageResponse;
 const CreateExternalAnchorRequest = models.CreateExternalAnchorRequest;
 const ConfirmOrderResponse = models.ConfirmOrderResponse;
 const GetPayRollAuthResponse = models.GetPayRollAuthResponse;
-const UnifiedTlinxOrderResponse = models.UnifiedTlinxOrderResponse;
+const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
 const CreateSinglePaymentData = models.CreateSinglePaymentData;
 const CheckAmountResponse = models.CheckAmountResponse;
+const QueryFlexPaymentOrderStatusResponse = models.QueryFlexPaymentOrderStatusResponse;
 const MerchantManagementList = models.MerchantManagementList;
 const QueryCityCodeResponse = models.QueryCityCodeResponse;
 const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
@@ -344,33 +431,47 @@ const DistributeRemoveReceiverRequest = models.DistributeRemoveReceiverRequest;
 const BillDownloadUrlResult = models.BillDownloadUrlResult;
 const CreatePayRollPreOrderRequest = models.CreatePayRollPreOrderRequest;
 const DeleteAgentTaxPaymentInfosRequest = models.DeleteAgentTaxPaymentInfosRequest;
+const FlexBillDownloadUrlResult = models.FlexBillDownloadUrlResult;
 const QueryAcctInfoListRequest = models.QueryAcctInfoListRequest;
 const CreatePayRollTokenRequest = models.CreatePayRollTokenRequest;
 const AddShopRequest = models.AddShopRequest;
 const TransferDetailRequest = models.TransferDetailRequest;
 const QueryOrderStatusResponse = models.QueryOrderStatusResponse;
+const ApplyFlexPaymentResponse = models.ApplyFlexPaymentResponse;
 const QueryTransferResultResponse = models.QueryTransferResultResponse;
 const CloseCloudOrderRequest = models.CloseCloudOrderRequest;
 const CreateInvoiceResultV2 = models.CreateInvoiceResultV2;
 const QueryAcctInfoRequest = models.QueryAcctInfoRequest;
 const DescribeChargeDetailResponse = models.DescribeChargeDetailResponse;
 const TranItem = models.TranItem;
+const CreateOpenBankGlobalPaymentOrderRequest = models.CreateOpenBankGlobalPaymentOrderRequest;
 const DistributeQueryReceiverResponse = models.DistributeQueryReceiverResponse;
+const QueryFlexFreezeOrderListRequest = models.QueryFlexFreezeOrderListRequest;
 const QueryTransferResultRequest = models.QueryTransferResultRequest;
+const TransferSinglePayResponse = models.TransferSinglePayResponse;
 const QueryReconciliationFileApplyInfoResult = models.QueryReconciliationFileApplyInfoResult;
 const ApplyReconciliationFileResult = models.ApplyReconciliationFileResult;
 const QueryOpenBankExternalSubMerchantBankAccountResponse = models.QueryOpenBankExternalSubMerchantBankAccountResponse;
+const OpenBankProfitSharePayeeInfo = models.OpenBankProfitSharePayeeInfo;
 const CreateRedInvoiceV2Request = models.CreateRedInvoiceV2Request;
 const ApplyOpenBankOrderDetailReceiptResponse = models.ApplyOpenBankOrderDetailReceiptResponse;
+const QueryMerchantClassificationRequest = models.QueryMerchantClassificationRequest;
 const OpenBankApprovalGuideInfo = models.OpenBankApprovalGuideInfo;
+const AddContractResponse = models.AddContractResponse;
 const CreateOrderResponse = models.CreateOrderResponse;
+const QueryMemberTransactionDetailsResponse = models.QueryMemberTransactionDetailsResponse;
 const MultiApplyOrder = models.MultiApplyOrder;
+const AddFlexIdInfoRequest = models.AddFlexIdInfoRequest;
 const ModifyMerchantRequest = models.ModifyMerchantRequest;
 const TransferItem = models.TransferItem;
 const OrderItem = models.OrderItem;
+const PayeeAccountInfos = models.PayeeAccountInfos;
 const RefundMemberTransactionRequest = models.RefundMemberTransactionRequest;
+const BindOpenBankProfitSharePayeeResult = models.BindOpenBankProfitSharePayeeResult;
 const CreateCloudSubMerchantResponse = models.CreateCloudSubMerchantResponse;
 const QueryFundsTransactionDetailsRequest = models.QueryFundsTransactionDetailsRequest;
+const QueryOpenBankRefundOrderResponse = models.QueryOpenBankRefundOrderResponse;
+const QueryFlexBillDownloadUrlResponse = models.QueryFlexBillDownloadUrlResponse;
 const BindOpenBankExternalSubMerchantBankAccountResult = models.BindOpenBankExternalSubMerchantBankAccountResult;
 const CheckAmountRequest = models.CheckAmountRequest;
 const CreateMerchantResultData = models.CreateMerchantResultData;
@@ -383,24 +484,29 @@ const OpenBankRechargeRedirectInfo = models.OpenBankRechargeRedirectInfo;
 const UnBindAcctResponse = models.UnBindAcctResponse;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const ApplyOpenBankOrderDetailReceiptRequest = models.ApplyOpenBankOrderDetailReceiptRequest;
-const GetBillDownloadUrlResponse = models.GetBillDownloadUrlResponse;
+const NaturalPersonInfo = models.NaturalPersonInfo;
 const QueryTransferDetailRequest = models.QueryTransferDetailRequest;
 const DownloadOrgFileResponse = models.DownloadOrgFileResponse;
 const OpenBankPayeeInfo = models.OpenBankPayeeInfo;
 const AddShopResult = models.AddShopResult;
 const PayDataResult = models.PayDataResult;
-const ModifyBindedAccountResponse = models.ModifyBindedAccountResponse;
+const CreateOpenBankAggregatedSubMerchantRegistrationRequest = models.CreateOpenBankAggregatedSubMerchantRegistrationRequest;
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
 const QueryBankTransactionDetailsResponse = models.QueryBankTransactionDetailsResponse;
+const PaymentOrderStatusResult = models.PaymentOrderStatusResult;
 const TransferSinglePayRequest = models.TransferSinglePayRequest;
-const CreateSinglePayResponse = models.CreateSinglePayResponse;
+const QueryOpenBankVerificationOrderRequest = models.QueryOpenBankVerificationOrderRequest;
+const OpenBankOrderRedirectInfo = models.OpenBankOrderRedirectInfo;
+const QueryFlexAmountBeforeTaxRequest = models.QueryFlexAmountBeforeTaxRequest;
 const MigrateOrderRefundRequest = models.MigrateOrderRefundRequest;
+const AddFlexFundingAccountResponse = models.AddFlexFundingAccountResponse;
 const QueryOpenBankBankAccountBalanceResult = models.QueryOpenBankBankAccountBalanceResult;
 const QuerySinglePaymentResultData = models.QuerySinglePaymentResultData;
 const UploadOrgFileResponse = models.UploadOrgFileResponse;
 const QueryOpenBankOrderDetailReceiptInfoResponse = models.QueryOpenBankOrderDetailReceiptInfoResponse;
 const CreateAnchorRequest = models.CreateAnchorRequest;
 const QueryExceedingInfoRequest = models.QueryExceedingInfoRequest;
+const ApplyOpenBankSubMerchantSignOnlineRequest = models.ApplyOpenBankSubMerchantSignOnlineRequest;
 const ExternalContractUserInfo = models.ExternalContractUserInfo;
 const BankBranchInfo = models.BankBranchInfo;
 const ContractUserInfo = models.ContractUserInfo;
@@ -409,24 +515,32 @@ const QueryCloudChannelDataRequest = models.QueryCloudChannelDataRequest;
 const QueryOpenBankBankAccountBalanceRequest = models.QueryOpenBankBankAccountBalanceRequest;
 const ModifyAgentTaxPaymentInfoRequest = models.ModifyAgentTaxPaymentInfoRequest;
 const DownloadReconciliationUrlRequest = models.DownloadReconciliationUrlRequest;
+const QueryFlexAmountBeforeTaxResponse = models.QueryFlexAmountBeforeTaxResponse;
 const CreateBatchPaymentRequest = models.CreateBatchPaymentRequest;
+const CreateOpenBankSubMerchantRateConfigureResult = models.CreateOpenBankSubMerchantRateConfigureResult;
 const CreateOpenBankExternalSubMerchantAccountBookResponse = models.CreateOpenBankExternalSubMerchantAccountBookResponse;
 const ModifyMntMbrBindRelateAcctBankCodeResponse = models.ModifyMntMbrBindRelateAcctBankCodeResponse;
+const UploadOpenBankSubMerchantCredentialResponse = models.UploadOpenBankSubMerchantCredentialResponse;
 const SyncContractDataResponse = models.SyncContractDataResponse;
 const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
 const ResponseQueryContract = models.ResponseQueryContract;
 const DownloadOrgFileRequest = models.DownloadOrgFileRequest;
+const CreateOpenBankGlobalPaymentOrderResponse = models.CreateOpenBankGlobalPaymentOrderResponse;
 const ContractSyncInfo = models.ContractSyncInfo;
 const Order = models.Order;
 const QueryAgentStatementsRequest = models.QueryAgentStatementsRequest;
-const CreateExternalAnchorData = models.CreateExternalAnchorData;
+const BusinessLicenseInfo = models.BusinessLicenseInfo;
+const QueryBankClearResponse = models.QueryBankClearResponse;
 const BindOpenBankExternalSubMerchantBankAccountRequest = models.BindOpenBankExternalSubMerchantBankAccountRequest;
 const OpenBankProfitShareInfo = models.OpenBankProfitShareInfo;
 const MigrateOrderRefundResponse = models.MigrateOrderRefundResponse;
-const TransferSinglePayResponse = models.TransferSinglePayResponse;
+const QueryFlexPaymentOrderListResponse = models.QueryFlexPaymentOrderListResponse;
 const CloudStoreInfo = models.CloudStoreInfo;
 const ContractOrderResponse = models.ContractOrderResponse;
+const OldChannelExternalUserInfo = models.OldChannelExternalUserInfo;
 const QueryInvoiceResponse = models.QueryInvoiceResponse;
+const UploadTaxPaymentRequest = models.UploadTaxPaymentRequest;
+const QueryFlexPayeeAccountListRequest = models.QueryFlexPayeeAccountListRequest;
 const QueryOpenBankBankAccountBalanceResponse = models.QueryOpenBankBankAccountBalanceResponse;
 const ViewMerchantResponse = models.ViewMerchantResponse;
 const AddShopResponse = models.AddShopResponse;
@@ -434,55 +548,75 @@ const UploadFileResponse = models.UploadFileResponse;
 const QueryMemberTransactionDetailsResult = models.QueryMemberTransactionDetailsResult;
 const CreateMerchantResult = models.CreateMerchantResult;
 const RefundResponse = models.RefundResponse;
+const QueryOpenBankProfitSharePayeeRequest = models.QueryOpenBankProfitSharePayeeRequest;
 const CreateTransferBatchRequest = models.CreateTransferBatchRequest;
+const QueryOpenBankVerificationResult = models.QueryOpenBankVerificationResult;
 const WithdrawItem = models.WithdrawItem;
 const QueryMemberTransactionRequest = models.QueryMemberTransactionRequest;
+const CreateOpenBankUnifiedOrderPaymentResult = models.CreateOpenBankUnifiedOrderPaymentResult;
 const QueryCityCodeRequest = models.QueryCityCodeRequest;
+const OpenBankFormInfo = models.OpenBankFormInfo;
 const CreateOrderRequest = models.CreateOrderRequest;
 const ModifyBindedAccountRequest = models.ModifyBindedAccountRequest;
 const WithdrawCashMembershipResponse = models.WithdrawCashMembershipResponse;
 const CreateSinglePaymentRequest = models.CreateSinglePaymentRequest;
+const QueryFlexPayeeAccountInfoResponse = models.QueryFlexPayeeAccountInfoResponse;
+const WithdrawBill = models.WithdrawBill;
 const MemberTransactionItem = models.MemberTransactionItem;
 const DistributeReceiverResult = models.DistributeReceiverResult;
 const DistributeApplyRequest = models.DistributeApplyRequest;
 const ViewShopRequest = models.ViewShopRequest;
+const OpenBankQueryRefundOrderResult = models.OpenBankQueryRefundOrderResult;
 const ApplyOutwardOrderResponse = models.ApplyOutwardOrderResponse;
+const QueryFlexServiceProviderAccountBalanceResponse = models.QueryFlexServiceProviderAccountBalanceResponse;
 const DistributeAccreditQueryResult = models.DistributeAccreditQueryResult;
-const QueryShopOpenIdResponse = models.QueryShopOpenIdResponse;
+const AddFlexPhoneNoRequest = models.AddFlexPhoneNoRequest;
 const Acct = models.Acct;
-const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
+const CloseOrderResponse = models.CloseOrderResponse;
 const ApplyPayerinfoData = models.ApplyPayerinfoData;
 const CheckAcctRequest = models.CheckAcctRequest;
 const CreateAgentTaxPaymentInfosResponse = models.CreateAgentTaxPaymentInfosResponse;
+const RevokeRechargeByThirdPayResponse = models.RevokeRechargeByThirdPayResponse;
+const CreateOpenBankUnifiedOrderRequest = models.CreateOpenBankUnifiedOrderRequest;
 const ApplyReconciliationFileResponse = models.ApplyReconciliationFileResponse;
 const ContractPayListResult = models.ContractPayListResult;
 const CreateInvoiceResult = models.CreateInvoiceResult;
 const DescribeOrderStatusRequest = models.DescribeOrderStatusRequest;
 const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
 const ChannelContractInfo = models.ChannelContractInfo;
+const RefundOpenBankOrderResponse = models.RefundOpenBankOrderResponse;
 const CreateAnchorResponse = models.CreateAnchorResponse;
+const QueryFlexBillDownloadUrlRequest = models.QueryFlexBillDownloadUrlRequest;
+const CreateOpenBankSubMerchantRateConfigureResponse = models.CreateOpenBankSubMerchantRateConfigureResponse;
 const UnifiedCloudOrderRequest = models.UnifiedCloudOrderRequest;
+const UploadOpenBankSubMerchantCredentialRequest = models.UploadOpenBankSubMerchantCredentialRequest;
+const ApplyOpenBankSettleOrderRequest = models.ApplyOpenBankSettleOrderRequest;
+const QueryOpenBankSubMerchantCredentialRequest = models.QueryOpenBankSubMerchantCredentialRequest;
 const MerchantRiskInfo = models.MerchantRiskInfo;
-const QueryPayerinfoResult = models.QueryPayerinfoResult;
+const QueryShopOpenIdResponse = models.QueryShopOpenIdResponse;
+const CreateFlexPayeeResult = models.CreateFlexPayeeResult;
+const FreezeOrders = models.FreezeOrders;
 const QueryOrderStatusResult = models.QueryOrderStatusResult;
 const QueryAgentTaxPaymentBatchResponse = models.QueryAgentTaxPaymentBatchResponse;
 const DeleteAgentTaxPaymentInfosResponse = models.DeleteAgentTaxPaymentInfosResponse;
 const QueryMerchantClassificationResponse = models.QueryMerchantClassificationResponse;
+const RegisterBillSupportWithdrawResponse = models.RegisterBillSupportWithdrawResponse;
 const SceneInfo = models.SceneInfo;
 const QueryContractResponse = models.QueryContractResponse;
 const CreateRedInvoiceResponse = models.CreateRedInvoiceResponse;
-const QueryMerchantBalanceResponse = models.QueryMerchantBalanceResponse;
-const RefundOrderResponse = models.RefundOrderResponse;
-const CloseOrderResponse = models.CloseOrderResponse;
+const QueryInvoiceResultData = models.QueryInvoiceResultData;
+const AddFlexIdInfoResponse = models.AddFlexIdInfoResponse;
+const ClearItem = models.ClearItem;
 const MerchantManagementResult = models.MerchantManagementResult;
 const UploadTaxListRequest = models.UploadTaxListRequest;
-const CloudSettleInfo = models.CloudSettleInfo;
 const RegisterInfo = models.RegisterInfo;
 const QueryOpenBankPaymentOrderResponse = models.QueryOpenBankPaymentOrderResponse;
 const QueryMaliciousRegistrationRequest = models.QueryMaliciousRegistrationRequest;
+const QueryReconciliationFileApplyInfoRequest = models.QueryReconciliationFileApplyInfoRequest;
 const AddContractResult = models.AddContractResult;
 const QueryBillDownloadURLResponse = models.QueryBillDownloadURLResponse;
 const UploadFileResult = models.UploadFileResult;
+const QueryAssignmentResponse = models.QueryAssignmentResponse;
 const DescribeChargeDetailRequest = models.DescribeChargeDetailRequest;
 const PayOrderResult = models.PayOrderResult;
 const CreateCloudSubMerchantRequest = models.CreateCloudSubMerchantRequest;
@@ -490,20 +624,27 @@ const CreateCustAcctIdResponse = models.CreateCustAcctIdResponse;
 const QueryAgentTaxPaymentBatchRequest = models.QueryAgentTaxPaymentBatchRequest;
 const CloudChannelExternalUserInfo = models.CloudChannelExternalUserInfo;
 const ApplyReconciliationFileRequest = models.ApplyReconciliationFileRequest;
-const RegisterBillSupportWithdrawResponse = models.RegisterBillSupportWithdrawResponse;
+const RegisterBillResponse = models.RegisterBillResponse;
+const PayeeInfoResult = models.PayeeInfoResult;
+const QueryOpenBankExternalSubMerchantRegistrationResponse = models.QueryOpenBankExternalSubMerchantRegistrationResponse;
 const ApplyOutwardOrderRequest = models.ApplyOutwardOrderRequest;
 const AssignmentData = models.AssignmentData;
 const DistributeAccreditTlinxResponse = models.DistributeAccreditTlinxResponse;
 const RechargeMemberThirdPayRequest = models.RechargeMemberThirdPayRequest;
 const CreateInvoiceRequest = models.CreateInvoiceRequest;
+const VerifyOpenBankAccountResult = models.VerifyOpenBankAccountResult;
+const QueryOpenBankUnbindExternalSubMerchantBankAccountRequest = models.QueryOpenBankUnbindExternalSubMerchantBankAccountRequest;
+const CreateFlexPayeeRequest = models.CreateFlexPayeeRequest;
 const AnchorContractInfo = models.AnchorContractInfo;
 const QueryFundsTransactionDetailsResponse = models.QueryFundsTransactionDetailsResponse;
 const ChannelReturnContractInfo = models.ChannelReturnContractInfo;
 const ApplyOpenBankOrderDetailReceiptResult = models.ApplyOpenBankOrderDetailReceiptResult;
 const CreateRedInvoiceV2Response = models.CreateRedInvoiceV2Response;
+const PayeeAccountPropertyInfo = models.PayeeAccountPropertyInfo;
 const DistributeMultiApplyResult = models.DistributeMultiApplyResult;
 const RefundOrderRequest = models.RefundOrderRequest;
 const OpenBankPayerInfo = models.OpenBankPayerInfo;
+const ApplyOpenBankSubMerchantSignOnlineResponse = models.ApplyOpenBankSubMerchantSignOnlineResponse;
 const TransactionItem = models.TransactionItem;
 const QueryTransferBatchRequest = models.QueryTransferBatchRequest;
 const TransferSinglePayData = models.TransferSinglePayData;
@@ -514,13 +655,15 @@ const ApplyOutwardOrderResult = models.ApplyOutwardOrderResult;
 const ApplyPayerInfoRequest = models.ApplyPayerInfoRequest;
 const CreateBatchPaymentBatchData = models.CreateBatchPaymentBatchData;
 const DownloadReconciliationUrlResponse = models.DownloadReconciliationUrlResponse;
-const QueryDownloadBillURLResponse = models.QueryDownloadBillURLResponse;
+const ModifyBindedAccountResponse = models.ModifyBindedAccountResponse;
 const DistributeCancelResult = models.DistributeCancelResult;
 const CreatePayRollPreOrderWithAuthResponse = models.CreatePayRollPreOrderWithAuthResponse;
 const CreateOpenBankOrderRechargeResult = models.CreateOpenBankOrderRechargeResult;
-const QuerySinglePayResult = models.QuerySinglePayResult;
+const AmountBeforeTaxResult = models.AmountBeforeTaxResult;
+const RefundOrderResponse = models.RefundOrderResponse;
 const CloudExternalPromptInfo = models.CloudExternalPromptInfo;
 const DistributeCancelResponse = models.DistributeCancelResponse;
+const CreateOpenBankVerificationResult = models.CreateOpenBankVerificationResult;
 const QueryOpenBankBankBranchListRequest = models.QueryOpenBankBankBranchListRequest;
 const QueryOpenBankBankBranchListResult = models.QueryOpenBankBankBranchListResult;
 const ApplyTradeData = models.ApplyTradeData;
@@ -528,16 +671,19 @@ const QueryOpenBankExternalSubMerchantBankAccountResult = models.QueryOpenBankEx
 const CreateOpenBankPaymentOrderResponse = models.CreateOpenBankPaymentOrderResponse;
 const DeduceQuotaResponse = models.DeduceQuotaResponse;
 const CloseOpenBankPaymentOrderResult = models.CloseOpenBankPaymentOrderResult;
+const RefundOpenBankOrderRequest = models.RefundOpenBankOrderRequest;
 const CreateBatchPaymentRecipient = models.CreateBatchPaymentRecipient;
 const RegisterBillSupportWithdrawRequest = models.RegisterBillSupportWithdrawRequest;
 const DeleteAgentTaxPaymentInfoResponse = models.DeleteAgentTaxPaymentInfoResponse;
 const QueryOpenBankDailyReceiptDownloadUrlResult = models.QueryOpenBankDailyReceiptDownloadUrlResult;
-const CreateSinglePayRequest = models.CreateSinglePayRequest;
 const QueryRefundResponse = models.QueryRefundResponse;
+const QueryMerchantPayWayListResponse = models.QueryMerchantPayWayListResponse;
 const DistributeAddReceiverResponse = models.DistributeAddReceiverResponse;
 const TerminateContractResponse = models.TerminateContractResponse;
-const QueryOpenBankUnbindExternalSubMerchantBankAccountRequest = models.QueryOpenBankUnbindExternalSubMerchantBankAccountRequest;
+const QueryOpenBankSubMerchantRateConfigureRequest = models.QueryOpenBankSubMerchantRateConfigureRequest;
 const QueryMerchantRequest = models.QueryMerchantRequest;
+const ApplyOpenBankSubMerchantSignOnlineResult = models.ApplyOpenBankSubMerchantSignOnlineResult;
+const QueryDownloadBillURLResponse = models.QueryDownloadBillURLResponse;
 const QueryAnchorContractInfoResponse = models.QueryAnchorContractInfoResponse;
 const MerchantClassificationId = models.MerchantClassificationId;
 const BindRelateAccReUnionPayResponse = models.BindRelateAccReUnionPayResponse;
@@ -576,6 +722,28 @@ class CpdpClient extends AbstractClient {
     DistributeAccreditQuery(req, cb) {
         let resp = new DistributeAccreditQueryResponse();
         this.request("DistributeAccreditQuery", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-补充手机号信息
+     * @param {AddFlexPhoneNoRequest} req
+     * @param {function(string, AddFlexPhoneNoResponse):void} cb
+     * @public
+     */
+    AddFlexPhoneNo(req, cb) {
+        let resp = new AddFlexPhoneNoResponse();
+        this.request("AddFlexPhoneNo", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-查询冻结订单列表
+     * @param {QueryFlexFreezeOrderListRequest} req
+     * @param {function(string, QueryFlexFreezeOrderListResponse):void} cb
+     * @public
+     */
+    QueryFlexFreezeOrderList(req, cb) {
+        let resp = new QueryFlexFreezeOrderListResponse();
+        this.request("QueryFlexFreezeOrderList", req, resp, cb);
     }
 
     /**
@@ -656,14 +824,25 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 灵云-上传主播信息
-     * @param {UploadExternalAnchorInfoRequest} req
-     * @param {function(string, UploadExternalAnchorInfoResponse):void} cb
+     * 云企付-退款结果查询
+     * @param {QueryOpenBankRefundOrderRequest} req
+     * @param {function(string, QueryOpenBankRefundOrderResponse):void} cb
      * @public
      */
-    UploadExternalAnchorInfo(req, cb) {
-        let resp = new UploadExternalAnchorInfoResponse();
-        this.request("UploadExternalAnchorInfo", req, resp, cb);
+    QueryOpenBankRefundOrder(req, cb) {
+        let resp = new QueryOpenBankRefundOrderResponse();
+        this.request("QueryOpenBankRefundOrder", req, resp, cb);
+    }
+
+    /**
+     * 云企付-查询核销订单状态，客户可以使用该接口来查询核销申请的订单状态。目前仅支持TENPAY渠道EBANK_PAYMENT付款方式的担保支付订单查询。
+     * @param {QueryOpenBankVerificationOrderRequest} req
+     * @param {function(string, QueryOpenBankVerificationOrderResponse):void} cb
+     * @public
+     */
+    QueryOpenBankVerificationOrder(req, cb) {
+        let resp = new QueryOpenBankVerificationOrderResponse();
+        this.request("QueryOpenBankVerificationOrder", req, resp, cb);
     }
 
     /**
@@ -711,6 +890,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-查询服务商账户余额
+     * @param {QueryFlexServiceProviderAccountBalanceRequest} req
+     * @param {function(string, QueryFlexServiceProviderAccountBalanceResponse):void} cb
+     * @public
+     */
+    QueryFlexServiceProviderAccountBalance(req, cb) {
+        let resp = new QueryFlexServiceProviderAccountBalanceResponse();
+        this.request("QueryFlexServiceProviderAccountBalance", req, resp, cb);
+    }
+
+    /**
      * 云企付-子商户进件
      * @param {CreateOpenBankExternalSubMerchantRegistrationRequest} req
      * @param {function(string, CreateOpenBankExternalSubMerchantRegistrationResponse):void} cb
@@ -744,6 +934,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-付款
+     * @param {ApplyFlexPaymentRequest} req
+     * @param {function(string, ApplyFlexPaymentResponse):void} cb
+     * @public
+     */
+    ApplyFlexPayment(req, cb) {
+        let resp = new ApplyFlexPaymentResponse();
+        this.request("ApplyFlexPayment", req, resp, cb);
+    }
+
+    /**
      * 云支付-查询合同明细接口
      * @param {ViewContractRequest} req
      * @param {function(string, ViewContractResponse):void} cb
@@ -752,6 +953,17 @@ class CpdpClient extends AbstractClient {
     ViewContract(req, cb) {
         let resp = new ViewContractResponse();
         this.request("ViewContract", req, resp, cb);
+    }
+
+    /**
+     * 云企付-聚合下单
+     * @param {CreateOpenBankUnifiedOrderRequest} req
+     * @param {function(string, CreateOpenBankUnifiedOrderResponse):void} cb
+     * @public
+     */
+    CreateOpenBankUnifiedOrder(req, cb) {
+        let resp = new CreateOpenBankUnifiedOrderResponse();
+        this.request("CreateOpenBankUnifiedOrder", req, resp, cb);
     }
 
     /**
@@ -810,6 +1022,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-子商户费率配置结果查询
+     * @param {QueryOpenBankSubMerchantRateConfigureRequest} req
+     * @param {function(string, QueryOpenBankSubMerchantRateConfigureResponse):void} cb
+     * @public
+     */
+    QueryOpenBankSubMerchantRateConfigure(req, cb) {
+        let resp = new QueryOpenBankSubMerchantRateConfigureResponse();
+        this.request("QueryOpenBankSubMerchantRateConfigure", req, resp, cb);
+    }
+
+    /**
      * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
      * @param {RegisterBillSupportWithdrawRequest} req
      * @param {function(string, RegisterBillSupportWithdrawResponse):void} cb
@@ -821,14 +1044,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 云企付-按日期批量查询回单下载地址
-     * @param {QueryOpenBankDailyReceiptDownloadUrlRequest} req
-     * @param {function(string, QueryOpenBankDailyReceiptDownloadUrlResponse):void} cb
+     * 灵云V2-补充证件信息
+     * @param {AddFlexIdInfoRequest} req
+     * @param {function(string, AddFlexIdInfoResponse):void} cb
      * @public
      */
-    QueryOpenBankDailyReceiptDownloadUrl(req, cb) {
-        let resp = new QueryOpenBankDailyReceiptDownloadUrlResponse();
-        this.request("QueryOpenBankDailyReceiptDownloadUrl", req, resp, cb);
+    AddFlexIdInfo(req, cb) {
+        let resp = new AddFlexIdInfoResponse();
+        this.request("AddFlexIdInfo", req, resp, cb);
     }
 
     /**
@@ -854,14 +1077,25 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 通过商家或者微信批次明细单号查询明细单
-     * @param {QueryTransferDetailRequest} req
-     * @param {function(string, QueryTransferDetailResponse):void} cb
+     * 灵云V2-收款用户账户列表查询
+     * @param {QueryFlexPayeeAccountListRequest} req
+     * @param {function(string, QueryFlexPayeeAccountListResponse):void} cb
      * @public
      */
-    QueryTransferDetail(req, cb) {
-        let resp = new QueryTransferDetailResponse();
-        this.request("QueryTransferDetail", req, resp, cb);
+    QueryFlexPayeeAccountList(req, cb) {
+        let resp = new QueryFlexPayeeAccountListResponse();
+        this.request("QueryFlexPayeeAccountList", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-冻结余额
+     * @param {FreezeFlexBalanceRequest} req
+     * @param {function(string, FreezeFlexBalanceResponse):void} cb
+     * @public
+     */
+    FreezeFlexBalance(req, cb) {
+        let resp = new FreezeFlexBalanceResponse();
+        this.request("FreezeFlexBalance", req, resp, cb);
     }
 
     /**
@@ -895,6 +1129,17 @@ class CpdpClient extends AbstractClient {
     QueryMerchantClassification(req, cb) {
         let resp = new QueryMerchantClassificationResponse();
         this.request("QueryMerchantClassification", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-查询结算订单列表
+     * @param {QueryFlexSettlementOrderListRequest} req
+     * @param {function(string, QueryFlexSettlementOrderListResponse):void} cb
+     * @public
+     */
+    QueryFlexSettlementOrderList(req, cb) {
+        let resp = new QueryFlexSettlementOrderListResponse();
+        this.request("QueryFlexSettlementOrderList", req, resp, cb);
     }
 
     /**
@@ -942,6 +1187,39 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-绑定分账收款方
+     * @param {BindOpenBankProfitSharePayeeRequest} req
+     * @param {function(string, BindOpenBankProfitSharePayeeResponse):void} cb
+     * @public
+     */
+    BindOpenBankProfitSharePayee(req, cb) {
+        let resp = new BindOpenBankProfitSharePayeeResponse();
+        this.request("BindOpenBankProfitSharePayee", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-收款用户信息查询
+     * @param {QueryFlexPayeeInfoRequest} req
+     * @param {function(string, QueryFlexPayeeInfoResponse):void} cb
+     * @public
+     */
+    QueryFlexPayeeInfo(req, cb) {
+        let resp = new QueryFlexPayeeInfoResponse();
+        this.request("QueryFlexPayeeInfo", req, resp, cb);
+    }
+
+    /**
+     * 通过商家或者微信批次明细单号查询明细单
+     * @param {QueryTransferDetailRequest} req
+     * @param {function(string, QueryTransferDetailResponse):void} cb
+     * @public
+     */
+    QueryTransferDetail(req, cb) {
+        let resp = new QueryTransferDetailResponse();
+        this.request("QueryTransferDetail", req, resp, cb);
+    }
+
+    /**
      * 云企付-查询联行号
      * @param {QueryOpenBankBankBranchListRequest} req
      * @param {function(string, QueryOpenBankBankBranchListResponse):void} cb
@@ -975,14 +1253,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 商户新增的接口
-     * @param {CreatePayMerchantRequest} req
-     * @param {function(string, CreatePayMerchantResponse):void} cb
+     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     * @param {ContractOrderRequest} req
+     * @param {function(string, ContractOrderResponse):void} cb
      * @public
      */
-    CreatePayMerchant(req, cb) {
-        let resp = new CreatePayMerchantResponse();
-        this.request("CreatePayMerchant", req, resp, cb);
+    ContractOrder(req, cb) {
+        let resp = new ContractOrderResponse();
+        this.request("ContractOrder", req, resp, cb);
     }
 
     /**
@@ -1005,6 +1283,39 @@ class CpdpClient extends AbstractClient {
     ApplyOpenBankOrderDetailReceipt(req, cb) {
         let resp = new ApplyOpenBankOrderDetailReceiptResponse();
         this.request("ApplyOpenBankOrderDetailReceipt", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-查询付款订单列表
+     * @param {QueryFlexPaymentOrderListRequest} req
+     * @param {function(string, QueryFlexPaymentOrderListResponse):void} cb
+     * @public
+     */
+    QueryFlexPaymentOrderList(req, cb) {
+        let resp = new QueryFlexPaymentOrderListResponse();
+        this.request("QueryFlexPaymentOrderList", req, resp, cb);
+    }
+
+    /**
+     * 商户查询是否签约和签约行为上报
+     * @param {RegisterBehaviorRequest} req
+     * @param {function(string, RegisterBehaviorResponse):void} cb
+     * @public
+     */
+    RegisterBehavior(req, cb) {
+        let resp = new RegisterBehaviorResponse();
+        this.request("RegisterBehavior", req, resp, cb);
+    }
+
+    /**
+     * 云企付-查询支持银行列表
+     * @param {QueryOpenBankSupportBankListRequest} req
+     * @param {function(string, QueryOpenBankSupportBankListResponse):void} cb
+     * @public
+     */
+    QueryOpenBankSupportBankList(req, cb) {
+        let resp = new QueryOpenBankSupportBankListResponse();
+        this.request("QueryOpenBankSupportBankList", req, resp, cb);
     }
 
     /**
@@ -1041,19 +1352,18 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
-查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
-     * @param {QueryMemberBindRequest} req
-     * @param {function(string, QueryMemberBindResponse):void} cb
+     * 灵云V2-订单汇总列表查询
+     * @param {QueryFlexOrderSummaryListRequest} req
+     * @param {function(string, QueryFlexOrderSummaryListResponse):void} cb
      * @public
      */
-    QueryMemberBind(req, cb) {
-        let resp = new QueryMemberBindResponse();
-        this.request("QueryMemberBind", req, resp, cb);
+    QueryFlexOrderSummaryList(req, cb) {
+        let resp = new QueryFlexOrderSummaryListResponse();
+        this.request("QueryFlexOrderSummaryList", req, resp, cb);
     }
 
     /**
-     * 云企付-创建支付订单
+     * 云企付-创建支付订单。支持B2B网关支付，B2C转账下单。
      * @param {CreateOpenBankPaymentOrderRequest} req
      * @param {function(string, CreateOpenBankPaymentOrderResponse):void} cb
      * @public
@@ -1130,6 +1440,28 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-跨境支付下单
+     * @param {CreateOpenBankGlobalPaymentOrderRequest} req
+     * @param {function(string, CreateOpenBankGlobalPaymentOrderResponse):void} cb
+     * @public
+     */
+    CreateOpenBankGlobalPaymentOrder(req, cb) {
+        let resp = new CreateOpenBankGlobalPaymentOrderResponse();
+        this.request("CreateOpenBankGlobalPaymentOrder", req, resp, cb);
+    }
+
+    /**
+     * 云支付-添加合同接口
+     * @param {AddContractRequest} req
+     * @param {function(string, AddContractResponse):void} cb
+     * @public
+     */
+    AddContract(req, cb) {
+        let resp = new AddContractResponse();
+        this.request("AddContract", req, resp, cb);
+    }
+
+    /**
      * 创建子商户
      * @param {CreateCloudSubMerchantRequest} req
      * @param {function(string, CreateCloudSubMerchantResponse):void} cb
@@ -1174,14 +1506,36 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
-     * @param {ContractOrderRequest} req
-     * @param {function(string, ContractOrderResponse):void} cb
+     * 商户新增的接口
+     * @param {CreatePayMerchantRequest} req
+     * @param {function(string, CreatePayMerchantResponse):void} cb
      * @public
      */
-    ContractOrder(req, cb) {
-        let resp = new ContractOrderResponse();
-        this.request("ContractOrder", req, resp, cb);
+    CreatePayMerchant(req, cb) {
+        let resp = new CreatePayMerchantResponse();
+        this.request("CreatePayMerchant", req, resp, cb);
+    }
+
+    /**
+     * 云企付-结算单查询结果
+     * @param {QueryOpenBankSettleOrderRequest} req
+     * @param {function(string, QueryOpenBankSettleOrderResponse):void} cb
+     * @public
+     */
+    QueryOpenBankSettleOrder(req, cb) {
+        let resp = new QueryOpenBankSettleOrderResponse();
+        this.request("QueryOpenBankSettleOrder", req, resp, cb);
+    }
+
+    /**
+     * 灵云-批量转账结果查询
+     * @param {QueryBatchPaymentResultRequest} req
+     * @param {function(string, QueryBatchPaymentResultResponse):void} cb
+     * @public
+     */
+    QueryBatchPaymentResult(req, cb) {
+        let resp = new QueryBatchPaymentResultResponse();
+        this.request("QueryBatchPaymentResult", req, resp, cb);
     }
 
     /**
@@ -1196,14 +1550,25 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 商户查询是否签约和签约行为上报
-     * @param {RegisterBehaviorRequest} req
-     * @param {function(string, RegisterBehaviorResponse):void} cb
+     * 灵云V2-收款用户账户信息查询
+     * @param {QueryFlexPayeeAccountInfoRequest} req
+     * @param {function(string, QueryFlexPayeeAccountInfoResponse):void} cb
      * @public
      */
-    RegisterBehavior(req, cb) {
-        let resp = new RegisterBehaviorResponse();
-        this.request("RegisterBehavior", req, resp, cb);
+    QueryFlexPayeeAccountInfo(req, cb) {
+        let resp = new QueryFlexPayeeAccountInfoResponse();
+        this.request("QueryFlexPayeeAccountInfo", req, resp, cb);
+    }
+
+    /**
+     * 云企付-退款申请
+     * @param {RefundOpenBankOrderRequest} req
+     * @param {function(string, RefundOpenBankOrderResponse):void} cb
+     * @public
+     */
+    RefundOpenBankOrder(req, cb) {
+        let resp = new RefundOpenBankOrderResponse();
+        this.request("RefundOpenBankOrder", req, resp, cb);
     }
 
     /**
@@ -1215,6 +1580,40 @@ class CpdpClient extends AbstractClient {
     CreatePayRollToken(req, cb) {
         let resp = new CreatePayRollTokenResponse();
         this.request("CreatePayRollToken", req, resp, cb);
+    }
+
+    /**
+     * 灵云-上传主播信息
+     * @param {UploadExternalAnchorInfoRequest} req
+     * @param {function(string, UploadExternalAnchorInfoResponse):void} cb
+     * @public
+     */
+    UploadExternalAnchorInfo(req, cb) {
+        let resp = new UploadExternalAnchorInfoResponse();
+        this.request("UploadExternalAnchorInfo", req, resp, cb);
+    }
+
+    /**
+     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
+查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     * @param {QueryMemberBindRequest} req
+     * @param {function(string, QueryMemberBindResponse):void} cb
+     * @public
+     */
+    QueryMemberBind(req, cb) {
+        let resp = new QueryMemberBindResponse();
+        this.request("QueryMemberBind", req, resp, cb);
+    }
+
+    /**
+     * 子商户在线签约
+     * @param {ApplyOpenBankSubMerchantSignOnlineRequest} req
+     * @param {function(string, ApplyOpenBankSubMerchantSignOnlineResponse):void} cb
+     * @public
+     */
+    ApplyOpenBankSubMerchantSignOnline(req, cb) {
+        let resp = new ApplyOpenBankSubMerchantSignOnlineResponse();
+        this.request("ApplyOpenBankSubMerchantSignOnline", req, resp, cb);
     }
 
     /**
@@ -1259,6 +1658,17 @@ class CpdpClient extends AbstractClient {
     QueryContractRelateShop(req, cb) {
         let resp = new QueryContractRelateShopResponse();
         this.request("QueryContractRelateShop", req, resp, cb);
+    }
+
+    /**
+     * 云支付-查询门店明细接口
+     * @param {ViewShopRequest} req
+     * @param {function(string, ViewShopResponse):void} cb
+     * @public
+     */
+    ViewShop(req, cb) {
+        let resp = new ViewShopResponse();
+        this.request("ViewShop", req, resp, cb);
     }
 
     /**
@@ -1317,14 +1727,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 云企付-查询订单支付结果
-     * @param {QueryOpenBankPaymentOrderRequest} req
-     * @param {function(string, QueryOpenBankPaymentOrderResponse):void} cb
+     * 财税-查询金融数据文件下载链接
+     * @param {QueryFinancialDataUrlRequest} req
+     * @param {function(string, QueryFinancialDataUrlResponse):void} cb
      * @public
      */
-    QueryOpenBankPaymentOrder(req, cb) {
-        let resp = new QueryOpenBankPaymentOrderResponse();
-        this.request("QueryOpenBankPaymentOrder", req, resp, cb);
+    QueryFinancialDataUrl(req, cb) {
+        let resp = new QueryFinancialDataUrlResponse();
+        this.request("QueryFinancialDataUrl", req, resp, cb);
     }
 
     /**
@@ -1347,6 +1757,50 @@ class CpdpClient extends AbstractClient {
     MigrateOrderRefund(req, cb) {
         let resp = new MigrateOrderRefundResponse();
         this.request("MigrateOrderRefund", req, resp, cb);
+    }
+
+    /**
+     * 云企付-子商户资质文件查询
+     * @param {QueryOpenBankSubMerchantCredentialRequest} req
+     * @param {function(string, QueryOpenBankSubMerchantCredentialResponse):void} cb
+     * @public
+     */
+    QueryOpenBankSubMerchantCredential(req, cb) {
+        let resp = new QueryOpenBankSubMerchantCredentialResponse();
+        this.request("QueryOpenBankSubMerchantCredential", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-查询付款订单状态
+     * @param {QueryFlexPaymentOrderStatusRequest} req
+     * @param {function(string, QueryFlexPaymentOrderStatusResponse):void} cb
+     * @public
+     */
+    QueryFlexPaymentOrderStatus(req, cb) {
+        let resp = new QueryFlexPaymentOrderStatusResponse();
+        this.request("QueryFlexPaymentOrderStatus", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-平台账户余额查询
+     * @param {QueryFlexPlatformAccountBalanceRequest} req
+     * @param {function(string, QueryFlexPlatformAccountBalanceResponse):void} cb
+     * @public
+     */
+    QueryFlexPlatformAccountBalance(req, cb) {
+        let resp = new QueryFlexPlatformAccountBalanceResponse();
+        this.request("QueryFlexPlatformAccountBalance", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-查询税前金额
+     * @param {QueryFlexAmountBeforeTaxRequest} req
+     * @param {function(string, QueryFlexAmountBeforeTaxResponse):void} cb
+     * @public
+     */
+    QueryFlexAmountBeforeTax(req, cb) {
+        let resp = new QueryFlexAmountBeforeTaxResponse();
+        this.request("QueryFlexAmountBeforeTax", req, resp, cb);
     }
 
     /**
@@ -1394,6 +1848,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-分页查询对账单数据
+     * @param {QueryOpenBankBillDataPageRequest} req
+     * @param {function(string, QueryOpenBankBillDataPageResponse):void} cb
+     * @public
+     */
+    QueryOpenBankBillDataPage(req, cb) {
+        let resp = new QueryOpenBankBillDataPageResponse();
+        this.request("QueryOpenBankBillDataPage", req, resp, cb);
+    }
+
+    /**
      * 云鉴-查询对账单下载地址的接口
      * @param {QueryDownloadBillURLRequest} req
      * @param {function(string, QueryDownloadBillURLResponse):void} cb
@@ -1435,6 +1900,28 @@ class CpdpClient extends AbstractClient {
     QueryMerchantOrder(req, cb) {
         let resp = new QueryMerchantOrderResponse();
         this.request("QueryMerchantOrder", req, resp, cb);
+    }
+
+    /**
+     * 云企付-子商户银行卡打款验证，在接入TENPAY渠道EBANK_PAYMENT付款时，若客户期望接入担保支付，需在接入前先完成，收款商户绑定的银行卡进行打款验证。验证成功后，才可以调用CreateOpenBankPaymentOrder接口进行担保支付下单。
+     * @param {VerifyOpenBankAccountRequest} req
+     * @param {function(string, VerifyOpenBankAccountResponse):void} cb
+     * @public
+     */
+    VerifyOpenBankAccount(req, cb) {
+        let resp = new VerifyOpenBankAccountResponse();
+        this.request("VerifyOpenBankAccount", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-收款用户开立
+     * @param {CreateFlexPayeeRequest} req
+     * @param {function(string, CreateFlexPayeeResponse):void} cb
+     * @public
+     */
+    CreateFlexPayee(req, cb) {
+        let resp = new CreateFlexPayeeResponse();
+        this.request("CreateFlexPayee", req, resp, cb);
     }
 
     /**
@@ -1695,6 +2182,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-创建核销申请，适用于针对支付订单维度的确认收货，解冻等业务场景。目前支持的渠道有TENPAY下的EBANK_PAYMENT付款方式创建支付订单时，选择担保支付下单的订单进行解冻。
+     * @param {CreateOpenBankVerificationOrderRequest} req
+     * @param {function(string, CreateOpenBankVerificationOrderResponse):void} cb
+     * @public
+     */
+    CreateOpenBankVerificationOrder(req, cb) {
+        let resp = new CreateOpenBankVerificationOrderResponse();
+        this.request("CreateOpenBankVerificationOrder", req, resp, cb);
+    }
+
+    /**
      * 正常结算提现失败情况下，发起重新提现的请求接口
      * @param {ApplyReWithdrawalRequest} req
      * @param {function(string, ApplyReWithdrawalResponse):void} cb
@@ -1728,14 +2226,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 直播平台-文件上传
-     * @param {UploadFileRequest} req
-     * @param {function(string, UploadFileResponse):void} cb
+     * 云企付-查询订单支付结果
+     * @param {QueryOpenBankPaymentOrderRequest} req
+     * @param {function(string, QueryOpenBankPaymentOrderResponse):void} cb
      * @public
      */
-    UploadFile(req, cb) {
-        let resp = new UploadFileResponse();
-        this.request("UploadFile", req, resp, cb);
+    QueryOpenBankPaymentOrder(req, cb) {
+        let resp = new QueryOpenBankPaymentOrderResponse();
+        this.request("QueryOpenBankPaymentOrder", req, resp, cb);
     }
 
     /**
@@ -1838,6 +2336,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-收款用户账户权益状态修改
+     * @param {ModifyFlexPayeeAccountRightStatusRequest} req
+     * @param {function(string, ModifyFlexPayeeAccountRightStatusResponse):void} cb
+     * @public
+     */
+    ModifyFlexPayeeAccountRightStatus(req, cb) {
+        let resp = new ModifyFlexPayeeAccountRightStatusResponse();
+        this.request("ModifyFlexPayeeAccountRightStatus", req, resp, cb);
+    }
+
+    /**
      * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。 
      * @param {RefundRequest} req
      * @param {function(string, RefundResponse):void} cb
@@ -1868,6 +2377,17 @@ class CpdpClient extends AbstractClient {
     RefundCloudOrder(req, cb) {
         let resp = new RefundCloudOrderResponse();
         this.request("RefundCloudOrder", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-收款用户账户余额查询
+     * @param {QueryFlexPayeeAccountBalanceRequest} req
+     * @param {function(string, QueryFlexPayeeAccountBalanceResponse):void} cb
+     * @public
+     */
+    QueryFlexPayeeAccountBalance(req, cb) {
+        let resp = new QueryFlexPayeeAccountBalanceResponse();
+        this.request("QueryFlexPayeeAccountBalance", req, resp, cb);
     }
 
     /**
@@ -1948,14 +2468,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 云支付-添加合同接口
-     * @param {AddContractRequest} req
-     * @param {function(string, AddContractResponse):void} cb
+     * 云企付-子商户费率配置
+     * @param {CreateOpenBankSubMerchantRateConfigureRequest} req
+     * @param {function(string, CreateOpenBankSubMerchantRateConfigureResponse):void} cb
      * @public
      */
-    AddContract(req, cb) {
-        let resp = new AddContractResponse();
-        this.request("AddContract", req, resp, cb);
+    CreateOpenBankSubMerchantRateConfigure(req, cb) {
+        let resp = new CreateOpenBankSubMerchantRateConfigureResponse();
+        this.request("CreateOpenBankSubMerchantRateConfigure", req, resp, cb);
     }
 
     /**
@@ -1981,6 +2501,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-查询对账单文件下载链接
+     * @param {QueryFlexBillDownloadUrlRequest} req
+     * @param {function(string, QueryFlexBillDownloadUrlResponse):void} cb
+     * @public
+     */
+    QueryFlexBillDownloadUrl(req, cb) {
+        let resp = new QueryFlexBillDownloadUrlResponse();
+        this.request("QueryFlexBillDownloadUrl", req, resp, cb);
+    }
+
+    /**
      * 云企付-查询对账单下载地址
      * @param {QueryOpenBankDownLoadUrlRequest} req
      * @param {function(string, QueryOpenBankDownLoadUrlResponse):void} cb
@@ -1989,18 +2520,6 @@ class CpdpClient extends AbstractClient {
     QueryOpenBankDownLoadUrl(req, cb) {
         let resp = new QueryOpenBankDownLoadUrlResponse();
         this.request("QueryOpenBankDownLoadUrl", req, resp, cb);
-    }
-
-    /**
-     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
-商户号,订单号,支付订单号,分账订单总金额,分账详情（通过|分割每笔明细：商户号1#分账金额1|商户号2#分账金额2）,交易手续费承担方商户号,交易手续费,发起时间,分账状态,结算日期,非交易主体分账金额,商户退款订单号,商户分账单号
-     * @param {GetDistributeBillDownloadUrlRequest} req
-     * @param {function(string, GetDistributeBillDownloadUrlResponse):void} cb
-     * @public
-     */
-    GetDistributeBillDownloadUrl(req, cb) {
-        let resp = new GetDistributeBillDownloadUrlResponse();
-        this.request("GetDistributeBillDownloadUrl", req, resp, cb);
     }
 
     /**
@@ -2015,17 +2534,6 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 银企直连-单笔支付状态查询接口
-     * @param {QuerySinglePayRequest} req
-     * @param {function(string, QuerySinglePayResponse):void} cb
-     * @public
-     */
-    QuerySinglePay(req, cb) {
-        let resp = new QuerySinglePayResponse();
-        this.request("QuerySinglePay", req, resp, cb);
-    }
-
-    /**
      * 跨境-付款人查询
      * @param {QueryPayerInfoRequest} req
      * @param {function(string, QueryPayerInfoResponse):void} cb
@@ -2034,6 +2542,17 @@ class CpdpClient extends AbstractClient {
     QueryPayerInfo(req, cb) {
         let resp = new QueryPayerInfoResponse();
         this.request("QueryPayerInfo", req, resp, cb);
+    }
+
+    /**
+     * 智慧零售-查询公司抬头
+     * @param {QueryCompanyTitleRequest} req
+     * @param {function(string, QueryCompanyTitleResponse):void} cb
+     * @public
+     */
+    QueryCompanyTitle(req, cb) {
+        let resp = new QueryCompanyTitleResponse();
+        this.request("QueryCompanyTitle", req, resp, cb);
     }
 
     /**
@@ -2070,14 +2589,15 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 银企直连-单笔支付接口
-     * @param {CreateSinglePayRequest} req
-     * @param {function(string, CreateSinglePayResponse):void} cb
+     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
+商户号,订单号,支付订单号,分账订单总金额,分账详情（通过|分割每笔明细：商户号1#分账金额1|商户号2#分账金额2）,交易手续费承担方商户号,交易手续费,发起时间,分账状态,结算日期,非交易主体分账金额,商户退款订单号,商户分账单号
+     * @param {GetDistributeBillDownloadUrlRequest} req
+     * @param {function(string, GetDistributeBillDownloadUrlResponse):void} cb
      * @public
      */
-    CreateSinglePay(req, cb) {
-        let resp = new CreateSinglePayResponse();
-        this.request("CreateSinglePay", req, resp, cb);
+    GetDistributeBillDownloadUrl(req, cb) {
+        let resp = new GetDistributeBillDownloadUrlResponse();
+        this.request("GetDistributeBillDownloadUrl", req, resp, cb);
     }
 
     /**
@@ -2090,6 +2610,17 @@ class CpdpClient extends AbstractClient {
     CreateCustAcctId(req, cb) {
         let resp = new CreateCustAcctIdResponse();
         this.request("CreateCustAcctId", req, resp, cb);
+    }
+
+    /**
+     * 直播平台-文件上传
+     * @param {UploadFileRequest} req
+     * @param {function(string, UploadFileResponse):void} cb
+     * @public
+     */
+    UploadFile(req, cb) {
+        let resp = new UploadFileResponse();
+        this.request("UploadFile", req, resp, cb);
     }
 
     /**
@@ -2115,6 +2646,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-修改收款用户资金账号信息
+     * @param {ModifyFlexFundingAccountRequest} req
+     * @param {function(string, ModifyFlexFundingAccountResponse):void} cb
+     * @public
+     */
+    ModifyFlexFundingAccount(req, cb) {
+        let resp = new ModifyFlexFundingAccountResponse();
+        this.request("ModifyFlexFundingAccount", req, resp, cb);
+    }
+
+    /**
      * 撤销会员在途充值(经第三方支付渠道)
      * @param {RevokeMemberRechargeThirdPayRequest} req
      * @param {function(string, RevokeMemberRechargeThirdPayResponse):void} cb
@@ -2126,14 +2668,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 云企付-查询支持银行列表
-     * @param {QueryOpenBankSupportBankListRequest} req
-     * @param {function(string, QueryOpenBankSupportBankListResponse):void} cb
+     * 云企付-按日期批量查询回单下载地址
+     * @param {QueryOpenBankDailyReceiptDownloadUrlRequest} req
+     * @param {function(string, QueryOpenBankDailyReceiptDownloadUrlResponse):void} cb
      * @public
      */
-    QueryOpenBankSupportBankList(req, cb) {
-        let resp = new QueryOpenBankSupportBankListResponse();
-        this.request("QueryOpenBankSupportBankList", req, resp, cb);
+    QueryOpenBankDailyReceiptDownloadUrl(req, cb) {
+        let resp = new QueryOpenBankDailyReceiptDownloadUrlResponse();
+        this.request("QueryOpenBankDailyReceiptDownloadUrl", req, resp, cb);
     }
 
     /**
@@ -2185,6 +2727,28 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 云企付-子商户资质文件上传
+     * @param {UploadOpenBankSubMerchantCredentialRequest} req
+     * @param {function(string, UploadOpenBankSubMerchantCredentialResponse):void} cb
+     * @public
+     */
+    UploadOpenBankSubMerchantCredential(req, cb) {
+        let resp = new UploadOpenBankSubMerchantCredentialResponse();
+        this.request("UploadOpenBankSubMerchantCredential", req, resp, cb);
+    }
+
+    /**
+     * 云企付-绑定分账收款方查询
+     * @param {QueryOpenBankProfitSharePayeeRequest} req
+     * @param {function(string, QueryOpenBankProfitSharePayeeResponse):void} cb
+     * @public
+     */
+    QueryOpenBankProfitSharePayee(req, cb) {
+        let resp = new QueryOpenBankProfitSharePayeeResponse();
+        this.request("QueryOpenBankProfitSharePayee", req, resp, cb);
+    }
+
+    /**
      * 云支付-查询已添加分账接收方接口
      * @param {DistributeQueryReceiverRequest} req
      * @param {function(string, DistributeQueryReceiverResponse):void} cb
@@ -2196,14 +2760,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 灵云-批量转账结果查询
-     * @param {QueryBatchPaymentResultRequest} req
-     * @param {function(string, QueryBatchPaymentResultResponse):void} cb
+     * 云企付-结算申请接口
+     * @param {ApplyOpenBankSettleOrderRequest} req
+     * @param {function(string, ApplyOpenBankSettleOrderResponse):void} cb
      * @public
      */
-    QueryBatchPaymentResult(req, cb) {
-        let resp = new QueryBatchPaymentResultResponse();
-        this.request("QueryBatchPaymentResult", req, resp, cb);
+    ApplyOpenBankSettleOrder(req, cb) {
+        let resp = new ApplyOpenBankSettleOrderResponse();
+        this.request("ApplyOpenBankSettleOrder", req, resp, cb);
     }
 
     /**
@@ -2262,6 +2826,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 子商户在线签约查询
+     * @param {QueryOpenBankSubMerchantSignOnlineRequest} req
+     * @param {function(string, QueryOpenBankSubMerchantSignOnlineResponse):void} cb
+     * @public
+     */
+    QueryOpenBankSubMerchantSignOnline(req, cb) {
+        let resp = new QueryOpenBankSubMerchantSignOnlineResponse();
+        this.request("QueryOpenBankSubMerchantSignOnline", req, resp, cb);
+    }
+
+    /**
      * 会员间交易退款
      * @param {RefundMemberTransactionRequest} req
      * @param {function(string, RefundMemberTransactionResponse):void} cb
@@ -2306,14 +2881,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 云支付-查询门店明细接口
-     * @param {ViewShopRequest} req
-     * @param {function(string, ViewShopResponse):void} cb
+     * 直播平台-查询代理商结算单链接
+     * @param {QueryAgentStatementsRequest} req
+     * @param {function(string, QueryAgentStatementsResponse):void} cb
      * @public
      */
-    ViewShop(req, cb) {
-        let resp = new ViewShopResponse();
-        this.request("ViewShop", req, resp, cb);
+    QueryAgentStatements(req, cb) {
+        let resp = new QueryAgentStatementsResponse();
+        this.request("QueryAgentStatements", req, resp, cb);
     }
 
     /**
@@ -2347,6 +2922,17 @@ class CpdpClient extends AbstractClient {
     QueryOpenBankExternalSubMerchantRegistration(req, cb) {
         let resp = new QueryOpenBankExternalSubMerchantRegistrationResponse();
         this.request("QueryOpenBankExternalSubMerchantRegistration", req, resp, cb);
+    }
+
+    /**
+     * 灵云V2-绑定收款用户资金账号信息
+     * @param {AddFlexFundingAccountRequest} req
+     * @param {function(string, AddFlexFundingAccountResponse):void} cb
+     * @public
+     */
+    AddFlexFundingAccount(req, cb) {
+        let resp = new AddFlexFundingAccountResponse();
+        this.request("AddFlexFundingAccount", req, resp, cb);
     }
 
     /**
@@ -2438,6 +3024,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 灵云V2-结算
+     * @param {ApplyFlexSettlementRequest} req
+     * @param {function(string, ApplyFlexSettlementResponse):void} cb
+     * @public
+     */
+    ApplyFlexSettlement(req, cb) {
+        let resp = new ApplyFlexSettlementResponse();
+        this.request("ApplyFlexSettlement", req, resp, cb);
+    }
+
+    /**
      * 云企付-子商户银行卡余额查询
      * @param {QueryOpenBankBankAccountBalanceRequest} req
      * @param {function(string, QueryOpenBankBankAccountBalanceResponse):void} cb
@@ -2460,14 +3057,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 直播平台-查询代理商结算单链接
-     * @param {QueryAgentStatementsRequest} req
-     * @param {function(string, QueryAgentStatementsResponse):void} cb
+     * 云企付-子商户进件V2
+     * @param {CreateOpenBankAggregatedSubMerchantRegistrationRequest} req
+     * @param {function(string, CreateOpenBankAggregatedSubMerchantRegistrationResponse):void} cb
      * @public
      */
-    QueryAgentStatements(req, cb) {
-        let resp = new QueryAgentStatementsResponse();
-        this.request("QueryAgentStatements", req, resp, cb);
+    CreateOpenBankAggregatedSubMerchantRegistration(req, cb) {
+        let resp = new CreateOpenBankAggregatedSubMerchantRegistrationResponse();
+        this.request("CreateOpenBankAggregatedSubMerchantRegistration", req, resp, cb);
     }
 
     /**

@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const RiskDetails = models.RiskDetails;
 const TextModerationRequest = models.TextModerationRequest;
 const DetailResults = models.DetailResults;
+const Tag = models.Tag;
 const User = models.User;
 const Device = models.Device;
 const TextModerationResponse = models.TextModerationResponse;

@@ -221,6 +221,200 @@ class DeleteAclRequest extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePost返回参数结构体
+ * @class
+ */
+class CreateInstancePostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * dip失败消息写入cls的配置
+ * @class
+ */
+class DropCls extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否投递到cls
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DropInvalidMessageToCls = null;
+
+        /**
+         * 投递cls的地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DropClsRegion = null;
+
+        /**
+         * 投递cls的账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DropClsOwneruin = null;
+
+        /**
+         * 投递cls的主题
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DropClsTopicId = null;
+
+        /**
+         * 投递cls的日志集id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DropClsLogSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DropInvalidMessageToCls = 'DropInvalidMessageToCls' in params ? params.DropInvalidMessageToCls : null;
+        this.DropClsRegion = 'DropClsRegion' in params ? params.DropClsRegion : null;
+        this.DropClsOwneruin = 'DropClsOwneruin' in params ? params.DropClsOwneruin : null;
+        this.DropClsTopicId = 'DropClsTopicId' in params ? params.DropClsTopicId : null;
+        this.DropClsLogSet = 'DropClsLogSet' in params ? params.DropClsLogSet : null;
+
+    }
+}
+
+/**
+ * PostgreSQL修改连接源参数
+ * @class
+ */
+class PostgreSQLModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * PostgreSQL连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * PostgreSQL的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * PostgreSQL连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * PostgreSQL连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * PostgreSQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * PostgreSQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 当type为TDSQL_C_POSTGRESQL时，该参数才有值【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+
+    }
+}
+
+/**
  * consumer信息
  * @class
  */
@@ -270,6 +464,135 @@ class GroupInfoMember extends  AbstractModel {
             obj.deserialize(params.Assignment)
             this.Assignment = obj;
         }
+
+    }
+}
+
+/**
+ * 数据处理ROW输出格式配置
+ * @class
+ */
+class RowParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 行内容，KEY_VALUE，VALUE
+         * @type {string || null}
+         */
+        this.RowContent = null;
+
+        /**
+         * key和value间的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyValueDelimiter = null;
+
+        /**
+         * 元素建的分隔符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EntryDelimiter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RowContent = 'RowContent' in params ? params.RowContent : null;
+        this.KeyValueDelimiter = 'KeyValueDelimiter' in params ? params.KeyValueDelimiter : null;
+        this.EntryDelimiter = 'EntryDelimiter' in params ? params.EntryDelimiter : null;
+
+    }
+}
+
+/**
+ * Es连接源参数
+ * @class
+ */
+class EsConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Es的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Es连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Es连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Es连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Es连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * Es连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Es连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
 
     }
 }
@@ -327,6 +650,46 @@ class BatchCreateAclRequest extends  AbstractModel {
                 this.RuleList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeDatahubTask返回参数结构体
+ * @class
+ */
+class DescribeDatahubTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {DescribeDatahubTaskRes || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeDatahubTaskRes();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -404,48 +767,61 @@ class PartitionOffset extends  AbstractModel {
 }
 
 /**
- * DescribeACL请求参数结构体
+ * SQLServer连接源参数
  * @class
  */
-class DescribeACLRequest extends  AbstractModel {
+class SQLServerConnectParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例Id
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER)
+         * SQLServer的连接port
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.ResourceType = null;
+        this.Port = null;
 
         /**
-         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。
+         * SQLServer连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ResourceName = null;
+        this.UserName = null;
 
         /**
-         * 偏移位置
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 个数限制
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 关键字匹配
+         * SQLServer连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SearchWord = null;
+        this.Password = null;
+
+        /**
+         * SQLServer连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * SQLServer连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * SQLServer连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
 
     }
 
@@ -456,12 +832,98 @@ class DescribeACLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * CreateConnectResource返回参数结构体
+ * @class
+ */
+class CreateConnectResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {ConnectResourceResourceIdResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConnectResourceResourceIdResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Topic消息保留时间配置返回信息
+ * @class
+ */
+class TopicRetentionTimeConfigRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 期望值，即用户配置的Topic消息保留时间(单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Expect = null;
+
+        /**
+         * 当前值，即当前生效值(可能存在动态调整，单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Current = null;
+
+        /**
+         * 最近变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ModTimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Expect = 'Expect' in params ? params.Expect : null;
+        this.Current = 'Current' in params ? params.Current : null;
+        this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
 
     }
 }
@@ -519,6 +981,66 @@ class BatchModifyTopicResultDTO extends  AbstractModel {
 }
 
 /**
+ * 订阅信息实体
+ * @class
+ */
+class SubscribedInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订阅的主题名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 订阅的分区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 分区offset信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PartitionOffset> || null}
+         */
+        this.PartitionOffset = null;
+
+        /**
+         * 订阅的主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+        if (params.PartitionOffset) {
+            this.PartitionOffset = new Array();
+            for (let z in params.PartitionOffset) {
+                let obj = new PartitionOffset();
+                obj.deserialize(params.PartitionOffset[z]);
+                this.PartitionOffset.push(obj);
+            }
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
  * DescribeTopicAttributes请求参数结构体
  * @class
  */
@@ -554,18 +1076,24 @@ class DescribeTopicAttributesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAttributes请求参数结构体
+ * DescribeDatahubGroupOffsets返回参数结构体
  * @class
  */
-class DescribeInstanceAttributesRequest extends  AbstractModel {
+class DescribeDatahubGroupOffsetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例id
+         * 返回的结果对象
+         * @type {GroupOffsetResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -576,7 +1104,41 @@ class DescribeInstanceAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Result) {
+            let obj = new GroupOffsetResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 值支持一拆多，即将一个值拆为一个数组
+ * @class
+ */
+class SplitParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分隔符
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Regex = 'Regex' in params ? params.Regex : null;
 
     }
 }
@@ -669,6 +1231,229 @@ class Assignment extends  AbstractModel {
 }
 
 /**
+ * 查询连接源具体数据的返参
+ * @class
+ */
+class DescribeConnectResourceResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 连接源名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 连接源描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 连接源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 连接源的状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 连接源的创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 连接源的异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 连接源的当前所处步骤
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CurrentStep = null;
+
+        /**
+         * 步骤列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.StepList = null;
+
+        /**
+         * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MySQLConnectParam || null}
+         */
+        this.MySQLConnectParam = null;
+
+        /**
+         * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PostgreSQLConnectParam || null}
+         */
+        this.PostgreSQLConnectParam = null;
+
+        /**
+         * Dts配置，Type为DTS时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DtsConnectParam || null}
+         */
+        this.DtsConnectParam = null;
+
+        /**
+         * MongoDB配置，Type为MONGODB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MongoDBConnectParam || null}
+         */
+        this.MongoDBConnectParam = null;
+
+        /**
+         * Es配置，Type为ES时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EsConnectParam || null}
+         */
+        this.EsConnectParam = null;
+
+        /**
+         * ClickHouse配置，Type为CLICKHOUSE时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClickHouseConnectParam || null}
+         */
+        this.ClickHouseConnectParam = null;
+
+        /**
+         * MariaDB配置，Type为MARIADB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MariaDBConnectParam || null}
+         */
+        this.MariaDBConnectParam = null;
+
+        /**
+         * SQLServer配置，Type为SQLSERVER时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SQLServerConnectParam || null}
+         */
+        this.SQLServerConnectParam = null;
+
+        /**
+         * Ctsdb配置，Type为CTSDB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CtsdbConnectParam || null}
+         */
+        this.CtsdbConnectParam = null;
+
+        /**
+         * Doris 配置，Type 为 DORIS 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DorisConnectParam || null}
+         */
+        this.DorisConnectParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.CurrentStep = 'CurrentStep' in params ? params.CurrentStep : null;
+        this.StepList = 'StepList' in params ? params.StepList : null;
+
+        if (params.MySQLConnectParam) {
+            let obj = new MySQLConnectParam();
+            obj.deserialize(params.MySQLConnectParam)
+            this.MySQLConnectParam = obj;
+        }
+
+        if (params.PostgreSQLConnectParam) {
+            let obj = new PostgreSQLConnectParam();
+            obj.deserialize(params.PostgreSQLConnectParam)
+            this.PostgreSQLConnectParam = obj;
+        }
+
+        if (params.DtsConnectParam) {
+            let obj = new DtsConnectParam();
+            obj.deserialize(params.DtsConnectParam)
+            this.DtsConnectParam = obj;
+        }
+
+        if (params.MongoDBConnectParam) {
+            let obj = new MongoDBConnectParam();
+            obj.deserialize(params.MongoDBConnectParam)
+            this.MongoDBConnectParam = obj;
+        }
+
+        if (params.EsConnectParam) {
+            let obj = new EsConnectParam();
+            obj.deserialize(params.EsConnectParam)
+            this.EsConnectParam = obj;
+        }
+
+        if (params.ClickHouseConnectParam) {
+            let obj = new ClickHouseConnectParam();
+            obj.deserialize(params.ClickHouseConnectParam)
+            this.ClickHouseConnectParam = obj;
+        }
+
+        if (params.MariaDBConnectParam) {
+            let obj = new MariaDBConnectParam();
+            obj.deserialize(params.MariaDBConnectParam)
+            this.MariaDBConnectParam = obj;
+        }
+
+        if (params.SQLServerConnectParam) {
+            let obj = new SQLServerConnectParam();
+            obj.deserialize(params.SQLServerConnectParam)
+            this.SQLServerConnectParam = obj;
+        }
+
+        if (params.CtsdbConnectParam) {
+            let obj = new CtsdbConnectParam();
+            obj.deserialize(params.CtsdbConnectParam)
+            this.CtsdbConnectParam = obj;
+        }
+
+        if (params.DorisConnectParam) {
+            let obj = new DorisConnectParam();
+            obj.deserialize(params.DorisConnectParam)
+            this.DorisConnectParam = obj;
+        }
+
+    }
+}
+
+/**
  * AuthorizeToken返回参数结构体
  * @class
  */
@@ -705,16 +1490,73 @@ class AuthorizeTokenResponse extends  AbstractModel {
 }
 
 /**
- * DescribeConsumerGroup返回参数结构体
+ * DescribeDatahubTask请求参数结构体
  * @class
  */
-class DescribeConsumerGroupResponse extends  AbstractModel {
+class DescribeDatahubTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的消费分组信息
-         * @type {ConsumerGroupResponse || null}
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * Url解析
+ * @class
+ */
+class UrlDecodeParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CharsetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CharsetName = 'CharsetName' in params ? params.CharsetName : null;
+
+    }
+}
+
+/**
+ * FetchLatestDatahubMessageList返回参数结构体
+ * @class
+ */
+class FetchLatestDatahubMessageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果。
+         * @type {Array.<ConsumerRecord> || null}
          */
         this.Result = null;
 
@@ -735,11 +1577,570 @@ class DescribeConsumerGroupResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new ConsumerGroupResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ConsumerRecord();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Es类型入参
+ * @class
+ */
+class EsParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Es的连接port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Es用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Es密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否为自建集群
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 实例vip
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * 实例的vpcId
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Es是否抛弃解析失败的消息
+         * @type {boolean || null}
+         */
+        this.DropInvalidMessage = null;
+
+        /**
+         * Es自定义index名称
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Es自定义日期后缀
+         * @type {string || null}
+         */
+        this.DateFormat = null;
+
+        /**
+         * 非json格式数据的自定义key
+         * @type {string || null}
+         */
+        this.ContentKey = null;
+
+        /**
+         * Es是否抛弃非json格式的消息
+         * @type {boolean || null}
+         */
+        this.DropInvalidJsonMessage = null;
+
+        /**
+         * 转储到Es中的文档ID取值字段名
+         * @type {string || null}
+         */
+        this.DocumentIdField = null;
+
+        /**
+         * Es自定义index名称的类型，STRING，JSONPATH，默认为STRING
+         * @type {string || null}
+         */
+        this.IndexType = null;
+
+        /**
+         * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+         * @type {DropCls || null}
+         */
+        this.DropCls = null;
+
+        /**
+         * 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键
+         * @type {string || null}
+         */
+        this.DatabasePrimaryKey = null;
+
+        /**
+         * 死信队列
+         * @type {FailureParam || null}
+         */
+        this.DropDlq = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.DropInvalidMessage = 'DropInvalidMessage' in params ? params.DropInvalidMessage : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.DateFormat = 'DateFormat' in params ? params.DateFormat : null;
+        this.ContentKey = 'ContentKey' in params ? params.ContentKey : null;
+        this.DropInvalidJsonMessage = 'DropInvalidJsonMessage' in params ? params.DropInvalidJsonMessage : null;
+        this.DocumentIdField = 'DocumentIdField' in params ? params.DocumentIdField : null;
+        this.IndexType = 'IndexType' in params ? params.IndexType : null;
+
+        if (params.DropCls) {
+            let obj = new DropCls();
+            obj.deserialize(params.DropCls)
+            this.DropCls = obj;
+        }
+        this.DatabasePrimaryKey = 'DatabasePrimaryKey' in params ? params.DatabasePrimaryKey : null;
+
+        if (params.DropDlq) {
+            let obj = new FailureParam();
+            obj.deserialize(params.DropDlq)
+            this.DropDlq = obj;
+        }
+
+    }
+}
+
+/**
+ * 查询连接源具体数据的返参
+ * @class
+ */
+class DescribeConnectResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 连接源名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 连接源描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 连接源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 连接源的状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 连接源的创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 连接源的异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 连接源的当前所处步骤
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CurrentStep = null;
+
+        /**
+         * 该连接源关联的Datahub任务数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DatahubTaskCount = null;
+
+        /**
+         * Dts配置，Type为DTS时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DtsConnectParam || null}
+         */
+        this.DtsConnectParam = null;
+
+        /**
+         * MongoDB配置，Type为MONGODB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MongoDBConnectParam || null}
+         */
+        this.MongoDBConnectParam = null;
+
+        /**
+         * Es配置，Type为ES时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EsConnectParam || null}
+         */
+        this.EsConnectParam = null;
+
+        /**
+         * ClickHouse配置，Type为CLICKHOUSE时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClickHouseConnectParam || null}
+         */
+        this.ClickHouseConnectParam = null;
+
+        /**
+         * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MySQLConnectParam || null}
+         */
+        this.MySQLConnectParam = null;
+
+        /**
+         * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PostgreSQLConnectParam || null}
+         */
+        this.PostgreSQLConnectParam = null;
+
+        /**
+         * MariaDB配置，Type为MARIADB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MariaDBConnectParam || null}
+         */
+        this.MariaDBConnectParam = null;
+
+        /**
+         * SQLServer配置，Type为SQLSERVER时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SQLServerConnectParam || null}
+         */
+        this.SQLServerConnectParam = null;
+
+        /**
+         * Ctsdb配置，Type为CTSDB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CtsdbConnectParam || null}
+         */
+        this.CtsdbConnectParam = null;
+
+        /**
+         * Doris 配置，Type 为 DORIS 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DorisConnectParam || null}
+         */
+        this.DorisConnectParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.CurrentStep = 'CurrentStep' in params ? params.CurrentStep : null;
+        this.DatahubTaskCount = 'DatahubTaskCount' in params ? params.DatahubTaskCount : null;
+
+        if (params.DtsConnectParam) {
+            let obj = new DtsConnectParam();
+            obj.deserialize(params.DtsConnectParam)
+            this.DtsConnectParam = obj;
+        }
+
+        if (params.MongoDBConnectParam) {
+            let obj = new MongoDBConnectParam();
+            obj.deserialize(params.MongoDBConnectParam)
+            this.MongoDBConnectParam = obj;
+        }
+
+        if (params.EsConnectParam) {
+            let obj = new EsConnectParam();
+            obj.deserialize(params.EsConnectParam)
+            this.EsConnectParam = obj;
+        }
+
+        if (params.ClickHouseConnectParam) {
+            let obj = new ClickHouseConnectParam();
+            obj.deserialize(params.ClickHouseConnectParam)
+            this.ClickHouseConnectParam = obj;
+        }
+
+        if (params.MySQLConnectParam) {
+            let obj = new MySQLConnectParam();
+            obj.deserialize(params.MySQLConnectParam)
+            this.MySQLConnectParam = obj;
+        }
+
+        if (params.PostgreSQLConnectParam) {
+            let obj = new PostgreSQLConnectParam();
+            obj.deserialize(params.PostgreSQLConnectParam)
+            this.PostgreSQLConnectParam = obj;
+        }
+
+        if (params.MariaDBConnectParam) {
+            let obj = new MariaDBConnectParam();
+            obj.deserialize(params.MariaDBConnectParam)
+            this.MariaDBConnectParam = obj;
+        }
+
+        if (params.SQLServerConnectParam) {
+            let obj = new SQLServerConnectParam();
+            obj.deserialize(params.SQLServerConnectParam)
+            this.SQLServerConnectParam = obj;
+        }
+
+        if (params.CtsdbConnectParam) {
+            let obj = new CtsdbConnectParam();
+            obj.deserialize(params.CtsdbConnectParam)
+            this.CtsdbConnectParam = obj;
+        }
+
+        if (params.DorisConnectParam) {
+            let obj = new DorisConnectParam();
+            obj.deserialize(params.DorisConnectParam)
+            this.DorisConnectParam = obj;
+        }
+
+    }
+}
+
+/**
+ * Dts类型入参
+ * @class
+ */
+class DtsParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dts实例Id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Dts的连接ip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Dts的连接port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Dts订阅的topic
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Dts消费分组的Id
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Dts消费分组的账号
+         * @type {string || null}
+         */
+        this.GroupUser = null;
+
+        /**
+         * Dts消费分组的密码
+         * @type {string || null}
+         */
+        this.GroupPassword = null;
+
+        /**
+         * false同步原始数据，true同步解析后的json格式数据,默认true
+         * @type {boolean || null}
+         */
+        this.TranSql = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupUser = 'GroupUser' in params ? params.GroupUser : null;
+        this.GroupPassword = 'GroupPassword' in params ? params.GroupPassword : null;
+        this.TranSql = 'TranSql' in params ? params.TranSql : null;
+
+    }
+}
+
+/**
+ * 组偏移量分区对象
+ * @class
+ */
+class GroupOffsetPartition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * topic 的 partitionId
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * consumer 提交的 offset 位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * 错误码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 当前 partition 最新的 offset
+         * @type {number || null}
+         */
+        this.LogEndOffset = null;
+
+        /**
+         * 未消费的消息个数
+         * @type {number || null}
+         */
+        this.Lag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
+        this.Lag = 'Lag' in params ? params.Lag : null;
+
+    }
+}
+
+/**
+ * CancelAuthorizationToken请求参数结构体
+ * @class
+ */
+class CancelAuthorizationTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 用户
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * token串
+         * @type {string || null}
+         */
+        this.Tokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Tokens = 'Tokens' in params ? params.Tokens : null;
 
     }
 }
@@ -776,6 +2177,146 @@ class CancelAuthorizationTokenResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MySQL连接源参数
+ * @class
+ */
+class MySQLConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MySQL的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MySQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MySQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * MySQL连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MySQL连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MySQL连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * 当type为TDSQL_C_MYSQL时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Mysql 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+
+    }
+}
+
+/**
+ * InquireCkafkaPrice接口询价返回值
+ * @class
+ */
+class InquireCkafkaPriceResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryPrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * 公网带宽价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryPrice || null}
+         */
+        this.PublicNetworkBandwidthPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new InquiryPrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.PublicNetworkBandwidthPrice) {
+            let obj = new InquiryPrice();
+            obj.deserialize(params.PublicNetworkBandwidthPrice)
+            this.PublicNetworkBandwidthPrice = obj;
+        }
 
     }
 }
@@ -865,6 +2406,83 @@ class CreateRouteRequest extends  AbstractModel {
 }
 
 /**
+ * SQLServer修改连接源参数
+ * @class
+ */
+class SQLServerModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SQLServer连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * SQLServer的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * SQLServer连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * SQLServer连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * SQLServer连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * SQLServer连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
  * DeleteTopic请求参数结构体
  * @class
  */
@@ -895,6 +2513,76 @@ class DeleteTopicRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * DescribeDatahubTasks请求参数结构体
+ * @class
+ */
+class DescribeDatahubTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件，按照 TaskName 过滤，支持模糊查询
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 转储的目标类型
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * 任务类型，SOURCE数据接入，SINK数据流出
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 转储的源类型
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 转储的资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
 
     }
 }
@@ -940,24 +2628,130 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset返回参数结构体
+ * Datahub资源配置
  * @class
  */
-class FetchMessageByOffsetResponse extends  AbstractModel {
+class DatahubResource extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {ConsumerRecord || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 资源类型
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
+
+        /**
+         * ckafka配置，Type为KAFKA时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {KafkaParam || null}
+         */
+        this.KafkaParam = null;
+
+        /**
+         * EB配置，Type为EB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EventBusParam || null}
+         */
+        this.EventBusParam = null;
+
+        /**
+         * MongoDB配置，Type为MONGODB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MongoDBParam || null}
+         */
+        this.MongoDBParam = null;
+
+        /**
+         * Es配置，Type为ES时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EsParam || null}
+         */
+        this.EsParam = null;
+
+        /**
+         * Tdw配置，Type为TDW时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TdwParam || null}
+         */
+        this.TdwParam = null;
+
+        /**
+         * Dts配置，Type为DTS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DtsParam || null}
+         */
+        this.DtsParam = null;
+
+        /**
+         * ClickHouse配置，Type为CLICKHOUSE时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClickHouseParam || null}
+         */
+        this.ClickHouseParam = null;
+
+        /**
+         * Cls配置，Type为CLS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClsParam || null}
+         */
+        this.ClsParam = null;
+
+        /**
+         * Cos配置，Type为COS时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CosParam || null}
+         */
+        this.CosParam = null;
+
+        /**
+         * MySQL配置，Type为MYSQL时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MySQLParam || null}
+         */
+        this.MySQLParam = null;
+
+        /**
+         * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PostgreSQLParam || null}
+         */
+        this.PostgreSQLParam = null;
+
+        /**
+         * Topic配置，Type为Topic时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TopicParam || null}
+         */
+        this.TopicParam = null;
+
+        /**
+         * MariaDB配置，Type为MARIADB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MariaDBParam || null}
+         */
+        this.MariaDBParam = null;
+
+        /**
+         * SQLServer配置，Type为SQLSERVER时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SQLServerParam || null}
+         */
+        this.SQLServerParam = null;
+
+        /**
+         * Ctsdb配置，Type为CTSDB时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CtsdbParam || null}
+         */
+        this.CtsdbParam = null;
+
+        /**
+         * Scf配置，Type为SCF时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ScfParam || null}
+         */
+        this.ScfParam = null;
 
     }
 
@@ -968,13 +2762,103 @@ class FetchMessageByOffsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.Result) {
-            let obj = new ConsumerRecord();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.KafkaParam) {
+            let obj = new KafkaParam();
+            obj.deserialize(params.KafkaParam)
+            this.KafkaParam = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.EventBusParam) {
+            let obj = new EventBusParam();
+            obj.deserialize(params.EventBusParam)
+            this.EventBusParam = obj;
+        }
+
+        if (params.MongoDBParam) {
+            let obj = new MongoDBParam();
+            obj.deserialize(params.MongoDBParam)
+            this.MongoDBParam = obj;
+        }
+
+        if (params.EsParam) {
+            let obj = new EsParam();
+            obj.deserialize(params.EsParam)
+            this.EsParam = obj;
+        }
+
+        if (params.TdwParam) {
+            let obj = new TdwParam();
+            obj.deserialize(params.TdwParam)
+            this.TdwParam = obj;
+        }
+
+        if (params.DtsParam) {
+            let obj = new DtsParam();
+            obj.deserialize(params.DtsParam)
+            this.DtsParam = obj;
+        }
+
+        if (params.ClickHouseParam) {
+            let obj = new ClickHouseParam();
+            obj.deserialize(params.ClickHouseParam)
+            this.ClickHouseParam = obj;
+        }
+
+        if (params.ClsParam) {
+            let obj = new ClsParam();
+            obj.deserialize(params.ClsParam)
+            this.ClsParam = obj;
+        }
+
+        if (params.CosParam) {
+            let obj = new CosParam();
+            obj.deserialize(params.CosParam)
+            this.CosParam = obj;
+        }
+
+        if (params.MySQLParam) {
+            let obj = new MySQLParam();
+            obj.deserialize(params.MySQLParam)
+            this.MySQLParam = obj;
+        }
+
+        if (params.PostgreSQLParam) {
+            let obj = new PostgreSQLParam();
+            obj.deserialize(params.PostgreSQLParam)
+            this.PostgreSQLParam = obj;
+        }
+
+        if (params.TopicParam) {
+            let obj = new TopicParam();
+            obj.deserialize(params.TopicParam)
+            this.TopicParam = obj;
+        }
+
+        if (params.MariaDBParam) {
+            let obj = new MariaDBParam();
+            obj.deserialize(params.MariaDBParam)
+            this.MariaDBParam = obj;
+        }
+
+        if (params.SQLServerParam) {
+            let obj = new SQLServerParam();
+            obj.deserialize(params.SQLServerParam)
+            this.SQLServerParam = obj;
+        }
+
+        if (params.CtsdbParam) {
+            let obj = new CtsdbParam();
+            obj.deserialize(params.CtsdbParam)
+            this.CtsdbParam = obj;
+        }
+
+        if (params.ScfParam) {
+            let obj = new ScfParam();
+            obj.deserialize(params.ScfParam)
+            this.ScfParam = obj;
+        }
 
     }
 }
@@ -1018,6 +2902,194 @@ class BatchModifyTopicAttributesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClickHouse类型入参
+ * @class
+ */
+class ClickHouseParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClickHouse的集群
+         * @type {string || null}
+         */
+        this.Cluster = null;
+
+        /**
+         * ClickHouse的数据库名
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * ClickHouse的数据表名
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * ClickHouse的schema
+         * @type {Array.<ClickHouseSchema> || null}
+         */
+        this.Schema = null;
+
+        /**
+         * 实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * ClickHouse的连接ip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * ClickHouse的连接port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * ClickHouse的用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * ClickHouse的密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 实例vip
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * 实例的vpcId
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否为自建集群
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * ClickHouse是否抛弃解析失败的消息，默认为true
+         * @type {boolean || null}
+         */
+        this.DropInvalidMessage = null;
+
+        /**
+         * ClickHouse 类型，emr-clickhouse : "emr";cdw-clickhouse : "cdwch";自建 : ""
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+         * @type {DropCls || null}
+         */
+        this.DropCls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+
+        if (params.Schema) {
+            this.Schema = new Array();
+            for (let z in params.Schema) {
+                let obj = new ClickHouseSchema();
+                obj.deserialize(params.Schema[z]);
+                this.Schema.push(obj);
+            }
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.DropInvalidMessage = 'DropInvalidMessage' in params ? params.DropInvalidMessage : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.DropCls) {
+            let obj = new DropCls();
+            obj.deserialize(params.DropCls)
+            this.DropCls = obj;
+        }
+
+    }
+}
+
+/**
+ * 过滤器参数
+ * @class
+ */
+class FilterMapParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key值
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 匹配模式，前缀匹配PREFIX，后缀匹配SUFFIX，包含匹配CONTAINS，EXCEPT除外匹配，数值匹配NUMBER，IP匹配IP
+         * @type {string || null}
+         */
+        this.MatchMode = null;
+
+        /**
+         * Value值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 固定REGULAR
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.MatchMode = 'MatchMode' in params ? params.MatchMode : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -1079,6 +3151,47 @@ class CreateInstancePreResp extends  AbstractModel {
 }
 
 /**
+ * ModifyDatahubTask返回参数结构体
+ * @class
+ */
+class ModifyDatahubTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubTaskIdRes || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DatahubTaskIdRes();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GroupInfo内部topic对象
  * @class
  */
@@ -1115,26 +3228,42 @@ class GroupInfoTopics extends  AbstractModel {
 }
 
 /**
- * 统一返回的TopicResponse
+ * FetchMessageListByOffset请求参数结构体
  * @class
  */
-class TopicResult extends  AbstractModel {
+class FetchMessageListByOffsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的主题信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Topic> || null}
+         * 实例Id
+         * @type {string || null}
          */
-        this.TopicList = null;
+        this.InstanceId = null;
 
         /**
-         * 符合条件的 topic 数量
-注意：此字段可能返回 null，表示取不到有效值。
+         * 主题名
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 分区id
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Partition = null;
+
+        /**
+         * 位点信息
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大查询条数，默认20，最大20
+         * @type {number || null}
+         */
+        this.SinglePartitionRecordNumber = null;
 
     }
 
@@ -1145,16 +3274,11 @@ class TopicResult extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
 
     }
 }
@@ -1327,6 +3451,265 @@ class CreateTokenResponse extends  AbstractModel {
 }
 
 /**
+ * 数据处理参数
+ * @class
+ */
+class TransformsParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原始数据
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 处理链
+         * @type {Array.<FieldParam> || null}
+         */
+        this.FieldChain = null;
+
+        /**
+         * 过滤器
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FilterMapParam> || null}
+         */
+        this.FilterParam = null;
+
+        /**
+         * 失败处理
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FailureParam || null}
+         */
+        this.FailureParam = null;
+
+        /**
+         * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 数据来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 输出格式，JSON，ROW，默认为JSON
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * 输出格式为ROW必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RowParam || null}
+         */
+        this.RowParam = null;
+
+        /**
+         * 是否保留数据源Topic元数据信息（源Topic、Partition、Offset），默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.KeepMetadata = null;
+
+        /**
+         * 数组解析
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BatchAnalyseParam || null}
+         */
+        this.BatchAnalyse = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+
+        if (params.FieldChain) {
+            this.FieldChain = new Array();
+            for (let z in params.FieldChain) {
+                let obj = new FieldParam();
+                obj.deserialize(params.FieldChain[z]);
+                this.FieldChain.push(obj);
+            }
+        }
+
+        if (params.FilterParam) {
+            this.FilterParam = new Array();
+            for (let z in params.FilterParam) {
+                let obj = new FilterMapParam();
+                obj.deserialize(params.FilterParam[z]);
+                this.FilterParam.push(obj);
+            }
+        }
+
+        if (params.FailureParam) {
+            let obj = new FailureParam();
+            obj.deserialize(params.FailureParam)
+            this.FailureParam = obj;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+
+        if (params.RowParam) {
+            let obj = new RowParam();
+            obj.deserialize(params.RowParam)
+            this.RowParam = obj;
+        }
+        this.KeepMetadata = 'KeepMetadata' in params ? params.KeepMetadata : null;
+
+        if (params.BatchAnalyse) {
+            let obj = new BatchAnalyseParam();
+            obj.deserialize(params.BatchAnalyse)
+            this.BatchAnalyse = obj;
+        }
+
+    }
+}
+
+/**
+ * ClickHouse修改连接源参数
+ * @class
+ */
+class ClickHouseModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClickHouse连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * ClickHouse的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * ClickHouse连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * ClickHouse连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * ClickHouse连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * ClickHouse连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * ClickHouse连接源是否为自建集群【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 是否更新到关联的Datahub任务，默认为true
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * 查询Datahub任务列表
+ * @class
+ */
+class DescribeDatahubTasksRes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Datahub任务信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DatahubTaskInfo> || null}
+         */
+        this.TaskList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TaskList) {
+            this.TaskList = new Array();
+            for (let z in params.TaskList) {
+                let obj = new DatahubTaskInfo();
+                obj.deserialize(params.TaskList[z]);
+                this.TaskList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeInstancesDetail返回参数结构体
  * @class
  */
@@ -1407,6 +3790,41 @@ class CreateInstancePreData extends  AbstractModel {
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeAppInfo请求参数结构体
+ * @class
+ */
+class DescribeAppInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 本次查询用户数目最大数量限制，最大值为50，默认50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1537,6 +3955,198 @@ class AclRule extends  AbstractModel {
 }
 
 /**
+ * 数据处理——数据处理参数
+ * @class
+ */
+class SMTParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据处理KEY
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 操作，DATE系统预设-时间戳，CUSTOMIZE自定义，MAPPING映射，JSONPATH
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+        /**
+         * 数据类型，ORIGINAL原始，STRING，INT64，FLOAT64，BOOLEAN，MAP，ARRAY
+         * @type {string || null}
+         */
+        this.SchemeType = null;
+
+        /**
+         * 数据处理VALUE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * VALUE处理
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ValueParam || null}
+         */
+        this.ValueOperate = null;
+
+        /**
+         * 原始VALUE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginalValue = null;
+
+        /**
+         * VALUE处理链
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ValueParam> || null}
+         */
+        this.ValueOperates = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
+        this.SchemeType = 'SchemeType' in params ? params.SchemeType : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.ValueOperate) {
+            let obj = new ValueParam();
+            obj.deserialize(params.ValueOperate)
+            this.ValueOperate = obj;
+        }
+        this.OriginalValue = 'OriginalValue' in params ? params.OriginalValue : null;
+
+        if (params.ValueOperates) {
+            this.ValueOperates = new Array();
+            for (let z in params.ValueOperates) {
+                let obj = new ValueParam();
+                obj.deserialize(params.ValueOperates[z]);
+                this.ValueOperates.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CheckCdcCluster返回参数结构体
+ * @class
+ */
+class CheckCdcClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果状态Success
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Ctsdb连接源参数(更新)
+ * @class
+ */
+class CtsdbModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ctsdb的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Ctsdb连接源的实例vip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Ctsdb连接源的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Ctsdb连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Ctsdb连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Ctsdb连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+    }
+}
+
+/**
  * DescribeACL返回参数结构体
  * @class
  */
@@ -1630,31 +4240,75 @@ class DynamicDiskConfig extends  AbstractModel {
 }
 
 /**
- * 操作型结果返回值
+ * Doris 连接源参数
  * @class
  */
-class JgwOperateResponse extends  AbstractModel {
+class DorisConnectParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的code，0为正常，非0为错误
-         * @type {string || null}
-         */
-        this.ReturnCode = null;
-
-        /**
-         * 成功消息
-         * @type {string || null}
-         */
-        this.ReturnMessage = null;
-
-        /**
-         * 操作型返回的Data数据,可能有flowId等
+         * Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OperateResponseData || null}
+         * @type {number || null}
          */
-        this.Data = null;
+        this.Port = null;
+
+        /**
+         * Doris 连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Doris 连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Doris 连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Doris 连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Doris 连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * Doris 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BePort = null;
 
     }
 
@@ -1665,14 +4319,15 @@ class JgwOperateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
-
-        if (params.Data) {
-            let obj = new OperateResponseData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.BePort = 'BePort' in params ? params.BePort : null;
 
     }
 }
@@ -1811,12 +4466,24 @@ class DescribeTopicSubscribeGroupResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCkafkaZone请求参数结构体
+ * DeleteAclRule请求参数结构体
  * @class
  */
-class DescribeCkafkaZoneRequest extends  AbstractModel {
+class DeleteAclRuleRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 实例id信息
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * acl规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
 
     }
 
@@ -1827,45 +4494,43 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }
 }
 
 /**
- * 标准版销售信息
+ * DescribeConnectResources请求参数结构体
  * @class
  */
-class SaleInfo extends  AbstractModel {
+class DescribeConnectResourcesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 手动设置的flag标志
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.Flag = null;
-
-        /**
-         * ckakfa版本号(1.1.1/2.4.2/0.10.2)
-注意：此字段可能返回 null，表示取不到有效值。
+         * 连接源类型
          * @type {string || null}
          */
-        this.Version = null;
+        this.Type = null;
 
         /**
-         * 专业版、标准版标志
-注意：此字段可能返回 null，表示取不到有效值。
+         * 连接源名称的关键字查询
          * @type {string || null}
          */
-        this.Platform = null;
+        this.SearchWord = null;
 
         /**
-         * 售罄标志：true售罄
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * 分页偏移量，默认为0
+         * @type {number || null}
          */
-        this.SoldOut = null;
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -1876,10 +4541,10 @@ class SaleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Flag = 'Flag' in params ? params.Flag : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.Platform = 'Platform' in params ? params.Platform : null;
-        this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1963,6 +4628,299 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * ModifyConnectResource请求参数结构体
+ * @class
+ */
+class ModifyConnectResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 连接源名称，为空时不修改
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 连接源描述，为空时不修改
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 连接源类型，修改数据源参数时，需要与原Type相同，否则编辑数据源无效
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Dts配置，Type为DTS时必填
+         * @type {DtsModifyConnectParam || null}
+         */
+        this.DtsConnectParam = null;
+
+        /**
+         * MongoDB配置，Type为MONGODB时必填
+         * @type {MongoDBModifyConnectParam || null}
+         */
+        this.MongoDBConnectParam = null;
+
+        /**
+         * Es配置，Type为ES时必填
+         * @type {EsModifyConnectParam || null}
+         */
+        this.EsConnectParam = null;
+
+        /**
+         * ClickHouse配置，Type为CLICKHOUSE时必填
+         * @type {ClickHouseModifyConnectParam || null}
+         */
+        this.ClickHouseConnectParam = null;
+
+        /**
+         * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填
+         * @type {MySQLModifyConnectParam || null}
+         */
+        this.MySQLConnectParam = null;
+
+        /**
+         * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+         * @type {PostgreSQLModifyConnectParam || null}
+         */
+        this.PostgreSQLConnectParam = null;
+
+        /**
+         * MariaDB配置，Type为MARIADB时必填
+         * @type {MariaDBModifyConnectParam || null}
+         */
+        this.MariaDBConnectParam = null;
+
+        /**
+         * SQLServer配置，Type为SQLSERVER时必填
+         * @type {SQLServerModifyConnectParam || null}
+         */
+        this.SQLServerConnectParam = null;
+
+        /**
+         * Ctsdb配置，Type为CTSDB
+         * @type {CtsdbModifyConnectParam || null}
+         */
+        this.CtsdbConnectParam = null;
+
+        /**
+         * Doris配置，Type为DORIS
+         * @type {DorisModifyConnectParam || null}
+         */
+        this.DorisConnectParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.DtsConnectParam) {
+            let obj = new DtsModifyConnectParam();
+            obj.deserialize(params.DtsConnectParam)
+            this.DtsConnectParam = obj;
+        }
+
+        if (params.MongoDBConnectParam) {
+            let obj = new MongoDBModifyConnectParam();
+            obj.deserialize(params.MongoDBConnectParam)
+            this.MongoDBConnectParam = obj;
+        }
+
+        if (params.EsConnectParam) {
+            let obj = new EsModifyConnectParam();
+            obj.deserialize(params.EsConnectParam)
+            this.EsConnectParam = obj;
+        }
+
+        if (params.ClickHouseConnectParam) {
+            let obj = new ClickHouseModifyConnectParam();
+            obj.deserialize(params.ClickHouseConnectParam)
+            this.ClickHouseConnectParam = obj;
+        }
+
+        if (params.MySQLConnectParam) {
+            let obj = new MySQLModifyConnectParam();
+            obj.deserialize(params.MySQLConnectParam)
+            this.MySQLConnectParam = obj;
+        }
+
+        if (params.PostgreSQLConnectParam) {
+            let obj = new PostgreSQLModifyConnectParam();
+            obj.deserialize(params.PostgreSQLConnectParam)
+            this.PostgreSQLConnectParam = obj;
+        }
+
+        if (params.MariaDBConnectParam) {
+            let obj = new MariaDBModifyConnectParam();
+            obj.deserialize(params.MariaDBConnectParam)
+            this.MariaDBConnectParam = obj;
+        }
+
+        if (params.SQLServerConnectParam) {
+            let obj = new SQLServerModifyConnectParam();
+            obj.deserialize(params.SQLServerConnectParam)
+            this.SQLServerConnectParam = obj;
+        }
+
+        if (params.CtsdbConnectParam) {
+            let obj = new CtsdbModifyConnectParam();
+            obj.deserialize(params.CtsdbConnectParam)
+            this.CtsdbConnectParam = obj;
+        }
+
+        if (params.DorisConnectParam) {
+            let obj = new DorisModifyConnectParam();
+            obj.deserialize(params.DorisConnectParam)
+            this.DorisConnectParam = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyInstanceAttributes返回参数结构体
+ * @class
+ */
+class ModifyInstanceAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * record 与数据库表的映射关系
+ * @class
+ */
+class RecordMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息的 key 名称
+         * @type {string || null}
+         */
+        this.JsonKey = null;
+
+        /**
+         * 消息类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 消息是否允许为空
+         * @type {boolean || null}
+         */
+        this.AllowNull = null;
+
+        /**
+         * 对应映射列名称
+         * @type {string || null}
+         */
+        this.ColumnName = null;
+
+        /**
+         * 数据库表额外字段
+         * @type {string || null}
+         */
+        this.ExtraInfo = null;
+
+        /**
+         * 当前列大小
+         * @type {string || null}
+         */
+        this.ColumnSize = null;
+
+        /**
+         * 当前列精度
+         * @type {string || null}
+         */
+        this.DecimalDigits = null;
+
+        /**
+         * 是否为自增列
+         * @type {boolean || null}
+         */
+        this.AutoIncrement = null;
+
+        /**
+         * 数据库表默认参数
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JsonKey = 'JsonKey' in params ? params.JsonKey : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AllowNull = 'AllowNull' in params ? params.AllowNull : null;
+        this.ColumnName = 'ColumnName' in params ? params.ColumnName : null;
+        this.ExtraInfo = 'ExtraInfo' in params ? params.ExtraInfo : null;
+        this.ColumnSize = 'ColumnSize' in params ? params.ColumnSize : null;
+        this.DecimalDigits = 'DecimalDigits' in params ? params.DecimalDigits : null;
+        this.AutoIncrement = 'AutoIncrement' in params ? params.AutoIncrement : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+
+    }
+}
+
+/**
  * BatchModifyGroupOffsets返回参数结构体
  * @class
  */
@@ -2024,6 +4982,13 @@ class GroupResponse extends  AbstractModel {
          */
         this.GroupList = null;
 
+        /**
+         * 消费分组配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupCountQuota = null;
+
     }
 
     /**
@@ -2041,6 +5006,94 @@ class GroupResponse extends  AbstractModel {
                 let obj = new DescribeGroup();
                 obj.deserialize(params.GroupList[z]);
                 this.GroupList.push(obj);
+            }
+        }
+        this.GroupCountQuota = 'GroupCountQuota' in params ? params.GroupCountQuota : null;
+
+    }
+}
+
+/**
+ * 实例详情返回结果
+ * @class
+ */
+class InstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的实例详情列表
+         * @type {Array.<InstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new InstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 消费组偏移量返回结果
+ * @class
+ */
+class GroupOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合调节的总结果数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 该主题分区数组，其中每个元素为一个 json object
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupOffsetTopic> || null}
+         */
+        this.TopicList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new GroupOffsetTopic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
             }
         }
 
@@ -2083,24 +5136,242 @@ class CreateTokenRequest extends  AbstractModel {
 }
 
 /**
- * DeleteAclRule请求参数结构体
+ * DescribeTopic返回参数结构体
  * @class
  */
-class DeleteAclRuleRequest extends  AbstractModel {
+class DescribeTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例id信息
+         * 返回的结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TopicResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TopicResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MongoDB修改连接源参数
+ * @class
+ */
+class MongoDBModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MongoDB连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MongoDB的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MongoDB连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MongoDB连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * MongoDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MongoDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * MongoDB连接源是否为自建集群【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * Tdw类型入参
+ * @class
+ */
+class TdwParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tdw的bid
+         * @type {string || null}
+         */
+        this.Bid = null;
+
+        /**
+         * Tdw的tid
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 默认true
+         * @type {boolean || null}
+         */
+        this.IsDomestic = null;
+
+        /**
+         * TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com
+         * @type {string || null}
+         */
+        this.TdwHost = null;
+
+        /**
+         * TDW端口，默认8099
+         * @type {number || null}
+         */
+        this.TdwPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bid = 'Bid' in params ? params.Bid : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.IsDomestic = 'IsDomestic' in params ? params.IsDomestic : null;
+        this.TdwHost = 'TdwHost' in params ? params.TdwHost : null;
+        this.TdwPort = 'TdwPort' in params ? params.TdwPort : null;
+
+    }
+}
+
+/**
+ * ModifyGroupOffsets请求参数结构体
+ * @class
+ */
+class ModifyGroupOffsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * kafka实例id
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * acl规则名称
+         * kafka 消费分组
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.Group = null;
+
+        /**
+         * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * 表示需要重置的topics， 不填表示全部
+         * @type {Array.<string> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
+         * @type {number || null}
+         */
+        this.Shift = null;
+
+        /**
+         * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
+         * @type {number || null}
+         */
+        this.ShiftTimestamp = null;
+
+        /**
+         * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
+         * @type {Array.<number> || null}
+         */
+        this.Partitions = null;
 
     }
 
@@ -2112,7 +5383,121 @@ class DeleteAclRuleRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.Topics = 'Topics' in params ? params.Topics : null;
+        this.Shift = 'Shift' in params ? params.Shift : null;
+        this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+
+    }
+}
+
+/**
+ * DescribeDatahubTopic返回参数结构体
+ * @class
+ */
+class DescribeDatahubTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的结果对象
+         * @type {DescribeDatahubTopicResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeDatahubTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCkafkaZone请求参数结构体
+ * @class
+ */
+class DescribeCkafkaZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cdc专业集群业务参数
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+
+    }
+}
+
+/**
+ * FetchDatahubMessageByOffset返回参数结构体
+ * @class
+ */
+class FetchDatahubMessageByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {ConsumerRecord || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConsumerRecord();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2158,19 +5543,24 @@ class CreateConsumerResponse extends  AbstractModel {
 }
 
 /**
- * 路由信息返回对象
+ * CreateCdcCluster返回参数结构体
  * @class
  */
-class RouteResponse extends  AbstractModel {
+class CreateCdcClusterResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Route> || null}
+         * 无
+         * @type {CdcClusterResponse || null}
          */
-        this.Routers = null;
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2182,14 +5572,12 @@ class RouteResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Routers) {
-            this.Routers = new Array();
-            for (let z in params.Routers) {
-                let obj = new Route();
-                obj.deserialize(params.Routers[z]);
-                this.Routers.push(obj);
-            }
+        if (params.Result) {
+            let obj = new CdcClusterResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2226,6 +5614,75 @@ class DescribeGroupResponse extends  AbstractModel {
 
         if (params.Result) {
             let obj = new GroupResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 创建CDC 标准版共享集群出参
+ * @class
+ */
+class CdcClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * ModifyPassword返回参数结构体
+ * @class
+ */
+class ModifyPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -2272,6 +5729,48 @@ class ModifyInstanceAttributesConfig extends  AbstractModel {
         this.AutoCreateTopicEnable = 'AutoCreateTopicEnable' in params ? params.AutoCreateTopicEnable : null;
         this.DefaultNumPartitions = 'DefaultNumPartitions' in params ? params.DefaultNumPartitions : null;
         this.DefaultReplicationFactor = 'DefaultReplicationFactor' in params ? params.DefaultReplicationFactor : null;
+
+    }
+}
+
+/**
+ * FetchDatahubMessageByOffset请求参数结构体
+ * @class
+ */
+class FetchDatahubMessageByOffsetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 分区id
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 位点信息，必填
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2348,6 +5847,69 @@ class OperateResponseData extends  AbstractModel {
 }
 
 /**
+ * DescribeACL请求参数结构体
+ * @class
+ */
+class DescribeACLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER)
+         * @type {number || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 偏移位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 个数限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 关键字匹配
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+    }
+}
+
+/**
  * CreateUser返回参数结构体
  * @class
  */
@@ -2388,24 +5950,113 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes返回参数结构体
+ * 查询Datahub任务信息
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class DescribeDatahubTaskRes extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 任务ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务类型，SOURCE数据接入，SINK数据流出
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 数据源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubResource || null}
+         */
+        this.SourceResource = null;
+
+        /**
+         * 数据目标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubResource || null}
+         */
+        this.TargetResource = null;
+
+        /**
+         * Connection列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Connection> || null}
+         */
+        this.Connections = null;
+
+        /**
+         * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 消息处理规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TransformParam || null}
+         */
+        this.TransformParam = null;
+
+        /**
+         * 数据接入ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatahubId = null;
+
+        /**
+         * 绑定的SchemaId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchemaId = null;
+
+        /**
+         * 绑定的Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * 数据处理规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TransformsParam || null}
+         */
+        this.TransformsParam = null;
+
+        /**
+         * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 任务标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -2416,13 +6067,57 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.SourceResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.SourceResource)
+            this.SourceResource = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.TargetResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.TargetResource)
+            this.TargetResource = obj;
+        }
+
+        if (params.Connections) {
+            this.Connections = new Array();
+            for (let z in params.Connections) {
+                let obj = new Connection();
+                obj.deserialize(params.Connections[z]);
+                this.Connections.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.TransformParam) {
+            let obj = new TransformParam();
+            obj.deserialize(params.TransformParam)
+            this.TransformParam = obj;
+        }
+        this.DatahubId = 'DatahubId' in params ? params.DatahubId : null;
+        this.SchemaId = 'SchemaId' in params ? params.SchemaId : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+
+        if (params.TransformsParam) {
+            let obj = new TransformsParam();
+            obj.deserialize(params.TransformsParam)
+            this.TransformsParam = obj;
+        }
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2463,6 +6158,329 @@ class CreatePartitionResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MongoDB连接源参数
+ * @class
+ */
+class MongoDBConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MongoDB的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MongoDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MongoDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * MongoDB连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MongoDB连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * MongoDB连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MongoDB连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * MySQL类型入参
+ * @class
+ */
+class MySQLParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MySQL的数据库名称，"*"为全数据库
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名"
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * 该MySQL在连接管理内的Id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+         * @type {string || null}
+         */
+        this.SnapshotMode = null;
+
+        /**
+         * 存放MySQL的Ddl信息的Topic，为空则默认不存放
+         * @type {string || null}
+         */
+        this.DdlTopic = null;
+
+        /**
+         * "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query
+         * @type {string || null}
+         */
+        this.DataSourceMonitorMode = null;
+
+        /**
+         * 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句
+         * @type {string || null}
+         */
+        this.DataSourceMonitorResource = null;
+
+        /**
+         * "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型
+         * @type {string || null}
+         */
+        this.DataSourceIncrementMode = null;
+
+        /**
+         * 传入需要监听的列名称
+         * @type {string || null}
+         */
+        this.DataSourceIncrementColumn = null;
+
+        /**
+         * "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据
+         * @type {string || null}
+         */
+        this.DataSourceStartFrom = null;
+
+        /**
+         * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+         * @type {string || null}
+         */
+        this.DataTargetInsertMode = null;
+
+        /**
+         * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+         * @type {string || null}
+         */
+        this.DataTargetPrimaryKeyField = null;
+
+        /**
+         * 表与消息间的映射关系
+         * @type {Array.<RecordMapping> || null}
+         */
+        this.DataTargetRecordMapping = null;
+
+        /**
+         * 事件路由到特定主题的正则表达式，默认为(.*)
+         * @type {string || null}
+         */
+        this.TopicRegex = null;
+
+        /**
+         * TopicRegex的引用组，指定$1、$2等
+         * @type {string || null}
+         */
+        this.TopicReplacement = null;
+
+        /**
+         * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+         * @type {string || null}
+         */
+        this.KeyColumns = null;
+
+        /**
+         * Mysql 是否抛弃解析失败的消息，默认为true
+         * @type {boolean || null}
+         */
+        this.DropInvalidMessage = null;
+
+        /**
+         * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+         * @type {DropCls || null}
+         */
+        this.DropCls = null;
+
+        /**
+         * 输出格式，DEFAULT、CANAL_1、CANAL_2
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * 当Table输入的是前缀时，该项值为true，否则为false
+         * @type {boolean || null}
+         */
+        this.IsTablePrefix = null;
+
+        /**
+         * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+         * @type {string || null}
+         */
+        this.IncludeContentChanges = null;
+
+        /**
+         * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+         * @type {boolean || null}
+         */
+        this.IncludeQuery = null;
+
+        /**
+         * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+         * @type {boolean || null}
+         */
+        this.RecordWithSchema = null;
+
+        /**
+         * 存放信令表的数据库名称
+         * @type {string || null}
+         */
+        this.SignalDatabase = null;
+
+        /**
+         * 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix
+         * @type {boolean || null}
+         */
+        this.IsTableRegular = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SnapshotMode = 'SnapshotMode' in params ? params.SnapshotMode : null;
+        this.DdlTopic = 'DdlTopic' in params ? params.DdlTopic : null;
+        this.DataSourceMonitorMode = 'DataSourceMonitorMode' in params ? params.DataSourceMonitorMode : null;
+        this.DataSourceMonitorResource = 'DataSourceMonitorResource' in params ? params.DataSourceMonitorResource : null;
+        this.DataSourceIncrementMode = 'DataSourceIncrementMode' in params ? params.DataSourceIncrementMode : null;
+        this.DataSourceIncrementColumn = 'DataSourceIncrementColumn' in params ? params.DataSourceIncrementColumn : null;
+        this.DataSourceStartFrom = 'DataSourceStartFrom' in params ? params.DataSourceStartFrom : null;
+        this.DataTargetInsertMode = 'DataTargetInsertMode' in params ? params.DataTargetInsertMode : null;
+        this.DataTargetPrimaryKeyField = 'DataTargetPrimaryKeyField' in params ? params.DataTargetPrimaryKeyField : null;
+
+        if (params.DataTargetRecordMapping) {
+            this.DataTargetRecordMapping = new Array();
+            for (let z in params.DataTargetRecordMapping) {
+                let obj = new RecordMapping();
+                obj.deserialize(params.DataTargetRecordMapping[z]);
+                this.DataTargetRecordMapping.push(obj);
+            }
+        }
+        this.TopicRegex = 'TopicRegex' in params ? params.TopicRegex : null;
+        this.TopicReplacement = 'TopicReplacement' in params ? params.TopicReplacement : null;
+        this.KeyColumns = 'KeyColumns' in params ? params.KeyColumns : null;
+        this.DropInvalidMessage = 'DropInvalidMessage' in params ? params.DropInvalidMessage : null;
+
+        if (params.DropCls) {
+            let obj = new DropCls();
+            obj.deserialize(params.DropCls)
+            this.DropCls = obj;
+        }
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.IsTablePrefix = 'IsTablePrefix' in params ? params.IsTablePrefix : null;
+        this.IncludeContentChanges = 'IncludeContentChanges' in params ? params.IncludeContentChanges : null;
+        this.IncludeQuery = 'IncludeQuery' in params ? params.IncludeQuery : null;
+        this.RecordWithSchema = 'RecordWithSchema' in params ? params.RecordWithSchema : null;
+        this.SignalDatabase = 'SignalDatabase' in params ? params.SignalDatabase : null;
+        this.IsTableRegular = 'IsTableRegular' in params ? params.IsTableRegular : null;
+
+    }
+}
+
+/**
+ * 批量解析
+ * @class
+ */
+class BatchAnalyseParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ONE_BY_ONE单条输出，MERGE合并输出
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -2586,6 +6604,62 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeConsumerGroup请求参数结构体
+ * @class
+ */
+class DescribeConsumerGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ckafka实例id。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 可选，用户需要查询的group名称。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 本次返回个数限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DeleteUser返回参数结构体
  * @class
  */
@@ -2621,6 +6695,69 @@ class DeleteUserResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConnectResource请求参数结构体
+ * @class
+ */
+class DescribeConnectResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
+ * DescribeTopicProduceConnection请求参数结构体
+ * @class
+ */
+class DescribeTopicProduceConnectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * topic名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -2743,24 +6880,84 @@ class DescribeTopicSyncReplicaResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAppInfo请求参数结构体
+ * CreateConnectResource请求参数结构体
  * @class
  */
-class DescribeAppInfoRequest extends  AbstractModel {
+class CreateConnectResourceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移位置
-         * @type {number || null}
+         * 连接源名称
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.ResourceName = null;
 
         /**
-         * 本次查询用户数目最大数量限制，最大值为50，默认50
-         * @type {number || null}
+         * 连接源类型
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Type = null;
+
+        /**
+         * 连接源描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Dts配置，Type为DTS时必填
+         * @type {DtsConnectParam || null}
+         */
+        this.DtsConnectParam = null;
+
+        /**
+         * MongoDB配置，Type为MONGODB时必填
+         * @type {MongoDBConnectParam || null}
+         */
+        this.MongoDBConnectParam = null;
+
+        /**
+         * Es配置，Type为ES时必填
+         * @type {EsConnectParam || null}
+         */
+        this.EsConnectParam = null;
+
+        /**
+         * ClickHouse配置，Type为CLICKHOUSE时必填
+         * @type {ClickHouseConnectParam || null}
+         */
+        this.ClickHouseConnectParam = null;
+
+        /**
+         * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填
+         * @type {MySQLConnectParam || null}
+         */
+        this.MySQLConnectParam = null;
+
+        /**
+         * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+         * @type {PostgreSQLConnectParam || null}
+         */
+        this.PostgreSQLConnectParam = null;
+
+        /**
+         * MariaDB配置，Type为MARIADB时必填
+         * @type {MariaDBConnectParam || null}
+         */
+        this.MariaDBConnectParam = null;
+
+        /**
+         * SQLServer配置，Type为SQLSERVER时必填
+         * @type {SQLServerConnectParam || null}
+         */
+        this.SQLServerConnectParam = null;
+
+        /**
+         * Doris 配置，Type为 DORIS 时必填
+         * @type {DorisConnectParam || null}
+         */
+        this.DorisConnectParam = null;
 
     }
 
@@ -2771,8 +6968,239 @@ class DescribeAppInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.DtsConnectParam) {
+            let obj = new DtsConnectParam();
+            obj.deserialize(params.DtsConnectParam)
+            this.DtsConnectParam = obj;
+        }
+
+        if (params.MongoDBConnectParam) {
+            let obj = new MongoDBConnectParam();
+            obj.deserialize(params.MongoDBConnectParam)
+            this.MongoDBConnectParam = obj;
+        }
+
+        if (params.EsConnectParam) {
+            let obj = new EsConnectParam();
+            obj.deserialize(params.EsConnectParam)
+            this.EsConnectParam = obj;
+        }
+
+        if (params.ClickHouseConnectParam) {
+            let obj = new ClickHouseConnectParam();
+            obj.deserialize(params.ClickHouseConnectParam)
+            this.ClickHouseConnectParam = obj;
+        }
+
+        if (params.MySQLConnectParam) {
+            let obj = new MySQLConnectParam();
+            obj.deserialize(params.MySQLConnectParam)
+            this.MySQLConnectParam = obj;
+        }
+
+        if (params.PostgreSQLConnectParam) {
+            let obj = new PostgreSQLConnectParam();
+            obj.deserialize(params.PostgreSQLConnectParam)
+            this.PostgreSQLConnectParam = obj;
+        }
+
+        if (params.MariaDBConnectParam) {
+            let obj = new MariaDBConnectParam();
+            obj.deserialize(params.MariaDBConnectParam)
+            this.MariaDBConnectParam = obj;
+        }
+
+        if (params.SQLServerConnectParam) {
+            let obj = new SQLServerConnectParam();
+            obj.deserialize(params.SQLServerConnectParam)
+            this.SQLServerConnectParam = obj;
+        }
+
+        if (params.DorisConnectParam) {
+            let obj = new DorisConnectParam();
+            obj.deserialize(params.DorisConnectParam)
+            this.DorisConnectParam = obj;
+        }
+
+    }
+}
+
+/**
+ * MariaDB类型入参
+ * @class
+ */
+class MariaDBParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MariaDB的数据库名称，"*"为全数据库
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * MariaDB的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * 该MariaDB在连接管理内的Id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+         * @type {string || null}
+         */
+        this.SnapshotMode = null;
+
+        /**
+         * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+         * @type {string || null}
+         */
+        this.KeyColumns = null;
+
+        /**
+         * 当Table输入的是前缀时，该项值为true，否则为false
+         * @type {boolean || null}
+         */
+        this.IsTablePrefix = null;
+
+        /**
+         * 输出格式，DEFAULT、CANAL_1、CANAL_2
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+         * @type {string || null}
+         */
+        this.IncludeContentChanges = null;
+
+        /**
+         * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+         * @type {boolean || null}
+         */
+        this.IncludeQuery = null;
+
+        /**
+         * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+         * @type {boolean || null}
+         */
+        this.RecordWithSchema = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SnapshotMode = 'SnapshotMode' in params ? params.SnapshotMode : null;
+        this.KeyColumns = 'KeyColumns' in params ? params.KeyColumns : null;
+        this.IsTablePrefix = 'IsTablePrefix' in params ? params.IsTablePrefix : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.IncludeContentChanges = 'IncludeContentChanges' in params ? params.IncludeContentChanges : null;
+        this.IncludeQuery = 'IncludeQuery' in params ? params.IncludeQuery : null;
+        this.RecordWithSchema = 'RecordWithSchema' in params ? params.RecordWithSchema : null;
+
+    }
+}
+
+/**
+ * 路由实体对象
+ * @class
+ */
+class Route extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例接入方式
+0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
+1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
+3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * 路由ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * vip网络类型（1:外网TGW  2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境）
+         * @type {number || null}
+         */
+        this.VipType = null;
+
+        /**
+         * 虚拟IP列表
+         * @type {Array.<VipEntity> || null}
+         */
+        this.VipList = null;
+
+        /**
+         * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DomainPort = null;
+
+        /**
+         * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeleteTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.VipType = 'VipType' in params ? params.VipType : null;
+
+        if (params.VipList) {
+            this.VipList = new Array();
+            for (let z in params.VipList) {
+                let obj = new VipEntity();
+                obj.deserialize(params.VipList[z]);
+                this.VipList.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
+        this.DeleteTimestamp = 'DeleteTimestamp' in params ? params.DeleteTimestamp : null;
 
     }
 }
@@ -2853,25 +7281,25 @@ class Partitions extends  AbstractModel {
 }
 
 /**
- * DescribeTopic返回参数结构体
+ * 创建数据转储返回值
  * @class
  */
-class DescribeTopicResponse extends  AbstractModel {
+class CreateDatahubTaskRes extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TopicResult || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 转储任务id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskId = null;
+
+        /**
+         * 数据转储Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatahubId = null;
 
     }
 
@@ -2882,13 +7310,8 @@ class DescribeTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new TopicResult();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DatahubId = 'DatahubId' in params ? params.DatahubId : null;
 
     }
 }
@@ -3142,6 +7565,51 @@ class ModifyGroupOffsetsResponse extends  AbstractModel {
 }
 
 /**
+ * topic链接信息
+ * @class
+ */
+class DescribeConnectInfoResultDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpAddr = null;
+
+        /**
+         * 连结时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 是否支持的版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUnSupportVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IpAddr = 'IpAddr' in params ? params.IpAddr : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.IsUnSupportVersion = 'IsUnSupportVersion' in params ? params.IsUnSupportVersion : null;
+
+    }
+}
+
+/**
  * 分区实体
  * @class
  */
@@ -3205,6 +7673,81 @@ class CreateAclResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 数据处理规则失败处理
+ * @class
+ */
+class FailureParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 类型，DLQ死信队列，IGNORE_ERROR保留，DROP废弃
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Ckafka类型死信队列
+         * @type {KafkaParam || null}
+         */
+        this.KafkaParam = null;
+
+        /**
+         * 重试间隔
+         * @type {number || null}
+         */
+        this.RetryInterval = null;
+
+        /**
+         * 重试次数
+         * @type {number || null}
+         */
+        this.MaxRetryAttempts = null;
+
+        /**
+         * DIP Topic类型死信队列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TopicParam || null}
+         */
+        this.TopicParam = null;
+
+        /**
+         * 死信队列类型，CKAFKA，TOPIC
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DlqType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.KafkaParam) {
+            let obj = new KafkaParam();
+            obj.deserialize(params.KafkaParam)
+            this.KafkaParam = obj;
+        }
+        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
+        this.MaxRetryAttempts = 'MaxRetryAttempts' in params ? params.MaxRetryAttempts : null;
+
+        if (params.TopicParam) {
+            let obj = new TopicParam();
+            obj.deserialize(params.TopicParam)
+            this.TopicParam = obj;
+        }
+        this.DlqType = 'DlqType' in params ? params.DlqType : null;
 
     }
 }
@@ -3451,6 +7994,136 @@ class DynamicRetentionTime extends  AbstractModel {
 }
 
 /**
+ * 数据处理参数
+ * @class
+ */
+class TransformParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取
+         * @type {string || null}
+         */
+        this.AnalysisFormat = null;
+
+        /**
+         * 输出格式
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * 是否保留解析失败数据
+         * @type {FailureParam || null}
+         */
+        this.FailureParam = null;
+
+        /**
+         * 原始数据
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 数据来源，TOPIC从源topic拉取，CUSTOMIZE自定义
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 分隔符、正则表达式
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+        /**
+         * Map
+         * @type {Array.<MapParam> || null}
+         */
+        this.MapParam = null;
+
+        /**
+         * 过滤器
+         * @type {Array.<FilterMapParam> || null}
+         */
+        this.FilterParam = null;
+
+        /**
+         * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MapParam> || null}
+         */
+        this.AnalyseResult = null;
+
+        /**
+         * 底层引擎是否使用eb
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.UseEventBus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AnalysisFormat = 'AnalysisFormat' in params ? params.AnalysisFormat : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+
+        if (params.FailureParam) {
+            let obj = new FailureParam();
+            obj.deserialize(params.FailureParam)
+            this.FailureParam = obj;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+
+        if (params.MapParam) {
+            this.MapParam = new Array();
+            for (let z in params.MapParam) {
+                let obj = new MapParam();
+                obj.deserialize(params.MapParam[z]);
+                this.MapParam.push(obj);
+            }
+        }
+
+        if (params.FilterParam) {
+            this.FilterParam = new Array();
+            for (let z in params.FilterParam) {
+                let obj = new FilterMapParam();
+                obj.deserialize(params.FilterParam[z]);
+                this.FilterParam.push(obj);
+            }
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.AnalyseResult) {
+            this.AnalyseResult = new Array();
+            for (let z in params.AnalyseResult) {
+                let obj = new MapParam();
+                obj.deserialize(params.AnalyseResult[z]);
+                this.AnalyseResult.push(obj);
+            }
+        }
+        this.UseEventBus = 'UseEventBus' in params ? params.UseEventBus : null;
+
+    }
+}
+
+/**
  * DescribeTopicSubscribeGroup请求参数结构体
  * @class
  */
@@ -3540,36 +8213,67 @@ class DeleteInstancePreResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset请求参数结构体
+ * Table、Topic路由
  * @class
  */
-class FetchMessageByOffsetRequest extends  AbstractModel {
+class TableMapping extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例Id
+         * 库名
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Database = null;
 
         /**
-         * 主题名
+         * 表名，多个表,（逗号）隔开
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Topic名称
          * @type {string || null}
          */
         this.Topic = null;
 
         /**
-         * 分区id
-         * @type {number || null}
+         * Topic ID
+         * @type {string || null}
          */
-        this.Partition = null;
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceAttributes请求参数结构体
+ * @class
+ */
+class DescribeInstanceAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 位点信息，必填
-         * @type {number || null}
+         * 实例id
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.InstanceId = null;
 
     }
 
@@ -3581,9 +8285,41 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * 公网带宽参数
+ * @class
+ */
+class InquiryPublicNetworkParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公网计费模式: BANDWIDTH_PREPAID(包年包月), BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时计费)
+         * @type {string || null}
+         */
+        this.PublicNetworkChargeType = null;
+
+        /**
+         * 公网带宽, 单位MB
+         * @type {number || null}
+         */
+        this.PublicNetworkMonthly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicNetworkChargeType = 'PublicNetworkChargeType' in params ? params.PublicNetworkChargeType : null;
+        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
 
     }
 }
@@ -3670,6 +8406,46 @@ class TopicInSyncReplicaInfo extends  AbstractModel {
 }
 
 /**
+ * DeleteConnectResource返回参数结构体
+ * @class
+ */
+class DeleteConnectResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {ConnectResourceResourceIdResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConnectResourceResourceIdResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRegion请求参数结构体
  * @class
  */
@@ -3695,6 +8471,12 @@ class DescribeRegionRequest extends  AbstractModel {
          */
         this.Business = null;
 
+        /**
+         * cdc专有集群业务字段，可忽略
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3707,6 +8489,7 @@ class DescribeRegionRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Business = 'Business' in params ? params.Business : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -3868,25 +8651,25 @@ class DescribeGroupInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGroupInfo返回参数结构体
+ * 查询连接源列表的返参
  * @class
  */
-class DescribeGroupInfoResponse extends  AbstractModel {
+class DescribeConnectResourcesResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupInfoResponse> || null}
+         * 连接源个数
+         * @type {number || null}
          */
-        this.Result = null;
+        this.TotalCount = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 连接源数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeConnectResource> || null}
          */
-        this.RequestId = null;
+        this.ConnectResourceList = null;
 
     }
 
@@ -3897,16 +8680,16 @@ class DescribeGroupInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new GroupInfoResponse();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
+        if (params.ConnectResourceList) {
+            this.ConnectResourceList = new Array();
+            for (let z in params.ConnectResourceList) {
+                let obj = new DescribeConnectResource();
+                obj.deserialize(params.ConnectResourceList[z]);
+                this.ConnectResourceList.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4015,6 +8798,114 @@ class DeleteRouteTriggerTimeResponse extends  AbstractModel {
 }
 
 /**
+ * 用户实体
+ * @class
+ */
+class User extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户id
+         * @type {number || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 用户名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最后更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribeTopicSubscribeGroup接口出参
+ * @class
+ */
+class TopicSubscribeGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 消费分组状态数量信息
+         * @type {string || null}
+         */
+        this.StatusCountInfo = null;
+
+        /**
+         * 消费分组信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupInfoResponse> || null}
+         */
+        this.GroupsInfo = null;
+
+        /**
+         * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.StatusCountInfo = 'StatusCountInfo' in params ? params.StatusCountInfo : null;
+
+        if (params.GroupsInfo) {
+            this.GroupsInfo = new Array();
+            for (let z in params.GroupsInfo) {
+                let obj = new GroupInfoResponse();
+                obj.deserialize(params.GroupsInfo[z]);
+                this.GroupsInfo.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeUser返回参数结构体
  * @class
  */
@@ -4048,6 +8939,220 @@ class DescribeUserResponse extends  AbstractModel {
             let obj = new UserResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Dts连接源参数
+ * @class
+ */
+class DtsConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dts的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Dts消费分组的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Dts消费分组的账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Dts消费分组的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Dts实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Dts订阅的topic
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * Doris 连接源修改参数
+ * @class
+ */
+class DorisModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Doris 连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Doris 连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Doris 连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Doris 连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Doris 连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * Doris 连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BePort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.BePort = 'BePort' in params ? params.BePort : null;
+
+    }
+}
+
+/**
+ * DescribeGroupInfo返回参数结构体
+ * @class
+ */
+class DescribeGroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupInfoResponse> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new GroupInfoResponse();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4117,7 +9222,7 @@ class DescribeTopicRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回数量，不填则默认为10，最大值为50
+         * 返回数量，不填则默认为20，最大值为50
          * @type {number || null}
          */
         this.Limit = null;
@@ -4142,6 +9247,34 @@ class DescribeTopicRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
+
+    }
+}
+
+/**
+ * DeleteConnectResource请求参数结构体
+ * @class
+ */
+class DeleteConnectResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -4328,6 +9461,83 @@ class DescribeAppInfoResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cos Datahub 任务接入参数
+ * @class
+ */
+class CosParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cos 存储桶名称
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * 地域代码
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 对象名称
+         * @type {string || null}
+         */
+        this.ObjectKey = null;
+
+        /**
+         * 汇聚消息量的大小（单位：MB)
+         * @type {number || null}
+         */
+        this.AggregateBatchSize = null;
+
+        /**
+         * 汇聚的时间间隔（单位：小时）
+         * @type {number || null}
+         */
+        this.AggregateInterval = null;
+
+        /**
+         * 消息汇聚后的文件格式（支持csv, json）
+         * @type {string || null}
+         */
+        this.FormatOutputType = null;
+
+        /**
+         * 转储的对象目录前缀
+         * @type {string || null}
+         */
+        this.ObjectKeyPrefix = null;
+
+        /**
+         * 根据strptime 时间格式化的分区格式
+         * @type {string || null}
+         */
+        this.DirectoryTimeFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ObjectKey = 'ObjectKey' in params ? params.ObjectKey : null;
+        this.AggregateBatchSize = 'AggregateBatchSize' in params ? params.AggregateBatchSize : null;
+        this.AggregateInterval = 'AggregateInterval' in params ? params.AggregateInterval : null;
+        this.FormatOutputType = 'FormatOutputType' in params ? params.FormatOutputType : null;
+        this.ObjectKeyPrefix = 'ObjectKeyPrefix' in params ? params.ObjectKeyPrefix : null;
+        this.DirectoryTimeFormat = 'DirectoryTimeFormat' in params ? params.DirectoryTimeFormat : null;
 
     }
 }
@@ -4605,24 +9815,30 @@ class DescribeInstanceAttributesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyPassword返回参数结构体
+ * Map参数
  * @class
  */
-class ModifyPasswordResponse extends  AbstractModel {
+class MapParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * key值
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Key = null;
+
+        /**
+         * 类型，DEFAULT默认，DATE系统预设-时间戳，CUSTOMIZE自定义，MAPPING映射
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 值
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -4633,13 +9849,9 @@ class ModifyPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -4689,6 +9901,49 @@ class TopicDetailResponse extends  AbstractModel {
 }
 
 /**
+ * Topic 副本及详情数据集合
+ * @class
+ */
+class TopicInSyncReplicaResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic详情及副本合集
+         * @type {Array.<TopicInSyncReplicaInfo> || null}
+         */
+        this.TopicInSyncReplicaList = null;
+
+        /**
+         * 总计个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicInSyncReplicaList) {
+            this.TopicInSyncReplicaList = new Array();
+            for (let z in params.TopicInSyncReplicaList) {
+                let obj = new TopicInSyncReplicaInfo();
+                obj.deserialize(params.TopicInSyncReplicaList[z]);
+                this.TopicInSyncReplicaList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * DeleteInstancePre请求参数结构体
  * @class
  */
@@ -4717,38 +9972,18 @@ class DeleteInstancePreRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTopicSubscribeGroup接口出参
+ * DescribeDatahubTopic请求参数结构体
  * @class
  */
-class TopicSubscribeGroup extends  AbstractModel {
+class DescribeDatahubTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 消费分组状态数量信息
+         * 名称
          * @type {string || null}
          */
-        this.StatusCountInfo = null;
-
-        /**
-         * 消费分组信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupInfoResponse> || null}
-         */
-        this.GroupsInfo = null;
-
-        /**
-         * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.Name = null;
 
     }
 
@@ -4759,18 +9994,7 @@ class TopicSubscribeGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.StatusCountInfo = 'StatusCountInfo' in params ? params.StatusCountInfo : null;
-
-        if (params.GroupsInfo) {
-            this.GroupsInfo = new Array();
-            for (let z in params.GroupsInfo) {
-                let obj = new GroupInfoResponse();
-                obj.deserialize(params.GroupsInfo[z]);
-                this.GroupsInfo.push(obj);
-            }
-        }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -4862,6 +10086,124 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
 }
 
 /**
+ * ClickHouse的Schema
+ * @class
+ */
+class ClickHouseSchema extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表的列名
+         * @type {string || null}
+         */
+        this.ColumnName = null;
+
+        /**
+         * 该列对应的jsonKey名
+         * @type {string || null}
+         */
+        this.JsonKey = null;
+
+        /**
+         * 表列项的类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 列项是否允许为空
+         * @type {boolean || null}
+         */
+        this.AllowNull = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ColumnName = 'ColumnName' in params ? params.ColumnName : null;
+        this.JsonKey = 'JsonKey' in params ? params.JsonKey : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AllowNull = 'AllowNull' in params ? params.AllowNull : null;
+
+    }
+}
+
+/**
+ * Ctsdb连接源参数
+ * @class
+ */
+class CtsdbConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ctsdb的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Ctsdb连接源的实例vip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Ctsdb连接源的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Ctsdb连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Ctsdb连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Ctsdb连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+    }
+}
+
+/**
  * ModifyPassword请求参数结构体
  * @class
  */
@@ -4911,6 +10253,83 @@ class ModifyPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * MariaDB连接源参数
+ * @class
+ */
+class MariaDBModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MariaDB连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MariaDB的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MariaDB连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MariaDB连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * MariaDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MariaDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
  * ModifyInstanceAttributes请求参数结构体
  * @class
  */
@@ -4955,7 +10374,7 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         this.RebalanceTime = null;
 
         /**
-         * 时间戳
+         * 公网带宽
          * @type {number || null}
          */
         this.PublicNetwork = null;
@@ -4965,6 +10384,12 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          * @type {DynamicDiskConfig || null}
          */
         this.DynamicDiskConfig = null;
+
+        /**
+         * 实例级别单条消息大小（单位byte)
+         * @type {number || null}
+         */
+        this.MaxMessageByte = null;
 
     }
 
@@ -4998,6 +10423,35 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             obj.deserialize(params.DynamicDiskConfig)
             this.DynamicDiskConfig = obj;
         }
+        this.MaxMessageByte = 'MaxMessageByte' in params ? params.MaxMessageByte : null;
+
+    }
+}
+
+/**
+ * DeleteDatahubTopic请求参数结构体
+ * @class
+ */
+class DeleteDatahubTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -5047,42 +10501,24 @@ class DescribeRegionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeConsumerGroup请求参数结构体
+ * CreateTopic返回参数结构体
  * @class
  */
-class DescribeConsumerGroupRequest extends  AbstractModel {
+class CreateTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ckafka实例id。
+         * 返回创建结果
+         * @type {CreateTopicResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 可选，用户需要查询的group名称。
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 本次返回个数限制
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移位置
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -5093,11 +10529,13 @@ class DescribeConsumerGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Result) {
+            let obj = new CreateTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5138,6 +10576,98 @@ class VipEntity extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicProduceConnection返回参数结构体
+ * @class
+ */
+class DescribeTopicProduceConnectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 链接信息返回结果集
+         * @type {Array.<DescribeConnectInfoResultDTO> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new DescribeConnectInfoResultDTO();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * FetchLatestDatahubMessageList请求参数结构体
+ * @class
+ */
+class FetchLatestDatahubMessageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 分区id
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 位点信息
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大查询条数，最小1，最大100
+         * @type {number || null}
+         */
+        this.MessageCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.MessageCount = 'MessageCount' in params ? params.MessageCount : null;
+
+    }
+}
+
+/**
  * 消费组主题对象
  * @class
  */
@@ -5173,36 +10703,92 @@ class ConsumerGroupTopic extends  AbstractModel {
 }
 
 /**
- * 用户实体
+ * Datahub任务信息
  * @class
  */
-class User extends  AbstractModel {
+class DatahubTaskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户id
-         * @type {number || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 用户名称
+         * 任务ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.TaskId = null;
 
         /**
-         * 创建时间
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务类型，SOURCE数据接入，SINK数据流出
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 数据源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubResource || null}
+         */
+        this.SourceResource = null;
+
+        /**
+         * 数据目标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubResource || null}
+         */
+        this.TargetResource = null;
+
+        /**
+         * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 最后更新时间
+         * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.UpdateTime = null;
+        this.ErrorMessage = null;
+
+        /**
+         * 创建进度百分比
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskProgress = null;
+
+        /**
+         * 任务当前处于的步骤
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskCurrentStep = null;
+
+        /**
+         * Datahub转储Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatahubId = null;
+
+        /**
+         * 步骤列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.StepList = null;
 
     }
 
@@ -5213,58 +10799,94 @@ class User extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.SourceResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.SourceResource)
+            this.SourceResource = obj;
+        }
+
+        if (params.TargetResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.TargetResource)
+            this.TargetResource = obj;
+        }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.TaskProgress = 'TaskProgress' in params ? params.TaskProgress : null;
+        this.TaskCurrentStep = 'TaskCurrentStep' in params ? params.TaskCurrentStep : null;
+        this.DatahubId = 'DatahubId' in params ? params.DatahubId : null;
+        this.StepList = 'StepList' in params ? params.StepList : null;
 
     }
 }
 
 /**
- * 组偏移量分区对象
+ * 数据处理——处理链
  * @class
  */
-class GroupOffsetPartition extends  AbstractModel {
+class FieldParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * topic 的 partitionId
-         * @type {number || null}
+         * 解析
+         * @type {AnalyseParam || null}
          */
-        this.Partition = null;
+        this.Analyse = null;
 
         /**
-         * consumer 提交的 offset 位置
-         * @type {number || null}
+         * 二次解析
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SecondaryAnalyseParam || null}
          */
-        this.Offset = null;
+        this.SecondaryAnalyse = null;
 
         /**
-         * 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串
+         * 数据处理
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SMTParam> || null}
+         */
+        this.SMT = null;
+
+        /**
+         * 测试结果
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Metadata = null;
+        this.Result = null;
 
         /**
-         * 错误码
-         * @type {number || null}
+         * 解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SMTParam> || null}
          */
-        this.ErrorCode = null;
+        this.AnalyseResult = null;
 
         /**
-         * 当前 partition 最新的 offset
-         * @type {number || null}
+         * 二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SMTParam> || null}
          */
-        this.LogEndOffset = null;
+        this.SecondaryAnalyseResult = null;
 
         /**
-         * 未消费的消息个数
-         * @type {number || null}
+         * JSON格式解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Lag = null;
+        this.AnalyseJsonResult = null;
+
+        /**
+         * JSON格式二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecondaryAnalyseJsonResult = null;
 
     }
 
@@ -5275,12 +10897,48 @@ class GroupOffsetPartition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Metadata = 'Metadata' in params ? params.Metadata : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
-        this.Lag = 'Lag' in params ? params.Lag : null;
+
+        if (params.Analyse) {
+            let obj = new AnalyseParam();
+            obj.deserialize(params.Analyse)
+            this.Analyse = obj;
+        }
+
+        if (params.SecondaryAnalyse) {
+            let obj = new SecondaryAnalyseParam();
+            obj.deserialize(params.SecondaryAnalyse)
+            this.SecondaryAnalyse = obj;
+        }
+
+        if (params.SMT) {
+            this.SMT = new Array();
+            for (let z in params.SMT) {
+                let obj = new SMTParam();
+                obj.deserialize(params.SMT[z]);
+                this.SMT.push(obj);
+            }
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.AnalyseResult) {
+            this.AnalyseResult = new Array();
+            for (let z in params.AnalyseResult) {
+                let obj = new SMTParam();
+                obj.deserialize(params.AnalyseResult[z]);
+                this.AnalyseResult.push(obj);
+            }
+        }
+
+        if (params.SecondaryAnalyseResult) {
+            this.SecondaryAnalyseResult = new Array();
+            for (let z in params.SecondaryAnalyseResult) {
+                let obj = new SMTParam();
+                obj.deserialize(params.SecondaryAnalyseResult[z]);
+                this.SecondaryAnalyseResult.push(obj);
+            }
+        }
+        this.AnalyseJsonResult = 'AnalyseJsonResult' in params ? params.AnalyseJsonResult : null;
+        this.SecondaryAnalyseJsonResult = 'SecondaryAnalyseJsonResult' in params ? params.SecondaryAnalyseJsonResult : null;
 
     }
 }
@@ -5326,52 +10984,10 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * CancelAuthorizationToken请求参数结构体
+ * DeleteDatahubTopic返回参数结构体
  * @class
  */
-class CancelAuthorizationTokenRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 用户
-         * @type {string || null}
-         */
-        this.User = null;
-
-        /**
-         * token串
-         * @type {string || null}
-         */
-        this.Tokens = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Tokens = 'Tokens' in params ? params.Tokens : null;
-
-    }
-}
-
-/**
- * DeleteTopic返回参数结构体
- * @class
- */
-class DeleteTopicResponse extends  AbstractModel {
+class DeleteDatahubTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5408,6 +11024,266 @@ class DeleteTopicResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeConsumerGroup返回参数结构体
+ * @class
+ */
+class DescribeConsumerGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的消费分组信息
+         * @type {ConsumerGroupResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConsumerGroupResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * FetchMessageListByOffset返回参数结构体
+ * @class
+ */
+class FetchMessageListByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口
+         * @type {Array.<ConsumerRecord> || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ConsumerRecord();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 详细类别的价格
+ * @class
+ */
+class InquiryDetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 额外内网带宽价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryBasePrice || null}
+         */
+        this.BandwidthPrice = null;
+
+        /**
+         * 硬盘价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryBasePrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * 额外分区价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryBasePrice || null}
+         */
+        this.PartitionPrice = null;
+
+        /**
+         * 额外Topic价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryBasePrice || null}
+         */
+        this.TopicPrice = null;
+
+        /**
+         * 实例套餐价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryBasePrice || null}
+         */
+        this.InstanceTypePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BandwidthPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.BandwidthPrice)
+            this.BandwidthPrice = obj;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+
+        if (params.PartitionPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.PartitionPrice)
+            this.PartitionPrice = obj;
+        }
+
+        if (params.TopicPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.TopicPrice)
+            this.TopicPrice = obj;
+        }
+
+        if (params.InstanceTypePrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.InstanceTypePrice)
+            this.InstanceTypePrice = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteDatahubTask请求参数结构体
+ * @class
+ */
+class DeleteDatahubTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeGroupOffsets请求参数结构体
+ * @class
+ */
+class DescribeGroupOffsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * （过滤条件）按照实例 ID 过滤
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Kafka 消费分组
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息
+         * @type {Array.<string> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * 模糊匹配 topicName
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 本次查询的偏移位置，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 本次返回结果的最大个数，默认为50，最大值为50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Topics = 'Topics' in params ? params.Topics : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DeleteRouteTriggerTime请求参数结构体
  * @class
  */
@@ -5431,6 +11307,47 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
             return;
         }
         this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+
+    }
+}
+
+/**
+ * DeleteDatahubTask返回参数结构体
+ * @class
+ */
+class DeleteDatahubTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DatahubTaskIdRes || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DatahubTaskIdRes();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5818,6 +11735,158 @@ class InstanceAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePost请求参数结构体
+ * @class
+ */
+class CreateInstancePostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例带宽
+         * @type {number || null}
+         */
+        this.BandWidth = null;
+
+        /**
+         * vpcId，不填默认基础网络
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id，vpc网络需要传该参数，基础网络可以不传
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * 可用区
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 创建实例时可以选择集群Id, 该入参表示集群Id
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeDatahubTopics返回参数结构体
+ * @class
+ */
+class DescribeDatahubTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribeDatahubTopicsResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeDatahubTopicsResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConnectResource返回参数结构体
+ * @class
+ */
+class DescribeConnectResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribeConnectResourceResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeConnectResourceResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGroup请求参数结构体
  * @class
  */
@@ -5907,25 +11976,30 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * 消费组偏移量返回结果
+ * Connection信息
  * @class
  */
-class GroupOffsetResponse extends  AbstractModel {
+class Connection extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合调节的总结果数
-         * @type {number || null}
+         * Topic名称
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.TopicName = null;
 
         /**
-         * 该主题分区数组，其中每个元素为一个 json object
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupOffsetTopic> || null}
+         * 消费组ID
+         * @type {string || null}
          */
-        this.TopicList = null;
+        this.GroupId = null;
+
+        /**
+         * Topic的Id
+         * @type {string || null}
+         */
+        this.TopicId = null;
 
     }
 
@@ -5936,16 +12010,9 @@ class GroupOffsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new GroupOffsetTopic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -6068,24 +12135,19 @@ class CreateUserRequest extends  AbstractModel {
 }
 
 /**
- * 实例详情返回结果
+ * 路由信息返回对象
  * @class
  */
-class InstanceDetailResponse extends  AbstractModel {
+class RouteResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合条件的实例总数
-         * @type {number || null}
+         * 路由信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Route> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 符合条件的实例详情列表
-         * @type {Array.<InstanceDetail> || null}
-         */
-        this.InstanceList = null;
+        this.Routers = null;
 
     }
 
@@ -6096,16 +12158,92 @@ class InstanceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new InstanceDetail();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
+        if (params.Routers) {
+            this.Routers = new Array();
+            for (let z in params.Routers) {
+                let obj = new Route();
+                obj.deserialize(params.Routers[z]);
+                this.Routers.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Dts修改连接源参数
+ * @class
+ */
+class DtsModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dts实例Id【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Dts的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Dts消费分组的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Dts消费分组的账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Dts消费分组的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否更新到关联的Datahub任务，默认为true
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * Dts订阅的topic【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
     }
 }
@@ -6155,6 +12293,83 @@ class DeleteRouteRequest extends  AbstractModel {
         this.RouteId = 'RouteId' in params ? params.RouteId : null;
         this.CallerAppid = 'CallerAppid' in params ? params.CallerAppid : null;
         this.DeleteRouteTime = 'DeleteRouteTime' in params ? params.DeleteRouteTime : null;
+
+    }
+}
+
+/**
+ * CreateCdcCluster请求参数结构体
+ * @class
+ */
+class CreateCdcClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cdc的id
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * vpcId,一个地域只有唯一一个vpcid用于CDC
+         * @type {string || null}
+         */
+        this.CdcVpcId = null;
+
+        /**
+         * 每个CDC集群有唯一一个子网ID
+         * @type {string || null}
+         */
+        this.CdcSubnetId = null;
+
+        /**
+         * 所在可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * cdc集群的总带宽
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * cdc集群的总磁盘
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 数据盘类型
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 系统盘类型
+         * @type {string || null}
+         */
+        this.SystemDiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.CdcVpcId = 'CdcVpcId' in params ? params.CdcVpcId : null;
+        this.CdcSubnetId = 'CdcSubnetId' in params ? params.CdcSubnetId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.SystemDiskType = 'SystemDiskType' in params ? params.SystemDiskType : null;
 
     }
 }
@@ -6240,6 +12455,205 @@ class CreateInstancePreResponse extends  AbstractModel {
 }
 
 /**
+ * 返回连接源的Id
+ * @class
+ */
+class ConnectResourceResourceIdResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
+ * CheckCdcCluster请求参数结构体
+ * @class
+ */
+class CheckCdcClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * FetchMessageByOffset请求参数结构体
+ * @class
+ */
+class FetchMessageByOffsetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 主题名
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 分区id
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 位点信息，必填
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Datahub Topic详情
+ * @class
+ */
+class DescribeDatahubTopicResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Topic名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic Id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 分区数
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * 过期时间
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * 用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 状态，1使用中，2删除中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 服务路由地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail请求参数结构体
  * @class
  */
@@ -6254,7 +12668,7 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * （过滤条件）按照实例名称过滤，支持模糊查询
+         * （过滤条件）按照实例名,实例Id,可用区,私有网络id,子网id 过滤，支持模糊查询
          * @type {string || null}
          */
         this.SearchWord = null;
@@ -6301,6 +12715,12 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
          */
         this.InstanceIdList = null;
 
+        /**
+         * 根据标签列表过滤实例（取交集）
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -6327,6 +12747,125 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数——Jsonpath替换参数
+ * @class
+ */
+class JsonPathReplaceParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 被替换值，Jsonpath表达式
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * 替换值，Jsonpath表达式或字符串
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数——截取参数
+ * @class
+ */
+class SubstrParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 截取起始位置
+         * @type {number || null}
+         */
+        this.Start = null;
+
+        /**
+         * 截取截止位置
+         * @type {number || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
+ * FetchMessageByOffset返回参数结构体
+ * @class
+ */
+class FetchMessageByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果
+         * @type {ConsumerRecord || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConsumerRecord();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6381,6 +12920,46 @@ class CreateConsumerRequest extends  AbstractModel {
 }
 
 /**
+ * InquireCkafkaPrice返回参数结构体
+ * @class
+ */
+class InquireCkafkaPriceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 出参
+         * @type {InquireCkafkaPriceResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InquireCkafkaPriceResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRoute请求参数结构体
  * @class
  */
@@ -6409,24 +12988,348 @@ class DescribeRouteRequest extends  AbstractModel {
 }
 
 /**
- * Topic 副本及详情数据集合
+ * InquireCkafkaPrice请求参数结构体
  * @class
  */
-class TopicInSyncReplicaResult extends  AbstractModel {
+class InquireCkafkaPriceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic详情及副本合集
-         * @type {Array.<TopicInSyncReplicaInfo> || null}
+         * 国内站标准版填写standards2, 专业版填写profession
+         * @type {string || null}
          */
-        this.TopicInSyncReplicaList = null;
+        this.InstanceType = null;
 
         /**
-         * 总计个数
+         * 购买/续费付费类型(购买时不填的话, 默认获取购买包年包月一个月的费用)
+         * @type {InstanceChargeParam || null}
+         */
+        this.InstanceChargeParam = null;
+
+        /**
+         * 购买/续费时购买的实例数量(不填时, 默认为1个)
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.InstanceNum = null;
+
+        /**
+         * 实例内网带宽大小, 单位MB/s (购买时必填)
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 实例的硬盘购买类型以及大小 (购买时必填)
+         * @type {InquiryDiskParam || null}
+         */
+        this.InquiryDiskParam = null;
+
+        /**
+         * 实例消息保留时间大小, 单位小时 (购买时必填)
+         * @type {number || null}
+         */
+        this.MessageRetention = null;
+
+        /**
+         * 购买实例topic数, 单位个 (购买时必填)
+         * @type {number || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 购买实例分区数, 单位个 (购买时必填)
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * 标记操作, 新购填写purchase, 续费填写renew, (不填时, 默认为purchase)
+         * @type {string || null}
+         */
+        this.CategoryAction = null;
+
+        /**
+         * 国内站购买的版本, sv_ckafka_instance_s2_1(入门型), sv_ckafka_instance_s2_2(标准版), sv_ckafka_instance_s2_3(进阶型), 如果instanceType为standards2, 但该参数为空, 则默认值为sv_ckafka_instance_s2_1
+         * @type {string || null}
+         */
+        this.BillType = null;
+
+        /**
+         * 公网带宽计费模式, 目前只有专业版支持公网带宽 (购买公网带宽时必填)
+         * @type {InquiryPublicNetworkParam || null}
+         */
+        this.PublicNetworkParam = null;
+
+        /**
+         * 续费时的实例id, 续费时填写
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.InstanceChargeParam) {
+            let obj = new InstanceChargeParam();
+            obj.deserialize(params.InstanceChargeParam)
+            this.InstanceChargeParam = obj;
+        }
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+        if (params.InquiryDiskParam) {
+            let obj = new InquiryDiskParam();
+            obj.deserialize(params.InquiryDiskParam)
+            this.InquiryDiskParam = obj;
+        }
+        this.MessageRetention = 'MessageRetention' in params ? params.MessageRetention : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.CategoryAction = 'CategoryAction' in params ? params.CategoryAction : null;
+        this.BillType = 'BillType' in params ? params.BillType : null;
+
+        if (params.PublicNetworkParam) {
+            let obj = new InquiryPublicNetworkParam();
+            obj.deserialize(params.PublicNetworkParam)
+            this.PublicNetworkParam = obj;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数——转换时间格式参数
+ * @class
+ */
+class DateParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间格式
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 输入类型，string，unix时间戳，默认string
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * 时区，默认GMT+8
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数
+ * @class
+ */
+class ValueParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理模式，REPLACE替换，SUBSTR截取，DATE日期转换，TRIM去除前后空格，REGEX_REPLACE正则替换，URL_DECODE，LOWERCASE转换为小写
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 替换，TYPE=REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ReplaceParam || null}
+         */
+        this.Replace = null;
+
+        /**
+         * 截取，TYPE=SUBSTR时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SubstrParam || null}
+         */
+        this.Substr = null;
+
+        /**
+         * 时间转换，TYPE=DATE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DateParam || null}
+         */
+        this.Date = null;
+
+        /**
+         * 正则替换，TYPE=REGEX_REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RegexReplaceParam || null}
+         */
+        this.RegexReplace = null;
+
+        /**
+         * 值支持一拆多，TYPE=SPLIT时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SplitParam || null}
+         */
+        this.Split = null;
+
+        /**
+         * key-value二次解析，TYPE=KV时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {KVParam || null}
+         */
+        this.KV = null;
+
+        /**
+         * 处理结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * JsonPath替换，TYPE=JSON_PATH_REPLACE时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {JsonPathReplaceParam || null}
+         */
+        this.JsonPathReplace = null;
+
+        /**
+         * Url解析
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UrlDecodeParam || null}
+         */
+        this.UrlDecode = null;
+
+        /**
+         * 小写字符解析
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LowercaseParam || null}
+         */
+        this.Lowercase = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Replace) {
+            let obj = new ReplaceParam();
+            obj.deserialize(params.Replace)
+            this.Replace = obj;
+        }
+
+        if (params.Substr) {
+            let obj = new SubstrParam();
+            obj.deserialize(params.Substr)
+            this.Substr = obj;
+        }
+
+        if (params.Date) {
+            let obj = new DateParam();
+            obj.deserialize(params.Date)
+            this.Date = obj;
+        }
+
+        if (params.RegexReplace) {
+            let obj = new RegexReplaceParam();
+            obj.deserialize(params.RegexReplace)
+            this.RegexReplace = obj;
+        }
+
+        if (params.Split) {
+            let obj = new SplitParam();
+            obj.deserialize(params.Split)
+            this.Split = obj;
+        }
+
+        if (params.KV) {
+            let obj = new KVParam();
+            obj.deserialize(params.KV)
+            this.KV = obj;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.JsonPathReplace) {
+            let obj = new JsonPathReplaceParam();
+            obj.deserialize(params.JsonPathReplace)
+            this.JsonPathReplace = obj;
+        }
+
+        if (params.UrlDecode) {
+            let obj = new UrlDecodeParam();
+            obj.deserialize(params.UrlDecode)
+            this.UrlDecode = obj;
+        }
+
+        if (params.Lowercase) {
+            let obj = new LowercaseParam();
+            obj.deserialize(params.Lowercase)
+            this.Lowercase = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeDatahubTasks返回参数结构体
+ * @class
+ */
+class DescribeDatahubTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回任务查询结果
+         * @type {DescribeDatahubTasksRes || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6438,15 +13341,68 @@ class TopicInSyncReplicaResult extends  AbstractModel {
             return;
         }
 
-        if (params.TopicInSyncReplicaList) {
-            this.TopicInSyncReplicaList = new Array();
-            for (let z in params.TopicInSyncReplicaList) {
-                let obj = new TopicInSyncReplicaInfo();
-                obj.deserialize(params.TopicInSyncReplicaList[z]);
-                this.TopicInSyncReplicaList.push(obj);
-            }
+        if (params.Result) {
+            let obj = new DescribeDatahubTasksRes();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 购买硬盘参数
+ * @class
+ */
+class InquiryDiskParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买硬盘类型: SSD(SSD), CLOUD_SSD(SSD云硬盘), CLOUD_PREMIUM(高性能云硬盘), CLOUD_BASIC(云盘)
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 购买硬盘大小: 单位GB
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
+ * 小写字符解析
+ * @class
+ */
+class LowercaseParam extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -6482,6 +13438,171 @@ class SendMessageResponse extends  AbstractModel {
         }
         this.MessageId = 'MessageId' in params ? params.MessageId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDatahubGroupOffsets请求参数结构体
+ * @class
+ */
+class DescribeDatahubGroupOffsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * （过滤条件）按照实例 ID 过滤
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Kafka 消费分组
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * 模糊匹配 topicName
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 本次查询的偏移位置，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 本次返回结果的最大个数，默认为50，最大值为50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 询价返回参数
+ * @class
+ */
+class InquiryBasePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单位原价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 折扣单位价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 合计原价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣合计价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 折扣(单位是%)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 付费货币
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 硬盘专用返回参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 购买时长单位("m"按月, "h"按小时)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -6712,6 +13833,230 @@ class TopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * Ckafka配置
+ * @class
+ */
+class KafkaParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否为自建集群
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Topic名称，多个以“,”分隔
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OffsetType = null;
+
+        /**
+         * Offset类型为timestamp时必传，传时间戳，精确到秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 实例资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Zone ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Topic的Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Topic的分区数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * 启用容错实例/开启死信队列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableToleration = null;
+
+        /**
+         * Qps 限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.QpsLimit = null;
+
+        /**
+         * Table到Topic的路由，「分发到多个topic」开关打开时必传
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TableMapping> || null}
+         */
+        this.TableMappings = null;
+
+        /**
+         * 「分发到多个topic」开关，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.UseTableMapping = null;
+
+        /**
+         * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.UseAutoCreateTopic = null;
+
+        /**
+         * 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CompressionType = null;
+
+        /**
+         * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgMultiple = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.OffsetType = 'OffsetType' in params ? params.OffsetType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.EnableToleration = 'EnableToleration' in params ? params.EnableToleration : null;
+        this.QpsLimit = 'QpsLimit' in params ? params.QpsLimit : null;
+
+        if (params.TableMappings) {
+            this.TableMappings = new Array();
+            for (let z in params.TableMappings) {
+                let obj = new TableMapping();
+                obj.deserialize(params.TableMappings[z]);
+                this.TableMappings.push(obj);
+            }
+        }
+        this.UseTableMapping = 'UseTableMapping' in params ? params.UseTableMapping : null;
+        this.UseAutoCreateTopic = 'UseAutoCreateTopic' in params ? params.UseAutoCreateTopic : null;
+        this.CompressionType = 'CompressionType' in params ? params.CompressionType : null;
+        this.MsgMultiple = 'MsgMultiple' in params ? params.MsgMultiple : null;
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数——正则替换参数
+ * @class
+ */
+class RegexReplaceParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 正则表达式
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+        /**
+         * 替换新值
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+
+    }
+}
+
+/**
+ * 建立私有连接的参数
+ * @class
+ */
+class PrivateLinkParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户实例的vip
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * 客户实例的vpcId
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+
+    }
+}
+
+/**
  * CreateRoute返回参数结构体
  * @class
  */
@@ -6797,6 +14142,124 @@ class InstanceResponse extends  AbstractModel {
 }
 
 /**
+ * Datahub主题
+ * @class
+ */
+class DatahubTopicDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Topic名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic Id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 分区数
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * 过期时间
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * 状态，1使用中，2删除中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 操作型结果返回值
+ * @class
+ */
+class JgwOperateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的code，0为正常，非0为错误
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * 成功消息
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * 操作型返回的Data数据,可能有flowId等
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperateResponseData || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new OperateResponseData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeGroup返回实体
  * @class
  */
@@ -6827,6 +14290,158 @@ class DescribeGroup extends  AbstractModel {
         }
         this.Group = 'Group' in params ? params.Group : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
+ * Cls类型入参
+ * @class
+ */
+class ClsParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生产的信息是否为json格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DecodeJson = null;
+
+        /**
+         * cls日志主题id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * cls日志集id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogSet = null;
+
+        /**
+         * 当DecodeJson为false时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContentKey = null;
+
+        /**
+         * 指定消息中的某字段内容作为cls日志的时间。
+字段内容格式需要是秒级时间戳
+         * @type {string || null}
+         */
+        this.TimeField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DecodeJson = 'DecodeJson' in params ? params.DecodeJson : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.LogSet = 'LogSet' in params ? params.LogSet : null;
+        this.ContentKey = 'ContentKey' in params ? params.ContentKey : null;
+        this.TimeField = 'TimeField' in params ? params.TimeField : null;
+
+    }
+}
+
+/**
+ * EventBus配置
+ * @class
+ */
+class EventBusParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型。EB_COS/EB_ES/EB_CLS
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 是否为自建集群
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * SCF云函数命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * SCF云函数函数名
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * SCF云函数版本及别名
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+
+    }
+}
+
+/**
+ * Datahub请求的taskid
+ * @class
+ */
+class DatahubTaskIdRes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -6904,6 +14519,58 @@ class CreateTopicResp extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * 数据处理-解析参数
+ * @class
+ */
+class AnalyseParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取，SOURCE处理上层所有结果
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 分隔符、正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+        /**
+         * 需再次处理的KEY——模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InputValueType = null;
+
+        /**
+         * 需再次处理的KEY——KEY表达式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InputValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.InputValueType = 'InputValueType' in params ? params.InputValueType : null;
+        this.InputValue = 'InputValue' in params ? params.InputValue : null;
 
     }
 }
@@ -7047,6 +14714,499 @@ class DescribeRouteResponse extends  AbstractModel {
 }
 
 /**
+ * Es修改连接源参数
+ * @class
+ */
+class EsModifyConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Es连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Es的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Es连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * Es连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Es连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Es连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Es连接源是否为自建集群【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+
+    }
+}
+
+/**
+ * ModifyConnectResource返回参数结构体
+ * @class
+ */
+class ModifyConnectResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源的Id
+         * @type {ConnectResourceResourceIdResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConnectResourceResourceIdResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 实例购买付费参数
+ * @class
+ */
+class InstanceChargeParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例付费类型: PREPAID(包年包月), POSTPAID_BY_HOUR(按量付费)
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 购买时长: 包年包月时需要填写, 按量计费无需填写
+         * @type {number || null}
+         */
+        this.InstanceChargePeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InstanceChargePeriod = 'InstanceChargePeriod' in params ? params.InstanceChargePeriod : null;
+
+    }
+}
+
+/**
+ * DescribeDatahubTopics请求参数结构体
+ * @class
+ */
+class DescribeDatahubTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询值
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 本次查询的偏移位置，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 本次返回结果的最大个数，默认为50，最大值为50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateDatahubTask请求参数结构体
+ * @class
+ */
+class CreateDatahubTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务类型，SOURCE数据接入，SINK数据流出
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 数据源
+         * @type {DatahubResource || null}
+         */
+        this.SourceResource = null;
+
+        /**
+         * 数据目标
+         * @type {DatahubResource || null}
+         */
+        this.TargetResource = null;
+
+        /**
+         * 数据处理规则
+         * @type {TransformParam || null}
+         */
+        this.TransformParam = null;
+
+        /**
+         * 实例连接参数【已废弃】
+         * @type {PrivateLinkParam || null}
+         */
+        this.PrivateLinkParam = null;
+
+        /**
+         * 选择所要绑定的SchemaId
+         * @type {string || null}
+         */
+        this.SchemaId = null;
+
+        /**
+         * 数据处理规则
+         * @type {TransformsParam || null}
+         */
+        this.TransformsParam = null;
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+
+        if (params.SourceResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.SourceResource)
+            this.SourceResource = obj;
+        }
+
+        if (params.TargetResource) {
+            let obj = new DatahubResource();
+            obj.deserialize(params.TargetResource)
+            this.TargetResource = obj;
+        }
+
+        if (params.TransformParam) {
+            let obj = new TransformParam();
+            obj.deserialize(params.TransformParam)
+            this.TransformParam = obj;
+        }
+
+        if (params.PrivateLinkParam) {
+            let obj = new PrivateLinkParam();
+            obj.deserialize(params.PrivateLinkParam)
+            this.PrivateLinkParam = obj;
+        }
+        this.SchemaId = 'SchemaId' in params ? params.SchemaId : null;
+
+        if (params.TransformsParam) {
+            let obj = new TransformsParam();
+            obj.deserialize(params.TransformsParam)
+            this.TransformsParam = obj;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 询价返回参数
+ * @class
+ */
+class InquiryPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单位原价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 折扣单位价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 合计原价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣合计价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 折扣(单位是%)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 付费货币
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 硬盘专用返回参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 购买时长单位("m"按月, "h"按小时)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 详细类别的价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InquiryDetailPrice || null}
+         */
+        this.DetailPrices = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.DetailPrices) {
+            let obj = new InquiryDetailPrice();
+            obj.deserialize(params.DetailPrices)
+            this.DetailPrices = obj;
+        }
+
+    }
+}
+
+/**
+ * 统一返回的TopicResponse
+ * @class
+ */
+class TopicResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的主题信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Topic> || null}
+         */
+        this.TopicList = null;
+
+        /**
+         * 符合条件的 topic 数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * DescribeTopicDetail请求参数结构体
  * @class
  */
@@ -7143,6 +15303,41 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
 }
 
 /**
+ * Ctsdb类型入参
+ * @class
+ */
+class CtsdbParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接管理实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Ctsdb的metric
+         * @type {string || null}
+         */
+        this.CtsdbMetric = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.CtsdbMetric = 'CtsdbMetric' in params ? params.CtsdbMetric : null;
+
+    }
+}
+
+/**
  * SendMessage请求参数结构体
  * @class
  */
@@ -7232,6 +15427,13 @@ class ConsumerRecord extends  AbstractModel {
          */
         this.Timestamp = null;
 
+        /**
+         * 消息headers
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Headers = null;
+
     }
 
     /**
@@ -7247,65 +15449,81 @@ class ConsumerRecord extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Headers = 'Headers' in params ? params.Headers : null;
 
     }
 }
 
 /**
- * ModifyGroupOffsets请求参数结构体
+ * PostgreSQL连接源参数
  * @class
  */
-class ModifyGroupOffsetsRequest extends  AbstractModel {
+class PostgreSQLConnectParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * kafka实例id
+         * PostgreSQL的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * PostgreSQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.UserName = null;
 
         /**
-         * kafka 消费分组
+         * PostgreSQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Group = null;
+        this.Password = null;
 
         /**
-         * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
-         * @type {number || null}
+         * PostgreSQL连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Strategy = null;
+        this.Resource = null;
 
         /**
-         * 表示需要重置的topics， 不填表示全部
-         * @type {Array.<string> || null}
+         * PostgreSQL连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Topics = null;
+        this.ServiceVip = null;
 
         /**
-         * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
-         * @type {number || null}
+         * PostgreSQL连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Shift = null;
+        this.UniqVpcId = null;
 
         /**
-         * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
-         * @type {number || null}
+         * 当type为TDSQL_C_POSTGRESQL时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.ShiftTimestamp = null;
+        this.ClusterId = null;
 
         /**
-         * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
-         * @type {number || null}
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
          */
-        this.Offset = null;
+        this.IsUpdate = null;
 
         /**
-         * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
-         * @type {Array.<number> || null}
+         * PostgreSQL连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
          */
-        this.Partitions = null;
+        this.SelfBuilt = null;
 
     }
 
@@ -7316,14 +15534,58 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.Topics = 'Topics' in params ? params.Topics : null;
-        this.Shift = 'Shift' in params ? params.Shift : null;
-        this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+
+    }
+}
+
+/**
+ * key-value二次解析
+ * @class
+ */
+class KVParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分隔符
+         * @type {string || null}
+         */
+        this.Delimiter = null;
+
+        /**
+         * key-value二次解析分隔符
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+        /**
+         * 保留源Key，默认为false不保留
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeepOriginalKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Delimiter = 'Delimiter' in params ? params.Delimiter : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.KeepOriginalKey = 'KeepOriginalKey' in params ? params.KeepOriginalKey : null;
 
     }
 }
@@ -7454,61 +15716,90 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * 路由实体对象
+ * PostgreSQL类型入参
  * @class
  */
-class Route extends  AbstractModel {
+class PostgreSQLParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例接入方式
-0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
-1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
-2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
-3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
-         * @type {number || null}
-         */
-        this.AccessType = null;
-
-        /**
-         * 路由ID
-         * @type {number || null}
-         */
-        this.RouteId = null;
-
-        /**
-         * vip网络类型（1:外网TGW  2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境）
-         * @type {number || null}
-         */
-        this.VipType = null;
-
-        /**
-         * 虚拟IP列表
-         * @type {Array.<VipEntity> || null}
-         */
-        this.VipList = null;
-
-        /**
-         * 域名
-注意：此字段可能返回 null，表示取不到有效值。
+         * PostgreSQL的数据库名称
          * @type {string || null}
          */
-        this.Domain = null;
+        this.Database = null;
 
         /**
-         * 域名port
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DomainPort = null;
-
-        /**
-         * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
+         * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
          * @type {string || null}
          */
-        this.DeleteTimestamp = null;
+        this.Table = null;
+
+        /**
+         * 该PostgreSQL在连接管理内的Id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 复制存量信息(never增量, initial全量)，默认为initial
+         * @type {string || null}
+         */
+        this.SnapshotMode = null;
+
+        /**
+         * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
+         * @type {string || null}
+         */
+        this.DataFormat = null;
+
+        /**
+         * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+         * @type {string || null}
+         */
+        this.DataTargetInsertMode = null;
+
+        /**
+         * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+         * @type {string || null}
+         */
+        this.DataTargetPrimaryKeyField = null;
+
+        /**
+         * 表与消息间的映射关系
+         * @type {Array.<RecordMapping> || null}
+         */
+        this.DataTargetRecordMapping = null;
+
+        /**
+         * 是否抛弃解析失败的消息，默认为true
+         * @type {boolean || null}
+         */
+        this.DropInvalidMessage = null;
+
+        /**
+         * 输入的table是否为正则表达式
+         * @type {boolean || null}
+         */
+        this.IsTableRegular = null;
+
+        /**
+         * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+         * @type {string || null}
+         */
+        this.KeyColumns = null;
+
+        /**
+         * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+         * @type {boolean || null}
+         */
+        this.RecordWithSchema = null;
 
     }
 
@@ -7519,21 +15810,104 @@ class Route extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccessType = 'AccessType' in params ? params.AccessType : null;
-        this.RouteId = 'RouteId' in params ? params.RouteId : null;
-        this.VipType = 'VipType' in params ? params.VipType : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.SnapshotMode = 'SnapshotMode' in params ? params.SnapshotMode : null;
+        this.DataFormat = 'DataFormat' in params ? params.DataFormat : null;
+        this.DataTargetInsertMode = 'DataTargetInsertMode' in params ? params.DataTargetInsertMode : null;
+        this.DataTargetPrimaryKeyField = 'DataTargetPrimaryKeyField' in params ? params.DataTargetPrimaryKeyField : null;
 
-        if (params.VipList) {
-            this.VipList = new Array();
-            for (let z in params.VipList) {
-                let obj = new VipEntity();
-                obj.deserialize(params.VipList[z]);
-                this.VipList.push(obj);
+        if (params.DataTargetRecordMapping) {
+            this.DataTargetRecordMapping = new Array();
+            for (let z in params.DataTargetRecordMapping) {
+                let obj = new RecordMapping();
+                obj.deserialize(params.DataTargetRecordMapping[z]);
+                this.DataTargetRecordMapping.push(obj);
             }
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
-        this.DeleteTimestamp = 'DeleteTimestamp' in params ? params.DeleteTimestamp : null;
+        this.DropInvalidMessage = 'DropInvalidMessage' in params ? params.DropInvalidMessage : null;
+        this.IsTableRegular = 'IsTableRegular' in params ? params.IsTableRegular : null;
+        this.KeyColumns = 'KeyColumns' in params ? params.KeyColumns : null;
+        this.RecordWithSchema = 'RecordWithSchema' in params ? params.RecordWithSchema : null;
+
+    }
+}
+
+/**
+ * MariaDB连接源参数
+ * @class
+ */
+class MariaDBConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MariaDB的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MariaDB连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MariaDB连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * MariaDB连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MariaDB连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MariaDB连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
 
     }
 }
@@ -7653,33 +16027,84 @@ class Acl extends  AbstractModel {
 }
 
 /**
- * Topic消息保留时间配置返回信息
+ * MongoDB类型入参
  * @class
  */
-class TopicRetentionTimeConfigRsp extends  AbstractModel {
+class MongoDBParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 期望值，即用户配置的Topic消息保留时间(单位分钟)
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * MongoDB的数据库名称
+         * @type {string || null}
          */
-        this.Expect = null;
+        this.Database = null;
 
         /**
-         * 当前值，即当前生效值(可能存在动态调整，单位分钟)
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * MongoDB的集群
+         * @type {string || null}
          */
-        this.Current = null;
+        this.Collection = null;
 
         /**
-         * 最近变更时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 是否复制存量数据，默认传参true
+         * @type {boolean || null}
+         */
+        this.CopyExisting = null;
+
+        /**
+         * 实例资源
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * MongoDB的连接ip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * MongoDB的连接port
          * @type {number || null}
          */
-        this.ModTimeStamp = null;
+        this.Port = null;
+
+        /**
+         * MongoDB数据库用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MongoDB数据库密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔
+         * @type {string || null}
+         */
+        this.ListeningEvent = null;
+
+        /**
+         * 主从优先级，默认主节点
+         * @type {string || null}
+         */
+        this.ReadPreference = null;
+
+        /**
+         * 聚合管道
+         * @type {string || null}
+         */
+        this.Pipeline = null;
+
+        /**
+         * 是否为自建集群
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
 
     }
 
@@ -7690,9 +16115,94 @@ class TopicRetentionTimeConfigRsp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Expect = 'Expect' in params ? params.Expect : null;
-        this.Current = 'Current' in params ? params.Current : null;
-        this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Collection = 'Collection' in params ? params.Collection : null;
+        this.CopyExisting = 'CopyExisting' in params ? params.CopyExisting : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ListeningEvent = 'ListeningEvent' in params ? params.ListeningEvent : null;
+        this.ReadPreference = 'ReadPreference' in params ? params.ReadPreference : null;
+        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+
+    }
+}
+
+/**
+ * Topic配置
+ * @class
+ */
+class TopicParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单独售卖Topic的Topic名称
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OffsetType = null;
+
+        /**
+         * Offset类型为timestamp时必传，传时间戳，精确到秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Topic的TopicId【出参】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CompressionType = null;
+
+        /**
+         * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.UseAutoCreateTopic = null;
+
+        /**
+         * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MsgMultiple = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.OffsetType = 'OffsetType' in params ? params.OffsetType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.CompressionType = 'CompressionType' in params ? params.CompressionType : null;
+        this.UseAutoCreateTopic = 'UseAutoCreateTopic' in params ? params.UseAutoCreateTopic : null;
+        this.MsgMultiple = 'MsgMultiple' in params ? params.MsgMultiple : null;
 
     }
 }
@@ -7807,6 +16317,12 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.QuotaConsumerByteRate = null;
 
+        /**
+         * 调整topic副本数
+         * @type {number || null}
+         */
+        this.ReplicaNum = null;
+
     }
 
     /**
@@ -7841,29 +16357,24 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         }
         this.QuotaProducerByteRate = 'QuotaProducerByteRate' in params ? params.QuotaProducerByteRate : null;
         this.QuotaConsumerByteRate = 'QuotaConsumerByteRate' in params ? params.QuotaConsumerByteRate : null;
+        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
 
     }
 }
 
 /**
- * CreateTopic返回参数结构体
+ * 数据处理——二次解析参数
  * @class
  */
-class CreateTopicResponse extends  AbstractModel {
+class SecondaryAnalyseParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回创建结果
-         * @type {CreateTopicResp || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 分隔符
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Regex = null;
 
     }
 
@@ -7874,13 +16385,7 @@ class CreateTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new CreateTopicResp();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
 
     }
 }
@@ -7900,7 +16405,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 可用区
+         * 可用区，购买多可用区实例时，填写ZoneIds.N字段中的任意一个值
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -7997,7 +16502,7 @@ class CreateInstancePreRequest extends  AbstractModel {
         this.MultiZoneFlag = null;
 
         /**
-         * 可用区列表
+         * 可用区列表，购买多可用区实例时为必填项
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
@@ -8084,48 +16589,40 @@ class DeleteTopicIpWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGroupOffsets请求参数结构体
+ * 标准版销售信息
  * @class
  */
-class DescribeGroupOffsetsRequest extends  AbstractModel {
+class SaleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * （过滤条件）按照实例 ID 过滤
+         * 手动设置的flag标志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Flag = null;
+
+        /**
+         * ckakfa版本号(1.1.1/2.4.2/0.10.2)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Version = null;
 
         /**
-         * Kafka 消费分组
+         * 专业版、标准版标志
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Group = null;
+        this.Platform = null;
 
         /**
-         * group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息
-         * @type {Array.<string> || null}
+         * 售罄标志：true售罄
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
          */
-        this.Topics = null;
-
-        /**
-         * 模糊匹配 topicName
-         * @type {string || null}
-         */
-        this.SearchWord = null;
-
-        /**
-         * 本次查询的偏移位置，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 本次返回结果的最大个数，默认为50，最大值为50
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.SoldOut = null;
 
     }
 
@@ -8136,12 +16633,234 @@ class DescribeGroupOffsetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Topics = 'Topics' in params ? params.Topics : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
+
+    }
+}
+
+/**
+ * DeleteTopic返回参数结构体
+ * @class
+ */
+class DeleteTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的结果集
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Scf类型入参
+ * @class
+ */
+class ScfParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SCF云函数函数名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * SCF云函数命名空间, 默认为default
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * SCF云函数版本及别名, 默认为$DEFAULT
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * 每批最大发送消息数, 默认为1000
+         * @type {number || null}
+         */
+        this.BatchSize = null;
+
+        /**
+         * SCF调用失败后重试次数, 默认为5
+         * @type {number || null}
+         */
+        this.MaxRetries = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.BatchSize = 'BatchSize' in params ? params.BatchSize : null;
+        this.MaxRetries = 'MaxRetries' in params ? params.MaxRetries : null;
+
+    }
+}
+
+/**
+ * CreateDatahubTask返回参数结构体
+ * @class
+ */
+class CreateDatahubTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {CreateDatahubTaskRes || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CreateDatahubTaskRes();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClickHouse连接源参数
+ * @class
+ */
+class ClickHouseConnectParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClickHouse的连接port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * ClickHouse连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * ClickHouse连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * ClickHouse连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * ClickHouse连接源是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
+
+        /**
+         * ClickHouse连接源的实例vip，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * ClickHouse连接源的vpcId，当为腾讯云实例时，必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
 
     }
 }
@@ -8191,6 +16910,50 @@ class DescribeUserRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Datahub主题列表
+ * @class
+ */
+class DescribeDatahubTopicsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Topic列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DatahubTopicDTO> || null}
+         */
+        this.TopicList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new DatahubTopicDTO();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
 
     }
 }
@@ -8247,6 +17010,41 @@ class DescribeTopicSyncReplicaRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OutOfSyncReplicaOnly = 'OutOfSyncReplicaOnly' in params ? params.OutOfSyncReplicaOnly : null;
+
+    }
+}
+
+/**
+ * ModifyDatahubTask请求参数结构体
+ * @class
+ */
+class ModifyDatahubTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
 
     }
 }
@@ -8450,6 +17248,20 @@ class InstanceDetail extends  AbstractModel {
          */
         this.PublicNetwork = null;
 
+        /**
+         * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 实例功能列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Features = null;
+
     }
 
     /**
@@ -8505,6 +17317,8 @@ class InstanceDetail extends  AbstractModel {
         this.PartitionNumber = 'PartitionNumber' in params ? params.PartitionNumber : null;
         this.PublicNetworkChargeType = 'PublicNetworkChargeType' in params ? params.PublicNetworkChargeType : null;
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.Features = 'Features' in params ? params.Features : null;
 
     }
 }
@@ -8587,39 +17401,75 @@ class DescribeTopicDetailResponse extends  AbstractModel {
 }
 
 /**
- * 订阅信息实体
+ * MySQL修改连接源参数
  * @class
  */
-class SubscribedInfo extends  AbstractModel {
+class MySQLModifyConnectParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订阅的主题名
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 订阅的分区
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<number> || null}
-         */
-        this.Partition = null;
-
-        /**
-         * 分区offset信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<PartitionOffset> || null}
-         */
-        this.PartitionOffset = null;
-
-        /**
-         * 订阅的主题ID
+         * MySQL连接源的实例资源【不支持修改】
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TopicId = null;
+        this.Resource = null;
+
+        /**
+         * MySQL的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * MySQL连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceVip = null;
+
+        /**
+         * MySQL连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * MySQL连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * MySQL连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUpdate = null;
+
+        /**
+         * 当type为TDSQL_C_MYSQL时
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 是否是自建的集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SelfBuilt = null;
 
     }
 
@@ -8630,18 +17480,99 @@ class SubscribedInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceVip = 'ServiceVip' in params ? params.ServiceVip : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.IsUpdate = 'IsUpdate' in params ? params.IsUpdate : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SelfBuilt = 'SelfBuilt' in params ? params.SelfBuilt : null;
 
-        if (params.PartitionOffset) {
-            this.PartitionOffset = new Array();
-            for (let z in params.PartitionOffset) {
-                let obj = new PartitionOffset();
-                obj.deserialize(params.PartitionOffset[z]);
-                this.PartitionOffset.push(obj);
-            }
+    }
+}
+
+/**
+ * SQLServer类型入参
+ * @class
+ */
+class SQLServerParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SQLServer的数据库名称
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * SQLServer的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * 该SQLServer在连接管理内的Id
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 复制存量信息(schema_only增量, initial全量)，默认为initial
+         * @type {string || null}
+         */
+        this.SnapshotMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.SnapshotMode = 'SnapshotMode' in params ? params.SnapshotMode : null;
+
+    }
+}
+
+/**
+ * 数据处理——Value处理参数——替换参数
+ * @class
+ */
+class ReplaceParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 被替换值
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * 替换值
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
 
     }
 }
@@ -8681,167 +17612,336 @@ class Price extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeConnectResources返回参数结构体
+ * @class
+ */
+class DescribeConnectResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接源列表
+         * @type {DescribeConnectResourcesResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeConnectResourcesResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
+    CreateInstancePostResponse: CreateInstancePostResponse,
+    DropCls: DropCls,
+    PostgreSQLModifyConnectParam: PostgreSQLModifyConnectParam,
     GroupInfoMember: GroupInfoMember,
+    RowParam: RowParam,
+    EsConnectParam: EsConnectParam,
     BatchCreateAclRequest: BatchCreateAclRequest,
+    DescribeDatahubTaskResponse: DescribeDatahubTaskResponse,
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
-    DescribeACLRequest: DescribeACLRequest,
+    SQLServerConnectParam: SQLServerConnectParam,
+    CreateConnectResourceResponse: CreateConnectResourceResponse,
+    TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     BatchModifyTopicResultDTO: BatchModifyTopicResultDTO,
+    SubscribedInfo: SubscribedInfo,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
-    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
+    DescribeDatahubGroupOffsetsResponse: DescribeDatahubGroupOffsetsResponse,
+    SplitParam: SplitParam,
     ConsumerGroup: ConsumerGroup,
     Assignment: Assignment,
+    DescribeConnectResourceResp: DescribeConnectResourceResp,
     AuthorizeTokenResponse: AuthorizeTokenResponse,
-    DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
+    DescribeDatahubTaskRequest: DescribeDatahubTaskRequest,
+    UrlDecodeParam: UrlDecodeParam,
+    FetchLatestDatahubMessageListResponse: FetchLatestDatahubMessageListResponse,
+    EsParam: EsParam,
+    DescribeConnectResource: DescribeConnectResource,
+    DtsParam: DtsParam,
+    GroupOffsetPartition: GroupOffsetPartition,
+    CancelAuthorizationTokenRequest: CancelAuthorizationTokenRequest,
     CancelAuthorizationTokenResponse: CancelAuthorizationTokenResponse,
+    MySQLConnectParam: MySQLConnectParam,
+    InquireCkafkaPriceResp: InquireCkafkaPriceResp,
     CreateRouteRequest: CreateRouteRequest,
+    SQLServerModifyConnectParam: SQLServerModifyConnectParam,
     DeleteTopicRequest: DeleteTopicRequest,
+    DescribeDatahubTasksRequest: DescribeDatahubTasksRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
+    DatahubResource: DatahubResource,
     BatchModifyTopicAttributesResponse: BatchModifyTopicAttributesResponse,
+    ClickHouseParam: ClickHouseParam,
+    FilterMapParam: FilterMapParam,
     CreateInstancePreResp: CreateInstancePreResp,
+    ModifyDatahubTaskResponse: ModifyDatahubTaskResponse,
     GroupInfoTopics: GroupInfoTopics,
-    TopicResult: TopicResult,
+    FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
     Region: Region,
     ModifyInstancePreRequest: ModifyInstancePreRequest,
     CreateTokenResponse: CreateTokenResponse,
+    TransformsParam: TransformsParam,
+    ClickHouseModifyConnectParam: ClickHouseModifyConnectParam,
+    DescribeDatahubTasksRes: DescribeDatahubTasksRes,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     CreateInstancePreData: CreateInstancePreData,
+    DescribeAppInfoRequest: DescribeAppInfoRequest,
     AclRule: AclRule,
+    SMTParam: SMTParam,
+    CheckCdcClusterResponse: CheckCdcClusterResponse,
+    CtsdbModifyConnectParam: CtsdbModifyConnectParam,
     DescribeACLResponse: DescribeACLResponse,
     DynamicDiskConfig: DynamicDiskConfig,
-    JgwOperateResponse: JgwOperateResponse,
+    DorisConnectParam: DorisConnectParam,
     ZoneInfo: ZoneInfo,
     DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,
-    DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
-    SaleInfo: SaleInfo,
+    DeleteAclRuleRequest: DeleteAclRuleRequest,
+    DescribeConnectResourcesRequest: DescribeConnectResourcesRequest,
     Topic: Topic,
     Tag: Tag,
+    ModifyConnectResourceRequest: ModifyConnectResourceRequest,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    RecordMapping: RecordMapping,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
+    InstanceDetailResponse: InstanceDetailResponse,
+    GroupOffsetResponse: GroupOffsetResponse,
     CreateTokenRequest: CreateTokenRequest,
-    DeleteAclRuleRequest: DeleteAclRuleRequest,
+    DescribeTopicResponse: DescribeTopicResponse,
+    MongoDBModifyConnectParam: MongoDBModifyConnectParam,
+    TdwParam: TdwParam,
+    ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
+    DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
+    DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
+    FetchDatahubMessageByOffsetResponse: FetchDatahubMessageByOffsetResponse,
     CreateConsumerResponse: CreateConsumerResponse,
-    RouteResponse: RouteResponse,
+    CreateCdcClusterResponse: CreateCdcClusterResponse,
     DescribeGroupResponse: DescribeGroupResponse,
+    CdcClusterResponse: CdcClusterResponse,
+    ModifyPasswordResponse: ModifyPasswordResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
+    FetchDatahubMessageByOffsetRequest: FetchDatahubMessageByOffsetRequest,
     AuthorizeTokenRequest: AuthorizeTokenRequest,
     OperateResponseData: OperateResponseData,
+    DescribeACLRequest: DescribeACLRequest,
     CreateUserResponse: CreateUserResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    DescribeDatahubTaskRes: DescribeDatahubTaskRes,
     CreatePartitionResponse: CreatePartitionResponse,
+    MongoDBConnectParam: MongoDBConnectParam,
+    MySQLParam: MySQLParam,
+    BatchAnalyseParam: BatchAnalyseParam,
     ClusterInfo: ClusterInfo,
     DeleteGroupRequest: DeleteGroupRequest,
+    DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     DeleteUserResponse: DeleteUserResponse,
+    DescribeConnectResourceRequest: DescribeConnectResourceRequest,
+    DescribeTopicProduceConnectionRequest: DescribeTopicProduceConnectionRequest,
     CreateAclRequest: CreateAclRequest,
     DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
-    DescribeAppInfoRequest: DescribeAppInfoRequest,
+    CreateConnectResourceRequest: CreateConnectResourceRequest,
+    MariaDBParam: MariaDBParam,
+    Route: Route,
     DeleteRouteResponse: DeleteRouteResponse,
     Partitions: Partitions,
-    DescribeTopicResponse: DescribeTopicResponse,
+    CreateDatahubTaskRes: CreateDatahubTaskRes,
     ConsumerGroupResponse: ConsumerGroupResponse,
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
     GroupOffsetTopic: GroupOffsetTopic,
     ModifyGroupOffsetsResponse: ModifyGroupOffsetsResponse,
+    DescribeConnectInfoResultDTO: DescribeConnectInfoResultDTO,
     Partition: Partition,
     CreateAclResponse: CreateAclResponse,
+    FailureParam: FailureParam,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
+    TransformParam: TransformParam,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     DeleteInstancePreResponse: DeleteInstancePreResponse,
-    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    TableMapping: TableMapping,
+    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
+    InquiryPublicNetworkParam: InquiryPublicNetworkParam,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
+    DeleteConnectResourceResponse: DeleteConnectResourceResponse,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
     DeleteAclRuleResponse: DeleteAclRuleResponse,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
-    DescribeGroupInfoResponse: DescribeGroupInfoResponse,
+    DescribeConnectResourcesResp: DescribeConnectResourcesResp,
     ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
     BatchContent: BatchContent,
     DeleteRouteTriggerTimeResponse: DeleteRouteTriggerTimeResponse,
+    User: User,
+    TopicSubscribeGroup: TopicSubscribeGroup,
     DescribeUserResponse: DescribeUserResponse,
+    DtsConnectParam: DtsConnectParam,
+    DorisModifyConnectParam: DorisModifyConnectParam,
+    DescribeGroupInfoResponse: DescribeGroupInfoResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,
+    DeleteConnectResourceRequest: DeleteConnectResourceRequest,
     CreatePartitionRequest: CreatePartitionRequest,
     Group: Group,
     GroupInfoResponse: GroupInfoResponse,
     DescribeAppInfoResponse: DescribeAppInfoResponse,
+    CosParam: CosParam,
     AclResponse: AclResponse,
     ZoneResponse: ZoneResponse,
     Instance: Instance,
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
-    ModifyPasswordResponse: ModifyPasswordResponse,
+    MapParam: MapParam,
     TopicDetailResponse: TopicDetailResponse,
+    TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     DeleteInstancePreRequest: DeleteInstancePreRequest,
-    TopicSubscribeGroup: TopicSubscribeGroup,
+    DescribeDatahubTopicRequest: DescribeDatahubTopicRequest,
     Config: Config,
+    ClickHouseSchema: ClickHouseSchema,
+    CtsdbConnectParam: CtsdbConnectParam,
     ModifyPasswordRequest: ModifyPasswordRequest,
+    MariaDBModifyConnectParam: MariaDBModifyConnectParam,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,
+    DeleteDatahubTopicRequest: DeleteDatahubTopicRequest,
     DescribeRegionResponse: DescribeRegionResponse,
-    DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
+    CreateTopicResponse: CreateTopicResponse,
     VipEntity: VipEntity,
+    DescribeTopicProduceConnectionResponse: DescribeTopicProduceConnectionResponse,
+    FetchLatestDatahubMessageListRequest: FetchLatestDatahubMessageListRequest,
     ConsumerGroupTopic: ConsumerGroupTopic,
-    User: User,
-    GroupOffsetPartition: GroupOffsetPartition,
+    DatahubTaskInfo: DatahubTaskInfo,
+    FieldParam: FieldParam,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
-    CancelAuthorizationTokenRequest: CancelAuthorizationTokenRequest,
-    DeleteTopicResponse: DeleteTopicResponse,
+    DeleteDatahubTopicResponse: DeleteDatahubTopicResponse,
+    DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
+    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
+    InquiryDetailPrice: InquiryDetailPrice,
+    DeleteDatahubTaskRequest: DeleteDatahubTaskRequest,
+    DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
+    DeleteDatahubTaskResponse: DeleteDatahubTaskResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
+    CreateInstancePostRequest: CreateInstancePostRequest,
+    DescribeDatahubTopicsResponse: DescribeDatahubTopicsResponse,
+    DescribeConnectResourceResponse: DescribeConnectResourceResponse,
     DescribeGroupRequest: DescribeGroupRequest,
     Filter: Filter,
-    GroupOffsetResponse: GroupOffsetResponse,
+    Connection: Connection,
     BatchCreateAclResponse: BatchCreateAclResponse,
     ModifyInstancePreResponse: ModifyInstancePreResponse,
     CreateUserRequest: CreateUserRequest,
-    InstanceDetailResponse: InstanceDetailResponse,
+    RouteResponse: RouteResponse,
+    DtsModifyConnectParam: DtsModifyConnectParam,
     DeleteRouteRequest: DeleteRouteRequest,
+    CreateCdcClusterRequest: CreateCdcClusterRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     CreateInstancePreResponse: CreateInstancePreResponse,
+    ConnectResourceResourceIdResp: ConnectResourceResourceIdResp,
+    CheckCdcClusterRequest: CheckCdcClusterRequest,
+    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    DescribeDatahubTopicResp: DescribeDatahubTopicResp,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
+    JsonPathReplaceParam: JsonPathReplaceParam,
+    SubstrParam: SubstrParam,
+    FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
     CreateConsumerRequest: CreateConsumerRequest,
+    InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
     DescribeRouteRequest: DescribeRouteRequest,
-    TopicInSyncReplicaResult: TopicInSyncReplicaResult,
+    InquireCkafkaPriceRequest: InquireCkafkaPriceRequest,
+    DateParam: DateParam,
+    ValueParam: ValueParam,
+    DescribeDatahubTasksResponse: DescribeDatahubTasksResponse,
+    InquiryDiskParam: InquiryDiskParam,
+    LowercaseParam: LowercaseParam,
     SendMessageResponse: SendMessageResponse,
+    DescribeDatahubGroupOffsetsRequest: DescribeDatahubGroupOffsetsRequest,
+    InquiryBasePrice: InquiryBasePrice,
     DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
     TopicAttributesResponse: TopicAttributesResponse,
+    KafkaParam: KafkaParam,
+    RegexReplaceParam: RegexReplaceParam,
+    PrivateLinkParam: PrivateLinkParam,
     CreateRouteResponse: CreateRouteResponse,
     InstanceResponse: InstanceResponse,
+    DatahubTopicDTO: DatahubTopicDTO,
+    JgwOperateResponse: JgwOperateResponse,
     DescribeGroup: DescribeGroup,
+    ClsParam: ClsParam,
+    EventBusParam: EventBusParam,
+    DatahubTaskIdRes: DatahubTaskIdRes,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
+    AnalyseParam: AnalyseParam,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
+    EsModifyConnectParam: EsModifyConnectParam,
+    ModifyConnectResourceResponse: ModifyConnectResourceResponse,
+    InstanceChargeParam: InstanceChargeParam,
+    DescribeDatahubTopicsRequest: DescribeDatahubTopicsRequest,
+    CreateDatahubTaskRequest: CreateDatahubTaskRequest,
+    InquiryPrice: InquiryPrice,
+    TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
+    CtsdbParam: CtsdbParam,
     SendMessageRequest: SendMessageRequest,
     ConsumerRecord: ConsumerRecord,
-    ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
+    PostgreSQLConnectParam: PostgreSQLConnectParam,
+    KVParam: KVParam,
     BatchModifyTopicAttributesRequest: BatchModifyTopicAttributesRequest,
     DeleteGroupResponse: DeleteGroupResponse,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
-    Route: Route,
+    PostgreSQLParam: PostgreSQLParam,
+    MariaDBConnectParam: MariaDBConnectParam,
     AclRuleInfo: AclRuleInfo,
     Acl: Acl,
-    TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
+    MongoDBParam: MongoDBParam,
+    TopicParam: TopicParam,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
-    CreateTopicResponse: CreateTopicResponse,
+    SecondaryAnalyseParam: SecondaryAnalyseParam,
     CreateInstancePreRequest: CreateInstancePreRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
-    DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
+    SaleInfo: SaleInfo,
+    DeleteTopicResponse: DeleteTopicResponse,
+    ScfParam: ScfParam,
+    CreateDatahubTaskResponse: CreateDatahubTaskResponse,
+    ClickHouseConnectParam: ClickHouseConnectParam,
     DescribeUserRequest: DescribeUserRequest,
+    DescribeDatahubTopicsResp: DescribeDatahubTopicsResp,
     DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
+    ModifyDatahubTaskRequest: ModifyDatahubTaskRequest,
     InstanceDetail: InstanceDetail,
     InstanceQuotaConfigResp: InstanceQuotaConfigResp,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
-    SubscribedInfo: SubscribedInfo,
+    MySQLModifyConnectParam: MySQLModifyConnectParam,
+    SQLServerParam: SQLServerParam,
+    ReplaceParam: ReplaceParam,
     Price: Price,
+    DescribeConnectResourcesResponse: DescribeConnectResourcesResponse,
 
 }

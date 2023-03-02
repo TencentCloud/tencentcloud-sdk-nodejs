@@ -61,6 +61,70 @@ class UpdateDevicesEnableStateResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDeviceLocationSolve请求参数结构体
+ * @class
+ */
+class DescribeDeviceLocationSolveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 定位解析类型，wifi或GNSSNavigation
+         * @type {string || null}
+         */
+        this.LocationType = null;
+
+        /**
+         * LoRaEdge卫星导航电文
+         * @type {string || null}
+         */
+        this.GNSSNavigation = null;
+
+        /**
+         * wifi信息
+         * @type {Array.<WifiInfo> || null}
+         */
+        this.WiFiInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.LocationType = 'LocationType' in params ? params.LocationType : null;
+        this.GNSSNavigation = 'GNSSNavigation' in params ? params.GNSSNavigation : null;
+
+        if (params.WiFiInfo) {
+            this.WiFiInfo = new Array();
+            for (let z in params.WiFiInfo) {
+                let obj = new WifiInfo();
+                obj.deserialize(params.WiFiInfo[z]);
+                this.WiFiInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteProject请求参数结构体
  * @class
  */
@@ -789,6 +853,13 @@ class BindProductInfo extends  AbstractModel {
          */
         this.DevStatus = null;
 
+        /**
+         * 产品拥有者名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductOwnerName = null;
+
     }
 
     /**
@@ -806,6 +877,7 @@ class BindProductInfo extends  AbstractModel {
         this.ProductType = 'ProductType' in params ? params.ProductType : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
         this.DevStatus = 'DevStatus' in params ? params.DevStatus : null;
+        this.ProductOwnerName = 'ProductOwnerName' in params ? params.ProductOwnerName : null;
 
     }
 }
@@ -2550,6 +2622,41 @@ class DeviceData extends  AbstractModel {
 }
 
 /**
+ * wifi定位信息
+ * @class
+ */
+class WifiInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * mac地址
+         * @type {string || null}
+         */
+        this.MAC = null;
+
+        /**
+         * 信号强度
+         * @type {number || null}
+         */
+        this.RSSI = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MAC = 'MAC' in params ? params.MAC : null;
+        this.RSSI = 'RSSI' in params ? params.RSSI : null;
+
+    }
+}
+
+/**
  * GetTopicRuleList请求参数结构体
  * @class
  */
@@ -2947,18 +3054,42 @@ class ListTopicPolicyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLoRaFrequency请求参数结构体
+ * 获取返回列表的详情。
  * @class
  */
-class DescribeLoRaFrequencyRequest extends  AbstractModel {
+class BatchProductionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 频点唯一ID
+         * 量产ID
          * @type {string || null}
          */
-        this.FreqId = null;
+        this.BatchProductionId = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 烧录方式
+         * @type {number || null}
+         */
+        this.BurnMethod = null;
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
 
     }
 
@@ -2969,7 +3100,11 @@ class DescribeLoRaFrequencyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FreqId = 'FreqId' in params ? params.FreqId : null;
+        this.BatchProductionId = 'BatchProductionId' in params ? params.BatchProductionId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.BurnMethod = 'BurnMethod' in params ? params.BurnMethod : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
 
     }
 }
@@ -3847,14 +3982,14 @@ class CallDeviceActionSyncResponse extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * 输出参数
+         * 输出参数，取值设备端上报$thing/up/action method为action_reply 的 response字段，物模型协议参考https://cloud.tencent.com/document/product/1081/34916#.E8.AE.BE.E5.A4.87.E8.A1.8C.E4.B8.BA.E8.B0.83.E7.94.A8
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OutputParams = null;
 
         /**
-         * 返回状态，当设备不在线等部分情况，会通过该 Status 返回。
+         * 返回状态，取值设备端上报$thing/up/action	method为action_reply 的 status字段，如果不包含status字段，则取默认值，空字符串，物模型协议参考https://cloud.tencent.com/document/product/1081/34916#.E8.AE.BE.E5.A4.87.E8.A1.8C.E4.B8.BA.E8.B0.83.E7.94.A8
          * @type {string || null}
          */
         this.Status = null;
@@ -4625,30 +4760,43 @@ class TopicRuleInfo extends  AbstractModel {
 }
 
 /**
- * GetCOSURL请求参数结构体
+ * DescribeDeviceLocationSolve返回参数结构体
  * @class
  */
-class GetCOSURLRequest extends  AbstractModel {
+class DescribeDeviceLocationSolveResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductID = null;
-
-        /**
-         * 固件版本
-         * @type {string || null}
-         */
-        this.FirmwareVersion = null;
-
-        /**
-         * 文件大小
+         * 经度
          * @type {number || null}
          */
-        this.FileSize = null;
+        this.Longitude = null;
+
+        /**
+         * 纬度
+         * @type {number || null}
+         */
+        this.Latitude = null;
+
+        /**
+         * 类型
+         * @type {string || null}
+         */
+        this.LocationType = null;
+
+        /**
+         * 误差精度预估，单位为米
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Accuracy = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4659,9 +4807,11 @@ class GetCOSURLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
-        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.Longitude = 'Longitude' in params ? params.Longitude : null;
+        this.Latitude = 'Latitude' in params ? params.Latitude : null;
+        this.LocationType = 'LocationType' in params ? params.LocationType : null;
+        this.Accuracy = 'Accuracy' in params ? params.Accuracy : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6778,6 +6928,12 @@ class DescribeBindedProductsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 是否跨账号绑定产品
+         * @type {number || null}
+         */
+        this.ProductSource = null;
+
     }
 
     /**
@@ -6790,6 +6946,7 @@ class DescribeBindedProductsRequest extends  AbstractModel {
         this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ProductSource = 'ProductSource' in params ? params.ProductSource : null;
 
     }
 }
@@ -7740,6 +7897,20 @@ class DescribeDeviceBindGatewayResponse extends  AbstractModel {
         this.GatewayName = null;
 
         /**
+         * 设备对应产品所属的主账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GatewayProductOwnerName = null;
+
+        /**
+         * 设备对应产品所属的主账号 UIN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GatewayProductOwnerUin = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7757,6 +7928,8 @@ class DescribeDeviceBindGatewayResponse extends  AbstractModel {
         this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
         this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
         this.GatewayName = 'GatewayName' in params ? params.GatewayName : null;
+        this.GatewayProductOwnerName = 'GatewayProductOwnerName' in params ? params.GatewayProductOwnerName : null;
+        this.GatewayProductOwnerUin = 'GatewayProductOwnerUin' in params ? params.GatewayProductOwnerUin : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8709,42 +8882,30 @@ class ModifyProjectResponse extends  AbstractModel {
 }
 
 /**
- * 获取返回列表的详情。
+ * GetCOSURL请求参数结构体
  * @class
  */
-class BatchProductionInfo extends  AbstractModel {
+class GetCOSURLRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 量产ID
-         * @type {string || null}
-         */
-        this.BatchProductionId = null;
 
         /**
          * 产品ID
          * @type {string || null}
          */
-        this.ProductId = null;
+        this.ProductID = null;
 
         /**
-         * 烧录方式
-         * @type {number || null}
-         */
-        this.BurnMethod = null;
-
-        /**
-         * 创建时间
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 产品名称
+         * 固件版本
          * @type {string || null}
          */
-        this.ProductName = null;
+        this.FirmwareVersion = null;
+
+        /**
+         * 文件大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
 
     }
 
@@ -8755,11 +8916,37 @@ class BatchProductionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BatchProductionId = 'BatchProductionId' in params ? params.BatchProductionId : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.BurnMethod = 'BurnMethod' in params ? params.BurnMethod : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+
+    }
+}
+
+/**
+ * DescribeLoRaFrequency请求参数结构体
+ * @class
+ */
+class DescribeLoRaFrequencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 频点唯一ID
+         * @type {string || null}
+         */
+        this.FreqId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FreqId = 'FreqId' in params ? params.FreqId : null;
 
     }
 }
@@ -8852,6 +9039,12 @@ class DescribeGatewaySubProductsRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 是否跨账号产品
+         * @type {number || null}
+         */
+        this.ProductSource = null;
+
     }
 
     /**
@@ -8865,6 +9058,7 @@ class DescribeGatewaySubProductsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProductSource = 'ProductSource' in params ? params.ProductSource : null;
 
     }
 }
@@ -9690,6 +9884,13 @@ class DeviceInfo extends  AbstractModel {
          */
         this.DeviceType = null;
 
+        /**
+         * 是否是 lora 设备
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsLora = null;
+
     }
 
     /**
@@ -9719,6 +9920,7 @@ class DeviceInfo extends  AbstractModel {
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.IsLora = 'IsLora' in params ? params.IsLora : null;
 
     }
 }
@@ -10128,6 +10330,7 @@ class CreatePositionSpaceRequest extends  AbstractModel {
 
 module.exports = {
     UpdateDevicesEnableStateResponse: UpdateDevicesEnableStateResponse,
+    DescribeDeviceLocationSolveRequest: DescribeDeviceLocationSolveRequest,
     DeleteProjectRequest: DeleteProjectRequest,
     DevicesItem: DevicesItem,
     DeleteFenceBindRequest: DeleteFenceBindRequest,
@@ -10182,6 +10385,7 @@ module.exports = {
     UnbindProductsRequest: UnbindProductsRequest,
     SearchStudioProductResponse: SearchStudioProductResponse,
     DeviceData: DeviceData,
+    WifiInfo: WifiInfo,
     GetTopicRuleListRequest: GetTopicRuleListRequest,
     FenceBindDeviceItem: FenceBindDeviceItem,
     DeviceDataHistoryItem: DeviceDataHistoryItem,
@@ -10190,7 +10394,7 @@ module.exports = {
     ProjectEntryEx: ProjectEntryEx,
     DescribeBatchProductionResponse: DescribeBatchProductionResponse,
     ListTopicPolicyRequest: ListTopicPolicyRequest,
-    DescribeLoRaFrequencyRequest: DescribeLoRaFrequencyRequest,
+    BatchProductionInfo: BatchProductionInfo,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteLoRaFrequencyRequest: DeleteLoRaFrequencyRequest,
     ControlDeviceDataRequest: ControlDeviceDataRequest,
@@ -10225,7 +10429,7 @@ module.exports = {
     FirmwareInfo: FirmwareInfo,
     DisableTopicRuleResponse: DisableTopicRuleResponse,
     TopicRuleInfo: TopicRuleInfo,
-    GetCOSURLRequest: GetCOSURLRequest,
+    DescribeDeviceLocationSolveResponse: DescribeDeviceLocationSolveResponse,
     DescribeStudioProductResponse: DescribeStudioProductResponse,
     CreateFenceBindRequest: CreateFenceBindRequest,
     DescribeDeviceResponse: DescribeDeviceResponse,
@@ -10310,7 +10514,8 @@ module.exports = {
     AppDeviceInfo: AppDeviceInfo,
     BindProductsResponse: BindProductsResponse,
     ModifyProjectResponse: ModifyProjectResponse,
-    BatchProductionInfo: BatchProductionInfo,
+    GetCOSURLRequest: GetCOSURLRequest,
+    DescribeLoRaFrequencyRequest: DescribeLoRaFrequencyRequest,
     DescribeGatewayBindDevicesRequest: DescribeGatewayBindDevicesRequest,
     DescribeGatewaySubProductsRequest: DescribeGatewaySubProductsRequest,
     DeleteStudioProductRequest: DeleteStudioProductRequest,

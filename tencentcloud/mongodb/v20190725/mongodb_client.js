@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
+const DescribeAccountUsersRequest = models.DescribeAccountUsersRequest;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
 const KillOpsRequest = models.KillOpsRequest;
@@ -38,9 +39,11 @@ const DBInstanceInfo = models.DBInstanceInfo;
 const SetAccountUserPrivilegeResponse = models.SetAccountUserPrivilegeResponse;
 const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
 const Operation = models.Operation;
 const SpecItem = models.SpecItem;
 const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
+const CreateAccountUserResponse = models.CreateAccountUserResponse;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
 const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
@@ -55,41 +58,47 @@ const InstanceIntegerParam = models.InstanceIntegerParam;
 const ModifyNetworkAddress = models.ModifyNetworkAddress;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const CreateAccountUserRequest = models.CreateAccountUserRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
+const DescribeAccountUsersResponse = models.DescribeAccountUsersResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
+const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
+const UserInfo = models.UserInfo;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const NodeTag = models.NodeTag;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const SecurityGroup = models.SecurityGroup;
-const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const ReplicaSetInfo = models.ReplicaSetInfo;
 const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const ClientConnection = models.ClientConnection;
+const ReplicateSetInfo = models.ReplicateSetInfo;
 const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const SecurityGroupBound = models.SecurityGroupBound;
+const DescribeDBInstanceNodePropertyResponse = models.DescribeDBInstanceNodePropertyResponse;
 const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const ShardInfo = models.ShardInfo;
-const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
+const TerminateDBInstancesResponse = models.TerminateDBInstancesResponse;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const SetAccountUserPrivilegeRequest = models.SetAccountUserPrivilegeRequest;
+const NodeProperty = models.NodeProperty;
 const KillOpsResponse = models.KillOpsResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
-const BackupFile = models.BackupFile;
 const AssignProjectRequest = models.AssignProjectRequest;
 const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
 const SpecificationInfo = models.SpecificationInfo;
@@ -117,6 +126,28 @@ class MongodbClient extends AbstractClient {
         super("mongodb.tencentcloudapi.com", "2019-07-25", credential, region, profile);
     }
     
+    /**
+     * 本接口（TerminateDBInstances）可将包年包月实例退还隔离。
+     * @param {TerminateDBInstancesRequest} req
+     * @param {function(string, TerminateDBInstancesResponse):void} cb
+     * @public
+     */
+    TerminateDBInstances(req, cb) {
+        let resp = new TerminateDBInstancesResponse();
+        this.request("TerminateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于查询节点的属性，包括节点所在可用区、节点名称、地址、角色、状态、主从延迟、优先级、投票权、标签等属性。
+     * @param {DescribeDBInstanceNodePropertyRequest} req
+     * @param {function(string, DescribeDBInstanceNodePropertyResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceNodeProperty(req, cb) {
+        let resp = new DescribeDBInstanceNodePropertyResponse();
+        this.request("DescribeDBInstanceNodeProperty", req, resp, cb);
+    }
+
     /**
      * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
      * @param {DescribeDBInstanceDealRequest} req
@@ -173,7 +204,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 账户权限设置。
+     * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
      * @param {SetAccountUserPrivilegeRequest} req
      * @param {function(string, SetAccountUserPrivilegeResponse):void} cb
      * @public
@@ -217,19 +248,6 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 备份下载功能已调整，此接口即将下线
-
-本接口（DescribeBackupAccess）用于获取备份文件的下载授权，具体的备份文件信息可通过查询实例备份列表（DescribeDBBackups）接口获取
-     * @param {DescribeBackupAccessRequest} req
-     * @param {function(string, DescribeBackupAccessResponse):void} cb
-     * @public
-     */
-    DescribeBackupAccess(req, cb) {
-        let resp = new DescribeBackupAccessResponse();
-        this.request("DescribeBackupAccess", req, resp, cb);
-    }
-
-    /**
      * 本接口 (InquirePriceModifyDBInstanceSpec) 用于调整实例的配置询价。
      * @param {InquirePriceModifyDBInstanceSpecRequest} req
      * @param {function(string, InquirePriceModifyDBInstanceSpecResponse):void} cb
@@ -252,18 +270,18 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
-     * @param {ModifyDBInstanceNetworkAddressRequest} req
-     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * 本接口(CreateAccountUser)用于创建mongodb实例账号。
+     * @param {CreateAccountUserRequest} req
+     * @param {function(string, CreateAccountUserResponse):void} cb
      * @public
      */
-    ModifyDBInstanceNetworkAddress(req, cb) {
-        let resp = new ModifyDBInstanceNetworkAddressResponse();
-        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
+    CreateAccountUser(req, cb) {
+        let resp = new CreateAccountUserResponse();
+        this.request("CreateAccountUser", req, resp, cb);
     }
 
     /**
-     * 本接口(CreateDBInstanceHour)用于创建按量计费的MongoDB云数据库实例。
+     * 本接口（CreateDBInstanceHour）用于创建按量计费的MongoDB云数据库实例。
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
      * @public
@@ -340,6 +358,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     * @param {ModifyDBInstanceNetworkAddressRequest} req
+     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNetworkAddress(req, cb) {
+        let resp = new ModifyDBInstanceNetworkAddressResponse();
+        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateDBInstance)用于创建包年包月的MongoDB云数据库实例。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
      * @param {CreateDBInstanceRequest} req
      * @param {function(string, CreateDBInstanceResponse):void} cb
@@ -395,7 +424,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
+     * 本接口（InquirePriceCreateDBInstances）用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
      * @param {InquirePriceCreateDBInstancesRequest} req
      * @param {function(string, InquirePriceCreateDBInstancesResponse):void} cb
      * @public
@@ -415,6 +444,17 @@ class MongodbClient extends AbstractClient {
     AssignProject(req, cb) {
         let resp = new AssignProjectResponse();
         this.request("AssignProject", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号。
+     * @param {DescribeAccountUsersRequest} req
+     * @param {function(string, DescribeAccountUsersResponse):void} cb
+     * @public
+     */
+    DescribeAccountUsers(req, cb) {
+        let resp = new DescribeAccountUsersResponse();
+        this.request("DescribeAccountUsers", req, resp, cb);
     }
 
     /**

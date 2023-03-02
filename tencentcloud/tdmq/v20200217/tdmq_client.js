@@ -22,6 +22,7 @@ const CmqDeadLetterPolicy = models.CmqDeadLetterPolicy;
 const DescribeNamespaceBundlesOptRequest = models.DescribeNamespaceBundlesOptRequest;
 const RocketMQNamespace = models.RocketMQNamespace;
 const DescribeSubscriptionsRequest = models.DescribeSubscriptionsRequest;
+const InstanceNodeDistribution = models.InstanceNodeDistribution;
 const CreateRocketMQGroupRequest = models.CreateRocketMQGroupRequest;
 const ModifyEnvironmentAttributesRequest = models.ModifyEnvironmentAttributesRequest;
 const DeleteClusterResponse = models.DeleteClusterResponse;
@@ -34,10 +35,15 @@ const ResetRocketMQConsumerOffSetResponse = models.ResetRocketMQConsumerOffSetRe
 const DescribeBindClustersResponse = models.DescribeBindClustersResponse;
 const BindCluster = models.BindCluster;
 const ModifyClusterResponse = models.ModifyClusterResponse;
+const VpcConfig = models.VpcConfig;
 const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
+const RocketMQVipInstance = models.RocketMQVipInstance;
+const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
 const DescribeAllTenantsResponse = models.DescribeAllTenantsResponse;
+const DescribeRabbitMQNodeListRequest = models.DescribeRabbitMQNodeListRequest;
 const DescribeNamespaceBundlesOptResponse = models.DescribeNamespaceBundlesOptResponse;
+const RocketMQInstanceConfig = models.RocketMQInstanceConfig;
 const DescribeBindVpcsResponse = models.DescribeBindVpcsResponse;
 const RewindCmqQueueResponse = models.RewindCmqQueueResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
@@ -48,6 +54,7 @@ const CreateAMQPClusterRequest = models.CreateAMQPClusterRequest;
 const DeleteRocketMQGroupRequest = models.DeleteRocketMQGroupRequest;
 const RocketMQGroup = models.RocketMQGroup;
 const AMQPClusterRecentStats = models.AMQPClusterRecentStats;
+const DescribeRocketMQVipInstanceDetailRequest = models.DescribeRocketMQVipInstanceDetailRequest;
 const DeleteCmqTopicResponse = models.DeleteCmqTopicResponse;
 const ModifyAMQPVHostRequest = models.ModifyAMQPVHostRequest;
 const CreateSubscriptionRequest = models.CreateSubscriptionRequest;
@@ -91,7 +98,7 @@ const ModifyAMQPExchangeResponse = models.ModifyAMQPExchangeResponse;
 const DescribeAMQPExchangesResponse = models.DescribeAMQPExchangesResponse;
 const AcknowledgeMessageRequest = models.AcknowledgeMessageRequest;
 const DeleteAMQPClusterRequest = models.DeleteAMQPClusterRequest;
-const DescribeTopicsResponse = models.DescribeTopicsResponse;
+const DescribeRocketMQVipInstanceDetailResponse = models.DescribeRocketMQVipInstanceDetailResponse;
 const PublishCmqMsgResponse = models.PublishCmqMsgResponse;
 const DescribePublishersRequest = models.DescribePublishersRequest;
 const CreateRocketMQClusterRequest = models.CreateRocketMQClusterRequest;
@@ -107,12 +114,14 @@ const DeleteCmqQueueResponse = models.DeleteCmqQueueResponse;
 const DescribeRocketMQClusterRequest = models.DescribeRocketMQClusterRequest;
 const DeleteRocketMQTopicResponse = models.DeleteRocketMQTopicResponse;
 const ModifyCmqTopicAttributeRequest = models.ModifyCmqTopicAttributeRequest;
+const DescribeRabbitMQVipInstancesResponse = models.DescribeRabbitMQVipInstancesResponse;
 const DeleteRolesRequest = models.DeleteRolesRequest;
 const ModifyRocketMQTopicResponse = models.ModifyRocketMQTopicResponse;
 const CreateCmqSubscribeResponse = models.CreateCmqSubscribeResponse;
 const DescribeCmqDeadLetterSourceQueuesRequest = models.DescribeCmqDeadLetterSourceQueuesRequest;
 const DescribeSubscriptionsResponse = models.DescribeSubscriptionsResponse;
 const ModifyRoleRequest = models.ModifyRoleRequest;
+const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
 const SendMessagesResponse = models.SendMessagesResponse;
 const ReceiveMessageRequest = models.ReceiveMessageRequest;
 const CreateTopicRequest = models.CreateTopicRequest;
@@ -170,6 +179,7 @@ const AMQPClusterInfo = models.AMQPClusterInfo;
 const DescribeAMQPRouteRelationsResponse = models.DescribeAMQPRouteRelationsResponse;
 const DeleteTopicsResponse = models.DeleteTopicsResponse;
 const CreateAMQPClusterResponse = models.CreateAMQPClusterResponse;
+const DescribeRocketMQVipInstancesRequest = models.DescribeRocketMQVipInstancesRequest;
 const DeleteAMQPExchangeRequest = models.DeleteAMQPExchangeRequest;
 const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
 const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
@@ -224,12 +234,14 @@ const ModifyEnvironmentRoleResponse = models.ModifyEnvironmentRoleResponse;
 const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
 const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
 const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
+const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
+const Sort = models.Sort;
 const CreateRoleRequest = models.CreateRoleRequest;
 const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
 const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
 const Role = models.Role;
 const ModifyAMQPClusterResponse = models.ModifyAMQPClusterResponse;
-const Sort = models.Sort;
+const DescribeTopicsResponse = models.DescribeTopicsResponse;
 const AMQPClusterConfig = models.AMQPClusterConfig;
 const DescribeAMQPExchangesRequest = models.DescribeAMQPExchangesRequest;
 const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
@@ -242,12 +254,15 @@ const DescribeNodeHealthOptResponse = models.DescribeNodeHealthOptResponse;
 const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
 const CreateAMQPRouteRelationRequest = models.CreateAMQPRouteRelationRequest;
+const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
 const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
 const SendCmqMsgRequest = models.SendCmqMsgRequest;
 const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
+const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
+const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;
 const AMQPClusterDetail = models.AMQPClusterDetail;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const SendMessagesRequest = models.SendMessagesRequest;
@@ -385,6 +400,17 @@ class TdmqClient extends AbstractClient {
     DeleteRocketMQGroup(req, cb) {
         let resp = new DeleteRocketMQGroupResponse();
         this.request("DeleteRocketMQGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询用户已购的RabbitMQ专享实例列表
+     * @param {DescribeRabbitMQVipInstancesRequest} req
+     * @param {function(string, DescribeRabbitMQVipInstancesResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQVipInstances(req, cb) {
+        let resp = new DescribeRabbitMQVipInstancesResponse();
+        this.request("DescribeRabbitMQVipInstances", req, resp, cb);
     }
 
     /**
@@ -740,6 +766,17 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
+     * 获取单个RocketMQ专享集群信息
+     * @param {DescribeRocketMQVipInstanceDetailRequest} req
+     * @param {function(string, DescribeRocketMQVipInstanceDetailResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQVipInstanceDetail(req, cb) {
+        let resp = new DescribeRocketMQVipInstanceDetailResponse();
+        this.request("DescribeRocketMQVipInstanceDetail", req, resp, cb);
+    }
+
+    /**
      * 删除Amqp队列
      * @param {DeleteAMQPQueueRequest} req
      * @param {function(string, DeleteAMQPQueueResponse):void} cb
@@ -751,14 +788,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * 更新RocketMQ集群信息
-     * @param {ModifyRocketMQClusterRequest} req
-     * @param {function(string, ModifyRocketMQClusterResponse):void} cb
+     * 删除Vhost
+     * @param {DeleteAMQPVHostRequest} req
+     * @param {function(string, DeleteAMQPVHostResponse):void} cb
      * @public
      */
-    ModifyRocketMQCluster(req, cb) {
-        let resp = new ModifyRocketMQClusterResponse();
-        this.request("ModifyRocketMQCluster", req, resp, cb);
+    DeleteAMQPVHost(req, cb) {
+        let resp = new DeleteAMQPVHostResponse();
+        this.request("DeleteAMQPVHost", req, resp, cb);
     }
 
     /**
@@ -839,6 +876,17 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
+     * RabbitMQ专享版查询节点列表
+     * @param {DescribeRabbitMQNodeListRequest} req
+     * @param {function(string, DescribeRabbitMQNodeListResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQNodeList(req, cb) {
+        let resp = new DescribeRabbitMQNodeListResponse();
+        this.request("DescribeRabbitMQNodeList", req, resp, cb);
+    }
+
+    /**
      * 获取租户VPC绑定关系
      * @param {DescribeBindVpcsRequest} req
      * @param {function(string, DescribeBindVpcsResponse):void} cb
@@ -902,6 +950,17 @@ class TdmqClient extends AbstractClient {
     DescribeAMQPRouteRelations(req, cb) {
         let resp = new DescribeAMQPRouteRelationsResponse();
         this.request("DescribeAMQPRouteRelations", req, resp, cb);
+    }
+
+    /**
+     * 查询用户已购的RocketMQ专享实例列表
+     * @param {DescribeRocketMQVipInstancesRequest} req
+     * @param {function(string, DescribeRocketMQVipInstancesResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQVipInstances(req, cb) {
+        let resp = new DescribeRocketMQVipInstancesResponse();
+        this.request("DescribeRocketMQVipInstances", req, resp, cb);
     }
 
     /**
@@ -971,14 +1030,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * 删除Vhost
-     * @param {DeleteAMQPVHostRequest} req
-     * @param {function(string, DeleteAMQPVHostResponse):void} cb
+     * 更新RocketMQ集群信息
+     * @param {ModifyRocketMQClusterRequest} req
+     * @param {function(string, ModifyRocketMQClusterResponse):void} cb
      * @public
      */
-    DeleteAMQPVHost(req, cb) {
-        let resp = new DeleteAMQPVHostResponse();
-        this.request("DeleteAMQPVHost", req, resp, cb);
+    ModifyRocketMQCluster(req, cb) {
+        let resp = new ModifyRocketMQClusterResponse();
+        this.request("ModifyRocketMQCluster", req, resp, cb);
     }
 
     /**
@@ -1004,7 +1063,27 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * 接收发送到指定 topic 中的消息
+     * 当前 ReceiveMessage 接口只支持 Partitioned 类型的 Topic。该接口用于接收发送到指定 Partitioned Topic 中的消息，当 Partitioned Topic 中没有消息但还去尝试调用该接口时，会抛出 ReceiveTimeout 的异常。
+
+如何使用 BatchReceivePolicy：
+
+BatchReceive 接口提供了如下三个参数：
+
+● MaxNumMessages: 即每次使用 BatchReceive 的时候，最多一次Receive接口返回多少条消息。
+● MaxNumBytes：即每次使用 BatchReceive 的时候，最多一次Receive接口返回多大内容的消息，单位是：bytes。
+● Timeout：即每次使用 BatchReceive 的时候，最多一次 Receive 接口的超时时间是多久，单位是：MS。
+
+默认如果上述三个参数都不指定，即关闭 BatchReceive 的特性。如果三个参数中的任意一个参数指定的数值大于 0，即开启 BatchReceive。BatchReceive 的结束条件为到达上述三个参数中任意一个指定的阈值。
+
+注意：MaxNumMessages 和 MaxNumBytes 每一次接收的最大消息同时受限于 ReceiveQueueSize 的大小，如果 ReceiveQueueSize 的大小设置为 5，MaxNumMessages 设置为10，那么一次 BatchReceive 接收的最多的消息是 5条，而不是10条。
+
+
+
+BatchReceivePolicy 的接口会一次性返回多条消息：
+
+1. 多条消息的内容之间使用特殊字符 '###' 来进行分割，业务侧接收到消息之后，可以利用不同语言提供的 Split 工具分割不同的消息。
+2. 多条消息的 MessageID 之间使用特殊字符 '###' 来进行分割，业务侧接收到消息之后，可以利用不同语言提供的 Split 工具分割不同的消息。（用于在调用 AcknowledgeMessage 接口中填入所需要的 MessageID 字段信息）
+
      * @param {ReceiveMessageRequest} req
      * @param {function(string, ReceiveMessageResponse):void} cb
      * @public

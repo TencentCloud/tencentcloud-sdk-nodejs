@@ -246,7 +246,7 @@ class CreateAsyncRecognitionTaskRequest extends  AbstractModel {
         this.EngineType = null;
 
         /**
-         * 语音流地址，支持rtmp、hls、rtsp等流媒体协议，以及各类基于http协议的直播流
+         * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8)
          * @type {string || null}
          */
         this.Url = null;
@@ -441,7 +441,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         super();
 
         /**
-         * 腾讯云项目 ID，可填 0，总长度不超过 1024 字节。
+         * 腾讯云项目 ID，废弃参数，填写0即可。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -463,7 +463,8 @@ class SentenceRecognitionRequest extends  AbstractModel {
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
 • 16k_zh_medical：16k 医疗；
-• 16k_zh_dialect：多方言。
+• 16k_zh-PY 中英粤;
+• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
          * @type {string || null}
          */
         this.EngSerViceType = null;
@@ -481,13 +482,13 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.VoiceFormat = null;
 
         /**
-         * 用户端对此任务的唯一标识，用户自助生成，用于用户查找识别结果。
+         * 废弃参数，填写任意字符串即可。
          * @type {string || null}
          */
         this.UsrAudioKey = null;
 
         /**
-         * 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时长不能超过60s，音频文件大小不能超过3MB。
+         * 语音的URL地址，需要公网环境浏览器可下载。当 SourceType 值为 0时须填写该字段，为 1 时不填。音频时长不能超过60s，音频文件大小不能超过3MB。
          * @type {string || null}
          */
         this.Url = null;
@@ -505,10 +506,10 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.DataLen = null;
 
         /**
-         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-         * @type {string || null}
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认值为 0。
+         * @type {number || null}
          */
-        this.HotwordId = null;
+        this.WordInfo = null;
 
         /**
          * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
@@ -535,10 +536,22 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.ConvertNumMode = null;
 
         /**
-         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认值为 0。
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
+        /**
+         * 自学习模型 id。如设置了该参数，将生效对应的自学习模型。
+         * @type {string || null}
+         */
+        this.CustomizationId = null;
+
+        /**
+         * 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”、“蜜汁”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。
          * @type {number || null}
          */
-        this.WordInfo = null;
+        this.ReinforceHotword = null;
 
     }
 
@@ -558,12 +571,14 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
-        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
         this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
-        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.CustomizationId = 'CustomizationId' in params ? params.CustomizationId : null;
+        this.ReinforceHotword = 'ReinforceHotword' in params ? params.ReinforceHotword : null;
 
     }
 }
@@ -909,7 +924,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 引擎模型类型。
+         * 引擎模型类型。注意：非电话场景请务必使用16k的引擎。
 电话场景：
 • 8k_en：电话 8k 英语；
 • 8k_zh：电话 8k 中文普通话通用；
@@ -923,8 +938,8 @@ class CreateRecTaskRequest extends  AbstractModel {
 • 16k_en_edu 英文教育；
 • 16k_zh_medical  医疗；
 • 16k_th 泰语；
-• 16k_wuu-SH：16k 上海话方言；
-• 16k_zh_dialect：多方言。
+• 16k_zh-PY 中英粤;
+• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
          * @type {string || null}
          */
         this.EngineModelType = null;
@@ -936,7 +951,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.ChannelNum = null;
 
         /**
-         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）
+         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）；3: 标点符号分段，包含每段时间戳，特别适用于字幕场景（包含词级时间、标点、语速值）。
          * @type {number || null}
          */
         this.ResTextFormat = null;
@@ -968,7 +983,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.CallbackUrl = null;
 
         /**
-         * 语音的URL地址，需要公网可下载。长度小于2048字节，当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在5个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
+         * 语音的URL地址，需要公网环境浏览器可下载。当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在5个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
          * @type {string || null}
          */
         this.Url = null;
@@ -998,13 +1013,13 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.FilterDirty = null;
 
         /**
-         * 热词表id。如不设置该参数，自动生效默认热词表；如果设置了该参数，那么将生效对应的热词表。
+         * 热词表id。如不设置该参数，自动生效默认热词表；如设置了该参数，那么将生效对应的热词表。
          * @type {string || null}
          */
         this.HotwordId = null;
 
         /**
-         * 自学习模型 id。如不设置该参数，自动生效最后一次上线的自学习模型；如果设置了该参数，那么将生效对应的自学习模型。
+         * 自学习模型 id。如设置了该参数，将生效对应的自学习模型。
          * @type {string || null}
          */
         this.CustomizationId = null;
@@ -1026,6 +1041,31 @@ class CreateRecTaskRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.FilterModal = null;
+
+        /**
+         * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。0:不开启，1:开启
+         * @type {number || null}
+         */
+        this.EmotionalEnergy = null;
+
+        /**
+         * 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。
+         * @type {number || null}
+         */
+        this.ReinforceHotword = null;
+
+        /**
+         * 单标点最多字数，取值范围：[6，40]。默认为0，不开启该功能。该参数可用于字幕生成场景，控制单行字幕最大字数（设置ResTextFormat为3，解析返回的ResultDetail列表，通过结构中FinalSentence获取单个标点断句结果）。
+         * @type {number || null}
+         */
+        this.SentenceMaxLength = null;
+
+        /**
+         * 情绪识别能力(目前支持16k_zh) 默认为0，不开启。 1：开启情绪识别但是不会在文本展示“情绪标签”， 2：开启情绪识别并且在文本展示“情绪标签”。（该功能需要设置ResTextFormat 大于0）
+注意：本功能为增值服务，购买对应套餐包后，将参数设置为1或2时方可按对应方式生效，并消耗套餐包对应资源。参数设置为0时无需购买套餐包，也不会消耗对应资源。
+         * @type {number || null}
+         */
+        this.EmotionRecognition = null;
 
     }
 
@@ -1053,6 +1093,10 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.EmotionalEnergy = 'EmotionalEnergy' in params ? params.EmotionalEnergy : null;
+        this.ReinforceHotword = 'ReinforceHotword' in params ? params.ReinforceHotword : null;
+        this.SentenceMaxLength = 'SentenceMaxLength' in params ? params.SentenceMaxLength : null;
+        this.EmotionRecognition = 'EmotionRecognition' in params ? params.EmotionRecognition : null;
 
     }
 }
@@ -1890,6 +1934,27 @@ class SentenceDetail extends  AbstractModel {
          */
         this.SpeakerId = null;
 
+        /**
+         * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EmotionalEnergy = null;
+
+        /**
+         * 本句与上一句之间的静音时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SilenceTime = null;
+
+        /**
+         * 情绪类型（可能为空）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.EmotionType = null;
+
     }
 
     /**
@@ -1915,6 +1980,9 @@ class SentenceDetail extends  AbstractModel {
         }
         this.SpeechSpeed = 'SpeechSpeed' in params ? params.SpeechSpeed : null;
         this.SpeakerId = 'SpeakerId' in params ? params.SpeakerId : null;
+        this.EmotionalEnergy = 'EmotionalEnergy' in params ? params.EmotionalEnergy : null;
+        this.SilenceTime = 'SilenceTime' in params ? params.SilenceTime : null;
+        this.EmotionType = 'EmotionType' in params ? params.EmotionType : null;
 
     }
 }

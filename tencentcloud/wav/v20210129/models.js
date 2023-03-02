@@ -3408,6 +3408,13 @@ class ClueInfoDetail extends  AbstractModel {
          */
         this.TagList = null;
 
+        /**
+         * 客户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
     }
 
     /**
@@ -3431,6 +3438,7 @@ class ClueInfoDetail extends  AbstractModel {
         this.SalesPhone = 'SalesPhone' in params ? params.SalesPhone : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.TagList = 'TagList' in params ? params.TagList : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
 
     }
 }

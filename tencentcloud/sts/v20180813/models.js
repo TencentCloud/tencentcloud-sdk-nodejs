@@ -177,19 +177,19 @@ class AssumeRoleWithWebIdentityResponse extends  AbstractModel {
         super();
 
         /**
-         * 临时秘钥过期时间(时间戳)
+         * 临时密钥过期时间(时间戳)
          * @type {number || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * 临时秘钥过期时间
+         * 临时密钥过期时间
          * @type {string || null}
          */
         this.Expiration = null;
 
         /**
-         * 临时秘钥
+         * 临时密钥
          * @type {Credentials || null}
          */
         this.Credentials = null;
@@ -647,6 +647,12 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
          */
         this.Tags = null;
 
+        /**
+         * 调用者身份uin
+         * @type {string || null}
+         */
+        this.SourceIdentity = null;
+
     }
 
     /**
@@ -670,6 +676,7 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
                 this.Tags.push(obj);
             }
         }
+        this.SourceIdentity = 'SourceIdentity' in params ? params.SourceIdentity : null;
 
     }
 }

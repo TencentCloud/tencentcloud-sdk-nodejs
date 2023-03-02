@@ -388,7 +388,7 @@ class CreateSecretRequest extends  AbstractModel {
         super();
 
         /**
-         * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。
+         * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。一旦创建不可修改。
          * @type {string || null}
          */
         this.SecretName = null;
@@ -1481,6 +1481,12 @@ class CreateSSHKeyPairSecretRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 用户自定义输入的SSH密钥对的名称，可由数字，字母和下划线组成，只能以数字和字母开头，长度不超过25个字符。
+         * @type {string || null}
+         */
+        this.SSHKeyName = null;
+
     }
 
     /**
@@ -1503,6 +1509,7 @@ class CreateSSHKeyPairSecretRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.SSHKeyName = 'SSHKeyName' in params ? params.SSHKeyName : null;
 
     }
 }

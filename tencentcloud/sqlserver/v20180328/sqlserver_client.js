@@ -27,32 +27,39 @@ const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
 const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
+const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceFileRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const QueryMigrationCheckProcessRequest = models.QueryMigrationCheckProcessRequest;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
 const DatabaseTuple = models.DatabaseTuple;
 const RegionInfo = models.RegionInfo;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
+const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceFileRequest;
 const DeletePublishSubscribeRequest = models.DeletePublishSubscribeRequest;
 const ModifyMaintenanceSpanRequest = models.ModifyMaintenanceSpanRequest;
+const CreateBusinessDBInstancesResponse = models.CreateBusinessDBInstancesResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DatabaseTupleStatus = models.DatabaseTupleStatus;
 const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
 const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
+const SlaveZones = models.SlaveZones;
 const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const MigrateDetail = models.MigrateDetail;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
 const RunMigrationRequest = models.RunMigrationRequest;
-const RunMigrationResponse = models.RunMigrationResponse;
+const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
+const CreateBusinessIntelligenceFileResponse = models.CreateBusinessIntelligenceFileResponse;
+const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const ModifyPublishSubscribeNameResponse = models.ModifyPublishSubscribeNameResponse;
-const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
 const ParamRecord = models.ParamRecord;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationRequest;
 const DBRemark = models.DBRemark;
+const CloseInterCommunicationRequest = models.CloseInterCommunicationRequest;
 const MigrateDB = models.MigrateDB;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
 const DescribeReadOnlyGroupListResponse = models.DescribeReadOnlyGroupListResponse;
@@ -63,20 +70,22 @@ const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeIncrementalMigrationRequest = models.DescribeIncrementalMigrationRequest;
 const DescribeReadOnlyGroupByReadOnlyInstanceResponse = models.DescribeReadOnlyGroupByReadOnlyInstanceResponse;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligenceFileResponse;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const StepDetail = models.StepDetail;
 const ParameterDetail = models.ParameterDetail;
-const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
+const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
 const ZoneInfo = models.ZoneInfo;
+const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const RenewPostpaidDBInstanceRequest = models.RenewPostpaidDBInstanceRequest;
-const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
+const CrossRegionStatus = models.CrossRegionStatus;
 const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
 const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
+const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
 const CompleteMigrationResponse = models.CompleteMigrationResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const StartMigrationCheckResponse = models.StartMigrationCheckResponse;
@@ -84,6 +93,7 @@ const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
 const CompleteMigrationRequest = models.CompleteMigrationRequest;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const RemoveBackupsRequest = models.RemoveBackupsRequest;
@@ -94,14 +104,14 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const SlowlogInfo = models.SlowlogInfo;
+const MigrationStep = models.MigrationStep;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
 const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
-const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
+const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DescribeCrossRegionZoneResponse = models.DescribeCrossRegionZoneResponse;
 const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagResponse;
@@ -116,15 +126,18 @@ const QueryMigrationCheckProcessResponse = models.QueryMigrationCheckProcessResp
 const CreateReadOnlyDBInstancesRequest = models.CreateReadOnlyDBInstancesRequest;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
+const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
 const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const DescribeDBsRequest = models.DescribeDBsRequest;
+const DescribeMigrationDatabasesRequest = models.DescribeMigrationDatabasesRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
+const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
 const AccountPrivilege = models.AccountPrivilege;
@@ -149,6 +162,7 @@ const ReadOnlyInstance = models.ReadOnlyInstance;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
 const ReadOnlyInstanceWeightPair = models.ReadOnlyInstanceWeightPair;
+const DescribeBusinessIntelligenceFileRequest = models.DescribeBusinessIntelligenceFileRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
@@ -162,19 +176,21 @@ const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
-const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
+const InterInstanceFlow = models.InterInstanceFlow;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
 const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const AccountDetail = models.AccountDetail;
 const ModifyDatabaseMdfResponse = models.ModifyDatabaseMdfResponse;
 const CreateBackupResponse = models.CreateBackupResponse;
-const DBInstance = models.DBInstance;
+const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
 const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
+const DescribeDBInstanceInterRequest = models.DescribeDBInstanceInterRequest;
 const StartMigrationCheckRequest = models.StartMigrationCheckRequest;
+const InterInstance = models.InterInstance;
 const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
@@ -188,11 +204,13 @@ const ModifyDatabaseCDCResponse = models.ModifyDatabaseCDCResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CreateIncrementalMigrationResponse = models.CreateIncrementalMigrationResponse;
 const MigrationAction = models.MigrationAction;
+const RunMigrationResponse = models.RunMigrationResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
-const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
+const DBInstance = models.DBInstance;
 const AccountCreateInfo = models.AccountCreateInfo;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DBPrivilege = models.DBPrivilege;
+const FileAction = models.FileAction;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeReadOnlyGroupDetailsResponse = models.DescribeReadOnlyGroupDetailsResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
@@ -214,19 +232,21 @@ const DeletePublishSubscribeResponse = models.DeletePublishSubscribeResponse;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const CloneDBRequest = models.CloneDBRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
-const DescribeMigrationDatabasesRequest = models.DescribeMigrationDatabasesRequest;
+const CrossBackupAddr = models.CrossBackupAddr;
 const Parameter = models.Parameter;
 const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const RenewPostpaidDBInstanceResponse = models.RenewPostpaidDBInstanceResponse;
 const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
-const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
 const CreateDBResponse = models.CreateDBResponse;
+const CloseInterCommunicationResponse = models.CloseInterCommunicationResponse;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
-const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
+const CreateBusinessDBInstancesRequest = models.CreateBusinessDBInstancesRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeSlowlogsResponse = models.DescribeSlowlogsResponse;
 const DBDetail = models.DBDetail;
@@ -239,16 +259,18 @@ const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const StopMigrationResponse = models.StopMigrationResponse;
-const MigrationStep = models.MigrationStep;
+const DBRenameRes = models.DBRenameRes;
 const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
 const DescribeUploadBackupInfoRequest = models.DescribeUploadBackupInfoRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DeleteDBInstanceResponse = models.DeleteDBInstanceResponse;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
 const DescribePublishSubscribeResponse = models.DescribePublishSubscribeResponse;
 const DescribeReadOnlyGroupListRequest = models.DescribeReadOnlyGroupListRequest;
+const SlowlogInfo = models.SlowlogInfo;
 const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
 const MigrateTarget = models.MigrateTarget;
@@ -567,6 +589,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例。
+     * @param {CreateBusinessDBInstancesRequest} req
+     * @param {function(string, CreateBusinessDBInstancesResponse):void} cb
+     * @public
+     */
+    CreateBusinessDBInstances(req, cb) {
+        let resp = new CreateBusinessDBInstancesResponse();
+        this.request("CreateBusinessDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyDBName）用于更新数据库名。
      * @param {ModifyDBNameRequest} req
      * @param {function(string, ModifyDBNameResponse):void} cb
@@ -688,6 +721,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（RunMigration）用于启动迁移任务，开始迁移
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
@@ -795,6 +839,17 @@ class SqlserverClient extends AbstractClient {
     DescribeInstanceParamRecords(req, cb) {
         let resp = new DescribeInstanceParamRecordsResponse();
         this.request("DescribeInstanceParamRecords", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateBusinessIntelligenceFile）用于添加商业智能服务文件。
+     * @param {CreateBusinessIntelligenceFileRequest} req
+     * @param {function(string, CreateBusinessIntelligenceFileResponse):void} cb
+     * @public
+     */
+    CreateBusinessIntelligenceFile(req, cb) {
+        let resp = new CreateBusinessIntelligenceFileResponse();
+        this.request("CreateBusinessIntelligenceFile", req, resp, cb);
     }
 
     /**
@@ -932,6 +987,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DeleteBusinessIntelligenceFile）用于删除商业智能文件。
+     * @param {DeleteBusinessIntelligenceFileRequest} req
+     * @param {function(string, DeleteBusinessIntelligenceFileResponse):void} cb
+     * @public
+     */
+    DeleteBusinessIntelligenceFile(req, cb) {
+        let resp = new DeleteBusinessIntelligenceFileResponse();
+        this.request("DeleteBusinessIntelligenceFile", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateBackupMigration）用于创建备份导入任务。
      * @param {CreateBackupMigrationRequest} req
      * @param {function(string, CreateBackupMigrationResponse):void} cb
@@ -954,6 +1020,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeBusinessIntelligenceFile）用于查询商业智能服务需要的文件。
+     * @param {DescribeBusinessIntelligenceFileRequest} req
+     * @param {function(string, DescribeBusinessIntelligenceFileResponse):void} cb
+     * @public
+     */
+    DescribeBusinessIntelligenceFile(req, cb) {
+        let resp = new DescribeBusinessIntelligenceFileResponse();
+        this.request("DescribeBusinessIntelligenceFile", req, resp, cb);
+    }
+
+    /**
      * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
      * @param {AssociateSecurityGroupsRequest} req
      * @param {function(string, AssociateSecurityGroupsResponse):void} cb
@@ -962,6 +1039,17 @@ class SqlserverClient extends AbstractClient {
     AssociateSecurityGroups(req, cb) {
         let resp = new AssociateSecurityGroupsResponse();
         this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口（OpenInterCommunication）用于打开实例的互通，实例互通可以实现商业智能服务相互联通。
+     * @param {OpenInterCommunicationRequest} req
+     * @param {function(string, OpenInterCommunicationResponse):void} cb
+     * @public
+     */
+    OpenInterCommunication(req, cb) {
+        let resp = new OpenInterCommunicationResponse();
+        this.request("OpenInterCommunication", req, resp, cb);
     }
 
     /**
@@ -1053,14 +1141,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RunMigration）用于启动迁移任务，开始迁移
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * 本接口（DescribeDBInstanceInter）用于查询互通实例的信息。
+     * @param {DescribeDBInstanceInterRequest} req
+     * @param {function(string, DescribeDBInstanceInterResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    DescribeDBInstanceInter(req, cb) {
+        let resp = new DescribeDBInstanceInterResponse();
+        this.request("DescribeDBInstanceInter", req, resp, cb);
     }
 
     /**
@@ -1072,6 +1160,17 @@ class SqlserverClient extends AbstractClient {
     CreateReadOnlyDBInstances(req, cb) {
         let resp = new CreateReadOnlyDBInstancesResponse();
         this.request("CreateReadOnlyDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CloseInterCommunication）用于关闭实例互通。
+     * @param {CloseInterCommunicationRequest} req
+     * @param {function(string, CloseInterCommunicationResponse):void} cb
+     * @public
+     */
+    CloseInterCommunication(req, cb) {
+        let resp = new CloseInterCommunicationResponse();
+        this.request("CloseInterCommunication", req, resp, cb);
     }
 
     /**

@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const PublishMessageRequest = models.PublishMessageRequest;
 const UpdateDevicesEnableStateResponse = models.UpdateDevicesEnableStateResponse;
 const DescribeProductCAResponse = models.DescribeProductCAResponse;
+const DeleteDeviceShadowResponse = models.DeleteDeviceShadowResponse;
 const UpdateProductPrivateCARequest = models.UpdateProductPrivateCARequest;
 const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const DescribeDeviceResourcesRequest = models.DescribeDeviceResourcesRequest;
@@ -31,6 +32,7 @@ const TopicRulePayload = models.TopicRulePayload;
 const PayloadLogItem = models.PayloadLogItem;
 const BindProductInfo = models.BindProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const DeleteDeviceShadowRequest = models.DeleteDeviceShadowRequest;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const DescribeProductCARequest = models.DescribeProductCARequest;
 const DeviceLabel = models.DeviceLabel;
@@ -600,6 +602,17 @@ class IotcloudClient extends AbstractClient {
     EditFirmware(req, cb) {
         let resp = new EditFirmwareResponse();
         this.request("EditFirmware", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteDeviceShadow）用于删除设备影子 
+     * @param {DeleteDeviceShadowRequest} req
+     * @param {function(string, DeleteDeviceShadowResponse):void} cb
+     * @public
+     */
+    DeleteDeviceShadow(req, cb) {
+        let resp = new DeleteDeviceShadowResponse();
+        this.request("DeleteDeviceShadow", req, resp, cb);
     }
 
     /**

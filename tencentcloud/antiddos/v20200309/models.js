@@ -376,6 +376,12 @@ pcre(正则表达式)
          */
         this.Id = null;
 
+        /**
+         * 大于报文长度，取值1+
+         * @type {number || null}
+         */
+        this.PktLenGT = null;
+
     }
 
     /**
@@ -407,6 +413,7 @@ pcre(正则表达式)
         this.Offset2 = 'Offset2' in params ? params.Offset2 : null;
         this.IsNot2 = 'IsNot2' in params ? params.IsNot2 : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.PktLenGT = 'PktLenGT' in params ? params.PktLenGT : null;
 
     }
 }
@@ -1301,10 +1308,46 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterInstanceIdList = null;
 
         /**
-         * 企业版搜索
+         * 企业版搜索,  1：包含重保护航套餐下的企业版列表, 2: 不包含重保护航套餐的企业版列表
          * @type {number || null}
          */
         this.FilterEnterpriseFlag = null;
+
+        /**
+         * 轻量版搜索
+         * @type {number || null}
+         */
+        this.FilterLightFlag = null;
+
+        /**
+         * 定制版搜索
+         * @type {number || null}
+         */
+        this.FilterChannelFlag = null;
+
+        /**
+         * 标签搜索
+         * @type {TagFilter || null}
+         */
+        this.FilterTag = null;
+
+        /**
+         * 试用资源搜索，1: 应急防护资源；2：PLG试用资源
+         * @type {number || null}
+         */
+        this.FilterTrialFlag = null;
+
+        /**
+         * 重保护航搜索
+         * @type {number || null}
+         */
+        this.FilterConvoy = null;
+
+        /**
+         * 默认false；接口传true，返回数据中不包含高级信息，高级信息包含：InstanceList[0].Usage。
+         * @type {boolean || null}
+         */
+        this.ExcludeAdvancedInfo = null;
 
     }
 
@@ -1326,6 +1369,17 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterBoundStatus = 'FilterBoundStatus' in params ? params.FilterBoundStatus : null;
         this.FilterInstanceIdList = 'FilterInstanceIdList' in params ? params.FilterInstanceIdList : null;
         this.FilterEnterpriseFlag = 'FilterEnterpriseFlag' in params ? params.FilterEnterpriseFlag : null;
+        this.FilterLightFlag = 'FilterLightFlag' in params ? params.FilterLightFlag : null;
+        this.FilterChannelFlag = 'FilterChannelFlag' in params ? params.FilterChannelFlag : null;
+
+        if (params.FilterTag) {
+            let obj = new TagFilter();
+            obj.deserialize(params.FilterTag)
+            this.FilterTag = obj;
+        }
+        this.FilterTrialFlag = 'FilterTrialFlag' in params ? params.FilterTrialFlag : null;
+        this.FilterConvoy = 'FilterConvoy' in params ? params.FilterConvoy : null;
+        this.ExcludeAdvancedInfo = 'ExcludeAdvancedInfo' in params ? params.ExcludeAdvancedInfo : null;
 
     }
 }
@@ -1920,6 +1974,46 @@ class DescribeDefaultAlarmThresholdResponse extends  AbstractModel {
 }
 
 /**
+ * CreateNewL7Rules返回参数结构体
+ * @class
+ */
+class CreateNewL7RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDDoSAI请求参数结构体
  * @class
  */
@@ -2202,6 +2296,139 @@ class DescribeDDoSConnectLimitListResponse extends  AbstractModel {
 }
 
 /**
+ * L7规则健康检查参数
+ * @class
+ */
+class L7RuleHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置状态，0： 正常，1：配置中，2：配置失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * =1表示开启；=0表示关闭
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 检查目录的URL，默认为/
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 检测间隔时间，单位秒
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 健康阈值，单位次
+         * @type {number || null}
+         */
+        this.AliveNum = null;
+
+        /**
+         * 不健康阈值，单位次
+         * @type {number || null}
+         */
+        this.KickNum = null;
+
+        /**
+         * HTTP请求方式，取值[HEAD,GET]
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 健康检查判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 是否同时下发http和https规则健康检查配置
+         * @type {number || null}
+         */
+        this.ProtocolFlag = null;
+
+        /**
+         * 被动探测开关，=1表示开启；=0表示关闭
+         * @type {number || null}
+         */
+        this.PassiveEnable = null;
+
+        /**
+         * 被动探测不健康屏蔽时间
+         * @type {number || null}
+         */
+        this.BlockInter = null;
+
+        /**
+         * 被动探测不健康统计间隔
+         * @type {number || null}
+         */
+        this.FailedCountInter = null;
+
+        /**
+         * 被动探测不健康阈值
+         * @type {number || null}
+         */
+        this.FailedThreshold = null;
+
+        /**
+         * 被动探测判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和
+         * @type {number || null}
+         */
+        this.PassiveStatusCode = null;
+
+        /**
+         * 被动探测配置状态，0： 正常，1：配置中，2：配置失败
+         * @type {number || null}
+         */
+        this.PassiveStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
+        this.KickNum = 'KickNum' in params ? params.KickNum : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.ProtocolFlag = 'ProtocolFlag' in params ? params.ProtocolFlag : null;
+        this.PassiveEnable = 'PassiveEnable' in params ? params.PassiveEnable : null;
+        this.BlockInter = 'BlockInter' in params ? params.BlockInter : null;
+        this.FailedCountInter = 'FailedCountInter' in params ? params.FailedCountInter : null;
+        this.FailedThreshold = 'FailedThreshold' in params ? params.FailedThreshold : null;
+        this.PassiveStatusCode = 'PassiveStatusCode' in params ? params.PassiveStatusCode : null;
+        this.PassiveStatus = 'PassiveStatus' in params ? params.PassiveStatus : null;
+
+    }
+}
+
+/**
  * ModifyPacketFilterConfig返回参数结构体
  * @class
  */
@@ -2333,13 +2560,13 @@ class DescribeOverviewAttackTrendRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * 起始时间
+         * 防护概览攻击趋势开始时间
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 防护概览攻击趋势结束时间
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2437,7 +2664,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterDamDDoSStatus = null;
 
         /**
-         * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking
+         * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking，试用资源填trial
          * @type {string || null}
          */
         this.FilterStatus = null;
@@ -2453,6 +2680,24 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.FilterInstanceIdList = null;
+
+        /**
+         * 标签搜索
+         * @type {TagFilter || null}
+         */
+        this.FilterTag = null;
+
+        /**
+         * 按照套餐类型进行过滤
+         * @type {Array.<string> || null}
+         */
+        this.FilterPackType = null;
+
+        /**
+         * 重保护航搜索
+         * @type {number || null}
+         */
+        this.FilterConvoy = null;
 
     }
 
@@ -2476,6 +2721,79 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterStatus = 'FilterStatus' in params ? params.FilterStatus : null;
         this.FilterCname = 'FilterCname' in params ? params.FilterCname : null;
         this.FilterInstanceIdList = 'FilterInstanceIdList' in params ? params.FilterInstanceIdList : null;
+
+        if (params.FilterTag) {
+            let obj = new TagFilter();
+            obj.deserialize(params.FilterTag)
+            this.FilterTag = obj;
+        }
+        this.FilterPackType = 'FilterPackType' in params ? params.FilterPackType : null;
+        this.FilterConvoy = 'FilterConvoy' in params ? params.FilterConvoy : null;
+
+    }
+}
+
+/**
+ * DescribeNewL7Rules返回参数结构体
+ * @class
+ */
+class DescribeNewL7RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转发规则列表
+         * @type {Array.<NewL7RuleEntry> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * 健康检查配置列表
+         * @type {Array.<L7RuleHealth> || null}
+         */
+        this.Healths = null;
+
+        /**
+         * 总规则数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new NewL7RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+        if (params.Healths) {
+            this.Healths = new Array();
+            for (let z in params.Healths) {
+                let obj = new L7RuleHealth();
+                obj.deserialize(params.Healths[z]);
+                this.Healths.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2667,6 +2985,41 @@ class DescribeL7RulesBySSLCertIdRequest extends  AbstractModel {
 }
 
 /**
+ * 标签类型
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签键值列表
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeListPacketFilterConfig返回参数结构体
  * @class
  */
@@ -2710,34 +3063,6 @@ class DescribeListPacketFilterConfigResponse extends  AbstractModel {
                 obj.deserialize(params.ConfigList[z]);
                 this.ConfigList.push(obj);
             }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteBlackWhiteIpList返回参数结构体
- * @class
- */
-class DeleteBlackWhiteIpListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2853,7 +3178,7 @@ class BoundIpInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 产品分类下的子类型，绑定操作为必填项，解绑操作可不填。取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
+         * 产品分类下的子类型，绑定操作为必填项，解绑操作可不填。取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（弹性公网常规IP）]
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -3078,6 +3403,69 @@ class DisassociateDDoSEipAddressResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBgpBizTrend请求参数结构体
+ * @class
+ */
+class DescribeBgpBizTrendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgp-multip表示高防包）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 统计开始时间。 例：“2020-09-22 00:00:00”
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 统计结束时间。 例：“2020-09-22 00:00:00”
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 统计纬度，可取值intraffic, outtraffic, inpkg, outpkg
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 0表示固定时间，1表示自定义时间
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+
+    }
+}
+
+/**
  * DeleteCCThresholdPolicy返回参数结构体
  * @class
  */
@@ -3106,30 +3494,60 @@ class DeleteCCThresholdPolicyResponse extends  AbstractModel {
 }
 
 /**
- * DeleteBlackWhiteIpList请求参数结构体
+ * DescribeBizHttpStatus请求参数结构体
  * @class
  */
-class DeleteBlackWhiteIpListRequest extends  AbstractModel {
+class DescribeBizHttpStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源实例ID
+         * 统计方式，仅支持sum
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Statistics = null;
 
         /**
-         * IP列表
-         * @type {Array.<string> || null}
-         */
-        this.IpList = null;
-
-        /**
-         * IP类型，取值[black(黑名单IP), white(白名单IP)]
+         * 大禹子产品代号（bgpip表示高防IP）
          * @type {string || null}
          */
-        this.Type = null;
+        this.Business = null;
+
+        /**
+         * 统计周期，可取值60，300，1800，3600， 21600，86400，单位秒
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 统计开始时间。 如2020-02-01 12:04:12
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 统计结束时间。如2020-02-03 18:03:23
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 资源Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 特定域名查询
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtoInfo = null;
 
     }
 
@@ -3140,9 +3558,22 @@ class DeleteBlackWhiteIpListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IpList = 'IpList' in params ? params.IpList : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Statistics = 'Statistics' in params ? params.Statistics : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.ProtoInfo) {
+            this.ProtoInfo = new Array();
+            for (let z in params.ProtoInfo) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtoInfo[z]);
+                this.ProtoInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -3176,6 +3607,12 @@ class SourceServer extends  AbstractModel {
          */
         this.Weight = null;
 
+        /**
+         * 端口号：0~65535
+         * @type {number || null}
+         */
+        this.Port = null;
+
     }
 
     /**
@@ -3188,6 +3625,7 @@ class SourceServer extends  AbstractModel {
         this.RealServer = 'RealServer' in params ? params.RealServer : null;
         this.RsType = 'RsType' in params ? params.RsType : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -3566,6 +4004,12 @@ class BlackWhiteIpRelation extends  AbstractModel {
          */
         this.Mask = null;
 
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -3587,6 +4031,7 @@ class BlackWhiteIpRelation extends  AbstractModel {
             }
         }
         this.Mask = 'Mask' in params ? params.Mask : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -3713,6 +4158,83 @@ class ModifyCcBlackWhiteIpListResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNewL7Rules请求参数结构体
+ * @class
+ */
+class DescribeNewL7RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
+         * @type {Array.<number> || null}
+         */
+        this.StatusList = null;
+
+        /**
+         * 域名搜索，选填，当需要搜索域名请填写
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * IP搜索，选填，当需要搜索IP请填写
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 一页条数，填0表示不分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页起始偏移，取值为(页码-1)*一页条数
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 转发协议搜索，选填，取值[http, https, http/https]
+         * @type {Array.<string> || null}
+         */
+        this.ProtocolList = null;
+
+        /**
+         * 高防IP实例的Cname
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.StatusList = 'StatusList' in params ? params.StatusList : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ProtocolList = 'ProtocolList' in params ? params.ProtocolList : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
 
     }
 }
@@ -3906,7 +4428,7 @@ class ModifyDDoSBlackWhiteIpListRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 当前黑名单类型，取值black时黑名单；取值white时白名单
+         * 当前配置的黑白名单类型，取值black时表示黑名单；取值white时表示白名单
          * @type {string || null}
          */
         this.OldIpType = null;
@@ -4099,13 +4621,13 @@ class DescribeOverviewAttackTrendResponse extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 起始时间
+         * 防护概览攻击趋势起始时间
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 防护概览攻击趋势结束时间
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4155,6 +4677,97 @@ class DescribeOverviewAttackTrendResponse extends  AbstractModel {
 }
 
 /**
+ * 业务流量的http状态码聚合数据
+ * @class
+ */
+class HttpStatusMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * http2xx回源状态码
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp2xx = null;
+
+        /**
+         * http5xx状态码
+         * @type {Array.<number> || null}
+         */
+        this.Http5xx = null;
+
+        /**
+         * http5xx回源状态码
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp5xx = null;
+
+        /**
+         * http404回源状态码
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp404 = null;
+
+        /**
+         * http4xx状态码
+         * @type {Array.<number> || null}
+         */
+        this.Http4xx = null;
+
+        /**
+         * http4xx回源状态码
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp4xx = null;
+
+        /**
+         * http2xx状态码
+         * @type {Array.<number> || null}
+         */
+        this.Http2xx = null;
+
+        /**
+         * http404状态码
+         * @type {Array.<number> || null}
+         */
+        this.Http404 = null;
+
+        /**
+         * http3xx回源状态码
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp3xx = null;
+
+        /**
+         * http3xx状态码
+         * @type {Array.<number> || null}
+         */
+        this.Http3xx = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceHttp2xx = 'SourceHttp2xx' in params ? params.SourceHttp2xx : null;
+        this.Http5xx = 'Http5xx' in params ? params.Http5xx : null;
+        this.SourceHttp5xx = 'SourceHttp5xx' in params ? params.SourceHttp5xx : null;
+        this.SourceHttp404 = 'SourceHttp404' in params ? params.SourceHttp404 : null;
+        this.Http4xx = 'Http4xx' in params ? params.Http4xx : null;
+        this.SourceHttp4xx = 'SourceHttp4xx' in params ? params.SourceHttp4xx : null;
+        this.Http2xx = 'Http2xx' in params ? params.Http2xx : null;
+        this.Http404 = 'Http404' in params ? params.Http404 : null;
+        this.SourceHttp3xx = 'SourceHttp3xx' in params ? params.SourceHttp3xx : null;
+        this.Http3xx = 'Http3xx' in params ? params.Http3xx : null;
+
+    }
+}
+
+/**
  * 7层转发规则
  * @class
  */
@@ -4191,6 +4804,18 @@ class Layer7Rule extends  AbstractModel {
          * @type {Array.<RuleInstanceRelation> || null}
          */
         this.InstanceDetailRule = null;
+
+        /**
+         * 协议
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
 
     }
 
@@ -4238,6 +4863,8 @@ class Layer7Rule extends  AbstractModel {
                 this.InstanceDetailRule.push(obj);
             }
         }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -4353,7 +4980,7 @@ class DescribeCCLevelListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * 分级策略列表详情
+         * 分级策略列表总数
          * @type {Array.<CCLevelPolicy> || null}
          */
         this.LevelList = null;
@@ -4783,7 +5410,7 @@ class CreateCcGeoIPBlockConfigRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * CC区域封禁配置，填写参数时配置ID请为空
+         * CC区域封禁配置
          * @type {CcGeoIPBlockConfig || null}
          */
         this.CcGeoIPBlockConfig = null;
@@ -4868,6 +5495,56 @@ class CreateDDoSSpeedLimitConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeNewL7RulesErrHealth返回参数结构体
+ * @class
+ */
+class DescribeNewL7RulesErrHealthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP及错误信息，多个IP用","分割
+         * @type {Array.<KeyValue> || null}
+         */
+        this.ErrHealths = null;
+
+        /**
+         * 异常规则的总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrHealths) {
+            this.ErrHealths = new Array();
+            for (let z in params.ErrHealths) {
+                let obj = new KeyValue();
+                obj.deserialize(params.ErrHealths[z]);
+                this.ErrHealths.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeletePacketFilterConfig请求参数结构体
  * @class
  */
@@ -4902,53 +5579,6 @@ class DeletePacketFilterConfigRequest extends  AbstractModel {
             let obj = new PacketFilterConfig();
             obj.deserialize(params.PacketFilterConfig)
             this.PacketFilterConfig = obj;
-        }
-
-    }
-}
-
-/**
- * ModifyL7RulesEdge请求参数结构体
- * @class
- */
-class ModifyL7RulesEdgeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 大禹子产品代号（edge表示边界防护产品）
-         * @type {string || null}
-         */
-        this.Business = null;
-
-        /**
-         * 资源ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 规则
-         * @type {L7RuleEntry || null}
-         */
-        this.Rule = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-
-        if (params.Rule) {
-            let obj = new L7RuleEntry();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
         }
 
     }
@@ -5051,48 +5681,42 @@ class DescribeBasicDeviceStatusResponse extends  AbstractModel {
 }
 
 /**
- * 水印防护配置
+ * DescribeBgpBizTrend返回参数结构体
  * @class
  */
-class WaterPrintConfig extends  AbstractModel {
+class DescribeBgpBizTrendResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 水印偏移量，取值范围[0, 100)
+         * 曲线图各个时间点的值
+         * @type {Array.<number> || null}
+         */
+        this.DataList = null;
+
+        /**
+         * 曲线图取值个数
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Total = null;
 
         /**
-         * 是否开启，取值[
-0（手动开启）
-1（立即运行）
-]
-         * @type {number || null}
-         */
-        this.OpenStatus = null;
-
-        /**
-         * 水印所属的转发监听器列表
-         * @type {Array.<ForwardListener> || null}
-         */
-        this.Listeners = null;
-
-        /**
-         * 水印添加成功后生成的水印密钥列表，一条水印最少1个密钥，最多2个密钥
-         * @type {Array.<WaterPrintKey> || null}
-         */
-        this.Keys = null;
-
-        /**
-         * 水印检查模式, 取值[
-checkall（普通模式）
-shortfpcheckall（精简模式）
-]
+         * 统计纬度
          * @type {string || null}
          */
-        this.Verify = null;
+        this.MetricName = null;
+
+        /**
+         * 返回数组最大值
+         * @type {number || null}
+         */
+        this.MaxData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5103,27 +5727,11 @@ shortfpcheckall（精简模式）
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
-
-        if (params.Listeners) {
-            this.Listeners = new Array();
-            for (let z in params.Listeners) {
-                let obj = new ForwardListener();
-                obj.deserialize(params.Listeners[z]);
-                this.Listeners.push(obj);
-            }
-        }
-
-        if (params.Keys) {
-            this.Keys = new Array();
-            for (let z in params.Keys) {
-                let obj = new WaterPrintKey();
-                obj.deserialize(params.Keys[z]);
-                this.Keys.push(obj);
-            }
-        }
-        this.Verify = 'Verify' in params ? params.Verify : null;
+        this.DataList = 'DataList' in params ? params.DataList : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.MaxData = 'MaxData' in params ? params.MaxData : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5155,6 +5763,13 @@ class L4RuleSource extends  AbstractModel {
          */
         this.Port = null;
 
+        /**
+         * 备份源站，1: 备份源站，0: 普通源站
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Backup = null;
+
     }
 
     /**
@@ -5167,6 +5782,70 @@ class L4RuleSource extends  AbstractModel {
         this.Source = 'Source' in params ? params.Source : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
         this.Port = 'Port' in params ? params.Port : null;
+        this.Backup = 'Backup' in params ? params.Backup : null;
+
+    }
+}
+
+/**
+ * DescribePendingRiskInfo返回参数结构体
+ * @class
+ */
+class DescribePendingRiskInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否为付费用户，true：付费用户， false：普通用户
+         * @type {boolean || null}
+         */
+        this.IsPaidUsr = null;
+
+        /**
+         * 攻击中的资源数量
+         * @type {number || null}
+         */
+        this.AttackingCount = null;
+
+        /**
+         * 封堵中的资源数量
+         * @type {number || null}
+         */
+        this.BlockingCount = null;
+
+        /**
+         * 已过期的资源数量
+         * @type {number || null}
+         */
+        this.ExpiredCount = null;
+
+        /**
+         * 所有待处理风险事件总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsPaidUsr = 'IsPaidUsr' in params ? params.IsPaidUsr : null;
+        this.AttackingCount = 'AttackingCount' in params ? params.AttackingCount : null;
+        this.BlockingCount = 'BlockingCount' in params ? params.BlockingCount : null;
+        this.ExpiredCount = 'ExpiredCount' in params ? params.ExpiredCount : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5209,6 +5888,18 @@ class ProtocolBlockConfig extends  AbstractModel {
          */
         this.CheckExceptNullConnect = null;
 
+        /**
+         * ping of death防护，取值[0(防护关)，1(防护开)]
+         * @type {number || null}
+         */
+        this.PingOfDeath = null;
+
+        /**
+         * tear drop防护，取值[0(防护关)，1(防护开)]
+         * @type {number || null}
+         */
+        this.TearDrop = null;
+
     }
 
     /**
@@ -5223,6 +5914,8 @@ class ProtocolBlockConfig extends  AbstractModel {
         this.DropIcmp = 'DropIcmp' in params ? params.DropIcmp : null;
         this.DropOther = 'DropOther' in params ? params.DropOther : null;
         this.CheckExceptNullConnect = 'CheckExceptNullConnect' in params ? params.CheckExceptNullConnect : null;
+        this.PingOfDeath = 'PingOfDeath' in params ? params.PingOfDeath : null;
+        this.TearDrop = 'TearDrop' in params ? params.TearDrop : null;
 
     }
 }
@@ -5411,6 +6104,49 @@ class BGPIPInstance extends  AbstractModel {
          */
         this.BGPIPChannelFlag = null;
 
+        /**
+         * 资源关联标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagInfoList = null;
+
+        /**
+         * 资产实例所属的全力防护套餐包详情，
+注意：当资产实例不是全力防护套餐包的实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AnycastOutPackRelation || null}
+         */
+        this.AnycastOutPackRelation = null;
+
+        /**
+         * 资源实例版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * 重保实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConvoyId = null;
+
+        /**
+         * 带宽后付费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ElasticBandwidth = null;
+
+        /**
+         * 是否为EO代播的ip: 1是，0不是
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EOFlag = null;
+
     }
 
     /**
@@ -5480,6 +6216,25 @@ class BGPIPInstance extends  AbstractModel {
         this.DamDDoSStatus = 'DamDDoSStatus' in params ? params.DamDDoSStatus : null;
         this.V6Flag = 'V6Flag' in params ? params.V6Flag : null;
         this.BGPIPChannelFlag = 'BGPIPChannelFlag' in params ? params.BGPIPChannelFlag : null;
+
+        if (params.TagInfoList) {
+            this.TagInfoList = new Array();
+            for (let z in params.TagInfoList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagInfoList[z]);
+                this.TagInfoList.push(obj);
+            }
+        }
+
+        if (params.AnycastOutPackRelation) {
+            let obj = new AnycastOutPackRelation();
+            obj.deserialize(params.AnycastOutPackRelation)
+            this.AnycastOutPackRelation = obj;
+        }
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.ConvoyId = 'ConvoyId' in params ? params.ConvoyId : null;
+        this.ElasticBandwidth = 'ElasticBandwidth' in params ? params.ElasticBandwidth : null;
+        this.EOFlag = 'EOFlag' in params ? params.EOFlag : null;
 
     }
 }
@@ -6392,7 +7147,7 @@ class ListenerCcThreholdConfig extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 协议（可取值htttps）
+         * 协议（可取值https）
          * @type {string || null}
          */
         this.Protocol = null;
@@ -6599,6 +7354,54 @@ class CreateDDoSConnectLimitResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 水印配置相关信息
+ * @class
+ */
+class WaterPrintRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印配置
+         * @type {WaterPrintConfig || null}
+         */
+        this.WaterPrintConfig = null;
+
+        /**
+         * 水印配置所属的资源实例
+         * @type {Array.<InstanceRelation> || null}
+         */
+        this.InstanceDetailList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WaterPrintConfig) {
+            let obj = new WaterPrintConfig();
+            obj.deserialize(params.WaterPrintConfig)
+            this.WaterPrintConfig = obj;
+        }
+
+        if (params.InstanceDetailList) {
+            this.InstanceDetailList = new Array();
+            for (let z in params.InstanceDetailList) {
+                let obj = new InstanceRelation();
+                obj.deserialize(params.InstanceDetailList[z]);
+                this.InstanceDetailList.push(obj);
+            }
+        }
 
     }
 }
@@ -6841,64 +7644,12 @@ class DeletePortAclConfigRequest extends  AbstractModel {
 }
 
 /**
- * 防护阈值配置相关信息
+ * DescribePendingRiskInfo请求参数结构体
  * @class
  */
-class ProtectThresholdRelation extends  AbstractModel {
+class DescribePendingRiskInfoRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * DDoS防护等级，取值[
-low(宽松)
-middle(适中)
-high(严格)
-]
-         * @type {string || null}
-         */
-        this.DDoSLevel = null;
-
-        /**
-         * DDoS清洗阈值，单位Mbps
-         * @type {number || null}
-         */
-        this.DDoSThreshold = null;
-
-        /**
-         * DDoS的AI防护开关，取值[
-on(开启)
-off(关闭)
-]
-         * @type {string || null}
-         */
-        this.DDoSAI = null;
-
-        /**
-         * CC清洗开关，取值[
-0(关闭)
-1(开启)
-]
-         * @type {number || null}
-         */
-        this.CCEnable = null;
-
-        /**
-         * CC清洗阈值，单位QPS
-         * @type {number || null}
-         */
-        this.CCThreshold = null;
-
-        /**
-         * 所属的资源实例
-         * @type {Array.<InstanceRelation> || null}
-         */
-        this.InstanceDetailList = null;
-
-        /**
-         * 域名与协议纬度的防护阈值
-         * @type {Array.<ListenerCcThreholdConfig> || null}
-         */
-        this.ListenerCcThresholdList = null;
 
     }
 
@@ -6908,29 +7659,6 @@ off(关闭)
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
-        this.DDoSThreshold = 'DDoSThreshold' in params ? params.DDoSThreshold : null;
-        this.DDoSAI = 'DDoSAI' in params ? params.DDoSAI : null;
-        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
-        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
-
-        if (params.InstanceDetailList) {
-            this.InstanceDetailList = new Array();
-            for (let z in params.InstanceDetailList) {
-                let obj = new InstanceRelation();
-                obj.deserialize(params.InstanceDetailList[z]);
-                this.InstanceDetailList.push(obj);
-            }
-        }
-
-        if (params.ListenerCcThresholdList) {
-            this.ListenerCcThresholdList = new Array();
-            for (let z in params.ListenerCcThresholdList) {
-                let obj = new ListenerCcThreholdConfig();
-                obj.deserialize(params.ListenerCcThresholdList[z]);
-                this.ListenerCcThresholdList.push(obj);
-            }
         }
 
     }
@@ -7291,42 +8019,40 @@ SMP(smp协议)
 }
 
 /**
- * AssociateDDoSEipLoadBalancer请求参数结构体
+ * Anycast转外套餐详情
  * @class
  */
-class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
+class AnycastOutPackRelation extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
-         * @type {string || null}
+         * 业务带宽(单位M)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.NormalBandwidth = null;
 
         /**
-         * 资源实例ID对应的高防弹性公网IP。
-         * @type {string || null}
+         * 转发规则数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Eip = null;
+        this.ForwardRulesLimit = null;
 
         /**
-         * 要绑定的负载均衡ID。负载均衡 ID 形如：lb-0000002i。可通过登录控制台查询，也可通过 DescribeLoadBalancers 接口返回值中的LoadBalancerId获取。
-         * @type {string || null}
+         * 自动续费标记
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.LoadBalancerID = null;
+        this.AutoRenewFlag = null;
 
         /**
-         * CLB所在地域，例如：ap-hongkong。
+         * 到期时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.LoadBalancerRegion = null;
-
-        /**
-         * CLB内网IP
-         * @type {string || null}
-         */
-        this.Vip = null;
+        this.CurDeadline = null;
 
     }
 
@@ -7337,11 +8063,186 @@ class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Eip = 'Eip' in params ? params.Eip : null;
-        this.LoadBalancerID = 'LoadBalancerID' in params ? params.LoadBalancerID : null;
-        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.NormalBandwidth = 'NormalBandwidth' in params ? params.NormalBandwidth : null;
+        this.ForwardRulesLimit = 'ForwardRulesLimit' in params ? params.ForwardRulesLimit : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.CurDeadline = 'CurDeadline' in params ? params.CurDeadline : null;
+
+    }
+}
+
+/**
+ * 防护阈值配置相关信息
+ * @class
+ */
+class ProtectThresholdRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DDoS防护等级，取值[
+low(宽松)
+middle(适中)
+high(严格)
+]
+         * @type {string || null}
+         */
+        this.DDoSLevel = null;
+
+        /**
+         * DDoS清洗阈值，单位Mbps
+         * @type {number || null}
+         */
+        this.DDoSThreshold = null;
+
+        /**
+         * DDoS的AI防护开关，取值[
+on(开启)
+off(关闭)
+]
+         * @type {string || null}
+         */
+        this.DDoSAI = null;
+
+        /**
+         * CC清洗开关，取值[
+0(关闭)
+1(开启)
+]
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+        /**
+         * CC清洗阈值，单位QPS
+         * @type {number || null}
+         */
+        this.CCThreshold = null;
+
+        /**
+         * 所属的资源实例
+         * @type {Array.<InstanceRelation> || null}
+         */
+        this.InstanceDetailList = null;
+
+        /**
+         * 域名与协议纬度的防护阈值
+         * @type {Array.<ListenerCcThreholdConfig> || null}
+         */
+        this.ListenerCcThresholdList = null;
+
+        /**
+         * SYN FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SynFloodThreshold = null;
+
+        /**
+         * SYN FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SynFloodPktThreshold = null;
+
+        /**
+         * UDP FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UdpFloodThreshold = null;
+
+        /**
+         * UDP FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UdpFloodPktThreshold = null;
+
+        /**
+         * ACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AckFloodThreshold = null;
+
+        /**
+         * ACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AckFloodPktThreshold = null;
+
+        /**
+         * SYNACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SynAckFloodThreshold = null;
+
+        /**
+         * SYNACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SynAckFloodPktThreshold = null;
+
+        /**
+         * RST FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RstFloodThreshold = null;
+
+        /**
+         * RST FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RstFloodPktThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
+        this.DDoSThreshold = 'DDoSThreshold' in params ? params.DDoSThreshold : null;
+        this.DDoSAI = 'DDoSAI' in params ? params.DDoSAI : null;
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+
+        if (params.InstanceDetailList) {
+            this.InstanceDetailList = new Array();
+            for (let z in params.InstanceDetailList) {
+                let obj = new InstanceRelation();
+                obj.deserialize(params.InstanceDetailList[z]);
+                this.InstanceDetailList.push(obj);
+            }
+        }
+
+        if (params.ListenerCcThresholdList) {
+            this.ListenerCcThresholdList = new Array();
+            for (let z in params.ListenerCcThresholdList) {
+                let obj = new ListenerCcThreholdConfig();
+                obj.deserialize(params.ListenerCcThresholdList[z]);
+                this.ListenerCcThresholdList.push(obj);
+            }
+        }
+        this.SynFloodThreshold = 'SynFloodThreshold' in params ? params.SynFloodThreshold : null;
+        this.SynFloodPktThreshold = 'SynFloodPktThreshold' in params ? params.SynFloodPktThreshold : null;
+        this.UdpFloodThreshold = 'UdpFloodThreshold' in params ? params.UdpFloodThreshold : null;
+        this.UdpFloodPktThreshold = 'UdpFloodPktThreshold' in params ? params.UdpFloodPktThreshold : null;
+        this.AckFloodThreshold = 'AckFloodThreshold' in params ? params.AckFloodThreshold : null;
+        this.AckFloodPktThreshold = 'AckFloodPktThreshold' in params ? params.AckFloodPktThreshold : null;
+        this.SynAckFloodThreshold = 'SynAckFloodThreshold' in params ? params.SynAckFloodThreshold : null;
+        this.SynAckFloodPktThreshold = 'SynAckFloodPktThreshold' in params ? params.SynAckFloodPktThreshold : null;
+        this.RstFloodThreshold = 'RstFloodThreshold' in params ? params.RstFloodThreshold : null;
+        this.RstFloodPktThreshold = 'RstFloodPktThreshold' in params ? params.RstFloodPktThreshold : null;
 
     }
 }
@@ -7529,6 +8430,72 @@ class ModifyDDoSThresholdRequest extends  AbstractModel {
          */
         this.Business = null;
 
+        /**
+         * 配置其他阈值标志位，1表示配置其他阈值
+         * @type {number || null}
+         */
+        this.OtherThresholdFlag = null;
+
+        /**
+         * SYN FLOOD流量阈值
+         * @type {number || null}
+         */
+        this.SynFloodThreshold = null;
+
+        /**
+         * SYN FLOOD包量阈值
+         * @type {number || null}
+         */
+        this.SynFloodPktThreshold = null;
+
+        /**
+         * UDP FLOOD流量阈值
+         * @type {number || null}
+         */
+        this.UdpFloodThreshold = null;
+
+        /**
+         * UDP FLOOD包量阈值
+         * @type {number || null}
+         */
+        this.UdpFloodPktThreshold = null;
+
+        /**
+         * ACK FLOOD流量阈值
+         * @type {number || null}
+         */
+        this.AckFloodThreshold = null;
+
+        /**
+         * ACK FLOOD包量阈值
+         * @type {number || null}
+         */
+        this.AckFloodPktThreshold = null;
+
+        /**
+         * SYNACK FLOOD流量阈值
+         * @type {number || null}
+         */
+        this.SynAckFloodThreshold = null;
+
+        /**
+         * SYNACK FLOOD包量阈值
+         * @type {number || null}
+         */
+        this.SynAckFloodPktThreshold = null;
+
+        /**
+         * RST FLOOD流量阈值
+         * @type {number || null}
+         */
+        this.RstFloodThreshold = null;
+
+        /**
+         * RST FLOOD包量阈值
+         * @type {number || null}
+         */
+        this.RstFloodPktThreshold = null;
+
     }
 
     /**
@@ -7541,6 +8508,17 @@ class ModifyDDoSThresholdRequest extends  AbstractModel {
         this.Threshold = 'Threshold' in params ? params.Threshold : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Business = 'Business' in params ? params.Business : null;
+        this.OtherThresholdFlag = 'OtherThresholdFlag' in params ? params.OtherThresholdFlag : null;
+        this.SynFloodThreshold = 'SynFloodThreshold' in params ? params.SynFloodThreshold : null;
+        this.SynFloodPktThreshold = 'SynFloodPktThreshold' in params ? params.SynFloodPktThreshold : null;
+        this.UdpFloodThreshold = 'UdpFloodThreshold' in params ? params.UdpFloodThreshold : null;
+        this.UdpFloodPktThreshold = 'UdpFloodPktThreshold' in params ? params.UdpFloodPktThreshold : null;
+        this.AckFloodThreshold = 'AckFloodThreshold' in params ? params.AckFloodThreshold : null;
+        this.AckFloodPktThreshold = 'AckFloodPktThreshold' in params ? params.AckFloodPktThreshold : null;
+        this.SynAckFloodThreshold = 'SynAckFloodThreshold' in params ? params.SynAckFloodThreshold : null;
+        this.SynAckFloodPktThreshold = 'SynAckFloodPktThreshold' in params ? params.SynAckFloodPktThreshold : null;
+        this.RstFloodThreshold = 'RstFloodThreshold' in params ? params.RstFloodThreshold : null;
+        this.RstFloodPktThreshold = 'RstFloodPktThreshold' in params ? params.RstFloodPktThreshold : null;
 
     }
 }
@@ -7590,6 +8568,56 @@ class ModifyDDoSLevelRequest extends  AbstractModel {
         this.Business = 'Business' in params ? params.Business : null;
         this.Method = 'Method' in params ? params.Method : null;
         this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
+
+    }
+}
+
+/**
+ * DescribeListSchedulingDomain返回参数结构体
+ * @class
+ */
+class DescribeListSchedulingDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 调度域名信息列表
+         * @type {Array.<SchedulingDomainInfo> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DomainList) {
+            this.DomainList = new Array();
+            for (let z in params.DomainList) {
+                let obj = new SchedulingDomainInfo();
+                obj.deserialize(params.DomainList[z]);
+                this.DomainList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7916,46 +8944,6 @@ class DescribeCCPrecisionPlyListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyL7RulesEdge返回参数结构体
- * @class
- */
-class ModifyL7RulesEdgeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 成功码
-         * @type {SuccessCode || null}
-         */
-        this.Success = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Protocol、Port参数
  * @class
  */
@@ -8269,6 +9257,63 @@ class PortSegment extends  AbstractModel {
         }
         this.BeginPort = 'BeginPort' in params ? params.BeginPort : null;
         this.EndPort = 'EndPort' in params ? params.EndPort : null;
+
+    }
+}
+
+/**
+ * CreateNewL7Rules请求参数结构体
+ * @class
+ */
+class CreateNewL7RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则列表
+         * @type {Array.<L7RuleEntry> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID列表
+         * @type {Array.<string> || null}
+         */
+        this.IdList = null;
+
+        /**
+         * 资源IP列表
+         * @type {Array.<string> || null}
+         */
+        this.VipList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new L7RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.IdList = 'IdList' in params ? params.IdList : null;
+        this.VipList = 'VipList' in params ? params.VipList : null;
 
     }
 }
@@ -8630,24 +9675,24 @@ class CreateWaterPrintKeyRequest extends  AbstractModel {
 }
 
 /**
- * 水印配置相关信息
+ * DescribeBizHttpStatus返回参数结构体
  * @class
  */
-class WaterPrintRelation extends  AbstractModel {
+class DescribeBizHttpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 水印配置
-         * @type {WaterPrintConfig || null}
+         * 业务流量http状态码统计数据
+         * @type {HttpStatusMap || null}
          */
-        this.WaterPrintConfig = null;
+        this.HttpStatusMap = null;
 
         /**
-         * 水印配置所属的资源实例
-         * @type {Array.<InstanceRelation> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.InstanceDetailList = null;
+        this.RequestId = null;
 
     }
 
@@ -8659,20 +9704,12 @@ class WaterPrintRelation extends  AbstractModel {
             return;
         }
 
-        if (params.WaterPrintConfig) {
-            let obj = new WaterPrintConfig();
-            obj.deserialize(params.WaterPrintConfig)
-            this.WaterPrintConfig = obj;
+        if (params.HttpStatusMap) {
+            let obj = new HttpStatusMap();
+            obj.deserialize(params.HttpStatusMap)
+            this.HttpStatusMap = obj;
         }
-
-        if (params.InstanceDetailList) {
-            this.InstanceDetailList = new Array();
-            for (let z in params.InstanceDetailList) {
-                let obj = new InstanceRelation();
-                obj.deserialize(params.InstanceDetailList[z]);
-                this.InstanceDetailList.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8686,7 +9723,8 @@ class InsL7Rules extends  AbstractModel {
         super();
 
         /**
-         * 规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中
+         * 规则在中间状态态不可修改，只可在（0， 2， 8）状态可编辑。
+规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中
          * @type {number || null}
          */
         this.Status = null;
@@ -8843,6 +9881,41 @@ class DescribeListDDoSAIResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNewL7RulesErrHealth请求参数结构体
+ * @class
+ */
+class DescribeNewL7RulesErrHealthRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号(bgpip表示高防IP)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 规则Id列表
+         * @type {Array.<string> || null}
+         */
+        this.RuleIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
 
     }
 }
@@ -9386,6 +10459,13 @@ class NewL7RuleEntry extends  AbstractModel {
          */
         this.ErrCode = null;
 
+        /**
+         * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Version = null;
+
     }
 
     /**
@@ -9429,6 +10509,7 @@ class NewL7RuleEntry extends  AbstractModel {
         this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
         this.RewriteHttps = 'RewriteHttps' in params ? params.RewriteHttps : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -9608,6 +10689,12 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
          */
         this.OpenStatus = null;
 
+        /**
+         * 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验
+         * @type {number || null}
+         */
+        this.CloudSdkProxy = null;
+
     }
 
     /**
@@ -9619,35 +10706,48 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+        this.CloudSdkProxy = 'CloudSdkProxy' in params ? params.CloudSdkProxy : null;
 
     }
 }
 
 /**
- * DescribeListSchedulingDomain返回参数结构体
+ * AssociateDDoSEipLoadBalancer请求参数结构体
  * @class
  */
-class DescribeListSchedulingDomainResponse extends  AbstractModel {
+class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总数
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 调度域名信息列表
-         * @type {Array.<SchedulingDomainInfo> || null}
-         */
-        this.DomainList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 资源实例ID对应的高防弹性公网IP。
+         * @type {string || null}
+         */
+        this.Eip = null;
+
+        /**
+         * 要绑定的负载均衡ID。负载均衡 ID 形如：lb-0000002i。可通过登录控制台查询，也可通过 DescribeLoadBalancers 接口返回值中的LoadBalancerId获取。
+         * @type {string || null}
+         */
+        this.LoadBalancerID = null;
+
+        /**
+         * CLB所在地域，例如：ap-hongkong。
+         * @type {string || null}
+         */
+        this.LoadBalancerRegion = null;
+
+        /**
+         * CLB内网IP
+         * @type {string || null}
+         */
+        this.Vip = null;
 
     }
 
@@ -9658,17 +10758,11 @@ class DescribeListSchedulingDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.DomainList) {
-            this.DomainList = new Array();
-            for (let z in params.DomainList) {
-                let obj = new SchedulingDomainInfo();
-                obj.deserialize(params.DomainList[z]);
-                this.DomainList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Eip = 'Eip' in params ? params.Eip : null;
+        this.LoadBalancerID = 'LoadBalancerID' in params ? params.LoadBalancerID : null;
+        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }
@@ -9824,6 +10918,92 @@ class CCThresholdPolicy extends  AbstractModel {
         this.Threshold = 'Threshold' in params ? params.Threshold : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
+ * 水印防护配置
+ * @class
+ */
+class WaterPrintConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印偏移量，取值范围[0, 100)
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 是否开启，取值[
+0（手动开启）
+1（立即运行）
+]
+         * @type {number || null}
+         */
+        this.OpenStatus = null;
+
+        /**
+         * 水印所属的转发监听器列表
+         * @type {Array.<ForwardListener> || null}
+         */
+        this.Listeners = null;
+
+        /**
+         * 水印添加成功后生成的水印密钥列表，一条水印最少1个密钥，最多2个密钥
+         * @type {Array.<WaterPrintKey> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * 水印检查模式, 取值[
+checkall（普通模式）
+shortfpcheckall（精简模式）
+]
+         * @type {string || null}
+         */
+        this.Verify = null;
+
+        /**
+         * 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CloudSdkProxy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+
+        if (params.Listeners) {
+            this.Listeners = new Array();
+            for (let z in params.Listeners) {
+                let obj = new ForwardListener();
+                obj.deserialize(params.Listeners[z]);
+                this.Listeners.push(obj);
+            }
+        }
+
+        if (params.Keys) {
+            this.Keys = new Array();
+            for (let z in params.Keys) {
+                let obj = new WaterPrintKey();
+                obj.deserialize(params.Keys[z]);
+                this.Keys.push(obj);
+            }
+        }
+        this.Verify = 'Verify' in params ? params.Verify : null;
+        this.CloudSdkProxy = 'CloudSdkProxy' in params ? params.CloudSdkProxy : null;
 
     }
 }
@@ -10303,6 +11483,41 @@ class DescribeListBGPInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 标签信息，用于资源列表返回关联的标签
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeDDoSTrend请求参数结构体
  * @class
  */
@@ -10569,6 +11784,43 @@ class BGPInstance extends  AbstractModel {
          */
         this.CCEnable = null;
 
+        /**
+         * 资源关联标签
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagInfoList = null;
+
+        /**
+         * 新版本1ip高防包
+         * @type {number || null}
+         */
+        this.IpCountNewFlag = null;
+
+        /**
+         * 攻击封堵套餐标记
+         * @type {number || null}
+         */
+        this.VitalityVersion = null;
+
+        /**
+         * 网络线路
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Line = null;
+
+        /**
+         * 弹性业务带宽开关
+         * @type {number || null}
+         */
+        this.ElasticServiceBandwidth = null;
+
+        /**
+         * 赠送的业务带宽
+         * @type {number || null}
+         */
+        this.GiftServiceBandWidth = null;
+
     }
 
     /**
@@ -10624,6 +11876,20 @@ class BGPInstance extends  AbstractModel {
         this.BoundStatus = 'BoundStatus' in params ? params.BoundStatus : null;
         this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+
+        if (params.TagInfoList) {
+            this.TagInfoList = new Array();
+            for (let z in params.TagInfoList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagInfoList[z]);
+                this.TagInfoList.push(obj);
+            }
+        }
+        this.IpCountNewFlag = 'IpCountNewFlag' in params ? params.IpCountNewFlag : null;
+        this.VitalityVersion = 'VitalityVersion' in params ? params.VitalityVersion : null;
+        this.Line = 'Line' in params ? params.Line : null;
+        this.ElasticServiceBandwidth = 'ElasticServiceBandwidth' in params ? params.ElasticServiceBandwidth : null;
+        this.GiftServiceBandWidth = 'GiftServiceBandWidth' in params ? params.GiftServiceBandWidth : null;
 
     }
 }
@@ -10798,7 +12064,7 @@ class DescribeBizTrendRequest extends  AbstractModel {
         this.Business = null;
 
         /**
-         * 统计周期，可取值300，1800，3600，21600，86400，单位秒
+         * 统计周期，可取值60，300，1800，3600，21600，86400，单位秒
          * @type {number || null}
          */
         this.Period = null;
@@ -11419,6 +12685,12 @@ class L7RuleEntry extends  AbstractModel {
          */
         this.Id = null;
 
+        /**
+         * 智能cc开关，取值[0(关闭), 1(开启)]
+         * @type {number || null}
+         */
+        this.CCAIEnable = null;
+
     }
 
     /**
@@ -11457,6 +12729,7 @@ class L7RuleEntry extends  AbstractModel {
         this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
         this.SSLId = 'SSLId' in params ? params.SSLId : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.CCAIEnable = 'CCAIEnable' in params ? params.CCAIEnable : null;
 
     }
 }
@@ -11724,6 +12997,12 @@ class CreateCCReqLimitPolicyRequest extends  AbstractModel {
          */
         this.Policy = null;
 
+        /**
+         * 是否为兜底频控
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
     }
 
     /**
@@ -11743,6 +13022,7 @@ class CreateCCReqLimitPolicyRequest extends  AbstractModel {
             obj.deserialize(params.Policy)
             this.Policy = obj;
         }
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
 
     }
 }
@@ -12108,6 +13388,12 @@ class PacketFilterRelation extends  AbstractModel {
          */
         this.InstanceDetailList = null;
 
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -12132,6 +13418,7 @@ class PacketFilterRelation extends  AbstractModel {
                 this.InstanceDetailList.push(obj);
             }
         }
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -12335,22 +13622,25 @@ module.exports = {
     CreateIPAlarmThresholdConfigRequest: CreateIPAlarmThresholdConfigRequest,
     CreateCcBlackWhiteIpListResponse: CreateCcBlackWhiteIpListResponse,
     DescribeDefaultAlarmThresholdResponse: DescribeDefaultAlarmThresholdResponse,
+    CreateNewL7RulesResponse: CreateNewL7RulesResponse,
     CreateDDoSAIRequest: CreateDDoSAIRequest,
     DescribeListProtectThresholdConfigRequest: DescribeListProtectThresholdConfigRequest,
     ModifyNewDomainRulesResponse: ModifyNewDomainRulesResponse,
     CcBlackWhiteIpPolicy: CcBlackWhiteIpPolicy,
     DescribeDDoSConnectLimitListResponse: DescribeDDoSConnectLimitListResponse,
+    L7RuleHealth: L7RuleHealth,
     ModifyPacketFilterConfigResponse: ModifyPacketFilterConfigResponse,
     DescribeCCLevelPolicyRequest: DescribeCCLevelPolicyRequest,
     CreateWaterPrintConfigResponse: CreateWaterPrintConfigResponse,
     DescribeOverviewAttackTrendRequest: DescribeOverviewAttackTrendRequest,
     DescribeListBGPIPInstancesRequest: DescribeListBGPIPInstancesRequest,
+    DescribeNewL7RulesResponse: DescribeNewL7RulesResponse,
     StaticPackRelation: StaticPackRelation,
     CreatePortAclConfigRequest: CreatePortAclConfigRequest,
     DescribeCCThresholdListResponse: DescribeCCThresholdListResponse,
     DescribeL7RulesBySSLCertIdRequest: DescribeL7RulesBySSLCertIdRequest,
+    TagFilter: TagFilter,
     DescribeListPacketFilterConfigResponse: DescribeListPacketFilterConfigResponse,
-    DeleteBlackWhiteIpListResponse: DeleteBlackWhiteIpListResponse,
     CreateSchedulingDomainRequest: CreateSchedulingDomainRequest,
     ModifyPortAclConfigRequest: ModifyPortAclConfigRequest,
     BoundIpInfo: BoundIpInfo,
@@ -12358,8 +13648,9 @@ module.exports = {
     ModifyCCReqLimitPolicyRequest: ModifyCCReqLimitPolicyRequest,
     DescribeOverviewDDoSTrendRequest: DescribeOverviewDDoSTrendRequest,
     DisassociateDDoSEipAddressResponse: DisassociateDDoSEipAddressResponse,
+    DescribeBgpBizTrendRequest: DescribeBgpBizTrendRequest,
     DeleteCCThresholdPolicyResponse: DeleteCCThresholdPolicyResponse,
-    DeleteBlackWhiteIpListRequest: DeleteBlackWhiteIpListRequest,
+    DescribeBizHttpStatusRequest: DescribeBizHttpStatusRequest,
     SourceServer: SourceServer,
     CCLevelPolicy: CCLevelPolicy,
     DescribeOverviewIndexResponse: DescribeOverviewIndexResponse,
@@ -12372,6 +13663,7 @@ module.exports = {
     EipAddressPackRelation: EipAddressPackRelation,
     CreateDDoSBlackWhiteIpListResponse: CreateDDoSBlackWhiteIpListResponse,
     ModifyCcBlackWhiteIpListResponse: ModifyCcBlackWhiteIpListResponse,
+    DescribeNewL7RulesRequest: DescribeNewL7RulesRequest,
     ProtocolBlockRelation: ProtocolBlockRelation,
     DescribeListPacketFilterConfigRequest: DescribeListPacketFilterConfigRequest,
     DescribeOverviewIndexRequest: DescribeOverviewIndexRequest,
@@ -12381,6 +13673,7 @@ module.exports = {
     DescribeOverviewDDoSEventListResponse: DescribeOverviewDDoSEventListResponse,
     CreateCcGeoIPBlockConfigResponse: CreateCcGeoIPBlockConfigResponse,
     DescribeOverviewAttackTrendResponse: DescribeOverviewAttackTrendResponse,
+    HttpStatusMap: HttpStatusMap,
     Layer7Rule: Layer7Rule,
     ModifyPortAclConfigResponse: ModifyPortAclConfigResponse,
     DescribeBasicDeviceStatusRequest: DescribeBasicDeviceStatusRequest,
@@ -12399,12 +13692,13 @@ module.exports = {
     CreateCcGeoIPBlockConfigRequest: CreateCcGeoIPBlockConfigRequest,
     DeletePortAclConfigResponse: DeletePortAclConfigResponse,
     CreateDDoSSpeedLimitConfigResponse: CreateDDoSSpeedLimitConfigResponse,
+    DescribeNewL7RulesErrHealthResponse: DescribeNewL7RulesErrHealthResponse,
     DeletePacketFilterConfigRequest: DeletePacketFilterConfigRequest,
-    ModifyL7RulesEdgeRequest: ModifyL7RulesEdgeRequest,
     DescribeListDDoSGeoIPBlockConfigResponse: DescribeListDDoSGeoIPBlockConfigResponse,
     DescribeBasicDeviceStatusResponse: DescribeBasicDeviceStatusResponse,
-    WaterPrintConfig: WaterPrintConfig,
+    DescribeBgpBizTrendResponse: DescribeBgpBizTrendResponse,
     L4RuleSource: L4RuleSource,
+    DescribePendingRiskInfoResponse: DescribePendingRiskInfoResponse,
     ProtocolBlockConfig: ProtocolBlockConfig,
     DeleteCCPrecisionPolicyRequest: DeleteCCPrecisionPolicyRequest,
     BGPIPInstance: BGPIPInstance,
@@ -12432,30 +13726,32 @@ module.exports = {
     DeleteDDoSBlackWhiteIpListRequest: DeleteDDoSBlackWhiteIpListRequest,
     PackInfo: PackInfo,
     CreateDDoSConnectLimitResponse: CreateDDoSConnectLimitResponse,
+    WaterPrintRelation: WaterPrintRelation,
     IPLineInfo: IPLineInfo,
     DescribeCcBlackWhiteIpListRequest: DescribeCcBlackWhiteIpListRequest,
     DescribeListListenerResponse: DescribeListListenerResponse,
     DeletePortAclConfigRequest: DeletePortAclConfigRequest,
-    ProtectThresholdRelation: ProtectThresholdRelation,
+    DescribePendingRiskInfoRequest: DescribePendingRiskInfoRequest,
     CreatePortAclConfigResponse: CreatePortAclConfigResponse,
     ModifyDDoSLevelResponse: ModifyDDoSLevelResponse,
     CreateL7RuleCertsResponse: CreateL7RuleCertsResponse,
     CreateCCPrecisionPolicyRequest: CreateCCPrecisionPolicyRequest,
     ConnectLimitConfig: ConnectLimitConfig,
     DDoSSpeedLimitConfig: DDoSSpeedLimitConfig,
-    AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
+    AnycastOutPackRelation: AnycastOutPackRelation,
+    ProtectThresholdRelation: ProtectThresholdRelation,
     DescribeListProtectThresholdConfigResponse: DescribeListProtectThresholdConfigResponse,
     CertIdInsL7Rules: CertIdInsL7Rules,
     IpSegment: IpSegment,
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,
     ModifyDDoSThresholdRequest: ModifyDDoSThresholdRequest,
     ModifyDDoSLevelRequest: ModifyDDoSLevelRequest,
+    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
     DescribeListIPAlarmConfigResponse: DescribeListIPAlarmConfigResponse,
     CcGeoIpPolicyNew: CcGeoIpPolicyNew,
     ModifyDDoSBlackWhiteIpListResponse: ModifyDDoSBlackWhiteIpListResponse,
     CCReqLimitPolicy: CCReqLimitPolicy,
     DescribeCCPrecisionPlyListRequest: DescribeCCPrecisionPlyListRequest,
-    ModifyL7RulesEdgeResponse: ModifyL7RulesEdgeResponse,
     ProtocolPort: ProtocolPort,
     DescribeCCLevelListRequest: DescribeCCLevelListRequest,
     ModifyCCThresholdPolicyRequest: ModifyCCThresholdPolicyRequest,
@@ -12463,6 +13759,7 @@ module.exports = {
     DescribeListDDoSAIRequest: DescribeListDDoSAIRequest,
     DescribeListIPAlarmConfigRequest: DescribeListIPAlarmConfigRequest,
     PortSegment: PortSegment,
+    CreateNewL7RulesRequest: CreateNewL7RulesRequest,
     DescribeOverviewCCTrendResponse: DescribeOverviewCCTrendResponse,
     ModifyCCReqLimitPolicyResponse: ModifyCCReqLimitPolicyResponse,
     DefaultAlarmThreshold: DefaultAlarmThreshold,
@@ -12471,10 +13768,11 @@ module.exports = {
     ModifyDomainUsrNameRequest: ModifyDomainUsrNameRequest,
     CreateDDoSConnectLimitRequest: CreateDDoSConnectLimitRequest,
     CreateWaterPrintKeyRequest: CreateWaterPrintKeyRequest,
-    WaterPrintRelation: WaterPrintRelation,
+    DescribeBizHttpStatusResponse: DescribeBizHttpStatusResponse,
     InsL7Rules: InsL7Rules,
     DescribeCCReqLimitPolicyListResponse: DescribeCCReqLimitPolicyListResponse,
     DescribeListDDoSAIResponse: DescribeListDDoSAIResponse,
+    DescribeNewL7RulesErrHealthRequest: DescribeNewL7RulesErrHealthRequest,
     ModifyCCPrecisionPolicyResponse: ModifyCCPrecisionPolicyResponse,
     CcGeoIPBlockConfig: CcGeoIPBlockConfig,
     ModifyDDoSSpeedLimitConfigRequest: ModifyDDoSSpeedLimitConfigRequest,
@@ -12490,10 +13788,11 @@ module.exports = {
     DescribeListDDoSSpeedLimitConfigRequest: DescribeListDDoSSpeedLimitConfigRequest,
     SpeedValue: SpeedValue,
     SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
-    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
+    AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
     ModifyCCPrecisionPolicyRequest: ModifyCCPrecisionPolicyRequest,
     DeleteDDoSBlackWhiteIpListResponse: DeleteDDoSBlackWhiteIpListResponse,
     CCThresholdPolicy: CCThresholdPolicy,
+    WaterPrintConfig: WaterPrintConfig,
     ModifyDomainUsrNameResponse: ModifyDomainUsrNameResponse,
     DescribeCCTrendResponse: DescribeCCTrendResponse,
     CreateSchedulingDomainResponse: CreateSchedulingDomainResponse,
@@ -12504,6 +13803,7 @@ module.exports = {
     DDoSGeoIPBlockConfigRelation: DDoSGeoIPBlockConfigRelation,
     DescribeListProtocolBlockConfigRequest: DescribeListProtocolBlockConfigRequest,
     DescribeListBGPInstancesResponse: DescribeListBGPInstancesResponse,
+    TagInfo: TagInfo,
     DescribeDDoSTrendRequest: DescribeDDoSTrendRequest,
     DeleteCCRequestLimitPolicyResponse: DeleteCCRequestLimitPolicyResponse,
     CreateCcBlackWhiteIpListRequest: CreateCcBlackWhiteIpListRequest,

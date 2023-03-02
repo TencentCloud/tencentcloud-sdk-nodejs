@@ -26,9 +26,10 @@ const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
 const AuthParam = models.AuthParam;
 const SetVideoGenerationTaskCallbackKeyRequest = models.SetVideoGenerationTaskCallbackKeyRequest;
 const StartWhiteboardPushRequest = models.StartWhiteboardPushRequest;
-const OmittedDuration = models.OmittedDuration;
+const DescribeTIWRoomDailyUsageRequest = models.DescribeTIWRoomDailyUsageRequest;
 const DescribeWhiteboardPushRequest = models.DescribeWhiteboardPushRequest;
 const DescribeQualityMetricsResponse = models.DescribeQualityMetricsResponse;
+const DescribeTIWRoomDailyUsageResponse = models.DescribeTIWRoomDailyUsageResponse;
 const ResumeOnlineRecordResponse = models.ResumeOnlineRecordResponse;
 const SetVideoGenerationTaskCallbackResponse = models.SetVideoGenerationTaskCallbackResponse;
 const SetWhiteboardPushCallbackKeyResponse = models.SetWhiteboardPushCallbackKeyResponse;
@@ -36,12 +37,12 @@ const WhiteboardPushBackupParam = models.WhiteboardPushBackupParam;
 const DescribeSnapshotTaskRequest = models.DescribeSnapshotTaskRequest;
 const StartOnlineRecordRequest = models.StartOnlineRecordRequest;
 const DescribeVideoGenerationTaskCallbackResponse = models.DescribeVideoGenerationTaskCallbackResponse;
+const OmittedDuration = models.OmittedDuration;
 const DescribeSnapshotTaskResponse = models.DescribeSnapshotTaskResponse;
 const StartWhiteboardPushResponse = models.StartWhiteboardPushResponse;
 const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
 const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackRequest;
 const SnapshotCOS = models.SnapshotCOS;
-const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
 const StopWhiteboardPushRequest = models.StopWhiteboardPushRequest;
 const SetTranscodeCallbackResponse = models.SetTranscodeCallbackResponse;
 const StopOnlineRecordRequest = models.StopOnlineRecordRequest;
@@ -72,14 +73,16 @@ const DescribeOnlineRecordResponse = models.DescribeOnlineRecordResponse;
 const SetTranscodeCallbackKeyRequest = models.SetTranscodeCallbackKeyRequest;
 const CreateSnapshotTaskRequest = models.CreateSnapshotTaskRequest;
 const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
+const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
 const StreamLayout = models.StreamLayout;
 const DescribeQualityMetricsRequest = models.DescribeQualityMetricsRequest;
 const SetOnlineRecordCallbackKeyRequest = models.SetOnlineRecordCallbackKeyRequest;
 const CreateVideoGenerationTaskRequest = models.CreateVideoGenerationTaskRequest;
 const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest;
 const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
-const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
+const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
 const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
+const RoomUsageDataItem = models.RoomUsageDataItem;
 const SetWhiteboardPushCallbackRequest = models.SetWhiteboardPushCallbackRequest;
 const SetWhiteboardPushCallbackResponse = models.SetWhiteboardPushCallbackResponse;
 const RecordControl = models.RecordControl;
@@ -233,6 +236,20 @@ class TiwClient extends AbstractClient {
     StartWhiteboardPush(req, cb) {
         let resp = new StartWhiteboardPushResponse();
         this.request("StartWhiteboardPush", req, resp, cb);
+    }
+
+    /**
+     * 查询互动白板房间维度每天计费用量。
+1. 单次查询统计区间最多不能超过31天。
+2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
+
+     * @param {DescribeTIWRoomDailyUsageRequest} req
+     * @param {function(string, DescribeTIWRoomDailyUsageResponse):void} cb
+     * @public
+     */
+    DescribeTIWRoomDailyUsage(req, cb) {
+        let resp = new DescribeTIWRoomDailyUsageResponse();
+        this.request("DescribeTIWRoomDailyUsage", req, resp, cb);
     }
 
     /**

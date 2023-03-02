@@ -376,7 +376,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
+     * 避免官网歧义
+
+升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
 单个人员库有且仅支持一次回滚操作。
 
 升级是一个耗时的操作，执行时间与人员库的人脸数相关，升级的人员库中的人脸数越多，升级的耗时越长。升级接口是个异步任务，调用成功后返回JobId，通过GetUpgradeGroupFaceModelVersionResult查询升级进度和结果。如果升级成功，人员库版本将切换到新版本。如果想回滚到旧版本，可以调用RevertGroupFaceModelVersion进行回滚。
@@ -392,7 +394,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+     * 同理
+
+本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
 
 回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
      * @param {RevertGroupFaceModelVersionRequest} req
@@ -434,7 +438,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 获取人员库升级任务列表
+     * 避免官网歧义
+
+获取人员库升级任务列表
 
      * @param {GetUpgradeGroupFaceModelVersionJobListRequest} req
      * @param {function(string, GetUpgradeGroupFaceModelVersionJobListResponse):void} cb
@@ -548,6 +554,8 @@ class IaiClient extends AbstractClient {
      * 人脸静态活体检测（高精度版）可用于对用户上传的静态图片进行防翻拍活体检测，以判断是否是翻拍图片。
 
 相比现有静态活体检测服务，高精度版在维持高真人通过率的前提下，增强了对高清屏幕、裁剪纸片、3D面具等攻击的防御能力，攻击拦截率约为业内同类型产品形态4-5倍。同时支持多场景人脸核验，满足移动端、PC端各类型场景的图片活体检验需求，适用于各个行业不同的活体检验应用。
+
+人脸静态活体检测（高精度版）接口于2022年8月1日 00:00起正式开始计费，采取后付费按量计费模式，详见[计费概述](https://cloud.tencent.com/document/product/867/17640)。
      * @param {DetectLiveFaceAccurateRequest} req
      * @param {function(string, DetectLiveFaceAccurateResponse):void} cb
      * @public
@@ -558,7 +566,9 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 人员库升级结果查询
+     * 避免官网歧义
+
+人员库升级结果查询
      * @param {GetUpgradeGroupFaceModelVersionResultRequest} req
      * @param {function(string, GetUpgradeGroupFaceModelVersionResultResponse):void} cb
      * @public

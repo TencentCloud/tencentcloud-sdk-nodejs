@@ -26,7 +26,9 @@ const TurnOnStandaloneGatewayResponse = models.TurnOnStandaloneGatewayResponse;
 const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
 const DescribeEnvDealRegionResponse = models.DescribeEnvDealRegionResponse;
 const DeleteCloudBaseRunServerVersionResponse = models.DeleteCloudBaseRunServerVersionResponse;
+const RollUpdateCloudBaseRunServerVersionResponse = models.RollUpdateCloudBaseRunServerVersionResponse;
 const SearchClsLogResponse = models.SearchClsLogResponse;
+const ModifyClsTopicResponse = models.ModifyClsTopicResponse;
 const StandaloneGatewayInfo = models.StandaloneGatewayInfo;
 const CloudBaseRunSideSpec = models.CloudBaseRunSideSpec;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
@@ -36,7 +38,7 @@ const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFre
 const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
-const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
+const DescribeCloudBaseRunPodListResponse = models.DescribeCloudBaseRunPodListResponse;
 const DescribeCloudBaseRunServerDomainNameResponse = models.DescribeCloudBaseRunServerDomainNameResponse;
 const LogResObject = models.LogResObject;
 const DestroyStandaloneGatewayRequest = models.DestroyStandaloneGatewayRequest;
@@ -44,15 +46,16 @@ const CloudRunServiceSimpleVersionSnapshot = models.CloudRunServiceSimpleVersion
 const CreateWxCloudBaseRunServerDBClusterResponse = models.CreateWxCloudBaseRunServerDBClusterResponse;
 const ReplaceActivityRecordResponse = models.ReplaceActivityRecordResponse;
 const DescribeSpecialCostItemsRequest = models.DescribeSpecialCostItemsRequest;
-const DescribeCloudBaseRunResourceForExtendRequest = models.DescribeCloudBaseRunResourceForExtendRequest;
+const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
 const DescribeWxCloudBaseRunSubNetsRequest = models.DescribeWxCloudBaseRunSubNetsRequest;
 const ModifyEndUserRequest = models.ModifyEndUserRequest;
 const DescribeCurveDataResponse = models.DescribeCurveDataResponse;
-const RollUpdateCloudBaseRunServerVersionResponse = models.RollUpdateCloudBaseRunServerVersionResponse;
+const DescribeBaasPackageListRequest = models.DescribeBaasPackageListRequest;
 const ClsInfo = models.ClsInfo;
 const DescribeCloudBaseRunOperationTypesRequest = models.DescribeCloudBaseRunOperationTypesRequest;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
 const DescribeCloudBaseRunOneClickTaskExternalRequest = models.DescribeCloudBaseRunOneClickTaskExternalRequest;
+const ModifyClsTopicRequest = models.ModifyClsTopicRequest;
 const DescribeStandaloneGatewayResponse = models.DescribeStandaloneGatewayResponse;
 const DescribeWxCloudBaseRunEnvsResponse = models.DescribeWxCloudBaseRunEnvsResponse;
 const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
@@ -70,6 +73,7 @@ const EndUserInfo = models.EndUserInfo;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
 const DescribeHostingDomainTaskRequest = models.DescribeHostingDomainTaskRequest;
 const FreezeCloudBaseRunServersRequest = models.FreezeCloudBaseRunServersRequest;
+const BaasPackageInfo = models.BaasPackageInfo;
 const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
 const ActivityInfoItem = models.ActivityInfoItem;
 const KVPair = models.KVPair;
@@ -80,6 +84,7 @@ const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
 const CreateWxCloudBaseRunEnvRequest = models.CreateWxCloudBaseRunEnvRequest;
 const ModifyCloudBaseRunServerFlowConfRequest = models.ModifyCloudBaseRunServerFlowConfRequest;
 const DescribeActivityRecordResponse = models.DescribeActivityRecordResponse;
+const DescribeCloudBaseRunVersionRsByConditionResponse = models.DescribeCloudBaseRunVersionRsByConditionResponse;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CreateWxCloudBaseRunServerDBClusterRequest = models.CreateWxCloudBaseRunServerDBClusterRequest;
 const DeleteCloudBaseProjectLatestVersionResponse = models.DeleteCloudBaseProjectLatestVersionResponse;
@@ -95,6 +100,7 @@ const DescribeWxCloudBaseRunSubNetsResponse = models.DescribeWxCloudBaseRunSubNe
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const CloudBaseCapabilities = models.CloudBaseCapabilities;
 const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
+const DescribeExtensionUploadInfoRequest = models.DescribeExtensionUploadInfoRequest;
 const DescribeEnvPostpaidDeductResponse = models.DescribeEnvPostpaidDeductResponse;
 const HpaPolicy = models.HpaPolicy;
 const CloudBaseRunImageSecretInfo = models.CloudBaseRunImageSecretInfo;
@@ -120,6 +126,7 @@ const TurnOffStandaloneGatewayResponse = models.TurnOffStandaloneGatewayResponse
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
 const CreateHostingDomainResponse = models.CreateHostingDomainResponse;
+const TkeClusterInfo = models.TkeClusterInfo;
 const DescribeActivityRecordRequest = models.DescribeActivityRecordRequest;
 const CreateWxCloudBaseRunEnvResponse = models.CreateWxCloudBaseRunEnvResponse;
 const DeleteCloudBaseRunServerVersionRequest = models.DeleteCloudBaseRunServerVersionRequest;
@@ -128,7 +135,7 @@ const LoginStatistic = models.LoginStatistic;
 const DescribeCloudBaseRunServerDomainNameRequest = models.DescribeCloudBaseRunServerDomainNameRequest;
 const DescribeCloudBaseRunAllVpcsRequest = models.DescribeCloudBaseRunAllVpcsRequest;
 const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
-const DescribeExtensionUploadInfoRequest = models.DescribeExtensionUploadInfoRequest;
+const DescribeBaasPackageListResponse = models.DescribeBaasPackageListResponse;
 const ReplaceActivityRecordRequest = models.ReplaceActivityRecordRequest;
 const DeleteWxGatewayRouteResponse = models.DeleteWxGatewayRouteResponse;
 const CloudBaseRunKVPriority = models.CloudBaseRunKVPriority;
@@ -168,7 +175,7 @@ const StandaloneGatewayPackageInfo = models.StandaloneGatewayPackageInfo;
 const CloudBaseRunNfsVolumeSource = models.CloudBaseRunNfsVolumeSource;
 const DescribeSmsQuotasResponse = models.DescribeSmsQuotasResponse;
 const DescribeWxCloudBaseRunEnvsRequest = models.DescribeWxCloudBaseRunEnvsRequest;
-const DescribeCloudBaseRunVersionRsByConditionResponse = models.DescribeCloudBaseRunVersionRsByConditionResponse;
+const CloudBaseRunServiceVolumeHostPath = models.CloudBaseRunServiceVolumeHostPath;
 const DescribeCurveDataRequest = models.DescribeCurveDataRequest;
 const DescribeActivityInfoRequest = models.DescribeActivityInfoRequest;
 const BindEnvGatewayRequest = models.BindEnvGatewayRequest;
@@ -195,8 +202,8 @@ const EnvBillingInfoItem = models.EnvBillingInfoItem;
 const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
 const DescribeSmsQuotasRequest = models.DescribeSmsQuotasRequest;
 const DescribeCloudBaseRunVersionResponse = models.DescribeCloudBaseRunVersionResponse;
-const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
-const DescribeCloudBaseRunPodListResponse = models.DescribeCloudBaseRunPodListResponse;
+const DescribeCloudBaseRunResourceForExtendRequest = models.DescribeCloudBaseRunResourceForExtendRequest;
+const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
 const SearchClsLogRequest = models.SearchClsLogRequest;
 const CloudBaseCodeRepoDetail = models.CloudBaseCodeRepoDetail;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
@@ -284,6 +291,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 修改日志主题
+     * @param {ModifyClsTopicRequest} req
+     * @param {function(string, ModifyClsTopicResponse):void} cb
+     * @public
+     */
+    ModifyClsTopic(req, cb) {
+        let resp = new ModifyClsTopicResponse();
+        this.request("ModifyClsTopic", req, resp, cb);
+    }
+
+    /**
      * 本接口（DestroyStandaloneGateway）用于销毁小租户网关。
      * @param {DestroyStandaloneGatewayRequest} req
      * @param {function(string, DestroyStandaloneGatewayResponse):void} cb
@@ -314,6 +332,17 @@ class TcbClient extends AbstractClient {
     DeleteWxGatewayRoute(req, cb) {
         let resp = new DeleteWxGatewayRouteResponse();
         this.request("DeleteWxGatewayRoute", req, resp, cb);
+    }
+
+    /**
+     * 查询用户活动信息
+     * @param {DescribeUserActivityInfoRequest} req
+     * @param {function(string, DescribeUserActivityInfoResponse):void} cb
+     * @public
+     */
+    DescribeUserActivityInfo(req, cb) {
+        let resp = new DescribeUserActivityInfoResponse();
+        this.request("DescribeUserActivityInfo", req, resp, cb);
     }
 
     /**
@@ -540,14 +569,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 查询用户活动信息
-     * @param {DescribeUserActivityInfoRequest} req
-     * @param {function(string, DescribeUserActivityInfoResponse):void} cb
+     * 获取新套餐列表，含详情，如果传了PackageId，则只获取指定套餐详情
+     * @param {DescribeBaasPackageListRequest} req
+     * @param {function(string, DescribeBaasPackageListResponse):void} cb
      * @public
      */
-    DescribeUserActivityInfo(req, cb) {
-        let resp = new DescribeUserActivityInfoResponse();
-        this.request("DescribeUserActivityInfo", req, resp, cb);
+    DescribeBaasPackageList(req, cb) {
+        let resp = new DescribeBaasPackageListResponse();
+        this.request("DescribeBaasPackageList", req, resp, cb);
     }
 
     /**

@@ -520,6 +520,34 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
+ * TagRole返回参数结构体
+ * @class
+ */
+class TagRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetRole请求参数结构体
  * @class
  */
@@ -1372,10 +1400,10 @@ class DescribeUserSAMLConfigRequest extends  AbstractModel {
 }
 
 /**
- * TagRole返回参数结构体
+ * DeleteAccessKey返回参数结构体
  * @class
  */
-class TagRoleResponse extends  AbstractModel {
+class DeleteAccessKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1791,30 +1819,25 @@ class ListSAMLProvidersRequest extends  AbstractModel {
 }
 
 /**
- * ListGroups请求参数结构体
+ * CreateAccessKey返回参数结构体
  * @class
  */
-class ListGroupsRequest extends  AbstractModel {
+class CreateAccessKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 页码。默认为1。
-         * @type {number || null}
+         * 访问密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AccessKeyDetail || null}
          */
-        this.Page = null;
+        this.AccessKey = null;
 
         /**
-         * 每页数量。默认为20。
-         * @type {number || null}
-         */
-        this.Rp = null;
-
-        /**
-         * 按用户组名称匹配。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.RequestId = null;
 
     }
 
@@ -1825,9 +1848,13 @@ class ListGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Page = 'Page' in params ? params.Page : null;
-        this.Rp = 'Rp' in params ? params.Rp : null;
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+
+        if (params.AccessKey) {
+            let obj = new AccessKeyDetail();
+            obj.deserialize(params.AccessKey)
+            this.AccessKey = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1856,6 +1883,34 @@ class DeletePolicyVersionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAccessKey请求参数结构体
+ * @class
+ */
+class CreateAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定用户Uin，不填默认为当前用户创建访问密钥
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
 
     }
 }
@@ -2190,6 +2245,90 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
         }
         this.ServiceTypeList = 'ServiceTypeList' in params ? params.ServiceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAccessKey请求参数结构体
+ * @class
+ */
+class DeleteAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定需要删除的AccessKeyId
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * 指定用户Uin，不填默认为当前用户删除访问密钥
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
+ * 访问密钥
+ * @class
+ */
+class AccessKeyDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问密钥标识
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * 访问密钥（密钥仅创建时可见，请妥善保存）
+         * @type {string || null}
+         */
+        this.SecretAccessKey = null;
+
+        /**
+         * 密钥状态，激活（Active）或未激活（Inactive）
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.SecretAccessKey = 'SecretAccessKey' in params ? params.SecretAccessKey : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2734,6 +2873,13 @@ class SecretIdLastUsed extends  AbstractModel {
          */
         this.LastUsedDate = null;
 
+        /**
+         * 最后密钥访问日期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastSecretUsedDate = null;
+
     }
 
     /**
@@ -2745,6 +2891,35 @@ class SecretIdLastUsed extends  AbstractModel {
         }
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.LastUsedDate = 'LastUsedDate' in params ? params.LastUsedDate : null;
+        this.LastSecretUsedDate = 'LastSecretUsedDate' in params ? params.LastSecretUsedDate : null;
+
+    }
+}
+
+/**
+ * UpdateAccessKey返回参数结构体
+ * @class
+ */
+class UpdateAccessKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2913,6 +3088,20 @@ class GetUserResponse extends  AbstractModel {
         this.Email = null;
 
         /**
+         * 最近一次登录ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RecentlyLoginIP = null;
+
+        /**
+         * 最近一次登录时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RecentlyLoginTime = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2935,6 +3124,8 @@ class GetUserResponse extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+        this.RecentlyLoginIP = 'RecentlyLoginIP' in params ? params.RecentlyLoginIP : null;
+        this.RecentlyLoginTime = 'RecentlyLoginTime' in params ? params.RecentlyLoginTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3058,13 +3249,13 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * 角色ID，用于指定角色，入参 AttachRoleId 与 AttachRoleName 二选一
+         * 角色ID，用于指定角色，入参 DetachRoleId 与 DetachRoleName 二选一
          * @type {string || null}
          */
         this.DetachRoleId = null;
 
         /**
-         * 角色名称，用于指定角色，入参 AttachRoleId 与 AttachRoleName 二选一
+         * 角色名称，用于指定角色，入参 DetachRoleId 与 DetachRoleName 二选一
          * @type {string || null}
          */
         this.DetachRoleName = null;
@@ -4258,6 +4449,48 @@ class UpdateSAMLProviderResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateAccessKey请求参数结构体
+ * @class
+ */
+class UpdateAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定需要更新的AccessKeyId
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * 密钥状态，激活（Active）或未激活（Inactive）
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 指定用户Uin，不填默认为当前用户更新访问密钥
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
  * UpdateUser请求参数结构体
  * @class
  */
@@ -5189,18 +5422,24 @@ class UpdateOIDCConfigResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSAMLProvider请求参数结构体
+ * AttachGroupPolicy请求参数结构体
  * @class
  */
-class DeleteSAMLProviderRequest extends  AbstractModel {
+class AttachGroupPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SAML身份提供商名称
-         * @type {string || null}
+         * 策略 id
+         * @type {number || null}
          */
-        this.Name = null;
+        this.PolicyId = null;
+
+        /**
+         * 用户组 id
+         * @type {number || null}
+         */
+        this.AttachGroupId = null;
 
     }
 
@@ -5211,7 +5450,8 @@ class DeleteSAMLProviderRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
 
     }
 }
@@ -6157,24 +6397,18 @@ class ListGrantServiceAccessNode extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy请求参数结构体
+ * DeleteSAMLProvider请求参数结构体
  * @class
  */
-class AttachGroupPolicyRequest extends  AbstractModel {
+class DeleteSAMLProviderRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略 id
-         * @type {number || null}
+         * SAML身份提供商名称
+         * @type {string || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * 用户组 id
-         * @type {number || null}
-         */
-        this.AttachGroupId = null;
+        this.Name = null;
 
     }
 
@@ -6185,8 +6419,7 @@ class AttachGroupPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -6406,6 +6639,48 @@ class DescribeSafeAuthFlagIntlResponse extends  AbstractModel {
             this.OffsiteFlag = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListGroups请求参数结构体
+ * @class
+ */
+class ListGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 页码。默认为1。
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * 每页数量。默认为20。
+         * @type {number || null}
+         */
+        this.Rp = null;
+
+        /**
+         * 按用户组名称匹配。
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Rp = 'Rp' in params ? params.Rp : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
 
     }
 }
@@ -8486,6 +8761,7 @@ module.exports = {
     DescribeRoleListResponse: DescribeRoleListResponse,
     UpdatePolicyResponse: UpdatePolicyResponse,
     DeleteUserResponse: DeleteUserResponse,
+    TagRoleResponse: TagRoleResponse,
     GetRoleRequest: GetRoleRequest,
     CreateServiceLinkedRoleRequest: CreateServiceLinkedRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
@@ -8509,7 +8785,7 @@ module.exports = {
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
-    TagRoleResponse: TagRoleResponse,
+    DeleteAccessKeyResponse: DeleteAccessKeyResponse,
     PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     GetGroupRequest: GetGroupRequest,
     StrategyInfo: StrategyInfo,
@@ -8519,8 +8795,9 @@ module.exports = {
     DescribeSubAccountsRequest: DescribeSubAccountsRequest,
     DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
-    ListGroupsRequest: ListGroupsRequest,
+    CreateAccessKeyResponse: CreateAccessKeyResponse,
     DeletePolicyVersionResponse: DeletePolicyVersionResponse,
+    CreateAccessKeyRequest: CreateAccessKeyRequest,
     GetRolePermissionBoundaryResponse: GetRolePermissionBoundaryResponse,
     AttachedUserPolicyGroupInfo: AttachedUserPolicyGroupInfo,
     ListGroupsForUserResponse: ListGroupsForUserResponse,
@@ -8528,6 +8805,8 @@ module.exports = {
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
     CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
+    DeleteAccessKeyRequest: DeleteAccessKeyRequest,
+    AccessKeyDetail: AccessKeyDetail,
     WeChatWorkSubAccount: WeChatWorkSubAccount,
     OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
@@ -8538,6 +8817,7 @@ module.exports = {
     DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     SecretIdLastUsed: SecretIdLastUsed,
+    UpdateAccessKeyResponse: UpdateAccessKeyResponse,
     CreateUserOIDCConfigResponse: CreateUserOIDCConfigResponse,
     ListAttachedUserAllPoliciesResponse: ListAttachedUserAllPoliciesResponse,
     DeleteGroupRequest: DeleteGroupRequest,
@@ -8572,6 +8852,7 @@ module.exports = {
     DisableUserSSORequest: DisableUserSSORequest,
     ListPoliciesGrantingServiceAccessRequest: ListPoliciesGrantingServiceAccessRequest,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
+    UpdateAccessKeyRequest: UpdateAccessKeyRequest,
     UpdateUserRequest: UpdateUserRequest,
     ListWeChatWorkSubAccountsResponse: ListWeChatWorkSubAccountsResponse,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
@@ -8592,7 +8873,7 @@ module.exports = {
     AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     UpdateOIDCConfigResponse: UpdateOIDCConfigResponse,
-    DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
+    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     GetAccountSummaryResponse: GetAccountSummaryResponse,
     CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
@@ -8614,11 +8895,12 @@ module.exports = {
     CreateUserSAMLConfigRequest: CreateUserSAMLConfigRequest,
     UpdateGroupRequest: UpdateGroupRequest,
     ListGrantServiceAccessNode: ListGrantServiceAccessNode,
-    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     UpdateOIDCConfigRequest: UpdateOIDCConfigRequest,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
     DescribeSafeAuthFlagIntlResponse: DescribeSafeAuthFlagIntlResponse,
+    ListGroupsRequest: ListGroupsRequest,
     ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
     DescribeSafeAuthFlagIntlRequest: DescribeSafeAuthFlagIntlRequest,

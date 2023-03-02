@@ -41,25 +41,30 @@ const ResourceInfo = models.ResourceInfo;
 const DescribeShieldInstancesRequest = models.DescribeShieldInstancesRequest;
 const CreateScanInstancesResponse = models.CreateScanInstancesResponse;
 const DescribeScanInstancesResponse = models.DescribeScanInstancesResponse;
+const DescribeUrlDetectionResultRequest = models.DescribeUrlDetectionResultRequest;
 const VulInfo = models.VulInfo;
 const AppInfo = models.AppInfo;
+const DescribeShieldPlanInstanceResponse = models.DescribeShieldPlanInstanceResponse;
 const ServiceInfo = models.ServiceInfo;
 const SoInfo = models.SoInfo;
-const DescribeShieldPlanInstanceResponse = models.DescribeShieldPlanInstanceResponse;
 const ScanSensitiveInfo = models.ScanSensitiveInfo;
+const PluginListItem = models.PluginListItem;
+const DescribeApkDetectionResultRequest = models.DescribeApkDetectionResultRequest;
+const ResultListItem = models.ResultListItem;
 const ResourceServiceInfo = models.ResourceServiceInfo;
 const DescribeResourceInstancesRequest = models.DescribeResourceInstancesRequest;
 const AdInfo = models.AdInfo;
+const DescribeUrlDetectionResultResponse = models.DescribeUrlDetectionResultResponse;
 const DescribeShieldPlanInstanceRequest = models.DescribeShieldPlanInstanceRequest;
 const ShieldInfo = models.ShieldInfo;
-const ScanPermissionList = models.ScanPermissionList;
+const DescribeUserBaseInfoInstanceRequest = models.DescribeUserBaseInfoInstanceRequest;
 const CreateResourceInstancesResponse = models.CreateResourceInstancesResponse;
 const AppDetailInfo = models.AppDetailInfo;
 const DeleteScanInstancesResponse = models.DeleteScanInstancesResponse;
 const Filter = models.Filter;
 const DeleteShieldInstancesResponse = models.DeleteShieldInstancesResponse;
 const DescribeScanInstancesRequest = models.DescribeScanInstancesRequest;
-const DescribeUserBaseInfoInstanceRequest = models.DescribeUserBaseInfoInstanceRequest;
+const DescribeApkDetectionResultResponse = models.DescribeApkDetectionResultResponse;
 const DescribeResourceInstancesResponse = models.DescribeResourceInstancesResponse;
 const DescribeScanResultsRequest = models.DescribeScanResultsRequest;
 const CreateCosSecKeyInstanceResponse = models.CreateCosSecKeyInstanceResponse;
@@ -70,6 +75,8 @@ const DescribeShieldResultResponse = models.DescribeShieldResultResponse;
 const CreateBindInstanceResponse = models.CreateBindInstanceResponse;
 const VulList = models.VulList;
 const BindInfo = models.BindInfo;
+const ScanPermissionList = models.ScanPermissionList;
+const OptPluginListItem = models.OptPluginListItem;
 const DeleteScanInstancesRequest = models.DeleteScanInstancesRequest;
 
 
@@ -95,7 +102,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 通过唯一标识获取加固的结果
+     * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {DescribeShieldResultRequest} req
      * @param {function(string, DescribeShieldResultResponse):void} cb
      * @public
@@ -128,7 +135,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 将应用和资源进行绑定
+     * 将应用和资源进行绑定。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {CreateBindInstanceRequest} req
      * @param {function(string, CreateBindInstanceResponse):void} cb
      * @public
@@ -139,7 +146,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性。
+     * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
      * @param {CreateCosSecKeyInstanceRequest} req
      * @param {function(string, CreateCosSecKeyInstanceResponse):void} cb
      * @public
@@ -150,7 +157,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 获取某个用户的所有资源信息
+     * 获取某个用户的所有资源信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {DescribeResourceInstancesRequest} req
      * @param {function(string, DescribeResourceInstancesResponse):void} cb
      * @public
@@ -172,7 +179,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 查询加固策略
+     * 查询加固策略。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {DescribeShieldPlanInstanceRequest} req
      * @param {function(string, DescribeShieldPlanInstanceResponse):void} cb
      * @public
@@ -183,7 +190,7 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果
+     * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {CreateShieldInstanceRequest} req
      * @param {function(string, CreateShieldInstanceResponse):void} cb
      * @public
@@ -195,7 +202,7 @@ class MsClient extends AbstractClient {
 
     /**
      * 本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
 
      * @param {DescribeShieldInstancesRequest} req
      * @param {function(string, DescribeShieldInstancesResponse):void} cb
@@ -207,7 +214,30 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 对资源进行策略新增
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     * @param {DescribeScanInstancesRequest} req
+     * @param {function(string, DescribeScanInstancesResponse):void} cb
+     * @public
+     */
+    DescribeScanInstances(req, cb) {
+        let resp = new DescribeScanInstancesResponse();
+        this.request("DescribeScanInstances", req, resp, cb);
+    }
+
+    /**
+     * 移动安全-网址检测服务
+     * @param {DescribeUrlDetectionResultRequest} req
+     * @param {function(string, DescribeUrlDetectionResultResponse):void} cb
+     * @public
+     */
+    DescribeUrlDetectionResult(req, cb) {
+        let resp = new DescribeUrlDetectionResultResponse();
+        this.request("DescribeUrlDetectionResult", req, resp, cb);
+    }
+
+    /**
+     * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {CreateShieldPlanInstanceRequest} req
      * @param {function(string, CreateShieldPlanInstanceResponse):void} cb
      * @public
@@ -229,19 +259,18 @@ class MsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-     * @param {DescribeScanInstancesRequest} req
-     * @param {function(string, DescribeScanInstancesResponse):void} cb
+     * 该接口采用同步模式请求腾讯APK云检测服务，即时返回检测数据，需要用户用轮询的方式调用本接口来进行样本送检并获取检测结果(每隔60s发送一次请求，传相同的参数，重试30次)，一般情况下0.5h内会出检测结果，最长时间是3h。当Result为ok并且ResultList数组非空有值时，代表检测完毕，若长时间获取不到检测结果，请联系客服。
+     * @param {DescribeApkDetectionResultRequest} req
+     * @param {function(string, DescribeApkDetectionResultResponse):void} cb
      * @public
      */
-    DescribeScanInstances(req, cb) {
-        let resp = new DescribeScanInstancesResponse();
-        this.request("DescribeScanInstances", req, resp, cb);
+    DescribeApkDetectionResult(req, cb) {
+        let resp = new DescribeApkDetectionResultResponse();
+        this.request("DescribeApkDetectionResult", req, resp, cb);
     }
 
     /**
-     * 删除一个或者多个app加固信息
+     * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      * @param {DeleteShieldInstancesRequest} req
      * @param {function(string, DeleteShieldInstancesResponse):void} cb
      * @public

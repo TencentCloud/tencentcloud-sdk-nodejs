@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const MatchKBPURLListResponse = models.MatchKBPURLListResponse;
 const DescribeKBComponentVulnerabilityRequest = models.DescribeKBComponentVulnerabilityRequest;
 const ComponentVulnerabilityUnion = models.ComponentVulnerabilityUnion;
 const LicenseUnion = models.LicenseUnion;
@@ -26,6 +27,7 @@ const CVSSV3Info = models.CVSSV3Info;
 const Component = models.Component;
 const DescribeKBVulnerabilityResponse = models.DescribeKBVulnerabilityResponse;
 const DescribeKBLicenseResponse = models.DescribeKBLicenseResponse;
+const MatchKBPURLListRequest = models.MatchKBPURLListRequest;
 const VulnerabilityUnion = models.VulnerabilityUnion;
 const LicenseDetail = models.LicenseDetail;
 const DescribeKBVulnerabilityRequest = models.DescribeKBVulnerabilityRequest;
@@ -92,6 +94,17 @@ class BscaClient extends AbstractClient {
     DescribeKBVulnerability(req, cb) {
         let resp = new DescribeKBVulnerabilityResponse();
         this.request("DescribeKBVulnerability", req, resp, cb);
+    }
+
+    /**
+     * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
+     * @param {MatchKBPURLListRequest} req
+     * @param {function(string, MatchKBPURLListResponse):void} cb
+     * @public
+     */
+    MatchKBPURLList(req, cb) {
+        let resp = new MatchKBPURLListResponse();
+        this.request("MatchKBPURLList", req, resp, cb);
     }
 
 

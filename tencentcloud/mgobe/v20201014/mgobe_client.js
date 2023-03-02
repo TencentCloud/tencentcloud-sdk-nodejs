@@ -46,7 +46,9 @@ class MgobeClient extends AbstractClient {
     }
     
     /**
-     * 该接口用于查询玩家信息。支持两种用法，当OpenId不传的时候，PlayerId必传，传入PlayerId可以查询当前PlayerId的玩家信息，当OpenId传入的时候，PlayerId可不传，按照OpenId查询玩家信息。
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+该接口用于查询玩家信息。支持两种用法，当OpenId不传的时候，PlayerId必传，传入PlayerId可以查询当前PlayerId的玩家信息，当OpenId传入的时候，PlayerId可不传，按照OpenId查询玩家信息。
      * @param {DescribePlayerRequest} req
      * @param {function(string, DescribePlayerResponse):void} cb
      * @public
@@ -57,7 +59,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 修改玩家自定义状态
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+修改玩家自定义状态
      * @param {ChangeRoomPlayerStatusRequest} req
      * @param {function(string, ChangeRoomPlayerStatusResponse):void} cb
      * @public
@@ -68,7 +72,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 修改房间
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+修改房间
      * @param {ModifyRoomRequest} req
      * @param {function(string, ModifyRoomResponse):void} cb
      * @public
@@ -79,7 +85,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 踢出房间玩家
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+踢出房间玩家
      * @param {RemoveRoomPlayerRequest} req
      * @param {function(string, RemoveRoomPlayerResponse):void} cb
      * @public
@@ -90,7 +98,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于查询房间信息。支持两种用法，当房间Id不传的时候，玩家Id必传，传入玩家Id可以查询当前玩家所在的房间信息，当房间Id传入的时候，玩家Id可不传，按照房间Id查询房间信息。
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+该接口用于查询房间信息。支持两种用法，当房间Id不传的时候，玩家Id必传，传入玩家Id可以查询当前玩家所在的房间信息，当房间Id传入的时候，玩家Id可不传，按照房间Id查询房间信息。
      * @param {DescribeRoomRequest} req
      * @param {function(string, DescribeRoomResponse):void} cb
      * @public
@@ -101,7 +111,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 修改房间玩家自定义属性
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+修改房间玩家自定义属性
      * @param {ChangeRoomPlayerProfileRequest} req
      * @param {function(string, ChangeRoomPlayerProfileResponse):void} cb
      * @public
@@ -112,7 +124,9 @@ class MgobeClient extends AbstractClient {
     }
 
     /**
-     * 通过game_id、room_id解散房间
+     * 此接口无法使用，游戏联机对战引擎MGOBE已于6.1正式下架，感谢您的支持
+
+通过game_id、room_id解散房间
      * @param {DismissRoomRequest} req
      * @param {function(string, DismissRoomResponse):void} cb
      * @public

@@ -66,6 +66,147 @@ class CreateVirusScanAgainRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecLogDeliveryKafkaSetting请求参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryKafkaSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeSearchTemplates返回参数结构体
+ * @class
+ */
+class DescribeSearchTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 模板列表
+         * @type {Array.<SearchTemplate> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SearchTemplate();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 扫描忽略的漏洞
+ * @class
+ */
+class ScanIgnoreVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞CVEID
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 忽略的仓库镜像数
+         * @type {number || null}
+         */
+        this.RegistryImageCount = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 是否忽略所有镜像：0：否/1：是
+         * @type {number || null}
+         */
+        this.IsIgnoreAll = null;
+
+        /**
+         * 忽略的本地镜像数
+         * @type {number || null}
+         */
+        this.LocalImageCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.RegistryImageCount = 'RegistryImageCount' in params ? params.RegistryImageCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.IsIgnoreAll = 'IsIgnoreAll' in params ? params.IsIgnoreAll : null;
+        this.LocalImageCount = 'LocalImageCount' in params ? params.LocalImageCount : null;
+
+    }
+}
+
+/**
  * UpdateImageRegistryTimingScanTask返回参数结构体
  * @class
  */
@@ -88,6 +229,197 @@ class UpdateImageRegistryTimingScanTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeScanIgnoreVulList返回参数结构体
+ * @class
+ */
+class DescribeScanIgnoreVulListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总是
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞列表
+         * @type {Array.<ScanIgnoreVul> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ScanIgnoreVul();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVulDefenceEventStatus请求参数结构体
+ * @class
+ */
+class ModifyVulDefenceEventStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件IDs数组
+         * @type {Array.<number> || null}
+         */
+        this.EventIDs = null;
+
+        /**
+         * 操作状态：
+EVENT_DEALED：已处理，EVENT_IGNORE：忽略，EVENT_ISOLATE_CONTAINER：隔离容器，EVENT_DEL：删除
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventIDs = 'EventIDs' in params ? params.EventIDs : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifyVirusAutoIsolateExampleSwitch返回参数结构体
+ * @class
+ */
+class ModifyVirusAutoIsolateExampleSwitchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Ckafka topic信息
+ * @class
+ */
+class CKafkaTopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicID = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicID = 'TopicID' in params ? params.TopicID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * CreateVulExportJob返回参数结构体
+ * @class
+ */
+class CreateVulExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -136,6 +468,85 @@ class DescribeUnfinishRefreshTaskResponse extends  AbstractModel {
 }
 
 /**
+ * CreateComponentExportJob请求参数结构体
+ * @class
+ */
+class CreateComponentExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+        /**
+         * 需要返回的数量，默认为10000，最大值为10000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>ComponentName- String - 是否必填：否 - 镜像组件名称</li><li>ComponentVersion- String - 是否必填：否 - 镜像组件版本</li><li>ComponentType- String - 是否必填：否 - 镜像组件类型</li><li>VulLevel- String - 是否必填：否 - 漏洞威胁等级</li><li>HasVul- String - 是否必填：否 -是否有漏洞；true：是，false，否；不传或ALL ：全部</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式desc ，asc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * 表示是否启用合规标准。
  * @class
  */
@@ -171,30 +582,24 @@ class ComplianceBenchmarkStandardEnable extends  AbstractModel {
 }
 
 /**
- * DescribeRiskSyscallWhiteLists返回参数结构体
+ * CreateNetworkFirewallUndoPublish请求参数结构体
  * @class
  */
-class DescribeRiskSyscallWhiteListsResponse extends  AbstractModel {
+class CreateNetworkFirewallUndoPublishRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件总数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 白名单信息列表
-         * @type {Array.<RiskSyscallWhiteListBaseInfo> || null}
-         */
-        this.WhiteListSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 集群Id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * 策略Id数组
+         * @type {Array.<number> || null}
+         */
+        this.Id = null;
 
     }
 
@@ -205,17 +610,8 @@ class DescribeRiskSyscallWhiteListsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.WhiteListSet) {
-            this.WhiteListSet = new Array();
-            for (let z in params.WhiteListSet) {
-                let obj = new RiskSyscallWhiteListBaseInfo();
-                obj.deserialize(params.WhiteListSet[z]);
-                this.WhiteListSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -263,89 +659,24 @@ class CreateRefreshTaskResponse extends  AbstractModel {
 }
 
 /**
- * 容器安全镜像病毒信息
+ * CreateVulDefenceHostExportJob返回参数结构体
  * @class
  */
-class ImageVirusInfo extends  AbstractModel {
+class CreateVulDefenceHostExportJobResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路径
-注意：此字段可能返回 null，表示取不到有效值。
+         * 导出任务ID，前端拿着任务ID查询任务进度
          * @type {string || null}
          */
-        this.Path = null;
+        this.JobId = null;
 
         /**
-         * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RiskLevel = null;
-
-        /**
-         * 病毒名称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VirusName = null;
-
-        /**
-         * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Desc = null;
-
-        /**
-         * 修护建议
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Solution = null;
-
-        /**
-         * 大小
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * 首次发现时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FirstScanTime = null;
-
-        /**
-         * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LatestScanTime = null;
-
-        /**
-         * 文件md5
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Md5 = null;
-
-        /**
-         * 文件名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FileName = null;
+        this.RequestId = null;
 
     }
 
@@ -356,17 +687,224 @@ class ImageVirusInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Path = 'Path' in params ? params.Path : null;
-        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
-        this.VirusName = 'VirusName' in params ? params.VirusName : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
-        this.Solution = 'Solution' in params ? params.Solution : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.FirstScanTime = 'FirstScanTime' in params ? params.FirstScanTime : null;
-        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 容器安全镜像漏洞信息
+ * @class
+ */
+class ImageVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 观点验证程序id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.POCID = null;
+
+        /**
+         * 漏洞名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 涉及组件信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ComponentsInfo> || null}
+         */
+        this.Components = null;
+
+        /**
+         * 分类
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * 分类2
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CategoryType = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Des = null;
+
+        /**
+         * 解决方案
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OfficialSolution = null;
+
+        /**
+         * 引用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reference = null;
+
+        /**
+         * 防御方案
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenseSolution = null;
+
+        /**
+         * 提交时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubmitTime = null;
+
+        /**
+         * Cvss分数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CvssScore = null;
+
+        /**
+         * Cvss信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CvssVector = null;
+
+        /**
+         * 是否建议修复
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsSuggest = null;
+
+        /**
+         * 修复版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FixedVersions = null;
+
+        /**
+         * 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 组件名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * 组件版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.POCID = 'POCID' in params ? params.POCID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Components) {
+            this.Components = new Array();
+            for (let z in params.Components) {
+                let obj = new ComponentsInfo();
+                obj.deserialize(params.Components[z]);
+                this.Components.push(obj);
+            }
+        }
+        this.Category = 'Category' in params ? params.Category : null;
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Des = 'Des' in params ? params.Des : null;
+        this.OfficialSolution = 'OfficialSolution' in params ? params.OfficialSolution : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.DefenseSolution = 'DefenseSolution' in params ? params.DefenseSolution : null;
+        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
+        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
+        this.CvssVector = 'CvssVector' in params ? params.CvssVector : null;
+        this.IsSuggest = 'IsSuggest' in params ? params.IsSuggest : null;
+        this.FixedVersions = 'FixedVersions' in params ? params.FixedVersions : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.Version = 'Version' in params ? params.Version : null;
+
+    }
+}
+
+/**
+ * CreateVulImageExportJob返回参数结构体
+ * @class
+ */
+class CreateVulImageExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -536,6 +1074,185 @@ class DescribeVirusScanTimeoutSettingResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVulImageList返回参数结构体
+ * @class
+ */
+class DescribeVulImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 受影响的镜像列表
+         * @type {Array.<VulAffectedImageInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 镜像总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulAffectedImageInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateVulExportJob请求参数结构体
+ * @class
+ */
+class CreateVulExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+        /**
+         * 需要返回的数量，默认为10000，最大值为10000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>ComponentName- String - 是否必填：否 - 镜像组件名称</li><li>ComponentVersion- String - 是否必填：否 - 镜像组件版本</li><li>ComponentType- String - 是否必填：否 - 镜像组件类型</li><li>VulLevel- String - 是否必填：否 - 漏洞威胁等级</li><li>HasVul- String - 是否必填：否 -是否有漏洞；true：是，false，否；不传或ALL ：全部</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式desc ，asc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallNamespaceLabelList返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallNamespaceLabelListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群空间标签详细信息
+         * @type {Array.<NetworkClusterNamespaceLabelInfo> || null}
+         */
+        this.ClusterNamespaceLabelList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterNamespaceLabelList) {
+            this.ClusterNamespaceLabelList = new Array();
+            for (let z in params.ClusterNamespaceLabelList) {
+                let obj = new NetworkClusterNamespaceLabelInfo();
+                obj.deserialize(params.ClusterNamespaceLabelList[z]);
+                this.ClusterNamespaceLabelList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateCheckComponent的入口参数,用于批量安装防御容器
  * @class
  */
@@ -621,6 +1338,85 @@ class DescribeAssetComponentListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVulImageList请求参数结构体
+ * @class
+ */
+class DescribeVulImageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedNewestImage- Bool- 是否必填：否 - 仅展示影响最新版本镜像的漏洞</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>HostIP- string -是否必填: 否 - 内网IP</li>
+<li>PublicIP- string -是否必填: 否 - 外网IP</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>HostName- string -是否必填: 否 - 主机名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageRegistryVulList返回参数结构体
  * @class
  */
@@ -668,6 +1464,119 @@ class DescribeAssetImageRegistryVulListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞扫描的镜像信息
+ * @class
+ */
+class VulScanImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像大小
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 任务状态:SCANNING:扫描中 FAILED:失败 FINISHED:完成 CANCELED:取消
+         * @type {string || null}
+         */
+        this.ScanStatus = null;
+
+        /**
+         * 扫描时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ScanDuration = null;
+
+        /**
+         * 高危漏洞数
+         * @type {number || null}
+         */
+        this.HighLevelVulCount = null;
+
+        /**
+         * 中危漏洞数
+         * @type {number || null}
+         */
+        this.MediumLevelVulCount = null;
+
+        /**
+         * 低危漏洞数
+         * @type {number || null}
+         */
+        this.LowLevelVulCount = null;
+
+        /**
+         * 严重漏洞数
+         * @type {number || null}
+         */
+        this.CriticalLevelVulCount = null;
+
+        /**
+         * 本地镜像漏洞扫描任务ID
+         * @type {number || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 漏洞扫描的开始时间
+         * @type {string || null}
+         */
+        this.ScanStartTime = null;
+
+        /**
+         * 漏洞扫描的结束时间
+         * @type {string || null}
+         */
+        this.ScanEndTime = null;
+
+        /**
+         * 失败原因:TIMEOUT:超时 TOO_MANY:任务过多 OFFLINE:离线
+         * @type {string || null}
+         */
+        this.ErrorStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+        this.ScanDuration = 'ScanDuration' in params ? params.ScanDuration : null;
+        this.HighLevelVulCount = 'HighLevelVulCount' in params ? params.HighLevelVulCount : null;
+        this.MediumLevelVulCount = 'MediumLevelVulCount' in params ? params.MediumLevelVulCount : null;
+        this.LowLevelVulCount = 'LowLevelVulCount' in params ? params.LowLevelVulCount : null;
+        this.CriticalLevelVulCount = 'CriticalLevelVulCount' in params ? params.CriticalLevelVulCount : null;
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.ScanStartTime = 'ScanStartTime' in params ? params.ScanStartTime : null;
+        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.ErrorStatus = 'ErrorStatus' in params ? params.ErrorStatus : null;
 
     }
 }
@@ -781,6 +1690,90 @@ class DescribeAssetImageDetailRequest extends  AbstractModel {
 }
 
 /**
+ * 漏洞扫描忽略的本地镜像
+ * @class
+ */
+class VulIgnoreLocalImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像大小
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+
+    }
+}
+
+/**
+ * ModifyK8sApiAbnormalRuleInfo返回参数结构体
+ * @class
+ */
+class ModifyK8sApiAbnormalRuleInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAssetImageScanStop返回参数结构体
  * @class
  */
@@ -816,25 +1809,103 @@ class ModifyAssetImageScanStopResponse extends  AbstractModel {
 }
 
 /**
- * DescribeComplianceScanFailedAssetList返回参数结构体
+ * AddAssetImageRegistryRegistryDetail请求参数结构体
  * @class
  */
-class DescribeComplianceScanFailedAssetListResponse extends  AbstractModel {
+class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回检测失败的资产的总数。
-         * @type {number || null}
+         * 仓库名
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.Name = null;
 
         /**
-         * 返回各类检测失败的资产的汇总信息的列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ComplianceScanFailedAsset> || null}
+         * 用户名
+         * @type {string || null}
          */
-        this.ScanFailedAssetList = null;
+        this.Username = null;
+
+        /**
+         * 密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 仓库url
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 仓库类型，列表：harbor
+         * @type {string || null}
+         */
+        this.RegistryType = null;
+
+        /**
+         * 网络类型，列表：public（公网）
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 仓库版本
+         * @type {string || null}
+         */
+        this.RegistryVersion = null;
+
+        /**
+         * 区域，列表：default（默认）
+         * @type {string || null}
+         */
+        this.RegistryRegion = null;
+
+        /**
+         * 限速
+         * @type {number || null}
+         */
+        this.SpeedLimit = null;
+
+        /**
+         * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+         * @type {number || null}
+         */
+        this.Insecure = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.RegistryVersion = 'RegistryVersion' in params ? params.RegistryVersion : null;
+        this.RegistryRegion = 'RegistryRegion' in params ? params.RegistryRegion : null;
+        this.SpeedLimit = 'SpeedLimit' in params ? params.SpeedLimit : null;
+        this.Insecure = 'Insecure' in params ? params.Insecure : null;
+
+    }
+}
+
+/**
+ * AddIgnoreVul返回参数结构体
+ * @class
+ */
+class AddIgnoreVulResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -850,16 +1921,6 @@ class DescribeComplianceScanFailedAssetListResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ScanFailedAssetList) {
-            this.ScanFailedAssetList = new Array();
-            for (let z in params.ScanFailedAssetList) {
-                let obj = new ComplianceScanFailedAsset();
-                obj.deserialize(params.ScanFailedAssetList[z]);
-                this.ScanFailedAssetList.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -867,18 +1928,24 @@ class DescribeComplianceScanFailedAssetListResponse extends  AbstractModel {
 }
 
 /**
- * SyncAssetImageRegistryAsset返回参数结构体
+ * 漏洞防御攻击事件趋势
  * @class
  */
-class SyncAssetImageRegistryAssetResponse extends  AbstractModel {
+class VulDefenceEventTendency extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 日期
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Date = null;
+
+        /**
+         * 事件数量
+         * @type {number || null}
+         */
+        this.EventCount = null;
 
     }
 
@@ -889,7 +1956,36 @@ class SyncAssetImageRegistryAssetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallClusterRefreshStatus请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallClusterRefreshStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1018,24 +2114,36 @@ class DescribeAccessControlEventsExportResponse extends  AbstractModel {
 }
 
 /**
- * AddEditAbnormalProcessRule请求参数结构体
+ * DescribeImageRiskSummary返回参数结构体
  * @class
  */
-class AddEditAbnormalProcessRuleRequest extends  AbstractModel {
+class DescribeImageRiskSummaryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 增加策略信息，策略id为空，编辑策略是id不能为空
-         * @type {AbnormalProcessRuleInfo || null}
+         * 安全漏洞
+         * @type {Array.<RunTimeRiskInfo> || null}
          */
-        this.RuleInfo = null;
+        this.VulnerabilityCnt = null;
 
         /**
-         * 仅在加白的时候带上
+         * 木马病毒
+         * @type {Array.<RunTimeRiskInfo> || null}
+         */
+        this.MalwareVirusCnt = null;
+
+        /**
+         * 敏感信息
+         * @type {Array.<RunTimeRiskInfo> || null}
+         */
+        this.RiskCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EventId = null;
+        this.RequestId = null;
 
     }
 
@@ -1047,33 +2155,50 @@ class AddEditAbnormalProcessRuleRequest extends  AbstractModel {
             return;
         }
 
-        if (params.RuleInfo) {
-            let obj = new AbnormalProcessRuleInfo();
-            obj.deserialize(params.RuleInfo)
-            this.RuleInfo = obj;
+        if (params.VulnerabilityCnt) {
+            this.VulnerabilityCnt = new Array();
+            for (let z in params.VulnerabilityCnt) {
+                let obj = new RunTimeRiskInfo();
+                obj.deserialize(params.VulnerabilityCnt[z]);
+                this.VulnerabilityCnt.push(obj);
+            }
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
+
+        if (params.MalwareVirusCnt) {
+            this.MalwareVirusCnt = new Array();
+            for (let z in params.MalwareVirusCnt) {
+                let obj = new RunTimeRiskInfo();
+                obj.deserialize(params.MalwareVirusCnt[z]);
+                this.MalwareVirusCnt.push(obj);
+            }
+        }
+
+        if (params.RiskCnt) {
+            this.RiskCnt = new Array();
+            for (let z in params.RiskCnt) {
+                let obj = new RunTimeRiskInfo();
+                obj.deserialize(params.RiskCnt[z]);
+                this.RiskCnt.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeComplianceTaskAssetSummary请求参数结构体
+ * DescribeNetworkFirewallPolicyDetail请求参数结构体
  * @class
  */
-class DescribeComplianceTaskAssetSummaryRequest extends  AbstractModel {
+class DescribeNetworkFirewallPolicyDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资产类型列表。
-ASSET_CONTAINER, 容器
-ASSET_IMAGE, 镜像
-ASSET_HOST, 主机
-ASSET_K8S, K8S资产
-         * @type {Array.<string> || null}
+         * 策略Id
+         * @type {number || null}
          */
-        this.AssetTypeSet = null;
+        this.Id = null;
 
     }
 
@@ -1084,7 +2209,42 @@ ASSET_K8S, K8S资产
         if (!params) {
             return;
         }
-        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * CreateAccessControlsRuleExportJob返回参数结构体
+ * @class
+ */
+class CreateAccessControlsRuleExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1118,12 +2278,50 @@ class ModifyAssetImageRegistryScanStopResponse extends  AbstractModel {
 }
 
 /**
- * DescribeProVersionInfo请求参数结构体
+ * DescribeAssetImageRegistryRiskListExport请求参数结构体
  * @class
  */
-class DescribeProVersionInfoRequest extends  AbstractModel {
+class DescribeAssetImageRegistryRiskListExportRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Level- String - 是否必填：否 - 漏洞级别筛选，</li>
+<li>Name - String - 是否必填：否 - 漏洞名称</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 镜像信息
+         * @type {ImageInfo || null}
+         */
+        this.ImageInfo = null;
+
+        /**
+         * 镜像标识Id
+         * @type {number || null}
+         */
+        this.Id = null;
 
     }
 
@@ -1134,6 +2332,25 @@ class DescribeProVersionInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+        if (params.ImageInfo) {
+            let obj = new ImageInfo();
+            obj.deserialize(params.ImageInfo)
+            this.ImageInfo = obj;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1169,6 +2386,124 @@ class SetCheckModeResponse extends  AbstractModel {
         }
         this.SetCheckResult = 'SetCheckResult' in params ? params.SetCheckResult : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全日志接入对象详情
+ * @class
+ */
+class SecLogJoinObjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机ID
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 主机IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机状态
+         * @type {string || null}
+         */
+        this.HostStatus = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * 接入状态(true:已接入  false:未接入)
+         * @type {boolean || null}
+         */
+        this.JoinState = null;
+
+        /**
+         * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * 集群主节点地址
+         * @type {string || null}
+         */
+        this.ClusterMainAddress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.HostStatus = 'HostStatus' in params ? params.HostStatus : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.JoinState = 'JoinState' in params ? params.JoinState : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.ClusterMainAddress = 'ClusterMainAddress' in params ? params.ClusterMainAddress : null;
+
+    }
+}
+
+/**
+ * DescribeVulImageSummary请求参数结构体
+ * @class
+ */
+class DescribeVulImageSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1246,6 +2581,140 @@ class DescribeAssetImageScanStatusResponse extends  AbstractModel {
         this.RiskCount = 'RiskCount' in params ? params.RiskCount : null;
         this.LeftSeconds = 'LeftSeconds' in params ? params.LeftSeconds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleDetail返回参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSampleDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件Md5值
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 文件大小(B)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 病毒名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 查杀引擎
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.KillEngine = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 事件描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HarmDescribe = null;
+
+        /**
+         * 建议方案
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SuggestScheme = null;
+
+        /**
+         * 参考链接
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReferenceLink = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.KillEngine = 'KillEngine' in params ? params.KillEngine : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.HarmDescribe = 'HarmDescribe' in params ? params.HarmDescribe : null;
+        this.SuggestScheme = 'SuggestScheme' in params ? params.SuggestScheme : null;
+        this.ReferenceLink = 'ReferenceLink' in params ? params.ReferenceLink : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceEventTendency请求参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1392,6 +2861,21 @@ class DescribePurchaseStateInfoResponse extends  AbstractModel {
         this.GivenAuthorizedCnt = null;
 
         /**
+         * 起始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 子状态(具体意义依据State字段而定)
+State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubState = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1415,18 +2899,67 @@ class DescribePurchaseStateInfoResponse extends  AbstractModel {
         this.ExpirationTime = 'ExpirationTime' in params ? params.ExpirationTime : null;
         this.AutomaticRenewal = 'AutomaticRenewal' in params ? params.AutomaticRenewal : null;
         this.GivenAuthorizedCnt = 'GivenAuthorizedCnt' in params ? params.GivenAuthorizedCnt : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.SubState = 'SubState' in params ? params.SubState : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * ModifyVirusFileStatus返回参数结构体
+ * 后付费详情
  * @class
  */
-class ModifyVirusFileStatusResponse extends  AbstractModel {
+class SoftQuotaDayInfo extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 扣费时间
+         * @type {string || null}
+         */
+        this.PayTime = null;
+
+        /**
+         * 计费核数
+         * @type {number || null}
+         */
+        this.CoresCnt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.CoresCnt = 'CoresCnt' in params ? params.CoresCnt : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefencePlugin返回参数结构体
+ * @class
+ */
+class DescribeVulDefencePluginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞防御插件列表
+         * @type {Array.<VulDefencePlugin> || null}
+         */
+        this.List = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1442,6 +2975,16 @@ class ModifyVirusFileStatusResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulDefencePlugin();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1624,6 +3167,34 @@ class DescribeVirusDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteEscapeWhiteList请求参数结构体
+ * @class
+ */
+class DeleteEscapeWhiteListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白名单记录ID数组
+         * @type {Array.<number> || null}
+         */
+        this.IDSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IDSet = 'IDSet' in params ? params.IDSet : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail请求参数结构体
  * @class
  */
@@ -1647,6 +3218,81 @@ class DescribeClusterDetailRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ModifyK8sApiAbnormalRuleInfo请求参数结构体
+ * @class
+ */
+class ModifyK8sApiAbnormalRuleInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则详情
+         * @type {K8sApiAbnormalRuleInfo || null}
+         */
+        this.RuleInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleInfo) {
+            let obj = new K8sApiAbnormalRuleInfo();
+            obj.deserialize(params.RuleInfo)
+            this.RuleInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * UpdateAndPublishNetworkFirewallPolicyDetail返回参数结构体
+ * @class
+ */
+class UpdateAndPublishNetworkFirewallPolicyDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1720,6 +3366,34 @@ class DescribeAssetImageListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecLogDeliveryClsOptions请求参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryClsOptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.ClsRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClsRegion = 'ClsRegion' in params ? params.ClsRegion : null;
+
+    }
+}
+
+/**
  * DescribeRiskSyscallWhiteListDetail请求参数结构体
  * @class
  */
@@ -1743,6 +3417,56 @@ class DescribeRiskSyscallWhiteListDetailRequest extends  AbstractModel {
             return;
         }
         this.WhiteListId = 'WhiteListId' in params ? params.WhiteListId : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleScopeList返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleScopeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表
+         * @type {Array.<K8sApiAbnormalRuleScopeInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new K8sApiAbnormalRuleScopeInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1778,6 +3502,49 @@ class ModifyAbnormalProcessRuleStatusRequest extends  AbstractModel {
         }
         this.RuleIdSet = 'RuleIdSet' in params ? params.RuleIdSet : null;
         this.IsEnable = 'IsEnable' in params ? params.IsEnable : null;
+
+    }
+}
+
+/**
+ * DescribeVulTendency返回参数结构体
+ * @class
+ */
+class DescribeVulTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞趋势列表
+         * @type {Array.<VulTendencyInfo> || null}
+         */
+        this.VulTendencySet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulTendencySet) {
+            this.VulTendencySet = new Array();
+            for (let z in params.VulTendencySet) {
+                let obj = new VulTendencyInfo();
+                obj.deserialize(params.VulTendencySet[z]);
+                this.VulTendencySet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1867,6 +3634,62 @@ class ProcessDetailInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeAutoAuthorizedRuleHost请求参数结构体
+ * @class
+ */
+class DescribeAutoAuthorizedRuleHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则id
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 需要返回的数量，默认为全部；
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序方式，asc，desc
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * ScanCompliancePolicyItems请求参数结构体
  * @class
  */
@@ -1890,6 +3713,41 @@ class ScanCompliancePolicyItemsRequest extends  AbstractModel {
             return;
         }
         this.CustomerPolicyItemIdSet = 'CustomerPolicyItemIdSet' in params ? params.CustomerPolicyItemIdSet : null;
+
+    }
+}
+
+/**
+ * DescribeAgentDaemonSetCmd返回参数结构体
+ * @class
+ */
+class DescribeAgentDaemonSetCmdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安装命令
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Command = 'Command' in params ? params.Command : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2026,6 +3884,174 @@ class DeleteAccessControlRulesRequest extends  AbstractModel {
             return;
         }
         this.RuleIdSet = 'RuleIdSet' in params ? params.RuleIdSet : null;
+
+    }
+}
+
+/**
+ * DeleteRiskSyscallEvents返回参数结构体
+ * @class
+ */
+class DeleteRiskSyscallEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenTcssTrial返回参数结构体
+ * @class
+ */
+class OpenTcssTrialResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 试用开通结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 试用开通开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSearchExportList返回参数结构体
+ * @class
+ */
+class DescribeSearchExportListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateVulScanTask请求参数结构体
+ * @class
+ */
+class CreateVulScanTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地镜像扫描范围类型。ALL:全部本地镜像，NOT_SCAN：全部已授权未扫描本地镜像，IMAGEIDS:自选本地镜像ID
+         * @type {string || null}
+         */
+        this.LocalImageScanType = null;
+
+        /**
+         * 根据已授权的本地镜像IDs扫描，优先权高于根据满足条件的已授权的本地镜像。
+         * @type {Array.<string> || null}
+         */
+        this.LocalImageIDs = null;
+
+        /**
+         * 仓库镜像扫描范围类型。ALL:全部仓库镜像，NOT_SCAN：全部已授权未扫描仓库镜像，IMAGEIDS:自选仓库镜像ID
+         * @type {string || null}
+         */
+        this.RegistryImageScanType = null;
+
+        /**
+         * 根据已授权的仓库镜像IDs扫描，优先权高于根据满足条件的已授权的仓库镜像。
+         * @type {Array.<number> || null}
+         */
+        this.RegistryImageIDs = null;
+
+        /**
+         * 本地镜像重新漏洞扫描时的任务ID
+         * @type {number || null}
+         */
+        this.LocalTaskID = null;
+
+        /**
+         * 仓库镜像重新漏洞扫描时的任务ID
+         * @type {number || null}
+         */
+        this.RegistryTaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalImageScanType = 'LocalImageScanType' in params ? params.LocalImageScanType : null;
+        this.LocalImageIDs = 'LocalImageIDs' in params ? params.LocalImageIDs : null;
+        this.RegistryImageScanType = 'RegistryImageScanType' in params ? params.RegistryImageScanType : null;
+        this.RegistryImageIDs = 'RegistryImageIDs' in params ? params.RegistryImageIDs : null;
+        this.LocalTaskID = 'LocalTaskID' in params ? params.LocalTaskID : null;
+        this.RegistryTaskID = 'RegistryTaskID' in params ? params.RegistryTaskID : null;
 
     }
 }
@@ -2195,40 +4221,37 @@ class DescribeAccessControlEventsResponse extends  AbstractModel {
 }
 
 /**
- * 运行时安全，进程基础信息
+ * 安全日志日志投递kafka设置详情
  * @class
  */
-class ProcessBaseInfo extends  AbstractModel {
+class SecLogDeliveryKafkaSettingInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 进程启动用户
-注意：此字段可能返回 null，表示取不到有效值。
+         * 日志类型
          * @type {string || null}
          */
-        this.ProcessStartUser = null;
+        this.LogType = null;
 
         /**
-         * 进程用户组
-注意：此字段可能返回 null，表示取不到有效值。
+         * 主题ID
          * @type {string || null}
          */
-        this.ProcessUserGroup = null;
+        this.TopicID = null;
 
         /**
-         * 进程路径
+         * 主题名称
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ProcessPath = null;
+        this.TopicName = null;
 
         /**
-         * 进程命令行参数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 投递状态(false:关 true:开)
+         * @type {boolean || null}
          */
-        this.ProcessParam = null;
+        this.State = null;
 
     }
 
@@ -2239,10 +4262,102 @@ class ProcessBaseInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProcessStartUser = 'ProcessStartUser' in params ? params.ProcessStartUser : null;
-        this.ProcessUserGroup = 'ProcessUserGroup' in params ? params.ProcessUserGroup : null;
-        this.ProcessPath = 'ProcessPath' in params ? params.ProcessPath : null;
-        this.ProcessParam = 'ProcessParam' in params ? params.ProcessParam : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.TopicID = 'TopicID' in params ? params.TopicID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * DescribeRiskSyscallWhiteLists返回参数结构体
+ * @class
+ */
+class DescribeRiskSyscallWhiteListsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 白名单信息列表
+         * @type {Array.<RiskSyscallWhiteListBaseInfo> || null}
+         */
+        this.WhiteListSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.WhiteListSet) {
+            this.WhiteListSet = new Array();
+            for (let z in params.WhiteListSet) {
+                let obj = new RiskSyscallWhiteListBaseInfo();
+                obj.deserialize(params.WhiteListSet[z]);
+                this.WhiteListSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNetworkFirewallPolicyDiscover返回参数结构体
+ * @class
+ */
+class CreateNetworkFirewallPolicyDiscoverResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的集群检查任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2372,6 +4487,41 @@ ASSET_ABNORMAL: 异常
 }
 
 /**
+ * 未授权核数趋势
+ * @class
+ */
+class UnauthorizedCoresTendency extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.DateTime = null;
+
+        /**
+         * 未授权的核数
+         * @type {number || null}
+         */
+        this.CoresCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DateTime = 'DateTime' in params ? params.DateTime : null;
+        this.CoresCount = 'CoresCount' in params ? params.CoresCount : null;
+
+    }
+}
+
+/**
  * DescribeRiskSyscallEvents返回参数结构体
  * @class
  */
@@ -2422,6 +4572,205 @@ class DescribeRiskSyscallEventsResponse extends  AbstractModel {
 }
 
 /**
+ * 集群列表Item
+ * @class
+ */
+class AssetClusterListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群状态
+CSR_RUNNING: 运行中
+CSR_EXCEPTION:异常
+CSR_DEL:已经删除
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 绑定规则名称
+         * @type {string || null}
+         */
+        this.BindRuleName = null;
+
+        /**
+         * 集群类型:
+CT_TKE: TKE集群
+CT_USER_CREATE: 用户自建集群
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.BindRuleName = 'BindRuleName' in params ? params.BindRuleName : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+
+    }
+}
+
+/**
+ * 网络集群策略返回的结构体
+ * @class
+ */
+class NetworkPolicyInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络策略名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 网络策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 发布状态：
+
+开启待确认：PublishedNoConfirm
+
+开启已确认：PublishedConfirmed
+
+关闭中：unPublishing
+
+开启中：Publishing
+
+待开启：unPublishEdit
+         * @type {string || null}
+         */
+        this.PublishStatus = null;
+
+        /**
+         * 策略类型：
+
+自动发现：System
+
+手动添加：Manual
+         * @type {string || null}
+         */
+        this.PolicySourceType = null;
+
+        /**
+         * 策略空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 策略创建日期
+         * @type {string || null}
+         */
+        this.PolicyCreateTime = null;
+
+        /**
+         * 策略类型
+
+kube-router：KubeRouter
+
+cilium：Cilium
+         * @type {string || null}
+         */
+        this.NetworkPolicyPlugin = null;
+
+        /**
+         * 策略发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublishResult = null;
+
+        /**
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.FromPolicyRule = null;
+
+        /**
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.ToPolicyRule = null;
+
+        /**
+         * 作用对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * 网络策略Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PublishStatus = 'PublishStatus' in params ? params.PublishStatus : null;
+        this.PolicySourceType = 'PolicySourceType' in params ? params.PolicySourceType : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.PolicyCreateTime = 'PolicyCreateTime' in params ? params.PolicyCreateTime : null;
+        this.NetworkPolicyPlugin = 'NetworkPolicyPlugin' in params ? params.NetworkPolicyPlugin : null;
+        this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageRiskList返回参数结构体
  * @class
  */
@@ -2467,6 +4816,227 @@ class DescribeAssetImageRiskListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateEmergencyVulExportJob返回参数结构体
+ * @class
+ */
+class CreateEmergencyVulExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateVulDefenceEventExportJob请求参数结构体
+ * @class
+ */
+class CreateVulDefenceEventExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 - 插件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_DEFENDED：已防御</li>
+<li>ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED </li>
+<li>ContainerNetStatus- String -是否必填: 否 -  容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATING</li>
+<li>EventType - String -是否必填: 否 -  入侵状态，防御成功：EVENT_DEFENDED，尝试攻击：EVENT_ATTACK </li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+<li>VulName- string - 是否必填：否 - 漏洞名称。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号。</li>
+<li>SourceIP- string - 是否必填：否 - 攻击源IP。</li>
+<li>ContainerName- string - 是否必填：否 - 容器名称。</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>HostName- string - 是否必填：否 - 主机名称。</li>
+<li>HostIP- string - 是否必填：否 - 内网IP。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，最大值为100000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：事件数量：EventCount
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyList请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DeleteIgnoreVul请求参数结构体
+ * @class
+ */
+class DeleteIgnoreVulRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID 信息列表
+         * @type {Array.<ModifyIgnoreVul> || null}
+         */
+        this.List = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ModifyIgnoreVul();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
 
     }
 }
@@ -2606,6 +5176,99 @@ class DescribeComplianceAssetDetailInfoRequest extends  AbstractModel {
 }
 
 /**
+ * 网络集群策略自定义规则
+ * @class
+ */
+class NetworkPeer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对象类型：
+
+命名空间：NamespaceSelector，代表NamespaceSelector有值
+
+pod类型：PodSelector，代表NamespaceSelector和PodSelector都有值
+
+ip类型：IPBlock，代表只有IPBlock有值
+         * @type {string || null}
+         */
+        this.PeerType = null;
+
+        /**
+         * 空间选择器
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceSelector = null;
+
+        /**
+         * pod选择器
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * Ip选择器
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IPBlock = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PeerType = 'PeerType' in params ? params.PeerType : null;
+        this.NamespaceSelector = 'NamespaceSelector' in params ? params.NamespaceSelector : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.IPBlock = 'IPBlock' in params ? params.IPBlock : null;
+
+    }
+}
+
+/**
+ * DescribeESAggregations返回参数结构体
+ * @class
+ */
+class DescribeESAggregationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES聚合结果JSON
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateExportComplianceStatusListJob返回参数结构体
  * @class
  */
@@ -2687,6 +5350,92 @@ class DescribeAssetAppServiceListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAssetSyncLastTime请求参数结构体
+ * @class
+ */
+class DescribeAssetSyncLastTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 容器安全镜像组件信息
+ * @class
+ */
+class ImageComponent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 组件版本
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 组件路径
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 组件类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 组件漏洞数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VulCount = null;
+
+        /**
+         * 镜像ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
 
     }
 }
@@ -2786,6 +5535,51 @@ class DescribeEscapeRuleInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞趋势信息
+ * @class
+ */
+class VulTendencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞趋势列表
+         * @type {Array.<RunTimeTendencyInfo> || null}
+         */
+        this.VulSet = null;
+
+        /**
+         * 漏洞影响的镜像类型：
+LOCAL：本地镜像
+REGISTRY: 仓库镜像
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulSet) {
+            this.VulSet = new Array();
+            for (let z in params.VulSet) {
+                let obj = new RunTimeTendencyInfo();
+                obj.deserialize(params.VulSet[z]);
+                this.VulSet.push(obj);
+            }
+        }
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
 
     }
 }
@@ -3021,6 +5815,140 @@ CHECK_FAILED, 检测失败
 }
 
 /**
+ * 待处理异常进程事件趋势
+ * @class
+ */
+class AbnormalProcessEventTendencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 待处理代理软件事件数
+         * @type {number || null}
+         */
+        this.ProxyToolEventCount = null;
+
+        /**
+         * 待处理横向参透事件数
+         * @type {number || null}
+         */
+        this.TransferControlEventCount = null;
+
+        /**
+         * 待处理恶意命令事件数
+         * @type {number || null}
+         */
+        this.AttackCmdEventCount = null;
+
+        /**
+         * 待处理反弹shell事件数
+         * @type {number || null}
+         */
+        this.ReverseShellEventCount = null;
+
+        /**
+         * 待处理无文件程序执行事件数
+         * @type {number || null}
+         */
+        this.FilelessEventCount = null;
+
+        /**
+         * 待处理高危命令事件数
+         * @type {number || null}
+         */
+        this.RiskCmdEventCount = null;
+
+        /**
+         * 待处理敏感服务异常子进程启动事件数
+         * @type {number || null}
+         */
+        this.AbnormalChildProcessEventCount = null;
+
+        /**
+         * 待处理自定义规则事件数
+         * @type {number || null}
+         */
+        this.UserDefinedRuleEventCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.ProxyToolEventCount = 'ProxyToolEventCount' in params ? params.ProxyToolEventCount : null;
+        this.TransferControlEventCount = 'TransferControlEventCount' in params ? params.TransferControlEventCount : null;
+        this.AttackCmdEventCount = 'AttackCmdEventCount' in params ? params.AttackCmdEventCount : null;
+        this.ReverseShellEventCount = 'ReverseShellEventCount' in params ? params.ReverseShellEventCount : null;
+        this.FilelessEventCount = 'FilelessEventCount' in params ? params.FilelessEventCount : null;
+        this.RiskCmdEventCount = 'RiskCmdEventCount' in params ? params.RiskCmdEventCount : null;
+        this.AbnormalChildProcessEventCount = 'AbnormalChildProcessEventCount' in params ? params.AbnormalChildProcessEventCount : null;
+        this.UserDefinedRuleEventCount = 'UserDefinedRuleEventCount' in params ? params.UserDefinedRuleEventCount : null;
+
+    }
+}
+
+/**
+ * DescribeAssetClusterList返回参数结构体
+ * @class
+ */
+class DescribeAssetClusterListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群列表
+         * @type {Array.<AssetClusterListItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AssetClusterListItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 容器逃逸扫描策略开关信息
  * @class
  */
@@ -3163,12 +6091,19 @@ ASSET_K8S, K8S资产
 }
 
 /**
- * RemoveAssetImageRegistryRegistryDetail返回参数结构体
+ * DescribeAssetImageRegistryRiskListExport返回参数结构体
  * @class
  */
-class RemoveAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
+class DescribeAssetImageRegistryRiskListExportResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * excel文件下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3185,7 +6120,106 @@ class RemoveAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全日志告警信息
+ * @class
+ */
+class SecLogAlertMsgInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警类型
+         * @type {string || null}
+         */
+        this.MsgType = null;
+
+        /**
+         * 告警值
+         * @type {string || null}
+         */
+        this.MsgValue = null;
+
+        /**
+         * 状态(0:关闭 1:开启)
+         * @type {boolean || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgType = 'MsgType' in params ? params.MsgType : null;
+        this.MsgValue = 'MsgValue' in params ? params.MsgValue : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * 镜像自动授权结果信息
+ * @class
+ */
+class AutoAuthorizedImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 授权时间
+         * @type {string || null}
+         */
+        this.AuthorizedTime = null;
+
+        /**
+         * 授权结果，SUCCESS:成功，REACH_LIMIT:达到授权上限，LICENSE_INSUFFICIENT:授权数不足'
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 是否授权，1：是，0：否
+         * @type {number || null}
+         */
+        this.IsAuthorized = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.AuthorizedTime = 'AuthorizedTime' in params ? params.AuthorizedTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
 
     }
 }
@@ -3237,6 +6271,34 @@ class UpdateAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
         this.HealthCheckErr = 'HealthCheckErr' in params ? params.HealthCheckErr : null;
         this.NameRepeatErr = 'NameRepeatErr' in params ? params.NameRepeatErr : null;
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySecLogDeliveryKafkaSetting返回参数结构体
+ * @class
+ */
+class ModifySecLogDeliveryKafkaSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3447,6 +6509,90 @@ class ProcessInfo extends  AbstractModel {
 }
 
 /**
+ * 基本镜像信息
+ * @class
+ */
+class ImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像tag
+         * @type {string || null}
+         */
+        this.ImageTag = null;
+
+        /**
+         * 强制扫描
+         * @type {string || null}
+         */
+        this.Force = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageDigest = null;
+
+        /**
+         * 仓库类型
+         * @type {string || null}
+         */
+        this.RegistryType = null;
+
+        /**
+         * 镜像仓库地址
+         * @type {string || null}
+         */
+        this.ImageRepoAddress = null;
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.Force = 'Force' in params ? params.Force : null;
+        this.ImageDigest = 'ImageDigest' in params ? params.ImageDigest : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+        this.ImageRepoAddress = 'ImageRepoAddress' in params ? params.ImageRepoAddress : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeReverseShellDetail请求参数结构体
  * @class
  */
@@ -3516,6 +6662,83 @@ class ModifyReverseShellStatusRequest extends  AbstractModel {
         this.EventIdSet = 'EventIdSet' in params ? params.EventIdSet : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * DescribePublicKey返回参数结构体
+ * @class
+ */
+class DescribePublicKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公钥
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetCheckMode请求参数结构体
+ * @class
+ */
+class SetCheckModeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要设置的集群ID列表
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * 集群检查模式(正常模式"Cluster_Normal"、主动模式"Cluster_Actived"、不设置"Cluster_Unset")
+         * @type {string || null}
+         */
+        this.ClusterCheckMode = null;
+
+        /**
+         * 0不设置 1打开 2关闭
+         * @type {number || null}
+         */
+        this.ClusterAutoCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.ClusterCheckMode = 'ClusterCheckMode' in params ? params.ClusterCheckMode : null;
+        this.ClusterAutoCheck = 'ClusterAutoCheck' in params ? params.ClusterAutoCheck : null;
 
     }
 }
@@ -3641,6 +6864,692 @@ Name 可取值：WorkloadType,ClusterId
         }
         this.By = 'By' in params ? params.By : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceHost请求参数结构体
+ * @class
+ */
+class DescribeVulDefenceHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 - 插件状态，正常：SUCCESS，异常：FAIL， NO_DEFENCE:未防御</li>
+<li>KeyWords- string - 是否必填：否 - 主机名称/IP。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：更新时间：ModifyTime/首次开启时间：CreateTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * 应急漏洞列表信息
+ * @class
+ */
+class EmergencyVulInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 漏洞标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * CVSS V3分数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CVSSV3Score = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * CVE编号
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * 漏洞披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubmitTime = null;
+
+        /**
+         * 最近发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestFoundTime = null;
+
+        /**
+         * 应急漏洞风险情况：NOT_SCAN：未扫描，SCANNING：扫描中，SCANNED_NOT_RISK：已扫描，暂未风险 ，SCANNED_RISK：已扫描存在风险
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 漏洞ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 防御状态，NO_DEFENDED:未防御，DEFENDED:已防御
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceStatus = null;
+
+        /**
+         * 漏洞防御主机范围: MANUAL:自选主机节点，ALL:全部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceScope = null;
+
+        /**
+         * 漏洞防御主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenceHostCount = null;
+
+        /**
+         * 已防御攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefendedCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CVSSV3Score = 'CVSSV3Score' in params ? params.CVSSV3Score : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
+        this.LatestFoundTime = 'LatestFoundTime' in params ? params.LatestFoundTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.DefenceStatus = 'DefenceStatus' in params ? params.DefenceStatus : null;
+        this.DefenceScope = 'DefenceScope' in params ? params.DefenceScope : null;
+        this.DefenceHostCount = 'DefenceHostCount' in params ? params.DefenceHostCount : null;
+        this.DefendedCount = 'DefendedCount' in params ? params.DefendedCount : null;
+
+    }
+}
+
+/**
+ * ExportVirusList请求参数结构体
+ * @class
+ */
+class ExportVirusListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>FileName - String - 是否必填：否 - 文件名称</li>
+<li>FilePath - String - 是否必填：否 - 文件路径</li>
+<li>VirusName - String - 是否必填：否 - 病毒名称</li>
+<li>ContainerName- String - 是否必填：是 - 容器名称</li>
+<li>ContainerId- string - 是否必填：否 - 容器id</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称</li>
+<li>ImageId- string - 是否必填：否 - 镜像id</li>
+<li>IsRealTime- int - 是否必填：否 - 过滤是否实时监控数据</li>
+<li>TaskId- string - 是否必填：否 - 任务ID</li>
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>ContainerNetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
+<li>ContainerStatus - string -是否必填: 否 - 容器状态 RUNNING PAUSED STOPPED CREATED DESTROYED RESTARTING REMOVING</li>
+<li>AutoIsolateMode - string -是否必填: 否 - 隔离方式 MANUAL AUTO</li>
+<li>MD5 - string -是否必填: 否 - md5 </li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * CreateWebVulExportJob请求参数结构体
+ * @class
+ */
+class CreateWebVulExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为50000，最大值为50000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedContainer- string - 是否必填：否 - 仅展示影响容器的漏洞true,false</li>
+<li>OnlyAffectedNewestImage-string - 是否必填：否 - 仅展示影响最新版本镜像的漏洞true,false</li>
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CategoryType- string - 是否必填：否 - 漏洞子类型</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+<li>FocusOnType - string - 是否必填：否 -关注紧急度类型 。ALL :全部，SERIOUS_LEVEL： 严重和高危 ，IS_SUGGEST： 重点关注，POC_EXP 有Poc或Exp ，NETWORK_EXP: 远程Exp</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * CreateK8sApiAbnormalEventExportJob请求参数结构体
+ * @class
+ */
+class CreateK8sApiAbnormalEventExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+<li>Status - string  - 是否必填: 否 -事件状态筛选</li>
+<li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li>
+<li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalTendency返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势列表
+         * @type {Array.<K8sApiAbnormalTendencyItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new K8sApiAbnormalTendencyItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * k8sapi异常事件列表Item
+ * @class
+ */
+class K8sApiAbnormalEventListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 命中规则类型
+         * @type {string || null}
+         */
+        this.MatchRuleType = null;
+
+        /**
+         * 威胁等级
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群运行状态
+         * @type {string || null}
+         */
+        this.ClusterRunningStatus = null;
+
+        /**
+         * 初次生成时间
+         * @type {string || null}
+         */
+        this.FirstCreateTime = null;
+
+        /**
+         * 最近一次生成时间
+         * @type {string || null}
+         */
+        this.LastCreateTime = null;
+
+        /**
+         * 告警数量
+         * @type {number || null}
+         */
+        this.AlarmCount = null;
+
+        /**
+         * 状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 规则类型
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 解决方案
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 命中规则
+         * @type {K8sApiAbnormalRuleScopeInfo || null}
+         */
+        this.MatchRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.MatchRuleType = 'MatchRuleType' in params ? params.MatchRuleType : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterRunningStatus = 'ClusterRunningStatus' in params ? params.ClusterRunningStatus : null;
+        this.FirstCreateTime = 'FirstCreateTime' in params ? params.FirstCreateTime : null;
+        this.LastCreateTime = 'LastCreateTime' in params ? params.LastCreateTime : null;
+        this.AlarmCount = 'AlarmCount' in params ? params.AlarmCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.MatchRule) {
+            let obj = new K8sApiAbnormalRuleScopeInfo();
+            obj.deserialize(params.MatchRule)
+            this.MatchRule = obj;
+        }
+
+    }
+}
+
+/**
+ * 安全日志接入详情
+ * @class
+ */
+class SecLogJoinInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已接入数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 是否已接入(true:已接入 false:未接入)
+         * @type {boolean || null}
+         */
+        this.IsJoined = null;
+
+        /**
+         * 日志类型(
+容器bash:  "container_bash"
+容器启动: "container_launch"
+k8sApi: "k8s_api"
+)
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.IsJoined = 'IsJoined' in params ? params.IsJoined : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+
+    }
+}
+
+/**
+ * 促销活动内容
+ * @class
+ */
+class PromotionActivityContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 月数
+         * @type {number || null}
+         */
+        this.MonthNum = null;
+
+        /**
+         * 核数最低限量
+         * @type {number || null}
+         */
+        this.CoresCountLimit = null;
+
+        /**
+         * 专业版折扣
+         * @type {number || null}
+         */
+        this.ProfessionalDiscount = null;
+
+        /**
+         * 附赠镜像数
+         * @type {number || null}
+         */
+        this.ImageAuthorizationNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MonthNum = 'MonthNum' in params ? params.MonthNum : null;
+        this.CoresCountLimit = 'CoresCountLimit' in params ? params.CoresCountLimit : null;
+        this.ProfessionalDiscount = 'ProfessionalDiscount' in params ? params.ProfessionalDiscount : null;
+        this.ImageAuthorizationNum = 'ImageAuthorizationNum' in params ? params.ImageAuthorizationNum : null;
 
     }
 }
@@ -3785,6 +7694,86 @@ class AddEditRiskSyscallWhiteListRequest extends  AbstractModel {
 }
 
 /**
+ * k8a api 异常请求规则详情
+ * @class
+ */
+class K8sApiAbnormalRuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 状态
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * 规则信息列表
+         * @type {Array.<K8sApiAbnormalRuleScopeInfo> || null}
+         */
+        this.RuleInfoList = null;
+
+        /**
+         * 生效集群IDSet
+         * @type {Array.<string> || null}
+         */
+        this.EffectClusterIDSet = null;
+
+        /**
+         * 规则类型
+RT_SYSTEM 系统规则
+RT_USER 用户自定义
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 是否所有集群生效
+         * @type {boolean || null}
+         */
+        this.EffectAllCluster = null;
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.RuleInfoList) {
+            this.RuleInfoList = new Array();
+            for (let z in params.RuleInfoList) {
+                let obj = new K8sApiAbnormalRuleScopeInfo();
+                obj.deserialize(params.RuleInfoList[z]);
+                this.RuleInfoList.push(obj);
+            }
+        }
+        this.EffectClusterIDSet = 'EffectClusterIDSet' in params ? params.EffectClusterIDSet : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.EffectAllCluster = 'EffectAllCluster' in params ? params.EffectAllCluster : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+
+    }
+}
+
+/**
  * 容器安全运行时高危系统调用信息
  * @class
  */
@@ -3922,6 +7911,19 @@ class ReverseShellEventInfo extends  AbstractModel {
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
     }
 
     /**
@@ -3950,6 +7952,171 @@ class ReverseShellEventInfo extends  AbstractModel {
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogJoinObjectList返回参数结构体
+ * @class
+ */
+class DescribeSecLogJoinObjectListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 接入对象列表
+         * @type {Array.<SecLogJoinObjectInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SecLogJoinObjectInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSystemVulExportJob请求参数结构体
+ * @class
+ */
+class CreateSystemVulExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为50000，最大值为50000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedContainer- string - 是否必填：否 - 仅展示影响容器的漏洞true,false</li>
+<li>OnlyAffectedNewestImage-string - 是否必填：否 - 仅展示影响最新版本镜像的漏洞true,false</li>
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CategoryType- string - 是否必填：否 - 漏洞子类型</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+<li>FocusOnType - string - 是否必填：否 -关注紧急度类型 。ALL :全部，SERIOUS_LEVEL： 严重和高危 ，IS_SUGGEST： 重点关注，POC_EXP 有Poc或Exp ，NETWORK_EXP: 远程Exp</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeVulScanInfo请求参数结构体
+ * @class
+ */
+class DescribeVulScanInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地镜像漏洞扫描任务ID，无则返回最近一次的漏洞任务扫描
+         * @type {number || null}
+         */
+        this.LocalTaskID = null;
+
+        /**
+         * 仓库镜像漏洞扫描任务ID，无则返回最近一次的漏洞任务扫描
+         * @type {number || null}
+         */
+        this.RegistryTaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalTaskID = 'LocalTaskID' in params ? params.LocalTaskID : null;
+        this.RegistryTaskID = 'RegistryTaskID' in params ? params.RegistryTaskID : null;
 
     }
 }
@@ -3978,6 +8145,41 @@ class DescribeRiskSyscallDetailRequest extends  AbstractModel {
             return;
         }
         this.EventId = 'EventId' in params ? params.EventId : null;
+
+    }
+}
+
+/**
+ * ScanComplianceAssetsByPolicyItem请求参数结构体
+ * @class
+ */
+class ScanComplianceAssetsByPolicyItemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定的检测项的ID
+         * @type {number || null}
+         */
+        this.CustomerPolicyItemId = null;
+
+        /**
+         * 要重新扫描的客户资产项ID的列表。
+         * @type {Array.<number> || null}
+         */
+        this.CustomerAssetIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerPolicyItemId = 'CustomerPolicyItemId' in params ? params.CustomerPolicyItemId : null;
+        this.CustomerAssetIdSet = 'CustomerAssetIdSet' in params ? params.CustomerAssetIdSet : null;
 
     }
 }
@@ -4099,24 +8301,18 @@ class DescribeAssetImageRegistryListResponse extends  AbstractModel {
 }
 
 /**
- * ExportVirusList返回参数结构体
+ * DescribeVirusAutoIsolateSampleDetail请求参数结构体
  * @class
  */
-class ExportVirusListResponse extends  AbstractModel {
+class DescribeVirusAutoIsolateSampleDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 导出任务ID，前端拿着任务ID查询任务进度
+         * 文件MD5值
          * @type {string || null}
          */
-        this.JobId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.MD5 = null;
 
     }
 
@@ -4127,8 +8323,7 @@ class ExportVirusListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
 
     }
 }
@@ -4196,31 +8391,10 @@ class DescribeAssetImageVirusListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImageRiskSummary请求参数结构体
+ * DeleteComplianceAssetPolicySetFromWhitelist返回参数结构体
  * @class
  */
-class DescribeImageRiskSummaryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * ModifyReverseShellStatus返回参数结构体
- * @class
- */
-class ModifyReverseShellStatusResponse extends  AbstractModel {
+class DeleteComplianceAssetPolicySetFromWhitelistResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4239,6 +8413,147 @@ class ModifyReverseShellStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalSummary返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待处理事件个数
+         * @type {number || null}
+         */
+        this.UnhandleEventCount = null;
+
+        /**
+         * 待处理高危事件个数
+         * @type {number || null}
+         */
+        this.UnhandleHighLevelEventCount = null;
+
+        /**
+         * 待处理中危事件个数
+         * @type {number || null}
+         */
+        this.UnhandleMediumLevelEventCount = null;
+
+        /**
+         * 待处理低危事件个数
+         * @type {number || null}
+         */
+        this.UnhandleLowLevelEventCount = null;
+
+        /**
+         * 待处理提示级别事件个数
+         * @type {number || null}
+         */
+        this.UnhandleNoticeLevelEventCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnhandleEventCount = 'UnhandleEventCount' in params ? params.UnhandleEventCount : null;
+        this.UnhandleHighLevelEventCount = 'UnhandleHighLevelEventCount' in params ? params.UnhandleHighLevelEventCount : null;
+        this.UnhandleMediumLevelEventCount = 'UnhandleMediumLevelEventCount' in params ? params.UnhandleMediumLevelEventCount : null;
+        this.UnhandleLowLevelEventCount = 'UnhandleLowLevelEventCount' in params ? params.UnhandleLowLevelEventCount : null;
+        this.UnhandleNoticeLevelEventCount = 'UnhandleNoticeLevelEventCount' in params ? params.UnhandleNoticeLevelEventCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogJoinTypeList返回参数结构体
+ * @class
+ */
+class DescribeSecLogJoinTypeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接入日志列表
+         * @type {Array.<SecLogJoinInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SecLogJoinInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAssetSyncLastTime返回参数结构体
+ * @class
+ */
+class DescribeAssetSyncLastTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产最近同步时间
+         * @type {string || null}
+         */
+        this.AssetSyncLastTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetSyncLastTime = 'AssetSyncLastTime' in params ? params.AssetSyncLastTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4317,6 +8632,209 @@ class CreateAssetImageScanSettingRequest extends  AbstractModel {
         this.ScanVul = 'ScanVul' in params ? params.ScanVul : null;
         this.All = 'All' in params ? params.All : null;
         this.Images = 'Images' in params ? params.Images : null;
+
+    }
+}
+
+/**
+ * 逃逸白名单
+ * @class
+ */
+class EscapeWhiteListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 白名单记录ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 关联主机数量
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 关联容器数量
+         * @type {number || null}
+         */
+        this.ContainerCount = null;
+
+        /**
+         * 加白事件类型
+         * @type {Array.<string> || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 镜像大小
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.ContainerCount = 'ContainerCount' in params ? params.ContainerCount : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+
+    }
+}
+
+/**
+ * CreateNetworkFirewallUndoPublish返回参数结构体
+ * @class
+ */
+class CreateNetworkFirewallUndoPublishResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeIndexList返回参数结构体
+ * @class
+ */
+class DescribeIndexListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES 索引信息
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVulDefenceSetting请求参数结构体
+ * @class
+ */
+class ModifyVulDefenceSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启:0: 关闭 1:开启
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 漏洞防御主机范围:0：自选 1: 全部主机。IsEnabled为1时必填
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * 自选漏洞防御主机,Scope为0时必填
+         * @type {Array.<string> || null}
+         */
+        this.HostIDs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.HostIDs = 'HostIDs' in params ? params.HostIDs : null;
 
     }
 }
@@ -4444,6 +8962,12 @@ class DescribeAssetSummaryResponse extends  AbstractModel {
         this.ImageUnsafeCnt = null;
 
         /**
+         * 主机未安装agent数量
+         * @type {number || null}
+         */
+        this.HostUnInstallCnt = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4477,64 +9001,31 @@ class DescribeAssetSummaryResponse extends  AbstractModel {
         this.WebServiceCnt = 'WebServiceCnt' in params ? params.WebServiceCnt : null;
         this.LatestImageScanTime = 'LatestImageScanTime' in params ? params.LatestImageScanTime : null;
         this.ImageUnsafeCnt = 'ImageUnsafeCnt' in params ? params.ImageUnsafeCnt : null;
+        this.HostUnInstallCnt = 'HostUnInstallCnt' in params ? params.HostUnInstallCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeImageRegistryTimingScanTask返回参数结构体
+ * CreateNetworkFirewallClusterRefresh返回参数结构体
  * @class
  */
-class DescribeImageRegistryTimingScanTaskResponse extends  AbstractModel {
+class CreateNetworkFirewallClusterRefreshResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 定时扫描开关
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.Enable = null;
-
-        /**
-         * 定时任务扫描时间
-         * @type {string || null}
-         */
-        this.ScanTime = null;
-
-        /**
-         * 定时扫描间隔
+         * 返回创建的集群检查任务的ID，为0表示创建失败。
          * @type {number || null}
          */
-        this.ScanPeriod = null;
+        this.TaskId = null;
 
         /**
-         * 扫描类型数组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
          */
-        this.ScanType = null;
-
-        /**
-         * 扫描全部镜像
-         * @type {boolean || null}
-         */
-        this.All = null;
-
-        /**
-         * 自定义扫描镜像
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ImageInfo> || null}
-         */
-        this.Images = null;
-
-        /**
-         * 自动以扫描镜像Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<number> || null}
-         */
-        this.Id = null;
+        this.Result = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4551,33 +9042,111 @@ class DescribeImageRegistryTimingScanTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
-        this.ScanPeriod = 'ScanPeriod' in params ? params.ScanPeriod : null;
-        this.ScanType = 'ScanType' in params ? params.ScanType : null;
-        this.All = 'All' in params ? params.All : null;
-
-        if (params.Images) {
-            this.Images = new Array();
-            for (let z in params.Images) {
-                let obj = new ImageInfo();
-                obj.deserialize(params.Images[z]);
-                this.Images.push(obj);
-            }
-        }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeAssetWebServiceList请求参数结构体
+ * CreateComponentExportJob返回参数结构体
  * @class
  */
-class DescribeAssetWebServiceListRequest extends  AbstractModel {
+class CreateComponentExportJobResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReverseShellWhiteLists返回参数结构体
+ * @class
+ */
+class DescribeReverseShellWhiteListsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 白名单信息列表
+         * @type {Array.<ReverseShellWhiteListBaseInfo> || null}
+         */
+        this.WhiteListSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.WhiteListSet) {
+            this.WhiteListSet = new Array();
+            for (let z in params.WhiteListSet) {
+                let obj = new ReverseShellWhiteListBaseInfo();
+                obj.deserialize(params.WhiteListSet[z]);
+                this.WhiteListSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulContainerList请求参数结构体
+ * @class
+ */
+class DescribeVulContainerListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
 
         /**
          * 需要返回的数量，默认为10，最大值为100
@@ -4593,13 +9162,10 @@ class DescribeAssetWebServiceListRequest extends  AbstractModel {
 
         /**
          * 过滤条件。
-<li>Keywords- String - 是否必填：否 - 模糊查询可选字段</li>
-<li>Type- String - 是否必填：否 - 主机运行状态筛选，"Apache"
-"Jboss"
-"lighttpd"
-"Nginx"
-"Tomcat"</li>
-         * @type {Array.<AssetFilters> || null}
+<li>OnlyAffectedNewestImage- Bool- 是否必填：否 - 仅展示影响最新版本镜像的漏洞</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID</li>
+<li>ContainerName- String -是否必填: 否 - 容器名称</li>
+         * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
 
@@ -4612,15 +9178,96 @@ class DescribeAssetWebServiceListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PocID = 'PocID' in params ? params.PocID : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
-                let obj = new AssetFilters();
+                let obj = new RunTimeFilters();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteReverseShellEvents请求参数结构体
+ * @class
+ */
+class DeleteReverseShellEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ids
+         * @type {Array.<string> || null}
+         */
+        this.EventIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventIdSet = 'EventIdSet' in params ? params.EventIdSet : null;
+
+    }
+}
+
+/**
+ * cls日志集信息
+ * @class
+ */
+class ClsLogsetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetID = null;
+
+        /**
+         * 日志集名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * cls主题列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClsTopicInfo> || null}
+         */
+        this.TopicList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetID = 'LogsetID' in params ? params.LogsetID : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new ClsTopicInfo();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
             }
         }
 
@@ -4687,6 +9334,209 @@ class CheckRepeatAssetImageRegistryResponse extends  AbstractModel {
         }
         this.IsRepeat = 'IsRepeat' in params ? params.IsRepeat : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞防御事件详情
+ * @class
+ */
+class VulDefenceEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞CVEID
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 入侵状态
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 攻击源IP
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * 攻击源ip地址所在城市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 事件数量
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * 容器ID
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 处理状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+        /**
+         * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 隔离状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * 最近发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MergeTime = null;
+
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerNetSubStatus = null;
+
+        /**
+         * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerIsolateOperationSrc = null;
+
+        /**
+         * 主机QUUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.QUUID = null;
+
+        /**
+         * 主机内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+        this.City = 'City' in params ? params.City : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventID = 'EventID' in params ? params.EventID : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.MergeTime = 'MergeTime' in params ? params.MergeTime : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
+        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.QUUID = 'QUUID' in params ? params.QUUID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -4763,43 +9613,18 @@ class DescribeAccessControlEventsExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRiskSyscallDetail返回参数结构体
+ * ExportVirusList返回参数结构体
  * @class
  */
-class DescribeRiskSyscallDetailResponse extends  AbstractModel {
+class ExportVirusListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件基本信息
-         * @type {RunTimeEventBaseInfo || null}
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
          */
-        this.EventBaseInfo = null;
-
-        /**
-         * 进程信息
-         * @type {ProcessDetailInfo || null}
-         */
-        this.ProcessInfo = null;
-
-        /**
-         * 父进程信息
-         * @type {ProcessDetailBaseInfo || null}
-         */
-        this.ParentProcessInfo = null;
-
-        /**
-         * 事件描述
-         * @type {RiskSyscallEventDescription || null}
-         */
-        this.EventDetail = null;
-
-        /**
-         * 祖先进程信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ProcessBaseInfo || null}
-         */
-        this.AncestorProcessInfo = null;
+        this.JobId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4816,80 +9641,25 @@ class DescribeRiskSyscallDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.EventBaseInfo) {
-            let obj = new RunTimeEventBaseInfo();
-            obj.deserialize(params.EventBaseInfo)
-            this.EventBaseInfo = obj;
-        }
-
-        if (params.ProcessInfo) {
-            let obj = new ProcessDetailInfo();
-            obj.deserialize(params.ProcessInfo)
-            this.ProcessInfo = obj;
-        }
-
-        if (params.ParentProcessInfo) {
-            let obj = new ProcessDetailBaseInfo();
-            obj.deserialize(params.ParentProcessInfo)
-            this.ParentProcessInfo = obj;
-        }
-
-        if (params.EventDetail) {
-            let obj = new RiskSyscallEventDescription();
-            obj.deserialize(params.EventDetail)
-            this.EventDetail = obj;
-        }
-
-        if (params.AncestorProcessInfo) {
-            let obj = new ProcessBaseInfo();
-            obj.deserialize(params.AncestorProcessInfo)
-            this.AncestorProcessInfo = obj;
-        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 运行时容器反弹shell事件描述信息
+ * DeleteReverseShellWhiteLists返回参数结构体
  * @class
  */
-class ReverseShellEventDescription extends  AbstractModel {
+class DeleteReverseShellWhiteListsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 描述信息
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Description = null;
-
-        /**
-         * 解决方案
-         * @type {string || null}
-         */
-        this.Solution = null;
-
-        /**
-         * 事件备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 目标地址
-         * @type {string || null}
-         */
-        this.DstAddress = null;
-
-        /**
-         * 事件最后一次处理的时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OperationTime = null;
+        this.RequestId = null;
 
     }
 
@@ -4900,11 +9670,148 @@ class ReverseShellEventDescription extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Solution = 'Solution' in params ? params.Solution : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.DstAddress = 'DstAddress' in params ? params.DstAddress : null;
-        this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallAuditRecord返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallAuditRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群审计总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群的审计详细信息
+         * @type {Array.<NetworkAuditRecord> || null}
+         */
+        this.AuditList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AuditList) {
+            this.AuditList = new Array();
+            for (let z in params.AuditList) {
+                let obj = new NetworkAuditRecord();
+                obj.deserialize(params.AuditList[z]);
+                this.AuditList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogCleanSettingInfo返回参数结构体
+ * @class
+ */
+class DescribeSecLogCleanSettingInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发清理的储量底线
+         * @type {number || null}
+         */
+        this.ReservesLimit = null;
+
+        /**
+         * 清理停止时的储量截至线
+         * @type {number || null}
+         */
+        this.ReservesDeadline = null;
+
+        /**
+         * 触发清理的存储天数
+         * @type {number || null}
+         */
+        this.DayLimit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservesLimit = 'ReservesLimit' in params ? params.ReservesLimit : null;
+        this.ReservesDeadline = 'ReservesDeadline' in params ? params.ReservesDeadline : null;
+        this.DayLimit = 'DayLimit' in params ? params.DayLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateNetworkFirewallPolicyYamlDetail返回参数结构体
+ * @class
+ */
+class UpdateNetworkFirewallPolicyYamlDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4960,18 +9867,186 @@ class DescribeAssetImageBindRuleInfoResponse extends  AbstractModel {
 }
 
 /**
- * ScanCompliancePolicyItems返回参数结构体
+ * DescribeESHits请求参数结构体
  * @class
  */
-class ScanCompliancePolicyItemsResponse extends  AbstractModel {
+class DescribeESHitsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回重新检测任务的ID。
+         * ES查询条件JSON
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.TaskId = null;
+        this.Offset = null;
+
+        /**
+         * 返回数量，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeTcssSummary返回参数结构体
+ * @class
+ */
+class DescribeTcssSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像总数
+         * @type {number || null}
+         */
+        this.ImageCnt = null;
+
+        /**
+         * 已扫描镜像数
+         * @type {number || null}
+         */
+        this.ScannedImageCnt = null;
+
+        /**
+         * 待扫描镜像个数
+         * @type {number || null}
+         */
+        this.UnScannedImageCnt = null;
+
+        /**
+         * 本地镜像个数
+         * @type {number || null}
+         */
+        this.LocalImageCnt = null;
+
+        /**
+         * 仓库镜像个数
+         * @type {number || null}
+         */
+        this.RepositoryImageCnt = null;
+
+        /**
+         * 风险本地镜像个数
+         * @type {number || null}
+         */
+        this.RiskLocalImageCnt = null;
+
+        /**
+         * 风险仓库镜像个数
+         * @type {number || null}
+         */
+        this.RiskRepositoryImageCnt = null;
+
+        /**
+         * 容器个数
+         * @type {number || null}
+         */
+        this.ContainerCnt = null;
+
+        /**
+         * 风险容器个数
+         * @type {number || null}
+         */
+        this.RiskContainerCnt = null;
+
+        /**
+         * 集群个数
+         * @type {number || null}
+         */
+        this.ClusterCnt = null;
+
+        /**
+         * 风险集群个数
+         * @type {number || null}
+         */
+        this.RiskClusterCnt = null;
+
+        /**
+         * 待扫描漏洞个数
+         * @type {number || null}
+         */
+        this.UnScannedVulCnt = null;
+
+        /**
+         * 风险漏洞个数
+         * @type {number || null}
+         */
+        this.RiskVulCnt = null;
+
+        /**
+         * 安全基线待扫描项个数
+         * @type {number || null}
+         */
+        this.UnScannedBaseLineCnt = null;
+
+        /**
+         * 安全基线风险个数
+         * @type {number || null}
+         */
+        this.RiskBaseLineCnt = null;
+
+        /**
+         * 运行时(高危)待处理事件个数
+         * @type {number || null}
+         */
+        this.RuntimeUnhandleEventCnt = null;
+
+        /**
+         * 待扫描集群个数
+         * @type {number || null}
+         */
+        this.UnScannedClusterCnt = null;
+
+        /**
+         * 是否已扫描镜像
+         * @type {boolean || null}
+         */
+        this.ScanImageStatus = null;
+
+        /**
+         * 是否已扫描集群
+         * @type {boolean || null}
+         */
+        this.ScanClusterStatus = null;
+
+        /**
+         * 是否已扫描基线
+         * @type {boolean || null}
+         */
+        this.ScanBaseLineStatus = null;
+
+        /**
+         * 是否已扫描漏洞
+         * @type {boolean || null}
+         */
+        this.ScanVulStatus = null;
+
+        /**
+         * 漏洞影响镜像数
+         * @type {number || null}
+         */
+        this.VulRiskImageCnt = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4988,8 +10063,57 @@ class ScanCompliancePolicyItemsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ImageCnt = 'ImageCnt' in params ? params.ImageCnt : null;
+        this.ScannedImageCnt = 'ScannedImageCnt' in params ? params.ScannedImageCnt : null;
+        this.UnScannedImageCnt = 'UnScannedImageCnt' in params ? params.UnScannedImageCnt : null;
+        this.LocalImageCnt = 'LocalImageCnt' in params ? params.LocalImageCnt : null;
+        this.RepositoryImageCnt = 'RepositoryImageCnt' in params ? params.RepositoryImageCnt : null;
+        this.RiskLocalImageCnt = 'RiskLocalImageCnt' in params ? params.RiskLocalImageCnt : null;
+        this.RiskRepositoryImageCnt = 'RiskRepositoryImageCnt' in params ? params.RiskRepositoryImageCnt : null;
+        this.ContainerCnt = 'ContainerCnt' in params ? params.ContainerCnt : null;
+        this.RiskContainerCnt = 'RiskContainerCnt' in params ? params.RiskContainerCnt : null;
+        this.ClusterCnt = 'ClusterCnt' in params ? params.ClusterCnt : null;
+        this.RiskClusterCnt = 'RiskClusterCnt' in params ? params.RiskClusterCnt : null;
+        this.UnScannedVulCnt = 'UnScannedVulCnt' in params ? params.UnScannedVulCnt : null;
+        this.RiskVulCnt = 'RiskVulCnt' in params ? params.RiskVulCnt : null;
+        this.UnScannedBaseLineCnt = 'UnScannedBaseLineCnt' in params ? params.UnScannedBaseLineCnt : null;
+        this.RiskBaseLineCnt = 'RiskBaseLineCnt' in params ? params.RiskBaseLineCnt : null;
+        this.RuntimeUnhandleEventCnt = 'RuntimeUnhandleEventCnt' in params ? params.RuntimeUnhandleEventCnt : null;
+        this.UnScannedClusterCnt = 'UnScannedClusterCnt' in params ? params.UnScannedClusterCnt : null;
+        this.ScanImageStatus = 'ScanImageStatus' in params ? params.ScanImageStatus : null;
+        this.ScanClusterStatus = 'ScanClusterStatus' in params ? params.ScanClusterStatus : null;
+        this.ScanBaseLineStatus = 'ScanBaseLineStatus' in params ? params.ScanBaseLineStatus : null;
+        this.ScanVulStatus = 'ScanVulStatus' in params ? params.ScanVulStatus : null;
+        this.VulRiskImageCnt = 'VulRiskImageCnt' in params ? params.VulRiskImageCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRiskSyscallEvents请求参数结构体
+ * @class
+ */
+class DeleteRiskSyscallEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ids
+         * @type {Array.<string> || null}
+         */
+        this.EventIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventIdSet = 'EventIdSet' in params ? params.EventIdSet : null;
 
     }
 }
@@ -5095,6 +10219,62 @@ class DescribeEscapeSafeStateResponse extends  AbstractModel {
             return;
         }
         this.IsSafe = 'IsSafe' in params ? params.IsSafe : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImageRiskSummary请求参数结构体
+ * @class
+ */
+class DescribeImageRiskSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateDefenceVulExportJob返回参数结构体
+ * @class
+ */
+class CreateDefenceVulExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5218,6 +10398,84 @@ class ScanComplianceAssetsByPolicyItemResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRiskDnsEventExportJob请求参数结构体
+ * @class
+ */
+class CreateRiskDnsEventExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>EventStatus- String - 是否必填：否 - 事件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_ADD_WHITE：已加白</li>
+<li>ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED </li>
+<li>ContainerNetStatus- String -是否必填: 否 -  容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATING</li>
+<li>EventType - String -是否必填: 否 -  事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP</li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+<li>RiskDns- string - 是否必填：否 - 恶意域名。</li>
+<li>RiskIP- string - 是否必填：否 - 恶意IP。</li>
+<li>ContainerName- string - 是否必填：否 - 容器名称。</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>HostName- string - 是否必填：否 - 主机名称。</li>
+<li>HostIP- string - 是否必填：否 - 内网IP。</li>
+<li>PublicIP- string - 是否必填：否 - 外网IP。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，最大值为100000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：事件数量：EventCount
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -5514,6 +10772,120 @@ class DescribeReverseShellEventsRequest extends  AbstractModel {
 }
 
 /**
+ * AddNetworkFirewallPolicyDetail返回参数结构体
+ * @class
+ */
+class AddNetworkFirewallPolicyDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyStatus请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogKafkaUIN返回参数结构体
+ * @class
+ */
+class DescribeSecLogKafkaUINResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标UIN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DstUIN = null;
+
+        /**
+         * 授权状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DstUIN = 'DstUIN' in params ? params.DstUIN : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAbnormalProcessRuleDetail请求参数结构体
  * @class
  */
@@ -5563,10 +10935,10 @@ class DescribeAbnormalProcessRuleDetailRequest extends  AbstractModel {
 }
 
 /**
- * SyncAssetImageRegistryAsset请求参数结构体
+ * DescribeLogStorageStatistic请求参数结构体
  * @class
  */
-class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
+class DescribeLogStorageStatisticRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5579,6 +10951,291 @@ class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * 运行时木马列表信息
+ * @class
+ */
+class VirusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件路径
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * 病毒名称
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 容器id
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * DEAL_NONE:文件待处理
+DEAL_IGNORE:已经忽略
+DEAL_ADD_WHITELIST:加白
+DEAL_DEL:文件已经删除
+DEAL_ISOLATE:已经隔离
+DEAL_ISOLATING:隔离中
+DEAL_ISOLATE_FAILED:隔离失败
+DEAL_RECOVERING:恢复中
+DEAL_RECOVER_FAILED: 恢复失败
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 事件id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 事件描述
+         * @type {string || null}
+         */
+        this.HarmDescribe = null;
+
+        /**
+         * 建议方案
+         * @type {string || null}
+         */
+        this.SuggestScheme = null;
+
+        /**
+         * 失败子状态:
+FILE_NOT_FOUND:文件不存在
+FILE_ABNORMAL:文件异常
+FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常
+BACKUP_FILE_NOT_FOUND:备份文件不存在
+CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
+CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
+TIMEOUT: 超时
+TOO_MANY: 任务过多
+OFFLINE: 离线
+INTERNAL: 服务内部错误
+VALIDATION: 参数非法
+         * @type {string || null}
+         */
+        this.SubStatus = null;
+
+        /**
+         * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+         * @type {string || null}
+         */
+        this.ContainerNetSubStatus = null;
+
+        /**
+         * 容器隔离操作来源
+         * @type {string || null}
+         */
+        this.ContainerIsolateOperationSrc = null;
+
+        /**
+         * md5值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CheckPlatform = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.HarmDescribe = 'HarmDescribe' in params ? params.HarmDescribe : null;
+        this.SuggestScheme = 'SuggestScheme' in params ? params.SuggestScheme : null;
+        this.SubStatus = 'SubStatus' in params ? params.SubStatus : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
+        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
+
+    }
+}
+
+/**
+ * DescribeVulIgnoreRegistryImageList请求参数结构体
+ * @class
+ */
+class DescribeVulIgnoreRegistryImageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * AddEditImageAutoAuthorizedRule返回参数结构体
+ * @class
+ */
+class AddEditImageAutoAuthorizedRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5628,6 +11285,101 @@ class ClusterCheckTaskItem extends  AbstractModel {
         this.ClusterRegion = 'ClusterRegion' in params ? params.ClusterRegion : null;
         this.NodeIp = 'NodeIp' in params ? params.NodeIp : null;
         this.WorkloadName = 'WorkloadName' in params ? params.WorkloadName : null;
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleList请求参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSampleListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>MD5- String - 是否必填：否 - md5 </li>
+<li>AutoIsolateSwitch- String - 是否必填：否 - 自动隔离开关 </li>
+<li>VirusName- String - 是否必填：否 - 病毒名 </li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * ModifySecLogJoinObjects返回参数结构体
+ * @class
+ */
+class ModifySecLogJoinObjectsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5724,6 +11476,27 @@ class RenewImageAuthorizeStateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVirusAutoIsolateSetting请求参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * CreateAssetImageRegistryScanTaskOneKey请求参数结构体
  * @class
  */
@@ -5781,6 +11554,139 @@ class CreateAssetImageRegistryScanTaskOneKeyRequest extends  AbstractModel {
 }
 
 /**
+ * RemoveAssetImageRegistryRegistryDetail请求参数结构体
+ * @class
+ */
+class RemoveAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库唯一id
+         * @type {number || null}
+         */
+        this.RegistryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+    }
+}
+
+/**
+ * 网络集群策略自定义规则
+ * @class
+ */
+class NetworkCustomPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络策略方向，分为FROM和TO
+         * @type {string || null}
+         */
+        this.Direction = null;
+
+        /**
+         * 网络策略策略端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NetworkPorts> || null}
+         */
+        this.Ports = null;
+
+        /**
+         * 网络策略策略对象
+
+开启待确认：PublishedNoConfirm
+
+开启已确认：PublishedConfirmed
+
+关闭中：unPublishing
+
+开启中：Publishing
+
+待开启：unPublishEdit
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NetworkPeer> || null}
+         */
+        this.Peer = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Direction = 'Direction' in params ? params.Direction : null;
+
+        if (params.Ports) {
+            this.Ports = new Array();
+            for (let z in params.Ports) {
+                let obj = new NetworkPorts();
+                obj.deserialize(params.Ports[z]);
+                this.Ports.push(obj);
+            }
+        }
+
+        if (params.Peer) {
+            this.Peer = new Array();
+            for (let z in params.Peer) {
+                let obj = new NetworkPeer();
+                obj.deserialize(params.Peer[z]);
+                this.Peer.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteNetworkFirewallPolicyDetail请求参数结构体
+ * @class
+ */
+class DeleteNetworkFirewallPolicyDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略Id数组
+         * @type {Array.<number> || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * ModifyEscapeEventStatus请求参数结构体
  * @class
  */
@@ -5795,7 +11701,12 @@ class ModifyEscapeEventStatusRequest extends  AbstractModel {
         this.EventIdSet = null;
 
         /**
-         * 标记事件的状态：EVENT_UNDEAL:未处理（取消忽略），EVENT_DEALED:已处理，EVENT_IGNORE:忽略，EVENT_DELETE：已删除
+         * 标记事件的状态：
+EVENT_UNDEAL:未处理（取消忽略），
+EVENT_DEALED:已处理，
+EVENT_IGNORE:忽略，
+EVENT_DELETE：已删除
+EVENT_ADD_WHITE：加白
          * @type {string || null}
          */
         this.Status = null;
@@ -5805,6 +11716,25 @@ class ModifyEscapeEventStatusRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Remark = null;
+
+        /**
+         * 加白镜像ID数组
+         * @type {Array.<string> || null}
+         */
+        this.ImageIDs = null;
+
+        /**
+         * 加白事件类型
+   ESCAPE_CGROUPS：利用cgroup机制逃逸
+   ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+   ESCAPE_DOCKER_API：访问Docker API接口逃逸
+   ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+   MOUNT_SENSITIVE_PTAH：敏感路径挂载
+   PRIVILEGE_CONTAINER_START：特权容器
+   PRIVILEGE：程序提权逃逸
+         * @type {Array.<string> || null}
+         */
+        this.EventType = null;
 
     }
 
@@ -5818,50 +11748,65 @@ class ModifyEscapeEventStatusRequest extends  AbstractModel {
         this.EventIdSet = 'EventIdSet' in params ? params.EventIdSet : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ImageIDs = 'ImageIDs' in params ? params.ImageIDs : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
 
     }
 }
 
 /**
- * DescribeAssetImageBindRuleInfo请求参数结构体
+ * 查询镜像绑定的运行时规则信息
  * @class
  */
-class DescribeAssetImageBindRuleInfoRequest extends  AbstractModel {
+class ImagesBindRuleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤参数,"Filters":[{"Name":"EventType","Values":[""]}]
-EventType取值：
-"FILE_ABNORMAL_READ" 访问控制
-"MALICE_PROCESS_START" 恶意进程启动
-         * @type {Array.<RunTimeFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 升序降序,asc desc
+         * 镜像id
          * @type {string || null}
          */
-        this.Order = null;
+        this.ImageId = null;
 
         /**
-         * 排序字段
+         * 镜像名称
          * @type {string || null}
          */
-        this.By = null;
+        this.ImageName = null;
+
+        /**
+         * 关联容器数量
+         * @type {number || null}
+         */
+        this.ContainerCnt = null;
+
+        /**
+         * 绑定规则id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 规则名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 镜像大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScanTime = null;
 
     }
 
@@ -5872,19 +11817,13 @@ EventType取值：
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new RunTimeFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ContainerCnt = 'ContainerCnt' in params ? params.ContainerCnt : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
 
     }
 }
@@ -5920,6 +11859,120 @@ class ImageHost extends  AbstractModel {
         }
         this.ImageID = 'ImageID' in params ? params.ImageID : null;
         this.HostID = 'HostID' in params ? params.HostID : null;
+
+    }
+}
+
+/**
+ * AddComplianceAssetPolicySetToWhitelist返回参数结构体
+ * @class
+ */
+class AddComplianceAssetPolicySetToWhitelistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUnauthorizedCoresTendency返回参数结构体
+ * @class
+ */
+class DescribeUnauthorizedCoresTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 未授权核数趋势
+         * @type {Array.<UnauthorizedCoresTendency> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new UnauthorizedCoresTendency();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyStatus返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * NameRepeat,K8sRuleIngressPortError等
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TaskResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskResult = 'TaskResult' in params ? params.TaskResult : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5970,6 +12023,100 @@ class DescribeAssetContainerListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyContainerNetStatus请求参数结构体
+ * @class
+ */
+class ModifyContainerNetStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 容器ID
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * 状态(
+隔离容器: EVENT_ISOLATE_CONTAINER
+恢复容器: EVENT_RESOTRE_CONTAINER
+)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeVulIgnoreLocalImageList请求参数结构体
+ * @class
+ */
+class DescribeVulIgnoreLocalImageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式:DESC,ACS
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段 ImageSize
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -6034,6 +12181,84 @@ class DescribeVirusMonitorSettingResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSystemVulList请求参数结构体
+ * @class
+ */
+class DescribeSystemVulListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedContainer- string - 是否必填：否 - 仅展示影响容器的漏洞true,false</li>
+<li>OnlyAffectedNewestImage-string - 是否必填：否 - 仅展示影响最新版本镜像的漏洞true,false</li>
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+<li>FocusOnType - string - 是否必填：否 -关注紧急度类型 。ALL :全部，SERIOUS_LEVEL： 严重和高危 ，IS_SUGGEST： 重点关注，POC_EXP 有Poc或Exp ，NETWORK_EXP: 远程Exp</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeContainerSecEventSummary请求参数结构体
  * @class
  */
@@ -6077,6 +12302,69 @@ class DescribeAssetImageRegistrySummaryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogCleanSettingInfo请求参数结构体
+ * @class
+ */
+class DescribeSecLogCleanSettingInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeVulScanAuthorizedImageSummary返回参数结构体
+ * @class
+ */
+class DescribeVulScanAuthorizedImageSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 全部已授权的本地镜像数
+         * @type {number || null}
+         */
+        this.AllAuthorizedImageCount = null;
+
+        /**
+         * 已授权未扫描的本地镜像数
+         * @type {number || null}
+         */
+        this.UnScanAuthorizedImageCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllAuthorizedImageCount = 'AllAuthorizedImageCount' in params ? params.AllAuthorizedImageCount : null;
+        this.UnScanAuthorizedImageCount = 'UnScanAuthorizedImageCount' in params ? params.UnScanAuthorizedImageCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6270,6 +12558,9 @@ class DescribeVirusListRequest extends  AbstractModel {
 <li>TaskId- string - 是否必填：否 - 任务ID</li>
 <li>ContainerNetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
 <li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>ContainerStatus - string -是否必填: 否 - 容器状态 RUNNING PAUSED STOPPED CREATED DESTROYED RESTARTING REMOVING</li>
+<li>AutoIsolateMode - string -是否必填: 否 - 隔离方式 MANUAL AUTO</li>
+<li>MD5 - string -是否必填: 否 - md5 </li>
          * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
@@ -6540,6 +12831,49 @@ class ImagesVul extends  AbstractModel {
 }
 
 /**
+ * DescribePromotionActivity返回参数结构体
+ * @class
+ */
+class DescribePromotionActivityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 促销活动内容
+         * @type {Array.<PromotionActivityContent> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new PromotionActivityContent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyVirusMonitorSetting请求参数结构体
  * @class
  */
@@ -6589,24 +12923,31 @@ class ModifyVirusMonitorSettingRequest extends  AbstractModel {
 }
 
 /**
- * ScanComplianceAssetsByPolicyItem请求参数结构体
+ * ModifyEscapeWhiteList请求参数结构体
  * @class
  */
-class ScanComplianceAssetsByPolicyItemRequest extends  AbstractModel {
+class ModifyEscapeWhiteListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定的检测项的ID
-         * @type {number || null}
+         * 加白名单事件类型
+   ESCAPE_CGROUPS：利用cgroup机制逃逸
+   ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+   ESCAPE_DOCKER_API：访问Docker API接口逃逸
+   ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+   MOUNT_SENSITIVE_PTAH：敏感路径挂载
+   PRIVILEGE_CONTAINER_START：特权容器
+   PRIVILEGE：程序提权逃逸
+         * @type {Array.<string> || null}
          */
-        this.CustomerPolicyItemId = null;
+        this.EventType = null;
 
         /**
-         * 要重新扫描的客户资产项ID的列表。
+         * 白名单记录ID
          * @type {Array.<number> || null}
          */
-        this.CustomerAssetIdSet = null;
+        this.IDSet = null;
 
     }
 
@@ -6617,8 +12958,233 @@ class ScanComplianceAssetsByPolicyItemRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerPolicyItemId = 'CustomerPolicyItemId' in params ? params.CustomerPolicyItemId : null;
-        this.CustomerAssetIdSet = 'CustomerAssetIdSet' in params ? params.CustomerAssetIdSet : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.IDSet = 'IDSet' in params ? params.IDSet : null;
+
+    }
+}
+
+/**
+ * AddAndPublishNetworkFirewallPolicyDetail返回参数结构体
+ * @class
+ */
+class AddAndPublishNetworkFirewallPolicyDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSearchExportList请求参数结构体
+ * @class
+ */
+class DescribeSearchExportListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES查询条件JSON
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * DescribeReverseShellWhiteListDetail请求参数结构体
+ * @class
+ */
+class DescribeReverseShellWhiteListDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白名单id
+         * @type {string || null}
+         */
+        this.WhiteListId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WhiteListId = 'WhiteListId' in params ? params.WhiteListId : null;
+
+    }
+}
+
+/**
+ * AddCompliancePolicyAssetSetToWhitelist返回参数结构体
+ * @class
+ */
+class AddCompliancePolicyAssetSetToWhitelistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulContainerList返回参数结构体
+ * @class
+ */
+class DescribeVulContainerListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 容器列表
+         * @type {Array.<VulAffectedContainerInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 容器总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulAffectedContainerInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRiskSyscallNames请求参数结构体
+ * @class
+ */
+class DescribeRiskSyscallNamesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * ModifyVulDefenceEventStatus返回参数结构体
+ * @class
+ */
+class ModifyVulDefenceEventStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6668,6 +13234,170 @@ class DescribeEscapeEventInfoResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleInfo返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则详情
+         * @type {K8sApiAbnormalRuleInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new K8sApiAbnormalRuleInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeESHits返回参数结构体
+ * @class
+ */
+class DescribeESHitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES查询结果JSON
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImageRegistryTimingScanTask返回参数结构体
+ * @class
+ */
+class DescribeImageRegistryTimingScanTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定时扫描开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 定时任务扫描时间
+         * @type {string || null}
+         */
+        this.ScanTime = null;
+
+        /**
+         * 定时扫描间隔
+         * @type {number || null}
+         */
+        this.ScanPeriod = null;
+
+        /**
+         * 扫描类型数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ScanType = null;
+
+        /**
+         * 扫描全部镜像
+         * @type {boolean || null}
+         */
+        this.All = null;
+
+        /**
+         * 自定义扫描镜像
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageInfo> || null}
+         */
+        this.Images = null;
+
+        /**
+         * 自动以扫描镜像Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Id = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
+        this.ScanPeriod = 'ScanPeriod' in params ? params.ScanPeriod : null;
+        this.ScanType = 'ScanType' in params ? params.ScanType : null;
+        this.All = 'All' in params ? params.All : null;
+
+        if (params.Images) {
+            this.Images = new Array();
+            for (let z in params.Images) {
+                let obj = new ImageInfo();
+                obj.deserialize(params.Images[z]);
+                this.Images.push(obj);
+            }
+        }
+        this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6835,72 +13565,31 @@ class ClusterInfoItem extends  AbstractModel {
 }
 
 /**
- * AddAssetImageRegistryRegistryDetail请求参数结构体
+ * DescribeComplianceScanFailedAssetList返回参数结构体
  * @class
  */
-class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
+class DescribeComplianceScanFailedAssetListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 用户名
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * 密码
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * 仓库url
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 仓库类型，列表：harbor
-         * @type {string || null}
-         */
-        this.RegistryType = null;
-
-        /**
-         * 网络类型，列表：public（公网）
-         * @type {string || null}
-         */
-        this.NetType = null;
-
-        /**
-         * 仓库版本
-         * @type {string || null}
-         */
-        this.RegistryVersion = null;
-
-        /**
-         * 区域，列表：default（默认）
-         * @type {string || null}
-         */
-        this.RegistryRegion = null;
-
-        /**
-         * 限速
+         * 返回检测失败的资产的总数。
          * @type {number || null}
          */
-        this.SpeedLimit = null;
+        this.TotalCount = null;
 
         /**
-         * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
-         * @type {number || null}
+         * 返回各类检测失败的资产的汇总信息的列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ComplianceScanFailedAsset> || null}
          */
-        this.Insecure = null;
+        this.ScanFailedAssetList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6911,16 +13600,158 @@ class AddAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
-        this.NetType = 'NetType' in params ? params.NetType : null;
-        this.RegistryVersion = 'RegistryVersion' in params ? params.RegistryVersion : null;
-        this.RegistryRegion = 'RegistryRegion' in params ? params.RegistryRegion : null;
-        this.SpeedLimit = 'SpeedLimit' in params ? params.SpeedLimit : null;
-        this.Insecure = 'Insecure' in params ? params.Insecure : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ScanFailedAssetList) {
+            this.ScanFailedAssetList = new Array();
+            for (let z in params.ScanFailedAssetList) {
+                let obj = new ComplianceScanFailedAsset();
+                obj.deserialize(params.ScanFailedAssetList[z]);
+                this.ScanFailedAssetList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyReverseShellStatus返回参数结构体
+ * @class
+ */
+class ModifyReverseShellStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMachine返回参数结构体
+ * @class
+ */
+class DeleteMachineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddCompliancePolicyAssetSetToWhitelist请求参数结构体
+ * @class
+ */
+class AddCompliancePolicyAssetSetToWhitelistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项ID
+         * @type {number || null}
+         */
+        this.CustomerPolicyItemId = null;
+
+        /**
+         * 需要忽略指定检查项内的资产ID列表
+         * @type {Array.<number> || null}
+         */
+        this.CustomerAssetItemIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerPolicyItemId = 'CustomerPolicyItemId' in params ? params.CustomerPolicyItemId : null;
+        this.CustomerAssetItemIdSet = 'CustomerAssetItemIdSet' in params ? params.CustomerAssetItemIdSet : null;
+
+    }
+}
+
+/**
+ * DescribeEscapeWhiteList返回参数结构体
+ * @class
+ */
+class DescribeEscapeWhiteListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 逃逸白名单列表
+         * @type {Array.<EscapeWhiteListInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new EscapeWhiteListInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7144,6 +13975,19 @@ RULE_MODE_HOLDUP 拦截
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
     }
 
     /**
@@ -7178,6 +14022,7 @@ RULE_MODE_HOLDUP 拦截
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
 
     }
 }
@@ -7303,6 +14148,201 @@ CHANGE_USRCFG：篡改用户配置
         this.RuleMode = 'RuleMode' in params ? params.RuleMode : null;
         this.IsEnable = 'IsEnable' in params ? params.IsEnable : null;
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogAlertMsg返回参数结构体
+ * @class
+ */
+class DescribeSecLogAlertMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警消息队列
+         * @type {Array.<SecLogAlertMsgInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SecLogAlertMsgInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInspectionReport请求参数结构体
+ * @class
+ */
+class DescribeInspectionReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeAgentDaemonSetCmd请求参数结构体
+ * @class
+ */
+class DescribeAgentDaemonSetCmdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否是腾讯云
+         * @type {boolean || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 地域标示, NetType=direct时必填
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * VpcId, NetType=direct时必填
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 命令有效期，非腾讯云时必填
+         * @type {string || null}
+         */
+        this.ExpireDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogAlertMsg请求参数结构体
+ * @class
+ */
+class DescribeSecLogAlertMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警类型
+日志储量告警: log_reserve_full
+日志存储时间告警: log_save_day_limit
+kafka实例/公网域名不可用: kafka_instance_domain_unavailable
+kafka 用户名密码错误: kafka_user_passwd_wrong
+kafka后台报错字段: kafka_field_wrong
+         * @type {Array.<string> || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * AddNetworkFirewallPolicyYamlDetail返回参数结构体
+ * @class
+ */
+class AddNetworkFirewallPolicyYamlDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7493,6 +14533,19 @@ RULE_MODE_HOLDUP 拦截
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
     }
 
     /**
@@ -7528,6 +14581,7 @@ RULE_MODE_HOLDUP 拦截
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
 
     }
 }
@@ -7577,6 +14631,30 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.NoRiskClusterCount = null;
 
         /**
+         * 已经检查集群数
+         * @type {number || null}
+         */
+        this.CheckedClusterCount = null;
+
+        /**
+         * 自动检查集群数
+         * @type {number || null}
+         */
+        this.AutoCheckClusterCount = null;
+
+        /**
+         * 手动检查集群数
+         * @type {number || null}
+         */
+        this.ManualCheckClusterCount = null;
+
+        /**
+         * 检查失败集群数
+         * @type {number || null}
+         */
+        this.FailedClusterCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7597,7 +14675,176 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.ManagedClusterCount = 'ManagedClusterCount' in params ? params.ManagedClusterCount : null;
         this.IndependentClusterCount = 'IndependentClusterCount' in params ? params.IndependentClusterCount : null;
         this.NoRiskClusterCount = 'NoRiskClusterCount' in params ? params.NoRiskClusterCount : null;
+        this.CheckedClusterCount = 'CheckedClusterCount' in params ? params.CheckedClusterCount : null;
+        this.AutoCheckClusterCount = 'AutoCheckClusterCount' in params ? params.AutoCheckClusterCount : null;
+        this.ManualCheckClusterCount = 'ManualCheckClusterCount' in params ? params.ManualCheckClusterCount : null;
+        this.FailedClusterCount = 'FailedClusterCount' in params ? params.FailedClusterCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogDeliveryClsOptions返回参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryClsOptionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cls可选日志集合列表(仅当入参ClsRegion不为空时返回)
+         * @type {Array.<ClsLogsetInfo> || null}
+         */
+        this.LogSetList = null;
+
+        /**
+         * 可选地域列表(仅当入参ClsRegion为空时返回)
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LogSetList) {
+            this.LogSetList = new Array();
+            for (let z in params.LogSetList) {
+                let obj = new ClsLogsetInfo();
+                obj.deserialize(params.LogSetList[z]);
+                this.LogSetList.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMachine请求参数结构体
+ * @class
+ */
+class DeleteMachineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端Uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * CreateVulImageExportJob请求参数结构体
+ * @class
+ */
+class CreateVulImageExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 需要返回的数量，默认为50000，最大值为50000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedNewestImage- Bool- 是否必填：否 - 仅展示影响最新版本镜像的漏洞</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ClientIP- string -是否必填: 否 - 内网IP</li>
+<li>PublicIP- string -是否必填: 否 - 外网IP</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>HostName- string -是否必填: 否 - 主机名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -7692,154 +14939,21 @@ class ModifyRiskSyscallStatusResponse extends  AbstractModel {
 }
 
 /**
- * 运行时安全事件基本信息
+ * DescribeVulSummary请求参数结构体
  * @class
  */
-class RunTimeEventBaseInfo extends  AbstractModel {
+class DescribeVulSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件唯一ID
-         * @type {string || null}
+         * 过滤条件。
+<li>OnlyAffectedNewestImage- string- 是否必填：否 - 仅展示影响最新版本镜像的漏洞true,false</li>
+<li>OnlyAffectedContainer-string- 是否必填：否 - 仅展示影响容器的漏洞,true,false</li>
+<li>CategoryType- string - 是否必填：否 - 漏洞分类: SYSTEM:系统漏洞 WEB:web应用漏洞 ALL:全部漏洞</li>
+         * @type {Array.<RunTimeFilters> || null}
          */
-        this.EventId = null;
-
-        /**
-         * 事件发现时间
-         * @type {string || null}
-         */
-        this.FoundTime = null;
-
-        /**
-         * 容器id
-         * @type {string || null}
-         */
-        this.ContainerId = null;
-
-        /**
-         * 容器名称
-         * @type {string || null}
-         */
-        this.ContainerName = null;
-
-        /**
-         * 镜像id
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * 镜像名称
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * 节点名称
-         * @type {string || null}
-         */
-        this.NodeName = null;
-
-        /**
-         * Pod名称
-         * @type {string || null}
-         */
-        this.PodName = null;
-
-        /**
-         * 状态， “EVENT_UNDEAL”:事件未处理
-    "EVENT_DEALED":事件已经处理
-    "EVENT_INGNORE"：事件已经忽略
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 事件名称：
-宿主机文件访问逃逸、
-Syscall逃逸、
-MountNamespace逃逸、
-程序提权逃逸、
-特权容器启动逃逸、
-敏感路径挂载
-恶意进程启动
-文件篡改
-         * @type {string || null}
-         */
-        this.EventName = null;
-
-        /**
-         * 事件类型
-   ESCAPE_HOST_ACESS_FILE:宿主机文件访问逃逸
-   ESCAPE_MOUNT_NAMESPACE:MountNamespace逃逸
-   ESCAPE_PRIVILEDGE:程序提权逃逸
-   ESCAPE_PRIVILEDGE_CONTAINER_START:特权容器启动逃逸
-   ESCAPE_MOUNT_SENSITIVE_PTAH:敏感路径挂载
-   ESCAPE_SYSCALL:Syscall逃逸
-         * @type {string || null}
-         */
-        this.EventType = null;
-
-        /**
-         * 事件数量
-         * @type {number || null}
-         */
-        this.EventCount = null;
-
-        /**
-         * 最近生成时间
-         * @type {string || null}
-         */
-        this.LatestFoundTime = null;
-
-        /**
-         * 内网ip
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HostIP = null;
-
-        /**
-         * 外网ip
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClientIP = null;
-
-        /**
-         * 网络状态
-未隔离  	NORMAL
-已隔离		ISOLATED
-隔离中		ISOLATING
-隔离失败	ISOLATE_FAILED
-解除隔离中  RESTORING
-解除隔离失败 RESTORE_FAILED
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContainerNetStatus = null;
-
-        /**
-         * 容器子状态
-"AGENT_OFFLINE"       //Agent离线
-"NODE_DESTROYED"      //节点已销毁
-"CONTAINER_EXITED"    //容器已退出
-"CONTAINER_DESTROYED" //容器已销毁
-"SHARED_HOST"         // 容器与主机共享网络
-"RESOURCE_LIMIT"      //隔离操作资源超限
-"UNKNOW"              // 原因未知
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContainerNetSubStatus = null;
-
-        /**
-         * 容器隔离操作来源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ContainerIsolateOperationSrc = null;
+        this.Filters = null;
 
     }
 
@@ -7850,47 +14964,38 @@ MountNamespace逃逸、
         if (!params) {
             return;
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.FoundTime = 'FoundTime' in params ? params.FoundTime : null;
-        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
-        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.PodName = 'PodName' in params ? params.PodName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.EventName = 'EventName' in params ? params.EventName : null;
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.EventCount = 'EventCount' in params ? params.EventCount : null;
-        this.LatestFoundTime = 'LatestFoundTime' in params ? params.LatestFoundTime : null;
-        this.HostIP = 'HostIP' in params ? params.HostIP : null;
-        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
-        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
-        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
-        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
 
 /**
- * DescribeReverseShellWhiteLists返回参数结构体
+ * DescribeAutoAuthorizedRuleHost返回参数结构体
  * @class
  */
-class DescribeReverseShellWhiteListsResponse extends  AbstractModel {
+class DescribeAutoAuthorizedRuleHostResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件总数量
+         * 镜像自动授权规则授权范围主机列表
+         * @type {Array.<AutoAuthorizedRuleHostInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
          * @type {number || null}
          */
         this.TotalCount = null;
-
-        /**
-         * 白名单信息列表
-         * @type {Array.<ReverseShellWhiteListBaseInfo> || null}
-         */
-        this.WhiteListSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7907,15 +15012,43 @@ class DescribeReverseShellWhiteListsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.WhiteListSet) {
-            this.WhiteListSet = new Array();
-            for (let z in params.WhiteListSet) {
-                let obj = new ReverseShellWhiteListBaseInfo();
-                obj.deserialize(params.WhiteListSet[z]);
-                this.WhiteListSet.push(obj);
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AutoAuthorizedRuleHostInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
             }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteIgnoreVul返回参数结构体
+ * @class
+ */
+class DeleteIgnoreVulResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7973,6 +15106,62 @@ class ModifyAssetImageRegistryScanStopOneKeyRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteSearchTemplate请求参数结构体
+ * @class
+ */
+class DeleteSearchTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * SwitchImageAutoAuthorizedRule返回参数结构体
+ * @class
+ */
+class SwitchImageAutoAuthorizedRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeExportJobResult请求参数结构体
  * @class
  */
@@ -8001,66 +15190,49 @@ class DescribeExportJobResultRequest extends  AbstractModel {
 }
 
 /**
- * 基本镜像信息
+ * DescribeNetworkFirewallNamespaceLabelList请求参数结构体
  * @class
  */
-class ImageInfo extends  AbstractModel {
+class DescribeNetworkFirewallNamespaceLabelListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例名称
+         * 集群id
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.ClusterId = null;
 
         /**
-         * 命名空间
-         * @type {string || null}
+         * 偏移量
+         * @type {number || null}
          */
-        this.Namespace = null;
+        this.Offset = null;
 
         /**
-         * 镜像名称
-         * @type {string || null}
+         * 每次查询的最大记录数量
+         * @type {number || null}
          */
-        this.ImageName = null;
+        this.Limit = null;
 
         /**
-         * 镜像tag
-         * @type {string || null}
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
          */
-        this.ImageTag = null;
+        this.Filters = null;
 
         /**
-         * 强制扫描
+         * 排序字段
          * @type {string || null}
          */
-        this.Force = null;
+        this.By = null;
 
         /**
-         * 镜像id
+         * 排序方式 asc,desc
          * @type {string || null}
          */
-        this.ImageDigest = null;
-
-        /**
-         * 仓库类型
-         * @type {string || null}
-         */
-        this.RegistryType = null;
-
-        /**
-         * 镜像仓库地址
-         * @type {string || null}
-         */
-        this.ImageRepoAddress = null;
-
-        /**
-         * 实例id
-         * @type {string || null}
-         */
-        this.InstanceId = null;
+        this.Order = null;
 
     }
 
@@ -8071,15 +15243,94 @@ class ImageInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
-        this.Force = 'Force' in params ? params.Force : null;
-        this.ImageDigest = 'ImageDigest' in params ? params.ImageDigest : null;
-        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
-        this.ImageRepoAddress = 'ImageRepoAddress' in params ? params.ImageRepoAddress : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalEventList请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalEventListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
+<li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+<li>Status - string  - 是否必填: 否 -事件状态筛选</li>
+<li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li>
+<li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+LatestFoundTime: 最近生成时间
+AlarmCount: 告警数量
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -8170,27 +15421,49 @@ class CreateComplianceTaskResponse extends  AbstractModel {
 }
 
 /**
- * 运行时安全事件趋势信息
+ * DescribeAssetImageRegistryList请求参数结构体
  * @class
  */
-class ImageRiskTendencyInfo extends  AbstractModel {
+class DescribeAssetImageRegistryListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 趋势列表
-         * @type {Array.<RunTimeTendencyInfo> || null}
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
          */
-        this.ImageRiskSet = null;
+        this.Limit = null;
 
         /**
-         * 风险类型：
-IRT_VULNERABILITY : 安全漏洞
-IRT_MALWARE_VIRUS: 木马病毒
-IRT_RISK:敏感信息
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤字段
+IsAuthorized是否授权，取值全部all，未授权0，已授权1
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
          * @type {string || null}
          */
-        this.ImageRiskType = null;
+        this.By = null;
+
+        /**
+         * 排序方式，asc，desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 是否仅展示各repository最新的镜像, 默认为false
+         * @type {boolean || null}
+         */
+        this.OnlyShowLatest = null;
 
     }
 
@@ -8201,39 +15474,55 @@ IRT_RISK:敏感信息
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
-        if (params.ImageRiskSet) {
-            this.ImageRiskSet = new Array();
-            for (let z in params.ImageRiskSet) {
-                let obj = new RunTimeTendencyInfo();
-                obj.deserialize(params.ImageRiskSet[z]);
-                this.ImageRiskSet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.ImageRiskType = 'ImageRiskType' in params ? params.ImageRiskType : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OnlyShowLatest = 'OnlyShowLatest' in params ? params.OnlyShowLatest : null;
 
     }
 }
 
 /**
- * ModifyAsset请求参数结构体
+ * 漏洞防护的插件信息
  * @class
  */
-class ModifyAssetRequest extends  AbstractModel {
+class VulDefencePlugin extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 全部同步
-         * @type {boolean || null}
+         * java进程pid
+         * @type {number || null}
          */
-        this.All = null;
+        this.PID = null;
 
         /**
-         * 要同步的主机列表 两个参数必选一个 All优先
-         * @type {Array.<string> || null}
+         * 进程主类名
+         * @type {string || null}
          */
-        this.Hosts = null;
+        this.MainClass = null;
+
+        /**
+         * 插件运行状态：注入中:INJECTING，注入成功：SUCCESS，注入失败：FAIL，插件超时：TIMEOUT，插件退出：QUIT
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误日志
+         * @type {string || null}
+         */
+        this.ErrorLog = null;
 
     }
 
@@ -8244,8 +15533,232 @@ class ModifyAssetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.All = 'All' in params ? params.All : null;
-        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.PID = 'PID' in params ? params.PID : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorLog = 'ErrorLog' in params ? params.ErrorLog : null;
+
+    }
+}
+
+/**
+ * DescribeAbnormalProcessEventTendency返回参数结构体
+ * @class
+ */
+class DescribeAbnormalProcessEventTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待处理异常进程事件趋势
+         * @type {Array.<AbnormalProcessEventTendencyInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AbnormalProcessEventTendencyInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeScanIgnoreVulList请求参数结构体
+ * @class
+ */
+class DescribeScanIgnoreVulListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>VulName- string - 是否必填：否 - 漏洞名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式:DESC,ACS
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段 UpdateTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeReverseShellWhiteLists请求参数结构体
+ * @class
+ */
+class DescribeReverseShellWhiteListsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 升序降序,asc desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * CheckNetworkFirewallPolicyYaml请求参数结构体
+ * @class
+ */
+class CheckNetworkFirewallPolicyYamlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * base64编码的networkpolicy yaml字符串
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -8323,6 +15836,76 @@ Name 可取值：RiskLevel风险等级, RiskTarget检查对象，风险对象,Ri
 }
 
 /**
+ * 漏洞防御的主机信息
+ * @class
+ */
+class VulDefenceHost extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 主机ip即内网ip
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机QUUID
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 插件状态，正常：SUCCESS，异常：FAIL， NO_DEFENDED:未防御
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 外网ip
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * 首次开启时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * ModifyAccessControlStatus返回参数结构体
  * @class
  */
@@ -8351,60 +15934,18 @@ class ModifyAccessControlStatusResponse extends  AbstractModel {
 }
 
 /**
- * 容器网络信息
+ * DeleteReverseShellWhiteLists请求参数结构体
  * @class
  */
-class ContainerNetwork extends  AbstractModel {
+class DeleteReverseShellWhiteListsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * endpoint id
-         * @type {string || null}
+         * 白名单ids
+         * @type {Array.<string> || null}
          */
-        this.EndpointID = null;
-
-        /**
-         * 模式:bridge
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-        /**
-         * 网络名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 网络ID
-         * @type {string || null}
-         */
-        this.NetworkID = null;
-
-        /**
-         * 网关
-         * @type {string || null}
-         */
-        this.Gateway = null;
-
-        /**
-         * IPV4地址
-         * @type {string || null}
-         */
-        this.Ipv4 = null;
-
-        /**
-         * IPV6地址
-         * @type {string || null}
-         */
-        this.Ipv6 = null;
-
-        /**
-         * MAC 地址
-         * @type {string || null}
-         */
-        this.MAC = null;
+        this.WhiteListIdSet = null;
 
     }
 
@@ -8415,14 +15956,57 @@ class ContainerNetwork extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EndpointID = 'EndpointID' in params ? params.EndpointID : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.NetworkID = 'NetworkID' in params ? params.NetworkID : null;
-        this.Gateway = 'Gateway' in params ? params.Gateway : null;
-        this.Ipv4 = 'Ipv4' in params ? params.Ipv4 : null;
-        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
-        this.MAC = 'MAC' in params ? params.MAC : null;
+        this.WhiteListIdSet = 'WhiteListIdSet' in params ? params.WhiteListIdSet : null;
+
+    }
+}
+
+/**
+ * DescribeEmergencyVulList返回参数结构体
+ * @class
+ */
+class DescribeEmergencyVulListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞列表
+         * @type {Array.<EmergencyVulInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new EmergencyVulInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8479,18 +16063,18 @@ class DescribeAssetAppServiceListRequest extends  AbstractModel {
 }
 
 /**
- * RemoveAssetImageRegistryRegistryDetail请求参数结构体
+ * ModifyImageAuthorized返回参数结构体
  * @class
  */
-class RemoveAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
+class ModifyImageAuthorizedResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库唯一id
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.RegistryId = null;
+        this.RequestId = null;
 
     }
 
@@ -8501,7 +16085,247 @@ class RemoveAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 网络集群资产返回的结构体
+ * @class
+ */
+class NetworkClusterInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名字
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群版本
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * 集群操作系统
+         * @type {string || null}
+         */
+        this.ClusterOs = null;
+
+        /**
+         * 集群类型
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 集群区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 集群网络插件
+         * @type {string || null}
+         */
+        this.NetworkPolicyPlugin = null;
+
+        /**
+         * 集群状态
+         * @type {string || null}
+         */
+        this.ClusterStatus = null;
+
+        /**
+         * 总策略数量
+         * @type {number || null}
+         */
+        this.TotalRuleCount = null;
+
+        /**
+         * 已开启策略数量
+         * @type {number || null}
+         */
+        this.EnableRuleCount = null;
+
+        /**
+         * 集群网络插件状态，正常：Running 不正常：Error
+         * @type {string || null}
+         */
+        this.NetworkPolicyPluginStatus = null;
+
+        /**
+         * 集群网络插件错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkPolicyPluginError = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.ClusterOs = 'ClusterOs' in params ? params.ClusterOs : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.NetworkPolicyPlugin = 'NetworkPolicyPlugin' in params ? params.NetworkPolicyPlugin : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.TotalRuleCount = 'TotalRuleCount' in params ? params.TotalRuleCount : null;
+        this.EnableRuleCount = 'EnableRuleCount' in params ? params.EnableRuleCount : null;
+        this.NetworkPolicyPluginStatus = 'NetworkPolicyPluginStatus' in params ? params.NetworkPolicyPluginStatus : null;
+        this.NetworkPolicyPluginError = 'NetworkPolicyPluginError' in params ? params.NetworkPolicyPluginError : null;
+
+    }
+}
+
+/**
+ * AddEscapeWhiteList返回参数结构体
+ * @class
+ */
+class AddEscapeWhiteListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySecLogCleanSettingInfo返回参数结构体
+ * @class
+ */
+class ModifySecLogCleanSettingInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWebVulList请求参数结构体
+ * @class
+ */
+class DescribeWebVulListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedContainer- string - 是否必填：否 - 仅展示影响容器的漏洞true,false</li>
+<li>OnlyAffectedNewestImage-string - 是否必填：否 - 仅展示影响最新版本镜像的漏洞true,false</li>
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+<li>FocusOnType - string - 是否必填：否 -关注紧急度类型 。ALL :全部，SERIOUS_LEVEL： 严重和高危 ，IS_SUGGEST： 重点关注，POC_EXP 有Poc或Exp ，NETWORK_EXP: 远程Exp</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -8598,6 +16422,175 @@ class ModifyVirusScanSettingRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVulDefenceEvent请求参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 - 插件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_DEFENDED：已防御</li>
+<li>ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED </li>
+<li>ContainerNetStatus- String -是否必填: 否 -  容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATING</li>
+<li>EventType - String -是否必填: 否 -  入侵状态，防御成功：EVENT_DEFENDED，尝试攻击：EVENT_ATTACK </li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+<li>VulName- string - 是否必填：否 - 漏洞名称。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号。</li>
+<li>SourceIP- string - 是否必填：否 - 攻击源IP。</li>
+<li>ContainerName- string - 是否必填：否 - 容器名称。</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>HostName- string - 是否必填：否 - 主机名称。</li>
+<li>HostIP- string - 是否必填：否 - 内网IP。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：事件数量：EventCount
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeVirusSummary返回参数结构体
+ * @class
+ */
+class DescribeVirusSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最近的一次扫描任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 木马影响容器个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RiskContainerCnt = null;
+
+        /**
+         * 待处理风险个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RiskCnt = null;
+
+        /**
+         * 病毒库更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VirusDataBaseModifyTime = null;
+
+        /**
+         * 木马影响容器个数较昨日增长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RiskContainerIncrease = null;
+
+        /**
+         * 待处理风险个数较昨日增长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RiskIncrease = null;
+
+        /**
+         * 隔离事件个数较昨日新增
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsolateIncrease = null;
+
+        /**
+         * 隔离事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsolateCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RiskContainerCnt = 'RiskContainerCnt' in params ? params.RiskContainerCnt : null;
+        this.RiskCnt = 'RiskCnt' in params ? params.RiskCnt : null;
+        this.VirusDataBaseModifyTime = 'VirusDataBaseModifyTime' in params ? params.VirusDataBaseModifyTime : null;
+        this.RiskContainerIncrease = 'RiskContainerIncrease' in params ? params.RiskContainerIncrease : null;
+        this.RiskIncrease = 'RiskIncrease' in params ? params.RiskIncrease : null;
+        this.IsolateIncrease = 'IsolateIncrease' in params ? params.IsolateIncrease : null;
+        this.IsolateCnt = 'IsolateCnt' in params ? params.IsolateCnt : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetDBServiceList请求参数结构体
  * @class
  */
@@ -8644,6 +16637,55 @@ class DescribeAssetDBServiceListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpdateAndPublishNetworkFirewallPolicyYamlDetail请求参数结构体
+ * @class
+ */
+class UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * base64编码的networkpolicy yaml字符串
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -8760,49 +16802,18 @@ class AddEditAbnormalProcessRuleResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAssetImageRegistryList请求参数结构体
+ * ScanComplianceScanFailedAssets请求参数结构体
  * @class
  */
-class DescribeAssetImageRegistryListRequest extends  AbstractModel {
+class ScanComplianceScanFailedAssetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
+         * 要重新扫描的客户资产项ID的列表。
+         * @type {Array.<number> || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤字段
-IsAuthorized是否授权，取值全部all，未授权0，已授权1
-         * @type {Array.<AssetFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 排序字段
-         * @type {string || null}
-         */
-        this.By = null;
-
-        /**
-         * 排序方式，asc，desc
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * 是否仅展示各repository最新的镜像, 默认为false
-         * @type {boolean || null}
-         */
-        this.OnlyShowLatest = null;
+        this.CustomerAssetIdSet = null;
 
     }
 
@@ -8813,20 +16824,67 @@ IsAuthorized是否授权，取值全部all，未授权0，已授权1
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.CustomerAssetIdSet = 'CustomerAssetIdSet' in params ? params.CustomerAssetIdSet : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new AssetFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * ModifySecLogDeliveryClsSetting返回参数结构体
+ * @class
+ */
+class ModifySecLogDeliveryClsSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.By = 'By' in params ? params.By : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.OnlyShowLatest = 'OnlyShowLatest' in params ? params.OnlyShowLatest : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeComplianceTaskAssetSummary请求参数结构体
+ * @class
+ */
+class DescribeComplianceTaskAssetSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产类型列表。
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+         * @type {Array.<string> || null}
+         */
+        this.AssetTypeSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
 
     }
 }
@@ -8928,42 +16986,36 @@ class DescribeRiskSyscallWhiteListDetailResponse extends  AbstractModel {
 }
 
 /**
- * DescribeReverseShellWhiteLists请求参数结构体
+ * AddNetworkFirewallPolicyYamlDetail请求参数结构体
  * @class
  */
-class DescribeReverseShellWhiteListsRequest extends  AbstractModel {
+class AddNetworkFirewallPolicyYamlDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
-         * @type {Array.<RunTimeFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 升序降序,asc desc
+         * 集群Id
          * @type {string || null}
          */
-        this.Order = null;
+        this.ClusterId = null;
 
         /**
-         * 排序字段
+         * 策略名
          * @type {string || null}
          */
-        this.By = null;
+        this.PolicyName = null;
+
+        /**
+         * base64编码的networkpolicy yaml字符串
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -8974,19 +17026,108 @@ class DescribeReverseShellWhiteListsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new RunTimeFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeVulLevelImageSummary返回参数结构体
+ * @class
+ */
+class DescribeVulLevelImageSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 高危漏洞最新本地镜像占比
+         * @type {number || null}
+         */
+        this.HighLevelVulLocalImagePercent = null;
+
+        /**
+         * 中危漏洞最新本地镜像占比
+         * @type {number || null}
+         */
+        this.MediumLevelVulLocalImagePercent = null;
+
+        /**
+         * 低危漏洞最新本地镜像占比
+         * @type {number || null}
+         */
+        this.LowLevelVulLocalImagePercent = null;
+
+        /**
+         * 严重漏洞最新本地镜像占比
+         * @type {number || null}
+         */
+        this.CriticalLevelVulLocalImagePercent = null;
+
+        /**
+         * 影响的最新版本本地镜像数
+         * @type {number || null}
+         */
+        this.LocalNewestImageCount = null;
+
+        /**
+         * 影响的最新版本仓库镜像数
+         * @type {number || null}
+         */
+        this.RegistryNewestImageCount = null;
+
+        /**
+         * 高危漏洞最新仓库镜像占比
+         * @type {number || null}
+         */
+        this.HighLevelVulRegistryImagePercent = null;
+
+        /**
+         * 中危漏洞最新仓库镜像占比
+         * @type {number || null}
+         */
+        this.MediumLevelVulRegistryImagePercent = null;
+
+        /**
+         * 低危漏洞最新仓库镜像占比
+         * @type {number || null}
+         */
+        this.LowLevelVulRegistryImagePercent = null;
+
+        /**
+         * 严重漏洞最新仓库镜像占比
+         * @type {number || null}
+         */
+        this.CriticalLevelVulRegistryImagePercent = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.HighLevelVulLocalImagePercent = 'HighLevelVulLocalImagePercent' in params ? params.HighLevelVulLocalImagePercent : null;
+        this.MediumLevelVulLocalImagePercent = 'MediumLevelVulLocalImagePercent' in params ? params.MediumLevelVulLocalImagePercent : null;
+        this.LowLevelVulLocalImagePercent = 'LowLevelVulLocalImagePercent' in params ? params.LowLevelVulLocalImagePercent : null;
+        this.CriticalLevelVulLocalImagePercent = 'CriticalLevelVulLocalImagePercent' in params ? params.CriticalLevelVulLocalImagePercent : null;
+        this.LocalNewestImageCount = 'LocalNewestImageCount' in params ? params.LocalNewestImageCount : null;
+        this.RegistryNewestImageCount = 'RegistryNewestImageCount' in params ? params.RegistryNewestImageCount : null;
+        this.HighLevelVulRegistryImagePercent = 'HighLevelVulRegistryImagePercent' in params ? params.HighLevelVulRegistryImagePercent : null;
+        this.MediumLevelVulRegistryImagePercent = 'MediumLevelVulRegistryImagePercent' in params ? params.MediumLevelVulRegistryImagePercent : null;
+        this.LowLevelVulRegistryImagePercent = 'LowLevelVulRegistryImagePercent' in params ? params.LowLevelVulRegistryImagePercent : null;
+        this.CriticalLevelVulRegistryImagePercent = 'CriticalLevelVulRegistryImagePercent' in params ? params.CriticalLevelVulRegistryImagePercent : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9027,35 +17168,34 @@ class ScanComplianceAssetsResponse extends  AbstractModel {
 }
 
 /**
- * CreateComplianceTask请求参数结构体
+ * DescribeCompliancePeriodTaskList请求参数结构体
  * @class
  */
-class CreateComplianceTaskRequest extends  AbstractModel {
+class DescribeCompliancePeriodTaskListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定要扫描的资产类型列表。
+         * 资产的类型，取值为：
 ASSET_CONTAINER, 容器
 ASSET_IMAGE, 镜像
 ASSET_HOST, 主机
 ASSET_K8S, K8S资产
-AssetTypeSet, PolicySetId, PeriodTaskId三个参数，必须要给其中一个参数填写有效的值。
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
-        this.AssetTypeSet = null;
+        this.AssetType = null;
 
         /**
-         * 按照策略集ID指定的策略执行合规检查。
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.PolicySetId = null;
+        this.Offset = null;
 
         /**
-         * 按照定时任务ID指定的策略执行合规检查。
+         * 需要返回的数量，默认为10，最大值为100。
          * @type {number || null}
          */
-        this.PeriodTaskId = null;
+        this.Limit = null;
 
     }
 
@@ -9066,9 +17206,100 @@ AssetTypeSet, PolicySetId, PeriodTaskId三个参数，必须要给其中一个�
         if (!params) {
             return;
         }
-        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
-        this.PolicySetId = 'PolicySetId' in params ? params.PolicySetId : null;
-        this.PeriodTaskId = 'PeriodTaskId' in params ? params.PeriodTaskId : null;
+        this.AssetType = 'AssetType' in params ? params.AssetType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateAssetImageVirusExportJob返回参数结构体
+ * @class
+ */
+class CreateAssetImageVirusExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeIndexList请求参数结构体
+ * @class
+ */
+class DescribeIndexListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateWebVulExportJob返回参数结构体
+ * @class
+ */
+class CreateWebVulExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9114,6 +17345,27 @@ class DescribeReverseShellWhiteListDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeUnauthorizedCoresTendency请求参数结构体
+ * @class
+ */
+class DescribeUnauthorizedCoresTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeAssetImageVulListExport返回参数结构体
  * @class
  */
@@ -9149,50 +17401,48 @@ class DescribeAssetImageVulListExportResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAssetImageRegistryRiskListExport请求参数结构体
+ * 漏洞Top排名信息
  * @class
  */
-class DescribeAssetImageRegistryRiskListExportRequest extends  AbstractModel {
+class VulTopRankingInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 导出字段
-         * @type {Array.<string> || null}
+         * 漏洞名称
+         * @type {string || null}
          */
-        this.ExportField = null;
+        this.VulName = null;
 
         /**
-         * 需要返回的数量，默认为10，最大值为100
+         * 威胁等级,CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 影响的镜像数
          * @type {number || null}
          */
-        this.Limit = null;
+        this.AffectedImageCount = null;
 
         /**
-         * 偏移量，默认为0。
+         * 影响的容器数
          * @type {number || null}
          */
-        this.Offset = null;
+        this.AffectedContainerCount = null;
 
         /**
-         * 过滤条件。
-<li>Level- String - 是否必填：否 - 漏洞级别筛选，</li>
-<li>Name - String - 是否必填：否 - 漏洞名称</li>
-         * @type {Array.<AssetFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 镜像信息
-         * @type {ImageInfo || null}
-         */
-        this.ImageInfo = null;
-
-        /**
-         * 镜像标识Id
+         * 漏洞ID
          * @type {number || null}
          */
-        this.Id = null;
+        this.ID = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
 
     }
 
@@ -9203,25 +17453,61 @@ class DescribeAssetImageRegistryRiskListExportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ExportField = 'ExportField' in params ? params.ExportField : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.AffectedImageCount = 'AffectedImageCount' in params ? params.AffectedImageCount : null;
+        this.AffectedContainerCount = 'AffectedContainerCount' in params ? params.AffectedContainerCount : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new AssetFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeProVersionInfo请求参数结构体
+ * @class
+ */
+class DescribeProVersionInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
-        if (params.ImageInfo) {
-            let obj = new ImageInfo();
-            obj.deserialize(params.ImageInfo)
-            this.ImageInfo = obj;
+    }
+}
+
+/**
+ * DescribeVulLevelSummary请求参数结构体
+ * @class
+ */
+class DescribeVulLevelSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞分类: SYSTEM:系统漏洞 WEB:web应用漏洞 EMERGENCY:应急漏洞
+         * @type {string || null}
+         */
+        this.CategoryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
 
     }
 }
@@ -9963,6 +18249,204 @@ class DescribeAssetHostListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeABTestConfig请求参数结构体
+ * @class
+ */
+class DescribeABTestConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灰度项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+
+    }
+}
+
+/**
+ * k8s api 异常事件规则配置范围 
+ * @class
+ */
+class K8sApiAbnormalRuleScopeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 范围
+系统事件:
+ANONYMOUS_ACCESS: 匿名访问
+ABNORMAL_UA_REQ: 异常UA请求
+ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动
+GET_CREDENTIALS: 凭据信息获取
+MOUNT_SENSITIVE_PATH: 敏感路径挂载
+COMMAND_RUN: 命令执行
+PRIVILEGE_CONTAINER: 特权容器
+EXCEPTION_CRONTAB_TASK: 异常定时任务
+STATICS_POD: 静态pod创建
+ABNORMAL_CREATE_POD: 异常pod创建
+USER_DEFINED: 用户自定义
+         * @type {string || null}
+         */
+        this.Scope = null;
+
+        /**
+         * 动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行)
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 开关状态(true:开 false:关) 适用于系统规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * 是否被删除 适用于自定义规则入参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsDelete = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsDelete = 'IsDelete' in params ? params.IsDelete : null;
+
+    }
+}
+
+/**
+ * StopVulScanTask请求参数结构体
+ * @class
+ */
+class StopVulScanTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地镜像漏洞扫描任务ID
+         * @type {number || null}
+         */
+        this.LocalTaskID = null;
+
+        /**
+         * 本地镜像ID，无则全部
+         * @type {Array.<string> || null}
+         */
+        this.LocalImageIDs = null;
+
+        /**
+         * 仓库镜像ID，无则全部
+         * @type {Array.<number> || null}
+         */
+        this.RegistryImageIDs = null;
+
+        /**
+         * 仓库镜像漏洞扫描任务ID
+         * @type {number || null}
+         */
+        this.RegistryTaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalTaskID = 'LocalTaskID' in params ? params.LocalTaskID : null;
+        this.LocalImageIDs = 'LocalImageIDs' in params ? params.LocalImageIDs : null;
+        this.RegistryImageIDs = 'RegistryImageIDs' in params ? params.RegistryImageIDs : null;
+        this.RegistryTaskID = 'RegistryTaskID' in params ? params.RegistryTaskID : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallNamespaceList返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallNamespaceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群的详细信息
+         * @type {Array.<NetworkClusterNamespaceInfo> || null}
+         */
+        this.ClusterNamespaceList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterNamespaceList) {
+            this.ClusterNamespaceList = new Array();
+            for (let z in params.ClusterNamespaceList) {
+                let obj = new NetworkClusterNamespaceInfo();
+                obj.deserialize(params.ClusterNamespaceList[z]);
+                this.ClusterNamespaceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 容器安全镜像仓库列表
  * @class
  */
@@ -10264,6 +18748,27 @@ class CreateAssetImageRegistryScanTaskResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePublicKey请求参数结构体
+ * @class
+ */
+class DescribePublicKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * 容器安全端口信息列表
  * @class
  */
@@ -10399,6 +18904,48 @@ class DescribeAssetImageRegistrySummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeVirusManualScanEstimateTimeout返回参数结构体
+ * @class
+ */
+class DescribeVirusManualScanEstimateTimeoutResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预估超时时间(h)
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * 单台主机并行扫描容器数
+         * @type {number || null}
+         */
+        this.ContainerScanConcurrencyCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.ContainerScanConcurrencyCount = 'ContainerScanConcurrencyCount' in params ? params.ContainerScanConcurrencyCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10557,6 +19104,20 @@ class HostInfo extends  AbstractModel {
          */
         this.RegionID = null;
 
+        /**
+         * 所属项目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProjectInfo || null}
+         */
+        this.Project = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -10581,6 +19142,21 @@ class HostInfo extends  AbstractModel {
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
         this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
         this.RegionID = 'RegionID' in params ? params.RegionID : null;
+
+        if (params.Project) {
+            let obj = new ProjectInfo();
+            obj.deserialize(params.Project)
+            this.Project = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -10609,6 +19185,62 @@ class DescribeVirusScanTimeoutSettingRequest extends  AbstractModel {
             return;
         }
         this.ScanType = 'ScanType' in params ? params.ScanType : null;
+
+    }
+}
+
+/**
+ * ModifySecLogJoinState返回参数结构体
+ * @class
+ */
+class ModifySecLogJoinStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccessControlRuleStatus返回参数结构体
+ * @class
+ */
+class ModifyAccessControlRuleStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10692,6 +19324,248 @@ class CreateRefreshTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeK8sApiAbnormalEventList返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalEventListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件列表
+         * @type {Array.<K8sApiAbnormalEventListItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new K8sApiAbnormalEventListItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNewestVul请求参数结构体
+ * @class
+ */
+class DescribeNewestVulRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeAbnormalProcessLevelSummary返回参数结构体
+ * @class
+ */
+class DescribeAbnormalProcessLevelSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异常进程高危待处理事件数
+         * @type {number || null}
+         */
+        this.HighLevelEventCount = null;
+
+        /**
+         * 异常进程中危待处理事件数
+         * @type {number || null}
+         */
+        this.MediumLevelEventCount = null;
+
+        /**
+         * 异常进程低危待处理事件数
+         * @type {number || null}
+         */
+        this.LowLevelEventCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HighLevelEventCount = 'HighLevelEventCount' in params ? params.HighLevelEventCount : null;
+        this.MediumLevelEventCount = 'MediumLevelEventCount' in params ? params.MediumLevelEventCount : null;
+        this.LowLevelEventCount = 'LowLevelEventCount' in params ? params.LowLevelEventCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddEscapeWhiteList请求参数结构体
+ * @class
+ */
+class AddEscapeWhiteListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加白名单事件类型
+   ESCAPE_CGROUPS：利用cgroup机制逃逸
+   ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+   ESCAPE_DOCKER_API：访问Docker API接口逃逸
+   ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+   MOUNT_SENSITIVE_PTAH：敏感路径挂载
+   PRIVILEGE_CONTAINER_START：特权容器
+   PRIVILEGE：程序提权逃逸
+         * @type {Array.<string> || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 加白名单镜像ID数组
+         * @type {Array.<string> || null}
+         */
+        this.ImageIDs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.ImageIDs = 'ImageIDs' in params ? params.ImageIDs : null;
+
+    }
+}
+
+/**
+ * DescribeESAggregations请求参数结构体
+ * @class
+ */
+class DescribeESAggregationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES聚合条件JSON
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * 网络集群pod返回的结构体
+ * @class
+ */
+class NetworkClusterPodInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * pod名字
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * pod空间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * pod标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Labels = null;
+
+        /**
+         * pod类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WorkloadKind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.WorkloadKind = 'WorkloadKind' in params ? params.WorkloadKind : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageRiskListExport返回参数结构体
  * @class
  */
@@ -10722,6 +19596,48 @@ class DescribeAssetImageRiskListExportResponse extends  AbstractModel {
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySecLogCleanSettingInfo请求参数结构体
+ * @class
+ */
+class ModifySecLogCleanSettingInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发清理的储量底线(50-99)
+         * @type {number || null}
+         */
+        this.ReservesLimit = null;
+
+        /**
+         * 清理停止时的储量截至线(>0,小于ReservesLimit)
+         * @type {number || null}
+         */
+        this.ReservesDeadline = null;
+
+        /**
+         * 触发清理的存储天数(>=1)
+         * @type {number || null}
+         */
+        this.DayLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservesLimit = 'ReservesLimit' in params ? params.ReservesLimit : null;
+        this.ReservesDeadline = 'ReservesDeadline' in params ? params.ReservesDeadline : null;
+        this.DayLimit = 'DayLimit' in params ? params.DayLimit : null;
 
     }
 }
@@ -10840,47 +19756,24 @@ class DescribeAccessControlRuleDetailRequest extends  AbstractModel {
 }
 
 /**
- * ExportVirusList请求参数结构体
+ * ModifyVirusScanTimeoutSetting请求参数结构体
  * @class
  */
-class ExportVirusListRequest extends  AbstractModel {
+class ModifyVirusScanTimeoutSettingRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件。
-<li>FileName - String - 是否必填：否 - 文件名称</li>
-<li>FilePath - String - 是否必填：否 - 文件路径</li>
-<li>VirusName - String - 是否必填：否 - 病毒名称</li>
-<li>ContainerName- String - 是否必填：是 - 容器名称</li>
-<li>ContainerId- string - 是否必填：否 - 容器id</li>
-<li>ImageName- string - 是否必填：否 - 镜像名称</li>
-<li>ImageId- string - 是否必填：否 - 镜像id</li>
-<li>IsRealTime- int - 是否必填：否 - 过滤是否实时监控数据</li>
-<li>TaskId- string - 是否必填：否 - 任务ID</li>
-<li>NetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
-<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
-         * @type {Array.<RunTimeFilters> || null}
+         * 超时时长单位小时(5~24h)
+         * @type {number || null}
          */
-        this.Filters = null;
+        this.Timeout = null;
 
         /**
-         * 排序方式
-         * @type {string || null}
+         * 设置类型0一键检测，1定时检测
+         * @type {number || null}
          */
-        this.Order = null;
-
-        /**
-         * 排序字段
-         * @type {string || null}
-         */
-        this.By = null;
-
-        /**
-         * 导出字段
-         * @type {Array.<string> || null}
-         */
-        this.ExportField = null;
+        this.ScanType = null;
 
     }
 
@@ -10891,18 +19784,43 @@ class ExportVirusListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.ScanType = 'ScanType' in params ? params.ScanType : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new RunTimeFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * CreateProcessEventsExportJob返回参数结构体
+ * @class
+ */
+class CreateProcessEventsExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
-        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10964,10 +19882,99 @@ class ImageRiskInfo extends  AbstractModel {
 }
 
 /**
- * DeleteReverseShellWhiteLists返回参数结构体
+ * DescribeRiskSyscallDetail返回参数结构体
  * @class
  */
-class DeleteReverseShellWhiteListsResponse extends  AbstractModel {
+class DescribeRiskSyscallDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件基本信息
+         * @type {RunTimeEventBaseInfo || null}
+         */
+        this.EventBaseInfo = null;
+
+        /**
+         * 进程信息
+         * @type {ProcessDetailInfo || null}
+         */
+        this.ProcessInfo = null;
+
+        /**
+         * 父进程信息
+         * @type {ProcessDetailBaseInfo || null}
+         */
+        this.ParentProcessInfo = null;
+
+        /**
+         * 事件描述
+         * @type {RiskSyscallEventDescription || null}
+         */
+        this.EventDetail = null;
+
+        /**
+         * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProcessBaseInfo || null}
+         */
+        this.AncestorProcessInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EventBaseInfo) {
+            let obj = new RunTimeEventBaseInfo();
+            obj.deserialize(params.EventBaseInfo)
+            this.EventBaseInfo = obj;
+        }
+
+        if (params.ProcessInfo) {
+            let obj = new ProcessDetailInfo();
+            obj.deserialize(params.ProcessInfo)
+            this.ProcessInfo = obj;
+        }
+
+        if (params.ParentProcessInfo) {
+            let obj = new ProcessDetailBaseInfo();
+            obj.deserialize(params.ParentProcessInfo)
+            this.ParentProcessInfo = obj;
+        }
+
+        if (params.EventDetail) {
+            let obj = new RiskSyscallEventDescription();
+            obj.deserialize(params.EventDetail)
+            this.EventDetail = obj;
+        }
+
+        if (params.AncestorProcessInfo) {
+            let obj = new ProcessBaseInfo();
+            obj.deserialize(params.AncestorProcessInfo)
+            this.AncestorProcessInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteK8sApiAbnormalRule返回参数结构体
+ * @class
+ */
+class DeleteK8sApiAbnormalRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -11029,6 +20036,87 @@ class ComplianceHostDetailInfo extends  AbstractModel {
 }
 
 /**
+ * 受漏洞影响的组件信息
+ * @class
+ */
+class VulAffectedImageComponentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 组件版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 组件修复版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FixedVersion = null;
+
+        /**
+         * 组件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.FixedVersion = 'FixedVersion' in params ? params.FixedVersion : null;
+        this.Path = 'Path' in params ? params.Path : null;
+
+    }
+}
+
+/**
+ * DescribePromotionActivity请求参数结构体
+ * @class
+ */
+class DescribePromotionActivityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活动ID
+         * @type {number || null}
+         */
+        this.ActiveID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActiveID = 'ActiveID' in params ? params.ActiveID : null;
+
+    }
+}
+
+/**
  * 容器运行时安全，访问控制子策略信息
  * @class
  */
@@ -11076,6 +20164,62 @@ class AccessControlChildRuleInfo extends  AbstractModel {
         this.ProcessPath = 'ProcessPath' in params ? params.ProcessPath : null;
         this.TargetFilePath = 'TargetFilePath' in params ? params.TargetFilePath : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogKafkaUIN请求参数结构体
+ * @class
+ */
+class DescribeSecLogKafkaUINRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateSystemVulExportJob返回参数结构体
+ * @class
+ */
+class CreateSystemVulExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11229,30 +20373,44 @@ class InitializeUserComplianceEnvironmentResponse extends  AbstractModel {
 }
 
 /**
- * SetCheckMode请求参数结构体
+ * 运行时容器反弹shell事件描述信息
  * @class
  */
-class SetCheckModeRequest extends  AbstractModel {
+class ReverseShellEventDescription extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要设置的集群ID列表
-         * @type {Array.<string> || null}
-         */
-        this.ClusterIds = null;
-
-        /**
-         * 集群检查模式(正常模式"Cluster_Normal"、主动模式"Cluster_Actived"、不设置"Cluster_Unset")
+         * 描述信息
          * @type {string || null}
          */
-        this.ClusterCheckMode = null;
+        this.Description = null;
 
         /**
-         * 0不设置 1打开 2关闭
-         * @type {number || null}
+         * 解决方案
+         * @type {string || null}
          */
-        this.ClusterAutoCheck = null;
+        this.Solution = null;
+
+        /**
+         * 事件备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 目标地址
+         * @type {string || null}
+         */
+        this.DstAddress = null;
+
+        /**
+         * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OperationTime = null;
 
     }
 
@@ -11263,9 +20421,230 @@ class SetCheckModeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
-        this.ClusterCheckMode = 'ClusterCheckMode' in params ? params.ClusterCheckMode : null;
-        this.ClusterAutoCheck = 'ClusterAutoCheck' in params ? params.ClusterAutoCheck : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DstAddress = 'DstAddress' in params ? params.DstAddress : null;
+        this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
+
+    }
+}
+
+/**
+ * DescribeImageRegistryNamespaceList返回参数结构体
+ * @class
+ */
+class DescribeImageRegistryNamespaceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可返回的项目空间的总量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的项目空间列表
+         * @type {Array.<string> || null}
+         */
+        this.NamespaceList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.NamespaceList = 'NamespaceList' in params ? params.NamespaceList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 受漏洞影响的镜像信息
+ * @class
+ */
+class VulAffectedImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 关联的主机数
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 关联的容器数
+         * @type {number || null}
+         */
+        this.ContainerCount = null;
+
+        /**
+         * 组件列表
+         * @type {Array.<VulAffectedImageComponentInfo> || null}
+         */
+        this.ComponentList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.ContainerCount = 'ContainerCount' in params ? params.ContainerCount : null;
+
+        if (params.ComponentList) {
+            this.ComponentList = new Array();
+            for (let z in params.ComponentList) {
+                let obj = new VulAffectedImageComponentInfo();
+                obj.deserialize(params.ComponentList[z]);
+                this.ComponentList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 主机标签信息
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleList返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则列表
+         * @type {Array.<K8sApiAbnormalRuleListItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new K8sApiAbnormalRuleListItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteCompliancePolicyAssetSetFromWhitelist返回参数结构体
+ * @class
+ */
+class DeleteCompliancePolicyAssetSetFromWhitelistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11473,6 +20852,18 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         this.RegionID = null;
 
         /**
+         * 所属项目
+         * @type {ProjectInfo || null}
+         */
+        this.Project = null;
+
+        /**
+         * 标签
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -11511,7 +20902,99 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
         this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
         this.RegionID = 'RegionID' in params ? params.RegionID : null;
+
+        if (params.Project) {
+            let obj = new ProjectInfo();
+            obj.deserialize(params.Project)
+            this.Project = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全日志kafka可选信息
+ * @class
+ */
+class CKafkaInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 主题列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CKafkaTopicInfo> || null}
+         */
+        this.TopicList = null;
+
+        /**
+         * 路由列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CkafkaRouteInfo> || null}
+         */
+        this.RouteList = null;
+
+        /**
+         * kafka版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KafkaVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new CKafkaTopicInfo();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+
+        if (params.RouteList) {
+            this.RouteList = new Array();
+            for (let z in params.RouteList) {
+                let obj = new CkafkaRouteInfo();
+                obj.deserialize(params.RouteList[z]);
+                this.RouteList.push(obj);
+            }
+        }
+        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
 
     }
 }
@@ -11567,12 +21050,18 @@ class DescribeAffectedNodeListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeClusterSummary请求参数结构体
+ * DeleteK8sApiAbnormalRule请求参数结构体
  * @class
  */
-class DescribeClusterSummaryRequest extends  AbstractModel {
+class DeleteK8sApiAbnormalRuleRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 规则ID集合
+         * @type {Array.<string> || null}
+         */
+        this.RuleIDSet = null;
 
     }
 
@@ -11583,6 +21072,35 @@ class DescribeClusterSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RuleIDSet = 'RuleIDSet' in params ? params.RuleIDSet : null;
+
+    }
+}
+
+/**
+ * ModifyVirusFileStatus返回参数结构体
+ * @class
+ */
+class ModifyVirusFileStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11619,6 +21137,69 @@ class DescribeAbnormalProcessRulesExportResponse extends  AbstractModel {
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SyncAssetImageRegistryAsset返回参数结构体
+ * @class
+ */
+class SyncAssetImageRegistryAssetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAbnormalProcessEventTendency请求参数结构体
+ * @class
+ */
+class DescribeAbnormalProcessEventTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -11713,6 +21294,41 @@ class DescribeEscapeEventDetailResponse extends  AbstractModel {
 }
 
 /**
+ * ScanCompliancePolicyItems返回参数结构体
+ * @class
+ */
+class ScanCompliancePolicyItemsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回重新检测任务的ID。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAccessControlRules返回参数结构体
  * @class
  */
@@ -11741,12 +21357,66 @@ class DeleteAccessControlRulesResponse extends  AbstractModel {
 }
 
 /**
- * RenewImageAuthorizeState返回参数结构体
+ * DescribeVulImageSummary返回参数结构体
  * @class
  */
-class RenewImageAuthorizeStateResponse extends  AbstractModel {
+class DescribeVulImageSummaryResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 受严重或高危漏洞影响的镜像数
+         * @type {number || null}
+         */
+        this.SeriousVulImageCount = null;
+
+        /**
+         * 已扫描的镜像数
+         * @type {number || null}
+         */
+        this.ScannedImageCount = null;
+
+        /**
+         * 漏洞总数量
+         * @type {number || null}
+         */
+        this.VulTotalCount = null;
+
+        /**
+         * 系统漏洞数
+         * @type {number || null}
+         */
+        this.SysTemVulCount = null;
+
+        /**
+         * web应用漏洞数
+         * @type {number || null}
+         */
+        this.WebVulCount = null;
+
+        /**
+         * 已授权镜像数
+         * @type {number || null}
+         */
+        this.AllAuthorizedImageCount = null;
+
+        /**
+         * 应急漏洞数
+         * @type {number || null}
+         */
+        this.EmergencyVulCount = null;
+
+        /**
+         * 支持扫描的漏洞总数量
+         * @type {number || null}
+         */
+        this.SupportVulTotalCount = null;
+
+        /**
+         * 漏洞库更新时间
+         * @type {string || null}
+         */
+        this.VulLibraryUpdateTime = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11763,6 +21433,15 @@ class RenewImageAuthorizeStateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SeriousVulImageCount = 'SeriousVulImageCount' in params ? params.SeriousVulImageCount : null;
+        this.ScannedImageCount = 'ScannedImageCount' in params ? params.ScannedImageCount : null;
+        this.VulTotalCount = 'VulTotalCount' in params ? params.VulTotalCount : null;
+        this.SysTemVulCount = 'SysTemVulCount' in params ? params.SysTemVulCount : null;
+        this.WebVulCount = 'WebVulCount' in params ? params.WebVulCount : null;
+        this.AllAuthorizedImageCount = 'AllAuthorizedImageCount' in params ? params.AllAuthorizedImageCount : null;
+        this.EmergencyVulCount = 'EmergencyVulCount' in params ? params.EmergencyVulCount : null;
+        this.SupportVulTotalCount = 'SupportVulTotalCount' in params ? params.SupportVulTotalCount : null;
+        this.VulLibraryUpdateTime = 'VulLibraryUpdateTime' in params ? params.VulLibraryUpdateTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11785,6 +21464,62 @@ class DescribeEscapeRuleInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * 木马趋势详情
+ * @class
+ */
+class VirusTendencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 待处理事件总数
+         * @type {number || null}
+         */
+        this.PendingEventCount = null;
+
+        /**
+         * 风险容器总数
+         * @type {number || null}
+         */
+        this.RiskContainerCount = null;
+
+        /**
+         * 事件总数
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * 隔离事件总数
+         * @type {number || null}
+         */
+        this.IsolateEventCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.PendingEventCount = 'PendingEventCount' in params ? params.PendingEventCount : null;
+        this.RiskContainerCount = 'RiskContainerCount' in params ? params.RiskContainerCount : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.IsolateEventCount = 'IsolateEventCount' in params ? params.IsolateEventCount : null;
 
     }
 }
@@ -11840,59 +21575,36 @@ class DescribeComplianceWhitelistItemListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVirusSummary返回参数结构体
+ * DescribeAssetWebServiceList请求参数结构体
  * @class
  */
-class DescribeVirusSummaryResponse extends  AbstractModel {
+class DescribeAssetWebServiceListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最近的一次扫描任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 木马影响容器个数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 需要返回的数量，默认为10，最大值为100
          * @type {number || null}
          */
-        this.RiskContainerCnt = null;
+        this.Limit = null;
 
         /**
-         * 待处理风险个数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.RiskCnt = null;
+        this.Offset = null;
 
         /**
-         * 病毒库更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 过滤条件。
+<li>Keywords- String - 是否必填：否 - 模糊查询可选字段</li>
+<li>Type- String - 是否必填：否 - 主机运行状态筛选，"Apache"
+"Jboss"
+"lighttpd"
+"Nginx"
+"Tomcat"</li>
+         * @type {Array.<AssetFilters> || null}
          */
-        this.VirusDataBaseModifyTime = null;
-
-        /**
-         * 木马影响容器个数较昨日增长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RiskContainerIncrease = null;
-
-        /**
-         * 待处理风险个数较昨日增长
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RiskIncrease = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Filters = null;
 
     }
 
@@ -11903,13 +21615,17 @@ class DescribeVirusSummaryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RiskContainerCnt = 'RiskContainerCnt' in params ? params.RiskContainerCnt : null;
-        this.RiskCnt = 'RiskCnt' in params ? params.RiskCnt : null;
-        this.VirusDataBaseModifyTime = 'VirusDataBaseModifyTime' in params ? params.VirusDataBaseModifyTime : null;
-        this.RiskContainerIncrease = 'RiskContainerIncrease' in params ? params.RiskContainerIncrease : null;
-        this.RiskIncrease = 'RiskIncrease' in params ? params.RiskIncrease : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -11993,24 +21709,24 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSecEventsTendency请求参数结构体
+ * DescribeEscapeEventTendency请求参数结构体
  * @class
  */
-class DescribeSecEventsTendencyRequest extends  AbstractModel {
+class DescribeEscapeEventTendencyRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 开始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
 
         /**
          * 结束时间
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
 
     }
 
@@ -12021,55 +21737,31 @@ class DescribeSecEventsTendencyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
 
     }
 }
 
 /**
- * DescribeContainerSecEventSummary返回参数结构体
+ * DescribeInspectionReport返回参数结构体
  * @class
  */
-class DescribeContainerSecEventSummaryResponse extends  AbstractModel {
+class DescribeInspectionReportResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 未处理逃逸事件
-         * @type {number || null}
+         * 报告名称
+         * @type {string || null}
          */
-        this.UnhandledEscapeCnt = null;
+        this.ReportName = null;
 
         /**
-         * 未处理反弹shell事件
-         * @type {number || null}
+         * 下载链接
+         * @type {string || null}
          */
-        this.UnhandledReverseShellCnt = null;
-
-        /**
-         * 未处理高危系统调用
-         * @type {number || null}
-         */
-        this.UnhandledRiskSyscallCnt = null;
-
-        /**
-         * 未处理异常进程
-         * @type {number || null}
-         */
-        this.UnhandledAbnormalProcessCnt = null;
-
-        /**
-         * 未处理文件篡改
-         * @type {number || null}
-         */
-        this.UnhandledFileCnt = null;
-
-        /**
-         * 未处理木马事件
-         * @type {number || null}
-         */
-        this.UnhandledVirusEventCnt = null;
+        this.ReportUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12086,13 +21778,314 @@ class DescribeContainerSecEventSummaryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnhandledEscapeCnt = 'UnhandledEscapeCnt' in params ? params.UnhandledEscapeCnt : null;
-        this.UnhandledReverseShellCnt = 'UnhandledReverseShellCnt' in params ? params.UnhandledReverseShellCnt : null;
-        this.UnhandledRiskSyscallCnt = 'UnhandledRiskSyscallCnt' in params ? params.UnhandledRiskSyscallCnt : null;
-        this.UnhandledAbnormalProcessCnt = 'UnhandledAbnormalProcessCnt' in params ? params.UnhandledAbnormalProcessCnt : null;
-        this.UnhandledFileCnt = 'UnhandledFileCnt' in params ? params.UnhandledFileCnt : null;
-        this.UnhandledVirusEventCnt = 'UnhandledVirusEventCnt' in params ? params.UnhandledVirusEventCnt : null;
+        this.ReportName = 'ReportName' in params ? params.ReportName : null;
+        this.ReportUrl = 'ReportUrl' in params ? params.ReportUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全日志-日志投递cls设置信息
+ * @class
+ */
+class SecLogDeliveryClsSettingInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志类型
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 投递状态(true:开启 false:关闭)
+         * @type {boolean || null}
+         */
+        this.State = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 日志集
+         * @type {string || null}
+         */
+        this.LogSet = null;
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicID = null;
+
+        /**
+         * 日志集名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogSetName = null;
+
+        /**
+         * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.LogSet = 'LogSet' in params ? params.LogSet : null;
+        this.TopicID = 'TopicID' in params ? params.TopicID : null;
+        this.LogSetName = 'LogSetName' in params ? params.LogSetName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * DescribeVirusScanTaskStatus请求参数结构体
+ * @class
+ */
+class DescribeVirusScanTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+
+    }
+}
+
+/**
+ * CreateAssetImageScanSetting返回参数结构体
+ * @class
+ */
+class CreateAssetImageScanSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceEventDetail请求参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventID = 'EventID' in params ? params.EventID : null;
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleList返回参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSampleListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 木马自动隔离样本列表
+         * @type {Array.<VirusAutoIsolateSampleInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VirusAutoIsolateSampleInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusEventTendency请求参数结构体
+ * @class
+ */
+class DescribeVirusEventTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势周期(默认为7天)
+         * @type {number || null}
+         */
+        this.TendencyPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TendencyPeriod = 'TendencyPeriod' in params ? params.TendencyPeriod : null;
+
+    }
+}
+
+/**
+ * DescribeAssetImageRegistryVulListExport返回参数结构体
+ * @class
+ */
+class DescribeAssetImageRegistryVulListExportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * excel文件下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopVirusScanTask请求参数结构体
+ * @class
+ */
+class StopVirusScanTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 需要停止的容器id 为空默认停止整个任务
+         * @type {Array.<string> || null}
+         */
+        this.ContainerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ContainerIds = 'ContainerIds' in params ? params.ContainerIds : null;
 
     }
 }
@@ -12172,18 +22165,48 @@ EVENT_DEALED:事件已经处理
 }
 
 /**
- * ScanComplianceScanFailedAssets请求参数结构体
+ * CreateProcessEventsExportJob请求参数结构体
  * @class
  */
-class ScanComplianceScanFailedAssetsRequest extends  AbstractModel {
+class CreateProcessEventsExportJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要重新扫描的客户资产项ID的列表。
-         * @type {Array.<number> || null}
+         * 需要返回的数量，最大值为10000
+         * @type {number || null}
          */
-        this.CustomerAssetIdSet = null;
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤参数,Status：EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 升序降序,asc desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：latest_found_time
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
 
     }
 
@@ -12194,7 +22217,60 @@ class ScanComplianceScanFailedAssetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerAssetIdSet = 'CustomerAssetIdSet' in params ? params.CustomerAssetIdSet : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * DescribeVulDetail返回参数结构体
+ * @class
+ */
+class DescribeVulDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞详情信息
+         * @type {VulDetailInfo || null}
+         */
+        this.VulInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulInfo) {
+            let obj = new VulDetailInfo();
+            obj.deserialize(params.VulInfo)
+            this.VulInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12377,6 +22453,19 @@ class RiskSyscallEventInfo extends  AbstractModel {
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
     }
 
     /**
@@ -12407,6 +22496,50 @@ class RiskSyscallEventInfo extends  AbstractModel {
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+
+    }
+}
+
+/**
+ * DescribeEscapeEventTendency返回参数结构体
+ * @class
+ */
+class DescribeEscapeEventTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待处理逃逸事件趋势
+         * @type {Array.<EscapeEventTendencyInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new EscapeEventTendencyInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12530,6 +22663,27 @@ class ClusterCheckItem extends  AbstractModel {
          */
         this.AffectedVersion = null;
 
+        /**
+         * 忽略的资产数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IgnoredAssetNum = null;
+
+        /**
+         * 是否忽略该检测项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsIgnored = null;
+
+        /**
+         * 受影响评估
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskAssessment = null;
+
     }
 
     /**
@@ -12555,6 +22709,9 @@ class ClusterCheckItem extends  AbstractModel {
         this.RelateLink = 'RelateLink' in params ? params.RelateLink : null;
         this.AffectedType = 'AffectedType' in params ? params.AffectedType : null;
         this.AffectedVersion = 'AffectedVersion' in params ? params.AffectedVersion : null;
+        this.IgnoredAssetNum = 'IgnoredAssetNum' in params ? params.IgnoredAssetNum : null;
+        this.IsIgnored = 'IsIgnored' in params ? params.IsIgnored : null;
+        this.RiskAssessment = 'RiskAssessment' in params ? params.RiskAssessment : null;
 
     }
 }
@@ -12610,145 +22767,12 @@ class DescribeAssetImageVulListResponse extends  AbstractModel {
 }
 
 /**
- * 容器安全镜像漏洞信息
+ * DescribeK8sApiAbnormalSummary请求参数结构体
  * @class
  */
-class ImageVul extends  AbstractModel {
+class DescribeK8sApiAbnormalSummaryRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 漏洞id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CVEID = null;
-
-        /**
-         * 观点验证程序id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.POCID = null;
-
-        /**
-         * 漏洞名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 涉及组件信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ComponentsInfo> || null}
-         */
-        this.Components = null;
-
-        /**
-         * 分类
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Category = null;
-
-        /**
-         * 分类2
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CategoryType = null;
-
-        /**
-         * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Des = null;
-
-        /**
-         * 解决方案
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OfficialSolution = null;
-
-        /**
-         * 引用
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Reference = null;
-
-        /**
-         * 防御方案
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DefenseSolution = null;
-
-        /**
-         * 提交时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubmitTime = null;
-
-        /**
-         * Cvss分数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CvssScore = null;
-
-        /**
-         * Cvss信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CvssVector = null;
-
-        /**
-         * 是否建议修复
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IsSuggest = null;
-
-        /**
-         * 修复版本号
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FixedVersions = null;
-
-        /**
-         * 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp"
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * 组件名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Component = null;
-
-        /**
-         * 组件版本
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Version = null;
 
     }
 
@@ -12759,33 +22783,27 @@ class ImageVul extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CVEID = 'CVEID' in params ? params.CVEID : null;
-        this.POCID = 'POCID' in params ? params.POCID : null;
-        this.Name = 'Name' in params ? params.Name : null;
 
-        if (params.Components) {
-            this.Components = new Array();
-            for (let z in params.Components) {
-                let obj = new ComponentsInfo();
-                obj.deserialize(params.Components[z]);
-                this.Components.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeAbnormalProcessLevelSummary请求参数结构体
+ * @class
+ */
+class DescribeAbnormalProcessLevelSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Category = 'Category' in params ? params.Category : null;
-        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Des = 'Des' in params ? params.Des : null;
-        this.OfficialSolution = 'OfficialSolution' in params ? params.OfficialSolution : null;
-        this.Reference = 'Reference' in params ? params.Reference : null;
-        this.DefenseSolution = 'DefenseSolution' in params ? params.DefenseSolution : null;
-        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
-        this.CvssScore = 'CvssScore' in params ? params.CvssScore : null;
-        this.CvssVector = 'CvssVector' in params ? params.CvssVector : null;
-        this.IsSuggest = 'IsSuggest' in params ? params.IsSuggest : null;
-        this.FixedVersions = 'FixedVersions' in params ? params.FixedVersions : null;
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Component = 'Component' in params ? params.Component : null;
-        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -12836,6 +22854,173 @@ class AssetFilters extends  AbstractModel {
 }
 
 /**
+ * ModifyK8sApiAbnormalRuleStatus请求参数结构体
+ * @class
+ */
+class ModifyK8sApiAbnormalRuleStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * 状态(true:开 false:关)
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyDetail返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 入站类型
+         * @type {number || null}
+         */
+        this.FromPolicyRule = null;
+
+        /**
+         * 出站类型
+         * @type {number || null}
+         */
+        this.ToPolicyRule = null;
+
+        /**
+         * 自定义规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NetworkCustomPolicy> || null}
+         */
+        this.CustomPolicy = null;
+
+        /**
+         * pod选择器
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 策略创建时间
+         * @type {string || null}
+         */
+        this.PolicyCreateTime = null;
+
+        /**
+         * 策略源类型，分为System和Manual，分别代表手动和系统添加
+         * @type {string || null}
+         */
+        this.PolicySourceType = null;
+
+        /**
+         * 网络策略对应的网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkPolicyPlugin = null;
+
+        /**
+         * 网络策略状态
+         * @type {string || null}
+         */
+        this.PublishStatus = null;
+
+        /**
+         * 网络发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublishResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+
+        if (params.CustomPolicy) {
+            this.CustomPolicy = new Array();
+            for (let z in params.CustomPolicy) {
+                let obj = new NetworkCustomPolicy();
+                obj.deserialize(params.CustomPolicy[z]);
+                this.CustomPolicy.push(obj);
+            }
+        }
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PolicyCreateTime = 'PolicyCreateTime' in params ? params.PolicyCreateTime : null;
+        this.PolicySourceType = 'PolicySourceType' in params ? params.PolicySourceType : null;
+        this.NetworkPolicyPlugin = 'NetworkPolicyPlugin' in params ? params.NetworkPolicyPlugin : null;
+        this.PublishStatus = 'PublishStatus' in params ? params.PublishStatus : null;
+        this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePostPayDetail返回参数结构体
  * @class
  */
@@ -12875,6 +23060,142 @@ class DescribePostPayDetailResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalEventInfo返回参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalEventInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件详情
+         * @type {K8sApiAbnormalEventInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new K8sApiAbnormalEventInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPodLabelsList返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPodLabelsListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群pod总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群pod详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NetworkClusterPodInfo> || null}
+         */
+        this.PodList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PodList) {
+            this.PodList = new Array();
+            for (let z in params.PodList) {
+                let obj = new NetworkClusterPodInfo();
+                obj.deserialize(params.PodList[z]);
+                this.PodList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 受漏洞影响的组件信息
+ * @class
+ */
+class VulAffectedComponentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 组件版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Version = null;
+
+        /**
+         * 组件修复版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FixedVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.FixedVersion = 'FixedVersion' in params ? params.FixedVersion : null;
 
     }
 }
@@ -13156,6 +23477,41 @@ class ModifyVirusFileStatusRequest extends  AbstractModel {
 }
 
 /**
+ * CreateVulContainerExportJob返回参数结构体
+ * @class
+ */
+class CreateVulContainerExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageRegistryListExport请求参数结构体
  * @class
  */
@@ -13234,19 +23590,18 @@ class DescribeAssetImageRegistryListExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAssetImageRegistryRiskListExport返回参数结构体
+ * CreateK8sApiAbnormalRuleInfo返回参数结构体
  * @class
  */
-class DescribeAssetImageRegistryRiskListExportResponse extends  AbstractModel {
+class CreateK8sApiAbnormalRuleInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * excel文件下载地址
-注意：此字段可能返回 null，表示取不到有效值。
+         * 规则ID
          * @type {string || null}
          */
-        this.DownloadUrl = null;
+        this.RuleID = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13263,8 +23618,61 @@ class DescribeAssetImageRegistryRiskListExportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 运行时安全，进程基础信息
+ * @class
+ */
+class ProcessBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 进程启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessStartUser = null;
+
+        /**
+         * 进程用户组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessUserGroup = null;
+
+        /**
+         * 进程路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessPath = null;
+
+        /**
+         * 进程命令行参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProcessStartUser = 'ProcessStartUser' in params ? params.ProcessStartUser : null;
+        this.ProcessUserGroup = 'ProcessUserGroup' in params ? params.ProcessUserGroup : null;
+        this.ProcessPath = 'ProcessPath' in params ? params.ProcessPath : null;
+        this.ProcessParam = 'ProcessParam' in params ? params.ProcessParam : null;
 
     }
 }
@@ -13301,6 +23709,111 @@ class ModifyEscapeRuleRequest extends  AbstractModel {
                 this.RuleSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * k8sapi异常请求趋势Item
+ * @class
+ */
+class K8sApiAbnormalTendencyItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 异常UA请求事件数
+         * @type {number || null}
+         */
+        this.ExceptionUARequestCount = null;
+
+        /**
+         * 匿名用户权限事件数
+         * @type {number || null}
+         */
+        this.AnonymousUserRightCount = null;
+
+        /**
+         * 凭据信息获取事件数
+         * @type {number || null}
+         */
+        this.CredentialInformationObtainCount = null;
+
+        /**
+         * 敏感数据挂载事件数
+         * @type {number || null}
+         */
+        this.SensitiveDataMountCount = null;
+
+        /**
+         * 命令执行事件数
+         * @type {number || null}
+         */
+        this.CmdExecCount = null;
+
+        /**
+         * 异常定时任务事件数
+         * @type {number || null}
+         */
+        this.AbnormalScheduledTaskCount = null;
+
+        /**
+         * 静态Pod创建数
+         * @type {number || null}
+         */
+        this.StaticsPodCreateCount = null;
+
+        /**
+         * 可疑容器创建数
+         * @type {number || null}
+         */
+        this.DoubtfulContainerCreateCount = null;
+
+        /**
+         * 自定义规则事件数
+         * @type {number || null}
+         */
+        this.UserDefinedRuleCount = null;
+
+        /**
+         * 匿名访问事件数
+         * @type {number || null}
+         */
+        this.AnonymousAccessCount = null;
+
+        /**
+         * 特权容器事件数
+         * @type {number || null}
+         */
+        this.PrivilegeContainerCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.ExceptionUARequestCount = 'ExceptionUARequestCount' in params ? params.ExceptionUARequestCount : null;
+        this.AnonymousUserRightCount = 'AnonymousUserRightCount' in params ? params.AnonymousUserRightCount : null;
+        this.CredentialInformationObtainCount = 'CredentialInformationObtainCount' in params ? params.CredentialInformationObtainCount : null;
+        this.SensitiveDataMountCount = 'SensitiveDataMountCount' in params ? params.SensitiveDataMountCount : null;
+        this.CmdExecCount = 'CmdExecCount' in params ? params.CmdExecCount : null;
+        this.AbnormalScheduledTaskCount = 'AbnormalScheduledTaskCount' in params ? params.AbnormalScheduledTaskCount : null;
+        this.StaticsPodCreateCount = 'StaticsPodCreateCount' in params ? params.StaticsPodCreateCount : null;
+        this.DoubtfulContainerCreateCount = 'DoubtfulContainerCreateCount' in params ? params.DoubtfulContainerCreateCount : null;
+        this.UserDefinedRuleCount = 'UserDefinedRuleCount' in params ? params.UserDefinedRuleCount : null;
+        this.AnonymousAccessCount = 'AnonymousAccessCount' in params ? params.AnonymousAccessCount : null;
+        this.PrivilegeContainerCount = 'PrivilegeContainerCount' in params ? params.PrivilegeContainerCount : null;
 
     }
 }
@@ -13356,6 +23869,104 @@ class DescribeAbnormalProcessRulesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyVulDefenceSetting返回参数结构体
+ * @class
+ */
+class ModifyVulDefenceSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 支持防御的漏洞
+ * @class
+ */
+class SupportDefenceVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 漏洞标签
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 漏洞CVSS
+         * @type {number || null}
+         */
+        this.CVSSV3Score = null;
+
+        /**
+         * 漏洞威胁等级
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 漏洞CVEID
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞披露时间
+         * @type {string || null}
+         */
+        this.SubmitTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CVSSV3Score = 'CVSSV3Score' in params ? params.CVSSV3Score : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
+
+    }
+}
+
+/**
  * DescribeCheckItemList请求参数结构体
  * @class
  */
@@ -13401,6 +24012,119 @@ class DescribeCheckItemListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeImageComponentList返回参数结构体
+ * @class
+ */
+class DescribeImageComponentListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像组件列表
+         * @type {Array.<ImageComponent> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ImageComponent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAbnormalProcessRulesExportJob返回参数结构体
+ * @class
+ */
+class CreateAbnormalProcessRulesExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogDeliveryKafkaOptions请求参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryKafkaOptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域，若为空则返回所有可选地域
+         * @type {string || null}
+         */
+        this.RegionID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionID = 'RegionID' in params ? params.RegionID : null;
 
     }
 }
@@ -13552,6 +24276,199 @@ class DescribeAccessControlRuleDetailResponse extends  AbstractModel {
 }
 
 /**
+ * CreateNetworkFirewallPublish请求参数结构体
+ * @class
+ */
+class CreateNetworkFirewallPublishRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略Id数组
+         * @type {Array.<number> || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * CreateHostExportJob返回参数结构体
+ * @class
+ */
+class CreateHostExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyDiscover请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyDiscoverRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyYamlDetail返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyYamlDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * base64编码的yaml字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 策略创建时间
+         * @type {string || null}
+         */
+        this.PolicyCreateTime = null;
+
+        /**
+         * 策略源类型，分为System和Manual，分别代表手动和系统添加
+         * @type {string || null}
+         */
+        this.PolicySourceType = null;
+
+        /**
+         * 网络策略对应的网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkPolicyPlugin = null;
+
+        /**
+         * 网络策略状态
+         * @type {string || null}
+         */
+        this.PublishStatus = null;
+
+        /**
+         * 网络发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublishResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PolicyCreateTime = 'PolicyCreateTime' in params ? params.PolicyCreateTime : null;
+        this.PolicySourceType = 'PolicySourceType' in params ? params.PolicySourceType : null;
+        this.NetworkPolicyPlugin = 'NetworkPolicyPlugin' in params ? params.NetworkPolicyPlugin : null;
+        this.PublishStatus = 'PublishStatus' in params ? params.PublishStatus : null;
+        this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateOrModifyPostPayCores请求参数结构体
  * @class
  */
@@ -13580,6 +24497,127 @@ class CreateOrModifyPostPayCoresRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyImageAuthorized请求参数结构体
+ * @class
+ */
+class ModifyImageAuthorizedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地镜像是否全部授权的标识，优先权高于根据本地镜像ids授权。等于true时需UpdatedLocalImageCnt大于0。
+         * @type {boolean || null}
+         */
+        this.AllLocalImages = null;
+
+        /**
+         * 仓库镜像是否全部授权的标识，优先权高于根据镜像ids授权。等于true时需UpdatedRegistryImageCnt大于0。
+         * @type {boolean || null}
+         */
+        this.AllRegistryImages = null;
+
+        /**
+         * 指定操作授权的本地镜像数量，判断优先权最高，实际多出的镜像随机忽略，实际不足的部分也忽略。
+         * @type {number || null}
+         */
+        this.UpdatedLocalImageCnt = null;
+
+        /**
+         * 指定操作授权的仓库镜像数量，判断优先权最高，实际多出的镜像随机忽略，实际不足的部分也忽略；
+         * @type {number || null}
+         */
+        this.UpdatedRegistryImageCnt = null;
+
+        /**
+         * 根据满足条件的本地镜像授权,本地镜像来源；ASSETIMAGE:本地镜像列表；IMAGEALL:同步本地镜像；AllLocalImages为false且LocalImageIds为空和UpdatedLocalImageCnt大于0时，需要
+         * @type {string || null}
+         */
+        this.ImageSourceType = null;
+
+        /**
+         * 根据满足条件的本地镜像授权，AllLocalImages为false且LocalImageIds为空和UpdatedLocalImageCnt大于0时，需要。
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.LocalImageFilter = null;
+
+        /**
+         * 根据满足条件的仓库镜像授权，AllRegistryImages为false且RegistryImageIds为空和UpdatedRegistryImageCnt大于0时，需要。
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.RegistryImageFilter = null;
+
+        /**
+         * 根据满足条件的镜像授权,同时排除的本地镜像。
+         * @type {Array.<string> || null}
+         */
+        this.ExcludeLocalImageIds = null;
+
+        /**
+         * 根据满足条件的镜像授权,同时排除的仓库镜像。
+         * @type {Array.<string> || null}
+         */
+        this.ExcludeRegistryImageIds = null;
+
+        /**
+         * 根据本地镜像ids授权，优先权高于根据满足条件的镜像授权。AllLocalImages为false且LocalImageFilter为空和UpdatedLocalImageCnt大于0时，需要。
+         * @type {Array.<string> || null}
+         */
+        this.LocalImageIds = null;
+
+        /**
+         * 根据仓库镜像Ids授权，优先权高于根据满足条件的镜像授。AllRegistryImages为false且RegistryImageFilter为空和UpdatedRegistryImageCnt大于0时，需要。
+         * @type {Array.<string> || null}
+         */
+        this.RegistryImageIds = null;
+
+        /**
+         * 是否仅最新的镜像；RegistryImageFilter不为空且UpdatedRegistryImageCnt大于0时仓库镜像需要。
+         * @type {boolean || null}
+         */
+        this.OnlyShowLatest = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllLocalImages = 'AllLocalImages' in params ? params.AllLocalImages : null;
+        this.AllRegistryImages = 'AllRegistryImages' in params ? params.AllRegistryImages : null;
+        this.UpdatedLocalImageCnt = 'UpdatedLocalImageCnt' in params ? params.UpdatedLocalImageCnt : null;
+        this.UpdatedRegistryImageCnt = 'UpdatedRegistryImageCnt' in params ? params.UpdatedRegistryImageCnt : null;
+        this.ImageSourceType = 'ImageSourceType' in params ? params.ImageSourceType : null;
+
+        if (params.LocalImageFilter) {
+            this.LocalImageFilter = new Array();
+            for (let z in params.LocalImageFilter) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.LocalImageFilter[z]);
+                this.LocalImageFilter.push(obj);
+            }
+        }
+
+        if (params.RegistryImageFilter) {
+            this.RegistryImageFilter = new Array();
+            for (let z in params.RegistryImageFilter) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.RegistryImageFilter[z]);
+                this.RegistryImageFilter.push(obj);
+            }
+        }
+        this.ExcludeLocalImageIds = 'ExcludeLocalImageIds' in params ? params.ExcludeLocalImageIds : null;
+        this.ExcludeRegistryImageIds = 'ExcludeRegistryImageIds' in params ? params.ExcludeRegistryImageIds : null;
+        this.LocalImageIds = 'LocalImageIds' in params ? params.LocalImageIds : null;
+        this.RegistryImageIds = 'RegistryImageIds' in params ? params.RegistryImageIds : null;
+        this.OnlyShowLatest = 'OnlyShowLatest' in params ? params.OnlyShowLatest : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageScanTask请求参数结构体
  * @class
  */
@@ -13601,30 +24639,45 @@ class DescribeAssetImageScanTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeValueAddedSrvInfo返回参数结构体
+ * DescribeSecLogDeliveryClsSetting请求参数结构体
  * @class
  */
-class DescribeValueAddedSrvInfoResponse extends  AbstractModel {
+class DescribeSecLogDeliveryClsSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * UpdateNetworkFirewallPolicyDetail返回参数结构体
+ * @class
+ */
+class UpdateNetworkFirewallPolicyDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库镜像未授权数量
+         * 返回创建的任务的ID，为0表示创建失败。
          * @type {number || null}
          */
-        this.RegistryImageCnt = null;
+        this.TaskId = null;
 
         /**
-         * 本地镜像未授权数量
-         * @type {number || null}
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
          */
-        this.LocalImageCnt = null;
-
-        /**
-         * 未使用的镜像安全扫描授权数
-         * @type {number || null}
-         */
-        this.UnusedAuthorizedCnt = null;
+        this.Result = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13641,10 +24694,109 @@ class DescribeValueAddedSrvInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryImageCnt = 'RegistryImageCnt' in params ? params.RegistryImageCnt : null;
-        this.LocalImageCnt = 'LocalImageCnt' in params ? params.LocalImageCnt : null;
-        this.UnusedAuthorizedCnt = 'UnusedAuthorizedCnt' in params ? params.UnusedAuthorizedCnt : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySecLogKafkaUIN返回参数结构体
+ * @class
+ */
+class ModifySecLogKafkaUINResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPodLabelsList请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPodLabelsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -13680,6 +24832,71 @@ class CreateVirusScanTaskResponse extends  AbstractModel {
         }
         this.TaskID = 'TaskID' in params ? params.TaskID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallAuditRecord请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallAuditRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - Action
+Name 可取值：publish，unpublish，confirm，add，update，delete
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -13948,6 +25165,19 @@ MountNamespace逃逸、
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
     }
 
     /**
@@ -13977,6 +25207,7 @@ MountNamespace逃逸、
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
 
     }
 }
@@ -14005,6 +25236,84 @@ class ModifyVirusScanTimeoutSettingResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAssetImageVirusExportJob请求参数结构体
+ * @class
+ */
+class CreateAssetImageVirusExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为10000
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 升序降序,asc desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -14131,6 +25440,73 @@ class CreateAssetImageRegistryScanTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAssetClusterList请求参数结构体
+ * @class
+ */
+class DescribeAssetClusterListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
+<li>Status - string  - 是否必填: 否 -集群状态</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段。
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageListExport返回参数结构体
  * @class
  */
@@ -14160,6 +25536,227 @@ class DescribeAssetImageListExportResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 告警配置策略
+ * @class
+ */
+class WarningRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警事件类型：
+镜像仓库安全-木马：IMG_REG_VIRUS
+镜像仓库安全-漏洞：IMG_REG_VUL
+镜像仓库安全-敏感信息：IMG_REG_RISK
+镜像安全-木马：IMG_VIRUS
+镜像安全-漏洞：IMG_VUL
+镜像安全-敏感信息：IMG_RISK
+镜像安全-镜像拦截：IMG_INTERCEPT
+运行时安全-容器逃逸：RUNTIME_ESCAPE
+运行时安全-异常进程：RUNTIME_FILE
+运行时安全-异常文件访问：RUNTIME_PROCESS
+运行时安全-高危系统调用：RUNTIME_SYSCALL
+运行时安全-反弹Shell：RUNTIME_REVERSE_SHELL
+运行时安全-木马：RUNTIME_VIRUS
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 开关状态：
+打开：ON
+关闭：OFF
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 告警开始时间，格式: HH:mm
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 告警结束时间，格式: HH:mm
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 告警等级策略控制，二进制位每位代表一个含义，值以字符串类型传递
+控制开关分为高、中、低，则二进制位分别为：第1位:低，第2位:中，第3位:高，0表示关闭、1表示打开。
+如：高危和中危打开告警，低危关闭告警，则二进制值为：110
+告警类型不区分等级控制，则传1。
+         * @type {string || null}
+         */
+        this.ControlBits = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ControlBits = 'ControlBits' in params ? params.ControlBits : null;
+
+    }
+}
+
+/**
+ * 受漏洞影响的容器信息
+ * @class
+ */
+class VulAffectedContainerInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内网IP
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 容器ID
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * Pod名称
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * PodIP值
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 主机ID
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 外网IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+
+    }
+}
+
+/**
+ * DescribeLogStorageStatistic返回参数结构体
+ * @class
+ */
+class DescribeLogStorageStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总容量（单位：B）
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 已使用容量（单位：B）
+         * @type {number || null}
+         */
+        this.UsedSize = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.UsedSize = 'UsedSize' in params ? params.UsedSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSearchTemplate返回参数结构体
+ * @class
+ */
+class CreateSearchTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14404,6 +26001,158 @@ class DescribeAssetContainerDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVulDefenceSetting返回参数结构体
+ * @class
+ */
+class DescribeVulDefenceSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启:0: 关闭 1:开启
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 漏洞防御主机范围: 0:自选主机节点，1:全部
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * 漏洞防御主机数量
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 开启漏洞防御异常主机数量
+         * @type {number || null}
+         */
+        this.ExceptionHostCount = null;
+
+        /**
+         * 自选漏洞防御主机
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.HostIDs = null;
+
+        /**
+         * 开通容器安全的主机总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostTotalCount = null;
+
+        /**
+         * 支持防御的漏洞数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SupportDefenseVulCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.ExceptionHostCount = 'ExceptionHostCount' in params ? params.ExceptionHostCount : null;
+        this.HostIDs = 'HostIDs' in params ? params.HostIDs : null;
+        this.HostTotalCount = 'HostTotalCount' in params ? params.HostTotalCount : null;
+        this.SupportDefenseVulCount = 'SupportDefenseVulCount' in params ? params.SupportDefenseVulCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImageComponentList请求参数结构体
+ * @class
+ */
+class DescribeImageComponentListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>ComponentName- String - 是否必填：否 - 镜像组件名称</li><li>ComponentVersion- String - 是否必填：否 - 镜像组件版本</li><li>ComponentType- String - 是否必填：否 - 镜像组件类型</li><li>VulLevel- String - 是否必填：否 - 漏洞威胁等级</li><li>HasVul- String - 是否必填：否 -是否有漏洞；true：是，false，否；不传或ALL ：全部</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式desc ，asc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * 容器运行时安全，子策略信息
  * @class
  */
@@ -14457,18 +26206,24 @@ class AbnormalProcessChildRuleInfo extends  AbstractModel {
 }
 
 /**
- * ScanComplianceScanFailedAssets返回参数结构体
+ * DescribeNetworkFirewallPolicyList返回参数结构体
  * @class
  */
-class ScanComplianceScanFailedAssetsResponse extends  AbstractModel {
+class DescribeNetworkFirewallPolicyListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回重新检测任务的ID。
+         * 集群总数
          * @type {number || null}
          */
-        this.TaskId = null;
+        this.TotalCount = null;
+
+        /**
+         * 集群的详细信息
+         * @type {Array.<NetworkPolicyInfoItem> || null}
+         */
+        this.NetPolicy = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14485,8 +26240,115 @@ class ScanComplianceScanFailedAssetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NetPolicy) {
+            this.NetPolicy = new Array();
+            for (let z in params.NetPolicy) {
+                let obj = new NetworkPolicyInfoItem();
+                obj.deserialize(params.NetPolicy[z]);
+                this.NetPolicy.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAgentInstallCommand请求参数结构体
+ * @class
+ */
+class DescribeAgentInstallCommandRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否是腾讯云
+         * @type {boolean || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 地域标示, NetType=direct时必填
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * VpcId, NetType=direct时必填
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 命令有效期，非腾讯云时必填
+         * @type {string || null}
+         */
+        this.ExpireDate = null;
+
+        /**
+         * 标签ID列表，IsCloud=false时才会生效
+         * @type {Array.<number> || null}
+         */
+        this.TagIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+        this.TagIds = 'TagIds' in params ? params.TagIds : null;
+
+    }
+}
+
+/**
+ * ResetSecLogTopicConfig请求参数结构体
+ * @class
+ */
+class ResetSecLogTopicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置类型(ckafka/cls)
+         * @type {string || null}
+         */
+        this.ConfigType = null;
+
+        /**
+         * 日志类型
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -14506,6 +26368,12 @@ class DescribeAssetImageVirusListExportResponse extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -14521,7 +26389,29 @@ class DescribeAssetImageVirusListExportResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusScanSetting请求参数结构体
+ * @class
+ */
+class DescribeVirusScanSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -14547,6 +26437,8 @@ ET_REVERSE_SHELL: 反弹shell
 ET_RISK_SYSCALL:高危系统调用
 ET_ABNORMAL_PROCESS: 异常进程
 ET_ACCESS_CONTROL 文件篡改
+ET_VIRUS 木马事件
+ET_MALICIOUS_CONNECTION 恶意外连事件
          * @type {string || null}
          */
         this.EventType = null;
@@ -14570,6 +26462,310 @@ ET_ACCESS_CONTROL 文件篡改
             }
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
+
+    }
+}
+
+/**
+ * CreateAccessControlsRuleExportJob请求参数结构体
+ * @class
+ */
+class CreateAccessControlsRuleExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {Array.<string> || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * 木马自动隔离样本信息
+ * @class
+ */
+class VirusAutoIsolateSampleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件MD5值
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 病毒名
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 最近编辑时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 自动隔离开关(true:开 false:关)
+         * @type {boolean || null}
+         */
+        this.AutoIsolateSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.AutoIsolateSwitch = 'AutoIsolateSwitch' in params ? params.AutoIsolateSwitch : null;
+
+    }
+}
+
+/**
+ * DescribeExportJobDownloadURL请求参数结构体
+ * @class
+ */
+class DescribeExportJobDownloadURLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.JobID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobID = 'JobID' in params ? params.JobID : null;
+
+    }
+}
+
+/**
+ * DescribeImageAutoAuthorizedRule请求参数结构体
+ * @class
+ */
+class DescribeImageAutoAuthorizedRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeVulIgnoreRegistryImageList返回参数结构体
+ * @class
+ */
+class DescribeVulIgnoreRegistryImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像列表
+         * @type {Array.<VulIgnoreRegistryImage> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulIgnoreRegistryImage();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateAndPublishNetworkFirewallPolicyDetail请求参数结构体
+ * @class
+ */
+class UpdateAndPublishNetworkFirewallPolicyDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.FromPolicyRule = null;
+
+        /**
+         * 出站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.ToPolicyRule = null;
+
+        /**
+         * pod选择器
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 自定义规则
+         * @type {Array.<NetworkCustomPolicy> || null}
+         */
+        this.CustomPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.CustomPolicy) {
+            this.CustomPolicy = new Array();
+            for (let z in params.CustomPolicy) {
+                let obj = new NetworkCustomPolicy();
+                obj.deserialize(params.CustomPolicy[z]);
+                this.CustomPolicy.push(obj);
+            }
+        }
 
     }
 }
@@ -14690,6 +26886,41 @@ class CreateClusterCheckTaskResponse extends  AbstractModel {
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.CreateResult = 'CreateResult' in params ? params.CreateResult : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * cls主题信息
+ * @class
+ */
+class ClsTopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicID = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicID = 'TopicID' in params ? params.TopicID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -14894,6 +27125,20 @@ RESULT_PASSED: 通过
          */
         this.ImageTag = null;
 
+        /**
+         * 检查项验证信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VerifyInfo = null;
+
+        /**
+         * 主机实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -14912,6 +27157,8 @@ RESULT_PASSED: 通过
         this.CheckResult = 'CheckResult' in params ? params.CheckResult : null;
         this.HostIP = 'HostIP' in params ? params.HostIP : null;
         this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.VerifyInfo = 'VerifyInfo' in params ? params.VerifyInfo : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -14988,6 +27235,168 @@ class DescribeAssetImageHostListResponse extends  AbstractModel {
 }
 
 /**
+ * ModifySecLogKafkaUIN请求参数结构体
+ * @class
+ */
+class ModifySecLogKafkaUINRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标UIN
+         * @type {string || null}
+         */
+        this.DstUIN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DstUIN = 'DstUIN' in params ? params.DstUIN : null;
+
+    }
+}
+
+/**
+ * ModifyVirusAutoIsolateSetting请求参数结构体
+ * @class
+ */
+class ModifyVirusAutoIsolateSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自动隔离开关(true:开 false:关)
+         * @type {boolean || null}
+         */
+        this.AutoIsolateSwitch = null;
+
+        /**
+         * 是否中断隔离文件关联的进程(true:是 false:否)
+         * @type {boolean || null}
+         */
+        this.IsKillProgress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoIsolateSwitch = 'AutoIsolateSwitch' in params ? params.AutoIsolateSwitch : null;
+        this.IsKillProgress = 'IsKillProgress' in params ? params.IsKillProgress : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallClusterList返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallClusterListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群的详细信息
+         * @type {Array.<NetworkClusterInfoItem> || null}
+         */
+        this.ClusterInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterInfoList) {
+            this.ClusterInfoList = new Array();
+            for (let z in params.ClusterInfoList) {
+                let obj = new NetworkClusterInfoItem();
+                obj.deserialize(params.ClusterInfoList[z]);
+                this.ClusterInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 待处理逃逸事件趋势
+ * @class
+ */
+class EscapeEventTendencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待处理风险容器事件总数
+         * @type {number || null}
+         */
+        this.RiskContainerEventCount = null;
+
+        /**
+         * 待处理程序特权事件总数
+         * @type {number || null}
+         */
+        this.ProcessPrivilegeEventCount = null;
+
+        /**
+         * 待处理容器逃逸事件总数
+         * @type {number || null}
+         */
+        this.ContainerEscapeEventCount = null;
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RiskContainerEventCount = 'RiskContainerEventCount' in params ? params.RiskContainerEventCount : null;
+        this.ProcessPrivilegeEventCount = 'ProcessPrivilegeEventCount' in params ? params.ProcessPrivilegeEventCount : null;
+        this.ContainerEscapeEventCount = 'ContainerEscapeEventCount' in params ? params.ContainerEscapeEventCount : null;
+        this.Date = 'Date' in params ? params.Date : null;
+
+    }
+}
+
+/**
  * DescribeImageRiskTendency返回参数结构体
  * @class
  */
@@ -15026,6 +27435,62 @@ class DescribeImageRiskTendencyResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 检查项+资产ids 的集合单元
+ * @class
+ */
+class CompliancePolicyAssetSetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检查项ID
+         * @type {number || null}
+         */
+        this.CustomerPolicyItemId = null;
+
+        /**
+         * 需要忽略指定检查项内的资产ID列表，为空表示所有
+         * @type {Array.<number> || null}
+         */
+        this.CustomerAssetItemIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerPolicyItemId = 'CustomerPolicyItemId' in params ? params.CustomerPolicyItemId : null;
+        this.CustomerAssetItemIdSet = 'CustomerAssetItemIdSet' in params ? params.CustomerAssetItemIdSet : null;
+
+    }
+}
+
+/**
+ * SyncAssetImageRegistryAsset请求参数结构体
+ * @class
+ */
+class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -15087,6 +27552,83 @@ ASSET_K8S, K8S资产
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeSearchLogs请求参数结构体
+ * @class
+ */
+class DescribeSearchLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeEscapeEventTypeSummary返回参数结构体
+ * @class
+ */
+class DescribeEscapeEventTypeSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 容器逃逸事件数
+         * @type {number || null}
+         */
+        this.ContainerEscapeEventCount = null;
+
+        /**
+         * 程序提权事件数
+         * @type {number || null}
+         */
+        this.ProcessPrivilegeEventCount = null;
+
+        /**
+         * 风险容器事件数
+         * @type {number || null}
+         */
+        this.RiskContainerEventCount = null;
+
+        /**
+         * 逃逸事件待处理数
+         * @type {number || null}
+         */
+        this.PendingEscapeEventCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerEscapeEventCount = 'ContainerEscapeEventCount' in params ? params.ContainerEscapeEventCount : null;
+        this.ProcessPrivilegeEventCount = 'ProcessPrivilegeEventCount' in params ? params.ProcessPrivilegeEventCount : null;
+        this.RiskContainerEventCount = 'RiskContainerEventCount' in params ? params.RiskContainerEventCount : null;
+        this.PendingEscapeEventCount = 'PendingEscapeEventCount' in params ? params.PendingEscapeEventCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15213,12 +27755,38 @@ class DescribeImageSimpleListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVirusScanSetting请求参数结构体
+ * CreateAbnormalProcessRulesExportJob请求参数结构体
  * @class
  */
-class DescribeVirusScanSettingRequest extends  AbstractModel {
+class CreateAbnormalProcessRulesExportJobRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
 
     }
 
@@ -15229,6 +27797,53 @@ class DescribeVirusScanSettingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * CreateK8sApiAbnormalEventExportJob返回参数结构体
+ * @class
+ */
+class CreateK8sApiAbnormalEventExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15300,6 +27915,278 @@ class DescribeAssetImageRegistryRegistryListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeVulDefenceHost返回参数结构体
+ * @class
+ */
+class DescribeVulDefenceHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞防御的主机列表
+         * @type {Array.<VulDefenceHost> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulDefenceHost();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateImageExportJob请求参数结构体
+ * @class
+ */
+class CreateImageExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>ImageName- String - 是否必填：否 - 镜像名称筛选，</li>
+<li>ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErr</li>
+<li>ImageID- String - 是否必填：否 - 镜像ID筛选，</li>
+<li>SecurityRisk- String - 是否必填：否 - 安全风险，VulCnt 、VirusCnt、RiskCnt、IsTrustImage</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
+ * CreateEmergencyVulExportJob请求参数结构体
+ * @class
+ */
+class CreateEmergencyVulExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为50000，最大值为50000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * k8s api 异常请求规则列表Item
+ * @class
+ */
+class K8sApiAbnormalRuleListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 规则类型
+RT_SYSTEM 系统规则
+RT_USER 用户自定义
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 受影响集群总数
+         * @type {number || null}
+         */
+        this.EffectClusterCount = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 编辑账号
+         * @type {string || null}
+         */
+        this.OprUin = null;
+
+        /**
+         * 状态
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.EffectClusterCount = 'EffectClusterCount' in params ? params.EffectClusterCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.OprUin = 'OprUin' in params ? params.OprUin : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -15490,6 +28377,56 @@ class ComplianceImageDetailInfo extends  AbstractModel {
         this.ImageName = 'ImageName' in params ? params.ImageName : null;
         this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
         this.Repository = 'Repository' in params ? params.Repository : null;
+
+    }
+}
+
+/**
+ * DescribeVulScanLocalImageList返回参数结构体
+ * @class
+ */
+class DescribeVulScanLocalImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像列表
+         * @type {Array.<VulScanImageInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulScanImageInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15776,6 +28713,76 @@ class DescribeAbnormalProcessEventsExportRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVulSummary返回参数结构体
+ * @class
+ */
+class DescribeVulSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞总数量
+         * @type {number || null}
+         */
+        this.VulTotalCount = null;
+
+        /**
+         * 严重及高危漏洞数量
+         * @type {number || null}
+         */
+        this.SeriousVulCount = null;
+
+        /**
+         * 重点关注漏洞数量
+         * @type {number || null}
+         */
+        this.SuggestVulCount = null;
+
+        /**
+         * 有Poc或者Exp的漏洞数量
+         * @type {number || null}
+         */
+        this.PocExpLevelVulCount = null;
+
+        /**
+         * 有远程Exp的漏洞数量
+         * @type {number || null}
+         */
+        this.RemoteExpLevelVulCount = null;
+
+        /**
+         * 受严重或高危漏洞影响的最新版本镜像数
+         * @type {number || null}
+         */
+        this.SeriousVulNewestImageCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulTotalCount = 'VulTotalCount' in params ? params.VulTotalCount : null;
+        this.SeriousVulCount = 'SeriousVulCount' in params ? params.SeriousVulCount : null;
+        this.SuggestVulCount = 'SuggestVulCount' in params ? params.SuggestVulCount : null;
+        this.PocExpLevelVulCount = 'PocExpLevelVulCount' in params ? params.PocExpLevelVulCount : null;
+        this.RemoteExpLevelVulCount = 'RemoteExpLevelVulCount' in params ? params.RemoteExpLevelVulCount : null;
+        this.SeriousVulNewestImageCount = 'SeriousVulNewestImageCount' in params ? params.SeriousVulNewestImageCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetComponentList请求参数结构体
  * @class
  */
@@ -15833,43 +28840,53 @@ class DescribeAssetComponentListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUserCluster请求参数结构体
+ * DescribeEmergencyVulList请求参数结构体
  * @class
  */
-class DescribeUserClusterRequest extends  AbstractModel {
+class DescribeEmergencyVulListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每次查询的最大记录数量
+         * 需要返回的数量，默认为10，最大值为100
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Name - String
-Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
-         * @type {Array.<ComplianceFilters> || null}
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>Tags- string - 是否必填：否 - 漏洞标签，POC，EXP。</li>
+<li>CanBeFixed- string - 是否必填：否 - 是否可修复true,false。</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ContainerID- string -是否必填: 否 - 容器ID</li>
+<li>ContainerName- string -是否必填: 否 - 容器名称</li>
+<li>ComponentName- string -是否必填: 否 - 组件名称</li>
+<li>ComponentVersion- string -是否必填: 否 - 组件版本</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+         * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
 
         /**
          * 排序字段
          * @type {string || null}
          */
         this.By = null;
-
-        /**
-         * 排序方式 asc,desc
-         * @type {string || null}
-         */
-        this.Order = null;
 
     }
 
@@ -15880,19 +28897,47 @@ Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,Clust
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
-                let obj = new ComplianceFilters();
+                let obj = new RunTimeFilters();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
             }
         }
-        this.By = 'By' in params ? params.By : null;
         this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DeleteReverseShellEvents返回参数结构体
+ * @class
+ */
+class DeleteReverseShellEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16090,12 +29135,256 @@ class ModifyAssetImageRegistryScanStopOneKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRiskSyscallNames请求参数结构体
+ * 漏洞防御事件详情
  * @class
  */
-class DescribeRiskSyscallNamesRequest extends  AbstractModel {
+class VulDefenceEventDetail extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 漏洞CVEID
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 入侵状态
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 攻击源IP
+         * @type {string || null}
+         */
+        this.SourceIP = null;
+
+        /**
+         * 攻击源ip地址所在城市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 事件数量
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * 容器ID
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 处理状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 攻击源端口
+         * @type {Array.<string> || null}
+         */
+        this.SourcePort = null;
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 主机内网IP
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机外网IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Pod名称
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * 危害描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 修复建议
+         * @type {string || null}
+         */
+        this.OfficialSolution = null;
+
+        /**
+         * 攻击包
+         * @type {string || null}
+         */
+        this.NetworkPayload = null;
+
+        /**
+         * 进程PID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PID = null;
+
+        /**
+         * 进程主类名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MainClass = null;
+
+        /**
+         * 堆栈信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StackTrace = null;
+
+        /**
+         * 监听账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerAccount = null;
+
+        /**
+         * 监听端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerPort = null;
+
+        /**
+         * 进程路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerExe = null;
+
+        /**
+         * 进程命令行参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerArg = null;
+
+        /**
+         * 主机QUUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.QUUID = null;
+
+        /**
+         * 隔离状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerNetSubStatus = null;
+
+        /**
+         * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerIsolateOperationSrc = null;
+
+        /**
+         * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerStatus = null;
+
+        /**
+         * 接口Url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JNDIUrl = null;
+
+        /**
+         * rasp detail
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RaspInfo> || null}
+         */
+        this.RaspDetail = null;
 
     }
 
@@ -16105,30 +29394,85 @@ class DescribeRiskSyscallNamesRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.SourceIP = 'SourceIP' in params ? params.SourceIP : null;
+        this.City = 'City' in params ? params.City : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SourcePort = 'SourcePort' in params ? params.SourcePort : null;
+        this.EventID = 'EventID' in params ? params.EventID : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.OfficialSolution = 'OfficialSolution' in params ? params.OfficialSolution : null;
+        this.NetworkPayload = 'NetworkPayload' in params ? params.NetworkPayload : null;
+        this.PID = 'PID' in params ? params.PID : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.StackTrace = 'StackTrace' in params ? params.StackTrace : null;
+        this.ServerAccount = 'ServerAccount' in params ? params.ServerAccount : null;
+        this.ServerPort = 'ServerPort' in params ? params.ServerPort : null;
+        this.ServerExe = 'ServerExe' in params ? params.ServerExe : null;
+        this.ServerArg = 'ServerArg' in params ? params.ServerArg : null;
+        this.QUUID = 'QUUID' in params ? params.QUUID : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
+        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.JNDIUrl = 'JNDIUrl' in params ? params.JNDIUrl : null;
+
+        if (params.RaspDetail) {
+            this.RaspDetail = new Array();
+            for (let z in params.RaspDetail) {
+                let obj = new RaspInfo();
+                obj.deserialize(params.RaspDetail[z]);
+                this.RaspDetail.push(obj);
+            }
         }
 
     }
 }
 
 /**
- * 后付费详情
+ * UpdateNetworkFirewallPolicyYamlDetail请求参数结构体
  * @class
  */
-class SoftQuotaDayInfo extends  AbstractModel {
+class UpdateNetworkFirewallPolicyYamlDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 扣费时间
+         * 集群Id
          * @type {string || null}
          */
-        this.PayTime = null;
+        this.ClusterId = null;
 
         /**
-         * 计费核数
+         * 策略id
          * @type {number || null}
          */
-        this.CoresCnt = null;
+        this.Id = null;
+
+        /**
+         * base64编码的networkpolicy yaml字符串
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -16139,8 +29483,312 @@ class SoftQuotaDayInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayTime = 'PayTime' in params ? params.PayTime : null;
-        this.CoresCnt = 'CoresCnt' in params ? params.CoresCnt : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleInfo请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+
+    }
+}
+
+/**
+ * 运行时安全事件基本信息
+ * @class
+ */
+class RunTimeEventBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件唯一ID
+         * @type {string || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件发现时间
+         * @type {string || null}
+         */
+        this.FoundTime = null;
+
+        /**
+         * 容器id
+         * @type {string || null}
+         */
+        this.ContainerId = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 节点名称
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Pod名称
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * 状态， “EVENT_UNDEAL”:事件未处理
+    "EVENT_DEALED":事件已经处理
+    "EVENT_INGNORE"：事件已经忽略
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 事件名称：
+宿主机文件访问逃逸、
+Syscall逃逸、
+MountNamespace逃逸、
+程序提权逃逸、
+特权容器启动逃逸、
+敏感路径挂载
+恶意进程启动
+文件篡改
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 事件类型
+   ESCAPE_HOST_ACESS_FILE:宿主机文件访问逃逸
+   ESCAPE_MOUNT_NAMESPACE:MountNamespace逃逸
+   ESCAPE_PRIVILEDGE:程序提权逃逸
+   ESCAPE_PRIVILEDGE_CONTAINER_START:特权容器启动逃逸
+   ESCAPE_MOUNT_SENSITIVE_PTAH:敏感路径挂载
+   ESCAPE_SYSCALL:Syscall逃逸
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 事件数量
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * 最近生成时间
+         * @type {string || null}
+         */
+        this.LatestFoundTime = null;
+
+        /**
+         * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerNetStatus = null;
+
+        /**
+         * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerNetSubStatus = null;
+
+        /**
+         * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerIsolateOperationSrc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.FoundTime = 'FoundTime' in params ? params.FoundTime : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.LatestFoundTime = 'LatestFoundTime' in params ? params.LatestFoundTime : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
+        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
+        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+
+    }
+}
+
+/**
+ * DescribeSystemVulList返回参数结构体
+ * @class
+ */
+class DescribeSystemVulListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞列表
+         * @type {Array.<VulInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞扫描新增和取消忽略漏洞入参
+ * @class
+ */
+class ModifyIgnoreVul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 忽略的镜像ID，空表示全部
+         * @type {Array.<string> || null}
+         */
+        this.ImageIDs = null;
+
+        /**
+         * 当有镜像时
+镜像类型: LOCAL 本地镜像 REGISTRY 仓库镜像
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.ImageIDs = 'ImageIDs' in params ? params.ImageIDs : null;
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
 
     }
 }
@@ -16313,6 +29961,27 @@ class DescribeAssetDBServiceListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecLogJoinTypeList请求参数结构体
+ * @class
+ */
+class DescribeSecLogJoinTypeListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeImageSimpleList请求参数结构体
  * @class
  */
@@ -16377,6 +30046,123 @@ class DescribeImageSimpleListRequest extends  AbstractModel {
 }
 
 /**
+ * CreateNetworkFirewallPolicyDiscover请求参数结构体
+ * @class
+ */
+class CreateNetworkFirewallPolicyDiscoverRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * 运行时安全事件趋势信息
+ * @class
+ */
+class ImageRiskTendencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势列表
+         * @type {Array.<RunTimeTendencyInfo> || null}
+         */
+        this.ImageRiskSet = null;
+
+        /**
+         * 风险类型：
+IRT_VULNERABILITY : 安全漏洞
+IRT_MALWARE_VIRUS: 木马病毒
+IRT_RISK:敏感信息
+         * @type {string || null}
+         */
+        this.ImageRiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImageRiskSet) {
+            this.ImageRiskSet = new Array();
+            for (let z in params.ImageRiskSet) {
+                let obj = new RunTimeTendencyInfo();
+                obj.deserialize(params.ImageRiskSet[z]);
+                this.ImageRiskSet.push(obj);
+            }
+        }
+        this.ImageRiskType = 'ImageRiskType' in params ? params.ImageRiskType : null;
+
+    }
+}
+
+/**
+ * DescribeVulTopRanking返回参数结构体
+ * @class
+ */
+class DescribeVulTopRankingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞Top排名信息列表
+         * @type {Array.<VulTopRankingInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulTopRankingInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAssetWebServiceList返回参数结构体
  * @class
  */
@@ -16422,6 +30208,372 @@ class DescribeAssetWebServiceListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞详情信息
+ * @class
+ */
+class VulDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CVE编号
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 漏洞标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 漏洞类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CategoryType = null;
+
+        /**
+         * 漏洞威胁等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 漏洞披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubmitTime = null;
+
+        /**
+         * 漏洞描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * CVSS V3描述
+         * @type {string || null}
+         */
+        this.CVSSV3Desc = null;
+
+        /**
+         * 漏洞修复建议
+         * @type {string || null}
+         */
+        this.OfficialSolution = null;
+
+        /**
+         * 缓解措施
+         * @type {string || null}
+         */
+        this.DefenseSolution = null;
+
+        /**
+         * 参考链接
+         * @type {Array.<string> || null}
+         */
+        this.Reference = null;
+
+        /**
+         * CVSS V3分数
+         * @type {number || null}
+         */
+        this.CVSSV3Score = null;
+
+        /**
+         * 受漏洞影响的组件列表
+         * @type {Array.<VulAffectedComponentInfo> || null}
+         */
+        this.ComponentList = null;
+
+        /**
+         * 影响本地镜像数
+         * @type {number || null}
+         */
+        this.LocalImageCount = null;
+
+        /**
+         * 影响容器数
+         * @type {number || null}
+         */
+        this.ContainerCount = null;
+
+        /**
+         * 影响仓库镜像数
+         * @type {number || null}
+         */
+        this.RegistryImageCount = null;
+
+        /**
+         * 漏洞子类型
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * 影响最新本地镜像数
+         * @type {number || null}
+         */
+        this.LocalNewestImageCount = null;
+
+        /**
+         * 影响最新仓库镜像数
+         * @type {number || null}
+         */
+        this.RegistryNewestImageCount = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 防御状态，NO_DEFENDED:未防御，DEFENDED:已防御
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceStatus = null;
+
+        /**
+         * 漏洞防御主机范围: MANUAL:自选主机节点，ALL:全部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceScope = null;
+
+        /**
+         * 漏洞防御主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenceHostCount = null;
+
+        /**
+         * 已防御攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefendedCount = null;
+
+        /**
+         * 是否已扫描，NOT_SCAN:未扫描,SCANNED:已扫描
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScanStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CVSSV3Desc = 'CVSSV3Desc' in params ? params.CVSSV3Desc : null;
+        this.OfficialSolution = 'OfficialSolution' in params ? params.OfficialSolution : null;
+        this.DefenseSolution = 'DefenseSolution' in params ? params.DefenseSolution : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.CVSSV3Score = 'CVSSV3Score' in params ? params.CVSSV3Score : null;
+
+        if (params.ComponentList) {
+            this.ComponentList = new Array();
+            for (let z in params.ComponentList) {
+                let obj = new VulAffectedComponentInfo();
+                obj.deserialize(params.ComponentList[z]);
+                this.ComponentList.push(obj);
+            }
+        }
+        this.LocalImageCount = 'LocalImageCount' in params ? params.LocalImageCount : null;
+        this.ContainerCount = 'ContainerCount' in params ? params.ContainerCount : null;
+        this.RegistryImageCount = 'RegistryImageCount' in params ? params.RegistryImageCount : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.LocalNewestImageCount = 'LocalNewestImageCount' in params ? params.LocalNewestImageCount : null;
+        this.RegistryNewestImageCount = 'RegistryNewestImageCount' in params ? params.RegistryNewestImageCount : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.DefenceStatus = 'DefenceStatus' in params ? params.DefenceStatus : null;
+        this.DefenceScope = 'DefenceScope' in params ? params.DefenceScope : null;
+        this.DefenceHostCount = 'DefenceHostCount' in params ? params.DefenceHostCount : null;
+        this.DefendedCount = 'DefendedCount' in params ? params.DefendedCount : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+
+    }
+}
+
+/**
+ * DescribeVulLevelSummary返回参数结构体
+ * @class
+ */
+class DescribeVulLevelSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 高危漏洞数
+         * @type {number || null}
+         */
+        this.HighLevelVulCount = null;
+
+        /**
+         * 中危漏洞数
+         * @type {number || null}
+         */
+        this.MediumLevelVulCount = null;
+
+        /**
+         * 低危漏洞数
+         * @type {number || null}
+         */
+        this.LowLevelVulCount = null;
+
+        /**
+         * 严重漏洞数
+         * @type {number || null}
+         */
+        this.CriticalLevelVulCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HighLevelVulCount = 'HighLevelVulCount' in params ? params.HighLevelVulCount : null;
+        this.MediumLevelVulCount = 'MediumLevelVulCount' in params ? params.MediumLevelVulCount : null;
+        this.LowLevelVulCount = 'LowLevelVulCount' in params ? params.LowLevelVulCount : null;
+        this.CriticalLevelVulCount = 'CriticalLevelVulCount' in params ? params.CriticalLevelVulCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddNetworkFirewallPolicyDetail请求参数结构体
+ * @class
+ */
+class AddNetworkFirewallPolicyDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.FromPolicyRule = null;
+
+        /**
+         * 出站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.ToPolicyRule = null;
+
+        /**
+         * pod选择器
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 自定义规则
+         * @type {Array.<NetworkCustomPolicy> || null}
+         */
+        this.CustomPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.CustomPolicy) {
+            this.CustomPolicy = new Array();
+            for (let z in params.CustomPolicy) {
+                let obj = new NetworkCustomPolicy();
+                obj.deserialize(params.CustomPolicy[z]);
+                this.CustomPolicy.push(obj);
+            }
+        }
 
     }
 }
@@ -16607,6 +30759,13 @@ RESULT_FAILED: 未通过
          */
         this.BenchmarkStandardId = null;
 
+        /**
+         * 检测项适用的版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicableVersion = null;
+
     }
 
     /**
@@ -16631,6 +30790,7 @@ RESULT_FAILED: 未通过
         this.WhitelistId = 'WhitelistId' in params ? params.WhitelistId : null;
         this.FixSuggestion = 'FixSuggestion' in params ? params.FixSuggestion : null;
         this.BenchmarkStandardId = 'BenchmarkStandardId' in params ? params.BenchmarkStandardId : null;
+        this.ApplicableVersion = 'ApplicableVersion' in params ? params.ApplicableVersion : null;
 
     }
 }
@@ -16755,6 +30915,296 @@ class ModifyRiskSyscallStatusRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVulDefenceEvent返回参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞防御事件列表
+         * @type {Array.<VulDefenceEvent> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulDefenceEvent();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusEventTendency返回参数结构体
+ * @class
+ */
+class DescribeVirusEventTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势列表
+         * @type {Array.<VirusTendencyInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VirusTendencyInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddEditImageAutoAuthorizedRule请求参数结构体
+ * @class
+ */
+class AddEditImageAutoAuthorizedRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权范围类别，MANUAL:自选主机节点，ALL:全部镜像
+         * @type {string || null}
+         */
+        this.RangeType = null;
+
+        /**
+         * 每天最大的镜像授权数限制, 0表示无限制
+         * @type {number || null}
+         */
+        this.MaxDailyCount = null;
+
+        /**
+         * 规则是否生效，0:不生效，1:已生效
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 自选主机id，当授权范围为MANUAL:自选主机时且HostIdFilters为空时，必填
+         * @type {Array.<string> || null}
+         */
+        this.HostIdSet = null;
+
+        /**
+         * 规则id，在编辑时，必填
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 根据条件过滤，当授权范围为MANUAL:自选主机时且HostIdSet为空时，必填
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.HostIdFilters = null;
+
+        /**
+         * 根据条件过滤而且排除指定主机id
+         * @type {Array.<string> || null}
+         */
+        this.ExcludeHostIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RangeType = 'RangeType' in params ? params.RangeType : null;
+        this.MaxDailyCount = 'MaxDailyCount' in params ? params.MaxDailyCount : null;
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.HostIdSet = 'HostIdSet' in params ? params.HostIdSet : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.HostIdFilters) {
+            this.HostIdFilters = new Array();
+            for (let z in params.HostIdFilters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.HostIdFilters[z]);
+                this.HostIdFilters.push(obj);
+            }
+        }
+        this.ExcludeHostIdSet = 'ExcludeHostIdSet' in params ? params.ExcludeHostIdSet : null;
+
+    }
+}
+
+/**
+ * SwitchImageAutoAuthorizedRule请求参数结构体
+ * @class
+ */
+class SwitchImageAutoAuthorizedRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则是否生效，0:不生效，1:已生效
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 规则id
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusSampleDownloadUrl返回参数结构体
+ * @class
+ */
+class DescribeVirusSampleDownloadUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 样本下载地址
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeValueAddedSrvInfo返回参数结构体
+ * @class
+ */
+class DescribeValueAddedSrvInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库镜像未授权数量
+         * @type {number || null}
+         */
+        this.RegistryImageCnt = null;
+
+        /**
+         * 本地镜像未授权数量
+         * @type {number || null}
+         */
+        this.LocalImageCnt = null;
+
+        /**
+         * 未使用的镜像安全扫描授权数
+         * @type {number || null}
+         */
+        this.UnusedAuthorizedCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryImageCnt = 'RegistryImageCnt' in params ? params.RegistryImageCnt : null;
+        this.LocalImageCnt = 'LocalImageCnt' in params ? params.LocalImageCnt : null;
+        this.UnusedAuthorizedCnt = 'UnusedAuthorizedCnt' in params ? params.UnusedAuthorizedCnt : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 运行时风险信息
  * @class
  */
@@ -16864,6 +31314,34 @@ class CreateVirusScanTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAbnormalProcessDetail请求参数结构体
+ * @class
+ */
+class DescribeAbnormalProcessDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件唯一id
+         * @type {string || null}
+         */
+        this.EventId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+
+    }
+}
+
+/**
  * DescribeAssetImageScanTask返回参数结构体
  * @class
  */
@@ -16934,6 +31412,69 @@ class AddEditAccessControlRuleRequest extends  AbstractModel {
             this.RuleInfo = obj;
         }
         this.EventId = 'EventId' in params ? params.EventId : null;
+
+    }
+}
+
+/**
+ * DescribeVulTopRanking请求参数结构体
+ * @class
+ */
+class DescribeVulTopRankingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞分类: SYSTEM:系统漏洞 WEB:web应用漏洞 EMERGENCY:应急漏洞
+         * @type {string || null}
+         */
+        this.CategoryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
+
+    }
+}
+
+/**
+ * ConfirmNetworkFirewallPolicy请求参数结构体
+ * @class
+ */
+class ConfirmNetworkFirewallPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略Id数组
+         * @type {Array.<number> || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -17011,6 +31552,161 @@ class ContainerMount extends  AbstractModel {
         this.Propagation = 'Propagation' in params ? params.Propagation : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Driver = 'Driver' in params ? params.Driver : null;
+
+    }
+}
+
+/**
+ * DeleteSearchTemplate返回参数结构体
+ * @class
+ */
+class DeleteSearchTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddComplianceAssetPolicySetToWhitelist请求参数结构体
+ * @class
+ */
+class AddComplianceAssetPolicySetToWhitelistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产ID+检查项IDs. 列表
+         * @type {Array.<ComplianceAssetPolicySetItem> || null}
+         */
+        this.AssetPolicySetList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AssetPolicySetList) {
+            this.AssetPolicySetList = new Array();
+            for (let z in params.AssetPolicySetList) {
+                let obj = new ComplianceAssetPolicySetItem();
+                obj.deserialize(params.AssetPolicySetList[z]);
+                this.AssetPolicySetList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleDownloadURL返回参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSampleDownloadURLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 样本下载链接
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogVasInfo请求参数结构体
+ * @class
+ */
+class DescribeSecLogVasInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyDiscover返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyDiscoverResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17153,6 +31849,219 @@ class ComplianceFilters extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
         this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
+
+    }
+}
+
+/**
+ * 容器安全镜像病毒信息
+ * @class
+ */
+class ImageVirusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 病毒名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 修护建议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+        /**
+         * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstScanTime = null;
+
+        /**
+         * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestScanTime = null;
+
+        /**
+         * 文件md5
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * 文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CheckPlatform = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.FirstScanTime = 'FirstScanTime' in params ? params.FirstScanTime : null;
+        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
+
+    }
+}
+
+/**
+ * StopVulScanTask返回参数结构体
+ * @class
+ */
+class StopVulScanTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyEscapeWhiteList返回参数结构体
+ * @class
+ */
+class ModifyEscapeWhiteListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 网络集群网络空间标签返回的结构体
+ * @class
+ */
+class NetworkClusterNamespaceLabelInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络空间标签
+         * @type {string || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 网络空间名字
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -17326,6 +32235,258 @@ class ImagesInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyVirusAutoIsolateExampleSwitch请求参数结构体
+ * @class
+ */
+class ModifyVirusAutoIsolateExampleSwitchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件Md5值
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 开关(开:true 关: false)
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 容器安全镜像病毒信息
+ * @class
+ */
+class ImageVirus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 分类
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * 病毒名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 解决方案
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+        /**
+         * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件md5
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileMd5 = null;
+
+        /**
+         * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstScanTime = null;
+
+        /**
+         * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestScanTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FirstScanTime = 'FirstScanTime' in params ? params.FirstScanTime : null;
+        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
+
+    }
+}
+
+/**
+ * ModifySecLogDeliveryKafkaSetting请求参数结构体
+ * @class
+ */
+class ModifySecLogDeliveryKafkaSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 用户名
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 日志类型队列
+         * @type {Array.<SecLogDeliveryKafkaSettingInfo> || null}
+         */
+        this.LogTypeList = null;
+
+        /**
+         * 接入类型
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * kafka版本号
+         * @type {string || null}
+         */
+        this.KafkaVersion = null;
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.RegionID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.LogTypeList) {
+            this.LogTypeList = new Array();
+            for (let z in params.LogTypeList) {
+                let obj = new SecLogDeliveryKafkaSettingInfo();
+                obj.deserialize(params.LogTypeList[z]);
+                this.LogTypeList.push(obj);
+            }
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
+        this.RegionID = 'RegionID' in params ? params.RegionID : null;
+
+    }
+}
+
+/**
  * DescribeReverseShellEventsExport请求参数结构体
  * @class
  */
@@ -17397,60 +32558,30 @@ class DescribeReverseShellEventsExportRequest extends  AbstractModel {
 }
 
 /**
- * 告警配置策略
+ * ModifyK8sApiAbnormalEventStatus请求参数结构体
  * @class
  */
-class WarningRule extends  AbstractModel {
+class ModifyK8sApiAbnormalEventStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 告警事件类型：
-镜像仓库安全-木马：IMG_REG_VIRUS
-镜像仓库安全-漏洞：IMG_REG_VUL
-镜像仓库安全-敏感信息：IMG_REG_RISK
-镜像安全-木马：IMG_VIRUS
-镜像安全-漏洞：IMG_VUL
-镜像安全-敏感信息：IMG_RISK
-镜像安全-镜像拦截：IMG_INTERCEPT
-运行时安全-容器逃逸：RUNTIME_ESCAPE
-运行时安全-异常进程：RUNTIME_FILE
-运行时安全-异常文件访问：RUNTIME_PROCESS
-运行时安全-高危系统调用：RUNTIME_SYSCALL
-运行时安全-反弹Shell：RUNTIME_REVERSE_SHELL
-运行时安全-木马：RUNTIME_VIRUS
-         * @type {string || null}
+         * 事件ID集合
+         * @type {Array.<number> || null}
          */
-        this.Type = null;
+        this.EventIDSet = null;
 
         /**
-         * 开关状态：
-打开：ON
-关闭：OFF
+         * 状态
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Status = null;
 
         /**
-         * 告警开始时间，格式: HH:mm
+         * 备注
          * @type {string || null}
          */
-        this.BeginTime = null;
-
-        /**
-         * 告警结束时间，格式: HH:mm
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 告警等级策略控制，二进制位每位代表一个含义，值以字符串类型传递
-控制开关分为高、中、低，则二进制位分别为：第1位:低，第2位:中，第3位:高，0表示关闭、1表示打开。
-如：高危和中危打开告警，低危关闭告警，则二进制值为：110
-告警类型不区分等级控制，则传1。
-         * @type {string || null}
-         */
-        this.ControlBits = null;
+        this.Remark = null;
 
     }
 
@@ -17461,11 +32592,122 @@ class WarningRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.ControlBits = 'ControlBits' in params ? params.ControlBits : null;
+        this.EventIDSet = 'EventIDSet' in params ? params.EventIDSet : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifySecLogJoinObjects请求参数结构体
+ * @class
+ */
+class ModifySecLogJoinObjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志类型
+bash日志: container_bash
+容器启动: container_launch
+k8sApi: k8s_api
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 绑定主机quuid列表
+         * @type {Array.<string> || null}
+         */
+        this.BindList = null;
+
+        /**
+         * 待解绑主机quuid列表
+         * @type {Array.<string> || null}
+         */
+        this.UnBindList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.BindList = 'BindList' in params ? params.BindList : null;
+        this.UnBindList = 'UnBindList' in params ? params.UnBindList : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleList请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段。
+<li>UpdateTime - string  - 是否必填: 否 -最后更新时间</li>
+<li>EffectClusterCount - string  - 是否必填: 否 -影响集群数</li>
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -17567,6 +32809,83 @@ class DescribeAccessControlDetailResponse extends  AbstractModel {
             this.AncestorProcessInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateImageExportJob返回参数结构体
+ * @class
+ */
+class CreateImageExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * excel文件下载地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 主机所属项目
+ * @class
+ */
+class ProjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
 
     }
 }
@@ -17687,18 +33006,60 @@ class DescribeAssetImageRegistryAssetStatusResponse extends  AbstractModel {
 }
 
 /**
- * DeleteReverseShellWhiteLists请求参数结构体
+ * 容器网络信息
  * @class
  */
-class DeleteReverseShellWhiteListsRequest extends  AbstractModel {
+class ContainerNetwork extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 白名单ids
-         * @type {Array.<string> || null}
+         * endpoint id
+         * @type {string || null}
          */
-        this.WhiteListIdSet = null;
+        this.EndpointID = null;
+
+        /**
+         * 模式:bridge
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 网络名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 网络ID
+         * @type {string || null}
+         */
+        this.NetworkID = null;
+
+        /**
+         * 网关
+         * @type {string || null}
+         */
+        this.Gateway = null;
+
+        /**
+         * IPV4地址
+         * @type {string || null}
+         */
+        this.Ipv4 = null;
+
+        /**
+         * IPV6地址
+         * @type {string || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * MAC 地址
+         * @type {string || null}
+         */
+        this.MAC = null;
 
     }
 
@@ -17709,7 +33070,179 @@ class DeleteReverseShellWhiteListsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WhiteListIdSet = 'WhiteListIdSet' in params ? params.WhiteListIdSet : null;
+        this.EndpointID = 'EndpointID' in params ? params.EndpointID : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NetworkID = 'NetworkID' in params ? params.NetworkID : null;
+        this.Gateway = 'Gateway' in params ? params.Gateway : null;
+        this.Ipv4 = 'Ipv4' in params ? params.Ipv4 : null;
+        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
+        this.MAC = 'MAC' in params ? params.MAC : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogDeliveryKafkaSetting返回参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryKafkaSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息队列实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 消息队列实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 日志类型队列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SecLogDeliveryKafkaSettingInfo> || null}
+         */
+        this.LogTypeList = null;
+
+        /**
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionID = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.LogTypeList) {
+            this.LogTypeList = new Array();
+            for (let z in params.LogTypeList) {
+                let obj = new SecLogDeliveryKafkaSettingInfo();
+                obj.deserialize(params.LogTypeList[z]);
+                this.LogTypeList.push(obj);
+            }
+        }
+        this.User = 'User' in params ? params.User : null;
+        this.RegionID = 'RegionID' in params ? params.RegionID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateHostExportJob请求参数结构体
+ * @class
+ */
+class CreateHostExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"</li>
+<li>HostName - String - 是否必填：否 - 主机名筛选</li>
+<li>Group- String - 是否必填：否 - 主机群组搜索</li>
+<li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
+<li>HostID- string - 是否必填：否 - 主机id搜索</li>
+<li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
+<li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li>
+<li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
+<li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li>
+<li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li>
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为10000
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 升序降序,asc desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
 
     }
 }
@@ -17738,6 +33271,34 @@ class AddEditRiskSyscallWhiteListResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSampleDownloadURL请求参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSampleDownloadURLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 样本Md5值
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
 
     }
 }
@@ -17789,18 +33350,18 @@ class ModifyAbnormalProcessStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAccessControlRuleStatus返回参数结构体
+ * DescribeVulDetail请求参数结构体
  * @class
  */
-class ModifyAccessControlRuleStatusResponse extends  AbstractModel {
+class DescribeVulDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 漏洞PocID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PocID = null;
 
     }
 
@@ -17811,7 +33372,152 @@ class ModifyAccessControlRuleStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+
+    }
+}
+
+/**
+ * CreateEscapeWhiteListExportJob请求参数结构体
+ * @class
+ */
+class CreateEscapeWhiteListExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>EventType- String - 是否必填：否 - 加白事件类型，ESCAPE_CGROUPS：利用cgroup机制逃逸，ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸， ESCAPE_DOCKER_API：访问Docker API接口逃逸，ESCAPE_VUL_OCCURRED：逃逸漏洞利用，MOUNT_SENSITIVE_PTAH：敏感路径挂载，PRIVILEGE_CONTAINER_START：特权容器， PRIVILEGE：程序提权逃逸</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10000，最大值为10000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：主机数量：HostCount，容器数量：ContainerCount，更新时间：UpdateTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogJoinObjectList请求参数结构体
+ * @class
+ */
+class DescribeSecLogJoinObjectListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志类型
+bash: "container_bash",
+启动: "container_launch",
+"k8s": "k8s_api"
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 - 主机状态 </li>
+<li>HostIP- String - 是否必填：否 - 主机内网IP </li>
+<li>PublicIP- String - 是否必填：否 - 主机外网IP </li>
+<li>HostName- String - 是否必填：否 - 主机名称 </li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -18162,6 +33868,13 @@ RESULT_FAILED: 未通过
          */
         this.LastCheckTime = null;
 
+        /**
+         * 验证信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VerifyInfo = null;
+
     }
 
     /**
@@ -18183,6 +33896,7 @@ RESULT_FAILED: 未通过
         this.WhitelistId = 'WhitelistId' in params ? params.WhitelistId : null;
         this.FixSuggestion = 'FixSuggestion' in params ? params.FixSuggestion : null;
         this.LastCheckTime = 'LastCheckTime' in params ? params.LastCheckTime : null;
+        this.VerifyInfo = 'VerifyInfo' in params ? params.VerifyInfo : null;
 
     }
 }
@@ -18204,6 +33918,56 @@ class InitializeUserComplianceEnvironmentRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeSupportDefenceVul返回参数结构体
+ * @class
+ */
+class DescribeSupportDefenceVulResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持防御的漏洞列表
+         * @type {Array.<SupportDefenceVul> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SupportDefenceVul();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18304,24 +34068,26 @@ class DescribeEscapeSafeStateRequest extends  AbstractModel {
 }
 
 /**
- * StopVirusScanTask请求参数结构体
+ * 网络集群策略自定义规则端口
  * @class
  */
-class StopVirusScanTaskRequest extends  AbstractModel {
+class NetworkPorts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID
+         * 网络策略协议
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.Protocol = null;
 
         /**
-         * 需要停止的容器id 为空默认停止整个任务
-         * @type {Array.<string> || null}
+         * 网络策略策略端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.ContainerIds = null;
+        this.Port = null;
 
     }
 
@@ -18332,8 +34098,99 @@ class StopVirusScanTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ContainerIds = 'ContainerIds' in params ? params.ContainerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * CreateVulScanTask返回参数结构体
+ * @class
+ */
+class CreateVulScanTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地镜像重新漏洞扫描时的任务ID
+         * @type {number || null}
+         */
+        this.LocalTaskID = null;
+
+        /**
+         * 仓库镜像重新漏洞扫描时的任务ID
+         * @type {number || null}
+         */
+        this.RegistryTaskID = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalTaskID = 'LocalTaskID' in params ? params.LocalTaskID : null;
+        this.RegistryTaskID = 'RegistryTaskID' in params ? params.RegistryTaskID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTcssSummary请求参数结构体
+ * @class
+ */
+class DescribeTcssSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * ModifyContainerNetStatus返回参数结构体
+ * @class
+ */
+class ModifyContainerNetStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18367,6 +34224,177 @@ class DescribeEscapeEventDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSupportDefenceVul请求参数结构体
+ * @class
+ */
+class DescribeSupportDefenceVulRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：披露时间：SubmitTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DeleteCompliancePolicyAssetSetFromWhitelist请求参数结构体
+ * @class
+ */
+class DeleteCompliancePolicyAssetSetFromWhitelistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * （检查项ID+资产ID列表）的列表
+         * @type {Array.<CompliancePolicyAssetSetItem> || null}
+         */
+        this.PolicyAssetSetList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PolicyAssetSetList) {
+            this.PolicyAssetSetList = new Array();
+            for (let z in params.PolicyAssetSetList) {
+                let obj = new CompliancePolicyAssetSetItem();
+                obj.deserialize(params.PolicyAssetSetList[z]);
+                this.PolicyAssetSetList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeExportJobManageList请求参数结构体
+ * @class
+ */
+class DescribeExportJobManageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败
+<li>ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像
+</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+InsertTime: 创建时间
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * DescribeVirusSummary请求参数结构体
  * @class
  */
@@ -18383,6 +34411,107 @@ class DescribeVirusSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallPolicyYamlDetail请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallPolicyYamlDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * ModifySecLogJoinState请求参数结构体
+ * @class
+ */
+class ModifySecLogJoinStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志类型
+bash日志: container_bash
+容器启动: container_launch
+k8sApi: k8s_api
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 状态(true:开 false:关)
+         * @type {boolean || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * 灰度项目配置
+ * @class
+ */
+class ABTestConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灰度项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * true：正在灰度，false：不在灰度
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -18493,6 +34622,27 @@ class DeleteAbnormalProcessRulesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateNetworkFirewallClusterRefresh请求参数结构体
+ * @class
+ */
+class CreateNetworkFirewallClusterRefreshRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyCompliancePeriodTask请求参数结构体
  * @class
  */
@@ -18543,6 +34693,78 @@ class ModifyCompliancePeriodTaskRequest extends  AbstractModel {
                 this.StandardSettings.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallNamespaceList请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallNamespaceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -18662,6 +34884,185 @@ class DescribeRiskListResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAsset请求参数结构体
+ * @class
+ */
+class ModifyAssetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 全部同步
+         * @type {boolean || null}
+         */
+        this.All = null;
+
+        /**
+         * 要同步的主机列表 两个参数必选一个 All优先
+         * @type {Array.<string> || null}
+         */
+        this.Hosts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.All = 'All' in params ? params.All : null;
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+
+    }
+}
+
+/**
+ * 地域信息
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域标识
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+
+    }
+}
+
+/**
+ * DescribeEscapeWhiteList请求参数结构体
+ * @class
+ */
+class DescribeEscapeWhiteListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>EventType- String - 是否必填：否 - 加白事件类型，ESCAPE_CGROUPS：利用cgroup机制逃逸，ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸， ESCAPE_DOCKER_API：访问Docker API接口逃逸，ESCAPE_VUL_OCCURRED：逃逸漏洞利用，MOUNT_SENSITIVE_PTAH：敏感路径挂载，PRIVILEGE_CONTAINER_START：特权容器， PRIVILEGE：程序提权逃逸</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：主机数量：HostCount，容器数量：ContainerCount，更新时间：UpdateTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeVirusManualScanEstimateTimeout请求参数结构体
+ * @class
+ */
+class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扫描范围0容器1主机节点
+         * @type {number || null}
+         */
+        this.ScanRangeType = null;
+
+        /**
+         * true 全选，false 自选
+         * @type {boolean || null}
+         */
+        this.ScanRangeAll = null;
+
+        /**
+         * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
+         * @type {Array.<string> || null}
+         */
+        this.ScanIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScanRangeType = 'ScanRangeType' in params ? params.ScanRangeType : null;
+        this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
+        this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
+
+    }
+}
+
+/**
  * 容器组件信息
  * @class
  */
@@ -18692,6 +35093,90 @@ class ComponentInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Version = 'Version' in params ? params.Version : null;
+
+    }
+}
+
+/**
+ * ConfirmNetworkFirewallPolicy返回参数结构体
+ * @class
+ */
+class ConfirmNetworkFirewallPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建确认任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNetworkFirewallPublish返回参数结构体
+ * @class
+ */
+class CreateNetworkFirewallPublishResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18754,18 +35239,24 @@ class CreateClusterCheckTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAbnormalProcessDetail请求参数结构体
+ * 漏洞防御插件 rasp信息
  * @class
  */
-class DescribeAbnormalProcessDetailRequest extends  AbstractModel {
+class RaspInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件唯一id
+         * rasp名称
          * @type {string || null}
          */
-        this.EventId = null;
+        this.Name = null;
+
+        /**
+         * rasp  描述
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -18776,7 +35267,199 @@ class DescribeAbnormalProcessDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallClusterList请求参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallClusterListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * CreateVulDefenceEventExportJob返回参数结构体
+ * @class
+ */
+class CreateVulDefenceEventExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 自动授权镜像规则授权范围主机列表
+ * @class
+ */
+class AutoAuthorizedRuleHostInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机id
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 主机ip即内网ip
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 镜像个数
+         * @type {number || null}
+         */
+        this.ImageCnt = null;
+
+        /**
+         * 容器个数
+         * @type {number || null}
+         */
+        this.ContainerCnt = null;
+
+        /**
+         * 外网ip
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * 主机实例ID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * docker 版本
+         * @type {string || null}
+         */
+        this.DockerVersion = null;
+
+        /**
+         * agent运行状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.ImageCnt = 'ImageCnt' in params ? params.ImageCnt : null;
+        this.ContainerCnt = 'ContainerCnt' in params ? params.ContainerCnt : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.DockerVersion = 'DockerVersion' in params ? params.DockerVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -18831,103 +35514,45 @@ class CreateExportComplianceStatusListJobRequest extends  AbstractModel {
 }
 
 /**
- * 容器安全镜像病毒信息
+ * DescribeImageAutoAuthorizedTaskList请求参数结构体
  * @class
  */
-class ImageVirus extends  AbstractModel {
+class DescribeImageAutoAuthorizedTaskListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路径
-注意：此字段可能返回 null，表示取不到有效值。
+         * 开始时间
          * @type {string || null}
          */
-        this.Path = null;
+        this.StartTime = null;
 
         /**
-         * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
+         * 结束时间
          * @type {string || null}
          */
-        this.RiskLevel = null;
+        this.EndTime = null;
 
         /**
-         * 分类
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 过滤字段
+Status授权结果，全部授权成功：ALLSUCCSESS，部分授权失败：PARTIALFAIL,全部授权失败：ALLFAIL
+Type授权方式，AUTO:自动授权，MANUAL:手动授权
+Source 镜像来源，LOCAL:本地镜像，REGISTRY:仓库镜像
+         * @type {Array.<AssetFilters> || null}
          */
-        this.Category = null;
+        this.Filters = null;
 
         /**
-         * 病毒名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.VirusName = null;
-
-        /**
-         * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Desc = null;
-
-        /**
-         * 解决方案
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Solution = null;
-
-        /**
-         * 文件类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FileType = null;
-
-        /**
-         * 文件路径
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
-         * 文件md5
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FileMd5 = null;
-
-        /**
-         * 大小
-注意：此字段可能返回 null，表示取不到有效值。
+         * 需要返回的数量，默认为10，最大值为100
          * @type {number || null}
          */
-        this.FileSize = null;
+        this.Limit = null;
 
         /**
-         * 首次发现时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 偏移量，默认为0
+         * @type {number || null}
          */
-        this.FirstScanTime = null;
-
-        /**
-         * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LatestScanTime = null;
+        this.Offset = null;
 
     }
 
@@ -18938,19 +35563,186 @@ class ImageVirus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Path = 'Path' in params ? params.Path : null;
-        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
-        this.Category = 'Category' in params ? params.Category : null;
-        this.VirusName = 'VirusName' in params ? params.VirusName : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
-        this.Solution = 'Solution' in params ? params.Solution : null;
-        this.FileType = 'FileType' in params ? params.FileType : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.FirstScanTime = 'FirstScanTime' in params ? params.FirstScanTime : null;
-        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeVirusSampleDownloadUrl请求参数结构体
+ * @class
+ */
+class DescribeVirusSampleDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 木马id
+         * @type {string || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * AddAndPublishNetworkFirewallPolicyYamlDetail返回参数结构体
+ * @class
+ */
+class AddAndPublishNetworkFirewallPolicyYamlDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddAndPublishNetworkFirewallPolicyDetail请求参数结构体
+ * @class
+ */
+class AddAndPublishNetworkFirewallPolicyDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.FromPolicyRule = null;
+
+        /**
+         * 出站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
+         */
+        this.ToPolicyRule = null;
+
+        /**
+         * pod选择器
+         * @type {string || null}
+         */
+        this.PodSelector = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 自定义规则
+         * @type {Array.<NetworkCustomPolicy> || null}
+         */
+        this.CustomPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.CustomPolicy) {
+            this.CustomPolicy = new Array();
+            for (let z in params.CustomPolicy) {
+                let obj = new NetworkCustomPolicy();
+                obj.deserialize(params.CustomPolicy[z]);
+                this.CustomPolicy.push(obj);
+            }
+        }
 
     }
 }
@@ -19020,6 +35812,98 @@ class DescribeEscapeEventInfoRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateAndPublishNetworkFirewallPolicyYamlDetail返回参数结构体
+ * @class
+ */
+class UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExportJobManageList返回参数结构体
+ * @class
+ */
+class DescribeExportJobManageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务列表
+         * @type {Array.<ExportJobInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ExportJobInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRiskSyscallEventsExport返回参数结构体
  * @class
  */
@@ -19064,140 +35948,12 @@ class DescribeRiskSyscallEventsExportResponse extends  AbstractModel {
 }
 
 /**
- * 容器列表集合
+ * DescribeUnfinishRefreshTask请求参数结构体
  * @class
  */
-class ContainerInfo extends  AbstractModel {
+class DescribeUnfinishRefreshTaskRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 容器id
-         * @type {string || null}
-         */
-        this.ContainerID = null;
-
-        /**
-         * 容器名称
-         * @type {string || null}
-         */
-        this.ContainerName = null;
-
-        /**
-         * 容器运行状态
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 运行用户
-         * @type {string || null}
-         */
-        this.RunAs = null;
-
-        /**
-         * 命令行
-         * @type {string || null}
-         */
-        this.Cmd = null;
-
-        /**
-         * CPU使用率 *1000
-         * @type {number || null}
-         */
-        this.CPUUsage = null;
-
-        /**
-         * 内存使用 kb
-         * @type {number || null}
-         */
-        this.RamUsage = null;
-
-        /**
-         * 镜像名称
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * 镜像id
-         * @type {string || null}
-         */
-        this.ImageID = null;
-
-        /**
-         * 镜像id
-         * @type {string || null}
-         */
-        this.POD = null;
-
-        /**
-         * 主机id
-         * @type {string || null}
-         */
-        this.HostID = null;
-
-        /**
-         * 主机ip
-         * @type {string || null}
-         */
-        this.HostIP = null;
-
-        /**
-         * 更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 主机名称
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * 外网ip
-         * @type {string || null}
-         */
-        this.PublicIp = null;
-
-        /**
-         * 网络状态
-未隔离  	NORMAL
-已隔离		ISOLATED
-隔离中		ISOLATING
-隔离失败	ISOLATE_FAILED
-解除隔离中  RESTORING
-解除隔离失败 RESTORE_FAILED
-         * @type {string || null}
-         */
-        this.NetStatus = null;
-
-        /**
-         * 网络子状态
-         * @type {string || null}
-         */
-        this.NetSubStatus = null;
-
-        /**
-         * 隔离来源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IsolateSource = null;
-
-        /**
-         * 隔离时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IsolateTime = null;
 
     }
 
@@ -19208,26 +35964,6 @@ class ContainerInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
-        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.RunAs = 'RunAs' in params ? params.RunAs : null;
-        this.Cmd = 'Cmd' in params ? params.Cmd : null;
-        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
-        this.RamUsage = 'RamUsage' in params ? params.RamUsage : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageID = 'ImageID' in params ? params.ImageID : null;
-        this.POD = 'POD' in params ? params.POD : null;
-        this.HostID = 'HostID' in params ? params.HostID : null;
-        this.HostIP = 'HostIP' in params ? params.HostIP : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
-        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
-        this.NetSubStatus = 'NetSubStatus' in params ? params.NetSubStatus : null;
-        this.IsolateSource = 'IsolateSource' in params ? params.IsolateSource : null;
-        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
 
     }
 }
@@ -19318,6 +36054,56 @@ class DescribeAssetImageRegistryRiskInfoListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeImageRegistryNamespaceList请求参数结构体
+ * @class
+ */
+class DescribeImageRegistryNamespaceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次查询的起始偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 本次查询的数据量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询的过滤条件。Name字段可取值"Namespace"。
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeAssetImageRegistryScanStatusOneKey请求参数结构体
  * @class
  */
@@ -19403,6 +36189,27 @@ class ModifyAccessControlRuleStatusRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVulScanAuthorizedImageSummary请求参数结构体
+ * @class
+ */
+class DescribeVulScanAuthorizedImageSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeWarningRules请求参数结构体
  * @class
  */
@@ -19480,6 +36287,79 @@ class DescribeContainerAssetSummaryRequest extends  AbstractModel {
 }
 
 /**
+ * ckafkal路由详情
+ * @class
+ */
+class CkafkaRouteInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RouteID = null;
+
+        /**
+         * 域名名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DomainPort = null;
+
+        /**
+         * 虚拟ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 虚拟ip类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VipType = null;
+
+        /**
+         * 接入类型
+// 0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
+	// 1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+	// 2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
+	// 3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteID = 'RouteID' in params ? params.RouteID : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.VipType = 'VipType' in params ? params.VipType : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+
+    }
+}
+
+/**
  * 组件信息
  * @class
  */
@@ -19512,6 +36392,91 @@ class ComponentsInfo extends  AbstractModel {
         }
         this.Component = 'Component' in params ? params.Component : null;
         this.Version = 'Version' in params ? params.Version : null;
+
+    }
+}
+
+/**
+ * DescribeImageAutoAuthorizedLogList返回参数结构体
+ * @class
+ */
+class DescribeImageAutoAuthorizedLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 自动授权结果镜像列表
+         * @type {Array.<AutoAuthorizedImageInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AutoAuthorizedImageInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteComplianceAssetPolicySetFromWhitelist请求参数结构体
+ * @class
+ */
+class DeleteComplianceAssetPolicySetFromWhitelistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产ID
+         * @type {number || null}
+         */
+        this.AssetItemId = null;
+
+        /**
+         * 需要忽略指定资产内的检查项ID列表
+         * @type {Array.<number> || null}
+         */
+        this.CustomerPolicyItemIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetItemId = 'AssetItemId' in params ? params.AssetItemId : null;
+        this.CustomerPolicyItemIdSet = 'CustomerPolicyItemIdSet' in params ? params.CustomerPolicyItemIdSet : null;
 
     }
 }
@@ -19791,6 +36756,98 @@ class DescribeReverseShellDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterSummary请求参数结构体
+ * @class
+ */
+class DescribeClusterSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * AddIgnoreVul请求参数结构体
+ * @class
+ */
+class AddIgnoreVulRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID信息列表
+         * @type {Array.<ModifyIgnoreVul> || null}
+         */
+        this.List = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ModifyIgnoreVul();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateEscapeWhiteListExportJob返回参数结构体
+ * @class
+ */
+class CreateEscapeWhiteListExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccessControlRulesExport返回参数结构体
  * @class
  */
@@ -19891,6 +36948,83 @@ class DescribeAbnormalProcessEventsExportResponse extends  AbstractModel {
 }
 
 /**
+ * 导出任务详情
+ * @class
+ */
+class ExportJobInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.JobID = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 来源
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 导出状态
+         * @type {string || null}
+         */
+        this.ExportStatus = null;
+
+        /**
+         * 导出进度
+         * @type {number || null}
+         */
+        this.ExportProgress = null;
+
+        /**
+         * 失败原因
+         * @type {string || null}
+         */
+        this.FailureMsg = null;
+
+        /**
+         * 超时时间
+         * @type {string || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * 插入时间
+         * @type {string || null}
+         */
+        this.InsertTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobID = 'JobID' in params ? params.JobID : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.ExportStatus = 'ExportStatus' in params ? params.ExportStatus : null;
+        this.ExportProgress = 'ExportProgress' in params ? params.ExportProgress : null;
+        this.FailureMsg = 'FailureMsg' in params ? params.FailureMsg : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+
+    }
+}
+
+/**
  * DescribeContainerAssetSummary返回参数结构体
  * @class
  */
@@ -19959,6 +37093,12 @@ class DescribeContainerAssetSummaryResponse extends  AbstractModel {
         this.ImageTotalCnt = null;
 
         /**
+         * 主机未安装agent数量
+         * @type {number || null}
+         */
+        this.HostUnInstallCnt = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -19983,6 +37123,7 @@ class DescribeContainerAssetSummaryResponse extends  AbstractModel {
         this.HostOfflineCnt = 'HostOfflineCnt' in params ? params.HostOfflineCnt : null;
         this.ImageRegistryCnt = 'ImageRegistryCnt' in params ? params.ImageRegistryCnt : null;
         this.ImageTotalCnt = 'ImageTotalCnt' in params ? params.ImageTotalCnt : null;
+        this.HostUnInstallCnt = 'HostUnInstallCnt' in params ? params.HostUnInstallCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -20067,6 +37208,39 @@ class CreateAssetImageScanTaskRequest extends  AbstractModel {
 }
 
 /**
+ * CreateSearchTemplate请求参数结构体
+ * @class
+ */
+class CreateSearchTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索模板
+         * @type {SearchTemplate || null}
+         */
+        this.SearchTemplate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SearchTemplate) {
+            let obj = new SearchTemplate();
+            obj.deserialize(params.SearchTemplate)
+            this.SearchTemplate = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeEscapeEventsExport请求参数结构体
  * @class
  */
@@ -20138,36 +37312,24 @@ class DescribeEscapeEventsExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeImageRiskSummary返回参数结构体
+ * AddEditAbnormalProcessRule请求参数结构体
  * @class
  */
-class DescribeImageRiskSummaryResponse extends  AbstractModel {
+class AddEditAbnormalProcessRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 安全漏洞
-         * @type {Array.<RunTimeRiskInfo> || null}
+         * 增加策略信息，策略id为空，编辑策略是id不能为空
+         * @type {AbnormalProcessRuleInfo || null}
          */
-        this.VulnerabilityCnt = null;
+        this.RuleInfo = null;
 
         /**
-         * 木马病毒
-         * @type {Array.<RunTimeRiskInfo> || null}
-         */
-        this.MalwareVirusCnt = null;
-
-        /**
-         * 敏感信息
-         * @type {Array.<RunTimeRiskInfo> || null}
-         */
-        this.RiskCnt = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 仅在加白的时候带上
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EventId = null;
 
     }
 
@@ -20179,33 +37341,12 @@ class DescribeImageRiskSummaryResponse extends  AbstractModel {
             return;
         }
 
-        if (params.VulnerabilityCnt) {
-            this.VulnerabilityCnt = new Array();
-            for (let z in params.VulnerabilityCnt) {
-                let obj = new RunTimeRiskInfo();
-                obj.deserialize(params.VulnerabilityCnt[z]);
-                this.VulnerabilityCnt.push(obj);
-            }
+        if (params.RuleInfo) {
+            let obj = new AbnormalProcessRuleInfo();
+            obj.deserialize(params.RuleInfo)
+            this.RuleInfo = obj;
         }
-
-        if (params.MalwareVirusCnt) {
-            this.MalwareVirusCnt = new Array();
-            for (let z in params.MalwareVirusCnt) {
-                let obj = new RunTimeRiskInfo();
-                obj.deserialize(params.MalwareVirusCnt[z]);
-                this.MalwareVirusCnt.push(obj);
-            }
-        }
-
-        if (params.RiskCnt) {
-            this.RiskCnt = new Array();
-            for (let z in params.RiskCnt) {
-                let obj = new RunTimeRiskInfo();
-                obj.deserialize(params.RiskCnt[z]);
-                this.RiskCnt.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
@@ -20359,6 +37500,69 @@ class CreateCheckComponentRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAgentInstallCommand返回参数结构体
+ * @class
+ */
+class DescribeAgentInstallCommandResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * linux系统安装命令
+         * @type {string || null}
+         */
+        this.LinuxCommand = null;
+
+        /**
+         * windows系统安装命令（windows2008及以上）
+         * @type {string || null}
+         */
+        this.WindowsCommand = null;
+
+        /**
+         * windows系统安装命令第一步（windows2003）
+         * @type {string || null}
+         */
+        this.WindowsStepOne = null;
+
+        /**
+         * windows系统安装命令第二步（windows2003）
+         * @type {string || null}
+         */
+        this.WindowsStepTwo = null;
+
+        /**
+         * windows版agent下载链接
+         * @type {string || null}
+         */
+        this.WindowsDownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LinuxCommand = 'LinuxCommand' in params ? params.LinuxCommand : null;
+        this.WindowsCommand = 'WindowsCommand' in params ? params.WindowsCommand : null;
+        this.WindowsStepOne = 'WindowsStepOne' in params ? params.WindowsStepOne : null;
+        this.WindowsStepTwo = 'WindowsStepTwo' in params ? params.WindowsStepTwo : null;
+        this.WindowsDownloadUrl = 'WindowsDownloadUrl' in params ? params.WindowsDownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRiskSyscallWhiteLists请求参数结构体
  * @class
  */
@@ -20387,6 +37591,34 @@ class DeleteRiskSyscallWhiteListsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyK8sApiAbnormalRuleStatus返回参数结构体
+ * @class
+ */
+class ModifyK8sApiAbnormalRuleStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeImageAuthorizedInfo请求参数结构体
  * @class
  */
@@ -20403,6 +37635,41 @@ class DescribeImageAuthorizedInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeExportJobDownloadURL返回参数结构体
+ * @class
+ */
+class DescribeExportJobDownloadURLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载链接
+         * @type {string || null}
+         */
+        this.DownloadURL = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadURL = 'DownloadURL' in params ? params.DownloadURL : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20454,6 +37721,56 @@ class DescribeAssetImageRegistryRiskInfoListResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulIgnoreLocalImageList返回参数结构体
+ * @class
+ */
+class DescribeVulIgnoreLocalImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像列表
+         * @type {Array.<VulIgnoreLocalImage> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulIgnoreLocalImage();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -20772,6 +38089,41 @@ class AddCompliancePolicyItemToWhitelistResponse extends  AbstractModel {
 }
 
 /**
+ * 资产+检查项ids 集合单元
+ * @class
+ */
+class ComplianceAssetPolicySetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资产ID
+         * @type {number || null}
+         */
+        this.CustomerAssetItemId = null;
+
+        /**
+         * 需要忽略指定资产内的检查项ID列表，为空表示所有
+         * @type {Array.<number> || null}
+         */
+        this.CustomerPolicyItemIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerAssetItemId = 'CustomerAssetItemId' in params ? params.CustomerAssetItemId : null;
+        this.CustomerPolicyItemIdSet = 'CustomerPolicyItemIdSet' in params ? params.CustomerPolicyItemIdSet : null;
+
+    }
+}
+
+/**
  * DescribeAccessControlRules请求参数结构体
  * @class
  */
@@ -20864,6 +38216,415 @@ class StopVirusScanTaskResponse extends  AbstractModel {
 }
 
 /**
+ * k8sApi异常事件详情
+ * @class
+ */
+class K8sApiAbnormalEventInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命中规则名称
+         * @type {string || null}
+         */
+        this.MatchRuleName = null;
+
+        /**
+         * 命中规则类型
+         * @type {string || null}
+         */
+        this.MatchRuleType = null;
+
+        /**
+         * 告警等级
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群运行状态
+         * @type {string || null}
+         */
+        this.ClusterRunningStatus = null;
+
+        /**
+         * 初次生成时间
+         * @type {string || null}
+         */
+        this.FirstCreateTime = null;
+
+        /**
+         * 最近一次生成时间
+         * @type {string || null}
+         */
+        this.LastCreateTime = null;
+
+        /**
+         * 告警数量
+         * @type {number || null}
+         */
+        this.AlarmCount = null;
+
+        /**
+         * 状态
+"EVENT_UNDEAL":未处理
+"EVENT_DEALED": 已处理
+"EVENT_IGNORE": 忽略
+"EVENT_DEL": 删除
+"EVENT_ADD_WHITE": 加白
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 集群masterIP
+         * @type {string || null}
+         */
+        this.ClusterMasterIP = null;
+
+        /**
+         * k8s版本
+         * @type {string || null}
+         */
+        this.K8sVersion = null;
+
+        /**
+         * 运行时组件
+         * @type {Array.<string> || null}
+         */
+        this.RunningComponent = null;
+
+        /**
+         * 描述
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 建议
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 请求信息
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.MatchRuleID = null;
+
+        /**
+         * 高亮字段数组
+         * @type {Array.<string> || null}
+         */
+        this.HighLightFields = null;
+
+        /**
+         * 命中规则
+         * @type {K8sApiAbnormalRuleScopeInfo || null}
+         */
+        this.MatchRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchRuleName = 'MatchRuleName' in params ? params.MatchRuleName : null;
+        this.MatchRuleType = 'MatchRuleType' in params ? params.MatchRuleType : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterRunningStatus = 'ClusterRunningStatus' in params ? params.ClusterRunningStatus : null;
+        this.FirstCreateTime = 'FirstCreateTime' in params ? params.FirstCreateTime : null;
+        this.LastCreateTime = 'LastCreateTime' in params ? params.LastCreateTime : null;
+        this.AlarmCount = 'AlarmCount' in params ? params.AlarmCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterMasterIP = 'ClusterMasterIP' in params ? params.ClusterMasterIP : null;
+        this.K8sVersion = 'K8sVersion' in params ? params.K8sVersion : null;
+        this.RunningComponent = 'RunningComponent' in params ? params.RunningComponent : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.MatchRuleID = 'MatchRuleID' in params ? params.MatchRuleID : null;
+        this.HighLightFields = 'HighLightFields' in params ? params.HighLightFields : null;
+
+        if (params.MatchRule) {
+            let obj = new K8sApiAbnormalRuleScopeInfo();
+            obj.deserialize(params.MatchRule)
+            this.MatchRule = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeVulDefenceEventTendency返回参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventTendencyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞防御事件趋势
+         * @type {Array.<VulDefenceEventTendency> || null}
+         */
+        this.DefendedList = null;
+
+        /**
+         * 漏洞攻击事件趋势
+         * @type {Array.<VulDefenceEventTendency> || null}
+         */
+        this.AttackList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DefendedList) {
+            this.DefendedList = new Array();
+            for (let z in params.DefendedList) {
+                let obj = new VulDefenceEventTendency();
+                obj.deserialize(params.DefendedList[z]);
+                this.DefendedList.push(obj);
+            }
+        }
+
+        if (params.AttackList) {
+            this.AttackList = new Array();
+            for (let z in params.AttackList) {
+                let obj = new VulDefenceEventTendency();
+                obj.deserialize(params.AttackList[z]);
+                this.AttackList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateK8sApiAbnormalRuleInfo请求参数结构体
+ * @class
+ */
+class CreateK8sApiAbnormalRuleInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则详情
+         * @type {K8sApiAbnormalRuleInfo || null}
+         */
+        this.RuleInfo = null;
+
+        /**
+         * 拷贝规则ID(适用于复制规则场景)
+         * @type {string || null}
+         */
+        this.CopySrcRuleID = null;
+
+        /**
+         * 事件ID(适用于事件加白场景)
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleInfo) {
+            let obj = new K8sApiAbnormalRuleInfo();
+            obj.deserialize(params.RuleInfo)
+            this.RuleInfo = obj;
+        }
+        this.CopySrcRuleID = 'CopySrcRuleID' in params ? params.CopySrcRuleID : null;
+        this.EventID = 'EventID' in params ? params.EventID : null;
+
+    }
+}
+
+/**
+ * CreateK8sApiAbnormalRuleExportJob返回参数结构体
+ * @class
+ */
+class CreateK8sApiAbnormalRuleExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenewImageAuthorizeState返回参数结构体
+ * @class
+ */
+class RenewImageAuthorizeStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 镜像自动授权任务信息
+ * @class
+ */
+class ImageAutoAuthorizedTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 授权方式，AUTO:自动授权，MANUAL:手动授权
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 任务日期
+         * @type {string || null}
+         */
+        this.AuthorizedDate = null;
+
+        /**
+         * 镜像来源，LOCAL:本地镜像，REGISTRY:仓库镜像
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 最近授权时间
+         * @type {string || null}
+         */
+        this.LastAuthorizedTime = null;
+
+        /**
+         * 自动授权成功数
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * 自动授权失败数
+         * @type {number || null}
+         */
+        this.FailCount = null;
+
+        /**
+         * 最近任务失败码，REACH_LIMIT:达到授权上限，LICENSE_INSUFFICIENT:授权数不足
+         * @type {string || null}
+         */
+        this.LatestFailCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AuthorizedDate = 'AuthorizedDate' in params ? params.AuthorizedDate : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.LastAuthorizedTime = 'LastAuthorizedTime' in params ? params.LastAuthorizedTime : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+        this.LatestFailCode = 'LatestFailCode' in params ? params.LatestFailCode : null;
+
+    }
+}
+
+/**
  * AddEditWarningRules请求参数结构体
  * @class
  */
@@ -20900,6 +38661,41 @@ class AddEditWarningRulesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSearchLogs返回参数结构体
+ * @class
+ */
+class DescribeSearchLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 历史搜索记录 保留最新的10条
+         * @type {Array.<string> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAsset返回参数结构体
  * @class
  */
@@ -20930,6 +38726,41 @@ class ModifyAssetResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 网络集群网络空间返回的结构体
+ * @class
+ */
+class NetworkClusterNamespaceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络空间标签
+         * @type {string || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 网络空间名字
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -20979,58 +38810,45 @@ class DescribeReverseShellEventsExportResponse extends  AbstractModel {
 }
 
 /**
- * 查询镜像绑定的运行时规则信息
+ * DescribeAssetImageBindRuleInfo请求参数结构体
  * @class
  */
-class ImagesBindRuleInfo extends  AbstractModel {
+class DescribeAssetImageBindRuleInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像id
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * 镜像名称
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * 关联容器数量
+         * 需要返回的数量，默认为10，最大值为100
          * @type {number || null}
          */
-        this.ContainerCnt = null;
+        this.Limit = null;
 
         /**
-         * 绑定规则id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 规则名字
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * 镜像大小
-注意：此字段可能返回 null，表示取不到有效值。
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.ImageSize = null;
+        this.Offset = null;
 
         /**
-         * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 过滤参数,"Filters":[{"Name":"EventType","Values":[""]}]
+EventType取值：
+"FILE_ABNORMAL_READ" 访问控制
+"MALICE_PROCESS_START" 恶意进程启动
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 升序降序,asc desc
          * @type {string || null}
          */
-        this.ScanTime = null;
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -21041,13 +38859,19 @@ class ImagesBindRuleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ContainerCnt = 'ContainerCnt' in params ? params.ContainerCnt : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
-        this.ScanTime = 'ScanTime' in params ? params.ScanTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -21097,6 +38921,46 @@ class DescribeAssetImageListResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceEventDetail返回参数结构体
+ * @class
+ */
+class DescribeVulDefenceEventDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞防御事件详细
+         * @type {VulDefenceEventDetail || null}
+         */
+        this.EventDetail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EventDetail) {
+            let obj = new VulDefenceEventDetail();
+            obj.deserialize(params.EventDetail)
+            this.EventDetail = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -21191,6 +39055,13 @@ RESULT_PASSED: 通过。
          */
         this.CheckResult = null;
 
+        /**
+         * 主机节点的实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -21211,6 +39082,7 @@ RESULT_PASSED: 通过。
         this.FailedPolicyItemCount = 'FailedPolicyItemCount' in params ? params.FailedPolicyItemCount : null;
         this.LastCheckTime = 'LastCheckTime' in params ? params.LastCheckTime : null;
         this.CheckResult = 'CheckResult' in params ? params.CheckResult : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -21287,18 +39159,48 @@ class DescribeAssetImageRegistryVirusListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeReverseShellWhiteListDetail请求参数结构体
+ * CreateEscapeEventsExportJob请求参数结构体
  * @class
  */
-class DescribeReverseShellWhiteListDetailRequest extends  AbstractModel {
+class CreateEscapeEventsExportJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 白名单id
+         * 需要返回的数量，最大值为10000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤参数,Status：EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 升序降序,asc desc
          * @type {string || null}
          */
-        this.WhiteListId = null;
+        this.Order = null;
+
+        /**
+         * 排序字段：latest_found_time
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
 
     }
 
@@ -21309,7 +39211,20 @@ class DescribeReverseShellWhiteListDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WhiteListId = 'WhiteListId' in params ? params.WhiteListId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
 
     }
 }
@@ -21337,6 +39252,48 @@ class ModifyVirusMonitorSettingResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckNetworkFirewallPolicyYaml返回参数结构体
+ * @class
+ */
+class CheckNetworkFirewallPolicyYamlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建任务的结果，"Succ"为成功，"Failed"为失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -21434,6 +39391,106 @@ class DescribeWarningRulesResponse extends  AbstractModel {
                 this.WarningRules.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUserCluster请求参数结构体
+ * @class
+ */
+class DescribeUserClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次查询的最大记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+         * @type {Array.<ComplianceFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式 asc,desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkFirewallClusterRefreshStatus返回参数结构体
+ * @class
+ */
+class DescribeNetworkFirewallClusterRefreshStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -21628,34 +39685,36 @@ class AffectedWorkloadItem extends  AbstractModel {
 }
 
 /**
- * DescribeCompliancePeriodTaskList请求参数结构体
+ * AddAndPublishNetworkFirewallPolicyYamlDetail请求参数结构体
  * @class
  */
-class DescribeCompliancePeriodTaskListRequest extends  AbstractModel {
+class AddAndPublishNetworkFirewallPolicyYamlDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资产的类型，取值为：
-ASSET_CONTAINER, 容器
-ASSET_IMAGE, 镜像
-ASSET_HOST, 主机
-ASSET_K8S, K8S资产
+         * 集群Id
          * @type {string || null}
          */
-        this.AssetType = null;
+        this.ClusterId = null;
 
         /**
-         * 偏移量，默认为0。
-         * @type {number || null}
+         * 策略名
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.PolicyName = null;
 
         /**
-         * 需要返回的数量，默认为10，最大值为100。
-         * @type {number || null}
+         * base64编码的networkpolicy yaml字符串
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Yaml = null;
+
+        /**
+         * 策略描述
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -21666,9 +39725,57 @@ ASSET_K8S, K8S资产
         if (!params) {
             return;
         }
-        this.AssetType = 'AssetType' in params ? params.AssetType : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * CreateComplianceTask请求参数结构体
+ * @class
+ */
+class CreateComplianceTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定要扫描的资产类型列表。
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+AssetTypeSet, PolicySetId, PeriodTaskId三个参数，必须要给其中一个参数填写有效的值。
+         * @type {Array.<string> || null}
+         */
+        this.AssetTypeSet = null;
+
+        /**
+         * 按照策略集ID指定的策略执行合规检查。
+         * @type {number || null}
+         */
+        this.PolicySetId = null;
+
+        /**
+         * 按照定时任务ID指定的策略执行合规检查。
+         * @type {number || null}
+         */
+        this.PeriodTaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
+        this.PolicySetId = 'PolicySetId' in params ? params.PolicySetId : null;
+        this.PeriodTaskId = 'PeriodTaskId' in params ? params.PeriodTaskId : null;
 
     }
 }
@@ -21745,6 +39852,62 @@ class DescribeAccessControlRulesExportRequest extends  AbstractModel {
 }
 
 /**
+ * OpenTcssTrial请求参数结构体
+ * @class
+ */
+class OpenTcssTrialRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateEscapeEventsExportJob返回参数结构体
+ * @class
+ */
+class CreateEscapeEventsExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 运行时容器高危系统调用事件描述信息
  * @class
  */
@@ -21803,6 +39966,73 @@ class RiskSyscallEventDescription extends  AbstractModel {
 }
 
 /**
+ * DescribeImageAutoAuthorizedRule返回参数结构体
+ * @class
+ */
+class DescribeImageAutoAuthorizedRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则是否生效，0:不生效，1:已生效
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * 授权范围类别，MANUAL:自选主机节点，ALL:全部镜像
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RangeType = null;
+
+        /**
+         * 授权范围是自选主机时的主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HostCount = null;
+
+        /**
+         * 每天最大的镜像授权数限制, 0表示无限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxDailyCount = null;
+
+        /**
+         * 规则id，用未设置时为0
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.RangeType = 'RangeType' in params ? params.RangeType : null;
+        this.HostCount = 'HostCount' in params ? params.HostCount : null;
+        this.MaxDailyCount = 'MaxDailyCount' in params ? params.MaxDailyCount : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddEditWarningRules返回参数结构体
  * @class
  */
@@ -21826,6 +40056,222 @@ class AddEditWarningRulesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulDefenceSetting请求参数结构体
+ * @class
+ */
+class DescribeVulDefenceSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeVirusAutoIsolateSetting返回参数结构体
+ * @class
+ */
+class DescribeVirusAutoIsolateSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自动隔离开关(true:开 false:关)
+         * @type {boolean || null}
+         */
+        this.AutoIsolateSwitch = null;
+
+        /**
+         * 是否中断隔离文件关联的进程(true:是 false:否)
+         * @type {boolean || null}
+         */
+        this.IsKillProgress = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoIsolateSwitch = 'AutoIsolateSwitch' in params ? params.AutoIsolateSwitch : null;
+        this.IsKillProgress = 'IsKillProgress' in params ? params.IsKillProgress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 漏洞列表信息
+ * @class
+ */
+class VulInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 漏洞标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * CVSS V3分数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CVSSV3Score = null;
+
+        /**
+         * 风险等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * CVE编号
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 漏洞子类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * 首次发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FoundTime = null;
+
+        /**
+         * 最近发现时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestFoundTime = null;
+
+        /**
+         * 漏洞ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 影响本地镜像数
+         * @type {number || null}
+         */
+        this.LocalImageCount = null;
+
+        /**
+         * 影响容器数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ContainerCount = null;
+
+        /**
+         * 影响仓库镜像数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegistryImageCount = null;
+
+        /**
+         * 漏洞PocID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 防御状态，NO_DEFENDED:未防御，DEFENDED:已防御
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceStatus = null;
+
+        /**
+         * 漏洞防御主机范围: MANUAL:自选主机节点，ALL:全部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefenceScope = null;
+
+        /**
+         * 漏洞防御主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefenceHostCount = null;
+
+        /**
+         * 已防御攻击次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DefendedCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CVSSV3Score = 'CVSSV3Score' in params ? params.CVSSV3Score : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.FoundTime = 'FoundTime' in params ? params.FoundTime : null;
+        this.LatestFoundTime = 'LatestFoundTime' in params ? params.LatestFoundTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.LocalImageCount = 'LocalImageCount' in params ? params.LocalImageCount : null;
+        this.ContainerCount = 'ContainerCount' in params ? params.ContainerCount : null;
+        this.RegistryImageCount = 'RegistryImageCount' in params ? params.RegistryImageCount : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.DefenceStatus = 'DefenceStatus' in params ? params.DefenceStatus : null;
+        this.DefenceScope = 'DefenceScope' in params ? params.DefenceScope : null;
+        this.DefenceHostCount = 'DefenceHostCount' in params ? params.DefenceHostCount : null;
+        this.DefendedCount = 'DefendedCount' in params ? params.DefendedCount : null;
 
     }
 }
@@ -21875,6 +40321,81 @@ class DescribeAssetImageRegistryAssetStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeVulScanLocalImageList请求参数结构体
+ * @class
+ */
+class DescribeVulScanLocalImageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞扫描任务ID
+         * @type {number || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedNewestImage- Bool- 是否必填：否 - 仅展示影响最新版本镜像的漏洞</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String -是否必填: 否 - 镜像名称</li>
+<li>ScanStatus- string -是否必填: 否 - 检测状态。WAIT_SCAN：待检测，SCANNING：检查中，SCANNED：检查完成，SCAN_ERR：检查失败，CANCELED：检测停止</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -21997,24 +40518,38 @@ class ImageProgress extends  AbstractModel {
 }
 
 /**
- * ModifyVirusScanTimeoutSetting请求参数结构体
+ * CreateK8sApiAbnormalRuleExportJob请求参数结构体
  * @class
  */
-class ModifyVirusScanTimeoutSettingRequest extends  AbstractModel {
+class CreateK8sApiAbnormalRuleExportJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 超时时长单位小时(5~24h)
-         * @type {number || null}
+         * 过滤条件。
+<li>RuleType - string  - 是否必填: 否 -规则类型</li>
+<li>Status - string  - 是否必填: 否 -状态</li>
+         * @type {Array.<RunTimeFilters> || null}
          */
-        this.Timeout = null;
+        this.Filters = null;
 
         /**
-         * 设置类型0一键检测，1定时检测
-         * @type {number || null}
+         * 排序方式
+         * @type {string || null}
          */
-        this.ScanType = null;
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {Array.<string> || null}
+         */
+        this.By = null;
+
+        /**
+         * 导出字段
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
 
     }
 
@@ -22025,8 +40560,18 @@ class ModifyVirusScanTimeoutSettingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
-        this.ScanType = 'ScanType' in params ? params.ScanType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
 
     }
 }
@@ -22060,6 +40605,109 @@ class CreateVirusScanAgainResponse extends  AbstractModel {
 }
 
 /**
+ * CreateDefenceVulExportJob请求参数结构体
+ * @class
+ */
+class CreateDefenceVulExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10000，最大值为10000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Level- String - 是否必填：否 - 威胁等级，CRITICAL:严重 HIGH:高/MIDDLE:中/LOW:低</li>
+<li>CVEID- string - 是否必填：否 - CVE编号</li>
+<li>Name- string -是否必填: 否 - 漏洞名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * ModifySecLogDeliveryClsSetting请求参数结构体
+ * @class
+ */
+class ModifySecLogDeliveryClsSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志信息
+         * @type {Array.<SecLogDeliveryClsSettingInfo> || null}
+         */
+        this.List = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SecLogDeliveryClsSettingInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * AddEditAccessControlRule返回参数结构体
  * @class
  */
@@ -22083,6 +40731,48 @@ class AddEditAccessControlRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeEscapeEventTypeSummary请求参数结构体
+ * @class
+ */
+class DescribeEscapeEventTypeSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeVulLevelImageSummary请求参数结构体
+ * @class
+ */
+class DescribeVulLevelImageSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -22116,10 +40806,45 @@ class DeleteCompliancePolicyItemFromWhitelistResponse extends  AbstractModel {
 }
 
 /**
- * CreateAssetImageScanSetting返回参数结构体
+ * DescribeSecEventsTendency请求参数结构体
  * @class
  */
-class CreateAssetImageScanSettingResponse extends  AbstractModel {
+class DescribeSecEventsTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ResetSecLogTopicConfig返回参数结构体
+ * @class
+ */
+class ResetSecLogTopicConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -22198,6 +40923,121 @@ class DescribeAccessControlRulesResponse extends  AbstractModel {
  * @class
  */
 class ModifyEscapeRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogVasInfo返回参数结构体
+ * @class
+ */
+class DescribeSecLogVasInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买状态
+待购: Pending
+已购: Normal
+隔离: Isolate
+         * @type {string || null}
+         */
+        this.BuyStatus = null;
+
+        /**
+         * 存储时长(月)
+         * @type {number || null}
+         */
+        this.LogSaveMonth = null;
+
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 截止时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 存储容量(GB)
+         * @type {number || null}
+         */
+        this.LogCapacity = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceID = null;
+
+        /**
+         * 是否曾经购买过(false:未曾 true:曾经购买过)
+         * @type {boolean || null}
+         */
+        this.IsPurchased = null;
+
+        /**
+         * 试用存储容量(GB)
+         * @type {number || null}
+         */
+        this.TrialCapacity = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
+        this.LogSaveMonth = 'LogSaveMonth' in params ? params.LogSaveMonth : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.LogCapacity = 'LogCapacity' in params ? params.LogCapacity : null;
+        this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
+        this.IsPurchased = 'IsPurchased' in params ? params.IsPurchased : null;
+        this.TrialCapacity = 'TrialCapacity' in params ? params.TrialCapacity : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVirusAutoIsolateSetting返回参数结构体
+ * @class
+ */
+class ModifyVirusAutoIsolateSettingResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -22650,6 +41490,18 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
         this.ContainerIsolateOperationSrc = null;
 
         /**
+         * 检测平台
+1: 云查杀引擎
+2: tav
+3: binaryAi
+4: 异常行为
+5: 威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CheckPlatform = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -22710,6 +41562,57 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImageAutoAuthorizedTaskList返回参数结构体
+ * @class
+ */
+class DescribeImageAutoAuthorizedTaskListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自动授权任务列表
+         * @type {Array.<ImageAutoAuthorizedTask> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ImageAutoAuthorizedTask();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -22759,6 +41662,109 @@ class DescribeComplianceAssetListResponse extends  AbstractModel {
                 let obj = new ComplianceAssetInfo();
                 obj.deserialize(params.AssetInfoList[z]);
                 this.AssetInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateVulContainerExportJob请求参数结构体
+ * @class
+ */
+class CreateVulContainerExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 需要返回的数量，默认为50000，最大值为50000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>OnlyAffectedNewestImage- Bool- 是否必填：否 - 仅展示影响最新版本镜像的漏洞</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID</li>
+<li>ContainerName- String -是否必填: 否 - 容器名称</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeSecLogDeliveryClsSetting返回参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryClsSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志类型列表
+         * @type {Array.<SecLogDeliveryClsSettingInfo> || null}
+         */
+        this.LogTypeList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LogTypeList) {
+            this.LogTypeList = new Array();
+            for (let z in params.LogTypeList) {
+                let obj = new SecLogDeliveryClsSettingInfo();
+                obj.deserialize(params.LogTypeList[z]);
+                this.LogTypeList.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -22859,6 +41865,97 @@ class DescribeComplianceAssetDetailInfoResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteEscapeWhiteList返回参数结构体
+ * @class
+ */
+class DeleteEscapeWhiteListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveAssetImageRegistryRegistryDetail返回参数结构体
+ * @class
+ */
+class RemoveAssetImageRegistryRegistryDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ScanComplianceScanFailedAssets返回参数结构体
+ * @class
+ */
+class ScanComplianceScanFailedAssetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回重新检测任务的ID。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAssetImageRegistryScanStop请求参数结构体
  * @class
  */
@@ -22938,18 +42035,30 @@ class ModifyAssetImageRegistryScanStopRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVirusScanTaskStatus请求参数结构体
+ * DeleteNetworkFirewallPolicyDetail返回参数结构体
  * @class
  */
-class DescribeVirusScanTaskStatusRequest extends  AbstractModel {
+class DeleteNetworkFirewallPolicyDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务id
+         * 返回创建的任务的ID，为0表示创建失败。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 创建删除任务的结果，"Succ"为成功，"Failed"为失败
          * @type {string || null}
          */
-        this.TaskID = null;
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -22960,7 +42069,37 @@ class DescribeVirusScanTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalTendency请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势周期(默认为7天)
+         * @type {number || null}
+         */
+        this.TendencyPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TendencyPeriod = 'TendencyPeriod' in params ? params.TendencyPeriod : null;
 
     }
 }
@@ -23010,6 +42149,69 @@ class RiskSyscallWhiteListInfo extends  AbstractModel {
         this.SyscallNames = 'SyscallNames' in params ? params.SyscallNames : null;
         this.ProcessPath = 'ProcessPath' in params ? params.ProcessPath : null;
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeNewestVul返回参数结构体
+ * @class
+ */
+class DescribeNewestVulResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 披露时间
+         * @type {string || null}
+         */
+        this.SubmitTime = null;
+
+        /**
+         * 应急漏洞风险情况：NOT_SCAN：未扫描，SCANNING：扫描中，SCANNED：已扫描
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 漏洞CVEID
+         * @type {string || null}
+         */
+        this.CVEID = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.SubmitTime = 'SubmitTime' in params ? params.SubmitTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CVEID = 'CVEID' in params ? params.CVEID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23123,19 +42325,18 @@ RiskLevel
 }
 
 /**
- * DescribeAssetImageRegistryVulListExport返回参数结构体
+ * DescribeABTestConfig返回参数结构体
  * @class
  */
-class DescribeAssetImageRegistryVulListExportResponse extends  AbstractModel {
+class DescribeABTestConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * excel文件下载地址
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 灰度项目配置
+         * @type {Array.<ABTestConfig> || null}
          */
-        this.DownloadUrl = null;
+        this.Config = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -23152,7 +42353,177 @@ class DescribeAssetImageRegistryVulListExportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+
+        if (params.Config) {
+            this.Config = new Array();
+            for (let z in params.Config) {
+                let obj = new ABTestConfig();
+                obj.deserialize(params.Config[z]);
+                this.Config.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 快速搜索模板
+ * @class
+ */
+class SearchTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检索名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 检索索引类型
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 检索语句
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * 时间范围
+         * @type {string || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * 转换的检索语句内容
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 检索方式。输入框检索：standard,过滤，检索：simple
+         * @type {string || null}
+         */
+        this.Flag = null;
+
+        /**
+         * 展示数据
+         * @type {string || null}
+         */
+        this.DisplayData = null;
+
+        /**
+         * 规则ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+        this.TimeRange = 'TimeRange' in params ? params.TimeRange : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.DisplayData = 'DisplayData' in params ? params.DisplayData : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeContainerSecEventSummary返回参数结构体
+ * @class
+ */
+class DescribeContainerSecEventSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 未处理逃逸事件
+         * @type {number || null}
+         */
+        this.UnhandledEscapeCnt = null;
+
+        /**
+         * 未处理反弹shell事件
+         * @type {number || null}
+         */
+        this.UnhandledReverseShellCnt = null;
+
+        /**
+         * 未处理高危系统调用
+         * @type {number || null}
+         */
+        this.UnhandledRiskSyscallCnt = null;
+
+        /**
+         * 未处理异常进程
+         * @type {number || null}
+         */
+        this.UnhandledAbnormalProcessCnt = null;
+
+        /**
+         * 未处理文件篡改
+         * @type {number || null}
+         */
+        this.UnhandledFileCnt = null;
+
+        /**
+         * 未处理木马事件
+         * @type {number || null}
+         */
+        this.UnhandledVirusEventCnt = null;
+
+        /**
+         * 未处理恶意外连事件
+         * @type {number || null}
+         */
+        this.UnhandledMaliciousConnectionEventCnt = null;
+
+        /**
+         * 未处理k8sApi事件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnhandledK8sApiEventCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnhandledEscapeCnt = 'UnhandledEscapeCnt' in params ? params.UnhandledEscapeCnt : null;
+        this.UnhandledReverseShellCnt = 'UnhandledReverseShellCnt' in params ? params.UnhandledReverseShellCnt : null;
+        this.UnhandledRiskSyscallCnt = 'UnhandledRiskSyscallCnt' in params ? params.UnhandledRiskSyscallCnt : null;
+        this.UnhandledAbnormalProcessCnt = 'UnhandledAbnormalProcessCnt' in params ? params.UnhandledAbnormalProcessCnt : null;
+        this.UnhandledFileCnt = 'UnhandledFileCnt' in params ? params.UnhandledFileCnt : null;
+        this.UnhandledVirusEventCnt = 'UnhandledVirusEventCnt' in params ? params.UnhandledVirusEventCnt : null;
+        this.UnhandledMaliciousConnectionEventCnt = 'UnhandledMaliciousConnectionEventCnt' in params ? params.UnhandledMaliciousConnectionEventCnt : null;
+        this.UnhandledK8sApiEventCnt = 'UnhandledK8sApiEventCnt' in params ? params.UnhandledK8sApiEventCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -23251,6 +42622,8 @@ class DescribeAssetHostListRequest extends  AbstractModel {
 <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
 <li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li>
 <li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
+<li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li>
+<li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li>
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -23287,6 +42660,143 @@ class DescribeAssetHostListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * CreateVulDefenceHostExportJob请求参数结构体
+ * @class
+ */
+class CreateVulDefenceHostExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 - 插件状态，正常：SUCCESS，异常：FAIL， NO_DEFENCE:未防御</li>
+<li>KeyWords- string - 是否必填：否 - 主机名称/IP。</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，最大值为100000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序方式：asc/desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段：更新时间：ModifyTime/首次开启时间：CreateTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeImageAutoAuthorizedLogList请求参数结构体
+ * @class
+ */
+class DescribeImageAutoAuthorizedLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自动授权任务Id
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Status授权结果，SUCCESS:成功，REACH_LIMIT:达到授权上限，LICENSE_INSUFFICIENT:授权数不足
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段：AuthorizedTime
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * 排序方式，asc，desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.By = 'By' in params ? params.By : null;
         this.Order = 'Order' in params ? params.Order : null;
 
@@ -23429,12 +42939,37 @@ class DescribeRiskSyscallWhiteListsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUnfinishRefreshTask请求参数结构体
+ * DescribeVulDefencePlugin请求参数结构体
  * @class
  */
-class DescribeUnfinishRefreshTaskRequest extends  AbstractModel {
+class DescribeVulDefencePluginRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 主机HostID即quuid
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Status- String - 是否必填：否 -插件运行状态：注入中:INJECTING，注入成功：SUCCESS，注入失败：FAIL，插件超时：TIMEOUT，插件退出：QUIT</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -23445,6 +42980,187 @@ class DescribeUnfinishRefreshTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 容器列表集合
+ * @class
+ */
+class ContainerInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 容器id
+         * @type {string || null}
+         */
+        this.ContainerID = null;
+
+        /**
+         * 容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 容器运行状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 运行用户
+         * @type {string || null}
+         */
+        this.RunAs = null;
+
+        /**
+         * 命令行
+         * @type {string || null}
+         */
+        this.Cmd = null;
+
+        /**
+         * CPU使用率 *1000
+         * @type {number || null}
+         */
+        this.CPUUsage = null;
+
+        /**
+         * 内存使用 kb
+         * @type {number || null}
+         */
+        this.RamUsage = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.POD = null;
+
+        /**
+         * 主机id
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 主机ip
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 主机名称
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 外网ip
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
+        /**
+         * 网络子状态
+         * @type {string || null}
+         */
+        this.NetSubStatus = null;
+
+        /**
+         * 隔离来源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsolateSource = null;
+
+        /**
+         * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerID = 'ContainerID' in params ? params.ContainerID : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RunAs = 'RunAs' in params ? params.RunAs : null;
+        this.Cmd = 'Cmd' in params ? params.Cmd : null;
+        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
+        this.RamUsage = 'RamUsage' in params ? params.RamUsage : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.POD = 'POD' in params ? params.POD : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
+        this.NetSubStatus = 'NetSubStatus' in params ? params.NetSubStatus : null;
+        this.IsolateSource = 'IsolateSource' in params ? params.IsolateSource : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
 
     }
 }
@@ -23572,6 +43288,91 @@ class DescribeAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
 }
 
 /**
+ * 网络集群资产审计返回结构体
+ * @class
+ */
+class NetworkAuditRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名字
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 动作
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 操作人
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 策略名
+         * @type {string || null}
+         */
+        this.NetworkPolicyName = null;
+
+        /**
+         * 操作时间
+         * @type {string || null}
+         */
+        this.OperationTime = null;
+
+        /**
+         * 操作人appid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 操作人uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.NetworkPolicyName = 'NetworkPolicyName' in params ? params.NetworkPolicyName : null;
+        this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+
+    }
+}
+
+/**
  * UpdateAssetImageRegistryRegistryDetail请求参数结构体
  * @class
  */
@@ -23658,6 +43459,65 @@ class UpdateAssetImageRegistryRegistryDetailRequest extends  AbstractModel {
         this.RegistryRegion = 'RegistryRegion' in params ? params.RegistryRegion : null;
         this.SpeedLimit = 'SpeedLimit' in params ? params.SpeedLimit : null;
         this.Insecure = 'Insecure' in params ? params.Insecure : null;
+
+    }
+}
+
+/**
+ * DescribeK8sApiAbnormalRuleScopeList请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalRuleScopeListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤条件。
+<li>Action - string -是否必填: 否 - 执行动作</li>
+<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -23871,6 +43731,69 @@ class AddEditReverseShellWhiteListRequest extends  AbstractModel {
 }
 
 /**
+ * 漏洞扫描忽略的仓库镜像
+ * @class
+ */
+class VulIgnoreRegistryImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 仓库名称
+         * @type {string || null}
+         */
+        this.RegistryName = null;
+
+        /**
+         * 镜像版本
+         * @type {string || null}
+         */
+        this.ImageVersion = null;
+
+        /**
+         * 仓库地址
+         * @type {string || null}
+         */
+        this.RegistryPath = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * 漏洞PocID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.RegistryName = 'RegistryName' in params ? params.RegistryName : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
+        this.RegistryPath = 'RegistryPath' in params ? params.RegistryPath : null;
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.PocID = 'PocID' in params ? params.PocID : null;
+
+    }
+}
+
+/**
  * DescribeVirusTaskList请求参数结构体
  * @class
  */
@@ -23901,7 +43824,10 @@ class DescribeVirusTaskListRequest extends  AbstractModel {
 <li>ContainerName - String - 是否必填：否 - 容器名称</li>
 <li>ContainerId - String - 是否必填：否 - 容器id</li>
 <li>Hostname - String - 是否必填：否 - 主机名称</li>
-<li>HostIp- String - 是否必填：是 - 容器名称</li>
+<li>HostIp- String - 是否必填：否 - 主机IP</li>
+<li>ImageId- String - 是否必填：否 - 镜像ID</li>
+<li>ImageName- String - 是否必填：否 - 镜像名称</li>
+<li>Status- String - 是否必填：否 - 状态</li>
          * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
@@ -23941,6 +43867,41 @@ class DescribeVirusTaskListRequest extends  AbstractModel {
         }
         this.By = 'By' in params ? params.By : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * CreateRiskDnsEventExportJob返回参数结构体
+ * @class
+ */
+class CreateRiskDnsEventExportJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出任务ID，前端拿着任务ID查询任务进度
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24019,6 +43980,175 @@ class DescribeAssetImageRegistryVirusListExportRequest extends  AbstractModel {
             this.ImageInfo = obj;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeWebVulList返回参数结构体
+ * @class
+ */
+class DescribeWebVulListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 漏洞列表
+         * @type {Array.<VulInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulScanInfo返回参数结构体
+ * @class
+ */
+class DescribeVulScanInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次扫描的本地镜像总数
+         * @type {number || null}
+         */
+        this.LocalImageScanCount = null;
+
+        /**
+         * 忽略的漏洞数量
+         * @type {number || null}
+         */
+        this.IgnoreVulCount = null;
+
+        /**
+         * 漏洞扫描的开始时间
+         * @type {string || null}
+         */
+        this.ScanStartTime = null;
+
+        /**
+         * 漏洞扫描的结束时间
+         * @type {string || null}
+         */
+        this.ScanEndTime = null;
+
+        /**
+         * 发现风险镜像数量
+         * @type {number || null}
+         */
+        this.FoundRiskImageCount = null;
+
+        /**
+         * 本地发现漏洞数量
+         * @type {number || null}
+         */
+        this.FoundVulCount = null;
+
+        /**
+         * 扫描进度
+         * @type {number || null}
+         */
+        this.ScanProgress = null;
+
+        /**
+         * 本次扫描的仓库镜像总数
+         * @type {number || null}
+         */
+        this.RegistryImageScanCount = null;
+
+        /**
+         * 本地镜像最近一次的漏洞任务扫描ID
+         * @type {number || null}
+         */
+        this.LocalTaskID = null;
+
+        /**
+         * 扫描状态:NOT_SCAN:未扫描，SCANNING:扫描中,SCANNED:完成，CANCELED：扫描停止
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 剩余时间，秒
+         * @type {number || null}
+         */
+        this.RemainingTime = null;
+
+        /**
+         * 仓库镜像最近一次的漏洞任务扫描ID
+         * @type {number || null}
+         */
+        this.RegistryTaskID = null;
+
+        /**
+         * 仓库发现漏洞数量
+         * @type {number || null}
+         */
+        this.RegistryFoundVulCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalImageScanCount = 'LocalImageScanCount' in params ? params.LocalImageScanCount : null;
+        this.IgnoreVulCount = 'IgnoreVulCount' in params ? params.IgnoreVulCount : null;
+        this.ScanStartTime = 'ScanStartTime' in params ? params.ScanStartTime : null;
+        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.FoundRiskImageCount = 'FoundRiskImageCount' in params ? params.FoundRiskImageCount : null;
+        this.FoundVulCount = 'FoundVulCount' in params ? params.FoundVulCount : null;
+        this.ScanProgress = 'ScanProgress' in params ? params.ScanProgress : null;
+        this.RegistryImageScanCount = 'RegistryImageScanCount' in params ? params.RegistryImageScanCount : null;
+        this.LocalTaskID = 'LocalTaskID' in params ? params.LocalTaskID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RemainingTime = 'RemainingTime' in params ? params.RemainingTime : null;
+        this.RegistryTaskID = 'RegistryTaskID' in params ? params.RegistryTaskID : null;
+        this.RegistryFoundVulCount = 'RegistryFoundVulCount' in params ? params.RegistryFoundVulCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24103,6 +44233,18 @@ class FileAttributeInfo extends  AbstractModel {
          */
         this.LatestTamperedFileMTime = null;
 
+        /**
+         * 新文件内容
+         * @type {string || null}
+         */
+        this.NewFile = null;
+
+        /**
+         * 新旧文件的差异
+         * @type {string || null}
+         */
+        this.FileDiff = null;
+
     }
 
     /**
@@ -24118,6 +44260,52 @@ class FileAttributeInfo extends  AbstractModel {
         this.FilePath = 'FilePath' in params ? params.FilePath : null;
         this.FileCreateTime = 'FileCreateTime' in params ? params.FileCreateTime : null;
         this.LatestTamperedFileMTime = 'LatestTamperedFileMTime' in params ? params.LatestTamperedFileMTime : null;
+        this.NewFile = 'NewFile' in params ? params.NewFile : null;
+        this.FileDiff = 'FileDiff' in params ? params.FileDiff : null;
+
+    }
+}
+
+/**
+ * DescribeVulTendency请求参数结构体
+ * @class
+ */
+class DescribeVulTendencyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 枚举类型：
+LATEST：最新版本
+CONTAINER: 运行容器
+         * @type {string || null}
+         */
+        this.SphereOfInfluence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SphereOfInfluence = 'SphereOfInfluence' in params ? params.SphereOfInfluence : null;
 
     }
 }
@@ -24153,6 +44341,92 @@ class DescribePostPayDetailRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ModifyK8sApiAbnormalEventStatus返回参数结构体
+ * @class
+ */
+class ModifyK8sApiAbnormalEventStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecLogDeliveryKafkaOptions返回参数结构体
+ * @class
+ */
+class DescribeSecLogDeliveryKafkaOptionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例列表
+         * @type {Array.<CKafkaInstanceInfo> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * 地域列表
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new CKafkaInstanceInfo();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24277,160 +44551,72 @@ class ReverseShellWhiteListInfo extends  AbstractModel {
 }
 
 /**
- * 运行时木马列表信息
+ * UpdateNetworkFirewallPolicyDetail请求参数结构体
  * @class
  */
-class VirusInfo extends  AbstractModel {
+class UpdateNetworkFirewallPolicyDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文件名称
+         * 集群Id
          * @type {string || null}
          */
-        this.FileName = null;
+        this.ClusterId = null;
 
         /**
-         * 文件路径
-         * @type {string || null}
-         */
-        this.FilePath = null;
-
-        /**
-         * 病毒名称
-         * @type {string || null}
-         */
-        this.VirusName = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * 容器名称
-         * @type {string || null}
-         */
-        this.ContainerName = null;
-
-        /**
-         * 容器id
-         * @type {string || null}
-         */
-        this.ContainerId = null;
-
-        /**
-         * 容器状态，CS_RUNING:运行， CS_PAUSE:暂停，CS_STOP:停止，
-												       CS_CREATE:已经创建， CS_DESTORY:销毁
-         * @type {string || null}
-         */
-        this.ContainerStatus = null;
-
-        /**
-         * 镜像名称
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * 镜像id
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * DEAL_NONE:文件待处理
-DEAL_IGNORE:已经忽略
-DEAL_ADD_WHITELIST:加白
-DEAL_DEL:文件已经删除
-DEAL_ISOLATE:已经隔离
-DEAL_ISOLATING:隔离中
-DEAL_ISOLATE_FAILED:隔离失败
-DEAL_RECOVERING:恢复中
-DEAL_RECOVER_FAILED: 恢复失败
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 事件id
-         * @type {string || null}
+         * 策略Id
+         * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * 事件描述
-         * @type {string || null}
+         * 入站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
          */
-        this.HarmDescribe = null;
+        this.FromPolicyRule = null;
 
         /**
-         * 建议方案
-         * @type {string || null}
+         * 出站规则
+
+全部允许：1
+
+全部拒绝 ：2
+
+自定义：3
+         * @type {number || null}
          */
-        this.SuggestScheme = null;
+        this.ToPolicyRule = null;
 
         /**
-         * 失败子状态:
-FILE_NOT_FOUND:文件不存在
-FILE_ABNORMAL:文件异常
-FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常
-BACKUP_FILE_NOT_FOUND:备份文件不存在
-CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
-CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
-TIMEOUT: 超时
-TOO_MANY: 任务过多
-OFFLINE: 离线
-INTERNAL: 服务内部错误
-VALIDATION: 参数非法
+         * pod选择器
          * @type {string || null}
          */
-        this.SubStatus = null;
+        this.PodSelector = null;
 
         /**
-         * 网络状态
-未隔离  	NORMAL
-已隔离		ISOLATED
-隔离中		ISOLATING
-隔离失败	ISOLATE_FAILED
-解除隔离中  RESTORING
-解除隔离失败 RESTORE_FAILED
+         * 命名空间
          * @type {string || null}
          */
-        this.ContainerNetStatus = null;
+        this.Namespace = null;
 
         /**
-         * 容器子状态
-"AGENT_OFFLINE"       //Agent离线
-	"NODE_DESTROYED"      //节点已销毁
-	"CONTAINER_EXITED"    //容器已退出
-	"CONTAINER_DESTROYED" //容器已销毁
-	"SHARED_HOST"         // 容器与主机共享网络
-	"RESOURCE_LIMIT"      //隔离操作资源超限
-	"UNKNOW"              // 原因未知
+         * 策略描述
          * @type {string || null}
          */
-        this.ContainerNetSubStatus = null;
+        this.Description = null;
 
         /**
-         * 容器隔离操作来源
-         * @type {string || null}
+         * 自定义规则
+         * @type {Array.<NetworkCustomPolicy> || null}
          */
-        this.ContainerIsolateOperationSrc = null;
-
-        /**
-         * md5值
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MD5 = null;
+        this.CustomPolicy = null;
 
     }
 
@@ -24441,25 +44627,22 @@ VALIDATION: 参数非法
         if (!params) {
             return;
         }
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FilePath = 'FilePath' in params ? params.FilePath : null;
-        this.VirusName = 'VirusName' in params ? params.VirusName : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
-        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
-        this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Id = 'Id' in params ? params.Id : null;
-        this.HarmDescribe = 'HarmDescribe' in params ? params.HarmDescribe : null;
-        this.SuggestScheme = 'SuggestScheme' in params ? params.SuggestScheme : null;
-        this.SubStatus = 'SubStatus' in params ? params.SubStatus : null;
-        this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
-        this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
-        this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
-        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.FromPolicyRule = 'FromPolicyRule' in params ? params.FromPolicyRule : null;
+        this.ToPolicyRule = 'ToPolicyRule' in params ? params.ToPolicyRule : null;
+        this.PodSelector = 'PodSelector' in params ? params.PodSelector : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.CustomPolicy) {
+            this.CustomPolicy = new Array();
+            for (let z in params.CustomPolicy) {
+                let obj = new NetworkCustomPolicy();
+                obj.deserialize(params.CustomPolicy[z]);
+                this.CustomPolicy.push(obj);
+            }
+        }
 
     }
 }
@@ -24505,123 +44688,299 @@ class EscapeRuleEnabled extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeK8sApiAbnormalEventInfo请求参数结构体
+ * @class
+ */
+class DescribeK8sApiAbnormalEventInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DescribeSearchTemplates请求参数结构体
+ * @class
+ */
+class DescribeSearchTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
 module.exports = {
     CreateVirusScanAgainRequest: CreateVirusScanAgainRequest,
+    DescribeSecLogDeliveryKafkaSettingRequest: DescribeSecLogDeliveryKafkaSettingRequest,
+    DescribeSearchTemplatesResponse: DescribeSearchTemplatesResponse,
+    ScanIgnoreVul: ScanIgnoreVul,
     UpdateImageRegistryTimingScanTaskResponse: UpdateImageRegistryTimingScanTaskResponse,
+    DescribeScanIgnoreVulListResponse: DescribeScanIgnoreVulListResponse,
+    ModifyVulDefenceEventStatusRequest: ModifyVulDefenceEventStatusRequest,
+    ModifyVirusAutoIsolateExampleSwitchResponse: ModifyVirusAutoIsolateExampleSwitchResponse,
+    CKafkaTopicInfo: CKafkaTopicInfo,
+    CreateVulExportJobResponse: CreateVulExportJobResponse,
     DescribeUnfinishRefreshTaskResponse: DescribeUnfinishRefreshTaskResponse,
+    CreateComponentExportJobRequest: CreateComponentExportJobRequest,
     ComplianceBenchmarkStandardEnable: ComplianceBenchmarkStandardEnable,
-    DescribeRiskSyscallWhiteListsResponse: DescribeRiskSyscallWhiteListsResponse,
+    CreateNetworkFirewallUndoPublishRequest: CreateNetworkFirewallUndoPublishRequest,
     CreateRefreshTaskResponse: CreateRefreshTaskResponse,
-    ImageVirusInfo: ImageVirusInfo,
+    CreateVulDefenceHostExportJobResponse: CreateVulDefenceHostExportJobResponse,
+    ImageVul: ImageVul,
+    CreateVulImageExportJobResponse: CreateVulImageExportJobResponse,
     AbnormalProcessEventDescription: AbnormalProcessEventDescription,
     CompliancePeriodTaskRule: CompliancePeriodTaskRule,
     DescribeVirusScanTimeoutSettingResponse: DescribeVirusScanTimeoutSettingResponse,
+    DescribeVulImageListResponse: DescribeVulImageListResponse,
+    CreateVulExportJobRequest: CreateVulExportJobRequest,
+    DescribeNetworkFirewallNamespaceLabelListResponse: DescribeNetworkFirewallNamespaceLabelListResponse,
     ClusterCreateComponentItem: ClusterCreateComponentItem,
     DescribeAssetComponentListResponse: DescribeAssetComponentListResponse,
+    DescribeVulImageListRequest: DescribeVulImageListRequest,
     DescribeAssetImageRegistryVulListResponse: DescribeAssetImageRegistryVulListResponse,
+    VulScanImageInfo: VulScanImageInfo,
     AddAssetImageRegistryRegistryDetailResponse: AddAssetImageRegistryRegistryDetailResponse,
     DeleteCompliancePolicyItemFromWhitelistRequest: DeleteCompliancePolicyItemFromWhitelistRequest,
     DescribeAssetImageDetailRequest: DescribeAssetImageDetailRequest,
+    VulIgnoreLocalImage: VulIgnoreLocalImage,
+    ModifyK8sApiAbnormalRuleInfoResponse: ModifyK8sApiAbnormalRuleInfoResponse,
     ModifyAssetImageScanStopResponse: ModifyAssetImageScanStopResponse,
-    DescribeComplianceScanFailedAssetListResponse: DescribeComplianceScanFailedAssetListResponse,
-    SyncAssetImageRegistryAssetResponse: SyncAssetImageRegistryAssetResponse,
+    AddAssetImageRegistryRegistryDetailRequest: AddAssetImageRegistryRegistryDetailRequest,
+    AddIgnoreVulResponse: AddIgnoreVulResponse,
+    VulDefenceEventTendency: VulDefenceEventTendency,
+    DescribeNetworkFirewallClusterRefreshStatusRequest: DescribeNetworkFirewallClusterRefreshStatusRequest,
     DescribeAssetImageRegistryVirusListExportResponse: DescribeAssetImageRegistryVirusListExportResponse,
     DescribeSecEventsTendencyResponse: DescribeSecEventsTendencyResponse,
     DescribeAccessControlEventsExportResponse: DescribeAccessControlEventsExportResponse,
-    AddEditAbnormalProcessRuleRequest: AddEditAbnormalProcessRuleRequest,
-    DescribeComplianceTaskAssetSummaryRequest: DescribeComplianceTaskAssetSummaryRequest,
+    DescribeImageRiskSummaryResponse: DescribeImageRiskSummaryResponse,
+    DescribeNetworkFirewallPolicyDetailRequest: DescribeNetworkFirewallPolicyDetailRequest,
+    CreateAccessControlsRuleExportJobResponse: CreateAccessControlsRuleExportJobResponse,
     ModifyAssetImageRegistryScanStopResponse: ModifyAssetImageRegistryScanStopResponse,
-    DescribeProVersionInfoRequest: DescribeProVersionInfoRequest,
+    DescribeAssetImageRegistryRiskListExportRequest: DescribeAssetImageRegistryRiskListExportRequest,
     SetCheckModeResponse: SetCheckModeResponse,
+    SecLogJoinObjectInfo: SecLogJoinObjectInfo,
+    DescribeVulImageSummaryRequest: DescribeVulImageSummaryRequest,
     DescribeAssetImageScanStatusResponse: DescribeAssetImageScanStatusResponse,
+    DescribeVirusAutoIsolateSampleDetailResponse: DescribeVirusAutoIsolateSampleDetailResponse,
+    DescribeVulDefenceEventTendencyRequest: DescribeVulDefenceEventTendencyRequest,
     DescribeAbnormalProcessRulesExportRequest: DescribeAbnormalProcessRulesExportRequest,
     DescribePurchaseStateInfoResponse: DescribePurchaseStateInfoResponse,
-    ModifyVirusFileStatusResponse: ModifyVirusFileStatusResponse,
+    SoftQuotaDayInfo: SoftQuotaDayInfo,
+    DescribeVulDefencePluginResponse: DescribeVulDefencePluginResponse,
     DescribeAssetImageRegistryRegistryDetailResponse: DescribeAssetImageRegistryRegistryDetailResponse,
     RunTimeFilters: RunTimeFilters,
     DescribeVirusDetailRequest: DescribeVirusDetailRequest,
+    DeleteEscapeWhiteListRequest: DeleteEscapeWhiteListRequest,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    ModifyK8sApiAbnormalRuleInfoRequest: ModifyK8sApiAbnormalRuleInfoRequest,
+    UpdateAndPublishNetworkFirewallPolicyDetailResponse: UpdateAndPublishNetworkFirewallPolicyDetailResponse,
     DescribeAssetImageListRequest: DescribeAssetImageListRequest,
+    DescribeSecLogDeliveryClsOptionsRequest: DescribeSecLogDeliveryClsOptionsRequest,
     DescribeRiskSyscallWhiteListDetailRequest: DescribeRiskSyscallWhiteListDetailRequest,
+    DescribeK8sApiAbnormalRuleScopeListResponse: DescribeK8sApiAbnormalRuleScopeListResponse,
     ModifyAbnormalProcessRuleStatusRequest: ModifyAbnormalProcessRuleStatusRequest,
+    DescribeVulTendencyResponse: DescribeVulTendencyResponse,
     ProcessDetailInfo: ProcessDetailInfo,
+    DescribeAutoAuthorizedRuleHostRequest: DescribeAutoAuthorizedRuleHostRequest,
     ScanCompliancePolicyItemsRequest: ScanCompliancePolicyItemsRequest,
+    DescribeAgentDaemonSetCmdResponse: DescribeAgentDaemonSetCmdResponse,
     DescribeAssetImageVirusListExportRequest: DescribeAssetImageVirusListExportRequest,
     CreateAssetImageScanTaskResponse: CreateAssetImageScanTaskResponse,
     DescribeTaskResultSummaryRequest: DescribeTaskResultSummaryRequest,
     DeleteAccessControlRulesRequest: DeleteAccessControlRulesRequest,
+    DeleteRiskSyscallEventsResponse: DeleteRiskSyscallEventsResponse,
+    OpenTcssTrialResponse: OpenTcssTrialResponse,
+    DescribeSearchExportListResponse: DescribeSearchExportListResponse,
+    CreateVulScanTaskRequest: CreateVulScanTaskRequest,
     ComplianceK8SDetailInfo: ComplianceK8SDetailInfo,
     AccessControlEventDescription: AccessControlEventDescription,
     DescribeAccessControlEventsResponse: DescribeAccessControlEventsResponse,
-    ProcessBaseInfo: ProcessBaseInfo,
+    SecLogDeliveryKafkaSettingInfo: SecLogDeliveryKafkaSettingInfo,
+    DescribeRiskSyscallWhiteListsResponse: DescribeRiskSyscallWhiteListsResponse,
+    CreateNetworkFirewallPolicyDiscoverResponse: CreateNetworkFirewallPolicyDiscoverResponse,
     ComplianceAssetDetailInfo: ComplianceAssetDetailInfo,
+    UnauthorizedCoresTendency: UnauthorizedCoresTendency,
     DescribeRiskSyscallEventsResponse: DescribeRiskSyscallEventsResponse,
+    AssetClusterListItem: AssetClusterListItem,
+    NetworkPolicyInfoItem: NetworkPolicyInfoItem,
     DescribeAssetImageRiskListResponse: DescribeAssetImageRiskListResponse,
+    CreateEmergencyVulExportJobResponse: CreateEmergencyVulExportJobResponse,
+    CreateVulDefenceEventExportJobRequest: CreateVulDefenceEventExportJobRequest,
+    DescribeNetworkFirewallPolicyListRequest: DescribeNetworkFirewallPolicyListRequest,
+    DeleteIgnoreVulRequest: DeleteIgnoreVulRequest,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
     ImageSimpleInfo: ImageSimpleInfo,
     DescribeComplianceAssetDetailInfoRequest: DescribeComplianceAssetDetailInfoRequest,
+    NetworkPeer: NetworkPeer,
+    DescribeESAggregationsResponse: DescribeESAggregationsResponse,
     CreateExportComplianceStatusListJobResponse: CreateExportComplianceStatusListJobResponse,
     DescribeAssetAppServiceListResponse: DescribeAssetAppServiceListResponse,
+    DescribeAssetSyncLastTimeRequest: DescribeAssetSyncLastTimeRequest,
+    ImageComponent: ImageComponent,
     ComplianceBenchmarkStandard: ComplianceBenchmarkStandard,
     DescribeEscapeRuleInfoResponse: DescribeEscapeRuleInfoResponse,
+    VulTendencyInfo: VulTendencyInfo,
     DescribePurchaseStateInfoRequest: DescribePurchaseStateInfoRequest,
     AddCompliancePolicyItemToWhitelistRequest: AddCompliancePolicyItemToWhitelistRequest,
     ComplianceAssetSummary: ComplianceAssetSummary,
+    AbnormalProcessEventTendencyInfo: AbnormalProcessEventTendencyInfo,
+    DescribeAssetClusterListResponse: DescribeAssetClusterListResponse,
     EscapeRule: EscapeRule,
     CompliancePeriodTask: CompliancePeriodTask,
-    RemoveAssetImageRegistryRegistryDetailResponse: RemoveAssetImageRegistryRegistryDetailResponse,
+    DescribeAssetImageRegistryRiskListExportResponse: DescribeAssetImageRegistryRiskListExportResponse,
+    SecLogAlertMsgInfo: SecLogAlertMsgInfo,
+    AutoAuthorizedImageInfo: AutoAuthorizedImageInfo,
     UpdateAssetImageRegistryRegistryDetailResponse: UpdateAssetImageRegistryRegistryDetailResponse,
+    ModifySecLogDeliveryKafkaSettingResponse: ModifySecLogDeliveryKafkaSettingResponse,
     DeleteAbnormalProcessRulesResponse: DeleteAbnormalProcessRulesResponse,
     RuleBaseInfo: RuleBaseInfo,
     ProcessInfo: ProcessInfo,
+    ImageInfo: ImageInfo,
     DescribeReverseShellDetailRequest: DescribeReverseShellDetailRequest,
     ModifyReverseShellStatusRequest: ModifyReverseShellStatusRequest,
+    DescribePublicKeyResponse: DescribePublicKeyResponse,
+    SetCheckModeRequest: SetCheckModeRequest,
     DescribeAssetImageRiskListExportRequest: DescribeAssetImageRiskListExportRequest,
     DescribeAffectedWorkloadListRequest: DescribeAffectedWorkloadListRequest,
+    DescribeVulDefenceHostRequest: DescribeVulDefenceHostRequest,
+    EmergencyVulInfo: EmergencyVulInfo,
+    ExportVirusListRequest: ExportVirusListRequest,
+    CreateWebVulExportJobRequest: CreateWebVulExportJobRequest,
+    CreateK8sApiAbnormalEventExportJobRequest: CreateK8sApiAbnormalEventExportJobRequest,
+    DescribeK8sApiAbnormalTendencyResponse: DescribeK8sApiAbnormalTendencyResponse,
+    K8sApiAbnormalEventListItem: K8sApiAbnormalEventListItem,
+    SecLogJoinInfo: SecLogJoinInfo,
+    PromotionActivityContent: PromotionActivityContent,
     DescribeAffectedClusterCountRequest: DescribeAffectedClusterCountRequest,
     DescribeAssetImageRegistryVulListExportRequest: DescribeAssetImageRegistryVulListExportRequest,
     AddEditRiskSyscallWhiteListRequest: AddEditRiskSyscallWhiteListRequest,
+    K8sApiAbnormalRuleInfo: K8sApiAbnormalRuleInfo,
     ReverseShellEventInfo: ReverseShellEventInfo,
+    DescribeSecLogJoinObjectListResponse: DescribeSecLogJoinObjectListResponse,
+    CreateSystemVulExportJobRequest: CreateSystemVulExportJobRequest,
+    DescribeVulScanInfoRequest: DescribeVulScanInfoRequest,
     DescribeRiskSyscallDetailRequest: DescribeRiskSyscallDetailRequest,
+    ScanComplianceAssetsByPolicyItemRequest: ScanComplianceAssetsByPolicyItemRequest,
     DescribeAbnormalProcessRulesRequest: DescribeAbnormalProcessRulesRequest,
     DescribeAssetImageRegistryListResponse: DescribeAssetImageRegistryListResponse,
-    ExportVirusListResponse: ExportVirusListResponse,
+    DescribeVirusAutoIsolateSampleDetailRequest: DescribeVirusAutoIsolateSampleDetailRequest,
     DescribeAssetImageVirusListResponse: DescribeAssetImageVirusListResponse,
-    DescribeImageRiskSummaryRequest: DescribeImageRiskSummaryRequest,
-    ModifyReverseShellStatusResponse: ModifyReverseShellStatusResponse,
+    DeleteComplianceAssetPolicySetFromWhitelistResponse: DeleteComplianceAssetPolicySetFromWhitelistResponse,
+    DescribeK8sApiAbnormalSummaryResponse: DescribeK8sApiAbnormalSummaryResponse,
+    DescribeSecLogJoinTypeListResponse: DescribeSecLogJoinTypeListResponse,
+    DescribeAssetSyncLastTimeResponse: DescribeAssetSyncLastTimeResponse,
     CreateAssetImageScanSettingRequest: CreateAssetImageScanSettingRequest,
+    EscapeWhiteListInfo: EscapeWhiteListInfo,
+    CreateNetworkFirewallUndoPublishResponse: CreateNetworkFirewallUndoPublishResponse,
+    DescribeIndexListResponse: DescribeIndexListResponse,
+    ModifyVulDefenceSettingRequest: ModifyVulDefenceSettingRequest,
     DescribeAssetSummaryResponse: DescribeAssetSummaryResponse,
-    DescribeImageRegistryTimingScanTaskResponse: DescribeImageRegistryTimingScanTaskResponse,
-    DescribeAssetWebServiceListRequest: DescribeAssetWebServiceListRequest,
+    CreateNetworkFirewallClusterRefreshResponse: CreateNetworkFirewallClusterRefreshResponse,
+    CreateComponentExportJobResponse: CreateComponentExportJobResponse,
+    DescribeReverseShellWhiteListsResponse: DescribeReverseShellWhiteListsResponse,
+    DescribeVulContainerListRequest: DescribeVulContainerListRequest,
+    DeleteReverseShellEventsRequest: DeleteReverseShellEventsRequest,
+    ClsLogsetInfo: ClsLogsetInfo,
     ModifyEscapeEventStatusResponse: ModifyEscapeEventStatusResponse,
     CheckRepeatAssetImageRegistryResponse: CheckRepeatAssetImageRegistryResponse,
+    VulDefenceEvent: VulDefenceEvent,
     DescribeAccessControlEventsExportRequest: DescribeAccessControlEventsExportRequest,
-    DescribeRiskSyscallDetailResponse: DescribeRiskSyscallDetailResponse,
-    ReverseShellEventDescription: ReverseShellEventDescription,
+    ExportVirusListResponse: ExportVirusListResponse,
+    DeleteReverseShellWhiteListsResponse: DeleteReverseShellWhiteListsResponse,
+    DescribeNetworkFirewallAuditRecordResponse: DescribeNetworkFirewallAuditRecordResponse,
+    DescribeSecLogCleanSettingInfoResponse: DescribeSecLogCleanSettingInfoResponse,
+    UpdateNetworkFirewallPolicyYamlDetailResponse: UpdateNetworkFirewallPolicyYamlDetailResponse,
     DescribeAssetImageBindRuleInfoResponse: DescribeAssetImageBindRuleInfoResponse,
-    ScanCompliancePolicyItemsResponse: ScanCompliancePolicyItemsResponse,
+    DescribeESHitsRequest: DescribeESHitsRequest,
+    DescribeTcssSummaryResponse: DescribeTcssSummaryResponse,
+    DeleteRiskSyscallEventsRequest: DeleteRiskSyscallEventsRequest,
     DescribeAssetContainerListRequest: DescribeAssetContainerListRequest,
     DescribeEscapeSafeStateResponse: DescribeEscapeSafeStateResponse,
+    DescribeImageRiskSummaryRequest: DescribeImageRiskSummaryRequest,
+    CreateDefenceVulExportJobResponse: CreateDefenceVulExportJobResponse,
     AbnormalProcessRuleInfo: AbnormalProcessRuleInfo,
     ScanComplianceAssetsByPolicyItemResponse: ScanComplianceAssetsByPolicyItemResponse,
+    CreateRiskDnsEventExportJobRequest: CreateRiskDnsEventExportJobRequest,
     ComplianceWhitelistItem: ComplianceWhitelistItem,
     DescribeAssetPortListRequest: DescribeAssetPortListRequest,
     DescribeComplianceTaskPolicyItemSummaryListResponse: DescribeComplianceTaskPolicyItemSummaryListResponse,
     ComplianceContainerDetailInfo: ComplianceContainerDetailInfo,
     DescribeReverseShellEventsRequest: DescribeReverseShellEventsRequest,
+    AddNetworkFirewallPolicyDetailResponse: AddNetworkFirewallPolicyDetailResponse,
+    DescribeNetworkFirewallPolicyStatusRequest: DescribeNetworkFirewallPolicyStatusRequest,
+    DescribeSecLogKafkaUINResponse: DescribeSecLogKafkaUINResponse,
     DescribeAbnormalProcessRuleDetailRequest: DescribeAbnormalProcessRuleDetailRequest,
-    SyncAssetImageRegistryAssetRequest: SyncAssetImageRegistryAssetRequest,
+    DescribeLogStorageStatisticRequest: DescribeLogStorageStatisticRequest,
+    VirusInfo: VirusInfo,
+    DescribeVulIgnoreRegistryImageListRequest: DescribeVulIgnoreRegistryImageListRequest,
+    AddEditImageAutoAuthorizedRuleResponse: AddEditImageAutoAuthorizedRuleResponse,
     ClusterCheckTaskItem: ClusterCheckTaskItem,
+    DescribeVirusAutoIsolateSampleListRequest: DescribeVirusAutoIsolateSampleListRequest,
+    ModifySecLogJoinObjectsResponse: ModifySecLogJoinObjectsResponse,
     DescribeAffectedClusterCountResponse: DescribeAffectedClusterCountResponse,
     RenewImageAuthorizeStateRequest: RenewImageAuthorizeStateRequest,
+    DescribeVirusAutoIsolateSettingRequest: DescribeVirusAutoIsolateSettingRequest,
     CreateAssetImageRegistryScanTaskOneKeyRequest: CreateAssetImageRegistryScanTaskOneKeyRequest,
+    RemoveAssetImageRegistryRegistryDetailRequest: RemoveAssetImageRegistryRegistryDetailRequest,
+    NetworkCustomPolicy: NetworkCustomPolicy,
+    DeleteNetworkFirewallPolicyDetailRequest: DeleteNetworkFirewallPolicyDetailRequest,
     ModifyEscapeEventStatusRequest: ModifyEscapeEventStatusRequest,
-    DescribeAssetImageBindRuleInfoRequest: DescribeAssetImageBindRuleInfoRequest,
+    ImagesBindRuleInfo: ImagesBindRuleInfo,
     ImageHost: ImageHost,
+    AddComplianceAssetPolicySetToWhitelistResponse: AddComplianceAssetPolicySetToWhitelistResponse,
+    DescribeUnauthorizedCoresTendencyResponse: DescribeUnauthorizedCoresTendencyResponse,
+    DescribeNetworkFirewallPolicyStatusResponse: DescribeNetworkFirewallPolicyStatusResponse,
     DescribeAssetContainerListResponse: DescribeAssetContainerListResponse,
+    ModifyContainerNetStatusRequest: ModifyContainerNetStatusRequest,
+    DescribeVulIgnoreLocalImageListRequest: DescribeVulIgnoreLocalImageListRequest,
     DescribeVirusMonitorSettingResponse: DescribeVirusMonitorSettingResponse,
+    DescribeSystemVulListRequest: DescribeSystemVulListRequest,
     DescribeContainerSecEventSummaryRequest: DescribeContainerSecEventSummaryRequest,
     DescribeAssetImageRegistrySummaryResponse: DescribeAssetImageRegistrySummaryResponse,
+    DescribeSecLogCleanSettingInfoRequest: DescribeSecLogCleanSettingInfoRequest,
+    DescribeVulScanAuthorizedImageSummaryResponse: DescribeVulScanAuthorizedImageSummaryResponse,
     DescribeImageAuthorizedInfoResponse: DescribeImageAuthorizedInfoResponse,
     DescribeAbnormalProcessEventsRequest: DescribeAbnormalProcessEventsRequest,
     ModifyAbnormalProcessRuleStatusResponse: ModifyAbnormalProcessRuleStatusResponse,
@@ -24629,49 +44988,98 @@ module.exports = {
     DescribeComplianceAssetListRequest: DescribeComplianceAssetListRequest,
     ModifyVirusScanSettingResponse: ModifyVirusScanSettingResponse,
     ImagesVul: ImagesVul,
+    DescribePromotionActivityResponse: DescribePromotionActivityResponse,
     ModifyVirusMonitorSettingRequest: ModifyVirusMonitorSettingRequest,
-    ScanComplianceAssetsByPolicyItemRequest: ScanComplianceAssetsByPolicyItemRequest,
+    ModifyEscapeWhiteListRequest: ModifyEscapeWhiteListRequest,
+    AddAndPublishNetworkFirewallPolicyDetailResponse: AddAndPublishNetworkFirewallPolicyDetailResponse,
+    DescribeSearchExportListRequest: DescribeSearchExportListRequest,
+    DescribeReverseShellWhiteListDetailRequest: DescribeReverseShellWhiteListDetailRequest,
+    AddCompliancePolicyAssetSetToWhitelistResponse: AddCompliancePolicyAssetSetToWhitelistResponse,
+    DescribeVulContainerListResponse: DescribeVulContainerListResponse,
+    DescribeRiskSyscallNamesRequest: DescribeRiskSyscallNamesRequest,
+    ModifyVulDefenceEventStatusResponse: ModifyVulDefenceEventStatusResponse,
     DescribeEscapeEventInfoResponse: DescribeEscapeEventInfoResponse,
+    DescribeK8sApiAbnormalRuleInfoResponse: DescribeK8sApiAbnormalRuleInfoResponse,
+    DescribeESHitsResponse: DescribeESHitsResponse,
+    DescribeImageRegistryTimingScanTaskResponse: DescribeImageRegistryTimingScanTaskResponse,
     ClusterInfoItem: ClusterInfoItem,
-    AddAssetImageRegistryRegistryDetailRequest: AddAssetImageRegistryRegistryDetailRequest,
+    DescribeComplianceScanFailedAssetListResponse: DescribeComplianceScanFailedAssetListResponse,
+    ModifyReverseShellStatusResponse: ModifyReverseShellStatusResponse,
+    DeleteMachineResponse: DeleteMachineResponse,
+    AddCompliancePolicyAssetSetToWhitelistRequest: AddCompliancePolicyAssetSetToWhitelistRequest,
+    DescribeEscapeWhiteListResponse: DescribeEscapeWhiteListResponse,
     DescribeAssetImageHostListRequest: DescribeAssetImageHostListRequest,
     AbnormalProcessEventInfo: AbnormalProcessEventInfo,
     DescribeCompliancePeriodTaskListResponse: DescribeCompliancePeriodTaskListResponse,
     DescribeAssetImageScanSettingRequest: DescribeAssetImageScanSettingRequest,
     AccessControlSystemChildRuleInfo: AccessControlSystemChildRuleInfo,
+    DescribeSecLogAlertMsgResponse: DescribeSecLogAlertMsgResponse,
+    DescribeInspectionReportRequest: DescribeInspectionReportRequest,
+    DescribeAgentDaemonSetCmdRequest: DescribeAgentDaemonSetCmdRequest,
+    DescribeSecLogAlertMsgRequest: DescribeSecLogAlertMsgRequest,
+    AddNetworkFirewallPolicyYamlDetailResponse: AddNetworkFirewallPolicyYamlDetailResponse,
     AccessControlEventInfo: AccessControlEventInfo,
     DescribeClusterSummaryResponse: DescribeClusterSummaryResponse,
+    DescribeSecLogDeliveryClsOptionsResponse: DescribeSecLogDeliveryClsOptionsResponse,
+    DeleteMachineRequest: DeleteMachineRequest,
+    CreateVulImageExportJobRequest: CreateVulImageExportJobRequest,
     DescribeValueAddedSrvInfoRequest: DescribeValueAddedSrvInfoRequest,
     DescribeCompliancePolicyItemAffectedSummaryResponse: DescribeCompliancePolicyItemAffectedSummaryResponse,
     ModifyRiskSyscallStatusResponse: ModifyRiskSyscallStatusResponse,
-    RunTimeEventBaseInfo: RunTimeEventBaseInfo,
-    DescribeReverseShellWhiteListsResponse: DescribeReverseShellWhiteListsResponse,
+    DescribeVulSummaryRequest: DescribeVulSummaryRequest,
+    DescribeAutoAuthorizedRuleHostResponse: DescribeAutoAuthorizedRuleHostResponse,
+    DeleteIgnoreVulResponse: DeleteIgnoreVulResponse,
     ModifyAssetImageRegistryScanStopOneKeyRequest: ModifyAssetImageRegistryScanStopOneKeyRequest,
+    DeleteSearchTemplateRequest: DeleteSearchTemplateRequest,
+    SwitchImageAutoAuthorizedRuleResponse: SwitchImageAutoAuthorizedRuleResponse,
     DescribeExportJobResultRequest: DescribeExportJobResultRequest,
-    ImageInfo: ImageInfo,
+    DescribeNetworkFirewallNamespaceLabelListRequest: DescribeNetworkFirewallNamespaceLabelListRequest,
+    DescribeK8sApiAbnormalEventListRequest: DescribeK8sApiAbnormalEventListRequest,
     DescribeAffectedWorkloadListResponse: DescribeAffectedWorkloadListResponse,
     CreateComplianceTaskResponse: CreateComplianceTaskResponse,
-    ImageRiskTendencyInfo: ImageRiskTendencyInfo,
-    ModifyAssetRequest: ModifyAssetRequest,
+    DescribeAssetImageRegistryListRequest: DescribeAssetImageRegistryListRequest,
+    VulDefencePlugin: VulDefencePlugin,
+    DescribeAbnormalProcessEventTendencyResponse: DescribeAbnormalProcessEventTendencyResponse,
+    DescribeScanIgnoreVulListRequest: DescribeScanIgnoreVulListRequest,
+    DescribeReverseShellWhiteListsRequest: DescribeReverseShellWhiteListsRequest,
+    CheckNetworkFirewallPolicyYamlRequest: CheckNetworkFirewallPolicyYamlRequest,
     DescribeRiskListRequest: DescribeRiskListRequest,
+    VulDefenceHost: VulDefenceHost,
     ModifyAccessControlStatusResponse: ModifyAccessControlStatusResponse,
-    ContainerNetwork: ContainerNetwork,
+    DeleteReverseShellWhiteListsRequest: DeleteReverseShellWhiteListsRequest,
+    DescribeEmergencyVulListResponse: DescribeEmergencyVulListResponse,
     DescribeAssetAppServiceListRequest: DescribeAssetAppServiceListRequest,
-    RemoveAssetImageRegistryRegistryDetailRequest: RemoveAssetImageRegistryRegistryDetailRequest,
+    ModifyImageAuthorizedResponse: ModifyImageAuthorizedResponse,
+    NetworkClusterInfoItem: NetworkClusterInfoItem,
+    AddEscapeWhiteListResponse: AddEscapeWhiteListResponse,
+    ModifySecLogCleanSettingInfoResponse: ModifySecLogCleanSettingInfoResponse,
+    DescribeWebVulListRequest: DescribeWebVulListRequest,
     ModifyVirusScanSettingRequest: ModifyVirusScanSettingRequest,
+    DescribeVulDefenceEventRequest: DescribeVulDefenceEventRequest,
+    DescribeVirusSummaryResponse: DescribeVirusSummaryResponse,
     DescribeAssetDBServiceListRequest: DescribeAssetDBServiceListRequest,
+    UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
     DescribeProVersionInfoResponse: DescribeProVersionInfoResponse,
     AddEditAbnormalProcessRuleResponse: AddEditAbnormalProcessRuleResponse,
-    DescribeAssetImageRegistryListRequest: DescribeAssetImageRegistryListRequest,
+    ScanComplianceScanFailedAssetsRequest: ScanComplianceScanFailedAssetsRequest,
+    ModifySecLogDeliveryClsSettingResponse: ModifySecLogDeliveryClsSettingResponse,
+    DescribeComplianceTaskAssetSummaryRequest: DescribeComplianceTaskAssetSummaryRequest,
     CreateCheckComponentResponse: CreateCheckComponentResponse,
     DescribeImageRegistryTimingScanTaskRequest: DescribeImageRegistryTimingScanTaskRequest,
     DescribeRiskSyscallWhiteListDetailResponse: DescribeRiskSyscallWhiteListDetailResponse,
-    DescribeReverseShellWhiteListsRequest: DescribeReverseShellWhiteListsRequest,
+    AddNetworkFirewallPolicyYamlDetailRequest: AddNetworkFirewallPolicyYamlDetailRequest,
+    DescribeVulLevelImageSummaryResponse: DescribeVulLevelImageSummaryResponse,
     ScanComplianceAssetsResponse: ScanComplianceAssetsResponse,
-    CreateComplianceTaskRequest: CreateComplianceTaskRequest,
+    DescribeCompliancePeriodTaskListRequest: DescribeCompliancePeriodTaskListRequest,
+    CreateAssetImageVirusExportJobResponse: CreateAssetImageVirusExportJobResponse,
+    DescribeIndexListRequest: DescribeIndexListRequest,
+    CreateWebVulExportJobResponse: CreateWebVulExportJobResponse,
     DescribeReverseShellWhiteListDetailResponse: DescribeReverseShellWhiteListDetailResponse,
+    DescribeUnauthorizedCoresTendencyRequest: DescribeUnauthorizedCoresTendencyRequest,
     DescribeAssetImageVulListExportResponse: DescribeAssetImageVulListExportResponse,
-    DescribeAssetImageRegistryRiskListExportRequest: DescribeAssetImageRegistryRiskListExportRequest,
+    VulTopRankingInfo: VulTopRankingInfo,
+    DescribeProVersionInfoRequest: DescribeProVersionInfoRequest,
+    DescribeVulLevelSummaryRequest: DescribeVulLevelSummaryRequest,
     EscapeEventDescription: EscapeEventDescription,
     DescribeAssetImageDetailResponse: DescribeAssetImageDetailResponse,
     CreateAssetImageRegistryScanTaskOneKeyResponse: CreateAssetImageRegistryScanTaskOneKeyResponse,
@@ -24681,247 +45089,479 @@ module.exports = {
     ReverseShellWhiteListBaseInfo: ReverseShellWhiteListBaseInfo,
     AccessControlRuleInfo: AccessControlRuleInfo,
     DescribeAssetHostListResponse: DescribeAssetHostListResponse,
+    DescribeABTestConfigRequest: DescribeABTestConfigRequest,
+    K8sApiAbnormalRuleScopeInfo: K8sApiAbnormalRuleScopeInfo,
+    StopVulScanTaskRequest: StopVulScanTaskRequest,
+    DescribeNetworkFirewallNamespaceListResponse: DescribeNetworkFirewallNamespaceListResponse,
     ImageRepoInfo: ImageRepoInfo,
     CreateAssetImageRegistryScanTaskResponse: CreateAssetImageRegistryScanTaskResponse,
+    DescribePublicKeyRequest: DescribePublicKeyRequest,
     PortInfo: PortInfo,
     DescribeAssetImageRegistrySummaryRequest: DescribeAssetImageRegistrySummaryRequest,
+    DescribeVirusManualScanEstimateTimeoutResponse: DescribeVirusManualScanEstimateTimeoutResponse,
     DescribeTaskResultSummaryResponse: DescribeTaskResultSummaryResponse,
     HostInfo: HostInfo,
     DescribeVirusScanTimeoutSettingRequest: DescribeVirusScanTimeoutSettingRequest,
+    ModifySecLogJoinStateResponse: ModifySecLogJoinStateResponse,
+    ModifyAccessControlRuleStatusResponse: ModifyAccessControlRuleStatusResponse,
     ModifyAssetImageScanStopRequest: ModifyAssetImageScanStopRequest,
     CreateRefreshTaskRequest: CreateRefreshTaskRequest,
+    DescribeK8sApiAbnormalEventListResponse: DescribeK8sApiAbnormalEventListResponse,
+    DescribeNewestVulRequest: DescribeNewestVulRequest,
+    DescribeAbnormalProcessLevelSummaryResponse: DescribeAbnormalProcessLevelSummaryResponse,
+    AddEscapeWhiteListRequest: AddEscapeWhiteListRequest,
+    DescribeESAggregationsRequest: DescribeESAggregationsRequest,
+    NetworkClusterPodInfo: NetworkClusterPodInfo,
     DescribeAssetImageRiskListExportResponse: DescribeAssetImageRiskListExportResponse,
+    ModifySecLogCleanSettingInfoRequest: ModifySecLogCleanSettingInfoRequest,
     DescribeAccessControlEventsRequest: DescribeAccessControlEventsRequest,
     DescribeAccessControlRuleDetailRequest: DescribeAccessControlRuleDetailRequest,
-    ExportVirusListRequest: ExportVirusListRequest,
+    ModifyVirusScanTimeoutSettingRequest: ModifyVirusScanTimeoutSettingRequest,
+    CreateProcessEventsExportJobResponse: CreateProcessEventsExportJobResponse,
     ImageRiskInfo: ImageRiskInfo,
-    DeleteReverseShellWhiteListsResponse: DeleteReverseShellWhiteListsResponse,
+    DescribeRiskSyscallDetailResponse: DescribeRiskSyscallDetailResponse,
+    DeleteK8sApiAbnormalRuleResponse: DeleteK8sApiAbnormalRuleResponse,
     ComplianceHostDetailInfo: ComplianceHostDetailInfo,
+    VulAffectedImageComponentInfo: VulAffectedImageComponentInfo,
+    DescribePromotionActivityRequest: DescribePromotionActivityRequest,
     AccessControlChildRuleInfo: AccessControlChildRuleInfo,
+    DescribeSecLogKafkaUINRequest: DescribeSecLogKafkaUINRequest,
+    CreateSystemVulExportJobResponse: CreateSystemVulExportJobResponse,
     DescribeRiskSyscallNamesResponse: DescribeRiskSyscallNamesResponse,
     AddEditReverseShellWhiteListResponse: AddEditReverseShellWhiteListResponse,
     DescribeAbnormalProcessEventsResponse: DescribeAbnormalProcessEventsResponse,
     InitializeUserComplianceEnvironmentResponse: InitializeUserComplianceEnvironmentResponse,
-    SetCheckModeRequest: SetCheckModeRequest,
+    ReverseShellEventDescription: ReverseShellEventDescription,
+    DescribeImageRegistryNamespaceListResponse: DescribeImageRegistryNamespaceListResponse,
+    VulAffectedImageInfo: VulAffectedImageInfo,
+    TagInfo: TagInfo,
+    DescribeK8sApiAbnormalRuleListResponse: DescribeK8sApiAbnormalRuleListResponse,
+    DeleteCompliancePolicyAssetSetFromWhitelistResponse: DeleteCompliancePolicyAssetSetFromWhitelistResponse,
     DescribeVirusTaskListResponse: DescribeVirusTaskListResponse,
     DescribeAssetHostDetailResponse: DescribeAssetHostDetailResponse,
+    CKafkaInstanceInfo: CKafkaInstanceInfo,
     DescribeAffectedNodeListResponse: DescribeAffectedNodeListResponse,
-    DescribeClusterSummaryRequest: DescribeClusterSummaryRequest,
+    DeleteK8sApiAbnormalRuleRequest: DeleteK8sApiAbnormalRuleRequest,
+    ModifyVirusFileStatusResponse: ModifyVirusFileStatusResponse,
     DescribeAbnormalProcessRulesExportResponse: DescribeAbnormalProcessRulesExportResponse,
+    SyncAssetImageRegistryAssetResponse: SyncAssetImageRegistryAssetResponse,
+    DescribeAbnormalProcessEventTendencyRequest: DescribeAbnormalProcessEventTendencyRequest,
     DescribeEscapeEventDetailResponse: DescribeEscapeEventDetailResponse,
+    ScanCompliancePolicyItemsResponse: ScanCompliancePolicyItemsResponse,
     DeleteAccessControlRulesResponse: DeleteAccessControlRulesResponse,
-    RenewImageAuthorizeStateResponse: RenewImageAuthorizeStateResponse,
+    DescribeVulImageSummaryResponse: DescribeVulImageSummaryResponse,
     DescribeEscapeRuleInfoRequest: DescribeEscapeRuleInfoRequest,
+    VirusTendencyInfo: VirusTendencyInfo,
     DescribeComplianceWhitelistItemListResponse: DescribeComplianceWhitelistItemListResponse,
-    DescribeVirusSummaryResponse: DescribeVirusSummaryResponse,
+    DescribeAssetWebServiceListRequest: DescribeAssetWebServiceListRequest,
     UpdateImageRegistryTimingScanTaskRequest: UpdateImageRegistryTimingScanTaskRequest,
-    DescribeSecEventsTendencyRequest: DescribeSecEventsTendencyRequest,
-    DescribeContainerSecEventSummaryResponse: DescribeContainerSecEventSummaryResponse,
+    DescribeEscapeEventTendencyRequest: DescribeEscapeEventTendencyRequest,
+    DescribeInspectionReportResponse: DescribeInspectionReportResponse,
+    SecLogDeliveryClsSettingInfo: SecLogDeliveryClsSettingInfo,
+    DescribeVirusScanTaskStatusRequest: DescribeVirusScanTaskStatusRequest,
+    CreateAssetImageScanSettingResponse: CreateAssetImageScanSettingResponse,
+    DescribeVulDefenceEventDetailRequest: DescribeVulDefenceEventDetailRequest,
+    DescribeVirusAutoIsolateSampleListResponse: DescribeVirusAutoIsolateSampleListResponse,
+    DescribeVirusEventTendencyRequest: DescribeVirusEventTendencyRequest,
+    DescribeAssetImageRegistryVulListExportResponse: DescribeAssetImageRegistryVulListExportResponse,
+    StopVirusScanTaskRequest: StopVirusScanTaskRequest,
     DescribeAssetContainerDetailRequest: DescribeAssetContainerDetailRequest,
     ModifyAccessControlStatusRequest: ModifyAccessControlStatusRequest,
-    ScanComplianceScanFailedAssetsRequest: ScanComplianceScanFailedAssetsRequest,
+    CreateProcessEventsExportJobRequest: CreateProcessEventsExportJobRequest,
+    DescribeVulDetailResponse: DescribeVulDetailResponse,
     ModifyCompliancePeriodTaskResponse: ModifyCompliancePeriodTaskResponse,
     RiskSyscallEventInfo: RiskSyscallEventInfo,
+    DescribeEscapeEventTendencyResponse: DescribeEscapeEventTendencyResponse,
     ClusterCheckItem: ClusterCheckItem,
     DescribeAssetImageVulListResponse: DescribeAssetImageVulListResponse,
-    ImageVul: ImageVul,
+    DescribeK8sApiAbnormalSummaryRequest: DescribeK8sApiAbnormalSummaryRequest,
+    DescribeAbnormalProcessLevelSummaryRequest: DescribeAbnormalProcessLevelSummaryRequest,
     AssetFilters: AssetFilters,
+    ModifyK8sApiAbnormalRuleStatusRequest: ModifyK8sApiAbnormalRuleStatusRequest,
+    DescribeNetworkFirewallPolicyDetailResponse: DescribeNetworkFirewallPolicyDetailResponse,
     DescribePostPayDetailResponse: DescribePostPayDetailResponse,
+    DescribeK8sApiAbnormalEventInfoResponse: DescribeK8sApiAbnormalEventInfoResponse,
+    DescribeNetworkFirewallPodLabelsListResponse: DescribeNetworkFirewallPodLabelsListResponse,
+    VulAffectedComponentInfo: VulAffectedComponentInfo,
     DescribeAssetImageScanStatusRequest: DescribeAssetImageScanStatusRequest,
     DescribeCheckItemListResponse: DescribeCheckItemListResponse,
     ComplianceScanFailedAsset: ComplianceScanFailedAsset,
     ScanComplianceAssetsRequest: ScanComplianceAssetsRequest,
     DescribeAbnormalProcessRuleDetailResponse: DescribeAbnormalProcessRuleDetailResponse,
     ModifyVirusFileStatusRequest: ModifyVirusFileStatusRequest,
+    CreateVulContainerExportJobResponse: CreateVulContainerExportJobResponse,
     DescribeAssetImageRegistryListExportRequest: DescribeAssetImageRegistryListExportRequest,
-    DescribeAssetImageRegistryRiskListExportResponse: DescribeAssetImageRegistryRiskListExportResponse,
+    CreateK8sApiAbnormalRuleInfoResponse: CreateK8sApiAbnormalRuleInfoResponse,
+    ProcessBaseInfo: ProcessBaseInfo,
     ModifyEscapeRuleRequest: ModifyEscapeRuleRequest,
+    K8sApiAbnormalTendencyItem: K8sApiAbnormalTendencyItem,
     DescribeAbnormalProcessRulesResponse: DescribeAbnormalProcessRulesResponse,
+    ModifyVulDefenceSettingResponse: ModifyVulDefenceSettingResponse,
+    SupportDefenceVul: SupportDefenceVul,
     DescribeCheckItemListRequest: DescribeCheckItemListRequest,
+    DescribeImageComponentListResponse: DescribeImageComponentListResponse,
+    CreateAbnormalProcessRulesExportJobResponse: CreateAbnormalProcessRulesExportJobResponse,
+    DescribeSecLogDeliveryKafkaOptionsRequest: DescribeSecLogDeliveryKafkaOptionsRequest,
     DescribeVirusScanSettingResponse: DescribeVirusScanSettingResponse,
     DescribeAccessControlRuleDetailResponse: DescribeAccessControlRuleDetailResponse,
+    CreateNetworkFirewallPublishRequest: CreateNetworkFirewallPublishRequest,
+    CreateHostExportJobResponse: CreateHostExportJobResponse,
+    DescribeNetworkFirewallPolicyDiscoverRequest: DescribeNetworkFirewallPolicyDiscoverRequest,
+    DescribeNetworkFirewallPolicyYamlDetailResponse: DescribeNetworkFirewallPolicyYamlDetailResponse,
     CreateOrModifyPostPayCoresRequest: CreateOrModifyPostPayCoresRequest,
+    ModifyImageAuthorizedRequest: ModifyImageAuthorizedRequest,
     DescribeAssetImageScanTaskRequest: DescribeAssetImageScanTaskRequest,
-    DescribeValueAddedSrvInfoResponse: DescribeValueAddedSrvInfoResponse,
+    DescribeSecLogDeliveryClsSettingRequest: DescribeSecLogDeliveryClsSettingRequest,
+    UpdateNetworkFirewallPolicyDetailResponse: UpdateNetworkFirewallPolicyDetailResponse,
+    ModifySecLogKafkaUINResponse: ModifySecLogKafkaUINResponse,
+    DescribeNetworkFirewallPodLabelsListRequest: DescribeNetworkFirewallPodLabelsListRequest,
     CreateVirusScanTaskResponse: CreateVirusScanTaskResponse,
+    DescribeNetworkFirewallAuditRecordRequest: DescribeNetworkFirewallAuditRecordRequest,
     DescribeAssetProcessListRequest: DescribeAssetProcessListRequest,
     DescribeAssetProcessListResponse: DescribeAssetProcessListResponse,
     EscapeEventInfo: EscapeEventInfo,
     ModifyVirusScanTimeoutSettingResponse: ModifyVirusScanTimeoutSettingResponse,
+    CreateAssetImageVirusExportJobRequest: CreateAssetImageVirusExportJobRequest,
     DescribeAssetImageRegistryDetailRequest: DescribeAssetImageRegistryDetailRequest,
     CreateAssetImageRegistryScanTaskRequest: CreateAssetImageRegistryScanTaskRequest,
+    DescribeAssetClusterListRequest: DescribeAssetClusterListRequest,
     DescribeAssetImageListExportResponse: DescribeAssetImageListExportResponse,
+    WarningRule: WarningRule,
+    VulAffectedContainerInfo: VulAffectedContainerInfo,
+    DescribeLogStorageStatisticResponse: DescribeLogStorageStatisticResponse,
+    CreateSearchTemplateResponse: CreateSearchTemplateResponse,
     DescribeAssetContainerDetailResponse: DescribeAssetContainerDetailResponse,
+    DescribeVulDefenceSettingResponse: DescribeVulDefenceSettingResponse,
+    DescribeImageComponentListRequest: DescribeImageComponentListRequest,
     AbnormalProcessChildRuleInfo: AbnormalProcessChildRuleInfo,
-    ScanComplianceScanFailedAssetsResponse: ScanComplianceScanFailedAssetsResponse,
+    DescribeNetworkFirewallPolicyListResponse: DescribeNetworkFirewallPolicyListResponse,
+    DescribeAgentInstallCommandRequest: DescribeAgentInstallCommandRequest,
+    ResetSecLogTopicConfigRequest: ResetSecLogTopicConfigRequest,
     DescribeAssetImageVirusListExportResponse: DescribeAssetImageVirusListExportResponse,
+    DescribeVirusScanSettingRequest: DescribeVirusScanSettingRequest,
     SecTendencyEventInfo: SecTendencyEventInfo,
+    CreateAccessControlsRuleExportJobRequest: CreateAccessControlsRuleExportJobRequest,
+    VirusAutoIsolateSampleInfo: VirusAutoIsolateSampleInfo,
+    DescribeExportJobDownloadURLRequest: DescribeExportJobDownloadURLRequest,
+    DescribeImageAutoAuthorizedRuleRequest: DescribeImageAutoAuthorizedRuleRequest,
+    DescribeVulIgnoreRegistryImageListResponse: DescribeVulIgnoreRegistryImageListResponse,
+    UpdateAndPublishNetworkFirewallPolicyDetailRequest: UpdateAndPublishNetworkFirewallPolicyDetailRequest,
     DescribeAssetPortListResponse: DescribeAssetPortListResponse,
     DescribeRefreshTaskRequest: DescribeRefreshTaskRequest,
     CreateClusterCheckTaskResponse: CreateClusterCheckTaskResponse,
+    ClsTopicInfo: ClsTopicInfo,
     DescribeCompliancePolicyItemAffectedAssetListRequest: DescribeCompliancePolicyItemAffectedAssetListRequest,
     DescribeImageRiskTendencyRequest: DescribeImageRiskTendencyRequest,
     CreateOrModifyPostPayCoresResponse: CreateOrModifyPostPayCoresResponse,
     ComplianceAffectedAsset: ComplianceAffectedAsset,
     DescribeVirusMonitorSettingRequest: DescribeVirusMonitorSettingRequest,
     DescribeAssetImageHostListResponse: DescribeAssetImageHostListResponse,
+    ModifySecLogKafkaUINRequest: ModifySecLogKafkaUINRequest,
+    ModifyVirusAutoIsolateSettingRequest: ModifyVirusAutoIsolateSettingRequest,
+    DescribeNetworkFirewallClusterListResponse: DescribeNetworkFirewallClusterListResponse,
+    EscapeEventTendencyInfo: EscapeEventTendencyInfo,
     DescribeImageRiskTendencyResponse: DescribeImageRiskTendencyResponse,
+    CompliancePolicyAssetSetItem: CompliancePolicyAssetSetItem,
+    SyncAssetImageRegistryAssetRequest: SyncAssetImageRegistryAssetRequest,
     DescribeComplianceScanFailedAssetListRequest: DescribeComplianceScanFailedAssetListRequest,
+    DescribeSearchLogsRequest: DescribeSearchLogsRequest,
+    DescribeEscapeEventTypeSummaryResponse: DescribeEscapeEventTypeSummaryResponse,
     DescribeAssetImageRegistryVulListRequest: DescribeAssetImageRegistryVulListRequest,
     DescribeImageSimpleListResponse: DescribeImageSimpleListResponse,
-    DescribeVirusScanSettingRequest: DescribeVirusScanSettingRequest,
+    CreateAbnormalProcessRulesExportJobRequest: CreateAbnormalProcessRulesExportJobRequest,
+    CreateK8sApiAbnormalEventExportJobResponse: CreateK8sApiAbnormalEventExportJobResponse,
     DescribeUserClusterResponse: DescribeUserClusterResponse,
     DescribeAssetImageRegistryRegistryListRequest: DescribeAssetImageRegistryRegistryListRequest,
+    DescribeVulDefenceHostResponse: DescribeVulDefenceHostResponse,
+    CreateImageExportJobRequest: CreateImageExportJobRequest,
+    CreateEmergencyVulExportJobRequest: CreateEmergencyVulExportJobRequest,
+    K8sApiAbnormalRuleListItem: K8sApiAbnormalRuleListItem,
     DescribeVirusScanTaskStatusResponse: DescribeVirusScanTaskStatusResponse,
     DescribeEscapeEventsExportResponse: DescribeEscapeEventsExportResponse,
     ComplianceImageDetailInfo: ComplianceImageDetailInfo,
+    DescribeVulScanLocalImageListResponse: DescribeVulScanLocalImageListResponse,
     DescribeComplianceWhitelistItemListRequest: DescribeComplianceWhitelistItemListRequest,
     DescribeAccessControlDetailRequest: DescribeAccessControlDetailRequest,
     ClusterRiskItem: ClusterRiskItem,
     DescribeVirusListResponse: DescribeVirusListResponse,
     DescribeAbnormalProcessEventsExportRequest: DescribeAbnormalProcessEventsExportRequest,
+    DescribeVulSummaryResponse: DescribeVulSummaryResponse,
     DescribeAssetComponentListRequest: DescribeAssetComponentListRequest,
-    DescribeUserClusterRequest: DescribeUserClusterRequest,
+    DescribeEmergencyVulListRequest: DescribeEmergencyVulListRequest,
+    DeleteReverseShellEventsResponse: DeleteReverseShellEventsResponse,
     DescribeAbnormalProcessDetailResponse: DescribeAbnormalProcessDetailResponse,
     DescribeAssetImageListExportRequest: DescribeAssetImageListExportRequest,
     ModifyAssetImageRegistryScanStopOneKeyResponse: ModifyAssetImageRegistryScanStopOneKeyResponse,
-    DescribeRiskSyscallNamesRequest: DescribeRiskSyscallNamesRequest,
-    SoftQuotaDayInfo: SoftQuotaDayInfo,
+    VulDefenceEventDetail: VulDefenceEventDetail,
+    UpdateNetworkFirewallPolicyYamlDetailRequest: UpdateNetworkFirewallPolicyYamlDetailRequest,
+    DescribeK8sApiAbnormalRuleInfoRequest: DescribeK8sApiAbnormalRuleInfoRequest,
+    RunTimeEventBaseInfo: RunTimeEventBaseInfo,
+    DescribeSystemVulListResponse: DescribeSystemVulListResponse,
+    ModifyIgnoreVul: ModifyIgnoreVul,
     DescribeAssetImageRegistryVirusListResponse: DescribeAssetImageRegistryVirusListResponse,
     DescribeAssetImageSimpleListRequest: DescribeAssetImageSimpleListRequest,
     DescribeAssetDBServiceListResponse: DescribeAssetDBServiceListResponse,
+    DescribeSecLogJoinTypeListRequest: DescribeSecLogJoinTypeListRequest,
     DescribeImageSimpleListRequest: DescribeImageSimpleListRequest,
+    CreateNetworkFirewallPolicyDiscoverRequest: CreateNetworkFirewallPolicyDiscoverRequest,
+    ImageRiskTendencyInfo: ImageRiskTendencyInfo,
+    DescribeVulTopRankingResponse: DescribeVulTopRankingResponse,
     DescribeAssetWebServiceListResponse: DescribeAssetWebServiceListResponse,
+    VulDetailInfo: VulDetailInfo,
+    DescribeVulLevelSummaryResponse: DescribeVulLevelSummaryResponse,
+    AddNetworkFirewallPolicyDetailRequest: AddNetworkFirewallPolicyDetailRequest,
     DescribeComplianceTaskPolicyItemSummaryListRequest: DescribeComplianceTaskPolicyItemSummaryListRequest,
     CompliancePolicyItemSummary: CompliancePolicyItemSummary,
     DescribeAssetImageVulListRequest: DescribeAssetImageVulListRequest,
     ModifyRiskSyscallStatusRequest: ModifyRiskSyscallStatusRequest,
+    DescribeVulDefenceEventResponse: DescribeVulDefenceEventResponse,
+    DescribeVirusEventTendencyResponse: DescribeVirusEventTendencyResponse,
+    AddEditImageAutoAuthorizedRuleRequest: AddEditImageAutoAuthorizedRuleRequest,
+    SwitchImageAutoAuthorizedRuleRequest: SwitchImageAutoAuthorizedRuleRequest,
+    DescribeVirusSampleDownloadUrlResponse: DescribeVirusSampleDownloadUrlResponse,
+    DescribeValueAddedSrvInfoResponse: DescribeValueAddedSrvInfoResponse,
     RunTimeRiskInfo: RunTimeRiskInfo,
     CreateVirusScanTaskRequest: CreateVirusScanTaskRequest,
+    DescribeAbnormalProcessDetailRequest: DescribeAbnormalProcessDetailRequest,
     DescribeAssetImageScanTaskResponse: DescribeAssetImageScanTaskResponse,
     AddEditAccessControlRuleRequest: AddEditAccessControlRuleRequest,
+    DescribeVulTopRankingRequest: DescribeVulTopRankingRequest,
+    ConfirmNetworkFirewallPolicyRequest: ConfirmNetworkFirewallPolicyRequest,
     ContainerMount: ContainerMount,
+    DeleteSearchTemplateResponse: DeleteSearchTemplateResponse,
+    AddComplianceAssetPolicySetToWhitelistRequest: AddComplianceAssetPolicySetToWhitelistRequest,
+    DescribeVirusAutoIsolateSampleDownloadURLResponse: DescribeVirusAutoIsolateSampleDownloadURLResponse,
+    DescribeSecLogVasInfoRequest: DescribeSecLogVasInfoRequest,
+    DescribeNetworkFirewallPolicyDiscoverResponse: DescribeNetworkFirewallPolicyDiscoverResponse,
     DescribeAssetImageSimpleListResponse: DescribeAssetImageSimpleListResponse,
     DescribeComplianceAssetPolicyItemListResponse: DescribeComplianceAssetPolicyItemListResponse,
     ComplianceFilters: ComplianceFilters,
+    ImageVirusInfo: ImageVirusInfo,
+    StopVulScanTaskResponse: StopVulScanTaskResponse,
+    ModifyEscapeWhiteListResponse: ModifyEscapeWhiteListResponse,
+    NetworkClusterNamespaceLabelInfo: NetworkClusterNamespaceLabelInfo,
     ImagesInfo: ImagesInfo,
+    ModifyVirusAutoIsolateExampleSwitchRequest: ModifyVirusAutoIsolateExampleSwitchRequest,
+    ImageVirus: ImageVirus,
+    ModifySecLogDeliveryKafkaSettingRequest: ModifySecLogDeliveryKafkaSettingRequest,
     DescribeReverseShellEventsExportRequest: DescribeReverseShellEventsExportRequest,
-    WarningRule: WarningRule,
+    ModifyK8sApiAbnormalEventStatusRequest: ModifyK8sApiAbnormalEventStatusRequest,
+    ModifySecLogJoinObjectsRequest: ModifySecLogJoinObjectsRequest,
+    DescribeK8sApiAbnormalRuleListRequest: DescribeK8sApiAbnormalRuleListRequest,
     DescribeAccessControlDetailResponse: DescribeAccessControlDetailResponse,
+    CreateImageExportJobResponse: CreateImageExportJobResponse,
+    ProjectInfo: ProjectInfo,
     DescribeAffectedNodeListRequest: DescribeAffectedNodeListRequest,
     DescribeAssetImageRegistryAssetStatusResponse: DescribeAssetImageRegistryAssetStatusResponse,
-    DeleteReverseShellWhiteListsRequest: DeleteReverseShellWhiteListsRequest,
+    ContainerNetwork: ContainerNetwork,
+    DescribeSecLogDeliveryKafkaSettingResponse: DescribeSecLogDeliveryKafkaSettingResponse,
+    CreateHostExportJobRequest: CreateHostExportJobRequest,
     AddEditRiskSyscallWhiteListResponse: AddEditRiskSyscallWhiteListResponse,
+    DescribeVirusAutoIsolateSampleDownloadURLRequest: DescribeVirusAutoIsolateSampleDownloadURLRequest,
     ModifyAbnormalProcessStatusRequest: ModifyAbnormalProcessStatusRequest,
-    ModifyAccessControlRuleStatusResponse: ModifyAccessControlRuleStatusResponse,
+    DescribeVulDetailRequest: DescribeVulDetailRequest,
+    CreateEscapeWhiteListExportJobRequest: CreateEscapeWhiteListExportJobRequest,
+    DescribeSecLogJoinObjectListRequest: DescribeSecLogJoinObjectListRequest,
     ImageRisk: ImageRisk,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     ComplianceAssetPolicyItem: ComplianceAssetPolicyItem,
     InitializeUserComplianceEnvironmentRequest: InitializeUserComplianceEnvironmentRequest,
+    DescribeSupportDefenceVulResponse: DescribeSupportDefenceVulResponse,
     DescribeAssetImageRiskListRequest: DescribeAssetImageRiskListRequest,
     DescribeEscapeSafeStateRequest: DescribeEscapeSafeStateRequest,
-    StopVirusScanTaskRequest: StopVirusScanTaskRequest,
+    NetworkPorts: NetworkPorts,
+    CreateVulScanTaskResponse: CreateVulScanTaskResponse,
+    DescribeTcssSummaryRequest: DescribeTcssSummaryRequest,
+    ModifyContainerNetStatusResponse: ModifyContainerNetStatusResponse,
     DescribeEscapeEventDetailRequest: DescribeEscapeEventDetailRequest,
+    DescribeSupportDefenceVulRequest: DescribeSupportDefenceVulRequest,
+    DeleteCompliancePolicyAssetSetFromWhitelistRequest: DeleteCompliancePolicyAssetSetFromWhitelistRequest,
+    DescribeExportJobManageListRequest: DescribeExportJobManageListRequest,
     DescribeVirusSummaryRequest: DescribeVirusSummaryRequest,
+    DescribeNetworkFirewallPolicyYamlDetailRequest: DescribeNetworkFirewallPolicyYamlDetailRequest,
+    ModifySecLogJoinStateRequest: ModifySecLogJoinStateRequest,
+    ABTestConfig: ABTestConfig,
     RiskSyscallWhiteListBaseInfo: RiskSyscallWhiteListBaseInfo,
     DeleteAbnormalProcessRulesRequest: DeleteAbnormalProcessRulesRequest,
+    CreateNetworkFirewallClusterRefreshRequest: CreateNetworkFirewallClusterRefreshRequest,
     ModifyCompliancePeriodTaskRequest: ModifyCompliancePeriodTaskRequest,
+    DescribeNetworkFirewallNamespaceListRequest: DescribeNetworkFirewallNamespaceListRequest,
     DescribeRiskSyscallEventsRequest: DescribeRiskSyscallEventsRequest,
     DescribeRiskListResponse: DescribeRiskListResponse,
+    ModifyAssetRequest: ModifyAssetRequest,
+    RegionInfo: RegionInfo,
+    DescribeEscapeWhiteListRequest: DescribeEscapeWhiteListRequest,
+    DescribeVirusManualScanEstimateTimeoutRequest: DescribeVirusManualScanEstimateTimeoutRequest,
     ComponentInfo: ComponentInfo,
+    ConfirmNetworkFirewallPolicyResponse: ConfirmNetworkFirewallPolicyResponse,
+    CreateNetworkFirewallPublishResponse: CreateNetworkFirewallPublishResponse,
     DescribeAssetSummaryRequest: DescribeAssetSummaryRequest,
     CreateClusterCheckTaskRequest: CreateClusterCheckTaskRequest,
-    DescribeAbnormalProcessDetailRequest: DescribeAbnormalProcessDetailRequest,
+    RaspInfo: RaspInfo,
+    DescribeNetworkFirewallClusterListRequest: DescribeNetworkFirewallClusterListRequest,
+    CreateVulDefenceEventExportJobResponse: CreateVulDefenceEventExportJobResponse,
+    AutoAuthorizedRuleHostInfo: AutoAuthorizedRuleHostInfo,
     CreateExportComplianceStatusListJobRequest: CreateExportComplianceStatusListJobRequest,
-    ImageVirus: ImageVirus,
+    DescribeImageAutoAuthorizedTaskListRequest: DescribeImageAutoAuthorizedTaskListRequest,
+    DescribeVirusSampleDownloadUrlRequest: DescribeVirusSampleDownloadUrlRequest,
+    AddAndPublishNetworkFirewallPolicyYamlDetailResponse: AddAndPublishNetworkFirewallPolicyYamlDetailResponse,
+    AddAndPublishNetworkFirewallPolicyDetailRequest: AddAndPublishNetworkFirewallPolicyDetailRequest,
     DescribeEscapeEventInfoRequest: DescribeEscapeEventInfoRequest,
+    UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse,
+    DescribeExportJobManageListResponse: DescribeExportJobManageListResponse,
     DescribeRiskSyscallEventsExportResponse: DescribeRiskSyscallEventsExportResponse,
-    ContainerInfo: ContainerInfo,
+    DescribeUnfinishRefreshTaskRequest: DescribeUnfinishRefreshTaskRequest,
     DescribeAssetImageRegistryRiskInfoListRequest: DescribeAssetImageRegistryRiskInfoListRequest,
+    DescribeImageRegistryNamespaceListRequest: DescribeImageRegistryNamespaceListRequest,
     DescribeAssetImageRegistryScanStatusOneKeyRequest: DescribeAssetImageRegistryScanStatusOneKeyRequest,
     ModifyAccessControlRuleStatusRequest: ModifyAccessControlRuleStatusRequest,
+    DescribeVulScanAuthorizedImageSummaryRequest: DescribeVulScanAuthorizedImageSummaryRequest,
     DescribeWarningRulesRequest: DescribeWarningRulesRequest,
     RunTimeTendencyInfo: RunTimeTendencyInfo,
     DescribeContainerAssetSummaryRequest: DescribeContainerAssetSummaryRequest,
+    CkafkaRouteInfo: CkafkaRouteInfo,
     ComponentsInfo: ComponentsInfo,
+    DescribeImageAutoAuthorizedLogListResponse: DescribeImageAutoAuthorizedLogListResponse,
+    DeleteComplianceAssetPolicySetFromWhitelistRequest: DeleteComplianceAssetPolicySetFromWhitelistRequest,
     DeleteRiskSyscallWhiteListsResponse: DeleteRiskSyscallWhiteListsResponse,
     DescribeAssetImageVirusListRequest: DescribeAssetImageVirusListRequest,
     DescribeAssetImageScanSettingResponse: DescribeAssetImageScanSettingResponse,
     DescribeReverseShellDetailResponse: DescribeReverseShellDetailResponse,
+    DescribeClusterSummaryRequest: DescribeClusterSummaryRequest,
+    AddIgnoreVulRequest: AddIgnoreVulRequest,
+    CreateEscapeWhiteListExportJobResponse: CreateEscapeWhiteListExportJobResponse,
     DescribeAccessControlRulesExportResponse: DescribeAccessControlRulesExportResponse,
     ModifyAbnormalProcessStatusResponse: ModifyAbnormalProcessStatusResponse,
     DescribeAbnormalProcessEventsExportResponse: DescribeAbnormalProcessEventsExportResponse,
+    ExportJobInfo: ExportJobInfo,
     DescribeContainerAssetSummaryResponse: DescribeContainerAssetSummaryResponse,
     CreateAssetImageScanTaskRequest: CreateAssetImageScanTaskRequest,
+    CreateSearchTemplateRequest: CreateSearchTemplateRequest,
     DescribeEscapeEventsExportRequest: DescribeEscapeEventsExportRequest,
-    DescribeImageRiskSummaryResponse: DescribeImageRiskSummaryResponse,
+    AddEditAbnormalProcessRuleRequest: AddEditAbnormalProcessRuleRequest,
     CheckRepeatAssetImageRegistryRequest: CheckRepeatAssetImageRegistryRequest,
     AffectedNodeItem: AffectedNodeItem,
     CreateCheckComponentRequest: CreateCheckComponentRequest,
+    DescribeAgentInstallCommandResponse: DescribeAgentInstallCommandResponse,
     DeleteRiskSyscallWhiteListsRequest: DeleteRiskSyscallWhiteListsRequest,
+    ModifyK8sApiAbnormalRuleStatusResponse: ModifyK8sApiAbnormalRuleStatusResponse,
     DescribeImageAuthorizedInfoRequest: DescribeImageAuthorizedInfoRequest,
+    DescribeExportJobDownloadURLResponse: DescribeExportJobDownloadURLResponse,
     DescribeAssetImageRegistryRiskInfoListResponse: DescribeAssetImageRegistryRiskInfoListResponse,
+    DescribeVulIgnoreLocalImageListResponse: DescribeVulIgnoreLocalImageListResponse,
     DescribeAssetImageRegistryDetailResponse: DescribeAssetImageRegistryDetailResponse,
     AddCompliancePolicyItemToWhitelistResponse: AddCompliancePolicyItemToWhitelistResponse,
+    ComplianceAssetPolicySetItem: ComplianceAssetPolicySetItem,
     DescribeAccessControlRulesRequest: DescribeAccessControlRulesRequest,
     StopVirusScanTaskResponse: StopVirusScanTaskResponse,
+    K8sApiAbnormalEventInfo: K8sApiAbnormalEventInfo,
+    DescribeVulDefenceEventTendencyResponse: DescribeVulDefenceEventTendencyResponse,
+    CreateK8sApiAbnormalRuleInfoRequest: CreateK8sApiAbnormalRuleInfoRequest,
+    CreateK8sApiAbnormalRuleExportJobResponse: CreateK8sApiAbnormalRuleExportJobResponse,
+    RenewImageAuthorizeStateResponse: RenewImageAuthorizeStateResponse,
+    ImageAutoAuthorizedTask: ImageAutoAuthorizedTask,
     AddEditWarningRulesRequest: AddEditWarningRulesRequest,
+    DescribeSearchLogsResponse: DescribeSearchLogsResponse,
     ModifyAssetResponse: ModifyAssetResponse,
+    NetworkClusterNamespaceInfo: NetworkClusterNamespaceInfo,
     DescribeReverseShellEventsExportResponse: DescribeReverseShellEventsExportResponse,
-    ImagesBindRuleInfo: ImagesBindRuleInfo,
+    DescribeAssetImageBindRuleInfoRequest: DescribeAssetImageBindRuleInfoRequest,
     DescribeAssetImageListResponse: DescribeAssetImageListResponse,
+    DescribeVulDefenceEventDetailResponse: DescribeVulDefenceEventDetailResponse,
     ComplianceAssetInfo: ComplianceAssetInfo,
     DescribeAssetImageRegistryVirusListRequest: DescribeAssetImageRegistryVirusListRequest,
-    DescribeReverseShellWhiteListDetailRequest: DescribeReverseShellWhiteListDetailRequest,
+    CreateEscapeEventsExportJobRequest: CreateEscapeEventsExportJobRequest,
     ModifyVirusMonitorSettingResponse: ModifyVirusMonitorSettingResponse,
+    CheckNetworkFirewallPolicyYamlResponse: CheckNetworkFirewallPolicyYamlResponse,
     DescribeComplianceTaskAssetSummaryResponse: DescribeComplianceTaskAssetSummaryResponse,
     DescribeWarningRulesResponse: DescribeWarningRulesResponse,
+    DescribeUserClusterRequest: DescribeUserClusterRequest,
+    DescribeNetworkFirewallClusterRefreshStatusResponse: DescribeNetworkFirewallClusterRefreshStatusResponse,
     VirusTaskInfo: VirusTaskInfo,
     AffectedWorkloadItem: AffectedWorkloadItem,
-    DescribeCompliancePeriodTaskListRequest: DescribeCompliancePeriodTaskListRequest,
+    AddAndPublishNetworkFirewallPolicyYamlDetailRequest: AddAndPublishNetworkFirewallPolicyYamlDetailRequest,
+    CreateComplianceTaskRequest: CreateComplianceTaskRequest,
     DescribeAccessControlRulesExportRequest: DescribeAccessControlRulesExportRequest,
+    OpenTcssTrialRequest: OpenTcssTrialRequest,
+    CreateEscapeEventsExportJobResponse: CreateEscapeEventsExportJobResponse,
     RiskSyscallEventDescription: RiskSyscallEventDescription,
+    DescribeImageAutoAuthorizedRuleResponse: DescribeImageAutoAuthorizedRuleResponse,
     AddEditWarningRulesResponse: AddEditWarningRulesResponse,
+    DescribeVulDefenceSettingRequest: DescribeVulDefenceSettingRequest,
+    DescribeVirusAutoIsolateSettingResponse: DescribeVirusAutoIsolateSettingResponse,
+    VulInfo: VulInfo,
     DescribeAssetImageRegistryRegistryListResponse: DescribeAssetImageRegistryRegistryListResponse,
     DescribeAssetImageRegistryAssetStatusRequest: DescribeAssetImageRegistryAssetStatusRequest,
+    DescribeVulScanLocalImageListRequest: DescribeVulScanLocalImageListRequest,
     ImageProgress: ImageProgress,
-    ModifyVirusScanTimeoutSettingRequest: ModifyVirusScanTimeoutSettingRequest,
+    CreateK8sApiAbnormalRuleExportJobRequest: CreateK8sApiAbnormalRuleExportJobRequest,
     CreateVirusScanAgainResponse: CreateVirusScanAgainResponse,
+    CreateDefenceVulExportJobRequest: CreateDefenceVulExportJobRequest,
+    ModifySecLogDeliveryClsSettingRequest: ModifySecLogDeliveryClsSettingRequest,
     AddEditAccessControlRuleResponse: AddEditAccessControlRuleResponse,
+    DescribeEscapeEventTypeSummaryRequest: DescribeEscapeEventTypeSummaryRequest,
+    DescribeVulLevelImageSummaryRequest: DescribeVulLevelImageSummaryRequest,
     DeleteCompliancePolicyItemFromWhitelistResponse: DeleteCompliancePolicyItemFromWhitelistResponse,
-    CreateAssetImageScanSettingResponse: CreateAssetImageScanSettingResponse,
+    DescribeSecEventsTendencyRequest: DescribeSecEventsTendencyRequest,
+    ResetSecLogTopicConfigResponse: ResetSecLogTopicConfigResponse,
     DescribeAccessControlRulesResponse: DescribeAccessControlRulesResponse,
     ModifyEscapeRuleResponse: ModifyEscapeRuleResponse,
+    DescribeSecLogVasInfoResponse: DescribeSecLogVasInfoResponse,
+    ModifyVirusAutoIsolateSettingResponse: ModifyVirusAutoIsolateSettingResponse,
     AssetSimpleImageInfo: AssetSimpleImageInfo,
     DescribeCompliancePolicyItemAffectedSummaryRequest: DescribeCompliancePolicyItemAffectedSummaryRequest,
     DescribeVirusDetailResponse: DescribeVirusDetailResponse,
+    DescribeImageAutoAuthorizedTaskListResponse: DescribeImageAutoAuthorizedTaskListResponse,
     DescribeComplianceAssetListResponse: DescribeComplianceAssetListResponse,
+    CreateVulContainerExportJobRequest: CreateVulContainerExportJobRequest,
+    DescribeSecLogDeliveryClsSettingResponse: DescribeSecLogDeliveryClsSettingResponse,
     DescribeComplianceAssetDetailInfoResponse: DescribeComplianceAssetDetailInfoResponse,
+    DeleteEscapeWhiteListResponse: DeleteEscapeWhiteListResponse,
+    RemoveAssetImageRegistryRegistryDetailResponse: RemoveAssetImageRegistryRegistryDetailResponse,
+    ScanComplianceScanFailedAssetsResponse: ScanComplianceScanFailedAssetsResponse,
     ModifyAssetImageRegistryScanStopRequest: ModifyAssetImageRegistryScanStopRequest,
-    DescribeVirusScanTaskStatusRequest: DescribeVirusScanTaskStatusRequest,
+    DeleteNetworkFirewallPolicyDetailResponse: DeleteNetworkFirewallPolicyDetailResponse,
+    DescribeK8sApiAbnormalTendencyRequest: DescribeK8sApiAbnormalTendencyRequest,
     RiskSyscallWhiteListInfo: RiskSyscallWhiteListInfo,
+    DescribeNewestVulResponse: DescribeNewestVulResponse,
     DescribeCompliancePolicyItemAffectedAssetListResponse: DescribeCompliancePolicyItemAffectedAssetListResponse,
     DescribeComplianceAssetPolicyItemListRequest: DescribeComplianceAssetPolicyItemListRequest,
-    DescribeAssetImageRegistryVulListExportResponse: DescribeAssetImageRegistryVulListExportResponse,
+    DescribeABTestConfigResponse: DescribeABTestConfigResponse,
+    SearchTemplate: SearchTemplate,
+    DescribeContainerSecEventSummaryResponse: DescribeContainerSecEventSummaryResponse,
     ProcessDetailBaseInfo: ProcessDetailBaseInfo,
     DescribeAssetHostListRequest: DescribeAssetHostListRequest,
+    CreateVulDefenceHostExportJobRequest: CreateVulDefenceHostExportJobRequest,
+    DescribeImageAutoAuthorizedLogListRequest: DescribeImageAutoAuthorizedLogListRequest,
     DescribeRiskSyscallEventsExportRequest: DescribeRiskSyscallEventsExportRequest,
     DescribeRiskSyscallWhiteListsRequest: DescribeRiskSyscallWhiteListsRequest,
-    DescribeUnfinishRefreshTaskRequest: DescribeUnfinishRefreshTaskRequest,
+    DescribeVulDefencePluginRequest: DescribeVulDefencePluginRequest,
+    ContainerInfo: ContainerInfo,
     DescribeAssetImageRegistryScanStatusOneKeyResponse: DescribeAssetImageRegistryScanStatusOneKeyResponse,
     DescribeAssetImageRegistryRegistryDetailRequest: DescribeAssetImageRegistryRegistryDetailRequest,
+    NetworkAuditRecord: NetworkAuditRecord,
     UpdateAssetImageRegistryRegistryDetailRequest: UpdateAssetImageRegistryRegistryDetailRequest,
+    DescribeK8sApiAbnormalRuleScopeListRequest: DescribeK8sApiAbnormalRuleScopeListRequest,
     ServiceInfo: ServiceInfo,
     AddEditReverseShellWhiteListRequest: AddEditReverseShellWhiteListRequest,
+    VulIgnoreRegistryImage: VulIgnoreRegistryImage,
     DescribeVirusTaskListRequest: DescribeVirusTaskListRequest,
+    CreateRiskDnsEventExportJobResponse: CreateRiskDnsEventExportJobResponse,
     DescribeAssetImageRegistryVirusListExportRequest: DescribeAssetImageRegistryVirusListExportRequest,
+    DescribeWebVulListResponse: DescribeWebVulListResponse,
+    DescribeVulScanInfoResponse: DescribeVulScanInfoResponse,
     DescribeAssetImageRegistryListExportResponse: DescribeAssetImageRegistryListExportResponse,
     FileAttributeInfo: FileAttributeInfo,
+    DescribeVulTendencyRequest: DescribeVulTendencyRequest,
     DescribePostPayDetailRequest: DescribePostPayDetailRequest,
+    ModifyK8sApiAbnormalEventStatusResponse: ModifyK8sApiAbnormalEventStatusResponse,
+    DescribeSecLogDeliveryKafkaOptionsResponse: DescribeSecLogDeliveryKafkaOptionsResponse,
     DescribeAssetHostDetailRequest: DescribeAssetHostDetailRequest,
     DescribeRefreshTaskResponse: DescribeRefreshTaskResponse,
     ReverseShellWhiteListInfo: ReverseShellWhiteListInfo,
-    VirusInfo: VirusInfo,
+    UpdateNetworkFirewallPolicyDetailRequest: UpdateNetworkFirewallPolicyDetailRequest,
     EscapeRuleEnabled: EscapeRuleEnabled,
+    DescribeK8sApiAbnormalEventInfoRequest: DescribeK8sApiAbnormalEventInfoRequest,
+    DescribeSearchTemplatesRequest: DescribeSearchTemplatesRequest,
 
 }

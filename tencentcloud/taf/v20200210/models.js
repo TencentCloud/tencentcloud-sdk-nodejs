@@ -17,108 +17,12 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 业务出参
+ * 业务入参
  * @class
  */
-class OutputRecognizeEffectiveFlowValue extends  AbstractModel {
+class InputBusinessEncryptData extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 返回标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Lable = null;
-
-        /**
-         * 返回分值
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Score = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Lable = 'Lable' in params ? params.Lable : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-    }
-}
-
-/**
- * CheckKol
- * @class
- */
-class OutputKolData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 错误码[0:成功；非0：失败的错误码]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 业务返回数据
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<OutputKolValue> || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Value) {
-            this.Value = new Array();
-            for (let z in params.Value) {
-                let obj = new OutputKolValue();
-                obj.deserialize(params.Value[z]);
-                this.Value.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * CheckKol
- * @class
- */
-class InputKolBspData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * BspData
-         * @type {Array.<InputKolDataList> || null}
-         */
-        this.DataList = null;
 
     }
 
@@ -130,70 +34,22 @@ class InputKolBspData extends  AbstractModel {
             return;
         }
 
-        if (params.DataList) {
-            this.DataList = new Array();
-            for (let z in params.DataList) {
-                let obj = new InputKolDataList();
-                obj.deserialize(params.DataList[z]);
-                this.DataList.push(obj);
-            }
-        }
-
     }
 }
 
 /**
- * RecognizeEffectiveFlow请求参数结构体
+ * RecognizeCustomizedAudience请求参数结构体
  * @class
  */
-class RecognizeEffectiveFlowRequest extends  AbstractModel {
+class RecognizeCustomizedAudienceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
          * 业务入参
-         * @type {InputRecognizeEffectiveFlow || null}
-         */
-        this.BusinessSecurityData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BusinessSecurityData) {
-            let obj = new InputRecognizeEffectiveFlow();
-            obj.deserialize(params.BusinessSecurityData)
-            this.BusinessSecurityData = obj;
-        }
-
-    }
-}
-
-/**
- * EnhanceTaDegree请求参数结构体
- * @class
- */
-class EnhanceTaDegreeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务数据
-         * @type {InputTaBspData || null}
+         * @type {InputRecognizeTargetAudience || null}
          */
         this.BspData = null;
-
-        /**
-         * 业务加密数据
-         * @type {InputBusinessEncryptData || null}
-         */
-        this.BusinessEncryptData = null;
 
     }
 
@@ -206,16 +62,51 @@ class EnhanceTaDegreeRequest extends  AbstractModel {
         }
 
         if (params.BspData) {
-            let obj = new InputTaBspData();
+            let obj = new InputRecognizeTargetAudience();
             obj.deserialize(params.BspData)
             this.BspData = obj;
         }
 
-        if (params.BusinessEncryptData) {
-            let obj = new InputBusinessEncryptData();
-            obj.deserialize(params.BusinessEncryptData)
-            this.BusinessEncryptData = obj;
+    }
+}
+
+/**
+ * RecognizeTargetAudience返回参数结构体
+ * @class
+ */
+class RecognizeTargetAudienceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回包数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutputRecognizeTargetAudience || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+
+        if (params.Data) {
+            let obj = new OutputRecognizeTargetAudience();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -266,58 +157,32 @@ class OutputRecognizeTargetAudienceValue extends  AbstractModel {
 }
 
 /**
- * SendTrafficSecuritySmsMessage请求参数结构体
+ * 流量反欺诈-验准返回值
  * @class
  */
-class SendTrafficSecuritySmsMessageRequest extends  AbstractModel {
+class OutputRecognizeTargetAudience extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 业务入参
-         * @type {InputSendTrafficSecuritySmsMsg || null}
+         * 返回码（0，成功，其他失败）
+         * @type {number || null}
          */
-        this.BspData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BspData) {
-            let obj = new InputSendTrafficSecuritySmsMsg();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
-        }
-
-    }
-}
-
-/**
- * DetectFraudKOL返回参数结构体
- * @class
- */
-class DetectFraudKOLResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Code = null;
 
         /**
-         * 回包数据
+         * 返回码对应的信息
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputKolData || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Message = null;
+
+        /**
+         * 返回模型结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OutputRecognizeTargetAudienceValue> || null}
+         */
+        this.Value = null;
 
     }
 
@@ -328,13 +193,17 @@ class DetectFraudKOLResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
-        if (params.Data) {
-            let obj = new OutputKolData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
+        if (params.Value) {
+            this.Value = new Array();
+            for (let z in params.Value) {
+                let obj = new OutputRecognizeTargetAudienceValue();
+                obj.deserialize(params.Value[z]);
+                this.Value.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -381,683 +250,18 @@ class RecognizeCustomizedAudienceResponse extends  AbstractModel {
 }
 
 /**
- * CheckKol
- * @class
- */
-class OutputKolValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * KOL账号ID[比如微信公众号ID]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 是否查得[0：未查得；1：查得]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.IsCheck = null;
-
-        /**
-         * 作弊的可能性[0～100]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FraudPScore = null;
-
-        /**
-         * 作弊的严重性[0～100]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EvilPScore = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.IsCheck = 'IsCheck' in params ? params.IsCheck : null;
-        this.FraudPScore = 'FraudPScore' in params ? params.FraudPScore : null;
-        this.EvilPScore = 'EvilPScore' in params ? params.EvilPScore : null;
-
-    }
-}
-
-/**
- * EnhanceTaDegree返回参数结构体
- * @class
- */
-class EnhanceTaDegreeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputTaData || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new OutputTaData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 流量反欺诈-虚假TA识别
- * @class
- */
-class InputTaBspData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 请求序列号
-         * @type {number || null}
-         */
-        this.Seq = null;
-
-        /**
-         * 操作系统类型[0：未知；1：android；2：ios；3：windows]
-         * @type {string || null}
-         */
-        this.OsType = null;
-
-        /**
-         * 年龄下限
-         * @type {number || null}
-         */
-        this.AgeFloor = null;
-
-        /**
-         * 年龄上限
-         * @type {number || null}
-         */
-        this.AgeCeil = null;
-
-        /**
-         * 性别[1：男；2：女]
-         * @type {number || null}
-         */
-        this.Gender = null;
-
-        /**
-         * 用户操作时间,uinux时间戳，精确到秒
-         * @type {number || null}
-         */
-        this.UserTime = null;
-
-        /**
-         * Imei [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-         * @type {string || null}
-         */
-        this.Imei = null;
-
-        /**
-         * Imei小写后加密Md5 [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-         * @type {string || null}
-         */
-        this.ImeiMd5 = null;
-
-        /**
-         * Idfa [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-         * @type {string || null}
-         */
-        this.Idfa = null;
-
-        /**
-         * Idfa大写后加密Md5 [在(Imei|ImeiMd5|Idfa|IdfaMd5)里面4选1]
-         * @type {string || null}
-         */
-        this.IdfaMd5 = null;
-
-        /**
-         * 用户IP
-         * @type {string || null}
-         */
-        this.UserIp = null;
-
-        /**
-         * MAC地址[建议提供]
-         * @type {string || null}
-         */
-        this.Mac = null;
-
-        /**
-         * 手机号码[中国大陆]
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * 浏览器
-         * @type {string || null}
-         */
-        this.UserAgent = null;
-
-        /**
-         * APP名称
-         * @type {string || null}
-         */
-        this.App = null;
-
-        /**
-         * 应用安装包名称
-         * @type {string || null}
-         */
-        this.Package = null;
-
-        /**
-         * 设备制造商
-         * @type {string || null}
-         */
-        this.DeviceMaker = null;
-
-        /**
-         * 设备型号
-         * @type {string || null}
-         */
-        this.DeviceModule = null;
-
-        /**
-         * 入网方式[1：WIFI；2：4G；3：3G；4：2G；5：其它]
-         * @type {string || null}
-         */
-        this.AccessMode = null;
-
-        /**
-         * 运营商[1：移动；2：联通；3：电信；4：其它]
-         * @type {string || null}
-         */
-        this.Sp = null;
-
-        /**
-         * 网址
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 用户地址
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
-         * 纬度
-         * @type {string || null}
-         */
-        this.Latitude = null;
-
-        /**
-         * 精度
-         * @type {string || null}
-         */
-        this.Longitude = null;
-
-        /**
-         * 辅助区分信息
-         * @type {string || null}
-         */
-        this.Context = null;
-
-        /**
-         * 是否授权
-         * @type {number || null}
-         */
-        this.IsAuthorized = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Seq = 'Seq' in params ? params.Seq : null;
-        this.OsType = 'OsType' in params ? params.OsType : null;
-        this.AgeFloor = 'AgeFloor' in params ? params.AgeFloor : null;
-        this.AgeCeil = 'AgeCeil' in params ? params.AgeCeil : null;
-        this.Gender = 'Gender' in params ? params.Gender : null;
-        this.UserTime = 'UserTime' in params ? params.UserTime : null;
-        this.Imei = 'Imei' in params ? params.Imei : null;
-        this.ImeiMd5 = 'ImeiMd5' in params ? params.ImeiMd5 : null;
-        this.Idfa = 'Idfa' in params ? params.Idfa : null;
-        this.IdfaMd5 = 'IdfaMd5' in params ? params.IdfaMd5 : null;
-        this.UserIp = 'UserIp' in params ? params.UserIp : null;
-        this.Mac = 'Mac' in params ? params.Mac : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
-        this.App = 'App' in params ? params.App : null;
-        this.Package = 'Package' in params ? params.Package : null;
-        this.DeviceMaker = 'DeviceMaker' in params ? params.DeviceMaker : null;
-        this.DeviceModule = 'DeviceModule' in params ? params.DeviceModule : null;
-        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
-        this.Sp = 'Sp' in params ? params.Sp : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Location = 'Location' in params ? params.Location : null;
-        this.Latitude = 'Latitude' in params ? params.Latitude : null;
-        this.Longitude = 'Longitude' in params ? params.Longitude : null;
-        this.Context = 'Context' in params ? params.Context : null;
-        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
-
-    }
-}
-
-/**
- * 业务入参
- * @class
- */
-class Device extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务入参id
-         * @type {string || null}
-         */
-        this.DeviceId = null;
-
-        /**
-         * 业务入参类型
-         * @type {number || null}
-         */
-        this.DeviceType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-
-    }
-}
-
-/**
- * 返回结果
- * @class
- */
-class OutputSendTrafficSecuritySmsMsg extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回码（0：接口调用成功 非0：接口调用失败）
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 发送失败的号码列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * RecognizeEffectiveFlow返回参数结构体
- * @class
- */
-class RecognizeEffectiveFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务出参
-         * @type {OutputRecognizeEffectiveFlow || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new OutputRecognizeEffectiveFlow();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendTrafficSecuritySmsMessage返回参数结构体
- * @class
- */
-class SendTrafficSecuritySmsMessageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputSendTrafficSecuritySmsMsg || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new OutputSendTrafficSecuritySmsMsg();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DetectFraudKOL请求参数结构体
- * @class
- */
-class DetectFraudKOLRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务数据
-         * @type {InputKolBspData || null}
-         */
-        this.BspData = null;
-
-        /**
-         * 业务加密数据
-         * @type {InputBusinessEncryptData || null}
-         */
-        this.BusinessEncryptData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BspData) {
-            let obj = new InputKolBspData();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
-        }
-
-        if (params.BusinessEncryptData) {
-            let obj = new InputBusinessEncryptData();
-            obj.deserialize(params.BusinessEncryptData)
-            this.BusinessEncryptData = obj;
-        }
-
-    }
-}
-
-/**
- * RecognizeCustomizedAudience请求参数结构体
- * @class
- */
-class RecognizeCustomizedAudienceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务入参
-         * @type {InputRecognizeTargetAudience || null}
-         */
-        this.BspData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BspData) {
-            let obj = new InputRecognizeTargetAudience();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
-        }
-
-    }
-}
-
-/**
- * RecognizeTargetAudience请求参数结构体
- * @class
- */
-class RecognizeTargetAudienceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务数据
-         * @type {InputRecognizeTargetAudience || null}
-         */
-        this.BspData = null;
-
-        /**
-         * 业务加密数据
-         * @type {InputBusinessEncryptData || null}
-         */
-        this.BusinessEncryptData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.BspData) {
-            let obj = new InputRecognizeTargetAudience();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
-        }
-
-        if (params.BusinessEncryptData) {
-            let obj = new InputBusinessEncryptData();
-            obj.deserialize(params.BusinessEncryptData)
-            this.BusinessEncryptData = obj;
-        }
-
-    }
-}
-
-/**
- * RecognizeTargetAudience返回参数结构体
- * @class
- */
-class RecognizeTargetAudienceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputRecognizeTargetAudience || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new OutputRecognizeTargetAudience();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 业务出参
- * @class
- */
-class OutputRecognizeEffectiveFlow extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回码。0表示成功，非0标识失败错误码
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * UTF-8编码，出错消息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 业务入参
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputRecognizeEffectiveFlowValue || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Value) {
-            let obj = new OutputRecognizeEffectiveFlowValue();
-            obj.deserialize(params.Value)
-            this.Value = obj;
-        }
-
-    }
-}
-
-/**
  * 流量反欺诈-验准入参
  * @class
  */
 class InputRecognizeTargetAudience extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 模型ID列表
+         * @type {Array.<number> || null}
+         */
+        this.ModelIdList = null;
 
         /**
          * 设备ID，AccountType指定的类型
@@ -1070,12 +274,6 @@ class InputRecognizeTargetAudience extends  AbstractModel {
          * @type {number || null}
          */
         this.AccountType = null;
-
-        /**
-         * 模型ID列表
-         * @type {Array.<number> || null}
-         */
-        this.ModelIdList = null;
 
         /**
          * 用户IP
@@ -1308,9 +506,9 @@ class InputRecognizeTargetAudience extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ModelIdList = 'ModelIdList' in params ? params.ModelIdList : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.AccountType = 'AccountType' in params ? params.AccountType : null;
-        this.ModelIdList = 'ModelIdList' in params ? params.ModelIdList : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Os = 'Os' in params ? params.Os : null;
         this.Osv = 'Osv' in params ? params.Osv : null;
@@ -1361,32 +559,24 @@ class InputRecognizeTargetAudience extends  AbstractModel {
 }
 
 /**
- * 流量反欺诈-虚假TA识别
+ * 业务入参
  * @class
  */
-class OutputTaData extends  AbstractModel {
+class Device extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 错误码[0:成功；非0：失败的错误码]
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
+         * 业务入参id
          * @type {string || null}
          */
-        this.Message = null;
+        this.DeviceId = null;
 
         /**
-         * 结果数据
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputTaValue || null}
+         * 业务入参类型
+         * @type {number || null}
          */
-        this.Value = null;
+        this.DeviceType = null;
 
     }
 
@@ -1397,51 +587,8 @@ class OutputTaData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Value) {
-            let obj = new OutputTaValue();
-            obj.deserialize(params.Value)
-            this.Value = obj;
-        }
-
-    }
-}
-
-/**
- * 流量反欺诈-虚假TA识别
- * @class
- */
-class OutputTaValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 是否查得[0：未查得；1：查得]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.IsCheck = null;
-
-        /**
-         * 是否符合[0：不符合；1：符合]
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.IsMatch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IsCheck = 'IsCheck' in params ? params.IsCheck : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -1480,48 +627,24 @@ class RecognizePreciseTargetAudienceRequest extends  AbstractModel {
 }
 
 /**
- * CheckKOL
+ * RecognizeTargetAudience请求参数结构体
  * @class
  */
-class InputKolDataList extends  AbstractModel {
+class RecognizeTargetAudienceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 账号类型[1：微信；2：qq；3：微博]
-         * @type {number || null}
+         * 业务数据
+         * @type {InputRecognizeTargetAudience || null}
          */
-        this.Type = null;
+        this.BspData = null;
 
         /**
-         * KOL账号ID[比如微信公众号ID]
-         * @type {string || null}
+         * 业务加密数据
+         * @type {InputBusinessEncryptData || null}
          */
-        this.Id = null;
-
-        /**
-         * KOL名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 手机号
-         * @type {string || null}
-         */
-        this.Phone = null;
-
-        /**
-         * 代理商名称
-         * @type {string || null}
-         */
-        this.AgentInfo = null;
-
-        /**
-         * 是否授权
-         * @type {number || null}
-         */
-        this.IsAuthorized = null;
+        this.BusinessEncryptData = null;
 
     }
 
@@ -1532,12 +655,18 @@ class InputKolDataList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
-        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
+
+        if (params.BspData) {
+            let obj = new InputRecognizeTargetAudience();
+            obj.deserialize(params.BspData)
+            this.BspData = obj;
+        }
+
+        if (params.BusinessEncryptData) {
+            let obj = new InputBusinessEncryptData();
+            obj.deserialize(params.BusinessEncryptData)
+            this.BusinessEncryptData = obj;
+        }
 
     }
 }
@@ -1583,201 +712,17 @@ class RecognizePreciseTargetAudienceResponse extends  AbstractModel {
     }
 }
 
-/**
- * 接口入参
- * @class
- */
-class InputRecognizeEffectiveFlow extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * 业务入参
- * @class
- */
-class InputBusinessEncryptData extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * 流量反欺诈-验准返回值
- * @class
- */
-class OutputRecognizeTargetAudience extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回码（0，成功，其他失败）
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 返回模型结果
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<OutputRecognizeTargetAudienceValue> || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Value) {
-            this.Value = new Array();
-            for (let z in params.Value) {
-                let obj = new OutputRecognizeTargetAudienceValue();
-                obj.deserialize(params.Value[z]);
-                this.Value.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 业务入参
- * @class
- */
-class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 投放任务ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 手机号码列表（号码量<=200）
-         * @type {Array.<string> || null}
-         */
-        this.Mobiles = null;
-
-        /**
-         * 是否授权，1：已授权
-         * @type {number || null}
-         */
-        this.IsAuthorized = null;
-
-        /**
-         * 加密方式，0：AES加密；1：DES加密
-         * @type {number || null}
-         */
-        this.EncryptMethod = null;
-
-        /**
-         * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
-         * @type {number || null}
-         */
-        this.EncryptMode = null;
-
-        /**
-         * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
-         * @type {number || null}
-         */
-        this.PaddingType = null;
-
-        /**
-         * 加密数据
-         * @type {string || null}
-         */
-        this.EncryptData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Mobiles = 'Mobiles' in params ? params.Mobiles : null;
-        this.IsAuthorized = 'IsAuthorized' in params ? params.IsAuthorized : null;
-        this.EncryptMethod = 'EncryptMethod' in params ? params.EncryptMethod : null;
-        this.EncryptMode = 'EncryptMode' in params ? params.EncryptMode : null;
-        this.PaddingType = 'PaddingType' in params ? params.PaddingType : null;
-        this.EncryptData = 'EncryptData' in params ? params.EncryptData : null;
-
-    }
-}
-
 module.exports = {
-    OutputRecognizeEffectiveFlowValue: OutputRecognizeEffectiveFlowValue,
-    OutputKolData: OutputKolData,
-    InputKolBspData: InputKolBspData,
-    RecognizeEffectiveFlowRequest: RecognizeEffectiveFlowRequest,
-    EnhanceTaDegreeRequest: EnhanceTaDegreeRequest,
-    OutputRecognizeTargetAudienceValue: OutputRecognizeTargetAudienceValue,
-    SendTrafficSecuritySmsMessageRequest: SendTrafficSecuritySmsMessageRequest,
-    DetectFraudKOLResponse: DetectFraudKOLResponse,
-    RecognizeCustomizedAudienceResponse: RecognizeCustomizedAudienceResponse,
-    OutputKolValue: OutputKolValue,
-    EnhanceTaDegreeResponse: EnhanceTaDegreeResponse,
-    InputTaBspData: InputTaBspData,
-    Device: Device,
-    OutputSendTrafficSecuritySmsMsg: OutputSendTrafficSecuritySmsMsg,
-    RecognizeEffectiveFlowResponse: RecognizeEffectiveFlowResponse,
-    SendTrafficSecuritySmsMessageResponse: SendTrafficSecuritySmsMessageResponse,
-    DetectFraudKOLRequest: DetectFraudKOLRequest,
-    RecognizeCustomizedAudienceRequest: RecognizeCustomizedAudienceRequest,
-    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
-    RecognizeTargetAudienceResponse: RecognizeTargetAudienceResponse,
-    OutputRecognizeEffectiveFlow: OutputRecognizeEffectiveFlow,
-    InputRecognizeTargetAudience: InputRecognizeTargetAudience,
-    OutputTaData: OutputTaData,
-    OutputTaValue: OutputTaValue,
-    RecognizePreciseTargetAudienceRequest: RecognizePreciseTargetAudienceRequest,
-    InputKolDataList: InputKolDataList,
-    RecognizePreciseTargetAudienceResponse: RecognizePreciseTargetAudienceResponse,
-    InputRecognizeEffectiveFlow: InputRecognizeEffectiveFlow,
     InputBusinessEncryptData: InputBusinessEncryptData,
+    RecognizeCustomizedAudienceRequest: RecognizeCustomizedAudienceRequest,
+    RecognizeTargetAudienceResponse: RecognizeTargetAudienceResponse,
+    OutputRecognizeTargetAudienceValue: OutputRecognizeTargetAudienceValue,
     OutputRecognizeTargetAudience: OutputRecognizeTargetAudience,
-    InputSendTrafficSecuritySmsMsg: InputSendTrafficSecuritySmsMsg,
+    RecognizeCustomizedAudienceResponse: RecognizeCustomizedAudienceResponse,
+    InputRecognizeTargetAudience: InputRecognizeTargetAudience,
+    Device: Device,
+    RecognizePreciseTargetAudienceRequest: RecognizePreciseTargetAudienceRequest,
+    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
+    RecognizePreciseTargetAudienceResponse: RecognizePreciseTargetAudienceResponse,
 
 }

@@ -185,6 +185,19 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
          */
         this.CamRoleName = null;
 
+        /**
+         * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+        /**
+         * IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -255,6 +268,13 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
             this.EnhancedService = obj;
         }
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -862,10 +882,17 @@ class LaunchConfiguration extends  AbstractModel {
         this.InstanceTypes = null;
 
         /**
-         * 标签列表。
+         * 实例标签列表。扩容出来的实例会自动带上标签，最多支持10个标签。
          * @type {Array.<InstanceTag> || null}
          */
         this.InstanceTags = null;
+
+        /**
+         * 标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
         /**
          * 版本号。
@@ -916,6 +943,19 @@ class LaunchConfiguration extends  AbstractModel {
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
+
+        /**
+         * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+        /**
+         * IPv6公网带宽相关信息设置。
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
 
     }
 
@@ -994,6 +1034,15 @@ class LaunchConfiguration extends  AbstractModel {
                 this.InstanceTags.push(obj);
             }
         }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
@@ -1017,6 +1066,13 @@ class LaunchConfiguration extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -2110,7 +2166,7 @@ class DetachLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 应用型负载均衡器标识信息列表，列表长度上限为50，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
+         * 应用型负载均衡器标识信息列表，列表长度上限为100，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancerIdentification> || null}
          */
         this.ForwardLoadBalancerIdentifications = null;
@@ -2220,7 +2276,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -2553,6 +2609,12 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.InstanceTypes = null;
 
         /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
          * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
 <br><li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。
 <br><li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。
@@ -2570,10 +2632,10 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.InstanceTags = null;
 
         /**
-         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
-         * @type {string || null}
+         * 标签描述列表。通过指定该参数可以支持绑定标签到启动配置。每个启动配置最多支持30个标签。
+         * @type {Array.<Tag> || null}
          */
-        this.CamRoleName = null;
+        this.Tags = null;
 
         /**
          * 云服务器主机名（HostName）的相关设置。
@@ -2601,6 +2663,19 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
+
+        /**
+         * 高性能计算集群ID。<br>
+注意：此字段默认为空。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+        /**
+         * IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
 
     }
 
@@ -2658,6 +2733,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             this.InstanceMarketOptions = obj;
         }
         this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
 
         if (params.InstanceTags) {
@@ -2668,7 +2744,15 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
                 this.InstanceTags.push(obj);
             }
         }
-        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
         if (params.HostNameSettings) {
             let obj = new HostNameSettings();
@@ -2688,6 +2772,13 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -3111,13 +3202,13 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""
+         * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串""
          * @type {string || null}
          */
         this.NotificationMetadata = null;
 
         /**
-         * 通知目标
+         * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
          * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
@@ -3127,6 +3218,12 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
+
+        /**
+         * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
 
     }
 
@@ -3150,6 +3247,12 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -3622,6 +3725,75 @@ class DeleteLaunchConfigurationRequest extends  AbstractModel {
 }
 
 /**
+ * 执行命令结果。
+ * @class
+ */
+class InvocationResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 执行活动ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InvocationId = null;
+
+        /**
+         * 执行任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InvocationTaskId = null;
+
+        /**
+         * 命令ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CommandId = null;
+
+        /**
+         * 执行任务状态。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 执行异常信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InvocationId = 'InvocationId' in params ? params.InvocationId : null;
+        this.InvocationTaskId = 'InvocationTaskId' in params ? params.InvocationTaskId : null;
+        this.CommandId = 'CommandId' in params ? params.CommandId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+
+    }
+}
+
+/**
  * ModifyScalingPolicy请求参数结构体
  * @class
  */
@@ -3830,6 +4002,46 @@ class ModifyLifecycleHookResponse extends  AbstractModel {
 }
 
 /**
+ * 远程命令执行对象。
+ * @class
+ */
+class LifecycleCommand extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 远程命令ID。若选择执行命令，则此项必填。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CommandId = null;
+
+        /**
+         * 自定义参数。字段类型为 json encoded string。如：{"varA": "222"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
+自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Parameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CommandId = 'CommandId' in params ? params.CommandId : null;
+        this.Parameters = 'Parameters' in params ? params.Parameters : null;
+
+    }
+}
+
+/**
  * DescribeAutoScalingAdvices返回参数结构体
  * @class
  */
@@ -3935,7 +4147,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -4283,6 +4495,12 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          */
         this.DiskTypePolicy = null;
 
+        /**
+         * IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -4369,6 +4587,12 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -4725,13 +4949,19 @@ class Instance extends  AbstractModel {
 <li>TERMINATING：中止中
 <li>TERMINATION_FAILED：中止失败
 <li>ATTACHING：绑定中
+<li>ATTACH_FAILED：绑定失败
 <li>DETACHING：解绑中
-<li>ATTACHING_LB：绑定LB中<li>DETACHING_LB：解绑LB中
+<li>DETACH_FAILED：解绑失败
+<li>ATTACHING_LB：绑定LB中
+<li>DETACHING_LB：解绑LB中
+<li>MODIFYING_LB：修改LB中
 <li>STARTING：开机中
 <li>START_FAILED：开机失败
 <li>STOPPING：关机中
 <li>STOP_FAILED：关机失败
 <li>STOPPED：已关机
+<li>IN_LAUNCHING_HOOK：扩容生命周期挂钩中
+<li>IN_TERMINATING_HOOK：缩容生命周期挂钩中
          * @type {string || null}
          */
         this.LifeCycleState = null;
@@ -4861,7 +5091,7 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent。
+ * 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。
  * @class
  */
 class EnhancedService extends  AbstractModel {
@@ -4879,6 +5109,18 @@ class EnhancedService extends  AbstractModel {
          * @type {RunMonitorServiceEnabled || null}
          */
         this.MonitorService = null;
+
+        /**
+         * 该参数已废弃，查询时会返回空值，请勿使用。
+         * @type {Array.<RunAutomationServiceEnabled> || null}
+         */
+        this.AutomationService = null;
+
+        /**
+         * 开启自动化助手服务。若不指定该参数，则默认逻辑与CVM保持一致。注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationToolsService = null;
 
     }
 
@@ -4901,6 +5143,50 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+        if (params.AutomationService) {
+            this.AutomationService = new Array();
+            for (let z in params.AutomationService) {
+                let obj = new RunAutomationServiceEnabled();
+                obj.deserialize(params.AutomationService[z]);
+                this.AutomationService.push(obj);
+            }
+        }
+
+        if (params.AutomationToolsService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationToolsService)
+            this.AutomationToolsService = obj;
+        }
+
+    }
+}
+
+/**
+ * 描述了 “自动化助手” 服务相关的信息
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[自动化助手](https://cloud.tencent.com/document/product/1340)服务。取值范围：<br><li>TRUE：表示开启自动化助手服务<br><li>FALSE：表示不开启自动化助手服务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -4929,6 +5215,53 @@ class DeleteLaunchConfigurationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述了启动配置创建实例的IPv6地址公网可访问性，声明了IPv6地址公网使用计费模式，最大带宽等
+ * @class
+ */
+class IPv6InternetAccessible extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络计费模式。取值包括TRAFFIC_POSTPAID_BY_HOUR、BANDWIDTH_PACKAGE，默认取值为TRAFFIC_POSTPAID_BY_HOUR。查看当前账户类型可参考[账户类型说明](https://cloud.tencent.com/document/product/1199/49090#judge)。
+<br><li> IPv6对标准账户类型支持TRAFFIC_POSTPAID_BY_HOUR。
+<br><li> IPv6对传统账户类型支持BANDWIDTH_PACKAGE。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * 公网出带宽上限，单位：Mbps。<br>默认值：0，此时不为IPv6分配公网带宽。不同机型、可用区、计费模式的带宽上限范围不一致，具体限制详见[公网带宽上限](https://cloud.tencent.com/document/product/213/12523)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 带宽包ID。可通过[DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -5249,13 +5582,13 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""。最大长度不能超过1024个字节。
+         * 弹性伸缩向通知目标发送的附加信息，配置通知时使用,默认值为空字符串""。最大长度不能超过1024个字节。
          * @type {string || null}
          */
         this.NotificationMetadata = null;
 
         /**
-         * 通知目标
+         * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
          * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
@@ -5265,6 +5598,12 @@ class CreateLifecycleHookRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
+
+        /**
+         * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
 
     }
 
@@ -5288,6 +5627,12 @@ class CreateLifecycleHookRequest extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -5450,6 +5795,12 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * 远程命令执行对象。
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
+
     }
 
     /**
@@ -5471,6 +5822,12 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
             let obj = new NotificationTarget();
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
+        }
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
         }
 
     }
@@ -5912,7 +6269,8 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+         * 此参数已不再生效，请使用[创建通知](https://cloud.tencent.com/document/api/377/33185)。
+通知组ID，即为用户组ID集合。
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -6052,6 +6410,10 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
 <li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
 <li> launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称过滤。</li>
 <li> vague-launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称模糊搜索。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3
+</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
          * @type {Array.<Filter> || null}
          */
@@ -6155,7 +6517,7 @@ class ModifyLoadBalancerTargetAttributesRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为50
+         * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为100
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -6232,7 +6594,25 @@ class LifecycleActionResultInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 通知的结果，表示通知CMQ是否成功。
+         * 执行活动ID。可通过TAT的[查询执行活动](https://cloud.tencent.com/document/api/1340/52679)API查询具体的执行结果。
+         * @type {string || null}
+         */
+        this.InvocationId = null;
+
+        /**
+         * 命令调用的结果，表示执行TAT命令是否成功。<br>
+<li>SUCCESSFUL 命令调用成功，不代表命令执行成功，执行的具体情况可根据InvocationId进行查询</li>
+<li>FAILED 命令调用失败</li>
+<li>NONE</li>
+         * @type {string || null}
+         */
+        this.InvokeCommandResult = null;
+
+        /**
+         * 通知的结果，表示通知CMQ/TDMQ是否成功。<br>
+<li>SUCCESSFUL 通知成功</li>
+<li>FAILED 通知失败</li>
+<li>NONE</li>
          * @type {string || null}
          */
         this.NotificationResult = null;
@@ -6244,7 +6624,15 @@ class LifecycleActionResultInfo extends  AbstractModel {
         this.LifecycleActionResult = null;
 
         /**
-         * 结果的原因。
+         * 结果的原因。<br>
+<li>HEARTBEAT_TIMEOUT 由于心跳超时，结果根据DefaultResult设置。</li>
+<li>NOTIFICATION_FAILURE 由于发送通知失败，结果根据DefaultResult设置。</li>
+<li>CALL_INTERFACE 调用了接口CompleteLifecycleAction设置结果。</li>
+<li>ANOTHER_ACTION_ABANDON 另一个生命周期操作的结果已设置为“ABANDON”。</li>
+<li>COMMAND_CALL_FAILURE  由于命令调用失败，结果根据DefaultResult设置。</li>
+<li>COMMAND_EXEC_FINISH  命令执行完成。</li>
+<li>COMMAND_EXEC_FAILURE 由于命令执行失败，结果根据DefaultResult设置。</li>
+<li>COMMAND_EXEC_RESULT_CHECK_FAILURE 由于命令结果检查失败，结果根据DefaultResult设置。</li>
          * @type {string || null}
          */
         this.ResultReason = null;
@@ -6260,6 +6648,8 @@ class LifecycleActionResultInfo extends  AbstractModel {
         }
         this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InvocationId = 'InvocationId' in params ? params.InvocationId : null;
+        this.InvokeCommandResult = 'InvokeCommandResult' in params ? params.InvokeCommandResult : null;
         this.NotificationResult = 'NotificationResult' in params ? params.NotificationResult : null;
         this.LifecycleActionResult = 'LifecycleActionResult' in params ? params.LifecycleActionResult : null;
         this.ResultReason = 'ResultReason' in params ? params.ResultReason : null;
@@ -6556,6 +6946,13 @@ class LifecycleHook extends  AbstractModel {
          */
         this.LifecycleTransitionType = null;
 
+        /**
+         * 远程命令执行对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
+
     }
 
     /**
@@ -6580,6 +6977,12 @@ class LifecycleHook extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -6886,7 +7289,7 @@ class AttachLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -7050,6 +7453,7 @@ class Activity extends  AbstractModel {
 <li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例
 <li>START_INSTANCES：开启实例
 <li>STOP_INSTANCES：关闭实例
+<li>INVOKE_COMMAND：执行命令
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -7126,6 +7530,12 @@ class Activity extends  AbstractModel {
          */
         this.DetailedStatusMessageSet = null;
 
+        /**
+         * 执行命令结果。
+         * @type {Array.<InvocationResult> || null}
+         */
+        this.InvocationResultSet = null;
+
     }
 
     /**
@@ -7171,6 +7581,15 @@ class Activity extends  AbstractModel {
                 let obj = new DetailedStatusMessage();
                 obj.deserialize(params.DetailedStatusMessageSet[z]);
                 this.DetailedStatusMessageSet.push(obj);
+            }
+        }
+
+        if (params.InvocationResultSet) {
+            this.InvocationResultSet = new Array();
+            for (let z in params.InvocationResultSet) {
+                let obj = new InvocationResult();
+                obj.deserialize(params.InvocationResultSet[z]);
+                this.InvocationResultSet.push(obj);
             }
         }
 
@@ -7719,11 +8138,13 @@ module.exports = {
     ModifyLoadBalancerTargetAttributesResponse: ModifyLoadBalancerTargetAttributesResponse,
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
+    InvocationResult: InvocationResult,
     ModifyScalingPolicyRequest: ModifyScalingPolicyRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
     InstanceTag: InstanceTag,
     ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
+    LifecycleCommand: LifecycleCommand,
     DescribeAutoScalingAdvicesResponse: DescribeAutoScalingAdvicesResponse,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
@@ -7738,7 +8159,9 @@ module.exports = {
     Instance: Instance,
     DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     EnhancedService: EnhancedService,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DeleteLaunchConfigurationResponse: DeleteLaunchConfigurationResponse,
+    IPv6InternetAccessible: IPv6InternetAccessible,
     DescribeScheduledActionsRequest: DescribeScheduledActionsRequest,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteScheduledActionRequest: DeleteScheduledActionRequest,

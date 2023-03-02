@@ -19,14 +19,18 @@ const AbstractClient = require('../../common/abstract_client')
 const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOffsetTemplateResponse;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
+const DescribeInputRTPSettings = models.DescribeInputRTPSettings;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
-const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const DeleteStreamLinkFlowRequest = models.DeleteStreamLinkFlowRequest;
+const FrameRateConfig = models.FrameRateConfig;
 const OverrideTranscodeParameter = models.OverrideTranscodeParameter;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const WorkflowInfo = models.WorkflowInfo;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const ProcessLiveStreamResponse = models.ProcessLiveStreamResponse;
+const CreateOutputSRTSettings = models.CreateOutputSRTSettings;
+const ModifyStreamLinkOutputInfoResponse = models.ModifyStreamLinkOutputInfoResponse;
 const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphicsTemplatesRequest;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
@@ -35,11 +39,17 @@ const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
 const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const ManageTaskResponse = models.ManageTaskResponse;
+const FlowMediaInfo = models.FlowMediaInfo;
 const DeleteWorkflowRequest = models.DeleteWorkflowRequest;
-const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
-const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
+const DescribeRTMPPullSourceAddress = models.DescribeRTMPPullSourceAddress;
+const DescribeOutputRTMPPullSettings = models.DescribeOutputRTMPPullSettings;
+const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const ModifyOutputInfo = models.ModifyOutputInfo;
+const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const NumberFormat = models.NumberFormat;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
+const EnhanceConfig = models.EnhanceConfig;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateWorkflowRequest = models.CreateWorkflowRequest;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
@@ -49,15 +59,24 @@ const ManageTaskRequest = models.ManageTaskRequest;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
+const CreateInputHLSPullSettings = models.CreateInputHLSPullSettings;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
+const ModifyStreamLinkFlowResponse = models.ModifyStreamLinkFlowResponse;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
-const MosaicInput = models.MosaicInput;
+const VideoEnhanceConfig = models.VideoEnhanceConfig;
+const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
+const StartStreamLinkFlowResponse = models.StartStreamLinkFlowResponse;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
+const CreateOutputRTPSettingsDestinations = models.CreateOutputRTPSettingsDestinations;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
+const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
+const SuperResolutionConfig = models.SuperResolutionConfig;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
+const DescribeStreamLinkFlowsResponse = models.DescribeStreamLinkFlowsResponse;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
+const AiContentReviewResult = models.AiContentReviewResult;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
@@ -67,29 +86,42 @@ const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
 const CreateAdaptiveDynamicStreamingTemplateRequest = models.CreateAdaptiveDynamicStreamingTemplateRequest;
+const CreateInputRTMPPullSettings = models.CreateInputRTMPPullSettings;
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
-const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
+const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
+const ModifyStreamLinkFlowRequest = models.ModifyStreamLinkFlowRequest;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const DeleteWorkflowResponse = models.DeleteWorkflowResponse;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
+const HdrConfig = models.HdrConfig;
+const ScheduleTask = models.ScheduleTask;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
+const DescribeOutputHLSPullServerUrl = models.DescribeOutputHLSPullServerUrl;
+const DescribeStreamLinkFlowSRTStatisticsRequest = models.DescribeStreamLinkFlowSRTStatisticsRequest;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const CosInputInfo = models.CosInputInfo;
 const TagConfigureInfo = models.TagConfigureInfo;
-const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
-const AiSampleFaceInfo = models.AiSampleFaceInfo;
+const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
+const FlowStatisticsArray = models.FlowStatisticsArray;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
-const NumberFormat = models.NumberFormat;
+const DescribeInputSRTSettings = models.DescribeInputSRTSettings;
+const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const EnableWorkflowRequest = models.EnableWorkflowRequest;
+const CreateStreamLinkFlowResponse = models.CreateStreamLinkFlowResponse;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
-const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
+const SRTAddressDestination = models.SRTAddressDestination;
+const FlowRealtimeStatusItem = models.FlowRealtimeStatusItem;
+const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const EditMediaTaskInput = models.EditMediaTaskInput;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
-const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
-const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
+const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
+const AiSampleFaceInfo = models.AiSampleFaceInfo;
+const CreateInputRTSPPullSettings = models.CreateInputRTSPPullSettings;
+const CreateStreamLinkFlowRequest = models.CreateStreamLinkFlowRequest;
+const CreateOutputSRTSettingsDestinations = models.CreateOutputSRTSettingsDestinations;
 const RecognizeMediaForZhiXueRequest = models.RecognizeMediaForZhiXueRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
@@ -97,22 +129,29 @@ const WatermarkTemplate = models.WatermarkTemplate;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
+const ScratchRepairConfig = models.ScratchRepairConfig;
 const LiveStreamAiReviewResultInfo = models.LiveStreamAiReviewResultInfo;
 const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
+const CreateOutputRtmpSettingsDestinations = models.CreateOutputRtmpSettingsDestinations;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const ScheduleRecognitionTaskResult = models.ScheduleRecognitionTaskResult;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
+const DescribeInputRTMPPullSettings = models.DescribeInputRTMPPullSettings;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
+const RTMPPullSourceAddress = models.RTMPPullSourceAddress;
 const CosOutputStorage = models.CosOutputStorage;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
+const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const ParseNotificationRequest = models.ParseNotificationRequest;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
+const DescribeStreamLinkFlowStatisticsRequest = models.DescribeStreamLinkFlowStatisticsRequest;
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
 const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
@@ -123,13 +162,16 @@ const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemp
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
+const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const EditMediaRequest = models.EditMediaRequest;
+const CreateStreamLinkOutputInfoResponse = models.CreateStreamLinkOutputInfoResponse;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
+const RTPAddressDestination = models.RTPAddressDestination;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
-const UrlInputInfo = models.UrlInputInfo;
+const StopStreamLinkFlowRequest = models.StopStreamLinkFlowRequest;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
@@ -138,6 +180,7 @@ const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateRe
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
+const DescribeInputRTSPPullSettings = models.DescribeInputRTSPPullSettings;
 const RawTranscodeParameter = models.RawTranscodeParameter;
 const LiveStreamTaskNotifyConfig = models.LiveStreamTaskNotifyConfig;
 const VideoTemplateInfo = models.VideoTemplateInfo;
@@ -146,20 +189,34 @@ const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUp
 const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
+const CreateOutputInfo = models.CreateOutputInfo;
 const TaskOutputStorage = models.TaskOutputStorage;
+const FlowLogInfo = models.FlowLogInfo;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
+const ColorEnhanceConfig = models.ColorEnhanceConfig;
+const DescribeOutputRTPSettings = models.DescribeOutputRTPSettings;
+const DeleteStreamLinkOutputResponse = models.DeleteStreamLinkOutputResponse;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
-const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
+const RTMPAddressDestination = models.RTMPAddressDestination;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
+const SRTSourceAddressReq = models.SRTSourceAddressReq;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const DescribeRTSPPullSourceAddress = models.DescribeRTSPPullSourceAddress;
+const DescribeOutputRTSPPullSettings = models.DescribeOutputRTSPPullSettings;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
+const DescribeOutputHLSPullSettings = models.DescribeOutputHLSPullSettings;
+const AiRecognitionTaskTransTextResultInput = models.AiRecognitionTaskTransTextResultInput;
+const ImageQualityEnhanceConfig = models.ImageQualityEnhanceConfig;
+const DescribeStreamLinkRegionsResponse = models.DescribeStreamLinkRegionsResponse;
 const AiSampleWord = models.AiSampleWord;
+const DescribeStreamLinkFlowStatisticsResponse = models.DescribeStreamLinkFlowStatisticsResponse;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const LiveStreamOcrWordsRecognitionResult = models.LiveStreamOcrWordsRecognitionResult;
 const LiveStreamProcessErrorInfo = models.LiveStreamProcessErrorInfo;
@@ -170,55 +227,79 @@ const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
+const ModifyStreamLinkOutputInfoRequest = models.ModifyStreamLinkOutputInfoRequest;
 const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognitionResult;
+const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const RecognizeMediaForZhiXueResponse = models.RecognizeMediaForZhiXueResponse;
 const AiSamplePerson = models.AiSamplePerson;
+const FlowStatistics = models.FlowStatistics;
+const CreateInputSRTSettings = models.CreateInputSRTSettings;
+const FlowRealtimeStatusCommon = models.FlowRealtimeStatusCommon;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
-const TEHDConfig = models.TEHDConfig;
+const DescribeStreamLinkActivateStateResponse = models.DescribeStreamLinkActivateStateResponse;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
+const DescribeStreamLinkFlowRequest = models.DescribeStreamLinkFlowRequest;
+const CreateOutputRTMPSettings = models.CreateOutputRTMPSettings;
 const WorkflowTrigger = models.WorkflowTrigger;
+const HLSPullSourceAddress = models.HLSPullSourceAddress;
 const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
 const LiveStreamAiReviewImagePoliticalResult = models.LiveStreamAiReviewImagePoliticalResult;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
+const ScheduleAnalysisTaskResult = models.ScheduleAnalysisTaskResult;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
+const OutputSRTSourceAddressResp = models.OutputSRTSourceAddressResp;
+const StreamLinkRegionInfo = models.StreamLinkRegionInfo;
+const FlowRealtimeStatusRTP = models.FlowRealtimeStatusRTP;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
-const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
+const OutputAddress = models.OutputAddress;
+const MosaicInput = models.MosaicInput;
+const DescribeStreamLinkActivateStateRequest = models.DescribeStreamLinkActivateStateRequest;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
 const HeadTailParameter = models.HeadTailParameter;
 const RawImageWatermarkInput = models.RawImageWatermarkInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
+const SRTSourceAddressResp = models.SRTSourceAddressResp;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
+const DescribeInput = models.DescribeInput;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
+const DescribeStreamLinkFlowSRTStatisticsResponse = models.DescribeStreamLinkFlowSRTStatisticsResponse;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const AiAnalysisResult = models.AiAnalysisResult;
+const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
+const FlowVideo = models.FlowVideo;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const ResetWorkflowRequest = models.ResetWorkflowRequest;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
+const DescribeOutput = models.DescribeOutput;
 const LiveStreamAiReviewVoicePornResult = models.LiveStreamAiReviewVoicePornResult;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
+const StartStreamLinkFlowRequest = models.StartStreamLinkFlowRequest;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
 const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
-const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
+const StopStreamLinkFlowResponse = models.StopStreamLinkFlowResponse;
+const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
+const InputAddress = models.InputAddress;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
+const DeleteStreamLinkFlowResponse = models.DeleteStreamLinkFlowResponse;
 const LiveStreamAsrFullTextRecognitionResult = models.LiveStreamAsrFullTextRecognitionResult;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
@@ -227,38 +308,49 @@ const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const ActionConfigInfo = models.ActionConfigInfo;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
+const DescribeStreamLinkFlowMediaStatisticsResponse = models.DescribeStreamLinkFlowMediaStatisticsResponse;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
+const CreateOutputInfoRTPSettings = models.CreateOutputInfoRTPSettings;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
-const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
+const SubtitleTemplate = models.SubtitleTemplate;
+const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
+const DescribeStreamLinkFlowRealtimeStatusRequest = models.DescribeStreamLinkFlowRealtimeStatusRequest;
 const AiReviewProhibitedAsrTaskOutput = models.AiReviewProhibitedAsrTaskOutput;
 const LiveStreamFaceRecognitionResult = models.LiveStreamFaceRecognitionResult;
-const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
+const FlowAudio = models.FlowAudio;
 const CoverConfigureInfoForUpdate = models.CoverConfigureInfoForUpdate;
 const DisableWorkflowResponse = models.DisableWorkflowResponse;
-const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
+const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
 const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplateInfoForUpdate;
+const FlowRealtimeStatusRTMP = models.FlowRealtimeStatusRTMP;
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const ParseNotificationResponse = models.ParseNotificationResponse;
+const ActivityResult = models.ActivityResult;
+const DescribeInputHLSPullSettings = models.DescribeInputHLSPullSettings;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
+const DescribeStreamLinkFlowsRequest = models.DescribeStreamLinkFlowsRequest;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
 const CosFileUploadTrigger = models.CosFileUploadTrigger;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
+const FlowRealtimeStatusSRT = models.FlowRealtimeStatusSRT;
 const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
+const DeleteStreamLinkOutputRequest = models.DeleteStreamLinkOutputRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
-const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
+const ArtifactRepairConfig = models.ArtifactRepairConfig;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const DescribeStreamLinkFlowResponse = models.DescribeStreamLinkFlowResponse;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const CreateWorkflowResponse = models.CreateWorkflowResponse;
@@ -267,15 +359,20 @@ const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateRe
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
+const DescribeOutputRTMPPullServerUrl = models.DescribeOutputRTMPPullServerUrl;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
+const LiveStreamTransTextRecognitionResult = models.LiveStreamTransTextRecognitionResult;
 const WatermarkInput = models.WatermarkInput;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const AiSampleWordInfo = models.AiSampleWordInfo;
 const AdaptiveDynamicStreamingInfoItem = models.AdaptiveDynamicStreamingInfoItem;
+const CreateStreamLinkOutputInfoRequest = models.CreateStreamLinkOutputInfoRequest;
 const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const LiveStreamOcrFullTextRecognitionResult = models.LiveStreamOcrFullTextRecognitionResult;
+const ModifyStreamLinkInputRequest = models.ModifyStreamLinkInputRequest;
+const ScheduleReviewTaskResult = models.ScheduleReviewTaskResult;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const MediaMetaData = models.MediaMetaData;
 const ExpressionConfigInfo = models.ExpressionConfigInfo;
@@ -285,23 +382,33 @@ const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTempla
 const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const TaskNotifyConfig = models.TaskNotifyConfig;
+const FaceEnhanceConfig = models.FaceEnhanceConfig;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
 const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
+const DescribeStreamLinkRegionsRequest = models.DescribeStreamLinkRegionsRequest;
+const ModifyStreamLinkInputResponse = models.ModifyStreamLinkInputResponse;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const LiveStreamAiRecognitionResultItem = models.LiveStreamAiRecognitionResultItem;
 const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
 const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
+const DescribeInputRTMPSettings = models.DescribeInputRTMPSettings;
+const SharpEnhanceConfig = models.SharpEnhanceConfig;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
+const FlowSRTInfo = models.FlowSRTInfo;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeOutputSRTSettings = models.DescribeOutputSRTSettings;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const LiveStreamAiReviewImagePornResult = models.LiveStreamAiReviewImagePornResult;
+const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
+const TEHDConfig = models.TEHDConfig;
+const CreateInputRTPSettings = models.CreateInputRTPSettings;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
@@ -313,6 +420,7 @@ const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
+const CreateInput = models.CreateInput;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const DescribeWorkflowsRequest = models.DescribeWorkflowsRequest;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
@@ -323,32 +431,39 @@ const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
-const LiveStreamProcessTask = models.LiveStreamProcessTask;
+const DescribeFlow = models.DescribeFlow;
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
-const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
-const AiContentReviewResult = models.AiContentReviewResult;
+const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
+const DescribeStreamLinkFlowRealtimeStatusResponse = models.DescribeStreamLinkFlowRealtimeStatusResponse;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
+const FlowMediaAudio = models.FlowMediaAudio;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const DisableWorkflowRequest = models.DisableWorkflowRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
-const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
+const DescribeStreamLinkFlowLogsRequest = models.DescribeStreamLinkFlowLogsRequest;
+const DescribeOutputRTMPSettings = models.DescribeOutputRTMPSettings;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
+const DescribeStreamLinkFlowLogsResponse = models.DescribeStreamLinkFlowLogsResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
 const PornConfigureInfo = models.PornConfigureInfo;
+const ModifyInput = models.ModifyInput;
+const VideoDenoiseConfig = models.VideoDenoiseConfig;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const ParseLiveStreamProcessNotificationRequest = models.ParseLiveStreamProcessNotificationRequest;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const WorkflowTask = models.WorkflowTask;
+const FlowMediaVideo = models.FlowMediaVideo;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const EditMediaFileInfo = models.EditMediaFileInfo;
+const UrlInputInfo = models.UrlInputInfo;
 const FaceConfigureInfo = models.FaceConfigureInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
@@ -360,22 +475,32 @@ const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResp
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
-const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
+const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
+const ActivityResItem = models.ActivityResItem;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
-const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
+const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
+const RTSPPullSourceAddress = models.RTSPPullSourceAddress;
+const DescribeHLSPullSourceAddress = models.DescribeHLSPullSourceAddress;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
+const DescribeStreamLinkFlowMediaStatisticsRequest = models.DescribeStreamLinkFlowMediaStatisticsRequest;
 const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
+const RegionInfo = models.RegionInfo;
+const AiRecognitionTaskTransTextResult = models.AiRecognitionTaskTransTextResult;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
+const ResilientStreamConf = models.ResilientStreamConf;
+const DescribeOutputRTSPPullServerUrl = models.DescribeOutputRTSPPullServerUrl;
+const LowLightEnhanceConfig = models.LowLightEnhanceConfig;
 const DescribeMediaMetaDataRequest = models.DescribeMediaMetaDataRequest;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
+const AiRecognitionTaskTransTextSegmentItem = models.AiRecognitionTaskTransTextSegmentItem;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const AiRecognitionResult = models.AiRecognitionResult;
 
@@ -391,6 +516,39 @@ class MpsClient extends AbstractClient {
     }
     
     /**
+     * 批量查询媒体输入流的配置信息。
+     * @param {DescribeStreamLinkFlowsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlows(req, cb) {
+        let resp = new DescribeStreamLinkFlowsResponse();
+        this.request("DescribeStreamLinkFlows", req, resp, cb);
+    }
+
+    /**
+     * 停止媒体传输流。
+     * @param {StopStreamLinkFlowRequest} req
+     * @param {function(string, StopStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    StopStreamLinkFlow(req, cb) {
+        let resp = new StopStreamLinkFlowResponse();
+        this.request("StopStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
+     * 修改媒体传输流的输出配置。
+     * @param {ModifyStreamLinkOutputInfoRequest} req
+     * @param {function(string, ModifyStreamLinkOutputInfoResponse):void} cb
+     * @public
+     */
+    ModifyStreamLinkOutputInfo(req, cb) {
+        let resp = new ModifyStreamLinkOutputInfoResponse();
+        this.request("ModifyStreamLinkOutputInfo", req, resp, cb);
+    }
+
+    /**
      * 创建用户自定义指定时间点截图模板，数量上限：16。
      * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
      * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
@@ -402,15 +560,38 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
-     * @param {ParseNotificationRequest} req
-     * @param {function(string, ParseNotificationResponse):void} cb
+     * 实时查询流的当前状态
+     * @param {DescribeStreamLinkFlowRealtimeStatusRequest} req
+     * @param {function(string, DescribeStreamLinkFlowRealtimeStatusResponse):void} cb
      * @public
      */
-    ParseNotification(req, cb) {
-        let resp = new ParseNotificationResponse();
-        this.request("ParseNotification", req, resp, cb);
+    DescribeStreamLinkFlowRealtimeStatus(req, cb) {
+        let resp = new DescribeStreamLinkFlowRealtimeStatusResponse();
+        this.request("DescribeStreamLinkFlowRealtimeStatus", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     * @param {ModifyAIAnalysisTemplateRequest} req
+     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAIAnalysisTemplate(req, cb) {
+        let resp = new ModifyAIAnalysisTemplateResponse();
+        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * 删除媒体传输流的输出配置。
+     * @param {DeleteStreamLinkOutputRequest} req
+     * @param {function(string, DeleteStreamLinkOutputResponse):void} cb
+     * @public
+     */
+    DeleteStreamLinkOutput(req, cb) {
+        let resp = new DeleteStreamLinkOutputResponse();
+        this.request("DeleteStreamLinkOutput", req, resp, cb);
     }
 
     /**
@@ -553,6 +734,28 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 查询媒体输入流的配置信息。
+     * @param {DescribeStreamLinkFlowRequest} req
+     * @param {function(string, DescribeStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlow(req, cb) {
+        let resp = new DescribeStreamLinkFlowResponse();
+        this.request("DescribeStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
+     * 删除媒体传输的传输流配置。
+     * @param {DeleteStreamLinkFlowRequest} req
+     * @param {function(string, DeleteStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    DeleteStreamLinkFlow(req, cb) {
+        let resp = new DeleteStreamLinkFlowResponse();
+        this.request("DeleteStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
      * 根据内容分析模板唯一标识，获取内容分析模板详情列表。返回结果包含符合条件的所有用户自定义内容分析模板及系统预置视频内容分析模板
      * @param {DescribeAIAnalysisTemplatesRequest} req
      * @param {function(string, DescribeAIAnalysisTemplatesResponse):void} cb
@@ -561,6 +764,28 @@ class MpsClient extends AbstractClient {
     DescribeAIAnalysisTemplates(req, cb) {
         let resp = new DescribeAIAnalysisTemplatesResponse();
         this.request("DescribeAIAnalysisTemplates", req, resp, cb);
+    }
+
+    /**
+     * 查询媒体传输流的日志信息。
+     * @param {DescribeStreamLinkFlowLogsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlowLogs(req, cb) {
+        let resp = new DescribeStreamLinkFlowLogsResponse();
+        this.request("DescribeStreamLinkFlowLogs", req, resp, cb);
+    }
+
+    /**
+     * 查询媒体传输流的SRT质量数据。
+     * @param {DescribeStreamLinkFlowSRTStatisticsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowSRTStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlowSRTStatistics(req, cb) {
+        let resp = new DescribeStreamLinkFlowSRTStatisticsResponse();
+        this.request("DescribeStreamLinkFlowSRTStatistics", req, resp, cb);
     }
 
     /**
@@ -586,14 +811,14 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 修改转自适应码流模板
-     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
-     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
+     * 创建媒体传输流的输出信息。
+     * @param {CreateStreamLinkOutputInfoRequest} req
+     * @param {function(string, CreateStreamLinkOutputInfoResponse):void} cb
      * @public
      */
-    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
-        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
-        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
+    CreateStreamLinkOutputInfo(req, cb) {
+        let resp = new CreateStreamLinkOutputInfoResponse();
+        this.request("CreateStreamLinkOutputInfo", req, resp, cb);
     }
 
     /**
@@ -751,6 +976,18 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 查询媒体传输流的媒体质量数据。
+
+     * @param {DescribeStreamLinkFlowStatisticsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlowStatistics(req, cb) {
+        let resp = new DescribeStreamLinkFlowStatisticsResponse();
+        this.request("DescribeStreamLinkFlowStatistics", req, resp, cb);
+    }
+
+    /**
      * 创建用户自定义水印模板，数量上限：1000。
      * @param {CreateWatermarkTemplateRequest} req
      * @param {function(string, CreateWatermarkTemplateResponse):void} cb
@@ -795,6 +1032,17 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 启动媒体传输流。
+     * @param {StartStreamLinkFlowRequest} req
+     * @param {function(string, StartStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    StartStreamLinkFlow(req, cb) {
+        let resp = new StartStreamLinkFlowResponse();
+        this.request("StartStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
      * 创建用户自定义转动图模板，数量上限：16。
      * @param {CreateAnimatedGraphicsTemplateRequest} req
      * @param {function(string, CreateAnimatedGraphicsTemplateResponse):void} cb
@@ -817,6 +1065,17 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 修改媒体传输流的输入信息。
+     * @param {ModifyStreamLinkInputRequest} req
+     * @param {function(string, ModifyStreamLinkInputResponse):void} cb
+     * @public
+     */
+    ModifyStreamLinkInput(req, cb) {
+        let resp = new ModifyStreamLinkInputResponse();
+        this.request("ModifyStreamLinkInput", req, resp, cb);
+    }
+
+    /**
      * 启用工作流。
      * @param {EnableWorkflowRequest} req
      * @param {function(string, EnableWorkflowResponse):void} cb
@@ -825,6 +1084,30 @@ class MpsClient extends AbstractClient {
     EnableWorkflow(req, cb) {
         let resp = new EnableWorkflowResponse();
         this.request("EnableWorkflow", req, resp, cb);
+    }
+
+    /**
+     * 查询媒体传输流的媒体质量数据。
+
+     * @param {DescribeStreamLinkFlowMediaStatisticsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowMediaStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkFlowMediaStatistics(req, cb) {
+        let resp = new DescribeStreamLinkFlowMediaStatisticsResponse();
+        this.request("DescribeStreamLinkFlowMediaStatistics", req, resp, cb);
+    }
+
+    /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     * @param {ParseNotificationRequest} req
+     * @param {function(string, ParseNotificationResponse):void} cb
+     * @public
+     */
+    ParseNotification(req, cb) {
+        let resp = new ParseNotificationResponse();
+        this.request("ParseNotification", req, resp, cb);
     }
 
     /**
@@ -850,22 +1133,31 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义内容分析模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
-     * @param {ModifyAIAnalysisTemplateRequest} req
-     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
+     * 查询媒体传输开通状态。
+     * @param {DescribeStreamLinkActivateStateRequest} req
+     * @param {function(string, DescribeStreamLinkActivateStateResponse):void} cb
      * @public
      */
-    ModifyAIAnalysisTemplate(req, cb) {
-        let resp = new ModifyAIAnalysisTemplateResponse();
-        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
+    DescribeStreamLinkActivateState(req, cb) {
+        let resp = new DescribeStreamLinkActivateStateResponse();
+        this.request("DescribeStreamLinkActivateState", req, resp, cb);
+    }
+
+    /**
+     * 修改媒体传输的传输流配置信息。
+     * @param {ModifyStreamLinkFlowRequest} req
+     * @param {function(string, ModifyStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    ModifyStreamLinkFlow(req, cb) {
+        let resp = new ModifyStreamLinkFlowResponse();
+        this.request("ModifyStreamLinkFlow", req, resp, cb);
     }
 
     /**
      * * 该接口用于查询任务列表；
 * 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
-* 只能查询到最近三天（72 小时）内的任务。
+* 只能查询到最近七天（168小时）内的任务。
      * @param {DescribeTasksRequest} req
      * @param {function(string, DescribeTasksResponse):void} cb
      * @public
@@ -873,6 +1165,17 @@ class MpsClient extends AbstractClient {
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
         this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * 查询媒体传输所有地区。
+     * @param {DescribeStreamLinkRegionsRequest} req
+     * @param {function(string, DescribeStreamLinkRegionsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkRegions(req, cb) {
+        let resp = new DescribeStreamLinkRegionsResponse();
+        this.request("DescribeStreamLinkRegions", req, resp, cb);
     }
 
     /**
@@ -964,10 +1267,21 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 创建媒体传输的传输流配置。
+     * @param {CreateStreamLinkFlowRequest} req
+     * @param {function(string, CreateStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    CreateStreamLinkFlow(req, cb) {
+        let resp = new CreateStreamLinkFlowResponse();
+        this.request("CreateStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
      * 对直播流媒体发起处理任务，功能包括：
 
 * 智能内容审核（画面鉴黄、敏感信息检测、声音鉴黄）；
-* 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+* 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音实时翻译）。
 
 直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
      * @param {ProcessLiveStreamRequest} req
@@ -991,16 +1305,16 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 对 COS 中的媒体文件发起处理任务，功能包括：
-1. 视频转码（带水印）；
+     * 对 URL视频链接 或 COS 中的媒体文件发起处理任务，功能包括：
+1. 视频转码（普通转码、极速高清转码、音视频增强）；
 2. 视频转动图；
 3. 对视频按指定时间点截图；
 4. 对视频采样截图；
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
 7. 智能内容审核（鉴黄、敏感信息检测）；
-8. 智能内容分析（标签、分类、封面、按帧标签）；
-9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+8. 智能内容分析（标签、分类、封面、按帧标签、拆条、集锦、片头片尾）；
+9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）。
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
@@ -1074,6 +1388,17 @@ class MpsClient extends AbstractClient {
     CreateAIAnalysisTemplate(req, cb) {
         let resp = new CreateAIAnalysisTemplateResponse();
         this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * 修改转自适应码流模板
+     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
+     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
+        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
+        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
     }
 
     /**

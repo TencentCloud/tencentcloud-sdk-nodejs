@@ -255,6 +255,12 @@ class AutomationAgentInfo extends  AbstractModel {
          */
         this.Environment = null;
 
+        /**
+         * Agent 支持的功能列表。
+         * @type {Array.<string> || null}
+         */
+        this.SupportFeatures = null;
+
     }
 
     /**
@@ -269,6 +275,7 @@ class AutomationAgentInfo extends  AbstractModel {
         this.LastHeartbeatTime = 'LastHeartbeatTime' in params ? params.LastHeartbeatTime : null;
         this.AgentStatus = 'AgentStatus' in params ? params.AgentStatus : null;
         this.Environment = 'Environment' in params ? params.Environment : null;
+        this.SupportFeatures = 'SupportFeatures' in params ? params.SupportFeatures : null;
 
     }
 }
@@ -828,6 +835,18 @@ class CommandDocument extends  AbstractModel {
          */
         this.Username = null;
 
+        /**
+         * 保存输出的 COS Bucket 链接。
+         * @type {string || null}
+         */
+        this.OutputCOSBucketUrl = null;
+
+        /**
+         * 保存输出的文件名称前缀。
+         * @type {string || null}
+         */
+        this.OutputCOSKeyPrefix = null;
+
     }
 
     /**
@@ -842,6 +861,8 @@ class CommandDocument extends  AbstractModel {
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
         this.WorkingDirectory = 'WorkingDirectory' in params ? params.WorkingDirectory : null;
         this.Username = 'Username' in params ? params.Username : null;
+        this.OutputCOSBucketUrl = 'OutputCOSBucketUrl' in params ? params.OutputCOSBucketUrl : null;
+        this.OutputCOSKeyPrefix = 'OutputCOSKeyPrefix' in params ? params.OutputCOSKeyPrefix : null;
 
     }
 }

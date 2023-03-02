@@ -727,13 +727,14 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：当前有库存的硬盘类型。
+         * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_BSSD：通用性SSD云硬盘<br><br>默认取值：当前有库存的硬盘类型。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * 系统盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -3775,14 +3776,14 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><li>CLOUD_BSSD：通用型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
-该参数目前仅用于`DescribeInstances`接口。
+该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -4276,6 +4277,13 @@ class OutputMapping extends  AbstractModel {
          */
         this.DestinationPath = null;
 
+        /**
+         * 输出映射选项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutputMappingOption || null}
+         */
+        this.OutputMappingOption = null;
+
     }
 
     /**
@@ -4287,6 +4295,12 @@ class OutputMapping extends  AbstractModel {
         }
         this.SourcePath = 'SourcePath' in params ? params.SourcePath : null;
         this.DestinationPath = 'DestinationPath' in params ? params.DestinationPath : null;
+
+        if (params.OutputMappingOption) {
+            let obj = new OutputMappingOption();
+            obj.deserialize(params.OutputMappingOption)
+            this.OutputMappingOption = obj;
+        }
 
     }
 }
@@ -4312,7 +4326,7 @@ class EnhancedService extends  AbstractModel {
         this.MonitorService = null;
 
         /**
-         * 开启云自动化助手服务。若不指定该参数，则默认不开启云自动化助手服务。
+         * 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，则公共镜像默认开启云自动化助手服务，其他镜像默认不开启云自动化助手服务。
          * @type {RunAutomationServiceEnabled || null}
          */
         this.AutomationService = null;
@@ -5007,6 +5021,25 @@ class Docker extends  AbstractModel {
          */
         this.Server = null;
 
+        /**
+         * 拉取Docker镜像重试次数。默认值：0。
+         * @type {number || null}
+         */
+        this.MaxRetryCount = null;
+
+        /**
+         * 拉取Docker镜像失败时延迟时间。单位：秒。
+         * @type {number || null}
+         */
+        this.DelayOnRetry = null;
+
+        /**
+         * Docker命令运行参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DockerRunOption = null;
+
     }
 
     /**
@@ -5020,6 +5053,9 @@ class Docker extends  AbstractModel {
         this.Password = 'Password' in params ? params.Password : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.Server = 'Server' in params ? params.Server : null;
+        this.MaxRetryCount = 'MaxRetryCount' in params ? params.MaxRetryCount : null;
+        this.DelayOnRetry = 'DelayOnRetry' in params ? params.DelayOnRetry : null;
+        this.DockerRunOption = 'DockerRunOption' in params ? params.DockerRunOption : null;
 
     }
 }
@@ -5053,7 +5089,7 @@ class ModifyComputeEnvResponse extends  AbstractModel {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等
  * @class
  */
 class Placement extends  AbstractModel {
@@ -5067,7 +5103,7 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
+         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -5079,7 +5115,7 @@ class Placement extends  AbstractModel {
         this.HostIds = null;
 
         /**
-         * 指定母机ip生产子机
+         * 指定母机IP生产子机
          * @type {Array.<string> || null}
          */
         this.HostIps = null;
@@ -5526,6 +5562,18 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。
+         * @type {number || null}
+         */
+        this.GpuCount = null;
+
+        /**
+         * 实例的CPU主频信息
+         * @type {string || null}
+         */
+        this.Frequency = null;
+
     }
 
     /**
@@ -5573,6 +5621,8 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
         this.Fpga = 'Fpga' in params ? params.Fpga : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.GpuCount = 'GpuCount' in params ? params.GpuCount : null;
+        this.Frequency = 'Frequency' in params ? params.Frequency : null;
 
     }
 }
@@ -6674,6 +6724,37 @@ class DescribeCvmZoneInstanceConfigInfosResponse extends  AbstractModel {
 }
 
 /**
+ * 输出映射选项
+ * @class
+ */
+class OutputMappingOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 容器场景下,输出选项从实例映射到容器内的实例侧的工作空间。
+BATCH_WORKSPACE: 工作空间为BATCH在实例内定义的工作空间，BATCH侧保证作业之间的隔离。（默认）
+GLOBAL_WORKSPACE: 工作空间为实例操作系统空间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Workspace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Workspace = 'Workspace' in params ? params.Workspace : null;
+
+    }
+}
+
+/**
  * DescribeJobs返回参数结构体
  * @class
  */
@@ -7349,6 +7430,7 @@ module.exports = {
     AttachInstancesRequest: AttachInstancesRequest,
     DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
     DescribeCvmZoneInstanceConfigInfosResponse: DescribeCvmZoneInstanceConfigInfosResponse,
+    OutputMappingOption: OutputMappingOption,
     DescribeJobsResponse: DescribeJobsResponse,
     Activity: Activity,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,

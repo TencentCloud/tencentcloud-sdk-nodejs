@@ -22,15 +22,21 @@ const ModifyPathRewriteRequest = models.ModifyPathRewriteRequest;
 const TsfPageContainerEvent = models.TsfPageContainerEvent;
 const ApiDetailResponse = models.ApiDetailResponse;
 const UpdateApiRateLimitRuleRequest = models.UpdateApiRateLimitRuleRequest;
+const DeleteClusterResponse = models.DeleteClusterResponse;
 const CosCredentials = models.CosCredentials;
 const DeletePathRewritesResponse = models.DeletePathRewritesResponse;
 const PathRewritePage = models.PathRewritePage;
 const DescribeUnitApiUseDetailRequest = models.DescribeUnitApiUseDetailRequest;
+const ClusterV2 = models.ClusterV2;
+const ModifyApplicationResponse = models.ModifyApplicationResponse;
 const DescribeApiVersionsResponse = models.DescribeApiVersionsResponse;
+const ReassociateBusinessLogConfigRequest = models.ReassociateBusinessLogConfigRequest;
 const StopContainerGroupResponse = models.StopContainerGroupResponse;
 const DeletePathRewritesRequest = models.DeletePathRewritesRequest;
 const DeleteLaneResponse = models.DeleteLaneResponse;
 const DescribeGroupReleaseRequest = models.DescribeGroupReleaseRequest;
+const DescribeConfigTemplateResponse = models.DescribeConfigTemplateResponse;
+const DescribeDeliveryConfigResponse = models.DescribeDeliveryConfigResponse;
 const SimpleApplication = models.SimpleApplication;
 const ContinueRunFailedTaskBatchRequest = models.ContinueRunFailedTaskBatchRequest;
 const DescribeSimpleClustersResponse = models.DescribeSimpleClustersResponse;
@@ -46,20 +52,24 @@ const DescribeInvocationMetricDataDimensionResponse = models.DescribeInvocationM
 const SearchStdoutLogResponse = models.SearchStdoutLogResponse;
 const CreateGatewayApiResponse = models.CreateGatewayApiResponse;
 const DescribeFileConfigsResponse = models.DescribeFileConfigsResponse;
+const DescribeClustersRequest = models.DescribeClustersRequest;
 const DescribeApiVersionsRequest = models.DescribeApiVersionsRequest;
-const TsfPageConfigReleaseLog = models.TsfPageConfigReleaseLog;
+const DeleteConfigTemplateResponse = models.DeleteConfigTemplateResponse;
 const DescribeGroupBindedGatewaysResponse = models.DescribeGroupBindedGatewaysResponse;
 const DescribeJvmMonitorRequest = models.DescribeJvmMonitorRequest;
+const TaskRule = models.TaskRule;
 const UnbindApiGroupRequest = models.UnbindApiGroupRequest;
 const TaskRecord = models.TaskRecord;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const RedoTaskBatchRequest = models.RedoTaskBatchRequest;
-const DescribeTaskLastStatusRequest = models.DescribeTaskLastStatusRequest;
+const DescribeGroupsResponse = models.DescribeGroupsResponse;
 const ModifyUploadInfoResponse = models.ModifyUploadInfoResponse;
 const TsfPageConfig = models.TsfPageConfig;
 const CreateApiRateLimitRuleRequest = models.CreateApiRateLimitRuleRequest;
 const TaskRecordPage = models.TaskRecordPage;
+const AssociateBusinessLogConfigRequest = models.AssociateBusinessLogConfigRequest;
 const DescribeJvmMonitorResponse = models.DescribeJvmMonitorResponse;
+const DescribeDeliveryConfigRequest = models.DescribeDeliveryConfigRequest;
 const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const ChangeApiUsableStatusRequest = models.ChangeApiUsableStatusRequest;
 const DescribeMicroservicesResponse = models.DescribeMicroservicesResponse;
@@ -74,6 +84,7 @@ const DeleteImageTagsRequest = models.DeleteImageTagsRequest;
 const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const InvocationMetricScatterPlot = models.InvocationMetricScatterPlot;
 const RollbackConfigRequest = models.RollbackConfigRequest;
+const DescribeProgramsRequest = models.DescribeProgramsRequest;
 const CreateGatewayApiRequest = models.CreateGatewayApiRequest;
 const DescribeCreateGatewayApiStatusResponse = models.DescribeCreateGatewayApiStatusResponse;
 const DeleteConfigResponse = models.DeleteConfigResponse;
@@ -83,6 +94,7 @@ const DescribeGatewayAllGroupApisResponse = models.DescribeGatewayAllGroupApisRe
 const LaneRule = models.LaneRule;
 const MsInstance = models.MsInstance;
 const GatewayPluginBoundParam = models.GatewayPluginBoundParam;
+const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
 const ModifyLaneRuleRequest = models.ModifyLaneRuleRequest;
 const AddInstancesResponse = models.AddInstancesResponse;
 const StartContainerGroupRequest = models.StartContainerGroupRequest;
@@ -93,11 +105,14 @@ const ScalableRule = models.ScalableRule;
 const EnableUnitRuleRequest = models.EnableUnitRuleRequest;
 const CreateClusterResponse = models.CreateClusterResponse;
 const CreateMicroserviceResponse = models.CreateMicroserviceResponse;
+const AgentProfile = models.AgentProfile;
 const StopGroupRequest = models.StopGroupRequest;
 const ShrinkGroupResponse = models.ShrinkGroupResponse;
 const CosUploadInfo = models.CosUploadInfo;
 const DescribeLanesResponse = models.DescribeLanesResponse;
+const StartGroupRequest = models.StartGroupRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
+const DescribeDownloadInfoRequest = models.DescribeDownloadInfoRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const DescribeGroupBindedGatewaysRequest = models.DescribeGroupBindedGatewaysRequest;
 const DescribeRepositoryRequest = models.DescribeRepositoryRequest;
@@ -107,6 +122,7 @@ const ImageTagsResult = models.ImageTagsResult;
 const RepositoryInfo = models.RepositoryInfo;
 const DraftApiGroupRequest = models.DraftApiGroupRequest;
 const CreateLaneResponse = models.CreateLaneResponse;
+const DescribeDeliveryConfigsResponse = models.DescribeDeliveryConfigsResponse;
 const TcrRepoInfo = models.TcrRepoInfo;
 const UpdateApiTimeoutsResponse = models.UpdateApiTimeoutsResponse;
 const TsfPageDimension = models.TsfPageDimension;
@@ -117,19 +133,22 @@ const DeleteImageTag = models.DeleteImageTag;
 const DescribeContainerGroupDeployInfoResponse = models.DescribeContainerGroupDeployInfoResponse;
 const DescribeOverviewInvocationRequest = models.DescribeOverviewInvocationRequest;
 const TaskLastExecuteStatus = models.TaskLastExecuteStatus;
-const DescribeProgramsRequest = models.DescribeProgramsRequest;
+const DisassociateBusinessLogConfigResponse = models.DisassociateBusinessLogConfigResponse;
 const DescribePublicConfigRequest = models.DescribePublicConfigRequest;
+const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
 const ImageRepository = models.ImageRepository;
-const DescribeInovcationIndicatorsRequest = models.DescribeInovcationIndicatorsRequest;
+const DescribeOverviewInvocationResponse = models.DescribeOverviewInvocationResponse;
 const CreatePublicConfigResponse = models.CreatePublicConfigResponse;
 const LaneRules = models.LaneRules;
 const TsfPageVmGroup = models.TsfPageVmGroup;
 const CreateConfigResponse = models.CreateConfigResponse;
+const RevokeFileConfigRequest = models.RevokeFileConfigRequest;
 const DescribeCreateGatewayApiStatusRequest = models.DescribeCreateGatewayApiStatusRequest;
 const RevocationPublicConfigResponse = models.RevocationPublicConfigResponse;
 const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
-const ModifyContainerGroupRequest = models.ModifyContainerGroupRequest;
+const AssociateConfigWithGroupResponse = models.AssociateConfigWithGroupResponse;
 const UpdateRepositoryResponse = models.UpdateRepositoryResponse;
+const DisassociateKafkaConfigRequest = models.DisassociateKafkaConfigRequest;
 const RollbackConfigResponse = models.RollbackConfigResponse;
 const RevocationConfigRequest = models.RevocationConfigRequest;
 const StartContainerGroupResponse = models.StartContainerGroupResponse;
@@ -145,13 +164,16 @@ const DeleteGroupResponse = models.DeleteGroupResponse;
 const DescribeSimpleApplicationsResponse = models.DescribeSimpleApplicationsResponse;
 const DeployContainerGroupRequest = models.DeployContainerGroupRequest;
 const DescribeSimpleApplicationsRequest = models.DescribeSimpleApplicationsRequest;
+const DescribeDeliveryConfigByGroupIdResponse = models.DescribeDeliveryConfigByGroupIdResponse;
+const ModifyContainerGroupRequest = models.ModifyContainerGroupRequest;
 const OperateApplicationTcrBindingRequest = models.OperateApplicationTcrBindingRequest;
 const ContainGroup = models.ContainGroup;
+const DescribeGroupBusinessLogConfigsResponse = models.DescribeGroupBusinessLogConfigsResponse;
 const ContainGroupResult = models.ContainGroupResult;
 const UpdateUnitRuleRequest = models.UpdateUnitRuleRequest;
 const ReleasePublicConfigResponse = models.ReleasePublicConfigResponse;
 const ReleaseApiGroupResponse = models.ReleaseApiGroupResponse;
-const CreateFileConfigRequest = models.CreateFileConfigRequest;
+const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const UpdateApiRateLimitRulesRequest = models.UpdateApiRateLimitRulesRequest;
 const DescribeGroupInstancesRequest = models.DescribeGroupInstancesRequest;
 const DescribeMsApiListRequest = models.DescribeMsApiListRequest;
@@ -169,12 +191,14 @@ const DescribeInvocationMetricDataPointRequest = models.DescribeInvocationMetric
 const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
 const MonitorOverview = models.MonitorOverview;
 const CreateGroupRequest = models.CreateGroupRequest;
+const DeleteClusterRequest = models.DeleteClusterRequest;
 const StopTaskBatchResponse = models.StopTaskBatchResponse;
 const ServiceStatisticsResult = models.ServiceStatisticsResult;
 const CreateContainGroupResponse = models.CreateContainGroupResponse;
 const DescribeContainerGroupDetailResponse = models.DescribeContainerGroupDetailResponse;
 const Ports = models.Ports;
 const DescribeGroupGatewaysResponse = models.DescribeGroupGatewaysResponse;
+const SimpleKafkaDeliveryConfig = models.SimpleKafkaDeliveryConfig;
 const RevocationConfigResponse = models.RevocationConfigResponse;
 const PkgBind = models.PkgBind;
 const DeleteTaskResponse = models.DeleteTaskResponse;
@@ -184,16 +208,20 @@ const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const DescribeContainerEventsRequest = models.DescribeContainerEventsRequest;
 const DisableUnitRuleRequest = models.DisableUnitRuleRequest;
 const Namespace = models.Namespace;
+const DescribeApplicationBusinessLogConfigResponse = models.DescribeApplicationBusinessLogConfigResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const Env = models.Env;
-const ResourceFieldRef = models.ResourceFieldRef;
+const ModifyClusterRequest = models.ModifyClusterRequest;
 const Resource = models.Resource;
 const DeleteContainerGroupResponse = models.DeleteContainerGroupResponse;
 const DeleteServerlessGroupResponse = models.DeleteServerlessGroupResponse;
 const DeleteImageTagsResponse = models.DeleteImageTagsResponse;
-const CreateLaneRuleRequest = models.CreateLaneRuleRequest;
+const DeliveryKafkaInfo = models.DeliveryKafkaInfo;
+const GroupUnitApiDailyUseStatistics = models.GroupUnitApiDailyUseStatistics;
+const DescribeFileConfigReleasesResponse = models.DescribeFileConfigReleasesResponse;
 const DisableUnitRouteResponse = models.DisableUnitRouteResponse;
 const ExecuteTaskRequest = models.ExecuteTaskRequest;
+const DescribeGroupBusinessLogConfigsRequest = models.DescribeGroupBusinessLogConfigsRequest;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const LaneInfo = models.LaneInfo;
 const DescribeConfigReleaseLogsResponse = models.DescribeConfigReleaseLogsResponse;
@@ -201,8 +229,9 @@ const DeletePublicConfigResponse = models.DeletePublicConfigResponse;
 const DescribeSimpleGroupsResponse = models.DescribeSimpleGroupsResponse;
 const DescribeFlowLastBatchStateRequest = models.DescribeFlowLastBatchStateRequest;
 const MetricDataCurve = models.MetricDataCurve;
+const GroupInfo = models.GroupInfo;
 const TerminateTaskFlowBatchResponse = models.TerminateTaskFlowBatchResponse;
-const ShrinkInstancesRequest = models.ShrinkInstancesRequest;
+const DisassociateKafkaConfigResponse = models.DisassociateKafkaConfigResponse;
 const ValueFrom = models.ValueFrom;
 const ShrinkInstancesResponse = models.ShrinkInstancesResponse;
 const DeleteLaneRuleResponse = models.DeleteLaneRuleResponse;
@@ -214,9 +243,11 @@ const TsfPageNamespace = models.TsfPageNamespace;
 const VolumeInfo = models.VolumeInfo;
 const UpdateApiTimeoutsRequest = models.UpdateApiTimeoutsRequest;
 const Metric = models.Metric;
-const DescribeOverviewInvocationResponse = models.DescribeOverviewInvocationResponse;
+const DescribeInovcationIndicatorsRequest = models.DescribeInovcationIndicatorsRequest;
+const ShrinkInstancesRequest = models.ShrinkInstancesRequest;
 const DescribeSimpleNamespacesRequest = models.DescribeSimpleNamespacesRequest;
 const ExecuteTaskFlowResponse = models.ExecuteTaskFlowResponse;
+const DescribeClustersResponse = models.DescribeClustersResponse;
 const SearchBusinessLogRequest = models.SearchBusinessLogRequest;
 const ExpandGroupResponse = models.ExpandGroupResponse;
 const DescribePublicConfigsResponse = models.DescribePublicConfigsResponse;
@@ -224,22 +255,28 @@ const DescribeUnitNamespacesResponse = models.DescribeUnitNamespacesResponse;
 const ContinueRunFailedTaskBatchResponse = models.ContinueRunFailedTaskBatchResponse;
 const DescribeSimpleClustersRequest = models.DescribeSimpleClustersRequest;
 const Program = models.Program;
+const KafkaDeliveryConfig = models.KafkaDeliveryConfig;
 const ApiDefinitionDescr = models.ApiDefinitionDescr;
 const DescribeLaneRulesResponse = models.DescribeLaneRulesResponse;
 const DescribeImageRepositoryRequest = models.DescribeImageRepositoryRequest;
 const IndicatorCoord = models.IndicatorCoord;
 const TsfPageUnitRule = models.TsfPageUnitRule;
 const DescribeApiGroupRequest = models.DescribeApiGroupRequest;
+const AssociateBusinessLogConfigResponse = models.AssociateBusinessLogConfigResponse;
 const DescribeGatewayApisRequest = models.DescribeGatewayApisRequest;
+const AssociateConfigWithGroupRequest = models.AssociateConfigWithGroupRequest;
+const TsfPageConfigReleaseLog = models.TsfPageConfigReleaseLog;
 const DescribeContainerGroupDetailRequest = models.DescribeContainerGroupDetailRequest;
 const JvmMonitorData = models.JvmMonitorData;
 const DescribeGroupsWithPluginRequest = models.DescribeGroupsWithPluginRequest;
 const ImageRepositoryResult = models.ImageRepositoryResult;
 const ModifyTaskResponse = models.ModifyTaskResponse;
+const RevokeFileConfigResponse = models.RevokeFileConfigResponse;
 const SearchBusinessLogResponse = models.SearchBusinessLogResponse;
 const DeleteUnitNamespacesRequest = models.DeleteUnitNamespacesRequest;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const UnitRuleItem = models.UnitRuleItem;
+const UpdateConfigTemplateResponse = models.UpdateConfigTemplateResponse;
 const BindPluginRequest = models.BindPluginRequest;
 const HealthCheckSetting = models.HealthCheckSetting;
 const DeleteLaneRuleRequest = models.DeleteLaneRuleRequest;
@@ -250,7 +287,7 @@ const Cluster = models.Cluster;
 const DescribeGroupUseDetailRequest = models.DescribeGroupUseDetailRequest;
 const Microservice = models.Microservice;
 const UpdateUnitRuleResponse = models.UpdateUnitRuleResponse;
-const HealthCheckSettings = models.HealthCheckSettings;
+const CreateUnitRuleRequest = models.CreateUnitRuleRequest;
 const StartGroupResponse = models.StartGroupResponse;
 const GroupRelease = models.GroupRelease;
 const DescribePathRewritesRequest = models.DescribePathRewritesRequest;
@@ -280,6 +317,7 @@ const CreateApplicationResponse = models.CreateApplicationResponse;
 const GatewayGroupIds = models.GatewayGroupIds;
 const DescribeInvocationMetricDataDimensionRequest = models.DescribeInvocationMetricDataDimensionRequest;
 const DeployGroupResponse = models.DeployGroupResponse;
+const ModifyGroupResponse = models.ModifyGroupResponse;
 const BindApiGroupResponse = models.BindApiGroupResponse;
 const MetricDataPointMap = models.MetricDataPointMap;
 const DescribeGroupAttributeResponse = models.DescribeGroupAttributeResponse;
@@ -289,10 +327,12 @@ const DescribeEnabledUnitRuleResponse = models.DescribeEnabledUnitRuleResponse;
 const UpdateApiGroupRequest = models.UpdateApiGroupRequest;
 const TsfApiListResponse = models.TsfApiListResponse;
 const EnableUnitRouteResponse = models.EnableUnitRouteResponse;
-const DisableUnitRuleResponse = models.DisableUnitRuleResponse;
+const GroupUseStatisticsEntity = models.GroupUseStatisticsEntity;
+const DescribeBusinessLogConfigRequest = models.DescribeBusinessLogConfigRequest;
 const TsfPageGatewayDeployGroup = models.TsfPageGatewayDeployGroup;
 const ImageTag = models.ImageTag;
 const ExecuteTaskFlowRequest = models.ExecuteTaskFlowRequest;
+const DescribeBusinessLogConfigResponse = models.DescribeBusinessLogConfigResponse;
 const TerminateTaskFlowBatchRequest = models.TerminateTaskFlowBatchRequest;
 const CreateUnitRuleResponse = models.CreateUnitRuleResponse;
 const DescribeTaskRecordsResponse = models.DescribeTaskRecordsResponse;
@@ -304,9 +344,10 @@ const DescribeGatewayApisResponse = models.DescribeGatewayApisResponse;
 const DescribeUnitRuleRequest = models.DescribeUnitRuleRequest;
 const UpdateGatewayApiResponse = models.UpdateGatewayApiResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DeleteFileConfigResponse = models.DeleteFileConfigResponse;
 const ContainerEvent = models.ContainerEvent;
 const ModifyLaneResponse = models.ModifyLaneResponse;
-const DescribeDownloadInfoRequest = models.DescribeDownloadInfoRequest;
+const DeleteFileConfigRequest = models.DeleteFileConfigRequest;
 const DescribePublicConfigSummaryResponse = models.DescribePublicConfigSummaryResponse;
 const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleaseLogsRequest;
 const ShardArgument = models.ShardArgument;
@@ -316,10 +357,12 @@ const DescribeApplicationAttributeResponse = models.DescribeApplicationAttribute
 const ModifyLaneRequest = models.ModifyLaneRequest;
 const DescribeLanesRequest = models.DescribeLanesRequest;
 const DescribeGatewayMonitorOverviewResponse = models.DescribeGatewayMonitorOverviewResponse;
+const BusinesLogConfigAssociatedGroup = models.BusinesLogConfigAssociatedGroup;
 const CreatePublicConfigRequest = models.CreatePublicConfigRequest;
 const CreateAllGatewayApiAsyncRequest = models.CreateAllGatewayApiAsyncRequest;
 const PathRewrite = models.PathRewrite;
 const EnableTaskFlowResponse = models.EnableTaskFlowResponse;
+const ApiDetailInfo = models.ApiDetailInfo;
 const DeleteUnitRuleResponse = models.DeleteUnitRuleResponse;
 const TsfPageConfigRelease = models.TsfPageConfigRelease;
 const DisableTaskFlowResponse = models.DisableTaskFlowResponse;
@@ -328,6 +371,8 @@ const DescribeImageTagsResponse = models.DescribeImageTagsResponse;
 const BindPluginResponse = models.BindPluginResponse;
 const RedoTaskFlowBatchRequest = models.RedoTaskFlowBatchRequest;
 const TsfPageUnitNamespace = models.TsfPageUnitNamespace;
+const CreateMicroserviceWithDetailRespRequest = models.CreateMicroserviceWithDetailRespRequest;
+const BusinessLogConfigSchema = models.BusinessLogConfigSchema;
 const MetricDataSingleValue = models.MetricDataSingleValue;
 const StopTaskExecuteRequest = models.StopTaskExecuteRequest;
 const DescribePkgsRequest = models.DescribePkgsRequest;
@@ -348,34 +393,41 @@ const ModifyContainerGroupResponse = models.ModifyContainerGroupResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const DescribeUnitNamespacesRequest = models.DescribeUnitNamespacesRequest;
 const DeleteTaskRequest = models.DeleteTaskRequest;
-const CreateUnitRuleRequest = models.CreateUnitRuleRequest;
+const HealthCheckSettings = models.HealthCheckSettings;
 const VmGroupSimple = models.VmGroupSimple;
 const ApiResponseDescr = models.ApiResponseDescr;
+const DescribeBusinessLogConfigsRequest = models.DescribeBusinessLogConfigsRequest;
+const DeleteConfigTemplateRequest = models.DeleteConfigTemplateRequest;
 const DescribePluginInstancesRequest = models.DescribePluginInstancesRequest;
 const ApiRequestDescr = models.ApiRequestDescr;
 const ApiVersionArray = models.ApiVersionArray;
+const GatewayConfig = models.GatewayConfig;
+const DeliveryConfigBindGroups = models.DeliveryConfigBindGroups;
 const DescribeInovcationIndicatorsResponse = models.DescribeInovcationIndicatorsResponse;
 const MultiValueDataPoints = models.MultiValueDataPoints;
 const ConfigReleaseLog = models.ConfigReleaseLog;
 const CreateFileConfigResponse = models.CreateFileConfigResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
+const TsfPageClusterV2 = models.TsfPageClusterV2;
 const DescribeUploadInfoRequest = models.DescribeUploadInfoRequest;
 const OverviewBasicResourceUsage = models.OverviewBasicResourceUsage;
 const DescribeUnitRulesResponse = models.DescribeUnitRulesResponse;
 const UpdateGatewayApiRequest = models.UpdateGatewayApiRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const ReassociateBusinessLogConfigResponse = models.ReassociateBusinessLogConfigResponse;
 const PathRewriteCreateObject = models.PathRewriteCreateObject;
 const DescribeApiGroupsRequest = models.DescribeApiGroupsRequest;
 const DeleteUnitRuleRequest = models.DeleteUnitRuleRequest;
 const ApplicationAttribute = models.ApplicationAttribute;
 const TaskFlowLastBatchState = models.TaskFlowLastBatchState;
 const DeletePkgsResponse = models.DeletePkgsResponse;
-const DescribeGroupsResponse = models.DescribeGroupsResponse;
+const DescribeTaskLastStatusRequest = models.DescribeTaskLastStatusRequest;
+const DescribeBusinessLogConfigsResponse = models.DescribeBusinessLogConfigsResponse;
 const ApplicationForPage = models.ApplicationForPage;
 const DescribeInvocationMetricScatterPlotRequest = models.DescribeInvocationMetricScatterPlotRequest;
 const CreateTaskFlowResponse = models.CreateTaskFlowResponse;
 const DescribeMicroservicesRequest = models.DescribeMicroservicesRequest;
-const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
+const DescribeApplicationBusinessLogConfigRequest = models.DescribeApplicationBusinessLogConfigRequest;
 const DescribeInvocationMetricDataCurveRequest = models.DescribeInvocationMetricDataCurveRequest;
 const VmGroupOther = models.VmGroupOther;
 const DescribeTaskLastStatusResponse = models.DescribeTaskLastStatusResponse;
@@ -385,15 +437,16 @@ const DescribeApplicationsRequest = models.DescribeApplicationsRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const MultiValue = models.MultiValue;
 const DescribePublicConfigReleasesRequest = models.DescribePublicConfigReleasesRequest;
+const TsfPageFileConfigRelease = models.TsfPageFileConfigRelease;
 const DescribeLaneRulesRequest = models.DescribeLaneRulesRequest;
 const UnitRuleTag = models.UnitRuleTag;
 const DescribePluginInstancesResponse = models.DescribePluginInstancesResponse;
 const CreateRepositoryResponse = models.CreateRepositoryResponse;
-const GroupUnitApiDailyUseStatistics = models.GroupUnitApiDailyUseStatistics;
+const CreateLaneRuleRequest = models.CreateLaneRuleRequest;
 const CurvePoint = models.CurvePoint;
 const CosDownloadInfo = models.CosDownloadInfo;
 const DeletePkgsRequest = models.DeletePkgsRequest;
-const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const CreateFileConfigRequest = models.CreateFileConfigRequest;
 const GroupApiUseStatistics = models.GroupApiUseStatistics;
 const ChangeApiUsableStatusResponse = models.ChangeApiUsableStatusResponse;
 const EnableTaskResponse = models.EnableTaskResponse;
@@ -402,11 +455,12 @@ const PagedProgram = models.PagedProgram;
 const GroupUnitApiUseStatistics = models.GroupUnitApiUseStatistics;
 const DescribeGroupInstancesResponse = models.DescribeGroupInstancesResponse;
 const DescribeContainerGroupDeployInfoRequest = models.DescribeContainerGroupDeployInfoRequest;
-const OperateApplicationTcrBindingResponse = models.OperateApplicationTcrBindingResponse;
+const DescribeDeliveryConfigsRequest = models.DescribeDeliveryConfigsRequest;
+const DisassociateBusinessLogConfigRequest = models.DisassociateBusinessLogConfigRequest;
 const DescribePublicConfigReleaseLogsResponse = models.DescribePublicConfigReleaseLogsResponse;
 const DeleteApiGroupRequest = models.DeleteApiGroupRequest;
 const ReleaseApiGroupRequest = models.ReleaseApiGroupRequest;
-const StartGroupRequest = models.StartGroupRequest;
+const DescribeFileConfigReleasesRequest = models.DescribeFileConfigReleasesRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const ExpandGroupRequest = models.ExpandGroupRequest;
@@ -414,7 +468,7 @@ const RevocationPublicConfigRequest = models.RevocationPublicConfigRequest;
 const ModifyLaneRuleResponse = models.ModifyLaneRuleResponse;
 const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
 const DescribeGroupAttributeRequest = models.DescribeGroupAttributeRequest;
-const TaskRule = models.TaskRule;
+const ModifyClusterResponse = models.ModifyClusterResponse;
 const PkgInfo = models.PkgInfo;
 const GroupPod = models.GroupPod;
 const EnableTaskFlowRequest = models.EnableTaskFlowRequest;
@@ -427,6 +481,7 @@ const DescribeConfigReleasesRequest = models.DescribeConfigReleasesRequest;
 const StdoutLogV2 = models.StdoutLogV2;
 const GroupDailyUseStatistics = models.GroupDailyUseStatistics;
 const DescribeEnabledUnitRuleRequest = models.DescribeEnabledUnitRuleRequest;
+const CreateConfigTemplateRequest = models.CreateConfigTemplateRequest;
 const DescribeApiGroupResponse = models.DescribeApiGroupResponse;
 const RedoTaskExecuteResponse = models.RedoTaskExecuteResponse;
 const CreateLaneRequest = models.CreateLaneRequest;
@@ -436,56 +491,67 @@ const RedoTaskExecuteRequest = models.RedoTaskExecuteRequest;
 const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const InvocationIndicator = models.InvocationIndicator;
 const DescribeConfigRequest = models.DescribeConfigRequest;
+const OperateApplicationTcrBindingResponse = models.OperateApplicationTcrBindingResponse;
 const DisableUnitRouteRequest = models.DisableUnitRouteRequest;
 const DescribeUnitRulesRequest = models.DescribeUnitRulesRequest;
+const UpdateConfigTemplateRequest = models.UpdateConfigTemplateRequest;
 const DescribeGatewayAllGroupApisRequest = models.DescribeGatewayAllGroupApisRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ContainerGroupDetail = models.ContainerGroupDetail;
 const BindApiGroupRequest = models.BindApiGroupRequest;
 const StopTaskBatchRequest = models.StopTaskBatchRequest;
-const ApiDetailInfo = models.ApiDetailInfo;
+const ConfigTemplate = models.ConfigTemplate;
 const DescribeUnitApiUseDetailResponse = models.DescribeUnitApiUseDetailResponse;
 const DescribeInvocationMetricScatterPlotResponse = models.DescribeInvocationMetricScatterPlotResponse;
 const DescribeUsableUnitNamespacesRequest = models.DescribeUsableUnitNamespacesRequest;
 const DescribeContainerGroupsRequest = models.DescribeContainerGroupsRequest;
+const TsfPageBusinessLogConfig = models.TsfPageBusinessLogConfig;
 const DescribeProgramsResponse = models.DescribeProgramsResponse;
 const ProgramItem = models.ProgramItem;
 const DisableTaskFlowRequest = models.DisableTaskFlowRequest;
 const DescribePodInstancesRequest = models.DescribePodInstancesRequest;
 const RedoTaskResponse = models.RedoTaskResponse;
+const DeliveryConfigBindGroup = models.DeliveryConfigBindGroup;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const WarmupSetting = models.WarmupSetting;
 const EnableUnitRouteRequest = models.EnableUnitRouteRequest;
 const TsfPageApplication = models.TsfPageApplication;
 const InstanceEnrichedInfo = models.InstanceEnrichedInfo;
 const DescribeInvocationMetricDataCurveResponse = models.DescribeInvocationMetricDataCurveResponse;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const DescribeFileConfigsRequest = models.DescribeFileConfigsRequest;
+const CreateConfigTemplateResponse = models.CreateConfigTemplateResponse;
 const ExecuteTaskResponse = models.ExecuteTaskResponse;
 const CreateApiRateLimitRuleResponse = models.CreateApiRateLimitRuleResponse;
 const Config = models.Config;
 const ProtocolPort = models.ProtocolPort;
 const DescribeApiUseDetailRequest = models.DescribeApiUseDetailRequest;
+const CreateMicroserviceWithDetailRespResponse = models.CreateMicroserviceWithDetailRespResponse;
 const TsfPageBusinessLogV2 = models.TsfPageBusinessLogV2;
 const FieldRef = models.FieldRef;
 const CreateClusterRequest = models.CreateClusterRequest;
+const DescribeDeliveryConfigByGroupIdRequest = models.DescribeDeliveryConfigByGroupIdRequest;
 const TsfPageMicroservice = models.TsfPageMicroservice;
 const ConfigRelease = models.ConfigRelease;
 const DeleteContainerGroupRequest = models.DeleteContainerGroupRequest;
 const AdvanceSettings = models.AdvanceSettings;
 const ReleaseConfigRequest = models.ReleaseConfigRequest;
 const MsApiArray = models.MsApiArray;
+const BusinessLogConfig = models.BusinessLogConfig;
 const DescribeApiDetailRequest = models.DescribeApiDetailRequest;
 const StopContainerGroupRequest = models.StopContainerGroupRequest;
 const UpdateHealthCheckSettingsResponse = models.UpdateHealthCheckSettingsResponse;
 const ApiRateLimitRule = models.ApiRateLimitRule;
 const Filter = models.Filter;
 const DescribeInvocationMetricDataPointResponse = models.DescribeInvocationMetricDataPointResponse;
-const GroupUseStatisticsEntity = models.GroupUseStatisticsEntity;
+const DisableUnitRuleResponse = models.DisableUnitRuleResponse;
+const ModifyApplicationRequest = models.ModifyApplicationRequest;
 const DescribePathRewritesResponse = models.DescribePathRewritesResponse;
 const AddInstanceResult = models.AddInstanceResult;
 const DescribeFlowLastBatchStateResponse = models.DescribeFlowLastBatchStateResponse;
 const StopTaskExecuteResponse = models.StopTaskExecuteResponse;
 const UpdateApiRateLimitRulesResponse = models.UpdateApiRateLimitRulesResponse;
+const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
 const DescribeSimpleGroupsRequest = models.DescribeSimpleGroupsRequest;
 const DescribeConfigReleasesResponse = models.DescribeConfigReleasesResponse;
 const ApiGroupInfo = models.ApiGroupInfo;
@@ -500,6 +566,7 @@ const DeployContainerGroupResponse = models.DeployContainerGroupResponse;
 const TsfPageApiDetailInfo = models.TsfPageApiDetailInfo;
 const DescribeBasicResourceUsageRequest = models.DescribeBasicResourceUsageRequest;
 const DeleteMicroserviceResponse = models.DeleteMicroserviceResponse;
+const ResourceFieldRef = models.ResourceFieldRef;
 const DescribeReleasedConfigResponse = models.DescribeReleasedConfigResponse;
 const HealthCheckConfig = models.HealthCheckConfig;
 const TsfPageSimpleApplication = models.TsfPageSimpleApplication;
@@ -507,12 +574,14 @@ const PropertyField = models.PropertyField;
 const DescribeApiDetailResponse = models.DescribeApiDetailResponse;
 const DescribeGroupsRequest = models.DescribeGroupsRequest;
 const LaneRuleTag = models.LaneRuleTag;
+const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const OperationInfoDetail = models.OperationInfoDetail;
 const CreatePathRewritesRequest = models.CreatePathRewritesRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const SearchStdoutLogRequest = models.SearchStdoutLogRequest;
 const RedoTaskBatchResponse = models.RedoTaskBatchResponse;
 const DescribeStatisticsRequest = models.DescribeStatisticsRequest;
+const ModifyGroupRequest = models.ModifyGroupRequest;
 const DescribeMicroserviceResponse = models.DescribeMicroserviceResponse;
 const DescribeImageRepositoryResponse = models.DescribeImageRepositoryResponse;
 const TaskId = models.TaskId;
@@ -522,7 +591,7 @@ const DescribeConfigSummaryResponse = models.DescribeConfigSummaryResponse;
 const CreateContainGroupRequest = models.CreateContainGroupRequest;
 const DescribePublicConfigReleasesResponse = models.DescribePublicConfigReleasesResponse;
 const CreatePathRewritesResponse = models.CreatePathRewritesResponse;
-const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
+const DescribeConfigTemplateRequest = models.DescribeConfigTemplateRequest;
 const DraftApiGroupResponse = models.DraftApiGroupResponse;
 const DescribeConfigSummaryRequest = models.DescribeConfigSummaryRequest;
 const DeleteLaneRequest = models.DeleteLaneRequest;
@@ -589,14 +658,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 修改容器部署组实例数
-     * @param {ModifyContainerReplicasRequest} req
-     * @param {function(string, ModifyContainerReplicasResponse):void} cb
+     * 查询应用关联日志配置项信息
+     * @param {DescribeApplicationBusinessLogConfigRequest} req
+     * @param {function(string, DescribeApplicationBusinessLogConfigResponse):void} cb
      * @public
      */
-    ModifyContainerReplicas(req, cb) {
-        let resp = new ModifyContainerReplicasResponse();
-        this.request("ModifyContainerReplicas", req, resp, cb);
+    DescribeApplicationBusinessLogConfig(req, cb) {
+        let resp = new DescribeApplicationBusinessLogConfigResponse();
+        this.request("DescribeApplicationBusinessLogConfig", req, resp, cb);
     }
 
     /**
@@ -677,6 +746,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 删除集群
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
+     * @public
+     */
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
      * 重新执行工作流批次
      * @param {RedoTaskFlowBatchRequest} req
      * @param {function(string, RedoTaskFlowBatchResponse):void} cb
@@ -732,14 +812,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 停用任务
-     * @param {DisableTaskRequest} req
-     * @param {function(string, DisableTaskResponse):void} cb
+     * 创建参数模板
+     * @param {CreateConfigTemplateRequest} req
+     * @param {function(string, CreateConfigTemplateResponse):void} cb
      * @public
      */
-    DisableTask(req, cb) {
-        let resp = new DisableTaskResponse();
-        this.request("DisableTask", req, resp, cb);
+    CreateConfigTemplate(req, cb) {
+        let resp = new CreateConfigTemplateResponse();
+        this.request("CreateConfigTemplate", req, resp, cb);
     }
 
     /**
@@ -809,6 +889,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 修改集群信息
+     * @param {ModifyClusterRequest} req
+     * @param {function(string, ModifyClusterResponse):void} cb
+     * @public
+     */
+    ModifyCluster(req, cb) {
+        let resp = new ModifyClusterResponse();
+        this.request("ModifyCluster", req, resp, cb);
+    }
+
+    /**
      *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
      * @param {DescribeContainerGroupDetailRequest} req
      * @param {function(string, DescribeContainerGroupDetailResponse):void} cb
@@ -864,6 +955,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 修改容器部署组实例数
+     * @param {ModifyContainerReplicasRequest} req
+     * @param {function(string, ModifyContainerReplicasResponse):void} cb
+     * @public
+     */
+    ModifyContainerReplicas(req, cb) {
+        let resp = new ModifyContainerReplicasResponse();
+        this.request("ModifyContainerReplicas", req, resp, cb);
+    }
+
+    /**
      * 查询简单集群列表
      * @param {DescribeSimpleClustersRequest} req
      * @param {function(string, DescribeSimpleClustersResponse):void} cb
@@ -886,6 +988,28 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 撤回已发布的文件配置
+     * @param {RevokeFileConfigRequest} req
+     * @param {function(string, RevokeFileConfigResponse):void} cb
+     * @public
+     */
+    RevokeFileConfig(req, cb) {
+        let resp = new RevokeFileConfigResponse();
+        this.request("RevokeFileConfig", req, resp, cb);
+    }
+
+    /**
+     * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
+     * @param {CreateContainGroupRequest} req
+     * @param {function(string, CreateContainGroupResponse):void} cb
+     * @public
+     */
+    CreateContainGroup(req, cb) {
+        let resp = new CreateContainGroupResponse();
+        this.request("CreateContainGroup", req, resp, cb);
+    }
+
+    /**
      * 查询某个插件下绑定或未绑定的API分组
      * @param {DescribeGroupsWithPluginRequest} req
      * @param {function(string, DescribeGroupsWithPluginResponse):void} cb
@@ -905,6 +1029,17 @@ class TsfClient extends AbstractClient {
     DisableUnitRoute(req, cb) {
         let resp = new DisableUnitRouteResponse();
         this.request("DisableUnitRoute", req, resp, cb);
+    }
+
+    /**
+     * 取消关联业务日志配置项和应用
+     * @param {DisassociateBusinessLogConfigRequest} req
+     * @param {function(string, DisassociateBusinessLogConfigResponse):void} cb
+     * @public
+     */
+    DisassociateBusinessLogConfig(req, cb) {
+        let resp = new DisassociateBusinessLogConfigResponse();
+        this.request("DisassociateBusinessLogConfig", req, resp, cb);
     }
 
     /**
@@ -1052,6 +1187,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 更新仓库信息
+     * @param {UpdateRepositoryRequest} req
+     * @param {function(string, UpdateRepositoryResponse):void} cb
+     * @public
+     */
+    UpdateRepository(req, cb) {
+        let resp = new UpdateRepositoryResponse();
+        this.request("UpdateRepository", req, resp, cb);
+    }
+
+    /**
      * 查询网关分组监控明细数据
      * @param {DescribeGroupUseDetailRequest} req
      * @param {function(string, DescribeGroupUseDetailResponse):void} cb
@@ -1063,25 +1209,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询公共配置（单条）
-     * @param {DescribePublicConfigRequest} req
-     * @param {function(string, DescribePublicConfigResponse):void} cb
+     * 镜像仓库列表 
+     * @param {DescribeImageRepositoryRequest} req
+     * @param {function(string, DescribeImageRepositoryResponse):void} cb
      * @public
      */
-    DescribePublicConfig(req, cb) {
-        let resp = new DescribePublicConfigResponse();
-        this.request("DescribePublicConfig", req, resp, cb);
+    DescribeImageRepository(req, cb) {
+        let resp = new DescribeImageRepositoryResponse();
+        this.request("DescribeImageRepository", req, resp, cb);
     }
 
     /**
-     * 更新仓库信息
-     * @param {UpdateRepositoryRequest} req
-     * @param {function(string, UpdateRepositoryResponse):void} cb
+     * 重关联业务日志配置
+     * @param {ReassociateBusinessLogConfigRequest} req
+     * @param {function(string, ReassociateBusinessLogConfigResponse):void} cb
      * @public
      */
-    UpdateRepository(req, cb) {
-        let resp = new UpdateRepositoryResponse();
-        this.request("UpdateRepository", req, resp, cb);
+    ReassociateBusinessLogConfig(req, cb) {
+        let resp = new ReassociateBusinessLogConfigResponse();
+        this.request("ReassociateBusinessLogConfig", req, resp, cb);
     }
 
     /**
@@ -1184,6 +1330,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 删除文件配置项
+     * @param {DeleteFileConfigRequest} req
+     * @param {function(string, DeleteFileConfigResponse):void} cb
+     * @public
+     */
+    DeleteFileConfig(req, cb) {
+        let resp = new DeleteFileConfigResponse();
+        this.request("DeleteFileConfig", req, resp, cb);
+    }
+
+    /**
      * 停止容器部署组
      * @param {StopContainerGroupRequest} req
      * @param {function(string, StopContainerGroupResponse):void} cb
@@ -1192,6 +1349,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     StopContainerGroup(req, cb) {
         let resp = new StopContainerGroupResponse();
         this.request("StopContainerGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询分组管理日志配置列表
+     * @param {DescribeGroupBusinessLogConfigsRequest} req
+     * @param {function(string, DescribeGroupBusinessLogConfigsResponse):void} cb
+     * @public
+     */
+    DescribeGroupBusinessLogConfigs(req, cb) {
+        let resp = new DescribeGroupBusinessLogConfigsResponse();
+        this.request("DescribeGroupBusinessLogConfigs", req, resp, cb);
     }
 
     /**
@@ -1272,6 +1440,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 查询虚拟机部署组云主机列表
+     * @param {DescribeGroupInstancesRequest} req
+     * @param {function(string, DescribeGroupInstancesResponse):void} cb
+     * @public
+     */
+    DescribeGroupInstances(req, cb) {
+        let resp = new DescribeGroupInstancesResponse();
+        this.request("DescribeGroupInstances", req, resp, cb);
+    }
+
+    /**
      * 创建泳道规则
      * @param {CreateLaneRuleRequest} req
      * @param {function(string, CreateLaneRuleResponse):void} cb
@@ -1302,6 +1481,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DescribeApiGroups(req, cb) {
         let resp = new DescribeApiGroupsResponse();
         this.request("DescribeApiGroups", req, resp, cb);
+    }
+
+    /**
+     * 获取集群列表
+     * @param {DescribeClustersRequest} req
+     * @param {function(string, DescribeClustersResponse):void} cb
+     * @public
+     */
+    DescribeClusters(req, cb) {
+        let resp = new DescribeClustersResponse();
+        this.request("DescribeClusters", req, resp, cb);
+    }
+
+    /**
+     * 查询日志配置项列表
+     * @param {DescribeBusinessLogConfigsRequest} req
+     * @param {function(string, DescribeBusinessLogConfigsResponse):void} cb
+     * @public
+     */
+    DescribeBusinessLogConfigs(req, cb) {
+        let resp = new DescribeBusinessLogConfigsResponse();
+        this.request("DescribeBusinessLogConfigs", req, resp, cb);
     }
 
     /**
@@ -1349,14 +1550,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 镜像仓库列表 
-     * @param {DescribeImageRepositoryRequest} req
-     * @param {function(string, DescribeImageRepositoryResponse):void} cb
+     * 查询文件配置项发布信息
+     * @param {DescribeFileConfigReleasesRequest} req
+     * @param {function(string, DescribeFileConfigReleasesResponse):void} cb
      * @public
      */
-    DescribeImageRepository(req, cb) {
-        let resp = new DescribeImageRepositoryResponse();
-        this.request("DescribeImageRepository", req, resp, cb);
+    DescribeFileConfigReleases(req, cb) {
+        let resp = new DescribeFileConfigReleasesResponse();
+        this.request("DescribeFileConfigReleases", req, resp, cb);
     }
 
     /**
@@ -1448,6 +1649,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 用部署组id获取绑定信息
+     * @param {DescribeDeliveryConfigByGroupIdRequest} req
+     * @param {function(string, DescribeDeliveryConfigByGroupIdResponse):void} cb
+     * @public
+     */
+    DescribeDeliveryConfigByGroupId(req, cb) {
+        let resp = new DescribeDeliveryConfigByGroupIdResponse();
+        this.request("DescribeDeliveryConfigByGroupId", req, resp, cb);
+    }
+
+    /**
      * 查询简单部署组列表
      * @param {DescribeSimpleGroupsRequest} req
      * @param {function(string, DescribeSimpleGroupsResponse):void} cb
@@ -1470,14 +1682,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 启用任务
-     * @param {EnableTaskRequest} req
-     * @param {function(string, EnableTaskResponse):void} cb
+     * 删除模板
+     * @param {DeleteConfigTemplateRequest} req
+     * @param {function(string, DeleteConfigTemplateResponse):void} cb
      * @public
      */
-    EnableTask(req, cb) {
-        let resp = new EnableTaskResponse();
-        this.request("EnableTask", req, resp, cb);
+    DeleteConfigTemplate(req, cb) {
+        let resp = new DeleteConfigTemplateResponse();
+        this.request("DeleteConfigTemplate", req, resp, cb);
     }
 
     /**
@@ -1534,6 +1746,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     AddInstances(req, cb) {
         let resp = new AddInstancesResponse();
         this.request("AddInstances", req, resp, cb);
+    }
+
+    /**
+     * 修改命名空间
+     * @param {ModifyNamespaceRequest} req
+     * @param {function(string, ModifyNamespaceResponse):void} cb
+     * @public
+     */
+    ModifyNamespace(req, cb) {
+        let resp = new ModifyNamespaceResponse();
+        this.request("ModifyNamespace", req, resp, cb);
     }
 
     /**
@@ -1614,14 +1837,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询简单应用列表
-     * @param {DescribeSimpleApplicationsRequest} req
-     * @param {function(string, DescribeSimpleApplicationsResponse):void} cb
+     * 查询公共配置（单条）
+     * @param {DescribePublicConfigRequest} req
+     * @param {function(string, DescribePublicConfigResponse):void} cb
      * @public
      */
-    DescribeSimpleApplications(req, cb) {
-        let resp = new DescribeSimpleApplicationsResponse();
-        this.request("DescribeSimpleApplications", req, resp, cb);
+    DescribePublicConfig(req, cb) {
+        let resp = new DescribePublicConfigResponse();
+        this.request("DescribePublicConfig", req, resp, cb);
     }
 
     /**
@@ -1636,14 +1859,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 发布Api分组
-     * @param {ReleaseApiGroupRequest} req
-     * @param {function(string, ReleaseApiGroupResponse):void} cb
+     * 修改应用
+     * @param {ModifyApplicationRequest} req
+     * @param {function(string, ModifyApplicationResponse):void} cb
      * @public
      */
-    ReleaseApiGroup(req, cb) {
-        let resp = new ReleaseApiGroupResponse();
-        this.request("ReleaseApiGroup", req, resp, cb);
+    ModifyApplication(req, cb) {
+        let resp = new ModifyApplicationResponse();
+        this.request("ModifyApplication", req, resp, cb);
     }
 
     /**
@@ -1680,25 +1903,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询虚拟机部署组云主机列表
-     * @param {DescribeGroupInstancesRequest} req
-     * @param {function(string, DescribeGroupInstancesResponse):void} cb
+     * 查询业务日志配置项信息
+     * @param {DescribeBusinessLogConfigRequest} req
+     * @param {function(string, DescribeBusinessLogConfigResponse):void} cb
      * @public
      */
-    DescribeGroupInstances(req, cb) {
-        let resp = new DescribeGroupInstancesResponse();
-        this.request("DescribeGroupInstances", req, resp, cb);
+    DescribeBusinessLogConfig(req, cb) {
+        let resp = new DescribeBusinessLogConfigResponse();
+        this.request("DescribeBusinessLogConfig", req, resp, cb);
     }
 
     /**
-     * 删除仓库
-     * @param {DeleteRepositoryRequest} req
-     * @param {function(string, DeleteRepositoryResponse):void} cb
+     * 查询网关所有分组下Api列表
+     * @param {DescribeGatewayAllGroupApisRequest} req
+     * @param {function(string, DescribeGatewayAllGroupApisResponse):void} cb
      * @public
      */
-    DeleteRepository(req, cb) {
-        let resp = new DeleteRepositoryResponse();
-        this.request("DeleteRepository", req, resp, cb);
+    DescribeGatewayAllGroupApis(req, cb) {
+        let resp = new DescribeGatewayAllGroupApisResponse();
+        this.request("DescribeGatewayAllGroupApis", req, resp, cb);
     }
 
     /**
@@ -1736,14 +1959,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询路径重写
-     * @param {DescribePathRewriteRequest} req
-     * @param {function(string, DescribePathRewriteResponse):void} cb
+     * 导入配置
+     * @param {DescribeConfigTemplateRequest} req
+     * @param {function(string, DescribeConfigTemplateResponse):void} cb
      * @public
      */
-    DescribePathRewrite(req, cb) {
-        let resp = new DescribePathRewriteResponse();
-        this.request("DescribePathRewrite", req, resp, cb);
+    DescribeConfigTemplate(req, cb) {
+        let resp = new DescribeConfigTemplateResponse();
+        this.request("DescribeConfigTemplate", req, resp, cb);
+    }
+
+    /**
+     * 取消关联投递信息和部署组
+     * @param {DisassociateKafkaConfigRequest} req
+     * @param {function(string, DisassociateKafkaConfigResponse):void} cb
+     * @public
+     */
+    DisassociateKafkaConfig(req, cb) {
+        let resp = new DisassociateKafkaConfigResponse();
+        this.request("DisassociateKafkaConfig", req, resp, cb);
     }
 
     /**
@@ -1835,6 +2069,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 更新参数模板
+     * @param {UpdateConfigTemplateRequest} req
+     * @param {function(string, UpdateConfigTemplateResponse):void} cb
+     * @public
+     */
+    UpdateConfigTemplate(req, cb) {
+        let resp = new UpdateConfigTemplateResponse();
+        this.request("UpdateConfigTemplate", req, resp, cb);
+    }
+
+    /**
      * 查询配置发布信息
      * @param {DescribeConfigReleasesRequest} req
      * @param {function(string, DescribeConfigReleasesResponse):void} cb
@@ -1890,6 +2135,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 获取多个投递项配置 
+     * @param {DescribeDeliveryConfigsRequest} req
+     * @param {function(string, DescribeDeliveryConfigsResponse):void} cb
+     * @public
+     */
+    DescribeDeliveryConfigs(req, cb) {
+        let resp = new DescribeDeliveryConfigsResponse();
+        this.request("DescribeDeliveryConfigs", req, resp, cb);
+    }
+
+    /**
      * 更新Api分组
      * @param {UpdateApiGroupRequest} req
      * @param {function(string, UpdateApiGroupResponse):void} cb
@@ -1909,6 +2165,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     ModifyLane(req, cb) {
         let resp = new ModifyLaneResponse();
         this.request("ModifyLane", req, resp, cb);
+    }
+
+    /**
+     * 启用任务
+     * @param {EnableTaskRequest} req
+     * @param {function(string, EnableTaskResponse):void} cb
+     * @public
+     */
+    EnableTask(req, cb) {
+        let resp = new EnableTaskResponse();
+        this.request("EnableTask", req, resp, cb);
+    }
+
+    /**
+     * 新增微服务返回id
+     * @param {CreateMicroserviceWithDetailRespRequest} req
+     * @param {function(string, CreateMicroserviceWithDetailRespResponse):void} cb
+     * @public
+     */
+    CreateMicroserviceWithDetailResp(req, cb) {
+        let resp = new CreateMicroserviceWithDetailRespResponse();
+        this.request("CreateMicroserviceWithDetailResp", req, resp, cb);
     }
 
     /**
@@ -2000,6 +2278,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 发布Api分组
+     * @param {ReleaseApiGroupRequest} req
+     * @param {function(string, ReleaseApiGroupResponse):void} cb
+     * @public
+     */
+    ReleaseApiGroup(req, cb) {
+        let resp = new ReleaseApiGroupResponse();
+        this.request("ReleaseApiGroup", req, resp, cb);
+    }
+
+    /**
+     * 关联日志配置项到应用
+     * @param {AssociateBusinessLogConfigRequest} req
+     * @param {function(string, AssociateBusinessLogConfigResponse):void} cb
+     * @public
+     */
+    AssociateBusinessLogConfig(req, cb) {
+        let resp = new AssociateBusinessLogConfigResponse();
+        this.request("AssociateBusinessLogConfig", req, resp, cb);
+    }
+
+    /**
      * 查询公共配置发布历史
      * @param {DescribePublicConfigReleaseLogsRequest} req
      * @param {function(string, DescribePublicConfigReleaseLogsResponse):void} cb
@@ -2019,6 +2319,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DescribeConfigReleaseLogs(req, cb) {
         let resp = new DescribeConfigReleaseLogsResponse();
         this.request("DescribeConfigReleaseLogs", req, resp, cb);
+    }
+
+    /**
+     * 查询简单应用列表
+     * @param {DescribeSimpleApplicationsRequest} req
+     * @param {function(string, DescribeSimpleApplicationsResponse):void} cb
+     * @public
+     */
+    DescribeSimpleApplications(req, cb) {
+        let resp = new DescribeSimpleApplicationsResponse();
+        this.request("DescribeSimpleApplications", req, resp, cb);
+    }
+
+    /**
+     * 查询路径重写
+     * @param {DescribePathRewriteRequest} req
+     * @param {function(string, DescribePathRewriteResponse):void} cb
+     * @public
+     */
+    DescribePathRewrite(req, cb) {
+        let resp = new DescribePathRewriteResponse();
+        this.request("DescribePathRewrite", req, resp, cb);
     }
 
     /**
@@ -2077,14 +2399,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询网关所有分组下Api列表
-     * @param {DescribeGatewayAllGroupApisRequest} req
-     * @param {function(string, DescribeGatewayAllGroupApisResponse):void} cb
+     * 删除仓库
+     * @param {DeleteRepositoryRequest} req
+     * @param {function(string, DeleteRepositoryResponse):void} cb
      * @public
      */
-    DescribeGatewayAllGroupApis(req, cb) {
-        let resp = new DescribeGatewayAllGroupApisResponse();
-        this.request("DescribeGatewayAllGroupApis", req, resp, cb);
+    DeleteRepository(req, cb) {
+        let resp = new DeleteRepositoryResponse();
+        this.request("DeleteRepository", req, resp, cb);
+    }
+
+    /**
+     * 停用任务
+     * @param {DisableTaskRequest} req
+     * @param {function(string, DisableTaskResponse):void} cb
+     * @public
+     */
+    DisableTask(req, cb) {
+        let resp = new DisableTaskResponse();
+        this.request("DisableTask", req, resp, cb);
     }
 
     /**
@@ -2297,14 +2630,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 创建容器部署组
-     * @param {CreateContainGroupRequest} req
-     * @param {function(string, CreateContainGroupResponse):void} cb
+     * 更新部署组信息
+     * @param {ModifyGroupRequest} req
+     * @param {function(string, ModifyGroupResponse):void} cb
      * @public
      */
-    CreateContainGroup(req, cb) {
-        let resp = new CreateContainGroupResponse();
-        this.request("CreateContainGroup", req, resp, cb);
+    ModifyGroup(req, cb) {
+        let resp = new ModifyGroupResponse();
+        this.request("ModifyGroup", req, resp, cb);
+    }
+
+    /**
+     * 获取单个投递项配置信息
+     * @param {DescribeDeliveryConfigRequest} req
+     * @param {function(string, DescribeDeliveryConfigResponse):void} cb
+     * @public
+     */
+    DescribeDeliveryConfig(req, cb) {
+        let resp = new DescribeDeliveryConfigResponse();
+        this.request("DescribeDeliveryConfig", req, resp, cb);
     }
 
     /**
@@ -2404,6 +2748,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DescribePublicConfigReleases(req, cb) {
         let resp = new DescribePublicConfigReleasesResponse();
         this.request("DescribePublicConfigReleases", req, resp, cb);
+    }
+
+    /**
+     * 关联投递配置到部署组
+     * @param {AssociateConfigWithGroupRequest} req
+     * @param {function(string, AssociateConfigWithGroupResponse):void} cb
+     * @public
+     */
+    AssociateConfigWithGroup(req, cb) {
+        let resp = new AssociateConfigWithGroupResponse();
+        this.request("AssociateConfigWithGroup", req, resp, cb);
     }
 
     /**

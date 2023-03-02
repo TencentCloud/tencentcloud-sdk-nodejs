@@ -20,7 +20,7 @@ const DescribeInstancesTrafficPackagesRequest = models.DescribeInstancesTrafficP
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const RenewInstancesRequest = models.RenewInstancesRequest;
 const DescribeDisksDeniedActionsRequest = models.DescribeDisksDeniedActionsRequest;
-const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTrafficPackagesResponse;
+const DescribeDiskBackupsRequest = models.DescribeDiskBackupsRequest;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const AttachCcnRequest = models.AttachCcnRequest;
@@ -32,7 +32,8 @@ const InstanceDeniedActions = models.InstanceDeniedActions;
 const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
-const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
+const BlueprintPrice = models.BlueprintPrice;
+const DescribeScenesResponse = models.DescribeScenesResponse;
 const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
 const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
@@ -41,11 +42,15 @@ const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
+const ModifyInstancesBundleRequest = models.ModifyInstancesBundleRequest;
+const DeleteDiskBackupsRequest = models.DeleteDiskBackupsRequest;
 const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
 const DiscountDetail = models.DiscountDetail;
 const DescribeDiskConfigsRequest = models.DescribeDiskConfigsRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const DescribeDiskBackupsResponse = models.DescribeDiskBackupsResponse;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
+const ModifyDiskBackupsAttributeRequest = models.ModifyDiskBackupsAttributeRequest;
 const AttachCcnResponse = models.AttachCcnResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const ResetAttachCcnRequest = models.ResetAttachCcnRequest;
@@ -53,6 +58,9 @@ const AttachDisksRequest = models.AttachDisksRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TerminateDisksResponse = models.TerminateDisksResponse;
+const DiskBackup = models.DiskBackup;
+const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTrafficPackagesResponse;
+const DescribeDiskBackupsDeniedActionsRequest = models.DescribeDiskBackupsDeniedActionsRequest;
 const KeyPair = models.KeyPair;
 const DescribeFirewallRulesTemplateRequest = models.DescribeFirewallRulesTemplateRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
@@ -69,27 +77,32 @@ const DeleteFirewallRulesRequest = models.DeleteFirewallRulesRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyFirewallRuleDescriptionRequest = models.ModifyFirewallRuleDescriptionRequest;
 const InstanceTrafficPackage = models.InstanceTrafficPackage;
-const StartInstancesResponse = models.StartInstancesResponse;
+const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const TrafficPackage = models.TrafficPackage;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
+const DetailPrice = models.DetailPrice;
+const ApplyDiskBackupResponse = models.ApplyDiskBackupResponse;
 const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const InstanceReturnable = models.InstanceReturnable;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
 const ModifyDisksAttributeRequest = models.ModifyDisksAttributeRequest;
 const DockerContainerPublishPort = models.DockerContainerPublishPort;
 const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
+const DescribeScenesRequest = models.DescribeScenesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
-const SnapshotDeniedActions = models.SnapshotDeniedActions;
+const DeleteDiskBackupsResponse = models.DeleteDiskBackupsResponse;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
 const DescribeBundleDiscountResponse = models.DescribeBundleDiscountResponse;
-const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const DescribeAllScenesRequest = models.DescribeAllScenesRequest;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DataDiskPrice = models.DataDiskPrice;
+const SceneInfo = models.SceneInfo;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
@@ -97,7 +110,7 @@ const IsolateInstancesRequest = models.IsolateInstancesRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
+const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
@@ -106,7 +119,9 @@ const DiskReturnable = models.DiskReturnable;
 const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const ApplyDiskBackupRequest = models.ApplyDiskBackupRequest;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
+const StartInstancesResponse = models.StartInstancesResponse;
 const LoginSettings = models.LoginSettings;
 const Instance = models.Instance;
 const DockerContainerVolume = models.DockerContainerVolume;
@@ -118,12 +133,15 @@ const DiskPrice = models.DiskPrice;
 const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DescribeBundlesRequest = models.DescribeBundlesRequest;
 const Blueprint = models.Blueprint;
+const InquirePriceCreateInstancesResponse = models.InquirePriceCreateInstancesResponse;
+const TotalPrice = models.TotalPrice;
 const DeniedAction = models.DeniedAction;
+const DescribeAllScenesResponse = models.DescribeAllScenesResponse;
 const ModifyInstancesLoginKeyPairAttributeResponse = models.ModifyInstancesLoginKeyPairAttributeResponse;
 const InquirePriceRenewDisksResponse = models.InquirePriceRenewDisksResponse;
 const Bundle = models.Bundle;
 const DiskConfig = models.DiskConfig;
-const InquirePriceCreateInstancesResponse = models.InquirePriceCreateInstancesResponse;
+const CreateDiskBackupResponse = models.CreateDiskBackupResponse;
 const DescribeSnapshotsDeniedActionsRequest = models.DescribeSnapshotsDeniedActionsRequest;
 const DescribeDiskDiscountResponse = models.DescribeDiskDiscountResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
@@ -138,6 +156,8 @@ const ModifyFirewallRuleDescriptionResponse = models.ModifyFirewallRuleDescripti
 const DescribeDiskDiscountRequest = models.DescribeDiskDiscountRequest;
 const InquirePriceCreateBlueprintRequest = models.InquirePriceCreateBlueprintRequest;
 const AttachDisksResponse = models.AttachDisksResponse;
+const DiskBackupDeniedActions = models.DiskBackupDeniedActions;
+const CreateDiskBackupRequest = models.CreateDiskBackupRequest;
 const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
@@ -166,13 +186,16 @@ const TerminateDisksRequest = models.TerminateDisksRequest;
 const ResetInstanceRequest = models.ResetInstanceRequest;
 const DescribeDiskConfigsResponse = models.DescribeDiskConfigsResponse;
 const InternetAccessible = models.InternetAccessible;
+const InstancePriceDetail = models.InstancePriceDetail;
 const RebootInstancesResponse = models.RebootInstancesResponse;
-const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
+const DescribeDiskBackupsDeniedActionsResponse = models.DescribeDiskBackupsDeniedActionsResponse;
 const DescribeInstanceLoginKeyPairAttributeRequest = models.DescribeInstanceLoginKeyPairAttributeRequest;
 const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
 const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
-const BlueprintPrice = models.BlueprintPrice;
+const ModifyDiskBackupsAttributeResponse = models.ModifyDiskBackupsAttributeResponse;
+const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
+const ModifyInstancesBundleResponse = models.ModifyInstancesBundleResponse;
 const GeneralResourceQuota = models.GeneralResourceQuota;
 const DescribeResetInstanceBlueprintsResponse = models.DescribeResetInstanceBlueprintsResponse;
 const DescribeDisksReturnableRequest = models.DescribeDisksReturnableRequest;
@@ -183,12 +206,14 @@ const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
-const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const RenewInstancesResponse = models.RenewInstancesResponse;
+const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const DescribeFirewallRulesRequest = models.DescribeFirewallRulesRequest;
 const DiskDeniedActions = models.DiskDeniedActions;
 const InquirePriceCreateInstancesRequest = models.InquirePriceCreateInstancesRequest;
+const Scene = models.Scene;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const DescribeModifyInstanceBundlesResponse = models.DescribeModifyInstanceBundlesResponse;
 const AttachDetail = models.AttachDetail;
@@ -247,6 +272,21 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (TerminateInstances) 用于销毁实例。
+
+* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
+* 支持批量操作，每次请求批量实例的上限为100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
+     * @param {TerminateInstancesRequest} req
+     * @param {function(string, TerminateInstancesResponse):void} cb
+     * @public
+     */
+    TerminateInstances(req, cb) {
+        let resp = new TerminateInstancesResponse();
+        this.request("TerminateInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DeleteBlueprints) 用于删除镜像。
      * @param {DeleteBlueprintsRequest} req
      * @param {function(string, DeleteBlueprintsResponse):void} cb
@@ -258,14 +298,31 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
-     * @param {DescribeInstancesDiskNumRequest} req
-     * @param {function(string, DescribeInstancesDiskNumResponse):void} cb
+     * 本接口（ApplyDiskBackup）用于回滚指定云硬盘的备份点。
+* 仅支持回滚到原云硬盘。
+* 用于回滚的云硬盘备份点必须处于 NORMAL 状态。
+  云硬盘备份点状态可以通过  [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379) 接口查询。
+* 回滚云硬盘备份点时，云硬盘的状态必须为 UNATTACHED或ATTACHED。
+  云硬盘状态可通过 [DescribeDisks](https://cloud.tencent.com/document/api/1207/66093) 接口查询。
+* 如果云硬盘处于 ATTACHED状态，相关RUNNING 状态的实例会强制关机，然后回滚云硬盘备份点。
+     * @param {ApplyDiskBackupRequest} req
+     * @param {function(string, ApplyDiskBackupResponse):void} cb
      * @public
      */
-    DescribeInstancesDiskNum(req, cb) {
-        let resp = new DescribeInstancesDiskNumResponse();
-        this.request("DescribeInstancesDiskNum", req, resp, cb);
+    ApplyDiskBackup(req, cb) {
+        let resp = new ApplyDiskBackupResponse();
+        this.request("ApplyDiskBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
+     * @param {DescribeAllScenesRequest} req
+     * @param {function(string, DescribeAllScenesResponse):void} cb
+     * @public
+     */
+    DescribeAllScenes(req, cb) {
+        let resp = new DescribeAllScenesResponse();
+        this.request("DescribeAllScenes", req, resp, cb);
     }
 
     /**
@@ -389,6 +446,17 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
+     * @param {DescribeInstancesDiskNumRequest} req
+     * @param {function(string, DescribeInstancesDiskNumResponse):void} cb
+     * @public
+     */
+    DescribeInstancesDiskNum(req, cb) {
+        let resp = new DescribeInstancesDiskNumResponse();
+        this.request("DescribeInstancesDiskNum", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteKeyPairs）用于删除密钥对。
      * @param {DeleteKeyPairsRequest} req
      * @param {function(string, DeleteKeyPairsResponse):void} cb
@@ -446,6 +514,18 @@ class LighthouseClient extends AbstractClient {
     ImportKeyPair(req, cb) {
         let resp = new ImportKeyPairResponse();
         this.request("ImportKeyPair", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteDiskBackups）用于删除云硬盘备份点。
+云硬盘备份点必须处于 NORMAL 状态，云硬盘备份点状态可以通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询，见输出参数中 DiskBackupState 字段解释。
+     * @param {DeleteDiskBackupsRequest} req
+     * @param {function(string, DeleteDiskBackupsResponse):void} cb
+     * @public
+     */
+    DeleteDiskBackups(req, cb) {
+        let resp = new DeleteDiskBackupsResponse();
+        this.request("DeleteDiskBackups", req, resp, cb);
     }
 
     /**
@@ -516,6 +596,17 @@ class LighthouseClient extends AbstractClient {
     DeleteFirewallRules(req, cb) {
         let resp = new DeleteFirewallRulesResponse();
         this.request("DeleteFirewallRules", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeDiskBackups）用于查询云硬盘备份点的详细信息。
+     * @param {DescribeDiskBackupsRequest} req
+     * @param {function(string, DescribeDiskBackupsResponse):void} cb
+     * @public
+     */
+    DescribeDiskBackups(req, cb) {
+        let resp = new DescribeDiskBackupsResponse();
+        this.request("DescribeDiskBackups", req, resp, cb);
     }
 
     /**
@@ -659,6 +750,17 @@ class LighthouseClient extends AbstractClient {
     DescribeInstancesDeniedActions(req, cb) {
         let resp = new DescribeInstancesDeniedActionsResponse();
         this.request("DescribeInstancesDeniedActions", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyDiskBackupsAttribute) 用于修改云硬盘备份点属性。
+     * @param {ModifyDiskBackupsAttributeRequest} req
+     * @param {function(string, ModifyDiskBackupsAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDiskBackupsAttribute(req, cb) {
+        let resp = new ModifyDiskBackupsAttributeResponse();
+        this.request("ModifyDiskBackupsAttribute", req, resp, cb);
     }
 
     /**
@@ -861,18 +963,14 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (TerminateInstances) 用于销毁实例。
-
-* 处于 SHUTDOWN 状态的实例，可通过本接口销毁，且不可恢复。
-* 支持批量操作，每次请求批量实例的上限为100。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态 (LatestOperationState) 为“SUCCESS”，则代表操作成功。
-     * @param {TerminateInstancesRequest} req
-     * @param {function(string, TerminateInstancesResponse):void} cb
+     * 本接口（DescribeDiskBackupsDeniedActions）用于查询一个或多个云硬盘备份点的操作限制列表信息。
+     * @param {DescribeDiskBackupsDeniedActionsRequest} req
+     * @param {function(string, DescribeDiskBackupsDeniedActionsResponse):void} cb
      * @public
      */
-    TerminateInstances(req, cb) {
-        let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, cb);
+    DescribeDiskBackupsDeniedActions(req, cb) {
+        let resp = new DescribeDiskBackupsDeniedActionsResponse();
+        this.request("DescribeDiskBackupsDeniedActions", req, resp, cb);
     }
 
     /**
@@ -896,11 +994,9 @@ class LighthouseClient extends AbstractClient {
 * 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
 * 管理终端地址一旦被访问，将自动失效，您需要重新查询。
 * 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
+* 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
 获取到 `InstanceVncUrl` 后，您需要在链接 `https://img.qcloud.com/qcloud/app/active_vnc/index.html?` 末尾加上参数 `InstanceVncUrl=xxxx`。
-
-  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
-
-    最后组成的 URL 格式如下：
+ 最后组成的 URL 格式如下：
 
 ```
 https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
@@ -965,14 +1061,25 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
-     * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
-     * @param {DescribeSnapshotsDeniedActionsRequest} req
-     * @param {function(string, DescribeSnapshotsDeniedActionsResponse):void} cb
+     * 本接口 ( CreateDiskBackup  ) 用于创建指定云硬盘（当前只支持数据盘）的备份点。
+     * @param {CreateDiskBackupRequest} req
+     * @param {function(string, CreateDiskBackupResponse):void} cb
      * @public
      */
-    DescribeSnapshotsDeniedActions(req, cb) {
-        let resp = new DescribeSnapshotsDeniedActionsResponse();
-        this.request("DescribeSnapshotsDeniedActions", req, resp, cb);
+    CreateDiskBackup(req, cb) {
+        let resp = new CreateDiskBackupResponse();
+        this.request("CreateDiskBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeScenes)用于查看使用场景列表。
+     * @param {DescribeScenesRequest} req
+     * @param {function(string, DescribeScenesResponse):void} cb
+     * @public
+     */
+    DescribeScenes(req, cb) {
+        let resp = new DescribeScenesResponse();
+        this.request("DescribeScenes", req, resp, cb);
     }
 
     /**
@@ -1069,6 +1176,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
+     * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
+     * @param {DescribeSnapshotsDeniedActionsRequest} req
+     * @param {function(string, DescribeSnapshotsDeniedActionsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotsDeniedActions(req, cb) {
+        let resp = new DescribeSnapshotsDeniedActionsResponse();
+        this.request("DescribeSnapshotsDeniedActions", req, resp, cb);
+    }
+
+    /**
      * 本接口（DetachDisks）用于卸载一个或多个云硬盘。
      * @param {DetachDisksRequest} req
      * @param {function(string, DetachDisksResponse):void} cb
@@ -1077,6 +1195,20 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DetachDisks(req, cb) {
         let resp = new DetachDisksResponse();
         this.request("DetachDisks", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyInstancesBundle)用于变更一个或多个轻量应用服务器实例套餐。
+* 只有状态为 RUNNING，STOPPED的实例才可以进行此操作。
+* 支持批量操作。每次请求批量实例的上限为 30。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     * @param {ModifyInstancesBundleRequest} req
+     * @param {function(string, ModifyInstancesBundleResponse):void} cb
+     * @public
+     */
+    ModifyInstancesBundle(req, cb) {
+        let resp = new ModifyInstancesBundleResponse();
+        this.request("ModifyInstancesBundle", req, resp, cb);
     }
 
 
