@@ -128,9 +128,9 @@ it("redis.v20180412.DescribeTaskInfo", async function () {
     }
 })
 
-it("redis.v20180412.ModifyDBInstanceSecurityGroups", async function () {
+it("redis.v20180412.ModifyBackupDownloadRestriction", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyBackupDownloadRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("redis.v20180412.ClearInstance", async function () {
     }
 })
 
-it("redis.v20180412.AllocateWanAddress", async function () {
+it("redis.v20180412.DescribeBackupUrl", async function () {
     try {
-       const data = await client.AllocateWanAddress({})
+       const data = await client.DescribeBackupUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +358,9 @@ it("redis.v20180412.RenewInstance", async function () {
     }
 })
 
-it("redis.v20180412.DescribeBackupUrl", async function () {
+it("redis.v20180412.AllocateWanAddress", async function () {
     try {
-       const data = await client.DescribeBackupUrl({})
+       const data = await client.AllocateWanAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +468,9 @@ it("redis.v20180412.SwitchProxy", async function () {
     }
 })
 
-it("redis.v20180412.RestoreInstance", async function () {
+it("redis.v20180412.DestroyPrepaidInstance", async function () {
     try {
-       const data = await client.RestoreInstance({})
+       const data = await client.DestroyPrepaidInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,6 +668,16 @@ it("redis.v20180412.DescribeSlowLog", async function () {
     }
 })
 
+it("redis.v20180412.DescribeBackupDownloadRestriction", async function () {
+    try {
+       const data = await client.DescribeBackupDownloadRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstanceZoneInfo", async function () {
     try {
        const data = await client.DescribeInstanceZoneInfo({})
@@ -738,9 +748,9 @@ it("redis.v20180412.DescribeInstanceShards", async function () {
     }
 })
 
-it("redis.v20180412.DestroyPrepaidInstance", async function () {
+it("redis.v20180412.RestoreInstance", async function () {
     try {
-       const data = await client.DestroyPrepaidInstance({})
+       const data = await client.RestoreInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -791,6 +801,16 @@ it("redis.v20180412.StartupInstance", async function () {
 it("redis.v20180412.DescribeProxySlowLog", async function () {
     try {
        const data = await client.DescribeProxySlowLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

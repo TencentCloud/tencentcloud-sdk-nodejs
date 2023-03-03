@@ -94,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskInfo", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载的网络信息与地址。
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async ModifyBackupDownloadRestriction(req, cb) {
+        return this.request("ModifyBackupDownloadRestriction", req, cb);
     }
     /**
      * 修改实例子账号
@@ -130,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearInstance", req, cb);
     }
     /**
-     * 开通外网
+     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
      */
-    async AllocateWanAddress(req, cb) {
-        return this.request("AllocateWanAddress", req, cb);
+    async DescribeBackupUrl(req, cb) {
+        return this.request("DescribeBackupUrl", req, cb);
     }
     /**
      * 删除实例子账号
@@ -232,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewInstance", req, cb);
     }
     /**
-     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
+     * 开通外网
      */
-    async DescribeBackupUrl(req, cb) {
-        return this.request("DescribeBackupUrl", req, cb);
+    async AllocateWanAddress(req, cb) {
+        return this.request("AllocateWanAddress", req, cb);
     }
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
@@ -298,10 +298,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchProxy", req, cb);
     }
     /**
-     * 恢复 CRS 实例
+     * 包年包月实例退还
      */
-    async RestoreInstance(req, cb) {
-        return this.request("RestoreInstance", req, cb);
+    async DestroyPrepaidInstance(req, cb) {
+        return this.request("DestroyPrepaidInstance", req, cb);
     }
     /**
      * 查询参数修改历史列表
@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowLog", req, cb);
     }
     /**
+     * 本接口（DescribeBackupDownloadRestriction）用于查询当前地域数据库备份文件的下载地址。
+     */
+    async DescribeBackupDownloadRestriction(req, cb) {
+        return this.request("DescribeBackupDownloadRestriction", req, cb);
+    }
+    /**
      * 查询Redis节点详细信息
      */
     async DescribeInstanceZoneInfo(req, cb) {
@@ -460,10 +466,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceShards", req, cb);
     }
     /**
-     * 包年包月实例退还
+     * 恢复 CRS 实例
      */
-    async DestroyPrepaidInstance(req, cb) {
-        return this.request("DestroyPrepaidInstance", req, cb);
+    async RestoreInstance(req, cb) {
+        return this.request("RestoreInstance", req, cb);
     }
     /**
      * 查询Redis实例列表
@@ -494,6 +500,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProxySlowLog(req, cb) {
         return this.request("DescribeProxySlowLog", req, cb);
+    }
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 复制组实例切主

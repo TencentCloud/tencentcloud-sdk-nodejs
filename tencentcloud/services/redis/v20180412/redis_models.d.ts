@@ -698,6 +698,15 @@ export interface RedisNodeInfo {
     ZoneName?: string;
 }
 /**
+ * ModifyBackupDownloadRestriction返回参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBackupUrl请求参数结构体
  */
 export interface DescribeBackupUrlRequest {
@@ -1194,17 +1203,13 @@ export interface DestroyPrepaidInstanceRequest {
     InstanceId: string;
 }
 /**
- * ManualBackupInstance返回参数结构体
+ * DisableReplicaReadonly请求参数结构体
  */
-export interface ManualBackupInstanceResponse {
+export interface DisableReplicaReadonlyRequest {
     /**
-      * 任务ID
+      * 实例序号ID
       */
-    TaskId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * 任务信息详情
@@ -1255,6 +1260,39 @@ export interface TaskInfoDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: number;
+}
+/**
+ * ModifyBackupDownloadRestriction请求参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionRequest {
+    /**
+      * 下载备份文件的网络限制类型：
+
+- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
+-  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
+- Customize：指用户自定义的私有网络可下载备份文件。
+      */
+    LimitType: string;
+    /**
+      * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
+      */
+    VpcComparisonSymbol?: string;
+    /**
+      * 标识自定义的 LimitIp 地址是否可下载备份文件。
+
+- In: 自定义的 IP 地址可以下载。
+- NotIn: 自定义的 IP 不可以下载。
+      */
+    IpComparisonSymbol?: string;
+    /**
+      * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，需配置该参数。
+      */
+    LimitVpc?: Array<BackupLimitVpcItem>;
+    /**
+      * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，需配置该参数。
+
+      */
+    LimitIp?: Array<string>;
 }
 /**
  * DisableReplicaReadonly返回参数结构体
@@ -1751,17 +1789,33 @@ export interface InstanceSecurityGroupDetail {
     SecurityGroupDetails: Array<SecurityGroupDetail>;
 }
 /**
- * 自定义的备份文件下载地址的 VPC 信息。
+ * DescribeInstanceParams返回参数结构体
  */
-export interface BackupLimitVpcItem {
+export interface DescribeInstanceParamsResponse {
     /**
-      * 自定义下载备份文件的VPC 所属地域。
+      * 实例参数个数
       */
-    Region: string;
+    TotalCount: number;
     /**
-      * 自定义下载备份文件的 VPC 列表。
+      * 实例枚举类型参数
       */
-    VpcList: Array<string>;
+    InstanceEnumParam: Array<InstanceEnumParam>;
+    /**
+      * 实例整型参数
+      */
+    InstanceIntegerParam: Array<InstanceIntegerParam>;
+    /**
+      * 实例字符型参数
+      */
+    InstanceTextParam: Array<InstanceTextParam>;
+    /**
+      * 实例多选项型参数
+      */
+    InstanceMultiParam: Array<InstanceMultiParam>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpgradeProxyVersion返回参数结构体
@@ -2799,6 +2853,19 @@ export interface ModifyConnectionConfigRequest {
     ClientLimit?: number;
 }
 /**
+ * ManualBackupInstance返回参数结构体
+ */
+export interface ManualBackupInstanceResponse {
+    /**
+      * 任务ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 实例节点
  */
 export interface InstanceNode {
@@ -3366,6 +3433,42 @@ export interface DescribeInstanceMonitorHotKeyRequest {
       * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
       */
     SpanType: number;
+}
+/**
+ * DescribeBackupDownloadRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionResponse {
+    /**
+      * 下载备份文件的网络限制类型：
+
+- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
+-  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
+- Customize：指用户自定义的私有网络可下载备份文件。
+      */
+    LimitType?: string;
+    /**
+      * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
+      */
+    VpcComparisonSymbol?: string;
+    /**
+      * 标识自定义的 LimitIp 地址是否可下载备份文件。
+
+- In: 自定义的 IP 地址可以下载。
+- NotIn: 自定义的 IP 不可以下载。
+      */
+    IpComparisonSymbol?: string;
+    /**
+      * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。
+      */
+    LimitVpc?: Array<BackupLimitVpcItem>;
+    /**
+      * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。
+      */
+    LimitIp?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpgradeInstance返回参数结构体
@@ -4164,14 +4267,9 @@ export interface DescribeInstanceMonitorBigKeyRequest {
     Date: string;
 }
 /**
- * DisableReplicaReadonly请求参数结构体
+ * DescribeBackupDownloadRestriction请求参数结构体
  */
-export interface DisableReplicaReadonlyRequest {
-    /**
-      * 实例序号ID
-      */
-    InstanceId: string;
-}
+export declare type DescribeBackupDownloadRestrictionRequest = null;
 /**
  * DescribeParamTemplateInfo返回参数结构体
  */
@@ -4223,33 +4321,17 @@ export interface SwitchInstanceVipResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceParams返回参数结构体
+ * 自定义的备份文件下载地址的 VPC 信息。
  */
-export interface DescribeInstanceParamsResponse {
+export interface BackupLimitVpcItem {
     /**
-      * 实例参数个数
+      * 自定义下载备份文件的VPC 所属地域。
       */
-    TotalCount: number;
+    Region: string;
     /**
-      * 实例枚举类型参数
+      * 自定义下载备份文件的 VPC 列表。
       */
-    InstanceEnumParam: Array<InstanceEnumParam>;
-    /**
-      * 实例整型参数
-      */
-    InstanceIntegerParam: Array<InstanceIntegerParam>;
-    /**
-      * 实例字符型参数
-      */
-    InstanceTextParam: Array<InstanceTextParam>;
-    /**
-      * 实例多选项型参数
-      */
-    InstanceMultiParam: Array<InstanceMultiParam>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    VpcList: Array<string>;
 }
 /**
  * DisassociateSecurityGroups请求参数结构体

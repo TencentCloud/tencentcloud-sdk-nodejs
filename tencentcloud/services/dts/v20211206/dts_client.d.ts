@@ -112,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     CreateMigrateCheckJob(req: CreateMigrateCheckJobRequest, cb?: (error: string, rep: CreateMigrateCheckJobResponse) => void): Promise<CreateMigrateCheckJobResponse>;
     /**
-     * 查询同步校验任务结果
+     * 查询同步校验任务结果，检查必要参数和周边配置
      */
     DescribeCheckSyncJobResult(req: DescribeCheckSyncJobResultRequest, cb?: (error: string, rep: DescribeCheckSyncJobResultResponse) => void): Promise<DescribeCheckSyncJobResultResponse>;
     /**

@@ -182,7 +182,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMigrateCheckJob", req, cb);
     }
     /**
-     * 查询同步校验任务结果
+     * 查询同步校验任务结果，检查必要参数和周边配置
      */
     async DescribeCheckSyncJobResult(req, cb) {
         return this.request("DescribeCheckSyncJobResult", req, cb);

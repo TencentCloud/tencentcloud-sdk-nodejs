@@ -602,6 +602,7 @@ import {
   ReviewTemplate,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   ImageOperation,
+  MediaSubStreamInfoItem,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
   DescribeRoundPlaysResponse,

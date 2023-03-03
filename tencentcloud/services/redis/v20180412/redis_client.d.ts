@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpgradeSmallVersionRequest, ModifyInstanceParamsResponse, EnableReplicaReadonlyRequest, DescribeInstanceMonitorTopNCmdResponse, ModifyAutoBackupConfigResponse, RestoreInstanceRequest, AllocateWanAddressRequest, ApplyParamsTemplateRequest, UpgradeInstanceVersionResponse, CreateInstancesRequest, CreateReplicationGroupRequest, ModifyInstanceReadOnlyResponse, DescribeInstanceZoneInfoRequest, ModifyConnectionConfigResponse, ModifyNetworkConfigResponse, DescribeInstanceMonitorBigKeyResponse, AssociateSecurityGroupsRequest, DescribeTaskListResponse, ModifyInstanceRequest, KillMasterGroupResponse, RenewInstanceResponse, DescribeSlowLogResponse, DescribeCommonDBInstancesRequest, DescribeDBSecurityGroupsResponse, RestoreInstanceResponse, DescribeBackupUrlRequest, DeleteParamTemplateResponse, DescribeInstancesResponse, DescribeInstanceZoneInfoResponse, ResetPasswordResponse, ClearInstanceRequest, UpgradeInstanceVersionRequest, DescribeParamTemplatesRequest, RenewInstanceRequest, UpgradeVersionToMultiAvailabilityZonesResponse, DescribeInstanceParamRecordsResponse, ModifyAutoBackupConfigRequest, DescribeInstanceDealDetailRequest, DescribeProjectSecurityGroupRequest, DescribeInstanceShardsResponse, DestroyPrepaidInstanceRequest, ManualBackupInstanceResponse, DisableReplicaReadonlyResponse, CreateParamTemplateResponse, DescribeInstanceDTSInfoResponse, ChangeMasterInstanceResponse, AddReplicationInstanceResponse, DestroyPostpaidInstanceResponse, SwitchInstanceVipRequest, ChangeReplicaToMasterRequest, ModifyInstanceResponse, ModifyDBInstanceSecurityGroupsResponse, ChangeMasterInstanceRequest, DescribeInstanceDTSInfoRequest, CreateParamTemplateRequest, DescribeTendisSlowLogResponse, DescribeProductInfoResponse, ModifyInstanceAccountRequest, ModifyMaintenanceWindowRequest, DescribeParamTemplateInfoRequest, DescribeBackupUrlResponse, InquiryPriceRenewInstanceResponse, DescribeDBSecurityGroupsRequest, InquiryPriceCreateInstanceResponse, UpgradeProxyVersionResponse, ResetPasswordRequest, ModifyInstanceAccountResponse, DescribeProjectSecurityGroupsResponse, DescribeInstanceMonitorTookDistResponse, DescribeInstanceBackupsResponse, UpgradeVersionToMultiAvailabilityZonesRequest, AllocateWanAddressResponse, DescribeInstanceMonitorTookDistRequest, DeleteReplicationInstanceRequest, KillMasterGroupRequest, DescribeInstanceMonitorTopNCmdTookResponse, CloseSSLRequest, DescribeInstanceMonitorBigKeySizeDistRequest, DescribeInstanceAccountRequest, SwitchProxyRequest, DescribeInstanceParamRecordsRequest, DescribeTaskListRequest, ChangeReplicaToMasterResponse, CreateInstancesResponse, DescribeTaskInfoRequest, ApplyParamsTemplateResponse, DescribeReplicationGroupRequest, DescribeInstanceMonitorTopNCmdRequest, ModifyNetworkConfigRequest, DescribeInstanceSecurityGroupRequest, DescribeInstanceParamsRequest, CleanUpInstanceResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, DescribeInstanceShardsRequest, DescribeAutoBackupConfigResponse, InquiryPriceUpgradeInstanceRequest, ModifyParamTemplateResponse, DescribeProjectSecurityGroupsRequest, DescribeInstanceMonitorBigKeySizeDistResponse, CreateInstanceAccountRequest, EnableReplicaReadonlyResponse, DescribeMaintenanceWindowResponse, DescribeInstanceSecurityGroupResponse, ReleaseWanAddressResponse, ModifyConnectionConfigRequest, SwitchProxyResponse, StartupInstanceResponse, AssociateSecurityGroupsResponse, DescribeTaskInfoResponse, DescribeInstanceMonitorBigKeyTypeDistResponse, DeleteReplicationInstanceResponse, CleanUpInstanceRequest, DescribeInstanceDealDetailResponse, DescribeInstancesRequest, ModfiyInstancePasswordRequest, DescribeSlowLogRequest, DeleteParamTemplateRequest, DescribeAutoBackupConfigRequest, DescribeInstanceMonitorSIPResponse, DestroyPostpaidInstanceRequest, ChangeInstanceRoleRequest, DeleteInstanceAccountRequest, DescribeInstanceMonitorHotKeyRequest, UpgradeInstanceResponse, ManualBackupInstanceRequest, DescribeReplicationGroupResponse, ModifyParamTemplateRequest, ModfiyInstancePasswordResponse, ReleaseWanAddressRequest, InquiryPriceRenewInstanceRequest, CloseSSLResponse, ModifyMaintenanceWindowResponse, CreateReplicationGroupResponse, DescribeInstanceMonitorBigKeyTypeDistRequest, DescribeInstanceMonitorTopNCmdTookRequest, DestroyPrepaidInstanceResponse, DescribeCommonDBInstancesResponse, InquiryPriceCreateInstanceRequest, UpgradeSmallVersionResponse, ModifyInstanceParamsRequest, OpenSSLRequest, DescribeInstanceNodeInfoRequest, DescribeMaintenanceWindowRequest, AddReplicationInstanceRequest, DescribeTendisSlowLogRequest, DescribeProxySlowLogRequest, DescribeProxySlowLogResponse, ModifyInstanceReadOnlyRequest, DescribeInstanceAccountResponse, DescribeInstanceMonitorBigKeyRequest, DisableReplicaReadonlyRequest, DescribeParamTemplateInfoResponse, DescribeProductInfoRequest, SwitchInstanceVipResponse, DescribeInstanceParamsResponse, DisassociateSecurityGroupsRequest, StartupInstanceRequest, CreateInstanceAccountResponse, DescribeInstanceBackupsRequest, InquiryPriceUpgradeInstanceResponse, DeleteInstanceAccountResponse, DescribeInstanceMonitorSIPRequest, OpenSSLResponse, ChangeInstanceRoleResponse, UpgradeProxyVersionRequest, UpgradeInstanceRequest, DescribeInstanceNodeInfoResponse, DescribeProjectSecurityGroupResponse, DescribeInstanceMonitorHotKeyResponse, DisassociateSecurityGroupsResponse, ClearInstanceResponse } from "./redis_models";
+import { UpgradeSmallVersionRequest, ModifyInstanceParamsResponse, EnableReplicaReadonlyRequest, DescribeInstanceMonitorTopNCmdResponse, ModifyAutoBackupConfigResponse, RestoreInstanceRequest, AllocateWanAddressRequest, ApplyParamsTemplateRequest, UpgradeInstanceVersionResponse, CreateInstancesRequest, CreateReplicationGroupRequest, ModifyInstanceReadOnlyResponse, DescribeInstanceZoneInfoRequest, ModifyConnectionConfigResponse, ModifyNetworkConfigResponse, DescribeInstanceMonitorBigKeyResponse, AssociateSecurityGroupsRequest, DescribeTaskListResponse, ModifyInstanceRequest, KillMasterGroupResponse, RenewInstanceResponse, DescribeSlowLogResponse, DescribeCommonDBInstancesRequest, DescribeDBSecurityGroupsResponse, RestoreInstanceResponse, ModifyBackupDownloadRestrictionResponse, DescribeBackupUrlRequest, DeleteParamTemplateResponse, DescribeInstancesResponse, DescribeInstanceZoneInfoResponse, ResetPasswordResponse, ClearInstanceRequest, UpgradeInstanceVersionRequest, DescribeParamTemplatesRequest, RenewInstanceRequest, UpgradeVersionToMultiAvailabilityZonesResponse, DescribeInstanceParamRecordsResponse, ModifyAutoBackupConfigRequest, DescribeInstanceDealDetailRequest, DescribeProjectSecurityGroupRequest, DescribeInstanceShardsResponse, DestroyPrepaidInstanceRequest, DisableReplicaReadonlyRequest, ModifyBackupDownloadRestrictionRequest, DisableReplicaReadonlyResponse, CreateParamTemplateResponse, DescribeInstanceDTSInfoResponse, ChangeMasterInstanceResponse, AddReplicationInstanceResponse, DestroyPostpaidInstanceResponse, SwitchInstanceVipRequest, ChangeReplicaToMasterRequest, ModifyInstanceResponse, ModifyDBInstanceSecurityGroupsResponse, ChangeMasterInstanceRequest, DescribeInstanceDTSInfoRequest, CreateParamTemplateRequest, DescribeTendisSlowLogResponse, DescribeProductInfoResponse, ModifyInstanceAccountRequest, ModifyMaintenanceWindowRequest, DescribeParamTemplateInfoRequest, DescribeBackupUrlResponse, InquiryPriceRenewInstanceResponse, DescribeDBSecurityGroupsRequest, InquiryPriceCreateInstanceResponse, DescribeInstanceParamsResponse, UpgradeProxyVersionResponse, ResetPasswordRequest, ModifyInstanceAccountResponse, DescribeProjectSecurityGroupsResponse, DescribeInstanceMonitorTookDistResponse, DescribeInstanceBackupsResponse, UpgradeVersionToMultiAvailabilityZonesRequest, AllocateWanAddressResponse, DescribeInstanceMonitorTookDistRequest, DeleteReplicationInstanceRequest, KillMasterGroupRequest, DescribeInstanceMonitorTopNCmdTookResponse, CloseSSLRequest, DescribeInstanceMonitorBigKeySizeDistRequest, DescribeInstanceAccountRequest, SwitchProxyRequest, DescribeInstanceParamRecordsRequest, DescribeTaskListRequest, ChangeReplicaToMasterResponse, CreateInstancesResponse, DescribeTaskInfoRequest, ApplyParamsTemplateResponse, DescribeReplicationGroupRequest, DescribeInstanceMonitorTopNCmdRequest, ModifyNetworkConfigRequest, DescribeInstanceSecurityGroupRequest, DescribeInstanceParamsRequest, CleanUpInstanceResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, DescribeInstanceShardsRequest, DescribeAutoBackupConfigResponse, InquiryPriceUpgradeInstanceRequest, ModifyParamTemplateResponse, DescribeProjectSecurityGroupsRequest, DescribeInstanceMonitorBigKeySizeDistResponse, CreateInstanceAccountRequest, EnableReplicaReadonlyResponse, DescribeMaintenanceWindowResponse, DescribeInstanceSecurityGroupResponse, ReleaseWanAddressResponse, ModifyConnectionConfigRequest, ManualBackupInstanceResponse, SwitchProxyResponse, StartupInstanceResponse, AssociateSecurityGroupsResponse, DescribeTaskInfoResponse, DescribeInstanceMonitorBigKeyTypeDistResponse, DeleteReplicationInstanceResponse, CleanUpInstanceRequest, DescribeInstanceDealDetailResponse, DescribeInstancesRequest, ModfiyInstancePasswordRequest, DescribeSlowLogRequest, DeleteParamTemplateRequest, DescribeAutoBackupConfigRequest, DescribeInstanceMonitorSIPResponse, DestroyPostpaidInstanceRequest, ChangeInstanceRoleRequest, DeleteInstanceAccountRequest, DescribeInstanceMonitorHotKeyRequest, DescribeBackupDownloadRestrictionResponse, UpgradeInstanceResponse, ManualBackupInstanceRequest, DescribeReplicationGroupResponse, ModifyParamTemplateRequest, ModfiyInstancePasswordResponse, ReleaseWanAddressRequest, InquiryPriceRenewInstanceRequest, CloseSSLResponse, ModifyMaintenanceWindowResponse, CreateReplicationGroupResponse, DescribeInstanceMonitorBigKeyTypeDistRequest, DescribeInstanceMonitorTopNCmdTookRequest, DestroyPrepaidInstanceResponse, DescribeCommonDBInstancesResponse, InquiryPriceCreateInstanceRequest, UpgradeSmallVersionResponse, ModifyInstanceParamsRequest, OpenSSLRequest, DescribeInstanceNodeInfoRequest, DescribeMaintenanceWindowRequest, AddReplicationInstanceRequest, DescribeTendisSlowLogRequest, DescribeProxySlowLogRequest, DescribeProxySlowLogResponse, ModifyInstanceReadOnlyRequest, DescribeInstanceAccountResponse, DescribeInstanceMonitorBigKeyRequest, DescribeBackupDownloadRestrictionRequest, DescribeParamTemplateInfoResponse, DescribeProductInfoRequest, SwitchInstanceVipResponse, DisassociateSecurityGroupsRequest, StartupInstanceRequest, CreateInstanceAccountResponse, DescribeInstanceBackupsRequest, InquiryPriceUpgradeInstanceResponse, DeleteInstanceAccountResponse, DescribeInstanceMonitorSIPRequest, OpenSSLResponse, ChangeInstanceRoleResponse, UpgradeProxyVersionRequest, UpgradeInstanceRequest, DescribeInstanceNodeInfoResponse, DescribeProjectSecurityGroupResponse, DescribeInstanceMonitorHotKeyResponse, DisassociateSecurityGroupsResponse, ClearInstanceResponse } from "./redis_models";
 /**
  * redis client
  * @class
@@ -52,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskInfo(req: DescribeTaskInfoRequest, cb?: (error: string, rep: DescribeTaskInfoResponse) => void): Promise<DescribeTaskInfoResponse>;
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载的网络信息与地址。
      */
-    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
     /**
      * 修改实例子账号
      */
@@ -76,9 +76,9 @@ export declare class Client extends AbstractClient {
      */
     ClearInstance(req: ClearInstanceRequest, cb?: (error: string, rep: ClearInstanceResponse) => void): Promise<ClearInstanceResponse>;
     /**
-     * 开通外网
+     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
      */
-    AllocateWanAddress(req: AllocateWanAddressRequest, cb?: (error: string, rep: AllocateWanAddressResponse) => void): Promise<AllocateWanAddressResponse>;
+    DescribeBackupUrl(req: DescribeBackupUrlRequest, cb?: (error: string, rep: DescribeBackupUrlResponse) => void): Promise<DescribeBackupUrlResponse>;
     /**
      * 删除实例子账号
      */
@@ -144,9 +144,9 @@ export declare class Client extends AbstractClient {
      */
     RenewInstance(req: RenewInstanceRequest, cb?: (error: string, rep: RenewInstanceResponse) => void): Promise<RenewInstanceResponse>;
     /**
-     * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
+     * 开通外网
      */
-    DescribeBackupUrl(req: DescribeBackupUrlRequest, cb?: (error: string, rep: DescribeBackupUrlResponse) => void): Promise<DescribeBackupUrlResponse>;
+    AllocateWanAddress(req: AllocateWanAddressRequest, cb?: (error: string, rep: AllocateWanAddressResponse) => void): Promise<AllocateWanAddressResponse>;
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
      */
@@ -188,9 +188,9 @@ export declare class Client extends AbstractClient {
      */
     SwitchProxy(req: SwitchProxyRequest, cb?: (error: string, rep: SwitchProxyResponse) => void): Promise<SwitchProxyResponse>;
     /**
-     * 恢复 CRS 实例
+     * 包年包月实例退还
      */
-    RestoreInstance(req: RestoreInstanceRequest, cb?: (error: string, rep: RestoreInstanceResponse) => void): Promise<RestoreInstanceResponse>;
+    DestroyPrepaidInstance(req: DestroyPrepaidInstanceRequest, cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void): Promise<DestroyPrepaidInstanceResponse>;
     /**
      * 查询参数修改历史列表
      */
@@ -268,6 +268,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeSlowLog(req: DescribeSlowLogRequest, cb?: (error: string, rep: DescribeSlowLogResponse) => void): Promise<DescribeSlowLogResponse>;
     /**
+     * 本接口（DescribeBackupDownloadRestriction）用于查询当前地域数据库备份文件的下载地址。
+     */
+    DescribeBackupDownloadRestriction(req?: DescribeBackupDownloadRestrictionRequest, cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void): Promise<DescribeBackupDownloadRestrictionResponse>;
+    /**
      * 查询Redis节点详细信息
      */
     DescribeInstanceZoneInfo(req: DescribeInstanceZoneInfoRequest, cb?: (error: string, rep: DescribeInstanceZoneInfoResponse) => void): Promise<DescribeInstanceZoneInfoResponse>;
@@ -296,9 +300,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceShards(req: DescribeInstanceShardsRequest, cb?: (error: string, rep: DescribeInstanceShardsResponse) => void): Promise<DescribeInstanceShardsResponse>;
     /**
-     * 包年包月实例退还
+     * 恢复 CRS 实例
      */
-    DestroyPrepaidInstance(req: DestroyPrepaidInstanceRequest, cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void): Promise<DestroyPrepaidInstanceResponse>;
+    RestoreInstance(req: RestoreInstanceRequest, cb?: (error: string, rep: RestoreInstanceResponse) => void): Promise<RestoreInstanceResponse>;
     /**
      * 查询Redis实例列表
      */
@@ -319,6 +323,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
      */
     DescribeProxySlowLog(req: DescribeProxySlowLogRequest, cb?: (error: string, rep: DescribeProxySlowLogResponse) => void): Promise<DescribeProxySlowLogResponse>;
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
      * 复制组实例切主
      */

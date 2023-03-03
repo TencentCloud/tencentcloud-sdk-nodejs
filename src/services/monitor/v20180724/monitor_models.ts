@@ -364,7 +364,7 @@ export interface CreatePolicyGroupResponse {
   /**
    * 创建成功的策略组Id
    */
-  GroupId?: number
+  GroupId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -425,6 +425,29 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
    * 需要关联的 Grafana 实例
    */
   GrafanaInstanceId?: string
+}
+
+/**
+ * DescribePolicyConditionListResponseDeprecatingInfo
+ */
+export interface DescribePolicyConditionListResponseDeprecatingInfo {
+  /**
+      * 是否隐藏
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Hidden?: boolean
+
+  /**
+      * 新视图名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewViewNames?: Array<string>
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
 }
 
 /**
@@ -2439,7 +2462,7 @@ export interface CreatePolicyGroupCondition {
   ContinuePeriod?: number
 
   /**
-   * 如果通过模版创建，需要传入模版中该指标的对应RuleId
+   * 如果通过模板创建，需要传入模板中该指标的对应RuleId
    */
   RuleId?: number
 }
@@ -2862,7 +2885,7 @@ export interface CreateAlarmNoticeRequest {
   CLSNotices?: Array<CLSNotice>
 
   /**
-   * 模版绑定的标签
+   * 模板绑定的标签
    */
   Tags?: Array<Tag>
 }
@@ -2952,7 +2975,7 @@ export interface SendCustomAlarmMsgResponse {
  */
 export interface AlarmPolicyCondition {
   /**
-      * 指标触发与或条件，0=或，1=与
+      * 告警触发条件的判断方式. 0: 任意; 1: 全部; 2: 复合. 当取值为2的时候为复合告警，与参数 ComplexExpression 配合使用.
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsUnionRule: number
@@ -2962,6 +2985,12 @@ export interface AlarmPolicyCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Rules: Array<AlarmPolicyRule>
+
+  /**
+      * 复合告警触发条件的判断表达式，当 IsUnionRule 取值为2的时候有效. 其作用是描述多个触发条件需要满足表达式求值为True时才算是满足告警条件.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComplexExpression?: string
 }
 
 /**
@@ -3635,7 +3664,7 @@ export interface CreateAlarmPolicyRequest {
   GroupBy?: Array<string>
 
   /**
-   * 模版绑定的标签
+   * 模板绑定的标签
    */
   Tags?: Array<Tag>
 
@@ -5521,7 +5550,7 @@ export interface CreatePolicyGroupEventCondition {
   AlarmNotifyPeriod: number
 
   /**
-   * 如果通过模版创建，需要传入模版中该指标的对应RuleId
+   * 如果通过模板创建，需要传入模板中该指标的对应RuleId
    */
   RuleId?: number
 }
@@ -6628,7 +6657,7 @@ export interface AlarmNotice {
   CLSNotices: Array<CLSNotice>
 
   /**
-      * 通知模版绑定的标签
+      * 通知模板绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
@@ -8333,7 +8362,7 @@ export interface CreatePolicyGroupRequest {
   Module: string
 
   /**
-   * 策略组所属视图的名称，若通过模版创建，可不传入
+   * 策略组所属视图的名称，若通过模板创建，可不传入
    */
   ViewName?: string
 
@@ -8343,7 +8372,7 @@ export interface CreatePolicyGroupRequest {
   ProjectId?: number
 
   /**
-   * 模版策略组Id, 通过模版创建时才需要传
+   * 模板策略组Id, 通过模板创建时才需要传
    */
   ConditionTempGroupId?: number
 
@@ -8373,7 +8402,7 @@ export interface CreatePolicyGroupRequest {
   EventConditions?: Array<CreatePolicyGroupEventCondition>
 
   /**
-   * 是否为后端调用。当且仅当值为1时，后台拉取策略模版中的规则填充入Conditions以及EventConditions字段
+   * 是否为后端调用。当且仅当值为1时，后台拉取策略模板中的规则填充入Conditions以及EventConditions字段
    */
   BackEndCall?: number
 
@@ -8444,7 +8473,7 @@ export interface DescribePolicyConditionListEventMetric {
 }
 
 /**
- * 通知模版与策略绑定关系
+ * 通知模板与策略绑定关系
  */
 export interface NoticeBindPolicys {
   /**
@@ -8523,7 +8552,7 @@ export interface DescribeAlarmNoticesRequest {
   NoticeIds?: Array<string>
 
   /**
-   * 模版根据标签过滤
+   * 模板根据标签过滤
    */
   Tags?: Array<Tag>
 }
@@ -8895,6 +8924,26 @@ export interface ModifyPrometheusInstanceAttributesRequest {
  */
 export interface DescribePrometheusConfigResponse {
   /**
+   * 全局配置
+   */
+  Config?: string
+
+  /**
+   * ServiceMonitor配置
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * PodMonitor配置
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+   * 原生Job
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8920,27 +8969,27 @@ export interface DescribeProductEventListRequest {
   Module: string
 
   /**
-   * 产品类型过滤，比如"cvm"表示云服务器
+   * 产品类型过滤，例如"cvm"表示云服务器
    */
   ProductName?: Array<string>
 
   /**
-   * 事件名称过滤，比如"guest_reboot"表示机器重启
+   * 事件名称过滤，例如"guest_reboot"表示机器重启
    */
   EventName?: Array<string>
 
   /**
-   * 影响对象，比如"ins-19708ino"
+   * 影响对象，例如"ins-19708ino"
    */
   InstanceId?: Array<string>
 
   /**
-   * 维度过滤，比如外网IP:10.0.0.1
+   * 维度过滤，例如外网IP:10.0.0.1
    */
   Dimensions?: Array<DescribeProductEventListDimensions>
 
   /**
-   * 产品事件地域过滤参数，比如gz，各地域缩写可参见[地域列表](https://cloud.tencent.com/document/product/248/50863)
+   * 产品事件地域过滤参数，例如gz，各地域缩写可参见[地域列表](https://cloud.tencent.com/document/product/248/50863)
    */
   RegionList?: Array<string>
 
@@ -9699,6 +9748,12 @@ export interface DescribePolicyConditionListCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SupportRegions: Array<string>
+
+  /**
+      * 弃用信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeprecatingInfo?: DescribePolicyConditionListResponseDeprecatingInfo
 }
 
 /**
@@ -10139,7 +10194,7 @@ export interface PrometheusScrapeJob {
 }
 
 /**
- * 通知模版ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
+ * 通知模板ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
  */
 export interface AlarmHierarchicalNotice {
   /**

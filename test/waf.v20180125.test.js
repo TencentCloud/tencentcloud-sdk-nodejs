@@ -318,6 +318,16 @@ it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     }
 })
 
+it("waf.v20180125.DescribeAttackOverview", async function () {
+    try {
+       const data = await client.DescribeAttackOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteDownloadRecord", async function () {
     try {
        const data = await client.DeleteDownloadRecord({})

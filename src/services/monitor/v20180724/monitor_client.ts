@@ -34,6 +34,7 @@ import {
   CreatePolicyGroupResponse,
   DescribeBaseMetricsResponse,
   CreatePrometheusMultiTenantInstancePostPayModeRequest,
+  DescribePolicyConditionListResponseDeprecatingInfo,
   PrometheusTempModify,
   SendCustomAlarmMsgRequest,
   UnBindingPolicyObjectRequest,

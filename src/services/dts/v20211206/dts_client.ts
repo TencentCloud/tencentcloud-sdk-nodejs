@@ -418,7 +418,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询同步校验任务结果
+   * 查询同步校验任务结果，检查必要参数和周边配置
    */
   async DescribeCheckSyncJobResult(
     req: DescribeCheckSyncJobResultRequest,

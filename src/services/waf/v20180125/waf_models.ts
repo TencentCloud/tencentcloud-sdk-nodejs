@@ -1468,6 +1468,41 @@ export interface DeleteDomainWhiteRulesResponse {
 }
 
 /**
+ * DescribeAttackOverview返回参数结构体
+ */
+export interface DescribeAttackOverviewResponse {
+  /**
+   * 访问请求总数
+   */
+  AccessCount: number
+
+  /**
+   * Web攻击总数
+   */
+  AttackCount: number
+
+  /**
+   * 访问控制总数
+   */
+  ACLCount: number
+
+  /**
+   * CC攻击总数
+   */
+  CCCount: number
+
+  /**
+   * Bot攻击总数
+   */
+  BotCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWafAutoDenyStatus返回参数结构体
  */
 export interface ModifyWafAutoDenyStatusResponse {
@@ -1803,6 +1838,11 @@ export interface ModifyAccessPeriodRequest {
    */
   TopicId: string
 }
+
+/**
+ * DescribeAttackOverview请求参数结构体
+ */
+export type DescribeAttackOverviewRequest = null
 
 /**
  * bot的qps详情

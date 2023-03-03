@@ -517,7 +517,7 @@ export interface DescribeLoadBalancerTrafficResponse {
       * 按出带宽从高到低排序后的负载均衡信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancerTraffic: Array<LoadBalancerTraffic>
+  LoadBalancerTraffic?: Array<LoadBalancerTraffic>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2089,6 +2089,12 @@ export interface LoadBalancerTraffic {
    * 最大出带宽，单位：Mbps
    */
   OutBandwidth: number
+
+  /**
+      * CLB域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
 }
 
 /**

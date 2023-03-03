@@ -5016,11 +5016,11 @@ export interface DescribeMediaInfosResponse {
     /**
       * 媒体文件信息列表。
       */
-    MediaInfoSet: Array<MediaInfo>;
+    MediaInfoSet?: Array<MediaInfo>;
     /**
       * 不存在的文件 ID 列表。
       */
-    NotExistFileIdSet: Array<string>;
+    NotExistFileIdSet?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12163,7 +12163,9 @@ export interface AdaptiveDynamicStreamingInfoItem {
       */
     Definition: number;
     /**
-      * 打包格式，只能为 HLS。
+      * 打包格式，取值范围：
+<li>HLS；</li>
+<li>DASH。</li>
       */
     Package: string;
     /**
@@ -12187,6 +12189,10 @@ export interface AdaptiveDynamicStreamingInfoItem {
 <li>None 表示没有经过数字水印处理。</li>
       */
     DigitalWatermarkType?: string;
+    /**
+      * 子流信息列表。
+      */
+    SubStreamSet?: Array<MediaSubStreamInfoItem>;
 }
 /**
  * 直播即时剪辑流信息
@@ -12765,7 +12771,8 @@ export interface DescribeTaskDetailResponse {
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
 <li>DescribeFileAttributesTask：获取文件属性任务；</li>
 <li>RebuildMedia：音画质重生任务；</li>
-<li>ReviewAudioVideo：音视频审核任务。</li>
+<li>ReviewAudioVideo：音视频审核任务；</li>
+<li>ExtractTraceWatermark：提取溯源水印任务。</li>
       */
     TaskType?: string;
     /**
@@ -14546,6 +14553,30 @@ export interface ImageOperation {
       * 图片裁剪处理，仅当 Type 为 CenterCut 时有效。
       */
     CenterCut?: ImageCenterCut;
+}
+/**
+ * 转自适应码流子流信息。
+ */
+export interface MediaSubStreamInfoItem {
+    /**
+      * 子流类型，取值范围：
+<li>audio：纯音频；</li>
+<li>video：视频（可能包含音频流）。</li>
+      */
+    Type?: string;
+    /**
+      * 当子流为视频流时，视频画面宽度，单位：px。
+      */
+    Width?: number;
+    /**
+      * 当子流为视频流时，视频画面高度，单位：px。
+      */
+    Height?: number;
+    /**
+      * 子流媒体文件大小，单位：Byte。
+<font color=red>注意：</font>在 2023-02-09T16:00:00Z 前处理生成的自适应码流文件此字段为0。
+      */
+    Size?: number;
 }
 /**
  * DescribeWatermarkTemplates返回参数结构体

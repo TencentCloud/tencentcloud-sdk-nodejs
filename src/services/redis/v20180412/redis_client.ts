@@ -47,6 +47,7 @@ import {
   DescribeDBSecurityGroupsResponse,
   RestoreInstanceResponse,
   RedisNodeInfo,
+  ModifyBackupDownloadRestrictionResponse,
   DescribeBackupUrlRequest,
   DeleteParamTemplateResponse,
   DescribeInstancesResponse,
@@ -71,8 +72,9 @@ import {
   ParameterDetail,
   DescribeInstanceShardsResponse,
   DestroyPrepaidInstanceRequest,
-  ManualBackupInstanceResponse,
+  DisableReplicaReadonlyRequest,
   TaskInfoDetail,
+  ModifyBackupDownloadRestrictionRequest,
   DisableReplicaReadonlyResponse,
   CreateParamTemplateResponse,
   InstanceTagInfo,
@@ -100,7 +102,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
-  BackupLimitVpcItem,
+  DescribeInstanceParamsResponse,
   UpgradeProxyVersionResponse,
   ResetPasswordRequest,
   ModifyInstanceAccountResponse,
@@ -152,6 +154,7 @@ import {
   ReleaseWanAddressResponse,
   ProductConf,
   ModifyConnectionConfigRequest,
+  ManualBackupInstanceResponse,
   InstanceNode,
   TendisNodes,
   SwitchProxyResponse,
@@ -178,6 +181,7 @@ import {
   ChangeInstanceRoleRequest,
   DeleteInstanceAccountRequest,
   DescribeInstanceMonitorHotKeyRequest,
+  DescribeBackupDownloadRestrictionResponse,
   UpgradeInstanceResponse,
   ManualBackupInstanceRequest,
   DescribeReplicationGroupResponse,
@@ -209,11 +213,11 @@ import {
   ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
   DescribeInstanceMonitorBigKeyRequest,
-  DisableReplicaReadonlyRequest,
+  DescribeBackupDownloadRestrictionRequest,
   DescribeParamTemplateInfoResponse,
   DescribeProductInfoRequest,
   SwitchInstanceVipResponse,
-  DescribeInstanceParamsResponse,
+  BackupLimitVpcItem,
   DisassociateSecurityGroupsRequest,
   StartupInstanceRequest,
   HotKeyInfo,
@@ -361,13 +365,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载的网络信息与地址。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**
@@ -421,13 +425,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通外网
+   * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
    */
-  async AllocateWanAddress(
-    req: AllocateWanAddressRequest,
-    cb?: (error: string, rep: AllocateWanAddressResponse) => void
-  ): Promise<AllocateWanAddressResponse> {
-    return this.request("AllocateWanAddress", req, cb)
+  async DescribeBackupUrl(
+    req: DescribeBackupUrlRequest,
+    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
+  ): Promise<DescribeBackupUrlResponse> {
+    return this.request("DescribeBackupUrl", req, cb)
   }
 
   /**
@@ -591,13 +595,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeBackupUrl）用于查询备份 Rdb 文件的下载地址。
+   * 开通外网
    */
-  async DescribeBackupUrl(
-    req: DescribeBackupUrlRequest,
-    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
-  ): Promise<DescribeBackupUrlResponse> {
-    return this.request("DescribeBackupUrl", req, cb)
+  async AllocateWanAddress(
+    req: AllocateWanAddressRequest,
+    cb?: (error: string, rep: AllocateWanAddressResponse) => void
+  ): Promise<AllocateWanAddressResponse> {
+    return this.request("AllocateWanAddress", req, cb)
   }
 
   /**
@@ -701,13 +705,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复 CRS 实例
+   * 包年包月实例退还
    */
-  async RestoreInstance(
-    req: RestoreInstanceRequest,
-    cb?: (error: string, rep: RestoreInstanceResponse) => void
-  ): Promise<RestoreInstanceResponse> {
-    return this.request("RestoreInstance", req, cb)
+  async DestroyPrepaidInstance(
+    req: DestroyPrepaidInstanceRequest,
+    cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void
+  ): Promise<DestroyPrepaidInstanceResponse> {
+    return this.request("DestroyPrepaidInstance", req, cb)
   }
 
   /**
@@ -901,6 +905,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeBackupDownloadRestriction）用于查询当前地域数据库备份文件的下载地址。
+   */
+  async DescribeBackupDownloadRestriction(
+    req?: DescribeBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void
+  ): Promise<DescribeBackupDownloadRestrictionResponse> {
+    return this.request("DescribeBackupDownloadRestriction", req, cb)
+  }
+
+  /**
    * 查询Redis节点详细信息
    */
   async DescribeInstanceZoneInfo(
@@ -971,13 +985,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 包年包月实例退还
+   * 恢复 CRS 实例
    */
-  async DestroyPrepaidInstance(
-    req: DestroyPrepaidInstanceRequest,
-    cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void
-  ): Promise<DestroyPrepaidInstanceResponse> {
-    return this.request("DestroyPrepaidInstance", req, cb)
+  async RestoreInstance(
+    req: RestoreInstanceRequest,
+    cb?: (error: string, rep: RestoreInstanceResponse) => void
+  ): Promise<RestoreInstanceResponse> {
+    return this.request("RestoreInstance", req, cb)
   }
 
   /**
@@ -1028,6 +1042,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxySlowLogResponse) => void
   ): Promise<DescribeProxySlowLogResponse> {
     return this.request("DescribeProxySlowLog", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**

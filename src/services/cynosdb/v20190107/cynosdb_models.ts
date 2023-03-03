@@ -2380,6 +2380,18 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceTags: Array<Tag>
+
+  /**
+      * 主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MasterZone?: string
+
+  /**
+      * 备可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveZones?: Array<string>
 }
 
 /**
@@ -5863,7 +5875,7 @@ export interface DescribeInstanceSpecsResponse {
   /**
    * 规格信息
    */
-  InstanceSpecSet: Array<InstanceSpec>
+  InstanceSpecSet?: Array<InstanceSpec>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

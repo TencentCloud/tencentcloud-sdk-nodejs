@@ -67,6 +67,7 @@ import {
   DeleteIpAccessControlRequest,
   AttackLogInfo,
   DeleteDomainWhiteRulesResponse,
+  DescribeAttackOverviewResponse,
   ModifyWafAutoDenyStatusResponse,
   DescribeWafAutoDenyStatusResponse,
   DeleteDomainWhiteRulesRequest,
@@ -84,6 +85,7 @@ import {
   ModifyCustomRuleStatusRequest,
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
+  DescribeAttackOverviewRequest,
   BotQPS,
   ModifyWafAutoDenyRulesResponse,
   SearchAttackLogResponse,
@@ -443,6 +445,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafAutoDenyRulesResponse) => void
   ): Promise<DescribeWafAutoDenyRulesResponse> {
     return this.request("DescribeWafAutoDenyRules", req, cb)
+  }
+
+  /**
+   * 攻击总览
+   */
+  async DescribeAttackOverview(
+    req?: DescribeAttackOverviewRequest,
+    cb?: (error: string, rep: DescribeAttackOverviewResponse) => void
+  ): Promise<DescribeAttackOverviewResponse> {
+    return this.request("DescribeAttackOverview", req, cb)
   }
 
   /**

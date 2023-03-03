@@ -210,6 +210,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafAutoDenyRules", req, cb);
     }
     /**
+     * 攻击总览
+     */
+    async DescribeAttackOverview(req, cb) {
+        return this.request("DescribeAttackOverview", req, cb);
+    }
+    /**
      * 删除访问日志下载记录
      */
     async DeleteDownloadRecord(req, cb) {

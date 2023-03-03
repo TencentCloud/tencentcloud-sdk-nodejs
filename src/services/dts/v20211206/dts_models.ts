@@ -263,7 +263,7 @@ export interface ContinueMigrateJobRequest {
  */
 export interface DescribeCheckSyncJobResultRequest {
   /**
-   * 同步任务id
+   * 同步实例id（即标识一个同步作业），形如sync-werwfs23，此值必填
    */
   JobId?: string
 }
@@ -948,34 +948,34 @@ export interface StopCompareRequest {
  */
 export interface DescribeCheckSyncJobResultResponse {
   /**
-      * 校验结果
+      * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  Status?: string
 
   /**
       * 步骤总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StepCount: number
+  StepCount?: number
 
   /**
       * 当前所在步骤
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StepCur: number
+  StepCur?: number
 
   /**
-      * 总体进度
+      * 总体进度，范围为[0,100]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Progress: number
+  Progress?: number
 
   /**
       * 步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StepInfos: Array<StepInfo>
+  StepInfos?: Array<StepInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2327,13 +2327,13 @@ export interface StepInfo {
   StepId?: string
 
   /**
-      * 当前状态，是否完成
+      * 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停)
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status?: string
 
   /**
-      * 步骤开始时间
+      * 步骤开始时间，可能为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StartTime?: string
@@ -2351,7 +2351,7 @@ export interface StepInfo {
   Warnings?: Array<StepTip>
 
   /**
-      * 当前步骤进度
+      * 当前步骤进度，范围为[0-100]
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Progress?: number

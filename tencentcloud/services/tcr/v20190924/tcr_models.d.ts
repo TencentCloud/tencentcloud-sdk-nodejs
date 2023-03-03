@@ -1689,32 +1689,6 @@ export interface DeleteInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceAll请求参数结构体
- */
-export interface DescribeInstanceAllRequest {
-    /**
-      * 实例ID列表(为空时，
-表示获取账号下所有实例)
-      */
-    Registryids?: Array<string>;
-    /**
-      * 偏移量,默认0
-      */
-    Offset?: number;
-    /**
-      * 最大输出条数，默认20，最大为100
-      */
-    Limit?: number;
-    /**
-      * 过滤条件
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 获取所有地域的实例，默认为False
-      */
-    AllRegion?: boolean;
-}
-/**
  * DeleteImageLifecycleGlobalPersonal请求参数结构体
  */
 export declare type DeleteImageLifecycleGlobalPersonalRequest = null;
@@ -4335,24 +4309,6 @@ export interface DescribeTagRetentionRulesRequest {
       * 分页Page
       */
     Offset?: number;
-}
-/**
- * DescribeInstanceAll返回参数结构体
- */
-export interface DescribeInstanceAllResponse {
-    /**
-      * 总实例个数
-      */
-    TotalCount: number;
-    /**
-      * 实例信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Registries: Array<Registry>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 用户配额返回值

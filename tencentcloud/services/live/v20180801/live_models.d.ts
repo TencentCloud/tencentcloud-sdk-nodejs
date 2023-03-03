@@ -3156,6 +3156,7 @@ UTC 格式时间，例如：2019-01-07T15:00:00Z。
     Duration: number;
     /**
       * 主播 IP。
+当客户端为内网推流时，展示为: - 。
       */
     ClientIp: string;
     /**

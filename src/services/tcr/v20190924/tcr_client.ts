@@ -116,7 +116,6 @@ import {
   CreateNamespacePersonalResponse,
   DescribeReplicationInstanceSyncStatusRequest,
   DeleteInstanceResponse,
-  DescribeInstanceAllRequest,
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
@@ -267,7 +266,6 @@ import {
   DescribeTagRetentionExecutionRequest,
   CreateRepositoryResponse,
   DescribeTagRetentionRulesRequest,
-  DescribeInstanceAllResponse,
   RespLimit,
   CheckInstanceNameRequest,
   DescribeInstanceAllNamespacesRequest,
@@ -632,18 +630,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationTriggerPersonalResponse) => void
   ): Promise<DescribeApplicationTriggerPersonalResponse> {
     return this.request("DescribeApplicationTriggerPersonal", req, cb)
-  }
-
-  /**
-     * 内部替换接口+DescribeInstanceAllForCoding
-
-查询全部实例信息
-     */
-  async DescribeInstanceAll(
-    req: DescribeInstanceAllRequest,
-    cb?: (error: string, rep: DescribeInstanceAllResponse) => void
-  ): Promise<DescribeInstanceAllResponse> {
-    return this.request("DescribeInstanceAll", req, cb)
   }
 
   /**
