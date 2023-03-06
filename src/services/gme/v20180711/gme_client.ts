@@ -19,84 +19,96 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ApplicationList,
-  ScanVoiceResponse,
-  AppStatisticsItem,
   ModifyAppStatusRequest,
   CreateCustomizationResponse,
-  DescribeScanResultListResponse,
-  DescribeApplicationDataRequest,
-  UserMicStatus,
-  DescribeApplicationListResponse,
-  CreateScanUserResponse,
-  DescribeRealtimeScanConfigResponse,
-  ModifyUserMicStatusRequest,
+  ModifyCustomizationStateRequest,
   CustomizationConfigs,
   VoiceMessageStatisticsItem,
-  DeleteRoomMemberRequest,
   RoomUser,
-  CreateCustomizationRequest,
-  DescribeRoomInfoRequest,
-  StreamTextStatisticsItem,
-  UpdateScanRoomsRequest,
-  ModifyCustomizationResponse,
-  DescribeRealtimeScanConfigRequest,
   DescribeScanResultListRequest,
-  ModifyCustomizationStateResponse,
-  CreateAgeDetectTaskRequest,
+  StartRecordRequest,
+  ModifyRecordInfoRequest,
   RealTimeSpeechStatisticsItem,
-  DescribeAppStatisticsRequest,
-  CreateScanUserRequest,
-  ModifyCustomizationStateRequest,
-  Task,
-  Tag,
-  DescribeAgeDetectTaskResponse,
-  GetCustomizationListResponse,
   AudioTextStatisticsItem,
-  ApplicationDataStatistics,
+  GetCustomizationListResponse,
   DeleteScanUserRequest,
-  ModifyAppStatusResp,
-  DescribeAppStatisticsResponse,
-  UpdateScanRoomsResponse,
+  ModifyUserMicStatusRequest,
   UpdateScanUsersResponse,
-  DescribeApplicationDataResponse,
-  DeleteRoomMemberResponse,
-  DeleteScanUserResponse,
-  ModifyCustomizationRequest,
-  VoiceMessageConf,
   VoiceFilterStatisticsItem,
-  CreateAppResp,
-  DescribeRoomInfoResponse,
   DescribeAgeDetectTaskRequest,
   DeleteCustomizationResponse,
-  ModifyUserMicStatusResponse,
   DescribeApplicationListRequest,
   GetCustomizationListRequest,
-  DescribeUserInAndOutTimeResponse,
-  UpdateScanUsersRequest,
+  DescribeRecordInfoResponse,
+  DescribeApplicationListResponse,
+  StopRecordResponse,
+  ScanPiece,
+  Tag,
+  DescribeUserInAndOutTimeRequest,
+  StartRecordResponse,
+  DescribeScanResultListResponse,
+  UserMicStatus,
+  CreateAppResponse,
+  DescribeRecordInfoRequest,
+  DescribeRoomInfoRequest,
+  ModifyCustomizationResponse,
+  DeleteCustomizationRequest,
+  CreateAgeDetectTaskRequest,
+  RealtimeTextStatisticsItem,
+  DescribeAppStatisticsResponse,
+  DeleteScanUserResponse,
+  DescribeRoomInfoResponse,
+  RecordInfo,
+  StatusInfo,
   DeleteResult,
   AgeDetectTaskResult,
-  DescribeScanResult,
   AgeDetectTask,
-  Filter,
-  ScanDetail,
-  CreateAgeDetectTaskResponse,
-  CreateAppRequest,
+  DescribeTaskInfoRequest,
   RealtimeSpeechConf,
   DescribeAppStatisticsResp,
   ScanVoiceResult,
-  CreateAppResponse,
-  OverseaTextStatisticsItem,
-  StatusInfo,
-  DeleteCustomizationRequest,
-  ScanPiece,
-  ModifyAppStatusResponse,
-  InOutTimeInfo,
-  VoiceFilterConf,
-  RealtimeTextStatisticsItem,
   ServiceStatus,
-  StatisticsItem,
   ScanVoiceRequest,
-  DescribeUserInAndOutTimeRequest,
+  DescribeApplicationDataRequest,
+  CreateScanUserResponse,
+  ModifyUserMicStatusResponse,
+  DescribeTaskInfoResponse,
+  ApplicationDataStatistics,
+  ModifyAppStatusResp,
+  InOutTimeInfo,
+  DeleteRoomMemberResponse,
+  ModifyCustomizationRequest,
+  StatisticsItem,
+  Filter,
+  SubscribeRecordUserIds,
+  DescribeUserInAndOutTimeResponse,
+  DescribeAppStatisticsRequest,
+  StopRecordRequest,
+  CreateAppRequest,
+  VoiceFilterConf,
+  ScanVoiceResponse,
+  AppStatisticsItem,
+  CreateAgeDetectTaskResponse,
+  DescribeRealtimeScanConfigResponse,
+  Task,
+  DeleteRoomMemberRequest,
+  CreateCustomizationRequest,
+  UpdateScanRoomsRequest,
+  DescribeRealtimeScanConfigRequest,
+  ModifyCustomizationStateResponse,
+  CreateScanUserRequest,
+  StreamTextStatisticsItem,
+  DescribeAgeDetectTaskResponse,
+  VoiceMessageConf,
+  CreateAppResp,
+  UpdateScanRoomsResponse,
+  DescribeApplicationDataResponse,
+  OverseaTextStatisticsItem,
+  DescribeScanResult,
+  ScanDetail,
+  ModifyAppStatusResponse,
+  UpdateScanUsersRequest,
+  ModifyRecordInfoResponse,
 } from "./gme_models"
 
 /**
@@ -116,6 +128,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoomInfoResponse) => void
   ): Promise<DescribeRoomInfoResponse> {
     return this.request("DescribeRoomInfo", req, cb)
+  }
+
+  /**
+     * 停止录制
+
+     */
+  async StopRecord(
+    req: StopRecordRequest,
+    cb?: (error: string, rep: StopRecordResponse) => void
+  ): Promise<StopRecordResponse> {
+    return this.request("StopRecord", req, cb)
   }
 
   /**
@@ -159,13 +182,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户自定义送检信息
+   * 更新自定义送检房间号
    */
-  async DescribeRealtimeScanConfig(
-    req: DescribeRealtimeScanConfigRequest,
-    cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void
-  ): Promise<DescribeRealtimeScanConfigResponse> {
-    return this.request("DescribeRealtimeScanConfig", req, cb)
+  async UpdateScanRooms(
+    req: UpdateScanRoomsRequest,
+    cb?: (error: string, rep: UpdateScanRoomsResponse) => void
+  ): Promise<UpdateScanRoomsResponse> {
+    return this.request("UpdateScanRooms", req, cb)
   }
 
   /**
@@ -176,6 +199,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustomizationResponse) => void
   ): Promise<CreateCustomizationResponse> {
     return this.request("CreateCustomization", req, cb)
+  }
+
+  /**
+   * 查询房间录制的详细信息
+   */
+  async DescribeTaskInfo(
+    req: DescribeTaskInfoRequest,
+    cb?: (error: string, rep: DescribeTaskInfoResponse) => void
+  ): Promise<DescribeTaskInfoResponse> {
+    return this.request("DescribeTaskInfo", req, cb)
   }
 
   /**
@@ -394,13 +427,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新自定义送检房间号
+   * 获取用户自定义送检信息
    */
-  async UpdateScanRooms(
-    req: UpdateScanRoomsRequest,
-    cb?: (error: string, rep: UpdateScanRoomsResponse) => void
-  ): Promise<UpdateScanRoomsResponse> {
-    return this.request("UpdateScanRooms", req, cb)
+  async DescribeRealtimeScanConfig(
+    req: DescribeRealtimeScanConfigRequest,
+    cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void
+  ): Promise<DescribeRealtimeScanConfigResponse> {
+    return this.request("DescribeRealtimeScanConfig", req, cb)
+  }
+
+  /**
+   * 修改录制配置信息
+   */
+  async ModifyRecordInfo(
+    req: ModifyRecordInfoRequest,
+    cb?: (error: string, rep: ModifyRecordInfoResponse) => void
+  ): Promise<ModifyRecordInfoResponse> {
+    return this.request("ModifyRecordInfo", req, cb)
   }
 
   /**
@@ -445,6 +488,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询录制任务信息。
+   */
+  async DescribeRecordInfo(
+    req: DescribeRecordInfoRequest,
+    cb?: (error: string, rep: DescribeRecordInfoResponse) => void
+  ): Promise<DescribeRecordInfoResponse> {
+    return this.request("DescribeRecordInfo", req, cb)
+  }
+
+  /**
    * **接口作用**：此接口用于修改房间用户的麦克风状态，例如房间内用户麦克风为打开状态，可调用此接口将该用户麦克风进行关闭，关闭后即使该用户使用客户端接口 EnableMic 打开麦克风，依然无法与房间内成员通话，属于被禁言状态。该状态持续到此用户退房后失效，或者调用该接口重新打开此用户麦克风状态。
    **接口应用场景**：此接口多用于游戏业务中台或者风控后台，对一些发表不当言论的玩家进行禁言处理。
    **接口使用前提**：目前 ModifyUserMicStatus 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
@@ -464,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCustomizationResponse) => void
   ): Promise<DeleteCustomizationResponse> {
     return this.request("DeleteCustomization", req, cb)
+  }
+
+  /**
+   * 开启录制
+   */
+  async StartRecord(
+    req: StartRecordRequest,
+    cb?: (error: string, rep: StartRecordResponse) => void
+  ): Promise<StartRecordResponse> {
+    return this.request("StartRecord", req, cb)
   }
 
   /**

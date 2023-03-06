@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, CreateCustomizationResponse, DescribeScanResultListResponse, DescribeApplicationDataRequest, DescribeApplicationListResponse, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, ModifyUserMicStatusRequest, DeleteRoomMemberRequest, CreateCustomizationRequest, DescribeRoomInfoRequest, UpdateScanRoomsRequest, ModifyCustomizationResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, ModifyCustomizationStateResponse, CreateAgeDetectTaskRequest, DescribeAppStatisticsRequest, CreateScanUserRequest, ModifyCustomizationStateRequest, DescribeAgeDetectTaskResponse, GetCustomizationListResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, UpdateScanUsersResponse, DescribeApplicationDataResponse, DeleteRoomMemberResponse, DeleteScanUserResponse, ModifyCustomizationRequest, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, ModifyUserMicStatusResponse, DescribeApplicationListRequest, GetCustomizationListRequest, DescribeUserInAndOutTimeResponse, UpdateScanUsersRequest, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DeleteCustomizationRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ModifyAppStatusRequest, CreateCustomizationResponse, ModifyCustomizationStateRequest, DescribeScanResultListRequest, StartRecordRequest, ModifyRecordInfoRequest, GetCustomizationListResponse, DeleteScanUserRequest, ModifyUserMicStatusRequest, UpdateScanUsersResponse, DescribeAgeDetectTaskRequest, DeleteCustomizationResponse, DescribeApplicationListRequest, GetCustomizationListRequest, DescribeRecordInfoResponse, DescribeApplicationListResponse, StopRecordResponse, DescribeUserInAndOutTimeRequest, StartRecordResponse, DescribeScanResultListResponse, CreateAppResponse, DescribeRecordInfoRequest, DescribeRoomInfoRequest, ModifyCustomizationResponse, DeleteCustomizationRequest, CreateAgeDetectTaskRequest, DescribeAppStatisticsResponse, DeleteScanUserResponse, DescribeRoomInfoResponse, DescribeTaskInfoRequest, ScanVoiceRequest, DescribeApplicationDataRequest, CreateScanUserResponse, ModifyUserMicStatusResponse, DescribeTaskInfoResponse, DeleteRoomMemberResponse, ModifyCustomizationRequest, DescribeUserInAndOutTimeResponse, DescribeAppStatisticsRequest, StopRecordRequest, CreateAppRequest, ScanVoiceResponse, CreateAgeDetectTaskResponse, DescribeRealtimeScanConfigResponse, DeleteRoomMemberRequest, CreateCustomizationRequest, UpdateScanRoomsRequest, DescribeRealtimeScanConfigRequest, ModifyCustomizationStateResponse, CreateScanUserRequest, DescribeAgeDetectTaskResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, ModifyAppStatusResponse, UpdateScanUsersRequest, ModifyRecordInfoResponse } from "./gme_models";
 /**
  * gme client
  * @class
@@ -11,6 +11,11 @@ export declare class Client extends AbstractClient {
      * 获取房间内用户信息
      */
     DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
+    /**
+     * 停止录制
+
+     */
+    StopRecord(req: StopRecordRequest, cb?: (error: string, rep: StopRecordResponse) => void): Promise<StopRecordResponse>;
     /**
      * 删除自定义送检用户
      */
@@ -28,13 +33,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserInAndOutTime(req: DescribeUserInAndOutTimeRequest, cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void): Promise<DescribeUserInAndOutTimeResponse>;
     /**
-     * 获取用户自定义送检信息
+     * 更新自定义送检房间号
      */
-    DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
+    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
     /**
      * 用户使用该接口可以创建语音消息转文本热句模型，以供识别调用
      */
     CreateCustomization(req: CreateCustomizationRequest, cb?: (error: string, rep: CreateCustomizationResponse) => void): Promise<CreateCustomizationResponse>;
+    /**
+     * 查询房间录制的详细信息
+     */
+    DescribeTaskInfo(req: DescribeTaskInfoRequest, cb?: (error: string, rep: DescribeTaskInfoResponse) => void): Promise<DescribeTaskInfoResponse>;
     /**
      * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
 </br>
@@ -209,9 +218,13 @@ export declare class Client extends AbstractClient {
      */
     ModifyCustomization(req: ModifyCustomizationRequest, cb?: (error: string, rep: ModifyCustomizationResponse) => void): Promise<ModifyCustomizationResponse>;
     /**
-     * 更新自定义送检房间号
+     * 获取用户自定义送检信息
      */
-    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
+    DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
+    /**
+     * 修改录制配置信息
+     */
+    ModifyRecordInfo(req: ModifyRecordInfoRequest, cb?: (error: string, rep: ModifyRecordInfoResponse) => void): Promise<ModifyRecordInfoResponse>;
     /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */
@@ -230,6 +243,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyCustomizationState(req: ModifyCustomizationStateRequest, cb?: (error: string, rep: ModifyCustomizationStateResponse) => void): Promise<ModifyCustomizationStateResponse>;
     /**
+     * 查询录制任务信息。
+     */
+    DescribeRecordInfo(req: DescribeRecordInfoRequest, cb?: (error: string, rep: DescribeRecordInfoResponse) => void): Promise<DescribeRecordInfoResponse>;
+    /**
      * **接口作用**：此接口用于修改房间用户的麦克风状态，例如房间内用户麦克风为打开状态，可调用此接口将该用户麦克风进行关闭，关闭后即使该用户使用客户端接口 EnableMic 打开麦克风，依然无法与房间内成员通话，属于被禁言状态。该状态持续到此用户退房后失效，或者调用该接口重新打开此用户麦克风状态。
 **接口应用场景**：此接口多用于游戏业务中台或者风控后台，对一些发表不当言论的玩家进行禁言处理。
 **接口使用前提**：目前 ModifyUserMicStatus 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
@@ -239,6 +256,10 @@ export declare class Client extends AbstractClient {
      * 用户通过该接口可以删除语音消息转文本热句模型
      */
     DeleteCustomization(req: DeleteCustomizationRequest, cb?: (error: string, rep: DeleteCustomizationResponse) => void): Promise<DeleteCustomizationResponse>;
+    /**
+     * 开启录制
+     */
+    StartRecord(req: StartRecordRequest, cb?: (error: string, rep: StartRecordResponse) => void): Promise<StartRecordResponse>;
     /**
      * 本接口(ModifyAppStatus)用于修改应用总开关状态。
      */

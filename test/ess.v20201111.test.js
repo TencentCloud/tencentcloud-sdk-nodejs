@@ -88,6 +88,16 @@ it("ess.v20201111.DescribeFileUrls", async function () {
     }
 })
 
+it("ess.v20201111.CreateUserAutoSignEnableUrl", async function () {
+    try {
+       const data = await client.CreateUserAutoSignEnableUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowEvidenceReport", async function () {
     try {
        const data = await client.CreateFlowEvidenceReport({})
@@ -121,6 +131,16 @@ it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
 it("ess.v20201111.CreateFlowApprovers", async function () {
     try {
        const data = await client.CreateFlowApprovers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DisableUserAutoSign", async function () {
+    try {
+       const data = await client.DisableUserAutoSign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +201,16 @@ it("ess.v20201111.CreateSealPolicy", async function () {
 it("ess.v20201111.CreateFlow", async function () {
     try {
        const data = await client.CreateFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
+    try {
+       const data = await client.DescribeUserAutoSignStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -34,6 +34,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRoomInfo", req, cb);
     }
     /**
+     * 停止录制
+
+     */
+    async StopRecord(req, cb) {
+        return this.request("StopRecord", req, cb);
+    }
+    /**
      * 删除自定义送检用户
      */
     async DeleteScanUser(req, cb) {
@@ -58,16 +65,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserInAndOutTime", req, cb);
     }
     /**
-     * 获取用户自定义送检信息
+     * 更新自定义送检房间号
      */
-    async DescribeRealtimeScanConfig(req, cb) {
-        return this.request("DescribeRealtimeScanConfig", req, cb);
+    async UpdateScanRooms(req, cb) {
+        return this.request("UpdateScanRooms", req, cb);
     }
     /**
      * 用户使用该接口可以创建语音消息转文本热句模型，以供识别调用
      */
     async CreateCustomization(req, cb) {
         return this.request("CreateCustomization", req, cb);
+    }
+    /**
+     * 查询房间录制的详细信息
+     */
+    async DescribeTaskInfo(req, cb) {
+        return this.request("DescribeTaskInfo", req, cb);
     }
     /**
      * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
@@ -257,10 +270,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomization", req, cb);
     }
     /**
-     * 更新自定义送检房间号
+     * 获取用户自定义送检信息
      */
-    async UpdateScanRooms(req, cb) {
-        return this.request("UpdateScanRooms", req, cb);
+    async DescribeRealtimeScanConfig(req, cb) {
+        return this.request("DescribeRealtimeScanConfig", req, cb);
+    }
+    /**
+     * 修改录制配置信息
+     */
+    async ModifyRecordInfo(req, cb) {
+        return this.request("ModifyRecordInfo", req, cb);
     }
     /**
      * 本接口(CreateApp)用于创建一个GME应用。
@@ -288,6 +307,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomizationState", req, cb);
     }
     /**
+     * 查询录制任务信息。
+     */
+    async DescribeRecordInfo(req, cb) {
+        return this.request("DescribeRecordInfo", req, cb);
+    }
+    /**
      * **接口作用**：此接口用于修改房间用户的麦克风状态，例如房间内用户麦克风为打开状态，可调用此接口将该用户麦克风进行关闭，关闭后即使该用户使用客户端接口 EnableMic 打开麦克风，依然无法与房间内成员通话，属于被禁言状态。该状态持续到此用户退房后失效，或者调用该接口重新打开此用户麦克风状态。
 **接口应用场景**：此接口多用于游戏业务中台或者风控后台，对一些发表不当言论的玩家进行禁言处理。
 **接口使用前提**：目前 ModifyUserMicStatus 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
@@ -300,6 +325,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCustomization(req, cb) {
         return this.request("DeleteCustomization", req, cb);
+    }
+    /**
+     * 开启录制
+     */
+    async StartRecord(req, cb) {
+        return this.request("StartRecord", req, cb);
     }
     /**
      * 本接口(ModifyAppStatus)用于修改应用总开关状态。

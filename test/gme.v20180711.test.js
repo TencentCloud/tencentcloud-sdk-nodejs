@@ -28,6 +28,16 @@ it("gme.v20180711.DescribeRoomInfo", async function () {
     }
 })
 
+it("gme.v20180711.StopRecord", async function () {
+    try {
+       const data = await client.StopRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.DeleteScanUser", async function () {
     try {
        const data = await client.DeleteScanUser({})
@@ -68,9 +78,9 @@ it("gme.v20180711.DescribeUserInAndOutTime", async function () {
     }
 })
 
-it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
+it("gme.v20180711.UpdateScanRooms", async function () {
     try {
-       const data = await client.DescribeRealtimeScanConfig({})
+       const data = await client.UpdateScanRooms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +91,16 @@ it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
 it("gme.v20180711.CreateCustomization", async function () {
     try {
        const data = await client.CreateCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeTaskInfo", async function () {
+    try {
+       const data = await client.DescribeTaskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,19 @@ it("gme.v20180711.ModifyCustomization", async function () {
     }
 })
 
-it("gme.v20180711.UpdateScanRooms", async function () {
+it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
     try {
-       const data = await client.UpdateScanRooms({})
+       const data = await client.DescribeRealtimeScanConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ModifyRecordInfo", async function () {
+    try {
+       const data = await client.ModifyRecordInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +238,16 @@ it("gme.v20180711.ModifyCustomizationState", async function () {
     }
 })
 
+it("gme.v20180711.DescribeRecordInfo", async function () {
+    try {
+       const data = await client.DescribeRecordInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.ModifyUserMicStatus", async function () {
     try {
        const data = await client.ModifyUserMicStatus({})
@@ -221,6 +261,16 @@ it("gme.v20180711.ModifyUserMicStatus", async function () {
 it("gme.v20180711.DeleteCustomization", async function () {
     try {
        const data = await client.DeleteCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.StartRecord", async function () {
+    try {
+       const data = await client.StartRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

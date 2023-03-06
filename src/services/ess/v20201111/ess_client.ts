@@ -29,6 +29,7 @@ import {
   CreateMultiFlowSignQRCodeResponse,
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
+  DisableUserAutoSignResponse,
   CreateIntegrationEmployeesRequest,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
@@ -45,23 +46,26 @@ import {
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
   CreateFlowRequest,
-  FileUrl,
+  AutoSignConfig,
   DescribeThirdPartyAuthCodeRequest,
   DescribeFlowInfoRequest,
   DeleteSealPoliciesResponse,
   OrganizationInfo,
+  DescribeUserAutoSignStatusResponse,
   FillApproverInfo,
   OccupiedSeal,
   FailedDeleteStaffData,
   PdfVerifyResult,
   CreateBatchCancelFlowUrlResponse,
+  UserThreeFactor,
   CreateSealPolicyResponse,
+  DisableUserAutoSignRequest,
   DescribeIntegrationEmployeesResponse,
   SuccessDeleteStaffData,
   CreateConvertTaskApiResponse,
   CreateFlowSignReviewRequest,
   FailedCreateStaffData,
-  CreateFlowByFilesRequest,
+  CreateUserAutoSignEnableUrlResponse,
   CreateFlowSignUrlResponse,
   DescribeFileUrlsRequest,
   FormField,
@@ -91,10 +95,12 @@ import {
   CreateFlowSignReviewResponse,
   Filter,
   CreateStaffResult,
+  CreateUserAutoSignEnableUrlRequest,
   DescribeIntegrationMainOrganizationUserResponse,
   CreateSchemeUrlResponse,
   ApproverRestriction,
   DeleteSealPoliciesRequest,
+  CreateFlowByFilesRequest,
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
@@ -103,6 +109,7 @@ import {
   StartFlowRequest,
   CreatePrepareFlowRequest,
   ApproverOption,
+  FileUrl,
   CreateSealPolicyRequest,
   DescribeOrganizationSealsRequest,
   CancelFlowRequest,
@@ -124,6 +131,7 @@ import {
   DescribeFlowInfoResponse,
   CcInfo,
   CreateFlowResponse,
+  DescribeUserAutoSignStatusRequest,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
   CancelMultiFlowSignQRCodeResponse,
@@ -216,6 +224,16 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
+   * 企业方可以通过此接口获取个人用户开启自动签的跳转链接
+   */
+  async CreateUserAutoSignEnableUrl(
+    req: CreateUserAutoSignEnableUrlRequest,
+    cb?: (error: string, rep: CreateUserAutoSignEnableUrlResponse) => void
+  ): Promise<CreateUserAutoSignEnableUrlResponse> {
+    return this.request("CreateUserAutoSignEnableUrl", req, cb)
+  }
+
+  /**
      * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
 出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
      */
@@ -259,6 +277,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateFlowApproversResponse) => void
   ): Promise<CreateFlowApproversResponse> {
     return this.request("CreateFlowApprovers", req, cb)
+  }
+
+  /**
+   * 企业方可以通过此接口关闭个人的自动签功能
+   */
+  async DisableUserAutoSign(
+    req: DisableUserAutoSignRequest,
+    cb?: (error: string, rep: DisableUserAutoSignResponse) => void
+  ): Promise<DisableUserAutoSignResponse> {
+    return this.request("DisableUserAutoSign", req, cb)
   }
 
   /**
@@ -330,6 +358,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateFlowResponse) => void
   ): Promise<CreateFlowResponse> {
     return this.request("CreateFlow", req, cb)
+  }
+
+  /**
+   * 企业方可以通过此接口查询个人用户自动签开启状态
+   */
+  async DescribeUserAutoSignStatus(
+    req: DescribeUserAutoSignStatusRequest,
+    cb?: (error: string, rep: DescribeUserAutoSignStatusResponse) => void
+  ): Promise<DescribeUserAutoSignStatusResponse> {
+    return this.request("DescribeUserAutoSignStatus", req, cb)
   }
 
   /**

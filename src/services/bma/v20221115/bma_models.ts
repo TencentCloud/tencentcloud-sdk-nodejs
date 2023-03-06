@@ -622,6 +622,12 @@ export interface FakeURLData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CertificationStatus?: number
+
+  /**
+      * 网址截图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Snapshot?: string
 }
 
 /**

@@ -77,6 +77,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DescribeFileUrls", req, cb);
     }
     /**
+     * 企业方可以通过此接口获取个人用户开启自动签的跳转链接
+     */
+    async CreateUserAutoSignEnableUrl(req, cb) {
+        return this.request("CreateUserAutoSignEnableUrl", req, cb);
+    }
+    /**
      * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
 出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
      */
@@ -105,6 +111,12 @@ callbackinfo包含： 回调地址和签名key
      */
     async CreateFlowApprovers(req, cb) {
         return this.request("CreateFlowApprovers", req, cb);
+    }
+    /**
+     * 企业方可以通过此接口关闭个人的自动签功能
+     */
+    async DisableUserAutoSign(req, cb) {
+        return this.request("DisableUserAutoSign", req, cb);
     }
     /**
      * 提交企业签署流程审批结果
@@ -152,6 +164,12 @@ callbackinfo包含： 回调地址和签名key
      */
     async CreateFlow(req, cb) {
         return this.request("CreateFlow", req, cb);
+    }
+    /**
+     * 企业方可以通过此接口查询个人用户自动签开启状态
+     */
+    async DescribeUserAutoSignStatus(req, cb) {
+        return this.request("DescribeUserAutoSignStatus", req, cb);
     }
     /**
      * 查询出证报告，返回报告 URL。

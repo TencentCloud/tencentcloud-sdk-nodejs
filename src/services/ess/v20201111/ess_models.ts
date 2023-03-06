@@ -295,6 +295,16 @@ export interface DescribeThirdPartyAuthCodeResponse {
 }
 
 /**
+ * DisableUserAutoSign返回参数结构体
+ */
+export interface DisableUserAutoSignResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationEmployees请求参数结构体
  */
 export interface CreateIntegrationEmployeesRequest {
@@ -906,19 +916,44 @@ false：有序签
 }
 
 /**
- * 下载文件的URL信息
+ * 自动签开启、签署相关配置
  */
-export interface FileUrl {
+export interface AutoSignConfig {
   /**
-   * 下载文件的URL
-   */
-  Url: string
-
-  /**
-      * 下载文件的附加信息
+      * 自动签开通个人用户的三要素
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Option: string
+  UserInfo: UserThreeFactor
+
+  /**
+      * 回调链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CallbackUrl: string
+
+  /**
+      * 是否回调证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertInfoCallback?: boolean
+
+  /**
+      * 是否支持用户自定义签名印章
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserDefineSeal?: boolean
+
+  /**
+      * 是否需要回调的时候返回印章(签名) 图片的 base64
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SealImgCallback?: boolean
+
+  /**
+      * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyChannels?: Array<string>
 }
 
 /**
@@ -989,6 +1024,21 @@ export interface OrganizationInfo {
    * 机构的代理IP
    */
   ProxyIp?: string
+}
+
+/**
+ * DescribeUserAutoSignStatus返回参数结构体
+ */
+export interface DescribeUserAutoSignStatusResponse {
+  /**
+   * 是否开通
+   */
+  IsOpen?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1193,6 +1243,32 @@ export interface CreateBatchCancelFlowUrlResponse {
 }
 
 /**
+ * 用户的三要素：姓名，证件号，证件类型
+ */
+export interface UserThreeFactor {
+  /**
+      * 姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 证件类型: 
+ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardType: string
+
+  /**
+      * 证件号，如果有 X 请大写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardNumber: string
+}
+
+/**
  * CreateSealPolicy返回参数结构体
  */
 export interface CreateSealPolicyResponse {
@@ -1205,6 +1281,27 @@ export interface CreateSealPolicyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisableUserAutoSign请求参数结构体
+ */
+export interface DisableUserAutoSignRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+
+  /**
+      * 自动签场景:
+E_PRESCRIPTION_AUTO_SIGN 电子处方
+      */
+  SceneKey: string
+
+  /**
+   * 关闭自动签的个人的三要素
+   */
+  UserInfo: UserThreeFactor
 }
 
 /**
@@ -1328,112 +1425,43 @@ export interface FailedCreateStaffData {
 }
 
 /**
- * CreateFlowByFiles请求参数结构体
+ * CreateUserAutoSignEnableUrl返回参数结构体
  */
-export interface CreateFlowByFilesRequest {
+export interface CreateUserAutoSignEnableUrlResponse {
   /**
-   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
+   * 跳转短链
    */
-  Operator: UserInfo
+  Url?: string
 
   /**
-   * 签署流程名称,最大长度200个字符
+   * 小程序AppId
    */
-  FlowName: string
+  AppId?: string
 
   /**
-   * 签署参与者信息，最大限制50方
+   * 小程序 原始 Id
    */
-  Approvers: Array<ApproverInfo>
+  AppOriginalId?: string
 
   /**
-   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
+   * 跳转路径
    */
-  FileIds: Array<string>
+  Path?: string
 
   /**
-   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
+   * base64格式跳转二维码
    */
-  FlowType?: string
+  QrCode?: string
 
   /**
-   * 经办人内容控件配置
+   * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
    */
-  Components?: Array<Component>
+  UrlType?: string
 
   /**
-      * 被抄送人的信息列表。
-注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
-      */
-  CcInfos?: Array<CcInfo>
-
-  /**
-      * 是否需要预览，true：预览模式，false：非预览（默认）；
-预览链接有效期300秒；
-
-注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
-      */
-  NeedPreview?: boolean
-
-  /**
-   * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PreviewType?: number
-
-  /**
-      * 签署流程的签署截止时间。
-值为unix时间戳,精确到秒,不传默认为当前时间一年后
-      */
-  Deadline?: number
-
-  /**
-      * 发送类型：
-true：无序签
-false：有序签
-注：默认为false（有序签）
-      */
-  Unordered?: boolean
-
-  /**
-   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-   */
-  CustomShowMap?: string
-
-  /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
-若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
-
-注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-      */
-  NeedSignReview?: boolean
-
-  /**
-   * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
-   */
-  UserData?: string
-
-  /**
-      * 签署人校验方式
-VerifyCheck: 人脸识别（默认）
-MobileCheck：手机号验证
-参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
-      */
-  ApproverVerifyType?: string
-
-  /**
-   * 签署流程描述,最大长度1000个字符
-   */
-  FlowDescription?: string
-
-  /**
-   * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
-   */
-  SignBeanTag?: number
-
-  /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
-   */
-  Agent?: Agent
+  RequestId?: string
 }
 
 /**
@@ -2449,6 +2477,32 @@ export interface CreateStaffResult {
 }
 
 /**
+ * CreateUserAutoSignEnableUrl请求参数结构体
+ */
+export interface CreateUserAutoSignEnableUrlRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+
+  /**
+      * 自动签场景:
+E_PRESCRIPTION_AUTO_SIGN 电子处方
+      */
+  SceneKey: string
+
+  /**
+   * 自动签开通，签署相关配置
+   */
+  AutoSignConfig: AutoSignConfig
+
+  /**
+   * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
+   */
+  UrlType?: string
+}
+
+/**
  * DescribeIntegrationMainOrganizationUser返回参数结构体
  */
 export interface DescribeIntegrationMainOrganizationUserResponse {
@@ -2532,6 +2586,115 @@ export interface DeleteSealPoliciesRequest {
    * 待授权的员工ID
    */
   UserIds?: Array<string>
+}
+
+/**
+ * CreateFlowByFiles请求参数结构体
+ */
+export interface CreateFlowByFilesRequest {
+  /**
+   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
+   */
+  Operator: UserInfo
+
+  /**
+   * 签署流程名称,最大长度200个字符
+   */
+  FlowName: string
+
+  /**
+   * 签署参与者信息，最大限制50方
+   */
+  Approvers: Array<ApproverInfo>
+
+  /**
+   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
+   */
+  FileIds: Array<string>
+
+  /**
+   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
+   */
+  FlowType?: string
+
+  /**
+   * 经办人内容控件配置
+   */
+  Components?: Array<Component>
+
+  /**
+      * 被抄送人的信息列表。
+注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
+      */
+  CcInfos?: Array<CcInfo>
+
+  /**
+      * 是否需要预览，true：预览模式，false：非预览（默认）；
+预览链接有效期300秒；
+
+注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
+      */
+  NeedPreview?: boolean
+
+  /**
+   * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
+   */
+  PreviewType?: number
+
+  /**
+      * 签署流程的签署截止时间。
+值为unix时间戳,精确到秒,不传默认为当前时间一年后
+      */
+  Deadline?: number
+
+  /**
+      * 发送类型：
+true：无序签
+false：有序签
+注：默认为false（有序签）
+      */
+  Unordered?: boolean
+
+  /**
+   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+   */
+  CustomShowMap?: string
+
+  /**
+      * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
+
+注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+      */
+  NeedSignReview?: boolean
+
+  /**
+   * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
+   */
+  UserData?: string
+
+  /**
+      * 签署人校验方式
+VerifyCheck: 人脸识别（默认）
+MobileCheck：手机号验证
+参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+      */
+  ApproverVerifyType?: string
+
+  /**
+   * 签署流程描述,最大长度1000个字符
+   */
+  FlowDescription?: string
+
+  /**
+   * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
+   */
+  SignBeanTag?: number
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -2723,6 +2886,22 @@ export interface ApproverOption {
    * 是否可以转发 false-可以转发,默认 true-不可以转发
    */
   NoTransfer?: boolean
+}
+
+/**
+ * 下载文件的URL信息
+ */
+export interface FileUrl {
+  /**
+   * 下载文件的URL
+   */
+  Url: string
+
+  /**
+      * 下载文件的附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Option: string
 }
 
 /**
@@ -3440,6 +3619,27 @@ export interface CreateFlowResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUserAutoSignStatus请求参数结构体
+ */
+export interface DescribeUserAutoSignStatusRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+
+  /**
+      * 自动签场景:
+E_PRESCRIPTION_AUTO_SIGN 电子处方
+      */
+  SceneKey: string
+
+  /**
+   * 查询开启状态的用户信息
+   */
+  UserInfo: UserThreeFactor
 }
 
 /**

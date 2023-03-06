@@ -72,7 +72,7 @@ export interface ChannelBatchCancelFlowsResponse {
     RequestId?: string;
 }
 /**
- * 渠道版员工部门信息
+ * 第三方应用集成员工部门信息
  */
 export interface Department {
     /**
@@ -242,12 +242,12 @@ export interface CreateSealByImageResponse {
  */
 export interface OperateChannelTemplateResponse {
     /**
-      * 腾讯电子签颁发给渠道的应用ID
+      * 腾讯电子签颁发给第三方应用平台的应用ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AppId?: string;
     /**
-      * 渠道方模板库模板唯一标识
+      * 第三方应用平台模板库模板唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TemplateId?: string;
@@ -309,7 +309,7 @@ export interface FlowFileInfo {
       */
     CallbackUrl?: string;
     /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      * 第三方应用的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
       */
     CustomerData?: string;
     /**
@@ -361,7 +361,7 @@ export interface SyncProxyOrganizationRequest {
       */
     Agent: Agent;
     /**
-      * 渠道侧合作企业名称，最大长度64个字符
+      * 第三方平台子客企业名称，最大长度64个字符
       */
     ProxyOrganizationName: string;
     /**
@@ -369,11 +369,11 @@ export interface SyncProxyOrganizationRequest {
       */
     BusinessLicense?: string;
     /**
-      * 渠道侧合作企业统一社会信用代码，最大长度200个字符
+      * 第三方平台子客企业统一社会信用代码，最大长度200个字符
       */
     UniformSocialCreditCode?: string;
     /**
-      * 渠道侧合作企业法人/负责人姓名
+      * 第三方平台子客企业法人/负责人姓名
       */
     ProxyLegalName?: string;
     /**
@@ -549,7 +549,7 @@ export interface ChannelCreateFlowByFilesRequest {
       */
     CustomShowMap?: string;
     /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      * 业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
       */
     CustomerData?: string;
     /**
@@ -581,15 +581,15 @@ export interface Agent {
       */
     AppId: string;
     /**
-      * 渠道平台自定义，对于渠道子客企业的唯一标识。一个渠道子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要渠道平台保存），最大64位字符串
+      * 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串
       */
     ProxyOrganizationOpenId?: string;
     /**
-      * 渠道子客企业中的员工/经办人，通过渠道平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
+      * 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
       */
     ProxyOperator?: UserInfo;
     /**
-      * 在子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
+      * 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
       */
     ProxyAppId?: string;
     /**
@@ -606,16 +606,16 @@ export interface FlowApproverDetail {
       */
     ReceiptId: string;
     /**
-      * 渠道侧企业的第三方id
+      * 平台企业的第三方id
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyOrganizationOpenId: string;
     /**
-      * 渠道侧企业操作人的第三方id
+      * 平台企业操作人的第三方id
       */
     ProxyOperatorOpenId: string;
     /**
-      * 渠道侧企业名称
+      * 平台企业名称
       */
     ProxyOrganizationName: string;
     /**
@@ -709,11 +709,11 @@ MobileCheck：手机号验证
  */
 export interface DescribeFlowDetailInfoResponse {
     /**
-      * 渠道侧应用号Id
+      * 第三方平台应用号Id
       */
     ApplicationId?: string;
     /**
-      * 渠道侧企业第三方Id
+      * 第三方平台子客企业OpenId
       */
     ProxyOrganizationOpenId?: string;
     /**
@@ -762,9 +762,9 @@ export interface ResourceUrlInfo {
 其中签署方FlowApproverInfo需要传递的参数
 非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识
 1-个人：Name、Mobile必传
-2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
-3-渠道合作企业不指定经办人：OrgName必传、OrgOpenId必传；
-4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
+2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
+3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；
+4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
 
 RecipientId参数：
 从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId
@@ -794,17 +794,17 @@ export interface FlowApproverInfo {
       */
     OrganizationName?: string;
     /**
-      * 指定签署人非渠道企业下员工，在ApproverType为ORGANIZATION时指定。
-默认为false，即签署人位于同一个渠道应用号下；
+      * 指定签署人非第三方平台子客企业下员工，在ApproverType为ORGANIZATION时指定。
+默认为false，即签署人位于同一个第三方平台应用号下；默认为false，即签署人位于同一个第三方应用号下；
       */
     NotChannelOrganization?: boolean;
     /**
       * 用户侧第三方id，最大长度64个字符
-当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程
+当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程
       */
     OpenId?: string;
     /**
-      * 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
+      * 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
       */
     OrganizationOpenId?: string;
     /**
@@ -916,21 +916,21 @@ export interface TemplateInfo {
       */
     PreviewUrl: string;
     /**
-      * 渠道版-模板PDF文件链接
+      * 第三方应用集成-模板PDF文件链接
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PdfUrl: string;
     /**
-      * 关联的渠道模板ID
+      * 关联的平台企业模板ID
       */
     ChannelTemplateId: string;
     /**
-      * 关联的渠道模板名称
+      * 关联的平台企业模板名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ChannelTemplateName: string;
     /**
-      * 0-需要渠道子客手动领取渠道的模板(默认); 1-渠道自动设置子客模板
+      * 0-需要子客企业手动领取平台企业的模板(默认); 1-平台自动设置子客模板
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ChannelAutoSave: number;
@@ -1020,7 +1020,7 @@ export interface DescribeTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 渠道版员工角色信息
+ * 第三方应用集成员工角色信息
  */
 export interface StaffRole {
     /**
@@ -1244,7 +1244,7 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
  */
 export interface UploadFilesRequest {
     /**
-      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      * 应用相关信息，若是第三方应用集成调用 appid 和proxyappid 必填
       */
     Agent: Agent;
     /**
@@ -1316,8 +1316,8 @@ export interface DescribeUsageRequest {
     EndDate: string;
     /**
       * 是否汇总数据，默认不汇总。
-不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
-汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
+不汇总：返回在统计区间内第三方平台下所有企业的每日明细，即每个企业N条数据，N为统计天数；
+汇总：返回在统计区间内第三方平台下所有企业的汇总后数据，即每个企业一条数据；
       */
     NeedAggregate?: boolean;
     /**
@@ -1376,7 +1376,7 @@ CreateFlowsByTemplates 接口不使用此字段。
  * 此结构体 (FlowInfo) 用于描述签署流程信息。
 
 【数据表格传参说明】
-当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
+当模板的 ComponentType='DYNAMIC_TABLE'时（ 第三方应用集成或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
 输入示例1：
 
 ```
@@ -1487,7 +1487,6 @@ CreateFlowsByTemplates 接口不使用此字段。
 | ------------------- | ------- | ------------------------------------------------- |
 | widthPercent   | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35                    |
 | content    | String  | 表头单元格内容，字数不超过100                         |
-
  */
 export interface FlowInfo {
     /**
@@ -1523,7 +1522,7 @@ export interface FlowInfo {
       */
     FlowDescription?: string;
     /**
-      * 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      *  第三方应用平台的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
       */
     CustomerData?: string;
     /**
@@ -1547,7 +1546,7 @@ export interface FlowInfo {
  */
 export interface UserInfo {
     /**
-      * 渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
+      * 第三方应用平台自定义，对应第三方平台子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串
       */
     OpenId?: string;
     /**
@@ -1769,14 +1768,14 @@ export interface CreateSignUrlsRequest {
     /**
       * 签署链接生成类型，默认是 "ALL"；
 "ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；
-"CHANNEL"：渠道合作企业；
-"NOT_CHANNEL"：非渠道合作企业；
+"CHANNEL"：第三方平台子客企业企业；
+"NOT_CHANNEL"：非第三方平台子客企业企业；
 "PERSON"：个人；
 "FOLLOWER"：关注方，目前是合同抄送方；
       */
     GenerateType?: string;
     /**
-      * 非渠道合作企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填
+      * 非第三方平台子客企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填
       */
     OrganizationName?: string;
     /**
@@ -1789,11 +1788,11 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
       */
     Mobile?: string;
     /**
-      * 渠道合作企业的企业Id，GenerateType为"CHANNEL"时必填
+      * 第三方平台子客企业的企业OpenId，GenerateType为"CHANNEL"时必填
       */
     OrganizationOpenId?: string;
     /**
-      * 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息
+      * 第三方平台子客企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息
       */
     OpenId?: string;
     /**
@@ -1844,7 +1843,7 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
     Restrictions?: Array<ApproverRestriction>;
     /**
       * 回调地址，最大长度1000个字符
-不传默认使用渠道应用号配置的回调地址
+不传默认使用第三方应用号配置的回调地址
 回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败
       */
     CallbackUrl?: string;
@@ -1945,7 +1944,7 @@ export interface CreateFlowsByTemplatesResponse {
       */
     FlowIds?: Array<string>;
     /**
-      * 渠道的业务信息，限制1024字符
+      * 业务信息，限制1024字符
       */
     CustomerData?: Array<string>;
     /**
@@ -2229,15 +2228,15 @@ export interface UploadFilesResponse {
     /**
       * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
       */
-    FileIds: Array<string>;
+    FileIds?: Array<string>;
     /**
       * 上传成功文件数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 文件Url
       */
-    FileUrls: Array<string>;
+    FileUrls?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2443,7 +2442,7 @@ export interface ChannelCreateBoundFlowsResponse {
  */
 export interface ProxyOrganizationOperator {
     /**
-      * 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串
+      * 对应Agent-ProxyOperator-OpenId。第三方应用平台自定义，对子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串
       */
     Id: string;
     /**
@@ -2465,6 +2464,14 @@ export interface ProxyOrganizationOperator {
       * 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。
       */
     Mobile?: string;
+    /**
+      * 默认角色，值为以下三个对应的英文：
+业务管理员：admin
+经办人：channel-normal-operator
+业务员：channel-sales-man
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultRole?: string;
 }
 /**
  * ModifyExtendedService返回参数结构体
@@ -2756,8 +2763,8 @@ SIGN_PAGING_SEAL - 可以指定印章ID
       */
     OffsetY?: number;
     /**
-      * 渠道控件ID。
-如果不为空，属于渠道预设控件；
+      * 平台企业控件ID。
+如果不为空，属于平台企业预设控件；
       */
     ChannelComponentId?: string;
     /**
@@ -2936,11 +2943,11 @@ export interface DescribeTemplatesRequest {
       */
     WithPreviewUrl?: boolean;
     /**
-      * 是否获取模板的PDF文件链接-渠道版需要开启白名单时才能使用。
+      * 是否获取模板的PDF文件链接- 第三方应用集成需要开启白名单时才能使用。
       */
     WithPdfUrl?: boolean;
     /**
-      * 渠道模板ID
+      * 模板ID
       */
     ChannelTemplateId?: string;
 }
@@ -3051,11 +3058,11 @@ export interface CreateFlowsByTemplatesRequest {
  */
 export interface UsageDetail {
     /**
-      * 渠道侧合作企业唯一标识
+      * 子客企业唯一标识
       */
     ProxyOrganizationOpenId: string;
     /**
-      * 渠道侧合作企业名
+      * 子客企业名
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyOrganizationName: string;
@@ -3113,7 +3120,7 @@ export interface OperateChannelTemplateRequest {
       */
     OperateType: string;
     /**
-      * 渠道方模板库模板唯一标识
+      * 第三方应用平台模板库模板唯一标识
       */
     TemplateId: string;
     /**
