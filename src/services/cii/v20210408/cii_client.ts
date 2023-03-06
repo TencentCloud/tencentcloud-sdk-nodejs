@@ -105,7 +105,7 @@ export class Client extends AbstractClient {
     let options = {
       multipart: true,
     }
-    return this.request("UploadMedicalFile", req, cb)
+    return this.request("UploadMedicalFile", req, options, cb)
   }
 
   /**
