@@ -158,6 +158,16 @@ it("dlc.v20210125.CancelNotebookSessionStatementBatch", async function () {
     }
 })
 
+it("dlc.v20210125.ModifySparkApp", async function () {
+    try {
+       const data = await client.ModifySparkApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteSparkApp", async function () {
     try {
        const data = await client.DeleteSparkApp({})
@@ -318,6 +328,16 @@ it("dlc.v20210125.DescribeNotebookSessionLog", async function () {
     }
 })
 
+it("dlc.v20210125.SwitchDataEngine", async function () {
+    try {
+       const data = await client.SwitchDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.AlterDMSDatabase", async function () {
     try {
        const data = await client.AlterDMSDatabase({})
@@ -328,9 +348,9 @@ it("dlc.v20210125.AlterDMSDatabase", async function () {
     }
 })
 
-it("dlc.v20210125.ModifySparkApp", async function () {
+it("dlc.v20210125.DescribeSparkAppTasks", async function () {
     try {
-       const data = await client.ModifySparkApp({})
+       const data = await client.DescribeSparkAppTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +458,16 @@ it("dlc.v20210125.CreateScript", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateRowFilter", async function () {
+    try {
+       const data = await client.UpdateRowFilter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDMSTables", async function () {
     try {
        const data = await client.DescribeDMSTables({})
@@ -538,6 +568,16 @@ it("dlc.v20210125.DescribeTable", async function () {
     }
 })
 
+it("dlc.v20210125.DetachUserPolicy", async function () {
+    try {
+       const data = await client.DetachUserPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionStatements", async function () {
     try {
        const data = await client.DescribeNotebookSessionStatements({})
@@ -588,6 +628,16 @@ it("dlc.v20210125.BindWorkGroupsToUser", async function () {
     }
 })
 
+it("dlc.v20210125.SuspendResumeDataEngine", async function () {
+    try {
+       const data = await client.SuspendResumeDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateSparkAppTask", async function () {
     try {
        const data = await client.CreateSparkAppTask({})
@@ -628,9 +678,19 @@ it("dlc.v20210125.DeleteUser", async function () {
     }
 })
 
-it("dlc.v20210125.SuspendResumeDataEngine", async function () {
+it("dlc.v20210125.DescribeLakeFsDirSummary", async function () {
     try {
-       const data = await client.SuspendResumeDataEngine({})
+       const data = await client.DescribeLakeFsDirSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeEngineUsageInfo", async function () {
+    try {
+       const data = await client.DescribeEngineUsageInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +788,9 @@ it("dlc.v20210125.ModifyGovernEventRule", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkAppTasks", async function () {
+it("dlc.v20210125.CreateDataEngine", async function () {
     try {
-       const data = await client.DescribeSparkAppTasks({})
+       const data = await client.CreateDataEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,9 +838,9 @@ it("dlc.v20210125.CreateNotebookSessionStatement", async function () {
     }
 })
 
-it("dlc.v20210125.DetachUserPolicy", async function () {
+it("dlc.v20210125.DescribeLakeFsInfo", async function () {
     try {
-       const data = await client.DetachUserPolicy({})
+       const data = await client.DescribeLakeFsInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

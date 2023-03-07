@@ -31,6 +31,7 @@ import {
   DescribeCloudNativeAPIGatewayNodesRequest,
   DescribeCloudNativeAPIGatewayNodesResult,
   ZookeeperReplica,
+  EngineRegionInfo,
   DescribeNacosServerInterfacesRequest,
   SREInstance,
   DescribeSREInstanceAccessAddressResponse,

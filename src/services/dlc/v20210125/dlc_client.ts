@@ -27,6 +27,7 @@ import {
   DeleteUserRequest,
   ListTaskJobLogDetailResponse,
   Asset,
+  TaskResultInfo,
   CreateResultDownloadResponse,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
@@ -40,6 +41,7 @@ import {
   CreateTasksInOrderResponse,
   DescribeTablesResponse,
   SparkJobInfo,
+  SwitchDataEngineRequest,
   SuspendResumeDataEngineResponse,
   DeleteSparkAppRequest,
   ModifyUserResponse,
@@ -49,7 +51,7 @@ import {
   DetachUserPolicyRequest,
   CrontabResumeSuspendStrategy,
   AlterDMSTableResponse,
-  DescribeTasksResponse,
+  DescribeEngineUsageInfoRequest,
   DescribeDMSTableResponse,
   DropDMSPartitionsRequest,
   NotebookSessions,
@@ -58,7 +60,9 @@ import {
   AddDMSPartitionsResponse,
   DetachWorkGroupPolicyResponse,
   GenerateCreateMangedTableSqlRequest,
+  SwitchDataEngineResponse,
   CSVSerde,
+  DescribeLakeFsInfoRequest,
   ModifySparkAppRequest,
   StreamingStatistics,
   CreateDatabaseRequest,
@@ -91,11 +95,14 @@ import {
   DescribeNotebookSessionsResponse,
   DescribeDMSPartitionsRequest,
   TPartition,
+  CreateDataEngineResponse,
   DescribeSparkAppJobsRequest,
   DeleteNotebookSessionRequest,
   CreateDMSTableResponse,
   CreateNotebookSessionRequest,
+  WorkGroupIdSetOfUserId,
   Partition,
+  CreateDataEngineRequest,
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
   CSV,
@@ -115,6 +122,7 @@ import {
   CreateExportTaskRequest,
   DescribeNotebookSessionStatementResponse,
   ReportHeartbeatMetaDataResponse,
+  DataEngineConfigPair,
   ReportHeartbeatMetaDataRequest,
   CreateDMSTableRequest,
   CancelNotebookSessionStatementResponse,
@@ -150,7 +158,7 @@ import {
   DeleteWorkGroupRequest,
   DescribeTaskResultRequest,
   Filter,
-  DescribeUsersResponse,
+  DescribeLakeFsDirSummaryResponse,
   DataFormat,
   DescribeNotebookSessionLogResponse,
   ViewResponseInfo,
@@ -162,15 +170,16 @@ import {
   UnlockMetaDataResponse,
   DeleteWorkGroupResponse,
   DropDMSTableResponse,
-  WorkGroupIdSetOfUserId,
+  DescribeTableRequest,
   CreateWorkGroupResponse,
-  TaskResultInfo,
+  DescribeEngineUsageInfoResponse,
   DescribeTablesRequest,
   DeleteNotebookSessionResponse,
   CreateStoreLocationRequest,
   DMSTableInfo,
   DescribeNotebookSessionStatementsResponse,
   AttachUserPolicyResponse,
+  DescribeLakeFsInfoResponse,
   DropDMSTableRequest,
   DescribeNotebookSessionStatementSqlResultResponse,
   DMSPartition,
@@ -179,7 +188,7 @@ import {
   DeleteUsersFromWorkGroupResponse,
   UnbindWorkGroupsFromUserRequest,
   DescribeDMSDatabaseRequest,
-  DescribeTableRequest,
+  DescribeLakeFsDirSummaryRequest,
   Policy,
   JobLogResult,
   Other,
@@ -202,8 +211,11 @@ import {
   DetachUserPolicyResponse,
   DescribeWorkGroupsRequest,
   TasksOverview,
+  UpdateRowFilterResponse,
   CreateTasksResponse,
   CreateNotebookSessionResponse,
+  DescribeViewsResponse,
+  DescribeTasksResponse,
   CreateSparkAppRequest,
   DescribeDataEnginesRequest,
   DropDMSPartitionsResponse,
@@ -217,7 +229,7 @@ import {
   AlterDMSDatabaseRequest,
   SQLTask,
   UserMessage,
-  DescribeViewsResponse,
+  DescribeUsersResponse,
   Property,
   CreateResultDownloadRequest,
   CreateDMSDatabaseRequest,
@@ -229,6 +241,7 @@ import {
   DescribeScriptsResponse,
   DatabaseResponseInfo,
   DMSColumn,
+  UpdateRowFilterRequest,
   TColumn,
   DescribeResultDownloadRequest,
 } from "./dlc_models"
@@ -380,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelNotebookSessionStatementBatchResponse) => void
   ): Promise<CancelNotebookSessionStatementBatchResponse> {
     return this.request("CancelNotebookSessionStatementBatch", req, cb)
+  }
+
+  /**
+   * 更新spark应用
+   */
+  async ModifySparkApp(
+    req: ModifySparkAppRequest,
+    cb?: (error: string, rep: ModifySparkAppResponse) => void
+  ): Promise<ModifySparkAppResponse> {
+    return this.request("ModifySparkApp", req, cb)
   }
 
   /**
@@ -543,6 +566,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 切换主备集群
+   */
+  async SwitchDataEngine(
+    req: SwitchDataEngineRequest,
+    cb?: (error: string, rep: SwitchDataEngineResponse) => void
+  ): Promise<SwitchDataEngineResponse> {
+    return this.request("SwitchDataEngine", req, cb)
+  }
+
+  /**
    * DMS元数据更新库
    */
   async AlterDMSDatabase(
@@ -553,13 +586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新spark应用
+   * 查询spark应用的运行任务实例列表
    */
-  async ModifySparkApp(
-    req: ModifySparkAppRequest,
-    cb?: (error: string, rep: ModifySparkAppResponse) => void
-  ): Promise<ModifySparkAppResponse> {
-    return this.request("ModifySparkApp", req, cb)
+  async DescribeSparkAppTasks(
+    req: DescribeSparkAppTasksRequest,
+    cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
+  ): Promise<DescribeSparkAppTasksResponse> {
+    return this.request("DescribeSparkAppTasks", req, cb)
   }
 
   /**
@@ -663,6 +696,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+   */
+  async UpdateRowFilter(
+    req: UpdateRowFilterRequest,
+    cb?: (error: string, rep: UpdateRowFilterResponse) => void
+  ): Promise<UpdateRowFilterResponse> {
+    return this.request("UpdateRowFilter", req, cb)
+  }
+
+  /**
    * DMS元数据获取表列表
    */
   async DescribeDMSTables(
@@ -763,6 +806,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解绑用户鉴权策略
+   */
+  async DetachUserPolicy(
+    req: DetachUserPolicyRequest,
+    cb?: (error: string, rep: DetachUserPolicyResponse) => void
+  ): Promise<DetachUserPolicyResponse> {
+    return this.request("DetachUserPolicy", req, cb)
+  }
+
+  /**
    * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
    */
   async DescribeNotebookSessionStatements(
@@ -813,6 +866,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于控制暂停或恢复数据引擎
+   */
+  async SuspendResumeDataEngine(
+    req: SuspendResumeDataEngineRequest,
+    cb?: (error: string, rep: SuspendResumeDataEngineResponse) => void
+  ): Promise<SuspendResumeDataEngineResponse> {
+    return this.request("SuspendResumeDataEngine", req, cb)
+  }
+
+  /**
    * 创建spark任务
    */
   async CreateSparkAppTask(
@@ -853,13 +916,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于控制暂停或恢复数据引擎
+   * 查询托管存储指定目录的Summary
    */
-  async SuspendResumeDataEngine(
-    req: SuspendResumeDataEngineRequest,
-    cb?: (error: string, rep: SuspendResumeDataEngineResponse) => void
-  ): Promise<SuspendResumeDataEngineResponse> {
-    return this.request("SuspendResumeDataEngine", req, cb)
+  async DescribeLakeFsDirSummary(
+    req?: DescribeLakeFsDirSummaryRequest,
+    cb?: (error: string, rep: DescribeLakeFsDirSummaryResponse) => void
+  ): Promise<DescribeLakeFsDirSummaryResponse> {
+    return this.request("DescribeLakeFsDirSummary", req, cb)
+  }
+
+  /**
+   * 本接口根据引擎ID获取数据引擎资源使用情况
+   */
+  async DescribeEngineUsageInfo(
+    req: DescribeEngineUsageInfoRequest,
+    cb?: (error: string, rep: DescribeEngineUsageInfoResponse) => void
+  ): Promise<DescribeEngineUsageInfoResponse> {
+    return this.request("DescribeEngineUsageInfo", req, cb)
   }
 
   /**
@@ -953,13 +1026,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询spark应用的运行任务实例列表
+   * 为用户创建数据引擎
    */
-  async DescribeSparkAppTasks(
-    req: DescribeSparkAppTasksRequest,
-    cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
-  ): Promise<DescribeSparkAppTasksResponse> {
-    return this.request("DescribeSparkAppTasks", req, cb)
+  async CreateDataEngine(
+    req: CreateDataEngineRequest,
+    cb?: (error: string, rep: CreateDataEngineResponse) => void
+  ): Promise<CreateDataEngineResponse> {
+    return this.request("CreateDataEngine", req, cb)
   }
 
   /**
@@ -1003,13 +1076,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑用户鉴权策略
+   * 查询用户的托管存储信息
    */
-  async DetachUserPolicy(
-    req: DetachUserPolicyRequest,
-    cb?: (error: string, rep: DetachUserPolicyResponse) => void
-  ): Promise<DetachUserPolicyResponse> {
-    return this.request("DetachUserPolicy", req, cb)
+  async DescribeLakeFsInfo(
+    req?: DescribeLakeFsInfoRequest,
+    cb?: (error: string, rep: DescribeLakeFsInfoResponse) => void
+  ): Promise<DescribeLakeFsInfoResponse> {
+    return this.request("DescribeLakeFsInfo", req, cb)
   }
 
   /**

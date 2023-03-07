@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ExportBashEventsRequest, DescribeSearchTemplatesResponse, ExportReverseShellEventsResponse, DescribeBaselineTopResponse, DescribeAssetWebServiceInfoListResponse, DescribeAssetAppProcessListResponse, ScanVulAgainRequest, DeleteBaselineStrategyResponse, ExportWebPageEventListResponse, DescribeUndoVulCountsResponse, DescribeBaselineScanScheduleResponse, DeleteBashEventsResponse, DescribeAssetProcessInfoListRequest, ExportWebPageEventListRequest, DescribeAssetWebFrameListRequest, DescribeMonthInspectionReportResponse, DescribeSaveOrUpdateWarningsResponse, DescribeBaselineHostTopResponse, DeleteBashRulesResponse, ExportVulListResponse, DescribeHistoryServiceResponse, ModifyWebPageProtectSettingResponse, DescribeVulInfoCvssResponse, DescribeBaselineStrategyDetailRequest, ModifyLicenseBindsRequest, DescribeAssetUserInfoResponse, DescribeServersAndRiskAndFirstInfoResponse, ExportAttackLogsResponse, DescribeBaselineEffectHostListResponse, TrustMalwaresRequest, ExportVulEffectHostListRequest, DescribeBaselineBasicInfoRequest, DescribeProVersionInfoRequest, DescribeVulCountByDatesRequest, CreateLicenseOrderResponse, DescribeBaselineStrategyListResponse, DescribeAttackLogInfoResponse, DescribePrivilegeEventsResponse, DescribeOverviewStatisticsResponse, DescribeMonthInspectionReportRequest, DescribeBashRulesResponse, DescribeAvailableExpertServiceDetailResponse, ChangeRuleEventsIgnoreStatusRequest, DescribeWebPageEventListRequest, ExportAssetCoreModuleListRequest, DescribeComponentStatisticsResponse, DescribeMachineRegionsRequest, DescribeSearchExportListResponse, DescribeVulLevelCountResponse, DescribeAvailableExpertServiceDetailRequest, DescribeServerRelatedDirInfoResponse, DescribeUsualLoginPlacesResponse, DescribeBaselineBasicInfoResponse, EditBashRulesResponse, ScanVulResponse, DescribeOverviewStatisticsRequest, DeleteScanTaskRequest, DescribeTagMachinesRequest, DescribeLicenseListResponse, DescribeJavaMemShellListResponse, ModifyAutoOpenProVersionConfigRequest, DeletePrivilegeEventsRequest, ExportAttackLogsRequest, DescribeBanModeRequest, DescribeSecurityEventStatRequest, DeleteSearchTemplateRequest, ExportReverseShellEventsRequest, DeleteLoginWhiteListResponse, DescribeAttackLogsResponse, DeleteMalwaresResponse, DescribeAssetInitServiceListRequest, ScanVulAgainResponse, SeparateMalwaresResponse, DescribeTagsRequest, DescribeRiskDnsListRequest, DescribeStrategyExistRequest, DescribeSecurityDynamicsRequest, CheckBashRuleParamsRequest, DescribeIgnoreBaselineRuleRequest, ExportNonlocalLoginPlacesResponse, DescribeAssetJarListResponse, ExportMaliciousRequestsRequest, DescribeWebPageProtectStatRequest, ExportVulDetectionReportRequest, ExportMalwaresResponse, DescribeScanVulSettingRequest, StartBaselineDetectRequest, DescribeAssetPlanTaskListResponse, DescribeBaselineRuleRequest, DescribeHistoryAccountsRequest, DescribeAssetMachineDetailRequest, CancelIgnoreVulResponse, IgnoreImpactedHostsResponse, DescribeAssetMachineDetailResponse, DescribeStrategyExistResponse, DeleteReverseShellEventsRequest, DescribeSearchLogsResponse, DescribeMachineOsListResponse, DescribeAssetWebServiceProcessListResponse, IgnoreImpactedHostsRequest, ModifyOrderAttributeResponse, DescribeMachinesRequest, DescribeVulEffectHostListRequest, ExportLicenseDetailRequest, DeletePrivilegeRulesRequest, DescribeLicenseBindScheduleResponse, DescribeMalwareInfoRequest, DescribeVersionStatisticsRequest, ExportPrivilegeEventsResponse, ModifyBaselinePolicyResponse, DescribeReverseShellEventsRequest, DescribeAttackVulTypeListRequest, DescribeLogStorageStatisticRequest, DeleteBaselinePolicyRequest, DescribeBaselinePolicyListResponse, CheckBashRuleParamsResponse, DeleteLicenseRecordRequest, ExportBaselineListRequest, DeleteProtectDirRequest, ExportIgnoreBaselineRuleResponse, DescribeBanStatusResponse, DescribeVulListRequest, DescribeLicenseBindListResponse, DescribePrivilegeRulesRequest, ModifyOrderAttributeRequest, DescribeAssetSystemPackageListResponse, DescribeClientExceptionResponse, DescribeAssetMachineListResponse, DescribeWebPageGeneralizeRequest, DescribeBaselineDetailRequest, ModifyWarningSettingRequest, DescribeMalwareRiskWarningRequest, DescribeAssetInfoRequest, DescribeVulTopResponse, UntrustMalwaresRequest, DescribeAssetAppListRequest, UntrustMalwaresResponse, DescribeExpertServiceListResponse, DescribeAccountStatisticsResponse, DescribeSearchExportListRequest, ScanAssetRequest, DescribeBaselineRuleResponse, ModifyMachineRemarkRequest, StopBaselineDetectResponse, DeleteMaliciousRequestsResponse, ExportBruteAttacksResponse, ExportBruteAttacksRequest, DeleteMachineResponse, ScanVulRequest, DescribeBruteAttackListResponse, RecoverMalwaresRequest, DescribeAssetCoreModuleInfoResponse, DescribeAssetEnvListRequest, StopNoticeBanTipsRequest, DescribeScanMalwareScheduleRequest, DescribeBashEventsResponse, UpdateMachineTagsResponse, DescribeBashEventsRequest, DeleteMachineRequest, DescribeAssetWebLocationListResponse, DescribeAssetHostTotalCountResponse, DescribeAssetJarListRequest, DescribeProtectNetListResponse, DescribeESAggregationsResponse, ChangeRuleEventsIgnoreStatusResponse, DeletePrivilegeRulesResponse, CreateProtectServerRequest, DescribeMachineListRequest, CreateEmergencyVulScanResponse, DescribeAssetCoreModuleInfoRequest, DescribeIndexListResponse, DescribeTagMachinesResponse, ModifyWebPageProtectDirRequest, DescribeWebPageGeneralizeResponse, DescribeBanWhiteListResponse, DescribeOpenPortStatisticsResponse, DeleteAttackLogsResponse, DescribeMalWareListRequest, DescribeProVersionInfoResponse, DeleteTagsResponse, DescribeSecurityEventsCntRequest, ExportMaliciousRequestsResponse, DescribeVulCountByDatesResponse, DescribeServersAndRiskAndFirstInfoRequest, DescribeIndexListRequest, DeleteBashRulesRequest, CreateProtectServerResponse, DescribeExpertServiceListRequest, DescribeBaselineHostTopRequest, ExportBaselineEffectHostListResponse, DescribeVulHostTopResponse, TrustMalwaresResponse, DescribeHistoryServiceRequest, DescribeWarningListRequest, SyncAssetScanRequest, DescribeServerRelatedDirInfoRequest, DescribeESAggregationsRequest, DescribeReverseShellRulesResponse, DescribeBruteAttackListRequest, ModifyMachineRemarkResponse, DescribeVulListResponse, DescribeUndoVulCountsRequest, ScanAssetResponse, DescribeMalwareFileRequest, DescribeLicenseListRequest, ModifyLicenseUnBindsRequest, DeleteMaliciousRequestsRequest, DescribeBanWhiteListRequest, DescribeWebPageServiceInfoResponse, DescribeUsualLoginPlacesRequest, DescribeJavaMemShellListRequest, SwitchBashRulesRequest, DescribeProcessStatisticsRequest, CreateScanMalwareSettingResponse, ExportProtectDirListResponse, ExportTasksRequest, DescribeAssetWebLocationInfoResponse, ModifyBruteAttackRulesRequest, ExportVulListRequest, CreateLicenseOrderRequest, DescribeBaselineScanScheduleRequest, DescribeEmergencyVulListResponse, DestroyOrderResponse, DescribeAssetUserListResponse, DeleteMalwaresRequest, RecoverMalwaresResponse, DescribeReverseShellRulesRequest, DescribeScanVulSettingResponse, DescribeAssetDatabaseInfoResponse, SetBashEventsStatusRequest, DescribeBaselineStrategyListRequest, DescribeAttackLogsRequest, ExportAssetWebServiceInfoListRequest, SetBashEventsStatusResponse, DescribeAssetUserInfoRequest, DescribeProtectDirListRequest, ExportPrivilegeEventsRequest, DescribeMalwareFileResponse, StopBaselineDetectRequest, DescribeRiskDnsListResponse, DescribeAssetWebAppListResponse, DescribeScanTaskStatusRequest, ExportIgnoreBaselineRuleRequest, DeleteMachineTagRequest, DescribeExportMachinesResponse, DescribeScanTaskStatusResponse, DescribeProtectNetListRequest, DescribeWebPageEventListResponse, DescribeBashEventsNewResponse, DeleteProtectDirResponse, ModifyBanStatusRequest, DescribeWebPageServiceInfoRequest, DescribeLogStorageStatisticResponse, DescribeEmergencyResponseListRequest, DescribeScanStateResponse, EditTagsRequest, DeleteReverseShellRulesRequest, DescribeBaselineEffectHostListRequest, ExportSecurityTrendsRequest, DescribeAssetDatabaseInfoRequest, DescribeOpenPortStatisticsRequest, ExportAssetWebServiceInfoListResponse, ExportSecurityTrendsResponse, ModifyMalwareTimingScanSettingsResponse, DeleteNonlocalLoginPlacesResponse, ModifyWebPageProtectSettingRequest, DeleteMalwareScanTaskResponse, DescribeBaselineDetailResponse, ExportIgnoreRuleEffectHostListResponse, DescribeAssetRecentMachineInfoRequest, DescribeAssetWebAppPluginListRequest, DeletePrivilegeEventsResponse, DescribeMachineInfoResponse, DescribeImportMachineInfoRequest, StartBaselineDetectResponse, DescribeVulEffectHostListResponse, SwitchBashRulesResponse, DescribeSearchLogsRequest, DescribeAttackLogInfoRequest, ScanVulSettingResponse, DescribeAssetJarInfoResponse, DescribeVulInfoCvssRequest, DescribeComponentStatisticsRequest, DescribeMaliciousRequestWhiteListRequest, ModifyBanStatusResponse, DescribeLoginWhiteListResponse, StopNoticeBanTipsResponse, DescribeScanMalwareScheduleResponse, DescribeMalwareTimingScanSettingRequest, CreateSearchLogResponse, DescribeSecurityTrendsResponse, DescribeEmergencyVulListRequest, DescribeSecurityDynamicsResponse, DeleteReverseShellEventsResponse, DescribeProVersionStatusResponse, DescribeScanTaskDetailsResponse, DescribeGeneralStatRequest, UpdateBaselineStrategyResponse, DescribeVulHostTopRequest, DescribeIgnoreRuleEffectHostListRequest, ModifyWarningSettingResponse, DescribeMalwareInfoResponse, DescribeAssetJarInfoRequest, DescribePrivilegeEventsRequest, DescribeAssetEnvListResponse, DescribeVulHostCountScanTimeRequest, ExportScanTaskDetailsResponse, ExportBashEventsResponse, DeleteLoginWhiteListRequest, DeleteWebPageEventLogResponse, DescribeLicenseBindScheduleRequest, DescribeVersionStatisticsResponse, DescribeBruteAttackRulesRequest, DescribeProcessStatisticsResponse, ModifyBruteAttackRulesResponse, DeleteNonlocalLoginPlacesRequest, DescribeAssetWebAppPluginListResponse, DescribeTagsResponse, DescribeLoginWhiteCombinedListRequest, DeleteSearchTemplateResponse, DescribeBanRegionsResponse, DescribeEmergencyResponseListResponse, DeleteBaselinePolicyResponse, DescribeAssetAppListResponse, ModifyWebPageProtectSwitchRequest, CreateScanMalwareSettingRequest, DescribeMalwareTimingScanSettingResponse, DescribeHostLoginListRequest, DescribeAssetWebServiceProcessListRequest, ExportVulDetectionExcelRequest, CreateEmergencyVulScanRequest, DescribeProtectDirRelatedServerResponse, ModifyAutoOpenProVersionConfigResponse, ExportBaselineEffectHostListRequest, DescribeBaselineItemDetectListRequest, DescribeBanStatusRequest, DescribeAssetRecentMachineInfoResponse, DescribeMalWareListResponse, ModifyLicenseUnBindsResponse, DescribeAssetPortInfoListResponse, DescribeProtectDirListResponse, DescribeMaliciousRequestWhiteListResponse, DescribeBaselinePolicyListRequest, DeleteBruteAttacksResponse, ExportTasksResponse, DescribeIgnoreBaselineRuleResponse, DescribeMachineOsListRequest, DescribeMalwareRiskWarningResponse, DescribeBashRulesRequest, ExportLicenseDetailResponse, DescribeBanModeResponse, DescribeImportMachineInfoResponse, DescribeSecurityEventStatResponse, DescribeAssetDatabaseListRequest, ModifyWebPageProtectSwitchResponse, DescribeAssetMachineListRequest, CreateSearchTemplateResponse, DescribeAssetDatabaseListResponse, ExportMalwaresRequest, ExportNonlocalLoginPlacesRequest, SyncAssetScanResponse, CreateBaselineStrategyRequest, DescribeSecurityTrendsRequest, DescribeAttackVulTypeListResponse, DescribePrivilegeRulesResponse, DescribeReverseShellEventsResponse, DescribeBashEventsNewRequest, DescribeWebPageProtectStatResponse, DescribeAssetPortInfoListRequest, DescribeExportMachinesRequest, DescribeAssetInfoResponse, DeleteMalwareScanTaskRequest, DescribeIgnoreRuleEffectHostListResponse, ExportProtectDirListRequest, CreateBaselineStrategyResponse, ExportAssetCoreModuleListResponse, DescribeHistoryAccountsResponse, DescribeLoginWhiteListRequest, ExportVulDetectionReportResponse, DescribeScanScheduleRequest, EditBashRulesRequest, DescribeLicenseGeneralResponse, ScanVulSettingRequest, ExportScanTaskDetailsRequest, ExportBaselineListResponse, DescribeBruteAttackRulesResponse, ModifyBanModeResponse, DeleteLicenseRecordResponse, DeleteBruteAttacksRequest, DescribeAssetCoreModuleListResponse, DescribeBaselineItemListRequest, DescribeLoginWhiteCombinedListResponse, ExportVulDetectionExcelResponse, DescribeWarningListResponse, CreateSearchTemplateRequest, DeleteTagsRequest, DescribeScanStateRequest, SyncBaselineDetectSummaryResponse, ModifyMalwareTimingScanSettingsRequest, DescribeMachineListResponse, SyncBaselineDetectSummaryRequest, DescribeExpertServiceOrderListResponse, DeleteReverseShellRulesResponse, DescribeAssetPlanTaskListRequest, DescribeScanTaskDetailsRequest, DescribeProtectDirRelatedServerRequest, DescribeBaselineItemListResponse, DescribeClientExceptionRequest, DescribeBanRegionsRequest, DescribeBaselineAnalysisDataResponse, ModifyBanModeRequest, DeleteScanTaskResponse, DescribeMachineRegionsResponse, DestroyOrderRequest, DeleteBashEventsRequest, SeparateMalwaresRequest, ExportIgnoreRuleEffectHostListRequest, DescribeVulHostCountScanTimeResponse, DescribeAssetCoreModuleListRequest, DeleteAttackLogsRequest, DescribeBaselineStrategyDetailResponse, DescribeBaselineListRequest, ModifyLicenseBindsResponse, DescribeBaselineTopRequest, DescribeAssetAppProcessListRequest, DescribeLicenseBindListRequest, DescribeAccountStatisticsRequest, DescribeBaselineHostDetectListResponse, DescribeSaveOrUpdateWarningsRequest, DescribeAssetProcessInfoListResponse, DescribeScanScheduleResponse, ModifyWebPageProtectDirResponse, DescribeAssetWebAppListRequest, DescribeLicenseGeneralRequest, DescribeMachinesResponse, DescribeAssetWebLocationListRequest, DescribeAssetHostTotalCountRequest, DescribeVulLevelCountRequest, DeleteWebPageEventLogRequest, DescribeProVersionStatusRequest, DescribeBaselineListResponse, DescribeExpertServiceOrderListRequest, ExportVulEffectHostListResponse, DescribeVulTopRequest, DescribeMachineInfoRequest, DescribeGeneralStatResponse, EditTagsResponse, DeleteMachineTagResponse, UpdateMachineTagsRequest, DescribeBaselineItemDetectListResponse, UpdateBaselineStrategyRequest, DescribeHostLoginListResponse, DescribeBaselineAnalysisDataRequest, DescribeAssetWebLocationInfoRequest, DescribeAssetInitServiceListResponse, ModifyBaselinePolicyRequest, DescribeBaselineHostDetectListRequest, DescribeAssetWebFrameListResponse, DescribeAssetUserListRequest, DeleteBaselineStrategyRequest, DescribeAssetSystemPackageListRequest, DescribeSecurityEventsCntResponse, DescribeAssetWebServiceInfoListRequest, CreateSearchLogRequest, DescribeSearchTemplatesRequest, CancelIgnoreVulRequest } from "./cwp_models";
+import { ExportBashEventsRequest, DescribeSearchTemplatesResponse, ExportReverseShellEventsResponse, DescribeBaselineDetectOverviewResponse, DescribeAssetWebServiceInfoListResponse, DescribeAssetAppProcessListResponse, ScanVulAgainRequest, ExportBaselineFixListRequest, DescribeBaselineTopResponse, DeleteBaselineStrategyResponse, ExportWebPageEventListResponse, DescribeUndoVulCountsResponse, DescribeBaselineScanScheduleResponse, DeleteBashEventsResponse, DescribeAssetProcessInfoListRequest, ModifyBaselineRuleRequest, ExportWebPageEventListRequest, DescribeAssetWebFrameListRequest, DescribeMonthInspectionReportResponse, DescribeSaveOrUpdateWarningsResponse, DescribeBaselineHostTopResponse, DeleteBashRulesResponse, DescribeSecurityEventsCntResponse, ExportVulListResponse, DescribeHistoryServiceResponse, ModifyWebPageProtectSettingResponse, DeleteBaselineRuleIgnoreResponse, ModifyAutoOpenProVersionConfigResponse, DescribeVulInfoCvssResponse, DescribeBaselineStrategyDetailRequest, ModifyLicenseBindsRequest, DescribeAssetUserInfoResponse, DescribeServersAndRiskAndFirstInfoResponse, ExportAttackLogsResponse, DescribeBaselineEffectHostListResponse, TrustMalwaresRequest, ExportVulEffectHostListRequest, DescribeBaselineBasicInfoRequest, DescribeProVersionInfoRequest, DescribeVulCountByDatesRequest, CreateLicenseOrderResponse, DescribeBaselineStrategyListResponse, DescribeAttackLogInfoResponse, DescribePrivilegeEventsResponse, DescribeOverviewStatisticsResponse, DescribeMonthInspectionReportRequest, DescribeBaselineDetectListResponse, DescribeBashRulesResponse, DescribeAvailableExpertServiceDetailResponse, ChangeRuleEventsIgnoreStatusRequest, DescribeWebPageEventListRequest, ExportAssetCoreModuleListRequest, DescribeComponentStatisticsResponse, DescribeMachineRegionsRequest, DescribeSearchExportListResponse, DescribeAttackLogsRequest, DescribeVulLevelCountResponse, ExportBaselineItemDetectListRequest, DescribeAvailableExpertServiceDetailRequest, DescribeServerRelatedDirInfoResponse, DescribeUsualLoginPlacesResponse, DescribeBaselineBasicInfoResponse, EditBashRulesResponse, ModifyBruteAttackRulesResponse, ScanVulResponse, DescribeOverviewStatisticsRequest, DeleteScanTaskRequest, DescribeTagMachinesRequest, DescribeLicenseListResponse, DescribeJavaMemShellListResponse, DescribeBaselineRuleListRequest, ModifyAutoOpenProVersionConfigRequest, DeletePrivilegeEventsRequest, ExportAttackLogsRequest, DescribeBanModeRequest, DescribeSecurityEventStatRequest, DeleteSearchTemplateRequest, ExportReverseShellEventsRequest, DeleteLoginWhiteListResponse, DescribeAttackLogsResponse, DescribeBaselineHostIgnoreListResponse, DeleteMalwaresResponse, DescribeAssetInitServiceListRequest, ScanVulAgainResponse, SeparateMalwaresResponse, DescribeTagsRequest, DescribeRiskDnsListRequest, DescribeStrategyExistRequest, DescribeSecurityDynamicsRequest, CheckBashRuleParamsRequest, DescribeIgnoreBaselineRuleRequest, ExportNonlocalLoginPlacesResponse, DescribeAssetJarListResponse, ExportBaselineItemDetectListResponse, ExportMaliciousRequestsRequest, DescribeWebPageProtectStatRequest, DescribeBaselineItemInfoResponse, DescribeBaselineRuleCategoryListResponse, ExportVulDetectionReportRequest, ExportMalwaresResponse, DescribeScanVulSettingRequest, DescribeServersAndRiskAndFirstInfoRequest, DescribeMalwareRiskWarningRequest, StartBaselineDetectRequest, DescribeAssetPlanTaskListResponse, DescribeBaselineRuleRequest, DescribeHistoryAccountsRequest, DescribeAssetMachineDetailRequest, CancelIgnoreVulResponse, FixBaselineDetectRequest, IgnoreImpactedHostsResponse, DescribeBaselineRuleIgnoreListRequest, DescribeAssetMachineDetailResponse, DescribeBaselineDownloadListRequest, DescribeStrategyExistResponse, DeleteReverseShellEventsRequest, DescribeSearchLogsResponse, DescribeMachineOsListResponse, DescribeAssetWebServiceProcessListResponse, IgnoreImpactedHostsRequest, DescribeBaselineWeakPasswordListRequest, ModifyOrderAttributeResponse, DescribeMachinesRequest, DescribeVulEffectHostListRequest, ExportLicenseDetailRequest, DeletePrivilegeRulesRequest, ModifyBaselinePolicyStateRequest, DescribeLicenseBindScheduleResponse, DescribeMalwareInfoRequest, DescribeVersionStatisticsRequest, ExportPrivilegeEventsResponse, ModifyBaselinePolicyResponse, DescribeReverseShellEventsRequest, DescribeAttackVulTypeListRequest, DescribeLogStorageStatisticRequest, DeleteBaselinePolicyRequest, DescribeBaselinePolicyListResponse, CheckBashRuleParamsResponse, DeleteLicenseRecordRequest, ExportBaselineListRequest, DeleteProtectDirRequest, ExportIgnoreBaselineRuleResponse, DescribeBaselineRuleListResponse, DescribeBanStatusResponse, DescribeVulListRequest, DescribeLicenseBindListResponse, DescribePrivilegeRulesRequest, ModifyOrderAttributeRequest, DescribeAssetSystemPackageListResponse, DescribeClientExceptionResponse, DescribeAssetMachineListResponse, DescribeWebPageGeneralizeRequest, DescribeBaselineDetailRequest, ModifyWarningSettingRequest, DescribeBruteAttackListResponse, DescribeAssetInfoRequest, DescribeVulTopResponse, UntrustMalwaresRequest, DescribeAssetAppListRequest, UntrustMalwaresResponse, DescribeExpertServiceListResponse, DescribeAccountStatisticsResponse, DescribeSearchExportListRequest, DeleteBaselineWeakPasswordRequest, ScanAssetRequest, DescribeBaselineRuleResponse, ModifyMachineRemarkRequest, StopBaselineDetectResponse, DescribeBaselineItemRiskTopRequest, DeleteMaliciousRequestsResponse, ExportBruteAttacksResponse, ExportBruteAttacksRequest, DeleteMachineResponse, ScanVulRequest, ExportBaselineRuleDetectListRequest, RecoverMalwaresRequest, DescribeProtectNetListRequest, DescribeAssetCoreModuleInfoResponse, DescribeAssetEnvListRequest, StopNoticeBanTipsRequest, DescribeScanMalwareScheduleRequest, DescribeBashEventsResponse, UpdateMachineTagsResponse, DescribeBashEventsRequest, DeleteMachineRequest, DescribeAssetWebLocationListResponse, DescribeAssetHostTotalCountResponse, DescribeProtectNetListResponse, DescribeESAggregationsResponse, ChangeRuleEventsIgnoreStatusResponse, DeletePrivilegeRulesResponse, CreateProtectServerRequest, DescribeMachineListRequest, CreateEmergencyVulScanResponse, DescribeTagMachinesResponse, DescribeAssetCoreModuleInfoRequest, DescribeIndexListResponse, DescribeIgnoreHostAndItemConfigResponse, ModifyWebPageProtectDirRequest, DescribeWebPageGeneralizeResponse, DescribeBanWhiteListResponse, ModifyBaselineRuleIgnoreResponse, DescribeOpenPortStatisticsResponse, DeleteAttackLogsResponse, DescribeMalWareListRequest, DescribeProVersionInfoResponse, DeleteTagsResponse, DescribeSecurityEventsCntRequest, DescribeBaselineDownloadListResponse, ExportMaliciousRequestsResponse, DescribeVulCountByDatesResponse, DescribeBaselineRuleCategoryListRequest, ModifyBaselineRuleResponse, DescribeIndexListRequest, DeleteBashRulesRequest, CreateProtectServerResponse, DescribeBaselineItemInfoRequest, DescribeBaselineHostRiskTopRequest, DescribeExpertServiceListRequest, DescribeBaselineHostTopRequest, ExportBaselineEffectHostListResponse, DescribeVulHostTopResponse, TrustMalwaresResponse, DescribeHistoryServiceRequest, DescribeWarningListRequest, SyncAssetScanRequest, DescribeServerRelatedDirInfoRequest, DescribeESAggregationsRequest, DescribeReverseShellRulesResponse, DescribeBruteAttackListRequest, ModifyMachineRemarkResponse, DescribeVulListResponse, DescribeUndoVulCountsRequest, ScanAssetResponse, DescribeBaselineFixListResponse, DeleteLoginWhiteListRequest, DescribeLicenseListRequest, ModifyLicenseUnBindsRequest, DescribeBaselineRuleDetectListRequest, DeleteMaliciousRequestsRequest, DescribeBanWhiteListRequest, DescribeWebPageServiceInfoResponse, DescribeUsualLoginPlacesRequest, DescribeJavaMemShellListRequest, SwitchBashRulesRequest, DescribeProcessStatisticsRequest, FixBaselineDetectResponse, CreateScanMalwareSettingResponse, ExportProtectDirListResponse, ExportTasksRequest, ModifyBaselineRuleIgnoreRequest, DescribeAssetWebLocationInfoResponse, ModifyBruteAttackRulesRequest, ExportVulListRequest, CreateLicenseOrderRequest, DescribeBaselineScanScheduleRequest, DescribeEmergencyVulListResponse, DestroyOrderResponse, DescribeAssetUserListResponse, DeleteMalwaresRequest, RecoverMalwaresResponse, DeleteBaselineRuleRequest, DescribeIgnoreHostAndItemConfigRequest, DescribeReverseShellRulesRequest, DescribeScanVulSettingResponse, DescribeAssetDatabaseInfoResponse, SetBashEventsStatusRequest, DescribeBaselineStrategyListRequest, DescribeBaselineRuleIgnoreListResponse, ExportAssetWebServiceInfoListRequest, SetBashEventsStatusResponse, DescribeAssetUserInfoRequest, ExportBaselineItemListRequest, DescribeProtectDirListRequest, ExportPrivilegeEventsRequest, DescribeMalwareFileResponse, StopBaselineDetectRequest, DescribeRiskDnsListResponse, DescribeAssetWebAppListResponse, DescribeScanTaskStatusRequest, DeleteBaselineRuleResponse, DeleteMachineTagRequest, DescribeExportMachinesResponse, DescribeScanTaskStatusResponse, DescribeBaselineItemRiskTopResponse, DescribeWebPageEventListResponse, DescribeBashEventsNewResponse, DeleteProtectDirResponse, ModifyBanStatusRequest, DescribeWebPageServiceInfoRequest, ModifyBaselineWeakPasswordRequest, ExportBaselineItemListResponse, DescribeLogStorageStatisticResponse, ModifyBaselinePolicyStateResponse, DescribeBaselineFixListRequest, DescribeEmergencyResponseListRequest, DescribeScanStateResponse, EditTagsRequest, DeleteReverseShellRulesRequest, DescribeBaselineEffectHostListRequest, ExportSecurityTrendsRequest, ExportBaselineHostDetectListRequest, DescribeAssetDatabaseInfoRequest, DescribeOpenPortStatisticsRequest, ExportAssetWebServiceInfoListResponse, ExportSecurityTrendsResponse, ModifyMalwareTimingScanSettingsResponse, DescribeBaselineWeakPasswordListResponse, DeleteNonlocalLoginPlacesResponse, ModifyWebPageProtectSettingRequest, DeleteMalwareScanTaskResponse, DescribeBaselineDetailResponse, ExportIgnoreRuleEffectHostListResponse, DescribeAssetRecentMachineInfoRequest, DescribeAssetWebAppPluginListRequest, DeletePrivilegeEventsResponse, DescribeMachineInfoResponse, DescribeImportMachineInfoRequest, StartBaselineDetectResponse, DescribeVulEffectHostListResponse, SwitchBashRulesResponse, DescribeSearchLogsRequest, DescribeAttackLogInfoRequest, ScanVulSettingResponse, DescribeAssetJarInfoResponse, DescribeVulInfoCvssRequest, DescribeComponentStatisticsRequest, DescribeMaliciousRequestWhiteListRequest, ModifyBanStatusResponse, DescribeLoginWhiteListResponse, StopNoticeBanTipsResponse, DescribeScanMalwareScheduleResponse, DescribeBaselineItemListRequest, CreateSearchLogResponse, DescribeSecurityTrendsResponse, DescribeEmergencyVulListRequest, DescribeSecurityDynamicsResponse, DeleteReverseShellEventsResponse, DescribeMachineInfoRequest, DescribeScanTaskDetailsResponse, DescribeGeneralStatRequest, UpdateBaselineStrategyResponse, DescribeVulHostTopRequest, DescribeIgnoreRuleEffectHostListRequest, ModifyWarningSettingResponse, DescribeMalwareInfoResponse, ExportBaselineHostDetectListResponse, DescribeAssetJarInfoRequest, DescribePrivilegeEventsRequest, DescribeAssetEnvListResponse, DescribeVulHostCountScanTimeRequest, ExportScanTaskDetailsResponse, ExportBashEventsResponse, DeleteWebPageEventLogResponse, DescribeLicenseBindScheduleRequest, DescribeVersionStatisticsResponse, DescribeBruteAttackRulesRequest, DescribeProcessStatisticsResponse, DeleteBaselineRuleIgnoreRequest, DeleteNonlocalLoginPlacesRequest, DescribeAssetWebAppPluginListResponse, DescribeTagsResponse, DescribeMalwareFileRequest, DescribeLoginWhiteCombinedListRequest, DeleteSearchTemplateResponse, DescribeBanRegionsResponse, DescribeEmergencyResponseListResponse, DeleteBaselinePolicyResponse, DescribeAssetAppListResponse, ModifyWebPageProtectSwitchRequest, CreateScanMalwareSettingRequest, DescribeMalwareTimingScanSettingResponse, DescribeHostLoginListRequest, DescribeAssetWebServiceProcessListRequest, ExportVulDetectionExcelRequest, CreateEmergencyVulScanRequest, DescribeProtectDirRelatedServerResponse, DescribeBaselineItemIgnoreListRequest, ExportBaselineEffectHostListRequest, DescribeBaselineItemDetectListRequest, DescribeBanStatusRequest, DescribeAssetRecentMachineInfoResponse, DescribeMalWareListResponse, ModifyLicenseUnBindsResponse, DescribeAssetPortInfoListResponse, DescribeProtectDirListResponse, DescribeMaliciousRequestWhiteListResponse, DescribeBaselinePolicyListRequest, DeleteBruteAttacksResponse, ExportTasksResponse, DescribeIgnoreBaselineRuleResponse, DescribeMachineOsListRequest, DescribeMalwareRiskWarningResponse, DescribeBashRulesRequest, ExportLicenseDetailResponse, DescribeBanModeResponse, DescribeImportMachineInfoResponse, DescribeSecurityEventStatResponse, DescribeAssetDatabaseListRequest, ModifyWebPageProtectSwitchResponse, DescribeAssetMachineListRequest, ExportBaselineRuleDetectListResponse, CreateSearchTemplateResponse, ExportBaselineWeakPasswordListRequest, DescribeAssetDatabaseListResponse, ExportMalwaresRequest, ExportNonlocalLoginPlacesRequest, SyncAssetScanResponse, CreateBaselineStrategyRequest, DescribeSecurityTrendsRequest, DescribeAttackVulTypeListResponse, DescribePrivilegeRulesResponse, DescribeReverseShellEventsResponse, DescribeBashEventsNewRequest, DescribeWebPageProtectStatResponse, DescribeAssetPortInfoListRequest, DescribeExportMachinesRequest, DescribeAssetInfoResponse, DeleteMalwareScanTaskRequest, DescribeIgnoreRuleEffectHostListResponse, ExportProtectDirListRequest, CreateBaselineStrategyResponse, ExportAssetCoreModuleListResponse, DescribeHistoryAccountsResponse, DescribeLoginWhiteListRequest, ExportVulDetectionReportResponse, DescribeScanScheduleRequest, EditBashRulesRequest, DescribeLicenseGeneralResponse, ExportBaselineWeakPasswordListResponse, ScanVulSettingRequest, ExportScanTaskDetailsRequest, ExportBaselineListResponse, DescribeBruteAttackRulesResponse, ModifyBanModeResponse, DeleteLicenseRecordResponse, DeleteBruteAttacksRequest, DescribeAssetCoreModuleListResponse, DescribeMalwareTimingScanSettingRequest, DescribeLoginWhiteCombinedListResponse, ExportVulDetectionExcelResponse, DescribeWarningListResponse, DescribeAssetJarListRequest, CreateSearchTemplateRequest, DeleteTagsRequest, DescribeScanStateRequest, SyncBaselineDetectSummaryResponse, ModifyMalwareTimingScanSettingsRequest, DescribeMachineListResponse, SyncBaselineDetectSummaryRequest, DescribeExpertServiceOrderListResponse, DeleteReverseShellRulesResponse, DescribeAssetPlanTaskListRequest, DescribeScanTaskDetailsRequest, DescribeProtectDirRelatedServerRequest, DescribeBaselineItemListResponse, DescribeClientExceptionRequest, DescribeBanRegionsRequest, DescribeBaselineAnalysisDataResponse, ModifyBanModeRequest, DescribeBaselineHostIgnoreListRequest, DeleteScanTaskResponse, ExportIgnoreBaselineRuleRequest, DescribeMachineRegionsResponse, DestroyOrderRequest, DescribeBaselineRuleDetectListResponse, DeleteBashEventsRequest, SeparateMalwaresRequest, ExportIgnoreRuleEffectHostListRequest, DescribeVulHostCountScanTimeResponse, DescribeAssetCoreModuleListRequest, DeleteAttackLogsRequest, DescribeBaselineStrategyDetailResponse, DescribeBaselineListRequest, ModifyLicenseBindsResponse, ExportBaselineFixListResponse, ModifyBaselineWeakPasswordResponse, DescribeBaselineTopRequest, DescribeAssetAppProcessListRequest, DescribeLicenseBindListRequest, DescribeAccountStatisticsRequest, DescribeBaselineHostDetectListResponse, DescribeSaveOrUpdateWarningsRequest, DescribeAssetProcessInfoListResponse, DescribeScanScheduleResponse, ModifyWebPageProtectDirResponse, DescribeAssetWebAppListRequest, DescribeBaselineDetectOverviewRequest, DescribeLicenseGeneralRequest, DescribeMachinesResponse, DescribeAssetWebLocationListRequest, DescribeAssetHostTotalCountRequest, DescribeVulLevelCountRequest, DeleteBaselineWeakPasswordResponse, DeleteWebPageEventLogRequest, DescribeProVersionStatusRequest, DescribeBaselineListResponse, DescribeBaselineHostRiskTopResponse, DescribeExpertServiceOrderListRequest, ExportVulEffectHostListResponse, DescribeVulTopRequest, DescribeProVersionStatusResponse, DescribeGeneralStatResponse, EditTagsResponse, DeleteMachineTagResponse, UpdateMachineTagsRequest, DescribeBaselineItemDetectListResponse, UpdateBaselineStrategyRequest, DescribeHostLoginListResponse, DescribeBaselineAnalysisDataRequest, DescribeBaselineDetectListRequest, DescribeAssetWebLocationInfoRequest, DescribeAssetInitServiceListResponse, ModifyBaselinePolicyRequest, DescribeBaselineHostDetectListRequest, DescribeAssetWebFrameListResponse, DescribeAssetUserListRequest, DeleteBaselineStrategyRequest, DescribeAssetSystemPackageListRequest, CancelIgnoreVulRequest, DescribeAssetWebServiceInfoListRequest, CreateSearchLogRequest, DescribeSearchTemplatesRequest, DescribeBaselineItemIgnoreListResponse } from "./cwp_models";
 /**
  * cwp client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 本接口(TrustMalwares)将被识别木马文件设为信任。
      */
     TrustMalwares(req: TrustMalwaresRequest, cb?: (error: string, rep: TrustMalwaresResponse) => void): Promise<TrustMalwaresResponse>;
+    /**
+     * 删除基线规则
+     */
+    DeleteBaselineRule(req: DeleteBaselineRuleRequest, cb?: (error: string, rep: DeleteBaselineRuleResponse) => void): Promise<DeleteBaselineRuleResponse>;
     /**
      * 获取资产管理端口列表
      */
@@ -52,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetPlanTaskList(req: DescribeAssetPlanTaskListRequest, cb?: (error: string, rep: DescribeAssetPlanTaskListResponse) => void): Promise<DescribeAssetPlanTaskListResponse>;
     /**
-     * 获取爆破阻断模式
+     * 删除基线忽略规则
      */
-    DescribeBanMode(req?: DescribeBanModeRequest, cb?: (error: string, rep: DescribeBanModeResponse) => void): Promise<DescribeBanModeResponse>;
+    DeleteBaselineRuleIgnore(req: DeleteBaselineRuleIgnoreRequest, cb?: (error: string, rep: DeleteBaselineRuleIgnoreResponse) => void): Promise<DeleteBaselineRuleIgnoreResponse>;
     /**
      * 根据检测项id或事件id批量忽略事件或取消忽略
      */
@@ -63,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 获取资产管理系统安装包列表
      */
     DescribeAssetSystemPackageList(req: DescribeAssetSystemPackageListRequest, cb?: (error: string, rep: DescribeAssetSystemPackageListResponse) => void): Promise<DescribeAssetSystemPackageListResponse>;
+    /**
+     * 根据基线策略id查询策略详情
+     */
+    DescribeBaselineStrategyDetail(req: DescribeBaselineStrategyDetailRequest, cb?: (error: string, rep: DescribeBaselineStrategyDetailResponse) => void): Promise<DescribeBaselineStrategyDetailResponse>;
     /**
      * 获取资产管理Web应用插件列表
      */
@@ -100,9 +108,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeBashRules(req: DescribeBashRulesRequest, cb?: (error: string, rep: DescribeBashRulesResponse) => void): Promise<DescribeBashRulesResponse>;
     /**
-     * 获取历史搜索记录
+     * 获取基线规则列表
      */
-    DescribeSearchLogs(req?: DescribeSearchLogsRequest, cb?: (error: string, rep: DescribeSearchLogsResponse) => void): Promise<DescribeSearchLogsResponse>;
+    DescribeBaselineRuleList(req: DescribeBaselineRuleListRequest, cb?: (error: string, rep: DescribeBaselineRuleListResponse) => void): Promise<DescribeBaselineRuleListResponse>;
     /**
      * 根据Ids删除本地提权
      */
@@ -136,9 +144,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteBashEvents(req: DeleteBashEventsRequest, cb?: (error: string, rep: DeleteBashEventsResponse) => void): Promise<DeleteBashEventsResponse>;
     /**
-     * 根据基线id查询基线影响主机列表
+     * 获取基线检测详情记录
      */
-    DescribeBaselineEffectHostList(req: DescribeBaselineEffectHostListRequest, cb?: (error: string, rep: DescribeBaselineEffectHostListResponse) => void): Promise<DescribeBaselineEffectHostListResponse>;
+    DescribeBaselineDetectList(req: DescribeBaselineDetectListRequest, cb?: (error: string, rep: DescribeBaselineDetectListResponse) => void): Promise<DescribeBaselineDetectListResponse>;
+    /**
+     * 导出修复列表
+     */
+    ExportBaselineFixList(req: ExportBaselineFixListRequest, cb?: (error: string, rep: ExportBaselineFixListResponse) => void): Promise<ExportBaselineFixListResponse>;
     /**
      * 本接口 (DeleteMaliciousRequests) 用于删除恶意请求记录。
      */
@@ -196,6 +208,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeProtectDirRelatedServer(req: DescribeProtectDirRelatedServerRequest, cb?: (error: string, rep: DescribeProtectDirRelatedServerResponse) => void): Promise<DescribeProtectDirRelatedServerResponse>;
     /**
+     * 导出基线主机检测
+     */
+    ExportBaselineHostDetectList(req: ExportBaselineHostDetectListRequest, cb?: (error: string, rep: ExportBaselineHostDetectListResponse) => void): Promise<ExportBaselineHostDetectListResponse>;
+    /**
      * 删除防护网站
      */
     DeleteProtectDir(req: DeleteProtectDirRequest, cb?: (error: string, rep: DeleteProtectDirResponse) => void): Promise<DeleteProtectDirResponse>;
@@ -220,13 +236,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetAppList(req: DescribeAssetAppListRequest, cb?: (error: string, rep: DescribeAssetAppListResponse) => void): Promise<DescribeAssetAppListResponse>;
     /**
+     * 导出资产管理Web服务列表
+     */
+    ExportAssetWebServiceInfoList(req: ExportAssetWebServiceInfoListRequest, cb?: (error: string, rep: ExportAssetWebServiceInfoListResponse) => void): Promise<ExportAssetWebServiceInfoListResponse>;
+    /**
      * 查询网站防篡改概览信息
      */
     DescribeWebPageGeneralize(req?: DescribeWebPageGeneralizeRequest, cb?: (error: string, rep: DescribeWebPageGeneralizeResponse) => void): Promise<DescribeWebPageGeneralizeResponse>;
     /**
-     * 导出本次漏洞检测Excel
+     * 获取爆破阻断模式
      */
-    ExportVulDetectionExcel(req: ExportVulDetectionExcelRequest, cb?: (error: string, rep: ExportVulDetectionExcelResponse) => void): Promise<ExportVulDetectionExcelResponse>;
+    DescribeBanMode(req?: DescribeBanModeRequest, cb?: (error: string, rep: DescribeBanModeResponse) => void): Promise<DescribeBanModeResponse>;
     /**
      * DestroyOrder  该接口可以对资源销毁.
      */
@@ -260,6 +280,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBaselineScanSchedule(req: DescribeBaselineScanScheduleRequest, cb?: (error: string, rep: DescribeBaselineScanScheduleResponse) => void): Promise<DescribeBaselineScanScheduleResponse>;
     /**
+     * 获取基线下载列表
+     */
+    DescribeBaselineDownloadList(req: DescribeBaselineDownloadListRequest, cb?: (error: string, rep: DescribeBaselineDownloadListResponse) => void): Promise<DescribeBaselineDownloadListResponse>;
+    /**
      * 导出已忽略基线检测项信息
      */
     ExportIgnoreBaselineRule(req: ExportIgnoreBaselineRuleRequest, cb?: (error: string, rep: ExportIgnoreBaselineRuleResponse) => void): Promise<ExportIgnoreBaselineRuleResponse>;
@@ -275,6 +299,14 @@ export declare class Client extends AbstractClient {
      * 查询Jar包列表
      */
     DescribeAssetJarList(req: DescribeAssetJarListRequest, cb?: (error: string, rep: DescribeAssetJarListResponse) => void): Promise<DescribeAssetJarListResponse>;
+    /**
+     * 删除基线弱口令
+     */
+    DeleteBaselineWeakPassword(req: DeleteBaselineWeakPasswordRequest, cb?: (error: string, rep: DeleteBaselineWeakPasswordResponse) => void): Promise<DeleteBaselineWeakPasswordResponse>;
+    /**
+     * 更改基线忽略规则
+     */
+    ModifyBaselineRuleIgnore(req: ModifyBaselineRuleIgnoreRequest, cb?: (error: string, rep: ModifyBaselineRuleIgnoreResponse) => void): Promise<ModifyBaselineRuleIgnoreResponse>;
     /**
      * 本接口 (DeleteNonlocalLoginPlaces) 用于删除异地登录记录。
      */
@@ -300,13 +332,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeTagMachines(req: DescribeTagMachinesRequest, cb?: (error: string, rep: DescribeTagMachinesResponse) => void): Promise<DescribeTagMachinesResponse>;
     /**
-     * 关联机器标签列表
+     * 修复基线检测
      */
-    UpdateMachineTags(req: UpdateMachineTagsRequest, cb?: (error: string, rep: UpdateMachineTagsResponse) => void): Promise<UpdateMachineTagsResponse>;
+    FixBaselineDetect(req: FixBaselineDetectRequest, cb?: (error: string, rep: FixBaselineDetectResponse) => void): Promise<FixBaselineDetectResponse>;
     /**
-     *  一键检测
+     * 获取基线规则检测列表
      */
-    ScanVul(req: ScanVulRequest, cb?: (error: string, rep: ScanVulResponse) => void): Promise<ScanVulResponse>;
+    DescribeBaselineRuleDetectList(req: DescribeBaselineRuleDetectListRequest, cb?: (error: string, rep: DescribeBaselineRuleDetectListResponse) => void): Promise<DescribeBaselineRuleDetectListResponse>;
     /**
      * 导出本地提权事件
      */
@@ -319,6 +351,10 @@ export declare class Client extends AbstractClient {
      * 获取概览统计数据。
      */
     DescribeOverviewStatistics(req?: DescribeOverviewStatisticsRequest, cb?: (error: string, rep: DescribeOverviewStatisticsResponse) => void): Promise<DescribeOverviewStatisticsResponse>;
+    /**
+     * 导出基线检测项
+     */
+    ExportBaselineItemDetectList(req: ExportBaselineItemDetectListRequest, cb?: (error: string, rep: ExportBaselineItemDetectListResponse) => void): Promise<ExportBaselineItemDetectListResponse>;
     /**
      * 专家服务-可用订单详情
      */
@@ -335,6 +371,10 @@ export declare class Client extends AbstractClient {
      * 资产指纹启动扫描
      */
     ScanAsset(req: ScanAssetRequest, cb?: (error: string, rep: ScanAssetResponse) => void): Promise<ScanAssetResponse>;
+    /**
+     *  一键检测
+     */
+    ScanVul(req: ScanVulRequest, cb?: (error: string, rep: ScanVulResponse) => void): Promise<ScanVulResponse>;
     /**
      * 对授权管理-订单列表内已过期的订单进行删除.(删除后的订单不在统计范畴内)
      */
@@ -396,6 +436,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteLoginWhiteList(req: DeleteLoginWhiteListRequest, cb?: (error: string, rep: DeleteLoginWhiteListResponse) => void): Promise<DeleteLoginWhiteListResponse>;
     /**
+     * 获取所有主机标签
+     */
+    DescribeTags(req: DescribeTagsRequest, cb?: (error: string, rep: DescribeTagsResponse) => void): Promise<DescribeTagsResponse>;
+    /**
      * 获取当前用户告警列表
      */
     DescribeWarningList(req?: DescribeWarningListRequest, cb?: (error: string, rep: DescribeWarningListResponse) => void): Promise<DescribeWarningListResponse>;
@@ -403,6 +447,10 @@ export declare class Client extends AbstractClient {
      * 根据基线策略id更新策略信息
      */
     UpdateBaselineStrategy(req: UpdateBaselineStrategyRequest, cb?: (error: string, rep: UpdateBaselineStrategyResponse) => void): Promise<UpdateBaselineStrategyResponse>;
+    /**
+     * 获取基线忽略规则列表
+     */
+    DescribeBaselineRuleIgnoreList(req: DescribeBaselineRuleIgnoreListRequest, cb?: (error: string, rep: DescribeBaselineRuleIgnoreListResponse) => void): Promise<DescribeBaselineRuleIgnoreListResponse>;
     /**
      * 修改主机备注信息
      */
@@ -440,6 +488,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeSaveOrUpdateWarnings(req: DescribeSaveOrUpdateWarningsRequest, cb?: (error: string, rep: DescribeSaveOrUpdateWarningsResponse) => void): Promise<DescribeSaveOrUpdateWarningsResponse>;
     /**
+     * 导出基线检测规则
+     */
+    ExportBaselineRuleDetectList(req: ExportBaselineRuleDetectListRequest, cb?: (error: string, rep: ExportBaselineRuleDetectListResponse) => void): Promise<ExportBaselineRuleDetectListResponse>;
+    /**
      * 本接口 (ExportBruteAttacks) 用于导出密码破解记录成CSV文件。
      */
     ExportBruteAttacks(req: ExportBruteAttacksRequest, cb?: (error: string, rep: ExportBruteAttacksResponse) => void): Promise<ExportBruteAttacksResponse>;
@@ -447,6 +499,10 @@ export declare class Client extends AbstractClient {
      * 修改爆破阻断模式
      */
     ModifyBanMode(req: ModifyBanModeRequest, cb?: (error: string, rep: ModifyBanModeResponse) => void): Promise<ModifyBanModeResponse>;
+    /**
+     * 关联机器标签列表
+     */
+    UpdateMachineTags(req: UpdateMachineTagsRequest, cb?: (error: string, rep: UpdateMachineTagsResponse) => void): Promise<UpdateMachineTagsResponse>;
     /**
      * 创建/修改网站防护目录
      */
@@ -464,9 +520,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetUserList(req: DescribeAssetUserListRequest, cb?: (error: string, rep: DescribeAssetUserListResponse) => void): Promise<DescribeAssetUserListResponse>;
     /**
-     * 根据基线策略id查询策略详情
+     * 获取基线检测项TOP5
      */
-    DescribeBaselineStrategyDetail(req: DescribeBaselineStrategyDetailRequest, cb?: (error: string, rep: DescribeBaselineStrategyDetailResponse) => void): Promise<DescribeBaselineStrategyDetailResponse>;
+    DescribeBaselineItemRiskTop(req: DescribeBaselineItemRiskTopRequest, cb?: (error: string, rep: DescribeBaselineItemRiskTopResponse) => void): Promise<DescribeBaselineItemRiskTopResponse>;
     /**
      * 更改基线策略设置
      */
@@ -512,6 +568,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeVulEffectHostList(req: DescribeVulEffectHostListRequest, cb?: (error: string, rep: DescribeVulEffectHostListResponse) => void): Promise<DescribeVulEffectHostListResponse>;
     /**
+     * 获取基线服务器风险TOP5
+     */
+    DescribeBaselineHostRiskTop(req: DescribeBaselineHostRiskTopRequest, cb?: (error: string, rep: DescribeBaselineHostRiskTopResponse) => void): Promise<DescribeBaselineHostRiskTopResponse>;
+    /**
      * 删除基线策略配置
      */
     DeleteBaselinePolicy(req: DeleteBaselinePolicyRequest, cb?: (error: string, rep: DeleteBaselinePolicyResponse) => void): Promise<DeleteBaselinePolicyResponse>;
@@ -535,13 +595,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeSearchTemplates(req: DescribeSearchTemplatesRequest, cb?: (error: string, rep: DescribeSearchTemplatesResponse) => void): Promise<DescribeSearchTemplatesResponse>;
     /**
+     * 获取历史搜索记录
+     */
+    DescribeSearchLogs(req?: DescribeSearchLogsRequest, cb?: (error: string, rep: DescribeSearchLogsResponse) => void): Promise<DescribeSearchLogsResponse>;
+    /**
      * 专家服务-应急响应列表
      */
     DescribeEmergencyResponseList(req: DescribeEmergencyResponseListRequest, cb?: (error: string, rep: DescribeEmergencyResponseListResponse) => void): Promise<DescribeEmergencyResponseListResponse>;
     /**
-     * 导出资产管理Web服务列表
+     * 获取忽略规则主机列表
      */
-    ExportAssetWebServiceInfoList(req: ExportAssetWebServiceInfoListRequest, cb?: (error: string, rep: ExportAssetWebServiceInfoListResponse) => void): Promise<ExportAssetWebServiceInfoListResponse>;
+    DescribeBaselineHostIgnoreList(req: DescribeBaselineHostIgnoreListRequest, cb?: (error: string, rep: DescribeBaselineHostIgnoreListResponse) => void): Promise<DescribeBaselineHostIgnoreListResponse>;
     /**
      * 漏洞管理-重新检测接口
      */
@@ -610,6 +674,10 @@ export declare class Client extends AbstractClient {
      * 删除高危命令规则
      */
     DeleteBashRules(req: DeleteBashRulesRequest, cb?: (error: string, rep: DeleteBashRulesResponse) => void): Promise<DeleteBashRulesResponse>;
+    /**
+     * 获取一键忽略受影响的检测项和主机信息
+     */
+    DescribeIgnoreHostAndItemConfig(req: DescribeIgnoreHostAndItemConfigRequest, cb?: (error: string, rep: DescribeIgnoreHostAndItemConfigResponse) => void): Promise<DescribeIgnoreHostAndItemConfigResponse>;
     /**
      * 获取资产管理进程列表
      */
@@ -683,6 +751,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeMachineInfo(req: DescribeMachineInfoRequest, cb?: (error: string, rep: DescribeMachineInfoResponse) => void): Promise<DescribeMachineInfoResponse>;
     /**
+     * 导出检测项结果列表
+     */
+    ExportBaselineItemList(req: ExportBaselineItemListRequest, cb?: (error: string, rep: ExportBaselineItemListResponse) => void): Promise<ExportBaselineItemListResponse>;
+    /**
      * 切换高危命令规则状态
      */
     SwitchBashRules(req: SwitchBashRulesRequest, cb?: (error: string, rep: SwitchBashRulesResponse) => void): Promise<SwitchBashRulesResponse>;
@@ -722,6 +794,10 @@ export declare class Client extends AbstractClient {
      * 根据基线id查询基线详情接口
      */
     DescribeBaselineDetail(req: DescribeBaselineDetailRequest, cb?: (error: string, rep: DescribeBaselineDetailResponse) => void): Promise<DescribeBaselineDetailResponse>;
+    /**
+     * 获取基线检测概览
+     */
+    DescribeBaselineDetectOverview(req: DescribeBaselineDetectOverviewRequest, cb?: (error: string, rep: DescribeBaselineDetectOverviewResponse) => void): Promise<DescribeBaselineDetectOverviewResponse>;
     /**
      * 获取基线检测项的列表
      */
@@ -791,6 +867,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeLicenseGeneral(req?: DescribeLicenseGeneralRequest, cb?: (error: string, rep: DescribeLicenseGeneralResponse) => void): Promise<DescribeLicenseGeneralResponse>;
     /**
+     * 根据基线id查询基线影响主机列表
+     */
+    DescribeBaselineEffectHostList(req: DescribeBaselineEffectHostListRequest, cb?: (error: string, rep: DescribeBaselineEffectHostListResponse) => void): Promise<DescribeBaselineEffectHostListResponse>;
+    /**
+     * 获取基线弱口令列表
+     */
+    DescribeBaselineWeakPasswordList(req: DescribeBaselineWeakPasswordListRequest, cb?: (error: string, rep: DescribeBaselineWeakPasswordListResponse) => void): Promise<DescribeBaselineWeakPasswordListResponse>;
+    /**
      * 该接口可以获取设置中心-授权管理,某个授权下已绑定的授权机器列表
      */
     DescribeLicenseBindList(req: DescribeLicenseBindListRequest, cb?: (error: string, rep: DescribeLicenseBindListResponse) => void): Promise<DescribeLicenseBindListResponse>;
@@ -807,6 +891,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetDatabaseInfo(req: DescribeAssetDatabaseInfoRequest, cb?: (error: string, rep: DescribeAssetDatabaseInfoResponse) => void): Promise<DescribeAssetDatabaseInfoResponse>;
     /**
+     * 更改或新增弱口令
+     */
+    ModifyBaselineWeakPassword(req: ModifyBaselineWeakPasswordRequest, cb?: (error: string, rep: ModifyBaselineWeakPasswordResponse) => void): Promise<ModifyBaselineWeakPasswordResponse>;
+    /**
      * 设置高危命令事件状态
      */
     SetBashEventsStatus(req: SetBashEventsStatusRequest, cb?: (error: string, rep: SetBashEventsStatusResponse) => void): Promise<SetBashEventsStatusResponse>;
@@ -814,6 +902,10 @@ export declare class Client extends AbstractClient {
      * 导出反弹Shell事件
      */
     ExportReverseShellEvents(req: ExportReverseShellEventsRequest, cb?: (error: string, rep: ExportReverseShellEventsResponse) => void): Promise<ExportReverseShellEventsResponse>;
+    /**
+     * 获取基线检测项信息
+     */
+    DescribeBaselineItemInfo(req: DescribeBaselineItemInfoRequest, cb?: (error: string, rep: DescribeBaselineItemInfoResponse) => void): Promise<DescribeBaselineItemInfoResponse>;
     /**
      * 删除网络攻击日志
      */
@@ -823,6 +915,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeScanVulSetting(req?: DescribeScanVulSettingRequest, cb?: (error: string, rep: DescribeScanVulSettingResponse) => void): Promise<DescribeScanVulSettingResponse>;
     /**
+     * 导出本次漏洞检测Excel
+     */
+    ExportVulDetectionExcel(req: ExportVulDetectionExcelRequest, cb?: (error: string, rep: ExportVulDetectionExcelResponse) => void): Promise<ExportVulDetectionExcelResponse>;
+    /**
      * 查询资产管理启动服务列表
      */
     DescribeAssetInitServiceList(req: DescribeAssetInitServiceListRequest, cb?: (error: string, rep: DescribeAssetInitServiceListResponse) => void): Promise<DescribeAssetInitServiceListResponse>;
@@ -831,9 +927,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteMachine(req: DeleteMachineRequest, cb?: (error: string, rep: DeleteMachineResponse) => void): Promise<DeleteMachineResponse>;
     /**
+     * 获取忽略规则项列表
+     */
+    DescribeBaselineItemIgnoreList(req: DescribeBaselineItemIgnoreListRequest, cb?: (error: string, rep: DescribeBaselineItemIgnoreListResponse) => void): Promise<DescribeBaselineItemIgnoreListResponse>;
+    /**
      * 专家服务-专家服务订单列表
      */
     DescribeExpertServiceOrderList(req: DescribeExpertServiceOrderListRequest, cb?: (error: string, rep: DescribeExpertServiceOrderListResponse) => void): Promise<DescribeExpertServiceOrderListResponse>;
+    /**
+     * 获取基线修复列表
+     */
+    DescribeBaselineFixList(req: DescribeBaselineFixListRequest, cb?: (error: string, rep: DescribeBaselineFixListResponse) => void): Promise<DescribeBaselineFixListResponse>;
     /**
      * 根据策略名查询策略是否存在
      */
@@ -847,17 +951,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeClientException(req: DescribeClientExceptionRequest, cb?: (error: string, rep: DescribeClientExceptionResponse) => void): Promise<DescribeClientExceptionResponse>;
     /**
-     * 获取所有主机标签
+     * 获取基线分类列表
      */
-    DescribeTags(req: DescribeTagsRequest, cb?: (error: string, rep: DescribeTagsResponse) => void): Promise<DescribeTagsResponse>;
+    DescribeBaselineRuleCategoryList(req?: DescribeBaselineRuleCategoryListRequest, cb?: (error: string, rep: DescribeBaselineRuleCategoryListResponse) => void): Promise<DescribeBaselineRuleCategoryListResponse>;
     /**
      * 查询基线基础信息列表
      */
     DescribeBaselineBasicInfo(req: DescribeBaselineBasicInfoRequest, cb?: (error: string, rep: DescribeBaselineBasicInfoResponse) => void): Promise<DescribeBaselineBasicInfoResponse>;
     /**
+     * 导出弱口令配置列表
+     */
+    ExportBaselineWeakPasswordList(req: ExportBaselineWeakPasswordListRequest, cb?: (error: string, rep: ExportBaselineWeakPasswordListResponse) => void): Promise<ExportBaselineWeakPasswordListResponse>;
+    /**
      * 本接口 (DescribeSecurityTrends) 用于获取安全事件统计数据。
      */
     DescribeSecurityTrends(req: DescribeSecurityTrendsRequest, cb?: (error: string, rep: DescribeSecurityTrendsResponse) => void): Promise<DescribeSecurityTrendsResponse>;
+    /**
+     * 更改基线检测规则
+     */
+    ModifyBaselineRule(req: ModifyBaselineRuleRequest, cb?: (error: string, rep: ModifyBaselineRuleResponse) => void): Promise<ModifyBaselineRuleResponse>;
     /**
      * 根据基线策略id查询基线策略数据概览统计
      */
@@ -894,6 +1006,10 @@ export declare class Client extends AbstractClient {
      * 漏洞管理-导出漏洞列表
      */
     ExportVulList(req: ExportVulListRequest, cb?: (error: string, rep: ExportVulListResponse) => void): Promise<ExportVulListResponse>;
+    /**
+     * 检测基线
+     */
+    StartBaselineDetect(req: StartBaselineDetectRequest, cb?: (error: string, rep: StartBaselineDetectResponse) => void): Promise<StartBaselineDetectResponse>;
     /**
      * 用于获取单台主机或所有主机是否开通专业版状态。
      */
@@ -939,7 +1055,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeUndoVulCounts(req: DescribeUndoVulCountsRequest, cb?: (error: string, rep: DescribeUndoVulCountsResponse) => void): Promise<DescribeUndoVulCountsResponse>;
     /**
-     * 检测基线
+     * 更改基线策略状态
      */
-    StartBaselineDetect(req: StartBaselineDetectRequest, cb?: (error: string, rep: StartBaselineDetectResponse) => void): Promise<StartBaselineDetectResponse>;
+    ModifyBaselinePolicyState(req: ModifyBaselinePolicyStateRequest, cb?: (error: string, rep: ModifyBaselinePolicyStateResponse) => void): Promise<ModifyBaselinePolicyStateResponse>;
 }

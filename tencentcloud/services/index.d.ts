@@ -110,6 +110,7 @@ export { ie } from "./ie";
 export { iecp } from "./iecp";
 export { iir } from "./iir";
 export { ims } from "./ims";
+export { intlpartnersmgt } from "./intlpartnersmgt";
 export { iot } from "./iot";
 export { iotcloud } from "./iotcloud";
 export { iotexplorer } from "./iotexplorer";

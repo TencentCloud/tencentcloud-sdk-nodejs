@@ -570,7 +570,7 @@ export interface RocketMQVipInstance {
   InstanceVersion: string
 
   /**
-   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
    */
   Status: number
 
@@ -823,57 +823,63 @@ export interface RocketMQInstanceConfig {
   /**
    * 单命名空间TPS上线
    */
-  MaxTpsPerNamespace: number
+  MaxTpsPerNamespace?: number
 
   /**
    * 最大命名空间数量
    */
-  MaxNamespaceNum: number
+  MaxNamespaceNum?: number
 
   /**
    * 已使用命名空间数量
    */
-  UsedNamespaceNum: number
+  UsedNamespaceNum?: number
 
   /**
    * 最大Topic数量
    */
-  MaxTopicNum: number
+  MaxTopicNum?: number
 
   /**
    * 已使用Topic数量
    */
-  UsedTopicNum: number
+  UsedTopicNum?: number
 
   /**
    * 最大Group数量
    */
-  MaxGroupNum: number
+  MaxGroupNum?: number
 
   /**
    * 已使用Group数量
    */
-  UsedGroupNum: number
+  UsedGroupNum?: number
 
   /**
    * 集群类型
    */
-  ConfigDisplay: string
+  ConfigDisplay?: string
 
   /**
    * 集群节点数
    */
-  NodeCount: number
+  NodeCount?: number
 
   /**
    * 节点分布情况
    */
-  NodeDistribution: Array<InstanceNodeDistribution>
+  NodeDistribution?: Array<InstanceNodeDistribution>
 
   /**
    * topic分布情况
    */
-  TopicDistribution: Array<RocketMQTopicDistribution>
+  TopicDistribution?: Array<RocketMQTopicDistribution>
+
+  /**
+      * 每个主题最大队列数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxQueuesPerTopic?: number
 }
 
 /**
@@ -4652,8 +4658,10 @@ export interface CreateAMQPClusterResponse {
  */
 export interface DescribeRocketMQVipInstancesRequest {
   /**
-   * 查询条件过滤器
-   */
+      * 查询条件过滤器，支持的查询条件如下：
+instanceIds - 实例ID
+instanceName - 实例名称
+      */
   Filters?: Array<Filter>
 
   /**
@@ -6896,12 +6904,12 @@ export interface DescribeRocketMQVipInstancesResponse {
   /**
    * 未分页的总数目
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 实例信息列表
    */
-  Instances: Array<RocketMQVipInstance>
+  Instances?: Array<RocketMQVipInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

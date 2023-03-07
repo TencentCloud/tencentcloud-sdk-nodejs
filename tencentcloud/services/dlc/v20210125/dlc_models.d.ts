@@ -230,6 +230,91 @@ export interface Asset {
     DatasourceId?: number;
 }
 /**
+ * 任务结果信息。
+ */
+export interface TaskResultInfo {
+    /**
+      * 任务唯一ID
+      */
+    TaskId: string;
+    /**
+      * 数据源名称，当前任务执行时候选中的默认数据源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionName: string;
+    /**
+      * 数据库名称，当前任务执行时候选中的默认数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatabaseName: string;
+    /**
+      * 当前执行的SQL，一个任务包含一个SQL
+      */
+    SQL: string;
+    /**
+      * 执行任务的类型，现在分为DDL、DML、DQL
+      */
+    SQLType: string;
+    /**
+      * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功 -1：任务执行失败 -3：用户手动终止。只有任务执行成功的情况下，才会返回任务执行的结果
+      */
+    State: number;
+    /**
+      * 扫描的数据量，单位byte
+      */
+    DataAmount: number;
+    /**
+      * 计算耗时，单位： ms
+      */
+    UsedTime: number;
+    /**
+      * 任务结果输出的COS桶地址
+      */
+    OutputPath: string;
+    /**
+      * 任务创建时间，时间戳
+      */
+    CreateTime: string;
+    /**
+      * 任务执行信息，成功时返回success，失败时返回失败原因
+      */
+    OutputMessage: string;
+    /**
+      * 被影响的行数
+      */
+    RowAffectInfo: string;
+    /**
+      * 结果的schema信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultSchema: Array<Column>;
+    /**
+      * 结果信息，反转义后，外层数组的每个元素为一行数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultSet: string;
+    /**
+      * 分页信息，如果没有更多结果数据，nextToken为空
+      */
+    NextToken: string;
+    /**
+      * 任务执行进度num/100(%)
+      */
+    Percentage: number;
+    /**
+      * 任务进度明细
+      */
+    ProgressDetail: string;
+    /**
+      * 控制台展示格式。table：表格展示 text：文本展示
+      */
+    DisplayFormat: string;
+    /**
+      * 任务耗时，单位： ms
+      */
+    TotalTime: number;
+}
+/**
  * CreateResultDownload返回参数结构体
  */
 export interface CreateResultDownloadResponse {
@@ -566,6 +651,19 @@ export interface SparkJobInfo {
     JobExecutorMaxNumbers?: number;
 }
 /**
+ * SwitchDataEngine请求参数结构体
+ */
+export interface SwitchDataEngineRequest {
+    /**
+      * 主集群名称
+      */
+    DataEngineName: string;
+    /**
+      * 是否开启备集群
+      */
+    StartStandbyCluster: boolean;
+}
+/**
  * SuspendResumeDataEngine返回参数结构体
  */
 export interface SuspendResumeDataEngineResponse {
@@ -690,26 +788,13 @@ export interface AlterDMSTableResponse {
     RequestId?: string;
 }
 /**
- * DescribeTasks返回参数结构体
+ * DescribeEngineUsageInfo请求参数结构体
  */
-export interface DescribeTasksResponse {
+export interface DescribeEngineUsageInfoRequest {
     /**
-      * 任务对象列表。
+      * House Id
       */
-    TaskList: Array<TaskResponseInfo>;
-    /**
-      * 实例总数。
-      */
-    TotalCount: number;
-    /**
-      * 任务概览信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TasksOverview: TasksOverview;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DataEngineId: string;
 }
 /**
  * DescribeDMSTable返回参数结构体
@@ -978,6 +1063,15 @@ export interface GenerateCreateMangedTableSqlRequest {
     Properties?: Array<Property>;
 }
 /**
+ * SwitchDataEngine返回参数结构体
+ */
+export interface SwitchDataEngineResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CSV序列化及反序列化数据结构
  */
 export interface CSVSerde {
@@ -994,6 +1088,10 @@ export interface CSVSerde {
       */
     Separator?: string;
 }
+/**
+ * DescribeLakeFsInfo请求参数结构体
+ */
+export declare type DescribeLakeFsInfoRequest = null;
 /**
  * ModifySparkApp请求参数结构体
  */
@@ -1808,6 +1906,19 @@ export interface TPartition {
     TransformArgs?: Array<string>;
 }
 /**
+ * CreateDataEngine返回参数结构体
+ */
+export interface CreateDataEngineResponse {
+    /**
+      * 虚拟引擎id
+      */
+    DataEngineId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSparkAppJobs请求参数结构体
  */
 export interface DescribeSparkAppJobsRequest {
@@ -1920,6 +2031,19 @@ export interface CreateNotebookSessionRequest {
     ExecutorMaxNumbers?: number;
 }
 /**
+ * 同一个用户绑定的工作组集合
+ */
+export interface WorkGroupIdSetOfUserId {
+    /**
+      * 用户Id，和CAM侧Uin匹配
+      */
+    UserId: string;
+    /**
+      * 工作组Id集合
+      */
+    WorkGroupIds: Array<number>;
+}
+/**
  * 数据表分块信息。
  */
 export interface Partition {
@@ -1950,6 +2074,119 @@ export interface Partition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: number;
+}
+/**
+ * CreateDataEngine请求参数结构体
+ */
+export interface CreateDataEngineRequest {
+    /**
+      * 引擎类型spark/presto
+      */
+    EngineType: string;
+    /**
+      * 虚拟集群名称
+      */
+    DataEngineName: string;
+    /**
+      * 集群类型 spark_private/presto_private/presto_cu/spark_cu
+      */
+    ClusterType: string;
+    /**
+      * 计费模式 0=共享模式 1=按量计费 2=包年包月
+      */
+    Mode: number;
+    /**
+      * 是否自动启动集群
+      */
+    AutoResume: boolean;
+    /**
+      * 最小资源
+      */
+    MinClusters?: number;
+    /**
+      * 最大资源
+      */
+    MaxClusters?: number;
+    /**
+      * 是否为默虚拟集群
+      */
+    DefaultDataEngine?: boolean;
+    /**
+      * VPC网段
+      */
+    CidrBlock?: string;
+    /**
+      * 描述信息
+      */
+    Message?: string;
+    /**
+      * 集群规模
+      */
+    Size?: number;
+    /**
+      * 计费类型，后付费：0，预付费：1。当前只支持后付费，不填默认为后付费。
+      */
+    PayMode?: number;
+    /**
+      * 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认3600
+      */
+    TimeSpan?: number;
+    /**
+      * 资源使用时长的单位，后付费：s，预付费：m。默认为s
+      */
+    TimeUnit?: string;
+    /**
+      * 资源的自动续费标志。后付费无需续费，固定填0；预付费下：0表示手动续费、1代表自动续费、2代表不续费，在0下如果是大客户，会自动帮大客户续费。默认为0
+      */
+    AutoRenew?: number;
+    /**
+      * 创建资源的时候需要绑定的标签信息
+      */
+    Tags?: Array<TagInfo>;
+    /**
+      * 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起
+      */
+    AutoSuspend?: boolean;
+    /**
+      * 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥）
+      */
+    CrontabResumeSuspend?: number;
+    /**
+      * 定时启停策略，复杂类型：包含启停时间、挂起集群策略
+      */
+    CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy;
+    /**
+      * 引擎执行任务类型，默认为SQL
+      */
+    EngineExecType?: string;
+    /**
+      * 单个集群最大并发任务数，默认5
+      */
+    MaxConcurrency?: number;
+    /**
+      * 可容忍的排队时间，默认0。当任务排队的时间超过可容忍的时间时可能会触发扩容。如果该参数为0，则表示一旦有任务排队就可能立即触发扩容。
+      */
+    TolerableQueueTime?: number;
+    /**
+      * 集群自动挂起时间，默认10分钟
+      */
+    AutoSuspendTime?: number;
+    /**
+      * 资源类型。Standard_CU：标准型；Memory_CU：内存型
+      */
+    ResourceType?: string;
+    /**
+      * 集群高级配置
+      */
+    DataEngineConfigPairs?: Array<DataEngineConfigPair>;
+    /**
+      * 集群镜像版本名字。如SuperSQL-P 1.1;SuperSQL-S 3.2等,不传，默认创建最新镜像版本的集群
+      */
+    ImageVersionName?: string;
+    /**
+      * 主集群名称
+      */
+    MainClusterName?: string;
 }
 /**
  * CreateTask请求参数结构体
@@ -2303,6 +2540,10 @@ export interface ReportHeartbeatMetaDataResponse {
       */
     RequestId?: string;
 }
+/**
+ * 引擎配置
+ */
+export declare type DataEngineConfigPair = null;
 /**
  * ReportHeartbeatMetaData请求参数结构体
  */
@@ -3369,17 +3610,9 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * DescribeUsers返回参数结构体
+ * DescribeLakeFsDirSummary返回参数结构体
  */
-export interface DescribeUsersResponse {
-    /**
-      * 查询到的用户总数
-      */
-    TotalCount: number;
-    /**
-      * 查询到的授权用户信息集合
-      */
-    UserSet: Array<UserInfo>;
+export interface DescribeLakeFsDirSummaryResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3646,17 +3879,21 @@ export interface DropDMSTableResponse {
     RequestId?: string;
 }
 /**
- * 同一个用户绑定的工作组集合
+ * DescribeTable请求参数结构体
  */
-export interface WorkGroupIdSetOfUserId {
+export interface DescribeTableRequest {
     /**
-      * 用户Id，和CAM侧Uin匹配
+      * 查询对象表名称
       */
-    UserId: string;
+    TableName: string;
     /**
-      * 工作组Id集合
+      * 查询表所在的数据库名称。
       */
-    WorkGroupIds: Array<number>;
+    DatabaseName: string;
+    /**
+      * 查询表所在的数据源名称
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * CreateWorkGroup返回参数结构体
@@ -3672,89 +3909,25 @@ export interface CreateWorkGroupResponse {
     RequestId?: string;
 }
 /**
- * 任务结果信息。
+ * DescribeEngineUsageInfo返回参数结构体
  */
-export interface TaskResultInfo {
+export interface DescribeEngineUsageInfoResponse {
     /**
-      * 任务唯一ID
+      * 集群总规格
       */
-    TaskId: string;
+    Total: number;
     /**
-      * 数据源名称，当前任务执行时候选中的默认数据源
-注意：此字段可能返回 null，表示取不到有效值。
+      * 已占用集群规格
       */
-    DatasourceConnectionName: string;
+    Used: number;
     /**
-      * 数据库名称，当前任务执行时候选中的默认数据库
-注意：此字段可能返回 null，表示取不到有效值。
+      * 剩余集群规格
       */
-    DatabaseName: string;
+    Available: number;
     /**
-      * 当前执行的SQL，一个任务包含一个SQL
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SQL: string;
-    /**
-      * 执行任务的类型，现在分为DDL、DML、DQL
-      */
-    SQLType: string;
-    /**
-      * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功 -1：任务执行失败 -3：用户手动终止。只有任务执行成功的情况下，才会返回任务执行的结果
-      */
-    State: number;
-    /**
-      * 扫描的数据量，单位byte
-      */
-    DataAmount: number;
-    /**
-      * 计算耗时，单位： ms
-      */
-    UsedTime: number;
-    /**
-      * 任务结果输出的COS桶地址
-      */
-    OutputPath: string;
-    /**
-      * 任务创建时间，时间戳
-      */
-    CreateTime: string;
-    /**
-      * 任务执行信息，成功时返回success，失败时返回失败原因
-      */
-    OutputMessage: string;
-    /**
-      * 被影响的行数
-      */
-    RowAffectInfo: string;
-    /**
-      * 结果的schema信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResultSchema: Array<Column>;
-    /**
-      * 结果信息，反转义后，外层数组的每个元素为一行数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResultSet: string;
-    /**
-      * 分页信息，如果没有更多结果数据，nextToken为空
-      */
-    NextToken: string;
-    /**
-      * 任务执行进度num/100(%)
-      */
-    Percentage: number;
-    /**
-      * 任务进度明细
-      */
-    ProgressDetail: string;
-    /**
-      * 控制台展示格式。table：表格展示 text：文本展示
-      */
-    DisplayFormat: string;
-    /**
-      * 任务耗时，单位： ms
-      */
-    TotalTime: number;
+    RequestId?: string;
 }
 /**
  * DescribeTables请求参数结构体
@@ -3857,6 +4030,15 @@ export interface DescribeNotebookSessionStatementsResponse {
  * AttachUserPolicy返回参数结构体
  */
 export interface AttachUserPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeLakeFsInfo返回参数结构体
+ */
+export interface DescribeLakeFsInfoResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4048,22 +4230,9 @@ export interface DescribeDMSDatabaseRequest {
     Pattern?: string;
 }
 /**
- * DescribeTable请求参数结构体
+ * DescribeLakeFsDirSummary请求参数结构体
  */
-export interface DescribeTableRequest {
-    /**
-      * 查询对象表名称
-      */
-    TableName: string;
-    /**
-      * 查询表所在的数据库名称。
-      */
-    DatabaseName: string;
-    /**
-      * 查询表所在的数据源名称
-      */
-    DatasourceConnectionName?: string;
-}
+export declare type DescribeLakeFsDirSummaryRequest = null;
 /**
  * 权限对象
  */
@@ -4143,6 +4312,11 @@ export interface Policy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SourceName?: string;
+    /**
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: number;
 }
 /**
  * 日志详情
@@ -4555,6 +4729,15 @@ export interface TasksOverview {
     TotalTaskCount: number;
 }
 /**
+ * UpdateRowFilter返回参数结构体
+ */
+export interface UpdateRowFilterResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateTasks返回参数结构体
  */
 export interface CreateTasksResponse {
@@ -4588,6 +4771,45 @@ export interface CreateNotebookSessionResponse {
       * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
       */
     State?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeViews返回参数结构体
+ */
+export interface DescribeViewsResponse {
+    /**
+      * 视图对象列表。
+      */
+    ViewList: Array<ViewResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+    /**
+      * 任务对象列表。
+      */
+    TaskList: Array<TaskResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 任务概览信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TasksOverview: TasksOverview;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4984,6 +5206,11 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ImageVersionName?: string;
+    /**
+      * 是否开启备集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartStandbyCluster?: boolean;
 }
 /**
  * DescribeSparkAppTasks请求参数结构体
@@ -5113,17 +5340,17 @@ export interface UserMessage {
     UserAlias: string;
 }
 /**
- * DescribeViews返回参数结构体
+ * DescribeUsers返回参数结构体
  */
-export interface DescribeViewsResponse {
+export interface DescribeUsersResponse {
     /**
-      * 视图对象列表。
-      */
-    ViewList: Array<ViewResponseInfo>;
-    /**
-      * 实例总数。
+      * 查询到的用户总数
       */
     TotalCount: number;
+    /**
+      * 查询到的授权用户信息集合
+      */
+    UserSet: Array<UserInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5373,6 +5600,19 @@ export interface DMSColumn {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsPartition?: boolean;
+}
+/**
+ * UpdateRowFilter请求参数结构体
+ */
+export interface UpdateRowFilterRequest {
+    /**
+      * 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取
+      */
+    PolicyId: number;
+    /**
+      * 新的过滤策略。
+      */
+    Policy: Policy;
 }
 /**
  * 表字段描述信息

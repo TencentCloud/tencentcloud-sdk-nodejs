@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TrustMalwares", req, cb);
     }
     /**
+     * 删除基线规则
+     */
+    async DeleteBaselineRule(req, cb) {
+        return this.request("DeleteBaselineRule", req, cb);
+    }
+    /**
      * 获取资产管理端口列表
      */
     async DescribeAssetPortInfoList(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetPlanTaskList", req, cb);
     }
     /**
-     * 获取爆破阻断模式
+     * 删除基线忽略规则
      */
-    async DescribeBanMode(req, cb) {
-        return this.request("DescribeBanMode", req, cb);
+    async DeleteBaselineRuleIgnore(req, cb) {
+        return this.request("DeleteBaselineRuleIgnore", req, cb);
     }
     /**
      * 根据检测项id或事件id批量忽略事件或取消忽略
@@ -110,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetSystemPackageList(req, cb) {
         return this.request("DescribeAssetSystemPackageList", req, cb);
+    }
+    /**
+     * 根据基线策略id查询策略详情
+     */
+    async DescribeBaselineStrategyDetail(req, cb) {
+        return this.request("DescribeBaselineStrategyDetail", req, cb);
     }
     /**
      * 获取资产管理Web应用插件列表
@@ -166,10 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBashRules", req, cb);
     }
     /**
-     * 获取历史搜索记录
+     * 获取基线规则列表
      */
-    async DescribeSearchLogs(req, cb) {
-        return this.request("DescribeSearchLogs", req, cb);
+    async DescribeBaselineRuleList(req, cb) {
+        return this.request("DescribeBaselineRuleList", req, cb);
     }
     /**
      * 根据Ids删除本地提权
@@ -220,10 +232,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBashEvents", req, cb);
     }
     /**
-     * 根据基线id查询基线影响主机列表
+     * 获取基线检测详情记录
      */
-    async DescribeBaselineEffectHostList(req, cb) {
-        return this.request("DescribeBaselineEffectHostList", req, cb);
+    async DescribeBaselineDetectList(req, cb) {
+        return this.request("DescribeBaselineDetectList", req, cb);
+    }
+    /**
+     * 导出修复列表
+     */
+    async ExportBaselineFixList(req, cb) {
+        return this.request("ExportBaselineFixList", req, cb);
     }
     /**
      * 本接口 (DeleteMaliciousRequests) 用于删除恶意请求记录。
@@ -310,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProtectDirRelatedServer", req, cb);
     }
     /**
+     * 导出基线主机检测
+     */
+    async ExportBaselineHostDetectList(req, cb) {
+        return this.request("ExportBaselineHostDetectList", req, cb);
+    }
+    /**
      * 删除防护网站
      */
     async DeleteProtectDir(req, cb) {
@@ -346,16 +370,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetAppList", req, cb);
     }
     /**
+     * 导出资产管理Web服务列表
+     */
+    async ExportAssetWebServiceInfoList(req, cb) {
+        return this.request("ExportAssetWebServiceInfoList", req, cb);
+    }
+    /**
      * 查询网站防篡改概览信息
      */
     async DescribeWebPageGeneralize(req, cb) {
         return this.request("DescribeWebPageGeneralize", req, cb);
     }
     /**
-     * 导出本次漏洞检测Excel
+     * 获取爆破阻断模式
      */
-    async ExportVulDetectionExcel(req, cb) {
-        return this.request("ExportVulDetectionExcel", req, cb);
+    async DescribeBanMode(req, cb) {
+        return this.request("DescribeBanMode", req, cb);
     }
     /**
      * DestroyOrder  该接口可以对资源销毁.
@@ -406,6 +436,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineScanSchedule", req, cb);
     }
     /**
+     * 获取基线下载列表
+     */
+    async DescribeBaselineDownloadList(req, cb) {
+        return this.request("DescribeBaselineDownloadList", req, cb);
+    }
+    /**
      * 导出已忽略基线检测项信息
      */
     async ExportIgnoreBaselineRule(req, cb) {
@@ -428,6 +464,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetJarList(req, cb) {
         return this.request("DescribeAssetJarList", req, cb);
+    }
+    /**
+     * 删除基线弱口令
+     */
+    async DeleteBaselineWeakPassword(req, cb) {
+        return this.request("DeleteBaselineWeakPassword", req, cb);
+    }
+    /**
+     * 更改基线忽略规则
+     */
+    async ModifyBaselineRuleIgnore(req, cb) {
+        return this.request("ModifyBaselineRuleIgnore", req, cb);
     }
     /**
      * 本接口 (DeleteNonlocalLoginPlaces) 用于删除异地登录记录。
@@ -466,16 +514,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagMachines", req, cb);
     }
     /**
-     * 关联机器标签列表
+     * 修复基线检测
      */
-    async UpdateMachineTags(req, cb) {
-        return this.request("UpdateMachineTags", req, cb);
+    async FixBaselineDetect(req, cb) {
+        return this.request("FixBaselineDetect", req, cb);
     }
     /**
-     *  一键检测
+     * 获取基线规则检测列表
      */
-    async ScanVul(req, cb) {
-        return this.request("ScanVul", req, cb);
+    async DescribeBaselineRuleDetectList(req, cb) {
+        return this.request("DescribeBaselineRuleDetectList", req, cb);
     }
     /**
      * 导出本地提权事件
@@ -494,6 +542,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOverviewStatistics(req, cb) {
         return this.request("DescribeOverviewStatistics", req, cb);
+    }
+    /**
+     * 导出基线检测项
+     */
+    async ExportBaselineItemDetectList(req, cb) {
+        return this.request("ExportBaselineItemDetectList", req, cb);
     }
     /**
      * 专家服务-可用订单详情
@@ -518,6 +572,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ScanAsset(req, cb) {
         return this.request("ScanAsset", req, cb);
+    }
+    /**
+     *  一键检测
+     */
+    async ScanVul(req, cb) {
+        return this.request("ScanVul", req, cb);
     }
     /**
      * 对授权管理-订单列表内已过期的订单进行删除.(删除后的订单不在统计范畴内)
@@ -610,6 +670,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoginWhiteList", req, cb);
     }
     /**
+     * 获取所有主机标签
+     */
+    async DescribeTags(req, cb) {
+        return this.request("DescribeTags", req, cb);
+    }
+    /**
      * 获取当前用户告警列表
      */
     async DescribeWarningList(req, cb) {
@@ -620,6 +686,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateBaselineStrategy(req, cb) {
         return this.request("UpdateBaselineStrategy", req, cb);
+    }
+    /**
+     * 获取基线忽略规则列表
+     */
+    async DescribeBaselineRuleIgnoreList(req, cb) {
+        return this.request("DescribeBaselineRuleIgnoreList", req, cb);
     }
     /**
      * 修改主机备注信息
@@ -676,6 +748,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSaveOrUpdateWarnings", req, cb);
     }
     /**
+     * 导出基线检测规则
+     */
+    async ExportBaselineRuleDetectList(req, cb) {
+        return this.request("ExportBaselineRuleDetectList", req, cb);
+    }
+    /**
      * 本接口 (ExportBruteAttacks) 用于导出密码破解记录成CSV文件。
      */
     async ExportBruteAttacks(req, cb) {
@@ -686,6 +764,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyBanMode(req, cb) {
         return this.request("ModifyBanMode", req, cb);
+    }
+    /**
+     * 关联机器标签列表
+     */
+    async UpdateMachineTags(req, cb) {
+        return this.request("UpdateMachineTags", req, cb);
     }
     /**
      * 创建/修改网站防护目录
@@ -712,10 +796,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetUserList", req, cb);
     }
     /**
-     * 根据基线策略id查询策略详情
+     * 获取基线检测项TOP5
      */
-    async DescribeBaselineStrategyDetail(req, cb) {
-        return this.request("DescribeBaselineStrategyDetail", req, cb);
+    async DescribeBaselineItemRiskTop(req, cb) {
+        return this.request("DescribeBaselineItemRiskTop", req, cb);
     }
     /**
      * 更改基线策略设置
@@ -784,6 +868,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulEffectHostList", req, cb);
     }
     /**
+     * 获取基线服务器风险TOP5
+     */
+    async DescribeBaselineHostRiskTop(req, cb) {
+        return this.request("DescribeBaselineHostRiskTop", req, cb);
+    }
+    /**
      * 删除基线策略配置
      */
     async DeleteBaselinePolicy(req, cb) {
@@ -817,16 +907,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchTemplates", req, cb);
     }
     /**
+     * 获取历史搜索记录
+     */
+    async DescribeSearchLogs(req, cb) {
+        return this.request("DescribeSearchLogs", req, cb);
+    }
+    /**
      * 专家服务-应急响应列表
      */
     async DescribeEmergencyResponseList(req, cb) {
         return this.request("DescribeEmergencyResponseList", req, cb);
     }
     /**
-     * 导出资产管理Web服务列表
+     * 获取忽略规则主机列表
      */
-    async ExportAssetWebServiceInfoList(req, cb) {
-        return this.request("ExportAssetWebServiceInfoList", req, cb);
+    async DescribeBaselineHostIgnoreList(req, cb) {
+        return this.request("DescribeBaselineHostIgnoreList", req, cb);
     }
     /**
      * 漏洞管理-重新检测接口
@@ -929,6 +1025,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteBashRules(req, cb) {
         return this.request("DeleteBashRules", req, cb);
+    }
+    /**
+     * 获取一键忽略受影响的检测项和主机信息
+     */
+    async DescribeIgnoreHostAndItemConfig(req, cb) {
+        return this.request("DescribeIgnoreHostAndItemConfig", req, cb);
     }
     /**
      * 获取资产管理进程列表
@@ -1039,6 +1141,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachineInfo", req, cb);
     }
     /**
+     * 导出检测项结果列表
+     */
+    async ExportBaselineItemList(req, cb) {
+        return this.request("ExportBaselineItemList", req, cb);
+    }
+    /**
      * 切换高危命令规则状态
      */
     async SwitchBashRules(req, cb) {
@@ -1097,6 +1205,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBaselineDetail(req, cb) {
         return this.request("DescribeBaselineDetail", req, cb);
+    }
+    /**
+     * 获取基线检测概览
+     */
+    async DescribeBaselineDetectOverview(req, cb) {
+        return this.request("DescribeBaselineDetectOverview", req, cb);
     }
     /**
      * 获取基线检测项的列表
@@ -1201,6 +1315,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLicenseGeneral", req, cb);
     }
     /**
+     * 根据基线id查询基线影响主机列表
+     */
+    async DescribeBaselineEffectHostList(req, cb) {
+        return this.request("DescribeBaselineEffectHostList", req, cb);
+    }
+    /**
+     * 获取基线弱口令列表
+     */
+    async DescribeBaselineWeakPasswordList(req, cb) {
+        return this.request("DescribeBaselineWeakPasswordList", req, cb);
+    }
+    /**
      * 该接口可以获取设置中心-授权管理,某个授权下已绑定的授权机器列表
      */
     async DescribeLicenseBindList(req, cb) {
@@ -1225,6 +1351,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetDatabaseInfo", req, cb);
     }
     /**
+     * 更改或新增弱口令
+     */
+    async ModifyBaselineWeakPassword(req, cb) {
+        return this.request("ModifyBaselineWeakPassword", req, cb);
+    }
+    /**
      * 设置高危命令事件状态
      */
     async SetBashEventsStatus(req, cb) {
@@ -1235,6 +1367,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportReverseShellEvents(req, cb) {
         return this.request("ExportReverseShellEvents", req, cb);
+    }
+    /**
+     * 获取基线检测项信息
+     */
+    async DescribeBaselineItemInfo(req, cb) {
+        return this.request("DescribeBaselineItemInfo", req, cb);
     }
     /**
      * 删除网络攻击日志
@@ -1249,6 +1387,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanVulSetting", req, cb);
     }
     /**
+     * 导出本次漏洞检测Excel
+     */
+    async ExportVulDetectionExcel(req, cb) {
+        return this.request("ExportVulDetectionExcel", req, cb);
+    }
+    /**
      * 查询资产管理启动服务列表
      */
     async DescribeAssetInitServiceList(req, cb) {
@@ -1261,10 +1405,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachine", req, cb);
     }
     /**
+     * 获取忽略规则项列表
+     */
+    async DescribeBaselineItemIgnoreList(req, cb) {
+        return this.request("DescribeBaselineItemIgnoreList", req, cb);
+    }
+    /**
      * 专家服务-专家服务订单列表
      */
     async DescribeExpertServiceOrderList(req, cb) {
         return this.request("DescribeExpertServiceOrderList", req, cb);
+    }
+    /**
+     * 获取基线修复列表
+     */
+    async DescribeBaselineFixList(req, cb) {
+        return this.request("DescribeBaselineFixList", req, cb);
     }
     /**
      * 根据策略名查询策略是否存在
@@ -1285,10 +1441,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClientException", req, cb);
     }
     /**
-     * 获取所有主机标签
+     * 获取基线分类列表
      */
-    async DescribeTags(req, cb) {
-        return this.request("DescribeTags", req, cb);
+    async DescribeBaselineRuleCategoryList(req, cb) {
+        return this.request("DescribeBaselineRuleCategoryList", req, cb);
     }
     /**
      * 查询基线基础信息列表
@@ -1297,10 +1453,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineBasicInfo", req, cb);
     }
     /**
+     * 导出弱口令配置列表
+     */
+    async ExportBaselineWeakPasswordList(req, cb) {
+        return this.request("ExportBaselineWeakPasswordList", req, cb);
+    }
+    /**
      * 本接口 (DescribeSecurityTrends) 用于获取安全事件统计数据。
      */
     async DescribeSecurityTrends(req, cb) {
         return this.request("DescribeSecurityTrends", req, cb);
+    }
+    /**
+     * 更改基线检测规则
+     */
+    async ModifyBaselineRule(req, cb) {
+        return this.request("ModifyBaselineRule", req, cb);
     }
     /**
      * 根据基线策略id查询基线策略数据概览统计
@@ -1355,6 +1523,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportVulList(req, cb) {
         return this.request("ExportVulList", req, cb);
+    }
+    /**
+     * 检测基线
+     */
+    async StartBaselineDetect(req, cb) {
+        return this.request("StartBaselineDetect", req, cb);
     }
     /**
      * 用于获取单台主机或所有主机是否开通专业版状态。
@@ -1423,10 +1597,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUndoVulCounts", req, cb);
     }
     /**
-     * 检测基线
+     * 更改基线策略状态
      */
-    async StartBaselineDetect(req, cb) {
-        return this.request("StartBaselineDetect", req, cb);
+    async ModifyBaselinePolicyState(req, cb) {
+        return this.request("ModifyBaselinePolicyState", req, cb);
     }
 }
 exports.Client = Client;

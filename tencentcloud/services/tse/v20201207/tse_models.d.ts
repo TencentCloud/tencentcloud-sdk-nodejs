@@ -252,6 +252,26 @@ export interface ZookeeperReplica {
     VpcId?: string;
 }
 /**
+ * 引擎地域配置详情
+ */
+export interface EngineRegionInfo {
+    /**
+      * 引擎节点所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineRegion: string;
+    /**
+      * 此地域节点分配数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Replica: number;
+    /**
+      * 集群网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcInfos: Array<VpcInfo>;
+}
+/**
  * DescribeNacosServerInterfaces请求参数结构体
  */
 export interface DescribeNacosServerInterfacesRequest {
@@ -828,6 +848,10 @@ polarismesh - STANDARD版本
 - 1：自动续费
       */
     PrepaidRenewFlag?: number;
+    /**
+      * 跨地域部署的引擎地域配置详情
+      */
+    EngineRegionInfos?: Array<EngineRegionInfo>;
 }
 /**
  * 实例地域信息描述

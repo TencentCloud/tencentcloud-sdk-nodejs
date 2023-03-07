@@ -48,6 +48,16 @@ it("cwp.v20180228.TrustMalwares", async function () {
     }
 })
 
+it("cwp.v20180228.DeleteBaselineRule", async function () {
+    try {
+       const data = await client.DeleteBaselineRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAssetPortInfoList", async function () {
     try {
        const data = await client.DescribeAssetPortInfoList({})
@@ -128,9 +138,9 @@ it("cwp.v20180228.DescribeAssetPlanTaskList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeBanMode", async function () {
+it("cwp.v20180228.DeleteBaselineRuleIgnore", async function () {
     try {
-       const data = await client.DescribeBanMode({})
+       const data = await client.DeleteBaselineRuleIgnore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +161,16 @@ it("cwp.v20180228.ChangeRuleEventsIgnoreStatus", async function () {
 it("cwp.v20180228.DescribeAssetSystemPackageList", async function () {
     try {
        const data = await client.DescribeAssetSystemPackageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
+    try {
+       const data = await client.DescribeBaselineStrategyDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +268,9 @@ it("cwp.v20180228.DescribeBashRules", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeSearchLogs", async function () {
+it("cwp.v20180228.DescribeBaselineRuleList", async function () {
     try {
-       const data = await client.DescribeSearchLogs({})
+       const data = await client.DescribeBaselineRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +358,19 @@ it("cwp.v20180228.DeleteBashEvents", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeBaselineEffectHostList", async function () {
+it("cwp.v20180228.DescribeBaselineDetectList", async function () {
     try {
-       const data = await client.DescribeBaselineEffectHostList({})
+       const data = await client.DescribeBaselineDetectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportBaselineFixList", async function () {
+    try {
+       const data = await client.ExportBaselineFixList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +518,16 @@ it("cwp.v20180228.DescribeProtectDirRelatedServer", async function () {
     }
 })
 
+it("cwp.v20180228.ExportBaselineHostDetectList", async function () {
+    try {
+       const data = await client.ExportBaselineHostDetectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteProtectDir", async function () {
     try {
        const data = await client.DeleteProtectDir({})
@@ -548,6 +588,16 @@ it("cwp.v20180228.DescribeAssetAppList", async function () {
     }
 })
 
+it("cwp.v20180228.ExportAssetWebServiceInfoList", async function () {
+    try {
+       const data = await client.ExportAssetWebServiceInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeWebPageGeneralize", async function () {
     try {
        const data = await client.DescribeWebPageGeneralize({})
@@ -558,9 +608,9 @@ it("cwp.v20180228.DescribeWebPageGeneralize", async function () {
     }
 })
 
-it("cwp.v20180228.ExportVulDetectionExcel", async function () {
+it("cwp.v20180228.DescribeBanMode", async function () {
     try {
-       const data = await client.ExportVulDetectionExcel({})
+       const data = await client.DescribeBanMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,6 +698,16 @@ it("cwp.v20180228.DescribeBaselineScanSchedule", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBaselineDownloadList", async function () {
+    try {
+       const data = await client.DescribeBaselineDownloadList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.ExportIgnoreBaselineRule", async function () {
     try {
        const data = await client.ExportIgnoreBaselineRule({})
@@ -681,6 +741,26 @@ it("cwp.v20180228.DescribePrivilegeRules", async function () {
 it("cwp.v20180228.DescribeAssetJarList", async function () {
     try {
        const data = await client.DescribeAssetJarList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DeleteBaselineWeakPassword", async function () {
+    try {
+       const data = await client.DeleteBaselineWeakPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyBaselineRuleIgnore", async function () {
+    try {
+       const data = await client.ModifyBaselineRuleIgnore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +828,9 @@ it("cwp.v20180228.DescribeTagMachines", async function () {
     }
 })
 
-it("cwp.v20180228.UpdateMachineTags", async function () {
+it("cwp.v20180228.FixBaselineDetect", async function () {
     try {
-       const data = await client.UpdateMachineTags({})
+       const data = await client.FixBaselineDetect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +838,9 @@ it("cwp.v20180228.UpdateMachineTags", async function () {
     }
 })
 
-it("cwp.v20180228.ScanVul", async function () {
+it("cwp.v20180228.DescribeBaselineRuleDetectList", async function () {
     try {
-       const data = await client.ScanVul({})
+       const data = await client.DescribeBaselineRuleDetectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -791,6 +871,16 @@ it("cwp.v20180228.ExportProtectDirList", async function () {
 it("cwp.v20180228.DescribeOverviewStatistics", async function () {
     try {
        const data = await client.DescribeOverviewStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportBaselineItemDetectList", async function () {
+    try {
+       const data = await client.ExportBaselineItemDetectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -831,6 +921,16 @@ it("cwp.v20180228.CreateSearchTemplate", async function () {
 it("cwp.v20180228.ScanAsset", async function () {
     try {
        const data = await client.ScanAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ScanVul", async function () {
+    try {
+       const data = await client.ScanVul({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,6 +1088,16 @@ it("cwp.v20180228.DeleteLoginWhiteList", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeTags", async function () {
+    try {
+       const data = await client.DescribeTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeWarningList", async function () {
     try {
        const data = await client.DescribeWarningList({})
@@ -1001,6 +1111,16 @@ it("cwp.v20180228.DescribeWarningList", async function () {
 it("cwp.v20180228.UpdateBaselineStrategy", async function () {
     try {
        const data = await client.UpdateBaselineStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineRuleIgnoreList", async function () {
+    try {
+       const data = await client.DescribeBaselineRuleIgnoreList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1098,6 +1218,16 @@ it("cwp.v20180228.DescribeSaveOrUpdateWarnings", async function () {
     }
 })
 
+it("cwp.v20180228.ExportBaselineRuleDetectList", async function () {
+    try {
+       const data = await client.ExportBaselineRuleDetectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.ExportBruteAttacks", async function () {
     try {
        const data = await client.ExportBruteAttacks({})
@@ -1111,6 +1241,16 @@ it("cwp.v20180228.ExportBruteAttacks", async function () {
 it("cwp.v20180228.ModifyBanMode", async function () {
     try {
        const data = await client.ModifyBanMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.UpdateMachineTags", async function () {
+    try {
+       const data = await client.UpdateMachineTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1158,9 +1298,9 @@ it("cwp.v20180228.DescribeAssetUserList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
+it("cwp.v20180228.DescribeBaselineItemRiskTop", async function () {
     try {
-       const data = await client.DescribeBaselineStrategyDetail({})
+       const data = await client.DescribeBaselineItemRiskTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1278,6 +1418,16 @@ it("cwp.v20180228.DescribeVulEffectHostList", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBaselineHostRiskTop", async function () {
+    try {
+       const data = await client.DescribeBaselineHostRiskTop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteBaselinePolicy", async function () {
     try {
        const data = await client.DeleteBaselinePolicy({})
@@ -1328,6 +1478,16 @@ it("cwp.v20180228.DescribeSearchTemplates", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSearchLogs", async function () {
+    try {
+       const data = await client.DescribeSearchLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeEmergencyResponseList", async function () {
     try {
        const data = await client.DescribeEmergencyResponseList({})
@@ -1338,9 +1498,9 @@ it("cwp.v20180228.DescribeEmergencyResponseList", async function () {
     }
 })
 
-it("cwp.v20180228.ExportAssetWebServiceInfoList", async function () {
+it("cwp.v20180228.DescribeBaselineHostIgnoreList", async function () {
     try {
-       const data = await client.ExportAssetWebServiceInfoList({})
+       const data = await client.DescribeBaselineHostIgnoreList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1511,6 +1671,16 @@ it("cwp.v20180228.DescribeAssetAppProcessList", async function () {
 it("cwp.v20180228.DeleteBashRules", async function () {
     try {
        const data = await client.DeleteBashRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeIgnoreHostAndItemConfig", async function () {
+    try {
+       const data = await client.DescribeIgnoreHostAndItemConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1698,6 +1868,16 @@ it("cwp.v20180228.DescribeMachineInfo", async function () {
     }
 })
 
+it("cwp.v20180228.ExportBaselineItemList", async function () {
+    try {
+       const data = await client.ExportBaselineItemList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.SwitchBashRules", async function () {
     try {
        const data = await client.SwitchBashRules({})
@@ -1791,6 +1971,16 @@ it("cwp.v20180228.DescribeLicenseBindSchedule", async function () {
 it("cwp.v20180228.DescribeBaselineDetail", async function () {
     try {
        const data = await client.DescribeBaselineDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineDetectOverview", async function () {
+    try {
+       const data = await client.DescribeBaselineDetectOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1968,6 +2158,26 @@ it("cwp.v20180228.DescribeLicenseGeneral", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBaselineEffectHostList", async function () {
+    try {
+       const data = await client.DescribeBaselineEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineWeakPasswordList", async function () {
+    try {
+       const data = await client.DescribeBaselineWeakPasswordList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeLicenseBindList", async function () {
     try {
        const data = await client.DescribeLicenseBindList({})
@@ -2008,6 +2218,16 @@ it("cwp.v20180228.DescribeAssetDatabaseInfo", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyBaselineWeakPassword", async function () {
+    try {
+       const data = await client.ModifyBaselineWeakPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.SetBashEventsStatus", async function () {
     try {
        const data = await client.SetBashEventsStatus({})
@@ -2021,6 +2241,16 @@ it("cwp.v20180228.SetBashEventsStatus", async function () {
 it("cwp.v20180228.ExportReverseShellEvents", async function () {
     try {
        const data = await client.ExportReverseShellEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineItemInfo", async function () {
+    try {
+       const data = await client.DescribeBaselineItemInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2048,6 +2278,16 @@ it("cwp.v20180228.DescribeScanVulSetting", async function () {
     }
 })
 
+it("cwp.v20180228.ExportVulDetectionExcel", async function () {
+    try {
+       const data = await client.ExportVulDetectionExcel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAssetInitServiceList", async function () {
     try {
        const data = await client.DescribeAssetInitServiceList({})
@@ -2068,9 +2308,29 @@ it("cwp.v20180228.DeleteMachine", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBaselineItemIgnoreList", async function () {
+    try {
+       const data = await client.DescribeBaselineItemIgnoreList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeExpertServiceOrderList", async function () {
     try {
        const data = await client.DescribeExpertServiceOrderList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineFixList", async function () {
+    try {
+       const data = await client.DescribeBaselineFixList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2108,9 +2368,9 @@ it("cwp.v20180228.DescribeClientException", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeTags", async function () {
+it("cwp.v20180228.DescribeBaselineRuleCategoryList", async function () {
     try {
-       const data = await client.DescribeTags({})
+       const data = await client.DescribeBaselineRuleCategoryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2128,9 +2388,29 @@ it("cwp.v20180228.DescribeBaselineBasicInfo", async function () {
     }
 })
 
+it("cwp.v20180228.ExportBaselineWeakPasswordList", async function () {
+    try {
+       const data = await client.ExportBaselineWeakPasswordList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeSecurityTrends", async function () {
     try {
        const data = await client.DescribeSecurityTrends({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyBaselineRule", async function () {
+    try {
+       const data = await client.ModifyBaselineRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2221,6 +2501,16 @@ it("cwp.v20180228.DescribeVersionStatistics", async function () {
 it("cwp.v20180228.ExportVulList", async function () {
     try {
        const data = await client.ExportVulList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.StartBaselineDetect", async function () {
+    try {
+       const data = await client.StartBaselineDetect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2338,9 +2628,9 @@ it("cwp.v20180228.DescribeUndoVulCounts", async function () {
     }
 })
 
-it("cwp.v20180228.StartBaselineDetect", async function () {
+it("cwp.v20180228.ModifyBaselinePolicyState", async function () {
     try {
-       const data = await client.StartBaselineDetect({})
+       const data = await client.ModifyBaselinePolicyState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

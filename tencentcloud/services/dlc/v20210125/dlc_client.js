@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelNotebookSessionStatementBatch", req, cb);
     }
     /**
+     * 更新spark应用
+     */
+    async ModifySparkApp(req, cb) {
+        return this.request("ModifySparkApp", req, cb);
+    }
+    /**
      * 删除spark应用
      */
     async DeleteSparkApp(req, cb) {
@@ -208,16 +214,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebookSessionLog", req, cb);
     }
     /**
+     * 切换主备集群
+     */
+    async SwitchDataEngine(req, cb) {
+        return this.request("SwitchDataEngine", req, cb);
+    }
+    /**
      * DMS元数据更新库
      */
     async AlterDMSDatabase(req, cb) {
         return this.request("AlterDMSDatabase", req, cb);
     }
     /**
-     * 更新spark应用
+     * 查询spark应用的运行任务实例列表
      */
-    async ModifySparkApp(req, cb) {
-        return this.request("ModifySparkApp", req, cb);
+    async DescribeSparkAppTasks(req, cb) {
+        return this.request("DescribeSparkAppTasks", req, cb);
     }
     /**
      * 创建托管存储内表（该接口已废弃）
@@ -280,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScript", req, cb);
     }
     /**
+     * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+     */
+    async UpdateRowFilter(req, cb) {
+        return this.request("UpdateRowFilter", req, cb);
+    }
+    /**
      * DMS元数据获取表列表
      */
     async DescribeDMSTables(req, cb) {
@@ -340,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTable", req, cb);
     }
     /**
+     * 解绑用户鉴权策略
+     */
+    async DetachUserPolicy(req, cb) {
+        return this.request("DetachUserPolicy", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
      */
     async DescribeNotebookSessionStatements(req, cb) {
@@ -370,6 +394,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindWorkGroupsToUser", req, cb);
     }
     /**
+     * 本接口用于控制暂停或恢复数据引擎
+     */
+    async SuspendResumeDataEngine(req, cb) {
+        return this.request("SuspendResumeDataEngine", req, cb);
+    }
+    /**
      * 创建spark任务
      */
     async CreateSparkAppTask(req, cb) {
@@ -394,10 +424,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUser", req, cb);
     }
     /**
-     * 本接口用于控制暂停或恢复数据引擎
+     * 查询托管存储指定目录的Summary
      */
-    async SuspendResumeDataEngine(req, cb) {
-        return this.request("SuspendResumeDataEngine", req, cb);
+    async DescribeLakeFsDirSummary(req, cb) {
+        return this.request("DescribeLakeFsDirSummary", req, cb);
+    }
+    /**
+     * 本接口根据引擎ID获取数据引擎资源使用情况
+     */
+    async DescribeEngineUsageInfo(req, cb) {
+        return this.request("DescribeEngineUsageInfo", req, cb);
     }
     /**
      * 本接口（DescribeDatabases）用于查询数据库列表。
@@ -454,10 +490,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyGovernEventRule", req, cb);
     }
     /**
-     * 查询spark应用的运行任务实例列表
+     * 为用户创建数据引擎
      */
-    async DescribeSparkAppTasks(req, cb) {
-        return this.request("DescribeSparkAppTasks", req, cb);
+    async CreateDataEngine(req, cb) {
+        return this.request("CreateDataEngine", req, cb);
     }
     /**
      * 本接口（DescribeNotebookSessionStatementSqlResult）用于获取statement运行结果。
@@ -484,10 +520,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatement", req, cb);
     }
     /**
-     * 解绑用户鉴权策略
+     * 查询用户的托管存储信息
      */
-    async DetachUserPolicy(req, cb) {
-        return this.request("DetachUserPolicy", req, cb);
+    async DescribeLakeFsInfo(req, cb) {
+        return this.request("DescribeLakeFsInfo", req, cb);
     }
     /**
      * 本接口（DescribeTables）用于查询数据表列表。
