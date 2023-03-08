@@ -5992,47 +5992,47 @@ export interface DescribeClusterEndpointsResponse {
   /**
    * 集群APIServer的CA证书
    */
-  CertificationAuthority: string
+  CertificationAuthority?: string
 
   /**
    * 集群APIServer的外网访问地址
    */
-  ClusterExternalEndpoint: string
+  ClusterExternalEndpoint?: string
 
   /**
    * 集群APIServer的内网访问地址
    */
-  ClusterIntranetEndpoint: string
+  ClusterIntranetEndpoint?: string
 
   /**
       * 集群APIServer的域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterDomain: string
+  ClusterDomain?: string
 
   /**
       * 集群APIServer的外网访问ACL列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterExternalACL: Array<string>
+  ClusterExternalACL?: Array<string>
 
   /**
       * 外网域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterExternalDomain: string
+  ClusterExternalDomain?: string
 
   /**
       * 内网域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterIntranetDomain: string
+  ClusterIntranetDomain?: string
 
   /**
       * 外网安全组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SecurityGroup: string
+  SecurityGroup?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6325,50 +6325,50 @@ export interface DescribeClusterSecurityResponse {
   /**
    * 集群的账号名称
    */
-  UserName: string
+  UserName?: string
 
   /**
    * 集群的访问密码
    */
-  Password: string
+  Password?: string
 
   /**
    * 集群访问CA证书
    */
-  CertificationAuthority: string
+  CertificationAuthority?: string
 
   /**
    * 集群访问的地址
    */
-  ClusterExternalEndpoint: string
+  ClusterExternalEndpoint?: string
 
   /**
    * 集群访问的域名
    */
-  Domain: string
+  Domain?: string
 
   /**
    * 集群Endpoint地址
    */
-  PgwEndpoint: string
+  PgwEndpoint?: string
 
   /**
       * 集群访问策略组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SecurityPolicy: Array<string>
+  SecurityPolicy?: Array<string>
 
   /**
       * 集群Kubeconfig文件
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Kubeconfig: string
+  Kubeconfig?: string
 
   /**
       * 集群JnsGw的访问地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  JnsGwEndpoint: string
+  JnsGwEndpoint?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7087,12 +7087,12 @@ export interface DescribeEksContainerInstanceLogResponse {
   /**
    * 容器名称
    */
-  ContainerName: string
+  ContainerName?: string
 
   /**
    * 日志内容
    */
-  LogContent: string
+  LogContent?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -953,10 +953,6 @@ export interface AlarmEventInfo {
       */
     AlarmLevel: number;
     /**
-      * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
-      */
-    AlarmIndicator: number;
-    /**
       * 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http）
       */
     AlarmWay: number;
@@ -968,6 +964,10 @@ export interface AlarmEventInfo {
       * 项目ID
       */
     ProjectId: string;
+    /**
+      * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
+      */
+    AlarmIndicator?: number;
     /**
       * 告警指标描述
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3577,6 +3577,16 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InLongManagerVersion?: string;
+    /**
+      * dataproxy url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataProxyUrl?: Array<string>;
+    /**
+      * 任务版本是否已提交运维
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Submit?: boolean;
 }
 /**
  * SubmitTask返回参数结构体
@@ -4615,27 +4625,13 @@ export interface TaskAlarmInfo {
       */
     AlarmLevel: number;
     /**
-      * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
-，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数
-      */
-    AlarmIndicator: number;
-    /**
       * 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http）
       */
     AlarmWay: string;
     /**
-      * 告警接收人ID，多个用逗号隔开
-      */
-    AlarmRecipientId: string;
-    /**
       * 任务类型(201表示实时，202表示离线)
       */
     TaskType: number;
-    /**
-      * 告警接收人昵称，多个用逗号隔开
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AlarmRecipientName: string;
     /**
       * 主键ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4645,6 +4641,11 @@ export interface TaskAlarmInfo {
       * 规则ID
       */
     RegularId?: string;
+    /**
+      * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
+，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数
+      */
+    AlarmIndicator?: number;
     /**
       * 指标阈值(1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败)
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4656,6 +4657,10 @@ export interface TaskAlarmInfo {
       */
     EstimatedTime?: number;
     /**
+      * 告警接收人ID，多个用逗号隔开
+      */
+    AlarmRecipientId?: string;
+    /**
       * 项目ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -4665,6 +4670,11 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Creater?: string;
+    /**
+      * 告警接收人昵称，多个用逗号隔开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmRecipientName?: string;
     /**
       * 告警指标描述
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4685,6 +4695,21 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeName?: string;
+    /**
+      * 指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmIndicatorInfos?: Array<AlarmIndicatorInfo>;
+    /**
+      * 告警接收人类型，0指定人员；1任务责任人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmRecipientType?: number;
+    /**
+      * 企业微信群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WeComHook?: string;
 }
 /**
  * DescribeClusterNamespaceList请求参数结构体
@@ -4735,6 +4760,11 @@ export interface AlarmReceiverInfo {
       * http，0：未设置，1：成功，2：失败
       */
     Http: number;
+    /**
+      * 企业微信群，0：未设置，1：成功，2：失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WecomGroup?: number;
 }
 /**
  * Spark SQL配置参数
@@ -5462,6 +5492,16 @@ export interface TableInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TableName: string;
+    /**
+      * 表databaseName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginDatabaseName: string;
+    /**
+      * 表schemaName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginSchemaName: string;
 }
 /**
  * DescribeProject请求参数结构体
@@ -8496,6 +8536,41 @@ export interface DescribeRuleTemplatesRequest {
       * 源端对应的引擎类型
       */
     SourceEngineTypes?: Array<number>;
+}
+/**
+ * 告警指标
+ */
+export interface AlarmIndicatorInfo {
+    /**
+      * 指标id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: string;
+    /**
+      * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmIndicator?: number;
+    /**
+      * 告警指标描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmIndicatorDesc?: string;
+    /**
+      * 指标阈值，1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TriggerType?: number;
+    /**
+      * 预计的超时时间，分钟级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EstimatedTime?: number;
+    /**
+      * 实时任务告警需要的参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Operator?: number;
 }
 /**
  * RegisterEvent返回参数结构体

@@ -358,6 +358,7 @@ import {
   RuleGroupSchedulerInfo,
   DatasourceBaseInfo,
   DescribeRuleTemplatesRequest,
+  AlarmIndicatorInfo,
   RegisterEventResponse,
   SubscribeReceiver,
   DescribeQualityScoreTrendRequest,

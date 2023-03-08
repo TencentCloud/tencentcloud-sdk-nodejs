@@ -680,7 +680,17 @@ export interface PrometheusRecordRuleYamlItem {
 /**
  * k8s中标签，一般以数组的方式存在
  */
-export type Label = null
+export interface Label {
+  /**
+   * map表中的Name
+   */
+  Name: string
+
+  /**
+   * map表中的Value
+   */
+  Value: string
+}
 
 /**
  * DescribeGrafanaIntegrations返回参数结构体
@@ -4514,7 +4524,22 @@ export interface UpdatePrometheusScrapeJobRequest {
 /**
  * 托管Prometheus agent信息
  */
-export type PrometheusAgentInfo = null
+export interface PrometheusAgentInfo {
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 备注
+   */
+  Describe?: string
+}
 
 /**
  * CreatePrometheusClusterAgent返回参数结构体

@@ -98,6 +98,11 @@ export interface StatusNode {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExternalUrl: string;
+    /**
+      * 并行节点 3-4
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParallelNodes?: string;
 }
 /**
  * 云函数SCF

@@ -2547,6 +2547,46 @@ export interface UpdatePublishCdnStreamResponse {
     RequestId?: string;
 }
 /**
+ * 文字水印参数。
+ */
+export interface McuWaterMarkText {
+    /**
+      * 文字水印内容。
+      */
+    Text: string;
+    /**
+      * 水印在输出时的宽。单位为像素值。
+      */
+    WaterMarkWidth: number;
+    /**
+      * 水印在输出时的高。单位为像素值。
+      */
+    WaterMarkHeight: number;
+    /**
+      * 水印在输出时的X偏移。单位为像素值。
+      */
+    LocationX: number;
+    /**
+      * 水印在输出时的Y偏移。单位为像素值。
+      */
+    LocationY: number;
+    /**
+      * 字体大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FontSize: number;
+    /**
+      * 字体颜色，默认为白色。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FontColor?: string;
+    /**
+      * 字体背景色，不配置默认为透明。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackGroundColor?: string;
+}
+/**
  * RemoveUserByStrRoomId请求参数结构体
  */
 export interface RemoveUserByStrRoomIdRequest {
@@ -2762,13 +2802,18 @@ export interface PublishCdnParams {
  */
 export interface McuWaterMarkParams {
     /**
-      * 水印类型，0为图片（默认）。
+      * 水印类型，0为图片（默认），1为文字。
       */
     WaterMarkType?: number;
     /**
       * 图片水印参数。WaterMarkType为0指定。
       */
     WaterMarkImage?: McuWaterMarkImage;
+    /**
+      * 文字水印参数。WaterMarkType为1指定。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WaterMarkText?: McuWaterMarkText;
 }
 /**
  * 用户的异常体验及可能的原因

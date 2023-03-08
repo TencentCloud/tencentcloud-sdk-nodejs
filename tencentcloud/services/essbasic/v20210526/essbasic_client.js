@@ -151,6 +151,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCreateBoundFlows", req, cb);
     }
     /**
+     * 创建预发起合同
+     */
+    async ChannelCreatePrepareFlow(req, cb) {
+        return this.request("ChannelCreatePrepareFlow", req, cb);
+    }
+    /**
      * 指定需要批量撤销的签署流程Id，获取批量撤销链接 - 不建议使用此接口，可使用ChannelBatchCancelFlows
 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；
 接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销;

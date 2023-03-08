@@ -224,8 +224,6 @@ var iir_1 = require("./iir");
 Object.defineProperty(exports, "iir", { enumerable: true, get: function () { return iir_1.iir; } });
 var ims_1 = require("./ims");
 Object.defineProperty(exports, "ims", { enumerable: true, get: function () { return ims_1.ims; } });
-var intlpartnersmgt_1 = require("./intlpartnersmgt");
-Object.defineProperty(exports, "intlpartnersmgt", { enumerable: true, get: function () { return intlpartnersmgt_1.intlpartnersmgt; } });
 var iot_1 = require("./iot");
 Object.defineProperty(exports, "iot", { enumerable: true, get: function () { return iot_1.iot; } });
 var iotcloud_1 = require("./iotcloud");

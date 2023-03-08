@@ -24,6 +24,7 @@ import {
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
   Department,
+  CommonApproverOption,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
@@ -31,12 +32,14 @@ import {
   DescribeResourceUrlsByFlowsRequest,
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
-  CreateSealByImageResponse,
+  ChannelCreatePrepareFlowResponse,
   OperateChannelTemplateResponse,
   FlowFileInfo,
+  CreateFlowOption,
+  BaseFlowInfo,
   CreateConsoleLoginUrlResponse,
   SyncProxyOrganizationRequest,
-  CreateSealByImageRequest,
+  ChannelCreatePrepareFlowRequest,
   ChannelCreateFlowRemindsRequest,
   ChannelCreateSealPolicyResponse,
   ChannelCancelFlowResponse,
@@ -62,6 +65,7 @@ import {
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
+  CommonFlowApprover,
   PdfVerifyResult,
   ChannelCancelMultiFlowSignQRCodeRequest,
   UploadFilesRequest,
@@ -101,6 +105,7 @@ import {
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
+  CreateSealByImageResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelCreateReleaseFlowRequest,
   ChannelCreateFlowGroupByFilesResponse,
@@ -129,6 +134,7 @@ import {
   ChannelDescribeEmployeesResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
+  CreateSealByImageRequest,
   ChannelUpdateSealStatusResponse,
   ChannelCreateFlowSignUrlRequest,
   DescribeExtendedServiceAuthInfoResponse,
@@ -329,6 +335,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
   ): Promise<ChannelCreateBoundFlowsResponse> {
     return this.request("ChannelCreateBoundFlows", req, cb)
+  }
+
+  /**
+   * 创建预发起合同
+   */
+  async ChannelCreatePrepareFlow(
+    req: ChannelCreatePrepareFlowRequest,
+    cb?: (error: string, rep: ChannelCreatePrepareFlowResponse) => void
+  ): Promise<ChannelCreatePrepareFlowResponse> {
+    return this.request("ChannelCreatePrepareFlow", req, cb)
   }
 
   /**

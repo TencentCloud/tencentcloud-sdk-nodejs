@@ -135,6 +135,7 @@ import {
   McuSeiParams,
   DescribeExternalTrtcMeasureRequest,
   UpdatePublishCdnStreamResponse,
+  McuWaterMarkText,
   RemoveUserByStrRoomIdRequest,
   RecordParams,
   DescribeTRTCMarketScaleMetricDataResponse,

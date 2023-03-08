@@ -87,6 +87,16 @@ export interface Department {
     DepartmentName: string;
 }
 /**
+ * 签署人配置信息
+ */
+export interface CommonApproverOption {
+    /**
+      * 是否允许修改签署人信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CanEditApprover?: boolean;
+}
+/**
  * ChannelCreateFlowSignReview请求参数结构体
  */
 export interface ChannelCreateFlowSignReviewRequest {
@@ -225,13 +235,17 @@ export interface ChannelCreateFlowSignUrlResponse {
     RequestId?: string;
 }
 /**
- * CreateSealByImage返回参数结构体
+ * ChannelCreatePrepareFlow返回参数结构体
  */
-export interface CreateSealByImageResponse {
+export interface ChannelCreatePrepareFlowResponse {
     /**
-      * 印章id
+      * 预发起的合同链接
       */
-    SealId?: string;
+    PrepareFlowUrl?: string;
+    /**
+      * 合同发起后预览链接
+      */
+    PreviewFlowUrl?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -326,6 +340,61 @@ export interface FlowFileInfo {
     NeedSignReview?: boolean;
 }
 /**
+ * 创建合同配置信息
+ */
+export interface CreateFlowOption {
+    /**
+      * 是否允许修改合同信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CanEditFlow?: boolean;
+}
+/**
+ * 基础流程信息
+ */
+export interface BaseFlowInfo {
+    /**
+      * 合同流程名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowName: string;
+    /**
+      * 合同流程类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowType: string;
+    /**
+      * 合同流程描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowDescription: string;
+    /**
+      * 合同流程截止时间，unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deadline: number;
+    /**
+      * 是否顺序签署(true:无序签,false:顺序签)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Unordered?: boolean;
+    /**
+      * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntelligentStatus?: string;
+    /**
+      * 填写控件内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FormFields?: Array<FormField>;
+    /**
+      * 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NeedSignReview?: boolean;
+}
+/**
  * CreateConsoleLoginUrl返回参数结构体
  */
 export interface CreateConsoleLoginUrlResponse {
@@ -382,23 +451,47 @@ export interface SyncProxyOrganizationRequest {
     Operator?: UserInfo;
 }
 /**
- * CreateSealByImage请求参数结构体
+ * ChannelCreatePrepareFlow请求参数结构体
  */
-export interface CreateSealByImageRequest {
+export interface ChannelCreatePrepareFlowRequest {
     /**
-      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      * 资源id，与ResourceType对应
       */
-    Agent: Agent;
+    ResourceId: string;
     /**
-      * 印章名称，最大长度不超过50字符
+      * 资源类型，1：模版，目前仅支持模版，与ResourceId对应
       */
-    SealName: string;
+    ResourceType: number;
     /**
-      * 印章图片base64，大小不超过10M（原始图片不超过7.6M）
+      * 合同流程基础信息
       */
-    SealImage: string;
+    FlowInfo: BaseFlowInfo;
     /**
-      * 操作者的信息
+      * 合同签署人信息
+      */
+    FlowApproverList: Array<CommonFlowApprover>;
+    /**
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+      */
+    Agent?: Agent;
+    /**
+      * 合同流程配置信息
+      */
+    FlowOption?: CreateFlowOption;
+    /**
+      * 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL
+      */
+    FlowId?: string;
+    /**
+      * 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL
+      */
+    NeedPreview?: boolean;
+    /**
+      * 企业机构信息，不用传
+      */
+    Organization?: OrganizationInfo;
+    /**
+      * 操作人（用户）信息，不用传
       */
     Operator?: UserInfo;
 }
@@ -1160,6 +1253,81 @@ export interface OrganizationInfo {
       * 用户渠道
       */
     Channel?: string;
+}
+/**
+ * 通用签署人信息
+ */
+export interface CommonFlowApprover {
+    /**
+      * 指定当前签署人为第三方应用集成子客，默认false：当前签署人为第三方应用集成子客，true：当前签署人为saas企业用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotChannelOrganization: boolean;
+    /**
+      * 签署人类型,目前支持：0-企业签署人，1-个人签署人，3-企业静默签署人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverType?: number;
+    /**
+      * 企业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationId?: string;
+    /**
+      * 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同毕传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationOpenId?: string;
+    /**
+      * 企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationName?: string;
+    /**
+      * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId?: string;
+    /**
+      * 用户openId，第三方应用集成非静默签子客企业签署人必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId?: string;
+    /**
+      * 签署人名称，saas企业签署人，个人签署人必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverName?: string;
+    /**
+      * 签署人手机号，saas企业签署人，个人签署人必传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverMobile?: string;
+    /**
+      * 签署人Id，使用模版发起是，对应模版配置中的签署人RecipientId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecipientId?: string;
+    /**
+      * 签署前置条件：阅读时长限制，不传默认10s,最大300s，最小3s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreReadTime?: number;
+    /**
+      * 签署前置条件：阅读全文限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFullText?: boolean;
+    /**
+      * 通知类型：SMS（短信） NONE（不做通知）, 不传 默认SMS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotifyType?: string;
+    /**
+      * 签署人配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverOption?: CommonApproverOption;
 }
 /**
  * 合同文件验签单个结果结构体
@@ -2342,6 +2510,19 @@ export interface ChannelDescribeOrganizationSealsResponse {
     RequestId?: string;
 }
 /**
+ * CreateSealByImage返回参数结构体
+ */
+export interface CreateSealByImageResponse {
+    /**
+      * 印章id
+      */
+    SealId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ChannelCancelMultiFlowSignQRCode返回参数结构体
  */
 export interface ChannelCancelMultiFlowSignQRCodeResponse {
@@ -3235,6 +3416,27 @@ export interface DescribeChannelFlowEvidenceReportResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateSealByImage请求参数结构体
+ */
+export interface CreateSealByImageRequest {
+    /**
+      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+      */
+    Agent: Agent;
+    /**
+      * 印章名称，最大长度不超过50字符
+      */
+    SealName: string;
+    /**
+      * 印章图片base64，大小不超过10M（原始图片不超过7.6M）
+      */
+    SealImage: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * ChannelUpdateSealStatus返回参数结构体

@@ -4500,6 +4500,12 @@ Public：公网属性， Private：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SniSwitch: number
+
+  /**
+      * 负载均衡实例的域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerDomain?: string
 }
 
 /**
@@ -5903,7 +5909,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   Forward?: number
 
   /**
-      * 负载均衡实例的域名，仅公网传统型负载均衡实例才提供该字段
+      * 负载均衡实例的域名，仅公网传统型负载均衡实例才提供该字段。逐步下线中，建议用LoadBalancerDomain替代。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Domain?: string
@@ -6195,4 +6201,10 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AttributeFlags?: Array<string>
+
+  /**
+      * 负载均衡实例的域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerDomain?: string
 }
