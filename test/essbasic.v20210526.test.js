@@ -398,6 +398,16 @@ it("essbasic.v20210526.ChannelCreateFlowGroupByFiles", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateEmbedWebUrl", async function () {
+    try {
+       const data = await client.ChannelCreateEmbedWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     try {
        const data = await client.DescribeFlowDetailInfo({})

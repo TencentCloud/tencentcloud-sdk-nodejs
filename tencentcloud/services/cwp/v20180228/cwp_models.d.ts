@@ -11223,6 +11223,10 @@ export interface CreateEmergencyVulScanRequest {
       * 自选服务器时生效，主机uuid的string数组
       */
     Uuids?: Array<string>;
+    /**
+      * 扫描超时时长 ，单位秒
+      */
+    TimeoutPeriod?: number;
 }
 /**
  * DescribeProtectDirRelatedServer返回参数结构体

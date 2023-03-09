@@ -511,6 +511,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageSpriteTemplates", req, cb);
     }
     /**
+     * 提取视频中的盲水印。
+     */
+    async WithdrawsWatermark(req, cb) {
+        return this.request("WithdrawsWatermark", req, cb);
+    }
+    /**
      * 删除用户自定义内容审核模板。
      */
     async DeleteContentReviewTemplate(req, cb) {

@@ -758,6 +758,16 @@ it("mps.v20190612.DescribeImageSpriteTemplates", async function () {
     }
 })
 
+it("mps.v20190612.WithdrawsWatermark", async function () {
+    try {
+       const data = await client.WithdrawsWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteContentReviewTemplate", async function () {
     try {
        const data = await client.DeleteContentReviewTemplate({})

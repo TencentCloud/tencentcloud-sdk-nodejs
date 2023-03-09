@@ -310,6 +310,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("ChannelCreateFlowGroupByFiles", req, cb);
     }
     /**
+     * 本接口（ChannelCreateEmbedWebUrl）用于创建嵌入web的链接
+     */
+    async ChannelCreateEmbedWebUrl(req, cb) {
+        return this.request("ChannelCreateEmbedWebUrl", req, cb);
+    }
+    /**
      * 此接口（DescribeFlowDetailInfo）用于查询合同(签署流程)的详细信息。
      */
     async DescribeFlowDetailInfo(req, cb) {

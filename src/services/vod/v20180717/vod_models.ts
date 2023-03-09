@@ -5429,22 +5429,22 @@ export interface SimpleHlsClipResponse {
   /**
    * 裁剪后的视频地址。
    */
-  Url: string
+  Url?: string
 
   /**
    * 裁剪后的视频元信息。目前`Size`，`Rotate`，`VideoDuration`，`AudioDuration` 几个字段暂时缺省，没有真实数据。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
 
   /**
    * 剪辑固化后的视频的媒体文件的唯一标识。
    */
-  FileId: string
+  FileId?: string
 
   /**
    * 剪辑固化后的视频任务流 ID。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

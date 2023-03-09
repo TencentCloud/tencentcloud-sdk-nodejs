@@ -424,7 +424,6 @@ export class Client extends AbstractClient {
      * 本接口（CompleteLifecycleAction）用于完成生命周期动作。
 
 * 用户通过调用本接口，指定一个具体的生命周期挂钩的结果（“CONITNUE”或者“ABANDON”）。如果一直不调用本接口，则生命周期挂钩会在超时后按照“DefaultResult”进行处理。
-
      */
   async CompleteLifecycleAction(
     req: CompleteLifecycleActionRequest,

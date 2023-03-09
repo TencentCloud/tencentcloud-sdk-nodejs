@@ -323,8 +323,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Amqp交换机
-   */
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp交换机
+     */
   async DeleteAMQPExchange(
     req: DeleteAMQPExchangeRequest,
     cb?: (error: string, rep: DeleteAMQPExchangeResponse) => void
@@ -363,8 +365,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Amqp Vhost
-   */
+     * 产品下线了，对应的接口也要下线。
+
+创建Amqp Vhost
+     */
   async CreateAMQPVHost(
     req: CreateAMQPVHostRequest,
     cb?: (error: string, rep: CreateAMQPVHostResponse) => void
@@ -433,8 +437,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取单个Amqp集群信息
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取单个Amqp集群信息
+     */
   async DescribeAMQPCluster(
     req: DescribeAMQPClusterRequest,
     cb?: (error: string, rep: DescribeAMQPClusterResponse) => void
@@ -643,8 +649,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AMQP集群
-   */
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP集群
+     */
   async CreateAMQPCluster(
     req: CreateAMQPClusterRequest,
     cb?: (error: string, rep: CreateAMQPClusterResponse) => void
@@ -663,8 +671,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Amqp Vhost 列表
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp Vhost 列表
+     */
   async DescribeAMQPVHosts(
     req: DescribeAMQPVHostsRequest,
     cb?: (error: string, rep: DescribeAMQPVHostsResponse) => void
@@ -673,8 +683,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新Amqp队列
-   */
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp队列
+     */
   async ModifyAMQPQueue(
     req: ModifyAMQPQueueRequest,
     cb?: (error: string, rep: ModifyAMQPQueueResponse) => void
@@ -733,8 +745,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Amqp队列
-   */
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp队列
+     */
   async DeleteAMQPQueue(
     req: DeleteAMQPQueueRequest,
     cb?: (error: string, rep: DeleteAMQPQueueResponse) => void
@@ -743,8 +757,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Vhost
-   */
+     * 产品下线了，对应的接口也要下线。
+
+删除Vhost
+     */
   async DeleteAMQPVHost(
     req: DeleteAMQPVHostRequest,
     cb?: (error: string, rep: DeleteAMQPVHostResponse) => void
@@ -783,8 +799,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除AMQP集群
-   */
+     * 产品下线了，对应的接口也要下线。
+
+删除AMQP集群
+     */
   async DeleteAMQPCluster(
     req: DeleteAMQPClusterRequest,
     cb?: (error: string, rep: DeleteAMQPClusterResponse) => void
@@ -843,8 +861,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
+     */
   async DescribeAMQPCreateQuota(
     req?: DescribeAMQPCreateQuotaRequest,
     cb?: (error: string, rep: DescribeAMQPCreateQuotaResponse) => void
@@ -863,8 +883,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AMQP Exchange
-   */
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP Exchange
+     */
   async CreateAMQPExchange(
     req: CreateAMQPExchangeRequest,
     cb?: (error: string, rep: CreateAMQPExchangeResponse) => void
@@ -873,8 +895,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AMQP路由关系
-   */
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP路由关系
+     */
   async CreateAMQPRouteRelation(
     req: CreateAMQPRouteRelationRequest,
     cb?: (error: string, rep: CreateAMQPRouteRelationResponse) => void
@@ -883,8 +907,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Amqp路由关系列表
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp路由关系列表
+     */
   async DescribeAMQPRouteRelations(
     req: DescribeAMQPRouteRelationsRequest,
     cb?: (error: string, rep: DescribeAMQPRouteRelationsResponse) => void
@@ -913,8 +939,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AMQP队列
-   */
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP队列
+     */
   async CreateAMQPQueue(
     req: CreateAMQPQueueRequest,
     cb?: (error: string, rep: CreateAMQPQueueResponse) => void
@@ -923,8 +951,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新Vhost
-   */
+     * 产品下线了，对应的接口也要下线。
+
+更新Vhost
+     */
   async ModifyAMQPVHost(
     req: ModifyAMQPVHostRequest,
     cb?: (error: string, rep: ModifyAMQPVHostResponse) => void
@@ -943,8 +973,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Amqp队列列表
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp队列列表
+     */
   async DescribeAMQPQueues(
     req: DescribeAMQPQueuesRequest,
     cb?: (error: string, rep: DescribeAMQPQueuesResponse) => void
@@ -983,8 +1015,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取AMQP Exchange列表
-   */
+     * 产品下线了，对应的接口也要下线。
+
+获取AMQP Exchange列表
+     */
   async DescribeAMQPExchanges(
     req: DescribeAMQPExchangesRequest,
     cb?: (error: string, rep: DescribeAMQPExchangesResponse) => void
@@ -1023,8 +1057,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 更新Amqp交换机
-   */
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp交换机
+     */
   async ModifyAMQPExchange(
     req: ModifyAMQPExchangeRequest,
     cb?: (error: string, rep: ModifyAMQPExchangeResponse) => void
@@ -1123,8 +1159,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 删除Amqp路由关系
-   */
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp路由关系
+     */
   async DeleteAMQPRouteRelation(
     req: DeleteAMQPRouteRelationRequest,
     cb?: (error: string, rep: DeleteAMQPRouteRelationResponse) => void

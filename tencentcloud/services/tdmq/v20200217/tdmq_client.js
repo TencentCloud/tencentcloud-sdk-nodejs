@@ -52,7 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAMQPCluster", req, cb);
     }
     /**
-     * 删除Amqp交换机
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp交换机
      */
     async DeleteAMQPExchange(req, cb) {
         return this.request("DeleteAMQPExchange", req, cb);
@@ -76,7 +78,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqTopics", req, cb);
     }
     /**
-     * 创建Amqp Vhost
+     * 产品下线了，对应的接口也要下线。
+
+创建Amqp Vhost
      */
     async CreateAMQPVHost(req, cb) {
         return this.request("CreateAMQPVHost", req, cb);
@@ -118,7 +122,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
-     * 获取单个Amqp集群信息
+     * 产品下线了，对应的接口也要下线。
+
+获取单个Amqp集群信息
      */
     async DescribeAMQPCluster(req, cb) {
         return this.request("DescribeAMQPCluster", req, cb);
@@ -244,7 +250,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
-     * 创建AMQP集群
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP集群
      */
     async CreateAMQPCluster(req, cb) {
         return this.request("CreateAMQPCluster", req, cb);
@@ -256,13 +264,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
     }
     /**
-     * 获取Amqp Vhost 列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp Vhost 列表
      */
     async DescribeAMQPVHosts(req, cb) {
         return this.request("DescribeAMQPVHosts", req, cb);
     }
     /**
-     * 更新Amqp队列
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp队列
      */
     async ModifyAMQPQueue(req, cb) {
         return this.request("ModifyAMQPQueue", req, cb);
@@ -298,13 +310,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQVipInstanceDetail", req, cb);
     }
     /**
-     * 删除Amqp队列
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp队列
      */
     async DeleteAMQPQueue(req, cb) {
         return this.request("DeleteAMQPQueue", req, cb);
     }
     /**
-     * 删除Vhost
+     * 产品下线了，对应的接口也要下线。
+
+删除Vhost
      */
     async DeleteAMQPVHost(req, cb) {
         return this.request("DeleteAMQPVHost", req, cb);
@@ -328,7 +344,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubscription", req, cb);
     }
     /**
-     * 删除AMQP集群
+     * 产品下线了，对应的接口也要下线。
+
+删除AMQP集群
      */
     async DeleteAMQPCluster(req, cb) {
         return this.request("DeleteAMQPCluster", req, cb);
@@ -364,7 +382,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBindVpcs", req, cb);
     }
     /**
-     * 获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
+     * 产品下线了，对应的接口也要下线。
+
+获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
      */
     async DescribeAMQPCreateQuota(req, cb) {
         return this.request("DescribeAMQPCreateQuota", req, cb);
@@ -376,19 +396,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQTopic", req, cb);
     }
     /**
-     * 创建AMQP Exchange
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP Exchange
      */
     async CreateAMQPExchange(req, cb) {
         return this.request("CreateAMQPExchange", req, cb);
     }
     /**
-     * 创建AMQP路由关系
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP路由关系
      */
     async CreateAMQPRouteRelation(req, cb) {
         return this.request("CreateAMQPRouteRelation", req, cb);
     }
     /**
-     * 获取Amqp路由关系列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp路由关系列表
      */
     async DescribeAMQPRouteRelations(req, cb) {
         return this.request("DescribeAMQPRouteRelations", req, cb);
@@ -406,13 +432,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAMQPClusters", req, cb);
     }
     /**
-     * 创建AMQP队列
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP队列
      */
     async CreateAMQPQueue(req, cb) {
         return this.request("CreateAMQPQueue", req, cb);
     }
     /**
-     * 更新Vhost
+     * 产品下线了，对应的接口也要下线。
+
+更新Vhost
      */
     async ModifyAMQPVHost(req, cb) {
         return this.request("ModifyAMQPVHost", req, cb);
@@ -424,7 +454,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQGroups", req, cb);
     }
     /**
-     * 获取Amqp队列列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp队列列表
      */
     async DescribeAMQPQueues(req, cb) {
         return this.request("DescribeAMQPQueues", req, cb);
@@ -448,7 +480,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRoles", req, cb);
     }
     /**
-     * 获取AMQP Exchange列表
+     * 产品下线了，对应的接口也要下线。
+
+获取AMQP Exchange列表
      */
     async DescribeAMQPExchanges(req, cb) {
         return this.request("DescribeAMQPExchanges", req, cb);
@@ -480,7 +514,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ReceiveMessage", req, cb);
     }
     /**
-     * 更新Amqp交换机
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp交换机
      */
     async ModifyAMQPExchange(req, cb) {
         return this.request("ModifyAMQPExchange", req, cb);
@@ -540,7 +576,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 删除Amqp路由关系
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp路由关系
      */
     async DeleteAMQPRouteRelation(req, cb) {
         return this.request("DeleteAMQPRouteRelation", req, cb);

@@ -869,6 +869,12 @@ export interface ResourceConfigItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RefJobCount: number
+
+  /**
+      * 分状态统计关联作业数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefJobStatusCountSet?: Array<RefJobStatusCountItem>
 }
 
 /**
@@ -1027,6 +1033,23 @@ export interface TreeResourceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FolderId: string
+}
+
+/**
+ * 依赖作业分状态计数信息
+ */
+export interface RefJobStatusCountItem {
+  /**
+      * 作业状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobStatus?: number
+
+  /**
+      * 作业数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count?: number
 }
 
 /**
@@ -1307,75 +1330,99 @@ export interface ResourceItem {
   /**
    * 资源ID
    */
-  ResourceId: string
+  ResourceId?: string
 
   /**
    * 资源名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 资源类型
    */
-  ResourceType: number
+  ResourceType?: number
 
   /**
    * 资源位置
    */
-  ResourceLoc: ResourceLoc
+  ResourceLoc?: ResourceLoc
 
   /**
    * 资源地域
    */
-  Region: string
+  Region?: string
 
   /**
    * 应用ID
    */
-  AppId: number
+  AppId?: number
 
   /**
    * 主账号Uin
    */
-  OwnerUin: string
+  OwnerUin?: string
 
   /**
    * 子账号Uin
    */
-  CreatorUin: string
+  CreatorUin?: string
 
   /**
    * 资源创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 资源最后更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 
   /**
    * 资源的资源版本ID
    */
-  LatestResourceConfigVersion: number
+  LatestResourceConfigVersion?: number
 
   /**
       * 资源备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
       * 版本个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VersionCount: number
+  VersionCount?: number
 
   /**
       * 关联作业数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RefJobCount: number
+  RefJobCount?: number
+
+  /**
+      * 作业运行状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsJobRun?: number
+
+  /**
+      * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileName?: string
+
+  /**
+      * 工作空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WorkSpaceId?: number
+
+  /**
+      * 分状态统计关联作业数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefJobStatusCountSet?: Array<RefJobStatusCountItem>
 }
 
 /**
@@ -1549,7 +1596,7 @@ export interface RunJobDescription {
   RunType: number
 
   /**
-   * 已废弃。旧版 SQL 类型作业启动参数：指定数据源消费起始时间点
+   * 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（例:T1557394288000）
    */
   StartMode?: string
 
@@ -1567,6 +1614,12 @@ export interface RunJobDescription {
    * Savepoint的Id
    */
   SavepointId?: string
+
+  /**
+      * 使用历史版本系统依赖
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UseOldSystemConnector?: boolean
 }
 
 /**

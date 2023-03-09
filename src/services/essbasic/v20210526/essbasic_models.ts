@@ -289,18 +289,13 @@ export interface ChannelCreateFlowSignUrlResponse {
 }
 
 /**
- * ChannelCreatePrepareFlow返回参数结构体
+ * CreateSealByImage返回参数结构体
  */
-export interface ChannelCreatePrepareFlowResponse {
+export interface CreateSealByImageResponse {
   /**
-   * 预发起的合同链接
+   * 印章id
    */
-  PrepareFlowUrl?: string
-
-  /**
-   * 合同发起后预览链接
-   */
-  PreviewFlowUrl?: string
+  SealId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2970,13 +2965,18 @@ export interface ChannelDescribeOrganizationSealsResponse {
 }
 
 /**
- * CreateSealByImage返回参数结构体
+ * ChannelCreatePrepareFlow返回参数结构体
  */
-export interface CreateSealByImageResponse {
+export interface ChannelCreatePrepareFlowResponse {
   /**
-   * 印章id
+   * 预发起的合同链接
    */
-  SealId?: string
+  PrepareFlowUrl?: string
+
+  /**
+   * 合同发起后预览链接
+   */
+  PreviewFlowUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3501,6 +3501,21 @@ export interface GetDownloadFlowUrlRequest {
    * 操作者的信息，不用传
    */
   Operator?: UserInfo
+}
+
+/**
+ * ChannelCreateEmbedWebUrl返回参数结构体
+ */
+export interface ChannelCreateEmbedWebUrlResponse {
+  /**
+   * 嵌入的web链接
+   */
+  WebUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4098,6 +4113,36 @@ export interface DescribeExtendedServiceAuthInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ChannelCreateEmbedWebUrl请求参数结构体
+ */
+export interface ChannelCreateEmbedWebUrlRequest {
+  /**
+   * WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程
+   */
+  EmbedType: string
+
+  /**
+   * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+   */
+  Agent: Agent
+
+  /**
+   * 渠道操作者信息
+   */
+  Operator?: UserInfo
+
+  /**
+   * WEB嵌入的业务资源ID，EmbedType取值MODIFY_TEMPLATE或PREVIEW_TEMPLATE或 PREVIEW_FLOW时BusinessId必填
+   */
+  BusinessId?: string
+
+  /**
+   * 是否隐藏控件，只有预览模板时生效
+   */
+  HiddenComponents?: boolean
 }
 
 /**

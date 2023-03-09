@@ -514,6 +514,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DescribeKeyPairs", req, cb);
     }
     /**
+     * 本接口 (DescribeTaskInfo) 用于查询云服务器维修任务列表及详细信息。
+
+- 可以根据实例ID、实例名称或任务状态等信息来查询维修任务列表。过滤信息详情可参考入参说明。
+- 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的维修任务列表。
+
+默认接口请求频率限制：10次/秒。</br>
+     */
+    async DescribeTaskInfo(req, cb) {
+        return this.request("DescribeTaskInfo", req, cb);
+    }
+    /**
      * 本接口(DescribeReservedInstancesOfferings)供用户列出可购买的预留实例配置
      */
     async DescribeReservedInstancesOfferings(req, cb) {

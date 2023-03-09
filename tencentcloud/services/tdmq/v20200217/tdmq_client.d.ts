@@ -24,7 +24,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyAMQPCluster(req: ModifyAMQPClusterRequest, cb?: (error: string, rep: ModifyAMQPClusterResponse) => void): Promise<ModifyAMQPClusterResponse>;
     /**
-     * 删除Amqp交换机
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp交换机
      */
     DeleteAMQPExchange(req: DeleteAMQPExchangeRequest, cb?: (error: string, rep: DeleteAMQPExchangeResponse) => void): Promise<DeleteAMQPExchangeResponse>;
     /**
@@ -40,7 +42,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqTopics(req: DescribeCmqTopicsRequest, cb?: (error: string, rep: DescribeCmqTopicsResponse) => void): Promise<DescribeCmqTopicsResponse>;
     /**
-     * 创建Amqp Vhost
+     * 产品下线了，对应的接口也要下线。
+
+创建Amqp Vhost
      */
     CreateAMQPVHost(req: CreateAMQPVHostRequest, cb?: (error: string, rep: CreateAMQPVHostResponse) => void): Promise<CreateAMQPVHostResponse>;
     /**
@@ -68,7 +72,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
     /**
-     * 获取单个Amqp集群信息
+     * 产品下线了，对应的接口也要下线。
+
+获取单个Amqp集群信息
      */
     DescribeAMQPCluster(req: DescribeAMQPClusterRequest, cb?: (error: string, rep: DescribeAMQPClusterResponse) => void): Promise<DescribeAMQPClusterResponse>;
     /**
@@ -152,7 +158,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqSubscriptionDetail(req: DescribeCmqSubscriptionDetailRequest, cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void): Promise<DescribeCmqSubscriptionDetailResponse>;
     /**
-     * 创建AMQP集群
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP集群
      */
     CreateAMQPCluster(req: CreateAMQPClusterRequest, cb?: (error: string, rep: CreateAMQPClusterResponse) => void): Promise<CreateAMQPClusterResponse>;
     /**
@@ -160,11 +168,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqDeadLetterSourceQueues(req: DescribeCmqDeadLetterSourceQueuesRequest, cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void): Promise<DescribeCmqDeadLetterSourceQueuesResponse>;
     /**
-     * 获取Amqp Vhost 列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp Vhost 列表
      */
     DescribeAMQPVHosts(req: DescribeAMQPVHostsRequest, cb?: (error: string, rep: DescribeAMQPVHostsResponse) => void): Promise<DescribeAMQPVHostsResponse>;
     /**
-     * 更新Amqp队列
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp队列
      */
     ModifyAMQPQueue(req: ModifyAMQPQueueRequest, cb?: (error: string, rep: ModifyAMQPQueueResponse) => void): Promise<ModifyAMQPQueueResponse>;
     /**
@@ -188,11 +200,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeRocketMQVipInstanceDetail(req: DescribeRocketMQVipInstanceDetailRequest, cb?: (error: string, rep: DescribeRocketMQVipInstanceDetailResponse) => void): Promise<DescribeRocketMQVipInstanceDetailResponse>;
     /**
-     * 删除Amqp队列
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp队列
      */
     DeleteAMQPQueue(req: DeleteAMQPQueueRequest, cb?: (error: string, rep: DeleteAMQPQueueResponse) => void): Promise<DeleteAMQPQueueResponse>;
     /**
-     * 删除Vhost
+     * 产品下线了，对应的接口也要下线。
+
+删除Vhost
      */
     DeleteAMQPVHost(req: DeleteAMQPVHostRequest, cb?: (error: string, rep: DeleteAMQPVHostResponse) => void): Promise<DeleteAMQPVHostResponse>;
     /**
@@ -208,7 +224,9 @@ export declare class Client extends AbstractClient {
      */
     CreateSubscription(req: CreateSubscriptionRequest, cb?: (error: string, rep: CreateSubscriptionResponse) => void): Promise<CreateSubscriptionResponse>;
     /**
-     * 删除AMQP集群
+     * 产品下线了，对应的接口也要下线。
+
+删除AMQP集群
      */
     DeleteAMQPCluster(req: DeleteAMQPClusterRequest, cb?: (error: string, rep: DeleteAMQPClusterResponse) => void): Promise<DeleteAMQPClusterResponse>;
     /**
@@ -232,7 +250,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeBindVpcs(req: DescribeBindVpcsRequest, cb?: (error: string, rep: DescribeBindVpcsResponse) => void): Promise<DescribeBindVpcsResponse>;
     /**
-     * 获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
+     * 产品下线了，对应的接口也要下线。
+
+获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
      */
     DescribeAMQPCreateQuota(req?: DescribeAMQPCreateQuotaRequest, cb?: (error: string, rep: DescribeAMQPCreateQuotaResponse) => void): Promise<DescribeAMQPCreateQuotaResponse>;
     /**
@@ -240,15 +260,21 @@ export declare class Client extends AbstractClient {
      */
     DeleteRocketMQTopic(req: DeleteRocketMQTopicRequest, cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void): Promise<DeleteRocketMQTopicResponse>;
     /**
-     * 创建AMQP Exchange
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP Exchange
      */
     CreateAMQPExchange(req: CreateAMQPExchangeRequest, cb?: (error: string, rep: CreateAMQPExchangeResponse) => void): Promise<CreateAMQPExchangeResponse>;
     /**
-     * 创建AMQP路由关系
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP路由关系
      */
     CreateAMQPRouteRelation(req: CreateAMQPRouteRelationRequest, cb?: (error: string, rep: CreateAMQPRouteRelationResponse) => void): Promise<CreateAMQPRouteRelationResponse>;
     /**
-     * 获取Amqp路由关系列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp路由关系列表
      */
     DescribeAMQPRouteRelations(req: DescribeAMQPRouteRelationsRequest, cb?: (error: string, rep: DescribeAMQPRouteRelationsResponse) => void): Promise<DescribeAMQPRouteRelationsResponse>;
     /**
@@ -260,11 +286,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeAMQPClusters(req: DescribeAMQPClustersRequest, cb?: (error: string, rep: DescribeAMQPClustersResponse) => void): Promise<DescribeAMQPClustersResponse>;
     /**
-     * 创建AMQP队列
+     * 产品下线了，对应的接口也要下线。
+
+创建AMQP队列
      */
     CreateAMQPQueue(req: CreateAMQPQueueRequest, cb?: (error: string, rep: CreateAMQPQueueResponse) => void): Promise<CreateAMQPQueueResponse>;
     /**
-     * 更新Vhost
+     * 产品下线了，对应的接口也要下线。
+
+更新Vhost
      */
     ModifyAMQPVHost(req: ModifyAMQPVHostRequest, cb?: (error: string, rep: ModifyAMQPVHostResponse) => void): Promise<ModifyAMQPVHostResponse>;
     /**
@@ -272,7 +302,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRocketMQGroups(req: DescribeRocketMQGroupsRequest, cb?: (error: string, rep: DescribeRocketMQGroupsResponse) => void): Promise<DescribeRocketMQGroupsResponse>;
     /**
-     * 获取Amqp队列列表
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp队列列表
      */
     DescribeAMQPQueues(req: DescribeAMQPQueuesRequest, cb?: (error: string, rep: DescribeAMQPQueuesResponse) => void): Promise<DescribeAMQPQueuesResponse>;
     /**
@@ -288,7 +320,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteRoles(req: DeleteRolesRequest, cb?: (error: string, rep: DeleteRolesResponse) => void): Promise<DeleteRolesResponse>;
     /**
-     * 获取AMQP Exchange列表
+     * 产品下线了，对应的接口也要下线。
+
+获取AMQP Exchange列表
      */
     DescribeAMQPExchanges(req: DescribeAMQPExchangesRequest, cb?: (error: string, rep: DescribeAMQPExchangesResponse) => void): Promise<DescribeAMQPExchangesResponse>;
     /**
@@ -316,7 +350,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     ReceiveMessage(req: ReceiveMessageRequest, cb?: (error: string, rep: ReceiveMessageResponse) => void): Promise<ReceiveMessageResponse>;
     /**
-     * 更新Amqp交换机
+     * 产品下线了，对应的接口也要下线。
+
+更新Amqp交换机
      */
     ModifyAMQPExchange(req: ModifyAMQPExchangeRequest, cb?: (error: string, rep: ModifyAMQPExchangeResponse) => void): Promise<ModifyAMQPExchangeResponse>;
     /**
@@ -356,7 +392,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     * 删除Amqp路由关系
+     * 产品下线了，对应的接口也要下线。
+
+删除Amqp路由关系
      */
     DeleteAMQPRouteRelation(req: DeleteAMQPRouteRelationRequest, cb?: (error: string, rep: DeleteAMQPRouteRelationResponse) => void): Promise<DeleteAMQPRouteRelationResponse>;
     /**

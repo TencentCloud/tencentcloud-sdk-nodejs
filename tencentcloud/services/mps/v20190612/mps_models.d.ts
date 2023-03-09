@@ -640,6 +640,43 @@ export interface DescribeOutputRTMPPullSettings {
     ServerUrls: Array<DescribeOutputRTMPPullServerUrl>;
 }
 /**
+ * AWS S3 文件是上传触发器。
+ */
+export interface AwsS3FileUploadTrigger {
+    /**
+      * 工作流绑定的 AWS S3 存储桶。
+      */
+    S3Bucket: string;
+    /**
+      * 工作流绑定的桶所在 AWS 区域。
+      */
+    S3Region: string;
+    /**
+      * 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。
+      */
+    Dir?: string;
+    /**
+      * 工作流允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。
+      */
+    Formats?: Array<string>;
+    /**
+      * 工作流绑定的 AWS S3 存储桶的秘钥ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    S3SecretId?: string;
+    /**
+      * 工作流绑定的 AWS S3 存储桶的秘钥Key。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    S3SecretKey?: string;
+    /**
+      * 工作流绑定的 AWS S3 存储桶对应的 SQS事件队列。
+注意：队列和桶需要在同一区域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AwsSQS?: AwsSQS;
+}
+/**
  * 用户自定义文本审核任务控制参数。
  */
 export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
@@ -830,7 +867,10 @@ export interface EnhanceConfig {
  */
 export interface MediaInputInfo {
     /**
-      * 输入来源对象的类型，支持 COS、URL 两种。
+      * 输入来源对象的类型，支持：
+<li> COS：COS源</li>
+<li> URL：URL源</li>
+<li> AWS-S3：AWS 源，目前只支持转码任务 </li>
       */
     Type: string;
     /**
@@ -842,6 +882,11 @@ export interface MediaInputInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UrlInputInfo?: UrlInputInfo;
+    /**
+      * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    S3InputInfo?: S3InputInfo;
 }
 /**
  * CreateWorkflow请求参数结构体
@@ -1429,37 +1474,21 @@ export interface DescribeStreamLinkFlowsResponse {
     RequestId?: string;
 }
 /**
- * 采样截图信息
+ * 语音识别片段。
  */
-export interface MediaSampleSnapshotItem {
+export interface AiRecognitionTaskAsrWordsSegmentItem {
     /**
-      * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+      * 识别片段起始的偏移时间，单位：秒。
       */
-    Definition: number;
+    StartTimeOffset: number;
     /**
-      * 采样方式，取值范围：
-<li>Percent：根据百分比间隔采样。</li>
-<li>Time：根据时间间隔采样。</li>
+      * 识别片段终止的偏移时间，单位：秒。
       */
-    SampleType: string;
+    EndTimeOffset: number;
     /**
-      * 采样间隔
-<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
-<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+      * 识别片段置信度。取值：0~100。
       */
-    Interval: number;
-    /**
-      * 截图后文件的存储位置。
-      */
-    Storage: TaskOutputStorage;
-    /**
-      * 生成的截图 path 列表。
-      */
-    ImagePathSet: Array<string>;
-    /**
-      * 截图如果被打上了水印，被打水印的模板 ID 列表。
-      */
-    WaterMarkDefinition: Array<number>;
+    Confidence: number;
 }
 /**
  * 内容审核结果
@@ -2768,6 +2797,23 @@ export interface ScheduleRecognitionTaskResult {
     Output: Array<AiRecognitionResult>;
 }
 /**
+ * WithdrawsWatermark请求参数结构体
+ */
+export interface WithdrawsWatermarkRequest {
+    /**
+      * 输入媒体文件存储信息。
+      */
+    InputInfo: MediaInputInfo;
+    /**
+      * 任务的事件通知信息，不填代表不获取事件通知。
+      */
+    TaskNotifyConfig?: TaskNotifyConfig;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext?: string;
+}
+/**
  * 语音全文识别的输入。
  */
 export interface AiRecognitionTaskAsrFullTextResultInput {
@@ -3329,6 +3375,31 @@ export interface CreateStreamLinkOutputInfoResponse {
     RequestId?: string;
 }
 /**
+ * AWS S3存储输入
+ */
+export interface S3InputInfo {
+    /**
+      * S3 bucket。
+      */
+    S3Bucket: string;
+    /**
+      * S3 bucket 对应的区域。
+      */
+    S3Region: string;
+    /**
+      * S3 bucket 中的媒体资源路径。
+      */
+    S3Object: string;
+    /**
+      * AWS 内网访问 媒体资源的秘钥id。
+      */
+    S3SecretId?: string;
+    /**
+      * AWS 内网访问 媒体资源的秘钥key。
+      */
+    S3SecretKey?: string;
+}
+/**
  * 对视频截雪碧图任务结果类型
  */
 export interface MediaProcessTaskImageSpriteResult {
@@ -3551,6 +3622,39 @@ export interface ProhibitedConfigureInfoForUpdate {
     OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate;
 }
 /**
+ * 采样截图信息
+ */
+export interface MediaSampleSnapshotItem {
+    /**
+      * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+      */
+    Definition: number;
+    /**
+      * 采样方式，取值范围：
+<li>Percent：根据百分比间隔采样。</li>
+<li>Time：根据时间间隔采样。</li>
+      */
+    SampleType: string;
+    /**
+      * 采样间隔
+<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
+<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+      */
+    Interval: number;
+    /**
+      * 截图后文件的存储位置。
+      */
+    Storage: TaskOutputStorage;
+    /**
+      * 生成的截图 path 列表。
+      */
+    ImagePathSet: Array<string>;
+    /**
+      * 截图如果被打上了水印，被打水印的模板 ID 列表。
+      */
+    WaterMarkDefinition: Array<number>;
+}
+/**
  * 智能标签任务控制参数
  */
 export interface TagConfigureInfoForUpdate {
@@ -3569,15 +3673,6 @@ export interface DeleteWordSamplesRequest {
       * 关键词，数组长度限制：100 个词。
       */
     Keywords: Array<string>;
-}
-/**
- * 查询输入的RTSP配置信息。
- */
-export interface DescribeInputRTSPPullSettings {
-    /**
-      * RTSP源站地址信息。
-      */
-    SourceAddresses: Array<DescribeRTSPPullSourceAddress>;
 }
 /**
  * 自定义转码的规格参数。
@@ -3862,7 +3957,9 @@ export interface CreateOutputInfo {
  */
 export interface TaskOutputStorage {
     /**
-      * 媒体处理输出对象存储位置的类型，现在仅支持 COS。
+      * 媒体处理输出对象存储位置的类型，支持：
+<li>COS：COS存储</li>
+<li>AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域</li>
       */
     Type: string;
     /**
@@ -3870,6 +3967,11 @@ export interface TaskOutputStorage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CosOutputStorage?: CosOutputStorage;
+    /**
+      * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    S3OutputStorage?: S3OutputStorage;
 }
 /**
  * 传输流日志信息。
@@ -3915,6 +4017,39 @@ export interface FlowLogInfo {
       * 输入或输出的名称。
       */
     InputOutputName: string;
+}
+/**
+ * ModifyAIAnalysisTemplate请求参数结构体
+ */
+export interface ModifyAIAnalysisTemplateRequest {
+    /**
+      * 视频内容分析模板唯一标识。
+      */
+    Definition: number;
+    /**
+      * 视频内容分析模板名称，长度限制：64 个字符。
+      */
+    Name?: string;
+    /**
+      * 视频内容分析模板描述信息，长度限制：256 个字符。
+      */
+    Comment?: string;
+    /**
+      * 智能分类任务控制参数。
+      */
+    ClassificationConfigure?: ClassificationConfigureInfoForUpdate;
+    /**
+      * 智能标签任务控制参数。
+      */
+    TagConfigure?: TagConfigureInfoForUpdate;
+    /**
+      * 智能封面任务控制参数。
+      */
+    CoverConfigure?: CoverConfigureInfoForUpdate;
+    /**
+      * 智能按帧标签任务控制参数。
+      */
+    FrameTagConfigure?: FrameTagConfigureInfoForUpdate;
 }
 /**
  * 用户自定义审核任务控制参数
@@ -5017,7 +5152,11 @@ export interface CreateOutputRTMPSettings {
  */
 export interface WorkflowTrigger {
     /**
-      * 触发器的类型，目前仅支持 CosFileUpload。
+      * 触发器的类型，可选值：
+<li>CosFileUpload：COS触发</li>
+<li>AwsS3FileUpload：AWS触发，目前只支持转码任务。只有编排支持，工作流不支持。  </li>
+
+
       */
     Type: string;
     /**
@@ -5025,6 +5164,13 @@ export interface WorkflowTrigger {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CosFileUploadTrigger?: CosFileUploadTrigger;
+    /**
+      * 当 Type 为 AwsS3FileUpload 时必填且有效，为 AWS S3 触发规则。
+
+注意：目前AWS的S3、对应触发队列SQS、回调队列SQS的秘钥需要一致。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AwsS3FileUploadTrigger?: AwsS3FileUploadTrigger;
 }
 /**
  * 创建的输入HLS拉流源站配置信息。
@@ -6428,6 +6574,19 @@ export interface ProhibitedAsrReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
+ * WithdrawsWatermark返回参数结构体
+ */
+export interface WithdrawsWatermarkResponse {
+    /**
+      * 任务 ID，可以通过该 ID 查询任务状态和结果。
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 内容审核 Asr 文字敏感任务输入参数类型
  */
 export interface AiReviewPoliticalAsrTaskInput {
@@ -6611,21 +6770,13 @@ export interface AiReviewTaskPoliticalAsrResult {
     Output: AiReviewPoliticalAsrTaskOutput;
 }
 /**
- * 语音识别片段。
+ * 查询输入的RTSP配置信息。
  */
-export interface AiRecognitionTaskAsrWordsSegmentItem {
+export interface DescribeInputRTSPPullSettings {
     /**
-      * 识别片段起始的偏移时间，单位：秒。
+      * RTSP源站地址信息。
       */
-    StartTimeOffset: number;
-    /**
-      * 识别片段终止的偏移时间，单位：秒。
-      */
-    EndTimeOffset: number;
-    /**
-      * 识别片段置信度。取值：0~100。
-      */
-    Confidence: number;
+    SourceAddresses: Array<DescribeRTSPPullSourceAddress>;
 }
 /**
  * 字幕流配置参数。
@@ -7273,6 +7424,27 @@ export interface UserDefineConfigureInfoForUpdate {
       * 用户自定义文本审核控制参数。
       */
     OcrReviewInfo: UserDefineOcrTextReviewTemplateInfoForUpdate;
+}
+/**
+ * AWS S3 输出位置
+ */
+export interface S3OutputStorage {
+    /**
+      * S3 bucket。
+      */
+    S3Bucket: string;
+    /**
+      * S3 bucket 对应的区域。
+      */
+    S3Region: string;
+    /**
+      * AWS 内网上传 媒体资源的秘钥id。
+      */
+    S3SecretId?: string;
+    /**
+      * AWS 内网上传 媒体资源的秘钥key。
+      */
+    S3SecretKey?: string;
 }
 /**
  * 绑定到 COS 的输入规则。
@@ -8281,6 +8453,7 @@ export interface TaskNotifyConfig {
 <li>TDMQ-CMQ：消息队列</li>
 <li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
 <li>SCF：不推荐使用，需要在控制台额外配置SCF</li>
+<li>AWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域</li>
 <font color="red"> 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 </font>
       */
     NotifyType?: string;
@@ -8288,6 +8461,12 @@ export interface TaskNotifyConfig {
       * HTTP回调地址，NotifyType为URL时必填。
       */
     NotifyUrl?: string;
+    /**
+      * AWS SQS 回调，NotifyType为 AWS-SQS 时必填。
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AwsSQS?: AwsSQS;
 }
 /**
  * 人脸增强配置
@@ -8308,34 +8487,45 @@ export interface FaceEnhanceConfig {
     Intensity?: number;
 }
 /**
- * 内容审核涉敏任务结果类型
+ * 直播 AI 内容审核图片鉴黄结果
  */
-export interface AiReviewTaskPoliticalResult {
+export interface LiveStreamAiReviewImagePornResult {
     /**
-      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      * 嫌疑片段起始的 PTS 时间，单位：秒。
       */
-    Status: string;
+    StartPtsTime: number;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 嫌疑片段结束的 PTS 时间，单位：秒。
       */
-    ErrCodeExt: string;
+    EndPtsTime: number;
     /**
-      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      * 嫌疑片段涉黄分数。
       */
-    ErrCode: number;
+    Confidence: number;
     /**
-      * 错误信息。
+      * 嫌疑片段鉴黄结果建议，取值范围：
+<li>pass</li>
+<li>review</li>
+<li>block</li>
       */
-    Message: string;
+    Suggestion: string;
     /**
-      * 内容审核涉敏任务输入。
+      * 视频鉴黄结果标签，取值范围：
+<li>porn：色情。</li>
+<li>sexy：性感。</li>
+<li>vulgar：低俗。</li>
+<li>intimacy：亲密行为。</li>
       */
-    Input: AiReviewPoliticalTaskInput;
+    Label: string;
     /**
-      * 内容审核涉敏任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 嫌疑图片 URL （图片不会永久存储，到达
+PicUrlExpireTime 时间点后图片将被删除）。
       */
-    Output: AiReviewPoliticalTaskOutput;
+    Url: string;
+    /**
+      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      */
+    PicUrlExpireTime: string;
 }
 /**
  * 智能按帧标签任务输入类型
@@ -8774,45 +8964,34 @@ violation_photo：
     SegmentSet: Array<MediaContentReviewPoliticalSegmentItem>;
 }
 /**
- * 直播 AI 内容审核图片鉴黄结果
+ * 内容审核涉敏任务结果类型
  */
-export interface LiveStreamAiReviewImagePornResult {
+export interface AiReviewTaskPoliticalResult {
     /**
-      * 嫌疑片段起始的 PTS 时间，单位：秒。
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
       */
-    StartPtsTime: number;
+    Status: string;
     /**
-      * 嫌疑片段结束的 PTS 时间，单位：秒。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
-    EndPtsTime: number;
+    ErrCodeExt: string;
     /**
-      * 嫌疑片段涉黄分数。
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
-    Confidence: number;
+    ErrCode: number;
     /**
-      * 嫌疑片段鉴黄结果建议，取值范围：
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+      * 错误信息。
       */
-    Suggestion: string;
+    Message: string;
     /**
-      * 视频鉴黄结果标签，取值范围：
-<li>porn：色情。</li>
-<li>sexy：性感。</li>
-<li>vulgar：低俗。</li>
-<li>intimacy：亲密行为。</li>
+      * 内容审核涉敏任务输入。
       */
-    Label: string;
+    Input: AiReviewPoliticalTaskInput;
     /**
-      * 嫌疑图片 URL （图片不会永久存储，到达
-PicUrlExpireTime 时间点后图片将被删除）。
+      * 内容审核涉敏任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Url: string;
-    /**
-      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-      */
-    PicUrlExpireTime: string;
+    Output: AiReviewPoliticalTaskOutput;
 }
 /**
  * 翻译结果。
@@ -9548,37 +9727,25 @@ export interface DescribeWordSamplesRequest {
     Limit?: number;
 }
 /**
- * ModifyAIAnalysisTemplate请求参数结构体
+ * Aws SQS 队列信息
  */
-export interface ModifyAIAnalysisTemplateRequest {
+export interface AwsSQS {
     /**
-      * 视频内容分析模板唯一标识。
+      * SQS 队列区域。
       */
-    Definition: number;
+    SQSRegion: string;
     /**
-      * 视频内容分析模板名称，长度限制：64 个字符。
+      * SQS 队列名称。
       */
-    Name?: string;
+    SQSQueueName: string;
     /**
-      * 视频内容分析模板描述信息，长度限制：256 个字符。
+      * 读写SQS的秘钥id。
       */
-    Comment?: string;
+    S3SecretId?: string;
     /**
-      * 智能分类任务控制参数。
+      * 读写SQS的秘钥key。
       */
-    ClassificationConfigure?: ClassificationConfigureInfoForUpdate;
-    /**
-      * 智能标签任务控制参数。
-      */
-    TagConfigure?: TagConfigureInfoForUpdate;
-    /**
-      * 智能封面任务控制参数。
-      */
-    CoverConfigure?: CoverConfigureInfoForUpdate;
-    /**
-      * 智能按帧标签任务控制参数。
-      */
-    FrameTagConfigure?: FrameTagConfigureInfoForUpdate;
+    S3SecretKey?: string;
 }
 /**
  * 查询Flow的配置信息。

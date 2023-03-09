@@ -45,6 +45,7 @@ import {
   DeleteWorkflowRequest,
   DescribeRTMPPullSourceAddress,
   DescribeOutputRTMPPullSettings,
+  AwsS3FileUploadTrigger,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
   ModifyOutputInfo,
   MediaSnapshotByTimeOffsetItem,
@@ -77,7 +78,7 @@ import {
   SuperResolutionConfig,
   DeletePersonSampleRequest,
   DescribeStreamLinkFlowsResponse,
-  MediaSampleSnapshotItem,
+  AiRecognitionTaskAsrWordsSegmentItem,
   AiContentReviewResult,
   ParseLiveStreamProcessNotificationResponse,
   AiRecognitionTaskInput,
@@ -139,6 +140,7 @@ import {
   PornAsrReviewTemplateInfoForUpdate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ScheduleRecognitionTaskResult,
+  WithdrawsWatermarkRequest,
   AiRecognitionTaskAsrFullTextResultInput,
   DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
@@ -169,6 +171,7 @@ import {
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,
   CreateStreamLinkOutputInfoResponse,
+  S3InputInfo,
   MediaProcessTaskImageSpriteResult,
   RTPAddressDestination,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
@@ -180,9 +183,9 @@ import {
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ProhibitedConfigureInfoForUpdate,
+  MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
-  DescribeInputRTSPPullSettings,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
   VideoTemplateInfo,
@@ -194,6 +197,7 @@ import {
   CreateOutputInfo,
   TaskOutputStorage,
   FlowLogInfo,
+  ModifyAIAnalysisTemplateRequest,
   UserDefineConfigureInfo,
   ColorEnhanceConfig,
   DescribeOutputRTPSettings,
@@ -306,6 +310,7 @@ import {
   AiReviewPornOcrTaskOutput,
   CreateSampleSnapshotTemplateResponse,
   ProhibitedAsrReviewTemplateInfo,
+  WithdrawsWatermarkResponse,
   AiReviewPoliticalAsrTaskInput,
   ActionConfigInfo,
   MediaAiAnalysisTagItem,
@@ -314,7 +319,7 @@ import {
   PornOcrReviewTemplateInfo,
   CreateOutputInfoRTPSettings,
   AiReviewTaskPoliticalAsrResult,
-  AiRecognitionTaskAsrWordsSegmentItem,
+  DescribeInputRTSPPullSettings,
   SubtitleTemplate,
   LiveStreamProcessTask,
   AiReviewProhibitedAsrTaskInput,
@@ -342,6 +347,7 @@ import {
   CreateAIAnalysisTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   UserDefineConfigureInfoForUpdate,
+  S3OutputStorage,
   CosFileUploadTrigger,
   AiReviewPoliticalAsrTaskOutput,
   FlowRealtimeStatusSRT,
@@ -385,7 +391,7 @@ import {
   DescribeImageSpriteTemplatesResponse,
   TaskNotifyConfig,
   FaceEnhanceConfig,
-  AiReviewTaskPoliticalResult,
+  LiveStreamAiReviewImagePornResult,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
@@ -405,7 +411,7 @@ import {
   DescribeOutputSRTSettings,
   AiRecognitionTaskFaceResultInput,
   AiReviewPoliticalTaskOutput,
-  LiveStreamAiReviewImagePornResult,
+  AiReviewTaskPoliticalResult,
   AiRecognitionTaskTransTextResultOutput,
   ModifySnapshotByTimeOffsetTemplateRequest,
   LiveStreamAiReviewResultItem,
@@ -432,7 +438,7 @@ import {
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
   DescribeWordSamplesRequest,
-  ModifyAIAnalysisTemplateRequest,
+  AwsSQS,
   DescribeFlow,
   CreateWatermarkTemplateResponse,
   DescribeSampleSnapshotTemplatesResponse,
@@ -1293,6 +1299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void
   ): Promise<DescribeImageSpriteTemplatesResponse> {
     return this.request("DescribeImageSpriteTemplates", req, cb)
+  }
+
+  /**
+   * 提取视频中的盲水印。
+   */
+  async WithdrawsWatermark(
+    req: WithdrawsWatermarkRequest,
+    cb?: (error: string, rep: WithdrawsWatermarkResponse) => void
+  ): Promise<WithdrawsWatermarkResponse> {
+    return this.request("WithdrawsWatermark", req, cb)
   }
 
   /**

@@ -32,7 +32,7 @@ import {
   DescribeResourceUrlsByFlowsRequest,
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
-  ChannelCreatePrepareFlowResponse,
+  CreateSealByImageResponse,
   OperateChannelTemplateResponse,
   FlowFileInfo,
   CreateFlowOption,
@@ -105,7 +105,7 @@ import {
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDescribeOrganizationSealsResponse,
-  CreateSealByImageResponse,
+  ChannelCreatePrepareFlowResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelCreateReleaseFlowRequest,
   ChannelCreateFlowGroupByFilesResponse,
@@ -118,6 +118,7 @@ import {
   ChannelDeleteSealPoliciesResponse,
   Component,
   GetDownloadFlowUrlRequest,
+  ChannelCreateEmbedWebUrlResponse,
   ChannelBatchCancelFlowsRequest,
   ChannelUpdateSealStatusRequest,
   SignUrl,
@@ -138,6 +139,7 @@ import {
   ChannelUpdateSealStatusResponse,
   ChannelCreateFlowSignUrlRequest,
   DescribeExtendedServiceAuthInfoResponse,
+  ChannelCreateEmbedWebUrlRequest,
   CcInfo,
 } from "./essbasic_models"
 
@@ -582,6 +584,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void
   ): Promise<ChannelCreateFlowGroupByFilesResponse> {
     return this.request("ChannelCreateFlowGroupByFiles", req, cb)
+  }
+
+  /**
+   * 本接口（ChannelCreateEmbedWebUrl）用于创建嵌入web的链接
+   */
+  async ChannelCreateEmbedWebUrl(
+    req: ChannelCreateEmbedWebUrlRequest,
+    cb?: (error: string, rep: ChannelCreateEmbedWebUrlResponse) => void
+  ): Promise<ChannelCreateEmbedWebUrlResponse> {
+    return this.request("ChannelCreateEmbedWebUrl", req, cb)
   }
 
   /**

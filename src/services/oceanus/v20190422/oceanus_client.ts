@@ -54,6 +54,7 @@ import {
   DescribeTreeResourcesRsp,
   DescribeResourcesRequest,
   TreeResourceItem,
+  RefJobStatusCountItem,
   ResourceLocParam,
   ResourceRefJobInfo,
   DescribeJobConfigsRequest,

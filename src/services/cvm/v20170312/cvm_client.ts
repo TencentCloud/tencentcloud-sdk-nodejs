@@ -21,7 +21,7 @@ import {
   InquiryPriceTerminateInstancesResponse,
   LocalDiskType,
   AssociateInstancesKeyPairsResponse,
-  RenewInstancesRequest,
+  ModifyChcAttributeResponse,
   DescribeHpcClustersRequest,
   DescribeImageQuotaResponse,
   ModifyInstancesProjectRequest,
@@ -40,6 +40,7 @@ import {
   PostPaidQuota,
   ResetInstancesTypeRequest,
   ChcHost,
+  RepairTaskInfo,
   DeleteLaunchTemplateVersionsRequest,
   DeleteImagesRequest,
   DeleteLaunchTemplateRequest,
@@ -78,6 +79,7 @@ import {
   DeleteHpcClustersResponse,
   ModifyLaunchTemplateDefaultVersionResponse,
   DescribeInstancesOperationLimitRequest,
+  ResetInstancesPasswordResponse,
   ModifyImageAttributeRequest,
   DescribeInstanceVncUrlRequest,
   StopInstancesResponse,
@@ -120,7 +122,7 @@ import {
   InstanceMarketOptionsRequest,
   DescribeImageSharePermissionResponse,
   DeleteLaunchTemplateVersionsResponse,
-  ResetInstancesPasswordResponse,
+  DescribeTaskInfoRequest,
   InquiryPriceRunInstancesRequest,
   Image,
   ChcDeployExtraConfig,
@@ -182,7 +184,7 @@ import {
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
   ModifyHostsAttributeResponse,
   ModifyHpcClusterAttributeRequest,
-  ModifyChcAttributeResponse,
+  DescribeTaskInfoResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
@@ -243,6 +245,7 @@ import {
   InquirePricePurchaseReservedInstancesOfferingResponse,
   DisassociateSecurityGroupsRequest,
   ModifyHostsAttributeRequest,
+  RenewInstancesRequest,
   ImportKeyPairRequest,
   SyncImage,
   KeyPair,
@@ -1002,6 +1005,21 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeKeyPairsResponse) => void
   ): Promise<DescribeKeyPairsResponse> {
     return this.request("DescribeKeyPairs", req, cb)
+  }
+
+  /**
+     * 本接口 (DescribeTaskInfo) 用于查询云服务器维修任务列表及详细信息。
+
+- 可以根据实例ID、实例名称或任务状态等信息来查询维修任务列表。过滤信息详情可参考入参说明。
+- 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的维修任务列表。
+
+默认接口请求频率限制：10次/秒。</br>
+     */
+  async DescribeTaskInfo(
+    req: DescribeTaskInfoRequest,
+    cb?: (error: string, rep: DescribeTaskInfoResponse) => void
+  ): Promise<DescribeTaskInfoResponse> {
+    return this.request("DescribeTaskInfo", req, cb)
   }
 
   /**

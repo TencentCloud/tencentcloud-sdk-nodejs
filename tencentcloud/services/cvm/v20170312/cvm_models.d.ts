@@ -46,22 +46,13 @@ export interface AssociateInstancesKeyPairsResponse {
     RequestId?: string;
 }
 /**
- * RenewInstances请求参数结构体
+ * ModifyChcAttribute返回参数结构体
  */
-export interface RenewInstancesRequest {
+export interface ModifyChcAttributeResponse {
     /**
-      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceIds: Array<string>;
-    /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">
-包年包月实例该参数为必传参数。</dx-alert>
-      */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
-    /**
-      * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
-      */
-    RenewPortableDataDisk?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeHpcClusters请求参数结构体
@@ -443,6 +434,163 @@ TENANT: 租赁
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeployExtraConfig?: ChcDeployExtraConfig;
+}
+/**
+ * 描述维修任务的相关信息
+ */
+export interface RepairTaskInfo {
+    /**
+      * 维修任务ID
+      */
+    TaskId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias: string;
+    /**
+      * 任务类型ID，与任务类型中文名的对应关系如下：
+
+- `101`：实例运行隐患
+- `102`：实例运行异常
+- `103`：实例硬盘异常
+- `104`：实例网络连接异常
+- `105`：实例运行预警
+- `106`：实例硬盘预警
+- `107`：实例维护升级
+
+各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789#.E7.BB.B4.E4.BF.AE.E4.BB.BB.E5.8A.A1.E5.88.86.E7.B1.BB)。
+      */
+    TaskTypeId: number;
+    /**
+      * 任务类型中文名
+      */
+    TaskTypeName?: string;
+    /**
+      * 任务状态ID，与任务状态中文名的对应关系如下：
+
+- `1`：待授权
+- `2`：处理中
+- `3`：已结束
+- `4`：已预约
+- `5`：已取消
+- `6`：已避免
+
+各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789#.E4.BB.BB.E5.8A.A1.E7.8A.B6.E6.80.81)。
+      */
+    TaskStatus: number;
+    /**
+      * 设备状态ID，与设备状态中文名的对应关系如下：
+
+- `1`：故障中
+- `2`：处理中
+- `3`：正常
+- `4`：已预约
+- `5`：已取消
+- `6`：已避免
+      */
+    DeviceStatus?: number;
+    /**
+      * 操作状态ID，与操作状态中文名的对应关系如下：
+
+- `1`：未授权
+- `2`：已授权
+- `3`：已处理
+- `4`：已预约
+- `5`：已取消
+- `6`：已避免
+      */
+    OperateStatus?: number;
+    /**
+      * 任务创建时间
+      */
+    CreateTime: string;
+    /**
+      * 任务授权时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthTime: string;
+    /**
+      * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskDetail: string;
+    /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 所在私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 所在私有网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcName?: string;
+    /**
+      * 所在子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
+    /**
+      * 所在子网名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetName?: string;
+    /**
+      * 实例公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanIp?: string;
+    /**
+      * 实例内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LanIp?: string;
+    /**
+      * 产品类型，支持取值：
+
+- `CVM`：云服务器
+- `CDH`：专用宿主机
+- `CPM2.0`：裸金属云服务器
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Product?: string;
+    /**
+      * 任务子类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskSubType?: string;
+    /**
+      * 任务授权类型
+      */
+    AuthType?: number;
+    /**
+      * 授权渠道，支持取值：
+
+- `Waiting_auth`：待授权
+- `Customer_auth`：客户操作授权
+- `System_mandatory_auth`：系统默认授权
+- `Pre_policy_auth`：预置策略授权
+      */
+    AuthSource?: string;
 }
 /**
  * DeleteLaunchTemplateVersions请求参数结构体
@@ -1138,6 +1286,15 @@ export interface DescribeInstancesOperationLimitRequest {
     Operation: string;
 }
 /**
+ * ResetInstancesPassword返回参数结构体
+ */
+export interface ResetInstancesPasswordResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyImageAttribute请求参数结构体
  */
 export interface ModifyImageAttributeRequest {
@@ -1798,13 +1955,97 @@ export interface DeleteLaunchTemplateVersionsResponse {
     RequestId?: string;
 }
 /**
- * ResetInstancesPassword返回参数结构体
+ * DescribeTaskInfo请求参数结构体
  */
-export interface ResetInstancesPasswordResponse {
+export interface DescribeTaskInfoRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
-    RequestId?: string;
+    Limit: number;
+    /**
+      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      */
+    Offset: number;
+    /**
+      * 按照指定的产品类型查询，支持取值：
+
+- `CVM`：云服务器
+- `CDH`：专用宿主机
+- `CPM2.0`：裸金属云服务器
+
+未传入或为空时，默认查询全部产品类型。
+      */
+    Product?: string;
+    /**
+      * 按照一个或多个任务状态ID进行过滤。
+`TaskStatus`（任务状态ID）与任务状态中文名的对应关系如下：
+
+- `1`：待授权
+- `2`：处理中
+- `3`：已结束
+- `4`：已预约
+- `5`：已取消
+- `6`：已避免
+
+各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789#.E4.BB.BB.E5.8A.A1.E7.8A.B6.E6.80.81)。
+      */
+    TaskStatus?: Array<number>;
+    /**
+      * 按照一个或多个任务类型ID进行过滤。
+
+`TaskTypeId`（任务类型ID）与任务类型中文名的对应关系如下：
+
+- `101`：实例运行隐患
+- `102`：实例运行异常
+- `103`：实例硬盘异常
+- `104`：实例网络连接异常
+- `105`：实例运行预警
+- `106`：实例硬盘预警
+- `107`：实例维护升级
+
+各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789#.E7.BB.B4.E4.BF.AE.E4.BB.BB.E5.8A.A1.E5.88.86.E7.B1.BB)。
+      */
+    TaskTypeIds?: Array<number>;
+    /**
+      * 按照一个或者多个任务ID查询。任务ID形如：`rep-xxxxxxxx`。
+      */
+    TaskIds?: Array<string>;
+    /**
+      * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 按照一个或者多个实例名称查询。
+      */
+    Aliases?: Array<string>;
+    /**
+      * 时间查询区间的起始位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当天`00:00:00`。
+      */
+    StartDate?: string;
+    /**
+      * 时间查询区间的终止位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当前时刻。
+      */
+    EndDate?: string;
+    /**
+      * 指定返回维修任务列表的排序字段，目前支持：
+
+- `CreateTime`：任务创建时间
+- `AuthTime`：任务授权时间
+- `EndTime`：任务结束时间
+
+未传入时或为空时，默认按`CreateTime`字段进行排序。
+      */
+    OrderField?: string;
+    /**
+      * 排序方式，目前支持：
+
+- `0`：升序（默认）
+- `1`：降序
+
+未传入或为空时，默认按升序排序。
+
+      */
+    Order?: number;
 }
 /**
  * InquiryPriceRunInstances请求参数结构体
@@ -3337,6 +3578,10 @@ TencentCloud: 腾讯云官方许可
 BYOL: 自带许可（Bring Your Own License）
       */
     LicenseType?: string;
+    /**
+      * 启动模式
+      */
+    BootMode?: string;
 }
 /**
  * 竞价相关选项
@@ -3708,9 +3953,18 @@ export interface ModifyHpcClusterAttributeRequest {
     Remark?: string;
 }
 /**
- * ModifyChcAttribute返回参数结构体
+ * DescribeTaskInfo返回参数结构体
  */
-export interface ModifyChcAttributeResponse {
+export interface DescribeTaskInfoResponse {
+    /**
+      * 查询返回的维修任务总数量。
+      */
+    TotalCount?: number;
+    /**
+      * 查询返回的维修任务列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepairTaskInfoSet?: Array<RepairTaskInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4937,6 +5191,24 @@ export interface ModifyHostsAttributeRequest {
       * 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/doc/api/403/4398)接口创建。可通过[`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API返回值中的`projectId`获取。后续使用[DescribeHosts](https://cloud.tencent.com/document/api/213/16474)接口查询实例时，项目ID可用于过滤结果。
       */
     ProjectId?: number;
+}
+/**
+ * RenewInstances请求参数结构体
+ */
+export interface RenewInstancesRequest {
+    /**
+      * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">
+包年包月实例该参数为必传参数。</dx-alert>
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
+      */
+    RenewPortableDataDisk?: boolean;
 }
 /**
  * ImportKeyPair请求参数结构体
