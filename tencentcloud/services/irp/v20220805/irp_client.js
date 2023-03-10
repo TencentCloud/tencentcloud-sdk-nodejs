@@ -28,6 +28,30 @@ class Client extends abstract_client_1.AbstractClient {
         super("irp.tencentcloudapi.com", "2022-08-05", clientConfig);
     }
     /**
+     * 上报电商类商品信息
+     */
+    async ReportGoodsInfo(req, cb) {
+        return this.request("ReportGoodsInfo", req, cb);
+    }
+    /**
+     * 上报电商类行为数据
+     */
+    async ReportGoodsBehavior(req, cb) {
+        return this.request("ReportGoodsBehavior", req, cb);
+    }
+    /**
+     * 上报信息流场景内的行为数据，随着数据的积累，模型的效果会逐渐稳定。
+     */
+    async ReportFeedBehavior(req, cb) {
+        return this.request("ReportFeedBehavior", req, cb);
+    }
+    /**
+     * 获取电商类推荐结果
+     */
+    async DescribeGoodsRecommend(req, cb) {
+        return this.request("DescribeGoodsRecommend", req, cb);
+    }
+    /**
      * 上报信息流用户信息，请务必确认用户的唯一性，并在请求推荐结果时指定用户的唯一标识信息（UserId），否则将无法进行千人千面的推荐
      */
     async ReportFeedUser(req, cb) {
@@ -38,12 +62,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReportFeedItem(req, cb) {
         return this.request("ReportFeedItem", req, cb);
-    }
-    /**
-     * 上报信息流场景内的行为数据，随着数据的积累，模型的效果会逐渐稳定。
-     */
-    async ReportFeedBehavior(req, cb) {
-        return this.request("ReportFeedBehavior", req, cb);
     }
     /**
      * 获取信息流推荐结果

@@ -724,7 +724,7 @@ export interface ChannelCreateFlowByFilesRequest {
   FlowName?: string
 
   /**
-   * 签署流程签约方列表，最多不超过5个参与方
+   * 签署流程签约方列表，最多不超过50个参与方
    */
   FlowApprovers?: Array<FlowApproverInfo>
 
@@ -795,6 +795,16 @@ MobileCheck：手机号验证
    * 操作者的信息，不用传
    */
   Operator?: UserInfo
+
+  /**
+   * 被抄送人信息列表
+   */
+  CcInfos?: Array<CcInfo>
+
+  /**
+   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   */
+  CcNotifyType?: number
 }
 
 /**
@@ -2017,6 +2027,11 @@ export interface FlowInfo {
 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
       */
   NeedSignReview?: boolean
+
+  /**
+   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   */
+  CcNotifyType?: number
 }
 
 /**
@@ -4153,4 +4168,25 @@ export interface CcInfo {
    * 被抄送人手机号，大陆11位手机号
    */
   Mobile?: string
+
+  /**
+      * 被抄送人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 被抄送人类型
+0--个人. 1--员工
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcType?: number
+
+  /**
+      * 被抄送人权限
+0--可查看
+1--可查看也可下载
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcPermission?: number
 }

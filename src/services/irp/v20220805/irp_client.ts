@@ -18,19 +18,30 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ReportFeedItemResponse,
-  ReportFeedUserRequest,
   FeedUserInfo,
-  FeedRecommendResponse,
   DocItem,
+  ReportFeedItemRequest,
+  ReportGoodsBehaviorResponse,
+  UserIdInfo,
+  FeedRecommendResponse,
+  UserPortraitInfo,
+  RecGoodsData,
+  GoodsInfo,
   DislikeInfo,
   ReportFeedBehaviorResponse,
-  ReportFeedItemRequest,
-  UserIdInfo,
+  ReportGoodsInfoResponse,
+  ReportFeedUserRequest,
   RecItemData,
-  ReportFeedBehaviorRequest,
   FeedBehaviorInfo,
   ReportFeedUserResponse,
+  StrUserIdInfo,
+  ReportFeedItemResponse,
+  DescribeGoodsRecommendRequest,
+  ReportGoodsBehaviorRequest,
+  ReportGoodsInfoRequest,
+  ReportFeedBehaviorRequest,
+  GoodsBehaviorInfo,
+  DescribeGoodsRecommendResponse,
   FeedRecommendRequest,
 } from "./irp_models"
 
@@ -41,6 +52,46 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("irp.tencentcloudapi.com", "2022-08-05", clientConfig)
+  }
+
+  /**
+   * 上报电商类商品信息
+   */
+  async ReportGoodsInfo(
+    req: ReportGoodsInfoRequest,
+    cb?: (error: string, rep: ReportGoodsInfoResponse) => void
+  ): Promise<ReportGoodsInfoResponse> {
+    return this.request("ReportGoodsInfo", req, cb)
+  }
+
+  /**
+   * 上报电商类行为数据
+   */
+  async ReportGoodsBehavior(
+    req: ReportGoodsBehaviorRequest,
+    cb?: (error: string, rep: ReportGoodsBehaviorResponse) => void
+  ): Promise<ReportGoodsBehaviorResponse> {
+    return this.request("ReportGoodsBehavior", req, cb)
+  }
+
+  /**
+   * 上报信息流场景内的行为数据，随着数据的积累，模型的效果会逐渐稳定。
+   */
+  async ReportFeedBehavior(
+    req: ReportFeedBehaviorRequest,
+    cb?: (error: string, rep: ReportFeedBehaviorResponse) => void
+  ): Promise<ReportFeedBehaviorResponse> {
+    return this.request("ReportFeedBehavior", req, cb)
+  }
+
+  /**
+   * 获取电商类推荐结果
+   */
+  async DescribeGoodsRecommend(
+    req: DescribeGoodsRecommendRequest,
+    cb?: (error: string, rep: DescribeGoodsRecommendResponse) => void
+  ): Promise<DescribeGoodsRecommendResponse> {
+    return this.request("DescribeGoodsRecommend", req, cb)
   }
 
   /**
@@ -61,16 +112,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReportFeedItemResponse) => void
   ): Promise<ReportFeedItemResponse> {
     return this.request("ReportFeedItem", req, cb)
-  }
-
-  /**
-   * 上报信息流场景内的行为数据，随着数据的积累，模型的效果会逐渐稳定。
-   */
-  async ReportFeedBehavior(
-    req: ReportFeedBehaviorRequest,
-    cb?: (error: string, rep: ReportFeedBehaviorResponse) => void
-  ): Promise<ReportFeedBehaviorResponse> {
-    return this.request("ReportFeedBehavior", req, cb)
   }
 
   /**

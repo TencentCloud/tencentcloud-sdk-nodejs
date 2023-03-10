@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cloudhsm.tencentcloudapi.com", "2019-11-12", clientConfig);
     }
     /**
+     * 获取告警事件
+     */
+    async GetAlarmEvent(req, cb) {
+        return this.request("GetAlarmEvent", req, cb);
+    }
+    /**
      * 修改VSM属性
      */
     async ModifyVsmAttributes(req, cb) {
@@ -58,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHSMByVpcId", req, cb);
     }
     /**
+     * 获取VSM监控信息
+     */
+    async GetVsmMonitorInfo(req, cb) {
+        return this.request("GetVsmMonitorInfo", req, cb);
+    }
+    /**
      * 通过SubnetId获取Hsm资源数
      */
     async DescribeHSMBySubnetId(req, cb) {
@@ -74,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSubnet(req, cb) {
         return this.request("DescribeSubnet", req, cb);
+    }
+    /**
+     * 修改告警事件
+     */
+    async ModifyAlarmEvent(req, cb) {
+        return this.request("ModifyAlarmEvent", req, cb);
     }
     /**
      * 获取当前地域所支持的设备列表

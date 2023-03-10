@@ -260,6 +260,20 @@ export interface ParquetKeyInfo {
     KeyNonExistingField: string;
 }
 /**
+ * DescribeCosRecharges返回参数结构体
+ */
+export interface DescribeCosRechargesResponse {
+    /**
+      * 见: CosRechargeInfo 结构描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data?: Array<CosRechargeInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeShipperTasks返回参数结构体
  */
 export interface DescribeShipperTasksResponse {
@@ -285,6 +299,19 @@ export interface CreateMachineGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 过滤器
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+      */
+    Key: string;
+    /**
+      * 需要过滤的值。
+      */
+    Values: Array<string>;
 }
 /**
  * DescribeConfigMachineGroups请求参数结构体
@@ -641,7 +668,7 @@ export interface OpenKafkaConsumerResponse {
     /**
       * 待消费TopicId
       */
-    TopicID: string;
+    TopicID?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -732,7 +759,7 @@ export interface CreateLogsetResponse {
     /**
       * 日志集ID
       */
-    LogsetId: string;
+    LogsetId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -753,29 +780,56 @@ export interface DeleteMachineGroupResponse {
 export interface Tag {
     /**
       * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Key: string;
     /**
       * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Value: string;
 }
 /**
- * DescribeExports请求参数结构体
+ * CreateCosRecharge请求参数结构体
  */
-export interface DescribeExportsRequest {
+export interface CreateCosRechargeRequest {
     /**
-      * 日志主题ID
+      * 日志主题 ID
       */
     TopicId: string;
     /**
-      * 分页的偏移量，默认值为0
+      * 日志集ID
       */
-    Offset?: number;
+    LogsetId: string;
     /**
-      * 分页单页限制数目，默认值为20，最大值100
+      * 投递任务名称
       */
-    Limit?: number;
+    Name: string;
+    /**
+      * COS存储桶
+      */
+    Bucket: string;
+    /**
+      * COS存储桶所在地域
+      */
+    BucketRegion: string;
+    /**
+      * COS文件所在文件夹的前缀
+      */
+    Prefix: string;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；
+默认为minimalist_log
+      */
+    LogType: string;
+    /**
+      * supported: "", "gzip", "lzop", "snappy”; 默认空
+      */
+    Compress?: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+      */
+    ExtractRuleInfo?: ExtractRuleInfo;
 }
 /**
  * 日志提取规则
@@ -1516,6 +1570,23 @@ export interface DescribeMachineGroupConfigsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCosRecharges请求参数结构体
+ */
+export interface DescribeCosRechargesRequest {
+    /**
+      * 日志主题 ID
+      */
+    TopicId: string;
+    /**
+      * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+      */
+    Status?: number;
+    /**
+      * 是否启用:   0： 未启用  ， 1：启用
+      */
+    Enable?: number;
+}
+/**
  * 机器组信息
  */
 export interface MachineGroupInfo {
@@ -1592,17 +1663,51 @@ export interface CloseKafkaConsumerResponse {
     RequestId?: string;
 }
 /**
- * 元字段索引配置
+ * DescribeMachineGroups请求参数结构体
  */
-export interface RuleTagInfo {
+export interface DescribeMachineGroupsRequest {
     /**
-      * 是否大小写敏感
+      * <br><li> machineGroupName
+
+按照【机器组名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> machineGroupId
+
+按照【机器组ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> tagKey
+
+按照【标签键】进行过滤。
+
+类型：String
+
+必选：否
+
+<br><li> tag:tagKey
+
+按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+类型：String
+
+必选：否
+
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
-    CaseSensitive: boolean;
+    Filters?: Array<Filter>;
     /**
-      * 元字段索引配置中的字段信息
+      * 分页的偏移量，默认值为0
       */
-    KeyValues: Array<KeyValueInfo>;
+    Offset?: number;
+    /**
+      * 分页单页的限制数目，默认值为20，最大值100
+      */
+    Limit?: number;
 }
 /**
  * CreateIndex请求参数结构体
@@ -1761,49 +1866,19 @@ export interface CreateTopicRequest {
     Period?: number;
 }
 /**
- * DescribeMachineGroups请求参数结构体
+ * DescribeExports请求参数结构体
  */
-export interface DescribeMachineGroupsRequest {
+export interface DescribeExportsRequest {
     /**
-      * <br><li> machineGroupName
-
-按照【机器组名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> machineGroupId
-
-按照【机器组ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> tagKey
-
-按照【标签键】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> tag:tagKey
-
-按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-类型：String
-
-必选：否
-
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+      * 日志主题ID
       */
-    Filters?: Array<Filter>;
+    TopicId: string;
     /**
       * 分页的偏移量，默认值为0
       */
     Offset?: number;
     /**
-      * 分页单页的限制数目，默认值为20，最大值100
+      * 分页单页限制数目，默认值为20，最大值100
       */
     Limit?: number;
 }
@@ -2095,6 +2170,19 @@ export interface CloseKafkaConsumerRequest {
       * CLS对应的topic标识
       */
     FromTopicId: string;
+}
+/**
+ * 元字段索引配置
+ */
+export interface RuleTagInfo {
+    /**
+      * 是否大小写敏感
+      */
+    CaseSensitive: boolean;
+    /**
+      * 元字段索引配置中的字段信息
+      */
+    KeyValues: Array<KeyValueInfo>;
 }
 /**
  * CreateExport请求参数结构体
@@ -3025,6 +3113,15 @@ export interface DescribeMachinesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCosRecharge返回参数结构体
+ */
+export interface ModifyCosRechargeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 投递日志的压缩配置
  */
 export interface CompressInfo {
@@ -3154,6 +3251,15 @@ export interface ShipperInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FilenameMode: number;
+}
+/**
+ * CreateCosRecharge返回参数结构体
+ */
+export interface CreateCosRechargeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 键值或者元字段索引的字段信息
@@ -3800,6 +3906,27 @@ export interface DeleteMachineGroupInfoResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCosRecharge请求参数结构体
+ */
+export interface ModifyCosRechargeRequest {
+    /**
+      * COS导入配置ID
+      */
+    Id: string;
+    /**
+      * 日志主题Id
+      */
+    TopicId: string;
+    /**
+      * COS导入任务名称
+      */
+    Name?: string;
+    /**
+      * 是否启用:   0： 未启用  ， 1：启用
+      */
+    Enable?: number;
+}
+/**
  * DescribeLogsets请求参数结构体
  */
 export interface DescribeLogsetsRequest {
@@ -3865,17 +3992,85 @@ export interface DeleteTopicResponse {
     RequestId?: string;
 }
 /**
- * 过滤器
+ * cos导入配置信息
  */
-export interface Filter {
+export interface CosRechargeInfo {
     /**
-      * 需要过滤的字段。
+      * COS导入配置ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Key: string;
+    Id: string;
     /**
-      * 需要过滤的值。
+      * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Values: Array<string>;
+    TopicId: string;
+    /**
+      * 日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogsetId: string;
+    /**
+      * cos导入任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * cos存储桶
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Bucket: string;
+    /**
+      * cos存储桶地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketRegion: string;
+    /**
+      * cos存储桶前缀地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Prefix: string;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志；
+默认为minimalist_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogType: string;
+    /**
+      * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 是否启用:   0： 未启用  ， 1：启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Enable: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 进度条百分值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Progress: number;
+    /**
+      * supported: "", "gzip", "lzop", "snappy”; 默认空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Compress: string;
+    /**
+      * 见： ExtractRuleInfo 结构描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtractRuleInfo: ExtractRuleInfo;
 }
 /**
  * 投递任务出入参 Content

@@ -64,6 +64,101 @@ export interface DescribeNotebookSessionStatementRequest {
     StatementId: string;
 }
 /**
+ * 网络配置
+ */
+export interface NetworkConnection {
+    /**
+      * 网络配置id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: number;
+    /**
+      * 网络配置唯一标志符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssociateId?: string;
+    /**
+      * 计算引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HouseId?: string;
+    /**
+      * 数据源id(已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionId?: string;
+    /**
+      * 网络配置状态（0-初始化，1-正常）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    State?: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: number;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: number;
+    /**
+      * 创建用户Appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Appid?: number;
+    /**
+      * 计算引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HouseName?: string;
+    /**
+      * 网络配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionName?: string;
+    /**
+      * 网络配置类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConnectionType?: number;
+    /**
+      * 创建用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin?: string;
+    /**
+      * 创建用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountUin?: string;
+    /**
+      * 网络配置描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConnectionDesc?: string;
+    /**
+      * 数据源vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionVpcId?: string;
+    /**
+      * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionSubnetId?: string;
+    /**
+      * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionCidrBlock?: string;
+    /**
+      * 数据源SubnetCidrBlock
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionSubnetCidrBlock?: string;
+}
+/**
  * CancelNotebookSessionStatement请求参数结构体
  */
 export interface CancelNotebookSessionStatementRequest {
@@ -1906,6 +2001,10 @@ export interface TPartition {
     TransformArgs?: Array<string>;
 }
 /**
+ * DescribeForbiddenTablePro请求参数结构体
+ */
+export declare type DescribeForbiddenTableProRequest = null;
+/**
  * CreateDataEngine返回参数结构体
  */
 export interface CreateDataEngineResponse {
@@ -3702,99 +3801,13 @@ export interface ViewResponseInfo {
     ModifiedTime: string;
 }
 /**
- * 网络配置
+ * DescribeForbiddenTablePro返回参数结构体
  */
-export interface NetworkConnection {
+export interface DescribeForbiddenTableProResponse {
     /**
-      * 网络配置id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Id?: number;
-    /**
-      * 网络配置唯一标志符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AssociateId?: string;
-    /**
-      * 计算引擎id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HouseId?: string;
-    /**
-      * 数据源id(已废弃)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionId?: string;
-    /**
-      * 网络配置状态（0-初始化，1-正常）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    State?: number;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime?: number;
-    /**
-      * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime?: number;
-    /**
-      * 创建用户Appid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Appid?: number;
-    /**
-      * 计算引擎名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HouseName?: string;
-    /**
-      * 网络配置名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionName?: string;
-    /**
-      * 网络配置类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NetworkConnectionType?: number;
-    /**
-      * 创建用户uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Uin?: string;
-    /**
-      * 创建用户SubAccountUin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubAccountUin?: string;
-    /**
-      * 网络配置描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NetworkConnectionDesc?: string;
-    /**
-      * 数据源vpcid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionVpcId?: string;
-    /**
-      * 数据源SubnetId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionSubnetId?: string;
-    /**
-      * 数据源SubnetId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionCidrBlock?: string;
-    /**
-      * 数据源SubnetCidrBlock
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionSubnetCidrBlock?: string;
+    RequestId?: string;
 }
 /**
  * CreateUser请求参数结构体

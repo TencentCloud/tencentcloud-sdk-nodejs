@@ -967,6 +967,22 @@ export interface DescribeThirdPartyAuthCodeRequest {
 }
 
 /**
+ * CreateReleaseFlow返回参数结构体
+ */
+export interface CreateReleaseFlowResponse {
+  /**
+      * 解除协议流程编号
+
+      */
+  FlowId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFlowInfo请求参数结构体
  */
 export interface DescribeFlowInfoRequest {
@@ -1851,6 +1867,83 @@ export interface DescribeFileUrlsResponse {
 }
 
 /**
+ * 成员企业信息
+ */
+export interface GroupOrganization {
+  /**
+      * 成员企业名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 成员企业别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alias?: string
+
+  /**
+      * 成员企业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationId?: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: number
+
+  /**
+      * 成员企业状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 是否为集团主企业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsMainOrganization?: boolean
+
+  /**
+      * 企业社会信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardNumber?: string
+
+  /**
+      * 企业超管信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminInfo?: Admin
+
+  /**
+      * 企业许可证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  License?: string
+
+  /**
+      * 企业许可证过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseExpireTime?: number
+
+  /**
+      * 成员企业加入集团时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JoinTime?: number
+
+  /**
+      * 是否可以使用审批流引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowEngineEnable?: boolean
+}
+
+/**
  * 授权用户
  */
 export interface AuthorizedUser {
@@ -2027,80 +2120,18 @@ export interface RegisterInfo {
 }
 
 /**
- * 成员企业信息
+ * CreateIntegrationEmployees返回参数结构体
  */
-export interface GroupOrganization {
+export interface CreateIntegrationEmployeesResponse {
   /**
-      * 成员企业名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name?: string
+   * 创建员工的结果
+   */
+  CreateEmployeeResult: CreateStaffResult
 
   /**
-      * 成员企业别名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alias?: string
-
-  /**
-      * 成员企业id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationId?: string
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime?: number
-
-  /**
-      * 成员企业状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status?: number
-
-  /**
-      * 是否为集团主企业
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsMainOrganization?: boolean
-
-  /**
-      * 企业社会信用代码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdCardNumber?: string
-
-  /**
-      * 企业超管信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminInfo?: Admin
-
-  /**
-      * 企业许可证
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  License?: string
-
-  /**
-      * 企业许可证过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LicenseExpireTime?: number
-
-  /**
-      * 成员企业加入集团时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  JoinTime?: number
-
-  /**
-      * 是否可以使用审批流引擎
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowEngineEnable?: boolean
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2129,18 +2160,30 @@ export interface CreateFlowSignUrlRequest {
 }
 
 /**
- * CreateIntegrationEmployees返回参数结构体
+ * CreateReleaseFlow请求参数结构体
  */
-export interface CreateIntegrationEmployeesResponse {
+export interface CreateReleaseFlowRequest {
   /**
-   * 创建员工的结果
+   * 调用方用户信息，userId 必填
    */
-  CreateEmployeeResult: CreateStaffResult
+  Operator: UserInfo
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 待解除的签署流程编号（即原签署流程的编号）
    */
-  RequestId?: string
+  NeedRelievedFlowId: string
+
+  /**
+   * 解除协议内容
+   */
+  ReliveInfo: RelieveInfo
+
+  /**
+      * 非必须，解除协议的本企业签署人列表，
+默认使用原流程的签署人列表,当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业其他已实名员工来替换原流程中的原签署人，注意需要指明原签署人的编号(ReceiptId,通过DescribeFlowInfo接口获取)来代表需要替换哪一个签署人
+解除协议的签署人数量不能多于原流程的签署人数量
+      */
+  ReleasedApprovers?: Array<ReleasedApprover>
 }
 
 /**
@@ -2695,6 +2738,11 @@ MobileCheck：手机号验证
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+
+  /**
+   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   */
+  CcNotifyType?: number
 }
 
 /**
@@ -2825,6 +2873,11 @@ export interface StartFlowRequest {
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+
+  /**
+   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   */
+  CcNotifyType?: number
 }
 
 /**
@@ -3504,6 +3557,45 @@ true--是，处理置白
 }
 
 /**
+ * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
+ */
+export interface RelieveInfo {
+  /**
+      * 解除理由，最大支持200个字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason: string
+
+  /**
+      * 解除后仍然有效的条款，保留条款，最大支持200个字
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemainInForceItem?: string
+
+  /**
+      * 原合同事项处理-费用结算，最大支持200个字
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalExpenseSettlement?: string
+
+  /**
+      * 原合同事项处理-其他事项，最大支持200个字
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalOtherSettlement?: string
+
+  /**
+      * 其他约定，最大支持200个字
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherDeals?: string
+}
+
+/**
  * CreateBatchCancelFlowUrl请求参数结构体
  */
 export interface CreateBatchCancelFlowUrlRequest {
@@ -3604,6 +3696,28 @@ export interface CcInfo {
    * 被抄送人手机号
    */
   Mobile?: string
+
+  /**
+      * 被抄送人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 被抄送人类型,
+0--个人
+1--员工
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcType?: number
+
+  /**
+      * 被抄送人权限
+0--可查看
+1--可查看也可下载
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcPermission?: number
 }
 
 /**
@@ -3640,6 +3754,31 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
    * 查询开启状态的用户信息
    */
   UserInfo: UserThreeFactor
+}
+
+/**
+ * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
+注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。
+ */
+export interface ReleasedApprover {
+  /**
+      * 签署人姓名，最大长度50个字符
+
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 签署人手机号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mobile: string
+
+  /**
+      * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RelievedApproverReceiptId: string
 }
 
 /**

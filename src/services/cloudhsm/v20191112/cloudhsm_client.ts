@@ -25,24 +25,31 @@ import {
   InquiryPriceBuyVsmRequest,
   DescribeVpcResponse,
   ModifyVsmAttributesRequest,
+  GetAlarmEventResponse,
+  ModifyAlarmEventRequest,
   DescribeSubnetResponse,
+  GetVsmMonitorInfoResponse,
   VsmInfo,
   DescribeSupportedHsmRequest,
-  SgUnit,
+  GetAlarmEventRequest,
   DescribeHSMByVpcIdResponse,
   DescribeUsgRuleResponse,
   Tag,
   ResourceInfo,
   DescribeVpcRequest,
-  Vpc,
+  AlarmPolicy,
   DescribeUsgRequest,
+  HsmInfo,
+  Vpc,
   DescribeVsmAttributesResponse,
   TagFilter,
   DescribeHSMByVpcIdRequest,
+  ModifyAlarmEventResponse,
   UsgRuleDetail,
   InquiryPriceBuyVsmResponse,
+  SgUnit,
   DescribeHSMBySubnetIdResponse,
-  HsmInfo,
+  GetVsmMonitorInfoRequest,
   DescribeUsgResponse,
   DescribeHSMBySubnetIdRequest,
   DescribeVsmsRequest,
@@ -60,6 +67,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cloudhsm.tencentcloudapi.com", "2019-11-12", clientConfig)
+  }
+
+  /**
+   * 获取告警事件
+   */
+  async GetAlarmEvent(
+    req?: GetAlarmEventRequest,
+    cb?: (error: string, rep: GetAlarmEventResponse) => void
+  ): Promise<GetAlarmEventResponse> {
+    return this.request("GetAlarmEvent", req, cb)
   }
 
   /**
@@ -113,6 +130,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取VSM监控信息
+   */
+  async GetVsmMonitorInfo(
+    req: GetVsmMonitorInfoRequest,
+    cb?: (error: string, rep: GetVsmMonitorInfoResponse) => void
+  ): Promise<GetVsmMonitorInfoResponse> {
+    return this.request("GetVsmMonitorInfo", req, cb)
+  }
+
+  /**
    * 通过SubnetId获取Hsm资源数
    */
   async DescribeHSMBySubnetId(
@@ -140,6 +167,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubnetResponse) => void
   ): Promise<DescribeSubnetResponse> {
     return this.request("DescribeSubnet", req, cb)
+  }
+
+  /**
+   * 修改告警事件
+   */
+  async ModifyAlarmEvent(
+    req: ModifyAlarmEventRequest,
+    cb?: (error: string, rep: ModifyAlarmEventResponse) => void
+  ): Promise<ModifyAlarmEventResponse> {
+    return this.request("ModifyAlarmEvent", req, cb)
   }
 
   /**

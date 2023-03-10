@@ -408,6 +408,16 @@ it("cvm.v20170312.RenewHosts", async function () {
     }
 })
 
+it("cvm.v20170312.RepairTaskControl", async function () {
+    try {
+       const data = await client.RepairTaskControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DescribeHosts", async function () {
     try {
        const data = await client.DescribeHosts({})

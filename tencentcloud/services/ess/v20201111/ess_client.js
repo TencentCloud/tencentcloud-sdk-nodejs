@@ -166,6 +166,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlow", req, cb);
     }
     /**
+     * 发起解除协议，主要应用场景为：基于一份已经签署的合同(签署流程)，进行解除操作。
+     */
+    async CreateReleaseFlow(req, cb) {
+        return this.request("CreateReleaseFlow", req, cb);
+    }
+    /**
      * 企业方可以通过此接口查询个人用户自动签开启状态
      */
     async DescribeUserAutoSignStatus(req, cb) {

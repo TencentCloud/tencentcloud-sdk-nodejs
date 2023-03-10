@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSubnetRequest, DescribeVsmsResponse, DescribeSupportedHsmResponse, InquiryPriceBuyVsmRequest, DescribeVpcResponse, ModifyVsmAttributesRequest, DescribeSubnetResponse, DescribeSupportedHsmRequest, DescribeHSMByVpcIdResponse, DescribeUsgRuleResponse, DescribeVpcRequest, DescribeUsgRequest, DescribeVsmAttributesResponse, DescribeHSMByVpcIdRequest, InquiryPriceBuyVsmResponse, DescribeHSMBySubnetIdResponse, DescribeUsgResponse, DescribeHSMBySubnetIdRequest, DescribeVsmsRequest, DescribeUsgRuleRequest, ModifyVsmAttributesResponse, DescribeVsmAttributesRequest } from "./cloudhsm_models";
+import { DescribeSubnetRequest, DescribeVsmsResponse, DescribeSupportedHsmResponse, InquiryPriceBuyVsmRequest, DescribeVpcResponse, ModifyVsmAttributesRequest, GetAlarmEventResponse, ModifyAlarmEventRequest, DescribeSubnetResponse, GetVsmMonitorInfoResponse, DescribeSupportedHsmRequest, GetAlarmEventRequest, DescribeHSMByVpcIdResponse, DescribeUsgRuleResponse, DescribeVpcRequest, DescribeUsgRequest, DescribeVsmAttributesResponse, DescribeHSMByVpcIdRequest, ModifyAlarmEventResponse, InquiryPriceBuyVsmResponse, DescribeHSMBySubnetIdResponse, GetVsmMonitorInfoRequest, DescribeUsgResponse, DescribeHSMBySubnetIdRequest, DescribeVsmsRequest, DescribeUsgRuleRequest, ModifyVsmAttributesResponse, DescribeVsmAttributesRequest } from "./cloudhsm_models";
 /**
  * cloudhsm client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取告警事件
+     */
+    GetAlarmEvent(req?: GetAlarmEventRequest, cb?: (error: string, rep: GetAlarmEventResponse) => void): Promise<GetAlarmEventResponse>;
     /**
      * 修改VSM属性
      */
@@ -28,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeHSMByVpcId(req: DescribeHSMByVpcIdRequest, cb?: (error: string, rep: DescribeHSMByVpcIdResponse) => void): Promise<DescribeHSMByVpcIdResponse>;
     /**
+     * 获取VSM监控信息
+     */
+    GetVsmMonitorInfo(req: GetVsmMonitorInfoRequest, cb?: (error: string, rep: GetVsmMonitorInfoResponse) => void): Promise<GetVsmMonitorInfoResponse>;
+    /**
      * 通过SubnetId获取Hsm资源数
      */
     DescribeHSMBySubnetId(req: DescribeHSMBySubnetIdRequest, cb?: (error: string, rep: DescribeHSMBySubnetIdResponse) => void): Promise<DescribeHSMBySubnetIdResponse>;
@@ -39,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 查询子网列表
      */
     DescribeSubnet(req: DescribeSubnetRequest, cb?: (error: string, rep: DescribeSubnetResponse) => void): Promise<DescribeSubnetResponse>;
+    /**
+     * 修改告警事件
+     */
+    ModifyAlarmEvent(req: ModifyAlarmEventRequest, cb?: (error: string, rep: ModifyAlarmEventResponse) => void): Promise<ModifyAlarmEventResponse>;
     /**
      * 获取当前地域所支持的设备列表
      */

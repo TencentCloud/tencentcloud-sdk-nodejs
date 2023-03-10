@@ -208,6 +208,16 @@ it("ess.v20201111.CreateFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateReleaseFlow", async function () {
+    try {
+       const data = await client.CreateReleaseFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.DescribeUserAutoSignStatus({})

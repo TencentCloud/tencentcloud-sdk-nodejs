@@ -1108,12 +1108,12 @@ export interface ClusterInfo {
       */
     ApiAccessIpv6: string;
     /**
-      * 集群类型
+      * 集群类型，0,1:共享集群; 2:独立集群
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterType: number;
     /**
-      * 集群状态
+      * 集群状态, 0：表示正常运行中，1：表示冻结隔离一般欠费进入此状态，2：表示待回收，一般用户主动触发删除进入这个状态，3：待释放，进入这个状态，表示可以释放此表占用的资源了，4：变更中
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterStatus: number;
@@ -1176,6 +1176,11 @@ export interface ClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsReadOnlyUlogBackupExpireDay: number;
+    /**
+      * restproxy状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestProxyStatus: number;
 }
 /**
  * DisableRestProxy请求参数结构体
@@ -1854,6 +1859,11 @@ export interface ServerDetailInfo {
       * 写次数
       */
     WriteNum: number;
+    /**
+      * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
 }
 /**
  * 表格详情信息
@@ -2911,6 +2921,11 @@ export interface ProxyDetailInfo {
       * 慢处理包速度
       */
     SlowProcessSpeed: number;
+    /**
+      * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
 }
 /**
  * 表定义描述文件详情，不包含文件内容
@@ -3098,4 +3113,23 @@ export interface TableGroupInfo {
       * 表格组包含的表格存储总量（MB）
       */
     TotalSize: number;
+    /**
+      * 表格Txh备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TxhBackupExpireDay: number;
+    /**
+      * 是否开启mysql负载均衡,0未开启 1开启中 2已开启
+      */
+    EnableMysql: number;
+    /**
+      * mysql负载均衡vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MysqlConnIp: string;
+    /**
+      * mysql负载均衡vport
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MysqlConnPort: number;
 }

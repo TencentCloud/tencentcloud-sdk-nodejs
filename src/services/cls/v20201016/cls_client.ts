@@ -29,8 +29,10 @@ import {
   ModifyTopicRequest,
   DeleteLogsetResponse,
   ParquetKeyInfo,
+  DescribeCosRechargesResponse,
   DescribeShipperTasksResponse,
   CreateMachineGroupResponse,
+  Filter,
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
   CreateLogsetRequest,
@@ -58,7 +60,7 @@ import {
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
   Tag,
-  DescribeExportsRequest,
+  CreateCosRechargeRequest,
   ExtractRuleInfo,
   TopicInfo,
   DescribeConsumerRequest,
@@ -88,17 +90,18 @@ import {
   RetryShipperTaskResponse,
   SplitPartitionRequest,
   DescribeMachineGroupConfigsResponse,
+  DescribeCosRechargesRequest,
   MachineGroupInfo,
   DescribeLogHistogramResponse,
   CloseKafkaConsumerResponse,
-  RuleTagInfo,
+  DescribeMachineGroupsRequest,
   CreateIndexRequest,
   DescribeLogsetsResponse,
   DeleteConsumerResponse,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
   CreateTopicRequest,
-  DescribeMachineGroupsRequest,
+  DescribeExportsRequest,
   AlarmTarget,
   OpenKafkaConsumerRequest,
   DeleteConfigResponse,
@@ -114,6 +117,7 @@ import {
   AnalysisDimensional,
   ShipperTaskInfo,
   CloseKafkaConsumerRequest,
+  RuleTagInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
   DescribeMachineGroupsResponse,
@@ -151,6 +155,7 @@ import {
   ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
   DescribeMachinesResponse,
+  ModifyCosRechargeResponse,
   CompressInfo,
   ApplyConfigToMachineGroupResponse,
   DeleteAlarmRequest,
@@ -158,6 +163,7 @@ import {
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
   ShipperInfo,
+  CreateCosRechargeResponse,
   KeyValueInfo,
   AddMachineGroupInfoResponse,
   ModifyMachineGroupRequest,
@@ -184,10 +190,11 @@ import {
   ModifyConfigExtraRequest,
   ModifyLogsetRequest,
   DeleteMachineGroupInfoResponse,
+  ModifyCosRechargeRequest,
   DescribeLogsetsRequest,
   ParquetInfo,
   DeleteTopicResponse,
-  Filter,
+  CosRechargeInfo,
   ConsumerContent,
   CreateExportResponse,
   HostFileInfo,
@@ -255,13 +262,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取制定机器组下的机器状态
+   * 本接口用于获取cos导入配置
    */
-  async DescribeMachines(
-    req: DescribeMachinesRequest,
-    cb?: (error: string, rep: DescribeMachinesResponse) => void
-  ): Promise<DescribeMachinesResponse> {
-    return this.request("DescribeMachines", req, cb)
+  async DescribeCosRecharges(
+    req: DescribeCosRechargesRequest,
+    cb?: (error: string, rep: DescribeCosRechargesResponse) => void
+  ): Promise<DescribeCosRechargesResponse> {
+    return this.request("DescribeCosRecharges", req, cb)
   }
 
   /**
@@ -546,6 +553,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于分裂主题分区
+   */
+  async SplitPartition(
+    req: SplitPartitionRequest,
+    cb?: (error: string, rep: SplitPartitionResponse) => void
+  ): Promise<SplitPartitionResponse> {
+    return this.request("SplitPartition", req, cb)
+  }
+
+  /**
    * 该接口用于删除通知渠道组
    */
   async DeleteAlarmNotice(
@@ -583,6 +600,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
   ): Promise<ModifyAlarmNoticeResponse> {
     return this.request("ModifyAlarmNotice", req, cb)
+  }
+
+  /**
+   * 获取制定机器组下的机器状态
+   */
+  async DescribeMachines(
+    req: DescribeMachinesRequest,
+    cb?: (error: string, rep: DescribeMachinesResponse) => void
+  ): Promise<DescribeMachinesResponse> {
+    return this.request("DescribeMachines", req, cb)
   }
 
   /**
@@ -860,16 +887,6 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于分裂主题分区
-   */
-  async SplitPartition(
-    req: SplitPartitionRequest,
-    cb?: (error: string, rep: SplitPartitionResponse) => void
-  ): Promise<SplitPartitionResponse> {
-    return this.request("SplitPartition", req, cb)
-  }
-
-  /**
    * 获取采集规则配置
    */
   async DescribeConfigs(
@@ -877,6 +894,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DescribeConfigsResponse) => void
   ): Promise<DescribeConfigsResponse> {
     return this.request("DescribeConfigs", req, cb)
+  }
+
+  /**
+   * 本接口用于创建cos导入任务
+   */
+  async CreateCosRecharge(
+    req: CreateCosRechargeRequest,
+    cb?: (error: string, rep: CreateCosRechargeResponse) => void
+  ): Promise<CreateCosRechargeResponse> {
+    return this.request("CreateCosRecharge", req, cb)
   }
 
   /**
@@ -927,6 +954,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void
   ): Promise<DescribeConfigMachineGroupsResponse> {
     return this.request("DescribeConfigMachineGroups", req, cb)
+  }
+
+  /**
+   * 本接口用于修改cos导入任务
+   */
+  async ModifyCosRecharge(
+    req: ModifyCosRechargeRequest,
+    cb?: (error: string, rep: ModifyCosRechargeResponse) => void
+  ): Promise<ModifyCosRechargeResponse> {
+    return this.request("ModifyCosRecharge", req, cb)
   }
 
   /**

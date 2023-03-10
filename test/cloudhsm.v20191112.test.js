@@ -18,6 +18,16 @@ const client = new tencentcloud.cloudhsm.v20191112.Client({
 })
 describe("cloudhsm.v20191112.test.js", function () {
 
+it("cloudhsm.v20191112.GetAlarmEvent", async function () {
+    try {
+       const data = await client.GetAlarmEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudhsm.v20191112.ModifyVsmAttributes", async function () {
     try {
        const data = await client.ModifyVsmAttributes({})
@@ -68,6 +78,16 @@ it("cloudhsm.v20191112.DescribeHSMByVpcId", async function () {
     }
 })
 
+it("cloudhsm.v20191112.GetVsmMonitorInfo", async function () {
+    try {
+       const data = await client.GetVsmMonitorInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudhsm.v20191112.DescribeHSMBySubnetId", async function () {
     try {
        const data = await client.DescribeHSMBySubnetId({})
@@ -91,6 +111,16 @@ it("cloudhsm.v20191112.DescribeUsg", async function () {
 it("cloudhsm.v20191112.DescribeSubnet", async function () {
     try {
        const data = await client.DescribeSubnet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudhsm.v20191112.ModifyAlarmEvent", async function () {
+    try {
+       const data = await client.ModifyAlarmEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

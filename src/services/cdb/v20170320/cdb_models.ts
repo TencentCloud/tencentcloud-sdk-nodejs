@@ -3938,12 +3938,12 @@ export interface DescribeCloneListResponse {
   /**
    * 满足条件的条目数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 克隆任务列表。
    */
-  Items: Array<CloneItem>
+  Items?: Array<CloneItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5597,6 +5597,16 @@ export interface CloneItem {
    * 任务状态，包括以下状态：initial,running,wait_complete,success,failed
    */
   TaskStatus: string
+
+  /**
+   * 克隆实例所在地域Id
+   */
+  NewRegionId: number
+
+  /**
+   * 源实例所在地域Id
+   */
+  SrcRegionId: number
 }
 
 /**

@@ -251,6 +251,21 @@ export interface TerminateInstancesResponse {
 }
 
 /**
+ * RepairTaskControl返回参数结构体
+ */
+export interface RepairTaskControlResponse {
+  /**
+   * 已完成授权的维修任务ID。
+   */
+  TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstancesChargeType返回参数结构体
  */
 export interface ModifyInstancesChargeTypeResponse {
@@ -945,6 +960,45 @@ export interface InstanceTypeConfig {
    * FPGA核数，单位：核。
    */
   FPGA: number
+}
+
+/**
+ * RepairTaskControl请求参数结构体
+ */
+export interface RepairTaskControlRequest {
+  /**
+      * 待授权任务实例对应的产品类型，支持取值：
+
+- `CVM`：云服务器
+- `CDH`：专用宿主机
+- `CPM2.0`：裸金属云服务器
+      */
+  Product: string
+
+  /**
+   * 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 维修任务ID。
+   */
+  TaskId: string
+
+  /**
+   * 操作类型，当前只支持传入`AuthorizeRepair`。
+   */
+  Operate: string
+
+  /**
+   * 预约授权时间，形如`2023-01-01 12:00:00`。预约时间需晚于当前时间至少5分钟，且在48小时之内。
+   */
+  OrderAuthTime?: string
+
+  /**
+   * 附加的授权处理策略。
+   */
+  TaskSubMethod?: string
 }
 
 /**
@@ -2366,12 +2420,12 @@ export interface DescribeTaskInfoRequest {
   Aliases?: Array<string>
 
   /**
-   * 时间查询区间的起始位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当天`00:00:00`。
+   * 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当天`00:00:00`。
    */
   StartDate?: string
 
   /**
-   * 时间查询区间的终止位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当前时刻。
+   * 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当前时刻。
    */
   EndDate?: string
 
@@ -5396,6 +5450,11 @@ export interface TerminateInstancesRequest {
    * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
    */
   InstanceIds: Array<string>
+
+  /**
+   * 释放实例挂载的包年包月数据盘。
+   */
+  ReleasePrepaidDataDisks?: boolean
 }
 
 /**

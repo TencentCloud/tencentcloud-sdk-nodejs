@@ -40,6 +40,7 @@ import {
   AiReviewTaskProhibitedOcrResult,
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
+  DeleteScheduleResponse,
   ManageTaskResponse,
   FlowMediaInfo,
   DeleteWorkflowRequest,
@@ -70,6 +71,7 @@ import {
   DeleteContentReviewTemplateRequest,
   StartStreamLinkFlowResponse,
   AiReviewPoliticalTaskInput,
+  ModifyScheduleRequest,
   CreateOutputRTPSettingsDestinations,
   ClassificationConfigureInfo,
   MediaAiAnalysisClassificationItem,
@@ -106,6 +108,7 @@ import {
   DescribeStreamLinkFlowSRTStatisticsRequest,
   MediaAiAnalysisCoverItem,
   CosInputInfo,
+  CreateScheduleResponse,
   TagConfigureInfo,
   DescribeWordSamplesResponse,
   FlowStatisticsArray,
@@ -144,13 +147,14 @@ import {
   AiRecognitionTaskAsrFullTextResultInput,
   DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
+  DisableScheduleRequest,
   RTMPPullSourceAddress,
   CosOutputStorage,
-  AiRecognitionTaskFaceSegmentItem,
+  MediaProcessTaskAnimatedGraphicResult,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
   ClassificationConfigureInfoForUpdate,
-  DeleteAdaptiveDynamicStreamingTemplateResponse,
+  CreateScheduleRequest,
   CreateAnimatedGraphicsTemplateRequest,
   ParseNotificationRequest,
   CreateWordSamplesRequest,
@@ -162,6 +166,7 @@ import {
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   ProhibitedAsrReviewTemplateInfoForUpdate,
+  DisableScheduleResponse,
   ModifyAnimatedGraphicsTemplateResponse,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
@@ -186,6 +191,7 @@ import {
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
+  EnableScheduleRequest,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
   VideoTemplateInfo,
@@ -196,7 +202,7 @@ import {
   DescribeWatermarkTemplatesRequest,
   CreateOutputInfo,
   TaskOutputStorage,
-  FlowLogInfo,
+  MediaProcessTaskResult,
   ModifyAIAnalysisTemplateRequest,
   UserDefineConfigureInfo,
   ColorEnhanceConfig,
@@ -207,7 +213,7 @@ import {
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   MediaAnimatedGraphicsItem,
   ModifyWordSampleRequest,
-  MediaProcessTaskAnimatedGraphicResult,
+  AiRecognitionTaskFaceSegmentItem,
   AiAnalysisTaskTagResult,
   RTMPAddressDestination,
   AiAnalysisTaskTagOutput,
@@ -219,6 +225,7 @@ import {
   MediaProcessTaskSnapshotByTimeOffsetResult,
   DescribeOutputHLSPullSettings,
   AiRecognitionTaskTransTextResultInput,
+  DescribeSchedulesResponse,
   ImageQualityEnhanceConfig,
   DescribeStreamLinkRegionsResponse,
   AiSampleWord,
@@ -252,14 +259,16 @@ import {
   WorkflowTrigger,
   HLSPullSourceAddress,
   LiveStreamAiRecognitionResultInfo,
-  LiveStreamAiReviewImagePoliticalResult,
+  ActivityPara,
   TerrorismOcrReviewTemplateInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   ModifyImageSpriteTemplateResponse,
   CreateWatermarkTemplateRequest,
   ScheduleAnalysisTaskResult,
   TerrorismConfigureInfoForUpdate,
+  EnableScheduleResponse,
   OutputSRTSourceAddressResp,
+  DeleteAdaptiveDynamicStreamingTemplateResponse,
   StreamLinkRegionInfo,
   FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
@@ -268,6 +277,7 @@ import {
   DescribeStreamLinkActivateStateRequest,
   AIAnalysisTemplateItem,
   HeadTailParameter,
+  LiveStreamAiReviewImagePoliticalResult,
   RawImageWatermarkInput,
   DescribeImageSpriteTemplatesRequest,
   AiSampleTagOperation,
@@ -300,6 +310,7 @@ import {
   AiAnalysisTaskCoverOutput,
   AiContentReviewTaskInput,
   InputAddress,
+  DeleteScheduleRequest,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
   AiAnalysisTaskInput,
@@ -323,7 +334,7 @@ import {
   SubtitleTemplate,
   LiveStreamProcessTask,
   AiReviewProhibitedAsrTaskInput,
-  MediaContentReviewSegmentItem,
+  DescribeMediaMetaDataResponse,
   TerrorismOcrReviewTemplateInfo,
   AiReviewTaskPornResult,
   DescribeStreamLinkFlowRealtimeStatusRequest,
@@ -369,11 +380,12 @@ import {
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeOutputRTMPPullServerUrl,
   AiRecognitionTaskOcrWordsSegmentItem,
-  MediaProcessTaskResult,
+  FlowLogInfo,
   DeleteWordSamplesResponse,
   LiveStreamTransTextRecognitionResult,
   WatermarkInput,
   EnableWorkflowResponse,
+  Activity,
   AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
   CreateStreamLinkOutputInfoRequest,
@@ -431,6 +443,7 @@ import {
   CreateInput,
   AiReviewTerrorismTaskInput,
   DescribeWorkflowsRequest,
+  DescribeSchedulesRequest,
   MediaAudioStreamItem,
   LiveStreamAiReviewImageTerrorismResult,
   ProcessLiveStreamRequest,
@@ -442,11 +455,12 @@ import {
   DescribeFlow,
   CreateWatermarkTemplateResponse,
   DescribeSampleSnapshotTemplatesResponse,
-  DescribeMediaMetaDataResponse,
+  MediaContentReviewSegmentItem,
   DescribeStreamLinkFlowRealtimeStatusResponse,
   TerrorismImgReviewTemplateInfo,
   FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
+  SchedulesInfo,
   DisableWorkflowRequest,
   PoliticalConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
@@ -459,6 +473,7 @@ import {
   DeleteTranscodeTemplateResponse,
   MediaTranscodeItem,
   DescribePersonSamplesResponse,
+  ModifyScheduleResponse,
   PornConfigureInfo,
   ModifyInput,
   VideoDenoiseConfig,
@@ -523,36 +538,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询媒体输入流的配置信息。
-   */
-  async DescribeStreamLinkFlows(
-    req: DescribeStreamLinkFlowsRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowsResponse) => void
-  ): Promise<DescribeStreamLinkFlowsResponse> {
-    return this.request("DescribeStreamLinkFlows", req, cb)
-  }
-
-  /**
-   * 停止媒体传输流。
-   */
-  async StopStreamLinkFlow(
-    req: StopStreamLinkFlowRequest,
-    cb?: (error: string, rep: StopStreamLinkFlowResponse) => void
-  ): Promise<StopStreamLinkFlowResponse> {
-    return this.request("StopStreamLinkFlow", req, cb)
-  }
-
-  /**
-   * 修改媒体传输流的输出配置。
-   */
-  async ModifyStreamLinkOutputInfo(
-    req: ModifyStreamLinkOutputInfoRequest,
-    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
-  ): Promise<ModifyStreamLinkOutputInfoResponse> {
-    return this.request("ModifyStreamLinkOutputInfo", req, cb)
-  }
-
-  /**
    * 创建用户自定义指定时间点截图模板，数量上限：16。
    */
   async CreateSnapshotByTimeOffsetTemplate(
@@ -573,55 +558,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改用户自定义内容分析模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
-     */
-  async ModifyAIAnalysisTemplate(
-    req: ModifyAIAnalysisTemplateRequest,
-    cb?: (error: string, rep: ModifyAIAnalysisTemplateResponse) => void
-  ): Promise<ModifyAIAnalysisTemplateResponse> {
-    return this.request("ModifyAIAnalysisTemplate", req, cb)
-  }
-
-  /**
-   * 删除媒体传输流的输出配置。
+   * 创建用户自定义转动图模板，数量上限：16。
    */
-  async DeleteStreamLinkOutput(
-    req: DeleteStreamLinkOutputRequest,
-    cb?: (error: string, rep: DeleteStreamLinkOutputResponse) => void
-  ): Promise<DeleteStreamLinkOutputResponse> {
-    return this.request("DeleteStreamLinkOutput", req, cb)
-  }
-
-  /**
-   * 修改用户自定义内容审核模板。
-   */
-  async ModifyContentReviewTemplate(
-    req: ModifyContentReviewTemplateRequest,
-    cb?: (error: string, rep: ModifyContentReviewTemplateResponse) => void
-  ): Promise<ModifyContentReviewTemplateResponse> {
-    return this.request("ModifyContentReviewTemplate", req, cb)
-  }
-
-  /**
-   * 创建用户自定义内容审核模板，数量上限：50。
-   */
-  async CreateContentReviewTemplate(
-    req: CreateContentReviewTemplateRequest,
-    cb?: (error: string, rep: CreateContentReviewTemplateResponse) => void
-  ): Promise<CreateContentReviewTemplateResponse> {
-    return this.request("CreateContentReviewTemplate", req, cb)
-  }
-
-  /**
-   * 创建用户自定义采样截图模板，数量上限：16。
-   */
-  async CreateSampleSnapshotTemplate(
-    req: CreateSampleSnapshotTemplateRequest,
-    cb?: (error: string, rep: CreateSampleSnapshotTemplateResponse) => void
-  ): Promise<CreateSampleSnapshotTemplateResponse> {
-    return this.request("CreateSampleSnapshotTemplate", req, cb)
+  async CreateAnimatedGraphicsTemplate(
+    req: CreateAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
+  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
+    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
   }
 
   /**
@@ -639,79 +582,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除用户自定义内容分析模板。
-
-注意：模板 ID 为 10000 以下的为系统预置模板，不允许删除。
-     */
-  async DeleteAIAnalysisTemplate(
-    req: DeleteAIAnalysisTemplateRequest,
-    cb?: (error: string, rep: DeleteAIAnalysisTemplateResponse) => void
-  ): Promise<DeleteAIAnalysisTemplateResponse> {
-    return this.request("DeleteAIAnalysisTemplate", req, cb)
-  }
-
-  /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
-     */
-  async ParseLiveStreamProcessNotification(
-    req: ParseLiveStreamProcessNotificationRequest,
-    cb?: (error: string, rep: ParseLiveStreamProcessNotificationResponse) => void
-  ): Promise<ParseLiveStreamProcessNotificationResponse> {
-    return this.request("ParseLiveStreamProcessNotification", req, cb)
-  }
-
-  /**
-   * 根据工作流 ID，获取工作流详情列表。
-   */
-  async DescribeWorkflows(
-    req: DescribeWorkflowsRequest,
-    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
-  ): Promise<DescribeWorkflowsResponse> {
-    return this.request("DescribeWorkflows", req, cb)
-  }
-
-  /**
-   * 查询指定时间点截图模板，支持根据条件，分页查询。
-   */
-  async DescribeSnapshotByTimeOffsetTemplates(
-    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
-    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
-  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
-    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
-  }
-
-  /**
-   * 获取媒体的元信息，包括视频画面宽、高、编码格式、时长、帧率等。
-   */
-  async DescribeMediaMetaData(
-    req: DescribeMediaMetaDataRequest,
-    cb?: (error: string, rep: DescribeMediaMetaDataResponse) => void
-  ): Promise<DescribeMediaMetaDataResponse> {
-    return this.request("DescribeMediaMetaData", req, cb)
-  }
-
-  /**
-   * 重新设置一个已经存在且处于禁用状态的工作流。
-   */
-  async ResetWorkflow(
-    req: ResetWorkflowRequest,
-    cb?: (error: string, rep: ResetWorkflowResponse) => void
-  ): Promise<ResetWorkflowResponse> {
-    return this.request("ResetWorkflow", req, cb)
-  }
-
-  /**
-   * 修改用户自定义转码模板信息。
-   */
-  async ModifyTranscodeTemplate(
-    req: ModifyTranscodeTemplateRequest,
-    cb?: (error: string, rep: ModifyTranscodeTemplateResponse) => void
-  ): Promise<ModifyTranscodeTemplateResponse> {
-    return this.request("ModifyTranscodeTemplate", req, cb)
-  }
-
-  /**
    * 删除用户自定义转动图模板。
    */
   async DeleteAnimatedGraphicsTemplate(
@@ -719,26 +589,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
   ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
     return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
-   * 查询媒体输入流的配置信息。
-   */
-  async DescribeStreamLinkFlow(
-    req: DescribeStreamLinkFlowRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowResponse) => void
-  ): Promise<DescribeStreamLinkFlowResponse> {
-    return this.request("DescribeStreamLinkFlow", req, cb)
-  }
-
-  /**
-   * 删除媒体传输的传输流配置。
-   */
-  async DeleteStreamLinkFlow(
-    req: DeleteStreamLinkFlowRequest,
-    cb?: (error: string, rep: DeleteStreamLinkFlowResponse) => void
-  ): Promise<DeleteStreamLinkFlowResponse> {
-    return this.request("DeleteStreamLinkFlow", req, cb)
   }
 
   /**
@@ -752,23 +602,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询媒体传输流的日志信息。
+   * 删除用户自定义转码模板。
    */
-  async DescribeStreamLinkFlowLogs(
-    req: DescribeStreamLinkFlowLogsRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowLogsResponse) => void
-  ): Promise<DescribeStreamLinkFlowLogsResponse> {
-    return this.request("DescribeStreamLinkFlowLogs", req, cb)
-  }
-
-  /**
-   * 查询媒体传输流的SRT质量数据。
-   */
-  async DescribeStreamLinkFlowSRTStatistics(
-    req: DescribeStreamLinkFlowSRTStatisticsRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowSRTStatisticsResponse) => void
-  ): Promise<DescribeStreamLinkFlowSRTStatisticsResponse> {
-    return this.request("DescribeStreamLinkFlowSRTStatistics", req, cb)
+  async DeleteTranscodeTemplate(
+    req: DeleteTranscodeTemplateRequest,
+    cb?: (error: string, rep: DeleteTranscodeTemplateResponse) => void
+  ): Promise<DeleteTranscodeTemplateResponse> {
+    return this.request("DeleteTranscodeTemplate", req, cb)
   }
 
   /**
@@ -782,86 +622,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义内容识别模板。
-   */
-  async ModifyAIRecognitionTemplate(
-    req: ModifyAIRecognitionTemplateRequest,
-    cb?: (error: string, rep: ModifyAIRecognitionTemplateResponse) => void
-  ): Promise<ModifyAIRecognitionTemplateResponse> {
-    return this.request("ModifyAIRecognitionTemplate", req, cb)
-  }
-
-  /**
-   * 创建媒体传输流的输出信息。
-   */
-  async CreateStreamLinkOutputInfo(
-    req: CreateStreamLinkOutputInfoRequest,
-    cb?: (error: string, rep: CreateStreamLinkOutputInfoResponse) => void
-  ): Promise<CreateStreamLinkOutputInfoResponse> {
-    return this.request("CreateStreamLinkOutputInfo", req, cb)
-  }
-
-  /**
-   * 修改用户自定义采样截图模板。
-   */
-  async ModifySampleSnapshotTemplate(
-    req: ModifySampleSnapshotTemplateRequest,
-    cb?: (error: string, rep: ModifySampleSnapshotTemplateResponse) => void
-  ): Promise<ModifySampleSnapshotTemplateResponse> {
-    return this.request("ModifySampleSnapshotTemplate", req, cb)
-  }
-
-  /**
-   * 删除用户自定义水印模板。
-   */
-  async DeleteWatermarkTemplate(
-    req: DeleteWatermarkTemplateRequest,
-    cb?: (error: string, rep: DeleteWatermarkTemplateResponse) => void
-  ): Promise<DeleteWatermarkTemplateResponse> {
-    return this.request("DeleteWatermarkTemplate", req, cb)
-  }
-
-  /**
-   * 该接口用于根据素材 ID，删除素材样本。
-   */
-  async DeletePersonSample(
-    req: DeletePersonSampleRequest,
-    cb?: (error: string, rep: DeletePersonSampleResponse) => void
-  ): Promise<DeletePersonSampleResponse> {
-    return this.request("DeletePersonSample", req, cb)
-  }
-
-  /**
-   * 删除用户自定义转码模板。
-   */
-  async DeleteTranscodeTemplate(
-    req: DeleteTranscodeTemplateRequest,
-    cb?: (error: string, rep: DeleteTranscodeTemplateResponse) => void
-  ): Promise<DeleteTranscodeTemplateResponse> {
-    return this.request("DeleteTranscodeTemplate", req, cb)
-  }
-
-  /**
-   * 删除用户自定义指定时间点截图模板。
-   */
-  async DeleteSnapshotByTimeOffsetTemplate(
-    req: DeleteSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
-  }
-
-  /**
-   * 修改用户自定义转动图模板。
-   */
-  async ModifyAnimatedGraphicsTemplate(
-    req: ModifyAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
-  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
-    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
    * 该接口用于根据应用场景、关键词、标签，分页查询关键词样本信息。
    */
   async DescribeWordSamples(
@@ -872,33 +632,34 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义水印模板，水印类型不允许修改。
-   */
-  async ModifyWatermarkTemplate(
-    req: ModifyWatermarkTemplateRequest,
-    cb?: (error: string, rep: ModifyWatermarkTemplateResponse) => void
-  ): Promise<ModifyWatermarkTemplateResponse> {
-    return this.request("ModifyWatermarkTemplate", req, cb)
+     * 对 URL视频链接 或 COS 中的媒体文件发起处理任务，功能包括：
+1. 视频转码（普通转码、极速高清转码、音视频增强）；
+2. 视频转动图；
+3. 对视频按指定时间点截图；
+4. 对视频采样截图；
+5. 对视频截图雪碧图；
+6. 对视频转自适应码流；
+7. 智能内容审核（鉴黄、敏感信息检测）；
+8. 智能内容分析（标签、分类、封面、按帧标签、拆条、集锦、片头片尾）；
+9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）。
+     */
+  async ProcessMedia(
+    req: ProcessMediaRequest,
+    cb?: (error: string, rep: ProcessMediaResponse) => void
+  ): Promise<ProcessMediaResponse> {
+    return this.request("ProcessMedia", req, cb)
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
-   */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
-  }
+     * 修改用户自定义内容分析模板。
 
-  /**
-   * 删除工作流。对于已启用的工作流，需要禁用后才能删除。
-   */
-  async DeleteWorkflow(
-    req: DeleteWorkflowRequest,
-    cb?: (error: string, rep: DeleteWorkflowResponse) => void
-  ): Promise<DeleteWorkflowResponse> {
-    return this.request("DeleteWorkflow", req, cb)
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     */
+  async ModifyAIAnalysisTemplate(
+    req: ModifyAIAnalysisTemplateRequest,
+    cb?: (error: string, rep: ModifyAIAnalysisTemplateResponse) => void
+  ): Promise<ModifyAIAnalysisTemplateResponse> {
+    return this.request("ModifyAIAnalysisTemplate", req, cb)
   }
 
   /**
@@ -953,83 +714,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义水印模板，数量上限：1000。
+   * 删除用户自定义指定时间点截图模板。
    */
-  async CreateWatermarkTemplate(
-    req: CreateWatermarkTemplateRequest,
-    cb?: (error: string, rep: CreateWatermarkTemplateResponse) => void
-  ): Promise<CreateWatermarkTemplateResponse> {
-    return this.request("CreateWatermarkTemplate", req, cb)
-  }
-
-  /**
-   * 该接口用于查询素材样本信息，支持根据素材 ID、名称、标签，分页查询。
-   */
-  async DescribePersonSamples(
-    req: DescribePersonSamplesRequest,
-    cb?: (error: string, rep: DescribePersonSamplesResponse) => void
-  ): Promise<DescribePersonSamplesResponse> {
-    return this.request("DescribePersonSamples", req, cb)
-  }
-
-  /**
-   * 删除用户自定义采样截图模板。
-   */
-  async DeleteSampleSnapshotTemplate(
-    req: DeleteSampleSnapshotTemplateRequest,
-    cb?: (error: string, rep: DeleteSampleSnapshotTemplateResponse) => void
-  ): Promise<DeleteSampleSnapshotTemplateResponse> {
-    return this.request("DeleteSampleSnapshotTemplate", req, cb)
-  }
-
-  /**
-   * 删除用户自定义内容识别模板。
-   */
-  async DeleteAIRecognitionTemplate(
-    req: DeleteAIRecognitionTemplateRequest,
-    cb?: (error: string, rep: DeleteAIRecognitionTemplateResponse) => void
-  ): Promise<DeleteAIRecognitionTemplateResponse> {
-    return this.request("DeleteAIRecognitionTemplate", req, cb)
-  }
-
-  /**
-   * 启动媒体传输流。
-   */
-  async StartStreamLinkFlow(
-    req: StartStreamLinkFlowRequest,
-    cb?: (error: string, rep: StartStreamLinkFlowResponse) => void
-  ): Promise<StartStreamLinkFlowResponse> {
-    return this.request("StartStreamLinkFlow", req, cb)
-  }
-
-  /**
-   * 创建用户自定义转动图模板，数量上限：16。
-   */
-  async CreateAnimatedGraphicsTemplate(
-    req: CreateAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
-  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
-    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
-   * 查询转动图模板列表，支持根据条件，分页查询。
-   */
-  async DescribeAnimatedGraphicsTemplates(
-    req: DescribeAnimatedGraphicsTemplatesRequest,
-    cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void
-  ): Promise<DescribeAnimatedGraphicsTemplatesResponse> {
-    return this.request("DescribeAnimatedGraphicsTemplates", req, cb)
-  }
-
-  /**
-   * 修改媒体传输流的输入信息。
-   */
-  async ModifyStreamLinkInput(
-    req: ModifyStreamLinkInputRequest,
-    cb?: (error: string, rep: ModifyStreamLinkInputResponse) => void
-  ): Promise<ModifyStreamLinkInputResponse> {
-    return this.request("ModifyStreamLinkInput", req, cb)
+  async DeleteSnapshotByTimeOffsetTemplate(
+    req: DeleteSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -1043,28 +734,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询媒体传输流的媒体质量数据。
-
-     */
-  async DescribeStreamLinkFlowMediaStatistics(
-    req: DescribeStreamLinkFlowMediaStatisticsRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void
-  ): Promise<DescribeStreamLinkFlowMediaStatisticsResponse> {
-    return this.request("DescribeStreamLinkFlowMediaStatistics", req, cb)
-  }
-
-  /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
-     */
-  async ParseNotification(
-    req: ParseNotificationRequest,
-    cb?: (error: string, rep: ParseNotificationResponse) => void
-  ): Promise<ParseNotificationResponse> {
-    return this.request("ParseNotification", req, cb)
-  }
-
-  /**
    * 智能媒体识别，包含表情和动作识别。仅用于智学，其他调用无效。
    */
   async RecognizeMediaForZhiXue(
@@ -1072,26 +741,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeMediaForZhiXueResponse) => void
   ): Promise<RecognizeMediaForZhiXueResponse> {
     return this.request("RecognizeMediaForZhiXue", req, cb)
-  }
-
-  /**
-   * 对已发起的任务进行管理。
-   */
-  async ManageTask(
-    req: ManageTaskRequest,
-    cb?: (error: string, rep: ManageTaskResponse) => void
-  ): Promise<ManageTaskResponse> {
-    return this.request("ManageTask", req, cb)
-  }
-
-  /**
-   * 查询媒体传输开通状态。
-   */
-  async DescribeStreamLinkActivateState(
-    req?: DescribeStreamLinkActivateStateRequest,
-    cb?: (error: string, rep: DescribeStreamLinkActivateStateResponse) => void
-  ): Promise<DescribeStreamLinkActivateStateResponse> {
-    return this.request("DescribeStreamLinkActivateState", req, cb)
   }
 
   /**
@@ -1117,6 +766,198 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户自定义转码模板，数量上限：1000。
+   */
+  async CreateTranscodeTemplate(
+    req: CreateTranscodeTemplateRequest,
+    cb?: (error: string, rep: CreateTranscodeTemplateResponse) => void
+  ): Promise<CreateTranscodeTemplateResponse> {
+    return this.request("CreateTranscodeTemplate", req, cb)
+  }
+
+  /**
+   * 创建媒体传输的传输流配置。
+   */
+  async CreateStreamLinkFlow(
+    req: CreateStreamLinkFlowRequest,
+    cb?: (error: string, rep: CreateStreamLinkFlowResponse) => void
+  ): Promise<CreateStreamLinkFlowResponse> {
+    return this.request("CreateStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 本接口仅用于定制开发的特殊场景，除非云媒体处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
+   */
+  async ExecuteFunction(
+    req: ExecuteFunctionRequest,
+    cb?: (error: string, rep: ExecuteFunctionResponse) => void
+  ): Promise<ExecuteFunctionResponse> {
+    return this.request("ExecuteFunction", req, cb)
+  }
+
+  /**
+   * 批量查询媒体输入流的配置信息。
+   */
+  async DescribeStreamLinkFlows(
+    req: DescribeStreamLinkFlowsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowsResponse) => void
+  ): Promise<DescribeStreamLinkFlowsResponse> {
+    return this.request("DescribeStreamLinkFlows", req, cb)
+  }
+
+  /**
+   * 修改用户自定义转动图模板。
+   */
+  async ModifyAnimatedGraphicsTemplate(
+    req: ModifyAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
+  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
+    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 删除媒体传输流的输出配置。
+   */
+  async DeleteStreamLinkOutput(
+    req: DeleteStreamLinkOutputRequest,
+    cb?: (error: string, rep: DeleteStreamLinkOutputResponse) => void
+  ): Promise<DeleteStreamLinkOutputResponse> {
+    return this.request("DeleteStreamLinkOutput", req, cb)
+  }
+
+  /**
+   * 创建用户自定义内容审核模板，数量上限：50。
+   */
+  async CreateContentReviewTemplate(
+    req: CreateContentReviewTemplateRequest,
+    cb?: (error: string, rep: CreateContentReviewTemplateResponse) => void
+  ): Promise<CreateContentReviewTemplateResponse> {
+    return this.request("CreateContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 创建用户自定义采样截图模板，数量上限：16。
+   */
+  async CreateSampleSnapshotTemplate(
+    req: CreateSampleSnapshotTemplateRequest,
+    cb?: (error: string, rep: CreateSampleSnapshotTemplateResponse) => void
+  ): Promise<CreateSampleSnapshotTemplateResponse> {
+    return this.request("CreateSampleSnapshotTemplate", req, cb)
+  }
+
+  /**
+     * 删除用户自定义内容分析模板。
+
+注意：模板 ID 为 10000 以下的为系统预置模板，不允许删除。
+     */
+  async DeleteAIAnalysisTemplate(
+    req: DeleteAIAnalysisTemplateRequest,
+    cb?: (error: string, rep: DeleteAIAnalysisTemplateResponse) => void
+  ): Promise<DeleteAIAnalysisTemplateResponse> {
+    return this.request("DeleteAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 修改编排
+   */
+  async ModifySchedule(
+    req: ModifyScheduleRequest,
+    cb?: (error: string, rep: ModifyScheduleResponse) => void
+  ): Promise<ModifyScheduleResponse> {
+    return this.request("ModifySchedule", req, cb)
+  }
+
+  /**
+   * 获取媒体的元信息，包括视频画面宽、高、编码格式、时长、帧率等。
+   */
+  async DescribeMediaMetaData(
+    req: DescribeMediaMetaDataRequest,
+    cb?: (error: string, rep: DescribeMediaMetaDataResponse) => void
+  ): Promise<DescribeMediaMetaDataResponse> {
+    return this.request("DescribeMediaMetaData", req, cb)
+  }
+
+  /**
+   * 修改用户自定义采样截图模板。
+   */
+  async ModifySampleSnapshotTemplate(
+    req: ModifySampleSnapshotTemplateRequest,
+    cb?: (error: string, rep: ModifySampleSnapshotTemplateResponse) => void
+  ): Promise<ModifySampleSnapshotTemplateResponse> {
+    return this.request("ModifySampleSnapshotTemplate", req, cb)
+  }
+
+  /**
+   * 重新设置一个已经存在且处于禁用状态的工作流。
+   */
+  async ResetWorkflow(
+    req: ResetWorkflowRequest,
+    cb?: (error: string, rep: ResetWorkflowResponse) => void
+  ): Promise<ResetWorkflowResponse> {
+    return this.request("ResetWorkflow", req, cb)
+  }
+
+  /**
+   * 删除工作流。对于已启用的工作流，需要禁用后才能删除。
+   */
+  async DeleteWorkflow(
+    req: DeleteWorkflowRequest,
+    cb?: (error: string, rep: DeleteWorkflowResponse) => void
+  ): Promise<DeleteWorkflowResponse> {
+    return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+   * 修改用户自定义雪碧图模板。
+   */
+  async ModifyImageSpriteTemplate(
+    req: ModifyImageSpriteTemplateRequest,
+    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
+  ): Promise<ModifyImageSpriteTemplateResponse> {
+    return this.request("ModifyImageSpriteTemplate", req, cb)
+  }
+
+  /**
+   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+   */
+  async DescribeTranscodeTemplates(
+    req: DescribeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
+  ): Promise<DescribeTranscodeTemplatesResponse> {
+    return this.request("DescribeTranscodeTemplates", req, cb)
+  }
+
+  /**
+   * 删除媒体传输的传输流配置。
+   */
+  async DeleteStreamLinkFlow(
+    req: DeleteStreamLinkFlowRequest,
+    cb?: (error: string, rep: DeleteStreamLinkFlowResponse) => void
+  ): Promise<DeleteStreamLinkFlowResponse> {
+    return this.request("DeleteStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 启动媒体传输流。
+   */
+  async StartStreamLinkFlow(
+    req: StartStreamLinkFlowRequest,
+    cb?: (error: string, rep: StartStreamLinkFlowResponse) => void
+  ): Promise<StartStreamLinkFlowResponse> {
+    return this.request("StartStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 修改媒体传输流的输入信息。
+   */
+  async ModifyStreamLinkInput(
+    req: ModifyStreamLinkInputRequest,
+    cb?: (error: string, rep: ModifyStreamLinkInputResponse) => void
+  ): Promise<ModifyStreamLinkInputResponse> {
+    return this.request("ModifyStreamLinkInput", req, cb)
+  }
+
+  /**
    * 查询媒体传输所有地区。
    */
   async DescribeStreamLinkRegions(
@@ -1124,6 +965,207 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkRegionsResponse) => void
   ): Promise<DescribeStreamLinkRegionsResponse> {
     return this.request("DescribeStreamLinkRegions", req, cb)
+  }
+
+  /**
+   * 查询编排。
+   */
+  async DescribeSchedules(
+    req: DescribeSchedulesRequest,
+    cb?: (error: string, rep: DescribeSchedulesResponse) => void
+  ): Promise<DescribeSchedulesResponse> {
+    return this.request("DescribeSchedules", req, cb)
+  }
+
+  /**
+   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+   */
+  async ModifyPersonSample(
+    req: ModifyPersonSampleRequest,
+    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
+  ): Promise<ModifyPersonSampleResponse> {
+    return this.request("ModifyPersonSample", req, cb)
+  }
+
+  /**
+   * 删除用户自定义内容审核模板。
+   */
+  async DeleteContentReviewTemplate(
+    req: DeleteContentReviewTemplateRequest,
+    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
+  ): Promise<DeleteContentReviewTemplateResponse> {
+    return this.request("DeleteContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 创建用户自定义内容分析模板，数量上限：50。
+   */
+  async CreateAIAnalysisTemplate(
+    req: CreateAIAnalysisTemplateRequest,
+    cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
+  ): Promise<CreateAIAnalysisTemplateResponse> {
+    return this.request("CreateAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 停止媒体传输流。
+   */
+  async StopStreamLinkFlow(
+    req: StopStreamLinkFlowRequest,
+    cb?: (error: string, rep: StopStreamLinkFlowResponse) => void
+  ): Promise<StopStreamLinkFlowResponse> {
+    return this.request("StopStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 查询指定时间点截图模板，支持根据条件，分页查询。
+   */
+  async DescribeSnapshotByTimeOffsetTemplates(
+    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
+  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
+    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
+  }
+
+  /**
+   * 修改用户自定义转码模板信息。
+   */
+  async ModifyTranscodeTemplate(
+    req: ModifyTranscodeTemplateRequest,
+    cb?: (error: string, rep: ModifyTranscodeTemplateResponse) => void
+  ): Promise<ModifyTranscodeTemplateResponse> {
+    return this.request("ModifyTranscodeTemplate", req, cb)
+  }
+
+  /**
+   * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
+   */
+  async DescribeContentReviewTemplates(
+    req: DescribeContentReviewTemplatesRequest,
+    cb?: (error: string, rep: DescribeContentReviewTemplatesResponse) => void
+  ): Promise<DescribeContentReviewTemplatesResponse> {
+    return this.request("DescribeContentReviewTemplates", req, cb)
+  }
+
+  /**
+   * 查询媒体传输流的SRT质量数据。
+   */
+  async DescribeStreamLinkFlowSRTStatistics(
+    req: DescribeStreamLinkFlowSRTStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowSRTStatisticsResponse) => void
+  ): Promise<DescribeStreamLinkFlowSRTStatisticsResponse> {
+    return this.request("DescribeStreamLinkFlowSRTStatistics", req, cb)
+  }
+
+  /**
+   * 创建媒体传输流的输出信息。
+   */
+  async CreateStreamLinkOutputInfo(
+    req: CreateStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: CreateStreamLinkOutputInfoResponse) => void
+  ): Promise<CreateStreamLinkOutputInfoResponse> {
+    return this.request("CreateStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
+   * 根据工作流 ID，获取工作流详情列表。
+   */
+  async DescribeWorkflows(
+    req: DescribeWorkflowsRequest,
+    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
+  ): Promise<DescribeWorkflowsResponse> {
+    return this.request("DescribeWorkflows", req, cb)
+  }
+
+  /**
+   * 修改用户自定义水印模板，水印类型不允许修改。
+   */
+  async ModifyWatermarkTemplate(
+    req: ModifyWatermarkTemplateRequest,
+    cb?: (error: string, rep: ModifyWatermarkTemplateResponse) => void
+  ): Promise<ModifyWatermarkTemplateResponse> {
+    return this.request("ModifyWatermarkTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于批量删除关键词样本。
+   */
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
+  }
+
+  /**
+   * 查询媒体传输开通状态。
+   */
+  async DescribeStreamLinkActivateState(
+    req?: DescribeStreamLinkActivateStateRequest,
+    cb?: (error: string, rep: DescribeStreamLinkActivateStateResponse) => void
+  ): Promise<DescribeStreamLinkActivateStateResponse> {
+    return this.request("DescribeStreamLinkActivateState", req, cb)
+  }
+
+  /**
+   * 创建用户自定义水印模板，数量上限：1000。
+   */
+  async CreateWatermarkTemplate(
+    req: CreateWatermarkTemplateRequest,
+    cb?: (error: string, rep: CreateWatermarkTemplateResponse) => void
+  ): Promise<CreateWatermarkTemplateResponse> {
+    return this.request("CreateWatermarkTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于查询素材样本信息，支持根据素材 ID、名称、标签，分页查询。
+   */
+  async DescribePersonSamples(
+    req: DescribePersonSamplesRequest,
+    cb?: (error: string, rep: DescribePersonSamplesResponse) => void
+  ): Promise<DescribePersonSamplesResponse> {
+    return this.request("DescribePersonSamples", req, cb)
+  }
+
+  /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     */
+  async ParseNotification(
+    req: ParseNotificationRequest,
+    cb?: (error: string, rep: ParseNotificationResponse) => void
+  ): Promise<ParseNotificationResponse> {
+    return this.request("ParseNotification", req, cb)
+  }
+
+  /**
+   * 删除用户自定义内容识别模板。
+   */
+  async DeleteAIRecognitionTemplate(
+    req: DeleteAIRecognitionTemplateRequest,
+    cb?: (error: string, rep: DeleteAIRecognitionTemplateResponse) => void
+  ): Promise<DeleteAIRecognitionTemplateResponse> {
+    return this.request("DeleteAIRecognitionTemplate", req, cb)
+  }
+
+  /**
+   * 查询转动图模板列表，支持根据条件，分页查询。
+   */
+  async DescribeAnimatedGraphicsTemplates(
+    req: DescribeAnimatedGraphicsTemplatesRequest,
+    cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void
+  ): Promise<DescribeAnimatedGraphicsTemplatesResponse> {
+    return this.request("DescribeAnimatedGraphicsTemplates", req, cb)
+  }
+
+  /**
+   * 对已发起的任务进行管理。
+   */
+  async ManageTask(
+    req: ManageTaskRequest,
+    cb?: (error: string, rep: ManageTaskResponse) => void
+  ): Promise<ManageTaskResponse> {
+    return this.request("ManageTask", req, cb)
   }
 
   /**
@@ -1144,46 +1186,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWordSamplesResponse) => void
   ): Promise<CreateWordSamplesResponse> {
     return this.request("CreateWordSamples", req, cb)
-  }
-
-  /**
-   * 该接口用于创建素材样本，用于通过五官定位等技术，进行内容识别、内容不适宜等视频处理。
-   */
-  async CreatePersonSample(
-    req: CreatePersonSampleRequest,
-    cb?: (error: string, rep: CreatePersonSampleResponse) => void
-  ): Promise<CreatePersonSampleResponse> {
-    return this.request("CreatePersonSample", req, cb)
-  }
-
-  /**
-   * 本接口仅用于定制开发的特殊场景，除非云媒体处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
-   */
-  async ExecuteFunction(
-    req: ExecuteFunctionRequest,
-    cb?: (error: string, rep: ExecuteFunctionResponse) => void
-  ): Promise<ExecuteFunctionResponse> {
-    return this.request("ExecuteFunction", req, cb)
-  }
-
-  /**
-   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
-   */
-  async ModifyPersonSample(
-    req: ModifyPersonSampleRequest,
-    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
-  ): Promise<ModifyPersonSampleResponse> {
-    return this.request("ModifyPersonSample", req, cb)
-  }
-
-  /**
-   * 创建用户自定义转码模板，数量上限：1000。
-   */
-  async CreateTranscodeTemplate(
-    req: CreateTranscodeTemplateRequest,
-    cb?: (error: string, rep: CreateTranscodeTemplateResponse) => void
-  ): Promise<CreateTranscodeTemplateResponse> {
-    return this.request("CreateTranscodeTemplate", req, cb)
   }
 
   /**
@@ -1208,31 +1210,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建媒体传输的传输流配置。
-   */
-  async CreateStreamLinkFlow(
-    req: CreateStreamLinkFlowRequest,
-    cb?: (error: string, rep: CreateStreamLinkFlowResponse) => void
-  ): Promise<CreateStreamLinkFlowResponse> {
-    return this.request("CreateStreamLinkFlow", req, cb)
-  }
-
-  /**
-     * 对直播流媒体发起处理任务，功能包括：
-
-* 智能内容审核（画面鉴黄、敏感信息检测、声音鉴黄）；
-* 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音实时翻译）。
-
-直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
-     */
-  async ProcessLiveStream(
-    req: ProcessLiveStreamRequest,
-    cb?: (error: string, rep: ProcessLiveStreamResponse) => void
-  ): Promise<ProcessLiveStreamResponse> {
-    return this.request("ProcessLiveStream", req, cb)
-  }
-
-  /**
    * 查询转自适应码流模板，支持根据条件，分页查询。
    */
   async DescribeAdaptiveDynamicStreamingTemplates(
@@ -1243,42 +1220,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对 URL视频链接 或 COS 中的媒体文件发起处理任务，功能包括：
-1. 视频转码（普通转码、极速高清转码、音视频增强）；
+     * 对 COS 中指定 Bucket 的目录下上传的媒体文件，设置处理规则，包括：
+1. 视频转码（带水印）；
 2. 视频转动图；
 3. 对视频按指定时间点截图；
 4. 对视频采样截图；
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
 7. 智能内容审核（鉴黄、敏感信息检测）；
-8. 智能内容分析（标签、分类、封面、按帧标签、拆条、集锦、片头片尾）；
-9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）。
+8. 智能内容分析（标签、分类、封面、按帧标签）；
+9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+
+注意：创建编排成功后是禁用状态，需要手动启用。
      */
-  async ProcessMedia(
-    req: ProcessMediaRequest,
-    cb?: (error: string, rep: ProcessMediaResponse) => void
-  ): Promise<ProcessMediaResponse> {
-    return this.request("ProcessMedia", req, cb)
-  }
-
-  /**
-   * 创建用户自定义内容识别模板，数量上限：50。
-   */
-  async CreateAIRecognitionTemplate(
-    req: CreateAIRecognitionTemplateRequest,
-    cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void
-  ): Promise<CreateAIRecognitionTemplateResponse> {
-    return this.request("CreateAIRecognitionTemplate", req, cb)
-  }
-
-  /**
-   * 修改用户自定义雪碧图模板。
-   */
-  async ModifyImageSpriteTemplate(
-    req: ModifyImageSpriteTemplateRequest,
-    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
-  ): Promise<ModifyImageSpriteTemplateResponse> {
-    return this.request("ModifyImageSpriteTemplate", req, cb)
+  async CreateSchedule(
+    req: CreateScheduleRequest,
+    cb?: (error: string, rep: CreateScheduleResponse) => void
+  ): Promise<CreateScheduleResponse> {
+    return this.request("CreateSchedule", req, cb)
   }
 
   /**
@@ -1302,56 +1261,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提取视频中的盲水印。
-   */
-  async WithdrawsWatermark(
-    req: WithdrawsWatermarkRequest,
-    cb?: (error: string, rep: WithdrawsWatermarkResponse) => void
-  ): Promise<WithdrawsWatermarkResponse> {
-    return this.request("WithdrawsWatermark", req, cb)
-  }
-
-  /**
-   * 删除用户自定义内容审核模板。
-   */
-  async DeleteContentReviewTemplate(
-    req: DeleteContentReviewTemplateRequest,
-    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
-  ): Promise<DeleteContentReviewTemplateResponse> {
-    return this.request("DeleteContentReviewTemplate", req, cb)
-  }
-
-  /**
-   * 创建用户自定义内容分析模板，数量上限：50。
-   */
-  async CreateAIAnalysisTemplate(
-    req: CreateAIAnalysisTemplateRequest,
-    cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
-  ): Promise<CreateAIAnalysisTemplateResponse> {
-    return this.request("CreateAIAnalysisTemplate", req, cb)
-  }
-
-  /**
-   * 修改转自适应码流模板
-   */
-  async ModifyAdaptiveDynamicStreamingTemplate(
-    req: ModifyAdaptiveDynamicStreamingTemplateRequest,
-    cb?: (error: string, rep: ModifyAdaptiveDynamicStreamingTemplateResponse) => void
-  ): Promise<ModifyAdaptiveDynamicStreamingTemplateResponse> {
-    return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb)
-  }
-
-  /**
-   * 根据内容识别模板唯一标识，获取内容识别模板详情列表。返回结果包含符合条件的所有用户自定义内容识别模板及系统预置视频内容识别模板
-   */
-  async DescribeAIRecognitionTemplates(
-    req: DescribeAIRecognitionTemplatesRequest,
-    cb?: (error: string, rep: DescribeAIRecognitionTemplatesResponse) => void
-  ): Promise<DescribeAIRecognitionTemplatesResponse> {
-    return this.request("DescribeAIRecognitionTemplates", req, cb)
-  }
-
-  /**
    * 查询用户自定义水印模板，支持根据条件，分页查询。
    */
   async DescribeWatermarkTemplates(
@@ -1372,6 +1281,203 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体传输流的输出配置。
+   */
+  async ModifyStreamLinkOutputInfo(
+    req: ModifyStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
+  ): Promise<ModifyStreamLinkOutputInfoResponse> {
+    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
+   * 根据内容识别模板唯一标识，获取内容识别模板详情列表。返回结果包含符合条件的所有用户自定义内容识别模板及系统预置视频内容识别模板
+   */
+  async DescribeAIRecognitionTemplates(
+    req: DescribeAIRecognitionTemplatesRequest,
+    cb?: (error: string, rep: DescribeAIRecognitionTemplatesResponse) => void
+  ): Promise<DescribeAIRecognitionTemplatesResponse> {
+    return this.request("DescribeAIRecognitionTemplates", req, cb)
+  }
+
+  /**
+   * 提取视频中的盲水印。
+   */
+  async WithdrawsWatermark(
+    req: WithdrawsWatermarkRequest,
+    cb?: (error: string, rep: WithdrawsWatermarkResponse) => void
+  ): Promise<WithdrawsWatermarkResponse> {
+    return this.request("WithdrawsWatermark", req, cb)
+  }
+
+  /**
+   * 查询媒体输入流的配置信息。
+   */
+  async DescribeStreamLinkFlow(
+    req: DescribeStreamLinkFlowRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowResponse) => void
+  ): Promise<DescribeStreamLinkFlowResponse> {
+    return this.request("DescribeStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 删除编排
+   */
+  async DeleteSchedule(
+    req: DeleteScheduleRequest,
+    cb?: (error: string, rep: DeleteScheduleResponse) => void
+  ): Promise<DeleteScheduleResponse> {
+    return this.request("DeleteSchedule", req, cb)
+  }
+
+  /**
+   * 修改转自适应码流模板
+   */
+  async ModifyAdaptiveDynamicStreamingTemplate(
+    req: ModifyAdaptiveDynamicStreamingTemplateRequest,
+    cb?: (error: string, rep: ModifyAdaptiveDynamicStreamingTemplateResponse) => void
+  ): Promise<ModifyAdaptiveDynamicStreamingTemplateResponse> {
+    return this.request("ModifyAdaptiveDynamicStreamingTemplate", req, cb)
+  }
+
+  /**
+   * 删除用户自定义水印模板。
+   */
+  async DeleteWatermarkTemplate(
+    req: DeleteWatermarkTemplateRequest,
+    cb?: (error: string, rep: DeleteWatermarkTemplateResponse) => void
+  ): Promise<DeleteWatermarkTemplateResponse> {
+    return this.request("DeleteWatermarkTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于根据素材 ID，删除素材样本。
+   */
+  async DeletePersonSample(
+    req: DeletePersonSampleRequest,
+    cb?: (error: string, rep: DeletePersonSampleResponse) => void
+  ): Promise<DeletePersonSampleResponse> {
+    return this.request("DeletePersonSample", req, cb)
+  }
+
+  /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     */
+  async ParseLiveStreamProcessNotification(
+    req: ParseLiveStreamProcessNotificationRequest,
+    cb?: (error: string, rep: ParseLiveStreamProcessNotificationResponse) => void
+  ): Promise<ParseLiveStreamProcessNotificationResponse> {
+    return this.request("ParseLiveStreamProcessNotification", req, cb)
+  }
+
+  /**
+   * 启用自动化触发编排任务。
+   */
+  async EnableSchedule(
+    req: EnableScheduleRequest,
+    cb?: (error: string, rep: EnableScheduleResponse) => void
+  ): Promise<EnableScheduleResponse> {
+    return this.request("EnableSchedule", req, cb)
+  }
+
+  /**
+     * 对直播流媒体发起处理任务，功能包括：
+
+* 智能内容审核（画面鉴黄、敏感信息检测、声音鉴黄）；
+* 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音实时翻译）。
+
+直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
+     */
+  async ProcessLiveStream(
+    req: ProcessLiveStreamRequest,
+    cb?: (error: string, rep: ProcessLiveStreamResponse) => void
+  ): Promise<ProcessLiveStreamResponse> {
+    return this.request("ProcessLiveStream", req, cb)
+  }
+
+  /**
+   * 删除用户自定义采样截图模板。
+   */
+  async DeleteSampleSnapshotTemplate(
+    req: DeleteSampleSnapshotTemplateRequest,
+    cb?: (error: string, rep: DeleteSampleSnapshotTemplateResponse) => void
+  ): Promise<DeleteSampleSnapshotTemplateResponse> {
+    return this.request("DeleteSampleSnapshotTemplate", req, cb)
+  }
+
+  /**
+     * 查询媒体传输流的媒体质量数据。
+
+     */
+  async DescribeStreamLinkFlowMediaStatistics(
+    req: DescribeStreamLinkFlowMediaStatisticsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void
+  ): Promise<DescribeStreamLinkFlowMediaStatisticsResponse> {
+    return this.request("DescribeStreamLinkFlowMediaStatistics", req, cb)
+  }
+
+  /**
+   * 该接口用于创建素材样本，用于通过五官定位等技术，进行内容识别、内容不适宜等视频处理。
+   */
+  async CreatePersonSample(
+    req: CreatePersonSampleRequest,
+    cb?: (error: string, rep: CreatePersonSampleResponse) => void
+  ): Promise<CreatePersonSampleResponse> {
+    return this.request("CreatePersonSample", req, cb)
+  }
+
+  /**
+   * 禁用自动化触发编排任务。
+   */
+  async DisableSchedule(
+    req: DisableScheduleRequest,
+    cb?: (error: string, rep: DisableScheduleResponse) => void
+  ): Promise<DisableScheduleResponse> {
+    return this.request("DisableSchedule", req, cb)
+  }
+
+  /**
+   * 修改用户自定义内容审核模板。
+   */
+  async ModifyContentReviewTemplate(
+    req: ModifyContentReviewTemplateRequest,
+    cb?: (error: string, rep: ModifyContentReviewTemplateResponse) => void
+  ): Promise<ModifyContentReviewTemplateResponse> {
+    return this.request("ModifyContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 创建用户自定义内容识别模板，数量上限：50。
+   */
+  async CreateAIRecognitionTemplate(
+    req: CreateAIRecognitionTemplateRequest,
+    cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void
+  ): Promise<CreateAIRecognitionTemplateResponse> {
+    return this.request("CreateAIRecognitionTemplate", req, cb)
+  }
+
+  /**
+   * 修改用户自定义内容识别模板。
+   */
+  async ModifyAIRecognitionTemplate(
+    req: ModifyAIRecognitionTemplateRequest,
+    cb?: (error: string, rep: ModifyAIRecognitionTemplateResponse) => void
+  ): Promise<ModifyAIRecognitionTemplateResponse> {
+    return this.request("ModifyAIRecognitionTemplate", req, cb)
+  }
+
+  /**
+   * 查询媒体传输流的日志信息。
+   */
+  async DescribeStreamLinkFlowLogs(
+    req: DescribeStreamLinkFlowLogsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowLogsResponse) => void
+  ): Promise<DescribeStreamLinkFlowLogsResponse> {
+    return this.request("DescribeStreamLinkFlowLogs", req, cb)
+  }
+
+  /**
    * 删除雪碧图模板。
    */
   async DeleteImageSpriteTemplate(
@@ -1379,25 +1485,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImageSpriteTemplateResponse) => void
   ): Promise<DeleteImageSpriteTemplateResponse> {
     return this.request("DeleteImageSpriteTemplate", req, cb)
-  }
-
-  /**
-   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
-   */
-  async DescribeTranscodeTemplates(
-    req: DescribeTranscodeTemplatesRequest,
-    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
-  ): Promise<DescribeTranscodeTemplatesResponse> {
-    return this.request("DescribeTranscodeTemplates", req, cb)
-  }
-
-  /**
-   * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
-   */
-  async DescribeContentReviewTemplates(
-    req: DescribeContentReviewTemplatesRequest,
-    cb?: (error: string, rep: DescribeContentReviewTemplatesResponse) => void
-  ): Promise<DescribeContentReviewTemplatesResponse> {
-    return this.request("DescribeContentReviewTemplates", req, cb)
   }
 }

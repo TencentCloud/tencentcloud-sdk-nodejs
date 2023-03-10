@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 获取制定机器组下的机器状态
+     * 本接口用于获取cos导入配置
      */
-    async DescribeMachines(req, cb) {
-        return this.request("DescribeMachines", req, cb);
+    async DescribeCosRecharges(req, cb) {
+        return this.request("DescribeCosRecharges", req, cb);
     }
     /**
      * 本接口用于获取日志集信息列表。
@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLogset", req, cb);
     }
     /**
+     * 本接口用于分裂主题分区
+     */
+    async SplitPartition(req, cb) {
+        return this.request("SplitPartition", req, cb);
+    }
+    /**
      * 该接口用于删除通知渠道组
      */
     async DeleteAlarmNotice(req, cb) {
@@ -255,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAlarmNotice(req, cb) {
         return this.request("ModifyAlarmNotice", req, cb);
+    }
+    /**
+     * 获取制定机器组下的机器状态
+     */
+    async DescribeMachines(req, cb) {
+        return this.request("DescribeMachines", req, cb);
     }
     /**
      * 打开Kafka协议消费功能
@@ -483,16 +495,16 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConsumer", req, cb);
     }
     /**
-     * 本接口用于分裂主题分区
-     */
-    async SplitPartition(req, cb) {
-        return this.request("SplitPartition", req, cb);
-    }
-    /**
      * 获取采集规则配置
      */
     async DescribeConfigs(req, cb) {
         return this.request("DescribeConfigs", req, cb);
+    }
+    /**
+     * 本接口用于创建cos导入任务
+     */
+    async CreateCosRecharge(req, cb) {
+        return this.request("CreateCosRecharge", req, cb);
     }
     /**
      * 获取机器组信息列表
@@ -523,6 +535,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DescribeConfigMachineGroups(req, cb) {
         return this.request("DescribeConfigMachineGroups", req, cb);
+    }
+    /**
+     * 本接口用于修改cos导入任务
+     */
+    async ModifyCosRecharge(req, cb) {
+        return this.request("ModifyCosRecharge", req, cb);
     }
     /**
      * 本接口用于删除日志下载任务

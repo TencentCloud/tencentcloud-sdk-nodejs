@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogHistogramRequest, DescribeLogContextRequest, DeleteShipperRequest, ModifyTopicRequest, DeleteLogsetResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, ModifyConfigExtraResponse, CreateLogsetRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, MergePartitionRequest, DescribeShippersResponse, CreateConfigExtraResponse, ModifyShipperResponse, RetryShipperTaskRequest, DescribeConfigExtrasResponse, OpenKafkaConsumerResponse, DescribeIndexRequest, DescribeConfigsResponse, DeleteMachineGroupInfoRequest, CreateLogsetResponse, DeleteMachineGroupResponse, DescribeExportsRequest, DescribeConsumerRequest, DeleteConfigExtraResponse, ModifyConsumerRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, CreateConsumerResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, DescribeShippersRequest, RetryShipperTaskResponse, SplitPartitionRequest, DescribeMachineGroupConfigsResponse, DescribeLogHistogramResponse, CloseKafkaConsumerResponse, CreateIndexRequest, DescribeLogsetsResponse, DeleteConsumerResponse, DescribeTopicsRequest, GetAlarmLogResponse, CreateTopicRequest, DescribeMachineGroupsRequest, OpenKafkaConsumerRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteConsumerRequest, DeleteIndexRequest, DescribeConsumerResponse, UploadLogRequest, ModifyConsumerResponse, DescribeConfigsRequest, DeleteConfigRequest, CloseKafkaConsumerRequest, CreateExportRequest, DescribeAlarmNoticesResponse, DescribeMachineGroupsResponse, DeleteConfigExtraRequest, ModifyConfigRequest, AddMachineGroupInfoRequest, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DeleteIndexResponse, ModifyIndexRequest, GetAlarmLogRequest, DeleteShipperResponse, DescribeLogContextResponse, DeleteExportRequest, SplitPartitionResponse, ModifyShipperRequest, CreateConfigExtraRequest, CreateConsumerRequest, ModifyConfigResponse, ModifyAlarmNoticeResponse, DescribeMachinesResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, AddMachineGroupInfoResponse, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, DescribeMachinesRequest, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeConfigExtrasRequest, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyConfigExtraRequest, ModifyLogsetRequest, DeleteMachineGroupInfoResponse, DescribeLogsetsRequest, DeleteTopicResponse, CreateExportResponse, MergePartitionResponse } from "./cls_models";
+import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogHistogramRequest, DescribeLogContextRequest, DeleteShipperRequest, ModifyTopicRequest, DeleteLogsetResponse, DescribeCosRechargesResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, ModifyConfigExtraResponse, CreateLogsetRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, MergePartitionRequest, DescribeShippersResponse, CreateConfigExtraResponse, ModifyShipperResponse, RetryShipperTaskRequest, DescribeConfigExtrasResponse, OpenKafkaConsumerResponse, DescribeIndexRequest, DescribeConfigsResponse, DeleteMachineGroupInfoRequest, CreateLogsetResponse, DeleteMachineGroupResponse, CreateCosRechargeRequest, DescribeConsumerRequest, DeleteConfigExtraResponse, ModifyConsumerRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, CreateConsumerResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, DescribeShippersRequest, RetryShipperTaskResponse, SplitPartitionRequest, DescribeMachineGroupConfigsResponse, DescribeCosRechargesRequest, DescribeLogHistogramResponse, CloseKafkaConsumerResponse, DescribeMachineGroupsRequest, CreateIndexRequest, DescribeLogsetsResponse, DeleteConsumerResponse, DescribeTopicsRequest, GetAlarmLogResponse, CreateTopicRequest, DescribeExportsRequest, OpenKafkaConsumerRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteConsumerRequest, DeleteIndexRequest, DescribeConsumerResponse, UploadLogRequest, ModifyConsumerResponse, DescribeConfigsRequest, DeleteConfigRequest, CloseKafkaConsumerRequest, CreateExportRequest, DescribeAlarmNoticesResponse, DescribeMachineGroupsResponse, DeleteConfigExtraRequest, ModifyConfigRequest, AddMachineGroupInfoRequest, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DeleteIndexResponse, ModifyIndexRequest, GetAlarmLogRequest, DeleteShipperResponse, DescribeLogContextResponse, DeleteExportRequest, SplitPartitionResponse, ModifyShipperRequest, CreateConfigExtraRequest, CreateConsumerRequest, ModifyConfigResponse, ModifyAlarmNoticeResponse, DescribeMachinesResponse, ModifyCosRechargeResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, CreateCosRechargeResponse, AddMachineGroupInfoResponse, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, DescribeMachinesRequest, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeConfigExtrasRequest, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyConfigExtraRequest, ModifyLogsetRequest, DeleteMachineGroupInfoResponse, ModifyCosRechargeRequest, DescribeLogsetsRequest, DeleteTopicResponse, CreateExportResponse, MergePartitionResponse } from "./cls_models";
 /**
  * cls client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     * 获取制定机器组下的机器状态
+     * 本接口用于获取cos导入配置
      */
-    DescribeMachines(req: DescribeMachinesRequest, cb?: (error: string, rep: DescribeMachinesResponse) => void): Promise<DescribeMachinesResponse>;
+    DescribeCosRecharges(req: DescribeCosRechargesRequest, cb?: (error: string, rep: DescribeCosRechargesResponse) => void): Promise<DescribeCosRechargesResponse>;
     /**
      * 本接口用于获取日志集信息列表。
      */
@@ -145,6 +145,10 @@ export declare class Client extends AbstractClient {
      */
     CreateLogset(req: CreateLogsetRequest, cb?: (error: string, rep: CreateLogsetResponse) => void): Promise<CreateLogsetResponse>;
     /**
+     * 本接口用于分裂主题分区
+     */
+    SplitPartition(req: SplitPartitionRequest, cb?: (error: string, rep: SplitPartitionResponse) => void): Promise<SplitPartitionResponse>;
+    /**
      * 该接口用于删除通知渠道组
      */
     DeleteAlarmNotice(req: DeleteAlarmNoticeRequest, cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void): Promise<DeleteAlarmNoticeResponse>;
@@ -160,6 +164,10 @@ export declare class Client extends AbstractClient {
      * 该接口用于修改通知渠道组
      */
     ModifyAlarmNotice(req: ModifyAlarmNoticeRequest, cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void): Promise<ModifyAlarmNoticeResponse>;
+    /**
+     * 获取制定机器组下的机器状态
+     */
+    DescribeMachines(req: DescribeMachinesRequest, cb?: (error: string, rep: DescribeMachinesResponse) => void): Promise<DescribeMachinesResponse>;
     /**
      * 打开Kafka协议消费功能
      */
@@ -363,13 +371,13 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeConsumer(req: DescribeConsumerRequest, cb?: (error: string, rep: DescribeConsumerResponse) => void): Promise<DescribeConsumerResponse>;
     /**
-     * 本接口用于分裂主题分区
-     */
-    SplitPartition(req: SplitPartitionRequest, cb?: (error: string, rep: SplitPartitionResponse) => void): Promise<SplitPartitionResponse>;
-    /**
      * 获取采集规则配置
      */
     DescribeConfigs(req: DescribeConfigsRequest, cb?: (error: string, rep: DescribeConfigsResponse) => void): Promise<DescribeConfigsResponse>;
+    /**
+     * 本接口用于创建cos导入任务
+     */
+    CreateCosRecharge(req: CreateCosRechargeRequest, cb?: (error: string, rep: CreateCosRechargeResponse) => void): Promise<CreateCosRechargeResponse>;
     /**
      * 获取机器组信息列表
      */
@@ -390,6 +398,10 @@ cls.pb.cc cls.pb.h cls.proto
      * 获取采集规则配置所绑定的机器组
      */
     DescribeConfigMachineGroups(req: DescribeConfigMachineGroupsRequest, cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void): Promise<DescribeConfigMachineGroupsResponse>;
+    /**
+     * 本接口用于修改cos导入任务
+     */
+    ModifyCosRecharge(req: ModifyCosRechargeRequest, cb?: (error: string, rep: ModifyCosRechargeResponse) => void): Promise<ModifyCosRechargeResponse>;
     /**
      * 本接口用于删除日志下载任务
      */

@@ -568,6 +568,15 @@ export interface AiReviewProhibitedOcrTaskOutput {
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
 }
 /**
+ * DeleteSchedule返回参数结构体
+ */
+export interface DeleteScheduleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ManageTask返回参数结构体
  */
 export interface ManageTaskResponse {
@@ -1313,6 +1322,41 @@ export interface AiReviewPoliticalTaskInput {
       * 模板 ID。
       */
     Definition: number;
+}
+/**
+ * ModifySchedule请求参数结构体
+ */
+export interface ModifyScheduleRequest {
+    /**
+      * 编排唯一标识。
+      */
+    ScheduleId: number;
+    /**
+      * 编排名称。
+      */
+    ScheduleName?: string;
+    /**
+      * 编排绑定的触发规则。
+      */
+    Trigger?: WorkflowTrigger;
+    /**
+      * 编排任务列表。
+注意：内部不允许部分更新，如果需要更新需全量提交编排任务列表。
+      */
+    Activities?: Array<Activity>;
+    /**
+      * 媒体处理的文件输出存储位置。
+      */
+    OutputStorage?: TaskOutputStorage;
+    /**
+      * 媒体处理生成的文件输出的目标目录。
+注意：如果设置为空，则表示取消老配置的OutputDir值。
+      */
+    OutputDir?: string;
+    /**
+      * 任务的事件通知配置。
+      */
+    TaskNotifyConfig?: TaskNotifyConfig;
 }
 /**
  * 创建媒体传输流的输出的RTP的目标地址。
@@ -2148,6 +2192,19 @@ export interface CosInputInfo {
     Object: string;
 }
 /**
+ * CreateSchedule返回参数结构体
+ */
+export interface CreateScheduleResponse {
+    /**
+      * 编排 ID。
+      */
+    ScheduleId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 智能标签任务控制参数
  */
 export interface TagConfigureInfo {
@@ -2861,6 +2918,15 @@ export interface MediaProcessTaskInput {
     AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>;
 }
 /**
+ * DisableSchedule请求参数结构体
+ */
+export interface DisableScheduleRequest {
+    /**
+      * 编排唯一表示。
+      */
+    ScheduleId: number;
+}
+/**
  * 创建的输入RTMP拉流源站配置信息。
  */
 export interface RTMPPullSourceAddress {
@@ -2887,25 +2953,34 @@ export interface CosOutputStorage {
     Region?: string;
 }
 /**
- * 人脸识别结果片段
+ * 转动图任务结果类型
  */
-export interface AiRecognitionTaskFaceSegmentItem {
+export interface MediaProcessTaskAnimatedGraphicResult {
     /**
-      * 识别片段起始的偏移时间，单位：秒。
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
       */
-    StartTimeOffset: number;
+    Status: string;
     /**
-      * 识别片段终止的偏移时间，单位：秒。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
-    EndTimeOffset: number;
+    ErrCodeExt: string;
     /**
-      * 识别片段置信度。取值：0~100。
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
-    Confidence: number;
+    ErrCode: number;
     /**
-      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+      * 错误信息。
       */
-    AreaCoordSet: Array<number>;
+    Message: string;
+    /**
+      * 转动图任务的输入。
+      */
+    Input: AnimatedGraphicTaskInput;
+    /**
+      * 转动图任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: MediaAnimatedGraphicsItem;
 }
 /**
  * ProcessMedia返回参数结构体
@@ -2941,13 +3016,33 @@ export interface ClassificationConfigureInfoForUpdate {
     Switch?: string;
 }
 /**
- * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
+ * CreateSchedule请求参数结构体
  */
-export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
+export interface CreateScheduleRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 编排名称，最多128字符。同一个用户该名称唯一。
       */
-    RequestId?: string;
+    ScheduleName: string;
+    /**
+      * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发工作流。
+      */
+    Trigger: WorkflowTrigger;
+    /**
+      * 编排任务列表。
+      */
+    Activities: Array<Activity>;
+    /**
+      * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
+      */
+    OutputStorage?: TaskOutputStorage;
+    /**
+      * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
+      */
+    OutputDir?: string;
+    /**
+      * 任务的事件通知配置，不填代表不获取事件通知。
+      */
+    TaskNotifyConfig?: TaskNotifyConfig;
 }
 /**
  * CreateAnimatedGraphicsTemplate请求参数结构体
@@ -3229,6 +3324,15 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
       * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
       */
     ReviewConfidence?: number;
+}
+/**
+ * DisableSchedule返回参数结构体
+ */
+export interface DisableScheduleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyAnimatedGraphicsTemplate返回参数结构体
@@ -3675,6 +3779,15 @@ export interface DeleteWordSamplesRequest {
     Keywords: Array<string>;
 }
 /**
+ * EnableSchedule请求参数结构体
+ */
+export interface EnableScheduleRequest {
+    /**
+      * 编排唯一标识。
+      */
+    ScheduleId: number;
+}
+/**
  * 自定义转码的规格参数。
  */
 export interface RawTranscodeParameter {
@@ -3974,49 +4087,50 @@ export interface TaskOutputStorage {
     S3OutputStorage?: S3OutputStorage;
 }
 /**
- * 传输流日志信息。
+ * 任务查询结果类型
  */
-export interface FlowLogInfo {
+export interface MediaProcessTaskResult {
     /**
-      * 时间戳，单位为秒。
-      */
-    Timestamp: number;
-    /**
-      * 输入输出类型（input/output）。
+      * 任务的类型，可以取的值有：
+<li>Transcode：转码</li>
+<li>AnimatedGraphics：转动图</li>
+<li>SnapshotByTimeOffset：时间点截图</li>
+<li>SampleSnapshot：采样截图</li>
+<li>ImageSprites：雪碧图</li>
+<li>CoverBySnapshot：截图做封面</li>
+<li>AdaptiveDynamicStreaming：自适应码流</li>
       */
     Type: string;
     /**
-      * 输入或输出Id。
+      * 视频转码任务的查询结果，当任务类型为 Transcode 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InputOutputId: string;
+    TranscodeTask: MediaProcessTaskTranscodeResult;
     /**
-      * 协议。
+      * 视频转动图任务的查询结果，当任务类型为 AnimatedGraphics 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Protocol: string;
+    AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult;
     /**
-      * 事件代码。
+      * 对视频按时间点截图任务的查询结果，当任务类型为 SnapshotByTimeOffset 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EventCode: string;
+    SnapshotByTimeOffsetTask: MediaProcessTaskSnapshotByTimeOffsetResult;
     /**
-      * 事件信息。
+      * 对视频采样截图任务的查询结果，当任务类型为 SampleSnapshot 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EventMessage: string;
+    SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult;
     /**
-      * 对端IP。
+      * 对视频截雪碧图任务的查询结果，当任务类型为 ImageSprite 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemoteIp: string;
+    ImageSpriteTask: MediaProcessTaskImageSpriteResult;
     /**
-      * 对端端口。
+      * 转自适应码流任务查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemotePort: string;
-    /**
-      * 主备通道，0为主通道，1为备通道。
-      */
-    Pipeline: string;
-    /**
-      * 输入或输出的名称。
-      */
-    InputOutputName: string;
+    AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult;
 }
 /**
  * ModifyAIAnalysisTemplate请求参数结构体
@@ -4251,34 +4365,25 @@ export interface ModifyWordSampleRequest {
     TagOperationInfo?: AiSampleTagOperation;
 }
 /**
- * 转动图任务结果类型
+ * 人脸识别结果片段
  */
-export interface MediaProcessTaskAnimatedGraphicResult {
+export interface AiRecognitionTaskFaceSegmentItem {
     /**
-      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      * 识别片段起始的偏移时间，单位：秒。
       */
-    Status: string;
+    StartTimeOffset: number;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 识别片段终止的偏移时间，单位：秒。
       */
-    ErrCodeExt: string;
+    EndTimeOffset: number;
     /**
-      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      * 识别片段置信度。取值：0~100。
       */
-    ErrCode: number;
+    Confidence: number;
     /**
-      * 错误信息。
+      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
       */
-    Message: string;
-    /**
-      * 转动图任务的输入。
-      */
-    Input: AnimatedGraphicTaskInput;
-    /**
-      * 转动图任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Output: MediaAnimatedGraphicsItem;
+    AreaCoordSet: Array<number>;
 }
 /**
  * 智能标签结果类型
@@ -4508,6 +4613,23 @@ export interface AiRecognitionTaskTransTextResultInput {
       * 翻译模板 ID。
       */
     Definition: number;
+}
+/**
+ * DescribeSchedules返回参数结构体
+ */
+export interface DescribeSchedulesResponse {
+    /**
+      * 符合过滤条件的记录总数。
+      */
+    TotalCount: number;
+    /**
+      * 编排信息数组。
+      */
+    ScheduleInfoSet: Array<SchedulesInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 综合增强配置
@@ -5191,51 +5313,45 @@ export interface LiveStreamAiRecognitionResultInfo {
     ResultSet: Array<LiveStreamAiRecognitionResultItem>;
 }
 /**
- * 直播 AI 内容审核图片敏感结果
+ * 编排原子任务
  */
-export interface LiveStreamAiReviewImagePoliticalResult {
+export interface ActivityPara {
     /**
-      * 嫌疑片段起始的 PTS 时间，单位：秒。
+      * 视频转码任务
       */
-    StartPtsTime: number;
+    TranscodeTask?: TranscodeTaskInput;
     /**
-      * 嫌疑片段结束的 PTS 时间，单位：秒。
+      * 视频转动图任务
       */
-    EndPtsTime: number;
+    AnimatedGraphicTask?: AnimatedGraphicTaskInput;
     /**
-      * 嫌疑片段敏感分数。
+      * 视频按时间点截图任务
       */
-    Confidence: number;
+    SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput;
     /**
-      * 嫌疑片段鉴黄结果建议，取值范围：
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+      * 视频采样截图任务
       */
-    Suggestion: string;
+    SampleSnapshotTask?: SampleSnapshotTaskInput;
     /**
-      * 视频敏感结果标签，取值范围：
-<li>politician：敏感人物。</li>
-<li>violation_photo：违规图标。</li>
+      * 视频截雪碧图任务
       */
-    Label: string;
+    ImageSpriteTask?: ImageSpriteTaskInput;
     /**
-      * 敏感人物、违规图标名字。
+      * 转自适应码流任务
       */
-    Name: string;
+    AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput;
     /**
-      * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      * 视频内容审核类型任务
       */
-    AreaCoordSet: Array<number>;
+    AiContentReviewTask?: AiContentReviewTaskInput;
     /**
-      * 嫌疑图片 URL （图片不会永久存储，到达
-PicUrlExpireTime 时间点后图片将被删除）。
+      * 视频内容分析类型任务
       */
-    Url: string;
+    AiAnalysisTask?: AiAnalysisTaskInput;
     /**
-      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      * 视频内容识别类型任务
       */
-    PicUrlExpireTime: string;
+    AiRecognitionTask?: AiRecognitionTaskInput;
 }
 /**
  * 文本涉敏任务控制参数
@@ -5388,6 +5504,15 @@ export interface TerrorismConfigureInfoForUpdate {
     OcrReviewInfo?: TerrorismOcrReviewTemplateInfoForUpdate;
 }
 /**
+ * EnableSchedule返回参数结构体
+ */
+export interface EnableScheduleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SRT输出的监听地址。
  */
 export interface OutputSRTSourceAddressResp {
@@ -5399,6 +5524,15 @@ export interface OutputSRTSourceAddressResp {
       * 监听端口。
       */
     Port: number;
+}
+/**
+ * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
+ */
+export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 媒体传输的地区信息。
@@ -5574,6 +5708,53 @@ export interface HeadTailParameter {
       * 片尾列表。
       */
     TailSet?: Array<MediaInputInfo>;
+}
+/**
+ * 直播 AI 内容审核图片敏感结果
+ */
+export interface LiveStreamAiReviewImagePoliticalResult {
+    /**
+      * 嫌疑片段起始的 PTS 时间，单位：秒。
+      */
+    StartPtsTime: number;
+    /**
+      * 嫌疑片段结束的 PTS 时间，单位：秒。
+      */
+    EndPtsTime: number;
+    /**
+      * 嫌疑片段敏感分数。
+      */
+    Confidence: number;
+    /**
+      * 嫌疑片段鉴黄结果建议，取值范围：
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+      */
+    Suggestion: string;
+    /**
+      * 视频敏感结果标签，取值范围：
+<li>politician：敏感人物。</li>
+<li>violation_photo：违规图标。</li>
+      */
+    Label: string;
+    /**
+      * 敏感人物、违规图标名字。
+      */
+    Name: string;
+    /**
+      * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      */
+    AreaCoordSet: Array<number>;
+    /**
+      * 嫌疑图片 URL （图片不会永久存储，到达
+PicUrlExpireTime 时间点后图片将被删除）。
+      */
+    Url: string;
+    /**
+      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      */
+    PicUrlExpireTime: string;
 }
 /**
  * 图片水印模板输入参数
@@ -6355,6 +6536,15 @@ export interface InputAddress {
     Port: number;
 }
 /**
+ * DeleteSchedule请求参数结构体
+ */
+export interface DeleteScheduleRequest {
+    /**
+      * 编排唯一标识。
+      */
+    ScheduleId: number;
+}
+/**
  * CreateAdaptiveDynamicStreamingTemplate返回参数结构体
  */
 export interface CreateAdaptiveDynamicStreamingTemplateResponse {
@@ -6852,41 +7042,17 @@ export interface AiReviewProhibitedAsrTaskInput {
     Definition: number;
 }
 /**
- * 内容审核涉黄/涉敏嫌疑片段
+ * DescribeMediaMetaData返回参数结构体
  */
-export interface MediaContentReviewSegmentItem {
+export interface DescribeMediaMetaDataResponse {
     /**
-      * 嫌疑片段起始的偏移时间，单位：秒。
+      * 媒体元信息。
       */
-    StartTimeOffset: number;
+    MetaData?: MediaMetaData;
     /**
-      * 嫌疑片段结束的偏移时间，单位：秒。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    EndTimeOffset: number;
-    /**
-      * 嫌疑片段涉黄分数。
-      */
-    Confidence: number;
-    /**
-      * 嫌疑片段鉴黄结果标签。
-      */
-    Label: string;
-    /**
-      * 嫌疑片段鉴黄结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
-      */
-    Suggestion: string;
-    /**
-      * 嫌疑图片 URL （图片不会永久存储，到达
- PicUrlExpireTime 时间点后图片将被删除）。
-      */
-    Url: string;
-    /**
-      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-      */
-    PicUrlExpireTime: string;
+    RequestId?: string;
 }
 /**
  * 文本涉敏任务控制参数
@@ -7918,50 +8084,49 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
     AreaCoordSet: Array<number>;
 }
 /**
- * 任务查询结果类型
+ * 传输流日志信息。
  */
-export interface MediaProcessTaskResult {
+export interface FlowLogInfo {
     /**
-      * 任务的类型，可以取的值有：
-<li>Transcode：转码</li>
-<li>AnimatedGraphics：转动图</li>
-<li>SnapshotByTimeOffset：时间点截图</li>
-<li>SampleSnapshot：采样截图</li>
-<li>ImageSprites：雪碧图</li>
-<li>CoverBySnapshot：截图做封面</li>
-<li>AdaptiveDynamicStreaming：自适应码流</li>
+      * 时间戳，单位为秒。
+      */
+    Timestamp: number;
+    /**
+      * 输入输出类型（input/output）。
       */
     Type: string;
     /**
-      * 视频转码任务的查询结果，当任务类型为 Transcode 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 输入或输出Id。
       */
-    TranscodeTask: MediaProcessTaskTranscodeResult;
+    InputOutputId: string;
     /**
-      * 视频转动图任务的查询结果，当任务类型为 AnimatedGraphics 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 协议。
       */
-    AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult;
+    Protocol: string;
     /**
-      * 对视频按时间点截图任务的查询结果，当任务类型为 SnapshotByTimeOffset 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 事件代码。
       */
-    SnapshotByTimeOffsetTask: MediaProcessTaskSnapshotByTimeOffsetResult;
+    EventCode: string;
     /**
-      * 对视频采样截图任务的查询结果，当任务类型为 SampleSnapshot 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 事件信息。
       */
-    SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult;
+    EventMessage: string;
     /**
-      * 对视频截雪碧图任务的查询结果，当任务类型为 ImageSprite 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 对端IP。
       */
-    ImageSpriteTask: MediaProcessTaskImageSpriteResult;
+    RemoteIp: string;
     /**
-      * 转自适应码流任务查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 对端端口。
       */
-    AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult;
+    RemotePort: string;
+    /**
+      * 主备通道，0为主通道，1为备通道。
+      */
+    Pipeline: string;
+    /**
+      * 输入或输出的名称。
+      */
+    InputOutputName: string;
 }
 /**
  * DeleteWordSamples返回参数结构体
@@ -8044,6 +8209,34 @@ export interface EnableWorkflowResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 编排原子任务
+ */
+export interface Activity {
+    /**
+      * 原子任务类型：
+<li>input: 起始节点</li>
+<li>output：终止节点</li>
+<li>action-trans：转码</li>
+<li>action-samplesnapshot：采样截图</li>
+<li>action-AIAnalysis: 分析</li>
+<li>action-AIRecognition：识别</li>
+<li>action-aiReview：审核</li>
+<li>action-animated-graphics：转动图</li>
+<li>action-image-sprite：雪碧图</li>
+<li>action-snapshotByTimeOffset: 时间点截图</li>
+<li>action-adaptive-substream：自适应码流</li>
+      */
+    ActivityType: string;
+    /**
+      * 后驱节点索引数组
+      */
+    ReardriveIndex?: Array<number>;
+    /**
+      * 原子任务参数
+      */
+    ActivityPara?: ActivityPara;
 }
 /**
  * AI 样本管理，关键词输入信息。
@@ -9499,6 +9692,30 @@ export interface DescribeWorkflowsRequest {
     Limit?: number;
 }
 /**
+ * DescribeSchedules请求参数结构体
+ */
+export interface DescribeSchedulesRequest {
+    /**
+      * 编排 ID 过滤条件，数组长度限制：100。
+      */
+    ScheduleIds?: Array<number>;
+    /**
+      * 状态，取值范围：
+<li>Enabled：已启用，</li>
+<li>Disabled：已禁用。</li>
+不填此参数，则不区分工作流状态。
+      */
+    Status?: string;
+    /**
+      * 分页偏移量，默认值：0。
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认值：10，最大值：100。
+      */
+    Limit?: number;
+}
+/**
  * 点播文件音频流信息
  */
 export interface MediaAudioStreamItem {
@@ -9820,17 +10037,41 @@ export interface DescribeSampleSnapshotTemplatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeMediaMetaData返回参数结构体
+ * 内容审核涉黄/涉敏嫌疑片段
  */
-export interface DescribeMediaMetaDataResponse {
+export interface MediaContentReviewSegmentItem {
     /**
-      * 媒体元信息。
+      * 嫌疑片段起始的偏移时间，单位：秒。
       */
-    MetaData?: MediaMetaData;
+    StartTimeOffset: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 嫌疑片段结束的偏移时间，单位：秒。
       */
-    RequestId?: string;
+    EndTimeOffset: number;
+    /**
+      * 嫌疑片段涉黄分数。
+      */
+    Confidence: number;
+    /**
+      * 嫌疑片段鉴黄结果标签。
+      */
+    Label: string;
+    /**
+      * 嫌疑片段鉴黄结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+      */
+    Suggestion: string;
+    /**
+      * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
+      */
+    Url: string;
+    /**
+      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      */
+    PicUrlExpireTime: string;
 }
 /**
  * DescribeStreamLinkFlowRealtimeStatus返回参数结构体
@@ -9944,6 +10185,62 @@ export interface DescribeTranscodeTemplatesRequest {
 默认空，不限制类型。
       */
     TranscodeType?: string;
+}
+/**
+ * 编排详情。
+ */
+export interface SchedulesInfo {
+    /**
+      * 编排唯一标识。
+      */
+    ScheduleId: number;
+    /**
+      * 编排名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScheduleName: string;
+    /**
+      * 编排状态，取值范围：
+Enabled：已启用，
+Disabled：已禁用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: Array<string>;
+    /**
+      * 编排绑定的触发规则。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Trigger: WorkflowTrigger;
+    /**
+      * 编排任务列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Activities: Array<Activity>;
+    /**
+      * 媒体处理的文件输出存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutputStorage: TaskOutputStorage;
+    /**
+      * 媒体处理生成的文件输出的目标目录。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutputDir: string;
+    /**
+      * 任务的事件通知配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskNotifyConfig: TaskNotifyConfig;
+    /**
+      * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 最后编辑时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * DisableWorkflow请求参数结构体
@@ -10192,6 +10489,15 @@ export interface DescribePersonSamplesResponse {
       * 素材信息。
       */
     PersonSet?: Array<AiSamplePerson>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifySchedule返回参数结构体
+ */
+export interface ModifyScheduleResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

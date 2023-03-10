@@ -48,6 +48,7 @@ import {
   CreateFlowRequest,
   AutoSignConfig,
   DescribeThirdPartyAuthCodeRequest,
+  CreateReleaseFlowResponse,
   DescribeFlowInfoRequest,
   DeleteSealPoliciesResponse,
   OrganizationInfo,
@@ -74,6 +75,7 @@ import {
   Staff,
   CreateFlowEvidenceReportResponse,
   DescribeFileUrlsResponse,
+  GroupOrganization,
   AuthorizedUser,
   CreateDocumentRequest,
   RemindFlowRecords,
@@ -82,9 +84,9 @@ import {
   SignQrCode,
   GetTaskResultApiRequest,
   RegisterInfo,
-  GroupOrganization,
-  CreateFlowSignUrlRequest,
   CreateIntegrationEmployeesResponse,
+  CreateFlowSignUrlRequest,
+  CreateReleaseFlowRequest,
   FlowDetailInfo,
   CreateFlowByFilesResponse,
   UploadFilesResponse,
@@ -126,12 +128,14 @@ import {
   Caller,
   DescribeFlowTemplatesResponse,
   UploadFilesRequest,
+  RelieveInfo,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoResponse,
   CcInfo,
   CreateFlowResponse,
   DescribeUserAutoSignStatusRequest,
+  ReleasedApprover,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
   CancelMultiFlowSignQRCodeResponse,
@@ -358,6 +362,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateFlowResponse) => void
   ): Promise<CreateFlowResponse> {
     return this.request("CreateFlow", req, cb)
+  }
+
+  /**
+   * 发起解除协议，主要应用场景为：基于一份已经签署的合同(签署流程)，进行解除操作。
+   */
+  async CreateReleaseFlow(
+    req: CreateReleaseFlowRequest,
+    cb?: (error: string, rep: CreateReleaseFlowResponse) => void
+  ): Promise<CreateReleaseFlowResponse> {
+    return this.request("CreateReleaseFlow", req, cb)
   }
 
   /**

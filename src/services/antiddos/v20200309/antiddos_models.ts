@@ -4605,6 +4605,12 @@ export interface BGPInstanceSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ElasticLimit: number
+
+  /**
+      * 降配后的防护能力，单位Gbps
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DownGradeProtect?: number
 }
 
 /**

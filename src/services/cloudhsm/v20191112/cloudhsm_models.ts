@@ -233,6 +233,57 @@ Default-默认不修改
    * 子网Id
    */
   SubnetId?: string
+
+  /**
+   * 告警开关，0表示关闭告警，1表示启用告警
+   */
+  AlarmStatus?: number
+}
+
+/**
+ * GetAlarmEvent返回参数结构体
+ */
+export interface GetAlarmEventResponse {
+  /**
+      * 用户所有的告警策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmConfig?: Array<AlarmPolicy>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAlarmEvent请求参数结构体
+ */
+export interface ModifyAlarmEventRequest {
+  /**
+   * 告警事件，支持CPU、MEM、TCP
+   */
+  Event: string
+
+  /**
+   * 告警阈值
+   */
+  Limit: number
+
+  /**
+   * 告警状态，0表示停用，1表示启动
+   */
+  Status: number
+
+  /**
+   * 告警开始时间，只有在这个时间后才会发送告警，当跟EndTime同时为空时表示全天告警
+   */
+  BeginTime?: string
+
+  /**
+   * 告警结束时间，只有在这个时间前才会发送告警，当跟BeginTime同时为空时表示全天告警
+   */
+  EndTime?: string
 }
 
 /**
@@ -249,6 +300,21 @@ export interface DescribeSubnetResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubnetList: Array<Subnet>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetVsmMonitorInfo返回参数结构体
+ */
+export interface GetVsmMonitorInfoResponse {
+  /**
+   * VSM监控信息
+   */
+  MonitorInfo?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -282,33 +348,9 @@ export interface DescribeSupportedHsmRequest {
 }
 
 /**
- * 安全组基础信息
+ * GetAlarmEvent请求参数结构体
  */
-export interface SgUnit {
-  /**
-      * 安全组Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SgId: string
-
-  /**
-      * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SgName: string
-
-  /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SgRemark: string
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-}
+export type GetAlarmEventRequest = null
 
 /**
  * DescribeHSMByVpcId返回参数结构体
@@ -502,6 +544,12 @@ export interface ResourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Manufacturer: string
+
+  /**
+      * 告警状态，0：停用，1：启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmStatus?: number
 }
 
 /**
@@ -522,6 +570,81 @@ export interface DescribeVpcRequest {
    * 搜索关键字
    */
   SearchWord?: string
+}
+
+/**
+ * 告警策略
+ */
+export interface AlarmPolicy {
+  /**
+   * 用户账号
+   */
+  Uin?: string
+
+  /**
+   * 告警事件
+   */
+  Event?: string
+
+  /**
+   * 告警阈值
+   */
+  Limit?: number
+
+  /**
+   * 告警策略是否生效，0：停用，1：启用
+   */
+  Status?: number
+
+  /**
+   * 在这个时间后才允许发送告警
+   */
+  BeginTime?: string
+
+  /**
+   * 在这个时间前才允许发送告警
+   */
+  EndTime?: string
+}
+
+/**
+ * DescribeUsg请求参数结构体
+ */
+export interface DescribeUsgRequest {
+  /**
+   * 偏移量，当Offset和Limit均为0时将一次性返回用户所有的安全组列表。
+   */
+  Offset: number
+
+  /**
+   * 返回量，当Offset和Limit均为0时将一次性返回用户所有的安全组列表。
+   */
+  Limit: number
+
+  /**
+   * 搜索关键字
+   */
+  SearchWord?: string
+}
+
+/**
+ * 支持的加密机类型信息
+ */
+export interface HsmInfo {
+  /**
+   * 加密机型号
+   */
+  Model: string
+
+  /**
+   * 此类型的加密机所支持的VSM类型列表
+   */
+  VsmTypes: Array<VsmInfo>
+
+  /**
+   * 加密机母机类型：virtualization、GHSM、EHSM、SHSM
+   */
+  HsmType?: string
 }
 
 /**
@@ -551,26 +674,6 @@ export interface Vpc {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsDefault: boolean
-}
-
-/**
- * DescribeUsg请求参数结构体
- */
-export interface DescribeUsgRequest {
-  /**
-   * 偏移量，当Offset和Limit均为0时将一次性返回用户所有的安全组列表。
-   */
-  Offset: number
-
-  /**
-   * 返回量，当Offset和Limit均为0时将一次性返回用户所有的安全组列表。
-   */
-  Limit: number
-
-  /**
-   * 搜索关键字
-   */
-  SearchWord?: string
 }
 
 /**
@@ -736,6 +839,16 @@ export interface DescribeHSMByVpcIdRequest {
 }
 
 /**
+ * ModifyAlarmEvent返回参数结构体
+ */
+export interface ModifyAlarmEventResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全组规则详情
  */
 export interface UsgRuleDetail {
@@ -823,6 +936,35 @@ export interface InquiryPriceBuyVsmResponse {
 }
 
 /**
+ * 安全组基础信息
+ */
+export interface SgUnit {
+  /**
+      * 安全组Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SgId: string
+
+  /**
+      * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SgName: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SgRemark: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+}
+
+/**
  * DescribeHSMBySubnetId返回参数结构体
  */
 export interface DescribeHSMBySubnetIdResponse {
@@ -843,18 +985,18 @@ export interface DescribeHSMBySubnetIdResponse {
 }
 
 /**
- * 支持的加密机类型信息
+ * GetVsmMonitorInfo请求参数结构体
  */
-export interface HsmInfo {
+export interface GetVsmMonitorInfoRequest {
   /**
-   * 加密机型号
+   * 资源Id
    */
-  Model: string
+  ResourceId: string
 
   /**
-   * 此类型的加密机所支持的VSM类型列表
+   * 资源名称
    */
-  VsmTypes: Array<VsmInfo>
+  ResourceName?: string
 }
 
 /**

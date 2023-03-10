@@ -68,9 +68,9 @@ it("cls.v20201016.ModifyTopic", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMachines", async function () {
+it("cls.v20201016.DescribeCosRecharges", async function () {
     try {
-       const data = await client.DescribeMachines({})
+       const data = await client.DescribeCosRecharges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +358,16 @@ it("cls.v20201016.CreateLogset", async function () {
     }
 })
 
+it("cls.v20201016.SplitPartition", async function () {
+    try {
+       const data = await client.SplitPartition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
@@ -391,6 +401,16 @@ it("cls.v20201016.SearchLog", async function () {
 it("cls.v20201016.ModifyAlarmNotice", async function () {
     try {
        const data = await client.ModifyAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeMachines", async function () {
+    try {
+       const data = await client.DescribeMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +538,9 @@ it("cls.v20201016.DescribeConsumer", async function () {
     }
 })
 
-it("cls.v20201016.SplitPartition", async function () {
+it("cls.v20201016.DescribeConfigs", async function () {
     try {
-       const data = await client.SplitPartition({})
+       const data = await client.DescribeConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +548,9 @@ it("cls.v20201016.SplitPartition", async function () {
     }
 })
 
-it("cls.v20201016.DescribeConfigs", async function () {
+it("cls.v20201016.CreateCosRecharge", async function () {
     try {
-       const data = await client.DescribeConfigs({})
+       const data = await client.CreateCosRecharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -581,6 +601,16 @@ it("cls.v20201016.RetryShipperTask", async function () {
 it("cls.v20201016.DescribeConfigMachineGroups", async function () {
     try {
        const data = await client.DescribeConfigMachineGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyCosRecharge", async function () {
+    try {
+       const data = await client.ModifyCosRecharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,6 +18,46 @@ const client = new tencentcloud.irp.v20220805.Client({
 })
 describe("irp.v20220805.test.js", function () {
 
+it("irp.v20220805.ReportGoodsInfo", async function () {
+    try {
+       const data = await client.ReportGoodsInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("irp.v20220805.ReportGoodsBehavior", async function () {
+    try {
+       const data = await client.ReportGoodsBehavior({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("irp.v20220805.ReportFeedBehavior", async function () {
+    try {
+       const data = await client.ReportFeedBehavior({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("irp.v20220805.DescribeGoodsRecommend", async function () {
+    try {
+       const data = await client.DescribeGoodsRecommend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("irp.v20220805.ReportFeedUser", async function () {
     try {
        const data = await client.ReportFeedUser({})
@@ -31,16 +71,6 @@ it("irp.v20220805.ReportFeedUser", async function () {
 it("irp.v20220805.ReportFeedItem", async function () {
     try {
        const data = await client.ReportFeedItem({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("irp.v20220805.ReportFeedBehavior", async function () {
-    try {
-       const data = await client.ReportFeedBehavior({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
