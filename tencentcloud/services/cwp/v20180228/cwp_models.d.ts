@@ -5796,11 +5796,11 @@ export interface DescribeBaselineDownloadListResponse {
     /**
       * 无
       */
-    List: Array<BaselineDownload>;
+    List?: Array<BaselineDownload>;
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6594,11 +6594,11 @@ export interface DescribeBaselineFixListResponse {
     /**
       * 无
       */
-    List: Array<BaselineFix>;
+    List?: Array<BaselineFix>;
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8548,7 +8548,7 @@ export interface BaselineItemDetect {
  */
 export interface DescribeBaselineFixListRequest {
     /**
-      * <li>ItemName- string - 是否必填：否 - 项名称</i>
+      * <li>ItemName- string - 是否必填：否 - 项名称</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -11271,7 +11271,7 @@ export interface DescribeBaselineItemIgnoreListRequest {
       */
     Offset?: number;
     /**
-      * <li>CatgoryId - int64 - 是否必填：否 - 规则Id</i>
+      * <li>CatgoryId - int64 - 是否必填：否 - 规则Id</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -16079,11 +16079,11 @@ export interface DescribeBaselineItemIgnoreListResponse {
     /**
       * 无
       */
-    List: Array<BaselineItemInfo>;
+    List?: Array<BaselineItemInfo>;
     /**
       * 总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1487,7 +1487,7 @@ export interface CreateFlowSignUrlResponse {
   /**
    * 签署人签署链接信息
    */
-  FlowApproverUrlInfos: Array<FlowApproverUrlInfo>
+  FlowApproverUrlInfos?: Array<FlowApproverUrlInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2272,12 +2272,12 @@ export interface UploadFilesResponse {
   /**
    * 文件id数组
    */
-  FileIds: Array<string>
+  FileIds?: Array<string>
 
   /**
    * 上传成功文件数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

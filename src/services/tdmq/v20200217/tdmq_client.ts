@@ -42,6 +42,7 @@ import {
   RocketMQVipInstance,
   RabbitMQVipInstance,
   DescribeCmqQueuesResponse,
+  CreateRabbitMQVipInstanceRequest,
   DescribeAllTenantsResponse,
   DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
@@ -187,6 +188,7 @@ import {
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
   ClearCmqSubscriptionFilterTagsResponse,
+  CreateRabbitMQVipInstanceResponse,
   DescribeCmqTopicsRequest,
   Filter,
   AMQPExchange,
@@ -479,13 +481,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改环境角色授权。
+   * 创建RocketMQ消费组
    */
-  async ModifyEnvironmentRole(
-    req: ModifyEnvironmentRoleRequest,
-    cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
-  ): Promise<ModifyEnvironmentRoleResponse> {
-    return this.request("ModifyEnvironmentRole", req, cb)
+  async CreateRocketMQGroup(
+    req: CreateRocketMQGroupRequest,
+    cb?: (error: string, rep: CreateRocketMQGroupResponse) => void
+  ): Promise<CreateRocketMQGroupResponse> {
+    return this.request("CreateRocketMQGroup", req, cb)
   }
 
   /**
@@ -939,6 +941,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建RabbitMQ专享版实例
+   */
+  async CreateRabbitMQVipInstance(
+    req: CreateRabbitMQVipInstanceRequest,
+    cb?: (error: string, rep: CreateRabbitMQVipInstanceResponse) => void
+  ): Promise<CreateRabbitMQVipInstanceResponse> {
+    return this.request("CreateRabbitMQVipInstance", req, cb)
+  }
+
+  /**
      * 产品下线了，对应的接口也要下线。
 
 创建AMQP队列
@@ -1139,6 +1151,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * 修改环境角色授权。
+   */
+  async ModifyEnvironmentRole(
+    req: ModifyEnvironmentRoleRequest,
+    cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
+  ): Promise<ModifyEnvironmentRoleResponse> {
+    return this.request("ModifyEnvironmentRole", req, cb)
+  }
+
+  /**
    * 获取RocketMQ集群列表
    */
   async DescribeRocketMQClusters(
@@ -1303,13 +1325,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 创建RocketMQ消费组
+   * 删除cmq订阅
    */
-  async CreateRocketMQGroup(
-    req: CreateRocketMQGroupRequest,
-    cb?: (error: string, rep: CreateRocketMQGroupResponse) => void
-  ): Promise<CreateRocketMQGroupResponse> {
-    return this.request("CreateRocketMQGroup", req, cb)
+  async DeleteCmqSubscribe(
+    req: DeleteCmqSubscribeRequest,
+    cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
+  ): Promise<DeleteCmqSubscribeResponse> {
+    return this.request("DeleteCmqSubscribe", req, cb)
   }
 
   /**
@@ -1320,16 +1342,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: ModifyRoleResponse) => void
   ): Promise<ModifyRoleResponse> {
     return this.request("ModifyRole", req, cb)
-  }
-
-  /**
-   * 删除cmq订阅
-   */
-  async DeleteCmqSubscribe(
-    req: DeleteCmqSubscribeRequest,
-    cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
-  ): Promise<DeleteCmqSubscribeResponse> {
-    return this.request("DeleteCmqSubscribe", req, cb)
   }
 
   /**

@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("lcic.tencentcloudapi.com", "2022-08-17", clientConfig);
     }
     /**
-     * 此接口用于添加成员列表到指定群组
+     * 获取应用详情
      */
-    async AddGroupMember(req, cb) {
-        return this.request("AddGroupMember", req, cb);
+    async DescribeAppDetail(req, cb) {
+        return this.request("DescribeAppDetail", req, cb);
     }
     /**
      * 获取房间历史消息(房间历史消息保存7天)
@@ -56,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRoom(req, cb) {
         return this.request("ModifyRoom", req, cb);
+    }
+    /**
+     * 删除设置自定义元素。如果参数scenes为空则删除所有自定义元素，否则删除指定的scene自定义元素。
+     */
+    async DeleteAppCustomContent(req, cb) {
+        return this.request("DeleteAppCustomContent", req, cb);
     }
     /**
      * 获取水印设置
@@ -160,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUserProfile", req, cb);
     }
     /**
-     * 批量创建房间接口
+     * 此接口用于添加成员列表到指定群组
      */
-    async BatchCreateRoom(req, cb) {
-        return this.request("BatchCreateRoom", req, cb);
+    async AddGroupMember(req, cb) {
+        return this.request("AddGroupMember", req, cb);
     }
     /**
      * 注册用户
@@ -226,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCurrentMemberList", req, cb);
     }
     /**
-     * 获取应用详情
+     * 批量创建房间接口
      */
-    async DescribeAppDetail(req, cb) {
-        return this.request("DescribeAppDetail", req, cb);
+    async BatchCreateRoom(req, cb) {
+        return this.request("BatchCreateRoom", req, cb);
     }
     /**
      * 删除文档

@@ -219,7 +219,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DescribeIntegrationEmployees", req, cb);
     }
     /**
-     * 创建签署链接，需要联系运营人员开白后才可使用
+     * 创建签署链接，请联系客户经理申请使用
      */
     async CreateFlowSignUrl(req, cb) {
         return this.request("CreateFlowSignUrl", req, cb);
@@ -241,6 +241,7 @@ callbackinfo包含： 回调地址和签名key
     /**
      * 此接口（UploadFiles）用于文件上传。
 适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。
+其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。
 调用时需要设置Domain/接口请求域名为 file.ess.tencent.cn，并设置参数Version/版本号为2020-12-22
      */
     async UploadFiles(req, cb) {
@@ -249,7 +250,7 @@ callbackinfo包含： 回调地址和签名key
     /**
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
-该接口不可直接调用，需要联系运营开通后方可调用。
+该接口不可直接调用，请联系客户经理申请使用
      */
     async CreateFlowReminds(req, cb) {
         return this.request("CreateFlowReminds", req, cb);

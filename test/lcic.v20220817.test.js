@@ -18,9 +18,9 @@ const client = new tencentcloud.lcic.v20220817.Client({
 })
 describe("lcic.v20220817.test.js", function () {
 
-it("lcic.v20220817.AddGroupMember", async function () {
+it("lcic.v20220817.DescribeAppDetail", async function () {
     try {
-       const data = await client.AddGroupMember({})
+       const data = await client.DescribeAppDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("lcic.v20220817.DescribeDocumentsByRoom", async function () {
 it("lcic.v20220817.ModifyRoom", async function () {
     try {
        const data = await client.ModifyRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DeleteAppCustomContent", async function () {
+    try {
+       const data = await client.DeleteAppCustomContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,9 @@ it("lcic.v20220817.ModifyUserProfile", async function () {
     }
 })
 
-it("lcic.v20220817.BatchCreateRoom", async function () {
+it("lcic.v20220817.AddGroupMember", async function () {
     try {
-       const data = await client.BatchCreateRoom({})
+       const data = await client.AddGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +358,9 @@ it("lcic.v20220817.DescribeCurrentMemberList", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeAppDetail", async function () {
+it("lcic.v20220817.BatchCreateRoom", async function () {
     try {
-       const data = await client.DescribeAppDetail({})
+       const data = await client.BatchCreateRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

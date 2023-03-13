@@ -598,6 +598,51 @@ export interface DescribeCmqQueuesResponse {
     RequestId?: string;
 }
 /**
+ * CreateRabbitMQVipInstance请求参数结构体
+ */
+export interface CreateRabbitMQVipInstanceRequest {
+    /**
+      * 可用区
+      */
+    ZoneIds: Array<number>;
+    /**
+      * 私有网络VpcId
+      */
+    VpcId: string;
+    /**
+      * 私有网络SubnetId
+      */
+    SubnetId: string;
+    /**
+      * 集群名称
+      */
+    ClusterName: string;
+    /**
+      * 节点规格,基础型rabbit-vip-basic-1,标准型rabbit-vip-basic-2,高阶1型rabbit-vip-basic-3,高阶2型rabbit-vip-basic-4。不传默认为基础型
+      */
+    NodeSpec?: string;
+    /**
+      * 节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3
+      */
+    NodeNum?: number;
+    /**
+      * 单节点存储规格,不传默认为200G
+      */
+    StorageSize?: number;
+    /**
+      * 镜像队列,不传默认为false
+      */
+    EnableCreateDefaultHaMirrorQueue?: boolean;
+    /**
+      * 自动续费,不传默认为true
+      */
+    AutoRenewFlag?: boolean;
+    /**
+      * 购买时长,不传默认为1(月)
+      */
+    TimeSpan?: number;
+}
+/**
  * DescribeAllTenants返回参数结构体
  */
 export interface DescribeAllTenantsResponse {
@@ -3995,6 +4040,25 @@ export interface CmqDeadLetterSource {
  * ClearCmqSubscriptionFilterTags返回参数结构体
  */
 export interface ClearCmqSubscriptionFilterTagsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateRabbitMQVipInstance返回参数结构体
+ */
+export interface CreateRabbitMQVipInstanceResponse {
+    /**
+      * 订单号Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranId?: string;
+    /**
+      * 实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

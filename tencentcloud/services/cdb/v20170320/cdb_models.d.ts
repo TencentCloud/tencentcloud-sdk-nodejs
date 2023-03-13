@@ -2030,11 +2030,11 @@ export interface DescribeBinlogsResponse {
     /**
       * 符合查询条件的日志文件总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 符合查询条件的二进制日志文件详情。
       */
-    Items: Array<BinlogInfo>;
+    Items?: Array<BinlogInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2696,11 +2696,11 @@ export interface DescribeBackupsResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 符合查询条件的备份信息详情。
       */
-    Items: Array<BackupInfo>;
+    Items?: Array<BackupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2799,79 +2799,79 @@ export interface DescribeBackupConfigResponse {
     /**
       * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
       */
-    StartTimeMin: number;
+    StartTimeMin?: number;
     /**
       * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
       */
-    StartTimeMax: number;
+    StartTimeMax?: number;
     /**
       * 备份文件保留时间，单位为天。
       */
-    BackupExpireDays: number;
+    BackupExpireDays?: number;
     /**
       * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
       */
-    BackupMethod: string;
+    BackupMethod?: string;
     /**
       * Binlog 文件保留时间，单位为天。
       */
-    BinlogExpireDays: number;
+    BinlogExpireDays?: number;
     /**
       * 实例自动备份的时间窗。
       */
-    BackupTimeWindow: CommonTimeWindow;
+    BackupTimeWindow?: CommonTimeWindow;
     /**
       * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off
       */
-    EnableBackupPeriodSave: string;
+    EnableBackupPeriodSave?: string;
     /**
       * 定期保留最长天数，最小值：90，最大值：3650，默认值：1080
       */
-    BackupPeriodSaveDays: number;
+    BackupPeriodSaveDays?: number;
     /**
       * 定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly
       */
-    BackupPeriodSaveInterval: string;
+    BackupPeriodSaveInterval?: string;
     /**
       * 定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1
       */
-    BackupPeriodSaveCount: number;
+    BackupPeriodSaveCount?: number;
     /**
       * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
       */
-    StartBackupPeriodSaveDate: string;
+    StartBackupPeriodSaveDate?: string;
     /**
       * 是否开启数据备份归档策略，off-关闭，on-打开，默认为off
       */
-    EnableBackupArchive: string;
+    EnableBackupArchive?: string;
     /**
       * 数据备份归档起始天数，数据备份达到归档起始天数时进行归档，最小为180天，不得大于数据备份保留天数
       */
-    BackupArchiveDays: number;
+    BackupArchiveDays?: number;
     /**
       * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
       */
-    EnableBinlogArchive: string;
+    EnableBinlogArchive?: string;
     /**
       * 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数
       */
-    BinlogArchiveDays: number;
+    BinlogArchiveDays?: number;
     /**
       * 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off
       */
-    EnableBackupStandby: string;
+    EnableBackupStandby?: string;
     /**
       * 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数
       */
-    BackupStandbyDays: number;
+    BackupStandbyDays?: number;
     /**
       * 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off
       */
-    EnableBinlogStandby: string;
+    EnableBinlogStandby?: string;
     /**
       * 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数
       */
-    BinlogStandbyDays: number;
+    BinlogStandbyDays?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

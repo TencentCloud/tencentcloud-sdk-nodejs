@@ -29,6 +29,7 @@ import {
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
   CreateGroupWithMembersResponse,
+  DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
   ModifyAppResponse,
@@ -110,6 +111,7 @@ import {
   DescribeGroupRequest,
   CreateSupervisorRequest,
   BackgroundPictureConfig,
+  DeleteAppCustomContentResponse,
   DescribeCurrentMemberListResponse,
   ModifyGroupResponse,
   DescribeGroupListResponse,
@@ -128,13 +130,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于添加成员列表到指定群组
+   * 获取应用详情
    */
-  async AddGroupMember(
-    req: AddGroupMemberRequest,
-    cb?: (error: string, rep: AddGroupMemberResponse) => void
-  ): Promise<AddGroupMemberResponse> {
-    return this.request("AddGroupMember", req, cb)
+  async DescribeAppDetail(
+    req: DescribeAppDetailRequest,
+    cb?: (error: string, rep: DescribeAppDetailResponse) => void
+  ): Promise<DescribeAppDetailResponse> {
+    return this.request("DescribeAppDetail", req, cb)
   }
 
   /**
@@ -175,6 +177,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRoomResponse) => void
   ): Promise<ModifyRoomResponse> {
     return this.request("ModifyRoom", req, cb)
+  }
+
+  /**
+   * 删除设置自定义元素。如果参数scenes为空则删除所有自定义元素，否则删除指定的scene自定义元素。
+   */
+  async DeleteAppCustomContent(
+    req: DeleteAppCustomContentRequest,
+    cb?: (error: string, rep: DeleteAppCustomContentResponse) => void
+  ): Promise<DeleteAppCustomContentResponse> {
+    return this.request("DeleteAppCustomContent", req, cb)
   }
 
   /**
@@ -348,13 +360,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量创建房间接口
+   * 此接口用于添加成员列表到指定群组
    */
-  async BatchCreateRoom(
-    req: BatchCreateRoomRequest,
-    cb?: (error: string, rep: BatchCreateRoomResponse) => void
-  ): Promise<BatchCreateRoomResponse> {
-    return this.request("BatchCreateRoom", req, cb)
+  async AddGroupMember(
+    req: AddGroupMemberRequest,
+    cb?: (error: string, rep: AddGroupMemberResponse) => void
+  ): Promise<AddGroupMemberResponse> {
+    return this.request("AddGroupMember", req, cb)
   }
 
   /**
@@ -458,13 +470,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用详情
+   * 批量创建房间接口
    */
-  async DescribeAppDetail(
-    req: DescribeAppDetailRequest,
-    cb?: (error: string, rep: DescribeAppDetailResponse) => void
-  ): Promise<DescribeAppDetailResponse> {
-    return this.request("DescribeAppDetail", req, cb)
+  async BatchCreateRoom(
+    req: BatchCreateRoomRequest,
+    cb?: (error: string, rep: BatchCreateRoomResponse) => void
+  ): Promise<BatchCreateRoomResponse> {
+    return this.request("BatchCreateRoom", req, cb)
   }
 
   /**

@@ -208,9 +208,9 @@ it("tdmq.v20200217.DescribeClusterDetail", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyEnvironmentRole", async function () {
+it("tdmq.v20200217.CreateRocketMQGroup", async function () {
     try {
-       const data = await client.ModifyEnvironmentRole({})
+       const data = await client.CreateRocketMQGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,6 +648,16 @@ it("tdmq.v20200217.DescribeAMQPClusters", async function () {
     }
 })
 
+it("tdmq.v20200217.CreateRabbitMQVipInstance", async function () {
+    try {
+       const data = await client.CreateRabbitMQVipInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateAMQPQueue", async function () {
     try {
        const data = await client.CreateAMQPQueue({})
@@ -818,6 +828,16 @@ it("tdmq.v20200217.DescribeRocketMQTopics", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyEnvironmentRole", async function () {
+    try {
+       const data = await client.ModifyEnvironmentRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQClusters", async function () {
     try {
        const data = await client.DescribeRocketMQClusters({})
@@ -978,9 +998,9 @@ it("tdmq.v20200217.ClearCmqSubscriptionFilterTags", async function () {
     }
 })
 
-it("tdmq.v20200217.CreateRocketMQGroup", async function () {
+it("tdmq.v20200217.DeleteCmqSubscribe", async function () {
     try {
-       const data = await client.CreateRocketMQGroup({})
+       const data = await client.DeleteCmqSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -991,16 +1011,6 @@ it("tdmq.v20200217.CreateRocketMQGroup", async function () {
 it("tdmq.v20200217.ModifyRole", async function () {
     try {
        const data = await client.ModifyRole({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.DeleteCmqSubscribe", async function () {
-    try {
-       const data = await client.DeleteCmqSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

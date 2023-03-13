@@ -435,7 +435,7 @@ export interface RenewInstanceResponse {
   /**
    * 交易 ID。
    */
-  DealId: string
+  DealId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -631,7 +631,7 @@ export interface RenewInstanceRequest {
   InstanceId: string
 
   /**
-   * 购买时长，单位：月。取值范围为 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
+   * 购买时长。单位：月。取值为 [1,2,3,4,5,6,7,8,9,10,11,12,24,36,48,60]。
    */
   Period: number
 }

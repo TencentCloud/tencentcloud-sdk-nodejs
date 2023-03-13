@@ -88,7 +88,9 @@ export declare class Client extends AbstractClient {
      */
     CreatePrefetchTask(req: CreatePrefetchTaskRequest, cb?: (error: string, rep: CreatePrefetchTaskResponse) => void): Promise<CreatePrefetchTaskResponse>;
     /**
-     * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
+     * 接口已经不兼容升级，故作下线处理
+
+本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
      */
     DescribeOverviewL7Data(req: DescribeOverviewL7DataRequest, cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void): Promise<DescribeOverviewL7DataResponse>;
     /**
@@ -132,7 +134,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteOriginGroup(req: DeleteOriginGroupRequest, cb?: (error: string, rep: DeleteOriginGroupResponse) => void): Promise<DeleteOriginGroupResponse>;
     /**
-     * 查询waf攻击top数据
+     * 此版本的接口已经废弃
+
+查询waf攻击top数据
      */
     DescribeWebManagedRulesTopData(req: DescribeWebManagedRulesTopDataRequest, cb?: (error: string, rep: DescribeWebManagedRulesTopDataResponse) => void): Promise<DescribeWebManagedRulesTopDataResponse>;
     /**
@@ -164,7 +168,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopL7CacheData(req: DescribeTopL7CacheDataRequest, cb?: (error: string, rep: DescribeTopL7CacheDataResponse) => void): Promise<DescribeTopL7CacheDataResponse>;
     /**
-     * 四层时序流量数据查询
+     * 旧版本的接口已经不兼容，故作下线处理
+
+四层时序流量数据查询
      */
     DescribeTimingL4Data(req: DescribeTimingL4DataRequest, cb?: (error: string, rep: DescribeTimingL4DataResponse) => void): Promise<DescribeTimingL4DataResponse>;
     /**
@@ -332,7 +338,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyDnsRecord(req: ModifyDnsRecordRequest, cb?: (error: string, rep: ModifyDnsRecordResponse) => void): Promise<ModifyDnsRecordResponse>;
     /**
-     * 查询DDos主攻击事件
+     * 此接口已经做不兼容变更，所以此版本的接口已经无法调用，故作下线处理
+
+查询DDos主攻击事件
      */
     DescribeDDosMajorAttackEvent(req: DescribeDDosMajorAttackEventRequest, cb?: (error: string, rep: DescribeDDosMajorAttackEventResponse) => void): Promise<DescribeDDosMajorAttackEventResponse>;
     /**

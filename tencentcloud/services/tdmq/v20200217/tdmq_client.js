@@ -148,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterDetail", req, cb);
     }
     /**
-     * 修改环境角色授权。
+     * 创建RocketMQ消费组
      */
-    async ModifyEnvironmentRole(req, cb) {
-        return this.request("ModifyEnvironmentRole", req, cb);
+    async CreateRocketMQGroup(req, cb) {
+        return this.request("CreateRocketMQGroup", req, cb);
     }
     /**
      * 根据提供的 MessageID 确认指定 topic 中的消息
@@ -432,6 +432,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAMQPClusters", req, cb);
     }
     /**
+     * 创建RabbitMQ专享版实例
+     */
+    async CreateRabbitMQVipInstance(req, cb) {
+        return this.request("CreateRabbitMQVipInstance", req, cb);
+    }
+    /**
      * 产品下线了，对应的接口也要下线。
 
 创建AMQP队列
@@ -564,6 +570,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DescribeRocketMQTopics", req, cb);
     }
     /**
+     * 修改环境角色授权。
+     */
+    async ModifyEnvironmentRole(req, cb) {
+        return this.request("ModifyEnvironmentRole", req, cb);
+    }
+    /**
      * 获取RocketMQ集群列表
      */
     async DescribeRocketMQClusters(req, cb) {
@@ -664,22 +676,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ClearCmqSubscriptionFilterTags", req, cb);
     }
     /**
-     * 创建RocketMQ消费组
+     * 删除cmq订阅
      */
-    async CreateRocketMQGroup(req, cb) {
-        return this.request("CreateRocketMQGroup", req, cb);
+    async DeleteCmqSubscribe(req, cb) {
+        return this.request("DeleteCmqSubscribe", req, cb);
     }
     /**
      * 角色修改
      */
     async ModifyRole(req, cb) {
         return this.request("ModifyRole", req, cb);
-    }
-    /**
-     * 删除cmq订阅
-     */
-    async DeleteCmqSubscribe(req, cb) {
-        return this.request("DeleteCmqSubscribe", req, cb);
     }
     /**
      * 获取某个租户的虚拟集群列表

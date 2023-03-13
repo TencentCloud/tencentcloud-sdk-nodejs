@@ -231,6 +231,19 @@ export interface CreateGroupWithMembersResponse {
     RequestId?: string;
 }
 /**
+ * DeleteAppCustomContent请求参数结构体
+ */
+export interface DeleteAppCustomContentRequest {
+    /**
+      * 应用ID。
+      */
+    SdkAppId: number;
+    /**
+      * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
+      */
+    Scenes?: Array<string>;
+}
+/**
  * BatchAddGroupMember返回参数结构体
  */
 export interface BatchAddGroupMemberResponse {
@@ -1938,6 +1951,15 @@ export interface BackgroundPictureConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Url: string;
+}
+/**
+ * DeleteAppCustomContent返回参数结构体
+ */
+export interface DeleteAppCustomContentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCurrentMemberList返回参数结构体

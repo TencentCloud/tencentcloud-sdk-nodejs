@@ -565,8 +565,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
-   */
+     * 接口已经不兼容升级，故作下线处理
+
+本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。
+     */
   async DescribeOverviewL7Data(
     req: DescribeOverviewL7DataRequest,
     cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void
@@ -675,8 +677,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询waf攻击top数据
-   */
+     * 此版本的接口已经废弃
+
+查询waf攻击top数据
+     */
   async DescribeWebManagedRulesTopData(
     req: DescribeWebManagedRulesTopDataRequest,
     cb?: (error: string, rep: DescribeWebManagedRulesTopDataResponse) => void
@@ -755,8 +759,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 四层时序流量数据查询
-   */
+     * 旧版本的接口已经不兼容，故作下线处理
+
+四层时序流量数据查询
+     */
   async DescribeTimingL4Data(
     req: DescribeTimingL4DataRequest,
     cb?: (error: string, rep: DescribeTimingL4DataResponse) => void
@@ -1175,8 +1181,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询DDos主攻击事件
-   */
+     * 此接口已经做不兼容变更，所以此版本的接口已经无法调用，故作下线处理
+
+查询DDos主攻击事件
+     */
   async DescribeDDosMajorAttackEvent(
     req: DescribeDDosMajorAttackEventRequest,
     cb?: (error: string, rep: DescribeDDosMajorAttackEventResponse) => void
