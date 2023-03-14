@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomains", req, cb);
     }
     /**
+     * 本接口用于搜索WAF访问日志
+     */
+    async SearchAccessLog(req, cb) {
+        return this.request("SearchAccessLog", req, cb);
+    }
+    /**
      * 本接口用于获取访问日志索引配置信息
      */
     async DescribeAccessIndex(req, cb) {
@@ -186,6 +192,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafThreatenIntelligence", req, cb);
     }
     /**
+     * 获取各个模块具体的规格限制
+     */
+    async DescribeRuleLimit(req, cb) {
+        return this.request("DescribeRuleLimit", req, cb);
+    }
+    /**
      * 修改ip惩罚规则
      */
     async ModifyWafAutoDenyRules(req, cb) {
@@ -246,10 +258,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafThreatenIntelligence", req, cb);
     }
     /**
-     * 本接口用于搜索WAF访问日志
+     * 获取防护状态以及生效的实例id
      */
-    async SearchAccessLog(req, cb) {
-        return this.request("SearchAccessLog", req, cb);
+    async DescribePolicyStatus(req, cb) {
+        return this.request("DescribePolicyStatus", req, cb);
     }
     /**
      * Waf  IP封堵状态查询
@@ -262,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddDomainWhiteRule(req, cb) {
         return this.request("AddDomainWhiteRule", req, cb);
+    }
+    /**
+     * 获取防护配置中的精准白名单策略列表
+     */
+    async DescribeCustomWhiteRule(req, cb) {
+        return this.request("DescribeCustomWhiteRule", req, cb);
     }
     /**
      * Waf IP黑白名单Upsert接口

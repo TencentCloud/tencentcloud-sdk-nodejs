@@ -1842,6 +1842,15 @@ export interface DescribeBandwidthPackagesResponse {
     RequestId?: string;
 }
 /**
+ * ReplaceSecurityGroupPolicies返回参数结构体
+ */
+export interface ReplaceSecurityGroupPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDirectConnectGateways请求参数结构体
  */
 export interface DescribeDirectConnectGatewaysRequest {
@@ -10283,6 +10292,23 @@ export interface DeleteNatGatewayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ReplaceSecurityGroupPolicies请求参数结构体
+ */
+export interface ReplaceSecurityGroupPoliciesRequest {
+    /**
+      * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+      */
+    SecurityGroupId: string;
+    /**
+      * 安全组规则集合对象。
+      */
+    SecurityGroupPolicySet: SecurityGroupPolicySet;
+    /**
+      * 旧的安全组规则集合对象，可选，日志记录用。
+      */
+    OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet;
 }
 /**
  * AdjustPublicAddress请求参数结构体

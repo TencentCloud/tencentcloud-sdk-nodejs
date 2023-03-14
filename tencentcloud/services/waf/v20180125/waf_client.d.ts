@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateAccessExportRequest, DescribeIpHitItemsResponse, DescribeUserCdcClbWafRegionsRequest, DeleteAttackDownloadRecordResponse, DescribeFlowTrendRequest, DescribeWafAutoDenyStatusRequest, DescribeWafAutoDenyRulesResponse, DescribeIpAccessControlResponse, DescribeInstancesResponse, ModifyDomainWhiteRuleRequest, DescribeAccessIndexRequest, DeleteSessionRequest, DescribeWafAutoDenyRulesRequest, SearchAttackLogRequest, AddCustomRuleResponse, DescribeFlowTrendResponse, GetAttackDownloadRecordsRequest, UpsertIpAccessControlRequest, DeleteDownloadRecordRequest, DescribeUserCdcClbWafRegionsResponse, DeleteAccessExportResponse, DescribeAccessExportsRequest, DescribeUserClbWafRegionsResponse, ModifyWafAutoDenyStatusRequest, ModifyAccessPeriodResponse, DescribeAutoDenyIPResponse, SwitchDomainRulesResponse, SearchAccessLogResponse, SwitchDomainRulesRequest, DescribeAutoDenyIPRequest, DescribeIpAccessControlRequest, ModifyAreaBanStatusRequest, AddSpartaProtectionRequest, PostAttackDownloadTaskRequest, DescribeAccessFastAnalysisRequest, DeleteIpAccessControlRequest, DeleteDomainWhiteRulesResponse, DescribeAttackOverviewResponse, ModifyWafAutoDenyStatusResponse, DescribeWafAutoDenyStatusResponse, DeleteDomainWhiteRulesRequest, PostAttackDownloadTaskResponse, DescribeDomainDetailsSaasRequest, ModifyCustomRuleStatusResponse, AddSpartaProtectionResponse, DescribeDomainWhiteRulesRequest, AddDomainWhiteRuleResponse, ModifyCustomRuleStatusRequest, DeleteDownloadRecordResponse, ModifyAccessPeriodRequest, DescribeAttackOverviewRequest, ModifyWafAutoDenyRulesResponse, SearchAttackLogResponse, DescribeInstancesRequest, DeleteIpAccessControlResponse, DescribeDomainDetailsSaasResponse, AddCustomRuleRequest, ModifyAreaBanStatusResponse, ModifyDomainWhiteRuleResponse, ModifyWafAutoDenyRulesRequest, DescribeAccessFastAnalysisResponse, DescribeDomainsResponse, ModifyWafThreatenIntelligenceRequest, DescribeIpHitItemsRequest, GetAttackDownloadRecordsResponse, DeleteAccessExportRequest, DescribeUserClbWafRegionsRequest, DescribeDomainWhiteRulesResponse, DeleteAttackDownloadRecordRequest, DescribeWafThreatenIntelligenceResponse, AddDomainWhiteRuleRequest, UpsertIpAccessControlResponse, DeleteSessionResponse, DescribeWafThreatenIntelligenceRequest, DescribeAccessIndexResponse, DescribeAccessExportsResponse, CreateAccessExportResponse, SearchAccessLogRequest, DescribeDomainsRequest, ModifyWafThreatenIntelligenceResponse } from "./waf_models";
+import { CreateAccessExportRequest, DescribeIpHitItemsResponse, DescribeUserCdcClbWafRegionsRequest, DeleteAttackDownloadRecordResponse, DescribeFlowTrendRequest, DescribeWafAutoDenyStatusRequest, DescribeCustomWhiteRuleResponse, DescribeWafAutoDenyRulesResponse, DescribeIpAccessControlResponse, DescribeInstancesResponse, ModifyDomainWhiteRuleRequest, DescribeAccessIndexRequest, DeleteSessionRequest, DescribeWafAutoDenyRulesRequest, SearchAttackLogRequest, AddCustomRuleResponse, DescribeFlowTrendResponse, GetAttackDownloadRecordsRequest, UpsertIpAccessControlRequest, DeleteDownloadRecordRequest, DescribeUserCdcClbWafRegionsResponse, DeleteAccessExportResponse, DescribeAccessExportsRequest, DescribeCustomWhiteRuleRequest, DescribeUserClbWafRegionsResponse, ModifyWafAutoDenyStatusRequest, ModifyAccessPeriodResponse, DescribeAutoDenyIPResponse, SwitchDomainRulesResponse, SearchAccessLogResponse, SwitchDomainRulesRequest, DescribeAutoDenyIPRequest, DescribeIpAccessControlRequest, ModifyAreaBanStatusRequest, AddSpartaProtectionRequest, PostAttackDownloadTaskRequest, DescribePolicyStatusRequest, DescribeAccessFastAnalysisRequest, DeleteIpAccessControlRequest, DeleteDomainWhiteRulesResponse, DescribeAttackOverviewResponse, ModifyWafAutoDenyStatusResponse, DescribeWafAutoDenyStatusResponse, DeleteDomainWhiteRulesRequest, PostAttackDownloadTaskResponse, DescribeDomainDetailsSaasRequest, ModifyCustomRuleStatusResponse, AddSpartaProtectionResponse, DescribeDomainWhiteRulesRequest, AddDomainWhiteRuleResponse, ModifyCustomRuleStatusRequest, DeleteDownloadRecordResponse, ModifyAccessPeriodRequest, DescribeAttackOverviewRequest, ModifyWafAutoDenyRulesResponse, SearchAttackLogResponse, DescribePolicyStatusResponse, DescribeInstancesRequest, DeleteIpAccessControlResponse, DescribeDomainDetailsSaasResponse, AddCustomRuleRequest, ModifyAreaBanStatusResponse, ModifyDomainWhiteRuleResponse, ModifyWafAutoDenyRulesRequest, DescribeAccessFastAnalysisResponse, DescribeDomainsResponse, ModifyWafThreatenIntelligenceRequest, DescribeIpHitItemsRequest, DescribeRuleLimitRequest, GetAttackDownloadRecordsResponse, DeleteAccessExportRequest, DescribeUserClbWafRegionsRequest, DescribeDomainWhiteRulesResponse, DeleteAttackDownloadRecordRequest, DescribeWafThreatenIntelligenceResponse, AddDomainWhiteRuleRequest, UpsertIpAccessControlResponse, DeleteSessionResponse, DescribeRuleLimitResponse, DescribeWafThreatenIntelligenceRequest, DescribeAccessIndexResponse, DescribeAccessExportsResponse, CreateAccessExportResponse, SearchAccessLogRequest, DescribeDomainsRequest, ModifyWafThreatenIntelligenceResponse } from "./waf_models";
 /**
  * waf client
  * @class
@@ -33,6 +33,10 @@ export declare class Client extends AbstractClient {
      * 查询用户所有域名的详细信息
      */
     DescribeDomains(req: DescribeDomainsRequest, cb?: (error: string, rep: DescribeDomainsResponse) => void): Promise<DescribeDomainsResponse>;
+    /**
+     * 本接口用于搜索WAF访问日志
+     */
+    SearchAccessLog(req: SearchAccessLogRequest, cb?: (error: string, rep: SearchAccessLogResponse) => void): Promise<SearchAccessLogResponse>;
     /**
      * 本接口用于获取访问日志索引配置信息
      */
@@ -114,6 +118,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyWafThreatenIntelligence(req: ModifyWafThreatenIntelligenceRequest, cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void): Promise<ModifyWafThreatenIntelligenceResponse>;
     /**
+     * 获取各个模块具体的规格限制
+     */
+    DescribeRuleLimit(req: DescribeRuleLimitRequest, cb?: (error: string, rep: DescribeRuleLimitResponse) => void): Promise<DescribeRuleLimitResponse>;
+    /**
      * 修改ip惩罚规则
      */
     ModifyWafAutoDenyRules(req: ModifyWafAutoDenyRulesRequest, cb?: (error: string, rep: ModifyWafAutoDenyRulesResponse) => void): Promise<ModifyWafAutoDenyRulesResponse>;
@@ -154,9 +162,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeWafThreatenIntelligence(req?: DescribeWafThreatenIntelligenceRequest, cb?: (error: string, rep: DescribeWafThreatenIntelligenceResponse) => void): Promise<DescribeWafThreatenIntelligenceResponse>;
     /**
-     * 本接口用于搜索WAF访问日志
+     * 获取防护状态以及生效的实例id
      */
-    SearchAccessLog(req: SearchAccessLogRequest, cb?: (error: string, rep: SearchAccessLogResponse) => void): Promise<SearchAccessLogResponse>;
+    DescribePolicyStatus(req: DescribePolicyStatusRequest, cb?: (error: string, rep: DescribePolicyStatusResponse) => void): Promise<DescribePolicyStatusResponse>;
     /**
      * Waf  IP封堵状态查询
      */
@@ -165,6 +173,10 @@ export declare class Client extends AbstractClient {
      * 增加域名规则白名单
      */
     AddDomainWhiteRule(req: AddDomainWhiteRuleRequest, cb?: (error: string, rep: AddDomainWhiteRuleResponse) => void): Promise<AddDomainWhiteRuleResponse>;
+    /**
+     * 获取防护配置中的精准白名单策略列表
+     */
+    DescribeCustomWhiteRule(req: DescribeCustomWhiteRuleRequest, cb?: (error: string, rep: DescribeCustomWhiteRuleResponse) => void): Promise<DescribeCustomWhiteRuleResponse>;
     /**
      * Waf IP黑白名单Upsert接口
      */

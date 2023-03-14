@@ -433,7 +433,7 @@ export class Client extends AbstractClient {
    * 创建巡课
    */
   async CreateSupervisor(
-    req?: CreateSupervisorRequest,
+    req: CreateSupervisorRequest,
     cb?: (error: string, rep: CreateSupervisorResponse) => void
   ): Promise<CreateSupervisorResponse> {
     return this.request("CreateSupervisor", req, cb)

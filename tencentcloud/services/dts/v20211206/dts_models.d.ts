@@ -453,6 +453,15 @@ export interface ModifyCompareTaskNameResponse {
     RequestId?: string;
 }
 /**
+ * StartSyncJob请求参数结构体
+ */
+export interface StartSyncJobRequest {
+    /**
+      * 同步任务id
+      */
+    JobId?: string;
+}
+/**
  * PauseSyncJob请求参数结构体
  */
 export interface PauseSyncJobRequest {
@@ -711,6 +720,35 @@ export interface DBEndpointInfo {
     DatabaseNetEnv?: string;
 }
 /**
+ * 单topic和自定义topic的描述
+ */
+export interface TopicRule {
+    /**
+      * topic名
+      */
+    TopicName?: string;
+    /**
+      * topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)
+      */
+    PartitionType?: string;
+    /**
+      * 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’
+      */
+    DbMatchMode?: string;
+    /**
+      * 库名，仅“自定义topic”时，DbMatchMode=Regular生效
+      */
+    DbName?: string;
+    /**
+      * 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’
+      */
+    TableMatchMode?: string;
+    /**
+      * 表名，仅“自定义topic”时，TableMatchMode=Regular生效
+      */
+    TableName?: string;
+}
+/**
  * ContinueSyncJob返回参数结构体
  */
 export interface ContinueSyncJobResponse {
@@ -758,6 +796,11 @@ export interface Options {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DdlOptions?: Array<DdlOption>;
+    /**
+      * kafka同步选项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaOption?: KafkaOption;
 }
 /**
  * CompleteMigrateJob请求参数结构体
@@ -803,6 +846,31 @@ export interface StopCompareRequest {
       * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
       */
     CompareTaskId: string;
+}
+/**
+ * 数据同步配置多节点数据库的节点信息。多节点数据库，如tdsqlmysql使用该结构；单节点数据库，如mysql使用Endpoint。
+ */
+export interface SyncDBEndpointInfos {
+    /**
+      * 数据库所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessType: string;
+    /**
+      * 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatabaseType: string;
+    /**
+      * 数据库信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Info: Array<Endpoint>;
 }
 /**
  * DescribeCheckSyncJobResult返回参数结构体
@@ -1143,13 +1211,25 @@ export interface CreateMigrationServiceResponse {
     RequestId?: string;
 }
 /**
- * StartSyncJob请求参数结构体
+ * 目标端为kakfa时添加的同步选项字段
  */
-export interface StartSyncJobRequest {
+export interface KafkaOption {
     /**
-      * 同步任务id
+      * 投递到kafka的数据类型，如Avro,Json
       */
-    JobId?: string;
+    DataType?: string;
+    /**
+      * 同步topic策略，如Single（集中投递到单topic）,Multi (自定义topic名称)
+      */
+    TopicType?: string;
+    /**
+      * 用于存储ddl的topic
+      */
+    DDLTopicName?: string;
+    /**
+      * 单topic和自定义topic的描述
+      */
+    TopicRules?: Array<TopicRule>;
 }
 /**
  * DescribeMigrationCheckJob返回参数结构体
@@ -1524,9 +1604,25 @@ export interface ConfigureSyncJobRequest {
       */
     SrcInfo?: Endpoint;
     /**
+      * 源端信息，多节点数据库使用，且SrcNodeType传cluster
+      */
+    SrcInfos?: SyncDBEndpointInfos;
+    /**
+      * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
+      */
+    SrcNodeType?: string;
+    /**
       * 目标端信息，单节点数据库使用
       */
     DstInfo?: Endpoint;
+    /**
+      * 目标端信息，多节点数据库使用，且DstNodeType传cluster
+      */
+    DstInfos?: SyncDBEndpointInfos;
+    /**
+      * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
+      */
+    DstNodeType?: string;
     /**
       * 同步任务选项
       */
@@ -2338,7 +2434,7 @@ export interface CreateSyncJobResponse {
     /**
       * 同步任务ids
       */
-    JobIds: Array<string>;
+    JobIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3087,7 +3183,7 @@ export interface CreateSyncJobRequest {
       */
     SrcRegion: string;
     /**
-      * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+      * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka等
       */
     DstDatabaseType: string;
     /**

@@ -455,7 +455,7 @@ export interface ChannelCreatePrepareFlowRequest {
       */
     ResourceId: string;
     /**
-      * 资源类型，1：模版，目前仅支持模版，与ResourceId对应
+      * 资源类型，1：模板，目前仅支持模板，与ResourceId对应
       */
     ResourceType: number;
     /**
@@ -1308,8 +1308,8 @@ export interface CommonFlowApprover {
       */
     ApproverMobile?: string;
     /**
-      * 签署人Id，使用模版发起是，对应模版配置中的签署人RecipientId
-注意：模版发起时该字段必填
+      * 签署人Id，使用模板发起是，对应模板配置中的签署人RecipientId
+注意：模板发起时该字段必填
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RecipientId?: string;

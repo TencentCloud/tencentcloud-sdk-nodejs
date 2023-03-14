@@ -78,6 +78,16 @@ it("waf.v20180125.DescribeDomains", async function () {
     }
 })
 
+it("waf.v20180125.SearchAccessLog", async function () {
+    try {
+       const data = await client.SearchAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAccessIndex", async function () {
     try {
        const data = await client.DescribeAccessIndex({})
@@ -278,6 +288,16 @@ it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     }
 })
 
+it("waf.v20180125.DescribeRuleLimit", async function () {
+    try {
+       const data = await client.DescribeRuleLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyWafAutoDenyRules", async function () {
     try {
        const data = await client.ModifyWafAutoDenyRules({})
@@ -378,9 +398,9 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
     }
 })
 
-it("waf.v20180125.SearchAccessLog", async function () {
+it("waf.v20180125.DescribePolicyStatus", async function () {
     try {
-       const data = await client.SearchAccessLog({})
+       const data = await client.DescribePolicyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +421,16 @@ it("waf.v20180125.DescribeIpHitItems", async function () {
 it("waf.v20180125.AddDomainWhiteRule", async function () {
     try {
        const data = await client.AddDomainWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeCustomWhiteRule", async function () {
+    try {
+       const data = await client.DescribeCustomWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18952,12 +18952,12 @@ export interface DescribeHeadTailTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 片头片尾模板详情列表。
    */
-  HeadTailTemplateSet: Array<HeadTailTemplate>
+  HeadTailTemplateSet?: Array<HeadTailTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

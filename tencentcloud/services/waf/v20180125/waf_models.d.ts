@@ -60,6 +60,108 @@ export interface DescribeIpHitItemsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCustomRules接口回包中的复杂类型
+ */
+export interface DescribeCustomRulesRspRuleListItem {
+    /**
+      * 动作类型
+      */
+    ActionType: string;
+    /**
+      * 跳过的策略
+      */
+    Bypass: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 过期时间
+      */
+    ExpireTime: string;
+    /**
+      * 策略名称
+      */
+    Name: string;
+    /**
+      * 重定向地址
+      */
+    Redirect: string;
+    /**
+      * 策略ID
+      */
+    RuleId: string;
+    /**
+      * 优先级
+      */
+    SortId: string;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 策略详情
+      */
+    Strategies: Array<Strategy>;
+}
+/**
+ * waf模块的规格
+ */
+export interface WafRuleLimit {
+    /**
+      * 自定义CC的规格
+      */
+    CC: number;
+    /**
+      * 自定义策略的规格
+      */
+    CustomRule: number;
+    /**
+      * 黑白名单的规格
+      */
+    IPControl: number;
+    /**
+      * 信息防泄漏的规格
+      */
+    AntiLeak: number;
+    /**
+      * 防篡改的规格
+      */
+    AntiTamper: number;
+    /**
+      * 紧急CC的规格
+      */
+    AutoCC: number;
+    /**
+      * 地域封禁的规格
+      */
+    AreaBan: number;
+    /**
+      * 自定义CC中配置session
+      */
+    CCSession: number;
+    /**
+      * AI的规格
+      */
+    AI: number;
+    /**
+      * 精准白名单的规格
+      */
+    CustomWhite: number;
+    /**
+      * api安全的规格
+      */
+    ApiSecurity: number;
+    /**
+      * 客户端流量标记的规格
+      */
+    ClientMsg: number;
+    /**
+      * 流量标记的规格
+      */
+    TrafficMarking: number;
+}
+/**
  * DescribeUserCdcClbWafRegions请求参数结构体
  */
 export declare type DescribeUserCdcClbWafRegionsRequest = null;
@@ -106,6 +208,23 @@ export interface DescribeFlowTrendRequest {
  * DescribeWafAutoDenyStatus请求参数结构体
  */
 export declare type DescribeWafAutoDenyStatusRequest = null;
+/**
+ * DescribeCustomWhiteRule返回参数结构体
+ */
+export interface DescribeCustomWhiteRuleResponse {
+    /**
+      * 规则详情
+      */
+    RuleList: Array<DescribeCustomRulesRspRuleListItem>;
+    /**
+      * 规则条数
+      */
+    TotalCount: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * 日志KeyValue对数组，用于搜索访问日志
  */
@@ -560,6 +679,35 @@ export interface DescribeAccessExportsRequest {
       * 分页单页限制数目，默认值为20，最大值100
       */
     Limit?: number;
+}
+/**
+ * DescribeCustomWhiteRule请求参数结构体
+ */
+export interface DescribeCustomWhiteRuleRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 偏移
+      */
+    Offset: number;
+    /**
+      * 容量
+      */
+    Limit: number;
+    /**
+      * 过滤数组,name可以是如下的值： RuleID,RuleName,Match
+      */
+    Filters?: Array<FiltersItemNew>;
+    /**
+      * asc或者desc
+      */
+    Order?: string;
+    /**
+      * exp_ts或者mod_ts
+      */
+    By?: string;
 }
 /**
  * DescribeUserClbWafRegions返回参数结构体
@@ -1132,6 +1280,19 @@ export interface PostAttackDownloadTaskRequest {
     Sort?: string;
 }
 /**
+ * DescribePolicyStatus请求参数结构体
+ */
+export interface DescribePolicyStatusRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * clb-waf或者saas-waf
+      */
+    Edition: string;
+}
+/**
  * DescribeAccessFastAnalysis请求参数结构体
  */
 export interface DescribeAccessFastAnalysisRequest {
@@ -1594,6 +1755,23 @@ export interface SearchAttackLogResponse {
       * CLS接口返回内容，标志是否启动新版本索引
       */
     SqlFlag?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePolicyStatus返回参数结构体
+ */
+export interface DescribePolicyStatusResponse {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 防护状态
+      */
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2225,6 +2403,15 @@ export interface DescribeIpHitItemsRequest {
     Ip?: string;
 }
 /**
+ * DescribeRuleLimit请求参数结构体
+ */
+export interface DescribeRuleLimitRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+}
+/**
  * DescribeAccessIndex接口的出参数
  */
 export interface AccessRuleInfo {
@@ -2451,6 +2638,19 @@ export interface DownloadAttackRecordInfo {
       * 下载任务需下载的日志总条数
       */
     TotalCount: number;
+}
+/**
+ * DescribeRuleLimit返回参数结构体
+ */
+export interface DescribeRuleLimitResponse {
+    /**
+      * waf模块的规格
+      */
+    Res: WafRuleLimit;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeWafThreatenIntelligence请求参数结构体

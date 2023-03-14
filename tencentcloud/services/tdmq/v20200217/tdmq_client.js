@@ -558,6 +558,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("CreateRocketMQNamespace", req, cb);
     }
     /**
+     * 修改RabbitMQ专享版实例
+     */
+    async ModifyRabbitMQVipInstance(req, cb) {
+        return this.request("ModifyRabbitMQVipInstance", req, cb);
+    }
+    /**
      * 创建环境角色授权
      */
     async CreateEnvironmentRole(req, cb) {

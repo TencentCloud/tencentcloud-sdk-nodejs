@@ -21,11 +21,14 @@ import {
   CreateAccessExportRequest,
   CdcCluster,
   DescribeIpHitItemsResponse,
+  DescribeCustomRulesRspRuleListItem,
+  WafRuleLimit,
   DescribeUserCdcClbWafRegionsRequest,
   IpHitItemsData,
   DeleteAttackDownloadRecordResponse,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
+  DescribeCustomWhiteRuleResponse,
   AccessLogItems,
   DescribeWafAutoDenyRulesResponse,
   DescribeIpAccessControlResponse,
@@ -47,6 +50,7 @@ import {
   DescribeUserCdcClbWafRegionsResponse,
   DeleteAccessExportResponse,
   DescribeAccessExportsRequest,
+  DescribeCustomWhiteRuleRequest,
   DescribeUserClbWafRegionsResponse,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
@@ -63,6 +67,7 @@ import {
   ModifyAreaBanStatusRequest,
   AddSpartaProtectionRequest,
   PostAttackDownloadTaskRequest,
+  DescribePolicyStatusRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
   AttackLogInfo,
@@ -89,6 +94,7 @@ import {
   BotQPS,
   ModifyWafAutoDenyRulesResponse,
   SearchAttackLogResponse,
+  DescribePolicyStatusResponse,
   DescribeInstancesRequest,
   CdcRegion,
   AccessValueInfo,
@@ -112,6 +118,7 @@ import {
   Strategy,
   AccessFullTextInfo,
   DescribeIpHitItemsRequest,
+  DescribeRuleLimitRequest,
   AccessRuleInfo,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
@@ -124,6 +131,7 @@ import {
   IpHitItem,
   DeleteSessionResponse,
   DownloadAttackRecordInfo,
+  DescribeRuleLimitResponse,
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessIndexResponse,
   DescribeAccessExportsResponse,
@@ -205,6 +213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainsResponse) => void
   ): Promise<DescribeDomainsResponse> {
     return this.request("DescribeDomains", req, cb)
+  }
+
+  /**
+   * 本接口用于搜索WAF访问日志
+   */
+  async SearchAccessLog(
+    req: SearchAccessLogRequest,
+    cb?: (error: string, rep: SearchAccessLogResponse) => void
+  ): Promise<SearchAccessLogResponse> {
+    return this.request("SearchAccessLog", req, cb)
   }
 
   /**
@@ -408,6 +426,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取各个模块具体的规格限制
+   */
+  async DescribeRuleLimit(
+    req: DescribeRuleLimitRequest,
+    cb?: (error: string, rep: DescribeRuleLimitResponse) => void
+  ): Promise<DescribeRuleLimitResponse> {
+    return this.request("DescribeRuleLimit", req, cb)
+  }
+
+  /**
    * 修改ip惩罚规则
    */
   async ModifyWafAutoDenyRules(
@@ -508,13 +536,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于搜索WAF访问日志
+   * 获取防护状态以及生效的实例id
    */
-  async SearchAccessLog(
-    req: SearchAccessLogRequest,
-    cb?: (error: string, rep: SearchAccessLogResponse) => void
-  ): Promise<SearchAccessLogResponse> {
-    return this.request("SearchAccessLog", req, cb)
+  async DescribePolicyStatus(
+    req: DescribePolicyStatusRequest,
+    cb?: (error: string, rep: DescribePolicyStatusResponse) => void
+  ): Promise<DescribePolicyStatusResponse> {
+    return this.request("DescribePolicyStatus", req, cb)
   }
 
   /**
@@ -535,6 +563,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDomainWhiteRuleResponse) => void
   ): Promise<AddDomainWhiteRuleResponse> {
     return this.request("AddDomainWhiteRule", req, cb)
+  }
+
+  /**
+   * 获取防护配置中的精准白名单策略列表
+   */
+  async DescribeCustomWhiteRule(
+    req: DescribeCustomWhiteRuleRequest,
+    cb?: (error: string, rep: DescribeCustomWhiteRuleResponse) => void
+  ): Promise<DescribeCustomWhiteRuleResponse> {
+    return this.request("DescribeCustomWhiteRule", req, cb)
   }
 
   /**

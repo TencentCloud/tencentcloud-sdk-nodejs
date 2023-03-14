@@ -113,6 +113,7 @@ import {
   DescribeNatGatewaysRequest,
   ModifyFlowLogAttributeResponse,
   DescribeBandwidthPackagesResponse,
+  ReplaceSecurityGroupPoliciesResponse,
   DescribeDirectConnectGatewaysRequest,
   DisableVpnGatewaySslClientCertRequest,
   AttachSnapshotInstancesRequest,
@@ -553,6 +554,7 @@ import {
   DescribeBandwidthPackageQuotaResponse,
   DeleteServiceTemplateGroupRequest,
   DeleteNatGatewayResponse,
+  ReplaceSecurityGroupPoliciesRequest,
   AdjustPublicAddressRequest,
   CreateDirectConnectGatewayResponse,
   ModifyVpcEndPointAttributeRequest,
@@ -1260,6 +1262,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVpnGatewayRoutesResponse) => void
   ): Promise<ModifyVpnGatewayRoutesResponse> {
     return this.request("ModifyVpnGatewayRoutes", req, cb)
+  }
+
+  /**
+     * 本接口（ReplaceSecurityGroupPolicies）用于批量修改安全组规则（SecurityGroupPolicy）。
+单个请求中只能替换单个方向的一条或多条规则, 必须要指定索引（PolicyIndex）。
+     */
+  async ReplaceSecurityGroupPolicies(
+    req: ReplaceSecurityGroupPoliciesRequest,
+    cb?: (error: string, rep: ReplaceSecurityGroupPoliciesResponse) => void
+  ): Promise<ReplaceSecurityGroupPoliciesResponse> {
+    return this.request("ReplaceSecurityGroupPolicies", req, cb)
   }
 
   /**

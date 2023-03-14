@@ -109,7 +109,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 通过此接口指定：合同，签署人，填写控件信息，生成预创建合同链接，点击后跳转到web页面完成合同创建并发起
 可指定合同信息不可更改，签署人信息不可更改
 合同发起后，填写及签署流程与现有操作流程一致
-注意：目前仅支持模版发起
+注意：目前仅支持模板发起
      */
     ChannelCreatePrepareFlow(req: ChannelCreatePrepareFlowRequest, cb?: (error: string, rep: ChannelCreatePrepareFlowResponse) => void): Promise<ChannelCreatePrepareFlowResponse>;
     /**
@@ -229,7 +229,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     ChannelCreateFlowGroupByFiles(req: ChannelCreateFlowGroupByFilesRequest, cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void): Promise<ChannelCreateFlowGroupByFilesResponse>;
     /**
      * 本接口（ChannelCreateEmbedWebUrl）用于创建嵌入web的链接
-本接口支持创建：创建印章，创建模版，修改模版，预览模版，预览合同流程的web链接
+本接口支持创建：创建印章，创建模板，修改模板，预览模板，预览合同流程的web链接
 进入web连接后与当前控制台操作保持一致
      */
     ChannelCreateEmbedWebUrl(req: ChannelCreateEmbedWebUrlRequest, cb?: (error: string, rep: ChannelCreateEmbedWebUrlResponse) => void): Promise<ChannelCreateEmbedWebUrlResponse>;

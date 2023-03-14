@@ -508,6 +508,16 @@ it("vpc.v20170312.ModifyVpnGatewayRoutes", async function () {
     }
 })
 
+it("vpc.v20170312.ReplaceSecurityGroupPolicies", async function () {
+    try {
+       const data = await client.ReplaceSecurityGroupPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisassociateVpcEndPointSecurityGroups", async function () {
     try {
        const data = await client.DisassociateVpcEndPointSecurityGroups({})

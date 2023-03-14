@@ -340,6 +340,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpnGatewayRoutes", req, cb);
     }
     /**
+     * 本接口（ReplaceSecurityGroupPolicies）用于批量修改安全组规则（SecurityGroupPolicy）。
+单个请求中只能替换单个方向的一条或多条规则, 必须要指定索引（PolicyIndex）。
+     */
+    async ReplaceSecurityGroupPolicies(req, cb) {
+        return this.request("ReplaceSecurityGroupPolicies", req, cb);
+    }
+    /**
      * 本接口（DisassociateVpcEndPointSecurityGroups）用于终端节点解绑安全组。
      */
     async DisassociateVpcEndPointSecurityGroups(req, cb) {

@@ -395,6 +395,26 @@ export interface CreateCmqTopicRequest {
 }
 
 /**
+ * ModifyRabbitMQVipInstance请求参数结构体
+ */
+export interface ModifyRabbitMQVipInstanceRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
  * CreateAMQPExchange请求参数结构体
  */
 export interface CreateAMQPExchangeRequest {
@@ -4790,6 +4810,22 @@ export interface CmqDeadLetterSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QueueName: string
+}
+
+/**
+ * ModifyRabbitMQVipInstance返回参数结构体
+ */
+export interface ModifyRabbitMQVipInstanceResponse {
+  /**
+      * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

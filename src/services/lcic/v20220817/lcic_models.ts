@@ -2296,7 +2296,17 @@ export interface DescribeGroupRequest {
 /**
  * CreateSupervisor请求参数结构体
  */
-export type CreateSupervisorRequest = null
+export interface CreateSupervisorRequest {
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
+
+  /**
+   * 用户ID列表。
+   */
+  Users: Array<string>
+}
 
 /**
  * 背景图片配置

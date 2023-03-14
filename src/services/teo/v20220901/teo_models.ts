@@ -417,6 +417,15 @@ export interface Https {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplyType?: string
+
+  /**
+      * 密码套件，取值有：
+<li>loose-v2023：提供最高的兼容性，安全性一般，支持 TLS 1.0-1.3 密码套件；</li>
+<li>general-v2023：提供较高的兼容性，安全性中等，支持 TLS 1.2-1.3 密码套件；</li>
+<li>strict-v2023：提供最高的安全性能，禁用所有含不安全隐患的加密套件，支持 TLS 1.2-1.3 密码套件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CipherSuite?: string
 }
 
 /**
@@ -2787,6 +2796,12 @@ export interface AccelerationDomain {
    * CNAME 地址。
    */
   Cname?: string
+
+  /**
+      * 加速域名归属权验证状态，取值有： <li>pending：待验证；</li> <li>finished：已完成验证。</li>	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdentificationStatus?: string
 }
 
 /**
@@ -3518,12 +3533,12 @@ export interface IdentifyZoneResponse {
   /**
    * 站点归属校验：Dns校验信息。
    */
-  Ascription: AscriptionInfo
+  Ascription?: AscriptionInfo
 
   /**
    * 站点归属权校验：文件校验信息。
    */
-  FileAscription: FileAscriptionInfo
+  FileAscription?: FileAscriptionInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4792,6 +4807,12 @@ export interface Identification {
    * 站点名称。
    */
   ZoneName: string
+
+  /**
+      * 验证子域名。验证站点时，该值为空。验证子域名是为具体子域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
 
   /**
       * 验证状态，取值有：
@@ -8498,6 +8519,12 @@ export interface IdentifyZoneRequest {
    * 站点名称。
    */
   ZoneName: string
+
+  /**
+      * 站点下的子域名。如果验证站点下的子域名，则传该值，否则为空。
+
+      */
+  Domain?: string
 }
 
 /**

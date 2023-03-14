@@ -31,6 +31,7 @@ import {
   SendBatchMessagesResponse,
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
+  ModifyRabbitMQVipInstanceRequest,
   CreateAMQPExchangeRequest,
   DescribeRocketMQNamespacesResponse,
   ResetRocketMQConsumerOffSetResponse,
@@ -187,6 +188,7 @@ import {
   DeleteRocketMQClusterResponse,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
+  ModifyRabbitMQVipInstanceResponse,
   ClearCmqSubscriptionFilterTagsResponse,
   CreateRabbitMQVipInstanceResponse,
   DescribeCmqTopicsRequest,
@@ -1128,6 +1130,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: CreateRocketMQNamespaceResponse) => void
   ): Promise<CreateRocketMQNamespaceResponse> {
     return this.request("CreateRocketMQNamespace", req, cb)
+  }
+
+  /**
+   * 修改RabbitMQ专享版实例
+   */
+  async ModifyRabbitMQVipInstance(
+    req: ModifyRabbitMQVipInstanceRequest,
+    cb?: (error: string, rep: ModifyRabbitMQVipInstanceResponse) => void
+  ): Promise<ModifyRabbitMQVipInstanceResponse> {
+    return this.request("ModifyRabbitMQVipInstance", req, cb)
   }
 
   /**
