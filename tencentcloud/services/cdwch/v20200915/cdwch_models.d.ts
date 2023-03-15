@@ -300,6 +300,15 @@ export interface ClusterConfigsInfoFromEMR {
     FilePath: string;
 }
 /**
+ * DescribeInstanceClusters请求参数结构体
+ */
+export interface DescribeInstanceClustersRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+}
+/**
  * OpenBackUp请求参数结构体
  */
 export interface OpenBackUpRequest {
@@ -385,6 +394,19 @@ export interface ConfigSubmitContext {
       * 保存配置文件的路径
       */
     FilePath?: string;
+}
+/**
+ * DescribeInstanceClusters返回参数结构体
+ */
+export interface DescribeInstanceClustersResponse {
+    /**
+      * cluster列表
+      */
+    Clusters: Array<ClusterInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateInstanceNew请求参数结构体
@@ -822,11 +844,11 @@ export interface ScaleOutInstanceRequest {
       */
     UserSubnetIPNum?: number;
     /**
-      * 同步元数据节点IP （uip）
+      * 同步元数据节点IP （uip），扩容的时候必填
       */
     ScaleOutNodeIp?: string;
     /**
-      * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔
+      * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔，缩容的时候必填
       */
     ReduceShardInfo?: Array<string>;
 }
@@ -864,6 +886,21 @@ export interface DescribeInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * clickhouse vcluster信息
+ */
+export interface ClusterInfo {
+    /**
+      * vcluster名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterName: string;
+    /**
+      * 当前cluster的IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeIps: Array<string>;
 }
 /**
  * ScaleUpInstance请求参数结构体

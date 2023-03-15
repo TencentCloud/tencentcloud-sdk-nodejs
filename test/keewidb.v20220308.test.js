@@ -338,6 +338,16 @@ it("keewidb.v20220308.ClearInstance", async function () {
     }
 })
 
+it("keewidb.v20220308.DescribeInstanceDealDetail", async function () {
+    try {
+       const data = await client.DescribeInstanceDealDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("keewidb.v20220308.DestroyPostpaidInstance", async function () {
     try {
        const data = await client.DestroyPostpaidInstance({})

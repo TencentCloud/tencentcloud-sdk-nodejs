@@ -5479,7 +5479,7 @@ export interface VideoFrameInterpolationInfo {
   Switch: string
 
   /**
-   * 智能插帧帧率，帧率范围为 (0, 60]，仅当智能插帧控制开关为 ON 时有效。默认跟源文件帧率一致。
+   * 智能插帧帧率，帧率范围为 (0, 100]，仅当智能插帧控制开关为 ON 时有效。默认跟源文件帧率一致。
    */
   Fps?: number
 }
@@ -7361,12 +7361,12 @@ export interface SearchMediaResponse {
       * 符合搜索条件的记录总数。
 <li>最大值：5000。当命中记录数超过5000时，该字段将返回 5000，而非实际命中总数。</li>
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 媒体文件信息列表。
    */
-  MediaInfoSet: Array<MediaInfo>
+  MediaInfoSet?: Array<MediaInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11790,7 +11790,7 @@ export interface RebuildMediaTargetVideoStream {
   ResolutionAdaptive?: string
 
   /**
-      * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
+      * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
@@ -11801,7 +11801,7 @@ export interface RebuildMediaTargetVideoStream {
   Width?: number
 
   /**
-      * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
+      * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
@@ -18060,6 +18060,12 @@ export interface SearchMediaRequest {
 <li> DEEP_ARCHIVE：深度归档存储。</li>
       */
   StorageClasses?: Array<string>
+
+  /**
+      * 媒体文件封装格式集合，匹配集合中任意元素。
+<li>数组长度限制：10。</li>
+      */
+  MediaTypes?: Array<string>
 
   /**
       * TRTC 应用 ID 集合。匹配集合中的任意元素。

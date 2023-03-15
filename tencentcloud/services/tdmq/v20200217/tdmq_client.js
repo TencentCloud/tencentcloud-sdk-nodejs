@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
+     * 获取单个RabbitMQ专享实例信息
+     */
+    async DescribeRabbitMQVipInstance(req, cb) {
+        return this.request("DescribeRabbitMQVipInstance", req, cb);
+    }
+    /**
      * 重置指定Group的消费位点到指定时间戳
      */
     async ResetRocketMQConsumerOffSet(req, cb) {

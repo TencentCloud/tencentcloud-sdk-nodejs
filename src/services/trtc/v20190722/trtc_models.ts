@@ -268,6 +268,59 @@ export interface DescribeUserEventRequest {
 }
 
 /**
+ * 自定义文字水印数据结构
+ */
+export interface WaterMarkChar {
+  /**
+      * 文字水印的起始坐标Y值，从左上角开始
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Top: number
+
+  /**
+      * 文字水印的起始坐标X值，从左上角开始
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Left: number
+
+  /**
+      * 文字水印的宽度，单位像素值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Width: number
+
+  /**
+      * 文字水印的高度，单位像素值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Height: number
+
+  /**
+      * 水印文字的内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Chars: string
+
+  /**
+      * 水印文字的大小，单位像素，默认14
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FontSize?: number
+
+  /**
+      * 水印文字的颜色，默认白色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FontColor?: string
+
+  /**
+      * 水印文字的背景色，为空代表背景透明，默认为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackGroundColor?: string
+}
+
+/**
  * StopPublishCdnStream返回参数结构体
  */
 export interface StopPublishCdnStreamResponse {
@@ -1721,7 +1774,7 @@ audio_video：音视频录制文件
  */
 export interface WaterMark {
   /**
-   * 水印类型，0为图片（默认），1为文字（暂不支持）。
+   * 水印类型，0为图片（默认），1为文字，2为时间戳。
    */
   WaterMarkType?: number
 
@@ -1729,6 +1782,18 @@ export interface WaterMark {
    * 水印为图片时的参数列表，水印为图片时校验必填。
    */
   WaterMarkImage?: WaterMarkImage
+
+  /**
+      * 水印为文字时的参数列表，水印为文字时校验必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WaterMarkChar?: WaterMarkChar
+
+  /**
+      * 水印为时间戳时的参数列表，水印为时间戳时校验必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WaterMarkTimestamp?: WaterMarkTimestamp
 }
 
 /**
@@ -3255,7 +3320,7 @@ export interface McuPublishCdnParam {
  */
 export interface AudioParams {
   /**
-      * 音频采样率:
+      * 音频采样率枚举值:(注意1 代表48000HZ, 2 代表44100HZ, 3 代表16000HZ)
 1：48000Hz（默认）;
 2：44100Hz
 3：16000Hz。
@@ -3263,7 +3328,7 @@ export interface AudioParams {
   SampleRate: number
 
   /**
-      * 声道数:
+      * 声道数枚举值:
 1：单声道;
 2：双声道（默认）。
       */
@@ -3290,6 +3355,23 @@ export interface SeriesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Values: Array<number>
+}
+
+/**
+ * 时间戳水印数据结构
+ */
+export interface WaterMarkTimestamp {
+  /**
+      * 时间戳的位置，取值范围0-6，分别代表上左，上右，下左，下右，上居中，下居中，居中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pos: number
+
+  /**
+      * 显示时间戳的时区，默认东八区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeZone?: number
 }
 
 /**

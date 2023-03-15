@@ -458,11 +458,11 @@ export interface DescribeInstancesResponse {
     /**
       * 实例个数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 实例列表
       */
-    InstanceSet: Array<CynosdbInstance>;
+    InstanceSet?: Array<CynosdbInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1230,17 +1230,64 @@ export interface DescribeResourcesByDealNameResponse {
     RequestId?: string;
 }
 /**
- * ResumeServerless返回参数结构体
+ * 实例网络信息
  */
-export interface ResumeServerlessResponse {
+export interface InstanceNetInfo {
     /**
-      * 异步流程ID
+      * 网络类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowId: number;
+    InstanceGroupType?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 接入组ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    InstanceGroupId?: string;
+    /**
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
+    /**
+      * 网络类型, 0-基础网络, 1-vpc网络, 2-黑石网络
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetType?: number;
+    /**
+      * 私有网络IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip?: string;
+    /**
+      * 私有网络端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vport?: number;
+    /**
+      * 外网域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanDomain?: string;
+    /**
+      * 外网Ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanIP?: string;
+    /**
+      * 外网端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanPort?: number;
+    /**
+      * 外网开启状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanStatus?: string;
 }
 /**
  * CreateAccounts请求参数结构体
@@ -2004,6 +2051,11 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SlaveZones?: Array<string>;
+    /**
+      * 实例网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceNetInfo?: Array<InstanceNetInfo>;
 }
 /**
  * DescribeAuditRuleWithInstanceIds请求参数结构体
@@ -3589,6 +3641,19 @@ export interface RevokeAccountPrivilegesRequest {
       * 数据库表信息
       */
     DbTables: Array<DbTable>;
+}
+/**
+ * ResumeServerless返回参数结构体
+ */
+export interface ResumeServerlessResponse {
+    /**
+      * 异步流程ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAuditRuleTemplates请求参数结构体

@@ -36,10 +36,12 @@ import {
   ModifyUserNewPrivilegeRequest,
   DescribeCkSqlApisRequest,
   ClusterConfigsInfoFromEMR,
+  DescribeInstanceClustersRequest,
   OpenBackUpRequest,
   BackupTableContent,
   CreateInstanceNewResponse,
   ConfigSubmitContext,
+  DescribeInstanceClustersResponse,
   CreateInstanceNewRequest,
   InstanceInfo,
   ModifyClusterConfigsRequest,
@@ -54,6 +56,7 @@ import {
   CreateBackUpScheduleResponse,
   InstanceConfigItem,
   DescribeInstanceResponse,
+  ClusterInfo,
   ScaleUpInstanceRequest,
   NodesSummary,
   DescribeInstanceShardsResponse,
@@ -138,6 +141,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenBackUpResponse) => void
   ): Promise<OpenBackUpResponse> {
     return this.request("OpenBackUp", req, cb)
+  }
+
+  /**
+   * 集群vcluster列表
+   */
+  async DescribeInstanceClusters(
+    req: DescribeInstanceClustersRequest,
+    cb?: (error: string, rep: DescribeInstanceClustersResponse) => void
+  ): Promise<DescribeInstanceClustersResponse> {
+    return this.request("DescribeInstanceClusters", req, cb)
   }
 
   /**

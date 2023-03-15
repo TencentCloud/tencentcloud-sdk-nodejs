@@ -36,6 +36,77 @@ export interface DescribeRolesResponse {
 }
 
 /**
+ * RabbitMQ集群访问信息
+ */
+export interface RabbitMQClusterAccessInfo {
+  /**
+      * 集群公网接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicAccessEndpoint: string
+
+  /**
+   * 集群控制台访问地址
+   */
+  WebConsoleEndpoint: string
+
+  /**
+   * 集群控制台登录用户名
+   */
+  WebConsoleUsername: string
+
+  /**
+   * 集群控制台登录密码
+   */
+  WebConsolePassword: string
+
+  /**
+   * 已废弃
+   */
+  PublicAccessEndpointStatus: boolean
+
+  /**
+   * 已废弃
+   */
+  PublicControlConsoleSwitchStatus: boolean
+
+  /**
+   * 已废弃
+   */
+  VpcControlConsoleSwitchStatus: boolean
+
+  /**
+   * Vpc管控台访问地址，示例值，http://1.1.1.1:15672
+   */
+  VpcWebConsoleEndpoint: string
+
+  /**
+      * 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicWebConsoleSwitchStatus?: string
+
+  /**
+      * Vpc管控台开关状态，示例值，
+OFF/ON/CREATING/DELETING
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcWebConsoleSwitchStatus?: string
+
+  /**
+      * 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicDataStreamStatus?: string
+
+  /**
+      * Prometheus信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrometheusEndpointInfo?: PrometheusEndpointInfo
+}
+
+/**
  * DescribeAMQPRouteRelations请求参数结构体
  */
 export interface DescribeAMQPRouteRelationsRequest {
@@ -1270,6 +1341,41 @@ export interface DescribeRocketMQVipInstanceDetailRequest {
 }
 
 /**
+ * RabbiteMQ集群白名单信息
+ */
+export interface RabbitMQClusterWhiteListInfo {
+  /**
+      * 废弃
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WhiteList: string
+
+  /**
+      * 公网管控台白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicControlConsoleWhiteList: string
+
+  /**
+      * 公网数据流白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicDataStreamWhiteList: string
+
+  /**
+      * 公网管控台白名单状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicControlConsoleWhiteListStatus?: string
+
+  /**
+      * 公网数据流白名单状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicDataStreamWhiteListStatus?: string
+}
+
+/**
  * DeleteCmqTopic返回参数结构体
  */
 export interface DeleteCmqTopicResponse {
@@ -1523,6 +1629,22 @@ export interface Topic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PulsarTopicType: number
+}
+
+/**
+ * exchange使用配额信息
+ */
+export interface ExchangeQuota {
+  /**
+   * 可创建最大exchange数
+   */
+  MaxExchange?: number
+
+  /**
+      * 已创建exchange数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsedExchange?: number
 }
 
 /**
@@ -4579,6 +4701,53 @@ export interface DescribeEnvironmentsResponse {
 }
 
 /**
+ * DescribeRabbitMQVipInstance返回参数结构体
+ */
+export interface DescribeRabbitMQVipInstanceResponse {
+  /**
+   * 集群信息
+   */
+  ClusterInfo: RabbitMQClusterInfo
+
+  /**
+   * 集群规格信息
+   */
+  ClusterSpecInfo: RabbitMQClusterSpecInfo
+
+  /**
+      * 集群访问
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterNetInfo: RabbitMQClusterAccessInfo
+
+  /**
+      * 集群白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterWhiteListInfo: RabbitMQClusterWhiteListInfo
+
+  /**
+   * vhost配额信息
+   */
+  VirtualHostQuota: VirtualHostQuota
+
+  /**
+   * exchange配额信息
+   */
+  ExchangeQuota: ExchangeQuota
+
+  /**
+   * queue配额信息
+   */
+  QueueQuota: QueueQuota
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCmqSubscriptionAttribute请求参数结构体
  */
 export interface ModifyCmqSubscriptionAttributeRequest {
@@ -4633,6 +4802,22 @@ export interface ModifyTopicResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * vhost使用配额信息
+ */
+export interface VirtualHostQuota {
+  /**
+   * 允许创建最大vhost数
+   */
+  MaxVirtualHost?: number
+
+  /**
+      * 已创建vhost数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsedVirtualHost?: number
 }
 
 /**
@@ -4781,6 +4966,99 @@ export interface DeleteRocketMQClusterResponse {
 }
 
 /**
+ * RabbiteMQ集群基本信息
+ */
+export interface RabbitMQClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 地域信息
+   */
+  Region: string
+
+  /**
+   * 创建时间，毫秒为单位
+   */
+  CreateTime: number
+
+  /**
+      * 集群说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+   * VPC及网络信息
+   */
+  Vpcs: Array<VpcEndpointInfo>
+
+  /**
+   * 虚拟主机数量
+   */
+  VirtualHostNumber: number
+
+  /**
+   * 队列数量
+   */
+  QueueNumber: number
+
+  /**
+   * 每秒生产消息数 单位：条/秒
+   */
+  MessagePublishRate: number
+
+  /**
+   * 堆积消息数 单位：条
+   */
+  MessageStackNumber: number
+
+  /**
+   * 过期时间
+   */
+  ExpireTime: number
+
+  /**
+   * Channel数量
+   */
+  ChannelNumber: number
+
+  /**
+   * Connection数量
+   */
+  ConnectionNumber: number
+
+  /**
+   * Consumer数量
+   */
+  ConsumerNumber: number
+
+  /**
+   * Exchang数量
+   */
+  ExchangeNumber: number
+
+  /**
+      * 集群异常。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExceptionInformation?: string
+
+  /**
+      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterStatus?: number
+}
+
+/**
  * CreateCmqTopic返回参数结构体
  */
 export interface CreateCmqTopicResponse {
@@ -4858,6 +5136,16 @@ export interface CreateRabbitMQVipInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRabbitMQVipInstance请求参数结构体
+ */
+export interface DescribeRabbitMQVipInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -5124,6 +5412,35 @@ export interface Consumer {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Partition: number
+}
+
+/**
+ * rabbitmq Prometheus信息
+ */
+export interface PrometheusEndpointInfo {
+  /**
+      * Prometheus开关的状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrometheusEndpointStatus?: string
+
+  /**
+      * prometheus信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcPrometheusEndpoint?: Array<string>
+
+  /**
+      * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodePrometheusAddress?: Array<string>
+
+  /**
+      * vpc信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcEndpointInfo?: VpcEndpointInfo
 }
 
 /**
@@ -5799,6 +6116,22 @@ export interface CreateRocketMQTopicRequest {
    * 分区数，全局顺序无效
    */
   PartitionNum?: number
+}
+
+/**
+ * queue使用配额信息
+ */
+export interface QueueQuota {
+  /**
+   * 可创建最大Queue数
+   */
+  MaxQueue?: number
+
+  /**
+      * 已创建Queue数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsedQueue?: number
 }
 
 /**
@@ -6730,6 +7063,33 @@ export interface DescribeNodeHealthOptResponse {
 }
 
 /**
+ * VPC接入点信息
+ */
+export interface VpcEndpointInfo {
+  /**
+   * vpc的id
+   */
+  VpcId: string
+
+  /**
+   * 子网id
+   */
+  SubnetId: string
+
+  /**
+   * vpc接入点信息
+   */
+  VpcEndpoint: string
+
+  /**
+      * vpc接入点状态
+OFF/ON/CREATING/DELETING
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcDataStreamEndpointStatus?: string
+}
+
+/**
  * PublishCmqMsg请求参数结构体
  */
 export interface PublishCmqMsgRequest {
@@ -6797,6 +7157,41 @@ export interface CreateAMQPRouteRelationRequest {
    * 绑定key,缺省值为default
    */
   RoutingKey?: string
+}
+
+/**
+ * RabbitMQ集群规格信息
+ */
+export interface RabbitMQClusterSpecInfo {
+  /**
+   * 集群规格名称
+   */
+  SpecName: string
+
+  /**
+   * 节点数量
+   */
+  NodeCount: number
+
+  /**
+   * 峰值tps
+   */
+  MaxTps: number
+
+  /**
+   * 峰值带宽。单位：mbps
+   */
+  MaxBandWidth: number
+
+  /**
+   * 存储容量。单位：GB
+   */
+  MaxStorage: number
+
+  /**
+   * 公网带宽tps。单位：Mbps
+   */
+  PublicNetworkTps: number
 }
 
 /**

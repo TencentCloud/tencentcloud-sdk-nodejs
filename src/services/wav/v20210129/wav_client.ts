@@ -22,12 +22,14 @@ import {
   QueryVehicleInfoListResponse,
   CreateCorpTagResponse,
   QueryChatArchivingListResponse,
-  LicenseInfo,
+  FollowUserPro,
   CustomerActionEventDetail,
   QueryCustomerEventDetailStatisticsResponse,
   QueryExternalContactDetailRequest,
   QueryExternalUserMappingInfoResponse,
-  QueryStaffEventDetailStatisticsRequest,
+  QueryCustomerProfileListRequest,
+  EnterpriseTag,
+  SalesActionEventDetail,
   QueryUserInfoListRequest,
   ExternalUserEventInfo,
   ChannelCodeInnerDetail,
@@ -38,18 +40,23 @@ import {
   VehicleInfo,
   ChatArchivingMsgTypeVideo,
   QueryMaterialListRequest,
+  CustomerProfile,
   CreateLeadResponse,
   QueryUserInfoListResponse,
   QueryVehicleInfoListRequest,
+  QueryExternalContactDetailByDateResponse,
   QueryExternalUserEventListResponse,
   QueryExternalContactListRequest,
   MiniAppCodeInfo,
   QueryClueInfoListResponse,
+  WeComTagDetail,
   CreateChannelCodeRequest,
   QueryExternalContactDetailResponse,
-  FollowUser,
-  QueryExternalContactListResponse,
   ExternalContactSimpleInfo,
+  QueryExternalContactListResponse,
+  QueryActivityLiveCodeListRequest,
+  FollowUser,
+  DealerInfo,
   QueryActivityLiveCodeListResponse,
   CreateCorpTagRequest,
   ExternalUserMappingInfo,
@@ -58,6 +65,7 @@ import {
   QueryClueInfoListRequest,
   CrmStatisticsData,
   MaterialInfo,
+  VehiclePurpose,
   ActivityDetail,
   LiveCodeDetail,
   TagGroup,
@@ -66,15 +74,17 @@ import {
   QueryActivityListResponse,
   QueryStaffEventDetailStatisticsResponse,
   QueryActivityJoinListRequest,
-  DealerInfo,
+  QueryExternalContactDetailByDateRequest,
+  ChannelTag,
   QueryExternalUserMappingInfoRequest,
   QueryCrmStatisticsResponse,
   QueryChannelCodeListRequest,
   QueryDealerInfoListResponse,
-  WeComTagDetail,
-  QueryActivityLiveCodeListRequest,
+  QueryCustomerProfileListResponse,
+  ExternalContactDetailPro,
   QueryActivityJoinListResponse,
   ClueInfoDetail,
+  QueryStaffEventDetailStatisticsRequest,
   QueryDealerInfoListRequest,
   QueryMiniAppCodeListResponse,
   CreateChannelCodeResponse,
@@ -86,8 +96,9 @@ import {
   QueryChatArchivingListRequest,
   CreateLeadRequest,
   QueryChannelCodeListResponse,
-  SalesActionEventDetail,
+  LicenseInfo,
   QueryMaterialListResponse,
+  PurchaseConcern,
 } from "./wav_models"
 
 /**
@@ -160,6 +171,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过接口拉取租户已有潜客客户档案列表信息
+   */
+  async QueryCustomerProfileList(
+    req: QueryCustomerProfileListRequest,
+    cb?: (error: string, rep: QueryCustomerProfileListResponse) => void
+  ): Promise<QueryCustomerProfileListResponse> {
+    return this.request("QueryCustomerProfileList", req, cb)
+  }
+
+  /**
    * 查询企业成员信息列表接口
    */
   async QueryUserInfoList(
@@ -210,13 +231,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 线索回收接口
+   * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
    */
-  async CreateLead(
-    req: CreateLeadRequest,
-    cb?: (error: string, rep: CreateLeadResponse) => void
-  ): Promise<CreateLeadResponse> {
-    return this.request("CreateLead", req, cb)
+  async QueryVehicleInfoList(
+    req: QueryVehicleInfoListRequest,
+    cb?: (error: string, rep: QueryVehicleInfoListResponse) => void
+  ): Promise<QueryVehicleInfoListResponse> {
+    return this.request("QueryVehicleInfoList", req, cb)
   }
 
   /**
@@ -230,13 +251,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+   * 线索回收接口
    */
-  async QueryVehicleInfoList(
-    req: QueryVehicleInfoListRequest,
-    cb?: (error: string, rep: QueryVehicleInfoListResponse) => void
-  ): Promise<QueryVehicleInfoListResponse> {
-    return this.request("QueryVehicleInfoList", req, cb)
+  async CreateLead(
+    req: CreateLeadRequest,
+    cb?: (error: string, rep: CreateLeadResponse) => void
+  ): Promise<CreateLeadResponse> {
+    return this.request("CreateLead", req, cb)
   }
 
   /**
@@ -307,6 +328,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryDealerInfoListResponse) => void
   ): Promise<QueryDealerInfoListResponse> {
     return this.request("QueryDealerInfoList", req, cb)
+  }
+
+  /**
+   * 企业可通过传入起始和结束时间，获取该时间段的外部联系人详情列表
+   */
+  async QueryExternalContactDetailByDate(
+    req: QueryExternalContactDetailByDateRequest,
+    cb?: (error: string, rep: QueryExternalContactDetailByDateResponse) => void
+  ): Promise<QueryExternalContactDetailByDateResponse> {
+    return this.request("QueryExternalContactDetailByDate", req, cb)
   }
 
   /**

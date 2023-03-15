@@ -1506,6 +1506,16 @@ export interface DetectInfoText {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LivenessMode: number;
+    /**
+      * nfc重复计费requestId列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NFCRequestIds?: Array<string>;
+    /**
+      * nfc重复计费计数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NFCBillingCounts?: number;
 }
 /**
  * DetectAuth请求参数结构体

@@ -4318,42 +4318,42 @@ export interface MLIDPassportOCRResponse {
     /**
       * 护照ID
       */
-    ID: string;
+    ID?: string;
     /**
       * 姓名
       */
-    Name: string;
+    Name?: string;
     /**
       * 出生日期
       */
-    DateOfBirth: string;
+    DateOfBirth?: string;
     /**
       * 性别（F女，M男）
       */
-    Sex: string;
+    Sex?: string;
     /**
       * 有效期
       */
-    DateOfExpiration: string;
+    DateOfExpiration?: string;
     /**
       * 发行国
       */
-    IssuingCountry: string;
+    IssuingCountry?: string;
     /**
       * 国家地区代码
       */
-    Nationality: string;
+    Nationality?: string;
     /**
       * 告警码
 -9103	证照翻拍告警
 -9102	证照复印件告警（包括黑白复印件、彩色复印件）
 -9106       证件遮挡告警
       */
-    Warn: Array<number>;
+    Warn?: Array<number>;
     /**
       * 证件图片
       */
-    Image: string;
+    Image?: string;
     /**
       * 扩展字段:
 {
@@ -4365,15 +4365,25 @@ export interface MLIDPassportOCRResponse {
     }
 }
       */
-    AdvancedInfo: string;
+    AdvancedInfo?: string;
     /**
       * 最下方第一行 MRZ Code 序列
       */
-    CodeSet: string;
+    CodeSet?: string;
     /**
       * 最下方第二行 MRZ Code 序列
       */
-    CodeCrc: string;
+    CodeCrc?: string;
+    /**
+      * 姓
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Surname?: string;
+    /**
+      * 名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GivenName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

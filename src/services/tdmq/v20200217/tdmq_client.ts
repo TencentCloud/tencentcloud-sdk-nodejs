@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeRolesResponse,
+  RabbitMQClusterAccessInfo,
   DescribeAMQPRouteRelationsRequest,
   CmqDeadLetterPolicy,
   DescribeNamespaceBundlesOptRequest,
@@ -59,11 +60,13 @@ import {
   RocketMQGroup,
   AMQPClusterRecentStats,
   DescribeRocketMQVipInstanceDetailRequest,
+  RabbitMQClusterWhiteListInfo,
   DeleteCmqTopicResponse,
   ModifyAMQPVHostRequest,
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
   Topic,
+  ExchangeQuota,
   DescribeCmqTopicDetailResponse,
   Environment,
   CmqQueue,
@@ -177,8 +180,10 @@ import {
   CreateTopicResponse,
   DescribeCmqQueuesRequest,
   DescribeEnvironmentsResponse,
+  DescribeRabbitMQVipInstanceResponse,
   ModifyCmqSubscriptionAttributeRequest,
   ModifyTopicResponse,
+  VirtualHostQuota,
   AMQPClusterInfo,
   DescribeAMQPRouteRelationsResponse,
   DeleteTopicsResponse,
@@ -186,11 +191,13 @@ import {
   DescribeRocketMQVipInstancesRequest,
   DeleteAMQPExchangeRequest,
   DeleteRocketMQClusterResponse,
+  RabbitMQClusterInfo,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
   ModifyRabbitMQVipInstanceResponse,
   ClearCmqSubscriptionFilterTagsResponse,
   CreateRabbitMQVipInstanceResponse,
+  DescribeRabbitMQVipInstanceRequest,
   DescribeCmqTopicsRequest,
   Filter,
   AMQPExchange,
@@ -201,6 +208,7 @@ import {
   ResetMsgSubOffsetByTimestampRequest,
   CreateEnvironmentRoleResponse,
   Consumer,
+  PrometheusEndpointInfo,
   CreateCmqSubscribeRequest,
   DeleteCmqSubscribeRequest,
   DescribeAMQPClustersResponse,
@@ -222,6 +230,7 @@ import {
   DescribeCmqQueueDetailRequest,
   DescribeAMQPQueuesResponse,
   CreateRocketMQTopicRequest,
+  QueueQuota,
   CreateRoleResponse,
   DeleteRocketMQClusterRequest,
   InternalTenant,
@@ -257,9 +266,11 @@ import {
   DeleteAMQPRouteRelationRequest,
   SendCmqMsgResponse,
   DescribeNodeHealthOptResponse,
+  VpcEndpointInfo,
   PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   CreateAMQPRouteRelationRequest,
+  RabbitMQClusterSpecInfo,
   RabbitMQPrivateNode,
   DeleteCmqSubscribeResponse,
   DescribePublisherSummaryRequest,
@@ -706,6 +717,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 获取单个RabbitMQ专享实例信息
+   */
+  async DescribeRabbitMQVipInstance(
+    req: DescribeRabbitMQVipInstanceRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVipInstanceResponse) => void
+  ): Promise<DescribeRabbitMQVipInstanceResponse> {
+    return this.request("DescribeRabbitMQVipInstance", req, cb)
   }
 
   /**

@@ -777,6 +777,23 @@ export interface DescribeClientRuleListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeIdentifications返回参数结构体
+ */
+export interface DescribeIdentificationsResponse {
+    /**
+      * 符合条件的站点个数。
+      */
+    TotalCount: number;
+    /**
+      * 站点验证信息列表。
+      */
+    Identifications: Array<Identification>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySecurityPolicy请求参数结构体
  */
 export interface ModifySecurityPolicyRequest {
@@ -993,6 +1010,68 @@ export interface CreateApplicationProxyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Bot自定义规则
+ */
+export interface BotUserRule {
+    /**
+      * 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。
+      */
+    RuleName: string;
+    /**
+      * 处置动作，取值有：
+<li>drop：拦截；</li>
+<li>monitor：观察；</li>
+<li>trans：放行；</li>
+<li>alg：JavaScript挑战；</li>
+<li>captcha：托管挑战；</li>
+<li>silence：静默；</li>
+<li>shortdelay：短时响应；</li>
+<li>longdelay：长时响应。</li>
+      */
+    Action: string;
+    /**
+      * 规则状态，取值有：
+<li>on：生效；</li>
+<li>off：不生效。</li>默认on生效。
+      */
+    RuleStatus: string;
+    /**
+      * 规则详情。
+      */
+    AclConditions: Array<AclCondition>;
+    /**
+      * 规则权重，取值范围0-100。
+      */
+    RulePriority: number;
+    /**
+      * 规则id。仅出参使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleID?: number;
+    /**
+      * 随机处置的处置方式及占比，非随机处置可不填暂不支持。
+      */
+    ExtendActions?: Array<BotExtendAction>;
+    /**
+      * 过滤词，取值有：
+<li>sip：客户端ip。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreqFields?: Array<string>;
+    /**
+      * 更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: string;
+    /**
+      * 统计范围，字段为null时，代表source_to_eo。取值有：
+<li>source_to_eo：（响应）源站到EdgeOne。</li>
+<li>client_to_eo：（请求）客户端到EdgeOne；</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreqScope?: Array<string>;
 }
 /**
  * ModifyOriginGroup返回参数结构体
@@ -1324,21 +1403,26 @@ export interface CreateRuleResponse {
     RequestId?: string;
 }
 /**
- * DescribeIdentifications返回参数结构体
+ * Bot扩展处置方式，多处置动作组合。
  */
-export interface DescribeIdentificationsResponse {
+export interface BotExtendAction {
     /**
-      * 符合条件的站点个数。
+      * 处置动作，取值有：
+<li>monitor：观察；</li>
+<li>trans：放行；</li>
+<li>alg：JavaScript挑战；</li>
+<li>captcha：托管挑战；</li>
+<li>random：随机，按照ExtendActions分配处置动作和比例；</li>
+<li>silence：静默；</li>
+<li>shortdelay：短时响应；</li>
+<li>longdelay：长时响应。</li>
       */
-    TotalCount: number;
+    Action: string;
     /**
-      * 站点验证信息列表。
+      * 处置方式的触发概率，范围0-100。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Identifications: Array<Identification>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Percent?: number;
 }
 /**
  * CreatePurgeTask返回参数结构体
@@ -1565,7 +1649,12 @@ export interface AclCondition {
 <li>method：请求方式；</li>
 <li>header：请求头部；</li>
 <li>app_proto：应用层协议；</li>
-<li>sip_proto：网络层协议。</li>
+<li>sip_proto：网络层协议；</li>
+<li>uabot：UA 特征规则，仅bot自定义规则可用；</li>
+<li>idcid：IDC 规则，仅bot自定义规则可用；</li>
+<li>sipbot：搜索引擎规则，仅bot自定义规则可用；</li>
+<li>portrait：画像分析，仅bot自定义规则可用；</li>
+<li>header_seq：请求头顺序，仅bot自定义规则可用。</li>
       */
     MatchFrom: string;
     /**
@@ -7783,6 +7872,15 @@ export interface BotConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IntelligenceRule?: IntelligenceRule;
+    /**
+      * Bot自定义规则。如果为null，默认使用历史配置。
+      */
+    BotUserRules?: Array<BotUserRule>;
+    /**
+      * Bot托管定制策略，入参可不填，仅出参使用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Customizes?: Array<BotUserRule>;
 }
 /**
  * DescribeLogTopicTasks返回参数结构体

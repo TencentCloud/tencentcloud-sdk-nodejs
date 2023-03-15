@@ -825,7 +825,7 @@ export interface DescribeDiskConfigQuotaResponse {
   /**
    * 云盘配置列表。
    */
-  DiskConfigSet: Array<DiskConfig>
+  DiskConfigSet?: Array<DiskConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

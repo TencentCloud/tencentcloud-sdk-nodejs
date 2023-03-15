@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenBackUp", req, cb);
     }
     /**
+     * 集群vcluster列表
+     */
+    async DescribeInstanceClusters(req, cb) {
+        return this.request("DescribeInstanceClusters", req, cb);
+    }
+    /**
      * 在集群详情页面获取所有参数列表
      */
     async DescribeInstanceKeyValConfigs(req, cb) {

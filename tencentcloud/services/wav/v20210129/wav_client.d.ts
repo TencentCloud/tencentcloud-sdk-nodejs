@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryVehicleInfoListResponse, CreateCorpTagResponse, QueryChatArchivingListResponse, QueryCustomerEventDetailStatisticsResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryStaffEventDetailStatisticsRequest, QueryUserInfoListRequest, QueryExternalUserEventListRequest, QueryMaterialListRequest, CreateLeadResponse, QueryUserInfoListResponse, QueryVehicleInfoListRequest, QueryExternalUserEventListResponse, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, CreateCorpTagRequest, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryStaffEventDetailStatisticsResponse, QueryActivityJoinListRequest, QueryExternalUserMappingInfoRequest, QueryCrmStatisticsResponse, QueryChannelCodeListRequest, QueryDealerInfoListResponse, QueryActivityLiveCodeListRequest, QueryActivityJoinListResponse, QueryDealerInfoListRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryCustomerEventDetailStatisticsRequest, QueryCrmStatisticsRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, CreateLeadRequest, QueryChannelCodeListResponse, QueryMaterialListResponse } from "./wav_models";
+import { QueryVehicleInfoListResponse, CreateCorpTagResponse, QueryChatArchivingListResponse, QueryCustomerEventDetailStatisticsResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryCustomerProfileListRequest, QueryUserInfoListRequest, QueryExternalUserEventListRequest, QueryMaterialListRequest, CreateLeadResponse, QueryUserInfoListResponse, QueryVehicleInfoListRequest, QueryExternalContactDetailByDateResponse, QueryExternalUserEventListResponse, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListRequest, QueryActivityLiveCodeListResponse, CreateCorpTagRequest, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryStaffEventDetailStatisticsResponse, QueryActivityJoinListRequest, QueryExternalContactDetailByDateRequest, QueryExternalUserMappingInfoRequest, QueryCrmStatisticsResponse, QueryChannelCodeListRequest, QueryDealerInfoListResponse, QueryCustomerProfileListResponse, QueryActivityJoinListResponse, QueryStaffEventDetailStatisticsRequest, QueryDealerInfoListRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryCustomerEventDetailStatisticsRequest, QueryCrmStatisticsRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, CreateLeadRequest, QueryChannelCodeListResponse, QueryMaterialListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -32,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     QueryExternalContactList(req: QueryExternalContactListRequest, cb?: (error: string, rep: QueryExternalContactListResponse) => void): Promise<QueryExternalContactListResponse>;
     /**
+     * 通过接口拉取租户已有潜客客户档案列表信息
+     */
+    QueryCustomerProfileList(req: QueryCustomerProfileListRequest, cb?: (error: string, rep: QueryCustomerProfileListResponse) => void): Promise<QueryCustomerProfileListResponse>;
+    /**
      * 查询企业成员信息列表接口
      */
     QueryUserInfoList(req: QueryUserInfoListRequest, cb?: (error: string, rep: QueryUserInfoListResponse) => void): Promise<QueryUserInfoListResponse>;
@@ -52,17 +56,17 @@ export declare class Client extends AbstractClient {
      */
     QueryExternalContactDetail(req: QueryExternalContactDetailRequest, cb?: (error: string, rep: QueryExternalContactDetailResponse) => void): Promise<QueryExternalContactDetailResponse>;
     /**
-     * 线索回收接口
+     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
      */
-    CreateLead(req: CreateLeadRequest, cb?: (error: string, rep: CreateLeadResponse) => void): Promise<CreateLeadResponse>;
+    QueryVehicleInfoList(req: QueryVehicleInfoListRequest, cb?: (error: string, rep: QueryVehicleInfoListResponse) => void): Promise<QueryVehicleInfoListResponse>;
     /**
      * 通过接口拉取SaaS内企业成员在指定时间范围内的行为事件明细。此接口提供的数据以天为维度，查询的时间范围为[start_time,end_time]，即前后均为闭区间，支持的最大查询跨度为365天。
      */
     QueryStaffEventDetailStatistics(req: QueryStaffEventDetailStatisticsRequest, cb?: (error: string, rep: QueryStaffEventDetailStatisticsResponse) => void): Promise<QueryStaffEventDetailStatisticsResponse>;
     /**
-     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+     * 线索回收接口
      */
-    QueryVehicleInfoList(req: QueryVehicleInfoListRequest, cb?: (error: string, rep: QueryVehicleInfoListResponse) => void): Promise<QueryVehicleInfoListResponse>;
+    CreateLead(req: CreateLeadRequest, cb?: (error: string, rep: CreateLeadResponse) => void): Promise<CreateLeadResponse>;
     /**
      * 根据游标拉取会话存档列表信息
      */
@@ -91,6 +95,10 @@ export declare class Client extends AbstractClient {
      * 企业可通过此接口获取录入在企微SaaS平台上的经销商信息。
      */
     QueryDealerInfoList(req: QueryDealerInfoListRequest, cb?: (error: string, rep: QueryDealerInfoListResponse) => void): Promise<QueryDealerInfoListResponse>;
+    /**
+     * 企业可通过传入起始和结束时间，获取该时间段的外部联系人详情列表
+     */
+    QueryExternalContactDetailByDate(req: QueryExternalContactDetailByDateRequest, cb?: (error: string, rep: QueryExternalContactDetailByDateResponse) => void): Promise<QueryExternalContactDetailByDateResponse>;
     /**
      * 企业可通过此接口将企业主体对应的外部联系人id转换为乐销车应用主体对应的外部联系人。
      */

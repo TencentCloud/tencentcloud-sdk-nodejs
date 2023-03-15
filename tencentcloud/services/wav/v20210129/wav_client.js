@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryExternalContactList", req, cb);
     }
     /**
+     * 通过接口拉取租户已有潜客客户档案列表信息
+     */
+    async QueryCustomerProfileList(req, cb) {
+        return this.request("QueryCustomerProfileList", req, cb);
+    }
+    /**
      * 查询企业成员信息列表接口
      */
     async QueryUserInfoList(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryExternalContactDetail", req, cb);
     }
     /**
-     * 线索回收接口
+     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
      */
-    async CreateLead(req, cb) {
-        return this.request("CreateLead", req, cb);
+    async QueryVehicleInfoList(req, cb) {
+        return this.request("QueryVehicleInfoList", req, cb);
     }
     /**
      * 通过接口拉取SaaS内企业成员在指定时间范围内的行为事件明细。此接口提供的数据以天为维度，查询的时间范围为[start_time,end_time]，即前后均为闭区间，支持的最大查询跨度为365天。
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryStaffEventDetailStatistics", req, cb);
     }
     /**
-     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+     * 线索回收接口
      */
-    async QueryVehicleInfoList(req, cb) {
-        return this.request("QueryVehicleInfoList", req, cb);
+    async CreateLead(req, cb) {
+        return this.request("CreateLead", req, cb);
     }
     /**
      * 根据游标拉取会话存档列表信息
@@ -152,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryDealerInfoList(req, cb) {
         return this.request("QueryDealerInfoList", req, cb);
+    }
+    /**
+     * 企业可通过传入起始和结束时间，获取该时间段的外部联系人详情列表
+     */
+    async QueryExternalContactDetailByDate(req, cb) {
+        return this.request("QueryExternalContactDetailByDate", req, cb);
     }
     /**
      * 企业可通过此接口将企业主体对应的外部联系人id转换为乐销车应用主体对应的外部联系人。

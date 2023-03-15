@@ -538,6 +538,12 @@ export interface BatchDescribeKTVMusicDetailsRequest {
    * 歌曲 Id 列表。
    */
   MusicIds: Array<string>
+
+  /**
+      * 播放场景。默认为Chat
+<li>Live：直播</li><li>Chat：语聊</li>
+      */
+  PlayScene?: string
 }
 
 /**
@@ -881,12 +887,12 @@ export interface BatchDescribeKTVMusicDetailsResponse {
   /**
    * 歌曲详细信息列表。
    */
-  KTVMusicDetailInfoSet: Array<KTVMusicDetailInfo>
+  KTVMusicDetailInfoSet?: Array<KTVMusicDetailInfo>
 
   /**
    * 不存在歌曲Id列表。
    */
-  NotExistMusicIdSet: Array<string>
+  NotExistMusicIdSet?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

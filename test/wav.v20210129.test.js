@@ -78,6 +78,16 @@ it("wav.v20210129.QueryExternalContactList", async function () {
     }
 })
 
+it("wav.v20210129.QueryCustomerProfileList", async function () {
+    try {
+       const data = await client.QueryCustomerProfileList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryUserInfoList", async function () {
     try {
        const data = await client.QueryUserInfoList({})
@@ -128,9 +138,9 @@ it("wav.v20210129.QueryExternalContactDetail", async function () {
     }
 })
 
-it("wav.v20210129.CreateLead", async function () {
+it("wav.v20210129.QueryVehicleInfoList", async function () {
     try {
-       const data = await client.CreateLead({})
+       const data = await client.QueryVehicleInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +158,9 @@ it("wav.v20210129.QueryStaffEventDetailStatistics", async function () {
     }
 })
 
-it("wav.v20210129.QueryVehicleInfoList", async function () {
+it("wav.v20210129.CreateLead", async function () {
     try {
-       const data = await client.QueryVehicleInfoList({})
+       const data = await client.CreateLead({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +231,16 @@ it("wav.v20210129.QueryMiniAppCodeList", async function () {
 it("wav.v20210129.QueryDealerInfoList", async function () {
     try {
        const data = await client.QueryDealerInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryExternalContactDetailByDate", async function () {
+    try {
+       const data = await client.QueryExternalContactDetailByDate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -405,7 +405,7 @@ export interface DescribeVASStatisticResponse {
     /**
       * 增值服务用量列表
       */
-    VASList: Array<VASStatisticItem>;
+    VASList?: Array<VASStatisticItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -532,11 +532,11 @@ export interface DescribePackageDetailResponse {
     /**
       * 套餐配置详情
       */
-    Info: Array<PackageDetailItem>;
+    Info?: Array<PackageDetailItem>;
     /**
       * 套餐代码列表
       */
-    LevelMap: Array<string>;
+    LevelMap?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3420,7 +3420,7 @@ export interface DescribeRecordExistExceptDefaultNSResponse {
     /**
       * true 是 false 否
       */
-    Exist: boolean;
+    Exist?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

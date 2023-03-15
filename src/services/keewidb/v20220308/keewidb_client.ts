@@ -32,6 +32,7 @@ import {
   CreateBackupManuallyResponse,
   DescribeDBSecurityGroupsResponse,
   RedisNodeInfo,
+  ModifyAutoBackupConfigRequest,
   ProxyNodeInfo,
   DestroyPostpaidInstanceRequest,
   InstanceProxySlowlogDetail,
@@ -42,7 +43,7 @@ import {
   CreateBackupManuallyRequest,
   DescribeInstanceParamRecordsResponse,
   InstanceMultiParam,
-  ModifyAutoBackupConfigRequest,
+  DescribeInstanceDealDetailRequest,
   DestroyPrepaidInstanceRequest,
   InstanceIntegerParam,
   InstanceTagInfo,
@@ -80,11 +81,13 @@ import {
   ResetPasswordRequest,
   ProductConf,
   ModifyConnectionConfigRequest,
+  TradeDealDetail,
   ResourceTag,
   AssociateSecurityGroupsResponse,
   ReplicaGroup,
   InstanceInfo,
   CleanUpInstanceRequest,
+  DescribeInstanceDealDetailResponse,
   DescribeInstancesRequest,
   DescribeTaskInfoResponse,
   DescribeAutoBackupConfigRequest,
@@ -445,6 +448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearInstanceResponse) => void
   ): Promise<ClearInstanceResponse> {
     return this.request("ClearInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceDealDetail）用于查询预付费订单信息。
+   */
+  async DescribeInstanceDealDetail(
+    req: DescribeInstanceDealDetailRequest,
+    cb?: (error: string, rep: DescribeInstanceDealDetailResponse) => void
+  ): Promise<DescribeInstanceDealDetailResponse> {
+    return this.request("DescribeInstanceDealDetail", req, cb)
   }
 
   /**

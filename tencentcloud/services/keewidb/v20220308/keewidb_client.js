@@ -220,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearInstance", req, cb);
     }
     /**
+     * 本接口（DescribeInstanceDealDetail）用于查询预付费订单信息。
+     */
+    async DescribeInstanceDealDetail(req, cb) {
+        return this.request("DescribeInstanceDealDetail", req, cb);
+    }
+    /**
      * 本接口（DestroyPostpaidInstance）用于退还按量计费实例。
      */
     async DestroyPostpaidInstance(req, cb) {

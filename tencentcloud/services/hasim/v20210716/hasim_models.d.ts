@@ -1051,6 +1051,14 @@ export interface DescribeLinksRequest {
       * 标签ID 集合
       */
     TagIDs?: Array<number>;
+    /**
+      * 翻页大小, 默认翻页大小为10，最大数量为500
+      */
+    Limit?: number;
+    /**
+      * 翻页起始
+      */
+    Offset?: number;
 }
 /**
  * CreateRule返回参数结构体

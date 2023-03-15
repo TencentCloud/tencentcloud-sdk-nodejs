@@ -78,6 +78,16 @@ it("cdwch.v20200915.OpenBackUp", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeInstanceClusters", async function () {
+    try {
+       const data = await client.DescribeInstanceClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.DescribeInstanceKeyValConfigs", async function () {
     try {
        const data = await client.DescribeInstanceKeyValConfigs({})

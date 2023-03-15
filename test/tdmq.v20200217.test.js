@@ -428,6 +428,16 @@ it("tdmq.v20200217.DescribeClusters", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRabbitMQVipInstance", async function () {
+    try {
+       const data = await client.DescribeRabbitMQVipInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ResetRocketMQConsumerOffSet", async function () {
     try {
        const data = await client.ResetRocketMQConsumerOffSet({})

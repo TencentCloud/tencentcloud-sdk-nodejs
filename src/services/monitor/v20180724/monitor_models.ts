@@ -5425,22 +5425,22 @@ export interface DescribeStatisticDataResponse {
   /**
    * 统计周期
    */
-  Period: number
+  Period?: number
 
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
 
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
 
   /**
    * 监控数据
    */
-  Data: Array<MetricData>
+  Data?: Array<MetricData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11165,7 +11165,7 @@ export interface DescribeStatisticDataRequest {
   Module: string
 
   /**
-   * 命名空间，目前只支持QCE/TKE
+   * 命名空间，目前只支持QCE/TKE2
    */
   Namespace: string
 
