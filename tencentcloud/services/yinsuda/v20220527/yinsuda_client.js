@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateKTVRobot", req, cb);
     }
     /**
-     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     * 充值直播会员，使该用户可以在直播场景使用
      */
-    async SyncKTVRobotCommand(req, cb) {
-        return this.request("SyncKTVRobotCommand", req, cb);
+    async RechargeLiveVip(req, cb) {
+        return this.request("RechargeLiveVip", req, cb);
     }
     /**
      * 获取标签分组及分组下的标签列表信息。
@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKTVPlaylistDetail", req, cb);
     }
     /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    async SyncKTVRobotCommand(req, cb) {
+        return this.request("SyncKTVRobotCommand", req, cb);
+    }
+    /**
      * 销毁机器人，机器人退出 RTC 房间。
      */
     async DestroyKTVRobot(req, cb) {
@@ -62,6 +68,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeKTVSuggestions(req, cb) {
         return this.request("DescribeKTVSuggestions", req, cb);
+    }
+    /**
+     * 获取用户信息，包括是否为直播会员，及直播会员信息等
+     */
+    async DescribeUserInfo(req, cb) {
+        return this.request("DescribeUserInfo", req, cb);
+    }
+    /**
+     * 批量获取直播会员充值流水详细信息，包括：流水号，订单状态，下订单时间等
+     */
+    async DescribeLiveVipTradeInfos(req, cb) {
+        return this.request("DescribeLiveVipTradeInfos", req, cb);
     }
     /**
      * 批量获取歌曲详细信息，包括：歌词下载链接、播放凭证、音高数据下载链接信息等。

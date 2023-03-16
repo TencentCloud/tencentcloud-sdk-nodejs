@@ -184,6 +184,21 @@ export interface SyncKTVRobotCommandRequest {
 }
 
 /**
+ * 标签信息。
+ */
+export interface KTVTagInfo {
+  /**
+   * 标签 Id。
+   */
+  TagId: string
+
+  /**
+   * 标签名称。
+   */
+  Name: string
+}
+
+/**
  * DescribeKTVPlaylistDetail请求参数结构体
  */
 export interface DescribeKTVPlaylistDetailRequest {
@@ -218,6 +233,16 @@ export interface DescribeKTVPlaylistDetailRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+}
+
+/**
+ * SyncKTVRobotCommand返回参数结构体
+ */
+export interface SyncKTVRobotCommandResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -282,6 +307,27 @@ export interface CreateKTVRobotResponse {
 }
 
 /**
+ * 直播会员用户信息
+ */
+export interface LiveVipUserInfo {
+  /**
+   * 房间标识。
+   */
+  RoomId?: string
+
+  /**
+   * 直播会员结束时间。
+   */
+  LiveVipEndTime?: string
+
+  /**
+      * 会员生效状态
+<li>Valid：生效</li><li>Invalid：无效</li>
+      */
+  LiveVipStatus?: string
+}
+
+/**
  * DescribeKTVSuggestions请求参数结构体
  */
 export interface DescribeKTVSuggestionsRequest {
@@ -334,6 +380,21 @@ export interface DescribeKTVPlaylistsResponse {
    * 歌单总数。
    */
   TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RechargeLiveVip返回参数结构体
+ */
+export interface RechargeLiveVipResponse {
+  /**
+   * 直播会员信息。
+   */
+  LiveVipUserInfo?: LiveVipUserInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -395,13 +456,45 @@ export interface DescribeKTVPlaylistDetailResponse {
 }
 
 /**
- * SyncKTVRobotCommand返回参数结构体
+ * DescribeLiveVipTradeInfos请求参数结构体
  */
-export interface SyncKTVRobotCommandResponse {
+export interface DescribeLiveVipTradeInfosRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 应用名称。
    */
-  RequestId?: string
+  AppName: string
+
+  /**
+   * 直播会员充值下单起始时间，格式为 ISO。默认为当前时间前一天。
+   */
+  StartTime?: string
+
+  /**
+   * 直播会员充值下单截止时间，格式为 ISO。默认为当前时间。 EndTime不能小于StartTime
+   */
+  EndTime?: string
+
+  /**
+      * 交易流水号集合，匹配集合指定所有流水号 。
+<li>数组长度限制：10。</li>
+      */
+  TradeSerialNos?: Array<string>
+
+  /**
+      * 用户标识集合，匹配集合指定所有用户标识 。
+<li>数组长度限制：10。</li>
+      */
+  UserIds?: Array<string>
+
+  /**
+   * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Offset?: number
+
+  /**
+   * 分页返回的记录条数，默认值：20，最大值：50。
+   */
+  Limit?: number
 }
 
 /**
@@ -587,18 +680,23 @@ export interface DescribeKTVMusicsByTagResponse {
 }
 
 /**
- * 标签信息。
+ * DescribeLiveVipTradeInfos返回参数结构体
  */
-export interface KTVTagInfo {
+export interface DescribeLiveVipTradeInfosResponse {
   /**
-   * 标签 Id。
+   * 直播会员充值流水信息列表
    */
-  TagId: string
+  LiveVipTradeInfoSet?: Array<LiveVipTradeInfo>
 
   /**
-   * 标签名称。
+   * 直播会员充值流水总数。
    */
-  Name: string
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -796,6 +894,41 @@ export interface DescribeKTVTagsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RechargeLiveVip请求参数结构体
+ */
+export interface RechargeLiveVipRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+
+  /**
+   * 用户标识。
+   */
+  UserId: string
+
+  /**
+   * 交易流水号，用于标记此次充值记录，多次充值记录传入相同的 TradeSerialNo 会判断为失败，可用于防止重提提交造成重复计费。
+   */
+  TradeSerialNo: string
+
+  /**
+   * 房间标识。
+   */
+  RoomId: string
+
+  /**
+      * 充值会员天数。
+取值有：
+<li>31</li>
+<li>93</li>
+<li>186</li>
+<li>372</li>
+      */
+  VipDays: number
 }
 
 /**
@@ -1088,6 +1221,21 @@ export interface KTVPlaylistBaseInfo {
 }
 
 /**
+ * DescribeUserInfo请求参数结构体
+ */
+export interface DescribeUserInfoRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+
+  /**
+   * 用户标识。
+   */
+  UserId: string
+}
+
+/**
  * 发送自定义信息指令参数
  */
 export interface SendMessageCommandInput {
@@ -1120,6 +1268,93 @@ export interface DestroyKTVRobotRequest {
    * 机器人Id。
    */
   RobotId: string
+}
+
+/**
+ * 充值直播会员流水信息
+ */
+export interface LiveVipTradeInfo {
+  /**
+   * 交易流水号。
+   */
+  TradeSerialNo?: string
+
+  /**
+   * 应用名称。
+   */
+  AppName?: string
+
+  /**
+   * 用户标识。
+   */
+  UserId?: string
+
+  /**
+   * 房间标识。
+   */
+  RoomId?: string
+
+  /**
+      * 充值会员天数。
+取值有： 
+<li>31</li> <li>93</li><li>186</li> <li>372</li>
+      */
+  VipDays?: number
+
+  /**
+      * 订单状态。 
+取值有： 
+<li>Success：成功</li><li>Fail：失败</li><li>Processing：订单处理中</li>
+      */
+  Status?: string
+
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+}
+
+/**
+ * 用户信息
+ */
+export interface UserInfo {
+  /**
+   * 应用名称。
+   */
+  AppName?: string
+
+  /**
+   * 用户标识。
+   */
+  UserId?: string
+
+  /**
+      * 直播会员详细信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LiveVipUserInfo?: LiveVipUserInfo
+
+  /**
+      * 用户类型
+<li>Normal：普通用户</li>
+<li>LiveVip：直播会员用户</li>
+      */
+  UserType?: string
+}
+
+/**
+ * DescribeUserInfo返回参数结构体
+ */
+export interface DescribeUserInfoResponse {
+  /**
+   * 用户信息。
+   */
+  UserInfo?: UserInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

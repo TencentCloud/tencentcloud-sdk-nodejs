@@ -200,6 +200,7 @@ import {
   InquiryPriceCreateInstanceRequest,
   UpgradeSmallVersionResponse,
   ModifyInstanceParamsRequest,
+  DescribeSSLStatusRequest,
   OpenSSLRequest,
   BackupDownloadInfo,
   BigKeyTypeInfo,
@@ -207,6 +208,7 @@ import {
   DescribeMaintenanceWindowRequest,
   AddReplicationInstanceRequest,
   InstanceClusterNode,
+  DescribeSSLStatusResponse,
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
   DescribeProxySlowLogResponse,
@@ -862,6 +864,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
   ): Promise<AssociateSecurityGroupsResponse> {
     return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 查询SSL状态
+   */
+  async DescribeSSLStatus(
+    req: DescribeSSLStatusRequest,
+    cb?: (error: string, rep: DescribeSSLStatusResponse) => void
+  ): Promise<DescribeSSLStatusResponse> {
+    return this.request("DescribeSSLStatus", req, cb)
   }
 
   /**

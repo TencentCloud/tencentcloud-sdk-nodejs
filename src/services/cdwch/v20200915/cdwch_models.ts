@@ -479,6 +479,59 @@ export interface ConfigSubmitContext {
 }
 
 /**
+ * 集群状态抽象后的结构体
+ */
+export interface InstanceStateInfo {
+  /**
+      * 集群状态，例如：Serving
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceState: string
+
+  /**
+      * 集群操作创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowCreateTime: string
+
+  /**
+      * 集群操作名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowName: string
+
+  /**
+      * 集群操作进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowProgress: number
+
+  /**
+      * 集群状态描述，例如：运行中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceStateDesc: string
+
+  /**
+      * 集群流程错误信息，例如：“创建失败，资源不足”
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowMsg: string
+
+  /**
+      * 当前步骤的名称，例如：”购买资源中“
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProcessName: string
+
+  /**
+      * 请求id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceClusters返回参数结构体
  */
 export interface DescribeInstanceClustersResponse {
@@ -754,6 +807,78 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CosMoveFactor: number
+
+  /**
+      * external/local/yunti
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Kind: string
+
+  /**
+      * 是否弹性ck
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsElastic: boolean
+
+  /**
+      * 集群详细状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceStateInfo: InstanceStateInfo
+
+  /**
+      * ZK高可用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HAZk: boolean
+
+  /**
+      * 挂载盘,默认0:没有类型；1:裸盘;2:lvm
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MountDiskType?: number
+
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CHProxyVip?: string
+
+  /**
+      * cos buket的名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosBucketName?: string
+
+  /**
+      * 是否可以挂载云盘
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanAttachCbs?: boolean
+
+  /**
+      * 是否可以挂载云盘阵列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanAttachCbsLvm?: boolean
+
+  /**
+      * 是否可以挂载cos
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanAttachCos?: boolean
+
+  /**
+      * 服务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Components?: Array<ServiceInfo>
+
+  /**
+      * 可升级的内核版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpgradeVersions?: string
 }
 
 /**
@@ -807,6 +932,23 @@ export interface DescribeInstanceKeyValConfigsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务详细信息描述。
+ */
+export interface ServiceInfo {
+  /**
+      * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 服务的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: string
 }
 
 /**
@@ -984,6 +1126,31 @@ export interface MapConfigItem {
 }
 
 /**
+ * 集群内节点的规格磁盘规格描述
+ */
+export interface AttachCBSSpec {
+  /**
+   * 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM"
+   */
+  DiskType?: string
+
+  /**
+   * 磁盘容量，单位G
+   */
+  DiskSize?: number
+
+  /**
+   * 磁盘总数
+   */
+  DiskCount?: number
+
+  /**
+   * 描述
+   */
+  DiskDesc?: string
+}
+
+/**
  * ScaleOutInstance请求参数结构体
  */
 export interface ScaleOutInstanceRequest {
@@ -1144,6 +1311,48 @@ export interface NodesSummary {
    * 磁盘描述
    */
   DiskDesc: string
+
+  /**
+      * 挂载云盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttachCBSSpec: AttachCBSSpec
+
+  /**
+      * 子产品类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubProductType?: string
+
+  /**
+      * 规格对应的核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecCore?: number
+
+  /**
+      * 规格对应的内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecMemory?: number
+
+  /**
+      * 磁盘的数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskCount?: number
+
+  /**
+      * 磁盘的最大大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDiskSize?: number
+
+  /**
+      * 是否为加密云盘
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encrypt?: number
 }
 
 /**

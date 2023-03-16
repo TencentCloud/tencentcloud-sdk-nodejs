@@ -628,6 +628,16 @@ it("redis.v20180412.AssociateSecurityGroups", async function () {
     }
 })
 
+it("redis.v20180412.DescribeSSLStatus", async function () {
+    try {
+       const data = await client.DescribeSSLStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstanceMonitorBigKey", async function () {
     try {
        const data = await client.DescribeInstanceMonitorBigKey({})

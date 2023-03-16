@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, SyncKTVRobotCommandResponse, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DestroyKTVRobotRequest, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
+import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, SyncKTVRobotCommandResponse, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, RechargeLiveVipResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeLiveVipTradeInfosRequest, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, DescribeLiveVipTradeInfosResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, RechargeLiveVipRequest, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DescribeUserInfoRequest, DestroyKTVRobotRequest, DescribeUserInfoResponse, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -12,9 +12,9 @@ export declare class Client extends AbstractClient {
      */
     CreateKTVRobot(req: CreateKTVRobotRequest, cb?: (error: string, rep: CreateKTVRobotResponse) => void): Promise<CreateKTVRobotResponse>;
     /**
-     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     * 充值直播会员，使该用户可以在直播场景使用
      */
-    SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
+    RechargeLiveVip(req: RechargeLiveVipRequest, cb?: (error: string, rep: RechargeLiveVipResponse) => void): Promise<RechargeLiveVipResponse>;
     /**
      * 获取标签分组及分组下的标签列表信息。
      */
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeKTVPlaylistDetail(req: DescribeKTVPlaylistDetailRequest, cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void): Promise<DescribeKTVPlaylistDetailResponse>;
     /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
+    /**
      * 销毁机器人，机器人退出 RTC 房间。
      */
     DestroyKTVRobot(req: DestroyKTVRobotRequest, cb?: (error: string, rep: DestroyKTVRobotResponse) => void): Promise<DestroyKTVRobotResponse>;
@@ -31,6 +35,14 @@ export declare class Client extends AbstractClient {
      * 根据关键词获取联想词列表。
      */
     DescribeKTVSuggestions(req: DescribeKTVSuggestionsRequest, cb?: (error: string, rep: DescribeKTVSuggestionsResponse) => void): Promise<DescribeKTVSuggestionsResponse>;
+    /**
+     * 获取用户信息，包括是否为直播会员，及直播会员信息等
+     */
+    DescribeUserInfo(req: DescribeUserInfoRequest, cb?: (error: string, rep: DescribeUserInfoResponse) => void): Promise<DescribeUserInfoResponse>;
+    /**
+     * 批量获取直播会员充值流水详细信息，包括：流水号，订单状态，下订单时间等
+     */
+    DescribeLiveVipTradeInfos(req: DescribeLiveVipTradeInfosRequest, cb?: (error: string, rep: DescribeLiveVipTradeInfosResponse) => void): Promise<DescribeLiveVipTradeInfosResponse>;
     /**
      * 批量获取歌曲详细信息，包括：歌词下载链接、播放凭证、音高数据下载链接信息等。
      */

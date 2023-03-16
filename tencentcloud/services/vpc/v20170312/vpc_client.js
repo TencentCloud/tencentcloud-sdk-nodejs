@@ -1777,7 +1777,7 @@ LimitTypes取值范围：
         return this.request("DisassociateDhcpIpWithAddressIp", req, cb);
     }
     /**
-     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）。
      */
     async CreateHaVip(req, cb) {
         return this.request("CreateHaVip", req, cb);

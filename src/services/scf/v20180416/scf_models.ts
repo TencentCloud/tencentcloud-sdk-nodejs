@@ -333,7 +333,7 @@ export interface PublishLayerVersionResponse {
   /**
    * 本次创建的层的版本号
    */
-  LayerVersion: number
+  LayerVersion?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2822,12 +2822,8 @@ export interface GetLayerVersionResponse {
   LayerName?: string
 
   /**
-      * 层的具体版本当前状态，可能取值：
-Active 正常
-Publishing  发布中
-PublishFailed  发布失败
-Deleted 已删除
-      */
+   * 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
+   */
   Status?: string
 
   /**
@@ -3147,12 +3143,12 @@ export interface ListLayersResponse {
   /**
    * 层列表
    */
-  Layers: Array<LayerVersionInfo>
+  Layers?: Array<LayerVersionInfo>
 
   /**
    * 层总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3291,7 +3287,7 @@ export interface GetAsyncEventStatusResponse {
   /**
    * 异步事件状态
    */
-  Result: AsyncEventStatus
+  Result?: AsyncEventStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3651,17 +3647,17 @@ export interface GetFunctionLogsResponse {
   /**
    * 函数日志的总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 函数日志信息
    */
-  Data: Array<FunctionLog>
+  Data?: Array<FunctionLog>
 
   /**
    * 该字段已下线
    */
-  SearchContext: LogSearchContext
+  SearchContext?: LogSearchContext
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3836,12 +3832,12 @@ export interface ListNamespacesResponse {
   /**
    * namespace详情
    */
-  Namespaces: Array<Namespace>
+  Namespaces?: Array<Namespace>
 
   /**
    * 返回的namespace数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

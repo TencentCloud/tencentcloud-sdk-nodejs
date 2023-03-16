@@ -28,9 +28,9 @@ it("yinsuda.v20220527.CreateKTVRobot", async function () {
     }
 })
 
-it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
+it("yinsuda.v20220527.RechargeLiveVip", async function () {
     try {
-       const data = await client.SyncKTVRobotCommand({})
+       const data = await client.RechargeLiveVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,6 +58,16 @@ it("yinsuda.v20220527.DescribeKTVPlaylistDetail", async function () {
     }
 })
 
+it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
+    try {
+       const data = await client.SyncKTVRobotCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("yinsuda.v20220527.DestroyKTVRobot", async function () {
     try {
        const data = await client.DestroyKTVRobot({})
@@ -71,6 +81,26 @@ it("yinsuda.v20220527.DestroyKTVRobot", async function () {
 it("yinsuda.v20220527.DescribeKTVSuggestions", async function () {
     try {
        const data = await client.DescribeKTVSuggestions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("yinsuda.v20220527.DescribeUserInfo", async function () {
+    try {
+       const data = await client.DescribeUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("yinsuda.v20220527.DescribeLiveVipTradeInfos", async function () {
+    try {
+       const data = await client.DescribeLiveVipTradeInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

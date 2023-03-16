@@ -4745,6 +4745,16 @@ export interface ModifyInstanceParamsRequest {
 }
 
 /**
+ * DescribeSSLStatus请求参数结构体
+ */
+export interface DescribeSSLStatusRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * OpenSSL请求参数结构体
  */
 export interface OpenSSLRequest {
@@ -4922,6 +4932,41 @@ export interface InstanceClusterNode {
    * 节点存储倾斜度
    */
   StorageSlope: number
+}
+
+/**
+ * DescribeSSLStatus返回参数结构体
+ */
+export interface DescribeSSLStatusResponse {
+  /**
+   * 证书下载地址
+   */
+  CertDownloadUrl: string
+
+  /**
+   * 证书下载链接到期时间
+   */
+  UrlExpiredTime: string
+
+  /**
+   * 实例SSL配置状态， true：开启 false：关闭
+   */
+  SSLConfig: boolean
+
+  /**
+   * 实例SSL特性支持， true：支持 false：不支持（小版本升级后才能支持SSL特性）
+   */
+  FeatureSupport: boolean
+
+  /**
+   * SSL配置状态，1: 配置中 2：配置成功
+   */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

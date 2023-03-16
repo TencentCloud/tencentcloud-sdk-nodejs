@@ -1474,12 +1474,12 @@ export interface DescribeClustersResponse {
   /**
    * 集群概览信息列表。
    */
-  ClusterSet: Array<ClusterOverview>
+  ClusterSet?: Array<ClusterOverview>
 
   /**
    * 集群数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1524,12 +1524,12 @@ export interface DescribeClusterActivitiesResponse {
   /**
    * 集群活动历史记录列表。
    */
-  ClusterActivitySet: Array<ClusterActivity>
+  ClusterActivitySet?: Array<ClusterActivity>
 
   /**
    * 集群活动历史记录数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -28,15 +28,19 @@ import {
   CreateKTVRobotRequest,
   KTVSuggestionInfo,
   SyncKTVRobotCommandRequest,
+  KTVTagInfo,
   DescribeKTVPlaylistDetailRequest,
+  SyncKTVRobotCommandResponse,
   KTVMusicDetailInfo,
   CreateKTVRobotResponse,
+  LiveVipUserInfo,
   DescribeKTVSuggestionsRequest,
   DescribeKTVMatchMusicsRequest,
   DescribeKTVPlaylistsResponse,
+  RechargeLiveVipResponse,
   DescribeKTVPlaylistsRequest,
   DescribeKTVPlaylistDetailResponse,
-  SyncKTVRobotCommandResponse,
+  DescribeLiveVipTradeInfosRequest,
   SetDestroyModeCommandInput,
   SetAudioParamCommandInput,
   KTVMatchMusic,
@@ -46,7 +50,7 @@ import {
   BatchDescribeKTVMusicDetailsRequest,
   AMEMusicBaseInfo,
   DescribeKTVMusicsByTagResponse,
-  KTVTagInfo,
+  DescribeLiveVipTradeInfosResponse,
   MusicAlbumInfo,
   SetPlayModeCommandInput,
   SyncRobotCommand,
@@ -54,6 +58,7 @@ import {
   KTVRobotInfo,
   DescribeKTVMatchMusicsResponse,
   DescribeKTVTagsResponse,
+  RechargeLiveVipRequest,
   ChorusClip,
   SetPlaylistCommandInput,
   ApplyChorusRequest,
@@ -65,8 +70,12 @@ import {
   PlayCommandInput,
   TimeRange,
   KTVPlaylistBaseInfo,
+  DescribeUserInfoRequest,
   SendMessageCommandInput,
   DestroyKTVRobotRequest,
+  LiveVipTradeInfo,
+  UserInfo,
+  DescribeUserInfoResponse,
   DescribeKTVRobotsRequest,
   DescribeKTVTagsRequest,
   SeekCommandInput,
@@ -92,13 +101,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   * 充值直播会员，使该用户可以在直播场景使用
    */
-  async SyncKTVRobotCommand(
-    req: SyncKTVRobotCommandRequest,
-    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
-  ): Promise<SyncKTVRobotCommandResponse> {
-    return this.request("SyncKTVRobotCommand", req, cb)
+  async RechargeLiveVip(
+    req: RechargeLiveVipRequest,
+    cb?: (error: string, rep: RechargeLiveVipResponse) => void
+  ): Promise<RechargeLiveVipResponse> {
+    return this.request("RechargeLiveVip", req, cb)
   }
 
   /**
@@ -122,6 +131,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   */
+  async SyncKTVRobotCommand(
+    req: SyncKTVRobotCommandRequest,
+    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
+  ): Promise<SyncKTVRobotCommandResponse> {
+    return this.request("SyncKTVRobotCommand", req, cb)
+  }
+
+  /**
    * 销毁机器人，机器人退出 RTC 房间。
    */
   async DestroyKTVRobot(
@@ -139,6 +158,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVSuggestionsResponse) => void
   ): Promise<DescribeKTVSuggestionsResponse> {
     return this.request("DescribeKTVSuggestions", req, cb)
+  }
+
+  /**
+   * 获取用户信息，包括是否为直播会员，及直播会员信息等
+   */
+  async DescribeUserInfo(
+    req: DescribeUserInfoRequest,
+    cb?: (error: string, rep: DescribeUserInfoResponse) => void
+  ): Promise<DescribeUserInfoResponse> {
+    return this.request("DescribeUserInfo", req, cb)
+  }
+
+  /**
+   * 批量获取直播会员充值流水详细信息，包括：流水号，订单状态，下订单时间等
+   */
+  async DescribeLiveVipTradeInfos(
+    req: DescribeLiveVipTradeInfosRequest,
+    cb?: (error: string, rep: DescribeLiveVipTradeInfosResponse) => void
+  ): Promise<DescribeLiveVipTradeInfosResponse> {
+    return this.request("DescribeLiveVipTradeInfos", req, cb)
   }
 
   /**

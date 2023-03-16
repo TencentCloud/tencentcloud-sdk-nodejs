@@ -1247,7 +1247,7 @@ LimitTypes取值范围：
      */
     DisassociateDhcpIpWithAddressIp(req: DisassociateDhcpIpWithAddressIpRequest, cb?: (error: string, rep: DisassociateDhcpIpWithAddressIpResponse) => void): Promise<DisassociateDhcpIpWithAddressIpResponse>;
     /**
-     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）。
      */
     CreateHaVip(req: CreateHaVipRequest, cb?: (error: string, rep: CreateHaVipResponse) => void): Promise<CreateHaVipResponse>;
     /**

@@ -394,6 +394,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
+     * 查询SSL状态
+     */
+    async DescribeSSLStatus(req, cb) {
+        return this.request("DescribeSSLStatus", req, cb);
+    }
+    /**
      * 腾讯云数据库 Redis 已经于2022年10月31日下线查询实例大 Key 接口。具体公告，请参见[查询实例大 Key 接口下线公告](https://cloud.tencent.com/document/product/239/81005)。
      */
     async DescribeInstanceMonitorBigKey(req, cb) {

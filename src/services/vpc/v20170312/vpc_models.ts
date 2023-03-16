@@ -8357,7 +8357,7 @@ export interface CreateNetworkInterfaceRequest {
   NetworkInterfaceDescription?: string
 
   /**
-   * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。
+   * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。
    */
   SecondaryPrivateIpAddressCount?: number
 
@@ -8931,7 +8931,7 @@ export interface CreateAndAttachNetworkInterfaceRequest {
   PrivateIpAddresses?: Array<PrivateIpAddressSpecification>
 
   /**
-   * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。
+   * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。
    */
   SecondaryPrivateIpAddressCount?: number
 
@@ -8946,7 +8946,7 @@ export interface CreateAndAttachNetworkInterfaceRequest {
   NetworkInterfaceDescription?: string
 
   /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
 
@@ -11331,7 +11331,7 @@ export interface CreateAndAttachNetworkInterfaceResponse {
   /**
    * 弹性网卡实例。
    */
-  NetworkInterface: NetworkInterface
+  NetworkInterface?: NetworkInterface
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13596,7 +13596,7 @@ export interface CreateNetworkInterfaceResponse {
   /**
    * 弹性网卡实例。
    */
-  NetworkInterface: NetworkInterface
+  NetworkInterface?: NetworkInterface
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14569,6 +14569,11 @@ export interface CreateHaVipRequest {
    * 指定虚拟IP地址，必须在`VPC`网段内且未被占用。不指定则自动分配。
    */
   Vip?: string
+
+  /**
+   * `HAVIP`所在弹性网卡`ID`。
+   */
+  NetworkInterfaceId?: string
 }
 
 /**
