@@ -50,6 +50,7 @@ import {
   IsolateHourDBInstanceRequest,
   IsolateDBInstanceResponse,
   ModifyLogFileRetentionPeriodRequest,
+  DescribeDatabaseTableRequest,
   DescribeLogFileRetentionPeriodRequest,
   DescribeFlowResponse,
   CloneAccountResponse,
@@ -77,11 +78,13 @@ import {
   DescribeDBSecurityGroupsRequest,
   SwitchDBInstanceHAResponse,
   DescribeSaleInfoRequest,
+  DescribeBackupFilesResponse,
   RenewDBInstanceRequest,
   CreateTmpInstancesRequest,
   RestartDBInstancesResponse,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
+  ViewPrivileges,
   ResetAccountPasswordResponse,
   DescribePriceRequest,
   CreateDBInstanceResponse,
@@ -106,7 +109,7 @@ import {
   ModifyDBParametersResponse,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
-  DescribeDatabaseTableRequest,
+  DescribeBackupFilesRequest,
   OpenDBExtranetAccessResponse,
   KillSessionRequest,
   TerminateDedicatedDBInstanceRequest,
@@ -142,7 +145,7 @@ import {
   ActivateHourDBInstanceRequest,
   RenewDBInstanceResponse,
   DescribeDatabasesResponse,
-  ViewPrivileges,
+  InstanceBackupFileItem,
   DescribeOrdersRequest,
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
@@ -693,6 +696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTmpInstancesResponse) => void
   ): Promise<CreateTmpInstancesResponse> {
     return this.request("CreateTmpInstances", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBackupFiles)用于查看备份文件列表。
+   */
+  async DescribeBackupFiles(
+    req: DescribeBackupFilesRequest,
+    cb?: (error: string, rep: DescribeBackupFilesResponse) => void
+  ): Promise<DescribeBackupFilesResponse> {
+    return this.request("DescribeBackupFiles", req, cb)
   }
 
   /**

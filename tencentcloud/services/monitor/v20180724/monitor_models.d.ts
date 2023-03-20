@@ -1371,6 +1371,10 @@ export interface CreatePrometheusRecordRuleYamlRequest {
       * yaml的内容
       */
     Content: string;
+    /**
+      * 规则名称
+      */
+    Name?: string;
 }
 /**
  * 实例维度组合数组
@@ -3907,13 +3911,13 @@ export interface CreateGrafanaInstanceRequest {
       */
     SubnetIds: Array<string>;
     /**
-      * Grafana 初始密码
-      */
-    GrafanaInitPassword: string;
-    /**
       * 是否启用外网
       */
     EnableInternet: boolean;
+    /**
+      * Grafana 初始密码
+      */
+    GrafanaInitPassword?: string;
     /**
       * 标签
       */
@@ -4069,7 +4073,7 @@ export interface CreateGrafanaInstanceResponse {
     /**
       * 实例名
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

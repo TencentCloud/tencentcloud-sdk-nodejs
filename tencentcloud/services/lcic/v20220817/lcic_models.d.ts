@@ -218,6 +218,24 @@ export interface BatchCreateGroupWithMembersResponse {
     RequestId?: string;
 }
 /**
+ * GetRoomEvent返回参数结构体
+ */
+export interface GetRoomEventResponse {
+    /**
+      * 该房间的事件总数，keyword搜索不影响该值。
+      */
+    Total?: number;
+    /**
+      * 详细事件内容。包含相应的类型、发生的时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Events?: Array<EventInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateGroupWithMembers返回参数结构体
  */
 export interface CreateGroupWithMembersResponse {
@@ -814,6 +832,36 @@ export interface GroupInfo {
     SubGroupIds?: string;
 }
 /**
+ * GetRoomEvent请求参数结构体
+ */
+export interface GetRoomEventRequest {
+    /**
+      * 房间Id。
+      */
+    RoomId: number;
+    /**
+      * 应用Id。
+      */
+    SdkAppId: number;
+    /**
+      * 起始页，1开始。keyword为空时有效。
+      */
+    Page: number;
+    /**
+      * 每页个数。keyword为空时有效。一次性最多200条。
+      */
+    Limit: number;
+    /**
+      * 搜索事件类型。有以下事件类型:
+RoomStart:房间开始
+RoomEnd:房间结束
+MemberJoin:成员加入
+MemberQuit:成员退出
+RecordFinish:录制结束
+      */
+    Keyword?: string;
+}
+/**
  * DescribeDocument返回参数结构体
  */
 export interface DescribeDocumentResponse {
@@ -904,6 +952,25 @@ export interface DescribeGroupMemberListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 房间事件信息。
+ */
+export interface EventInfo {
+    /**
+      * 事件发生的秒级unix时间戳。
+      */
+    Timestamp?: number;
+    /**
+      * 事件类型,有以下值:
+RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束
+      */
+    EventType?: string;
+    /**
+      * 事件详细内容，包含房间号,成员类型事件包含用户Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventData?: EventDataInfo;
 }
 /**
  * 应用配置信息
@@ -1325,6 +1392,21 @@ export interface DescribeSdkAppIdUsersResponse {
     RequestId?: string;
 }
 /**
+ * 房间事件对应的信息。
+ */
+export interface EventDataInfo {
+    /**
+      * 事件发生的房间号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoomId?: number;
+    /**
+      * 事件发生的用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId?: string;
+}
+/**
  * DescribeRoomStatistics返回参数结构体
  */
 export interface DescribeRoomStatisticsResponse {
@@ -1685,41 +1767,6 @@ export interface RoomInfo {
     GroupId?: string;
 }
 /**
- * DescribeDocumentsByRoom返回参数结构体
- */
-export interface DescribeDocumentsByRoomResponse {
-    /**
-      * 文档信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Documents?: Array<DocumentInfo>;
-    /**
-      * 符合查询条件文档总数
-      */
-    Total?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeRoomStatistics请求参数结构体
- */
-export interface DescribeRoomStatisticsRequest {
-    /**
-      * 房间Id。
-      */
-    RoomId: number;
-    /**
-      * 分页查询当前页数，从1开始递增。
-      */
-    Page: number;
-    /**
-      * 每页数据量，最大1000。
-      */
-    Limit: number;
-}
-/**
  * ModifyRoom请求参数结构体
  */
 export interface ModifyRoomRequest {
@@ -1797,6 +1844,41 @@ coteaching 双师
       * 房间绑定的群组ID
       */
     GroupId?: string;
+}
+/**
+ * DescribeRoomStatistics请求参数结构体
+ */
+export interface DescribeRoomStatisticsRequest {
+    /**
+      * 房间Id。
+      */
+    RoomId: number;
+    /**
+      * 分页查询当前页数，从1开始递增。
+      */
+    Page: number;
+    /**
+      * 每页数据量，最大1000。
+      */
+    Limit: number;
+}
+/**
+ * DescribeDocumentsByRoom返回参数结构体
+ */
+export interface DescribeDocumentsByRoomResponse {
+    /**
+      * 文档信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Documents?: Array<DocumentInfo>;
+    /**
+      * 符合查询条件文档总数
+      */
+    Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * LoginOriginId返回参数结构体

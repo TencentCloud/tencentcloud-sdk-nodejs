@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchDeleteGroupMember", req, cb);
     }
     /**
+     * 获取房间事件,仅在课堂结束1小时内有效。
+     */
+    async GetRoomEvent(req, cb) {
+        return this.request("GetRoomEvent", req, cb);
+    }
+    /**
      * 获取房间信息
      */
     async DescribeRoom(req, cb) {

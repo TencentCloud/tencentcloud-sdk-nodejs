@@ -330,6 +330,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTmpInstances", req, cb);
     }
     /**
+     * 本接口(DescribeBackupFiles)用于查看备份文件列表。
+     */
+    async DescribeBackupFiles(req, cb) {
+        return this.request("DescribeBackupFiles", req, cb);
+    }
+    /**
      * 本接口(ModifyDBEncryptAttributes)用于修改实例数据加密。
      */
     async ModifyDBEncryptAttributes(req, cb) {

@@ -498,6 +498,16 @@ it("mariadb.v20170312.CreateTmpInstances", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeBackupFiles", async function () {
+    try {
+       const data = await client.DescribeBackupFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.ModifyDBEncryptAttributes", async function () {
     try {
        const data = await client.ModifyDBEncryptAttributes({})

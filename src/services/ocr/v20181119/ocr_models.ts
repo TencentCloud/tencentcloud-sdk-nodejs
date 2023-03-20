@@ -767,8 +767,9 @@ export interface DriverLicenseOCRResponse {
   StartDate?: string
 
   /**
-   * 有效期截止时间（YYYY-MM-DD）
-   */
+      * 有效期截止时间（新版驾驶证返回 YYYY-MM-DD，
+老版驾驶证返回有效期限 X年）
+      */
   EndDate?: string
 
   /**

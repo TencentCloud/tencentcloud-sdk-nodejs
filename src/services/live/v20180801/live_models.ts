@@ -5992,12 +5992,12 @@ export interface DescribeLogDownloadListResponse {
   /**
    * 日志信息列表。
    */
-  LogInfoList: Array<LogInfo>
+  LogInfoList?: Array<LogInfo>
 
   /**
    * 总条数。
    */
-  TotalNum: number
+  TotalNum?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8081,6 +8081,7 @@ export interface DescribeLogDownloadListRequest {
   /**
       * 开始时间，北京时间。
 格式：yyyy-mm-dd HH:MM:SS。
+注：此字段为北京时间（UTC+8时区）。
       */
   StartTime: string
 
@@ -8088,6 +8089,7 @@ export interface DescribeLogDownloadListRequest {
       * 结束时间，北京时间。
 格式：yyyy-mm-dd HH:MM:SS。
 注意：结束时间 - 开始时间 <=7天。
+注：此字段为北京时间（UTC+8时区）。
       */
   EndTime: string
 
@@ -8095,6 +8097,11 @@ export interface DescribeLogDownloadListRequest {
    * 域名列表。
    */
   PlayDomains: Array<string>
+
+  /**
+   * 快直播还是标准直播，0：标准直播，1：快直播。默认为0。
+   */
+  IsFastLive?: number
 }
 
 /**

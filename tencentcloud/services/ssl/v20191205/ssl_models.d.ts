@@ -118,6 +118,10 @@ export interface UploadCertificateRequest {
       * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
       */
     CertificateUse?: string;
+    /**
+      * 相同的证书是否允许重复上传
+      */
+    Repeatable?: boolean;
 }
 /**
  * DeleteCertificate请求参数结构体
@@ -1696,7 +1700,12 @@ export interface UploadCertificateResponse {
     /**
       * 证书 ID。
       */
-    CertificateId: string;
+    CertificateId?: string;
+    /**
+      * 重复证书的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepeatCertId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -6150,25 +6150,34 @@ export interface DescribeVirusMonitorSettingResponse {
   /**
    * 是否开启实时监控
    */
-  EnableScan: boolean
+  EnableScan?: boolean
 
   /**
       * 扫描全部路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScanPathAll: boolean
+  ScanPathAll?: boolean
 
   /**
       * 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScanPathType: number
+  ScanPathType?: number
 
   /**
       * 自选排除或扫描的地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScanPath: Array<string>
+  ScanPath?: Array<string>
+
+  /**
+      * 扫描路径模式：
+SCAN_PATH_ALL：全部路径
+SCAN_PATH_DEFAULT：默认路径
+SCAN_PATH_USER_DEFINE：用户自定义路径
+
+      */
+  ScanPathMode?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6544,6 +6553,15 @@ export interface ModifyVirusMonitorSettingRequest {
    * 自选排除或扫描的地址
    */
   ScanPath?: Array<string>
+
+  /**
+      * 扫描路径模式：
+SCAN_PATH_ALL：全部路径
+SCAN_PATH_DEFAULT：默认路径
+SCAN_PATH_USER_DEFINE：用户自定义路径
+
+      */
+  ScanPathMode?: string
 }
 
 /**
@@ -8279,6 +8297,15 @@ export interface ModifyVirusScanSettingRequest {
    * 扫描路径
    */
   ScanPath?: Array<string>
+
+  /**
+      * 扫描路径模式：
+SCAN_PATH_ALL：全部路径
+SCAN_PATH_DEFAULT：默认路径
+SCAN_PATH_USER_DEFINE：用户自定义路径
+
+      */
+  ScanPathMode?: string
 }
 
 /**
@@ -12125,58 +12152,67 @@ export interface DescribeVirusScanSettingResponse {
   /**
    * 是否开启定期扫描
    */
-  EnableScan: boolean
+  EnableScan?: boolean
 
   /**
    * 检测周期每隔多少天
    */
-  Cycle: number
+  Cycle?: number
 
   /**
    * 扫描开始时间
    */
-  BeginScanAt: string
+  BeginScanAt?: string
 
   /**
    * 扫描全部路径
    */
-  ScanPathAll: boolean
+  ScanPathAll?: boolean
 
   /**
    * 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径
    */
-  ScanPathType: number
+  ScanPathType?: number
 
   /**
    * 超时时长，单位小时
    */
-  Timeout: number
+  Timeout?: number
 
   /**
    * 扫描范围0容器1主机节点
    */
-  ScanRangeType: number
+  ScanRangeType?: number
 
   /**
    * true 全选，false 自选
    */
-  ScanRangeAll: boolean
+  ScanRangeAll?: boolean
 
   /**
    * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
    */
-  ScanIds: Array<string>
+  ScanIds?: Array<string>
 
   /**
    * 自选排除或扫描的地址
    */
-  ScanPath: Array<string>
+  ScanPath?: Array<string>
 
   /**
       * 一键检测的超时设置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClickTimeout: number
+  ClickTimeout?: number
+
+  /**
+      * 扫描路径模式：
+SCAN_PATH_ALL：全部路径
+SCAN_PATH_DEFAULT：默认路径
+SCAN_PATH_USER_DEFINE：用户自定义路径
+
+      */
+  ScanPathMode?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12456,7 +12492,7 @@ export interface CreateVirusScanTaskResponse {
   /**
    * 任务id
    */
-  TaskID: string
+  TaskID?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15801,6 +15837,15 @@ export interface CreateVirusScanTaskRequest {
    * 自选排除或扫描的地址
    */
   ScanPath?: Array<string>
+
+  /**
+      * 扫描路径模式：
+SCAN_PATH_ALL：全部路径
+SCAN_PATH_DEFAULT：默认路径
+SCAN_PATH_USER_DEFINE：用户自定义路径
+
+      */
+  ScanPathMode?: string
 }
 
 /**
@@ -20647,181 +20692,181 @@ export interface DescribeVirusDetailResponse {
       * 镜像ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageId: string
+  ImageId?: string
 
   /**
       * 镜像名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageName: string
+  ImageName?: string
 
   /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateTime: string
+  CreateTime?: string
 
   /**
       * 木马文件大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Size: number
+  Size?: number
 
   /**
       * 木马文件路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FilePath: string
+  FilePath?: string
 
   /**
       * 最近生成时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
       * 病毒名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VirusName: string
+  VirusName?: string
 
   /**
       * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RiskLevel: string
+  RiskLevel?: string
 
   /**
       * 容器名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerName: string
+  ContainerName?: string
 
   /**
       * 容器id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerId: string
+  ContainerId?: string
 
   /**
       * 主机名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostName: string
+  HostName?: string
 
   /**
       * 主机id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostId: string
+  HostId?: string
 
   /**
       * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessName: string
+  ProcessName?: string
 
   /**
       * 进程路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessPath: string
+  ProcessPath?: string
 
   /**
       * 进程md5
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessMd5: string
+  ProcessMd5?: string
 
   /**
       * 进程id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessId: number
+  ProcessId?: number
 
   /**
       * 进程参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessArgv: string
+  ProcessArgv?: string
 
   /**
       * 进程链
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessChan: string
+  ProcessChan?: string
 
   /**
       * 进程组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessAccountGroup: string
+  ProcessAccountGroup?: string
 
   /**
       * 进程启动用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessStartAccount: string
+  ProcessStartAccount?: string
 
   /**
       * 进程文件权限
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProcessFileAuthority: string
+  ProcessFileAuthority?: string
 
   /**
       * 来源：0：一键扫描， 1：定时扫描 2：实时监控
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SourceType: number
+  SourceType?: number
 
   /**
       * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PodName: string
+  PodName?: string
 
   /**
       * 标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tags: Array<string>
+  Tags?: Array<string>
 
   /**
       * 事件描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HarmDescribe: string
+  HarmDescribe?: string
 
   /**
       * 建议方案
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SuggestScheme: string
+  SuggestScheme?: string
 
   /**
       * 备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Mark: string
+  Mark?: string
 
   /**
       * 风险文件名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileName: string
+  FileName?: string
 
   /**
       * 文件MD5
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileMd5: string
+  FileMd5?: string
 
   /**
       * 事件类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EventType: string
+  EventType?: string
 
   /**
       * DEAL_NONE:文件待处理
@@ -20835,7 +20880,7 @@ DEAL_RECOVERING:恢复中
 DEAL_RECOVER_FAILED: 恢复失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  Status?: string
 
   /**
       * 失败子状态:
@@ -20847,91 +20892,91 @@ CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
 CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SubStatus: string
+  SubStatus?: string
 
   /**
       * 内网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIP: string
+  HostIP?: string
 
   /**
       * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClientIP: string
+  ClientIP?: string
 
   /**
       * 父进程启动用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PProcessStartUser: string
+  PProcessStartUser?: string
 
   /**
       * 父进程用户组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PProcessUserGroup: string
+  PProcessUserGroup?: string
 
   /**
       * 父进程路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PProcessPath: string
+  PProcessPath?: string
 
   /**
       * 父进程命令行参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PProcessParam: string
+  PProcessParam?: string
 
   /**
       * 祖先进程启动用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessStartUser: string
+  AncestorProcessStartUser?: string
 
   /**
       * 祖先进程用户组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessUserGroup: string
+  AncestorProcessUserGroup?: string
 
   /**
       * 祖先进程路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessPath: string
+  AncestorProcessPath?: string
 
   /**
       * 祖先进程命令行参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessParam: string
+  AncestorProcessParam?: string
 
   /**
       * 事件最后一次处理的时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OperationTime: string
+  OperationTime?: string
 
   /**
       * 容器隔离状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerNetStatus: string
+  ContainerNetStatus?: string
 
   /**
       * 容器隔离子状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerNetSubStatus: string
+  ContainerNetSubStatus?: string
 
   /**
       * 容器隔离操作来源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerIsolateOperationSrc: string
+  ContainerIsolateOperationSrc?: string
 
   /**
       * 检测平台
@@ -20942,7 +20987,19 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
 5: 威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CheckPlatform: Array<string>
+  CheckPlatform?: Array<string>
+
+  /**
+      * 文件访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileAccessTime?: string
+
+  /**
+      * 文件修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileModifyTime?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

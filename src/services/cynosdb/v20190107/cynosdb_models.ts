@@ -2992,25 +2992,25 @@ export interface AddInstancesResponse {
       * 冻结流水，一次开通一个冻结流水。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranId: string
+  TranId?: string
 
   /**
       * 后付费订单号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealNames: Array<string>
+  DealNames?: Array<string>
 
   /**
       * 发货资源id列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResourceIds: Array<string>
+  ResourceIds?: Array<string>
 
   /**
       * 大订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BigDealIds: Array<string>
+  BigDealIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4930,17 +4930,17 @@ export interface AddInstancesRequest {
   ReadOnlyCount: number
 
   /**
-   * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。
+   * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。当前版本已废弃。
    */
   InstanceGrpId?: string
 
   /**
-   * 所属VPC网络ID，该参数已废弃
+   * 所属VPC网络ID。
    */
   VpcId?: string
 
   /**
-   * 所属子网ID，如果设置了VpcId，则SubnetId必填。该参数已废弃。
+   * 所属子网ID，如果设置了VpcId，则SubnetId必填。
    */
   SubnetId?: string
 
@@ -4984,6 +4984,11 @@ export interface AddInstancesRequest {
    * 参数列表，ParamTemplateId 传入时InstanceParams才有效
    */
   InstanceParams?: Array<ModifyParamItem>
+
+  /**
+   * 安全组ID，新建只读实例时可以指定安全组。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**

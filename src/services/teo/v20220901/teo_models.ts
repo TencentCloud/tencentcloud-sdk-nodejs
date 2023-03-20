@@ -3377,12 +3377,12 @@ export interface DescribeAccelerationDomainsResponse {
   /**
    * 加速域名总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 加速域名列表。
    */
-  AccelerationDomains: Array<AccelerationDomain>
+  AccelerationDomains?: Array<AccelerationDomain>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3513,6 +3513,12 @@ export interface ZoneSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Grpc: Grpc
+
+  /**
+      * 图片优化相关配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageOptimize: ImageOptimize
 }
 
 /**
@@ -5051,25 +5057,15 @@ export interface DescribeTimingL7AnalysisDataResponse {
 }
 
 /**
- * ModifyAliasDomainStatus请求参数结构体
+ * 图片优化配置。
  */
-export interface ModifyAliasDomainStatusRequest {
+export interface ImageOptimize {
   /**
-   * 站点 ID。
-   */
-  ZoneId: string
-
-  /**
-      * 别称域名状态，取值有：
-<li> false：开启别称域名；</li>
-<li> true：关闭别称域名。</li>
+      * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
-  Paused: boolean
-
-  /**
-   * 待修改状态的别称域名名称。如果为空，则不执行修改状态操作。
-   */
-  AliasNames?: Array<string>
+  Switch: string
 }
 
 /**
@@ -5729,6 +5725,28 @@ export interface CreatePlanForZoneRequest {
 }
 
 /**
+ * ModifyAliasDomainStatus请求参数结构体
+ */
+export interface ModifyAliasDomainStatusRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+
+  /**
+      * 别称域名状态，取值有：
+<li> false：开启别称域名；</li>
+<li> true：关闭别称域名。</li>
+      */
+  Paused: boolean
+
+  /**
+   * 待修改状态的别称域名名称。如果为空，则不执行修改状态操作。
+   */
+  AliasNames?: Array<string>
+}
+
+/**
  * 客户端规则信息
  */
 export interface ClientRule {
@@ -6155,7 +6173,7 @@ export interface Action {
 <li> 智能压缩（Compression）；</li>
 <li> Hsts；</li>
 <li> ClientIpHeader；</li>
-<li> TlsVersion；</li>
+<li> SslTlsSecureConf；</li>
 <li> OcspStapling；</li>
 <li> HTTP/2 访问（Http2）；</li>
 <li> 回源跟随重定向(UpstreamFollowRedirect)；</li>
@@ -8864,6 +8882,8 @@ export interface DescribeAccelerationDomainsRequest {
 <li>origin-type<br>   按照【<strong>源站类型</strong>】进行过滤。<br>   类型：String<br>   必选：否
 <li>origin<br>   按照【<strong>主源站地址</strong>】进行过滤。<br>   类型：String<br>   必选：否
 <li>backup-origin<br>   按照【<strong>备用源站地址</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>domain-cname<br>   按照【<strong>加速CNAME名</strong>】进行过滤。<br>   类型：String<br>   必选：否
+<li>share-cname<br>   按照【<strong>共享CNAME名</strong>】进行过滤。<br>   类型：String<br>   必选：否
       */
   Filters?: Array<AdvancedFilter>
 

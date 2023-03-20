@@ -1604,6 +1604,11 @@ export interface Resource {
       * 授权点数扩展包个数(50点)
       */
     PackageNode: number;
+    /**
+      * 日志投递规格信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogDeliveryArgs?: string;
 }
 /**
  * BindDeviceResource请求参数结构体

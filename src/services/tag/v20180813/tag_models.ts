@@ -1357,7 +1357,7 @@ export interface TagResourcesResponse {
 创建并绑定标签成功时，返回的FailedResources为空。
 创建并绑定标签失败或部分失败时，返回的FailedResources会显示失败资源的详细信息。
       */
-  FailedResources: Array<FailedResource>
+  FailedResources?: Array<FailedResource>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -151,11 +151,11 @@ export interface OrgMember {
  */
 export interface DescribeOrganizationMemberAuthIdentitiesRequest {
     /**
-      * 偏移量。
+      * 偏移量。取值是limit的整数倍，默认值 : 0
       */
     Offset: number;
     /**
-      * 限制数目。最大50
+      * 限制数目。取值范围：1~50，默认值：10
       */
     Limit: number;
     /**
@@ -404,11 +404,11 @@ export interface DescribeOrganizationMembersResponse {
     /**
       * 成员列表。
       */
-    Items: Array<OrgMember>;
+    Items?: Array<OrgMember>;
     /**
       * 总数目。
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -569,15 +569,15 @@ export interface AddOrganizationNodeRequest {
  */
 export interface DescribeOrganizationMemberAuthIdentitiesResponse {
     /**
-      * 列表。
+      * 授权身份列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items: Array<OrgMemberAuthIdentity>;
+    Items?: Array<OrgMemberAuthIdentity>;
     /**
       * 总数目。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -780,17 +780,17 @@ export interface OrgMemberAuthIdentity {
       */
     IdentityId: number;
     /**
-      * 身份角色名。
+      * 身份的角色名。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IdentityRoleName: string;
     /**
-      * 身份角色别名。
+      * 身份的角色别名。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IdentityRoleAliasName: string;
     /**
-      * 描述
+      * 描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description: string;
@@ -804,6 +804,11 @@ export interface OrgMemberAuthIdentity {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime: string;
+    /**
+      * 身份类型。取值： 1-预设  2-自定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdentityType?: number;
 }
 /**
  * 成员主要信息
@@ -905,11 +910,11 @@ export interface OrgIdentity {
  */
 export interface DescribeOrganizationMembersRequest {
     /**
-      * 偏移量。
+      * 偏移量。取值是limit的整数倍，默认值 : 0
       */
     Offset: number;
     /**
-      * 限制数目。最大50
+      * 限制数目。取值范围：1~50，默认值：10
       */
     Limit: number;
     /**

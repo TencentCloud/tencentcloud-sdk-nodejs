@@ -298,6 +298,17 @@ export interface FileSystemInfo {
    * 文件系统标签列表
    */
   Tags: Array<TagInfo>
+
+  /**
+   * 文件系统声明周期管理状态
+   */
+  TieringState: string
+
+  /**
+      * 分层存储详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TieringDetail: TieringDetailInfo
 }
 
 /**
@@ -891,23 +902,18 @@ export interface AvailableType {
 }
 
 /**
- * UpdateCfsSnapshotAttribute请求参数结构体
+ * CreateCfsSnapshot返回参数结构体
  */
-export interface UpdateCfsSnapshotAttributeRequest {
+export interface CreateCfsSnapshotResponse {
   /**
-   * 文件系统快照ID
+   * 文件系统快照id
    */
   SnapshotId: string
 
   /**
-   * 文件系统快照名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SnapshotName?: string
-
-  /**
-   * 文件系统快照保留天数
-   */
-  AliveDays?: number
+  RequestId?: string
 }
 
 /**
@@ -1746,21 +1752,6 @@ export interface MountInfo {
 }
 
 /**
- * CreateCfsSnapshot返回参数结构体
- */
-export interface CreateCfsSnapshotResponse {
-  /**
-   * 文件系统快照id
-   */
-  SnapshotId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UpdateCfsFileSystemPGroup请求参数结构体
  */
 export interface UpdateCfsFileSystemPGroupRequest {
@@ -1876,6 +1867,26 @@ export interface DeleteCfsPGroupResponse {
 }
 
 /**
+ * UpdateCfsSnapshotAttribute请求参数结构体
+ */
+export interface UpdateCfsSnapshotAttributeRequest {
+  /**
+   * 文件系统快照ID
+   */
+  SnapshotId: string
+
+  /**
+   * 文件系统快照名称
+   */
+  SnapshotName?: string
+
+  /**
+   * 文件系统快照保留天数
+   */
+  AliveDays?: number
+}
+
+/**
  * DescribeUserQuota返回参数结构体
  */
 export interface DescribeUserQuotaResponse {
@@ -1894,6 +1905,11 @@ export interface DescribeUserQuotaResponse {
    */
   RequestId?: string
 }
+
+/**
+ * 分层存储详细信息
+ */
+export type TieringDetailInfo = null
 
 /**
  * 权限组数组

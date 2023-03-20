@@ -28,6 +28,7 @@ import {
   CreateGroupWithMembersRequest,
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
+  GetRoomEventResponse,
   CreateGroupWithMembersResponse,
   DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
@@ -59,9 +60,11 @@ import {
   BatchDeleteGroupMemberResponse,
   CreateGroupWithSubGroupResponse,
   GroupInfo,
+  GetRoomEventRequest,
   DescribeDocumentResponse,
   DeleteGroupMemberResponse,
   DescribeGroupMemberListResponse,
+  EventInfo,
   AppConfig,
   DeleteRecordResponse,
   BatchCreateRoomRequest,
@@ -82,6 +85,7 @@ import {
   DescribeRoomResponse,
   DescribeCurrentMemberListRequest,
   DescribeSdkAppIdUsersResponse,
+  EventDataInfo,
   DescribeRoomStatisticsResponse,
   DeleteDocumentRequest,
   MessageList,
@@ -96,9 +100,9 @@ import {
   LoginUserRequest,
   SetWatermarkResponse,
   RoomInfo,
-  DescribeDocumentsByRoomResponse,
-  DescribeRoomStatisticsRequest,
   ModifyRoomRequest,
+  DescribeRoomStatisticsRequest,
+  DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
   AppCustomContent,
   DeleteGroupResponse,
@@ -317,6 +321,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDeleteGroupMemberResponse) => void
   ): Promise<BatchDeleteGroupMemberResponse> {
     return this.request("BatchDeleteGroupMember", req, cb)
+  }
+
+  /**
+   * 获取房间事件,仅在课堂结束1小时内有效。
+   */
+  async GetRoomEvent(
+    req: GetRoomEventRequest,
+    cb?: (error: string, rep: GetRoomEventResponse) => void
+  ): Promise<GetRoomEventResponse> {
+    return this.request("GetRoomEvent", req, cb)
   }
 
   /**
