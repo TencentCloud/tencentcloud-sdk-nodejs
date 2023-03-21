@@ -110,27 +110,22 @@ export interface DeleteCustomCategoryRequest {
 export interface MediaFilter {
     /**
       * 媒资名称过滤条件
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MediaNameSet?: Array<string>;
     /**
       * 媒资状态数组，媒资状态可选值参见MediaInfo
-注意：此字段可能返回 null，表示取不到有效值。
       */
     StatusSet?: Array<number>;
     /**
       * 媒资ID数组
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MediaIdSet?: Array<string>;
     /**
       * 媒资自定义标签数组
-注意：此字段可能返回 null，表示取不到有效值。
       */
     LabelSet?: Array<string>;
     /**
       * 媒资文件类型，定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MediaType?: number;
 }

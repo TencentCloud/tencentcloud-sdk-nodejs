@@ -4457,15 +4457,13 @@ export interface Medicine {
  */
 export interface ReportTypeVersion {
   /**
-      * 检验报告
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 检验报告
+   */
   ReportType?: number
 
   /**
-      * 版本2
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 版本2
+   */
   Version?: number
 }
 

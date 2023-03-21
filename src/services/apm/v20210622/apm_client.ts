@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyApmInstanceRequest,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
   DescribeServiceOverviewResponse,
   QueryMetricItem,
+  TerminateApmInstanceRequest,
   DescribeApmInstancesResponse,
   ApmAgentInfo,
   ApmMetricRecord,
@@ -39,9 +41,11 @@ import {
   DescribeMetricRecordsRequest,
   DescribeGeneralMetricDataRequest,
   CreateApmInstanceResponse,
+  ModifyApmInstanceResponse,
   GeneralFilter,
   DescribeApmInstancesRequest,
   DescribeGeneralMetricDataResponse,
+  TerminateApmInstanceResponse,
 } from "./apm_models"
 
 /**
@@ -51,6 +55,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apm.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * 修改Apm实例接口
+   */
+  async ModifyApmInstance(
+    req: ModifyApmInstanceRequest,
+    cb?: (error: string, rep: ModifyApmInstanceResponse) => void
+  ): Promise<ModifyApmInstanceResponse> {
+    return this.request("ModifyApmInstance", req, cb)
   }
 
   /**
@@ -92,6 +106,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMetricRecordsResponse) => void
   ): Promise<DescribeMetricRecordsResponse> {
     return this.request("DescribeMetricRecords", req, cb)
+  }
+
+  /**
+   * apm销毁实例
+   */
+  async TerminateApmInstance(
+    req: TerminateApmInstanceRequest,
+    cb?: (error: string, rep: TerminateApmInstanceResponse) => void
+  ): Promise<TerminateApmInstanceResponse> {
+    return this.request("TerminateApmInstance", req, cb)
   }
 
   /**

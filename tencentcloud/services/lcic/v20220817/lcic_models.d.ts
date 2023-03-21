@@ -500,25 +500,21 @@ export interface BatchUserRequest {
     /**
       * 低代码互动课堂的SdkAppId。
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
     SdkAppId: number;
     /**
       * 用户名称。
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name?: string;
     /**
       * 用户在客户系统的Id，需要在同一应用下唯一。
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginId?: string;
     /**
       * 用户头像。
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Avatar?: string;
 }
@@ -1654,12 +1650,10 @@ export interface RegisterUserRequest {
 export interface GroupBaseInfo {
     /**
       * 待创建群组名
-注意：此字段可能返回 null，表示取不到有效值。
       */
     GroupName: string;
     /**
       * 群组主讲人ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
     TeacherId?: string;
 }
@@ -1687,82 +1681,66 @@ export interface SetWatermarkResponse {
 export interface RoomInfo {
     /**
       * 房间名称。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name: string;
     /**
       * 预定的房间开始时间，unix时间戳。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     StartTime: number;
     /**
       * 预定的房间结束时间，unix时间戳。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime: number;
     /**
       * 分辨率。可以有如下取值： 1 标清 2 高清 3 全高清
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Resolution: number;
     /**
       * 最大连麦人数（不包括老师）。取值范围[0, 16]
-注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxMicNumber: number;
     /**
       * 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频
-注意：此字段可能返回 null，表示取不到有效值。
       */
     SubType: string;
     /**
       * 老师ID。通过[注册用户]接口获取的UserId。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     TeacherId?: string;
     /**
       * 进入课堂时是否自动连麦。可以有以下取值： 0 不自动连麦（需要手动申请上麦，默认值） 1 自动连麦
-注意：此字段可能返回 null，表示取不到有效值。
       */
     AutoMic?: number;
     /**
       * 释放音视频权限后是否自动取消连麦。可以有以下取值： 0 自动取消连麦（默认值） 1 保持连麦状态
-注意：此字段可能返回 null，表示取不到有效值。
       */
     TurnOffMic?: number;
     /**
       * 高音质模式。可以有以下取值： 0 不开启高音质（默认值） 1 开启高音质
-注意：此字段可能返回 null，表示取不到有效值。
       */
     AudioQuality?: number;
     /**
       * 上课后是否禁止自动录制。可以有以下取值： 0 不禁止录制（自动开启录制，默认值） 1 禁止录制 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     DisableRecord?: number;
     /**
       * 助教Id列表。通过[注册用户]接口获取的UserId。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Assistants?: Array<string>;
     /**
       * rtc人数。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RTCAudienceNumber?: number;
     /**
       * 观看类型。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     AudienceType?: number;
     /**
       * 录制布局。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RecordLayout?: number;
     /**
       * 房间绑定的群组ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
     GroupId?: string;
 }

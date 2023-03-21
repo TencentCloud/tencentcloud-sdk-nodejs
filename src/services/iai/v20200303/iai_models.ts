@@ -2154,9 +2154,8 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00
  */
 export interface GroupExDescriptionInfo {
   /**
-      * 人员库自定义描述字段Index，从0开始
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 人员库自定义描述字段Index，从0开始
+   */
   GroupExDescriptionIndex: number
 
   /**
@@ -2349,9 +2348,8 @@ export interface DeletePersonResponse {
  */
 export interface PersonExDescriptionInfo {
   /**
-      * 人员描述字段Index，从0开始
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 人员描述字段Index，从0开始
+   */
   PersonExDescriptionIndex: number
 
   /**

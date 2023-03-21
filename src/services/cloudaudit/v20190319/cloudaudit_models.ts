@@ -497,9 +497,8 @@ export interface Resource {
   ResourceType?: string
 
   /**
-      * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 资源名称
+   */
   ResourceName?: string
 }
 
@@ -613,15 +612,13 @@ export interface CreateAuditTrackRequest {
  */
 export interface LookupAttribute {
   /**
-      * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
+   */
   AttributeKey: string
 
   /**
-      * AttributeValue的值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * AttributeValue的值
+   */
   AttributeValue?: string
 }
 

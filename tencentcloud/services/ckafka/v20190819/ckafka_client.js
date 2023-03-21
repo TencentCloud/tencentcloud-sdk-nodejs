@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FetchMessageListByOffset", req, cb);
     }
     /**
+     * 创建Datahub主题
+     */
+    async CreateDatahubTopic(req, cb) {
+        return this.request("CreateDatahubTopic", req, cb);
+    }
+    /**
      * 枚举ACL
      */
     async DescribeACL(req, cb) {

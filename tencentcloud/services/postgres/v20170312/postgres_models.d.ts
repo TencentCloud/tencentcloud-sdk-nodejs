@@ -195,6 +195,19 @@ export interface DeleteReadOnlyGroupResponse {
     RequestId?: string;
 }
 /**
+ * OpenDBExtranetAccess请求参数结构体
+ */
+export interface OpenDBExtranetAccessRequest {
+    /**
+      * 实例ID，形如postgres-hez4fh0v
+      */
+    DBInstanceId: string;
+    /**
+      * 是否开通Ipv6外网，1：是，0：否
+      */
+    IsIpv6?: number;
+}
+/**
  * CreateInstances请求参数结构体
  */
 export interface CreateInstancesRequest {
@@ -444,6 +457,15 @@ export interface DescribeAvailableRecoveryTimeResponse {
     RequestId?: string;
 }
 /**
+ * CreateBaseBackup请求参数结构体
+ */
+export interface CreateBaseBackupRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+}
+/**
  * ModifyDBInstanceReadOnlyGroup返回参数结构体
  */
 export interface ModifyDBInstanceReadOnlyGroupResponse {
@@ -457,81 +479,33 @@ export interface ModifyDBInstanceReadOnlyGroupResponse {
     RequestId?: string;
 }
 /**
- * CloneDBInstance请求参数结构体
+ * 数据库实例规格
  */
-export interface CloneDBInstanceRequest {
+export interface ClassInfo {
     /**
-      * 克隆的源实例ID。
-      */
-    DBInstanceId: string;
-    /**
-      * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+      * 规格ID
       */
     SpecCode: string;
     /**
-      * 实例容量大小，单位：GB。
+      * CPU核数
       */
-    Storage: number;
+    CPU: number;
     /**
-      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+      * 内存大小，单位：MB
       */
-    Period: number;
+    Memory: number;
     /**
-      * 续费标记：0-正常续费（默认）；1-自动续费。
+      * 该规格所支持最大存储容量，单位：GB
       */
-    AutoRenewFlag: number;
+    MaxStorage: number;
     /**
-      * 私有网络ID。
+      * 该规格所支持最小存储容量，单位：GB
       */
-    VpcId: string;
+    MinStorage: number;
     /**
-      * 已配置的私有网络中的子网ID。
+      * 该规格的预估QPS
       */
-    SubnetId: string;
-    /**
-      * 新购实例的实例名称。
-      */
-    Name?: string;
-    /**
-      * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
-      */
-    InstanceChargeType?: string;
-    /**
-      * 安全组ID。
-      */
-    SecurityGroupIds?: Array<string>;
-    /**
-      * 项目ID。
-      */
-    ProjectId?: number;
-    /**
-      * 实例需要绑定的Tag信息，默认为空。
-      */
-    TagList?: Array<Tag>;
-    /**
-      * 购买多可用区实例时填写。
-      */
-    DBNodeSet?: Array<DBNode>;
-    /**
-      * 是否自动使用代金券。1（是），0（否），默认不使用。
-      */
-    AutoVoucher?: number;
-    /**
-      * 代金券ID列表。
-      */
-    VoucherIds?: string;
-    /**
-      * 活动ID。
-      */
-    ActivityId?: number;
-    /**
-      * 基础备份集ID。
-      */
-    BackupSetId?: string;
-    /**
-      * 恢复时间点。
-      */
-    RecoveryTargetTime?: string;
+    QPS: number;
 }
 /**
  * DescribeCloneDBInstanceSpec请求参数结构体
@@ -607,6 +581,15 @@ export interface DeleteServerlessDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DeleteLogBackup返回参数结构体
+ */
+export interface DeleteLogBackupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyReadOnlyGroupConfig请求参数结构体
  */
 export interface ModifyReadOnlyGroupConfigRequest {
@@ -642,6 +625,47 @@ export interface ModifyReadOnlyGroupConfigRequest {
       * 延迟剔除最小保留实例数
       */
     MinDelayEliminateReserve?: number;
+}
+/**
+ * 实例备份统计项
+ */
+export interface BackupSummary {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 实例日志备份数量。
+      */
+    LogBackupCount: number;
+    /**
+      * 实例日志备份大小。
+      */
+    LogBackupSize: number;
+    /**
+      * 手动创建的实例基础备份数量。
+      */
+    ManualBaseBackupCount: number;
+    /**
+      * 手动创建的实例基础备份大小。
+      */
+    ManualBaseBackupSize: number;
+    /**
+      * 自动创建的实例基础备份数量。
+      */
+    AutoBaseBackupCount: number;
+    /**
+      * 自动创建的实例基础备份大小。
+      */
+    AutoBaseBackupSize: number;
+    /**
+      * 总备份数量
+      */
+    TotalBackupCount: number;
+    /**
+      * 总备份大小
+      */
+    TotalBackupSize: number;
 }
 /**
  * AddDBInstanceToReadOnlyGroup请求参数结构体
@@ -733,14 +757,9 @@ export interface RenewInstanceRequest {
     VoucherIds?: Array<string>;
 }
 /**
- * RebalanceReadOnlyGroup请求参数结构体
+ * DescribeBackupOverview请求参数结构体
  */
-export interface RebalanceReadOnlyGroupRequest {
-    /**
-      * 只读组ID
-      */
-    ReadOnlyGroupId: string;
-}
+export declare type DescribeBackupOverviewRequest = null;
 /**
  * DescribeRegions返回参数结构体
  */
@@ -753,6 +772,15 @@ export interface DescribeRegionsResponse {
       * 地域信息集合。
       */
     RegionSet: Array<RegionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyBaseBackupExpireTime返回参数结构体
+ */
+export interface ModifyBaseBackupExpireTimeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -879,49 +907,17 @@ SUPPORTMODIFYONLY：支持变配。
     StandbyZoneSet: Array<string>;
 }
 /**
- * InquiryPriceCreateDBInstances请求参数结构体
+ * DescribeReadOnlyGroups返回参数结构体
  */
-export interface InquiryPriceCreateDBInstancesRequest {
+export interface DescribeReadOnlyGroupsResponse {
     /**
-      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      * 只读组列表
       */
-    Zone: string;
+    ReadOnlyGroupList: Array<ReadOnlyGroup>;
     /**
-      * 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SpecCode: string;
-    /**
-      * 存储容量大小，单位：GB。
-      */
-    Storage: number;
-    /**
-      * 实例数量。目前最大数量不超过100，如需一次性创建更多实例，请联系客服支持。
-      */
-    InstanceCount: number;
-    /**
-      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
-      */
-    Period: number;
-    /**
-      * 【弃字段，不再生效】，计费ID。该参数可以通过调用DescribeProductConfig接口的返回值中的Pid字段来获取。
-      */
-    Pid?: number;
-    /**
-      * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
-      */
-    InstanceChargeType?: string;
-    /**
-      * 实例类型，默认primary，支持如下：
-primary（双机高可用（一主一从））
-readonly（只读实例）
-      */
-    InstanceType?: string;
-    /**
-      * DB引擎，默认postgresql，支持如下：
-postgresql（云数据库PostgreSQL）
-mssql_compatible（MSSQL兼容-云数据库PostgreSQL）
-      */
-    DBEngine?: string;
+    RequestId?: string;
 }
 /**
  * 单条SlowQuery信息
@@ -1002,6 +998,34 @@ export interface Tag {
     TagValue: string;
 }
 /**
+ * DescribeBackupSummaries请求参数结构体
+ */
+export interface DescribeBackupSummariesRequest {
+    /**
+      * 每页显示数量，取值范围为1-100，默认为返回10条。
+      */
+    Limit?: number;
+    /**
+      * 数据偏移量，从0开始。
+      */
+    Offset?: number;
+    /**
+      * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-instance-id：按照实例ID过滤，类型为string。
+db-instance-name：按照实例名过滤，类型为string。
+db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 排序字段，支持TotalBackupSize,LogBackupSize,ManualBaseBackupSize,AutoBaseBackupSize。
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，包括升序：asc，降序：desc。
+      */
+    OrderByType?: string;
+}
+/**
  * DescribeDBInstanceAttribute请求参数结构体
  */
 export interface DescribeDBInstanceAttributeRequest {
@@ -1022,6 +1046,15 @@ export interface CloseServerlessDBExtranetAccessRequest {
       * 实例名称
       */
     DBInstanceName?: string;
+}
+/**
+ * CreateBaseBackup返回参数结构体
+ */
+export interface CreateBaseBackupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CloneDBInstance返回参数结构体
@@ -1076,6 +1109,51 @@ export interface AddDBInstanceToReadOnlyGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据库基础备份信息
+ */
+export interface BaseBackup {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 备份文件唯一标识。
+      */
+    Id: string;
+    /**
+      * 备份文件名称。
+      */
+    Name: string;
+    /**
+      * 备份方式：物理备份、逻辑备份。
+      */
+    BackupMethod: string;
+    /**
+      * 备份模式：自动备份、手动备份。
+      */
+    BackupMode: string;
+    /**
+      * 备份任务状态。
+      */
+    State: string;
+    /**
+      * 备份集大小，单位bytes。
+      */
+    Size: number;
+    /**
+      * 备份的开始时间。
+      */
+    StartTime: string;
+    /**
+      * 备份的结束时间。
+      */
+    FinishTime: string;
+    /**
+      * 备份的过期时间。
+      */
+    ExpireTime: string;
 }
 /**
  * CreateReadOnlyDBInstance返回参数结构体
@@ -1151,6 +1229,19 @@ export interface DescribeOrdersResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupDownloadURL返回参数结构体
+ */
+export interface DescribeBackupDownloadURLResponse {
+    /**
+      * 备份的下载地址。
+      */
+    BackupDownloadURL: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * OpenServerlessDBExtranetAccess返回参数结构体
  */
 export interface OpenServerlessDBExtranetAccessResponse {
@@ -1206,6 +1297,44 @@ export interface InquiryPriceCreateDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * 数据库版本号信息
+ */
+export interface Version {
+    /**
+      * 数据库引擎，支持：
+1、postgresql（云数据库PostgreSQL）；
+2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；
+      */
+    DBEngine: string;
+    /**
+      * 数据库版本，例如：12.4
+      */
+    DBVersion: string;
+    /**
+      * 数据库主要版本，例如：12
+      */
+    DBMajorVersion: string;
+    /**
+      * 数据库内核版本，例如：v12.4_r1.3
+      */
+    DBKernelVersion: string;
+    /**
+      * 数据库内核支持的特性列表。例如，
+TDE：支持数据加密。
+      */
+    SupportedFeatureNames: Array<string>;
+    /**
+      * 数据库版本状态，包括：
+AVAILABLE：可用；
+DEPRECATED：已弃用。
+      */
+    Status: string;
+    /**
+      * 该数据库版本（DBKernelVersion）可以升级到的版本号列表。
+      */
+    AvailableUpgradeTarget: Array<string>;
+}
+/**
  * CreateDBInstanceNetworkAccess请求参数结构体
  */
 export interface CreateDBInstanceNetworkAccessRequest {
@@ -1238,6 +1367,51 @@ export interface ModifySwitchTimePeriodResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * InquiryPriceCreateDBInstances请求参数结构体
+ */
+export interface InquiryPriceCreateDBInstancesRequest {
+    /**
+      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      */
+    Zone: string;
+    /**
+      * 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。
+      */
+    SpecCode: string;
+    /**
+      * 存储容量大小，单位：GB。
+      */
+    Storage: number;
+    /**
+      * 实例数量。目前最大数量不超过100，如需一次性创建更多实例，请联系客服支持。
+      */
+    InstanceCount: number;
+    /**
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
+      */
+    Period: number;
+    /**
+      * 【弃字段，不再生效】，计费ID。该参数可以通过调用DescribeProductConfig接口的返回值中的Pid字段来获取。
+      */
+    Pid?: number;
+    /**
+      * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
+      */
+    InstanceChargeType?: string;
+    /**
+      * 实例类型，默认primary，支持如下：
+primary（双机高可用（一主一从））
+readonly（只读实例）
+      */
+    InstanceType?: string;
+    /**
+      * DB引擎，默认postgresql，支持如下：
+postgresql（云数据库PostgreSQL）
+mssql_compatible（MSSQL兼容-云数据库PostgreSQL）
+      */
+    DBEngine?: string;
 }
 /**
  * DescribeDefaultParameters返回参数结构体
@@ -1572,17 +1746,40 @@ export interface ParamVersionRelation {
     EnumValue: Array<string>;
 }
 /**
- * DescribeReadOnlyGroups返回参数结构体
+ * DescribeLogBackups请求参数结构体
  */
-export interface DescribeReadOnlyGroupsResponse {
+export interface DescribeLogBackupsRequest {
     /**
-      * 只读组列表
+      * 备份的最小结束时间，形如2018-01-01 00:00:00。默认为7天前。
       */
-    ReadOnlyGroupList: Array<ReadOnlyGroup>;
+    MinFinishTime?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。
       */
-    RequestId?: string;
+    MaxFinishTime?: string;
+    /**
+      * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-instance-id：按照实例ID过滤，类型为string。
+db-instance-name：按照实例名过滤，类型为string。
+db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 每页显示数量，取值范围为1-100，默认为返回10条。
+      */
+    Limit?: number;
+    /**
+      * 数据偏移量，从0开始。
+      */
+    Offset?: number;
+    /**
+      * 排序字段，支持StartTime,FinishTime,Size。
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，包括升序：asc，降序：desc。
+      */
+    OrderByType?: string;
 }
 /**
  * SetAutoRenewFlag返回参数结构体
@@ -1778,6 +1975,23 @@ export interface DeleteReadOnlyGroupNetworkAccessResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupSummaries返回参数结构体
+ */
+export interface DescribeBackupSummariesResponse {
+    /**
+      * 备份统计信息列表。
+      */
+    BackupSummarySet: Array<BackupSummary>;
+    /**
+      * 查询到的所有备份信息数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBErrlogs请求参数结构体
  */
 export interface DescribeDBErrlogsRequest {
@@ -1885,13 +2099,81 @@ export interface ServerlessDBAccount {
     DBConnLimit: number;
 }
 /**
- * ModifyDBInstanceDeployment返回参数结构体
+ * CloneDBInstance请求参数结构体
  */
-export interface ModifyDBInstanceDeploymentResponse {
+export interface CloneDBInstanceRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 克隆的源实例ID。
       */
-    RequestId?: string;
+    DBInstanceId: string;
+    /**
+      * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+      */
+    SpecCode: string;
+    /**
+      * 实例容量大小，单位：GB。
+      */
+    Storage: number;
+    /**
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+      */
+    Period: number;
+    /**
+      * 续费标记：0-正常续费（默认）；1-自动续费。
+      */
+    AutoRenewFlag: number;
+    /**
+      * 私有网络ID。
+      */
+    VpcId: string;
+    /**
+      * 已配置的私有网络中的子网ID。
+      */
+    SubnetId: string;
+    /**
+      * 新购实例的实例名称。
+      */
+    Name?: string;
+    /**
+      * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+      */
+    InstanceChargeType?: string;
+    /**
+      * 安全组ID。
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * 项目ID。
+      */
+    ProjectId?: number;
+    /**
+      * 实例需要绑定的Tag信息，默认为空。
+      */
+    TagList?: Array<Tag>;
+    /**
+      * 购买多可用区实例时填写。
+      */
+    DBNodeSet?: Array<DBNode>;
+    /**
+      * 是否自动使用代金券。1（是），0（否），默认不使用。
+      */
+    AutoVoucher?: number;
+    /**
+      * 代金券ID列表。
+      */
+    VoucherIds?: string;
+    /**
+      * 活动ID。
+      */
+    ActivityId?: number;
+    /**
+      * 基础备份集ID。
+      */
+    BackupSetId?: string;
+    /**
+      * 恢复时间点。
+      */
+    RecoveryTargetTime?: string;
 }
 /**
  * DeleteParameterTemplate请求参数结构体
@@ -1901,6 +2183,25 @@ export interface DeleteParameterTemplateRequest {
       * 参数模板ID，用于唯一确认待操作的参数模板
       */
     TemplateId: string;
+}
+/**
+ * DescribeClasses请求参数结构体
+ */
+export interface DescribeClassesRequest {
+    /**
+      * 可用区ID。可以通过接口DescribeZones获取。
+      */
+    Zone: string;
+    /**
+      * 数据库引擎，支持：
+1、postgresql（云数据库PostgreSQL）；
+2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；
+      */
+    DBEngine: string;
+    /**
+      * 数据库主版本号。例如12，13，可以通过接口DescribeDBVersions获取。
+      */
+    DBMajorVersion: string;
 }
 /**
  * DescribeParamsEvent请求参数结构体
@@ -2272,20 +2573,6 @@ export interface CreateReadOnlyGroupRequest {
     SecurityGroupIds?: Array<string>;
 }
 /**
- * CreateReadOnlyGroupNetworkAccess返回参数结构体
- */
-export interface CreateReadOnlyGroupNetworkAccessResponse {
-    /**
-      * 流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeParamsEvent返回参数结构体
  */
 export interface DescribeParamsEventResponse {
@@ -2492,6 +2779,23 @@ export interface ParamInfo {
     SpecRelationSet: Array<ParamSpecRelation>;
 }
 /**
+ * DescribeLogBackups返回参数结构体
+ */
+export interface DescribeLogBackupsResponse {
+    /**
+      * 查询到的日志备份数量。
+      */
+    TotalCount: number;
+    /**
+      * 日志备份详细信息列表。
+      */
+    LogBackupSet: Array<LogBackup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 慢SQL 统计分析接口返回详情
  */
 export interface Detail {
@@ -2586,13 +2890,13 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
     InstanceChargeType?: string;
 }
 /**
- * RebalanceReadOnlyGroup返回参数结构体
+ * IsolateDBInstances请求参数结构体
  */
-export interface RebalanceReadOnlyGroupResponse {
+export interface IsolateDBInstancesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例ID集合。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
       */
-    RequestId?: string;
+    DBInstanceIdSet: Array<string>;
 }
 /**
  * ModifyDBInstanceName请求参数结构体
@@ -2641,6 +2945,15 @@ export interface EncryptionKey {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
+}
+/**
+ * UpgradeDBInstanceKernelVersion返回参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * InquiryPriceRenewDBInstance返回参数结构体
@@ -2740,13 +3053,49 @@ export interface DescribeServerlessDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * IsolateDBInstances请求参数结构体
+ * DescribeBackupOverview返回参数结构体
  */
-export interface IsolateDBInstancesRequest {
+export interface DescribeBackupOverviewResponse {
     /**
-      * 实例ID集合。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
+      * 总免费空间大小，单位byte。
       */
-    DBInstanceIdSet: Array<string>;
+    TotalFreeSize: number;
+    /**
+      * 已使用免费空间大小，单位byte。
+      */
+    UsedFreeSize: number;
+    /**
+      * 已使用收费空间大小，单位byte。
+      */
+    UsedBillingSize: number;
+    /**
+      * 日志备份数量。
+      */
+    LogBackupCount: number;
+    /**
+      * 日志备份大小，单位byte。
+      */
+    LogBackupSize: number;
+    /**
+      * 手动创建的基础备份数量。
+      */
+    ManualBaseBackupCount: number;
+    /**
+      * 手动创建的基础备份大小，单位byte。
+      */
+    ManualBaseBackupSize: number;
+    /**
+      * 自动创建的基础备份数量。
+      */
+    AutoBaseBackupCount: number;
+    /**
+      * 自动创建的基础备份大小，单位byte。
+      */
+    AutoBaseBackupSize: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeParameterTemplates请求参数结构体
@@ -2795,6 +3144,19 @@ export interface InitDBInstancesRequest {
     Charset: string;
 }
 /**
+ * DescribeClasses返回参数结构体
+ */
+export interface DescribeClassesResponse {
+    /**
+      * 数据库规格列表
+      */
+    ClassInfoSet?: Array<ClassInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteDBInstanceNetworkAccess请求参数结构体
  */
 export interface DeleteDBInstanceNetworkAccessRequest {
@@ -2814,6 +3176,15 @@ export interface DeleteDBInstanceNetworkAccessRequest {
       * 目标VIP地址。
       */
     Vip: string;
+}
+/**
+ * ModifyDBInstanceDeployment返回参数结构体
+ */
+export interface ModifyDBInstanceDeploymentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述实例的详细信息
@@ -3053,13 +3424,50 @@ export interface Filter {
     Values?: Array<string>;
 }
 /**
- * DisIsolateDBInstances返回参数结构体
+ * DescribeReadOnlyGroups请求参数结构体
  */
-export interface DisIsolateDBInstancesResponse {
+export interface DescribeReadOnlyGroupsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 过滤条件，必须传入主实例ID进行过滤，否则返回值将为空，过滤参数为：db-master-instance-id
       */
-    RequestId?: string;
+    Filters?: Array<Filter>;
+    /**
+      * 查询每一页的条数，默认为10
+      */
+    PageSize?: number;
+    /**
+      * 查询的页码，默认为1
+      */
+    PageNumber?: number;
+    /**
+      * 查询排序依据，目前支持:ROGroupId,CreateTime,Name
+      */
+    OrderBy?: string;
+    /**
+      * 查询排序依据类型，目前支持:desc,asc
+      */
+    OrderByType?: string;
+}
+/**
+ * DescribeBackupDownloadURL请求参数结构体
+ */
+export interface DescribeBackupDownloadURLRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 备份类型，目前支持：LogBackup，BaseBackup。
+      */
+    BackupType: string;
+    /**
+      * 备份的唯一ID。
+      */
+    BackupId: string;
+    /**
+      * 链接的有效时间，默认为12小时。
+      */
+    URLExpireTime?: number;
 }
 /**
  * ModifyDBInstanceParameters返回参数结构体
@@ -3071,17 +3479,17 @@ export interface ModifyDBInstanceParametersResponse {
     RequestId?: string;
 }
 /**
- * OpenDBExtranetAccess请求参数结构体
+ * DescribeDBVersions返回参数结构体
  */
-export interface OpenDBExtranetAccessRequest {
+export interface DescribeDBVersionsResponse {
     /**
-      * 实例ID，形如postgres-hez4fh0v
+      * 数据库版本号信息列表
       */
-    DBInstanceId: string;
+    VersionSet?: Array<Version>;
     /**
-      * 是否开通Ipv6外网，1：是，0：否
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    IsIpv6?: number;
+    RequestId?: string;
 }
 /**
  * 慢查询详情
@@ -3345,6 +3753,60 @@ export interface DescribeEncryptionKeysRequest {
     DBInstanceId: string;
 }
 /**
+ * 数据库日志备份信息
+ */
+export interface LogBackup {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 备份文件唯一标识。
+      */
+    Id: string;
+    /**
+      * 备份文件名称。
+      */
+    Name: string;
+    /**
+      * 备份方式：物理备份、逻辑备份。
+      */
+    BackupMethod: string;
+    /**
+      * 备份模式：自动备份、手动备份。
+      */
+    BackupMode: string;
+    /**
+      * 备份任务状态。
+      */
+    State: string;
+    /**
+      * 备份集大小，单位bytes。
+      */
+    Size: number;
+    /**
+      * 备份的开始时间。
+      */
+    StartTime: string;
+    /**
+      * 备份的结束时间。
+      */
+    FinishTime: string;
+    /**
+      * 备份的过期时间。
+      */
+    ExpireTime: string;
+}
+/**
+ * RebalanceReadOnlyGroup请求参数结构体
+ */
+export interface RebalanceReadOnlyGroupRequest {
+    /**
+      * 只读组ID
+      */
+    ReadOnlyGroupId: string;
+}
+/**
  * ModifyBackupPlan返回参数结构体
  */
 export interface ModifyBackupPlanResponse {
@@ -3564,6 +4026,19 @@ export interface ModifyBackupPlanRequest {
     BackupPeriod?: Array<string>;
 }
 /**
+ * DeleteBaseBackup请求参数结构体
+ */
+export interface DeleteBaseBackupRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 基础备份ID。
+      */
+    BaseBackupId: string;
+}
+/**
  * 批量修改参数
  */
 export interface ParamEntry {
@@ -3592,6 +4067,15 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
       * 币种。例如，CNY：人民币。
       */
     Currency: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DisIsolateDBInstances返回参数结构体
+ */
+export interface DisIsolateDBInstancesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3746,6 +4230,23 @@ export interface RestartDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBaseBackupExpireTime请求参数结构体
+ */
+export interface ModifyBaseBackupExpireTimeRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 基础备份ID。
+      */
+    BaseBackupId: string;
+    /**
+      * 新过期时间。
+      */
+    NewExpireTime: string;
+}
+/**
  * DescribeDBInstances返回参数结构体
  */
 export interface DescribeDBInstancesResponse {
@@ -3783,6 +4284,15 @@ export interface DescribeBackupPlansRequest {
       * 实例ID
       */
     DBInstanceId: string;
+}
+/**
+ * RebalanceReadOnlyGroup返回参数结构体
+ */
+export interface RebalanceReadOnlyGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ResetAccountPassword请求参数结构体
@@ -3861,29 +4371,18 @@ export interface RawSlowQuery {
     SessionStartTime: string;
 }
 /**
- * DescribeReadOnlyGroups请求参数结构体
+ * CreateReadOnlyGroupNetworkAccess返回参数结构体
  */
-export interface DescribeReadOnlyGroupsRequest {
+export interface CreateReadOnlyGroupNetworkAccessResponse {
     /**
-      * 过滤条件，必须传入主实例ID进行过滤，否则返回值将为空，过滤参数为：db-master-instance-id
+      * 流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Filters?: Array<Filter>;
+    FlowId: number;
     /**
-      * 查询每一页的条数，默认为10
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PageSize?: number;
-    /**
-      * 查询的页码，默认为1
-      */
-    PageNumber?: number;
-    /**
-      * 查询排序依据，目前支持:ROGroupId,CreateTime,Name
-      */
-    OrderBy?: string;
-    /**
-      * 查询排序依据类型，目前支持:desc,asc
-      */
-    OrderByType?: string;
+    RequestId?: string;
 }
 /**
  * DescribeAccounts返回参数结构体
@@ -3964,6 +4463,10 @@ export interface UpgradeDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDBVersions请求参数结构体
+ */
+export declare type DescribeDBVersionsRequest = null;
+/**
  * ModifyDBInstancesProject请求参数结构体
  */
 export interface ModifyDBInstancesProjectRequest {
@@ -4036,6 +4539,28 @@ export interface DescribeDBInstanceAttributeResponse {
     RequestId?: string;
 }
 /**
+ * DeleteLogBackup请求参数结构体
+ */
+export interface DeleteLogBackupRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 日志备份ID。
+      */
+    LogBackupId: string;
+}
+/**
+ * DeleteBaseBackup返回参数结构体
+ */
+export interface DeleteBaseBackupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 安全组规则信息
  */
 export interface PolicyRule {
@@ -4078,6 +4603,23 @@ export interface ModifyDBInstanceSpecResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBaseBackups返回参数结构体
+ */
+export interface DescribeBaseBackupsResponse {
+    /**
+      * 查询到的基础备份数量。
+      */
+    TotalCount: number;
+    /**
+      * 基础备份详细信息列表。
+      */
+    BaseBackupSet: Array<BaseBackup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBXlogs返回参数结构体
  */
 export interface DescribeDBXlogsResponse {
@@ -4093,6 +4635,42 @@ export interface DescribeDBXlogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeBaseBackups请求参数结构体
+ */
+export interface DescribeBaseBackupsRequest {
+    /**
+      * 备份的最小结束时间，形如2018-01-01 00:00:00。默认为7天前。
+      */
+    MinFinishTime?: string;
+    /**
+      * 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。
+      */
+    MaxFinishTime?: string;
+    /**
+      * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-instance-id：按照实例ID过滤，类型为string。
+db-instance-name：按照实例名过滤，类型为string。
+db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 每页显示数量，取值范围为1-100，默认为返回10条。
+      */
+    Limit?: number;
+    /**
+      * 数据偏移量，从0开始。
+      */
+    Offset?: number;
+    /**
+      * 排序字段，支持StartTime,FinishTime,Size。
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，包括升序：asc，降序：desc。
+      */
+    OrderByType?: string;
 }
 /**
  * DescribeEncryptionKeys返回参数结构体
@@ -4145,4 +4723,38 @@ export interface CreateDBInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpgradeDBInstanceKernelVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionRequest {
+    /**
+      * 实例ID
+      */
+    DBInstanceId: string;
+    /**
+      * 升级的目标内核版本号。可以通过接口DescribeDBVersions的返回字段AvailableUpgradeTarget获取。
+      */
+    TargetDBKernelVersion: string;
+    /**
+      * 指定实例升级内核版本号完成后的切换时间。可选值，
+0：立即切换（默认值）。
+1：指定时间切换。
+2：维护时间窗口内切换。
+      */
+    SwitchTag?: number;
+    /**
+      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+      */
+    SwitchStartTime?: string;
+    /**
+      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+      */
+    SwitchEndTime?: string;
+    /**
+      * 是否对本次升级实例内核版本号操作执行预检查。可选值，
+true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
+false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+      */
+    DryRun?: boolean;
 }

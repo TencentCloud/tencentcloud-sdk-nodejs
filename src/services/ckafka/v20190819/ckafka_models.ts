@@ -476,7 +476,7 @@ export interface CreateConnectResourceResponse {
   /**
    * 连接源的Id
    */
-  Result: ConnectResourceResourceIdResp
+  Result?: ConnectResourceResourceIdResp
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -751,6 +751,12 @@ export interface DescribeConnectResourceResp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DorisConnectParam: DorisConnectParam
+
+  /**
+      * Kafka配置，Type 为 KAFKA 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaConnectParam?: KafkaConnectParam
 }
 
 /**
@@ -1012,6 +1018,12 @@ export interface DescribeConnectResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DorisConnectParam: DorisConnectParam
+
+  /**
+      * Kafka配置，Type 为 KAFKA 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaConnectParam?: KafkaConnectParam
 }
 
 /**
@@ -2359,6 +2371,16 @@ export interface DescribeConnectResourcesRequest {
 }
 
 /**
+ * DescribeRoute请求参数结构体
+ */
+export interface DescribeRouteRequest {
+  /**
+   * 实例唯一id
+   */
+  InstanceId: string
+}
+
+/**
  * 返回的topic对象
  */
 export interface Topic {
@@ -2604,18 +2626,33 @@ export interface GroupOffsetResponse {
 }
 
 /**
- * CreateToken请求参数结构体
+ * CreateDatahubTopic请求参数结构体
  */
-export interface CreateTokenRequest {
+export interface CreateDatahubTopicRequest {
   /**
-   * 实例ID
+   * 名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
-  InstanceId: string
+  Name: string
 
   /**
-   * 用户名
+   * Partition个数，大于0
    */
-  User: string
+  PartitionNum: number
+
+  /**
+   * 消息保留时间，单位ms，当前最小值为60000ms
+   */
+  RetentionMs: number
+
+  /**
+   * 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   */
+  Note?: string
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3553,6 +3590,11 @@ export interface CreateConnectResourceRequest {
    * Doris 配置，Type为 DORIS 时必填
    */
   DorisConnectParam?: DorisConnectParam
+
+  /**
+   * Kafka配置，Type为 KAFKA 时必填
+   */
+  KafkaConnectParam?: KafkaConnectParam
 }
 
 /**
@@ -4149,6 +4191,16 @@ export interface TableMapping {
 }
 
 /**
+ * Datahub Topic 响应
+ */
+export interface DatahubTopicResp {
+  /**
+   * Topic名称
+   */
+  TopicName: string
+}
+
+/**
  * DescribeInstanceAttributes请求参数结构体
  */
 export interface DescribeInstanceAttributesRequest {
@@ -4620,13 +4672,18 @@ export interface DescribeTopicRequest {
 }
 
 /**
- * DeleteConnectResource请求参数结构体
+ * CreateToken请求参数结构体
  */
-export interface DeleteConnectResourceRequest {
+export interface CreateTokenRequest {
   /**
-   * 连接源的Id
+   * 实例ID
    */
-  ResourceId: string
+  InstanceId: string
+
+  /**
+   * 用户名
+   */
+  User: string
 }
 
 /**
@@ -5255,6 +5312,41 @@ export interface VipEntity {
    * 虚拟端口
    */
   Vport: string
+}
+
+/**
+ * Kafka连接源参数
+ */
+export interface KafkaConnectParam {
+  /**
+      * Kafka连接源的实例资源, 非自建时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resource?: string
+
+  /**
+      * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SelfBuilt?: boolean
+
+  /**
+      * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUpdate?: boolean
+
+  /**
+      * Kafka连接的broker地址, 自建时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BrokerAddress?: string
+
+  /**
+      * CKafka连接源的实例资源地域, 跨地域时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
 }
 
 /**
@@ -6041,45 +6133,38 @@ export interface RouteResponse {
  */
 export interface DtsModifyConnectParam {
   /**
-      * Dts实例Id【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts实例Id【不支持修改】
+   */
   Resource: string
 
   /**
-      * Dts的连接port【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts的连接port【不支持修改】
+   */
   Port?: number
 
   /**
-      * Dts消费分组的Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts消费分组的Id
+   */
   GroupId?: string
 
   /**
-      * Dts消费分组的账号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts消费分组的账号
+   */
   UserName?: string
 
   /**
-      * Dts消费分组的密码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts消费分组的密码
+   */
   Password?: string
 
   /**
-      * 是否更新到关联的Datahub任务，默认为true
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 是否更新到关联的Datahub任务，默认为true
+   */
   IsUpdate?: boolean
 
   /**
-      * Dts订阅的topic【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Dts订阅的topic【不支持修改】
+   */
   Topic?: string
 }
 
@@ -6427,13 +6512,18 @@ export interface InquireCkafkaPriceResponse {
 }
 
 /**
- * DescribeRoute请求参数结构体
+ * CreateDatahubTopic返回参数结构体
  */
-export interface DescribeRouteRequest {
+export interface CreateDatahubTopicResponse {
   /**
-   * 实例唯一id
+   * 返回创建结果
    */
-  InstanceId: string
+  Result: DatahubTopicResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7096,37 +7186,18 @@ export interface DescribeGroup {
 }
 
 /**
- * Cls类型入参
+ * Ctsdb类型入参
  */
-export interface ClsParam {
+export interface CtsdbParam {
   /**
-      * 生产的信息是否为json格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DecodeJson: boolean
-
-  /**
-   * cls日志主题id
+   * 连接管理实例资源
    */
-  Resource: string
+  Resource?: string
 
   /**
-      * cls日志集id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogSet?: string
-
-  /**
-      * 当DecodeJson为false时必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContentKey?: string
-
-  /**
-      * 指定消息中的某字段内容作为cls日志的时间。
-字段内容格式需要是秒级时间戳
-      */
-  TimeField?: string
+   * Ctsdb的metric
+   */
+  CtsdbMetric?: string
 }
 
 /**
@@ -7611,18 +7682,34 @@ export interface DescribeGroupOffsetsResponse {
 }
 
 /**
- * Ctsdb类型入参
+ * Cls类型入参
  */
-export interface CtsdbParam {
+export interface ClsParam {
   /**
-   * 连接管理实例资源
+   * 生产的信息是否为json格式
    */
-  Resource?: string
+  DecodeJson: boolean
 
   /**
-   * Ctsdb的metric
+   * cls日志主题id
    */
-  CtsdbMetric?: string
+  Resource: string
+
+  /**
+   * cls日志集id
+   */
+  LogSet?: string
+
+  /**
+   * 当DecodeJson为false时必填
+   */
+  ContentKey?: string
+
+  /**
+      * 指定消息中的某字段内容作为cls日志的时间。
+字段内容格式需要是秒级时间戳
+      */
+  TimeField?: string
 }
 
 /**
@@ -8374,21 +8461,18 @@ export interface DeleteTopicResponse {
  */
 export interface ScfParam {
   /**
-      * SCF云函数函数名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * SCF云函数函数名
+   */
   FunctionName: string
 
   /**
-      * SCF云函数命名空间, 默认为default
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * SCF云函数命名空间, 默认为default
+   */
   Namespace?: string
 
   /**
-      * SCF云函数版本及别名, 默认为$DEFAULT
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * SCF云函数版本及别名, 默认为$DEFAULT
+   */
   Qualifier?: string
 
   /**
@@ -8823,6 +8907,16 @@ export interface MySQLModifyConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SelfBuilt?: boolean
+}
+
+/**
+ * DeleteConnectResource请求参数结构体
+ */
+export interface DeleteConnectResourceRequest {
+  /**
+   * 连接源的Id
+   */
+  ResourceId: string
 }
 
 /**

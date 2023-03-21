@@ -103,27 +103,23 @@ export interface SearchWordItemsResponse {
  */
 export interface DpToken {
   /**
-      * 句法依存关系的类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 句法依存关系的类型
+   */
   Relation?: string
 
   /**
-      * 当前词父节点的序号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 当前词父节点的序号
+   */
   HeadId?: number
 
   /**
-      * 基础词
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 基础词
+   */
   Word?: string
 
   /**
-      * 基础词的序号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 基础词的序号
+   */
   Id?: number
 }
 
@@ -253,21 +249,18 @@ export interface DictInfo {
   Id: string
 
   /**
-      * 自定义词库描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 自定义词库描述信息。
+   */
   Description?: string
 
   /**
-      * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
+   */
   UpdateTime?: string
 
   /**
-      * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+   */
   CreateTime?: string
 }
 
@@ -296,51 +289,43 @@ export interface ClassificationResult {
   SecondClassName?: string
 
   /**
-      * 一级分类概率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 一级分类概率
+   */
   FirstClassProbability?: number
 
   /**
-      * 二级分类概率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 二级分类概率
+   */
   SecondClassProbability?: number
 
   /**
-      * 三级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 三级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   ThirdClassName?: string
 
   /**
-      * 三级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 三级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   ThirdClassProbability?: number
 
   /**
-      * 四级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 四级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   FourthClassName?: string
 
   /**
-      * 四级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 四级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   FourthClassProbability?: number
 
   /**
-      * 五级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 五级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   FifthClassName?: string
 
   /**
-      * 五级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 五级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+   */
   FifthClassProbability?: number
 }
 
@@ -450,15 +435,13 @@ export interface SearchResult {
   IsExist: number
 
   /**
-      * 匹配到的词条文本。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 匹配到的词条文本。
+   */
   MatchText: string
 
   /**
-      * 词条的词性。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 词条的词性。
+   */
   Pos?: string
 }
 
@@ -492,9 +475,8 @@ export interface WordItem {
   CreateTime?: string
 
   /**
-      * 词条的词性。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 词条的词性。
+   */
   Pos?: string
 }
 

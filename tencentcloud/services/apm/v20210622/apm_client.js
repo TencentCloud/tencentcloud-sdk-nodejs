@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("apm.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
+     * 修改Apm实例接口
+     */
+    async ModifyApmInstance(req, cb) {
+        return this.request("ModifyApmInstance", req, cb);
+    }
+    /**
      * APM实例列表拉取
      */
     async DescribeApmInstances(req, cb) {
@@ -51,6 +57,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMetricRecords(req, cb) {
         return this.request("DescribeMetricRecords", req, cb);
+    }
+    /**
+     * apm销毁实例
+     */
+    async TerminateApmInstance(req, cb) {
+        return this.request("TerminateApmInstance", req, cb);
     }
     /**
      * 业务购买APM实例，调用该接口创建

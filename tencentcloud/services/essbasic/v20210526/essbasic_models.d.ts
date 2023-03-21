@@ -92,7 +92,6 @@ export interface Department {
 export interface CommonApproverOption {
     /**
       * 是否允许修改签署人信息
-注意：此字段可能返回 null，表示取不到有效值。
       */
     CanEditApprover?: boolean;
 }
@@ -341,7 +340,6 @@ export interface FlowFileInfo {
 export interface CreateFlowOption {
     /**
       * 是否允许修改合同信息
-注意：此字段可能返回 null，表示取不到有效值。
       */
     CanEditFlow?: boolean;
 }
@@ -351,42 +349,34 @@ export interface CreateFlowOption {
 export interface BaseFlowInfo {
     /**
       * 合同流程名称
-注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowName: string;
     /**
       * 合同流程类型
-注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowType: string;
     /**
       * 合同流程描述信息
-注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowDescription: string;
     /**
       * 合同流程截止时间，unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Deadline: number;
     /**
       * 是否顺序签署(true:无序签,false:顺序签)
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Unordered?: boolean;
     /**
       * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
-注意：此字段可能返回 null，表示取不到有效值。
       */
     IntelligentStatus?: string;
     /**
       * 填写控件内容
-注意：此字段可能返回 null，表示取不到有效值。
       */
     FormFields?: Array<FormField>;
     /**
       * 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批
-注意：此字段可能返回 null，表示取不到有效值。
       */
     NeedSignReview?: boolean;
 }
@@ -1264,73 +1254,59 @@ export interface OrganizationInfo {
 export interface CommonFlowApprover {
     /**
       * 指定当前签署人为第三方应用集成子客，默认false：当前签署人为第三方应用集成子客，true：当前签署人为saas企业用户
-注意：此字段可能返回 null，表示取不到有效值。
       */
     NotChannelOrganization: boolean;
     /**
       * 签署人类型,目前支持：0-企业签署人，1-个人签署人，3-企业静默签署人
-注意：此字段可能返回 null，表示取不到有效值。
       */
     ApproverType?: number;
     /**
       * 企业id
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OrganizationId?: string;
     /**
       * 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同毕传
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OrganizationOpenId?: string;
     /**
       * 企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OrganizationName?: string;
     /**
       * 用户id
-注意：此字段可能返回 null，表示取不到有效值。
       */
     UserId?: string;
     /**
       * 用户openId，第三方应用集成非静默签子客企业签署人必传
-注意：此字段可能返回 null，表示取不到有效值。
       */
     OpenId?: string;
     /**
       * 签署人名称，saas企业签署人，个人签署人必传
-注意：此字段可能返回 null，表示取不到有效值。
       */
     ApproverName?: string;
     /**
       * 签署人手机号，saas企业签署人，个人签署人必传
-注意：此字段可能返回 null，表示取不到有效值。
       */
     ApproverMobile?: string;
     /**
       * 签署人Id，使用模板发起是，对应模板配置中的签署人RecipientId
 注意：模板发起时该字段必填
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RecipientId?: string;
     /**
       * 签署前置条件：阅读时长限制，不传默认10s,最大300s，最小3s
-注意：此字段可能返回 null，表示取不到有效值。
       */
     PreReadTime?: number;
     /**
       * 签署前置条件：阅读全文限制
-注意：此字段可能返回 null，表示取不到有效值。
       */
     IsFullText?: boolean;
     /**
       * 通知类型：SMS（短信） NONE（不做通知）, 不传 默认SMS
-注意：此字段可能返回 null，表示取不到有效值。
       */
     NotifyType?: string;
     /**
       * 签署人配置
-注意：此字段可能返回 null，表示取不到有效值。
       */
     ApproverOption?: CommonApproverOption;
 }
@@ -2663,7 +2639,6 @@ export interface ProxyOrganizationOperator {
 业务管理员：admin
 经办人：channel-normal-operator
 业务员：channel-sales-man
-注意：此字段可能返回 null，表示取不到有效值。
       */
     DefaultRole?: string;
 }
@@ -3547,20 +3522,17 @@ export interface CcInfo {
     Mobile?: string;
     /**
       * 被抄送人姓名
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name?: string;
     /**
       * 被抄送人类型
 0--个人. 1--员工
-注意：此字段可能返回 null，表示取不到有效值。
       */
     CcType?: number;
     /**
       * 被抄送人权限
 0--可查看
 1--可查看也可下载
-注意：此字段可能返回 null，表示取不到有效值。
       */
     CcPermission?: number;
 }

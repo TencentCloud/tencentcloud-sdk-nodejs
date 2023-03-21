@@ -859,12 +859,10 @@ export interface DeleteQueueRequest {
 export interface Filter {
     /**
       * 需要过滤的字段。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name: string;
     /**
       * 字段的过滤值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Values: Array<string>;
 }
@@ -1157,11 +1155,11 @@ export interface DescribeAutoScalingConfigurationRequest {
  */
 export interface StorageOption {
     /**
-      * 集群挂载CFS文件系统选项
+      * 集群挂载CFS文件系统选项。
       */
     CFSOptions?: Array<CFSOption>;
     /**
-      * 集群挂在GooseFS文件系统选项
+      * 集群挂载GooseFS文件系统选项。
       */
     GooseFSOptions?: Array<GooseFSOption>;
 }

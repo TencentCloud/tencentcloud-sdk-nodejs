@@ -11431,15 +11431,13 @@ export interface SearchConditionInstance {
   ExecutionSpace: number
 
   /**
-      * 产品名称，可选
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 产品名称，可选
+   */
   ProductName?: number
 
   /**
-      * 资源组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 资源组
+   */
   ResourceGroup?: number
 }
 

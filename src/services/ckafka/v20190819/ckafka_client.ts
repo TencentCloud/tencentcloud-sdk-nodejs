@@ -86,6 +86,7 @@ import {
   DescribeTopicSubscribeGroupResponse,
   DeleteAclRuleRequest,
   DescribeConnectResourcesRequest,
+  DescribeRouteRequest,
   Topic,
   Tag,
   ModifyConnectResourceRequest,
@@ -95,7 +96,7 @@ import {
   GroupResponse,
   InstanceDetailResponse,
   GroupOffsetResponse,
-  CreateTokenRequest,
+  CreateDatahubTopicRequest,
   DescribeTopicResponse,
   MongoDBModifyConnectParam,
   TdwParam,
@@ -148,6 +149,7 @@ import {
   DescribeTopicSubscribeGroupRequest,
   DeleteInstancePreResponse,
   TableMapping,
+  DatahubTopicResp,
   DescribeInstanceAttributesRequest,
   InquiryPublicNetworkParam,
   TopicInSyncReplicaInfo,
@@ -169,7 +171,7 @@ import {
   DescribeGroupInfoResponse,
   AppIdResponse,
   DescribeTopicRequest,
-  DeleteConnectResourceRequest,
+  CreateTokenRequest,
   CreatePartitionRequest,
   Group,
   GroupInfoResponse,
@@ -194,6 +196,7 @@ import {
   DescribeRegionResponse,
   CreateTopicResponse,
   VipEntity,
+  KafkaConnectParam,
   DescribeTopicProduceConnectionResponse,
   FetchLatestDatahubMessageListRequest,
   ConsumerGroupTopic,
@@ -235,7 +238,7 @@ import {
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
   InquireCkafkaPriceResponse,
-  DescribeRouteRequest,
+  CreateDatahubTopicResponse,
   InquireCkafkaPriceRequest,
   DateParam,
   ValueParam,
@@ -256,7 +259,7 @@ import {
   DatahubTopicDTO,
   JgwOperateResponse,
   DescribeGroup,
-  ClsParam,
+  CtsdbParam,
   EventBusParam,
   DatahubTaskIdRes,
   TopicPartitionDO,
@@ -273,7 +276,7 @@ import {
   TopicResult,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
-  CtsdbParam,
+  ClsParam,
   SendMessageRequest,
   ConsumerRecord,
   PostgreSQLConnectParam,
@@ -304,6 +307,7 @@ import {
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
   MySQLModifyConnectParam,
+  DeleteConnectResourceRequest,
   SQLServerParam,
   ReplaceParam,
   Price,
@@ -557,6 +561,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FetchMessageListByOffsetResponse) => void
   ): Promise<FetchMessageListByOffsetResponse> {
     return this.request("FetchMessageListByOffset", req, cb)
+  }
+
+  /**
+   * 创建Datahub主题
+   */
+  async CreateDatahubTopic(
+    req: CreateDatahubTopicRequest,
+    cb?: (error: string, rep: CreateDatahubTopicResponse) => void
+  ): Promise<CreateDatahubTopicResponse> {
+    return this.request("CreateDatahubTopic", req, cb)
   }
 
   /**

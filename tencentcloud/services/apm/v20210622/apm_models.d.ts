@@ -1,4 +1,73 @@
 /**
+ * ModifyApmInstance请求参数结构体
+ */
+export interface ModifyApmInstanceRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例名
+      */
+    Name: string;
+    /**
+      * 标签列表
+      */
+    Tags?: Array<ApmTag>;
+    /**
+      * 实例详情
+      */
+    Description?: string;
+    /**
+      * Trace数据保存时长
+      */
+    TraceDuration?: number;
+    /**
+      * 是否开启计费
+      */
+    OpenBilling?: boolean;
+    /**
+      * 实例上报额度
+      */
+    SpanDailyCounters?: number;
+    /**
+      * 错误率阈值
+      */
+    ErrRateThreshold?: number;
+    /**
+      * 采样率
+      */
+    SampleRate?: number;
+    /**
+      * 是否开启错误采样 0 关 1 开
+      */
+    ErrorSample?: number;
+    /**
+      * 慢请求阈值
+      */
+    SlowRequestSavedThreshold?: number;
+    /**
+      * 是否开启日志功能 0 关 1 开
+      */
+    IsRelatedLog?: number;
+    /**
+      * 日志地域
+      */
+    LogRegion?: string;
+    /**
+      * CLS日志主题ID | ES 索引名
+      */
+    LogTopicID?: string;
+    /**
+      * CLS日志集 | ES集群ID
+      */
+    LogSet?: string;
+    /**
+      * CLS | ES
+      */
+    LogSource?: string;
+}
+/**
  * apm实例信息
  */
 export interface ApmInstanceDetail {
@@ -176,6 +245,15 @@ export interface QueryMetricItem {
       * 同比，支持多种同比方式
       */
     Compares?: Array<string>;
+}
+/**
+ * TerminateApmInstance请求参数结构体
+ */
+export interface TerminateApmInstanceRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
 }
 /**
  * DescribeApmInstances返回参数结构体
@@ -603,6 +681,15 @@ export interface CreateApmInstanceResponse {
     RequestId?: string;
 }
 /**
+ * ModifyApmInstance返回参数结构体
+ */
+export interface ModifyApmInstanceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 查询过滤参数
  */
 export interface GeneralFilter {
@@ -645,6 +732,15 @@ export interface DescribeGeneralMetricDataResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Records: Array<Line>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * TerminateApmInstance返回参数结构体
+ */
+export interface TerminateApmInstanceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

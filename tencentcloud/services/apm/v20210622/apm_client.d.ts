@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateApmInstanceRequest, DescribeServiceOverviewResponse, DescribeApmInstancesResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeMetricRecordsResponse, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse } from "./apm_models";
+import { ModifyApmInstanceRequest, CreateApmInstanceRequest, DescribeServiceOverviewResponse, TerminateApmInstanceRequest, DescribeApmInstancesResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeMetricRecordsResponse, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, ModifyApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse, TerminateApmInstanceResponse } from "./apm_models";
 /**
  * apm client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 修改Apm实例接口
+     */
+    ModifyApmInstance(req: ModifyApmInstanceRequest, cb?: (error: string, rep: ModifyApmInstanceResponse) => void): Promise<ModifyApmInstanceResponse>;
     /**
      * APM实例列表拉取
      */
@@ -24,6 +28,10 @@ export declare class Client extends AbstractClient {
      * 拉取通用指标列表
      */
     DescribeMetricRecords(req: DescribeMetricRecordsRequest, cb?: (error: string, rep: DescribeMetricRecordsResponse) => void): Promise<DescribeMetricRecordsResponse>;
+    /**
+     * apm销毁实例
+     */
+    TerminateApmInstance(req: TerminateApmInstanceRequest, cb?: (error: string, rep: TerminateApmInstanceResponse) => void): Promise<TerminateApmInstanceResponse>;
     /**
      * 业务购买APM实例，调用该接口创建
      */

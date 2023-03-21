@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
-     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+     * 本接口 (DescribeBackupDownloadURL) 用于获取备份下载链接。
      */
-    async DescribeDBInstances(req, cb) {
-        return this.request("DescribeDBInstances", req, cb);
+    async DescribeBackupDownloadURL(req, cb) {
+        return this.request("DescribeBackupDownloadURL", req, cb);
     }
     /**
      * 可对RO组进行网络的删除操作。
@@ -124,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBErrlogs", req, cb);
     }
     /**
-     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
      */
-    async DescribeReadOnlyGroups(req, cb) {
-        return this.request("DescribeReadOnlyGroups", req, cb);
+    async DescribeParameterTemplates(req, cb) {
+        return this.request("DescribeParameterTemplates", req, cb);
     }
     /**
      * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
@@ -148,10 +148,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     * 获取实例可修改参数列表
      */
-    async OpenDBExtranetAccess(req, cb) {
-        return this.request("OpenDBExtranetAccess", req, cb);
+    async DescribeDBInstanceParameters(req, cb) {
+        return this.request("DescribeDBInstanceParameters", req, cb);
+    }
+    /**
+     * 本接口（CreateBaseBackup）用于创建实例的全量备份。
+     */
+    async CreateBaseBackup(req, cb) {
+        return this.request("CreateBaseBackup", req, cb);
     }
     /**
      * 本接口（DescribeParameterTemplateAttributes）用于查询某个参数模板的具体内容，包括基本信息和参数信息。
@@ -166,10 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDBInstanceNetworkAccess", req, cb);
     }
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 本接口（DeleteBaseBackup）用于修改实例指定全量备份的过期时间。
      */
-    async RestartDBInstance(req, cb) {
-        return this.request("RestartDBInstance", req, cb);
+    async ModifyBaseBackupExpireTime(req, cb) {
+        return this.request("ModifyBaseBackupExpireTime", req, cb);
     }
     /**
      * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
@@ -244,16 +250,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RebalanceReadOnlyGroup", req, cb);
     }
     /**
-     * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
+     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
      */
-    async CreateServerlessDBInstance(req, cb) {
-        return this.request("CreateServerlessDBInstance", req, cb);
+    async DescribeReadOnlyGroups(req, cb) {
+        return this.request("DescribeReadOnlyGroups", req, cb);
     }
     /**
-     * 获取实例可修改参数列表
+     * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
      */
-    async DescribeDBInstanceParameters(req, cb) {
-        return this.request("DescribeDBInstanceParameters", req, cb);
+    async DeleteParameterTemplate(req, cb) {
+        return this.request("DeleteParameterTemplate", req, cb);
+    }
+    /**
+     * 本接口（DeleteLogBackup）用于删除实例指定日志备份。
+     */
+    async DeleteLogBackup(req, cb) {
+        return this.request("DeleteLogBackup", req, cb);
     }
     /**
      * 本接口 (DescribeZones) 用于查询支持的可用区信息。
@@ -262,10 +274,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZones", req, cb);
     }
     /**
-     * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
+     * 本接口（RestartDBInstance）用于重启实例。
      */
-    async DeleteParameterTemplate(req, cb) {
-        return this.request("DeleteParameterTemplate", req, cb);
+    async RestartDBInstance(req, cb) {
+        return this.request("RestartDBInstance", req, cb);
+    }
+    /**
+     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+     */
+    async DescribeDBInstances(req, cb) {
+        return this.request("DescribeDBInstances", req, cb);
+    }
+    /**
+     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     */
+    async OpenDBExtranetAccess(req, cb) {
+        return this.request("OpenDBExtranetAccess", req, cb);
     }
     /**
      * 本接口（IsolateDBInstances）用于隔离实例
@@ -298,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSpec", req, cb);
     }
     /**
+     * 本接口 (DescribeBaseBackups) 用于查询基础备份列表。
+     */
+    async DescribeBaseBackups(req, cb) {
+        return this.request("DescribeBaseBackups", req, cb);
+    }
+    /**
      * 本接口（DescribeAvailableRecoveryTime）用于查询实例可恢复的时间范围。
      */
     async DescribeAvailableRecoveryTime(req, cb) {
@@ -316,10 +346,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
+     * 本接口 (DescribeLogBackups) 用于查询日志备份列表。
+     */
+    async DescribeLogBackups(req, cb) {
+        return this.request("DescribeLogBackups", req, cb);
+    }
+    /**
      * 此接口（DescribeSlowQueryList）用于查询指定时间范围内的所有慢查询。
      */
     async DescribeSlowQueryList(req, cb) {
         return this.request("DescribeSlowQueryList", req, cb);
+    }
+    /**
+     * 本接口（DeleteBaseBackup）用于删除实例指定全量备份。
+     */
+    async DeleteBaseBackup(req, cb) {
+        return this.request("DeleteBaseBackup", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
@@ -332,6 +374,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CloseDBExtranetAccess(req, cb) {
         return this.request("CloseDBExtranetAccess", req, cb);
+    }
+    /**
+     * 本接口（DescribeCloneDBInstanceSpec）用于查询克隆实例可选择的最小规格，包括SpecCode和磁盘。
+     */
+    async DescribeCloneDBInstanceSpec(req, cb) {
+        return this.request("DescribeCloneDBInstanceSpec", req, cb);
+    }
+    /**
+     * 本接口（UpgradeDBInstanceKernelVersion）用于升级实例的内核版本号。
+     */
+    async UpgradeDBInstanceKernelVersion(req, cb) {
+        return this.request("UpgradeDBInstanceKernelVersion", req, cb);
     }
     /**
      * 用于克隆实例，支持指定备份集、指定时间点进行克隆。
@@ -370,16 +424,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerlessDBInstances", req, cb);
     }
     /**
+     * 本接口（DescribeDBVersions）用于查询支持的数据库版本号列表。
+     */
+    async DescribeDBVersions(req, cb) {
+        return this.request("DescribeDBVersions", req, cb);
+    }
+    /**
      * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述，修改，添加和删除参数模板参数。
      */
     async ModifyParameterTemplate(req, cb) {
         return this.request("ModifyParameterTemplate", req, cb);
     }
     /**
-     * 本接口（DescribeCloneDBInstanceSpec）用于查询克隆实例可选择的最小规格，包括SpecCode和磁盘。
+     * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
      */
-    async DescribeCloneDBInstanceSpec(req, cb) {
-        return this.request("DescribeCloneDBInstanceSpec", req, cb);
+    async CreateServerlessDBInstance(req, cb) {
+        return this.request("CreateServerlessDBInstance", req, cb);
     }
     /**
      * 本接口 (CreateParameterTemplate) 用于创建参数模板。
@@ -400,16 +460,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
      * 本接口(CreateReadOnlyDBInstance)用于创建只读实例
      */
     async CreateReadOnlyDBInstance(req, cb) {
         return this.request("CreateReadOnlyDBInstance", req, cb);
     }
     /**
-     * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
+     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
      */
-    async DescribeParameterTemplates(req, cb) {
-        return this.request("DescribeParameterTemplates", req, cb);
+    async DescribeDBSlowlogs(req, cb) {
+        return this.request("DescribeDBSlowlogs", req, cb);
     }
     /**
      * 本接口(ModifyReadOnlyGroupConfig)用于更新只读组配置信息
@@ -422,6 +488,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);
+    }
+    /**
+     * 本接口(DescribeBackupSummaries)用于查询实例备份的统计信息，返回以实例为维度的备份个数、占用容量等信息（容量单位为字节）。
+     */
+    async DescribeBackupSummaries(req, cb) {
+        return this.request("DescribeBackupSummaries", req, cb);
     }
     /**
      * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
@@ -442,16 +514,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamsEvent", req, cb);
     }
     /**
-     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
+     * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
      */
-    async DescribeDBSlowlogs(req, cb) {
-        return this.request("DescribeDBSlowlogs", req, cb);
+    async DescribeBackupOverview(req, cb) {
+        return this.request("DescribeBackupOverview", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+     * 本接口（DescribeClasses）用于查询实例售卖规格。
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async DescribeClasses(req, cb) {
+        return this.request("DescribeClasses", req, cb);
     }
 }
 exports.Client = Client;

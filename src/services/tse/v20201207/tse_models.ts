@@ -317,21 +317,18 @@ export interface ZookeeperReplica {
  */
 export interface EngineRegionInfo {
   /**
-      * 引擎节点所在地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 引擎节点所在地域
+   */
   EngineRegion: string
 
   /**
-      * 此地域节点分配数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 此地域节点分配数量
+   */
   Replica: number
 
   /**
-      * 集群网络信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 集群网络信息
+   */
   VpcInfos: Array<VpcInfo>
 }
 

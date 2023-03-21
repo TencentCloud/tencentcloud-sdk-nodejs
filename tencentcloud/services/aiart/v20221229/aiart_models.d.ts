@@ -17,17 +17,14 @@ export interface ImageToImageResponse {
 export interface LogoParam {
     /**
       * 水印url
-注意：此字段可能返回 null，表示取不到有效值。
       */
     LogoUrl?: string;
     /**
       * 水印base64，url和base64二选一传入
-注意：此字段可能返回 null，表示取不到有效值。
       */
     LogoImage?: string;
     /**
       * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
-注意：此字段可能返回 null，表示取不到有效值。
       */
     LogoRect?: LogoRect;
 }
@@ -97,22 +94,18 @@ Strength 值越小，生成图和原图越接近。取值范围0~1，不传默�
 export interface LogoRect {
     /**
       * 左上角X坐标
-注意：此字段可能返回 null，表示取不到有效值。
       */
     X?: number;
     /**
       * 左上角Y坐标
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Y?: number;
     /**
       * 方框宽度
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Width?: number;
     /**
       * 方框高度
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Height?: number;
 }
@@ -127,7 +120,6 @@ export interface ResultConfig {
 ● 768:768
 ● 768:1024
 ● 1024:768
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Resolution?: string;
 }

@@ -10030,21 +10030,18 @@ export type DescribeCustomerGatewayVendorsRequest = null
  */
 export interface CcnFlowLock {
   /**
-      * 带宽所属的云联网ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 带宽所属的云联网ID。
+   */
   CcnId: string
 
   /**
-      * 实例所属用户主账号ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 实例所属用户主账号ID。
+   */
   UserAccountID: string
 
   /**
-      * 带宽实例的唯一ID。作为`UnlockCcnBandwidths`接口和`LockCcnBandwidths`接口的入参时，该字段必传。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 带宽实例的唯一ID。作为`UnlockCcnBandwidths`接口和`LockCcnBandwidths`接口的入参时，该字段必传。
+   */
   RegionFlowControlId?: string
 }
 

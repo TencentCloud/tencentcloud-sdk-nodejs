@@ -573,21 +573,18 @@ export interface DescribeListenersResponse {
  */
 export interface TargetsWeightRule {
   /**
-      * 负载均衡监听器 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 负载均衡监听器 ID
+   */
   ListenerId?: string
 
   /**
-      * 要修改权重的后端机器列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 要修改权重的后端机器列表
+   */
   Targets?: Array<Target>
 
   /**
-      * 后端服务新的转发权重，取值范围：0~100。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 后端服务新的转发权重，取值范围：0~100。
+   */
   Weight?: number
 }
 
@@ -5111,27 +5108,23 @@ export interface Placement {
  */
 export interface Target {
   /**
-      * 后端服务的监听端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 后端服务的监听端口
+   */
   Port?: number
 
   /**
-      * 子机ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 子机ID
+   */
   InstanceId?: string
 
   /**
-      * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   */
   Weight?: number
 
   /**
-      * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至子机，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至子机，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。
+   */
   EniIp?: string
 }
 
@@ -5927,33 +5920,28 @@ export interface BatchModifyTargetWeightRequest {
  */
 export interface BatchTarget {
   /**
-      * 监听器ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 监听器ID
+   */
   ListenerId?: string
 
   /**
-      * 绑定端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 绑定端口
+   */
   Port?: number
 
   /**
-      * 子机ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 子机ID
+   */
   InstanceId?: string
 
   /**
-      * 弹性网卡ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 弹性网卡ip
+   */
   EniIp?: string
 
   /**
-      * 子机权重，范围[0, 100]。绑定时如果不存在，则默认为10。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 子机权重，范围[0, 100]。绑定时如果不存在，则默认为10。
+   */
   Weight?: number
 }
 

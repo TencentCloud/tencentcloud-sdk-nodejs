@@ -2905,6 +2905,11 @@ export interface AddVpcCniSubnetsRequest {
    * 集群所属的VPC的ID
    */
   VpcId: string
+
+  /**
+   * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
+   */
+  SkipAddingNonMasqueradeCIDRs?: boolean
 }
 
 /**

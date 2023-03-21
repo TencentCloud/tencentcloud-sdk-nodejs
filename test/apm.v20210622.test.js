@@ -18,6 +18,16 @@ const client = new tencentcloud.apm.v20210622.Client({
 })
 describe("apm.v20210622.test.js", function () {
 
+it("apm.v20210622.ModifyApmInstance", async function () {
+    try {
+       const data = await client.ModifyApmInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeApmInstances", async function () {
     try {
        const data = await client.DescribeApmInstances({})
@@ -51,6 +61,16 @@ it("apm.v20210622.DescribeGeneralMetricData", async function () {
 it("apm.v20210622.DescribeMetricRecords", async function () {
     try {
        const data = await client.DescribeMetricRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.TerminateApmInstance", async function () {
+    try {
+       const data = await client.TerminateApmInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

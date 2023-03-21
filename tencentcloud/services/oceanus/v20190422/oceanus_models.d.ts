@@ -1347,7 +1347,6 @@ export interface RunJobDescription {
     SavepointId?: string;
     /**
       * 使用历史版本系统依赖
-注意：此字段可能返回 null，表示取不到有效值。
       */
     UseOldSystemConnector?: boolean;
 }

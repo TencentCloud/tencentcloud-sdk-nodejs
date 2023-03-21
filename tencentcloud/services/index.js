@@ -320,6 +320,8 @@ var ses_1 = require("./ses");
 Object.defineProperty(exports, "ses", { enumerable: true, get: function () { return ses_1.ses; } });
 var smh_1 = require("./smh");
 Object.defineProperty(exports, "smh", { enumerable: true, get: function () { return smh_1.smh; } });
+var smop_1 = require("./smop");
+Object.defineProperty(exports, "smop", { enumerable: true, get: function () { return smop_1.smop; } });
 var smpn_1 = require("./smpn");
 Object.defineProperty(exports, "smpn", { enumerable: true, get: function () { return smpn_1.smpn; } });
 var sms_1 = require("./sms");

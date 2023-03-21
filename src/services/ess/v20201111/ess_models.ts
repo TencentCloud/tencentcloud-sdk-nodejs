@@ -495,21 +495,18 @@ export interface Agent {
   AppId?: string
 
   /**
-      * 被代理机构的应用号，一般不用传
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 被代理机构的应用号，一般不用传
+   */
   ProxyAppId?: string
 
   /**
-      * 被代理机构在电子签平台的机构编号，集团代理下场景必传
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 被代理机构在电子签平台的机构编号，集团代理下场景必传
+   */
   ProxyOrganizationId?: string
 
   /**
-      * 被代理机构的经办人，一般不用传
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 被代理机构的经办人，一般不用传
+   */
   ProxyOperator?: string
 }
 
@@ -920,39 +917,33 @@ false：有序签
  */
 export interface AutoSignConfig {
   /**
-      * 自动签开通个人用户的三要素
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 自动签开通个人用户的三要素
+   */
   UserInfo: UserThreeFactor
 
   /**
-      * 回调链接
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 回调链接
+   */
   CallbackUrl: string
 
   /**
-      * 是否回调证书信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 是否回调证书信息
+   */
   CertInfoCallback?: boolean
 
   /**
-      * 是否支持用户自定义签名印章
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 是否支持用户自定义签名印章
+   */
   UserDefineSeal?: boolean
 
   /**
-      * 是否需要回调的时候返回印章(签名) 图片的 base64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 是否需要回调的时候返回印章(签名) 图片的 base64
+   */
   SealImgCallback?: boolean
 
   /**
-      * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
+   */
   VerifyChannels?: Array<string>
 }
 
@@ -1263,9 +1254,8 @@ export interface CreateBatchCancelFlowUrlResponse {
  */
 export interface UserThreeFactor {
   /**
-      * 姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 姓名
+   */
   Name: string
 
   /**
@@ -1273,14 +1263,12 @@ export interface UserThreeFactor {
 ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-注意：此字段可能返回 null，表示取不到有效值。
       */
   IdCardType: string
 
   /**
-      * 证件号，如果有 X 请大写
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 证件号，如果有 X 请大写
+   */
   IdCardNumber: string
 }
 
@@ -3561,36 +3549,31 @@ true--是，处理置白
  */
 export interface RelieveInfo {
   /**
-      * 解除理由，最大支持200个字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 解除理由，最大支持200个字
+   */
   Reason: string
 
   /**
       * 解除后仍然有效的条款，保留条款，最大支持200个字
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
   RemainInForceItem?: string
 
   /**
       * 原合同事项处理-费用结算，最大支持200个字
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalExpenseSettlement?: string
 
   /**
       * 原合同事项处理-其他事项，最大支持200个字
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalOtherSettlement?: string
 
   /**
       * 其他约定，最大支持200个字
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
   OtherDeals?: string
 }
@@ -3698,16 +3681,14 @@ export interface CcInfo {
   Mobile?: string
 
   /**
-      * 被抄送人姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 被抄送人姓名
+   */
   Name?: string
 
   /**
       * 被抄送人类型,
 0--个人
 1--员工
-注意：此字段可能返回 null，表示取不到有效值。
       */
   CcType?: number
 
@@ -3715,7 +3696,6 @@ export interface CcInfo {
       * 被抄送人权限
 0--可查看
 1--可查看也可下载
-注意：此字段可能返回 null，表示取不到有效值。
       */
   CcPermission?: number
 }
@@ -3764,20 +3744,17 @@ export interface ReleasedApprover {
   /**
       * 签署人姓名，最大长度50个字符
 
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
 
   /**
-      * 签署人手机号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 签署人手机号
+   */
   Mobile: string
 
   /**
-      * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
+   */
   RelievedApproverReceiptId: string
 }
 

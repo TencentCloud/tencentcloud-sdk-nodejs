@@ -1843,12 +1843,10 @@ export interface CreateAutoCalloutTaskRequest {
 export interface Filter {
     /**
       * 筛选字段名
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name: string;
     /**
       * 筛选条件值
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Values: Array<string>;
 }

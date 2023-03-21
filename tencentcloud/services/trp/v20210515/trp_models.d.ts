@@ -2408,10 +2408,6 @@ export interface DescribeTraceDataListRequest {
  */
 export interface DescribeScanStatsRequest {
     /**
-      * 批次ID
-      */
-    BatchId: string;
-    /**
       * 企业ID
       */
     CorpId?: number;
@@ -2423,6 +2419,18 @@ export interface DescribeScanStatsRequest {
       * 当前分页
       */
     PageNumber?: number;
+    /**
+      * 商户ID
+      */
+    MerchantId?: string;
+    /**
+      * 产品ID
+      */
+    ProductId?: string;
+    /**
+      * 批次ID
+      */
+    BatchId?: string;
 }
 /**
  * DeleteMerchant返回参数结构体
@@ -2596,6 +2604,14 @@ export interface ScanStat {
       * 更新时间
       */
     UpdateTime?: string;
+    /**
+      * 商户名称
+      */
+    MerchantName?: string;
+    /**
+      * 产品名称
+      */
+    ProductName?: string;
 }
 /**
  * ModifyTraceCode返回参数结构体
