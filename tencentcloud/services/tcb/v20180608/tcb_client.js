@@ -289,6 +289,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyEnv", req, cb);
     }
     /**
+     * 查询网关监控数据
+     */
+    async DescribeGatewayCurveData(req, cb) {
+        return this.request("DescribeGatewayCurveData", req, cb);
+    }
+    /**
      * 获取环境下单地域
      */
     async DescribeEnvDealRegion(req, cb) {

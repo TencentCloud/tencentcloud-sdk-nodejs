@@ -18,6 +18,16 @@ const client = new tencentcloud.iotvideo.v20211125.Client({
 })
 describe("iotvideo.v20211125.test.js", function () {
 
+it("iotvideo.v20211125.CallTRTCDevice", async function () {
+    try {
+       const data = await client.CallTRTCDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CreateAIDetection", async function () {
     try {
        const data = await client.CreateAIDetection({})

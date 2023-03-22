@@ -932,18 +932,13 @@ export interface CdbRegionSellConf {
 }
 
 /**
- * DeleteAccounts返回参数结构体
+ * DescribeRoGroups请求参数结构体
  */
-export interface DeleteAccountsResponse {
+export interface DescribeRoGroupsRequest {
   /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   * 实例ID，格式如：cdb-c1nl9rpv或者cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
    */
-  AsyncRequestId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -1061,6 +1056,36 @@ export interface StopRollbackResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AnalyzeAuditLogs请求参数结构体
+ */
+export interface AnalyzeAuditLogsRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+
+  /**
+   * 要分析的日志开始时间，格式为："2023-02-16 00:00:20"。
+   */
+  StartTime: string
+
+  /**
+   * 要分析的日志结束时间，格式为："2023-02-16 00:10:20"。
+   */
+  EndTime: string
+
+  /**
+   * 聚合维度的排序条件。
+   */
+  AggregationConditions: Array<AggregationCondition>
+
+  /**
+   * 该过滤条件下的审计日志结果集作为分析日志。
+   */
+  AuditLogFilter?: AuditLogFilter
 }
 
 /**
@@ -1874,13 +1899,53 @@ export interface ModifyBackupConfigResponse {
 }
 
 /**
- * OpenWanService请求参数结构体
+ * DescribeTimeWindow返回参数结构体
  */
-export interface OpenWanServiceRequest {
+export interface DescribeTimeWindowResponse {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 星期一的可维护时间列表。
    */
-  InstanceId: string
+  Monday: Array<string>
+
+  /**
+   * 星期二的可维护时间列表。
+   */
+  Tuesday: Array<string>
+
+  /**
+   * 星期三的可维护时间列表。
+   */
+  Wednesday: Array<string>
+
+  /**
+   * 星期四的可维护时间列表。
+   */
+  Thursday: Array<string>
+
+  /**
+   * 星期五的可维护时间列表。
+   */
+  Friday: Array<string>
+
+  /**
+   * 星期六的可维护时间列表。
+   */
+  Saturday: Array<string>
+
+  /**
+   * 星期日的可维护时间列表。
+   */
+  Sunday: Array<string>
+
+  /**
+   * 最大数据延迟阈值
+   */
+  MaxDelayTime: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3152,13 +3217,18 @@ export interface DescribeAsyncRequestInfoResponse {
 }
 
 /**
- * DescribeRoGroups请求参数结构体
+ * DeleteAccounts返回参数结构体
  */
-export interface DescribeRoGroupsRequest {
+export interface DeleteAccountsResponse {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv或者cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  InstanceId: string
+  AsyncRequestId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3274,53 +3344,13 @@ export interface CreateRoInstanceIpRequest {
 }
 
 /**
- * DescribeTimeWindow返回参数结构体
+ * OpenWanService请求参数结构体
  */
-export interface DescribeTimeWindowResponse {
+export interface OpenWanServiceRequest {
   /**
-   * 星期一的可维护时间列表。
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
-  Monday: Array<string>
-
-  /**
-   * 星期二的可维护时间列表。
-   */
-  Tuesday: Array<string>
-
-  /**
-   * 星期三的可维护时间列表。
-   */
-  Wednesday: Array<string>
-
-  /**
-   * 星期四的可维护时间列表。
-   */
-  Thursday: Array<string>
-
-  /**
-   * 星期五的可维护时间列表。
-   */
-  Friday: Array<string>
-
-  /**
-   * 星期六的可维护时间列表。
-   */
-  Saturday: Array<string>
-
-  /**
-   * 星期日的可维护时间列表。
-   */
-  Sunday: Array<string>
-
-  /**
-   * 最大数据延迟阈值
-   */
-  MaxDelayTime: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -4022,33 +4052,20 @@ export interface DeviceMemInfo {
 }
 
 /**
- * UpgradeDBInstanceEngineVersion请求参数结构体
+ * 审计日志分析结果
  */
-export interface UpgradeDBInstanceEngineVersionRequest {
+export interface AuditLogAggregationResult {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
-   */
-  InstanceId: string
+      * 聚合维度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AggregationField: string
 
   /**
-   * 主实例数据库引擎版本，支持值包括：5.6 和 5.7。
-   */
-  EngineVersion: string
-
-  /**
-   * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
-   */
-  WaitSwitch?: number
-
-  /**
-   * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
-   */
-  UpgradeSubversion?: number
-
-  /**
-   * 延迟阈值。取值范围1~10
-   */
-  MaxDelayTime?: number
+      * 聚合桶的结果集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Buckets: Array<Bucket>
 }
 
 /**
@@ -4357,51 +4374,23 @@ export interface DisassociateSecurityGroupsResponse {
 }
 
 /**
- * 置放群组信息
+ * 审计日志聚合条件
  */
-export interface DeployGroupInfo {
+export interface AggregationCondition {
   /**
-   * 置放群组 ID。
+   * 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。
    */
-  DeployGroupId: string
+  AggregationField: string
 
   /**
-   * 置放群组名称。
+   * 偏移量。
    */
-  DeployGroupName: string
+  Offset?: number
 
   /**
-   * 创建时间。
+   * 该聚合字段下要返回聚合桶的数量，最大100。
    */
-  CreateTime: string
-
-  /**
-   * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
-   */
-  Quota: number
-
-  /**
-      * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Affinity: string
-
-  /**
-      * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LimitNum: number
-
-  /**
-   * 置放群组详细信息。
-   */
-  Description: string
-
-  /**
-      * 置放群组物理机型属性。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DevClass: string
+  Limit?: number
 }
 
 /**
@@ -5173,6 +5162,36 @@ export interface AuditLogFilter {
    * SQL 语句。支持传递多个sql语句。
    */
   Sqls?: Array<string>
+
+  /**
+   * 影响行数，格式为M-N，例如：10-200
+   */
+  AffectRowsSection?: string
+
+  /**
+   * 返回行数，格式为M-N，例如：10-200
+   */
+  SentRowsSection?: string
+
+  /**
+   * 执行时间，格式为M-N，例如：10-200
+   */
+  ExecTimeSection?: string
+
+  /**
+   * 锁等待时间，格式为M-N，例如：10-200
+   */
+  LockWaitTimeSection?: string
+
+  /**
+   * IO等待时间，格式为M-N，例如：10-200
+   */
+  IoWaitTimeSection?: string
+
+  /**
+   * 事务持续时间，格式为M-N，例如：10-200
+   */
+  TransactionLivingTimeSection?: string
 }
 
 /**
@@ -7191,6 +7210,36 @@ export interface ModifyBackupEncryptionStatusResponse {
 }
 
 /**
+ * UpgradeDBInstanceEngineVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceEngineVersionRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   */
+  InstanceId: string
+
+  /**
+   * 主实例数据库引擎版本，支持值包括：5.6 和 5.7。
+   */
+  EngineVersion: string
+
+  /**
+   * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
+   */
+  WaitSwitch?: number
+
+  /**
+   * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
+   */
+  UpgradeSubversion?: number
+
+  /**
+   * 延迟阈值。取值范围1~10
+   */
+  MaxDelayTime?: number
+}
+
+/**
  * DescribeDataBackupOverview请求参数结构体
  */
 export interface DescribeDataBackupOverviewRequest {
@@ -7238,6 +7287,22 @@ export interface ModifyDBInstanceProjectRequest {
    * 项目的 ID。
    */
   NewProjectId?: number
+}
+
+/**
+ * 聚合桶的信息
+ */
+export interface Bucket {
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+   * ip等于10.0.0.8访问了26次实例，即桶内文档数量。
+   */
+  Count: number
 }
 
 /**
@@ -8431,6 +8496,28 @@ export interface DescribeBackupSummariesRequest {
 }
 
 /**
+ * AnalyzeAuditLogs返回参数结构体
+ */
+export interface AnalyzeAuditLogsResponse {
+  /**
+      * 返回的聚合桶信息集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items?: Array<AuditLogAggregationResult>
+
+  /**
+      * 扫描的日志条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDBInstance返回参数结构体
  */
 export interface CreateDBInstanceResponse {
@@ -9392,6 +9479,54 @@ export interface RestartDBInstancesRequest {
    * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * 置放群组信息
+ */
+export interface DeployGroupInfo {
+  /**
+   * 置放群组 ID。
+   */
+  DeployGroupId: string
+
+  /**
+   * 置放群组名称。
+   */
+  DeployGroupName: string
+
+  /**
+   * 创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
+   */
+  Quota: number
+
+  /**
+      * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Affinity: string
+
+  /**
+      * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LimitNum: number
+
+  /**
+   * 置放群组详细信息。
+   */
+  Description: string
+
+  /**
+      * 置放群组物理机型属性。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DevClass: string
 }
 
 /**

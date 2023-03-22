@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUser", req, cb);
     }
     /**
+     * 此接口用于获取群组成员列表
+     */
+    async DescribeGroupMemberList(req, cb) {
+        return this.request("DescribeGroupMemberList", req, cb);
+    }
+    /**
      * 此接口修改群组信息
      */
     async ModifyGroup(req, cb) {
@@ -136,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchAddGroupMember", req, cb);
     }
     /**
-     * 此接口用于批量删除成员列表到指定群组列表
+     * 服务商信息获取
      */
-    async BatchDeleteGroupMember(req, cb) {
-        return this.request("BatchDeleteGroupMember", req, cb);
+    async DescribeDeveloper(req, cb) {
+        return this.request("DescribeDeveloper", req, cb);
     }
     /**
      * 获取房间事件,仅在课堂结束1小时内有效。
@@ -226,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetAppCustomContent", req, cb);
     }
     /**
-     * 此接口用于获取群组成员列表
+     * 此接口用于批量删除成员列表到指定群组列表
      */
-    async DescribeGroupMemberList(req, cb) {
-        return this.request("DescribeGroupMemberList", req, cb);
+    async BatchDeleteGroupMember(req, cb) {
+        return this.request("BatchDeleteGroupMember", req, cb);
     }
     /**
      * 获取当前房间的成员列表，房间结束或过期后无法使用。

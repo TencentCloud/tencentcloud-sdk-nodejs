@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotvideo.tencentcloudapi.com", "2021-11-25", clientConfig);
     }
     /**
+     * 呼叫TRTC设备
+     */
+    async CallTRTCDevice(req, cb) {
+        return this.request("CallTRTCDevice", req, cb);
+    }
+    /**
      * 发起AI推理请求
      */
     async CreateAIDetection(req, cb) {

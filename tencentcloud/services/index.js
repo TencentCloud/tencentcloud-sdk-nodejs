@@ -290,6 +290,8 @@ var oceanus_1 = require("./oceanus");
 Object.defineProperty(exports, "oceanus", { enumerable: true, get: function () { return oceanus_1.oceanus; } });
 var ocr_1 = require("./ocr");
 Object.defineProperty(exports, "ocr", { enumerable: true, get: function () { return ocr_1.ocr; } });
+var omics_1 = require("./omics");
+Object.defineProperty(exports, "omics", { enumerable: true, get: function () { return omics_1.omics; } });
 var organization_1 = require("./organization");
 Object.defineProperty(exports, "organization", { enumerable: true, get: function () { return organization_1.organization; } });
 var partners_1 = require("./partners");

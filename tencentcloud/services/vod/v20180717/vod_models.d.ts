@@ -8464,7 +8464,7 @@ export interface ConfirmEventsRequest {
       */
     ExtInfo?: string;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
 }
@@ -8505,7 +8505,7 @@ export interface CreateSubAppIdResponse {
     /**
       * 新创建的子应用 ID。
       */
-    SubAppId?: number;
+    SubAppId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12317,11 +12317,11 @@ export interface DescribeSubAppIdsResponse {
     /**
       * 子应用信息集合。
       */
-    SubAppIdInfoSet: Array<SubAppIdInfo>;
+    SubAppIdInfoSet?: Array<SubAppIdInfo>;
     /**
       * 子应用总数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

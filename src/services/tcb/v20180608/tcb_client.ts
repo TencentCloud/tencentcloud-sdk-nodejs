@@ -77,6 +77,7 @@ import {
   FreezeCloudBaseRunServersRequest,
   BaasPackageInfo,
   DescribeQuotaDataResponse,
+  DescribeGatewayCurveDataResponse,
   ActivityInfoItem,
   KVPair,
   SmsFreeQuota,
@@ -90,6 +91,7 @@ import {
   CreateStaticStoreRequest,
   CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
+  DescribeGatewayCurveDataRequest,
   CreateAuthDomainResponse,
   ModifyDatabaseACLRequest,
   DescribeEnvsRequest,
@@ -678,6 +680,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
+  }
+
+  /**
+   * 查询网关监控数据
+   */
+  async DescribeGatewayCurveData(
+    req: DescribeGatewayCurveDataRequest,
+    cb?: (error: string, rep: DescribeGatewayCurveDataResponse) => void
+  ): Promise<DescribeGatewayCurveDataResponse> {
+    return this.request("DescribeGatewayCurveData", req, cb)
   }
 
   /**

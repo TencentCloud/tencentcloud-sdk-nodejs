@@ -153,6 +153,16 @@ export interface BatchDeleteRecordRequest {
 }
 
 /**
+ * ModifyApp返回参数结构体
+ */
+export interface ModifyAppResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchRegister请求参数结构体
  */
 export interface BatchRegisterRequest {
@@ -273,6 +283,16 @@ export interface BatchCreateGroupWithMembersResponse {
 }
 
 /**
+ * AddGroupMember返回参数结构体
+ */
+export interface AddGroupMemberResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetRoomEvent返回参数结构体
  */
 export interface GetRoomEventResponse {
@@ -344,9 +364,33 @@ export interface ModifyUserProfileResponse {
 }
 
 /**
- * ModifyApp返回参数结构体
+ * GetWatermark返回参数结构体
  */
-export interface ModifyAppResponse {
+export interface GetWatermarkResponse {
+  /**
+      * 老师视频区域的水印参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TeacherLogo?: WatermarkConfig
+
+  /**
+      * 白板区域的水印参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BoardLogo?: WatermarkConfig
+
+  /**
+      * 背景图片配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackgroundPicture?: BackgroundPictureConfig
+
+  /**
+      * 文字水印配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Text?: TextMarkConfig
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -861,40 +905,6 @@ export interface DocumentInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime?: number
-}
-
-/**
- * GetWatermark返回参数结构体
- */
-export interface GetWatermarkResponse {
-  /**
-      * 老师视频区域的水印参数配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TeacherLogo?: WatermarkConfig
-
-  /**
-      * 白板区域的水印参数配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BoardLogo?: WatermarkConfig
-
-  /**
-      * 背景图片配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackgroundPicture?: BackgroundPictureConfig
-
-  /**
-      * 文字水印配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Text?: TextMarkConfig
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2224,6 +2234,11 @@ export interface LoginOriginIdResponse {
 }
 
 /**
+ * DescribeDeveloper请求参数结构体
+ */
+export type DescribeDeveloperRequest = null
+
+/**
  * 应用自定义内容
  */
 export interface AppCustomContent {
@@ -2469,9 +2484,9 @@ export interface CreateRoomResponse {
 }
 
 /**
- * AddGroupMember返回参数结构体
+ * DescribeDeveloper返回参数结构体
  */
-export interface AddGroupMemberResponse {
+export interface DescribeDeveloperResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

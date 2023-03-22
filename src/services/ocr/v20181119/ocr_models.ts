@@ -104,17 +104,17 @@ export interface BusinessCardOCRResponse {
   /**
    * 名片识别结果，具体内容请点击左侧链接。
    */
-  BusinessCardInfos?: Array<BusinessCardInfo>
+  BusinessCardInfos: Array<BusinessCardInfo>
 
   /**
    * 返回图像预处理后的图片，图像预处理未开启时返回内容为空。
    */
-  RetImageBase64?: string
+  RetImageBase64: string
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -355,62 +355,62 @@ export interface EstateCertOCRResponse {
   /**
    * 权利人
    */
-  Obligee?: string
+  Obligee: string
 
   /**
    * 共有情况
    */
-  Ownership?: string
+  Ownership: string
 
   /**
    * 坐落
    */
-  Location?: string
+  Location: string
 
   /**
    * 不动产单元号
    */
-  Unit?: string
+  Unit: string
 
   /**
    * 权利类型
    */
-  Type?: string
+  Type: string
 
   /**
    * 权利性质
    */
-  Property?: string
+  Property: string
 
   /**
    * 用途
    */
-  Usage?: string
+  Usage: string
 
   /**
    * 面积
    */
-  Area?: string
+  Area: string
 
   /**
    * 使用期限
    */
-  Term?: string
+  Term: string
 
   /**
    * 权利其他状况，多行会用换行符\n连接。
    */
-  Other?: string
+  Other: string
 
   /**
    * 图片旋转角度
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 不动产权号
    */
-  Number?: string
+  Number: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2207,12 +2207,12 @@ export interface FormulaOCRResponse {
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
    */
-  Angle: number
+  Angle?: number
 
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  FormulaInfos: Array<TextFormula>
+  FormulaInfos?: Array<TextFormula>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5326,7 +5326,7 @@ export interface FinanBillOCRResponse {
   /**
    * 金融票据整单识别结果，具体内容请点击左侧链接。
    */
-  FinanBillInfos: Array<FinanBillInfo>
+  FinanBillInfos?: Array<FinanBillInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1904,6 +1904,36 @@ export interface CreateProductResponse {
     RequestId?: string;
 }
 /**
+ * TRTC调用参数
+ */
+export interface TRTCParams {
+    /**
+      * 应用id，供TRTC SDK使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SDKAppId?: number;
+    /**
+      * 用户id，供TRTC SDK使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId?: string;
+    /**
+      * 用户id签名，供TRTC SDK使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserSig?: string;
+    /**
+      * 房间id，供TRTC SDK使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StrRoomId?: string;
+    /**
+      * 权限票据，供TRTC SDK使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateMapKey?: string;
+}
+/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -1933,13 +1963,17 @@ export interface DescribeDeviceDataHistoryResponse {
     RequestId?: string;
 }
 /**
- * ModifyDataForward返回参数结构体
+ * CallTRTCDevice请求参数结构体
  */
-export interface ModifyDataForwardResponse {
+export interface CallTRTCDeviceRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品ID
       */
-    RequestId?: string;
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
 }
 /**
  * CallDeviceActionAsync请求参数结构体
@@ -3444,6 +3478,19 @@ export interface ModifyModelDefinitionResponse {
     RequestId?: string;
 }
 /**
+ * CallTRTCDevice返回参数结构体
+ */
+export interface CallTRTCDeviceResponse {
+    /**
+      * TRTC SDK房间参数
+      */
+    TRTCParams?: TRTCParams;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyDeviceLogLevel返回参数结构体
  */
 export interface ModifyDeviceLogLevelResponse {
@@ -4222,6 +4269,15 @@ export interface DeviceCntStats {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ActiveCnt: number;
+}
+/**
+ * ModifyDataForward返回参数结构体
+ */
+export interface ModifyDataForwardResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCloudStorageUsers请求参数结构体

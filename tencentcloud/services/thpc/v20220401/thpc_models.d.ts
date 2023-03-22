@@ -413,7 +413,7 @@ export interface CreateClusterResponse {
       * 集群ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -474,7 +474,7 @@ export interface CreateClusterRequest {
       */
     SchedulerType?: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像。
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。
       */
     ImageId?: string;
     /**

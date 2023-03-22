@@ -168,6 +168,16 @@ it("lcic.v20220817.DescribeUser", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeGroupMemberList", async function () {
+    try {
+       const data = await client.DescribeGroupMemberList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.ModifyGroup", async function () {
     try {
        const data = await client.ModifyGroup({})
@@ -198,9 +208,9 @@ it("lcic.v20220817.BatchAddGroupMember", async function () {
     }
 })
 
-it("lcic.v20220817.BatchDeleteGroupMember", async function () {
+it("lcic.v20220817.DescribeDeveloper", async function () {
     try {
-       const data = await client.BatchDeleteGroupMember({})
+       const data = await client.DescribeDeveloper({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +358,9 @@ it("lcic.v20220817.SetAppCustomContent", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeGroupMemberList", async function () {
+it("lcic.v20220817.BatchDeleteGroupMember", async function () {
     try {
-       const data = await client.DescribeGroupMemberList({})
+       const data = await client.BatchDeleteGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

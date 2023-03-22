@@ -22,18 +22,20 @@ import {
   ModifyRoomResponse,
   DescribeAppDetailResponse,
   BatchDeleteRecordRequest,
+  ModifyAppResponse,
   BatchRegisterRequest,
   DeleteRoomResponse,
   ModifyUserProfileRequest,
   CreateGroupWithMembersRequest,
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
+  AddGroupMemberResponse,
   GetRoomEventResponse,
   CreateGroupWithMembersResponse,
   DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
-  ModifyAppResponse,
+  GetWatermarkResponse,
   LoginOriginIdRequest,
   BatchRegisterResponse,
   BindDocumentToRoomResponse,
@@ -54,7 +56,6 @@ import {
   DescribeGroupListRequest,
   GetRoomMessageRequest,
   DocumentInfo,
-  GetWatermarkResponse,
   DeleteDocumentResponse,
   DeleteRecordRequest,
   BatchDeleteGroupMemberResponse,
@@ -104,6 +105,7 @@ import {
   DescribeRoomStatisticsRequest,
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
+  DescribeDeveloperRequest,
   AppCustomContent,
   DeleteGroupResponse,
   DescribeSdkAppIdUsersRequest,
@@ -120,7 +122,7 @@ import {
   ModifyGroupResponse,
   DescribeGroupListResponse,
   CreateRoomResponse,
-  AddGroupMemberResponse,
+  DescribeDeveloperResponse,
   TextMarkConfig,
 } from "./lcic_models"
 
@@ -284,6 +286,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于获取群组成员列表
+   */
+  async DescribeGroupMemberList(
+    req: DescribeGroupMemberListRequest,
+    cb?: (error: string, rep: DescribeGroupMemberListResponse) => void
+  ): Promise<DescribeGroupMemberListResponse> {
+    return this.request("DescribeGroupMemberList", req, cb)
+  }
+
+  /**
    * 此接口修改群组信息
    */
   async ModifyGroup(
@@ -314,13 +326,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于批量删除成员列表到指定群组列表
+   * 服务商信息获取
    */
-  async BatchDeleteGroupMember(
-    req: BatchDeleteGroupMemberRequest,
-    cb?: (error: string, rep: BatchDeleteGroupMemberResponse) => void
-  ): Promise<BatchDeleteGroupMemberResponse> {
-    return this.request("BatchDeleteGroupMember", req, cb)
+  async DescribeDeveloper(
+    req?: DescribeDeveloperRequest,
+    cb?: (error: string, rep: DescribeDeveloperResponse) => void
+  ): Promise<DescribeDeveloperResponse> {
+    return this.request("DescribeDeveloper", req, cb)
   }
 
   /**
@@ -464,13 +476,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于获取群组成员列表
+   * 此接口用于批量删除成员列表到指定群组列表
    */
-  async DescribeGroupMemberList(
-    req: DescribeGroupMemberListRequest,
-    cb?: (error: string, rep: DescribeGroupMemberListResponse) => void
-  ): Promise<DescribeGroupMemberListResponse> {
-    return this.request("DescribeGroupMemberList", req, cb)
+  async BatchDeleteGroupMember(
+    req: BatchDeleteGroupMemberRequest,
+    cb?: (error: string, rep: BatchDeleteGroupMemberResponse) => void
+  ): Promise<BatchDeleteGroupMemberResponse> {
+    return this.request("BatchDeleteGroupMember", req, cb)
   }
 
   /**

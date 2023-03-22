@@ -114,8 +114,9 @@ import {
   ModifyPushChannelResponse,
   CallDeviceActionSyncResponse,
   CreateProductResponse,
+  TRTCParams,
   DescribeDeviceDataHistoryResponse,
-  ModifyDataForwardResponse,
+  CallTRTCDeviceRequest,
   CallDeviceActionAsyncRequest,
   DescribeAIModelsRequest,
   RetryDeviceFirmwareTaskResponse,
@@ -191,6 +192,7 @@ import {
   ImportModelDefinitionRequest,
   CreateTaskFileUrlRequest,
   ModifyModelDefinitionResponse,
+  CallTRTCDeviceResponse,
   ModifyDeviceLogLevelResponse,
   CreateDataForwardRequest,
   BatchUpdateFirmwareRequest,
@@ -232,6 +234,7 @@ import {
   DeleteDeviceResponse,
   CreateTaskFileUrlResponse,
   DeviceCntStats,
+  ModifyDataForwardResponse,
   DescribeCloudStorageUsersRequest,
   ModifyDataForwardStatusRequest,
   DescribeFirmwareTaskRequest,
@@ -246,6 +249,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("iotvideo.tencentcloudapi.com", "2021-11-25", clientConfig)
+  }
+
+  /**
+   * 呼叫TRTC设备
+   */
+  async CallTRTCDevice(
+    req: CallTRTCDeviceRequest,
+    cb?: (error: string, rep: CallTRTCDeviceResponse) => void
+  ): Promise<CallTRTCDeviceResponse> {
+    return this.request("CallTRTCDevice", req, cb)
   }
 
   /**

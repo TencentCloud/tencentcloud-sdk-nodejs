@@ -1867,6 +1867,46 @@ export interface DescribeQuotaDataResponse {
 }
 
 /**
+ * DescribeGatewayCurveData返回参数结构体
+ */
+export interface DescribeGatewayCurveDataResponse {
+  /**
+   * 监控类型
+   */
+  MetricName: string
+
+  /**
+   * 监控起始时间
+   */
+  StartTime: string
+
+  /**
+   * 监控结束时间
+   */
+  EndTime: string
+
+  /**
+   * 监控数据间隔
+   */
+  Period: number
+
+  /**
+   * 监控值
+   */
+  Values: Array<number>
+
+  /**
+   * 监控时间
+   */
+  Time: Array<number>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 活动信息
  */
 export interface ActivityInfoItem {
@@ -2164,6 +2204,46 @@ export interface DeleteCloudBaseProjectLatestVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeGatewayCurveData请求参数结构体
+ */
+export interface DescribeGatewayCurveDataRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+
+  /**
+   * 网关id
+   */
+  GatewayId: string
+
+  /**
+   * 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502
+   */
+  MetricName: string
+
+  /**
+   * 监控起始时间
+   */
+  StartTime: string
+
+  /**
+   * 监控结束时间
+   */
+  EndTime: string
+
+  /**
+   * 网关版本
+   */
+  GatewayVersion?: string
+
+  /**
+   * 网关路由名称
+   */
+  GatewayRoute?: string
 }
 
 /**

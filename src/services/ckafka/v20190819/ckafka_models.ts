@@ -7045,6 +7045,18 @@ export interface KafkaParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MsgMultiple?: number
+
+  /**
+      * 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写"META_SYNC_INSTANCE_TYPE", 同步元数据及全部topic内消息的填写"META_AND_DATA_SYNC_INSTANCE_TYPE"; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写"DATA_SYNC_TYPE"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConnectorSyncType?: string
+
+  /**
+      * 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeepPartition?: boolean
 }
 
 /**

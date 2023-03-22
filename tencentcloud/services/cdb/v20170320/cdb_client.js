@@ -456,6 +456,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopDBImportJob", req, cb);
     }
     /**
+     * 在不同过滤条件下的审计日志结果集中，选定特定的数据列进行聚合统计。
+     */
+    async AnalyzeAuditLogs(req, cb) {
+        return this.request("AnalyzeAuditLogs", req, cb);
+    }
+    /**
      * 本接口(CreateAccounts)用于创建云数据库的账户，需要指定新的账户名和域名，以及所对应的密码，同时可以设置账号的备注信息以及最大可用连接数。
      */
     async CreateAccounts(req, cb) {
@@ -624,7 +630,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
-     * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
+     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+
+本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
      */
     async InitDBInstances(req, cb) {
         return this.request("InitDBInstances", req, cb);

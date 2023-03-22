@@ -2886,7 +2886,7 @@ export interface GroupMemberInfo {
  */
 export interface CreatePolicyRequest {
   /**
-   * 策略名
+   * 策略名称。长度为1~128个字符，可包含英文字母、数字和+=,.@-_。
    */
   PolicyName: string
 
@@ -3049,7 +3049,7 @@ export interface CreateRoleResponse {
       * 角色ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RoleId: string
+  RoleId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3448,7 +3448,7 @@ export interface GetRoleResponse {
  */
 export interface CreateRoleRequest {
   /**
-   * 角色名称
+   * 角色名称。长度为1~128个字符，可包含英文字母、数字和+=,.@-_。
    */
   RoleName: string
 
@@ -3718,32 +3718,32 @@ export interface AddUserResponse {
   /**
    * 子用户 UIN
    */
-  Uin: number
+  Uin?: number
 
   /**
    * 子用户用户名
    */
-  Name: string
+  Name?: string
 
   /**
    * 如果输入参数组合为自动生成随机密码，则返回生成的密码
    */
-  Password: string
+  Password?: string
 
   /**
    * 子用户密钥 ID
    */
-  SecretId: string
+  SecretId?: string
 
   /**
    * 子用户密钥 Key
    */
-  SecretKey: string
+  SecretKey?: string
 
   /**
    * 子用户 UID
    */
-  Uid: number
+  Uid?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4046,7 +4046,7 @@ export interface CreateGroupResponse {
   /**
    * 用户组 ID
    */
-  GroupId: number
+  GroupId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
