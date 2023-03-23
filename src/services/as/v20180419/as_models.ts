@@ -233,9 +233,11 @@ export interface ModifyAutoScalingGroupRequest {
   Zones?: Array<string>
 
   /**
-      * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。
-<br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
-<br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
+      * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。部分成功的伸缩活动判定为一次失败活动。
+<br><li>
+IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
+<br><li>
+INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
 <br><li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。
       */
   RetryPolicy?: string
@@ -816,6 +818,7 @@ export interface DescribeScalingPoliciesRequest {
 <li> auto-scaling-policy-id - String - 是否必填：否 -（过滤条件）按照告警策略ID过滤。</li>
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 <li> scaling-policy-name - String - 是否必填：否 -（过滤条件）按照告警策略名称过滤。</li>
+<li> scaling-policy-type - String - 是否必填：否 -（过滤条件）按照告警策略类型过滤，取值范围为SIMPLE，TARGET_TRACKING。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingPolicyIds`和`Filters`。
       */
   Filters?: Array<Filter>
@@ -925,7 +928,7 @@ export interface ExecuteScalingPolicyResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1000,7 +1003,7 @@ export interface CreateScalingPolicyResponse {
   /**
    * 告警触发策略ID。
    */
-  AutoScalingPolicyId: string
+  AutoScalingPolicyId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1676,29 +1679,66 @@ export interface ScalingPolicy {
   AutoScalingPolicyId: string
 
   /**
+      * 告警触发策略类型。取值：
+- SIMPLE：简单策略
+- TARGET_TRACKING：目标追踪策略
+      */
+  ScalingPolicyType?: string
+
+  /**
    * 告警触发策略名称。
    */
   ScalingPolicyName: string
 
   /**
-   * 告警触发后，期望实例数修改方式。取值 ：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
+   * 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
    */
   AdjustmentType: string
 
   /**
-   * 告警触发后，期望实例数的调整值。
+   * 告警触发后，期望实例数的调整值，仅适用于简单策略。
    */
   AdjustmentValue: number
 
   /**
-   * 冷却时间。
+   * 冷却时间，仅适用于简单策略。
    */
   Cooldown: number
 
   /**
-   * 告警监控指标。
+   * 简单告警触发策略告警监控指标，仅适用于简单策略。
    */
   MetricAlarm: MetricAlarm
+
+  /**
+      * 预定义监控项，仅适用于目标追踪策略。取值范围：<br><li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li><li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li><li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li><li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li><li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PredefinedMetricType: string
+
+  /**
+      * 目标值，仅适用于目标追踪策略。<br><li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li><li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetValue: number
+
+  /**
+      * 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EstimatedInstanceWarmup: number
+
+  /**
+      * 是否禁用缩容，仅适用于目标追踪策略。取值范围：<br><li>true：目标追踪策略仅触发扩容</li><li>false：目标追踪策略触发扩容和缩容</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisableScaleIn: boolean
+
+  /**
+      * 告警监控指标列表，仅适用于目标追踪策略。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricAlarms: Array<MetricAlarm>
 
   /**
    * 通知组ID，即为用户组ID集合。
@@ -1922,24 +1962,44 @@ export interface ModifyScalingPolicyRequest {
   ScalingPolicyName?: string
 
   /**
-   * 告警触发后，期望实例数修改方式。取值 ：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
+   * 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
    */
   AdjustmentType?: string
 
   /**
-   * 告警触发后，期望实例数的调整值。取值：<br><li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。
+   * 告警触发后，期望实例数的调整值，仅适用于简单策略。<br><li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。
    */
   AdjustmentValue?: number
 
   /**
-   * 冷却时间，单位为秒。
+   * 冷却时间，仅适用于简单策略，单位为秒。
    */
   Cooldown?: number
 
   /**
-   * 告警监控指标。
+   * 告警监控指标，仅适用于简单策略。
    */
   MetricAlarm?: MetricAlarm
+
+  /**
+   * 预定义监控项，仅适用于目标追踪策略。取值范围：<br><li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li><li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li><li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li><li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li><li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
+   */
+  PredefinedMetricType?: string
+
+  /**
+   * 目标值，仅适用于目标追踪策略。<br><li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li><li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
+   */
+  TargetValue?: number
+
+  /**
+   * 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600。
+   */
+  EstimatedInstanceWarmup?: number
+
+  /**
+   * 是否禁用缩容，仅适用于目标追踪策略。取值范围：<br><li>true：目标追踪策略仅触发扩容</li><li>false：目标追踪策略触发扩容和缩容</li>
+   */
+  DisableScaleIn?: boolean
 
   /**
       * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
@@ -2106,7 +2166,7 @@ export interface CreateAutoScalingGroupRequest {
   Zones?: Array<string>
 
   /**
-      * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。
+      * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。部分成功的伸缩活动判定为一次失败活动。
 <br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
 <br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
 <br><li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。
@@ -2547,6 +2607,15 @@ export interface Instance {
    * 伸缩组名称
    */
   AutoScalingGroupName: string
+
+  /**
+      * 预热状态，取值如下：
+<li>WAITING_ENTER_WARMUP：等待进入预热
+<li>NO_NEED_WARMUP：无需预热
+<li>IN_WARMUP：预热中
+<li>AFTER_WARMUP：完成预热
+      */
+  WarmupStatus: string
 }
 
 /**
@@ -3043,7 +3112,7 @@ export interface CreateAutoScalingGroupResponse {
   /**
    * 伸缩组ID
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3121,24 +3190,49 @@ export interface CreateScalingPolicyRequest {
   ScalingPolicyName: string
 
   /**
-   * 告警触发后，期望实例数修改方式。取值 ：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
+   * 告警触发策略类型，默认类型为SIMPLE。取值范围：<br><li>SIMPLE：简单策略</li><li>TARGET_TRACKING：目标追踪策略</li>
    */
-  AdjustmentType: string
+  ScalingPolicyType?: string
 
   /**
-   * 告警触发后，期望实例数的调整值。取值：<br><li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。
+   * 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
    */
-  AdjustmentValue: number
+  AdjustmentType?: string
 
   /**
-   * 告警监控指标。
+   * 告警触发后，期望实例数的调整值，仅适用于简单策略。<br><li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。
    */
-  MetricAlarm: MetricAlarm
+  AdjustmentValue?: number
 
   /**
-   * 冷却时间，单位为秒。默认冷却时间300秒。
+   * 冷却时间，单位为秒，仅适用于简单策略。默认冷却时间300秒。
    */
   Cooldown?: number
+
+  /**
+   * 告警监控指标，仅适用于简单策略。
+   */
+  MetricAlarm?: MetricAlarm
+
+  /**
+   * 预定义监控项，仅适用于目标追踪策略。取值范围：<br><li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li><li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li><li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li><li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li><li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
+   */
+  PredefinedMetricType?: string
+
+  /**
+   * 目标值，仅适用于目标追踪策略。<br><li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li><li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
+   */
+  TargetValue?: number
+
+  /**
+   * 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600，默认预热时间300秒。
+   */
+  EstimatedInstanceWarmup?: number
+
+  /**
+   * 是否禁用缩容，仅适用于目标追踪策略，默认值为 false。取值范围：<br><li>true：目标追踪策略仅触发扩容</li><li>false：目标追踪策略触发扩容和缩容</li>
+   */
+  DisableScaleIn?: boolean
 
   /**
       * 此参数已不再生效，请使用[创建通知](https://cloud.tencent.com/document/api/377/33185)。
@@ -3376,6 +3470,11 @@ export interface MetricAlarm {
    * 统计类型，可选字段如下：<br><li>AVERAGE：平均值</li><li>MAXIMUM：最大值<li>MINIMUM：最小值</li><br> 默认取值：AVERAGE
    */
   Statistic?: string
+
+  /**
+   * 精确告警阈值，本参数不作为入参输入，仅用作查询接口出参：<br><li>CPU_UTILIZATION：(0, 100]，单位：%</li><li>MEM_UTILIZATION：(0, 100]，单位：%</li><li>LAN_TRAFFIC_OUT：>0，单位：Mbps </li><li>LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>WAN_TRAFFIC_IN：>0，单位：Mbps</li>
+   */
+  PreciseThreshold?: number
 }
 
 /**
@@ -3676,12 +3775,12 @@ export interface DescribeScalingPoliciesResponse {
   /**
    * 弹性伸缩告警触发策略详细信息列表。
    */
-  ScalingPolicySet: Array<ScalingPolicy>
+  ScalingPolicySet?: Array<ScalingPolicy>
 
   /**
    * 符合条件的通知数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3992,7 +4091,7 @@ export interface DeleteLifecycleHookResponse {
  */
 export interface ExecuteScalingPolicyRequest {
   /**
-   * 告警伸缩策略ID
+   * 告警伸缩策略ID，不支持目标追踪策略。
    */
   AutoScalingPolicyId: string
 

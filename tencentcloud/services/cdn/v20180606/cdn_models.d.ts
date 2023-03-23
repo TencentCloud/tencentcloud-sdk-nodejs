@@ -5330,30 +5330,30 @@ export interface CreateVerifyRecordResponse {
     /**
       * 子解析
       */
-    SubDomain: string;
+    SubDomain?: string;
     /**
       * 解析值
       */
-    Record: string;
+    Record?: string;
     /**
       * 解析类型
       */
-    RecordType: string;
+    RecordType?: string;
     /**
       * 文件验证 URL 指引
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileVerifyUrl: string;
+    FileVerifyUrl?: string;
     /**
       * 文件校验域名列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileVerifyDomains: Array<string>;
+    FileVerifyDomains?: Array<string>;
     /**
       * 文件校验文件名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileVerifyName: string;
+    FileVerifyName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

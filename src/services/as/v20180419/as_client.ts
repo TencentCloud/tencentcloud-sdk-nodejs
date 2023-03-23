@@ -175,6 +175,7 @@ export class Client extends AbstractClient {
 
 * 可以根据伸缩策略ID执行伸缩策略。
 * 伸缩策略所属伸缩组处于伸缩活动时，会拒绝执行伸缩策略。
+* 本接口不支持执行目标追踪策略。
      */
   async ExecuteScalingPolicy(
     req: ExecuteScalingPolicyRequest,

@@ -92,13 +92,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGrafanaInstance", req, cb);
     }
     /**
-     * 创建云监控告警策略
+     * 创建告警策略
      */
     async CreateAlarmPolicy(req, cb) {
         return this.request("CreateAlarmPolicy", req, cb);
     }
     /**
-     * 查询云监控产品列表，支持云服务器CVM、云数据库、云消息队列、负载均衡、容器服务、专线等云产品。
+     * 查询腾讯云可观测平台云产品列表，支持云服务器CVM、云数据库、云消息队列、负载均衡、容器服务、专线等云产品。
      */
     async DescribeProductList(req, cb) {
         return this.request("DescribeProductList", req, cb);
@@ -200,7 +200,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmEvents", req, cb);
     }
     /**
-     * 云监控告警删除告警通知模板
+     * 删除告警通知模板
      */
     async DeleteAlarmNotices(req, cb) {
         return this.request("DeleteAlarmNotices", req, cb);
@@ -250,7 +250,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteServiceDiscovery", req, cb);
     }
     /**
-     * 与云监控融合的2.0实例关联集群
+     * 与腾讯云可观测融合的2.0实例关联集群
      */
     async CreatePrometheusClusterAgent(req, cb) {
         return this.request("CreatePrometheusClusterAgent", req, cb);
@@ -354,7 +354,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateServiceDiscovery", req, cb);
     }
     /**
-     * 云监控支持多种类型的监控，此接口列出支持的所有类型
+     * 腾讯云可观测平台支持多种类型的监控，此接口列出支持的所有类型
      */
     async DescribeMonitorTypes(req, cb) {
         return this.request("DescribeMonitorTypes", req, cb);
@@ -465,7 +465,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendCustomAlarmMsg", req, cb);
     }
     /**
-     * 云监控告警修改告警策略绑定的告警通知模板
+     * 告警修改告警策略绑定的告警通知模板
      */
     async ModifyAlarmPolicyNotice(req, cb) {
         return this.request("ModifyAlarmPolicyNotice", req, cb);
@@ -679,7 +679,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmMetrics", req, cb);
     }
     /**
-     * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+     * 修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
      */
     async ModifyAlarmPolicyTasks(req, cb) {
         return this.request("ModifyAlarmPolicyTasks", req, cb);
@@ -875,7 +875,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusTemp", req, cb);
     }
     /**
-     * 云监控告警获取告警通知模板所有回调URL
+     * 获取告警通知模板所有回调URL
      */
     async DescribeAlarmNoticeCallbacks(req, cb) {
         return this.request("DescribeAlarmNoticeCallbacks", req, cb);

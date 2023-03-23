@@ -898,6 +898,11 @@ export interface ModifyOutputInfo {
 当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
       */
   AllowIpList?: Array<string>
+
+  /**
+   * 最大拉流并发数，最大4，默认4。
+   */
+  MaxConcurrent?: number
 }
 
 /**
@@ -4753,6 +4758,11 @@ export interface CreateOutputInfo {
 当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
       */
   AllowIpList?: Array<string>
+
+  /**
+   * 最大拉流并发数，最大4，默认4。
+   */
+  MaxConcurrent?: number
 }
 
 /**
@@ -7361,6 +7371,11 @@ export interface DescribeOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HLSPullSettings: DescribeOutputHLSPullSettings
+
+  /**
+   * 最大拉流并发数，最大为4，默认4。
+   */
+  MaxConcurrent?: number
 }
 
 /**

@@ -278,6 +278,16 @@ it("trtc.v20190722.DismissRoom", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeTrtcRoomUsage", async function () {
+    try {
+       const data = await client.DescribeTrtcRoomUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeRecordStatistic", async function () {
     try {
        const data = await client.DescribeRecordStatistic({})

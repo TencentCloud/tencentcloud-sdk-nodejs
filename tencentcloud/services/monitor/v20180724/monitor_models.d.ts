@@ -418,7 +418,7 @@ export interface SendCustomAlarmMsgRequest {
       */
     Module: string;
     /**
-      * 消息策略ID，在云监控自定义消息页面配置
+      * 消息策略ID，在自定义消息页面配置
       */
     PolicyId: string;
     /**
@@ -2037,12 +2037,12 @@ export interface DescribeProductListResponse {
       * 产品信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProductList: Array<ProductSimple>;
+    ProductList?: Array<ProductSimple>;
     /**
       * 产品总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5579,11 +5579,11 @@ export interface CreateAlarmPolicyResponse {
     /**
       * 告警策略 ID
       */
-    PolicyId: string;
+    PolicyId?: string;
     /**
       * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
       */
-    OriginId: string;
+    OriginId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6129,11 +6129,11 @@ export interface DescribeMonitorTypesResponse {
     /**
       * 监控类型，云产品监控为 MT_QCE
       */
-    MonitorTypes: Array<string>;
+    MonitorTypes?: Array<string>;
     /**
       * 监控类型详情
       */
-    MonitorTypeInfos: Array<MonitorTypeInfo>;
+    MonitorTypeInfos?: Array<MonitorTypeInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7863,6 +7863,10 @@ export interface ModifyAlarmPolicyNoticeRequest {
       * 告警策略ID数组，支持给多个告警策略批量绑定通知模板。最多30个。
       */
     PolicyIds?: Array<string>;
+    /**
+      * 告警分级通知规则配置
+      */
+    HierarchicalNotices?: Array<AlarmHierarchicalNotice>;
 }
 /**
  * DeleteAlarmPolicy请求参数结构体

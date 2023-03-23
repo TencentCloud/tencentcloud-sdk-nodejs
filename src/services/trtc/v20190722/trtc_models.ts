@@ -311,6 +311,16 @@ export interface WaterMarkChar {
 }
 
 /**
+ * DescribeTrtcRoomUsage返回参数结构体
+ */
+export interface DescribeTrtcRoomUsageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopPublishCdnStream返回参数结构体
  */
 export interface StopPublishCdnStreamResponse {
@@ -2694,6 +2704,11 @@ export interface DescribePictureResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeTrtcRoomUsage请求参数结构体
+ */
+export type DescribeTrtcRoomUsageRequest = null
 
 /**
  * DescribeTrtcMcuTranscodeTime请求参数结构体

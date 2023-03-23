@@ -815,19 +815,22 @@ export interface ModifySecurityPolicyRequest {
     TemplateId?: string;
 }
 /**
- * 无
+ * DescribeDDoSAttackEvent返回参数结构体
  */
-export interface Waf {
+export interface DescribeDDoSAttackEventResponse {
     /**
-      * Waf开关，取值为：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+      * DDOS攻击事件数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Switch: string;
+    Data?: Array<DDoSAttackEvent>;
     /**
-      * 策略ID。
+      * 查询结果的总条数。
       */
-    PolicyId?: number;
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyApplicationProxyRuleStatus返回参数结构体
@@ -2184,6 +2187,61 @@ export interface RulesSettingAction {
     Properties: Array<RulesProperties>;
 }
 /**
+ * DDoS攻击事件对象
+ */
+export interface DDoSAttackEvent {
+    /**
+      * 事件ID。
+      */
+    EventId: string;
+    /**
+      * 攻击类型(对应交互事件名称)。
+      */
+    AttackType: string;
+    /**
+      * 攻击状态。
+      */
+    AttackStatus: number;
+    /**
+      * 攻击最大带宽。
+      */
+    AttackMaxBandWidth: number;
+    /**
+      * 攻击包速率峰值。
+      */
+    AttackPacketMaxRate: number;
+    /**
+      * 攻击开始时间，单位为s。
+      */
+    AttackStartTime: number;
+    /**
+      * 攻击结束时间，单位为s。
+      */
+    AttackEndTime: number;
+    /**
+      * DDoS策略组ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyId: number;
+    /**
+      * 站点ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: string;
+    /**
+      * 攻击事件所属地区，取值有：
+<li>overseas：全球（除中国大陆地区）数据；</li>
+<li>mainland：中国大陆地区数据。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Area: string;
+    /**
+      * 封禁解封信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DDoSBlockData: Array<DDoSBlockData>;
+}
+/**
  * 存储客户端请求IP的头部信息配置
  */
 export interface ClientIpHeader {
@@ -2827,20 +2885,31 @@ export interface DescribeTopL7AnalysisDataRequest {
     EndTime: string;
     /**
       * 查询的指标，取值有：
-<li> l7Flow_outFlux_country：请求的国家；</li>
-<li> l7Flow_outFlux_statusCode：请求的状态码；</li>
-<li> l7Flow_outFlux_domain：请求域名；</li>
-<li> l7Flow_outFlux_url：请求的URL; </li>
-<li> l7Flow_outFlux_resourceType：请求的资源类型；</li>
-<li> l7Flow_outFlux_sip：客户端的源IP；</li>
-<li> l7Flow_outFlux_referers：refer信息；</li>
-<li> l7Flow_outFlux_ua_device：设备类型; </li>
-<li> l7Flow_outFlux_ua_browser：浏览器类型；</li>
-<li> l7Flow_outFlux_us_os：操作系统类型。</li>
+<li> l7Flow_outFlux_country：按国家维度统计流量指标；</li>
+<li> l7Flow_outFlux_statusCode：按状态码维度统计流量指标；</li>
+<li> l7Flow_outFlux_domain：按域名维度统计流量指标；</li>
+<li> l7Flow_outFlux_url：按URL维度统计流量指标; </li>
+<li> l7Flow_outFlux_resourceType：按资源类型维度统计流量指标；</li>
+<li> l7Flow_outFlux_sip：按客户端的源IP维度统计流量指标；</li>
+<li> l7Flow_outFlux_referers：按refer信息维度统计流量指标；</li>
+<li> l7Flow_outFlux_ua_device：按设备类型维度统计流量指标; </li>
+<li> l7Flow_outFlux_ua_browser：按浏览器类型维度统计流量指标；</li>
+<li> l7Flow_outFlux_us_os：按操作系统类型维度统计流量指标；</li>
+<li> l7Flow_request_country：按国家维度统计请求数指标；</li>
+<li> l7Flow_request_statusCode：按状态码维度统计请求数指标；</li>
+<li> l7Flow_request_domain：按域名维度统计请求数指标；</li>
+<li> l7Flow_request_url：按URL维度统计请求数指标; </li>
+<li> l7Flow_request_resourceType：按资源类型维度统计请求数指标；</li>
+<li> l7Flow_request_sip：按客户端的源IP维度统计请求数指标；</li>
+<li> l7Flow_request_refere请求的rs：按refer信息维度统计请求数指标；</li>
+<li> l7Flow_request_ua_device：按设备类型维度统计请求数指标; </li>
+<li> l7Flow_request_ua_browser：按浏览器类型维度统计请求数指标；</li>
+<li> l7Flow_request_us_os：按操作系统类型维度统计请求数指标。</li>
+
       */
     MetricName: string;
     /**
-      * 站点集合，不填默认选择全部站点。
+      * 站点集合，此参数必填，不填默认查询为空。
       */
     ZoneIds?: Array<string>;
     /**
@@ -3223,6 +3292,23 @@ export interface SpeedTestingDetailData {
       * 地域性能数据。
       */
     DistrictStatistics: Array<DistrictStatistics>;
+}
+/**
+ * DDoS封禁解封信息
+ */
+export interface DDoSBlockData {
+    /**
+      * 开始时间，采用unix时间戳。
+      */
+    StartTime: number;
+    /**
+      * 结束时间，采用unix时间戳, 为0表示还处于封禁中。
+      */
+    EndTime: number;
+    /**
+      * 封禁受影响区域。
+      */
+    BlockArea: string;
 }
 /**
  * 自定义 nameservers
@@ -3887,6 +3973,21 @@ export interface SpeedTestingQuota {
     AvailableTestRuns: number;
 }
 /**
+ * 无
+ */
+export interface Waf {
+    /**
+      * Waf开关，取值为：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+      */
+    Switch: string;
+    /**
+      * 策略ID。
+      */
+    PolicyId?: number;
+}
+/**
  * ModifyRule返回参数结构体
  */
 export interface ModifyRuleResponse {
@@ -4314,6 +4415,35 @@ export interface CachePrefresh {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Percent?: number;
+}
+/**
+ * DescribePurgeTasks请求参数结构体
+ */
+export interface DescribePurgeTasksRequest {
+    /**
+      * 字段已废弃，请使用Filters中的zone-id。
+      */
+    ZoneId?: string;
+    /**
+      * 查询起始时间。
+      */
+    StartTime?: string;
+    /**
+      * 查询结束时间。
+      */
+    EndTime?: string;
+    /**
+      * 分页查询偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 分页查限制数目，默认值：20，最大值：1000。
+      */
+    Limit?: number;
+    /**
+      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-xxx，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
+      */
+    Filters?: Array<AdvancedFilter>;
 }
 /**
  * DescribeWebProtectionClientIpList返回参数结构体
@@ -6291,12 +6421,12 @@ export interface DescribeTopL7AnalysisDataResponse {
     /**
       * 查询结果的总条数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 七层流量前topN数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: Array<TopDataRecord>;
+    Data?: Array<TopDataRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7265,33 +7395,56 @@ export interface DescribeAvailablePlansResponse {
     RequestId?: string;
 }
 /**
- * DescribePurgeTasks请求参数结构体
+ * DescribeDDoSAttackEvent请求参数结构体
  */
-export interface DescribePurgeTasksRequest {
+export interface DescribeDDoSAttackEventRequest {
     /**
-      * 字段已废弃，请使用Filters中的zone-id。
+      * 开始时间。
       */
-    ZoneId?: string;
+    StartTime: string;
     /**
-      * 查询起始时间。
+      * 结束时间。
       */
-    StartTime?: string;
+    EndTime: string;
     /**
-      * 查询结束时间。
+      * ddos策略组集合，不填默认选择全部策略。
       */
-    EndTime?: string;
+    PolicyIds?: Array<number>;
     /**
-      * 分页查询偏移量，默认为0。
+      * 站点集合，此参数必填，不填默认查询为空。
       */
-    Offset?: number;
+    ZoneIds?: Array<string>;
     /**
-      * 分页查限制数目，默认值：20，最大值：1000。
+      * 分页查询的限制数目，默认值为20，最大查询条目为1000。
       */
     Limit?: number;
     /**
-      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-xxx，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
+      * 分页的偏移量，默认值为0。
       */
-    Filters?: Array<AdvancedFilter>;
+    Offset?: number;
+    /**
+      * 是否展示详细信息。
+      */
+    ShowDetail?: boolean;
+    /**
+      * 数据归属地区，取值有：
+<li>overseas：全球（除中国大陆地区）数据；</li>
+<li>mainland：中国大陆地区数据；</li>
+<li>global：全球数据；</li>不填默认取值为global。
+      */
+    Area?: string;
+    /**
+      * 排序字段，取值有：
+<li>MaxBandWidth：带宽峰值；</li>
+<li>AttackStartTime：攻击开始时间。</li>不填默认值为：AttackStartTime。
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，取值有：
+<li>asc：升序方式；</li>
+<li>desc：降序方式。</li>不填默认值为：desc。
+      */
+    OrderType?: string;
 }
 /**
  * 源站组信息

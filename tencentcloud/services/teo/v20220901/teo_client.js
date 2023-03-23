@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindZoneToPlan", req, cb);
     }
     /**
+     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+     */
+    async DescribeDDoSAttackEvent(req, cb) {
+        return this.request("DescribeDDoSAttackEvent", req, cb);
+    }
+    /**
      * 修改加速域名信息
      */
     async ModifyAccelerationDomain(req, cb) {

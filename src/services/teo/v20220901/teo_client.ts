@@ -52,7 +52,7 @@ import {
   DescribeClientRuleListResponse,
   DescribeIdentificationsResponse,
   ModifySecurityPolicyRequest,
-  Waf,
+  DescribeDDoSAttackEventResponse,
   ModifyApplicationProxyRuleStatusResponse,
   DescribeClientRuleListRequest,
   ModifyZoneSettingRequest,
@@ -105,6 +105,7 @@ import {
   DescribeRulesSettingResponse,
   RuleExtraParameter,
   RulesSettingAction,
+  DDoSAttackEvent,
   ClientIpHeader,
   DescribeDDoSAttackTopDataRequest,
   Quic,
@@ -145,6 +146,7 @@ import {
   WebSocket,
   DescribeWebProtectionTopDataRequest,
   SpeedTestingDetailData,
+  DDoSBlockData,
   VanityNameServers,
   RuleItem,
   ModifySecurityWafGroupPolicyResponse,
@@ -170,6 +172,7 @@ import {
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
   SpeedTestingQuota,
+  Waf,
   ModifyRuleResponse,
   CheckCertificateResponse,
   AscriptionInfo,
@@ -189,6 +192,7 @@ import {
   Identification,
   DescribeDDoSAttackDataRequest,
   CachePrefresh,
+  DescribePurgeTasksRequest,
   DescribeWebProtectionClientIpListResponse,
   DescribeTimingL7AnalysisDataResponse,
   ImageOptimize,
@@ -311,7 +315,7 @@ import {
   WafGroup,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
-  DescribePurgeTasksRequest,
+  DescribeDDoSAttackEventRequest,
   OriginGroup,
   DescribeWebProtectionTopDataResponse,
   VanityNameServersIps,
@@ -785,6 +789,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindZoneToPlanResponse) => void
   ): Promise<BindZoneToPlanResponse> {
     return this.request("BindZoneToPlan", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+   */
+  async DescribeDDoSAttackEvent(
+    req: DescribeDDoSAttackEventRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
+  ): Promise<DescribeDDoSAttackEventResponse> {
+    return this.request("DescribeDDoSAttackEvent", req, cb)
   }
 
   /**

@@ -14,7 +14,9 @@ export declare class Client extends AbstractClient {
      */
     InsuranceBillOCR(req: InsuranceBillOCRRequest, cb?: (error: string, rep: InsuranceBillOCRResponse) => void): Promise<InsuranceBillOCRResponse>;
     /**
-     * 本接口支持营业执照信息的识别与准确性核验。
+     * 库源服务调整，该接口在2023年6月1日将正式下线。
+
+本接口支持营业执照信息的识别与准确性核验。
 
 您可以通过输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询）进行核验，接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。查询到工商信息包括：统一社会信用代码、经营期限、法人姓名、经营状态、经营业务范围、注册资本等。
      */
@@ -26,7 +28,9 @@ export declare class Client extends AbstractClient {
      */
     ImageEnhancement(req: ImageEnhancementRequest, cb?: (error: string, rep: ImageEnhancementResponse) => void): Promise<ImageEnhancementResponse>;
     /**
-     * 本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
+     * 库源服务调整，该接口在2023年6月1日将正式下线。
+
+本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
 
 产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
      */
@@ -389,7 +393,9 @@ export declare class Client extends AbstractClient {
      */
     FinanBillSliceOCR(req: FinanBillSliceOCRRequest, cb?: (error: string, rep: FinanBillSliceOCRResponse) => void): Promise<FinanBillSliceOCRResponse>;
     /**
-     * 此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
+     * 库源服务调整，该接口在2023年6月1日将正式下线。
+
+此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
      */
     VerifyEnterpriseFourFactors(req: VerifyEnterpriseFourFactorsRequest, cb?: (error: string, rep: VerifyEnterpriseFourFactorsResponse) => void): Promise<VerifyEnterpriseFourFactorsResponse>;
     /**
@@ -619,7 +625,9 @@ export declare class Client extends AbstractClient {
      */
     PassportOCR(req: PassportOCRRequest, cb?: (error: string, rep: PassportOCRResponse) => void): Promise<PassportOCRResponse>;
     /**
-     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+     * 库源服务调整，该接口在2023年6月1日将正式下线。
+
+本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
 
 您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
 

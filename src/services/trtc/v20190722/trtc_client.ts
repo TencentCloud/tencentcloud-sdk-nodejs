@@ -27,6 +27,7 @@ import {
   McuLayoutVolume,
   DescribeUserEventRequest,
   WaterMarkChar,
+  DescribeTrtcRoomUsageResponse,
   StopPublishCdnStreamResponse,
   AbnormalEvent,
   ScaleInfomation,
@@ -119,6 +120,7 @@ import {
   TRTCDataResp,
   DescribeExternalTrtcMeasureResponse,
   DescribePictureResponse,
+  DescribeTrtcRoomUsageRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
   UserInformation,
   DescribeScaleInfoRequest,
@@ -546,6 +548,19 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DismissRoomResponse) => void
   ): Promise<DismissRoomResponse> {
     return this.request("DismissRoom", req, cb)
+  }
+
+  /**
+     * 查询TRTC音视频房间维度用量。
+- 单次只能查询一天数据，返回查询时间段内的汇总数据；通过多次查询可以查不同天数据。若查询跨天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
+- 默认接口请求频率限制：1次/15秒。
+     */
+  async DescribeTrtcRoomUsage(
+    req?: DescribeTrtcRoomUsageRequest,
+    cb?: (error: string, rep: DescribeTrtcRoomUsageResponse) => void
+  ): Promise<DescribeTrtcRoomUsageResponse> {
+    return this.request("DescribeTrtcRoomUsage", req, cb)
   }
 
   /**
