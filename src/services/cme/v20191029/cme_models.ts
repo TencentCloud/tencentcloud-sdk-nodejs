@@ -112,12 +112,12 @@ export interface ImportMaterialResponse {
   /**
    * 媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
 
   /**
    * 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
    */
-  PreProcessTaskId: string
+  PreProcessTaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -377,6 +377,43 @@ export interface StreamConnectInputInterruptInfo {
 <li>Backup：备源。</li>
       */
   EndPoint: string
+}
+
+/**
+ * 点播转直播播放信息。
+ */
+export interface MediaCastPlayInfo {
+  /**
+      * 点播转直播项目运行状态，取值有：
+<li> Working : 运行中；</li>
+<li> Idle: 空闲状态。</li>
+      */
+  Status: string
+
+  /**
+   * 当前播放的输入源 Id。
+   */
+  CurrentSourceId?: string
+
+  /**
+   * 当前播放的输入源的播放位置，单位：秒。
+   */
+  CurrentSourcePosition: number
+
+  /**
+   * 当前播放的输入源时长，单位：秒。
+   */
+  CurrentSourceDuration: number
+
+  /**
+   * 输出源状态信息。
+   */
+  DestinationStatusSet: Array<MediaCastDestinationStatus>
+
+  /**
+   * 已经循环播放的次数。
+   */
+  LoopCount: number
 }
 
 /**
@@ -837,12 +874,12 @@ export interface DescribeTasksResponse {
   /**
    * 符合搜索条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 任务基础信息列表。
    */
-  TaskBaseInfoSet: Array<TaskBaseInfo>
+  TaskBaseInfoSet?: Array<TaskBaseInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1083,6 +1120,34 @@ export interface PlatformInfo {
 }
 
 /**
+ * HandleMediaCastProject返回参数结构体
+ */
+export interface HandleMediaCastProjectResponse {
+  /**
+      * 播放信息，Operation 为 DescribePlayInfo 时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlayInfo: MediaCastPlayInfo
+
+  /**
+      * 输入源信息， Operation 为 AddSource 时返回添加成功的输入源信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceInfoSet: Array<MediaCastSourceInfo>
+
+  /**
+      * 输出源信息， Operation 为 AddDestination 时返回添加成功的输出源信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DestinationInfoSet: Array<MediaCastDestinationInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 链接类型的素材信息
  */
 export interface LinkMaterial {
@@ -1161,6 +1226,29 @@ export interface FlattenListMediaRequest {
    * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以平铺查询任意分类下的媒体信息。如果指定操作者，则操作者必须对当前分类有读权限。
    */
   Operator?: string
+}
+
+/**
+ * 点播转直播输出源状态信息。
+ */
+export interface MediaCastDestinationStatus {
+  /**
+   * 输出源 Id，由系统分配。
+   */
+  Id?: string
+
+  /**
+   * 输出源直播地址。
+   */
+  PushUrl: string
+
+  /**
+      * 输出源的状态。取值有：
+<li> Working ：运行中；</li>
+<li> Stopped：停止输出；</li>
+<li> Failed：输出失败。</li>
+      */
+  Status: string
 }
 
 /**
@@ -1251,6 +1339,31 @@ export interface Entity {
    * Id，当 Type=PERSON，取值为用户 Id，当 Type=TEAM，取值为团队 Id。
    */
   Id: string
+}
+
+/**
+ * 点播转直播项目输入信息。
+ */
+export interface MediaCastProjectInput {
+  /**
+   * 输入源列表。输入源列表最大个数为100.
+   */
+  SourceInfos?: Array<MediaCastSourceInfo>
+
+  /**
+   * 输出源列表。输出源列表最大个数为10.
+   */
+  DestinationInfos?: Array<MediaCastDestinationInfo>
+
+  /**
+   * 输出媒体配置。
+   */
+  OutputMediaSetting?: MediaCastOutputMediaSetting
+
+  /**
+   * 播放控制参数。
+   */
+  PlaySetting?: MediaCastPlaySetting
 }
 
 /**
@@ -1380,6 +1493,11 @@ export interface VideoEditProjectOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetaData: MediaMetaData
+
+  /**
+   * 导出视频的封面图片 URL。
+   */
+  CoverURL?: string
 }
 
 /**
@@ -1410,6 +1528,7 @@ export interface CreateProjectRequest {
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
 <li>RECORD_REPLAY：录制回放。</li>
+<li>MEDIA_CAST：点播转直播。</li>
       */
   Category: string
 
@@ -1463,6 +1582,11 @@ export interface CreateProjectRequest {
    * 录制回放项目输入信息，仅当项目类型为 RECORD_REPLAY 时必填。
    */
   RecordReplayProjectInput?: RecordReplayProjectInput
+
+  /**
+   * 点播转直播项目输入信息，仅当项目类型为 MEDIA_CAST 时必填。
+   */
+  MediaCastProjectInput?: MediaCastProjectInput
 }
 
 /**
@@ -1654,19 +1778,19 @@ export interface MediaTrackItem {
  */
 export interface MediaCastDestinationInfo {
   /**
-   * 输出源序号。由系统进行分配。
+   * 输出源 Id。由系统进行分配。
    */
-  Index?: number
-
-  /**
-   * 输出源的名称。
-   */
-  Name?: string
+  Id?: string
 
   /**
    * 输出直播流地址。支持的直播流类型为 RTMP 和 SRT。
    */
   PushUrl?: string
+
+  /**
+   * 输出源的名称。
+   */
+  Name?: string
 }
 
 /**
@@ -1742,16 +1866,17 @@ export interface WeiboPublishInfo {
  */
 export interface MediaCastSourceInfo {
   /**
+      * 输入源 Id，由系统分配。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: string
+
+  /**
       * 输入源的媒体类型，取值有：
 <li>CME：多媒体创作引擎的媒体文件；</li>
 <li>VOD：云点播的媒资文件。</li>
       */
-  Type: string
-
-  /**
-   * 多媒体创作引擎的媒体 ID。当 Type = CME  时必填。
-   */
-  MaterialId?: string
+  Type?: string
 
   /**
    * 云点播媒体文件 ID。当 Type = VOD 时必填。
@@ -1759,9 +1884,9 @@ export interface MediaCastSourceInfo {
   FileId?: string
 
   /**
-   * 序号，位于输入源列表中的序号，由系统分配。
+   * 多媒体创作引擎的媒体 ID。当 Type = CME  时必填。
    */
-  Index?: number
+  MaterialId?: string
 }
 
 /**
@@ -1771,7 +1896,7 @@ export interface CreateLinkResponse {
   /**
    * 新建链接的媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1786,7 +1911,7 @@ export interface ExportVideoByTemplateResponse {
   /**
    * 导出任务 Id。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1832,17 +1957,17 @@ export interface ListMediaResponse {
   /**
    * 符合条件的媒体记录总数。
    */
-  MaterialTotalCount: number
+  MaterialTotalCount?: number
 
   /**
    * 浏览分类路径下的媒体列表信息。
    */
-  MaterialInfoSet: Array<MaterialInfo>
+  MaterialInfoSet?: Array<MaterialInfo>
 
   /**
    * 浏览分类路径下的一级子类。
    */
-  ClassInfoSet: Array<ClassInfo>
+  ClassInfoSet?: Array<ClassInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1857,12 +1982,12 @@ export interface SearchMaterialResponse {
   /**
    * 符合记录总条数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 媒体信息，仅返回基础信息。
    */
-  MaterialInfoSet: Array<MaterialInfo>
+  MaterialInfoSet?: Array<MaterialInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2087,12 +2212,12 @@ export interface CreateProjectResponse {
   /**
    * 项目 Id。
    */
-  ProjectId: string
+  ProjectId?: string
 
   /**
    * <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为2 ，第0个代表主输入源推流信息，第1个代表备输入源推流信息。只有当各自输入源类型为推流时才有有效内容。</li>
    */
-  RtmpPushInputInfoSet: Array<RtmpPushInputInfo>
+  RtmpPushInputInfoSet?: Array<RtmpPushInputInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2301,7 +2426,7 @@ export interface DescribeMaterialsResponse {
   /**
    * 媒体列表信息。
    */
-  MaterialInfoSet: Array<MaterialInfo>
+  MaterialInfoSet?: Array<MaterialInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2678,12 +2803,12 @@ export interface DescribeAccountsResponse {
   /**
    * 符合搜索条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 账号信息列表。
    */
-  AccountInfoSet: Array<AccountInfo>
+  AccountInfoSet?: Array<AccountInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2768,12 +2893,12 @@ export interface ImportMediaToProjectResponse {
   /**
    * 媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
 
   /**
    * 媒体预处理任务 ID，如果未指定发起预处理任务则为空。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3065,9 +3190,8 @@ export interface VideoExportCompletedEvent {
  */
 export interface ResourceInfo {
   /**
-      * 媒资和分类资源。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 媒资和分类资源。
+   */
   Resource: Resource
 
   /**
@@ -3419,15 +3543,13 @@ export interface GrantResourceAuthorizationRequest {
  */
 export interface TimeRange {
   /**
-      * 开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
   StartTime: string
 
   /**
-      * 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
   EndTime: string
 }
 
@@ -3617,13 +3739,13 @@ export interface HandleStreamConnectProjectResponse {
   /**
    * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
    */
-  StreamInputRtmpPushUrl: string
+  StreamInputRtmpPushUrl?: string
 
   /**
       * 点播输入源播放进度信息，当 Operation 取值 DescribeInputPlayInfo 且 InputType 为 VodPull 类型时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VodPullInputPlayInfo: VodPullInputPlayInfo
+  VodPullInputPlayInfo?: VodPullInputPlayInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4052,6 +4174,7 @@ export interface DescribeProjectsRequest {
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
 <li>RECORD_REPLAY：录制回放。</li>
+<li>MEDIA_CAST：点播转直播。</li>
 
 注：如果不填则不使用项目类型进行过滤。
       */
@@ -4104,7 +4227,7 @@ export interface DescribeLoginStatusResponse {
   /**
    * 用户登录状态列表。
    */
-  LoginStatusInfoSet: Array<LoginStatusInfo>
+  LoginStatusInfoSet?: Array<LoginStatusInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4302,12 +4425,12 @@ export interface DescribeProjectsResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 项目信息列表。
    */
-  ProjectInfoSet: Array<ProjectInfo>
+  ProjectInfoSet?: Array<ProjectInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4451,7 +4574,7 @@ export interface ParseEventResponse {
   /**
    * 事件内容。
    */
-  EventContent: EventContent
+  EventContent?: EventContent
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4802,7 +4925,7 @@ export interface DescribeClassResponse {
   /**
    * 分类信息列表。
    */
-  ClassInfoSet?: Array<ClassInfo>
+  ClassInfoSet: Array<ClassInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4882,7 +5005,7 @@ export interface CopyProjectResponse {
   /**
    * 复制后的项目 ID。
    */
-  ProjectId: string
+  ProjectId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4901,13 +5024,68 @@ export interface DeleteClassResponse {
 }
 
 /**
+ * HandleMediaCastProject请求参数结构体
+ */
+export interface HandleMediaCastProjectRequest {
+  /**
+   * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
+   */
+  Platform: string
+
+  /**
+   * 点播转直播项目 Id 。
+   */
+  ProjectId: string
+
+  /**
+   * 请参考 [操作类型](#Operation)。
+   */
+  Operation: string
+
+  /**
+      * 输入源信息。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+当 Operation 为 AddSource、DeleteSource、SwitchSource 时必填。
+      */
+  SourceInfos?: Array<MediaCastSourceInfo>
+
+  /**
+      * 输出源信息。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+当 Operation 为 AddDestination、DeleteDestination、EnableDestination、DisableDestination、ModifyDestination 时必填。
+      */
+  DestinationInfos?: Array<MediaCastDestinationInfo>
+
+  /**
+      * 输出媒体配置。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+当 Operation 为 ModfiyOutputSetting 时必填。
+      */
+  OutputMediaSetting?: MediaCastOutputMediaSetting
+
+  /**
+      * 播放控制参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+当 Operation 为 ModifyPlaySetting 时必填。
+      */
+  PlaySetting?: MediaCastPlaySetting
+
+  /**
+      * 新添加的输入源位于输入源列表的位置，从0开始。默认加在输入源列表的后面。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+当 Operation 为 AddSource 时必填。
+      */
+  Position?: number
+
+  /**
+   * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有点播转直播项目。如果指定操作者，则操作者必须为项目所有者。
+   */
+  Operator?: string
+}
+
+/**
  * ExportVideoEditProject返回参数结构体
  */
 export interface ExportVideoEditProjectResponse {
   /**
    * 任务 Id。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

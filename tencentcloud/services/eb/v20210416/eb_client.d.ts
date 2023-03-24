@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ListConnectionsResponse, GetEventBusResponse, ListConnectionsRequest, DeleteRuleRequest, UpdateRuleResponse, CreateTargetRequest, DeleteTargetResponse, ListRulesResponse, CreateTargetResponse, CheckRuleRequest, GetRuleResponse, CreateConnectionResponse, ListTargetsRequest, ListRulesRequest, UpdateTransformationResponse, UpdateEventBusRequest, CreateEventBusRequest, PutEventsResponse, CreateRuleRequest, DeleteConnectionResponse, DeleteRuleResponse, GetTransformationResponse, CreateTransformationRequest, PublishEventRequest, CheckTransformationResponse, ListTargetsResponse, ListEventBusesResponse, CheckRuleResponse, UpdateTargetResponse, CreateConnectionRequest, DeleteEventBusRequest, ListEventBusesRequest, PublishEventResponse, CreateTransformationResponse, PutEventsRequest, DeleteEventBusResponse, GetTransformationRequest, CreateEventBusResponse, DeleteConnectionRequest, UpdateTransformationRequest, CreateRuleResponse, DeleteTransformationResponse, DeleteTransformationRequest, GetEventBusRequest, UpdateConnectionRequest, DeleteTargetRequest, UpdateRuleRequest, CheckTransformationRequest, UpdateConnectionResponse, GetRuleRequest, UpdateTargetRequest, UpdateEventBusResponse } from "./eb_models";
+import { ListConnectionsResponse, GetEventBusResponse, ListConnectionsRequest, DeleteRuleRequest, UpdateRuleResponse, CreateTargetRequest, DeleteTargetResponse, UpdateRuleRequest, DescribeLogTagValueRequest, ListRulesResponse, CreateTargetResponse, CheckRuleRequest, GetRuleResponse, CreateConnectionResponse, ListTargetsRequest, ListRulesRequest, UpdateEventBusRequest, CreateEventBusRequest, PutEventsResponse, CreateRuleRequest, DeleteConnectionResponse, DeleteRuleResponse, GetTransformationResponse, CreateTransformationRequest, PublishEventRequest, SearchLogResponse, CheckTransformationResponse, ListTargetsResponse, ListEventBusesResponse, CheckRuleResponse, UpdateTargetResponse, CreateConnectionRequest, DeleteEventBusRequest, ListEventBusesRequest, PublishEventResponse, CreateTransformationResponse, PutEventsRequest, DeleteEventBusResponse, GetTransformationRequest, CreateEventBusResponse, DeleteConnectionRequest, UpdateTransformationRequest, CreateRuleResponse, DeleteTransformationResponse, DeleteTransformationRequest, UpdateConnectionRequest, GetEventBusRequest, DeleteTargetRequest, DescribeLogTagValueResponse, UpdateTransformationResponse, SearchLogRequest, CheckTransformationRequest, UpdateConnectionResponse, GetRuleRequest, UpdateTargetRequest, UpdateEventBusResponse } from "./eb_models";
 /**
  * eb client
  * @class
@@ -72,6 +72,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateRule(req: UpdateRuleRequest, cb?: (error: string, rep: UpdateRuleResponse) => void): Promise<UpdateRuleResponse>;
     /**
+     * 查询日志索引维度值
+     */
+    DescribeLogTagValue(req: DescribeLogTagValueRequest, cb?: (error: string, rep: DescribeLogTagValueResponse) => void): Promise<DescribeLogTagValueResponse>;
+    /**
      * 用于删除转换器
      */
     DeleteTransformation(req: DeleteTransformationRequest, cb?: (error: string, rep: DeleteTransformationResponse) => void): Promise<DeleteTransformationResponse>;
@@ -83,6 +87,10 @@ export declare class Client extends AbstractClient {
      * 获取事件规则详情
      */
     GetRule(req: GetRuleRequest, cb?: (error: string, rep: GetRuleResponse) => void): Promise<GetRuleResponse>;
+    /**
+     * 日志检索
+     */
+    SearchLog(req: SearchLogRequest, cb?: (error: string, rep: SearchLogResponse) => void): Promise<SearchLogResponse>;
     /**
      * 删除事件连接器
      */

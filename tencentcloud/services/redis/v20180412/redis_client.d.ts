@@ -240,7 +240,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorHotKey(req: DescribeInstanceMonitorHotKeyRequest, cb?: (error: string, rep: DescribeInstanceMonitorHotKeyResponse) => void): Promise<DescribeInstanceMonitorHotKeyResponse>;
     /**
-     * 修改redis密码
+     * 本接口（ModfiyInstancePassword）用于修改实例访问密码。
      */
     ModfiyInstancePassword(req: ModfiyInstancePasswordRequest, cb?: (error: string, rep: ModfiyInstancePasswordResponse) => void): Promise<ModfiyInstancePasswordResponse>;
     /**
@@ -252,7 +252,7 @@ export declare class Client extends AbstractClient {
      */
     AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
     /**
-     * 查询SSL状态
+     * 本接口（DescribeSSLStatus）用于查询实例 SSL 认证相关信息，包括开启状态、配置状态、证书地址等。
      */
     DescribeSSLStatus(req: DescribeSSLStatusRequest, cb?: (error: string, rep: DescribeSSLStatusResponse) => void): Promise<DescribeSSLStatusResponse>;
     /**
@@ -356,7 +356,7 @@ export declare class Client extends AbstractClient {
      */
     CreateInstances(req: CreateInstancesRequest, cb?: (error: string, rep: CreateInstancesResponse) => void): Promise<CreateInstancesResponse>;
     /**
-     * 查询订单信息
+     * 本接口（DescribeInstanceDealDetail）用于查询订单信息。
      */
     DescribeInstanceDealDetail(req: DescribeInstanceDealDetailRequest, cb?: (error: string, rep: DescribeInstanceDealDetailResponse) => void): Promise<DescribeInstanceDealDetailResponse>;
     /**

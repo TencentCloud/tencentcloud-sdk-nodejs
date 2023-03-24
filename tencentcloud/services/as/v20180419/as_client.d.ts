@@ -168,7 +168,6 @@ export declare class Client extends AbstractClient {
 * 启动配置，可以通过 `ModifyLaunchConfigurationAttributes` 修改少量字段。如需使用新的启动配置，建议重新创建启动配置。
 
 * 每个项目最多只能创建20个启动配置，详见[使用限制](https://cloud.tencent.com/document/product/377/3120)。
-
      */
     CreateLaunchConfiguration(req: CreateLaunchConfigurationRequest, cb?: (error: string, rep: CreateLaunchConfigurationResponse) => void): Promise<CreateLaunchConfigurationResponse>;
     /**

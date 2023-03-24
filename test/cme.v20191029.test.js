@@ -268,6 +268,16 @@ it("cme.v20191029.ModifyTeamMember", async function () {
     }
 })
 
+it("cme.v20191029.ModifyVideoEncodingPreset", async function () {
+    try {
+       const data = await client.ModifyVideoEncodingPreset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DeleteVideoEncodingPreset", async function () {
     try {
        const data = await client.DeleteVideoEncodingPreset({})
@@ -318,9 +328,9 @@ it("cme.v20191029.DescribeLoginStatus", async function () {
     }
 })
 
-it("cme.v20191029.ModifyVideoEncodingPreset", async function () {
+it("cme.v20191029.HandleMediaCastProject", async function () {
     try {
-       const data = await client.ModifyVideoEncodingPreset({})
+       const data = await client.HandleMediaCastProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -46,7 +46,7 @@ import {
   UrlDecodeParam,
   FetchLatestDatahubMessageListResponse,
   EsParam,
-  DescribeConnectResource,
+  DescribeAclRuleResponse,
   DtsParam,
   GroupOffsetPartition,
   CancelAuthorizationTokenRequest,
@@ -68,9 +68,10 @@ import {
   FetchMessageListByOffsetRequest,
   Region,
   ModifyInstancePreRequest,
-  CreateTokenResponse,
+  CreateAclRuleRequest,
   TransformsParam,
   ClickHouseModifyConnectParam,
+  ModifyAclRuleRequest,
   DescribeDatahubTasksRes,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
@@ -79,7 +80,7 @@ import {
   SMTParam,
   CheckCdcClusterResponse,
   CtsdbModifyConnectParam,
-  DescribeACLResponse,
+  CreateTokenResponse,
   DynamicDiskConfig,
   DorisConnectParam,
   ZoneInfo,
@@ -89,9 +90,10 @@ import {
   DescribeRouteRequest,
   Topic,
   Tag,
+  ModifyAclRuleResponse,
   ModifyConnectResourceRequest,
   ModifyInstanceAttributesResponse,
-  RecordMapping,
+  DescribeACLResponse,
   BatchModifyGroupOffsetsResponse,
   GroupResponse,
   InstanceDetailResponse,
@@ -146,10 +148,12 @@ import {
   DeleteAclResponse,
   DynamicRetentionTime,
   TransformParam,
+  DeleteRouteTriggerTimeRequest,
   DescribeTopicSubscribeGroupRequest,
   DeleteInstancePreResponse,
   TableMapping,
   DatahubTopicResp,
+  RecordMapping,
   DescribeInstanceAttributesRequest,
   InquiryPublicNetworkParam,
   TopicInSyncReplicaInfo,
@@ -168,6 +172,7 @@ import {
   DescribeUserResponse,
   DtsConnectParam,
   DorisModifyConnectParam,
+  FieldParam,
   DescribeGroupInfoResponse,
   AppIdResponse,
   DescribeTopicRequest,
@@ -201,7 +206,7 @@ import {
   FetchLatestDatahubMessageListRequest,
   ConsumerGroupTopic,
   DatahubTaskInfo,
-  FieldParam,
+  CreateAclRuleResponse,
   DescribeTopicAttributesResponse,
   DeleteDatahubTopicResponse,
   DescribeConsumerGroupResponse,
@@ -209,7 +214,7 @@ import {
   InquiryDetailPrice,
   DeleteDatahubTaskRequest,
   DescribeGroupOffsetsRequest,
-  DeleteRouteTriggerTimeRequest,
+  DeleteConnectResourceRequest,
   DeleteDatahubTaskResponse,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
@@ -288,6 +293,7 @@ import {
   MariaDBConnectParam,
   AclRuleInfo,
   Acl,
+  DescribeAclRuleRequest,
   MongoDBParam,
   TopicParam,
   ModifyTopicAttributesRequest,
@@ -302,12 +308,13 @@ import {
   DescribeUserRequest,
   DescribeDatahubTopicsResp,
   DescribeTopicSyncReplicaRequest,
+  DescribeConnectResource,
   ModifyDatahubTaskRequest,
   InstanceDetail,
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
   MySQLModifyConnectParam,
-  DeleteConnectResourceRequest,
+  AclRuleResp,
   SQLServerParam,
   ReplaceParam,
   Price,
@@ -381,6 +388,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancePostResponse) => void
   ): Promise<CreateInstancePostResponse> {
     return this.request("CreateInstancePost", req, cb)
+  }
+
+  /**
+   * 查询ACL规则列表
+   */
+  async DescribeAclRule(
+    req: DescribeAclRuleRequest,
+    cb?: (error: string, rep: DescribeAclRuleResponse) => void
+  ): Promise<DescribeAclRuleResponse> {
+    return this.request("DescribeAclRule", req, cb)
   }
 
   /**
@@ -714,6 +731,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改AC策略，目前只支持预设规则的是否应用到新增topic这一项的修改
+   */
+  async ModifyAclRule(
+    req: ModifyAclRuleRequest,
+    cb?: (error: string, rep: ModifyAclRuleResponse) => void
+  ): Promise<ModifyAclRuleResponse> {
+    return this.request("ModifyAclRule", req, cb)
+  }
+
+  /**
    * 本接口用于增加主题中的分区
    */
   async CreatePartition(
@@ -953,6 +980,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicResponse) => void
   ): Promise<DescribeTopicResponse> {
     return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 添加 ACL 规则
+   */
+  async CreateAclRule(
+    req: CreateAclRuleRequest,
+    cb?: (error: string, rep: CreateAclRuleResponse) => void
+  ): Promise<CreateAclRuleResponse> {
+    return this.request("CreateAclRule", req, cb)
   }
 
   /**

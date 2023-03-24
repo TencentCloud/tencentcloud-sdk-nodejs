@@ -16,6 +16,17 @@
  */
 
 /**
+ * 描述如何数据转换
+
+ */
+export interface Transform {
+  /**
+   * 描述如何数据转换
+   */
+  OutputStructs: Array<OutputStructParam>
+}
+
+/**
  * ListConnections返回参数结构体
  */
 export interface ListConnectionsResponse {
@@ -270,24 +281,78 @@ export interface DeleteTargetResponse {
 }
 
 /**
- * 描述如何提取数据
+ * UpdateRule请求参数结构体
  */
-export interface Extraction {
+export interface UpdateRuleRequest {
   /**
-   * JsonPath, 不指定则使用默认值$.
+   * 事件规则ID
    */
-  ExtractionInputPath: string
+  RuleId: string
 
   /**
-   * 取值: TEXT/JSON
+   * 事件集ID
    */
-  Format: string
+  EventBusId: string
 
   /**
-      * 仅在Text需要传递
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TextParams?: TextParams
+   * 使能开关。
+   */
+  Enable?: boolean
+
+  /**
+   * 规则描述，不限字符类型，200字符描述以内。
+   */
+  Description?: string
+
+  /**
+   * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+   */
+  EventPattern?: string
+
+  /**
+   * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   */
+  RuleName?: string
+}
+
+/**
+ * DescribeLogTagValue请求参数结构体
+ */
+export interface DescribeLogTagValueRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: number
+
+  /**
+   * 结束时间
+   */
+  EndTime: number
+
+  /**
+   * 事件集ID
+   */
+  EventBusId: string
+
+  /**
+   * 聚合字段
+   */
+  GroupField: string
+
+  /**
+   * 页数
+   */
+  Page: number
+
+  /**
+   * 每页数据大小
+   */
+  Limit: number
+
+  /**
+   * 筛选条件
+   */
+  Filter?: Array<LogFilter>
 }
 
 /**
@@ -646,13 +711,24 @@ export interface DeadLetterConfig {
 }
 
 /**
- * UpdateTransformation返回参数结构体
+ * 日志存储过滤条件
  */
-export interface UpdateTransformationResponse {
+export interface LogFilters {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过滤字段名称
    */
-  RequestId?: string
+  Key: string
+
+  /**
+   * 运算符, 全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
+   */
+  Operator: string
+
+  /**
+      * 过滤值，范围运算需要同时输入两个值，以英文逗号分隔
+
+      */
+  Value: string
 }
 
 /**
@@ -910,6 +986,40 @@ export interface EtlFilter {
 }
 
 /**
+ * SearchLog返回参数结构体
+ */
+export interface SearchLogResponse {
+  /**
+      * 日志总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
+
+  /**
+      * 每页日志条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Limit?: number
+
+  /**
+      * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Page?: number
+
+  /**
+      * 日志检索结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results?: Array<SearchLogResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckTransformation返回参数结构体
  */
 export interface CheckTransformationResponse {
@@ -1000,6 +1110,59 @@ export interface ConnectionDescription {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DTSParams?: DTSParams
+}
+
+/**
+ * 日志检索详情
+ */
+export interface SearchLogResult {
+  /**
+      * 单条日志上报时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp?: string
+
+  /**
+      * 日志内容详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message?: string
+
+  /**
+      * 事件来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Source?: string
+
+  /**
+      * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 事件匹配规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleIds?: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Subject?: string
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * 事件状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
 }
 
 /**
@@ -1387,13 +1550,24 @@ export interface DeleteTransformationRequest {
 }
 
 /**
- * GetEventBus请求参数结构体
+ * 描述如何提取数据
  */
-export interface GetEventBusRequest {
+export interface Extraction {
   /**
-   * 事件集ID
+   * JsonPath, 不指定则使用默认值$.
    */
-  EventBusId: string
+  ExtractionInputPath: string
+
+  /**
+   * 取值: TEXT/JSON
+   */
+  Format: string
+
+  /**
+      * 仅在Text需要传递
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TextParams?: TextParams
 }
 
 /**
@@ -1424,6 +1598,16 @@ export interface UpdateConnectionRequest {
    * 连接器名称
    */
   ConnectionName?: string
+}
+
+/**
+ * GetEventBus请求参数结构体
+ */
+export interface GetEventBusRequest {
+  /**
+   * 事件集ID
+   */
+  EventBusId: string
 }
 
 /**
@@ -1462,38 +1646,60 @@ export interface CkafkaParams {
 }
 
 /**
- * UpdateRule请求参数结构体
+ * DescribeLogTagValue返回参数结构体
  */
-export interface UpdateRuleRequest {
+export interface DescribeLogTagValueResponse {
   /**
-   * 事件规则ID
-   */
-  RuleId: string
+      * 索引检索维度值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results?: Array<string>
 
   /**
-   * 事件集ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EventBusId: string
+  RequestId?: string
+}
+
+/**
+ * 日志查询相关接口filter参数定义
+ */
+export interface LogFilter {
+  /**
+   * 过滤字段名称
+   */
+  Key?: string
 
   /**
-   * 使能开关。
+   * 运算符，全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
    */
-  Enable?: boolean
+  Operator?: string
 
   /**
-   * 规则描述，不限字符类型，200字符描述以内。
-   */
-  Description?: string
+      * 过滤值,范围运算需要同时输入两个值，以英文逗号分隔
+
+      */
+  Value?: string
 
   /**
-   * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+   * 该层级filters逻辑关系，取值 "AND" 或 "OR"
    */
-  EventPattern?: string
+  Type?: string
 
   /**
-   * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   * LogFilters数组
    */
-  RuleName?: string
+  Filters?: Array<LogFilters>
+}
+
+/**
+ * UpdateTransformation返回参数结构体
+ */
+export interface UpdateTransformationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1517,14 +1723,48 @@ export interface OutputStructParam {
 }
 
 /**
- * 描述如何数据转换
-
+ * SearchLog请求参数结构体
  */
-export interface Transform {
+export interface SearchLogRequest {
   /**
-   * 描述如何数据转换
+   * 起始时间unix 毫秒时间戳
    */
-  OutputStructs: Array<OutputStructParam>
+  StartTime: number
+
+  /**
+   * 结束时间unix 毫秒时间戳
+   */
+  EndTime: number
+
+  /**
+   * 事件集ID
+   */
+  EventBusId: string
+
+  /**
+   * 页码
+   */
+  Page: number
+
+  /**
+   * 每页数据大小
+   */
+  Limit: number
+
+  /**
+   * 筛选条件
+   */
+  Filter?: Array<LogFilter>
+
+  /**
+   * 排序数组
+   */
+  OrderFields?: Array<string>
+
+  /**
+   * 排序方式，asc 从旧到新，desc 从新到旧
+   */
+  OrderBy?: string
 }
 
 /**

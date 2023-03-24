@@ -1461,13 +1461,15 @@ export interface DescribeComputeEnvRequest {
  */
 export interface InstanceMarketOptionsRequest {
   /**
-   * 竞价相关选项
-   */
+      * 竞价相关选项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   SpotOptions: SpotMarketOptions
 
   /**
-   * 市场选项类型，当前只支持取值：spot
-   */
+      * 市场选项类型，当前只支持取值：spot
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   MarketType?: string
 }
 

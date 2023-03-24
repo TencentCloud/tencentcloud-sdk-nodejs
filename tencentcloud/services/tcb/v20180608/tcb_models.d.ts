@@ -1569,27 +1569,27 @@ export interface DescribeGatewayCurveDataResponse {
     /**
       * 监控类型
       */
-    MetricName: string;
+    MetricName?: string;
     /**
       * 监控起始时间
       */
-    StartTime: string;
+    StartTime?: string;
     /**
       * 监控结束时间
       */
-    EndTime: string;
+    EndTime?: string;
     /**
       * 监控数据间隔
       */
-    Period: number;
+    Period?: number;
     /**
       * 监控值
       */
-    Values: Array<number>;
+    Values?: Array<number>;
     /**
       * 监控时间
       */
-    Time: Array<number>;
+    Time?: Array<number>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1863,7 +1863,7 @@ export interface DescribeGatewayCurveDataRequest {
       */
     GatewayId: string;
     /**
-      * 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502
+      * 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502 GwConnect GwCircuit
       */
     MetricName: string;
     /**

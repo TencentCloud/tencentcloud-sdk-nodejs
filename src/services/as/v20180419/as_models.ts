@@ -154,6 +154,11 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    * IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。
    */
   IPv6InternetAccessible?: IPv6InternetAccessible
+
+  /**
+   * 置放群组id，仅支持指定一个。
+   */
+  DisasterRecoverGroupIds?: Array<string>
 }
 
 /**
@@ -638,7 +643,7 @@ export interface CreateLaunchConfigurationResponse {
   /**
    * 当通过本接口来创建启动配置时会返回该参数，表示启动配置ID。
    */
-  LaunchConfigurationId: string
+  LaunchConfigurationId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1385,6 +1390,11 @@ export interface CreateLaunchConfigurationRequest {
    * IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。
    */
   IPv6InternetAccessible?: IPv6InternetAccessible
+
+  /**
+   * 置放群组id，仅支持指定一个。
+   */
+  DisasterRecoverGroupIds?: Array<string>
 }
 
 /**
@@ -2616,6 +2626,12 @@ export interface Instance {
 <li>AFTER_WARMUP：完成预热
       */
   WarmupStatus: string
+
+  /**
+      * 置放群组id，仅支持指定一个。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisasterRecoverGroupIds?: Array<string>
 }
 
 /**
@@ -3637,6 +3653,12 @@ export interface ClearLaunchConfigurationAttributesRequest {
 填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置。
       */
   ClearInstanceNameSettings?: boolean
+
+  /**
+      * 是否清空置放群组信息，非必填，默认为 false。
+填 true 代表清空置放群组信息，清空后基于此新创建的云主机将不指定任何置放群组。
+      */
+  ClearDisasterRecoverGroupIds?: boolean
 }
 
 /**

@@ -3708,6 +3708,15 @@ export interface ImageConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContainerImageAccelerate?: boolean
+
+  /**
+      * 镜像函数端口设置
+-1: 无端口镜像函数
+0: 默认端口，当前默认端口是9000
+其他: 特殊端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImagePort?: number
 }
 
 /**

@@ -7963,7 +7963,7 @@ export interface CreateImageProcessingTemplateResponse {
     /**
       * 图片处理模板唯一标识。
       */
-    Definition: number;
+    Definition?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12006,7 +12006,7 @@ export interface CreateHeadTailTemplateResponse {
     /**
       * 片头片尾模板号。
       */
-    Definition: number;
+    Definition?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -16186,11 +16186,11 @@ export interface DescribeImageProcessingTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 图片处理模板详情列表。
       */
-    ImageProcessingTemplateSet: Array<ImageProcessingTemplate>;
+    ImageProcessingTemplateSet?: Array<ImageProcessingTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

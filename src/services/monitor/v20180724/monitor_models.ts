@@ -8375,6 +8375,11 @@ export interface PrometheusClusterAgentBasic {
    * 是否采集指标，true代表drop所有指标，false代表采集默认指标
    */
   NotScrape?: boolean
+
+  /**
+   * 是否开启默认预聚合规则
+   */
+  OpenDefaultRecord?: boolean
 }
 
 /**

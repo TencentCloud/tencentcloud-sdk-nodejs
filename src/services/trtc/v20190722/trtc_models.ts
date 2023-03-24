@@ -1462,7 +1462,7 @@ export interface McuLayout {
   RenderMode?: number
 
   /**
-      * 子画面的背景颜色，常用的颜色有：
+      * 【此参数配置无效，暂不支持】子画面的背景颜色，常用的颜色有：
 红色：0xcc0033。
 黄色：0xcc9900。
 绿色：0xcccc33。

@@ -78,6 +78,16 @@ it("ckafka.v20190819.CreateInstancePost", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeAclRule", async function () {
+    try {
+       const data = await client.DescribeAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
     try {
        const data = await client.DescribeTopicSubscribeGroup({})
@@ -408,6 +418,16 @@ it("ckafka.v20190819.CheckCdcCluster", async function () {
     }
 })
 
+it("ckafka.v20190819.ModifyAclRule", async function () {
+    try {
+       const data = await client.ModifyAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.CreatePartition", async function () {
     try {
        const data = await client.CreatePartition({})
@@ -641,6 +661,16 @@ it("ckafka.v20190819.DescribeTopicProduceConnection", async function () {
 it("ckafka.v20190819.DescribeTopic", async function () {
     try {
        const data = await client.DescribeTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreateAclRule", async function () {
+    try {
+       const data = await client.CreateAclRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

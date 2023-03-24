@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  Transform,
   ListConnectionsResponse,
   ESTargetParams,
   GetEventBusResponse,
@@ -28,7 +29,8 @@ import {
   UpdateRuleResponse,
   CreateTargetRequest,
   DeleteTargetResponse,
-  Extraction,
+  UpdateRuleRequest,
+  DescribeLogTagValueRequest,
   TargetBrief,
   DTSParams,
   ListRulesResponse,
@@ -43,7 +45,7 @@ import {
   ListRulesRequest,
   SCFParams,
   DeadLetterConfig,
-  UpdateTransformationResponse,
+  LogFilters,
   UpdateEventBusRequest,
   CreateEventBusRequest,
   PutEventsResponse,
@@ -56,11 +58,13 @@ import {
   CreateTransformationRequest,
   PublishEventRequest,
   EtlFilter,
+  SearchLogResponse,
   CheckTransformationResponse,
   ListTargetsResponse,
   ListEventBusesResponse,
   CheckRuleResponse,
   ConnectionDescription,
+  SearchLogResult,
   CkafkaDeliveryParams,
   UpdateTargetResponse,
   CreateConnectionRequest,
@@ -81,13 +85,16 @@ import {
   TargetDescription,
   DeleteTransformationResponse,
   DeleteTransformationRequest,
-  GetEventBusRequest,
+  Extraction,
   UpdateConnectionRequest,
+  GetEventBusRequest,
   DeleteTargetRequest,
   CkafkaParams,
-  UpdateRuleRequest,
+  DescribeLogTagValueResponse,
+  LogFilter,
+  UpdateTransformationResponse,
   OutputStructParam,
-  Transform,
+  SearchLogRequest,
   CheckTransformationRequest,
   UpdateConnectionResponse,
   GetRuleRequest,
@@ -267,6 +274,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询日志索引维度值
+   */
+  async DescribeLogTagValue(
+    req: DescribeLogTagValueRequest,
+    cb?: (error: string, rep: DescribeLogTagValueResponse) => void
+  ): Promise<DescribeLogTagValueResponse> {
+    return this.request("DescribeLogTagValue", req, cb)
+  }
+
+  /**
    * 用于删除转换器
    */
   async DeleteTransformation(
@@ -294,6 +311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRuleResponse) => void
   ): Promise<GetRuleResponse> {
     return this.request("GetRule", req, cb)
+  }
+
+  /**
+   * 日志检索
+   */
+  async SearchLog(
+    req: SearchLogRequest,
+    cb?: (error: string, rep: SearchLogResponse) => void
+  ): Promise<SearchLogResponse> {
+    return this.request("SearchLog", req, cb)
   }
 
   /**

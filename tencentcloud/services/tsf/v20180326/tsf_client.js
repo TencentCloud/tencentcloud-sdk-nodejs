@@ -214,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileConfigs", req, cb);
     }
     /**
-     * 修改容器部署组实例数
+     * 创建参数模板,并返回模版详细信息
      */
-    async ModifyContainerReplicas(req, cb) {
-        return this.request("ModifyContainerReplicas", req, cb);
+    async CreateConfigTemplateWithDetailResp(req, cb) {
+        return this.request("CreateConfigTemplateWithDetailResp", req, cb);
     }
     /**
      * 查询简单集群列表
@@ -291,6 +291,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeApplications(req, cb) {
         return this.request("DescribeApplications", req, cb);
+    }
+    /**
+     * 创建路径重写，并返回路径重写规则信息
+     */
+    async CreatePathRewritesWithDetailResp(req, cb) {
+        return this.request("CreatePathRewritesWithDetailResp", req, cb);
     }
     /**
      *  获取部署组详情
@@ -515,6 +521,18 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeBusinessLogConfigs", req, cb);
     }
     /**
+     * 创建公共配置项，并返回配置项详细信息
+     */
+    async CreatePublicConfigWithDetailResp(req, cb) {
+        return this.request("CreatePublicConfigWithDetailResp", req, cb);
+    }
+    /**
+     * 创建单元化规则, 并返回详细信息
+     */
+    async CreateUnitRuleWithDetailResp(req, cb) {
+        return this.request("CreateUnitRuleWithDetailResp", req, cb);
+    }
+    /**
      * 发布配置
      */
     async ReleaseConfig(req, cb) {
@@ -621,6 +639,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async ReleaseFileConfig(req, cb) {
         return this.request("ReleaseFileConfig", req, cb);
+    }
+    /**
+     * 删除API限流规则
+     */
+    async DeleteApiRateLimitRule(req, cb) {
+        return this.request("DeleteApiRateLimitRule", req, cb);
     }
     /**
      * 查询某个网关绑定的API 分组信息列表
@@ -841,10 +865,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateLane", req, cb);
     }
     /**
-     * 停止虚拟机部署组
+     * 获取容器事件列表
      */
-    async StopGroup(req, cb) {
-        return this.request("StopGroup", req, cb);
+    async DescribeContainerEvents(req, cb) {
+        return this.request("DescribeContainerEvents", req, cb);
     }
     /**
      * 查询网关监控概览
@@ -869,6 +893,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async UpdateApiGroup(req, cb) {
         return this.request("UpdateApiGroup", req, cb);
+    }
+    /**
+     * 停止虚拟机部署组
+     */
+    async StopGroup(req, cb) {
+        return this.request("StopGroup", req, cb);
     }
     /**
      * 更新泳道信息
@@ -1001,6 +1031,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeJvmMonitor(req, cb) {
         return this.request("DescribeJvmMonitor", req, cb);
+    }
+    /**
+     * 发布配置,并且返回配置 ID
+     */
+    async ReleaseConfigWithDetailResp(req, cb) {
+        return this.request("ReleaseConfigWithDetailResp", req, cb);
     }
     /**
      * 删除仓库
@@ -1147,6 +1183,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeEnabledUnitRule", req, cb);
     }
     /**
+     * 修改容器部署组实例数
+     */
+    async ModifyContainerReplicas(req, cb) {
+        return this.request("ModifyContainerReplicas", req, cb);
+    }
+    /**
      * 查询仓库信息
      */
     async DescribeRepository(req, cb) {
@@ -1232,16 +1274,22 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UpdateGatewayApi", req, cb);
     }
     /**
-     * 获取容器事件列表
+     * 创建API限流规则,并返回规则信息
      */
-    async DescribeContainerEvents(req, cb) {
-        return this.request("DescribeContainerEvents", req, cb);
+    async CreateApiRateLimitRuleWithDetailResp(req, cb) {
+        return this.request("CreateApiRateLimitRuleWithDetailResp", req, cb);
     }
     /**
      * 下线部署组所有机器实例
      */
     async ShrinkGroup(req, cb) {
         return this.request("ShrinkGroup", req, cb);
+    }
+    /**
+     * 资源任务的执行状态描述接口
+     */
+    async DescribeResourceTaskStatus(req, cb) {
+        return this.request("DescribeResourceTaskStatus", req, cb);
     }
     /**
      * 启动分组

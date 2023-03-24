@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, SearchMaterialRequest, DeleteTeamResponse, CopyProjectRequest, RevokeResourceAuthorizationResponse, DescribeTasksResponse, DeleteTeamRequest, DescribeTeamsRequest, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, ParseEventRequest, DeleteVideoEncodingPresetRequest, ModifyVideoEncodingPresetResponse, DescribeJoinTeamsRequest, DeleteMaterialRequest, ModifyProjectResponse, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, CreateVideoEncodingPresetResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, GrantResourceAuthorizationRequest, ListMediaRequest, DeleteVideoEncodingPresetResponse, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, HandleStreamConnectProjectResponse, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeVideoEncodingPresetsResponse, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, CreateVideoEncodingPresetRequest, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, ParseEventResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, ModifyVideoEncodingPresetRequest, HandleStreamConnectProjectRequest, ModifyProjectRequest, DescribeVideoEncodingPresetsRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, CopyProjectResponse, DeleteClassResponse, ExportVideoEditProjectResponse, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
+import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, SearchMaterialRequest, DeleteTeamResponse, CopyProjectRequest, RevokeResourceAuthorizationResponse, DescribeTasksResponse, DeleteTeamRequest, DescribeTeamsRequest, HandleMediaCastProjectResponse, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, ParseEventRequest, DeleteVideoEncodingPresetRequest, ModifyVideoEncodingPresetResponse, DescribeJoinTeamsRequest, DeleteMaterialRequest, ModifyProjectResponse, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, CreateVideoEncodingPresetResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, GrantResourceAuthorizationRequest, ListMediaRequest, DeleteVideoEncodingPresetResponse, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, HandleStreamConnectProjectResponse, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeVideoEncodingPresetsResponse, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, CreateVideoEncodingPresetRequest, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, ParseEventResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, ModifyVideoEncodingPresetRequest, HandleStreamConnectProjectRequest, ModifyProjectRequest, DescribeVideoEncodingPresetsRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, CopyProjectResponse, DeleteClassResponse, HandleMediaCastProjectRequest, ExportVideoEditProjectResponse, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
 /**
  * cme client
  * @class
@@ -46,7 +46,7 @@ export declare class Client extends AbstractClient {
      */
     SearchMaterial(req: SearchMaterialRequest, cb?: (error: string, rep: SearchMaterialResponse) => void): Promise<SearchMaterialResponse>;
     /**
-     * 该接口接受制作云回调给客户的事件内容，将其转化为对应的 EventContent 结构，请不要实际调用该接口，只需要将接收到的事件内容直接使用 JSON 解析到 EventContent  即可使用。
+     * 该接口接受多媒体创作引擎回调给业务的事件内容，将其转化为对应的 EventContent 结构。请不要实际调用该接口，只需要将接收到的事件内容直接使用 JSON 解析到 EventContent  结构即可使用。
      */
     ParseEvent(req: ParseEventRequest, cb?: (error: string, rep: ParseEventResponse) => void): Promise<ParseEventResponse>;
     /**
@@ -110,13 +110,17 @@ export declare class Client extends AbstractClient {
      */
     MoveClass(req: MoveClassRequest, cb?: (error: string, rep: MoveClassResponse) => void): Promise<MoveClassResponse>;
     /**
-     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * 创建媒体链接或分类路径链接，将源资源信息链接到目标。
      */
     CreateLink(req: CreateLinkRequest, cb?: (error: string, rep: CreateLinkResponse) => void): Promise<CreateLinkResponse>;
     /**
      * 修改团队成员信息，包括成员备注、角色等。
      */
     ModifyTeamMember(req: ModifyTeamMemberRequest, cb?: (error: string, rep: ModifyTeamMemberResponse) => void): Promise<ModifyTeamMemberResponse>;
+    /**
+     * 修改视频编码配置信息。
+     */
+    ModifyVideoEncodingPreset(req: ModifyVideoEncodingPresetRequest, cb?: (error: string, rep: ModifyVideoEncodingPresetResponse) => void): Promise<ModifyVideoEncodingPresetResponse>;
     /**
      * 删除指定 ID 的视频编码配置
      */
@@ -138,9 +142,23 @@ export declare class Client extends AbstractClient {
      */
     DescribeLoginStatus(req: DescribeLoginStatusRequest, cb?: (error: string, rep: DescribeLoginStatusResponse) => void): Promise<DescribeLoginStatusResponse>;
     /**
-     * 修改视频编码配置信息。
+     * 对点播转直播项目进行操作。
+### 操作类型<a id="Operation"></a>
+- `AddSource`（添加输入源），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B12-.E6.B7.BB.E5.8A.A0.E8.BE.93.E5.85.A5.E6.BA.90)；
+- `DeleteSource`（删除输入源），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B7-.E5.88.A0.E9.99.A4.E8.BE.93.E5.85.A5.E6.BA.90)；
+- `SwitchSource`（切换当前播放的输入源），项目状态为 Working 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B6-.E5.88.87.E6.8D.A2.E5.BD.93.E5.89.8D.E6.92.AD.E6.94.BE.E7.9A.84.E8.BE.93.E5.85.A5.E6.BA.90)
+- `AddDestination`（ 添加输出源），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B13-.E6.B7.BB.E5.8A.A0.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `DeleteDestination`（删除输出源），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B8-.E5.88.A0.E9.99.A4.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `EnableDestination`（启动输出源），项目状态为 Working 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B10-.E5.90.AF.E5.8A.A8.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `DisableDestination`（停止输出源），项目状态为 Working 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B5-.E5.81.9C.E6.AD.A2.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `ModifyDestination`（修改输出源），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B2-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.87.BA.E6.BA.90)；
+- `Start`（启动点播转直播），项目状态为 Idle 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B9-.E5.90.AF.E5.8A.A8.E7.82.B9.E6.92.AD.E8.BD.AC.E7.9B.B4.E6.92.AD)；
+- `Stop`（停止点播转直播），项目状态为 Working 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B4-.E5.81.9C.E6.AD.A2.E7.82.B9.E6.92.AD.E8.BD.AC.E7.9B.B4.E6.92.AD)；
+- `ModifyOutputMediaSetting`（修改媒体输出配置），项目状态为 Idle 时可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B3-.E4.BF.AE.E6.94.B9.E8.BE.93.E5.87.BA.E7.9A.84.E5.AA.92.E4.BD.93.E9.85.8D.E7.BD.AE)；
+- `ModifyPlaySetting`（修改播放结束时间），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B1-.E4.BF.AE.E6.94.B9.E7.BB.93.E6.9D.9F.E6.97.B6.E9.97.B4);
+- `DescribePlayInfo`（查询播放信息），项目状态为 Idle、Working 时均可以操作。参见 [示例](#.E7.A4.BA.E4.BE.8B11-.E6.9F.A5.E8.AF.A2.E7.82.B9.E6.92.AD.E8.BD.AC.E7.9B.B4.E6.92.AD.E9.A1.B9.E7.9B.AE.E7.9A.84.E6.92.AD.E6.94.BE.E4.BF.A1.E6.81.AF)。
      */
-    ModifyVideoEncodingPreset(req: ModifyVideoEncodingPresetRequest, cb?: (error: string, rep: ModifyVideoEncodingPresetResponse) => void): Promise<ModifyVideoEncodingPresetResponse>;
+    HandleMediaCastProject(req: HandleMediaCastProjectRequest, cb?: (error: string, rep: HandleMediaCastProjectResponse) => void): Promise<HandleMediaCastProjectResponse>;
     /**
      * 根据媒体 Id 批量获取媒体详情。
      */
@@ -198,7 +216,7 @@ export declare class Client extends AbstractClient {
      */
     ImportMediaToProject(req: ImportMediaToProjectRequest, cb?: (error: string, rep: ImportMediaToProjectResponse) => void): Promise<ImportMediaToProjectResponse>;
     /**
-     *  浏览当前分类路径下的资源，包括媒体文件和子分类，返回媒资基础信息和分类信息。
+     * 浏览当前分类路径下的资源，包括媒体文件和子分类，返回媒资基础信息和分类信息。
      */
     ListMedia(req: ListMediaRequest, cb?: (error: string, rep: ListMediaResponse) => void): Promise<ListMediaResponse>;
     /**
@@ -209,6 +227,7 @@ export declare class Client extends AbstractClient {
 <li>视频拆条：用于视频拆条；</li>
 <li>录制回放项目：用于直播录制回放；</li>
 <li>云转推项目：用于直播云转推。</li>
+<li>点播转直播项目：用于点播文件转直播输出。</li>
      */
     CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
     /**
@@ -222,7 +241,6 @@ export declare class Client extends AbstractClient {
  如果 SourceResource.Resource.Id = /素材/视频/NBA，DestinationResource.Resource.Id= /素材/视频/篮球
 <li>当 DestinationResource.Resource.Id 不存在时候且原始资源与目标资源归属相同，操作结果为重命名原始分类；</li>
 <li>当 DestinationResource.Resource.Id 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA</li>
-
      */
     MoveResource(req: MoveResourceRequest, cb?: (error: string, rep: MoveResourceResponse) => void): Promise<MoveResourceResponse>;
     /**
@@ -232,7 +250,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteClass(req: DeleteClassRequest, cb?: (error: string, rep: DeleteClassResponse) => void): Promise<DeleteClassResponse>;
     /**
-     * 删除项目。
+     * 删除项目。处于推流状态的云转推和点播转直播项目不允许删除，若强行调用删除项目接口会返回失败。
      */
     DeleteProject(req: DeleteProjectRequest, cb?: (error: string, rep: DeleteProjectResponse) => void): Promise<DeleteProjectResponse>;
     /**

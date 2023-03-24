@@ -750,109 +750,17 @@ export interface EsParam {
     DropDlq?: FailureParam;
 }
 /**
- * 查询连接源具体数据的返参
+ * DescribeAclRule返回参数结构体
  */
-export interface DescribeConnectResource {
+export interface DescribeAclRuleResponse {
     /**
-      * 连接源的Id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回的AclRule结果集对象
       */
-    ResourceId: string;
+    Result: AclRuleResp;
     /**
-      * 连接源名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ResourceName: string;
-    /**
-      * 连接源描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * 连接源类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: string;
-    /**
-      * 连接源的状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: number;
-    /**
-      * 连接源的创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 连接源的异常信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ErrorMessage: string;
-    /**
-      * 连接源的当前所处步骤
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CurrentStep: string;
-    /**
-      * 该连接源关联的Datahub任务数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatahubTaskCount: number;
-    /**
-      * Dts配置，Type为DTS时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DtsConnectParam: DtsConnectParam;
-    /**
-      * MongoDB配置，Type为MONGODB时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MongoDBConnectParam: MongoDBConnectParam;
-    /**
-      * Es配置，Type为ES时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EsConnectParam: EsConnectParam;
-    /**
-      * ClickHouse配置，Type为CLICKHOUSE时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClickHouseConnectParam: ClickHouseConnectParam;
-    /**
-      * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MySQLConnectParam: MySQLConnectParam;
-    /**
-      * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PostgreSQLConnectParam: PostgreSQLConnectParam;
-    /**
-      * MariaDB配置，Type为MARIADB时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MariaDBConnectParam: MariaDBConnectParam;
-    /**
-      * SQLServer配置，Type为SQLSERVER时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SQLServerConnectParam: SQLServerConnectParam;
-    /**
-      * Ctsdb配置，Type为CTSDB时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CtsdbConnectParam: CtsdbConnectParam;
-    /**
-      * Doris 配置，Type 为 DORIS 时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DorisConnectParam: DorisConnectParam;
-    /**
-      * Kafka配置，Type 为 KAFKA 时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KafkaConnectParam?: KafkaConnectParam;
+    RequestId?: string;
 }
 /**
  * Dts类型入参
@@ -1485,18 +1393,41 @@ export interface ModifyInstancePreRequest {
     Partition?: number;
 }
 /**
- * CreateToken返回参数结构体
+ * CreateAclRule请求参数结构体
  */
-export interface CreateTokenResponse {
+export interface CreateAclRuleRequest {
     /**
-      * token串
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例id信息
       */
-    Result: string;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Acl资源类型,目前只支持Topic,枚举值列表：Topic
       */
-    RequestId?: string;
+    ResourceType: string;
+    /**
+      * 匹配类型，目前支持前缀匹配与预设策略，枚举值列表：PREFIXED/PRESET
+      */
+    PatternType: string;
+    /**
+      * 规则名称
+      */
+    RuleName: string;
+    /**
+      * 设置的ACL规则列表
+      */
+    RuleList: Array<AclRuleInfo>;
+    /**
+      * 表示前缀匹配的前缀的值
+      */
+    Pattern?: string;
+    /**
+      * 预设ACL规则是否应用到新增的topic中
+      */
+    IsApplied?: number;
+    /**
+      * ACL规则的备注
+      */
+    Comment?: string;
 }
 /**
  * 数据处理参数
@@ -1595,6 +1526,23 @@ export interface ClickHouseModifyConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsUpdate?: boolean;
+}
+/**
+ * ModifyAclRule请求参数结构体
+ */
+export interface ModifyAclRuleRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * ACL策略名
+      */
+    RuleName: string;
+    /**
+      * 是否应用到新增的Topic
+      */
+    IsApplied: number;
 }
 /**
  * 查询Datahub任务列表
@@ -1813,13 +1761,14 @@ export interface CtsdbModifyConnectParam {
     Resource?: string;
 }
 /**
- * DescribeACL返回参数结构体
+ * CreateToken返回参数结构体
  */
-export interface DescribeACLResponse {
+export interface CreateTokenResponse {
     /**
-      * 返回的ACL结果集对象
+      * token串
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: AclResponse;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2030,6 +1979,19 @@ export interface Tag {
     TagValue: string;
 }
 /**
+ * ModifyAclRule返回参数结构体
+ */
+export interface ModifyAclRuleResponse {
+    /**
+      * 规则的唯一表示Key
+      */
+    Result: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyConnectResource请求参数结构体
  */
 export interface ModifyConnectResourceRequest {
@@ -2104,45 +2066,17 @@ export interface ModifyInstanceAttributesResponse {
     RequestId?: string;
 }
 /**
- * record 与数据库表的映射关系
+ * DescribeACL返回参数结构体
  */
-export interface RecordMapping {
+export interface DescribeACLResponse {
     /**
-      * 消息的 key 名称
+      * 返回的ACL结果集对象
       */
-    JsonKey?: string;
+    Result: AclResponse;
     /**
-      * 消息类型
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Type?: string;
-    /**
-      * 消息是否允许为空
-      */
-    AllowNull?: boolean;
-    /**
-      * 对应映射列名称
-      */
-    ColumnName?: string;
-    /**
-      * 数据库表额外字段
-      */
-    ExtraInfo?: string;
-    /**
-      * 当前列大小
-      */
-    ColumnSize?: string;
-    /**
-      * 当前列精度
-      */
-    DecimalDigits?: string;
-    /**
-      * 是否为自增列
-      */
-    AutoIncrement?: boolean;
-    /**
-      * 数据库表默认参数
-      */
-    DefaultValue?: string;
+    RequestId?: string;
 }
 /**
  * BatchModifyGroupOffsets返回参数结构体
@@ -3468,6 +3402,15 @@ export interface TransformParam {
     UseEventBus?: boolean;
 }
 /**
+ * DeleteRouteTriggerTime请求参数结构体
+ */
+export interface DeleteRouteTriggerTimeRequest {
+    /**
+      * 修改时间
+      */
+    DelayTime: string;
+}
+/**
  * DescribeTopicSubscribeGroup请求参数结构体
  */
 export interface DescribeTopicSubscribeGroupRequest {
@@ -3530,6 +3473,47 @@ export interface DatahubTopicResp {
       * Topic名称
       */
     TopicName: string;
+}
+/**
+ * record 与数据库表的映射关系
+ */
+export interface RecordMapping {
+    /**
+      * 消息的 key 名称
+      */
+    JsonKey?: string;
+    /**
+      * 消息类型
+      */
+    Type?: string;
+    /**
+      * 消息是否允许为空
+      */
+    AllowNull?: boolean;
+    /**
+      * 对应映射列名称
+      */
+    ColumnName?: string;
+    /**
+      * 数据库表额外字段
+      */
+    ExtraInfo?: string;
+    /**
+      * 当前列大小
+      */
+    ColumnSize?: string;
+    /**
+      * 当前列精度
+      */
+    DecimalDigits?: string;
+    /**
+      * 是否为自增列
+      */
+    AutoIncrement?: boolean;
+    /**
+      * 数据库表默认参数
+      */
+    DefaultValue?: string;
 }
 /**
  * DescribeInstanceAttributes请求参数结构体
@@ -3880,6 +3864,50 @@ export interface DorisModifyConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BePort?: number;
+}
+/**
+ * 数据处理——处理链
+ */
+export interface FieldParam {
+    /**
+      * 解析
+      */
+    Analyse: AnalyseParam;
+    /**
+      * 二次解析
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecondaryAnalyse?: SecondaryAnalyseParam;
+    /**
+      * 数据处理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SMT?: Array<SMTParam>;
+    /**
+      * 测试结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: string;
+    /**
+      * 解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnalyseResult?: Array<SMTParam>;
+    /**
+      * 二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecondaryAnalyseResult?: Array<SMTParam>;
+    /**
+      * JSON格式解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnalyseJsonResult?: string;
+    /**
+      * JSON格式二次解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecondaryAnalyseJsonResult?: string;
 }
 /**
  * DescribeGroupInfo返回参数结构体
@@ -4620,48 +4648,17 @@ export interface DatahubTaskInfo {
     StepList: Array<string>;
 }
 /**
- * 数据处理——处理链
+ * CreateAclRule返回参数结构体
  */
-export interface FieldParam {
+export interface CreateAclRuleResponse {
     /**
-      * 解析
+      * 规则的唯一表示Key
       */
-    Analyse: AnalyseParam;
+    Result: number;
     /**
-      * 二次解析
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SecondaryAnalyse?: SecondaryAnalyseParam;
-    /**
-      * 数据处理
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SMT?: Array<SMTParam>;
-    /**
-      * 测试结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: string;
-    /**
-      * 解析结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AnalyseResult?: Array<SMTParam>;
-    /**
-      * 二次解析结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SecondaryAnalyseResult?: Array<SMTParam>;
-    /**
-      * JSON格式解析结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AnalyseJsonResult?: string;
-    /**
-      * JSON格式二次解析结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SecondaryAnalyseJsonResult?: string;
+    RequestId?: string;
 }
 /**
  * DescribeTopicAttributes返回参数结构体
@@ -4784,13 +4781,13 @@ export interface DescribeGroupOffsetsRequest {
     Limit?: number;
 }
 /**
- * DeleteRouteTriggerTime请求参数结构体
+ * DeleteConnectResource请求参数结构体
  */
-export interface DeleteRouteTriggerTimeRequest {
+export interface DeleteConnectResourceRequest {
     /**
-      * 修改时间
+      * 连接源的Id
       */
-    DelayTime: string;
+    ResourceId: string;
 }
 /**
  * DeleteDatahubTask返回参数结构体
@@ -6825,6 +6822,27 @@ export interface Acl {
     PermissionType: number;
 }
 /**
+ * DescribeAclRule请求参数结构体
+ */
+export interface DescribeAclRuleRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * ACL规则名
+      */
+    RuleName?: string;
+    /**
+      * ACL规则匹配类型
+      */
+    PatternType?: string;
+    /**
+      * 是否读取简略的ACL规则
+      */
+    IsSimplified?: boolean;
+}
+/**
  * MongoDB类型入参
  */
 export interface MongoDBParam {
@@ -7279,6 +7297,121 @@ export interface DescribeTopicSyncReplicaRequest {
     OutOfSyncReplicaOnly?: boolean;
 }
 /**
+ * 查询连接源具体数据的返参
+ */
+export interface DescribeConnectResource {
+    /**
+      * 连接源的Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: string;
+    /**
+      * 连接源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceName: string;
+    /**
+      * 连接源描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 连接源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 连接源的状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 连接源的创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 连接源的异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMessage: string;
+    /**
+      * 该连接源关联的Datahub任务数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatahubTaskCount: number;
+    /**
+      * 连接源的当前所处步骤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrentStep: string;
+    /**
+      * 创建进度百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskProgress?: number;
+    /**
+      * 步骤列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepList?: Array<string>;
+    /**
+      * Dts配置，Type为DTS时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DtsConnectParam: DtsConnectParam;
+    /**
+      * MongoDB配置，Type为MONGODB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MongoDBConnectParam: MongoDBConnectParam;
+    /**
+      * Es配置，Type为ES时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EsConnectParam: EsConnectParam;
+    /**
+      * ClickHouse配置，Type为CLICKHOUSE时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClickHouseConnectParam: ClickHouseConnectParam;
+    /**
+      * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MySQLConnectParam: MySQLConnectParam;
+    /**
+      * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PostgreSQLConnectParam: PostgreSQLConnectParam;
+    /**
+      * MariaDB配置，Type为MARIADB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MariaDBConnectParam: MariaDBConnectParam;
+    /**
+      * SQLServer配置，Type为SQLSERVER时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SQLServerConnectParam: SQLServerConnectParam;
+    /**
+      * Ctsdb配置，Type为CTSDB时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CtsdbConnectParam: CtsdbConnectParam;
+    /**
+      * Doris 配置，Type 为 DORIS 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DorisConnectParam: DorisConnectParam;
+    /**
+      * Kafka配置，Type 为 KAFKA 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KafkaConnectParam?: KafkaConnectParam;
+}
+/**
  * ModifyDatahubTask请求参数结构体
  */
 export interface ModifyDatahubTaskRequest {
@@ -7516,13 +7649,18 @@ export interface MySQLModifyConnectParam {
     SelfBuilt?: boolean;
 }
 /**
- * DeleteConnectResource请求参数结构体
+ * AclRule列表接口返回结果
  */
-export interface DeleteConnectResourceRequest {
+export interface AclRuleResp {
     /**
-      * 连接源的Id
+      * 总数据条数
       */
-    ResourceId: string;
+    TotalCount: number;
+    /**
+      * AclRule列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AclRuleList: Array<AclRule>;
 }
 /**
  * SQLServer类型入参

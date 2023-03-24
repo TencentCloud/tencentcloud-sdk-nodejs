@@ -376,7 +376,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorHotKey", req, cb);
     }
     /**
-     * 修改redis密码
+     * 本接口（ModfiyInstancePassword）用于修改实例访问密码。
      */
     async ModfiyInstancePassword(req, cb) {
         return this.request("ModfiyInstancePassword", req, cb);
@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
-     * 查询SSL状态
+     * 本接口（DescribeSSLStatus）用于查询实例 SSL 认证相关信息，包括开启状态、配置状态、证书地址等。
      */
     async DescribeSSLStatus(req, cb) {
         return this.request("DescribeSSLStatus", req, cb);
@@ -550,7 +550,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstances", req, cb);
     }
     /**
-     * 查询订单信息
+     * 本接口（DescribeInstanceDealDetail）用于查询订单信息。
      */
     async DescribeInstanceDealDetail(req, cb) {
         return this.request("DescribeInstanceDealDetail", req, cb);

@@ -551,11 +551,16 @@ export interface SeatUserInfo {
     /**
       * 坐席名称
       */
-    Name?: string;
+    Name: string;
     /**
       * 坐席邮箱
       */
-    Mail?: string;
+    Mail: string;
+    /**
+      * 工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StaffNumber: string;
     /**
       * 坐席电话号码（带0086前缀）
       */
@@ -573,11 +578,6 @@ export interface SeatUserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkillGroupNameList?: Array<string>;
-    /**
-      * 工号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StaffNumber?: string;
 }
 /**
  * CreateStaff返回参数结构体

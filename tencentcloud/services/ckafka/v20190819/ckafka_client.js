@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstancePost", req, cb);
     }
     /**
+     * 查询ACL规则列表
+     */
+    async DescribeAclRule(req, cb) {
+        return this.request("DescribeAclRule", req, cb);
+    }
+    /**
      * 查询订阅某主题消息分组信息
      */
     async DescribeTopicSubscribeGroup(req, cb) {
@@ -262,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckCdcCluster", req, cb);
     }
     /**
+     * 修改AC策略，目前只支持预设规则的是否应用到新增topic这一项的修改
+     */
+    async ModifyAclRule(req, cb) {
+        return this.request("ModifyAclRule", req, cb);
+    }
+    /**
      * 本接口用于增加主题中的分区
      */
     async CreatePartition(req, cb) {
@@ -406,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopic(req, cb) {
         return this.request("DescribeTopic", req, cb);
+    }
+    /**
+     * 添加 ACL 规则
+     */
+    async CreateAclRule(req, cb) {
+        return this.request("CreateAclRule", req, cb);
     }
     /**
      * 获取Datahub主题属性

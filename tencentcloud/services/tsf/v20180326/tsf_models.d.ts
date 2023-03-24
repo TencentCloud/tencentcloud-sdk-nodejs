@@ -509,6 +509,20 @@ false：停止失败
     RequestId?: string;
 }
 /**
+ * CreateConfigTemplateWithDetailResp返回参数结构体
+ */
+export interface CreateConfigTemplateWithDetailRespResponse {
+    /**
+      * 创建成功，返回 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ConfigTemplate;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeletePathRewrites请求参数结构体
  */
 export interface DeletePathRewritesRequest {
@@ -1387,21 +1401,18 @@ export interface RollbackConfigRequest {
     ReleaseDesc?: string;
 }
 /**
- * DescribePrograms请求参数结构体
+ * DisassociateBusinessLogConfig返回参数结构体
  */
-export interface DescribeProgramsRequest {
+export interface DisassociateBusinessLogConfigResponse {
     /**
-      * 模糊查询数据集ID，数据集名称，不传入时查询全量
+      * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SearchWord?: string;
+    Result?: boolean;
     /**
-      * 每页数量
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit?: number;
-    /**
-      * 起始偏移量
-      */
-    Offset?: number;
+    RequestId?: string;
 }
 /**
  * CreateGatewayApi请求参数结构体
@@ -1774,6 +1785,20 @@ export interface DescribeRepositoryResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: RepositoryInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ReleaseConfigWithDetailResp返回参数结构体
+ */
+export interface ReleaseConfigWithDetailRespResponse {
+    /**
+      * 配置项发布 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ConfigRelease;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2294,6 +2319,52 @@ export interface DescribeRepositoryRequest {
     RepositoryId: string;
 }
 /**
+ * CreatePublicConfigWithDetailResp请求参数结构体
+ */
+export interface CreatePublicConfigWithDetailRespRequest {
+    /**
+      * 配置项名称
+      */
+    ConfigName: string;
+    /**
+      * 配置项版本
+      */
+    ConfigVersion: string;
+    /**
+      * 配置项值，总是接收yaml格式的内容
+      */
+    ConfigValue: string;
+    /**
+      * 配置项版本描述
+      */
+    ConfigVersionDesc?: string;
+    /**
+      * 配置项类型
+      */
+    ConfigType?: string;
+    /**
+      * Base64编码的配置项
+      */
+    EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
+}
+/**
+ * DescribeResourceTaskStatus返回参数结构体
+ */
+export interface DescribeResourceTaskStatusResponse {
+    /**
+      * 资源任务执行状态结果
+      */
+    Result?: ResourceTaskStatusResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RedoTask请求参数结构体
  */
 export interface RedoTaskRequest {
@@ -2622,18 +2693,21 @@ export interface TaskLastExecuteStatus {
     BatchLogId: string;
 }
 /**
- * DisassociateBusinessLogConfig返回参数结构体
+ * DescribePrograms请求参数结构体
  */
-export interface DisassociateBusinessLogConfigResponse {
+export interface DescribeProgramsRequest {
     /**
-      * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
+      * 模糊查询数据集ID，数据集名称，不传入时查询全量
       */
-    Result?: boolean;
+    SearchWord?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 每页数量
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 起始偏移量
+      */
+    Offset?: number;
 }
 /**
  * DescribePublicConfig请求参数结构体
@@ -3127,6 +3201,19 @@ export interface TsfPageInstance {
     Content: Array<Instance>;
 }
 /**
+ * ModifyLane返回参数结构体
+ */
+export interface ModifyLaneResponse {
+    /**
+      * 操作状态
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteGroup返回参数结构体
  */
 export interface DeleteGroupResponse {
@@ -3312,6 +3399,44 @@ export interface DeployContainerGroupRequest {
       * 预热配置信息
       */
     WarmupSetting?: WarmupSetting;
+}
+/**
+ * CreateApiRateLimitRuleWithDetailResp请求参数结构体
+ */
+export interface CreateApiRateLimitRuleWithDetailRespRequest {
+    /**
+      * Api Id
+      */
+    ApiId: string;
+    /**
+      * qps值
+      */
+    MaxQps: number;
+    /**
+      * 开启/禁用，enabled/disabled, 不传默认开启
+      */
+    UsableStatus?: string;
+}
+/**
+ * CreateUnitRuleWithDetailResp请求参数结构体
+ */
+export interface CreateUnitRuleWithDetailRespRequest {
+    /**
+      * 网关实体ID
+      */
+    GatewayInstanceId: string;
+    /**
+      * 规则名称
+      */
+    Name: string;
+    /**
+      * 规则描述
+      */
+    Description?: string;
+    /**
+      * 规则项列表
+      */
+    UnitRuleItemList?: Array<UnitRuleItem>;
 }
 /**
  * DescribeSimpleApplications请求参数结构体
@@ -4186,6 +4311,20 @@ export interface DescribeContainerGroupDetailResponse {
     RequestId?: string;
 }
 /**
+ * CreatePathRewritesWithDetailResp返回参数结构体
+ */
+export interface CreatePathRewritesWithDetailRespResponse {
+    /**
+      * 返回路径重写规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 服务端口
  */
 export interface Ports {
@@ -4290,6 +4429,20 @@ export interface DeleteMicroserviceRequest {
       * 微服务ID
       */
     MicroserviceId: string;
+}
+/**
+ * CreatePublicConfigWithDetailResp返回参数结构体
+ */
+export interface CreatePublicConfigWithDetailRespResponse {
+    /**
+      * 公共配置项 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: Config;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RemoveInstances返回参数结构体
@@ -6207,6 +6360,20 @@ export interface MetricDimension {
     Value?: string;
 }
 /**
+ * CreateUnitRuleWithDetailResp返回参数结构体
+ */
+export interface CreateUnitRuleWithDetailRespResponse {
+    /**
+      * 单元化规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: UnitRule;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * api分组已绑定的网关部署组
  */
 export interface GatewayDeployGroup {
@@ -7036,6 +7203,31 @@ export interface ModifyContainerReplicasResponse {
     RequestId?: string;
 }
 /**
+ * CreateConfigTemplateWithDetailResp请求参数结构体
+ */
+export interface CreateConfigTemplateWithDetailRespRequest {
+    /**
+      * 配置模板名称
+      */
+    ConfigTemplateName: string;
+    /**
+      * 配置模板对应的微服务框架
+      */
+    ConfigTemplateType: string;
+    /**
+      * 配置模板数据
+      */
+    ConfigTemplateValue: string;
+    /**
+      * 配置模板描述
+      */
+    ConfigTemplateDesc?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
+}
+/**
  * GatewayPlugin 翻页对象
  */
 export interface TsfPageGatewayPlugin {
@@ -7854,6 +8046,15 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
+ * CreatePathRewritesWithDetailResp请求参数结构体
+ */
+export interface CreatePathRewritesWithDetailRespRequest {
+    /**
+      * 路径重写列表
+      */
+    PathRewrites: Array<PathRewriteCreateObject>;
+}
+/**
  * DeleteFileConfig返回参数结构体
  */
 export interface DeleteFileConfigResponse {
@@ -7866,6 +8067,16 @@ export interface DeleteFileConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 资源任务转态结果
+ */
+export interface ResourceTaskStatusResult {
+    /**
+      * 任务的执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus: number;
 }
 /**
  * 返回容器的事件，比如 k8s deployment 或者 pod 的 events
@@ -7913,11 +8124,11 @@ export interface ContainerEvent {
     Count: number;
 }
 /**
- * ModifyLane返回参数结构体
+ * DeleteApiRateLimitRule返回参数结构体
  */
-export interface ModifyLaneResponse {
+export interface DeleteApiRateLimitRuleResponse {
     /**
-      * 操作状态
+      * 是否成功
       */
     Result?: boolean;
     /**
@@ -8557,6 +8768,15 @@ export interface StopTaskExecuteRequest {
     TaskId?: string;
 }
 /**
+ * DeleteApiRateLimitRule请求参数结构体
+ */
+export interface DeleteApiRateLimitRuleRequest {
+    /**
+      * 限流规则ID
+      */
+    RuleId: string;
+}
+/**
  * DescribePkgs请求参数结构体
  */
 export interface DescribePkgsRequest {
@@ -8640,6 +8860,23 @@ export interface DescribeApplicationAttributeRequest {
       * 应用ID
       */
     ApplicationId: string;
+}
+/**
+ * ReleaseConfigWithDetailResp请求参数结构体
+ */
+export interface ReleaseConfigWithDetailRespRequest {
+    /**
+      * 配置ID
+      */
+    ConfigId: string;
+    /**
+      * 部署组ID
+      */
+    GroupId: string;
+    /**
+      * 发布描述
+      */
+    ReleaseDesc?: string;
 }
 /**
  * CreateTask请求参数结构体
@@ -8874,14 +9111,14 @@ export interface SimpleGroup {
     AppMicroServiceType: string;
 }
 /**
- * DescribeContainerEvents返回参数结构体
+ * CreateApiRateLimitRuleWithDetailResp返回参数结构体
  */
-export interface DescribeContainerEventsResponse {
+export interface CreateApiRateLimitRuleWithDetailRespResponse {
     /**
-      * events 分页列表
+      * 创建的规则 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: TsfPageContainerEvent;
+    Result?: ApiRateLimitRule;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9358,20 +9595,6 @@ export interface ConfigReleaseLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RollbackFlag: boolean;
-}
-/**
- * CreateFileConfig返回参数结构体
- */
-export interface CreateFileConfigResponse {
-    /**
-      * true：创建成功；false：创建失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * CreateConfig请求参数结构体
@@ -10159,6 +10382,20 @@ export interface DescribeLaneRulesRequest {
     RuleIdList?: Array<string>;
 }
 /**
+ * DescribeContainerEvents返回参数结构体
+ */
+export interface DescribeContainerEventsResponse {
+    /**
+      * events 分页列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TsfPageContainerEvent;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 微服务网关单元化规则标签
  */
 export interface UnitRuleTag {
@@ -10391,13 +10628,14 @@ export interface ChangeApiUsableStatusResponse {
     RequestId?: string;
 }
 /**
- * EnableTask返回参数结构体
+ * CreateFileConfig返回参数结构体
  */
-export interface EnableTaskResponse {
+export interface CreateFileConfigResponse {
     /**
-      * 操作成功or失败
+      * true：创建成功；false：创建失败
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10865,33 +11103,13 @@ export interface StopGroupResponse {
     RequestId?: string;
 }
 /**
- * CreateRepository请求参数结构体
+ * CreatePathRewrites请求参数结构体
  */
-export interface CreateRepositoryRequest {
+export interface CreatePathRewritesRequest {
     /**
-      * 仓库名称
+      * 路径重写列表
       */
-    RepositoryName: string;
-    /**
-      * 仓库类型（默认仓库：default，私有仓库：private）
-      */
-    RepositoryType: string;
-    /**
-      * 仓库所在桶名称
-      */
-    BucketName: string;
-    /**
-      * 仓库所在桶地域
-      */
-    BucketRegion: string;
-    /**
-      * 目录
-      */
-    Directory?: string;
-    /**
-      * 仓库描述
-      */
-    RepositoryDesc?: string;
+    PathRewrites: PathRewriteCreateObject;
 }
 /**
  * ModifyMicroservice请求参数结构体
@@ -11999,6 +12217,15 @@ export interface InstanceEnrichedInfo {
     GroupName: string;
 }
 /**
+ * DescribeResourceTaskStatus请求参数结构体
+ */
+export interface DescribeResourceTaskStatusRequest {
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+}
+/**
  * DescribeInvocationMetricDataCurve返回参数结构体
  */
 export interface DescribeInvocationMetricDataCurveResponse {
@@ -12429,6 +12656,19 @@ export interface AdvanceSettings {
       * 子任务单机并发数限制，默认值为2
       */
     SubTaskConcurrency?: number;
+}
+/**
+ * EnableTask返回参数结构体
+ */
+export interface EnableTaskResponse {
+    /**
+      * 操作成功or失败
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ReleaseConfig请求参数结构体
@@ -13409,13 +13649,33 @@ export interface OperationInfoDetail {
     Supported: boolean;
 }
 /**
- * CreatePathRewrites请求参数结构体
+ * CreateRepository请求参数结构体
  */
-export interface CreatePathRewritesRequest {
+export interface CreateRepositoryRequest {
     /**
-      * 路径重写列表
+      * 仓库名称
       */
-    PathRewrites: PathRewriteCreateObject;
+    RepositoryName: string;
+    /**
+      * 仓库类型（默认仓库：default，私有仓库：private）
+      */
+    RepositoryType: string;
+    /**
+      * 仓库所在桶名称
+      */
+    BucketName: string;
+    /**
+      * 仓库所在桶地域
+      */
+    BucketRegion: string;
+    /**
+      * 目录
+      */
+    Directory?: string;
+    /**
+      * 仓库描述
+      */
+    RepositoryDesc?: string;
 }
 /**
  * DeleteNamespace请求参数结构体

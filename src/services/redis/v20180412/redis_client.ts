@@ -837,7 +837,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改redis密码
+   * 本接口（ModfiyInstancePassword）用于修改实例访问密码。
    */
   async ModfiyInstancePassword(
     req: ModfiyInstancePasswordRequest,
@@ -867,7 +867,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询SSL状态
+   * 本接口（DescribeSSLStatus）用于查询实例 SSL 认证相关信息，包括开启状态、配置状态、证书地址等。
    */
   async DescribeSSLStatus(
     req: DescribeSSLStatusRequest,
@@ -1127,7 +1127,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询订单信息
+   * 本接口（DescribeInstanceDealDetail）用于查询订单信息。
    */
   async DescribeInstanceDealDetail(
     req: DescribeInstanceDealDetailRequest,

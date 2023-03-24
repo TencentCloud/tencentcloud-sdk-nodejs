@@ -178,6 +178,16 @@ it("eb.v20210416.UpdateRule", async function () {
     }
 })
 
+it("eb.v20210416.DescribeLogTagValue", async function () {
+    try {
+       const data = await client.DescribeLogTagValue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eb.v20210416.DeleteTransformation", async function () {
     try {
        const data = await client.DeleteTransformation({})
@@ -201,6 +211,16 @@ it("eb.v20210416.CreateConnection", async function () {
 it("eb.v20210416.GetRule", async function () {
     try {
        const data = await client.GetRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eb.v20210416.SearchLog", async function () {
+    try {
+       const data = await client.SearchLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

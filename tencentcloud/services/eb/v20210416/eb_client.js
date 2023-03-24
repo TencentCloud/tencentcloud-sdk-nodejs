@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRule", req, cb);
     }
     /**
+     * 查询日志索引维度值
+     */
+    async DescribeLogTagValue(req, cb) {
+        return this.request("DescribeLogTagValue", req, cb);
+    }
+    /**
      * 用于删除转换器
      */
     async DeleteTransformation(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetRule(req, cb) {
         return this.request("GetRule", req, cb);
+    }
+    /**
+     * 日志检索
+     */
+    async SearchLog(req, cb) {
+        return this.request("SearchLog", req, cb);
     }
     /**
      * 删除事件连接器
