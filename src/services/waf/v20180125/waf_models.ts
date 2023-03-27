@@ -1669,27 +1669,27 @@ export interface DescribeAttackOverviewResponse {
   /**
    * 访问请求总数
    */
-  AccessCount: number
+  AccessCount?: number
 
   /**
    * Web攻击总数
    */
-  AttackCount: number
+  AttackCount?: number
 
   /**
    * 访问控制总数
    */
-  ACLCount: number
+  ACLCount?: number
 
   /**
    * CC攻击总数
    */
-  CCCount: number
+  CCCount?: number
 
   /**
    * Bot攻击总数
    */
-  BotCount: number
+  BotCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2037,7 +2037,37 @@ export interface ModifyAccessPeriodRequest {
 /**
  * DescribeAttackOverview请求参数结构体
  */
-export type DescribeAttackOverviewRequest = null
+export interface DescribeAttackOverviewRequest {
+  /**
+   * 查询开始时间
+   */
+  FromTime: string
+
+  /**
+   * 查询结束时间
+   */
+  ToTime: string
+
+  /**
+   * 客户的Appid
+   */
+  Appid?: number
+
+  /**
+   * 被查询的域名
+   */
+  Domain?: string
+
+  /**
+   * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
+   */
+  Edition?: string
+
+  /**
+   * WAF实例ID，不传则不过滤
+   */
+  InstanceID?: string
+}
 
 /**
  * bot的qps详情

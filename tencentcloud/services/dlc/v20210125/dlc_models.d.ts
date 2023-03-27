@@ -744,6 +744,11 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JobExecutorMaxNumbers?: number;
+    /**
+      * 镜像版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SparkImageVersion?: string;
 }
 /**
  * SwitchDataEngine请求参数结构体

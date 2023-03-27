@@ -286,6 +286,8 @@ export declare class Client extends AbstractClient {
     GetTaskState(req: GetTaskStateRequest, cb?: (error: string, rep: GetTaskStateResponse) => void): Promise<GetTaskStateResponse>;
     /**
      * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
+
+默认接口请求频率限制：20次/秒。
      */
     RecognizeOnlineTaxiItineraryOCR(req: RecognizeOnlineTaxiItineraryOCRRequest, cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void): Promise<RecognizeOnlineTaxiItineraryOCRResponse>;
     /**
@@ -296,6 +298,8 @@ export declare class Client extends AbstractClient {
     HKIDCardOCR(req: HKIDCardOCRRequest, cb?: (error: string, rep: HKIDCardOCRResponse) => void): Promise<HKIDCardOCRResponse>;
     /**
      * 本接口支持中英文图片/ PDF内常规表格、无线表格、多表格的检测和识别，支持日文有线表格识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
+
+默认接口请求频率限制：10次/秒。
      */
     RecognizeTableOCR(req: RecognizeTableOCRRequest, cb?: (error: string, rep: RecognizeTableOCRResponse) => void): Promise<RecognizeTableOCRResponse>;
     /**
@@ -421,11 +425,13 @@ export declare class Client extends AbstractClient {
 
 本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
 
-
+默认接口请求频率限制：10次/秒。
      */
     TableOCR(req: TableOCRRequest, cb?: (error: string, rep: TableOCRResponse) => void): Promise<TableOCRResponse>;
     /**
      * 本接口支持网约车驾驶证关键字段的识别，包括姓名、证号、起始日期、截止日期、发证日期。
+
+默认接口请求频率限制：5次/秒。
      */
     RideHailingDriverLicenseOCR(req: RideHailingDriverLicenseOCRRequest, cb?: (error: string, rep: RideHailingDriverLicenseOCRResponse) => void): Promise<RideHailingDriverLicenseOCRResponse>;
     /**
@@ -562,6 +568,8 @@ export declare class Client extends AbstractClient {
     AdvertiseOCR(req: AdvertiseOCRRequest, cb?: (error: string, rep: AdvertiseOCRResponse) => void): Promise<AdvertiseOCRResponse>;
     /**
      * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+
+默认接口请求频率限制：5次/秒。
      */
     VehicleRegCertOCR(req: VehicleRegCertOCRRequest, cb?: (error: string, rep: VehicleRegCertOCRResponse) => void): Promise<VehicleRegCertOCRResponse>;
     /**
@@ -584,6 +592,8 @@ export declare class Client extends AbstractClient {
     EnglishOCR(req: EnglishOCRRequest, cb?: (error: string, rep: EnglishOCRResponse) => void): Promise<EnglishOCRResponse>;
     /**
      * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+
+默认接口请求频率限制：5次/秒。
      */
     ResidenceBookletOCR(req: ResidenceBookletOCRRequest, cb?: (error: string, rep: ResidenceBookletOCRResponse) => void): Promise<ResidenceBookletOCRResponse>;
     /**
@@ -672,7 +682,8 @@ export declare class Client extends AbstractClient {
     EduPaperOCR(req: EduPaperOCRRequest, cb?: (error: string, rep: EduPaperOCRResponse) => void): Promise<EduPaperOCRResponse>;
     /**
      * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
-           
+
+默认接口请求频率限制：5次/秒。
      */
     RideHailingTransportLicenseOCR(req: RideHailingTransportLicenseOCRRequest, cb?: (error: string, rep: RideHailingTransportLicenseOCRResponse) => void): Promise<RideHailingTransportLicenseOCRResponse>;
     /**

@@ -33,6 +33,7 @@ import {
   ActiveHourDCDBInstanceResponse,
   DescribeDCDBPriceResponse,
   ModifyInstanceVportResponse,
+  DescribeDCDBInstanceDetailRequest,
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   TerminateDedicatedDBInstanceResponse,
@@ -62,12 +63,13 @@ import {
   DescribeDCDBInstanceNodeInfoRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
+  NodeInfo,
   DescribeOrdersResponse,
   CreateHourDCDBInstanceRequest,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
-  DescribeDCDBRenewalPriceRequest,
+  DescribeDCDBInstanceDetailResponse,
   ModifyInstanceNetworkResponse,
   DescribeDBSecurityGroupsRequest,
   DatabaseProcedure,
@@ -114,9 +116,9 @@ import {
   ColumnPrivilege,
   SplitShardConfig,
   RenewDCDBInstanceResponse,
-  DescribeShardSpecResponse,
-  AssociateSecurityGroupsResponse,
   DescribeDCDBRenewalPriceResponse,
+  AssociateSecurityGroupsResponse,
+  DescribeShardSpecResponse,
   DescribeDCDBShardsResponse,
   ZonesInfo,
   CreateHourDCDBInstanceResponse,
@@ -127,6 +129,7 @@ import {
   ShardInfo,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
+  ShardBriefInfo,
   DatabasePrivilege,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
@@ -175,6 +178,7 @@ import {
   SqlLogItem,
   DescribeAccountsResponse,
   DescribeDBSlowLogsResponse,
+  DescribeDCDBRenewalPriceRequest,
   DescribeDCDBInstancesRequest,
   Project,
   ModifyInstanceVportRequest,
@@ -790,6 +794,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloneAccountResponse) => void
   ): Promise<CloneAccountResponse> {
     return this.request("CloneAccount", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDCDBInstanceDetail）用于获取DCDB实例详情
+   */
+  async DescribeDCDBInstanceDetail(
+    req: DescribeDCDBInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeDCDBInstanceDetailResponse) => void
+  ): Promise<DescribeDCDBInstanceDetailResponse> {
+    return this.request("DescribeDCDBInstanceDetail", req, cb)
   }
 
   /**

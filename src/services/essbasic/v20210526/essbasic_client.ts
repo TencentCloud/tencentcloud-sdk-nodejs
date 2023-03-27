@@ -38,6 +38,8 @@ import {
   CreateFlowOption,
   BaseFlowInfo,
   CreateConsoleLoginUrlResponse,
+  ChannelDeleteRoleUsersRequest,
+  ChannelCreateUserRolesResponse,
   SyncProxyOrganizationRequest,
   ChannelCreatePrepareFlowRequest,
   ChannelCreateFlowRemindsRequest,
@@ -47,16 +49,17 @@ import {
   FlowApproverUrlInfo,
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
-  Agent,
+  ChannelRole,
   FlowApproverDetail,
-  RelieveInfo,
+  DescribeResourceUrlsByFlowsResponse,
   ChannelCreateFlowGroupByFilesRequest,
   DescribeFlowDetailInfoResponse,
   ResourceUrlInfo,
-  FlowApproverInfo,
+  ChannelDescribeRolesRequest,
   PrepareFlowsResponse,
   TemplateInfo,
   GetDownloadFlowUrlResponse,
+  Agent,
   Recipient,
   DescribeTemplatesResponse,
   StaffRole,
@@ -65,6 +68,7 @@ import {
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
+  SignUrlInfo,
   CommonFlowApprover,
   PdfVerifyResult,
   ChannelCancelMultiFlowSignQRCodeRequest,
@@ -81,17 +85,18 @@ import {
   ChannelCreateBoundFlowsRequest,
   ChannelDescribeEmployeesRequest,
   AuthorizedUser,
-  DescribeResourceUrlsByFlowsResponse,
+  ChannelDeleteRoleUsersResponse,
   SyncProxyOrganizationOperatorsRequest,
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
   SignQrCode,
+  FlowApproverInfo,
   ChannelGetTaskResultApiRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
   SyncProxyOrganizationOperatorsResponse,
-  SignUrlInfo,
+  FailedCreateRoleData,
   FlowResourceUrlInfo,
   UploadFile,
   ExtentServiceAuthInfo,
@@ -107,6 +112,7 @@ import {
   ChannelDescribeOrganizationSealsResponse,
   ChannelCreatePrepareFlowResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
+  ChannelDescribeRolesResponse,
   ChannelCreateReleaseFlowRequest,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
@@ -114,6 +120,7 @@ import {
   ChannelCreateBoundFlowsResponse,
   ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
+  ChannelCreateUserRolesRequest,
   ChannelGetTaskResultApiResponse,
   ChannelDeleteSealPoliciesResponse,
   Component,
@@ -124,6 +131,7 @@ import {
   SignUrl,
   ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
+  RelieveInfo,
   ChannelCreateSealPolicyRequest,
   OccupiedSeal,
   CreateFlowsByTemplatesRequest,
@@ -288,6 +296,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void
   ): Promise<ChannelDescribeOrganizationSealsResponse> {
     return this.request("ChannelDescribeOrganizationSeals", req, cb)
+  }
+
+  /**
+   * 渠道版删除员工绑定角色
+   */
+  async ChannelDeleteRoleUsers(
+    req: ChannelDeleteRoleUsersRequest,
+    cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void
+  ): Promise<ChannelDeleteRoleUsersResponse> {
+    return this.request("ChannelDeleteRoleUsers", req, cb)
+  }
+
+  /**
+   * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+   */
+  async DescribeTemplates(
+    req: DescribeTemplatesRequest,
+    cb?: (error: string, rep: DescribeTemplatesResponse) => void
+  ): Promise<DescribeTemplatesResponse> {
+    return this.request("DescribeTemplates", req, cb)
   }
 
   /**
@@ -498,6 +526,16 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
+   * 渠道办查询用户角色
+   */
+  async ChannelDescribeRoles(
+    req: ChannelDescribeRolesRequest,
+    cb?: (error: string, rep: ChannelDescribeRolesResponse) => void
+  ): Promise<ChannelDescribeRolesResponse> {
+    return this.request("ChannelDescribeRoles", req, cb)
+  }
+
+  /**
      * 根据签署流程信息批量获取资源下载链接，可以下载签署中、签署完的合同，需合作企业先进行授权。
 此接口直接返回下载的资源的url，与接口GetDownloadFlowUrl跳转到控制台的下载方式不同。
      */
@@ -509,13 +547,13 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+   * 渠道版绑定员工角色
    */
-  async DescribeTemplates(
-    req: DescribeTemplatesRequest,
-    cb?: (error: string, rep: DescribeTemplatesResponse) => void
-  ): Promise<DescribeTemplatesResponse> {
-    return this.request("DescribeTemplates", req, cb)
+  async ChannelCreateUserRoles(
+    req: ChannelCreateUserRolesRequest,
+    cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void
+  ): Promise<ChannelCreateUserRolesResponse> {
+    return this.request("ChannelCreateUserRoles", req, cb)
   }
 
   /**

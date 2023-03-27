@@ -2308,6 +2308,11 @@ export interface DescribeConnectResourcesRequest {
    * 返回数量，默认为20，最大值为100
    */
   Limit?: number
+
+  /**
+   * 连接源的关键字查询, 根据地域查询本地域内连接管理列表中的连接(仅支持包含region输入的连接源)
+   */
+  ResourceRegion?: string
 }
 
 /**
@@ -9156,7 +9161,7 @@ export interface DescribeConnectResourcesResponse {
   /**
    * 连接源列表
    */
-  Result: DescribeConnectResourcesResp
+  Result?: DescribeConnectResourcesResp
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

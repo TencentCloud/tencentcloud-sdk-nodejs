@@ -479,7 +479,7 @@ export class Client extends AbstractClient {
    * 攻击总览
    */
   async DescribeAttackOverview(
-    req?: DescribeAttackOverviewRequest,
+    req: DescribeAttackOverviewRequest,
     cb?: (error: string, rep: DescribeAttackOverviewResponse) => void
   ): Promise<DescribeAttackOverviewResponse> {
     return this.request("DescribeAttackOverview", req, cb)

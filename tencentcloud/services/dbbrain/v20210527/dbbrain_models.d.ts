@@ -193,6 +193,11 @@ export interface InstanceConfs {
       * 实例概览开关，Yes/No。
       */
     OverviewDisplay?: string;
+    /**
+      * redis大key分析的自定义分割符，仅redis使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyDelimiters?: Array<string>;
 }
 /**
  * CreateSecurityAuditLogExportTask请求参数结构体
@@ -1929,6 +1934,20 @@ export interface InstanceInfo {
       * 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。
       */
     AuditRunningStatus: string;
+    /**
+      * 内网vip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternalVip?: string;
+    /**
+      * 内网port
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternalVport?: number;
+    /**
+      * 创建时间
+      */
+    CreateTime?: string;
 }
 /**
  * CreateSqlFilter返回参数结构体

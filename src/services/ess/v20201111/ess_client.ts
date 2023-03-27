@@ -21,7 +21,7 @@ import {
   CancelFlowResponse,
   DescribeFlowEvidenceReportRequest,
   Department,
-  CreateSchemeUrlRequest,
+  CreatePreparedPersonalEsignRequest,
   FileInfo,
   CreateFlowApproversResponse,
   DescribeIntegrationMainOrganizationUserRequest,
@@ -46,6 +46,7 @@ import {
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
   CreateFlowRequest,
+  CreateSchemeUrlRequest,
   AutoSignConfig,
   DescribeThirdPartyAuthCodeRequest,
   CreateReleaseFlowResponse,
@@ -79,6 +80,7 @@ import {
   AuthorizedUser,
   CreateDocumentRequest,
   RemindFlowRecords,
+  CreatePreparedPersonalEsignResponse,
   DescribeOrganizationSealsResponse,
   DeleteIntegrationEmployeesRequest,
   SignQrCode,
@@ -267,6 +269,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateBatchCancelFlowUrlResponse) => void
   ): Promise<CreateBatchCancelFlowUrlResponse> {
     return this.request("CreateBatchCancelFlowUrl", req, cb)
+  }
+
+  /**
+   * 本接口（CreatePreparedPersonalEsign）由于创建导入个人印章。
+   */
+  async CreatePreparedPersonalEsign(
+    req: CreatePreparedPersonalEsignRequest,
+    cb?: (error: string, rep: CreatePreparedPersonalEsignResponse) => void
+  ): Promise<CreatePreparedPersonalEsignResponse> {
+    return this.request("CreatePreparedPersonalEsign", req, cb)
   }
 
   /**
@@ -568,7 +580,7 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-   * 创建员工
+   * 创建员工,如需在此接口提醒员工实名，入参Employees的OpenId不传
    */
   async CreateIntegrationEmployees(
     req: CreateIntegrationEmployeesRequest,

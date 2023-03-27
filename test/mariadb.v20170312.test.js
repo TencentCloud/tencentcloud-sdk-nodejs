@@ -668,6 +668,16 @@ it("mariadb.v20170312.UpgradeDBInstance", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeDBInstanceDetail", async function () {
+    try {
+       const data = await client.DescribeDBInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeLogFileRetentionPeriod", async function () {
     try {
        const data = await client.DescribeLogFileRetentionPeriod({})

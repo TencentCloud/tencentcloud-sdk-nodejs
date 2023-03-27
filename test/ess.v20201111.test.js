@@ -128,6 +128,16 @@ it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
     }
 })
 
+it("ess.v20201111.CreatePreparedPersonalEsign", async function () {
+    try {
+       const data = await client.CreatePreparedPersonalEsign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowApprovers", async function () {
     try {
        const data = await client.CreateFlowApprovers({})

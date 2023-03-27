@@ -140,7 +140,7 @@ export declare class Client extends AbstractClient {
     /**
      * 攻击总览
      */
-    DescribeAttackOverview(req?: DescribeAttackOverviewRequest, cb?: (error: string, rep: DescribeAttackOverviewResponse) => void): Promise<DescribeAttackOverviewResponse>;
+    DescribeAttackOverview(req: DescribeAttackOverviewRequest, cb?: (error: string, rep: DescribeAttackOverviewResponse) => void): Promise<DescribeAttackOverviewResponse>;
     /**
      * 删除访问日志下载记录
      */

@@ -56,56 +56,53 @@ export interface Department {
 }
 
 /**
- * CreateSchemeUrl请求参数结构体
+ * CreatePreparedPersonalEsign请求参数结构体
  */
-export interface CreateSchemeUrlRequest {
+export interface CreatePreparedPersonalEsignRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 个人用户名称
    */
-  Operator: UserInfo
+  UserName: string
 
   /**
-   * 企业名称
+   * 身份证件号码
    */
-  OrganizationName?: string
+  IdCardNumber: string
 
   /**
-   * 姓名,最大长度50个字符
+   * 印章图片的base64
    */
-  Name?: string
+  SealImage: string
 
   /**
-   * 手机号，大陆手机号11位
+   * 印章名称
+   */
+  SealName: string
+
+  /**
+   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
+   */
+  Operator?: UserInfo
+
+  /**
+      * 身份证件类型:
+ID_CARD 身份证
+PASSPORT 护照
+HONGKONG_AND_MACAO 香港身份
+FOREIGN_ID_CARD 国外身份
+HONGKONG_MACAO_AND_TAIWAN 港台身份
+      */
+  IdCardType?: string
+
+  /**
+   * 手机号码
    */
   Mobile?: string
 
   /**
-      * 链接类型
-HTTP：跳转电子签小程序的http_url，
-APP：第三方APP或小程序跳转电子签小程序的path。
-默认为HTTP类型
-      */
-  EndPoint?: string
-
-  /**
-   * 签署流程编号 (PathType=1时必传)
+   * 是否需开通自动签
    */
-  FlowId?: string
-
-  /**
-   * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
-   */
-  PathType?: number
-
-  /**
-   * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
-   */
-  AutoJumpBack?: boolean
-
-  /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
-   */
-  Agent?: Agent
+  EnableAutoSign?: boolean
 }
 
 /**
@@ -317,6 +314,11 @@ export interface CreateIntegrationEmployeesRequest {
    * 待创建员工的信息，Mobile和DisplayName必填
    */
   Employees: Array<Staff>
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -910,6 +912,59 @@ false：有序签
 注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。
       */
   CcInfos?: Array<CcInfo>
+}
+
+/**
+ * CreateSchemeUrl请求参数结构体
+ */
+export interface CreateSchemeUrlRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 企业名称
+   */
+  OrganizationName?: string
+
+  /**
+   * 姓名,最大长度50个字符
+   */
+  Name?: string
+
+  /**
+   * 手机号，大陆手机号11位
+   */
+  Mobile?: string
+
+  /**
+      * 链接类型
+HTTP：跳转电子签小程序的http_url，
+APP：第三方APP或小程序跳转电子签小程序的path。
+默认为HTTP类型
+      */
+  EndPoint?: string
+
+  /**
+   * 签署流程编号 (PathType=1时必传)
+   */
+  FlowId?: string
+
+  /**
+   * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
+   */
+  PathType?: number
+
+  /**
+   * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
+   */
+  AutoJumpBack?: boolean
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -1765,7 +1820,7 @@ export interface Staff {
   Email?: string
 
   /**
-      * 用户在第三方平台id
+      * 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OpenId?: string
@@ -1803,6 +1858,16 @@ export interface Staff {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QuiteJob?: number
+
+  /**
+   * 员工离职交接人用户id
+   */
+  ReceiveUserId?: string
+
+  /**
+   * 员工离职交接人用户OpenId
+   */
+  ReceiveOpenId?: string
 }
 
 /**
@@ -2013,6 +2078,21 @@ export interface RemindFlowRecords {
 }
 
 /**
+ * CreatePreparedPersonalEsign返回参数结构体
+ */
+export interface CreatePreparedPersonalEsignResponse {
+  /**
+   * 导入生成的印章ID
+   */
+  SealId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationSeals返回参数结构体
  */
 export interface DescribeOrganizationSealsResponse {
@@ -2045,6 +2125,11 @@ export interface DeleteIntegrationEmployeesRequest {
    * 待移除员工的信息，userId和openId二选一，必填一个
    */
   Employees: Array<Staff>
+
+  /**
+   * 代理信息
+   */
+  Agent?: Agent
 }
 
 /**
@@ -2114,7 +2199,7 @@ export interface CreateIntegrationEmployeesResponse {
   /**
    * 创建员工的结果
    */
-  CreateEmployeeResult: CreateStaffResult
+  CreateEmployeeResult?: CreateStaffResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2291,6 +2376,12 @@ export interface SuccessCreateStaffData {
    * 员工在电子签平台的id
    */
   UserId: string
+
+  /**
+      * 提示，当创建已存在未实名用户时，改字段有值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Note?: string
 }
 
 /**
@@ -2368,7 +2459,7 @@ export interface Recipient {
  */
 export interface VerifyPdfRequest {
   /**
-   * 合同Id，流程Id
+   * 流程ID
    */
   FlowId: string
 
@@ -3096,7 +3187,7 @@ MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；
 CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；
 FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；
 DYNAMIC_TABLE - 动态表格控件；
-ATTACHMENT - 附件控件,ComponentValue 填写福建图片的资源 ID列表，以逗号分割；
+ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；
 SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；
 DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；
 DISTRICT - 省市区行政区划控件，ComponentValue填写省市区行政区划字符串内容；
@@ -3364,7 +3455,7 @@ export interface DeleteIntegrationEmployeesResponse {
   /**
    * 员工删除数据
    */
-  DeleteEmployeeResult: DeleteStaffsResult
+  DeleteEmployeeResult?: DeleteStaffsResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3399,18 +3490,17 @@ export interface VerifyPdfResponse {
   /**
    * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
    */
-  VerifyResult: number
+  VerifyResult?: number
 
   /**
-      * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
-；5-文件签名格式错误
-      */
-  PdfVerifyResults: Array<PdfVerifyResult>
+   * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
+   */
+  PdfVerifyResults?: Array<PdfVerifyResult>
 
   /**
    * 验签序列号
    */
-  VerifySerialNo: string
+  VerifySerialNo?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

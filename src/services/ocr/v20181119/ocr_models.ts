@@ -62,7 +62,7 @@ export interface RecognizeOnlineTaxiItineraryOCRResponse {
   /**
    * 网约车行程单识别结果，具体内容请点击左侧链接。
    */
-  OnlineTaxiItineraryInfos: Array<OnlineTaxiItineraryInfo>
+  OnlineTaxiItineraryInfos?: Array<OnlineTaxiItineraryInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6027,7 +6027,7 @@ export interface VehicleRegCertOCRResponse {
   /**
    * 机动车登记证书识别结果，具体内容请点击左侧链接。
    */
-  VehicleRegCertInfos: Array<VehicleRegCertInfo>
+  VehicleRegCertInfos?: Array<VehicleRegCertInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

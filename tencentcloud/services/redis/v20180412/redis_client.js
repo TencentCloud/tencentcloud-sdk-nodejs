@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddReplicationInstance", req, cb);
     }
     /**
+     * 本接口（CloneInstances）可基于当前实例的备份文件克隆一个完整的新实例。
+     */
+    async CloneInstances(req, cb) {
+        return this.request("CloneInstances", req, cb);
+    }
+    /**
      * 创建参数模板。
      */
     async CreateParamTemplate(req, cb) {

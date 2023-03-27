@@ -12,11 +12,15 @@ export declare class Client extends AbstractClient {
      */
     CreateSelectiveCredential(req: CreateSelectiveCredentialRequest, cb?: (error: string, rep: CreateSelectiveCredentialResponse) => void): Promise<CreateSelectiveCredentialResponse>;
     /**
-     * 权威机构列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+权威机构列表
      */
     GetAuthoritiesList(req: GetAuthoritiesListRequest, cb?: (error: string, rep: GetAuthoritiesListResponse) => void): Promise<GetAuthoritiesListResponse>;
     /**
-     * 披露策略Policy管理列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy管理列表
      */
     GetPolicyList(req: GetPolicyListRequest, cb?: (error: string, rep: GetPolicyListResponse) => void): Promise<GetPolicyListResponse>;
     /**
@@ -24,7 +28,9 @@ export declare class Client extends AbstractClient {
      */
     GetCredentialStatus(req: GetCredentialStatusRequest, cb?: (error: string, rep: GetCredentialStatusResponse) => void): Promise<GetCredentialStatusResponse>;
     /**
-     * 查看公钥
+     * 下线已有内测接口，待上线正式版本的接口
+
+查看公钥
      */
     GetPublicKey(req: GetPublicKeyRequest, cb?: (error: string, rep: GetPublicKeyResponse) => void): Promise<GetPublicKeyResponse>;
     /**
@@ -32,71 +38,105 @@ export declare class Client extends AbstractClient {
      */
     CheckChain(req: CheckChainRequest, cb?: (error: string, rep: CheckChainResponse) => void): Promise<CheckChainResponse>;
     /**
-     * 披露策略Policy查看
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy查看
      */
     QueryPolicy(req: QueryPolicyRequest, cb?: (error: string, rep: QueryPolicyResponse) => void): Promise<QueryPolicyResponse>;
     /**
-     * 检查部署情况
+     * 下线已有内测接口，待上线正式版本的接口
+
+检查部署情况
      */
     CheckDidDeploy(req: CheckDidDeployRequest, cb?: (error: string, rep: CheckDidDeployResponse) => void): Promise<CheckDidDeployResponse>;
     /**
-     * 认证权威机构
+     * 下线已有内测接口，待上线正式版本的接口
+
+认证权威机构
      */
     RecognizeAuthorityIssuer(req: RecognizeAuthorityIssuerRequest, cb?: (error: string, rep: RecognizeAuthorityIssuerResponse) => void): Promise<RecognizeAuthorityIssuerResponse>;
     /**
-     * 撤消权威机构认证
+     * 下线已有内测接口，待上线正式版本的接口
+
+撤消权威机构认证
      */
     CancelAuthorityIssuer(req: CancelAuthorityIssuerRequest, cb?: (error: string, rep: CancelAuthorityIssuerResponse) => void): Promise<CancelAuthorityIssuerResponse>;
     /**
-     * DID注册趋势
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID注册趋势
      */
     GetDidRegisterTrend(req: GetDidRegisterTrendRequest, cb?: (error: string, rep: GetDidRegisterTrendResponse) => void): Promise<GetDidRegisterTrendResponse>;
     /**
-     * DID详情
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID详情
      */
     GetDidDetail(req: GetDidDetailRequest, cb?: (error: string, rep: GetDidDetailResponse) => void): Promise<GetDidDetailResponse>;
     /**
-     * 删除合约
+     * 下线已有内测接口，待上线正式版本的接口
+
+删除合约
      */
     RemoveHash(req: RemoveHashRequest, cb?: (error: string, rep: RemoveHashResponse) => void): Promise<RemoveHashResponse>;
     /**
-     * 凭证颁发按机构排行
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发按机构排行
      */
     GetCredentialIssueRank(req: GetCredentialIssueRankRequest, cb?: (error: string, rep: GetCredentialIssueRankResponse) => void): Promise<GetCredentialIssueRankResponse>;
     /**
-     * 主群组配置列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+主群组配置列表
      */
     GetGroupList(req: GetGroupListRequest, cb?: (error: string, rep: GetGroupListResponse) => void): Promise<GetGroupListResponse>;
     /**
-     * 披露策略Policy注册
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy注册
      */
     RegisterClaimPolicy(req: RegisterClaimPolicyRequest, cb?: (error: string, rep: RegisterClaimPolicyResponse) => void): Promise<RegisterClaimPolicyResponse>;
     /**
-     * 获取联盟列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取联盟列表
      */
     GetConsortiumList(req?: GetConsortiumListRequest, cb?: (error: string, rep: GetConsortiumListResponse) => void): Promise<GetConsortiumListResponse>;
     /**
-     * 获取用户的DID网络列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取用户的DID网络列表
      */
     GetDidClusterList(req?: GetDidClusterListRequest, cb?: (error: string, rep: GetDidClusterListResponse) => void): Promise<GetDidClusterListResponse>;
     /**
-     * 获取DID服务详情
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID服务详情
      */
     GetDidServiceDetail(req: GetDidServiceDetailRequest, cb?: (error: string, rep: GetDidServiceDetailResponse) => void): Promise<GetDidServiceDetailResponse>;
     /**
-     * 凭证模版列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证模版列表
      */
     GetCptList(req: GetCptListRequest, cb?: (error: string, rep: GetCptListResponse) => void): Promise<GetCptListResponse>;
     /**
-     * 凭证颁发趋势
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发趋势
      */
     GetCredentialIssueTrend(req: GetCredentialIssueTrendRequest, cb?: (error: string, rep: GetCredentialIssueTrendResponse) => void): Promise<GetCredentialIssueTrendResponse>;
     /**
-     * 通过Name部署TDID合约
+     * 下线已有内测接口，待上线正式版本的接口
+
+通过Name部署TDID合约
      */
     DeployByName(req: DeployByNameRequest, cb?: (error: string, rep: DeployByNameResponse) => void): Promise<DeployByNameResponse>;
     /**
-     * 创建DID服务
+     * 下线已有内测接口，待上线正式版本的接口
+
+创建DID服务
      */
     CreateDidService(req: CreateDidServiceRequest, cb?: (error: string, rep: CreateDidServiceResponse) => void): Promise<CreateDidServiceResponse>;
     /**
@@ -104,7 +144,9 @@ export declare class Client extends AbstractClient {
      */
     CreateCredential(req: CreateCredentialRequest, cb?: (error: string, rep: CreateCredentialResponse) => void): Promise<CreateCredentialResponse>;
     /**
-     * 获取DID区块链网络详情
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID区块链网络详情
      */
     GetDidClusterDetail(req: GetDidClusterDetailRequest, cb?: (error: string, rep: GetDidClusterDetailResponse) => void): Promise<GetDidClusterDetailResponse>;
     /**
@@ -112,15 +154,21 @@ export declare class Client extends AbstractClient {
      */
     SetCredentialStatus(req: SetCredentialStatusRequest, cb?: (error: string, rep: SetCredentialStatusResponse) => void): Promise<SetCredentialStatusResponse>;
     /**
-     * 标签列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+标签列表
      */
     GetLabelList(req: GetLabelListRequest, cb?: (error: string, rep: GetLabelListResponse) => void): Promise<GetLabelListResponse>;
     /**
-     * 启用合约
+     * 下线已有内测接口，待上线正式版本的接口
+
+启用合约
      */
     EnableHash(req: EnableHashRequest, cb?: (error: string, rep: EnableHashResponse) => void): Promise<EnableHashResponse>;
     /**
-     * 合约部署列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+合约部署列表
      */
     GetDeployList(req: GetDeployListRequest, cb?: (error: string, rep: GetDeployListResponse) => void): Promise<GetDeployListResponse>;
     /**
@@ -128,16 +176,22 @@ export declare class Client extends AbstractClient {
      */
     CreateTDid(req: CreateTDidRequest, cb?: (error: string, rep: CreateTDidResponse) => void): Promise<CreateTDidResponse>;
     /**
-     * 注册为权威机构
+     * 下线已有内测接口，待上线正式版本的接口
+
+注册为权威机构
      */
     RegisterIssuer(req: RegisterIssuerRequest, cb?: (error: string, rep: RegisterIssuerResponse) => void): Promise<RegisterIssuerResponse>;
     /**
-     * 合约部署详情
+     * 下线已有内测接口，待上线正式版本的接口
+
+合约部署详情
 
      */
     GetDeployInfo(req: GetDeployInfoRequest, cb?: (error: string, rep: GetDeployInfoResponse) => void): Promise<GetDeployInfoResponse>;
     /**
-     * 凭证颁发按机构排行
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发按机构排行
      */
     GetCredentialCptRank(req: GetCredentialCptRankRequest, cb?: (error: string, rep: GetCredentialCptRankResponse) => void): Promise<GetCredentialCptRankResponse>;
     /**
@@ -150,11 +204,15 @@ export declare class Client extends AbstractClient {
      */
     GetDidDocument(req: GetDidDocumentRequest, cb?: (error: string, rep: GetDidDocumentResponse) => void): Promise<GetDidDocumentResponse>;
     /**
-     * 获取DID服务列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID服务列表
      */
     GetDidServiceList(req: GetDidServiceListRequest, cb?: (error: string, rep: GetDidServiceListResponse) => void): Promise<GetDidServiceListResponse>;
     /**
-     * DID列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID列表
      */
     GetDidList(req: GetDidListRequest, cb?: (error: string, rep: GetDidListResponse) => void): Promise<GetDidListResponse>;
     /**
@@ -172,12 +230,16 @@ export declare class Client extends AbstractClient {
      */
     CreateTDidByPrivateKey(req: CreateTDidByPrivateKeyRequest, cb?: (error: string, rep: CreateTDidByPrivateKeyResponse) => void): Promise<CreateTDidByPrivateKeyResponse>;
     /**
-     * DID添加标签
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID添加标签
 
      */
     AddLabel(req: AddLabelRequest, cb?: (error: string, rep: AddLabelResponse) => void): Promise<AddLabelResponse>;
     /**
-     * 凭证模版下载
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证模版下载
      */
     DownCpt(req: DownCptRequest, cb?: (error: string, rep: DownCptResponse) => void): Promise<DownCptResponse>;
     /**
@@ -185,7 +247,9 @@ export declare class Client extends AbstractClient {
      */
     RegisterCpt(req: RegisterCptRequest, cb?: (error: string, rep: RegisterCptResponse) => void): Promise<RegisterCptResponse>;
     /**
-     * 获取联盟bcos网络列表
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取联盟bcos网络列表
      */
     GetConsortiumClusterList(req: GetConsortiumClusterListRequest, cb?: (error: string, rep: GetConsortiumClusterListResponse) => void): Promise<GetConsortiumClusterListResponse>;
     /**
@@ -193,7 +257,9 @@ export declare class Client extends AbstractClient {
      */
     VerifyCredential(req: VerifyCredentialRequest, cb?: (error: string, rep: VerifyCredentialResponse) => void): Promise<VerifyCredentialResponse>;
     /**
-     * 概览
+     * 下线已有内测接口，待上线正式版本的接口
+
+概览
 
      */
     GetDataPanel(req: GetDataPanelRequest, cb?: (error: string, rep: GetDataPanelResponse) => void): Promise<GetDataPanelResponse>;
@@ -202,7 +268,9 @@ export declare class Client extends AbstractClient {
      */
     GetAuthorityIssuer(req: GetAuthorityIssuerRequest, cb?: (error: string, rep: GetAuthorityIssuerResponse) => void): Promise<GetAuthorityIssuerResponse>;
     /**
-     * 新建标签
+     * 下线已有内测接口，待上线正式版本的接口
+
+新建标签
      */
     CreateLabel(req: CreateLabelRequest, cb?: (error: string, rep: CreateLabelResponse) => void): Promise<CreateLabelResponse>;
 }

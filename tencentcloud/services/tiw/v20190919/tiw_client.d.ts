@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetWhiteboardPushCallbackKeyRequest, SetVideoGenerationTaskCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, StartWhiteboardPushRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeQualityMetricsResponse, DescribeTIWRoomDailyUsageResponse, ResumeOnlineRecordResponse, SetVideoGenerationTaskCallbackResponse, SetWhiteboardPushCallbackKeyResponse, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, DescribeSnapshotTaskResponse, StartWhiteboardPushResponse, ResumeOnlineRecordRequest, DescribeOnlineRecordCallbackRequest, StopWhiteboardPushRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackKeyResponse, CreateTranscodeResponse, CreateSnapshotTaskResponse, DescribeVideoGenerationTaskResponse, DescribeWhiteboardPushCallbackResponse, SetTranscodeCallbackKeyResponse, DescribeTIWDailyUsageResponse, DescribeOnlineRecordRequest, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, SetOnlineRecordCallbackKeyResponse, DescribeVideoGenerationTaskRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, CreateTranscodeRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, SetTranscodeCallbackKeyRequest, CreateSnapshotTaskRequest, DescribeTranscodeResponse, DescribeTranscodeCallbackResponse, DescribeQualityMetricsRequest, SetOnlineRecordCallbackKeyRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeRequest, DescribeOnlineRecordCallbackResponse, SetTranscodeCallbackRequest, SetWhiteboardPushCallbackRequest, SetWhiteboardPushCallbackResponse, DescribeTIWDailyUsageRequest, DescribeVideoGenerationTaskCallbackRequest, SetOnlineRecordCallbackRequest, PauseOnlineRecordRequest, StopWhiteboardPushResponse, SetOnlineRecordCallbackResponse } from "./tiw_models";
+import { DescribeOfflineRecordCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeWhiteboardPushSearchResponse, ResumeOnlineRecordResponse, DescribeWhiteboardApplicationConfigResponse, CreateSnapshotTaskResponse, DescribeOfflineRecordResponse, ModifyApplicationResponse, CreateTranscodeResponse, DescribeUserResourcesResponse, DescribeOnlineRecordRequest, ModifyWhiteboardBucketConfigRequest, SetOnlineRecordCallbackKeyResponse, DescribeAPIServiceRequest, DescribeQualityMetricsRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeSearchResponse, ResumeOnlineRecordRequest, SetWhiteboardPushCallbackKeyResponse, DescribeRoomListRequest, SetWhiteboardPushCallbackResponse, ApplyTiwTrialResponse, PauseOnlineRecordRequest, DescribeApplicationInfosResponse, DescribeApplicationUsageResponse, DescribeAPIServiceResponse, DescribeWhiteboardBucketConfigRequest, DescribeUsageSummaryResponse, DescribeApplicationInfosRequest, DescribeApplicationUsageRequest, DescribeOfflineRecordCallbackResponse, CreateOfflineRecordResponse, SetVideoGenerationTaskCallbackKeyResponse, DescribeVideoGenerationTaskResponse, DescribeVideoGenerationTaskRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, DescribeTranscodeRequest, DescribeBoardSDKLogResponse, SetOnlineRecordCallbackResponse, ApplyTiwTrialRequest, DescribeTranscodeCallbackResponse, DescribeUserListResponse, ModifyAutoRenewFlagResponse, DescribeTIWDailyUsageRequest, DescribeWhiteboardBucketConfigResponse, DescribeBoardSDKLogRequest, DescribeVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackKeyRequest, DescribeTranscodeSearchRequest, StartWhiteboardPushRequest, CreateOfflineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigRequest, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeUserStatusRequest, DescribeOnlineRecordCallbackRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetOfflineRecordCallbackRequest, SetVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigResponse, SetVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackRequest, DescribeTIWDailyUsageResponse, DescribeWhiteboardApplicationConfigRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, ModifyWhiteboardBucketConfigResponse, CreateSnapshotTaskRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackKeyRequest, ModifyApplicationRequest, DescribeOnlineRecordCallbackResponse, SetOfflineRecordCallbackResponse, DescribeQualityMetricsResponse, DescribeIMApplicationsResponse, SetOnlineRecordCallbackRequest, DescribeUserListRequest, DescribeUserResourcesRequest, StopWhiteboardPushResponse, DescribePostpaidUsageRequest, DescribeRoomListResponse, DescribeIMApplicationsRequest, ModifyAutoRenewFlagRequest, DescribeSnapshotTaskResponse, DescribeUserStatusResponse, DescribeTIWRoomDailyUsageResponse, DescribeWhiteboardPushCallbackResponse, CreateApplicationRequest, DescribeWhiteboardPushSearchRequest, SetTranscodeCallbackKeyResponse, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, DescribeUsageSummaryRequest, CreateTranscodeRequest, SetTranscodeCallbackKeyRequest, SetTranscodeCallbackRequest, DescribePostpaidUsageResponse, StartWhiteboardPushResponse, CreateApplicationResponse, StopWhiteboardPushRequest, DescribeOfflineRecordRequest } from "./tiw_models";
 /**
  * tiw client
  * @class
@@ -8,9 +8,25 @@ import { SetWhiteboardPushCallbackKeyRequest, SetVideoGenerationTaskCallbackRequ
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 查询文档转码，实时录制存储桶的配置
+     */
+    DescribeWhiteboardBucketConfig(req: DescribeWhiteboardBucketConfigRequest, cb?: (error: string, rep: DescribeWhiteboardBucketConfigResponse) => void): Promise<DescribeWhiteboardBucketConfigResponse>;
+    /**
      * 设置实时录制回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
      */
     SetOnlineRecordCallback(req: SetOnlineRecordCallbackRequest, cb?: (error: string, rep: SetOnlineRecordCallbackResponse) => void): Promise<SetOnlineRecordCallbackResponse>;
+    /**
+     * 停止实时录制
+     */
+    StopOnlineRecord(req: StopOnlineRecordRequest, cb?: (error: string, rep: StopOnlineRecordResponse) => void): Promise<StopOnlineRecordResponse>;
+    /**
+     * 查询客户端白板日志
+     */
+    DescribeBoardSDKLog(req: DescribeBoardSDKLogRequest, cb?: (error: string, rep: DescribeBoardSDKLogResponse) => void): Promise<DescribeBoardSDKLogResponse>;
+    /**
+     * 查询白板用户列表
+     */
+    DescribeUserList(req: DescribeUserListRequest, cb?: (error: string, rep: DescribeUserListResponse) => void): Promise<DescribeUserListResponse>;
     /**
      * 设置录制视频生成回调地址
      */
@@ -24,6 +40,10 @@ export declare class Client extends AbstractClient {
      */
     SetOnlineRecordCallbackKey(req: SetOnlineRecordCallbackKeyRequest, cb?: (error: string, rep: SetOnlineRecordCallbackKeyResponse) => void): Promise<SetOnlineRecordCallbackKeyResponse>;
     /**
+     * 查询白板应用任务相关的配置，包括存储桶、回调等
+     */
+    DescribeWhiteboardApplicationConfig(req: DescribeWhiteboardApplicationConfigRequest, cb?: (error: string, rep: DescribeWhiteboardApplicationConfigResponse) => void): Promise<DescribeWhiteboardApplicationConfigResponse>;
+    /**
      * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
      */
     SetTranscodeCallback(req: SetTranscodeCallbackRequest, cb?: (error: string, rep: SetTranscodeCallbackResponse) => void): Promise<SetTranscodeCallbackResponse>;
@@ -32,29 +52,73 @@ export declare class Client extends AbstractClient {
      */
     ResumeOnlineRecord(req: ResumeOnlineRecordRequest, cb?: (error: string, rep: ResumeOnlineRecordResponse) => void): Promise<ResumeOnlineRecordResponse>;
     /**
+     * 申请互动白板试用，默认15天
+     */
+    ApplyTiwTrial(req?: ApplyTiwTrialRequest, cb?: (error: string, rep: ApplyTiwTrialResponse) => void): Promise<ApplyTiwTrialResponse>;
+    /**
+     * 查询用户后付费用量
+     */
+    DescribePostpaidUsage(req: DescribePostpaidUsageRequest, cb?: (error: string, rep: DescribePostpaidUsageResponse) => void): Promise<DescribePostpaidUsageResponse>;
+    /**
      * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
     SetTranscodeCallbackKey(req: SetTranscodeCallbackKeyRequest, cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void): Promise<SetTranscodeCallbackKeyResponse>;
+    /**
+     * 设置课后录制回调地址
+     */
+    SetOfflineRecordCallback(req: SetOfflineRecordCallbackRequest, cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void): Promise<SetOfflineRecordCallbackResponse>;
     /**
      * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
      */
     CreateSnapshotTask(req: CreateSnapshotTaskRequest, cb?: (error: string, rep: CreateSnapshotTaskResponse) => void): Promise<CreateSnapshotTaskResponse>;
     /**
+     * 查询录制视频生成回调地址
+     */
+    DescribeVideoGenerationTaskCallback(req: DescribeVideoGenerationTaskCallbackRequest, cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void): Promise<DescribeVideoGenerationTaskCallbackResponse>;
+    /**
+     * 修改白板应用
+     */
+    ModifyApplication(req: ModifyApplicationRequest, cb?: (error: string, rep: ModifyApplicationResponse) => void): Promise<ModifyApplicationResponse>;
+    /**
+     * 修改白板应用任务相关的配置，包括存储桶、回调等
+     */
+    ModifyWhiteboardApplicationConfig(req: ModifyWhiteboardApplicationConfigRequest, cb?: (error: string, rep: ModifyWhiteboardApplicationConfigResponse) => void): Promise<ModifyWhiteboardApplicationConfigResponse>;
+    /**
      * 查询录制任务状态与结果
      */
     DescribeOnlineRecord(req: DescribeOnlineRecordRequest, cb?: (error: string, rep: DescribeOnlineRecordResponse) => void): Promise<DescribeOnlineRecordResponse>;
+    /**
+     * 设置白板月功能费自动续费
+     */
+    ModifyAutoRenewFlag(req: ModifyAutoRenewFlagRequest, cb?: (error: string, rep: ModifyAutoRenewFlagResponse) => void): Promise<ModifyAutoRenewFlagResponse>;
     /**
      * 查询实时录制回调地址
      */
     DescribeOnlineRecordCallback(req: DescribeOnlineRecordCallbackRequest, cb?: (error: string, rep: DescribeOnlineRecordCallbackResponse) => void): Promise<DescribeOnlineRecordCallbackResponse>;
     /**
+     * 查询文档转码回调地址
+     */
+    DescribeTranscodeCallback(req: DescribeTranscodeCallbackRequest, cb?: (error: string, rep: DescribeTranscodeCallbackResponse) => void): Promise<DescribeTranscodeCallbackResponse>;
+    /**
+     * 创建白板应用
+     */
+    CreateApplication(req: CreateApplicationRequest, cb?: (error: string, rep: CreateApplicationResponse) => void): Promise<CreateApplicationResponse>;
+    /**
+     * 通过服务角色调用其他云产品API接口获取信息
+     */
+    DescribeAPIService(req: DescribeAPIServiceRequest, cb?: (error: string, rep: DescribeAPIServiceResponse) => void): Promise<DescribeAPIServiceResponse>;
+    /**
      * 查询白板推流回调地址
      */
     DescribeWhiteboardPushCallback(req: DescribeWhiteboardPushCallbackRequest, cb?: (error: string, rep: DescribeWhiteboardPushCallbackResponse) => void): Promise<DescribeWhiteboardPushCallbackResponse>;
     /**
-     * 发起一个白板推流任务
+     * 查询白板应用详情
      */
-    StartWhiteboardPush(req: StartWhiteboardPushRequest, cb?: (error: string, rep: StartWhiteboardPushResponse) => void): Promise<StartWhiteboardPushResponse>;
+    DescribeApplicationInfos(req?: DescribeApplicationInfosRequest, cb?: (error: string, rep: DescribeApplicationInfosResponse) => void): Promise<DescribeApplicationInfosResponse>;
+    /**
+     * 发起一个实时录制任务
+     */
+    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
     /**
      * 查询互动白板房间维度每天计费用量。
 1. 单次查询统计区间最多不能超过31天。
@@ -67,25 +131,41 @@ export declare class Client extends AbstractClient {
      */
     CreateTranscode(req: CreateTranscodeRequest, cb?: (error: string, rep: CreateTranscodeResponse) => void): Promise<CreateTranscodeResponse>;
     /**
-     * 查询录制视频生成回调地址
+     * 按文档名称搜索转码任务
      */
-    DescribeVideoGenerationTaskCallback(req: DescribeVideoGenerationTaskCallbackRequest, cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void): Promise<DescribeVideoGenerationTaskCallbackResponse>;
+    DescribeTranscodeSearch(req?: DescribeTranscodeSearchRequest, cb?: (error: string, rep: DescribeTranscodeSearchResponse) => void): Promise<DescribeTranscodeSearchResponse>;
+    /**
+     * 查询客户资源列表
+     */
+    DescribeUserResources(req?: DescribeUserResourcesRequest, cb?: (error: string, rep: DescribeUserResourcesResponse) => void): Promise<DescribeUserResourcesResponse>;
     /**
      * 设置白板推流回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
     SetWhiteboardPushCallback(req: SetWhiteboardPushCallbackRequest, cb?: (error: string, rep: SetWhiteboardPushCallbackResponse) => void): Promise<SetWhiteboardPushCallbackResponse>;
     /**
-     * 发起一个实时录制任务
+     * 查询课后录制回调地址
      */
-    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
+    DescribeOfflineRecordCallback(req: DescribeOfflineRecordCallbackRequest, cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void): Promise<DescribeOfflineRecordCallbackResponse>;
     /**
-     * 停止实时录制
+     * 创建课后录制任务
      */
-    StopOnlineRecord(req: StopOnlineRecordRequest, cb?: (error: string, rep: StopOnlineRecordResponse) => void): Promise<StopOnlineRecordResponse>;
+    CreateOfflineRecord(req: CreateOfflineRecordRequest, cb?: (error: string, rep: CreateOfflineRecordResponse) => void): Promise<CreateOfflineRecordResponse>;
+    /**
+     * 查询指定时间段内子产品的用量汇总
+     */
+    DescribeUsageSummary(req: DescribeUsageSummaryRequest, cb?: (error: string, rep: DescribeUsageSummaryResponse) => void): Promise<DescribeUsageSummaryResponse>;
     /**
      * 设置白板推流回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
     SetWhiteboardPushCallbackKey(req: SetWhiteboardPushCallbackKeyRequest, cb?: (error: string, rep: SetWhiteboardPushCallbackKeyResponse) => void): Promise<SetWhiteboardPushCallbackKeyResponse>;
+    /**
+     * 根据房间号搜索白板推流任务
+     */
+    DescribeWhiteboardPushSearch(req?: DescribeWhiteboardPushSearchRequest, cb?: (error: string, rep: DescribeWhiteboardPushSearchResponse) => void): Promise<DescribeWhiteboardPushSearchResponse>;
+    /**
+     * 查询录制视频生成任务状态与结果
+     */
+    DescribeVideoGenerationTask(req: DescribeVideoGenerationTaskRequest, cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void): Promise<DescribeVideoGenerationTaskResponse>;
     /**
      * 查询文档转码任务的执行进度与转码结果
      */
@@ -102,17 +182,33 @@ export declare class Client extends AbstractClient {
      */
     StopWhiteboardPush(req: StopWhiteboardPushRequest, cb?: (error: string, rep: StopWhiteboardPushResponse) => void): Promise<StopWhiteboardPushResponse>;
     /**
+     * 查询可用于创建白板应用的IM应用列表
+     */
+    DescribeIMApplications(req?: DescribeIMApplicationsRequest, cb?: (error: string, rep: DescribeIMApplicationsResponse) => void): Promise<DescribeIMApplicationsResponse>;
+    /**
      * 查询互动白板质量数据
      */
     DescribeQualityMetrics(req: DescribeQualityMetricsRequest, cb?: (error: string, rep: DescribeQualityMetricsResponse) => void): Promise<DescribeQualityMetricsResponse>;
+    /**
+     * 查询课后录制任务的进度与录制结果等相关信息
+     */
+    DescribeOfflineRecord(req: DescribeOfflineRecordRequest, cb?: (error: string, rep: DescribeOfflineRecordResponse) => void): Promise<DescribeOfflineRecordResponse>;
+    /**
+     * 发起一个白板推流任务
+     */
+    StartWhiteboardPush(req: StartWhiteboardPushRequest, cb?: (error: string, rep: StartWhiteboardPushResponse) => void): Promise<StartWhiteboardPushResponse>;
     /**
      * 暂停实时录制
      */
     PauseOnlineRecord(req: PauseOnlineRecordRequest, cb?: (error: string, rep: PauseOnlineRecordResponse) => void): Promise<PauseOnlineRecordResponse>;
     /**
-     * 查询文档转码回调地址
+     * 查询互动白板各个子产品用量
      */
-    DescribeTranscodeCallback(req: DescribeTranscodeCallbackRequest, cb?: (error: string, rep: DescribeTranscodeCallbackResponse) => void): Promise<DescribeTranscodeCallbackResponse>;
+    DescribeApplicationUsage(req: DescribeApplicationUsageRequest, cb?: (error: string, rep: DescribeApplicationUsageResponse) => void): Promise<DescribeApplicationUsageResponse>;
+    /**
+     * 查询白板房间列表
+     */
+    DescribeRoomList(req: DescribeRoomListRequest, cb?: (error: string, rep: DescribeRoomListResponse) => void): Promise<DescribeRoomListResponse>;
     /**
      * 设置视频生成回调鉴权密钥
      */
@@ -122,11 +218,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeWhiteboardPush(req: DescribeWhiteboardPushRequest, cb?: (error: string, rep: DescribeWhiteboardPushResponse) => void): Promise<DescribeWhiteboardPushResponse>;
     /**
-     * 查询录制视频生成任务状态与结果
+     * 查询互动白板用户详情，包括是否开通了互动白板，当前互动白板服务有效期等信息
+
      */
-    DescribeVideoGenerationTask(req: DescribeVideoGenerationTaskRequest, cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void): Promise<DescribeVideoGenerationTaskResponse>;
+    DescribeUserStatus(req?: DescribeUserStatusRequest, cb?: (error: string, rep: DescribeUserStatusResponse) => void): Promise<DescribeUserStatusResponse>;
     /**
      * 获取指定白板板书生成任务信息
      */
     DescribeSnapshotTask(req: DescribeSnapshotTaskRequest, cb?: (error: string, rep: DescribeSnapshotTaskResponse) => void): Promise<DescribeSnapshotTaskResponse>;
+    /**
+     * 设置文档转码，实时录制存储桶的配置
+     */
+    ModifyWhiteboardBucketConfig(req: ModifyWhiteboardBucketConfigRequest, cb?: (error: string, rep: ModifyWhiteboardBucketConfigResponse) => void): Promise<ModifyWhiteboardBucketConfigResponse>;
 }

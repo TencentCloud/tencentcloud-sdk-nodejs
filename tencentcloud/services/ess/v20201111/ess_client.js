@@ -103,6 +103,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateBatchCancelFlowUrl", req, cb);
     }
     /**
+     * 本接口（CreatePreparedPersonalEsign）由于创建导入个人印章。
+     */
+    async CreatePreparedPersonalEsign(req, cb) {
+        return this.request("CreatePreparedPersonalEsign", req, cb);
+    }
+    /**
      * 补充签署流程本企业签署人信息
 适用场景：在通过模板或者文件发起合同时，若未指定本企业签署人信息，则流程发起后，可以调用此接口补充签署人。
 同一签署人可以补充多个员工作为候选签署人,最终签署人取决于谁先领取合同完成签署。
@@ -297,7 +303,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateSchemeUrl", req, cb);
     }
     /**
-     * 创建员工
+     * 创建员工,如需在此接口提醒员工实名，入参Employees的OpenId不传
      */
     async CreateIntegrationEmployees(req, cb) {
         return this.request("CreateIntegrationEmployees", req, cb);

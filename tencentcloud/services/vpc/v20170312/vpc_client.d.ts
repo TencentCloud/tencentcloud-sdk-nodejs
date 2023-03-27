@@ -30,7 +30,7 @@ export declare class Client extends AbstractClient {
      */
     AdjustPublicAddress(req: AdjustPublicAddressRequest, cb?: (error: string, rep: AdjustPublicAddressResponse) => void): Promise<AdjustPublicAddressResponse>;
     /**
-     * 本接口（CreateFlowLog）用于创建流日志
+     * 本接口（CreateFlowLog）用于创建网络流日志。
      */
     CreateFlowLog(req: CreateFlowLogRequest, cb?: (error: string, rep: CreateFlowLogResponse) => void): Promise<CreateFlowLogResponse>;
     /**

@@ -86,6 +86,7 @@ import {
   DatabaseFunction,
   ViewPrivileges,
   ResetAccountPasswordResponse,
+  DescribeDBInstanceDetailResponse,
   DescribePriceRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
@@ -95,6 +96,7 @@ import {
   DescribeDBEncryptAttributesResponse,
   DestroyDBInstanceRequest,
   DatabaseTable,
+  DescribeDBInstanceDetailRequest,
   DescribeDBEncryptAttributesRequest,
   Deal,
   GrantAccountPrivilegesRequest,
@@ -868,6 +870,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
   ): Promise<UpgradeDBInstanceResponse> {
     return this.request("UpgradeDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDBInstanceDetail)用于查询指定实例的详细信息。
+   */
+  async DescribeDBInstanceDetail(
+    req: DescribeDBInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeDBInstanceDetailResponse) => void
+  ): Promise<DescribeDBInstanceDetailResponse> {
+    return this.request("DescribeDBInstanceDetail", req, cb)
   }
 
   /**

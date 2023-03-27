@@ -18,84 +18,145 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeOfflineRecordCallbackRequest,
   Canvas,
-  SetWhiteboardPushCallbackKeyRequest,
-  TimeValue,
-  LayoutParams,
-  SetVideoGenerationTaskCallbackRequest,
-  StreamControl,
   StopOnlineRecordResponse,
-  AuthParam,
   SetVideoGenerationTaskCallbackKeyRequest,
-  StartWhiteboardPushRequest,
   DescribeTIWRoomDailyUsageRequest,
   DescribeWhiteboardPushRequest,
-  DescribeQualityMetricsResponse,
-  DescribeTIWRoomDailyUsageResponse,
+  DescribeWhiteboardPushSearchResponse,
   ResumeOnlineRecordResponse,
-  SetVideoGenerationTaskCallbackResponse,
+  UsageDataItem,
+  DescribeWhiteboardApplicationConfigResponse,
+  WhiteboardPushResult,
+  CreateSnapshotTaskResponse,
+  DescribeOfflineRecordResponse,
+  ModifyApplicationResponse,
+  CreateTranscodeResponse,
+  DescribeUserResourcesResponse,
+  VideoInfo,
+  CustomLayout,
+  Interrupt,
+  DescribeOnlineRecordRequest,
+  RoomListItem,
+  ModifyWhiteboardBucketConfigRequest,
+  SetOnlineRecordCallbackKeyResponse,
+  RoomUsageDataItem,
+  DescribeAPIServiceRequest,
+  DescribeQualityMetricsRequest,
+  CreateVideoGenerationTaskRequest,
+  DescribeTranscodeCallbackRequest,
+  DescribeTranscodeSearchResponse,
+  ResumeOnlineRecordRequest,
   SetWhiteboardPushCallbackKeyResponse,
+  DescribeRoomListRequest,
+  SetWhiteboardPushCallbackResponse,
+  ApplyTiwTrialResponse,
+  OmittedDuration,
+  PauseOnlineRecordRequest,
+  DescribeApplicationInfosResponse,
+  DescribeApplicationUsageResponse,
+  DescribeAPIServiceResponse,
+  TimeValue,
+  DescribeWhiteboardBucketConfigRequest,
+  DescribeUsageSummaryResponse,
+  DescribeApplicationInfosRequest,
+  DescribeApplicationUsageRequest,
+  SnapshotResult,
+  DescribeOfflineRecordCallbackResponse,
+  CreateOfflineRecordResponse,
+  SetVideoGenerationTaskCallbackKeyResponse,
+  DescribeVideoGenerationTaskResponse,
+  DataItem,
+  DescribeVideoGenerationTaskRequest,
+  DescribeWhiteboardPushCallbackRequest,
+  DescribeOnlineRecordResponse,
+  DescribeTranscodeRequest,
+  DescribeBoardSDKLogResponse,
+  SetOnlineRecordCallbackResponse,
+  ApplyTiwTrialRequest,
+  DescribeTranscodeCallbackResponse,
+  DescribeUserListResponse,
+  ModifyAutoRenewFlagResponse,
+  DescribeTIWDailyUsageRequest,
+  DescribeWhiteboardBucketConfigResponse,
+  MixStream,
+  DescribeBoardSDKLogRequest,
+  DescribeVideoGenerationTaskCallbackRequest,
+  SetWhiteboardPushCallbackKeyRequest,
+  DescribeTranscodeSearchRequest,
+  AuthParam,
+  Detail,
+  StartWhiteboardPushRequest,
+  CreateOfflineRecordRequest,
+  UserListItem,
+  DescribeVideoGenerationTaskCallbackResponse,
+  WhiteboardPushTaskSearchResult,
+  ModifyWhiteboardApplicationConfigRequest,
   WhiteboardPushBackupParam,
   DescribeSnapshotTaskRequest,
   StartOnlineRecordRequest,
-  DescribeVideoGenerationTaskCallbackResponse,
-  OmittedDuration,
-  DescribeSnapshotTaskResponse,
-  StartWhiteboardPushResponse,
-  ResumeOnlineRecordRequest,
+  DescribeUserStatusRequest,
   DescribeOnlineRecordCallbackRequest,
-  SnapshotCOS,
-  StopWhiteboardPushRequest,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
-  SnapshotWhiteboard,
-  UsageDataItem,
-  SetVideoGenerationTaskCallbackKeyResponse,
-  CreateTranscodeResponse,
-  CreateSnapshotTaskResponse,
-  DescribeVideoGenerationTaskResponse,
-  DescribeWhiteboardPushCallbackResponse,
-  CustomLayout,
-  Interrupt,
-  VideoInfo,
-  SetTranscodeCallbackKeyResponse,
+  SetOfflineRecordCallbackRequest,
+  SetVideoGenerationTaskCallbackResponse,
+  ApplicationItem,
+  ModifyWhiteboardApplicationConfigResponse,
+  SetVideoGenerationTaskCallbackRequest,
+  SetWhiteboardPushCallbackRequest,
   DescribeTIWDailyUsageResponse,
   Concat,
-  DescribeOnlineRecordRequest,
-  DescribeWhiteboardPushResponse,
-  StartOnlineRecordResponse,
-  SetOnlineRecordCallbackKeyResponse,
-  DescribeVideoGenerationTaskRequest,
-  SnapshotResult,
+  DescribeWhiteboardApplicationConfigRequest,
+  SnapshotCOS,
   CreateVideoGenerationTaskResponse,
+  Whiteboard,
   PauseOnlineRecordResponse,
-  CreateTranscodeRequest,
-  DescribeWhiteboardPushCallbackRequest,
-  DescribeOnlineRecordResponse,
-  SetTranscodeCallbackKeyRequest,
+  ModifyWhiteboardBucketConfigResponse,
   CreateSnapshotTaskRequest,
   DescribeTranscodeResponse,
-  DescribeTranscodeCallbackResponse,
-  StreamLayout,
-  DescribeQualityMetricsRequest,
   SetOnlineRecordCallbackKeyRequest,
-  CreateVideoGenerationTaskRequest,
-  DescribeTranscodeCallbackRequest,
-  DescribeTranscodeRequest,
+  ModifyApplicationRequest,
   DescribeOnlineRecordCallbackResponse,
-  SetTranscodeCallbackRequest,
-  RoomUsageDataItem,
-  SetWhiteboardPushCallbackRequest,
-  SetWhiteboardPushCallbackResponse,
+  SetOfflineRecordCallbackResponse,
   RecordControl,
-  DescribeTIWDailyUsageRequest,
-  Whiteboard,
-  MixStream,
-  DescribeVideoGenerationTaskCallbackRequest,
+  DescribeQualityMetricsResponse,
+  TranscodeTaskResult,
+  DescribeIMApplicationsResponse,
   SetOnlineRecordCallbackRequest,
-  PauseOnlineRecordRequest,
+  DescribeUserListRequest,
+  DescribeUserResourcesRequest,
   StopWhiteboardPushResponse,
-  SetOnlineRecordCallbackResponse,
+  DescribePostpaidUsageRequest,
+  LayoutParams,
+  StreamControl,
+  DescribeRoomListResponse,
+  DescribeIMApplicationsRequest,
+  ModifyAutoRenewFlagRequest,
+  DescribeSnapshotTaskResponse,
+  DescribeUserStatusResponse,
+  StreamLayout,
+  DescribeTIWRoomDailyUsageResponse,
+  DescribeWhiteboardPushCallbackResponse,
+  CreateApplicationRequest,
+  DescribeWhiteboardPushSearchRequest,
+  SetTranscodeCallbackKeyResponse,
+  DescribeWhiteboardPushResponse,
+  StartOnlineRecordResponse,
+  Tag,
+  DescribeUsageSummaryRequest,
+  SnapshotWhiteboard,
+  CreateTranscodeRequest,
+  SetTranscodeCallbackKeyRequest,
+  SetTranscodeCallbackRequest,
+  DescribePostpaidUsageResponse,
+  StartWhiteboardPushResponse,
+  WhiteboardApplicationConfig,
+  TranscodeTaskSearchResult,
+  CreateApplicationResponse,
+  StopWhiteboardPushRequest,
+  DescribeOfflineRecordRequest,
 } from "./tiw_models"
 
 /**
@@ -108,6 +169,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档转码，实时录制存储桶的配置
+   */
+  async DescribeWhiteboardBucketConfig(
+    req: DescribeWhiteboardBucketConfigRequest,
+    cb?: (error: string, rep: DescribeWhiteboardBucketConfigResponse) => void
+  ): Promise<DescribeWhiteboardBucketConfigResponse> {
+    return this.request("DescribeWhiteboardBucketConfig", req, cb)
+  }
+
+  /**
    * 设置实时录制回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
    */
   async SetOnlineRecordCallback(
@@ -115,6 +186,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetOnlineRecordCallbackResponse) => void
   ): Promise<SetOnlineRecordCallbackResponse> {
     return this.request("SetOnlineRecordCallback", req, cb)
+  }
+
+  /**
+   * 停止实时录制
+   */
+  async StopOnlineRecord(
+    req: StopOnlineRecordRequest,
+    cb?: (error: string, rep: StopOnlineRecordResponse) => void
+  ): Promise<StopOnlineRecordResponse> {
+    return this.request("StopOnlineRecord", req, cb)
+  }
+
+  /**
+   * 查询客户端白板日志
+   */
+  async DescribeBoardSDKLog(
+    req: DescribeBoardSDKLogRequest,
+    cb?: (error: string, rep: DescribeBoardSDKLogResponse) => void
+  ): Promise<DescribeBoardSDKLogResponse> {
+    return this.request("DescribeBoardSDKLog", req, cb)
+  }
+
+  /**
+   * 查询白板用户列表
+   */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
   }
 
   /**
@@ -148,6 +249,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询白板应用任务相关的配置，包括存储桶、回调等
+   */
+  async DescribeWhiteboardApplicationConfig(
+    req: DescribeWhiteboardApplicationConfigRequest,
+    cb?: (error: string, rep: DescribeWhiteboardApplicationConfigResponse) => void
+  ): Promise<DescribeWhiteboardApplicationConfigResponse> {
+    return this.request("DescribeWhiteboardApplicationConfig", req, cb)
+  }
+
+  /**
    * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
    */
   async SetTranscodeCallback(
@@ -168,6 +279,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 申请互动白板试用，默认15天
+   */
+  async ApplyTiwTrial(
+    req?: ApplyTiwTrialRequest,
+    cb?: (error: string, rep: ApplyTiwTrialResponse) => void
+  ): Promise<ApplyTiwTrialResponse> {
+    return this.request("ApplyTiwTrial", req, cb)
+  }
+
+  /**
+   * 查询用户后付费用量
+   */
+  async DescribePostpaidUsage(
+    req: DescribePostpaidUsageRequest,
+    cb?: (error: string, rep: DescribePostpaidUsageResponse) => void
+  ): Promise<DescribePostpaidUsageResponse> {
+    return this.request("DescribePostpaidUsage", req, cb)
+  }
+
+  /**
    * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
    */
   async SetTranscodeCallbackKey(
@@ -175,6 +306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void
   ): Promise<SetTranscodeCallbackKeyResponse> {
     return this.request("SetTranscodeCallbackKey", req, cb)
+  }
+
+  /**
+   * 设置课后录制回调地址
+   */
+  async SetOfflineRecordCallback(
+    req: SetOfflineRecordCallbackRequest,
+    cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void
+  ): Promise<SetOfflineRecordCallbackResponse> {
+    return this.request("SetOfflineRecordCallback", req, cb)
   }
 
   /**
@@ -188,6 +329,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询录制视频生成回调地址
+   */
+  async DescribeVideoGenerationTaskCallback(
+    req: DescribeVideoGenerationTaskCallbackRequest,
+    cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void
+  ): Promise<DescribeVideoGenerationTaskCallbackResponse> {
+    return this.request("DescribeVideoGenerationTaskCallback", req, cb)
+  }
+
+  /**
+   * 修改白板应用
+   */
+  async ModifyApplication(
+    req: ModifyApplicationRequest,
+    cb?: (error: string, rep: ModifyApplicationResponse) => void
+  ): Promise<ModifyApplicationResponse> {
+    return this.request("ModifyApplication", req, cb)
+  }
+
+  /**
+   * 修改白板应用任务相关的配置，包括存储桶、回调等
+   */
+  async ModifyWhiteboardApplicationConfig(
+    req: ModifyWhiteboardApplicationConfigRequest,
+    cb?: (error: string, rep: ModifyWhiteboardApplicationConfigResponse) => void
+  ): Promise<ModifyWhiteboardApplicationConfigResponse> {
+    return this.request("ModifyWhiteboardApplicationConfig", req, cb)
+  }
+
+  /**
    * 查询录制任务状态与结果
    */
   async DescribeOnlineRecord(
@@ -195,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOnlineRecordResponse) => void
   ): Promise<DescribeOnlineRecordResponse> {
     return this.request("DescribeOnlineRecord", req, cb)
+  }
+
+  /**
+   * 设置白板月功能费自动续费
+   */
+  async ModifyAutoRenewFlag(
+    req: ModifyAutoRenewFlagRequest,
+    cb?: (error: string, rep: ModifyAutoRenewFlagResponse) => void
+  ): Promise<ModifyAutoRenewFlagResponse> {
+    return this.request("ModifyAutoRenewFlag", req, cb)
   }
 
   /**
@@ -208,6 +389,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档转码回调地址
+   */
+  async DescribeTranscodeCallback(
+    req: DescribeTranscodeCallbackRequest,
+    cb?: (error: string, rep: DescribeTranscodeCallbackResponse) => void
+  ): Promise<DescribeTranscodeCallbackResponse> {
+    return this.request("DescribeTranscodeCallback", req, cb)
+  }
+
+  /**
+   * 创建白板应用
+   */
+  async CreateApplication(
+    req: CreateApplicationRequest,
+    cb?: (error: string, rep: CreateApplicationResponse) => void
+  ): Promise<CreateApplicationResponse> {
+    return this.request("CreateApplication", req, cb)
+  }
+
+  /**
+   * 通过服务角色调用其他云产品API接口获取信息
+   */
+  async DescribeAPIService(
+    req: DescribeAPIServiceRequest,
+    cb?: (error: string, rep: DescribeAPIServiceResponse) => void
+  ): Promise<DescribeAPIServiceResponse> {
+    return this.request("DescribeAPIService", req, cb)
+  }
+
+  /**
    * 查询白板推流回调地址
    */
   async DescribeWhiteboardPushCallback(
@@ -218,13 +429,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起一个白板推流任务
+   * 查询白板应用详情
    */
-  async StartWhiteboardPush(
-    req: StartWhiteboardPushRequest,
-    cb?: (error: string, rep: StartWhiteboardPushResponse) => void
-  ): Promise<StartWhiteboardPushResponse> {
-    return this.request("StartWhiteboardPush", req, cb)
+  async DescribeApplicationInfos(
+    req?: DescribeApplicationInfosRequest,
+    cb?: (error: string, rep: DescribeApplicationInfosResponse) => void
+  ): Promise<DescribeApplicationInfosResponse> {
+    return this.request("DescribeApplicationInfos", req, cb)
+  }
+
+  /**
+   * 发起一个实时录制任务
+   */
+  async StartOnlineRecord(
+    req: StartOnlineRecordRequest,
+    cb?: (error: string, rep: StartOnlineRecordResponse) => void
+  ): Promise<StartOnlineRecordResponse> {
+    return this.request("StartOnlineRecord", req, cb)
   }
 
   /**
@@ -251,13 +472,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询录制视频生成回调地址
+   * 按文档名称搜索转码任务
    */
-  async DescribeVideoGenerationTaskCallback(
-    req: DescribeVideoGenerationTaskCallbackRequest,
-    cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void
-  ): Promise<DescribeVideoGenerationTaskCallbackResponse> {
-    return this.request("DescribeVideoGenerationTaskCallback", req, cb)
+  async DescribeTranscodeSearch(
+    req?: DescribeTranscodeSearchRequest,
+    cb?: (error: string, rep: DescribeTranscodeSearchResponse) => void
+  ): Promise<DescribeTranscodeSearchResponse> {
+    return this.request("DescribeTranscodeSearch", req, cb)
+  }
+
+  /**
+   * 查询客户资源列表
+   */
+  async DescribeUserResources(
+    req?: DescribeUserResourcesRequest,
+    cb?: (error: string, rep: DescribeUserResourcesResponse) => void
+  ): Promise<DescribeUserResourcesResponse> {
+    return this.request("DescribeUserResources", req, cb)
   }
 
   /**
@@ -271,23 +502,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起一个实时录制任务
+   * 查询课后录制回调地址
    */
-  async StartOnlineRecord(
-    req: StartOnlineRecordRequest,
-    cb?: (error: string, rep: StartOnlineRecordResponse) => void
-  ): Promise<StartOnlineRecordResponse> {
-    return this.request("StartOnlineRecord", req, cb)
+  async DescribeOfflineRecordCallback(
+    req: DescribeOfflineRecordCallbackRequest,
+    cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void
+  ): Promise<DescribeOfflineRecordCallbackResponse> {
+    return this.request("DescribeOfflineRecordCallback", req, cb)
   }
 
   /**
-   * 停止实时录制
+   * 创建课后录制任务
    */
-  async StopOnlineRecord(
-    req: StopOnlineRecordRequest,
-    cb?: (error: string, rep: StopOnlineRecordResponse) => void
-  ): Promise<StopOnlineRecordResponse> {
-    return this.request("StopOnlineRecord", req, cb)
+  async CreateOfflineRecord(
+    req: CreateOfflineRecordRequest,
+    cb?: (error: string, rep: CreateOfflineRecordResponse) => void
+  ): Promise<CreateOfflineRecordResponse> {
+    return this.request("CreateOfflineRecord", req, cb)
+  }
+
+  /**
+   * 查询指定时间段内子产品的用量汇总
+   */
+  async DescribeUsageSummary(
+    req: DescribeUsageSummaryRequest,
+    cb?: (error: string, rep: DescribeUsageSummaryResponse) => void
+  ): Promise<DescribeUsageSummaryResponse> {
+    return this.request("DescribeUsageSummary", req, cb)
   }
 
   /**
@@ -298,6 +539,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetWhiteboardPushCallbackKeyResponse) => void
   ): Promise<SetWhiteboardPushCallbackKeyResponse> {
     return this.request("SetWhiteboardPushCallbackKey", req, cb)
+  }
+
+  /**
+   * 根据房间号搜索白板推流任务
+   */
+  async DescribeWhiteboardPushSearch(
+    req?: DescribeWhiteboardPushSearchRequest,
+    cb?: (error: string, rep: DescribeWhiteboardPushSearchResponse) => void
+  ): Promise<DescribeWhiteboardPushSearchResponse> {
+    return this.request("DescribeWhiteboardPushSearch", req, cb)
+  }
+
+  /**
+   * 查询录制视频生成任务状态与结果
+   */
+  async DescribeVideoGenerationTask(
+    req: DescribeVideoGenerationTaskRequest,
+    cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void
+  ): Promise<DescribeVideoGenerationTaskResponse> {
+    return this.request("DescribeVideoGenerationTask", req, cb)
   }
 
   /**
@@ -334,6 +595,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询可用于创建白板应用的IM应用列表
+   */
+  async DescribeIMApplications(
+    req?: DescribeIMApplicationsRequest,
+    cb?: (error: string, rep: DescribeIMApplicationsResponse) => void
+  ): Promise<DescribeIMApplicationsResponse> {
+    return this.request("DescribeIMApplications", req, cb)
+  }
+
+  /**
    * 查询互动白板质量数据
    */
   async DescribeQualityMetrics(
@@ -341,6 +612,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityMetricsResponse) => void
   ): Promise<DescribeQualityMetricsResponse> {
     return this.request("DescribeQualityMetrics", req, cb)
+  }
+
+  /**
+   * 查询课后录制任务的进度与录制结果等相关信息
+   */
+  async DescribeOfflineRecord(
+    req: DescribeOfflineRecordRequest,
+    cb?: (error: string, rep: DescribeOfflineRecordResponse) => void
+  ): Promise<DescribeOfflineRecordResponse> {
+    return this.request("DescribeOfflineRecord", req, cb)
+  }
+
+  /**
+   * 发起一个白板推流任务
+   */
+  async StartWhiteboardPush(
+    req: StartWhiteboardPushRequest,
+    cb?: (error: string, rep: StartWhiteboardPushResponse) => void
+  ): Promise<StartWhiteboardPushResponse> {
+    return this.request("StartWhiteboardPush", req, cb)
   }
 
   /**
@@ -354,13 +645,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文档转码回调地址
+   * 查询互动白板各个子产品用量
    */
-  async DescribeTranscodeCallback(
-    req: DescribeTranscodeCallbackRequest,
-    cb?: (error: string, rep: DescribeTranscodeCallbackResponse) => void
-  ): Promise<DescribeTranscodeCallbackResponse> {
-    return this.request("DescribeTranscodeCallback", req, cb)
+  async DescribeApplicationUsage(
+    req: DescribeApplicationUsageRequest,
+    cb?: (error: string, rep: DescribeApplicationUsageResponse) => void
+  ): Promise<DescribeApplicationUsageResponse> {
+    return this.request("DescribeApplicationUsage", req, cb)
+  }
+
+  /**
+   * 查询白板房间列表
+   */
+  async DescribeRoomList(
+    req: DescribeRoomListRequest,
+    cb?: (error: string, rep: DescribeRoomListResponse) => void
+  ): Promise<DescribeRoomListResponse> {
+    return this.request("DescribeRoomList", req, cb)
   }
 
   /**
@@ -384,13 +685,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询录制视频生成任务状态与结果
-   */
-  async DescribeVideoGenerationTask(
-    req: DescribeVideoGenerationTaskRequest,
-    cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void
-  ): Promise<DescribeVideoGenerationTaskResponse> {
-    return this.request("DescribeVideoGenerationTask", req, cb)
+     * 查询互动白板用户详情，包括是否开通了互动白板，当前互动白板服务有效期等信息
+
+     */
+  async DescribeUserStatus(
+    req?: DescribeUserStatusRequest,
+    cb?: (error: string, rep: DescribeUserStatusResponse) => void
+  ): Promise<DescribeUserStatusResponse> {
+    return this.request("DescribeUserStatus", req, cb)
   }
 
   /**
@@ -401,5 +703,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSnapshotTaskResponse) => void
   ): Promise<DescribeSnapshotTaskResponse> {
     return this.request("DescribeSnapshotTask", req, cb)
+  }
+
+  /**
+   * 设置文档转码，实时录制存储桶的配置
+   */
+  async ModifyWhiteboardBucketConfig(
+    req: ModifyWhiteboardBucketConfigRequest,
+    cb?: (error: string, rep: ModifyWhiteboardBucketConfigResponse) => void
+  ): Promise<ModifyWhiteboardBucketConfigResponse> {
+    return this.request("ModifyWhiteboardBucketConfig", req, cb)
   }
 }

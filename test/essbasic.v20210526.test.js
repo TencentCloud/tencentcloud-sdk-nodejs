@@ -148,6 +148,26 @@ it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDeleteRoleUsers", async function () {
+    try {
+       const data = await client.ChannelDeleteRoleUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeTemplates", async function () {
+    try {
+       const data = await client.DescribeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateSignUrls", async function () {
     try {
        const data = await client.CreateSignUrls({})
@@ -308,6 +328,16 @@ it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeRoles", async function () {
+    try {
+       const data = await client.ChannelDescribeRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
     try {
        const data = await client.DescribeResourceUrlsByFlows({})
@@ -318,9 +348,9 @@ it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeTemplates", async function () {
+it("essbasic.v20210526.ChannelCreateUserRoles", async function () {
     try {
-       const data = await client.DescribeTemplates({})
+       const data = await client.ChannelCreateUserRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

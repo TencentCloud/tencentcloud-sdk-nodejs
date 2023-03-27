@@ -156,8 +156,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 权威机构列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+权威机构列表
+     */
   async GetAuthoritiesList(
     req: GetAuthoritiesListRequest,
     cb?: (error: string, rep: GetAuthoritiesListResponse) => void
@@ -166,8 +168,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 披露策略Policy管理列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy管理列表
+     */
   async GetPolicyList(
     req: GetPolicyListRequest,
     cb?: (error: string, rep: GetPolicyListResponse) => void
@@ -186,8 +190,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看公钥
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+查看公钥
+     */
   async GetPublicKey(
     req: GetPublicKeyRequest,
     cb?: (error: string, rep: GetPublicKeyResponse) => void
@@ -206,8 +212,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 披露策略Policy查看
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy查看
+     */
   async QueryPolicy(
     req: QueryPolicyRequest,
     cb?: (error: string, rep: QueryPolicyResponse) => void
@@ -216,8 +224,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查部署情况
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+检查部署情况
+     */
   async CheckDidDeploy(
     req: CheckDidDeployRequest,
     cb?: (error: string, rep: CheckDidDeployResponse) => void
@@ -226,8 +236,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 认证权威机构
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+认证权威机构
+     */
   async RecognizeAuthorityIssuer(
     req: RecognizeAuthorityIssuerRequest,
     cb?: (error: string, rep: RecognizeAuthorityIssuerResponse) => void
@@ -236,8 +248,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 撤消权威机构认证
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+撤消权威机构认证
+     */
   async CancelAuthorityIssuer(
     req: CancelAuthorityIssuerRequest,
     cb?: (error: string, rep: CancelAuthorityIssuerResponse) => void
@@ -246,8 +260,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DID注册趋势
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID注册趋势
+     */
   async GetDidRegisterTrend(
     req: GetDidRegisterTrendRequest,
     cb?: (error: string, rep: GetDidRegisterTrendResponse) => void
@@ -256,8 +272,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DID详情
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID详情
+     */
   async GetDidDetail(
     req: GetDidDetailRequest,
     cb?: (error: string, rep: GetDidDetailResponse) => void
@@ -266,8 +284,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除合约
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+删除合约
+     */
   async RemoveHash(
     req: RemoveHashRequest,
     cb?: (error: string, rep: RemoveHashResponse) => void
@@ -276,8 +296,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证颁发按机构排行
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发按机构排行
+     */
   async GetCredentialIssueRank(
     req: GetCredentialIssueRankRequest,
     cb?: (error: string, rep: GetCredentialIssueRankResponse) => void
@@ -286,8 +308,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 主群组配置列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+主群组配置列表
+     */
   async GetGroupList(
     req: GetGroupListRequest,
     cb?: (error: string, rep: GetGroupListResponse) => void
@@ -296,8 +320,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 披露策略Policy注册
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+披露策略Policy注册
+     */
   async RegisterClaimPolicy(
     req: RegisterClaimPolicyRequest,
     cb?: (error: string, rep: RegisterClaimPolicyResponse) => void
@@ -306,8 +332,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取联盟列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取联盟列表
+     */
   async GetConsortiumList(
     req?: GetConsortiumListRequest,
     cb?: (error: string, rep: GetConsortiumListResponse) => void
@@ -316,8 +344,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户的DID网络列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取用户的DID网络列表
+     */
   async GetDidClusterList(
     req?: GetDidClusterListRequest,
     cb?: (error: string, rep: GetDidClusterListResponse) => void
@@ -326,8 +356,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DID服务详情
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID服务详情
+     */
   async GetDidServiceDetail(
     req: GetDidServiceDetailRequest,
     cb?: (error: string, rep: GetDidServiceDetailResponse) => void
@@ -336,8 +368,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证模版列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证模版列表
+     */
   async GetCptList(
     req: GetCptListRequest,
     cb?: (error: string, rep: GetCptListResponse) => void
@@ -346,8 +380,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证颁发趋势
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发趋势
+     */
   async GetCredentialIssueTrend(
     req: GetCredentialIssueTrendRequest,
     cb?: (error: string, rep: GetCredentialIssueTrendResponse) => void
@@ -356,8 +392,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过Name部署TDID合约
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+通过Name部署TDID合约
+     */
   async DeployByName(
     req: DeployByNameRequest,
     cb?: (error: string, rep: DeployByNameResponse) => void
@@ -366,8 +404,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建DID服务
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+创建DID服务
+     */
   async CreateDidService(
     req: CreateDidServiceRequest,
     cb?: (error: string, rep: CreateDidServiceResponse) => void
@@ -386,8 +426,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DID区块链网络详情
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID区块链网络详情
+     */
   async GetDidClusterDetail(
     req: GetDidClusterDetailRequest,
     cb?: (error: string, rep: GetDidClusterDetailResponse) => void
@@ -406,8 +448,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 标签列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+标签列表
+     */
   async GetLabelList(
     req: GetLabelListRequest,
     cb?: (error: string, rep: GetLabelListResponse) => void
@@ -416,8 +460,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用合约
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+启用合约
+     */
   async EnableHash(
     req: EnableHashRequest,
     cb?: (error: string, rep: EnableHashResponse) => void
@@ -426,8 +472,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合约部署列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+合约部署列表
+     */
   async GetDeployList(
     req: GetDeployListRequest,
     cb?: (error: string, rep: GetDeployListResponse) => void
@@ -446,8 +494,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册为权威机构
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+注册为权威机构
+     */
   async RegisterIssuer(
     req: RegisterIssuerRequest,
     cb?: (error: string, rep: RegisterIssuerResponse) => void
@@ -456,7 +506,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 合约部署详情
+     * 下线已有内测接口，待上线正式版本的接口
+
+合约部署详情
 
      */
   async GetDeployInfo(
@@ -467,8 +519,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证颁发按机构排行
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证颁发按机构排行
+     */
   async GetCredentialCptRank(
     req: GetCredentialCptRankRequest,
     cb?: (error: string, rep: GetCredentialCptRankResponse) => void
@@ -498,8 +552,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DID服务列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取DID服务列表
+     */
   async GetDidServiceList(
     req: GetDidServiceListRequest,
     cb?: (error: string, rep: GetDidServiceListResponse) => void
@@ -508,8 +564,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DID列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID列表
+     */
   async GetDidList(
     req: GetDidListRequest,
     cb?: (error: string, rep: GetDidListResponse) => void
@@ -550,7 +608,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DID添加标签
+     * 下线已有内测接口，待上线正式版本的接口
+
+DID添加标签
 
      */
   async AddLabel(
@@ -561,8 +621,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证模版下载
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+凭证模版下载
+     */
   async DownCpt(
     req: DownCptRequest,
     cb?: (error: string, rep: DownCptResponse) => void
@@ -581,8 +643,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取联盟bcos网络列表
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+获取联盟bcos网络列表
+     */
   async GetConsortiumClusterList(
     req: GetConsortiumClusterListRequest,
     cb?: (error: string, rep: GetConsortiumClusterListResponse) => void
@@ -601,7 +665,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 概览
+     * 下线已有内测接口，待上线正式版本的接口
+
+概览
 
      */
   async GetDataPanel(
@@ -622,8 +688,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建标签
-   */
+     * 下线已有内测接口，待上线正式版本的接口
+
+新建标签
+     */
   async CreateLabel(
     req: CreateLabelRequest,
     cb?: (error: string, rep: CreateLabelResponse) => void

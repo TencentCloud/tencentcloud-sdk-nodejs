@@ -806,7 +806,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateFlowLog）用于创建流日志
+   * 本接口（CreateFlowLog）用于创建网络流日志。
    */
   async CreateFlowLog(
     req: CreateFlowLogRequest,

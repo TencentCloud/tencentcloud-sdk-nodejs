@@ -434,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeDBInstance", req, cb);
     }
     /**
+     * 本接口(DescribeDBInstanceDetail)用于查询指定实例的详细信息。
+     */
+    async DescribeDBInstanceDetail(req, cb) {
+        return this.request("DescribeDBInstanceDetail", req, cb);
+    }
+    /**
      * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
      */
     async DescribeLogFileRetentionPeriod(req, cb) {

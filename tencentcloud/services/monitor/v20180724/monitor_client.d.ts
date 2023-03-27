@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAlarmNotices(req: DeleteAlarmNoticesRequest, cb?: (error: string, rep: DeleteAlarmNoticesResponse) => void): Promise<DeleteAlarmNoticesResponse>;
     /**
-     * 云监控告警编辑告警通知模板
+     * 编辑告警通知模板
      */
     ModifyAlarmNotice(req: ModifyAlarmNoticeRequest, cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void): Promise<ModifyAlarmNoticeResponse>;
     /**
@@ -607,7 +607,7 @@ export declare class Client extends AbstractClient {
      */
     TerminatePrometheusInstances(req: TerminatePrometheusInstancesRequest, cb?: (error: string, rep: TerminatePrometheusInstancesResponse) => void): Promise<TerminatePrometheusInstancesResponse>;
     /**
-     * 获取与云监控融合实例列表
+     * 获取与 Prometheus 监控融合实例列表
      */
     DescribePrometheusInstancesOverview(req: DescribePrometheusInstancesOverviewRequest, cb?: (error: string, rep: DescribePrometheusInstancesOverviewResponse) => void): Promise<DescribePrometheusInstancesOverviewResponse>;
     /**

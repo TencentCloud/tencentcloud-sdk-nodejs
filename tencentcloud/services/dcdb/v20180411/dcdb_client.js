@@ -392,6 +392,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
+     * 本接口（DescribeDCDBInstanceDetail）用于获取DCDB实例详情
+     */
+    async DescribeDCDBInstanceDetail(req, cb) {
+        return this.request("DescribeDCDBInstanceDetail", req, cb);
+    }
+    /**
      * 本接口（ModifyDBInstanceName）用于修改实例名字
      */
     async ModifyDBInstanceName(req, cb) {

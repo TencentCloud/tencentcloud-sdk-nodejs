@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelDeleteSealPoliciesRequest, ChannelBatchCancelFlowsResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, ChannelCreateFlowSignUrlResponse, CreateSealByImageResponse, OperateChannelTemplateResponse, CreateConsoleLoginUrlResponse, SyncProxyOrganizationRequest, ChannelCreatePrepareFlowRequest, ChannelCreateFlowRemindsRequest, ChannelCreateSealPolicyResponse, ChannelCancelFlowResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, ChannelCreateFlowGroupByFilesRequest, DescribeFlowDetailInfoResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, UploadFilesRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, DescribeUsageResponse, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, DescribeResourceUrlsByFlowsResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelGetTaskResultApiRequest, CreateFlowsByTemplatesResponse, DescribeChannelFlowEvidenceReportRequest, SyncProxyOrganizationOperatorsResponse, CreateSignUrlsResponse, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, PrepareFlowsRequest, ChannelCreateFlowByFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelDescribeOrganizationSealsResponse, ChannelCreatePrepareFlowResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelCreateReleaseFlowRequest, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ChannelCreateBoundFlowsResponse, ModifyExtendedServiceResponse, ChannelGetTaskResultApiResponse, ChannelDeleteSealPoliciesResponse, GetDownloadFlowUrlRequest, ChannelCreateEmbedWebUrlResponse, ChannelBatchCancelFlowsRequest, ChannelUpdateSealStatusRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, ChannelCreateSealPolicyRequest, CreateFlowsByTemplatesRequest, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, CreateSealByImageRequest, ChannelUpdateSealStatusResponse, ChannelCreateFlowSignUrlRequest, DescribeExtendedServiceAuthInfoResponse, ChannelCreateEmbedWebUrlRequest } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelDeleteSealPoliciesRequest, ChannelBatchCancelFlowsResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, ChannelCreateFlowSignUrlResponse, CreateSealByImageResponse, OperateChannelTemplateResponse, CreateConsoleLoginUrlResponse, ChannelDeleteRoleUsersRequest, ChannelCreateUserRolesResponse, SyncProxyOrganizationRequest, ChannelCreatePrepareFlowRequest, ChannelCreateFlowRemindsRequest, ChannelCreateSealPolicyResponse, ChannelCancelFlowResponse, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, DescribeResourceUrlsByFlowsResponse, ChannelCreateFlowGroupByFilesRequest, DescribeFlowDetailInfoResponse, ChannelDescribeRolesRequest, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, UploadFilesRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, DescribeUsageResponse, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, ChannelDeleteRoleUsersResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelGetTaskResultApiRequest, CreateFlowsByTemplatesResponse, DescribeChannelFlowEvidenceReportRequest, SyncProxyOrganizationOperatorsResponse, CreateSignUrlsResponse, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, PrepareFlowsRequest, ChannelCreateFlowByFilesResponse, ChannelCreateFlowSignReviewResponse, ChannelDescribeOrganizationSealsResponse, ChannelCreatePrepareFlowResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelDescribeRolesResponse, ChannelCreateReleaseFlowRequest, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ChannelCreateBoundFlowsResponse, ModifyExtendedServiceResponse, ChannelCreateUserRolesRequest, ChannelGetTaskResultApiResponse, ChannelDeleteSealPoliciesResponse, GetDownloadFlowUrlRequest, ChannelCreateEmbedWebUrlResponse, ChannelBatchCancelFlowsRequest, ChannelUpdateSealStatusRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, ChannelCreateSealPolicyRequest, CreateFlowsByTemplatesRequest, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, CreateSealByImageRequest, ChannelUpdateSealStatusResponse, ChannelCreateFlowSignUrlRequest, DescribeExtendedServiceAuthInfoResponse, ChannelCreateEmbedWebUrlRequest } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -67,6 +67,14 @@ export declare class Client extends AbstractClient {
 客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
      */
     ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
+    /**
+     * 渠道版删除员工绑定角色
+     */
+    ChannelDeleteRoleUsers(req: ChannelDeleteRoleUsersRequest, cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void): Promise<ChannelDeleteRoleUsersResponse>;
+    /**
+     * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+     */
+    DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
     /**
      * 创建跳转小程序查看或签署的链接。
 
@@ -179,14 +187,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     CreateFlowsByTemplates(req: CreateFlowsByTemplatesRequest, cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void): Promise<CreateFlowsByTemplatesResponse>;
     /**
+     * 渠道办查询用户角色
+     */
+    ChannelDescribeRoles(req: ChannelDescribeRolesRequest, cb?: (error: string, rep: ChannelDescribeRolesResponse) => void): Promise<ChannelDescribeRolesResponse>;
+    /**
      * 根据签署流程信息批量获取资源下载链接，可以下载签署中、签署完的合同，需合作企业先进行授权。
 此接口直接返回下载的资源的url，与接口GetDownloadFlowUrl跳转到控制台的下载方式不同。
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
-     * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+     * 渠道版绑定员工角色
      */
-    DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
+    ChannelCreateUserRoles(req: ChannelCreateUserRolesRequest, cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void): Promise<ChannelCreateUserRolesResponse>;
     /**
      * 此接口（UploadFiles）用于文件上传。
 其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。

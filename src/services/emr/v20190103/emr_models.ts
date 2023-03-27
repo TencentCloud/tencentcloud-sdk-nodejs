@@ -1355,6 +1355,12 @@ export interface EmrListInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OutSideSoftInfo: Array<SoftDependInfo>
+
+  /**
+      * 当前集群的应用场景是否支持体外客户端
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSupportOutsideCluster?: boolean
 }
 
 /**

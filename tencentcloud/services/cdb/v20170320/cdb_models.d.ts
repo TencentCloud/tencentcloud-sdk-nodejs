@@ -2118,6 +2118,10 @@ export interface DescribeDefaultParamsRequest {
       * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
       */
     TemplateType?: string;
+    /**
+      * 参数模板引擎，默认值：InnoDB
+      */
+    EngineType?: string;
 }
 /**
  * 地址
@@ -5426,11 +5430,11 @@ export interface DescribeDefaultParamsResponse {
     /**
       * 参数个数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 参数详情。
       */
-    Items: Array<ParameterDetail>;
+    Items?: Array<ParameterDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

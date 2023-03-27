@@ -494,6 +494,46 @@ export interface CreateConsoleLoginUrlResponse {
 }
 
 /**
+ * ChannelDeleteRoleUsers请求参数结构体
+ */
+export interface ChannelDeleteRoleUsersRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+
+  /**
+   * 角色Id
+   */
+  RoleId: string
+
+  /**
+   * 用户列表
+   */
+  UserIds: Array<string>
+
+  /**
+   * 代理信息
+   */
+  Agent: Agent
+}
+
+/**
+ * ChannelCreateUserRoles返回参数结构体
+ */
+export interface ChannelCreateUserRolesResponse {
+  /**
+   * 绑定失败的用户角色列表
+   */
+  FailedCreateRoleData?: Array<FailedCreateRoleData>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SyncProxyOrganization请求参数结构体
  */
 export interface SyncProxyOrganizationRequest {
@@ -798,33 +838,26 @@ MobileCheck：手机号验证
 }
 
 /**
- * 应用相关信息
+ * 渠道角色信息
  */
-export interface Agent {
+export interface ChannelRole {
   /**
-   * 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。
-   */
-  AppId: string
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoleId?: string
 
   /**
-   * 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串
-   */
-  ProxyOrganizationOpenId?: string
+      * 角色名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoleName?: string
 
   /**
-   * 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
-   */
-  ProxyOperator?: UserInfo
-
-  /**
-   * 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
-   */
-  ProxyAppId?: string
-
-  /**
-   * 内部参数，暂未开放使用
-   */
-  ProxyOrganizationId?: string
+      * 角色状态：1-启用；2-禁用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoleStatus?: number
 }
 
 /**
@@ -893,33 +926,24 @@ export interface FlowApproverDetail {
 }
 
 /**
- * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
+ * DescribeResourceUrlsByFlows返回参数结构体
  */
-export interface RelieveInfo {
+export interface DescribeResourceUrlsByFlowsResponse {
   /**
-   * 解除理由，最大支持200个字
+   * 签署流程资源对应链接信息
    */
-  Reason: string
+  FlowResourceUrlInfos?: Array<FlowResourceUrlInfo>
 
   /**
-   * 解除后仍然有效的条款，保留条款，最大支持200个字
-   */
-  RemainInForceItem?: string
+      * 创建消息，对应多个合同ID，
+成功为“”,创建失败则对应失败消息
+      */
+  ErrorMessages?: Array<string>
 
   /**
-   * 原合同事项处理-费用结算，最大支持200个字
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OriginalExpenseSettlement?: string
-
-  /**
-   * 原合同事项处理-其他事项，最大支持200个字
-   */
-  OriginalOtherSettlement?: string
-
-  /**
-   * 其他约定，最大支持200个字
-   */
-  OtherDeals?: string
+  RequestId?: string
 }
 
 /**
@@ -1017,130 +1041,35 @@ export interface ResourceUrlInfo {
 }
 
 /**
- * 创建签署流程签署人入参。
-
-其中签署方FlowApproverInfo需要传递的参数
-非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识
-1-个人：Name、Mobile必传
-2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
-3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；
-4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
-
-RecipientId参数：
-从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId
+ * ChannelDescribeRoles请求参数结构体
  */
-export interface FlowApproverInfo {
+export interface ChannelDescribeRolesRequest {
   /**
-   * 签署人姓名，最大长度50个字符
+   * 操作人信息
    */
-  Name?: string
+  Operator: UserInfo
 
   /**
-      * 签署人身份证件类型
-1.ID_CARD 居民身份证
-2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
-3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+   */
+  Agent: Agent
+
+  /**
+   * 查询起始偏移，最大2000
+   */
+  Offset: number
+
+  /**
+   * 查询数量，最大200
+   */
+  Limit: string
+
+  /**
+      * 查询的关键字段:
+Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色
+Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
       */
-  IdCardType?: string
-
-  /**
-   * 签署人证件号
-   */
-  IdCardNumber?: string
-
-  /**
-   * 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号。
-   */
-  Mobile?: string
-
-  /**
-   * 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符；
-   */
-  OrganizationName?: string
-
-  /**
-      * 指定签署人非第三方平台子客企业下员工，在ApproverType为ORGANIZATION时指定。
-默认为false，即签署人位于同一个第三方平台应用号下；默认为false，即签署人位于同一个第三方应用号下；
-      */
-  NotChannelOrganization?: boolean
-
-  /**
-      * 用户侧第三方id，最大长度64个字符
-当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程
-      */
-  OpenId?: string
-
-  /**
-   * 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
-   */
-  OrganizationOpenId?: string
-
-  /**
-      * 签署人类型
-PERSON-个人/自然人；
-PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
-ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
-ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
-      */
-  ApproverType?: string
-
-  /**
-   * 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置；
-   */
-  RecipientId?: string
-
-  /**
-   * 签署截止时间，默认一年
-   */
-  Deadline?: number
-
-  /**
-   * 签署完回调url，最大长度1000个字符
-   */
-  CallbackUrl?: string
-
-  /**
-   * 使用PDF文件直接发起合同时，签署人指定的签署控件
-   */
-  SignComponents?: Array<Component>
-
-  /**
-      * 个人签署方指定签署控件类型，目前支持：OCR_ESIGN -AI智慧手写签名
-HANDWRITE -手写签名
-      */
-  ComponentLimitType?: Array<string>
-
-  /**
-   * 合同的强制预览时间：3~300s，未指定则按合同页数计算
-   */
-  PreReadTime?: number
-
-  /**
-   * 签署完前端跳转的url，暂未使用
-   */
-  JumpUrl?: string
-
-  /**
-   * 签署人个性化能力值
-   */
-  ApproverOption?: ApproverOption
-
-  /**
-   * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要
-   */
-  ApproverNeedSignReview?: boolean
-
-  /**
-      * 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式) 如果不传默认为1
-查看合同的签署方式 Flow层级的优先于approver层级的
-      */
-  ApproverVerifyTypes?: Array<number>
-
-  /**
-      * 签署人签署合同时的认证方式
-1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
-      */
-  ApproverSignTypes?: Array<number>
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1264,6 +1193,36 @@ export interface GetDownloadFlowUrlResponse {
 }
 
 /**
+ * 应用相关信息
+ */
+export interface Agent {
+  /**
+   * 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。
+   */
+  AppId: string
+
+  /**
+   * 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串
+   */
+  ProxyOrganizationOpenId?: string
+
+  /**
+   * 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
+   */
+  ProxyOperator?: UserInfo
+
+  /**
+   * 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
+   */
+  ProxyAppId?: string
+
+  /**
+   * 内部参数，暂未开放使用
+   */
+  ProxyOrganizationId?: string
+}
+
+/**
  * 签署参与者信息
  */
 export interface Recipient {
@@ -1365,7 +1324,7 @@ export interface StaffRole {
  */
 export interface ChannelVerifyPdfRequest {
   /**
-   * 合同Id，流程Id
+   * 流程ID
    */
   FlowId: string
 
@@ -1410,9 +1369,8 @@ export interface ChannelVerifyPdfResponse {
   VerifyResult?: number
 
   /**
-      * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域
-；5-文件签名格式错误
-      */
+   * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
+   */
   PdfVerifyResults?: Array<PdfVerifyResult>
 
   /**
@@ -1510,6 +1468,91 @@ export interface OrganizationInfo {
    * 用户渠道
    */
   Channel?: string
+}
+
+/**
+ * 签署链接内容
+ */
+export interface SignUrlInfo {
+  /**
+      * 签署链接，过期时间为30天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignUrl: string
+
+  /**
+      * 合同过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Deadline: number
+
+  /**
+      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignOrder: number
+
+  /**
+      * 签署人编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SignId: string
+
+  /**
+      * 自定义用户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomUserId: string
+
+  /**
+      * 用户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 用户手机号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mobile: string
+
+  /**
+      * 签署参与者机构名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationName: string
+
+  /**
+      * 参与者类型:
+ORGANIZATION 企业经办人
+PERSON 自然人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApproverType: string
+
+  /**
+      * 经办人身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardNumber: string
+
+  /**
+      * 签署链接对应流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: string
+
+  /**
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OpenId: string
+
+  /**
+      * 合同组签署链接对应的合同组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowGroupId: string
 }
 
 /**
@@ -2219,19 +2262,13 @@ export interface AuthorizedUser {
 }
 
 /**
- * DescribeResourceUrlsByFlows返回参数结构体
+ * ChannelDeleteRoleUsers返回参数结构体
  */
-export interface DescribeResourceUrlsByFlowsResponse {
+export interface ChannelDeleteRoleUsersResponse {
   /**
-   * 签署流程资源对应链接信息
+   * 角色id
    */
-  FlowResourceUrlInfos?: Array<FlowResourceUrlInfo>
-
-  /**
-      * 创建消息，对应多个合同ID，
-成功为“”,创建失败则对应失败消息
-      */
-  ErrorMessages?: Array<string>
+  RoleId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2419,6 +2456,133 @@ export interface SignQrCode {
 }
 
 /**
+ * 创建签署流程签署人入参。
+
+其中签署方FlowApproverInfo需要传递的参数
+非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识
+1-个人：Name、Mobile必传
+2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
+3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；
+4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
+
+RecipientId参数：
+从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId
+ */
+export interface FlowApproverInfo {
+  /**
+   * 签署人姓名，最大长度50个字符
+   */
+  Name?: string
+
+  /**
+      * 签署人身份证件类型
+1.ID_CARD 居民身份证
+2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
+3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+      */
+  IdCardType?: string
+
+  /**
+   * 签署人证件号
+   */
+  IdCardNumber?: string
+
+  /**
+   * 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号。
+   */
+  Mobile?: string
+
+  /**
+   * 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符；
+   */
+  OrganizationName?: string
+
+  /**
+      * 指定签署人非第三方平台子客企业下员工，在ApproverType为ORGANIZATION时指定。
+默认为false，即签署人位于同一个第三方平台应用号下；默认为false，即签署人位于同一个第三方应用号下；
+      */
+  NotChannelOrganization?: boolean
+
+  /**
+      * 用户侧第三方id，最大长度64个字符
+当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程
+      */
+  OpenId?: string
+
+  /**
+   * 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
+   */
+  OrganizationOpenId?: string
+
+  /**
+      * 签署人类型
+PERSON-个人/自然人；
+PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
+ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
+ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
+      */
+  ApproverType?: string
+
+  /**
+   * 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置；
+   */
+  RecipientId?: string
+
+  /**
+   * 签署截止时间，默认一年
+   */
+  Deadline?: number
+
+  /**
+   * 签署完回调url，最大长度1000个字符
+   */
+  CallbackUrl?: string
+
+  /**
+   * 使用PDF文件直接发起合同时，签署人指定的签署控件
+   */
+  SignComponents?: Array<Component>
+
+  /**
+      * 个人签署方指定签署控件类型，目前支持：OCR_ESIGN -AI智慧手写签名
+HANDWRITE -手写签名
+      */
+  ComponentLimitType?: Array<string>
+
+  /**
+   * 合同的强制预览时间：3~300s，未指定则按合同页数计算
+   */
+  PreReadTime?: number
+
+  /**
+   * 签署完前端跳转的url，暂未使用
+   */
+  JumpUrl?: string
+
+  /**
+   * 签署人个性化能力值
+   */
+  ApproverOption?: ApproverOption
+
+  /**
+   * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要
+   */
+  ApproverNeedSignReview?: boolean
+
+  /**
+      * 签署人查看合同时认证方式, 1-实名查看 2-短信验证码查看(企业签署方不支持该方式) 如果不传默认为1
+查看合同的签署方式 Flow层级的优先于approver层级的
+      */
+  ApproverVerifyTypes?: Array<number>
+
+  /**
+      * 签署人签署合同时的认证方式
+1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
+      */
+  ApproverSignTypes?: Array<number>
+}
+
+/**
  * ChannelGetTaskResultApi请求参数结构体
  */
 export interface ChannelGetTaskResultApiRequest {
@@ -2580,88 +2744,20 @@ export interface SyncProxyOrganizationOperatorsResponse {
 }
 
 /**
- * 签署链接内容
+ * 绑定失败的用户角色信息
  */
-export interface SignUrlInfo {
+export interface FailedCreateRoleData {
   /**
-      * 签署链接，过期时间为30天
+      * 用户userId
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SignUrl: string
+  UserId?: string
 
   /**
-      * 合同过期时间
+      * 角色RoleId列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Deadline: number
-
-  /**
-      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SignOrder: number
-
-  /**
-      * 签署人编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SignId: string
-
-  /**
-      * 自定义用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CustomUserId: string
-
-  /**
-      * 用户姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 用户手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Mobile: string
-
-  /**
-      * 签署参与者机构名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationName: string
-
-  /**
-      * 参与者类型:
-ORGANIZATION 企业经办人
-PERSON 自然人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApproverType: string
-
-  /**
-      * 经办人身份证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdCardNumber: string
-
-  /**
-      * 签署链接对应流程Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowId: string
-
-  /**
-      * 企业经办人 用户在渠道的编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OpenId: string
-
-  /**
-      * 合同组签署链接对应的合同组id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowGroupId: string
+  RoleIds?: Array<string>
 }
 
 /**
@@ -3004,6 +3100,37 @@ export interface ChannelCancelMultiFlowSignQRCodeResponse {
 }
 
 /**
+ * ChannelDescribeRoles返回参数结构体
+ */
+export interface ChannelDescribeRolesResponse {
+  /**
+   * 页面偏移量，最大2000
+   */
+  Offset?: number
+
+  /**
+   * 查询数量，最大200
+   */
+  Limit?: number
+
+  /**
+   * 查询角色的总数量
+   */
+  TotalCount?: number
+
+  /**
+      * 角色信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelRoles?: Array<ChannelRole>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ChannelCreateReleaseFlow请求参数结构体
  */
 export interface ChannelCreateReleaseFlowRequest {
@@ -3163,6 +3290,31 @@ export interface ModifyExtendedServiceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ChannelCreateUserRoles请求参数结构体
+ */
+export interface ChannelCreateUserRolesRequest {
+  /**
+   * 操作者信息
+   */
+  Operator: UserInfo
+
+  /**
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+   */
+  Agent: Agent
+
+  /**
+   * 绑定角色的员工id列表
+   */
+  UserIds: Array<string>
+
+  /**
+   * 绑定角色的角色id列表
+   */
+  RoleIds: Array<string>
 }
 
 /**
@@ -3702,6 +3854,36 @@ export interface DescribeTemplatesRequest {
    * 模板ID
    */
   ChannelTemplateId?: string
+}
+
+/**
+ * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
+ */
+export interface RelieveInfo {
+  /**
+   * 解除理由，最大支持200个字
+   */
+  Reason: string
+
+  /**
+   * 解除后仍然有效的条款，保留条款，最大支持200个字
+   */
+  RemainInForceItem?: string
+
+  /**
+   * 原合同事项处理-费用结算，最大支持200个字
+   */
+  OriginalExpenseSettlement?: string
+
+  /**
+   * 原合同事项处理-其他事项，最大支持200个字
+   */
+  OriginalOtherSettlement?: string
+
+  /**
+   * 其他约定，最大支持200个字
+   */
+  OtherDeals?: string
 }
 
 /**

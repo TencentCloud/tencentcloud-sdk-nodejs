@@ -1591,6 +1591,304 @@ export interface ResetAccountPasswordResponse {
 }
 
 /**
+ * DescribeDBInstanceDetail返回参数结构体
+ */
+export interface DescribeDBInstanceDetailResponse {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例状态
+   */
+  Status: number
+
+  /**
+   * 实例目前运行状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 内网 IP 地址
+   */
+  Vip: string
+
+  /**
+   * 内网端口
+   */
+  Vport: number
+
+  /**
+   * 是否临时实例，0为否，非0为是
+   */
+  IsTmp: number
+
+  /**
+   * 节点数，2为一主一从，3为一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 实例所在地域名称，如 ap-shanghai
+   */
+  Region: string
+
+  /**
+   * 实例所在可用区名称，如 ap-shanghai-1
+   */
+  Zone: string
+
+  /**
+   * 字符串型的私有网络Id
+   */
+  VpcId: string
+
+  /**
+   * 字符串型的私有网络子网Id
+   */
+  SubnetId: string
+
+  /**
+   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+   */
+  WanStatus: number
+
+  /**
+   * 外网访问的域名，公网可解析
+   */
+  WanDomain: string
+
+  /**
+   * 外网 IP 地址，公网可访问
+   */
+  WanVip: string
+
+  /**
+   * 外网端口
+   */
+  WanPort: number
+
+  /**
+   * 实例所属项目 Id
+   */
+  ProjectId: number
+
+  /**
+   * TDSQL 版本信息
+   */
+  TdsqlVersion: string
+
+  /**
+   * 实例内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 实例存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 主可用区，如 ap-shanghai-1
+   */
+  MasterZone: string
+
+  /**
+   * 从可用区列表，如 [ap-shanghai-2]
+   */
+  SlaveZones: Array<string>
+
+  /**
+   * 自动续费标志：0 否，1 是
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 独享集群Id，普通实例为空
+   */
+  ExclusterId: string
+
+  /**
+   * 付费模式：prepaid 表示预付费
+   */
+  PayMode: string
+
+  /**
+   * 实例创建时间，格式为 2006-01-02 15:04:05
+   */
+  CreateTime: string
+
+  /**
+   * 实例是否支持审计
+   */
+  IsAuditSupported: boolean
+
+  /**
+   * 实例到期时间，格式为 2006-01-02 15:04:05
+   */
+  PeriodEndTime: string
+
+  /**
+   * 机型信息
+   */
+  Machine: string
+
+  /**
+   * 存储空间使用率
+   */
+  StorageUsage: string
+
+  /**
+   * 日志存储空间大小，单位 GB
+   */
+  LogStorage: number
+
+  /**
+   * 是否支持数据加密。1-支持；0-不支持
+   */
+  IsEncryptSupported: number
+
+  /**
+      * 内网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip6: string
+
+  /**
+   * 实例Cpu核数
+   */
+  Cpu: number
+
+  /**
+   * 产品类型ID
+   */
+  Pid: number
+
+  /**
+   * 最大QPS
+   */
+  Qps: number
+
+  /**
+      * 是否支持IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6Flag: number
+
+  /**
+      * 外网IPv6地址，公网可访问
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanVipv6: string
+
+  /**
+      * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanStatusIpv6: number
+
+  /**
+      * 外网IPv6端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanPortIpv6: number
+
+  /**
+      * 数据库引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbEngine: string
+
+  /**
+      * 数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbVersion: string
+
+  /**
+   * 标签信息
+   */
+  ResourceTags: Array<ResourceTag>
+
+  /**
+      * DCN标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnFlag: number
+
+  /**
+      * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnStatus: number
+
+  /**
+      * DCN灾备实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnDstNum: number
+
+  /**
+      * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: number
+
+  /**
+      * 实例的各个DB节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodesInfo: Array<NodeInfo>
+
+  /**
+      * 实例是否支持设置用户连接数限制，内核为10.1暂不支持。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsMaxUserConnectionsSupported: boolean
+
+  /**
+      * 对外显示的数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbVersionId: string
+
+  /**
+      * 加密状态, 0-未开启，1-已开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EncryptStatus: number
+
+  /**
+      * DCN的配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReplicaConfig: DCNReplicaConfig
+
+  /**
+      * DCN的运行状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReplicaStatus: DCNReplicaStatus
+
+  /**
+      * 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExclusterType: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrice请求参数结构体
  */
 export interface DescribePriceRequest {
@@ -1755,6 +2053,16 @@ export interface DatabaseTable {
    * 表名
    */
   Table: string
+}
+
+/**
+ * DescribeDBInstanceDetail请求参数结构体
+ */
+export interface DescribeDBInstanceDetailRequest {
+  /**
+   * 实例Id形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
 }
 
 /**

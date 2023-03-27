@@ -206,7 +206,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlarmNotices", req, cb);
     }
     /**
-     * 云监控告警编辑告警通知模板
+     * 编辑告警通知模板
      */
     async ModifyAlarmNotice(req, cb) {
         return this.request("ModifyAlarmNotice", req, cb);
@@ -911,7 +911,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminatePrometheusInstances", req, cb);
     }
     /**
-     * 获取与云监控融合实例列表
+     * 获取与 Prometheus 监控融合实例列表
      */
     async DescribePrometheusInstancesOverview(req, cb) {
         return this.request("DescribePrometheusInstancesOverview", req, cb);

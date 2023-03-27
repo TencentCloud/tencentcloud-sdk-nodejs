@@ -283,6 +283,16 @@ export interface ModifyInstanceVportResponse {
 }
 
 /**
+ * DescribeDCDBInstanceDetail请求参数结构体
+ */
+export interface DescribeDCDBInstanceDetailRequest {
+  /**
+   * 实例ID，形如dcdbt-7oaxtcb7
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyInstanceVip返回参数结构体
  */
 export interface ModifyInstanceVipResponse {
@@ -865,6 +875,21 @@ export interface DescribeDBLogFilesRequest {
 }
 
 /**
+ * 描述DB节点信息
+ */
+export interface NodeInfo {
+  /**
+   * DB节点ID
+   */
+  NodeId: string
+
+  /**
+   * DB节点角色，取值为master或者slave
+   */
+  Role: string
+}
+
+/**
  * DescribeOrders返回参数结构体
  */
 export interface DescribeOrdersResponse {
@@ -1069,25 +1094,274 @@ export interface CloneAccountRequest {
 }
 
 /**
- * DescribeDCDBRenewalPrice请求参数结构体
+ * DescribeDCDBInstanceDetail返回参数结构体
  */
-export interface DescribeDCDBRenewalPriceRequest {
+export interface DescribeDCDBInstanceDetailResponse {
   /**
-   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   * 实例ID，形如dcdbt-7oaxtcb7
    */
   InstanceId: string
 
   /**
-   * 续费时长，单位：月。不传则默认为1个月。
+   * 实例名称
    */
-  Period?: number
+  InstanceName: string
 
   /**
-   * 价格金额单位，不传默认单位为分，取值：
-   * pent：分
-   * microPent：微分
+   * 实例状态。0-实例创建中；1-异步任务处理中；2-运行中；3-实例未初始化；-1-实例已隔离
    */
-  AmountUnit?: string
+  Status: number
+
+  /**
+   * 实例目前运行状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 实例内网IP地址
+   */
+  Vip: string
+
+  /**
+   * 实例内网端口
+   */
+  Vport: number
+
+  /**
+   * 实例节点数。值为2时表示一主一从，值为3时表示一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 实例所在地域名称，形如ap-guangzhou
+   */
+  Region: string
+
+  /**
+   * 实例私有网络ID，形如vpc-r9jr0de3
+   */
+  VpcId: string
+
+  /**
+   * 实例私有网络子网ID，形如subnet-6rqs61o2
+   */
+  SubnetId: string
+
+  /**
+   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+   */
+  WanStatus: number
+
+  /**
+   * 外网访问的域名，公网可解析
+   */
+  WanDomain: string
+
+  /**
+   * 外网IP地址，公网可访问
+   */
+  WanVip: string
+
+  /**
+   * 外网访问端口
+   */
+  WanPort: number
+
+  /**
+   * 实例所属项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 实例自动续费标志。0-正常续费；1-自动续费；2-到期不续费
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 独享集群ID
+   */
+  ExclusterId: string
+
+  /**
+   * 付费模式。prepaid-预付费；postpaid-按量计费
+   */
+  PayMode: string
+
+  /**
+   * 实例创建时间，格式为 2006-01-02 15:04:05
+   */
+  CreateTime: string
+
+  /**
+   * 实例到期时间，格式为 2006-01-02 15:04:05
+   */
+  PeriodEndTime: string
+
+  /**
+   * 数据库版本信息
+   */
+  DbVersion: string
+
+  /**
+   * 实例是否支持审计。0-不支持；1-支持
+   */
+  IsAuditSupported: number
+
+  /**
+   * 实例是否支持数据加密。0-不支持；1-支持
+   */
+  IsEncryptSupported: number
+
+  /**
+   * 实例母机机器型号
+   */
+  Machine: string
+
+  /**
+   * 实例内存大小，单位 GB，各个分片的内存大小的和
+   */
+  Memory: number
+
+  /**
+   * 实例磁盘存储大小，单位 GB，各个分片的磁盘大小的和
+   */
+  Storage: number
+
+  /**
+   * 实例存储空间使用率，计算方式为：各个分片已经使用的磁盘大小的和/各个分片的磁盘大小的和。
+   */
+  StorageUsage: number
+
+  /**
+   * 日志存储空间大小，单位GB
+   */
+  LogStorage: number
+
+  /**
+   * 产品类型ID
+   */
+  Pid: number
+
+  /**
+   * 主DB可用区
+   */
+  MasterZone: string
+
+  /**
+   * 从DB可用区
+   */
+  SlaveZones: Array<string>
+
+  /**
+   * 分片信息
+   */
+  Shards: Array<ShardBriefInfo>
+
+  /**
+      * 内网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip6: string
+
+  /**
+      * 实例Cpu核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cpu: number
+
+  /**
+      * 实例QPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Qps: number
+
+  /**
+      * DB引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbEngine: string
+
+  /**
+      * 是否支持IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6Flag: number
+
+  /**
+      * 外网IPv6地址，公网可访问
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanVipv6: string
+
+  /**
+      * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanStatusIpv6: number
+
+  /**
+      * 外网IPv6端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanPortIpv6: number
+
+  /**
+   * 标签信息
+   */
+  ResourceTags: Array<ResourceTag>
+
+  /**
+      * DCN标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnFlag: number
+
+  /**
+      * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnStatus: number
+
+  /**
+      * DCN灾备实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnDstNum: number
+
+  /**
+      * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: number
+
+  /**
+      * 实例是否支持设置用户连接数限制，内核为10.1暂不支持。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsMaxUserConnectionsSupported: boolean
+
+  /**
+      * 对外显示的数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbVersionId: string
+
+  /**
+      * 加密状态, 0-未开启，1-已开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EncryptStatus: number
+
+  /**
+      * 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExclusterType: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2427,13 +2701,22 @@ export interface RenewDCDBInstanceResponse {
 }
 
 /**
- * DescribeShardSpec返回参数结构体
+ * DescribeDCDBRenewalPrice返回参数结构体
  */
-export interface DescribeShardSpecResponse {
+export interface DescribeDCDBRenewalPriceResponse {
   /**
-   * 按机型分类的可售卖规格列表
+   * 原价
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站为人民币，国际站为美元
    */
-  SpecConfig: Array<SpecConfig>
+  OriginalPrice: number
+
+  /**
+   * 实际价格，受折扣等影响，可能和原价不同
+   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
+   * 币种：国内站人民币，国际站美元
+   */
+  Price: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2452,22 +2735,13 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
- * DescribeDCDBRenewalPrice返回参数结构体
+ * DescribeShardSpec返回参数结构体
  */
-export interface DescribeDCDBRenewalPriceResponse {
+export interface DescribeShardSpecResponse {
   /**
-   * 原价
-   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
-   * 币种：国内站为人民币，国际站为美元
+   * 按机型分类的可售卖规格列表
    */
-  OriginalPrice: number
-
-  /**
-   * 实际价格，受折扣等影响，可能和原价不同
-   * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
-   * 币种：国内站人民币，国际站美元
-   */
-  Price: number
+  SpecConfig: Array<SpecConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2695,6 +2969,87 @@ export interface OpenDBExtranetAccessRequest {
    * 是否IPv6，默认0
    */
   Ipv6Flag?: number
+}
+
+/**
+ * DCDB分片信息
+ */
+export interface ShardBriefInfo {
+  /**
+   * 分片SerialId
+   */
+  ShardSerialId: string
+
+  /**
+   * 分片ID，形如shard-7vg1o339
+   */
+  ShardInstanceId: string
+
+  /**
+   * 分片运行状态
+   */
+  Status: number
+
+  /**
+   * 分片运行状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 分片创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 分片内存大小，单位GB
+   */
+  Memory: number
+
+  /**
+   * 分片磁盘大小，单位GB
+   */
+  Storage: number
+
+  /**
+   * 分片日志磁盘空间大小，单位GB
+   */
+  LogDisk: number
+
+  /**
+   * 分片节点个数
+   */
+  NodeCount: number
+
+  /**
+   * 分片磁盘空间使用率
+   */
+  StorageUsage: number
+
+  /**
+   * 分片Proxy版本信息
+   */
+  ProxyVersion: string
+
+  /**
+   * 分片主DB可用区
+   */
+  ShardMasterZone: string
+
+  /**
+   * 分片从DB可用区
+   */
+  ShardSlaveZones: Array<string>
+
+  /**
+   * 分片Cpu核数
+   */
+  Cpu: number
+
+  /**
+      * DB节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodesInfo: Array<NodeInfo>
 }
 
 /**
@@ -4086,6 +4441,28 @@ export interface DescribeDBSlowLogsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDCDBRenewalPrice请求参数结构体
+ */
+export interface DescribeDCDBRenewalPriceRequest {
+  /**
+   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 续费时长，单位：月。不传则默认为1个月。
+   */
+  Period?: number
+
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**

@@ -116,18 +116,19 @@ import {
   DescribeInstanceMonitorTookDistRequest,
   DeleteReplicationInstanceRequest,
   KillMasterGroupRequest,
-  InstanceTextParam,
+  CloneInstancesResponse,
   ParamTemplateInfo,
   DescribeInstanceMonitorTopNCmdTookResponse,
   CloseSSLRequest,
   DescribeInstanceMonitorBigKeySizeDistRequest,
   DescribeInstanceAccountRequest,
-  SwitchProxyRequest,
+  InstanceTextParam,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
+  CloneInstancesRequest,
   ApplyParamsTemplateResponse,
   DescribeReplicationGroupRequest,
   RedisNodes,
@@ -217,6 +218,7 @@ import {
   DescribeInstanceMonitorBigKeyRequest,
   DescribeBackupDownloadRestrictionRequest,
   DescribeParamTemplateInfoResponse,
+  SwitchProxyRequest,
   DescribeProductInfoRequest,
   SwitchInstanceVipResponse,
   BackupLimitVpcItem,
@@ -544,6 +546,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddReplicationInstanceResponse) => void
   ): Promise<AddReplicationInstanceResponse> {
     return this.request("AddReplicationInstance", req, cb)
+  }
+
+  /**
+   * 本接口（CloneInstances）可基于当前实例的备份文件克隆一个完整的新实例。
+   */
+  async CloneInstances(
+    req: CloneInstancesRequest,
+    cb?: (error: string, rep: CloneInstancesResponse) => void
+  ): Promise<CloneInstancesResponse> {
+    return this.request("CloneInstances", req, cb)
   }
 
   /**

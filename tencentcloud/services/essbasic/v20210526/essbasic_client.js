@@ -114,6 +114,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
+     * 渠道版删除员工绑定角色
+     */
+    async ChannelDeleteRoleUsers(req, cb) {
+        return this.request("ChannelDeleteRoleUsers", req, cb);
+    }
+    /**
+     * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+     */
+    async DescribeTemplates(req, cb) {
+        return this.request("DescribeTemplates", req, cb);
+    }
+    /**
      * 创建跳转小程序查看或签署的链接。
 
 跳转小程序的几种方式：主要是设置不同的EndPoint
@@ -257,6 +269,12 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
+     * 渠道办查询用户角色
+     */
+    async ChannelDescribeRoles(req, cb) {
+        return this.request("ChannelDescribeRoles", req, cb);
+    }
+    /**
      * 根据签署流程信息批量获取资源下载链接，可以下载签署中、签署完的合同，需合作企业先进行授权。
 此接口直接返回下载的资源的url，与接口GetDownloadFlowUrl跳转到控制台的下载方式不同。
      */
@@ -264,10 +282,10 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
     /**
-     * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
+     * 渠道版绑定员工角色
      */
-    async DescribeTemplates(req, cb) {
-        return this.request("DescribeTemplates", req, cb);
+    async ChannelCreateUserRoles(req, cb) {
+        return this.request("ChannelCreateUserRoles", req, cb);
     }
     /**
      * 此接口（UploadFiles）用于文件上传。
