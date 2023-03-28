@@ -21,6 +21,23 @@ export interface DescribeFlowEvidenceReportRequest {
     ReportId: string;
 }
 /**
+ * UpdateIntegrationEmployees返回参数结构体
+ */
+export interface UpdateIntegrationEmployeesResponse {
+    /**
+      * 更新成功的用户列表
+      */
+    SuccessEmployeeData?: Array<SuccessUpdateStaffData>;
+    /**
+      * 更新失败的用户列表
+      */
+    FailedEmployeeData?: Array<FailedUpdateStaffData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 集成版员工部门信息
  */
 export interface Department {
@@ -259,6 +276,35 @@ export interface CreateIntegrationEmployeesRequest {
     Agent?: Agent;
 }
 /**
+ * CreateConvertTaskApi请求参数结构体
+ */
+export interface CreateConvertTaskApiRequest {
+    /**
+      * 资源类型 取值范围doc,docx,html,xls,xlsx之一
+      */
+    ResourceType: string;
+    /**
+      * 资源名称，长度限制为256字符
+      */
+    ResourceName: string;
+    /**
+      * 资源Id，通过UploadFiles获取
+      */
+    ResourceId: string;
+    /**
+      * 调用方用户信息，userId 必填
+      */
+    Operator?: UserInfo;
+    /**
+      * 应用号信息
+      */
+    Agent?: Agent;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
+}
+/**
  * CreateFlowEvidenceReport请求参数结构体
  */
 export interface CreateFlowEvidenceReportRequest {
@@ -325,33 +371,41 @@ export interface FlowApproverUrlInfo {
     ApproverType?: number;
 }
 /**
- * CreateConvertTaskApi请求参数结构体
+ * 授权用户
  */
-export interface CreateConvertTaskApiRequest {
+export interface AuthorizedUser {
     /**
-      * 资源类型 取值范围doc,docx,html,xls,xlsx之一
+      * 用户id
       */
-    ResourceType: string;
+    UserId: string;
+}
+/**
+ * DescribeIntegrationRoles请求参数结构体
+ */
+export interface DescribeIntegrationRolesRequest {
     /**
-      * 资源名称，长度限制为256字符
+      * 操作人信息
       */
-    ResourceName: string;
+    Operator: UserInfo;
     /**
-      * 资源Id，通过UploadFiles获取
+      * 返回最大数量，最大为200
       */
-    ResourceId: string;
+    Limit: number;
     /**
-      * 调用方用户信息，userId 必填
-      */
-    Operator?: UserInfo;
-    /**
-      * 应用号信息
+      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
       */
     Agent?: Agent;
     /**
-      * 暂未开放
+      * 查询的关键字段:
+Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色
+Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
+Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色
       */
-    Organization?: OrganizationInfo;
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0，最大为2000
+      */
+    Offset?: number;
 }
 /**
  * CreateFlowReminds返回参数结构体
@@ -525,13 +579,13 @@ export interface DescribeFlowTemplatesRequest {
     /**
       * 这个参数跟下面的IsChannel参数配合使用。
 IsChannel=false时，ApplicationId参数不起任何作用。
-IsChannel=true时，ApplicationId为空，查询所有渠道模板列表；ApplicationId不为空，查询指定渠道下的模板列表
-ApplicationId为空，查询渠道模板列表
+IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表
+ApplicationId为空，查询所有应用下的模板列表
       */
     ApplicationId?: string;
     /**
       * 默认为false，查询SaaS模板库列表；
-为true，查询渠道模板库管理列表
+为true，查询第三方应用集成平台企业模板库管理列表
       */
     IsChannel?: boolean;
     /**
@@ -682,6 +736,19 @@ export interface DescribeIntegrationEmployeesRequest {
       * 偏移量，默认为0，最大为20000
       */
     Offset?: number;
+}
+/**
+ * CreateIntegrationUserRoles返回参数结构体
+ */
+export interface CreateIntegrationUserRolesResponse {
+    /**
+      * 绑定角色失败列表信息
+      */
+    FailedCreateRoleData?: Array<FailedCreateRoleData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateFlow请求参数结构体
@@ -1104,6 +1171,23 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
     IdCardNumber: string;
 }
 /**
+ * 一码多扫签署二维码对象
+ */
+export interface SignQrCode {
+    /**
+      * 二维码id
+      */
+    QrCodeId: string;
+    /**
+      * 二维码url
+      */
+    QrCodeUrl: string;
+    /**
+      * 二维码过期时间
+      */
+    ExpiredTime: number;
+}
+/**
  * CreateSealPolicy返回参数结构体
  */
 export interface CreateSealPolicyResponse {
@@ -1220,21 +1304,17 @@ REJECT: 拒绝
     Agent?: Agent;
 }
 /**
- * 创建员工的失败数据
+ * CreateSchemeUrl返回参数结构体
  */
-export interface FailedCreateStaffData {
+export interface CreateSchemeUrlResponse {
     /**
-      * 员工名
+      * 小程序链接地址
       */
-    DisplayName: string;
+    SchemeUrl?: string;
     /**
-      * 员工手机号
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Mobile: string;
-    /**
-      * 失败原因
-      */
-    Reason: string;
+    RequestId?: string;
 }
 /**
  * CreateUserAutoSignEnableUrl返回参数结构体
@@ -1340,7 +1420,7 @@ export interface DescribeFileUrlsRequest {
  * 电子文档的控件填充信息。按照控件类型进行相应的填充。
 
 【数据表格传参说明】
-当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
+当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
 输入示例1：
 
 ```
@@ -1686,13 +1766,17 @@ export interface GroupOrganization {
     FlowEngineEnable?: boolean;
 }
 /**
- * 授权用户
+ * DeleteIntegrationRoleUsers返回参数结构体
  */
-export interface AuthorizedUser {
+export interface DeleteIntegrationRoleUsersResponse {
     /**
-      * 用户id
+      * 角色id
       */
-    UserId: string;
+    RoleId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateDocument请求参数结构体
@@ -1801,21 +1885,29 @@ export interface DeleteIntegrationEmployeesRequest {
     Agent?: Agent;
 }
 /**
- * 一码多扫签署二维码对象
+ * 更新员工信息失败返回的数据信息
  */
-export interface SignQrCode {
+export interface FailedUpdateStaffData {
     /**
-      * 二维码id
+      * 用户传入的名称
       */
-    QrCodeId: string;
+    DisplayName?: string;
     /**
-      * 二维码url
+      * 用户传入的手机号
       */
-    QrCodeUrl: string;
+    Mobile?: string;
     /**
-      * 二维码过期时间
+      * 失败原因
       */
-    ExpiredTime: number;
+    Reason?: string;
+    /**
+      * 用户Id
+      */
+    UserId?: string;
+    /**
+      * 用户OpenId
+      */
+    OpenId?: string;
 }
 /**
  * GetTaskResultApi请求参数结构体
@@ -1865,6 +1957,27 @@ export interface CreateIntegrationEmployeesResponse {
     RequestId?: string;
 }
 /**
+ * DeleteIntegrationRoleUsers请求参数结构体
+ */
+export interface DeleteIntegrationRoleUsersRequest {
+    /**
+      * 操作人
+      */
+    Operator: UserInfo;
+    /**
+      * 角色id
+      */
+    RoleId: string;
+    /**
+      * 用户信息
+      */
+    Users: Array<UserInfo>;
+    /**
+      * 代理信息
+      */
+    Agent?: Agent;
+}
+/**
  * CreateFlowSignUrl请求参数结构体
  */
 export interface CreateFlowSignUrlRequest {
@@ -1907,6 +2020,27 @@ export interface CreateReleaseFlowRequest {
 解除协议的签署人数量不能多于原流程的签署人数量
       */
     ReleasedApprovers?: Array<ReleasedApprover>;
+}
+/**
+ * CreateIntegrationUserRoles请求参数结构体
+ */
+export interface CreateIntegrationUserRolesRequest {
+    /**
+      * 操作人信息
+      */
+    Operator: UserInfo;
+    /**
+      * 绑定角色的用户id列表
+      */
+    UserIds: Array<string>;
+    /**
+      * 绑定角色的角色id列表
+      */
+    RoleIds: Array<string>;
+    /**
+      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+      */
+    Agent?: Agent;
 }
 /**
  * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
@@ -1953,6 +2087,23 @@ export interface FlowDetailInfo {
       * 合同(流程)的签署人数组
       */
     FlowApproverInfos: Array<FlowApproverDetail>;
+}
+/**
+ * 更新员工信息成功返回的数据信息
+ */
+export interface SuccessUpdateStaffData {
+    /**
+      * 传入的用户名称
+      */
+    DisplayName?: string;
+    /**
+      * 传入的手机号
+      */
+    Mobile?: string;
+    /**
+      * 用户Id
+      */
+    UserId?: string;
 }
 /**
  * CreateFlowByFiles返回参数结构体
@@ -2084,6 +2235,21 @@ export interface VerifyPdfRequest {
       * 调用方用户信息，userId 必填
       */
     Operator?: UserInfo;
+}
+/**
+ * 绑定角色失败信息
+ */
+export interface FailedCreateRoleData {
+    /**
+      * 用户userId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId?: string;
+    /**
+      * 角色id列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleIds?: Array<string>;
 }
 /**
  * 参与者信息
@@ -2243,17 +2409,21 @@ export interface DescribeIntegrationMainOrganizationUserResponse {
     RequestId?: string;
 }
 /**
- * CreateSchemeUrl返回参数结构体
+ * 创建员工的失败数据
  */
-export interface CreateSchemeUrlResponse {
+export interface FailedCreateStaffData {
     /**
-      * 小程序链接地址
+      * 员工名
       */
-    SchemeUrl?: string;
+    DisplayName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 员工手机号
       */
-    RequestId?: string;
+    Mobile: string;
+    /**
+      * 失败原因
+      */
+    Reason: string;
 }
 /**
  * 指定签署人限制项
@@ -2395,6 +2565,36 @@ MobileCheck：手机号验证
       * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
       */
     CcNotifyType?: number;
+}
+/**
+ * 企业角色数据信息
+ */
+export interface IntegrateRole {
+    /**
+      * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleId?: string;
+    /**
+      * 角色名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleName?: string;
+    /**
+      * 角色类型：1-系统角色，2-自定义角色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoleStatus?: number;
+    /**
+      * 是否是集团角色
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsGroupRole?: boolean;
+    /**
+      * 管辖的子企业列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubOrgIdList?: Array<string>;
 }
 /**
  * CreatePrepareFlow返回参数结构体
@@ -2863,7 +3063,7 @@ KEYWORD 关键字，使用ComponentId指定关键字
       */
     ComponentDateFontSize?: number;
     /**
-      * 渠道版控件 id 标识
+      * 平台模板控件 id 标识
       */
     ChannelComponentId?: string;
     /**
@@ -2875,7 +3075,7 @@ KEYWORD 关键字，使用ComponentId指定关键字
       */
     OffsetY?: number;
     /**
-      * //渠道子客控件来源。0-渠道指定；1-用户自定义
+      * //子客控件来源。0-平台指定；1-用户自定义
       */
     ChannelComponentSource?: number;
     /**
@@ -2897,6 +3097,31 @@ KEYWORD 关键字，使用ComponentId指定关键字
     KeywordIndexes?: Array<number>;
 }
 /**
+ * DescribeIntegrationRoles返回参数结构体
+ */
+export interface DescribeIntegrationRolesResponse {
+    /**
+      * 偏移量，默认为0，最大为2000
+      */
+    Offset?: number;
+    /**
+      * 返回最大数量，最大为200
+      */
+    Limit?: number;
+    /**
+      * 符合查询条件的总的角色数
+      */
+    TotalCount?: number;
+    /**
+      * 企业角色信息列表
+      */
+    IntegrateRoles?: Array<IntegrateRole>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateFlowReminds请求参数结构体
  */
 export interface CreateFlowRemindsRequest {
@@ -2908,6 +3133,23 @@ export interface CreateFlowRemindsRequest {
       * 需要执行催办的签署流程id数组，最多100个
       */
     FlowIds: Array<string>;
+}
+/**
+ * UpdateIntegrationEmployees请求参数结构体
+ */
+export interface UpdateIntegrationEmployeesRequest {
+    /**
+      * 操作人信息
+      */
+    Operator: UserInfo;
+    /**
+      * 代理信息
+      */
+    Agent: Agent;
+    /**
+      * 员工信息
+      */
+    Employees: Array<Staff>;
 }
 /**
  * DescribeFlowBriefs请求参数结构体

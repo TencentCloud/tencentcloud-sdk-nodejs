@@ -434,22 +434,32 @@ export interface DescribeTelCallInfoResponse {
   /**
    * 呼出套餐包消耗分钟数
    */
-  TelCallOutCount: number
+  TelCallOutCount?: number
 
   /**
    * 呼入套餐包消耗分钟数
    */
-  TelCallInCount: number
+  TelCallInCount?: number
 
   /**
    * 坐席使用统计个数
    */
-  SeatUsedCount: number
+  SeatUsedCount?: number
 
   /**
    * 音频套餐包消耗分钟数
    */
-  VoipCallInCount: number
+  VoipCallInCount?: number
+
+  /**
+   * 离线语音转文字套餐包消耗分钟数
+   */
+  AsrOfflineCount?: number
+
+  /**
+   * 实时语音转文字套餐包消耗分钟数
+   */
+  AsrRealtimeCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

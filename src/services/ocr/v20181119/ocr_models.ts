@@ -969,42 +969,42 @@ export interface PermitOCRResponse {
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
 
   /**
    * 英文姓名
    */
-  EnglishName: string
+  EnglishName?: string
 
   /**
    * 证件号
    */
-  Number: string
+  Number?: string
 
   /**
    * 性别
    */
-  Sex: string
+  Sex?: string
 
   /**
    * 有效期限
    */
-  ValidDate: string
+  ValidDate?: string
 
   /**
    * 签发机关
    */
-  IssueAuthority: string
+  IssueAuthority?: string
 
   /**
    * 签发地点
    */
-  IssueAddress: string
+  IssueAddress?: string
 
   /**
    * 出生日期
    */
-  Birthday: string
+  Birthday?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1722,12 +1722,12 @@ export interface QrcodeOCRResponse {
   /**
    * 二维码/条形码识别结果信息，具体内容请点击左侧链接。
    */
-  CodeResults: Array<QrcodeResultsInfo>
+  CodeResults?: Array<QrcodeResultsInfo>
 
   /**
    * 图片大小，具体内容请点击左侧链接。
    */
-  ImgSize: QrcodeImgSize
+  ImgSize?: QrcodeImgSize
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1974,32 +1974,32 @@ export interface PropOwnerCertOCRResponse {
   /**
    * 房地产权利人
    */
-  Owner: string
+  Owner?: string
 
   /**
    * 共有情况
    */
-  Possession: string
+  Possession?: string
 
   /**
    * 登记时间
    */
-  RegisterTime: string
+  RegisterTime?: string
 
   /**
    * 规划用途
    */
-  Purpose: string
+  Purpose?: string
 
   /**
    * 房屋性质
    */
-  Nature: string
+  Nature?: string
 
   /**
    * 房地坐落
    */
-  Location: string
+  Location?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2398,7 +2398,7 @@ export interface MixedInvoiceDetectResponse {
   /**
    * 检测出的票据类型列表，具体内容请点击左侧链接。
    */
-  InvoiceDetectInfos: Array<InvoiceDetectInfo>
+  InvoiceDetectInfos?: Array<InvoiceDetectInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3227,22 +3227,22 @@ export interface OrgCodeCertOCRResponse {
   /**
    * 代码
    */
-  OrgCode: string
+  OrgCode?: string
 
   /**
    * 机构名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 地址
    */
-  Address: string
+  Address?: string
 
   /**
    * 有效期
    */
-  ValidDate: string
+  ValidDate?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5068,7 +5068,7 @@ export interface FinanBillSliceOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -5076,7 +5076,7 @@ export interface FinanBillSliceOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -6531,57 +6531,57 @@ export interface MainlandPermitOCRResponse {
   /**
    * 中文姓名
    */
-  Name: string
+  Name?: string
 
   /**
    * 英文姓名
    */
-  EnglishName: string
+  EnglishName?: string
 
   /**
    * 性别
    */
-  Sex: string
+  Sex?: string
 
   /**
    * 出生日期
    */
-  Birthday: string
+  Birthday?: string
 
   /**
    * 签发机关
    */
-  IssueAuthority: string
+  IssueAuthority?: string
 
   /**
    * 有效期限
    */
-  ValidDate: string
+  ValidDate?: string
 
   /**
    * 证件号
    */
-  Number: string
+  Number?: string
 
   /**
    * 签发地点
    */
-  IssueAddress: string
+  IssueAddress?: string
 
   /**
    * 签发次数
    */
-  IssueNumber: string
+  IssueNumber?: string
 
   /**
    * 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
    */
-  Type: string
+  Type?: string
 
   /**
    * RetProfile为True时返回头像字段， Base64编码
    */
-  Profile: string
+  Profile?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -125,6 +125,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DisableUserAutoSign", req, cb);
     }
     /**
+     * 解绑用户角色绑定关系
+     */
+    async DeleteIntegrationRoleUsers(req, cb) {
+        return this.request("DeleteIntegrationRoleUsers", req, cb);
+    }
+    /**
      * 提交企业签署流程审批结果
 适用场景:
 在通过接口(CreateFlow 或者CreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。
@@ -199,6 +205,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowByFiles", req, cb);
     }
     /**
+     * 查询集成版角色
+     */
+    async DescribeIntegrationRoles(req, cb) {
+        return this.request("DescribeIntegrationRoles", req, cb);
+    }
+    /**
      * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
 适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
 适用的模板仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模板，且模板中发起方没有填写控件。
@@ -243,6 +255,12 @@ callbackinfo包含： 回调地址和签名key
      */
     async DescribeFlowBriefs(req, cb) {
         return this.request("DescribeFlowBriefs", req, cb);
+    }
+    /**
+     * 集成版绑定员工角色
+     */
+    async CreateIntegrationUserRoles(req, cb) {
+        return this.request("CreateIntegrationUserRoles", req, cb);
     }
     /**
      * 此接口（UploadFiles）用于文件上传。
@@ -307,6 +325,12 @@ callbackinfo包含： 回调地址和签名key
      */
     async CreateIntegrationEmployees(req, cb) {
         return this.request("CreateIntegrationEmployees", req, cb);
+    }
+    /**
+     * 更新集成版员工信息(姓名，手机号，邮件)，用户实名后无法更改姓名与手机号
+     */
+    async UpdateIntegrationEmployees(req, cb) {
+        return this.request("UpdateIntegrationEmployees", req, cb);
     }
 }
 exports.Client = Client;

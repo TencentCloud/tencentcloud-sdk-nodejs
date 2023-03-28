@@ -151,7 +151,7 @@ export interface DescribeProbeMetricDataResponse {
       * 返回指标 JSON 序列化后的字符串,具体如下所示：
 "[{\"name\":\"task_navigate_request_gauge\",\"columns\":[\"time\",\"avg(first_screen_time) / 1000\"],\"values\":[[1641571200,6.756600000000001]],\"tags\":null}]"
       */
-    MetricSet: string;
+    MetricSet?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -284,11 +284,11 @@ export interface DescribeDetailedSingleProbeDataResponse {
     /**
       * 单次详情数据
       */
-    DataSet: Array<DetailedSingleDataDefine>;
+    DataSet?: Array<DetailedSingleDataDefine>;
     /**
       * 符合条件的数据总数
       */
-    TotalNumber: number;
+    TotalNumber?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -359,7 +359,7 @@ export interface DescribeProbeNodesResponse {
       * 节点列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodeSet: Array<NodeDefine>;
+    NodeSet?: Array<NodeDefine>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

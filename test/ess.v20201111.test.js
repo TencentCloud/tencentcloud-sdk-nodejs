@@ -158,6 +158,16 @@ it("ess.v20201111.DisableUserAutoSign", async function () {
     }
 })
 
+it("ess.v20201111.DeleteIntegrationRoleUsers", async function () {
+    try {
+       const data = await client.DeleteIntegrationRoleUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowSignReview", async function () {
     try {
        const data = await client.CreateFlowSignReview({})
@@ -258,6 +268,16 @@ it("ess.v20201111.CreateFlowByFiles", async function () {
     }
 })
 
+it("ess.v20201111.DescribeIntegrationRoles", async function () {
+    try {
+       const data = await client.DescribeIntegrationRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
     try {
        const data = await client.CreateMultiFlowSignQRCode({})
@@ -321,6 +341,16 @@ it("ess.v20201111.CreateConvertTaskApi", async function () {
 it("ess.v20201111.DescribeFlowBriefs", async function () {
     try {
        const data = await client.DescribeFlowBriefs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateIntegrationUserRoles", async function () {
+    try {
+       const data = await client.CreateIntegrationUserRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +431,16 @@ it("ess.v20201111.CreateSchemeUrl", async function () {
 it("ess.v20201111.CreateIntegrationEmployees", async function () {
     try {
        const data = await client.CreateIntegrationEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.UpdateIntegrationEmployees", async function () {
+    try {
+       const data = await client.UpdateIntegrationEmployees({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

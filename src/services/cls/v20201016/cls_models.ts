@@ -168,6 +168,18 @@ export interface LogInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostName: string
+
+  /**
+      * 原始日志(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawLog?: string
+
+  /**
+      * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStatus?: string
 }
 
 /**
@@ -445,52 +457,52 @@ export interface SearchLogResponse {
   /**
    * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
    */
-  Context: string
+  Context?: string
 
   /**
       * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
 注意：仅当检索分析语句(Query)不包含SQL时有效
       */
-  ListOver: boolean
+  ListOver?: boolean
 
   /**
    * 返回的是否为统计分析（即SQL）结果
    */
-  Analysis: boolean
+  Analysis?: boolean
 
   /**
       * 匹配检索条件的原始日志
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Results: Array<LogInfo>
+  Results?: Array<LogInfo>
 
   /**
       * 日志统计分析结果的列名
 当UseNewAnalysis为false时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ColNames: Array<string>
+  ColNames?: Array<string>
 
   /**
       * 日志统计分析结果
 当UseNewAnalysis为false时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AnalysisResults: Array<LogItems>
+  AnalysisResults?: Array<LogItems>
 
   /**
       * 日志统计分析结果
 当UseNewAnalysis为true时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AnalysisRecords: Array<string>
+  AnalysisRecords?: Array<string>
 
   /**
       * 日志统计分析结果的列属性
 当UseNewAnalysis为true时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Columns: Array<Column>
+  Columns?: Array<Column>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3377,6 +3389,18 @@ export interface LogContextInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostName: string
+
+  /**
+      * 原始日志(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawLog?: string
+
+  /**
+      * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStatus?: string
 }
 
 /**
@@ -4204,6 +4228,13 @@ export interface SearchLogRequest {
 默认值为1
       */
   SamplingRate?: number
+
+  /**
+      * 检索语法规则，默认值为0。
+0：Lucene语法，1：CQL语法。
+详细说明参见https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules
+      */
+  SyntaxRule?: number
 }
 
 /**

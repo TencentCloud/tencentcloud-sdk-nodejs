@@ -726,6 +726,10 @@ export interface DescribeDBInstancesRequest {
       * 数据库代理 ID 。
       */
     ProxyIds?: Array<string>;
+    /**
+      * 数据库引擎类型。
+      */
+    EngineTypes?: Array<string>;
 }
 /**
  * 表名
@@ -3474,11 +3478,11 @@ export interface DescribeDBInstancesResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 实例详细信息列表。
       */
-    Items: Array<InstanceInfo>;
+    Items?: Array<InstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5422,6 +5426,10 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxDelayTime: number;
+    /**
+      * 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘
+      */
+    DiskType: string;
 }
 /**
  * DescribeDefaultParams返回参数结构体
@@ -6551,11 +6559,11 @@ export interface DescribeTasksResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 返回的实例任务信息。
       */
-    Items: Array<TaskDetail>;
+    Items?: Array<TaskDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

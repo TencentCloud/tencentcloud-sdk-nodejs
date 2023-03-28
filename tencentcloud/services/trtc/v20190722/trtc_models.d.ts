@@ -1138,6 +1138,10 @@ export interface McuLayoutParams {
       * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
       */
     MaxVideoUser?: MaxVideoUser;
+    /**
+      * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
+      */
+    RenderMode?: number;
 }
 /**
  * DescribeTRTCRealTimeQualityMetricData请求参数结构体
@@ -1339,7 +1343,7 @@ export interface StartPublishCdnStreamResponse {
     /**
       * 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskiD参数。
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2103,11 +2107,11 @@ export interface StartPublishCdnStreamRequest {
       */
     AgentParams: AgentParams;
     /**
-      * 是否转码，0表示无需转码，1表示需要转码。
+      * 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转吗费用。
       */
     WithTranscoding: number;
     /**
-      * 转推流的音频编码参数。
+      * 转推流的音频编码参数。由于音频是必转码的（不会收取转码费用），所以启动任务的时候，必须填写。
       */
     AudioParams?: McuAudioParams;
     /**
@@ -2119,7 +2123,7 @@ export interface StartPublishCdnStreamRequest {
       */
     SingleSubscribeParams?: SingleSubscribeParams;
     /**
-      * 转推的CDN参数。
+      * 转推的CDN参数。和回推房间参数必须要有一个。
       */
     PublishCdnParams?: Array<McuPublishCdnParam>;
     /**
@@ -2127,7 +2131,7 @@ export interface StartPublishCdnStreamRequest {
       */
     SeiParams?: McuSeiParams;
     /**
-      * 回推房间信息
+      * 回推房间信息，和转推CDN参数必须要有一个。
       */
     FeedBackRoomParams?: Array<McuFeedBackRoomParams>;
 }
@@ -2278,7 +2282,20 @@ export interface DescribePictureResponse {
 /**
  * DescribeTrtcRoomUsage请求参数结构体
  */
-export declare type DescribeTrtcRoomUsageRequest = null;
+export interface DescribeTrtcRoomUsageRequest {
+    /**
+      * TRTC的SdkAppId，和房间所对应的SdkAppId相同。
+      */
+    SdkAppid: number;
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD HH:MM，精确到分钟级。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD HH:MM，单次查询不超过24h。
+      */
+    EndTime: string;
+}
 /**
  * DescribeTrtcMcuTranscodeTime请求参数结构体
  */
@@ -2594,7 +2611,7 @@ export interface UpdatePublishCdnStreamResponse {
     /**
       * 转推任务唯一的String Id
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

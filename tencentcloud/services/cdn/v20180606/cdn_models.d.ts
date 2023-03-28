@@ -1770,7 +1770,14 @@ export interface DescribeDistrictIspDataRequest {
     /**
       * 指定查询指标，支持:
 bandwidth：带宽，单位为 bps
+flux：流量，单位为 byte
 request：请求数，单位为 次
+statusCode：状态码，返回 0、2xx、3xx、4xx、5xx 汇总数据，单位为 次
+2xx：返回 2xx 状态码汇总及各 2 开头状态码数据，单位为 次
+3xx：返回 3xx 状态码汇总及各 3 开头状态码数据，单位为 次
+4xx：返回 4xx 状态码汇总及各 4 开头状态码数据，单位为 次
+5xx：返回 5xx 状态码汇总及各 5 开头状态码数据，单位为 次
+支持指定具体状态码查询，若未产生过，则返回为空
       */
     Metric: string;
     /**
@@ -8357,7 +8364,7 @@ export interface DescribeDistrictIspDataResponse {
       * 地区运营商数据明细
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: Array<DistrictIspInfo>;
+    Data?: Array<DistrictIspInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

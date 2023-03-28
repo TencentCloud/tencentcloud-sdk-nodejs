@@ -994,18 +994,18 @@ export interface DescribeVoucherInfoResponse {
   /**
    * 券总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 总余额（微分）
    */
-  TotalBalance: number
+  TotalBalance?: number
 
   /**
       * 代金券相关信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VoucherInfos: Array<VoucherInfos>
+  VoucherInfos?: Array<VoucherInfos>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2024,12 +2024,12 @@ export interface DescribeVoucherInfoRequest {
   VoucherName?: string
 
   /**
-   * 发放开始时间
+   * 发放开始时间,例：2021-01-01
    */
   TimeFrom?: string
 
   /**
-   * 发放结束时间
+   * 发放结束时间，例：2021-01-01
    */
   TimeTo?: string
 

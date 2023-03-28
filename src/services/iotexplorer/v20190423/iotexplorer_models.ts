@@ -176,7 +176,7 @@ export interface ModifyStudioProductResponse {
   /**
    * 产品描述
    */
-  Product: ProductEntry
+  Product?: ProductEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -678,6 +678,11 @@ export interface ModifyStudioProductRequest {
    * 是否打开二进制转Json功能, 取值为字符串 true/false
    */
   EnableProductScript?: string
+
+  /**
+   * 传1或者2；1代表强踢，2代表非强踢。传其它值不做任何处理
+   */
+  BindStrategy?: number
 }
 
 /**
@@ -705,17 +710,17 @@ export interface CreateStudioProductRequest {
   CategoryId: number
 
   /**
-   * 产品类型 填写 ( 0 普通产品 )
+   * 产品类型 填写 ( 0 普通产品 ， 5 网关产品)
    */
   ProductType: number
 
   /**
-   * 加密类型 加密类型，1表示证书认证，2表示签名认证。
+   * 加密类型 ，1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
    */
   EncryptionType: string
 
   /**
-   * 连接类型 可以填写 wifi cellular else
+   * 连接类型 可以填写 wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
    */
   NetType: string
 
@@ -2320,7 +2325,7 @@ export interface DescribeStudioProductResponse {
   /**
    * 产品详情
    */
-  Product: ProductEntry
+  Product?: ProductEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3362,17 +3367,18 @@ export interface ProductEntry {
   CategoryId: number
 
   /**
-   * 加密类型
+   * 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
    */
   EncryptionType: string
 
   /**
-   * 连接类型
-   */
+      * 连接类型。如：
+wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
+      */
   NetType: string
 
   /**
-   * 数据协议
+   * 数据协议 (1 使用物模型 2 为自定义类型)
    */
   DataProtocol: number
 
@@ -3382,7 +3388,7 @@ export interface ProductEntry {
   ProductDesc: string
 
   /**
-   * 状态
+   * 状态 如：all 全部, dev 开发中, audit 审核中 released 已发布
    */
   DevStatus: string
 
@@ -3402,7 +3408,7 @@ export interface ProductEntry {
   Region: string
 
   /**
-   * 产品类型
+   * 产品类型。如： 0 普通产品 ， 5 网关产品
    */
   ProductType: number
 
@@ -3433,6 +3439,12 @@ export interface ProductEntry {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreatorNickName: string
+
+  /**
+      * 绑定策略（1：强踢；2：非强踢；0：表示无意义）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BindStrategy: number
 }
 
 /**

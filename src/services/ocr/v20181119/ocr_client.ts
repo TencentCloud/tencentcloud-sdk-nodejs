@@ -429,8 +429,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-   */
+     * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
+
+默认接口请求频率限制：5次/秒。
+     */
   async QrcodeOCR(
     req: QrcodeOCRRequest,
     cb?: (error: string, rep: QrcodeOCRResponse) => void
@@ -524,7 +526,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口支持集装箱箱门信息识别，识别字段包括集装箱箱号、类型、总重量、有效承重、容量、自身重量，具备集装箱箱号、类型不完整或者不清晰的告警功能。
-
+默认接口请求频率限制：5次/秒。
      */
   async RecognizeContainerOCR(
     req: RecognizeContainerOCRRequest,
@@ -544,8 +546,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
-   */
+     * 本接口支持多张、多类型票据的混合检测和自动分类，返回对应票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票、酒店账单、客运限额发票、购物小票、完税证明共15种票据。
+默认接口请求频率限制：5次/秒。
+     */
   async MixedInvoiceDetect(
     req: MixedInvoiceDetectRequest,
     cb?: (error: string, rep: MixedInvoiceDetectResponse) => void
@@ -626,6 +629,8 @@ export class Client extends AbstractClient {
   /**
      * 本接口支持房产证关键字段的识别，包括房地产权利人、共有情况、登记时间、规划用途、房屋性质、房屋坐落等。
 目前接口对合肥、成都、佛山三个城市的房产证版式识别较好。
+
+默认接口请求频率限制：5次/秒。
      */
   async PropOwnerCertOCR(
     req: PropOwnerCertOCRRequest,
@@ -849,8 +854,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持对卡式港澳台通行证的识别，包括签发地点、签发机关、有效期限、性别、出生日期、英文姓名、姓名、证件号等字段。
-   */
+     * 本接口支持对卡式港澳台通行证的识别，包括签发地点、签发机关、有效期限、性别、出生日期、英文姓名、姓名、证件号等字段。
+
+默认接口请求频率限制：10次/秒。
+     */
   async PermitOCR(
     req: PermitOCRRequest,
     cb?: (error: string, rep: PermitOCRResponse) => void
@@ -859,8 +866,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持组织机构代码证关键字段的识别，包括代码、有效期、地址、机构名称等。
-   */
+     * 本接口支持组织机构代码证关键字段的识别，包括代码、有效期、地址、机构名称等。
+
+默认接口请求频率限制：5次/秒。
+     */
   async OrgCodeCertOCR(
     req: OrgCodeCertOCRRequest,
     cb?: (error: string, rep: OrgCodeCertOCRResponse) => void
@@ -879,8 +888,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持常见银行票据的自动分类和识别。切片识别包括金融行业常见票据的重要切片字段识别，包括金额、账号、日期、凭证号码等。（金融票据切片：金融票据中待识别字段及其周围局部区域的裁剪图像。）
-   */
+     * 本接口支持常见银行票据的自动分类和识别。切片识别包括金融行业常见票据的重要切片字段识别，包括金额、账号、日期、凭证号码等。（金融票据切片：金融票据中待识别字段及其周围局部区域的裁剪图像。）
+
+默认接口请求频率限制：5次/秒。
+     */
   async FinanBillSliceOCR(
     req: FinanBillSliceOCRRequest,
     cb?: (error: string, rep: FinanBillSliceOCRResponse) => void
@@ -1269,8 +1280,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 智能识别并结构化港澳台居民来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
-   */
+     * 智能识别并结构化港澳台居民来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
+
+默认接口请求频率限制：20次/秒。
+     */
   async MainlandPermitOCR(
     req: MainlandPermitOCRRequest,
     cb?: (error: string, rep: MainlandPermitOCRResponse) => void
@@ -1291,8 +1304,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持中国大陆地区护照个人资料页多个字段的检测与识别。已支持字段包括英文姓名、中文姓名、国家码、护照号、出生地、出生日期、国籍英文、性别英文、有效期、签发地点英文、签发日期、持证人签名、护照机读码（MRZ码）等。
-   */
+     * 本接口支持中国大陆地区护照个人资料页多个字段的检测与识别。已支持字段包括英文姓名、中文姓名、国家码、护照号、出生地、出生日期、国籍英文、性别英文、有效期、签发地点英文、签发日期、持证人签名、护照机读码（MRZ码）等。
+
+默认接口请求频率限制：10次/秒。
+     */
   async PassportOCR(
     req: PassportOCRRequest,
     cb?: (error: string, rep: PassportOCRResponse) => void

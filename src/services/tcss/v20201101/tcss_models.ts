@@ -14442,32 +14442,57 @@ export interface DescribeVulSummaryResponse {
   /**
    * 漏洞总数量
    */
-  VulTotalCount: number
+  VulTotalCount?: number
 
   /**
    * 严重及高危漏洞数量
    */
-  SeriousVulCount: number
+  SeriousVulCount?: number
 
   /**
    * 重点关注漏洞数量
    */
-  SuggestVulCount: number
+  SuggestVulCount?: number
 
   /**
    * 有Poc或者Exp的漏洞数量
    */
-  PocExpLevelVulCount: number
+  PocExpLevelVulCount?: number
 
   /**
    * 有远程Exp的漏洞数量
    */
-  RemoteExpLevelVulCount: number
+  RemoteExpLevelVulCount?: number
 
   /**
    * 受严重或高危漏洞影响的最新版本镜像数
    */
-  SeriousVulNewestImageCount: number
+  SeriousVulNewestImageCount?: number
+
+  /**
+   * 系统漏洞重点关注数
+   */
+  SystemVulnerabilityFocusCount?: number
+
+  /**
+   * web漏洞重点关注数
+   */
+  WebVulnerabilityFocusCount?: number
+
+  /**
+   * 受影响本地镜像数
+   */
+  SeriousVulnerabilityLocalImageCount?: number
+
+  /**
+   * 受影响仓库镜像数
+   */
+  SeriousVulnerabilityRegistryImageCount?: number
+
+  /**
+   * 应急漏洞数量
+   */
+  EmergencyVulnerabilityCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
