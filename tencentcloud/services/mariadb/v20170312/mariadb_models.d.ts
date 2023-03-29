@@ -1336,237 +1336,242 @@ export interface DescribeDBInstanceDetailResponse {
     /**
       * 实例Id
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 实例名称
       */
-    InstanceName: string;
+    InstanceName?: string;
     /**
       * 实例状态
       */
-    Status: number;
+    Status?: number;
     /**
       * 实例目前运行状态描述
       */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
       * 内网 IP 地址
       */
-    Vip: string;
+    Vip?: string;
     /**
       * 内网端口
       */
-    Vport: number;
+    Vport?: number;
     /**
       * 是否临时实例，0为否，非0为是
       */
-    IsTmp: number;
+    IsTmp?: number;
     /**
       * 节点数，2为一主一从，3为一主二从
       */
-    NodeCount: number;
+    NodeCount?: number;
     /**
       * 实例所在地域名称，如 ap-shanghai
       */
-    Region: string;
+    Region?: string;
     /**
       * 实例所在可用区名称，如 ap-shanghai-1
       */
-    Zone: string;
+    Zone?: string;
     /**
       * 字符串型的私有网络Id
       */
-    VpcId: string;
+    VpcId?: string;
     /**
       * 字符串型的私有网络子网Id
       */
-    SubnetId: string;
+    SubnetId?: string;
     /**
       * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
       */
-    WanStatus: number;
+    WanStatus?: number;
     /**
       * 外网访问的域名，公网可解析
       */
-    WanDomain: string;
+    WanDomain?: string;
     /**
       * 外网 IP 地址，公网可访问
       */
-    WanVip: string;
+    WanVip?: string;
     /**
       * 外网端口
       */
-    WanPort: number;
+    WanPort?: number;
     /**
       * 实例所属项目 Id
       */
-    ProjectId: number;
+    ProjectId?: number;
     /**
       * TDSQL 版本信息
       */
-    TdsqlVersion: string;
+    TdsqlVersion?: string;
     /**
       * 实例内存大小，单位 GB
       */
-    Memory: number;
+    Memory?: number;
     /**
       * 实例存储大小，单位 GB
       */
-    Storage: number;
+    Storage?: number;
     /**
       * 主可用区，如 ap-shanghai-1
       */
-    MasterZone: string;
+    MasterZone?: string;
     /**
       * 从可用区列表，如 [ap-shanghai-2]
       */
-    SlaveZones: Array<string>;
+    SlaveZones?: Array<string>;
     /**
       * 自动续费标志：0 否，1 是
       */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /**
       * 独享集群Id，普通实例为空
       */
-    ExclusterId: string;
+    ExclusterId?: string;
     /**
       * 付费模式：prepaid 表示预付费
       */
-    PayMode: string;
+    PayMode?: string;
     /**
       * 实例创建时间，格式为 2006-01-02 15:04:05
       */
-    CreateTime: string;
+    CreateTime?: string;
     /**
       * 实例是否支持审计
       */
-    IsAuditSupported: boolean;
+    IsAuditSupported?: boolean;
     /**
       * 实例到期时间，格式为 2006-01-02 15:04:05
       */
-    PeriodEndTime: string;
+    PeriodEndTime?: string;
     /**
       * 机型信息
       */
-    Machine: string;
+    Machine?: string;
     /**
       * 存储空间使用率
       */
-    StorageUsage: string;
+    StorageUsage?: string;
     /**
       * 日志存储空间大小，单位 GB
       */
-    LogStorage: number;
+    LogStorage?: number;
     /**
       * 是否支持数据加密。1-支持；0-不支持
       */
-    IsEncryptSupported: number;
+    IsEncryptSupported?: number;
     /**
       * 内网IPv6
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Vip6: string;
+    Vip6?: string;
     /**
       * 实例Cpu核数
       */
-    Cpu: number;
+    Cpu?: number;
     /**
       * 产品类型ID
       */
-    Pid: number;
+    Pid?: number;
     /**
       * 最大QPS
       */
-    Qps: number;
+    Qps?: number;
     /**
       * 是否支持IPv6
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Ipv6Flag: number;
+    Ipv6Flag?: number;
     /**
       * 外网IPv6地址，公网可访问
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WanVipv6: string;
+    WanVipv6?: string;
     /**
       * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WanStatusIpv6: number;
+    WanStatusIpv6?: number;
     /**
       * 外网IPv6端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WanPortIpv6: number;
+    WanPortIpv6?: number;
     /**
       * 数据库引擎
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbEngine: string;
+    DbEngine?: string;
     /**
       * 数据库版本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbVersion: string;
+    DbVersion?: string;
     /**
       * 标签信息
       */
-    ResourceTags: Array<ResourceTag>;
+    ResourceTags?: Array<ResourceTag>;
     /**
       * DCN标志，0-无，1-主实例，2-灾备实例
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DcnFlag: number;
+    DcnFlag?: number;
     /**
       * DCN状态，0-无，1-创建中，2-同步中，3-已断开
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DcnStatus: number;
+    DcnStatus?: number;
     /**
       * DCN灾备实例数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DcnDstNum: number;
+    DcnDstNum?: number;
     /**
       * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceType: number;
+    InstanceType?: number;
     /**
       * 实例的各个DB节点信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodesInfo: Array<NodeInfo>;
+    NodesInfo?: Array<NodeInfo>;
     /**
       * 实例是否支持设置用户连接数限制，内核为10.1暂不支持。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsMaxUserConnectionsSupported: boolean;
+    IsMaxUserConnectionsSupported?: boolean;
     /**
       * 对外显示的数据库版本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DbVersionId: string;
+    DbVersionId?: string;
     /**
       * 加密状态, 0-未开启，1-已开启
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EncryptStatus: number;
+    EncryptStatus?: number;
     /**
       * DCN的配置信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReplicaConfig: DCNReplicaConfig;
+    ReplicaConfig?: DCNReplicaConfig;
     /**
       * DCN的运行状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReplicaStatus: DCNReplicaStatus;
+    ReplicaStatus?: DCNReplicaStatus;
     /**
       * 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExclusterType: number;
+    ExclusterType?: number;
+    /**
+      * VPC就近访问
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RsAccessStrategy?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

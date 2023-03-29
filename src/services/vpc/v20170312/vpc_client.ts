@@ -2882,7 +2882,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
+   * 本接口（DownloadCustomerGatewayConfiguration）用于下载VPN通道配置。
    */
   async DownloadCustomerGatewayConfiguration(
     req: DownloadCustomerGatewayConfigurationRequest,

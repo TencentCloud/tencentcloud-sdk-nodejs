@@ -728,7 +728,7 @@ export interface DescribeBillSummaryByTagRequest {
   EndTime: string
 
   /**
-   * 分账标签键
+   * 分账标签键，用户自定义
    */
   TagKey: string
 
@@ -2516,19 +2516,19 @@ export interface DescribeBillSummaryByTagResponse {
   /**
    * 数据是否准备好，0未准备好，1准备好
    */
-  Ready: number
+  Ready?: number
 
   /**
       * 各标签值花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryOverview: Array<TagSummaryOverviewItem>
+  SummaryOverview?: Array<TagSummaryOverviewItem>
 
   /**
       * 总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryTotal: SummaryTotal
+  SummaryTotal?: SummaryTotal
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

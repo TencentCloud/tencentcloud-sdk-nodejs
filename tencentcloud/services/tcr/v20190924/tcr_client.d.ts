@@ -12,7 +12,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeImageLifecycleGlobalPersonal(req?: DescribeImageLifecycleGlobalPersonalRequest, cb?: (error: string, rep: DescribeImageLifecycleGlobalPersonalResponse) => void): Promise<DescribeImageLifecycleGlobalPersonalResponse>;
     /**
-     * 用于在个人版中创建清理策略
+     * 前端与现有逻辑均不再使用，可下线
+
+用于在个人版中创建清理策略
      */
     CreateImageLifecyclePersonal(req: CreateImageLifecyclePersonalRequest, cb?: (error: string, rep: CreateImageLifecyclePersonalResponse) => void): Promise<CreateImageLifecyclePersonalResponse>;
     /**
@@ -128,7 +130,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyRepositoryAccessPersonal(req: ModifyRepositoryAccessPersonalRequest, cb?: (error: string, rep: ModifyRepositoryAccessPersonalResponse) => void): Promise<ModifyRepositoryAccessPersonalResponse>;
     /**
-     * 用于在个人版镜像仓库中删除仓库Tag自动清理策略
+     * 前端与后端目前现有逻辑均不再使用，可下线
+
+用于在个人版镜像仓库中删除仓库Tag自动清理策略
      */
     DeleteImageLifecyclePersonal(req: DeleteImageLifecyclePersonalRequest, cb?: (error: string, rep: DeleteImageLifecyclePersonalResponse) => void): Promise<DeleteImageLifecyclePersonalResponse>;
     /**

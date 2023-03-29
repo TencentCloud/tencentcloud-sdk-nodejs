@@ -272,6 +272,7 @@ import {
   AnalyseParam,
   BatchModifyTopicInfo,
   DescribeRouteResponse,
+  ModifyDatahubTopicResponse,
   EsModifyConnectParam,
   ModifyConnectResourceResponse,
   InstanceChargeParam,
@@ -296,6 +297,7 @@ import {
   DescribeAclRuleRequest,
   MongoDBParam,
   TopicParam,
+  ModifyDatahubTopicRequest,
   ModifyTopicAttributesRequest,
   SecondaryAnalyseParam,
   CreateInstancePreRequest,
@@ -461,13 +463,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改主题属性。
+   * 修改Datahub主题属性
    */
-  async ModifyTopicAttributes(
-    req: ModifyTopicAttributesRequest,
-    cb?: (error: string, rep: ModifyTopicAttributesResponse) => void
-  ): Promise<ModifyTopicAttributesResponse> {
-    return this.request("ModifyTopicAttributes", req, cb)
+  async ModifyDatahubTopic(
+    req: ModifyDatahubTopicRequest,
+    cb?: (error: string, rep: ModifyDatahubTopicResponse) => void
+  ): Promise<ModifyDatahubTopicResponse> {
+    return this.request("ModifyDatahubTopic", req, cb)
   }
 
   /**
@@ -1070,5 +1072,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquireCkafkaPriceResponse) => void
   ): Promise<InquireCkafkaPriceResponse> {
     return this.request("InquireCkafkaPrice", req, cb)
+  }
+
+  /**
+   * 本接口用于修改主题属性。
+   */
+  async ModifyTopicAttributes(
+    req: ModifyTopicAttributesRequest,
+    cb?: (error: string, rep: ModifyTopicAttributesResponse) => void
+  ): Promise<ModifyTopicAttributesResponse> {
+    return this.request("ModifyTopicAttributes", req, cb)
   }
 }

@@ -148,9 +148,9 @@ it("ckafka.v20190819.SendMessage", async function () {
     }
 })
 
-it("ckafka.v20190819.ModifyTopicAttributes", async function () {
+it("ckafka.v20190819.ModifyDatahubTopic", async function () {
     try {
-       const data = await client.ModifyTopicAttributes({})
+       const data = await client.ModifyDatahubTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -751,6 +751,16 @@ it("ckafka.v20190819.ModifyPassword", async function () {
 it("ckafka.v20190819.InquireCkafkaPrice", async function () {
     try {
        const data = await client.InquireCkafkaPrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.ModifyTopicAttributes", async function () {
+    try {
+       const data = await client.ModifyTopicAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

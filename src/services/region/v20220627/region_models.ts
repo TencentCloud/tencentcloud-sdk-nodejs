@@ -173,6 +173,11 @@ export interface DescribeZonesRequest {
    * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
    */
   Product: string
+
+  /**
+   * 不传或者0表示不查询【可选业务白名单】，1表示查询【可选业务白名单】，该参数设置了1，只有在业务白名单查不到情况下，才会查该白名单
+   */
+  Scene?: number
 }
 
 /**
@@ -182,12 +187,12 @@ export interface DescribeZonesResponse {
   /**
    * 可用区数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 可用区列表信息。
    */
-  ZoneSet: Array<ZoneInfo>
+  ZoneSet?: Array<ZoneInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -246,12 +251,12 @@ export interface DescribeRegionsResponse {
   /**
    * 地域数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 地域列表信息
    */
-  RegionSet: Array<RegionInfo>
+  RegionSet?: Array<RegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -267,4 +272,9 @@ export interface DescribeRegionsRequest {
    * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
    */
   Product: string
+
+  /**
+   * 不传或者0表示不查询【可选业务白名单】，1表示查询【可选业务白名单】，该参数设置了1，只有在业务白名单查不到情况下，才会查该白名单
+   */
+  Scene?: number
 }

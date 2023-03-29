@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendMessage", req, cb);
     }
     /**
-     * 本接口用于修改主题属性。
+     * 修改Datahub主题属性
      */
-    async ModifyTopicAttributes(req, cb) {
-        return this.request("ModifyTopicAttributes", req, cb);
+    async ModifyDatahubTopic(req, cb) {
+        return this.request("ModifyDatahubTopic", req, cb);
     }
     /**
      * 创建主题ip白名单
@@ -472,6 +472,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquireCkafkaPrice(req, cb) {
         return this.request("InquireCkafkaPrice", req, cb);
+    }
+    /**
+     * 本接口用于修改主题属性。
+     */
+    async ModifyTopicAttributes(req, cb) {
+        return this.request("ModifyTopicAttributes", req, cb);
     }
 }
 exports.Client = Client;

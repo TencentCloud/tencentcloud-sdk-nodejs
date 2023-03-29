@@ -951,7 +951,7 @@ export declare class Client extends AbstractClient {
      */
     ModifySubnetAttribute(req: ModifySubnetAttributeRequest, cb?: (error: string, rep: ModifySubnetAttributeResponse) => void): Promise<ModifySubnetAttributeResponse>;
     /**
-     * 本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
+     * 本接口（DownloadCustomerGatewayConfiguration）用于下载VPN通道配置。
      */
     DownloadCustomerGatewayConfiguration(req: DownloadCustomerGatewayConfigurationRequest, cb?: (error: string, rep: DownloadCustomerGatewayConfigurationResponse) => void): Promise<DownloadCustomerGatewayConfigurationResponse>;
     /**

@@ -567,7 +567,7 @@ export interface UpdateScdnDomainResponse {
     /**
       * 提交结果，Success表示成功
       */
-    Result: string;
+    Result?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4284,28 +4284,28 @@ export interface DescribeScdnConfigResponse {
     /**
       * 自定义防护策略配置
       */
-    Acl: ScdnAclConfig;
+    Acl?: ScdnAclConfig;
     /**
       * Web 攻击防护（WAF）配置
       */
-    Waf: ScdnWafConfig;
+    Waf?: ScdnWafConfig;
     /**
       * CC 防护配置
       */
-    CC: ScdnConfig;
+    CC?: ScdnConfig;
     /**
       * DDOS 防护配置
       */
-    Ddos: ScdnDdosConfig;
+    Ddos?: ScdnDdosConfig;
     /**
       * BOT 防护配置
       */
-    Bot: ScdnBotConfig;
+    Bot?: ScdnBotConfig;
     /**
       * 当前状态，取值online | offline
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: string;
+    Status?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

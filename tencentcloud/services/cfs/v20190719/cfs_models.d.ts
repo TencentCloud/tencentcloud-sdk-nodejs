@@ -166,7 +166,13 @@ export interface FileSystemInfo {
       */
     FileSystemId: string;
     /**
-      * 文件系统状态
+      * 文件系统状态。取值范围：
+- creating:创建中
+- mounting:挂载中
+- create_failed:创建失败
+- available:可使用
+- unserviced:停服中
+- upgrading:升级中
       */
     LifeCycleState: string;
     /**
@@ -234,7 +240,7 @@ export interface FileSystemInfo {
       */
     Tags: Array<TagInfo>;
     /**
-      * 文件系统声明周期管理状态
+      * 文件系统生命周期管理状态
       */
     TieringState: string;
     /**

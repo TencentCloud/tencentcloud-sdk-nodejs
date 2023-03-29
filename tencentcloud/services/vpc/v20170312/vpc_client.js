@@ -1365,7 +1365,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySubnetAttribute", req, cb);
     }
     /**
-     * 本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
+     * 本接口（DownloadCustomerGatewayConfiguration）用于下载VPN通道配置。
      */
     async DownloadCustomerGatewayConfiguration(req, cb) {
         return this.request("DownloadCustomerGatewayConfiguration", req, cb);

@@ -618,6 +618,19 @@ export interface DescribeFlowEvidenceReportResponse {
     RequestId?: string;
 }
 /**
+ * 应用回调信息
+ */
+export interface CallbackInfo {
+    /**
+      * 回调url
+      */
+    CallbackUrl: string;
+    /**
+      * 回调加密token
+      */
+    Token: string;
+}
+/**
  * 二期接口返回的模板的信息结构
  */
 export interface TemplateInfo {
@@ -2666,7 +2679,20 @@ export interface CancelMultiFlowSignQRCodeRequest {
 /**
  * ModifyApplicationCallbackInfo请求参数结构体
  */
-export declare type ModifyApplicationCallbackInfoRequest = null;
+export interface ModifyApplicationCallbackInfoRequest {
+    /**
+      * 调用方用户信息，userId 必填
+      */
+    Operator: UserInfo;
+    /**
+      * 操作类型：1-新增，2-删除
+      */
+    OperateType: number;
+    /**
+      * 回调信息
+      */
+    CallbackInfo: CallbackInfo;
+}
 /**
  * 主企业员工账号信息
  */

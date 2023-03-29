@@ -41,7 +41,7 @@ import {
   RoomListItem,
   ModifyWhiteboardBucketConfigRequest,
   SetOnlineRecordCallbackKeyResponse,
-  RoomUsageDataItem,
+  DescribeRecordSearchResponse,
   DescribeAPIServiceRequest,
   DescribeQualityMetricsRequest,
   CreateVideoGenerationTaskRequest,
@@ -58,6 +58,7 @@ import {
   DescribeApplicationUsageResponse,
   DescribeAPIServiceResponse,
   TimeValue,
+  RecordTaskResult,
   DescribeWhiteboardBucketConfigRequest,
   DescribeUsageSummaryResponse,
   DescribeApplicationInfosRequest,
@@ -98,6 +99,7 @@ import {
   StartOnlineRecordRequest,
   DescribeUserStatusRequest,
   DescribeOnlineRecordCallbackRequest,
+  RecordTaskSearchResult,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
   SetOfflineRecordCallbackRequest,
@@ -109,6 +111,7 @@ import {
   DescribeTIWDailyUsageResponse,
   Concat,
   DescribeWhiteboardApplicationConfigRequest,
+  RoomUsageDataItem,
   SnapshotCOS,
   CreateVideoGenerationTaskResponse,
   Whiteboard,
@@ -157,6 +160,7 @@ import {
   CreateApplicationResponse,
   StopWhiteboardPushRequest,
   DescribeOfflineRecordRequest,
+  DescribeRecordSearchRequest,
 } from "./tiw_models"
 
 /**
@@ -226,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetVideoGenerationTaskCallbackResponse) => void
   ): Promise<SetVideoGenerationTaskCallbackResponse> {
     return this.request("SetVideoGenerationTaskCallback", req, cb)
+  }
+
+  /**
+   * 根据房间号搜索实时录制任务
+   */
+  async DescribeRecordSearch(
+    req?: DescribeRecordSearchRequest,
+    cb?: (error: string, rep: DescribeRecordSearchResponse) => void
+  ): Promise<DescribeRecordSearchResponse> {
+    return this.request("DescribeRecordSearch", req, cb)
   }
 
   /**
@@ -399,16 +413,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建白板应用
-   */
-  async CreateApplication(
-    req: CreateApplicationRequest,
-    cb?: (error: string, rep: CreateApplicationResponse) => void
-  ): Promise<CreateApplicationResponse> {
-    return this.request("CreateApplication", req, cb)
-  }
-
-  /**
    * 通过服务角色调用其他云产品API接口获取信息
    */
   async DescribeAPIService(
@@ -512,6 +516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档转码任务的执行进度与转码结果
+   */
+  async DescribeTranscode(
+    req: DescribeTranscodeRequest,
+    cb?: (error: string, rep: DescribeTranscodeResponse) => void
+  ): Promise<DescribeTranscodeResponse> {
+    return this.request("DescribeTranscode", req, cb)
+  }
+
+  /**
    * 创建课后录制任务
    */
   async CreateOfflineRecord(
@@ -562,13 +576,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文档转码任务的执行进度与转码结果
+   * 创建白板应用
    */
-  async DescribeTranscode(
-    req: DescribeTranscodeRequest,
-    cb?: (error: string, rep: DescribeTranscodeResponse) => void
-  ): Promise<DescribeTranscodeResponse> {
-    return this.request("DescribeTranscode", req, cb)
+  async CreateApplication(
+    req: CreateApplicationRequest,
+    cb?: (error: string, rep: CreateApplicationResponse) => void
+  ): Promise<CreateApplicationResponse> {
+    return this.request("CreateApplication", req, cb)
   }
 
   /**

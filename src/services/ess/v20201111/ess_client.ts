@@ -45,6 +45,7 @@ import {
   FlowApproverDetail,
   DescribeFlowTemplatesRequest,
   DescribeFlowEvidenceReportResponse,
+  CallbackInfo,
   TemplateInfo,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
@@ -180,7 +181,7 @@ callbackinfo包含： 回调地址和签名key
 操作：新增/删除
      */
   async ModifyApplicationCallbackInfo(
-    req?: ModifyApplicationCallbackInfoRequest,
+    req: ModifyApplicationCallbackInfoRequest,
     cb?: (error: string, rep: ModifyApplicationCallbackInfoResponse) => void
   ): Promise<ModifyApplicationCallbackInfoResponse> {
     return this.request("ModifyApplicationCallbackInfo", req, cb)

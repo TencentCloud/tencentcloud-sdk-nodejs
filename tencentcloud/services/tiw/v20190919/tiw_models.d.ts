@@ -407,32 +407,21 @@ export interface SetOnlineRecordCallbackKeyResponse {
     RequestId?: string;
 }
 /**
- * 互动白板房间用量信息
+ * DescribeRecordSearch返回参数结构体
  */
-export interface RoomUsageDataItem {
+export interface DescribeRecordSearchResponse {
     /**
-      * 日期，格式为YYYY-MM-DD
+      * 录制任务搜索结果集合
       */
-    Time: string;
+    RecordTaskSet: Array<RecordTaskSearchResult>;
     /**
-      * 白板应用SDKAppID
+      * 录制总任务数
       */
-    SdkAppId: number;
+    TotalCount: number;
     /**
-      * 互动白板子产品，请求参数传入的一致
-- sp_tiw_board: 互动白板时长
-- sp_tiw_ric: 实时录制时长
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SubProduct: string;
-    /**
-      * 用量值
-- 白板时长、实时录制时长单位为分钟
-      */
-    Value: number;
-    /**
-      * 互动白板房间号
-      */
-    RoomID: number;
+    RequestId?: string;
 }
 /**
  * DescribeAPIService请求参数结构体
@@ -696,6 +685,59 @@ export interface TimeValue {
       * 查询指标对应当前时间的值
       */
     Value: number;
+}
+/**
+ * 实时录制结果
+ */
+export interface RecordTaskResult {
+    /**
+      * AUTO - 自动停止录制， USER_CALL - 用户主动调用停止录制
+      */
+    FinishReason: string;
+    /**
+      * 异常数
+      */
+    ExceptionCnt: number;
+    /**
+      * 房间号
+      */
+    RoomId: number;
+    /**
+      * 分组
+      */
+    GroupId: string;
+    /**
+      * 录制真实开始时间
+      */
+    RecordStartTime: number;
+    /**
+      * 录制结束时间
+      */
+    RecordStopTime: number;
+    /**
+      * 录制总时长
+      */
+    TotalTime: number;
+    /**
+      * 视频信息列表
+      */
+    VideoInfos: Array<VideoInfo>;
+    /**
+      * 被忽略的视频时间段
+      */
+    OmittedDurations: Array<OmittedDuration>;
+    /**
+      * 详情
+      */
+    Details: string;
+    /**
+      * 任务失败错误码
+      */
+    ErrorCode: number;
+    /**
+      * 错误信息
+      */
+    ErrorMsg: string;
 }
 /**
  * DescribeWhiteboardBucketConfig请求参数结构体
@@ -1598,6 +1640,40 @@ export interface DescribeOnlineRecordCallbackRequest {
     SdkAppId: number;
 }
 /**
+ * 实时录制任务搜索结果
+ */
+export interface RecordTaskSearchResult {
+    /**
+      * 任务唯一ID
+      */
+    TaskId: string;
+    /**
+      * 实时录制任务状态
+- PAUSED: 录制已暂停
+- PREPARED: 录制在准备阶段
+- RECORDING: 正在录制
+- STOPPED：录制已停止
+- FINISHED: 录制已结束
+      */
+    Status: string;
+    /**
+      * 实时录制房间号
+      */
+    RoomId: number;
+    /**
+      * 任务创建时间
+      */
+    CreateTime: string;
+    /**
+      * 用户应用SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 实时录制结果
+      */
+    Result: RecordTaskResult;
+}
+/**
  * SetTranscodeCallback返回参数结构体
  */
 export interface SetTranscodeCallbackResponse {
@@ -1742,6 +1818,34 @@ transcode: 文档转码
       * 需要查询配置的SdkAppId列表
       */
     SdkAppIds?: Array<number>;
+}
+/**
+ * 互动白板房间用量信息
+ */
+export interface RoomUsageDataItem {
+    /**
+      * 日期，格式为YYYY-MM-DD
+      */
+    Time: string;
+    /**
+      * 白板应用SDKAppID
+      */
+    SdkAppId: number;
+    /**
+      * 互动白板子产品，请求参数传入的一致
+- sp_tiw_board: 互动白板时长
+- sp_tiw_ric: 实时录制时长
+      */
+    SubProduct: string;
+    /**
+      * 用量值
+- 白板时长、实时录制时长单位为分钟
+      */
+    Value: number;
+    /**
+      * 互动白板房间号
+      */
+    RoomID: number;
 }
 /**
  * 板书文件存储cos参数
@@ -2796,3 +2900,7 @@ export interface DescribeOfflineRecordRequest {
       */
     TaskId: string;
 }
+/**
+ * DescribeRecordSearch请求参数结构体
+ */
+export declare type DescribeRecordSearchRequest = null;

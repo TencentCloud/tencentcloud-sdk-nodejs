@@ -2055,6 +2055,10 @@ export interface ModifyConnectResourceRequest {
       * Doris配置，Type为DORIS
       */
     DorisConnectParam?: DorisModifyConnectParam;
+    /**
+      * Kafka配置，Type为 KAFKA 时必填
+      */
+    KafkaConnectParam?: KafkaConnectParam;
 }
 /**
  * ModifyInstanceAttributes返回参数结构体
@@ -6239,6 +6243,19 @@ export interface DescribeRouteResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDatahubTopic返回参数结构体
+ */
+export interface ModifyDatahubTopicResponse {
+    /**
+      * 返回结果集
+      */
+    Result: JgwOperateResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * Es修改连接源参数
  */
 export interface EsModifyConnectParam {
@@ -6290,7 +6307,7 @@ export interface ModifyConnectResourceResponse {
     /**
       * 连接源的Id
       */
-    Result: ConnectResourceResourceIdResp;
+    Result?: ConnectResourceResourceIdResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6937,6 +6954,27 @@ export interface TopicParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MsgMultiple?: number;
+}
+/**
+ * ModifyDatahubTopic请求参数结构体
+ */
+export interface ModifyDatahubTopicRequest {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 消息保留时间，单位：ms，当前最小值为60000ms。
+      */
+    RetentionMs: number;
+    /**
+      * 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。
+      */
+    Note?: string;
+    /**
+      * 标签列表
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * ModifyTopicAttributes请求参数结构体

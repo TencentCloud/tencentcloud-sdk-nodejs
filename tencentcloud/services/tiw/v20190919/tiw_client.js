@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetVideoGenerationTaskCallback", req, cb);
     }
     /**
+     * 根据房间号搜索实时录制任务
+     */
+    async DescribeRecordSearch(req, cb) {
+        return this.request("DescribeRecordSearch", req, cb);
+    }
+    /**
      * 创建视频生成任务
      */
     async CreateVideoGenerationTask(req, cb) {
@@ -166,12 +172,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscodeCallback", req, cb);
     }
     /**
-     * 创建白板应用
-     */
-    async CreateApplication(req, cb) {
-        return this.request("CreateApplication", req, cb);
-    }
-    /**
      * 通过服务角色调用其他云产品API接口获取信息
      */
     async DescribeAPIService(req, cb) {
@@ -235,6 +235,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOfflineRecordCallback", req, cb);
     }
     /**
+     * 查询文档转码任务的执行进度与转码结果
+     */
+    async DescribeTranscode(req, cb) {
+        return this.request("DescribeTranscode", req, cb);
+    }
+    /**
      * 创建课后录制任务
      */
     async CreateOfflineRecord(req, cb) {
@@ -265,10 +271,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVideoGenerationTask", req, cb);
     }
     /**
-     * 查询文档转码任务的执行进度与转码结果
+     * 创建白板应用
      */
-    async DescribeTranscode(req, cb) {
-        return this.request("DescribeTranscode", req, cb);
+    async CreateApplication(req, cb) {
+        return this.request("CreateApplication", req, cb);
     }
     /**
      * 查询互动白板天维度计费用量。

@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
 callbackinfo包含： 回调地址和签名key
 操作：新增/删除
      */
-    ModifyApplicationCallbackInfo(req?: ModifyApplicationCallbackInfoRequest, cb?: (error: string, rep: ModifyApplicationCallbackInfoResponse) => void): Promise<ModifyApplicationCallbackInfoResponse>;
+    ModifyApplicationCallbackInfo(req: ModifyApplicationCallbackInfoRequest, cb?: (error: string, rep: ModifyApplicationCallbackInfoResponse) => void): Promise<ModifyApplicationCallbackInfoResponse>;
     /**
      * 此接口用于发起流程
 适用场景：见创建签署流程接口。

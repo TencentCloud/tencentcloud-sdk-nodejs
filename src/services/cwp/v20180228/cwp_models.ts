@@ -50,14 +50,14 @@ export interface DescribeSearchTemplatesResponse {
  */
 export interface ExportReverseShellEventsResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 任务id
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1290,12 +1290,12 @@ export interface ExportAttackLogsResponse {
   /**
    * 已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务ID 可通过ExportTasks接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1998,14 +1998,14 @@ export type DescribeMachineRegionsRequest = null
  */
 export interface DescribeSearchExportListResponse {
   /**
-   * 导出的任务号
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: number
+  TaskId?: number
 
   /**
-   * 下载地址
+   * 该参数作废
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3210,14 +3210,14 @@ export interface DescribeIgnoreBaselineRuleRequest {
  */
 export interface ExportNonlocalLoginPlacesResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务ID
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3469,14 +3469,14 @@ export interface ExportVulDetectionReportRequest {
  */
 export interface ExportMalwaresResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 任务id
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4237,14 +4237,14 @@ export type DescribeVersionStatisticsRequest = null
  */
 export interface ExportPrivilegeEventsResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务ID
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4458,14 +4458,14 @@ export interface DeleteProtectDirRequest {
  */
 export interface ExportIgnoreBaselineRuleResponse {
   /**
-   * 文件下载地址
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务Id , 可通过ExportTasks 接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5232,14 +5232,14 @@ export interface DeleteMaliciousRequestsResponse {
  */
 export interface ExportBruteAttacksResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务ID
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6911,14 +6911,14 @@ export interface LicenseBindTaskDetail {
  */
 export interface ExportMaliciousRequestsResponse {
   /**
-   * 导出文件下载链接地址。
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务Id , 可通过ExportTasks 接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7210,15 +7210,15 @@ export interface DescribeBaselineHostTopRequest {
  */
 export interface ExportBaselineEffectHostListResponse {
   /**
-      * 下载地址
+      * 该参数已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务id 可通过 ExportTasks接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8258,9 +8258,9 @@ export interface MalwareRisk {
  */
 export interface ExportProtectDirListResponse {
   /**
-   * 任务ID
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9861,9 +9861,9 @@ export interface BaselineRuleInfo {
  */
 export interface DescribeExportMachinesResponse {
   /**
-   * 任务id
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10623,14 +10623,14 @@ export interface DescribeBaselineDetailResponse {
  */
 export interface ExportIgnoreRuleEffectHostListResponse {
   /**
-   * 导出文件下载地址
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务Id , 可通过ExportTasks 接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12295,9 +12295,9 @@ export type DescribeVulHostCountScanTimeRequest = null
  */
 export interface ExportScanTaskDetailsResponse {
   /**
-   * 导出本次检测Excel的任务Id（不同于入参的本次检测任务id）
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址(不同于入参的本次检测任务id)
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12312,12 +12312,12 @@ export interface ExportBashEventsResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出任务ID
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13895,12 +13895,12 @@ export interface ExportLicenseDetailResponse {
   /**
    * 下载地址,该字段废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 任务ID,可通过任务ID去查下载任务
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15454,12 +15454,12 @@ export interface ExportBaselineListResponse {
       * 导出文件下载地址（已弃用）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出文件Id 可通过ExportTasks接口下载
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15719,14 +15719,14 @@ export interface DescribeLoginWhiteCombinedListResponse {
  */
 export interface ExportVulDetectionExcelResponse {
   /**
-   * 导出文件下载链接地址
+   * 该参数已废弃
    */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
-   * 导出本次漏洞检测Excel的任务Id（不同于入参的本次漏洞检测任务id）
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址（不同于入参的本次漏洞检测任务id）
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -18397,19 +18397,19 @@ export interface UpdateMachineTagsRequest {
   Quuid: string
 
   /**
+   * 标签ID，该操作会覆盖原有的标签列表
+   */
+  TagIds?: Array<number>
+
+  /**
    * 服务器地区 如: ap-guangzhou
    */
-  MachineRegion: string
+  MachineRegion?: string
 
   /**
    * 服务器类型(CVM|BM|ECM|LH|Other)
    */
-  MachineArea: string
-
-  /**
-   * 标签ID，该操作会覆盖原有的标签列表
-   */
-  TagIds?: Array<number>
+  MachineArea?: string
 }
 
 /**
