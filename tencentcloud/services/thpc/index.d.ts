@@ -1,4 +1,8 @@
 export declare const thpc: {
+    v20230321: {
+        Client: typeof import("./v20230321/thpc_client").Client;
+        Models: typeof import("./v20230321/thpc_models");
+    };
     v20211109: {
         Client: typeof import("./v20211109/thpc_client").Client;
         Models: typeof import("./v20211109/thpc_models");

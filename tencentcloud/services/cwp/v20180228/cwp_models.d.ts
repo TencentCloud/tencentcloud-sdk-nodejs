@@ -4291,6 +4291,15 @@ export interface UntrustMalwaresResponse {
     RequestId?: string;
 }
 /**
+ * 可用区信息
+ */
+export interface ZoneInfo {
+    /**
+      * 可用区名称
+      */
+    ZoneName: string;
+}
+/**
  * DescribeExpertServiceList返回参数结构体
  */
 export interface DescribeExpertServiceListResponse {
@@ -5940,6 +5949,38 @@ export interface ModifyBaselineRuleResponse {
  * DescribeIndexList请求参数结构体
  */
 export declare type DescribeIndexListRequest = null;
+/**
+ * DescribeRiskDnsEventList请求参数结构体
+ */
+export interface DescribeRiskDnsEventListRequest {
+    /**
+      * <li>IpOrName - String - 是否必填：否 - 主机Ip或别名筛选</li>
+<li>HostId - String - 是否必填：否 - 主机Id</li>
+<li>AgentId - String - 是否必填：否 - 客户端Id</li>
+<li>PolicyType - String - 是否必填：否 - 策略类型,0:系统策略1:用户自定义策略</li>
+<li>Domain - String - 是否必填：否 - 域名(先对域名做urlencode,再base64)</li>
+<li>HandleStatus - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
+<li>BeginTime - String - 是否必填：否 - 最近访问开始时间</li>
+<li>EndTime - String - 是否必填：否 - 最近访问结束时间</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 需要返回的数量，默认为10，最大值为100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 排序方式：根据请求次数排序：[asc:升序|desc:降序]
+      */
+    Order?: string;
+    /**
+      * 排序字段：[AccessCount:请求次数|LastTime:最近请求时间]
+      */
+    By?: string;
+}
 /**
  * 防护目录列表集
  */
@@ -8263,13 +8304,110 @@ export interface AssetDiskPartitionInfo {
     Used: number;
 }
 /**
- * 可用区信息
+ * 恶意请求事件
  */
-export interface ZoneInfo {
+export interface RiskDnsEvent {
     /**
-      * 可用区名称
+      * 事件Id
       */
-    ZoneName: string;
+    Id?: number;
+    /**
+      * 策略ID
+      */
+    PolicyId?: number;
+    /**
+      * 命中策略类型[-1:未知|0系统|1:用户]
+      */
+    PolicyType?: number;
+    /**
+      * 命中策略名称
+      */
+    PolicyName?: string;
+    /**
+      * 保护级别[0:基础版|1:专业版|2:旗舰版]
+      */
+    ProtectLevel?: number;
+    /**
+      * 主机ID
+      */
+    HostId?: string;
+    /**
+      * 主机名称
+      */
+    HostName?: string;
+    /**
+      * 主机IP
+      */
+    HostIp?: string;
+    /**
+      * 外网IP
+      */
+    WanIp?: string;
+    /**
+      * 客户端ID
+      */
+    AgentId?: string;
+    /**
+      * 访问域名
+      */
+    Domain?: string;
+    /**
+      * 标签特性
+      */
+    Tags?: Array<string>;
+    /**
+      * 访问次数
+      */
+    AccessCount?: number;
+    /**
+      * 威胁描述
+      */
+    ThreatDesc?: string;
+    /**
+      * 修复方案
+      */
+    SuggestSolution?: string;
+    /**
+      * 参考链接
+      */
+    ReferenceLink?: string;
+    /**
+      * 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略]
+      */
+    HandleStatus?: number;
+    /**
+      * 进程ID
+      */
+    Pid?: number;
+    /**
+      * 进程名
+      */
+    ProcessName?: string;
+    /**
+      * 进程MD5
+      */
+    ProcessMd5?: string;
+    /**
+      * 命令行
+      */
+    CmdLine?: string;
+    /**
+      * 首次访问时间
+      */
+    FirstTime?: string;
+    /**
+      * 最近访问时间
+      */
+    LastTime?: string;
+    /**
+      * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
+      */
+    HostStatus?: string;
+    /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineExtraInfo?: MachineExtraInfo;
 }
 /**
  * 基线检测信息
@@ -13199,6 +13337,24 @@ export interface AssetProcessBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineExtraInfo?: MachineExtraInfo;
+}
+/**
+ * DescribeRiskDnsEventList返回参数结构体
+ */
+export interface DescribeRiskDnsEventListResponse {
+    /**
+      * 恶意请求事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<RiskDnsEvent>;
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteBruteAttacks请求参数结构体

@@ -801,6 +801,11 @@ export interface BrandData {
    * 服务信息
    */
   Services?: ServiceData
+
+  /**
+   * 账号id
+   */
+  Uin?: string
 }
 
 /**

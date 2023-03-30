@@ -209,6 +209,7 @@ import {
   UntrustMalwaresRequest,
   DescribeAssetAppListRequest,
   UntrustMalwaresResponse,
+  ZoneInfo,
   DescribeExpertServiceListResponse,
   DescribeAccountStatisticsResponse,
   DescribeSearchExportListRequest,
@@ -277,6 +278,7 @@ import {
   DescribeBaselineRuleCategoryListRequest,
   ModifyBaselineRuleResponse,
   DescribeIndexListRequest,
+  DescribeRiskDnsEventListRequest,
   ProtectDirInfo,
   DeleteBashRulesRequest,
   CreateProtectServerResponse,
@@ -372,7 +374,7 @@ import {
   DeleteBaselineRuleResponse,
   DeleteMachineTagRequest,
   AssetDiskPartitionInfo,
-  ZoneInfo,
+  RiskDnsEvent,
   BaselineRuleInfo,
   DescribeExportMachinesResponse,
   DescribeScanTaskStatusResponse,
@@ -568,6 +570,7 @@ import {
   ModifyBanModeResponse,
   DeleteLicenseRecordResponse,
   AssetProcessBaseInfo,
+  DescribeRiskDnsEventListResponse,
   DeleteBruteAttacksRequest,
   DescribeAssetCoreModuleListResponse,
   DescribeMalwareTimingScanSettingRequest,
@@ -701,13 +704,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增或编辑标签
+   * 获取恶意请求事件列表
    */
-  async EditTags(
-    req: EditTagsRequest,
-    cb?: (error: string, rep: EditTagsResponse) => void
-  ): Promise<EditTagsResponse> {
-    return this.request("EditTags", req, cb)
+  async DescribeRiskDnsEventList(
+    req: DescribeRiskDnsEventListRequest,
+    cb?: (error: string, rep: DescribeRiskDnsEventListResponse) => void
+  ): Promise<DescribeRiskDnsEventListResponse> {
+    return this.request("DescribeRiskDnsEventList", req, cb)
   }
 
   /**
@@ -1241,13 +1244,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出漏洞影响主机列表
+   * 新增或编辑标签
    */
-  async ExportVulEffectHostList(
-    req: ExportVulEffectHostListRequest,
-    cb?: (error: string, rep: ExportVulEffectHostListResponse) => void
-  ): Promise<ExportVulEffectHostListResponse> {
-    return this.request("ExportVulEffectHostList", req, cb)
+  async EditTags(
+    req: EditTagsRequest,
+    cb?: (error: string, rep: EditTagsResponse) => void
+  ): Promise<EditTagsResponse> {
+    return this.request("EditTags", req, cb)
   }
 
   /**
@@ -1368,6 +1371,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBaselineScanScheduleResponse) => void
   ): Promise<DescribeBaselineScanScheduleResponse> {
     return this.request("DescribeBaselineScanSchedule", req, cb)
+  }
+
+  /**
+   * 导出漏洞影响主机列表
+   */
+  async ExportVulEffectHostList(
+    req: ExportVulEffectHostListRequest,
+    cb?: (error: string, rep: ExportVulEffectHostListResponse) => void
+  ): Promise<ExportVulEffectHostListResponse> {
+    return this.request("ExportVulEffectHostList", req, cb)
   }
 
   /**

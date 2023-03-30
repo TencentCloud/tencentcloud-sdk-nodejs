@@ -2787,7 +2787,16 @@ export interface InvoiceGeneralOCRResponse {
 /**
  * 智慧表单上传文件信息
  */
-export declare type SmartFormFileUrl = null;
+export interface SmartFormFileUrl {
+    /**
+      * 文件url地址
+      */
+    FileUrl: string;
+    /**
+      * 文件的顺序，顺序从1开始
+      */
+    FileOrderNumber: number;
+}
 /**
  * VatInvoiceVerifyNew返回参数结构体
  */

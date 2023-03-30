@@ -691,6 +691,36 @@ export interface CloudNativeAPIGatewayNode {
    * 节点 ip
    */
   NodeIp: string
+
+  /**
+      * Zone id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId?: string
+
+  /**
+      * Zone
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone?: string
+
+  /**
+      * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId?: string
+
+  /**
+      * 分组名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName?: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
 }
 
 /**

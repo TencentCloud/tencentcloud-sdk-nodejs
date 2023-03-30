@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTags", req, cb);
     }
     /**
-     * 新增或编辑标签
+     * 获取恶意请求事件列表
      */
-    async EditTags(req, cb) {
-        return this.request("EditTags", req, cb);
+    async DescribeRiskDnsEventList(req, cb) {
+        return this.request("DescribeRiskDnsEventList", req, cb);
     }
     /**
      * 本接口(TrustMalwares)将被识别木马文件设为信任。
@@ -358,10 +358,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIgnoreRuleEffectHostList", req, cb);
     }
     /**
-     * 导出漏洞影响主机列表
+     * 新增或编辑标签
      */
-    async ExportVulEffectHostList(req, cb) {
-        return this.request("ExportVulEffectHostList", req, cb);
+    async EditTags(req, cb) {
+        return this.request("EditTags", req, cb);
     }
     /**
      * 查询应用列表
@@ -434,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBaselineScanSchedule(req, cb) {
         return this.request("DescribeBaselineScanSchedule", req, cb);
+    }
+    /**
+     * 导出漏洞影响主机列表
+     */
+    async ExportVulEffectHostList(req, cb) {
+        return this.request("ExportVulEffectHostList", req, cb);
     }
     /**
      * 获取基线下载列表

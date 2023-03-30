@@ -5,15 +5,15 @@ export interface TextToVoiceResponse {
     /**
       * base64编码的wav/mp3音频数据
       */
-    Audio: string;
+    Audio?: string;
     /**
       * 一次请求对应一个SessionId
       */
-    SessionId: string;
+    SessionId?: string;
     /**
       * 时间戳信息，若未开启时间戳，则返回空数组。
       */
-    Subtitles: Array<Subtitle>;
+    Subtitles?: Array<Subtitle>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -189,7 +189,7 @@ export interface TextToVoiceRequest {
       */
     Volume?: number;
     /**
-      * 语速，范围：[-2，2]，分别对应不同语速：<li>-2代表0.6倍</li><li>-1代表0.8倍</li><li>0代表1.0倍（默认）</li><li>1代表1.2倍</li><li>2代表1.5倍</li>如果需要更细化的语速，可以保留小数点后一位，例如0.5 1.1 1.8等。<br>
+      * 语速，范围：[-2，6]，分别对应不同语速：<li>-2代表0.6倍</li><li>-1代表0.8倍</li><li>0代表1.0倍（默认）</li><li>1代表1.2倍</li><li>2代表1.5倍</li><li>6代表2.5倍</li>如果需要更细化的语速，可以保留小数点后一位，例如0.5 1.1 1.8等。<br>
       */
     Speed?: number;
     /**

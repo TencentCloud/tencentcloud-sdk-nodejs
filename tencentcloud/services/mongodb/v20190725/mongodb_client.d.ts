@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstance(req: IsolateDBInstanceRequest, cb?: (error: string, rep: IsolateDBInstanceResponse) => void): Promise<IsolateDBInstanceResponse>;
     /**
-     * 本接口 (InquirePriceModifyDBInstanceSpec) 用于调整实例的配置询价。
+     * 本接口 (InquirePriceModifyDBInstanceSpec) 用于查询实例配置变更后的价格。
      */
     InquirePriceModifyDBInstanceSpec(req: InquirePriceModifyDBInstanceSpecRequest, cb?: (error: string, rep: InquirePriceModifyDBInstanceSpecResponse) => void): Promise<InquirePriceModifyDBInstanceSpecResponse>;
     /**

@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateDBInstance", req, cb);
     }
     /**
-     * 本接口 (InquirePriceModifyDBInstanceSpec) 用于调整实例的配置询价。
+     * 本接口 (InquirePriceModifyDBInstanceSpec) 用于查询实例配置变更后的价格。
      */
     async InquirePriceModifyDBInstanceSpec(req, cb) {
         return this.request("InquirePriceModifyDBInstanceSpec", req, cb);

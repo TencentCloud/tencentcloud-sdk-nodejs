@@ -1353,15 +1353,15 @@ export interface CheckCertificateChainResponse {
     /**
       * true为通过检查，false为未通过检查。
       */
-    IsValid: boolean;
+    IsValid?: boolean;
     /**
       * true为可信CA，false为不可信CA。
       */
-    IsTrustedCA: boolean;
+    IsTrustedCA?: boolean;
     /**
       * 包含证书链中每一段证书的通用名称。
       */
-    Chains: Array<string>;
+    Chains?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

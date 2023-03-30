@@ -28,9 +28,9 @@ it("cwp.v20180228.DeleteTags", async function () {
     }
 })
 
-it("cwp.v20180228.EditTags", async function () {
+it("cwp.v20180228.DescribeRiskDnsEventList", async function () {
     try {
-       const data = await client.EditTags({})
+       const data = await client.DescribeRiskDnsEventList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +568,9 @@ it("cwp.v20180228.DescribeIgnoreRuleEffectHostList", async function () {
     }
 })
 
-it("cwp.v20180228.ExportVulEffectHostList", async function () {
+it("cwp.v20180228.EditTags", async function () {
     try {
-       const data = await client.ExportVulEffectHostList({})
+       const data = await client.EditTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +691,16 @@ it("cwp.v20180228.IgnoreImpactedHosts", async function () {
 it("cwp.v20180228.DescribeBaselineScanSchedule", async function () {
     try {
        const data = await client.DescribeBaselineScanSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportVulEffectHostList", async function () {
+    try {
+       const data = await client.ExportVulEffectHostList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
