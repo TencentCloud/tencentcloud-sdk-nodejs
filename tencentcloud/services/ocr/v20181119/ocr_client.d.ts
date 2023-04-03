@@ -681,6 +681,8 @@ export declare class Client extends AbstractClient {
     MixedInvoiceOCR(req: MixedInvoiceOCRRequest, cb?: (error: string, rep: MixedInvoiceOCRResponse) => void): Promise<MixedInvoiceOCRResponse>;
     /**
      * 印尼身份证识别
+
+默认接口请求频率限制：20次/秒。
      */
     RecognizeIndonesiaIDCardOCR(req: RecognizeIndonesiaIDCardOCRRequest, cb?: (error: string, rep: RecognizeIndonesiaIDCardOCRResponse) => void): Promise<RecognizeIndonesiaIDCardOCRResponse>;
     /**

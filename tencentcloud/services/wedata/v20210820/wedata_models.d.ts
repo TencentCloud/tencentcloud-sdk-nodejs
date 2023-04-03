@@ -5810,23 +5810,23 @@ export interface DescribeInLongAgentListResponse {
     /**
       * 采集器信息列表
       */
-    Items: Array<InLongAgentDetail>;
+    Items?: Array<InLongAgentDetail>;
     /**
       * 页码
       */
-    PageIndex: number;
+    PageIndex?: number;
     /**
       * 每页记录数
       */
-    PageSize: number;
+    PageSize?: number;
     /**
       * 总记录数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 总页数
       */
-    TotalPage: number;
+    TotalPage?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6002,6 +6002,11 @@ export interface InLongAgentDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AgentTotal: number;
+    /**
+      * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LifeDays?: number;
 }
 /**
  * ModifyDataSource请求参数结构体

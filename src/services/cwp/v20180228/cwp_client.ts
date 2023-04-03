@@ -212,7 +212,7 @@ import {
   ZoneInfo,
   DescribeExpertServiceListResponse,
   DescribeAccountStatisticsResponse,
-  DescribeSearchExportListRequest,
+  DescribeBashEventsInfoNewRequest,
   DeleteBaselineWeakPasswordRequest,
   ScanAssetRequest,
   DescribeBaselineRuleResponse,
@@ -221,6 +221,7 @@ import {
   DescribeBaselineItemRiskTopRequest,
   DeleteMaliciousRequestsResponse,
   ExportBruteAttacksResponse,
+  DescribeBashEventsInfoNewResponse,
   ProtectDirRelatedServer,
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
@@ -464,6 +465,7 @@ import {
   DescribeVulHostCountScanTimeRequest,
   ExportScanTaskDetailsResponse,
   ExportBashEventsResponse,
+  BashEventsInfoNew,
   EventStat,
   DeleteWebPageEventLogResponse,
   DescribeLicenseBindScheduleRequest,
@@ -605,6 +607,7 @@ import {
   DeleteScanTaskResponse,
   ExportIgnoreBaselineRuleRequest,
   DescribeMachineRegionsResponse,
+  DescribeSearchExportListRequest,
   DestroyOrderRequest,
   AssetWebAppBaseInfo,
   DescribeBaselineRuleDetectListResponse,
@@ -1404,13 +1407,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 打开入侵检测-恶意文件检测,弹出风险预警内容
+   * 查询高危命令事件详情(新)
    */
-  async DescribeMalwareRiskWarning(
-    req?: DescribeMalwareRiskWarningRequest,
-    cb?: (error: string, rep: DescribeMalwareRiskWarningResponse) => void
-  ): Promise<DescribeMalwareRiskWarningResponse> {
-    return this.request("DescribeMalwareRiskWarning", req, cb)
+  async DescribeBashEventsInfoNew(
+    req: DescribeBashEventsInfoNewRequest,
+    cb?: (error: string, rep: DescribeBashEventsInfoNewResponse) => void
+  ): Promise<DescribeBashEventsInfoNewResponse> {
+    return this.request("DescribeBashEventsInfoNew", req, cb)
   }
 
   /**
@@ -2444,6 +2447,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMalwareScanTaskResponse) => void
   ): Promise<DeleteMalwareScanTaskResponse> {
     return this.request("DeleteMalwareScanTask", req, cb)
+  }
+
+  /**
+   * 打开入侵检测-恶意文件检测,弹出风险预警内容
+   */
+  async DescribeMalwareRiskWarning(
+    req?: DescribeMalwareRiskWarningRequest,
+    cb?: (error: string, rep: DescribeMalwareRiskWarningResponse) => void
+  ): Promise<DescribeMalwareRiskWarningResponse> {
+    return this.request("DescribeMalwareRiskWarning", req, cb)
   }
 
   /**

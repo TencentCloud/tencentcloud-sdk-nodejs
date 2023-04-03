@@ -46,6 +46,7 @@ import {
   CreateInstanceNewRequest,
   InstanceInfo,
   ModifyClusterConfigsRequest,
+  ScaleUpInstanceRequest,
   DescribeInstanceKeyValConfigsResponse,
   ServiceInfo,
   ResourceSpec,
@@ -60,7 +61,7 @@ import {
   InstanceConfigItem,
   DescribeInstanceResponse,
   ClusterInfo,
-  ScaleUpInstanceRequest,
+  DescribeInstanceStateRequest,
   NodesSummary,
   DescribeInstanceShardsResponse,
   InstanceConfigInfo,
@@ -70,6 +71,7 @@ import {
   ActionAlterCkUserResponse,
   Tag,
   ScheduleStrategy,
+  DescribeInstanceStateResponse,
   ResizeDiskResponse,
   DescribeBackUpScheduleResponse,
   DescribeCkSqlApisResponse,
@@ -134,6 +136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ActionAlterCkUserResponse) => void
   ): Promise<ActionAlterCkUserResponse> {
     return this.request("ActionAlterCkUser", req, cb)
+  }
+
+  /**
+   * 集群详情页中显示集群状态、流程进度等
+   */
+  async DescribeInstanceState(
+    req: DescribeInstanceStateRequest,
+    cb?: (error: string, rep: DescribeInstanceStateResponse) => void
+  ): Promise<DescribeInstanceStateResponse> {
+    return this.request("DescribeInstanceState", req, cb)
   }
 
   /**

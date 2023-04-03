@@ -28,6 +28,16 @@ it("car.v20220110.ApplyConcurrent", async function () {
     }
 })
 
+it("car.v20220110.StopPublishStream", async function () {
+    try {
+       const data = await client.StopPublishStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("car.v20220110.DestroySession", async function () {
     try {
        const data = await client.DestroySession({})
@@ -41,6 +51,16 @@ it("car.v20220110.DestroySession", async function () {
 it("car.v20220110.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("car.v20220110.StartPublishStream", async function () {
+    try {
+       const data = await client.StartPublishStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

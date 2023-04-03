@@ -19,8 +19,10 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
+  DescribeQuestionListRequest,
   ModifyRoomResponse,
   DescribeAppDetailResponse,
+  DescribeSupervisorsResponse,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
   BatchRegisterRequest,
@@ -29,9 +31,8 @@ import {
   CreateGroupWithMembersRequest,
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
-  AddGroupMemberResponse,
   GetRoomEventResponse,
-  CreateGroupWithMembersResponse,
+  MemberRecord,
   DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
@@ -60,6 +61,7 @@ import {
   DeleteRecordRequest,
   BatchDeleteGroupMemberResponse,
   CreateGroupWithSubGroupResponse,
+  MessageItem,
   GroupInfo,
   GetRoomEventRequest,
   DescribeDocumentResponse,
@@ -68,6 +70,7 @@ import {
   EventInfo,
   AppConfig,
   DeleteRecordResponse,
+  DescribeAnswerListRequest,
   BatchCreateRoomRequest,
   DescribeGroupMemberListRequest,
   UserInfo,
@@ -87,29 +90,35 @@ import {
   DescribeCurrentMemberListRequest,
   DescribeSdkAppIdUsersResponse,
   EventDataInfo,
+  DescribeAnswerListResponse,
   DescribeRoomStatisticsResponse,
   DeleteDocumentRequest,
+  DescribeSupervisorsRequest,
   MessageList,
   DeleteGroupMemberRequest,
   GetWatermarkRequest,
-  MemberRecord,
+  CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
   ModifyAppRequest,
   UnbindDocumentFromRoomRequest,
   RegisterUserRequest,
   GroupBaseInfo,
   LoginUserRequest,
+  AnswerStat,
   SetWatermarkResponse,
   RoomInfo,
   ModifyRoomRequest,
+  AnswerInfo,
   DescribeRoomStatisticsRequest,
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
+  DescribeQuestionListResponse,
+  QuestionInfo,
   DescribeDeveloperRequest,
   AppCustomContent,
   DeleteGroupResponse,
   DescribeSdkAppIdUsersRequest,
-  MessageItem,
+  AddGroupMemberResponse,
   CreateSupervisorResponse,
   SceneItem,
   DeleteRoomRequest,
@@ -266,6 +275,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取巡课列表
+   */
+  async DescribeSupervisors(
+    req: DescribeSupervisorsRequest,
+    cb?: (error: string, rep: DescribeSupervisorsResponse) => void
+  ): Promise<DescribeSupervisorsResponse> {
+    return this.request("DescribeSupervisors", req, cb)
+  }
+
+  /**
    * 此接口用于删除指定群组，支持批量操作。
    */
   async DeleteGroup(
@@ -326,13 +345,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务商信息获取
+   * 此接口用于批量删除成员列表到指定群组列表
    */
-  async DescribeDeveloper(
-    req?: DescribeDeveloperRequest,
-    cb?: (error: string, rep: DescribeDeveloperResponse) => void
-  ): Promise<DescribeDeveloperResponse> {
-    return this.request("DescribeDeveloper", req, cb)
+  async BatchDeleteGroupMember(
+    req: BatchDeleteGroupMemberRequest,
+    cb?: (error: string, rep: BatchDeleteGroupMemberResponse) => void
+  ): Promise<BatchDeleteGroupMemberResponse> {
+    return this.request("BatchDeleteGroupMember", req, cb)
   }
 
   /**
@@ -466,6 +485,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取房间提问列表
+   */
+  async DescribeQuestionList(
+    req: DescribeQuestionListRequest,
+    cb?: (error: string, rep: DescribeQuestionListResponse) => void
+  ): Promise<DescribeQuestionListResponse> {
+    return this.request("DescribeQuestionList", req, cb)
+  }
+
+  /**
    * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
    */
   async SetAppCustomContent(
@@ -476,13 +505,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于批量删除成员列表到指定群组列表
+   * 服务商信息获取
    */
-  async BatchDeleteGroupMember(
-    req: BatchDeleteGroupMemberRequest,
-    cb?: (error: string, rep: BatchDeleteGroupMemberResponse) => void
-  ): Promise<BatchDeleteGroupMemberResponse> {
-    return this.request("BatchDeleteGroupMember", req, cb)
+  async DescribeDeveloper(
+    req?: DescribeDeveloperRequest,
+    cb?: (error: string, rep: DescribeDeveloperResponse) => void
+  ): Promise<DescribeDeveloperResponse> {
+    return this.request("DescribeDeveloper", req, cb)
   }
 
   /**
@@ -503,6 +532,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchCreateRoomResponse) => void
   ): Promise<BatchCreateRoomResponse> {
     return this.request("BatchCreateRoom", req, cb)
+  }
+
+  /**
+   * 获取房间答题详情
+   */
+  async DescribeAnswerList(
+    req: DescribeAnswerListRequest,
+    cb?: (error: string, rep: DescribeAnswerListResponse) => void
+  ): Promise<DescribeAnswerListResponse> {
+    return this.request("DescribeAnswerList", req, cb)
   }
 
   /**

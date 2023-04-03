@@ -1657,7 +1657,7 @@ export interface CreateDisksResponse {
     /**
       * 创建的云硬盘ID列表。
       */
-    DiskIdSet: Array<string>;
+    DiskIdSet?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -728,9 +728,9 @@ it("cwp.v20180228.ExportIgnoreBaselineRule", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeMalwareRiskWarning", async function () {
+it("cwp.v20180228.DescribeBashEventsInfoNew", async function () {
     try {
-       const data = await client.DescribeMalwareRiskWarning({})
+       const data = await client.DescribeBashEventsInfoNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1761,6 +1761,16 @@ it("cwp.v20180228.DescribeAssetRecentMachineInfo", async function () {
 it("cwp.v20180228.DeleteMalwareScanTask", async function () {
     try {
        const data = await client.DeleteMalwareScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeMalwareRiskWarning", async function () {
+    try {
+       const data = await client.DescribeMalwareRiskWarning({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

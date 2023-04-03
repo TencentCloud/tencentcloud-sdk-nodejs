@@ -2526,7 +2526,7 @@ export interface DescribeRoMinScaleRequest {
  */
 export interface DescribeDefaultParamsRequest {
   /**
-   * mysql版本，目前支持 ["5.1", "5.5", "5.6", "5.7"]。
+   * 引擎版本，目前支持 ["5.1", "5.5", "5.6", "5.7", "8.0"]
    */
   EngineVersion: string
 

@@ -902,6 +902,31 @@ export interface ModifyClusterConfigsRequest {
 }
 
 /**
+ * ScaleUpInstance请求参数结构体
+ */
+export interface ScaleUpInstanceRequest {
+  /**
+   * 实例唯一ID
+   */
+  InstanceId: string
+
+  /**
+   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+   */
+  Type: string
+
+  /**
+   * clickhouse节点规格。
+   */
+  SpecName: string
+
+  /**
+   * 是否滚动重启，false为不滚动重启，true为滚动重启
+   */
+  ScaleUpEnableRolling: boolean
+}
+
+/**
  * DescribeInstanceKeyValConfigs返回参数结构体
  */
 export interface DescribeInstanceKeyValConfigsResponse {
@@ -1223,7 +1248,7 @@ export interface DescribeInstanceResponse {
   /**
    * 实例描述信息
    */
-  InstanceInfo: InstanceInfo
+  InstanceInfo?: InstanceInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1249,28 +1274,13 @@ export interface ClusterInfo {
 }
 
 /**
- * ScaleUpInstance请求参数结构体
+ * DescribeInstanceState请求参数结构体
  */
-export interface ScaleUpInstanceRequest {
+export interface DescribeInstanceStateRequest {
   /**
-   * 实例唯一ID
+   * 集群实例名称
    */
   InstanceId: string
-
-  /**
-   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
-   */
-  Type: string
-
-  /**
-   * clickhouse节点规格。
-   */
-  SpecName: string
-
-  /**
-   * 是否滚动重启，false为不滚动重启，true为滚动重启
-   */
-  ScaleUpEnableRolling: boolean
 }
 
 /**
@@ -1484,6 +1494,11 @@ export interface DescribeInstanceRequest {
    * 集群实例ID
    */
   InstanceId: string
+
+  /**
+   * 是否是open api查询
+   */
+  IsOpenApi?: boolean
 }
 
 /**
@@ -1546,6 +1561,51 @@ export interface ScheduleStrategy {
    * 策略id
    */
   ScheduleId: number
+}
+
+/**
+ * DescribeInstanceState返回参数结构体
+ */
+export interface DescribeInstanceStateResponse {
+  /**
+   * 集群状态，例如：Serving
+   */
+  InstanceState?: string
+
+  /**
+      * 集群操作创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowCreateTime?: string
+
+  /**
+      * 集群操作名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowName?: string
+
+  /**
+      * 集群操作进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowProgress?: number
+
+  /**
+      * 集群状态描述，例如：运行中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceStateDesc?: string
+
+  /**
+      * 集群流程错误信息，例如：“创建失败，资源不足”
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

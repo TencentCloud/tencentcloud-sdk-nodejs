@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyConcurrent", req, cb);
     }
     /**
+     * 停止云端推流
+     */
+    async StopPublishStream(req, cb) {
+        return this.request("StopPublishStream", req, cb);
+    }
+    /**
      * 销毁会话
      */
     async DestroySession(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSession(req, cb) {
         return this.request("CreateSession", req, cb);
+    }
+    /**
+     * 开始云端推流
+     */
+    async StartPublishStream(req, cb) {
+        return this.request("StartPublishStream", req, cb);
     }
 }
 exports.Client = Client;

@@ -379,6 +379,10 @@ export interface BaseFlowInfo {
       * 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批
       */
     NeedSignReview?: boolean;
+    /**
+      * 用户流程自定义数据参数
+      */
+    UserData?: string;
 }
 /**
  * CreateConsoleLoginUrl返回参数结构体

@@ -202,6 +202,7 @@ import {
   AdvancedAuthentication,
   Revalidate,
   UrlRecord,
+  OthersPrivateAccess,
   DescribePushQuotaResponse,
   Authentication,
   CreateClsLogTopicResponse,

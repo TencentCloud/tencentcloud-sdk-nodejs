@@ -4293,82 +4293,92 @@ export interface RecognizeIndonesiaIDCardOCRResponse {
   /**
    * 证件号码
    */
-  NIK: string
+  NIK?: string
 
   /**
    * 姓名
    */
-  Nama: string
+  Nama?: string
 
   /**
    * 出生地/出生时间
    */
-  TempatTglLahir: string
+  TempatTglLahir?: string
 
   /**
    * 性别
    */
-  JenisKelamin: string
+  JenisKelamin?: string
 
   /**
    * 血型
    */
-  GolDarah: string
+  GolDarah?: string
 
   /**
    * 地址
    */
-  Alamat: string
+  Alamat?: string
 
   /**
    * 街道
    */
-  RTRW: string
+  RTRW?: string
 
   /**
    * 村
    */
-  KelDesa: string
+  KelDesa?: string
 
   /**
    * 地区
    */
-  Kecamatan: string
+  Kecamatan?: string
 
   /**
    * 宗教信仰
    */
-  Agama: string
+  Agama?: string
 
   /**
    * 婚姻状况
    */
-  StatusPerkawinan: string
+  StatusPerkawinan?: string
 
   /**
    * 职业
    */
-  Perkerjaan: string
+  Perkerjaan?: string
 
   /**
    * 国籍
    */
-  KewargaNegaraan: string
+  KewargaNegaraan?: string
 
   /**
    * 身份证有效期限
    */
-  BerlakuHingga: string
+  BerlakuHingga?: string
 
   /**
    * 发证日期
    */
-  IssuedDate: string
+  IssuedDate?: string
 
   /**
    * 人像截图
    */
-  Photo: string
+  Photo?: string
+
+  /**
+   * 省份，Scene为V2时支持识别
+   */
+  Provinsi?: string
+
+  /**
+   * 城市，Scene为V2时支持识别
+   */
+  Kota?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

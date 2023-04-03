@@ -3811,7 +3811,7 @@ export interface ModifyRecordRemarkResponse {
  */
 export interface DescribeDomainListRequest {
   /**
-   * 域名分组类型，默认为ALL。可取值为ALL，MINE，SHARE，ISMARK，PAUSE，VIP，RECENT，SHARE_OUT。
+   * 域名分组类型，默认为ALL。可取值为ALL，MINE，SHARE，ISMARK，PAUSE，VIP，RECENT，SHARE_OUT，FREE。
    */
   Type?: string
 

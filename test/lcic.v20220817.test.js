@@ -148,6 +148,16 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeSupervisors", async function () {
+    try {
+       const data = await client.DescribeSupervisors({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DeleteGroup", async function () {
     try {
        const data = await client.DeleteGroup({})
@@ -208,9 +218,9 @@ it("lcic.v20220817.BatchAddGroupMember", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeDeveloper", async function () {
+it("lcic.v20220817.BatchDeleteGroupMember", async function () {
     try {
-       const data = await client.DescribeDeveloper({})
+       const data = await client.BatchDeleteGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +358,16 @@ it("lcic.v20220817.CreateSupervisor", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeQuestionList", async function () {
+    try {
+       const data = await client.DescribeQuestionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SetAppCustomContent", async function () {
     try {
        const data = await client.SetAppCustomContent({})
@@ -358,9 +378,9 @@ it("lcic.v20220817.SetAppCustomContent", async function () {
     }
 })
 
-it("lcic.v20220817.BatchDeleteGroupMember", async function () {
+it("lcic.v20220817.DescribeDeveloper", async function () {
     try {
-       const data = await client.BatchDeleteGroupMember({})
+       const data = await client.DescribeDeveloper({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +401,16 @@ it("lcic.v20220817.DescribeCurrentMemberList", async function () {
 it("lcic.v20220817.BatchCreateRoom", async function () {
     try {
        const data = await client.BatchCreateRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeAnswerList", async function () {
+    try {
+       const data = await client.DescribeAnswerList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

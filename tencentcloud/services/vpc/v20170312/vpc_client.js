@@ -328,13 +328,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpcEndPointAttribute", req, cb);
     }
     /**
-     * 查询路由型VPN网关的目的路由
+     * 本接口（DescribeVpnGatewayRoutes）用于查询VPN网关路由。
      */
     async DescribeVpnGatewayRoutes(req, cb) {
         return this.request("DescribeVpnGatewayRoutes", req, cb);
     }
     /**
-     * 修改VPN路由是否启用
+     * 本接口（ModifyVpnGatewayRoutes）用于修改VPN路由是否启用。
      */
     async ModifyVpnGatewayRoutes(req, cb) {
         return this.request("ModifyVpnGatewayRoutes", req, cb);
@@ -649,7 +649,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignIpv6SubnetCidrBlock", req, cb);
     }
     /**
-     * 本接口（DescribeVpnGatewayCcnRoutes）用于查询VPN网关云联网路由
+     * 本接口（DescribeVpnGatewayCcnRoutes）用于查询VPN网关云联网路由。
      */
     async DescribeVpnGatewayCcnRoutes(req, cb) {
         return this.request("DescribeVpnGatewayCcnRoutes", req, cb);
@@ -698,7 +698,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewVpnGateway", req, cb);
     }
     /**
-     * 设置VPNGW续费标记
+     * 本接口（SetVpnGatewaysRenewFlag）用于设置VPNGW续费标记。
      */
     async SetVpnGatewaysRenewFlag(req, cb) {
         return this.request("SetVpnGatewaysRenewFlag", req, cb);
@@ -894,7 +894,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("HaVipDisassociateAddressIp", req, cb);
     }
     /**
-     * 本接口（ModifyVpnGatewayCcnRoutes）用于修改VPN网关云联网路由
+     * 本接口（ModifyVpnGatewayCcnRoutes）用于修改VPN网关云联网路由。
      */
     async ModifyVpnGatewayCcnRoutes(req, cb) {
         return this.request("ModifyVpnGatewayCcnRoutes", req, cb);
@@ -926,7 +926,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAssistantCidr", req, cb);
     }
     /**
-     * 本接口（DeleteVpnGatewayCcnRoutes）用于删除VPN网关路由
+     * 本接口（DeleteVpnGatewayRoutes）用于删除VPN网关路由
      */
     async DeleteVpnGatewayRoutes(req, cb) {
         return this.request("DeleteVpnGatewayRoutes", req, cb);
@@ -1763,7 +1763,6 @@ LimitTypes取值范围：
      * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
 该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-
      */
     async DescribeCrossBorderCcnRegionBandwidthLimits(req, cb) {
         return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb);

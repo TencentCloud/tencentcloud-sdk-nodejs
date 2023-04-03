@@ -2870,7 +2870,7 @@ export interface DescribeReplicationGroupRequest {
   GroupId?: string
 
   /**
-   * 设置模糊查询的关键字，可以设置为实例ID或实例名称进行模糊查询。
+   * 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。
    */
   SearchKey?: string
 }
@@ -3836,39 +3836,62 @@ export interface Groups {
   AppId: number
 
   /**
-   * 地域ID 1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
-   */
+      * 地域ID 。
+- 1：广州 
+- 4：上海 
+- 5：中国香港 
+- 6：多伦多 
+- 7：上海金融 
+- 8：北京 
+- 9：新加坡
+- 11：深圳金融
+- 15：美西（硅谷）
+- 16：成都 
+- 17：德国 
+- 18：韩国 
+- 19：重庆 
+- 21：印度 
+- 22：美东（弗吉尼亚）
+- 23：泰国 
+- 24：俄罗斯 
+- 25：日本
+      */
   RegionId: number
 
   /**
-   * 复制组信息
+   * 复制组 ID。
    */
   GroupId: string
 
   /**
-      * 复制组名称
+      * 复制组名称。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GroupName: string
 
   /**
-   * 复制组状态，37："绑定复制组中"，38："复制组重连中"，51："解绑复制组中"，52："复制组实例切主中"，53："角色变更中"
-   */
+      * 复制组状态。
+- 37：绑定复制组中。
+- 38：复制组重连中。
+- 51：解绑复制组中。
+- 52：复制组实例切主中。
+- 53：角色变更中。
+      */
   Status: number
 
   /**
-   * 复制组数量
+   * 复制组数量。
    */
   InstanceCount: number
 
   /**
-      * 复制组实例
+      * 复制组中的实例信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Instances: Array<Instances>
 
   /**
-      * 备注信息
+      * 备注信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
@@ -4271,12 +4294,12 @@ export interface DescribeReplicationGroupResponse {
   /**
    * 复制组数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 复制组信息。
    */
-  Groups: Array<Groups>
+  Groups?: Array<Groups>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

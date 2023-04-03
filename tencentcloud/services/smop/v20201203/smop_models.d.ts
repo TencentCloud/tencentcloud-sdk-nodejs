@@ -38,7 +38,7 @@ export interface TaskEventData {
       */
     TaskType?: number;
     /**
-      * 当前积分/成长值
+      * 当前积分
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalCoin?: number;
@@ -62,6 +62,11 @@ export interface TaskEventData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskName?: string;
+    /**
+      * 当前成长值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GrowScore?: number;
 }
 /**
  * SubmitTaskEvent返回参数结构体
@@ -113,7 +118,7 @@ export interface SubmitTaskEventRequest {
       */
     Code: string;
     /**
-      * 同步异步方式
+      * 同步异步方式：0为同步、1位异步
       */
     Async: number;
     /**

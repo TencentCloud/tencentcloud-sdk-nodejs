@@ -77,7 +77,7 @@ import {
   UnassignIpv6AddressesResponse,
   CreateIp6TranslatorsResponse,
   DescribeFlowLogsRequest,
-  DeleteTemplateMemberRequest,
+  CcnRegionBandwidthLimitInfo,
   CloneSecurityGroupRequest,
   AssociateNatGatewayAddressRequest,
   CreateDirectConnectGatewayRequest,
@@ -146,6 +146,7 @@ import {
   HaVipAssociateAddressIpRequest,
   DisassociateNatGatewayAddressResponse,
   DeleteRoutesResponse,
+  ModifyDhcpIpAttributeRequest,
   DescribeCrossBorderComplianceRequest,
   DescribeSecurityGroupAssociationStatisticsResponse,
   ModifyAssistantCidrResponse,
@@ -282,7 +283,7 @@ import {
   DeleteNetworkAclRequest,
   NatGatewayDestinationIpPortTranslationNatRule,
   CloneSecurityGroupResponse,
-  ModifyDhcpIpAttributeRequest,
+  CcnBandwidth,
   ModifyIp6TranslatorRequest,
   CreateVpnConnectionResponse,
   AddressTemplateSpecification,
@@ -397,6 +398,7 @@ import {
   DownloadCustomerGatewayConfigurationRequest,
   DeleteBandwidthPackageRequest,
   HaVip,
+  DeleteTemplateMemberRequest,
   ModifyAddressesBandwidthResponse,
   LocalGateway,
   RejectAttachCcnInstancesResponse,
@@ -1245,7 +1247,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询路由型VPN网关的目的路由
+   * 本接口（DescribeVpnGatewayRoutes）用于查询VPN网关路由。
    */
   async DescribeVpnGatewayRoutes(
     req: DescribeVpnGatewayRoutesRequest,
@@ -1255,7 +1257,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改VPN路由是否启用
+   * 本接口（ModifyVpnGatewayRoutes）用于修改VPN路由是否启用。
    */
   async ModifyVpnGatewayRoutes(
     req: ModifyVpnGatewayRoutesRequest,
@@ -1754,7 +1756,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeVpnGatewayCcnRoutes）用于查询VPN网关云联网路由
+   * 本接口（DescribeVpnGatewayCcnRoutes）用于查询VPN网关云联网路由。
    */
   async DescribeVpnGatewayCcnRoutes(
     req: DescribeVpnGatewayCcnRoutesRequest,
@@ -1831,7 +1833,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置VPNGW续费标记
+   * 本接口（SetVpnGatewaysRenewFlag）用于设置VPNGW续费标记。
    */
   async SetVpnGatewaysRenewFlag(
     req: SetVpnGatewaysRenewFlagRequest,
@@ -2127,7 +2129,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyVpnGatewayCcnRoutes）用于修改VPN网关云联网路由
+   * 本接口（ModifyVpnGatewayCcnRoutes）用于修改VPN网关云联网路由。
    */
   async ModifyVpnGatewayCcnRoutes(
     req: ModifyVpnGatewayCcnRoutesRequest,
@@ -2179,7 +2181,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteVpnGatewayCcnRoutes）用于删除VPN网关路由
+   * 本接口（DeleteVpnGatewayRoutes）用于删除VPN网关路由
    */
   async DeleteVpnGatewayRoutes(
     req: DeleteVpnGatewayRoutesRequest,
@@ -3504,10 +3506,9 @@ LimitTypes取值范围：
      * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
 该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-
      */
   async DescribeCrossBorderCcnRegionBandwidthLimits(
-    req?: DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
+    req: DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
     cb?: (error: string, rep: DescribeCrossBorderCcnRegionBandwidthLimitsResponse) => void
   ): Promise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse> {
     return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb)

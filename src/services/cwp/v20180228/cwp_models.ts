@@ -5131,13 +5131,13 @@ export interface DescribeAccountStatisticsResponse {
 }
 
 /**
- * DescribeSearchExportList请求参数结构体
+ * DescribeBashEventsInfoNew请求参数结构体
  */
-export interface DescribeSearchExportListRequest {
+export interface DescribeBashEventsInfoNewRequest {
   /**
-   * ES查询条件JSON
+   * 事件id
    */
-  Query: string
+  Id: number
 }
 
 /**
@@ -5250,6 +5250,22 @@ export interface ExportBruteAttacksResponse {
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBashEventsInfoNew返回参数结构体
+ */
+export interface DescribeBashEventsInfoNewResponse {
+  /**
+      * 事件详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BashEventsInfo: BashEventsInfoNew
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12494,6 +12510,161 @@ export interface ExportBashEventsResponse {
 }
 
 /**
+ * 高危命令数据详情(新)
+ */
+export interface BashEventsInfoNew {
+  /**
+   * 数据ID
+   */
+  Id: number
+
+  /**
+   * 云镜ID
+   */
+  Uuid: string
+
+  /**
+   * 主机ID
+   */
+  Quuid: string
+
+  /**
+   * 主机内网IP
+   */
+  HostIp: string
+
+  /**
+   * 平台类型
+   */
+  Platform: number
+
+  /**
+   * 执行命令
+   */
+  BashCmd: string
+
+  /**
+   * 规则ID,等于0表示已规则已被删除或生效范围已修改
+   */
+  RuleId: number
+
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+   * 规则等级：1-高 2-中 3-低
+   */
+  RuleLevel: number
+
+  /**
+   * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
+   */
+  Status: number
+
+  /**
+   * 发生时间
+   */
+  CreateTime: string
+
+  /**
+   * 主机名
+   */
+  MachineName: string
+
+  /**
+      * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Exe: string
+
+  /**
+      * 处理时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime: string
+
+  /**
+      * 规则类别  0=系统规则，1=用户规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleCategory: number
+
+  /**
+      * 自动生成的正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegexBashCmd: string
+
+  /**
+      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PsTree: string
+
+  /**
+      * 建议方案
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuggestScheme: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HarmDescribe: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 参考链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  References: Array<string>
+
+  /**
+      * 主机外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineWanIp: string
+
+  /**
+      * 主机在线状态 OFFLINE  ONLINE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineStatus: string
+
+  /**
+      * 登录用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  User: string
+
+  /**
+      * 进程号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pid: string
+
+  /**
+      * 0:普通 1:专业版 2:旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineType: number
+
+  /**
+      * 检测来源 0:bash日志 1:实时监控
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectBy: number
+}
+
+/**
  * 未处理的安全事件统计信息
  */
 export interface EventStat {
@@ -16880,6 +17051,16 @@ export interface DescribeMachineRegionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSearchExportList请求参数结构体
+ */
+export interface DescribeSearchExportListRequest {
+  /**
+   * ES查询条件JSON
+   */
+  Query: string
 }
 
 /**

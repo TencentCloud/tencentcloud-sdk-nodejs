@@ -161,12 +161,12 @@ export interface AttachCcnRequest {
  */
 export interface CreateInstancesRequest {
   /**
-   * 套餐ID。
+   * 套餐ID。可以通过调用 [查询套餐](https://cloud.tencent.com/document/api/1207/47575) 接口获取。
    */
   BundleId: string
 
   /**
-   * 镜像ID。
+   * 镜像ID。可以通过调用 [查询镜像信息](https://cloud.tencent.com/document/api/1207/47689) 接口获取。
    */
   BlueprintId: string
 
@@ -1916,7 +1916,7 @@ export interface CreateInstancesResponse {
 
 可根据 DescribeInstances 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。
       */
-  InstanceIdSet: Array<string>
+  InstanceIdSet?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

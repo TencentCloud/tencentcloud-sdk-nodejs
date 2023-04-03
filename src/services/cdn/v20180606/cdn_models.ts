@@ -4013,7 +4013,12 @@ global：全球加速
   QnPrivateAccess?: QnPrivateAccess
 
   /**
-   * HTTPS服务
+   * 其他厂商对象存储回源鉴权
+   */
+  OthersPrivateAccess?: OthersPrivateAccess
+
+  /**
+   * HTTPS服务，默认开启（收费服务，详见计费说明和产品文档）
    */
   HttpsBilling?: HttpsBilling
 }
@@ -5653,6 +5658,40 @@ export interface UrlRecord {
 }
 
 /**
+ * 其他厂商对象存储回源鉴权
+ */
+export interface OthersPrivateAccess {
+  /**
+   * 开关， on/off。
+   */
+  Switch: string
+
+  /**
+      * 访问ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccessKey?: string
+
+  /**
+      * 密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecretKey?: string
+
+  /**
+      * 地域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * 存储桶名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket?: string
+}
+
+/**
  * DescribePushQuota返回参数结构体
  */
 export interface DescribePushQuotaResponse {
@@ -7195,6 +7234,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HttpsBilling: HttpsBilling
+
+  /**
+      * 其他厂商对象存储回源鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OthersPrivateAccess?: OthersPrivateAccess
 }
 
 /**
@@ -8951,7 +8996,12 @@ global：全球加速
   QnPrivateAccess?: QnPrivateAccess
 
   /**
-   * HTTPS服务
+   * 其他厂商对象存储回源鉴权
+   */
+  OthersPrivateAccess?: OthersPrivateAccess
+
+  /**
+   * HTTPS服务（收费服务，详见计费说明和产品文档）
    */
   HttpsBilling?: HttpsBilling
 }

@@ -454,10 +454,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportIgnoreBaselineRule", req, cb);
     }
     /**
-     * 打开入侵检测-恶意文件检测,弹出风险预警内容
+     * 查询高危命令事件详情(新)
      */
-    async DescribeMalwareRiskWarning(req, cb) {
-        return this.request("DescribeMalwareRiskWarning", req, cb);
+    async DescribeBashEventsInfoNew(req, cb) {
+        return this.request("DescribeBashEventsInfoNew", req, cb);
     }
     /**
      * 获取本地提权规则列表
@@ -1079,6 +1079,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteMalwareScanTask(req, cb) {
         return this.request("DeleteMalwareScanTask", req, cb);
+    }
+    /**
+     * 打开入侵检测-恶意文件检测,弹出风险预警内容
+     */
+    async DescribeMalwareRiskWarning(req, cb) {
+        return this.request("DescribeMalwareRiskWarning", req, cb);
     }
     /**
      * 漏洞top统计

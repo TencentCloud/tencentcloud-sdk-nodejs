@@ -2100,6 +2100,10 @@ export interface FlowDetailInfo {
       * 合同(流程)的签署人数组
       */
     FlowApproverInfos: Array<FlowApproverDetail>;
+    /**
+      * 合同(流程)的关注方信息列表
+      */
+    CcInfos?: Array<FlowApproverDetail>;
 }
 /**
  * 更新员工信息成功返回的数据信息

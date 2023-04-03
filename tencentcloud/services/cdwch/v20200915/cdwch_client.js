@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ActionAlterCkUser", req, cb);
     }
     /**
+     * 集群详情页中显示集群状态、流程进度等
+     */
+    async DescribeInstanceState(req, cb) {
+        return this.request("DescribeInstanceState", req, cb);
+    }
+    /**
      * 开启或者关闭策略
      */
     async OpenBackUp(req, cb) {

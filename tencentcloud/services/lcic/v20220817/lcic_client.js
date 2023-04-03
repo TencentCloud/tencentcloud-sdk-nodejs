@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDocument", req, cb);
     }
     /**
+     * 获取巡课列表
+     */
+    async DescribeSupervisors(req, cb) {
+        return this.request("DescribeSupervisors", req, cb);
+    }
+    /**
      * 此接口用于删除指定群组，支持批量操作。
      */
     async DeleteGroup(req, cb) {
@@ -142,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchAddGroupMember", req, cb);
     }
     /**
-     * 服务商信息获取
+     * 此接口用于批量删除成员列表到指定群组列表
      */
-    async DescribeDeveloper(req, cb) {
-        return this.request("DescribeDeveloper", req, cb);
+    async BatchDeleteGroupMember(req, cb) {
+        return this.request("BatchDeleteGroupMember", req, cb);
     }
     /**
      * 获取房间事件,仅在课堂结束1小时内有效。
@@ -226,16 +232,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSupervisor", req, cb);
     }
     /**
+     * 获取房间提问列表
+     */
+    async DescribeQuestionList(req, cb) {
+        return this.request("DescribeQuestionList", req, cb);
+    }
+    /**
      * 设置应用的自定义内容，包括应用图标，自定义的代码等。如果已存在，则为更新。更新js、css内容后，要生效也需要调用该接口
      */
     async SetAppCustomContent(req, cb) {
         return this.request("SetAppCustomContent", req, cb);
     }
     /**
-     * 此接口用于批量删除成员列表到指定群组列表
+     * 服务商信息获取
      */
-    async BatchDeleteGroupMember(req, cb) {
-        return this.request("BatchDeleteGroupMember", req, cb);
+    async DescribeDeveloper(req, cb) {
+        return this.request("DescribeDeveloper", req, cb);
     }
     /**
      * 获取当前房间的成员列表，房间结束或过期后无法使用。
@@ -248,6 +260,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchCreateRoom(req, cb) {
         return this.request("BatchCreateRoom", req, cb);
+    }
+    /**
+     * 获取房间答题详情
+     */
+    async DescribeAnswerList(req, cb) {
+        return this.request("DescribeAnswerList", req, cb);
     }
     /**
      * 删除文档

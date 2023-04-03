@@ -6313,43 +6313,47 @@ export interface DescribeClusterSummaryResponse {
     /**
       * 集群总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 有风险的集群数量
       */
-    RiskClusterCount: number;
+    RiskClusterCount?: number;
     /**
       * 未检查的集群数量
       */
-    UncheckClusterCount: number;
+    UncheckClusterCount?: number;
     /**
       * 托管集群数量
       */
-    ManagedClusterCount: number;
+    ManagedClusterCount?: number;
     /**
       * 独立集群数量
       */
-    IndependentClusterCount: number;
+    IndependentClusterCount?: number;
     /**
       * 无风险的集群数量
       */
-    NoRiskClusterCount: number;
+    NoRiskClusterCount?: number;
     /**
       * 已经检查集群数
       */
-    CheckedClusterCount: number;
+    CheckedClusterCount?: number;
     /**
       * 自动检查集群数
       */
-    AutoCheckClusterCount: number;
+    AutoCheckClusterCount?: number;
     /**
       * 手动检查集群数
       */
-    ManualCheckClusterCount: number;
+    ManualCheckClusterCount?: number;
     /**
       * 检查失败集群数
       */
-    FailedClusterCount: number;
+    FailedClusterCount?: number;
+    /**
+      * 未导入的集群数量
+      */
+    NotImportedClusterCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -14430,99 +14434,103 @@ export interface DescribeClusterDetailResponse {
     /**
       * 集群id
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 集群名字
       */
-    ClusterName: string;
+    ClusterName?: string;
     /**
       * 当前集群扫描任务的进度，100表示扫描完成.
       */
-    ScanTaskProgress: number;
+    ScanTaskProgress?: number;
     /**
       * 集群版本
       */
-    ClusterVersion: string;
+    ClusterVersion?: string;
     /**
       * 运行时组件
       */
-    ContainerRuntime: string;
+    ContainerRuntime?: string;
     /**
       * 集群节点数
       */
-    ClusterNodeNum: number;
+    ClusterNodeNum?: number;
     /**
       * 集群状态 (Running 运行中 Creating 创建中 Abnormal 异常 )
       */
-    ClusterStatus: string;
+    ClusterStatus?: string;
     /**
       * 集群类型：为托管集群MANAGED_CLUSTER、独立集群INDEPENDENT_CLUSTER
       */
-    ClusterType: string;
+    ClusterType?: string;
     /**
       * 集群区域
       */
-    Region: string;
+    Region?: string;
     /**
       * 严重风险检查项的数量
       */
-    SeriousRiskCount: number;
+    SeriousRiskCount?: number;
     /**
       * 高风险检查项的数量
       */
-    HighRiskCount: number;
+    HighRiskCount?: number;
     /**
       * 中风险检查项的数量
       */
-    MiddleRiskCount: number;
+    MiddleRiskCount?: number;
     /**
       * 提示风险检查项的数量
       */
-    HintRiskCount: number;
+    HintRiskCount?: number;
     /**
       * 检查任务的状态
       */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
       * 防御容器状态
       */
-    DefenderStatus: string;
+    DefenderStatus?: string;
     /**
       * 扫描任务创建时间
       */
-    TaskCreateTime: string;
+    TaskCreateTime?: string;
     /**
       * 网络类型.PublicNetwork为公网类型,VPCNetwork为VPC网络
       */
-    NetworkType: string;
+    NetworkType?: string;
     /**
       * API Server地址
       */
-    ApiServerAddress: string;
+    ApiServerAddress?: string;
     /**
       * 节点数
       */
-    NodeCount: number;
+    NodeCount?: number;
     /**
       * 命名空间数
       */
-    NamespaceCount: number;
+    NamespaceCount?: number;
     /**
       * 工作负载数
       */
-    WorkloadCount: number;
+    WorkloadCount?: number;
     /**
       * Pod数量
       */
-    PodCount: number;
+    PodCount?: number;
     /**
       * Service数量
       */
-    ServiceCount: number;
+    ServiceCount?: number;
     /**
       * Ingress数量
       */
-    IngressCount: number;
+    IngressCount?: number;
+    /**
+      * 主节点的ip列表
+      */
+    MasterIps?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

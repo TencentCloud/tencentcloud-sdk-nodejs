@@ -568,18 +568,18 @@ export interface ModifyIp6RuleResponse {
  */
 export interface SetVpnGatewaysRenewFlagRequest {
   /**
-   * VPNGW字符型ID列表
+   * VPNGW字符型ID列表。可通过[DescribeVpnGateways](https://cloud.tencent.com/document/api/215/17514)接口返回值VpnGatewaySet中的VpnGatewayId获取。
    */
   VpnGatewayIds: Array<string>
 
   /**
-      * 自动续费标记[0, 1, 2]
-0表示默认状态(初始状态)， 1表示自动续费，2表示明确不自动续费
+      * 自动续费标记 [0, 1, 2]
+0表示默认状态(初始状态)， 1表示自动续费，2表示明确不自动续费。
       */
   AutoRenewFlag: number
 
   /**
-   * VPNGW类型['IPSEC', 'SSL']
+   * VPNGW类型['IPSEC', 'SSL']， 默认为IPSEC。
    */
   Type?: string
 }
@@ -1386,19 +1386,9 @@ export interface DescribeFlowLogsRequest {
 }
 
 /**
- * DeleteTemplateMember请求参数结构体
+ * 云联网（CCN）地域出带宽上限。
  */
-export interface DeleteTemplateMemberRequest {
-  /**
-   * 参数模板实例ID，支持IP地址、协议端口、IP地址组、协议端口组四种参数模板的实例ID。
-   */
-  TemplateId: string
-
-  /**
-   * 需要添加的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致。
-   */
-  TemplateMember: Array<MemberInfo>
-}
+export type CcnRegionBandwidthLimitInfo = null
 
 /**
  * CloneSecurityGroup请求参数结构体
@@ -2074,12 +2064,12 @@ export interface DescribeCcnAttachedInstancesRequest {
   CcnId?: string
 
   /**
-   * 排序字段。支持：`CcnId` `InstanceType` `InstanceId` `InstanceName` `InstanceRegion` `AttachedTime` `State`。
+   * 排序字段。支持：`CcnId` `InstanceType` `InstanceId` `InstanceName` `InstanceRegion` `AttachedTime` `State`。默认值：`AttachedTime`
    */
   OrderField?: string
 
   /**
-   * 排序方法。升序：`ASC`，倒序：`DESC`。
+   * 排序方法。升序：`ASC`，倒序：`DESC`。默认值：`ASC`
    */
   OrderDirection?: string
 }
@@ -2668,12 +2658,12 @@ export interface UnassignIpv6CidrBlockResponse {
  */
 export interface ModifyVpnGatewayRoutesRequest {
   /**
-   * Vpn网关id
+   * VPN网关实例ID。
    */
   VpnGatewayId: string
 
   /**
-   * 路由修改参数
+   * 路由修改参数。
    */
   Routes: Array<VpnGatewayRouteModify>
 }
@@ -2716,6 +2706,21 @@ export interface DeleteRoutesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDhcpIpAttribute请求参数结构体
+ */
+export interface ModifyDhcpIpAttributeRequest {
+  /**
+   * `DhcpIp`唯一`ID`，形如：`dhcpip-9o233uri`。
+   */
+  DhcpIpId: string
+
+  /**
+   * `DhcpIp`名称，可任意命名，但不得超过60个字符。
+   */
+  DhcpIpName: string
 }
 
 /**
@@ -4470,12 +4475,12 @@ export interface DescribeCcnsRequest {
   Limit?: number
 
   /**
-   * 排序字段。支持：`CcnId` `CcnName` `CreateTime` `State` `QosLevel`
+   * 排序字段。支持：`CcnId` `CcnName` `CreateTime` `State` `QosLevel`。默认值: `CreateTime`
    */
   OrderField?: string
 
   /**
-   * 排序方法。升序：`ASC`，倒序：`DESC`。
+   * 排序方法。升序：`ASC`，倒序：`DESC`。默认值：`ASC`
    */
   OrderDirection?: string
 }
@@ -4816,57 +4821,57 @@ export interface ModifyCcnRegionBandwidthLimitsTypeRequest {
   CcnId: string
 
   /**
-   * 云联网限速类型，INTER_REGION_LIMIT：地域间限速，OUTER_REGION_LIMIT：地域出口限速。
+   * 云联网限速类型，INTER_REGION_LIMIT：地域间限速，OUTER_REGION_LIMIT：地域出口限速。默认值：OUTER_REGION_LIMIT。
    */
   BandwidthLimitType?: string
 }
 
 /**
- * Vpn网关目的路由
+ * VPN网关目的路由
  */
 export interface VpnGatewayRoute {
   /**
-   * 目的端IDC网段
+   * 目的端IDC网段。
    */
   DestinationCidrBlock: string
 
   /**
-   * 下一跳类型（关联实例类型）可选值:"VPNCONN"(VPN通道), "CCN"(CCN实例)
+   * 下一跳类型（关联实例类型）可选值："VPNCONN"（VPN通道）， "CCN"（CCN实例）。
    */
   InstanceType: string
 
   /**
-   * 下一跳实例ID
+   * 下一跳实例ID。
    */
   InstanceId: string
 
   /**
-   * 优先级, 可选值: 0, 100
+   * 优先级，可选值：0，100。
    */
   Priority: number
 
   /**
-   * 启用状态, 可选值: "ENABLE"(启用), "DISABLE"(禁用)
+   * 启用状态，可选值："ENABLE"（启用），"DISABLE"  (禁用)。
    */
   Status: string
 
   /**
-   * 路由条目ID
+   * 路由条目ID。
    */
   RouteId?: string
 
   /**
-   * 路由类型, 可选值: "VPC"(VPC路由), "CCN"(云联网传播路由), "Static"(静态路由), "BGP"(BGP路由)
+   * 路由类型，可选值："VPC"（VPC路由），"CCN"（云联网传播路由），"Static"（静态路由），"BGP"（BGP路由）。
    */
   Type?: string
 
   /**
-   * 创建时间
+   * 创建时间。
    */
   CreateTime?: string
 
   /**
-   * 更新时间
+   * 更新时间。
    */
   UpdateTime?: string
 }
@@ -5920,18 +5925,79 @@ export interface CloneSecurityGroupResponse {
 }
 
 /**
- * ModifyDhcpIpAttribute请求参数结构体
+ * 用于描述云联网地域间限速带宽实例的信息。
  */
-export interface ModifyDhcpIpAttributeRequest {
+export interface CcnBandwidth {
   /**
-   * `DhcpIp`唯一`ID`，形如：`dhcpip-9o233uri`。
+   * 带宽所属的云联网ID。
    */
-  DhcpIpId: string
+  CcnId: string
 
   /**
-   * `DhcpIp`名称，可任意命名，但不得超过60个字符。
-   */
-  DhcpIpName: string
+      * 实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 实例的过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpiredTime: string
+
+  /**
+      * 带宽实例的唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionFlowControlId: string
+
+  /**
+      * 带宽是否自动续费的标记。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewFlag: string
+
+  /**
+      * 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcnRegionBandwidthLimit: CcnRegionBandwidthLimitInfo
+
+  /**
+      * 云市场实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MarketId: string
+
+  /**
+      * 实例所属用户主账号ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserAccountID: string
+
+  /**
+      * 是否跨境，`true`表示跨境，反之不跨境。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsCrossBorder: boolean
+
+  /**
+      * `true`表示封禁，地域间流量不通，`false`解禁，地域间流量正常
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSecurityLock: boolean
+
+  /**
+      * `POSTPAID`表示后付费，`PREPAID`表示预付费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceChargeType: string
+
+  /**
+      * 实例更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -6131,12 +6197,12 @@ NONEXTHOP：无下一跳；
  */
 export interface VpnGatewayRouteModify {
   /**
-   * Vpn网关路由ID
+   * VPN网关路由ID。
    */
   RouteId: string
 
   /**
-   * Vpn网关状态, ENABEL 启用, DISABLE禁用
+   * VPN网关状态, ENABLE 启用, DISABLE禁用。
    */
   Status: string
 }
@@ -6458,12 +6524,12 @@ export interface DescribeCcnAttachedInstancesResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 关联实例列表。
    */
-  InstanceSet: Array<CcnAttachedInstance>
+  InstanceSet?: Array<CcnAttachedInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6498,7 +6564,7 @@ export interface CreateVpnGatewayRoutesResponse {
   /**
    * VPN网关目的路由
    */
-  Routes: Array<VpnGatewayRoute>
+  Routes?: Array<VpnGatewayRoute>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7913,17 +7979,17 @@ export interface DescribeVpcResourceDashboardResponse {
  */
 export interface DescribeVpnGatewayCcnRoutesRequest {
   /**
-   * VPN网关实例ID
+   * VPN网关实例ID。
    */
   VpnGatewayId: string
 
   /**
-   * 偏移量
+   * 偏移量。默认值：0
    */
   Offset?: number
 
   /**
-   * 返回数量
+   * 返回数量。默认值：20
    */
   Limit?: number
 }
@@ -8678,7 +8744,7 @@ export interface DownloadCustomerGatewayConfigurationRequest {
   VpnConnectionId: string
 
   /**
-   * 对端网关厂商信息对象，可通过DescribeCustomerGatewayVendors获取。
+   * 对端网关厂商信息对象，可通过[DescribeCustomerGatewayVendors](https://cloud.tencent.com/document/api/215/17513)获取。
    */
   CustomerGatewayVendor: CustomerGatewayVendor
 
@@ -8758,6 +8824,21 @@ export interface HaVip {
    * 使用havip的业务标识。
    */
   Business: string
+}
+
+/**
+ * DeleteTemplateMember请求参数结构体
+ */
+export interface DeleteTemplateMemberRequest {
+  /**
+   * 参数模板实例ID，支持IP地址、协议端口、IP地址组、协议端口组四种参数模板的实例ID。
+   */
+  TemplateId: string
+
+  /**
+   * 需要添加的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致。
+   */
+  TemplateMember: Array<MemberInfo>
 }
 
 /**
@@ -9985,22 +10066,22 @@ export interface GetCcnRegionBandwidthLimitsRequest {
   Filters?: Array<Filter>
 
   /**
-   * 排序条件，目前支持带宽（BandwidthLimit）和过期时间（ExpireTime）
+   * 排序条件，目前支持带宽（`BandwidthLimit`）和过期时间（`ExpireTime`），默认按 `ExpireTime` 排序。
    */
   SortedBy?: string
 
   /**
-   * 偏移量
+   * 偏移量。
    */
   Offset?: number
 
   /**
-   * 返回数量
+   * 返回数量。
    */
   Limit?: number
 
   /**
-   * 排序方式，'ASC':升序,'DESC':降序。
+   * 排序方式，'ASC':升序,'DESC':降序。默认按'ASC'排序。
    */
   OrderBy?: string
 }
@@ -10160,9 +10241,15 @@ export interface DescribeCrossBorderFlowMonitorRequest {
  */
 export interface DescribeVpnGatewayRoutesResponse {
   /**
-   * VPN网关目的路由
+   * VPN网关目的路由。
    */
-  Routes: Array<VpnGatewayRoute>
+  Routes?: Array<VpnGatewayRoute>
+
+  /**
+      * 路由条数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10855,7 +10942,7 @@ export interface DescribeCustomerGatewaysRequest {
   Filters?: Array<Filter>
 
   /**
-   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
    */
   Offset?: number
 
@@ -11944,7 +12031,7 @@ export interface ModifyVpnGatewayRoutesResponse {
       * VPN路由信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Routes: Array<VpnGatewayRoute>
+  Routes?: Array<VpnGatewayRoute>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12600,7 +12687,7 @@ export interface DescribeSubnetsResponse {
  */
 export interface DescribeCustomerGatewaysResponse {
   /**
-   * 对端网关对象列表
+   * 对端网关对象列表。
    */
   CustomerGatewaySet?: Array<CustomerGateway>
 
@@ -12828,19 +12915,19 @@ export interface RemoveBandwidthPackageResourcesRequest {
  */
 export interface VpngwCcnRoutes {
   /**
-   * 路由信息ID
+   * 路由信息ID。
    */
   RouteId: string
 
   /**
-      * 路由信息是否启用
+      * 路由信息是否启用。
 ENABLE：启用该路由
 DISABLE：不启用该路由
       */
   Status?: string
 
   /**
-   * 路由CIDR
+   * 路由CIDR。
    */
   DestinationCidrBlock?: string
 }
@@ -13565,12 +13652,28 @@ export interface CcnBandwidthInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MarketId: string
+
+  /**
+      * 资源绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet?: Array<Tag>
 }
 
 /**
  * DescribeCrossBorderCcnRegionBandwidthLimits返回参数结构体
  */
 export interface DescribeCrossBorderCcnRegionBandwidthLimitsResponse {
+  /**
+   * 符合条件的对象总数。
+   */
+  TotalCount?: number
+
+  /**
+   * 云联网地域间限速带宽实例的信息。
+   */
+  CcnBandwidthSet?: Array<CcnBandwidth>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13738,12 +13841,12 @@ export interface DeleteNatGatewaySourceIpTranslationNatRuleRequest {
  */
 export interface ModifyVpnGatewayCcnRoutesRequest {
   /**
-   * VPN网关实例ID
+   * VPN网关实例ID。
    */
   VpnGatewayId: string
 
   /**
-   * 云联网路由（IDC网段）列表
+   * 云联网路由（IDC网段）列表。
    */
   Routes: Array<VpngwCcnRoutes>
 }
@@ -14176,22 +14279,22 @@ export interface DirectConnectSubnet {
  */
 export interface DescribeVpnGatewayRoutesRequest {
   /**
-   * VPN网关的ID
+   * VPN网关实例ID。
    */
   VpnGatewayId: string
 
   /**
-   * 过滤条件,  条件包括(DestinationCidr, InstanceId,InstanceType)
+   * 过滤条件,  条件包括(DestinationCidr, InstanceId,InstanceType)。
    */
   Filters?: Array<Filter>
 
   /**
-   * 偏移量, 默认0
+   * 偏移量, 默认0。
    */
   Offset?: number
 
   /**
-   * 单页个数, 默认20, 最大值100
+   * 单页个数, 默认20, 最大值100。
    */
   Limit?: number
 }
@@ -14201,7 +14304,7 @@ export interface DescribeVpnGatewayRoutesRequest {
  */
 export interface GetCcnRegionBandwidthLimitsResponse {
   /**
-      * 云联网（CCN）各地域出带宽带宽详情。
+      * 云联网（CCN）各地域出带宽详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CcnBandwidthSet?: Array<CcnBandwidthInfo>
@@ -14519,7 +14622,7 @@ export interface DeleteVpnGatewayRoutesRequest {
   VpnGatewayId: string
 
   /**
-   * 路由ID信息列表
+   * 路由ID信息列表，可以通过[DescribeVpnGatewayRoutes](https://cloud.tencent.com/document/api/215/57676)接口查询。
    */
   RouteIds: Array<string>
 }
@@ -14692,7 +14795,23 @@ export interface CreateRouteTableResponse {
 /**
  * DescribeCrossBorderCcnRegionBandwidthLimits请求参数结构体
  */
-export type DescribeCrossBorderCcnRegionBandwidthLimitsRequest = null
+export interface DescribeCrossBorderCcnRegionBandwidthLimitsRequest {
+  /**
+      * 过滤条件，目前`value`值个数只支持一个，可支持的字段有：
+<li>`source-region` 源地域，值形如：`["ap-guangzhou"]`</li> <li>`destination-region` 目的地域，值形如：`["ap-shanghai"]`</li> <li>`ccn-ids` 云联网ID数组，值形如：`["ccn-12345678"]`</li> <li>`user-account-id` 用户账号ID，值形如`["12345678"]`</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认0。
+   */
+  Offset?: number
+
+  /**
+   * 单页返回数据量可选值0到100之间的整数，默认20。
+   */
+  Limit?: number
+}
 
 /**
  * DescribeSnapshotAttachedInstances请求参数结构体
@@ -15456,7 +15575,7 @@ export interface InstanceChargePrepaid {
   Period: number
 
   /**
-   * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_MANUAL_RENEW
+   * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_AUTO_RENEW
    */
   RenewFlag?: string
 }
@@ -15537,7 +15656,7 @@ export interface AuditCrossBorderComplianceRequest {
   ServiceProvider: string
 
   /**
-   * 表单唯一`ID`。
+   * 表单唯一`ID`。可通过[DescribeCrossBorderCompliance](https://cloud.tencent.com/document/product/215/47838)接口查询ComplianceId信息
    */
   ComplianceId: number
 

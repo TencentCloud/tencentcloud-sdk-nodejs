@@ -6848,6 +6848,11 @@ export interface RebuildMediaTaskInput {
   EndTimeOffset: number
 
   /**
+   * 音画质重生模版号。
+   */
+  Definition?: number
+
+  /**
    * 画质修复控制参数。
    */
   RepairInfo: RepairInfo

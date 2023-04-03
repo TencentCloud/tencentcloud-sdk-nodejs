@@ -849,6 +849,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 印尼身份证识别
+
+默认接口请求频率限制：20次/秒。
      */
     async RecognizeIndonesiaIDCardOCR(req, cb) {
         return this.request("RecognizeIndonesiaIDCardOCR", req, cb);

@@ -68,6 +68,16 @@ it("cdwch.v20200915.ActionAlterCkUser", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeInstanceState", async function () {
+    try {
+       const data = await client.DescribeInstanceState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.OpenBackUp", async function () {
     try {
        const data = await client.OpenBackUp({})

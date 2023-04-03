@@ -103,6 +103,26 @@ video 纯视频
 }
 
 /**
+ * DescribeQuestionList请求参数结构体
+ */
+export interface DescribeQuestionListRequest {
+  /**
+   * 房间ID
+   */
+  RoomId: number
+
+  /**
+   * 分页查询当前页数，从1开始递增，默认值为1
+   */
+  Page?: number
+
+  /**
+   * 分页查询当前页数，从1开始递增，默认值为1
+   */
+  Limit?: number
+}
+
+/**
  * ModifyRoom返回参数结构体
  */
 export interface ModifyRoomResponse {
@@ -130,6 +150,36 @@ export interface DescribeAppDetailResponse {
    * 场景配置
    */
   SceneConfig?: Array<SceneItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSupervisors返回参数结构体
+ */
+export interface DescribeSupervisorsResponse {
+  /**
+   * 数据总量
+   */
+  Total?: number
+
+  /**
+   * 分页查询当前页数
+   */
+  Page?: number
+
+  /**
+   * 当前页数据量
+   */
+  Limit?: number
+
+  /**
+   * 巡课列表
+   */
+  UserIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -283,16 +333,6 @@ export interface BatchCreateGroupWithMembersResponse {
 }
 
 /**
- * AddGroupMember返回参数结构体
- */
-export interface AddGroupMemberResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GetRoomEvent返回参数结构体
  */
 export interface GetRoomEventResponse {
@@ -314,18 +354,89 @@ export interface GetRoomEventResponse {
 }
 
 /**
- * CreateGroupWithMembers返回参数结构体
+ * 成员记录信息。
  */
-export interface CreateGroupWithMembersResponse {
+export interface MemberRecord {
   /**
-   * 创建成功群组ID
+   * 用户ID。
    */
-  GroupId?: string
+  UserId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 用户名称。
    */
-  RequestId?: string
+  UserName: string
+
+  /**
+   * 在线时长，单位秒。
+   */
+  PresentTime: number
+
+  /**
+   * 是否开启摄像头。
+   */
+  Camera: number
+
+  /**
+   * 是否开启麦克风。
+   */
+  Mic: number
+
+  /**
+   * 是否禁言。
+   */
+  Silence: number
+
+  /**
+   * 回答问题数量。
+   */
+  AnswerQuestions: number
+
+  /**
+   * 举手数量。
+   */
+  HandUps: number
+
+  /**
+   * 首次进入房间的unix时间戳。
+   */
+  FirstJoinTimestamp: number
+
+  /**
+   * 最后一次退出房间的unix时间戳。
+   */
+  LastQuitTimestamp: number
+
+  /**
+   * 奖励次数。
+   */
+  Rewords: number
+
+  /**
+   * 用户IP。
+   */
+  IPAddress?: string
+
+  /**
+   * 用户位置信息。
+   */
+  Location?: string
+
+  /**
+   * 用户设备平台信息。0:unknown  1:windows  2:mac  3:android  4:ios  5:web   6:h5   7:miniprogram （小程序）
+   */
+  Device?: number
+
+  /**
+   * 每个成员上麦次数。
+   */
+  PerMemberMicCount?: number
+
+  /**
+      * 每个成员发送消息数量。
+
+      */
+  PerMemberMessageCount?: number
 }
 
 /**
@@ -959,6 +1070,29 @@ export interface CreateGroupWithSubGroupResponse {
 }
 
 /**
+ * 单条消息体内容
+ */
+export interface MessageItem {
+  /**
+      * 消息类型。0表示文本消息，1表示图片消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MessageType?: number
+
+  /**
+      * 文本消息内容。message type为0时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TextMessage?: string
+
+  /**
+      * 图片消息URL。 message type为1时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageMessage?: string
+}
+
+/**
  * 获取群组列表返回的群组信息
  */
 export interface GroupInfo {
@@ -1176,6 +1310,26 @@ export interface DeleteRecordResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAnswerList请求参数结构体
+ */
+export interface DescribeAnswerListRequest {
+  /**
+   * 问题ID
+   */
+  QuestionId: string
+
+  /**
+   * 1
+   */
+  Page?: number
+
+  /**
+   * 100
+   */
+  Limit?: number
 }
 
 /**
@@ -1672,6 +1826,27 @@ export interface EventDataInfo {
 }
 
 /**
+ * DescribeAnswerList返回参数结构体
+ */
+export interface DescribeAnswerListResponse {
+  /**
+   * 符合查询条件的房间答案总数
+   */
+  Total?: number
+
+  /**
+      * 房间提问答案列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnswerInfo?: Array<AnswerInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRoomStatistics返回参数结构体
  */
 export interface DescribeRoomStatisticsResponse {
@@ -1731,6 +1906,27 @@ export interface DeleteDocumentRequest {
    * 文档ID。
    */
   DocumentId: string
+}
+
+/**
+ * DescribeSupervisors请求参数结构体
+ */
+export interface DescribeSupervisorsRequest {
+  /**
+      * 低代码互动课堂的SdkAppId。
+
+      */
+  SdkAppId: number
+
+  /**
+   * 每页数据量，最大100。 不填默认20.
+   */
+  Limit?: number
+
+  /**
+   * 分页查询当前页数，从1开始递增，不填默认为1。
+   */
+  Page?: number
 }
 
 /**
@@ -1794,89 +1990,18 @@ export interface GetWatermarkRequest {
 }
 
 /**
- * 成员记录信息。
+ * CreateGroupWithMembers返回参数结构体
  */
-export interface MemberRecord {
+export interface CreateGroupWithMembersResponse {
   /**
-   * 用户ID。
+   * 创建成功群组ID
    */
-  UserId: string
+  GroupId?: string
 
   /**
-   * 用户名称。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName: string
-
-  /**
-   * 在线时长，单位秒。
-   */
-  PresentTime: number
-
-  /**
-   * 是否开启摄像头。
-   */
-  Camera: number
-
-  /**
-   * 是否开启麦克风。
-   */
-  Mic: number
-
-  /**
-   * 是否禁言。
-   */
-  Silence: number
-
-  /**
-   * 回答问题数量。
-   */
-  AnswerQuestions: number
-
-  /**
-   * 举手数量。
-   */
-  HandUps: number
-
-  /**
-   * 首次进入房间的unix时间戳。
-   */
-  FirstJoinTimestamp: number
-
-  /**
-   * 最后一次退出房间的unix时间戳。
-   */
-  LastQuitTimestamp: number
-
-  /**
-   * 奖励次数。
-   */
-  Rewords: number
-
-  /**
-   * 用户IP。
-   */
-  IPAddress?: string
-
-  /**
-   * 用户位置信息。
-   */
-  Location?: string
-
-  /**
-   * 用户设备平台信息。0:unknown  1:windows  2:mac  3:android  4:ios  5:web   6:h5   7:miniprogram （小程序）
-   */
-  Device?: number
-
-  /**
-   * 每个成员上麦次数。
-   */
-  PerMemberMicCount?: number
-
-  /**
-      * 每个成员发送消息数量。
-
-      */
-  PerMemberMessageCount?: number
+  RequestId?: string
 }
 
 /**
@@ -1982,6 +2107,21 @@ export interface LoginUserRequest {
    * 注册获取的用户id。
    */
   UserId: string
+}
+
+/**
+ * 每个选项答题人数统计
+ */
+export interface AnswerStat {
+  /**
+   * 选项（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
+   */
+  Answer?: number
+
+  /**
+   * 答题人数
+   */
+  Count?: number
 }
 
 /**
@@ -2173,6 +2313,36 @@ coteaching 双师
 }
 
 /**
+ * 房间问答问题详情
+ */
+export interface AnswerInfo {
+  /**
+   * 用户名
+   */
+  Name?: string
+
+  /**
+   * 答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
+   */
+  Answer?: number
+
+  /**
+   * 答题用时
+   */
+  CostTime?: number
+
+  /**
+   * 用户ID
+   */
+  UserId?: string
+
+  /**
+   * 答案是否正确（1正确0错误）
+   */
+  IsCorrect?: number
+}
+
+/**
  * DescribeRoomStatistics请求参数结构体
  */
 export interface DescribeRoomStatisticsRequest {
@@ -2231,6 +2401,58 @@ export interface LoginOriginIdResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeQuestionList返回参数结构体
+ */
+export interface DescribeQuestionListResponse {
+  /**
+   * 符合查询条件的房间问答问题总数
+   */
+  Total?: number
+
+  /**
+      * 房间问答问题列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QuestionInfo?: Array<QuestionInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 房间问答答案详情
+ */
+export interface QuestionInfo {
+  /**
+   * 问题ID
+   */
+  QuestionId?: string
+
+  /**
+   * 问题内容
+   */
+  QuestionContent?: string
+
+  /**
+   * 倒计时答题设置的秒数（0 表示不计时）
+   */
+  Duration?: number
+
+  /**
+   * 正确答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
+   */
+  CorrectAnswer?: number
+
+  /**
+      * 每个选项答题人数统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnswerStats?: Array<AnswerStat>
 }
 
 /**
@@ -2299,26 +2521,13 @@ export interface DescribeSdkAppIdUsersRequest {
 }
 
 /**
- * 单条消息体内容
+ * AddGroupMember返回参数结构体
  */
-export interface MessageItem {
+export interface AddGroupMemberResponse {
   /**
-      * 消息类型。0表示文本消息，1表示图片消息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MessageType?: number
-
-  /**
-      * 文本消息内容。message type为0时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TextMessage?: string
-
-  /**
-      * 图片消息URL。 message type为1时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImageMessage?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2487,6 +2696,11 @@ export interface CreateRoomResponse {
  * DescribeDeveloper返回参数结构体
  */
 export interface DescribeDeveloperResponse {
+  /**
+   * 服务商ID
+   */
+  DeveloperId?: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
