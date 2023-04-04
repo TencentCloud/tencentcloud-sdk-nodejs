@@ -418,6 +418,8 @@ var trdp_1 = require("./trdp");
 Object.defineProperty(exports, "trdp", { enumerable: true, get: function () { return trdp_1.trdp; } });
 var trp_1 = require("./trp");
 Object.defineProperty(exports, "trp", { enumerable: true, get: function () { return trp_1.trp; } });
+var trro_1 = require("./trro");
+Object.defineProperty(exports, "trro", { enumerable: true, get: function () { return trro_1.trro; } });
 var trtc_1 = require("./trtc");
 Object.defineProperty(exports, "trtc", { enumerable: true, get: function () { return trtc_1.trtc; } });
 var tse_1 = require("./tse");

@@ -1,0 +1,819 @@
+/**
+ * DescribeDeviceSessionDetails返回参数结构体
+ */
+export interface DescribeDeviceSessionDetailsResponse {
+    /**
+      * 按设备区分的会话详细数据
+      */
+    Details: Array<SessionDeviceDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteProject请求参数结构体
+ */
+export interface DeleteProjectRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+}
+/**
+ * 权限信息
+ */
+export interface PolicyInfo {
+    /**
+      * 远端设备ID
+      */
+    RemoteDeviceId: string;
+    /**
+      * 关联的现场设备ID
+      */
+    FieldDeviceIds: Array<string>;
+    /**
+      * 最近添加时间
+      */
+    ModifyTime: string;
+}
+/**
+ * ModifyDevice返回参数结构体
+ */
+export interface ModifyDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePolicy返回参数结构体
+ */
+export interface DescribePolicyResponse {
+    /**
+      * 权限模式
+      */
+    PolicyMode: string;
+    /**
+      * 返回的权限模式是否为当前生效的权限模式
+      */
+    PolicyEnabled: boolean;
+    /**
+      * 权限信息列表
+      */
+    PolicyInfo: Array<PolicyInfo>;
+    /**
+      * 本次返回的权限信息数量
+      */
+    Num: number;
+    /**
+      * 权限信息总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BatchDeleteDevices请求参数结构体
+ */
+export interface BatchDeleteDevicesRequest {
+    /**
+      * 目标删除设备所属项目ID
+      */
+    ProjectId: string;
+    /**
+      * 目标删除设备的设备ID数组
+      */
+    DeviceIds: Array<string>;
+}
+/**
+ * 会话信息
+ */
+export interface SessionInfo {
+    /**
+      * 会话ID
+      */
+    SessionId: string;
+    /**
+      * 远端设备ID
+      */
+    RemoteDeviceId: string;
+    /**
+      * 现场设备ID
+      */
+    FieldDeviceId: string;
+    /**
+      * 分辨率
+      */
+    Resolution: string;
+    /**
+      * 会话开始时间
+      */
+    StartTime: number;
+    /**
+      * 会话结束时间
+      */
+    EndTime: number;
+    /**
+      * 通话质量：good|normal|bad，对应优良差
+      */
+    Quality: string;
+}
+/**
+ * DescribeDeviceInfo请求参数结构体
+ */
+export interface DescribeDeviceInfoRequest {
+    /**
+      * 目标设备所属项目ID
+      */
+    ProjectId: string;
+    /**
+      * 目标设备ID
+      */
+    DeviceId: string;
+}
+/**
+ * DescribeSessionStatisticsByInterval返回参数结构体
+ */
+export interface DescribeSessionStatisticsByIntervalResponse {
+    /**
+      * 各时间段的会话统计数据
+      */
+    SessionStatistics: Array<SessionIntervalStatistic>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProjectInfo请求参数结构体
+ */
+export interface DescribeProjectInfoRequest {
+    /**
+      * 目标项目ID
+      */
+    ProjectId?: string;
+}
+/**
+ * ModifyPolicy请求参数结构体
+ */
+export interface ModifyPolicyRequest {
+    /**
+      * 修改权限配置的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 修改权限配置的远端设备ID
+      */
+    RemoteDeviceId: string;
+    /**
+      * 权限修改涉及的现场设备ID数组
+      */
+    FieldDeviceIds: Array<string>;
+    /**
+      * 修改的目标权限模式，black为黑名单，white为白名单
+      */
+    PolicyMode: string;
+    /**
+      * 修改模式，add为新增（添加现场设备I关联），remove为删除（解除现场设备关联），set为设置（更新现场设备关联）
+      */
+    ModifyMode: string;
+}
+/**
+ * DescribeDeviceInfo返回参数结构体
+ */
+export interface DescribeDeviceInfoResponse {
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 设备类型，field为现场设备（被控方），remote为远端设备（操控方）
+      */
+    DeviceType: string;
+    /**
+      * 设备状态，offline为离线，ready为在线准备，connected为会话中
+      */
+    DeviceStatus: string;
+    /**
+      * 设备状态最后更新时间
+      */
+    LastReportTime: string;
+    /**
+      * 设备信息最后修改时间
+      */
+    ModifyTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProjectList返回参数结构体
+ */
+export interface DescribeProjectListResponse {
+    /**
+      * 项目信息数组
+      */
+    Projects: Array<ProjectInfo>;
+    /**
+      * 项目总数
+      */
+    Total: number;
+    /**
+      * 本次返回的项目数
+      */
+    Num: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyProject返回参数结构体
+ */
+export interface ModifyProjectResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BatchDeletePolicy返回参数结构体
+ */
+export interface BatchDeletePolicyResponse {
+    /**
+      * 删除权限配置失败的远端设备ID列表
+      */
+    FailedRemoteDeviceIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePolicy请求参数结构体
+ */
+export interface DescribePolicyRequest {
+    /**
+      * 查看权限的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 查看的权限模式，black为黑名单，white为白名单，不填默认为当前项目生效的权限模式
+      */
+    PolicyMode?: string;
+    /**
+      * 模糊匹配模式，remoteMatch为远端设备ID匹配，fieldMatch为现场ID匹配，不填默认为remoteMatch
+      */
+    SearchMode?: string;
+    /**
+      * 模糊匹配关键字，不填默认不进行模糊匹配
+      */
+    SearchWords?: string;
+    /**
+      * 每页返回的最大数量，不填默认为10
+      */
+    PageSize?: number;
+    /**
+      * 当前页码，不填默认为1（首页）
+      */
+    PageNumber?: number;
+}
+/**
+ * DescribeSessionStatistics请求参数结构体
+ */
+export interface DescribeSessionStatisticsRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 设备ID
+      */
+    DeviceId?: string;
+    /**
+      * 起始时间，单位：秒
+      */
+    StartTime?: number;
+    /**
+      * 结束时间，单位：秒
+      */
+    EndTime?: number;
+}
+/**
+ * BatchDeleteDevices返回参数结构体
+ */
+export interface BatchDeleteDevicesResponse {
+    /**
+      * 删除失败的设备ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedDeviceIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyProject请求参数结构体
+ */
+export interface ModifyProjectRequest {
+    /**
+      * 目标修改项目的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 修改后的项目名称，不填则不修改
+      */
+    ProjectName?: string;
+    /**
+      * 修改后的项目描述，不填则不修改
+      */
+    ProjectDescription?: string;
+    /**
+      * 修改后的权限模式，black为黑名单，white为白名单,不填则不修改
+      */
+    PolicyMode?: string;
+}
+/**
+ * ModifyDevice请求参数结构体
+ */
+export interface ModifyDeviceRequest {
+    /**
+      * 要修改设备归属项目的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 要修改设备的设备ID
+      */
+    DeviceId: string;
+    /**
+      * 修改后的设备名称，不填则不修改
+      */
+    DeviceName?: string;
+    /**
+      * 修改后的设备认证口令，不填则不修改
+      */
+    DeviceToken?: string;
+}
+/**
+ * DescribeProjectList请求参数结构体
+ */
+export interface DescribeProjectListRequest {
+    /**
+      * 每页返回的最大项目数量，不填默认为10
+      */
+    PageSize?: number;
+    /**
+      * 当前页码，不填默认为1（首页）
+      */
+    PageNumber?: number;
+}
+/**
+ * 项目信息
+ */
+export interface ProjectInfo {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 项目名称
+      */
+    ProjectName: string;
+    /**
+      * 项目描述
+      */
+    ProjectDescription: string;
+    /**
+      * 项目权限模式，black为黑名单，white为白名单
+      */
+    PolicyMode: string;
+    /**
+      * 项目信息修改时间
+      */
+    ModifyTime: string;
+}
+/**
+ * BatchDeletePolicy请求参数结构体
+ */
+export interface BatchDeletePolicyRequest {
+    /**
+      * 删除权限配置的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 删除权限配置的远端设备ID列表
+      */
+    RemoteDeviceIds: Array<string>;
+    /**
+      * 删除权限配置的权限模式, black为黑名单，white为白名单
+      */
+    PolicyMode: string;
+}
+/**
+ * DescribeDeviceSessionList返回参数结构体
+ */
+export interface DescribeDeviceSessionListResponse {
+    /**
+      * 总个数
+      */
+    Total: number;
+    /**
+      * 会话列表
+      */
+    DeviceSessionList: Array<SessionInfo>;
+    /**
+      * 本页数量
+      */
+    Num: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProjectInfo返回参数结构体
+ */
+export interface DescribeProjectInfoResponse {
+    /**
+      * 项目名称
+      */
+    ProjectName: string;
+    /**
+      * 项目描述
+      */
+    ProjectDescription: string;
+    /**
+      * 项目权限模式，black为黑名单，white为白名单
+      */
+    PolicyMode: string;
+    /**
+      * 项目信息修改时间
+      */
+    ModifyTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceList返回参数结构体
+ */
+export interface DescribeDeviceListResponse {
+    /**
+      * 设备信息列表
+      */
+    Devices: Array<DeviceInfo>;
+    /**
+      * 设备总数
+      */
+    Total: number;
+    /**
+      * 本次返回的设备数
+      */
+    Num: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteProject返回参数结构体
+ */
+export interface DeleteProjectResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceList请求参数结构体
+ */
+export interface DescribeDeviceListRequest {
+    /**
+      * 设备所属项目ID
+      */
+    ProjectId: string;
+    /**
+      * 设备类型筛选，不填默认为全部设备类型
+      */
+    DeviceType?: string;
+    /**
+      * 对设备ID或Name按关键字进行模糊匹配，不填则不进行模糊匹配
+      */
+    SearchWords?: string;
+    /**
+      * 每页返回的最大设备数，不填默认为10
+      */
+    PageSize?: number;
+    /**
+      * 当前页码，不填默认为1（首页）
+      */
+    PageNumber?: number;
+}
+/**
+ * 会话数据详单（按设备区分）
+ */
+export interface SessionDeviceDetail {
+    /**
+      * 设备类型：field或remote
+      */
+    DeviceType: string;
+    /**
+      * 起始点位时间，单位：秒
+      */
+    StartTime: number;
+    /**
+      * 结束点位时间，单位：秒
+      */
+    EndTime: number;
+    /**
+      * 会话ID
+      */
+    SessionId: string;
+    /**
+      * 码率，单位：kbps
+      */
+    Rate: Array<number>;
+    /**
+      * 帧率
+      */
+    Fps: Array<number>;
+    /**
+      * 丢包率，单位：%
+      */
+    Lost: Array<number>;
+    /**
+      * 网络时延，单位：ms
+      */
+    NetworkLatency: Array<number>;
+    /**
+      * 视频时延，单位：ms
+      */
+    VideoLatency: Array<number>;
+    /**
+      * CPU使用率，单位：%
+      */
+    CpuUsed: Array<number>;
+    /**
+      * 内存使用率，单位：%
+      */
+    MemUsed: Array<number>;
+    /**
+      * 时间偏移量，单位：秒
+      */
+    TimeOffset: Array<number>;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+}
+/**
+ * CreateDevice返回参数结构体
+ */
+export interface CreateDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSessionStatisticsByInterval请求参数结构体
+ */
+export interface DescribeSessionStatisticsByIntervalRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 统计时间间隔：hour|day|month
+      */
+    StatisticInterval: string;
+    /**
+      * 设备ID
+      */
+    DeviceId?: string;
+    /**
+      * 起始时间，单位：秒
+      */
+    StartTime?: number;
+    /**
+      * 结束时间，单位：秒
+      */
+    EndTime?: number;
+}
+/**
+ * CreateDevice请求参数结构体
+ */
+export interface CreateDeviceRequest {
+    /**
+      * 创建设备所归属的项目ID
+      */
+    ProjectId: string;
+    /**
+      * 创建设备ID，项目内需要唯一，由小写英文字母、数字和下划线构成，长度不超过18
+      */
+    DeviceId: string;
+    /**
+      * 创建设备名称，长度小于24, 可包含中文、数字、英文字母和下划线
+      */
+    DeviceName: string;
+    /**
+      * 设备类型，field为现场设备（受控设备），remote为远端设备（操控设备），不填默认为field
+      */
+    DeviceType: string;
+    /**
+      * 设备认证口令，由大小写英文字母和数字构成，须为16位
+      */
+    DeviceToken: string;
+}
+/**
+ * DescribeSessionStatistics返回参数结构体
+ */
+export interface DescribeSessionStatisticsResponse {
+    /**
+      * 会话数量
+      */
+    SessionNum: number;
+    /**
+      * 通话时长，单位：分钟
+      */
+    TotalDuration: number;
+    /**
+      * 活跃现场设备数
+      */
+    ActiveFieldDeviceNum: number;
+    /**
+      * 活跃远端设备数
+      */
+    ActiveRemoteDeviceNum: number;
+    /**
+      * 优良会话占比，单位：%
+      */
+    NotBadSessionRatio: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceSessionDetails请求参数结构体
+ */
+export interface DescribeDeviceSessionDetailsRequest {
+    /**
+      * 会话ID
+      */
+    SessionId: string;
+}
+/**
+ * 设备信息
+ */
+export interface DeviceInfo {
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 设备状态，offline为离线，ready为在线准备，connected为会话中
+      */
+    DeviceStatus: string;
+    /**
+      * 设备类型，field为现场设备（受控方），remote为远端设备（操控方）
+      */
+    DeviceType: string;
+    /**
+      * 设备信息最近修改时间
+      */
+    ModifyTime: string;
+    /**
+      * 设备状态最近更新时间
+      */
+    LastReportTime: string;
+    /**
+      * 设备所属项目Id
+      */
+    ProjectId: string;
+}
+/**
+ * DescribeDeviceSessionList请求参数结构体
+ */
+export interface DescribeDeviceSessionListRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 页码，从1开始
+      */
+    PageNumber: number;
+    /**
+      * 每页个数
+      */
+    PageSize: number;
+    /**
+      * 设备ID
+      */
+    DeviceId?: string;
+    /**
+      * 开始时间
+      */
+    StartTime?: number;
+    /**
+      * 结束时间
+      */
+    EndTime?: number;
+}
+/**
+ * ModifyPolicy返回参数结构体
+ */
+export interface ModifyPolicyResponse {
+    /**
+      * 添加关联失败的现场设备ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedInsertIds: Array<string>;
+    /**
+      * 解除关联失败的现场设备ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedDeleteIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateProject返回参数结构体
+ */
+export interface CreateProjectResponse {
+    /**
+      * 项目ID，长度为16位
+      */
+    ProjectId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 单位时间间隔的会话统计数据
+ */
+export interface SessionIntervalStatistic {
+    /**
+      * 活跃现场设备数
+      */
+    ActiveFieldDeviceNum: number;
+    /**
+      * 活跃远端设备数
+      */
+    ActiveRemoteDeviceNum: number;
+    /**
+      * 会话数量
+      */
+    SessionNum: number;
+    /**
+      * 会话时长，单位：分钟
+      */
+    TotalDuration: number;
+    /**
+      * 时间戳，单位：秒
+      */
+    StartTime: number;
+    /**
+      * 时间戳，单位：秒
+      */
+    EndTime: number;
+    /**
+      * 优良会话占比，单位：%
+      */
+    NotBadSessionRatio: number;
+}
+/**
+ * CreateProject请求参数结构体
+ */
+export interface CreateProjectRequest {
+    /**
+      * 项目名称，长度不超过24个字符
+      */
+    ProjectName: string;
+    /**
+      * 项目描述，长度不超过120个字符，不填默认为空
+      */
+    ProjectDescription?: string;
+    /**
+      * 权限模式，black为黑名单，white为白名单，不填默认为black
+      */
+    PolicyMode?: string;
+}

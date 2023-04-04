@@ -207,6 +207,7 @@ export { tms } from "./tms";
 export { tmt } from "./tmt";
 export { trdp } from "./trdp";
 export { trp } from "./trp";
+export { trro } from "./trro";
 export { trtc } from "./trtc";
 export { tse } from "./tse";
 export { tsf } from "./tsf";
