@@ -7315,7 +7315,7 @@ export interface Bucket {
   Key: string
 
   /**
-   * ip等于10.0.0.8访问了26次实例，即桶内文档数量。
+   * key值出现的次数。
    */
   Count: number
 }

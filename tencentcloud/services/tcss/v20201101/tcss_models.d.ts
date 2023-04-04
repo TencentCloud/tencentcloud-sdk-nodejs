@@ -8874,109 +8874,109 @@ export interface DescribeVirusTaskListResponse {
  */
 export interface DescribeAssetHostDetailResponse {
     /**
-      * 云镜uuid
+      * 容器安全uuid
       */
-    UUID: string;
+    UUID?: string;
     /**
       * 更新时间
       */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
       * 主机名
       */
-    HostName: string;
+    HostName?: string;
     /**
       * 主机分组
       */
-    Group: string;
+    Group?: string;
     /**
       * 主机IP
       */
-    HostIP: string;
+    HostIP?: string;
     /**
       * 操作系统
       */
-    OsName: string;
+    OsName?: string;
     /**
       * agent版本
       */
-    AgentVersion: string;
+    AgentVersion?: string;
     /**
       * 内核版本
       */
-    KernelVersion: string;
+    KernelVersion?: string;
     /**
       * docker版本
       */
-    DockerVersion: string;
+    DockerVersion?: string;
     /**
       * docker api版本
       */
-    DockerAPIVersion: string;
+    DockerAPIVersion?: string;
     /**
       * docker go 版本
       */
-    DockerGoVersion: string;
+    DockerGoVersion?: string;
     /**
       * docker 文件系统类型
       */
-    DockerFileSystemDriver: string;
+    DockerFileSystemDriver?: string;
     /**
       * docker root 目录
       */
-    DockerRootDir: string;
+    DockerRootDir?: string;
     /**
       * 镜像数
       */
-    ImageCnt: number;
+    ImageCnt?: number;
     /**
       * 容器数
       */
-    ContainerCnt: number;
+    ContainerCnt?: number;
     /**
       * k8s IP
       */
-    K8sMasterIP: string;
+    K8sMasterIP?: string;
     /**
       * k8s version
       */
-    K8sVersion: string;
+    K8sVersion?: string;
     /**
       * kube proxy
       */
-    KubeProxyVersion: string;
+    KubeProxyVersion?: string;
     /**
       * "UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中
       */
-    Status: string;
+    Status?: string;
     /**
       * 是否Containerd
       */
-    IsContainerd: boolean;
+    IsContainerd?: boolean;
     /**
       * 主机来源;"TENCENTCLOUD":"腾讯云服务器","OTHERCLOUD":"非腾讯云服务器"
       */
-    MachineType: string;
+    MachineType?: string;
     /**
       * 外网ip
       */
-    PublicIp: string;
+    PublicIp?: string;
     /**
       * 主机实例ID
       */
-    InstanceID: string;
+    InstanceID?: string;
     /**
       * 地域ID
       */
-    RegionID: number;
+    RegionID?: number;
     /**
       * 所属项目
       */
-    Project: ProjectInfo;
+    Project?: ProjectInfo;
     /**
       * 标签
       */
-    Tags: Array<TagInfo>;
+    Tags?: Array<TagInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

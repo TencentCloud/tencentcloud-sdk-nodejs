@@ -54,7 +54,7 @@ import {
   DescribeUserClbWafRegionsResponse,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
-  QPSPackageNew,
+  DescribeVipInfoRequest,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
@@ -79,6 +79,7 @@ import {
   DomainPackageNew,
   RuleList,
   PostAttackDownloadTaskResponse,
+  QPSPackageNew,
   DescribeDomainDetailsSaasRequest,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
@@ -118,12 +119,14 @@ import {
   Strategy,
   AccessFullTextInfo,
   DescribeIpHitItemsRequest,
+  DescribeVipInfoResponse,
   DescribeRuleLimitRequest,
   AccessRuleInfo,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
+  VipInfo,
   DeleteAttackDownloadRecordRequest,
   DescribeWafThreatenIntelligenceResponse,
   AddDomainWhiteRuleRequest,
@@ -313,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTrendResponse) => void
   ): Promise<DescribeFlowTrendResponse> {
     return this.request("DescribeFlowTrend", req, cb)
+  }
+
+  /**
+   * 根据过滤条件查询VIP信息
+   */
+  async DescribeVipInfo(
+    req: DescribeVipInfoRequest,
+    cb?: (error: string, rep: DescribeVipInfoResponse) => void
+  ): Promise<DescribeVipInfoResponse> {
+    return this.request("DescribeVipInfo", req, cb)
   }
 
   /**

@@ -299,7 +299,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 渠道版删除员工绑定角色
+   * 删除员工绑定角色
    */
   async ChannelDeleteRoleUsers(
     req: ChannelDeleteRoleUsersRequest,
@@ -526,7 +526,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 渠道办查询用户角色
+   * 查询用户角色
    */
   async ChannelDescribeRoles(
     req: ChannelDescribeRolesRequest,
@@ -547,7 +547,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 渠道版绑定员工角色
+   * 绑定员工角色
    */
   async ChannelCreateUserRoles(
     req: ChannelCreateUserRolesRequest,

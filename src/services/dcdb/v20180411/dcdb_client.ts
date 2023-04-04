@@ -47,6 +47,7 @@ import {
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   DescribeDBParametersResponse,
+  DescribeDatabaseTableRequest,
   IsolateHourDCDBInstanceRequest,
   ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
@@ -75,6 +76,7 @@ import {
   DatabaseProcedure,
   DescribeDCDBPriceRequest,
   SwitchDBInstanceHAResponse,
+  DescribeBackupFilesResponse,
   ParamModifyResult,
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
@@ -104,7 +106,7 @@ import {
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
-  DescribeDatabaseTableRequest,
+  DescribeBackupFilesRequest,
   DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   TerminateDedicatedDBInstanceRequest,
@@ -121,6 +123,7 @@ import {
   DescribeShardSpecResponse,
   DescribeDCDBShardsResponse,
   ZonesInfo,
+  InstanceBackupFileItem,
   CreateHourDCDBInstanceResponse,
   Database,
   GrantAccountPrivilegesResponse,
@@ -632,6 +635,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void
   ): Promise<CloseDBExtranetAccessResponse> {
     return this.request("CloseDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBackupFiles)用于查看备份文件列表。
+   */
+  async DescribeBackupFiles(
+    req: DescribeBackupFilesRequest,
+    cb?: (error: string, rep: DescribeBackupFilesResponse) => void
+  ): Promise<DescribeBackupFilesResponse> {
+    return this.request("DescribeBackupFiles", req, cb)
   }
 
   /**

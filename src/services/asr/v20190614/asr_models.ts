@@ -779,7 +779,7 @@ export interface DeleteCustomizationResponse {
  */
 export interface TaskStatus {
   /**
-   * 任务标识。
+   * 任务标识。注意：TaskId数据类型为uint64。
    */
   TaskId: number
 

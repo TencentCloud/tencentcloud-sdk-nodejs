@@ -438,6 +438,16 @@ it("dcdb.v20180411.CloseDBExtranetAccess", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeBackupFiles", async function () {
+    try {
+       const data = await client.DescribeBackupFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.ModifyDBEncryptAttributes", async function () {
     try {
        const data = await client.ModifyDBEncryptAttributes({})

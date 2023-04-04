@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
     /**
-     * 渠道版删除员工绑定角色
+     * 删除员工绑定角色
      */
     ChannelDeleteRoleUsers(req: ChannelDeleteRoleUsersRequest, cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void): Promise<ChannelDeleteRoleUsersResponse>;
     /**
@@ -187,7 +187,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     CreateFlowsByTemplates(req: CreateFlowsByTemplatesRequest, cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void): Promise<CreateFlowsByTemplatesResponse>;
     /**
-     * 渠道办查询用户角色
+     * 查询用户角色
      */
     ChannelDescribeRoles(req: ChannelDescribeRolesRequest, cb?: (error: string, rep: ChannelDescribeRolesResponse) => void): Promise<ChannelDescribeRolesResponse>;
     /**
@@ -196,7 +196,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
-     * 渠道版绑定员工角色
+     * 绑定员工角色
      */
     ChannelCreateUserRoles(req: ChannelCreateUserRolesRequest, cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void): Promise<ChannelCreateUserRolesResponse>;
     /**

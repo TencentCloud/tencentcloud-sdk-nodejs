@@ -178,6 +178,16 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
     }
 })
 
+it("waf.v20180125.DescribeVipInfo", async function () {
+    try {
+       const data = await client.DescribeVipInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeUserCdcClbWafRegions", async function () {
     try {
        const data = await client.DescribeUserCdcClbWafRegions({})

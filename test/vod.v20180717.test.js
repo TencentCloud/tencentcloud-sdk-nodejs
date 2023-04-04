@@ -138,6 +138,16 @@ it("vod.v20180717.ProcessMediaByProcedure", async function () {
     }
 })
 
+it("vod.v20180717.ModifyRebuildMediaTemplate", async function () {
+    try {
+       const data = await client.ModifyRebuildMediaTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DeleteTranscodeTemplate", async function () {
     try {
        const data = await client.DeleteTranscodeTemplate({})
@@ -518,6 +528,16 @@ it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
     }
 })
 
+it("vod.v20180717.DeleteRebuildMediaTemplate", async function () {
+    try {
+       const data = await client.DeleteRebuildMediaTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.LiveRealTimeClip", async function () {
     try {
        const data = await client.LiveRealTimeClip({})
@@ -671,6 +691,16 @@ it("vod.v20180717.DescribeImageReviewUsageData", async function () {
 it("vod.v20180717.CreateStorageRegion", async function () {
     try {
        const data = await client.CreateStorageRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateRebuildMediaTemplate", async function () {
+    try {
+       const data = await client.CreateRebuildMediaTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1138,6 +1168,16 @@ it("vod.v20180717.SetDrmKeyProviderInfo", async function () {
     }
 })
 
+it("vod.v20180717.RebuildMediaByTemplate", async function () {
+    try {
+       const data = await client.RebuildMediaByTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateReviewTemplate", async function () {
     try {
        const data = await client.CreateReviewTemplate({})
@@ -1421,6 +1461,16 @@ it("vod.v20180717.DeleteVodDomain", async function () {
 it("vod.v20180717.CreateAIRecognitionTemplate", async function () {
     try {
        const data = await client.CreateAIRecognitionTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeRebuildMediaTemplates", async function () {
+    try {
+       const data = await client.DescribeRebuildMediaTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

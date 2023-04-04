@@ -503,9 +503,9 @@ export interface CreateConsoleLoginUrlResponse {
  */
 export interface ChannelDeleteRoleUsersRequest {
   /**
-   * 操作人信息
+   * 代理信息
    */
-  Operator: UserInfo
+  Agent: Agent
 
   /**
    * 角色Id
@@ -518,9 +518,9 @@ export interface ChannelDeleteRoleUsersRequest {
   UserIds: Array<string>
 
   /**
-   * 代理信息
+   * 操作人信息
    */
-  Agent: Agent
+  Operator: UserInfo
 }
 
 /**
@@ -1050,11 +1050,6 @@ export interface ResourceUrlInfo {
  */
 export interface ChannelDescribeRolesRequest {
   /**
-   * 操作人信息
-   */
-  Operator: UserInfo
-
-  /**
    * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
    */
   Agent: Agent
@@ -1068,6 +1063,11 @@ export interface ChannelDescribeRolesRequest {
    * 查询数量，最大200
    */
   Limit: string
+
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
 
   /**
       * 查询的关键字段:
@@ -3302,11 +3302,6 @@ export interface ModifyExtendedServiceResponse {
  */
 export interface ChannelCreateUserRolesRequest {
   /**
-   * 操作者信息
-   */
-  Operator: UserInfo
-
-  /**
    * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
    */
   Agent: Agent
@@ -3320,6 +3315,11 @@ export interface ChannelCreateUserRolesRequest {
    * 绑定角色的角色id列表
    */
   RoleIds: Array<string>
+
+  /**
+   * 操作者信息
+   */
+  Operator: UserInfo
 }
 
 /**

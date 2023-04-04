@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNamespace", req, cb);
     }
     /**
+     * 更新触发器状态的值
+     */
+    async UpdateTriggerStatus(req, cb) {
+        return this.request("UpdateTriggerStatus", req, cb);
+    }
+    /**
      * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
 一个别名必须指向一个主版本，此外还可以同时指向一个附加版本。调用函数时指定特定的别名，则请求会被发送到别名指向的版本上，您可以配置请求发送到主版本和附加版本的比例。
      */

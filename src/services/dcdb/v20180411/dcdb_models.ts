@@ -610,6 +610,26 @@ export interface DescribeDBParametersResponse {
 }
 
 /**
+ * DescribeDatabaseTable请求参数结构体
+ */
+export interface DescribeDatabaseTableRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 数据库名称，通过 DescribeDatabases 接口获取。
+   */
+  DbName: string
+
+  /**
+   * 表名称，通过 DescribeDatabaseObjects 接口获取。
+   */
+  Table: string
+}
+
+/**
  * IsolateHourDCDBInstance请求参数结构体
  */
 export interface IsolateHourDCDBInstanceRequest {
@@ -1473,6 +1493,26 @@ export interface SwitchDBInstanceHAResponse {
    * 异步流程Id
    */
   FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBackupFiles返回参数结构体
+ */
+export interface DescribeBackupFilesResponse {
+  /**
+   * 备份文件列表
+   */
+  Files: Array<InstanceBackupFileItem>
+
+  /**
+   * 总条目数
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2456,23 +2496,53 @@ export interface SecurityGroup {
 }
 
 /**
- * DescribeDatabaseTable请求参数结构体
+ * DescribeBackupFiles请求参数结构体
  */
-export interface DescribeDatabaseTableRequest {
+export interface DescribeBackupFilesRequest {
   /**
-   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   * 按实例ID查询
    */
-  InstanceId: string
+  InstanceId?: string
 
   /**
-   * 数据库名称，通过 DescribeDatabases 接口获取。
+   * 按分片ID查询
    */
-  DbName: string
+  ShardId?: string
 
   /**
-   * 表名称，通过 DescribeDatabaseObjects 接口获取。
+   * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
    */
-  Table: string
+  BackupType?: string
+
+  /**
+   * 按开始时间查询
+   */
+  StartTime?: string
+
+  /**
+   * 按结束时间查询
+   */
+  EndTime?: string
+
+  /**
+   * 分页参数
+   */
+  Limit?: number
+
+  /**
+   * 分页参数
+   */
+  Offset?: number
+
+  /**
+   * 排序参数，可选值：Time,Size
+   */
+  OrderBy?: string
+
+  /**
+   * 排序参数，可选值：DESC,ASC
+   */
+  OrderType?: string
 }
 
 /**
@@ -2804,6 +2874,66 @@ export interface ZonesInfo {
    * 是否在售
    */
   OnSale: boolean
+}
+
+/**
+ * 实例备份文件信息
+ */
+export interface InstanceBackupFileItem {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例状态
+   */
+  InstanceStatus: number
+
+  /**
+   * 分片ID
+   */
+  ShardId: string
+
+  /**
+   * 文件路径
+   */
+  FilePath: string
+
+  /**
+   * 文件名
+   */
+  FileName: string
+
+  /**
+   * 文件大小
+   */
+  FileSize: number
+
+  /**
+   * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
+   */
+  BackupType: string
+
+  /**
+   * 手动备份，0:否，1:是
+   */
+  ManualBackup: number
+
+  /**
+   * 备份开始时间
+   */
+  StartTime: string
+
+  /**
+   * 备份结束时间
+   */
+  EndTime: string
 }
 
 /**

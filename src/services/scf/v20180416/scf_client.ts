@@ -106,6 +106,7 @@ import {
   CreateTriggerResponse,
   PublishLayerVersionRequest,
   CreateNamespaceRequest,
+  UpdateTriggerStatusResponse,
   UpdateFunctionEventInvokeConfigRequest,
   DeleteLayerVersionRequest,
   Filter,
@@ -125,6 +126,7 @@ import {
   GetFunctionAddressResponse,
   CfsInsInfo,
   InstanceConcurrencyConfig,
+  UpdateTriggerStatusRequest,
   TriggerAction,
   LimitsInfo,
   ListLayersResponse,
@@ -400,6 +402,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNamespaceResponse) => void
   ): Promise<DeleteNamespaceResponse> {
     return this.request("DeleteNamespace", req, cb)
+  }
+
+  /**
+   * 更新触发器状态的值
+   */
+  async UpdateTriggerStatus(
+    req: UpdateTriggerStatusRequest,
+    cb?: (error: string, rep: UpdateTriggerStatusResponse) => void
+  ): Promise<UpdateTriggerStatusResponse> {
+    return this.request("UpdateTriggerStatus", req, cb)
   }
 
   /**

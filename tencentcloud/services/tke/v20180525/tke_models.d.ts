@@ -234,6 +234,11 @@ Name: 通过实例名称来过滤
  */
 export interface ServiceAccountAuthenticationOptions {
     /**
+      * 使用TKE默认issuer和jwksuri
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UseTKEDefault?: boolean;
+    /**
       * service-account-issuer
 注意：此字段可能返回 null，表示取不到有效值。
       */

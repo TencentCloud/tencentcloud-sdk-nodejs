@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ProcessMediaByProcedure", req, cb);
     }
     /**
+     * 修改音画质重生模版。
+     */
+    async ModifyRebuildMediaTemplate(req, cb) {
+        return this.request("ModifyRebuildMediaTemplate", req, cb);
+    }
+    /**
      * 删除用户自定义转码模板。
      */
     async DeleteTranscodeTemplate(req, cb) {
@@ -403,6 +409,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDrmKeyProviderInfo", req, cb);
     }
     /**
+     * 删除音画质重生模版。
+     */
+    async DeleteRebuildMediaTemplate(req, cb) {
+        return this.request("DeleteRebuildMediaTemplate", req, cb);
+    }
+    /**
      * 直播即时剪辑，是指在直播过程中（即直播尚未结束时），客户可以在过往直播内容中选择一段，实时生成一个新的视频（HLS 格式），开发者可以将其立即分享出去，或者长久保存起来。
 
 腾讯云点播支持两种即时剪辑模式：
@@ -562,6 +574,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateStorageRegion(req, cb) {
         return this.request("CreateStorageRegion", req, cb);
+    }
+    /**
+     * 创建音画质重生模版。
+     */
+    async CreateRebuildMediaTemplate(req, cb) {
+        return this.request("CreateRebuildMediaTemplate", req, cb);
     }
     /**
      * 该接口用于修改轮播播单。
@@ -890,6 +908,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDrmKeyProviderInfo", req, cb);
     }
     /**
+     * 使用模版发起音画质重生。
+     */
+    async RebuildMediaByTemplate(req, cb) {
+        return this.request("RebuildMediaByTemplate", req, cb);
+    }
+    /**
      * 创建用户自定义审核模板，数量上限：50。
 >模板仅适用于 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 和 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 接口。
      */
@@ -1146,6 +1170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAIRecognitionTemplate(req, cb) {
         return this.request("CreateAIRecognitionTemplate", req, cb);
+    }
+    /**
+     * 获取音画质重生模版列表。
+     */
+    async DescribeRebuildMediaTemplates(req, cb) {
+        return this.request("DescribeRebuildMediaTemplates", req, cb);
     }
     /**
      * 该接口用于查询播放统计文件的下载地址。

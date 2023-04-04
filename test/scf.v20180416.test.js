@@ -248,6 +248,16 @@ it("scf.v20180416.DeleteNamespace", async function () {
     }
 })
 
+it("scf.v20180416.UpdateTriggerStatus", async function () {
+    try {
+       const data = await client.UpdateTriggerStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.CreateAlias", async function () {
     try {
        const data = await client.CreateAlias({})

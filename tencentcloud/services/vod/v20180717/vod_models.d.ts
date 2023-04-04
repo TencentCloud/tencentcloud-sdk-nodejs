@@ -1843,6 +1843,59 @@ export interface DescribeClientUploadAccelerationUsageDataResponse {
     RequestId?: string;
 }
 /**
+ * ModifyRebuildMediaTemplate请求参数结构体
+ */
+export interface ModifyRebuildMediaTemplateRequest {
+    /**
+      * 音画质重生模版号。
+      */
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: string;
+    /**
+      * 音画质重生模版名称。
+      */
+    Name?: string;
+    /**
+      * 音画质重生模版描述。
+      */
+    Comment?: string;
+    /**
+      * 音画质重生视频控制信息。
+      */
+    RebuildVideoInfo?: RebuildVideoInfo;
+    /**
+      * 音画质重生音频控制信息。
+      */
+    RebuildAudioInfo?: RebuildAudioInfo;
+    /**
+      * 输出目标视频控制信息。
+      */
+    TargetVideoInfo?: RebuildMediaTargetVideoStream;
+    /**
+      * 输出目标音频控制信息。
+      */
+    TargetAudioInfo?: RebuildMediaTargetAudioStream;
+    /**
+      * 输出文件封装格式，可选值：mp4、flv、hls。
+      */
+    Container?: string;
+    /**
+      * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+      */
+    RemoveVideo?: number;
+    /**
+      * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+      */
+    RemoveAudio?: number;
+}
+/**
  * ComposeMedia请求参数结构体
  */
 export interface ComposeMediaRequest {
@@ -2242,38 +2295,21 @@ export interface ModifyTranscodeTemplateRequest {
     SegmentType?: string;
 }
 /**
- * 智能精彩片段结果类型
+ * 编辑视频任务的输入。
  */
-export interface AiAnalysisTaskHighlightResult {
+export interface EditMediaTaskInput {
     /**
-      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+      * 输入视频的来源类型，可以取的值为 File，Stream 两种。
       */
-    Status: string;
+    InputType: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 输入的视频文件信息，当 InputType 为 File 时，该字段有值。
       */
-    ErrCodeExt: string;
+    FileInfoSet: Array<EditMediaFileInfo>;
     /**
-      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+      * 输入的流信息，当 InputType 为 Stream 时，该字段有值。
       */
-    ErrCode: number;
-    /**
-      * 错误信息。
-      */
-    Message: string;
-    /**
-      * 智能精彩片段任务输入。
-      */
-    Input: AiAnalysisTaskHighlightInput;
-    /**
-      * 智能精彩片段任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Output: AiAnalysisTaskHighlightOutput;
-    /**
-      * 智能精彩片段任务进度，取值范围 [0-100] 。
-      */
-    Progress: number;
+    StreamInfoSet: Array<EditMediaStreamInfo>;
 }
 /**
  * DeleteAIAnalysisTemplate返回参数结构体
@@ -2416,6 +2452,30 @@ export interface AiReviewPornTaskInput {
       * 鉴别涉及令人反感的信息的模板 ID。
       */
     Definition: number;
+}
+/**
+ * 用户自定义语音审核任务控制参数
+ */
+export interface UserDefineAsrTextReviewTemplateInfo {
+    /**
+      * 用户自定语音审核任务开关，可选值：
+<li>ON：开启自定义语音审核任务；</li>
+<li>OFF：关闭自定义语音审核任务。</li>
+      */
+    Switch: string;
+    /**
+      * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+      */
+    LabelSet?: Array<string>;
+    /**
+      * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+      */
+    BlockConfidence?: number;
+    /**
+      * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+      */
+    ReviewConfidence?: number;
 }
 /**
  * CreateProcedureTemplate请求参数结构体
@@ -2870,6 +2930,47 @@ export interface DescribeEventConfigRequest {
     SubAppId?: number;
 }
 /**
+ * 音视频审核 Ocr 文字的嫌疑片段
+ */
+export interface MediaContentReviewOcrTextSegmentItem {
+    /**
+      * 嫌疑片段起始的偏移时间，单位：秒。
+      */
+    StartTimeOffset: number;
+    /**
+      * 嫌疑片段结束的偏移时间，单位：秒。
+      */
+    EndTimeOffset: number;
+    /**
+      * 嫌疑片段置信度。
+      */
+    Confidence: number;
+    /**
+      * 嫌疑片段音视频审核的结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+      */
+    Suggestion: string;
+    /**
+      * 嫌疑关键词列表。
+      */
+    KeywordSet: Array<string>;
+    /**
+      * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      */
+    AreaCoordSet: Array<number>;
+    /**
+      * 嫌疑图片 URL （图片不会永久存储，到达
+PicUrlExpireTime 时间点后图片将被删除）。
+      */
+    Url: string;
+    /**
+      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    PicUrlExpireTime: string;
+}
+/**
  * 智能分类结果信息
  */
 export interface AiAnalysisTaskClassificationOutput {
@@ -2932,45 +3033,51 @@ export interface AiRecognitionTaskOcrFullTextResultOutput {
     SegmentSetFileUrlExpireTime: string;
 }
 /**
- * 编辑视频任务的输入。
+ * 智能精彩片段结果类型
  */
-export interface EditMediaTaskInput {
+export interface AiAnalysisTaskHighlightResult {
     /**
-      * 输入视频的来源类型，可以取的值为 File，Stream 两种。
+      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
       */
-    InputType: string;
+    Status: string;
     /**
-      * 输入的视频文件信息，当 InputType 为 File 时，该字段有值。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
-    FileInfoSet: Array<EditMediaFileInfo>;
+    ErrCodeExt: string;
     /**
-      * 输入的流信息，当 InputType 为 Stream 时，该字段有值。
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
-    StreamInfoSet: Array<EditMediaStreamInfo>;
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 智能精彩片段任务输入。
+      */
+    Input: AiAnalysisTaskHighlightInput;
+    /**
+      * 智能精彩片段任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: AiAnalysisTaskHighlightOutput;
+    /**
+      * 智能精彩片段任务进度，取值范围 [0-100] 。
+      */
+    Progress: number;
 }
 /**
- * 用户自定义语音审核任务控制参数
+ * CreateRebuildMediaTemplate返回参数结构体
  */
-export interface UserDefineAsrTextReviewTemplateInfo {
+export interface CreateRebuildMediaTemplateResponse {
     /**
-      * 用户自定语音审核任务开关，可选值：
-<li>ON：开启自定义语音审核任务；</li>
-<li>OFF：关闭自定义语音审核任务。</li>
+      * 音画质重生模版 ID。
       */
-    Switch: string;
+    Definition?: number;
     /**
-      * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LabelSet?: Array<string>;
-    /**
-      * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
-      */
-    BlockConfidence?: number;
-    /**
-      * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
-      */
-    ReviewConfidence?: number;
+    RequestId?: string;
 }
 /**
  * DescribeWordSamples返回参数结构体
@@ -3511,19 +3618,6 @@ export interface ModifyMediaInfoRequest {
 同一个请求里，ClearSubtitles 与 AddSubtitles不能同时出现。
       */
     ClearSubtitles?: number;
-}
-/**
- * DeleteTranscodeTemplate请求参数结构体
- */
-export interface DeleteTranscodeTemplateRequest {
-    /**
-      * 转码模板唯一标识。
-      */
-    Definition: number;
-    /**
-      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
-      */
-    SubAppId?: number;
 }
 /**
  * 溯源水印参数
@@ -5254,6 +5348,16 @@ export interface DeleteHeadTailTemplateResponse {
     RequestId?: string;
 }
 /**
+ * 音画质重生音频控制控制信息。
+ */
+export interface RebuildAudioInfo {
+    /**
+      * 音频降噪控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AudioDenoiseInfo?: AudioDenoiseInfo;
+}
+/**
  * RemoveWatermark返回参数结构体
  */
 export interface RemoveWatermarkResponse {
@@ -5267,43 +5371,73 @@ export interface RemoveWatermarkResponse {
     RequestId?: string;
 }
 /**
- * 视频转码任务信息，该结构仅用于对 2017 版[视频转码](https://cloud.tencent.com/document/product/266/7822)接口发起的任务。
+ * 音画质重生模版详情。
  */
-export interface TranscodeTask2017 {
+export interface RebuildMediaTemplate {
     /**
-      * 转码任务 ID。
+      * 音画质重生模版号。
       */
-    TaskId: string;
+    Definition?: number;
     /**
-      * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+      * 模板类型，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
       */
-    ErrCode: number;
+    Type?: string;
     /**
-      * 错误信息。
+      * 音画质重生模版名称。
       */
-    Message: string;
+    Name?: string;
     /**
-      * 被转码文件 ID。
+      * 音画质重生模版描述。
       */
-    FileId: string;
+    Comment?: string;
     /**
-      * 被转码文件名称。
+      * 音画质重生视频控制信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileName: string;
+    RebuildVideoInfo?: RebuildVideoInfo;
     /**
-      * 视频时长，单位：秒。
+      * 音画质重生音频控制信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Duration: number;
+    RebuildAudioInfo?: RebuildAudioInfo;
     /**
-      * 封面地址。
+      * 输出视频控制信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CoverUrl: string;
+    TargetVideoInfo?: RebuildMediaTargetVideoStream;
     /**
-      * 视频转码后生成的播放信息。
+      * 输出音频控制信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PlayInfoSet: Array<TranscodePlayInfo2017>;
+    TargetAudioInfo?: RebuildMediaTargetAudioStream;
+    /**
+      * 封装格式。可选值：mp4、hls。默认是 mp4。
+      */
+    Container?: string;
+    /**
+      * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+      */
+    RemoveVideo?: number;
+    /**
+      * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+      */
+    RemoveAudio?: number;
+    /**
+      * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    CreateTime?: string;
+    /**
+      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    UpdateTime?: string;
 }
 /**
  * CreatePersonSample返回参数结构体
@@ -6221,6 +6355,70 @@ export interface ModifyWordSampleRequest {
     TagOperationInfo?: AiSampleTagOperation;
 }
 /**
+ * 编辑视频任务信息
+ */
+export interface EditMediaTask {
+    /**
+      * 任务 ID。
+      */
+    TaskId?: string;
+    /**
+      * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+    Status?: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+      */
+    ErrCode?: number;
+    /**
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt?: string;
+    /**
+      * 错误信息。
+      */
+    Message?: string;
+    /**
+      * 编辑视频任务进度，取值范围 [0-100] 。
+      */
+    Progress?: number;
+    /**
+      * 视频编辑任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Input?: EditMediaTaskInput;
+    /**
+      * 视频编辑任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output?: EditMediaTaskOutput;
+    /**
+      * 输出视频的元信息。
+      */
+    MetaData?: MediaMetaData;
+    /**
+      * 任务类型为 Procedure 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
+      */
+    ProcedureTaskId?: string;
+    /**
+      * 任务类型为 ReviewAudioVideo 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
+      */
+    ReviewAudioVideoTaskId?: string;
+    /**
+      * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId?: string;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext?: string;
+}
+/**
  * 人脸识别结果片段
  */
 export interface AiRecognitionTaskFaceSegmentItem {
@@ -6453,6 +6651,33 @@ export interface AiAnalysisTaskHighlightOutput {
       * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     HighlightSetFileUrlExpireTime: string;
+}
+/**
+ * DescribeRebuildMediaTemplates请求参数结构体
+ */
+export interface DescribeRebuildMediaTemplatesRequest {
+    /**
+      * 音画质重生模版列表。
+      */
+    Definitions?: Array<number>;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+      */
+    Type?: string;
+    /**
+      * 分页偏移量，默认值：0。
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认值：10，最大值：100。
+      */
+    Limit?: number;
 }
 /**
  * 图片审核片段。
@@ -7340,13 +7565,26 @@ export interface AsrWordsConfigureInfo {
     LabelSet?: Array<string>;
 }
 /**
- * ModifySubAppIdStatus返回参数结构体
+ * DeleteRebuildMediaTemplate返回参数结构体
  */
-export interface ModifySubAppIdStatusResponse {
+export interface DeleteRebuildMediaTemplateResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteRebuildMediaTemplate请求参数结构体
+ */
+export interface DeleteRebuildMediaTemplateRequest {
+    /**
+      * 音画质重生模版号。
+      */
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
 }
 /**
  * SimpleHlsClip请求参数结构体
@@ -8339,6 +8577,15 @@ export interface DescribeImageSpriteTemplatesRequest {
     Type?: string;
 }
 /**
+ * ModifyRebuildMediaTemplate返回参数结构体
+ */
+export interface ModifyRebuildMediaTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 视频打点信息
  */
 export interface MediaKeyFrameDescItem {
@@ -8350,6 +8597,51 @@ export interface MediaKeyFrameDescItem {
       * 打点的内容字符串，限制 1-128 个字符。
       */
     Content: string;
+}
+/**
+ * RebuildMediaByTemplate请求参数结构体
+ */
+export interface RebuildMediaByTemplateRequest {
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+    /**
+      * 音画质重生模版 ID。
+      */
+    Definition: number;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: string;
+    /**
+      * 起始偏移时间，单位：秒，不填表示从视频开始截取。
+      */
+    StartTimeOffset?: number;
+    /**
+      * 结束偏移时间，单位：秒，不填表示截取到视频末尾。
+      */
+    EndTimeOffset?: number;
+    /**
+      * 音画质重生后的文件配置。
+      */
+    OutputConfig?: RebuildMediaOutputConfig;
+    /**
+      * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+      */
+    SessionId?: string;
+    /**
+      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+      */
+    SessionContext?: string;
+    /**
+      * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+      */
+    TasksPriority?: number;
+    /**
+      * 保留字段，特殊用途时使用。
+      */
+    ExtInfo?: string;
 }
 /**
  * ModifyVodDomainConfig请求参数结构体
@@ -8519,21 +8811,17 @@ export interface CreateSubAppIdResponse {
     RequestId?: string;
 }
 /**
- * CreateWatermarkTemplate返回参数结构体
+ * DeleteTranscodeTemplate请求参数结构体
  */
-export interface CreateWatermarkTemplateResponse {
+export interface DeleteTranscodeTemplateRequest {
     /**
-      * 水印模板唯一标识。
+      * 转码模板唯一标识。
       */
     Definition: number;
     /**
-      * 水印图片地址，仅当 Type 为 image，该字段有效。
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
-    ImageUrl: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SubAppId?: number;
 }
 /**
  * 暴恐信息
@@ -9976,6 +10264,11 @@ export interface PullUploadRequest {
 支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。请确保媒体 URL 可以访问。
       */
     MediaUrl: string;
+    /**
+      * 媒体文件类型（扩展名），支持的类型详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
+如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。
+      */
+    MediaType?: string;
     /**
       * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
@@ -13224,6 +13517,24 @@ export interface AiRecognitionTaskFaceResultInput {
     Definition: number;
 }
 /**
+ * 音画质重生结果文件输出。
+ */
+export interface RebuildMediaOutputConfig {
+    /**
+      * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+      */
+    MediaName?: string;
+    /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+      */
+    ClassId?: number;
+    /**
+      * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ExpireTime?: string;
+}
+/**
  * 涉及令人不适宜的信息
  */
 export interface AiReviewPoliticalTaskOutput {
@@ -13293,6 +13604,15 @@ export interface AiReviewTaskPoliticalResult {
       * 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+}
+/**
+ * ModifySubAppIdStatus返回参数结构体
+ */
+export interface ModifySubAppIdStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ReviewImage返回参数结构体
@@ -13953,6 +14273,19 @@ export interface AiReviewTerrorismTaskInput {
     Definition: number;
 }
 /**
+ * RebuildMediaByTemplate返回参数结构体
+ */
+export interface RebuildMediaByTemplateResponse {
+    /**
+      * 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。
+      */
+    TaskId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 点播文件音频流信息
  */
 export interface MediaAudioStreamItem {
@@ -14541,6 +14874,57 @@ export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
       * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
       */
     ReviewConfidence?: number;
+}
+/**
+ * CreateRebuildMediaTemplate请求参数结构体
+ */
+export interface CreateRebuildMediaTemplateRequest {
+    /**
+      * 输出文件封装格式，可选值：mp4、flv、hls。
+      */
+    Container: string;
+    /**
+      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+      */
+    SubAppId?: number;
+    /**
+      * 音画质重生模版名称。
+      */
+    Name?: string;
+    /**
+      * 模版描述。
+      */
+    Comment?: string;
+    /**
+      * 音画质重生视频控制控制信息。
+      */
+    RebuildVideoInfo?: RebuildVideoInfo;
+    /**
+      * 音画质重生音频控制控制信息。
+      */
+    RebuildAudioInfo?: RebuildAudioInfo;
+    /**
+      * 输出目标视频控制信息。
+      */
+    TargetVideoInfo?: RebuildMediaTargetVideoStream;
+    /**
+      * 输出目标音频控制信息。
+      */
+    TargetAudioInfo?: RebuildMediaTargetAudioStream;
+    /**
+      * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+      */
+    RemoveVideo?: number;
+    /**
+      * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+      */
+    RemoveAudio?: string;
 }
 /**
  * 单个图片处理操作。
@@ -15625,45 +16009,21 @@ export interface CreateSampleSnapshotTemplateRequest {
     FillType?: string;
 }
 /**
- * 音视频审核 Ocr 文字的嫌疑片段
+ * DescribeRebuildMediaTemplates返回参数结构体
  */
-export interface MediaContentReviewOcrTextSegmentItem {
+export interface DescribeRebuildMediaTemplatesResponse {
     /**
-      * 嫌疑片段起始的偏移时间，单位：秒。
+      * 符合过滤条件的记录总数。
       */
-    StartTimeOffset: number;
+    TotalCount?: number;
     /**
-      * 嫌疑片段结束的偏移时间，单位：秒。
+      * 音画质重生模板详情列表。
       */
-    EndTimeOffset: number;
+    RebuildMediaTemplateSet?: Array<RebuildMediaTemplate>;
     /**
-      * 嫌疑片段置信度。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Confidence: number;
-    /**
-      * 嫌疑片段音视频审核的结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
-      */
-    Suggestion: string;
-    /**
-      * 嫌疑关键词列表。
-      */
-    KeywordSet: Array<string>;
-    /**
-      * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-      */
-    AreaCoordSet: Array<number>;
-    /**
-      * 嫌疑图片 URL （图片不会永久存储，到达
-PicUrlExpireTime 时间点后图片将被删除）。
-      */
-    Url: string;
-    /**
-      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    PicUrlExpireTime: string;
+    RequestId?: string;
 }
 /**
  * 音频增益调节参数
@@ -15769,7 +16129,7 @@ export interface PullUploadResponse {
     /**
       * 拉取上传视频的任务 ID，可以通过该 ID 查询拉取上传任务的状态。
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15874,68 +16234,21 @@ export interface PornImgReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
- * 编辑视频任务信息
+ * CreateWatermarkTemplate返回参数结构体
  */
-export interface EditMediaTask {
+export interface CreateWatermarkTemplateResponse {
     /**
-      * 任务 ID。
+      * 水印模板唯一标识。
       */
-    TaskId?: string;
+    Definition: number;
     /**
-      * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+      * 水印图片地址，仅当 Type 为 image，该字段有效。
       */
-    Status?: string;
+    ImageUrl: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ErrCode?: number;
-    /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-      */
-    ErrCodeExt?: string;
-    /**
-      * 错误信息。
-      */
-    Message?: string;
-    /**
-      * 编辑视频任务进度，取值范围 [0-100] 。
-      */
-    Progress?: number;
-    /**
-      * 视频编辑任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Input?: EditMediaTaskInput;
-    /**
-      * 视频编辑任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Output?: EditMediaTaskOutput;
-    /**
-      * 输出视频的元信息。
-      */
-    MetaData?: MediaMetaData;
-    /**
-      * 任务类型为 Procedure 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
-      */
-    ProcedureTaskId?: string;
-    /**
-      * 任务类型为 ReviewAudioVideo 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
-      */
-    ReviewAudioVideoTaskId?: string;
-    /**
-      * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-      */
-    SessionId?: string;
-    /**
-      * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-      */
-    SessionContext?: string;
+    RequestId?: string;
 }
 /**
  * 画面鉴别涉及令人反感的信息的任务控制参数
@@ -16248,6 +16561,66 @@ export interface ReviewImageRequest {
       * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
       */
     SubAppId?: number;
+}
+/**
+ * 音画质重生视频控制控制信息。
+ */
+export interface RebuildVideoInfo {
+    /**
+      * 画质修复控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepairInfo?: RepairInfo;
+    /**
+      * 智能插帧控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo;
+    /**
+      * 画面超分控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuperResolutionInfo?: SuperResolutionInfo;
+    /**
+      * 高动态范围类型控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HDRInfo?: HDRInfo;
+    /**
+      * 视频降噪控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoDenoiseInfo?: VideoDenoiseInfo;
+    /**
+      * 色彩增强控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColorInfo?: ColorEnhanceInfo;
+    /**
+      * 细节增强控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SharpInfo?: SharpEnhanceInfo;
+    /**
+      * 人脸增强控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FaceInfo?: FaceEnhanceInfo;
+    /**
+      * 低光照控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LowLightInfo?: LowLightEnhanceInfo;
+    /**
+      * 去划痕控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScratchRepairInfo?: ScratchRepairInfo;
+    /**
+      * 去伪影控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ArtifactRepairInfo?: ArtifactRepairInfo;
 }
 /**
  * DescribeHeadTailTemplates返回参数结构体
@@ -16601,6 +16974,45 @@ export interface StorageStatData {
       * 当前深度归档存储量，单位是字节。
       */
     DeepArchiveStorage: number;
+}
+/**
+ * 视频转码任务信息，该结构仅用于对 2017 版[视频转码](https://cloud.tencent.com/document/product/266/7822)接口发起的任务。
+ */
+export interface TranscodeTask2017 {
+    /**
+      * 转码任务 ID。
+      */
+    TaskId: string;
+    /**
+      * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    Message: string;
+    /**
+      * 被转码文件 ID。
+      */
+    FileId: string;
+    /**
+      * 被转码文件名称。
+      */
+    FileName: string;
+    /**
+      * 视频时长，单位：秒。
+      */
+    Duration: number;
+    /**
+      * 封面地址。
+      */
+    CoverUrl: string;
+    /**
+      * 视频转码后生成的播放信息。
+      */
+    PlayInfoSet: Array<TranscodePlayInfo2017>;
 }
 /**
  * DescribeFileAttributes请求参数结构体

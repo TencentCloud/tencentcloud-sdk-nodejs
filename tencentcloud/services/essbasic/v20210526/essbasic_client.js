@@ -114,7 +114,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
-     * 渠道版删除员工绑定角色
+     * 删除员工绑定角色
      */
     async ChannelDeleteRoleUsers(req, cb) {
         return this.request("ChannelDeleteRoleUsers", req, cb);
@@ -269,7 +269,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
-     * 渠道办查询用户角色
+     * 查询用户角色
      */
     async ChannelDescribeRoles(req, cb) {
         return this.request("ChannelDescribeRoles", req, cb);
@@ -282,7 +282,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
     /**
-     * 渠道版绑定员工角色
+     * 绑定员工角色
      */
     async ChannelCreateUserRoles(req, cb) {
         return this.request("ChannelCreateUserRoles", req, cb);

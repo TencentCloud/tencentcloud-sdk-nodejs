@@ -1260,6 +1260,16 @@ export interface PrometheusInstancesOverview {
       * 绑定集群正常状态总数
       */
     BoundNormal: number;
+    /**
+      * 资源包状态，0-无可用资源包，1-有可用资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourcePackageStatus?: number;
+    /**
+      * 资源包规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourcePackageSpecName?: string;
 }
 /**
  * DescribePrometheusInstanceInitStatus返回参数结构体
@@ -8997,15 +9007,23 @@ export interface Filter {
     /**
       * 过滤方式（=, !=, in）
       */
-    Type: string;
+    Type?: string;
     /**
       * 过滤维度名
       */
-    Key: string;
+    Key?: string;
     /**
       * 过滤值，in过滤方式用逗号分割多个值
       */
-    Value: string;
+    Value?: string;
+    /**
+      * 过滤条件名称
+      */
+    Name?: string;
+    /**
+      * 过滤条件取值范围
+      */
+    Values?: Array<string>;
 }
 /**
  * DescribeProductEventList返回的Events里的GroupInfo

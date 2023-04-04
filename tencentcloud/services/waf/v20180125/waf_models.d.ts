@@ -742,29 +742,13 @@ export interface ModifyAccessPeriodResponse {
     RequestId?: string;
 }
 /**
- * clb-waf QPS套餐 New
+ * DescribeVipInfo请求参数结构体
  */
-export interface QPSPackageNew {
+export interface DescribeVipInfoRequest {
     /**
-      * 资源ID
+      * waf实例id列表
       */
-    ResourceIds: string;
-    /**
-      * 过期时间
-      */
-    ValidTime: string;
-    /**
-      * 是否自动续费，1：自动续费，0：不自动续费
-      */
-    RenewFlag: number;
-    /**
-      * 套餐购买个数
-      */
-    Count: number;
-    /**
-      * 套餐购买地域，clb-waf暂时没有用到
-      */
-    Region: string;
+    InstanceIds: Array<string>;
 }
 /**
  * 实例入参过滤器
@@ -1507,6 +1491,31 @@ export interface PostAttackDownloadTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * clb-waf QPS套餐 New
+ */
+export interface QPSPackageNew {
+    /**
+      * 资源ID
+      */
+    ResourceIds: string;
+    /**
+      * 过期时间
+      */
+    ValidTime: string;
+    /**
+      * 是否自动续费，1：自动续费，0：不自动续费
+      */
+    RenewFlag: number;
+    /**
+      * 套餐购买个数
+      */
+    Count: number;
+    /**
+      * 套餐购买地域，clb-waf暂时没有用到
+      */
+    Region: string;
 }
 /**
  * DescribeDomainDetailsSaas请求参数结构体
@@ -2428,6 +2437,19 @@ export interface DescribeIpHitItemsRequest {
     Ip?: string;
 }
 /**
+ * DescribeVipInfo返回参数结构体
+ */
+export interface DescribeVipInfoResponse {
+    /**
+      * VIP信息
+      */
+    VipInfo?: Array<VipInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRuleLimit请求参数结构体
  */
 export interface DescribeRuleLimitRequest {
@@ -2505,6 +2527,21 @@ export interface DescribeDomainWhiteRulesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Vip信息
+ */
+export interface VipInfo {
+    /**
+      * Virtual IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip?: string;
+    /**
+      * waf实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
 }
 /**
  * DeleteAttackDownloadRecord请求参数结构体
