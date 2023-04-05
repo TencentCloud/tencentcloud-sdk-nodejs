@@ -10,7 +10,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（ModifyDiskExtraPerformance）用于调整云硬盘额外的性能。
 
-* 目前仅支持极速型SSD云硬盘（CLOUD_TSSD）和高性能SSD云硬盘(CLOUD_HSSD)。
+* 目前仅支持增强型SSD云硬盘(CLOUD_HSSD)和极速型SSD云硬盘（CLOUD_TSSD）。
      */
     ModifyDiskExtraPerformance(req: ModifyDiskExtraPerformanceRequest, cb?: (error: string, rep: ModifyDiskExtraPerformanceResponse) => void): Promise<ModifyDiskExtraPerformanceResponse>;
     /**

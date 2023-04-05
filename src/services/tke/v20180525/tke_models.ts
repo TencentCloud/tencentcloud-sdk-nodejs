@@ -6732,25 +6732,25 @@ export interface DescribeClusterReleasesResponse {
       * 数量限制
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Limit: number
+  Limit?: number
 
   /**
       * 偏移量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Offset: number
+  Offset?: number
 
   /**
       * 已安装应用列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReleaseSet: Array<Release>
+  ReleaseSet?: Array<Release>
 
   /**
       * 已安装应用总数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7601,6 +7601,11 @@ export interface DescribeClusterReleasesRequest {
    * 页偏移量
    */
   Offset?: number
+
+  /**
+   * 集群类型, 目前支持传入 tke, eks, tkeedge, external
+   */
+  ClusterType?: string
 
   /**
    * helm Release 安装的namespace

@@ -18,39 +18,9 @@ const client = new tencentcloud.cloudstudio.v20210524.Client({
 })
 describe("cloudstudio.v20210524.test.js", function () {
 
-it("cloudstudio.v20210524.DescribeWorkspaceStatus", async function () {
-    try {
-       const data = await client.DescribeWorkspaceStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cloudstudio.v20210524.DescribeCustomizeTemplatesById", async function () {
     try {
        const data = await client.DescribeCustomizeTemplatesById({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.CreateWorkspaceByVersionControl", async function () {
-    try {
-       const data = await client.CreateWorkspaceByVersionControl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.CreateWorkspaceByTemplate", async function () {
-    try {
-       const data = await client.CreateWorkspaceByTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +38,9 @@ it("cloudstudio.v20210524.CreateWorkspaceTemporaryToken", async function () {
     }
 })
 
-it("cloudstudio.v20210524.ModifyCustomizeTemplateVersionControl", async function () {
+it("cloudstudio.v20210524.ModifyCustomizeTemplatesPartById", async function () {
     try {
-       const data = await client.ModifyCustomizeTemplateVersionControl({})
+       const data = await client.ModifyCustomizeTemplatesPartById({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,49 +48,9 @@ it("cloudstudio.v20210524.ModifyCustomizeTemplateVersionControl", async function
     }
 })
 
-it("cloudstudio.v20210524.RecoverWorkspace", async function () {
+it("cloudstudio.v20210524.DescribeWorkspaceIsReady", async function () {
     try {
-       const data = await client.RecoverWorkspace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.DescribeWorkspaceStatusList", async function () {
-    try {
-       const data = await client.DescribeWorkspaceStatusList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.RemoveWorkspace", async function () {
-    try {
-       const data = await client.RemoveWorkspace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.DescribeWorkspaceNameExist", async function () {
-    try {
-       const data = await client.DescribeWorkspaceNameExist({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.ModifyCustomizeTemplatesFullById", async function () {
-    try {
-       const data = await client.ModifyCustomizeTemplatesFullById({})
+       const data = await client.DescribeWorkspaceIsReady({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +68,9 @@ it("cloudstudio.v20210524.RunWorkspace", async function () {
     }
 })
 
-it("cloudstudio.v20210524.DeleteCustomizeTemplatesById", async function () {
+it("cloudstudio.v20210524.DescribeCustomizeTemplates", async function () {
     try {
-       const data = await client.DeleteCustomizeTemplatesById({})
+       const data = await client.DescribeCustomizeTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +78,9 @@ it("cloudstudio.v20210524.DeleteCustomizeTemplatesById", async function () {
     }
 })
 
-it("cloudstudio.v20210524.ModifyCustomizeTemplatesPartById", async function () {
+it("cloudstudio.v20210524.RecoverWorkspace", async function () {
     try {
-       const data = await client.ModifyCustomizeTemplatesPartById({})
+       const data = await client.RecoverWorkspace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +88,9 @@ it("cloudstudio.v20210524.ModifyCustomizeTemplatesPartById", async function () {
     }
 })
 
-it("cloudstudio.v20210524.StopWorkspace", async function () {
+it("cloudstudio.v20210524.CreateWorkspaceByVersionControl", async function () {
     try {
-       const data = await client.StopWorkspace({})
+       const data = await client.CreateWorkspaceByVersionControl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,29 +98,9 @@ it("cloudstudio.v20210524.StopWorkspace", async function () {
     }
 })
 
-it("cloudstudio.v20210524.DescribeCustomizeTemplatesPresets", async function () {
+it("cloudstudio.v20210524.ModifyCustomizeTemplateVersionControl", async function () {
     try {
-       const data = await client.DescribeCustomizeTemplatesPresets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.DescribeWorkspaceEnvList", async function () {
-    try {
-       const data = await client.DescribeWorkspaceEnvList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudstudio.v20210524.ModifyWorkspaceAttributes", async function () {
-    try {
-       const data = await client.ModifyWorkspaceAttributes({})
+       const data = await client.ModifyCustomizeTemplateVersionControl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +118,66 @@ it("cloudstudio.v20210524.CreateWorkspaceByAgent", async function () {
     }
 })
 
+it("cloudstudio.v20210524.RemoveWorkspace", async function () {
+    try {
+       const data = await client.RemoveWorkspace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DescribeWorkspaceEnvList", async function () {
+    try {
+       const data = await client.DescribeWorkspaceEnvList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DeleteCustomizeTemplatesById", async function () {
+    try {
+       const data = await client.DeleteCustomizeTemplatesById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.StopWorkspace", async function () {
+    try {
+       const data = await client.StopWorkspace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DescribeWorkspaceStatus", async function () {
+    try {
+       const data = await client.DescribeWorkspaceStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DescribeCustomizeTemplatesPresets", async function () {
+    try {
+       const data = await client.DescribeCustomizeTemplatesPresets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudstudio.v20210524.CreateCustomizeTemplates", async function () {
     try {
        const data = await client.CreateCustomizeTemplates({})
@@ -218,9 +188,49 @@ it("cloudstudio.v20210524.CreateCustomizeTemplates", async function () {
     }
 })
 
-it("cloudstudio.v20210524.DescribeCustomizeTemplates", async function () {
+it("cloudstudio.v20210524.ModifyCustomizeTemplatesFullById", async function () {
     try {
-       const data = await client.DescribeCustomizeTemplates({})
+       const data = await client.ModifyCustomizeTemplatesFullById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.CreateWorkspaceByTemplate", async function () {
+    try {
+       const data = await client.CreateWorkspaceByTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DescribeWorkspaceStatusList", async function () {
+    try {
+       const data = await client.DescribeWorkspaceStatusList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.DescribeWorkspaceNameExist", async function () {
+    try {
+       const data = await client.DescribeWorkspaceNameExist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudstudio.v20210524.ModifyWorkspaceAttributes", async function () {
+    try {
+       const data = await client.ModifyWorkspaceAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

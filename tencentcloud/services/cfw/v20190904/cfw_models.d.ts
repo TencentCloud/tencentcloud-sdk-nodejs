@@ -516,17 +516,61 @@ export interface VpcZoneData {
     Region: string;
 }
 /**
- * CreateChooseVpcs请求参数结构体
+ * 数据库白名单规则数据
  */
-export interface CreateChooseVpcsRequest {
+export interface DatabaseWhiteListRuleData {
     /**
-      * vpc列表
+      * 访问源
       */
-    VpcList: Array<string>;
+    SourceIp: string;
     /**
-      * zone列表
+      * 访问源类型，1 ip；6 实例；100 资源分组
       */
-    AllZoneList: Array<VpcZoneData>;
+    SourceType: number;
+    /**
+      * 访问目的
+      */
+    TargetIp: string;
+    /**
+      * 访问目的类型，1 ip；6 实例；100 资源分组
+      */
+    TargetType: number;
+    /**
+      * 规则描述
+      */
+    Detail: string;
+    /**
+      * 是否地域规则，0不是 1是
+      */
+    IsRegionRule: number;
+    /**
+      * 是否云厂商规则，0不是 1 时
+      */
+    IsCloudRule: number;
+    /**
+      * 是否启用，0 不启用，1启用
+      */
+    Enable: number;
+    /**
+      * 地域码1
+      */
+    FirstLevelRegionCode?: number;
+    /**
+      * 地域码2
+      */
+    SecondLevelRegionCode?: number;
+    /**
+      * 地域名称1
+      */
+    FirstLevelRegionName?: string;
+    /**
+      * 地域名称2
+      */
+    SecondLevelRegionName?: string;
+    /**
+      * 云厂商码
+      */
+    CloudCode?: string;
 }
 /**
  * DescribeNatFwVpcDnsLst请求参数结构体
@@ -571,7 +615,12 @@ export interface DescribeCfwEipsRequest {
  */
 export interface DescribeTLogInfoResponse {
     /**
-      * 无
+      * "NetworkNum":网络扫描探测
+ "HandleNum": 待处理事件
+"BanNum":
+  "VulNum": 漏洞利用
+  "OutNum": 失陷主机
+"BruteForceNum": 0
       */
     Data: TLogInfo;
     /**
@@ -724,6 +773,19 @@ export interface NatFwInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NatIp: string;
+}
+/**
+ * CreateSecurityGroupRules返回参数结构体
+ */
+export interface CreateSecurityGroupRulesResponse {
+    /**
+      * 状态值，0：添加成功，非0：添加失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ExpandCfwVertical请求参数结构体
@@ -1872,61 +1934,24 @@ export interface RemoveAcRuleRequest {
     RuleUuid: number;
 }
 /**
- * 数据库白名单规则数据
+ * 规则关联的beta任务
  */
-export interface DatabaseWhiteListRuleData {
+export interface BetaInfoByACL {
     /**
-      * 访问源
+      * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SourceIp: string;
+    TaskId?: number;
     /**
-      * 访问源类型，1 ip；6 实例；100 资源分组
+      * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SourceType: number;
+    TaskName?: string;
     /**
-      * 访问目的
+      * 上次执行时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TargetIp: string;
-    /**
-      * 访问目的类型，1 ip；6 实例；100 资源分组
-      */
-    TargetType: number;
-    /**
-      * 规则描述
-      */
-    Detail: string;
-    /**
-      * 是否地域规则，0不是 1是
-      */
-    IsRegionRule: number;
-    /**
-      * 是否云厂商规则，0不是 1 时
-      */
-    IsCloudRule: number;
-    /**
-      * 是否启用，0 不启用，1启用
-      */
-    Enable: number;
-    /**
-      * 地域码1
-      */
-    FirstLevelRegionCode?: number;
-    /**
-      * 地域码2
-      */
-    SecondLevelRegionCode?: number;
-    /**
-      * 地域名称1
-      */
-    FirstLevelRegionName?: string;
-    /**
-      * 地域名称2
-      */
-    SecondLevelRegionName?: string;
-    /**
-      * 云厂商码
-      */
-    CloudCode?: string;
+    LastTime?: string;
 }
 /**
  * RemoveNatAcRule请求参数结构体
@@ -3467,19 +3492,24 @@ export interface DescAcItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: number;
+    /**
+      * 关联任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BetaList?: Array<BetaInfoByACL>;
 }
 /**
- * CreateSecurityGroupRules返回参数结构体
+ * CreateChooseVpcs请求参数结构体
  */
-export interface CreateSecurityGroupRulesResponse {
+export interface CreateChooseVpcsRequest {
     /**
-      * 状态值，0：添加成功，非0：添加失败
+      * vpc列表
       */
-    Status: number;
+    VpcList: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * zone列表
       */
-    RequestId?: string;
+    AllZoneList: Array<VpcZoneData>;
 }
 /**
  * ExpandCfwVertical返回参数结构体

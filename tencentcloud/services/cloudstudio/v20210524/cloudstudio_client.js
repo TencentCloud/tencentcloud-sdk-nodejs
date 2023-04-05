@@ -28,28 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("cloudstudio.tencentcloudapi.com", "2021-05-24", clientConfig);
     }
     /**
-     * 获取工作空间元信息
-     */
-    async DescribeWorkspaceStatus(req, cb) {
-        return this.request("DescribeWorkspaceStatus", req, cb);
-    }
-    /**
      * 获取特定模板信息
      */
     async DescribeCustomizeTemplatesById(req, cb) {
         return this.request("DescribeCustomizeTemplatesById", req, cb);
-    }
-    /**
-     * 根据模板创建工作空间
-     */
-    async CreateWorkspaceByVersionControl(req, cb) {
-        return this.request("CreateWorkspaceByVersionControl", req, cb);
-    }
-    /**
-     * 快速开始, 基于模板创建工作空间
-     */
-    async CreateWorkspaceByTemplate(req, cb) {
-        return this.request("CreateWorkspaceByTemplate", req, cb);
     }
     /**
      * 为工作空间创建临时访问凭证，重复调用会创建新的 Token，旧的 Token 将会自动失效
@@ -58,10 +40,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkspaceTemporaryToken", req, cb);
     }
     /**
-     * 修改模板默认代码仓库
+     * 全量修改自定义模板，忽略空
      */
-    async ModifyCustomizeTemplateVersionControl(req, cb) {
-        return this.request("ModifyCustomizeTemplateVersionControl", req, cb);
+    async ModifyCustomizeTemplatesPartById(req, cb) {
+        return this.request("ModifyCustomizeTemplatesPartById", req, cb);
+    }
+    /**
+     * 获取工作空间是否已经启动就绪
+     */
+    async DescribeWorkspaceIsReady(req, cb) {
+        return this.request("DescribeWorkspaceIsReady", req, cb);
+    }
+    /**
+     * 运行空间
+     */
+    async RunWorkspace(req, cb) {
+        return this.request("RunWorkspace", req, cb);
+    }
+    /**
+     * 获取所有模板列表
+     */
+    async DescribeCustomizeTemplates(req, cb) {
+        return this.request("DescribeCustomizeTemplates", req, cb);
     }
     /**
      * 恢复工作空间
@@ -71,70 +71,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecoverWorkspace", req, cb);
     }
     /**
-     * 获取用户工作空间列表
+     * 根据模板创建工作空间
      */
-    async DescribeWorkspaceStatusList(req, cb) {
-        return this.request("DescribeWorkspaceStatusList", req, cb);
+    async CreateWorkspaceByVersionControl(req, cb) {
+        return this.request("CreateWorkspaceByVersionControl", req, cb);
     }
     /**
-     * 删除工作空间
+     * 修改模板默认代码仓库
      */
-    async RemoveWorkspace(req, cb) {
-        return this.request("RemoveWorkspace", req, cb);
-    }
-    /**
-     * 检查工作空间是否存在
-     */
-    async DescribeWorkspaceNameExist(req, cb) {
-        return this.request("DescribeWorkspaceNameExist", req, cb);
-    }
-    /**
-     * 全量修改自定义模板，不忽略空
-     */
-    async ModifyCustomizeTemplatesFullById(req, cb) {
-        return this.request("ModifyCustomizeTemplatesFullById", req, cb);
-    }
-    /**
-     * 运行空间
-     */
-    async RunWorkspace(req, cb) {
-        return this.request("RunWorkspace", req, cb);
-    }
-    /**
-     * 删除自定义模板
-     */
-    async DeleteCustomizeTemplatesById(req, cb) {
-        return this.request("DeleteCustomizeTemplatesById", req, cb);
-    }
-    /**
-     * 全量修改自定义模板，忽略空
-     */
-    async ModifyCustomizeTemplatesPartById(req, cb) {
-        return this.request("ModifyCustomizeTemplatesPartById", req, cb);
-    }
-    /**
-     * 停止运行空间
-     */
-    async StopWorkspace(req, cb) {
-        return this.request("StopWorkspace", req, cb);
-    }
-    /**
-     * 获取创建模板的预置参数
-     */
-    async DescribeCustomizeTemplatesPresets(req, cb) {
-        return this.request("DescribeCustomizeTemplatesPresets", req, cb);
-    }
-    /**
-     * 环境列表接口返回信息
-     */
-    async DescribeWorkspaceEnvList(req, cb) {
-        return this.request("DescribeWorkspaceEnvList", req, cb);
-    }
-    /**
-     * 修改工作空间的名称和描述
-     */
-    async ModifyWorkspaceAttributes(req, cb) {
-        return this.request("ModifyWorkspaceAttributes", req, cb);
+    async ModifyCustomizeTemplateVersionControl(req, cb) {
+        return this.request("ModifyCustomizeTemplateVersionControl", req, cb);
     }
     /**
      * 云服务器方式创建工作空间
@@ -143,16 +89,76 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkspaceByAgent", req, cb);
     }
     /**
+     * 删除工作空间
+     */
+    async RemoveWorkspace(req, cb) {
+        return this.request("RemoveWorkspace", req, cb);
+    }
+    /**
+     * 环境列表接口返回信息
+     */
+    async DescribeWorkspaceEnvList(req, cb) {
+        return this.request("DescribeWorkspaceEnvList", req, cb);
+    }
+    /**
+     * 删除自定义模板
+     */
+    async DeleteCustomizeTemplatesById(req, cb) {
+        return this.request("DeleteCustomizeTemplatesById", req, cb);
+    }
+    /**
+     * 停止运行空间
+     */
+    async StopWorkspace(req, cb) {
+        return this.request("StopWorkspace", req, cb);
+    }
+    /**
+     * 获取工作空间元信息
+     */
+    async DescribeWorkspaceStatus(req, cb) {
+        return this.request("DescribeWorkspaceStatus", req, cb);
+    }
+    /**
+     * 获取创建模板的预置参数
+     */
+    async DescribeCustomizeTemplatesPresets(req, cb) {
+        return this.request("DescribeCustomizeTemplatesPresets", req, cb);
+    }
+    /**
      * 添加自定义模板
      */
     async CreateCustomizeTemplates(req, cb) {
         return this.request("CreateCustomizeTemplates", req, cb);
     }
     /**
-     * 获取所有模板列表
+     * 全量修改自定义模板，不忽略空
      */
-    async DescribeCustomizeTemplates(req, cb) {
-        return this.request("DescribeCustomizeTemplates", req, cb);
+    async ModifyCustomizeTemplatesFullById(req, cb) {
+        return this.request("ModifyCustomizeTemplatesFullById", req, cb);
+    }
+    /**
+     * 快速开始, 基于模板创建工作空间
+     */
+    async CreateWorkspaceByTemplate(req, cb) {
+        return this.request("CreateWorkspaceByTemplate", req, cb);
+    }
+    /**
+     * 获取用户工作空间列表
+     */
+    async DescribeWorkspaceStatusList(req, cb) {
+        return this.request("DescribeWorkspaceStatusList", req, cb);
+    }
+    /**
+     * 检查工作空间是否存在
+     */
+    async DescribeWorkspaceNameExist(req, cb) {
+        return this.request("DescribeWorkspaceNameExist", req, cb);
+    }
+    /**
+     * 修改工作空间的名称和描述
+     */
+    async ModifyWorkspaceAttributes(req, cb) {
+        return this.request("ModifyWorkspaceAttributes", req, cb);
     }
 }
 exports.Client = Client;

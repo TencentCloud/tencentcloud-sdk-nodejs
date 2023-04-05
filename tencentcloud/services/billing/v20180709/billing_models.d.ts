@@ -1749,11 +1749,11 @@ export interface DescribeVoucherUsageDetailsRequest {
  */
 export interface DescribeDealsByCondRequest {
     /**
-      * 开始时间
+      * 开始时间 2016-01-01 00:00:00
       */
     StartTime: string;
     /**
-      * 结束时间
+      * 结束时间 2016-02-01 00:00:00 建议跨度不超过3个月
       */
     EndTime: string;
     /**
@@ -2420,11 +2420,11 @@ export interface DescribeDealsByCondResponse {
     /**
       * 订单列表
       */
-    Deals: Array<Deal>;
+    Deals?: Array<Deal>;
     /**
       * 订单总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

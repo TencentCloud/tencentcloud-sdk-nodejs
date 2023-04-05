@@ -81,6 +81,16 @@ export interface RecoverWorkspaceResponse {
 }
 
 /**
+ * DescribeWorkspaceIsReady请求参数结构体
+ */
+export interface DescribeWorkspaceIsReadyRequest {
+  /**
+   * 工作空间 spaceKey
+   */
+  SpaceKey: string
+}
+
+/**
  * DescribeWorkspaceStatus请求参数结构体
  */
 export interface DescribeWorkspaceStatusRequest {
@@ -1021,6 +1031,12 @@ export interface DescribeCustomizeTemplatesByIdResponse {
  */
 export interface DescribeWorkspaceNameExistResponse {
   /**
+      * 工作空间信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: WorkspaceInfoDTO
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1222,6 +1238,22 @@ export interface ModifyCustomizeTemplatesPartByIdRequest {
    * 自定义模板Patched参数
    */
   UserDefinedTemplatePatchedParams: UserDefinedTemplatePatchedParams
+}
+
+/**
+ * DescribeWorkspaceIsReady返回参数结构体
+ */
+export interface DescribeWorkspaceIsReadyResponse {
+  /**
+      * 工作空间是否就绪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

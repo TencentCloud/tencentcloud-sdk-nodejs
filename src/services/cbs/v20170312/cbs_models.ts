@@ -66,14 +66,14 @@ ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
  */
 export interface ModifyDiskExtraPerformanceRequest {
   /**
-   * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
-   */
-  DiskId: string
-
-  /**
    * 额外购买的云硬盘性能值，单位MB/s。
    */
   ThroughputPerformance: number
+
+  /**
+   * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
 }
 
 /**

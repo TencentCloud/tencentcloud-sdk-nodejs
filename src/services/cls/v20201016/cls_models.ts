@@ -32,7 +32,7 @@ export interface CreateAlarmResponse {
   /**
    * 告警策略ID。
    */
-  AlarmId: string
+  AlarmId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -377,7 +377,7 @@ export interface CreateMachineGroupResponse {
   /**
    * 机器组ID
    */
-  GroupId: string
+  GroupId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2486,23 +2486,27 @@ export interface DeleteConfigRequest {
  */
 export interface AnalysisDimensional {
   /**
-   * 分析名称
-   */
+      * 分析名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Name: string
 
   /**
-   * 分析类型：query，field ，original
-   */
+      * 分析类型：query，field ，original
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Type: string
 
   /**
-   * 分析内容
-   */
+      * 分析内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Content: string
 
   /**
-   * 配置
-   */
+      * 配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   ConfigInfo?: Array<AlarmAnalysisConfig>
 }
 
@@ -2817,7 +2821,7 @@ export interface CreateTopicResponse {
   /**
    * 日志主题ID
    */
-  TopicId: string
+  TopicId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2887,12 +2891,12 @@ export interface DescribeAlarmsResponse {
   /**
    * 告警策略列表。
    */
-  Alarms: Array<AlarmInfo>
+  Alarms?: Array<AlarmInfo>
 
   /**
    * 符合查询条件的告警策略数目。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

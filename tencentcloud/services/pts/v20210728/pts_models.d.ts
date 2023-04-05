@@ -166,31 +166,6 @@ export interface DeleteJobsRequest {
     ScenarioIds: Array<string>;
 }
 /**
- * 并发模式的施压配置
- */
-export interface Concurrency {
-    /**
-      * 多阶段配置数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Stages?: Array<Stage>;
-    /**
-      * 运行次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IterationCount?: number;
-    /**
-      * 最大RPS
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestsPerSecond?: number;
-    /**
-      * 优雅终止任务的等待时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GracefulStopSeconds?: number;
-}
-/**
  * 告警通知接收组
  */
 export interface AlertChannelRecord {
@@ -725,6 +700,105 @@ export interface UpdateScenarioResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 文件列表
+ */
+export interface File {
+    /**
+      * 文件 ID
+      */
+    FileId: string;
+    /**
+      * 文件种类，参数文件-1，协议文件-2，请求文件-3
+      */
+    Kind: number;
+    /**
+      * 文件名
+      */
+    Name: string;
+    /**
+      * 文件字节数
+      */
+    Size: number;
+    /**
+      * 文件类型
+      */
+    Type: string;
+    /**
+      * 更新时间
+      */
+    UpdatedAt: string;
+    /**
+      * 文件行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LineCount: number;
+    /**
+      * 头部数据行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeadLines: Array<string>;
+    /**
+      * 尾部数据行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TailLines: Array<string>;
+    /**
+      * 首行是否为参数名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeaderInFile: boolean;
+    /**
+      * 参数名数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeaderColumns: Array<string>;
+    /**
+      * 文件夹中的文件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileInfos: Array<FileInfo>;
+    /**
+      * 关联场景
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScenarioSet: Array<Scenario>;
+    /**
+      * 文件状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedAt: string;
+    /**
+      * 项目 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId: string;
+    /**
+      * 此字段不再使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppID: number;
+    /**
+      * 用户主账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * 用户子账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountUin: string;
+    /**
+      * 用户账号的 App ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: number;
 }
 /**
  * sample附带原始查询语句中的metric, aggregation
@@ -1495,6 +1569,41 @@ export interface AdjustJobSpeedResponse {
     RequestId?: string;
 }
 /**
+ * 错误信息汇总
+ */
+export interface ErrorSummary {
+    /**
+      * 状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
+    /**
+      * 结果码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: string;
+    /**
+      * 错误出现次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count?: number;
+    /**
+      * 错误率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rate?: number;
+    /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message?: string;
+    /**
+      * 请求协议类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Proto?: string;
+}
+/**
  * CreateProject返回参数结构体
  */
 export interface CreateProjectResponse {
@@ -2069,6 +2178,36 @@ export interface DescribeMetricLabelWithValuesResponse {
     RequestId?: string;
 }
 /**
+ * 文件基本信息
+ */
+export interface FileInfo {
+    /**
+      * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size?: number;
+    /**
+      * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedAt?: string;
+    /**
+      * 文件 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileId?: string;
+}
+/**
  * 施压配置
  */
 export interface LoadSpec {
@@ -2223,29 +2362,6 @@ export interface CreateCronJobRequest {
     Note?: string;
 }
 /**
- * 指标矩阵，可包含多条指标序列
- */
-export interface CustomSampleMatrix {
-    /**
-      * 指标名字
-      */
-    Metric: string;
-    /**
-      * 聚合函数
-      */
-    Aggregation: string;
-    /**
-      * 指标单位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Unit: string;
-    /**
-      * 指标序列数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Streams: Array<SampleStream>;
-}
-/**
  * UpdateJob返回参数结构体
  */
 export interface UpdateJobResponse {
@@ -2335,34 +2451,27 @@ export interface LoadSource {
     Region?: string;
 }
 /**
- * 文件基本信息
+ * 指标矩阵，可包含多条指标序列
  */
-export interface FileInfo {
+export interface CustomSampleMatrix {
     /**
-      * 文件名
+      * 指标名字
+      */
+    Metric: string;
+    /**
+      * 聚合函数
+      */
+    Aggregation: string;
+    /**
+      * 指标单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name?: string;
+    Unit: string;
     /**
-      * 文件大小
+      * 指标序列数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Size?: number;
-    /**
-      * 文件类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type?: string;
-    /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdatedAt?: string;
-    /**
-      * 文件 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FileId?: string;
+    Streams: Array<SampleStream>;
 }
 /**
  * 施压配置
@@ -3232,6 +3341,27 @@ export interface AbortJobRequest {
     AbortReason?: number;
 }
 /**
+ * DescribeErrorSummary请求参数结构体
+ */
+export interface DescribeErrorSummaryRequest {
+    /**
+      * 任务ID
+      */
+    JobId: string;
+    /**
+      * 场景ID
+      */
+    ScenarioId: string;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * 检查点汇总结果
  */
 export interface CheckSummary {
@@ -3409,103 +3539,34 @@ export interface ReactionTimeRange {
     Max?: string;
 }
 /**
- * 文件列表
+ * 并发模式的施压配置
  */
-export interface File {
+export interface Concurrency {
     /**
-      * 文件 ID
-      */
-    FileId: string;
-    /**
-      * 文件种类，参数文件-1，协议文件-2，请求文件-3
-      */
-    Kind: number;
-    /**
-      * 文件名
-      */
-    Name: string;
-    /**
-      * 文件字节数
-      */
-    Size: number;
-    /**
-      * 文件类型
-      */
-    Type: string;
-    /**
-      * 更新时间
-      */
-    UpdatedAt: string;
-    /**
-      * 文件行数
+      * 多阶段配置数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LineCount: number;
+    Stages?: Array<Stage>;
     /**
-      * 头部数据行
+      * 运行次数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HeadLines: Array<string>;
+    IterationCount?: number;
     /**
-      * 尾部数据行
+      * 最大RPS
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TailLines: Array<string>;
+    MaxRequestsPerSecond?: number;
     /**
-      * 首行是否为参数名
+      * 优雅终止任务的等待时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HeaderInFile: boolean;
+    GracefulStopSeconds?: number;
     /**
-      * 参数名数组
+      * 资源数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HeaderColumns: Array<string>;
-    /**
-      * 文件夹中的文件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FileInfos: Array<FileInfo>;
-    /**
-      * 关联场景
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ScenarioSet: Array<Scenario>;
-    /**
-      * 文件状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: number;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedAt: string;
-    /**
-      * 项目 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProjectId: string;
-    /**
-      * 此字段不再使用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AppID: number;
-    /**
-      * 用户主账号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Uin: string;
-    /**
-      * 用户子账号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubAccountUin: string;
-    /**
-      * 用户账号的 App ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AppId: number;
+    Resources?: number;
 }
 /**
  * DeleteAlertChannel请求参数结构体
@@ -3519,6 +3580,20 @@ export interface DeleteAlertChannelRequest {
       * Notice ID
       */
     NoticeId: string;
+}
+/**
+ * DescribeErrorSummary返回参数结构体
+ */
+export interface DescribeErrorSummaryResponse {
+    /**
+      * 错误汇总信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorSummarySet?: Array<ErrorSummary>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateProject返回参数结构体

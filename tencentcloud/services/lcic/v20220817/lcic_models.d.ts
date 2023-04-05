@@ -63,7 +63,7 @@ video 纯视频
       */
     Assistants?: Array<string>;
     /**
-      * 录制布局。
+      * 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
       */
     RecordLayout?: number;
     /**
@@ -766,7 +766,7 @@ export interface GetRoomMessageRequest {
       */
     RoomId: number;
     /**
-      * 消息序列。获取该序列以前前的消息(不包含该seq消息)
+      * 消息序列。获取该序列以前的消息(不包含该seq消息)
       */
     Seq?: number;
     /**

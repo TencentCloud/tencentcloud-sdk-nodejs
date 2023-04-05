@@ -368,6 +368,16 @@ it("waf.v20180125.DeleteDownloadRecord", async function () {
     }
 })
 
+it("waf.v20180125.CreateHost", async function () {
+    try {
+       const data = await client.CreateHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteSession", async function () {
     try {
        const data = await client.DeleteSession({})

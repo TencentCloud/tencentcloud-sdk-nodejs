@@ -1000,6 +1000,21 @@ export interface SearchAccessLogResponse {
 }
 
 /**
+ * CreateHost返回参数结构体
+ */
+export interface CreateHostResponse {
+  /**
+   * 新增防护域名ID
+   */
+  DomainId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ip黑白名单
  */
 export interface IpAccessControlItem {
@@ -1324,6 +1339,109 @@ export interface DescribeIpAccessControlRequest {
    * ip
    */
   Ip?: string
+}
+
+/**
+ * clb-waf防护域名
+ */
+export interface HostRecord {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 域名ID
+   */
+  DomainId: string
+
+  /**
+   * 主域名，入参时为空
+   */
+  MainDomain: string
+
+  /**
+   * waf模式，同saas waf保持一致
+   */
+  Mode: number
+
+  /**
+   * waf和LD的绑定，0：没有绑定，1：绑定
+   */
+  Status: number
+
+  /**
+   * 域名状态，0：正常，1：未检测到流量，2：即将过期，3：过期
+   */
+  State: number
+
+  /**
+   * 使用的规则，同saas waf保持一致
+   */
+  Engine: number
+
+  /**
+   * 是否开启代理，0：不开启，1：开启
+   */
+  IsCdn: number
+
+  /**
+   * 绑定的LB列表
+   */
+  LoadBalancerSet: Array<LoadBalancer>
+
+  /**
+   * 域名绑定的LB的地域，以,分割多个地域
+   */
+  Region: string
+
+  /**
+   * 产品分类，取值为：sparta-waf、clb-waf、cdn-waf
+   */
+  Edition: string
+
+  /**
+   * WAF的流量模式，1：清洗模式，0：镜像模式
+   */
+  FlowMode: number
+
+  /**
+   * 是否开启访问日志，1：开启，0：关闭
+   */
+  ClsStatus: number
+
+  /**
+      * 防护等级，可选值100,200,300
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level?: number
+
+  /**
+      * 域名需要下发到的cdc集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdcClusters?: Array<string>
+
+  /**
+      * 应用型负载均衡类型: clb或者apisix，默认clb
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbType?: string
+}
+
+/**
+ * CreateHost请求参数结构体
+ */
+export interface CreateHostRequest {
+  /**
+   * 防护域名配置信息
+   */
+  Host: HostRecord
+
+  /**
+   * 实例id
+   */
+  InstanceID?: string
 }
 
 /**
@@ -3484,4 +3602,66 @@ export interface ModifyWafThreatenIntelligenceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 负载均衡的监听器
+ */
+export interface LoadBalancer {
+  /**
+   * 负载均衡LD的ID
+   */
+  LoadBalancerId: string
+
+  /**
+   * 负载均衡LD的名称
+   */
+  LoadBalancerName: string
+
+  /**
+   * 负载均衡监听器的ID
+   */
+  ListenerId: string
+
+  /**
+   * 负载均衡监听器的名称
+   */
+  ListenerName: string
+
+  /**
+   * 负载均衡实例的IP
+   */
+  Vip: string
+
+  /**
+   * 负载均衡实例的端口
+   */
+  Vport: number
+
+  /**
+   * 负载均衡LD的地域
+   */
+  Region: string
+
+  /**
+   * 监听器协议，http、https
+   */
+  Protocol: string
+
+  /**
+   * 负载均衡监听器所在的zone
+   */
+  Zone: string
+
+  /**
+      * 负载均衡的VPCID，公网为-1，内网按实际填写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumericalVpcId?: number
+
+  /**
+      * 负载均衡的网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerType?: string
 }

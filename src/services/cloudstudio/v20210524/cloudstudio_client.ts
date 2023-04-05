@@ -21,6 +21,7 @@ import {
   UserDefinedTemplatePatchedParams,
   WorkspaceInfoDTO,
   RecoverWorkspaceResponse,
+  DescribeWorkspaceIsReadyRequest,
   DescribeWorkspaceStatusRequest,
   CreateCustomizeTemplatesRequest,
   RecoverWorkspaceRequest,
@@ -66,6 +67,7 @@ import {
   DescribeCustomizeTemplatesResponse,
   CreateWorkspaceByVersionControlResponse,
   ModifyCustomizeTemplatesPartByIdRequest,
+  DescribeWorkspaceIsReadyResponse,
   WorkspaceTokenDTO,
   UserDefinedTemplateParams,
   DeleteCustomizeTemplatesByIdResponse,
@@ -88,16 +90,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取工作空间元信息
-   */
-  async DescribeWorkspaceStatus(
-    req: DescribeWorkspaceStatusRequest,
-    cb?: (error: string, rep: DescribeWorkspaceStatusResponse) => void
-  ): Promise<DescribeWorkspaceStatusResponse> {
-    return this.request("DescribeWorkspaceStatus", req, cb)
-  }
-
-  /**
    * 获取特定模板信息
    */
   async DescribeCustomizeTemplatesById(
@@ -105,26 +97,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCustomizeTemplatesByIdResponse) => void
   ): Promise<DescribeCustomizeTemplatesByIdResponse> {
     return this.request("DescribeCustomizeTemplatesById", req, cb)
-  }
-
-  /**
-   * 根据模板创建工作空间
-   */
-  async CreateWorkspaceByVersionControl(
-    req: CreateWorkspaceByVersionControlRequest,
-    cb?: (error: string, rep: CreateWorkspaceByVersionControlResponse) => void
-  ): Promise<CreateWorkspaceByVersionControlResponse> {
-    return this.request("CreateWorkspaceByVersionControl", req, cb)
-  }
-
-  /**
-   * 快速开始, 基于模板创建工作空间
-   */
-  async CreateWorkspaceByTemplate(
-    req: CreateWorkspaceByTemplateRequest,
-    cb?: (error: string, rep: CreateWorkspaceByTemplateResponse) => void
-  ): Promise<CreateWorkspaceByTemplateResponse> {
-    return this.request("CreateWorkspaceByTemplate", req, cb)
   }
 
   /**
@@ -138,13 +110,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改模板默认代码仓库
+   * 全量修改自定义模板，忽略空
    */
-  async ModifyCustomizeTemplateVersionControl(
-    req: ModifyCustomizeTemplateVersionControlRequest,
-    cb?: (error: string, rep: ModifyCustomizeTemplateVersionControlResponse) => void
-  ): Promise<ModifyCustomizeTemplateVersionControlResponse> {
-    return this.request("ModifyCustomizeTemplateVersionControl", req, cb)
+  async ModifyCustomizeTemplatesPartById(
+    req: ModifyCustomizeTemplatesPartByIdRequest,
+    cb?: (error: string, rep: ModifyCustomizeTemplatesPartByIdResponse) => void
+  ): Promise<ModifyCustomizeTemplatesPartByIdResponse> {
+    return this.request("ModifyCustomizeTemplatesPartById", req, cb)
+  }
+
+  /**
+   * 获取工作空间是否已经启动就绪
+   */
+  async DescribeWorkspaceIsReady(
+    req: DescribeWorkspaceIsReadyRequest,
+    cb?: (error: string, rep: DescribeWorkspaceIsReadyResponse) => void
+  ): Promise<DescribeWorkspaceIsReadyResponse> {
+    return this.request("DescribeWorkspaceIsReady", req, cb)
+  }
+
+  /**
+   * 运行空间
+   */
+  async RunWorkspace(
+    req: RunWorkspaceRequest,
+    cb?: (error: string, rep: RunWorkspaceResponse) => void
+  ): Promise<RunWorkspaceResponse> {
+    return this.request("RunWorkspace", req, cb)
+  }
+
+  /**
+   * 获取所有模板列表
+   */
+  async DescribeCustomizeTemplates(
+    req: DescribeCustomizeTemplatesRequest,
+    cb?: (error: string, rep: DescribeCustomizeTemplatesResponse) => void
+  ): Promise<DescribeCustomizeTemplatesResponse> {
+    return this.request("DescribeCustomizeTemplates", req, cb)
   }
 
   /**
@@ -159,113 +161,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户工作空间列表
+   * 根据模板创建工作空间
    */
-  async DescribeWorkspaceStatusList(
-    req: DescribeWorkspaceStatusListRequest,
-    cb?: (error: string, rep: DescribeWorkspaceStatusListResponse) => void
-  ): Promise<DescribeWorkspaceStatusListResponse> {
-    return this.request("DescribeWorkspaceStatusList", req, cb)
+  async CreateWorkspaceByVersionControl(
+    req: CreateWorkspaceByVersionControlRequest,
+    cb?: (error: string, rep: CreateWorkspaceByVersionControlResponse) => void
+  ): Promise<CreateWorkspaceByVersionControlResponse> {
+    return this.request("CreateWorkspaceByVersionControl", req, cb)
   }
 
   /**
-   * 删除工作空间
+   * 修改模板默认代码仓库
    */
-  async RemoveWorkspace(
-    req: RemoveWorkspaceRequest,
-    cb?: (error: string, rep: RemoveWorkspaceResponse) => void
-  ): Promise<RemoveWorkspaceResponse> {
-    return this.request("RemoveWorkspace", req, cb)
-  }
-
-  /**
-   * 检查工作空间是否存在
-   */
-  async DescribeWorkspaceNameExist(
-    req: DescribeWorkspaceNameExistRequest,
-    cb?: (error: string, rep: DescribeWorkspaceNameExistResponse) => void
-  ): Promise<DescribeWorkspaceNameExistResponse> {
-    return this.request("DescribeWorkspaceNameExist", req, cb)
-  }
-
-  /**
-   * 全量修改自定义模板，不忽略空
-   */
-  async ModifyCustomizeTemplatesFullById(
-    req: ModifyCustomizeTemplatesFullByIdRequest,
-    cb?: (error: string, rep: ModifyCustomizeTemplatesFullByIdResponse) => void
-  ): Promise<ModifyCustomizeTemplatesFullByIdResponse> {
-    return this.request("ModifyCustomizeTemplatesFullById", req, cb)
-  }
-
-  /**
-   * 运行空间
-   */
-  async RunWorkspace(
-    req: RunWorkspaceRequest,
-    cb?: (error: string, rep: RunWorkspaceResponse) => void
-  ): Promise<RunWorkspaceResponse> {
-    return this.request("RunWorkspace", req, cb)
-  }
-
-  /**
-   * 删除自定义模板
-   */
-  async DeleteCustomizeTemplatesById(
-    req: DeleteCustomizeTemplatesByIdRequest,
-    cb?: (error: string, rep: DeleteCustomizeTemplatesByIdResponse) => void
-  ): Promise<DeleteCustomizeTemplatesByIdResponse> {
-    return this.request("DeleteCustomizeTemplatesById", req, cb)
-  }
-
-  /**
-   * 全量修改自定义模板，忽略空
-   */
-  async ModifyCustomizeTemplatesPartById(
-    req: ModifyCustomizeTemplatesPartByIdRequest,
-    cb?: (error: string, rep: ModifyCustomizeTemplatesPartByIdResponse) => void
-  ): Promise<ModifyCustomizeTemplatesPartByIdResponse> {
-    return this.request("ModifyCustomizeTemplatesPartById", req, cb)
-  }
-
-  /**
-   * 停止运行空间
-   */
-  async StopWorkspace(
-    req: StopWorkspaceRequest,
-    cb?: (error: string, rep: StopWorkspaceResponse) => void
-  ): Promise<StopWorkspaceResponse> {
-    return this.request("StopWorkspace", req, cb)
-  }
-
-  /**
-   * 获取创建模板的预置参数
-   */
-  async DescribeCustomizeTemplatesPresets(
-    req: DescribeCustomizeTemplatesPresetsRequest,
-    cb?: (error: string, rep: DescribeCustomizeTemplatesPresetsResponse) => void
-  ): Promise<DescribeCustomizeTemplatesPresetsResponse> {
-    return this.request("DescribeCustomizeTemplatesPresets", req, cb)
-  }
-
-  /**
-   * 环境列表接口返回信息
-   */
-  async DescribeWorkspaceEnvList(
-    req: DescribeWorkspaceEnvListRequest,
-    cb?: (error: string, rep: DescribeWorkspaceEnvListResponse) => void
-  ): Promise<DescribeWorkspaceEnvListResponse> {
-    return this.request("DescribeWorkspaceEnvList", req, cb)
-  }
-
-  /**
-   * 修改工作空间的名称和描述
-   */
-  async ModifyWorkspaceAttributes(
-    req: ModifyWorkspaceAttributesRequest,
-    cb?: (error: string, rep: ModifyWorkspaceAttributesResponse) => void
-  ): Promise<ModifyWorkspaceAttributesResponse> {
-    return this.request("ModifyWorkspaceAttributes", req, cb)
+  async ModifyCustomizeTemplateVersionControl(
+    req: ModifyCustomizeTemplateVersionControlRequest,
+    cb?: (error: string, rep: ModifyCustomizeTemplateVersionControlResponse) => void
+  ): Promise<ModifyCustomizeTemplateVersionControlResponse> {
+    return this.request("ModifyCustomizeTemplateVersionControl", req, cb)
   }
 
   /**
@@ -279,6 +191,66 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除工作空间
+   */
+  async RemoveWorkspace(
+    req: RemoveWorkspaceRequest,
+    cb?: (error: string, rep: RemoveWorkspaceResponse) => void
+  ): Promise<RemoveWorkspaceResponse> {
+    return this.request("RemoveWorkspace", req, cb)
+  }
+
+  /**
+   * 环境列表接口返回信息
+   */
+  async DescribeWorkspaceEnvList(
+    req: DescribeWorkspaceEnvListRequest,
+    cb?: (error: string, rep: DescribeWorkspaceEnvListResponse) => void
+  ): Promise<DescribeWorkspaceEnvListResponse> {
+    return this.request("DescribeWorkspaceEnvList", req, cb)
+  }
+
+  /**
+   * 删除自定义模板
+   */
+  async DeleteCustomizeTemplatesById(
+    req: DeleteCustomizeTemplatesByIdRequest,
+    cb?: (error: string, rep: DeleteCustomizeTemplatesByIdResponse) => void
+  ): Promise<DeleteCustomizeTemplatesByIdResponse> {
+    return this.request("DeleteCustomizeTemplatesById", req, cb)
+  }
+
+  /**
+   * 停止运行空间
+   */
+  async StopWorkspace(
+    req: StopWorkspaceRequest,
+    cb?: (error: string, rep: StopWorkspaceResponse) => void
+  ): Promise<StopWorkspaceResponse> {
+    return this.request("StopWorkspace", req, cb)
+  }
+
+  /**
+   * 获取工作空间元信息
+   */
+  async DescribeWorkspaceStatus(
+    req: DescribeWorkspaceStatusRequest,
+    cb?: (error: string, rep: DescribeWorkspaceStatusResponse) => void
+  ): Promise<DescribeWorkspaceStatusResponse> {
+    return this.request("DescribeWorkspaceStatus", req, cb)
+  }
+
+  /**
+   * 获取创建模板的预置参数
+   */
+  async DescribeCustomizeTemplatesPresets(
+    req: DescribeCustomizeTemplatesPresetsRequest,
+    cb?: (error: string, rep: DescribeCustomizeTemplatesPresetsResponse) => void
+  ): Promise<DescribeCustomizeTemplatesPresetsResponse> {
+    return this.request("DescribeCustomizeTemplatesPresets", req, cb)
+  }
+
+  /**
    * 添加自定义模板
    */
   async CreateCustomizeTemplates(
@@ -289,12 +261,52 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取所有模板列表
+   * 全量修改自定义模板，不忽略空
    */
-  async DescribeCustomizeTemplates(
-    req: DescribeCustomizeTemplatesRequest,
-    cb?: (error: string, rep: DescribeCustomizeTemplatesResponse) => void
-  ): Promise<DescribeCustomizeTemplatesResponse> {
-    return this.request("DescribeCustomizeTemplates", req, cb)
+  async ModifyCustomizeTemplatesFullById(
+    req: ModifyCustomizeTemplatesFullByIdRequest,
+    cb?: (error: string, rep: ModifyCustomizeTemplatesFullByIdResponse) => void
+  ): Promise<ModifyCustomizeTemplatesFullByIdResponse> {
+    return this.request("ModifyCustomizeTemplatesFullById", req, cb)
+  }
+
+  /**
+   * 快速开始, 基于模板创建工作空间
+   */
+  async CreateWorkspaceByTemplate(
+    req: CreateWorkspaceByTemplateRequest,
+    cb?: (error: string, rep: CreateWorkspaceByTemplateResponse) => void
+  ): Promise<CreateWorkspaceByTemplateResponse> {
+    return this.request("CreateWorkspaceByTemplate", req, cb)
+  }
+
+  /**
+   * 获取用户工作空间列表
+   */
+  async DescribeWorkspaceStatusList(
+    req: DescribeWorkspaceStatusListRequest,
+    cb?: (error: string, rep: DescribeWorkspaceStatusListResponse) => void
+  ): Promise<DescribeWorkspaceStatusListResponse> {
+    return this.request("DescribeWorkspaceStatusList", req, cb)
+  }
+
+  /**
+   * 检查工作空间是否存在
+   */
+  async DescribeWorkspaceNameExist(
+    req: DescribeWorkspaceNameExistRequest,
+    cb?: (error: string, rep: DescribeWorkspaceNameExistResponse) => void
+  ): Promise<DescribeWorkspaceNameExistResponse> {
+    return this.request("DescribeWorkspaceNameExist", req, cb)
+  }
+
+  /**
+   * 修改工作空间的名称和描述
+   */
+  async ModifyWorkspaceAttributes(
+    req: ModifyWorkspaceAttributesRequest,
+    cb?: (error: string, rep: ModifyWorkspaceAttributesResponse) => void
+  ): Promise<ModifyWorkspaceAttributesResponse> {
+    return this.request("ModifyWorkspaceAttributes", req, cb)
   }
 }

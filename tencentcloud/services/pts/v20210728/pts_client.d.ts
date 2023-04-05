@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCronJobsRequest, UpdateJobRequest, UpdateCronJobResponse, DescribeSampleMatrixQueryResponse, DescribeSampleLogsRequest, DeleteJobsRequest, DescribeAlertRecordsRequest, DeleteAlertChannelResponse, DescribeLabelValuesRequest, AbortCronJobsResponse, DescribeRequestSummaryResponse, DescribeScenarioWithJobsRequest, CreateCronJobResponse, RestartCronJobsResponse, UpdateProjectRequest, AbortJobResponse, UpdateScenarioRequest, DescribeRegionsResponse, UpdateScenarioResponse, CreateProjectRequest, AdjustJobSpeedRequest, DescribeRequestSummaryRequest, CreateFileResponse, DeleteProjectsResponse, DescribeLabelValuesResponse, DescribeAvailableMetricsRequest, CopyScenarioResponse, DescribeSampleMatrixQueryRequest, GenerateTmpKeyResponse, DescribeFilesResponse, DeleteProjectsRequest, UpdateFileScenarioRelationRequest, DeleteJobsResponse, AdjustJobSpeedResponse, CreateProjectResponse, DescribeSampleQueryRequest, DescribeSampleMatrixBatchQueryResponse, DescribeRegionsRequest, DeleteScenariosResponse, DeleteFilesRequest, CopyScenarioRequest, DescribeNormalLogsResponse, DescribeSampleBatchQueryRequest, RestartCronJobsRequest, DeleteScenariosRequest, CreateAlertChannelResponse, CreateAlertChannelRequest, DescribeAlertChannelsRequest, DescribeAvailableMetricsResponse, DescribeMetricLabelWithValuesResponse, DescribeAlertChannelsResponse, CreateCronJobRequest, UpdateJobResponse, DescribeCheckSummaryRequest, DeleteFilesResponse, CreateFileRequest, DeleteCronJobsRequest, DescribeSampleLogsResponse, DescribeCronJobsResponse, DescribeNormalLogsRequest, DescribeJobsRequest, DescribeFilesRequest, AbortCronJobsRequest, DescribeSampleMatrixBatchQueryRequest, DescribeAlertRecordsResponse, DescribeProjectsRequest, DescribeSampleQueryResponse, CreateScenarioRequest, DescribeMetricLabelWithValuesRequest, DescribeProjectsResponse, UpdateCronJobRequest, DescribeCheckSummaryResponse, DescribeScenariosRequest, DescribeScenariosResponse, CreateScenarioResponse, AbortJobRequest, DescribeJobsResponse, GenerateTmpKeyRequest, DescribeSampleBatchQueryResponse, StartJobResponse, DeleteCronJobsResponse, StartJobRequest, DescribeScenarioWithJobsResponse, DeleteAlertChannelRequest, UpdateProjectResponse, UpdateFileScenarioRelationResponse } from "./pts_models";
+import { DescribeCronJobsRequest, UpdateJobRequest, UpdateCronJobResponse, DescribeSampleMatrixQueryResponse, DescribeSampleLogsRequest, DeleteJobsRequest, DescribeAlertRecordsRequest, DeleteAlertChannelResponse, DescribeLabelValuesRequest, AbortCronJobsResponse, DescribeRequestSummaryResponse, DescribeScenarioWithJobsRequest, CreateCronJobResponse, RestartCronJobsResponse, UpdateProjectRequest, AbortJobResponse, UpdateScenarioRequest, DescribeRegionsResponse, UpdateScenarioResponse, CreateProjectRequest, AdjustJobSpeedRequest, DescribeRequestSummaryRequest, CreateFileResponse, DeleteProjectsResponse, DescribeLabelValuesResponse, DescribeAvailableMetricsRequest, CopyScenarioResponse, DescribeSampleMatrixQueryRequest, GenerateTmpKeyResponse, DescribeFilesResponse, DeleteProjectsRequest, UpdateFileScenarioRelationRequest, DeleteJobsResponse, AdjustJobSpeedResponse, CreateProjectResponse, DescribeSampleQueryRequest, DescribeSampleMatrixBatchQueryResponse, DescribeRegionsRequest, DeleteScenariosResponse, DeleteFilesRequest, CopyScenarioRequest, DescribeNormalLogsResponse, DescribeSampleBatchQueryRequest, RestartCronJobsRequest, DeleteScenariosRequest, CreateAlertChannelResponse, CreateAlertChannelRequest, DescribeAlertChannelsRequest, DescribeAvailableMetricsResponse, DescribeMetricLabelWithValuesResponse, DescribeAlertChannelsResponse, CreateCronJobRequest, UpdateJobResponse, DescribeCheckSummaryRequest, DeleteFilesResponse, CreateFileRequest, DeleteCronJobsRequest, DescribeSampleLogsResponse, DescribeCronJobsResponse, DescribeNormalLogsRequest, DescribeJobsRequest, DescribeFilesRequest, AbortCronJobsRequest, DescribeSampleMatrixBatchQueryRequest, DescribeAlertRecordsResponse, DescribeProjectsRequest, DescribeSampleQueryResponse, CreateScenarioRequest, DescribeMetricLabelWithValuesRequest, DescribeProjectsResponse, UpdateCronJobRequest, DescribeCheckSummaryResponse, DescribeScenariosRequest, DescribeScenariosResponse, CreateScenarioResponse, AbortJobRequest, DescribeErrorSummaryRequest, DescribeJobsResponse, GenerateTmpKeyRequest, DescribeSampleBatchQueryResponse, StartJobResponse, DeleteCronJobsResponse, StartJobRequest, DescribeScenarioWithJobsResponse, DeleteAlertChannelRequest, DescribeErrorSummaryResponse, UpdateProjectResponse, UpdateFileScenarioRelationResponse } from "./pts_models";
 /**
  * pts client
  * @class
@@ -51,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 删除文件
      */
     DeleteFiles(req: DeleteFilesRequest, cb?: (error: string, rep: DeleteFilesResponse) => void): Promise<DeleteFilesResponse>;
+    /**
+     * 查询地域列表
+     */
+    DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
      * 查询检查点汇总信息
      */
@@ -116,13 +120,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteJobs(req: DeleteJobsRequest, cb?: (error: string, rep: DeleteJobsResponse) => void): Promise<DeleteJobsResponse>;
     /**
+     * 查询错误详情汇总信息
+     */
+    DescribeErrorSummary(req: DescribeErrorSummaryRequest, cb?: (error: string, rep: DescribeErrorSummaryResponse) => void): Promise<DescribeErrorSummaryResponse>;
+    /**
      * 压测过程日志日志包括引擎输出日志及用户输出日志
      */
     DescribeNormalLogs(req: DescribeNormalLogsRequest, cb?: (error: string, rep: DescribeNormalLogsResponse) => void): Promise<DescribeNormalLogsResponse>;
-    /**
-     * 查询地域列表
-     */
-    DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
      * 复制场景
      */

@@ -24,7 +24,6 @@ import {
   DescribeSampleMatrixQueryResponse,
   DescribeSampleLogsRequest,
   DeleteJobsRequest,
-  Concurrency,
   AlertChannelRecord,
   DescribeAlertRecordsRequest,
   DeleteAlertChannelResponse,
@@ -45,6 +44,7 @@ import {
   DescribeRegionsResponse,
   Attributes,
   UpdateScenarioResponse,
+  File,
   CustomSample,
   CreateProjectRequest,
   AdjustJobSpeedRequest,
@@ -74,6 +74,7 @@ import {
   DeleteJobsResponse,
   TagSpec,
   AdjustJobSpeedResponse,
+  ErrorSummary,
   CreateProjectResponse,
   DescribeSampleQueryRequest,
   DescribeSampleMatrixBatchQueryResponse,
@@ -100,6 +101,7 @@ import {
   SLARule,
   DescribeAvailableMetricsResponse,
   DescribeMetricLabelWithValuesResponse,
+  FileInfo,
   LoadSpec,
   AlertChannel,
   ScriptOrigin,
@@ -107,14 +109,13 @@ import {
   Credentials,
   DescribeAlertChannelsResponse,
   CreateCronJobRequest,
-  CustomSampleMatrix,
   UpdateJobResponse,
   DescribeCheckSummaryRequest,
   Filter,
   DeleteFilesResponse,
   AggregationLegend,
   LoadSource,
-  FileInfo,
+  CustomSampleMatrix,
   Load,
   CreateFileRequest,
   RequestSummary,
@@ -141,6 +142,7 @@ import {
   DescribeScenariosResponse,
   CreateScenarioResponse,
   AbortJobRequest,
+  DescribeErrorSummaryRequest,
   CheckSummary,
   NotificationHook,
   DescribeJobsResponse,
@@ -152,8 +154,9 @@ import {
   StartJobRequest,
   DescribeScenarioWithJobsResponse,
   ReactionTimeRange,
-  File,
+  Concurrency,
   DeleteAlertChannelRequest,
+  DescribeErrorSummaryResponse,
   UpdateProjectResponse,
   UpdateFileScenarioRelationResponse,
 } from "./pts_models"
@@ -275,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFilesResponse) => void
   ): Promise<DeleteFilesResponse> {
     return this.request("DeleteFiles", req, cb)
+  }
+
+  /**
+   * 查询地域列表
+   */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
   }
 
   /**
@@ -438,6 +451,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询错误详情汇总信息
+   */
+  async DescribeErrorSummary(
+    req: DescribeErrorSummaryRequest,
+    cb?: (error: string, rep: DescribeErrorSummaryResponse) => void
+  ): Promise<DescribeErrorSummaryResponse> {
+    return this.request("DescribeErrorSummary", req, cb)
+  }
+
+  /**
    * 压测过程日志日志包括引擎输出日志及用户输出日志
    */
   async DescribeNormalLogs(
@@ -445,16 +468,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNormalLogsResponse) => void
   ): Promise<DescribeNormalLogsResponse> {
     return this.request("DescribeNormalLogs", req, cb)
-  }
-
-  /**
-   * 查询地域列表
-   */
-  async DescribeRegions(
-    req?: DescribeRegionsRequest,
-    cb?: (error: string, rep: DescribeRegionsResponse) => void
-  ): Promise<DescribeRegionsResponse> {
-    return this.request("DescribeRegions", req, cb)
   }
 
   /**

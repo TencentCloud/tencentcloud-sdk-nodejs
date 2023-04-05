@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteFiles", req, cb);
     }
     /**
+     * 查询地域列表
+     */
+    async DescribeRegions(req, cb) {
+        return this.request("DescribeRegions", req, cb);
+    }
+    /**
      * 查询检查点汇总信息
      */
     async DescribeCheckSummary(req, cb) {
@@ -190,16 +196,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteJobs", req, cb);
     }
     /**
+     * 查询错误详情汇总信息
+     */
+    async DescribeErrorSummary(req, cb) {
+        return this.request("DescribeErrorSummary", req, cb);
+    }
+    /**
      * 压测过程日志日志包括引擎输出日志及用户输出日志
      */
     async DescribeNormalLogs(req, cb) {
         return this.request("DescribeNormalLogs", req, cb);
-    }
-    /**
-     * 查询地域列表
-     */
-    async DescribeRegions(req, cb) {
-        return this.request("DescribeRegions", req, cb);
     }
     /**
      * 复制场景

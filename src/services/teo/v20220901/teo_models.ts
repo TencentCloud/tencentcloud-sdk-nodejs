@@ -429,6 +429,47 @@ export interface Https {
 }
 
 /**
+ * Bot主动特征识别规则。
+ */
+export interface AlgDetectRule {
+  /**
+   * 规则id。
+   */
+  RuleID?: number
+
+  /**
+   * 规则名。
+   */
+  RuleName?: string
+
+  /**
+   * 规则开关。
+   */
+  Switch?: string
+
+  /**
+   * 自定义规则。
+   */
+  AlgConditions?: Array<AclCondition>
+
+  /**
+      * Cookie校验和会话行为分析。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlgDetectSession?: AlgDetectSession
+
+  /**
+   * 客户端行为校验。
+   */
+  AlgDetectJS?: Array<AlgDetectJS>
+
+  /**
+   * 更新时间。仅出参使用。
+   */
+  UpdateTime?: string
+}
+
+/**
  * 安全数据维度值信息
  */
 export interface SecEntryValue {
@@ -1562,25 +1603,62 @@ export interface ModifyZoneResponse {
 }
 
 /**
- * Waf规则
+ * 安全模板配置
  */
-export interface WafRule {
+export interface TemplateConfig {
   /**
-      * 托管规则开关，取值有：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 模板ID。
+   */
+  TemplateId: string
+
+  /**
+   * 模板名称。
+   */
+  TemplateName: string
+}
+
+/**
+ * Cookie校验与会话跟踪。
+ */
+export interface AlgDetectSession {
+  /**
+   * 操作名称。
+   */
+  Name?: string
+
+  /**
+      * 校验方式，默认update_detect，取值有：
+<li>detect：仅校验；</li>
+<li>update_detect：更新Cookie并校验。</li>
       */
-  Switch: string
+  DetectMode?: string
 
   /**
-   * 黑名单，ID参考接口 [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1)。
-   */
-  BlockRuleIDs: Array<number>
+      * 会话速率和周期特征校验开关，默认off，取值有：
+<li>off：关闭；</li>
+<li>on：打开。</li>
+      */
+  SessionAnalyzeSwitch?: string
 
   /**
-   * 观察模式ID列表，将规则ID加入本参数列表中代表该ID使用观察模式生效，即该规则ID进入观察模式。ID参考接口 [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1)。
+   * 校验结果为未携带Cookie或Cookie已过期的统计周期。单位为秒，默认10，取值：5～3600。
    */
-  ObserveRuleIDs: Array<number>
+  InvalidStatTime?: number
+
+  /**
+   * 校验结果为未携带Cookie或Cookie已过期的触发阈值。单位为次，默认300，取值：1～100000000。
+   */
+  InvalidThreshold?: number
+
+  /**
+   * Cookie校验校验结果。
+   */
+  AlgDetectResults?: Array<AlgDetectResult>
+
+  /**
+   * 会话速率和周期特征校验结果。
+   */
+  SessionBehaviors?: Array<AlgDetectResult>
 }
 
 /**
@@ -2901,23 +2979,41 @@ export interface ModifyZoneSettingResponse {
 }
 
 /**
- * DescribeZones返回参数结构体
+ * Bot主动特征识别客户端行为校验。
  */
-export interface DescribeZonesResponse {
+export interface AlgDetectJS {
   /**
-   * 符合条件的站点个数。
+   * 操作名称。
    */
-  TotalCount: number
+  Name?: string
 
   /**
-   * 站点详细信息列表。
-   */
-  Zones: Array<Zone>
+      * 工作量证明 (proof_Of-Work)校验强度，默认low，取值有：
+<li>low：低；</li>
+<li>middle：中；</li>
+<li>high：高。</li>
+      */
+  WorkLevel?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 执行方式，js延迟执行的时间。单位为ms，默认500，取值：0～1000。
    */
-  RequestId?: string
+  ExecuteMode?: number
+
+  /**
+   * 客户端末启用JS（末完成检测）统计周期。单位为秒，默认10，取值：5～3600。
+   */
+  InvalidStatTime?: number
+
+  /**
+   * 客户端末启用JS（末完成检测）触发阈值。单位为次，默认300，取值：1～100000000。
+   */
+  InvalidThreshold?: number
+
+  /**
+   * Bot主动特征识别客户端行为校验结果。
+   */
+  AlgDetectResults?: Array<AlgDetectResult>
 }
 
 /**
@@ -4063,6 +4159,28 @@ export interface DescribeWebManagedRulesDataResponse {
 }
 
 /**
+ * Waf规则
+ */
+export interface WafRule {
+  /**
+      * 托管规则开关，取值有：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+      */
+  Switch: string
+
+  /**
+   * 黑名单，ID参考接口 [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1)。
+   */
+  BlockRuleIDs: Array<number>
+
+  /**
+   * 观察模式ID列表，将规则ID加入本参数列表中代表该ID使用观察模式生效，即该规则ID进入观察模式。ID参考接口 [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1)。
+   */
+  ObserveRuleIDs: Array<number>
+}
+
+/**
  * 安全配置
  */
 export interface SecurityConfig {
@@ -4961,18 +5079,38 @@ export interface ModifyApplicationProxyRequest {
 }
 
 /**
- * 安全模板配置
+ * DownloadL4Logs请求参数结构体
  */
-export interface TemplateConfig {
+export interface DownloadL4LogsRequest {
   /**
-   * 模板ID。
+   * 开始时间。
    */
-  TemplateId: string
+  StartTime: string
 
   /**
-   * 模板名称。
+   * 结束时间。
    */
-  TemplateName: string
+  EndTime: string
+
+  /**
+   * 站点集合，不填默认选择全部站点。
+   */
+  ZoneIds?: Array<string>
+
+  /**
+   * 四层实例ID集合。
+   */
+  ProxyIds?: Array<string>
+
+  /**
+   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
+   */
+  Limit?: number
+
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -7805,6 +7943,26 @@ export interface DescribePrefetchTasksRequest {
 export type DescribeRulesSettingRequest = null
 
 /**
+ * DescribeZones返回参数结构体
+ */
+export interface DescribeZonesResponse {
+  /**
+   * 符合条件的站点个数。
+   */
+  TotalCount: number
+
+  /**
+   * 站点详细信息列表。
+   */
+  Zones: Array<Zone>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAliasDomain返回参数结构体
  */
 export interface ModifyAliasDomainResponse {
@@ -8824,38 +8982,32 @@ export interface IdentifyZoneRequest {
 }
 
 /**
- * DownloadL4Logs请求参数结构体
+ * Bot主动特征识别校验结果。
  */
-export interface DownloadL4LogsRequest {
+export interface AlgDetectResult {
   /**
-   * 开始时间。
-   */
-  StartTime: string
+      * 校验结果，取值有：
+<li>invalid：不合法Cookie；</li>
+<li>cookie_empty：末携带Cookie或Cookie己过期；</li>
+<li>js_empty：客户端末启用JS（末完成检测）；</li>
+<li>low：会话速率和周期特征校验低风险；</li>
+<li>middle：会话速率和周期特征校验中风险；</li>
+<li>high：会话速率和周期特征校验高风险；</li>
+<li>timeout：检测超时时长；</li>
+<li>not_browser：不合法浏览器；</li>
+<li>is_bot：Bot客户端。</li>
+      */
+  Result?: string
 
   /**
-   * 结束时间。
-   */
-  EndTime: string
-
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-
-  /**
-   * 四层实例ID集合。
-   */
-  ProxyIds?: Array<string>
-
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
+      * 处罚动作，取值有：
+<li>drop：拦截；</li>
+<li>monitor：观察；</li>
+<li>silence：静默；</li>
+<li>shortdelay：（短时间）等待后响应；</li>
+<li>longdelay：（长时间）等待后响应。</li>
+      */
+  Action?: string
 }
 
 /**
@@ -9328,6 +9480,11 @@ export interface BotConfig {
    * Bot自定义规则。如果为null，默认使用历史配置。
    */
   BotUserRules?: Array<BotUserRule>
+
+  /**
+   * Bot主动特征识别规则。
+   */
+  AlgDetectRule?: Array<AlgDetectRule>
 
   /**
       * Bot托管定制策略，入参可不填，仅出参使用。

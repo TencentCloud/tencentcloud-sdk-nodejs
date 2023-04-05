@@ -240,6 +240,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDownloadRecord", req, cb);
     }
     /**
+     * clb-waf中添加防护的域名
+     */
+    async CreateHost(req, cb) {
+        return this.request("CreateHost", req, cb);
+    }
+    /**
      * 删除CC攻击的session设置
      */
     async DeleteSession(req, cb) {

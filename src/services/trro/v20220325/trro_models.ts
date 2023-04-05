@@ -41,6 +41,47 @@ export interface DeleteProjectRequest {
 }
 
 /**
+ * 按授权查看的license列表
+ */
+export interface License {
+  /**
+      * 该类型的license个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count?: number
+
+  /**
+      * license状态：0:未绑定；1:已绑定；2:已停服；3:已退费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 到期时间戳：s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime?: string
+
+  /**
+      * 服务时长：s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration?: string
+
+  /**
+      * 剩余天数：天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemainDay?: number
+
+  /**
+      * 该类型的licenseId列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseIds?: Array<string>
+}
+
+/**
  * 权限信息
  */
 export interface PolicyInfo {
@@ -68,6 +109,31 @@ export interface ModifyDeviceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetLicenses请求参数结构体
+ */
+export interface GetLicensesRequest {
+  /**
+   * 页码
+   */
+  PageNum: number
+
+  /**
+   * 页面数量
+   */
+  PageSize: number
+
+  /**
+   * projectId
+   */
+  ProjectId?: string
+
+  /**
+   * DeviceId
+   */
+  DeviceId?: string
 }
 
 /**
@@ -191,6 +257,76 @@ export interface DescribeSessionStatisticsByIntervalResponse {
 }
 
 /**
+ * DescribeRecentSessionList请求参数结构体
+ */
+export interface DescribeRecentSessionListRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+
+  /**
+   * 页码，从1开始
+   */
+  PageNumber: number
+
+  /**
+   * 每页个数
+   */
+  PageSize: number
+
+  /**
+   * 设备ID，支持过滤远端设备或现场设备
+   */
+  DeviceId?: string
+
+  /**
+   * 时间范围的起始时间。时间范围最大为最近两小时，若不传或超出范围，则起始时间按两小时前计算
+   */
+  StartTime?: number
+
+  /**
+   * 时间范围的结束时间。时间范围最大为最近两小时，若不传或超出范围，则结束时间按当前时间计算
+   */
+  EndTime?: number
+}
+
+/**
+ * 最新会话信息
+ */
+export interface RecentSessionInfo {
+  /**
+   * 会话ID
+   */
+  SessionId: string
+
+  /**
+   * 远端设备ID
+   */
+  RemoteDeviceId: string
+
+  /**
+   * 现场设备ID
+   */
+  FieldDeviceId: string
+
+  /**
+   * 分辨率
+   */
+  Resolution: string
+
+  /**
+   * 会话开始时间
+   */
+  StartTime: number
+
+  /**
+   * 最后更新时间
+   */
+  LatestUpdateTime: number
+}
+
+/**
  * DescribeProjectInfo请求参数结构体
  */
 export interface DescribeProjectInfoRequest {
@@ -266,6 +402,11 @@ export interface DescribeDeviceInfoResponse {
 }
 
 /**
+ * GetLicenseStat请求参数结构体
+ */
+export type GetLicenseStatRequest = null
+
+/**
  * DescribeProjectList返回参数结构体
  */
 export interface DescribeProjectListResponse {
@@ -316,6 +457,36 @@ export interface BatchDeletePolicyResponse {
 }
 
 /**
+ * GetLicenseStat返回参数结构体
+ */
+export interface GetLicenseStatResponse {
+  /**
+   * 有效授权
+   */
+  Valid?: number
+
+  /**
+   * 已绑定授权
+   */
+  Bound?: number
+
+  /**
+   * 未绑定授权
+   */
+  UnBound?: number
+
+  /**
+   * 过期授权
+   */
+  Expire?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePolicy请求参数结构体
  */
 export interface DescribePolicyRequest {
@@ -348,6 +519,75 @@ export interface DescribePolicyRequest {
    * 当前页码，不填默认为1（首页）
    */
   PageNumber?: number
+}
+
+/**
+ * ModifyPolicy返回参数结构体
+ */
+export interface ModifyPolicyResponse {
+  /**
+      * 添加关联失败的现场设备ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedInsertIds: Array<string>
+
+  /**
+      * 解除关联失败的现场设备ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedDeleteIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询用户设备的授权绑定情况
+ */
+export interface Device {
+  /**
+      * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceId?: string
+
+  /**
+      * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceName?: string
+
+  /**
+      * 已经绑定license数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseCount?: number
+
+  /**
+      * 剩余天数：天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemainDay?: number
+
+  /**
+      * 过期时间：s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime?: string
+
+  /**
+      * 服务时长：s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration?: string
+
+  /**
+      * 已经绑定licenseId列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseIds?: Array<string>
 }
 
 /**
@@ -414,6 +654,31 @@ export interface ModifyProjectRequest {
    * 修改后的权限模式，black为黑名单，white为白名单,不填则不修改
    */
   PolicyMode?: string
+}
+
+/**
+ * DescribeRecentSessionList返回参数结构体
+ */
+export interface DescribeRecentSessionListResponse {
+  /**
+   * 总个数
+   */
+  Total: number
+
+  /**
+   * 会话列表
+   */
+  RecentSessionList: Array<RecentSessionInfo>
+
+  /**
+   * 本页数量
+   */
+  Num: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -587,6 +852,26 @@ export interface DescribeDeviceListResponse {
 }
 
 /**
+ * BoundLicenses请求参数结构体
+ */
+export interface BoundLicensesRequest {
+  /**
+   * license数量
+   */
+  Count: number
+
+  /**
+   * 设备id
+   */
+  DeviceId: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+}
+
+/**
  * DeleteProject返回参数结构体
  */
 export interface DeleteProjectResponse {
@@ -702,6 +987,21 @@ export interface SessionDeviceDetail {
 }
 
 /**
+ * GetDeviceLicense返回参数结构体
+ */
+export interface GetDeviceLicenseResponse {
+  /**
+   * 指定设备已经绑定的可用license数量
+   */
+  AvailableCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDevice返回参数结构体
  */
 export interface CreateDeviceResponse {
@@ -807,6 +1107,36 @@ export interface DescribeSessionStatisticsResponse {
 }
 
 /**
+ * GetDevices返回参数结构体
+ */
+export interface GetDevicesResponse {
+  /**
+   * 设备授权列表
+   */
+  Devices?: Array<Device>
+
+  /**
+   * 列表数量
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BoundLicenses返回参数结构体
+ */
+export interface BoundLicensesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeviceSessionDetails请求参数结构体
  */
 export interface DescribeDeviceSessionDetailsRequest {
@@ -814,6 +1144,26 @@ export interface DescribeDeviceSessionDetailsRequest {
    * 会话ID
    */
   SessionId: string
+}
+
+/**
+ * GetLicenses返回参数结构体
+ */
+export interface GetLicensesResponse {
+  /**
+   * license列表
+   */
+  Licenses?: Array<License>
+
+  /**
+   * license列表项数量
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -892,25 +1242,28 @@ export interface DescribeDeviceSessionListRequest {
 }
 
 /**
- * ModifyPolicy返回参数结构体
+ * GetDevices请求参数结构体
  */
-export interface ModifyPolicyResponse {
+export interface GetDevicesRequest {
   /**
-      * 添加关联失败的现场设备ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailedInsertIds: Array<string>
-
-  /**
-      * 解除关联失败的现场设备ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailedDeleteIds: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 页码
    */
-  RequestId?: string
+  PageNum: number
+
+  /**
+   * 页面数量
+   */
+  PageSize: number
+
+  /**
+   * 项目 ID
+   */
+  ProjectId?: string
+
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
 }
 
 /**
@@ -966,6 +1319,21 @@ export interface SessionIntervalStatistic {
    * 优良会话占比，单位：%
    */
   NotBadSessionRatio: number
+}
+
+/**
+ * GetDeviceLicense请求参数结构体
+ */
+export interface GetDeviceLicenseRequest {
+  /**
+   * 目标设备所属项目ID
+   */
+  ProjectId: string
+
+  /**
+   * 目标设备ID
+   */
+  DeviceId: string
 }
 
 /**

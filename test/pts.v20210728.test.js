@@ -128,6 +128,16 @@ it("pts.v20210728.DeleteFiles", async function () {
     }
 })
 
+it("pts.v20210728.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("pts.v20210728.DescribeCheckSummary", async function () {
     try {
        const data = await client.DescribeCheckSummary({})
@@ -288,9 +298,9 @@ it("pts.v20210728.DeleteJobs", async function () {
     }
 })
 
-it("pts.v20210728.DescribeNormalLogs", async function () {
+it("pts.v20210728.DescribeErrorSummary", async function () {
     try {
-       const data = await client.DescribeNormalLogs({})
+       const data = await client.DescribeErrorSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +308,9 @@ it("pts.v20210728.DescribeNormalLogs", async function () {
     }
 })
 
-it("pts.v20210728.DescribeRegions", async function () {
+it("pts.v20210728.DescribeNormalLogs", async function () {
     try {
-       const data = await client.DescribeRegions({})
+       const data = await client.DescribeNormalLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

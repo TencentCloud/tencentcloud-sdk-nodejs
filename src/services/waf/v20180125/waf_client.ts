@@ -59,11 +59,14 @@ import {
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
   SearchAccessLogResponse,
+  CreateHostResponse,
   IpAccessControlItem,
   SwitchDomainRulesRequest,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   DescribeIpAccessControlRequest,
+  HostRecord,
+  CreateHostRequest,
   ModifyAreaBanStatusRequest,
   AddSpartaProtectionRequest,
   PostAttackDownloadTaskRequest,
@@ -145,6 +148,7 @@ import {
   DescribeDomainsRequest,
   BotPkg,
   ModifyWafThreatenIntelligenceResponse,
+  LoadBalancer,
 } from "./waf_models"
 
 /**
@@ -506,6 +510,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDownloadRecordResponse) => void
   ): Promise<DeleteDownloadRecordResponse> {
     return this.request("DeleteDownloadRecord", req, cb)
+  }
+
+  /**
+   * clb-waf中添加防护的域名
+   */
+  async CreateHost(
+    req: CreateHostRequest,
+    cb?: (error: string, rep: CreateHostResponse) => void
+  ): Promise<CreateHostResponse> {
+    return this.request("CreateHost", req, cb)
   }
 
   /**
