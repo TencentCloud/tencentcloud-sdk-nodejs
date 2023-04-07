@@ -145,6 +145,7 @@ import {
   DescribeWordSamplesResponse,
   AiSampleFaceInfo,
   MediaImageSpriteItem,
+  ImageBlur,
   ModifyVodDomainAccelerateConfigRequest,
   PoliticalConfigureInfoForUpdate,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
@@ -719,7 +720,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持三次操作，例如：裁剪-缩略-裁剪。
+   * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持十次操作，例如：裁剪-缩略-裁剪-模糊-缩略-裁剪-缩略-裁剪-模糊-缩略。
    */
   async CreateImageProcessingTemplate(
     req: CreateImageProcessingTemplateRequest,
@@ -869,7 +870,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改音画质重生模版。
+   * 修改音画质重生模板。
    */
   async ModifyRebuildMediaTemplate(
     req: ModifyRebuildMediaTemplateRequest,
@@ -1304,7 +1305,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除音画质重生模版。
+   * 删除音画质重生模板。
    */
   async DeleteRebuildMediaTemplate(
     req: DeleteRebuildMediaTemplateRequest,
@@ -1539,7 +1540,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建音画质重生模版。
+   * 创建音画质重生模板。
    */
   async CreateRebuildMediaTemplate(
     req: CreateRebuildMediaTemplateRequest,
@@ -2059,7 +2060,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用模版发起音画质重生。
+   * 使用模板发起音画质重生。
    */
   async RebuildMediaByTemplate(
     req: RebuildMediaByTemplateRequest,
@@ -2443,7 +2444,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取音画质重生模版列表。
+   * 获取音画质重生模板列表。
    */
   async DescribeRebuildMediaTemplates(
     req: DescribeRebuildMediaTemplatesRequest,

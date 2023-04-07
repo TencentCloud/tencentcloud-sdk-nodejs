@@ -2884,42 +2884,42 @@ export interface IDCardOCRResponse {
   /**
    * 姓名（人像面）
    */
-  Name: string
+  Name?: string
 
   /**
    * 性别（人像面）
    */
-  Sex: string
+  Sex?: string
 
   /**
    * 民族（人像面）
    */
-  Nation: string
+  Nation?: string
 
   /**
    * 出生日期（人像面）
    */
-  Birth: string
+  Birth?: string
 
   /**
    * 地址（人像面）
    */
-  Address: string
+  Address?: string
 
   /**
    * 身份证号（人像面）
    */
-  IdNum: string
+  IdNum?: string
 
   /**
    * 发证机关（国徽面）
    */
-  Authority: string
+  Authority?: string
 
   /**
    * 证件有效期（国徽面）
    */
-  ValidDate: string
+  ValidDate?: string
 
   /**
       * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
@@ -2939,7 +2939,7 @@ WarnInfos，告警信息，Code 告警码列表和释义：
 -9106	身份证 PS 告警，
 -9107       身份证反光告警。
       */
-  AdvancedInfo: string
+  AdvancedInfo?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

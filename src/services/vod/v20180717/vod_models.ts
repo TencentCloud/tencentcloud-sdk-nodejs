@@ -870,7 +870,7 @@ export interface ManageTaskResponse {
 export interface CreateImageProcessingTemplateRequest {
   /**
       * 图片处理操作数组，操作将以其在数组中的顺序执行。
-<li>长度限制：3。</li>
+<li>长度限制：10。</li>
       */
   Operations: Array<ImageOperation>
 
@@ -2164,7 +2164,7 @@ export interface DescribeClientUploadAccelerationUsageDataResponse {
  */
 export interface ModifyRebuildMediaTemplateRequest {
   /**
-   * 音画质重生模版号。
+   * 音画质重生模板号。
    */
   Definition: number
 
@@ -2174,12 +2174,12 @@ export interface ModifyRebuildMediaTemplateRequest {
   SubAppId?: string
 
   /**
-   * 音画质重生模版名称。
+   * 音画质重生模板名称。
    */
   Name?: string
 
   /**
-   * 音画质重生模版描述。
+   * 音画质重生模板描述。
    */
   Comment?: string
 
@@ -3601,7 +3601,7 @@ export interface AiAnalysisTaskHighlightResult {
  */
 export interface CreateRebuildMediaTemplateResponse {
   /**
-   * 音画质重生模版 ID。
+   * 音画质重生模板 ID。
    */
   Definition?: number
 
@@ -3679,6 +3679,27 @@ export interface MediaImageSpriteItem {
    * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
    */
   WebVttUrl: string
+}
+
+/**
+ * 图片模糊处理。
+ */
+export interface ImageBlur {
+  /**
+      * 图片模糊的操作类型。可选模式有：
+<li>Gaussian : 高斯模糊。</li>
+      */
+  Type: string
+
+  /**
+   * 模糊半径，取值范围为1 - 50。当 Type 取值为 Gaussian 时此字段有效。
+   */
+  Radius?: number
+
+  /**
+   * 正态分布的标准差，必须大于0。当 Type 取值为 Gaussian 时此字段有效。
+   */
+  Sigma?: number
 }
 
 /**
@@ -6270,11 +6291,11 @@ export interface RemoveWatermarkResponse {
 }
 
 /**
- * 音画质重生模版详情。
+ * 音画质重生模板详情。
  */
 export interface RebuildMediaTemplate {
   /**
-   * 音画质重生模版号。
+   * 音画质重生模板号。
    */
   Definition?: number
 
@@ -6286,12 +6307,12 @@ export interface RebuildMediaTemplate {
   Type?: string
 
   /**
-   * 音画质重生模版名称。
+   * 音画质重生模板名称。
    */
   Name?: string
 
   /**
-   * 音画质重生模版描述。
+   * 音画质重生模板描述。
    */
   Comment?: string
 
@@ -7772,7 +7793,7 @@ export interface AiAnalysisTaskHighlightOutput {
  */
 export interface DescribeRebuildMediaTemplatesRequest {
   /**
-   * 音画质重生模版列表。
+   * 音画质重生模板列表。
    */
   Definitions?: Array<number>
 
@@ -8847,7 +8868,7 @@ export interface DeleteRebuildMediaTemplateResponse {
  */
 export interface DeleteRebuildMediaTemplateRequest {
   /**
-   * 音画质重生模版号。
+   * 音画质重生模板号。
    */
   Definition: number
 
@@ -10049,7 +10070,7 @@ export interface RebuildMediaByTemplateRequest {
   FileId: string
 
   /**
-   * 音画质重生模版 ID。
+   * 音画质重生模板 ID。
    */
   Definition: number
 
@@ -17395,12 +17416,12 @@ export interface CreateRebuildMediaTemplateRequest {
   SubAppId?: number
 
   /**
-   * 音画质重生模版名称。
+   * 音画质重生模板名称。
    */
   Name?: string
 
   /**
-   * 模版描述。
+   * 模板描述。
    */
   Comment?: string
 
@@ -17461,6 +17482,11 @@ export interface ImageOperation {
    * 图片裁剪处理，仅当 Type 为 CenterCut 时有效。
    */
   CenterCut?: ImageCenterCut
+
+  /**
+   * 图片模糊处理，仅当 Type 为 Blur 时有效。
+   */
+  Blur?: ImageBlur
 }
 
 /**

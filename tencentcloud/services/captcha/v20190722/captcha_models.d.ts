@@ -589,24 +589,33 @@ export interface DescribeCaptchaResultResponse {
 21 diff 票据校验异常，可能的原因是（1）若Ticket包含terror前缀，一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理。（2）若Ticket不包含terror前缀，则是由于验证码风控系统发现请求有安全风险，业务侧可根据需要进行拦截。
 100 appid-secretkey-ticket mismatch 参数校验错误，（1）请检查CaptchaAppId与AppSecretKey是否正确，CaptchaAppId、AppSecretKey需要在验证码控制台【验证管理】>【基础配置】中获取（2）请检查传入的Ticket是否由传入的CaptchaAppId生成
       */
-    CaptchaCode: number;
+    CaptchaCode?: number;
     /**
       * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg: string;
+    CaptchaMsg?: string;
     /**
       * 无感验证模式下，该参数返回验证结果：
 EvilLevel=0 请求无恶意
 EvilLevel=100 请求有恶意
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EvilLevel: number;
+    EvilLevel?: number;
     /**
       * 前端获取验证码时间，时间戳格式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GetCaptchaTime: number;
+    GetCaptchaTime?: number;
+    /**
+      * 拦截类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EvilBitmap?: number;
+    /**
+      * 提交验证码时间
+      */
+    SubmitCaptchaTime?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -882,11 +891,11 @@ export interface DescribeCaptchaResultRequest {
       */
     AppSecretKey: string;
     /**
-      * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+      * 预留字段
       */
     BusinessId?: number;
     /**
-      * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+      * 预留字段
       */
     SceneId?: number;
     /**

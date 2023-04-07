@@ -460,6 +460,36 @@ export interface CreateOutputSRTSettings {
 }
 
 /**
+ * 智能精彩片段信息
+ */
+export interface MediaAiAnalysisHighlightItem {
+  /**
+   * 智能精彩集锦地址。
+   */
+  HighlightPath: string
+
+  /**
+   * 智能精彩集锦封面地址。
+   */
+  CovImgPath: string
+
+  /**
+   * 智能精彩集锦的可信度，取值范围是 0 到 100。
+   */
+  Confidence: number
+
+  /**
+   * 智能精彩集锦持续时间。
+   */
+  Duration: number
+
+  /**
+   * 智能精彩集锦子片段列表。
+   */
+  SegmentSet: Array<HighlightSegmentItem>
+}
+
+/**
  * ModifyStreamLinkOutputInfo返回参数结构体
  */
 export interface ModifyStreamLinkOutputInfoResponse {
@@ -787,39 +817,39 @@ export interface DescribeOutputRTMPPullSettings {
  */
 export interface AwsS3FileUploadTrigger {
   /**
-   * 工作流绑定的 AWS S3 存储桶。
+   * 绑定的 AWS S3 存储桶。
    */
   S3Bucket: string
 
   /**
-   * 工作流绑定的桶所在 AWS 区域。
+   * 绑定的桶所在 AWS 区域。
    */
   S3Region: string
 
   /**
-   * 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。
+   * 绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。
    */
   Dir?: string
 
   /**
-   * 工作流允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。
+   * 允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。
    */
   Formats?: Array<string>
 
   /**
-      * 工作流绑定的 AWS S3 存储桶的秘钥ID。
+      * 绑定的 AWS S3 存储桶的秘钥ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   S3SecretId?: string
 
   /**
-      * 工作流绑定的 AWS S3 存储桶的秘钥Key。
+      * 绑定的 AWS S3 存储桶的秘钥Key。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   S3SecretKey?: string
 
   /**
-      * 工作流绑定的 AWS S3 存储桶对应的 SQS事件队列。
+      * 绑定的 AWS S3 存储桶对应的 SQS事件队列。
 注意：队列和桶需要在同一区域。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -1098,8 +1128,9 @@ export interface CreateWorkflowRequest {
   OutputStorage?: TaskOutputStorage
 
   /**
-   * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
-   */
+      * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与触发文件所在的目录一致。
+      */
   OutputDir?: string
 
   /**
@@ -1606,7 +1637,7 @@ export interface ModifyScheduleRequest {
   OutputStorage?: TaskOutputStorage
 
   /**
-      * 媒体处理生成的文件输出的目标目录。
+      * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾。
 注意：如果设置为空，则表示取消老配置的OutputDir值。
       */
   OutputDir?: string
@@ -1798,23 +1829,13 @@ export interface DescribeStreamLinkFlowsResponse {
 }
 
 /**
- * 语音识别片段。
+ * 查询输入的RTSP配置信息。
  */
-export interface AiRecognitionTaskAsrWordsSegmentItem {
+export interface DescribeInputRTSPPullSettings {
   /**
-   * 识别片段起始的偏移时间，单位：秒。
+   * RTSP源站地址信息。
    */
-  StartTimeOffset: number
-
-  /**
-   * 识别片段终止的偏移时间，单位：秒。
-   */
-  EndTimeOffset: number
-
-  /**
-   * 识别片段置信度。取值：0~100。
-   */
-  Confidence: number
+  SourceAddresses: Array<DescribeRTSPPullSourceAddress>
 }
 
 /**
@@ -2318,6 +2339,37 @@ export interface ModifyStreamLinkFlowRequest {
 }
 
 /**
+ * 智能精彩片段结果类型
+ */
+export interface AiAnalysisTaskHighlightResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status: string
+
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 智能精彩片段任务输入。
+   */
+  Input: AiAnalysisTaskHighlightInput
+
+  /**
+      * 智能精彩片段任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: AiAnalysisTaskHighlightOutput
+}
+
+/**
  * DeleteAIAnalysisTemplate返回参数结构体
  */
 export interface DeleteAIAnalysisTemplateResponse {
@@ -2387,6 +2439,37 @@ export interface DeleteWorkflowResponse {
 }
 
 /**
+ * 质检异常项。
+ */
+export interface QualityControlResult {
+  /**
+      * 异常类型，取值范围：
+Jitter：抖动，
+Blur：模糊，
+LowLighting：低光照，
+HighLighting：过曝，
+CrashScreen：花屏，
+BlackWhiteEdge：黑白边，
+SolidColorScreen：纯色屏，
+Noise：噪点，
+Mosaic：马赛克，
+QRCode：二维码，
+AppletCode：小程序码，
+BarCode：条形码，
+LowVoice：低音，
+HighVoice：爆音，
+NoVoice：静音，
+LowEvaluation：无参考打分低于阈值。
+      */
+  Type: string
+
+  /**
+   * 质检结果项。
+   */
+  QualityControlItems: Array<QualityControlItem>
+}
+
+/**
  * 内容审核鉴黄任务输入参数类型
  */
 export interface AiReviewPornTaskInput {
@@ -2435,6 +2518,16 @@ export interface ScheduleTask {
 <li>FINISH：已完成。</li>
       */
   Status: string
+
+  /**
+   * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
+   */
+  ErrCode?: number
+
+  /**
+   * 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。
+   */
+  Message?: string
 
   /**
       * 媒体处理的目标文件信息。
@@ -2585,7 +2678,7 @@ export interface CreateScheduleResponse {
   /**
    * 编排 ID。
    */
-  ScheduleId: number
+  ScheduleId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3508,7 +3601,7 @@ export interface ProcessMediaResponse {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3548,7 +3641,7 @@ export interface CreateScheduleRequest {
   ScheduleName: string
 
   /**
-   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发工作流。
+   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。
    */
   Trigger: WorkflowTrigger
 
@@ -3563,8 +3656,9 @@ export interface CreateScheduleRequest {
   OutputStorage?: TaskOutputStorage
 
   /**
-   * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
-   */
+      * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与触发文件所在的目录一致。
+      */
   OutputDir?: string
 
   /**
@@ -3961,6 +4055,23 @@ export interface EditMediaOutputConfig {
    * 剪辑模式，可选值 normal、fast。默认是精确剪辑 normal
    */
   Type?: string
+}
+
+/**
+ * 视频质检输入参数类型
+ */
+export interface AiQualityControlTaskInput {
+  /**
+      * 视频质检模板 ID 。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Definition?: number
+
+  /**
+      * 渠道扩展参数json序列化字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelExtPara?: string
 }
 
 /**
@@ -5200,6 +5311,21 @@ export interface AiAnalysisTaskTagOutput {
 }
 
 /**
+ * 智能精彩片段结果信息
+ */
+export interface AiAnalysisTaskHighlightOutput {
+  /**
+   * 视频智能精彩片段列表。
+   */
+  HighlightSet: Array<MediaAiAnalysisHighlightItem>
+
+  /**
+   * 精彩片段的存储位置。
+   */
+  OutputStorage: TaskOutputStorage
+}
+
+/**
  * SRT输入源地址。
  */
 export interface SRTSourceAddressReq {
@@ -5229,9 +5355,21 @@ export interface ProcessMediaRequest {
   OutputStorage?: TaskOutputStorage
 
   /**
-   * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。
-   */
+      * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与 InputInfo 中文件所在的目录一致。
+      */
   OutputDir?: string
+
+  /**
+      * 编排ID。
+注意1：对于OutputStorage、OutputDir参数：
+<li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li>
+<li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。</li>
+注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。
+
+注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
+      */
+  ScheduleId?: number
 
   /**
    * 媒体处理类型任务参数。
@@ -5254,6 +5392,11 @@ export interface ProcessMediaRequest {
   AiRecognitionTask?: AiRecognitionTaskInput
 
   /**
+   * 视频质检类型任务参数。
+   */
+  AiQualityControlTask?: AiQualityControlTaskInput
+
+  /**
    * 任务的事件通知信息，不填代表不获取事件通知。
    */
   TaskNotifyConfig?: TaskNotifyConfig
@@ -5272,17 +5415,6 @@ export interface ProcessMediaRequest {
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string
-
-  /**
-      * 编排ID。
-注意1：对于OutputStorage、OutputDir参数：
-<li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li>
-<li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。</li>
-注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。
-
-注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。
-      */
-  ScheduleId?: number
 
   /**
       * 任务类型，默认Online
@@ -5414,12 +5546,12 @@ export interface DescribeSchedulesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 编排信息数组。
    */
-  ScheduleInfoSet: Array<SchedulesInfo>
+  ScheduleInfoSet?: Array<SchedulesInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6434,6 +6566,42 @@ export interface ScheduleAnalysisTaskResult {
 }
 
 /**
+ * 质检任务结果类型
+ */
+export interface ScheduleQualityControlTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status: string
+
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 质检任务的输入。
+   */
+  Input: AiQualityControlTaskInput
+
+  /**
+      * 质检任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: QualityControlData
+}
+
+/**
  * 涉敏任务控制参数。
  */
 export interface TerrorismConfigureInfoForUpdate {
@@ -7075,6 +7243,12 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FrameTagTask: AiAnalysisTaskFrameTagResult
+
+  /**
+      * 视频内容分析集锦任务的查询结果，当任务类型为 Highlight时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HighlightTask: AiAnalysisTaskHighlightResult
 }
 
 /**
@@ -7826,6 +8000,33 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
 }
 
 /**
+ * 质检结果项
+ */
+export interface QualityControlItem {
+  /**
+      * 置信度，取值范围是 0 到 100。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Confidence: number
+
+  /**
+   * 出现的起始时间戳，秒。
+   */
+  StartTimeOffset: number
+
+  /**
+   * 出现的结束时间戳，秒。
+   */
+  EndTimeOffset: number
+
+  /**
+      * 区域坐标(px)，即左上角坐标、右下角坐标。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AreaCoordSet: Array<number>
+}
+
+/**
  * DeleteStreamLinkFlow返回参数结构体
  */
 export interface DeleteStreamLinkFlowResponse {
@@ -7896,6 +8097,16 @@ export interface CreateSampleSnapshotTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能精彩片段任务输入类型
+ */
+export interface AiAnalysisTaskHighlightInput {
+  /**
+   * 视频智能精彩片段模板 ID。
+   */
+  Definition: number
 }
 
 /**
@@ -8151,13 +8362,23 @@ export interface AiReviewTaskPoliticalAsrResult {
 }
 
 /**
- * 查询输入的RTSP配置信息。
+ * 语音识别片段。
  */
-export interface DescribeInputRTSPPullSettings {
+export interface AiRecognitionTaskAsrWordsSegmentItem {
   /**
-   * RTSP源站地址信息。
+   * 识别片段起始的偏移时间，单位：秒。
    */
-  SourceAddresses: Array<DescribeRTSPPullSourceAddress>
+  StartTimeOffset: number
+
+  /**
+   * 识别片段终止的偏移时间，单位：秒。
+   */
+  EndTimeOffset: number
+
+  /**
+   * 识别片段置信度。取值：0~100。
+   */
+  Confidence: number
 }
 
 /**
@@ -9251,7 +9472,7 @@ export interface CreateWorkflowResponse {
   /**
    * 工作流 ID。
    */
-  WorkflowId: number
+  WorkflowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9630,17 +9851,20 @@ export interface Activity {
 <li>action-image-sprite：雪碧图</li>
 <li>action-snapshotByTimeOffset: 时间点截图</li>
 <li>action-adaptive-substream：自适应码流</li>
+注意：此字段可能返回 null，表示取不到有效值。
       */
   ActivityType: string
 
   /**
-   * 后驱节点索引数组
-   */
+      * 后驱节点索引数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   ReardriveIndex?: Array<number>
 
   /**
-   * 原子任务参数
-   */
+      * 原子任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   ActivityPara?: ActivityPara
 }
 
@@ -11356,10 +11580,18 @@ export interface DescribeSchedulesRequest {
   ScheduleIds?: Array<number>
 
   /**
+      * 编排触发类型，可选值：
+<li>CosFileUpload： 腾讯云 COS 文件上传触发</li>
+<li>AwsS3FileUpload：Aws S3 文件上传触发。</li>
+不填或者为空表示全部。
+      */
+  TriggerType?: string
+
+  /**
       * 状态，取值范围：
 <li>Enabled：已启用，</li>
 <li>Disabled：已禁用。</li>
-不填此参数，则不区分工作流状态。
+不填此参数，则不区编排状态。
       */
   Status?: string
 
@@ -11709,6 +11941,35 @@ export interface DescribeFlow {
    * 媒体传输输入流所属的区域，取值和InputRegion相同。
    */
   Region: string
+}
+
+/**
+ * 质检结果输出。
+ */
+export interface QualityControlData {
+  /**
+      * 为true时表示视频无音频轨。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoAudio: boolean
+
+  /**
+      * 为true时表示视频无视频轨。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoVideo: boolean
+
+  /**
+      * 视频无参考质量打分，百分制。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QualityEvaluationScore: number
+
+  /**
+      * 质检检出异常项。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QualityControlResultSet: Array<QualityControlResult>
 }
 
 /**
@@ -12663,6 +12924,12 @@ export interface WorkflowTask {
    * 视频内容识别任务的执行状态与结果。
    */
   AiRecognitionResultSet: Array<AiRecognitionResult>
+
+  /**
+      * 视频质检任务的执行状态与结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AiQualityControlTaskResult: ScheduleQualityControlTaskResult
 }
 
 /**
@@ -13562,6 +13829,26 @@ export interface EditMediaTaskOutput {
    * 编辑后的视频文件路径。
    */
   Path: string
+}
+
+/**
+ * 智能精彩集锦片段列表。
+ */
+export interface HighlightSegmentItem {
+  /**
+   * 置信度。
+   */
+  Confidence: number
+
+  /**
+   * 片段起始时间偏移。
+   */
+  StartTimeOffset: number
+
+  /**
+   * 片段结束时间偏移。
+   */
+  EndTimeOffset: number
 }
 
 /**

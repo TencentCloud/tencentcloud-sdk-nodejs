@@ -4076,27 +4076,27 @@ export interface DescribeHttpsPackagesResponse {
   /**
    * HTTPS请求包总个数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * HTTPS请求包详情
    */
-  HttpsPackages: Array<HttpsPackage>
+  HttpsPackages?: Array<HttpsPackage>
 
   /**
    * 即将过期的HTTPS请求包个数（7天内）
    */
-  ExpiringCount: number
+  ExpiringCount?: number
 
   /**
    * 有效HTTPS请求包个数
    */
-  EnabledCount: number
+  EnabledCount?: number
 
   /**
    * 付费HTTPS请求包个数
    */
-  PaidCount: number
+  PaidCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

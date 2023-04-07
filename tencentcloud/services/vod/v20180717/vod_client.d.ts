@@ -8,7 +8,7 @@ import { ModifySampleSnapshotTemplateResponse, ModifyWatermarkTemplateRequest, C
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持三次操作，例如：裁剪-缩略-裁剪。
+     * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持十次操作，例如：裁剪-缩略-裁剪-模糊-缩略-裁剪-缩略-裁剪-模糊-缩略。
      */
     CreateImageProcessingTemplate(req: CreateImageProcessingTemplateRequest, cb?: (error: string, rep: CreateImageProcessingTemplateResponse) => void): Promise<CreateImageProcessingTemplateResponse>;
     /**
@@ -86,7 +86,7 @@ export declare class Client extends AbstractClient {
      */
     ProcessMediaByProcedure(req: ProcessMediaByProcedureRequest, cb?: (error: string, rep: ProcessMediaByProcedureResponse) => void): Promise<ProcessMediaByProcedureResponse>;
     /**
-     * 修改音画质重生模版。
+     * 修改音画质重生模板。
      */
     ModifyRebuildMediaTemplate(req: ModifyRebuildMediaTemplateRequest, cb?: (error: string, rep: ModifyRebuildMediaTemplateResponse) => void): Promise<ModifyRebuildMediaTemplateResponse>;
     /**
@@ -287,7 +287,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDrmKeyProviderInfo(req: DescribeDrmKeyProviderInfoRequest, cb?: (error: string, rep: DescribeDrmKeyProviderInfoResponse) => void): Promise<DescribeDrmKeyProviderInfoResponse>;
     /**
-     * 删除音画质重生模版。
+     * 删除音画质重生模板。
      */
     DeleteRebuildMediaTemplate(req: DeleteRebuildMediaTemplateRequest, cb?: (error: string, rep: DeleteRebuildMediaTemplateResponse) => void): Promise<DeleteRebuildMediaTemplateResponse>;
     /**
@@ -420,7 +420,7 @@ export declare class Client extends AbstractClient {
      */
     CreateStorageRegion(req: CreateStorageRegionRequest, cb?: (error: string, rep: CreateStorageRegionResponse) => void): Promise<CreateStorageRegionResponse>;
     /**
-     * 创建音画质重生模版。
+     * 创建音画质重生模板。
      */
     CreateRebuildMediaTemplate(req: CreateRebuildMediaTemplateRequest, cb?: (error: string, rep: CreateRebuildMediaTemplateResponse) => void): Promise<CreateRebuildMediaTemplateResponse>;
     /**
@@ -658,7 +658,7 @@ export declare class Client extends AbstractClient {
      */
     SetDrmKeyProviderInfo(req: SetDrmKeyProviderInfoRequest, cb?: (error: string, rep: SetDrmKeyProviderInfoResponse) => void): Promise<SetDrmKeyProviderInfoResponse>;
     /**
-     * 使用模版发起音画质重生。
+     * 使用模板发起音画质重生。
      */
     RebuildMediaByTemplate(req: RebuildMediaByTemplateRequest, cb?: (error: string, rep: RebuildMediaByTemplateResponse) => void): Promise<RebuildMediaByTemplateResponse>;
     /**
@@ -862,7 +862,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAIRecognitionTemplate(req: CreateAIRecognitionTemplateRequest, cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void): Promise<CreateAIRecognitionTemplateResponse>;
     /**
-     * 获取音画质重生模版列表。
+     * 获取音画质重生模板列表。
      */
     DescribeRebuildMediaTemplates(req: DescribeRebuildMediaTemplatesRequest, cb?: (error: string, rep: DescribeRebuildMediaTemplatesResponse) => void): Promise<DescribeRebuildMediaTemplatesResponse>;
     /**

@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetDBInstancePassword", req, cb);
     }
     /**
-     * 查询实例绑定的安全组
+     * 本就口（DescribeSecurityGroup）用于查询实例绑定的安全组。
      */
     async DescribeSecurityGroup(req, cb) {
         return this.request("DescribeSecurityGroup", req, cb);
@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackupDownloadTask", req, cb);
     }
     /**
-     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
+     * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选主实例、灾备实例和只读实例信息列表。
      */
     async DescribeDBInstances(req, cb) {
         return this.request("DescribeDBInstances", req, cb);
@@ -233,7 +233,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenewDBInstances", req, cb);
     }
     /**
-     * 修改实例绑定的安全组
+     * 本接口（ModifyDBInstanceSecurityGroup）用于修改实例绑定的安全组
      */
     async ModifyDBInstanceSecurityGroup(req, cb) {
         return this.request("ModifyDBInstanceSecurityGroup", req, cb);

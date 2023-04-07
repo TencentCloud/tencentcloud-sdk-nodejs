@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachineTag", req, cb);
     }
     /**
+     * 获取指定点属性信息
+     */
+    async DescribeVertexDetail(req, cb) {
+        return this.request("DescribeVertexDetail", req, cb);
+    }
+    /**
      * 按分页形式展示网络攻击日志列表
      */
     async DescribeAttackLogs(req, cb) {
@@ -148,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanTaskDetails", req, cb);
     }
     /**
-     * 查询服务区关联目录详情
+     * 根据事件表名和id查询告警事件详情
      */
-    async DescribeServerRelatedDirInfo(req, cb) {
-        return this.request("DescribeServerRelatedDirInfo", req, cb);
+    async DescribeEventByTable(req, cb) {
+        return this.request("DescribeEventByTable", req, cb);
     }
     /**
      * 停止基线检测
@@ -214,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExpertServiceList", req, cb);
     }
     /**
-     * 查询基线列表信息
+     * 查询告警点id列表
      */
-    async DescribeBaselineList(req, cb) {
-        return this.request("DescribeBaselineList", req, cb);
+    async DescribeAlarmVertexId(req, cb) {
+        return this.request("DescribeAlarmVertexId", req, cb);
     }
     /**
      * DeleteScanTask 该接口可以对指定类型的扫描任务进行停止扫描;
@@ -412,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSearchLog", req, cb);
     }
     /**
+     * 获取告警点所在事件的所有节点信息
+     */
+    async DescribeAlarmIncidentNodes(req, cb) {
+        return this.request("DescribeAlarmIncidentNodes", req, cb);
+    }
+    /**
      * 获取应急漏洞列表
      */
     async DescribeEmergencyVulList(req, cb) {
@@ -422,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopNoticeBanTips(req, cb) {
         return this.request("StopNoticeBanTips", req, cb);
+    }
+    /**
+     * 反弹shell信息详情
+     */
+    async DescribeReverseShellEventInfo(req, cb) {
+        return this.request("DescribeReverseShellEventInfo", req, cb);
     }
     /**
      * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
@@ -452,6 +470,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportIgnoreBaselineRule(req, cb) {
         return this.request("ExportIgnoreBaselineRule", req, cb);
+    }
+    /**
+     * 本地提权信息详情
+     */
+    async DescribePrivilegeEventInfo(req, cb) {
+        return this.request("DescribePrivilegeEventInfo", req, cb);
     }
     /**
      * 查询高危命令事件详情(新)
@@ -760,10 +784,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportBaselineRuleDetectList", req, cb);
     }
     /**
-     * 本接口 (ExportBruteAttacks) 用于导出密码破解记录成CSV文件。
+     * 查询服务区关联目录详情
      */
-    async ExportBruteAttacks(req, cb) {
-        return this.request("ExportBruteAttacks", req, cb);
+    async DescribeServerRelatedDirInfo(req, cb) {
+        return this.request("DescribeServerRelatedDirInfo", req, cb);
     }
     /**
      * 修改爆破阻断模式
@@ -1021,6 +1045,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetWebLocationList", req, cb);
     }
     /**
+     * 查询恶意请求事件详情
+     */
+    async DescribeRiskDnsEventInfo(req, cb) {
+        return this.request("DescribeRiskDnsEventInfo", req, cb);
+    }
+    /**
      * 获取软件关联进程列表
      */
     async DescribeAssetAppProcessList(req, cb) {
@@ -1249,10 +1279,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProtectServer", req, cb);
     }
     /**
-     * DescribeScanState 该接口能查询对应模块正在进行的扫描任务状态
+     * 查询基线列表信息
      */
-    async DescribeScanState(req, cb) {
-        return this.request("DescribeScanState", req, cb);
+    async DescribeBaselineList(req, cb) {
+        return this.request("DescribeBaselineList", req, cb);
     }
     /**
      * 根据基线策略id删除策略
@@ -1435,10 +1465,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineFixList", req, cb);
     }
     /**
+     * DescribeScanState 该接口能查询对应模块正在进行的扫描任务状态
+     */
+    async DescribeScanState(req, cb) {
+        return this.request("DescribeScanState", req, cb);
+    }
+    /**
      * 根据策略名查询策略是否存在
      */
     async DescribeStrategyExist(req, cb) {
         return this.request("DescribeStrategyExist", req, cb);
+    }
+    /**
+     * 本接口 (ExportBruteAttacks) 用于导出密码破解记录成CSV文件。
+     */
+    async ExportBruteAttacks(req, cb) {
+        return this.request("ExportBruteAttacks", req, cb);
     }
     /**
      * 网站防篡改-查询网页防篡改服务器购买信息及服务器信息

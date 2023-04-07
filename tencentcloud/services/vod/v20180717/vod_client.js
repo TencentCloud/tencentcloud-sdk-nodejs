@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("vod.tencentcloudapi.com", "2018-07-17", clientConfig);
     }
     /**
-     * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持三次操作，例如：裁剪-缩略-裁剪。
+     * 创建一个用户自定义的图片处理模板，数量上限：16。最多支持十次操作，例如：裁剪-缩略-裁剪-模糊-缩略-裁剪-缩略-裁剪-模糊-缩略。
      */
     async CreateImageProcessingTemplate(req, cb) {
         return this.request("CreateImageProcessingTemplate", req, cb);
@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ProcessMediaByProcedure", req, cb);
     }
     /**
-     * 修改音画质重生模版。
+     * 修改音画质重生模板。
      */
     async ModifyRebuildMediaTemplate(req, cb) {
         return this.request("ModifyRebuildMediaTemplate", req, cb);
@@ -409,7 +409,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDrmKeyProviderInfo", req, cb);
     }
     /**
-     * 删除音画质重生模版。
+     * 删除音画质重生模板。
      */
     async DeleteRebuildMediaTemplate(req, cb) {
         return this.request("DeleteRebuildMediaTemplate", req, cb);
@@ -576,7 +576,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStorageRegion", req, cb);
     }
     /**
-     * 创建音画质重生模版。
+     * 创建音画质重生模板。
      */
     async CreateRebuildMediaTemplate(req, cb) {
         return this.request("CreateRebuildMediaTemplate", req, cb);
@@ -908,7 +908,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDrmKeyProviderInfo", req, cb);
     }
     /**
-     * 使用模版发起音画质重生。
+     * 使用模板发起音画质重生。
      */
     async RebuildMediaByTemplate(req, cb) {
         return this.request("RebuildMediaByTemplate", req, cb);
@@ -1172,7 +1172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAIRecognitionTemplate", req, cb);
     }
     /**
-     * 获取音画质重生模版列表。
+     * 获取音画质重生模板列表。
      */
     async DescribeRebuildMediaTemplates(req, cb) {
         return this.request("DescribeRebuildMediaTemplates", req, cb);

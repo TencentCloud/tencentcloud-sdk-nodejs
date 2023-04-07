@@ -77,6 +77,19 @@ export interface DescribeBaselineDetectOverviewResponse {
     RequestId?: string;
 }
 /**
+ * 节点关联的告警信息
+ */
+export interface AlarmInfo {
+    /**
+      * 该节点关联的告警，告警的table_name+id（t1:id1,t2:id2,...)
+      */
+    AlarmId: string;
+    /**
+      * 告警事件表状态，当该节点为告警点时生效
+      */
+    Status: number;
+}
+/**
  * DescribeAssetWebServiceInfoList返回参数结构体
  */
 export interface DescribeAssetWebServiceInfoListResponse {
@@ -1944,6 +1957,23 @@ export interface DeleteScanTaskRequest {
     QuuidList?: Array<string>;
 }
 /**
+ * DescribeAlarmIncidentNodes请求参数结构体
+ */
+export interface DescribeAlarmIncidentNodesRequest {
+    /**
+      * 机器uuid
+      */
+    Uuid: string;
+    /**
+      * 告警vid
+      */
+    AlarmVid: string;
+    /**
+      * 告警时间
+      */
+    AlarmTime: number;
+}
+/**
  * DescribeTagMachines请求参数结构体
  */
 export interface DescribeTagMachinesRequest {
@@ -2429,6 +2459,20 @@ export interface DeleteLoginWhiteListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVertexDetail返回参数结构体
+ */
+export interface DescribeVertexDetailResponse {
+    /**
+      * 指定点列表的属性信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VertexDetails?: Array<VertexDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAttackLogs返回参数结构体
  */
 export interface DescribeAttackLogsResponse {
@@ -2681,6 +2725,15 @@ export interface CheckBashRuleParamsRequest {
     Id?: number;
 }
 /**
+ * DescribeRiskDnsEventInfo请求参数结构体
+ */
+export interface DescribeRiskDnsEventInfoRequest {
+    /**
+      * 恶意请求事件Id
+      */
+    Id: number;
+}
+/**
  * DescribeIgnoreBaselineRule请求参数结构体
  */
 export interface DescribeIgnoreBaselineRuleRequest {
@@ -2861,6 +2914,11 @@ XTI - 威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+      * 请求目的端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
 }
 /**
  * DescribeWebPageProtectStat请求参数结构体
@@ -2895,6 +2953,120 @@ export interface DescribeBaselineRuleCategoryListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 反弹Shell数据详情
+ */
+export interface ReverseShellEventInfo {
+    /**
+      * ID 主键
+      */
+    Id: number;
+    /**
+      * 云镜UUID
+      */
+    Uuid: string;
+    /**
+      * 主机ID
+      */
+    Quuid: string;
+    /**
+      * 主机内网IP
+      */
+    HostIp: string;
+    /**
+      * 目标IP
+      */
+    DstIp: string;
+    /**
+      * 目标端口
+      */
+    DstPort: number;
+    /**
+      * 进程名
+      */
+    ProcessName: string;
+    /**
+      * 进程路径
+      */
+    FullPath: string;
+    /**
+      * 命令详情
+      */
+    CmdLine: string;
+    /**
+      * 执行用户
+      */
+    UserName: string;
+    /**
+      * 执行用户组
+      */
+    UserGroup: string;
+    /**
+      * 父进程名
+      */
+    ParentProcName: string;
+    /**
+      * 父进程用户
+      */
+    ParentProcUser: string;
+    /**
+      * 父进程用户组
+      */
+    ParentProcGroup: string;
+    /**
+      * 父进程路径
+      */
+    ParentProcPath: string;
+    /**
+      * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
+      */
+    Status: number;
+    /**
+      * 产生时间
+      */
+    CreateTime: string;
+    /**
+      * 主机名
+      */
+    MachineName: string;
+    /**
+      * 检测方法
+      */
+    DetectBy: number;
+    /**
+      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PsTree: string;
+    /**
+      * 建议方案
+      */
+    SuggestScheme: string;
+    /**
+      * 描述
+      */
+    HarmDescribe: string;
+    /**
+      * 标签
+      */
+    Tags: Array<string>;
+    /**
+      * 参考链接
+      */
+    References: Array<string>;
+    /**
+      * 主机外网ip
+      */
+    MachineWanIp: string;
+    /**
+      * 主机在线状态 OFFLINE  ONLINE
+      */
+    MachineStatus: string;
+    /**
+      * 处理时间
+      */
+    ModifyTime: string;
 }
 /**
  * ExportVulDetectionReport请求参数结构体
@@ -3201,18 +3373,9 @@ export interface DescribeSearchLogsResponse {
     RequestId?: string;
 }
 /**
- * DescribeMachineOsList返回参数结构体
+ * DescribeBaselineRuleCategoryList请求参数结构体
  */
-export interface DescribeMachineOsListResponse {
-    /**
-      * 操作系统列表
-      */
-    List: Array<OsName>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeBaselineRuleCategoryListRequest = null;
 /**
  * DescribeAssetWebServiceProcessList返回参数结构体
  */
@@ -3661,6 +3824,23 @@ export interface BaselineCategory {
       * 父分类ID,如果为0则没有父分类
       */
     ParentCategoryId: number;
+}
+/**
+ * DescribeEventByTable返回参数结构体
+ */
+export interface DescribeEventByTableResponse {
+    /**
+      * 告警类型，爆破bruteattack，高危命令bash，恶意文件malware，恶意请求risk_dns，本地提权privilege_escalation，反弹shell reverse_shell，内存马java_shell
+      */
+    Type?: string;
+    /**
+      * 事件内容的json编码字符串，字段结构对齐事件表
+      */
+    Value?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAttackVulTypeList请求参数结构体
@@ -4879,13 +5059,17 @@ export interface DescribeBashEventsResponse {
     RequestId?: string;
 }
 /**
- * UpdateMachineTags返回参数结构体
+ * DescribeEventByTable请求参数结构体
  */
-export interface UpdateMachineTagsResponse {
+export interface DescribeEventByTableRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 事件表名
       */
-    RequestId?: string;
+    TableName: string;
+    /**
+      * 事件表id号
+      */
+    Ids: Array<number>;
 }
 /**
  * DescribeBashEvents请求参数结构体
@@ -5091,6 +5275,11 @@ export interface PrivilegeEscalationProcess {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+      * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pid?: number;
 }
 /**
  * DescribeProtectNetList返回参数结构体
@@ -5632,6 +5821,20 @@ export interface DescribeWebPageGeneralizeResponse {
     RequestId?: string;
 }
 /**
+ * DescribeReverseShellEventInfo返回参数结构体
+ */
+export interface DescribeReverseShellEventInfoResponse {
+    /**
+      * 反弹shell详情信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReverseShellEventInfo: ReverseShellEventInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBanWhiteList返回参数结构体
  */
 export interface DescribeBanWhiteListResponse {
@@ -5947,9 +6150,18 @@ export interface DescribeVulCountByDatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeBaselineRuleCategoryList请求参数结构体
+ * DescribeMachineOsList返回参数结构体
  */
-export declare type DescribeBaselineRuleCategoryListRequest = null;
+export interface DescribeMachineOsListResponse {
+    /**
+      * 操作系统列表
+      */
+    List: Array<OsName>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * ModifyBaselineRule返回参数结构体
  */
@@ -7674,6 +7886,11 @@ export interface ReverseShell {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+      * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pid?: number;
 }
 /**
  * 软件应用关联进程信息
@@ -7835,6 +8052,23 @@ export interface BaselineItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RelatedCustomRuleInfo: Array<BaselineCustomRuleIdName>;
+}
+/**
+ * DescribeVertexDetail请求参数结构体
+ */
+export interface DescribeVertexDetailRequest {
+    /**
+      * 点id列表
+      */
+    VertexIds: Array<string>;
+    /**
+      * 事件id
+      */
+    IncidentId: string;
+    /**
+      * 事件所在表名
+      */
+    TableName: string;
 }
 /**
  * 组件统计数据。
@@ -8508,6 +8742,31 @@ export interface DescribeBaselineItemRiskTopResponse {
     RequestId?: string;
 }
 /**
+ * 事件点信息
+ */
+export interface IncidentVertexInfo {
+    /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncidentId?: string;
+    /**
+      * 事件所在表名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableName?: string;
+    /**
+      * 节点信息列表，数组项中包含节点详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vertex?: Array<VertexInfo>;
+    /**
+      * 节点总个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VertexCount?: number;
+}
+/**
  * DescribeWebPageEventList返回参数结构体
  */
 export interface DescribeWebPageEventListResponse {
@@ -8995,6 +9254,15 @@ export interface ExportSecurityTrendsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeReverseShellEventInfo请求参数结构体
+ */
+export interface DescribeReverseShellEventInfoRequest {
+    /**
+      * 事件id
+      */
+    Id: number;
+}
+/**
  * ModifyMalwareTimingScanSettings返回参数结构体
  */
 export interface ModifyMalwareTimingScanSettingsResponse {
@@ -9329,17 +9597,104 @@ export interface DescribeImportMachineInfoRequest {
     Filters?: Array<Filters>;
 }
 /**
- * 漏洞数量按等级分布统计结果实体
+ * 点详细信息
  */
-export interface VulLevelInfo {
+export interface VertexDetail {
     /**
-      * // 危害等级：1-低危；2-中危；3-高危；4-严重
+      * 该节点类型，进程:1；网络:2；文件:3；ssh:4
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VulLevel: number;
+    Type?: number;
     /**
-      * 数量
+      * 各节点类型用到的时间，2022-11-29 00:00:00 格式
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Count: number;
+    Time?: string;
+    /**
+      * 告警信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmInfo?: Array<AlarmInfo>;
+    /**
+      * 进程名，当该节点为进程时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcName?: string;
+    /**
+      * 命令行，当该节点为进程时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CmdLine?: string;
+    /**
+      * 进程id，当该节点为进程时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pid?: string;
+    /**
+      * 文件md5，当该节点为文件时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileMd5?: string;
+    /**
+      * 文件写入内容，当该节点为文件时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileContent?: string;
+    /**
+      * 文件路径，当该节点为文件时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilePath?: string;
+    /**
+      * 文件创建时间，当该节点为文件时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileCreateTime?: string;
+    /**
+      * 请求目的地址，当该节点为网络时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address?: string;
+    /**
+      * 目标端口，当该节点为网络时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DstPort?: number;
+    /**
+      * 登录源ip，当该节点为ssh时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SrcIP?: string;
+    /**
+      * 登录用户名用户组，当该节点为ssh时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    User?: string;
+    /**
+      * 漏洞名称，当该节点为漏洞时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulName?: string;
+    /**
+      * 漏洞利用时间，当该节点为漏洞时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulTime?: string;
+    /**
+      * http请求内容，当该节点为漏洞时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HttpContent?: string;
+    /**
+      * 漏洞利用者来源ip，当该节点为漏洞时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulSrcIP?: string;
+    /**
+      * 点id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VertexId?: string;
 }
 /**
  * StartBaselineDetect返回参数结构体
@@ -9984,6 +10339,15 @@ export interface BaselineRiskItem {
     HostCount: number;
 }
 /**
+ * DescribePrivilegeEventInfo请求参数结构体
+ */
+export interface DescribePrivilegeEventInfoRequest {
+    /**
+      * 事件id
+      */
+    Id: number;
+}
+/**
  * 资源管理Web服务列表信息
  */
 export interface AssetWebServiceBaseInfo {
@@ -10317,6 +10681,15 @@ export interface DescribeIgnoreRuleEffectHostListRequest {
  * ModifyWarningSetting返回参数结构体
  */
 export interface ModifyWarningSettingResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateMachineTags返回参数结构体
+ */
+export interface UpdateMachineTagsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11535,6 +11908,19 @@ export interface DescribeProtectDirRelatedServerResponse {
     RequestId?: string;
 }
 /**
+ * 漏洞数量按等级分布统计结果实体
+ */
+export interface VulLevelInfo {
+    /**
+      * // 危害等级：1-低危；2-中危；3-高危；4-严重
+      */
+    VulLevel: number;
+    /**
+      * 数量
+      */
+    Count: number;
+}
+/**
  * DescribeBaselineItemIgnoreList请求参数结构体
  */
 export interface DescribeBaselineItemIgnoreListRequest {
@@ -12063,6 +12449,20 @@ export interface DescribeImportMachineInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InvalidMachineList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRiskDnsEventInfo返回参数结构体
+ */
+export interface DescribeRiskDnsEventInfoResponse {
+    /**
+      * 恶意请求事件详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Info: RiskDnsEvent;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12983,6 +13383,75 @@ export interface ExportAssetCoreModuleListResponse {
     RequestId?: string;
 }
 /**
+ * 攻击溯源节点信息
+ */
+export interface VertexInfo {
+    /**
+      * 该结点类型，进程:1；网络:2；文件:3；ssh:4；
+      */
+    Type: number;
+    /**
+      * 该节点包含的vid
+      */
+    Vid: string;
+    /**
+      * 该节点的父节点vid
+      */
+    ParentVid: string;
+    /**
+      * 是否叶子
+      */
+    IsLeaf: boolean;
+    /**
+      * 进程名，当Type=1时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcNamePrefix: string;
+    /**
+      * 进程名md5，当Type=1时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProcNameMd5: string;
+    /**
+      * 命令行，当Type=1时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CmdLinePrefix: string;
+    /**
+      * 命令行md5，当Type=1时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CmdLineMd5: string;
+    /**
+      * 文件路径，当Type=3时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilePathPrefix: string;
+    /**
+      * 请求目的地址，当Type=2时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddressPrefix: string;
+    /**
+      * 是否漏洞节点
+      */
+    IsWeDetect: boolean;
+    /**
+      * 是否告警节点
+      */
+    IsAlarm: boolean;
+    /**
+      * 文件路径md5，当Type=3时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilePathMd5: string;
+    /**
+      * 请求目的地址md5，当Type=2时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddressMd5: string;
+}
+/**
  * DescribeHistoryAccounts返回参数结构体
  */
 export interface DescribeHistoryAccountsResponse {
@@ -13565,13 +14034,14 @@ export interface ExportVulDetectionExcelResponse {
     RequestId?: string;
 }
 /**
- * DescribeWarningList返回参数结构体
+ * DescribeAlarmVertexId返回参数结构体
  */
-export interface DescribeWarningListResponse {
+export interface DescribeAlarmVertexIdResponse {
     /**
-      * 获取告警列表
+      * 告警点id列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    WarningInfoList: Array<WarningInfoObj>;
+    AlarmVertexIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -14089,6 +14559,20 @@ export interface DescribeAssetPlanTaskListRequest {
     By?: string;
 }
 /**
+ * DescribePrivilegeEventInfo返回参数结构体
+ */
+export interface DescribePrivilegeEventInfoResponse {
+    /**
+      * 本地提权详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivilegeEventInfo: PrivilegeEventInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeScanTaskDetails请求参数结构体
  */
 export interface DescribeScanTaskDetailsRequest {
@@ -14239,6 +14723,115 @@ export interface DescribeBaselineAnalysisDataResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 本地提权数据
+ */
+export interface PrivilegeEventInfo {
+    /**
+      * 数据ID
+      */
+    Id: number;
+    /**
+      * 云镜ID
+      */
+    Uuid: string;
+    /**
+      * 主机ID
+      */
+    Quuid: string;
+    /**
+      * 主机内网IP
+      */
+    HostIp: string;
+    /**
+      * 进程名
+      */
+    ProcessName: string;
+    /**
+      * 进程路径
+      */
+    FullPath: string;
+    /**
+      * 执行命令
+      */
+    CmdLine: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 用户组
+      */
+    UserGroup: string;
+    /**
+      * 进程文件权限
+      */
+    ProcFilePrivilege: string;
+    /**
+      * 父进程名
+      */
+    ParentProcName: string;
+    /**
+      * 父进程用户名
+      */
+    ParentProcUser: string;
+    /**
+      * 父进程用户组
+      */
+    ParentProcGroup: string;
+    /**
+      * 父进程路径
+      */
+    ParentProcPath: string;
+    /**
+      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+      */
+    PsTree: string;
+    /**
+      * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
+      */
+    Status: number;
+    /**
+      * 发生时间
+      */
+    CreateTime: string;
+    /**
+      * 机器名
+      */
+    MachineName: string;
+    /**
+      * 建议方案
+      */
+    SuggestScheme: string;
+    /**
+      * 危害描述信息
+      */
+    HarmDescribe: string;
+    /**
+      * 标签
+      */
+    Tags: Array<string>;
+    /**
+      * 参考链接
+      */
+    References: Array<string>;
+    /**
+      * 主机外网ip
+      */
+    MachineWanIp: string;
+    /**
+      * 权限列表|隔开
+      */
+    NewCaps: string;
+    /**
+      * 主机在线状态 OFFLINE  ONLINE
+      */
+    MachineStatus: string;
+    /**
+      * 处理时间
+      */
+    ModifyTime: string;
 }
 /**
  * ModifyBanMode请求参数结构体
@@ -15468,6 +16061,20 @@ export interface DescribeBaselineHostRiskTopResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAlarmIncidentNodes返回参数结构体
+ */
+export interface DescribeAlarmIncidentNodesResponse {
+    /**
+      * 告警点所在事件的所有节点信息,可能包含多事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncidentNodes?: Array<IncidentVertexInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeExpertServiceOrderList请求参数结构体
  */
 export interface DescribeExpertServiceOrderListRequest {
@@ -15764,6 +16371,11 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+      * 地理位置中文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Location?: string;
 }
 /**
  * 告警设置列表
@@ -16081,6 +16693,23 @@ export interface DescribeAssetWebLocationInfoRequest {
     Id: string;
 }
 /**
+ * DescribeAlarmVertexId请求参数结构体
+ */
+export interface DescribeAlarmVertexIdRequest {
+    /**
+      * 机器uuid
+      */
+    Uuid: string;
+    /**
+      * 开始时间戳
+      */
+    StartTime: number;
+    /**
+      * 结束时间戳
+      */
+    EndTime: number;
+}
+/**
  * DescribeAssetInitServiceList返回参数结构体
  */
 export interface DescribeAssetInitServiceListResponse {
@@ -16163,6 +16792,19 @@ export interface DescribeAssetWebFrameListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WebFrames: Array<AssetWebFrameBaseInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeWarningList返回参数结构体
+ */
+export interface DescribeWarningListResponse {
+    /**
+      * 获取告警列表
+      */
+    WarningInfoList: Array<WarningInfoObj>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

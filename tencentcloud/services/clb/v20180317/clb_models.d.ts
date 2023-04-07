@@ -1095,6 +1095,11 @@ export interface IdleLoadBalancer {
       * 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。
       */
     Forward: number;
+    /**
+      * 负载均衡域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
 }
 /**
  * RegisterTargetGroupInstances返回参数结构体

@@ -642,6 +642,11 @@ export interface RestartModelAccelerateTaskRequest {
    * SavedModel保存时配置的签名
    */
   ModelSignature?: string
+
+  /**
+   * 加速引擎对应的框架版本
+   */
+  FrameworkVersion?: string
 }
 
 /**
@@ -2242,12 +2247,12 @@ export interface DescribeTrainingModelsResponse {
   /**
    * 模型列表
    */
-  TrainingModels: Array<TrainingModelDTO>
+  TrainingModels?: Array<TrainingModelDTO>
 
   /**
    * 模型总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3341,6 +3346,12 @@ HYBRID_PAID:
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Pods?: Pod
+
+  /**
+      * Pod列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodInfos?: Array<Pod>
 }
 
 /**
@@ -4006,11 +4017,11 @@ export interface DescribeTrainingModelsRequest {
   /**
       * 过滤器
 Filter.Name: 枚举值:
-    keyword (模型名称)
-    TrainingModelId (模型ID)
-    ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)
-    TrainingModelSource (模型来源)  其值Filter.Values支持： JOB/COS
-    ModelFormat（模型格式）其值Filter.Values支持：
+keyword (模型名称)
+TrainingModelId (模型ID)
+ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)
+TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COS
+ModelFormat（模型格式）其值Filter.Values支持：
 PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE
 Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
 每次请求的Filters的上限为10，Filter.Values的上限为100
@@ -4042,6 +4053,11 @@ Filter.Fuzzy取值：true/false，是否支持模糊匹配
    * 标签过滤
    */
   TagFilters?: Array<TagFilter>
+
+  /**
+   * 是否同时返回模型版本列表
+   */
+  WithModelVersions?: boolean
 }
 
 /**
@@ -4123,6 +4139,12 @@ export interface Pod {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Containers?: Container
+
+  /**
+      * 容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerInfos?: Array<Container>
 }
 
 /**
@@ -4351,6 +4373,11 @@ export interface BatchModelAccTask {
    * SavedModel保存时配置的签名
    */
   ModelSignature?: string
+
+  /**
+   * 加速引擎对应的框架版本
+   */
+  FrameworkVersion?: string
 }
 
 /**
@@ -4425,6 +4452,12 @@ export interface EngineVersion {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsSupportIntEightQuantization: boolean
+
+  /**
+      * 框架版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrameworkVersion: string
 }
 
 /**
@@ -4696,6 +4729,12 @@ export interface TrainingModelDTO {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime: string
+
+  /**
+      * 模型版本列表。默认不返回，仅在指定请求参数开启时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrainingModelVersions?: Array<TrainingModelVersionDTO>
 }
 
 /**
@@ -6213,6 +6252,12 @@ export interface ModelAccelerateTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QATModel: boolean
+
+  /**
+      * 加速引擎对应的框架版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrameworkVersion?: string
 }
 
 /**

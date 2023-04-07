@@ -326,7 +326,7 @@ export interface FlushInstanceRouterConfigResponse {
  */
 export interface DescribeSecurityGroupRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。
+   * 实例 ID。例如：cmgo-p8vn****。
    */
   InstanceId: string
 }
@@ -928,7 +928,7 @@ export interface BackupInfo {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   * 实例ID列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceIds?: Array<string>
 
@@ -948,13 +948,17 @@ export interface DescribeDBInstancesRequest {
   Status?: Array<number>
 
   /**
-   * 私有网络的ID，基础网络则不传该参数。
-   */
+      * 私有网络的 ID。
+- 基础网络则无需配置该参数。
+- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表中，单击私有网络名称，在**私有网络**页面获取其 ID。
+      */
   VpcId?: string
 
   /**
-   * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId。
-   */
+      * 私有网络的子网ID。
+- 基础网络则无需配置该参数。
+- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表中，单击私有网络名称，在**私有网络**页面获取其子网 ID。
+      */
   SubnetId?: string
 
   /**
@@ -973,27 +977,29 @@ export interface DescribeDBInstancesRequest {
   Offset?: number
 
   /**
-   * 返回结果集排序的字段，目前支持："ProjectId"、"InstanceName"、"CreateTime"，默认为升序排序。
+   * 配置返回结果排序依据的字段。目前支持依据"ProjectId"、"InstanceName"、"CreateTime"排序。
    */
   OrderBy?: string
 
   /**
-   * 返回结果集排序方式，目前支持："ASC"或者"DESC"。
-   */
+      * 配置返回结果的排序方式。
+- ASC：升序。
+- DESC：降序。
+      */
   OrderByType?: string
 
   /**
-   * 项目 ID。
+   * 项目 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在右上角的账户信息下拉菜单中，选择项目管理查询项目。
    */
   ProjectIds?: Array<number>
 
   /**
-   * 搜索关键词，支持实例ID、实例名称、完整IP。
+   * 配置查询搜索的关键词。支持配置为实例ID、实例名称或者内网 IP 地址。
    */
   SearchKey?: string
 
   /**
-   * Tag信息。
+   * 标签信息，包含标签键与标签值。
    */
   Tags?: Array<TagInfo>
 }
@@ -1321,12 +1327,12 @@ export interface InstanceTextParam {
  */
 export interface ModifyDBInstanceSecurityGroupRequest {
   /**
-   * 实例ID
+   * 实例 ID。例如：cmgo-7pje****。
    */
   InstanceId: string
 
   /**
-   * 目标安全组id
+   * 目标安全组 ID。请通过接口[DescribeSecurityGroup](https://cloud.tencent.com/document/product/240/55675)查看具体的安全组 ID。
    */
   SecurityGroupIds: Array<string>
 }
@@ -1533,9 +1539,9 @@ export interface InquirePriceCreateDBInstancesResponse {
  */
 export interface DescribeSecurityGroupResponse {
   /**
-   * 实例绑定的安全组
+   * 实例绑定的安全组信息。
    */
-  Groups: Array<SecurityGroup>
+  Groups?: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2496,12 +2502,12 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 实例详细信息列表。
    */
-  InstanceDetails: Array<InstanceDetail>
+  InstanceDetails?: Array<InstanceDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

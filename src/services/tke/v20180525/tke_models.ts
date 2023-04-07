@@ -5295,7 +5295,7 @@ export interface Cluster {
   TagSpecification: Array<TagSpecification>
 
   /**
-   * 集群状态 (Running 运行中  Creating 创建中 Idling 闲置中  Abnormal 异常  )
+   * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
    */
   ClusterStatus: string
 
@@ -5369,6 +5369,12 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuntimeVersion: string
+
+  /**
+      * 集群当前etcd数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterEtcdNodeNum: number
 }
 
 /**
@@ -8476,13 +8482,13 @@ export interface DescribeClusterVirtualNodePoolsResponse {
       * 节点池总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 虚拟节点池列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NodePoolSet?: Array<VirtualNodePool>
+  NodePoolSet: Array<VirtualNodePool>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10344,6 +10350,13 @@ export interface ClusterNetworkSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Ipv6ServiceCIDR: string
+
+  /**
+      * 集群Cilium Mode配置
+- clusterIP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CiliumMode: string
 }
 
 /**
