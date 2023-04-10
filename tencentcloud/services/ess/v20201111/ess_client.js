@@ -243,7 +243,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowSignUrl", req, cb);
     }
     /**
-     * 创建文件转换任务
+     * 上传了word、excel文件后，通过该接口发起文件转换任务，将word、excel文件转换为pdf文件。
      */
     async CreateConvertTaskApi(req, cb) {
         return this.request("CreateConvertTaskApi", req, cb);

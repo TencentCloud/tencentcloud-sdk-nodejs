@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb);
     }
     /**
+     * 根据任务id删除健康报告生成任务
+     */
+    async DeleteDBDiagReportTasks(req, cb) {
+        return this.request("DeleteDBDiagReportTasks", req, cb);
+    }
+    /**
      * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。
      */
     async DescribeMailProfile(req, cb) {

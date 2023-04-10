@@ -1628,6 +1628,16 @@ it("cwp.v20180228.DescribeBashEventsNew", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeFileTamperEvents", async function () {
+    try {
+       const data = await client.DescribeFileTamperEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
     try {
        const data = await client.ExportNonlocalLoginPlaces({})

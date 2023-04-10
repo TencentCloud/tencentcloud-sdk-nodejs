@@ -414,6 +414,8 @@ var tms_1 = require("./tms");
 Object.defineProperty(exports, "tms", { enumerable: true, get: function () { return tms_1.tms; } });
 var tmt_1 = require("./tmt");
 Object.defineProperty(exports, "tmt", { enumerable: true, get: function () { return tmt_1.tmt; } });
+var tourism_1 = require("./tourism");
+Object.defineProperty(exports, "tourism", { enumerable: true, get: function () { return tourism_1.tourism; } });
 var trdp_1 = require("./trdp");
 Object.defineProperty(exports, "trdp", { enumerable: true, get: function () { return trdp_1.trdp; } });
 var trp_1 = require("./trp");

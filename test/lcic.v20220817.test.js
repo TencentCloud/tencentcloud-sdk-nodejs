@@ -438,6 +438,16 @@ it("lcic.v20220817.BatchDeleteRecord", async function () {
     }
 })
 
+it("lcic.v20220817.GetRooms", async function () {
+    try {
+       const data = await client.GetRooms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DeleteRoom", async function () {
     try {
        const data = await client.DeleteRoom({})

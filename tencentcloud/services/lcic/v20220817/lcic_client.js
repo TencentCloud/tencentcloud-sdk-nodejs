@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchDeleteRecord", req, cb);
     }
     /**
+     * 获取房间列表
+     */
+    async GetRooms(req, cb) {
+        return this.request("GetRooms", req, cb);
+    }
+    /**
      * 删除房间
      */
     async DeleteRoom(req, cb) {

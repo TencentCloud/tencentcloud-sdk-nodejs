@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, CreateClusterResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstancesListRequest, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, ScaleOutClusterResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, StartStopServiceOrMonitorResponse, TerminateInstanceResponse, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, CreateClusterResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, SyncPodStateRequest, InquiryPriceCreateInstanceRequest, DescribeClusterNodesResponse, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeInstanceRenewNodesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, ScaleOutClusterResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -52,6 +52,10 @@ export declare class Client extends AbstractClient {
      */
     RunJobFlow(req: RunJobFlowRequest, cb?: (error: string, rep: RunJobFlowResponse) => void): Promise<RunJobFlowResponse>;
     /**
+     * 销毁集群节点
+     */
+    TerminateClusterNodes(req: TerminateClusterNodesRequest, cb?: (error: string, rep: TerminateClusterNodesResponse) => void): Promise<TerminateClusterNodesResponse>;
+    /**
      * 该接口支持安装了OpenLdap组件的集群。
 批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
      */
@@ -98,6 +102,10 @@ export declare class Client extends AbstractClient {
      * 修改YARN资源调度的资源配置
      */
     ModifyResourceScheduleConfig(req: ModifyResourceScheduleConfigRequest, cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void): Promise<ModifyResourceScheduleConfigResponse>;
+    /**
+     * 用于启动或停止监控或服务
+     */
+    StartStopServiceOrMonitor(req: StartStopServiceOrMonitorRequest, cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void): Promise<StartStopServiceOrMonitorResponse>;
     /**
      * 缩容Task节点
      */

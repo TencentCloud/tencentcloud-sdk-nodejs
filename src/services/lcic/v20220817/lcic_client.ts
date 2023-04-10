@@ -33,7 +33,7 @@ import {
   BatchCreateGroupWithMembersResponse,
   GetRoomEventResponse,
   MemberRecord,
-  DeleteAppCustomContentRequest,
+  GetRoomsRequest,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
   GetWatermarkResponse,
@@ -41,6 +41,7 @@ import {
   BatchRegisterResponse,
   BindDocumentToRoomResponse,
   CreateGroupWithSubGroupRequest,
+  RoomItem,
   SetWatermarkRequest,
   DescribeRoomRequest,
   BatchCreateRoomResponse,
@@ -113,7 +114,9 @@ import {
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
   DescribeQuestionListResponse,
+  GetRoomsResponse,
   QuestionInfo,
+  DeleteAppCustomContentRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
   DeleteGroupResponse,
@@ -562,6 +565,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDeleteRecordResponse) => void
   ): Promise<BatchDeleteRecordResponse> {
     return this.request("BatchDeleteRecord", req, cb)
+  }
+
+  /**
+   * 获取房间列表
+   */
+  async GetRooms(
+    req: GetRoomsRequest,
+    cb?: (error: string, rep: GetRoomsResponse) => void
+  ): Promise<GetRoomsResponse> {
+    return this.request("GetRooms", req, cb)
   }
 
   /**

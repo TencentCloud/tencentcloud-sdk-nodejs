@@ -305,6 +305,17 @@ export interface ModifyTopicRequest {
    * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
    */
   Period?: number
+
+  /**
+   * 日志主题描述
+   */
+  Describes?: string
+
+  /**
+      * 0：关闭日志沉降。
+非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
+      */
+  HotPeriod?: number
 }
 
 /**
@@ -2208,6 +2219,17 @@ export interface CreateTopicRequest {
    * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存
    */
   Period?: number
+
+  /**
+   * 日志主题描述
+   */
+  Describes?: string
+
+  /**
+      * 0：关闭日志沉降。
+非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
+      */
+  HotPeriod?: number
 }
 
 /**

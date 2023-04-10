@@ -804,6 +804,24 @@ export interface TimeSlice {
     Timestamp: number;
 }
 /**
+ * DeleteDBDiagReportTasks请求参数结构体
+ */
+export interface DeleteDBDiagReportTasksRequest {
+    /**
+      * 需要删除的任务id列表
+      */
+    AsyncRequestIds: Array<number>;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "mongodb" - 云数据库 CynosDB for MySQL，
+默认值为"mysql"。
+      */
+    Product: string;
+}
+/**
  * ModifyDiagDBInstanceConf请求参数结构体
  */
 export interface ModifyDiagDBInstanceConfRequest {
@@ -1081,6 +1099,19 @@ export interface CreateKillTaskRequest {
       * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
       */
     Product?: string;
+}
+/**
+ * DeleteDBDiagReportTasks返回参数结构体
+ */
+export interface DeleteDBDiagReportTasksResponse {
+    /**
+      * 任务删除状态, 0-删除成功
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProxyProcessStatistics返回参数结构体
@@ -2797,11 +2828,11 @@ export interface DescribeSlowLogTopSqlsResponse {
     /**
       * 符合条件的记录总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 慢日志 top sql 列表
       */
-    Rows: Array<SlowLogTopSqlItem>;
+    Rows?: Array<SlowLogTopSqlItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

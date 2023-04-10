@@ -2624,6 +2624,40 @@ export interface HostRiskLevelCount {
 }
 
 /**
+ * DescribeFileTamperEvents请求参数结构体
+ */
+export interface DescribeFileTamperEventsRequest {
+  /**
+      * 过滤条件。
+<li>Status - String - 是否必填：否 - 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略</li>
+<li>ModifyTime - String - 是否必填：否 - 最近发生时间</li>
+<li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
+<li>RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则</li>
+      */
+  Filters?: Array<Filters>
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 排序方式 ASC,DESC
+   */
+  Order?: string
+
+  /**
+   * 排序字段 CreateTime、ModifyTime
+   */
+  By?: string
+}
+
+/**
  * 资产管理jar包详情
  */
 export interface AssetJarDetail {
@@ -4226,6 +4260,27 @@ export interface AssetUserDetail {
  * ModifyOrderAttribute返回参数结构体
  */
 export interface ModifyOrderAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFileTamperEvents返回参数结构体
+ */
+export interface DescribeFileTamperEventsResponse {
+  /**
+      * 核心文件事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<FileTamperEvent>
+
+  /**
+   * 数据总条数
+   */
+  TotalCount: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9793,6 +9848,200 @@ export interface MachineExtraInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostName?: string
+}
+
+/**
+ * 核心文件监控事件
+ */
+export interface FileTamperEvent {
+  /**
+   * 机器名称
+   */
+  HostName?: string
+
+  /**
+   * 机器IP
+   */
+  HostIp?: string
+
+  /**
+   * 发生时间
+   */
+  CreateTime?: string
+
+  /**
+   * 最近发生时间
+   */
+  ModifyTime?: string
+
+  /**
+   * 事件id
+   */
+  Id?: number
+
+  /**
+   * 主机uuid
+   */
+  Uuid?: string
+
+  /**
+   * cvm id
+   */
+  Quuid?: string
+
+  /**
+   * 事件类型/动作  0 -- 告警
+   */
+  Type?: number
+
+  /**
+   * 进程路径
+   */
+  ProcessExe?: string
+
+  /**
+   * 进程参数
+   */
+  ProcessArgv?: string
+
+  /**
+   * 目标文件路径
+   */
+  Target?: string
+
+  /**
+   * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4-已手动处理
+   */
+  Status?: number
+
+  /**
+   * 事件产生次数
+   */
+  EventCount?: number
+
+  /**
+   * 规则id
+   */
+  RuleId?: number
+
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+
+  /**
+   * 事件详情: json格式
+   */
+  Pstree?: string
+
+  /**
+   * 规则类型 0系统规则 1自定义规则
+   */
+  RuleCategory?: number
+
+  /**
+   * 主机在线信息 ONLINE、OFFLINE
+   */
+  MachineStatus?: string
+
+  /**
+   * 危害描述
+   */
+  Description?: string
+
+  /**
+   * 修护建议
+   */
+  Suggestion?: string
+
+  /**
+   * 内网ip
+   */
+  PrivateIp?: string
+
+  /**
+   * 进程权限
+   */
+  ExePermission?: string
+
+  /**
+   * 用户名
+   */
+  UserName?: string
+
+  /**
+   * 用户组
+   */
+  UserGroup?: string
+
+  /**
+   * 进程名
+   */
+  ExeMd5?: string
+
+  /**
+   * 进程文件大小
+   */
+  ExeSize?: number
+
+  /**
+   * 进程执行时长
+   */
+  ExeTime?: number
+
+  /**
+   * 目标文件大小
+   */
+  TargetSize?: number
+
+  /**
+   * 目标文件权限
+   */
+  TargetPermission?: string
+
+  /**
+      * 目标文件更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetModifyTime?: string
+
+  /**
+      * 目标文件创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetCreatTime?: string
+
+  /**
+   * 进程pid
+   */
+  ExePid?: number
+
+  /**
+   * 文件名称
+   */
+  TargetName?: string
+
+  /**
+   * 参考链接
+   */
+  Reference?: string
+
+  /**
+   * 风险等级 0：无， 1: 高危， 2:中危， 3: 低危
+   */
+  Level?: number
+
+  /**
+      * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExeName?: string
+
+  /**
+      *  主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineExtraInfo?: MachineExtraInfo
 }
 
 /**

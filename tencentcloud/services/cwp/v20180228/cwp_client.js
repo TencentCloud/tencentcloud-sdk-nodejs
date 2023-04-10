@@ -997,6 +997,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBashEventsNew", req, cb);
     }
     /**
+     * 核心文件监控事件列表
+     */
+    async DescribeFileTamperEvents(req, cb) {
+        return this.request("DescribeFileTamperEvents", req, cb);
+    }
+    /**
      * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
      */
     async ExportNonlocalLoginPlaces(req, cb) {

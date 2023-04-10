@@ -4138,6 +4138,12 @@ export interface DatahubTopicResp {
    * Topic名称
    */
   TopicName: string
+
+  /**
+      * TopicId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicId?: string
 }
 
 /**

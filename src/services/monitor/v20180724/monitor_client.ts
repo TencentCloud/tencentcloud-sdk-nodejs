@@ -314,6 +314,7 @@ import {
   CreatePrometheusTempRequest,
   ModifyAlarmPolicyInfoResponse,
   MetricConfig,
+  Targets,
   DescribeAlarmEventsRequest,
   ModifyAlarmPolicyConditionRequest,
   ModifyAlarmNoticeResponse,

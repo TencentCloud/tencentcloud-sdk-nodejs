@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCurrentOp", req, cb);
     }
     /**
-     * 本接口(DescribeClientConnections)用于查询实例客户端连接信息，包括连接IP和连接数量。
+     * 本接口（DescribeClientConnections）用于查询实例客户端连接信息，包括连接 IP 和连接数量。
      */
     async DescribeClientConnections(req, cb) {
         return this.request("DescribeClientConnections", req, cb);
@@ -106,7 +106,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAsyncRequestInfo", req, cb);
     }
     /**
-     * 本接口(CreateAccountUser)用于创建mongodb实例账号。
+     * 本接口（CreateAccountUser）用于自定义实例访问账号。
      */
     async CreateAccountUser(req, cb) {
         return this.request("CreateAccountUser", req, cb);
@@ -203,7 +203,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignProject", req, cb);
     }
     /**
-     * 本接口(DescribeAccountUsers)用于获取当前实例的全部账号。
+     * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
      */
     async DescribeAccountUsers(req, cb) {
         return this.request("DescribeAccountUsers", req, cb);

@@ -166,7 +166,7 @@ export interface DeleteProxyGroupRequest {
   /**
    * 需要删除的通道组ID。
    */
-  GroupId?: string
+  GroupId: string
 
   /**
       * 强制删除标识。其中：

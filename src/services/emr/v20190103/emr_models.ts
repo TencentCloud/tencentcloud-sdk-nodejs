@@ -1803,6 +1803,31 @@ export interface InquiryPriceCreateInstanceResponse {
 }
 
 /**
+ * StartStopServiceOrMonitor请求参数结构体
+ */
+export interface StartStopServiceOrMonitorRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+
+  /**
+      * 操作类型，当前支持
+<li>StartService：启动服务</li>
+<li>StopService：停止服务</li>
+<li>StartMonitor：退出维护</li>
+<li>StopMonitor：进入维护</li>
+
+      */
+  OpType: string
+
+  /**
+   * 操作范围
+   */
+  OpScope: OpScope
+}
+
+/**
  * TerminateInstance请求参数结构体
  */
 export interface TerminateInstanceRequest {
@@ -2209,6 +2234,16 @@ export interface RunJobFlowResponse {
 }
 
 /**
+ * StartStopServiceOrMonitor返回参数结构体
+ */
+export interface StartStopServiceOrMonitorResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 多云盘参数
  */
 export interface MultiDisk {
@@ -2577,6 +2612,21 @@ export interface DescribeResourceScheduleResponse {
    * 容量调度器的信息
    */
   CSInfo: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TerminateClusterNodes返回参数结构体
+ */
+export interface TerminateClusterNodesResponse {
+  /**
+   * 缩容流程ID。
+   */
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3077,13 +3127,20 @@ export interface DescribeClusterNodesRequest {
 }
 
 /**
- * SyncPodState请求参数结构体
+ * 操作的进程范围
  */
-export interface SyncPodStateRequest {
+export interface ComponentBasicRestartInfo {
   /**
-   * EmrService中pod状态信息
-   */
-  Message: PodState
+      * 进程名，必填，如NameNode
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComponentName?: string
+
+  /**
+      * 操作的IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpList?: Array<string>
 }
 
 /**
@@ -3457,6 +3514,42 @@ export interface InquiryPriceUpdateInstanceRequest {
 }
 
 /**
+ * TerminateClusterNodes请求参数结构体
+ */
+export interface TerminateClusterNodesRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 销毁资源列表
+   */
+  CvmInstanceIds: Array<string>
+
+  /**
+      * 销毁节点类型取值范围：
+  <li>MASTER</li>
+  <li>TASK</li>
+  <li>CORE</li>
+  <li>ROUTER</li>
+      */
+  NodeFlag: string
+
+  /**
+      * 优雅缩容开关
+  <li>true:开启</li>
+  <li>false:不开启</li>
+      */
+  GraceDownFlag?: boolean
+
+  /**
+   * 优雅缩容等待时间,时间范围60到1800  单位秒
+   */
+  GraceDownTime?: number
+}
+
+/**
  * DescribeInstancesList请求参数结构体
  */
 export interface DescribeInstancesListRequest {
@@ -3548,6 +3641,17 @@ export interface OutterResource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: string
+}
+
+/**
+ * 操作范围
+ */
+export interface OpScope {
+  /**
+      * 操作范围，要操作的服务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceInfoList?: Array<ServiceBasicRestartInfo>
 }
 
 /**
@@ -3904,6 +4008,16 @@ export interface ZoneResourceConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ZoneTag?: string
+}
+
+/**
+ * SyncPodState请求参数结构体
+ */
+export interface SyncPodStateRequest {
+  /**
+   * EmrService中pod状态信息
+   */
+  Message: PodState
 }
 
 /**
@@ -5149,6 +5263,21 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TradeVersion?: number
+}
+
+/**
+ * 操作的服务范围
+ */
+export interface ServiceBasicRestartInfo {
+  /**
+   * 服务名，必填，如HDFS
+   */
+  ServiceName?: string
+
+  /**
+   * 如果没传，则表示所有进程
+   */
+  ComponentInfoList?: Array<ComponentBasicRestartInfo>
 }
 
 /**

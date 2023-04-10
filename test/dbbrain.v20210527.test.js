@@ -28,6 +28,16 @@ it("dbbrain.v20210527.DescribeSecurityAuditLogDownloadUrls", async function () {
     }
 })
 
+it("dbbrain.v20210527.DeleteDBDiagReportTasks", async function () {
+    try {
+       const data = await client.DeleteDBDiagReportTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeMailProfile", async function () {
     try {
        const data = await client.DescribeMailProfile({})

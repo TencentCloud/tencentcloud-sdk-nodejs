@@ -111,6 +111,7 @@ import {
   ExportAttackLogsRequest,
   IgnoreRuleEffectHostInfo,
   HostRiskLevelCount,
+  DescribeFileTamperEventsRequest,
   AssetJarDetail,
   DescribeBanModeRequest,
   DescribeSecurityEventStatRequest,
@@ -169,6 +170,7 @@ import {
   DescribeBaselineWeakPasswordListRequest,
   AssetUserDetail,
   ModifyOrderAttributeResponse,
+  DescribeFileTamperEventsResponse,
   DescribeMachinesRequest,
   DescribeVulEffectHostListRequest,
   ExportLicenseDetailRequest,
@@ -372,6 +374,7 @@ import {
   DescribeProtectDirListRequest,
   ExportPrivilegeEventsRequest,
   MachineExtraInfo,
+  FileTamperEvent,
   DescribeMalwareFileResponse,
   StopBaselineDetectRequest,
   TaskStatus,
@@ -2327,6 +2330,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBashEventsNewResponse) => void
   ): Promise<DescribeBashEventsNewResponse> {
     return this.request("DescribeBashEventsNew", req, cb)
+  }
+
+  /**
+   * 核心文件监控事件列表
+   */
+  async DescribeFileTamperEvents(
+    req: DescribeFileTamperEventsRequest,
+    cb?: (error: string, rep: DescribeFileTamperEventsResponse) => void
+  ): Promise<DescribeFileTamperEventsResponse> {
+    return this.request("DescribeFileTamperEvents", req, cb)
   }
 
   /**

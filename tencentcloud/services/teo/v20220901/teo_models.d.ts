@@ -245,7 +245,7 @@ export interface DescribeTopL7CacheDataRequest {
       */
     ZoneIds?: Array<string>;
     /**
-      * 查询前多少个数据，不填默认默认为10， 表示查询前top 10的数据。
+      * 查询前多少个数据，最大值为1000，不填默认默认为10， 表示查询前top 10的数据。
       */
     Limit?: number;
     /**
@@ -3216,10 +3216,14 @@ export interface DescribeOverviewL7DataRequest {
     EndTime: string;
     /**
       * 查询的指标，取值有：
-<li>l7Flow_outFlux: 访问流量；</li>
+<li>l7Flow_outFlux: Edegone响应流量；</li>
+<li>l7Flow_inFlux: Edgeone请求流量；</li>
+<li>l7Flow_outBandwidth: Edegone响应带宽；</li>
+<li>l7Flow_inBandwidth: Edegone请求带宽；</li>
+<li>l7Flow_hit_outFlux: 缓存命中流量；</li>
 <li>l7Flow_request: 访问请求数；</li>
-<li>l7Flow_outBandwidth: 访问带宽；</li>
-<li>l7Flow_hit_outFlux: 缓存命中流量。</li>
+<li>l7Flow_flux: 访问请求上行+下行流量；</li>
+<li>l7Flow_bandwidth：访问请求上行+下行带宽。</li>
       */
     MetricNames: Array<string>;
     /**
@@ -3729,9 +3733,13 @@ export interface DescribeTimingL7AnalysisDataRequest {
     EndTime: string;
     /**
       * 指标列表，取值有:
-<li>l7Flow_outFlux: 访问流量；</li>
+<li>l7Flow_outFlux: Edgeone响应流量；</li>
+<li>l7Flow_inFlux: Edgeone请求流量；</li>
+<li>l7Flow_outBandwidth: Edgeone响应带宽；</li>
+<li>l7Flow_inBandwidth：Edgeone请求带宽；</li>
 <li>l7Flow_request: 访问请求数；</li>
-<li>l7Flow_outBandwidth: 访问带宽。</li>
+<li>l7Flow_flux: 访问请求上行+下行流量；</li>
+<li>l7Flow_bandwidth：访问请求上行+下行带宽。</li>
       */
     MetricNames: Array<string>;
     /**
@@ -4587,12 +4595,12 @@ export interface DescribeTimingL7AnalysisDataResponse {
     /**
       * 查询结果的总条数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 时序流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: Array<TimingDataRecord>;
+    Data?: Array<TimingDataRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4791,12 +4799,12 @@ export interface DescribeOverviewL7DataResponse {
     /**
       * 查询结果的总条数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 七层监控类时序流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: Array<TimingDataRecord>;
+    Data?: Array<TimingDataRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

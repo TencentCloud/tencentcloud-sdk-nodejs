@@ -150,7 +150,7 @@ export interface DescribeCurrentOpResponse {
  */
 export interface DescribeAccountUsersRequest {
     /**
-      * 实例ID。
+      * 指定待获取账号的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
       */
     InstanceId: string;
 }
@@ -635,7 +635,7 @@ export interface CreateAccountUserResponse {
     /**
       * 创建任务ID。
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -764,7 +764,7 @@ export interface BackupInfo {
  */
 export interface DescribeDBInstancesRequest {
     /**
-      * 实例ID列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+      * 实例 ID 列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
       */
     InstanceIds?: Array<string>;
     /**
@@ -1031,7 +1031,7 @@ export interface CreateDBInstanceResponse {
  */
 export interface CreateAccountUserRequest {
     /**
-      * 实例 ID。
+      * 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
       */
     InstanceId: string;
     /**
@@ -1112,7 +1112,7 @@ export interface DescribeAccountUsersResponse {
     /**
       * 实例账号列表。
       */
-    Users: Array<UserInfo>;
+    Users?: Array<UserInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1164,13 +1164,13 @@ export interface DescribeBackupDownloadTaskRequest {
  */
 export interface DescribeClientConnectionsResponse {
     /**
-      * 客户端连接信息，包括客户端IP和对应IP的连接数量。
+      * 客户端连接信息，包括客户端 IP 和对应 IP 的连接数量。
       */
-    Clients: Array<ClientConnection>;
+    Clients?: Array<ClientConnection>;
     /**
       * 满足条件的记录总条数，可用于分页查询。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1591,15 +1591,16 @@ export interface DescribeDBBackupsRequest {
  */
 export interface DescribeClientConnectionsRequest {
     /**
-      * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+      * 指定待查询的实例ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+
       */
     InstanceId: string;
     /**
-      * 单次请求返回的数量，最小值为1，最大值为1000，默认值为1000。
+      * 单次请求返回的数量。最小值为1，最大值为1000，默认值为1000。
       */
     Limit?: number;
     /**
-      * 偏移量，默认值为0。
+      * 偏移量，默认值为0。Offset=Limit*(页码-1)。
       */
     Offset?: number;
 }

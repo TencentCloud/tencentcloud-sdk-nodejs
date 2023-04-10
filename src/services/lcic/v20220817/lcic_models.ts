@@ -440,18 +440,34 @@ export interface MemberRecord {
 }
 
 /**
- * DeleteAppCustomContent请求参数结构体
+ * GetRooms请求参数结构体
  */
-export interface DeleteAppCustomContentRequest {
+export interface GetRoomsRequest {
   /**
-   * 应用ID。
-   */
+      * 低代码平台的SdkAppId。
+
+      */
   SdkAppId: number
 
   /**
-   * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
+   * 开始时间。默认以当前时间减去半小时作为开始时间。
    */
-  Scenes?: Array<string>
+  StartTime?: number
+
+  /**
+   * 结束时间。默认以当前时间加上半小时作为结束时间。
+   */
+  EndTime?: number
+
+  /**
+   * 分页查询当前页数，从1开始递增
+   */
+  Page?: number
+
+  /**
+   * 默认是10条
+   */
+  Limit?: number
 }
 
 /**
@@ -572,6 +588,79 @@ export interface CreateGroupWithSubGroupRequest {
    * 群组默认主讲老师ID
    */
   TeacherId?: string
+}
+
+/**
+ * 房间列表
+ */
+export interface RoomItem {
+  /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 房间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoomId?: number
+
+  /**
+      * 房间状态。0 未开始 ；1进行中  ；2 已结束
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: number
+
+  /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: number
+
+  /**
+      * 实际开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealStartTime?: number
+
+  /**
+      * 实际结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealEndTime?: number
+
+  /**
+      * 分辨率。1 标清
+2 高清
+3 全高清
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resolution?: number
+
+  /**
+      * 最大允许连麦人数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxRTCMember?: number
+
+  /**
+      * 房间录制地址。已废弃，使用新字段 RecordUrl
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReplayUrl?: string
+
+  /**
+      * 录制地址（协议为https)。仅在房间结束后存在。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordUrl?: string
 }
 
 /**
@@ -2425,6 +2514,26 @@ export interface DescribeQuestionListResponse {
 }
 
 /**
+ * GetRooms返回参数结构体
+ */
+export interface GetRoomsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+
+  /**
+   * 房间列表
+   */
+  Rooms?: Array<RoomItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 房间问答答案详情
  */
 export interface QuestionInfo {
@@ -2453,6 +2562,21 @@ export interface QuestionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AnswerStats?: Array<AnswerStat>
+}
+
+/**
+ * DeleteAppCustomContent请求参数结构体
+ */
+export interface DeleteAppCustomContentRequest {
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
+
+  /**
+   * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
+   */
+  Scenes?: Array<string>
 }
 
 /**

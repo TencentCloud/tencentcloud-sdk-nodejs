@@ -50,6 +50,7 @@ import {
   ContactItem,
   DescribeDBSpaceStatusRequest,
   TimeSlice,
+  DeleteDBDiagReportTasksRequest,
   ModifyDiagDBInstanceConfRequest,
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
@@ -64,6 +65,7 @@ import {
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
   CreateKillTaskRequest,
+  DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
   SlowLogHost,
   CreateMailProfileRequest,
@@ -162,6 +164,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityAuditLogDownloadUrlsResponse) => void
   ): Promise<DescribeSecurityAuditLogDownloadUrlsResponse> {
     return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb)
+  }
+
+  /**
+   * 根据任务id删除健康报告生成任务
+   */
+  async DeleteDBDiagReportTasks(
+    req: DeleteDBDiagReportTasksRequest,
+    cb?: (error: string, rep: DeleteDBDiagReportTasksResponse) => void
+  ): Promise<DeleteDBDiagReportTasksResponse> {
+    return this.request("DeleteDBDiagReportTasks", req, cb)
   }
 
   /**

@@ -2602,7 +2602,7 @@ export interface AddExistedInstancesRequest {
   InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>
 
   /**
-   * 节点镜像（节点选项时，该参数是必传参数）
+   * 节点镜像
    */
   ImageId?: string
 }
@@ -5427,25 +5427,25 @@ export interface AddExistedInstancesResponse {
       * 失败的节点ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedInstanceIds: Array<string>
+  FailedInstanceIds?: Array<string>
 
   /**
       * 成功的节点ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SuccInstanceIds: Array<string>
+  SuccInstanceIds?: Array<string>
 
   /**
       * 超时未返回出来节点的ID(可能失败，也可能成功)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TimeoutInstanceIds: Array<string>
+  TimeoutInstanceIds?: Array<string>
 
   /**
       * 失败的节点的失败原因
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedReasons: Array<string>
+  FailedReasons?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

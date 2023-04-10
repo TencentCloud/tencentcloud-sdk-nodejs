@@ -128,6 +128,16 @@ it("emr.v20190103.RunJobFlow", async function () {
     }
 })
 
+it("emr.v20190103.TerminateClusterNodes", async function () {
+    try {
+       const data = await client.TerminateClusterNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeUsersForUserManager", async function () {
     try {
        const data = await client.DescribeUsersForUserManager({})
@@ -231,6 +241,16 @@ it("emr.v20190103.DescribeResourceSchedule", async function () {
 it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
     try {
        const data = await client.ModifyResourceScheduleConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+    try {
+       const data = await client.StartStopServiceOrMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

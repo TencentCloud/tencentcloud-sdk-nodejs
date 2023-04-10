@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunJobFlow", req, cb);
     }
     /**
+     * 销毁集群节点
+     */
+    async TerminateClusterNodes(req, cb) {
+        return this.request("TerminateClusterNodes", req, cb);
+    }
+    /**
      * 该接口支持安装了OpenLdap组件的集群。
 批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
      */
@@ -161,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyResourceScheduleConfig(req, cb) {
         return this.request("ModifyResourceScheduleConfig", req, cb);
+    }
+    /**
+     * 用于启动或停止监控或服务
+     */
+    async StartStopServiceOrMonitor(req, cb) {
+        return this.request("StartStopServiceOrMonitor", req, cb);
     }
     /**
      * 缩容Task节点

@@ -675,6 +675,24 @@ export interface PrometheusRecordRuleYamlItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterId: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: string
+
+  /**
+      * 规则数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count?: number
 }
 
 /**
@@ -781,6 +799,12 @@ export interface PrometheusConfigItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TemplateId?: string
+
+  /**
+      * 目标数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Targets?: Targets
 }
 
 /**
@@ -2763,6 +2787,12 @@ export interface DescribePrometheusGlobalConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RawJobs?: Array<PrometheusConfigItem>
+
+  /**
+      * Probes列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Probes?: Array<PrometheusConfigItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8085,6 +8115,35 @@ export interface MetricConfig {
    * 允许配置的持续周期个数
    */
   ContinuePeriod: Array<number>
+}
+
+/**
+ * 抓取目标数
+ */
+export interface Targets {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
+
+  /**
+      * 在线数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Up?: number
+
+  /**
+      * 不在线数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Down?: number
+
+  /**
+      * 未知状态数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unknown?: number
 }
 
 /**

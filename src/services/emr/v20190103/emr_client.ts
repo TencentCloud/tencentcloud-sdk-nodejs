@@ -57,6 +57,7 @@ import {
   InquiryPriceRenewInstanceResponse,
   DescribeJobFlowRequest,
   InquiryPriceCreateInstanceResponse,
+  StartStopServiceOrMonitorRequest,
   TerminateInstanceRequest,
   JobFlowResourceSpec,
   Configuration,
@@ -68,6 +69,7 @@ import {
   DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
   RunJobFlowResponse,
+  StartStopServiceOrMonitorResponse,
   MultiDisk,
   PodNewParameter,
   SearchItem,
@@ -79,6 +81,7 @@ import {
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
+  TerminateClusterNodesResponse,
   ModifyResourceSchedulerRequest,
   LoginSettings,
   RunJobFlowRequest,
@@ -91,15 +94,17 @@ import {
   BootstrapAction,
   DescribeCvmQuotaRequest,
   DescribeClusterNodesRequest,
-  SyncPodStateRequest,
+  ComponentBasicRestartInfo,
   CreateInstanceRequest,
   Execution,
   UpdateInstanceSettings,
   ScriptBootstrapActionConfig,
   DescribeInstancesRequest,
   InquiryPriceUpdateInstanceRequest,
+  TerminateClusterNodesRequest,
   DescribeInstancesListRequest,
   OutterResource,
+  OpScope,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
   TerminateTasksResponse,
@@ -112,6 +117,7 @@ import {
   MultiDiskMC,
   AddUsersForUserManagerRequest,
   ZoneResourceConfiguration,
+  SyncPodStateRequest,
   CustomMetaInfo,
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
@@ -140,6 +146,7 @@ import {
   ShortNodeInfo,
   EmrPrice,
   NodeHardwareInfo,
+  ServiceBasicRestartInfo,
   ScaleOutClusterResponse,
   JobFlowResource,
   ModifyResourcePoolsRequest,
@@ -267,6 +274,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 销毁集群节点
+   */
+  async TerminateClusterNodes(
+    req: TerminateClusterNodesRequest,
+    cb?: (error: string, rep: TerminateClusterNodesResponse) => void
+  ): Promise<TerminateClusterNodesResponse> {
+    return this.request("TerminateClusterNodes", req, cb)
+  }
+
+  /**
      * 该接口支持安装了OpenLdap组件的集群。
 批量导出用户。对于kerberos集群，如果需要kertab文件下载地址，可以将NeedKeytabInfo设置为true；注意SupportDownLoadKeyTab为true，但是DownLoadKeyTabUrl为空字符串，表示keytab文件在后台没有准备好（正在生成）。
      */
@@ -377,6 +394,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
   ): Promise<ModifyResourceScheduleConfigResponse> {
     return this.request("ModifyResourceScheduleConfig", req, cb)
+  }
+
+  /**
+   * 用于启动或停止监控或服务
+   */
+  async StartStopServiceOrMonitor(
+    req: StartStopServiceOrMonitorRequest,
+    cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void
+  ): Promise<StartStopServiceOrMonitorResponse> {
+    return this.request("StartStopServiceOrMonitor", req, cb)
   }
 
   /**

@@ -64,6 +64,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryBarCode", req, cb);
     }
     /**
+     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+
+默认接口请求频率限制：10次/秒。
+     */
+    async SmartStructuralOCRV2(req, cb) {
+        return this.request("SmartStructuralOCRV2", req, cb);
+    }
+    /**
      * 本接口支持智能化识别各类企业登记证书、许可证书、企业执照、三证合一类证书，结构化输出统一社会信用代码、公司名称、法定代表人、公司地址、注册资金、企业类型、经营范围等关键字段。
 
 默认接口请求频率限制：5次/秒。

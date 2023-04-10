@@ -32,6 +32,8 @@ import {
   FlightInvoiceOCRRequest,
   RecognizePhilippinesDrivingLicenseOCRRequest,
   MLIDPassportOCRRequest,
+  ItemInfo,
+  SmartStructuralOCRV2Request,
   TextDetectResponse,
   TollInvoiceOCRResponse,
   VerifyBizLicenseResponse,
@@ -51,8 +53,8 @@ import {
   HmtResidentPermitOCRResponse,
   VatInvoiceItem,
   VehicleRegCertInfo,
-  VehicleLicenseOCRRequest,
-  ImageEnhancementRequest,
+  Value,
+  EnterpriseLicenseOCRResponse,
   SealInfo,
   RecognizePhilippinesVoteIDOCRRequest,
   InvoiceGeneralInfo,
@@ -69,6 +71,7 @@ import {
   WordCoordPoint,
   InvoiceDetectInfo,
   MainlandPermitOCRRequest,
+  SmartStructuralOCRV2Response,
   EnterpriseLicenseOCRRequest,
   BankCardOCRRequest,
   StructuralItem,
@@ -87,7 +90,7 @@ import {
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
-  RideHailingDriverLicenseOCRRequest,
+  RecognizePhilippinesVoteIDOCRResponse,
   VatInvoiceUserInfo,
   InsuranceBillOCRResponse,
   GeneralAccurateOCRResponse,
@@ -103,6 +106,7 @@ import {
   VatInvoiceVerifyNewRequest,
   VehicleLicenseOCRResponse,
   VatInvoiceOCRRequest,
+  Key,
   IDCardOCRResponse,
   ClassifyDetectOCRRequest,
   DutyPaidProofOCRResponse,
@@ -111,6 +115,7 @@ import {
   HKIDCardOCRResponse,
   MedicalInvoiceInfo,
   VatInvoiceGoodsInfo,
+  GroupInfo,
   OrgCodeCertOCRResponse,
   PermitOCRRequest,
   InvoiceGeneralOCRResponse,
@@ -153,7 +158,6 @@ import {
   Polygon,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
-  MixedInvoiceDetectRequest,
   FlightInvoiceOCRResponse,
   TextDetectionResult,
   InstitutionOCRRequest,
@@ -162,6 +166,7 @@ import {
   TextVehicleFront,
   AdvertiseTextDetection,
   FinanBillSliceInfo,
+  RideHailingDriverLicenseOCRRequest,
   QueryBarCodeResponse,
   ArithmeticOCRRequest,
   VerifyOfdVatInvoiceOCRRequest,
@@ -185,7 +190,7 @@ import {
   PassportOCRRequest,
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
-  RecognizePhilippinesVoteIDOCRResponse,
+  LineInfo,
   QueryBarCodeRequest,
   ItemCoord,
   CreateAIFormTaskResponse,
@@ -221,16 +226,18 @@ import {
   RecognizeContainerOCRResponse,
   EnterpriseLicenseInfo,
   InsuranceBillOCRRequest,
+  ImageEnhancementRequest,
   GeneralHandwritingOCRResponse,
   TableCell,
   TableOCRResponse,
   DetectedWordCoordPoint,
   QuestionBlockObj,
   AdvertiseOCRResponse,
+  VehicleLicenseOCRRequest,
   VatRollInvoiceInfo,
   RecognizeOnlineTaxiItineraryOCRRequest,
   IDCardOCRRequest,
-  EnterpriseLicenseOCRResponse,
+  MixedInvoiceDetectRequest,
   WaybillOCRRequest,
   VinOCRRequest,
   RideHailingTransportLicenseOCRRequest,
@@ -309,6 +316,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryBarCodeResponse) => void
   ): Promise<QueryBarCodeResponse> {
     return this.request("QueryBarCode", req, cb)
+  }
+
+  /**
+     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async SmartStructuralOCRV2(
+    req: SmartStructuralOCRV2Request,
+    cb?: (error: string, rep: SmartStructuralOCRV2Response) => void
+  ): Promise<SmartStructuralOCRV2Response> {
+    return this.request("SmartStructuralOCRV2", req, cb)
   }
 
   /**
