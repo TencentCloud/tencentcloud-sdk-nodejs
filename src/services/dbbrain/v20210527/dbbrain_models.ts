@@ -181,6 +181,71 @@ export interface TableSpaceTimeSeries {
 }
 
 /**
+ * DescribeSlowLogs请求参数结构体
+ */
+export interface DescribeSlowLogsRequest {
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。
+   */
+  Product: string
+
+  /**
+   * 实例id。
+   */
+  InstanceId: string
+
+  /**
+   * sql模版的md5值
+   */
+  Md5: string
+
+  /**
+   * 开始时间，如“2019-09-10 12:13:14”。
+   */
+  StartTime: string
+
+  /**
+   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   */
+  EndTime: string
+
+  /**
+   * 分页参数
+   */
+  Offset: number
+
+  /**
+   * 分页参数
+   */
+  Limit: number
+
+  /**
+   * 数据库列表
+   */
+  DB?: Array<string>
+
+  /**
+   * 关键字
+   */
+  Key?: Array<string>
+
+  /**
+   * 用户
+   */
+  User?: Array<string>
+
+  /**
+   * ip
+   */
+  Ip?: Array<string>
+
+  /**
+   * 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素
+   */
+  Time?: Array<number>
+}
+
+/**
  * DescribeTopSpaceTables请求参数结构体
  */
 export interface DescribeTopSpaceTablesRequest {
@@ -1024,6 +1089,26 @@ export interface ModifyDiagDBInstanceConfRequest {
    * 指定更改巡检状态的实例ID。
    */
   InstanceIds?: Array<string>
+}
+
+/**
+ * DescribeSlowLogs返回参数结构体
+ */
+export interface DescribeSlowLogsResponse {
+  /**
+   * 符合条件的记录总数。
+   */
+  TotalCount?: number
+
+  /**
+   * 慢日志明细
+   */
+  Rows?: Array<SlowLogInfoItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3258,6 +3343,61 @@ export interface MonitorMetricSeriesData {
    * 监控指标对应的时间戳。
    */
   Timestamp: Array<number>
+}
+
+/**
+ * 慢日志详细信息
+ */
+export interface SlowLogInfoItem {
+  /**
+   * 慢日志开始时间
+   */
+  Timestamp?: string
+
+  /**
+   * sql语句
+   */
+  SqlText?: string
+
+  /**
+   * 数据库
+   */
+  Database?: string
+
+  /**
+      * User来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName?: string
+
+  /**
+      * IP来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserHost?: string
+
+  /**
+   * 执行时间,单位秒
+   */
+  QueryTime?: number
+
+  /**
+      * 锁时间,单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LockTime?: number
+
+  /**
+      * 扫描行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RowsExamined?: number
+
+  /**
+      * 返回行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RowsSent?: number
 }
 
 /**

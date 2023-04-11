@@ -210,46 +210,14 @@ export interface DeleteShipperRequest {
     ShipperId: string;
 }
 /**
- * ModifyTopic请求参数结构体
+ * 动态更新索引配置
  */
-export interface ModifyTopicRequest {
+export interface DynamicIndex {
     /**
-      * 日志主题ID
-      */
-    TopicId: string;
-    /**
-      * 日志主题名称
-      */
-    TopicName?: string;
-    /**
-      * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
-      */
-    Tags?: Array<Tag>;
-    /**
-      * 该日志主题是否开始采集
+      * 动态索引配置开关
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: boolean;
-    /**
-      * 是否开启自动分裂
-      */
-    AutoSplit?: boolean;
-    /**
-      * 若开启最大分裂，该主题能够能够允许的最大分区数
-      */
-    MaxSplitPartitions?: number;
-    /**
-      * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
-      */
-    Period?: number;
-    /**
-      * 日志主题描述
-      */
-    Describes?: string;
-    /**
-      * 0：关闭日志沉降。
-非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
-      */
-    HotPeriod?: number;
 }
 /**
  * DeleteLogset返回参数结构体
@@ -422,6 +390,11 @@ export interface SearchLogResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Columns?: Array<Column>;
+    /**
+      * 本次统计分析使用的采样率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SamplingRate?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -613,17 +586,46 @@ export interface ModifyShipperResponse {
     RequestId?: string;
 }
 /**
- * RetryShipperTask请求参数结构体
+ * ModifyTopic请求参数结构体
  */
-export interface RetryShipperTaskRequest {
+export interface ModifyTopicRequest {
     /**
-      * 投递规则ID
+      * 日志主题ID
       */
-    ShipperId: string;
+    TopicId: string;
     /**
-      * 投递任务ID
+      * 日志主题名称
       */
-    TaskId: string;
+    TopicName?: string;
+    /**
+      * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 该日志主题是否开始采集
+      */
+    Status?: boolean;
+    /**
+      * 是否开启自动分裂
+      */
+    AutoSplit?: boolean;
+    /**
+      * 若开启最大分裂，该主题能够能够允许的最大分区数
+      */
+    MaxSplitPartitions?: number;
+    /**
+      * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
+      */
+    Period?: number;
+    /**
+      * 日志主题描述
+      */
+    Describes?: string;
+    /**
+      * 0：关闭日志沉降。
+非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
+      */
+    HotPeriod?: number;
 }
 /**
  * 自建k8s-工作负载信息
@@ -1099,7 +1101,6 @@ export interface ModifyMachineGroupResponse {
 }
 /**
  * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
-
  */
 export interface RuleInfo {
     /**
@@ -1117,6 +1118,11 @@ export interface RuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tag?: RuleTagInfo;
+    /**
+      * 动态索引配置，如果为空时代表未开启动态段索引
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DynamicIndex?: DynamicIndex;
 }
 /**
  * DeleteMachineGroup请求参数结构体
@@ -3616,7 +3622,7 @@ export interface SearchLogRequest {
     /**
       * 检索语法规则，默认值为0。
 0：Lucene语法，1：CQL语法。
-详细说明参见https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules
+详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
       */
     SyntaxRule?: number;
 }
@@ -4144,6 +4150,19 @@ export interface ConsumerContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TimestampAccuracy?: number;
+}
+/**
+ * RetryShipperTask请求参数结构体
+ */
+export interface RetryShipperTaskRequest {
+    /**
+      * 投递规则ID
+      */
+    ShipperId: string;
+    /**
+      * 投递任务ID
+      */
+    TaskId: string;
 }
 /**
  * CreateExport返回参数结构体

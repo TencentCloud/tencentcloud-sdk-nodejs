@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOfflineRecordCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeWhiteboardPushSearchResponse, ResumeOnlineRecordResponse, DescribeWhiteboardApplicationConfigResponse, CreateSnapshotTaskResponse, DescribeOfflineRecordResponse, ModifyApplicationResponse, CreateTranscodeResponse, DescribeUserResourcesResponse, DescribeOnlineRecordRequest, ModifyWhiteboardBucketConfigRequest, SetOnlineRecordCallbackKeyResponse, DescribeRecordSearchResponse, DescribeAPIServiceRequest, DescribeQualityMetricsRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeSearchResponse, ResumeOnlineRecordRequest, SetWhiteboardPushCallbackKeyResponse, DescribeRoomListRequest, SetWhiteboardPushCallbackResponse, ApplyTiwTrialResponse, PauseOnlineRecordRequest, DescribeApplicationInfosResponse, DescribeApplicationUsageResponse, DescribeAPIServiceResponse, DescribeWhiteboardBucketConfigRequest, DescribeUsageSummaryResponse, DescribeApplicationInfosRequest, DescribeApplicationUsageRequest, DescribeOfflineRecordCallbackResponse, CreateOfflineRecordResponse, SetVideoGenerationTaskCallbackKeyResponse, DescribeVideoGenerationTaskResponse, DescribeVideoGenerationTaskRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, DescribeTranscodeRequest, DescribeBoardSDKLogResponse, SetOnlineRecordCallbackResponse, ApplyTiwTrialRequest, DescribeTranscodeCallbackResponse, DescribeUserListResponse, ModifyAutoRenewFlagResponse, DescribeTIWDailyUsageRequest, DescribeWhiteboardBucketConfigResponse, DescribeBoardSDKLogRequest, DescribeVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackKeyRequest, DescribeTranscodeSearchRequest, StartWhiteboardPushRequest, CreateOfflineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigRequest, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeUserStatusRequest, DescribeOnlineRecordCallbackRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetOfflineRecordCallbackRequest, SetVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigResponse, SetVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackRequest, DescribeTIWDailyUsageResponse, DescribeWhiteboardApplicationConfigRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, ModifyWhiteboardBucketConfigResponse, CreateSnapshotTaskRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackKeyRequest, ModifyApplicationRequest, DescribeOnlineRecordCallbackResponse, SetOfflineRecordCallbackResponse, DescribeQualityMetricsResponse, DescribeIMApplicationsResponse, SetOnlineRecordCallbackRequest, DescribeUserListRequest, DescribeUserResourcesRequest, StopWhiteboardPushResponse, DescribePostpaidUsageRequest, DescribeRoomListResponse, DescribeIMApplicationsRequest, ModifyAutoRenewFlagRequest, DescribeSnapshotTaskResponse, DescribeUserStatusResponse, DescribeTIWRoomDailyUsageResponse, DescribeWhiteboardPushCallbackResponse, CreateApplicationRequest, DescribeWhiteboardPushSearchRequest, SetTranscodeCallbackKeyResponse, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, DescribeUsageSummaryRequest, CreateTranscodeRequest, SetTranscodeCallbackKeyRequest, SetTranscodeCallbackRequest, DescribePostpaidUsageResponse, StartWhiteboardPushResponse, CreateApplicationResponse, StopWhiteboardPushRequest, DescribeOfflineRecordRequest, DescribeRecordSearchRequest } from "./tiw_models";
+import { DescribeOfflineRecordCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeWhiteboardPushSearchResponse, ResumeOnlineRecordResponse, DescribeWhiteboardApplicationConfigResponse, CreateSnapshotTaskResponse, DescribeOfflineRecordResponse, ModifyApplicationResponse, SetPPTCheckCallbackKeyResponse, CreateTranscodeResponse, DescribeUserResourcesResponse, DescribePPTCheckResponse, CreateApplicationRequest, ModifyWhiteboardBucketConfigRequest, SetOnlineRecordCallbackKeyResponse, DescribeRecordSearchResponse, DescribeAPIServiceRequest, DescribeQualityMetricsRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeSearchResponse, ResumeOnlineRecordRequest, SetWhiteboardPushCallbackKeyResponse, DescribeRoomListRequest, SetWhiteboardPushCallbackResponse, ApplyTiwTrialResponse, PauseOnlineRecordRequest, DescribeRunningTasksResponse, DescribeApplicationUsageResponse, DescribeAPIServiceResponse, DescribeWarningCallbackResponse, DescribeWhiteboardBucketConfigRequest, DescribeUsageSummaryResponse, DescribeRunningTasksRequest, DescribeApplicationUsageRequest, DescribeOfflineRecordCallbackResponse, SetWarningCallbackResponse, CreateOfflineRecordResponse, SetVideoGenerationTaskCallbackKeyResponse, DescribeVideoGenerationTaskResponse, SetPPTCheckCallbackKeyRequest, DescribeVideoGenerationTaskRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, DescribeTranscodeRequest, DescribeBoardSDKLogResponse, SetOnlineRecordCallbackResponse, DescribePPTCheckCallbackResponse, DescribeTranscodeCallbackResponse, DescribeUserListResponse, ModifyAutoRenewFlagResponse, DescribeApplicationInfosResponse, DescribeTIWDailyUsageRequest, DescribeWhiteboardBucketConfigResponse, DescribeBoardSDKLogRequest, DescribeVideoGenerationTaskCallbackRequest, SetVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackKeyRequest, DescribeTranscodeSearchRequest, ApplyTiwTrialRequest, StartWhiteboardPushRequest, CreateOfflineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigRequest, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeUserStatusRequest, DescribeOnlineRecordCallbackRequest, ModifyWhiteboardApplicationConfigResponse, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetOfflineRecordCallbackRequest, SetVideoGenerationTaskCallbackResponse, DescribeWarningCallbackRequest, CreatePPTCheckTaskRequest, SetWhiteboardPushCallbackRequest, DescribeTIWDailyUsageResponse, DescribeWhiteboardApplicationConfigRequest, CreateVideoGenerationTaskResponse, DescribePPTCheckCallbackRequest, PauseOnlineRecordResponse, ModifyWhiteboardBucketConfigResponse, CreateSnapshotTaskRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackKeyRequest, ModifyApplicationRequest, DescribeOnlineRecordCallbackResponse, SetOfflineRecordCallbackResponse, DescribeQualityMetricsResponse, DescribeIMApplicationsResponse, SetOnlineRecordCallbackRequest, DescribeUserListRequest, DescribeUserResourcesRequest, SetPPTCheckCallbackResponse, DescribeOnlineRecordRequest, StopWhiteboardPushResponse, SetWarningCallbackRequest, DescribePostpaidUsageRequest, DescribeRoomListResponse, DescribeIMApplicationsRequest, ModifyAutoRenewFlagRequest, DescribeSnapshotTaskResponse, DescribeUserStatusResponse, DescribeTIWRoomDailyUsageResponse, DescribeWhiteboardPushCallbackResponse, DescribeApplicationInfosRequest, DescribeWhiteboardPushSearchRequest, SetTranscodeCallbackKeyResponse, SetPPTCheckCallbackRequest, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, DescribeUsageSummaryRequest, CreatePPTCheckTaskResponse, CreateTranscodeRequest, SetTranscodeCallbackKeyRequest, SetTranscodeCallbackRequest, DescribePostpaidUsageResponse, StartWhiteboardPushResponse, CreateApplicationResponse, StopWhiteboardPushRequest, DescribeOfflineRecordRequest, DescribeRecordSearchRequest, DescribePPTCheckRequest } from "./tiw_models";
 /**
  * tiw client
  * @class
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRecordSearch(req?: DescribeRecordSearchRequest, cb?: (error: string, rep: DescribeRecordSearchResponse) => void): Promise<DescribeRecordSearchResponse>;
     /**
-     * 创建视频生成任务
+     * 检测PPT文件，识别PPT中包含的动态转码任务（Transcode）不支持的元素
      */
-    CreateVideoGenerationTask(req: CreateVideoGenerationTaskRequest, cb?: (error: string, rep: CreateVideoGenerationTaskResponse) => void): Promise<CreateVideoGenerationTaskResponse>;
+    CreatePPTCheckTask(req: CreatePPTCheckTaskRequest, cb?: (error: string, rep: CreatePPTCheckTaskResponse) => void): Promise<CreatePPTCheckTaskResponse>;
     /**
      * 设置实时录制回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
@@ -52,6 +52,10 @@ export declare class Client extends AbstractClient {
      */
     SetTranscodeCallback(req: SetTranscodeCallbackRequest, cb?: (error: string, rep: SetTranscodeCallbackResponse) => void): Promise<SetTranscodeCallbackResponse>;
     /**
+     * 发起一个实时录制任务
+     */
+    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
+    /**
      * 恢复实时录制
      */
     ResumeOnlineRecord(req: ResumeOnlineRecordRequest, cb?: (error: string, rep: ResumeOnlineRecordResponse) => void): Promise<ResumeOnlineRecordResponse>;
@@ -60,9 +64,16 @@ export declare class Client extends AbstractClient {
      */
     ApplyTiwTrial(req?: ApplyTiwTrialRequest, cb?: (error: string, rep: ApplyTiwTrialResponse) => void): Promise<ApplyTiwTrialResponse>;
     /**
-     * 查询用户后付费用量
+     * 查询PPT检测任务回调地址
      */
-    DescribePostpaidUsage(req: DescribePostpaidUsageRequest, cb?: (error: string, rep: DescribePostpaidUsageResponse) => void): Promise<DescribePostpaidUsageResponse>;
+    DescribePPTCheckCallback(req: DescribePPTCheckCallbackRequest, cb?: (error: string, rep: DescribePPTCheckCallbackResponse) => void): Promise<DescribePPTCheckCallbackResponse>;
+    /**
+     * 查询互动白板房间维度每天计费用量。
+1. 单次查询统计区间最多不能超过31天。
+2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
+
+     */
+    DescribeTIWRoomDailyUsage(req: DescribeTIWRoomDailyUsageRequest, cb?: (error: string, rep: DescribeTIWRoomDailyUsageResponse) => void): Promise<DescribeTIWRoomDailyUsageResponse>;
     /**
      * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
@@ -72,9 +83,17 @@ export declare class Client extends AbstractClient {
      */
     SetOfflineRecordCallback(req: SetOfflineRecordCallbackRequest, cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void): Promise<SetOfflineRecordCallbackResponse>;
     /**
+     * 设置PPT检测任务回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+     */
+    SetPPTCheckCallbackKey(req: SetPPTCheckCallbackKeyRequest, cb?: (error: string, rep: SetPPTCheckCallbackKeyResponse) => void): Promise<SetPPTCheckCallbackKeyResponse>;
+    /**
      * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
      */
     CreateSnapshotTask(req: CreateSnapshotTaskRequest, cb?: (error: string, rep: CreateSnapshotTaskResponse) => void): Promise<CreateSnapshotTaskResponse>;
+    /**
+     * 设置PPT检测任务回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
+     */
+    SetPPTCheckCallback(req: SetPPTCheckCallbackRequest, cb?: (error: string, rep: SetPPTCheckCallbackResponse) => void): Promise<SetPPTCheckCallbackResponse>;
     /**
      * 查询录制视频生成回调地址
      */
@@ -104,6 +123,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTranscodeCallback(req: DescribeTranscodeCallbackRequest, cb?: (error: string, rep: DescribeTranscodeCallbackResponse) => void): Promise<DescribeTranscodeCallbackResponse>;
     /**
+     * 设置告警回调地址。此功能需要申请白名单使用。
+     */
+    SetWarningCallback(req: SetWarningCallbackRequest, cb?: (error: string, rep: SetWarningCallbackResponse) => void): Promise<SetWarningCallbackResponse>;
+    /**
      * 通过服务角色调用其他云产品API接口获取信息
      */
     DescribeAPIService(req: DescribeAPIServiceRequest, cb?: (error: string, rep: DescribeAPIServiceResponse) => void): Promise<DescribeAPIServiceResponse>;
@@ -116,16 +139,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationInfos(req?: DescribeApplicationInfosRequest, cb?: (error: string, rep: DescribeApplicationInfosResponse) => void): Promise<DescribeApplicationInfosResponse>;
     /**
-     * 发起一个实时录制任务
+     * 查询告警回调地址。此功能需要申请白名单使用。
      */
-    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
+    DescribeWarningCallback(req: DescribeWarningCallbackRequest, cb?: (error: string, rep: DescribeWarningCallbackResponse) => void): Promise<DescribeWarningCallbackResponse>;
     /**
-     * 查询互动白板房间维度每天计费用量。
-1. 单次查询统计区间最多不能超过31天。
-2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
-
+     * 查询用户后付费用量
      */
-    DescribeTIWRoomDailyUsage(req: DescribeTIWRoomDailyUsageRequest, cb?: (error: string, rep: DescribeTIWRoomDailyUsageResponse) => void): Promise<DescribeTIWRoomDailyUsageResponse>;
+    DescribePostpaidUsage(req: DescribePostpaidUsageRequest, cb?: (error: string, rep: DescribePostpaidUsageResponse) => void): Promise<DescribePostpaidUsageResponse>;
     /**
      * 创建一个文档转码任务
      */
@@ -146,6 +166,10 @@ export declare class Client extends AbstractClient {
      * 查询课后录制回调地址
      */
     DescribeOfflineRecordCallback(req: DescribeOfflineRecordCallbackRequest, cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void): Promise<DescribeOfflineRecordCallbackResponse>;
+    /**
+     * 创建视频生成任务
+     */
+    CreateVideoGenerationTask(req: CreateVideoGenerationTaskRequest, cb?: (error: string, rep: CreateVideoGenerationTaskResponse) => void): Promise<CreateVideoGenerationTaskResponse>;
     /**
      * 查询文档转码任务的执行进度与转码结果
      */
@@ -174,6 +198,10 @@ export declare class Client extends AbstractClient {
      * 创建白板应用
      */
     CreateApplication(req: CreateApplicationRequest, cb?: (error: string, rep: CreateApplicationResponse) => void): Promise<CreateApplicationResponse>;
+    /**
+     * 根据指定的任务类型，获取当前正在执行中的任务列表。只能查询最近3天内创建的任务。
+     */
+    DescribeRunningTasks(req: DescribeRunningTasksRequest, cb?: (error: string, rep: DescribeRunningTasksResponse) => void): Promise<DescribeRunningTasksResponse>;
     /**
      * 查询互动白板天维度计费用量。
 1. 单次查询统计区间最多不能超过31天。
@@ -226,6 +254,10 @@ export declare class Client extends AbstractClient {
 
      */
     DescribeUserStatus(req?: DescribeUserStatusRequest, cb?: (error: string, rep: DescribeUserStatusResponse) => void): Promise<DescribeUserStatusResponse>;
+    /**
+     * 查询PPT检测任务的执行进度或结果
+     */
+    DescribePPTCheck(req: DescribePPTCheckRequest, cb?: (error: string, rep: DescribePPTCheckResponse) => void): Promise<DescribePPTCheckResponse>;
     /**
      * 获取指定白板板书生成任务信息
      */

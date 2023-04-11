@@ -90,7 +90,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowEvidenceReport", req, cb);
     }
     /**
-     * 验证合同文件
+     * 对流程的合同文件进行验证，判断文件是否合法。
      */
     async VerifyPdf(req, cb) {
         return this.request("VerifyPdf", req, cb);
@@ -103,7 +103,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateBatchCancelFlowUrl", req, cb);
     }
     /**
-     * 本接口（CreatePreparedPersonalEsign）由于创建导入个人印章。
+     * 本接口（CreatePreparedPersonalEsign）用于创建导入个人印章。
      */
     async CreatePreparedPersonalEsign(req, cb) {
         return this.request("CreatePreparedPersonalEsign", req, cb);
@@ -150,7 +150,7 @@ callbackinfo包含： 回调地址和签名key
     }
     /**
      * 创建签署流程电子文档
-适用场景：见创建签署流程接口。x0b
+适用场景：见创建签署流程接口。
 注：该接口需要给对应的流程指定一个模板id，并且填充该模板中需要补充的信息。是“发起流程”接口的前置接口。
      */
     async CreateDocument(req, cb) {
@@ -219,7 +219,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateMultiFlowSignQRCode", req, cb);
     }
     /**
-     * 查询转换任务状态
+     * 通过发起转换任务接口（CreateConvertTaskApi）返回的任务Id查询转换任务状态，通过本接口确认转换任务是否完成。大文件转换所需的时间可能会比较长。
      */
     async GetTaskResultApi(req, cb) {
         return this.request("GetTaskResultApi", req, cb);
@@ -275,6 +275,8 @@ callbackinfo包含： 回调地址和签名key
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
 该接口不可直接调用，请联系客户经理申请使用
+仅能催办当前状态为“待签署”的签署人，且只能催办一次
+发起合同时，签署人的NotifyType需设置为sms，否则无法催办
      */
     async CreateFlowReminds(req, cb) {
         return this.request("CreateFlowReminds", req, cb);

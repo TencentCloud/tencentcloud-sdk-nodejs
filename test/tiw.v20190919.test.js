@@ -88,9 +88,9 @@ it("tiw.v20190919.DescribeRecordSearch", async function () {
     }
 })
 
-it("tiw.v20190919.CreateVideoGenerationTask", async function () {
+it("tiw.v20190919.CreatePPTCheckTask", async function () {
     try {
-       const data = await client.CreateVideoGenerationTask({})
+       const data = await client.CreatePPTCheckTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +128,16 @@ it("tiw.v20190919.SetTranscodeCallback", async function () {
     }
 })
 
+it("tiw.v20190919.StartOnlineRecord", async function () {
+    try {
+       const data = await client.StartOnlineRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.ResumeOnlineRecord", async function () {
     try {
        const data = await client.ResumeOnlineRecord({})
@@ -148,9 +158,19 @@ it("tiw.v20190919.ApplyTiwTrial", async function () {
     }
 })
 
-it("tiw.v20190919.DescribePostpaidUsage", async function () {
+it("tiw.v20190919.DescribePPTCheckCallback", async function () {
     try {
-       const data = await client.DescribePostpaidUsage({})
+       const data = await client.DescribePPTCheckCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribeTIWRoomDailyUsage", async function () {
+    try {
+       const data = await client.DescribeTIWRoomDailyUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,29 @@ it("tiw.v20190919.SetOfflineRecordCallback", async function () {
     }
 })
 
+it("tiw.v20190919.SetPPTCheckCallbackKey", async function () {
+    try {
+       const data = await client.SetPPTCheckCallbackKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.CreateSnapshotTask", async function () {
     try {
        const data = await client.CreateSnapshotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.SetPPTCheckCallback", async function () {
+    try {
+       const data = await client.SetPPTCheckCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +298,16 @@ it("tiw.v20190919.DescribeTranscodeCallback", async function () {
     }
 })
 
+it("tiw.v20190919.SetWarningCallback", async function () {
+    try {
+       const data = await client.SetWarningCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.DescribeAPIService", async function () {
     try {
        const data = await client.DescribeAPIService({})
@@ -288,9 +338,9 @@ it("tiw.v20190919.DescribeApplicationInfos", async function () {
     }
 })
 
-it("tiw.v20190919.StartOnlineRecord", async function () {
+it("tiw.v20190919.DescribeWarningCallback", async function () {
     try {
-       const data = await client.StartOnlineRecord({})
+       const data = await client.DescribeWarningCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +348,9 @@ it("tiw.v20190919.StartOnlineRecord", async function () {
     }
 })
 
-it("tiw.v20190919.DescribeTIWRoomDailyUsage", async function () {
+it("tiw.v20190919.DescribePostpaidUsage", async function () {
     try {
-       const data = await client.DescribeTIWRoomDailyUsage({})
+       const data = await client.DescribePostpaidUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +401,16 @@ it("tiw.v20190919.SetWhiteboardPushCallback", async function () {
 it("tiw.v20190919.DescribeOfflineRecordCallback", async function () {
     try {
        const data = await client.DescribeOfflineRecordCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.CreateVideoGenerationTask", async function () {
+    try {
+       const data = await client.CreateVideoGenerationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +481,16 @@ it("tiw.v20190919.DescribeVideoGenerationTask", async function () {
 it("tiw.v20190919.CreateApplication", async function () {
     try {
        const data = await client.CreateApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribeRunningTasks", async function () {
+    try {
+       const data = await client.DescribeRunningTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +611,16 @@ it("tiw.v20190919.DescribeWhiteboardPush", async function () {
 it("tiw.v20190919.DescribeUserStatus", async function () {
     try {
        const data = await client.DescribeUserStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribePPTCheck", async function () {
+    try {
+       const data = await client.DescribePPTCheck({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1705,7 +1705,7 @@ export interface StartInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
- * 标签键值对
+ * 标签键值对，可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。
  */
 export interface Tag {
     /**
@@ -2226,7 +2226,7 @@ IMPORTFAILED-导入失败
       */
     ImageState: string;
     /**
-      * 镜像来源平台
+      * 镜像来源平台，包括如TencentOS、 CentOS、 Windows、 Ubuntu、 Debian、Fedora等。
       */
     Platform?: string;
     /**

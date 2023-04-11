@@ -955,7 +955,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetInitServiceList(req: DescribeAssetInitServiceListRequest, cb?: (error: string, rep: DescribeAssetInitServiceListResponse) => void): Promise<DescribeAssetInitServiceListResponse>;
     /**
-     * 本接口（DeleteMachine）用于卸载云镜客户端。
+     * 本接口（DeleteMachine）用于卸载主机安全客户端。
      */
     DeleteMachine(req: DeleteMachineRequest, cb?: (error: string, rep: DeleteMachineResponse) => void): Promise<DeleteMachineResponse>;
     /**

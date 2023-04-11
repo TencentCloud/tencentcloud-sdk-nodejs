@@ -2049,6 +2049,11 @@ export interface CreateRecordBatchRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MX: number;
+    /**
+      * 记录的权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weight?: number;
 }
 /**
  * CreateDomain返回参数结构体

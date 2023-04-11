@@ -288,6 +288,16 @@ it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeSlowLogs", async function () {
+    try {
+       const data = await client.DescribeSlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeDBDiagEvent", async function () {
     try {
        const data = await client.DescribeDBDiagEvent({})

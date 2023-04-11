@@ -28,13 +28,13 @@ import {
   InquirePriceRenewDBInstancesRequest,
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
-  DescribeSecurityGroupRequest,
+  InstanceMultiParam,
   SlowLogPattern,
   AssignProjectResponse,
   DescribeDBInstanceDealResponse,
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
-  InstanceMultiParam,
+  DescribeSecurityGroupRequest,
   DescribeBackupDownloadTaskResponse,
   FlushInstanceRouterConfigRequest,
   DBInstanceInfo,
@@ -42,7 +42,7 @@ import {
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
   DescribeDBInstanceNodePropertyRequest,
-  Operation,
+  DeleteAccountUserRequest,
   SpecItem,
   ModifyDBInstanceNetworkAddressResponse,
   CreateAccountUserResponse,
@@ -65,6 +65,7 @@ import {
   ModifyDBInstanceSecurityGroupRequest,
   DescribeAccountUsersResponse,
   DescribeBackupDownloadTaskRequest,
+  Operation,
   DescribeClientConnectionsResponse,
   TerminateDBInstancesRequest,
   DescribeDBBackupsResponse,
@@ -108,6 +109,7 @@ import {
   DescribeSpecInfoResponse,
   InquirePriceRenewDBInstancesResponse,
   TagInfo,
+  DeleteAccountUserResponse,
   DescribeDBInstancesResponse,
   OfflineIsolatedDBInstanceRequest,
   InquirePriceCreateDBInstancesRequest,
@@ -198,7 +200,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
+   * 本接口（SetAccountUserPrivilege）用于设置实例的账号权限。
    */
   async SetAccountUserPrivilege(
     req: SetAccountUserPrivilegeRequest,
@@ -368,7 +370,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeInstanceParams)用于查询当前实例可修改的参数列表。
+   * 本接口（DescribeInstanceParams）用于查询当前实例可修改的参数列表。
    */
   async DescribeInstanceParams(
     req: DescribeInstanceParamsRequest,
@@ -449,7 +451,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 备份实例接口
+   * 本接口（CreateBackupDBInstance）用于备份实例。
    */
   async CreateBackupDBInstance(
     req: CreateBackupDBInstanceRequest,
@@ -466,6 +468,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceRenewDBInstancesResponse) => void
   ): Promise<InquirePriceRenewDBInstancesResponse> {
     return this.request("InquirePriceRenewDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteAccountUser）用于删除实例的自定义账号。
+   */
+  async DeleteAccountUser(
+    req: DeleteAccountUserRequest,
+    cb?: (error: string, rep: DeleteAccountUserResponse) => void
+  ): Promise<DeleteAccountUserResponse> {
+    return this.request("DeleteAccountUser", req, cb)
   }
 
   /**

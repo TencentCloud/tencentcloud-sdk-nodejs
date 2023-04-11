@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceGroupMembers", req, cb);
     }
     /**
+     * 查询登录日志
+     */
+    async DescribeLoginEvent(req, cb) {
+        return this.request("DescribeLoginEvent", req, cb);
+    }
+    /**
      * 新建资产组
      */
     async CreateDeviceGroup(req, cb) {
@@ -100,6 +106,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindDeviceAccountPassword", req, cb);
     }
     /**
+     * 文件传输检索
+     */
+    async SearchFile(req, cb) {
+        return this.request("SearchFile", req, cb);
+    }
+    /**
+     * 搜索会话
+     */
+    async SearchSession(req, cb) {
+        return this.request("SearchSession", req, cb);
+    }
+    /**
      * 删除访问权限
      */
     async DeleteAcls(req, cb) {
@@ -134,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetDeviceAccountPassword(req, cb) {
         return this.request("ResetDeviceAccountPassword", req, cb);
+    }
+    /**
+     * 根据会话Id搜索Command
+     */
+    async SearchCommandBySid(req, cb) {
+        return this.request("SearchCommandBySid", req, cb);
     }
     /**
      * 删除资产组
@@ -172,10 +196,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeviceAccount", req, cb);
     }
     /**
+     * 搜索审计日志
+     */
+    async SearchAuditLog(req, cb) {
+        return this.request("SearchAuditLog", req, cb);
+    }
+    /**
      * 删除资产组成员
      */
     async DeleteDeviceGroupMembers(req, cb) {
         return this.request("DeleteDeviceGroupMembers", req, cb);
+    }
+    /**
+     * 查询操作日志
+     */
+    async DescribeOperationEvent(req, cb) {
+        return this.request("DescribeOperationEvent", req, cb);
     }
     /**
      * 删除主机账号
@@ -244,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroupMembers", req, cb);
     }
     /**
+     * 搜索文件传输会话下文件操作列表
+     */
+    async SearchFileBySid(req, cb) {
+        return this.request("SearchFileBySid", req, cb);
+    }
+    /**
      * 导入外部资产信息
      */
     async ImportExternalDevice(req, cb) {
@@ -278,6 +320,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BindDeviceAccountPrivateKey(req, cb) {
         return this.request("BindDeviceAccountPrivateKey", req, cb);
+    }
+    /**
+     * 命令执行检索
+     */
+    async SearchCommand(req, cb) {
+        return this.request("SearchCommand", req, cb);
+    }
+    /**
+     * 命令检索
+     */
+    async SearchSessionCommand(req, cb) {
+        return this.request("SearchSessionCommand", req, cb);
     }
 }
 exports.Client = Client;

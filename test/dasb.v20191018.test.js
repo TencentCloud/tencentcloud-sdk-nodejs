@@ -38,6 +38,16 @@ it("dasb.v20191018.DescribeDeviceGroupMembers", async function () {
     }
 })
 
+it("dasb.v20191018.DescribeLoginEvent", async function () {
+    try {
+       const data = await client.DescribeLoginEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.CreateDeviceGroup", async function () {
     try {
        const data = await client.CreateDeviceGroup({})
@@ -138,6 +148,26 @@ it("dasb.v20191018.BindDeviceAccountPassword", async function () {
     }
 })
 
+it("dasb.v20191018.SearchFile", async function () {
+    try {
+       const data = await client.SearchFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.SearchSession", async function () {
+    try {
+       const data = await client.SearchSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.DeleteAcls", async function () {
     try {
        const data = await client.DeleteAcls({})
@@ -191,6 +221,16 @@ it("dasb.v20191018.DescribeAcls", async function () {
 it("dasb.v20191018.ResetDeviceAccountPassword", async function () {
     try {
        const data = await client.ResetDeviceAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.SearchCommandBySid", async function () {
+    try {
+       const data = await client.SearchCommandBySid({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +298,29 @@ it("dasb.v20191018.CreateDeviceAccount", async function () {
     }
 })
 
+it("dasb.v20191018.SearchAuditLog", async function () {
+    try {
+       const data = await client.SearchAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.DeleteDeviceGroupMembers", async function () {
     try {
        const data = await client.DeleteDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DescribeOperationEvent", async function () {
+    try {
+       const data = await client.DescribeOperationEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +438,16 @@ it("dasb.v20191018.DescribeUserGroupMembers", async function () {
     }
 })
 
+it("dasb.v20191018.SearchFileBySid", async function () {
+    try {
+       const data = await client.SearchFileBySid({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.ImportExternalDevice", async function () {
     try {
        const data = await client.ImportExternalDevice({})
@@ -431,6 +501,26 @@ it("dasb.v20191018.CreateUser", async function () {
 it("dasb.v20191018.BindDeviceAccountPrivateKey", async function () {
     try {
        const data = await client.BindDeviceAccountPrivateKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.SearchCommand", async function () {
+    try {
+       const data = await client.SearchCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.SearchSessionCommand", async function () {
+    try {
+       const data = await client.SearchSessionCommand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

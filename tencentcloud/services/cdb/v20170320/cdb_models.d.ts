@@ -1359,6 +1359,10 @@ export interface UpgradeDBInstanceRequest {
       * 主节点可用区，该值仅在跨区迁移时生效。仅支持同地域下的可用区进行迁移。
       */
     ZoneId?: string;
+    /**
+      * 针对跨集群搬迁场景，选择同可用区RO的处理逻辑。together-同可用区RO跟随主实例迁移至目标可用区（默认选项），severally-同可用区RO保持原部署模式、不迁移至目标可用区。
+      */
+    RoTransType?: string;
 }
 /**
  * ModifyParamTemplate请求参数结构体

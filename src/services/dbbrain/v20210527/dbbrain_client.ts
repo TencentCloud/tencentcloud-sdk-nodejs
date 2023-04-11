@@ -23,6 +23,7 @@ import {
   HealthReportTask,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
+  DescribeSlowLogsRequest,
   DescribeTopSpaceTablesRequest,
   ScoreItem,
   InstanceConfs,
@@ -52,6 +53,7 @@ import {
   TimeSlice,
   DeleteDBDiagReportTasksRequest,
   ModifyDiagDBInstanceConfRequest,
+  DescribeSlowLogsResponse,
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
   ProcessStatistic,
@@ -134,6 +136,7 @@ import {
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
+  SlowLogInfoItem,
   SecLogExportTaskInfo,
   DescribeHealthScoreResponse,
   ScoreDetail,
@@ -424,6 +427,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
   ): Promise<DescribeRedisTopKeyPrefixListResponse> {
     return this.request("DescribeRedisTopKeyPrefixList", req, cb)
+  }
+
+  /**
+   * 获取指定时间内某个sql模版的慢日志明细
+   */
+  async DescribeSlowLogs(
+    req: DescribeSlowLogsRequest,
+    cb?: (error: string, rep: DescribeSlowLogsResponse) => void
+  ): Promise<DescribeSlowLogsResponse> {
+    return this.request("DescribeSlowLogs", req, cb)
   }
 
   /**

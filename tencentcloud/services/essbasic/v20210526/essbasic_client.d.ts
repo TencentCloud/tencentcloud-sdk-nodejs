@@ -130,7 +130,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     ChannelCreateBatchCancelFlowUrl(req: ChannelCreateBatchCancelFlowUrlRequest, cb?: (error: string, rep: ChannelCreateBatchCancelFlowUrlResponse) => void): Promise<ChannelCreateBatchCancelFlowUrlResponse>;
     /**
-     * 查询转换任务状态
+     * 通过发起转换任务接口（ChannelCreateConvertTaskApi）返回的任务Id查询转换任务状态，通过本接口确认转换任务是否完成。大文件转换所需的时间可能会比较长。
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
@@ -143,7 +143,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     ChannelUpdateSealStatus(req: ChannelUpdateSealStatusRequest, cb?: (error: string, rep: ChannelUpdateSealStatusResponse) => void): Promise<ChannelUpdateSealStatusResponse>;
     /**
-     * 合同文件验签
+     * 对流程的合同文件进行验证，判断文件是否合法。
      */
     ChannelVerifyPdf(req: ChannelVerifyPdfRequest, cb?: (error: string, rep: ChannelVerifyPdfResponse) => void): Promise<ChannelVerifyPdfResponse>;
     /**
@@ -212,6 +212,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个；接口失败后返回错误信息
 注意:
 该接口不可直接调用，请联系客户经理申请使用
+仅能催办当前状态为“待签署”的签署人，且只能催办一次
      */
     ChannelCreateFlowReminds(req: ChannelCreateFlowRemindsRequest, cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void): Promise<ChannelCreateFlowRemindsResponse>;
     /**

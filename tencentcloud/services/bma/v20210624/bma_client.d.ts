@@ -53,7 +53,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBPOfflineAttachment(req: ModifyBPOfflineAttachmentRequest, cb?: (error: string, rep: ModifyBPOfflineAttachmentResponse) => void): Promise<ModifyBPOfflineAttachmentResponse>;
     /**
-     * 版权保护-新建取证接口
+     * 不对外提供接口能力了
+
+版权保护-新建取证接口
      */
     CreateCRObtain(req: CreateCRObtainRequest, cb?: (error: string, rep: CreateCRObtainResponse) => void): Promise<CreateCRObtainResponse>;
     /**

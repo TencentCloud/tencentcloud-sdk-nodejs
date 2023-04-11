@@ -759,11 +759,11 @@ export interface DescribeRoomInfoRequest {
  */
 export interface StorageParams {
     /**
-      * 第三方云存储的账号信息（CloudStorage参数暂不可用，请使用CloudVod参数存储至云点播）。
+      * 第三方云存储的账号信息（特别说明：若您选择存储至对象存储COS将会收取录制文件投递至COS的费用，详见云端录制收费说明，存储至VOD将不收取此项费用。）。
       */
     CloudStorage?: CloudStorage;
     /**
-      * 【必填】腾讯云云点播的账号信息，目前仅支持存储至腾讯云点播VOD。
+      * 腾讯云云点播的账号信息。
       */
     CloudVod?: CloudVod;
 }
@@ -1517,12 +1517,12 @@ export interface DescribeScaleInfoResponse {
     /**
       * 返回的数据条数
       */
-    Total: number;
+    Total?: number;
     /**
       * 返回的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ScaleList: Array<ScaleInfomation>;
+    ScaleList?: Array<ScaleInfomation>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2366,7 +2366,7 @@ export interface DescribeScaleInfoRequest {
     StartTime: number;
     /**
       * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877），建议与StartTime间隔时间超过24小时。
-注意：按天统计，结束时间小于前一天，否则查询数据为空（如：需查询20号数据，结束时间需小于20号0点）。
+注意：按天统计，结束时间小于前一天，否则查询数据为空（如：需查询20号数据，结束时间需晚于20号0点）。
       */
     EndTime: number;
 }

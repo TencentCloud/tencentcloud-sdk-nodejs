@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ResetDeviceAccountPasswordResponse, BindDeviceAccountPasswordRequest, DeleteAclsRequest, DeleteDeviceGroupsResponse, DescribeDeviceGroupsResponse, DeleteCmdTemplatesResponse, DeleteDevicesResponse, BindDeviceAccountPasswordResponse, ResetDeviceAccountPasswordRequest, AddUserGroupMembersRequest, DescribeDevicesResponse, ResetUserResponse, DeleteUserGroupMembersRequest, DeleteUserGroupsResponse, ModifyDeviceRequest, ImportExternalDeviceRequest, BindDeviceResourceResponse, DeleteUserGroupMembersResponse, CreateUserGroupRequest, BindDeviceAccountPrivateKeyResponse, CreateDeviceGroupResponse, DescribeUserGroupMembersRequest, CreateUserResponse, DescribeAssetSyncStatusResponse, CreateAclRequest, DeleteDeviceGroupMembersRequest, CreateDeviceGroupRequest, CreateAclResponse, DescribeAclsResponse, CreateCmdTemplateResponse, ModifyAclRequest, DeleteUsersResponse, DescribeResourcesResponse, DescribeUsersRequest, DeployResourceRequest, CreateCmdTemplateRequest, ResetDeviceAccountPrivateKeyRequest, CreateAssetSyncJobResponse, BindDeviceAccountPrivateKeyRequest, CreateAssetSyncJobRequest, DescribeAssetSyncStatusRequest, ResetDeviceAccountPrivateKeyResponse, DeleteUsersRequest, DeleteDeviceAccountsRequest, DeleteDeviceGroupMembersResponse, ModifyDeviceGroupResponse, DescribeUserGroupMembersResponse, ImportExternalDeviceResponse, DeleteUserGroupsRequest, ResetUserRequest, DescribeDasbImageIdsRequest, CreateDeviceAccountResponse, ModifyDeviceGroupRequest, DescribeUsersResponse, DeployResourceResponse, CreateUserRequest, DescribeUserGroupsResponse, ModifyUserResponse, DescribeCmdTemplatesResponse, CreateDeviceAccountRequest, AddDeviceGroupMembersResponse, DeleteCmdTemplatesRequest, ModifyDeviceResponse, AddUserGroupMembersResponse, DescribeDeviceAccountsRequest, DescribeDasbImageIdsResponse, DescribeCmdTemplatesRequest, DeleteAclsResponse, CreateUserGroupResponse, DeleteDevicesRequest, DescribeDeviceAccountsResponse, DescribeDeviceGroupMembersRequest, ModifyAclResponse, DescribeResourcesRequest, DeleteDeviceGroupsRequest, DescribeDeviceGroupMembersResponse, BindDeviceResourceRequest, DescribeDevicesRequest, DescribeDeviceGroupsRequest, DescribeUserGroupsRequest, ModifyUserRequest, DescribeAclsRequest, AddDeviceGroupMembersRequest, DeleteDeviceAccountsResponse } from "./dasb_models";
+import { ResetDeviceAccountPasswordResponse, DescribeLoginEventRequest, BindDeviceAccountPasswordRequest, DeleteAclsRequest, DeleteDeviceGroupsResponse, DescribeDeviceGroupsResponse, DeleteCmdTemplatesResponse, DeleteDevicesResponse, BindDeviceAccountPasswordResponse, ResetDeviceAccountPasswordRequest, AddUserGroupMembersRequest, DescribeDevicesResponse, ResetUserResponse, DeleteUserGroupMembersRequest, DeleteAclsResponse, DeleteUserGroupsResponse, ModifyDeviceRequest, SearchFileRequest, SearchCommandRequest, ImportExternalDeviceRequest, SearchSessionRequest, BindDeviceResourceResponse, DeleteUserGroupMembersResponse, CreateUserGroupRequest, BindDeviceAccountPrivateKeyResponse, SearchCommandBySidRequest, CreateDeviceGroupResponse, DescribeUserGroupMembersRequest, CreateUserResponse, DescribeAssetSyncStatusResponse, CreateAclRequest, DescribeLoginEventResponse, DeleteDeviceGroupMembersRequest, CreateDeviceGroupRequest, CreateAclResponse, DescribeAclsResponse, CreateCmdTemplateResponse, ModifyAclRequest, SearchAuditLogRequest, SearchCommandResponse, DeleteUsersResponse, SearchCommandBySidResponse, DescribeResourcesResponse, DescribeUsersRequest, DeployResourceRequest, SearchSessionResponse, CreateCmdTemplateRequest, ResetDeviceAccountPrivateKeyRequest, CreateAssetSyncJobResponse, BindDeviceAccountPrivateKeyRequest, CreateAssetSyncJobRequest, DescribeAssetSyncStatusRequest, ResetDeviceAccountPrivateKeyResponse, DeleteUsersRequest, DeleteDeviceAccountsRequest, DeleteDeviceGroupMembersResponse, ModifyDeviceGroupResponse, DescribeUserGroupMembersResponse, ImportExternalDeviceResponse, SearchSessionCommandResponse, DeleteUserGroupsRequest, ResetUserRequest, DescribeDasbImageIdsRequest, CreateDeviceAccountResponse, ModifyDeviceGroupRequest, DescribeUsersResponse, DeployResourceResponse, CreateUserRequest, SearchFileBySidResponse, DescribeOperationEventRequest, ModifyDeviceResponse, ModifyUserResponse, DescribeCmdTemplatesResponse, CreateDeviceAccountRequest, AddDeviceGroupMembersResponse, DeleteCmdTemplatesRequest, DescribeUserGroupsResponse, AddUserGroupMembersResponse, DescribeDeviceAccountsRequest, DescribeDasbImageIdsResponse, DescribeCmdTemplatesRequest, CreateUserGroupResponse, DeleteDevicesRequest, DescribeDeviceAccountsResponse, ModifyUserRequest, ModifyAclResponse, DescribeResourcesRequest, DeleteDeviceGroupsRequest, DescribeDeviceGroupMembersResponse, SearchAuditLogResponse, BindDeviceResourceRequest, DescribeDevicesRequest, DescribeDeviceGroupsRequest, SearchSessionCommandRequest, SearchFileBySidRequest, DescribeOperationEventResponse, DescribeUserGroupsRequest, DescribeDeviceGroupMembersRequest, DescribeAclsRequest, AddDeviceGroupMembersRequest, DeleteDeviceAccountsResponse, SearchFileResponse } from "./dasb_models";
 /**
  * dasb client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 查询资产组成员列表
      */
     DescribeDeviceGroupMembers(req: DescribeDeviceGroupMembersRequest, cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void): Promise<DescribeDeviceGroupMembersResponse>;
+    /**
+     * 查询登录日志
+     */
+    DescribeLoginEvent(req: DescribeLoginEventRequest, cb?: (error: string, rep: DescribeLoginEventResponse) => void): Promise<DescribeLoginEventResponse>;
     /**
      * 新建资产组
      */
@@ -56,6 +60,14 @@ export declare class Client extends AbstractClient {
      */
     BindDeviceAccountPassword(req: BindDeviceAccountPasswordRequest, cb?: (error: string, rep: BindDeviceAccountPasswordResponse) => void): Promise<BindDeviceAccountPasswordResponse>;
     /**
+     * 文件传输检索
+     */
+    SearchFile(req: SearchFileRequest, cb?: (error: string, rep: SearchFileResponse) => void): Promise<SearchFileResponse>;
+    /**
+     * 搜索会话
+     */
+    SearchSession(req: SearchSessionRequest, cb?: (error: string, rep: SearchSessionResponse) => void): Promise<SearchSessionResponse>;
+    /**
      * 删除访问权限
      */
     DeleteAcls(req: DeleteAclsRequest, cb?: (error: string, rep: DeleteAclsResponse) => void): Promise<DeleteAclsResponse>;
@@ -79,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 清除设备账号绑定密码
      */
     ResetDeviceAccountPassword(req: ResetDeviceAccountPasswordRequest, cb?: (error: string, rep: ResetDeviceAccountPasswordResponse) => void): Promise<ResetDeviceAccountPasswordResponse>;
+    /**
+     * 根据会话Id搜索Command
+     */
+    SearchCommandBySid(req: SearchCommandBySidRequest, cb?: (error: string, rep: SearchCommandBySidResponse) => void): Promise<SearchCommandBySidResponse>;
     /**
      * 删除资产组
      */
@@ -104,9 +120,17 @@ export declare class Client extends AbstractClient {
      */
     CreateDeviceAccount(req: CreateDeviceAccountRequest, cb?: (error: string, rep: CreateDeviceAccountResponse) => void): Promise<CreateDeviceAccountResponse>;
     /**
+     * 搜索审计日志
+     */
+    SearchAuditLog(req: SearchAuditLogRequest, cb?: (error: string, rep: SearchAuditLogResponse) => void): Promise<SearchAuditLogResponse>;
+    /**
      * 删除资产组成员
      */
     DeleteDeviceGroupMembers(req: DeleteDeviceGroupMembersRequest, cb?: (error: string, rep: DeleteDeviceGroupMembersResponse) => void): Promise<DeleteDeviceGroupMembersResponse>;
+    /**
+     * 查询操作日志
+     */
+    DescribeOperationEvent(req: DescribeOperationEventRequest, cb?: (error: string, rep: DescribeOperationEventResponse) => void): Promise<DescribeOperationEventResponse>;
     /**
      * 删除主机账号
      */
@@ -152,6 +176,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserGroupMembers(req: DescribeUserGroupMembersRequest, cb?: (error: string, rep: DescribeUserGroupMembersResponse) => void): Promise<DescribeUserGroupMembersResponse>;
     /**
+     * 搜索文件传输会话下文件操作列表
+     */
+    SearchFileBySid(req: SearchFileBySidRequest, cb?: (error: string, rep: SearchFileBySidResponse) => void): Promise<SearchFileBySidResponse>;
+    /**
      * 导入外部资产信息
      */
     ImportExternalDevice(req: ImportExternalDeviceRequest, cb?: (error: string, rep: ImportExternalDeviceResponse) => void): Promise<ImportExternalDeviceResponse>;
@@ -175,4 +203,12 @@ export declare class Client extends AbstractClient {
      * 绑定主机账号私钥
      */
     BindDeviceAccountPrivateKey(req: BindDeviceAccountPrivateKeyRequest, cb?: (error: string, rep: BindDeviceAccountPrivateKeyResponse) => void): Promise<BindDeviceAccountPrivateKeyResponse>;
+    /**
+     * 命令执行检索
+     */
+    SearchCommand(req: SearchCommandRequest, cb?: (error: string, rep: SearchCommandResponse) => void): Promise<SearchCommandResponse>;
+    /**
+     * 命令检索
+     */
+    SearchSessionCommand(req: SearchSessionCommandRequest, cb?: (error: string, rep: SearchSessionCommandResponse) => void): Promise<SearchSessionCommandResponse>;
 }

@@ -8,6 +8,47 @@ export interface ResetDeviceAccountPasswordResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLoginEvent请求参数结构体
+ */
+export interface DescribeLoginEventRequest {
+    /**
+      * 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询
+      */
+    UserName?: string;
+    /**
+      * 姓名，模糊查询
+      */
+    RealName?: string;
+    /**
+      * 查询时间范围，起始时间
+      */
+    StartTime?: string;
+    /**
+      * 查询时间范围，结束时间
+      */
+    EndTime?: string;
+    /**
+      * 来源IP，模糊查询
+      */
+    SourceIp?: string;
+    /**
+      * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+      */
+    Entry?: number;
+    /**
+      * 操作结果，1-成功，2-失败
+      */
+    Result?: number;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 分页每页记录数，默认20
+      */
+    Limit?: number;
+}
+/**
  * BindDeviceAccountPassword请求参数结构体
  */
 export interface BindDeviceAccountPasswordRequest {
@@ -174,6 +215,59 @@ export interface ResetUserResponse {
     RequestId?: string;
 }
 /**
+ * 命令和所属会话
+ */
+export interface SessionCommand {
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 账号
+      */
+    RealName: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 内部Ip
+      */
+    PrivateIp: string;
+    /**
+      * 外部Ip
+      */
+    PublicIp: string;
+    /**
+      * 命令列表
+      */
+    Commands: Array<Command>;
+    /**
+      * 记录数
+      */
+    Count: number;
+    /**
+      * 会话Id
+      */
+    Id: string;
+    /**
+      * 设备id
+      */
+    InstanceId: string;
+    /**
+      * 设备所属的地域
+      */
+    ApCode: string;
+}
+/**
  * DeleteUserGroupMembers请求参数结构体
  */
 export interface DeleteUserGroupMembersRequest {
@@ -185,6 +279,15 @@ export interface DeleteUserGroupMembersRequest {
       * 需删除的成员用户ID集合
       */
     MemberIdSet: Array<number>;
+}
+/**
+ * DeleteAcls返回参数结构体
+ */
+export interface DeleteAclsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteUserGroups返回参数结构体
@@ -217,6 +320,151 @@ export interface ModifyDeviceRequest {
     DepartmentId?: string;
 }
 /**
+ * SearchFile请求参数结构体
+ */
+export interface SearchFileRequest {
+    /**
+      * 查询开始时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间
+      */
+    EndTime?: string;
+    /**
+      * 用户名
+      */
+    UserName?: string;
+    /**
+      * 姓名
+      */
+    RealName?: string;
+    /**
+      * 资产ID
+      */
+    InstanceId?: string;
+    /**
+      * 资产名称
+      */
+    DeviceName?: string;
+    /**
+      * 资产公网IP
+      */
+    PublicIp?: string;
+    /**
+      * 资产内网IP
+      */
+    PrivateIp?: string;
+    /**
+      * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
+      */
+    Method?: Array<number>;
+    /**
+      * 可填写路径名或文件（夹）名
+      */
+    FileName?: string;
+    /**
+      * 1-已执行，  2-被阻断
+      */
+    AuditAction?: Array<number>;
+    /**
+      * 分页的页内记录数，默认为20，最大200
+      */
+    Limit?: number;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+}
+/**
+ * 文件操作搜索结果
+ */
+export interface SearchFileBySidResult {
+    /**
+      * 文件操作时间
+      */
+    Time: string;
+    /**
+      * 1-上传文件 2-下载文件 3-删除文件 4-移动文件 5-重命名文件 6-新建文件夹 7-移动文件夹 8-重命名文件夹 9-删除文件夹
+      */
+    Method: number;
+    /**
+      * 文件传输协议
+      */
+    Protocol: string;
+    /**
+      * method为上传、下载、删除时文件在服务器上的位置, 或重命名、移动文件前文件的位置
+      */
+    FileCurr: string;
+    /**
+      * method为重命名、移动文件时代表移动后的新位置.其他情况为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileNew: string;
+    /**
+      * method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size: number;
+    /**
+      * 堡垒机拦截情况, 1-已执行，  2-被阻断
+      */
+    Action: number;
+}
+/**
+ * SearchCommand请求参数结构体
+ */
+export interface SearchCommandRequest {
+    /**
+      * 搜索区间的开始时间
+      */
+    StartTime: string;
+    /**
+      * 搜索区间的结束时间，不填默认为开始时间到现在为止
+      */
+    EndTime?: string;
+    /**
+      * 用户名
+      */
+    UserName?: string;
+    /**
+      * 姓名
+      */
+    RealName?: string;
+    /**
+      * 资产实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 资产名称
+      */
+    DeviceName?: string;
+    /**
+      * 资产的公网IP
+      */
+    PublicIp?: string;
+    /**
+      * 资产的内网IP
+      */
+    PrivateIp?: string;
+    /**
+      * 执行的命令
+      */
+    Cmd?: string;
+    /**
+      * 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断
+      */
+    AuditAction?: Array<number>;
+    /**
+      * 每页容量，默认20，最大200
+      */
+    Limit?: number;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+}
+/**
  * ImportExternalDevice请求参数结构体
  */
 export interface ImportExternalDeviceRequest {
@@ -224,6 +472,67 @@ export interface ImportExternalDeviceRequest {
       * 资产参数列表
       */
     DeviceSet: Array<ExternalDevice>;
+}
+/**
+ * SearchSession请求参数结构体
+ */
+export interface SearchSessionRequest {
+    /**
+      * 内部Ip
+      */
+    PrivateIp?: string;
+    /**
+      * 外部Ip
+      */
+    PublicIp?: string;
+    /**
+      * 用户名，长度不超过20
+      */
+    UserName?: string;
+    /**
+      * 账号，长度不超过64
+      */
+    Account?: string;
+    /**
+      * 来源Ip
+      */
+    FromIp?: string;
+    /**
+      * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
+      */
+    StartTime?: string;
+    /**
+      * 搜索区间的结束时间
+      */
+    EndTime?: string;
+    /**
+      * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
+      */
+    Kind?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 分页的页内记录数，默认为20，最大200
+      */
+    Limit?: number;
+    /**
+      * 姓名，长度不超过20
+      */
+    RealName?: string;
+    /**
+      * 主机名，长度不超过64
+      */
+    DeviceName?: string;
+    /**
+      * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
+      */
+    Status?: number;
+    /**
+      * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+      */
+    Id?: string;
 }
 /**
  * BindDeviceResource返回参数结构体
@@ -261,6 +570,68 @@ export interface CmdTemplate {
     CmdList: string;
 }
 /**
+ * 命令执行检索结果
+ */
+export interface SearchCommandResult {
+    /**
+      * 命令输入的时间
+      */
+    Time: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 资产ID
+      */
+    InstanceId: string;
+    /**
+      * 资产名称
+      */
+    DeviceName: string;
+    /**
+      * 资产公网IP
+      */
+    PublicIp: string;
+    /**
+      * 资产内网IP
+      */
+    PrivateIp: string;
+    /**
+      * 命令
+      */
+    Cmd: string;
+    /**
+      * 命令执行情况，1--允许，2--拒绝
+      */
+    Action: number;
+    /**
+      * 命令所属的会话ID
+      */
+    Sid: string;
+    /**
+      * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
+      */
+    TimeOffset: number;
+}
+/**
+ * 资产标签
+ */
+export interface TagFilter {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue?: Array<string>;
+}
+/**
  * CreateUserGroup请求参数结构体
  */
 export interface CreateUserGroupRequest {
@@ -274,6 +645,19 @@ export interface CreateUserGroupRequest {
     DepartmentId?: string;
 }
 /**
+ * 用于搜索文件传输记录等日志时按照protocol和method进行过滤
+ */
+export interface SearchFileTypeFilter {
+    /**
+      * 需要查询的文件传输类型，如SFTP/CLIP/RDP/RZSZ
+      */
+    Protocol: string;
+    /**
+      * 在当前指定的protocol下进一步过滤具体操作类型,如剪贴板文件上传，剪贴板文件下载等
+      */
+    Method?: Array<number>;
+}
+/**
  * BindDeviceAccountPrivateKey返回参数结构体
  */
 export interface BindDeviceAccountPrivateKeyResponse {
@@ -281,6 +665,31 @@ export interface BindDeviceAccountPrivateKeyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SearchCommandBySid请求参数结构体
+ */
+export interface SearchCommandBySidRequest {
+    /**
+      * 会话Id
+      */
+    Sid: string;
+    /**
+      * 命令，可模糊搜索
+      */
+    Cmd?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 每页容量，默认20，最大200
+      */
+    Limit?: number;
+    /**
+      * 根据拦截状态进行过滤
+      */
+    AuditAction?: Array<number>;
 }
 /**
  * CreateDeviceGroup返回参数结构体
@@ -323,6 +732,116 @@ export interface DescribeUserGroupMembersRequest {
       * 所属部门ID
       */
     DepartmentId?: string;
+}
+/**
+ * 操作日志
+ */
+export interface OperationEvent {
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 操作时间
+      */
+    Time: string;
+    /**
+      * 来源IP
+      */
+    SourceIp: string;
+    /**
+      * 操作类型
+      */
+    Kind: number;
+    /**
+      * 具体操作内容
+      */
+    Operation: string;
+    /**
+      * 操作结果，1-成功，2-失败
+      */
+    Result: number;
+}
+/**
+ * 搜索字符或图形会话时返回的SessionResul结构体
+ */
+export interface SessionResult {
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 主机账号
+      */
+    Account: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 会话大小
+      */
+    Size: number;
+    /**
+      * 设备ID
+      */
+    InstanceId: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 内部Ip
+      */
+    PrivateIp: string;
+    /**
+      * 外部Ip
+      */
+    PublicIp: string;
+    /**
+      * 来源Ip
+      */
+    FromIp: string;
+    /**
+      * 会话持续时长
+      */
+    Duration: number;
+    /**
+      * 该会话内命令数量 ，搜索图形会话时该字段无意义
+      */
+    Count: number;
+    /**
+      * 该会话内高危命令数，搜索图形时该字段无意义
+      */
+    DangerCount: number;
+    /**
+      * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
+      */
+    Status: number;
+    /**
+      * 会话Id
+      */
+    Id: string;
+    /**
+      * 设备所属的地域
+      */
+    ApCode: string;
+    /**
+      * 会话协议
+      */
+    Protocol: string;
 }
 /**
  * CreateUser返回参数结构体
@@ -458,6 +977,23 @@ export interface CreateAclRequest {
     DepartmentId?: string;
 }
 /**
+ * DescribeLoginEvent返回参数结构体
+ */
+export interface DescribeLoginEventResponse {
+    /**
+      * 登录日志列表
+      */
+    LoginEventSet: Array<LoginEvent>;
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteDeviceGroupMembers请求参数结构体
  */
 export interface DeleteDeviceGroupMembersRequest {
@@ -525,6 +1061,27 @@ export interface CreateCmdTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 命令集合
+ */
+export interface Command {
+    /**
+      * 命令
+      */
+    Cmd: string;
+    /**
+      * 命令输入的时间
+      */
+    Time: string;
+    /**
+      * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
+      */
+    TimeOffset: number;
+    /**
+      * 命令执行情况，1--允许，2--拒绝，3--确认
+      */
+    Action: number;
 }
 /**
  * ModifyAcl请求参数结构体
@@ -638,22 +1195,64 @@ export interface ModifyAclRequest {
     DepartmentId?: string;
 }
 /**
- * 资产标签
+ * SearchAuditLog请求参数结构体
  */
-export interface TagFilter {
+export interface SearchAuditLogRequest {
     /**
-      * 标签键
+      * 开始时间，不得早于当前时间的180天前
       */
-    TagKey: string;
+    StartTime: string;
     /**
-      * 标签值
+      * 结束时间
       */
-    TagValue?: Array<string>;
+    EndTime?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 每页容量，默认为20，最大200
+      */
+    Limit?: number;
+}
+/**
+ * SearchCommand返回参数结构体
+ */
+export interface SearchCommandResponse {
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 命令列表
+      */
+    Commands: Array<SearchCommandResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteUsers返回参数结构体
  */
 export interface DeleteUsersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchCommandBySid返回参数结构体
+ */
+export interface SearchCommandBySidResponse {
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 命令列表
+      */
+    CommandSet: Array<Command>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -773,6 +1372,23 @@ export interface DeployResourceRequest {
     SubnetName?: string;
 }
 /**
+ * SearchSession返回参数结构体
+ */
+export interface SearchSessionResponse {
+    /**
+      * 记录数
+      */
+    TotalCount: number;
+    /**
+      * 会话信息列表
+      */
+    SessionSet: Array<SessionResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateCmdTemplate请求参数结构体
  */
 export interface CreateCmdTemplateRequest {
@@ -784,6 +1400,55 @@ export interface CreateCmdTemplateRequest {
       * 命令列表，\n分隔，最大长度32768字节
       */
     CmdList: string;
+}
+/**
+ * 审计日志
+ */
+export interface AuditLogResult {
+    /**
+      * 被审计会话的Sid
+      */
+    Sid: string;
+    /**
+      * 审计者的编号
+      */
+    Uin: string;
+    /**
+      * 审计动作发生的时间
+      */
+    Time: string;
+    /**
+      * 审计者的Ip
+      */
+    ClientIp: string;
+    /**
+      * 审计动作类型，1--回放、2--中断、3--监控
+      */
+    Operation: number;
+    /**
+      * 被审计主机的Id
+      */
+    InstanceId: string;
+    /**
+      * 被审计主机的主机名
+      */
+    DeviceName: string;
+    /**
+      * 被审计会话所属的类型，如字符会话
+      */
+    Protocol: string;
+    /**
+      * 被审计主机的内部Ip
+      */
+    PrivateIp: string;
+    /**
+      * 被审计主机的外部Ip
+      */
+    PublicIp: string;
+    /**
+      * 审计者的子账号
+      */
+    SubAccountUin: string;
 }
 /**
  * ResetDeviceAccountPrivateKey请求参数结构体
@@ -927,6 +1592,23 @@ export interface DescribeUserGroupMembersResponse {
  * ImportExternalDevice返回参数结构体
  */
 export interface ImportExternalDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchSessionCommand返回参数结构体
+ */
+export interface SearchSessionCommandResponse {
+    /**
+      * 记录总数
+      */
+    TotalCount: number;
+    /**
+      * 命令和所属会话
+      */
+    CommandSessionSet: Array<SessionCommand>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1197,17 +1879,68 @@ export interface CreateUserRequest {
     DepartmentId?: string;
 }
 /**
- * DescribeUserGroups返回参数结构体
+ * SearchFileBySid返回参数结构体
  */
-export interface DescribeUserGroupsResponse {
+export interface SearchFileBySidResponse {
     /**
-      * 用户组总数
+      * 记录数
       */
     TotalCount: number;
     /**
-      * 用户组列表
+      * 某会话的文件操作列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupSet: Array<Group>;
+    SearchFileBySidResult: Array<SearchFileBySidResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeOperationEvent请求参数结构体
+ */
+export interface DescribeOperationEventRequest {
+    /**
+      * 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询
+      */
+    UserName?: string;
+    /**
+      * 姓名，模糊查询
+      */
+    RealName?: string;
+    /**
+      * 查询时间范围，起始时间
+      */
+    StartTime?: string;
+    /**
+      * 查询时间范围，结束时间
+      */
+    EndTime?: string;
+    /**
+      * 来源IP，模糊查询
+      */
+    SourceIp?: string;
+    /**
+      * 操作类型，参考DescribeOperationType返回结果
+      */
+    Kind?: number;
+    /**
+      * 操作结果，1-成功，2-失败
+      */
+    Result?: number;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 分页每页记录数，默认20
+      */
+    Limit?: number;
+}
+/**
+ * ModifyDevice返回参数结构体
+ */
+export interface ModifyDeviceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1271,9 +2004,17 @@ export interface DeleteCmdTemplatesRequest {
     IdSet: Array<number>;
 }
 /**
- * ModifyDevice返回参数结构体
+ * DescribeUserGroups返回参数结构体
  */
-export interface ModifyDeviceResponse {
+export interface DescribeUserGroupsResponse {
+    /**
+      * 用户组总数
+      */
+    TotalCount: number;
+    /**
+      * 用户组列表
+      */
+    GroupSet: Array<Group>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1352,13 +2093,33 @@ export interface DescribeCmdTemplatesRequest {
     Limit?: number;
 }
 /**
- * DeleteAcls返回参数结构体
+ * 登录日志
  */
-export interface DeleteAclsResponse {
+export interface LoginEvent {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户名
       */
-    RequestId?: string;
+    UserName: string;
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 操作时间
+      */
+    Time: string;
+    /**
+      * 来源IP
+      */
+    SourceIp: string;
+    /**
+      * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+      */
+    Entry: number;
+    /**
+      * 操作结果，1-成功，2-失败
+      */
+    Result: number;
 }
 /**
  * CreateUserGroup返回参数结构体
@@ -1400,41 +2161,51 @@ export interface DescribeDeviceAccountsResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeviceGroupMembers请求参数结构体
+ * ModifyUser请求参数结构体
  */
-export interface DescribeDeviceGroupMembersRequest {
+export interface ModifyUserRequest {
     /**
-      * 资产组ID
+      * 用户ID
       */
     Id: number;
     /**
-      * true - 查询已在该资产组的资产，false - 查询未在该资产组的资产
+      * 用户姓名，最大长度20个字符，不能包含空格
       */
-    Bound: boolean;
+    RealName: string;
     /**
-      * 资产名或资产IP，模糊查询
+      * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
       */
-    Name?: string;
+    Phone: string;
     /**
-      * 分页偏移位置，默认值为0
+      * 电子邮件
       */
-    Offset?: number;
+    Email: string;
     /**
-      * 每页条目数，默认20, 最大500
+      * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
       */
-    Limit?: number;
+    ValidateFrom?: string;
     /**
-      * 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
+      * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
       */
-    Kind?: number;
+    ValidateTo?: string;
     /**
-      * 所属部门ID
+      * 所属用户组ID集合
+      */
+    GroupIdSet?: Array<number>;
+    /**
+      * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
+      */
+    AuthType?: number;
+    /**
+      * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
+      */
+    ValidateTime?: string;
+    /**
+      * 用户所属部门的ID，如1.2.3
       */
     DepartmentId?: string;
-    /**
-      * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
-      */
-    TagFilters?: Array<TagFilter>;
 }
 /**
  * ModifyAcl返回参数结构体
@@ -1483,6 +2254,23 @@ export interface DescribeDeviceGroupMembersResponse {
       * 资产组成员列表
       */
     DeviceSet: Array<Device>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchAuditLog返回参数结构体
+ */
+export interface SearchAuditLogResponse {
+    /**
+      * 审计日志
+      */
+    AuditLogSet: Array<AuditLogResult>;
+    /**
+      * 日志总数量
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1823,6 +2611,81 @@ export interface DescribeDeviceGroupsRequest {
     DepartmentId?: string;
 }
 /**
+ * SearchSessionCommand请求参数结构体
+ */
+export interface SearchSessionCommandRequest {
+    /**
+      * 检索的目标命令，为模糊搜索
+      */
+    Cmd: string;
+    /**
+      * 开始时间，不得早于当前时间的180天前
+      */
+    StartTime: string;
+    /**
+      * 分页偏移位置，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 默认值为20，最大200
+      */
+    Limit?: number;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
+}
+/**
+ * SearchFileBySid请求参数结构体
+ */
+export interface SearchFileBySidRequest {
+    /**
+      * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+      */
+    Sid: string;
+    /**
+      * 是否创建审计日志,通过查看按钮调用时为true,其他为false
+      */
+    AuditLog: boolean;
+    /**
+      * 分页的页内记录数，默认为20，最大200
+      */
+    Limit?: number;
+    /**
+      * 可填写路径名或文件名
+      */
+    FileName?: string;
+    /**
+      * 分页用偏移量
+      */
+    Offset?: number;
+    /**
+      * 1-已执行，  2-被阻断
+      */
+    AuditAction?: number;
+    /**
+      * 以Protocol和Method为条件查询
+      */
+    TypeFilters?: Array<SearchFileTypeFilter>;
+}
+/**
+ * DescribeOperationEvent返回参数结构体
+ */
+export interface DescribeOperationEventResponse {
+    /**
+      * 操作日志列表
+      */
+    OperationEventSet: Array<OperationEvent>;
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 主机参数，导入外部主机时使用
  */
 export interface ExternalDevice {
@@ -1846,6 +2709,55 @@ export interface ExternalDevice {
       * 资产所属的部门ID
       */
     DepartmentId?: string;
+}
+/**
+ * 文件传输检索结果
+ */
+export interface SearchFileResult {
+    /**
+      * 文件传输的时间
+      */
+    Time: string;
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 资产ID
+      */
+    InstanceId: string;
+    /**
+      * 资产名称
+      */
+    DeviceName: string;
+    /**
+      * 资产公网IP
+      */
+    PublicIp: string;
+    /**
+      * 资产内网IP
+      */
+    PrivateIp: string;
+    /**
+      * 操作结果：1 - 已执行，2 - 已阻断
+      */
+    Action: number;
+    /**
+      * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
+      */
+    Method: number;
+    /**
+      * 下载的文件（夹）路径及名称
+      */
+    FileCurr: string;
+    /**
+      * 上传或新建文件（夹）路径及名称
+      */
+    FileNew: string;
 }
 /**
  * DescribeUserGroups请求参数结构体
@@ -1873,51 +2785,41 @@ export interface DescribeUserGroupsRequest {
     DepartmentId?: string;
 }
 /**
- * ModifyUser请求参数结构体
+ * DescribeDeviceGroupMembers请求参数结构体
  */
-export interface ModifyUserRequest {
+export interface DescribeDeviceGroupMembersRequest {
     /**
-      * 用户ID
+      * 资产组ID
       */
     Id: number;
     /**
-      * 用户姓名，最大长度20个字符，不能包含空格
+      * true - 查询已在该资产组的资产，false - 查询未在该资产组的资产
       */
-    RealName: string;
+    Bound: boolean;
     /**
-      * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+      * 资产名或资产IP，模糊查询
       */
-    Phone: string;
+    Name?: string;
     /**
-      * 电子邮件
+      * 分页偏移位置，默认值为0
       */
-    Email: string;
+    Offset?: number;
     /**
-      * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
+      * 每页条目数，默认20, 最大500
       */
-    ValidateFrom?: string;
+    Limit?: number;
     /**
-      * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
+      * 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
       */
-    ValidateTo?: string;
+    Kind?: number;
     /**
-      * 所属用户组ID集合
-      */
-    GroupIdSet?: Array<number>;
-    /**
-      * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
-      */
-    AuthType?: number;
-    /**
-      * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
-      */
-    ValidateTime?: string;
-    /**
-      * 用户所属部门的ID，如1.2.3
+      * 所属部门ID
       */
     DepartmentId?: string;
+    /**
+      * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
+      */
+    TagFilters?: Array<TagFilter>;
 }
 /**
  * DescribeAcls请求参数结构体
@@ -1977,6 +2879,24 @@ export interface AddDeviceGroupMembersRequest {
  * DeleteDeviceAccounts返回参数结构体
  */
 export interface DeleteDeviceAccountsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchFile返回参数结构体
+ */
+export interface SearchFileResponse {
+    /**
+      * 记录数
+      */
+    TotalCount: number;
+    /**
+      * 文件操作列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Files: Array<SearchFileResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

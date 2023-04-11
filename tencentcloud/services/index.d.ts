@@ -219,6 +219,7 @@ export { vm } from "./vm";
 export { vms } from "./vms";
 export { vod } from "./vod";
 export { vpc } from "./vpc";
+export { vrs } from "./vrs";
 export { waf } from "./waf";
 export { wav } from "./wav";
 export { wedata } from "./wedata";

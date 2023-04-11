@@ -3083,7 +3083,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteMachine）用于卸载云镜客户端。
+   * 本接口（DeleteMachine）用于卸载主机安全客户端。
    */
   async DeleteMachine(
     req: DeleteMachineRequest,

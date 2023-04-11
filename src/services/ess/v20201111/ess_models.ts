@@ -3115,7 +3115,7 @@ export interface GetTaskResultApiResponse {
   /**
    * 任务Id
    */
-  TaskId: string
+  TaskId?: string
 
   /**
       * 任务状态，需要关注的状态
@@ -3126,7 +3126,7 @@ export interface GetTaskResultApiResponse {
 -6 :ProcessFailed  - 转换失败
 -13:ProcessTimeout - 转换文件超时
       */
-  TaskStatus: number
+  TaskStatus?: number
 
   /**
       * 状态描述，需要关注的状态
@@ -3137,12 +3137,12 @@ DownloadFailed - 下载失败
 ProcessFailed  - 转换失败
 ProcessTimeout - 转换文件超时
       */
-  TaskMessage: string
+  TaskMessage?: string
 
   /**
    * 资源Id，也是FileId，用于文件发起使用
    */
-  ResourceId: string
+  ResourceId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

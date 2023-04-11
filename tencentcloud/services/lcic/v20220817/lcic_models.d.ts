@@ -46,6 +46,12 @@ video 纯视频
       */
     AutoMic?: number;
     /**
+      * 释放音视频权限后是否自动取消连麦。可以有以下取值：
+0 自动取消连麦（默认值）
+1 保持连麦状态
+      */
+    TurnOffMic?: number;
+    /**
       * 高音质模式。可以有以下取值：
 0 不开启高音质（默认值）
 1 开启高音质
@@ -62,6 +68,14 @@ video 纯视频
       * 助教Id列表。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有助教权限。
       */
     Assistants?: Array<string>;
+    /**
+      * rtc人数。
+      */
+    RTCAudienceNumber?: number;
+    /**
+      * 观看类型。0未知，1互动，2cdn或直播。 目前仅支持互动类型
+      */
+    AudienceType?: number;
     /**
       * 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
       */

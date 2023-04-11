@@ -210,9 +210,9 @@ export interface DescribeAccountUsersRequest {
  */
 export interface CreateBackupDBInstanceResponse {
   /**
-   * 查询备份流程的状态
+   * 查询备份流程的状态。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -322,13 +322,52 @@ export interface FlushInstanceRouterConfigResponse {
 }
 
 /**
- * DescribeSecurityGroup请求参数结构体
+ * 实例可修改参数Multi类型集合。
  */
-export interface DescribeSecurityGroupRequest {
+export interface InstanceMultiParam {
   /**
-   * 实例 ID。例如：cmgo-p8vn****。
+   * 参数当前值。
    */
-  InstanceId: string
+  CurrentValue: string
+
+  /**
+   * 参数默认值。
+   */
+  DefaultValue: string
+
+  /**
+   * 参考值范围。
+   */
+  EnumValue: Array<string>
+
+  /**
+      * 参数修改后是否需要重启才会生效。
+- 1：需要重启后生效。
+- 0：无需重启，设置成功即可生效。
+      */
+  NeedRestart: string
+
+  /**
+   * 参数名称。
+   */
+  ParamName: string
+
+  /**
+      * 是否为运行中参数值。
+- 1：运行中参数值。
+- 0：非运行中参数值。
+      */
+  Status: number
+
+  /**
+   * 参数说明。
+   */
+  Tips: Array<string>
+
+  /**
+   * 当前值的类型描述，默认为multi。
+   */
+  ValueType: string
 }
 
 /**
@@ -432,48 +471,13 @@ export interface IsolateDBInstanceResponse {
 }
 
 /**
- * 实例可修改参数Multi类型集合。
+ * DescribeSecurityGroup请求参数结构体
  */
-export interface InstanceMultiParam {
+export interface DescribeSecurityGroupRequest {
   /**
-   * 当前值
+   * 实例 ID。例如：cmgo-p8vn****。
    */
-  CurrentValue: string
-
-  /**
-   * 默认值
-   */
-  DefaultValue: string
-
-  /**
-   * 指导值范围
-   */
-  EnumValue: Array<string>
-
-  /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
-   */
-  NeedRestart: string
-
-  /**
-   * 参数名称
-   */
-  ParamName: string
-
-  /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
-  Status: number
-
-  /**
-   * 参数说明
-   */
-  Tips: Array<string>
-
-  /**
-   * 当前值的类型描述，默认为multi
-   */
-  ValueType: string
+  InstanceId: string
 }
 
 /**
@@ -526,9 +530,9 @@ export interface DBInstanceInfo {
  */
 export interface SetAccountUserPrivilegeResponse {
   /**
-   * 设置任务ID,用于查询是否设置完成
+   * 任务ID。
    */
-  FlowId: number
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -629,23 +633,24 @@ export interface DescribeDBInstanceNodePropertyRequest {
 }
 
 /**
- * 需要终止的操作
+ * DeleteAccountUser请求参数结构体
  */
-export interface Operation {
+export interface DeleteAccountUserRequest {
   /**
-   * 操作所在的分片名
-   */
-  ReplicaSetName: string
+      * 指定待删除账号的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+
+      */
+  InstanceId: string
 
   /**
-   * 操作所在的节点名
+   * 配置待删除的账号名。
    */
-  NodeName: string
+  UserName: string
 
   /**
-   * 操作序号
+   * 配置 mongouser 对应的密码。mongouser为系统默认账号，输入其对应的密码。
    */
-  OpId: number
+  MongoUserPassword: string
 }
 
 /**
@@ -1138,56 +1143,60 @@ export interface ResetDBInstancePasswordRequest {
 }
 
 /**
- * 实例可修改参数integer类型集合。
+ * 实例可修改参数 Integer 类型集合。
  */
 export interface InstanceIntegerParam {
   /**
-   * 当前值
+   * 参数当前值。
    */
   CurrentValue: string
 
   /**
-   * 默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 最大值
+   * 参数最大值。
    */
   Max: string
 
   /**
-   * 最小值
+   * 最小值。
    */
   Min: string
 
   /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
-   */
+      * 参数修改之后是否需要重启生效。
+- 1:需要重启后生效。
+- 0：无需重启，设置成功即可生效。
+      */
   NeedRestart: string
 
   /**
-   * 参数名称
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   Tips: Array<string>
 
   /**
-   * 参数类型
+   * 参数类型。
    */
   ValueType: string
 
   /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
+      * 是否为运行中参数值。
+- 1：运行中参数值。
+- 0：非运行中参数值。
+      */
   Status: number
 
   /**
-   * 冗余字段，可忽略
+   * 冗余字段，可忽略。
    */
   Unit: string
 }
@@ -1278,47 +1287,49 @@ export interface CreateAccountUserRequest {
 }
 
 /**
- * 实例可修改参数text类型集合。
+ * 实例可修改参数为 Text 类型的参数集合。
  */
 export interface InstanceTextParam {
   /**
-   * 当前值
+   * 参数当前值。
    */
   CurrentValue: string
 
   /**
-   * 默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 是否需要重启
+   * 修改参数值之后是否需要重启。
    */
   NeedRestart: string
 
   /**
-   * 参数名称
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * text类型值
+   * Text 类型参数对应的值。
    */
   TextValue: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   Tips: Array<string>
 
   /**
-   * 值类型说明
+   * 参数值类型说明。
    */
   ValueType: string
 
   /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
+      * 是否为运行中的参数值。
+- 1：运行中参数值。
+- 0：非运行中参数值。
+      */
   Status: string
 }
 
@@ -1400,6 +1411,26 @@ export interface DescribeBackupDownloadTaskRequest {
    * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
    */
   Status?: Array<number>
+}
+
+/**
+ * 需要终止的操作
+ */
+export interface Operation {
+  /**
+   * 操作所在的分片名
+   */
+  ReplicaSetName: string
+
+  /**
+   * 操作所在的节点名
+   */
+  NodeName: string
+
+  /**
+   * 操作序号
+   */
+  OpId: number
 }
 
 /**
@@ -1497,7 +1528,7 @@ export interface UserInfo {
  */
 export interface DescribeInstanceParamsRequest {
   /**
-   * 实例ID
+   * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
 }
@@ -2011,43 +2042,47 @@ export interface RenewDBInstancesResponse {
  */
 export interface InstanceEnumParam {
   /**
-   * 参数当前值
+   * 参数当前值。
    */
   CurrentValue: string
 
   /**
-   * 默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 枚举值，所有支持的值
+   * 枚举值，所有支持的值。
    */
   EnumValue: Array<string>
 
   /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
-   */
+      * 参数修改之后是否需要重启生效。
+- 1：需要重启后生效。
+- 0：无需重启，设置成功即可生效。
+      */
   NeedRestart: string
 
   /**
-   * 参数名称
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * 中英文说明
+   * 参数说明。
    */
   Tips: Array<string>
 
   /**
-   * 参数值类型说明
+   * 参数值类型说明。
    */
   ValueType: string
 
   /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
+      * 是否为运行中参数值。
+- 1：运行中参数值。
+- 0：非运行中参数值。
+      */
   Status: number
 }
 
@@ -2066,17 +2101,19 @@ export interface RenameInstanceResponse {
  */
 export interface CreateBackupDBInstanceRequest {
   /**
-   * 实例id
+   * 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 0-逻辑备份，1-物理备份
-   */
+      * 设置备份方式。
+- 0：逻辑备份。
+- 1：物理备份。
+      */
   BackupMethod: number
 
   /**
-   * 备份备注
+   * 备份备注信息。
    */
   BackupRemark?: string
 }
@@ -2086,17 +2123,17 @@ export interface CreateBackupDBInstanceRequest {
  */
 export interface SetAccountUserPrivilegeRequest {
   /**
-   * 实例ID。
+   * 指定待设置账号的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 账号名称。
+   * 设置账号名称。
    */
   UserName: string
 
   /**
-   * 权限信息。
+   * 设置权限信息。
    */
   AuthRole: Array<Auth>
 }
@@ -2497,6 +2534,21 @@ export interface TagInfo {
 }
 
 /**
+ * DeleteAccountUser返回参数结构体
+ */
+export interface DeleteAccountUserResponse {
+  /**
+   * 账户删除任务ID。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBInstances返回参数结构体
  */
 export interface DescribeDBInstancesResponse {
@@ -2621,29 +2673,29 @@ export interface InquirePriceCreateDBInstancesRequest {
  */
 export interface DescribeInstanceParamsResponse {
   /**
-   * 值为枚举类型参数集合
+   * 参数值为枚举类型参数集合。
    */
-  InstanceEnumParam: Array<InstanceEnumParam>
+  InstanceEnumParam?: Array<InstanceEnumParam>
 
   /**
-   * 值为integer类型参数集合
+   * 参数值为 Integer 类型参数集合。
    */
-  InstanceIntegerParam: Array<InstanceIntegerParam>
+  InstanceIntegerParam?: Array<InstanceIntegerParam>
 
   /**
-   * 值为text类型的参数集合
+   * 参数值为 Text 类型的参数集合。
    */
-  InstanceTextParam: Array<InstanceTextParam>
+  InstanceTextParam?: Array<InstanceTextParam>
 
   /**
-   * 值为混合类型的参数集合
+   * 参数值为混合类型的参数集合。
    */
-  InstanceMultiParam: Array<InstanceMultiParam>
+  InstanceMultiParam?: Array<InstanceMultiParam>
 
   /**
    * 当前实例支持修改的参数个数统计 如0
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

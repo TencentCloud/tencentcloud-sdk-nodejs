@@ -1915,13 +1915,13 @@ export interface DescribeBillResourceSummaryResponse {
   /**
    * 资源汇总列表
    */
-  ResourceSummarySet: Array<BillResourceSummary>
+  ResourceSummarySet?: Array<BillResourceSummary>
 
   /**
       * 资源汇总列表总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2507,6 +2507,12 @@ export interface BillDetail {
    * 项目ID:资源所属项目ID
    */
   ProjectId: number
+
+  /**
+      * 价格属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PriceInfo?: Array<string>
 }
 
 /**
@@ -2635,13 +2641,13 @@ export interface DescribeBillDetailResponse {
   /**
    * 详情列表
    */
-  DetailSet: Array<BillDetail>
+  DetailSet?: Array<BillDetail>
 
   /**
       * 总记录数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

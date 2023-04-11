@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
+  DescribeLoginEventRequest,
   BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
   DeleteDeviceGroupsResponse,
@@ -32,33 +33,51 @@ import {
   AddUserGroupMembersRequest,
   DescribeDevicesResponse,
   ResetUserResponse,
+  SessionCommand,
   DeleteUserGroupMembersRequest,
+  DeleteAclsResponse,
   DeleteUserGroupsResponse,
   ModifyDeviceRequest,
+  SearchFileRequest,
+  SearchFileBySidResult,
+  SearchCommandRequest,
   ImportExternalDeviceRequest,
+  SearchSessionRequest,
   BindDeviceResourceResponse,
   DeleteUserGroupMembersResponse,
   CmdTemplate,
+  SearchCommandResult,
+  TagFilter,
   CreateUserGroupRequest,
+  SearchFileTypeFilter,
   BindDeviceAccountPrivateKeyResponse,
+  SearchCommandBySidRequest,
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
+  OperationEvent,
+  SessionResult,
   CreateUserResponse,
   DescribeAssetSyncStatusResponse,
   CreateAclRequest,
+  DescribeLoginEventResponse,
   DeleteDeviceGroupMembersRequest,
   CreateDeviceGroupRequest,
   CreateAclResponse,
   DescribeAclsResponse,
   CreateCmdTemplateResponse,
+  Command,
   ModifyAclRequest,
-  TagFilter,
+  SearchAuditLogRequest,
+  SearchCommandResponse,
   DeleteUsersResponse,
+  SearchCommandBySidResponse,
   AssetSyncStatus,
   DescribeResourcesResponse,
   DescribeUsersRequest,
   DeployResourceRequest,
+  SearchSessionResponse,
   CreateCmdTemplateRequest,
+  AuditLogResult,
   ResetDeviceAccountPrivateKeyRequest,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
@@ -72,6 +91,7 @@ import {
   ModifyDeviceGroupResponse,
   DescribeUserGroupMembersResponse,
   ImportExternalDeviceResponse,
+  SearchSessionCommandResponse,
   DeleteUserGroupsRequest,
   User,
   ResetUserRequest,
@@ -83,37 +103,45 @@ import {
   DescribeUsersResponse,
   DeployResourceResponse,
   CreateUserRequest,
-  DescribeUserGroupsResponse,
+  SearchFileBySidResponse,
+  DescribeOperationEventRequest,
+  ModifyDeviceResponse,
   ModifyUserResponse,
   DescribeCmdTemplatesResponse,
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
-  ModifyDeviceResponse,
+  DescribeUserGroupsResponse,
   AddUserGroupMembersResponse,
   DescribeDeviceAccountsRequest,
   DescribeDasbImageIdsResponse,
   DescribeCmdTemplatesRequest,
-  DeleteAclsResponse,
+  LoginEvent,
   CreateUserGroupResponse,
   DeleteDevicesRequest,
   DescribeDeviceAccountsResponse,
-  DescribeDeviceGroupMembersRequest,
+  ModifyUserRequest,
   ModifyAclResponse,
   DescribeResourcesRequest,
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
+  SearchAuditLogResponse,
   Resource,
   BindDeviceResourceRequest,
   Acl,
   DescribeDevicesRequest,
   DescribeDeviceGroupsRequest,
+  SearchSessionCommandRequest,
+  SearchFileBySidRequest,
+  DescribeOperationEventResponse,
   ExternalDevice,
+  SearchFileResult,
   DescribeUserGroupsRequest,
-  ModifyUserRequest,
+  DescribeDeviceGroupMembersRequest,
   DescribeAclsRequest,
   AddDeviceGroupMembersRequest,
   DeleteDeviceAccountsResponse,
+  SearchFileResponse,
 } from "./dasb_models"
 
 /**
@@ -143,6 +171,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void
   ): Promise<DescribeDeviceGroupMembersResponse> {
     return this.request("DescribeDeviceGroupMembers", req, cb)
+  }
+
+  /**
+   * 查询登录日志
+   */
+  async DescribeLoginEvent(
+    req: DescribeLoginEventRequest,
+    cb?: (error: string, rep: DescribeLoginEventResponse) => void
+  ): Promise<DescribeLoginEventResponse> {
+    return this.request("DescribeLoginEvent", req, cb)
   }
 
   /**
@@ -246,6 +284,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文件传输检索
+   */
+  async SearchFile(
+    req: SearchFileRequest,
+    cb?: (error: string, rep: SearchFileResponse) => void
+  ): Promise<SearchFileResponse> {
+    return this.request("SearchFile", req, cb)
+  }
+
+  /**
+   * 搜索会话
+   */
+  async SearchSession(
+    req: SearchSessionRequest,
+    cb?: (error: string, rep: SearchSessionResponse) => void
+  ): Promise<SearchSessionResponse> {
+    return this.request("SearchSession", req, cb)
+  }
+
+  /**
    * 删除访问权限
    */
   async DeleteAcls(
@@ -303,6 +361,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetDeviceAccountPasswordResponse) => void
   ): Promise<ResetDeviceAccountPasswordResponse> {
     return this.request("ResetDeviceAccountPassword", req, cb)
+  }
+
+  /**
+   * 根据会话Id搜索Command
+   */
+  async SearchCommandBySid(
+    req: SearchCommandBySidRequest,
+    cb?: (error: string, rep: SearchCommandBySidResponse) => void
+  ): Promise<SearchCommandBySidResponse> {
+    return this.request("SearchCommandBySid", req, cb)
   }
 
   /**
@@ -366,6 +434,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 搜索审计日志
+   */
+  async SearchAuditLog(
+    req: SearchAuditLogRequest,
+    cb?: (error: string, rep: SearchAuditLogResponse) => void
+  ): Promise<SearchAuditLogResponse> {
+    return this.request("SearchAuditLog", req, cb)
+  }
+
+  /**
    * 删除资产组成员
    */
   async DeleteDeviceGroupMembers(
@@ -373,6 +451,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDeviceGroupMembersResponse) => void
   ): Promise<DeleteDeviceGroupMembersResponse> {
     return this.request("DeleteDeviceGroupMembers", req, cb)
+  }
+
+  /**
+   * 查询操作日志
+   */
+  async DescribeOperationEvent(
+    req: DescribeOperationEventRequest,
+    cb?: (error: string, rep: DescribeOperationEventResponse) => void
+  ): Promise<DescribeOperationEventResponse> {
+    return this.request("DescribeOperationEvent", req, cb)
   }
 
   /**
@@ -486,6 +574,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 搜索文件传输会话下文件操作列表
+   */
+  async SearchFileBySid(
+    req: SearchFileBySidRequest,
+    cb?: (error: string, rep: SearchFileBySidResponse) => void
+  ): Promise<SearchFileBySidResponse> {
+    return this.request("SearchFileBySid", req, cb)
+  }
+
+  /**
    * 导入外部资产信息
    */
   async ImportExternalDevice(
@@ -543,5 +641,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindDeviceAccountPrivateKeyResponse) => void
   ): Promise<BindDeviceAccountPrivateKeyResponse> {
     return this.request("BindDeviceAccountPrivateKey", req, cb)
+  }
+
+  /**
+   * 命令执行检索
+   */
+  async SearchCommand(
+    req: SearchCommandRequest,
+    cb?: (error: string, rep: SearchCommandResponse) => void
+  ): Promise<SearchCommandResponse> {
+    return this.request("SearchCommand", req, cb)
+  }
+
+  /**
+   * 命令检索
+   */
+  async SearchSessionCommand(
+    req: SearchSessionCommandRequest,
+    cb?: (error: string, rep: SearchSessionCommandResponse) => void
+  ): Promise<SearchSessionCommandResponse> {
+    return this.request("SearchSessionCommand", req, cb)
   }
 }

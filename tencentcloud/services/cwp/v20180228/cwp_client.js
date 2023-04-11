@@ -1447,7 +1447,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetInitServiceList", req, cb);
     }
     /**
-     * 本接口（DeleteMachine）用于卸载云镜客户端。
+     * 本接口（DeleteMachine）用于卸载主机安全客户端。
      */
     async DeleteMachine(req, cb) {
         return this.request("DeleteMachine", req, cb);

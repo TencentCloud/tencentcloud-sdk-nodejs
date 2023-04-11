@@ -442,6 +442,8 @@ var vod_1 = require("./vod");
 Object.defineProperty(exports, "vod", { enumerable: true, get: function () { return vod_1.vod; } });
 var vpc_1 = require("./vpc");
 Object.defineProperty(exports, "vpc", { enumerable: true, get: function () { return vpc_1.vpc; } });
+var vrs_1 = require("./vrs");
+Object.defineProperty(exports, "vrs", { enumerable: true, get: function () { return vrs_1.vrs; } });
 var waf_1 = require("./waf");
 Object.defineProperty(exports, "waf", { enumerable: true, get: function () { return waf_1.waf; } });
 var wav_1 = require("./wav");

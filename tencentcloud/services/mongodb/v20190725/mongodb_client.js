@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityGroup", req, cb);
     }
     /**
-     * 本接口(SetAccountUserPrivilege)用于设置mongodb实例的账号权限。
+     * 本接口（SetAccountUserPrivilege）用于设置实例的账号权限。
      */
     async SetAccountUserPrivilege(req, cb) {
         return this.request("SetAccountUserPrivilege", req, cb);
@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSpec", req, cb);
     }
     /**
-     * 本接口(DescribeInstanceParams)用于查询当前实例可修改的参数列表。
+     * 本接口（DescribeInstanceParams）用于查询当前实例可修改的参数列表。
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
@@ -221,7 +221,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("KillOps", req, cb);
     }
     /**
-     * 备份实例接口
+     * 本接口（CreateBackupDBInstance）用于备份实例。
      */
     async CreateBackupDBInstance(req, cb) {
         return this.request("CreateBackupDBInstance", req, cb);
@@ -231,6 +231,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquirePriceRenewDBInstances(req, cb) {
         return this.request("InquirePriceRenewDBInstances", req, cb);
+    }
+    /**
+     * 本接口（DeleteAccountUser）用于删除实例的自定义账号。
+     */
+    async DeleteAccountUser(req, cb) {
+        return this.request("DeleteAccountUser", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceSecurityGroup）用于修改实例绑定的安全组

@@ -2748,6 +2748,16 @@ export interface CreateDataEngineRequest {
    * 主集群名称
    */
   MainClusterName?: string
+
+  /**
+   * spark jar 包年包月集群是否开启弹性
+   */
+  ElasticSwitch?: boolean
+
+  /**
+   * spark jar 包年包月集群弹性上限
+   */
+  ElasticLimit?: number
 }
 
 /**

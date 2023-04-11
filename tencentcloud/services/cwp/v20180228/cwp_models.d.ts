@@ -1800,7 +1800,7 @@ export interface DescribeUsualLoginPlacesResponse {
     /**
       * 常用登录地数组
       */
-    UsualLoginPlaces: Array<UsualPlace>;
+    UsualLoginPlaces?: Array<UsualPlace>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2390,7 +2390,7 @@ export interface BashEventNew {
       */
     Id?: number;
     /**
-      * 云镜ID
+      * 主机安全ID
       */
     Uuid?: string;
     /**
@@ -5149,7 +5149,7 @@ export interface DescribeBashEventsRequest {
  */
 export interface DeleteMachineRequest {
     /**
-      * 云镜客户端Uuid。
+      * 主机安全客户端Uuid。
       */
     Uuid: string;
 }
@@ -7085,7 +7085,7 @@ export interface DescribeWebPageServiceInfoResponse {
  */
 export interface DescribeUsualLoginPlacesRequest {
     /**
-      * 云镜客户端UUID
+      * 主机安全客户端UUID
       */
     Uuid: string;
 }
@@ -7576,7 +7576,7 @@ export interface BashEvent {
       */
     Id: number;
     /**
-      * 云镜ID
+      * 主机安全ID
       */
     Uuid: string;
     /**
@@ -9660,51 +9660,51 @@ export interface DescribeMachineInfoResponse {
     /**
       * 机器ip。
       */
-    MachineIp: string;
+    MachineIp?: string;
     /**
-      * 受云镜保护天数。
+      * 受主机安全保护天数。
       */
-    ProtectDays: number;
+    ProtectDays?: number;
     /**
       * 操作系统。
       */
-    MachineOs: string;
+    MachineOs?: string;
     /**
       * 主机名称。
       */
-    MachineName: string;
+    MachineName?: string;
     /**
       * 在线状态。
 <li>ONLINE： 在线</li>
 <li>OFFLINE：离线</li>
       */
-    MachineStatus: string;
+    MachineStatus?: string;
     /**
       * CVM或BM主机唯一标识。
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 主机外网IP。
       */
-    MachineWanIp: string;
+    MachineWanIp?: string;
     /**
       * CVM或BM主机唯一Uuid。
       */
-    Quuid: string;
+    Quuid?: string;
     /**
-      * 云镜客户端唯一Uuid。
+      * 主机安全客户端唯一Uuid。
       */
-    Uuid: string;
+    Uuid?: string;
     /**
       * 是否开通专业版。
 <li>true：是</li>
 <li>false：否</li>
       */
-    IsProVersion: boolean;
+    IsProVersion?: boolean;
     /**
       * 专业版开通时间。
       */
-    ProVersionOpenDate: string;
+    ProVersionOpenDate?: string;
     /**
       * 云服务器类型。
 <li>CVM: 腾讯云服务器</li>
@@ -9713,41 +9713,41 @@ export interface DescribeMachineInfoResponse {
 <li>LH: 轻量应用服务器</li>
 <li>Other: 混合云机器</li>
       */
-    MachineType: string;
+    MachineType?: string;
     /**
       * 机器所属地域。如：ap-guangzhou，ap-shanghai
       */
-    MachineRegion: string;
+    MachineRegion?: string;
     /**
       * 主机状态。
 <li>POSTPAY: 表示后付费，即按量计费  </li>
 <li>PREPAY: 表示预付费，即包年包月</li>
       */
-    PayMode: string;
+    PayMode?: string;
     /**
       * 免费木马剩余检测数量。
       */
-    FreeMalwaresLeft: number;
+    FreeMalwaresLeft?: number;
     /**
       * 免费漏洞剩余检测数量。
       */
-    FreeVulsLeft: number;
+    FreeVulsLeft?: number;
     /**
       * agent版本号
       */
-    AgentVersion: string;
+    AgentVersion?: string;
     /**
       * 专业版到期时间(仅预付费)
       */
-    ProVersionDeadline: string;
+    ProVersionDeadline?: string;
     /**
       * 是否有资产扫描记录，0无，1有
       */
-    HasAssetScan: number;
+    HasAssetScan?: number;
     /**
-      * 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版.
+      * 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
       */
-    ProtectType: string;
+    ProtectType?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10648,7 +10648,7 @@ export interface AssetWebServiceBaseInfo {
  */
 export interface DescribeMachineInfoRequest {
     /**
-      * 云镜客户端唯一Uuid。
+      * 主机安全客户端唯一Uuid。
       */
     Uuid?: string;
     /**
@@ -11134,126 +11134,126 @@ export interface BashEventsInfoNew {
     /**
       * 数据ID
       */
-    Id: number;
+    Id?: number;
     /**
-      * 云镜ID
+      * 主机安全ID
       */
-    Uuid: string;
+    Uuid?: string;
     /**
       * 主机ID
       */
-    Quuid: string;
+    Quuid?: string;
     /**
       * 主机内网IP
       */
-    HostIp: string;
+    HostIp?: string;
     /**
       * 平台类型
       */
-    Platform: number;
+    Platform?: number;
     /**
       * 执行命令
       */
-    BashCmd: string;
+    BashCmd?: string;
     /**
       * 规则ID,等于0表示已规则已被删除或生效范围已修改
       */
-    RuleId: number;
+    RuleId?: number;
     /**
       * 规则名称
       */
-    RuleName: string;
+    RuleName?: string;
     /**
       * 规则等级：1-高 2-中 3-低
       */
-    RuleLevel: number;
+    RuleLevel?: number;
     /**
       * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
       */
-    Status: number;
+    Status?: number;
     /**
       * 发生时间
       */
-    CreateTime: string;
+    CreateTime?: string;
     /**
       * 主机名
       */
-    MachineName: string;
+    MachineName?: string;
     /**
       * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Exe: string;
+    Exe?: string;
     /**
       * 处理时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
       * 规则类别  0=系统规则，1=用户规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleCategory: number;
+    RuleCategory?: number;
     /**
       * 自动生成的正则表达式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RegexBashCmd: string;
+    RegexBashCmd?: string;
     /**
       * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PsTree: string;
+    PsTree?: string;
     /**
       * 建议方案
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SuggestScheme: string;
+    SuggestScheme?: string;
     /**
       * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HarmDescribe: string;
+    HarmDescribe?: string;
     /**
       * 标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
       * 参考链接
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    References: Array<string>;
+    References?: Array<string>;
     /**
       * 主机外网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MachineWanIp: string;
+    MachineWanIp?: string;
     /**
       * 主机在线状态 OFFLINE  ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MachineStatus: string;
+    MachineStatus?: string;
     /**
       * 登录用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    User: string;
+    User?: string;
     /**
       * 进程号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Pid: string;
+    Pid?: string;
     /**
       * 0:普通 1:专业版 2:旗舰版
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MachineType: number;
+    MachineType?: number;
     /**
       * 检测来源 0:bash日志 1:实时监控
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DetectBy: number;
+    DetectBy?: number;
 }
 /**
  * 未处理的安全事件统计信息
@@ -11651,7 +11651,7 @@ export interface HistoryAccount {
       */
     Id: number;
     /**
-      * 云镜客户端唯一Uuid。
+      * 主机安全客户端唯一Uuid。
       */
     Uuid: string;
     /**
@@ -16471,7 +16471,7 @@ export interface BruteAttackInfo {
       */
     Id?: number;
     /**
-      * 云镜客户端唯一标识UUID
+      * 主机安全客户端唯一标识UUID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Uuid?: string;

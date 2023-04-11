@@ -233,6 +233,15 @@ export interface ModifyApplicationResponse {
     RequestId?: string;
 }
 /**
+ * SetPPTCheckCallbackKey返回参数结构体
+ */
+export interface SetPPTCheckCallbackKeyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateTranscode返回参数结构体
  */
 export interface CreateTranscodeResponse {
@@ -305,6 +314,41 @@ export interface VideoInfo {
     Height: number;
 }
 /**
+ * DescribePPTCheck返回参数结构体
+ */
+export interface DescribePPTCheckResponse {
+    /**
+      * 任务的唯一标识Id
+      */
+    TaskId?: string;
+    /**
+      * PPT文件是否正常
+      */
+    IsOK?: boolean;
+    /**
+      * 修复后的PPT URL，只有创建任务时参数AutoHandleUnsupportedElement=true，才返回此参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultUrl?: string;
+    /**
+      * 错误PPT页面列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Slides?: Array<PPTErrSlide>;
+    /**
+      * 任务的当前状态 - QUEUED: 正在排队等待 - PROCESSING: 执行中 - FINISHED: 执行完成
+      */
+    Status?: string;
+    /**
+      * 当前进度,取值范围为0~100
+      */
+    Progress?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 自定义混流布局参数
  */
 export interface CustomLayout {
@@ -333,17 +377,29 @@ export interface Interrupt {
     Count: number;
 }
 /**
- * DescribeOnlineRecord请求参数结构体
+ * CreateApplication请求参数结构体
  */
-export interface DescribeOnlineRecordRequest {
+export interface CreateApplicationRequest {
     /**
-      * 客户的SdkAppId
+      * 应用SdkAppId
       */
     SdkAppId: number;
     /**
-      * 实时录制任务Id
+      * App名字
       */
-    TaskId: string;
+    AppName?: string;
+    /**
+      * 创建IM应用需要的SKey
+      */
+    SKey?: string;
+    /**
+      * 创建IM应用需要的TinyId
+      */
+    TinyId?: string;
+    /**
+      * 需要绑定的标签列表
+      */
+    TagList?: Array<Tag>;
 }
 /**
  * 日志查询里返回的白板房间数据
@@ -618,6 +674,21 @@ export interface OmittedDuration {
     ResumeTime: number;
 }
 /**
+ * PPT错误页面列表
+ */
+export interface PPTErrSlide {
+    /**
+      * 异常元素存在的页面，由页面类型+页码组成，页码类型包括：幻灯片、幻灯片母版、幻灯片布局等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Page?: string;
+    /**
+      * 错误元素列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Errs?: Array<PPTErr>;
+}
+/**
  * PauseOnlineRecord请求参数结构体
  */
 export interface PauseOnlineRecordRequest {
@@ -631,17 +702,17 @@ export interface PauseOnlineRecordRequest {
     TaskId: string;
 }
 /**
- * DescribeApplicationInfos返回参数结构体
+ * DescribeRunningTasks返回参数结构体
  */
-export interface DescribeApplicationInfosResponse {
+export interface DescribeRunningTasksResponse {
     /**
-      * 应用列表
+      * 当前正在执行中的任务总数
       */
-    ApplicationInfos: Array<ApplicationItem>;
+    Total?: number;
     /**
-      * 是否包含所有的应用，0-不包含，1-包含
+      * 任务信息列表
       */
-    AllOption: number;
+    Tasks?: Array<RunningTaskItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -685,6 +756,23 @@ export interface TimeValue {
       * 查询指标对应当前时间的值
       */
     Value: number;
+}
+/**
+ * DescribeWarningCallback返回参数结构体
+ */
+export interface DescribeWarningCallbackResponse {
+    /**
+      * 告警事件回调地址，如果未设置回调地址，该字段为空字符串
+      */
+    Callback?: string;
+    /**
+      * 告警回调鉴权密钥
+      */
+    CallbackKey?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 实时录制结果
@@ -764,9 +852,32 @@ export interface DescribeUsageSummaryResponse {
     RequestId?: string;
 }
 /**
- * DescribeApplicationInfos请求参数结构体
+ * DescribeRunningTasks请求参数结构体
  */
-export declare type DescribeApplicationInfosRequest = null;
+export interface DescribeRunningTasksRequest {
+    /**
+      * 应用的SdkAppID
+      */
+    SdkAppID: number;
+    /**
+      * 指定需要获取的任务类型。
+有效取值如下：
+- TranscodeH5: 动态转码任务，文档转HTML5页面
+- TranscodeJPG: 静态转码任务，文档转图片
+- WhiteboardPush: 白板推流任务
+- OnlineRecord: 实时录制任务
+      */
+    TaskType: string;
+    /**
+      * 分页获取时的任务偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 每次获取任务列表时最大获取任务数，默认值为100。
+有效取值范围：[1, 500]
+      */
+    Limit?: number;
+}
 /**
  * DescribeApplicationUsage请求参数结构体
  */
@@ -835,6 +946,15 @@ export interface DescribeOfflineRecordCallbackResponse {
     RequestId?: string;
 }
 /**
+ * SetWarningCallback返回参数结构体
+ */
+export interface SetWarningCallbackResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateOfflineRecord返回参数结构体
  */
 export interface CreateOfflineRecordResponse {
@@ -895,6 +1015,19 @@ export interface DescribeVideoGenerationTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetPPTCheckCallbackKey请求参数结构体
+ */
+export interface SetPPTCheckCallbackKeyRequest {
+    /**
+      * 应用的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 设置回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+      */
+    CallbackKey: string;
 }
 /**
  * 画图数据，Time/Value/Details
@@ -1062,9 +1195,22 @@ export interface SetOnlineRecordCallbackResponse {
     RequestId?: string;
 }
 /**
- * ApplyTiwTrial请求参数结构体
+ * DescribePPTCheckCallback返回参数结构体
  */
-export declare type ApplyTiwTrialRequest = null;
+export interface DescribePPTCheckCallbackResponse {
+    /**
+      * 回调地址
+      */
+    Callback?: string;
+    /**
+      * 回调鉴权密钥
+      */
+    CallbackKey?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * DescribeTranscodeCallback返回参数结构体
  */
@@ -1099,6 +1245,23 @@ export interface DescribeUserListResponse {
  * ModifyAutoRenewFlag返回参数结构体
  */
 export interface ModifyAutoRenewFlagResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeApplicationInfos返回参数结构体
+ */
+export interface DescribeApplicationInfosResponse {
+    /**
+      * 应用列表
+      */
+    ApplicationInfos: Array<ApplicationItem>;
+    /**
+      * 是否包含所有的应用，0-不包含，1-包含
+      */
+    AllOption: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1216,6 +1379,19 @@ export interface DescribeVideoGenerationTaskCallbackRequest {
     SdkAppId: number;
 }
 /**
+ * SetVideoGenerationTaskCallback请求参数结构体
+ */
+export interface SetVideoGenerationTaskCallbackRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
+      */
+    Callback: string;
+}
+/**
  * SetWhiteboardPushCallbackKey请求参数结构体
  */
 export interface SetWhiteboardPushCallbackKeyRequest {
@@ -1232,6 +1408,10 @@ export interface SetWhiteboardPushCallbackKeyRequest {
  * DescribeTranscodeSearch请求参数结构体
  */
 export declare type DescribeTranscodeSearchRequest = null;
+/**
+ * ApplyTiwTrial请求参数结构体
+ */
+export declare type ApplyTiwTrialRequest = null;
 /**
  * 鉴权参数
  */
@@ -1674,6 +1854,15 @@ export interface RecordTaskSearchResult {
     Result: RecordTaskResult;
 }
 /**
+ * ModifyWhiteboardApplicationConfig返回参数结构体
+ */
+export interface ModifyWhiteboardApplicationConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SetTranscodeCallback返回参数结构体
  */
 export interface SetTranscodeCallbackResponse {
@@ -1739,26 +1928,35 @@ export interface ApplicationItem {
     TagList: Array<Tag>;
 }
 /**
- * ModifyWhiteboardApplicationConfig返回参数结构体
+ * DescribeWarningCallback请求参数结构体
  */
-export interface ModifyWhiteboardApplicationConfigResponse {
+export interface DescribeWarningCallbackRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 应用的SdkAppId
       */
-    RequestId?: string;
+    SdkAppId: number;
 }
 /**
- * SetVideoGenerationTaskCallback请求参数结构体
+ * CreatePPTCheckTask请求参数结构体
  */
-export interface SetVideoGenerationTaskCallbackRequest {
+export interface CreatePPTCheckTaskRequest {
     /**
       * 客户的SdkAppId
       */
     SdkAppId: number;
     /**
-      * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
+      * 经过URL编码后的PPT文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pptx，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pptx。为了提高URL解析的成功率，请对URL进行编码。
       */
-    Callback: string;
+    Url: string;
+    /**
+      * 是否对不支持元素开启自动处理的功能。默认不开启。
+
+在开启自动处理的情况下，会自动进行如下处理：
+1. 墨迹：移除不支持的墨迹（比如使用WPS画的）
+2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页
+3. 已损坏音视频：移除PPT上对损坏音视频的引用
+      */
+    AutoHandleUnsupportedElement?: boolean;
 }
 /**
  * SetWhiteboardPushCallback请求参数结构体
@@ -1884,6 +2082,15 @@ export interface CreateVideoGenerationTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePPTCheckCallback请求参数结构体
+ */
+export interface DescribePPTCheckCallbackRequest {
+    /**
+      * 应用的SdkAppId
+      */
+    SdkAppId: number;
 }
 /**
  * 实时录制白板参数，例如白板宽高等
@@ -2228,6 +2435,28 @@ export interface DescribeUserListRequest {
  */
 export declare type DescribeUserResourcesRequest = null;
 /**
+ * SetPPTCheckCallback返回参数结构体
+ */
+export interface SetPPTCheckCallbackResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeOnlineRecord请求参数结构体
+ */
+export interface DescribeOnlineRecordRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 实时录制任务Id
+      */
+    TaskId: string;
+}
+/**
  * StopWhiteboardPush返回参数结构体
  */
 export interface StopWhiteboardPushResponse {
@@ -2240,6 +2469,24 @@ export interface StopWhiteboardPushResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetWarningCallback请求参数结构体
+ */
+export interface SetWarningCallbackRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。
+回调数据格式请参考文档：
+      */
+    Callback: string;
+    /**
+      * 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+      */
+    CallbackKey: string;
 }
 /**
  * DescribePostpaidUsage请求参数结构体
@@ -2355,6 +2602,26 @@ export interface ModifyAutoRenewFlagRequest {
       * 自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续 费，需要设置为0
       */
     AutoRenewFlag: number;
+}
+/**
+ * PPT错误元素
+ */
+export interface PPTErr {
+    /**
+      * 元素名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 0: 不支持的墨迹类型，1: 不支持自动翻页，2: 存在已损坏音视频，3: 存在不可访问资源，4: 只读文件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: number;
+    /**
+      * 错误详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Detail?: string;
 }
 /**
  * DescribeSnapshotTask返回参数结构体
@@ -2488,34 +2755,67 @@ export interface DescribeWhiteboardPushCallbackResponse {
     RequestId?: string;
 }
 /**
- * CreateApplication请求参数结构体
+ * DescribeApplicationInfos请求参数结构体
  */
-export interface CreateApplicationRequest {
-    /**
-      * 应用SdkAppId
-      */
-    SdkAppId: number;
-    /**
-      * App名字
-      */
-    AppName?: string;
-    /**
-      * 创建IM应用需要的SKey
-      */
-    SKey?: string;
-    /**
-      * 创建IM应用需要的TinyId
-      */
-    TinyId?: string;
-    /**
-      * 需要绑定的标签列表
-      */
-    TagList?: Array<Tag>;
-}
+export declare type DescribeApplicationInfosRequest = null;
 /**
  * DescribeWhiteboardPushSearch请求参数结构体
  */
 export declare type DescribeWhiteboardPushSearchRequest = null;
+/**
+ * 正在运行的任务列表项
+ */
+export interface RunningTaskItem {
+    /**
+      * 应用SdkAppID
+      */
+    SdkAppID?: number;
+    /**
+      * 任务ID
+      */
+    TaskID?: string;
+    /**
+      * 任务类型
+- TranscodeH5: 动态转码任务，文档转HTML5页面
+- TranscodeJPG: 静态转码任务，文档转图片
+- WhiteboardPush: 白板推流任务
+- OnlineRecord: 实时录制任务
+      */
+    TaskType?: string;
+    /**
+      * 任务创建时间
+      */
+    CreateTime?: string;
+    /**
+      * 任务取消时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CancelTime?: string;
+    /**
+      * 任务状态
+- QUEUED: 任务正在排队等待执行中
+- PROCESSING: 任务正在执行中
+- FINISHED: 任务已完成
+      */
+    Status?: string;
+    /**
+      * 任务当前进度
+      */
+    Progress?: number;
+    /**
+      * 转码任务中转码文件的原始URL
+此参数只有任务类型为TranscodeH5、TranscodeJPG类型时才会有有效值。其他任务类型为空字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileURL?: string;
+    /**
+      * 房间号
+
+当任务类型为TranscodeH5、TranscodeJPG时，房间号为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoomID?: number;
+}
 /**
  * SetTranscodeCallbackKey返回参数结构体
  */
@@ -2524,6 +2824,19 @@ export interface SetTranscodeCallbackKeyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetPPTCheckCallback请求参数结构体
+ */
+export interface SetPPTCheckCallbackRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 进度回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。 回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
+      */
+    Callback: string;
 }
 /**
  * DescribeWhiteboardPush返回参数结构体
@@ -2649,6 +2962,19 @@ export interface SnapshotWhiteboard {
       * 白板初始化参数的JSON转义字符串，透传到白板 SDK
       */
     InitParams?: string;
+}
+/**
+ * CreatePPTCheckTask返回参数结构体
+ */
+export interface CreatePPTCheckTaskResponse {
+    /**
+      * 检测任务的唯一标识Id，用于查询该任务的进度以及检测结果
+      */
+    TaskId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateTranscode请求参数结构体
@@ -2904,3 +3230,16 @@ export interface DescribeOfflineRecordRequest {
  * DescribeRecordSearch请求参数结构体
  */
 export declare type DescribeRecordSearchRequest = null;
+/**
+ * DescribePPTCheck请求参数结构体
+ */
+export interface DescribePPTCheckRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 任务的唯一标识Id
+      */
+    TaskId: string;
+}

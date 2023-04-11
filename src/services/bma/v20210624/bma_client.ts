@@ -207,8 +207,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 版权保护-新建取证接口
-   */
+     * 不对外提供接口能力了
+
+版权保护-新建取证接口
+     */
   async CreateCRObtain(
     req: CreateCRObtainRequest,
     cb?: (error: string, rep: CreateCRObtainResponse) => void

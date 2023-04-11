@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordSearch", req, cb);
     }
     /**
-     * 创建视频生成任务
+     * 检测PPT文件，识别PPT中包含的动态转码任务（Transcode）不支持的元素
      */
-    async CreateVideoGenerationTask(req, cb) {
-        return this.request("CreateVideoGenerationTask", req, cb);
+    async CreatePPTCheckTask(req, cb) {
+        return this.request("CreatePPTCheckTask", req, cb);
     }
     /**
      * 设置实时录制回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetTranscodeCallback", req, cb);
     }
     /**
+     * 发起一个实时录制任务
+     */
+    async StartOnlineRecord(req, cb) {
+        return this.request("StartOnlineRecord", req, cb);
+    }
+    /**
      * 恢复实时录制
      */
     async ResumeOnlineRecord(req, cb) {
@@ -106,10 +112,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyTiwTrial", req, cb);
     }
     /**
-     * 查询用户后付费用量
+     * 查询PPT检测任务回调地址
      */
-    async DescribePostpaidUsage(req, cb) {
-        return this.request("DescribePostpaidUsage", req, cb);
+    async DescribePPTCheckCallback(req, cb) {
+        return this.request("DescribePPTCheckCallback", req, cb);
+    }
+    /**
+     * 查询互动白板房间维度每天计费用量。
+1. 单次查询统计区间最多不能超过31天。
+2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
+
+     */
+    async DescribeTIWRoomDailyUsage(req, cb) {
+        return this.request("DescribeTIWRoomDailyUsage", req, cb);
     }
     /**
      * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
@@ -124,10 +139,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetOfflineRecordCallback", req, cb);
     }
     /**
+     * 设置PPT检测任务回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+     */
+    async SetPPTCheckCallbackKey(req, cb) {
+        return this.request("SetPPTCheckCallbackKey", req, cb);
+    }
+    /**
      * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
      */
     async CreateSnapshotTask(req, cb) {
         return this.request("CreateSnapshotTask", req, cb);
+    }
+    /**
+     * 设置PPT检测任务回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
+     */
+    async SetPPTCheckCallback(req, cb) {
+        return this.request("SetPPTCheckCallback", req, cb);
     }
     /**
      * 查询录制视频生成回调地址
@@ -172,6 +199,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscodeCallback", req, cb);
     }
     /**
+     * 设置告警回调地址。此功能需要申请白名单使用。
+     */
+    async SetWarningCallback(req, cb) {
+        return this.request("SetWarningCallback", req, cb);
+    }
+    /**
      * 通过服务角色调用其他云产品API接口获取信息
      */
     async DescribeAPIService(req, cb) {
@@ -190,19 +223,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationInfos", req, cb);
     }
     /**
-     * 发起一个实时录制任务
+     * 查询告警回调地址。此功能需要申请白名单使用。
      */
-    async StartOnlineRecord(req, cb) {
-        return this.request("StartOnlineRecord", req, cb);
+    async DescribeWarningCallback(req, cb) {
+        return this.request("DescribeWarningCallback", req, cb);
     }
     /**
-     * 查询互动白板房间维度每天计费用量。
-1. 单次查询统计区间最多不能超过31天。
-2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
-
+     * 查询用户后付费用量
      */
-    async DescribeTIWRoomDailyUsage(req, cb) {
-        return this.request("DescribeTIWRoomDailyUsage", req, cb);
+    async DescribePostpaidUsage(req, cb) {
+        return this.request("DescribePostpaidUsage", req, cb);
     }
     /**
      * 创建一个文档转码任务
@@ -233,6 +263,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOfflineRecordCallback(req, cb) {
         return this.request("DescribeOfflineRecordCallback", req, cb);
+    }
+    /**
+     * 创建视频生成任务
+     */
+    async CreateVideoGenerationTask(req, cb) {
+        return this.request("CreateVideoGenerationTask", req, cb);
     }
     /**
      * 查询文档转码任务的执行进度与转码结果
@@ -275,6 +311,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateApplication(req, cb) {
         return this.request("CreateApplication", req, cb);
+    }
+    /**
+     * 根据指定的任务类型，获取当前正在执行中的任务列表。只能查询最近3天内创建的任务。
+     */
+    async DescribeRunningTasks(req, cb) {
+        return this.request("DescribeRunningTasks", req, cb);
     }
     /**
      * 查询互动白板天维度计费用量。
@@ -351,6 +393,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUserStatus(req, cb) {
         return this.request("DescribeUserStatus", req, cb);
+    }
+    /**
+     * 查询PPT检测任务的执行进度或结果
+     */
+    async DescribePPTCheck(req, cb) {
+        return this.request("DescribePPTCheck", req, cb);
     }
     /**
      * 获取指定白板板书生成任务信息
