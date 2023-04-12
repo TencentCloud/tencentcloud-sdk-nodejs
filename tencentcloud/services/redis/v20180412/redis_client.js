@@ -202,7 +202,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddReplicationInstance", req, cb);
     }
     /**
-     * 本接口（CloneInstances）可基于当前实例的备份文件克隆一个完整的新实例。
+     * 本接口（CloneInstances）用于基于当前实例的备份文件克隆一个完整的新实例。
      */
     async CloneInstances(req, cb) {
         return this.request("CloneInstances", req, cb);
@@ -350,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetPassword(req, cb) {
         return this.request("ResetPassword", req, cb);
+    }
+    /**
+     * 移除复制组成员
+     */
+    async RemoveReplicationInstance(req, cb) {
+        return this.request("RemoveReplicationInstance", req, cb);
     }
     /**
      * 实例小版本升级
@@ -500,6 +506,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAutoBackupConfig(req, cb) {
         return this.request("DescribeAutoBackupConfig", req, cb);
+    }
+    /**
+     * 本接口（DescribeBandwidthRange）用于查询实例带宽信息。
+     */
+    async DescribeBandwidthRange(req, cb) {
+        return this.request("DescribeBandwidthRange", req, cb);
     }
     /**
      * 实例解隔离

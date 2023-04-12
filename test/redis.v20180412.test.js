@@ -558,6 +558,16 @@ it("redis.v20180412.ResetPassword", async function () {
     }
 })
 
+it("redis.v20180412.RemoveReplicationInstance", async function () {
+    try {
+       const data = await client.RemoveReplicationInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.UpgradeSmallVersion", async function () {
     try {
        const data = await client.UpgradeSmallVersion({})
@@ -801,6 +811,16 @@ it("redis.v20180412.OpenSSL", async function () {
 it("redis.v20180412.DescribeAutoBackupConfig", async function () {
     try {
        const data = await client.DescribeAutoBackupConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeBandwidthRange", async function () {
+    try {
+       const data = await client.DescribeBandwidthRange({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

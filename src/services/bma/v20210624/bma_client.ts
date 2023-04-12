@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ProtectURLInfo,
-  CreateCRObtainResponse,
+  ModifyCRWhiteListRequest,
   CreateCRUserVerifyRequest,
   CreateBPFalseTicketResponse,
   CreateCRRightFileRequest,
@@ -42,7 +42,6 @@ import {
   DescribeCRMonitorDetailResponse,
   MonitorTort,
   CreateBPFakeURLRequest,
-  UpdateCRWorkResponse,
   CreateBPProtectURLsResponse,
   DescribeBPProtectURLsResponse,
   DescribeCRMonitorsResponse,
@@ -50,7 +49,7 @@ import {
   CreateBPOfflineAttachmentRequest,
   CreateCRDesktopCodeResponse,
   CreateBPProtectURLsRequest,
-  CreateCRObtainRequest,
+  UpdateCRWorkResponse,
   ModifyCRBlockStatusRequest,
   ModifyCRMonitorRequest,
   CreateCRDesktopCodeRequest,
@@ -82,7 +81,6 @@ import {
   File,
   DescribeBPProtectURLsRequest,
   ModifyCRObtainStatusResponse,
-  ModifyCRWhiteListRequest,
   CreateCRCompanyVerifyRequest,
 } from "./bma_models"
 
@@ -204,18 +202,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBPOfflineAttachmentResponse) => void
   ): Promise<ModifyBPOfflineAttachmentResponse> {
     return this.request("ModifyBPOfflineAttachment", req, cb)
-  }
-
-  /**
-     * 不对外提供接口能力了
-
-版权保护-新建取证接口
-     */
-  async CreateCRObtain(
-    req: CreateCRObtainRequest,
-    cb?: (error: string, rep: CreateCRObtainResponse) => void
-  ): Promise<CreateCRObtainResponse> {
-    return this.request("CreateCRObtain", req, cb)
   }
 
   /**

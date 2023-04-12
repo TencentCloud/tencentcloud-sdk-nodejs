@@ -964,6 +964,31 @@ export interface BigKeyInfo {
     Updatetime: number;
 }
 /**
+ * DescribeBandwidthRange返回参数结构体
+ */
+export interface DescribeBandwidthRangeResponse {
+    /**
+      * 标准带宽。指购买实例时，系统为每个节点分配的带宽。
+      */
+    BaseBandwidth: number;
+    /**
+      * 指实例的附加带宽。标准带宽不满足需求的情况下，用户可自行增加的带宽。<ul><li>开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数 * Max ([只读副本数量, 1])，标准架构的分片数 = 1。</li><li>没有开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数，标准架构的分片数 = 1。</li></ul>
+      */
+    AddBandwidth: number;
+    /**
+      * 附加带宽设置下限。
+      */
+    MinAddBandwidth: number;
+    /**
+      * 附加带宽设置上限。
+      */
+    MaxAddBandwidth: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeParamTemplates请求参数结构体
  */
 export interface DescribeParamTemplatesRequest {
@@ -1005,6 +1030,23 @@ export interface UpgradeVersionToMultiAvailabilityZonesResponse {
       * 任务ID
       */
     FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeInstanceBackups返回参数结构体
+ */
+export interface DescribeInstanceBackupsResponse {
+    /**
+      * 备份总数。
+      */
+    TotalCount?: number;
+    /**
+      * 实例的备份数组。
+      */
+    BackupSet?: Array<RedisBackupSet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1914,21 +1956,13 @@ export interface DescribeInstanceMonitorTookDistResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceBackups返回参数结构体
+ * DescribeBandwidthRange请求参数结构体
  */
-export interface DescribeInstanceBackupsResponse {
+export interface DescribeBandwidthRangeRequest {
     /**
-      * 备份总数。
+      * 实例 ID。
       */
-    TotalCount?: number;
-    /**
-      * 实例的备份数组。
-      */
-    BackupSet?: Array<RedisBackupSet>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * 实例整型参数描述
@@ -2071,11 +2105,11 @@ export interface CloneInstancesResponse {
     /**
       * 请求任务 ID。
       */
-    DealId: string;
+    DealId?: string;
     /**
       * 克隆实例的 ID。
       */
-    InstanceIds: Array<string>;
+    InstanceIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2305,11 +2339,13 @@ export interface DescribeTaskInfoRequest {
  */
 export interface CloneInstancesRequest {
     /**
-      * 当前实例ID。
+      * 指定待克隆的源实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
       */
     InstanceId: string;
     /**
-      * 单次克隆实例的数量。包年包月每次购买最大数量为100。按量计费每次购买最大数量为30，每个地域购买数量取值范围为[1,100]。
+      * 单次克隆实例的数量。
+- 包年包月每次购买最大数量为100。
+- 按量计费每次购买最大数量为30。
       */
     GoodsNum: number;
     /**
@@ -2337,11 +2373,11 @@ export interface CloneInstancesRequest {
       */
     NoAuth?: boolean;
     /**
-      * 私有网络ID。如果未配置该参数，默认选择基础网络。
+      * 配置克隆实例的私有网络ID。如果未配置该参数，默认选择基础网络。
       */
     VpcId?: string;
     /**
-      * 私有网络所属子网。基础网络时该参数无需配置。
+      * 配置克隆实例所属私有网络的子网。基础网络时该参数无需配置。
       */
     SubnetId?: string;
     /**
@@ -2353,7 +2389,7 @@ export interface CloneInstancesRequest {
       */
     Password?: string;
     /**
-      * 自动续费标识。<ul><li>0：默认状态（手动续费）。</li><li>1：自动续费。</li><li>2：不自动续费，到期自动隔离。</li></ul>
+      * 自动续费标识。<ul><li>0：默认状态，手动续费。</li><li>1：自动续费。</li><li>2：不自动续费，到期自动隔离。</li></ul>
       */
     AutoRenew?: number;
     /**
@@ -2365,7 +2401,7 @@ export interface CloneInstancesRequest {
       */
     NodeSet?: Array<RedisNodeInfo>;
     /**
-      * 项目 ID。登录控制台，可在右上角的<b>账号中心</b> > <b>项目管理</b>中查找项目ID。
+      * 项目 ID。登录[Redis 控制台](https://console.cloud.tencent.com/redis#/)，可在右上角的<b>账号中心</b> > <b>项目管理</b>中查找项目ID。
       */
     ProjectId?: number;
     /**
@@ -2373,11 +2409,13 @@ export interface CloneInstancesRequest {
       */
     ResourceTags?: Array<ResourceTag>;
     /**
-      * 克隆实例需要应用的参数模板ID,请登录 Redis 控制台，在<b>参数模板</b>页面获取。若不配置该参数，则应用默认的参数模板。
+      * 指定克隆实例相关的参数模板 ID。
+- 若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。
+- 请通过[DescribeParamTemplates](https://cloud.tencent.com/document/product/239/58750)接口，查询实例的参数模板列表，获取模板 ID 编号。
       */
     TemplateId?: string;
     /**
-      * 指定克隆实例的告警策略 ID。请登录控制台，在<b>云监控</b> > <b>告警配置</b> > <b>告警策略</b>页面获取策略 ID 信息。
+      * 指定克隆实例的告警策略 ID。请登录[腾讯云可观测平台控制台](https://console.cloud.tencent.com/monitor/alarm2/policy)，在 <b>告警管理</b> > <b>策略管理</b>页面获取策略 ID 信息。
       */
     AlarmPolicyList?: Array<string>;
 }
@@ -2794,6 +2832,23 @@ export interface CreateInstanceAccountRequest {
       * 子账号描述信息
       */
     Remark?: string;
+}
+/**
+ * RemoveReplicationInstance请求参数结构体
+ */
+export interface RemoveReplicationInstanceRequest {
+    /**
+      * 复制组ID
+      */
+    GroupId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 数据同步类型，true:需要数据强同步,false:不需要强同步，仅限删除主实例
+      */
+    SyncType: boolean;
 }
 /**
  * EnableReplicaReadonly返回参数结构体
@@ -3414,7 +3469,7 @@ export interface SourceCommand {
  */
 export interface ModfiyInstancePasswordRequest {
     /**
-      * 实例 ID。
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
       */
     InstanceId: string;
     /**
@@ -3719,7 +3774,7 @@ export interface InstanceSet {
       */
     Size: number;
     /**
-      * 该字段已废弃。可使用云监控 API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内容容量。
+      * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
       */
     SizeUsed: number;
     /**
@@ -4632,6 +4687,19 @@ export interface DescribeInstanceBackupsRequest {
       * 实例名称，支持根据实例名称模糊搜索。
       */
     InstanceName?: string;
+}
+/**
+ * RemoveReplicationInstance返回参数结构体
+ */
+export interface RemoveReplicationInstanceResponse {
+    /**
+      * 异步任务ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 安全组详情

@@ -4515,7 +4515,7 @@ export interface UsualPlace {
   Id: number
 
   /**
-   * 云镜客户端唯一标识UUID。
+   * 主机安全客户端唯一标识UUID。
    */
   Uuid: string
 
@@ -5249,13 +5249,13 @@ export interface DescribeBruteAttackListResponse {
       * 总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 密码破解列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BruteAttackList: Array<BruteAttackInfo>
+  BruteAttackList?: Array<BruteAttackInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6077,15 +6077,23 @@ export interface DescribeBashEventsRequest {
   Limit?: number
 
   /**
+      * 过滤条件。
+<li>HostName - String - 是否必填：否 - 主机名</li>
+<li>Hostip - String - 是否必填：否 - 主机内网IP</li>
+<li>RuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)</li>
+<li>RuleName - String - 是否必填：否 - 策略名称</li>
+<li>RuleLevel - Int - 是否必填：否 - 威胁等级,可以多选</li>
+<li>Status - Int - 是否必填：否 - 处理状态,可多选(0:待处理 1:已处理 2:已加白  3:已忽略 4:已删除 5:已拦截)</li>
+<li>DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)</li>
+<li>StartTime - String - 是否必填：否 - 开始时间</li>
+<li>EndTime - String - 是否必填：否 - 结束时间</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
-  /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机内网IP)</li>
-      */
-  Filters?: Array<Filter>
 
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
@@ -6219,7 +6227,7 @@ export interface PrivilegeEscalationProcess {
   Id?: number
 
   /**
-   * 云镜ID
+   * 主机安全ID
    */
   Uuid?: string
 
@@ -7081,7 +7089,7 @@ export interface DeleteAttackLogsResponse {
  */
 export interface SecurityDynamic {
   /**
-   * 云镜客户端UUID。
+   * 主机安全客户端UUID。
    */
   Uuid: string
 
@@ -7844,7 +7852,7 @@ export interface DescribeBruteAttackListRequest {
   /**
       * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-<li>Uuid - String - 是否必填：否 - 云镜唯一Uuid</li>
+<li>Uuid - String - 是否必填：否 - 主机安全唯一Uuid</li>
 <li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
 <li>Status - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESS</li>
 <li>UserName - String - 是否必填：否 - UserName筛选</li>
@@ -9303,7 +9311,7 @@ export interface ReverseShell {
   Id?: number
 
   /**
-   * 云镜UUID
+   * 主机安全UUID
    */
   Uuid?: string
 
@@ -12447,7 +12455,7 @@ export interface LicenseBindDetail {
   Quuid?: string
 
   /**
-   * 云镜客户端UUID
+   * 主机安全客户端UUID
    */
   Uuid?: string
 
@@ -12457,7 +12465,7 @@ export interface LicenseBindDetail {
   Tags?: Array<string>
 
   /**
-   * 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
+   * 主机安全客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
    */
   AgentStatus?: string
 
@@ -14080,7 +14088,7 @@ export interface DescribeHostLoginListRequest {
   /**
       * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-<li>Uuid - String - 是否必填：否 - 云镜唯一Uuid</li>
+<li>Uuid - String - 是否必填：否 - 主机安全唯一Uuid</li>
 <li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
 <li>UserName - String - 是否必填：否 - 用户名筛选</li>
 <li>LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li>
@@ -19267,7 +19275,7 @@ export type DeleteWebPageEventLogRequest = null
  */
 export interface DescribeProVersionStatusRequest {
   /**
-   * 云镜客户端UUID、填写"all"表示所有主机。
+   * 主机安全客户端UUID、填写"all"表示所有主机。
    */
   Uuid: string
 }
@@ -19845,13 +19853,13 @@ export interface DescribeHostLoginListResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 登录审计列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostLoginList: Array<HostLoginList>
+  HostLoginList?: Array<HostLoginList>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

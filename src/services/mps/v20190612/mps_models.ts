@@ -2850,7 +2850,7 @@ export interface CreateStreamLinkFlowResponse {
   /**
    * 创建的Flow信息。
    */
-  Info: DescribeFlow
+  Info?: DescribeFlow
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6049,7 +6049,7 @@ export interface CreateInputSRTSettings {
   Mode?: string
 
   /**
-   * 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。
+   * 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。具体格式可以参考：https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys。
    */
   StreamId?: string
 

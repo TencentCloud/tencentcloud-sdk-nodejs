@@ -2899,6 +2899,11 @@ export interface DescribeScanStatsRequest {
    * 批次ID
    */
   BatchId?: string
+
+  /**
+   * 安心码
+   */
+  Code?: string
 }
 
 /**

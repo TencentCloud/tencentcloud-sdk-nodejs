@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCRObtainResponse, CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, CreateCRRightFileRequest, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, CreateCRTortRequest, UpdateCRWorkRequest, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, DescribeCRMonitorDetailResponse, CreateBPFakeURLRequest, UpdateCRWorkResponse, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateCRDesktopCodeResponse, CreateBPProtectURLsRequest, CreateCRObtainRequest, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, CreateCRDesktopCodeRequest, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeCRObtainDetailRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, DescribeCRWorkInfoResponse, DescribeCRObtainDetailResponse, CreateCRRightFileResponse, ModifyCRWhiteListResponse, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateCRTortResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, ModifyCRWhiteListRequest, CreateCRCompanyVerifyRequest } from "./bma_models";
+import { ModifyCRWhiteListRequest, CreateCRUserVerifyRequest, CreateBPFalseTicketResponse, CreateCRRightFileRequest, CreateCRRightResponse, CreateCRWorkResponse, CreateCRRightRequest, CreateBPOfflineTicketResponse, CreateCRTortRequest, UpdateCRWorkRequest, DescribeBPFakeURLsRequest, ModifyCRBlockStatusResponse, ModifyCRObtainStatusRequest, DescribeCRWorkInfoRequest, ModifyBPOfflineAttachmentRequest, DescribeBPFakeURLsResponse, CreateBPOfflineAttachmentResponse, DescribeBPReportFakeURLsRequest, DescribeCRMonitorDetailResponse, CreateBPFakeURLRequest, CreateBPProtectURLsResponse, DescribeBPProtectURLsResponse, DescribeCRMonitorsResponse, CreateCRCompanyVerifyResponse, CreateBPOfflineAttachmentRequest, CreateCRDesktopCodeResponse, CreateBPProtectURLsRequest, UpdateCRWorkResponse, ModifyCRBlockStatusRequest, ModifyCRMonitorRequest, CreateCRDesktopCodeRequest, CreateCRWorkRequest, DescribeBPCompanyInfoRequest, DescribeCRObtainDetailRequest, DescribeBPReportFakeURLsResponse, DescribeCRMonitorDetailRequest, CreateCRBlockResponse, ModifyCRRightStatusRequest, DescribeCRMonitorsRequest, DescribeCRWorkInfoResponse, DescribeCRObtainDetailResponse, CreateCRRightFileResponse, ModifyCRWhiteListResponse, CreateBPOfflineTicketRequest, CreateCRUserVerifyResponse, ModifyCRRightStatusResponse, DescribeBPCompanyInfoResponse, ModifyBPOfflineAttachmentResponse, CreateCRBlockRequest, CreateBPFakeURLResponse, CreateCRTortResponse, CreateBPFalseTicketRequest, ModifyCRMonitorResponse, DescribeBPProtectURLsRequest, ModifyCRObtainStatusResponse, CreateCRCompanyVerifyRequest } from "./bma_models";
 /**
  * bma client
  * @class
@@ -52,12 +52,6 @@ export declare class Client extends AbstractClient {
      * 修改下线材料
      */
     ModifyBPOfflineAttachment(req: ModifyBPOfflineAttachmentRequest, cb?: (error: string, rep: ModifyBPOfflineAttachmentResponse) => void): Promise<ModifyBPOfflineAttachmentResponse>;
-    /**
-     * 不对外提供接口能力了
-
-版权保护-新建取证接口
-     */
-    CreateCRObtain(req: CreateCRObtainRequest, cb?: (error: string, rep: CreateCRObtainResponse) => void): Promise<CreateCRObtainResponse>;
     /**
      * 开启/关闭监测
      */

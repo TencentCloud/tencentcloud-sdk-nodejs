@@ -996,6 +996,11 @@ export interface TemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TemplateVersion: string;
+    /**
+      * 模板可用状态，取值：1启用（默认），2停用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Available?: number;
 }
 /**
  * GetDownloadFlowUrl返回参数结构体

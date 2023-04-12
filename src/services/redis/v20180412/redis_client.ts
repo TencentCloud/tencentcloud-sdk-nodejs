@@ -60,9 +60,11 @@ import {
   UpgradeInstanceVersionRequest,
   RegionConf,
   BigKeyInfo,
+  DescribeBandwidthRangeResponse,
   DescribeParamTemplatesRequest,
   RenewInstanceRequest,
   UpgradeVersionToMultiAvailabilityZonesResponse,
+  DescribeInstanceBackupsResponse,
   DescribeInstanceParamRecordsResponse,
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
@@ -109,7 +111,7 @@ import {
   DelayDistribution,
   DescribeProjectSecurityGroupsResponse,
   DescribeInstanceMonitorTookDistResponse,
-  DescribeInstanceBackupsResponse,
+  DescribeBandwidthRangeRequest,
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
   AllocateWanAddressResponse,
@@ -149,6 +151,7 @@ import {
   DescribeInstanceMonitorBigKeySizeDistResponse,
   SecurityGroup,
   CreateInstanceAccountRequest,
+  RemoveReplicationInstanceRequest,
   EnableReplicaReadonlyResponse,
   DescribeMaintenanceWindowResponse,
   DescribeInstanceSecurityGroupResponse,
@@ -228,6 +231,7 @@ import {
   InstanceEnumParam,
   CreateInstanceAccountResponse,
   DescribeInstanceBackupsRequest,
+  RemoveReplicationInstanceResponse,
   SecurityGroupDetail,
   InquiryPriceUpgradeInstanceResponse,
   DeleteInstanceAccountResponse,
@@ -549,7 +553,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CloneInstances）可基于当前实例的备份文件克隆一个完整的新实例。
+   * 本接口（CloneInstances）用于基于当前实例的备份文件克隆一个完整的新实例。
    */
   async CloneInstances(
     req: CloneInstancesRequest,
@@ -796,6 +800,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetPasswordResponse) => void
   ): Promise<ResetPasswordResponse> {
     return this.request("ResetPassword", req, cb)
+  }
+
+  /**
+   * 移除复制组成员
+   */
+  async RemoveReplicationInstance(
+    req: RemoveReplicationInstanceRequest,
+    cb?: (error: string, rep: RemoveReplicationInstanceResponse) => void
+  ): Promise<RemoveReplicationInstanceResponse> {
+    return this.request("RemoveReplicationInstance", req, cb)
   }
 
   /**
@@ -1046,6 +1060,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoBackupConfigResponse) => void
   ): Promise<DescribeAutoBackupConfigResponse> {
     return this.request("DescribeAutoBackupConfig", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeBandwidthRange）用于查询实例带宽信息。
+   */
+  async DescribeBandwidthRange(
+    req: DescribeBandwidthRangeRequest,
+    cb?: (error: string, rep: DescribeBandwidthRangeResponse) => void
+  ): Promise<DescribeBandwidthRangeResponse> {
+    return this.request("DescribeBandwidthRange", req, cb)
   }
 
   /**

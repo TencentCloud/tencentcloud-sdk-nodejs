@@ -160,11 +160,11 @@ export interface DescribeSlowLogsRequest {
       */
     EndTime: string;
     /**
-      * 分页参数
+      * 偏移量，默认为0。
       */
     Offset: number;
     /**
-      * 分页参数
+      * 查询数目，默认为20，最大为100。
       */
     Limit: number;
     /**
