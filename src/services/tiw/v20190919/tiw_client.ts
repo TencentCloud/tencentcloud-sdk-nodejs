@@ -395,7 +395,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置PPT检测任务回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
+   * 设置PPT检测任务回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260#c9cbe05f-fe1a-4410-b4dc-40cc301c7b81
    */
   async SetPPTCheckCallback(
     req: SetPPTCheckCallbackRequest,

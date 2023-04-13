@@ -108,6 +108,16 @@ it("tcaplusdb.v20190823.DescribeTablesInRecycle", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.ModifyClusterName", async function () {
+    try {
+       const data = await client.ModifyClusterName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.DisableRestProxy", async function () {
     try {
        const data = await client.DisableRestProxy({})
@@ -128,9 +138,9 @@ it("tcaplusdb.v20190823.RollbackTables", async function () {
     }
 })
 
-it("tcaplusdb.v20190823.ModifyClusterName", async function () {
+it("tcaplusdb.v20190823.DeleteBackupRecords", async function () {
     try {
-       const data = await client.ModifyClusterName({})
+       const data = await client.DeleteBackupRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +211,16 @@ it("tcaplusdb.v20190823.CreateSnapshots", async function () {
 it("tcaplusdb.v20190823.EnableRestProxy", async function () {
     try {
        const data = await client.EnableRestProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.SetBackupExpireRule", async function () {
+    try {
+       const data = await client.SetBackupExpireRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +361,16 @@ it("tcaplusdb.v20190823.DescribeTasks", async function () {
 it("tcaplusdb.v20190823.DescribeSnapshots", async function () {
     try {
        const data = await client.DescribeSnapshots({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.DescribeBackupRecords", async function () {
+    try {
+       const data = await client.DescribeBackupRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1516,6 +1516,16 @@ export interface DetectInfoText {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NFCBillingCounts?: number;
+    /**
+      * 港澳台居住证通行证号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PassNo?: string;
+    /**
+      * 港澳台居住证签发次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VisaNum?: string;
 }
 /**
  * DetectAuth请求参数结构体

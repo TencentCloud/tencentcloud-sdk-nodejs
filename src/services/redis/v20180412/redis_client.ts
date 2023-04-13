@@ -743,7 +743,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询参数模板详情。
+   * 本接口（DescribeParamTemplateInfo）用于查询参数模板详情。
    */
   async DescribeParamTemplateInfo(
     req: DescribeParamTemplateInfoRequest,

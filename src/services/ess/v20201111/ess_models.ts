@@ -1384,17 +1384,17 @@ export interface CreateBatchCancelFlowUrlResponse {
   /**
    * 批量撤回签署流程链接
    */
-  BatchCancelFlowUrl: string
+  BatchCancelFlowUrl?: string
 
   /**
    * 签署流程撤回失败信息
    */
-  FailMessages: Array<string>
+  FailMessages?: Array<string>
 
   /**
    * 签署连接过期时间字符串：年月日-时分秒
    */
-  UrlExpireOn: string
+  UrlExpireOn?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1489,23 +1489,23 @@ export interface DescribeIntegrationEmployeesResponse {
       * 员工数据列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Employees: Array<Staff>
+  Employees?: Array<Staff>
 
   /**
       * 偏移量，默认为0，最大为20000
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Offset: number
+  Offset?: number
 
   /**
    * 返回最大数量，最大为20
    */
-  Limit: number
+  Limit?: number
 
   /**
    * 符合条件的员工数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3105,7 +3105,7 @@ export interface CreatePrepareFlowResponse {
   /**
    * 快速发起预览链接
    */
-  Url: string
+  Url?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

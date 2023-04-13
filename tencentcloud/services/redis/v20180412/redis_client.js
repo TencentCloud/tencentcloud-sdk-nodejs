@@ -316,7 +316,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParamRecords", req, cb);
     }
     /**
-     * 查询参数模板详情。
+     * 本接口（DescribeParamTemplateInfo）用于查询参数模板详情。
      */
     async DescribeParamTemplateInfo(req, cb) {
         return this.request("DescribeParamTemplateInfo", req, cb);

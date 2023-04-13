@@ -200,7 +200,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceParamRecords(req: DescribeInstanceParamRecordsRequest, cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void): Promise<DescribeInstanceParamRecordsResponse>;
     /**
-     * 查询参数模板详情。
+     * 本接口（DescribeParamTemplateInfo）用于查询参数模板详情。
      */
     DescribeParamTemplateInfo(req: DescribeParamTemplateInfoRequest, cb?: (error: string, rep: DescribeParamTemplateInfoResponse) => void): Promise<DescribeParamTemplateInfoResponse>;
     /**

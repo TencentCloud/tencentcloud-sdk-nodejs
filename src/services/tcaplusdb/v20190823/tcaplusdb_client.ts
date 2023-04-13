@@ -27,6 +27,7 @@ import {
   DeleteClusterResponse,
   DeleteTableIndexResponse,
   TableRollbackResultNew,
+  DescribeBackupRecordsResponse,
   ApplyStatus,
   RegionInfo,
   DescribeTablesResponse,
@@ -76,11 +77,13 @@ import {
   SetTableIndexRequest,
   ModifyTableQuotasResponse,
   RecoverRecycleTablesRequest,
+  ModifyClusterMachineRequest,
   DeleteSnapshotsResponse,
   DeleteTablesResponse,
   ModifyTableGroupNameRequest,
+  BackupExpireRuleInfo,
   DescribeTableGroupsRequest,
-  DescribeUinInWhitelistRequest,
+  ModifyCensorshipResponse,
   MergeTablesDataRequest,
   CreateClusterRequest,
   ModifyTableGroupTagsRequest,
@@ -99,6 +102,8 @@ import {
   DescribeIdlFileInfosResponse,
   ServerMachineInfo,
   CreateSnapshotsResponse,
+  SetBackupExpireRuleRequest,
+  DeleteBackupRecordsResponse,
   IdlFileInfo,
   DisableRestProxyResponse,
   TagInfoUnit,
@@ -115,6 +120,8 @@ import {
   DescribeTableTagsResponse,
   CreateTableGroupResponse,
   DescribeSnapshotsResponse,
+  SetBackupExpireRuleResponse,
+  DeleteBackupRecordsRequest,
   VerifyIdlFilesRequest,
   EnableRestProxyResponse,
   ModifyClusterNameResponse,
@@ -141,15 +148,16 @@ import {
   DescribeApplicationsRequest,
   DescribeTableGroupsResponse,
   DeleteTableGroupResponse,
+  DescribeBackupRecordsRequest,
   PoolInfo,
   DescribeMachineRequest,
   RollbackTablesRequest,
-  ModifyCensorshipResponse,
+  DescribeUinInWhitelistRequest,
   CompareIdlFilesRequest,
   ProxyDetailInfo,
   IdlFileInfoWithoutContent,
   ModifyTableMemosResponse,
-  ModifyClusterMachineRequest,
+  BackupRecords,
   Filter,
   ModifySnapshotsRequest,
   ImportSnapshotsRequest,
@@ -258,6 +266,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改指定的集群名称
+   */
+  async ModifyClusterName(
+    req: ModifyClusterNameRequest,
+    cb?: (error: string, rep: ModifyClusterNameResponse) => void
+  ): Promise<ModifyClusterNameResponse> {
+    return this.request("ModifyClusterName", req, cb)
+  }
+
+  /**
    * 当restful api为关闭状态时，可以通过此接口关闭restful api
    */
   async DisableRestProxy(
@@ -278,13 +296,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改指定的集群名称
+   * 删除手工备份
    */
-  async ModifyClusterName(
-    req: ModifyClusterNameRequest,
-    cb?: (error: string, rep: ModifyClusterNameResponse) => void
-  ): Promise<ModifyClusterNameResponse> {
-    return this.request("ModifyClusterName", req, cb)
+  async DeleteBackupRecords(
+    req: DeleteBackupRecordsRequest,
+    cb?: (error: string, rep: DeleteBackupRecordsResponse) => void
+  ): Promise<DeleteBackupRecordsResponse> {
+    return this.request("DeleteBackupRecords", req, cb)
   }
 
   /**
@@ -355,6 +373,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableRestProxyResponse) => void
   ): Promise<EnableRestProxyResponse> {
     return this.request("EnableRestProxy", req, cb)
+  }
+
+  /**
+   * 新增、删除、修改备份过期策略， ClusterId必须为具体的集群Id（appid）
+   */
+  async SetBackupExpireRule(
+    req: SetBackupExpireRuleRequest,
+    cb?: (error: string, rep: SetBackupExpireRuleResponse) => void
+  ): Promise<SetBackupExpireRuleResponse> {
+    return this.request("SetBackupExpireRule", req, cb)
   }
 
   /**
@@ -495,6 +523,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSnapshotsResponse) => void
   ): Promise<DescribeSnapshotsResponse> {
     return this.request("DescribeSnapshots", req, cb)
+  }
+
+  /**
+     * 查询备份记录
+
+查询集群级别时， 将TableGroupId设置为"-1", 将TableName设置为"-1"
+查询集群+表格组级别时， 将TableName设置为"-1"
+查询集群+表格组+表格级别时， 都不能设置为“-1”
+     */
+  async DescribeBackupRecords(
+    req: DescribeBackupRecordsRequest,
+    cb?: (error: string, rep: DescribeBackupRecordsResponse) => void
+  ): Promise<DescribeBackupRecordsResponse> {
+    return this.request("DescribeBackupRecords", req, cb)
   }
 
   /**

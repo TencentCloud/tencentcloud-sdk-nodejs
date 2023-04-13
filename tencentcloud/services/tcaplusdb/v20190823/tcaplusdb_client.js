@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTablesInRecycle", req, cb);
     }
     /**
+     * 修改指定的集群名称
+     */
+    async ModifyClusterName(req, cb) {
+        return this.request("ModifyClusterName", req, cb);
+    }
+    /**
      * 当restful api为关闭状态时，可以通过此接口关闭restful api
      */
     async DisableRestProxy(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollbackTables", req, cb);
     }
     /**
-     * 修改指定的集群名称
+     * 删除手工备份
      */
-    async ModifyClusterName(req, cb) {
-        return this.request("ModifyClusterName", req, cb);
+    async DeleteBackupRecords(req, cb) {
+        return this.request("DeleteBackupRecords", req, cb);
     }
     /**
      * 新增、修改表格数据订阅
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async EnableRestProxy(req, cb) {
         return this.request("EnableRestProxy", req, cb);
+    }
+    /**
+     * 新增、删除、修改备份过期策略， ClusterId必须为具体的集群Id（appid）
+     */
+    async SetBackupExpireRule(req, cb) {
+        return this.request("SetBackupExpireRule", req, cb);
     }
     /**
      * 用户创建备份任务
@@ -224,6 +236,16 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSnapshots(req, cb) {
         return this.request("DescribeSnapshots", req, cb);
+    }
+    /**
+     * 查询备份记录
+
+查询集群级别时， 将TableGroupId设置为"-1", 将TableName设置为"-1"
+查询集群+表格组级别时， 将TableName设置为"-1"
+查询集群+表格组+表格级别时， 都不能设置为“-1”
+     */
+    async DescribeBackupRecords(req, cb) {
+        return this.request("DescribeBackupRecords", req, cb);
     }
     /**
      * 修改集群标签

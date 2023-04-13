@@ -184,6 +184,23 @@ export interface TableRollbackResultNew {
     TotalKeyNum: number;
 }
 /**
+ * DescribeBackupRecords返回参数结构体
+ */
+export interface DescribeBackupRecordsResponse {
+    /**
+      * 备份记录详情
+      */
+    BackupRecords: Array<BackupRecords>;
+    /**
+      * 返回记录条数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 申请单id及其状态
  */
 export interface ApplyStatus {
@@ -1345,6 +1362,27 @@ export interface RecoverRecycleTablesRequest {
     SelectedTables: Array<SelectedTableInfoNew>;
 }
 /**
+ * ModifyClusterMachine请求参数结构体
+ */
+export interface ModifyClusterMachineRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * svr占用的机器
+      */
+    ServerList: Array<MachineInfo>;
+    /**
+      * proxy占用的机器
+      */
+    ProxyList: Array<MachineInfo>;
+    /**
+      * 集群类型1共享集群2独占集群
+      */
+    ClusterType: number;
+}
+/**
  * DeleteSnapshots返回参数结构体
  */
 export interface DeleteSnapshotsResponse {
@@ -1396,6 +1434,38 @@ export interface ModifyTableGroupNameRequest {
     TableGroupName: string;
 }
 /**
+ * 备份保留策略详情
+集群策略： ClueterId=集群Id， TableGroupId=-1,  TableName="-1"
+集群+表格组策略： ClueterId=集群Id， TableGroupId=表格组Id,  TableName="-1"
+集群+表格组+表格策略： ClueterId=集群Id， TableGroupId=表格组Id,  TableName="表格名"
+
+FileTag=0 txh引擎文件， =1 ulog流水文件， 当要设置为=1时， 这两项不可变 TableGroupId=-1和TableName="-1"
+ExpireDay为大于等于1，小于999的整形数字
+OperType=0 代表动作为新增， =1 代表动作为删除， =2 代表动作为修改， 其中0和2可以混用，后端实现兼容
+ */
+export interface BackupExpireRuleInfo {
+    /**
+      * 所属表格组ID
+      */
+    TableGroupId: string;
+    /**
+      * 表名称
+      */
+    TableName: string;
+    /**
+      * 文件标签，见上面描述
+      */
+    FileTag: number;
+    /**
+      * 淘汰天数，见上面描述
+      */
+    ExpireDay: number;
+    /**
+      * 操作类型，见上面描述
+      */
+    OperType: number;
+}
+/**
  * DescribeTableGroups请求参数结构体
  */
 export interface DescribeTableGroupsRequest {
@@ -1421,9 +1491,27 @@ export interface DescribeTableGroupsRequest {
     Limit?: number;
 }
 /**
- * DescribeUinInWhitelist请求参数结构体
+ * ModifyCensorship返回参数结构体
  */
-export declare type DescribeUinInWhitelistRequest = null;
+export interface ModifyCensorshipResponse {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 已加入审批人的uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uins: Array<string>;
+    /**
+      * 集群是否开启审核 0-关闭 1-开启
+      */
+    Censorship: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * MergeTablesData请求参数结构体
  */
@@ -1726,6 +1814,33 @@ export interface CreateSnapshotsResponse {
       * 批量创建的快照结果列表
       */
     TableResults: Array<SnapshotResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SetBackupExpireRule请求参数结构体
+ */
+export interface SetBackupExpireRuleRequest {
+    /**
+      * 表所属集群实例ID
+      */
+    ClusterId: string;
+    /**
+      * 淘汰策略数组
+      */
+    BackupExpireRules: Array<BackupExpireRuleInfo>;
+}
+/**
+ * DeleteBackupRecords返回参数结构体
+ */
+export interface DeleteBackupRecordsResponse {
+    /**
+      * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2229,6 +2344,33 @@ export interface DescribeSnapshotsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetBackupExpireRule返回参数结构体
+ */
+export interface SetBackupExpireRuleResponse {
+    /**
+      * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteBackupRecords请求参数结构体
+ */
+export interface DeleteBackupRecordsRequest {
+    /**
+      * 待删除备份记录的所在集群ID
+      */
+    ClusterId: string;
+    /**
+      * 待删除备份记录的详情
+      */
+    BackupRecords: Array<BackupRecords>;
 }
 /**
  * VerifyIdlFiles请求参数结构体
@@ -2800,6 +2942,31 @@ export interface DeleteTableGroupResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupRecords请求参数结构体
+ */
+export interface DescribeBackupRecordsRequest {
+    /**
+      * 集群ID，用于获取指定集群的单据
+      */
+    ClusterId?: string;
+    /**
+      * 分页
+      */
+    Limit?: number;
+    /**
+      * 分页
+      */
+    Offset?: number;
+    /**
+      * 表格组id，用于过滤
+      */
+    TableGroupId?: string;
+    /**
+      * 表格名，用于过滤
+      */
+    TableName?: string;
+}
+/**
  * center资源池中的机器信息
  */
 export interface PoolInfo {
@@ -2855,27 +3022,9 @@ export interface RollbackTablesRequest {
     Mode?: string;
 }
 /**
- * ModifyCensorship返回参数结构体
+ * DescribeUinInWhitelist请求参数结构体
  */
-export interface ModifyCensorshipResponse {
-    /**
-      * 集群id
-      */
-    ClusterId: string;
-    /**
-      * 已加入审批人的uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Uins: Array<string>;
-    /**
-      * 集群是否开启审核 0-关闭 1-开启
-      */
-    Censorship: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeUinInWhitelistRequest = null;
 /**
  * CompareIdlFiles请求参数结构体
  */
@@ -2980,25 +3129,51 @@ export interface ModifyTableMemosResponse {
     RequestId?: string;
 }
 /**
- * ModifyClusterMachine请求参数结构体
+ * 备份记录
+作为出参时，每个字段都会填充
+作为入参时， 原封不动将每个字段填回结构体， 注意只有FIleTag=OSDATA才可以调用此接口
  */
-export interface ModifyClusterMachineRequest {
+export interface BackupRecords {
     /**
-      * 集群id
+      * 表格组ID
       */
-    ClusterId: string;
+    ZoneId: number;
     /**
-      * svr占用的机器
+      * 表名称
       */
-    ServerList: Array<MachineInfo>;
+    TableName: string;
     /**
-      * proxy占用的机器
+      * 备份源
       */
-    ProxyList: Array<MachineInfo>;
+    BackupType: string;
     /**
-      * 集群类型1共享集群2独占集群
+      * 文件标签：TCAPLUS_FULL或OSDATA
       */
-    ClusterType: number;
+    FileTag: string;
+    /**
+      * 分片数量
+      */
+    ShardCount: number;
+    /**
+      * 备份批次日期
+      */
+    BackupBatchTime: string;
+    /**
+      * 备份文件汇总大小
+      */
+    BackupFileSize: number;
+    /**
+      * 备份成功率
+      */
+    BackupSuccRate: string;
+    /**
+      * 备份文件过期时间
+      */
+    BackupExpireTime: string;
+    /**
+      * 业务ID
+      */
+    AppId: number;
 }
 /**
  * 过滤条件
