@@ -315,6 +315,11 @@ export interface WaterMarkChar {
  */
 export interface DescribeTrtcRoomUsageResponse {
   /**
+   * 房间维度用量数据，csv文件格式。
+   */
+  Data?: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

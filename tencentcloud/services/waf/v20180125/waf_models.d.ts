@@ -619,7 +619,7 @@ export interface UpsertIpAccessControlRequest {
       */
     Domain: string;
     /**
-      * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳
+      * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
       */
     Items: Array<string>;
     /**
@@ -627,7 +627,7 @@ export interface UpsertIpAccessControlRequest {
       */
     Edition?: string;
     /**
-      * 是否为多域名黑白名单
+      * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，佛祖饿为空
       */
     SourceType?: string;
 }

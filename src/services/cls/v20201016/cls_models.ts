@@ -745,6 +745,11 @@ export interface ModifyTopicRequest {
 非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
       */
   HotPeriod?: number
+
+  /**
+   * webtracking开关； false: 关闭 true: 开启
+   */
+  IsWebTracking?: boolean
 }
 
 /**
@@ -2237,6 +2242,11 @@ export interface CreateTopicRequest {
 非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
       */
   HotPeriod?: number
+
+  /**
+   * webtracking开关； false: 关闭 true： 开启
+   */
+  IsWebTracking?: boolean
 }
 
 /**

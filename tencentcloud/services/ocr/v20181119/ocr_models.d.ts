@@ -738,7 +738,7 @@ export interface WaybillOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TextDetections: TextWaybill;
+    TextDetections?: TextWaybill;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -991,44 +991,44 @@ export interface HmtResidentPermitOCRResponse {
     /**
       * 证件姓名
       */
-    Name: string;
+    Name?: string;
     /**
       * 性别
       */
-    Sex: string;
+    Sex?: string;
     /**
       * 出生日期
       */
-    Birth: string;
+    Birth?: string;
     /**
       * 地址
       */
-    Address: string;
+    Address?: string;
     /**
       * 身份证号
       */
-    IdCardNo: string;
+    IdCardNo?: string;
     /**
       * 0-正面
 1-反面
       */
-    CardType: number;
+    CardType?: number;
     /**
       * 证件有效期限
       */
-    ValidDate: string;
+    ValidDate?: string;
     /**
       * 签发机关
       */
-    Authority: string;
+    Authority?: string;
     /**
       * 签发次数
       */
-    VisaNum: string;
+    VisaNum?: string;
     /**
       * 通行证号码
       */
-    PassNo: string;
+    PassNo?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1124,11 +1124,11 @@ export interface EnterpriseLicenseOCRResponse {
     /**
       * 企业证照识别结果，具体内容请点击左侧链接。
       */
-    EnterpriseLicenseInfos: Array<EnterpriseLicenseInfo>;
+    EnterpriseLicenseInfos?: Array<EnterpriseLicenseInfo>;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
       */
-    Angle: number;
+    Angle?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2068,39 +2068,39 @@ export interface RecognizePhilippinesVoteIDOCRResponse {
     /**
       * 人像照片Base64后的结果
       */
-    HeadPortrait: TextDetectionResult;
+    HeadPortrait?: TextDetectionResult;
     /**
       * 菲律宾VoteID的VIN
       */
-    VIN: TextDetectionResult;
+    VIN?: TextDetectionResult;
     /**
       * 姓名
       */
-    FirstName: TextDetectionResult;
+    FirstName?: TextDetectionResult;
     /**
       * 姓氏
       */
-    LastName: TextDetectionResult;
+    LastName?: TextDetectionResult;
     /**
       * 出生日期
       */
-    Birthday: TextDetectionResult;
+    Birthday?: TextDetectionResult;
     /**
       * 婚姻状况
       */
-    CivilStatus: TextDetectionResult;
+    CivilStatus?: TextDetectionResult;
     /**
       * 国籍
       */
-    Citizenship: TextDetectionResult;
+    Citizenship?: TextDetectionResult;
     /**
       * 地址
       */
-    Address: TextDetectionResult;
+    Address?: TextDetectionResult;
     /**
       * 地区
       */
-    PrecinctNo: TextDetectionResult;
+    PrecinctNo?: TextDetectionResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6530,57 +6530,57 @@ export interface BizLicenseOCRResponse {
     /**
       * 统一社会信用代码（三合一之前为注册号）
       */
-    RegNum: string;
+    RegNum?: string;
     /**
       * 公司名称
       */
-    Name: string;
+    Name?: string;
     /**
       * 注册资本
       */
-    Capital: string;
+    Capital?: string;
     /**
       * 法定代表人
       */
-    Person: string;
+    Person?: string;
     /**
       * 地址
       */
-    Address: string;
+    Address?: string;
     /**
       * 经营范围
       */
-    Business: string;
+    Business?: string;
     /**
       * 主体类型
       */
-    Type: string;
+    Type?: string;
     /**
       * 营业期限
       */
-    Period: string;
+    Period?: string;
     /**
       * 组成形式
       */
-    ComposingForm: string;
+    ComposingForm?: string;
     /**
       * 成立日期
       */
-    SetDate: string;
+    SetDate?: string;
     /**
       * Code 告警码列表和释义：
 -20001 非营业执照
 -9102 黑白复印件告警
 注：告警码可以同时存在多个
       */
-    RecognizeWarnCode: Array<number>;
+    RecognizeWarnCode?: Array<number>;
     /**
       * 告警码说明：
 OCR_WARNING_TYPE_NOT_MATCH 非营业执照
 WARN_COPY_CARD 黑白复印件告警
 注：告警信息可以同时存在多个
       */
-    RecognizeWarnMsg: Array<string>;
+    RecognizeWarnMsg?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
