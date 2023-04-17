@@ -167,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomPack", req, cb);
     }
     /**
+     * 查询溯源ID查溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
+     */
+    async DescribeTraceDataById(req, cb) {
+        return this.request("DescribeTraceDataById", req, cb);
+    }
+    /**
      * 以订单方式新建企业信息/配额信息
      */
     async CreateCorporationOrder(req, cb) {

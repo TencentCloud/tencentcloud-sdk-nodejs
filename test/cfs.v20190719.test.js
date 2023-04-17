@@ -128,6 +128,26 @@ it("cfs.v20190719.DescribeCfsServiceStatus", async function () {
     }
 })
 
+it("cfs.v20190719.StopMigrationTask", async function () {
+    try {
+       const data = await client.StopMigrationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeMigrationTasks", async function () {
+    try {
+       const data = await client.DescribeMigrationTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DescribeAvailableZoneInfo", async function () {
     try {
        const data = await client.DescribeAvailableZoneInfo({})
@@ -141,6 +161,16 @@ it("cfs.v20190719.DescribeAvailableZoneInfo", async function () {
 it("cfs.v20190719.UpdateCfsFileSystemName", async function () {
     try {
        const data = await client.UpdateCfsFileSystemName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DeleteMigrationTask", async function () {
+    try {
+       const data = await client.DeleteMigrationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +291,26 @@ it("cfs.v20190719.BindAutoSnapshotPolicy", async function () {
 it("cfs.v20190719.DeleteCfsRule", async function () {
     try {
        const data = await client.DeleteCfsRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeBucketList", async function () {
+    try {
+       const data = await client.DescribeBucketList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.CreateMigrationTask", async function () {
+    try {
+       const data = await client.CreateMigrationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

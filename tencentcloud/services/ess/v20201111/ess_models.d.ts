@@ -412,7 +412,7 @@ Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查�
  */
 export interface CreateFlowRemindsResponse {
     /**
-      * 签署连接过期时间字符串：年月日-时分秒
+      * 催办合同详情列表
       */
     RemindFlowRecords?: Array<RemindFlowRecords>;
     /**
@@ -2077,13 +2077,18 @@ export interface FlowDetailInfo {
       */
     FlowType: string;
     /**
-      * 合同(流程)的状态
-1：未签署
-2：部分签署
-3：已退回
-4：完成签署
-5：已过期
-6：已取消
+      * 流程状态
+- 0 还没有发起
+- 1 未签署
+- 2 部分签署
+- 3 已退回
+- 4 完成签署
+- 5 已过期
+- 6 已取消
+- 7 还没有预发起
+- 8 等待填写
+- 9 部分填写
+- 10 拒填
       */
     FlowStatus: number;
     /**

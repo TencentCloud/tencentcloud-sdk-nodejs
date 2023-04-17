@@ -2106,6 +2106,21 @@ export interface DescribeMerchantByIdResponse {
 }
 
 /**
+ * DescribeTraceDataById返回参数结构体
+ */
+export interface DescribeTraceDataByIdResponse {
+  /**
+   * 无
+   */
+  TraceData: TraceData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 码类型
  */
 export interface CodeItem {
@@ -2570,6 +2585,21 @@ export interface ModifyTraceCodeUnlinkResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTraceDataById请求参数结构体
+ */
+export interface DescribeTraceDataByIdRequest {
+  /**
+   * 溯源ID
+   */
+  Id: string
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
 }
 
 /**

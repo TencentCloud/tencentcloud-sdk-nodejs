@@ -42,7 +42,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShieldResult", req, cb);
     }
     /**
-     * 删除一个或者多个app扫描信息
+     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
+
+删除一个或者多个app扫描信息
      */
     async DeleteScanInstances(req, cb) {
         return this.request("DeleteScanInstances", req, cb);

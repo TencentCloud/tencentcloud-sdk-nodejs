@@ -18,7 +18,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeShieldResult(req: DescribeShieldResultRequest, cb?: (error: string, rep: DescribeShieldResultResponse) => void): Promise<DescribeShieldResultResponse>;
     /**
-     * 删除一个或者多个app扫描信息
+     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
+
+删除一个或者多个app扫描信息
      */
     DeleteScanInstances(req: DeleteScanInstancesRequest, cb?: (error: string, rep: DeleteScanInstancesResponse) => void): Promise<DeleteScanInstancesResponse>;
     /**

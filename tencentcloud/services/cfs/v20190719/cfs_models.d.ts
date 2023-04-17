@@ -1,4 +1,69 @@
 /**
+ * CreateMigrationTask请求参数结构体
+ */
+export interface CreateMigrationTaskRequest {
+    /**
+      * 迁移任务名称
+      */
+    TaskName: string;
+    /**
+      * 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移
+      */
+    MigrationType: number;
+    /**
+      * 迁移模式，默认为0。0: 全量迁移
+      */
+    MigrationMode: number;
+    /**
+      * 数据源账号的SecretId
+      */
+    SrcSecretId: string;
+    /**
+      * 数据源账号的SecretKey
+      */
+    SrcSecretKey: string;
+    /**
+      * 文件系统实例Id
+      */
+    FileSystemId: string;
+    /**
+      * 文件系统路径
+      */
+    FsPath: string;
+    /**
+      * 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖
+      */
+    CoverType: number;
+    /**
+      * 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS
+      */
+    SrcService: string;
+    /**
+      * 数据源桶名称，名称和地址至少有一个
+      */
+    BucketName?: string;
+    /**
+      * 数据源桶地域
+      */
+    BucketRegion?: string;
+    /**
+      * 数据源桶地址，名称和地址至少有一个
+      */
+    BucketAddress?: string;
+    /**
+      * 清单地址，迁移方式为清单迁移时必填
+      */
+    ListAddress?: string;
+    /**
+      * 目标文件系统名称
+      */
+    FsName?: string;
+    /**
+      * 源桶路径，默认为/
+      */
+    BucketPath?: string;
+}
+/**
  * 文件系统快照统计
  */
 export interface SnapshotStatistics {
@@ -61,6 +126,127 @@ export interface DescribeSnapshotOperationLogsRequest {
       * 结束时间
       */
     EndTime: string;
+}
+/**
+ * CFS数据迁移任务信息
+ */
+export interface MigrationTaskInfo {
+    /**
+      * 迁移任务名称
+      */
+    TaskName: string;
+    /**
+      * 迁移任务id
+      */
+    TaskId: string;
+    /**
+      * 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移
+      */
+    MigrationType: number;
+    /**
+      * 迁移模式，默认为0。0: 全量迁移
+      */
+    MigrationMode: number;
+    /**
+      * 数据源桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketName: string;
+    /**
+      * 数据源桶地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketRegion: string;
+    /**
+      * 数据源桶地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketAddress: string;
+    /**
+      * 清单地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ListAddress: string;
+    /**
+      * 文件系统实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FsName: string;
+    /**
+      * 文件系统实例Id
+      */
+    FileSystemId: string;
+    /**
+      * 文件系统路径
+      */
+    FsPath: string;
+    /**
+      * 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖
+      */
+    CoverType: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 完成/终止时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: number;
+    /**
+      * 迁移状态。0: 已完成；1: 进行中；2: 已终止
+      */
+    Status: number;
+    /**
+      * 文件数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileTotalCount: number;
+    /**
+      * 已迁移文件数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileMigratedCount: number;
+    /**
+      * 迁移失败文件数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileFailedCount: number;
+    /**
+      * 文件容量，单位Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileTotalSize: number;
+    /**
+      * 已迁移文件容量，单位Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileMigratedSize: number;
+    /**
+      * 迁移失败文件容量，单位Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileFailedSize: number;
+    /**
+      * 全部清单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileTotalList: string;
+    /**
+      * 已完成文件清单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileCompletedList: string;
+    /**
+      * 失败文件清单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileFailedList: string;
+    /**
+      * 源桶路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketPath: string;
 }
 /**
  * 文件系统客户端信息
@@ -276,6 +462,23 @@ export interface CreateCfsPGroupRequest {
     DescInfo?: string;
 }
 /**
+ * DescribeMigrationTasks返回参数结构体
+ */
+export interface DescribeMigrationTasksResponse {
+    /**
+      * 迁移任务的数量
+      */
+    TotalCount?: number;
+    /**
+      * 迁移任务详情
+      */
+    MigrationTasks?: Array<MigrationTaskInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAutoSnapshotPolicies请求参数结构体
  */
 export interface DescribeAutoSnapshotPoliciesRequest {
@@ -331,9 +534,22 @@ export interface BindAutoSnapshotPolicyResponse {
     RequestId?: string;
 }
 /**
- * SignUpCfsService请求参数结构体
+ * StopMigrationTask返回参数结构体
  */
-export declare type SignUpCfsServiceRequest = null;
+export interface StopMigrationTaskResponse {
+    /**
+      * 迁移任务Id
+      */
+    TaskId?: string;
+    /**
+      * 迁移状态。0: 已完成；1: 进行中；2: 已终止
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * SignUpCfsService返回参数结构体
  */
@@ -422,6 +638,19 @@ export interface DescribeCfsRulesRequest {
       * 权限组 ID
       */
     PGroupId: string;
+}
+/**
+ * UpdateCfsFileSystemName请求参数结构体
+ */
+export interface UpdateCfsFileSystemNameRequest {
+    /**
+      * 文件系统 ID
+      */
+    FileSystemId: string;
+    /**
+      * 用户自定义文件系统名称
+      */
+    FsName?: string;
 }
 /**
  * DeleteCfsPGroup请求参数结构体
@@ -583,6 +812,24 @@ export interface CreateCfsSnapshotRequest {
     ResourceTags?: Array<TagInfo>;
 }
 /**
+ * DescribeBucketList请求参数结构体
+ */
+export interface DescribeBucketListRequest {
+    /**
+      * 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS
+      */
+    SrcService: string;
+    /**
+      * 数据源账号的SecretId
+
+      */
+    SrcSecretId: string;
+    /**
+      * 数据源账号的SecretKey
+      */
+    SrcSecretKey: string;
+}
+/**
  * DeleteCfsRule请求参数结构体
  */
 export interface DeleteCfsRuleRequest {
@@ -596,13 +843,42 @@ export interface DeleteCfsRuleRequest {
     RuleId: string;
 }
 /**
- * DescribeCfsRules返回参数结构体
+ * UpdateCfsRule返回参数结构体
  */
-export interface DescribeCfsRulesResponse {
+export interface UpdateCfsRuleResponse {
     /**
-      * 权限组规则列表
+      * 权限组 ID
       */
-    RuleList: Array<PGroupRuleInfo>;
+    PGroupId: string;
+    /**
+      * 规则 ID
+      */
+    RuleId: string;
+    /**
+      * 允许访问的客户端 IP 或者 IP 段
+      */
+    AuthClientIp: string;
+    /**
+      * 读写权限
+      */
+    RWPermission: string;
+    /**
+      * 用户权限
+      */
+    UserPermission: string;
+    /**
+      * 优先级
+      */
+    Priority: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteMigrationTask返回参数结构体
+ */
+export interface DeleteMigrationTaskResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -692,6 +968,15 @@ export interface DeleteUserQuotaResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteMigrationTask请求参数结构体
+ */
+export interface DeleteMigrationTaskRequest {
+    /**
+      * 迁移任务ID
+      */
+    TaskId: string;
 }
 /**
  * 文件系统绑定权限组信息
@@ -848,17 +1133,18 @@ export interface CreateCfsRuleRequest {
     UserPermission?: string;
 }
 /**
- * UpdateCfsFileSystemName请求参数结构体
+ * 对象存储桶
  */
-export interface UpdateCfsFileSystemNameRequest {
+export interface BucketInfo {
     /**
-      * 文件系统 ID
+      * 桶名称
       */
-    FileSystemId: string;
+    Name: string;
     /**
-      * 用户自定义文件系统名称
+      * 桶所在地域
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FsName?: string;
+    Region: string;
 }
 /**
  * 快照操作日志
@@ -907,6 +1193,23 @@ export interface DescribeUserQuotaRequest {
       * Limit 页面大小
       */
     Limit?: number;
+}
+/**
+ * DescribeBucketList返回参数结构体
+ */
+export interface DescribeBucketListResponse {
+    /**
+      * 桶的数量
+      */
+    TotalCount?: number;
+    /**
+      * 桶列表
+      */
+    BucketList?: Array<BucketInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateCfsFileSystemName返回参数结构体
@@ -1107,6 +1410,37 @@ export interface AvailableZone {
     ZoneName: string;
 }
 /**
+ * DescribeMigrationTasks请求参数结构体
+ */
+export interface DescribeMigrationTasksRequest {
+    /**
+      * 分页的偏移量，默认值为0。
+      */
+    Offset?: number;
+    /**
+      * 分页单页限制数目，默认值为20，最大值100。
+      */
+    Limit?: number;
+    /**
+      * <br><li> taskId
+
+按照【迁移任务id】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> taskName
+
+按照【迁移任务名字】进行模糊搜索过滤。
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为100。
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * 条件过滤
  */
 export interface Filter {
@@ -1276,55 +1610,22 @@ export interface UpdateCfsFileSystemSizeLimitRequest {
     FileSystemId: string;
 }
 /**
- * UpdateCfsRule返回参数结构体
+ * DescribeCfsRules返回参数结构体
  */
-export interface UpdateCfsRuleResponse {
+export interface DescribeCfsRulesResponse {
     /**
-      * 权限组 ID
+      * 权限组规则列表
       */
-    PGroupId: string;
-    /**
-      * 规则 ID
-      */
-    RuleId: string;
-    /**
-      * 允许访问的客户端 IP 或者 IP 段
-      */
-    AuthClientIp: string;
-    /**
-      * 读写权限
-      */
-    RWPermission: string;
-    /**
-      * 用户权限
-      */
-    UserPermission: string;
-    /**
-      * 优先级
-      */
-    Priority: number;
+    RuleList: Array<PGroupRuleInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * UpdateCfsPGroup请求参数结构体
+ * SignUpCfsService请求参数结构体
  */
-export interface UpdateCfsPGroupRequest {
-    /**
-      * 权限组 ID
-      */
-    PGroupId: string;
-    /**
-      * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
-      */
-    Name?: string;
-    /**
-      * 权限组描述信息，1-255个字符
-      */
-    DescInfo?: string;
-}
+export declare type SignUpCfsServiceRequest = null;
 /**
  * UpdateAutoSnapshotPolicy返回参数结构体
  */
@@ -1495,6 +1796,19 @@ export interface UpdateCfsFileSystemPGroupRequest {
     FileSystemId: string;
 }
 /**
+ * CreateMigrationTask返回参数结构体
+ */
+export interface CreateMigrationTaskResponse {
+    /**
+      * 迁移任务Id
+      */
+    TaskId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteAutoSnapshotPolicy返回参数结构体
  */
 export interface DeleteAutoSnapshotPolicyResponse {
@@ -1536,6 +1850,23 @@ export interface UpdateCfsSnapshotAttributeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpdateCfsPGroup请求参数结构体
+ */
+export interface UpdateCfsPGroupRequest {
+    /**
+      * 权限组 ID
+      */
+    PGroupId: string;
+    /**
+      * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
+      */
+    Name?: string;
+    /**
+      * 权限组描述信息，1-255个字符
+      */
+    DescInfo?: string;
 }
 /**
  * SetUserQuota返回参数结构体
@@ -1696,6 +2027,15 @@ export interface DescribeCfsSnapshotsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * StopMigrationTask请求参数结构体
+ */
+export interface StopMigrationTaskRequest {
+    /**
+      * 迁移任务名称
+      */
+    TaskId: string;
 }
 /**
  * DescribeAutoSnapshotPolicies返回参数结构体

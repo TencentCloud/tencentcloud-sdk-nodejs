@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCfsPGroupsResponse, DescribeMountTargetsResponse, DescribeSnapshotOperationLogsRequest, DescribeCfsFileSystemsResponse, CreateCfsFileSystemResponse, BindAutoSnapshotPolicyRequest, CreateCfsPGroupRequest, DescribeAutoSnapshotPoliciesRequest, DescribeAvailableZoneInfoRequest, DescribeMountTargetsRequest, BindAutoSnapshotPolicyResponse, SignUpCfsServiceRequest, SignUpCfsServiceResponse, DescribeCfsRulesRequest, DeleteCfsPGroupRequest, UpdateCfsPGroupResponse, DeleteAutoSnapshotPolicyRequest, DeleteCfsFileSystemResponse, UpdateCfsRuleRequest, DeleteUserQuotaRequest, DescribeAvailableZoneInfoResponse, DeleteCfsSnapshotResponse, DescribeCfsFileSystemClientsResponse, DeleteMountTargetResponse, CreateCfsSnapshotRequest, DeleteCfsRuleRequest, DescribeCfsRulesResponse, DescribeSnapshotOperationLogsResponse, UpdateCfsFileSystemPGroupResponse, DeleteCfsFileSystemRequest, CreateCfsPGroupResponse, DescribeCfsServiceStatusRequest, DeleteUserQuotaResponse, SetUserQuotaRequest, CreateAutoSnapshotPolicyResponse, CreateCfsSnapshotResponse, DeleteMountTargetRequest, CreateCfsRuleRequest, UpdateCfsFileSystemNameRequest, DescribeUserQuotaRequest, UpdateCfsFileSystemNameResponse, DescribeCfsSnapshotOverviewResponse, DeleteCfsSnapshotRequest, DescribeCfsFileSystemClientsRequest, DescribeCfsFileSystemsRequest, CreateCfsFileSystemRequest, UnbindAutoSnapshotPolicyRequest, UnbindAutoSnapshotPolicyResponse, DescribeCfsServiceStatusResponse, DescribeCfsSnapshotsRequest, UpdateCfsFileSystemSizeLimitResponse, UpdateAutoSnapshotPolicyRequest, UpdateCfsFileSystemSizeLimitRequest, UpdateCfsRuleResponse, UpdateCfsPGroupRequest, UpdateAutoSnapshotPolicyResponse, UpdateCfsFileSystemPGroupRequest, DeleteAutoSnapshotPolicyResponse, DeleteCfsRuleResponse, UpdateCfsSnapshotAttributeResponse, SetUserQuotaResponse, DescribeCfsPGroupsRequest, DeleteCfsPGroupResponse, UpdateCfsSnapshotAttributeRequest, DescribeUserQuotaResponse, CreateCfsRuleResponse, DescribeCfsSnapshotsResponse, DescribeAutoSnapshotPoliciesResponse, DescribeCfsSnapshotOverviewRequest, CreateAutoSnapshotPolicyRequest } from "./cfs_models";
+import { CreateMigrationTaskRequest, DescribeCfsPGroupsResponse, DescribeMountTargetsResponse, DescribeSnapshotOperationLogsRequest, DescribeCfsFileSystemsResponse, CreateCfsFileSystemResponse, BindAutoSnapshotPolicyRequest, CreateCfsPGroupRequest, DescribeMigrationTasksResponse, DescribeAutoSnapshotPoliciesRequest, DescribeAvailableZoneInfoRequest, DescribeMountTargetsRequest, BindAutoSnapshotPolicyResponse, StopMigrationTaskResponse, SignUpCfsServiceResponse, DescribeCfsRulesRequest, UpdateCfsFileSystemNameRequest, DeleteCfsPGroupRequest, UpdateCfsPGroupResponse, DeleteAutoSnapshotPolicyRequest, DeleteCfsFileSystemResponse, UpdateCfsRuleRequest, DeleteUserQuotaRequest, DescribeAvailableZoneInfoResponse, DeleteCfsSnapshotResponse, DescribeCfsFileSystemClientsResponse, DeleteMountTargetResponse, CreateCfsSnapshotRequest, DescribeBucketListRequest, DeleteCfsRuleRequest, UpdateCfsRuleResponse, DeleteMigrationTaskResponse, DescribeSnapshotOperationLogsResponse, UpdateCfsFileSystemPGroupResponse, DeleteCfsFileSystemRequest, CreateCfsPGroupResponse, DescribeCfsServiceStatusRequest, DeleteUserQuotaResponse, DeleteMigrationTaskRequest, SetUserQuotaRequest, CreateAutoSnapshotPolicyResponse, CreateCfsSnapshotResponse, DeleteMountTargetRequest, CreateCfsRuleRequest, DescribeUserQuotaRequest, DescribeBucketListResponse, UpdateCfsFileSystemNameResponse, DescribeCfsSnapshotOverviewResponse, DeleteCfsSnapshotRequest, DescribeCfsFileSystemClientsRequest, DescribeCfsFileSystemsRequest, CreateCfsFileSystemRequest, DescribeMigrationTasksRequest, UnbindAutoSnapshotPolicyRequest, UnbindAutoSnapshotPolicyResponse, DescribeCfsServiceStatusResponse, DescribeCfsSnapshotsRequest, UpdateCfsFileSystemSizeLimitResponse, UpdateAutoSnapshotPolicyRequest, UpdateCfsFileSystemSizeLimitRequest, DescribeCfsRulesResponse, SignUpCfsServiceRequest, UpdateAutoSnapshotPolicyResponse, UpdateCfsFileSystemPGroupRequest, CreateMigrationTaskResponse, DeleteAutoSnapshotPolicyResponse, DeleteCfsRuleResponse, UpdateCfsSnapshotAttributeResponse, UpdateCfsPGroupRequest, SetUserQuotaResponse, DescribeCfsPGroupsRequest, DeleteCfsPGroupResponse, UpdateCfsSnapshotAttributeRequest, DescribeUserQuotaResponse, CreateCfsRuleResponse, DescribeCfsSnapshotsResponse, StopMigrationTaskRequest, DescribeAutoSnapshotPoliciesResponse, DescribeCfsSnapshotOverviewRequest, CreateAutoSnapshotPolicyRequest } from "./cfs_models";
 /**
  * cfs client
  * @class
@@ -52,6 +52,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsServiceStatus(req?: DescribeCfsServiceStatusRequest, cb?: (error: string, rep: DescribeCfsServiceStatusResponse) => void): Promise<DescribeCfsServiceStatusResponse>;
     /**
+     * 用于终止迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    StopMigrationTask(req: StopMigrationTaskRequest, cb?: (error: string, rep: StopMigrationTaskResponse) => void): Promise<StopMigrationTaskResponse>;
+    /**
+     * 用于获取迁移任务列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    DescribeMigrationTasks(req: DescribeMigrationTasksRequest, cb?: (error: string, rep: DescribeMigrationTasksResponse) => void): Promise<DescribeMigrationTasksResponse>;
+    /**
      * 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
      */
     DescribeAvailableZoneInfo(req?: DescribeAvailableZoneInfoRequest, cb?: (error: string, rep: DescribeAvailableZoneInfoResponse) => void): Promise<DescribeAvailableZoneInfoResponse>;
@@ -59,6 +69,11 @@ export declare class Client extends AbstractClient {
      * 本接口（UpdateCfsFileSystemName）用于更新文件系统名
      */
     UpdateCfsFileSystemName(req: UpdateCfsFileSystemNameRequest, cb?: (error: string, rep: UpdateCfsFileSystemNameResponse) => void): Promise<UpdateCfsFileSystemNameResponse>;
+    /**
+     * 用于删除迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    DeleteMigrationTask(req: DeleteMigrationTaskRequest, cb?: (error: string, rep: DeleteMigrationTaskResponse) => void): Promise<DeleteMigrationTaskResponse>;
     /**
      * 本接口（UpdateCfsFileSystemSizeLimit）用于更新文件系统存储容量限制。
      */
@@ -107,6 +122,16 @@ export declare class Client extends AbstractClient {
      * 本接口（DeleteCfsRule）用于删除权限组规则。
      */
     DeleteCfsRule(req: DeleteCfsRuleRequest, cb?: (error: string, rep: DeleteCfsRuleResponse) => void): Promise<DeleteCfsRuleResponse>;
+    /**
+     * 用于获取数据源桶列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    DescribeBucketList(req: DescribeBucketListRequest, cb?: (error: string, rep: DescribeBucketListResponse) => void): Promise<DescribeBucketListResponse>;
+    /**
+     * 用于创建迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    CreateMigrationTask(req: CreateMigrationTaskRequest, cb?: (error: string, rep: CreateMigrationTaskResponse) => void): Promise<CreateMigrationTaskResponse>;
     /**
      * 本接口（DeleteMountTarget）用于删除挂载点
      */

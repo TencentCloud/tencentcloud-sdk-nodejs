@@ -18,24 +18,28 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateMigrationTaskRequest,
   SnapshotStatistics,
   DescribeCfsPGroupsResponse,
   DescribeMountTargetsResponse,
   DescribeSnapshotOperationLogsRequest,
+  MigrationTaskInfo,
   FileSystemClient,
   DescribeCfsFileSystemsResponse,
   CreateCfsFileSystemResponse,
   FileSystemInfo,
   BindAutoSnapshotPolicyRequest,
   CreateCfsPGroupRequest,
+  DescribeMigrationTasksResponse,
   DescribeAutoSnapshotPoliciesRequest,
   DescribeAvailableZoneInfoRequest,
   DescribeMountTargetsRequest,
   BindAutoSnapshotPolicyResponse,
-  SignUpCfsServiceRequest,
+  StopMigrationTaskResponse,
   SignUpCfsServiceResponse,
   AutoSnapshotPolicyInfo,
   DescribeCfsRulesRequest,
+  UpdateCfsFileSystemNameRequest,
   DeleteCfsPGroupRequest,
   UpdateCfsPGroupResponse,
   DeleteAutoSnapshotPolicyRequest,
@@ -47,14 +51,17 @@ import {
   DescribeCfsFileSystemClientsResponse,
   DeleteMountTargetResponse,
   CreateCfsSnapshotRequest,
+  DescribeBucketListRequest,
   DeleteCfsRuleRequest,
-  DescribeCfsRulesResponse,
+  UpdateCfsRuleResponse,
+  DeleteMigrationTaskResponse,
   DescribeSnapshotOperationLogsResponse,
   UpdateCfsFileSystemPGroupResponse,
   DeleteCfsFileSystemRequest,
   CreateCfsPGroupResponse,
   DescribeCfsServiceStatusRequest,
   DeleteUserQuotaResponse,
+  DeleteMigrationTaskRequest,
   PGroup,
   SetUserQuotaRequest,
   CreateAutoSnapshotPolicyResponse,
@@ -63,9 +70,10 @@ import {
   UserQuota,
   DeleteMountTargetRequest,
   CreateCfsRuleRequest,
-  UpdateCfsFileSystemNameRequest,
+  BucketInfo,
   SnapshotOperateLog,
   DescribeUserQuotaRequest,
+  DescribeBucketListResponse,
   UpdateCfsFileSystemNameResponse,
   DescribeCfsSnapshotOverviewResponse,
   DeleteCfsSnapshotRequest,
@@ -75,6 +83,7 @@ import {
   AvailableRegion,
   CreateCfsFileSystemRequest,
   AvailableZone,
+  DescribeMigrationTasksRequest,
   Filter,
   UnbindAutoSnapshotPolicyRequest,
   UnbindAutoSnapshotPolicyResponse,
@@ -84,16 +93,18 @@ import {
   UpdateCfsFileSystemSizeLimitResponse,
   UpdateAutoSnapshotPolicyRequest,
   UpdateCfsFileSystemSizeLimitRequest,
-  UpdateCfsRuleResponse,
-  UpdateCfsPGroupRequest,
+  DescribeCfsRulesResponse,
+  SignUpCfsServiceRequest,
   UpdateAutoSnapshotPolicyResponse,
   FileSystemByPolicy,
   SnapshotInfo,
   MountInfo,
   UpdateCfsFileSystemPGroupRequest,
+  CreateMigrationTaskResponse,
   DeleteAutoSnapshotPolicyResponse,
   DeleteCfsRuleResponse,
   UpdateCfsSnapshotAttributeResponse,
+  UpdateCfsPGroupRequest,
   SetUserQuotaResponse,
   TagInfo,
   DescribeCfsPGroupsRequest,
@@ -104,6 +115,7 @@ import {
   PGroupInfo,
   CreateCfsRuleResponse,
   DescribeCfsSnapshotsResponse,
+  StopMigrationTaskRequest,
   DescribeAutoSnapshotPoliciesResponse,
   DescribeCfsSnapshotOverviewRequest,
   CreateAutoSnapshotPolicyRequest,
@@ -229,6 +241,28 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于终止迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async StopMigrationTask(
+    req: StopMigrationTaskRequest,
+    cb?: (error: string, rep: StopMigrationTaskResponse) => void
+  ): Promise<StopMigrationTaskResponse> {
+    return this.request("StopMigrationTask", req, cb)
+  }
+
+  /**
+     * 用于获取迁移任务列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async DescribeMigrationTasks(
+    req: DescribeMigrationTasksRequest,
+    cb?: (error: string, rep: DescribeMigrationTasksResponse) => void
+  ): Promise<DescribeMigrationTasksResponse> {
+    return this.request("DescribeMigrationTasks", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
    */
   async DescribeAvailableZoneInfo(
@@ -246,6 +280,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateCfsFileSystemNameResponse) => void
   ): Promise<UpdateCfsFileSystemNameResponse> {
     return this.request("UpdateCfsFileSystemName", req, cb)
+  }
+
+  /**
+     * 用于删除迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async DeleteMigrationTask(
+    req: DeleteMigrationTaskRequest,
+    cb?: (error: string, rep: DeleteMigrationTaskResponse) => void
+  ): Promise<DeleteMigrationTaskResponse> {
+    return this.request("DeleteMigrationTask", req, cb)
   }
 
   /**
@@ -366,6 +411,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCfsRuleResponse) => void
   ): Promise<DeleteCfsRuleResponse> {
     return this.request("DeleteCfsRule", req, cb)
+  }
+
+  /**
+     * 用于获取数据源桶列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async DescribeBucketList(
+    req: DescribeBucketListRequest,
+    cb?: (error: string, rep: DescribeBucketListResponse) => void
+  ): Promise<DescribeBucketListResponse> {
+    return this.request("DescribeBucketList", req, cb)
+  }
+
+  /**
+     * 用于创建迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async CreateMigrationTask(
+    req: CreateMigrationTaskRequest,
+    cb?: (error: string, rep: CreateMigrationTaskResponse) => void
+  ): Promise<CreateMigrationTaskResponse> {
+    return this.request("CreateMigrationTask", req, cb)
   }
 
   /**

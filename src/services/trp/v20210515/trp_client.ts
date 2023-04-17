@@ -84,6 +84,7 @@ import {
   ModifyCustomRuleStatusRequest,
   CreateCodePackResponse,
   DescribeMerchantByIdResponse,
+  DescribeTraceDataByIdResponse,
   CodeItem,
   CreateTraceDataResponse,
   DescribeCustomRuleByIdResponse,
@@ -104,6 +105,7 @@ import {
   DeleteTraceDataRequest,
   DescribeScanLogsRequest,
   ModifyTraceCodeUnlinkResponse,
+  DescribeTraceDataByIdRequest,
   Merchant,
   Product,
   DescribeTmpTokenRequest,
@@ -366,6 +368,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustomPackResponse) => void
   ): Promise<CreateCustomPackResponse> {
     return this.request("CreateCustomPack", req, cb)
+  }
+
+  /**
+   * 查询溯源ID查溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
+   */
+  async DescribeTraceDataById(
+    req: DescribeTraceDataByIdRequest,
+    cb?: (error: string, rep: DescribeTraceDataByIdResponse) => void
+  ): Promise<DescribeTraceDataByIdResponse> {
+    return this.request("DescribeTraceDataById", req, cb)
   }
 
   /**

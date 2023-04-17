@@ -94,6 +94,20 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsServiceStatus", req, cb);
     }
     /**
+     * 用于终止迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    async StopMigrationTask(req, cb) {
+        return this.request("StopMigrationTask", req, cb);
+    }
+    /**
+     * 用于获取迁移任务列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    async DescribeMigrationTasks(req, cb) {
+        return this.request("DescribeMigrationTasks", req, cb);
+    }
+    /**
      * 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
      */
     async DescribeAvailableZoneInfo(req, cb) {
@@ -104,6 +118,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateCfsFileSystemName(req, cb) {
         return this.request("UpdateCfsFileSystemName", req, cb);
+    }
+    /**
+     * 用于删除迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    async DeleteMigrationTask(req, cb) {
+        return this.request("DeleteMigrationTask", req, cb);
     }
     /**
      * 本接口（UpdateCfsFileSystemSizeLimit）用于更新文件系统存储容量限制。
@@ -176,6 +197,20 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCfsRule(req, cb) {
         return this.request("DeleteCfsRule", req, cb);
+    }
+    /**
+     * 用于获取数据源桶列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    async DescribeBucketList(req, cb) {
+        return this.request("DescribeBucketList", req, cb);
+    }
+    /**
+     * 用于创建迁移任务。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+    async CreateMigrationTask(req, cb) {
+        return this.request("CreateMigrationTask", req, cb);
     }
     /**
      * 本接口（DeleteMountTarget）用于删除挂载点
