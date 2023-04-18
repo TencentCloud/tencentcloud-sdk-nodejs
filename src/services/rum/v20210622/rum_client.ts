@@ -28,6 +28,7 @@ import {
   DeleteOfflineLogConfigResponse,
   ResumeProjectResponse,
   DescribeRumLogListResponse,
+  DescribeAppMetricsDataRequest,
   DescribeDataPvUrlInfoResponse,
   StopProjectResponse,
   DescribeDataFetchUrlResponse,
@@ -36,6 +37,8 @@ import {
   ModifyInstanceRequest,
   DescribeLogListRequest,
   DescribeErrorResponse,
+  DescribeAppMetricsDataResponse,
+  DescribeAppSingleCaseDetailListResponse,
   DeleteWhitelistResponse,
   CreateLogExportRequest,
   DescribePvListResponse,
@@ -64,6 +67,7 @@ import {
   CreateOfflineLogConfigResponse,
   ModifyProjectLimitRequest,
   DeleteInstanceResponse,
+  DescribeAppSingleCaseListResponse,
   DescribeDataPerformancePageRequest,
   DeleteReleaseFileRequest,
   ResumeInstanceRequest,
@@ -72,7 +76,7 @@ import {
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
   StopInstanceResponse,
-  DescribeProjectLimitsRequest,
+  DescribeDataCustomUrlResponse,
   CreateStarProjectResponse,
   DeleteProjectResponse,
   DescribeOfflineLogRecordsRequest,
@@ -90,7 +94,7 @@ import {
   CreateWhitelistRequest,
   DescribeDataPvUrlStatisticsResponse,
   DescribeDataLogUrlInfoRequest,
-  DescribeDataCustomUrlResponse,
+  DescribeProjectLimitsRequest,
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
   DescribeDataPerformanceProjectResponse,
@@ -98,6 +102,7 @@ import {
   ResumeInstanceResponse,
   DescribeDataStaticProjectResponse,
   CreateStarProjectRequest,
+  DescribeAppSingleCaseListRequest,
   DescribeReleaseFileSignRequest,
   DeleteWhitelistRequest,
   DescribeDataLogUrlInfoResponse,
@@ -128,7 +133,9 @@ import {
   DescribeDataWebVitalsPageResponse,
   DescribeProjectsRequest,
   DescribeDataEventUrlRequest,
+  DescribeAppDimensionMetricsResponse,
   DescribeOfflineLogConfigsRequest,
+  DescribeAppSingleCaseDetailListRequest,
   DescribeRumGroupLogRequest,
   DeleteOfflineLogConfigRequest,
   DescribeWhitelistsResponse,
@@ -151,6 +158,7 @@ import {
   Whitelist,
   RumProject,
   DescribeDataSetUrlStatisticsResponse,
+  DescribeAppDimensionMetricsRequest,
   RumInstanceInfo,
 } from "./rum_models"
 
@@ -244,13 +252,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+   * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
    */
-  async DescribeDataFetchProject(
-    req: DescribeDataFetchProjectRequest,
-    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
-  ): Promise<DescribeDataFetchProjectResponse> {
-    return this.request("DescribeDataFetchProject", req, cb)
+  async DeleteOfflineLogConfig(
+    req: DeleteOfflineLogConfigRequest,
+    cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void
+  ): Promise<DeleteOfflineLogConfigResponse> {
+    return this.request("DeleteOfflineLogConfig", req, cb)
   }
 
   /**
@@ -354,13 +362,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 RUM 业务系统
+   * 查询 app 监控个例聚合列表
    */
-  async CreateTawInstance(
-    req: CreateTawInstanceRequest,
-    cb?: (error: string, rep: CreateTawInstanceResponse) => void
-  ): Promise<CreateTawInstanceResponse> {
-    return this.request("CreateTawInstance", req, cb)
+  async DescribeAppSingleCaseList(
+    req: DescribeAppSingleCaseListRequest,
+    cb?: (error: string, rep: DescribeAppSingleCaseListResponse) => void
+  ): Promise<DescribeAppSingleCaseListResponse> {
+    return this.request("DescribeAppSingleCaseList", req, cb)
   }
 
   /**
@@ -409,13 +417,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增修改限流
+   * 获取DescribeDataFetchUrlInfo信息
    */
-  async ModifyProjectLimit(
-    req: ModifyProjectLimitRequest,
-    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
-  ): Promise<ModifyProjectLimitResponse> {
-    return this.request("ModifyProjectLimit", req, cb)
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 
   /**
@@ -429,13 +437,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取上传文件存储的临时密钥
+   * 查询 app 监控个例样本详情列表
    */
-  async DescribeReleaseFileSign(
-    req: DescribeReleaseFileSignRequest,
-    cb?: (error: string, rep: DescribeReleaseFileSignResponse) => void
-  ): Promise<DescribeReleaseFileSignResponse> {
-    return this.request("DescribeReleaseFileSign", req, cb)
+  async DescribeAppSingleCaseDetailList(
+    req: DescribeAppSingleCaseDetailListRequest,
+    cb?: (error: string, rep: DescribeAppSingleCaseDetailListResponse) => void
+  ): Promise<DescribeAppSingleCaseDetailListResponse> {
+    return this.request("DescribeAppSingleCaseDetailList", req, cb)
+  }
+
+  /**
+   * 获取 app 监控指标数据
+   */
+  async DescribeAppMetricsData(
+    req: DescribeAppMetricsDataRequest,
+    cb?: (error: string, rep: DescribeAppMetricsDataResponse) => void
+  ): Promise<DescribeAppMetricsDataResponse> {
+    return this.request("DescribeAppMetricsData", req, cb)
   }
 
   /**
@@ -473,6 +491,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增修改限流
+   */
+  async ModifyProjectLimit(
+    req: ModifyProjectLimitRequest,
+    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
+  ): Promise<ModifyProjectLimitResponse> {
+    return this.request("ModifyProjectLimit", req, cb)
+  }
+
+  /**
    * 获取DescribeDataStaticResource信息
    */
   async DescribeDataStaticResource(
@@ -490,6 +518,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectLimitsResponse) => void
   ): Promise<DescribeProjectLimitsResponse> {
     return this.request("DescribeProjectLimits", req, cb)
+  }
+
+  /**
+   * 用于查询 app 监控多维分析数据
+   */
+  async DescribeAppDimensionMetrics(
+    req: DescribeAppDimensionMetricsRequest,
+    cb?: (error: string, rep: DescribeAppDimensionMetricsResponse) => void
+  ): Promise<DescribeAppDimensionMetricsResponse> {
+    return this.request("DescribeAppDimensionMetrics", req, cb)
   }
 
   /**
@@ -563,13 +601,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchUrlInfo信息
+   * 创建 RUM 业务系统
    */
-  async DescribeDataFetchUrlInfo(
-    req: DescribeDataFetchUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
-  ): Promise<DescribeDataFetchUrlInfoResponse> {
-    return this.request("DescribeDataFetchUrlInfo", req, cb)
+  async CreateTawInstance(
+    req: CreateTawInstanceRequest,
+    cb?: (error: string, rep: CreateTawInstanceResponse) => void
+  ): Promise<CreateTawInstanceResponse> {
+    return this.request("CreateTawInstance", req, cb)
   }
 
   /**
@@ -657,6 +695,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取上传文件存储的临时密钥
+   */
+  async DescribeReleaseFileSign(
+    req: DescribeReleaseFileSignRequest,
+    cb?: (error: string, rep: DescribeReleaseFileSignResponse) => void
+  ): Promise<DescribeReleaseFileSignResponse> {
+    return this.request("DescribeReleaseFileSign", req, cb)
+  }
+
+  /**
    * 获取loginfo信息
    */
   async DescribeDataLogUrlInfo(
@@ -737,13 +785,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
    */
-  async DeleteOfflineLogConfig(
-    req: DeleteOfflineLogConfigRequest,
-    cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void
-  ): Promise<DeleteOfflineLogConfigResponse> {
-    return this.request("DeleteOfflineLogConfig", req, cb)
+  async DescribeDataFetchProject(
+    req: DescribeDataFetchProjectRequest,
+    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
+  ): Promise<DescribeDataFetchProjectResponse> {
+    return this.request("DescribeDataFetchProject", req, cb)
   }
 
   /**

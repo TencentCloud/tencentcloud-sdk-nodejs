@@ -282,6 +282,51 @@ export interface DescribeRumLogListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAppMetricsData请求参数结构体
+ */
+export interface DescribeAppMetricsDataRequest {
+    /**
+      * app 项目ID
+      */
+    ProjectID: number;
+    /**
+      * 查询的表名
+      */
+    From: string;
+    /**
+      * 查询指标 field
+      */
+    Fields: string;
+    /**
+      * 查询的过滤条件
+      */
+    Filter: string;
+    /**
+      * 查询简单过滤条件
+      */
+    FilterSimple?: string;
+    /**
+      * group by 条件
+      */
+    GroupBy?: Array<string>;
+    /**
+      * order by 条件
+      */
+    OrderBy?: Array<string>;
+    /**
+      * limit 参数
+      */
+    Limit?: number;
+    /**
+      * offset 参数
+      */
+    Offset?: number;
+    /**
+      * group by 参数
+      */
+    GroupByModifier?: string;
+}
+/**
  * DescribeDataPvUrlInfo返回参数结构体
  */
 export interface DescribeDataPvUrlInfoResponse {
@@ -408,6 +453,32 @@ export interface DescribeErrorResponse {
       * 时间
       */
     CreateTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAppMetricsData返回参数结构体
+ */
+export interface DescribeAppMetricsDataResponse {
+    /**
+      * 查询数据返回
+      */
+    Data: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAppSingleCaseDetailList返回参数结构体
+ */
+export interface DescribeAppSingleCaseDetailListResponse {
+    /**
+      * 查询数据返回
+      */
+    Data: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1027,6 +1098,19 @@ export interface DeleteInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAppSingleCaseList返回参数结构体
+ */
+export interface DescribeAppSingleCaseListResponse {
+    /**
+      * 查询数据返回
+      */
+    Data: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDataPerformancePage请求参数结构体
  */
 export interface DescribeDataPerformancePageRequest {
@@ -1319,13 +1403,17 @@ export interface StopInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeProjectLimits请求参数结构体
+ * DescribeDataCustomUrl返回参数结构体
  */
-export interface DescribeProjectLimitsRequest {
+export interface DescribeDataCustomUrlResponse {
     /**
-      * 项目ID
+      * 返回值
       */
-    ProjectID: number;
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateStarProject返回参数结构体
@@ -1751,17 +1839,13 @@ export interface DescribeDataLogUrlInfoRequest {
     EndTime: number;
 }
 /**
- * DescribeDataCustomUrl返回参数结构体
+ * DescribeProjectLimits请求参数结构体
  */
-export interface DescribeDataCustomUrlResponse {
+export interface DescribeProjectLimitsRequest {
     /**
-      * 返回值
+      * 项目ID
       */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ProjectID: number;
 }
 /**
  * Rum片区信息
@@ -1953,6 +2037,47 @@ export interface CreateStarProjectRequest {
       * 项目ID
       */
     ID: number;
+}
+/**
+ * DescribeAppSingleCaseList请求参数结构体
+ */
+export interface DescribeAppSingleCaseListRequest {
+    /**
+      * app 项目 ID
+      */
+    ProjectID: number;
+    /**
+      * 查询的表名
+      */
+    From: string;
+    /**
+      * 查询指标 field
+      */
+    Fields: string;
+    /**
+      * 查询的过滤条件
+      */
+    Filter: string;
+    /**
+      * 查询简单过滤条件
+      */
+    FilterSimple?: string;
+    /**
+      * group by 条件
+      */
+    GroupBy?: Array<string>;
+    /**
+      * order by 条件
+      */
+    OrderBy?: Array<string>;
+    /**
+      * limit 参数
+      */
+    Limit?: number;
+    /**
+      * offset 参数
+      */
+    Offset?: number;
 }
 /**
  * DescribeReleaseFileSign请求参数结构体
@@ -2808,6 +2933,19 @@ export interface DescribeDataEventUrlRequest {
     Env?: string;
 }
 /**
+ * DescribeAppDimensionMetrics返回参数结构体
+ */
+export interface DescribeAppDimensionMetricsResponse {
+    /**
+      * 查询数据返回
+      */
+    Data: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeOfflineLogConfigs请求参数结构体
  */
 export interface DescribeOfflineLogConfigsRequest {
@@ -2815,6 +2953,47 @@ export interface DescribeOfflineLogConfigsRequest {
       * 项目唯一上报 key
       */
     ProjectKey: string;
+}
+/**
+ * DescribeAppSingleCaseDetailList请求参数结构体
+ */
+export interface DescribeAppSingleCaseDetailListRequest {
+    /**
+      * app 项目ID
+      */
+    ProjectID: number;
+    /**
+      * 查询的表名
+      */
+    From: string;
+    /**
+      * 查询指标 field
+      */
+    Fields: string;
+    /**
+      * 查询的过滤条件
+      */
+    Filter: string;
+    /**
+      * 查询简单过滤条件
+      */
+    FilterSimple?: string;
+    /**
+      * group by 条件
+      */
+    GroupBy?: Array<string>;
+    /**
+      * order by 条件
+      */
+    OrderBy?: Array<string>;
+    /**
+      * limit 参数
+      */
+    Limit?: number;
+    /**
+      * offset 参数
+      */
+    Offset?: number;
 }
 /**
  * DescribeRumGroupLog请求参数结构体
@@ -3518,6 +3697,51 @@ export interface DescribeDataSetUrlStatisticsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeAppDimensionMetrics请求参数结构体
+ */
+export interface DescribeAppDimensionMetricsRequest {
+    /**
+      * app 项目ID
+      */
+    ProjectID: number;
+    /**
+      * 查询的表名
+      */
+    From: string;
+    /**
+      * 查询指标 fields
+      */
+    Fields: string;
+    /**
+      * 查询的过滤条件
+      */
+    Filter: string;
+    /**
+      * 查询简单过滤条件
+      */
+    FilterSimple?: string;
+    /**
+      * group by 条件
+      */
+    GroupBy?: Array<string>;
+    /**
+      * order by 条件
+      */
+    OrderBy?: Array<string>;
+    /**
+      * limit 参数
+      */
+    Limit?: number;
+    /**
+      * offset 参数
+      */
+    Offset?: number;
+    /**
+      * 业务上下文参数
+      */
+    BusinessContext?: string;
 }
 /**
  * Rum实例信息

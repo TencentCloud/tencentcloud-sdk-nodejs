@@ -31,6 +31,7 @@ import {
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
   DisableUserAutoSignResponse,
+  BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
   CreateConvertTaskApiRequest,
   CreateFlowEvidenceReportRequest,
@@ -54,8 +55,9 @@ import {
   CreateSchemeUrlRequest,
   AutoSignConfig,
   DescribeThirdPartyAuthCodeRequest,
+  UnbindEmployeeUserIdWithClientOpenIdResponse,
   CreateReleaseFlowResponse,
-  DescribeFlowInfoRequest,
+  BindEmployeeUserIdWithClientOpenIdRequest,
   DeleteSealPoliciesResponse,
   OrganizationInfo,
   DescribeUserAutoSignStatusResponse,
@@ -72,6 +74,7 @@ import {
   SuccessDeleteStaffData,
   CreateConvertTaskApiResponse,
   CreateFlowSignReviewRequest,
+  UnbindEmployeeUserIdWithClientOpenIdRequest,
   CreateSchemeUrlResponse,
   CreateUserAutoSignEnableUrlResponse,
   CreateFlowSignUrlResponse,
@@ -146,6 +149,7 @@ import {
   RelieveInfo,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
+  DescribeFlowInfoRequest,
   DescribeFlowInfoResponse,
   CcInfo,
   CreateFlowResponse,
@@ -274,6 +278,16 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
+   * 将存在绑定关系的电子签系统员工userId与客户系统员工openId进行解绑
+   */
+  async UnbindEmployeeUserIdWithClientOpenId(
+    req: UnbindEmployeeUserIdWithClientOpenIdRequest,
+    cb?: (error: string, rep: UnbindEmployeeUserIdWithClientOpenIdResponse) => void
+  ): Promise<UnbindEmployeeUserIdWithClientOpenIdResponse> {
+    return this.request("UnbindEmployeeUserIdWithClientOpenId", req, cb)
+  }
+
+  /**
      * 指定需要批量撤回的签署流程Id，获取批量撤销链接
 客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
      */
@@ -282,6 +296,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateBatchCancelFlowUrlResponse) => void
   ): Promise<CreateBatchCancelFlowUrlResponse> {
     return this.request("CreateBatchCancelFlowUrl", req, cb)
+  }
+
+  /**
+   * 将电子签系统员工userId与客户系统员工openId进行绑定
+   */
+  async BindEmployeeUserIdWithClientOpenId(
+    req: BindEmployeeUserIdWithClientOpenIdRequest,
+    cb?: (error: string, rep: BindEmployeeUserIdWithClientOpenIdResponse) => void
+  ): Promise<BindEmployeeUserIdWithClientOpenIdResponse> {
+    return this.request("BindEmployeeUserIdWithClientOpenId", req, cb)
   }
 
   /**

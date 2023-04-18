@@ -299,28 +299,48 @@ export interface AccessLogItems {
 }
 
 /**
- * DescribeWafAutoDenyRules返回参数结构体
+ * DescribePeakValue返回参数结构体
  */
-export interface DescribeWafAutoDenyRulesResponse {
+export interface DescribePeakValueResponse {
   /**
-   * 攻击次数阈值
+   * QPS峰值
    */
-  AttackThreshold: number
+  Access: number
 
   /**
-   * 攻击时间阈值
+   * 上行带宽峰值，单位B
    */
-  TimeThreshold: number
+  Up: number
 
   /**
-   * 自动封禁时间
+   * 下行带宽峰值，单位B
    */
-  DenyTimeThreshold: number
+  Down: number
 
   /**
-   * 自动封禁状态
+   * Web攻击总数
    */
-  DefenseStatus: number
+  Attack: number
+
+  /**
+   * CC攻击总数
+   */
+  Cc: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddDomainWhiteRule返回参数结构体
+ */
+export interface AddDomainWhiteRuleResponse {
+  /**
+   * 规则id
+   */
+  Id?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -485,6 +505,47 @@ export interface AccessRuleTagInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KeyValues: Array<AccessKeyValueInfo>
+}
+
+/**
+ * DescribePeakPoints请求参数结构体
+ */
+export interface DescribePeakPointsRequest {
+  /**
+   * 查询起始时间
+   */
+  FromTime: string
+
+  /**
+   * 查询终止时间
+   */
+  ToTime: string
+
+  /**
+   * 查询的域名，如果查询所有域名数据，该参数不填写
+   */
+  Domain?: string
+
+  /**
+   * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
+   */
+  Edition?: string
+
+  /**
+   * WAF实例ID，不传则不过滤
+   */
+  InstanceID?: string
+
+  /**
+      * 六个值可选：
+access-峰值qps趋势图
+botAccess- bot峰值qps趋势图
+down-下行峰值带宽趋势图
+up-上行峰值带宽趋势图
+attack-Web攻击总数趋势图
+cc-CC攻击总数趋势图
+      */
+  MetricName?: string
 }
 
 /**
@@ -1615,6 +1676,47 @@ export interface AddSpartaProtectionRequest {
 }
 
 /**
+ * PeakPoints数组项
+ */
+export interface PeakPointsItem {
+  /**
+   * 秒级别时间戳
+   */
+  Time: number
+
+  /**
+   * QPS
+   */
+  Access: number
+
+  /**
+   * 上行带宽峰值，单位B
+   */
+  Up: number
+
+  /**
+   * 下行带宽峰值，单位B
+   */
+  Down: number
+
+  /**
+   * Web攻击次数
+   */
+  Attack: number
+
+  /**
+   * CC攻击次数
+   */
+  Cc: number
+
+  /**
+      * Bot qps
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BotAccess: number
+}
+
+/**
  * PostAttackDownloadTask请求参数结构体
  */
 export interface PostAttackDownloadTaskRequest {
@@ -2098,21 +2200,6 @@ export interface DescribeDomainWhiteRulesRequest {
 }
 
 /**
- * AddDomainWhiteRule返回参数结构体
- */
-export interface AddDomainWhiteRuleResponse {
-  /**
-   * 规则id
-   */
-  Id?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyCustomRuleStatus请求参数结构体
  */
 export interface ModifyCustomRuleStatusRequest {
@@ -2135,6 +2222,21 @@ export interface ModifyCustomRuleStatusRequest {
    * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
    */
   Edition?: string
+}
+
+/**
+ * DescribePeakPoints返回参数结构体
+ */
+export interface DescribePeakPointsResponse {
+  /**
+   * 数据点
+   */
+  Points: Array<PeakPointsItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2195,6 +2297,46 @@ export interface DescribeAttackOverviewRequest {
    * WAF实例ID，不传则不过滤
    */
   InstanceID?: string
+}
+
+/**
+ * DescribePeakValue请求参数结构体
+ */
+export interface DescribePeakValueRequest {
+  /**
+   * 查询起始时间
+   */
+  FromTime: string
+
+  /**
+   * 查询结束时间
+   */
+  ToTime: string
+
+  /**
+   * 需要查询的域名，当前用户所有域名可以不传
+   */
+  Domain?: string
+
+  /**
+   * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
+   */
+  Edition?: string
+
+  /**
+   * WAF实例ID，不传则不过滤
+   */
+  InstanceID?: string
+
+  /**
+      * 五个值可选：
+access-峰值qps
+down-下行峰值带宽
+up-上行峰值带宽
+attack-Web攻击总数
+cc-CC攻击总数趋势图
+      */
+  MetricName?: string
 }
 
 /**
@@ -2665,6 +2807,36 @@ export interface AddCustomRuleRequest {
    * 添加规则的来源，默认为空
    */
   EventId?: string
+}
+
+/**
+ * DescribeWafAutoDenyRules返回参数结构体
+ */
+export interface DescribeWafAutoDenyRulesResponse {
+  /**
+   * 攻击次数阈值
+   */
+  AttackThreshold: number
+
+  /**
+   * 攻击时间阈值
+   */
+  TimeThreshold: number
+
+  /**
+   * 自动封禁时间
+   */
+  DenyTimeThreshold: number
+
+  /**
+   * 自动封禁状态
+   */
+  DefenseStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

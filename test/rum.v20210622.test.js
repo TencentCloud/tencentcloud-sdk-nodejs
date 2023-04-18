@@ -98,9 +98,9 @@ it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchProject", async function () {
+it("rum.v20210622.DeleteOfflineLogConfig", async function () {
     try {
-       const data = await client.DescribeDataFetchProject({})
+       const data = await client.DeleteOfflineLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("rum.v20210622.DescribeOfflineLogs", async function () {
     }
 })
 
-it("rum.v20210622.CreateTawInstance", async function () {
+it("rum.v20210622.DescribeAppSingleCaseList", async function () {
     try {
-       const data = await client.CreateTawInstance({})
+       const data = await client.DescribeAppSingleCaseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,9 @@ it("rum.v20210622.DescribeDataStaticUrl", async function () {
     }
 })
 
-it("rum.v20210622.ModifyProjectLimit", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.ModifyProjectLimit({})
+       const data = await client.DescribeDataFetchUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,19 @@ it("rum.v20210622.DescribeDataPvUrlStatistics", async function () {
     }
 })
 
-it("rum.v20210622.DescribeReleaseFileSign", async function () {
+it("rum.v20210622.DescribeAppSingleCaseDetailList", async function () {
     try {
-       const data = await client.DescribeReleaseFileSign({})
+       const data = await client.DescribeAppSingleCaseDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeAppMetricsData", async function () {
+    try {
+       const data = await client.DescribeAppMetricsData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +328,16 @@ it("rum.v20210622.ModifyInstance", async function () {
     }
 })
 
+it("rum.v20210622.ModifyProjectLimit", async function () {
+    try {
+       const data = await client.ModifyProjectLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataStaticResource", async function () {
     try {
        const data = await client.DescribeDataStaticResource({})
@@ -331,6 +351,16 @@ it("rum.v20210622.DescribeDataStaticResource", async function () {
 it("rum.v20210622.DescribeProjectLimits", async function () {
     try {
        const data = await client.DescribeProjectLimits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeAppDimensionMetrics", async function () {
+    try {
+       const data = await client.DescribeAppDimensionMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +438,9 @@ it("rum.v20210622.DeleteWhitelist", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+it("rum.v20210622.CreateTawInstance", async function () {
     try {
-       const data = await client.DescribeDataFetchUrlInfo({})
+       const data = await client.CreateTawInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,6 +528,16 @@ it("rum.v20210622.DescribeOfflineLogConfigs", async function () {
     }
 })
 
+it("rum.v20210622.DescribeReleaseFileSign", async function () {
+    try {
+       const data = await client.DescribeReleaseFileSign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
     try {
        const data = await client.DescribeDataLogUrlInfo({})
@@ -578,9 +618,9 @@ it("rum.v20210622.DescribeUvList", async function () {
     }
 })
 
-it("rum.v20210622.DeleteOfflineLogConfig", async function () {
+it("rum.v20210622.DescribeDataFetchProject", async function () {
     try {
-       const data = await client.DeleteOfflineLogConfig({})
+       const data = await client.DescribeDataFetchProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

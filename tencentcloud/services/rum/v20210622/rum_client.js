@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataLogUrlStatistics", req, cb);
     }
     /**
-     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
      */
-    async DescribeDataFetchProject(req, cb) {
-        return this.request("DescribeDataFetchProject", req, cb);
+    async DeleteOfflineLogConfig(req, cb) {
+        return this.request("DeleteOfflineLogConfig", req, cb);
     }
     /**
      * 删除实例，谨慎操作，不可恢复
@@ -142,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOfflineLogs", req, cb);
     }
     /**
-     * 创建 RUM 业务系统
+     * 查询 app 监控个例聚合列表
      */
-    async CreateTawInstance(req, cb) {
-        return this.request("CreateTawInstance", req, cb);
+    async DescribeAppSingleCaseList(req, cb) {
+        return this.request("DescribeAppSingleCaseList", req, cb);
     }
     /**
      * 获取项目下的PV列表
@@ -177,10 +177,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataStaticUrl", req, cb);
     }
     /**
-     * 新增修改限流
+     * 获取DescribeDataFetchUrlInfo信息
      */
-    async ModifyProjectLimit(req, cb) {
-        return this.request("ModifyProjectLimit", req, cb);
+    async DescribeDataFetchUrlInfo(req, cb) {
+        return this.request("DescribeDataFetchUrlInfo", req, cb);
     }
     /**
      * 获取DescribeDataPvUrlStatistics信息
@@ -189,10 +189,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataPvUrlStatistics", req, cb);
     }
     /**
-     * 获取上传文件存储的临时密钥
+     * 查询 app 监控个例样本详情列表
      */
-    async DescribeReleaseFileSign(req, cb) {
-        return this.request("DescribeReleaseFileSign", req, cb);
+    async DescribeAppSingleCaseDetailList(req, cb) {
+        return this.request("DescribeAppSingleCaseDetailList", req, cb);
+    }
+    /**
+     * 获取 app 监控指标数据
+     */
+    async DescribeAppMetricsData(req, cb) {
+        return this.request("DescribeAppMetricsData", req, cb);
     }
     /**
      * 接口请求域名： rum.tencentcloudapi.com 。
@@ -217,6 +223,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstance", req, cb);
     }
     /**
+     * 新增修改限流
+     */
+    async ModifyProjectLimit(req, cb) {
+        return this.request("ModifyProjectLimit", req, cb);
+    }
+    /**
      * 获取DescribeDataStaticResource信息
      */
     async DescribeDataStaticResource(req, cb) {
@@ -227,6 +239,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProjectLimits(req, cb) {
         return this.request("DescribeProjectLimits", req, cb);
+    }
+    /**
+     * 用于查询 app 监控多维分析数据
+     */
+    async DescribeAppDimensionMetrics(req, cb) {
+        return this.request("DescribeAppDimensionMetrics", req, cb);
     }
     /**
      * 获取DescribeDataCustomUrl信息
@@ -271,10 +289,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWhitelist", req, cb);
     }
     /**
-     * 获取DescribeDataFetchUrlInfo信息
+     * 创建 RUM 业务系统
      */
-    async DescribeDataFetchUrlInfo(req, cb) {
-        return this.request("DescribeDataFetchUrlInfo", req, cb);
+    async CreateTawInstance(req, cb) {
+        return this.request("CreateTawInstance", req, cb);
     }
     /**
      * 停止实例
@@ -329,6 +347,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOfflineLogConfigs", req, cb);
     }
     /**
+     * 获取上传文件存储的临时密钥
+     */
+    async DescribeReleaseFileSign(req, cb) {
+        return this.request("DescribeReleaseFileSign", req, cb);
+    }
+    /**
      * 获取loginfo信息
      */
     async DescribeDataLogUrlInfo(req, cb) {
@@ -377,10 +401,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUvList", req, cb);
     }
     /**
-     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      */
-    async DeleteOfflineLogConfig(req, cb) {
-        return this.request("DeleteOfflineLogConfig", req, cb);
+    async DescribeDataFetchProject(req, cb) {
+        return this.request("DescribeDataFetchProject", req, cb);
     }
     /**
      * 将对应 sourcemap 文件删除

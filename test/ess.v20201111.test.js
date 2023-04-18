@@ -118,9 +118,29 @@ it("ess.v20201111.VerifyPdf", async function () {
     }
 })
 
+it("ess.v20201111.UnbindEmployeeUserIdWithClientOpenId", async function () {
+    try {
+       const data = await client.UnbindEmployeeUserIdWithClientOpenId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
     try {
        const data = await client.CreateBatchCancelFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.BindEmployeeUserIdWithClientOpenId", async function () {
+    try {
+       const data = await client.BindEmployeeUserIdWithClientOpenId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

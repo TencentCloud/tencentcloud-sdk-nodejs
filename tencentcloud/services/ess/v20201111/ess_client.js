@@ -96,11 +96,23 @@ callbackinfo包含： 回调地址和签名key
         return this.request("VerifyPdf", req, cb);
     }
     /**
+     * 将存在绑定关系的电子签系统员工userId与客户系统员工openId进行解绑
+     */
+    async UnbindEmployeeUserIdWithClientOpenId(req, cb) {
+        return this.request("UnbindEmployeeUserIdWithClientOpenId", req, cb);
+    }
+    /**
      * 指定需要批量撤回的签署流程Id，获取批量撤销链接
 客户指定需要撤回的签署流程Id，最多100个，超过100不处理；接口调用成功返回批量撤回合同的链接，通过链接跳转到电子签小程序完成批量撤回
      */
     async CreateBatchCancelFlowUrl(req, cb) {
         return this.request("CreateBatchCancelFlowUrl", req, cb);
+    }
+    /**
+     * 将电子签系统员工userId与客户系统员工openId进行绑定
+     */
+    async BindEmployeeUserIdWithClientOpenId(req, cb) {
+        return this.request("BindEmployeeUserIdWithClientOpenId", req, cb);
     }
     /**
      * 本接口（CreatePreparedPersonalEsign）用于创建导入个人印章。

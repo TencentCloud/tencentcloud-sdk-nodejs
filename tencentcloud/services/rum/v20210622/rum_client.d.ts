@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateTawInstanceRequest, DescribeDataFetchProjectRequest, DescribeDataResponse, CreateTawInstanceResponse, DeleteProjectRequest, DescribeProjectLimitsResponse, DescribeTawInstancesRequest, DeleteOfflineLogConfigResponse, ResumeProjectResponse, DescribeRumLogListResponse, DescribeDataPvUrlInfoResponse, StopProjectResponse, DescribeDataFetchUrlResponse, DescribeErrorRequest, StopInstanceRequest, ModifyInstanceRequest, DescribeLogListRequest, DescribeErrorResponse, DeleteWhitelistResponse, CreateLogExportRequest, DescribePvListResponse, DescribeOfflineLogsRequest, DescribeScoresRequest, DescribeDataReportCountRequest, DeleteOfflineLogRecordRequest, DescribeReleaseFilesRequest, CreateReleaseFileRequest, DeleteOfflineLogRecordResponse, DescribeDataCustomUrlRequest, DescribeUvListResponse, CreateProjectRequest, DescribeDataStaticUrlRequest, ModifyInstanceResponse, DescribeOfflineLogRecordsResponse, DeleteStarProjectRequest, DescribeWhitelistsRequest, DescribeLogExportsResponse, DescribeUvListRequest, DescribeTawAreasResponse, DescribeDataRequest, StopProjectRequest, CreateOfflineLogConfigResponse, ModifyProjectLimitRequest, DeleteInstanceResponse, DescribeDataPerformancePageRequest, DeleteReleaseFileRequest, ResumeInstanceRequest, DescribeDataFetchUrlRequest, DescribeRumLogExportRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, StopInstanceResponse, DescribeProjectLimitsRequest, CreateStarProjectResponse, DeleteProjectResponse, DescribeOfflineLogRecordsRequest, DescribeDataPvUrlStatisticsRequest, ModifyProjectLimitResponse, DescribeRumLogExportsResponse, DescribeDataStaticProjectRequest, DescribeRumStatsLogListRequest, ResumeProjectRequest, DeleteLogExportRequest, DescribeRumGroupLogResponse, DescribeRumStatsLogListResponse, CreateWhitelistRequest, DescribeDataPvUrlStatisticsResponse, DescribeDataLogUrlInfoRequest, DescribeDataCustomUrlResponse, DescribeDataSetUrlStatisticsRequest, DescribeDataPerformanceProjectResponse, DescribeDataFetchUrlInfoResponse, ResumeInstanceResponse, DescribeDataStaticProjectResponse, CreateStarProjectRequest, DescribeReleaseFileSignRequest, DeleteWhitelistRequest, DescribeDataLogUrlInfoResponse, DeleteReleaseFileResponse, DescribeScoresResponse, DescribeOfflineLogConfigsResponse, DeleteLogExportResponse, DescribeReleaseFileSignResponse, DescribeOfflineLogsResponse, DescribeTawAreasRequest, DescribeDataLogUrlStatisticsRequest, DeleteStarProjectResponse, DescribeDataPerformancePageResponse, DeleteInstanceRequest, DescribeDataStaticResourceResponse, DescribeDataEventUrlResponse, DescribeDataWebVitalsPageRequest, DescribeDataFetchUrlInfoRequest, DescribeLogListResponse, DescribeReleaseFilesResponse, CreateOfflineLogConfigRequest, DescribeDataStaticUrlResponse, CreateWhitelistResponse, DescribeDataWebVitalsPageResponse, DescribeProjectsRequest, DescribeDataEventUrlRequest, DescribeOfflineLogConfigsRequest, DescribeRumGroupLogRequest, DeleteOfflineLogConfigRequest, DescribeWhitelistsResponse, DescribeProjectsResponse, ModifyProjectResponse, DescribeLogExportsRequest, DescribeDataReportCountResponse, DescribeDataPerformanceProjectRequest, DescribeRumLogExportResponse, DescribeRumLogExportsRequest, ModifyProjectRequest, DescribeRumLogListRequest, DescribeDataStaticResourceRequest, DescribeTawInstancesResponse, DescribePvListRequest, DescribeDataPvUrlInfoRequest, CreateReleaseFileResponse, CreateLogExportResponse, DescribeDataFetchProjectResponse, DescribeDataSetUrlStatisticsResponse } from "./rum_models";
+import { CreateTawInstanceRequest, DescribeDataFetchProjectRequest, DescribeDataResponse, CreateTawInstanceResponse, DeleteProjectRequest, DescribeProjectLimitsResponse, DescribeTawInstancesRequest, DeleteOfflineLogConfigResponse, ResumeProjectResponse, DescribeRumLogListResponse, DescribeAppMetricsDataRequest, DescribeDataPvUrlInfoResponse, StopProjectResponse, DescribeDataFetchUrlResponse, DescribeErrorRequest, StopInstanceRequest, ModifyInstanceRequest, DescribeLogListRequest, DescribeErrorResponse, DescribeAppMetricsDataResponse, DescribeAppSingleCaseDetailListResponse, DeleteWhitelistResponse, CreateLogExportRequest, DescribePvListResponse, DescribeOfflineLogsRequest, DescribeScoresRequest, DescribeDataReportCountRequest, DeleteOfflineLogRecordRequest, DescribeReleaseFilesRequest, CreateReleaseFileRequest, DeleteOfflineLogRecordResponse, DescribeDataCustomUrlRequest, DescribeUvListResponse, CreateProjectRequest, DescribeDataStaticUrlRequest, ModifyInstanceResponse, DescribeOfflineLogRecordsResponse, DeleteStarProjectRequest, DescribeWhitelistsRequest, DescribeLogExportsResponse, DescribeUvListRequest, DescribeTawAreasResponse, DescribeDataRequest, StopProjectRequest, CreateOfflineLogConfigResponse, ModifyProjectLimitRequest, DeleteInstanceResponse, DescribeAppSingleCaseListResponse, DescribeDataPerformancePageRequest, DeleteReleaseFileRequest, ResumeInstanceRequest, DescribeDataFetchUrlRequest, DescribeRumLogExportRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, StopInstanceResponse, DescribeDataCustomUrlResponse, CreateStarProjectResponse, DeleteProjectResponse, DescribeOfflineLogRecordsRequest, DescribeDataPvUrlStatisticsRequest, ModifyProjectLimitResponse, DescribeRumLogExportsResponse, DescribeDataStaticProjectRequest, DescribeRumStatsLogListRequest, ResumeProjectRequest, DeleteLogExportRequest, DescribeRumGroupLogResponse, DescribeRumStatsLogListResponse, CreateWhitelistRequest, DescribeDataPvUrlStatisticsResponse, DescribeDataLogUrlInfoRequest, DescribeProjectLimitsRequest, DescribeDataSetUrlStatisticsRequest, DescribeDataPerformanceProjectResponse, DescribeDataFetchUrlInfoResponse, ResumeInstanceResponse, DescribeDataStaticProjectResponse, CreateStarProjectRequest, DescribeAppSingleCaseListRequest, DescribeReleaseFileSignRequest, DeleteWhitelistRequest, DescribeDataLogUrlInfoResponse, DeleteReleaseFileResponse, DescribeScoresResponse, DescribeOfflineLogConfigsResponse, DeleteLogExportResponse, DescribeReleaseFileSignResponse, DescribeOfflineLogsResponse, DescribeTawAreasRequest, DescribeDataLogUrlStatisticsRequest, DeleteStarProjectResponse, DescribeDataPerformancePageResponse, DeleteInstanceRequest, DescribeDataStaticResourceResponse, DescribeDataEventUrlResponse, DescribeDataWebVitalsPageRequest, DescribeDataFetchUrlInfoRequest, DescribeLogListResponse, DescribeReleaseFilesResponse, CreateOfflineLogConfigRequest, DescribeDataStaticUrlResponse, CreateWhitelistResponse, DescribeDataWebVitalsPageResponse, DescribeProjectsRequest, DescribeDataEventUrlRequest, DescribeAppDimensionMetricsResponse, DescribeOfflineLogConfigsRequest, DescribeAppSingleCaseDetailListRequest, DescribeRumGroupLogRequest, DeleteOfflineLogConfigRequest, DescribeWhitelistsResponse, DescribeProjectsResponse, ModifyProjectResponse, DescribeLogExportsRequest, DescribeDataReportCountResponse, DescribeDataPerformanceProjectRequest, DescribeRumLogExportResponse, DescribeRumLogExportsRequest, ModifyProjectRequest, DescribeRumLogListRequest, DescribeDataStaticResourceRequest, DescribeTawInstancesResponse, DescribePvListRequest, DescribeDataPvUrlInfoRequest, CreateReleaseFileResponse, CreateLogExportResponse, DescribeDataFetchProjectResponse, DescribeDataSetUrlStatisticsResponse, DescribeAppDimensionMetricsRequest } from "./rum_models";
 /**
  * rum client
  * @class
@@ -40,9 +40,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataLogUrlStatistics(req: DescribeDataLogUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataLogUrlStatisticsResponse) => void): Promise<DescribeDataLogUrlStatisticsResponse>;
     /**
-     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
      */
-    DescribeDataFetchProject(req: DescribeDataFetchProjectRequest, cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void): Promise<DescribeDataFetchProjectResponse>;
+    DeleteOfflineLogConfig(req: DeleteOfflineLogConfigRequest, cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void): Promise<DeleteOfflineLogConfigResponse>;
     /**
      * 删除实例，谨慎操作，不可恢复
      */
@@ -84,9 +84,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeOfflineLogs(req: DescribeOfflineLogsRequest, cb?: (error: string, rep: DescribeOfflineLogsResponse) => void): Promise<DescribeOfflineLogsResponse>;
     /**
-     * 创建 RUM 业务系统
+     * 查询 app 监控个例聚合列表
      */
-    CreateTawInstance(req: CreateTawInstanceRequest, cb?: (error: string, rep: CreateTawInstanceResponse) => void): Promise<CreateTawInstanceResponse>;
+    DescribeAppSingleCaseList(req: DescribeAppSingleCaseListRequest, cb?: (error: string, rep: DescribeAppSingleCaseListResponse) => void): Promise<DescribeAppSingleCaseListResponse>;
     /**
      * 获取项目下的PV列表
      */
@@ -109,17 +109,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataStaticUrl(req: DescribeDataStaticUrlRequest, cb?: (error: string, rep: DescribeDataStaticUrlResponse) => void): Promise<DescribeDataStaticUrlResponse>;
     /**
-     * 新增修改限流
+     * 获取DescribeDataFetchUrlInfo信息
      */
-    ModifyProjectLimit(req: ModifyProjectLimitRequest, cb?: (error: string, rep: ModifyProjectLimitResponse) => void): Promise<ModifyProjectLimitResponse>;
+    DescribeDataFetchUrlInfo(req: DescribeDataFetchUrlInfoRequest, cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void): Promise<DescribeDataFetchUrlInfoResponse>;
     /**
      * 获取DescribeDataPvUrlStatistics信息
      */
     DescribeDataPvUrlStatistics(req: DescribeDataPvUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void): Promise<DescribeDataPvUrlStatisticsResponse>;
     /**
-     * 获取上传文件存储的临时密钥
+     * 查询 app 监控个例样本详情列表
      */
-    DescribeReleaseFileSign(req: DescribeReleaseFileSignRequest, cb?: (error: string, rep: DescribeReleaseFileSignResponse) => void): Promise<DescribeReleaseFileSignResponse>;
+    DescribeAppSingleCaseDetailList(req: DescribeAppSingleCaseDetailListRequest, cb?: (error: string, rep: DescribeAppSingleCaseDetailListResponse) => void): Promise<DescribeAppSingleCaseDetailListResponse>;
+    /**
+     * 获取 app 监控指标数据
+     */
+    DescribeAppMetricsData(req: DescribeAppMetricsDataRequest, cb?: (error: string, rep: DescribeAppMetricsDataResponse) => void): Promise<DescribeAppMetricsDataResponse>;
     /**
      * 接口请求域名： rum.tencentcloudapi.com 。
 
@@ -137,6 +141,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
     /**
+     * 新增修改限流
+     */
+    ModifyProjectLimit(req: ModifyProjectLimitRequest, cb?: (error: string, rep: ModifyProjectLimitResponse) => void): Promise<ModifyProjectLimitResponse>;
+    /**
      * 获取DescribeDataStaticResource信息
      */
     DescribeDataStaticResource(req: DescribeDataStaticResourceRequest, cb?: (error: string, rep: DescribeDataStaticResourceResponse) => void): Promise<DescribeDataStaticResourceResponse>;
@@ -144,6 +152,10 @@ export declare class Client extends AbstractClient {
      * 获取应用上报抽样信息
      */
     DescribeProjectLimits(req: DescribeProjectLimitsRequest, cb?: (error: string, rep: DescribeProjectLimitsResponse) => void): Promise<DescribeProjectLimitsResponse>;
+    /**
+     * 用于查询 app 监控多维分析数据
+     */
+    DescribeAppDimensionMetrics(req: DescribeAppDimensionMetricsRequest, cb?: (error: string, rep: DescribeAppDimensionMetricsResponse) => void): Promise<DescribeAppDimensionMetricsResponse>;
     /**
      * 获取DescribeDataCustomUrl信息
      */
@@ -173,9 +185,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteWhitelist(req: DeleteWhitelistRequest, cb?: (error: string, rep: DeleteWhitelistResponse) => void): Promise<DeleteWhitelistResponse>;
     /**
-     * 获取DescribeDataFetchUrlInfo信息
+     * 创建 RUM 业务系统
      */
-    DescribeDataFetchUrlInfo(req: DescribeDataFetchUrlInfoRequest, cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void): Promise<DescribeDataFetchUrlInfoResponse>;
+    CreateTawInstance(req: CreateTawInstanceRequest, cb?: (error: string, rep: CreateTawInstanceResponse) => void): Promise<CreateTawInstanceResponse>;
     /**
      * 停止实例
      */
@@ -213,6 +225,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeOfflineLogConfigs(req: DescribeOfflineLogConfigsRequest, cb?: (error: string, rep: DescribeOfflineLogConfigsResponse) => void): Promise<DescribeOfflineLogConfigsResponse>;
     /**
+     * 获取上传文件存储的临时密钥
+     */
+    DescribeReleaseFileSign(req: DescribeReleaseFileSignRequest, cb?: (error: string, rep: DescribeReleaseFileSignResponse) => void): Promise<DescribeReleaseFileSignResponse>;
+    /**
      * 获取loginfo信息
      */
     DescribeDataLogUrlInfo(req: DescribeDataLogUrlInfoRequest, cb?: (error: string, rep: DescribeDataLogUrlInfoResponse) => void): Promise<DescribeDataLogUrlInfoResponse>;
@@ -245,9 +261,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUvList(req: DescribeUvListRequest, cb?: (error: string, rep: DescribeUvListResponse) => void): Promise<DescribeUvListResponse>;
     /**
-     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      */
-    DeleteOfflineLogConfig(req: DeleteOfflineLogConfigRequest, cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void): Promise<DeleteOfflineLogConfigResponse>;
+    DescribeDataFetchProject(req: DescribeDataFetchProjectRequest, cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void): Promise<DescribeDataFetchProjectResponse>;
     /**
      * 将对应 sourcemap 文件删除
      */

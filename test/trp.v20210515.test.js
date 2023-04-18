@@ -48,6 +48,16 @@ it("trp.v20210515.ModifyTraceCodeUnlink", async function () {
     }
 })
 
+it("trp.v20210515.AuthorizedTransfer", async function () {
+    try {
+       const data = await client.AuthorizedTransfer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeCustomRuleById", async function () {
     try {
        const data = await client.DescribeCustomRuleById({})
@@ -141,6 +151,16 @@ it("trp.v20210515.DescribeProducts", async function () {
 it("trp.v20210515.DescribeCorpQuotas", async function () {
     try {
        const data = await client.DescribeCorpQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.ReportBatchCallbackStatus", async function () {
+    try {
+       const data = await client.ReportBatchCallbackStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +368,16 @@ it("trp.v20210515.CreateCodeBatch", async function () {
     }
 })
 
+it("trp.v20210515.EffectFeedback", async function () {
+    try {
+       const data = await client.EffectFeedback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DeleteCodeBatch", async function () {
     try {
        const data = await client.DeleteCodeBatch({})
@@ -378,9 +408,9 @@ it("trp.v20210515.CreateTraceData", async function () {
     }
 })
 
-it("trp.v20210515.CreateMerchant", async function () {
+it("trp.v20210515.CreateCodePack", async function () {
     try {
-       const data = await client.CreateMerchant({})
+       const data = await client.CreateCodePack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +478,9 @@ it("trp.v20210515.DescribeMerchants", async function () {
     }
 })
 
-it("trp.v20210515.CreateCodePack", async function () {
+it("trp.v20210515.CreateMerchant", async function () {
     try {
-       const data = await client.CreateCodePack({})
+       const data = await client.CreateMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -322,6 +322,21 @@ export interface DisableUserAutoSignResponse {
 }
 
 /**
+ * BindEmployeeUserIdWithClientOpenId返回参数结构体
+ */
+export interface BindEmployeeUserIdWithClientOpenIdResponse {
+  /**
+   * 绑定是否成功，1表示成功，0表示失败
+   */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationEmployees请求参数结构体
  */
 export interface CreateIntegrationEmployeesRequest {
@@ -1111,6 +1126,21 @@ export interface DescribeThirdPartyAuthCodeRequest {
 }
 
 /**
+ * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
+ */
+export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+  /**
+   * 解绑是否成功，1表示成功，0表示失败
+   */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateReleaseFlow返回参数结构体
  */
 export interface CreateReleaseFlowResponse {
@@ -1127,23 +1157,23 @@ export interface CreateReleaseFlowResponse {
 }
 
 /**
- * DescribeFlowInfo请求参数结构体
+ * BindEmployeeUserIdWithClientOpenId请求参数结构体
  */
-export interface DescribeFlowInfoRequest {
+export interface BindEmployeeUserIdWithClientOpenIdRequest {
   /**
-   * 需要查询的流程ID列表，限制最大100个
+   * OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId
    */
-  FlowIds: Array<string>
+  Operator: UserInfo
 
   /**
-   * 调用方用户信息
+   * 电子签系统员工UserId
    */
-  Operator?: UserInfo
+  UserId: string
 
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 客户系统OpenId
    */
-  Agent?: Agent
+  OpenId: string
 }
 
 /**
@@ -1579,6 +1609,26 @@ REJECT: 拒绝
    * 应用相关信息
    */
   Agent?: Agent
+}
+
+/**
+ * UnbindEmployeeUserIdWithClientOpenId请求参数结构体
+ */
+export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
+  /**
+   * OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId
+   */
+  Operator: UserInfo
+
+  /**
+   * 电子签系统员工UserId
+   */
+  UserId: string
+
+  /**
+   * 客户系统OpenId
+   */
+  OpenId: string
 }
 
 /**
@@ -4088,6 +4138,26 @@ export interface CreateMultiFlowSignQRCodeRequest {
    * 限制二维码用户条件（已弃用）
    */
   ApproverRestrictions?: ApproverRestriction
+}
+
+/**
+ * DescribeFlowInfo请求参数结构体
+ */
+export interface DescribeFlowInfoRequest {
+  /**
+   * 需要查询的流程ID列表，限制最大100个
+   */
+  FlowIds: Array<string>
+
+  /**
+   * 调用方用户信息
+   */
+  Operator?: UserInfo
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**

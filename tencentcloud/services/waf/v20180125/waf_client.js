@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessExports", req, cb);
     }
     /**
-     * 开启或禁用访问控制（自定义策略）
+     * 查询业务和攻击概要趋势
      */
-    async ModifyCustomRuleStatus(req, cb) {
-        return this.request("ModifyCustomRuleStatus", req, cb);
+    async DescribePeakPoints(req, cb) {
+        return this.request("DescribePeakPoints", req, cb);
     }
     /**
      * 本接口用于删除访问日志导出
@@ -186,10 +186,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PostAttackDownloadTask", req, cb);
     }
     /**
-     * 切换域名的规则开关
+     * 开启或禁用访问控制（自定义策略）
      */
-    async SwitchDomainRules(req, cb) {
-        return this.request("SwitchDomainRules", req, cb);
+    async ModifyCustomRuleStatus(req, cb) {
+        return this.request("ModifyCustomRuleStatus", req, cb);
+    }
+    /**
+     * 获取业务和攻击概览峰值
+     */
+    async DescribePeakValue(req, cb) {
+        return this.request("DescribePeakValue", req, cb);
     }
     /**
      * 配置WAF威胁情报封禁模块详情
@@ -286,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddDomainWhiteRule(req, cb) {
         return this.request("AddDomainWhiteRule", req, cb);
+    }
+    /**
+     * 切换域名的规则开关
+     */
+    async SwitchDomainRules(req, cb) {
+        return this.request("SwitchDomainRules", req, cb);
     }
     /**
      * 获取防护配置中的精准白名单策略列表

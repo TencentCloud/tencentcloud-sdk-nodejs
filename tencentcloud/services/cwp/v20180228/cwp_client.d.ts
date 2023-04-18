@@ -52,7 +52,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeVulList(req: DescribeVulListRequest, cb?: (error: string, rep: DescribeVulListResponse) => void): Promise<DescribeVulListResponse>;
     /**
-     * 导出ES查询文档列表
+     * 旧版日志下载接口下线
+
+导出ES查询文档列表
      */
     DescribeSearchExportList(req: DescribeSearchExportListRequest, cb?: (error: string, rep: DescribeSearchExportListResponse) => void): Promise<DescribeSearchExportListResponse>;
     /**

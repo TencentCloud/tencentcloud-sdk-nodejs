@@ -38,13 +38,13 @@ import {
   DescribeTraceCodeByIdResponse,
   CustomRule,
   DescribeProductsResponse,
-  CreateCodeBatchResponse,
+  CreateTraceChainResponse,
   DescribeTraceDataListResponse,
   DescribeTraceCodesRequest,
   CreateTraceCodesAsyncRequest,
   ModifyTraceDataResponse,
-  DeleteProductRequest,
-  CreateTraceChainResponse,
+  AuthorizedTransferResponse,
+  CreateCodeBatchResponse,
   CorpQuota,
   CreateCustomRuleRequest,
   DescribeCodePackStatusRequest,
@@ -57,6 +57,7 @@ import {
   DescribeCodePackStatusResponse,
   Job,
   TraceData,
+  EffectFeedbackResponse,
   PackSpec,
   ModifyCustomRuleResponse,
   ModifyMerchantResponse,
@@ -65,14 +66,18 @@ import {
   CreateTraceDataRequest,
   Ext,
   DescribeCorpQuotasRequest,
+  AuthorizedTransferRequest,
+  ReportBatchCallbackStatusRequest,
   CreateProductRequest,
   CreateCustomPackRequest,
   CreateCodePackRequest,
   CreateCodeBatchRequest,
   TraceItem,
   DescribeCustomRuleByIdRequest,
+  ReportBatchCallbackStatusResponse,
   ChainData,
   PhaseData,
+  DeleteProductRequest,
   ModifyTraceDataRanksRequest,
   ModifyCustomRuleStatusResponse,
   CreateCustomPackResponse,
@@ -80,10 +85,12 @@ import {
   DescribeTmpTokenResponse,
   DescribeCodePackUrlRequest,
   DeleteProductResponse,
+  OutputAuthorizedTransfer,
   DeleteTraceDataResponse,
   ModifyCustomRuleStatusRequest,
   CreateCodePackResponse,
   DescribeMerchantByIdResponse,
+  EffectFeedbackRequest,
   DescribeTraceDataByIdResponse,
   CodeItem,
   CreateTraceDataResponse,
@@ -106,6 +113,7 @@ import {
   DescribeScanLogsRequest,
   ModifyTraceCodeUnlinkResponse,
   DescribeTraceDataByIdRequest,
+  InputEncryptData,
   Merchant,
   Product,
   DescribeTmpTokenRequest,
@@ -123,11 +131,11 @@ import {
   DescribeCodePacksRequest,
   DescribeJobFileUrlResponse,
   DescribeTraceCodeByIdRequest,
-  DeleteMerchantRequest,
+  ModifyCodeBatchResponse,
   ScanStat,
   ModifyTraceCodeResponse,
   DescribeCodePackUrlResponse,
-  ModifyCodeBatchResponse,
+  DeleteMerchantRequest,
 } from "./trp_models"
 
 /**
@@ -168,6 +176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTraceCodeUnlinkResponse) => void
   ): Promise<ModifyTraceCodeUnlinkResponse> {
     return this.request("ModifyTraceCodeUnlink", req, cb)
+  }
+
+  /**
+   * 接收客户侧的用户已授权的号码。
+   */
+  async AuthorizedTransfer(
+    req: AuthorizedTransferRequest,
+    cb?: (error: string, rep: AuthorizedTransferResponse) => void
+  ): Promise<AuthorizedTransferResponse> {
+    return this.request("AuthorizedTransfer", req, cb)
   }
 
   /**
@@ -268,6 +286,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCorpQuotasResponse) => void
   ): Promise<DescribeCorpQuotasResponse> {
     return this.request("DescribeCorpQuotas", req, cb)
+  }
+
+  /**
+   * 接收离线筛选包回执，用于效果统计和分析。
+   */
+  async ReportBatchCallbackStatus(
+    req: ReportBatchCallbackStatusRequest,
+    cb?: (error: string, rep: ReportBatchCallbackStatusResponse) => void
+  ): Promise<ReportBatchCallbackStatusResponse> {
+    return this.request("ReportBatchCallbackStatus", req, cb)
   }
 
   /**
@@ -472,6 +500,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 接收客户反馈的各环节数据
+   */
+  async EffectFeedback(
+    req: EffectFeedbackRequest,
+    cb?: (error: string, rep: EffectFeedbackResponse) => void
+  ): Promise<EffectFeedbackResponse> {
+    return this.request("EffectFeedback", req, cb)
+  }
+
+  /**
    * 删除批次
    */
   async DeleteCodeBatch(
@@ -502,13 +540,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建商户
+   * 生成普通码包
    */
-  async CreateMerchant(
-    req: CreateMerchantRequest,
-    cb?: (error: string, rep: CreateMerchantResponse) => void
-  ): Promise<CreateMerchantResponse> {
-    return this.request("CreateMerchant", req, cb)
+  async CreateCodePack(
+    req: CreateCodePackRequest,
+    cb?: (error: string, rep: CreateCodePackResponse) => void
+  ): Promise<CreateCodePackResponse> {
+    return this.request("CreateCodePack", req, cb)
   }
 
   /**
@@ -572,13 +610,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成普通码包
+   * 新建商户
    */
-  async CreateCodePack(
-    req: CreateCodePackRequest,
-    cb?: (error: string, rep: CreateCodePackResponse) => void
-  ): Promise<CreateCodePackResponse> {
-    return this.request("CreateCodePack", req, cb)
+  async CreateMerchant(
+    req: CreateMerchantRequest,
+    cb?: (error: string, rep: CreateMerchantResponse) => void
+  ): Promise<CreateMerchantResponse> {
+    return this.request("CreateMerchant", req, cb)
   }
 
   /**

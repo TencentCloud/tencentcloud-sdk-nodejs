@@ -30,12 +30,14 @@ import {
   DescribeWafAutoDenyStatusRequest,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
-  DescribeWafAutoDenyRulesResponse,
+  DescribePeakValueResponse,
+  AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
   LoadBalancerPackageNew,
   DescribeInstancesResponse,
   ModifyDomainWhiteRuleRequest,
   AccessRuleTagInfo,
+  DescribePeakPointsRequest,
   DescribeAccessIndexRequest,
   DomainInfo,
   AccessLogItem,
@@ -69,6 +71,7 @@ import {
   CreateHostRequest,
   ModifyAreaBanStatusRequest,
   AddSpartaProtectionRequest,
+  PeakPointsItem,
   PostAttackDownloadTaskRequest,
   DescribePolicyStatusRequest,
   DescribeAccessFastAnalysisRequest,
@@ -90,11 +93,12 @@ import {
   PortItem,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
-  AddDomainWhiteRuleResponse,
   ModifyCustomRuleStatusRequest,
+  DescribePeakPointsResponse,
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
   DescribeAttackOverviewRequest,
+  DescribePeakValueRequest,
   BotQPS,
   ModifyWafAutoDenyRulesResponse,
   SearchAttackLogResponse,
@@ -109,6 +113,7 @@ import {
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
   AddCustomRuleRequest,
+  DescribeWafAutoDenyRulesResponse,
   FraudPkg,
   ModifyAreaBanStatusResponse,
   ModifyDomainWhiteRuleResponse,
@@ -171,13 +176,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或禁用访问控制（自定义策略）
+   * 查询业务和攻击概要趋势
    */
-  async ModifyCustomRuleStatus(
-    req: ModifyCustomRuleStatusRequest,
-    cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void
-  ): Promise<ModifyCustomRuleStatusResponse> {
-    return this.request("ModifyCustomRuleStatus", req, cb)
+  async DescribePeakPoints(
+    req: DescribePeakPointsRequest,
+    cb?: (error: string, rep: DescribePeakPointsResponse) => void
+  ): Promise<DescribePeakPointsResponse> {
+    return this.request("DescribePeakPoints", req, cb)
   }
 
   /**
@@ -423,13 +428,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换域名的规则开关
+   * 开启或禁用访问控制（自定义策略）
    */
-  async SwitchDomainRules(
-    req: SwitchDomainRulesRequest,
-    cb?: (error: string, rep: SwitchDomainRulesResponse) => void
-  ): Promise<SwitchDomainRulesResponse> {
-    return this.request("SwitchDomainRules", req, cb)
+  async ModifyCustomRuleStatus(
+    req: ModifyCustomRuleStatusRequest,
+    cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void
+  ): Promise<ModifyCustomRuleStatusResponse> {
+    return this.request("ModifyCustomRuleStatus", req, cb)
+  }
+
+  /**
+   * 获取业务和攻击概览峰值
+   */
+  async DescribePeakValue(
+    req: DescribePeakValueRequest,
+    cb?: (error: string, rep: DescribePeakValueResponse) => void
+  ): Promise<DescribePeakValueResponse> {
+    return this.request("DescribePeakValue", req, cb)
   }
 
   /**
@@ -590,6 +605,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDomainWhiteRuleResponse) => void
   ): Promise<AddDomainWhiteRuleResponse> {
     return this.request("AddDomainWhiteRule", req, cb)
+  }
+
+  /**
+   * 切换域名的规则开关
+   */
+  async SwitchDomainRules(
+    req: SwitchDomainRulesRequest,
+    cb?: (error: string, rep: SwitchDomainRulesResponse) => void
+  ): Promise<SwitchDomainRulesResponse> {
+    return this.request("SwitchDomainRules", req, cb)
   }
 
   /**

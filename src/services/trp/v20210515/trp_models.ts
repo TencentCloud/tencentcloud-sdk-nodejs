@@ -846,13 +846,13 @@ export interface DescribeProductsResponse {
 }
 
 /**
- * CreateCodeBatch返回参数结构体
+ * CreateTraceChain返回参数结构体
  */
-export interface CreateCodeBatchResponse {
+export interface CreateTraceChainResponse {
   /**
-   * 批次ID
+   * 溯源ID
    */
-  BatchId: string
+  TraceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -946,28 +946,28 @@ export interface ModifyTraceDataResponse {
 }
 
 /**
- * DeleteProduct请求参数结构体
+ * AuthorizedTransfer返回参数结构体
  */
-export interface DeleteProductRequest {
+export interface AuthorizedTransferResponse {
   /**
-   * 商品ID
+   * 业务出参。
    */
-  ProductId: string
+  Data?: OutputAuthorizedTransfer
 
   /**
-   * 企业ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CorpId?: number
+  RequestId?: string
 }
 
 /**
- * CreateTraceChain返回参数结构体
+ * CreateCodeBatch返回参数结构体
  */
-export interface CreateTraceChainResponse {
+export interface CreateCodeBatchResponse {
   /**
-   * 溯源ID
+   * 批次ID
    */
-  TraceId: string
+  BatchId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1375,6 +1375,21 @@ export interface TraceData {
 }
 
 /**
+ * EffectFeedback返回参数结构体
+ */
+export interface EffectFeedbackResponse {
+  /**
+   * 业务出参。
+   */
+  Data?: OutputAuthorizedTransfer
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 层级码配置
  */
 export interface PackSpec {
@@ -1558,6 +1573,26 @@ export interface DescribeCorpQuotasRequest {
    * 搜索企业ID
    */
   Keyword?: string
+}
+
+/**
+ * AuthorizedTransfer请求参数结构体
+ */
+export interface AuthorizedTransferRequest {
+  /**
+   * 业务加密入参。
+   */
+  BusinessSecurityData: InputEncryptData
+}
+
+/**
+ * ReportBatchCallbackStatus请求参数结构体
+ */
+export interface ReportBatchCallbackStatusRequest {
+  /**
+   * 业务加密入参。
+   */
+  BusinessSecurityData: InputEncryptData
 }
 
 /**
@@ -1843,6 +1878,21 @@ export interface DescribeCustomRuleByIdRequest {
 }
 
 /**
+ * ReportBatchCallbackStatus返回参数结构体
+ */
+export interface ReportBatchCallbackStatusResponse {
+  /**
+   * 业务出参。
+   */
+  Data?: OutputAuthorizedTransfer
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 上链数据
  */
 export interface ChainData {
@@ -1898,6 +1948,21 @@ export interface PhaseData {
    * 小程序名称AppName
    */
   AppName?: string
+}
+
+/**
+ * DeleteProduct请求参数结构体
+ */
+export interface DeleteProductRequest {
+  /**
+   * 商品ID
+   */
+  ProductId: string
+
+  /**
+   * 企业ID
+   */
+  CorpId?: number
 }
 
 /**
@@ -2039,6 +2104,29 @@ export interface DeleteProductResponse {
 }
 
 /**
+ * 业务出参
+ */
+export interface OutputAuthorizedTransfer {
+  /**
+      * 推送状态，0表示成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Code?: number
+
+  /**
+      * 错误码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message?: string
+
+  /**
+      * 错误信息描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+}
+
+/**
  * DeleteTraceData返回参数结构体
  */
 export interface DeleteTraceDataResponse {
@@ -2103,6 +2191,16 @@ export interface DescribeMerchantByIdResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EffectFeedback请求参数结构体
+ */
+export interface EffectFeedbackRequest {
+  /**
+   * 业务加密入参。
+   */
+  BusinessSecurityData: InputEncryptData
 }
 
 /**
@@ -2603,6 +2701,39 @@ export interface DescribeTraceDataByIdRequest {
 }
 
 /**
+ * 业务加密入参
+ */
+export interface InputEncryptData {
+  /**
+      * 加密方式，0：AES加密；
+
+      */
+  EncryptMethod: number
+
+  /**
+   * 加密算法中的块处理模式，1：CBC模式； 目前只支持CBC模式
+   */
+  EncryptMode: number
+
+  /**
+      * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：
+PKCS7Padding。
+      */
+  PaddingType: number
+
+  /**
+   * 加密数据，将AuthorizedData结构体数组（数组最大长度不超过20）序列化成JSON字符串，对得到的字符串加密并填充到该字段。
+   */
+  EncryptData: string
+
+  /**
+      * 用户是否授权，本接口取值：1，已授权。
+
+      */
+  IsAuthorized?: number
+}
+
+/**
  * 商户信息
  */
 export interface Merchant {
@@ -3075,18 +3206,18 @@ export interface DescribeTraceCodeByIdRequest {
 }
 
 /**
- * DeleteMerchant请求参数结构体
+ * ModifyCodeBatch返回参数结构体
  */
-export interface DeleteMerchantRequest {
+export interface ModifyCodeBatchResponse {
   /**
-   * 商户标识码
+   * 批次ID
    */
-  MerchantId: string
+  BatchId?: string
 
   /**
-   * 企业ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CorpId?: number
+  RequestId?: string
 }
 
 /**
@@ -3188,16 +3319,16 @@ export interface DescribeCodePackUrlResponse {
 }
 
 /**
- * ModifyCodeBatch返回参数结构体
+ * DeleteMerchant请求参数结构体
  */
-export interface ModifyCodeBatchResponse {
+export interface DeleteMerchantRequest {
   /**
-   * 批次ID
+   * 商户标识码
    */
-  BatchId?: string
+  MerchantId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 企业ID
    */
-  RequestId?: string
+  CorpId?: number
 }

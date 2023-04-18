@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTraceCodeUnlink", req, cb);
     }
     /**
+     * 接收客户侧的用户已授权的号码。
+     */
+    async AuthorizedTransfer(req, cb) {
+        return this.request("AuthorizedTransfer", req, cb);
+    }
+    /**
      * 查自定义码规则
      */
     async DescribeCustomRuleById(req, cb) {
@@ -105,6 +111,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCorpQuotas(req, cb) {
         return this.request("DescribeCorpQuotas", req, cb);
+    }
+    /**
+     * 接收离线筛选包回执，用于效果统计和分析。
+     */
+    async ReportBatchCallbackStatus(req, cb) {
+        return this.request("ReportBatchCallbackStatus", req, cb);
     }
     /**
      * 修改自定义码规则
@@ -228,6 +240,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCodeBatch", req, cb);
     }
     /**
+     * 接收客户反馈的各环节数据
+     */
+    async EffectFeedback(req, cb) {
+        return this.request("EffectFeedback", req, cb);
+    }
+    /**
      * 删除批次
      */
     async DeleteCodeBatch(req, cb) {
@@ -246,10 +264,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTraceData", req, cb);
     }
     /**
-     * 新建商户
+     * 生成普通码包
      */
-    async CreateMerchant(req, cb) {
-        return this.request("CreateMerchant", req, cb);
+    async CreateCodePack(req, cb) {
+        return this.request("CreateCodePack", req, cb);
     }
     /**
      * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
@@ -288,10 +306,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMerchants", req, cb);
     }
     /**
-     * 生成普通码包
+     * 新建商户
      */
-    async CreateCodePack(req, cb) {
-        return this.request("CreateCodePack", req, cb);
+    async CreateMerchant(req, cb) {
+        return this.request("CreateMerchant", req, cb);
     }
     /**
      * 获取异步任务的输出地址

@@ -28,9 +28,9 @@ it("waf.v20180125.DescribeAccessExports", async function () {
     }
 })
 
-it("waf.v20180125.ModifyCustomRuleStatus", async function () {
+it("waf.v20180125.DescribePeakPoints", async function () {
     try {
-       const data = await client.ModifyCustomRuleStatus({})
+       const data = await client.DescribePeakPoints({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,19 @@ it("waf.v20180125.PostAttackDownloadTask", async function () {
     }
 })
 
-it("waf.v20180125.SwitchDomainRules", async function () {
+it("waf.v20180125.ModifyCustomRuleStatus", async function () {
     try {
-       const data = await client.SwitchDomainRules({})
+       const data = await client.ModifyCustomRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribePeakValue", async function () {
+    try {
+       const data = await client.DescribePeakValue({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +451,16 @@ it("waf.v20180125.DescribeIpHitItems", async function () {
 it("waf.v20180125.AddDomainWhiteRule", async function () {
     try {
        const data = await client.AddDomainWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.SwitchDomainRules", async function () {
+    try {
+       const data = await client.SwitchDomainRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

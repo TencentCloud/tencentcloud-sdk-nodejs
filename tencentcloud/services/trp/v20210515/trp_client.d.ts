@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeScanLogsResponse, DescribeProductsRequest, CreateCorporationOrderResponse, ModifyProductResponse, ModifyProductRequest, ModifyCustomRuleRequest, DeleteCodeBatchRequest, DescribeMerchantsRequest, ModifyTraceCodeRequest, DescribeCustomRulesResponse, CreateMerchantRequest, DescribeCodeBatchByIdRequest, DescribeTraceCodeByIdResponse, DescribeProductsResponse, CreateCodeBatchResponse, DescribeTraceDataListResponse, DescribeTraceCodesRequest, CreateTraceCodesAsyncRequest, ModifyTraceDataResponse, DeleteProductRequest, CreateTraceChainResponse, CreateCustomRuleRequest, DescribeCodePackStatusRequest, ModifyTraceDataRequest, DescribeCodeBatchsRequest, ModifyTraceDataRanksResponse, CreateTraceCodesRequest, DescribeCodeBatchByIdResponse, DescribeCorpQuotasResponse, DescribeCodePackStatusResponse, ModifyCustomRuleResponse, ModifyMerchantResponse, DescribeCodesByPackResponse, CreateProductResponse, CreateTraceDataRequest, DescribeCorpQuotasRequest, CreateProductRequest, CreateCustomPackRequest, CreateCodePackRequest, CreateCodeBatchRequest, DescribeCustomRuleByIdRequest, ModifyTraceDataRanksRequest, ModifyCustomRuleStatusResponse, CreateCustomPackResponse, ModifyMerchantRequest, DescribeTmpTokenResponse, DescribeCodePackUrlRequest, DeleteProductResponse, DeleteTraceDataResponse, ModifyCustomRuleStatusRequest, CreateCodePackResponse, DescribeMerchantByIdResponse, DescribeTraceDataByIdResponse, CreateTraceDataResponse, DescribeCustomRuleByIdResponse, DescribeCodeBatchsResponse, CreateCustomRuleResponse, ModifyTraceCodeUnlinkRequest, DescribeCodePacksResponse, DescribeCodesByPackRequest, DescribeJobFileUrlRequest, CreateTraceCodesAsyncResponse, DescribeCustomRulesRequest, ModifyCodeBatchRequest, DescribeProductByIdRequest, DescribeTraceCodesResponse, CreateCorporationOrderRequest, CreateTraceCodesResponse, DeleteTraceDataRequest, DescribeScanLogsRequest, ModifyTraceCodeUnlinkResponse, DescribeTraceDataByIdRequest, DescribeTmpTokenRequest, DescribeScanStatsResponse, CreateMerchantResponse, DescribeMerchantsResponse, DescribeTraceDataListRequest, DescribeScanStatsRequest, DeleteMerchantResponse, DeleteCodeBatchResponse, CreateTraceChainRequest, DescribeMerchantByIdRequest, DescribeProductByIdResponse, DescribeCodePacksRequest, DescribeJobFileUrlResponse, DescribeTraceCodeByIdRequest, DeleteMerchantRequest, ModifyTraceCodeResponse, DescribeCodePackUrlResponse, ModifyCodeBatchResponse } from "./trp_models";
+import { DescribeScanLogsResponse, DescribeProductsRequest, CreateCorporationOrderResponse, ModifyProductResponse, ModifyProductRequest, ModifyCustomRuleRequest, DeleteCodeBatchRequest, DescribeMerchantsRequest, ModifyTraceCodeRequest, DescribeCustomRulesResponse, CreateMerchantRequest, DescribeCodeBatchByIdRequest, DescribeTraceCodeByIdResponse, DescribeProductsResponse, CreateTraceChainResponse, DescribeTraceDataListResponse, DescribeTraceCodesRequest, CreateTraceCodesAsyncRequest, ModifyTraceDataResponse, AuthorizedTransferResponse, CreateCodeBatchResponse, CreateCustomRuleRequest, DescribeCodePackStatusRequest, ModifyTraceDataRequest, DescribeCodeBatchsRequest, ModifyTraceDataRanksResponse, CreateTraceCodesRequest, DescribeCodeBatchByIdResponse, DescribeCorpQuotasResponse, DescribeCodePackStatusResponse, EffectFeedbackResponse, ModifyCustomRuleResponse, ModifyMerchantResponse, DescribeCodesByPackResponse, CreateProductResponse, CreateTraceDataRequest, DescribeCorpQuotasRequest, AuthorizedTransferRequest, ReportBatchCallbackStatusRequest, CreateProductRequest, CreateCustomPackRequest, CreateCodePackRequest, CreateCodeBatchRequest, DescribeCustomRuleByIdRequest, ReportBatchCallbackStatusResponse, DeleteProductRequest, ModifyTraceDataRanksRequest, ModifyCustomRuleStatusResponse, CreateCustomPackResponse, ModifyMerchantRequest, DescribeTmpTokenResponse, DescribeCodePackUrlRequest, DeleteProductResponse, DeleteTraceDataResponse, ModifyCustomRuleStatusRequest, CreateCodePackResponse, DescribeMerchantByIdResponse, EffectFeedbackRequest, DescribeTraceDataByIdResponse, CreateTraceDataResponse, DescribeCustomRuleByIdResponse, DescribeCodeBatchsResponse, CreateCustomRuleResponse, ModifyTraceCodeUnlinkRequest, DescribeCodePacksResponse, DescribeCodesByPackRequest, DescribeJobFileUrlRequest, CreateTraceCodesAsyncResponse, DescribeCustomRulesRequest, ModifyCodeBatchRequest, DescribeProductByIdRequest, DescribeTraceCodesResponse, CreateCorporationOrderRequest, CreateTraceCodesResponse, DeleteTraceDataRequest, DescribeScanLogsRequest, ModifyTraceCodeUnlinkResponse, DescribeTraceDataByIdRequest, DescribeTmpTokenRequest, DescribeScanStatsResponse, CreateMerchantResponse, DescribeMerchantsResponse, DescribeTraceDataListRequest, DescribeScanStatsRequest, DeleteMerchantResponse, DeleteCodeBatchResponse, CreateTraceChainRequest, DescribeMerchantByIdRequest, DescribeProductByIdResponse, DescribeCodePacksRequest, DescribeJobFileUrlResponse, DescribeTraceCodeByIdRequest, ModifyCodeBatchResponse, ModifyTraceCodeResponse, DescribeCodePackUrlResponse, DeleteMerchantRequest } from "./trp_models";
 /**
  * trp client
  * @class
@@ -20,6 +20,10 @@ export declare class Client extends AbstractClient {
 注意：溯源码必须属于指定的批次才会解绑
      */
     ModifyTraceCodeUnlink(req: ModifyTraceCodeUnlinkRequest, cb?: (error: string, rep: ModifyTraceCodeUnlinkResponse) => void): Promise<ModifyTraceCodeUnlinkResponse>;
+    /**
+     * 接收客户侧的用户已授权的号码。
+     */
+    AuthorizedTransfer(req: AuthorizedTransferRequest, cb?: (error: string, rep: AuthorizedTransferResponse) => void): Promise<AuthorizedTransferResponse>;
     /**
      * 查自定义码规则
      */
@@ -60,6 +64,10 @@ export declare class Client extends AbstractClient {
      * 查询渠道商下属企业额度使用情况
      */
     DescribeCorpQuotas(req: DescribeCorpQuotasRequest, cb?: (error: string, rep: DescribeCorpQuotasResponse) => void): Promise<DescribeCorpQuotasResponse>;
+    /**
+     * 接收离线筛选包回执，用于效果统计和分析。
+     */
+    ReportBatchCallbackStatus(req: ReportBatchCallbackStatusRequest, cb?: (error: string, rep: ReportBatchCallbackStatusResponse) => void): Promise<ReportBatchCallbackStatusResponse>;
     /**
      * 修改自定义码规则
      */
@@ -142,6 +150,10 @@ export declare class Client extends AbstractClient {
      */
     CreateCodeBatch(req: CreateCodeBatchRequest, cb?: (error: string, rep: CreateCodeBatchResponse) => void): Promise<CreateCodeBatchResponse>;
     /**
+     * 接收客户反馈的各环节数据
+     */
+    EffectFeedback(req: EffectFeedbackRequest, cb?: (error: string, rep: EffectFeedbackResponse) => void): Promise<EffectFeedbackResponse>;
+    /**
      * 删除批次
      */
     DeleteCodeBatch(req: DeleteCodeBatchRequest, cb?: (error: string, rep: DeleteCodeBatchResponse) => void): Promise<DeleteCodeBatchResponse>;
@@ -154,9 +166,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTraceData(req: CreateTraceDataRequest, cb?: (error: string, rep: CreateTraceDataResponse) => void): Promise<CreateTraceDataResponse>;
     /**
-     * 新建商户
+     * 生成普通码包
      */
-    CreateMerchant(req: CreateMerchantRequest, cb?: (error: string, rep: CreateMerchantResponse) => void): Promise<CreateMerchantResponse>;
+    CreateCodePack(req: CreateCodePackRequest, cb?: (error: string, rep: CreateCodePackResponse) => void): Promise<CreateCodePackResponse>;
     /**
      * 查询溯源信息，通常溯源信息跟生产批次绑定，即一个批次的所有溯源信息都是一样的
      */
@@ -182,9 +194,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeMerchants(req: DescribeMerchantsRequest, cb?: (error: string, rep: DescribeMerchantsResponse) => void): Promise<DescribeMerchantsResponse>;
     /**
-     * 生成普通码包
+     * 新建商户
      */
-    CreateCodePack(req: CreateCodePackRequest, cb?: (error: string, rep: CreateCodePackResponse) => void): Promise<CreateCodePackResponse>;
+    CreateMerchant(req: CreateMerchantRequest, cb?: (error: string, rep: CreateMerchantResponse) => void): Promise<CreateMerchantResponse>;
     /**
      * 获取异步任务的输出地址
      */

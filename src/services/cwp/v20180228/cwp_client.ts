@@ -830,8 +830,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出ES查询文档列表
-   */
+     * 旧版日志下载接口下线
+
+导出ES查询文档列表
+     */
   async DescribeSearchExportList(
     req: DescribeSearchExportListRequest,
     cb?: (error: string, rep: DescribeSearchExportListResponse) => void

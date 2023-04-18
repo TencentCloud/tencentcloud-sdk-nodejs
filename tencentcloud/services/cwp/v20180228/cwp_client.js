@@ -94,7 +94,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulList", req, cb);
     }
     /**
-     * 导出ES查询文档列表
+     * 旧版日志下载接口下线
+
+导出ES查询文档列表
      */
     async DescribeSearchExportList(req, cb) {
         return this.request("DescribeSearchExportList", req, cb);
