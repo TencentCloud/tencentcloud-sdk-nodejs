@@ -2451,6 +2451,21 @@ export interface OperateResponseData {
     FlowId: number;
 }
 /**
+ * RenewCkafkaInstance接口出参bigDealIds
+ */
+export interface RenewCkafkaInstanceResponse {
+    /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BigDealId?: string;
+    /**
+      * 子订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealName?: string;
+}
+/**
  * DescribeACL请求参数结构体
  */
 export interface DescribeACLRequest {
@@ -6815,6 +6830,19 @@ export interface AclRuleInfo {
       * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入格式需要带【User:】前缀。例如用户A，传入为User:A。
       */
     Principal: string;
+}
+/**
+ * RenewCkafkaInstance请求参数结构体
+ */
+export interface RenewCkafkaInstanceRequest {
+    /**
+      * 实例id
+      */
+    InstanceId: string;
+    /**
+      * 续费时长, 默认为1, 单位是月
+      */
+    TimeSpan?: number;
 }
 /**
  * ACL对象实体

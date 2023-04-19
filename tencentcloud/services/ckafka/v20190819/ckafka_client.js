@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ckafka.tencentcloudapi.com", "2019-08-19", clientConfig);
     }
     /**
+     * 续费Ckafka实例, 目前只支持国内站包年包月实例续费
+     */
+    async RenewCkafkaInstance(req, cb) {
+        return this.request("RenewCkafkaInstance", req, cb);
+    }
+    /**
      * 查看路由信息
      */
     async DescribeRoute(req, cb) {

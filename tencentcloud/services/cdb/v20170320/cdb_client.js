@@ -144,7 +144,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenDBInstanceGTID", req, cb);
     }
     /**
-     * 修改数据库代理描述
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+
+修改数据库代理描述
      */
     async ModifyCDBProxyDesc(req, cb) {
         return this.request("ModifyCDBProxyDesc", req, cb);
@@ -381,7 +383,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
-     * 请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
+     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+
+请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
      */
     async ModifyCDBProxyConnectionPool(req, cb) {
         return this.request("ModifyCDBProxyConnectionPool", req, cb);
@@ -540,7 +544,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBackup", req, cb);
     }
     /**
-     * 修改数据库代理VIP或端口
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+
+修改数据库代理VIP或端口
      */
     async ModifyCDBProxyVipVPort(req, cb) {
         return this.request("ModifyCDBProxyVipVPort", req, cb);
@@ -709,7 +715,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUploadedFiles", req, cb);
     }
     /**
-     * 查询数据库代理（待下线，替换接口QueryCDBProxy）
+     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+
+查询数据库代理（待下线，替换接口QueryCDBProxy）
      */
     async DescribeCDBProxy(req, cb) {
         return this.request("DescribeCDBProxy", req, cb);
@@ -824,7 +832,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditRule", req, cb);
     }
     /**
-     * 查询代理详情
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+
+查询代理详情
      */
     async QueryCDBProxy(req, cb) {
         return this.request("QueryCDBProxy", req, cb);
@@ -842,7 +852,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuditRule", req, cb);
     }
     /**
-     * 获取数据库代理连接池相关规格配置
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+
+获取数据库代理连接池相关规格配置
      */
     async DescribeProxyConnectionPoolConf(req, cb) {
         return this.request("DescribeProxyConnectionPoolConf", req, cb);

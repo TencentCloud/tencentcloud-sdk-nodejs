@@ -68,7 +68,6 @@ export declare class Client extends AbstractClient {
     CreatePhoneEmail(req: CreatePhoneEmailRequest, cb?: (error: string, rep: CreatePhoneEmailResponse) => void): Promise<CreatePhoneEmailResponse>;
     /**
      * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
      */
     DescribeTemplateList(req: DescribeTemplateListRequest, cb?: (error: string, rep: DescribeTemplateListResponse) => void): Promise<DescribeTemplateListResponse>;
     /**

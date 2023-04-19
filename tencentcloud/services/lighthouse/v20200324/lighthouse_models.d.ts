@@ -2352,9 +2352,21 @@ export interface Bundle {
     /**
       * 套餐类型。
 取值范围：
-<li> GENERAL_BUNDLE：通用型</li><li> STORAGE_BUNDLE：存储型 </li>
+<li>STARTER_BUNDLE：入门型</li>
+<li>GENERAL_BUNDLE：通用型</li>
+<li>ENTERPRISE_BUNDLE：企业型</li>
+<li>STORAGE_BUNDLE：存储型</li>
+<li>EXCLUSIVE_BUNDLE：专属型</li>
+<li>HK_EXCLUSIVE_BUNDLE：香港专属型 </li>
+<li>CAREFREE_BUNDLE：无忧型</li>
+<li>BEFAST_BUNDLE：蜂驰型 </li>
       */
     BundleType: string;
+    /**
+      * 套餐类型描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BundleTypeDescription?: string;
     /**
       * 套餐展示标签.
 取值范围:
@@ -2500,6 +2512,15 @@ export interface DescribeInstancesRequest {
 类型：String
 必选：否
 <li>instance-state</li>按照【实例状态】进行过滤。
+类型：String
+必选：否
+<li>tag-key</li>按照【标签键】进行过滤。
+类型：String
+必选：否
+<li>tag-value</li>按照【标签值】进行过滤。
+类型：String
+必选：否
+<li> tag:tag-key</li>按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 类型：String
 必选：否
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 InstanceIds 和 Filters。

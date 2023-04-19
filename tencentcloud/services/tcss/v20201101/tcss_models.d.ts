@@ -2114,11 +2114,11 @@ export interface DescribeReverseShellEventsResponse {
     /**
       * 事件总数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 反弹shell数组
       */
-    EventSet: Array<ReverseShellEventInfo>;
+    EventSet?: Array<ReverseShellEventInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4606,7 +4606,8 @@ export interface DescribeReverseShellEventsRequest {
       */
     Offset?: number;
     /**
-      * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
+      * 过滤参数
+InnerNetAlarmShow- int - 是否必填：1 - 内网告警展示 0 - 不展示
       */
     Filters?: Array<RunTimeFilters>;
     /**

@@ -115,6 +115,7 @@ import {
   FetchDatahubMessageByOffsetRequest,
   AuthorizeTokenRequest,
   OperateResponseData,
+  RenewCkafkaInstanceResponse,
   DescribeACLRequest,
   CreateUserResponse,
   DescribeDatahubTaskRes,
@@ -293,6 +294,7 @@ import {
   PostgreSQLParam,
   MariaDBConnectParam,
   AclRuleInfo,
+  RenewCkafkaInstanceRequest,
   Acl,
   DescribeAclRuleRequest,
   MongoDBParam,
@@ -330,6 +332,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ckafka.tencentcloudapi.com", "2019-08-19", clientConfig)
+  }
+
+  /**
+   * 续费Ckafka实例, 目前只支持国内站包年包月实例续费
+   */
+  async RenewCkafkaInstance(
+    req: RenewCkafkaInstanceRequest,
+    cb?: (error: string, rep: RenewCkafkaInstanceResponse) => void
+  ): Promise<RenewCkafkaInstanceResponse> {
+    return this.request("RenewCkafkaInstance", req, cb)
   }
 
   /**

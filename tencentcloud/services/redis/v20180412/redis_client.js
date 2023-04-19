@@ -562,7 +562,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMaintenanceWindow", req, cb);
     }
     /**
-     * 本接口(CreateInstances)用于创建redis实例。
+     * 本接口（CreateInstances）用于创建 Redis 实例。
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);

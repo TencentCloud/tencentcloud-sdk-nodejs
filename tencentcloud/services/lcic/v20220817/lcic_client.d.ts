@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, DescribeQuestionListRequest, ModifyRoomResponse, DescribeAppDetailResponse, DescribeSupervisorsResponse, BatchDeleteRecordRequest, ModifyAppResponse, BatchRegisterRequest, DeleteRoomResponse, ModifyUserProfileRequest, CreateGroupWithMembersRequest, DescribeDocumentsByRoomRequest, BatchCreateGroupWithMembersResponse, GetRoomEventResponse, GetRoomsRequest, BatchAddGroupMemberResponse, ModifyUserProfileResponse, GetWatermarkResponse, LoginOriginIdRequest, BatchRegisterResponse, BindDocumentToRoomResponse, CreateGroupWithSubGroupRequest, SetWatermarkRequest, DescribeRoomRequest, BatchCreateRoomResponse, UnbindDocumentFromRoomResponse, CreateDocumentResponse, DescribeGroupResponse, SetAppCustomContentResponse, LoginUserResponse, ModifyGroupRequest, DescribeAppDetailRequest, DeleteGroupRequest, AddGroupMemberRequest, DescribeGroupListRequest, GetRoomMessageRequest, DeleteDocumentResponse, DeleteRecordRequest, BatchDeleteGroupMemberResponse, CreateGroupWithSubGroupResponse, GetRoomEventRequest, DescribeDocumentResponse, DeleteGroupMemberResponse, DescribeGroupMemberListResponse, DeleteRecordResponse, DescribeAnswerListRequest, BatchCreateRoomRequest, DescribeGroupMemberListRequest, DescribeUserResponse, DescribeDocumentRequest, BatchDeleteRecordResponse, SetAppCustomContentRequest, DescribeUserRequest, RegisterUserResponse, BindDocumentToRoomRequest, CreateDocumentRequest, GetRoomMessageResponse, BatchAddGroupMemberRequest, DescribeRoomResponse, DescribeCurrentMemberListRequest, DescribeSdkAppIdUsersResponse, DescribeAnswerListResponse, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSupervisorsRequest, DeleteGroupMemberRequest, GetWatermarkRequest, CreateGroupWithMembersResponse, BatchDeleteGroupMemberRequest, ModifyAppRequest, UnbindDocumentFromRoomRequest, RegisterUserRequest, LoginUserRequest, SetWatermarkResponse, ModifyRoomRequest, DescribeRoomStatisticsRequest, DescribeDocumentsByRoomResponse, LoginOriginIdResponse, DescribeQuestionListResponse, GetRoomsResponse, DeleteAppCustomContentRequest, DescribeDeveloperRequest, DeleteGroupResponse, DescribeSdkAppIdUsersRequest, AddGroupMemberResponse, CreateSupervisorResponse, DeleteRoomRequest, BatchCreateGroupWithMembersRequest, DescribeGroupRequest, CreateSupervisorRequest, DeleteAppCustomContentResponse, DescribeCurrentMemberListResponse, ModifyGroupResponse, DescribeGroupListResponse, CreateRoomResponse, DescribeDeveloperResponse } from "./lcic_models";
+import { CreateRoomRequest, DescribeQuestionListRequest, ModifyRoomResponse, DescribeAppDetailResponse, DeleteSupervisorRequest, DescribeSupervisorsResponse, BatchDeleteRecordRequest, ModifyAppResponse, BatchRegisterRequest, DeleteRoomResponse, ModifyUserProfileRequest, CreateGroupWithMembersRequest, DescribeDocumentsByRoomRequest, BatchCreateGroupWithMembersResponse, GetRoomEventResponse, BatchCreateRoomResponse, DeleteAppCustomContentRequest, BatchAddGroupMemberResponse, ModifyUserProfileResponse, GetWatermarkResponse, LoginOriginIdRequest, BatchRegisterResponse, BindDocumentToRoomResponse, CreateGroupWithSubGroupRequest, SetWatermarkRequest, DescribeRoomRequest, EndRoomRequest, UnbindDocumentFromRoomResponse, CreateDocumentResponse, DescribeGroupResponse, SetAppCustomContentResponse, LoginUserResponse, ModifyGroupRequest, DescribeAppDetailRequest, DeleteGroupRequest, StartRoomRequest, AddGroupMemberRequest, DescribeGroupListRequest, GetRoomMessageRequest, DescribeDocumentsResponse, DeleteDocumentResponse, DeleteRecordRequest, BatchDeleteGroupMemberResponse, CreateGroupWithSubGroupResponse, DescribeDocumentsRequest, GetRoomEventRequest, DescribeDocumentResponse, DeleteGroupMemberResponse, DescribeGroupMemberListResponse, DeleteRecordResponse, DescribeAnswerListRequest, BatchCreateRoomRequest, DescribeGroupMemberListRequest, DescribeUserResponse, DescribeDocumentRequest, BatchDeleteRecordResponse, SetAppCustomContentRequest, DescribeUserRequest, RegisterUserResponse, StartRoomResponse, BindDocumentToRoomRequest, CreateDocumentRequest, GetRoomMessageResponse, BatchAddGroupMemberRequest, DescribeRoomResponse, DescribeCurrentMemberListRequest, DescribeSdkAppIdUsersResponse, DescribeAnswerListResponse, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSupervisorsRequest, DeleteGroupMemberRequest, EndRoomResponse, GetWatermarkRequest, CreateGroupWithMembersResponse, BatchDeleteGroupMemberRequest, ModifyAppRequest, UnbindDocumentFromRoomRequest, RegisterUserRequest, LoginUserRequest, DeleteSupervisorResponse, SetWatermarkResponse, ModifyRoomRequest, DescribeRoomStatisticsRequest, DescribeDocumentsByRoomResponse, LoginOriginIdResponse, DescribeQuestionListResponse, GetRoomsResponse, GetRoomsRequest, DescribeDeveloperRequest, DeleteGroupResponse, DescribeSdkAppIdUsersRequest, AddGroupMemberResponse, CreateSupervisorResponse, DeleteRoomRequest, BatchCreateGroupWithMembersRequest, DescribeGroupRequest, CreateSupervisorRequest, DeleteAppCustomContentResponse, DescribeCurrentMemberListResponse, ModifyGroupResponse, DescribeGroupListResponse, CreateRoomResponse, DescribeDeveloperResponse } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -16,9 +16,9 @@ export declare class Client extends AbstractClient {
      */
     GetRoomMessage(req: GetRoomMessageRequest, cb?: (error: string, rep: GetRoomMessageResponse) => void): Promise<GetRoomMessageResponse>;
     /**
-     * 设置水印
+     * 批量获取文档信息
      */
-    SetWatermark(req: SetWatermarkRequest, cb?: (error: string, rep: SetWatermarkResponse) => void): Promise<SetWatermarkResponse>;
+    DescribeDocuments(req: DescribeDocumentsRequest, cb?: (error: string, rep: DescribeDocumentsResponse) => void): Promise<DescribeDocumentsResponse>;
     /**
      * 此接口获取指定房间下课件列表
      */
@@ -31,6 +31,14 @@ export declare class Client extends AbstractClient {
      * 删除设置自定义元素。如果参数scenes为空则删除所有自定义元素，否则删除指定的scene自定义元素。
      */
     DeleteAppCustomContent(req: DeleteAppCustomContentRequest, cb?: (error: string, rep: DeleteAppCustomContentResponse) => void): Promise<DeleteAppCustomContentResponse>;
+    /**
+     * 设置水印
+     */
+    SetWatermark(req: SetWatermarkRequest, cb?: (error: string, rep: SetWatermarkResponse) => void): Promise<SetWatermarkResponse>;
+    /**
+     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     */
+    ModifyUserProfile(req: ModifyUserProfileRequest, cb?: (error: string, rep: ModifyUserProfileResponse) => void): Promise<ModifyUserProfileResponse>;
     /**
      * 获取水印设置
      */
@@ -51,6 +59,10 @@ export declare class Client extends AbstractClient {
      * 此接口用于获取指定应用ID下用户列表
      */
     DescribeSdkAppIdUsers(req: DescribeSdkAppIdUsersRequest, cb?: (error: string, rep: DescribeSdkAppIdUsersResponse) => void): Promise<DescribeSdkAppIdUsersResponse>;
+    /**
+     * 开始房间的直播
+     */
+    StartRoom(req: StartRoomRequest, cb?: (error: string, rep: StartRoomResponse) => void): Promise<StartRoomResponse>;
     /**
      * 此接口用于删除群组中指定成员
      */
@@ -84,9 +96,9 @@ export declare class Client extends AbstractClient {
      */
     BatchRegister(req: BatchRegisterRequest, cb?: (error: string, rep: BatchRegisterResponse) => void): Promise<BatchRegisterResponse>;
     /**
-     * 此接口用于批量添加成员列表到指定群组
+     * 删除巡课
      */
-    BatchAddGroupMember(req: BatchAddGroupMemberRequest, cb?: (error: string, rep: BatchAddGroupMemberResponse) => void): Promise<BatchAddGroupMemberResponse>;
+    DeleteSupervisor(req: DeleteSupervisorRequest, cb?: (error: string, rep: DeleteSupervisorResponse) => void): Promise<DeleteSupervisorResponse>;
     /**
      * 此接口用于批量删除成员列表到指定群组列表
      */
@@ -108,9 +120,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupList(req: DescribeGroupListRequest, cb?: (error: string, rep: DescribeGroupListResponse) => void): Promise<DescribeGroupListResponse>;
     /**
-     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     * 此接口用于批量添加成员列表到指定群组
      */
-    ModifyUserProfile(req: ModifyUserProfileRequest, cb?: (error: string, rep: ModifyUserProfileResponse) => void): Promise<ModifyUserProfileResponse>;
+    BatchAddGroupMember(req: BatchAddGroupMemberRequest, cb?: (error: string, rep: BatchAddGroupMemberResponse) => void): Promise<BatchAddGroupMemberResponse>;
     /**
      * 此接口用于添加成员列表到指定群组
      */
@@ -175,6 +187,10 @@ export declare class Client extends AbstractClient {
      * 批量删除多个房间的录制文件
      */
     BatchDeleteRecord(req: BatchDeleteRecordRequest, cb?: (error: string, rep: BatchDeleteRecordResponse) => void): Promise<BatchDeleteRecordResponse>;
+    /**
+     * 结束房间的直播
+     */
+    EndRoom(req: EndRoomRequest, cb?: (error: string, rep: EndRoomResponse) => void): Promise<EndRoomResponse>;
     /**
      * 获取房间列表
      */

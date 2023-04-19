@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRoomMessage", req, cb);
     }
     /**
-     * 设置水印
+     * 批量获取文档信息
      */
-    async SetWatermark(req, cb) {
-        return this.request("SetWatermark", req, cb);
+    async DescribeDocuments(req, cb) {
+        return this.request("DescribeDocuments", req, cb);
     }
     /**
      * 此接口获取指定房间下课件列表
@@ -62,6 +62,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAppCustomContent(req, cb) {
         return this.request("DeleteAppCustomContent", req, cb);
+    }
+    /**
+     * 设置水印
+     */
+    async SetWatermark(req, cb) {
+        return this.request("SetWatermark", req, cb);
+    }
+    /**
+     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     */
+    async ModifyUserProfile(req, cb) {
+        return this.request("ModifyUserProfile", req, cb);
     }
     /**
      * 获取水印设置
@@ -92,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSdkAppIdUsers(req, cb) {
         return this.request("DescribeSdkAppIdUsers", req, cb);
+    }
+    /**
+     * 开始房间的直播
+     */
+    async StartRoom(req, cb) {
+        return this.request("StartRoom", req, cb);
     }
     /**
      * 此接口用于删除群组中指定成员
@@ -142,10 +160,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchRegister", req, cb);
     }
     /**
-     * 此接口用于批量添加成员列表到指定群组
+     * 删除巡课
      */
-    async BatchAddGroupMember(req, cb) {
-        return this.request("BatchAddGroupMember", req, cb);
+    async DeleteSupervisor(req, cb) {
+        return this.request("DeleteSupervisor", req, cb);
     }
     /**
      * 此接口用于批量删除成员列表到指定群组列表
@@ -178,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupList", req, cb);
     }
     /**
-     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     * 此接口用于批量添加成员列表到指定群组
      */
-    async ModifyUserProfile(req, cb) {
-        return this.request("ModifyUserProfile", req, cb);
+    async BatchAddGroupMember(req, cb) {
+        return this.request("BatchAddGroupMember", req, cb);
     }
     /**
      * 此接口用于添加成员列表到指定群组
@@ -278,6 +296,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchDeleteRecord(req, cb) {
         return this.request("BatchDeleteRecord", req, cb);
+    }
+    /**
+     * 结束房间的直播
+     */
+    async EndRoom(req, cb) {
+        return this.request("EndRoom", req, cb);
     }
     /**
      * 获取房间列表

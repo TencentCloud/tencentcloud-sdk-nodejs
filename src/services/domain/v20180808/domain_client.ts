@@ -236,9 +236,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
-     */
+   * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
+   */
   async DescribeTemplateList(
     req: DescribeTemplateListRequest,
     cb?: (error: string, rep: DescribeTemplateListResponse) => void

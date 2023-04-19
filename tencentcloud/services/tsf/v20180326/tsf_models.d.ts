@@ -2110,6 +2110,55 @@ false：操作失败。
     RequestId?: string;
 }
 /**
+ * CreateFileConfigWithDetailResp请求参数结构体
+ */
+export interface CreateFileConfigWithDetailRespRequest {
+    /**
+      * 配置项名称
+      */
+    ConfigName: string;
+    /**
+      * 配置项版本
+      */
+    ConfigVersion: string;
+    /**
+      * 配置项文件名
+      */
+    ConfigFileName: string;
+    /**
+      * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
+      */
+    ConfigFileValue: string;
+    /**
+      * 配置项关联应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 发布路径
+      */
+    ConfigFilePath: string;
+    /**
+      * 配置项版本描述
+      */
+    ConfigVersionDesc?: string;
+    /**
+      * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+      */
+    ConfigFileCode?: string;
+    /**
+      * 后置命令
+      */
+    ConfigPostCmd?: string;
+    /**
+      * Base64编码的配置项
+      */
+    EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
+}
+/**
  * 部署javaagent的类型、版本信息
  */
 export interface AgentProfile {
@@ -2121,6 +2170,19 @@ export interface AgentProfile {
       * Agent版本号
       */
     AgentVersion?: string;
+}
+/**
+ * ModifyContainerReplicas返回参数结构体
+ */
+export interface ModifyContainerReplicasResponse {
+    /**
+      * 结果true：成功；false：失败；
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * StopGroup请求参数结构体
@@ -3629,6 +3691,20 @@ export interface ContainGroup {
     UpdatedTime?: string;
 }
 /**
+ * CreateConfigWithDetailResp返回参数结构体
+ */
+export interface CreateConfigWithDetailRespResponse {
+    /**
+      * 配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: Config;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeGroupBusinessLogConfigs返回参数结构体
  */
 export interface DescribeGroupBusinessLogConfigsResponse {
@@ -4443,6 +4519,43 @@ export interface CreatePublicConfigWithDetailRespResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateConfigWithDetailResp请求参数结构体
+ */
+export interface CreateConfigWithDetailRespRequest {
+    /**
+      * 配置项名称
+      */
+    ConfigName: string;
+    /**
+      * 配置项版本
+      */
+    ConfigVersion: string;
+    /**
+      * 配置项值
+      */
+    ConfigValue: string;
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 配置项版本描述
+      */
+    ConfigVersionDesc?: string;
+    /**
+      * 配置项值类型
+      */
+    ConfigType?: string;
+    /**
+      * Base64编码的配置项
+      */
+    EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * RemoveInstances返回参数结构体
@@ -7190,13 +7303,14 @@ export interface CreateTaskFlowRequest {
     ProgramIdList?: Array<string>;
 }
 /**
- * ModifyContainerReplicas返回参数结构体
+ * CreateFileConfigWithDetailResp返回参数结构体
  */
-export interface ModifyContainerReplicasResponse {
+export interface CreateFileConfigWithDetailRespResponse {
     /**
-      * 结果true：成功；false：失败；
+      * 文件配置项
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result?: FileConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -89,6 +89,11 @@ export interface DescribeNotebookSessionStatementRequest {
    * Session Statement唯一标识
    */
   StatementId: string
+
+  /**
+   * 任务唯一标识
+   */
+  TaskId?: string
 }
 
 /**
@@ -303,19 +308,25 @@ export interface ListTaskJobLogDetailResponse {
       * 下一次分页参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Context: string
+  Context?: string
 
   /**
       * 是否获取完结
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ListOver: boolean
+  ListOver?: boolean
 
   /**
       * 日志详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Results: Array<JobLogResult>
+  Results?: Array<JobLogResult>
+
+  /**
+      * 日志url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -910,6 +921,12 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SparkImageVersion?: string
+
+  /**
+      * 查询脚本关联id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SessionId?: string
 }
 
 /**
@@ -1570,6 +1587,11 @@ export interface ModifySparkAppRequest {
    * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
    */
   AppExecutorMaxNumbers?: number
+
+  /**
+   * 关联dlc查询脚本
+   */
+  SessionId?: string
 }
 
 /**
@@ -2046,6 +2068,11 @@ export interface ListTaskJobLogDetailRequest {
    * 预览日志的通用过滤条件
    */
   Filters?: Array<Filter>
+
+  /**
+   * SparkSQL任务唯一ID
+   */
+  BatchId?: string
 }
 
 /**
@@ -2442,22 +2469,22 @@ export interface DescribeSparkAppJobsRequest {
   Filters?: Array<Filter>
 
   /**
-   * 更新时间起始点
+   * 更新时间起始点，支持格式：yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
 
   /**
-   * 更新时间截止点
+   * 更新时间截止点，支持格式：yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
 
   /**
-   * 查询列表偏移量
+   * 查询列表偏移量, 默认值0
    */
   Offset?: number
 
   /**
-   * 查询列表限制数量
+   * 查询列表限制数量, 默认值100
    */
   Limit?: number
 }
@@ -5203,6 +5230,12 @@ export interface JobLogResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LogJson: string
+
+  /**
+      * 日志ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgLogId?: string
 }
 
 /**
@@ -5892,6 +5925,11 @@ export interface CreateSparkAppRequest {
    * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums
    */
   AppExecutorMaxNumbers?: number
+
+  /**
+   * 关联dlc查询脚本id
+   */
+  SessionId?: string
 }
 
 /**
@@ -6237,6 +6275,18 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StartStandbyCluster?: boolean
+
+  /**
+      * spark jar 包年包月集群是否开启弹性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ElasticSwitch?: boolean
+
+  /**
+      * spark jar 包年包月集群弹性上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ElasticLimit?: number
 }
 
 /**

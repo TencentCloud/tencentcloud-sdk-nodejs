@@ -407,6 +407,48 @@ export interface CreateLogsetRequest {
 }
 
 /**
+ * DescribeShippers请求参数结构体
+ */
+export interface DescribeShippersRequest {
+  /**
+      * <br><li> shipperName
+
+按照【投递规则名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> shipperId
+
+按照【投递规则ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> topicId
+
+按照【日志主题】进行过滤。
+
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 分页的偏移量，默认值为0
+   */
+  Offset?: number
+
+  /**
+   * 分页单页的限制数目，默认值为20，最大值100
+   */
+  Limit?: number
+}
+
+/**
  * 日志中的KV对
  */
 export interface LogItem {
@@ -1649,45 +1691,92 @@ export interface PartitionInfo {
 }
 
 /**
- * DescribeShippers请求参数结构体
+ * 告警历史详情
  */
-export interface DescribeShippersRequest {
+export interface AlertHistoryRecord {
   /**
-      * <br><li> shipperName
+   * 告警历史ID
+   */
+  RecordId: string
 
-按照【投递规则名称】进行过滤。
-类型：String
+  /**
+   * 告警策略ID
+   */
+  AlarmId: string
 
-必选：否
+  /**
+   * 告警策略名称
+   */
+  AlarmName: string
 
-<br><li> shipperId
+  /**
+   * 监控对象ID
+   */
+  TopicId: string
 
-按照【投递规则ID】进行过滤。
-类型：String
+  /**
+   * 监控对象名称
+   */
+  TopicName: string
 
-必选：否
+  /**
+   * 监控对象所属地域
+   */
+  Region: string
 
-<br><li> topicId
+  /**
+   * 触发条件
+   */
+  Trigger: string
 
-按照【日志主题】进行过滤。
+  /**
+   * 持续周期，持续满足触发条件TriggerCount个周期后，再进行告警
+   */
+  TriggerCount: number
 
-类型：String
+  /**
+   * 告警通知发送频率，单位为分钟
+   */
+  AlarmPeriod: number
 
-必选：否
+  /**
+   * 通知渠道组
+   */
+  Notices: Array<AlertHistoryNotice>
 
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+  /**
+   * 告警持续时间，单位为分钟
+   */
+  Duration: number
+
+  /**
+   * 告警状态，0代表未恢复，1代表已恢复，2代表已失效
+   */
+  Status: number
+
+  /**
+   * 告警发生时间，毫秒级Unix时间戳
+   */
+  CreateTime: number
+
+  /**
+      * 告警分组触发时对应的分组信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Filters?: Array<Filter>
+  GroupTriggerCondition?: Array<GroupTriggerConditionInfo>
 
   /**
-   * 分页的偏移量，默认值为0
-   */
-  Offset?: number
+      * 告警级别，0代表警告(Warn)，1代表提醒(Info)，2代表紧急 (Critical)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmLevel?: number
 
   /**
-   * 分页单页的限制数目，默认值为20，最大值100
-   */
-  Limit?: number
+      * 监控对象类型。
+0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonitorObjectType?: number
 }
 
 /**
@@ -2424,6 +2513,41 @@ export interface ModifyConsumerResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAlertRecordHistory请求参数结构体
+ */
+export interface DescribeAlertRecordHistoryRequest {
+  /**
+   * 查询时间范围启始时间，毫秒级unix时间戳
+   */
+  From: number
+
+  /**
+   * 查询时间范围结束时间，毫秒级unix时间戳
+   */
+  To: number
+
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset: number
+
+  /**
+   * 分页单页限制数目，最大值100。
+   */
+  Limit: number
+
+  /**
+      * - alertId：按照告警策略ID进行过滤。类型：String 必选：否
+- topicId：按照监控对象ID进行过滤。类型：String 必选：否
+- status：按照告警状态进行过滤。类型：String 必选：否，0代表未恢复，1代表已恢复，2代表已失效
+- alarmLevel：按照告警等级进行过滤。类型：String 必选：否，0代表警告，1代表提醒，2代表紧急
+
+每次请求的Filters的上限为10，Filter.Values的上限为100。
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3276,6 +3400,21 @@ export interface ExportInfo {
 }
 
 /**
+ * 分组触发条件
+ */
+export interface GroupTriggerConditionInfo {
+  /**
+   * 分组触发字段名称
+   */
+  Key: string
+
+  /**
+   * 分组触发字段值
+   */
+  Value: string
+}
+
+/**
  * DescribeLogContext返回参数结构体
  */
 export interface DescribeLogContextResponse {
@@ -3770,6 +3909,21 @@ export interface ApplyConfigToMachineGroupResponse {
 }
 
 /**
+ * 告警通知渠道组详情
+ */
+export interface AlertHistoryNotice {
+  /**
+   * 通知渠道组名称
+   */
+  Name: string
+
+  /**
+   * 通知渠道组ID
+   */
+  AlarmNoticeId: string
+}
+
+/**
  * DeleteAlarm请求参数结构体
  */
 export interface DeleteAlarmRequest {
@@ -3907,6 +4061,26 @@ export interface ShipperInfo {
  * CreateCosRecharge返回参数结构体
  */
 export interface CreateCosRechargeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAlertRecordHistory返回参数结构体
+ */
+export interface DescribeAlertRecordHistoryResponse {
+  /**
+   * 告警历史总数
+   */
+  TotalCount?: number
+
+  /**
+   * 告警历史详情
+   */
+  Records?: Array<AlertHistoryRecord>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

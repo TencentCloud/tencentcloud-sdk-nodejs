@@ -760,12 +760,12 @@ export interface DescribeTemplateListResponse {
   /**
    * 模板数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 模板详细信息列表。
    */
-  TemplateSet: Array<TemplateInfo>
+  TemplateSet?: Array<TemplateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -963,7 +963,7 @@ export interface CreateTemplateResponse {
   /**
    * 模板信息
    */
-  Template: TemplateInfo
+  Template?: TemplateInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1017,6 +1017,24 @@ GZJGZY: 公证机构执业证。
    * 证件照片地址。
    */
   ImgUrl: string
+
+  /**
+      * 联系人证件号码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistrantCertificateCode?: string
+
+  /**
+      * 联系人证件类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistrantCertificateType?: string
+
+  /**
+      * 联系人证件照片地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistrantImgUrl?: string
 }
 
 /**

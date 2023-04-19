@@ -88,7 +88,9 @@ export declare class Client extends AbstractClient {
      */
     OpenDBInstanceGTID(req: OpenDBInstanceGTIDRequest, cb?: (error: string, rep: OpenDBInstanceGTIDResponse) => void): Promise<OpenDBInstanceGTIDResponse>;
     /**
-     * 修改数据库代理描述
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+
+修改数据库代理描述
      */
     ModifyCDBProxyDesc(req: ModifyCDBProxyDescRequest, cb?: (error: string, rep: ModifyCDBProxyDescResponse) => void): Promise<ModifyCDBProxyDescResponse>;
     /**
@@ -253,7 +255,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
     /**
-     * 请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
+     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+
+请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
      */
     ModifyCDBProxyConnectionPool(req: ModifyCDBProxyConnectionPoolRequest, cb?: (error: string, rep: ModifyCDBProxyConnectionPoolResponse) => void): Promise<ModifyCDBProxyConnectionPoolResponse>;
     /**
@@ -362,7 +366,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteBackup(req: DeleteBackupRequest, cb?: (error: string, rep: DeleteBackupResponse) => void): Promise<DeleteBackupResponse>;
     /**
-     * 修改数据库代理VIP或端口
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+
+修改数据库代理VIP或端口
      */
     ModifyCDBProxyVipVPort(req: ModifyCDBProxyVipVPortRequest, cb?: (error: string, rep: ModifyCDBProxyVipVPortResponse) => void): Promise<ModifyCDBProxyVipVPortResponse>;
     /**
@@ -477,7 +483,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUploadedFiles(req: DescribeUploadedFilesRequest, cb?: (error: string, rep: DescribeUploadedFilesResponse) => void): Promise<DescribeUploadedFilesResponse>;
     /**
-     * 查询数据库代理（待下线，替换接口QueryCDBProxy）
+     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+
+查询数据库代理（待下线，替换接口QueryCDBProxy）
      */
     DescribeCDBProxy(req: DescribeCDBProxyRequest, cb?: (error: string, rep: DescribeCDBProxyResponse) => void): Promise<DescribeCDBProxyResponse>;
     /**
@@ -556,7 +564,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyAuditRule(req: ModifyAuditRuleRequest, cb?: (error: string, rep: ModifyAuditRuleResponse) => void): Promise<ModifyAuditRuleResponse>;
     /**
-     * 查询代理详情
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+
+查询代理详情
      */
     QueryCDBProxy(req: QueryCDBProxyRequest, cb?: (error: string, rep: QueryCDBProxyResponse) => void): Promise<QueryCDBProxyResponse>;
     /**
@@ -568,7 +578,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteAuditRule(req: DeleteAuditRuleRequest, cb?: (error: string, rep: DeleteAuditRuleResponse) => void): Promise<DeleteAuditRuleResponse>;
     /**
-     * 获取数据库代理连接池相关规格配置
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+
+获取数据库代理连接池相关规格配置
      */
     DescribeProxyConnectionPoolConf(req: DescribeProxyConnectionPoolConfRequest, cb?: (error: string, rep: DescribeProxyConnectionPoolConfResponse) => void): Promise<DescribeProxyConnectionPoolConfResponse>;
     /**

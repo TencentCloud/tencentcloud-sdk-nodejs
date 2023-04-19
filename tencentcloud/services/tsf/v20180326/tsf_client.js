@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePodInstances", req, cb);
     }
     /**
-     * 查询可用于被导入的命名空间列表
+     * 创建配置项，返回详细信息
      */
-    async DescribeUsableUnitNamespaces(req, cb) {
-        return this.request("DescribeUsableUnitNamespaces", req, cb);
+    async CreateConfigWithDetailResp(req, cb) {
+        return this.request("CreateConfigWithDetailResp", req, cb);
     }
     /**
      * 创建命名空间
@@ -130,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupAttribute", req, cb);
     }
     /**
-     * 查询配置项列表
+     * 创建文件配置项，返回详细信息
      */
-    async DescribeConfigs(req, cb) {
-        return this.request("DescribeConfigs", req, cb);
+    async CreateFileConfigWithDetailResp(req, cb) {
+        return this.request("CreateFileConfigWithDetailResp", req, cb);
     }
     /**
      * 创建参数模板
@@ -238,10 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeFileConfig", req, cb);
     }
     /**
-     * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
+     * 获取单个投递项配置信息
      */
-    async CreateContainGroup(req, cb) {
-        return this.request("CreateContainGroup", req, cb);
+    async DescribeDeliveryConfig(req, cb) {
+        return this.request("DescribeDeliveryConfig", req, cb);
     }
     /**
      * 查询某个插件下绑定或未绑定的API分组
@@ -351,6 +351,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async UpdateRepository(req, cb) {
         return this.request("UpdateRepository", req, cb);
+    }
+    /**
+     * 查询可用于被导入的命名空间列表
+     */
+    async DescribeUsableUnitNamespaces(req, cb) {
+        return this.request("DescribeUsableUnitNamespaces", req, cb);
     }
     /**
      * 查询网关分组监控明细数据
@@ -621,6 +627,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeSimpleGroups(req, cb) {
         return this.request("DescribeSimpleGroups", req, cb);
+    }
+    /**
+     * 查询配置项列表
+     */
+    async DescribeConfigs(req, cb) {
+        return this.request("DescribeConfigs", req, cb);
     }
     /**
      * 服务统计页面：接口和服务维度
@@ -1171,10 +1183,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ModifyGroup", req, cb);
     }
     /**
-     * 获取单个投递项配置信息
+     * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
      */
-    async DescribeDeliveryConfig(req, cb) {
-        return this.request("DescribeDeliveryConfig", req, cb);
+    async CreateContainGroup(req, cb) {
+        return this.request("CreateContainGroup", req, cb);
     }
     /**
      * 查询生效的单元化规则

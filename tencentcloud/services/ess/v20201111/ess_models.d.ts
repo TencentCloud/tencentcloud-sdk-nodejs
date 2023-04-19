@@ -265,7 +265,7 @@ export interface BindEmployeeUserIdWithClientOpenIdResponse {
     /**
       * 绑定是否成功，1表示成功，0表示失败
       */
-    Status: number;
+    Status?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -458,7 +458,7 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
       */
     Status?: number;
     /**
-      * 是否到处当前成员企业数据
+      * 是否导出当前成员企业数据
       */
     Export?: boolean;
     /**
@@ -570,10 +570,6 @@ export interface DescribeFlowTemplatesRequest {
       */
     Operator: UserInfo;
     /**
-      * 企业组织相关信息，一般不用填
-      */
-    Organization?: OrganizationInfo;
-    /**
       * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
       */
     Agent?: Agent;
@@ -602,13 +598,17 @@ ApplicationId为空，查询所有应用下的模板列表
       */
     IsChannel?: boolean;
     /**
-      * 暂未开放
-      */
-    GenerateSource?: number;
-    /**
       * 查询内容：0-模板列表及详情（默认），1-仅模板列表
       */
     ContentType?: number;
+    /**
+      * 暂未开放
+      */
+    Organization?: OrganizationInfo;
+    /**
+      * 暂未开放
+      */
+    GenerateSource?: number;
 }
 /**
  * DescribeFlowEvidenceReport返回参数结构体
@@ -704,7 +704,7 @@ export interface TemplateInfo {
       */
     Promoter?: Recipient;
     /**
-      * 模板可用状态，取值：0未知，但默认会被转成启用；1启用（默认），2停用
+      * 模板可用状态，取值：1启用（默认），2停用
       */
     Available?: number;
     /**
@@ -942,7 +942,7 @@ export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
     /**
       * 解绑是否成功，1表示成功，0表示失败
       */
-    Status: number;
+    Status?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -967,7 +967,7 @@ export interface CreateReleaseFlowResponse {
  */
 export interface BindEmployeeUserIdWithClientOpenIdRequest {
     /**
-      * OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId
+      * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定
       */
     Operator: UserInfo;
     /**
@@ -993,23 +993,23 @@ export interface DeleteSealPoliciesResponse {
  */
 export interface OrganizationInfo {
     /**
-      * 机构在平台的编号
+      * 机构在平台的编号，内部字段，暂未开放
       */
     OrganizationId?: string;
     /**
-      * 用户渠道
+      * 用户渠道，内部字段，暂未开放
       */
     Channel?: string;
     /**
-      * 用户在渠道的机构编号
+      * 用户在渠道的机构编号，内部字段，暂未开放
       */
     OrganizationOpenId?: string;
     /**
-      * 用户真实的IP
+      * 用户真实的IP，内部字段，暂未开放
       */
     ClientIp?: string;
     /**
-      * 机构的代理IP
+      * 机构的代理IP，内部字段，暂未开放
       */
     ProxyIp?: string;
 }
@@ -1120,11 +1120,11 @@ export interface FailedDeleteStaffData {
  */
 export interface PdfVerifyResult {
     /**
-      * 验签结果
+      * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
       */
     VerifyResult: number;
     /**
-      * 签署平台
+      * 签署平台，如果文件是在腾讯电子签平台签署，则返回腾讯电子签，如果文件不在腾讯电子签平台签署，则返回其他平台。
       */
     SignPlatform: string;
     /**
@@ -1351,7 +1351,7 @@ REJECT: 拒绝
  */
 export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
     /**
-      * OpenId与UserId二选一必填一个，当传入客户系统openId，传入的openId需与电子签员工userId绑定，且渠道channel必填，channel值为INTEGRATE，否则传入userId
+      * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定
       */
     Operator: UserInfo;
     /**
@@ -1618,19 +1618,19 @@ export interface UserInfo {
       */
     UserId?: string;
     /**
-      * 用户的来源渠道
+      * 用户的来源渠道，一般不用传，特定场景根据接口说明传值
       */
     Channel?: string;
     /**
-      * 用户在渠道的编号
+      * 用户在渠道的编号，一般不用传，特定场景根据接口说明传值
       */
     OpenId?: string;
     /**
-      * 用户真实IP
+      * 用户真实IP，内部字段，暂未开放
       */
     ClientIp?: string;
     /**
-      * 用户代理IP
+      * 用户代理IP，内部字段，暂未开放
       */
     ProxyIp?: string;
 }
@@ -1785,7 +1785,7 @@ export interface GroupOrganization {
       */
     UpdateTime?: number;
     /**
-      * 成员企业状态
+      * 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: number;
@@ -1855,7 +1855,7 @@ export interface CreateDocumentRequest {
       */
     TemplateId: string;
     /**
-      * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起
+      * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。
       */
     FileNames: Array<string>;
     /**
@@ -1940,7 +1940,7 @@ export interface DeleteIntegrationEmployeesRequest {
       */
     Employees: Array<Staff>;
     /**
-      * 代理信息
+      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id
       */
     Agent?: Agent;
 }
@@ -2244,7 +2244,7 @@ export interface Recipient {
       */
     RecipientId?: string;
     /**
-      * 参与者类型（ENTERPRISE/INDIVIDUAL）
+      * 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方
       */
     RecipientType?: string;
     /**
@@ -2284,7 +2284,7 @@ export interface Recipient {
       */
     UserId?: string;
     /**
-      * 发送方式（EMAIL/MOBILE）
+      * 发送方式。默认为EMAIL。EMAIL-邮件；MOBILE-手机短信；WECHAT-微信通知
       */
     DeliveryMethod?: string;
     /**
@@ -2462,6 +2462,14 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
       * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
       */
     UrlType?: string;
+    /**
+      * 通知类型，默认不填为不通知开通方，填写 SMS 为短息通知。
+      */
+    NotifyType?: string;
+    /**
+      * 若上方填写为 SMS，则此处为手机号
+      */
+    NotifyAddress?: string;
 }
 /**
  * DescribeIntegrationMainOrganizationUser返回参数结构体
@@ -3225,13 +3233,13 @@ export interface UpdateIntegrationEmployeesRequest {
       */
     Operator: UserInfo;
     /**
-      * 代理信息
-      */
-    Agent: Agent;
-    /**
       * 员工信息
       */
     Employees: Array<Staff>;
+    /**
+      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id
+      */
+    Agent?: Agent;
 }
 /**
  * DescribeFlowBriefs请求参数结构体

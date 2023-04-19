@@ -66,7 +66,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyWafAutoDenyStatus(req: ModifyWafAutoDenyStatusRequest, cb?: (error: string, rep: ModifyWafAutoDenyStatusResponse) => void): Promise<ModifyWafAutoDenyStatusResponse>;
     /**
-     * 本接口用于修改访问日志保存期限
+     * 本接口用于修改访问日志保存期限及大字段是否存储
      */
     ModifyAccessPeriod(req: ModifyAccessPeriodRequest, cb?: (error: string, rep: ModifyAccessPeriodResponse) => void): Promise<ModifyAccessPeriodResponse>;
     /**

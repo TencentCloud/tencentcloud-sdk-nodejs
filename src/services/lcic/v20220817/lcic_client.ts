@@ -22,6 +22,7 @@ import {
   DescribeQuestionListRequest,
   ModifyRoomResponse,
   DescribeAppDetailResponse,
+  DeleteSupervisorRequest,
   DescribeSupervisorsResponse,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
@@ -32,8 +33,9 @@ import {
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
   GetRoomEventResponse,
+  BatchCreateRoomResponse,
   MemberRecord,
-  GetRoomsRequest,
+  DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
   GetWatermarkResponse,
@@ -44,7 +46,7 @@ import {
   RoomItem,
   SetWatermarkRequest,
   DescribeRoomRequest,
-  BatchCreateRoomResponse,
+  EndRoomRequest,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
   DescribeGroupResponse,
@@ -54,14 +56,17 @@ import {
   ModifyGroupRequest,
   DescribeAppDetailRequest,
   DeleteGroupRequest,
+  StartRoomRequest,
   AddGroupMemberRequest,
   DescribeGroupListRequest,
   GetRoomMessageRequest,
+  DescribeDocumentsResponse,
   DocumentInfo,
   DeleteDocumentResponse,
   DeleteRecordRequest,
   BatchDeleteGroupMemberResponse,
   CreateGroupWithSubGroupResponse,
+  DescribeDocumentsRequest,
   MessageItem,
   GroupInfo,
   GetRoomEventRequest,
@@ -82,6 +87,7 @@ import {
   SetAppCustomContentRequest,
   DescribeUserRequest,
   RegisterUserResponse,
+  StartRoomResponse,
   BindDocumentToRoomRequest,
   CreateDocumentRequest,
   GetRoomMessageResponse,
@@ -97,6 +103,7 @@ import {
   DescribeSupervisorsRequest,
   MessageList,
   DeleteGroupMemberRequest,
+  EndRoomResponse,
   GetWatermarkRequest,
   CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
@@ -106,6 +113,7 @@ import {
   GroupBaseInfo,
   LoginUserRequest,
   AnswerStat,
+  DeleteSupervisorResponse,
   SetWatermarkResponse,
   RoomInfo,
   ModifyRoomRequest,
@@ -116,7 +124,7 @@ import {
   DescribeQuestionListResponse,
   GetRoomsResponse,
   QuestionInfo,
-  DeleteAppCustomContentRequest,
+  GetRoomsRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
   DeleteGroupResponse,
@@ -168,13 +176,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置水印
+   * 批量获取文档信息
    */
-  async SetWatermark(
-    req: SetWatermarkRequest,
-    cb?: (error: string, rep: SetWatermarkResponse) => void
-  ): Promise<SetWatermarkResponse> {
-    return this.request("SetWatermark", req, cb)
+  async DescribeDocuments(
+    req: DescribeDocumentsRequest,
+    cb?: (error: string, rep: DescribeDocumentsResponse) => void
+  ): Promise<DescribeDocumentsResponse> {
+    return this.request("DescribeDocuments", req, cb)
   }
 
   /**
@@ -205,6 +213,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAppCustomContentResponse) => void
   ): Promise<DeleteAppCustomContentResponse> {
     return this.request("DeleteAppCustomContent", req, cb)
+  }
+
+  /**
+   * 设置水印
+   */
+  async SetWatermark(
+    req: SetWatermarkRequest,
+    cb?: (error: string, rep: SetWatermarkResponse) => void
+  ): Promise<SetWatermarkResponse> {
+    return this.request("SetWatermark", req, cb)
+  }
+
+  /**
+   * 此接口用于修改用户配置，如头像，昵称/用户名等。
+   */
+  async ModifyUserProfile(
+    req: ModifyUserProfileRequest,
+    cb?: (error: string, rep: ModifyUserProfileResponse) => void
+  ): Promise<ModifyUserProfileResponse> {
+    return this.request("ModifyUserProfile", req, cb)
   }
 
   /**
@@ -255,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSdkAppIdUsersResponse) => void
   ): Promise<DescribeSdkAppIdUsersResponse> {
     return this.request("DescribeSdkAppIdUsers", req, cb)
+  }
+
+  /**
+   * 开始房间的直播
+   */
+  async StartRoom(
+    req: StartRoomRequest,
+    cb?: (error: string, rep: StartRoomResponse) => void
+  ): Promise<StartRoomResponse> {
+    return this.request("StartRoom", req, cb)
   }
 
   /**
@@ -338,13 +376,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于批量添加成员列表到指定群组
+   * 删除巡课
    */
-  async BatchAddGroupMember(
-    req: BatchAddGroupMemberRequest,
-    cb?: (error: string, rep: BatchAddGroupMemberResponse) => void
-  ): Promise<BatchAddGroupMemberResponse> {
-    return this.request("BatchAddGroupMember", req, cb)
+  async DeleteSupervisor(
+    req: DeleteSupervisorRequest,
+    cb?: (error: string, rep: DeleteSupervisorResponse) => void
+  ): Promise<DeleteSupervisorResponse> {
+    return this.request("DeleteSupervisor", req, cb)
   }
 
   /**
@@ -398,13 +436,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于修改用户配置，如头像，昵称/用户名等。
+   * 此接口用于批量添加成员列表到指定群组
    */
-  async ModifyUserProfile(
-    req: ModifyUserProfileRequest,
-    cb?: (error: string, rep: ModifyUserProfileResponse) => void
-  ): Promise<ModifyUserProfileResponse> {
-    return this.request("ModifyUserProfile", req, cb)
+  async BatchAddGroupMember(
+    req: BatchAddGroupMemberRequest,
+    cb?: (error: string, rep: BatchAddGroupMemberResponse) => void
+  ): Promise<BatchAddGroupMemberResponse> {
+    return this.request("BatchAddGroupMember", req, cb)
   }
 
   /**
@@ -565,6 +603,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDeleteRecordResponse) => void
   ): Promise<BatchDeleteRecordResponse> {
     return this.request("BatchDeleteRecord", req, cb)
+  }
+
+  /**
+   * 结束房间的直播
+   */
+  async EndRoom(
+    req: EndRoomRequest,
+    cb?: (error: string, rep: EndRoomResponse) => void
+  ): Promise<EndRoomResponse> {
+    return this.request("EndRoom", req, cb)
   }
 
   /**

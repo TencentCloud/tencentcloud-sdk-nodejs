@@ -38,16 +38,6 @@ it("sqlserver.v20180328.RecycleReadOnlyGroup", async function () {
     }
 })
 
-it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
-    try {
-       const data = await client.ModifyDBInstanceRenewFlag({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("sqlserver.v20180328.StartIncrementalMigration", async function () {
     try {
        const data = await client.StartIncrementalMigration({})
@@ -178,9 +168,9 @@ it("sqlserver.v20180328.CreatePublishSubscribe", async function () {
     }
 })
 
-it("sqlserver.v20180328.DescribeBackupFiles", async function () {
+it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
     try {
-       const data = await client.DescribeBackupFiles({})
+       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +718,16 @@ it("sqlserver.v20180328.DescribeBackupUploadSize", async function () {
     }
 })
 
+it("sqlserver.v20180328.StartInstanceXEvent", async function () {
+    try {
+       const data = await client.StartInstanceXEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DeleteMigration", async function () {
     try {
        const data = await client.DeleteMigration({})
@@ -958,9 +958,29 @@ it("sqlserver.v20180328.InquiryPriceUpgradeDBInstance", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeBackupFiles", async function () {
+    try {
+       const data = await client.DescribeBackupFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.InquiryPriceRenewDBInstance", async function () {
     try {
        const data = await client.InquiryPriceRenewDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.DescribeXEvents", async function () {
+    try {
+       const data = await client.DescribeXEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,6 +1048,16 @@ it("sqlserver.v20180328.DeleteBackupMigration", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeDBInstancesAttribute", async function () {
+    try {
+       const data = await client.DescribeDBInstancesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
@@ -1048,9 +1078,9 @@ it("sqlserver.v20180328.ModifyReadOnlyGroupDetails", async function () {
     }
 })
 
-it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
+it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
     try {
-       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
+       const data = await client.ModifyDBInstanceRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

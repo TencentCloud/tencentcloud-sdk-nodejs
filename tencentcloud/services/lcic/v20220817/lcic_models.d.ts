@@ -133,6 +133,19 @@ export interface DescribeAppDetailResponse {
     RequestId?: string;
 }
 /**
+ * DeleteSupervisor请求参数结构体
+ */
+export interface DeleteSupervisorRequest {
+    /**
+      * 应用ID
+      */
+    SdkAppId: number;
+    /**
+      * 用户ID列表
+      */
+    Users: Array<string>;
+}
+/**
  * DescribeSupervisors返回参数结构体
  */
 export interface DescribeSupervisorsResponse {
@@ -301,6 +314,19 @@ export interface GetRoomEventResponse {
     RequestId?: string;
 }
 /**
+ * BatchCreateRoom返回参数结构体
+ */
+export interface BatchCreateRoomResponse {
+    /**
+      * 创建成功课堂ID，与传入课堂信息顺序一致
+      */
+    RoomIds?: Array<number>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 成员记录信息。
  */
 export interface MemberRecord {
@@ -369,32 +395,37 @@ export interface MemberRecord {
 
       */
     PerMemberMessageCount?: number;
+    /**
+      * 用户角色。0代表学生；1代表老师； 2助教；3巡课。
+      */
+    Role?: number;
+    /**
+      * 上课班号
+      */
+    GroupId?: string;
+    /**
+      * 子上课班号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubGroupId?: Array<string>;
+    /**
+      * 用户的上台状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Stage?: number;
 }
 /**
- * GetRooms请求参数结构体
+ * DeleteAppCustomContent请求参数结构体
  */
-export interface GetRoomsRequest {
+export interface DeleteAppCustomContentRequest {
     /**
-      * 低代码平台的SdkAppId。
-
+      * 应用ID。
       */
     SdkAppId: number;
     /**
-      * 开始时间。默认以当前时间减去半小时作为开始时间。
+      * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
       */
-    StartTime?: number;
-    /**
-      * 结束时间。默认以当前时间加上半小时作为结束时间。
-      */
-    EndTime?: number;
-    /**
-      * 分页查询当前页数，从1开始递增
-      */
-    Page?: number;
-    /**
-      * 默认是10条
-      */
-    Limit?: number;
+    Scenes?: Array<string>;
 }
 /**
  * BatchAddGroupMember返回参数结构体
@@ -634,17 +665,13 @@ export interface DescribeRoomRequest {
     RoomId: number;
 }
 /**
- * BatchCreateRoom返回参数结构体
+ * EndRoom请求参数结构体
  */
-export interface BatchCreateRoomResponse {
+export interface EndRoomRequest {
     /**
-      * 创建成功课堂ID，与传入课堂信息顺序一致
+      * 房间ID。
       */
-    RoomIds?: Array<number>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RoomId: number;
 }
 /**
  * UnbindDocumentFromRoom返回参数结构体
@@ -801,6 +828,15 @@ export interface DeleteGroupRequest {
     SdkAppId: number;
 }
 /**
+ * StartRoom请求参数结构体
+ */
+export interface StartRoomRequest {
+    /**
+      * 房间ID。
+      */
+    RoomId: number;
+}
+/**
  * AddGroupMember请求参数结构体
  */
 export interface AddGroupMemberRequest {
@@ -862,6 +898,24 @@ export interface GetRoomMessageRequest {
       * 消息拉取的条数。最大数量不能超过套餐包限制。
       */
     Limit?: number;
+}
+/**
+ * DescribeDocuments返回参数结构体
+ */
+export interface DescribeDocumentsResponse {
+    /**
+      * 符合查询条件文档总数
+      */
+    Total?: number;
+    /**
+      * 文档信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Documents?: Array<DocumentInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 文档信息
@@ -937,6 +991,26 @@ export interface DocumentInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: number;
+    /**
+      * 课件页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pages?: number;
+    /**
+      * 宽，仅在静态转码的课件有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Width?: number;
+    /**
+      * 高，仅在静态转码的课件有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Height?: number;
+    /**
+      * 封面，仅转码的课件会生成封面
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cover?: string;
 }
 /**
  * DeleteDocument返回参数结构体
@@ -982,6 +1056,39 @@ export interface CreateGroupWithSubGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDocuments请求参数结构体
+ */
+export interface DescribeDocumentsRequest {
+    /**
+      * 学校id
+      */
+    SchoolId: number;
+    /**
+      * 分页查询当前页数，从1开始递增
+      */
+    Page: number;
+    /**
+      * 每页数据量，最大1000
+      */
+    Limit: number;
+    /**
+      * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
+      */
+    Permission: Array<number>;
+    /**
+      * 课件所有者的user_id，不填默认获取school_id下所有课件
+      */
+    Owner?: string;
+    /**
+      * 课件名称搜索词
+      */
+    Keyword?: string;
+    /**
+      * 课件id列表，从列表中查询，忽略错误的id
+      */
+    DocumentId?: Array<string>;
 }
 /**
  * 单条消息体内容
@@ -1383,6 +1490,15 @@ export interface RegisterUserResponse {
     RequestId?: string;
 }
 /**
+ * StartRoom返回参数结构体
+ */
+export interface StartRoomResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BindDocumentToRoom请求参数结构体
  */
 export interface BindDocumentToRoomRequest {
@@ -1758,6 +1874,15 @@ export interface DeleteGroupMemberRequest {
     MemberIds: Array<string>;
 }
 /**
+ * EndRoom返回参数结构体
+ */
+export interface EndRoomResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetWatermark请求参数结构体
  */
 export interface GetWatermarkRequest {
@@ -1882,6 +2007,15 @@ export interface AnswerStat {
       * 答题人数
       */
     Count?: number;
+}
+/**
+ * DeleteSupervisor返回参数结构体
+ */
+export interface DeleteSupervisorResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SetWatermark返回参数结构体
@@ -2179,17 +2313,30 @@ export interface QuestionInfo {
     AnswerStats?: Array<AnswerStat>;
 }
 /**
- * DeleteAppCustomContent请求参数结构体
+ * GetRooms请求参数结构体
  */
-export interface DeleteAppCustomContentRequest {
+export interface GetRoomsRequest {
     /**
-      * 应用ID。
+      * 低代码平台的SdkAppId。
+
       */
     SdkAppId: number;
     /**
-      * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
+      * 开始时间。默认以当前时间减去半小时作为开始时间。
       */
-    Scenes?: Array<string>;
+    StartTime?: number;
+    /**
+      * 结束时间。默认以当前时间加上半小时作为结束时间。
+      */
+    EndTime?: number;
+    /**
+      * 分页查询当前页数，从1开始递增
+      */
+    Page?: number;
+    /**
+      * 默认是10条
+      */
+    Limit?: number;
 }
 /**
  * DescribeDeveloper请求参数结构体

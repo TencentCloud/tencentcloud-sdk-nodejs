@@ -2633,6 +2633,7 @@ export interface DescribeFileTamperEventsRequest {
 <li>ModifyTime - String - 是否必填：否 - 最近发生时间</li>
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则</li>
+<li>FileAction- string - 是否必填：否 - 威胁行为 read 读取文件 write 写文件</li>
       */
   Filters?: Array<Filters>
 
@@ -4274,12 +4275,12 @@ export interface DescribeFileTamperEventsResponse {
       * 核心文件事件列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  List: Array<FileTamperEvent>
+  List?: Array<FileTamperEvent>
 
   /**
    * 数据总条数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10050,6 +10051,14 @@ export interface FileTamperEvent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MachineExtraInfo?: MachineExtraInfo
+
+  /**
+      * 文件威胁行为
+<li>read 读取文件</li>
+<li>write 修改文件</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileAction?: string
 }
 
 /**

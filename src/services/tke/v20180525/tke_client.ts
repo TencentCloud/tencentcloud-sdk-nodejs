@@ -461,6 +461,7 @@ import {
   CreatePrometheusTemplateResponse,
   CreateClusterEndpointVipRequest,
   ClusterInternalLB,
+  UpdateClusterKubeconfigRequest,
   DescribePrometheusGlobalConfigRequest,
   CreateECMInstancesResponse,
   ModifyPrometheusGlobalNotificationRequest,
@@ -507,6 +508,7 @@ import {
   GetClusterLevelPriceRequest,
   CreateClusterEndpointResponse,
   ClusterAdvancedSettings,
+  UpdateClusterKubeconfigResponse,
   ForwardApplicationRequestV3Response,
   ModifyClusterAuthenticationOptionsRequest,
   DeleteClusterEndpointVipRequest,
@@ -1446,6 +1448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEKSClusterResponse) => void
   ): Promise<CreateEKSClusterResponse> {
     return this.request("CreateEKSCluster", req, cb)
+  }
+
+  /**
+   * 对集群的Kubeconfig信息进行更新
+   */
+  async UpdateClusterKubeconfig(
+    req: UpdateClusterKubeconfigRequest,
+    cb?: (error: string, rep: UpdateClusterKubeconfigResponse) => void
+  ): Promise<UpdateClusterKubeconfigResponse> {
+    return this.request("UpdateClusterKubeconfig", req, cb)
   }
 
   /**

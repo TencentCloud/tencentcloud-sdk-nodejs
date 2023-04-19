@@ -10837,6 +10837,21 @@ export interface ClusterInternalLB {
 }
 
 /**
+ * UpdateClusterKubeconfig请求参数结构体
+ */
+export interface UpdateClusterKubeconfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 子账户Uin列表，传空默认为调用此接口的SubUin
+   */
+  SubAccounts?: Array<string>
+}
+
+/**
  * DescribePrometheusGlobalConfig请求参数结构体
  */
 export interface DescribePrometheusGlobalConfigRequest {
@@ -11885,6 +11900,22 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    * 是否开启QGPU共享
    */
   QGPUShareEnable?: boolean
+}
+
+/**
+ * UpdateClusterKubeconfig返回参数结构体
+ */
+export interface UpdateClusterKubeconfigResponse {
+  /**
+      * 已更新的子账户Uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedSubAccounts?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

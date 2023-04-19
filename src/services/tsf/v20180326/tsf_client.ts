@@ -109,7 +109,9 @@ import {
   EnableUnitRuleRequest,
   CreateClusterResponse,
   CreateMicroserviceResponse,
+  CreateFileConfigWithDetailRespRequest,
   AgentProfile,
+  ModifyContainerReplicasResponse,
   StopGroupRequest,
   ShrinkGroupResponse,
   CosUploadInfo,
@@ -177,6 +179,7 @@ import {
   ModifyContainerGroupRequest,
   OperateApplicationTcrBindingRequest,
   ContainGroup,
+  CreateConfigWithDetailRespResponse,
   DescribeGroupBusinessLogConfigsResponse,
   ContainGroupResult,
   UpdateUnitRuleRequest,
@@ -215,6 +218,7 @@ import {
   TsfPageMsInstance,
   DeleteMicroserviceRequest,
   CreatePublicConfigWithDetailRespResponse,
+  CreateConfigWithDetailRespRequest,
   RemoveInstancesResponse,
   DescribeContainerEventsRequest,
   DisableUnitRuleRequest,
@@ -319,7 +323,7 @@ import {
   DeployGroupRequest,
   LaneInfos,
   CreateTaskFlowRequest,
-  ModifyContainerReplicasResponse,
+  CreateFileConfigWithDetailRespResponse,
   CreateConfigTemplateWithDetailRespRequest,
   TsfPageGatewayPlugin,
   ApiUseStatisticsEntity,
@@ -712,13 +716,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询可用于被导入的命名空间列表
+   * 创建配置项，返回详细信息
    */
-  async DescribeUsableUnitNamespaces(
-    req: DescribeUsableUnitNamespacesRequest,
-    cb?: (error: string, rep: DescribeUsableUnitNamespacesResponse) => void
-  ): Promise<DescribeUsableUnitNamespacesResponse> {
-    return this.request("DescribeUsableUnitNamespaces", req, cb)
+  async CreateConfigWithDetailResp(
+    req: CreateConfigWithDetailRespRequest,
+    cb?: (error: string, rep: CreateConfigWithDetailRespResponse) => void
+  ): Promise<CreateConfigWithDetailRespResponse> {
+    return this.request("CreateConfigWithDetailResp", req, cb)
   }
 
   /**
@@ -802,13 +806,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询配置项列表
+   * 创建文件配置项，返回详细信息
    */
-  async DescribeConfigs(
-    req: DescribeConfigsRequest,
-    cb?: (error: string, rep: DescribeConfigsResponse) => void
-  ): Promise<DescribeConfigsResponse> {
-    return this.request("DescribeConfigs", req, cb)
+  async CreateFileConfigWithDetailResp(
+    req: CreateFileConfigWithDetailRespRequest,
+    cb?: (error: string, rep: CreateFileConfigWithDetailRespResponse) => void
+  ): Promise<CreateFileConfigWithDetailRespResponse> {
+    return this.request("CreateFileConfigWithDetailResp", req, cb)
   }
 
   /**
@@ -982,13 +986,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
+   * 获取单个投递项配置信息
    */
-  async CreateContainGroup(
-    req: CreateContainGroupRequest,
-    cb?: (error: string, rep: CreateContainGroupResponse) => void
-  ): Promise<CreateContainGroupResponse> {
-    return this.request("CreateContainGroup", req, cb)
+  async DescribeDeliveryConfig(
+    req: DescribeDeliveryConfigRequest,
+    cb?: (error: string, rep: DescribeDeliveryConfigResponse) => void
+  ): Promise<DescribeDeliveryConfigResponse> {
+    return this.request("DescribeDeliveryConfig", req, cb)
   }
 
   /**
@@ -1170,6 +1174,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: UpdateRepositoryResponse) => void
   ): Promise<UpdateRepositoryResponse> {
     return this.request("UpdateRepository", req, cb)
+  }
+
+  /**
+   * 查询可用于被导入的命名空间列表
+   */
+  async DescribeUsableUnitNamespaces(
+    req: DescribeUsableUnitNamespacesRequest,
+    cb?: (error: string, rep: DescribeUsableUnitNamespacesResponse) => void
+  ): Promise<DescribeUsableUnitNamespacesResponse> {
+    return this.request("DescribeUsableUnitNamespaces", req, cb)
   }
 
   /**
@@ -1620,6 +1634,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeSimpleGroupsResponse) => void
   ): Promise<DescribeSimpleGroupsResponse> {
     return this.request("DescribeSimpleGroups", req, cb)
+  }
+
+  /**
+   * 查询配置项列表
+   */
+  async DescribeConfigs(
+    req: DescribeConfigsRequest,
+    cb?: (error: string, rep: DescribeConfigsResponse) => void
+  ): Promise<DescribeConfigsResponse> {
+    return this.request("DescribeConfigs", req, cb)
   }
 
   /**
@@ -2535,13 +2559,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 获取单个投递项配置信息
+   * （已废弃，请使用 CreateGroup 和 DeployContainerGroup 创建和部署容器部署组）创建容器部署组
    */
-  async DescribeDeliveryConfig(
-    req: DescribeDeliveryConfigRequest,
-    cb?: (error: string, rep: DescribeDeliveryConfigResponse) => void
-  ): Promise<DescribeDeliveryConfigResponse> {
-    return this.request("DescribeDeliveryConfig", req, cb)
+  async CreateContainGroup(
+    req: CreateContainGroupRequest,
+    cb?: (error: string, rep: CreateContainGroupResponse) => void
+  ): Promise<CreateContainGroupResponse> {
+    return this.request("CreateContainGroup", req, cb)
   }
 
   /**

@@ -18,6 +18,16 @@ const client = new tencentcloud.ckafka.v20190819.Client({
 })
 describe("ckafka.v20190819.test.js", function () {
 
+it("ckafka.v20190819.RenewCkafkaInstance", async function () {
+    try {
+       const data = await client.RenewCkafkaInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeRoute", async function () {
     try {
        const data = await client.DescribeRoute({})

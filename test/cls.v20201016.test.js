@@ -48,6 +48,16 @@ it("cls.v20201016.GetAlarmLog", async function () {
     }
 })
 
+it("cls.v20201016.UploadLog", async function () {
+    try {
+       const data = await client.UploadLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateConsumer", async function () {
     try {
        const data = await client.CreateConsumer({})
@@ -438,9 +448,9 @@ it("cls.v20201016.ModifyConfig", async function () {
     }
 })
 
-it("cls.v20201016.UploadLog", async function () {
+it("cls.v20201016.DescribeAlertRecordHistory", async function () {
     try {
-       const data = await client.UploadLog({})
+       const data = await client.DescribeAlertRecordHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

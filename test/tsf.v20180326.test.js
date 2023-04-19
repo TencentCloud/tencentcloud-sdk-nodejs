@@ -98,9 +98,9 @@ it("tsf.v20180326.DescribePodInstances", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeUsableUnitNamespaces", async function () {
+it("tsf.v20180326.CreateConfigWithDetailResp", async function () {
     try {
-       const data = await client.DescribeUsableUnitNamespaces({})
+       const data = await client.CreateConfigWithDetailResp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("tsf.v20180326.DescribeGroupAttribute", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeConfigs", async function () {
+it("tsf.v20180326.CreateFileConfigWithDetailResp", async function () {
     try {
-       const data = await client.DescribeConfigs({})
+       const data = await client.CreateFileConfigWithDetailResp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +368,9 @@ it("tsf.v20180326.RevokeFileConfig", async function () {
     }
 })
 
-it("tsf.v20180326.CreateContainGroup", async function () {
+it("tsf.v20180326.DescribeDeliveryConfig", async function () {
     try {
-       const data = await client.CreateContainGroup({})
+       const data = await client.DescribeDeliveryConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +551,16 @@ it("tsf.v20180326.CreateUnitRule", async function () {
 it("tsf.v20180326.UpdateRepository", async function () {
     try {
        const data = await client.UpdateRepository({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeUsableUnitNamespaces", async function () {
+    try {
+       const data = await client.DescribeUsableUnitNamespaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1001,6 +1011,16 @@ it("tsf.v20180326.DescribeDeliveryConfigByGroupId", async function () {
 it("tsf.v20180326.DescribeSimpleGroups", async function () {
     try {
        const data = await client.DescribeSimpleGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeConfigs", async function () {
+    try {
+       const data = await client.DescribeConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1918,9 +1938,9 @@ it("tsf.v20180326.ModifyGroup", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeDeliveryConfig", async function () {
+it("tsf.v20180326.CreateContainGroup", async function () {
     try {
-       const data = await client.DescribeDeliveryConfig({})
+       const data = await client.CreateContainGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

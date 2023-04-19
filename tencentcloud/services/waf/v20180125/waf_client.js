@@ -114,7 +114,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafAutoDenyStatus", req, cb);
     }
     /**
-     * 本接口用于修改访问日志保存期限
+     * 本接口用于修改访问日志保存期限及大字段是否存储
      */
     async ModifyAccessPeriod(req, cb) {
         return this.request("ModifyAccessPeriod", req, cb);

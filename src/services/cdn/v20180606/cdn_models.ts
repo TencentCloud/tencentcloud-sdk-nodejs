@@ -98,12 +98,12 @@ export interface DescribeCdnDomainLogsResponse {
       * 日志包下载链接。
 下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。
       */
-  DomainLogs: Array<DomainLog>
+  DomainLogs?: Array<DomainLog>
 
   /**
    * 查询到的总条数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10767,6 +10767,12 @@ overseas：境外
    * 日志包文件名
    */
   LogName: string
+
+  /**
+      * 文件大小，单位: Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileSize?: number
 }
 
 /**

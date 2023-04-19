@@ -48,6 +48,7 @@ import {
   SlaveZones,
   ModifyIncrementalMigrationRequest,
   DescribeDBSecurityGroupsResponse,
+  StartInstanceXEventResponse,
   MigrateDetail,
   CreateIncrementalMigrationRequest,
   RunMigrationRequest,
@@ -79,7 +80,7 @@ import {
   DescribeBusinessIntelligenceFileResponse,
   ZoneInfo,
   ModifyMaintenanceSpanResponse,
-  InquiryPriceCreateDBInstancesRequest,
+  DescribeXEventsRequest,
   RenewPostpaidDBInstanceRequest,
   CrossRegionStatus,
   Migration,
@@ -100,6 +101,7 @@ import {
   ModifyAccountPrivilegeResponse,
   RemoveBackupsRequest,
   DBCreateInfo,
+  InquiryPriceCreateDBInstancesRequest,
   ModifyMigrationResponse,
   RecycleReadOnlyGroupResponse,
   DescribeZonesResponse,
@@ -108,6 +110,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   MigrationStep,
   ModifyAccountRemarkResponse,
+  Events,
   DescribeMigrationsResponse,
   DescribeBackupFilesResponse,
   RenewDBInstanceRequest,
@@ -129,6 +132,7 @@ import {
   ModifyAccountPrivilegeRequest,
   CreateBackupMigrationRequest,
   StartIncrementalMigrationRequest,
+  DescribeXEventsResponse,
   DescribeDBsNormalResponse,
   DescribeMigrationsRequest,
   DescribeDBCharsetsRequest,
@@ -154,6 +158,7 @@ import {
   TerminateDBInstanceRequest,
   DescribeUploadIncrementalInfoResponse,
   CreateDBRequest,
+  EventConfig,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeProjectSecurityGroupsRequest,
   InstanceDBDetail,
@@ -198,6 +203,7 @@ import {
   CosUploadBackupFile,
   DbNormalDetail,
   ModifyDBInstanceRenewFlagRequest,
+  DescribeDBInstancesAttributeResponse,
   Backup,
   DescribeBackupCommandRequest,
   AccountRemark,
@@ -211,6 +217,7 @@ import {
   DBInstance,
   AccountCreateInfo,
   RenewDBInstanceResponse,
+  StartInstanceXEventRequest,
   DBPrivilege,
   FileAction,
   DescribeOrdersRequest,
@@ -266,6 +273,7 @@ import {
   DescribeUploadBackupInfoRequest,
   DescribeAccountsResponse,
   DeleteDBInstanceResponse,
+  DescribeDBInstancesAttributeRequest,
   RestoreInstanceResponse,
   DescribeBackupCommandResponse,
   InquiryPriceRenewDBInstanceResponse,
@@ -310,16 +318,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void
   ): Promise<RecycleReadOnlyGroupResponse> {
     return this.request("RecycleReadOnlyGroup", req, cb)
-  }
-
-  /**
-   * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
-   */
-  async ModifyDBInstanceRenewFlag(
-    req: ModifyDBInstanceRenewFlagRequest,
-    cb?: (error: string, rep: ModifyDBInstanceRenewFlagResponse) => void
-  ): Promise<ModifyDBInstanceRenewFlagResponse> {
-    return this.request("ModifyDBInstanceRenewFlag", req, cb)
   }
 
   /**
@@ -453,13 +451,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
+   * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
    */
-  async DescribeBackupFiles(
-    req: DescribeBackupFilesRequest,
-    cb?: (error: string, rep: DescribeBackupFilesResponse) => void
-  ): Promise<DescribeBackupFilesResponse> {
-    return this.request("DescribeBackupFiles", req, cb)
+  async DescribeReadOnlyGroupByReadOnlyInstance(
+    req: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
+    cb?: (error: string, rep: DescribeReadOnlyGroupByReadOnlyInstanceResponse) => void
+  ): Promise<DescribeReadOnlyGroupByReadOnlyInstanceResponse> {
+    return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb)
   }
 
   /**
@@ -1005,6 +1003,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（StartInstanceXEvent）用于开启、关闭扩展事件。
+   */
+  async StartInstanceXEvent(
+    req: StartInstanceXEventRequest,
+    cb?: (error: string, rep: StartInstanceXEventResponse) => void
+  ): Promise<StartInstanceXEventResponse> {
+    return this.request("StartInstanceXEvent", req, cb)
+  }
+
+  /**
    * 本接口（DeleteMigration）用于删除迁移任务
    */
   async DeleteMigration(
@@ -1236,6 +1244,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
+   */
+  async DescribeBackupFiles(
+    req: DescribeBackupFilesRequest,
+    cb?: (error: string, rep: DescribeBackupFilesResponse) => void
+  ): Promise<DescribeBackupFilesResponse> {
+    return this.request("DescribeBackupFiles", req, cb)
+  }
+
+  /**
    * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
    */
   async InquiryPriceRenewDBInstance(
@@ -1243,6 +1261,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void
   ): Promise<InquiryPriceRenewDBInstanceResponse> {
     return this.request("InquiryPriceRenewDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeXEvents）用于查询扩展事件列表。
+   */
+  async DescribeXEvents(
+    req: DescribeXEventsRequest,
+    cb?: (error: string, rep: DescribeXEventsResponse) => void
+  ): Promise<DescribeXEventsResponse> {
+    return this.request("DescribeXEvents", req, cb)
   }
 
   /**
@@ -1306,6 +1334,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeDBInstancesAttribute）用于查询实例附属属性
+   */
+  async DescribeDBInstancesAttribute(
+    req: DescribeDBInstancesAttributeRequest,
+    cb?: (error: string, rep: DescribeDBInstancesAttributeResponse) => void
+  ): Promise<DescribeDBInstancesAttributeResponse> {
+    return this.request("DescribeDBInstancesAttribute", req, cb)
+  }
+
+  /**
    * 本接口（UpgradeDBInstance）用于升级实例
    */
   async UpgradeDBInstance(
@@ -1326,12 +1364,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+   * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
    */
-  async DescribeReadOnlyGroupByReadOnlyInstance(
-    req: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
-    cb?: (error: string, rep: DescribeReadOnlyGroupByReadOnlyInstanceResponse) => void
-  ): Promise<DescribeReadOnlyGroupByReadOnlyInstanceResponse> {
-    return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb)
+  async ModifyDBInstanceRenewFlag(
+    req: ModifyDBInstanceRenewFlagRequest,
+    cb?: (error: string, rep: ModifyDBInstanceRenewFlagResponse) => void
+  ): Promise<ModifyDBInstanceRenewFlagResponse> {
+    return this.request("ModifyDBInstanceRenewFlag", req, cb)
   }
 }

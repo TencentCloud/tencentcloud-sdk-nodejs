@@ -605,6 +605,15 @@ export interface DescribeDBSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
+ * StartInstanceXEvent返回参数结构体
+ */
+export interface StartInstanceXEventResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 迁移的进度详情类型
  */
 export interface MigrateDetail {
@@ -1200,49 +1209,33 @@ export interface ModifyMaintenanceSpanResponse {
     RequestId?: string;
 }
 /**
- * InquiryPriceCreateDBInstances请求参数结构体
+ * DescribeXEvents请求参数结构体
  */
-export interface InquiryPriceCreateDBInstancesRequest {
+export interface DescribeXEventsRequest {
     /**
-      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      * 实例ID
       */
-    Zone: string;
+    InstanceId: string;
     /**
-      * 内存大小，单位：GB
+      * 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件
       */
-    Memory: number;
+    EventType: string;
     /**
-      * 实例容量大小，单位：GB。
+      * 扩展文件生成开始时间
       */
-    Storage: number;
+    StartTime: string;
     /**
-      * 计费类型，取值支持 PREPAID，POSTPAID。
+      * 扩展文件生成结束时间
       */
-    InstanceChargeType?: string;
+    EndTime: string;
     /**
-      * 购买时长，单位：月。取值为1到48，默认为1
+      * 分页返回，页编号，默认值为第0页
       */
-    Period?: number;
+    Offset?: number;
     /**
-      * 一次性购买的实例数量。取值1-100，默认取值为1
+      * 分页返回，每页返回的数目，取值为1~100，默认值为20
       */
-    GoodsNum?: number;
-    /**
-      * sqlserver版本，目前只支持：2008R2（SQL Server 2008 Enterprise），2012SP3（SQL Server 2012 Enterprise），2016SP1（SQL Server 2016 Enterprise），201602（SQL Server 2016 Standard）2017（SQL Server 2017 Enterprise）版本。默认为2008R2版本
-      */
-    DBVersion?: string;
-    /**
-      * 预购买实例的CPU核心数
-      */
-    Cpu?: number;
-    /**
-      * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本，SI-基础版，默认取值HA
-      */
-    InstanceType?: string;
-    /**
-      * 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘，默认取值PM
-      */
-    MachineType?: string;
+    Limit?: number;
 }
 /**
  * RenewPostpaidDBInstance请求参数结构体
@@ -1798,6 +1791,51 @@ export interface DBCreateInfo {
     Remark?: string;
 }
 /**
+ * InquiryPriceCreateDBInstances请求参数结构体
+ */
+export interface InquiryPriceCreateDBInstancesRequest {
+    /**
+      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      */
+    Zone: string;
+    /**
+      * 内存大小，单位：GB
+      */
+    Memory: number;
+    /**
+      * 实例容量大小，单位：GB。
+      */
+    Storage: number;
+    /**
+      * 计费类型，取值支持 PREPAID，POSTPAID。
+      */
+    InstanceChargeType?: string;
+    /**
+      * 购买时长，单位：月。取值为1到48，默认为1
+      */
+    Period?: number;
+    /**
+      * 一次性购买的实例数量。取值1-100，默认取值为1
+      */
+    GoodsNum?: number;
+    /**
+      * sqlserver版本，目前只支持：2008R2（SQL Server 2008 Enterprise），2012SP3（SQL Server 2012 Enterprise），2016SP1（SQL Server 2016 Enterprise），201602（SQL Server 2016 Standard）2017（SQL Server 2017 Enterprise）版本。默认为2008R2版本
+      */
+    DBVersion?: string;
+    /**
+      * 预购买实例的CPU核心数
+      */
+    Cpu?: number;
+    /**
+      * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本，SI-基础版，默认取值HA
+      */
+    InstanceType?: string;
+    /**
+      * 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘，默认取值PM
+      */
+    MachineType?: string;
+}
+/**
  * ModifyMigration返回参数结构体
  */
 export interface ModifyMigrationResponse {
@@ -1976,6 +2014,47 @@ export interface ModifyAccountRemarkResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 实例扩展事件详情
+ */
+export interface Events {
+    /**
+      * ID
+      */
+    Id?: number;
+    /**
+      * 扩展事件文件名称
+      */
+    FileName?: string;
+    /**
+      * 扩展事件文件大小
+      */
+    Size?: number;
+    /**
+      * 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件
+      */
+    EventType?: string;
+    /**
+      * 事件记录状态，1-成功，2-失败
+      */
+    Status?: number;
+    /**
+      * 扩展文件生成开始时间
+      */
+    StartTime?: string;
+    /**
+      * 扩展文件生成开始时间
+      */
+    EndTime?: string;
+    /**
+      * 内网下载地址
+      */
+    InternalAddr?: string;
+    /**
+      * 外网下载地址
+      */
+    ExternalAddr?: string;
 }
 /**
  * DescribeMigrations返回参数结构体
@@ -2467,6 +2546,23 @@ export interface StartIncrementalMigrationRequest {
     IncrementalMigrationId: string;
 }
 /**
+ * DescribeXEvents返回参数结构体
+ */
+export interface DescribeXEventsResponse {
+    /**
+      * 扩展事件列表
+      */
+    Events?: Array<Events>;
+    /**
+      * 扩展事件总数量
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBsNormal返回参数结构体
  */
 export interface DescribeDBsNormalResponse {
@@ -2809,6 +2905,19 @@ export interface CreateDBRequest {
       * 数据库创建信息
       */
     DBs: Array<DBCreateInfo>;
+}
+/**
+ * 设置实例扩展事件阈值
+ */
+export interface EventConfig {
+    /**
+      * 事件类型，slow-设置慢SQL阈值，blocked-设置阻塞、死锁阈值
+      */
+    EventType: string;
+    /**
+      * 阈值，单位毫秒。0表示关闭，大于0表示开启
+      */
+    Threshold: number;
 }
 /**
  * ModifyDBInstanceSecurityGroups返回参数结构体
@@ -3882,6 +3991,47 @@ export interface ModifyDBInstanceRenewFlagRequest {
     RenewFlags: Array<InstanceRenewInfo>;
 }
 /**
+ * DescribeDBInstancesAttribute返回参数结构体
+ */
+export interface DescribeDBInstancesAttributeResponse {
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 定期备份状态 enable-开启，disable-关闭
+      */
+    RegularBackupEnable?: string;
+    /**
+      * 定期备份保留天数 [90 - 3650]天
+      */
+    RegularBackupSaveDays?: number;
+    /**
+      * 定期备份策略 years-每年，quarters-每季度，months-每月
+      */
+    RegularBackupStrategy?: string;
+    /**
+      * 定期备份保留个数
+      */
+    RegularBackupCounts?: number;
+    /**
+      * 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期
+      */
+    RegularBackupStartTime?: string;
+    /**
+      * 阻塞进程阈值，单位毫秒
+      */
+    BlockedThreshold?: number;
+    /**
+      * 慢SQL、阻塞、死锁扩展事件文件保留时长
+      */
+    EventSaveDays?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 备份文件详细信息
  */
 export interface Backup {
@@ -4377,6 +4527,19 @@ export interface RenewDBInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * StartInstanceXEvent请求参数结构体
+ */
+export interface StartInstanceXEventRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 开启、关闭扩展事件
+      */
+    EventConfig: Array<EventConfig>;
 }
 /**
  * 账号的数据库权限信息
@@ -5433,6 +5596,15 @@ export interface DeleteDBInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDBInstancesAttribute请求参数结构体
+ */
+export interface DescribeDBInstancesAttributeRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
 }
 /**
  * RestoreInstance返回参数结构体

@@ -364,7 +364,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMaintenanceWindow(req: DescribeMaintenanceWindowRequest, cb?: (error: string, rep: DescribeMaintenanceWindowResponse) => void): Promise<DescribeMaintenanceWindowResponse>;
     /**
-     * 本接口(CreateInstances)用于创建redis实例。
+     * 本接口（CreateInstances）用于创建 Redis 实例。
      */
     CreateInstances(req: CreateInstancesRequest, cb?: (error: string, rep: CreateInstancesResponse) => void): Promise<CreateInstancesResponse>;
     /**

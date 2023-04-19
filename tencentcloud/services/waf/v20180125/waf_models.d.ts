@@ -437,13 +437,20 @@ export interface DescribePeakPointsRequest {
       */
     InstanceID?: string;
     /**
-      * 六个值可选：
+      * 十三个值可选：
 access-峰值qps趋势图
 botAccess- bot峰值qps趋势图
 down-下行峰值带宽趋势图
 up-上行峰值带宽趋势图
 attack-Web攻击总数趋势图
 cc-CC攻击总数趋势图
+StatusServerError-WAF返回给客户端状态码次数趋势图
+StatusClientError-WAF返回给客户端状态码次数趋势图
+StatusRedirect-WAF返回给客户端状态码次数趋势图
+StatusOk-WAF返回给客户端状态码次数趋势图
+UpstreamServerError-源站返回给WAF状态码次数趋势图
+UpstreamClientError-源站返回给WAF状态码次数趋势图
+UpstreamRedirect-源站返回给WAF状态码次数趋势图
       */
     MetricName?: string;
 }
@@ -1054,6 +1061,26 @@ export interface DomainsPartInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxySendTimeout: number;
+    /**
+      * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SniType: number;
+    /**
+      * SniType=3时，需要填此参数，表示自定义的host；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SniHost: string;
+    /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weights?: Array<string>;
+    /**
+      * IsCdn=3时，表示自定义header
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpHeaders: Array<string>;
 }
 /**
  * DescribeAutoDenyIP请求参数结构体
@@ -1232,6 +1259,16 @@ export interface HostRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AlbType?: string;
+    /**
+      * IsCdn=3时，需要填此参数，表示自定义header
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpHeaders?: Array<string>;
+    /**
+      * 规则引擎类型， 1: menshen,   2:tiga
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineType?: number;
 }
 /**
  * CreateHost请求参数结构体
@@ -1340,7 +1377,7 @@ export interface AddSpartaProtectionRequest {
       */
     Ports?: Array<PortItem>;
     /**
-      * 版本：sparta-waf、clb-waf、cdn-waf
+      * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF，cdn-waf表示CDN上的Web防护能力
       */
     Edition?: string;
     /**
@@ -1383,6 +1420,18 @@ export interface AddSpartaProtectionRequest {
       * 300s
       */
     ProxySendTimeout?: number;
+    /**
+      * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
+      */
+    SniType?: number;
+    /**
+      * SniType=3时，需要填此参数，表示自定义的host；
+      */
+    SniHost?: string;
+    /**
+      * is_cdn=3时，需要填此参数，表示自定义header
+      */
+    IpHeaders?: Array<string>;
 }
 /**
  * PeakPoints数组项
@@ -1414,9 +1463,43 @@ export interface PeakPointsItem {
     Cc: number;
     /**
       * Bot qps
-注意：此字段可能返回 null，表示取不到有效值。
       */
     BotAccess: number;
+    /**
+      * WAF返回给客户端状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusServerError: number;
+    /**
+      * WAF返回给客户端状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusClientError: number;
+    /**
+      * WAF返回给客户端状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusRedirect: number;
+    /**
+      * WAF返回给客户端状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusOk: number;
+    /**
+      * 源站返回给WAF状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpstreamServerError: number;
+    /**
+      * 源站返回给WAF状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpstreamClientError: number;
+    /**
+      * 源站返回给WAF状态码次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpstreamRedirect: number;
 }
 /**
  * PostAttackDownloadTask请求参数结构体
@@ -2263,9 +2346,30 @@ export interface InstanceInfo {
     MaxBandwidth?: number;
 }
 /**
- * 防护域名端口配置信息
+ * 服务端口配置
  */
-export declare type PortInfo = null;
+export interface PortInfo {
+    /**
+      * Nginx的服务器id
+      */
+    NginxServerId: number;
+    /**
+      * 监听端口配置
+      */
+    Port: string;
+    /**
+      * 与端口对应的协议
+      */
+    Protocol: string;
+    /**
+      * 回源端口
+      */
+    UpstreamPort: string;
+    /**
+      * 回源协议
+      */
+    UpstreamProtocol: string;
+}
 /**
  * DescribeDomainDetailsSaas返回参数结构体
  */
@@ -2273,7 +2377,7 @@ export interface DescribeDomainDetailsSaasResponse {
     /**
       * 域名详情
       */
-    DomainsPartInfo: DomainsPartInfo;
+    DomainsPartInfo?: DomainsPartInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -918,6 +918,16 @@ it("tke.v20180525.CreateEKSCluster", async function () {
     }
 })
 
+it("tke.v20180525.UpdateClusterKubeconfig", async function () {
+    try {
+       const data = await client.UpdateClusterKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeVpcCniPodLimits", async function () {
     try {
        const data = await client.DescribeVpcCniPodLimits({})

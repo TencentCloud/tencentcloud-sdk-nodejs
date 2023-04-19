@@ -2327,6 +2327,12 @@ export interface CallBackTemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PushExceptionNotifyUrl: string
+
+  /**
+      * 音频审核回调 URL。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AudioAuditNotifyUrl?: string
 }
 
 /**
@@ -2849,6 +2855,21 @@ export interface LivePackageInfo {
 5: 已退款
       */
   Status?: number
+
+  /**
+      * 是否自动续购。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WillRenew?: number
+
+  /**
+      * 续购状态。
+1 ：续购成功。
+0 ：尚未续购。
+<0  : 续购失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewalResult?: number
 }
 
 /**

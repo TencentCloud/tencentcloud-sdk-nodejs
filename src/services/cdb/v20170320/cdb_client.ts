@@ -588,8 +588,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改数据库代理描述
-   */
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+
+修改数据库代理描述
+     */
   async ModifyCDBProxyDesc(
     req: ModifyCDBProxyDescRequest,
     cb?: (error: string, rep: ModifyCDBProxyDescResponse) => void
@@ -969,8 +971,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
-   */
+     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+
+请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
+     */
   async ModifyCDBProxyConnectionPool(
     req: ModifyCDBProxyConnectionPoolRequest,
     cb?: (error: string, rep: ModifyCDBProxyConnectionPoolResponse) => void
@@ -1228,8 +1232,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改数据库代理VIP或端口
-   */
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+
+修改数据库代理VIP或端口
+     */
   async ModifyCDBProxyVipVPort(
     req: ModifyCDBProxyVipVPortRequest,
     cb?: (error: string, rep: ModifyCDBProxyVipVPortResponse) => void
@@ -1505,8 +1511,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理（待下线，替换接口QueryCDBProxy）
-   */
+     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+
+查询数据库代理（待下线，替换接口QueryCDBProxy）
+     */
   async DescribeCDBProxy(
     req: DescribeCDBProxyRequest,
     cb?: (error: string, rep: DescribeCDBProxyResponse) => void
@@ -1692,8 +1700,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询代理详情
-   */
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+
+查询代理详情
+     */
   async QueryCDBProxy(
     req: QueryCDBProxyRequest,
     cb?: (error: string, rep: QueryCDBProxyResponse) => void
@@ -1722,8 +1732,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取数据库代理连接池相关规格配置
-   */
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+
+获取数据库代理连接池相关规格配置
+     */
   async DescribeProxyConnectionPoolConf(
     req: DescribeProxyConnectionPoolConfRequest,
     cb?: (error: string, rep: DescribeProxyConnectionPoolConfResponse) => void

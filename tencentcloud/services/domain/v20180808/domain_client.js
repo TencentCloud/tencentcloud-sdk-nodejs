@@ -116,7 +116,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
      */
     async DescribeTemplateList(req, cb) {
         return this.request("DescribeTemplateList", req, cb);

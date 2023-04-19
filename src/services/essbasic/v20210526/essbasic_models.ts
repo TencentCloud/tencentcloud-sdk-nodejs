@@ -1257,7 +1257,7 @@ export interface Recipient {
   RecipientId?: string
 
   /**
-   * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+   * 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方
    */
   RecipientType?: string
 

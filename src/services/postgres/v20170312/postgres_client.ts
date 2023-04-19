@@ -52,6 +52,7 @@ import {
   DescribeRegionsResponse,
   ModifyBaseBackupExpireTimeResponse,
   DBInstanceNetInfo,
+  BackupDownloadRestriction,
   ModifyDBInstanceDeploymentRequest,
   DeleteReadOnlyGroupNetworkAccessRequest,
   ZoneInfo,

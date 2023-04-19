@@ -827,6 +827,31 @@ export interface DBInstanceNetInfo {
     ProtocolType: string;
 }
 /**
+ * 备份下载限制信息
+ */
+export interface BackupDownloadRestriction {
+    /**
+      * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。
+      */
+    RestrictionType?: string;
+    /**
+      * vpc限制效力，ALLOW 允许；DENY 拒绝。
+      */
+    VpcRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的vpcId列表。
+      */
+    VpcIdSet?: Array<string>;
+    /**
+      * ip限制效力，ALLOW 允许；DENY 拒绝。
+      */
+    IpRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的ip列表。
+      */
+    IpSet?: Array<string>;
+}
+/**
  * ModifyDBInstanceDeployment请求参数结构体
  */
 export interface ModifyDBInstanceDeploymentRequest {
@@ -1235,7 +1260,7 @@ export interface DescribeBackupDownloadURLResponse {
     /**
       * 备份的下载地址。
       */
-    BackupDownloadURL: string;
+    BackupDownloadURL?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3468,6 +3493,10 @@ export interface DescribeBackupDownloadURLRequest {
       * 链接的有效时间，默认为12小时。
       */
     URLExpireTime?: number;
+    /**
+      * 备份下载限制
+      */
+    BackupDownloadRestriction?: BackupDownloadRestriction;
 }
 /**
  * ModifyDBInstanceParameters返回参数结构体
