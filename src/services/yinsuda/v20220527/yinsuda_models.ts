@@ -233,6 +233,12 @@ export interface DescribeKTVPlaylistDetailRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+
+  /**
+      * 播放场景。默认为Chat
+<li>Live：直播</li><li>Chat：语聊</li>
+      */
+  PlayScene?: string
 }
 
 /**
@@ -442,12 +448,12 @@ export interface DescribeKTVPlaylistDetailResponse {
   /**
    * 歌曲信息列表。
    */
-  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+  KTVMusicInfoSet?: Array<KTVMusicBaseInfo>
 
   /**
    * 滚动标记，用于设置下次请求的 ScrollToken 参数。
    */
-  ScrollToken: string
+  ScrollToken?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -790,12 +796,12 @@ export interface SearchKTVMusicsResponse {
   /**
    * 歌曲信息列表。
    */
-  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+  KTVMusicInfoSet?: Array<KTVMusicBaseInfo>
 
   /**
    * 滚动标记，用于设置下次请求的 ScrollToken 参数。
    */
-  ScrollToken: string
+  ScrollToken?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1176,6 +1182,12 @@ export interface SearchKTVMusicsRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+
+  /**
+      * 播放场景。默认为Chat
+<li>Live：直播</li><li>Chat：语聊</li>
+      */
+  PlayScene?: string
 }
 
 /**
