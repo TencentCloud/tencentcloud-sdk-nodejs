@@ -288,4 +288,14 @@ export interface TextToVoiceRequest {
    * 断句敏感阈值，默认值为：0，取值范围：[0,1,2]。该值越大越不容易断句，模型会更倾向于仅按照标点符号断句。此参数建议不要随意调整，可能会影响合成效果。
    */
   SegmentRate?: number
+
+  /**
+   * 控制合成音频的情感，仅支持情绪音色使用。取值: peaceful、exciting、thrill、neutral、sad、angry、cute、fear、poetry、happy、regretful、exciting_strong、aojiao、sajiao、story、raido、call、jieshuo等等；
+   */
+  EmotionCategory?: string
+
+  /**
+   * 控制合成音频情感程度，取值范围为[50,200],默认为100，不填写为默认值；只有EmotionCategory不为空时生效；
+   */
+  EmotionIntensity?: number
 }

@@ -2175,7 +2175,7 @@ coteaching 双师
     GroupId?: string;
 }
 /**
- * 房间问答问题详情
+ * 房间问答答案详情
  */
 export interface AnswerInfo {
     /**
@@ -2287,7 +2287,7 @@ export interface GetRoomsResponse {
     RequestId?: string;
 }
 /**
- * 房间问答答案详情
+ * 房间问答问题详情
  */
 export interface QuestionInfo {
     /**

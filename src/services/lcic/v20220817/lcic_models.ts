@@ -2575,7 +2575,7 @@ coteaching 双师
 }
 
 /**
- * 房间问答问题详情
+ * 房间问答答案详情
  */
 export interface AnswerInfo {
   /**
@@ -2707,7 +2707,7 @@ export interface GetRoomsResponse {
 }
 
 /**
- * 房间问答答案详情
+ * 房间问答问题详情
  */
 export interface QuestionInfo {
   /**

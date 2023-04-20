@@ -28,6 +28,7 @@ import {
   DeleteAttackDownloadRecordResponse,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
+  AddCustomWhiteRuleResponse,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
   DescribePeakValueResponse,
@@ -36,6 +37,7 @@ import {
   LoadBalancerPackageNew,
   DescribeInstancesResponse,
   ModifyDomainWhiteRuleRequest,
+  VipInfo,
   AccessRuleTagInfo,
   DescribePeakPointsRequest,
   DescribeAccessIndexRequest,
@@ -44,6 +46,7 @@ import {
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
   SearchAttackLogRequest,
+  DeleteCustomWhiteRuleResponse,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   GetAttackDownloadRecordsRequest,
@@ -54,6 +57,8 @@ import {
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
   DescribeUserClbWafRegionsResponse,
+  ModifyCustomWhiteRuleRequest,
+  DeleteCustomWhiteRuleRequest,
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
   DescribeVipInfoRequest,
@@ -73,6 +78,7 @@ import {
   AddSpartaProtectionRequest,
   PeakPointsItem,
   PostAttackDownloadTaskRequest,
+  ModifyCustomWhiteRuleResponse,
   DescribePolicyStatusRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
@@ -134,9 +140,9 @@ import {
   DeleteAccessExportRequest,
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
-  VipInfo,
-  DeleteAttackDownloadRecordRequest,
   DescribeWafThreatenIntelligenceResponse,
+  DeleteAttackDownloadRecordRequest,
+  AddCustomWhiteRuleRequest,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
   IpHitItem,
@@ -388,6 +394,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除精准白名单规则
+   */
+  async DeleteCustomWhiteRule(
+    req: DeleteCustomWhiteRuleRequest,
+    cb?: (error: string, rep: DeleteCustomWhiteRuleResponse) => void
+  ): Promise<DeleteCustomWhiteRuleResponse> {
+    return this.request("DeleteCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * 编辑精准白名单
+   */
+  async ModifyCustomWhiteRule(
+    req: ModifyCustomWhiteRuleRequest,
+    cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void
+  ): Promise<ModifyCustomWhiteRuleResponse> {
+    return this.request("ModifyCustomWhiteRule", req, cb)
+  }
+
+  /**
    * 查询下载攻击日志任务记录列表
    */
   async GetAttackDownloadRecords(
@@ -458,13 +484,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取各个模块具体的规格限制
+   * 增加精准白名单规则
    */
-  async DescribeRuleLimit(
-    req: DescribeRuleLimitRequest,
-    cb?: (error: string, rep: DescribeRuleLimitResponse) => void
-  ): Promise<DescribeRuleLimitResponse> {
-    return this.request("DescribeRuleLimit", req, cb)
+  async AddCustomWhiteRule(
+    req: AddCustomWhiteRuleRequest,
+    cb?: (error: string, rep: AddCustomWhiteRuleResponse) => void
+  ): Promise<AddCustomWhiteRuleResponse> {
+    return this.request("AddCustomWhiteRule", req, cb)
   }
 
   /**
@@ -555,6 +581,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
   ): Promise<DescribeDomainWhiteRulesResponse> {
     return this.request("DescribeDomainWhiteRules", req, cb)
+  }
+
+  /**
+   * 获取各个模块具体的规格限制
+   */
+  async DescribeRuleLimit(
+    req: DescribeRuleLimitRequest,
+    cb?: (error: string, rep: DescribeRuleLimitResponse) => void
+  ): Promise<DescribeRuleLimitResponse> {
+    return this.request("DescribeRuleLimit", req, cb)
   }
 
   /**

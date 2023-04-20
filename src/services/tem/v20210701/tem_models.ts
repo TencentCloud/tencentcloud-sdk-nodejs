@@ -497,6 +497,11 @@ export interface RollingUpdateApplicationByVersionRequest {
    * 发布过程中保障的最小可用实例数
    */
   MinAvailable?: number
+
+  /**
+   * 是否强制发布
+   */
+  Force?: boolean
 }
 
 /**
@@ -537,7 +542,7 @@ export interface RollingUpdateApplicationByVersionResponse {
   /**
    * 版本ID
    */
-  Result: string
+  Result?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

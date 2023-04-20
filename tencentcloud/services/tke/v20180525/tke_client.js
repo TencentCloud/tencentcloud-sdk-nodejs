@@ -946,7 +946,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpoint", req, cb);
     }
     /**
-     * 在应用市场中给集群创建应用
+     * 集群创建应用
      */
     async CreateClusterRelease(req, cb) {
         return this.request("CreateClusterRelease", req, cb);

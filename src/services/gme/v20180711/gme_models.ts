@@ -612,6 +612,16 @@ export interface DescribeUserInAndOutTimeRequest {
 }
 
 /**
+ * 语音转文本配置数据
+ */
+export interface AsrConf {
+  /**
+   * 语音转文本服务开关，取值：open/close
+   */
+  Status?: string
+}
+
+/**
  * StartRecord返回参数结构体
  */
 export interface StartRecordResponse {
@@ -770,17 +780,6 @@ export interface CreateAgeDetectTaskRequest {
 }
 
 /**
- * 实时语音转文本用量数据
- */
-export interface RealtimeTextStatisticsItem {
-  /**
-      * 统计值，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: number
-}
-
-/**
  * DescribeAppStatistics返回参数结构体
  */
 export interface DescribeAppStatisticsResponse {
@@ -869,6 +868,14 @@ export interface StatusInfo {
 }
 
 /**
+ * SceneInfo场景信息
+'RealTime','实时语音分析',
+'VoiceMessage','语音消息',
+'GMECloudApi':'GME云API接口'
+ */
+export type SceneInfo = null
+
+/**
  * 剔除房间操作结果
  */
 export interface DeleteResult {
@@ -948,7 +955,7 @@ export interface RealtimeSpeechConf {
   Status?: string
 
   /**
-   * 实时语音音质类型，取值：high-高音质
+   * 实时语音音质类型，取值：high-高音质 ordinary-普通音质
    */
   Quality?: string
 }
@@ -1428,6 +1435,12 @@ export interface VoiceFilterConf {
    * 语音过滤服务开关，取值：open/close
    */
   Status?: string
+
+  /**
+      * 场景配置信息，如开关状态，回调地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SceneInfos?: Array<SceneInfo>
 }
 
 /**
@@ -1778,7 +1791,7 @@ export interface CreateAppResp {
   RealtimeSpeechConf: RealtimeSpeechConf
 
   /**
-   * 语音消息及转文本服务配置数据
+   * 语音消息服务配置数据
    */
   VoiceMessageConf: VoiceMessageConf
 
@@ -1786,6 +1799,11 @@ export interface CreateAppResp {
    * 语音分析服务配置数据
    */
   VoiceFilterConf: VoiceFilterConf
+
+  /**
+   * 语音转文本服务配置数据
+   */
+  AsrConf?: AsrConf
 }
 
 /**
@@ -1817,6 +1835,26 @@ export interface DescribeApplicationDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateScanUsers请求参数结构体
+ */
+export interface UpdateScanUsersRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
+   */
+  UserIdString?: string
+
+  /**
+   * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
+   */
+  UserIdRegex?: Array<string>
 }
 
 /**
@@ -1951,23 +1989,14 @@ export interface ModifyAppStatusResponse {
 }
 
 /**
- * UpdateScanUsers请求参数结构体
+ * 实时语音转文本用量数据
  */
-export interface UpdateScanUsersRequest {
+export interface RealtimeTextStatisticsItem {
   /**
-   * 应用ID
-   */
-  BizId: number
-
-  /**
-   * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
-   */
-  UserIdString?: string
-
-  /**
-   * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
-   */
-  UserIdRegex?: Array<string>
+      * 统计值，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: number
 }
 
 /**

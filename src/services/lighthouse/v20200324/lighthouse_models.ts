@@ -572,7 +572,7 @@ export interface DescribeBundlesResponse {
  */
 export interface ModifyInstancesBundleRequest {
   /**
-   * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为30。
+   * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为15。
    */
   InstanceIds: Array<string>
 
@@ -1262,6 +1262,16 @@ export interface CreateBlueprintRequest {
    * 需要制作镜像的实例ID。
    */
   InstanceId?: string
+
+  /**
+      * 是否执行强制关机以制作镜像。
+取值范围：
+True：表示关机之后制作镜像
+False：表示开机状态制作镜像
+默认取值：True
+开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
+      */
+  ForcePowerOff?: boolean
 }
 
 /**
@@ -3474,7 +3484,7 @@ export interface CreateBlueprintResponse {
   /**
    * 自定义镜像ID。
    */
-  BlueprintId: string
+  BlueprintId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

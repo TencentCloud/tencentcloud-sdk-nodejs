@@ -258,6 +258,16 @@ it("ocr.v20181119.PropOwnerCertOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
+    try {
+       const data = await client.RecognizeThaiIDCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.BizLicenseOCR", async function () {
     try {
        const data = await client.BizLicenseOCR({})
@@ -698,6 +708,16 @@ it("ocr.v20181119.MainlandPermitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizePhilippinesSssIDOCR", async function () {
+    try {
+       const data = await client.RecognizePhilippinesSssIDOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.FormulaOCR", async function () {
     try {
        const data = await client.FormulaOCR({})
@@ -808,9 +828,9 @@ it("ocr.v20181119.RideHailingTransportLicenseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
+it("ocr.v20181119.RecognizePhilippinesTinIDOCR", async function () {
     try {
-       const data = await client.RecognizeThaiIDCardOCR({})
+       const data = await client.RecognizePhilippinesTinIDOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -340,7 +340,7 @@ export interface UpgradeClusterReleaseRequest {
       */
     Values?: ReleaseValues;
     /**
-      * 制品来源，范围：tke-market/tcr/other
+      * 制品来源，范围：tke-market 或 other
       */
     ChartFrom?: string;
     /**
@@ -4314,7 +4314,7 @@ export interface UpgradeClusterReleaseResponse {
       * 应用详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Release: PendingRelease;
+    Release?: PendingRelease;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4764,7 +4764,12 @@ export interface CreateClusterEndpointRequest {
       */
     SecurityGroup?: string;
     /**
-      * 创建lb参数，只有外网访问需要设置
+      * 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}。
+各个参数意义：
+InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。
+InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。
+VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
+BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE。
       */
     ExtensiveParameters?: string;
 }
@@ -6950,7 +6955,7 @@ export interface CreateClusterReleaseRequest {
       */
     Values?: ReleaseValues;
     /**
-      * 制品来源，范围：tke 应用市场/第三方chart
+      * 制品来源，范围：tke-market 或 other
       */
     ChartFrom?: string;
     /**
@@ -8734,6 +8739,10 @@ export interface VirtualNodeSpec {
       * 子网ID
       */
     SubnetId: string;
+    /**
+      * 腾讯云标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 集群网络相关的参数
@@ -9797,7 +9806,7 @@ export interface CreateClusterReleaseResponse {
       * 应用详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Release: PendingRelease;
+    Release?: PendingRelease;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

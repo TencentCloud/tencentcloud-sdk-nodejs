@@ -162,6 +162,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafAutoDenyStatus", req, cb);
     }
     /**
+     * 删除精准白名单规则
+     */
+    async DeleteCustomWhiteRule(req, cb) {
+        return this.request("DeleteCustomWhiteRule", req, cb);
+    }
+    /**
+     * 编辑精准白名单
+     */
+    async ModifyCustomWhiteRule(req, cb) {
+        return this.request("ModifyCustomWhiteRule", req, cb);
+    }
+    /**
      * 查询下载攻击日志任务记录列表
      */
     async GetAttackDownloadRecords(req, cb) {
@@ -204,10 +216,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafThreatenIntelligence", req, cb);
     }
     /**
-     * 获取各个模块具体的规格限制
+     * 增加精准白名单规则
      */
-    async DescribeRuleLimit(req, cb) {
-        return this.request("DescribeRuleLimit", req, cb);
+    async AddCustomWhiteRule(req, cb) {
+        return this.request("AddCustomWhiteRule", req, cb);
     }
     /**
      * 修改ip惩罚规则
@@ -262,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDomainWhiteRules(req, cb) {
         return this.request("DescribeDomainWhiteRules", req, cb);
+    }
+    /**
+     * 获取各个模块具体的规格限制
+     */
+    async DescribeRuleLimit(req, cb) {
+        return this.request("DescribeRuleLimit", req, cb);
     }
     /**
      * 添加Spart防护域名

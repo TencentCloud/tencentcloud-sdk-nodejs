@@ -324,6 +324,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PropOwnerCertOCR", req, cb);
     }
     /**
+     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+     */
+    async RecognizeThaiIDCardOCR(req, cb) {
+        return this.request("RecognizeThaiIDCardOCR", req, cb);
+    }
+    /**
      * 本接口支持快速精准识别营业执照上的字段，包括统一社会信用代码、公司名称、主体类型、法定代表人、注册资本、组成形式、成立日期、营业期限和经营范围等字段。
 
 默认接口请求频率限制：10次/秒。
@@ -802,6 +809,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MainlandPermitOCR", req, cb);
     }
     /**
+     * 菲律宾SSSID识别
+     */
+    async RecognizePhilippinesSssIDOCR(req, cb) {
+        return this.request("RecognizePhilippinesSssIDOCR", req, cb);
+    }
+    /**
      * 本接口支持识别主流初高中数学符号和公式，返回公式的 Latex 格式文本。
 
 默认接口请求频率限制：5次/秒。
@@ -890,11 +903,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RideHailingTransportLicenseOCR", req, cb);
     }
     /**
-     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+     * 菲律宾TinID识别
      */
-    async RecognizeThaiIDCardOCR(req, cb) {
-        return this.request("RecognizeThaiIDCardOCR", req, cb);
+    async RecognizePhilippinesTinIDOCR(req, cb) {
+        return this.request("RecognizePhilippinesTinIDOCR", req, cb);
     }
     /**
      * 本接口支持行驶证主页和副页所有字段的自动定位与识别。

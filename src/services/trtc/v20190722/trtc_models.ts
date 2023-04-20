@@ -2293,7 +2293,7 @@ export interface CreateCloudRecordingRequest {
   RecordParams: RecordParams
 
   /**
-   * 云端录制文件上传到云存储的参数(目前只支持使用腾讯云点播作为存储)。
+   * 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。
    */
   StorageParams: StorageParams
 
@@ -2574,7 +2574,7 @@ export interface CreateCloudRecordingResponse {
   /**
    * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

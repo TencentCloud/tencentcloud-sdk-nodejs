@@ -209,6 +209,24 @@ export interface DescribeFlowTrendRequest {
  */
 export declare type DescribeWafAutoDenyStatusRequest = null;
 /**
+ * AddCustomWhiteRule返回参数结构体
+ */
+export interface AddCustomWhiteRuleResponse {
+    /**
+      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+      */
+    Success: ResponseCode;
+    /**
+      * 添加成功的规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCustomWhiteRule返回参数结构体
  */
 export interface DescribeCustomWhiteRuleResponse {
@@ -396,6 +414,21 @@ export interface ModifyDomainWhiteRuleRequest {
       * 规则的开关状态
       */
     Status: number;
+}
+/**
+ * Vip信息
+ */
+export interface VipInfo {
+    /**
+      * Virtual IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip?: string;
+    /**
+      * waf实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
 }
 /**
  * DescribeAccessIndex接口的出参
@@ -635,6 +668,19 @@ export interface SearchAttackLogRequest {
     Sort?: string;
 }
 /**
+ * DeleteCustomWhiteRule返回参数结构体
+ */
+export interface DeleteCustomWhiteRuleResponse {
+    /**
+      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+      */
+    Success: ResponseCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AddCustomRule返回参数结构体
  */
 export interface AddCustomRuleResponse {
@@ -686,7 +732,7 @@ export interface UpsertIpAccessControlRequest {
       */
     Edition?: string;
     /**
-      * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，佛祖饿为空
+      * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
       */
     SourceType?: string;
 }
@@ -781,6 +827,52 @@ export interface DescribeUserClbWafRegionsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyCustomWhiteRule请求参数结构体
+ */
+export interface ModifyCustomWhiteRuleRequest {
+    /**
+      * 编辑的域名
+      */
+    Domain: string;
+    /**
+      * 编辑的规则ID
+      */
+    RuleId: number;
+    /**
+      * 编辑的规则名称
+      */
+    RuleName: string;
+    /**
+      * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。
+      */
+    Bypass: string;
+    /**
+      * 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。
+      */
+    SortId: number;
+    /**
+      * 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。
+      */
+    ExpireTime: number;
+    /**
+      * 匹配条件数组
+      */
+    Strategies: Array<Strategy>;
+}
+/**
+ * DeleteCustomWhiteRule请求参数结构体
+ */
+export interface DeleteCustomWhiteRuleRequest {
+    /**
+      * 删除的域名
+      */
+    Domain: string;
+    /**
+      * 删除的规则ID
+      */
+    RuleId: number;
 }
 /**
  * ModifyWafAutoDenyStatus请求参数结构体
@@ -1529,6 +1621,19 @@ export interface PostAttackDownloadTaskRequest {
       * 默认为desc，可以取值desc和asc
       */
     Sort?: string;
+}
+/**
+ * ModifyCustomWhiteRule返回参数结构体
+ */
+export interface ModifyCustomWhiteRuleResponse {
+    /**
+      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+      */
+    Success: ResponseCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribePolicyStatus请求参数结构体
@@ -2876,30 +2981,6 @@ export interface DescribeDomainWhiteRulesResponse {
     RequestId?: string;
 }
 /**
- * Vip信息
- */
-export interface VipInfo {
-    /**
-      * Virtual IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Vip?: string;
-    /**
-      * waf实例id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceId?: string;
-}
-/**
- * DeleteAttackDownloadRecord请求参数结构体
- */
-export interface DeleteAttackDownloadRecordRequest {
-    /**
-      * 下载任务记录唯一标记
-      */
-    Id: number;
-}
-/**
  * DescribeWafThreatenIntelligence返回参数结构体
  */
 export interface DescribeWafThreatenIntelligenceResponse {
@@ -2911,6 +2992,44 @@ export interface DescribeWafThreatenIntelligenceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteAttackDownloadRecord请求参数结构体
+ */
+export interface DeleteAttackDownloadRecordRequest {
+    /**
+      * 下载任务记录唯一标记
+      */
+    Id: number;
+}
+/**
+ * AddCustomWhiteRule请求参数结构体
+ */
+export interface AddCustomWhiteRuleRequest {
+    /**
+      * 规则名称
+      */
+    Name: string;
+    /**
+      * 优先级
+      */
+    SortId: string;
+    /**
+      * 过期时间
+      */
+    ExpireTime: string;
+    /**
+      * 策略详情
+      */
+    Strategies: Array<Strategy>;
+    /**
+      * 需要添加策略的域名
+      */
+    Domain: string;
+    /**
+      * 放行的详情
+      */
+    Bypass: string;
 }
 /**
  * AddDomainWhiteRule请求参数结构体

@@ -238,6 +238,26 @@ it("waf.v20180125.DescribeWafAutoDenyStatus", async function () {
     }
 })
 
+it("waf.v20180125.DeleteCustomWhiteRule", async function () {
+    try {
+       const data = await client.DeleteCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyCustomWhiteRule", async function () {
+    try {
+       const data = await client.ModifyCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.GetAttackDownloadRecords", async function () {
     try {
        const data = await client.GetAttackDownloadRecords({})
@@ -308,9 +328,9 @@ it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     }
 })
 
-it("waf.v20180125.DescribeRuleLimit", async function () {
+it("waf.v20180125.AddCustomWhiteRule", async function () {
     try {
-       const data = await client.DescribeRuleLimit({})
+       const data = await client.AddCustomWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +421,16 @@ it("waf.v20180125.DeleteSession", async function () {
 it("waf.v20180125.DescribeDomainWhiteRules", async function () {
     try {
        const data = await client.DescribeDomainWhiteRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeRuleLimit", async function () {
+    try {
+       const data = await client.DescribeRuleLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

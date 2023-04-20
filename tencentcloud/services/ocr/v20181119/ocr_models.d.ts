@@ -1832,6 +1832,39 @@ export interface TrainTicketOCRResponse {
     RequestId?: string;
 }
 /**
+ * RecognizePhilippinesTinIDOCR返回参数结构体
+ */
+export interface RecognizePhilippinesTinIDOCRResponse {
+    /**
+      * 人像照片Base64后的结果
+      */
+    HeadPortrait: TextDetectionResult;
+    /**
+      * 编码
+      */
+    LicenseNumber: TextDetectionResult;
+    /**
+      * 姓名
+      */
+    FullName: TextDetectionResult;
+    /**
+      * 地址
+      */
+    Address: TextDetectionResult;
+    /**
+      * 生日
+      */
+    Birthday: TextDetectionResult;
+    /**
+      * 发证日期
+      */
+    IssueDate: TextDetectionResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 过路过桥费字段信息
  */
 export interface TollInvoiceInfo {
@@ -2464,32 +2497,28 @@ WARN_DRIVER_LICENSE_PS_CARD ps告警
     RequestId?: string;
 }
 /**
- * VatInvoiceOCR请求参数结构体
+ * RecognizePhilippinesSssIDOCR请求参数结构体
  */
-export interface VatInvoiceOCRRequest {
+export interface RecognizePhilippinesSssIDOCRRequest {
     /**
-      * 图片/PDF的 Base64 值。
-支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。
-输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      * 是否返回人像照片。
+      */
+    ReturnHeadImage: boolean;
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
-      * 图片/PDF的 Url 地址。
-支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
-    /**
-      * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-      */
-    IsPdf?: boolean;
-    /**
-      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-      */
-    PdfPageNumber?: number;
 }
 /**
  * key信息组
@@ -2898,6 +2927,31 @@ export interface VatInvoiceVerifyNewResponse {
       * 通行费发票信息
       */
     PassInvoiceInfoList?: Array<PassInvoiceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RecognizePhilippinesSssIDOCR返回参数结构体
+ */
+export interface RecognizePhilippinesSssIDOCRResponse {
+    /**
+      * 人像照片Base64后的结果
+      */
+    HeadPortrait: TextDetectionResult;
+    /**
+      * 编号
+      */
+    LicenseNumber: TextDetectionResult;
+    /**
+      * 姓名
+      */
+    FullName: TextDetectionResult;
+    /**
+      * 生日
+      */
+    Birthday: TextDetectionResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6351,6 +6405,34 @@ export interface VinOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * VatInvoiceOCR请求参数结构体
+ */
+export interface VatInvoiceOCRRequest {
+    /**
+      * 图片/PDF的 Base64 值。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。
+输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片/PDF的 Url 地址。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
+}
+/**
  * RideHailingTransportLicenseOCR请求参数结构体
  */
 export interface RideHailingTransportLicenseOCRRequest {
@@ -6426,6 +6508,30 @@ MyKid 儿童卡
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RecognizePhilippinesTinIDOCR请求参数结构体
+ */
+export interface RecognizePhilippinesTinIDOCRRequest {
+    /**
+      * 是否返回人像照片。
+      */
+    ReturnHeadImage: boolean;
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
 }
 /**
  * RecognizeTableOCR请求参数结构体

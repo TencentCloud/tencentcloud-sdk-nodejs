@@ -80,6 +80,7 @@ import {
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
+  RecognizePhilippinesTinIDOCRResponse,
   TollInvoiceInfo,
   BankSlipInfo,
   ArithmeticOCRResponse,
@@ -105,7 +106,7 @@ import {
   ClassifyDetectOCRResponse,
   VatInvoiceVerifyNewRequest,
   VehicleLicenseOCRResponse,
-  VatInvoiceOCRRequest,
+  RecognizePhilippinesSssIDOCRRequest,
   Key,
   IDCardOCRResponse,
   ClassifyDetectOCRRequest,
@@ -121,6 +122,7 @@ import {
   InvoiceGeneralOCRResponse,
   SmartFormFileUrl,
   VatInvoiceVerifyNewResponse,
+  RecognizePhilippinesSssIDOCRResponse,
   TaxiInvoiceOCRRequest,
   PropOwnerCertOCRRequest,
   RecognizeContainerOCRRequest,
@@ -240,8 +242,10 @@ import {
   MixedInvoiceDetectRequest,
   WaybillOCRRequest,
   VinOCRRequest,
+  VatInvoiceOCRRequest,
   RideHailingTransportLicenseOCRRequest,
   MLIDCardOCRResponse,
+  RecognizePhilippinesTinIDOCRRequest,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
   VerifyBasicBizLicenseRequest,
@@ -656,6 +660,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PropOwnerCertOCRResponse) => void
   ): Promise<PropOwnerCertOCRResponse> {
     return this.request("PropOwnerCertOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+     */
+  async RecognizeThaiIDCardOCR(
+    req: RecognizeThaiIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void
+  ): Promise<RecognizeThaiIDCardOCRResponse> {
+    return this.request("RecognizeThaiIDCardOCR", req, cb)
   }
 
   /**
@@ -1313,6 +1328,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 菲律宾SSSID识别
+   */
+  async RecognizePhilippinesSssIDOCR(
+    req: RecognizePhilippinesSssIDOCRRequest,
+    cb?: (error: string, rep: RecognizePhilippinesSssIDOCRResponse) => void
+  ): Promise<RecognizePhilippinesSssIDOCRResponse> {
+    return this.request("RecognizePhilippinesSssIDOCR", req, cb)
+  }
+
+  /**
      * 本接口支持识别主流初高中数学符号和公式，返回公式的 Latex 格式文本。
 
 默认接口请求频率限制：5次/秒。
@@ -1445,14 +1470,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-     */
-  async RecognizeThaiIDCardOCR(
-    req: RecognizeThaiIDCardOCRRequest,
-    cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void
-  ): Promise<RecognizeThaiIDCardOCRResponse> {
-    return this.request("RecognizeThaiIDCardOCR", req, cb)
+   * 菲律宾TinID识别
+   */
+  async RecognizePhilippinesTinIDOCR(
+    req: RecognizePhilippinesTinIDOCRRequest,
+    cb?: (error: string, rep: RecognizePhilippinesTinIDOCRResponse) => void
+  ): Promise<RecognizePhilippinesTinIDOCRResponse> {
+    return this.request("RecognizePhilippinesTinIDOCR", req, cb)
   }
 
   /**
