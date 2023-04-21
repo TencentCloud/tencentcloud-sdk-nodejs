@@ -807,17 +807,22 @@ export interface HostCertificateResponse {
     RequestId?: string;
 }
 /**
- * UploadConfirmLetter请求参数结构体
+ * UploadCertificate返回参数结构体
  */
-export interface UploadConfirmLetterRequest {
+export interface UploadCertificateResponse {
     /**
-      * 证书ID
+      * 证书 ID。
       */
-    CertificateId: string;
+    CertificateId?: string;
     /**
-      * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+      * 重复证书的ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ConfirmLetter: string;
+    RepeatCertId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 权益包转出详情
@@ -1479,6 +1484,23 @@ export interface DescribeManagerDetailRequest {
     Offset?: number;
 }
 /**
+ * DescribeCompanies返回参数结构体
+ */
+export interface DescribeCompaniesResponse {
+    /**
+      * 公司列表
+      */
+    Companies: Array<CompanyInfo>;
+    /**
+      * 公司总数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
  */
 export interface DvAuthDetail {
@@ -1701,22 +1723,17 @@ export interface VerifyManagerRequest {
     ManagerId: number;
 }
 /**
- * UploadCertificate返回参数结构体
+ * RevokeCertificate请求参数结构体
  */
-export interface UploadCertificateResponse {
+export interface RevokeCertificateRequest {
     /**
       * 证书 ID。
       */
-    CertificateId?: string;
+    CertificateId: string;
     /**
-      * 重复证书的ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 吊销证书原因。
       */
-    RepeatCertId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Reason?: string;
 }
 /**
  * 返回参数键为 RevokeDomainValidateAuths 的内容。
@@ -1799,91 +1816,34 @@ export interface ModifyCertificateAliasResponse {
     RequestId?: string;
 }
 /**
- * DescribeManagerDetail返回参数结构体
+ * UploadConfirmLetter请求参数结构体
  */
-export interface DescribeManagerDetailResponse {
+export interface UploadConfirmLetterRequest {
     /**
-      * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
+      * 证书ID
       */
-    Status: string;
+    CertificateId: string;
     /**
-      * 管理人姓名
+      * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
       */
-    ManagerFirstName: string;
+    ConfirmLetter: string;
+}
+/**
+ * DescribeCompanies请求参数结构体
+ */
+export interface DescribeCompaniesRequest {
     /**
-      * 管理人邮箱
+      * 分页偏移量
       */
-    ManagerMail: string;
+    Offset?: number;
     /**
-      * 联系人姓名
+      * 分页每页限制数
       */
-    ContactFirstName: string;
+    Limit?: number;
     /**
-      * 管理人姓名
+      * 公司ID
       */
-    ManagerLastName: string;
-    /**
-      * 联系人职位
-      */
-    ContactPosition: string;
-    /**
-      * 管理人职位
-      */
-    ManagerPosition: string;
-    /**
-      * 核验通过时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VerifyTime: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 核验过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExpireTime: string;
-    /**
-      * 联系人姓名
-      */
-    ContactLastName: string;
-    /**
-      * 管理人电话
-      */
-    ManagerPhone: string;
-    /**
-      * 联系人电话
-      */
-    ContactPhone: string;
-    /**
-      * 联系人邮箱
-      */
-    ContactMail: string;
-    /**
-      * 管理人所属部门
-      */
-    ManagerDepartment: string;
-    /**
-      * 管理人所属公司信息
-      */
-    CompanyInfo: CompanyInfo;
-    /**
-      * 管理人公司ID
-      */
-    CompanyId: number;
-    /**
-      * 管理人ID
-      */
-    ManagerId: number;
-    /**
-      * 审核状态详细信息
-      */
-    StatusInfo: Array<ManagerStatusInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    CompanyId?: number;
 }
 /**
  * 管理人的四种审核状态
@@ -2143,17 +2103,91 @@ export interface SubmitCertificateInformationResponse {
     RequestId?: string;
 }
 /**
- * RevokeCertificate请求参数结构体
+ * DescribeManagerDetail返回参数结构体
  */
-export interface RevokeCertificateRequest {
+export interface DescribeManagerDetailResponse {
     /**
-      * 证书 ID。
+      * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
       */
-    CertificateId: string;
+    Status: string;
     /**
-      * 吊销证书原因。
+      * 管理人姓名
       */
-    Reason?: string;
+    ManagerFirstName: string;
+    /**
+      * 管理人邮箱
+      */
+    ManagerMail: string;
+    /**
+      * 联系人姓名
+      */
+    ContactFirstName: string;
+    /**
+      * 管理人姓名
+      */
+    ManagerLastName: string;
+    /**
+      * 联系人职位
+      */
+    ContactPosition: string;
+    /**
+      * 管理人职位
+      */
+    ManagerPosition: string;
+    /**
+      * 核验通过时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VerifyTime: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 核验过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTime: string;
+    /**
+      * 联系人姓名
+      */
+    ContactLastName: string;
+    /**
+      * 管理人电话
+      */
+    ManagerPhone: string;
+    /**
+      * 联系人电话
+      */
+    ContactPhone: string;
+    /**
+      * 联系人邮箱
+      */
+    ContactMail: string;
+    /**
+      * 管理人所属部门
+      */
+    ManagerDepartment: string;
+    /**
+      * 管理人所属公司信息
+      */
+    CompanyInfo: CompanyInfo;
+    /**
+      * 管理人公司ID
+      */
+    CompanyId: number;
+    /**
+      * 管理人ID
+      */
+    ManagerId: number;
+    /**
+      * 审核状态详细信息
+      */
+    StatusInfo: Array<ManagerStatusInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 预审核信息列表

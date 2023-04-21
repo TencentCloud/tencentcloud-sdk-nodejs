@@ -23,6 +23,7 @@ import {
   HealthReportTask,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
+  DescribeAuditLogFilesResponse,
   DescribeSlowLogsRequest,
   DescribeTopSpaceTablesRequest,
   ScoreItem,
@@ -36,8 +37,9 @@ import {
   DescribeRedisTopBigKeysResponse,
   DescribeSqlTemplateRequest,
   DescribeTopSpaceSchemaTimeSeriesResponse,
+  AuditLogFilter,
   SlowLogTopSqlItem,
-  DescribeNoPrimaryKeyTablesResponse,
+  CreateKillTaskResponse,
   DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
   DescribeMySqlProcessListResponse,
@@ -49,6 +51,7 @@ import {
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
+  DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
   TimeSlice,
   DeleteDBDiagReportTasksRequest,
@@ -62,11 +65,11 @@ import {
   CancelKillTaskRequest,
   MySqlProcess,
   DescribeDBDiagHistoryRequest,
-  CreateKillTaskResponse,
+  CreateAuditLogFileResponse,
   DeleteSqlFiltersResponse,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
-  CreateKillTaskRequest,
+  CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
   SlowLogHost,
@@ -116,17 +119,20 @@ import {
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
   DescribeAllUserGroupRequest,
-  CreateProxySessionKillTaskRequest,
+  CreateKillTaskRequest,
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
   CreateProxySessionKillTaskResponse,
+  AuditLogFile,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeProxyProcessStatisticsRequest,
   MonitorFloatMetric,
   DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
+  CreateAuditLogFileRequest,
+  DeleteAuditLogFileRequest,
   ModifyDiagDBInstanceConfResponse,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
@@ -142,6 +148,8 @@ import {
   ScoreDetail,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
+  DescribeNoPrimaryKeyTablesResponse,
+  DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
   DescribeUserSqlAdviceRequest,
   Table,
@@ -247,6 +255,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
   ): Promise<DescribeDBDiagReportTasksResponse> {
     return this.request("DescribeDBDiagReportTasks", req, cb)
+  }
+
+  /**
+   * 修改实例巡检开关。
+   */
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 用于删除云数据库实例的审计日志文件。
+   */
+  async DeleteAuditLogFile(
+    req: DeleteAuditLogFileRequest,
+    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
+  ): Promise<DeleteAuditLogFileResponse> {
+    return this.request("DeleteAuditLogFile", req, cb)
   }
 
   /**
@@ -387,6 +415,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySqlFiltersResponse) => void
   ): Promise<ModifySqlFiltersResponse> {
     return this.request("ModifySqlFilters", req, cb)
+  }
+
+  /**
+   * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
+   */
+  async CreateAuditLogFile(
+    req: CreateAuditLogFileRequest,
+    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
+  ): Promise<CreateAuditLogFileResponse> {
+    return this.request("CreateAuditLogFile", req, cb)
   }
 
   /**
@@ -570,13 +608,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例巡检开关。
+   * 用于创建云数据库实例的审计日志文件
    */
-  async ModifyDiagDBInstanceConf(
-    req: ModifyDiagDBInstanceConfRequest,
-    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
-  ): Promise<ModifyDiagDBInstanceConfResponse> {
-    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
   }
 
   /**

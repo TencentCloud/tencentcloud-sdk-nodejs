@@ -9981,6 +9981,16 @@ export interface Address {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagSet: Array<Tag>;
+    /**
+      * 到期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeadlineDate: string;
+    /**
+      * EIP绑定的实例类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType: string;
 }
 /**
  * VPN网关对象。

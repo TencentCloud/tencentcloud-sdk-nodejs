@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificate", req, cb);
     }
     /**
+     * 查询公司列表
+     */
+    async DescribeCompanies(req, cb) {
+        return this.request("DescribeCompanies", req, cb);
+    }
+    /**
      * 获取证书详情。
      */
     async DescribeCertificateDetail(req, cb) {

@@ -261,6 +261,36 @@ export interface TextToVoiceRequest {
 <li>101054-智友，通用男声</li>
 <li>101055-智付，通用女声</li>
 <li>101056-智林，东北男声</li>
+<li>301000-爱小广，多情感通用男声</li>
+<li>301001-爱小栋，多情感通用男声</li>
+<li>301002-爱小海，多情感通用男声</li>
+<li>301003-爱小霞，多情感通用女声</li>
+<li>301004-爱小玲，多情感通用女声</li>
+<li>301005-爱小章，多情感通用男声</li>
+<li>301006-爱小峰，多情感通用男声</li>
+<li>301007-爱小亮，多情感通用男声</li>
+<li>301008-爱小博，多情感通用男声</li>
+<li>301009-爱小芸，多情感通用女声</li>
+<li>301010-爱小秋，多情感通用女声</li>
+<li>301011-爱小芳，多情感通用女声</li>
+<li>301012-爱小琴，多情感通用女声</li>
+<li>301013-爱小康，多情感通用男声</li>
+<li>301014-爱小辉，多情感通用男声</li>
+<li>301015-爱小璐，多情感通用女声</li>
+<li>301016-爱小阳，多情感通用男声</li>
+<li>301017-爱小泉，多情感通用男声</li>
+<li>301018-爱小昆，多情感通用男声</li>
+<li>301019-爱小诚，多情感通用男声</li>
+<li>301020-爱小岚，多情感通用女声</li>
+<li>301021-爱小茹，多情感通用女声</li>
+<li>301022-爱小蓉，多情感通用女声</li>
+<li>301023-爱小燕，多情感通用女声</li>
+<li>301024-爱小莲，多情感通用女声</li>
+<li>301025-爱小武，多情感通用男声</li>
+<li>301026-爱小雪，多情感通用女声</li>
+<li>301027-爱小媛，多情感通用女声</li>
+<li>301028-爱小娴，多情感通用女声</li>
+<li>301029-爱小涛，多情感通用男声</li>
       */
   VoiceType?: number
 
@@ -290,7 +320,7 @@ export interface TextToVoiceRequest {
   SegmentRate?: number
 
   /**
-   * 控制合成音频的情感，仅支持情绪音色使用。取值: peaceful、exciting、thrill、neutral、sad、angry、cute、fear、poetry、happy、regretful、exciting_strong、aojiao、sajiao、story、raido、call、jieshuo等等；
+   * 控制合成音频的情感，仅支持多情感音色使用。取值: neutral(中性)、sad(悲伤)、happy(高兴)、angry(生气)、fear(恐惧)、news(新闻)、story(故事)、radio(广播)、poetry(诗歌)、call(客服)
    */
   EmotionCategory?: string
 

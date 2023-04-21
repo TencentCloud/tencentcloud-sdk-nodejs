@@ -508,6 +508,16 @@ it("tdmq.v20200217.ModifyCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribePulsarProInstanceDetail", async function () {
+    try {
+       const data = await client.DescribePulsarProInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyCmqSubscriptionAttribute", async function () {
     try {
        const data = await client.ModifyCmqSubscriptionAttribute({})
@@ -961,6 +971,16 @@ it("tdmq.v20200217.DescribePublishers", async function () {
 it("tdmq.v20200217.CreateRocketMQCluster", async function () {
     try {
        const data = await client.CreateRocketMQCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribePulsarProInstances", async function () {
+    try {
+       const data = await client.DescribePulsarProInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -46,6 +46,7 @@ import {
   RoomItem,
   SetWatermarkRequest,
   DescribeRoomRequest,
+  BatchDescribeDocumentRequest,
   EndRoomRequest,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
@@ -127,6 +128,7 @@ import {
   GetRoomsRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
+  BatchDescribeDocumentResponse,
   DeleteGroupResponse,
   DescribeSdkAppIdUsersRequest,
   AddGroupMemberResponse,
@@ -176,8 +178,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量获取文档信息
-   */
+     * 有新接口替换
+
+批量获取文档信息（已废弃，替代接口BatchDescribeDocument）
+     */
   async DescribeDocuments(
     req: DescribeDocumentsRequest,
     cb?: (error: string, rep: DescribeDocumentsResponse) => void
@@ -286,7 +290,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始房间的直播
+   * 开始房间的直播。 说明：开始房间接口调用之前需要有用户进入课堂初始化课堂信息。
    */
   async StartRoom(
     req: StartRoomRequest,
@@ -516,6 +520,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 服务商信息获取
+   */
+  async DescribeDeveloper(
+    req?: DescribeDeveloperRequest,
+    cb?: (error: string, rep: DescribeDeveloperResponse) => void
+  ): Promise<DescribeDeveloperResponse> {
+    return this.request("DescribeDeveloper", req, cb)
+  }
+
+  /**
    * 创建巡课
    */
   async CreateSupervisor(
@@ -546,13 +560,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务商信息获取
+   * 批量获取文档详情
    */
-  async DescribeDeveloper(
-    req?: DescribeDeveloperRequest,
-    cb?: (error: string, rep: DescribeDeveloperResponse) => void
-  ): Promise<DescribeDeveloperResponse> {
-    return this.request("DescribeDeveloper", req, cb)
+  async BatchDescribeDocument(
+    req: BatchDescribeDocumentRequest,
+    cb?: (error: string, rep: BatchDescribeDocumentResponse) => void
+  ): Promise<BatchDescribeDocumentResponse> {
+    return this.request("BatchDescribeDocument", req, cb)
   }
 
   /**

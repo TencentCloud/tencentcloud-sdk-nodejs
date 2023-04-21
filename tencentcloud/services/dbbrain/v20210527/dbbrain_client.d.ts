@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBDiagReportTaskRequest, DescribeSlowLogsRequest, DescribeTopSpaceTablesRequest, CreateSecurityAuditLogExportTaskRequest, DescribeDBDiagEventResponse, DescribeDBDiagEventsResponse, DescribeDBDiagReportTasksResponse, AddUserContactResponse, CancelKillTaskResponse, DescribeRedisTopBigKeysResponse, DescribeSqlTemplateRequest, DescribeTopSpaceSchemaTimeSeriesResponse, DescribeNoPrimaryKeyTablesResponse, DescribeProxySessionKillTasksRequest, DescribeMySqlProcessListResponse, DescribeTopSpaceTablesResponse, ModifySqlFiltersResponse, KillMySqlThreadsResponse, CreateSchedulerMailProfileRequest, DescribeDBSpaceStatusRequest, DeleteDBDiagReportTasksRequest, ModifyDiagDBInstanceConfRequest, DescribeSlowLogsResponse, DescribeSecurityAuditLogDownloadUrlsRequest, CreateDBDiagReportTaskResponse, CreateMailProfileResponse, DescribeSlowLogTimeSeriesStatsRequest, CancelKillTaskRequest, DescribeDBDiagHistoryRequest, CreateKillTaskResponse, DeleteSqlFiltersResponse, DescribeDBDiagEventsRequest, CreateDBDiagReportUrlResponse, CreateKillTaskRequest, DeleteDBDiagReportTasksResponse, DescribeProxyProcessStatisticsResponse, CreateMailProfileRequest, VerifyUserAccountRequest, DescribeSlowLogUserHostStatsResponse, DescribeMailProfileRequest, DeleteSecurityAuditLogExportTasksResponse, KillMySqlThreadsRequest, DescribeSqlFiltersResponse, CreateDBDiagReportUrlRequest, DescribeSecurityAuditLogExportTasksResponse, DescribeRedisTopKeyPrefixListRequest, DescribeSqlTemplateResponse, DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBDiagEventRequest, ModifySqlFiltersRequest, DescribeAllUserContactResponse, AddUserContactRequest, CreateSqlFilterRequest, DescribeAllUserContactRequest, DescribeDiagDBInstancesRequest, DescribeNoPrimaryKeyTablesRequest, CreateSqlFilterResponse, VerifyUserAccountResponse, DescribeSqlFiltersRequest, DescribeSecurityAuditLogExportTasksRequest, DeleteSecurityAuditLogExportTasksRequest, CreateSchedulerMailProfileResponse, DescribeTopSpaceSchemaTimeSeriesRequest, DescribeSlowLogTopSqlsRequest, DescribeMailProfileResponse, DescribeRedisTopBigKeysRequest, DescribeHealthScoreRequest, DescribeDiagDBInstancesResponse, DescribeAllUserGroupRequest, CreateProxySessionKillTaskRequest, CreateSecurityAuditLogExportTaskResponse, DescribeSlowLogUserHostStatsRequest, DescribeTopSpaceSchemasResponse, CreateProxySessionKillTaskResponse, DescribeSlowLogTimeSeriesStatsResponse, DescribeProxyProcessStatisticsRequest, DescribeRedisTopKeyPrefixListResponse, DescribeAllUserGroupResponse, ModifyDiagDBInstanceConfResponse, DescribeUserSqlAdviceResponse, DescribeDBSpaceStatusResponse, DescribeTopSpaceTableTimeSeriesRequest, DescribeDBDiagReportTasksRequest, DescribeHealthScoreResponse, DescribeTopSpaceSchemasRequest, DescribeSlowLogTopSqlsResponse, DeleteSqlFiltersRequest, DescribeUserSqlAdviceRequest, DescribeMySqlProcessListRequest, DescribeSecurityAuditLogDownloadUrlsResponse, DescribeProxySessionKillTasksResponse } from "./dbbrain_models";
+import { CreateDBDiagReportTaskRequest, DescribeAuditLogFilesResponse, DescribeSlowLogsRequest, DescribeTopSpaceTablesRequest, CreateSecurityAuditLogExportTaskRequest, DescribeDBDiagEventResponse, DescribeDBDiagEventsResponse, DescribeDBDiagReportTasksResponse, AddUserContactResponse, CancelKillTaskResponse, DescribeRedisTopBigKeysResponse, DescribeSqlTemplateRequest, DescribeTopSpaceSchemaTimeSeriesResponse, CreateKillTaskResponse, DescribeProxySessionKillTasksRequest, DescribeMySqlProcessListResponse, DescribeTopSpaceTablesResponse, ModifySqlFiltersResponse, KillMySqlThreadsResponse, CreateSchedulerMailProfileRequest, DeleteAuditLogFileResponse, DescribeDBSpaceStatusRequest, DeleteDBDiagReportTasksRequest, ModifyDiagDBInstanceConfRequest, DescribeSlowLogsResponse, DescribeSecurityAuditLogDownloadUrlsRequest, CreateDBDiagReportTaskResponse, CreateMailProfileResponse, DescribeSlowLogTimeSeriesStatsRequest, CancelKillTaskRequest, DescribeDBDiagHistoryRequest, CreateAuditLogFileResponse, DeleteSqlFiltersResponse, DescribeDBDiagEventsRequest, CreateDBDiagReportUrlResponse, CreateProxySessionKillTaskRequest, DeleteDBDiagReportTasksResponse, DescribeProxyProcessStatisticsResponse, CreateMailProfileRequest, VerifyUserAccountRequest, DescribeSlowLogUserHostStatsResponse, DescribeMailProfileRequest, DeleteSecurityAuditLogExportTasksResponse, KillMySqlThreadsRequest, DescribeSqlFiltersResponse, CreateDBDiagReportUrlRequest, DescribeSecurityAuditLogExportTasksResponse, DescribeRedisTopKeyPrefixListRequest, DescribeSqlTemplateResponse, DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBDiagEventRequest, ModifySqlFiltersRequest, DescribeAllUserContactResponse, AddUserContactRequest, CreateSqlFilterRequest, DescribeAllUserContactRequest, DescribeDiagDBInstancesRequest, DescribeNoPrimaryKeyTablesRequest, CreateSqlFilterResponse, VerifyUserAccountResponse, DescribeSqlFiltersRequest, DescribeSecurityAuditLogExportTasksRequest, DeleteSecurityAuditLogExportTasksRequest, CreateSchedulerMailProfileResponse, DescribeTopSpaceSchemaTimeSeriesRequest, DescribeSlowLogTopSqlsRequest, DescribeMailProfileResponse, DescribeRedisTopBigKeysRequest, DescribeHealthScoreRequest, DescribeDiagDBInstancesResponse, DescribeAllUserGroupRequest, CreateKillTaskRequest, CreateSecurityAuditLogExportTaskResponse, DescribeSlowLogUserHostStatsRequest, DescribeTopSpaceSchemasResponse, CreateProxySessionKillTaskResponse, DescribeSlowLogTimeSeriesStatsResponse, DescribeProxyProcessStatisticsRequest, DescribeRedisTopKeyPrefixListResponse, DescribeAllUserGroupResponse, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, ModifyDiagDBInstanceConfResponse, DescribeUserSqlAdviceResponse, DescribeDBSpaceStatusResponse, DescribeTopSpaceTableTimeSeriesRequest, DescribeDBDiagReportTasksRequest, DescribeHealthScoreResponse, DescribeTopSpaceSchemasRequest, DescribeSlowLogTopSqlsResponse, DescribeNoPrimaryKeyTablesResponse, DescribeAuditLogFilesRequest, DeleteSqlFiltersRequest, DescribeUserSqlAdviceRequest, DescribeMySqlProcessListRequest, DescribeSecurityAuditLogDownloadUrlsResponse, DescribeProxySessionKillTasksResponse } from "./dbbrain_models";
 /**
  * dbbrain client
  * @class
@@ -43,6 +43,14 @@ export declare class Client extends AbstractClient {
      * 查询健康报告生成任务列表。
      */
     DescribeDBDiagReportTasks(req: DescribeDBDiagReportTasksRequest, cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void): Promise<DescribeDBDiagReportTasksResponse>;
+    /**
+     * 修改实例巡检开关。
+     */
+    ModifyDiagDBInstanceConf(req: ModifyDiagDBInstanceConfRequest, cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void): Promise<ModifyDiagDBInstanceConfResponse>;
+    /**
+     * 用于删除云数据库实例的审计日志文件。
+     */
+    DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
     /**
      * 获取邮件发送联系组的相关信息。
      */
@@ -99,6 +107,10 @@ export declare class Client extends AbstractClient {
      * 更改实例限流任务状态，目前仅用于终止限流。
      */
     ModifySqlFilters(req: ModifySqlFiltersRequest, cb?: (error: string, rep: ModifySqlFiltersResponse) => void): Promise<ModifySqlFiltersResponse>;
+    /**
+     * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
+     */
+    CreateAuditLogFile(req: CreateAuditLogFileRequest, cb?: (error: string, rep: CreateAuditLogFileResponse) => void): Promise<CreateAuditLogFileResponse>;
     /**
      * 查询redis实例大key列表。
      */
@@ -172,9 +184,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopSpaceTableTimeSeries(req: DescribeTopSpaceTableTimeSeriesRequest, cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void): Promise<DescribeTopSpaceTableTimeSeriesResponse>;
     /**
-     * 修改实例巡检开关。
+     * 用于创建云数据库实例的审计日志文件
      */
-    ModifyDiagDBInstanceConf(req: ModifyDiagDBInstanceConfRequest, cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void): Promise<ModifyDiagDBInstanceConfResponse>;
+    DescribeAuditLogFiles(req: DescribeAuditLogFilesRequest, cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void): Promise<DescribeAuditLogFilesResponse>;
     /**
      * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
      */

@@ -803,6 +803,46 @@ export interface DescribeRoomRequest {
 }
 
 /**
+ * BatchDescribeDocument请求参数结构体
+ */
+export interface BatchDescribeDocumentRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 分页查询当前页数，从1开始递增
+   */
+  Page: number
+
+  /**
+   * 每页数据量，最大1000
+   */
+  Limit: number
+
+  /**
+   * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
+   */
+  Permission: Array<number>
+
+  /**
+   * 课件所有者的user_id，不填默认获取SdkAppId下所有课件
+   */
+  Owner?: string
+
+  /**
+   * 课件名称搜索词
+   */
+  Keyword?: string
+
+  /**
+   * 课件id列表，从列表中查询，忽略错误的id
+   */
+  DocumentId?: Array<string>
+}
+
+/**
  * EndRoom请求参数结构体
  */
 export interface EndRoomRequest {
@@ -2801,6 +2841,27 @@ export interface AppCustomContent {
    * Css : 自定义的css。针对应用用于支持课堂界面的、模块的UI渲染修改、皮肤配色修改、功能模块的隐藏和展示。
    */
   CssUrl?: string
+}
+
+/**
+ * BatchDescribeDocument返回参数结构体
+ */
+export interface BatchDescribeDocumentResponse {
+  /**
+   * 符合查询条件文档总数
+   */
+  Total?: number
+
+  /**
+      * 文档信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Documents?: Array<DocumentInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

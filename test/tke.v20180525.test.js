@@ -258,9 +258,9 @@ it("tke.v20180525.DeleteClusterVirtualNode", async function () {
     }
 })
 
-it("tke.v20180525.DescribeTKEEdgeScript", async function () {
+it("tke.v20180525.DeleteBackupStorageLocation", async function () {
     try {
-       const data = await client.DescribeTKEEdgeScript({})
+       const data = await client.DeleteBackupStorageLocation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +328,16 @@ it("tke.v20180525.ModifyPrometheusAgentExternalLabels", async function () {
     }
 })
 
+it("tke.v20180525.DescribeEdgeClusterExtraArgs", async function () {
+    try {
+       const data = await client.DescribeEdgeClusterExtraArgs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DeleteEKSCluster", async function () {
     try {
        const data = await client.DeleteEKSCluster({})
@@ -378,9 +388,9 @@ it("tke.v20180525.EnableClusterAudit", async function () {
     }
 })
 
-it("tke.v20180525.DescribeEdgeClusterExtraArgs", async function () {
+it("tke.v20180525.CreateBackupStorageLocation", async function () {
     try {
-       const data = await client.DescribeEdgeClusterExtraArgs({})
+       const data = await client.CreateBackupStorageLocation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +471,16 @@ it("tke.v20180525.DeleteImageCaches", async function () {
 it("tke.v20180525.DeleteClusterRouteTable", async function () {
     try {
        const data = await client.DeleteClusterRouteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeTKEEdgeScript", async function () {
+    try {
+       const data = await client.DescribeTKEEdgeScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,9 +1238,9 @@ it("tke.v20180525.DeletePrometheusRecordRuleYaml", async function () {
     }
 })
 
-it("tke.v20180525.ModifyPrometheusConfig", async function () {
+it("tke.v20180525.DescribeBackupStorageLocations", async function () {
     try {
-       const data = await client.ModifyPrometheusConfig({})
+       const data = await client.DescribeBackupStorageLocations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1431,6 +1451,16 @@ it("tke.v20180525.DescribePrometheusGlobalConfig", async function () {
 it("tke.v20180525.SyncPrometheusTemp", async function () {
     try {
        const data = await client.SyncPrometheusTemp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyPrometheusConfig", async function () {
+    try {
+       const data = await client.ModifyPrometheusConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

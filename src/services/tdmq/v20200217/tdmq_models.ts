@@ -526,6 +526,21 @@ export interface CreateAMQPExchangeRequest {
 }
 
 /**
+ * RocketMQtopic分布情况
+ */
+export interface RocketMQTopicDistribution {
+  /**
+   * topic类型
+   */
+  TopicType: string
+
+  /**
+   * topic数量
+   */
+  Count: number
+}
+
+/**
  * DescribeRocketMQNamespaces返回参数结构体
  */
 export interface DescribeRocketMQNamespacesResponse {
@@ -1632,6 +1647,26 @@ export interface Topic {
 }
 
 /**
+ * SendCmqMsg返回参数结构体
+ */
+export interface SendCmqMsgResponse {
+  /**
+   * true表示发送成功
+   */
+  Result: boolean
+
+  /**
+   * 消息id
+   */
+  MsgId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * exchange使用配额信息
  */
 export interface ExchangeQuota {
@@ -2654,6 +2689,26 @@ export interface DescribeAMQPVHostsRequest {
    * VHostId 列表过滤
    */
   VHostIdList?: Array<string>
+}
+
+/**
+ * DescribePulsarProInstances请求参数结构体
+ */
+export interface DescribePulsarProInstancesRequest {
+  /**
+   * 查询条件过滤器
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 查询数目上限，默认20
+   */
+  Limit?: number
+
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
 }
 
 /**
@@ -4015,6 +4070,26 @@ export interface TopicRecord {
 }
 
 /**
+ * DescribePulsarProInstances返回参数结构体
+ */
+export interface DescribePulsarProInstancesResponse {
+  /**
+   * 未分页的总数目
+   */
+  TotalCount: number
+
+  /**
+   * 实例信息列表
+   */
+  Instances: Array<PulsarProInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRocketMQGroup返回参数结构体
  */
 export interface CreateRocketMQGroupResponse {
@@ -4320,6 +4395,95 @@ export interface CreateCmqQueueResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Pulsar专业版实例信息
+ */
+export interface PulsarProInstance {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例版本
+   */
+  InstanceVersion: string
+
+  /**
+   * 实例状态，0-创建中，1-正常，2-隔离中，3-已销毁，4 - 异常, 5 - 发货失败，6-变配中，7-变配失败
+   */
+  Status: number
+
+  /**
+   * 实例配置规格名称
+   */
+  ConfigDisplay: string
+
+  /**
+   * 峰值TPS
+   */
+  MaxTps: number
+
+  /**
+   * 存储容量，GB为单位
+   */
+  MaxStorage: number
+
+  /**
+   * 实例到期时间，毫秒为单位
+   */
+  ExpireTime: number
+
+  /**
+   * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 0-后付费，1-预付费
+   */
+  PayMode: number
+
+  /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+   * 实例配置ID
+   */
+  SpecName: string
+
+  /**
+      * 规格外弹性TPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScalableTps: number
+
+  /**
+      * VPC的id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+   * 峰值带宽。单位：mbps
+   */
+  MaxBandWidth: number
 }
 
 /**
@@ -5149,6 +5313,42 @@ export interface DescribeRabbitMQVipInstanceRequest {
 }
 
 /**
+ * Pulsar专业版集群规格信息
+ */
+export interface PulsarProClusterSpecInfo {
+  /**
+   * 集群规格名称
+   */
+  SpecName: string
+
+  /**
+   * 峰值tps
+   */
+  MaxTps: number
+
+  /**
+   * 峰值带宽。单位：mbps
+   */
+  MaxBandWidth: number
+
+  /**
+   * 最大命名空间个数
+   */
+  MaxNamespaces: number
+
+  /**
+   * 最大主题分区数
+   */
+  MaxTopics: number
+
+  /**
+      * 规格外弹性TPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScalableTps: number
+}
+
+/**
  * DescribeCmqTopics请求参数结构体
  */
 export interface DescribeCmqTopicsRequest {
@@ -5885,6 +6085,52 @@ export interface CreateRocketMQClusterResponse {
  * DescribeAMQPCreateQuota请求参数结构体
  */
 export type DescribeAMQPCreateQuotaRequest = null
+
+/**
+ * Pulsar专业版集群信息
+ */
+export interface PulsarProClusterInfo {
+  /**
+   * 集群Id。
+   */
+  ClusterId: string
+
+  /**
+   * 集群名称。
+   */
+  ClusterName: string
+
+  /**
+   * 说明信息。
+   */
+  Remark: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 集群状态，0:创建中，1:正常，2:隔离
+   */
+  Status: number
+
+  /**
+   * 集群版本
+   */
+  Version: string
+
+  /**
+      * 节点分布情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeDistribution: Array<InstanceNodeDistribution>
+
+  /**
+   * 最大储存容量，单位：MB
+   */
+  MaxStorage: number
+}
 
 /**
  * AMQP 队列信息
@@ -6633,18 +6879,13 @@ export interface DescribeRocketMQClustersResponse {
 }
 
 /**
- * RocketMQtopic分布情况
+ * DescribePulsarProInstanceDetail请求参数结构体
  */
-export interface RocketMQTopicDistribution {
+export interface DescribePulsarProInstanceDetailRequest {
   /**
-   * topic类型
+   * 集群ID
    */
-  TopicType: string
-
-  /**
-   * topic数量
-   */
-  Count: number
+  ClusterId: string
 }
 
 /**
@@ -6680,6 +6921,41 @@ export interface CreateRoleRequest {
    * 必填字段，集群Id
    */
   ClusterId?: string
+}
+
+/**
+ * Pulsar 网络接入点信息
+ */
+export interface PulsarNetworkAccessPointInfo {
+  /**
+      * vpc的id，支撑网和公网接入点，该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 子网id，支撑网和公网接入点，该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+   * 接入地址
+   */
+  Endpoint: string
+
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+      * 接入点类型：
+0：支撑网接入点 
+1：VPC接入点 
+2：公网接入点
+      */
+  RouteType: number
 }
 
 /**
@@ -7023,18 +7299,25 @@ export interface DeleteAMQPRouteRelationRequest {
 }
 
 /**
- * SendCmqMsg返回参数结构体
+ * DescribePulsarProInstanceDetail返回参数结构体
  */
-export interface SendCmqMsgResponse {
+export interface DescribePulsarProInstanceDetailResponse {
   /**
-   * true表示发送成功
+   * 集群信息
    */
-  Result: boolean
+  ClusterInfo: PulsarProClusterInfo
 
   /**
-   * 消息id
-   */
-  MsgId: string
+      * 集群网络接入点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkAccessPointInfos: Array<PulsarNetworkAccessPointInfo>
+
+  /**
+      * 集群规格信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterSpecInfo: PulsarProClusterSpecInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

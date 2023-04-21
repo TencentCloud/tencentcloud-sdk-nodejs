@@ -310,7 +310,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartBackupMigration", req, cb);
     }
     /**
-     * 本接口（RestoreInstance）用于根据备份文件恢复实例。
+     * 本接口（RestoreInstance）用于按照备份集回档数据库。
      */
     async RestoreInstance(req, cb) {
         return this.request("RestoreInstance", req, cb);
@@ -564,7 +564,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountPrivilege", req, cb);
     }
     /**
-     * 本接口（RollbackInstance）用于回档实例
+     * 本接口（RollbackInstance）用于按照时间点回档实例
      */
     async RollbackInstance(req, cb) {
         return this.request("RollbackInstance", req, cb);

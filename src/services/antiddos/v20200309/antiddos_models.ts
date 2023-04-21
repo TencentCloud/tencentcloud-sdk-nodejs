@@ -259,11 +259,6 @@ pcre(正则表达式)
  */
 export interface DescribeOverviewCCTrendRequest {
   /**
-   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护）
-   */
-  Business: string
-
-  /**
    * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
    */
   Period: number
@@ -282,6 +277,11 @@ export interface DescribeOverviewCCTrendRequest {
    * 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)]
    */
   MetricName: string
+
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护）
+   */
+  Business?: string
 
   /**
    * 资源的IP
@@ -430,6 +430,11 @@ export interface DescribeListSchedulingDomainRequest {
    * 调度域名搜索
    */
   FilterDomain?: string
+
+  /**
+   * 运行状态 0 代表未运行  1 正在运行  2 运行异常
+   */
+  Status?: string
 }
 
 /**
@@ -715,6 +720,11 @@ export interface DescribeListBGPInstancesRequest {
    * 默认false；接口传true，返回数据中不包含高级信息，高级信息包含：InstanceList[0].Usage。
    */
   ExcludeAdvancedInfo?: boolean
+
+  /**
+   * 资产IP数组
+   */
+  FilterAssetIpList?: Array<string>
 }
 
 /**
@@ -1603,11 +1613,6 @@ export interface ModifyCCReqLimitPolicyRequest {
  */
 export interface DescribeOverviewDDoSTrendRequest {
   /**
-   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护）
-   */
-  Business: string
-
-  /**
    * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
    */
   Period: number
@@ -1626,6 +1631,11 @@ export interface DescribeOverviewDDoSTrendRequest {
    * 指标，取值[bps(攻击流量带宽，pps(攻击包速率))]
    */
   MetricName: string
+
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护）
+   */
+  Business?: string
 
   /**
    * 资源实例的IP列表
@@ -2863,12 +2873,12 @@ export interface BGPIPInstance {
   Status: string
 
   /**
-   * 购买时间
+   * 到期时间
    */
   ExpiredTime: string
 
   /**
-   * 到期时间
+   * 购买时间
    */
   CreatedTime: string
 
@@ -3532,6 +3542,12 @@ export interface IPLineInfo {
    * 资源flag，0：高防包资源，1：高防IP资源，2：非高防资源IP
    */
   ResourceFlag?: number
+
+  /**
+      * 域名化资产对应的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
 }
 
 /**
@@ -4106,12 +4122,12 @@ export interface DescribeListSchedulingDomainResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
 
   /**
    * 调度域名信息列表
    */
-  DomainList: Array<SchedulingDomainInfo>
+  DomainList?: Array<SchedulingDomainInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4479,12 +4495,12 @@ export interface DescribeOverviewCCTrendResponse {
   /**
    * 值个数
    */
-  Count: number
+  Count?: number
 
   /**
    * 值数组
    */
-  Data: Array<number>
+  Data?: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4929,6 +4945,12 @@ export interface DescribeBizTrendResponse {
    * 统计纬度
    */
   MetricName?: string
+
+  /**
+      * 返回DataList中的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxData?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5427,6 +5449,12 @@ other(托管IP)
    * IP所属的云产品实例ID，例如是弹性网卡的IP，InstanceId为弹性网卡的ID(eni-*); 如果是托管IP没有对应的资源实例ID,InstanceId为""
    */
   InstanceId: string
+
+  /**
+      * 域名化资产对应的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
 }
 
 /**
@@ -5745,6 +5773,12 @@ export interface BGPInstance {
    * 赠送的业务带宽
    */
   GiftServiceBandWidth?: number
+
+  /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime?: string
 }
 
 /**
@@ -5860,6 +5894,13 @@ export interface DescribeBizTrendRequest {
    * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
    */
   ProtoInfo?: Array<ProtocolPort>
+
+  /**
+      * 业务类型可取值domain, port
+port：端口业务
+domain：域名业务
+      */
+  BusinessType?: string
 }
 
 /**
@@ -5989,12 +6030,12 @@ export interface DescribeOverviewDDoSTrendResponse {
   /**
    * 值个数
    */
-  Count: number
+  Count?: number
 
   /**
    * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
    */
-  Data: Array<number>
+  Data?: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

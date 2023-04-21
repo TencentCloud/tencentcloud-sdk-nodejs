@@ -7,7 +7,7 @@ export interface CreatePictureRequest {
       */
     SdkAppId: number;
     /**
-      * 图片内容经base64编码后的string格式
+      * 图片内容经base64编码后的string格式,最大长度为2M
       */
     Content: string;
     /**
@@ -2959,7 +2959,7 @@ export interface CreatePictureResponse {
     /**
       * 图片id
       */
-    PictureId: number;
+    PictureId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

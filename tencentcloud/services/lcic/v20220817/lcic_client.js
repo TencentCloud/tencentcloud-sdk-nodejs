@@ -40,7 +40,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRoomMessage", req, cb);
     }
     /**
-     * 批量获取文档信息
+     * 有新接口替换
+
+批量获取文档信息（已废弃，替代接口BatchDescribeDocument）
      */
     async DescribeDocuments(req, cb) {
         return this.request("DescribeDocuments", req, cb);
@@ -106,7 +108,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSdkAppIdUsers", req, cb);
     }
     /**
-     * 开始房间的直播
+     * 开始房间的直播。 说明：开始房间接口调用之前需要有用户进入课堂初始化课堂信息。
      */
     async StartRoom(req, cb) {
         return this.request("StartRoom", req, cb);
@@ -244,6 +246,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGroupWithMembers", req, cb);
     }
     /**
+     * 服务商信息获取
+     */
+    async DescribeDeveloper(req, cb) {
+        return this.request("DescribeDeveloper", req, cb);
+    }
+    /**
      * 创建巡课
      */
     async CreateSupervisor(req, cb) {
@@ -262,10 +270,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetAppCustomContent", req, cb);
     }
     /**
-     * 服务商信息获取
+     * 批量获取文档详情
      */
-    async DescribeDeveloper(req, cb) {
-        return this.request("DescribeDeveloper", req, cb);
+    async BatchDescribeDocument(req, cb) {
+        return this.request("BatchDescribeDocument", req, cb);
     }
     /**
      * 获取当前房间的成员列表，房间结束或过期后无法使用。

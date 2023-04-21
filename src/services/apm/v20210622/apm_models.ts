@@ -245,6 +245,18 @@ export interface ApmInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalCount: number
+
+  /**
+      * CLS日志集 | ES集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogSet: string
+
+  /**
+      * Metric数据保存时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricDuration: number
 }
 
 /**

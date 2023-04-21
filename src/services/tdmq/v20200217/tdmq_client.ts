@@ -34,6 +34,7 @@ import {
   CreateCmqTopicRequest,
   ModifyRabbitMQVipInstanceRequest,
   CreateAMQPExchangeRequest,
+  RocketMQTopicDistribution,
   DescribeRocketMQNamespacesResponse,
   ResetRocketMQConsumerOffSetResponse,
   DescribeBindClustersResponse,
@@ -66,6 +67,7 @@ import {
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
   Topic,
+  SendCmqMsgResponse,
   ExchangeQuota,
   DescribeCmqTopicDetailResponse,
   Environment,
@@ -97,6 +99,7 @@ import {
   VpcBindRecord,
   RewindCmqQueueRequest,
   DescribeAMQPVHostsRequest,
+  DescribePulsarProInstancesRequest,
   ModifyClusterRequest,
   DescribeAMQPQueuesRequest,
   ModifyRocketMQClusterRequest,
@@ -154,6 +157,7 @@ import {
   DeleteRocketMQNamespaceResponse,
   ClearCmqSubscriptionFilterTagsRequest,
   TopicRecord,
+  DescribePulsarProInstancesResponse,
   CreateRocketMQGroupResponse,
   CreateEnvironmentRoleRequest,
   DescribeEnvironmentRolesRequest,
@@ -166,6 +170,7 @@ import {
   RocketMQClusterDetail,
   DeleteRocketMQGroupResponse,
   CreateCmqQueueResponse,
+  PulsarProInstance,
   PartitionsTopic,
   DescribeRocketMQGroupsResponse,
   ResetMsgSubOffsetByTimestampResponse,
@@ -198,6 +203,7 @@ import {
   ClearCmqSubscriptionFilterTagsResponse,
   CreateRabbitMQVipInstanceResponse,
   DescribeRabbitMQVipInstanceRequest,
+  PulsarProClusterSpecInfo,
   DescribeCmqTopicsRequest,
   Filter,
   AMQPExchange,
@@ -222,6 +228,7 @@ import {
   RetentionPolicy,
   CreateRocketMQClusterResponse,
   DescribeAMQPCreateQuotaRequest,
+  PulsarProClusterInfo,
   AMQPQueueDetail,
   DescribePublishersResponse,
   DeleteAMQPRouteRelationResponse,
@@ -249,9 +256,10 @@ import {
   DeleteCmqQueueRequest,
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQClustersResponse,
-  RocketMQTopicDistribution,
+  DescribePulsarProInstanceDetailRequest,
   Sort,
   CreateRoleRequest,
+  PulsarNetworkAccessPointInfo,
   ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
   Role,
@@ -264,7 +272,7 @@ import {
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
   DeleteAMQPRouteRelationRequest,
-  SendCmqMsgResponse,
+  DescribePulsarProInstanceDetailResponse,
   DescribeNodeHealthOptResponse,
   VpcEndpointInfo,
   PublishCmqMsgRequest,
@@ -804,6 +812,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取Pulsar专业版集群实例信息
+   */
+  async DescribePulsarProInstanceDetail(
+    req: DescribePulsarProInstanceDetailRequest,
+    cb?: (error: string, rep: DescribePulsarProInstanceDetailResponse) => void
+  ): Promise<DescribePulsarProInstanceDetailResponse> {
+    return this.request("DescribePulsarProInstanceDetail", req, cb)
+  }
+
+  /**
    * 修改cmq订阅属性
    */
   async ModifyCmqSubscriptionAttribute(
@@ -1305,6 +1323,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: CreateRocketMQClusterResponse) => void
   ): Promise<CreateRocketMQClusterResponse> {
     return this.request("CreateRocketMQCluster", req, cb)
+  }
+
+  /**
+   * 查询用户已购的Pulsar专业版实例列表
+   */
+  async DescribePulsarProInstances(
+    req: DescribePulsarProInstancesRequest,
+    cb?: (error: string, rep: DescribePulsarProInstancesResponse) => void
+  ): Promise<DescribePulsarProInstancesResponse> {
+    return this.request("DescribePulsarProInstances", req, cb)
   }
 
   /**

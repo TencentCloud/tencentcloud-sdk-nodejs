@@ -136,6 +136,25 @@ export interface TableSpaceTimeSeries {
     SeriesData: MonitorFloatMetricSeriesData;
 }
 /**
+ * DescribeAuditLogFiles返回参数结构体
+ */
+export interface DescribeAuditLogFilesResponse {
+    /**
+      * 符合条件的审计日志文件个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount?: number;
+    /**
+      * 审计日志文件详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items?: Array<AuditLogFile>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSlowLogs请求参数结构体
  */
 export interface DescribeSlowLogsRequest {
@@ -443,6 +462,35 @@ export interface DescribeTopSpaceSchemaTimeSeriesResponse {
     RequestId?: string;
 }
 /**
+ * 过滤条件。可按设置的过滤条件过滤日志。
+ */
+export interface AuditLogFilter {
+    /**
+      * 客户端地址。
+      */
+    Host?: Array<string>;
+    /**
+      * 数据库名称。
+      */
+    DBName?: Array<string>;
+    /**
+      * 用户名。
+      */
+    User?: Array<string>;
+    /**
+      * 返回行数。表示筛选返回行数大于该值的审计日志。
+      */
+    SentRows?: number;
+    /**
+      * 影响行数。表示筛选影响行数大于该值的审计日志。
+      */
+    AffectRows?: number;
+    /**
+      * 执行时间。单位为：µs。表示筛选执行时间大于该值的审计日志。
+      */
+    ExecTime?: number;
+}
+/**
  * 慢日志TopSql
  */
 export interface SlowLogTopSqlItem {
@@ -548,29 +596,13 @@ export interface SlowLogTopSqlItem {
     Md5: string;
 }
 /**
- * DescribeNoPrimaryKeyTables返回参数结构体
+ * CreateKillTask返回参数结构体
  */
-export interface DescribeNoPrimaryKeyTablesResponse {
+export interface CreateKillTaskResponse {
     /**
-      * 无主键表总数。
+      * kill会话任务创建成功返回1
       */
-    NoPrimaryKeyTableCount?: number;
-    /**
-      * 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。
-      */
-    NoPrimaryKeyTableCountDiff?: number;
-    /**
-      * 记录的无主键表总数（不超过无主键表总数），可用于分页查询。
-      */
-    NoPrimaryKeyTableRecordCount?: number;
-    /**
-      * 无主键表列表。
-      */
-    NoPrimaryKeyTables?: Array<Table>;
-    /**
-      * 采集时间戳（秒）。
-      */
-    Timestamp?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -827,6 +859,15 @@ export interface ContactItem {
     Mail: string;
 }
 /**
+ * DeleteAuditLogFile返回参数结构体
+ */
+export interface DeleteAuditLogFileResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBSpaceStatus请求参数结构体
  */
 export interface DescribeDBSpaceStatusRequest {
@@ -1062,13 +1103,13 @@ export interface DescribeDBDiagHistoryRequest {
     Product?: string;
 }
 /**
- * CreateKillTask返回参数结构体
+ * CreateAuditLogFile返回参数结构体
  */
-export interface CreateKillTaskResponse {
+export interface CreateAuditLogFileResponse {
     /**
-      * kill会话任务创建成功返回1
+      * 审计日志文件下载的任务ID
       */
-    Status: number;
+    AsyncRequestId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1130,45 +1171,17 @@ export interface CreateDBDiagReportUrlResponse {
     RequestId?: string;
 }
 /**
- * CreateKillTask请求参数结构体
+ * CreateProxySessionKillTask请求参数结构体
  */
-export interface CreateKillTaskRequest {
+export interface CreateProxySessionKillTaskRequest {
     /**
-      * kill会话任务的关联实例ID。
+      * 实例 ID。
       */
     InstanceId: string;
     /**
-      * 任务持续时间，单位秒，手动关闭任务传-1。
+      * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
       */
-    Duration: number;
-    /**
-      * 任务过滤条件，客户端IP。
-      */
-    Host?: string;
-    /**
-      * 任务过滤条件，数据库库名,多个","隔开。
-      */
-    DB?: string;
-    /**
-      * 任务过滤条件，相关命令，多个","隔开。
-      */
-    Command?: string;
-    /**
-      * 任务过滤条件，支持单条件前缀匹配。
-      */
-    Info?: string;
-    /**
-      * 任务过滤条件，用户类型。
-      */
-    User?: string;
-    /**
-      * 任务过滤条件，会话持续时长，单位秒。
-      */
-    Time?: number;
-    /**
-      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
-      */
-    Product?: string;
+    Product: string;
 }
 /**
  * DeleteDBDiagReportTasks返回参数结构体
@@ -2339,17 +2352,45 @@ export interface DescribeAllUserGroupRequest {
     Names?: Array<string>;
 }
 /**
- * CreateProxySessionKillTask请求参数结构体
+ * CreateKillTask请求参数结构体
  */
-export interface CreateProxySessionKillTaskRequest {
+export interface CreateKillTaskRequest {
     /**
-      * 实例 ID。
+      * kill会话任务的关联实例ID。
       */
     InstanceId: string;
     /**
-      * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+      * 任务持续时间，单位秒，手动关闭任务传-1。
       */
-    Product: string;
+    Duration: number;
+    /**
+      * 任务过滤条件，客户端IP。
+      */
+    Host?: string;
+    /**
+      * 任务过滤条件，数据库库名,多个","隔开。
+      */
+    DB?: string;
+    /**
+      * 任务过滤条件，相关命令，多个","隔开。
+      */
+    Command?: string;
+    /**
+      * 任务过滤条件，支持单条件前缀匹配。
+      */
+    Info?: string;
+    /**
+      * 任务过滤条件，用户类型。
+      */
+    User?: string;
+    /**
+      * 任务过滤条件，会话持续时长，单位秒。
+      */
+    Time?: number;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * CreateSecurityAuditLogExportTask返回参数结构体
@@ -2427,6 +2468,53 @@ export interface CreateProxySessionKillTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 审计日志文件
+ */
+export interface AuditLogFile {
+    /**
+      * 审计日志文件生成异步任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId?: number;
+    /**
+      * 审计日志文件名称。
+      */
+    FileName?: string;
+    /**
+      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
+    /**
+      * 文件状态值。可能返回的值为：
+"creating" - 生成中;
+"failed" - 创建失败;
+"success" - 已生成;
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
+    /**
+      * 文件大小，单位为 KB。
+      */
+    FileSize?: number;
+    /**
+      * 审计日志下载地址。
+      */
+    DownloadUrl?: string;
+    /**
+      * 错误信息。
+      */
+    ErrMsg?: string;
+    /**
+      * 文件生成进度。
+      */
+    Progress?: number;
+    /**
+      * 文件生成成功时间。
+      */
+    FinishTime?: string;
 }
 /**
  * DescribeSlowLogTimeSeriesStats返回参数结构体
@@ -2534,6 +2622,56 @@ export interface DescribeAllUserGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateAuditLogFile请求参数结构体
+ */
+export interface CreateAuditLogFileRequest {
+    /**
+      * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+      */
+    Product: string;
+    /**
+      * 与Product保持一致。如："dcdb" ,"mariadb"
+      */
+    NodeRequestType: string;
+    /**
+      * 实例 ID 。
+      */
+    InstanceId: string;
+    /**
+      * 开始时间，如“2019-09-10 12:13:14”。
+      */
+    StartTime: string;
+    /**
+      * 截止时间，如“2019-09-11 10:13:14”。
+      */
+    EndTime: string;
+    /**
+      * 过滤条件。可按设置的过滤条件过滤日志。
+      */
+    Filter?: AuditLogFilter;
+}
+/**
+ * DeleteAuditLogFile请求参数结构体
+ */
+export interface DeleteAuditLogFileRequest {
+    /**
+      * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+      */
+    Product: string;
+    /**
+      * 与Product保持一致。如："dcdb" ,"mariadb"
+      */
+    NodeRequestType: string;
+    /**
+      * 实例 ID 。
+      */
+    InstanceId: string;
+    /**
+      * 审计日志文件生成异步任务ID。
+      */
+    AsyncRequestId: number;
 }
 /**
  * ModifyDiagDBInstanceConf返回参数结构体
@@ -2953,6 +3091,60 @@ export interface DescribeSlowLogTopSqlsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeNoPrimaryKeyTables返回参数结构体
+ */
+export interface DescribeNoPrimaryKeyTablesResponse {
+    /**
+      * 无主键表总数。
+      */
+    NoPrimaryKeyTableCount?: number;
+    /**
+      * 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。
+      */
+    NoPrimaryKeyTableCountDiff?: number;
+    /**
+      * 记录的无主键表总数（不超过无主键表总数），可用于分页查询。
+      */
+    NoPrimaryKeyTableRecordCount?: number;
+    /**
+      * 无主键表列表。
+      */
+    NoPrimaryKeyTables?: Array<Table>;
+    /**
+      * 采集时间戳（秒）。
+      */
+    Timestamp?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAuditLogFiles请求参数结构体
+ */
+export interface DescribeAuditLogFilesRequest {
+    /**
+      * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+      */
+    Product: string;
+    /**
+      * 与Product保持一致。如："dcdb" ,"mariadb"
+      */
+    NodeRequestType: string;
+    /**
+      * 实例 ID 。
+      */
+    InstanceId: string;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 查询数目，默认为20，最大为100。
+      */
+    Limit?: number;
 }
 /**
  * DeleteSqlFilters请求参数结构体

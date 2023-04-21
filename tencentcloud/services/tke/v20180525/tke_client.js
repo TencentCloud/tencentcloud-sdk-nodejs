@@ -172,10 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterVirtualNode", req, cb);
     }
     /**
-     * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+     * 删除备份仓库
      */
-    async DescribeTKEEdgeScript(req, cb) {
-        return this.request("DescribeTKEEdgeScript", req, cb);
+    async DeleteBackupStorageLocation(req, cb) {
+        return this.request("DeleteBackupStorageLocation", req, cb);
     }
     /**
      * 边缘计算支持版本和k8s版本
@@ -214,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusAgentExternalLabels", req, cb);
     }
     /**
+     * 查询边缘集群自定义参数
+     */
+    async DescribeEdgeClusterExtraArgs(req, cb) {
+        return this.request("DescribeEdgeClusterExtraArgs", req, cb);
+    }
+    /**
      * 删除弹性集群(yunapiv3)
      */
     async DeleteEKSCluster(req, cb) {
@@ -244,10 +250,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableClusterAudit", req, cb);
     }
     /**
-     * 查询边缘集群自定义参数
+     * 创建备份仓库，指定了存储仓库类型（如COS）、COS桶地区、名称等信息，当前最多允许创建100个仓库， 注意此接口当前是全局接口，多个地域的TKE集群如果要备份到相同的备份仓库中，不需要重复创建备份仓库
      */
-    async DescribeEdgeClusterExtraArgs(req, cb) {
-        return this.request("DescribeEdgeClusterExtraArgs", req, cb);
+    async CreateBackupStorageLocation(req, cb) {
+        return this.request("CreateBackupStorageLocation", req, cb);
     }
     /**
      * 修改虚拟节点池
@@ -296,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterRouteTable(req, cb) {
         return this.request("DeleteClusterRouteTable", req, cb);
+    }
+    /**
+     * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+     */
+    async DescribeTKEEdgeScript(req, cb) {
+        return this.request("DescribeTKEEdgeScript", req, cb);
     }
     /**
      * 修改2.0实例告警策略
@@ -748,10 +760,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusRecordRuleYaml", req, cb);
     }
     /**
-     * 修改prometheus配置，如果配置项不存在，则会新增
+     * 查询备份仓库信息
      */
-    async ModifyPrometheusConfig(req, cb) {
-        return this.request("ModifyPrometheusConfig", req, cb);
+    async DescribeBackupStorageLocations(req, cb) {
+        return this.request("DescribeBackupStorageLocations", req, cb);
     }
     /**
      * 修改模板内容
@@ -878,6 +890,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SyncPrometheusTemp(req, cb) {
         return this.request("SyncPrometheusTemp", req, cb);
+    }
+    /**
+     * 修改prometheus配置，如果配置项不存在，则会新增
+     */
+    async ModifyPrometheusConfig(req, cb) {
+        return this.request("ModifyPrometheusConfig", req, cb);
     }
     /**
      * 查询容器实例中容器日志

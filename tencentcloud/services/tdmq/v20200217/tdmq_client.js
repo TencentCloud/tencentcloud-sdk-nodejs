@@ -338,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCluster", req, cb);
     }
     /**
+     * 获取Pulsar专业版集群实例信息
+     */
+    async DescribePulsarProInstanceDetail(req, cb) {
+        return this.request("DescribePulsarProInstanceDetail", req, cb);
+    }
+    /**
      * 修改cmq订阅属性
      */
     async ModifyCmqSubscriptionAttribute(req, cb) {
@@ -656,6 +662,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async CreateRocketMQCluster(req, cb) {
         return this.request("CreateRocketMQCluster", req, cb);
+    }
+    /**
+     * 查询用户已购的Pulsar专业版实例列表
+     */
+    async DescribePulsarProInstances(req, cb) {
+        return this.request("DescribePulsarProInstances", req, cb);
     }
     /**
      * 创建RocketMQ主题

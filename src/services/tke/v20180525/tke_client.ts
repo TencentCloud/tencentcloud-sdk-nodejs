@@ -49,6 +49,7 @@ import {
   ClusterAsGroup,
   PrometheusTempModify,
   EnableClusterAuditResponse,
+  CreateBackupStorageLocationResponse,
   EnvironmentVariable,
   UpdateImageCacheRequest,
   ManuallyAdded,
@@ -73,6 +74,7 @@ import {
   DescribeTKEEdgeClusterStatusResponse,
   ModifyClusterAsGroupOptionAttributeRequest,
   DescribeClusterStatusRequest,
+  CreateBackupStorageLocationRequest,
   PrometheusConfigItem,
   DeleteClusterNodePoolRequest,
   DescribeEKSClusterCredentialResponse,
@@ -90,6 +92,8 @@ import {
   UpdateEKSContainerInstanceRequest,
   CUDNN,
   GetMostSuitableImageCacheResponse,
+  Event,
+  Exec,
   DescribeEdgeAvailableExtraArgsResponse,
   CreatePrometheusRecordRuleYamlRequest,
   DescribeEnableVpcCniProgressRequest,
@@ -163,6 +167,7 @@ import {
   NfsVolume,
   PrometheusNotification,
   ClusterCondition,
+  BackupStorageLocation,
   NodePool,
   DescribeEKSClustersResponse,
   VolumeMount,
@@ -196,6 +201,7 @@ import {
   UpgradeNodeResetParam,
   DriverVersion,
   CreateClusterInstancesRequest,
+  DeleteBackupStorageLocationRequest,
   ClusterCIDRSettings,
   Taint,
   ModifyNodePoolInstanceTypesRequest,
@@ -232,7 +238,7 @@ import {
   DeletePrometheusTemplateRequest,
   DeletePrometheusRecordRuleYamlResponse,
   DescribePrometheusTempSyncResponse,
-  Cluster,
+  CreatePrometheusConfigResponse,
   DescribeClusterEndpointStatusResponse,
   DescribeExternalClusterSpecResponse,
   AddExistedInstancesResponse,
@@ -241,7 +247,7 @@ import {
   EnableVpcCniNetworkTypeRequest,
   Container,
   CreateClusterEndpointRequest,
-  Exec,
+  DeletePrometheusClusterAgentResponse,
   DescribePrometheusInstanceResponse,
   Capabilities,
   UpdateTKEEdgeClusterRequest,
@@ -308,7 +314,7 @@ import {
   ModifyPrometheusTemplateResponse,
   ModifyPrometheusAlertPolicyResponse,
   DescribePrometheusClusterAgentsResponse,
-  CreatePrometheusConfigResponse,
+  Cluster,
   DescribeClusterAuthenticationOptionsRequest,
   DescribeEksContainerInstanceLogResponse,
   DeleteEKSClusterResponse,
@@ -353,7 +359,6 @@ import {
   DeleteTKEEdgeClusterRequest,
   CreatePrometheusGlobalNotificationResponse,
   DescribeClusterAuthenticationOptionsResponse,
-  DeletePrometheusClusterAgentResponse,
   CreateClusterReleaseRequest,
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
@@ -451,7 +456,7 @@ import {
   DeleteClusterEndpointVipResponse,
   ClusterBasicSettings,
   PrometheusTemp,
-  InstanceDataDiskMountSetting,
+  DescribeBackupStorageLocationsResponse,
   ModifyClusterAsGroupAttributeResponse,
   DeletePrometheusTempRequest,
   DescribeTKEEdgeScriptResponse,
@@ -469,7 +474,7 @@ import {
   GetUpgradeInstanceProgressRequest,
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
-  Event,
+  DeleteBackupStorageLocationResponse,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DeleteClusterRouteResponse,
   DeletePrometheusConfigRequest,
@@ -534,11 +539,13 @@ import {
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
+  InstanceDataDiskMountSetting,
   PrometheusInstanceOverview,
   DescribeClusterVirtualNodeResponse,
   ScaleInMaster,
   RunPrometheusInstanceRequest,
   PendingRelease,
+  DescribeBackupStorageLocationsRequest,
 } from "./tke_models"
 
 /**
@@ -791,13 +798,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+   * 删除备份仓库
    */
-  async DescribeTKEEdgeScript(
-    req: DescribeTKEEdgeScriptRequest,
-    cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void
-  ): Promise<DescribeTKEEdgeScriptResponse> {
-    return this.request("DescribeTKEEdgeScript", req, cb)
+  async DeleteBackupStorageLocation(
+    req: DeleteBackupStorageLocationRequest,
+    cb?: (error: string, rep: DeleteBackupStorageLocationResponse) => void
+  ): Promise<DeleteBackupStorageLocationResponse> {
+    return this.request("DeleteBackupStorageLocation", req, cb)
   }
 
   /**
@@ -861,6 +868,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询边缘集群自定义参数
+   */
+  async DescribeEdgeClusterExtraArgs(
+    req: DescribeEdgeClusterExtraArgsRequest,
+    cb?: (error: string, rep: DescribeEdgeClusterExtraArgsResponse) => void
+  ): Promise<DescribeEdgeClusterExtraArgsResponse> {
+    return this.request("DescribeEdgeClusterExtraArgs", req, cb)
+  }
+
+  /**
    * 删除弹性集群(yunapiv3)
    */
   async DeleteEKSCluster(
@@ -911,13 +928,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询边缘集群自定义参数
+   * 创建备份仓库，指定了存储仓库类型（如COS）、COS桶地区、名称等信息，当前最多允许创建100个仓库， 注意此接口当前是全局接口，多个地域的TKE集群如果要备份到相同的备份仓库中，不需要重复创建备份仓库
    */
-  async DescribeEdgeClusterExtraArgs(
-    req: DescribeEdgeClusterExtraArgsRequest,
-    cb?: (error: string, rep: DescribeEdgeClusterExtraArgsResponse) => void
-  ): Promise<DescribeEdgeClusterExtraArgsResponse> {
-    return this.request("DescribeEdgeClusterExtraArgs", req, cb)
+  async CreateBackupStorageLocation(
+    req: CreateBackupStorageLocationRequest,
+    cb?: (error: string, rep: CreateBackupStorageLocationResponse) => void
+  ): Promise<CreateBackupStorageLocationResponse> {
+    return this.request("CreateBackupStorageLocation", req, cb)
   }
 
   /**
@@ -998,6 +1015,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterRouteTableResponse) => void
   ): Promise<DeleteClusterRouteTableResponse> {
     return this.request("DeleteClusterRouteTable", req, cb)
+  }
+
+  /**
+   * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+   */
+  async DescribeTKEEdgeScript(
+    req: DescribeTKEEdgeScriptRequest,
+    cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void
+  ): Promise<DescribeTKEEdgeScriptResponse> {
+    return this.request("DescribeTKEEdgeScript", req, cb)
   }
 
   /**
@@ -1751,13 +1778,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改prometheus配置，如果配置项不存在，则会新增
+   * 查询备份仓库信息
    */
-  async ModifyPrometheusConfig(
-    req: ModifyPrometheusConfigRequest,
-    cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
-  ): Promise<ModifyPrometheusConfigResponse> {
-    return this.request("ModifyPrometheusConfig", req, cb)
+  async DescribeBackupStorageLocations(
+    req: DescribeBackupStorageLocationsRequest,
+    cb?: (error: string, rep: DescribeBackupStorageLocationsResponse) => void
+  ): Promise<DescribeBackupStorageLocationsResponse> {
+    return this.request("DescribeBackupStorageLocations", req, cb)
   }
 
   /**
@@ -1968,6 +1995,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncPrometheusTempResponse) => void
   ): Promise<SyncPrometheusTempResponse> {
     return this.request("SyncPrometheusTemp", req, cb)
+  }
+
+  /**
+   * 修改prometheus配置，如果配置项不存在，则会新增
+   */
+  async ModifyPrometheusConfig(
+    req: ModifyPrometheusConfigRequest,
+    cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
+  ): Promise<ModifyPrometheusConfigResponse> {
+    return this.request("ModifyPrometheusConfig", req, cb)
   }
 
   /**

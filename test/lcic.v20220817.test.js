@@ -378,6 +378,16 @@ it("lcic.v20220817.CreateGroupWithMembers", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeDeveloper", async function () {
+    try {
+       const data = await client.DescribeDeveloper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateSupervisor", async function () {
     try {
        const data = await client.CreateSupervisor({})
@@ -408,9 +418,9 @@ it("lcic.v20220817.SetAppCustomContent", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeDeveloper", async function () {
+it("lcic.v20220817.BatchDescribeDocument", async function () {
     try {
-       const data = await client.DescribeDeveloper({})
+       const data = await client.BatchDescribeDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

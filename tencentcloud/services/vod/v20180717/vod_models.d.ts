@@ -6594,9 +6594,21 @@ export interface ReviewAudioVideoTaskOutput {
  */
 export interface RemoveWaterMarkTaskOutput {
     /**
-      * 视频 ID。
+      * 媒体文件 ID。
       */
     FileId: string;
+    /**
+      * 文件类型，例如 mp4、mp3 等。
+      */
+    FileType?: string;
+    /**
+      * 媒体文件播放地址。
+      */
+    FileUrl?: string;
+    /**
+      * 文件名称，最长 64 个字符。
+      */
+    MediaName?: string;
     /**
       * 元信息。包括大小、时长、视频流信息、音频流信息等。
       */
@@ -7280,6 +7292,11 @@ export interface DomainDetailInfo {
 <li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
       */
     CreateTime: string;
+    /**
+      * 域名 QUIC 配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QUICConfig?: DomainQUICConfig;
 }
 /**
  * 视频流配置信息
@@ -8681,6 +8698,10 @@ export interface ModifyVodDomainConfigRequest {
       * [Key 防盗链](/document/product/266/14047)规则。
       */
     UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
+    /**
+      * QUIC 配置。
+      */
+    QUICConfig?: DomainQUICConfig;
 }
 /**
  * AI 样本管理，标签操作。
@@ -13959,38 +13980,15 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 点播文件视频流信息
+ * 域名 QUIC 配置信息
  */
-export interface MediaVideoStreamItem {
+export interface DomainQUICConfig {
     /**
-      * 视频流的码率，单位：bps。
+      * QUIC 配置状态，可选值：
+<li>Enabled: 启用；</li>
+<li>Disabled: 禁用。</li>
       */
-    Bitrate?: number;
-    /**
-      * 视频流的高度，单位：px。
-      */
-    Height?: number;
-    /**
-      * 视频流的宽度，单位：px。
-      */
-    Width?: number;
-    /**
-      * 视频流的编码格式，例如 h264。
-      */
-    Codec?: string;
-    /**
-      * 帧率，单位：hz。
-      */
-    Fps?: number;
-    /**
-      * 编码标签，仅当 Codec 为 hevc 时有效。
-      */
-    CodecTag?: string;
-    /**
-      * 画面动态范围信息。
-<li><font color=red>注意</font>：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。</li>
-      */
-    DynamicRangeInfo: DynamicRangeInfo;
+    Status: string;
 }
 /**
  * SetDrmKeyProviderInfo请求参数结构体
@@ -14892,6 +14890,40 @@ export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
       * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
       */
     ReviewConfidence?: number;
+}
+/**
+ * 点播文件视频流信息
+ */
+export interface MediaVideoStreamItem {
+    /**
+      * 视频流的码率，单位：bps。
+      */
+    Bitrate?: number;
+    /**
+      * 视频流的高度，单位：px。
+      */
+    Height?: number;
+    /**
+      * 视频流的宽度，单位：px。
+      */
+    Width?: number;
+    /**
+      * 视频流的编码格式，例如 h264。
+      */
+    Codec?: string;
+    /**
+      * 帧率，单位：hz。
+      */
+    Fps?: number;
+    /**
+      * 编码标签，仅当 Codec 为 hevc 时有效。
+      */
+    CodecTag?: string;
+    /**
+      * 画面动态范围信息。
+<li><font color=red>注意</font>：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。</li>
+      */
+    DynamicRangeInfo: DynamicRangeInfo;
 }
 /**
  * CreateRebuildMediaTemplate请求参数结构体

@@ -233,7 +233,15 @@ export interface RestoreInstanceRequest {
       */
     RenameRestore?: Array<RenameRestoreDatabase>;
     /**
-      * 备份任务组ID，在单库备份文件模式下，可通过[DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获得。
+      * 回档类型，0-覆盖方式；1-重命名方式，默认1
+      */
+    Type?: number;
+    /**
+      * 需要覆盖回档的数据库，只有覆盖回档时必填
+      */
+    DBList?: Array<string>;
+    /**
+      * 备份任务组ID，在单库备份文件模式下
       */
     GroupId?: string;
 }
@@ -766,7 +774,7 @@ export interface RollbackInstanceResponse {
     /**
       * 异步任务ID
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4481,6 +4489,16 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SlaveZones: SlaveZones;
+    /**
+      * 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Architecture?: string;
+    /**
+      * 类型标识，EXCLUSIVE-独享型，SHARED-共享型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Style?: string;
 }
 /**
  * 账号创建信息
@@ -5417,13 +5435,13 @@ export interface RollbackInstanceRequest {
       */
     Type: number;
     /**
-      * 需要回档的数据库
-      */
-    DBs: Array<string>;
-    /**
       * 回档目标时间点
       */
     Time: string;
+    /**
+      * 需要回档的数据库
+      */
+    DBs?: Array<string>;
     /**
       * 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID
       */
@@ -5613,7 +5631,7 @@ export interface RestoreInstanceResponse {
     /**
       * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

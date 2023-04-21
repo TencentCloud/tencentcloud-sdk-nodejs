@@ -108,6 +108,26 @@ it("dbbrain.v20210527.DescribeDBDiagReportTasks", async function () {
     }
 })
 
+it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
+    try {
+       const data = await client.ModifyDiagDBInstanceConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DeleteAuditLogFile", async function () {
+    try {
+       const data = await client.DeleteAuditLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeAllUserGroup", async function () {
     try {
        const data = await client.DescribeAllUserGroup({})
@@ -241,6 +261,16 @@ it("dbbrain.v20210527.DeleteSecurityAuditLogExportTasks", async function () {
 it("dbbrain.v20210527.ModifySqlFilters", async function () {
     try {
        const data = await client.ModifySqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.CreateAuditLogFile", async function () {
+    try {
+       const data = await client.CreateAuditLogFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +458,9 @@ it("dbbrain.v20210527.DescribeTopSpaceTableTimeSeries", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
+it("dbbrain.v20210527.DescribeAuditLogFiles", async function () {
     try {
-       const data = await client.ModifyDiagDBInstanceConf({})
+       const data = await client.DescribeAuditLogFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

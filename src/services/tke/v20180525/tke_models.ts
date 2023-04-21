@@ -775,6 +775,16 @@ export interface EnableClusterAuditResponse {
 }
 
 /**
+ * CreateBackupStorageLocation返回参数结构体
+ */
+export interface CreateBackupStorageLocationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnvironmentVariable
  */
 export interface EnvironmentVariable {
@@ -1304,6 +1314,36 @@ export interface DescribeClusterStatusRequest {
    * 集群ID列表，不传默认拉取所有集群
    */
   ClusterIds?: Array<string>
+}
+
+/**
+ * CreateBackupStorageLocation请求参数结构体
+ */
+export interface CreateBackupStorageLocationRequest {
+  /**
+   * 存储仓库所属地域，比如COS广州(ap-guangzhou)
+   */
+  StorageRegion: string
+
+  /**
+   * 对象存储桶名称，如果是COS必须是tke-backup前缀开头
+   */
+  Bucket: string
+
+  /**
+   * 备份仓库名称
+   */
+  Name: string
+
+  /**
+   * 存储服务提供方，默认腾讯云
+   */
+  Provider?: string
+
+  /**
+   * 对象存储桶路径
+   */
+  Path?: string
 }
 
 /**
@@ -1843,6 +1883,57 @@ export interface GetMostSuitableImageCacheResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务事件
+ */
+export interface Event {
+  /**
+   * pod名称
+   */
+  PodName: string
+
+  /**
+   * 事件原因内容
+   */
+  Reason: string
+
+  /**
+   * 事件类型
+   */
+  Type: string
+
+  /**
+   * 事件出现次数
+   */
+  Count: number
+
+  /**
+   * 事件第一次出现时间
+   */
+  FirstTimestamp: string
+
+  /**
+   * 事件最后一次出现时间
+   */
+  LastTimestamp: string
+
+  /**
+   * 事件内容
+   */
+  Message: string
+}
+
+/**
+ * 探针在容器内执行检测命令参数类型
+ */
+export interface Exec {
+  /**
+      * 容器内检测的命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Commands?: Array<string>
 }
 
 /**
@@ -3308,6 +3399,12 @@ export interface EdgeCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ChargeType?: string
+
+  /**
+      * 边缘集群组件的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EdgeVersion?: string
 }
 
 /**
@@ -3579,6 +3676,57 @@ export interface ClusterCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message: string
+}
+
+/**
+ * 仓储仓库信息
+ */
+export interface BackupStorageLocation {
+  /**
+   * 备份仓库名称
+   */
+  Name?: string
+
+  /**
+   * 存储仓库所属地域，比如COS广州(ap-guangzhou)
+   */
+  StorageRegion?: string
+
+  /**
+      * 存储服务提供方，默认腾讯云	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Provider?: string
+
+  /**
+      * 对象存储桶名称，如果是COS必须是tke-backup-前缀开头	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket?: string
+
+  /**
+      * 对象存储桶路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path?: string
+
+  /**
+      * 存储仓库状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State?: string
+
+  /**
+      * 详细状态信息	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message?: string
+
+  /**
+      * 最后一次检查时间	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastValidationTime?: string
 }
 
 /**
@@ -4461,6 +4609,16 @@ export interface CreateClusterInstancesRequest {
 }
 
 /**
+ * DeleteBackupStorageLocation请求参数结构体
+ */
+export interface DeleteBackupStorageLocationRequest {
+  /**
+   * 备份仓库名称
+   */
+  Name: string
+}
+
+/**
  * 集群容器网络相关参数
  */
 export interface ClusterCIDRSettings {
@@ -5240,141 +5398,13 @@ export interface DescribePrometheusTempSyncResponse {
 }
 
 /**
- * 集群信息结构体
+ * CreatePrometheusConfig返回参数结构体
  */
-export interface Cluster {
+export interface CreatePrometheusConfigResponse {
   /**
-   * 集群ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId: string
-
-  /**
-   * 集群名称
-   */
-  ClusterName: string
-
-  /**
-   * 集群描述
-   */
-  ClusterDescription: string
-
-  /**
-   * 集群版本（默认值为1.10.5）
-   */
-  ClusterVersion: string
-
-  /**
-   * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
-   */
-  ClusterOs: string
-
-  /**
-   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
-   */
-  ClusterType: string
-
-  /**
-   * 集群网络相关参数
-   */
-  ClusterNetworkSettings: ClusterNetworkSettings
-
-  /**
-   * 集群当前node数量
-   */
-  ClusterNodeNum: number
-
-  /**
-   * 集群所属的项目ID
-   */
-  ProjectId: number
-
-  /**
-      * 标签描述列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagSpecification: Array<TagSpecification>
-
-  /**
-   * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
-   */
-  ClusterStatus: string
-
-  /**
-      * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Property: string
-
-  /**
-   * 集群当前master数量
-   */
-  ClusterMaterNodeNum: number
-
-  /**
-      * 集群使用镜像id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImageId: string
-
-  /**
-      * OsCustomizeType 系统定制类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OsCustomizeType: string
-
-  /**
-      * 集群运行环境docker或container
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContainerRuntime: string
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreatedTime: string
-
-  /**
-      * 删除保护开关
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeletionProtection: boolean
-
-  /**
-      * 集群是否开启第三方节点支持
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnableExternalNode: boolean
-
-  /**
-      * 集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterLevel: string
-
-  /**
-      * 自动变配集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoUpgradeClusterLevel: boolean
-
-  /**
-      * 是否开启QGPU共享
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  QGPUShareEnable: boolean
-
-  /**
-      * 运行时版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RuntimeVersion: string
-
-  /**
-      * 集群当前etcd数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterEtcdNodeNum: number
+  RequestId?: string
 }
 
 /**
@@ -5501,6 +5531,11 @@ export interface EnableVpcCniNetworkTypeRequest {
    * 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。
    */
   ExpiredSeconds?: number
+
+  /**
+   * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
+   */
+  SkipAddingNonMasqueradeCIDRs?: boolean
 }
 
 /**
@@ -5632,14 +5667,13 @@ BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式
 }
 
 /**
- * 探针在容器内执行检测命令参数类型
+ * DeletePrometheusClusterAgent返回参数结构体
  */
-export interface Exec {
+export interface DeletePrometheusClusterAgentResponse {
   /**
-      * 容器内检测的命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Commands?: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7083,13 +7117,141 @@ export interface DescribePrometheusClusterAgentsResponse {
 }
 
 /**
- * CreatePrometheusConfig返回参数结构体
+ * 集群信息结构体
  */
-export interface CreatePrometheusConfigResponse {
+export interface Cluster {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 集群描述
+   */
+  ClusterDescription: string
+
+  /**
+   * 集群版本（默认值为1.10.5）
+   */
+  ClusterVersion: string
+
+  /**
+   * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
+   */
+  ClusterOs: string
+
+  /**
+   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+   */
+  ClusterType: string
+
+  /**
+   * 集群网络相关参数
+   */
+  ClusterNetworkSettings: ClusterNetworkSettings
+
+  /**
+   * 集群当前node数量
+   */
+  ClusterNodeNum: number
+
+  /**
+   * 集群所属的项目ID
+   */
+  ProjectId: number
+
+  /**
+      * 标签描述列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification: Array<TagSpecification>
+
+  /**
+   * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
+   */
+  ClusterStatus: string
+
+  /**
+      * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Property: string
+
+  /**
+   * 集群当前master数量
+   */
+  ClusterMaterNodeNum: number
+
+  /**
+      * 集群使用镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
+
+  /**
+      * OsCustomizeType 系统定制类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsCustomizeType: string
+
+  /**
+      * 集群运行环境docker或container
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerRuntime: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 删除保护开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeletionProtection: boolean
+
+  /**
+      * 集群是否开启第三方节点支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableExternalNode: boolean
+
+  /**
+      * 集群等级，针对托管集群生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterLevel: string
+
+  /**
+      * 自动变配集群等级，针对托管集群生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoUpgradeClusterLevel: boolean
+
+  /**
+      * 是否开启QGPU共享
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QGPUShareEnable: boolean
+
+  /**
+      * 运行时版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuntimeVersion: string
+
+  /**
+      * 集群当前etcd数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterEtcdNodeNum: number
 }
 
 /**
@@ -8133,16 +8295,6 @@ export interface DescribeClusterAuthenticationOptionsResponse {
       */
   OIDCConfig?: OIDCConfigAuthenticationOptions
 
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeletePrometheusClusterAgent返回参数结构体
- */
-export interface DeletePrometheusClusterAgentResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10681,23 +10833,19 @@ cluster 集群级别
 }
 
 /**
- * CVM实例数据盘挂载配置
+ * DescribeBackupStorageLocations返回参数结构体
  */
-export interface InstanceDataDiskMountSetting {
+export interface DescribeBackupStorageLocationsResponse {
   /**
-   * CVM实例类型
-   */
-  InstanceType: string
+      * 详细备份仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupStorageLocationSet?: Array<BackupStorageLocation>
 
   /**
-   * 数据盘挂载信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DataDisks: Array<DataDisk>
-
-  /**
-   * CVM实例所属可用区
-   */
-  Zone: string
+  RequestId?: string
 }
 
 /**
@@ -10974,43 +11122,13 @@ export interface DescribeEdgeCVMInstancesResponse {
 }
 
 /**
- * 服务事件
+ * DeleteBackupStorageLocation返回参数结构体
  */
-export interface Event {
+export interface DeleteBackupStorageLocationResponse {
   /**
-   * pod名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PodName: string
-
-  /**
-   * 事件原因内容
-   */
-  Reason: string
-
-  /**
-   * 事件类型
-   */
-  Type: string
-
-  /**
-   * 事件出现次数
-   */
-  Count: number
-
-  /**
-   * 事件第一次出现时间
-   */
-  FirstTimestamp: string
-
-  /**
-   * 事件最后一次出现时间
-   */
-  LastTimestamp: string
-
-  /**
-   * 事件内容
-   */
-  Message: string
+  RequestId?: string
 }
 
 /**
@@ -12512,6 +12630,26 @@ export interface RouteTableConflict {
 }
 
 /**
+ * CVM实例数据盘挂载配置
+ */
+export interface InstanceDataDiskMountSetting {
+  /**
+   * CVM实例类型
+   */
+  InstanceType: string
+
+  /**
+   * 数据盘挂载信息
+   */
+  DataDisks: Array<DataDisk>
+
+  /**
+   * CVM实例所属可用区
+   */
+  Zone: string
+}
+
+/**
  * 托管prometheus实例概览
  */
 export interface PrometheusInstanceOverview {
@@ -12669,4 +12807,14 @@ export interface PendingRelease {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdatedTime: string
+}
+
+/**
+ * DescribeBackupStorageLocations请求参数结构体
+ */
+export interface DescribeBackupStorageLocationsRequest {
+  /**
+   * 多个备份仓库名称，如果不填写，默认返回当前地域所有存储仓库名称
+   */
+  Names?: Array<string>
 }

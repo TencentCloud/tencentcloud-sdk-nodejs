@@ -41,7 +41,7 @@ import {
   RootCertificates,
   DescribeCertificateResponse,
   HostCertificateResponse,
-  UploadConfirmLetterRequest,
+  UploadCertificateResponse,
   PackageTransferOutInfo,
   OperationLog,
   VerifyManagerResponse,
@@ -66,6 +66,7 @@ import {
   HostCertificateRequest,
   DescribeCertificateRequest,
   DescribeManagerDetailRequest,
+  DescribeCompaniesResponse,
   DvAuthDetail,
   ProjectInfo,
   ModifyCertificatesExpiringNotificationSwitchRequest,
@@ -78,12 +79,13 @@ import {
   UploadConfirmLetterResponse,
   DeleteManagerResponse,
   VerifyManagerRequest,
-  UploadCertificateResponse,
+  RevokeCertificateRequest,
   RevokeDomainValidateAuths,
   DescribePackagesRequest,
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
-  DescribeManagerDetailResponse,
+  UploadConfirmLetterRequest,
+  DescribeCompaniesRequest,
   ManagerStatusInfo,
   SubmitCertificateInformationRequest,
   DescribeCertificatesRequest,
@@ -91,7 +93,7 @@ import {
   DescribeManagersRequest,
   CompleteCertificateResponse,
   SubmitCertificateInformationResponse,
-  RevokeCertificateRequest,
+  DescribeManagerDetailResponse,
   PreAuditInfo,
   SubmittedData,
 } from "./ssl_models"
@@ -253,6 +255,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificateResponse) => void
   ): Promise<DescribeCertificateResponse> {
     return this.request("DescribeCertificate", req, cb)
+  }
+
+  /**
+   * 查询公司列表
+   */
+  async DescribeCompanies(
+    req: DescribeCompaniesRequest,
+    cb?: (error: string, rep: DescribeCompaniesResponse) => void
+  ): Promise<DescribeCompaniesResponse> {
+    return this.request("DescribeCompanies", req, cb)
   }
 
   /**

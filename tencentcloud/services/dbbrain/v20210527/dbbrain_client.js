@@ -82,6 +82,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagReportTasks", req, cb);
     }
     /**
+     * 修改实例巡检开关。
+     */
+    async ModifyDiagDBInstanceConf(req, cb) {
+        return this.request("ModifyDiagDBInstanceConf", req, cb);
+    }
+    /**
+     * 用于删除云数据库实例的审计日志文件。
+     */
+    async DeleteAuditLogFile(req, cb) {
+        return this.request("DeleteAuditLogFile", req, cb);
+    }
+    /**
      * 获取邮件发送联系组的相关信息。
      */
     async DescribeAllUserGroup(req, cb) {
@@ -164,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySqlFilters(req, cb) {
         return this.request("ModifySqlFilters", req, cb);
+    }
+    /**
+     * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
+     */
+    async CreateAuditLogFile(req, cb) {
+        return this.request("CreateAuditLogFile", req, cb);
     }
     /**
      * 查询redis实例大key列表。
@@ -274,10 +292,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
     }
     /**
-     * 修改实例巡检开关。
+     * 用于创建云数据库实例的审计日志文件
      */
-    async ModifyDiagDBInstanceConf(req, cb) {
-        return this.request("ModifyDiagDBInstanceConf", req, cb);
+    async DescribeAuditLogFiles(req, cb) {
+        return this.request("DescribeAuditLogFiles", req, cb);
     }
     /**
      * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。

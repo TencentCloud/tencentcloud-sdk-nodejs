@@ -168,6 +168,16 @@ it("ssl.v20191205.DescribeCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.DescribeCompanies", async function () {
+    try {
+       const data = await client.DescribeCompanies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeCertificateDetail", async function () {
     try {
        const data = await client.DescribeCertificateDetail({})

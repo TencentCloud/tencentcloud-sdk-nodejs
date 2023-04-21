@@ -196,7 +196,7 @@ export declare class Client extends AbstractClient {
      */
     StartBackupMigration(req: StartBackupMigrationRequest, cb?: (error: string, rep: StartBackupMigrationResponse) => void): Promise<StartBackupMigrationResponse>;
     /**
-     * 本接口（RestoreInstance）用于根据备份文件恢复实例。
+     * 本接口（RestoreInstance）用于按照备份集回档数据库。
      */
     RestoreInstance(req: RestoreInstanceRequest, cb?: (error: string, rep: RestoreInstanceResponse) => void): Promise<RestoreInstanceResponse>;
     /**
@@ -366,7 +366,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountPrivilege(req: ModifyAccountPrivilegeRequest, cb?: (error: string, rep: ModifyAccountPrivilegeResponse) => void): Promise<ModifyAccountPrivilegeResponse>;
     /**
-     * 本接口（RollbackInstance）用于回档实例
+     * 本接口（RollbackInstance）用于按照时间点回档实例
      */
     RollbackInstance(req: RollbackInstanceRequest, cb?: (error: string, rep: RollbackInstanceResponse) => void): Promise<RollbackInstanceResponse>;
     /**
