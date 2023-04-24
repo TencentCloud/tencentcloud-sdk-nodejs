@@ -1276,7 +1276,7 @@ export interface DescribeTRTCRealTimeScaleMetricDataResponse {
       * TRTC监控数据出参
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: TRTCDataResp;
+    Data?: TRTCDataResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

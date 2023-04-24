@@ -1857,7 +1857,7 @@ export interface CreateDocumentRequest {
     /**
       * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。
       */
-    FileNames: Array<string>;
+    FileNames?: Array<string>;
     /**
       * 内容控件信息数组
       */
@@ -2050,13 +2050,13 @@ export interface CreateFlowSignUrlRequest {
       */
     FlowApproverInfos: Array<FlowCreateApprover>;
     /**
-      * 机构信息，暂未开放
-      */
-    Organization: OrganizationInfo;
-    /**
       * 用户信息，此结构体UserId必填
       */
     Operator?: UserInfo;
+    /**
+      * 机构信息，暂未开放
+      */
+    Organization?: OrganizationInfo;
 }
 /**
  * CreateReleaseFlow请求参数结构体
@@ -2156,6 +2156,11 @@ export interface FlowDetailInfo {
       * 合同(流程)的关注方信息列表
       */
     CcInfos?: Array<FlowApproverDetail>;
+    /**
+      * 合同发起人UserId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Creator?: string;
 }
 /**
  * 更新员工信息成功返回的数据信息
@@ -3685,6 +3690,11 @@ export interface FlowBrief {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowMessage: string;
+    /**
+      *  合同发起人userId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Creator?: string;
 }
 /**
  * DescribeOrganizationGroupOrganizations返回参数结构体

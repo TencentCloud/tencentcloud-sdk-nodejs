@@ -96,6 +96,26 @@ export interface CreateMigrationTaskRequest {
 }
 
 /**
+ * ScaleUpFileSystem返回参数结构体
+ */
+export interface ScaleUpFileSystemResponse {
+  /**
+   * 文件系统Id
+   */
+  FileSystemId?: string
+
+  /**
+   * 扩容的目标容量
+   */
+  TargetCapacity?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文件系统快照统计
  */
 export interface SnapshotStatistics {
@@ -556,6 +576,21 @@ export interface BindAutoSnapshotPolicyRequest {
    * 文件系统列表
    */
   FileSystemIds: string
+}
+
+/**
+ * ScaleUpFileSystem请求参数结构体
+ */
+export interface ScaleUpFileSystemRequest {
+  /**
+   * 文件系统Id
+   */
+  FileSystemId: string
+
+  /**
+   * 扩容的目标容量
+   */
+  TargetCapacity: number
 }
 
 /**

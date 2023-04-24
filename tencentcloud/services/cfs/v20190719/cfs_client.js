@@ -127,6 +127,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMigrationTask", req, cb);
     }
     /**
+     * 该接口用于对turbo 文件系统扩容使用
+     */
+    async ScaleUpFileSystem(req, cb) {
+        return this.request("ScaleUpFileSystem", req, cb);
+    }
+    /**
      * 本接口（UpdateCfsFileSystemSizeLimit）用于更新文件系统存储容量限制。
      */
     async UpdateCfsFileSystemSizeLimit(req, cb) {

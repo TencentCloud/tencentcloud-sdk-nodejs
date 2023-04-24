@@ -66,6 +66,7 @@ import {
   DescribeTaskListRequest,
   CreateInstancesResponse,
   KeeWiDBNode,
+  DescribeConnectionConfigResponse,
   BinlogInfo,
   ModifyNetworkConfigRequest,
   DescribeInstanceParamsRequest,
@@ -101,6 +102,7 @@ import {
   DestroyPrepaidInstanceResponse,
   InstanceNodeInfo,
   TendisSlowLogDetail,
+  DescribeConnectionConfigRequest,
   ModifyInstanceParamsRequest,
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
@@ -112,13 +114,13 @@ import {
   DisassociateSecurityGroupsRequest,
   ModifyMaintenanceWindowRequest,
   DescribeInstanceBackupsRequest,
-  DescribeInstanceBinlogsResponse,
+  ClearInstanceResponse,
   ChangeInstanceMasterResponse,
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
   InstanceParam,
   DisassociateSecurityGroupsResponse,
-  ClearInstanceResponse,
+  DescribeInstanceBinlogsResponse,
 } from "./keewidb_models"
 
 /**
@@ -228,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeConnectionConfig）用于查询实例连接配置，包括出流量和入流量带宽、最大连接数限制。
+   */
+  async DescribeConnectionConfig(
+    req: DescribeConnectionConfigRequest,
+    cb?: (error: string, rep: DescribeConnectionConfigResponse) => void
+  ): Promise<DescribeConnectionConfigResponse> {
+    return this.request("DescribeConnectionConfig", req, cb)
   }
 
   /**

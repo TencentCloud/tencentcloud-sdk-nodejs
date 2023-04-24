@@ -112,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorTopNCmdTook(req: DescribeInstanceMonitorTopNCmdTookRequest, cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdTookResponse) => void): Promise<DescribeInstanceMonitorTopNCmdTookResponse>;
     /**
-     * 设置自动备份配置
+     * 本接口（ModifyAutoBackupConfig）用于设置自动备份的配置。
      */
     ModifyAutoBackupConfig(req: ModifyAutoBackupConfigRequest, cb?: (error: string, rep: ModifyAutoBackupConfigResponse) => void): Promise<ModifyAutoBackupConfigResponse>;
     /**

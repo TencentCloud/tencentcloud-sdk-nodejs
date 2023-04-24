@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 本接口（DescribeConnectionConfig）用于查询实例连接配置，包括出流量和入流量带宽、最大连接数限制。
+     */
+    async DescribeConnectionConfig(req, cb) {
+        return this.request("DescribeConnectionConfig", req, cb);
+    }
+    /**
      * 本接口（DescribeInstanceBinlogs）用于查询增量备份列表。
      */
     async DescribeInstanceBinlogs(req, cb) {

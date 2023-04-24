@@ -4821,50 +4821,18 @@ export interface DescribeAMQPClustersResponse {
     RequestId?: string;
 }
 /**
- * RocketMQ集群配置
+ * ModifyRocketMQInstanceSpec返回参数结构体
  */
-export interface RocketMQClusterConfig {
+export interface ModifyRocketMQInstanceSpecResponse {
     /**
-      * 单命名空间TPS上线
-      */
-    MaxTpsPerNamespace?: number;
-    /**
-      * 最大命名空间数量
-      */
-    MaxNamespaceNum?: number;
-    /**
-      * 已使用命名空间数量
-      */
-    UsedNamespaceNum?: number;
-    /**
-      * 最大Topic数量
-      */
-    MaxTopicNum?: number;
-    /**
-      * 已使用Topic数量
-      */
-    UsedTopicNum?: number;
-    /**
-      * 最大Group数量
-      */
-    MaxGroupNum?: number;
-    /**
-      * 已使用Group数量
-      */
-    UsedGroupNum?: number;
-    /**
-      * 消息最大保留时间，以毫秒为单位
-      */
-    MaxRetentionTime?: number;
-    /**
-      * 消息最长延时，以毫秒为单位
-      */
-    MaxLatencyTime?: number;
-    /**
-      * 单个主题最大队列数
+      * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MaxQueuesPerTopic?: number;
+    OrderId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCmqDeadLetterSourceQueues返回参数结构体
@@ -5107,6 +5075,52 @@ export interface RetentionPolicy {
     SizeInMB: number;
 }
 /**
+ * RocketMQ集群配置
+ */
+export interface RocketMQClusterConfig {
+    /**
+      * 单命名空间TPS上线
+      */
+    MaxTpsPerNamespace?: number;
+    /**
+      * 最大命名空间数量
+      */
+    MaxNamespaceNum?: number;
+    /**
+      * 已使用命名空间数量
+      */
+    UsedNamespaceNum?: number;
+    /**
+      * 最大Topic数量
+      */
+    MaxTopicNum?: number;
+    /**
+      * 已使用Topic数量
+      */
+    UsedTopicNum?: number;
+    /**
+      * 最大Group数量
+      */
+    MaxGroupNum?: number;
+    /**
+      * 已使用Group数量
+      */
+    UsedGroupNum?: number;
+    /**
+      * 消息最大保留时间，以毫秒为单位
+      */
+    MaxRetentionTime?: number;
+    /**
+      * 消息最长延时，以毫秒为单位
+      */
+    MaxLatencyTime?: number;
+    /**
+      * 单个主题最大队列数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxQueuesPerTopic?: number;
+}
+/**
  * CreateRocketMQCluster返回参数结构体
  */
 export interface CreateRocketMQClusterResponse {
@@ -5118,6 +5132,31 @@ export interface CreateRocketMQClusterResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyRocketMQInstanceSpec请求参数结构体
+ */
+export interface ModifyRocketMQInstanceSpecRequest {
+    /**
+      * 专享实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例规格，
+rocket-vip-basic-1 基础型
+rocket-vip-basic-2 标准型
+rocket-vip-basic-3 高阶Ⅰ型
+rocket-vip-basic-4 高阶Ⅱ型
+      */
+    Specification?: string;
+    /**
+      * 节点数量
+      */
+    NodeCount?: number;
+    /**
+      * 存储空间，GB为单位
+      */
+    StorageSize?: number;
 }
 /**
  * DescribeAMQPCreateQuota请求参数结构体

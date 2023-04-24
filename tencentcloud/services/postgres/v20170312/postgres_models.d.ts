@@ -787,6 +787,31 @@ export interface ModifyBaseBackupExpireTimeResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBackupDownloadRestriction请求参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionRequest {
+    /**
+      * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。
+      */
+    RestrictionType: string;
+    /**
+      * vpc限制效力，ALLOW 允许；DENY 拒绝。
+      */
+    VpcRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的vpcId列表。
+      */
+    VpcIdSet?: Array<string>;
+    /**
+      * ip限制效力，ALLOW 允许；DENY 拒绝。
+      */
+    IpRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的ip列表。
+      */
+    IpSet?: Array<string>;
+}
+/**
  * 描述实例的网络连接信息。
  */
 export interface DBInstanceNetInfo {
@@ -897,6 +922,10 @@ export interface DeleteReadOnlyGroupNetworkAccessRequest {
       */
     Vip: string;
 }
+/**
+ * DescribeBackupDownloadRestriction请求参数结构体
+ */
+export declare type DescribeBackupDownloadRestrictionRequest = null;
 /**
  * 描述可用区的编码和状态信息
  */
@@ -1729,6 +1758,15 @@ export interface SpecInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SupportKMSRegions: Array<string>;
+}
+/**
+ * ModifyBackupDownloadRestriction返回参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述各版本下的参数信息
@@ -3584,6 +3622,39 @@ export interface CloseDBExtranetAccessResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupDownloadRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionResponse {
+    /**
+      * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。
+      */
+    RestrictionType?: string;
+    /**
+      * vpc限制效力，ALLOW 允许；DENY 拒绝。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的vpcId列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcIdSet?: Array<string>;
+    /**
+      * ip限制效力，ALLOW 允许；DENY 拒绝。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpRestrictionEffect?: string;
+    /**
+      * 允许或拒绝下载备份文件的ip列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpSet?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateReadOnlyDBInstance请求参数结构体
  */
 export interface CreateReadOnlyDBInstanceRequest {
@@ -4431,6 +4502,31 @@ export interface DescribeAccountsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstanceChargeType请求参数结构体
+ */
+export interface ModifyDBInstanceChargeTypeRequest {
+    /**
+      * 实例ID，形如postgres-6fego161
+      */
+    DBInstanceId: string;
+    /**
+      * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。
+      */
+    InstanceChargeType: string;
+    /**
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+      */
+    Period: number;
+    /**
+      * 续费标记：0-正常续费（默认）；1-自动续费。
+      */
+    AutoRenewFlag?: number;
+    /**
+      * 是否自动使用代金券,1是,0否，默认不使用
+      */
+    AutoVoucher?: number;
+}
+/**
  * DescribeParameterTemplateAttributes返回参数结构体
  */
 export interface DescribeParameterTemplateAttributesResponse {
@@ -4666,6 +4762,40 @@ export interface DescribeDBXlogsResponse {
     RequestId?: string;
 }
 /**
+ * UpgradeDBInstanceKernelVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionRequest {
+    /**
+      * 实例ID
+      */
+    DBInstanceId: string;
+    /**
+      * 升级的目标内核版本号。可以通过接口DescribeDBVersions的返回字段AvailableUpgradeTarget获取。
+      */
+    TargetDBKernelVersion: string;
+    /**
+      * 指定实例升级内核版本号完成后的切换时间。可选值，
+0：立即切换（默认值）。
+1：指定时间切换。
+2：维护时间窗口内切换。
+      */
+    SwitchTag?: number;
+    /**
+      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+      */
+    SwitchStartTime?: string;
+    /**
+      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+      */
+    SwitchEndTime?: string;
+    /**
+      * 是否对本次升级实例内核版本号操作执行预检查。可选值，
+true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
+false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+      */
+    DryRun?: boolean;
+}
+/**
  * DescribeBaseBackups请求参数结构体
  */
 export interface DescribeBaseBackupsRequest {
@@ -4754,36 +4884,15 @@ export interface CreateDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * UpgradeDBInstanceKernelVersion请求参数结构体
+ * ModifyDBInstanceChargeType返回参数结构体
  */
-export interface UpgradeDBInstanceKernelVersionRequest {
+export interface ModifyDBInstanceChargeTypeResponse {
     /**
-      * 实例ID
+      * 订单名
       */
-    DBInstanceId: string;
+    DealName?: string;
     /**
-      * 升级的目标内核版本号。可以通过接口DescribeDBVersions的返回字段AvailableUpgradeTarget获取。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TargetDBKernelVersion: string;
-    /**
-      * 指定实例升级内核版本号完成后的切换时间。可选值，
-0：立即切换（默认值）。
-1：指定时间切换。
-2：维护时间窗口内切换。
-      */
-    SwitchTag?: number;
-    /**
-      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
-      */
-    SwitchStartTime?: string;
-    /**
-      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
-      */
-    SwitchEndTime?: string;
-    /**
-      * 是否对本次升级实例内核版本号操作执行预检查。可选值，
-true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
-false：发送正常请求（默认值），通过检查后直接升级内核版本号。
-      */
-    DryRun?: boolean;
+    RequestId?: string;
 }

@@ -140,6 +140,12 @@ export interface DescribeCustomRulesRspRuleListItem {
    * 策略详情
    */
   Strategies: Array<Strategy>
+
+  /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: string
 }
 
 /**
@@ -463,12 +469,12 @@ export interface DescribeInstancesResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
 
   /**
    * instance列表
    */
-  Instances: Array<InstanceInfo>
+  Instances?: Array<InstanceInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1085,7 +1091,7 @@ export interface DescribeVipInfoRequest {
 }
 
 /**
- * 实例入参过滤器
+ * 过滤数组
  */
 export interface FiltersItemNew {
   /**
@@ -2114,6 +2120,11 @@ export interface DescribeAttackOverviewResponse {
   BotCount?: number
 
   /**
+   * api资产总数
+   */
+  ApiAssetsCount?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2813,7 +2824,7 @@ export interface InstanceInfo {
   InstanceId: string
 
   /**
-   * name
+   * Name
    */
   InstanceName: string
 
@@ -2937,6 +2948,35 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxBandwidth?: number
+
+  /**
+   * api安全是否购买
+   */
+  APISecurity?: number
+
+  /**
+      * 购买的qps规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QpsStandard?: number
+
+  /**
+      * 购买的带宽规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BandwidthStandard?: number
+
+  /**
+      * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 实例沙箱值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SandboxQps?: number
 }
 
 /**
@@ -3016,7 +3056,7 @@ export interface AddCustomRuleRequest {
   SortId: string
 
   /**
-   * 过期时间
+   * 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期
    */
   ExpireTime: string
 
@@ -3350,23 +3390,27 @@ export interface ModifyWafThreatenIntelligenceRequest {
  */
 export interface Strategy {
   /**
-   * 匹配字段
-   */
+      * 匹配字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Field: string
 
   /**
-   * 逻辑符号
-   */
+      * 逻辑符号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   CompareFunc: string
 
   /**
-   * 匹配内容
-   */
+      * 匹配内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Content: string
 
   /**
-   * 匹配参数
-   */
+      * 匹配参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Arg: string
 }
 

@@ -777,7 +777,7 @@ export interface ModifyTraceDataResponse {
     /**
       * 溯源ID
       */
-    TraceId: string;
+    TraceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -893,6 +893,18 @@ export interface ModifyTraceDataRequest {
       */
     PhaseName?: string;
     /**
+      * 环节数据
+      */
+    PhaseData?: PhaseData;
+    /**
+      * 溯源状态 0: 无效, 1: 有效
+      */
+    Status?: number;
+    /**
+      * 排序
+      */
+    Rank?: number;
+    /**
       * [无效] 类型
       */
     Type?: number;
@@ -900,10 +912,6 @@ export interface ModifyTraceDataRequest {
       * [无效] 溯源码
       */
     Code?: string;
-    /**
-      * [无效] 排序
-      */
-    Rank?: number;
     /**
       * [无效] 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源
       */
@@ -932,14 +940,6 @@ export interface ModifyTraceDataRequest {
       * 企业ID
       */
     CorpId?: number;
-    /**
-      * 溯源状态 0: 无效, 1: 有效
-      */
-    Status?: number;
-    /**
-      * 环节数据
-      */
-    PhaseData?: PhaseData;
 }
 /**
  * DescribeCodeBatchs请求参数结构体
@@ -1004,6 +1004,18 @@ export interface CreateTraceCodesRequest {
       * 码
       */
     Codes?: Array<CodeItem>;
+    /**
+      * 码绑定激活策略，默认  0
+0: 传什么码就激活什么码
+1: 层级码 + 层级子码
+      */
+    CodeType?: number;
+    /**
+      * 错误检查类型，默认 0
+0: 没有新导入码时正常返回
+1: 没有新导入码时报错，并返回没有导入成功的原因
+      */
+    CheckType?: number;
 }
 /**
  * DescribeCodeBatchById返回参数结构体
@@ -1070,17 +1082,14 @@ export interface Job {
 export interface TraceData {
     /**
       * 溯源ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
     TraceId: string;
     /**
       * 企业ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
     CorpId: number;
     /**
       * 码类型 0: 批次, 1: 码, 2: 生产任务
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Type: number;
     /**
@@ -1090,17 +1099,14 @@ export interface TraceData {
     Code: string;
     /**
       * 排序，在Phase相同情况下，值越小排名靠前
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Rank: number;
     /**
       * 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Phase: number;
     /**
       * 溯源环节名称
-注意：此字段可能返回 null，表示取不到有效值。
       */
     PhaseName: string;
     /**
@@ -1110,7 +1116,6 @@ export interface TraceData {
     TraceTime: string;
     /**
       * 无
-注意：此字段可能返回 null，表示取不到有效值。
       */
     TraceItems: Array<TraceItem>;
     /**
@@ -1140,7 +1145,6 @@ export interface TraceData {
     PhaseData: PhaseData;
     /**
       * 溯源阶段状态 0: 无效, 1: 有效
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: number;
 }
@@ -1501,58 +1505,63 @@ export interface CreateCodeBatchRequest {
     BatchCode?: string;
 }
 /**
- * 溯源数据项
-Type的枚举值
+ * 溯源数据项 Type 的枚举值
+
 text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型
+
 具体组合如下
-Type: "text" 文本类型, 对应值 Value: "文本字符串"
-Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"
-Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"
-Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]
-Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"
-Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"]
+- Type: "text" 文本类型, 对应值 Value: "文本字符串"
+- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"
+- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"
+- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]
+- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"
+- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"]
  */
 export interface TraceItem {
     /**
       * 字段名称
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Name: string;
     /**
       * 字段值
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Value: string;
     /**
-      * 类型 text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 字段类型
+text:文本类型,
+longtext:长文本类型, banner:单图片类型, image:多图片类型,
+video:视频类型,
+mp:小程序类型
       */
     Type: string;
     /**
       * 只读
-注意：此字段可能返回 null，表示取不到有效值。
       */
     ReadOnly: boolean;
     /**
       * 扫码展示
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Hidden: boolean;
     /**
       * 多个值
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Values: Array<string>;
     /**
       * 类型标识
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Key: string;
     /**
       * 扩展字段
-注意：此字段可能返回 null，表示取不到有效值。
       */
     Ext: string;
+    /**
+      * 额外属性
+      */
+    Attrs?: Array<TraceItem>;
+    /**
+      * 子页面，只读
+      */
+    List?: Array<TraceData>;
 }
 /**
  * DescribeCustomRuleById请求参数结构体
@@ -1588,17 +1597,17 @@ export interface ChainData {
       * 区块hash
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BlockHash: string;
+    BlockHash?: string;
     /**
       * 区块高度
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BlockHeight: string;
+    BlockHeight?: string;
     /**
       * 区块时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BlockTime: string;
+    BlockTime?: string;
 }
 /**
  * 环节数据
@@ -2196,15 +2205,15 @@ export interface CreateTraceCodesResponse {
     /**
       * 批次ID
       */
-    BatchId: string;
+    BatchId?: string;
     /**
       * 导入成功码数量
       */
-    ActiveCnt: number;
+    ActiveCnt?: number;
     /**
       * 批次码数量
       */
-    CodeCnt: number;
+    CodeCnt?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

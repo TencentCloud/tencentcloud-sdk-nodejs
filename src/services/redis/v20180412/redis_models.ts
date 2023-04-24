@@ -190,24 +190,24 @@ export interface DescribeInstanceMonitorTopNCmdResponse {
  */
 export interface ModifyAutoBackupConfigResponse {
   /**
-   * 自动备份类型： 1 “定时回档”
+   * 自动备份类型。目前仅能配置为：1 ，指定时备份。
    */
-  AutoBackupType: number
+  AutoBackupType?: number
 
   /**
    * 自动备份周期。取值为：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
    */
-  WeekDays: Array<string>
+  WeekDays?: Array<string>
 
   /**
-   * 自动备份时间段。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。
+   * 自动定时备份时间段。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。
    */
-  TimePeriod: string
+  TimePeriod?: string
 
   /**
    * 全量备份文件保存天数,单位：天。
    */
-  BackupStorageDays: number
+  BackupStorageDays?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1318,8 +1318,9 @@ export interface DescribeInstanceParamRecordsResponse {
  */
 export interface ModifyAutoBackupConfigRequest {
   /**
-   * 实例ID。
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+      */
   InstanceId: string
 
   /**
@@ -1333,7 +1334,7 @@ export interface ModifyAutoBackupConfigRequest {
   TimePeriod: string
 
   /**
-   * 自动备份类型： 1 “定时回档”。
+   * 自动备份类型。目前仅能配置为：1 ，指定时备份。
    */
   AutoBackupType?: number
 }

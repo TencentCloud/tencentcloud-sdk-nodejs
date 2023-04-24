@@ -547,7 +547,7 @@ export interface ModifyLoadBalancerAttributesResponse {
       * 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DealName: string;
+    DealName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1507,6 +1507,10 @@ export interface ModifyLoadBalancerAttributesRequest {
       * 是否开启删除保护
       */
     DeleteProtect?: boolean;
+    /**
+      * 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换。修改后mycloud.com域名将失效。
+      */
+    ModifyClassicDomain?: boolean;
 }
 /**
  * DescribeLBListeners请求参数结构体

@@ -3977,12 +3977,12 @@ export interface DescribeAIRecognitionTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 音视频内容识别模板详情列表。
    */
-  AIRecognitionTemplateSet: Array<AIRecognitionTemplateItem>
+  AIRecognitionTemplateSet?: Array<AIRecognitionTemplateItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6252,6 +6252,15 @@ export interface AsrFullTextConfigureInfoForUpdate {
 <font color='red'>注意：此字段已废弃，建议使用 SubtitleFormatsOperation。</font>
       */
   SubtitleFormat?: string
+
+  /**
+      * 媒体源语言，取值范围：
+<li>zh：中文普通话；</li>
+<li>en：英语；</li>
+<li>ja：日语；</li>
+<li>zh-ca：粤语。</li>
+      */
+  SrcLanguage?: string
 }
 
 /**
@@ -10295,7 +10304,7 @@ export interface CreateAIRecognitionTemplateResponse {
   /**
    * 音视频内容识别模板唯一标识。
    */
-  Definition: number
+  Definition?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13976,6 +13985,16 @@ export interface AsrFullTextConfigureInfo {
 <font color='red'>注意：此字段已废弃，建议使用 SubtitleFormats。</font>
       */
   SubtitleFormat?: string
+
+  /**
+      * 媒体源语言，取值范围：
+<li>zh：中文普通话；</li>
+<li>en：英语；</li>
+<li>ja：日语；</li>
+<li>zh-ca：粤语。</li>
+<font color=red>注意：</font> 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。
+      */
+  SrcLanguage?: string
 }
 
 /**

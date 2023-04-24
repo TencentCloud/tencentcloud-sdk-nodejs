@@ -31,6 +31,7 @@ import {
   EstateCertOCRResponse,
   FlightInvoiceOCRRequest,
   RecognizePhilippinesDrivingLicenseOCRRequest,
+  WordItem,
   MLIDPassportOCRRequest,
   ItemInfo,
   SmartStructuralOCRV2Request,

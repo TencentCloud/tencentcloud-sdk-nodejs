@@ -2501,24 +2501,24 @@ export interface DescribeCallInMetricsResponse {
   /**
    * 时间戳
    */
-  Timestamp: number
+  Timestamp?: number
 
   /**
    * 总体指标
    */
-  TotalMetrics: CallInMetrics
+  TotalMetrics?: CallInMetrics
 
   /**
       * 线路维度指标
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NumberMetrics: Array<CallInNumberMetrics>
+  NumberMetrics?: Array<CallInNumberMetrics>
 
   /**
       * 技能组维度指标
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SkillGroupMetrics: Array<CallInSkillGroupMetrics>
+  SkillGroupMetrics?: Array<CallInSkillGroupMetrics>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2601,6 +2601,16 @@ export interface DescribeStaffStatusMetricsRequest {
    * 筛选坐席列表，默认不传返回全部坐席信息
    */
   StaffList?: Array<string>
+
+  /**
+   * 筛选技能组ID列表
+   */
+  GroupIdList?: Array<number>
+
+  /**
+   * 筛选坐席状态列表
+   */
+  StatusList?: Array<string>
 }
 
 /**
@@ -2889,7 +2899,7 @@ export interface DescribeStaffStatusMetricsResponse {
   /**
    * 坐席状态实时信息
    */
-  Metrics: Array<StaffStatusMetrics>
+  Metrics?: Array<StaffStatusMetrics>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3080,6 +3090,11 @@ export interface DescribeCallInMetricsRequest {
    * 是否返回线路维度信息，默认“否”
    */
   EnabledNumber?: boolean
+
+  /**
+   * 筛选技能组列表
+   */
+  GroupIdList?: Array<number>
 }
 
 /**

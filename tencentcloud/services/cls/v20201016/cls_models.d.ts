@@ -336,27 +336,9 @@ export interface CreateLogsetRequest {
  */
 export interface DescribeShippersRequest {
     /**
-      * <br><li> shipperName
-
-按照【投递规则名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> shipperId
-
-按照【投递规则ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
+      * - shipperName：按照【投递规则名称】进行过滤。类型：String。必选：否
+- shipperId：按照【投递规则ID】进行过滤。类型：String。必选：否
+- topicId：按照【日志主题】进行过滤。类型：String。必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
@@ -527,37 +509,26 @@ export interface DescribeShipperTasksRequest {
  */
 export interface DescribeAlarmsRequest {
     /**
-      * <br><li> name
+      * name
+- 按照【告警策略名称】进行过滤。
+- 类型：String
+- 必选：否
 
-按照【告警策略名称】进行过滤。
-类型：String
+alarmId
+- 按照【告警策略ID】进行过滤。
+- 类型：String
+- 必选：否
 
-必选：否
+topicId
+- 按照【监控对象的日志主题ID】进行过滤。
+- 类型：String
+- 必选：否
 
-<br><li> alarmId
-
-按照【告警策略ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【监控对象的日志主题ID】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> enable
-
-按照【启用状态】进行过滤。
-
-类型：String
-
-备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.
-
-必选：否
+enable
+- 按照【启用状态】进行过滤。
+- 类型：String
+- 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.
+- 必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
@@ -792,11 +763,11 @@ export interface DescribeConfigsResponse {
       * 采集配置列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Configs: Array<ConfigInfo>;
+    Configs?: Array<ConfigInfo>;
     /**
       * 过滤到的总数目
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1769,35 +1740,25 @@ export interface CloseKafkaConsumerResponse {
  */
 export interface DescribeMachineGroupsRequest {
     /**
-      * <br><li> machineGroupName
+      * machineGroupName
+- 按照【机器组名称】进行过滤。
+- 类型：String
+- 必选：否
 
-按照【机器组名称】进行过滤。
-类型：String
+machineGroupId
+- 按照【机器组ID】进行过滤。
+- 类型：String
+- 必选：否
 
-必选：否
+tagKey
+- 按照【标签键】进行过滤。
+- 类型：String
+- 必选：否
 
-<br><li> machineGroupId
-
-按照【机器组ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> tagKey
-
-按照【标签键】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> tag:tagKey
-
-按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-类型：String
-
-必选：否
-
+tag:tagKey
+- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+- 类型：String
+- 必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
@@ -1848,11 +1809,11 @@ export interface DescribeLogsetsResponse {
     /**
       * 分页的总数目
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 日志集列表
       */
-    Logsets: Array<LogsetInfo>;
+    Logsets?: Array<LogsetInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2167,27 +2128,20 @@ export interface DescribeAlertRecordHistoryRequest {
  */
 export interface DescribeConfigsRequest {
     /**
-      * <br><li> configName
+      * configName
+- 按照【采集配置名称】进行模糊匹配过滤。
+- 类型：String
+- 必选：否
 
-按照【采集配置名称】进行模糊匹配过滤。
-类型：String
+configId
+- 按照【采集配置ID】进行过滤。
+- 类型：String
+- 必选：否
 
-必选：否
-
-<br><li> configId
-
-按照【采集配置ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
+topicId
+- 按照【日志主题】进行过滤。
+- 类型：String
+- 必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
@@ -2392,11 +2346,11 @@ export interface DescribeMachineGroupsResponse {
       * 机器组信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MachineGroups: Array<MachineGroupInfo>;
+    MachineGroups?: Array<MachineGroupInfo>;
     /**
       * 分页的总数目
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4139,35 +4093,25 @@ export interface ModifyCosRechargeRequest {
  */
 export interface DescribeLogsetsRequest {
     /**
-      * <br><li> logsetName
+      * logsetName
+- 按照【日志集名称】进行过滤。
+- 类型：String
+- 必选：否
 
-按照【日志集名称】进行过滤。
-类型：String
+logsetId
+- 按照【日志集ID】进行过滤。
+- 类型：String
+- 必选：否
 
-必选：否
+tagKey
+- 按照【标签键】进行过滤。
+- 类型：String
+- 必选：否
 
-<br><li> logsetId
-
-按照【日志集ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> tagKey
-
-按照【标签键】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> tag:tagKey
-
-按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-类型：String
-
-必选：否
-
+tag:tagKey
+- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+- 类型：String
+- 必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
       */

@@ -118,6 +118,16 @@ it("keewidb.v20220308.DescribeInstances", async function () {
     }
 })
 
+it("keewidb.v20220308.DescribeConnectionConfig", async function () {
+    try {
+       const data = await client.DescribeConnectionConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("keewidb.v20220308.DescribeInstanceBinlogs", async function () {
     try {
        const data = await client.DescribeInstanceBinlogs({})

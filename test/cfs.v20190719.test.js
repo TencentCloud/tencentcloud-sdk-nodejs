@@ -178,6 +178,16 @@ it("cfs.v20190719.DeleteMigrationTask", async function () {
     }
 })
 
+it("cfs.v20190719.ScaleUpFileSystem", async function () {
+    try {
+       const data = await client.ScaleUpFileSystem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.UpdateCfsFileSystemSizeLimit", async function () {
     try {
        const data = await client.UpdateCfsFileSystemSizeLimit({})

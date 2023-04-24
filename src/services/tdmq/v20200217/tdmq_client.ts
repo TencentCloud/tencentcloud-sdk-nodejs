@@ -218,7 +218,7 @@ import {
   CreateCmqSubscribeRequest,
   DeleteCmqSubscribeRequest,
   DescribeAMQPClustersResponse,
-  RocketMQClusterConfig,
+  ModifyRocketMQInstanceSpecResponse,
   DescribeCmqDeadLetterSourceQueuesResponse,
   DeleteSubscriptionsResponse,
   DeleteRocketMQTopicRequest,
@@ -226,7 +226,9 @@ import {
   Cluster,
   SubscriptionTopic,
   RetentionPolicy,
+  RocketMQClusterConfig,
   CreateRocketMQClusterResponse,
+  ModifyRocketMQInstanceSpecRequest,
   DescribeAMQPCreateQuotaRequest,
   PulsarProClusterInfo,
   AMQPQueueDetail,
@@ -715,6 +717,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAMQPQueueResponse) => void
   ): Promise<ModifyAMQPQueueResponse> {
     return this.request("ModifyAMQPQueue", req, cb)
+  }
+
+  /**
+   * 本API用于修改RocketMQ专享实例配置，可以支持实例规格、节点数和存储的升配和实例规格的降配。本API发起订单并成功支付后进入实例配置变更的流程，可通过DescribeRocketMQVipInstances查询实例是否已变更完成。
+   */
+  async ModifyRocketMQInstanceSpec(
+    req: ModifyRocketMQInstanceSpecRequest,
+    cb?: (error: string, rep: ModifyRocketMQInstanceSpecResponse) => void
+  ): Promise<ModifyRocketMQInstanceSpecResponse> {
+    return this.request("ModifyRocketMQInstanceSpec", req, cb)
   }
 
   /**

@@ -478,6 +478,21 @@ export interface RecognizePhilippinesDrivingLicenseOCRRequest {
 }
 
 /**
+ * 还原文本信息
+ */
+export interface WordItem {
+  /**
+   * 文本块内容
+   */
+  DetectedText?: string
+
+  /**
+   * 四点坐标
+   */
+  Coord?: Polygon
+}
+
+/**
  * MLIDPassportOCR请求参数结构体
  */
 export interface MLIDPassportOCRRequest {
@@ -546,6 +561,11 @@ export interface SmartStructuralOCRV2Request {
 ItemNames=["姓名","性别"]
       */
   ItemNames?: Array<string>
+
+  /**
+   * 是否开启全文字段识别
+   */
+  ReturnFullText?: boolean
 }
 
 /**
@@ -1858,6 +1878,11 @@ export interface SmartStructuralOCRV2Response {
    * 配置结构化文本信息
    */
   StructuralList?: Array<GroupInfo>
+
+  /**
+   * 还原文本信息
+   */
+  WordList?: Array<WordItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

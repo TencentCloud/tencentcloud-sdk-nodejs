@@ -1476,6 +1476,11 @@ export interface TriggerInfo {
       * 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建
       */
     TriggerAttribute: string;
+    /**
+      * 客户自定义触发器描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
 }
 /**
  * 函数运行状态
@@ -2828,8 +2833,9 @@ export interface ListTriggersRequest {
       */
     Order?: string;
     /**
-      * * Qualifier:
-函数版本，别名
+      * * Qualifier: 函数版本，别名
+* TriggerName: 函数触发器名称
+* Description: 函数触发器描述
       */
     Filters?: Array<Filter>;
 }

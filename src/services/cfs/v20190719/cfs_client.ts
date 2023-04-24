@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateMigrationTaskRequest,
+  ScaleUpFileSystemResponse,
   SnapshotStatistics,
   DescribeCfsPGroupsResponse,
   DescribeMountTargetsResponse,
@@ -29,6 +30,7 @@ import {
   CreateCfsFileSystemResponse,
   FileSystemInfo,
   BindAutoSnapshotPolicyRequest,
+  ScaleUpFileSystemRequest,
   CreateCfsPGroupRequest,
   DescribeMigrationTasksResponse,
   DescribeAutoSnapshotPoliciesRequest,
@@ -291,6 +293,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMigrationTaskResponse) => void
   ): Promise<DeleteMigrationTaskResponse> {
     return this.request("DeleteMigrationTask", req, cb)
+  }
+
+  /**
+   * 该接口用于对turbo 文件系统扩容使用
+   */
+  async ScaleUpFileSystem(
+    req: ScaleUpFileSystemRequest,
+    cb?: (error: string, rep: ScaleUpFileSystemResponse) => void
+  ): Promise<ScaleUpFileSystemResponse> {
+    return this.request("ScaleUpFileSystem", req, cb)
   }
 
   /**

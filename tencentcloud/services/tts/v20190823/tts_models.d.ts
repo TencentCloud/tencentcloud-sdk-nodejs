@@ -263,7 +263,7 @@ export interface TextToVoiceRequest {
       */
     EmotionCategory?: string;
     /**
-      * 控制合成音频情感程度，取值范围为[50,200],默认为100，不填写为默认值；只有EmotionCategory不为空时生效；
+      * 控制合成音频情感程度，取值范围为[50,200],默认为100；只有EmotionCategory不为空时生效；
       */
     EmotionIntensity?: number;
 }

@@ -1255,6 +1255,31 @@ export interface KeeWiDBNode {
 }
 
 /**
+ * DescribeConnectionConfig返回参数结构体
+ */
+export interface DescribeConnectionConfigResponse {
+  /**
+   * 单分片入流量带宽限制，单位：MB。
+   */
+  InNetLimit?: number
+
+  /**
+   * 单分片出流量带宽限制，单位：MB。
+   */
+  OutNetLimit?: number
+
+  /**
+   * 单分片连接数限制。
+   */
+  ClientLimit?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例增量备份信息
  */
 export interface BinlogInfo {
@@ -2448,6 +2473,16 @@ export interface TendisSlowLogDetail {
 }
 
 /**
+ * DescribeConnectionConfig请求参数结构体
+ */
+export interface DescribeConnectionConfigRequest {
+  /**
+   * 实例 ID，如：kee-6ubh****。
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyInstanceParams请求参数结构体
  */
 export interface ModifyInstanceParamsRequest {
@@ -2699,18 +2734,13 @@ export interface DescribeInstanceBackupsRequest {
 }
 
 /**
- * DescribeInstanceBinlogs返回参数结构体
+ * ClearInstance返回参数结构体
  */
-export interface DescribeInstanceBinlogsResponse {
+export interface ClearInstanceResponse {
   /**
-   * 备份总数
+   * 任务 ID。
    */
-  TotalCount: number
-
-  /**
-   * 实例的备份信息数组
-   */
-  BackupSet: Array<BinlogInfo>
+  TaskId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2853,13 +2883,18 @@ export interface DisassociateSecurityGroupsResponse {
 }
 
 /**
- * ClearInstance返回参数结构体
+ * DescribeInstanceBinlogs返回参数结构体
  */
-export interface ClearInstanceResponse {
+export interface DescribeInstanceBinlogsResponse {
   /**
-   * 任务 ID。
+   * 备份总数
    */
-  TaskId: number
+  TotalCount: number
+
+  /**
+   * 实例的备份信息数组
+   */
+  BackupSet: Array<BinlogInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

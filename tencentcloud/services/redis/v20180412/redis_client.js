@@ -184,7 +184,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb);
     }
     /**
-     * 设置自动备份配置
+     * 本接口（ModifyAutoBackupConfig）用于设置自动备份的配置。
      */
     async ModifyAutoBackupConfig(req, cb) {
         return this.request("ModifyAutoBackupConfig", req, cb);

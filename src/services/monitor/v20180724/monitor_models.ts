@@ -8211,7 +8211,7 @@ export interface ModifyAlarmPolicyConditionRequest {
   LogAlarmReqInfo?: LogAlarmReq
 
   /**
-   * 模版id，专供prom使用
+   * 模板id，专供prom使用
    */
   NoticeIds?: Array<string>
 

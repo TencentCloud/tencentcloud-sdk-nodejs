@@ -1094,15 +1094,9 @@ export interface AnalyzeAuditLogsRequest {
 }
 
 /**
- * StopReplication返回参数结构体
+ * ModifyBackupEncryptionStatus返回参数结构体
  */
-export interface StopReplicationResponse {
-  /**
-      * 异步任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AsyncRequestId: string
-
+export interface ModifyBackupEncryptionStatusResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1212,6 +1206,7 @@ export interface OpenAuditServiceRequest {
       * 审计日志保存时长。支持值包括：
 7 - 一周
 30 - 一个月；
+90 - 三个月；
 180 - 六个月；
 365 - 一年；
 1095 - 三年；
@@ -1223,12 +1218,18 @@ export interface OpenAuditServiceRequest {
       * 高频审计日志保存时长。支持值包括：
 7 - 一周
 30 - 一个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年；
       */
   HighLogExpireDay?: number
+
+  /**
+   * 审计规则。同RuleTemplateIds都不填是全审计。
+   */
+  AuditRuleFilters?: Array<AuditRuleFilters>
+
+  /**
+   * 规则模版ID。同AuditRuleFilters都不填是全审计。
+   */
+  RuleTemplateIds?: Array<string>
 }
 
 /**
@@ -2084,6 +2085,17 @@ export interface DisassociateSecurityGroupsRequest {
 }
 
 /**
+ * 审计规则的过滤条件
+ */
+export interface AuditRuleFilters {
+  /**
+      * 单条审计规则。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleFilters?: Array<RuleFilters>
+}
+
+/**
  * ModifyLocalBinlogConfig请求参数结构体
  */
 export interface ModifyLocalBinlogConfigRequest {
@@ -2316,6 +2328,26 @@ export interface RollbackDBName {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NewDatabaseName: string
+}
+
+/**
+ * 审计规则的规则过滤条件
+ */
+export interface RuleFilters {
+  /**
+   * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句；affectRows -影响行数；sentRows-返回行数；checkRows-扫描行数；execTime-执行时间。
+   */
+  Type: string
+
+  /**
+   * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于；REG-正则；GT-大于；LT-小于。
+   */
+  Compare: string
+
+  /**
+   * 审计规则过滤条件的匹配值。sqlType条件的Value需在一下选择"alter", "changeuser", "create", "delete", "drop", "execute", "insert", "login", "logout", "other", "replace", "select", "set", "update"。
+   */
+  Value: Array<string>
 }
 
 /**
@@ -5207,6 +5239,21 @@ export interface AuditLogFilter {
    * 事务持续时间，格式为M-N，例如：10-200
    */
   TransactionLivingTimeSection?: string
+
+  /**
+   * 线程ID
+   */
+  ThreadId?: Array<string>
+
+  /**
+   * 返回行数。表示筛选返回行数大于该值的审计日志。
+   */
+  SentRows?: number
+
+  /**
+   * mysql错误码
+   */
+  ErrCode?: Array<number>
 }
 
 /**
@@ -5469,12 +5516,12 @@ export interface CreateDBInstanceHourResponse {
   /**
    * 短订单 ID。
    */
-  DealIds: Array<string>
+  DealIds?: Array<string>
 
   /**
    * 实例 ID 列表。
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7220,9 +7267,15 @@ export interface CloseCDBProxyResponse {
 }
 
 /**
- * ModifyBackupEncryptionStatus返回参数结构体
+ * StopReplication返回参数结构体
  */
-export interface ModifyBackupEncryptionStatusResponse {
+export interface StopReplicationResponse {
+  /**
+      * 异步任务 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncRequestId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8157,7 +8210,7 @@ export interface CreateDBInstanceHourRequest {
   InstanceRole?: string
 
   /**
-   * 主实例的可用区信息，购买灾备、RO实例时必填。
+   * 主实例地域信息，购买灾备、RO实例时，该字段必填。
    */
   MasterRegion?: string
 

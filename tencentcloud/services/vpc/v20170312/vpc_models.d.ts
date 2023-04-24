@@ -1165,7 +1165,23 @@ export interface DescribeFlowLogsRequest {
 /**
  * 云联网（CCN）地域出带宽上限。
  */
-export declare type CcnRegionBandwidthLimitInfo = null;
+export interface CcnRegionBandwidthLimitInfo {
+    /**
+      * 源地域，例如：ap-shanghai
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceRegion: string;
+    /**
+      * 目的地域， 例如：ap-shanghai
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DestinationRegion: string;
+    /**
+      * 出带宽上限，单位：Mbps。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BandwidthLimit: number;
+}
 /**
  * CloneSecurityGroup请求参数结构体
  */
@@ -1616,7 +1632,7 @@ export interface RouteTableAssociation {
  */
 export interface ModifyCustomerGatewayAttributeRequest {
     /**
-      * 对端网关ID，例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。
+      * 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。
       */
     CustomerGatewayId: string;
     /**
@@ -3502,7 +3518,7 @@ export interface CreateVpnConnectionRequest {
       */
     VpnGatewayId: string;
     /**
-      * 对端网关ID，例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。
+      * 对端网关ID。例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/product/215/17516)接口查询对端网关。
       */
     CustomerGatewayId: string;
     /**
@@ -3535,15 +3551,15 @@ CCN VPN 形的通道 可以不传VPCID
       */
     Tags?: Array<Tag>;
     /**
-      * 是否支持隧道内健康检查
+      * 是否支持隧道内健康检查，默认为False。
       */
     EnableHealthCheck?: boolean;
     /**
-      * 健康检查本端地址
+      * 健康检查本端地址，默认值为随机在169.254.128.0/17分配一个IP。
       */
     HealthCheckLocalIp?: string;
     /**
-      * 健康检查对端地址
+      * 健康检查对端地址，默认值为随机在169.254.128.0/17分配一个IP。
       */
     HealthCheckRemoteIp?: string;
     /**
@@ -5117,7 +5133,7 @@ export interface CreateVpnConnectionResponse {
     /**
       * 通道实例对象。
       */
-    VpnConnection: VpnConnection;
+    VpnConnection?: VpnConnection;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11034,7 +11050,7 @@ export interface ModifyVpnConnectionAttributeRequest {
       */
     PreShareKey?: string;
     /**
-      * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+      * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段，172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
       */
     SecurityPolicyDatabases?: Array<SecurityPolicyDatabase>;
     /**
@@ -11046,15 +11062,15 @@ export interface ModifyVpnConnectionAttributeRequest {
       */
     IPSECOptionsSpecification?: IPSECOptionsSpecification;
     /**
-      * 是否启用通道健康检查
+      * 是否启用通道健康检查，默认为False。
       */
     EnableHealthCheck?: boolean;
     /**
-      * 本端通道探测ip
+      * 本端通道探测IP。
       */
     HealthCheckLocalIp?: string;
     /**
-      * 对端通道探测ip
+      * 对端通道探测IP。
       */
     HealthCheckRemoteIp?: string;
     /**
@@ -11073,6 +11089,10 @@ export interface ModifyVpnConnectionAttributeRequest {
       * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
       */
     DpdAction?: string;
+    /**
+      * 对端网关ID，4.0及以上网关下的通道支持更新。
+      */
+    CustomerGatewayId?: string;
 }
 /**
  * DeleteNetworkInterface请求参数结构体
@@ -12952,7 +12972,7 @@ export interface DescribeVpnConnectionsResponse {
  */
 export interface DeleteCustomerGatewayRequest {
     /**
-      * 对端网关ID，例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。
+      * 对端网关ID，例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/api/215/17516)接口查询对端网关。
       */
     CustomerGatewayId: string;
 }
