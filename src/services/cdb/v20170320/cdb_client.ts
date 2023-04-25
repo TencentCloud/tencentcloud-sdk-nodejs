@@ -22,10 +22,13 @@ import {
   CdbZoneSellConf,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
+  CreateCdbProxyRequest,
+  CreateCdbProxyResponse,
   RWInfo,
   InstanceRollbackRangeTime,
   DescribeTablesResponse,
   ModifyBackupDownloadRestrictionResponse,
+  StartReplicationResponse,
   ModifyTimeWindowResponse,
   ParamRecord,
   ModifyTimeWindowRequest,
@@ -40,30 +43,35 @@ import {
   DescribeSupportedPrivilegesRequest,
   RWInstanceInfo,
   DescribeParamTemplateInfoRequest,
+  ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
+  ModifyCdbProxyAddressDescRequest,
   TableName,
   CdbRegionSellConf,
   DescribeRoGroupsRequest,
+  CreateCdbProxyAddressResponse,
   RollbackTableName,
   CloseWanServiceRequest,
-  OpenAuditServiceResponse,
+  DescribeAuditConfigRequest,
   CreateRoInstanceIpResponse,
   CreateAuditPolicyResponse,
   DescribeInstanceParamRecordsRequest,
   StopRollbackResponse,
+  CreateCdbProxyAddressRequest,
   AnalyzeAuditLogsRequest,
   ModifyBackupEncryptionStatusResponse,
   DatabaseName,
   DescribeInstanceParamsRequest,
   DescribeRoMinScaleResponse,
   StopDBImportJobResponse,
+  ProxyAllocation,
   ModifyDBInstanceNameRequest,
   TagInfoUnit,
   ModifyAuditRuleResponse,
-  OpenAuditServiceRequest,
   DescribeAuditRulesRequest,
   UpgradeDBInstanceEngineVersionResponse,
   ErrlogItem,
+  ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
   ModifyCDBProxyDescRequest,
   BackupConfig,
@@ -71,16 +79,17 @@ import {
   Rule,
   AuditPolicy,
   DescribeBackupTablesRequest,
+  ProxyNode,
   DescribeCdbZoneConfigResponse,
   DescribeTablesRequest,
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
-  StartReplicationResponse,
+  OpenAuditServiceResponse,
   ModifyCDBProxyVipVPortRequest,
   DescribeBinlogBackupOverviewResponse,
-  InitDBInstancesRequest,
   SwitchDBInstanceMasterSlaveRequest,
   ModifyCDBProxyConnectionPoolRequest,
+  ModifyCdbProxyAddressVipAndVPortRequest,
   ModifyAutoRenewFlagRequest,
   DeleteDeployGroupsRequest,
   DescribeAuditConfigResponse,
@@ -102,6 +111,7 @@ import {
   ProxyGroups,
   AuditRule,
   DescribeBinlogsRequest,
+  DescribeCdbProxyInfoRequest,
   RollbackDBName,
   RuleFilters,
   CreateAuditRuleResponse,
@@ -137,12 +147,14 @@ import {
   ModifyCDBProxyConnectionPoolResponse,
   Tag,
   CreateAuditLogFileResponse,
+  ModifyCdbProxyParamResponse,
   ModifyInstanceTagResponse,
   DescribeDBSwitchRecordsRequest,
   RemoteBackupInfo,
   DescribeAsyncRequestInfoResponse,
   DeleteAccountsResponse,
   ParamTemplateInfo,
+  ModifyCdbProxyAddressDescResponse,
   DeleteTimeWindowResponse,
   DescribeBackupsResponse,
   CreateAuditPolicyRequest,
@@ -156,7 +168,7 @@ import {
   StopReplicationRequest,
   CreateCloneInstanceResponse,
   DescribeCdbZoneConfigRequest,
-  DeviceCpuInfo,
+  OpenDBInstanceGTIDRequest,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
   QueryCDBProxyRequest,
@@ -164,8 +176,8 @@ import {
   DescribeLocalBinlogConfigRequest,
   QueryCDBProxyResponse,
   DescribeDeviceMonitorInfoRequest,
-  SwitchDrInstanceToMasterResponse,
-  DescribeDBInstanceConfigResponse,
+  StopDBImportJobRequest,
+  DescribeDBPriceRequest,
   SlaveConfig,
   ModifyAccountPrivilegesResponse,
   StopRollbackRequest,
@@ -175,10 +187,12 @@ import {
   DescribeDBInstanceConfigRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
+  SwitchDrInstanceToMasterResponse,
   ModifyDBInstanceNameResponse,
   VerifyRootAccountRequest,
   PoolConf,
   DescribeCloneListResponse,
+  DescribeDBInstanceConfigResponse,
   StartBatchRollbackRequest,
   OpenDBInstanceEncryptionRequest,
   DescribeDBInstanceCharsetRequest,
@@ -198,10 +212,9 @@ import {
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
-  AggregationCondition,
+  DeployGroupInfo,
   LocalBinlogConfig,
   InquiryPriceUpgradeInstancesResponse,
-  DescribeAuditConfigRequest,
   CreateDBInstanceRequest,
   DescribeProxyConnectionPoolConfRequest,
   DescribeParamTemplatesRequest,
@@ -227,13 +240,13 @@ import {
   VerifyRootAccountResponse,
   DescribeDBInstanceRebootTimeResponse,
   SwitchDrInstanceToMasterRequest,
+  ModifyCdbProxyParamRequest,
   RoGroup,
   ParameterDetail,
   ModifyCDBProxyVipVPortResponse,
   SwitchForUpgradeRequest,
   CreateDBInstanceHourResponse,
   DescribeBackupDownloadRestrictionResponse,
-  SlowLogItem,
   CloneItem,
   ModifyDBInstanceSecurityGroupsResponse,
   CreateAccountsRequest,
@@ -245,14 +258,18 @@ import {
   ModifyLocalBinlogConfigResponse,
   DescribeCloneListRequest,
   ModifyInstanceTagRequest,
+  DescribeProxySupportParamRequest,
   ModifyAutoRenewFlagResponse,
   RollbackTask,
+  StartReplicationRequest,
+  ProxyInst,
   ReloadBalanceProxyNodeResponse,
   DescribeTimeWindowRequest,
   DescribeDBImportRecordsResponse,
   DescribeBackupDatabasesResponse,
   BackupItem,
   AuditFilter,
+  DescribeProxySupportParamResponse,
   DescribeRollbackTaskDetailRequest,
   DescribeBackupTablesResponse,
   ModifyParamTemplateResponse,
@@ -269,6 +286,7 @@ import {
   OfflineIsolatedInstancesResponse,
   DatabasePrivilege,
   DescribeAuditPoliciesRequest,
+  AdjustCdbProxyAddressRequest,
   DescribeDatabasesResponse,
   DescribeRoGroupsResponse,
   DescribeAuditRulesResponse,
@@ -282,6 +300,7 @@ import {
   AccountInfo,
   DescribeRemoteBackupConfigResponse,
   ModifyCDBProxyDescResponse,
+  AdjustCdbProxyAddressResponse,
   ModifyDBInstanceVipVportRequest,
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
@@ -300,12 +319,13 @@ import {
   DescribeAccountPrivilegesRequest,
   CdbSellConfig,
   DescribeSupportedPrivilegesResponse,
-  StopDBImportJobRequest,
+  SlowLogItem,
   DescribeLocalBinlogConfigResponse,
   ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
   DescribeDBInstanceGTIDRequest,
   DescribeBackupEncryptionStatusResponse,
+  DescribeCdbProxyInfoResponse,
   ModifyAuditConfigRequest,
   DeviceDiskInfo,
   RoWeightValue,
@@ -313,8 +333,10 @@ import {
   RestartDBInstancesResponse,
   DescribeSlowLogsRequest,
   TagInfoItem,
+  ProxyNodeCustom,
   DescribeProxyCustomConfRequest,
   DescribeDBSecurityGroupsResponse,
+  CloseCdbProxyAddressRequest,
   ModifyRoGroupInfoResponse,
   DeleteAuditRuleRequest,
   DeleteParamTemplateResponse,
@@ -322,7 +344,9 @@ import {
   DescribeTasksResponse,
   DescribeAuditPoliciesResponse,
   IsolateDBInstanceResponse,
+  AdjustCdbProxyRequest,
   ModifyAccountDescriptionResponse,
+  ProxyAddress,
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
   ProxyGroup,
@@ -340,7 +364,7 @@ import {
   DescribeBackupSummariesRequest,
   AnalyzeAuditLogsResponse,
   CreateDBInstanceResponse,
-  StartReplicationRequest,
+  OpenAuditServiceRequest,
   DescribeDBInstanceCharsetResponse,
   DescribeDBFeaturesRequest,
   DescribeBackupSummariesResponse,
@@ -356,9 +380,9 @@ import {
   ModifyInstanceParamResponse,
   ColumnPrivilege,
   DescribeUploadedFilesResponse,
-  DescribeDBPriceRequest,
+  InitDBInstancesRequest,
   CreateBackupResponse,
-  OpenDBInstanceGTIDRequest,
+  DeviceCpuInfo,
   OpenDBInstanceEncryptionResponse,
   CdbZoneDataResult,
   SqlFileInfo,
@@ -371,9 +395,11 @@ import {
   TablePrivilege,
   AddTimeWindowResponse,
   BaseGroupInfo,
+  AdjustCdbProxyResponse,
   DescribeBackupEncryptionStatusRequest,
   IsolateDBInstanceRequest,
   AuditLogFile,
+  CloseCdbProxyAddressResponse,
   RollbackTables,
   DescribeBackupDatabasesRequest,
   LocalBinlogConfigDefault,
@@ -384,7 +410,7 @@ import {
   DeleteTimeWindowRequest,
   SwitchCDBProxyResponse,
   RestartDBInstancesRequest,
-  DeployGroupInfo,
+  AggregationCondition,
   ModifyRemoteBackupConfigRequest,
   DeleteBackupRequest,
   ModifyNameOrDescByDpIdRequest,
@@ -546,6 +572,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  }
+
+  /**
    * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
    */
   async StopRollback(
@@ -629,6 +665,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
   ): Promise<ModifyBackupDownloadRestrictionResponse> {
     return this.request("ModifyBackupDownloadRestriction", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+   */
+  async DescribeParamTemplates(
+    req: DescribeParamTemplatesRequest,
+    cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
+  ): Promise<DescribeParamTemplatesResponse> {
+    return this.request("DescribeParamTemplates", req, cb)
   }
 
   /**
@@ -750,6 +796,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+   */
+  async RenewDBInstance(
+    req: RenewDBInstanceRequest,
+    cb?: (error: string, rep: RenewDBInstanceResponse) => void
+  ): Promise<RenewDBInstanceResponse> {
+    return this.request("RenewDBInstance", req, cb)
   }
 
   /**
@@ -901,6 +957,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例支持代理版本和参数
+   */
+  async DescribeProxySupportParam(
+    req: DescribeProxySupportParamRequest,
+    cb?: (error: string, rep: DescribeProxySupportParamResponse) => void
+  ): Promise<DescribeProxySupportParamResponse> {
+    return this.request("DescribeProxySupportParam", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
    */
   async DescribeDeviceMonitorInfo(
@@ -950,6 +1016,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupTablesResponse) => void
   ): Promise<DescribeBackupTablesResponse> {
     return this.request("DescribeBackupTables", req, cb)
+  }
+
+  /**
+   * 数据库代理增加代理地址
+   */
+  async CreateCdbProxyAddress(
+    req: CreateCdbProxyAddressRequest,
+    cb?: (error: string, rep: CreateCdbProxyAddressResponse) => void
+  ): Promise<CreateCdbProxyAddressResponse> {
+    return this.request("CreateCdbProxyAddress", req, cb)
   }
 
   /**
@@ -1114,6 +1190,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 调整数据库代理配置
+   */
+  async AdjustCdbProxy(
+    req: AdjustCdbProxyRequest,
+    cb?: (error: string, rep: AdjustCdbProxyResponse) => void
+  ): Promise<AdjustCdbProxyResponse> {
+    return this.request("AdjustCdbProxy", req, cb)
+  }
+
+  /**
    * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
    */
   async UpgradeDBInstanceEngineVersion(
@@ -1214,13 +1300,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+   * 请求关闭数据库代理地址
    */
-  async DescribeParamTemplates(
-    req: DescribeParamTemplatesRequest,
-    cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
-  ): Promise<DescribeParamTemplatesResponse> {
-    return this.request("DescribeParamTemplates", req, cb)
+  async CloseCdbProxyAddress(
+    req: CloseCdbProxyAddressRequest,
+    cb?: (error: string, rep: CloseCdbProxyAddressResponse) => void
+  ): Promise<CloseCdbProxyAddressResponse> {
+    return this.request("CloseCdbProxyAddress", req, cb)
   }
 
   /**
@@ -1256,6 +1342,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改代理地址描述信息
+   */
+  async ModifyCdbProxyAddressDesc(
+    req: ModifyCdbProxyAddressDescRequest,
+    cb?: (error: string, rep: ModifyCdbProxyAddressDescResponse) => void
+  ): Promise<ModifyCdbProxyAddressDescResponse> {
+    return this.request("ModifyCdbProxyAddressDesc", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
    */
   async ModifyAccountHost(
@@ -1273,6 +1369,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartReplicationResponse) => void
   ): Promise<StartReplicationResponse> {
     return this.request("StartReplication", req, cb)
+  }
+
+  /**
+   * 调整数据库代理地址配置
+   */
+  async AdjustCdbProxyAddress(
+    req: AdjustCdbProxyAddressRequest,
+    cb?: (error: string, rep: AdjustCdbProxyAddressResponse) => void
+  ): Promise<AdjustCdbProxyAddressResponse> {
+    return this.request("AdjustCdbProxyAddress", req, cb)
+  }
+
+  /**
+   * 查询数据库代理详情信息
+   */
+  async DescribeCdbProxyInfo(
+    req: DescribeCdbProxyInfoRequest,
+    cb?: (error: string, rep: DescribeCdbProxyInfoResponse) => void
+  ): Promise<DescribeCdbProxyInfoResponse> {
+    return this.request("DescribeCdbProxyInfo", req, cb)
   }
 
   /**
@@ -1386,15 +1502,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
 
-本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
      */
-  async InitDBInstances(
-    req: InitDBInstancesRequest,
-    cb?: (error: string, rep: InitDBInstancesResponse) => void
-  ): Promise<InitDBInstancesResponse> {
-    return this.request("InitDBInstances", req, cb)
+  async DescribeDBPrice(
+    req: DescribeDBPriceRequest,
+    cb?: (error: string, rep: DescribeDBPriceResponse) => void
+  ): Promise<DescribeDBPriceResponse> {
+    return this.request("DescribeDBPrice", req, cb)
   }
 
   /**
@@ -1608,15 +1724,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
+     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
 
-注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
+本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
      */
-  async DescribeDBPrice(
-    req: DescribeDBPriceRequest,
-    cb?: (error: string, rep: DescribeDBPriceResponse) => void
-  ): Promise<DescribeDBPriceResponse> {
-    return this.request("DescribeDBPrice", req, cb)
+  async InitDBInstances(
+    req: InitDBInstancesRequest,
+    cb?: (error: string, rep: InitDBInstancesResponse) => void
+  ): Promise<InitDBInstancesResponse> {
+    return this.request("InitDBInstances", req, cb)
+  }
+
+  /**
+   * 主实例创建数据库代理
+   */
+  async CreateCdbProxy(
+    req: CreateCdbProxyRequest,
+    cb?: (error: string, rep: CreateCdbProxyResponse) => void
+  ): Promise<CreateCdbProxyResponse> {
+    return this.request("CreateCdbProxy", req, cb)
   }
 
   /**
@@ -1640,13 +1766,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+   * 配置数据库代理参数
    */
-  async RenewDBInstance(
-    req: RenewDBInstanceRequest,
-    cb?: (error: string, rep: RenewDBInstanceResponse) => void
-  ): Promise<RenewDBInstanceResponse> {
-    return this.request("RenewDBInstance", req, cb)
+  async ModifyCdbProxyParam(
+    req: ModifyCdbProxyParamRequest,
+    cb?: (error: string, rep: ModifyCdbProxyParamResponse) => void
+  ): Promise<ModifyCdbProxyParamResponse> {
+    return this.request("ModifyCdbProxyParam", req, cb)
   }
 
   /**
@@ -1714,13 +1840,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   * 修改数据库代理地址VPC信息
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyCdbProxyAddressVipAndVPort(
+    req: ModifyCdbProxyAddressVipAndVPortRequest,
+    cb?: (error: string, rep: ModifyCdbProxyAddressVipAndVPortResponse) => void
+  ): Promise<ModifyCdbProxyAddressVipAndVPortResponse> {
+    return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb)
   }
 
   /**

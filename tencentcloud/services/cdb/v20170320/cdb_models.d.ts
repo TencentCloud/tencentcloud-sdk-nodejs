@@ -209,6 +209,53 @@ export interface DescribeDatabasesRequest {
     DatabaseRegexp?: string;
 }
 /**
+ * CreateCdbProxy请求参数结构体
+ */
+export interface CreateCdbProxyRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 私有网络ID
+      */
+    UniqVpcId: string;
+    /**
+      * 私有子网ID
+      */
+    UniqSubnetId: string;
+    /**
+      * 节点规格配置
+      */
+    ProxyNodeCustom: Array<ProxyNodeCustom>;
+    /**
+      * 安全组
+      */
+    SecurityGroup?: Array<string>;
+    /**
+      * 描述
+      */
+    Desc?: string;
+    /**
+      * 连接池阈值
+      */
+    ConnectionPoolLimit?: number;
+}
+/**
+ * CreateCdbProxy返回参数结构体
+ */
+export interface CreateCdbProxyResponse {
+    /**
+      * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * proxy读写分离信息
  */
 export interface RWInfo {
@@ -296,6 +343,20 @@ export interface DescribeTablesResponse {
  * ModifyBackupDownloadRestriction返回参数结构体
  */
 export interface ModifyBackupDownloadRestrictionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StartReplication返回参数结构体
+ */
+export interface StartReplicationResponse {
+    /**
+      * 异步任务 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -587,6 +648,15 @@ export interface DescribeParamTemplateInfoRequest {
     TemplateId: number;
 }
 /**
+ * ModifyCdbProxyAddressVipAndVPort返回参数结构体
+ */
+export interface ModifyCdbProxyAddressVipAndVPortResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBInstances请求参数结构体
  */
 export interface DescribeDBInstancesRequest {
@@ -732,6 +802,23 @@ export interface DescribeDBInstancesRequest {
     EngineTypes?: Array<string>;
 }
 /**
+ * ModifyCdbProxyAddressDesc请求参数结构体
+ */
+export interface ModifyCdbProxyAddressDescRequest {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId: string;
+    /**
+      * 描述
+      */
+    Desc?: string;
+}
+/**
  * 表名
  */
 export interface TableName {
@@ -775,6 +862,20 @@ export interface DescribeRoGroupsRequest {
     InstanceId: string;
 }
 /**
+ * CreateCdbProxyAddress返回参数结构体
+ */
+export interface CreateCdbProxyAddressResponse {
+    /**
+      * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 用于回档的数据库表名
  */
 export interface RollbackTableName {
@@ -799,13 +900,13 @@ export interface CloseWanServiceRequest {
     InstanceId: string;
 }
 /**
- * OpenAuditService返回参数结构体
+ * DescribeAuditConfig请求参数结构体
  */
-export interface OpenAuditServiceResponse {
+export interface DescribeAuditConfigRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * CreateRoInstanceIp返回参数结构体
@@ -874,6 +975,80 @@ export interface StopRollbackResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateCdbProxyAddress请求参数结构体
+ */
+export interface CreateCdbProxyAddressRequest {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 权重分配模式，
+系统自动分配："system"， 自定义："custom"
+      */
+    WeightMode: string;
+    /**
+      * 是否开启延迟剔除，取值："true" | "false"
+      */
+    IsKickOut: boolean;
+    /**
+      * 最小保留数量，最小取值：0
+      */
+    MinCount: number;
+    /**
+      * 延迟剔除阈值，最小取值：0
+      */
+    MaxDelay: number;
+    /**
+      * 是否开启故障转移，取值："true" | "false"
+      */
+    FailOver: boolean;
+    /**
+      * 是否自动添加RO，取值："true" | "false"
+      */
+    AutoAddRo: boolean;
+    /**
+      * 是否是只读，取值："true" | "false"
+      */
+    ReadOnly: boolean;
+    /**
+      * 是否开启事务分离，取值："true" | "false"
+      */
+    TransSplit: boolean;
+    /**
+      * 读写权重分配
+      */
+    ProxyAllocation: Array<ProxyAllocation>;
+    /**
+      * 私有网络ID
+      */
+    UniqVpcId: string;
+    /**
+      * 私有子网ID
+      */
+    UniqSubnetId: string;
+    /**
+      * 是否开启连接池
+      */
+    ConnectionPool?: boolean;
+    /**
+      * 描述
+      */
+    Desc?: string;
+    /**
+      * IP地址
+      */
+    Vip?: string;
+    /**
+      * 端口
+      */
+    VPort?: number;
+    /**
+      * 安全组
+      */
+    SecurityGroup?: Array<string>;
 }
 /**
  * AnalyzeAuditLogs请求参数结构体
@@ -954,6 +1129,23 @@ export interface StopDBImportJobResponse {
     RequestId?: string;
 }
 /**
+ * 代理节点权重分布
+ */
+export interface ProxyAllocation {
+    /**
+      * 代理节点所属地域
+      */
+    Region: string;
+    /**
+      * 代理节点所属可用区
+      */
+    Zone: string;
+    /**
+      * 代理实例分布
+      */
+    ProxyInstance: Array<ProxyInst>;
+}
+/**
  * ModifyDBInstanceName请求参数结构体
  */
 export interface ModifyDBInstanceNameRequest {
@@ -987,40 +1179,6 @@ export interface ModifyAuditRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * OpenAuditService请求参数结构体
- */
-export interface OpenAuditServiceRequest {
-    /**
-      * CDB实例ID
-      */
-    InstanceId: string;
-    /**
-      * 审计日志保存时长。支持值包括：
-7 - 一周
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年；
-      */
-    LogExpireDay: number;
-    /**
-      * 高频审计日志保存时长。支持值包括：
-7 - 一周
-30 - 一个月；
-      */
-    HighLogExpireDay?: number;
-    /**
-      * 审计规则。同RuleTemplateIds都不填是全审计。
-      */
-    AuditRuleFilters?: Array<AuditRuleFilters>;
-    /**
-      * 规则模版ID。同AuditRuleFilters都不填是全审计。
-      */
-    RuleTemplateIds?: Array<string>;
 }
 /**
  * DescribeAuditRules请求参数结构体
@@ -1070,6 +1228,60 @@ export interface ErrlogItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Content: string;
+}
+/**
+ * 代理组详情
+ */
+export interface ProxyGroupInfo {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 代理版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyVersion: string;
+    /**
+      * 代理支持升级版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportUpgradeProxyVersion: string;
+    /**
+      * 代理状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 代理任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskStatus: string;
+    /**
+      * 代理组节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyNode: Array<ProxyNode>;
+    /**
+      * 代理组地址信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyAddress: Array<ProxyAddress>;
+    /**
+      * 连接池阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectionPoolLimit: number;
+    /**
+      * 支持创建地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportCreateProxyAddress: boolean;
+    /**
+      * 支持升级代理版本所需的cdb版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportUpgradeProxyMysqlVersion: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -1254,6 +1466,46 @@ export interface DescribeBackupTablesRequest {
     Limit?: number;
 }
 /**
+ * 代理节点
+ */
+export interface ProxyNode {
+    /**
+      * 代理节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyId: string;
+    /**
+      * CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cpu: number;
+    /**
+      * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mem: number;
+    /**
+      * 节点状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 代理节点可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+    /**
+      * 代理节点地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Connection: number;
+}
+/**
  * DescribeCdbZoneConfig返回参数结构体
  */
 export interface DescribeCdbZoneConfigResponse {
@@ -1386,14 +1638,9 @@ export interface ModifyParamTemplateRequest {
     ParamList?: Array<Parameter>;
 }
 /**
- * StartReplication返回参数结构体
+ * OpenAuditService返回参数结构体
  */
-export interface StartReplicationResponse {
-    /**
-      * 异步任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AsyncRequestId: string;
+export interface OpenAuditServiceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1470,27 +1717,6 @@ export interface DescribeBinlogBackupOverviewResponse {
     RequestId?: string;
 }
 /**
- * InitDBInstances请求参数结构体
- */
-export interface InitDBInstancesRequest {
-    /**
-      * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
-      */
-    InstanceIds: Array<string>;
-    /**
-      * 实例新的密码，密码规则：8-64个字符，至少包含字母、数字、字符（支持的字符：!@#$%^*()）中的两种。
-      */
-    NewPassword: string;
-    /**
-      * 实例的参数列表，目前支持设置“character_set_server”、“lower_case_table_names”参数。其中，“character_set_server”参数可选值为["utf8","latin1","gbk","utf8mb4"]；“lower_case_table_names”可选值为[“0”,“1”]。
-      */
-    Parameters: Array<ParamInfo>;
-    /**
-      * 实例的端口，取值范围为[1024, 65535]
-      */
-    Vport?: number;
-}
-/**
  * SwitchDBInstanceMasterSlave请求参数结构体
  */
 export interface SwitchDBInstanceMasterSlaveRequest {
@@ -1533,6 +1759,39 @@ export interface ModifyCDBProxyConnectionPoolRequest {
       * 连接保留阈值：单位（秒）
       */
     PoolConnectionTimeOut?: number;
+}
+/**
+ * ModifyCdbProxyAddressVipAndVPort请求参数结构体
+ */
+export interface ModifyCdbProxyAddressVipAndVPortRequest {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId: string;
+    /**
+      * 私有网络ID
+      */
+    UniqVpcId: string;
+    /**
+      * 私有子网ID
+      */
+    UniqSubnetId: string;
+    /**
+      * IP地址
+      */
+    Vip?: string;
+    /**
+      * 端口
+      */
+    VPort?: number;
+    /**
+      * 旧IP地址回收时间
+      */
+    ReleaseDuration?: number;
 }
 /**
  * ModifyAutoRenewFlag请求参数结构体
@@ -1933,6 +2192,19 @@ export interface DescribeBinlogsRequest {
       * 分页大小，默认值为20，最小值为1，最大值为100。
       */
     Limit?: number;
+}
+/**
+ * DescribeCdbProxyInfo请求参数结构体
+ */
+export interface DescribeCdbProxyInfoRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId?: string;
 }
 /**
  * 用于回档的数据库名
@@ -2665,6 +2937,15 @@ export interface CreateAuditLogFileResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCdbProxyParam返回参数结构体
+ */
+export interface ModifyCdbProxyParamResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyInstanceTag返回参数结构体
  */
 export interface ModifyInstanceTagResponse {
@@ -2775,6 +3056,15 @@ export interface ParamTemplateInfo {
       * 参数模板类型
       */
     TemplateType: string;
+}
+/**
+ * ModifyCdbProxyAddressDesc返回参数结构体
+ */
+export interface ModifyCdbProxyAddressDescResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteTimeWindow返回参数结构体
@@ -3036,17 +3326,13 @@ export interface CreateCloneInstanceResponse {
  */
 export declare type DescribeCdbZoneConfigRequest = null;
 /**
- *  CPU负载
+ * OpenDBInstanceGTID请求参数结构体
  */
-export interface DeviceCpuInfo {
+export interface OpenDBInstanceGTIDRequest {
     /**
-      * 实例CPU平均使用率
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    Rate: Array<DeviceCpuRateInfo>;
-    /**
-      * 实例CPU监控数据
-      */
-    Load: Array<number>;
+    InstanceId: string;
 }
 /**
  * DescribeAsyncRequestInfo请求参数结构体
@@ -3161,52 +3447,70 @@ export interface DescribeDeviceMonitorInfoRequest {
     Count?: number;
 }
 /**
- * SwitchDrInstanceToMaster返回参数结构体
+ * StopDBImportJob请求参数结构体
  */
-export interface SwitchDrInstanceToMasterResponse {
+export interface StopDBImportJobRequest {
     /**
-      * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+      * 异步任务的请求 ID。
       */
     AsyncRequestId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
- * DescribeDBInstanceConfig返回参数结构体
+ * DescribeDBPrice请求参数结构体
  */
-export interface DescribeDBInstanceConfigResponse {
+export interface DescribeDBPriceRequest {
     /**
-      * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
+      * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
       */
-    ProtectMode: number;
+    Period: number;
     /**
-      * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
+      * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。InstanceId为空时该参数为必填项。
       */
-    DeployMode: number;
+    Zone?: string;
     /**
-      * 实例可用区信息，格式如 "ap-shanghai-1"。
+      * 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。
       */
-    Zone: string;
+    GoodsNum?: number;
     /**
-      * 备库的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
       */
-    SlaveConfig: SlaveConfig;
+    Memory?: number;
     /**
-      * 强同步实例第二备库的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
       */
-    BackupConfig: BackupConfig;
+    Volume?: number;
     /**
-      * 是否切换备库。
+      * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。InstanceId为空时该参数为必填项。
       */
-    Switched: boolean;
+    InstanceRole?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。InstanceId为空时该参数为必填项。
       */
-    RequestId?: string;
+    PayType?: string;
+    /**
+      * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+      */
+    ProtectMode?: number;
+    /**
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
+      */
+    DeviceType?: string;
+    /**
+      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
+      */
+    InstanceNodes?: number;
+    /**
+      * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
+      */
+    Cpu?: number;
+    /**
+      * 询价续费实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
+      */
+    InstanceId?: string;
+    /**
+      * 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。
+      */
+    Ladder?: number;
 }
 /**
  * 从库的配置信息
@@ -3333,6 +3637,19 @@ export interface ModifyAuditConfigResponse {
     RequestId?: string;
 }
 /**
+ * SwitchDrInstanceToMaster返回参数结构体
+ */
+export interface SwitchDrInstanceToMasterResponse {
+    /**
+      * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+      */
+    AsyncRequestId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyDBInstanceName返回参数结构体
  */
 export interface ModifyDBInstanceNameResponse {
@@ -3386,6 +3703,41 @@ export interface DescribeCloneListResponse {
       * 克隆任务列表。
       */
     Items?: Array<CloneItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBInstanceConfig返回参数结构体
+ */
+export interface DescribeDBInstanceConfigResponse {
+    /**
+      * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
+      */
+    ProtectMode: number;
+    /**
+      * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
+      */
+    DeployMode: number;
+    /**
+      * 实例可用区信息，格式如 "ap-shanghai-1"。
+      */
+    Zone: string;
+    /**
+      * 备库的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlaveConfig: SlaveConfig;
+    /**
+      * 强同步实例第二备库的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupConfig: BackupConfig;
+    /**
+      * 是否切换备库。
+      */
+    Switched: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3724,21 +4076,44 @@ export interface DisassociateSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * 审计日志聚合条件
+ * 置放群组信息
  */
-export interface AggregationCondition {
+export interface DeployGroupInfo {
     /**
-      * 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。
+      * 置放群组 ID。
       */
-    AggregationField: string;
+    DeployGroupId: string;
     /**
-      * 偏移量。
+      * 置放群组名称。
       */
-    Offset?: number;
+    DeployGroupName: string;
     /**
-      * 该聚合字段下要返回聚合桶的数量，最大100。
+      * 创建时间。
       */
-    Limit?: number;
+    CreateTime: string;
+    /**
+      * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
+      */
+    Quota: number;
+    /**
+      * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Affinity: string;
+    /**
+      * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LimitNum: number;
+    /**
+      * 置放群组详细信息。
+      */
+    Description: string;
+    /**
+      * 置放群组物理机型属性。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DevClass: string;
 }
 /**
  * 本地binlog保留配置
@@ -3769,15 +4144,6 @@ export interface InquiryPriceUpgradeInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeAuditConfig请求参数结构体
- */
-export interface DescribeAuditConfigRequest {
-    /**
-      * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
-      */
-    InstanceId: string;
 }
 /**
  * CreateDBInstance请求参数结构体
@@ -4491,6 +4857,23 @@ export interface SwitchDrInstanceToMasterRequest {
     InstanceId: string;
 }
 /**
+ * ModifyCdbProxyParam请求参数结构体
+ */
+export interface ModifyCdbProxyParamRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 连接池阈值
+      */
+    ConnectionPoolLimit: number;
+}
+/**
  * 只读组参数
  */
 export interface RoGroup {
@@ -4676,66 +5059,6 @@ export interface DescribeBackupDownloadRestrictionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 结构化的慢日志详情
- */
-export interface SlowLogItem {
-    /**
-      * Sql的执行时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Timestamp: number;
-    /**
-      * Sql的执行时长（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    QueryTime: number;
-    /**
-      * Sql语句。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SqlText: string;
-    /**
-      * 客户端地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserHost: string;
-    /**
-      * 用户名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserName: string;
-    /**
-      * 数据库名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Database: string;
-    /**
-      * 锁时长（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LockTime: number;
-    /**
-      * 扫描行数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RowsExamined: number;
-    /**
-      * 结果集行数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RowsSent: number;
-    /**
-      * Sql模板。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SqlTemplate: string;
-    /**
-      * Sql语句的md5。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Md5: string;
 }
 /**
  * 克隆任务记录。
@@ -5026,6 +5349,15 @@ export interface ModifyInstanceTagRequest {
     DeleteTags?: Array<TagInfo>;
 }
 /**
+ * DescribeProxySupportParam请求参数结构体
+ */
+export interface DescribeProxySupportParamRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+}
+/**
  * ModifyAutoRenewFlag返回参数结构体
  */
 export interface ModifyAutoRenewFlagResponse {
@@ -5063,6 +5395,55 @@ export interface RollbackTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Detail: Array<RollbackInstancesInfo>;
+}
+/**
+ * StartReplication请求参数结构体
+ */
+export interface StartReplicationRequest {
+    /**
+      * 实例 ID。仅支持只读实例。
+      */
+    InstanceId: string;
+}
+/**
+ * 代理实例
+ */
+export interface ProxyInst {
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName?: string;
+    /**
+      * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType?: string;
+    /**
+      * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+    /**
+      * 只读权重,如果权重为系统自动分配，改值不生效，只代表是否启用该实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weight?: number;
+    /**
+      * 实例所属地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
+    /**
+      * 实例所属可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone?: string;
 }
 /**
  * ReloadBalanceProxyNode返回参数结构体
@@ -5152,6 +5533,55 @@ NEQ – 不等于；
       * 过滤条件匹配值。
       */
     Value: string;
+}
+/**
+ * DescribeProxySupportParam返回参数结构体
+ */
+export interface DescribeProxySupportParamResponse {
+    /**
+      * 支持最大代理版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyVersion: string;
+    /**
+      * 是否支持连接池
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportPool: boolean;
+    /**
+      * 连接池最小值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PoolMin: number;
+    /**
+      * 连接池最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PoolMax: number;
+    /**
+      * 是否支持事务拆分
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportTransSplit: boolean;
+    /**
+      * 支持连接池的最小代理版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportPoolMinVersion: string;
+    /**
+      * 支持事务拆分的最小代理版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportTransSplitMinVersion: string;
+    /**
+      * 是否支持设置只读
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportReadOnly: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeRollbackTaskDetail请求参数结构体
@@ -5600,6 +6030,60 @@ export interface DescribeAuditPoliciesRequest {
     InstanceName?: string;
 }
 /**
+ * AdjustCdbProxyAddress请求参数结构体
+ */
+export interface AdjustCdbProxyAddressRequest {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 权重分配模式，
+系统自动分配："system"， 自定义："custom"
+      */
+    WeightMode: string;
+    /**
+      * 是否开启延迟剔除，取值："true" | "false"
+      */
+    IsKickOut: boolean;
+    /**
+      * 最小保留数量，最小取值：0
+      */
+    MinCount: number;
+    /**
+      * 延迟剔除阈值，最小取值：0
+      */
+    MaxDelay: number;
+    /**
+      * 是否开启故障转移，取值："true" | "false"
+      */
+    FailOver: boolean;
+    /**
+      * 是否自动添加RO，取值："true" | "false"
+      */
+    AutoAddRo: boolean;
+    /**
+      * 是否是只读，取值："true" | "false"
+      */
+    ReadOnly: boolean;
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId: string;
+    /**
+      * 是否开启事务分离，取值："true" | "false"
+      */
+    TransSplit?: boolean;
+    /**
+      * 是否开启连接池
+      */
+    ConnectionPool?: boolean;
+    /**
+      * 读写权重分配。如果 WeightMode 传的是 system ，则传入的权重不生效，由系统分配默认权重。
+      */
+    ProxyAllocation?: Array<ProxyAllocation>;
+}
+/**
  * DescribeDatabases返回参数结构体
  */
 export interface DescribeDatabasesResponse {
@@ -5966,6 +6450,20 @@ export interface ModifyCDBProxyDescResponse {
     RequestId?: string;
 }
 /**
+ * AdjustCdbProxyAddress返回参数结构体
+ */
+export interface AdjustCdbProxyAddressResponse {
+    /**
+      * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyDBInstanceVipVport请求参数结构体
  */
 export interface ModifyDBInstanceVipVportRequest {
@@ -6316,13 +6814,64 @@ export interface DescribeSupportedPrivilegesResponse {
     RequestId?: string;
 }
 /**
- * StopDBImportJob请求参数结构体
+ * 结构化的慢日志详情
  */
-export interface StopDBImportJobRequest {
+export interface SlowLogItem {
     /**
-      * 异步任务的请求 ID。
+      * Sql的执行时间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    AsyncRequestId: string;
+    Timestamp: number;
+    /**
+      * Sql的执行时长（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QueryTime: number;
+    /**
+      * Sql语句。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SqlText: string;
+    /**
+      * 客户端地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserHost: string;
+    /**
+      * 用户名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 数据库名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Database: string;
+    /**
+      * 锁时长（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LockTime: number;
+    /**
+      * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowsExamined: number;
+    /**
+      * 结果集行数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RowsSent: number;
+    /**
+      * Sql模板。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SqlTemplate: string;
+    /**
+      * Sql语句的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Md5: string;
 }
 /**
  * DescribeLocalBinlogConfig返回参数结构体
@@ -6384,6 +6933,25 @@ export interface DescribeBackupEncryptionStatusResponse {
       * 实例是否开启了物理备份加密。可能的值有 on, off 。
       */
     EncryptionStatus: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCdbProxyInfo返回参数结构体
+ */
+export interface DescribeCdbProxyInfoResponse {
+    /**
+      * 代理组数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+    /**
+      * 代理组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyInfos: Array<ProxyGroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6526,6 +7094,31 @@ export interface TagInfoItem {
     TagValue: string;
 }
 /**
+ * 节点规格配置
+ */
+export interface ProxyNodeCustom {
+    /**
+      * 节点个数
+      */
+    NodeCount: number;
+    /**
+      * CPU核数
+      */
+    Cpu: number;
+    /**
+      * 内存大小
+      */
+    Mem: number;
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 可用区
+      */
+    Zone: string;
+}
+/**
  * DescribeProxyCustomConf请求参数结构体
  */
 export interface DescribeProxyCustomConfRequest {
@@ -6554,6 +7147,19 @@ export interface DescribeDBSecurityGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CloseCdbProxyAddress请求参数结构体
+ */
+export interface CloseCdbProxyAddressRequest {
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId: string;
 }
 /**
  * ModifyRoGroupInfo返回参数结构体
@@ -6650,6 +7256,31 @@ export interface IsolateDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * AdjustCdbProxy请求参数结构体
+ */
+export interface AdjustCdbProxyRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 代理组ID
+      */
+    ProxyGroupId: string;
+    /**
+      * 节点规格配置
+      */
+    ProxyNodeCustom: Array<ProxyNodeCustom>;
+    /**
+      * 重新负载均衡：auto(自动),manual(手动)
+      */
+    ReloadBalance: string;
+    /**
+      * 升级切换时间：nowTime(升级完成时),timeWindow(维护时间内)
+      */
+    UpgradeTime: string;
+}
+/**
  * ModifyAccountDescription返回参数结构体
  */
 export interface ModifyAccountDescriptionResponse {
@@ -6661,6 +7292,87 @@ export interface ModifyAccountDescriptionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据库代理地址信息
+ */
+export interface ProxyAddress {
+    /**
+      * 代理组地址ID
+      */
+    ProxyAddressId: string;
+    /**
+      * 私有网络ID
+      */
+    UniqVpcId: string;
+    /**
+      * 私有子网ID
+      */
+    UniqSubnetId: string;
+    /**
+      * IP地址
+      */
+    Vip: string;
+    /**
+      * 端口
+      */
+    VPort: number;
+    /**
+      * 权重分配模式；
+系统自动分配："system"， 自定义："custom"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WeightMode: string;
+    /**
+      * 是否开启延迟剔除，取值："true" | "false"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsKickOut: boolean;
+    /**
+      * 最小保留数量，最小取值：0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinCount: number;
+    /**
+      * 延迟剔除阈值，最小取值：0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxDelay: number;
+    /**
+      * 是否自动添加RO，取值："true" | "false"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoAddRo: boolean;
+    /**
+      * 是否是只读，取值："true" | "false"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadOnly: boolean;
+    /**
+      * 是否开启事务分离
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransSplit: boolean;
+    /**
+      * 是否开启故障转移
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailOver: boolean;
+    /**
+      * 是否开启连接池
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectionPool: boolean;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: string;
+    /**
+      * 实例读权重分配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyAllocation: Array<ProxyAllocation>;
 }
 /**
  * 通用时间窗
@@ -7243,13 +7955,38 @@ export interface CreateDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * StartReplication请求参数结构体
+ * OpenAuditService请求参数结构体
  */
-export interface StartReplicationRequest {
+export interface OpenAuditServiceRequest {
     /**
-      * 实例 ID。仅支持只读实例。
+      * CDB实例ID
       */
     InstanceId: string;
+    /**
+      * 审计日志保存时长。支持值包括：
+7 - 一周
+30 - 一个月；
+90 - 三个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+      */
+    LogExpireDay: number;
+    /**
+      * 高频审计日志保存时长。支持值包括：
+7 - 一周
+30 - 一个月；
+      */
+    HighLogExpireDay?: number;
+    /**
+      * 审计规则。同RuleTemplateIds都不填是全审计。
+      */
+    AuditRuleFilters?: Array<AuditRuleFilters>;
+    /**
+      * 规则模版ID。同AuditRuleFilters都不填是全审计。
+      */
+    RuleTemplateIds?: Array<string>;
 }
 /**
  * DescribeDBInstanceCharset返回参数结构体
@@ -7517,61 +8254,25 @@ export interface DescribeUploadedFilesResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBPrice请求参数结构体
+ * InitDBInstances请求参数结构体
  */
-export interface DescribeDBPriceRequest {
+export interface InitDBInstancesRequest {
     /**
-      * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
+      * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
       */
-    Period: number;
+    InstanceIds: Array<string>;
     /**
-      * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。InstanceId为空时该参数为必填项。
+      * 实例新的密码，密码规则：8-64个字符，至少包含字母、数字、字符（支持的字符：!@#$%^*()）中的两种。
       */
-    Zone?: string;
+    NewPassword: string;
     /**
-      * 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。
+      * 实例的参数列表，目前支持设置“character_set_server”、“lower_case_table_names”参数。其中，“character_set_server”参数可选值为["utf8","latin1","gbk","utf8mb4"]；“lower_case_table_names”可选值为[“0”,“1”]。
       */
-    GoodsNum?: number;
+    Parameters: Array<ParamInfo>;
     /**
-      * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
+      * 实例的端口，取值范围为[1024, 65535]
       */
-    Memory?: number;
-    /**
-      * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
-      */
-    Volume?: number;
-    /**
-      * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。InstanceId为空时该参数为必填项。
-      */
-    InstanceRole?: string;
-    /**
-      * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。InstanceId为空时该参数为必填项。
-      */
-    PayType?: string;
-    /**
-      * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
-      */
-    ProtectMode?: number;
-    /**
-      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
-      */
-    DeviceType?: string;
-    /**
-      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
-      */
-    InstanceNodes?: number;
-    /**
-      * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
-      */
-    Cpu?: number;
-    /**
-      * 询价续费实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
-      */
-    InstanceId?: string;
-    /**
-      * 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。
-      */
-    Ladder?: number;
+    Vport?: number;
 }
 /**
  * CreateBackup返回参数结构体
@@ -7587,13 +8288,17 @@ export interface CreateBackupResponse {
     RequestId?: string;
 }
 /**
- * OpenDBInstanceGTID请求参数结构体
+ *  CPU负载
  */
-export interface OpenDBInstanceGTIDRequest {
+export interface DeviceCpuInfo {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 实例CPU平均使用率
       */
-    InstanceId: string;
+    Rate: Array<DeviceCpuRateInfo>;
+    /**
+      * 实例CPU监控数据
+      */
+    Load: Array<number>;
 }
 /**
  * OpenDBInstanceEncryption返回参数结构体
@@ -7821,6 +8526,20 @@ export interface BaseGroupInfo {
     SupportUpgradeProxyVersion: string;
 }
 /**
+ * AdjustCdbProxy返回参数结构体
+ */
+export interface AdjustCdbProxyResponse {
+    /**
+      * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBackupEncryptionStatus请求参数结构体
  */
 export interface DescribeBackupEncryptionStatusRequest {
@@ -7872,6 +8591,15 @@ export interface AuditLogFile {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ErrMsg: string;
+}
+/**
+ * CloseCdbProxyAddress返回参数结构体
+ */
+export interface CloseCdbProxyAddressResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 用于回档的数据库表详情
@@ -8046,44 +8774,21 @@ export interface RestartDBInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
- * 置放群组信息
+ * 审计日志聚合条件
  */
-export interface DeployGroupInfo {
+export interface AggregationCondition {
     /**
-      * 置放群组 ID。
+      * 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。
       */
-    DeployGroupId: string;
+    AggregationField: string;
     /**
-      * 置放群组名称。
+      * 偏移量。
       */
-    DeployGroupName: string;
+    Offset?: number;
     /**
-      * 创建时间。
+      * 该聚合字段下要返回聚合桶的数量，最大100。
       */
-    CreateTime: string;
-    /**
-      * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
-      */
-    Quota: number;
-    /**
-      * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Affinity: string;
-    /**
-      * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LimitNum: number;
-    /**
-      * 置放群组详细信息。
-      */
-    Description: string;
-    /**
-      * 置放群组物理机型属性。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DevClass: string;
+    Limit?: number;
 }
 /**
  * ModifyRemoteBackupConfig请求参数结构体

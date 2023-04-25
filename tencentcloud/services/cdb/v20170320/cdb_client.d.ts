@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBImportJobRequest, DescribeDatabasesRequest, DescribeTablesResponse, ModifyBackupDownloadRestrictionResponse, ModifyTimeWindowResponse, ModifyTimeWindowRequest, DescribeRollbackRangeTimeRequest, DescribeBackupOverviewRequest, ModifyDBInstanceProjectResponse, DescribeDataBackupOverviewResponse, DeleteAuditPolicyRequest, ModifyInstanceParamRequest, CreateParamTemplateRequest, DescribeSupportedPrivilegesRequest, DescribeParamTemplateInfoRequest, DescribeDBInstancesRequest, DescribeRoGroupsRequest, CloseWanServiceRequest, OpenAuditServiceResponse, CreateRoInstanceIpResponse, CreateAuditPolicyResponse, DescribeInstanceParamRecordsRequest, StopRollbackResponse, AnalyzeAuditLogsRequest, ModifyBackupEncryptionStatusResponse, DescribeInstanceParamsRequest, DescribeRoMinScaleResponse, StopDBImportJobResponse, ModifyDBInstanceNameRequest, ModifyAuditRuleResponse, OpenAuditServiceRequest, DescribeAuditRulesRequest, UpgradeDBInstanceEngineVersionResponse, AssociateSecurityGroupsResponse, ModifyCDBProxyDescRequest, DescribeCDBProxyResponse, DescribeBackupTablesRequest, DescribeCdbZoneConfigResponse, DescribeTablesRequest, UpgradeDBInstanceRequest, ModifyParamTemplateRequest, StartReplicationResponse, ModifyCDBProxyVipVPortRequest, DescribeBinlogBackupOverviewResponse, InitDBInstancesRequest, SwitchDBInstanceMasterSlaveRequest, ModifyCDBProxyConnectionPoolRequest, ModifyAutoRenewFlagRequest, DeleteDeployGroupsRequest, DescribeAuditConfigResponse, ModifyBackupConfigResponse, DescribeTimeWindowResponse, DeleteAuditPolicyResponse, InitDBInstancesResponse, DescribeParamTemplateInfoResponse, DescribeInstanceParamsResponse, DisassociateSecurityGroupsRequest, ModifyLocalBinlogConfigRequest, StartBatchRollbackResponse, ModifyAccountHostResponse, DescribeRollbackRangeTimeResponse, ModifyRoGroupInfoRequest, DescribeBinlogsRequest, CreateAuditRuleResponse, ModifyRemoteBackupConfigResponse, DescribeDBInstanceInfoResponse, AssociateSecurityGroupsRequest, DescribeDBFeaturesResponse, ModifyAuditRuleRequest, DescribeBinlogsResponse, DescribeRoMinScaleRequest, DescribeDefaultParamsRequest, SwitchDBInstanceMasterSlaveResponse, DescribeBackupsRequest, DescribeInstanceParamRecordsResponse, DescribeDBInstanceGTIDResponse, DeleteParamTemplateRequest, ModifyBackupDownloadRestrictionRequest, CreateParamTemplateResponse, ModifyAccountPasswordResponse, ReleaseIsolatedDBInstancesRequest, DescribeErrorLogDataResponse, AddTimeWindowRequest, DeleteAuditLogFileResponse, DescribeDBSecurityGroupsRequest, DescribeDBSwitchRecordsResponse, ModifyCDBProxyConnectionPoolResponse, CreateAuditLogFileResponse, ModifyInstanceTagResponse, DescribeDBSwitchRecordsRequest, DescribeAsyncRequestInfoResponse, DeleteAccountsResponse, DeleteTimeWindowResponse, DescribeBackupsResponse, CreateAuditPolicyRequest, CreateRoInstanceIpRequest, OpenWanServiceRequest, DescribeBackupConfigResponse, DescribeParamTemplatesResponse, DescribeProjectSecurityGroupsRequest, StopReplicationRequest, CreateCloneInstanceResponse, DescribeCdbZoneConfigRequest, DescribeAsyncRequestInfoRequest, BalanceRoGroupLoadRequest, QueryCDBProxyRequest, DescribeBackupOverviewResponse, DescribeLocalBinlogConfigRequest, QueryCDBProxyResponse, DescribeDeviceMonitorInfoRequest, SwitchDrInstanceToMasterResponse, DescribeDBInstanceConfigResponse, ModifyAccountPrivilegesResponse, StopRollbackRequest, DescribeDeviceMonitorInfoResponse, ResetRootAccountRequest, DescribeDBInstanceConfigRequest, DescribeProxyCustomConfResponse, ModifyAuditConfigResponse, ModifyDBInstanceNameResponse, VerifyRootAccountRequest, DescribeCloneListResponse, StartBatchRollbackRequest, OpenDBInstanceEncryptionRequest, DescribeDBInstanceCharsetRequest, ModifyInstancePasswordComplexityResponse, DescribeRemoteBackupConfigRequest, DescribeDBInstancesResponse, DescribeBackupDownloadRestrictionRequest, CreateDeployGroupRequest, DeleteAccountsRequest, ReloadBalanceProxyNodeRequest, DescribeAccountsResponse, DescribeAuditLogFilesRequest, ModifyBackupConfigRequest, DisassociateSecurityGroupsResponse, InquiryPriceUpgradeInstancesResponse, DescribeAuditConfigRequest, CreateDBInstanceRequest, DescribeProxyConnectionPoolConfRequest, DescribeParamTemplatesRequest, DescribeAccountPrivilegesResponse, DescribeBackupConfigRequest, DescribeAccountsRequest, DescribeErrorLogDataRequest, DescribeAuditLogFilesResponse, DescribeDBInstanceRebootTimeRequest, CreateAccountsResponse, CreateDeployGroupResponse, ResetRootAccountResponse, ModifyNameOrDescByDpIdResponse, DescribeDBPriceResponse, OpenDBInstanceGTIDResponse, VerifyRootAccountResponse, DescribeDBInstanceRebootTimeResponse, SwitchDrInstanceToMasterRequest, ModifyCDBProxyVipVPortResponse, SwitchForUpgradeRequest, CreateDBInstanceHourResponse, DescribeBackupDownloadRestrictionResponse, ModifyDBInstanceSecurityGroupsResponse, CreateAccountsRequest, DescribeDeployGroupListRequest, CloseWanServiceResponse, RenewDBInstanceRequest, ModifyLocalBinlogConfigResponse, DescribeCloneListRequest, ModifyInstanceTagRequest, ModifyAutoRenewFlagResponse, ReloadBalanceProxyNodeResponse, DescribeTimeWindowRequest, DescribeDBImportRecordsResponse, DescribeBackupDatabasesResponse, DescribeRollbackTaskDetailRequest, DescribeBackupTablesResponse, ModifyParamTemplateResponse, BalanceRoGroupLoadResponse, ModifyDBInstanceVipVportResponse, DeleteAuditRuleResponse, DescribeUploadedFilesRequest, DescribeDefaultParamsResponse, SwitchCDBProxyRequest, DescribeTagsOfInstanceIdsResponse, DescribeDeployGroupListResponse, OfflineIsolatedInstancesResponse, DescribeAuditPoliciesRequest, DescribeDatabasesResponse, DescribeRoGroupsResponse, DescribeAuditRulesResponse, ModifyAccountHostRequest, CreateAuditLogFileRequest, CreateAuditRuleRequest, ModifyAccountPrivilegesRequest, CreateBackupRequest, DescribeRemoteBackupConfigResponse, ModifyCDBProxyDescResponse, ModifyDBInstanceVipVportRequest, DescribeDBImportRecordsRequest, CreateDBImportJobResponse, DescribeTagsOfInstanceIdsRequest, CloseCDBProxyResponse, StopReplicationResponse, UpgradeDBInstanceEngineVersionRequest, DescribeDataBackupOverviewRequest, DescribeDBInstanceInfoRequest, ModifyDBInstanceProjectRequest, SwitchForUpgradeResponse, DescribeCDBProxyRequest, DescribeAccountPrivilegesRequest, DescribeSupportedPrivilegesResponse, StopDBImportJobRequest, DescribeLocalBinlogConfigResponse, ModifyInstancePasswordComplexityRequest, OpenWanServiceResponse, DescribeDBInstanceGTIDRequest, DescribeBackupEncryptionStatusResponse, ModifyAuditConfigRequest, DescribeSlowLogDataResponse, RestartDBInstancesResponse, DescribeSlowLogsRequest, DescribeProxyCustomConfRequest, DescribeDBSecurityGroupsResponse, ModifyRoGroupInfoResponse, DeleteAuditRuleRequest, DeleteParamTemplateResponse, DescribeTasksResponse, DescribeAuditPoliciesResponse, IsolateDBInstanceResponse, ModifyAccountDescriptionResponse, ModifyAccountMaxUserConnectionsRequest, DeleteDeployGroupsResponse, DescribeTasksRequest, ModifyBackupEncryptionStatusRequest, DescribeRollbackTaskDetailResponse, CreateDBInstanceHourRequest, CreateCloneInstanceRequest, CloseCDBProxyRequest, DeleteBackupResponse, DescribeProjectSecurityGroupsResponse, DescribeBackupSummariesRequest, AnalyzeAuditLogsResponse, CreateDBInstanceResponse, StartReplicationRequest, DescribeDBInstanceCharsetResponse, DescribeDBFeaturesRequest, DescribeBackupSummariesResponse, DescribeBinlogBackupOverviewRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyAccountMaxUserConnectionsResponse, DescribeProxyConnectionPoolConfResponse, OfflineIsolatedInstancesRequest, InquiryPriceUpgradeInstancesRequest, ModifyInstanceParamResponse, DescribeUploadedFilesResponse, DescribeDBPriceRequest, CreateBackupResponse, OpenDBInstanceGTIDRequest, OpenDBInstanceEncryptionResponse, UpgradeCDBProxyVersionResponse, ModifyAccountDescriptionRequest, ModifyAccountPasswordRequest, RenewDBInstanceResponse, AddTimeWindowResponse, DescribeBackupEncryptionStatusRequest, IsolateDBInstanceRequest, DescribeBackupDatabasesRequest, DescribeSlowLogDataRequest, ReleaseIsolatedDBInstancesResponse, DeleteAuditLogFileRequest, DescribeSlowLogsResponse, DeleteTimeWindowRequest, SwitchCDBProxyResponse, RestartDBInstancesRequest, ModifyRemoteBackupConfigRequest, DeleteBackupRequest, ModifyNameOrDescByDpIdRequest, UpgradeDBInstanceResponse, UpgradeCDBProxyVersionRequest } from "./cdb_models";
+import { CreateDBImportJobRequest, DescribeDatabasesRequest, CreateCdbProxyRequest, CreateCdbProxyResponse, DescribeTablesResponse, ModifyBackupDownloadRestrictionResponse, StartReplicationResponse, ModifyTimeWindowResponse, ModifyTimeWindowRequest, DescribeRollbackRangeTimeRequest, DescribeBackupOverviewRequest, ModifyDBInstanceProjectResponse, DescribeDataBackupOverviewResponse, DeleteAuditPolicyRequest, ModifyInstanceParamRequest, CreateParamTemplateRequest, DescribeSupportedPrivilegesRequest, DescribeParamTemplateInfoRequest, ModifyCdbProxyAddressVipAndVPortResponse, DescribeDBInstancesRequest, ModifyCdbProxyAddressDescRequest, DescribeRoGroupsRequest, CreateCdbProxyAddressResponse, CloseWanServiceRequest, DescribeAuditConfigRequest, CreateRoInstanceIpResponse, CreateAuditPolicyResponse, DescribeInstanceParamRecordsRequest, StopRollbackResponse, CreateCdbProxyAddressRequest, AnalyzeAuditLogsRequest, ModifyBackupEncryptionStatusResponse, DescribeInstanceParamsRequest, DescribeRoMinScaleResponse, StopDBImportJobResponse, ModifyDBInstanceNameRequest, ModifyAuditRuleResponse, DescribeAuditRulesRequest, UpgradeDBInstanceEngineVersionResponse, AssociateSecurityGroupsResponse, ModifyCDBProxyDescRequest, DescribeCDBProxyResponse, DescribeBackupTablesRequest, DescribeCdbZoneConfigResponse, DescribeTablesRequest, UpgradeDBInstanceRequest, ModifyParamTemplateRequest, OpenAuditServiceResponse, ModifyCDBProxyVipVPortRequest, DescribeBinlogBackupOverviewResponse, SwitchDBInstanceMasterSlaveRequest, ModifyCDBProxyConnectionPoolRequest, ModifyCdbProxyAddressVipAndVPortRequest, ModifyAutoRenewFlagRequest, DeleteDeployGroupsRequest, DescribeAuditConfigResponse, ModifyBackupConfigResponse, DescribeTimeWindowResponse, DeleteAuditPolicyResponse, InitDBInstancesResponse, DescribeParamTemplateInfoResponse, DescribeInstanceParamsResponse, DisassociateSecurityGroupsRequest, ModifyLocalBinlogConfigRequest, StartBatchRollbackResponse, ModifyAccountHostResponse, DescribeRollbackRangeTimeResponse, ModifyRoGroupInfoRequest, DescribeBinlogsRequest, DescribeCdbProxyInfoRequest, CreateAuditRuleResponse, ModifyRemoteBackupConfigResponse, DescribeDBInstanceInfoResponse, AssociateSecurityGroupsRequest, DescribeDBFeaturesResponse, ModifyAuditRuleRequest, DescribeBinlogsResponse, DescribeRoMinScaleRequest, DescribeDefaultParamsRequest, SwitchDBInstanceMasterSlaveResponse, DescribeBackupsRequest, DescribeInstanceParamRecordsResponse, DescribeDBInstanceGTIDResponse, DeleteParamTemplateRequest, ModifyBackupDownloadRestrictionRequest, CreateParamTemplateResponse, ModifyAccountPasswordResponse, ReleaseIsolatedDBInstancesRequest, DescribeErrorLogDataResponse, AddTimeWindowRequest, DeleteAuditLogFileResponse, DescribeDBSecurityGroupsRequest, DescribeDBSwitchRecordsResponse, ModifyCDBProxyConnectionPoolResponse, CreateAuditLogFileResponse, ModifyCdbProxyParamResponse, ModifyInstanceTagResponse, DescribeDBSwitchRecordsRequest, DescribeAsyncRequestInfoResponse, DeleteAccountsResponse, ModifyCdbProxyAddressDescResponse, DeleteTimeWindowResponse, DescribeBackupsResponse, CreateAuditPolicyRequest, CreateRoInstanceIpRequest, OpenWanServiceRequest, DescribeBackupConfigResponse, DescribeParamTemplatesResponse, DescribeProjectSecurityGroupsRequest, StopReplicationRequest, CreateCloneInstanceResponse, DescribeCdbZoneConfigRequest, OpenDBInstanceGTIDRequest, DescribeAsyncRequestInfoRequest, BalanceRoGroupLoadRequest, QueryCDBProxyRequest, DescribeBackupOverviewResponse, DescribeLocalBinlogConfigRequest, QueryCDBProxyResponse, DescribeDeviceMonitorInfoRequest, StopDBImportJobRequest, DescribeDBPriceRequest, ModifyAccountPrivilegesResponse, StopRollbackRequest, DescribeDeviceMonitorInfoResponse, ResetRootAccountRequest, DescribeDBInstanceConfigRequest, DescribeProxyCustomConfResponse, ModifyAuditConfigResponse, SwitchDrInstanceToMasterResponse, ModifyDBInstanceNameResponse, VerifyRootAccountRequest, DescribeCloneListResponse, DescribeDBInstanceConfigResponse, StartBatchRollbackRequest, OpenDBInstanceEncryptionRequest, DescribeDBInstanceCharsetRequest, ModifyInstancePasswordComplexityResponse, DescribeRemoteBackupConfigRequest, DescribeDBInstancesResponse, DescribeBackupDownloadRestrictionRequest, CreateDeployGroupRequest, DeleteAccountsRequest, ReloadBalanceProxyNodeRequest, DescribeAccountsResponse, DescribeAuditLogFilesRequest, ModifyBackupConfigRequest, DisassociateSecurityGroupsResponse, InquiryPriceUpgradeInstancesResponse, CreateDBInstanceRequest, DescribeProxyConnectionPoolConfRequest, DescribeParamTemplatesRequest, DescribeAccountPrivilegesResponse, DescribeBackupConfigRequest, DescribeAccountsRequest, DescribeErrorLogDataRequest, DescribeAuditLogFilesResponse, DescribeDBInstanceRebootTimeRequest, CreateAccountsResponse, CreateDeployGroupResponse, ResetRootAccountResponse, ModifyNameOrDescByDpIdResponse, DescribeDBPriceResponse, OpenDBInstanceGTIDResponse, VerifyRootAccountResponse, DescribeDBInstanceRebootTimeResponse, SwitchDrInstanceToMasterRequest, ModifyCdbProxyParamRequest, ModifyCDBProxyVipVPortResponse, SwitchForUpgradeRequest, CreateDBInstanceHourResponse, DescribeBackupDownloadRestrictionResponse, ModifyDBInstanceSecurityGroupsResponse, CreateAccountsRequest, DescribeDeployGroupListRequest, CloseWanServiceResponse, RenewDBInstanceRequest, ModifyLocalBinlogConfigResponse, DescribeCloneListRequest, ModifyInstanceTagRequest, DescribeProxySupportParamRequest, ModifyAutoRenewFlagResponse, StartReplicationRequest, ReloadBalanceProxyNodeResponse, DescribeTimeWindowRequest, DescribeDBImportRecordsResponse, DescribeBackupDatabasesResponse, DescribeProxySupportParamResponse, DescribeRollbackTaskDetailRequest, DescribeBackupTablesResponse, ModifyParamTemplateResponse, BalanceRoGroupLoadResponse, ModifyDBInstanceVipVportResponse, DeleteAuditRuleResponse, DescribeUploadedFilesRequest, DescribeDefaultParamsResponse, SwitchCDBProxyRequest, DescribeTagsOfInstanceIdsResponse, DescribeDeployGroupListResponse, OfflineIsolatedInstancesResponse, DescribeAuditPoliciesRequest, AdjustCdbProxyAddressRequest, DescribeDatabasesResponse, DescribeRoGroupsResponse, DescribeAuditRulesResponse, ModifyAccountHostRequest, CreateAuditLogFileRequest, CreateAuditRuleRequest, ModifyAccountPrivilegesRequest, CreateBackupRequest, DescribeRemoteBackupConfigResponse, ModifyCDBProxyDescResponse, AdjustCdbProxyAddressResponse, ModifyDBInstanceVipVportRequest, DescribeDBImportRecordsRequest, CreateDBImportJobResponse, DescribeTagsOfInstanceIdsRequest, CloseCDBProxyResponse, StopReplicationResponse, UpgradeDBInstanceEngineVersionRequest, DescribeDataBackupOverviewRequest, DescribeDBInstanceInfoRequest, ModifyDBInstanceProjectRequest, SwitchForUpgradeResponse, DescribeCDBProxyRequest, DescribeAccountPrivilegesRequest, DescribeSupportedPrivilegesResponse, DescribeLocalBinlogConfigResponse, ModifyInstancePasswordComplexityRequest, OpenWanServiceResponse, DescribeDBInstanceGTIDRequest, DescribeBackupEncryptionStatusResponse, DescribeCdbProxyInfoResponse, ModifyAuditConfigRequest, DescribeSlowLogDataResponse, RestartDBInstancesResponse, DescribeSlowLogsRequest, DescribeProxyCustomConfRequest, DescribeDBSecurityGroupsResponse, CloseCdbProxyAddressRequest, ModifyRoGroupInfoResponse, DeleteAuditRuleRequest, DeleteParamTemplateResponse, DescribeTasksResponse, DescribeAuditPoliciesResponse, IsolateDBInstanceResponse, AdjustCdbProxyRequest, ModifyAccountDescriptionResponse, ModifyAccountMaxUserConnectionsRequest, DeleteDeployGroupsResponse, DescribeTasksRequest, ModifyBackupEncryptionStatusRequest, DescribeRollbackTaskDetailResponse, CreateDBInstanceHourRequest, CreateCloneInstanceRequest, CloseCDBProxyRequest, DeleteBackupResponse, DescribeProjectSecurityGroupsResponse, DescribeBackupSummariesRequest, AnalyzeAuditLogsResponse, CreateDBInstanceResponse, OpenAuditServiceRequest, DescribeDBInstanceCharsetResponse, DescribeDBFeaturesRequest, DescribeBackupSummariesResponse, DescribeBinlogBackupOverviewRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyAccountMaxUserConnectionsResponse, DescribeProxyConnectionPoolConfResponse, OfflineIsolatedInstancesRequest, InquiryPriceUpgradeInstancesRequest, ModifyInstanceParamResponse, DescribeUploadedFilesResponse, InitDBInstancesRequest, CreateBackupResponse, OpenDBInstanceEncryptionResponse, UpgradeCDBProxyVersionResponse, ModifyAccountDescriptionRequest, ModifyAccountPasswordRequest, RenewDBInstanceResponse, AddTimeWindowResponse, AdjustCdbProxyResponse, DescribeBackupEncryptionStatusRequest, IsolateDBInstanceRequest, CloseCdbProxyAddressResponse, DescribeBackupDatabasesRequest, DescribeSlowLogDataRequest, ReleaseIsolatedDBInstancesResponse, DeleteAuditLogFileRequest, DescribeSlowLogsResponse, DeleteTimeWindowRequest, SwitchCDBProxyResponse, RestartDBInstancesRequest, ModifyRemoteBackupConfigRequest, DeleteBackupRequest, ModifyNameOrDescByDpIdRequest, UpgradeDBInstanceResponse, UpgradeCDBProxyVersionRequest } from "./cdb_models";
 /**
  * cdb client
  * @class
@@ -68,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCdbZoneConfig(req?: DescribeCdbZoneConfigRequest, cb?: (error: string, rep: DescribeCdbZoneConfigResponse) => void): Promise<DescribeCdbZoneConfigResponse>;
     /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    /**
      * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
      */
     StopRollback(req: StopRollbackRequest, cb?: (error: string, rep: StopRollbackResponse) => void): Promise<StopRollbackResponse>;
@@ -105,6 +109,10 @@ export declare class Client extends AbstractClient {
      * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
      */
     ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
+    /**
+     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+     */
+    DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
      * 本接口(DescribeTasks)用于查询云数据库实例任务列表。
      */
@@ -160,6 +168,10 @@ export declare class Client extends AbstractClient {
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
+    /**
+     * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+     */
+    RenewDBInstance(req: RenewDBInstanceRequest, cb?: (error: string, rep: RenewDBInstanceResponse) => void): Promise<RenewDBInstanceResponse>;
     /**
      * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息，仅支持主实例和灾备实例，不支持只读实例。
      */
@@ -225,6 +237,10 @@ export declare class Client extends AbstractClient {
      */
     AddTimeWindow(req: AddTimeWindowRequest, cb?: (error: string, rep: AddTimeWindowResponse) => void): Promise<AddTimeWindowResponse>;
     /**
+     * 查询实例支持代理版本和参数
+     */
+    DescribeProxySupportParam(req: DescribeProxySupportParamRequest, cb?: (error: string, rep: DescribeProxySupportParamResponse) => void): Promise<DescribeProxySupportParamResponse>;
+    /**
      * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
      */
     DescribeDeviceMonitorInfo(req: DescribeDeviceMonitorInfoRequest, cb?: (error: string, rep: DescribeDeviceMonitorInfoResponse) => void): Promise<DescribeDeviceMonitorInfoResponse>;
@@ -246,6 +262,10 @@ export declare class Client extends AbstractClient {
 新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
      */
     DescribeBackupTables(req: DescribeBackupTablesRequest, cb?: (error: string, rep: DescribeBackupTablesResponse) => void): Promise<DescribeBackupTablesResponse>;
+    /**
+     * 数据库代理增加代理地址
+     */
+    CreateCdbProxyAddress(req: CreateCdbProxyAddressRequest, cb?: (error: string, rep: CreateCdbProxyAddressResponse) => void): Promise<CreateCdbProxyAddressResponse>;
     /**
      * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
      */
@@ -318,6 +338,10 @@ export declare class Client extends AbstractClient {
      */
     CreateAccounts(req: CreateAccountsRequest, cb?: (error: string, rep: CreateAccountsResponse) => void): Promise<CreateAccountsResponse>;
     /**
+     * 调整数据库代理配置
+     */
+    AdjustCdbProxy(req: AdjustCdbProxyRequest, cb?: (error: string, rep: AdjustCdbProxyResponse) => void): Promise<AdjustCdbProxyResponse>;
+    /**
      * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
      */
     UpgradeDBInstanceEngineVersion(req: UpgradeDBInstanceEngineVersionRequest, cb?: (error: string, rep: UpgradeDBInstanceEngineVersionResponse) => void): Promise<UpgradeDBInstanceEngineVersionResponse>;
@@ -358,9 +382,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRollbackRangeTime(req: DescribeRollbackRangeTimeRequest, cb?: (error: string, rep: DescribeRollbackRangeTimeResponse) => void): Promise<DescribeRollbackRangeTimeResponse>;
     /**
-     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+     * 请求关闭数据库代理地址
      */
-    DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
+    CloseCdbProxyAddress(req: CloseCdbProxyAddressRequest, cb?: (error: string, rep: CloseCdbProxyAddressResponse) => void): Promise<CloseCdbProxyAddressResponse>;
     /**
      * 本接口(DeleteBackup)用于删除数据库备份。本接口只支持删除手动发起的备份。
      */
@@ -376,6 +400,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeRoMinScale(req: DescribeRoMinScaleRequest, cb?: (error: string, rep: DescribeRoMinScaleResponse) => void): Promise<DescribeRoMinScaleResponse>;
     /**
+     * 修改代理地址描述信息
+     */
+    ModifyCdbProxyAddressDesc(req: ModifyCdbProxyAddressDescRequest, cb?: (error: string, rep: ModifyCdbProxyAddressDescResponse) => void): Promise<ModifyCdbProxyAddressDescResponse>;
+    /**
      * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
      */
     ModifyAccountHost(req: ModifyAccountHostRequest, cb?: (error: string, rep: ModifyAccountHostResponse) => void): Promise<ModifyAccountHostResponse>;
@@ -383,6 +411,14 @@ export declare class Client extends AbstractClient {
      * 开启 RO 复制，从主实例同步数据。
      */
     StartReplication(req: StartReplicationRequest, cb?: (error: string, rep: StartReplicationResponse) => void): Promise<StartReplicationResponse>;
+    /**
+     * 调整数据库代理地址配置
+     */
+    AdjustCdbProxyAddress(req: AdjustCdbProxyAddressRequest, cb?: (error: string, rep: AdjustCdbProxyAddressResponse) => void): Promise<AdjustCdbProxyAddressResponse>;
+    /**
+     * 查询数据库代理详情信息
+     */
+    DescribeCdbProxyInfo(req: DescribeCdbProxyInfoRequest, cb?: (error: string, rep: DescribeCdbProxyInfoResponse) => void): Promise<DescribeCdbProxyInfoResponse>;
     /**
      * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
      */
@@ -428,11 +464,11 @@ export declare class Client extends AbstractClient {
      */
     AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
     /**
-     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
 
-本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
      */
-    InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
+    DescribeDBPrice(req: DescribeDBPriceRequest, cb?: (error: string, rep: DescribeDBPriceResponse) => void): Promise<DescribeDBPriceResponse>;
     /**
      * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
 
@@ -524,11 +560,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupDatabases(req: DescribeBackupDatabasesRequest, cb?: (error: string, rep: DescribeBackupDatabasesResponse) => void): Promise<DescribeBackupDatabasesResponse>;
     /**
-     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
+     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
 
-注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
+本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
      */
-    DescribeDBPrice(req: DescribeDBPriceRequest, cb?: (error: string, rep: DescribeDBPriceResponse) => void): Promise<DescribeDBPriceResponse>;
+    InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
+    /**
+     * 主实例创建数据库代理
+     */
+    CreateCdbProxy(req: CreateCdbProxyRequest, cb?: (error: string, rep: CreateCdbProxyResponse) => void): Promise<CreateCdbProxyResponse>;
     /**
      * 本接口(ModifyAutoRenewFlag)用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
      */
@@ -538,9 +578,9 @@ export declare class Client extends AbstractClient {
      */
     SwitchCDBProxy(req: SwitchCDBProxyRequest, cb?: (error: string, rep: SwitchCDBProxyResponse) => void): Promise<SwitchCDBProxyResponse>;
     /**
-     * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+     * 配置数据库代理参数
      */
-    RenewDBInstance(req: RenewDBInstanceRequest, cb?: (error: string, rep: RenewDBInstanceResponse) => void): Promise<RenewDBInstanceResponse>;
+    ModifyCdbProxyParam(req: ModifyCdbProxyParamRequest, cb?: (error: string, rep: ModifyCdbProxyParamResponse) => void): Promise<ModifyCdbProxyParamResponse>;
     /**
      * 该接口（StartBatchRollback）用于批量回档云数据库实例的库表。
      */
@@ -570,9 +610,9 @@ export declare class Client extends AbstractClient {
      */
     QueryCDBProxy(req: QueryCDBProxyRequest, cb?: (error: string, rep: QueryCDBProxyResponse) => void): Promise<QueryCDBProxyResponse>;
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 修改数据库代理地址VPC信息
      */
-    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    ModifyCdbProxyAddressVipAndVPort(req: ModifyCdbProxyAddressVipAndVPortRequest, cb?: (error: string, rep: ModifyCdbProxyAddressVipAndVPortResponse) => void): Promise<ModifyCdbProxyAddressVipAndVPortResponse>;
     /**
      * 本接口(DeleteAuditRule)用于删除用户的审计规则。
      */

@@ -220,7 +220,7 @@ export interface RocketMQNamespace {
   NamespaceId: string
 
   /**
-   * 未消费消息的保留时间，以毫秒单位，范围60秒到15天
+   * 已废弃，未消费消息的保留时间，以毫秒单位，范围60秒到15天
    */
   Ttl: number
 
@@ -246,6 +246,12 @@ export interface RocketMQNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VpcEndpoint: string
+
+  /**
+      * 内部接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InternalEndpoint?: string
 }
 
 /**
@@ -730,6 +736,24 @@ export interface RocketMQVipInstance {
    * 实例配置ID
    */
   SpecName: string
+
+  /**
+      * 最大可设置消息保留时间，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxRetention?: number
+
+  /**
+      * 最小可设置消息保留时间，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinRetention?: number
+
+  /**
+      * 实例消息保留时间，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Retention?: number
 }
 
 /**
@@ -813,6 +837,12 @@ export interface RabbitMQVipInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExceptionInformation?: string
+
+  /**
+      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+为了和计费区分开，额外开启一个状态位，用于显示。
+      */
+  ClusterStatus?: number
 }
 
 /**
@@ -4304,6 +4334,18 @@ export interface RocketMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HttpVpcEndpoint?: string
+
+  /**
+      * TCP内部接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InternalEndpoint?: string
+
+  /**
+      * HTTP协议内部接入地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HttpInternalEndpoint?: string
 }
 
 /**

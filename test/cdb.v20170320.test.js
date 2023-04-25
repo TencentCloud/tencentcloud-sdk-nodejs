@@ -158,6 +158,16 @@ it("cdb.v20170320.DescribeCdbZoneConfig", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.StopRollback", async function () {
     try {
        const data = await client.StopRollback({})
@@ -231,6 +241,16 @@ it("cdb.v20170320.DescribeRollbackTaskDetail", async function () {
 it("cdb.v20170320.ModifyBackupDownloadRestriction", async function () {
     try {
        const data = await client.ModifyBackupDownloadRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeParamTemplates", async function () {
+    try {
+       const data = await client.DescribeParamTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +361,16 @@ it("cdb.v20170320.SwitchDBInstanceMasterSlave", async function () {
 it("cdb.v20170320.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.RenewDBInstance", async function () {
+    try {
+       const data = await client.RenewDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +518,16 @@ it("cdb.v20170320.AddTimeWindow", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeProxySupportParam", async function () {
+    try {
+       const data = await client.DescribeProxySupportParam({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
     try {
        const data = await client.DescribeDeviceMonitorInfo({})
@@ -531,6 +571,16 @@ it("cdb.v20170320.DescribeDBInstanceConfig", async function () {
 it("cdb.v20170320.DescribeBackupTables", async function () {
     try {
        const data = await client.DescribeBackupTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.CreateCdbProxyAddress", async function () {
+    try {
+       const data = await client.CreateCdbProxyAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +738,16 @@ it("cdb.v20170320.CreateAccounts", async function () {
     }
 })
 
+it("cdb.v20170320.AdjustCdbProxy", async function () {
+    try {
+       const data = await client.AdjustCdbProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.UpgradeDBInstanceEngineVersion", async function () {
     try {
        const data = await client.UpgradeDBInstanceEngineVersion({})
@@ -788,9 +848,9 @@ it("cdb.v20170320.DescribeRollbackRangeTime", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeParamTemplates", async function () {
+it("cdb.v20170320.CloseCdbProxyAddress", async function () {
     try {
-       const data = await client.DescribeParamTemplates({})
+       const data = await client.CloseCdbProxyAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,6 +888,16 @@ it("cdb.v20170320.DescribeRoMinScale", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyCdbProxyAddressDesc", async function () {
+    try {
+       const data = await client.ModifyCdbProxyAddressDesc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyAccountHost", async function () {
     try {
        const data = await client.ModifyAccountHost({})
@@ -841,6 +911,26 @@ it("cdb.v20170320.ModifyAccountHost", async function () {
 it("cdb.v20170320.StartReplication", async function () {
     try {
        const data = await client.StartReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.AdjustCdbProxyAddress", async function () {
+    try {
+       const data = await client.AdjustCdbProxyAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeCdbProxyInfo", async function () {
+    try {
+       const data = await client.DescribeCdbProxyInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +1048,9 @@ it("cdb.v20170320.AssociateSecurityGroups", async function () {
     }
 })
 
-it("cdb.v20170320.InitDBInstances", async function () {
+it("cdb.v20170320.DescribeDBPrice", async function () {
     try {
-       const data = await client.InitDBInstances({})
+       const data = await client.DescribeDBPrice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,9 +1258,19 @@ it("cdb.v20170320.DescribeBackupDatabases", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeDBPrice", async function () {
+it("cdb.v20170320.InitDBInstances", async function () {
     try {
-       const data = await client.DescribeDBPrice({})
+       const data = await client.InitDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.CreateCdbProxy", async function () {
+    try {
+       const data = await client.CreateCdbProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1198,9 +1298,9 @@ it("cdb.v20170320.SwitchCDBProxy", async function () {
     }
 })
 
-it("cdb.v20170320.RenewDBInstance", async function () {
+it("cdb.v20170320.ModifyCdbProxyParam", async function () {
     try {
-       const data = await client.RenewDBInstance({})
+       const data = await client.ModifyCdbProxyParam({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1368,9 @@ it("cdb.v20170320.QueryCDBProxy", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyDBInstanceSecurityGroups", async function () {
+it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyCdbProxyAddressVipAndVPort({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

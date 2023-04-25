@@ -6360,48 +6360,57 @@ export interface LiveStreamAiRecognitionResultInfo {
  */
 export interface ActivityPara {
   /**
-   * 视频转码任务
-   */
+      * 视频转码任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   TranscodeTask?: TranscodeTaskInput
 
   /**
-   * 视频转动图任务
-   */
+      * 视频转动图任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AnimatedGraphicTask?: AnimatedGraphicTaskInput
 
   /**
-   * 视频按时间点截图任务
-   */
+      * 视频按时间点截图任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput
 
   /**
-   * 视频采样截图任务
-   */
+      * 视频采样截图任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   SampleSnapshotTask?: SampleSnapshotTaskInput
 
   /**
-   * 视频截雪碧图任务
-   */
+      * 视频截雪碧图任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   ImageSpriteTask?: ImageSpriteTaskInput
 
   /**
-   * 转自适应码流任务
-   */
+      * 转自适应码流任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput
 
   /**
-   * 视频内容审核类型任务
-   */
+      * 视频内容审核类型任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AiContentReviewTask?: AiContentReviewTaskInput
 
   /**
-   * 视频内容分析类型任务
-   */
+      * 视频内容分析类型任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AiAnalysisTask?: AiAnalysisTaskInput
 
   /**
-   * 视频内容识别类型任务
-   */
+      * 视频内容识别类型任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AiRecognitionTask?: AiRecognitionTaskInput
 }
 
@@ -12208,7 +12217,7 @@ Enabled：已启用，
 Disabled：已禁用。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: Array<string>
+  Status: string
 
   /**
       * 编排绑定的触发规则。

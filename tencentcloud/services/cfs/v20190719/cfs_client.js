@@ -175,6 +175,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserQuota", req, cb);
     }
     /**
+     * 用来设置文件系统扩容策略
+     */
+    async ModifyFileSystemAutoScaleUpRule(req, cb) {
+        return this.request("ModifyFileSystemAutoScaleUpRule", req, cb);
+    }
+    /**
      * 更新定期自动快照策略
      */
     async UpdateAutoSnapshotPolicy(req, cb) {

@@ -586,12 +586,12 @@ export interface ModifyRuleRequest {
   ForwardType?: string
 
   /**
-   * TRPC被调服务器路由，ForwardType为TRPC时必填。
+   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
    */
   TrpcCallee?: string
 
   /**
-   * TRPC调用服务接口，ForwardType为TRPC时必填。
+   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。
    */
   TrpcFunc?: string
 }
@@ -3447,13 +3447,13 @@ export interface RuleOutput {
   WafDomainId: string
 
   /**
-      * TRPC被调服务器路由，ForwardType为TRPC时有效
+      * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TrpcCallee: string
 
   /**
-      * TRPC调用服务接口，ForwardType为TRPC时有效
+      * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TrpcFunc: string
@@ -5029,12 +5029,12 @@ export interface RuleInput {
   TargetType?: string
 
   /**
-   * TRPC被调服务器路由，ForwardType为TRPC时必填
+   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
    */
   TrpcCallee?: string
 
   /**
-   * TRPC调用服务接口，ForwardType为TRPC时必填
+   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放
    */
   TrpcFunc?: string
 

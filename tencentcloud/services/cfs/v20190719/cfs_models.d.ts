@@ -466,6 +466,28 @@ export interface BindAutoSnapshotPolicyRequest {
     FileSystemIds: string;
 }
 /**
+ * ModifyFileSystemAutoScaleUpRule请求参数结构体
+ */
+export interface ModifyFileSystemAutoScaleUpRuleRequest {
+    /**
+      * 文件系统id
+      */
+    FileSystemId: string;
+    /**
+      * 扩容阈值，范围[10-90]
+      */
+    ScaleUpThreshold: number;
+    /**
+      * 扩容后目标阈值,范围[10-90],该值要小于ScaleUpThreshold
+      */
+    TargetThreshold: number;
+    /**
+      * 规则状态0:关闭，1 开启
+
+      */
+    Status?: number;
+}
+/**
  * ScaleUpFileSystem请求参数结构体
  */
 export interface ScaleUpFileSystemRequest {
@@ -1054,6 +1076,31 @@ export interface CreateAutoSnapshotPolicyResponse {
       * 快照策略ID
       */
     AutoSnapshotPolicyId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyFileSystemAutoScaleUpRule返回参数结构体
+ */
+export interface ModifyFileSystemAutoScaleUpRuleResponse {
+    /**
+      * 文件系统id
+      */
+    FileSystemId?: string;
+    /**
+      * 规则状态0:关闭，1 开启
+      */
+    Status?: number;
+    /**
+      * 扩容阈值,范围[10-90]
+      */
+    ScaleUpThreshold?: number;
+    /**
+      * 扩容后达到阈值,范围[10-90]
+      */
+    TargetThreshold?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

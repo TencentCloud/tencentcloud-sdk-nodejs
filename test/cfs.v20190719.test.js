@@ -258,6 +258,16 @@ it("cfs.v20190719.DescribeUserQuota", async function () {
     }
 })
 
+it("cfs.v20190719.ModifyFileSystemAutoScaleUpRule", async function () {
+    try {
+       const data = await client.ModifyFileSystemAutoScaleUpRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
     try {
        const data = await client.UpdateAutoSnapshotPolicy({})

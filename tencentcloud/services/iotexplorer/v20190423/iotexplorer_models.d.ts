@@ -1192,6 +1192,11 @@ export interface ProjectEntryEx {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceCount: number;
+    /**
+      * 是否开通物联使能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableOpenState: number;
 }
 /**
  * DescribeBatchProduction返回参数结构体

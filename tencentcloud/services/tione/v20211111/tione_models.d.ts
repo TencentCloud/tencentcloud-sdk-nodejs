@@ -3,10 +3,6 @@
  */
 export interface CreateModelServiceRequest {
     /**
-      * 镜像信息，配置服务运行所需的镜像地址等信息
-      */
-    ImageInfo: ImageInfo;
-    /**
       * 新增版本时需要填写
       */
     ServiceGroupId?: string;
@@ -19,7 +15,7 @@ export interface CreateModelServiceRequest {
       */
     ServiceDescription?: string;
     /**
-      * 付费模式,有 PREPAID 、 POSTPAID_BY_HOUR 和 HYBRID_PAID 三种
+      * 付费模式,有 PREPAID （包年包月）和 POSTPAID_BY_HOUR（按量付费）
       */
     ChargeType?: string;
     /**
@@ -31,11 +27,15 @@ export interface CreateModelServiceRequest {
       */
     ModelInfo?: ModelInfo;
     /**
+      * 镜像信息，配置服务运行所需的镜像地址等信息
+      */
+    ImageInfo?: ImageInfo;
+    /**
       * 环境变量，可选参数，用于配置容器中的环境变量
       */
     Env?: Array<EnvVar>;
     /**
-      * 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写
+      * 资源描述，指定包年包月模式下的cpu,mem,gpu等信息，后付费无需填写
       */
     Resources?: ResourceInfo;
     /**
@@ -706,7 +706,7 @@ export interface Service {
       */
     ChargeType: string;
     /**
-      * 后付费资源组id
+      * 包年包月服务的资源组id，按量计费的服务为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceGroupId: string;
@@ -811,7 +811,7 @@ Waiting 就绪中
       */
     CreateFailedReason: string;
     /**
-      * 预付费服务对应的资源组名字
+      * 包年包月服务对应的资源组名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceGroupName: string;
@@ -2216,7 +2216,7 @@ export interface DescribeBillingSpecsRequest {
       */
     TaskType: string;
     /**
-      * 付费模式：POSTPAID_BY_HOUR后付费、PREPAID预付费
+      * 付费模式：POSTPAID_BY_HOUR按量付费、PREPAID包年包月
       */
     ChargeType: string;
     /**
@@ -2824,6 +2824,32 @@ HYBRID_PAID:
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PodInfos?: Array<Pod>;
+    /**
+      * 定时伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScaleStrategy?: string;
+    /**
+      * 定时伸缩任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CronScaleJobs?: Array<CronScaleJob>;
+    /**
+      * 实例数量调节方式,默认为手动
+支持：自动 - "AUTO", 手动 - "MANUAL"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScaleMode?: string;
+    /**
+      * 服务限速限流相关配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceLimit?: ServiceLimit;
+    /**
+      * 定时停止的配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScheduledAction?: string;
 }
 /**
  * DescribeModelService请求参数结构体

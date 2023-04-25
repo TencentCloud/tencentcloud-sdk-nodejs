@@ -22,6 +22,7 @@ import {
   RegionDetail,
   DestAddressInfo,
   DescribeUDPListenersRequest,
+  SupportFeature,
   DescribeGlobalDomainsRequest,
   DeleteProxyGroupRequest,
   OpenSecurityPolicyResponse,

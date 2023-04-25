@@ -30,6 +30,7 @@ import {
   CreateCfsFileSystemResponse,
   FileSystemInfo,
   BindAutoSnapshotPolicyRequest,
+  ModifyFileSystemAutoScaleUpRuleRequest,
   ScaleUpFileSystemRequest,
   CreateCfsPGroupRequest,
   DescribeMigrationTasksResponse,
@@ -67,6 +68,7 @@ import {
   PGroup,
   SetUserQuotaRequest,
   CreateAutoSnapshotPolicyResponse,
+  ModifyFileSystemAutoScaleUpRuleResponse,
   AvailableType,
   CreateCfsSnapshotResponse,
   UserQuota,
@@ -373,6 +375,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserQuotaResponse) => void
   ): Promise<DescribeUserQuotaResponse> {
     return this.request("DescribeUserQuota", req, cb)
+  }
+
+  /**
+   * 用来设置文件系统扩容策略
+   */
+  async ModifyFileSystemAutoScaleUpRule(
+    req: ModifyFileSystemAutoScaleUpRuleRequest,
+    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
+  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
+    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
   }
 
   /**

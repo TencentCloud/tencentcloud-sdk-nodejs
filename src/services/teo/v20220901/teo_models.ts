@@ -4021,13 +4021,13 @@ export interface DescribeTimingL7SourceDataResponse {
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 时序流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TimingDataRecords: Array<TimingDataRecord>
+  TimingDataRecords?: Array<TimingDataRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7048,7 +7048,7 @@ export interface DescribeTimingL7SourceDataRequest {
   MetricNames: Array<string>
 
   /**
-   * 站点集合，不填默认选择全部站点。
+   * 待查询的站点列表，此参数必填。
    */
   ZoneIds?: Array<string>
 

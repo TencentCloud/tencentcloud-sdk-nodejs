@@ -5,15 +5,15 @@ export interface TextTranslateResponse {
     /**
       * 翻译后的文本
       */
-    TargetText: string;
+    TargetText?: string;
     /**
       * 源语言，详见入参Target
       */
-    Source: string;
+    Source?: string;
     /**
       * 目标语言，详见入参Target
       */
-    Target: string;
+    Target?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -183,17 +183,17 @@ export interface LanguageDetectRequest {
  */
 export interface TextTranslateBatchResponse {
     /**
-      * 源语言，详见入参Target
+      * 源语言，详见入参Source
       */
-    Source: string;
+    Source?: string;
     /**
       * 目标语言，详见入参Target
       */
-    Target: string;
+    Target?: string;
     /**
       * 翻译后的文本列表
       */
-    TargetTextList: Array<string>;
+    TargetTextList?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -254,7 +254,7 @@ hi：印地语
       */
     ProjectId: number;
     /**
-      * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000字符。
+      * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于6000字符。
       */
     SourceTextList: Array<string>;
 }
@@ -288,7 +288,7 @@ export interface GetFileTranslateResponse {
     /**
       * 任务id
       */
-    Data: GetFileTranslateData;
+    Data?: GetFileTranslateData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -346,7 +346,7 @@ export interface FileTranslateResponse {
     /**
       * 文件翻译的请求返回结果，包含结果查询需要的TaskId
       */
-    Data: Task;
+    Data?: Task;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -405,7 +405,7 @@ lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（�
       */
     SourceType?: number;
     /**
-      * 需要翻译文件url
+      * 需要翻译文件url，文件需小于100MB。
       */
     Url?: string;
     /**
@@ -413,7 +413,7 @@ lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（�
       */
     BasicDocumentType?: string;
     /**
-      * 回调url
+      * 回调url，文件大于10MB，建议采用回调方式；回调时，所有内容会放入 Body 中。
       */
     CallbackUrl?: string;
     /**
@@ -426,7 +426,7 @@ lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（�
  */
 export interface TextTranslateRequest {
     /**
-      * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。
+      * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于6000字符。
       */
     SourceText: string;
     /**

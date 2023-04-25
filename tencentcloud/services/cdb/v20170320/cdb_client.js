@@ -116,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdbZoneConfig", req, cb);
     }
     /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
      * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
      */
     async StopRollback(req, cb) {
@@ -168,6 +174,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyBackupDownloadRestriction(req, cb) {
         return this.request("ModifyBackupDownloadRestriction", req, cb);
+    }
+    /**
+     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+     */
+    async DescribeParamTemplates(req, cb) {
+        return this.request("DescribeParamTemplates", req, cb);
     }
     /**
      * 本接口(DescribeTasks)用于查询云数据库实例任务列表。
@@ -245,6 +257,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+     */
+    async RenewDBInstance(req, cb) {
+        return this.request("RenewDBInstance", req, cb);
     }
     /**
      * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息，仅支持主实例和灾备实例，不支持只读实例。
@@ -339,6 +357,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddTimeWindow", req, cb);
     }
     /**
+     * 查询实例支持代理版本和参数
+     */
+    async DescribeProxySupportParam(req, cb) {
+        return this.request("DescribeProxySupportParam", req, cb);
+    }
+    /**
      * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
      */
     async DescribeDeviceMonitorInfo(req, cb) {
@@ -369,6 +393,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBackupTables(req, cb) {
         return this.request("DescribeBackupTables", req, cb);
+    }
+    /**
+     * 数据库代理增加代理地址
+     */
+    async CreateCdbProxyAddress(req, cb) {
+        return this.request("CreateCdbProxyAddress", req, cb);
     }
     /**
      * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
@@ -472,6 +502,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccounts", req, cb);
     }
     /**
+     * 调整数据库代理配置
+     */
+    async AdjustCdbProxy(req, cb) {
+        return this.request("AdjustCdbProxy", req, cb);
+    }
+    /**
      * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
      */
     async UpgradeDBInstanceEngineVersion(req, cb) {
@@ -532,10 +568,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRollbackRangeTime", req, cb);
     }
     /**
-     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
+     * 请求关闭数据库代理地址
      */
-    async DescribeParamTemplates(req, cb) {
-        return this.request("DescribeParamTemplates", req, cb);
+    async CloseCdbProxyAddress(req, cb) {
+        return this.request("CloseCdbProxyAddress", req, cb);
     }
     /**
      * 本接口(DeleteBackup)用于删除数据库备份。本接口只支持删除手动发起的备份。
@@ -558,6 +594,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRoMinScale", req, cb);
     }
     /**
+     * 修改代理地址描述信息
+     */
+    async ModifyCdbProxyAddressDesc(req, cb) {
+        return this.request("ModifyCdbProxyAddressDesc", req, cb);
+    }
+    /**
      * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
      */
     async ModifyAccountHost(req, cb) {
@@ -568,6 +610,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StartReplication(req, cb) {
         return this.request("StartReplication", req, cb);
+    }
+    /**
+     * 调整数据库代理地址配置
+     */
+    async AdjustCdbProxyAddress(req, cb) {
+        return this.request("AdjustCdbProxyAddress", req, cb);
+    }
+    /**
+     * 查询数据库代理详情信息
+     */
+    async DescribeCdbProxyInfo(req, cb) {
+        return this.request("DescribeCdbProxyInfo", req, cb);
     }
     /**
      * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
@@ -636,12 +690,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
-     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
 
-本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
      */
-    async InitDBInstances(req, cb) {
-        return this.request("InitDBInstances", req, cb);
+    async DescribeDBPrice(req, cb) {
+        return this.request("DescribeDBPrice", req, cb);
     }
     /**
      * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
@@ -774,12 +828,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDatabases", req, cb);
     }
     /**
-     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
+     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
 
-注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
+本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
      */
-    async DescribeDBPrice(req, cb) {
-        return this.request("DescribeDBPrice", req, cb);
+    async InitDBInstances(req, cb) {
+        return this.request("InitDBInstances", req, cb);
+    }
+    /**
+     * 主实例创建数据库代理
+     */
+    async CreateCdbProxy(req, cb) {
+        return this.request("CreateCdbProxy", req, cb);
     }
     /**
      * 本接口(ModifyAutoRenewFlag)用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
@@ -794,10 +854,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchCDBProxy", req, cb);
     }
     /**
-     * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
+     * 配置数据库代理参数
      */
-    async RenewDBInstance(req, cb) {
-        return this.request("RenewDBInstance", req, cb);
+    async ModifyCdbProxyParam(req, cb) {
+        return this.request("ModifyCdbProxyParam", req, cb);
     }
     /**
      * 该接口（StartBatchRollback）用于批量回档云数据库实例的库表。
@@ -840,10 +900,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryCDBProxy", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 修改数据库代理地址VPC信息
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async ModifyCdbProxyAddressVipAndVPort(req, cb) {
+        return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb);
     }
     /**
      * 本接口(DeleteAuditRule)用于删除用户的审计规则。

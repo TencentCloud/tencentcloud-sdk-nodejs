@@ -46,6 +46,11 @@ export interface RegionDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FeatureBitmap: number;
+    /**
+      * 接入区域支持的能力
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportFeature: SupportFeature;
 }
 /**
  * 网络加速的目标地址信息
@@ -94,6 +99,15 @@ export interface DescribeUDPListenersRequest {
       * 过滤条件，支持按照端口或监听器名称进行模糊查询，该参数不能与ListenerName和Port同时使用
       */
     SearchValue?: string;
+}
+/**
+ * 加速区域支持的能力，包括支持的网络类型等等。
+ */
+export interface SupportFeature {
+    /**
+      * 接入区域支持的网络类型列表，normal表示支持常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全eip。
+      */
+    NetworkType: Array<string>;
 }
 /**
  * DescribeGlobalDomains请求参数结构体
