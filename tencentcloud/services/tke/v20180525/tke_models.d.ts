@@ -2619,7 +2619,7 @@ export interface CreateTKEEdgeClusterResponse {
     /**
       * 边缘计算集群Id
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4194,7 +4194,7 @@ export interface CreateEdgeCVMInstancesResponse {
     /**
       * cvm id 列表
       */
-    CvmIdSet: Array<string>;
+    CvmIdSet?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7935,6 +7935,10 @@ export interface DescribeTKEEdgeClusterCredentialResponse {
       */
     GridDaemon?: string;
     /**
+      * 公网访问kins集群
+      */
+    UnitCluster?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -8369,6 +8373,10 @@ export interface CreateTKEEdgeClusterRequest {
       * 边缘组件镜像仓库前缀
       */
     RegistryPrefix?: string;
+    /**
+      * 集群绑定的云标签
+      */
+    TagSpecification?: TagSpecification;
 }
 /**
  * CreateClusterVirtualNodePool返回参数结构体
@@ -9245,20 +9253,20 @@ export interface DescribeTKEEdgeScriptResponse {
     /**
       * 下载链接
       */
-    Link: string;
+    Link?: string;
     /**
       * 下载需要的token
       */
-    Token: string;
+    Token?: string;
     /**
       * 下载命令
       */
-    Command: string;
+    Command?: string;
     /**
       * edgectl脚本版本，默认拉取最新版本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ScriptVersion: string;
+    ScriptVersion?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -191,6 +191,10 @@ export interface RollbackSnapshotRequest {
       * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
       */
     DomainId?: number;
+    /**
+      * 指定需要回滚的记录
+      */
+    RecordList?: Array<SnapshotRecord>;
 }
 /**
  * DeleteDomainAlias返回参数结构体
@@ -1266,6 +1270,10 @@ export interface DomainAliasInfo {
       * 域名别名
       */
     DomainAlias: string;
+    /**
+      * 别名状态：1-DNS不正确；2-正常；3-封禁。
+      */
+    Status?: number;
 }
 /**
  * CreateDeal请求参数结构体
@@ -1816,6 +1824,16 @@ export interface SnapshotRecord {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MX?: string;
+    /**
+      * 权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weight?: string;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason?: string;
 }
 /**
  * ModifyDomainUnlock返回参数结构体

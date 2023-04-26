@@ -37,6 +37,7 @@ import {
   AlgDetectRule,
   SecEntryValue,
   DescribeZonesRequest,
+  L4OfflineLog,
   DiffIPWhitelist,
   DescribeLogTopicTasksRequest,
   CreateCredentialRequest,
@@ -121,7 +122,8 @@ import {
   ModifyZoneSettingResponse,
   AlgDetectJS,
   AccelerationDomain,
-  UpdateOriginProtectionIPWhitelistRequest,
+  DeleteSecurityIPGroupRequest,
+  RateLimitTemplateDetail,
   Origin,
   WafConfig,
   DescribeSpeedTestingDetailsResponse,
@@ -148,6 +150,7 @@ import {
   WebSocket,
   DescribeWebProtectionTopDataRequest,
   SpeedTestingDetailData,
+  DeleteSecurityIPGroupResponse,
   DDoSBlockData,
   VanityNameServers,
   RuleItem,
@@ -162,12 +165,13 @@ import {
   MaxAge,
   ModifyAliasDomainStatusResponse,
   RuleCodeActionParams,
+  IPGroup,
   ModifyRulePriorityRequest,
   DescribeTimingL7AnalysisDataRequest,
   CreatePrefetchTaskResponse,
   NoCache,
   DescribeDefaultCertificatesRequest,
-  DescribeAliasDomainsResponse,
+  BindZoneToPlanRequest,
   DescribeWebProtectionHitRuleDetailRequest,
   IPWhitelist,
   DDoS,
@@ -212,8 +216,9 @@ import {
   CreateRuleRequest,
   ModifyZoneStatusRequest,
   TopEntry,
+  VanityNameServersIps,
   SlowPostConfig,
-  RateLimitTemplateDetail,
+  AccelerateMainland,
   ExceptUserRule,
   CreateApplicationProxyRuleResponse,
   RateLimitUserRule,
@@ -233,15 +238,18 @@ import {
   PostMaxSize,
   Sv,
   Rule,
+  SpeedTestingMetricData,
   Filter,
   CreateAccelerationDomainResponse,
   DescribeTimingL4DataResponse,
   CreateZoneResponse,
+  UpdateOriginProtectionIPWhitelistRequest,
   Action,
   SpeedTestingStatistics,
   DescribeSpeedTestingQuotaRequest,
   ApplicationProxy,
   ModifyApplicationProxyResponse,
+  ModifySecurityIPGroupResponse,
   ReclaimZoneRequest,
   CacheKey,
   ModifyOriginGroupRequest,
@@ -258,7 +266,7 @@ import {
   DescribeSpeedTestingDetailsRequest,
   DescribeTimingL7SourceDataRequest,
   DropPageConfig,
-  SpeedTestingMetricData,
+  ReclaimZoneResponse,
   UpdateOriginProtectionIPWhitelistResponse,
   SecEntry,
   DescribeIdentificationsRequest,
@@ -268,7 +276,7 @@ import {
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
   NormalAction,
-  BindZoneToPlanRequest,
+  DescribeAliasDomainsResponse,
   CreateAccelerationDomainRequest,
   FollowOrigin,
   DeleteZoneRequest,
@@ -281,7 +289,7 @@ import {
   ModifyApplicationProxyRuleResponse,
   DescribeZoneSettingResponse,
   AiRule,
-  L4OfflineLog,
+  CreateSecurityIPGroupRequest,
   DropPageDetail,
   DeleteRulesResponse,
   QueryCondition,
@@ -315,14 +323,14 @@ import {
   SubRuleItem,
   DescribeWebManagedRulesLogRequest,
   Task,
-  ReclaimZoneResponse,
+  CreateSecurityIPGroupResponse,
   WafGroup,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
   DescribeDDoSAttackEventRequest,
   OriginGroup,
   DescribeWebProtectionTopDataResponse,
-  VanityNameServersIps,
+  ModifySecurityIPGroupRequest,
   DescribeWebManagedRulesHitRuleDetailResponse,
   DescribeWebProtectionClientIpListRequest,
   IdentifyZoneRequest,
@@ -666,6 +674,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安全 IP 组
+   */
+  async CreateSecurityIPGroup(
+    req: CreateSecurityIPGroupRequest,
+    cb?: (error: string, rep: CreateSecurityIPGroupResponse) => void
+  ): Promise<CreateSecurityIPGroupResponse> {
+    return this.request("CreateSecurityIPGroup", req, cb)
+  }
+
+  /**
    * 查询清除缓存历史记录
    */
   async DescribePurgeTasks(
@@ -966,6 +984,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改安全 IP 组。
+   */
+  async ModifySecurityIPGroup(
+    req: ModifySecurityIPGroupRequest,
+    cb?: (error: string, rep: ModifySecurityIPGroupResponse) => void
+  ): Promise<ModifySecurityIPGroupResponse> {
+    return this.request("ModifySecurityIPGroup", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDDoSAttackTopData）用于查询DDoS攻击Top数据。
    */
   async DescribeDDoSAttackTopData(
@@ -1143,6 +1171,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZoneSettingResponse) => void
   ): Promise<DescribeZoneSettingResponse> {
     return this.request("DescribeZoneSetting", req, cb)
+  }
+
+  /**
+   * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。
+   */
+  async DeleteSecurityIPGroup(
+    req: DeleteSecurityIPGroupRequest,
+    cb?: (error: string, rep: DeleteSecurityIPGroupResponse) => void
+  ): Promise<DeleteSecurityIPGroupResponse> {
+    return this.request("DeleteSecurityIPGroup", req, cb)
   }
 
   /**

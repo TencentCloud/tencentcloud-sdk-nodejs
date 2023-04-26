@@ -68,9 +68,19 @@ it("nlp.v20190408.DependencyParsing", async function () {
     }
 })
 
-it("nlp.v20190408.WordEmbedding", async function () {
+it("nlp.v20190408.EvaluateSentenceSimilarity", async function () {
     try {
-       const data = await client.WordEmbedding({})
+       const data = await client.EvaluateSentenceSimilarity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.GenerateKeywordSentence", async function () {
+    try {
+       const data = await client.GenerateKeywordSentence({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +91,16 @@ it("nlp.v20190408.WordEmbedding", async function () {
 it("nlp.v20190408.DescribeDicts", async function () {
     try {
        const data = await client.DescribeDicts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.TextWriting", async function () {
+    try {
+       const data = await client.TextWriting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +121,16 @@ it("nlp.v20190408.CreateDict", async function () {
 it("nlp.v20190408.GeneratePoetry", async function () {
     try {
        const data = await client.GeneratePoetry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.ParseWords", async function () {
+    try {
+       const data = await client.ParseWords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("nlp.v20190408.DescribeWordItems", async function () {
 it("nlp.v20190408.TextCorrection", async function () {
     try {
        const data = await client.TextCorrection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.EvaluateWordSimilarity", async function () {
+    try {
+       const data = await client.EvaluateWordSimilarity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +268,16 @@ it("nlp.v20190408.LexicalAnalysis", async function () {
     }
 })
 
+it("nlp.v20190408.RetrieveSimilarWords", async function () {
+    try {
+       const data = await client.RetrieveSimilarWords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.KeywordsExtraction", async function () {
     try {
        const data = await client.KeywordsExtraction({})
@@ -238,9 +288,39 @@ it("nlp.v20190408.KeywordsExtraction", async function () {
     }
 })
 
+it("nlp.v20190408.TextEmbellish", async function () {
+    try {
+       const data = await client.TextEmbellish({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.TextCorrectionPro", async function () {
     try {
        const data = await client.TextCorrectionPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.WordEmbedding", async function () {
+    try {
+       const data = await client.WordEmbedding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.SentenceCorrection", async function () {
+    try {
+       const data = await client.SentenceCorrection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

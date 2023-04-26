@@ -2330,7 +2330,7 @@ export interface CreateCloudRecordingRequest {
  */
 export interface OutputParams {
   /**
-   * 直播流 ID，由用户自定义设置，该流 ID 不能与用户旁路的流 ID 相同。
+   * 直播流 ID，由用户自定义设置，该流 ID 不能与用户旁路的流 ID 相同，限制64字节。
    */
   StreamId: string
 

@@ -1329,7 +1329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 菲律宾SSSID识别
+   * 菲律宾SSSID/UMID识别
    */
   async RecognizePhilippinesSssIDOCR(
     req: RecognizePhilippinesSssIDOCRRequest,

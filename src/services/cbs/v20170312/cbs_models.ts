@@ -412,8 +412,9 @@ export interface BindAutoSnapshotPolicyRequest {
  */
 export interface CreateSnapshotResponse {
   /**
-   * 新创建的快照ID。
-   */
+      * 新创建的快照ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   SnapshotId?: string
 
   /**
@@ -1106,6 +1107,12 @@ export interface Disk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ErrorPrompt?: string
+
+  /**
+      * 云盘是否开启性能突发
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BurstPerformance?: boolean
 }
 
 /**

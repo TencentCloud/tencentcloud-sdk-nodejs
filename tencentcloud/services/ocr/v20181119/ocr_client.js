@@ -809,7 +809,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MainlandPermitOCR", req, cb);
     }
     /**
-     * 菲律宾SSSID识别
+     * 菲律宾SSSID/UMID识别
      */
     async RecognizePhilippinesSssIDOCR(req, cb) {
         return this.request("RecognizePhilippinesSssIDOCR", req, cb);

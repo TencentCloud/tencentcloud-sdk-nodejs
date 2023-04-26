@@ -450,11 +450,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetCcnRegionBandwidthLimits", req, cb);
     }
     /**
-     * 本接口（ReplaceRouteTableAssociation）用于修改子网（Subnet）关联的路由表（RouteTable）。
-* 一个子网只能关联一个路由表。
+     * 本接口（GenerateVpnConnectionDefaultHealthCheckIp）用于获取一对VPN通道健康检查地址。
      */
-    async ReplaceRouteTableAssociation(req, cb) {
-        return this.request("ReplaceRouteTableAssociation", req, cb);
+    async GenerateVpnConnectionDefaultHealthCheckIp(req, cb) {
+        return this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, cb);
     }
     /**
      * 本接口（DescribeTemplateLimits）用于查询参数模板配额列表。
@@ -677,6 +676,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFlowLogs(req, cb) {
         return this.request("DescribeFlowLogs", req, cb);
+    }
+    /**
+     * 本接口（ReplaceRouteTableAssociation）用于修改子网（Subnet）关联的路由表（RouteTable）。
+* 一个子网只能关联一个路由表。
+     */
+    async ReplaceRouteTableAssociation(req, cb) {
+        return this.request("ReplaceRouteTableAssociation", req, cb);
     }
     /**
      * 本接口（DescribeVpcIpv6Addresses）用于查询 `VPC` `IPv6` 信息。

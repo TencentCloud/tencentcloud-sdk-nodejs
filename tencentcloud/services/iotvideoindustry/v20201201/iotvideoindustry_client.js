@@ -406,7 +406,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMessageForward", req, cb);
     }
     /**
-     * 本接口(DescribeDevicesList) 用于获取设备列表，支持模糊搜索
+     * 本接口(DescribeDeviceList) 用于获取设备列表，支持模糊搜索
      */
     async DescribeDeviceList(req, cb) {
         return this.request("DescribeDeviceList", req, cb);

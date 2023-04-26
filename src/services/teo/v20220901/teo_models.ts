@@ -389,7 +389,7 @@ export interface Https {
   OcspStapling?: string
 
   /**
-      * Tls版本设置，取值有：
+      * Tls 版本设置，取值有：
 <li>TLSv1：TLSv1版本；</li>
 <li>TLSV1.1：TLSv1.1版本；</li>
 <li>TLSV1.2：TLSv1.2版本；</li>
@@ -536,6 +536,44 @@ export interface DescribeZonesRequest {
 <li> desc：从大到小排序。</li>不填写使用默认值desc。
       */
   Direction?: string
+}
+
+/**
+ * 离线日志详细信息
+ */
+export interface L4OfflineLog {
+  /**
+   * 日志打包开始时间。
+   */
+  LogTime: number
+
+  /**
+      * 四层实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyId: string
+
+  /**
+   * 原始大小 单位byte。
+   */
+  Size: number
+
+  /**
+   * 下载地址。
+   */
+  Url: string
+
+  /**
+   * 日志数据包名。
+   */
+  LogPacketName: string
+
+  /**
+      * 加速区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+      */
+  Area: string
 }
 
 /**
@@ -1088,7 +1126,7 @@ export interface DescribeClientRuleListRequest {
  */
 export interface ModifyZoneSettingRequest {
   /**
-   * 待变更的站点ID。
+   * 待变更的站点 ID。
    */
   ZoneId: string
 
@@ -1117,13 +1155,13 @@ export interface ModifyZoneSettingRequest {
   OfflineCache?: OfflineCache
 
   /**
-      * Quic访问配置。
+      * Quic 访问配置。
 不填写表示保持原有配置。
       */
   Quic?: Quic
 
   /**
-      * Post请求传输配置。
+      * Post 请求传输配置。
 不填写表示保持原有配置。
       */
   PostMaxSize?: PostMaxSize
@@ -1135,19 +1173,19 @@ export interface ModifyZoneSettingRequest {
   Compression?: Compression
 
   /**
-      * Http2回源配置。
+      * Http2 回源配置。
 不填写表示保持原有配置。
       */
   UpstreamHttp2?: UpstreamHttp2
 
   /**
-      * 访问协议强制Https跳转配置。
+      * 访问协议强制 Https 跳转配置。
 不填写表示保持原有配置。
       */
   ForceRedirect?: ForceRedirect
 
   /**
-      * Https加速配置。
+      * Https 加速配置。
 不填写表示保持原有配置。
       */
   Https?: Https
@@ -1165,13 +1203,13 @@ export interface ModifyZoneSettingRequest {
   SmartRouting?: SmartRouting
 
   /**
-      * WebSocket配置。
+      * WebSocket 配置。
 不填写表示保持原有配置。
       */
   WebSocket?: WebSocket
 
   /**
-      * 客户端IP回源请求头配置。
+      * 客户端 IP 回源请求头配置。
 不填写表示保持原有配置。
       */
   ClientIpHeader?: ClientIpHeader
@@ -1183,22 +1221,28 @@ export interface ModifyZoneSettingRequest {
   CachePrefresh?: CachePrefresh
 
   /**
-      * Ipv6访问配置。
+      * Ipv6 访问配置。
 不填写表示保持原有配置。
       */
   Ipv6?: Ipv6
 
   /**
-      * 回源时是否携带客户端IP所属地域信息的配置。
+      * 回源时是否携带客户端 IP 所属地域信息的配置。
 不填写表示保持原有配置。
       */
   ClientIpCountry?: ClientIpCountry
 
   /**
-      * Grpc协议支持配置。
+      * Grpc 协议支持配置。
 不填写表示保持原有配置。
       */
   Grpc?: Grpc
+
+  /**
+      * 图片优化配置。
+不填写表示关闭。
+      */
+  ImageOptimize?: ImageOptimize
 }
 
 /**
@@ -1231,7 +1275,7 @@ export interface CreateApplicationProxyResponse {
   /**
    * 新增的四层代理应用ID。
    */
-  ProxyId: string
+  ProxyId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2701,7 +2745,7 @@ export interface ClientIpHeader {
   Switch: string
 
   /**
-      * 回源时，存放客户端IP的请求头名称。
+      * 回源时，存放客户端 IP 的请求头名称。
 为空则使用默认值：X-Forwarded-IP。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -2782,7 +2826,7 @@ export interface DescribeDDoSAttackTopDataRequest {
  */
 export interface Quic {
   /**
-      * 是否开启Quic配置，取值有：
+      * 是否开启 Quic 配置，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
       */
@@ -2794,7 +2838,7 @@ export interface Quic {
  */
 export interface Ipv6 {
   /**
-      * Ipv6访问功能配置，取值有：
+      * Ipv6 访问功能配置，取值有：
 <li>on：开启Ipv6访问功能；</li>
 <li>off：关闭Ipv6访问功能。</li>
       */
@@ -3069,13 +3113,64 @@ export interface AccelerationDomain {
 }
 
 /**
- * UpdateOriginProtectionIPWhitelist请求参数结构体
+ * DeleteSecurityIPGroup请求参数结构体
  */
-export interface UpdateOriginProtectionIPWhitelistRequest {
+export interface DeleteSecurityIPGroupRequest {
   /**
-   * 站点ID。
+   * 站点 Id。
    */
   ZoneId: string
+
+  /**
+   * IP 组 Id。
+   */
+  GroupId: number
+}
+
+/**
+ * 模板当前详细配置
+ */
+export interface RateLimitTemplateDetail {
+  /**
+      * 模板等级名称，取值有：
+<li>sup_loose：超级宽松；</li>
+<li>loose：宽松；</li>
+<li>emergency：紧急；</li>
+<li>normal：适中；</li>
+<li>strict：严格；</li>
+<li>close：关闭，仅精准速率限制生效。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode: string
+
+  /**
+   * 唯一id。
+   */
+  ID?: number
+
+  /**
+      * 模板处置方式，取值有：
+<li>alg：JavaScript挑战；</li>
+<li>monitor：观察。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 惩罚时间，取值范围0-2天，单位秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishTime?: number
+
+  /**
+   * 统计阈值，单位是次，取值范围0-4294967294。
+   */
+  Threshold?: number
+
+  /**
+   * 统计周期，取值范围0-120秒。
+   */
+  Period?: number
 }
 
 /**
@@ -3104,7 +3199,7 @@ export interface Origin {
   OriginPullProtocol?: string
 
   /**
-      * 源站为腾讯云COS时，是否为私有访问bucket，取值有：
+      * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
 <li>on：私有访问；</li>
 <li>off：公共访问。</li>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3367,7 +3462,7 @@ export interface ClientIpCountry {
   Switch: string
 
   /**
-      * 存放客户端IP所属地域信息的请求头名称，当Switch=on时有效。
+      * 存放客户端 IP 所属地域信息的请求头名称，当 Switch=on 时有效。
 为空则使用默认值：EO-Client-IPCountry。
       */
   HeaderName?: string
@@ -3931,6 +4026,16 @@ export interface SpeedTestingDetailData {
 }
 
 /**
+ * DeleteSecurityIPGroup返回参数结构体
+ */
+export interface DeleteSecurityIPGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DDoS封禁解封信息
  */
 export interface DDoSBlockData {
@@ -4313,6 +4418,26 @@ export interface RuleCodeActionParams {
 }
 
 /**
+ * IP 网段组
+ */
+export interface IPGroup {
+  /**
+   * 组 Id，创建时填 0 即可。
+   */
+  GroupId: number
+
+  /**
+   * 组名称。
+   */
+  Name: string
+
+  /**
+   * IP 组内容，可以填入 IP 及 IP 掩码。
+   */
+  Content: Array<string>
+}
+
+/**
  * ModifyRulePriority请求参数结构体
  */
 export interface ModifyRulePriorityRequest {
@@ -4454,23 +4579,18 @@ export interface DescribeDefaultCertificatesRequest {
 }
 
 /**
- * DescribeAliasDomains返回参数结构体
+ * BindZoneToPlan请求参数结构体
  */
-export interface DescribeAliasDomainsResponse {
+export interface BindZoneToPlanRequest {
   /**
-   * 符合条件的别称域名个数。
+   * 未绑定套餐的站点ID。
    */
-  TotalCount: number
+  ZoneId: string
 
   /**
-   * 别称域名详细信息列表。
+   * 待绑定的目标套餐ID。
    */
-  AliasDomains: Array<AliasDomain>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PlanId: string
 }
 
 /**
@@ -5052,18 +5172,18 @@ export interface ForceRedirect {
  */
 export interface ModifyApplicationProxyRequest {
   /**
-   * 站点ID。
+   * 站点 ID。
    */
   ZoneId: string
 
   /**
-   * 代理ID。
+   * 代理 ID。
    */
   ProxyId: string
 
   /**
-      * 当ProxyType=hostname时，表示域名或子域名；
-当ProxyType=instance时，表示代理名称。
+      * 当 ProxyType=hostname 时，表示域名或子域名；
+当 ProxyType=instance 时，表示代理名称。
       */
   ProxyName: string
 
@@ -5081,9 +5201,14 @@ export interface ModifyApplicationProxyRequest {
   ProxyType?: string
 
   /**
-   * Ipv6访问配置，不填写保持原有配置。
+   * Ipv6 访问配置，不填写保持原有配置。
    */
   Ipv6?: Ipv6
+
+  /**
+   * 中国大陆加速优化配置。 不填写表示保持原有配置。
+   */
+  AccelerateMainland?: AccelerateMainland
 }
 
 /**
@@ -5599,7 +5724,7 @@ export interface Hsts {
   Switch: string
 
   /**
-      * MaxAge数值。单位为秒，最大值为1天。
+      * MaxAge 数值。单位为秒，最大值为1天。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxAge?: number
@@ -5724,6 +5849,21 @@ export interface TopEntry {
 }
 
 /**
+ * 自定义名字服务器 IP 信息
+ */
+export interface VanityNameServersIps {
+  /**
+   * 自定义名字服务器名称。
+   */
+  Name: string
+
+  /**
+   * 自定义名字服务器 IPv4 地址。
+   */
+  IPv4: string
+}
+
+/**
  * 慢速攻击配置。
  */
 export interface SlowPostConfig {
@@ -5762,49 +5902,15 @@ export interface SlowPostConfig {
 }
 
 /**
- * 模板当前详细配置
+ * 中国大陆加速优化配置。
  */
-export interface RateLimitTemplateDetail {
+export interface AccelerateMainland {
   /**
-      * 模板等级名称，取值有：
-<li>sup_loose：超级宽松；</li>
-<li>loose：宽松；</li>
-<li>emergency：紧急；</li>
-<li>normal：适中；</li>
-<li>strict：严格；</li>
-<li>close：关闭，仅精准速率限制生效。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+      * 是否开启中国大陆加速优化配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
       */
-  Mode: string
-
-  /**
-   * 唯一id。
-   */
-  ID?: number
-
-  /**
-      * 模板处置方式，取值有：
-<li>alg：JavaScript挑战；</li>
-<li>monitor：观察。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Action?: string
-
-  /**
-      * 惩罚时间，取值范围0-2天，单位秒。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PunishTime?: number
-
-  /**
-   * 统计阈值，单位是次，取值范围0-4294967294。
-   */
-  Threshold?: number
-
-  /**
-   * 统计周期，取值范围0-120秒。
-   */
-  Period?: number
+  Switch: string
 }
 
 /**
@@ -6137,13 +6243,13 @@ export interface SpeedTestingConfig {
  */
 export interface CreateApplicationProxyRequest {
   /**
-   * 站点ID。
+   * 站点 ID。
    */
   ZoneId: string
 
   /**
-      * 当ProxyType=hostname时，表示域名或子域名；
-当ProxyType=instance时，表示代理名称。
+      * 当 ProxyType=hostname 时，表示域名或子域名；
+当 ProxyType=instance 时，表示代理名称。
       */
   ProxyName: string
 
@@ -6182,8 +6288,8 @@ export interface CreateApplicationProxyRequest {
   SessionPersistTime?: number
 
   /**
-      * Ipv6访问配置。
-不填写表示关闭Ipv6访问。
+      * Ipv6 访问配置。
+不填写表示关闭 Ipv6 访问。
       */
   Ipv6?: Ipv6
 
@@ -6192,6 +6298,11 @@ export interface CreateApplicationProxyRequest {
 不填写则不创建规则。
       */
   ApplicationProxyRules?: Array<ApplicationProxyRule>
+
+  /**
+   * 中国大陆加速优化配置。不填写表示关闭中国大陆加速优化。
+   */
+  AccelerateMainland?: AccelerateMainland
 }
 
 /**
@@ -6331,7 +6442,7 @@ export interface IntelligenceRule {
  */
 export interface PostMaxSize {
   /**
-      * 是否开启POST请求上传文件限制，平台默认为限制为32MB，取值有：
+      * 是否开启 POST 请求上传文件限制，平台默认为限制为32MB，取值有：
 <li>on：开启限制；</li>
 <li>off：关闭限制。</li>
       */
@@ -6378,6 +6489,53 @@ export interface Rule {
    * 嵌套规则。
    */
   SubRules?: Array<SubRuleItem>
+}
+
+/**
+ * 不同维度的测速数据。
+ */
+export interface SpeedTestingMetricData {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+
+  /**
+   * 站点名称。
+   */
+  ZoneName: string
+
+  /**
+   * 源站拨测信息。
+   */
+  OriginSpeedTestingInfo: Array<SpeedTestingInfo>
+
+  /**
+   * EO 拨测信息。
+   */
+  ProxySpeedTestingInfo: Array<SpeedTestingInfo>
+
+  /**
+   * 站点状态。
+   */
+  SpeedTestingStatus: SpeedTestingStatus
+
+  /**
+   * 优化建议。
+   */
+  OptimizeAction: Array<OptimizeAction>
+
+  /**
+      * EO 整体性能，单位ms。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyLoadTime: number
+
+  /**
+      * 源站整体性能，单位ms。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginLoadTime: number
 }
 
 /**
@@ -6441,6 +6599,16 @@ export interface CreateZoneResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateOriginProtectionIPWhitelist请求参数结构体
+ */
+export interface UpdateOriginProtectionIPWhitelistRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
 }
 
 /**
@@ -6687,6 +6855,16 @@ export interface ModifyApplicationProxyResponse {
 }
 
 /**
+ * ModifySecurityIPGroup返回参数结构体
+ */
+export interface ModifySecurityIPGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReclaimZone请求参数结构体
  */
 export interface ReclaimZoneRequest {
@@ -6717,7 +6895,7 @@ export interface CacheKey {
   IgnoreCase?: string
 
   /**
-      * CacheKey中包含请求参数。
+      * CacheKey 中包含请求参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QueryString?: QueryString
@@ -7104,50 +7282,13 @@ export interface DropPageConfig {
 }
 
 /**
- * 不同维度的测速数据。
+ * ReclaimZone返回参数结构体
  */
-export interface SpeedTestingMetricData {
+export interface ReclaimZoneResponse {
   /**
-   * 站点ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-
-  /**
-   * 源站拨测信息。
-   */
-  OriginSpeedTestingInfo: Array<SpeedTestingInfo>
-
-  /**
-   * EO 拨测信息。
-   */
-  ProxySpeedTestingInfo: Array<SpeedTestingInfo>
-
-  /**
-   * 站点状态。
-   */
-  SpeedTestingStatus: SpeedTestingStatus
-
-  /**
-   * 优化建议。
-   */
-  OptimizeAction: Array<OptimizeAction>
-
-  /**
-      * EO 整体性能，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProxyLoadTime: number
-
-  /**
-      * 源站整体性能，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginLoadTime: number
+  RequestId?: string
 }
 
 /**
@@ -7303,18 +7444,23 @@ export interface NormalAction {
 }
 
 /**
- * BindZoneToPlan请求参数结构体
+ * DescribeAliasDomains返回参数结构体
  */
-export interface BindZoneToPlanRequest {
+export interface DescribeAliasDomainsResponse {
   /**
-   * 未绑定套餐的站点ID。
+   * 符合条件的别称域名个数。
    */
-  ZoneId: string
+  TotalCount: number
 
   /**
-   * 待绑定的目标套餐ID。
+   * 别称域名详细信息列表。
    */
-  PlanId: string
+  AliasDomains: Array<AliasDomain>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7669,41 +7815,18 @@ export interface AiRule {
 }
 
 /**
- * 离线日志详细信息
+ * CreateSecurityIPGroup请求参数结构体
  */
-export interface L4OfflineLog {
+export interface CreateSecurityIPGroupRequest {
   /**
-   * 日志打包开始时间。
+   * 站点 Id。
    */
-  LogTime: number
+  ZoneId: string
 
   /**
-      * 四层实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProxyId: string
-
-  /**
-   * 原始大小 单位byte。
+   * IP 组信息。
    */
-  Size: number
-
-  /**
-   * 下载地址。
-   */
-  Url: string
-
-  /**
-   * 日志数据包名。
-   */
-  LogPacketName: string
-
-  /**
-      * 加速区域，取值有：
-<li>mainland：中国大陆境内;</li>
-<li>overseas：全球（不含中国大陆）。</li>
-      */
-  Area: string
+  IPGroup: IPGroup
 }
 
 /**
@@ -8665,9 +8788,14 @@ export interface Task {
 }
 
 /**
- * ReclaimZone返回参数结构体
+ * CreateSecurityIPGroup返回参数结构体
  */
-export interface ReclaimZoneResponse {
+export interface CreateSecurityIPGroupResponse {
+  /**
+   * IP 组 Id。
+   */
+  GroupId?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8881,18 +9009,26 @@ export interface DescribeWebProtectionTopDataResponse {
 }
 
 /**
- * 自定义名字服务器 IP 信息
+ * ModifySecurityIPGroup请求参数结构体
  */
-export interface VanityNameServersIps {
+export interface ModifySecurityIPGroupRequest {
   /**
-   * 自定义名字服务器名称。
+   * 站点 Id。
    */
-  Name: string
+  ZoneId: string
 
   /**
-   * 自定义名字服务器 IPv4 地址。
+   * IP 组配置。
    */
-  IPv4: string
+  IPGroup: IPGroup
+
+  /**
+      * 操作类型，取值有：
+<li> append: 向 IPGroup 中追加 Content 参数中内容；</li>
+<li> remove: 从 IPGroup 中删除 Content 参数中内容；</li>
+<li> update: 全量替换 IPGroup 内容，并可修改 IPGroup 名称。 </li>
+      */
+  Mode: string
 }
 
 /**
@@ -9262,7 +9398,7 @@ export interface DescribeAccelerationDomainsRequest {
  */
 export interface Grpc {
   /**
-      * 是否开启Grpc配置，取值有：
+      * 是否开启 Grpc 配置，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
       */
@@ -9274,7 +9410,7 @@ export interface Grpc {
  */
 export interface UpstreamHttp2 {
   /**
-      * http2回源配置开关，取值有：
+      * http2 回源配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
       */

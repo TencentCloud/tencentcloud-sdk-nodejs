@@ -58,19 +58,17 @@ export interface RedisBackupSet {
       */
     StartTime: string;
     /**
-      * 备份ID。
+      * 备份任务ID。
       */
     BackupId: string;
     /**
       * 备份类型。
-
-- 1：用户发起的手动备份。
-- 0：凌晨系统发起的备份。
+- 1：凌晨系统发起的备份。
+- 0：用户发起的手动备份。
       */
     BackupType: string;
     /**
       * 备份状态。
-
 - 1：备份被其它流程锁定。
 - 2：备份正常，没有被任何流程锁定。
 - -1：备份已过期。
@@ -84,7 +82,6 @@ export interface RedisBackupSet {
     Remark: string;
     /**
       * 备份是否被锁定。
-
 - 0：未被锁定。
 - 1：已被锁定。
       */

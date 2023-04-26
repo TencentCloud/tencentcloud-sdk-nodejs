@@ -214,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOriginProtectionIPWhitelist", req, cb);
     }
     /**
+     * 创建安全 IP 组
+     */
+    async CreateSecurityIPGroup(req, cb) {
+        return this.request("CreateSecurityIPGroup", req, cb);
+    }
+    /**
      * 查询清除缓存历史记录
      */
     async DescribePurgeTasks(req, cb) {
@@ -394,6 +400,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccelerationDomainStatuses", req, cb);
     }
     /**
+     * 修改安全 IP 组。
+     */
+    async ModifySecurityIPGroup(req, cb) {
+        return this.request("ModifySecurityIPGroup", req, cb);
+    }
+    /**
      * 本接口（DescribeDDoSAttackTopData）用于查询DDoS攻击Top数据。
      */
     async DescribeDDoSAttackTopData(req, cb) {
@@ -500,6 +512,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeZoneSetting(req, cb) {
         return this.request("DescribeZoneSetting", req, cb);
+    }
+    /**
+     * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。
+     */
+    async DeleteSecurityIPGroup(req, cb) {
+        return this.request("DeleteSecurityIPGroup", req, cb);
     }
     /**
      * 当客户取回站定的同时会取回此站点下关联的别称域名，此时入参为ZoneId；当客户接入站点发现已被别称域名接入时通过验证之后可取回域名，此时入参为ZoneName。

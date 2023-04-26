@@ -1,4 +1,13 @@
 /**
+ * GenerateVpnConnectionDefaultHealthCheckIp请求参数结构体
+ */
+export interface GenerateVpnConnectionDefaultHealthCheckIpRequest {
+    /**
+      * VPN网关id， 例如：vpngw-1w9tue3d
+      */
+    VpnGatewayId: string;
+}
+/**
  * CreateNetworkAcl返回参数结构体
  */
 export interface CreateNetworkAclResponse {
@@ -7645,6 +7654,23 @@ export interface DescribeCcnRoutesRequest {
       * 返回数量
       */
     Limit?: number;
+}
+/**
+ * GenerateVpnConnectionDefaultHealthCheckIp返回参数结构体
+ */
+export interface GenerateVpnConnectionDefaultHealthCheckIpResponse {
+    /**
+      * VPN通道健康检查本端ip
+      */
+    HealthCheckLocalIp?: string;
+    /**
+      * VPN通道健康检查对端ip
+      */
+    HealthCheckRemoteIp?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDhcpIpAttribute返回参数结构体

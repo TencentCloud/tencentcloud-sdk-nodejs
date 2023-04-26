@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { LexicalAnalysisResponse, SentenceEmbeddingRequest, TextClassificationRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, AutoSummarizationRequest, ChatBotRequest, TextClassificationResponse, KeywordsExtractionRequest, TextCorrectionRequest, TextCorrectionProResponse, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, WordSimilarityResponse, CreateWordItemsRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, DeleteDictResponse, DescribeWordItemsRequest, GenerateCoupletResponse, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, GeneratePoetryResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SentimentAnalysisResponse, DependencyParsingResponse, SimilarWordsResponse, GenerateCoupletRequest, LexicalAnalysisRequest, GeneratePoetryRequest, CreateWordItemsResponse, SentimentAnalysisRequest, SearchWordItemsRequest, KeywordsExtractionResponse, CreateDictRequest } from "./nlp_models";
+import { RetrieveSimilarWordsResponse, SentenceEmbeddingRequest, EvaluateWordSimilarityResponse, ParseWordsResponse, TextCorrectionProResponse, EvaluateWordSimilarityRequest, DeleteDictResponse, TextWritingResponse, CreateDictResponse, TextClassificationResponse, LexicalAnalysisResponse, DescribeDictResponse, DescribeDictsResponse, DeleteDictRequest, GeneratePoetryRequest, SearchWordItemsRequest, GenerateKeywordSentenceRequest, SentimentAnalysisResponse, ChatBotResponse, KeywordsExtractionRequest, SentenceEmbeddingResponse, UpdateDictRequest, SentimentAnalysisRequest, TextWritingRequest, AutoSummarizationResponse, TextCorrectionResponse, DeleteWordItemsRequest, SimilarWordsResponse, DependencyParsingResponse, GenerateCoupletRequest, LexicalAnalysisRequest, CreateWordItemsResponse, TextSimilarityProRequest, RetrieveSimilarWordsRequest, AutoSummarizationRequest, DescribeDictsRequest, WordSimilarityResponse, TextEmbellishRequest, EvaluateSentenceSimilarityResponse, CreateWordItemsRequest, SimilarWordsRequest, DescribeWordItemsRequest, GenerateCoupletResponse, WordEmbeddingResponse, KeywordsExtractionResponse, SentenceCorrectionResponse, EvaluateSentenceSimilarityRequest, GenerateKeywordSentenceResponse, TextEmbellishResponse, TextClassificationRequest, SearchWordItemsResponse, ChatBotRequest, TextCorrectionRequest, UpdateDictResponse, WordSimilarityRequest, DeleteWordItemsResponse, TextSimilarityRequest, WordEmbeddingRequest, DescribeWordItemsResponse, ParseWordsRequest, TextSimilarityResponse, DescribeDictRequest, GeneratePoetryResponse, TextSimilarityProResponse, DependencyParsingRequest, SentenceCorrectionRequest, TextCorrectionProRequest, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -28,16 +28,21 @@ export declare class Client extends AbstractClient {
      */
     DependencyParsing(req: DependencyParsingRequest, cb?: (error: string, rep: DependencyParsingResponse) => void): Promise<DependencyParsingResponse>;
     /**
-     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
-
-该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
-
+     * 通过计算句子间的语义相似性，帮助您快速找到文本中重复或相似的句子，用于文本聚类、相似问题检索等应用场景。
      */
-    WordEmbedding(req: WordEmbeddingRequest, cb?: (error: string, rep: WordEmbeddingResponse) => void): Promise<WordEmbeddingResponse>;
+    EvaluateSentenceSimilarity(req: EvaluateSentenceSimilarityRequest, cb?: (error: string, rep: EvaluateSentenceSimilarityResponse) => void): Promise<EvaluateSentenceSimilarityResponse>;
+    /**
+     * 提取文本中的关键信息，生成简洁明了的关键句子，便于用户快速获取核心观点。
+     */
+    GenerateKeywordSentence(req: GenerateKeywordSentenceRequest, cb?: (error: string, rep: GenerateKeywordSentenceResponse) => void): Promise<GenerateKeywordSentenceResponse>;
     /**
      * 返回属于当前用户的所有自定义词库列表。
      */
     DescribeDicts(req: DescribeDictsRequest, cb?: (error: string, rep: DescribeDictsResponse) => void): Promise<DescribeDictsResponse>;
+    /**
+     * 通过自动补全文本片段，帮助用户快速生成高质量、连贯的完整文本，提高创作效率。
+     */
+    TextWriting(req: TextWritingRequest, cb?: (error: string, rep: TextWritingResponse) => void): Promise<TextWritingResponse>;
     /**
      * 根据指定的名称、描述创建自定义词库。
      */
@@ -46,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 根据用户输入的命题关键词自动生成一首七言律诗或五言律诗。（如需开通请联系商务）
      */
     GeneratePoetry(req: GeneratePoetryRequest, cb?: (error: string, rep: GeneratePoetryResponse) => void): Promise<GeneratePoetryResponse>;
+    /**
+     * 通过精准地对文本进行分词、词性标注、命名实体识别等功能，助您更好地理解文本内容，挖掘出潜在的价值信息。
+     */
+    ParseWords(req: ParseWordsRequest, cb?: (error: string, rep: ParseWordsResponse) => void): Promise<ParseWordsResponse>;
     /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
@@ -76,6 +85,10 @@ export declare class Client extends AbstractClient {
 此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
      */
     TextCorrection(req: TextCorrectionRequest, cb?: (error: string, rep: TextCorrectionResponse) => void): Promise<TextCorrectionResponse>;
+    /**
+     * 评估两个词语在语义空间的相似程度，为您的场景应用提供有力支持，如关键词过滤、热门话题挖掘等。（目前仅支持中文）
+     */
+    EvaluateWordSimilarity(req: EvaluateWordSimilarityRequest, cb?: (error: string, rep: EvaluateWordSimilarityResponse) => void): Promise<EvaluateWordSimilarityResponse>;
     /**
      * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
      */
@@ -125,15 +138,34 @@ export declare class Client extends AbstractClient {
      */
     LexicalAnalysis(req: LexicalAnalysisRequest, cb?: (error: string, rep: LexicalAnalysisResponse) => void): Promise<LexicalAnalysisResponse>;
     /**
+     * 基于大数据和深度学习技术，可以快速地找到与给定词语高度相似的其他词语，有助于提高搜索和推荐的准确性。（目前仅支持中文）
+     */
+    RetrieveSimilarWords(req: RetrieveSimilarWordsRequest, cb?: (error: string, rep: RetrieveSimilarWordsResponse) => void): Promise<RetrieveSimilarWordsResponse>;
+    /**
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
      */
     KeywordsExtraction(req: KeywordsExtractionRequest, cb?: (error: string, rep: KeywordsExtractionResponse) => void): Promise<KeywordsExtractionResponse>;
+    /**
+     * 运用先进的自然语言处理技术，对原始文本进行优化润色，提升文本的通顺性、表达力和语言质量。
+     */
+    TextEmbellish(req: TextEmbellishRequest, cb?: (error: string, rep: TextEmbellishResponse) => void): Promise<TextEmbellishResponse>;
     /**
      * 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
 
 此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
      */
     TextCorrectionPro(req: TextCorrectionProRequest, cb?: (error: string, rep: TextCorrectionProResponse) => void): Promise<TextCorrectionProResponse>;
+    /**
+     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+
+该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
+
+     */
+    WordEmbedding(req: WordEmbeddingRequest, cb?: (error: string, rep: WordEmbeddingResponse) => void): Promise<WordEmbeddingResponse>;
+    /**
+     * 智能识别并纠正句子中的语法、拼写、用词等错误，确保文本的准确性和可读性。
+     */
+    SentenceCorrection(req: SentenceCorrectionRequest, cb?: (error: string, rep: SentenceCorrectionResponse) => void): Promise<SentenceCorrectionResponse>;
     /**
      * 删除自定义词库，会附带相应删除词库包含的所有词条。
      */

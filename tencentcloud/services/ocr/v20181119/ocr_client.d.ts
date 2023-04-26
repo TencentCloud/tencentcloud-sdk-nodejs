@@ -651,7 +651,7 @@ export declare class Client extends AbstractClient {
      */
     MainlandPermitOCR(req: MainlandPermitOCRRequest, cb?: (error: string, rep: MainlandPermitOCRResponse) => void): Promise<MainlandPermitOCRResponse>;
     /**
-     * 菲律宾SSSID识别
+     * 菲律宾SSSID/UMID识别
      */
     RecognizePhilippinesSssIDOCR(req: RecognizePhilippinesSssIDOCRRequest, cb?: (error: string, rep: RecognizePhilippinesSssIDOCRResponse) => void): Promise<RecognizePhilippinesSssIDOCRResponse>;
     /**

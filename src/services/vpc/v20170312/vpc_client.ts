@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  GenerateVpnConnectionDefaultHealthCheckIpRequest,
   CreateNetworkAclResponse,
   NetworkAcl,
   ModifyAddressTemplateAttributeResponse,
@@ -407,6 +408,7 @@ import {
   DescribeAccountAttributesRequest,
   RenewAddressesResponse,
   DescribeCcnRoutesRequest,
+  GenerateVpnConnectionDefaultHealthCheckIpResponse,
   ModifyDhcpIpAttributeResponse,
   CreateAndAttachNetworkInterfaceRequest,
   DeleteVpcEndPointResponse,
@@ -1437,14 +1439,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ReplaceRouteTableAssociation）用于修改子网（Subnet）关联的路由表（RouteTable）。
-   * 一个子网只能关联一个路由表。
+   * 本接口（GenerateVpnConnectionDefaultHealthCheckIp）用于获取一对VPN通道健康检查地址。
    */
-  async ReplaceRouteTableAssociation(
-    req: ReplaceRouteTableAssociationRequest,
-    cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void
-  ): Promise<ReplaceRouteTableAssociationResponse> {
-    return this.request("ReplaceRouteTableAssociation", req, cb)
+  async GenerateVpnConnectionDefaultHealthCheckIp(
+    req: GenerateVpnConnectionDefaultHealthCheckIpRequest,
+    cb?: (error: string, rep: GenerateVpnConnectionDefaultHealthCheckIpResponse) => void
+  ): Promise<GenerateVpnConnectionDefaultHealthCheckIpResponse> {
+    return this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, cb)
   }
 
   /**
@@ -1799,6 +1800,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowLogsResponse) => void
   ): Promise<DescribeFlowLogsResponse> {
     return this.request("DescribeFlowLogs", req, cb)
+  }
+
+  /**
+   * 本接口（ReplaceRouteTableAssociation）用于修改子网（Subnet）关联的路由表（RouteTable）。
+   * 一个子网只能关联一个路由表。
+   */
+  async ReplaceRouteTableAssociation(
+    req: ReplaceRouteTableAssociationRequest,
+    cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void
+  ): Promise<ReplaceRouteTableAssociationResponse> {
+    return this.request("ReplaceRouteTableAssociation", req, cb)
   }
 
   /**

@@ -658,9 +658,9 @@ it("vpc.v20170312.SetCcnRegionBandwidthLimits", async function () {
     }
 })
 
-it("vpc.v20170312.ReplaceRouteTableAssociation", async function () {
+it("vpc.v20170312.GenerateVpnConnectionDefaultHealthCheckIp", async function () {
     try {
-       const data = await client.ReplaceRouteTableAssociation({})
+       const data = await client.GenerateVpnConnectionDefaultHealthCheckIp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -991,6 +991,16 @@ it("vpc.v20170312.CheckAssistantCidr", async function () {
 it("vpc.v20170312.DescribeFlowLogs", async function () {
     try {
        const data = await client.DescribeFlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ReplaceRouteTableAssociation", async function () {
+    try {
+       const data = await client.ReplaceRouteTableAssociation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

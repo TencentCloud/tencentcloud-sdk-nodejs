@@ -18,67 +18,91 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  LexicalAnalysisResponse,
+  RetrieveSimilarWordsResponse,
   SentenceEmbeddingRequest,
-  TextClassificationRequest,
-  WordSimilarityRequest,
-  SearchWordItemsResponse,
-  DpToken,
-  TextSimilarityResponse,
-  WordEmbeddingRequest,
-  ChatBotResponse,
-  AutoSummarizationRequest,
-  ChatBotRequest,
-  TextClassificationResponse,
-  KeywordsExtractionRequest,
+  EvaluateWordSimilarityResponse,
+  ParseWordsResponse,
+  BasicParticiple,
   DictInfo,
-  TextCorrectionRequest,
-  ClassificationResult,
-  TextCorrectionProResponse,
-  Keyword,
-  TextSimilarityProRequest,
-  UpdateDictResponse,
-  DescribeDictsRequest,
-  WordSimilarityResponse,
-  SearchResult,
-  CreateWordItemsRequest,
   WordItem,
-  DeleteWordItemsResponse,
+  TextCorrectionProResponse,
+  Embellish,
+  EvaluateWordSimilarityRequest,
+  DeleteDictResponse,
+  TextWritingResponse,
+  CreateDictResponse,
+  TextClassificationResponse,
+  LexicalAnalysisResponse,
+  DescribeDictResponse,
+  DescribeDictsResponse,
+  DeleteDictRequest,
+  Entity,
+  GeneratePoetryRequest,
+  SearchWordItemsRequest,
+  GenerateKeywordSentenceRequest,
+  SentimentAnalysisResponse,
+  ChatBotResponse,
+  KeywordsExtractionRequest,
+  SearchResult,
   SentenceEmbeddingResponse,
   UpdateDictRequest,
-  DeleteDictResponse,
+  SentimentAnalysisRequest,
+  TextWritingRequest,
+  AutoSummarizationResponse,
+  TextCorrectionResponse,
+  DeleteWordItemsRequest,
+  NerToken,
+  SimilarWordsResponse,
+  DependencyParsingResponse,
+  GenerateCoupletRequest,
+  LexicalAnalysisRequest,
+  CreateWordItemsResponse,
+  TextSimilarityProRequest,
+  RetrieveSimilarWordsRequest,
+  Writing,
+  AutoSummarizationRequest,
+  ClassificationResult,
+  DescribeDictsRequest,
+  WordSimilarityResponse,
+  TextEmbellishRequest,
+  EvaluateSentenceSimilarityResponse,
+  CreateWordItemsRequest,
+  SimilarWordsRequest,
   DescribeWordItemsRequest,
   GenerateCoupletResponse,
-  CreateDictResponse,
-  TextSimilarityRequest,
-  AutoSummarizationResponse,
   WordEmbeddingResponse,
-  DescribeWordItemsResponse,
-  SimilarWordsRequest,
-  DescribeDictRequest,
   PosToken,
-  GeneratePoetryResponse,
-  DeleteWordItemsRequest,
-  DescribeDictResponse,
-  TextCorrectionProRequest,
-  TextCorrectionResponse,
-  TextSimilarityProResponse,
-  DescribeDictsResponse,
-  DependencyParsingRequest,
-  DeleteDictRequest,
-  Similarity,
-  NerToken,
-  SentimentAnalysisResponse,
-  DependencyParsingResponse,
-  SimilarWordsResponse,
-  GenerateCoupletRequest,
-  CCIToken,
-  LexicalAnalysisRequest,
-  GeneratePoetryRequest,
-  CreateWordItemsResponse,
-  SentimentAnalysisRequest,
-  SearchWordItemsRequest,
   KeywordsExtractionResponse,
+  SentenceCorrectionResponse,
+  EvaluateSentenceSimilarityRequest,
+  Similarity,
+  GenerateKeywordSentenceResponse,
+  CCIToken,
+  TextEmbellishResponse,
+  CorrectionItem,
+  TextClassificationRequest,
+  SearchWordItemsResponse,
+  DpToken,
+  ChatBotRequest,
+  TextCorrectionRequest,
+  Keyword,
+  UpdateDictResponse,
+  WordSimilarityRequest,
+  DeleteWordItemsResponse,
+  TextSimilarityRequest,
+  WordEmbeddingRequest,
+  CompoundParticiple,
+  DescribeWordItemsResponse,
+  ParseWordsRequest,
+  TextSimilarityResponse,
+  DescribeDictRequest,
+  GeneratePoetryResponse,
+  TextSimilarityProResponse,
+  DependencyParsingRequest,
+  SentencePair,
+  KeywordSentence,
+  SentenceCorrectionRequest,
+  TextCorrectionProRequest,
   CreateDictRequest,
 } from "./nlp_models"
 
@@ -142,16 +166,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+   * 通过计算句子间的语义相似性，帮助您快速找到文本中重复或相似的句子，用于文本聚类、相似问题检索等应用场景。
+   */
+  async EvaluateSentenceSimilarity(
+    req: EvaluateSentenceSimilarityRequest,
+    cb?: (error: string, rep: EvaluateSentenceSimilarityResponse) => void
+  ): Promise<EvaluateSentenceSimilarityResponse> {
+    return this.request("EvaluateSentenceSimilarity", req, cb)
+  }
 
-该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
-
-     */
-  async WordEmbedding(
-    req: WordEmbeddingRequest,
-    cb?: (error: string, rep: WordEmbeddingResponse) => void
-  ): Promise<WordEmbeddingResponse> {
-    return this.request("WordEmbedding", req, cb)
+  /**
+   * 提取文本中的关键信息，生成简洁明了的关键句子，便于用户快速获取核心观点。
+   */
+  async GenerateKeywordSentence(
+    req: GenerateKeywordSentenceRequest,
+    cb?: (error: string, rep: GenerateKeywordSentenceResponse) => void
+  ): Promise<GenerateKeywordSentenceResponse> {
+    return this.request("GenerateKeywordSentence", req, cb)
   }
 
   /**
@@ -162,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDictsResponse) => void
   ): Promise<DescribeDictsResponse> {
     return this.request("DescribeDicts", req, cb)
+  }
+
+  /**
+   * 通过自动补全文本片段，帮助用户快速生成高质量、连贯的完整文本，提高创作效率。
+   */
+  async TextWriting(
+    req: TextWritingRequest,
+    cb?: (error: string, rep: TextWritingResponse) => void
+  ): Promise<TextWritingResponse> {
+    return this.request("TextWriting", req, cb)
   }
 
   /**
@@ -182,6 +223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GeneratePoetryResponse) => void
   ): Promise<GeneratePoetryResponse> {
     return this.request("GeneratePoetry", req, cb)
+  }
+
+  /**
+   * 通过精准地对文本进行分词、词性标注、命名实体识别等功能，助您更好地理解文本内容，挖掘出潜在的价值信息。
+   */
+  async ParseWords(
+    req: ParseWordsRequest,
+    cb?: (error: string, rep: ParseWordsResponse) => void
+  ): Promise<ParseWordsResponse> {
+    return this.request("ParseWords", req, cb)
   }
 
   /**
@@ -242,6 +293,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextCorrectionResponse) => void
   ): Promise<TextCorrectionResponse> {
     return this.request("TextCorrection", req, cb)
+  }
+
+  /**
+   * 评估两个词语在语义空间的相似程度，为您的场景应用提供有力支持，如关键词过滤、热门话题挖掘等。（目前仅支持中文）
+   */
+  async EvaluateWordSimilarity(
+    req: EvaluateWordSimilarityRequest,
+    cb?: (error: string, rep: EvaluateWordSimilarityResponse) => void
+  ): Promise<EvaluateWordSimilarityResponse> {
+    return this.request("EvaluateWordSimilarity", req, cb)
   }
 
   /**
@@ -335,6 +396,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 基于大数据和深度学习技术，可以快速地找到与给定词语高度相似的其他词语，有助于提高搜索和推荐的准确性。（目前仅支持中文）
+   */
+  async RetrieveSimilarWords(
+    req: RetrieveSimilarWordsRequest,
+    cb?: (error: string, rep: RetrieveSimilarWordsResponse) => void
+  ): Promise<RetrieveSimilarWordsResponse> {
+    return this.request("RetrieveSimilarWords", req, cb)
+  }
+
+  /**
    * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
    */
   async KeywordsExtraction(
@@ -342,6 +413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KeywordsExtractionResponse) => void
   ): Promise<KeywordsExtractionResponse> {
     return this.request("KeywordsExtraction", req, cb)
+  }
+
+  /**
+   * 运用先进的自然语言处理技术，对原始文本进行优化润色，提升文本的通顺性、表达力和语言质量。
+   */
+  async TextEmbellish(
+    req: TextEmbellishRequest,
+    cb?: (error: string, rep: TextEmbellishResponse) => void
+  ): Promise<TextEmbellishResponse> {
+    return this.request("TextEmbellish", req, cb)
   }
 
   /**
@@ -354,6 +435,29 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextCorrectionProResponse) => void
   ): Promise<TextCorrectionProResponse> {
     return this.request("TextCorrectionPro", req, cb)
+  }
+
+  /**
+     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+
+该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
+
+     */
+  async WordEmbedding(
+    req: WordEmbeddingRequest,
+    cb?: (error: string, rep: WordEmbeddingResponse) => void
+  ): Promise<WordEmbeddingResponse> {
+    return this.request("WordEmbedding", req, cb)
+  }
+
+  /**
+   * 智能识别并纠正句子中的语法、拼写、用词等错误，确保文本的准确性和可读性。
+   */
+  async SentenceCorrection(
+    req: SentenceCorrectionRequest,
+    cb?: (error: string, rep: SentenceCorrectionResponse) => void
+  ): Promise<SentenceCorrectionResponse> {
+    return this.request("SentenceCorrection", req, cb)
   }
 
   /**

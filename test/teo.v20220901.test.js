@@ -328,6 +328,16 @@ it("teo.v20220901.UpdateOriginProtectionIPWhitelist", async function () {
     }
 })
 
+it("teo.v20220901.CreateSecurityIPGroup", async function () {
+    try {
+       const data = await client.CreateSecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribePurgeTasks", async function () {
     try {
        const data = await client.DescribePurgeTasks({})
@@ -628,6 +638,16 @@ it("teo.v20220901.ModifyAccelerationDomainStatuses", async function () {
     }
 })
 
+it("teo.v20220901.ModifySecurityIPGroup", async function () {
+    try {
+       const data = await client.ModifySecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeDDoSAttackTopData", async function () {
     try {
        const data = await client.DescribeDDoSAttackTopData({})
@@ -801,6 +821,16 @@ it("teo.v20220901.DescribeLogSets", async function () {
 it("teo.v20220901.DescribeZoneSetting", async function () {
     try {
        const data = await client.DescribeZoneSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DeleteSecurityIPGroup", async function () {
+    try {
+       const data = await client.DeleteSecurityIPGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -264,7 +264,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyMessageForward(req: ModifyMessageForwardRequest, cb?: (error: string, rep: ModifyMessageForwardResponse) => void): Promise<ModifyMessageForwardResponse>;
     /**
-     * 本接口(DescribeDevicesList) 用于获取设备列表，支持模糊搜索
+     * 本接口(DescribeDeviceList) 用于获取设备列表，支持模糊搜索
      */
     DescribeDeviceList(req: DescribeDeviceListRequest, cb?: (error: string, rep: DescribeDeviceListResponse) => void): Promise<DescribeDeviceListResponse>;
     /**

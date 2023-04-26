@@ -58,19 +58,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DependencyParsing", req, cb);
     }
     /**
-     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
-
-该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
-
+     * 通过计算句子间的语义相似性，帮助您快速找到文本中重复或相似的句子，用于文本聚类、相似问题检索等应用场景。
      */
-    async WordEmbedding(req, cb) {
-        return this.request("WordEmbedding", req, cb);
+    async EvaluateSentenceSimilarity(req, cb) {
+        return this.request("EvaluateSentenceSimilarity", req, cb);
+    }
+    /**
+     * 提取文本中的关键信息，生成简洁明了的关键句子，便于用户快速获取核心观点。
+     */
+    async GenerateKeywordSentence(req, cb) {
+        return this.request("GenerateKeywordSentence", req, cb);
     }
     /**
      * 返回属于当前用户的所有自定义词库列表。
      */
     async DescribeDicts(req, cb) {
         return this.request("DescribeDicts", req, cb);
+    }
+    /**
+     * 通过自动补全文本片段，帮助用户快速生成高质量、连贯的完整文本，提高创作效率。
+     */
+    async TextWriting(req, cb) {
+        return this.request("TextWriting", req, cb);
     }
     /**
      * 根据指定的名称、描述创建自定义词库。
@@ -83,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GeneratePoetry(req, cb) {
         return this.request("GeneratePoetry", req, cb);
+    }
+    /**
+     * 通过精准地对文本进行分词、词性标注、命名实体识别等功能，助您更好地理解文本内容，挖掘出潜在的价值信息。
+     */
+    async ParseWords(req, cb) {
+        return this.request("ParseWords", req, cb);
     }
     /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
@@ -123,6 +138,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TextCorrection(req, cb) {
         return this.request("TextCorrection", req, cb);
+    }
+    /**
+     * 评估两个词语在语义空间的相似程度，为您的场景应用提供有力支持，如关键词过滤、热门话题挖掘等。（目前仅支持中文）
+     */
+    async EvaluateWordSimilarity(req, cb) {
+        return this.request("EvaluateWordSimilarity", req, cb);
     }
     /**
      * 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
@@ -187,10 +208,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LexicalAnalysis", req, cb);
     }
     /**
+     * 基于大数据和深度学习技术，可以快速地找到与给定词语高度相似的其他词语，有助于提高搜索和推荐的准确性。（目前仅支持中文）
+     */
+    async RetrieveSimilarWords(req, cb) {
+        return this.request("RetrieveSimilarWords", req, cb);
+    }
+    /**
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
      */
     async KeywordsExtraction(req, cb) {
         return this.request("KeywordsExtraction", req, cb);
+    }
+    /**
+     * 运用先进的自然语言处理技术，对原始文本进行优化润色，提升文本的通顺性、表达力和语言质量。
+     */
+    async TextEmbellish(req, cb) {
+        return this.request("TextEmbellish", req, cb);
     }
     /**
      * 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
@@ -199,6 +232,21 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TextCorrectionPro(req, cb) {
         return this.request("TextCorrectionPro", req, cb);
+    }
+    /**
+     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+
+该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
+
+     */
+    async WordEmbedding(req, cb) {
+        return this.request("WordEmbedding", req, cb);
+    }
+    /**
+     * 智能识别并纠正句子中的语法、拼写、用词等错误，确保文本的准确性和可读性。
+     */
+    async SentenceCorrection(req, cb) {
+        return this.request("SentenceCorrection", req, cb);
     }
     /**
      * 删除自定义词库，会附带相应删除词库包含的所有词条。

@@ -3773,6 +3773,11 @@ export interface RecordPlanItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Devices: Array<DeviceItem>;
+    /**
+      * 录像存储天数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordStorageTime?: number;
 }
 /**
  * DescribeMessageForwards返回参数结构体
