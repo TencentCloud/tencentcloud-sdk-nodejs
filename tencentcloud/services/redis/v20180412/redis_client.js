@@ -418,7 +418,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKey", req, cb);
     }
     /**
-     * 模拟故障
+     * 本接口（KillMasterGroup）模拟故障。
      */
     async KillMasterGroup(req, cb) {
         return this.request("KillMasterGroup", req, cb);

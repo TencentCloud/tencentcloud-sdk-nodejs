@@ -3124,19 +3124,19 @@ export interface DescribeSampleLogsResponse {
   /**
    * 日志总数
    */
-  Total: number
+  Total?: number
 
   /**
       * 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Context: string
+  Context?: string
 
   /**
       * 采样日志数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SampleLogs: Array<SampleLog>
+  SampleLogs?: Array<SampleLog>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

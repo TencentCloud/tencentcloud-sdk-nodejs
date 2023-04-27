@@ -1786,7 +1786,7 @@ export interface ModifyEnterpriseSecurityDispatchStatusResponse {
       * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: number;
+    Status?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4083,7 +4083,11 @@ export interface CreateAcRulesRequest {
  */
 export interface ModifyEnterpriseSecurityDispatchStatusRequest {
     /**
-      * 状态，0：立即下发，1：停止下发
+      * 0：打开立即下发开关；
+
+1：关闭立即下发开关；
+
+2：关闭立即下发开关下，触发开始下发
       */
     Status: number;
 }

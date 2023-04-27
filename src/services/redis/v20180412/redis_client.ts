@@ -913,7 +913,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 模拟故障
+   * 本接口（KillMasterGroup）模拟故障。
    */
   async KillMasterGroup(
     req: KillMasterGroupRequest,

@@ -84,6 +84,10 @@ video 纯视频
       * 房间绑定的群组ID,非空时限制组成员进入
       */
     GroupId?: string;
+    /**
+      * 打开学生麦克风/摄像头的授权开关
+      */
+    EnableDirectControl?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -592,6 +596,16 @@ export interface RoomItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RecordUrl?: string;
+    /**
+      * 最高房间内人数（包括老师），0表示不限制，默认为0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxMicNumber?: number;
+    /**
+      * 打开学生麦克风/摄像头的授权开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableDirectControl?: number;
 }
 /**
  * SetWatermark请求参数结构体
@@ -1722,6 +1736,10 @@ video 纯视频
       */
     GroupId?: string;
     /**
+      * 打开学生麦克风/摄像头的授权开关
+      */
+    EnableDirectControl?: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2127,6 +2145,10 @@ export interface RoomInfo {
       * 房间绑定的群组ID
       */
     GroupId?: string;
+    /**
+      * 打开学生麦克风/摄像头的授权开关
+      */
+    EnableDirectControl?: number;
 }
 /**
  * ModifyRoom请求参数结构体
@@ -2206,6 +2228,10 @@ coteaching 双师
       * 房间绑定的群组ID
       */
     GroupId?: string;
+    /**
+      * 打开学生麦克风/摄像头的授权开关
+      */
+    EnableDirectControl?: number;
 }
 /**
  * 房间问答答案详情

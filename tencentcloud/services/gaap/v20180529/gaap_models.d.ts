@@ -395,6 +395,15 @@ export interface AccessConfiguration {
     NetworkType?: string;
 }
 /**
+ * ModifyProxiesProject返回参数结构体
+ */
+export interface ModifyProxiesProjectResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCertificateDetail请求参数结构体
  */
 export interface DescribeCertificateDetailRequest {
@@ -404,20 +413,39 @@ export interface DescribeCertificateDetailRequest {
     CertificateId: string;
 }
 /**
- * 标签对应资源信息
+ * 加速通道接入点详细信息(包含id、地域、ip等）
  */
-export interface TagResourceInfo {
+export interface ProxyAccessInfo {
     /**
-      * 资源类型，其中：
-Proxy表示通道，
-ProxyGroup表示通道组，
-RealServer表示源站
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResourceType: string;
+    RegionId: string;
     /**
-      * 资源ID
+      * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResourceId: string;
+    RegionName: string;
+    /**
+      * 通道ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyId: string;
+    /**
+      * 通道接入ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip: string;
+    /**
+      * 三网通道VIP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VipList: Array<IPDetail>;
+    /**
+      * 接入点IDC类型。ec或dc
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceRegionIdcType: string;
 }
 /**
  * SetAuthentication返回参数结构体
@@ -1638,39 +1666,13 @@ export interface DescribeDestRegionsResponse {
     RequestId?: string;
 }
 /**
- * 加速通道接入点详细信息(包含id、地域、ip等）
+ * DescribeAuthSignature返回参数结构体
  */
-export interface ProxyAccessInfo {
+export interface DescribeAuthSignatureResponse {
     /**
-      * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RegionId: string;
-    /**
-      * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RegionName: string;
-    /**
-      * 通道ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProxyId: string;
-    /**
-      * 通道接入ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Vip: string;
-    /**
-      * 三网通道VIP列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VipList: Array<IPDetail>;
-    /**
-      * 接入点IDC类型。ec或dc
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SourceRegionIdcType: string;
+    RequestId?: string;
 }
 /**
  * DescribeDomainErrorPageInfoByIds返回参数结构体
@@ -2050,6 +2052,22 @@ export interface EnableGlobalDomainResponse {
     RequestId?: string;
 }
 /**
+ * 标签对应资源信息
+ */
+export interface TagResourceInfo {
+    /**
+      * 资源类型，其中：
+Proxy表示通道，
+ProxyGroup表示通道组，
+RealServer表示源站
+      */
+    ResourceType: string;
+    /**
+      * 资源ID
+      */
+    ResourceId: string;
+}
+/**
  * CreateSecurityRules返回参数结构体
  */
 export interface CreateSecurityRulesResponse {
@@ -2386,14 +2404,9 @@ export interface EnableGlobalDomainRequest {
     DomainId: string;
 }
 /**
- * ModifyGlobalDomainDns返回参数结构体
+ * DescribeAuthSignature请求参数结构体
  */
-export interface ModifyGlobalDomainDnsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeAuthSignatureRequest = null;
 /**
  * ModifyDomain请求参数结构体
  */
@@ -4694,9 +4707,9 @@ export interface ModifyProxyGroupAttributeRequest {
     ProjectId?: number;
 }
 /**
- * ModifyProxiesProject返回参数结构体
+ * ModifyGlobalDomainDns返回参数结构体
  */
-export interface ModifyProxiesProjectResponse {
+export interface ModifyGlobalDomainDnsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -763,6 +763,16 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SessionId?: string;
+    /**
+      * spark_emr_livy
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngineClusterType?: string;
+    /**
+      * Spark 3.2-EMR
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngineImageVersion?: string;
 }
 /**
  * SwitchDataEngine请求参数结构体

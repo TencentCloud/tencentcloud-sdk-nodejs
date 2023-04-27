@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     LockMetaData(req: LockMetaDataRequest, cb?: (error: string, rep: LockMetaDataResponse) => void): Promise<LockMetaDataResponse>;
     /**
-     * 获取spark应用列表
+     * 获取spark应用列表。
      */
     DescribeSparkAppJobs(req: DescribeSparkAppJobsRequest, cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void): Promise<DescribeSparkAppJobsResponse>;
     /**

@@ -848,6 +848,16 @@ it("tsf.v20180326.DescribeBusinessLogConfigs", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeUnitRulesV2", async function () {
+    try {
+       const data = await client.DescribeUnitRulesV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreatePublicConfigWithDetailResp", async function () {
     try {
        const data = await client.CreatePublicConfigWithDetailResp({})

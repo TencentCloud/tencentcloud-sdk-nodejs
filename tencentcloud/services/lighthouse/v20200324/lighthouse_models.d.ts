@@ -466,11 +466,11 @@ export interface DescribeBundlesResponse {
     /**
       * 套餐详细信息列表。
       */
-    BundleSet: Array<Bundle>;
+    BundleSet?: Array<Bundle>;
     /**
       * 符合要求的套餐总数，用于分页展示。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2421,7 +2421,7 @@ export interface CreateDiskBackupResponse {
     /**
       * 备份点ID。
       */
-    DiskBackupId: string;
+    DiskBackupId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3343,7 +3343,7 @@ export interface CreateInstanceSnapshotResponse {
     /**
       * 快照 ID。
       */
-    SnapshotId: string;
+    SnapshotId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

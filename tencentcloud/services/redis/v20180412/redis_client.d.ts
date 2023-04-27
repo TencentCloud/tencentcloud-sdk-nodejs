@@ -268,7 +268,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorBigKey(req: DescribeInstanceMonitorBigKeyRequest, cb?: (error: string, rep: DescribeInstanceMonitorBigKeyResponse) => void): Promise<DescribeInstanceMonitorBigKeyResponse>;
     /**
-     * 模拟故障
+     * 本接口（KillMasterGroup）模拟故障。
      */
     KillMasterGroup(req: KillMasterGroupRequest, cb?: (error: string, rep: KillMasterGroupResponse) => void): Promise<KillMasterGroupResponse>;
     /**

@@ -928,6 +928,16 @@ it("gaap.v20180529.DescribeDomainErrorPageInfo", async function () {
     }
 })
 
+it("gaap.v20180529.DescribeAuthSignature", async function () {
+    try {
+       const data = await client.DescribeAuthSignature({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.BanAndRecoverProxy", async function () {
     try {
        const data = await client.BanAndRecoverProxy({})

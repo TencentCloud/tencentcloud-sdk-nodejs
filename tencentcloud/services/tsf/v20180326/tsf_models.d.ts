@@ -76,17 +76,18 @@ export interface ModifyPathRewriteRequest {
     Order?: number;
 }
 /**
- * 分页的 ContainerEvent
+ * DescribeUnitRulesV2返回参数结构体
  */
-export interface TsfPageContainerEvent {
+export interface DescribeUnitRulesV2Response {
     /**
-      * 返回个数
+      * 分页列表信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    Result?: TsfPageUnitRuleV2;
     /**
-      * events 数组
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Content: Array<ContainerEvent>;
+    RequestId?: string;
 }
 /**
  * ApiDetailResponse描述
@@ -566,6 +567,19 @@ export interface DescribeConfigTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 分页的 ContainerEvent
+ */
+export interface TsfPageContainerEvent {
+    /**
+      * 返回个数
+      */
+    TotalCount: number;
+    /**
+      * events 数组
+      */
+    Content: Array<ContainerEvent>;
 }
 /**
  * DescribeDeliveryConfig返回参数结构体
@@ -7500,6 +7514,31 @@ false：操作失败。
     RequestId?: string;
 }
 /**
+ * DescribeUnitRulesV2请求参数结构体
+ */
+export interface DescribeUnitRulesV2Request {
+    /**
+      * 网关实体ID
+      */
+    GatewayInstanceId: string;
+    /**
+      * 根据规则名或备注内容模糊查询
+      */
+    SearchWord?: string;
+    /**
+      * 启用状态, disabled: 未发布， enabled: 发布
+      */
+    Status?: string;
+    /**
+      * 翻页查询偏移量
+      */
+    Offset?: number;
+    /**
+      * 翻页查询每页记录数
+      */
+    Limit?: number;
+}
+/**
  * BindApiGroup返回参数结构体
  */
 export interface BindApiGroupResponse {
@@ -13111,6 +13150,21 @@ export interface StopTaskExecuteResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 单元化规则翻页对象
+ */
+export interface TsfPageUnitRuleV2 {
+    /**
+      * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 记录实体列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<UnitRule>;
 }
 /**
  * UpdateApiRateLimitRules返回参数结构体

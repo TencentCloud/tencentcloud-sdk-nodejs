@@ -577,6 +577,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainErrorPageInfo", req, cb);
     }
     /**
+     * 为了防止在下单、询价、后付费开通等过程中确保来源合法以及订单参数没有被篡改过，各个业务方使用下单、询价等场景需调用计费签名接口获取签名，获取签名的请求需带上签名以验证身份，本接口可以获取计费签名。
+     */
+    async DescribeAuthSignature(req, cb) {
+        return this.request("DescribeAuthSignature", req, cb);
+    }
+    /**
      * 本接口（BanAndRecoverProxy）用于联通封禁解封GAAP跨境通道实例，支持按照客户UIN维度下发请求。被封禁的实例带宽上限将会被限制到0Mbps，无法正常处理客户端和源站之间的请求。
      */
     async BanAndRecoverProxy(req, cb) {

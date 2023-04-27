@@ -21,7 +21,7 @@ import {
   DescribePublicConfigSummaryRequest,
   TsfPageFileConfig,
   ModifyPathRewriteRequest,
-  TsfPageContainerEvent,
+  DescribeUnitRulesV2Response,
   ApiDetailResponse,
   UpdateApiRateLimitRuleRequest,
   DeleteClusterResponse,
@@ -39,6 +39,7 @@ import {
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
   DescribeConfigTemplateResponse,
+  TsfPageContainerEvent,
   DescribeDeliveryConfigResponse,
   SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
@@ -335,6 +336,7 @@ import {
   DescribeInvocationMetricDataDimensionRequest,
   DeployGroupResponse,
   ModifyGroupResponse,
+  DescribeUnitRulesV2Request,
   BindApiGroupResponse,
   MetricDataPointMap,
   DescribeGroupAttributeResponse,
@@ -573,6 +575,7 @@ import {
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
+  TsfPageUnitRuleV2,
   UpdateApiRateLimitRulesResponse,
   DeleteRepositoryRequest,
   DescribeSimpleGroupsRequest,
@@ -1464,6 +1467,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeBusinessLogConfigsResponse) => void
   ): Promise<DescribeBusinessLogConfigsResponse> {
     return this.request("DescribeBusinessLogConfigs", req, cb)
+  }
+
+  /**
+   * 查询单元化规则列表V2
+   */
+  async DescribeUnitRulesV2(
+    req: DescribeUnitRulesV2Request,
+    cb?: (error: string, rep: DescribeUnitRulesV2Response) => void
+  ): Promise<DescribeUnitRulesV2Response> {
+    return this.request("DescribeUnitRulesV2", req, cb)
   }
 
   /**

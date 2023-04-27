@@ -61,6 +61,7 @@ import {
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
   Tag,
+  MetaTagInfo,
   CreateCosRechargeRequest,
   ExtractRuleInfo,
   TopicInfo,

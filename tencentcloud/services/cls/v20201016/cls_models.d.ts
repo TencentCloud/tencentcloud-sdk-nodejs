@@ -825,6 +825,19 @@ export interface Tag {
     Value: string;
 }
 /**
+ * 元数据信息
+ */
+export interface MetaTagInfo {
+    /**
+      * 元数据key
+      */
+    Key?: string;
+    /**
+      * 元数据value
+      */
+    Value?: string;
+}
+/**
  * CreateCosRecharge请求参数结构体
  */
 export interface CreateCosRechargeRequest {
@@ -950,6 +963,19 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ParseProtocol?: string;
+    /**
+      * 元数据类型，0: 不使用元数据信息，1:使用机器组元数据，2:使用用户自定义元数据，3:使用采集配置路径，
+      */
+    MetadataType?: number;
+    /**
+      * 采集配置路径正则表达式，MetadataType为1时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathRegex?: string;
+    /**
+      * 用户自定义元数据信息，MetadataType为2时必填
+      */
+    MetaTags?: Array<MetaTagInfo>;
 }
 /**
  * 日志主题信息
@@ -1704,6 +1730,10 @@ export interface MachineGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceLogging: boolean;
+    /**
+      * 机器组元数据信息列表
+      */
+    MetaTags?: Array<MetaTagInfo>;
 }
 /**
  * DescribeLogHistogram返回参数结构体
@@ -3481,6 +3511,10 @@ export interface ModifyMachineGroupRequest {
       * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
       */
     ServiceLogging?: boolean;
+    /**
+      * 机器组元数据信息列表
+      */
+    MetaTags?: Array<MetaTagInfo>;
 }
 /**
  * DescribeAlarmNotices请求参数结构体
@@ -3766,6 +3800,10 @@ export interface CreateMachineGroupRequest {
       * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
       */
     ServiceLogging?: boolean;
+    /**
+      * 机器组元数据信息列表
+      */
+    MetaTags?: Array<MetaTagInfo>;
 }
 /**
  * DescribeExports返回参数结构体

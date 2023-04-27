@@ -1258,13 +1258,13 @@ export interface CreateRocketMQNamespaceRequest {
       */
     NamespaceId: string;
     /**
-      * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+      * 已废弃
       */
-    Ttl: number;
+    Ttl?: number;
     /**
-      * 消息持久化后保留的时间，以毫秒为单位
+      * 已废弃
       */
-    RetentionTime: number;
+    RetentionTime?: number;
     /**
       * 说明，最大128个字符
       */
@@ -6656,13 +6656,13 @@ export interface ModifyRocketMQNamespaceRequest {
       */
     NamespaceId: string;
     /**
-      * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+      * 已废弃
       */
-    Ttl: number;
+    Ttl?: number;
     /**
-      * 消息持久化后保留的时间，以毫秒为单位
+      * 已废弃
       */
-    RetentionTime: number;
+    RetentionTime?: number;
     /**
       * 说明，最大128个字符
       */

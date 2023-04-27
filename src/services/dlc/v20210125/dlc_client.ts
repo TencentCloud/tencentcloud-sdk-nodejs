@@ -508,7 +508,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取spark应用列表
+   * 获取spark应用列表。
    */
   async DescribeSparkAppJobs(
     req: DescribeSparkAppJobsRequest,

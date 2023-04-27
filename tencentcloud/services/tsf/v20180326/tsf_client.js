@@ -527,6 +527,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeBusinessLogConfigs", req, cb);
     }
     /**
+     * 查询单元化规则列表V2
+     */
+    async DescribeUnitRulesV2(req, cb) {
+        return this.request("DescribeUnitRulesV2", req, cb);
+    }
+    /**
      * 创建公共配置项，并返回配置项详细信息
      */
     async CreatePublicConfigWithDetailResp(req, cb) {

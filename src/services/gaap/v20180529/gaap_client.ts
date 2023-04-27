@@ -37,8 +37,9 @@ import {
   ModifyProxiesProjectRequest,
   DomainErrorPageInfo,
   AccessConfiguration,
+  ModifyProxiesProjectResponse,
   DescribeCertificateDetailRequest,
-  TagResourceInfo,
+  ProxyAccessInfo,
   SetAuthenticationResponse,
   DescribeProxyGroupStatisticsResponse,
   DisableGlobalDomainResponse,
@@ -106,7 +107,7 @@ import {
   DeleteListenersRequest,
   DescribeSecurityRulesRequest,
   DescribeDestRegionsResponse,
-  ProxyAccessInfo,
+  DescribeAuthSignatureResponse,
   DescribeDomainErrorPageInfoByIdsResponse,
   DescribeProxiesRequest,
   DescribeAccessRegionsByDestRegionResponse,
@@ -119,6 +120,7 @@ import {
   CreateSecurityPolicyResponse,
   TCPListener,
   EnableGlobalDomainResponse,
+  TagResourceInfo,
   CreateSecurityRulesResponse,
   DescribeAccessRegionsRequest,
   CreateCertificateRequest,
@@ -139,7 +141,7 @@ import {
   DeleteSecurityPolicyResponse,
   CreateDomainResponse,
   EnableGlobalDomainRequest,
-  ModifyGlobalDomainDnsResponse,
+  DescribeAuthSignatureRequest,
   ModifyDomainRequest,
   DeleteGlobalDomainDnsRequest,
   CreateCustomHeaderResponse,
@@ -235,7 +237,7 @@ import {
   DescribeProxyStatisticsResponse,
   DescribeRealServersStatusResponse,
   ModifyProxyGroupAttributeRequest,
-  ModifyProxiesProjectResponse,
+  ModifyGlobalDomainDnsResponse,
   CloseProxyGroupResponse,
   DeleteFirstLinkSessionResponse,
   ModifyProxiesAttributeResponse,
@@ -1194,6 +1196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainErrorPageInfoResponse) => void
   ): Promise<DescribeDomainErrorPageInfoResponse> {
     return this.request("DescribeDomainErrorPageInfo", req, cb)
+  }
+
+  /**
+   * 为了防止在下单、询价、后付费开通等过程中确保来源合法以及订单参数没有被篡改过，各个业务方使用下单、询价等场景需调用计费签名接口获取签名，获取签名的请求需带上签名以验证身份，本接口可以获取计费签名。
+   */
+  async DescribeAuthSignature(
+    req?: DescribeAuthSignatureRequest,
+    cb?: (error: string, rep: DescribeAuthSignatureResponse) => void
+  ): Promise<DescribeAuthSignatureResponse> {
+    return this.request("DescribeAuthSignature", req, cb)
   }
 
   /**

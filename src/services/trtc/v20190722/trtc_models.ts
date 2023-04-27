@@ -2293,7 +2293,7 @@ export interface CreateCloudRecordingRequest {
   RecordParams: RecordParams
 
   /**
-   * 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。
+   * 云端录制文件上传到云存储的参数(目前支持云点播VOD和对象存储COS)。点播和对象存储的参数必填其中之一，不支持同时设置点播和对象存储。
    */
   StorageParams: StorageParams
 

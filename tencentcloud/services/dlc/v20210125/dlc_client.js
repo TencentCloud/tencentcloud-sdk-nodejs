@@ -178,7 +178,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LockMetaData", req, cb);
     }
     /**
-     * 获取spark应用列表
+     * 获取spark应用列表。
      */
     async DescribeSparkAppJobs(req, cb) {
         return this.request("DescribeSparkAppJobs", req, cb);

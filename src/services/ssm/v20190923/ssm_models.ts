@@ -511,6 +511,24 @@ export interface SecretMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TargetUin: number
+
+  /**
+      * 轮转的频率，以天作为单位，在轮转开启状态下生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RotationFrequency?: number
+
+  /**
+      * 云产品凭据对应的云产品实例 ID 号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceID?: string
+
+  /**
+      * 用户指定的轮转开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RotationBeginTime?: string
 }
 
 /**
