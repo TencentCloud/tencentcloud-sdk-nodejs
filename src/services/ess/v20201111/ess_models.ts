@@ -256,12 +256,12 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
   NotifyType?: string
 
   /**
-   * 签署前置条件：是否需要阅读全文，默认为不需要
+   * 合同强制需要阅读全文，无需传此参数
    */
   IsFullText?: boolean
 
   /**
-   * 签署前置条件：阅读时长限制，单位秒，默认为不需要
+   * 合同的强制预览时间：3~300s，未指定则按合同页数计算
    */
   PreReadTime?: number
 
@@ -2067,8 +2067,9 @@ export interface CreateFlowEvidenceReportResponse {
  */
 export interface DescribeFileUrlsResponse {
   /**
-   * URL信息
-   */
+      * 文件URL信息；
+链接不是永久链接，有效期5分钟后链接失效。
+      */
   FileUrls?: Array<FileUrl>
 
   /**
@@ -2919,7 +2920,7 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
   UrlType?: string
 
   /**
-   * 通知类型，默认不填为不通知开通方，填写 SMS 为短息通知。
+   * 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。
    */
   NotifyType?: string
 

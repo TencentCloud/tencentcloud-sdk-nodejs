@@ -3574,6 +3574,12 @@ FAILED:已失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FailReason: string
+
+  /**
+      * 资金账户字类型: WECHATPAY_ACCOUNT 微信零钱, BANK_ACCOUNT 银行卡
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FundingAccountSubType?: string
 }
 
 /**

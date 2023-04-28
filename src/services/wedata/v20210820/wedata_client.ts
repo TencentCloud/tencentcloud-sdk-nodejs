@@ -67,7 +67,7 @@ import {
   DescribeDataSourceListRequest,
   DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeInLongTkeClusterListResponse,
-  KillInstancesRequest,
+  DescribeOperateTasksRequest,
   DescribeDataCheckStatRequest,
   RegisterEventListenerResponse,
   RestartInLongAgentResponse,
@@ -146,6 +146,7 @@ import {
   DescribeTableInfoListRequest,
   DescribeQualityScoreRequest,
   CommitIntegrationTaskResponse,
+  TaskReportDetail,
   IntegrationTaskInfo,
   SubmitTaskResponse,
   ModifyFolderRequest,
@@ -329,6 +330,7 @@ import {
   SubmitWorkflowRequest,
   RerunInstancesResponse,
   DescribeTaskLockStatusResponse,
+  KillInstancesRequest,
   StartIntegrationTaskResponse,
   BatchKillIntegrationTaskInstancesRequest,
   InstanceReportWriteNode,
@@ -423,6 +425,7 @@ import {
   DescribeTableScoreTrendRequest,
   RuleExecResultPage,
   ModifyExecStrategyRequest,
+  RealTimeTaskSpeed,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
   RuleHistoryPage,
@@ -476,7 +479,7 @@ import {
   CheckTaskNameExistResponse,
   DescribeInLongAgentTaskListResponse,
   LockIntegrationTaskRequest,
-  TaskReportDetail,
+  TaskInfoPage,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
   DescribeMonitorsByPageResponse,
@@ -528,7 +531,7 @@ import {
   OfflineTaskAddParam,
   DescribeRuleExecExportResultResponse,
   LogContent,
-  RealTimeTaskSpeed,
+  DescribeOperateTasksResponse,
   DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,
@@ -952,6 +955,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmEventsResponse) => void
   ): Promise<DescribeAlarmEventsResponse> {
     return this.request("DescribeAlarmEvents", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量置成功
+     */
+  async ForceSucInstances(
+    req: ForceSucInstancesRequest,
+    cb?: (error: string, rep: ForceSucInstancesResponse) => void
+  ): Promise<ForceSucInstancesResponse> {
+    return this.request("ForceSucInstances", req, cb)
   }
 
   /**
@@ -1464,14 +1478,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量置成功
-     */
-  async ForceSucInstances(
-    req: ForceSucInstancesRequest,
-    cb?: (error: string, rep: ForceSucInstancesResponse) => void
-  ): Promise<ForceSucInstancesResponse> {
-    return this.request("ForceSucInstances", req, cb)
+   * 任务运维列表组合条件查询
+   */
+  async DescribeOperateTasks(
+    req: DescribeOperateTasksRequest,
+    cb?: (error: string, rep: DescribeOperateTasksResponse) => void
+  ): Promise<DescribeOperateTasksResponse> {
+    return this.request("DescribeOperateTasks", req, cb)
   }
 
   /**

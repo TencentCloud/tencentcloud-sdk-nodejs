@@ -1977,18 +1977,18 @@ export interface PortItem {
     NginxServerId: string;
 }
 /**
- * Waf 威胁情报封禁模块配置详情
+ * 当前WAF威胁情报封禁模块详情
  */
 export interface WafThreatenIntelligenceDetails {
-    /**
-      * 封禁模组启用状态
-      */
-    DefenseStatus: number;
     /**
       * 封禁属性标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags?: Array<string>;
+    /**
+      * 封禁模组启用状态
+      */
+    DefenseStatus?: number;
     /**
       * 最后更新时间
       */
@@ -2166,6 +2166,11 @@ export interface BotQPS {
       * 使用qps的最大值
       */
     MaxBotQPS: number;
+    /**
+      * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag?: number;
 }
 /**
  * ModifyWafAutoDenyRules返回参数结构体
@@ -2645,6 +2650,11 @@ export interface FraudPkg {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UsedNum?: number;
+    /**
+      * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag?: number;
 }
 /**
  * ModifyAreaBanStatus返回参数结构体
@@ -2824,7 +2834,7 @@ export interface ModifyWafThreatenIntelligenceRequest {
     /**
       * 配置WAF威胁情报封禁模块详情
       */
-    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+    WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
 }
 /**
  * 自定义规则的匹配条件结构体
@@ -3024,7 +3034,7 @@ export interface DescribeWafThreatenIntelligenceResponse {
     /**
       * WAF 威胁情报封禁信息
       */
-    WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
+    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3405,6 +3415,11 @@ export interface BotPkg {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Type?: string;
+    /**
+      * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag?: number;
 }
 /**
  * ModifyWafThreatenIntelligence返回参数结构体

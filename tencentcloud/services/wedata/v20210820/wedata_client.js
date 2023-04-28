@@ -269,6 +269,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmEvents", req, cb);
     }
     /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量置成功
+     */
+    async ForceSucInstances(req, cb) {
+        return this.request("ForceSucInstances", req, cb);
+    }
+    /**
      * 质量报告-质量评分
      */
     async DescribeQualityScore(req, cb) {
@@ -578,11 +585,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTaskScript", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量置成功
+     * 任务运维列表组合条件查询
      */
-    async ForceSucInstances(req, cb) {
-        return this.request("ForceSucInstances", req, cb);
+    async DescribeOperateTasks(req, cb) {
+        return this.request("DescribeOperateTasks", req, cb);
     }
     /**
      * 查询规则组详情接口

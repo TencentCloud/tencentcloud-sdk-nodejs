@@ -3486,7 +3486,7 @@ export interface CreateLiveCallbackTemplateRequest {
   SnapshotNotifyUrl?: string
 
   /**
-      * 鉴黄回调 URL，
+      * 鉴黄回调 URL ，
 相关协议文档：[事件消息通知](/document/product/267/32741)。
       */
   PornCensorshipNotifyUrl?: string
@@ -3506,6 +3506,11 @@ export interface CreateLiveCallbackTemplateRequest {
    * 推流异常回调 URL。
    */
   PushExceptionNotifyUrl?: string
+
+  /**
+   * 音频审核回调 URL。
+   */
+  AudioAuditNotifyUrl?: string
 }
 
 /**
@@ -7939,7 +7944,7 @@ export interface CreateLiveCallbackTemplateResponse {
   /**
    * 模板ID。
    */
-  TemplateId: number
+  TemplateId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

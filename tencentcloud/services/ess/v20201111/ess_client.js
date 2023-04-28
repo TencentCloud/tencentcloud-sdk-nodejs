@@ -77,7 +77,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DescribeFileUrls", req, cb);
     }
     /**
-     * 企业方可以通过此接口获取个人用户开启自动签的跳转链接
+     * 企业方可以通过此接口获取个人用户开启自动签的跳转链接（处方单场景专用，使用此接口请与客户经理确认）
      */
     async CreateUserAutoSignEnableUrl(req, cb) {
         return this.request("CreateUserAutoSignEnableUrl", req, cb);
@@ -116,7 +116,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("BindEmployeeUserIdWithClientOpenId", req, cb);
     }
     /**
-     * 本接口（CreatePreparedPersonalEsign）用于创建导入个人印章。
+     * 本接口（CreatePreparedPersonalEsign）用于创建导入个人印章（处方单场景专用，在开通个人自动签之后调用，使用此接口请与客户经理确认）。
      */
     async CreatePreparedPersonalEsign(req, cb) {
         return this.request("CreatePreparedPersonalEsign", req, cb);
@@ -132,7 +132,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowApprovers", req, cb);
     }
     /**
-     * 企业方可以通过此接口关闭个人的自动签功能
+     * 企业方可以通过此接口关闭个人的自动签功能（处方单场景专用，使用此接口请与客户经理确认）
      */
     async DisableUserAutoSign(req, cb) {
         return this.request("DisableUserAutoSign", req, cb);
@@ -197,7 +197,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateReleaseFlow", req, cb);
     }
     /**
-     * 企业方可以通过此接口查询个人用户自动签开启状态
+     * 企业方可以通过此接口查询个人用户自动签开启状态。（处方单场景专用，使用此接口请与客户经理确认）
      */
     async DescribeUserAutoSignStatus(req, cb) {
         return this.request("DescribeUserAutoSignStatus", req, cb);
@@ -226,7 +226,13 @@ callbackinfo包含： 回调地址和签名key
     /**
      * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
 适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
-适用的模板仅限于B2C（1、无序签署，2、顺序签署时B静默签署，3、顺序签署时B非首位签署）、单C的模板，且模板中发起方没有填写控件。
+
+**本接口适用于发起方没有填写控件的 B2C或者单C模板**
+
+**若是B2C模板,还要满足以下任意一个条件**
+- 模板中配置的签署顺序是无序
+- B端企业的签署方式是静默签署
+- B端企业是非首位签署
      */
     async CreateMultiFlowSignQRCode(req, cb) {
         return this.request("CreateMultiFlowSignQRCode", req, cb);

@@ -398,6 +398,16 @@ it("wedata.v20210820.DescribeAlarmEvents", async function () {
     }
 })
 
+it("wedata.v20210820.ForceSucInstances", async function () {
+    try {
+       const data = await client.ForceSucInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeQualityScore", async function () {
     try {
        const data = await client.DescribeQualityScore({})
@@ -898,9 +908,9 @@ it("wedata.v20210820.ModifyTaskScript", async function () {
     }
 })
 
-it("wedata.v20210820.ForceSucInstances", async function () {
+it("wedata.v20210820.DescribeOperateTasks", async function () {
     try {
-       const data = await client.ForceSucInstances({})
+       const data = await client.DescribeOperateTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

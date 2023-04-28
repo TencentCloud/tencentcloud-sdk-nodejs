@@ -432,6 +432,11 @@ export interface BlockIgnoreRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Country: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Comment: string;
 }
 /**
  * ModifyNatFwVpcDnsSwitch请求参数结构体
@@ -3312,11 +3317,11 @@ export interface DescribeBlockIgnoreListRequest {
       */
     RuleType: number;
     /**
-      * 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数
+      * 排序类型：desc降序，asc正序
       */
     Order: string;
     /**
-      * 排序类型：desc降序，asc正序
+      * 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数
       */
     By: string;
     /**
@@ -4098,19 +4103,19 @@ export interface DescribeBlockIgnoreListResponse {
     /**
       * 列表数据
       */
-    Data: Array<BlockIgnoreRule>;
+    Data?: Array<BlockIgnoreRule>;
     /**
       * 查询结果总数，用于分页
       */
-    Total: number;
+    Total?: number;
     /**
       * 状态值，0：查询成功，非0：查询失败
       */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
       * 状态信息，success：查询成功，fail：查询失败
       */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

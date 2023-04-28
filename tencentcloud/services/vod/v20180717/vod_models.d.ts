@@ -10661,6 +10661,10 @@ export interface DescribeFileAttributesTaskOutput {
       * 媒体文件的 Md5 值。
       */
     Md5: string;
+    /**
+      * 媒体文件的 Sha1 值。
+      */
+    Sha1?: string;
 }
 /**
  * TRTC伴生录制信息。
@@ -14999,8 +15003,9 @@ export interface CreateRebuildMediaTemplateRequest {
 export interface ImageOperation {
     /**
       * 图片处理类型。可选类型有：
-<li>Scale : 图片缩略处理。</li>
-<li>CenterCut : 图片裁剪处理。</li>
+<li>Scale : 图片缩略处理；</li>
+<li>CenterCut : 图片裁剪处理；</li>
+<li>Blur : 图片模糊处理。</li>
       */
     Type: string;
     /**

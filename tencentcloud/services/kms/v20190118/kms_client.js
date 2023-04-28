@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("kms.tencentcloudapi.com", "2019-01-18", clientConfig);
     }
     /**
+     * 使用后量子密码算法密钥对签名进行验证。
+     */
+    async PostQuantumCryptoVerify(req, cb) {
+        return this.request("PostQuantumCryptoVerify", req, cb);
+    }
+    /**
      * 本接口用于加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作
      */
     async Encrypt(req, cb) {
@@ -168,6 +174,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GenerateRandom", req, cb);
     }
     /**
+     * 本接口使用后量子密码算法密钥，解密密文，并得到明文数据。
+     */
+    async PostQuantumCryptoDecrypt(req, cb) {
+        return this.request("PostQuantumCryptoDecrypt", req, cb);
+    }
+    /**
      * 覆盖指定密钥的设备指纹信息
      */
     async OverwriteWhiteBoxDeviceFingerprints(req, cb) {
@@ -264,6 +276,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWhiteBoxKey", req, cb);
     }
     /**
+     * 本接口使用后量子密码算法密钥，可加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作。
+     */
+    async PostQuantumCryptoEncrypt(req, cb) {
+        return this.request("PostQuantumCryptoEncrypt", req, cb);
+    }
+    /**
      * 启用白盒密钥
      */
     async EnableWhiteBoxKey(req, cb) {
@@ -310,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWhiteBoxDecryptKey(req, cb) {
         return this.request("DescribeWhiteBoxDecryptKey", req, cb);
+    }
+    /**
+     * 使用后量子密码算法签名验签密钥进行签名。
+     */
+    async PostQuantumCryptoSign(req, cb) {
+        return this.request("PostQuantumCryptoSign", req, cb);
     }
     /**
      * 获取可以提供KMS服务的地域列表

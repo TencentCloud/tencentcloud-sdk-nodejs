@@ -726,12 +726,12 @@ export interface QueueConfig {
   QueueName: string
 
   /**
-   * 队列中弹性节点数量最小值。取值范围0～200。
+   * 队列中弹性节点数量最小值。默认值：0。取值范围：0～200。
    */
   MinSize?: number
 
   /**
-   * 队列中弹性节点数量最大值。取值范围0～200。
+   * 队列中弹性节点数量最大值。默认值：10。取值范围：0～200。
    */
   MaxSize?: number
 

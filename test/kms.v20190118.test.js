@@ -18,6 +18,16 @@ const client = new tencentcloud.kms.v20190118.Client({
 })
 describe("kms.v20190118.test.js", function () {
 
+it("kms.v20190118.PostQuantumCryptoVerify", async function () {
+    try {
+       const data = await client.PostQuantumCryptoVerify({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.Encrypt", async function () {
     try {
        const data = await client.Encrypt({})
@@ -248,6 +258,16 @@ it("kms.v20190118.GenerateRandom", async function () {
     }
 })
 
+it("kms.v20190118.PostQuantumCryptoDecrypt", async function () {
+    try {
+       const data = await client.PostQuantumCryptoDecrypt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.OverwriteWhiteBoxDeviceFingerprints", async function () {
     try {
        const data = await client.OverwriteWhiteBoxDeviceFingerprints({})
@@ -408,6 +428,16 @@ it("kms.v20190118.CreateWhiteBoxKey", async function () {
     }
 })
 
+it("kms.v20190118.PostQuantumCryptoEncrypt", async function () {
+    try {
+       const data = await client.PostQuantumCryptoEncrypt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.EnableWhiteBoxKey", async function () {
     try {
        const data = await client.EnableWhiteBoxKey({})
@@ -481,6 +511,16 @@ it("kms.v20190118.DisableKeys", async function () {
 it("kms.v20190118.DescribeWhiteBoxDecryptKey", async function () {
     try {
        const data = await client.DescribeWhiteBoxDecryptKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.PostQuantumCryptoSign", async function () {
+    try {
+       const data = await client.PostQuantumCryptoSign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

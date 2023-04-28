@@ -1178,17 +1178,69 @@ export interface DescribeInLongTkeClusterListResponse {
     RequestId?: string;
 }
 /**
- * KillInstances请求参数结构体
+ * DescribeOperateTasks请求参数结构体
  */
-export interface KillInstancesRequest {
+export interface DescribeOperateTasksRequest {
     /**
-      * 项目Id
+      * 项目id
       */
     ProjectId: string;
     /**
-      * 实例嵌套集合
+      * 文件夹id，多个文件夹以逗号分隔
       */
-    Instances: Array<InstanceInfo>;
+    FolderIdList?: string;
+    /**
+      * 工作流id，多个工作流id之间以英文字符逗号分隔
+      */
+    WorkFlowIdList?: string;
+    /**
+      * 工作流名称，多个工作流名称之间以英文字符逗号分隔
+      */
+    WorkFlowNameList?: string;
+    /**
+      * 任务名称，多个任务名称之间以英文字符逗号分隔
+      */
+    TaskNameList?: string;
+    /**
+      * 任务id，多个任务id之间以英文字符逗号分隔
+      */
+    TaskIdList?: string;
+    /**
+      * 页号
+      */
+    PageNumber?: string;
+    /**
+      * 分页大小
+      */
+    PageSize?: string;
+    /**
+      * 排序字段，支持字段为FirstSubmitTime和FirstRunTime，标识最近提交和首次执行事件
+      */
+    SortItem?: string;
+    /**
+      * 排序类型。两种取值 DESC、ASC
+      */
+    SortType?: string;
+    /**
+      * 责任人，多个责任人之间以英文字符逗号分隔
+      */
+    InChargeList?: string;
+    /**
+      * 任务类型Id字符串，多个任务类型id之间以英文字符逗号分隔
+      */
+    TaskTypeIdList?: string;
+    /**
+      * 任务状态字符串，多个任务状态之间以英文字符逗号分隔
+      */
+    StatusList?: string;
+    /**
+      * 任务周期类型字符串，多个任务周期之间以英文字符逗号分隔
+      */
+    TaskCycleUnitList?: string;
+    /**
+      * 任务所属产品类型
+      */
+    ProductNameList?: string;
 }
 /**
  * DescribeDataCheckStat请求参数结构体
@@ -3472,6 +3524,59 @@ export interface CommitIntegrationTaskResponse {
     RequestId?: string;
 }
 /**
+ * 离线任务统计指标明细
+ */
+export interface TaskReportDetail {
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
+      * 任务实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例数据运行时间
+      */
+    CurRunDate: string;
+    /**
+      * 实例实际下发时间
+      */
+    IssueDate: string;
+    /**
+      * 任务状态码。1 正在执行,2 成功,3 失败,4 等待终止,5 正在终止,6 已终止,7 终止失败,9 等待执行。
+      */
+    TaskState: string;
+    /**
+      * 总读取条数
+      */
+    TotalReadRecords: number;
+    /**
+      * 总读取字节数
+      */
+    TotalReadBytes: number;
+    /**
+      * 总写入条数
+      */
+    TotalWriteRecords: number;
+    /**
+      * 总写入字节数
+      */
+    TotalWriteBytes: number;
+    /**
+      * 写入速度（条/秒）
+      */
+    RecordSpeed: number;
+    /**
+      * 吞吐（Byte/秒）
+      */
+    ByteSpeed: number;
+    /**
+      * 脏数据条数
+      */
+    TotalErrorRecords: number;
+}
+/**
  * 集成任务
  */
 export interface IntegrationTaskInfo {
@@ -5123,6 +5228,10 @@ export interface GenHiveTableDDLSqlRequest {
       * 增加的delete file数量阈值
       */
     AddDeleteFiles?: number;
+    /**
+      * 下游节点数据源ID
+      */
+    TargetDatasourceId?: string;
 }
 /**
  * DescribeRuleExecResultsByPage请求参数结构体
@@ -7640,6 +7749,19 @@ export interface DescribeTaskLockStatusResponse {
     RequestId?: string;
 }
 /**
+ * KillInstances请求参数结构体
+ */
+export interface KillInstancesRequest {
+    /**
+      * 项目Id
+      */
+    ProjectId: string;
+    /**
+      * 实例嵌套集合
+      */
+    Instances: Array<InstanceInfo>;
+}
+/**
  * StartIntegrationTask返回参数结构体
  */
 export interface StartIntegrationTaskResponse {
@@ -8611,6 +8733,11 @@ export interface AlarmIndicatorInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Operator?: number;
+    /**
+      * 告警指标阈值单位：ms(毫秒)、s(秒)、min(分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmIndicatorUnit?: string;
 }
 /**
  * RegisterEvent返回参数结构体
@@ -9250,6 +9377,11 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BizParamsString: string;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime?: number;
 }
 /**
  * 比较条件
@@ -9819,13 +9951,21 @@ export interface FieldConfig {
  */
 export interface DescribeRealTimeTaskMetricOverviewRequest {
     /**
-      * 无
+      * 要查看的实时任务的任务Id
       */
     TaskId: string;
     /**
       * 无
       */
     ProjectId: string;
+    /**
+      * 开始时间
+      */
+    StartTime?: number;
+    /**
+      * 结束时间
+      */
+    EndTime?: number;
 }
 /**
  * CreateResourcePath返回参数结构体
@@ -10239,6 +10379,19 @@ MONTH_CYCLE:M
     TableId?: string;
 }
 /**
+ * 实时任务同步速度趋势
+ */
+export interface RealTimeTaskSpeed {
+    /**
+      * 同步速度条/s列表
+      */
+    RecordsSpeedList: Array<RecordsSpeed>;
+    /**
+      * 同步速度字节/s列表
+      */
+    BytesSpeedList: Array<BytesSpeed>;
+}
+/**
  * BatchForceSuccessIntegrationTaskInstances请求参数结构体
  */
 export interface BatchForceSuccessIntegrationTaskInstancesRequest {
@@ -10336,39 +10489,39 @@ export interface DescribeRealTimeTaskMetricOverviewResponse {
     /**
       * 总读取记录数
       */
-    TotalRecordNumOfRead: number;
+    TotalRecordNumOfRead?: number;
     /**
       * 总读取字节数
       */
-    TotalRecordByteNumOfRead: number;
+    TotalRecordByteNumOfRead?: number;
     /**
       * 总写入记录数
       */
-    TotalRecordNumOfWrite: number;
+    TotalRecordNumOfWrite?: number;
     /**
       * 总写入字节数 单位字节
       */
-    TotalRecordByteNumOfWrite: number;
+    TotalRecordByteNumOfWrite?: number;
     /**
       * 总的脏记录数据
       */
-    TotalDirtyRecordNum: number;
+    TotalDirtyRecordNum?: number;
     /**
       * 总的脏字节数 单位字节
       */
-    TotalDirtyRecordByte: number;
+    TotalDirtyRecordByte?: number;
     /**
       * 运行时长 单位s
       */
-    TotalDuration: number;
+    TotalDuration?: number;
     /**
       * 开始运行时间
       */
-    BeginRunTime: string;
+    BeginRunTime?: string;
     /**
       * 目前运行到的时间
       */
-    EndRunTime: string;
+    EndRunTime?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11220,57 +11373,25 @@ export interface LockIntegrationTaskRequest {
     ProjectId: string;
 }
 /**
- * 离线任务统计指标明细
+ * 任务分页查询
  */
-export interface TaskReportDetail {
+export interface TaskInfoPage {
     /**
-      * 任务ID
+      * 页号
       */
-    TaskId: string;
+    PageNumber: number;
     /**
-      * 任务实例ID
+      * 页大小
       */
-    InstanceId: string;
+    PageSize: number;
     /**
-      * 实例数据运行时间
+      * 工作流列表信息
       */
-    CurRunDate: string;
+    Items: Array<TaskCanvasInfo>;
     /**
-      * 实例实际下发时间
+      * 总页数
       */
-    IssueDate: string;
-    /**
-      * 任务状态码。1 正在执行,2 成功,3 失败,4 等待终止,5 正在终止,6 已终止,7 终止失败,9 等待执行。
-      */
-    TaskState: string;
-    /**
-      * 总读取条数
-      */
-    TotalReadRecords: number;
-    /**
-      * 总读取字节数
-      */
-    TotalReadBytes: number;
-    /**
-      * 总写入条数
-      */
-    TotalWriteRecords: number;
-    /**
-      * 总写入字节数
-      */
-    TotalWriteBytes: number;
-    /**
-      * 写入速度（条/秒）
-      */
-    RecordSpeed: number;
-    /**
-      * 吞吐（Byte/秒）
-      */
-    ByteSpeed: number;
-    /**
-      * 脏数据条数
-      */
-    TotalErrorRecords: number;
+    TotalPage: number;
 }
 /**
  * BatchStopIntegrationTasks请求参数结构体
@@ -11773,6 +11894,10 @@ export interface DescribeIntegrationStatisticsTaskStatusResponse {
  */
 export interface DescribeDatabaseInfoListRequest {
     /**
+      * 过滤参数
+      */
+    Filters: Array<Filter>;
+    /**
       * 如果是hive这里写rpc，如果是其他类型不传
       */
     ConnectionType: string;
@@ -12120,12 +12245,12 @@ export interface GenHiveTableDDLSqlResponse {
     /**
       * 生成的ddl语句
       */
-    DDLSql: string;
+    DDLSql?: string;
     /**
       * 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: string;
+    Data?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12262,17 +12387,17 @@ export interface LogContent {
     Log: string;
 }
 /**
- * 实时任务同步速度趋势
+ * DescribeOperateTasks返回参数结构体
  */
-export interface RealTimeTaskSpeed {
+export interface DescribeOperateTasksResponse {
     /**
-      * 同步速度条/s列表
+      * 任务列表信息
       */
-    RecordsSpeedList: Array<RecordsSpeed>;
+    Data: TaskInfoPage;
     /**
-      * 同步速度字节/s列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    BytesSpeedList: Array<BytesSpeed>;
+    RequestId?: string;
 }
 /**
  * DescribeTopTableStat请求参数结构体

@@ -330,7 +330,7 @@ export interface ProcessLiveStreamResponse {
     /**
       * 任务 ID
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10036,6 +10036,10 @@ export interface ProcessLiveStreamRequest {
       * 视频内容识别类型任务参数。
       */
     AiRecognitionTask?: AiRecognitionTaskInput;
+    /**
+      * 视频内容分析类型任务参数。
+      */
+    AiAnalysisTask?: AiAnalysisTaskInput;
     /**
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */

@@ -239,6 +239,13 @@ export interface DescribeKTVPlaylistDetailRequest {
 <li>Live：直播</li><li>Chat：语聊</li>
       */
   PlayScene?: string
+
+  /**
+      * 物料过滤，取值有：
+<li>Lyrics：含有歌词；</li>
+<li>Midi：含有音高线。</li>
+      */
+  MaterialFilters?: Array<string>
 }
 
 /**
@@ -672,12 +679,12 @@ export interface DescribeKTVMusicsByTagResponse {
   /**
    * 歌曲信息列表。
    */
-  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+  KTVMusicInfoSet?: Array<KTVMusicBaseInfo>
 
   /**
    * 滚动标记，用于设置下次请求的 ScrollToken 参数。
    */
-  ScrollToken: string
+  ScrollToken?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1145,6 +1152,13 @@ export interface DescribeKTVMusicsByTagRequest {
 <li>Sing：可唱。</li>
       */
   RightFilters?: Array<string>
+
+  /**
+      * 物料过滤，取值有：
+<li>Lyrics：含有歌词；</li>
+<li>Midi：含有音高线。</li>
+      */
+  MaterialFilters?: Array<string>
 }
 
 /**
@@ -1188,6 +1202,13 @@ export interface SearchKTVMusicsRequest {
 <li>Live：直播</li><li>Chat：语聊</li>
       */
   PlayScene?: string
+
+  /**
+      * 物料过滤，取值有：
+<li>Lyrics：含有歌词；</li>
+<li>Midi：含有音高线。</li>
+      */
+  MaterialFilters?: Array<string>
 }
 
 /**

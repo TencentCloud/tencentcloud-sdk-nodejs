@@ -44,6 +44,7 @@ import {
   GenerateDataKeyRequest,
   UpdateAliasResponse,
   ScheduleKeyDeletionResponse,
+  PostQuantumCryptoVerifyRequest,
   GenerateRandomResponse,
   DescribeKeysRequest,
   GetPublicKeyRequest,
@@ -95,6 +96,8 @@ import {
   CancelKeyArchiveResponse,
   DecryptRequest,
   DescribeWhiteBoxKeyDetailsRequest,
+  PostQuantumCryptoSignRequest,
+  PostQuantumCryptoDecryptRequest,
   AsymmetricRsaDecryptResponse,
   CancelKeyDeletionResponse,
   DisableKeysRequest,
@@ -107,17 +110,22 @@ import {
   SignByAsymmetricKeyRequest,
   DescribeWhiteBoxDeviceFingerprintsRequest,
   GetRegionsRequest,
+  PostQuantumCryptoEncryptResponse,
   EncryptByWhiteBoxRequest,
   GenerateRandomRequest,
   ScheduleKeyDeletionRequest,
+  PostQuantumCryptoEncryptRequest,
   DisableKeyRequest,
   ImportKeyMaterialResponse,
   GetPublicKeyResponse,
   BindCloudResourceRequest,
   TagFilter,
+  PostQuantumCryptoSignResponse,
   SignByAsymmetricKeyResponse,
+  PostQuantumCryptoVerifyResponse,
   DescribeWhiteBoxDecryptKeyResponse,
   DescribeWhiteBoxDeviceFingerprintsResponse,
+  PostQuantumCryptoDecryptResponse,
   UpdateKeyDescriptionRequest,
   UnbindCloudResourceResponse,
   DescribeKeyResponse,
@@ -132,6 +140,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("kms.tencentcloudapi.com", "2019-01-18", clientConfig)
+  }
+
+  /**
+   * 使用后量子密码算法密钥对签名进行验证。
+   */
+  async PostQuantumCryptoVerify(
+    req: PostQuantumCryptoVerifyRequest,
+    cb?: (error: string, rep: PostQuantumCryptoVerifyResponse) => void
+  ): Promise<PostQuantumCryptoVerifyResponse> {
+    return this.request("PostQuantumCryptoVerify", req, cb)
   }
 
   /**
@@ -367,6 +385,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口使用后量子密码算法密钥，解密密文，并得到明文数据。
+   */
+  async PostQuantumCryptoDecrypt(
+    req: PostQuantumCryptoDecryptRequest,
+    cb?: (error: string, rep: PostQuantumCryptoDecryptResponse) => void
+  ): Promise<PostQuantumCryptoDecryptResponse> {
+    return this.request("PostQuantumCryptoDecrypt", req, cb)
+  }
+
+  /**
    * 覆盖指定密钥的设备指纹信息
    */
   async OverwriteWhiteBoxDeviceFingerprints(
@@ -527,6 +555,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口使用后量子密码算法密钥，可加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作。
+   */
+  async PostQuantumCryptoEncrypt(
+    req: PostQuantumCryptoEncryptRequest,
+    cb?: (error: string, rep: PostQuantumCryptoEncryptResponse) => void
+  ): Promise<PostQuantumCryptoEncryptResponse> {
+    return this.request("PostQuantumCryptoEncrypt", req, cb)
+  }
+
+  /**
    * 启用白盒密钥
    */
   async EnableWhiteBoxKey(
@@ -604,6 +642,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWhiteBoxDecryptKeyResponse) => void
   ): Promise<DescribeWhiteBoxDecryptKeyResponse> {
     return this.request("DescribeWhiteBoxDecryptKey", req, cb)
+  }
+
+  /**
+   * 使用后量子密码算法签名验签密钥进行签名。
+   */
+  async PostQuantumCryptoSign(
+    req: PostQuantumCryptoSignRequest,
+    cb?: (error: string, rep: PostQuantumCryptoSignResponse) => void
+  ): Promise<PostQuantumCryptoSignResponse> {
+    return this.request("PostQuantumCryptoSign", req, cb)
   }
 
   /**

@@ -4049,7 +4049,8 @@ export interface DescribePayTypeRequest {
       * 指定服务地域查询
 mainland：境内计费方式查询
 overseas：境外计费方式查询
-未填充时默认为 mainland
+global：全球计费方式查询
+未填充时，默认为 mainland
       */
   Area?: string
 
@@ -4057,6 +4058,14 @@ overseas：境外计费方式查询
    * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
    */
   Product?: string
+
+  /**
+      * 指定资源包查询
+flux：流量包
+https：HTTPS请求包
+未填充时，默认为 flux
+      */
+  Type?: string
 }
 
 /**
@@ -5852,7 +5861,7 @@ export interface StopScdnDomainResponse {
  */
 export interface DescribePayTypeResponse {
   /**
-      * 计费类型：
+      * 计费类型
 flux：流量计费
 bandwidth：带宽计费
 request：请求数计费
@@ -5860,41 +5869,42 @@ flux_sep：动静分离流量计费
 bandwidth_sep：动静分离带宽计费
 日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
       */
-  PayType: string
+  PayType?: string
 
   /**
-      * 计费周期：
+      * 计费周期
 day：日结计费
 month：月结计费
 hour：小时结计费
       */
-  BillingCycle: string
+  BillingCycle?: string
 
   /**
-      * monthMax：日峰值月平均，月结模式
+      * 统计类型
+monthMax：日峰值月平均，月结模式
 day95：日 95 带宽，月结模式
 month95：月95带宽，月结模式
 sum：总流量/总请求数，日结或月结模式
 max：峰值带宽，日结模式
       */
-  StatType: string
+  StatType?: string
 
   /**
-      * 境外计费类型：
+      * 计费区域
 all：全地区统一计费
 multiple：分地区计费
       */
-  RegionType: string
+  RegionType?: string
 
   /**
-      * 当前生效计费类型：
+      * 当前生效计费类型
 flux：流量计费
 bandwidth：带宽计费
 request：请求数计费
 flux_sep：动静分离流量计费
 bandwidth_sep：动静分离带宽计费
       */
-  CurrentPayType: string
+  CurrentPayType?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

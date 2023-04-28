@@ -1676,67 +1676,67 @@ export interface DescribeBackupByFlowIdResponse {
   /**
    * 备份文件唯一标识，RestoreInstance接口会用到该字段，对于单库备份文件只返回第一条记录的备份文件唯一标识；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的可回档的ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 文件名，对于单库备份文件只返回第一条记录的文件名；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的文件名
    */
-  FileName: string
+  FileName?: string
 
   /**
    * 备份任务名称，可自定义
    */
-  BackupName: string
+  BackupName?: string
 
   /**
    * 备份开始时间
    */
-  StartTime: string
+  StartTime?: string
 
   /**
    * 备份结束时间
    */
-  EndTime: string
+  EndTime?: string
 
   /**
    * 文件大小，单位 KB，对于单库备份文件只返回第一条记录的文件大小；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的文件大小
    */
-  Size: number
+  Size?: number
 
   /**
    * 备份策略，0-实例备份；1-多库备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
    */
-  Strategy: number
+  Strategy?: number
 
   /**
    * 备份文件状态，0-创建中；1-成功；2-失败
    */
-  Status: number
+  Status?: number
 
   /**
    * 备份方式，0-定时备份；1-手动临时备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
    */
-  BackupWay: number
+  BackupWay?: number
 
   /**
    * DB列表，对于单库备份文件只返回第一条记录包含的库名；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的库名。
    */
-  DBs: Array<string>
+  DBs?: Array<string>
 
   /**
    * 内网下载地址，对于单库备份文件只返回第一条记录的内网下载地址；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的下载地址
    */
-  InternalAddr: string
+  InternalAddr?: string
 
   /**
    * 外网下载地址，对于单库备份文件只返回第一条记录的外网下载地址；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的下载地址
    */
-  ExternalAddr: string
+  ExternalAddr?: string
 
   /**
    * 聚合Id，对于打包备份文件不返回此值。通过此值调用DescribeBackupFiles接口，获取单库备份文件的详细信息
    */
-  GroupId: string
+  GroupId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

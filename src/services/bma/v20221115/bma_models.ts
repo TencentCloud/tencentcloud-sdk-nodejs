@@ -75,6 +75,11 @@ export interface CreateBPBrandRequest {
   CompanyName?: string
 
   /**
+   * 品牌logo
+   */
+  BrandLogo?: string
+
+  /**
    * 联系电话
    */
   Phone?: string
@@ -626,6 +631,12 @@ export interface FakeURLData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Snapshot?: string
+
+  /**
+      * 账户资源状态：0-不可用 1-可用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountStatus?: number
 }
 
 /**
@@ -815,7 +826,7 @@ export interface CreateBPBrandResponse {
   /**
    * 企业id
    */
-  CompanyId: number
+  CompanyId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

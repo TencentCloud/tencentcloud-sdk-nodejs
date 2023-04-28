@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAliasRequest, EnableWhiteBoxKeyRequest, AsymmetricRsaDecryptRequest, EnableKeyRotationRequest, DescribeWhiteBoxKeyDetailsResponse, CreateKeyRequest, DisableWhiteBoxKeyResponse, DisableKeyResponse, DescribeWhiteBoxServiceStatusRequest, VerifyByAsymmetricKeyRequest, DescribeKeyRequest, ListAlgorithmsResponse, DisableKeysResponse, DescribeWhiteBoxKeyResponse, UpdateKeyDescriptionResponse, DescribeWhiteBoxServiceStatusResponse, ImportKeyMaterialRequest, EnableKeyRequest, GetKeyRotationStatusRequest, ListAlgorithmsRequest, ListKeyDetailResponse, GenerateDataKeyRequest, UpdateAliasResponse, ScheduleKeyDeletionResponse, GenerateRandomResponse, DescribeKeysRequest, GetPublicKeyRequest, GetServiceStatusRequest, EnableWhiteBoxKeysResponse, ArchiveKeyResponse, VerifyByAsymmetricKeyResponse, DescribeWhiteBoxKeyRequest, GetParametersForImportResponse, DecryptResponse, CreateWhiteBoxKeyResponse, DeleteImportedKeyMaterialResponse, EnableKeysRequest, EnableWhiteBoxKeysRequest, EncryptByWhiteBoxResponse, DescribeKeysResponse, EnableWhiteBoxKeyResponse, ReEncryptRequest, ListKeysResponse, AsymmetricSm2DecryptResponse, DisableKeyRotationResponse, DisableWhiteBoxKeysRequest, ListKeyDetailRequest, DeleteWhiteBoxKeyRequest, GetRegionsResponse, GenerateDataKeyResponse, CreateWhiteBoxKeyRequest, OverwriteWhiteBoxDeviceFingerprintsResponse, DisableWhiteBoxKeysResponse, ArchiveKeyRequest, GetParametersForImportRequest, CreateKeyResponse, ReEncryptResponse, EncryptResponse, CancelKeyDeletionRequest, DeleteImportedKeyMaterialRequest, EnableKeyResponse, GetServiceStatusResponse, GetKeyRotationStatusResponse, EncryptRequest, AsymmetricSm2DecryptRequest, DeleteWhiteBoxKeyResponse, ListKeysRequest, DescribeWhiteBoxDecryptKeyRequest, CancelKeyArchiveResponse, DecryptRequest, DescribeWhiteBoxKeyDetailsRequest, AsymmetricRsaDecryptResponse, CancelKeyDeletionResponse, DisableKeysRequest, DisableWhiteBoxKeyRequest, UnbindCloudResourceRequest, OverwriteWhiteBoxDeviceFingerprintsRequest, EnableKeyRotationResponse, BindCloudResourceResponse, EnableKeysResponse, SignByAsymmetricKeyRequest, DescribeWhiteBoxDeviceFingerprintsRequest, GetRegionsRequest, EncryptByWhiteBoxRequest, GenerateRandomRequest, ScheduleKeyDeletionRequest, DisableKeyRequest, ImportKeyMaterialResponse, GetPublicKeyResponse, BindCloudResourceRequest, SignByAsymmetricKeyResponse, DescribeWhiteBoxDecryptKeyResponse, DescribeWhiteBoxDeviceFingerprintsResponse, UpdateKeyDescriptionRequest, UnbindCloudResourceResponse, DescribeKeyResponse, CancelKeyArchiveRequest, DisableKeyRotationRequest } from "./kms_models";
+import { UpdateAliasRequest, EnableWhiteBoxKeyRequest, AsymmetricRsaDecryptRequest, EnableKeyRotationRequest, DescribeWhiteBoxKeyDetailsResponse, CreateKeyRequest, DisableWhiteBoxKeyResponse, DisableKeyResponse, DescribeWhiteBoxServiceStatusRequest, VerifyByAsymmetricKeyRequest, DescribeKeyRequest, ListAlgorithmsResponse, DisableKeysResponse, DescribeWhiteBoxKeyResponse, UpdateKeyDescriptionResponse, DescribeWhiteBoxServiceStatusResponse, ImportKeyMaterialRequest, EnableKeyRequest, GetKeyRotationStatusRequest, ListAlgorithmsRequest, ListKeyDetailResponse, GenerateDataKeyRequest, UpdateAliasResponse, ScheduleKeyDeletionResponse, PostQuantumCryptoVerifyRequest, GenerateRandomResponse, DescribeKeysRequest, GetPublicKeyRequest, GetServiceStatusRequest, EnableWhiteBoxKeysResponse, ArchiveKeyResponse, VerifyByAsymmetricKeyResponse, DescribeWhiteBoxKeyRequest, GetParametersForImportResponse, DecryptResponse, CreateWhiteBoxKeyResponse, DeleteImportedKeyMaterialResponse, EnableKeysRequest, EnableWhiteBoxKeysRequest, EncryptByWhiteBoxResponse, DescribeKeysResponse, EnableWhiteBoxKeyResponse, ReEncryptRequest, ListKeysResponse, AsymmetricSm2DecryptResponse, DisableKeyRotationResponse, DisableWhiteBoxKeysRequest, ListKeyDetailRequest, DeleteWhiteBoxKeyRequest, GetRegionsResponse, GenerateDataKeyResponse, CreateWhiteBoxKeyRequest, OverwriteWhiteBoxDeviceFingerprintsResponse, DisableWhiteBoxKeysResponse, ArchiveKeyRequest, GetParametersForImportRequest, CreateKeyResponse, ReEncryptResponse, EncryptResponse, CancelKeyDeletionRequest, DeleteImportedKeyMaterialRequest, EnableKeyResponse, GetServiceStatusResponse, GetKeyRotationStatusResponse, EncryptRequest, AsymmetricSm2DecryptRequest, DeleteWhiteBoxKeyResponse, ListKeysRequest, DescribeWhiteBoxDecryptKeyRequest, CancelKeyArchiveResponse, DecryptRequest, DescribeWhiteBoxKeyDetailsRequest, PostQuantumCryptoSignRequest, PostQuantumCryptoDecryptRequest, AsymmetricRsaDecryptResponse, CancelKeyDeletionResponse, DisableKeysRequest, DisableWhiteBoxKeyRequest, UnbindCloudResourceRequest, OverwriteWhiteBoxDeviceFingerprintsRequest, EnableKeyRotationResponse, BindCloudResourceResponse, EnableKeysResponse, SignByAsymmetricKeyRequest, DescribeWhiteBoxDeviceFingerprintsRequest, GetRegionsRequest, PostQuantumCryptoEncryptResponse, EncryptByWhiteBoxRequest, GenerateRandomRequest, ScheduleKeyDeletionRequest, PostQuantumCryptoEncryptRequest, DisableKeyRequest, ImportKeyMaterialResponse, GetPublicKeyResponse, BindCloudResourceRequest, PostQuantumCryptoSignResponse, SignByAsymmetricKeyResponse, PostQuantumCryptoVerifyResponse, DescribeWhiteBoxDecryptKeyResponse, DescribeWhiteBoxDeviceFingerprintsResponse, PostQuantumCryptoDecryptResponse, UpdateKeyDescriptionRequest, UnbindCloudResourceResponse, DescribeKeyResponse, CancelKeyArchiveRequest, DisableKeyRotationRequest } from "./kms_models";
 /**
  * kms client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 使用后量子密码算法密钥对签名进行验证。
+     */
+    PostQuantumCryptoVerify(req: PostQuantumCryptoVerifyRequest, cb?: (error: string, rep: PostQuantumCryptoVerifyResponse) => void): Promise<PostQuantumCryptoVerifyResponse>;
     /**
      * 本接口用于加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作
      */
@@ -102,6 +106,10 @@ export declare class Client extends AbstractClient {
      */
     GenerateRandom(req: GenerateRandomRequest, cb?: (error: string, rep: GenerateRandomResponse) => void): Promise<GenerateRandomResponse>;
     /**
+     * 本接口使用后量子密码算法密钥，解密密文，并得到明文数据。
+     */
+    PostQuantumCryptoDecrypt(req: PostQuantumCryptoDecryptRequest, cb?: (error: string, rep: PostQuantumCryptoDecryptResponse) => void): Promise<PostQuantumCryptoDecryptResponse>;
+    /**
      * 覆盖指定密钥的设备指纹信息
      */
     OverwriteWhiteBoxDeviceFingerprints(req: OverwriteWhiteBoxDeviceFingerprintsRequest, cb?: (error: string, rep: OverwriteWhiteBoxDeviceFingerprintsResponse) => void): Promise<OverwriteWhiteBoxDeviceFingerprintsResponse>;
@@ -166,6 +174,10 @@ export declare class Client extends AbstractClient {
      */
     CreateWhiteBoxKey(req: CreateWhiteBoxKeyRequest, cb?: (error: string, rep: CreateWhiteBoxKeyResponse) => void): Promise<CreateWhiteBoxKeyResponse>;
     /**
+     * 本接口使用后量子密码算法密钥，可加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作。
+     */
+    PostQuantumCryptoEncrypt(req: PostQuantumCryptoEncryptRequest, cb?: (error: string, rep: PostQuantumCryptoEncryptResponse) => void): Promise<PostQuantumCryptoEncryptResponse>;
+    /**
      * 启用白盒密钥
      */
     EnableWhiteBoxKey(req: EnableWhiteBoxKeyRequest, cb?: (error: string, rep: EnableWhiteBoxKeyResponse) => void): Promise<EnableWhiteBoxKeyResponse>;
@@ -197,6 +209,10 @@ export declare class Client extends AbstractClient {
      * 获取白盒解密密钥
      */
     DescribeWhiteBoxDecryptKey(req: DescribeWhiteBoxDecryptKeyRequest, cb?: (error: string, rep: DescribeWhiteBoxDecryptKeyResponse) => void): Promise<DescribeWhiteBoxDecryptKeyResponse>;
+    /**
+     * 使用后量子密码算法签名验签密钥进行签名。
+     */
+    PostQuantumCryptoSign(req: PostQuantumCryptoSignRequest, cb?: (error: string, rep: PostQuantumCryptoSignResponse) => void): Promise<PostQuantumCryptoSignResponse>;
     /**
      * 获取可以提供KMS服务的地域列表
      */

@@ -452,6 +452,11 @@ export interface SearchCommandRequest {
       */
     Cmd?: string;
     /**
+      * Cmd字段是前端传值是否进行base64.
+0:否，1：是
+      */
+    Encoding?: number;
+    /**
       * 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断
       */
     AuditAction?: Array<number>;
@@ -617,6 +622,46 @@ export interface SearchCommandResult {
       * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
       */
     TimeOffset: number;
+    /**
+      * 账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Account?: string;
+    /**
+      * source ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FromIp?: string;
+    /**
+      * 该命令所属会话的会话开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessTime?: string;
+    /**
+      * 复核时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfirmTime?: string;
+    /**
+      * 部门id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDepartmentId?: string;
+    /**
+      * 用户部门名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDepartmentName?: string;
+    /**
+      * 设备部门id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceDepartmentId?: string;
+    /**
+      * 设备部门名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceDepartmentName?: string;
 }
 /**
  * 资产标签
@@ -678,6 +723,11 @@ export interface SearchCommandBySidRequest {
       * 命令，可模糊搜索
       */
     Cmd?: string;
+    /**
+      * Cmd字段是前端传值是否进行base64.
+0:否，1：是
+      */
+    Encoding?: number;
     /**
       * 偏移量
       */
@@ -1056,7 +1106,7 @@ export interface CreateCmdTemplateResponse {
     /**
       * 新建成功后返回的记录ID
       */
-    Id: number;
+    Id?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1082,6 +1132,61 @@ export interface Command {
       * 命令执行情况，1--允许，2--拒绝，3--确认
       */
     Action: number;
+    /**
+      * 会话id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Sid?: string;
+    /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName?: string;
+    /**
+      * 设备account
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Account?: string;
+    /**
+      * 设备ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
+    /**
+      * source ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FromIp?: string;
+    /**
+      * 该命令所属会话的会话开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessTime?: string;
+    /**
+      * 复核时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfirmTime?: string;
+    /**
+      * 用户部门id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDepartmentId?: string;
+    /**
+      * 用户部门name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDepartmentName?: string;
+    /**
+      * 设备部门id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceDepartmentId?: string;
+    /**
+      * 设备部门name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceDepartmentName?: string;
 }
 /**
  * ModifyAcl请求参数结构体
@@ -1222,11 +1327,11 @@ export interface SearchCommandResponse {
     /**
       * 总记录数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 命令列表
       */
-    Commands: Array<SearchCommandResult>;
+    Commands?: Array<SearchCommandResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1248,11 +1353,11 @@ export interface SearchCommandBySidResponse {
     /**
       * 总记录数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 命令列表
       */
-    CommandSet: Array<Command>;
+    CommandSet?: Array<Command>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1400,6 +1505,12 @@ export interface CreateCmdTemplateRequest {
       * 命令列表，\n分隔，最大长度32768字节
       */
     CmdList: string;
+    /**
+      * 标识cmdlist字段前端是否为base64加密传值.
+0:表示非base64加密
+1:表示是base64加密
+      */
+    Encoding?: number;
 }
 /**
  * 审计日志
@@ -1604,11 +1715,11 @@ export interface SearchSessionCommandResponse {
     /**
       * 记录总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 命令和所属会话
       */
-    CommandSessionSet: Array<SessionCommand>;
+    CommandSessionSet?: Array<SessionCommand>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2630,6 +2741,11 @@ export interface SearchSessionCommandRequest {
       * 默认值为20，最大200
       */
     Limit?: number;
+    /**
+      * Cmd字段前端是否做base64加密
+0：否，1：是
+      */
+    Encoding?: number;
     /**
       * 结束时间
       */
