@@ -478,7 +478,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNetworkConfig", req, cb);
     }
     /**
-     * 获取集群版实例分片信息
+     * 本接口（DescribeInstanceShards）用于获取集群架构实例的分片信息。
      */
     async DescribeInstanceShards(req, cb) {
         return this.request("DescribeInstanceShards", req, cb);
@@ -490,7 +490,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestoreInstance", req, cb);
     }
     /**
-     * 查询Redis实例列表
+     * 本接口（DescribeInstances）用于查询Redis实例列表。
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);

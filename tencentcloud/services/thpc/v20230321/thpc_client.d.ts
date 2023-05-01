@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, ModifyInitNodeScriptsRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 本接口(DeleteNodes)用于删除指定集群中一个或者多个计算节点或者登录节点。
      */
     DeleteNodes(req: DeleteNodesRequest, cb?: (error: string, rep: DeleteNodesResponse) => void): Promise<DeleteNodesResponse>;
+    /**
+     * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
+     */
+    ModifyInitNodeScripts(req: ModifyInitNodeScriptsRequest, cb?: (error: string, rep: ModifyInitNodeScriptsResponse) => void): Promise<ModifyInitNodeScriptsResponse>;
     /**
      * 本接口 (CreateCluster) 用于创建并启动集群。
 

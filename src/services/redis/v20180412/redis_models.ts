@@ -1496,14 +1496,14 @@ export interface ParameterDetail {
  */
 export interface DescribeInstanceShardsResponse {
   /**
-   * 实例分片列表信息
+   * 实例分片列表信息，包括：节点信息、节点ID、Key数量、使用容量、容量倾斜率等信息。
    */
-  InstanceShards: Array<InstanceClusterShard>
+  InstanceShards?: Array<InstanceClusterShard>
 
   /**
-   * 实例分片节点总数
+   * 实例分片节点数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3163,13 +3163,15 @@ export interface DescribeParamTemplatesResponse {
  */
 export interface DescribeInstanceShardsRequest {
   /**
-   * 实例ID
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 是否过滤掉从节信息
-   */
+      * 是否过滤掉从节信息。
+- true；过滤从节点。
+- false：不过滤。
+      */
   FilterSlave?: boolean
 }
 
@@ -4033,17 +4035,19 @@ export interface DescribeInstancesRequest {
   Limit?: number
 
   /**
-   * 分页偏移量，取Limit整数倍。
+   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
    */
   Offset?: number
 
   /**
-   * 实例 ID，如：crs-6ubhgouj。
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+
+      */
   InstanceId?: string
 
   /**
-   * 实例排序依据，枚举值如下所示：<ul><li>projectId：项目ID。</li><li>createtime：实例创建时间。</li><li>instancename：实例名称。</li><li>type：实例类型。</li><li>curDeadline：实例到期时间。</li></ul>
+   * 实例列表排序依据，枚举值如下所示：<ul><li>projectId：依据项目ID排序。</li><li>createtime：依据实例创建时间排序。</li><li>instancename：依据实例名称排序。</li><li>type：依据实例类型排序。</li><li>curDeadline：依据实例到期时间排序。</li></ul>
    */
   OrderBy?: string
 
@@ -4108,7 +4112,7 @@ export interface DescribeInstancesRequest {
   EngineName?: string
 
   /**
-   * 续费模式。<ul><li>0：默认状态（手动续费）。</li><li>1：自动续费。</li><li>2：明确不自动续费。</ul>
+   * 续费模式。<ul><li>0：手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
    */
   AutoRenew?: Array<number>
 
@@ -4148,7 +4152,7 @@ export interface DescribeInstancesRequest {
   TagKeys?: Array<string>
 
   /**
-   * 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。<ul><li>local：本地盘版。</li><li>cloud：云盘版。</li><li>cdc：独享集群版。</li></ul>
+   * 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。<ul><li>local：本地盘版。</li><li>cdc：独享集群版。</li></ul>
    */
   ProductVersions?: Array<string>
 
@@ -4206,22 +4210,23 @@ export interface ModfiyInstancePasswordRequest {
  */
 export interface DescribeSlowLogRequest {
   /**
-   * 实例Id。
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+      */
   InstanceId: string
 
   /**
-   * 开始时间。
+   * 预查询慢日志的起始时间。
    */
   BeginTime: string
 
   /**
-   * 结束时间。
+   * 预查询慢日志的结束时间。
    */
   EndTime: string
 
   /**
-   * 慢查询平均执行时间阈值（单位：毫秒）。
+   * 慢查询平均执行时间阈值，单位：毫秒。
    */
   MinQueryTime?: number
 
@@ -4231,7 +4236,7 @@ export interface DescribeSlowLogRequest {
   Limit?: number
 
   /**
-   * 慢查询条数的偏移量，取Limit整数倍。
+   * 慢查询条数的偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
    */
   Offset?: number
 

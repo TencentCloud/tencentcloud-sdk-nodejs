@@ -134,6 +134,7 @@ import {
   QueryFlexPlatformAccountBalanceResponse,
   ApplyReWithdrawalRequest,
   DownloadFileResult,
+  QueryFlexWechatAuthResultResponse,
   RechargeByThirdPayResponse,
   QueryOutwardOrderRequest,
   ViewMerchantRequest,
@@ -240,6 +241,7 @@ import {
   OpenBankRefundOrderApplyResult,
   CreatePayRollPreOrderWithAuthRequest,
   QueryMerchantBalanceRequest,
+  ApplyFlexWechatPreAuthRequest,
   QueryOutwardOrderResult,
   QueryPayerInfoRequest,
   QuerySingleTransactionStatusRequest,
@@ -443,6 +445,7 @@ import {
   QueryTransferResultResponse,
   CloseCloudOrderRequest,
   CreateInvoiceResultV2,
+  WechatPreAuthResult,
   QueryAcctInfoRequest,
   DescribeChargeDetailResponse,
   TranItem,
@@ -561,13 +564,14 @@ import {
   CreateOrderRequest,
   ModifyBindedAccountRequest,
   WithdrawCashMembershipResponse,
+  ViewShopRequest,
   CreateSinglePaymentRequest,
   QueryFlexPayeeAccountInfoResponse,
   WithdrawBill,
   MemberTransactionItem,
   DistributeReceiverResult,
   DistributeApplyRequest,
-  ViewShopRequest,
+  QueryFlexWechatAuthResultRequest,
   OpenBankQueryRefundOrderResult,
   ApplyOutwardOrderResponse,
   QueryFlexServiceProviderAccountBalanceResponse,
@@ -643,6 +647,7 @@ import {
   ApplyOpenBankOrderDetailReceiptResult,
   CreateRedInvoiceV2Response,
   PayeeAccountPropertyInfo,
+  ApplyFlexWechatPreAuthResponse,
   DistributeMultiApplyResult,
   RefundOrderRequest,
   OpenBankPayerInfo,
@@ -653,6 +658,7 @@ import {
   CheckAcctResponse,
   CloudSubOrderRefund,
   QueryOpenBankExternalSubAccountBookBalanceRequest,
+  QueryWechatAuthResult,
   ApplyOutwardOrderResult,
   ApplyPayerInfoRequest,
   CreateBatchPaymentBatchData,
@@ -1815,6 +1821,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询微工卡核身结果
+   */
+  async QueryFlexWechatAuthResult(
+    req: QueryFlexWechatAuthResultRequest,
+    cb?: (error: string, rep: QueryFlexWechatAuthResultResponse) => void
+  ): Promise<QueryFlexWechatAuthResultResponse> {
+    return this.request("QueryFlexWechatAuthResult", req, cb)
+  }
+
+  /**
    * 智慧零售-发票红冲V2
    */
   async CreateRedInvoiceV2(
@@ -1935,6 +1951,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryMerchantResponse) => void
   ): Promise<QueryMerchantResponse> {
     return this.request("QueryMerchant", req, cb)
+  }
+
+  /**
+   * 微工卡开通预核身接口
+   */
+  async ApplyFlexWechatPreAuth(
+    req: ApplyFlexWechatPreAuthRequest,
+    cb?: (error: string, rep: ApplyFlexWechatPreAuthResponse) => void
+  ): Promise<ApplyFlexWechatPreAuthResponse> {
+    return this.request("ApplyFlexWechatPreAuth", req, cb)
   }
 
   /**

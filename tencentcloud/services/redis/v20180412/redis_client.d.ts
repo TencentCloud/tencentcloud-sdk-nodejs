@@ -308,7 +308,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyNetworkConfig(req: ModifyNetworkConfigRequest, cb?: (error: string, rep: ModifyNetworkConfigResponse) => void): Promise<ModifyNetworkConfigResponse>;
     /**
-     * 获取集群版实例分片信息
+     * 本接口（DescribeInstanceShards）用于获取集群架构实例的分片信息。
      */
     DescribeInstanceShards(req: DescribeInstanceShardsRequest, cb?: (error: string, rep: DescribeInstanceShardsResponse) => void): Promise<DescribeInstanceShardsResponse>;
     /**
@@ -316,7 +316,7 @@ export declare class Client extends AbstractClient {
      */
     RestoreInstance(req: RestoreInstanceRequest, cb?: (error: string, rep: RestoreInstanceResponse) => void): Promise<RestoreInstanceResponse>;
     /**
-     * 查询Redis实例列表
+     * 本接口（DescribeInstances）用于查询Redis实例列表。
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**

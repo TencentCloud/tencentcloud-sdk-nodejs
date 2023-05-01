@@ -1128,6 +1128,16 @@ it("cpdp.v20190820.CreateFlexPayee", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexWechatAuthResult", async function () {
+    try {
+       const data = await client.QueryFlexWechatAuthResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateRedInvoiceV2", async function () {
     try {
        const data = await client.CreateRedInvoiceV2({})
@@ -1241,6 +1251,16 @@ it("cpdp.v20190820.BindRelateAccReUnionPay", async function () {
 it("cpdp.v20190820.QueryMerchant", async function () {
     try {
        const data = await client.QueryMerchant({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ApplyFlexWechatPreAuth", async function () {
+    try {
+       const data = await client.ApplyFlexWechatPreAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

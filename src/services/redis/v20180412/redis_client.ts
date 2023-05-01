@@ -1013,7 +1013,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群版实例分片信息
+   * 本接口（DescribeInstanceShards）用于获取集群架构实例的分片信息。
    */
   async DescribeInstanceShards(
     req: DescribeInstanceShardsRequest,
@@ -1033,7 +1033,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Redis实例列表
+   * 本接口（DescribeInstances）用于查询Redis实例列表。
    */
   async DescribeInstances(
     req: DescribeInstancesRequest,

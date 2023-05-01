@@ -38,6 +38,16 @@ it("thpc.v20230321.DeleteNodes", async function () {
     }
 })
 
+it("thpc.v20230321.ModifyInitNodeScripts", async function () {
+    try {
+       const data = await client.ModifyInitNodeScripts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.CreateCluster", async function () {
     try {
        const data = await client.CreateCluster({})

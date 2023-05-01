@@ -49,6 +49,8 @@ import {
   InstanceChargePrepaid,
   Tag,
   LoginNode,
+  NodeScript,
+  ModifyInitNodeScriptsResponse,
   ManagerNodeOverview,
   ManagerNode,
   DeleteClusterRequest,
@@ -67,6 +69,7 @@ import {
   QueueConfigOverview,
   VirtualPrivateCloud,
   ExpansionNodeConfigOverview,
+  ModifyInitNodeScriptsRequest,
   GooseFSxOptionOverview,
   DescribeAutoScalingConfigurationRequest,
   StorageOption,
@@ -109,6 +112,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNodesResponse) => void
   ): Promise<DeleteNodesResponse> {
     return this.request("DeleteNodes", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
+   */
+  async ModifyInitNodeScripts(
+    req: ModifyInitNodeScriptsRequest,
+    cb?: (error: string, rep: ModifyInitNodeScriptsResponse) => void
+  ): Promise<ModifyInitNodeScriptsResponse> {
+    return this.request("ModifyInitNodeScripts", req, cb)
   }
 
   /**

@@ -3638,6 +3638,28 @@ export interface DownloadFileResult {
     Storage: string;
 }
 /**
+ * QueryFlexWechatAuthResult返回参数结构体
+ */
+export interface QueryFlexWechatAuthResultResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode?: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage?: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: QueryWechatAuthResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RechargeByThirdPay返回参数结构体
  */
 export interface RechargeByThirdPayResponse {
@@ -7872,6 +7894,56 @@ export interface QueryMerchantBalanceRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * ApplyFlexWechatPreAuth请求参数结构体
+ */
+export interface ApplyFlexWechatPreAuthRequest {
+    /**
+      * 商家核身单号
+      */
+    AuthNo: string;
+    /**
+      * 微信用户标识
+      */
+    OpenId: string;
+    /**
+      * 项目名称
+      */
+    ProjectName: string;
+    /**
+      * 用工单位名称
+      */
+    EmployerName: string;
+    /**
+      * 用户姓名
+      */
+    UserName: string;
+    /**
+      * 用户证件号
+      */
+    IdNo: string;
+    /**
+      * 用工类型
+LONG_TERM_EMPLOYMENT：长期用工，
+SHORT_TERM_EMPLOYMENT： 短期用工，
+COOPERATION_EMPLOYMENT：合作关系
+      */
+    EmploymentType: string;
+    /**
+      * 核身类型
+SIGN_IN：考勤、签到打卡类型
+INSURANCE：投保类型
+CONTRACT：签约类型
+      */
+    AuthType: string;
+    /**
+      * 环境类型
+test 测试
+release 生产
+sandbox 沙箱
+      */
+    Environment: string;
 }
 /**
  * 查询汇出结果
@@ -14853,6 +14925,35 @@ export interface CreateInvoiceResultV2 {
     InvoiceId: string;
 }
 /**
+ * 微工卡预核身结果
+ */
+export interface WechatPreAuthResult {
+    /**
+      * 商户核身单号
+      */
+    AuthNo?: string;
+    /**
+      * 微信用户标识
+      */
+    OpenId?: string;
+    /**
+      * 商户号
+      */
+    MchId?: string;
+    /**
+      * 子商户号
+      */
+    SubMchId?: string;
+    /**
+      * 预核身token值
+      */
+    Token?: string;
+    /**
+      * token有效期时间，单位：秒
+      */
+    Expire?: number;
+}
+/**
  * QueryAcctInfo请求参数结构体
  */
 export interface QueryAcctInfoRequest {
@@ -18588,6 +18689,31 @@ export interface WithdrawCashMembershipResponse {
     RequestId?: string;
 }
 /**
+ * ViewShop请求参数结构体
+ */
+export interface ViewShopRequest {
+    /**
+      * 收单系统分配的开放ID
+      */
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 外部商户主键编号（ShopNo或OutShopId必须传一个）
+      */
+    OutShopId?: string;
+    /**
+      * 门店编号（ShopNo或OutShopId必须传一个）
+      */
+    ShopNo?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
+}
+/**
  * CreateSinglePayment请求参数结构体
  */
 export interface CreateSinglePaymentRequest {
@@ -18805,29 +18931,20 @@ export interface DistributeApplyRequest {
     Profile?: string;
 }
 /**
- * ViewShop请求参数结构体
+ * QueryFlexWechatAuthResult请求参数结构体
  */
-export interface ViewShopRequest {
+export interface QueryFlexWechatAuthResultRequest {
     /**
-      * 收单系统分配的开放ID
+      * 商户核身单号
       */
-    OpenId: string;
+    AuthNo: string;
     /**
-      * 收单系统分配的密钥
+      * 环境类型
+test 测试
+release 生产
+sandbox 沙箱
       */
-    OpenKey: string;
-    /**
-      * 外部商户主键编号（ShopNo或OutShopId必须传一个）
-      */
-    OutShopId?: string;
-    /**
-      * 门店编号（ShopNo或OutShopId必须传一个）
-      */
-    ShopNo?: string;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
+    Environment?: string;
 }
 /**
  * 云企付-退款查询结果
@@ -21614,6 +21731,28 @@ DISABLE:停用
     PaymentRightStatus?: string;
 }
 /**
+ * ApplyFlexWechatPreAuth返回参数结构体
+ */
+export interface ApplyFlexWechatPreAuthResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode?: string;
+    /**
+      * 错误信息
+      */
+    ErrMessage?: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: WechatPreAuthResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 分账申请响应对象
  */
 export interface DistributeMultiApplyResult {
@@ -21916,6 +22055,75 @@ __sandbox__:沙箱环境
 _不填默认为生产环境_
       */
     Environment?: string;
+}
+/**
+ * 查询用户微工卡核身结果
+ */
+export interface QueryWechatAuthResult {
+    /**
+      * 商户核身单号
+      */
+    AuthNo?: string;
+    /**
+      * 微信用户标识
+      */
+    OpenId?: string;
+    /**
+      * 商户号
+      */
+    MchId?: string;
+    /**
+      * 子商户号
+      */
+    SubMchId?: string;
+    /**
+      * 核身渠道
+FROM_MINI_APP：来自小程序方式核身
+FROM_HARDWARE：来自硬件设备方式核身
+      */
+    AuthScene?: string;
+    /**
+      * 核身渠道标识
+
+用于定位渠道具体来源，如果是扫码打卡渠道标识就是具体的小程序appid，若是硬件设备，则是设备的序列号等
+      */
+    AuthSource?: string;
+    /**
+      * 项目名称
+      */
+    ProjectName?: string;
+    /**
+      * 所属单位名称
+      */
+    EmployerName?: string;
+    /**
+      * 核身时间
+yyyy-MM-DDTHH:mm:ss+TIMEZONE
+
+示例值：2015-05-20T13:29:35+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthTime?: string;
+    /**
+      * 核身类型
+
+SIGN_IN：考勤、签到打卡类型
+INSURANCE：投保类型
+CONTRACT：签约类型
+      */
+    AuthType?: string;
+    /**
+      * 核身状态
+AUTHENTICATE_PROCESSING：核身中
+AUTHENTICATE_SUCCESS：核身成功
+AUTHENTICATE_FAILED：核身失败
+      */
+    AuthState?: string;
+    /**
+      * 核身失败原因描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthFailReason?: string;
 }
 /**
  * 汇出指令申请结果

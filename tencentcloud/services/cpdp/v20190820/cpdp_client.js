@@ -695,6 +695,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlexPayee", req, cb);
     }
     /**
+     * 查询微工卡核身结果
+     */
+    async QueryFlexWechatAuthResult(req, cb) {
+        return this.request("QueryFlexWechatAuthResult", req, cb);
+    }
+    /**
      * 智慧零售-发票红冲V2
      */
     async CreateRedInvoiceV2(req, cb) {
@@ -768,6 +774,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMerchant(req, cb) {
         return this.request("QueryMerchant", req, cb);
+    }
+    /**
+     * 微工卡开通预核身接口
+     */
+    async ApplyFlexWechatPreAuth(req, cb) {
+        return this.request("ApplyFlexWechatPreAuth", req, cb);
     }
     /**
      * 修改会员属性-普通商户子账户。修改会员的会员属性。

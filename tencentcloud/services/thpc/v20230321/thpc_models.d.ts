@@ -535,6 +535,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 弹性伸缩类型。默认值：THPC_AS<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
       */
     AutoScalingType?: string;
+    /**
+      * 节点初始化脚本信息列表。
+      */
+    InitNodeScripts?: Array<NodeScript>;
 }
 /**
  * AddQueue返回参数结构体
@@ -636,6 +640,10 @@ export interface QueueConfig {
       * 扩容节点配置信息。
       */
     ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
+    /**
+      * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
+      */
+    DesiredIdleNodeCapacity?: number;
 }
 /**
  * 描述了实例的计费模式
@@ -705,6 +713,31 @@ export interface LoginNode {
 最多支持60个字符。
       */
     InstanceName?: string;
+}
+/**
+ * 描述节点执行脚本信息。
+ */
+export interface NodeScript {
+    /**
+      * 节点执行脚本获取地址。
+目前仅支持cos地址。地址最大长度：255。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScriptPath: string;
+    /**
+      * 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timeout?: number;
+}
+/**
+ * ModifyInitNodeScripts返回参数结构体
+ */
+export interface ModifyInitNodeScriptsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 管控节点概览。
@@ -1043,6 +1076,11 @@ export interface QueueConfigOverview {
       * 扩容节点配置信息。
       */
     ExpansionNodeConfigs?: Array<ExpansionNodeConfigOverview>;
+    /**
+      * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DesiredIdleNodeCapacity?: number;
 }
 /**
  * 描述了VPC相关信息
@@ -1108,6 +1146,19 @@ export interface ExpansionNodeConfigOverview {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DataDisks?: Array<DataDisk>;
+}
+/**
+ * ModifyInitNodeScripts请求参数结构体
+ */
+export interface ModifyInitNodeScriptsRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 节点初始化脚本信息列表。
+      */
+    InitNodeScripts?: Array<NodeScript>;
 }
 /**
  * GooseFSx存储选项概览信息。

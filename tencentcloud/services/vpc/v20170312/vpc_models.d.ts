@@ -2601,7 +2601,7 @@ export interface AssignPrivateIpAddressesResponse {
     /**
       * 内网IP详细信息。
       */
-    PrivateIpAddressSet: Array<PrivateIpAddressSpecification>;
+    PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7194,6 +7194,10 @@ export interface CreateNetworkInterfaceRequest {
       */
     SecondaryPrivateIpAddressCount?: number;
     /**
+      * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+      */
+    QosLevel?: string;
+    /**
       * 指定绑定的安全组，例如：['sg-1dd51d']。
       */
     SecurityGroupIds?: Array<string>;
@@ -7709,6 +7713,10 @@ export interface CreateAndAttachNetworkInterfaceRequest {
       * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。
       */
     SecondaryPrivateIpAddressCount?: number;
+    /**
+      * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+      */
+    QosLevel?: string;
     /**
       * 指定绑定的安全组，例如：['sg-1dd51d']。
       */
@@ -8863,6 +8871,10 @@ DELETING：删除中
 AVAILABLE：可用的
       */
     State?: string;
+    /**
+      * IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+      */
+    QosLevel?: string;
 }
 /**
  * ALG协议类型
@@ -11344,6 +11356,10 @@ export interface AssignPrivateIpAddressesRequest {
       * 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
       */
     SecondaryPrivateIpAddressCount?: number;
+    /**
+      * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+      */
+    QosLevel?: string;
 }
 /**
  * DescribeSnapshotAttachedInstances返回参数结构体
