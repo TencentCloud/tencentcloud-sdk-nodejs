@@ -223,7 +223,6 @@ class Client extends abstract_client_1.AbstractClient {
 
 >
 - 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
-
      */
     async DescribeGroups(req, cb) {
         return this.request("DescribeGroups", req, cb);

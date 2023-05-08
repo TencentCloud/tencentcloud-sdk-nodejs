@@ -1122,7 +1122,7 @@ export interface GetFamilyDeviceUserListResponse {
       * 设备的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UserList: Array<DeviceUser>;
+    UserList?: Array<DeviceUser>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3927,6 +3927,16 @@ export interface DeviceUser {
       * 用户角色 1所有者，0：其他分享者
       */
     Role: number;
+    /**
+      * 家庭ID，所有者带该参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FamilyId?: string;
+    /**
+      * 家庭名称，所有者带该参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FamilyName?: string;
 }
 /**
  * GetBatchProductionsList请求参数结构体

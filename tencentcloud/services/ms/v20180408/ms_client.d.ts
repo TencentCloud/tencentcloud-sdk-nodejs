@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeScanResultsResponse, CreateScanInstancesRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, CreateScanInstancesResponse, DescribeScanInstancesResponse, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeApkDetectionResultRequest, DescribeResourceInstancesRequest, DescribeUrlDetectionResultResponse, DescribeShieldPlanInstanceRequest, DescribeUserBaseInfoInstanceRequest, CreateResourceInstancesResponse, DeleteScanInstancesResponse, DeleteShieldInstancesResponse, DescribeScanInstancesRequest, DescribeApkDetectionResultResponse, DescribeResourceInstancesResponse, DescribeScanResultsRequest, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse, DeleteScanInstancesRequest } from "./ms_models";
+import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, DescribeShieldResultRequest, CreateShieldInstanceRequest, CreateCosSecKeyInstanceRequest, DescribeUserBaseInfoInstanceResponse, CreateShieldPlanInstanceRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeShieldInstancesRequest, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeApkDetectionResultRequest, DescribeResourceInstancesRequest, DescribeShieldPlanInstanceRequest, DescribeUserBaseInfoInstanceRequest, CreateResourceInstancesResponse, DeleteShieldInstancesResponse, DescribeUrlDetectionResultResponse, DescribeApkDetectionResultResponse, DescribeResourceInstancesResponse, CreateCosSecKeyInstanceResponse, DescribeShieldResultResponse, CreateBindInstanceResponse } from "./ms_models";
 /**
  * ms client
  * @class
@@ -8,21 +8,9 @@ import { CreateShieldPlanInstanceResponse, CreateResourceInstancesRequest, Descr
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-用户通过该接口批量提交应用进行应用扫描，扫描后需通过DescribeScanResults接口查询扫描结果
-     */
-    CreateScanInstances(req: CreateScanInstancesRequest, cb?: (error: string, rep: CreateScanInstancesResponse) => void): Promise<CreateScanInstancesResponse>;
-    /**
      * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      */
     DescribeShieldResult(req: DescribeShieldResultRequest, cb?: (error: string, rep: DescribeShieldResultResponse) => void): Promise<DescribeShieldResultResponse>;
-    /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-删除一个或者多个app扫描信息
-     */
-    DeleteScanInstances(req: DeleteScanInstancesRequest, cb?: (error: string, rep: DeleteScanInstancesResponse) => void): Promise<DeleteScanInstancesResponse>;
     /**
      * 用户可以使用该接口自建资源，只支持白名单用户
      */
@@ -40,12 +28,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceInstances(req: DescribeResourceInstancesRequest, cb?: (error: string, rep: DescribeResourceInstancesResponse) => void): Promise<DescribeResourceInstancesResponse>;
     /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-用户通过CreateScanInstances接口提交应用进行风险批量扫描后，用此接口批量获取风险详细信息,包含漏洞信息，广告信息，插件信息和病毒信息
-     */
-    DescribeScanResults(req: DescribeScanResultsRequest, cb?: (error: string, rep: DescribeScanResultsResponse) => void): Promise<DescribeScanResultsResponse>;
-    /**
      * 查询加固策略。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      */
     DescribeShieldPlanInstance(req: DescribeShieldPlanInstanceRequest, cb?: (error: string, rep: DescribeShieldPlanInstanceResponse) => void): Promise<DescribeShieldPlanInstanceResponse>;
@@ -59,13 +41,6 @@ export declare class Client extends AbstractClient {
 
      */
     DescribeShieldInstances(req: DescribeShieldInstancesRequest, cb?: (error: string, rep: DescribeShieldInstancesResponse) => void): Promise<DescribeShieldInstancesResponse>;
-    /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-     */
-    DescribeScanInstances(req: DescribeScanInstancesRequest, cb?: (error: string, rep: DescribeScanInstancesResponse) => void): Promise<DescribeScanInstancesResponse>;
     /**
      * 移动安全-网址检测服务
      */

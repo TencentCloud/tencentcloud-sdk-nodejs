@@ -1979,6 +1979,16 @@ export interface Metric {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProductId: number;
+    /**
+      * 匹配运算符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Operators?: Array<Operator>;
+    /**
+      * 指标触发
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Periods?: Array<number>;
 }
 /**
  * DescribeMidDimensionValueList的查询条件

@@ -5945,6 +5945,12 @@ export interface ParameterDetail {
    * 参数是公式类型时，该字段有效，表示公式类型最小值
    */
   MinFunc: string
+
+  /**
+      * 参数是否不支持修改
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNotSupportEdit?: boolean
 }
 
 /**

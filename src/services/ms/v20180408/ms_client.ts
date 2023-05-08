@@ -21,65 +21,45 @@ import {
   PlanDetailInfo,
   AppSetInfo,
   CreateShieldPlanInstanceResponse,
-  ScanInfo,
   CreateResourceInstancesRequest,
   DescribeShieldInstancesResponse,
-  PluginInfo,
-  ScanSensitiveList,
+  ShieldInfo,
   DescribeShieldResultRequest,
   CreateShieldInstanceRequest,
   CreateCosSecKeyInstanceRequest,
-  DescribeScanResultsResponse,
-  CreateScanInstancesRequest,
   DescribeUserBaseInfoInstanceResponse,
   CreateShieldPlanInstanceRequest,
-  ScanSetInfo,
-  AppScanSet,
-  ShieldPlanInfo,
   CreateBindInstanceRequest,
   CreateShieldInstanceResponse,
   DeleteShieldInstancesRequest,
   ResourceInfo,
   DescribeShieldInstancesRequest,
-  CreateScanInstancesResponse,
-  DescribeScanInstancesResponse,
   DescribeUrlDetectionResultRequest,
-  VulInfo,
   AppInfo,
   DescribeShieldPlanInstanceResponse,
   ServiceInfo,
   SoInfo,
-  ScanSensitiveInfo,
   PluginListItem,
   DescribeApkDetectionResultRequest,
   ResultListItem,
   ResourceServiceInfo,
   DescribeResourceInstancesRequest,
-  AdInfo,
-  DescribeUrlDetectionResultResponse,
   DescribeShieldPlanInstanceRequest,
-  ShieldInfo,
   DescribeUserBaseInfoInstanceRequest,
   CreateResourceInstancesResponse,
   AppDetailInfo,
-  DeleteScanInstancesResponse,
+  ShieldPlanInfo,
   Filter,
   DeleteShieldInstancesResponse,
-  DescribeScanInstancesRequest,
+  DescribeUrlDetectionResultResponse,
   DescribeApkDetectionResultResponse,
   DescribeResourceInstancesResponse,
-  DescribeScanResultsRequest,
   CreateCosSecKeyInstanceResponse,
-  VirusInfo,
-  ScanPermissionInfo,
   PlanInfo,
   DescribeShieldResultResponse,
   CreateBindInstanceResponse,
-  VulList,
   BindInfo,
-  ScanPermissionList,
   OptPluginListItem,
-  DeleteScanInstancesRequest,
 } from "./ms_models"
 
 /**
@@ -92,18 +72,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-用户通过该接口批量提交应用进行应用扫描，扫描后需通过DescribeScanResults接口查询扫描结果
-     */
-  async CreateScanInstances(
-    req: CreateScanInstancesRequest,
-    cb?: (error: string, rep: CreateScanInstancesResponse) => void
-  ): Promise<CreateScanInstancesResponse> {
-    return this.request("CreateScanInstances", req, cb)
-  }
-
-  /**
    * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
    */
   async DescribeShieldResult(
@@ -111,18 +79,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShieldResultResponse) => void
   ): Promise<DescribeShieldResultResponse> {
     return this.request("DescribeShieldResult", req, cb)
-  }
-
-  /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-删除一个或者多个app扫描信息
-     */
-  async DeleteScanInstances(
-    req: DeleteScanInstancesRequest,
-    cb?: (error: string, rep: DeleteScanInstancesResponse) => void
-  ): Promise<DeleteScanInstancesResponse> {
-    return this.request("DeleteScanInstances", req, cb)
   }
 
   /**
@@ -166,18 +122,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-用户通过CreateScanInstances接口提交应用进行风险批量扫描后，用此接口批量获取风险详细信息,包含漏洞信息，广告信息，插件信息和病毒信息
-     */
-  async DescribeScanResults(
-    req: DescribeScanResultsRequest,
-    cb?: (error: string, rep: DescribeScanResultsResponse) => void
-  ): Promise<DescribeScanResultsResponse> {
-    return this.request("DescribeScanResults", req, cb)
-  }
-
-  /**
    * 查询加固策略。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
    */
   async DescribeShieldPlanInstance(
@@ -207,19 +151,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShieldInstancesResponse) => void
   ): Promise<DescribeShieldInstancesResponse> {
     return this.request("DescribeShieldInstances", req, cb)
-  }
-
-  /**
-     * 由于该产品是线上免费使用产品，无企业版用户，升级迭代成本高及人力安排等原因，安全测评产品不再接入新用户，故下线。
-
-本接口用于查看app列表。
-可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-     */
-  async DescribeScanInstances(
-    req: DescribeScanInstancesRequest,
-    cb?: (error: string, rep: DescribeScanInstancesResponse) => void
-  ): Promise<DescribeScanInstancesResponse> {
-    return this.request("DescribeScanInstances", req, cb)
   }
 
   /**

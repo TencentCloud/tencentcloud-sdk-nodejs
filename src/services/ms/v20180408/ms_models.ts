@@ -141,21 +141,6 @@ export interface CreateShieldPlanInstanceResponse {
 }
 
 /**
- * 需要扫描的应用的服务信息
- */
-export interface ScanInfo {
-  /**
-   * 任务处理完成后的反向通知回调地址,批量提交app每扫描完成一个会通知一次,通知为POST请求，post信息{ItemId:
-   */
-  CallbackUrl: string
-
-  /**
-   * VULSCAN-漏洞扫描信息，VIRUSSCAN-返回病毒扫描信息， ADSCAN-广告扫描信息，PLUGINSCAN-插件扫描信息，PERMISSION-系统权限信息，SENSITIVE-敏感词信息，可以自由组合
-   */
-  ScanTypes: Array<string>
-}
-
-/**
  * CreateResourceInstances请求参数结构体
  */
 export interface CreateResourceInstancesRequest {
@@ -201,33 +186,43 @@ export interface DescribeShieldInstancesResponse {
 }
 
 /**
- * 插件信息
+ * 加固后app的信息
  */
-export interface PluginInfo {
+export interface ShieldInfo {
   /**
-   * 插件类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告
+   * 加固结果的返回码
    */
-  PluginType: number
+  ShieldCode: number
 
   /**
-   * 插件名称
+   * 加固后app的大小
    */
-  PluginName: string
+  ShieldSize?: number
 
   /**
-   * 插件描述
+   * 加固后app的md5
    */
-  PluginDesc: string
-}
+  ShieldMd5?: string
 
-/**
- * 安全扫描敏感词列表
- */
-export interface ScanSensitiveList {
   /**
-   * 敏感词列表
+   * 加固后的APP下载地址，该地址有效期为20分钟，请及时下载
    */
-  SensitiveList: Array<ScanSensitiveInfo>
+  AppUrl?: string
+
+  /**
+   * 加固的提交时间
+   */
+  TaskTime: number
+
+  /**
+   * 任务唯一标识
+   */
+  ItemId: string
+
+  /**
+   * 加固版本，basic基础版，professional专业版，enterprise企业版
+   */
+  ServiceEdition: string
 }
 
 /**
@@ -268,41 +263,6 @@ export interface CreateCosSecKeyInstanceRequest {
    * 密钥有效时间，默认为1小时。
    */
   Duration?: number
-}
-
-/**
- * DescribeScanResults返回参数结构体
- */
-export interface DescribeScanResultsResponse {
-  /**
-   * 批量扫描的app结果集
-   */
-  ScanSet: Array<ScanSetInfo>
-
-  /**
-   * 批量扫描结果的个数
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateScanInstances请求参数结构体
- */
-export interface CreateScanInstancesRequest {
-  /**
-   * 待扫描的app信息列表，一次最多提交20个
-   */
-  AppInfos: Array<AppInfo>
-
-  /**
-   * 扫描信息
-   */
-  ScanInfo: ScanInfo
 }
 
 /**
@@ -348,151 +308,6 @@ export interface CreateShieldPlanInstanceRequest {
    * 策略具体信息
    */
   PlanInfo: PlanInfo
-}
-
-/**
- * app扫描结果集
- */
-export interface ScanSetInfo {
-  /**
-   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-   */
-  TaskStatus: number
-
-  /**
-   * app信息
-   */
-  AppDetailInfo: AppDetailInfo
-
-  /**
-   * 病毒信息
-   */
-  VirusInfo: VirusInfo
-
-  /**
-   * 漏洞信息
-   */
-  VulInfo: VulInfo
-
-  /**
-   * 广告插件信息
-   */
-  AdInfo: AdInfo
-
-  /**
-   * 提交扫描的时间
-   */
-  TaskTime: number
-
-  /**
-   * 状态码，成功返回0，失败返回错误码
-   */
-  StatusCode: number
-
-  /**
-   * 状态描述
-   */
-  StatusDesc: string
-
-  /**
-   * 状态操作指引
-   */
-  StatusRef: string
-
-  /**
-   * 系统权限信息
-   */
-  PermissionInfo: ScanPermissionList
-
-  /**
-   * 敏感词列表
-   */
-  SensitiveInfo: ScanSensitiveList
-}
-
-/**
- * 扫描后app的信息，包含基本信息和扫描状态信息
- */
-export interface AppScanSet {
-  /**
-   * 任务唯一标识
-   */
-  ItemId: string
-
-  /**
-   * app的名称
-   */
-  AppName: string
-
-  /**
-   * app的包名
-   */
-  AppPkgName: string
-
-  /**
-   * app的版本号
-   */
-  AppVersion: string
-
-  /**
-   * app的md5
-   */
-  AppMd5: string
-
-  /**
-   * app的大小
-   */
-  AppSize: number
-
-  /**
-   * 扫描结果返回码
-   */
-  ScanCode: number
-
-  /**
-   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-   */
-  TaskStatus: number
-
-  /**
-   * 提交扫描时间
-   */
-  TaskTime: number
-
-  /**
-   * app的图标url
-   */
-  AppIconUrl: string
-
-  /**
-   * 标识唯一该app，主要用于删除
-   */
-  AppSid: string
-
-  /**
-   * 安全类型:1-安全软件，2-风险软件，3病毒软件
-   */
-  SafeType: number
-
-  /**
-   * 漏洞个数
-   */
-  VulCount: number
-}
-
-/**
- * 加固策略信息
- */
-export interface ShieldPlanInfo {
-  /**
-   * 加固策略数量
-   */
-  TotalCount: number
-
-  /**
-   * 加固策略具体信息数组
-   */
-  PlanSet: Array<PlanDetailInfo>
 }
 
 /**
@@ -626,61 +441,6 @@ export interface DescribeShieldInstancesRequest {
 }
 
 /**
- * CreateScanInstances返回参数结构体
- */
-export interface CreateScanInstancesResponse {
-  /**
-   * 任务唯一标识
-   */
-  ItemId: string
-
-  /**
-   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-   */
-  Progress: number
-
-  /**
-   * 提交成功的app的md5集合
-   */
-  AppMd5s: Array<string>
-
-  /**
-   * 剩余可用次数
-   */
-  LimitCount: number
-
-  /**
-   * 到期时间
-   */
-  LimitTime: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeScanInstances返回参数结构体
- */
-export interface DescribeScanInstancesResponse {
-  /**
-   * 符合要求的app数量
-   */
-  TotalCount: number
-
-  /**
-   * 一个关于app详细信息的结构体，主要包括app的基本信息和扫描状态信息。
-   */
-  ScanSet: Array<AppScanSet>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeUrlDetectionResult请求参数结构体
  */
 export interface DescribeUrlDetectionResultRequest {
@@ -688,21 +448,6 @@ export interface DescribeUrlDetectionResultRequest {
    * 查询的网址
    */
   Url: string
-}
-
-/**
- * 漏洞信息
- */
-export interface VulInfo {
-  /**
-   * 漏洞列表
-   */
-  VulList: Array<VulList>
-
-  /**
-   * 漏洞文件评分
-   */
-  VulFileScore: number
 }
 
 /**
@@ -808,26 +553,6 @@ export interface SoInfo {
    * so文件列表
    */
   SoFileNames: Array<string>
-}
-
-/**
- * 安全扫描敏感词
- */
-export interface ScanSensitiveInfo {
-  /**
-   * 敏感词
-   */
-  WordList: Array<string>
-
-  /**
-   * 敏感词对应的文件信息
-   */
-  FilePath: string
-
-  /**
-   * 文件sha1值
-   */
-  FileSha: string
 }
 
 /**
@@ -1038,38 +763,123 @@ export interface DescribeResourceInstancesRequest {
 }
 
 /**
- * 广告信息
+ * DescribeShieldPlanInstance请求参数结构体
  */
-export interface AdInfo {
+export interface DescribeShieldPlanInstanceRequest {
   /**
-   * 插播广告列表
+   * 资源id
    */
-  Spots: Array<PluginInfo>
+  ResourceId: string
 
   /**
-   * 精品推荐广告列表
+   * 服务类别id
    */
-  BoutiqueRecommands: Array<PluginInfo>
+  Pid: number
+}
+
+/**
+ * DescribeUserBaseInfoInstance请求参数结构体
+ */
+export type DescribeUserBaseInfoInstanceRequest = null
+
+/**
+ * CreateResourceInstances返回参数结构体
+ */
+export interface CreateResourceInstancesResponse {
+  /**
+   * 新创建的资源列表。
+   */
+  ResourceSet?: Array<string>
 
   /**
-   * 悬浮窗广告列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FloatWindowses: Array<PluginInfo>
+  RequestId?: string
+}
+
+/**
+ * app的详细基础信息
+ */
+export interface AppDetailInfo {
+  /**
+   * app的名称
+   */
+  AppName: string
 
   /**
-   * banner广告列表
+   * app的包名
    */
-  Banners: Array<PluginInfo>
+  AppPkgName: string
 
   /**
-   * 积分墙广告列表
+   * app的版本号
    */
-  IntegralWalls: Array<PluginInfo>
+  AppVersion: string
 
   /**
-   * 通知栏广告列表
+   * app的大小
    */
-  NotifyBars: Array<PluginInfo>
+  AppSize: number
+
+  /**
+   * app的md5
+   */
+  AppMd5: string
+
+  /**
+   * app的图标url
+   */
+  AppIconUrl: string
+
+  /**
+   * app的文件名称
+   */
+  FileName: string
+}
+
+/**
+ * 加固策略信息
+ */
+export interface ShieldPlanInfo {
+  /**
+   * 加固策略数量
+   */
+  TotalCount: number
+
+  /**
+   * 加固策略具体信息数组
+   */
+  PlanSet: Array<PlanDetailInfo>
+}
+
+/**
+ * 筛选数据结构
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段
+   */
+  Name: string
+
+  /**
+   * 需要过滤字段的值
+   */
+  Value?: string
+}
+
+/**
+ * DeleteShieldInstances返回参数结构体
+ */
+export interface DeleteShieldInstancesResponse {
+  /**
+   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+   */
+  Progress: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1161,201 +971,6 @@ export interface DescribeUrlDetectionResultResponse {
 }
 
 /**
- * DescribeShieldPlanInstance请求参数结构体
- */
-export interface DescribeShieldPlanInstanceRequest {
-  /**
-   * 资源id
-   */
-  ResourceId: string
-
-  /**
-   * 服务类别id
-   */
-  Pid: number
-}
-
-/**
- * 加固后app的信息
- */
-export interface ShieldInfo {
-  /**
-   * 加固结果的返回码
-   */
-  ShieldCode: number
-
-  /**
-   * 加固后app的大小
-   */
-  ShieldSize?: number
-
-  /**
-   * 加固后app的md5
-   */
-  ShieldMd5?: string
-
-  /**
-   * 加固后的APP下载地址，该地址有效期为20分钟，请及时下载
-   */
-  AppUrl?: string
-
-  /**
-   * 加固的提交时间
-   */
-  TaskTime: number
-
-  /**
-   * 任务唯一标识
-   */
-  ItemId: string
-
-  /**
-   * 加固版本，basic基础版，professional专业版，enterprise企业版
-   */
-  ServiceEdition: string
-}
-
-/**
- * DescribeUserBaseInfoInstance请求参数结构体
- */
-export type DescribeUserBaseInfoInstanceRequest = null
-
-/**
- * CreateResourceInstances返回参数结构体
- */
-export interface CreateResourceInstancesResponse {
-  /**
-   * 新创建的资源列表。
-   */
-  ResourceSet?: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * app的详细基础信息
- */
-export interface AppDetailInfo {
-  /**
-   * app的名称
-   */
-  AppName: string
-
-  /**
-   * app的包名
-   */
-  AppPkgName: string
-
-  /**
-   * app的版本号
-   */
-  AppVersion: string
-
-  /**
-   * app的大小
-   */
-  AppSize: number
-
-  /**
-   * app的md5
-   */
-  AppMd5: string
-
-  /**
-   * app的图标url
-   */
-  AppIconUrl: string
-
-  /**
-   * app的文件名称
-   */
-  FileName: string
-}
-
-/**
- * DeleteScanInstances返回参数结构体
- */
-export interface DeleteScanInstancesResponse {
-  /**
-   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-   */
-  Progress: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 筛选数据结构
- */
-export interface Filter {
-  /**
-   * 需要过滤的字段
-   */
-  Name: string
-
-  /**
-   * 需要过滤字段的值
-   */
-  Value?: string
-}
-
-/**
- * DeleteShieldInstances返回参数结构体
- */
-export interface DeleteShieldInstancesResponse {
-  /**
-   * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-   */
-  Progress: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeScanInstances请求参数结构体
- */
-export interface DescribeScanInstancesRequest {
-  /**
-   * 支持通过app名称，app包名进行筛选
-   */
-  Filters?: Array<Filter>
-
-  /**
-   * 偏移量，默认为0
-   */
-  Offset?: number
-
-  /**
-   * 数量限制，默认为20，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 可以提供ItemId数组来查询一个或者多个结果。注意不可以同时指定ItemIds和Filters。
-   */
-  ItemIds?: Array<string>
-
-  /**
-   * 按某个字段排序，目前仅支持TaskTime排序。
-   */
-  OrderField?: string
-
-  /**
-   * 升序（asc）还是降序（desc），默认：desc。
-   */
-  OrderDirection?: string
-}
-
-/**
  * DescribeApkDetectionResult返回参数结构体
  */
 export interface DescribeApkDetectionResultResponse {
@@ -1398,21 +1013,6 @@ export interface DescribeResourceInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeScanResults请求参数结构体
- */
-export interface DescribeScanResultsRequest {
-  /**
-   * 任务唯一标识
-   */
-  ItemId: string
-
-  /**
-   * 批量查询一个或者多个app的扫描结果，如果不传表示查询该任务下所提交的所有app
-   */
-  AppMd5s?: Array<string>
 }
 
 /**
@@ -1463,36 +1063,6 @@ export interface CreateCosSecKeyInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 病毒信息
- */
-export interface VirusInfo {
-  /**
-   * 软件安全类型，分别为0-未知、 1-安全软件、2-风险软件、3-病毒软件
-   */
-  SafeType: number
-
-  /**
-   * 病毒名称， utf8编码，非病毒时值为空
-   */
-  VirusName: string
-
-  /**
-   * 病毒描述，utf8编码，非病毒时值为空
-   */
-  VirusDesc: string
-}
-
-/**
- * 安全扫描系统权限信息
- */
-export interface ScanPermissionInfo {
-  /**
-   * 系统权限
-   */
-  Permission: string
 }
 
 /**
@@ -1631,51 +1201,6 @@ export interface CreateBindInstanceResponse {
 }
 
 /**
- * 漏洞信息
- */
-export interface VulList {
-  /**
-   * 漏洞id
-   */
-  VulId: string
-
-  /**
-   * 漏洞名称
-   */
-  VulName: string
-
-  /**
-   * 漏洞代码
-   */
-  VulCode: string
-
-  /**
-   * 漏洞描述
-   */
-  VulDesc: string
-
-  /**
-   * 漏洞解决方案
-   */
-  VulSolution: string
-
-  /**
-   * 漏洞来源类别，0默认自身，1第三方插件
-   */
-  VulSrcType: number
-
-  /**
-   * 漏洞位置
-   */
-  VulFilepath: string
-
-  /**
-   * 风险级别：1 低风险 ；2中等风险；3 高风险
-   */
-  RiskLevel: number
-}
-
-/**
  * 用户绑定app的基本信息
  */
 export interface BindInfo {
@@ -1696,16 +1221,6 @@ export interface BindInfo {
 }
 
 /**
- * 安全扫描系统权限信息
- */
-export interface ScanPermissionList {
-  /**
-   * 系统权限信息
-   */
-  PermissionList: Array<ScanPermissionInfo>
-}
-
-/**
  * APK检测服务：非广告插件结果列表(SDK、风险插件等)
  */
 export interface OptPluginListItem {
@@ -1723,14 +1238,4 @@ export interface OptPluginListItem {
    * 非广告插件描述
    */
   PluginDesc: string
-}
-
-/**
- * DeleteScanInstances请求参数结构体
- */
-export interface DeleteScanInstancesRequest {
-  /**
-   * 删除一个或多个扫描的app，最大支持20个
-   */
-  AppSids: Array<string>
 }

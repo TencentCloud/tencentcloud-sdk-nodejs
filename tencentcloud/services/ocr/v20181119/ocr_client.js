@@ -909,6 +909,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecognizePhilippinesTinIDOCR", req, cb);
     }
     /**
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+    async RecognizeGeneralInvoice(req, cb) {
+        return this.request("RecognizeGeneralInvoice", req, cb);
+    }
+    /**
      * 本接口支持行驶证主页和副页所有字段的自动定位与识别。
 
 行驶证主页：车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、识别代码、发动机号、注册日期、发证日期、发证单位。

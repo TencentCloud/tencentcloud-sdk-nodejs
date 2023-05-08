@@ -338,6 +338,12 @@ export interface ServeParticipant {
   TransferFrom: string
 
   /**
+      * 转接来源参与者类型，取值与 Type 一致
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransferFromType?: string
+
+  /**
       * 转接去向坐席信息
 注意：此字段可能返回 null，表示取不到有效值。
       */

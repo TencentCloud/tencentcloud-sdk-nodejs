@@ -721,6 +721,17 @@ export interface DescribeModelServiceGroupRequest {
 }
 
 /**
+ * RDMA配置
+ */
+export interface RDMAConfig {
+  /**
+      * 是否开启RDMA
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enable?: boolean
+}
+
+/**
  * 训练指标
  */
 export interface TrainingMetric {
@@ -2406,6 +2417,12 @@ TI.GN7.20XLARGE320.POST: 80C32
 80C32
       */
   InstanceTypeAlias?: string
+
+  /**
+      * RDMA配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RDMAConfig?: RDMAConfig
 }
 
 /**
@@ -2436,6 +2453,17 @@ export interface Spec {
    * 当前资源售罄时，可用的区域有哪些
    */
   AvailableRegion: Array<string>
+}
+
+/**
+ * 配置GooseFS参数
+ */
+export interface GooseFS {
+  /**
+      * goosefs实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: string
 }
 
 /**
@@ -3402,7 +3430,7 @@ export interface CreateTrainingTaskResponse {
   /**
    * 训练任务ID
    */
-  Id: string
+  Id?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3440,8 +3468,9 @@ export interface CreateTrainingTaskRequest {
   Name: string
 
   /**
-   * 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费
-   */
+      * 计费模式，eg：PREPAID 包年包月（资源组）;
+POSTPAID_BY_HOUR 按量计费
+      */
   ChargeType: string
 
   /**
@@ -5964,6 +5993,12 @@ export interface DataConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HDFSSource?: HDFSConfig
+
+  /**
+      * 配饰GooseFS的数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GooseFSSource?: GooseFS
 }
 
 /**

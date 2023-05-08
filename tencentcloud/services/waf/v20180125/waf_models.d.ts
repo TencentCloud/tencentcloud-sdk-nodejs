@@ -398,27 +398,27 @@ export interface ModifyDomainWhiteRuleRequest {
     /**
       * 需要更改的规则的域名
       */
-    Domain: string;
+    Domain?: string;
     /**
       * 白名单id
       */
-    Id: number;
+    Id?: number;
     /**
       * 规则的id列表
       */
-    Rules: Array<number>;
+    Rules?: Array<number>;
     /**
       * 规则匹配路径
       */
-    Url: string;
+    Url?: string;
     /**
       * 规则匹配方法
       */
-    Function: string;
+    Function?: string;
     /**
-      * 规则的开关状态
+      * 规则的开关状态，0表示关闭开关，1表示打开开关
       */
-    Status: number;
+    Status?: number;
 }
 /**
  * Vip信息
@@ -1034,15 +1034,15 @@ export interface SwitchDomainRulesRequest {
     /**
       * 域名
       */
-    Domain: string;
+    Domain?: string;
     /**
       * 规则列表
       */
-    Ids: Array<number>;
+    Ids?: Array<number>;
     /**
       * 开关状态
       */
-    Status: number;
+    Status?: number;
     /**
       * 设置为观察模式原因
       */
@@ -1800,11 +1800,11 @@ export interface DeleteDomainWhiteRulesRequest {
     /**
       * 需要删除的规则域名
       */
-    Domain: string;
+    Domain?: string;
     /**
       * 需要删除的白名单规则
       */
-    Ids: Array<number>;
+    Ids?: Array<number>;
 }
 /**
  * clb-waf 域名扩展套餐
@@ -3085,23 +3085,23 @@ export interface AddDomainWhiteRuleRequest {
     /**
       * 需要添加的域名
       */
-    Domain: string;
+    Domain?: string;
     /**
       * 需要添加的规则
       */
-    Rules: Array<number>;
+    Rules?: Array<number>;
     /**
       * 需要添加的规则url
       */
-    Url: string;
+    Url?: string;
     /**
       * 规则的方法
       */
-    Function: string;
+    Function?: string;
     /**
       * 规则的开关
       */
-    Status: number;
+    Status?: number;
 }
 /**
  * UpsertIpAccessControl返回参数结构体

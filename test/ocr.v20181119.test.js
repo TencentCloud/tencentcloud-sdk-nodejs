@@ -838,6 +838,16 @@ it("ocr.v20181119.RecognizePhilippinesTinIDOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeGeneralInvoice", async function () {
+    try {
+       const data = await client.RecognizeGeneralInvoice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.VehicleLicenseOCR", async function () {
     try {
        const data = await client.VehicleLicenseOCR({})

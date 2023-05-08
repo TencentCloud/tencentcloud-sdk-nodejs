@@ -689,14 +689,14 @@ export interface DownloadFlowInfo {
  */
 export interface FlowApproverUrlInfo {
   /**
-   * 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+   * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
    */
   SignUrl: string
 
   /**
-   * 签署人手机号
+   * 签署人类型 PERSON-个人
    */
-  Mobile: string
+  ApproverType: string
 
   /**
    * 签署人姓名
@@ -704,9 +704,15 @@ export interface FlowApproverUrlInfo {
   Name: string
 
   /**
-   * 签署人类型 PERSON-个人
+   * 签署人手机号
    */
-  ApproverType: string
+  Mobile: string
+
+  /**
+      * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LongUrl?: string
 }
 
 /**

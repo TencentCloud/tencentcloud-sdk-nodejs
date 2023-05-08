@@ -7474,6 +7474,30 @@ export interface ProtectDirInfo {
    * 自动恢复开关 (Filters 过滤Quuid 时 返回) 默认0
    */
   AutoRestoreSwitchStatus: number
+
+  /**
+      * 首次开启防护时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FirstProtectTime?: string
+
+  /**
+      * 最近开启防护时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestProtectTime?: string
+
+  /**
+      * 防护文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtectFileType?: string
+
+  /**
+      * 防护文件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtectFilesCount?: number
 }
 
 /**
@@ -8462,6 +8486,12 @@ export interface ProtectEventLists {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MachineExtraInfo?: MachineExtraInfo
+
+  /**
+      * 机器实例uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Quuid?: string
 }
 
 /**
@@ -12954,72 +12984,77 @@ export interface LoginWhiteCombinedInfo {
       * 白名单地域
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Places: Array<Place>
+  Places?: Array<Place>
 
   /**
    * 白名单用户（多个用户逗号隔开）
    */
-  UserName: string
+  UserName?: string
 
   /**
    * 白名单IP（多个IP逗号隔开）
    */
-  SrcIp: string
+  SrcIp?: string
 
   /**
    * 地域字符串
    */
-  Locale: string
+  Locale?: string
 
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
 
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
 
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
 
   /**
    * 是否对全局生效, 1：全局有效 0: 对指定主机列表生效'
    */
-  IsGlobal: number
+  IsGlobal?: number
 
   /**
    * 白名单名字：IsLocal=1时固定为：全部服务器；单台机器时为机器内网IP，多台服务器时为服务器数量，如：11台
    */
-  Name: string
+  Name?: string
 
   /**
    * 仅在单台服务器时，返回服务器名称
    */
-  Desc: string
+  Desc?: string
 
   /**
    * 白名单ID
    */
-  Id: number
+  Id?: number
 
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 最近修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
 
   /**
    * 服务器Uuid
    */
-  Uuid: string
+  Uuid?: string
+
+  /**
+   * 登陆地
+   */
+  Locations: string
 }
 
 /**
@@ -14772,12 +14807,12 @@ export interface DescribeProtectDirListResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 防护目录列表信息
    */
-  List: Array<ProtectDirInfo>
+  List?: Array<ProtectDirInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -16522,6 +16557,11 @@ export interface DescribeLicenseGeneralResponse {
    * 自动加购订单是否自动续费 ,true 开启, false 关闭
    */
   AutoRepurchaseRenewSwitch: boolean
+
+  /**
+   * 已销毁订单数
+   */
+  DestroyOrderNum: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

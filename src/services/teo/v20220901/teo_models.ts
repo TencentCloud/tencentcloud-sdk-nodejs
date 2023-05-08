@@ -3792,6 +3792,12 @@ export interface ZoneSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ImageOptimize: ImageOptimize
+
+  /**
+      * 中国大陆加速优化配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccelerateMainland?: AccelerateMainland
 }
 
 /**

@@ -18,29 +18,9 @@ const client = new tencentcloud.ms.v20180408.Client({
 })
 describe("ms.v20180408.test.js", function () {
 
-it("ms.v20180408.CreateScanInstances", async function () {
-    try {
-       const data = await client.CreateScanInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ms.v20180408.DescribeShieldResult", async function () {
     try {
        const data = await client.DescribeShieldResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ms.v20180408.DeleteScanInstances", async function () {
-    try {
-       const data = await client.DeleteScanInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,16 +68,6 @@ it("ms.v20180408.DescribeResourceInstances", async function () {
     }
 })
 
-it("ms.v20180408.DescribeScanResults", async function () {
-    try {
-       const data = await client.DescribeScanResults({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ms.v20180408.DescribeShieldPlanInstance", async function () {
     try {
        const data = await client.DescribeShieldPlanInstance({})
@@ -121,16 +91,6 @@ it("ms.v20180408.CreateShieldInstance", async function () {
 it("ms.v20180408.DescribeShieldInstances", async function () {
     try {
        const data = await client.DescribeShieldInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ms.v20180408.DescribeScanInstances", async function () {
-    try {
-       const data = await client.DescribeScanInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -304,7 +304,7 @@ export interface SendEmailRequest {
       */
     Attachments?: Array<Attachment>;
     /**
-      * 退订选项 1: 加入退订链接 0: 不加入退订链接
+      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语
       */
     Unsubscribe?: string;
     /**
@@ -829,7 +829,7 @@ export interface SendEmailResponse {
     /**
       * 接受消息生成的唯一消息标识符。
       */
-    MessageId: string;
+    MessageId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

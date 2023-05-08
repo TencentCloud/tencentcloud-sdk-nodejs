@@ -8488,6 +8488,11 @@ export interface RuleExecExportResult {
  */
 export interface DescribeDatabaseInfoListResponse {
   /**
+   * 数据库列表
+   */
+  DatabaseInfo?: Array<DatabaseInfo>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

@@ -29,11 +29,12 @@ import {
   DescribeTaskStatusResponse,
   SentenceRecognitionRequest,
   CloseAsyncRecognitionTaskResponse,
-  SentenceWord,
+  SentenceDetail,
   CreateCustomizationRequest,
   DownloadAsrVocabResponse,
   CreateRecTaskResponse,
   ModifyCustomizationResponse,
+  GetModelInfoRequest,
   CreateAsyncRecognitionTaskResponse,
   DeleteAsrVocabResponse,
   DownloadCustomizationResponse,
@@ -55,7 +56,7 @@ import {
   CreateAsrVocabResponse,
   Model,
   CreateAsrVocabRequest,
-  SentenceDetail,
+  GetModelInfoResponse,
   UpdateAsrVocabRequest,
   DescribeTaskStatusRequest,
   SentenceRecognitionResponse,
@@ -64,6 +65,7 @@ import {
   ModifyCustomizationStateResponse,
   DescribeAsyncRecognitionTasksResponse,
   GetAsrVocabListResponse,
+  SentenceWord,
   SentenceWords,
   DownloadCustomizationRequest,
 } from "./asr_models"
@@ -105,6 +107,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadAsrVocabResponse) => void
   ): Promise<DownloadAsrVocabResponse> {
     return this.request("DownloadAsrVocab", req, cb)
+  }
+
+  /**
+   * 通过自学习模型id获取自学习模型详细信息
+   */
+  async GetModelInfo(
+    req: GetModelInfoRequest,
+    cb?: (error: string, rep: GetModelInfoResponse) => void
+  ): Promise<GetModelInfoResponse> {
+    return this.request("GetModelInfo", req, cb)
   }
 
   /**

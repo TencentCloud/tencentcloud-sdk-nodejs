@@ -805,12 +805,12 @@ export interface KillMySqlThreadsResponse {
     /**
       * kill完成的sql会话ID列表。
       */
-    Threads: Array<number>;
+    Threads?: Array<number>;
     /**
       * 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SqlExecId: string;
+    SqlExecId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1474,6 +1474,10 @@ export interface KillMySqlThreadsRequest {
       * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
       */
     Product?: string;
+    /**
+      * 默认是ture, 记录下kill的记录，为了加快kill，可设置为false。
+      */
+    RecordHistory?: boolean;
 }
 /**
  * DescribeSqlFilters返回参数结构体
@@ -1482,11 +1486,11 @@ export interface DescribeSqlFiltersResponse {
     /**
       * 限流任务总数目。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 限流任务列表。
       */
-    Items: Array<SQLFilter>;
+    Items?: Array<SQLFilter>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2112,6 +2116,10 @@ export interface DescribeSqlFiltersRequest {
       * 返回数量，默认为20，最大值为100。
       */
     Limit?: number;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * DescribeSecurityAuditLogExportTasks请求参数结构体
@@ -3161,6 +3169,10 @@ export interface DeleteSqlFiltersRequest {
       * 限流任务ID列表。
       */
     FilterIds: Array<number>;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * DescribeUserSqlAdvice请求参数结构体

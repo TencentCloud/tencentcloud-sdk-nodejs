@@ -47,8 +47,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 删除域名规则白名单
-
-
      */
     async DeleteDomainWhiteRules(req, cb) {
         return this.request("DeleteDomainWhiteRules", req, cb);

@@ -3338,12 +3338,12 @@ export interface DescribeCDNStatDetailsResponse {
   /**
    * 每条数据的时间粒度，单位：分钟。
    */
-  DataInterval: number
+  DataInterval?: number
 
   /**
    * CDN 用量数据。
    */
-  Data: Array<StatDataItem>
+  Data?: Array<StatDataItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13226,6 +13226,7 @@ export interface DescribeCDNStatDetailsRequest {
 <li>Traffic：流量，单位为 Byte。</li>
 <li>Bandwidth：带宽，单位为 Bps。</li>
 <li>Requests：请求数。</li>
+<li>QUICRequests：QUIC 请求数。</li>
       */
   Metric: string
 
@@ -13378,6 +13379,7 @@ export interface StatDataItem {
 <li>流量数据，单位是字节。</li>
 <li>带宽数据，单位是比特每秒。</li>
 <li>直播剪辑数据，单位是秒。</li>
+<li>轮播数据，单位是秒。</li>
       */
   Value: number
 }

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVocabStateResponse, CreateCustomizationResponse, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, CreateAsyncRecognitionTaskResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, UpdateAsrVocabRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
+import { SetVocabStateResponse, CreateCustomizationResponse, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
 /**
  * asr client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
      */
     DownloadAsrVocab(req: DownloadAsrVocabRequest, cb?: (error: string, rep: DownloadAsrVocabResponse) => void): Promise<DownloadAsrVocabResponse>;
+    /**
+     * 通过自学习模型id获取自学习模型详细信息
+     */
+    GetModelInfo(req: GetModelInfoRequest, cb?: (error: string, rep: GetModelInfoResponse) => void): Promise<GetModelInfoResponse>;
     /**
      * 本接口服务对时长5小时以内的录音文件进行识别，异步返回识别全部结果。
 • 支持中文普通话、英语、粤语、日语、越南语、马来语、印度尼西亚语、菲律宾语、上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话。

@@ -48,6 +48,16 @@ it("asr.v20190614.DownloadAsrVocab", async function () {
     }
 })
 
+it("asr.v20190614.GetModelInfo", async function () {
+    try {
+       const data = await client.GetModelInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.CreateRecTask", async function () {
     try {
        const data = await client.CreateRecTask({})

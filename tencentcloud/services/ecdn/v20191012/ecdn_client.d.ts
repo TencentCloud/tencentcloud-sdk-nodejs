@@ -64,7 +64,9 @@ PurgePathCache 用于批量刷新目录缓存，一次提交将返回一个刷�
      */
     DescribeDomainsConfig(req: DescribeDomainsConfigRequest, cb?: (error: string, rep: DescribeDomainsConfigResponse) => void): Promise<DescribeDomainsConfigResponse>;
     /**
-     * 查询刷新接口的用量配额。
+     * ECDN融合CDN后，接口都用CDN的，此接口已经废弃
+
+查询刷新接口的用量配额。
 
 >?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41956"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */

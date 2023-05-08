@@ -294,6 +294,11 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
    * 签署人个性化能力值
    */
   ApproverOption?: ApproverOption
+
+  /**
+   * 签署完前端跳转的url，暂未使用
+   */
+  JumpUrl?: string
 }
 
 /**
@@ -443,16 +448,16 @@ export interface StaffRole {
  */
 export interface FlowApproverUrlInfo {
   /**
-      * 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+      * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SignUrl?: string
 
   /**
-      * 签署人手机号
+      * 签署人类型 1-个人
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ApproverMobile?: string
+  ApproverType?: number
 
   /**
       * 签署人姓名
@@ -461,10 +466,16 @@ export interface FlowApproverUrlInfo {
   ApproverName?: string
 
   /**
-      * 签署人类型 1-个人
+      * 签署人手机号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ApproverType?: number
+  ApproverMobile?: string
+
+  /**
+      * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LongUrl?: string
 }
 
 /**
@@ -2429,6 +2440,11 @@ export interface CreateFlowSignUrlRequest {
    * 用户信息，此结构体UserId必填
    */
   Operator?: UserInfo
+
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 
   /**
    * 机构信息，暂未开放

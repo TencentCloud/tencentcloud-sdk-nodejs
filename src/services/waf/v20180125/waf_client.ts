@@ -202,10 +202,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除域名规则白名单
-
-
-     */
+   * 删除域名规则白名单
+   */
   async DeleteDomainWhiteRules(
     req: DeleteDomainWhiteRulesRequest,
     cb?: (error: string, rep: DeleteDomainWhiteRulesResponse) => void

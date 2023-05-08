@@ -1,4 +1,33 @@
 /**
+ * 非税收入条目
+ */
+export interface NonTaxItem {
+    /**
+      * 项目编码
+      */
+    ItemID?: string;
+    /**
+      * 项目名称
+      */
+    Name?: string;
+    /**
+      * 单位
+      */
+    Unit?: string;
+    /**
+      * 数量
+      */
+    Quantity?: string;
+    /**
+      * 标准
+      */
+    Standard?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+}
+/**
  * 运单识别结果
  */
 export interface TextWaybill {
@@ -43,6 +72,68 @@ export interface RecognizeOnlineTaxiItineraryOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 混贴票据单张发票识别信息
+ */
+export interface InvoiceItem {
+    /**
+      * 识别结果。
+OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；
+FailedOperation.UnKnowError：表示识别失败；
+其它错误码见各个票据接口的定义。
+      */
+    Code: string;
+    /**
+      * 识别出的图片所属的票据类型。
+-1：未知类型
+0：出租车发票
+1：定额发票
+2：火车票
+3：增值税发票
+5：机票行程单
+8：通用机打发票
+9：汽车票
+10：轮船票
+11：增值税发票（卷票）
+12：购车发票
+13：过路过桥费发票
+15：非税发票
+16：全电发票
+      */
+    Type: number;
+    /**
+      * 旋转后的图片四点坐标。
+      */
+    Polygon: Polygon;
+    /**
+      * 识别出的图片在混贴票据图片中的旋转角度。
+      */
+    Angle: number;
+    /**
+      * 识别到的内容。
+      */
+    SingleInvoiceInfos: SingleInvoiceItem;
+    /**
+      * 发票处于识别图片或PDF文件中的页教，默认从1开始。
+      */
+    Page?: number;
+    /**
+      * 发票详细类型，详见下方 SubType 返回值说明
+      */
+    SubType?: string;
+    /**
+      * 发票类型描述，详见下方 TypeDescription  返回值说明
+      */
+    TypeDescription?: string;
+    /**
+      * 切割单图文件，Base64编码后的切图后的图片文件，开启 EnableCutImage 后进行返回
+      */
+    CutImage?: string;
+    /**
+      * 发票详细类型描述，详见下方 SubType 返回值说明
+      */
+    SubTypeDescription?: string;
 }
 /**
  * BankSlipOCR请求参数结构体
@@ -993,6 +1084,27 @@ export interface SingleInvoiceInfo {
     Row: number;
 }
 /**
+ * 增值税普通发票（卷票）条目
+ */
+export interface VatRollItem {
+    /**
+      * 项目名称
+      */
+    Name?: string;
+    /**
+      * 数量
+      */
+    Quantity?: string;
+    /**
+      * 单价
+      */
+    Price?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+}
+/**
  * 数学公式识别结果
  */
 export interface TextFormula {
@@ -1119,6 +1231,55 @@ export interface VehicleRegCertInfo {
       * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
       */
     Value: string;
+}
+/**
+ * 机票行程卡条目
+ */
+export interface FlightItem {
+    /**
+      * 出发航站楼
+      */
+    TerminalGetOn?: string;
+    /**
+      * 到达航站楼
+      */
+    TerminalGetOff?: string;
+    /**
+      * 承运人
+      */
+    Carrier?: string;
+    /**
+      * 航班号
+      */
+    FlightNumber?: string;
+    /**
+      * 座位等级
+      */
+    Seat?: string;
+    /**
+      * 乘机日期
+      */
+    DateGetOn?: string;
+    /**
+      * 乘机时间
+      */
+    TimeGetOn?: string;
+    /**
+      * 出发站
+      */
+    StationGetOn?: string;
+    /**
+      * 到达站
+      */
+    StationGetOff?: string;
+    /**
+      * 免费行李
+      */
+    Allow?: string;
+    /**
+      * 客票级别/客票类别
+      */
+    FareBasis?: string;
 }
 /**
  * value信息组
@@ -1470,6 +1631,59 @@ export interface TextEduPaper {
     Itemcoord: ItemCoord;
 }
 /**
+ * 增值税发票项目信息
+ */
+export interface VatInvoiceItemInfo {
+    /**
+      * 项目名称
+      */
+    Name?: string;
+    /**
+      * 规格型号
+      */
+    Specification?: string;
+    /**
+      * 单位
+      */
+    Unit?: string;
+    /**
+      * 数量
+      */
+    Quantity?: string;
+    /**
+      * 单价
+      */
+    Price?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+    /**
+      * 税率
+      */
+    TaxRate?: string;
+    /**
+      * 税额
+      */
+    Tax?: string;
+    /**
+      * 通行日期起
+      */
+    DateStart?: string;
+    /**
+      * 通行日期止
+      */
+    DateEnd?: string;
+    /**
+      * 车牌号
+      */
+    LicensePlate?: string;
+    /**
+      * 车辆类型
+      */
+    VehicleType?: string;
+}
+/**
  * QrcodeOCR返回参数结构体
  */
 export interface QrcodeOCRResponse {
@@ -1565,6 +1779,79 @@ export interface MainlandPermitOCRRequest {
       * 是否返回头像。默认不返回。
       */
     RetProfile?: boolean;
+}
+/**
+ * 电子发票详细条目信息
+ */
+export interface VatElectronicItemInfo {
+    /**
+      * 项目名称
+      */
+    Name?: string;
+    /**
+      * 数量
+      */
+    Quantity?: string;
+    /**
+      * 规格型号
+      */
+    Specification?: string;
+    /**
+      * 单价
+      */
+    Price?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+    /**
+      * 税率
+      */
+    TaxRate?: string;
+    /**
+      * 税额
+      */
+    Tax?: string;
+    /**
+      * 单位
+      */
+    Unit?: string;
+    /**
+      * 运输工具类型
+      */
+    VehicleType?: string;
+    /**
+      * 运输工具牌号
+      */
+    VehicleBrand?: string;
+    /**
+      * 起始地
+      */
+    DeparturePlace?: string;
+    /**
+      * 到达地
+      */
+    ArrivalPlace?: string;
+    /**
+      * 运输货物名称，仅货物运输服务发票返回
+      */
+    TransportItemsName?: string;
+    /**
+      * 建筑服务发生地，仅建筑发票返回
+      */
+    PlaceOfBuildingService?: string;
+    /**
+      * 建筑项目名称，仅建筑发票返回
+      */
+    BuildingName?: string;
+    /**
+      * 产权证书/不动产权证号，仅不动产经营租赁服务发票返回
+      */
+    EstateNumber?: string;
+    /**
+      * 面积单位，仅不动产经营租赁服务发票返回
+      */
+    AreaUnit?: string;
 }
 /**
  * SmartStructuralOCRV2返回参数结构体
@@ -2182,17 +2469,41 @@ export interface VatInvoiceUserInfo {
     FinancialAccount: string;
 }
 /**
- * InsuranceBillOCR返回参数结构体
+ * 通用机打发票条目
  */
-export interface InsuranceBillOCRResponse {
+export interface GeneralMachineItem {
     /**
-      * 保险单据识别结果，具体内容请点击左侧链接。
+      * 项目名称
       */
-    InsuranceBillInfos: Array<InsuranceBillInfo>;
+    Name?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 规格型号
       */
-    RequestId?: string;
+    Specification?: string;
+    /**
+      * 单位
+      */
+    Unit?: string;
+    /**
+      * 数量
+      */
+    Quantity?: string;
+    /**
+      * 单价
+      */
+    Price?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+    /**
+      * 税率
+      */
+    TaxRate?: string;
+    /**
+      * 税额
+      */
+    Tax?: string;
 }
 /**
  * GeneralAccurateOCR返回参数结构体
@@ -2236,6 +2547,95 @@ BACK：无照片的一面（国徽面），
 该参数如果不填或填错，将为您自动判断正反面。
       */
     CardSide?: string;
+}
+/**
+ * 汽车票
+ */
+export interface BusInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 乘车时间
+      */
+    TimeGetOn?: string;
+    /**
+      * 乘车日期
+      */
+    DateGetOn?: string;
+    /**
+      * 出发车站
+      */
+    StationGetOn?: string;
+    /**
+      * 到达车站
+      */
+    StationGetOff?: string;
+    /**
+      * 票价
+      */
+    Total?: string;
+    /**
+      * 姓名
+      */
+    UserName?: string;
+    /**
+      * 消费类型
+      */
+    Kind?: string;
+    /**
+      * 身份证号
+      */
+    UserID?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 乘车地点
+      */
+    PlaceGetOn?: string;
+    /**
+      * 检票口
+      */
+    GateNumber?: string;
+    /**
+      * 客票类型
+      */
+    TicketType?: string;
+    /**
+      * 车型
+      */
+    VehicleType?: string;
+    /**
+      * 座位号
+      */
+    SeatNumber?: string;
+    /**
+      * 车次
+      */
+    TrainNumber?: string;
 }
 /**
  * QrcodeOCR请求参数结构体
@@ -2312,6 +2712,65 @@ export interface TaxiInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
+ * RecognizeGeneralInvoice请求参数结构体
+ */
+export interface RecognizeGeneralInvoiceRequest {
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
+    /**
+      * 需要识别的票据类型列表，为空或不填表示识别全部类型。
+0：出租车发票
+1：定额发票
+2：火车票
+3：增值税发票
+5：机票行程单
+8：通用机打发票
+9：汽车票
+10：轮船票
+11：增值税发票（卷票 ）
+12：购车发票
+13：过路过桥费发票
+15：非税发票
+16：全电发票
+----------------------
+-1：其他发票,（只传入此类型时，图片均采用其他票类型进行识别）
+      */
+    Types?: Array<number>;
+    /**
+      * 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。
+      */
+    EnableOther?: boolean;
+    /**
+      * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+      */
+    EnablePdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
+    /**
+      * 是否开启PDF多页识别，默认值为false，开启后可同时支持多页PDF的识别返回，仅支持返回文件前30页。开启后EnablePdf和PdfPageNumber入参不进行控制。
+      */
+    EnableMultiplePage?: boolean;
+    /**
+      * 是否返回切割图片base64，默认值为false。
+      */
+    EnableCutImage?: boolean;
+}
+/**
  * GeneralBasicOCR返回参数结构体
  */
 export interface GeneralBasicOCRResponse {
@@ -2380,6 +2839,27 @@ export interface RecognizeThaiIDCardOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 其他发票
+ */
+export interface OtherInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 金额
+      */
+    Total?: string;
+    /**
+      * 列表
+      */
+    OtherInvoiceListItems?: Array<OtherInvoiceItem>;
+    /**
+      * 表格
+      */
+    OtherInvoiceTableItems?: Array<OtherInvoiceList>;
 }
 /**
  * 单元格识别结果
@@ -2899,6 +3379,121 @@ export interface PermitOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * 混贴票据中单张发票的内容
+ */
+export interface SingleInvoiceItem {
+    /**
+      * 增值税专用发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatSpecialInvoice: VatInvoiceInfo;
+    /**
+      * 增值税普通发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatCommonInvoice: VatInvoiceInfo;
+    /**
+      * 增值税电子普通发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicCommonInvoice: VatInvoiceInfo;
+    /**
+      * 增值税电子专用发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicSpecialInvoice?: VatInvoiceInfo;
+    /**
+      * 区块链电子发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicInvoiceBlockchain?: VatInvoiceInfo;
+    /**
+      * 增值税电子普通发票(通行费)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicInvoiceToll?: VatInvoiceInfo;
+    /**
+      * 电子发票(专用发票)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicSpecialInvoiceFull?: VatElectronicInfo;
+    /**
+      * 电子发票(普通发票)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatElectronicInvoiceFull?: VatElectronicInfo;
+    /**
+      * 通用机打发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachinePrintedInvoice?: MachinePrintedInvoice;
+    /**
+      * 汽车票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BusInvoice?: BusInvoice;
+    /**
+      * 轮船票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShippingInvoice?: ShippingInvoice;
+    /**
+      * 过路过桥费发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TollInvoice?: TollInvoice;
+    /**
+      * 其他发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OtherInvoice?: OtherInvoice;
+    /**
+      * 机动车销售统一发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MotorVehicleSaleInvoice?: MotorVehicleSaleInvoice;
+    /**
+      * 二手车销售统一发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsedCarPurchaseInvoice?: UsedCarPurchaseInvoice;
+    /**
+      * 增值税普通发票(卷票)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VatInvoiceRoll?: VatInvoiceRoll;
+    /**
+      * 出租车发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaxiTicket?: TaxiTicket;
+    /**
+      * 定额发票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuotaInvoice?: QuotaInvoice;
+    /**
+      * 机票行程单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AirTransport?: AirTransport;
+    /**
+      * 非税收入通用票据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NonTaxIncomeGeneralBill?: NonTaxIncomeBill;
+    /**
+      * 非税收入一般缴款书(电子)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NonTaxIncomeElectronicBill?: NonTaxIncomeBill;
+    /**
+      * 火车票
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TrainTicket?: TrainTicket;
+}
+/**
  * InvoiceGeneralOCR返回参数结构体
  */
 export interface InvoiceGeneralOCRResponse {
@@ -2954,6 +3549,167 @@ export interface VatInvoiceVerifyNewResponse {
     RequestId?: string;
 }
 /**
+ * 增值税发票返回值
+ */
+export interface VatInvoiceInfo {
+    /**
+      * 校验码
+      */
+    CheckCode?: string;
+    /**
+      * 发票联次
+      */
+    FormType?: string;
+    /**
+      * 车船税
+      */
+    TravelTax?: string;
+    /**
+      * 购买方地址电话
+      */
+    BuyerAddrTel?: string;
+    /**
+      * 购买方银行账号
+      */
+    BuyerBankAccount?: string;
+    /**
+      * 公司印章内容
+      */
+    CompanySealContent?: string;
+    /**
+      * 税务局章内容
+      */
+    TaxSealContent?: string;
+    /**
+      * 服务类型
+      */
+    ServiceName?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 是否存在二维码（0：没有，1：有）
+      */
+    QRCodeMark?: number;
+    /**
+      * 是否有代开标记（0：没有，1：有）
+      */
+    AgentMark?: number;
+    /**
+      * 是否有通行费标记（0：没有，1：有）
+      */
+    TransitMark?: number;
+    /**
+      * 是否有成品油标记（0：没有，1：有）
+      */
+    OilMark?: number;
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 机打发票号码
+      */
+    NumberConfirm?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 税前金额
+      */
+    PretaxAmount?: string;
+    /**
+      * 合计税额
+      */
+    Tax?: string;
+    /**
+      * 机器编号
+      */
+    MachineCode?: string;
+    /**
+      * 密码区
+      */
+    Ciphertext?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 销售方名称
+      */
+    Seller?: string;
+    /**
+      * 销售方纳税人识别号
+      */
+    SellerTaxID?: string;
+    /**
+      * 销售方地址电话
+      */
+    SellerAddrTel?: string;
+    /**
+      * 销售方银行账号
+      */
+    SellerBankAccount?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
+    /**
+      * 开票人
+      */
+    Issuer?: string;
+    /**
+      * 复核人
+      */
+    Reviewer?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 增值税发票项目信息
+      */
+    VatInvoiceItemInfos?: Array<VatInvoiceItemInfo>;
+    /**
+      * 机打发票代码
+      */
+    CodeConfirm?: string;
+    /**
+      * 收款人
+      */
+    Receiptor?: string;
+}
+/**
  * RecognizePhilippinesSssIDOCR返回参数结构体
  */
 export interface RecognizePhilippinesSssIDOCRResponse {
@@ -3007,6 +3763,155 @@ export interface TaxiInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
+ * 通用机打发票
+ */
+export interface MachinePrintedInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 时间
+      */
+    Time?: string;
+    /**
+      * 校验码
+      */
+    CheckCode?: string;
+    /**
+      * 密码区
+      */
+    Ciphertext?: string;
+    /**
+      * 种类
+      */
+    Category?: string;
+    /**
+      * 税前金额
+      */
+    PretaxAmount?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 合计税额
+      */
+    Tax?: string;
+    /**
+      * 行业分类
+      */
+    IndustryClass?: string;
+    /**
+      * 销售方名称
+      */
+    Seller?: string;
+    /**
+      * 销售方纳税人识别号
+      */
+    SellerTaxID?: string;
+    /**
+      * 销售方地址电话
+      */
+    SellerAddrTel?: string;
+    /**
+      * 销售方银行账号
+      */
+    SellerBankAccount?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 购买方地址电话
+      */
+    BuyerAddrTel?: string;
+    /**
+      * 购买方银行账号
+      */
+    BuyerBankAccount?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
+    /**
+      * 是否为浙江/广东通用机打发票（0：没有，1：有）
+      */
+    ElectronicMark?: number;
+    /**
+      * 开票人
+      */
+    Issuer?: string;
+    /**
+      * 收款人
+      */
+    Receiptor?: string;
+    /**
+      * 复核人
+      */
+    Reviewer?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 经办人支付信息
+      */
+    PaymentInfo?: string;
+    /**
+      * 经办人取票用户
+      */
+    TicketPickupUser?: string;
+    /**
+      * 经办人商户号
+      */
+    MerchantNumber?: string;
+    /**
+      * 经办人订单号
+      */
+    OrderNumber?: string;
+    /**
+      * 条目
+      */
+    GeneralMachineItems?: Array<GeneralMachineItem>;
+}
+/**
  * PropOwnerCertOCR请求参数结构体
  */
 export interface PropOwnerCertOCRRequest {
@@ -3045,6 +3950,107 @@ export interface RecognizeContainerOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+}
+/**
+ * 火车票
+ */
+export interface TrainTicket {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 乘车日期
+      */
+    DateGetOn?: string;
+    /**
+      * 乘车时间
+      */
+    TimeGetOn?: string;
+    /**
+      * 乘车人姓名
+      */
+    Name?: string;
+    /**
+      * 出发车站
+      */
+    StationGetOn?: string;
+    /**
+      * 到达车站
+      */
+    StationGetOff?: string;
+    /**
+      * 座位类型
+      */
+    Seat?: string;
+    /**
+      * 总金额
+      */
+    Total?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 序列号
+      */
+    SerialNumber?: string;
+    /**
+      * 身份证号
+      */
+    UserID?: string;
+    /**
+      * 检票口
+      */
+    GateNumber?: string;
+    /**
+      * 车次
+      */
+    TrainNumber?: string;
+    /**
+      * 手续费
+      */
+    HandlingFee?: string;
+    /**
+      * 原票价
+      */
+    OriginalFare?: string;
+    /**
+      * 大写金额
+      */
+    TotalCn?: string;
+    /**
+      * 座位号
+      */
+    SeatNumber?: string;
+    /**
+      * 取票地址
+      */
+    PickUpAddress?: string;
+    /**
+      * 是否始发改签
+      */
+    TicketChange?: string;
+    /**
+      * 加收票价
+      */
+    AdditionalFare?: string;
+    /**
+      * 收据号码
+      */
+    ReceiptNumber?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 是否仅供报销使用（0：没有，1：有）
+      */
+    ReimburseOnlyMark?: number;
 }
 /**
  * EduPaperOCR请求参数结构体
@@ -3186,32 +4192,177 @@ export interface BusinessCardInfo {
     ItemCoord: ItemCoord;
 }
 /**
- * 文字识别结果
+ * 机动车销售统一发票
  */
-export interface TextGeneralHandwriting {
+export interface MotorVehicleSaleInvoice {
     /**
-      * 识别出的文本行内容
+      * 发票名称
       */
-    DetectedText: string;
+    Title?: string;
     /**
-      * 置信度 0 - 100
+      * 发票代码
       */
-    Confidence: number;
+    Code?: string;
     /**
-      * 文本行坐标，以四个顶点坐标表示
+      * 发票号码
       */
-    Polygon: Array<Coord>;
+    Number?: string;
     /**
-      * 此字段为扩展字段。
-能返回文本行的段落信息，例如：{\"Parag\":{\"ParagNo\":2}}，
-其中ParagNo为段落行，从1开始。
+      * 开票日期
       */
-    AdvancedInfo: string;
+    Date?: string;
     /**
-      * 字的坐标数组，以四个顶点坐标表示
-注意：此字段可能返回 null，表示取不到有效值。
+      * 税前金额
       */
-    WordPolygon: Array<Polygon>;
+    PretaxAmount?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 销售方名称
+      */
+    Seller?: string;
+    /**
+      * 销售方单位代码
+      */
+    SellerTaxID?: string;
+    /**
+      * 销售方电话
+      */
+    SellerTel?: string;
+    /**
+      * 销售方地址
+      */
+    SellerAddress?: string;
+    /**
+      * 销售方开户行
+      */
+    SellerBank?: string;
+    /**
+      * 销售方银行账号
+      */
+    SellerBankAccount?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 购买方身份证号码/组织机构代码
+      */
+    BuyerID?: string;
+    /**
+      * 主管税务机关
+      */
+    TaxAuthorities?: string;
+    /**
+      * 主管税务机关代码
+      */
+    TaxAuthoritiesCode?: string;
+    /**
+      * 车辆识别代码
+      */
+    VIN?: string;
+    /**
+      * 厂牌型号
+      */
+    VehicleModel?: string;
+    /**
+      * 发动机号码
+      */
+    VehicleEngineCode?: string;
+    /**
+      * 合格证号
+      */
+    CertificateNumber?: string;
+    /**
+      * 商检单号
+      */
+    InspectionNumber?: string;
+    /**
+      * 机器编号
+      */
+    MachineID?: string;
+    /**
+      * 车辆类型
+      */
+    VehicleType?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 合计税额
+      */
+    Tax?: string;
+    /**
+      * 税率
+      */
+    TaxRate?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
+    /**
+      * 吨位
+      */
+    Tonnage?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 发票联次
+      */
+    FormType?: string;
+    /**
+      * 发票联名
+      */
+    FormName?: string;
+    /**
+      * 开票人
+      */
+    Issuer?: string;
+    /**
+      * 完税凭证号码
+      */
+    TaxNum?: string;
+    /**
+      * 限乘人数
+      */
+    MaxPeopleNum?: string;
+    /**
+      * 产地
+      */
+    Origin?: string;
+    /**
+      * 机打发票代码
+      */
+    MachineCode?: string;
+    /**
+      * 机打发票号码
+      */
+    MachineNumber?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
 }
 /**
  * TableOCR请求参数结构体
@@ -3999,6 +5150,75 @@ export interface VatInvoiceVerifyResponse {
     RequestId?: string;
 }
 /**
+ * 电子发票返回值
+ */
+export interface VatElectronicInfo {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 税前金额
+      */
+    PretaxAmount?: string;
+    /**
+      * 合计税额
+      */
+    Tax?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 销售方名称
+      */
+    Seller?: string;
+    /**
+      * 销售方纳税人识别号
+      */
+    SellerTaxID?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 开票人
+      */
+    Issuer?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 小计金额
+      */
+    SubTotal?: string;
+    /**
+      * 小计税额
+      */
+    SubTax?: string;
+    /**
+      * 电子发票详细条目信息
+      */
+    VatElectronicItems?: Array<VatElectronicItemInfo>;
+}
+/**
  * SmartStructuralOCR返回参数结构体
  */
 export interface SmartStructuralOCRResponse {
@@ -4030,25 +5250,13 @@ export interface DetectedWords {
     Character: string;
 }
 /**
- * VerifyEnterpriseFourFactors请求参数结构体
+ * 其他票Table
  */
-export interface VerifyEnterpriseFourFactorsRequest {
+export interface OtherInvoiceList {
     /**
-      * 姓名
+      * 列表
       */
-    RealName: string;
-    /**
-      * 证件号码（公司注册证件号）
-      */
-    IdCard: string;
-    /**
-      * 企业全称
-      */
-    EnterpriseName: string;
-    /**
-      * 企业标识（注册号，统一社会信用代码）
-      */
-    EnterpriseMark: string;
+    OtherInvoiceItemList?: Array<OtherInvoiceItem>;
 }
 /**
  * RecognizeIndonesiaIDCardOCR请求参数结构体
@@ -4435,6 +5643,111 @@ export interface ArithmeticOCRRequest {
     PdfPageIndex?: number;
 }
 /**
+ * 非税收入
+ */
+export interface NonTaxIncomeBill {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 校验码
+      */
+    CheckCode?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 交款人名称
+      */
+    Buyer?: string;
+    /**
+      * 交款人纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 收款人名称
+      */
+    Seller?: string;
+    /**
+      * 收款单位名称
+      */
+    SellerCompany?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 币种
+      */
+    CurrencyCode?: string;
+    /**
+      * 复核人
+      */
+    Reviewer?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 其他信息
+      */
+    OtherInfo?: string;
+    /**
+      * 缴款码
+      */
+    PaymentCode?: string;
+    /**
+      * 执收单位编码
+      */
+    ReceiveUnitCode?: string;
+    /**
+      * 执收单位名称
+      */
+    Receiver?: string;
+    /**
+      * 经办人
+      */
+    Operator?: string;
+    /**
+      * 付款人账号
+      */
+    PayerAccount?: string;
+    /**
+      * 付款人开户银行
+      */
+    PayerBank?: string;
+    /**
+      * 收款人账号
+      */
+    ReceiverAccount?: string;
+    /**
+      * 收款人开户银行
+      */
+    ReceiverBank?: string;
+    /**
+      * 条目
+      */
+    NonTaxItems?: Array<NonTaxItem>;
+}
+/**
  * VerifyOfdVatInvoiceOCR请求参数结构体
  */
 export interface VerifyOfdVatInvoiceOCRRequest {
@@ -4573,6 +5886,128 @@ export interface VatRollInvoiceOCRRequest {
       * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
       */
     PdfPageNumber?: number;
+}
+/**
+ * 机票行程单
+ */
+export interface AirTransport {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 电子客票号码
+      */
+    Number?: string;
+    /**
+      * 校验码
+      */
+    CheckCode?: string;
+    /**
+      * 印刷序号
+      */
+    SerialNumber?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 销售单位代号
+      */
+    AgentCode?: string;
+    /**
+      * 销售单位代号第一行
+      */
+    AgentCodeFirst?: string;
+    /**
+      * 销售单位代号第二行
+      */
+    AgentCodeSecond?: string;
+    /**
+      * 姓名
+      */
+    UserName?: string;
+    /**
+      * 身份证号
+      */
+    UserID?: string;
+    /**
+      * 填开单位
+      */
+    Issuer?: string;
+    /**
+      * 票价
+      */
+    Fare?: string;
+    /**
+      * 合计税额
+      */
+    Tax?: string;
+    /**
+      * 燃油附加费
+      */
+    FuelSurcharge?: string;
+    /**
+      * 民航发展基金
+      */
+    AirDevelopmentFund?: string;
+    /**
+      * 保险费
+      */
+    Insurance?: string;
+    /**
+      * 合计金额（小写）
+      */
+    Total?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 国内国际标签
+      */
+    DomesticInternationalTag?: string;
+    /**
+      * 客票生效日期
+      */
+    DateStart?: string;
+    /**
+      * 有效截至日期
+      */
+    DateEnd?: string;
+    /**
+      * 签注
+      */
+    Endorsement?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 条目
+      */
+    FlightItems?: Array<FlightItem>;
+}
+/**
+ * VerifyEnterpriseFourFactors请求参数结构体
+ */
+export interface VerifyEnterpriseFourFactorsRequest {
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 证件号码（公司注册证件号）
+      */
+    IdCard: string;
+    /**
+      * 企业全称
+      */
+    EnterpriseName: string;
+    /**
+      * 企业标识（注册号，统一社会信用代码）
+      */
+    EnterpriseMark: string;
 }
 /**
  * 表格标题
@@ -4856,6 +6291,34 @@ export interface FormulaOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * 文字识别结果
+ */
+export interface TextGeneralHandwriting {
+    /**
+      * 识别出的文本行内容
+      */
+    DetectedText: string;
+    /**
+      * 置信度 0 - 100
+      */
+    Confidence: number;
+    /**
+      * 文本行坐标，以四个顶点坐标表示
+      */
+    Polygon: Array<Coord>;
+    /**
+      * 此字段为扩展字段。
+能返回文本行的段落信息，例如：{\"Parag\":{\"ParagNo\":2}}，
+其中ParagNo为段落行，从1开始。
+      */
+    AdvancedInfo: string;
+    /**
+      * 字的坐标数组，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WordPolygon: Array<Polygon>;
+}
+/**
  * PassportOCR请求参数结构体
  */
 export interface PassportOCRRequest {
@@ -4971,6 +6434,55 @@ export interface QueryBarCodeRequest {
     BarCode: string;
 }
 /**
+ * 过路过桥费发票
+ */
+export interface TollInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 日期
+      */
+    Date?: string;
+    /**
+      * 时间
+      */
+    Time?: string;
+    /**
+      * 入口
+      */
+    Entrance?: string;
+    /**
+      * 出口
+      */
+    Exit?: string;
+    /**
+      * 高速标志（0：没有，1：有）
+      */
+    HighwayMark?: number;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+}
+/**
  * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
  */
 export interface ItemCoord {
@@ -5066,6 +6578,67 @@ No：不识别其他类型发票
       * 是否开启PDF多页识别，默认值为false，开启后可同时支持多页PDF的识别返回，仅支持返回文件前30页。开启后IsPDF和PdfPageNumber入参不进行控制。
       */
     ReturnMultiplePage?: boolean;
+}
+/**
+ * 轮船票
+ */
+export interface ShippingInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 姓名
+      */
+    UserName?: string;
+    /**
+      * 日期
+      */
+    Date?: string;
+    /**
+      * 时间
+      */
+    Time?: string;
+    /**
+      * 出发车站
+      */
+    StationGetOn?: string;
+    /**
+      * 到达车站
+      */
+    StationGetOff?: string;
+    /**
+      * 票价
+      */
+    Total?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 币种
+      */
+    CurrencyCode?: string;
 }
 /**
  * 表格内容检测
@@ -5217,6 +6790,99 @@ export interface ResidenceBookletOCRResponse {
     RequestId?: string;
 }
 /**
+ * 增值税普通发票(卷票)
+ */
+export interface VatInvoiceRoll {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 机打发票号码
+      */
+    NumberConfirm?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 校验码
+      */
+    CheckCode?: string;
+    /**
+      * 销售方名称
+      */
+    Seller?: string;
+    /**
+      * 销售方纳税人识别号
+      */
+    SellerTaxID?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方纳税人识别号
+      */
+    BuyerTaxID?: string;
+    /**
+      * 种类
+      */
+    Category?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 服务类型
+      */
+    ServiceName?: string;
+    /**
+      * 公司印章内容
+      */
+    CompanySealContent?: string;
+    /**
+      * 税务局章内容
+      */
+    TaxSealContent?: string;
+    /**
+      * 条目
+      */
+    VatRollItems?: Array<VatRollItem>;
+}
+/**
  * CarInvoiceOCR返回参数结构体
  */
 export interface CarInvoiceOCRResponse {
@@ -5312,6 +6978,23 @@ export interface ShipInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
+ * RecognizeGeneralInvoice返回参数结构体
+ */
+export interface RecognizeGeneralInvoiceResponse {
+    /**
+      * 混贴票据识别结果，具体内容请点击左侧链接。
+      */
+    MixedInvoiceItems?: Array<InvoiceItem>;
+    /**
+      * PDF文件总页码
+      */
+    TotalPDFCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 保险单据信息
  */
 export interface InsuranceBillInfo {
@@ -5376,6 +7059,19 @@ export interface RecognizeMedicalInvoiceOCRRequest {
       * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
       */
     PdfPageNumber?: number;
+}
+/**
+ * InsuranceBillOCR返回参数结构体
+ */
+export interface InsuranceBillOCRResponse {
+    /**
+      * 保险单据识别结果，具体内容请点击左侧链接。
+      */
+    InsuranceBillInfos: Array<InsuranceBillInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 卡证智能分类结果
@@ -5855,6 +7551,96 @@ export interface MLIDCardOCRRequest {
     RetImage?: boolean;
 }
 /**
+ * OtherInvoiceItem
+ */
+export interface OtherInvoiceItem {
+    /**
+      * 票面key值
+      */
+    Name?: string;
+    /**
+      * 票面value值
+      */
+    Value?: string;
+}
+/**
+ * 出租车发票
+ */
+export interface TaxiTicket {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 上车时间
+      */
+    TimeGetOn?: string;
+    /**
+      * 下车时间
+      */
+    TimeGetOff?: string;
+    /**
+      * 单价
+      */
+    Price?: string;
+    /**
+      * 里程
+      */
+    Mileage?: string;
+    /**
+      * 总金额
+      */
+    Total?: string;
+    /**
+      * 发票所在地
+      */
+    Place?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 车牌号
+      */
+    LicensePlate?: string;
+    /**
+      * 燃油附加费
+      */
+    FuelFee?: string;
+    /**
+      * 预约叫车服务费
+      */
+    BookingCallFee?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
+}
+/**
  * EnglishOCR返回参数结构体
  */
 export interface EnglishOCRResponse {
@@ -6053,6 +7839,51 @@ export interface EnterpriseLicenseInfo {
       * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
       */
     Value: string;
+}
+/**
+ * 定额发票
+ */
+export interface QuotaInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 是否存在二维码（1：有，0：无）
+      */
+    QRCodeMark?: number;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
 }
 /**
  * InsuranceBillOCR请求参数结构体
@@ -6929,6 +8760,143 @@ export interface FinanBillOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+}
+/**
+ * 二手车销售统一发票
+ */
+export interface UsedCarPurchaseInvoice {
+    /**
+      * 发票名称
+      */
+    Title?: string;
+    /**
+      * 是否存在二维码（0：没有，1：有）
+      */
+    QRCodeMark?: number;
+    /**
+      * 发票代码
+      */
+    Code?: string;
+    /**
+      * 发票号码
+      */
+    Number?: string;
+    /**
+      * 开票日期
+      */
+    Date?: string;
+    /**
+      * 价税合计（小写）
+      */
+    Total?: string;
+    /**
+      * 价税合计（大写）
+      */
+    TotalCn?: string;
+    /**
+      * 销货单位名称
+      */
+    Seller?: string;
+    /**
+      * 销售方电话
+      */
+    SellerTel?: string;
+    /**
+      * 销售方单位代码/个人身份证号
+      */
+    SellerTaxID?: string;
+    /**
+      * 销售方地址
+      */
+    SellerAddress?: string;
+    /**
+      * 购买方名称
+      */
+    Buyer?: string;
+    /**
+      * 购买方单位代码/个人身份证号
+      */
+    BuyerID?: string;
+    /**
+      * 购买方地址
+      */
+    BuyerAddress?: string;
+    /**
+      * 购买方电话
+      */
+    BuyerTel?: string;
+    /**
+      * 二手车市场
+      */
+    CompanyName?: string;
+    /**
+      * 二手车市场纳税人识别号
+      */
+    CompanyTaxID?: string;
+    /**
+      * 二手车市场开户银行和账号
+      */
+    CompanyBankAccount?: string;
+    /**
+      * 二手车市场电话
+      */
+    CompanyTel?: string;
+    /**
+      * 二手车市场地址
+      */
+    CompanyAddress?: string;
+    /**
+      * 转入地车辆管理所名称
+      */
+    TransferAdministrationName?: string;
+    /**
+      * 车牌号
+      */
+    LicensePlate?: string;
+    /**
+      * 登记证号
+      */
+    RegistrationNumber?: string;
+    /**
+      * 车辆识别代码
+      */
+    VIN?: string;
+    /**
+      * 厂牌型号
+      */
+    VehicleModel?: string;
+    /**
+      * 发票消费类型
+      */
+    Kind?: string;
+    /**
+      * 省
+      */
+    Province?: string;
+    /**
+      * 市
+      */
+    City?: string;
+    /**
+      * 车辆类型
+      */
+    VehicleType?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+    /**
+      * 发票联次
+      */
+    FormType?: string;
+    /**
+      * 发票联名
+      */
+    FormName?: string;
+    /**
+      * 是否有公司印章（0：没有，1：有）
+      */
+    CompanySealMark?: number;
 }
 /**
  * VerifyEnterpriseFourFactors返回参数结构体

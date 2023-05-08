@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadAsrVocab", req, cb);
     }
     /**
+     * 通过自学习模型id获取自学习模型详细信息
+     */
+    async GetModelInfo(req, cb) {
+        return this.request("GetModelInfo", req, cb);
+    }
+    /**
      * 本接口服务对时长5小时以内的录音文件进行识别，异步返回识别全部结果。
 • 支持中文普通话、英语、粤语、日语、越南语、马来语、印度尼西亚语、菲律宾语、上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话。
 • 支持wav、mp3、m4a、flv、mp4、wma、3gp、amr、aac、ogg-opus、flac格式。

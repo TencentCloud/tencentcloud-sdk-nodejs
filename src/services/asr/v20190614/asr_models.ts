@@ -335,23 +335,74 @@ export interface CloseAsyncRecognitionTaskResponse {
 }
 
 /**
- * 一句话识别返回的词时间戳
+ * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
  */
-export interface SentenceWord {
+export interface SentenceDetail {
   /**
-   * 词结果
-   */
-  Word: string
+      * 单句最终识别结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinalSentence: string
 
   /**
-   * 词在音频中的开始时间
-   */
-  StartTime: number
+      * 单句中间识别结果，使用空格拆分为多个词
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SliceSentence: string
 
   /**
-   * 词在音频中的结束时间
-   */
-  EndTime: number
+      * 单句开始时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartMs: number
+
+  /**
+      * 单句结束时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndMs: number
+
+  /**
+      * 单句中词个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WordsNum: number
+
+  /**
+      * 单句中词详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Words: Array<SentenceWords>
+
+  /**
+      * 单句语速，单位：字数/秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpeechSpeed: number
+
+  /**
+      * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpeakerId: number
+
+  /**
+      * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EmotionalEnergy: number
+
+  /**
+      * 本句与上一句之间的静音时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SilenceTime: number
+
+  /**
+      * 情绪类型（可能为空）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EmotionType?: Array<string>
 }
 
 /**
@@ -422,6 +473,16 @@ export interface ModifyCustomizationResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetModelInfo请求参数结构体
+ */
+export interface GetModelInfoRequest {
+  /**
+   * 模型id
+   */
+  ModelId: string
 }
 
 /**
@@ -956,74 +1017,18 @@ export interface CreateAsrVocabRequest {
 }
 
 /**
- * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
+ * GetModelInfo返回参数结构体
  */
-export interface SentenceDetail {
+export interface GetModelInfoResponse {
   /**
-      * 单句最终识别结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FinalSentence: string
+   * 模型信息
+   */
+  Data?: Model
 
   /**
-      * 单句中间识别结果，使用空格拆分为多个词
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SliceSentence: string
-
-  /**
-      * 单句开始时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartMs: number
-
-  /**
-      * 单句结束时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndMs: number
-
-  /**
-      * 单句中词个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  WordsNum: number
-
-  /**
-      * 单句中词详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Words: Array<SentenceWords>
-
-  /**
-      * 单句语速，单位：字数/秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SpeechSpeed: number
-
-  /**
-      * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SpeakerId: number
-
-  /**
-      * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EmotionalEnergy: number
-
-  /**
-      * 本句与上一句之间的静音时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SilenceTime: number
-
-  /**
-      * 情绪类型（可能为空）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EmotionType?: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1173,6 +1178,26 @@ export interface GetAsrVocabListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 一句话识别返回的词时间戳
+ */
+export interface SentenceWord {
+  /**
+   * 词结果
+   */
+  Word: string
+
+  /**
+   * 词在音频中的开始时间
+   */
+  StartTime: number
+
+  /**
+   * 词在音频中的结束时间
+   */
+  EndTime: number
 }
 
 /**
