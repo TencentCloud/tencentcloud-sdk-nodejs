@@ -81,6 +81,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyDiskBackup", req, cb);
     }
     /**
+     * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+     */
+    async ModifyBlueprintAttribute(req, cb) {
+        return this.request("ModifyBlueprintAttribute", req, cb);
+    }
+    /**
      * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
      */
     async DescribeAllScenes(req, cb) {
@@ -330,10 +336,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGeneralResourceQuotas", req, cb);
     }
     /**
-     * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+     * 本接口(CreateDisks)用于创建一个或多个云硬盘。
      */
-    async ModifyBlueprintAttribute(req, cb) {
-        return this.request("ModifyBlueprintAttribute", req, cb);
+    async CreateDisks(req, cb) {
+        return this.request("CreateDisks", req, cb);
     }
     /**
      * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。

@@ -130,6 +130,8 @@ var cpdp_1 = require("./cpdp");
 Object.defineProperty(exports, "cpdp", { enumerable: true, get: function () { return cpdp_1.cpdp; } });
 var cr_1 = require("./cr");
 Object.defineProperty(exports, "cr", { enumerable: true, get: function () { return cr_1.cr; } });
+var csip_1 = require("./csip");
+Object.defineProperty(exports, "csip", { enumerable: true, get: function () { return csip_1.csip; } });
 var cvm_1 = require("./cvm");
 Object.defineProperty(exports, "cvm", { enumerable: true, get: function () { return cvm_1.cvm; } });
 var cwp_1 = require("./cwp");

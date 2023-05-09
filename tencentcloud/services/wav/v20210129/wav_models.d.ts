@@ -1034,17 +1034,17 @@ export interface QueryExternalContactDetailResponse {
       * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NextCursor: string;
+    NextCursor?: string;
     /**
       * 客户信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Customer: ExternalContact;
+    Customer?: ExternalContact;
     /**
       * 添加了此外部联系人的企业成员信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FollowUser: Array<FollowUser>;
+    FollowUser?: Array<FollowUser>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

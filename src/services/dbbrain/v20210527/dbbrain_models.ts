@@ -257,7 +257,7 @@ export interface DescribeSlowLogsRequest {
   User?: Array<string>
 
   /**
-   * ip
+   * IP
    */
   Ip?: Array<string>
 

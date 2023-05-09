@@ -154,7 +154,7 @@ export declare class Client extends AbstractClient {
      */
     CreateGroupWithMembers(req: CreateGroupWithMembersRequest, cb?: (error: string, rep: CreateGroupWithMembersResponse) => void): Promise<CreateGroupWithMembersResponse>;
     /**
-     * 服务商信息获取
+     * 开发商信息获取
      */
     DescribeDeveloper(req?: DescribeDeveloperRequest, cb?: (error: string, rep: DescribeDeveloperResponse) => void): Promise<DescribeDeveloperResponse>;
     /**

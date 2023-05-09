@@ -246,7 +246,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGroupWithMembers", req, cb);
     }
     /**
-     * 服务商信息获取
+     * 开发商信息获取
      */
     async DescribeDeveloper(req, cb) {
         return this.request("DescribeDeveloper", req, cb);

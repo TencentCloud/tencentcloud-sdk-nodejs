@@ -73,7 +73,7 @@ video 纯视频
       */
     RTCAudienceNumber?: number;
     /**
-      * 观看类型。0未知，1互动，2cdn或直播。 目前仅支持互动类型
+      * 观看类型，互动直播（默认）。
       */
     AudienceType?: number;
     /**
@@ -85,7 +85,9 @@ video 纯视频
       */
     GroupId?: string;
     /**
-      * 打开学生麦克风/摄像头的授权开关
+      * 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：
+0 不允许直接控制（需同意，默认值）
+1 允许直接控制（无需同意）
       */
     EnableDirectControl?: number;
 }
@@ -2625,7 +2627,7 @@ export interface CreateRoomResponse {
  */
 export interface DescribeDeveloperResponse {
     /**
-      * 服务商ID
+      * 开发商ID
       */
     DeveloperId?: string;
     /**

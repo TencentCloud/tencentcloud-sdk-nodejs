@@ -19,8 +19,10 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ImageModerationRequest,
+  RecognitionResult,
   ObjectResult,
   OcrTextDetail,
+  RecognitionTag,
   ObjectDetail,
   OcrResult,
   LibDetail,

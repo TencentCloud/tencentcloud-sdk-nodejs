@@ -2275,23 +2275,23 @@ export interface DescribeDisasterRecoverGroupQuotaResponse {
     /**
       * 可创建置放群组数量的上限。
       */
-    GroupQuota: number;
+    GroupQuota?: number;
     /**
       * 当前用户已经创建的置放群组数量。
       */
-    CurrentNum: number;
+    CurrentNum?: number;
     /**
       * 物理机类型容灾组内实例的配额数。
       */
-    CvmInHostGroupQuota: number;
+    CvmInHostGroupQuota?: number;
     /**
       * 交换机类型容灾组内实例的配额数。
       */
-    CvmInSwGroupQuota: number;
+    CvmInSwGroupQuota?: number;
     /**
       * 机架类型容灾组内实例的配额数。
       */
-    CvmInRackGroupQuota: number;
+    CvmInRackGroupQuota?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

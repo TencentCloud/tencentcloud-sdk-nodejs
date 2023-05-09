@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRedisTopKeyPrefixList", req, cb);
     }
     /**
-     * 获取指定时间内某个sql模版的慢日志明细
+     * 获取指定时间内某个sql模板的慢日志明细
      */
     async DescribeSlowLogs(req, cb) {
         return this.request("DescribeSlowLogs", req, cb);

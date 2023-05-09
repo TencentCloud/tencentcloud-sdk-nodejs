@@ -80,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNodes", req, cb);
     }
     /**
+     * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
+     */
+    async DescribeInitNodeScripts(req, cb) {
+        return this.request("DescribeInitNodeScripts", req, cb);
+    }
+    /**
      * 本接口(DeleteQueue)用于从指定集群删除队列。
 * 本接口为目前只支持SchedulerType为SLURM的集群。
 

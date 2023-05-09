@@ -28,7 +28,7 @@ import {
   DescribeNodesRequest,
   DeleteNodesResponse,
   AddClusterStorageOptionResponse,
-  StorageOptionOverview,
+  DescribeInitNodeScriptsRequest,
   DeleteClusterResponse,
   ExpansionNodeConfig,
   NodeActivity,
@@ -49,6 +49,7 @@ import {
   InstanceChargePrepaid,
   Tag,
   LoginNode,
+  StorageOptionOverview,
   NodeScript,
   ModifyInitNodeScriptsResponse,
   ManagerNodeOverview,
@@ -80,6 +81,7 @@ import {
   DeleteClusterStorageOptionResponse,
   DescribeNodesResponse,
   DescribeClusterActivitiesResponse,
+  DescribeInitNodeScriptsResponse,
   DataDisk,
   DeleteQueueResponse,
   AddNodesResponse,
@@ -176,6 +178,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNodesResponse) => void
   ): Promise<DescribeNodesResponse> {
     return this.request("DescribeNodes", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
+   */
+  async DescribeInitNodeScripts(
+    req: DescribeInitNodeScriptsRequest,
+    cb?: (error: string, rep: DescribeInitNodeScriptsResponse) => void
+  ): Promise<DescribeInitNodeScriptsResponse> {
+    return this.request("DescribeInitNodeScripts", req, cb)
   }
 
   /**

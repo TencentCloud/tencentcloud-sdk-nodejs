@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKeySizeDist", req, cb);
     }
     /**
-     * 查询任务列表信息
+     * 本接口（DescribeTaskList）用于查询指定实例的任务列表信息。
      */
     async DescribeTaskList(req, cb) {
         return this.request("DescribeTaskList", req, cb);
@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceAccount", req, cb);
     }
     /**
-     * 该接口仅支持多AZ实例副本组提主和单AZ副本提主
+     * 本接口（ChangeReplicaToMaster）适用于实例副本组提主或副本提主。
      */
     async ChangeReplicaToMaster(req, cb) {
         return this.request("ChangeReplicaToMaster", req, cb);

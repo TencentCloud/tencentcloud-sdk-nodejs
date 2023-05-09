@@ -878,7 +878,7 @@ export interface CreateWorkspaceByTemplateResponse {
     /**
       * 创建工作空间返回的信息
       */
-    Data: WorkspaceInfo;
+    Data?: WorkspaceInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1129,6 +1129,11 @@ export interface WorkspaceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SpaceKey: string;
+    /**
+      * 工作空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
 }
 /**
  * CreateWorkspaceTemporaryToken返回参数结构体
@@ -1214,6 +1219,10 @@ export interface CreateWorkspaceByTemplateRequest {
       * 模板ID
       */
     TemplateId: number;
+    /**
+      * 工作空间名称
+      */
+    Name?: string;
 }
 /**
  * ModifyCustomizeTemplatesPartById返回参数结构体

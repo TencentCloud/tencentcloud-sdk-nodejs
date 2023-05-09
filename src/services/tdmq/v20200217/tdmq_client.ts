@@ -39,6 +39,7 @@ import {
   ResetRocketMQConsumerOffSetResponse,
   DescribeBindClustersResponse,
   BindCluster,
+  Sort,
   ModifyClusterResponse,
   VpcConfig,
   RocketMQClusterRecentStats,
@@ -47,6 +48,7 @@ import {
   DescribeCmqQueuesResponse,
   CreateRabbitMQVipInstanceRequest,
   DescribeAllTenantsResponse,
+  CreateRabbitMQVirtualHostResponse,
   DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
   RocketMQInstanceConfig,
@@ -90,6 +92,7 @@ import {
   CreateEnvironmentRequest,
   CreateAMQPQueueRequest,
   ClearCmqQueueRequest,
+  ModifyEnvironmentAttributesResponse,
   DescribeClustersRequest,
   Publisher,
   RocketMQTopic,
@@ -112,7 +115,7 @@ import {
   PublishCmqMsgResponse,
   DescribePublishersRequest,
   CreateRocketMQClusterRequest,
-  DeleteAMQPVHostRequest,
+  CreateRabbitMQUserResponse,
   AcknowledgeMessageResponse,
   ModifyCmqQueueAttributeResponse,
   DeleteEnvironmentRolesResponse,
@@ -250,7 +253,7 @@ import {
   DescribeNodeHealthOptRequest,
   DescribeBindClustersRequest,
   CreateRocketMQTopicResponse,
-  ModifyEnvironmentAttributesResponse,
+  CreateRabbitMQVirtualHostRequest,
   EnvironmentRole,
   ModifyAMQPQueueResponse,
   CreateCmqQueueRequest,
@@ -259,7 +262,7 @@ import {
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQClustersResponse,
   DescribePulsarProInstanceDetailRequest,
-  Sort,
+  CreateRabbitMQUserRequest,
   CreateRoleRequest,
   PulsarNetworkAccessPointInfo,
   ModifyEnvironmentRoleRequest,
@@ -295,6 +298,7 @@ import {
   SendMessagesRequest,
   ModifyRocketMQNamespaceRequest,
   DeleteAMQPVHostResponse,
+  DeleteAMQPVHostRequest,
   DescribeAllTenantsRequest,
 } from "./tdmq_models"
 
@@ -419,6 +423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
   ): Promise<DeleteRocketMQGroupResponse> {
     return this.request("DeleteRocketMQGroup", req, cb)
+  }
+
+  /**
+   * 创建RabbitMQ的用户
+   */
+  async CreateRabbitMQUser(
+    req: CreateRabbitMQUserRequest,
+    cb?: (error: string, rep: CreateRabbitMQUserResponse) => void
+  ): Promise<CreateRabbitMQUserResponse> {
+    return this.request("CreateRabbitMQUser", req, cb)
   }
 
   /**
@@ -601,6 +615,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQNamespaceResponse) => void
   ): Promise<DeleteRocketMQNamespaceResponse> {
     return this.request("DeleteRocketMQNamespace", req, cb)
+  }
+
+  /**
+   * 创建RabbitMQ的vhost
+   */
+  async CreateRabbitMQVirtualHost(
+    req: CreateRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: CreateRabbitMQVirtualHostResponse) => void
+  ): Promise<CreateRabbitMQVirtualHostResponse> {
+    return this.request("CreateRabbitMQVirtualHost", req, cb)
   }
 
   /**
@@ -1038,15 +1062,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp队列列表
-     */
-  async DescribeAMQPQueues(
-    req: DescribeAMQPQueuesRequest,
-    cb?: (error: string, rep: DescribeAMQPQueuesResponse) => void
-  ): Promise<DescribeAMQPQueuesResponse> {
-    return this.request("DescribeAMQPQueues", req, cb)
+   * 创建RocketMQ主题
+   */
+  async CreateRocketMQTopic(
+    req: CreateRocketMQTopicRequest,
+    cb?: (error: string, rep: CreateRocketMQTopicResponse) => void
+  ): Promise<CreateRocketMQTopicResponse> {
+    return this.request("CreateRocketMQTopic", req, cb)
   }
 
   /**
@@ -1348,13 +1370,15 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 创建RocketMQ主题
-   */
-  async CreateRocketMQTopic(
-    req: CreateRocketMQTopicRequest,
-    cb?: (error: string, rep: CreateRocketMQTopicResponse) => void
-  ): Promise<CreateRocketMQTopicResponse> {
-    return this.request("CreateRocketMQTopic", req, cb)
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp队列列表
+     */
+  async DescribeAMQPQueues(
+    req: DescribeAMQPQueuesRequest,
+    cb?: (error: string, rep: DescribeAMQPQueuesResponse) => void
+  ): Promise<DescribeAMQPQueuesResponse> {
+    return this.request("DescribeAMQPQueues", req, cb)
   }
 
   /**

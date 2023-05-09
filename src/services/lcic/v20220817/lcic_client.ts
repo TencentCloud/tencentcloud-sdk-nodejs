@@ -520,7 +520,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务商信息获取
+   * 开发商信息获取
    */
   async DescribeDeveloper(
     req?: DescribeDeveloperRequest,

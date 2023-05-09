@@ -87,6 +87,16 @@ export interface DescribeDisksDeniedActionsRequest {
 }
 
 /**
+ * InquirePriceCreateBlueprint请求参数结构体
+ */
+export interface InquirePriceCreateBlueprintRequest {
+  /**
+   * 自定义镜像的个数。默认值为1。
+   */
+  BlueprintCount?: number
+}
+
+/**
  * DescribeDiskBackups请求参数结构体
  */
 export interface DescribeDiskBackupsRequest {
@@ -771,6 +781,56 @@ export interface ResetAttachCcnRequest {
    * 云联网实例ID。
    */
   CcnId: string
+}
+
+/**
+ * CreateDisks请求参数结构体
+ */
+export interface CreateDisksRequest {
+  /**
+   * 可用区。可通过[DescribeZones](https://cloud.tencent.com/document/product/1207/57513)返回值中的Zone获取。
+   */
+  Zone: string
+
+  /**
+   * 云硬盘大小, 单位: GB。
+   */
+  DiskSize: number
+
+  /**
+   * 云硬盘介质类型。取值: "CLOUD_PREMIUM"(高性能云盘), "CLOUD_SSD"(SSD云硬盘)。
+   */
+  DiskType: string
+
+  /**
+   * 云硬盘包年包月相关参数设置。
+   */
+  DiskChargePrepaid: DiskChargePrepaid
+
+  /**
+   * 云硬盘名称。最大长度60。
+   */
+  DiskName?: string
+
+  /**
+   * 云硬盘个数。取值范围: [1, 30]。默认值: 1。
+   */
+  DiskCount?: number
+
+  /**
+   * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。
+   */
+  DiskBackupQuota?: number
+
+  /**
+   * 是否自动使用代金券。默认不使用。
+   */
+  AutoVoucher?: boolean
+
+  /**
+   * 自动挂载并初始化数据盘。
+   */
+  AutoMountConfiguration?: AutoMountConfiguration
 }
 
 /**
@@ -3141,13 +3201,20 @@ export interface DescribeDiskDiscountRequest {
 }
 
 /**
- * InquirePriceCreateBlueprint请求参数结构体
+ * CreateDisks返回参数结构体
  */
-export interface InquirePriceCreateBlueprintRequest {
+export interface CreateDisksResponse {
   /**
-   * 自定义镜像的个数。默认值为1。
+      * 当通过本接口来创建云硬盘时会返回该参数，表示一个或多个云硬盘ID。返回云硬盘ID列表并不代表云硬盘创建成功。
+
+可根据 [DescribeDisks](https://cloud.tencent.com/document/product/1207/66093) 接口查询返回的DiskSet中对应云硬盘的ID的状态来判断创建是否完成；如果云硬盘状态由“PENDING”变为“UNATTACHED”或“ATTACHED”，则为创建成功。
+      */
+  DiskIdSet?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BlueprintCount?: number
+  RequestId?: string
 }
 
 /**
@@ -4000,6 +4067,26 @@ export interface SoftwareDetail {
    * 详情值。
    */
   Value: string
+}
+
+/**
+ * 自动挂载并初始化该数据盘。
+ */
+export interface AutoMountConfiguration {
+  /**
+   * 待挂载的实例ID。指定的实例必须处于“运行中”状态。
+   */
+  InstanceId: string
+
+  /**
+   * 实例内的挂载点。仅Linux操作系统的实例可传入该参数, 不传则默认挂载在“/data/disk”路径下。
+   */
+  MountPoint?: string
+
+  /**
+   * 文件系统类型。取值: “ext4”、“xfs”。仅Linux操作系统的实例可传入该参数, 不传则默认为“ext4”。
+   */
+  FileSystemType?: string
 }
 
 /**

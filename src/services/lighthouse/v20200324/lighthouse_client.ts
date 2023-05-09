@@ -22,6 +22,7 @@ import {
   AssociateInstancesKeyPairsResponse,
   RenewInstancesRequest,
   DescribeDisksDeniedActionsRequest,
+  InquirePriceCreateBlueprintRequest,
   DescribeDiskBackupsRequest,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
@@ -56,6 +57,7 @@ import {
   AttachCcnResponse,
   RebootInstancesRequest,
   ResetAttachCcnRequest,
+  CreateDisksRequest,
   AttachDisksRequest,
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
@@ -156,7 +158,7 @@ import {
   Snapshot,
   ModifyFirewallRuleDescriptionResponse,
   DescribeDiskDiscountRequest,
-  InquirePriceCreateBlueprintRequest,
+  CreateDisksResponse,
   AttachDisksResponse,
   DiskBackupDeniedActions,
   CreateDiskBackupRequest,
@@ -202,6 +204,7 @@ import {
   DescribeResetInstanceBlueprintsResponse,
   DescribeDisksReturnableRequest,
   SoftwareDetail,
+  AutoMountConfiguration,
   InstancePrice,
   Tag,
   ModifySnapshotAttributeResponse,
@@ -308,6 +311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyDiskBackupResponse) => void
   ): Promise<ApplyDiskBackupResponse> {
     return this.request("ApplyDiskBackup", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+   */
+  async ModifyBlueprintAttribute(
+    req: ModifyBlueprintAttributeRequest,
+    cb?: (error: string, rep: ModifyBlueprintAttributeResponse) => void
+  ): Promise<ModifyBlueprintAttributeResponse> {
+    return this.request("ModifyBlueprintAttribute", req, cb)
   }
 
   /**
@@ -692,13 +705,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+   * 本接口(CreateDisks)用于创建一个或多个云硬盘。
    */
-  async ModifyBlueprintAttribute(
-    req: ModifyBlueprintAttributeRequest,
-    cb?: (error: string, rep: ModifyBlueprintAttributeResponse) => void
-  ): Promise<ModifyBlueprintAttributeResponse> {
-    return this.request("ModifyBlueprintAttribute", req, cb)
+  async CreateDisks(
+    req: CreateDisksRequest,
+    cb?: (error: string, rep: CreateDisksResponse) => void
+  ): Promise<CreateDisksResponse> {
+    return this.request("CreateDisks", req, cb)
   }
 
   /**

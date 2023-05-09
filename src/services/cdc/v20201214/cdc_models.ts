@@ -77,12 +77,12 @@ export interface DescribeDedicatedClusterTypesResponse {
   /**
    * 专用集群配置列表
    */
-  DedicatedClusterTypeSet: Array<DedicatedClusterType>
+  DedicatedClusterTypeSet?: Array<DedicatedClusterType>
 
   /**
    * 符合条件的个数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

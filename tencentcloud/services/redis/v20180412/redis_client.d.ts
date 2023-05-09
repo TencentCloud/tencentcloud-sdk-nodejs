@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorBigKeySizeDist(req: DescribeInstanceMonitorBigKeySizeDistRequest, cb?: (error: string, rep: DescribeInstanceMonitorBigKeySizeDistResponse) => void): Promise<DescribeInstanceMonitorBigKeySizeDistResponse>;
     /**
-     * 查询任务列表信息
+     * 本接口（DescribeTaskList）用于查询指定实例的任务列表信息。
      */
     DescribeTaskList(req: DescribeTaskListRequest, cb?: (error: string, rep: DescribeTaskListResponse) => void): Promise<DescribeTaskListResponse>;
     /**
@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceAccount(req: DescribeInstanceAccountRequest, cb?: (error: string, rep: DescribeInstanceAccountResponse) => void): Promise<DescribeInstanceAccountResponse>;
     /**
-     * 该接口仅支持多AZ实例副本组提主和单AZ副本提主
+     * 本接口（ChangeReplicaToMaster）适用于实例副本组提主或副本提主。
      */
     ChangeReplicaToMaster(req: ChangeReplicaToMasterRequest, cb?: (error: string, rep: ChangeReplicaToMasterResponse) => void): Promise<ChangeReplicaToMasterResponse>;
     /**

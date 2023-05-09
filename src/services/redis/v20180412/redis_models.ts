@@ -627,14 +627,14 @@ export interface AssociateSecurityGroupsRequest {
  */
 export interface DescribeTaskListResponse {
   /**
-   * 任务总数
+   * 任务总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
-   * 任务详细信息
+   * 任务详细信息。
    */
-  Tasks: Array<TaskInfoDetail>
+  Tasks?: Array<TaskInfoDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1536,55 +1536,79 @@ export interface DisableReplicaReadonlyRequest {
  */
 export interface TaskInfoDetail {
   /**
-      * 任务Id
+      * 任务 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskId: number
 
   /**
-      * 开始时间
+      * 任务开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StartTime: string
 
   /**
-      * 任务类型
+      * 任务类型。
+- FLOW_CREATE：创建实例。
+- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。
+- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。
+- FLOW_CLEARNETWORK：VPC退还中。
+- FLOW_SETPWD：设置访问密码。
+- FLOW_EXPORSHR：扩缩容流程。
+- FLOW_UpgradeArch：实例架构升级流程。
+- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。
+- FLOW_MODIFYINSTACEREADONLY：只读变更流程。
+- FLOW_CLOSE：关闭实例。
+- FLOW_DELETE：删除实例。
+- FLOW_OPEN_WAN：开启外网。
+- FLOW_CLEAN：清空实例。      
+- FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。
+- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。
+- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。
+- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。
+- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。
+- FLOW_BACKUPINSTANCE：备份实例。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskType: string
 
   /**
-      * 实例名称
+      * 实例名称。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceName: string
 
   /**
-      * 实例Id
+      * 实例 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceId: string
 
   /**
-      * 项目Id
+      * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProjectId: number
 
   /**
-      * 任务进度
+      * 任务进度。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Progress: number
 
   /**
-      * 结束时间
+      * 任务执行结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EndTime: string
 
   /**
-      * 任务状态
+      * 任务执行状态。
+
+0：任务初始化。
+1：执行中。
+2：完成。
+4：失败。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: number
@@ -1812,12 +1836,13 @@ export interface SwitchInstanceVipRequest {
  */
 export interface ChangeReplicaToMasterRequest {
   /**
-   * 实例Id
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+      */
   InstanceId: string
 
   /**
-   * 副本组Id，多AZ实例必填
+   * 副本节点组 ID，请通过接口[DescribeInstanceZoneInfo](https://cloud.tencent.com/document/product/239/50312)获取多 AZ备节点组的 ID 信息。单 AZ，则无需配置该参数。
    */
   GroupId?: number
 }
@@ -2713,62 +2738,85 @@ export interface DescribeInstanceParamRecordsRequest {
  */
 export interface DescribeTaskListRequest {
   /**
-   * 实例Id
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId?: string
 
   /**
-   * 实例名称
+   * 实例名称。
    */
   InstanceName?: string
 
   /**
-   * 分页大小,默认20，上限不大于100
+   * 每页输出的任务列表大小。默认为 20，最多输出100条。
    */
   Limit?: number
 
   /**
-   * 偏移量，取Limit整数倍（自动向下取整）
+   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
    */
   Offset?: number
 
   /**
-   * 项目Id
+   * 项目 ID。登录 [Redis 控制台](https://console.cloud.tencent.com/redis)，在右上角的账号信息下拉菜单中，选择**项目管理**，即可获取对应的项目 ID。
    */
   ProjectIds?: Array<number>
 
   /**
-   * 任务类型
-   */
+      * 任务类型。
+- FLOW_CREATE：创建实例。
+- FLOW_MODIFYCONNECTIONCONFIG：调整带宽连接数。
+- FLOW_MODIFYINSTANCEPASSWORDFREE：免密变更流程。
+- FLOW_CLEARNETWORK：VPC退还中。
+- FLOW_SETPWD：设置访问密码。
+- FLOW_EXPORSHR：扩缩容流程。
+- FLOW_UpgradeArch：实例架构升级流程。
+- FLOW_MODIFYINSTANCEPARAMS：修改实例参数。
+- FLOW_MODIFYINSTACEREADONLY：只读变更流程。
+- FLOW_CLOSE：关闭实例。
+- FLOW_DELETE：删除实例。
+- FLOW_OPEN_WAN：开启外网。
+- FLOW_CLEAN：清空实例。      
+- FLOW_MODIFYINSTANCEACCOUNT：修改实例账号。
+- FLOW_ENABLEINSTANCE_REPLICATE：开启副本只读。
+- FLOW_DISABLEINSTANCE_REPLICATE: 关闭副本只读。
+- FLOW_SWITCHINSTANCEVIP：交换实例 VIP。
+- FLOW_CHANGE_REPLICA_TO_MSTER：副本节点升主节点。
+- FLOW_BACKUPINSTANCE：备份实例。
+      */
   TaskTypes?: Array<string>
 
   /**
-   * 起始时间
+   * 任务执行的起始时间。格式如：2021-12-30 00:00:00。
    */
   BeginTime?: string
 
   /**
-   * 终止时间
+   * 任务运行的终止时间。格式如：2021-12-30 20:59:35
    */
   EndTime?: string
 
   /**
-   * 任务状态
+   * 该参数为内部使用，请忽略。
    */
   TaskStatus?: Array<number>
 
   /**
-   * 任务状态
-   */
+      * 任务执行状态。
+- 0：任务初始化。
+- 1：执行中。
+- 2：完成。
+- 4：失败。
+      */
   Result?: Array<number>
 
   /**
-   * 操作者Uin，该字段已废弃，使用OperateUin代替
+   * 该字段已废弃，使用OperateUin代替，请忽略。
    */
   OperatorUin?: Array<number>
 
   /**
-   * 操作者Uin
+   * 操作者账号 ID，UIN。
    */
   OperateUin?: Array<string>
 }
@@ -2778,9 +2826,9 @@ export interface DescribeTaskListRequest {
  */
 export interface ChangeReplicaToMasterResponse {
   /**
-   * 异步任务ID
+   * 异步任务ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4122,8 +4170,18 @@ export interface DescribeInstancesRequest {
   BillingMode?: string
 
   /**
-   * 实例类型。<ul><li>1：Redis 老集群版。</li><li>2：Redis 2.8 主从版。</li><li>3：CKV 主从版。</li><li>4：CKV 集群版。</li><li>5：Redis 2.8 单机版。</li><li>6：Redis 4.0主从版。</li><li>7：Redis 4.0 集群版。</li><li>8：Redis 5.0 主从版。</li><li>9：Redis 5.0 集群版。</li></ul>
-   */
+      * 实例类型。
+- 2：Redis 2.8内存版（标准架构）。
+- 3：CKV 3.2内存版（标准架构）。
+- 4：CKV 3.2内存版（集群架构）。
+- 5：Redis 2.8内存版（单机）。
+- 6：Redis 4.0内存版（标准架构）。
+- 7：Redis 4.0内存版（集群架构）。
+- 8：Redis 5.0内存版（标准架构）。
+- 9：Redis 5.0内存版（集群架构）。
+- 15：Redis 6.2内存版（标准架构）。
+- 16：Redis 6.2内存版（集群架构）。
+      */
   Type?: number
 
   /**

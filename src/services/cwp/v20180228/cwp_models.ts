@@ -2354,6 +2354,11 @@ export interface DescribeAlarmIncidentNodesRequest {
    * 告警时间
    */
   AlarmTime: number
+
+  /**
+   * 告警来源表ID
+   */
+  TableId?: number
 }
 
 /**

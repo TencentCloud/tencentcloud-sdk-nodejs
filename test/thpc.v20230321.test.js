@@ -98,6 +98,16 @@ it("thpc.v20230321.DescribeNodes", async function () {
     }
 })
 
+it("thpc.v20230321.DescribeInitNodeScripts", async function () {
+    try {
+       const data = await client.DescribeInitNodeScripts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.DeleteQueue", async function () {
     try {
        const data = await client.DeleteQueue({})

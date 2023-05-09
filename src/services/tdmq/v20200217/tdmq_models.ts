@@ -607,6 +607,21 @@ export interface BindCluster {
 }
 
 /**
+ * 排序器
+ */
+export interface Sort {
+  /**
+   * 排序字段
+   */
+  Name: string
+
+  /**
+   * 升序ASC，降序DESC
+   */
+  Order: string
+}
+
+/**
  * ModifyCluster返回参数结构体
  */
 export interface ModifyClusterResponse {
@@ -934,6 +949,21 @@ export interface DescribeAllTenantsResponse {
    * 虚拟集群列表
    */
   Tenants: Array<InternalTenant>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRabbitMQVirtualHost返回参数结构体
+ */
+export interface CreateRabbitMQVirtualHostResponse {
+  /**
+   * vhost名
+   */
+  VirtualHost: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2454,6 +2484,38 @@ export interface ClearCmqQueueRequest {
 }
 
 /**
+ * ModifyEnvironmentAttributes返回参数结构体
+ */
+export interface ModifyEnvironmentAttributesResponse {
+  /**
+   * 命名空间名称。
+   */
+  EnvironmentId: string
+
+  /**
+   * 未消费消息过期时间，单位：秒。
+   */
+  MsgTTL: number
+
+  /**
+      * 备注，字符串最长不超过128。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusters请求参数结构体
  */
 export interface DescribeClustersRequest {
@@ -3034,18 +3096,18 @@ export interface CreateRocketMQClusterRequest {
 }
 
 /**
- * DeleteAMQPVHost请求参数结构体
+ * CreateRabbitMQUser返回参数结构体
  */
-export interface DeleteAMQPVHostRequest {
+export interface CreateRabbitMQUserResponse {
   /**
-   * 集群ID
+   * 用户名，登录时使用
    */
-  ClusterId: string
+  User?: string
 
   /**
-   * vhost名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  VHostId: string
+  RequestId?: string
 }
 
 /**
@@ -6703,35 +6765,28 @@ export interface CreateRocketMQTopicResponse {
 }
 
 /**
- * ModifyEnvironmentAttributes返回参数结构体
+ * CreateRabbitMQVirtualHost请求参数结构体
  */
-export interface ModifyEnvironmentAttributesResponse {
+export interface CreateRabbitMQVirtualHostRequest {
   /**
-   * 命名空间名称。
+   * 集群实例Id
    */
-  EnvironmentId: string
+  InstanceId: string
 
   /**
-   * 未消费消息过期时间，单位：秒。
+   * vhost名
    */
-  MsgTTL: number
+  VirtualHost: string
 
   /**
-      * 备注，字符串最长不超过128。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark: string
-
-  /**
-      * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NamespaceId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 描述
    */
-  RequestId?: string
+  Description?: string
+
+  /**
+   * 消息轨迹开关,true打开,false关闭,默认关闭
+   */
+  TraceFlag?: boolean
 }
 
 /**
@@ -6976,18 +7031,44 @@ export interface DescribePulsarProInstanceDetailRequest {
 }
 
 /**
- * 排序器
+ * CreateRabbitMQUser请求参数结构体
  */
-export interface Sort {
+export interface CreateRabbitMQUserRequest {
   /**
-   * 排序字段
+   * 集群实例Id
    */
-  Name: string
+  InstanceId: string
 
   /**
-   * 升序ASC，降序DESC
+   * 用户名，登录时使用
    */
-  Order: string
+  User: string
+
+  /**
+   * 密码，登录时使用
+   */
+  Password: string
+
+  /**
+   * 描述
+   */
+  Description?: string
+
+  /**
+      * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围
+management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户
+      */
+  Tags?: Array<string>
+
+  /**
+   * 该用户的最大连接数，不填写则不限制
+   */
+  MaxConnections?: number
+
+  /**
+   * 该用户的最大channel数，不填写则不限制
+   */
+  MaxChannels?: number
 }
 
 /**
@@ -7931,6 +8012,21 @@ export interface DeleteAMQPVHostResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteAMQPVHost请求参数结构体
+ */
+export interface DeleteAMQPVHostRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * vhost名称
+   */
+  VHostId: string
 }
 
 /**

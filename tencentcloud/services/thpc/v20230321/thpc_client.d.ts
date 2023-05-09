@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, ModifyInitNodeScriptsRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DescribeInitNodeScriptsRequest, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, ModifyInitNodeScriptsRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DescribeInitNodeScriptsResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -43,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
      */
     DescribeNodes(req: DescribeNodesRequest, cb?: (error: string, rep: DescribeNodesResponse) => void): Promise<DescribeNodesResponse>;
+    /**
+     * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
+     */
+    DescribeInitNodeScripts(req: DescribeInitNodeScriptsRequest, cb?: (error: string, rep: DescribeInitNodeScriptsResponse) => void): Promise<DescribeInitNodeScriptsResponse>;
     /**
      * 本接口(DeleteQueue)用于从指定集群删除队列。
 * 本接口为目前只支持SchedulerType为SLURM的集群。

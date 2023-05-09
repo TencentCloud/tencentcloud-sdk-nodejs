@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRedisTopKeyPrefixList(req: DescribeRedisTopKeyPrefixListRequest, cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void): Promise<DescribeRedisTopKeyPrefixListResponse>;
     /**
-     * 获取指定时间内某个sql模版的慢日志明细
+     * 获取指定时间内某个sql模板的慢日志明细
      */
     DescribeSlowLogs(req: DescribeSlowLogsRequest, cb?: (error: string, rep: DescribeSlowLogsResponse) => void): Promise<DescribeSlowLogsResponse>;
     /**

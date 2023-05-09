@@ -468,7 +468,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定时间内某个sql模版的慢日志明细
+   * 获取指定时间内某个sql模板的慢日志明细
    */
   async DescribeSlowLogs(
     req: DescribeSlowLogsRequest,

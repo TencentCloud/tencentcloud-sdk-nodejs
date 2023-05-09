@@ -98,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQGroup", req, cb);
     }
     /**
+     * 创建RabbitMQ的用户
+     */
+    async CreateRabbitMQUser(req, cb) {
+        return this.request("CreateRabbitMQUser", req, cb);
+    }
+    /**
      * 查询用户已购的RabbitMQ专享实例列表
      */
     async DescribeRabbitMQVipInstances(req, cb) {
@@ -206,6 +212,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRocketMQNamespace(req, cb) {
         return this.request("DeleteRocketMQNamespace", req, cb);
+    }
+    /**
+     * 创建RabbitMQ的vhost
+     */
+    async CreateRabbitMQVirtualHost(req, cb) {
+        return this.request("CreateRabbitMQVirtualHost", req, cb);
     }
     /**
      * 删除集群
@@ -478,12 +490,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQGroups", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp队列列表
+     * 创建RocketMQ主题
      */
-    async DescribeAMQPQueues(req, cb) {
-        return this.request("DescribeAMQPQueues", req, cb);
+    async CreateRocketMQTopic(req, cb) {
+        return this.request("CreateRocketMQTopic", req, cb);
     }
     /**
      * 删除RocketMQ集群
@@ -676,10 +686,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DescribePulsarProInstances", req, cb);
     }
     /**
-     * 创建RocketMQ主题
+     * 产品下线了，对应的接口也要下线。
+
+获取Amqp队列列表
      */
-    async CreateRocketMQTopic(req, cb) {
-        return this.request("CreateRocketMQTopic", req, cb);
+    async DescribeAMQPQueues(req, cb) {
+        return this.request("DescribeAMQPQueues", req, cb);
     }
     /**
      * 获取用户绑定的专享集群列表

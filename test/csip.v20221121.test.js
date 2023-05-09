@@ -1,0 +1,101 @@
+
+const expect = require("chai").expect
+const tencentcloud = require("../../tencentcloud-sdk-nodejs")
+const client = new tencentcloud.csip.v20221121.Client({
+  credential: {
+    secretId: process.env.secretId,
+    secretKey: process.env.secretKey,
+  },
+  region: "ap-shanghai",
+  profile: {
+    signMethod: "TC3-HMAC-SHA256",
+    httpProfile: {
+      reqMethod: "POST",
+      reqTimeout: 30,
+      endpoint: "cvm.ap-shanghai.tencentcloudapi.com",
+    },
+  },
+})
+describe("csip.v20221121.test.js", function () {
+
+it("csip.v20221121.DescribeVpcAssets", async function () {
+    try {
+       const data = await client.DescribeVpcAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeDbAssetInfo", async function () {
+    try {
+       const data = await client.DescribeDbAssetInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeCVMAssets", async function () {
+    try {
+       const data = await client.DescribeCVMAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.AddNewBindRoleUser", async function () {
+    try {
+       const data = await client.AddNewBindRoleUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeScanReportList", async function () {
+    try {
+       const data = await client.DescribeScanReportList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSubnetAssets", async function () {
+    try {
+       const data = await client.DescribeSubnetAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeDbAssets", async function () {
+    try {
+       const data = await client.DescribeDbAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeCVMAssetInfo", async function () {
+    try {
+       const data = await client.DescribeCVMAssetInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+})

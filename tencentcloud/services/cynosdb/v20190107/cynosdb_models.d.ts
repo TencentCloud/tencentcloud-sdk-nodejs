@@ -2863,6 +2863,11 @@ export interface NetAddr {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WanStatus: string;
+    /**
+      * 实例组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceGroupId?: string;
 }
 /**
  * 参数模板详情

@@ -68,6 +68,16 @@ it("lighthouse.v20200324.ApplyDiskBackup", async function () {
     }
 })
 
+it("lighthouse.v20200324.ModifyBlueprintAttribute", async function () {
+    try {
+       const data = await client.ModifyBlueprintAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeAllScenes", async function () {
     try {
        const data = await client.DescribeAllScenes({})
@@ -398,9 +408,9 @@ it("lighthouse.v20200324.DescribeGeneralResourceQuotas", async function () {
     }
 })
 
-it("lighthouse.v20200324.ModifyBlueprintAttribute", async function () {
+it("lighthouse.v20200324.CreateDisks", async function () {
     try {
-       const data = await client.ModifyBlueprintAttribute({})
+       const data = await client.CreateDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

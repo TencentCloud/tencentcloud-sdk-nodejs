@@ -5407,7 +5407,7 @@ export interface TrainingTaskDetail {
   EndTime: string
 
   /**
-      * 计费金额信息，eg：2.00元/小时 (for后付费)
+      * 计费金额信息，eg：2.00元/小时 (按量计费)
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BillingInfo: string
@@ -5856,7 +5856,7 @@ export interface TrainingTaskSetItem {
   UpdateTime: string
 
   /**
-   * 计费金额信息，eg：2.00元/小时 (for后付费)
+   * 计费金额信息，eg：2.00元/小时 (按量计费)
    */
   BillingInfo: string
 

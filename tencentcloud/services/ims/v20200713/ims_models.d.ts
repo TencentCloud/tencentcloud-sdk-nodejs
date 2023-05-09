@@ -36,6 +36,21 @@ export interface ImageModerationRequest {
     Device?: Device;
 }
 /**
+ * 识别类型标签结果信息
+ */
+export interface RecognitionResult {
+    /**
+      * 当前可能的取值：Scene（图片场景模型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Label?: string;
+    /**
+      * Label对应模型下的识别标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<RecognitionTag>;
+}
+/**
  * 实体检测结果详情：实体、广告台标、二维码
  */
 export interface ObjectResult {
@@ -116,6 +131,26 @@ export interface OcrTextDetail {
     SubLabel: string;
 }
 /**
+ * 识别类型标签信息
+ */
+export interface RecognitionTag {
+    /**
+      * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * 置信分：0～100，数值越大表示置信度越高
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Score?: number;
+    /**
+      * 标签位置信息，若模型无位置信息，则可能为零值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Location?: Location;
+}
+/**
  * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
  */
 export interface ObjectDetail {
@@ -144,6 +179,16 @@ export interface ObjectDetail {
       * 二级标签名称
       */
     SubLabel: string;
+    /**
+      * 图库或人脸库id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId?: string;
+    /**
+      * 图或人脸id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObjectId?: string;
 }
 /**
  * OCR结果检测详情
@@ -431,6 +476,11 @@ export interface ImageModerationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Extra?: string;
+    /**
+      * 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecognitionResults?: Array<RecognitionResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

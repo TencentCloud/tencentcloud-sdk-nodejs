@@ -225,21 +225,13 @@ export interface AddClusterStorageOptionResponse {
     RequestId?: string;
 }
 /**
- * 集群存储选项概览信息。
+ * DescribeInitNodeScripts请求参数结构体
  */
-export interface StorageOptionOverview {
+export interface DescribeInitNodeScriptsRequest {
     /**
-      * CFS存储选项概览信息列表。
+      * 集群ID。
       */
-    CFSOptions: Array<CFSOptionOverview>;
-    /**
-      * GooseFS存储选项概览信息列表。
-      */
-    GooseFSOptions: Array<GooseFSOptionOverview>;
-    /**
-      * GooseFSx存储选项概览信息列表。
-      */
-    GooseFSxOptions?: Array<GooseFSxOptionOverview>;
+    ClusterId: string;
 }
 /**
  * DeleteCluster返回参数结构体
@@ -713,6 +705,23 @@ export interface LoginNode {
 最多支持60个字符。
       */
     InstanceName?: string;
+}
+/**
+ * 集群存储选项概览信息。
+ */
+export interface StorageOptionOverview {
+    /**
+      * CFS存储选项概览信息列表。
+      */
+    CFSOptions: Array<CFSOptionOverview>;
+    /**
+      * GooseFS存储选项概览信息列表。
+      */
+    GooseFSOptions: Array<GooseFSOptionOverview>;
+    /**
+      * GooseFSx存储选项概览信息列表。
+      */
+    GooseFSxOptions?: Array<GooseFSxOptionOverview>;
 }
 /**
  * 描述节点执行脚本信息。
@@ -1325,6 +1334,20 @@ export interface DescribeClusterActivitiesResponse {
       * 集群活动历史记录数量。
       */
     TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeInitNodeScripts返回参数结构体
+ */
+export interface DescribeInitNodeScriptsResponse {
+    /**
+      * 节点初始化脚本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InitNodeScriptSet?: Array<NodeScript>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
