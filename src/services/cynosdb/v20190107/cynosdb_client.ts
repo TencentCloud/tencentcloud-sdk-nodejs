@@ -59,6 +59,7 @@ import {
   PauseServerlessRequest,
   ModifiableInfo,
   DescribeFlowResponse,
+  SetRenewFlagResponse,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -171,7 +172,7 @@ import {
   InstanceSpec,
   DescribeFlowRequest,
   AuditLogFile,
-  SetRenewFlagResponse,
+  OpenReadOnlyInstanceExclusiveAccessRequest,
   Account,
   CreateBackupRequest,
   DescribeClusterParamLogsRequest,
@@ -203,6 +204,7 @@ import {
   SearchClusterDatabasesResponse,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
+  OpenReadOnlyInstanceExclusiveAccessResponse,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
   ModifyInstanceNameResponse,
@@ -943,6 +945,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(SearchClusterDatabases)搜索集群database列表
+   */
+  async SearchClusterDatabases(
+    req: SearchClusterDatabasesRequest,
+    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
+  ): Promise<SearchClusterDatabasesResponse> {
+    return this.request("SearchClusterDatabases", req, cb)
+  }
+
+  /**
    * 修改审计规则模版
    */
   async ModifyAuditRuleTemplates(
@@ -993,13 +1005,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterDatabases)搜索集群database列表
+   * 开通只读实例独有访问接入组
    */
-  async SearchClusterDatabases(
-    req: SearchClusterDatabasesRequest,
-    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
-  ): Promise<SearchClusterDatabasesResponse> {
-    return this.request("SearchClusterDatabases", req, cb)
+  async OpenReadOnlyInstanceExclusiveAccess(
+    req: OpenReadOnlyInstanceExclusiveAccessRequest,
+    cb?: (error: string, rep: OpenReadOnlyInstanceExclusiveAccessResponse) => void
+  ): Promise<OpenReadOnlyInstanceExclusiveAccessResponse> {
+    return this.request("OpenReadOnlyInstanceExclusiveAccess", req, cb)
   }
 
   /**

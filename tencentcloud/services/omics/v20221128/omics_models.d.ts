@@ -1,105 +1,121 @@
 /**
- * 任务。
+ * RunApplication返回参数结构体
  */
-export interface RunGroup {
+export interface RunApplicationResponse {
     /**
       * 任务批次ID。
       */
     RunGroupId?: string;
     /**
-      * 项目ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ProjectId?: string;
+    RequestId?: string;
+}
+/**
+ * 执行时间。
+ */
+export interface ExecutionTime {
     /**
-      * 项目名称。
-      */
-    ProjectName?: string;
-    /**
-      * 应用ID。
-      */
-    ApplicationId?: string;
-    /**
-      * 应用名称。
-      */
-    ApplicationName?: string;
-    /**
-      * 应用类型。
-      */
-    ApplicationType?: string;
-    /**
-      * 环境ID。
-      */
-    EnvironmentId?: string;
-    /**
-      * 环境名称。
-      */
-    EnvironmentName?: string;
-    /**
-      * 表格ID，单例运行为空。
+      * 提交时间。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TableId?: string;
+    SubmitTime?: string;
     /**
-      * 任务名称。
+      * 开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name?: string;
+    StartTime?: string;
     /**
-      * 任务描述。
+      * 结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description?: string;
+    EndTime?: string;
+}
+/**
+ * 任务运行状态。
+ */
+export interface RunStatusCount {
     /**
-      * 任务状态。
+      * 状态。
       */
     Status?: string;
     /**
-      * 任务输入。
+      * 数量。
       */
-    Input?: string;
-    /**
-      * 运行选项。
-      */
-    Option?: RunOption;
-    /**
-      * 任务总数量。
-      */
-    TotalRun?: number;
-    /**
-      * 各状态任务的数量。
-      */
-    RunStatusCounts?: Array<RunStatusCount>;
-    /**
-      * 执行时间。
-      */
-    ExecutionTime?: ExecutionTime;
-    /**
-      * 错误信息。
-      */
-    ErrorMessage?: string;
-    /**
-      * 创建时间。
-      */
-    CreateTime?: string;
-    /**
-      * 更新时间。
-      */
-    UpdateTime?: string;
+    Count?: number;
 }
 /**
- * 描述键值对过滤器，用于条件过滤查询。
-
-- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-
-- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ * GetRunStatus请求参数结构体
  */
-export interface Filter {
+export interface GetRunStatusRequest {
     /**
-      * 过滤字段。
+      * 任务Uuid。
       */
-    Name: string;
+    RunUuid: string;
     /**
-      * 过滤字段值。
+      * 项目ID。
       */
-    Values: Array<string>;
+    ProjectId: string;
+}
+/**
+ * DescribeRuns返回参数结构体
+ */
+export interface DescribeRunsResponse {
+    /**
+      * 符合条件的数量。
+      */
+    TotalCount?: number;
+    /**
+      * 任务列表。
+      */
+    Runs?: Array<Run>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ImportTableFile返回参数结构体
+ */
+export interface ImportTableFileResponse {
+    /**
+      * 表格ID。
+      */
+    TableId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteEnvironment返回参数结构体
+ */
+export interface DeleteEnvironmentResponse {
+    /**
+      * 工作流UUID。
+      */
+    WorkflowUuid?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetRunCalls请求参数结构体
+ */
+export interface GetRunCallsRequest {
+    /**
+      * 任务Uuid。
+      */
+    RunUuid: string;
+    /**
+      * 项目ID。
+      */
+    ProjectId: string;
+    /**
+      * 作业路径
+      */
+    Path: string;
 }
 /**
  * DescribeRuns请求参数结构体
@@ -195,134 +211,77 @@ export interface Run {
     UpdateTime?: string;
 }
 /**
- * RunApplication返回参数结构体
+ * DescribeEnvironments返回参数结构体
  */
-export interface RunApplicationResponse {
-    /**
-      * 任务批次ID。
-      */
-    RunGroupId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 执行时间。
- */
-export interface ExecutionTime {
-    /**
-      * 提交时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubmitTime?: string;
-    /**
-      * 开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime?: string;
-    /**
-      * 结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndTime?: string;
-}
-/**
- * DescribeRunGroups请求参数结构体
- */
-export interface DescribeRunGroupsRequest {
-    /**
-      * 项目ID。
-      */
-    ProjectId: string;
-    /**
-      * 返回数量，默认为10，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为0。
-      */
-    Offset?: number;
-    /**
-      * 过滤器，支持过滤字段：
-- Name：任务批次名称
-- RunGroupId：任务批次ID
-- Status：任务批次状态
-      */
-    Filters?: Array<Filter>;
-}
-/**
- * GetRunCalls返回参数结构体
- */
-export interface GetRunCallsResponse {
-    /**
-      * 作业详情。
-      */
-    Calls?: Array<RunMetadata>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * GetRunStatus请求参数结构体
- */
-export interface GetRunStatusRequest {
-    /**
-      * 任务Uuid。
-      */
-    RunUuid: string;
-    /**
-      * 项目ID。
-      */
-    ProjectId: string;
-}
-/**
- * DescribeRuns返回参数结构体
- */
-export interface DescribeRunsResponse {
+export interface DescribeEnvironmentsResponse {
     /**
       * 符合条件的数量。
       */
     TotalCount?: number;
     /**
-      * 任务列表。
+      * 环境详情列表。
       */
-    Runs?: Array<Run>;
+    Environments?: Array<Environment>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * ImportTableFile返回参数结构体
+ * 私有网络配置。
  */
-export interface ImportTableFileResponse {
+export interface VPCOption {
     /**
-      * 表格ID。
+      * 子网可用区。
       */
-    TableId?: string;
+    SubnetZone: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 私有网络CIDR。
       */
-    RequestId?: string;
+    VPCCIDRBlock: string;
+    /**
+      * 子网CIDR。
+      */
+    SubnetCIDRBlock: string;
 }
 /**
- * DescribeRunGroups返回参数结构体
+ * ImportTableFile请求参数结构体
  */
-export interface DescribeRunGroupsResponse {
+export interface ImportTableFileRequest {
     /**
-      * 符合条件的数量。
+      * 表格关联的项目ID。
       */
-    TotalCount?: number;
+    ProjectId: string;
     /**
-      * 任务批次列表。
+      * 表格名称，支持20个字符内的英文字符、数字和下划线。
       */
-    RunGroups?: Array<RunGroup>;
+    Name: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 表格文件Cos对象路径。
       */
-    RequestId?: string;
+    CosUri: string;
+    /**
+      * 表格文件中每列的数据类型，支持的类型包括：Int、String、File、Array[File]
+      */
+    DataType: Array<string>;
+    /**
+      * 表格描述。
+      */
+    Description?: string;
+}
+/**
+ * 计算集群配置。
+ */
+export interface ClusterOption {
+    /**
+      * 计算集群可用区。
+      */
+    Zone: string;
+    /**
+      * 计算集群类型，取值范围：
+- KUBERNETES
+      */
+    Type: string;
 }
 /**
  * RunApplication请求参数结构体
@@ -370,6 +329,387 @@ export interface RunApplicationRequest {
     TableRowUuids?: Array<string>;
 }
 /**
+ * DeleteEnvironment请求参数结构体
+ */
+export interface DeleteEnvironmentRequest {
+    /**
+      * 环境ID。
+      */
+    EnvironmentId: string;
+}
+/**
+ * 任务。
+ */
+export interface RunGroup {
+    /**
+      * 任务批次ID。
+      */
+    RunGroupId?: string;
+    /**
+      * 项目ID。
+      */
+    ProjectId?: string;
+    /**
+      * 项目名称。
+      */
+    ProjectName?: string;
+    /**
+      * 应用ID。
+      */
+    ApplicationId?: string;
+    /**
+      * 应用名称。
+      */
+    ApplicationName?: string;
+    /**
+      * 应用类型。
+      */
+    ApplicationType?: string;
+    /**
+      * 环境ID。
+      */
+    EnvironmentId?: string;
+    /**
+      * 环境名称。
+      */
+    EnvironmentName?: string;
+    /**
+      * 表格ID，单例运行为空。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableId?: string;
+    /**
+      * 任务名称。
+      */
+    Name?: string;
+    /**
+      * 任务描述。
+      */
+    Description?: string;
+    /**
+      * 任务状态。
+      */
+    Status?: string;
+    /**
+      * 任务输入。
+      */
+    Input?: string;
+    /**
+      * 运行选项。
+      */
+    Option?: RunOption;
+    /**
+      * 任务总数量。
+      */
+    TotalRun?: number;
+    /**
+      * 各状态任务的数量。
+      */
+    RunStatusCounts?: Array<RunStatusCount>;
+    /**
+      * 执行时间。
+      */
+    ExecutionTime?: ExecutionTime;
+    /**
+      * 错误信息。
+      */
+    ErrorMessage?: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime?: string;
+    /**
+      * 更新时间。
+      */
+    UpdateTime?: string;
+}
+/**
+ * 数据库配置。
+ */
+export interface DatabaseOption {
+    /**
+      * 数据库可用区。
+      */
+    Zone: string;
+}
+/**
+ * GetRunCalls返回参数结构体
+ */
+export interface GetRunCallsResponse {
+    /**
+      * 作业详情。
+      */
+    Calls?: Array<RunMetadata>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 描述键值对过滤器，用于条件过滤查询。
+
+- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+
+- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ */
+export interface Filter {
+    /**
+      * 过滤字段。
+      */
+    Name: string;
+    /**
+      * 过滤字段值。
+      */
+    Values: Array<string>;
+}
+/**
+ * 云资源ID。
+ */
+export interface ResourceIds {
+    /**
+      * 私有网络ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VPCId?: string;
+    /**
+      * 子网ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
+    /**
+      * 安全组ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityGroupId?: string;
+    /**
+      * TDSQL-C Mysql版数据库ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TDSQLCId?: string;
+    /**
+      * 文件存储ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CFSId?: string;
+    /**
+      * 文件存储类型：取值范围：
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CFSStorageType?: string;
+    /**
+      * 云服务器ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CVMId?: string;
+    /**
+      * 弹性容器集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EKSId?: string;
+}
+/**
+ * DescribeRunGroups返回参数结构体
+ */
+export interface DescribeRunGroupsResponse {
+    /**
+      * 符合条件的数量。
+      */
+    TotalCount?: number;
+    /**
+      * 任务批次列表。
+      */
+    RunGroups?: Array<RunGroup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 环境配置。
+ */
+export interface EnvironmentConfig {
+    /**
+      * 私有网络配置。
+      */
+    VPCOption: VPCOption;
+    /**
+      * 计算集群配置。
+      */
+    ClusterOption: ClusterOption;
+    /**
+      * 数据库配置。
+      */
+    DatabaseOption: DatabaseOption;
+    /**
+      * 存储配置。
+      */
+    StorageOption: StorageOption;
+    /**
+      * 云服务器配置。
+      */
+    CVMOption: CVMOption;
+}
+/**
+ * 组学平台环境详情。
+ */
+export interface Environment {
+    /**
+      * 环境ID。
+      */
+    EnvironmentId?: string;
+    /**
+      * 环境名称。
+      */
+    Name?: string;
+    /**
+      * 环境描述信息。
+      */
+    Description?: string;
+    /**
+      * 环境地域。
+      */
+    Region?: string;
+    /**
+      * 环境类型，取值范围：
+- KUBERNETES：Kubernetes容器集群
+- HPC：HPC高性能计算集群
+      */
+    Type?: string;
+    /**
+      * 环境状态，取值范围：
+- INITIALIZING：创建中
+- INITIALIZATION_ERROR：创建失败
+- RUNNING：运行中
+- ERROR：异常
+- DELETING：正在删除
+- DELETE_ERROR：删除失败
+      */
+    Status?: string;
+    /**
+      * 环境是否可用。环境需要可用才能投递计算任务。
+      */
+    Available?: boolean;
+    /**
+      * 环境信息。
+      */
+    Message?: string;
+    /**
+      * 云资源ID。
+      */
+    ResourceIds?: ResourceIds;
+    /**
+      * 上个工作流UUID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastWorkflowUuid?: string;
+    /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: string;
+}
+/**
+ * CreateEnvironment返回参数结构体
+ */
+export interface CreateEnvironmentResponse {
+    /**
+      * 环境ID。
+      */
+    EnvironmentId?: string;
+    /**
+      * 工作流UUID。
+      */
+    WorkflowUuid?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRunGroups请求参数结构体
+ */
+export interface DescribeRunGroupsRequest {
+    /**
+      * 项目ID。
+      */
+    ProjectId: string;
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤器，支持过滤字段：
+- Name：任务批次名称
+- RunGroupId：任务批次ID
+- Status：任务批次状态
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * GetRunStatus返回参数结构体
+ */
+export interface GetRunStatusResponse {
+    /**
+      * 作业详情。
+      */
+    Metadata?: RunMetadata;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 文件存储配置。
+ */
+export interface StorageOption {
+    /**
+      * 文件存储类型，取值范围：
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+      */
+    StorageType: string;
+    /**
+      * 文件存储可用区。
+      */
+    Zone: string;
+    /**
+      * 文件系统容量，turbo系列必填，单位为GiB。
+- turbo标准型起售40TiB，即40960GiB；扩容步长20TiB，即20480 GiB。
+- turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。
+      */
+    Capacity?: number;
+}
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 过滤器，支持过滤字段：
+- EnvironmentId：环境ID
+- Name：名称
+- Status：环境状态
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * 运行应用选项。
  */
 export interface RunOption {
@@ -389,17 +729,17 @@ export interface RunOption {
     UseErrorOnHold: boolean;
 }
 /**
- * 任务运行状态。
+ * 云服务器配置。
  */
-export interface RunStatusCount {
+export interface CVMOption {
     /**
-      * 状态。
+      * 云服务器可用区。
       */
-    Status?: string;
+    Zone: string;
     /**
-      * 数量。
+      * 云服务器实例规格。
       */
-    Count?: number;
+    InstanceType: string;
 }
 /**
  * 任务作业详情。
@@ -507,57 +847,19 @@ export interface RunMetadata {
     Stderr?: string;
 }
 /**
- * ImportTableFile请求参数结构体
+ * CreateEnvironment请求参数结构体
  */
-export interface ImportTableFileRequest {
+export interface CreateEnvironmentRequest {
     /**
-      * 表格关联的项目ID。
-      */
-    ProjectId: string;
-    /**
-      * 表格名称，支持20个字符内的英文字符、数字和下划线。
+      * 环境名称。
       */
     Name: string;
     /**
-      * 表格文件Cos对象路径。
+      * 环境配置信息。
       */
-    CosUri: string;
+    Config: EnvironmentConfig;
     /**
-      * 表格文件中每列的数据类型，支持的类型包括：Int、String、File、Array[File]
-      */
-    DataType: Array<string>;
-    /**
-      * 表格描述。
+      * 环境描述。
       */
     Description?: string;
-}
-/**
- * GetRunStatus返回参数结构体
- */
-export interface GetRunStatusResponse {
-    /**
-      * 作业详情。
-      */
-    Metadata?: RunMetadata;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * GetRunCalls请求参数结构体
- */
-export interface GetRunCallsRequest {
-    /**
-      * 任务Uuid。
-      */
-    RunUuid: string;
-    /**
-      * 项目ID。
-      */
-    ProjectId: string;
-    /**
-      * 作业路径
-      */
-    Path: string;
 }

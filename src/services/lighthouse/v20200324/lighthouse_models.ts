@@ -1626,6 +1626,26 @@ export interface DescribeInstancesDeniedActionsResponse {
 }
 
 /**
+ * RenewDisks请求参数结构体
+ */
+export interface RenewDisksRequest {
+  /**
+   * 云硬盘ID列表。一个或多个待操作的云硬盘ID。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次请求续费数据盘数量总计上限为50。
+   */
+  DiskIds: Array<string>
+
+  /**
+   * 续费云硬盘包年包月相关参数设置。
+   */
+  RenewDiskChargePrepaid: RenewDiskChargePrepaid
+
+  /**
+   * 是否自动使用代金券。默认不使用。
+   */
+  AutoVoucher?: boolean
+}
+
+/**
  * ModifyDisksAttribute请求参数结构体
  */
 export interface ModifyDisksAttributeRequest {
@@ -3772,22 +3792,26 @@ export interface TerminateInstancesRequest {
  */
 export interface RenewDiskChargePrepaid {
   /**
-   * 新购周期。
+   * 续费周期。
    */
   Period?: number
 
   /**
-   * 续费标识。
-   */
+      * 续费标识。取值范围：
+
+NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。
+
+默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。
+      */
   RenewFlag?: string
 
   /**
-   * 周期单位. 默认值: "m"。
+   * 周期单位。取值范围：“m”(月)。默认值: "m"。
    */
   TimeUnit?: string
 
   /**
-   * 当前实例到期时间。
+   * 当前实例到期时间。如“2018-01-01 00:00:00”。指定该参数即可对齐云硬盘所挂载的实例到期时间。该参数与Period必须指定其一，且不支持同时指定。
    */
   CurInstanceDeadline?: string
 }
@@ -3826,6 +3850,16 @@ export interface DescribeDiskConfigsResponse {
    */
   DiskConfigSet: Array<DiskConfig>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewDisks返回参数结构体
+ */
+export interface RenewDisksResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3960,6 +3994,16 @@ export interface ModifyDiskBackupsAttributeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IsolateDisks请求参数结构体
+ */
+export interface IsolateDisksRequest {
+  /**
+   * 云硬盘ID列表。一个或多个待操作的云硬盘ID。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次请求退还数据盘数量总计上限为20。
+   */
+  DiskIds: Array<string>
 }
 
 /**
@@ -4234,6 +4278,16 @@ export interface DescribeDisksDeniedActionsResponse {
  * ResetInstance返回参数结构体
  */
 export interface ResetInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IsolateDisks返回参数结构体
+ */
+export interface IsolateDisksResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

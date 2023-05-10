@@ -103,7 +103,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBandwidthPackage", req, cb);
     }
     /**
-     * 本接口（DeleteFlowLog）用于删除流日志
+     * 本接口（DeleteFlowLog）用于删除流日志。
      */
     async DeleteFlowLog(req, cb) {
         return this.request("DeleteFlowLog", req, cb);
@@ -143,7 +143,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatGatewayDestinationIpPortTranslationNatRules", req, cb);
     }
     /**
-     * 本接口（ModifyFlowLogAttribute）用于修改流日志属性
+     * 本接口（ModifyFlowLogAttribute）用于修改流日志属性。
      */
     async ModifyFlowLogAttribute(req, cb) {
         return this.request("ModifyFlowLogAttribute", req, cb);
@@ -1003,7 +1003,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableGatewayFlowMonitor", req, cb);
     }
     /**
-     * 本接口（DescribeFlowLog）用于查询流日志实例信息
+     * 本接口（DescribeFlowLog）用于查询流日志实例信息。
      */
     async DescribeFlowLog(req, cb) {
         return this.request("DescribeFlowLog", req, cb);

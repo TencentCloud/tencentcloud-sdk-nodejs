@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeRunsRequest, RunApplicationResponse, DescribeRunGroupsRequest, GetRunCallsResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, DescribeRunGroupsResponse, RunApplicationRequest, ImportTableFileRequest, GetRunStatusResponse, GetRunCallsRequest } from "./omics_models";
+import { RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, DescribeRunsRequest, DescribeEnvironmentsResponse, ImportTableFileRequest, RunApplicationRequest, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, CreateEnvironmentResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
 /**
  * omics client
  * @class
@@ -12,9 +12,17 @@ export declare class Client extends AbstractClient {
      */
     GetRunCalls(req: GetRunCallsRequest, cb?: (error: string, rep: GetRunCallsResponse) => void): Promise<GetRunCallsResponse>;
     /**
+     * 查询环境列表。
+     */
+    DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
+    /**
      * 导入表格文件。
      */
     ImportTableFile(req: ImportTableFileRequest, cb?: (error: string, rep: ImportTableFileResponse) => void): Promise<ImportTableFileResponse>;
+    /**
+     * 创建组学平台计算环境。
+     */
+    CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
     /**
      * 运行应用。
      */
@@ -27,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 查询任务批次列表。
      */
     DescribeRunGroups(req: DescribeRunGroupsRequest, cb?: (error: string, rep: DescribeRunGroupsResponse) => void): Promise<DescribeRunGroupsResponse>;
+    /**
+     * 删除环境。
+     */
+    DeleteEnvironment(req: DeleteEnvironmentRequest, cb?: (error: string, rep: DeleteEnvironmentResponse) => void): Promise<DeleteEnvironmentResponse>;
     /**
      * 查询任务详情。
      */

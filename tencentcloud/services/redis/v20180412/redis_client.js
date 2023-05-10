@@ -160,7 +160,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeInstanceRole", req, cb);
     }
     /**
-     * 查询实例节点信息
+     * 本接口（DescribeInstanceNodeInfo）用于查询实例节点信息。
      */
     async DescribeInstanceNodeInfo(req, cb) {
         return this.request("DescribeInstanceNodeInfo", req, cb);

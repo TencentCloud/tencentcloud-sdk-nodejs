@@ -838,6 +838,16 @@ it("live.v20180801.DescribeLiveTimeShiftTemplates", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveXP2PDetailInfoList", async function () {
+    try {
+       const data = await client.DescribeLiveXP2PDetailInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveDelayInfoList", async function () {
     try {
        const data = await client.DescribeLiveDelayInfoList({})

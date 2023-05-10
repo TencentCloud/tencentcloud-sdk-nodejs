@@ -2151,6 +2151,14 @@ export interface MediaProcessTaskSampleSnapshotResult {
       * 对视频做采样截图任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+    /**
+      * 采样截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 采样截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * DescribeDailyMediaPlayStat请求参数结构体
@@ -3232,6 +3240,14 @@ export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
       * 对视频转自适应码流任务的输出。
       */
     Output: AdaptiveDynamicStreamingInfoItem;
+    /**
+      * 转自适应码流任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 转自适应码流任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * 文本关键词识别控制参数。
@@ -4206,6 +4222,14 @@ export interface MediaProcessTaskAnimatedGraphicResult {
       * 转动图任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+    /**
+      * 转动图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 转动图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * ProcessMedia返回参数结构体
@@ -5041,6 +5065,14 @@ export interface MediaProcessTaskImageSpriteResult {
       * 对视频截雪碧图任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+    /**
+      * 截雪碧图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 截雪碧图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * 降码率任务信息
@@ -7103,6 +7135,14 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
       * 对视频按指定时间点截图任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+    /**
+      * 时间点截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 时间点截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * ManageTask请求参数结构体
@@ -8103,6 +8143,14 @@ export interface MediaProcessTaskCoverBySnapshotResult {
       * 对视频截图做封面任务进度，取值范围 [0-100] 。
       */
     Progress: number;
+    /**
+      * 截图做封面任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 截图做封面任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    FinishTime?: string;
 }
 /**
  * CreateWatermarkTemplate请求参数结构体
@@ -9308,6 +9356,14 @@ export interface HeadTailTemplate {
 默认值：stretch 。
       */
     FillType: string;
+    /**
+      * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    CreateTime?: string;
+    /**
+      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    UpdateTime?: string;
 }
 /**
  * DescribeStorageDetails返回参数结构体

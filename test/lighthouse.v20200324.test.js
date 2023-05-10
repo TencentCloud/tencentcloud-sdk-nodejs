@@ -638,6 +638,16 @@ it("lighthouse.v20200324.TerminateDisks", async function () {
     }
 })
 
+it("lighthouse.v20200324.IsolateDisks", async function () {
+    try {
+       const data = await client.IsolateDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.StartInstances", async function () {
     try {
        const data = await client.StartInstances({})
@@ -751,6 +761,16 @@ it("lighthouse.v20200324.RebootInstances", async function () {
 it("lighthouse.v20200324.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.RenewDisks", async function () {
+    try {
+       const data = await client.RenewDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

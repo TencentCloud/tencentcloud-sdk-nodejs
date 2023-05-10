@@ -483,7 +483,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例节点信息
+   * 本接口（DescribeInstanceNodeInfo）用于查询实例节点信息。
    */
   async DescribeInstanceNodeInfo(
     req: DescribeInstanceNodeInfoRequest,

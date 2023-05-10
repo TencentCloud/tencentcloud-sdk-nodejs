@@ -217,7 +217,7 @@ export interface DescribeSlowLogsRequest {
   InstanceId: string
 
   /**
-   * sql模版的md5值
+   * sql模板的md5值
    */
   Md5: string
 

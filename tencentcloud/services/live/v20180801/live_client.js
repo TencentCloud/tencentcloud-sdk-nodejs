@@ -586,6 +586,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveTimeShiftTemplates", req, cb);
     }
     /**
+     * P2P流数据查询接口，用来获取流量、卡播和起播信息。
+     */
+    async DescribeLiveXP2PDetailInfoList(req, cb) {
+        return this.request("DescribeLiveXP2PDetailInfoList", req, cb);
+    }
+    /**
      * 获取直播延播列表。
      */
     async DescribeLiveDelayInfoList(req, cb) {

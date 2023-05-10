@@ -2886,6 +2886,11 @@ export interface EdgeCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EdgeVersion?: string;
+    /**
+      * 集群绑定的云标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagSpecification?: TagSpecification;
 }
 /**
  * DescribeClusterNodePoolDetail返回参数结构体

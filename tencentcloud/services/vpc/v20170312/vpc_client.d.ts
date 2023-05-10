@@ -59,7 +59,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBandwidthPackage(req: CreateBandwidthPackageRequest, cb?: (error: string, rep: CreateBandwidthPackageResponse) => void): Promise<CreateBandwidthPackageResponse>;
     /**
-     * 本接口（DeleteFlowLog）用于删除流日志
+     * 本接口（DeleteFlowLog）用于删除流日志。
      */
     DeleteFlowLog(req: DeleteFlowLogRequest, cb?: (error: string, rep: DeleteFlowLogResponse) => void): Promise<DeleteFlowLogResponse>;
     /**
@@ -87,7 +87,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeNatGatewayDestinationIpPortTranslationNatRules(req: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest, cb?: (error: string, rep: DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) => void): Promise<DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse>;
     /**
-     * 本接口（ModifyFlowLogAttribute）用于修改流日志属性
+     * 本接口（ModifyFlowLogAttribute）用于修改流日志属性。
      */
     ModifyFlowLogAttribute(req: ModifyFlowLogAttributeRequest, cb?: (error: string, rep: ModifyFlowLogAttributeResponse) => void): Promise<ModifyFlowLogAttributeResponse>;
     /**
@@ -697,7 +697,7 @@ export declare class Client extends AbstractClient {
      */
     EnableGatewayFlowMonitor(req: EnableGatewayFlowMonitorRequest, cb?: (error: string, rep: EnableGatewayFlowMonitorResponse) => void): Promise<EnableGatewayFlowMonitorResponse>;
     /**
-     * 本接口（DescribeFlowLog）用于查询流日志实例信息
+     * 本接口（DescribeFlowLog）用于查询流日志实例信息。
      */
     DescribeFlowLog(req: DescribeFlowLogRequest, cb?: (error: string, rep: DescribeFlowLogResponse) => void): Promise<DescribeFlowLogResponse>;
     /**

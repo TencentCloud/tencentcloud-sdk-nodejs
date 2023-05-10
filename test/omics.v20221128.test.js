@@ -28,9 +28,29 @@ it("omics.v20221128.GetRunCalls", async function () {
     }
 })
 
+it("omics.v20221128.DescribeEnvironments", async function () {
+    try {
+       const data = await client.DescribeEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.ImportTableFile", async function () {
     try {
        const data = await client.ImportTableFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.CreateEnvironment", async function () {
+    try {
+       const data = await client.CreateEnvironment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +81,16 @@ it("omics.v20221128.DescribeRuns", async function () {
 it("omics.v20221128.DescribeRunGroups", async function () {
     try {
        const data = await client.DescribeRunGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.DeleteEnvironment", async function () {
+    try {
+       const data = await client.DeleteEnvironment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

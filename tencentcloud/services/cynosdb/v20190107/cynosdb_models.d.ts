@@ -779,6 +779,19 @@ export interface DescribeFlowResponse {
     RequestId?: string;
 }
 /**
+ * SetRenewFlag返回参数结构体
+ */
+export interface SetRenewFlagResponse {
+    /**
+      * 操作成功实例数
+      */
+    Count: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RevokeAccountPrivileges返回参数结构体
  */
 export interface RevokeAccountPrivilegesResponse {
@@ -3773,17 +3786,33 @@ export interface AuditLogFile {
     ErrMsg: string;
 }
 /**
- * SetRenewFlag返回参数结构体
+ * OpenReadOnlyInstanceExclusiveAccess请求参数结构体
  */
-export interface SetRenewFlagResponse {
+export interface OpenReadOnlyInstanceExclusiveAccessRequest {
     /**
-      * 操作成功实例数
+      * 集群ID
       */
-    Count: number;
+    ClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 需要开通独有访问的只读实例ID
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 指定的vpc ID
+      */
+    VpcId: string;
+    /**
+      * 指定的子网ID
+      */
+    SubnetId: string;
+    /**
+      * 端口
+      */
+    Port: number;
+    /**
+      * 安全组
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * 数据库账号信息
@@ -4757,6 +4786,19 @@ export interface DescribeInstanceDetailRequest {
  * ModifyMaintainPeriodConfig返回参数结构体
  */
 export interface ModifyMaintainPeriodConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * OpenReadOnlyInstanceExclusiveAccess返回参数结构体
+ */
+export interface OpenReadOnlyInstanceExclusiveAccessResponse {
+    /**
+      * 开通流程ID
+      */
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

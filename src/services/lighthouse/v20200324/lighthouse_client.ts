@@ -90,6 +90,7 @@ import {
   DescribeBlueprintsRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
+  RenewDisksRequest,
   ModifyDisksAttributeRequest,
   DockerContainerPublishPort,
   DescribeSnapshotsDeniedActionsResponse,
@@ -189,6 +190,7 @@ import {
   TerminateDisksRequest,
   ResetInstanceRequest,
   DescribeDiskConfigsResponse,
+  RenewDisksResponse,
   InternetAccessible,
   InstancePriceDetail,
   RebootInstancesResponse,
@@ -198,6 +200,7 @@ import {
   Price,
   DescribeDisksReturnableResponse,
   ModifyDiskBackupsAttributeResponse,
+  IsolateDisksRequest,
   CreateInstanceSnapshotResponse,
   ModifyInstancesBundleResponse,
   GeneralResourceQuota,
@@ -215,6 +218,7 @@ import {
   RenewInstancesResponse,
   DescribeDisksDeniedActionsResponse,
   ResetInstanceResponse,
+  IsolateDisksResponse,
   DescribeFirewallRulesRequest,
   DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
@@ -974,6 +978,21 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
+     * 本接口(IsolateDisks)用于退还一个或多个轻量应用服务器云硬盘。
+
+只有状态为 UNATTACHED 的数据盘才可以进行此操作。
+接口调用成功后，云硬盘会进入SHUTDOWN 状态。
+支持批量操作。每次请求批量资源的上限为 20。
+本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。云硬盘操作结果可以通过调用 [DescribeDisks](https://cloud.tencent.com/document/product/1207/66093) 接口查询，如果云硬盘的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+  async IsolateDisks(
+    req: IsolateDisksRequest,
+    cb?: (error: string, rep: IsolateDisksResponse) => void
+  ): Promise<IsolateDisksResponse> {
+    return this.request("IsolateDisks", req, cb)
+  }
+
+  /**
      * 本接口（StartInstances）用于启动一个或多个实例。
 
 * 只有状态为 STOPPED 的实例才可以进行此操作。
@@ -1101,6 +1120,20 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: CreateInstancesResponse) => void
   ): Promise<CreateInstancesResponse> {
     return this.request("CreateInstances", req, cb)
+  }
+
+  /**
+     * 本接口(RenewDisks)用于续费一个或多个轻量应用服务器云硬盘。
+
+只有状态为 ATTACHED，UNATTACHED 或 SHUTDOWN 的数据盘才可以进行此操作。
+支持批量操作。每次请求批量云硬盘的上限为 50。
+本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。云硬盘操作结果可以通过调用 [DescribeDisks](https://cloud.tencent.com/document/product/1207/66093) 接口查询，如果云硬盘的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+  async RenewDisks(
+    req: RenewDisksRequest,
+    cb?: (error: string, rep: RenewDisksResponse) => void
+  ): Promise<RenewDisksResponse> {
+    return this.request("RenewDisks", req, cb)
   }
 
   /**

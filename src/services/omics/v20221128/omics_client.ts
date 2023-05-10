@@ -18,25 +18,39 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RunGroup,
-  Filter,
-  DescribeRunsRequest,
-  Run,
   RunApplicationResponse,
   ExecutionTime,
-  DescribeRunGroupsRequest,
-  GetRunCallsResponse,
+  RunStatusCount,
   GetRunStatusRequest,
   DescribeRunsResponse,
   ImportTableFileResponse,
-  DescribeRunGroupsResponse,
-  RunApplicationRequest,
-  RunOption,
-  RunStatusCount,
-  RunMetadata,
-  ImportTableFileRequest,
-  GetRunStatusResponse,
+  DeleteEnvironmentResponse,
   GetRunCallsRequest,
+  DescribeRunsRequest,
+  Run,
+  DescribeEnvironmentsResponse,
+  VPCOption,
+  ImportTableFileRequest,
+  ClusterOption,
+  RunApplicationRequest,
+  DeleteEnvironmentRequest,
+  RunGroup,
+  DatabaseOption,
+  GetRunCallsResponse,
+  Filter,
+  ResourceIds,
+  DescribeRunGroupsResponse,
+  EnvironmentConfig,
+  Environment,
+  CreateEnvironmentResponse,
+  DescribeRunGroupsRequest,
+  GetRunStatusResponse,
+  StorageOption,
+  DescribeEnvironmentsRequest,
+  RunOption,
+  CVMOption,
+  RunMetadata,
+  CreateEnvironmentRequest,
 } from "./omics_models"
 
 /**
@@ -59,6 +73,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询环境列表。
+   */
+  async DescribeEnvironments(
+    req: DescribeEnvironmentsRequest,
+    cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
+  ): Promise<DescribeEnvironmentsResponse> {
+    return this.request("DescribeEnvironments", req, cb)
+  }
+
+  /**
    * 导入表格文件。
    */
   async ImportTableFile(
@@ -66,6 +90,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportTableFileResponse) => void
   ): Promise<ImportTableFileResponse> {
     return this.request("ImportTableFile", req, cb)
+  }
+
+  /**
+   * 创建组学平台计算环境。
+   */
+  async CreateEnvironment(
+    req: CreateEnvironmentRequest,
+    cb?: (error: string, rep: CreateEnvironmentResponse) => void
+  ): Promise<CreateEnvironmentResponse> {
+    return this.request("CreateEnvironment", req, cb)
   }
 
   /**
@@ -96,6 +130,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRunGroupsResponse) => void
   ): Promise<DescribeRunGroupsResponse> {
     return this.request("DescribeRunGroups", req, cb)
+  }
+
+  /**
+   * 删除环境。
+   */
+  async DeleteEnvironment(
+    req: DeleteEnvironmentRequest,
+    cb?: (error: string, rep: DeleteEnvironmentResponse) => void
+  ): Promise<DeleteEnvironmentResponse> {
+    return this.request("DeleteEnvironment", req, cb)
   }
 
   /**

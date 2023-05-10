@@ -64,6 +64,19 @@ export interface DescribeUploadStreamNumsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLiveXP2PDetailInfoList返回参数结构体
+ */
+export interface DescribeLiveXP2PDetailInfoListResponse {
+    /**
+      * P2P流统计信息。
+      */
+    DataInfoList: Array<XP2PDetailInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * HLS专属录制参数
  */
 export interface HlsSpecialParam {
@@ -5261,6 +5274,58 @@ export interface DeleteLiveTranscodeTemplateRequest {
  */
 export declare type DescribeLiveCallbackRulesRequest = null;
 /**
+ * 央视P2P流信息。
+ */
+export interface XP2PDetailInfo {
+    /**
+      * CDN流量。
+      */
+    CdnBytes: number;
+    /**
+      * P2P流量。
+      */
+    P2pBytes: number;
+    /**
+      * 卡播人数。
+      */
+    StuckPeople: number;
+    /**
+      * 卡播次数。
+      */
+    StuckTimes: number;
+    /**
+      * 在线人数。
+      */
+    OnlinePeople: number;
+    /**
+      * 起播请求次数
+      */
+    Request: number;
+    /**
+      * 起播成功次数
+      */
+    RequestSuccess: number;
+    /**
+      * 时间，一分钟粒度，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I。。
+      */
+    Time: string;
+    /**
+      * 类型，分live和vod两种。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 流ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StreamName: string;
+    /**
+      * AppId。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: string;
+}
+/**
  * 客户端ip播放汇总信息。
  */
 export interface ClientIpPlaySumInfo {
@@ -7332,6 +7397,30 @@ export interface DescribeVisitTopSumInfoListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeLiveXP2PDetailInfoList请求参数结构体
+ */
+export interface DescribeLiveXP2PDetailInfoListRequest {
+    /**
+      * utc分钟粒度查询时间，查询某一分钟的用量数据，格式为：yyyy-mm-ddTHH:MM:00Z，参考https://cloud.tencent.com/document/product/266/11732#I，
+例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
+
+支持最近六个月的查询。
+      */
+    QueryTime?: string;
+    /**
+      * 类型数组，分直播live和点播vod，不传默认查全部。
+      */
+    Type?: Array<string>;
+    /**
+      * 查询流数组，不传默认查所有流。
+      */
+    StreamNames?: Array<string>;
+    /**
+      * 查询维度，不传该参数则默认查询流维度的数据，传递该参数则只查对应维度的数据，和返回值的字段相关，目前支持AppId维度查询。
+      */
+    Dimension?: Array<string>;
 }
 /**
  * ModifyLivePullStreamTask返回参数结构体

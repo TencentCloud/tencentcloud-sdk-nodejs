@@ -3015,22 +3015,22 @@ export interface DescribeReplicationGroupRequest {
  */
 export interface RedisNodes {
   /**
-   * 节点ID
+   * 节点 ID。
    */
   NodeId: string
 
   /**
-   * 节点角色
+   * 节点角色。
    */
   NodeRole: string
 
   /**
-   * 分片ID
+   * 分片 ID。
    */
   ClusterId: number
 
   /**
-   * 可用区ID
+   * 可用区 ID。
    */
   ZoneId: number
 }
@@ -5150,17 +5150,17 @@ export interface BigKeyTypeInfo {
  */
 export interface DescribeInstanceNodeInfoRequest {
   /**
-   * 实例ID
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 列表大小
+   * 列表大小。每页输出的节点信息大小。默认为 20，最多输出1000条。该字段已不再使用，请忽略。
    */
   Limit?: number
 
   /**
-   * 偏移量
+   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。该字段已不再使用，请忽略。
    */
   Offset?: number
 }
@@ -6031,37 +6031,37 @@ export interface UpgradeInstanceRequest {
  */
 export interface DescribeInstanceNodeInfoResponse {
   /**
-   * proxy节点数量
+   * Proxy节点数量。
    */
-  ProxyCount: number
+  ProxyCount?: number
 
   /**
-      * proxy节点信息
+      * Proxy节点信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Proxy: Array<ProxyNodes>
+  Proxy?: Array<ProxyNodes>
 
   /**
-   * redis节点数量
+   * Redis节点数量。
    */
-  RedisCount: number
+  RedisCount?: number
 
   /**
-      * redis节点信息
+      * Redis节点信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Redis: Array<RedisNodes>
+  Redis?: Array<RedisNodes>
 
   /**
-   * tendis节点数量
+   * 该参数不再使用，请忽略。
    */
-  TendisCount: number
+  TendisCount?: number
 
   /**
-      * tendis节点信息
+      * 该参数不再使用，请忽略。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tendis: Array<TendisNodes>
+  Tendis?: Array<TendisNodes>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

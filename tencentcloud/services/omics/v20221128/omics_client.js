@@ -34,10 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRunCalls", req, cb);
     }
     /**
+     * 查询环境列表。
+     */
+    async DescribeEnvironments(req, cb) {
+        return this.request("DescribeEnvironments", req, cb);
+    }
+    /**
      * 导入表格文件。
      */
     async ImportTableFile(req, cb) {
         return this.request("ImportTableFile", req, cb);
+    }
+    /**
+     * 创建组学平台计算环境。
+     */
+    async CreateEnvironment(req, cb) {
+        return this.request("CreateEnvironment", req, cb);
     }
     /**
      * 运行应用。
@@ -56,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRunGroups(req, cb) {
         return this.request("DescribeRunGroups", req, cb);
+    }
+    /**
+     * 删除环境。
+     */
+    async DeleteEnvironment(req, cb) {
+        return this.request("DeleteEnvironment", req, cb);
     }
     /**
      * 查询任务详情。

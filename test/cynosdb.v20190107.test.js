@@ -718,6 +718,16 @@ it("cynosdb.v20190107.OfflineCluster", async function () {
     }
 })
 
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+    try {
+       const data = await client.SearchClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
@@ -768,9 +778,9 @@ it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+it("cynosdb.v20190107.OpenReadOnlyInstanceExclusiveAccess", async function () {
     try {
-       const data = await client.SearchClusterDatabases({})
+       const data = await client.OpenReadOnlyInstanceExclusiveAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

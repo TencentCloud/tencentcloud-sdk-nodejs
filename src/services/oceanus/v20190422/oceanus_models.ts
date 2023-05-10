@@ -18,7 +18,61 @@
 /**
  * 复制作业单条明细结果
  */
-export type CopyJobResult = null
+export interface CopyJobResult {
+  /**
+      * 原作业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobId: string
+
+  /**
+      * 原作业名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobName: string
+
+  /**
+      * 新作业名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetJobName: string
+
+  /**
+      * 新作业id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetJobId: string
+
+  /**
+      * 失败时候的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 0 成功  -1 失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: number
+
+  /**
+      * 目标集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName: string
+
+  /**
+      * 目标集群id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 作业类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobType: number
+}
 
 /**
  * CreateResource请求参数结构体
@@ -1579,7 +1633,37 @@ export interface CreateFolderResponse {
 /**
  * 复制作业单条明细
  */
-export type CopyJobItem = null
+export interface CopyJobItem {
+  /**
+   * 需要复制的作业serial id
+   */
+  SourceId: string
+
+  /**
+   * 目标集群的cluster serial id
+   */
+  TargetClusterId: string
+
+  /**
+   * 需要复制的作业名称
+   */
+  SourceName?: string
+
+  /**
+   * 新作业的名称
+   */
+  TargetName?: string
+
+  /**
+   * 新作业的目录id
+   */
+  TargetFolderId?: string
+
+  /**
+   * 源作业类型
+   */
+  JobType?: number
+}
 
 /**
  * 作业启动详情

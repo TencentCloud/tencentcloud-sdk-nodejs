@@ -96,7 +96,7 @@ export declare class Client extends AbstractClient {
      */
     ChangeInstanceRole(req: ChangeInstanceRoleRequest, cb?: (error: string, rep: ChangeInstanceRoleResponse) => void): Promise<ChangeInstanceRoleResponse>;
     /**
-     * 查询实例节点信息
+     * 本接口（DescribeInstanceNodeInfo）用于查询实例节点信息。
      */
     DescribeInstanceNodeInfo(req: DescribeInstanceNodeInfoRequest, cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void): Promise<DescribeInstanceNodeInfoResponse>;
     /**

@@ -881,7 +881,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteFlowLog）用于删除流日志
+   * 本接口（DeleteFlowLog）用于删除流日志。
    */
   async DeleteFlowLog(
     req: DeleteFlowLogRequest,
@@ -948,7 +948,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyFlowLogAttribute）用于修改流日志属性
+   * 本接口（ModifyFlowLogAttribute）用于修改流日志属性。
    */
   async ModifyFlowLogAttribute(
     req: ModifyFlowLogAttributeRequest,
@@ -2308,7 +2308,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeFlowLog）用于查询流日志实例信息
+   * 本接口（DescribeFlowLog）用于查询流日志实例信息。
    */
   async DescribeFlowLog(
     req: DescribeFlowLogRequest,

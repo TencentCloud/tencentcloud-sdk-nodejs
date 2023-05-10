@@ -448,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OfflineCluster", req, cb);
     }
     /**
+     * 本接口(SearchClusterDatabases)搜索集群database列表
+     */
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
+    }
+    /**
      * 修改审计规则模版
      */
     async ModifyAuditRuleTemplates(req, cb) {
@@ -478,10 +484,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 开通只读实例独有访问接入组
      */
-    async SearchClusterDatabases(req, cb) {
-        return this.request("SearchClusterDatabases", req, cb);
+    async OpenReadOnlyInstanceExclusiveAccess(req, cb) {
+        return this.request("OpenReadOnlyInstanceExclusiveAccess", req, cb);
     }
     /**
      * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。

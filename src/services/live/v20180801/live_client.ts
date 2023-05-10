@@ -22,6 +22,7 @@ import {
   BillDataInfo,
   EnableLiveDomainResponse,
   DescribeUploadStreamNumsResponse,
+  DescribeLiveXP2PDetailInfoListResponse,
   HlsSpecialParam,
   TranscodeTotalInfo,
   StopRecordTaskResponse,
@@ -241,6 +242,7 @@ import {
   DescribeLiveDelayInfoListResponse,
   DeleteLiveTranscodeTemplateRequest,
   DescribeLiveCallbackRulesRequest,
+  XP2PDetailInfo,
   ClientIpPlaySumInfo,
   DescribeLiveTranscodeTemplateResponse,
   CreateLiveSnapshotTemplateResponse,
@@ -329,6 +331,7 @@ import {
   DescribeStreamDayPlayInfoListResponse,
   StopLiveRecordRequest,
   DescribeVisitTopSumInfoListResponse,
+  DescribeLiveXP2PDetailInfoListRequest,
   ModifyLivePullStreamTaskResponse,
   CreateLiveSnapshotRuleResponse,
   DelayInfo,
@@ -1244,6 +1247,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveTimeShiftTemplatesResponse) => void
   ): Promise<DescribeLiveTimeShiftTemplatesResponse> {
     return this.request("DescribeLiveTimeShiftTemplates", req, cb)
+  }
+
+  /**
+   * P2P流数据查询接口，用来获取流量、卡播和起播信息。
+   */
+  async DescribeLiveXP2PDetailInfoList(
+    req: DescribeLiveXP2PDetailInfoListRequest,
+    cb?: (error: string, rep: DescribeLiveXP2PDetailInfoListResponse) => void
+  ): Promise<DescribeLiveXP2PDetailInfoListResponse> {
+    return this.request("DescribeLiveXP2PDetailInfoList", req, cb)
   }
 
   /**

@@ -1714,7 +1714,7 @@ export interface SecurityGroupPolicySet {
  */
 export interface ModifyFlowLogAttributeRequest {
   /**
-   * 流日志唯一ID
+   * 流日志唯一ID。
    */
   FlowLogId: string
 
@@ -1724,12 +1724,12 @@ export interface ModifyFlowLogAttributeRequest {
   VpcId?: string
 
   /**
-   * 流日志实例名字
+   * 流日志实例名字。
    */
   FlowLogName?: string
 
   /**
-   * 流日志实例描述
+   * 流日志实例描述。
    */
   FlowLogDescription?: string
 }
@@ -2506,7 +2506,7 @@ export interface IpGeolocationInfo {
  */
 export interface DeleteFlowLogRequest {
   /**
-   * 流日志唯一ID
+   * 流日志唯一ID。
    */
   FlowLogId: string
 
@@ -2959,12 +2959,12 @@ export interface ModifyVpcEndPointAttributeResponse {
  */
 export interface DescribeFlowLogRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID
+   * 私用网络ID或者统一ID，建议使用统一ID。
    */
   VpcId: string
 
   /**
-   * 流日志唯一ID
+   * 流日志唯一ID。
    */
   FlowLogId: string
 }
@@ -4008,7 +4008,7 @@ export interface DescribeNatGatewaysResponse {
  */
 export interface DescribeFlowLogResponse {
   /**
-   * 流日志信息
+   * 流日志信息。
    */
   FlowLog?: Array<FlowLog>
 
@@ -6661,7 +6661,7 @@ export interface CreateAddressTemplateResponse {
   /**
    * IP地址模板对象。
    */
-  AddressTemplate: AddressTemplate
+  AddressTemplate?: AddressTemplate
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8178,7 +8178,7 @@ export interface Filter {
   Name: string
 
   /**
-   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。
    */
   Values: Array<string>
 }

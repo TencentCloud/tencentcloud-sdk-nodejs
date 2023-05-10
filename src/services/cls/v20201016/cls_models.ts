@@ -2965,6 +2965,16 @@ export interface CreateShipperRequest {
    * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
    */
   FilenameMode?: number
+
+  /**
+   * 投递数据范围的开始时间点，不能超出日志主题的生命周期起点。如果用户不填写，默认为用户新建投递任务的时间。
+   */
+  StartTime?: number
+
+  /**
+   * 投递数据范围的结束时间点，不能填写未来时间。如果用户不填写，默认为持续投递，即无限。
+   */
+  EndTime?: number
 }
 
 /**
