@@ -792,6 +792,51 @@ export interface SetRenewFlagResponse {
     RequestId?: string;
 }
 /**
+ * ExportInstanceErrorLogs请求参数结构体
+ */
+export interface ExportInstanceErrorLogsRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 日志最早时间
+      */
+    StartTime?: string;
+    /**
+      * 日志最晚时间
+      */
+    EndTime?: string;
+    /**
+      * 限制条数
+      */
+    Limit?: number;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 日志等级
+      */
+    LogLevels?: Array<string>;
+    /**
+      * 关键字
+      */
+    KeyWords?: Array<string>;
+    /**
+      * 文件类型，可选值：csv, original
+      */
+    FileType?: string;
+    /**
+      * 可选值Timestamp
+      */
+    OrderBy?: string;
+    /**
+      * ASC或DESC
+      */
+    OrderByType?: string;
+}
+/**
  * RevokeAccountPrivileges返回参数结构体
  */
 export interface RevokeAccountPrivilegesResponse {
@@ -1028,6 +1073,26 @@ export interface AddClusterSlaveZoneRequest {
       * 从可用区
       */
     SlaveZone: string;
+}
+/**
+ * 实例错误日志返回类型
+ */
+export interface CynosdbErrorLogItem {
+    /**
+      * 日志时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timestamp?: number;
+    /**
+      * 日志等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level?: string;
+    /**
+      * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content?: string;
 }
 /**
  * DescribeAccountAllGrantPrivileges返回参数结构体
@@ -2080,6 +2145,20 @@ export interface DescribeAuditRuleWithInstanceIdsRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * ExportInstanceErrorLogs返回参数结构体
+ */
+export interface ExportInstanceErrorLogsResponse {
+    /**
+      * 错误日志导出内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorLogItems?: Array<ErrorLogItemExport>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数据库表
  */
 export interface DbTable {
@@ -2735,6 +2814,20 @@ export interface DescribeBackupDownloadUrlRequest {
     BackupId: number;
 }
 /**
+ * SearchClusterDatabases返回参数结构体
+ */
+export interface SearchClusterDatabasesResponse {
+    /**
+      * 数据库列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Databases: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 可回档的时间范围
  */
 export interface RollbackTimeRange {
@@ -3169,6 +3262,15 @@ export interface CreateAuditRuleTemplateRequest {
       * 规则模版描述。
       */
     Description?: string;
+}
+/**
+ * GrantAccountPrivileges返回参数结构体
+ */
+export interface GrantAccountPrivilegesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyBackupConfig返回参数结构体
@@ -4260,9 +4362,19 @@ export interface ModifyClusterSlaveZoneRequest {
     NewSlaveZone: string;
 }
 /**
- * GrantAccountPrivileges返回参数结构体
+ * DescribeInstanceErrorLogs返回参数结构体
  */
-export interface GrantAccountPrivilegesResponse {
+export interface DescribeInstanceErrorLogsResponse {
+    /**
+      * 日志条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount?: number;
+    /**
+      * 错误日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorLogs?: Array<CynosdbErrorLogItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4760,18 +4872,45 @@ export interface ResetAccountPasswordRequest {
     Host?: string;
 }
 /**
- * SearchClusterDatabases返回参数结构体
+ * DescribeInstanceErrorLogs请求参数结构体
  */
-export interface SearchClusterDatabasesResponse {
+export interface DescribeInstanceErrorLogsRequest {
     /**
-      * 数据库列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例Id
       */
-    Databases: Array<string>;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 日志条数限制
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 日志条数偏移量
+      */
+    Offset?: number;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
+    /**
+      * 排序字段，有Timestamp枚举值
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型，有ASC,DESC枚举值
+      */
+    OrderByType?: string;
+    /**
+      * 日志等级，有error、warning、note三种，支持多个等级同时搜索
+      */
+    LogLevels?: Array<string>;
+    /**
+      * 关键字，支持模糊搜索
+      */
+    KeyWords?: Array<string>;
 }
 /**
  * DescribeInstanceDetail请求参数结构体
@@ -5058,6 +5197,26 @@ export interface DescribeDBSecurityGroupsRequest {
       * 实例组ID
       */
     InstanceId: string;
+}
+/**
+ * 错误日志导出格式
+ */
+export interface ErrorLogItemExport {
+    /**
+      * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timestamp?: string;
+    /**
+      * 日志等级，可选值note, warning，error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level?: string;
+    /**
+      * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content?: string;
 }
 /**
  * DescribeAccountAllGrantPrivileges请求参数结构体

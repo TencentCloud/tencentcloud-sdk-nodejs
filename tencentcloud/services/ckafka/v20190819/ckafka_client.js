@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FetchLatestDatahubMessageList", req, cb);
     }
     /**
+     * 查询任务状态
+     */
+    async DescribeTaskStatus(req, cb) {
+        return this.request("DescribeTaskStatus", req, cb);
+    }
+    /**
      * 删除用户
      */
     async DeleteUser(req, cb) {

@@ -112,7 +112,7 @@ import {
   CdcClusterResponse,
   ModifyPasswordResponse,
   ModifyInstanceAttributesConfig,
-  FetchDatahubMessageByOffsetRequest,
+  DescribeTaskStatusResponse,
   AuthorizeTokenRequest,
   OperateResponseData,
   RenewCkafkaInstanceResponse,
@@ -247,6 +247,7 @@ import {
   CreateDatahubTopicResponse,
   InquireCkafkaPriceRequest,
   DateParam,
+  FetchDatahubMessageByOffsetRequest,
   ValueParam,
   DescribeDatahubTasksResponse,
   InquiryDiskParam,
@@ -307,8 +308,10 @@ import {
   SaleInfo,
   DeleteTopicResponse,
   ScfParam,
+  TaskStatusResponse,
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
+  DescribeTaskStatusRequest,
   DescribeUserRequest,
   DescribeDatahubTopicsResp,
   DescribeTopicSyncReplicaRequest,
@@ -772,6 +775,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FetchLatestDatahubMessageListResponse) => void
   ): Promise<FetchLatestDatahubMessageListResponse> {
     return this.request("FetchLatestDatahubMessageList", req, cb)
+  }
+
+  /**
+   * 查询任务状态
+   */
+  async DescribeTaskStatus(
+    req: DescribeTaskStatusRequest,
+    cb?: (error: string, rep: DescribeTaskStatusResponse) => void
+  ): Promise<DescribeTaskStatusResponse> {
+    return this.request("DescribeTaskStatus", req, cb)
   }
 
   /**

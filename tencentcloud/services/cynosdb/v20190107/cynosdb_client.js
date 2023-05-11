@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollBackCluster", req, cb);
     }
     /**
+     * 本接口(IsolateInstance)用于隔离实例。
+     */
+    async IsolateInstance(req, cb) {
+        return this.request("IsolateInstance", req, cb);
+    }
+    /**
      * 查询项目安全组信息
      */
     async DescribeProjectSecurityGroups(req, cb) {
@@ -86,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeParamTemplates(req, cb) {
         return this.request("DescribeParamTemplates", req, cb);
+    }
+    /**
+     * 本接口(SearchClusterTables)搜索集群数据表列表
+     */
+    async SearchClusterTables(req, cb) {
+        return this.request("SearchClusterTables", req, cb);
     }
     /**
      * 为集群删除手动备份，无法删除自动备份
@@ -322,10 +334,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditRuleWithInstanceIds", req, cb);
     }
     /**
-     * 本接口(IsolateInstance)用于隔离实例。
+     * 此接口（ExportInstanceErrorLogs）用于导出实例错误日志。
      */
-    async IsolateInstance(req, cb) {
-        return this.request("IsolateInstance", req, cb);
+    async ExportInstanceErrorLogs(req, cb) {
+        return this.request("ExportInstanceErrorLogs", req, cb);
     }
     /**
      * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
@@ -466,10 +478,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
-     * 本接口(SearchClusterTables)搜索集群数据表列表
+     * 查询实例错误日志列表
      */
-    async SearchClusterTables(req, cb) {
-        return this.request("SearchClusterTables", req, cb);
+    async DescribeInstanceErrorLogs(req, cb) {
+        return this.request("DescribeInstanceErrorLogs", req, cb);
     }
     /**
      * 切换到从可用区

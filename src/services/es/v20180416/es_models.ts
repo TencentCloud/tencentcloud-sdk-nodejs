@@ -910,6 +910,11 @@ export interface InstanceLog {
    * 日志内容
    */
   Message: string
+
+  /**
+   * 集群节点ID
+   */
+  NodeID?: string
 }
 
 /**
@@ -3166,6 +3171,11 @@ export interface KibanaView {
    * 可用区
    */
   Zone: string
+
+  /**
+   * ts-0noqayxu-az6-hot-03222010-0
+   */
+  NodeId?: string
 }
 
 /**

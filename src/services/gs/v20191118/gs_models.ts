@@ -135,7 +135,7 @@ export interface CreateSessionRequest {
   UserId: string
 
   /**
-   * 游戏ID
+   * 【已废弃】只在TrylockWorker时生效
    */
   GameId: string
 

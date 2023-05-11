@@ -4086,12 +4086,12 @@ export interface DescribeAssistantCidrResponse {
       * 符合条件的辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssistantCidrSet: Array<AssistantCidr>
+  AssistantCidrSet?: Array<AssistantCidr>
 
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10322,12 +10322,12 @@ export interface DescribeNetworkAclsResponse {
   /**
    * 实例详细信息列表。
    */
-  NetworkAclSet: Array<NetworkAcl>
+  NetworkAclSet?: Array<NetworkAcl>
 
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10796,7 +10796,7 @@ export interface DescribeVpcPrivateIpAddressesResponse {
   /**
    * 内网`IP`地址信息列表。
    */
-  VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>
+  VpcPrivateIpAddressSet?: Array<VpcPrivateIpAddress>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15518,8 +15518,9 @@ LOCAL_GATEWAY：本地网关。
   GatewayType: string
 
   /**
-   * 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。
-   */
+      * 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。
+特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。
+      */
   GatewayId: string
 
   /**

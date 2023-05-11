@@ -2985,6 +2985,10 @@ export interface DescribeTopicsRequest {
       */
     EnvironmentId: string;
     /**
+      * Pulsar 集群的ID
+      */
+    ClusterId: string;
+    /**
       * 主题名模糊匹配。
       */
     TopicName?: string;
@@ -3004,10 +3008,6 @@ export interface DescribeTopicsRequest {
 3：持久分区主题类型；
       */
     TopicType?: number;
-    /**
-      * Pulsar 集群的ID
-      */
-    ClusterId?: string;
     /**
       * * TopicName
 按照主题名字查询，精确查询。
@@ -6102,11 +6102,11 @@ export interface DescribeTopicsResponse {
     /**
       * 主题集合数组。
       */
-    TopicSets: Array<Topic>;
+    TopicSets?: Array<Topic>;
     /**
       * 主题数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

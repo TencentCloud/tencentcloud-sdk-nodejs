@@ -68,6 +68,16 @@ it("cynosdb.v20190107.RollBackCluster", async function () {
     }
 })
 
+it("cynosdb.v20190107.IsolateInstance", async function () {
+    try {
+       const data = await client.IsolateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeProjectSecurityGroups", async function () {
     try {
        const data = await client.DescribeProjectSecurityGroups({})
@@ -111,6 +121,16 @@ it("cynosdb.v20190107.AddClusterSlaveZone", async function () {
 it("cynosdb.v20190107.DescribeParamTemplates", async function () {
     try {
        const data = await client.DescribeParamTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SearchClusterTables", async function () {
+    try {
+       const data = await client.SearchClusterTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +528,9 @@ it("cynosdb.v20190107.DescribeAuditRuleWithInstanceIds", async function () {
     }
 })
 
-it("cynosdb.v20190107.IsolateInstance", async function () {
+it("cynosdb.v20190107.ExportInstanceErrorLogs", async function () {
     try {
-       const data = await client.IsolateInstance({})
+       const data = await client.ExportInstanceErrorLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +768,9 @@ it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterTables", async function () {
+it("cynosdb.v20190107.DescribeInstanceErrorLogs", async function () {
     try {
-       const data = await client.SearchClusterTables({})
+       const data = await client.DescribeInstanceErrorLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

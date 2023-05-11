@@ -727,6 +727,16 @@ export interface RunOption {
       * 是否使用错误挂起功能。
       */
     UseErrorOnHold: boolean;
+    /**
+      * 输出归档COS路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinalWorkflowOutputsDir?: string;
+    /**
+      * 是否使用相对目录归档输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UseRelativeOutputPaths?: boolean;
 }
 /**
  * 云服务器配置。

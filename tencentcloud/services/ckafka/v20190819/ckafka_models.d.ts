@@ -2407,21 +2407,17 @@ export interface ModifyInstanceAttributesConfig {
     DefaultReplicationFactor?: number;
 }
 /**
- * FetchDatahubMessageByOffset请求参数结构体
+ * DescribeTaskStatus返回参数结构体
  */
-export interface FetchDatahubMessageByOffsetRequest {
+export interface DescribeTaskStatusResponse {
     /**
-      * 主题名
+      * 返回结果
       */
-    Name: string;
+    Result?: TaskStatusResponse;
     /**
-      * 分区id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Partition: number;
-    /**
-      * 位点信息，必填
-      */
-    Offset?: number;
+    RequestId?: string;
 }
 /**
  * AuthorizeToken请求参数结构体
@@ -5606,6 +5602,23 @@ export interface DateParam {
     TimeZone?: string;
 }
 /**
+ * FetchDatahubMessageByOffset请求参数结构体
+ */
+export interface FetchDatahubMessageByOffsetRequest {
+    /**
+      * 主题名
+      */
+    Name: string;
+    /**
+      * 分区id
+      */
+    Partition: number;
+    /**
+      * 位点信息，必填
+      */
+    Offset?: number;
+}
+/**
  * 数据处理——Value处理参数
  */
 export interface ValueParam {
@@ -7254,6 +7267,23 @@ export interface ScfParam {
     MaxRetries?: number;
 }
 /**
+ * 任务状态返回对象
+ */
+export interface TaskStatusResponse {
+    /**
+      * 任务状态:
+0 成功
+1 失败
+2 进行中
+      */
+    Status: number;
+    /**
+      * 输出信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: string;
+}
+/**
  * CreateDatahubTask返回参数结构体
  */
 export interface CreateDatahubTaskResponse {
@@ -7310,6 +7340,15 @@ export interface ClickHouseConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsUpdate?: boolean;
+}
+/**
+ * DescribeTaskStatus请求参数结构体
+ */
+export interface DescribeTaskStatusRequest {
+    /**
+      * 任务唯一标记
+      */
+    FlowId: number;
 }
 /**
  * DescribeUser请求参数结构体

@@ -1093,6 +1093,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("SearchStdoutLog", req, cb);
     }
     /**
+     * 批量删除API
+     */
+    async DeleteGatewayApi(req, cb) {
+        return this.request("DeleteGatewayApi", req, cb);
+    }
+    /**
      * 创建工作流
      */
     async CreateTaskFlow(req, cb) {

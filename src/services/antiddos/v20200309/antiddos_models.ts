@@ -2730,7 +2730,7 @@ export interface L4RuleSource {
   Source: string
 
   /**
-   * 权重值，取值[0,100]
+   * 权重值，取值[0,100]，暂不支持
    */
   Weight: number
 

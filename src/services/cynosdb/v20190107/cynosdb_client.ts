@@ -60,6 +60,7 @@ import {
   ModifiableInfo,
   DescribeFlowResponse,
   SetRenewFlagResponse,
+  ExportInstanceErrorLogsRequest,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -68,6 +69,7 @@ import {
   ActivateInstanceRequest,
   DatabaseTables,
   AddClusterSlaveZoneRequest,
+  CynosdbErrorLogItem,
   DescribeAccountAllGrantPrivilegesResponse,
   RollbackDatabase,
   ModifyVipVportRequest,
@@ -112,6 +114,7 @@ import {
   SwitchClusterVpcRequest,
   CynosdbInstance,
   DescribeAuditRuleWithInstanceIdsRequest,
+  ExportInstanceErrorLogsResponse,
   DbTable,
   ModifyClusterSlaveZoneResponse,
   GrantAccountPrivilegesRequest,
@@ -134,6 +137,7 @@ import {
   ModifyClusterParamResponse,
   SecurityGroup,
   DescribeBackupDownloadUrlRequest,
+  SearchClusterDatabasesResponse,
   RollbackTimeRange,
   OfflineInstanceRequest,
   OpenAuditServiceRequest,
@@ -152,6 +156,7 @@ import {
   ResumeServerlessRequest,
   InquirePriceCreateRequest,
   CreateAuditRuleTemplateRequest,
+  GrantAccountPrivilegesResponse,
   ModifyBackupConfigResponse,
   DescribeInstanceSpecsRequest,
   ExportInstanceSlowQueriesRequest,
@@ -193,7 +198,7 @@ import {
   AddInstancesRequest,
   InquirePriceCreateResponse,
   ModifyClusterSlaveZoneRequest,
-  GrantAccountPrivilegesResponse,
+  DescribeInstanceErrorLogsResponse,
   ClusterParamModifyLog,
   DescribeInstanceSlowQueriesRequest,
   CynosdbInstanceDetail,
@@ -201,7 +206,7 @@ import {
   ExportInstanceSlowQueriesResponse,
   CynosdbClusterDetail,
   ResetAccountPasswordRequest,
-  SearchClusterDatabasesResponse,
+  DescribeInstanceErrorLogsRequest,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
   OpenReadOnlyInstanceExclusiveAccessResponse,
@@ -219,6 +224,7 @@ import {
   AuditLog,
   DescribeInstanceSpecsResponse,
   DescribeDBSecurityGroupsRequest,
+  ErrorLogItemExport,
   DescribeAccountAllGrantPrivilegesRequest,
   OfflineInstanceResponse,
   ModifyAuditServiceResponse,
@@ -295,6 +301,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(IsolateInstance)用于隔离实例。
+   */
+  async IsolateInstance(
+    req: IsolateInstanceRequest,
+    cb?: (error: string, rep: IsolateInstanceResponse) => void
+  ): Promise<IsolateInstanceResponse> {
+    return this.request("IsolateInstance", req, cb)
+  }
+
+  /**
    * 查询项目安全组信息
    */
   async DescribeProjectSecurityGroups(
@@ -342,6 +358,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
   ): Promise<DescribeParamTemplatesResponse> {
     return this.request("DescribeParamTemplates", req, cb)
+  }
+
+  /**
+   * 本接口(SearchClusterTables)搜索集群数据表列表
+   */
+  async SearchClusterTables(
+    req: SearchClusterTablesRequest,
+    cb?: (error: string, rep: SearchClusterTablesResponse) => void
+  ): Promise<SearchClusterTablesResponse> {
+    return this.request("SearchClusterTables", req, cb)
   }
 
   /**
@@ -735,13 +761,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(IsolateInstance)用于隔离实例。
+   * 此接口（ExportInstanceErrorLogs）用于导出实例错误日志。
    */
-  async IsolateInstance(
-    req: IsolateInstanceRequest,
-    cb?: (error: string, rep: IsolateInstanceResponse) => void
-  ): Promise<IsolateInstanceResponse> {
-    return this.request("IsolateInstance", req, cb)
+  async ExportInstanceErrorLogs(
+    req: ExportInstanceErrorLogsRequest,
+    cb?: (error: string, rep: ExportInstanceErrorLogsResponse) => void
+  ): Promise<ExportInstanceErrorLogsResponse> {
+    return this.request("ExportInstanceErrorLogs", req, cb)
   }
 
   /**
@@ -975,13 +1001,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterTables)搜索集群数据表列表
+   * 查询实例错误日志列表
    */
-  async SearchClusterTables(
-    req: SearchClusterTablesRequest,
-    cb?: (error: string, rep: SearchClusterTablesResponse) => void
-  ): Promise<SearchClusterTablesResponse> {
-    return this.request("SearchClusterTables", req, cb)
+  async DescribeInstanceErrorLogs(
+    req: DescribeInstanceErrorLogsRequest,
+    cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void
+  ): Promise<DescribeInstanceErrorLogsResponse> {
+    return this.request("DescribeInstanceErrorLogs", req, cb)
   }
 
   /**

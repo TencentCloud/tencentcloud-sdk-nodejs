@@ -2905,6 +2905,12 @@ export interface JsonInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetaFields: Array<string>
+
+  /**
+      * 投递Json格式，0：字符串方式投递；1:以结构化方式投递
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JsonType?: number
 }
 
 /**

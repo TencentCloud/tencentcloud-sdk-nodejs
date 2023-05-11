@@ -9802,37 +9802,17 @@ export interface TsfPageClusterV2 {
     Content: Array<ClusterV2>;
 }
 /**
- * DescribeUploadInfo请求参数结构体
+ * DeleteGatewayApi返回参数结构体
  */
-export interface DescribeUploadInfoRequest {
+export interface DeleteGatewayApiResponse {
     /**
-      * 应用ID
+      * 是否成功
       */
-    ApplicationId: string;
+    Result?: boolean;
     /**
-      * 程序包名
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PkgName: string;
-    /**
-      * 程序包版本
-      */
-    PkgVersion: string;
-    /**
-      * 程序包类型
-      */
-    PkgType: string;
-    /**
-      * 程序包介绍
-      */
-    PkgDesc?: string;
-    /**
-      * 程序包仓库类型
-      */
-    RepositoryType?: string;
-    /**
-      * 程序包仓库id
-      */
-    RepositoryId?: string;
+    RequestId?: string;
 }
 /**
  * TSF基本资源信息概览
@@ -11882,6 +11862,39 @@ export interface StopTaskBatchRequest {
     TaskId?: string;
 }
 /**
+ * DescribeUploadInfo请求参数结构体
+ */
+export interface DescribeUploadInfoRequest {
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 程序包名
+      */
+    PkgName: string;
+    /**
+      * 程序包版本
+      */
+    PkgVersion: string;
+    /**
+      * 程序包类型
+      */
+    PkgType: string;
+    /**
+      * 程序包介绍
+      */
+    PkgDesc?: string;
+    /**
+      * 程序包仓库类型
+      */
+    RepositoryType?: string;
+    /**
+      * 程序包仓库id
+      */
+    RepositoryId?: string;
+}
+/**
  * 配置模板对象
  */
 export interface ConfigTemplate {
@@ -13099,6 +13112,19 @@ export interface DescribePathRewritesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteGatewayApi请求参数结构体
+ */
+export interface DeleteGatewayApiRequest {
+    /**
+      * 分组ID
+      */
+    GroupId: string;
+    /**
+      * Api ID 数组
+      */
+    ApiList: Array<string>;
 }
 /**
  * 添加实例到集群的结果

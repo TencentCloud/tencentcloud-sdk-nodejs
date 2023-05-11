@@ -322,6 +322,11 @@ export interface DescribeSnapshotOperationLogsRequest {
  */
 export interface ModifySnapshotsSharePermissionRequest {
   /**
+   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
+   */
+  SnapshotIds: Array<string>
+
+  /**
    * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。
    */
   AccountIds: Array<string>
@@ -330,11 +335,6 @@ export interface ModifySnapshotsSharePermissionRequest {
    * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
    */
   Permission: string
-
-  /**
-   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
-   */
-  SnapshotIds: Array<string>
 }
 
 /**
@@ -573,7 +573,7 @@ export interface SnapshotCopyResult {
  */
 export interface RenewDiskRequest {
   /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的续费时长。<br>在云盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云盘会按对齐到实例续费后的到期时间来续费。
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云硬盘的续费时长。<br>在云硬盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云硬盘会按对齐到实例续费后的到期时间来续费。
    */
   DiskChargePrepaid: DiskChargePrepaid
 
@@ -1574,7 +1574,7 @@ export interface ApplyDiskBackupRequest {
  */
 export interface ModifyDisksChargeTypeRequest {
   /**
-   * 一个或多个待操作的云硬盘ID。每次请求批量云盘上限为100。
+   * 一个或多个待操作的云硬盘ID。每次请求批量云硬盘上限为100。
    */
   DiskIds: Array<string>
 
@@ -1979,8 +1979,9 @@ export interface Snapshot {
  */
 export interface CreateDisksResponse {
   /**
-   * 创建的云硬盘ID列表。
-   */
+      * 创建的云硬盘ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   DiskIdSet?: Array<string>
 
   /**

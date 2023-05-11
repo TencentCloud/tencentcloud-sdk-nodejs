@@ -431,7 +431,7 @@ import {
   ConfigReleaseLog,
   CreateConfigRequest,
   TsfPageClusterV2,
-  DescribeUploadInfoRequest,
+  DeleteGatewayApiResponse,
   OverviewBasicResourceUsage,
   DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
@@ -523,6 +523,7 @@ import {
   ContainerGroupDetail,
   BindApiGroupRequest,
   StopTaskBatchRequest,
+  DescribeUploadInfoRequest,
   ConfigTemplate,
   DescribeUnitApiUseDetailResponse,
   DescribeInvocationMetricScatterPlotResponse,
@@ -572,6 +573,7 @@ import {
   DisableUnitRuleResponse,
   ModifyApplicationRequest,
   DescribePathRewritesResponse,
+  DeleteGatewayApiRequest,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
@@ -2409,6 +2411,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: SearchStdoutLogResponse) => void
   ): Promise<SearchStdoutLogResponse> {
     return this.request("SearchStdoutLog", req, cb)
+  }
+
+  /**
+   * 批量删除API
+   */
+  async DeleteGatewayApi(
+    req: DeleteGatewayApiRequest,
+    cb?: (error: string, rep: DeleteGatewayApiResponse) => void
+  ): Promise<DeleteGatewayApiResponse> {
+    return this.request("DeleteGatewayApi", req, cb)
   }
 
   /**
