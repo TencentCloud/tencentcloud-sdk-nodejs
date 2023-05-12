@@ -1093,7 +1093,7 @@ export type DescribeAccountBalanceRequest = null
  */
 export interface DescribeBillDetailRequest {
   /**
-   * 偏移量
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
    */
   Offset: number
 
@@ -1108,17 +1108,17 @@ export interface DescribeBillDetailRequest {
   PeriodType?: string
 
   /**
-   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
+   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
    */
   Month?: string
 
   /**
-   * 周期开始时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。(不支持跨月查询)
+   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。(不支持跨月查询)
    */
   BeginTime?: string
 
   /**
-   * 周期结束时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。（不支持跨月查询）
+   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。（不支持跨月查询）
    */
   EndTime?: string
 
@@ -1184,6 +1184,11 @@ export interface DescribeBillDetailRequest {
 备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
       */
   BusinessCode?: string
+
+  /**
+   * 上一次请求返回的上下文信息，翻页查询Month>=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍
+   */
+  Context?: string
 }
 
 /**
@@ -1644,7 +1649,7 @@ export interface BillDetailComponent {
   Cost: string
 
   /**
-   * 折扣率
+   * 折扣率，本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
    */
   Discount: string
 
@@ -1686,7 +1691,7 @@ export interface BillDetailComponent {
   ComponentCode: string
 
   /**
-      * 合同价
+      * 组件单价
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContractPrice: string
@@ -1704,31 +1709,31 @@ export interface BillDetailComponent {
   RiTimeSpan: string
 
   /**
-      * 按组件原价的口径换算的预留实例抵扣金额
+      * 预留实例抵扣组件原价，本产品或服务使用预留实例抵扣的组件原价金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalCostWithRI: string
 
   /**
-      * 节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
+      * 节省计划抵扣率，节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SPDeductionRate: string
 
   /**
-      * 节省计划抵扣的SP包面值
+      * 节省计划抵扣金额，节省计划抵扣的SP包面值
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SPDeduction: string
 
   /**
-      * 按组件原价的口径换算的节省计划抵扣金额
+      * 节省计划抵扣组件原价，节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalCostWithSP: string
 
   /**
-      * 综合了官网折扣、预留实例抵扣、节省计划抵扣的混合折扣率。若没有预留实例抵扣、节省计划抵扣,混合折扣率等于折扣率
+      * 混合折扣率，综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BlendedDiscount: string
@@ -2650,10 +2655,16 @@ export interface DescribeBillDetailResponse {
   DetailSet?: Array<BillDetail>
 
   /**
-      * 总记录数
+      * 总记录数，24小时缓存一次，可能比实际总记录数少
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Total?: number
+
+  /**
+      * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Context?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

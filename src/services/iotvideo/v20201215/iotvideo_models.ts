@@ -3305,6 +3305,12 @@ export interface DeviceInfo {
    * 设备过期时间
    */
   ExpireTime: number
+
+  /**
+      * 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogLevel?: number
 }
 
 /**

@@ -203,6 +203,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DescribeUserAutoSignStatus", req, cb);
     }
     /**
+     * 生成子客编辑企业信息二维码
+     */
+    async CreateChannelSubOrganizationModifyQrCode(req, cb) {
+        return this.request("CreateChannelSubOrganizationModifyQrCode", req, cb);
+    }
+    /**
      * 查询出证报告，返回报告 URL。
      */
     async DescribeFlowEvidenceReport(req, cb) {

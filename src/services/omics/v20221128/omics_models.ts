@@ -16,6 +16,16 @@
  */
 
 /**
+ * RetryRuns返回参数结构体
+ */
+export interface RetryRunsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunApplication返回参数结构体
  */
 export interface RunApplicationResponse {
@@ -131,6 +141,76 @@ export interface DeleteEnvironmentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 组学平台环境详情。
+ */
+export interface Environment {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId?: string
+
+  /**
+   * 环境名称。
+   */
+  Name?: string
+
+  /**
+   * 环境描述信息。
+   */
+  Description?: string
+
+  /**
+   * 环境地域。
+   */
+  Region?: string
+
+  /**
+      * 环境类型，取值范围：
+- KUBERNETES：Kubernetes容器集群
+- HPC：HPC高性能计算集群
+      */
+  Type?: string
+
+  /**
+      * 环境状态，取值范围：
+- INITIALIZING：创建中
+- INITIALIZATION_ERROR：创建失败
+- RUNNING：运行中
+- ERROR：异常
+- DELETING：正在删除
+- DELETE_ERROR：删除失败
+      */
+  Status?: string
+
+  /**
+   * 环境是否可用。环境需要可用才能投递计算任务。
+   */
+  Available?: boolean
+
+  /**
+   * 环境信息。
+   */
+  Message?: string
+
+  /**
+   * 云资源ID。
+   */
+  ResourceIds?: ResourceIds
+
+  /**
+      * 上个工作流UUID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastWorkflowUuid?: string
+
+  /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreationTime?: string
 }
 
 /**
@@ -266,6 +346,55 @@ export interface Run {
 }
 
 /**
+ * 表格列。
+ */
+export interface TableColumn {
+  /**
+      * 列名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Header?: string
+
+  /**
+      * 列数据类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataType?: string
+}
+
+/**
+ * DescribeTablesRows请求参数结构体
+ */
+export interface DescribeTablesRowsRequest {
+  /**
+   * 项目ID。
+   */
+  ProjectId: string
+
+  /**
+   * 表格ID。
+   */
+  TableId: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+      * 过滤器，支持过滤字段：
+- Tr：表格数据，支持模糊查询
+- TableRowUuid：表格行UUID
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeEnvironments返回参数结构体
  */
 export interface DescribeEnvironmentsResponse {
@@ -278,6 +407,26 @@ export interface DescribeEnvironmentsResponse {
    * 环境详情列表。
    */
   Environments?: Array<Environment>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTables返回参数结构体
+ */
+export interface DescribeTablesResponse {
+  /**
+   * 结果总数。
+   */
+  TotalCount?: number
+
+  /**
+   * 表格列表。
+   */
+  Tables?: Array<Table>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -303,6 +452,21 @@ export interface VPCOption {
    * 子网CIDR。
    */
   SubnetCIDRBlock: string
+}
+
+/**
+ * RetryRuns请求参数结构体
+ */
+export interface RetryRunsRequest {
+  /**
+   * 关联项目ID。
+   */
+  ProjectId: string
+
+  /**
+   * 任务UUID。
+   */
+  RunUuids: Array<string>
 }
 
 /**
@@ -674,73 +838,23 @@ export interface EnvironmentConfig {
 }
 
 /**
- * 组学平台环境详情。
+ * DescribeTablesRows返回参数结构体
  */
-export interface Environment {
+export interface DescribeTablesRowsResponse {
   /**
-   * 环境ID。
+   * 结果总数。
    */
-  EnvironmentId?: string
+  TotalCount?: number
 
   /**
-   * 环境名称。
+   * 表格行列表。
    */
-  Name?: string
+  Rows?: Array<TableRow>
 
   /**
-   * 环境描述信息。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Description?: string
-
-  /**
-   * 环境地域。
-   */
-  Region?: string
-
-  /**
-      * 环境类型，取值范围：
-- KUBERNETES：Kubernetes容器集群
-- HPC：HPC高性能计算集群
-      */
-  Type?: string
-
-  /**
-      * 环境状态，取值范围：
-- INITIALIZING：创建中
-- INITIALIZATION_ERROR：创建失败
-- RUNNING：运行中
-- ERROR：异常
-- DELETING：正在删除
-- DELETE_ERROR：删除失败
-      */
-  Status?: string
-
-  /**
-   * 环境是否可用。环境需要可用才能投递计算任务。
-   */
-  Available?: boolean
-
-  /**
-   * 环境信息。
-   */
-  Message?: string
-
-  /**
-   * 云资源ID。
-   */
-  ResourceIds?: ResourceIds
-
-  /**
-      * 上个工作流UUID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LastWorkflowUuid?: string
-
-  /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreationTime?: string
+  RequestId?: string
 }
 
 /**
@@ -761,6 +875,23 @@ export interface CreateEnvironmentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 表格行。
+ */
+export interface TableRow {
+  /**
+      * 表格行UUID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableRowUuid?: string
+
+  /**
+      * 表格行内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content?: Array<string>
 }
 
 /**
@@ -833,6 +964,33 @@ export interface StorageOption {
 }
 
 /**
+ * DescribeTables请求参数结构体
+ */
+export interface DescribeTablesRequest {
+  /**
+   * 项目ID。
+   */
+  ProjectId: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+      * 过滤器，支持过滤字段：
+- Name：表格名称
+- TableId：表格ID
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeEnvironments请求参数结构体
  */
 export interface DescribeEnvironmentsRequest {
@@ -887,6 +1045,53 @@ export interface RunOption {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UseRelativeOutputPaths?: boolean
+}
+
+/**
+ * 表格。
+ */
+export interface Table {
+  /**
+      * 表格ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableId?: string
+
+  /**
+      * 关联项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId?: string
+
+  /**
+      * 表格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 表格描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 表格列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Columns?: Array<TableColumn>
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+      * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Creator?: string
 }
 
 /**

@@ -1478,6 +1478,16 @@ it("monitor.v20180724.DescribePluginOverviews", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeClusterAgentCreatingProgress", async function () {
+    try {
+       const data = await client.DescribeClusterAgentCreatingProgress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeRecordingRules", async function () {
     try {
        const data = await client.DescribeRecordingRules({})

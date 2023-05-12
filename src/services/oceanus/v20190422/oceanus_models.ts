@@ -370,6 +370,11 @@ export interface ModifyJobResponse {
 }
 
 /**
+ * session集群信息
+ */
+export type ClusterSession = null
+
+/**
  * CreateJobConfig返回参数结构体
  */
 export interface CreateJobConfigResponse {
@@ -2026,6 +2031,12 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsNeedManageNode: number
+
+  /**
+      * session集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterSessions?: Array<ClusterSession>
 }
 
 /**

@@ -472,7 +472,7 @@ export interface ModifyInstanceReadOnlyResponse {
  */
 export interface DescribeInstanceZoneInfoRequest {
   /**
-   * 实例Id，如：crs-6ubhgouj
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId?: string
 }
@@ -814,17 +814,17 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组规则。
    */
-  Groups: Array<SecurityGroup>
+  Groups?: Array<SecurityGroup>
 
   /**
-   * 安全组生效内网地址。
+   * 实例内网IPv4地址。
    */
-  VIP: string
+  VIP?: string
 
   /**
-   * 安全组生效内网端口。
+   * 内网端口。
    */
-  VPort: string
+  VPort?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -964,14 +964,14 @@ export interface DescribeInstancesResponse {
  */
 export interface DescribeInstanceZoneInfoResponse {
   /**
-   * 实例节点组的个数
+   * 实例节点组的个数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
-   * 实例节点组列表
+   * 实例节点组列表。
    */
-  ReplicaGroups: Array<ReplicaGroup>
+  ReplicaGroups?: Array<ReplicaGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -984,37 +984,45 @@ export interface DescribeInstanceZoneInfoResponse {
  */
 export interface Account {
   /**
-      * 实例ID
+      * 实例 ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceId: string
 
   /**
-      * 账号名称（如果是主账号，名称为root）
+      * 账号名称。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AccountName: string
 
   /**
-      * 账号描述信息
+      * 账号描述信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
 
   /**
-      * 读写策略：r-只读，w-只写，rw-读写
+      * 读写权限策略。
+- r：只读。
+- w：只写。
+- rw：读写。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Privilege: string
 
   /**
-      * 路由策略：master-主节点，replication-从节点
+      * 只读路由策略。
+- master：主节点。
+- replication：从节点。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReadonlyPolicy: Array<string>
 
   /**
-      * 子账号状态：1-账号变更中，2-账号有效，-4-账号已删除
+      * 子账号状态.
+- 1：账号变更中。
+- 2：账号有效。
+- 4：账号已删除。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
@@ -1055,22 +1063,22 @@ export interface InstanceProxySlowlogDetail {
  */
 export interface SecurityGroupsInboundAndOutbound {
   /**
-   * 执行动作
+   * 标识出入数据库的IP与端口是否被允许。
    */
   Action: string
 
   /**
-   * IP地址
+   * 出入数据库的IP地址
    */
   Ip: string
 
   /**
-   * 端口号
+   * 端口号。
    */
   Port: string
 
   /**
-   * 协议类型
+   * 协议类型。
    */
   Proto: string
 }
@@ -1341,43 +1349,47 @@ export interface ModifyAutoBackupConfigRequest {
  */
 export interface InstanceMultiParam {
   /**
-   * 参数名
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * 参数类型：multi
+   * 参数类型。例如：multi。
    */
   ValueType: string
 
   /**
-   * 修改后是否需要重启：true，false
-   */
+      * 参数修改后是否需要重启。
+- true：需要。
+- false：不需要。
+      */
   NeedRestart: string
 
   /**
-   * 参数默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 当前运行参数值
+   * 当前运行参数值。
    */
   CurrentValue: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   Tips: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   EnumValue: Array<string>
 
   /**
-   * 参数状态, 1: 修改中， 2：修改完成
-   */
+      * 参数修改的状态。
+- 1：修改中。
+- 2：修改完成。
+      */
   Status: number
 }
 
@@ -1396,27 +1408,27 @@ export interface DescribeInstanceDealDetailRequest {
  */
 export interface RedisNode {
   /**
-   * 节点key的个数
+   * Redis 节点上 Key 的个数。
    */
   Keys: number
 
   /**
-   * 节点slot分布
+   * Redis 节点 Slot 分布范围。例如：0-5460。
    */
   Slot: string
 
   /**
-   * 节点的序列ID
+   * 节点的序列 ID。
    */
   NodeId: string
 
   /**
-   * 节点的状态
+   * 节点的状态。
    */
   Status: string
 
   /**
-   * 节点角色
+   * 节点角色。
    */
   Role: string
 }
@@ -2206,8 +2218,9 @@ export interface DescribeDBSecurityGroupsRequest {
   Product: string
 
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+      */
   InstanceId: string
 }
 
@@ -2232,12 +2245,12 @@ export interface InquiryPriceCreateInstanceResponse {
  */
 export interface InstanceSecurityGroupDetail {
   /**
-   * 实例Id
+   * 实例 ID。
    */
   InstanceId: string
 
   /**
-   * 安全组信息
+   * 安全组信息，包括：安全组 ID、安全组名称、安全组出入站规则。
    */
   SecurityGroupDetails: Array<SecurityGroupDetail>
 }
@@ -2247,29 +2260,29 @@ export interface InstanceSecurityGroupDetail {
  */
 export interface DescribeInstanceParamsResponse {
   /**
-   * 实例参数个数
+   * 参数列表总数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
-   * 实例枚举类型参数
+   * 实例枚举类型参数。
    */
-  InstanceEnumParam: Array<InstanceEnumParam>
+  InstanceEnumParam?: Array<InstanceEnumParam>
 
   /**
-   * 实例整型参数
+   * 实例整型参数。
    */
-  InstanceIntegerParam: Array<InstanceIntegerParam>
+  InstanceIntegerParam?: Array<InstanceIntegerParam>
 
   /**
-   * 实例字符型参数
+   * 实例字符型参数。
    */
-  InstanceTextParam: Array<InstanceTextParam>
+  InstanceTextParam?: Array<InstanceTextParam>
 
   /**
-   * 实例多选项型参数
+   * 实例多选项型参数。
    */
-  InstanceMultiParam: Array<InstanceMultiParam>
+  InstanceMultiParam?: Array<InstanceMultiParam>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2653,17 +2666,17 @@ export interface DescribeInstanceMonitorBigKeySizeDistRequest {
  */
 export interface DescribeInstanceAccountRequest {
   /**
-   * 实例ID
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 分页大小
+   * 分页大小。
    */
   Limit: number
 
   /**
-   * 分页偏移量
+   * 分页偏移量。取Limit整数倍。计算公式：offset=limit*(页码-1)。
    */
   Offset: number
 }
@@ -2673,43 +2686,47 @@ export interface DescribeInstanceAccountRequest {
  */
 export interface InstanceTextParam {
   /**
-   * 参数名
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * 参数类型：text
+   * 参数类型。例如：text。
    */
   ValueType: string
 
   /**
-   * 修改后是否需要重启：true，false
-   */
+      * 参数修改后是否需要重启。
+- true：需要。
+- false：不需要。
+      */
   NeedRestart: string
 
   /**
-   * 参数默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 当前运行参数值
+   * 参数当前运行值。
    */
   CurrentValue: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   Tips: string
 
   /**
-   * 参数可取值
+   * 参数可取值。
    */
   TextValue: Array<string>
 
   /**
-   * 参数状态, 1: 修改中， 2：修改完成
-   */
+      * 参数修改状态。
+- 1: 修改中。
+- 2：修改完成。
+      */
   Status: number
 }
 
@@ -3103,7 +3120,7 @@ export interface ModifyNetworkConfigRequest {
  */
 export interface DescribeInstanceSecurityGroupRequest {
   /**
-   * 实例列表
+   * 实例 ID 列表。例如;["crs-f2ho5rsz\n"]
    */
   InstanceIds: Array<string>
 }
@@ -3146,7 +3163,7 @@ export interface InstanceParamHistory {
  */
 export interface DescribeInstanceParamsRequest {
   /**
-   * 实例Id
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId: string
 }
@@ -3531,9 +3548,9 @@ export interface DescribeMaintenanceWindowResponse {
  */
 export interface DescribeInstanceSecurityGroupResponse {
   /**
-   * 实例安全组信息
+   * 实例安全组信息。
    */
-  InstanceSecurityGroupsDetail: Array<InstanceSecurityGroupDetail>
+  InstanceSecurityGroupsDetail?: Array<InstanceSecurityGroupDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3676,7 +3693,7 @@ export interface ManualBackupInstanceResponse {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3883,16 +3900,16 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
- * 实例节点信息
+ * 实例节点组信息
  */
 export interface ReplicaGroup {
   /**
-   * 节点组ID
+   * 节点组 ID。
    */
   GroupId: number
 
   /**
-   * 节点组的名称，主节点为空
+   * 节点组的名称，主节点为空。
    */
   GroupName: string
 
@@ -4289,7 +4306,7 @@ export interface DescribeSlowLogRequest {
   MinQueryTime?: number
 
   /**
-   * 每个页面展示的慢查询条数，默认值为20。
+   * 每个页面展示的慢查询条数，默认值为20。取值范围：[20,1000]。
    */
   Limit?: number
 
@@ -4461,18 +4478,21 @@ export interface UpgradeInstanceResponse {
  */
 export interface ManualBackupInstanceRequest {
   /**
-   * 待操作的实例ID，可通过 DescribeInstance接口返回值中的 InstanceId 获取。
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
    */
   InstanceId: string
 
   /**
-   * 备份的备注信息
+   * 手动备份任务的备注信息。
    */
   Remark?: string
 
   /**
-   * 保存天数。0代表指定默认保留时间
-   */
+      * 备份数据的保存天数。
+- 单位：天；默认值为7天；取值范围：[0.1825]。如果超过 7天，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。
+- 如果不配置该参数，默认与自动备份的保留时间一致。
+- 如果未设置自动备份，默认为7天。
+      */
   StorageDays?: number
 }
 
@@ -5353,32 +5373,33 @@ export interface DescribeTendisSlowLogRequest {
  */
 export interface DescribeProxySlowLogRequest {
   /**
-   * 实例Id
-   */
+      * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+
+      */
   InstanceId: string
 
   /**
-   * 开始时间
+   * 慢查询的开始时间。
    */
   BeginTime: string
 
   /**
-   * 结束时间
+   * 慢查询的结束时间。
    */
   EndTime: string
 
   /**
-   * 慢查询阈值（单位：毫秒）
+   * 慢查询阈值，单位：毫秒。
    */
   MinQueryTime?: number
 
   /**
-   * 页面大小
+   * 分页大小。默认为 20，取值范围[20,1000]。
    */
   Limit?: number
 
   /**
-   * 偏移量，取Limit整数倍
+   * 偏移量，取Limit整数倍。
    */
   Offset?: number
 }
@@ -5388,14 +5409,14 @@ export interface DescribeProxySlowLogRequest {
  */
 export interface DescribeProxySlowLogResponse {
   /**
-   * 慢查询总数
+   * 慢查询总数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
-   * 慢查询详情
+   * 慢查询详情。
    */
-  InstanceProxySlowLogDetail: Array<InstanceProxySlowlogDetail>
+  InstanceProxySlowLogDetail?: Array<InstanceProxySlowlogDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5423,16 +5444,16 @@ export interface ModifyInstanceReadOnlyRequest {
  */
 export interface DescribeInstanceAccountResponse {
   /**
-      * 账号详细信息
+      * 账号详细信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Accounts: Array<Account>
+  Accounts?: Array<Account>
 
   /**
-      * 账号个数
+      * 账号个数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5620,43 +5641,47 @@ export interface HotKeyInfo {
  */
 export interface InstanceEnumParam {
   /**
-   * 参数名
+   * 参数名称。
    */
   ParamName: string
 
   /**
-   * 参数类型：enum
+   * 参数类型，例如：Enum。
    */
   ValueType: string
 
   /**
-   * 修改后是否需要重启：true，false
-   */
+      * 参数值修改后是否需要重启。
+- true：需要。
+- false：不需要。
+      */
   NeedRestart: string
 
   /**
-   * 参数默认值
+   * 参数默认值。
    */
   DefaultValue: string
 
   /**
-   * 当前运行参数值
+   * 参数当前运行值。
    */
   CurrentValue: string
 
   /**
-   * 参数说明
+   * 参数说明。
    */
   Tips: string
 
   /**
-   * 参数可取值
+   * 参数可取的值。
    */
   EnumValue: Array<string>
 
   /**
-   * 参数状态, 1: 修改中， 2：修改完成
-   */
+      * 参数修改状态。
+- 1: 修改中。
+- 2：修改完成。
+      */
   Status: number
 }
 
@@ -5741,37 +5766,37 @@ export interface RemoveReplicationInstanceResponse {
  */
 export interface SecurityGroupDetail {
   /**
-   * 项目Id
+   * 项目ID。
    */
   ProjectId: number
 
   /**
-   * 创建时间
+   * 创建安全组的时间。
    */
   CreateTime: string
 
   /**
-   * 安全组Id
+   * 安全组 ID。
    */
   SecurityGroupId: string
 
   /**
-   * 安全组名称
+   * 安全组名称。
    */
   SecurityGroupName: string
 
   /**
-   * 安全组标记
+   * 安全组标记。
    */
   SecurityGroupRemark: string
 
   /**
-   * 安全组入站规则
+   * 安全组入站规则，即控制访问数据库的来源。
    */
   InboundRule: Array<SecurityGroupsInboundAndOutbound>
 
   /**
-   * 安全组出站规则
+   * 安全组出站规则。
    */
   OutboundRule: Array<SecurityGroupsInboundAndOutbound>
 }

@@ -14,7 +14,7 @@ export declare class Client extends AbstractClient {
     /**
      * 返回用户可用的运行时列表，发布应用时返回的运行时环境，仅shared和private运行时，无sandbox运行时，并且只有running/scaling状态的
      */
-    ListDeployableRuntimesMC(req?: ListDeployableRuntimesMCRequest, cb?: (error: string, rep: ListDeployableRuntimesMCResponse) => void): Promise<ListDeployableRuntimesMCResponse>;
+    ListDeployableRuntimesMC(req: ListDeployableRuntimesMCRequest, cb?: (error: string, rep: ListDeployableRuntimesMCResponse) => void): Promise<ListDeployableRuntimesMCResponse>;
     /**
      * 获取运行时资源监控详情，cpu，memory，bandwidth
      */

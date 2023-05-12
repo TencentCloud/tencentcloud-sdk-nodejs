@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, DescribeRunsRequest, DescribeEnvironmentsResponse, ImportTableFileRequest, RunApplicationRequest, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, CreateEnvironmentResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
+import { RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, DescribeRunsRequest, DescribeTablesRowsRequest, DescribeEnvironmentsResponse, DescribeTablesResponse, RetryRunsRequest, ImportTableFileRequest, RunApplicationRequest, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, DescribeTablesRowsResponse, CreateEnvironmentResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeTablesRequest, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
 /**
  * omics client
  * @class
@@ -8,9 +8,9 @@ import { RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, Impo
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 查询作业详情。
+     * 查询表格行数据。
      */
-    GetRunCalls(req: GetRunCallsRequest, cb?: (error: string, rep: GetRunCallsResponse) => void): Promise<GetRunCallsResponse>;
+    DescribeTablesRows(req: DescribeTablesRowsRequest, cb?: (error: string, rep: DescribeTablesRowsResponse) => void): Promise<DescribeTablesRowsResponse>;
     /**
      * 查询环境列表。
      */
@@ -20,13 +20,21 @@ export declare class Client extends AbstractClient {
      */
     ImportTableFile(req: ImportTableFileRequest, cb?: (error: string, rep: ImportTableFileResponse) => void): Promise<ImportTableFileResponse>;
     /**
-     * 创建组学平台计算环境。
+     * 查询任务详情。
      */
-    CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
+    GetRunStatus(req: GetRunStatusRequest, cb?: (error: string, rep: GetRunStatusResponse) => void): Promise<GetRunStatusResponse>;
     /**
      * 运行应用。
      */
     RunApplication(req: RunApplicationRequest, cb?: (error: string, rep: RunApplicationResponse) => void): Promise<RunApplicationResponse>;
+    /**
+     * 创建组学平台计算环境。
+     */
+    CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
+    /**
+     * 重试任务。
+     */
+    RetryRuns(req: RetryRunsRequest, cb?: (error: string, rep: RetryRunsResponse) => void): Promise<RetryRunsResponse>;
     /**
      * 查询任务列表。
      */
@@ -40,7 +48,11 @@ export declare class Client extends AbstractClient {
      */
     DeleteEnvironment(req: DeleteEnvironmentRequest, cb?: (error: string, rep: DeleteEnvironmentResponse) => void): Promise<DeleteEnvironmentResponse>;
     /**
-     * 查询任务详情。
+     * 查询表格。
      */
-    GetRunStatus(req: GetRunStatusRequest, cb?: (error: string, rep: GetRunStatusResponse) => void): Promise<GetRunStatusResponse>;
+    DescribeTables(req: DescribeTablesRequest, cb?: (error: string, rep: DescribeTablesResponse) => void): Promise<DescribeTablesResponse>;
+    /**
+     * 查询作业详情。
+     */
+    GetRunCalls(req: GetRunCallsRequest, cb?: (error: string, rep: GetRunCallsResponse) => void): Promise<GetRunCallsResponse>;
 }

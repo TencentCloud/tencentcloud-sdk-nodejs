@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     CleanUpInstance(req: CleanUpInstanceRequest, cb?: (error: string, rep: CleanUpInstanceResponse) => void): Promise<CleanUpInstanceResponse>;
     /**
-     * 查看实例子账号信息
+     * 本接口（DescribeInstanceAccount）用于查看实例子账号信息。
      */
     DescribeInstanceAccount(req: DescribeInstanceAccountRequest, cb?: (error: string, rep: DescribeInstanceAccountResponse) => void): Promise<DescribeInstanceAccountResponse>;
     /**
@@ -60,7 +60,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceAccount(req: ModifyInstanceAccountRequest, cb?: (error: string, rep: ModifyInstanceAccountResponse) => void): Promise<ModifyInstanceAccountResponse>;
     /**
-     * 查询实例安全组信息
+     * 本接口（DescribeInstanceSecurityGroup）用于查询实例安全组信息。
      */
     DescribeInstanceSecurityGroup(req: DescribeInstanceSecurityGroupRequest, cb?: (error: string, rep: DescribeInstanceSecurityGroupResponse) => void): Promise<DescribeInstanceSecurityGroupResponse>;
     /**
@@ -168,7 +168,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceCreateInstance(req: InquiryPriceCreateInstanceRequest, cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void): Promise<InquiryPriceCreateInstanceResponse>;
     /**
-     * 查询实例参数列表
+     * 本接口（DescribeInstanceParams）用于查询实例参数列表。
      */
     DescribeInstanceParams(req: DescribeInstanceParamsRequest, cb?: (error: string, rep: DescribeInstanceParamsResponse) => void): Promise<DescribeInstanceParamsResponse>;
     /**
@@ -184,7 +184,7 @@ export declare class Client extends AbstractClient {
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
-     * 手动备份Redis实例
+     * 本接口（ManualBackupInstance）用于手动备份Redis实例。
      */
     ManualBackupInstance(req: ManualBackupInstanceRequest, cb?: (error: string, rep: ManualBackupInstanceResponse) => void): Promise<ManualBackupInstanceResponse>;
     /**
@@ -284,7 +284,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupDownloadRestriction(req?: DescribeBackupDownloadRestrictionRequest, cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void): Promise<DescribeBackupDownloadRestrictionResponse>;
     /**
-     * 查询Redis节点详细信息
+     * 本接口（DescribeInstanceZoneInfo）用于查询 Redis 节点详细信息。
      */
     DescribeInstanceZoneInfo(req: DescribeInstanceZoneInfoRequest, cb?: (error: string, rep: DescribeInstanceZoneInfoResponse) => void): Promise<DescribeInstanceZoneInfoResponse>;
     /**
@@ -352,7 +352,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**
-     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * 本接口（DescribeDBSecurityGroups）用于查询实例的安全组详情。
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
     /**

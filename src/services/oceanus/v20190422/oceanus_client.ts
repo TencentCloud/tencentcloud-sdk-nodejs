@@ -32,6 +32,7 @@ import {
   StopJobDescription,
   CreateFolderRequest,
   ModifyJobResponse,
+  ClusterSession,
   CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,

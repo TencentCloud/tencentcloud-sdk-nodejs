@@ -396,6 +396,51 @@ export interface CreateConnectResourceResponse {
     RequestId?: string;
 }
 /**
+ * Es修改连接源参数
+ */
+export interface EsModifyConnectParam {
+    /**
+      * Es连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource: string;
+    /**
+      * Es的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
+    /**
+      * Es连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceVip?: string;
+    /**
+      * Es连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId?: string;
+    /**
+      * Es连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName?: string;
+    /**
+      * Es连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Password?: string;
+    /**
+      * Es连接源是否为自建集群【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SelfBuilt?: boolean;
+    /**
+      * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsUpdate?: boolean;
+}
+/**
  * Topic消息保留时间配置返回信息
  */
 export interface TopicRetentionTimeConfigRsp {
@@ -1775,6 +1820,27 @@ export interface CreateTokenResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTopicFlowRanking请求参数结构体
+ */
+export interface DescribeTopicFlowRankingRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 排行类别(PRO-Topic生产流量/CON-Topic消费流量)
+      */
+    RankingType: string;
+    /**
+      * 排行起始日期
+      */
+    BeginDate?: string;
+    /**
+      * 排行结束日期
+      */
+    EndDate?: string;
+}
+/**
  * 动态硬盘扩容配置
  */
 export interface DynamicDiskConfig {
@@ -1798,6 +1864,41 @@ export interface DynamicDiskConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxDiskSpace?: number;
+}
+/**
+ * topic消息堆积、占用磁盘排行
+ */
+export interface TopicMessageHeapRanking {
+    /**
+      * 主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId: string;
+    /**
+      * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName: string;
+    /**
+      * 分区数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PartitionNum: number;
+    /**
+      * 副本数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplicaNum: number;
+    /**
+      * Topic 流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicTraffic: string;
+    /**
+      * topic消息堆积/占用磁盘
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageHeap: number;
 }
 /**
  * Doris 连接源参数
@@ -1850,46 +1951,33 @@ export interface DorisConnectParam {
     BePort?: number;
 }
 /**
- * zone信息实体
+ * topic 流量排行
  */
-export interface ZoneInfo {
+export interface TopicFlowRanking {
     /**
-      * zone的id
+      * 主题Id
       */
-    ZoneId: string;
+    TopicId: string;
     /**
-      * 是否内部APP
+      * 主题名称
       */
-    IsInternalApp: number;
+    TopicName: string;
     /**
-      * app id
+      * 分区数
       */
-    AppId: number;
+    PartitionNum: number;
     /**
-      * 标识
+      * 副本数
       */
-    Flag: boolean;
+    ReplicaNum: number;
     /**
-      * zone名称
+      * Topic 流量
       */
-    ZoneName: string;
+    TopicTraffic: string;
     /**
-      * zone状态
+      * Topic 消息堆积
       */
-    ZoneStatus: number;
-    /**
-      * 额外标识
-      */
-    Exflag: string;
-    /**
-      * json对象，key为机型，value true为售罄，false为未售罄
-      */
-    SoldOut: string;
-    /**
-      * 标准版售罄信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SalesInfo: Array<SaleInfo>;
+    MessageHeap: number;
 }
 /**
  * DescribeTopicSubscribeGroup返回参数结构体
@@ -4521,6 +4609,19 @@ export interface CreateTopicResponse {
     RequestId?: string;
 }
 /**
+ * 消费者组消费速度排行
+ */
+export interface ConsumerGroupSpeed {
+    /**
+      * 消费者组名称
+      */
+    ConsumerGroupName: string;
+    /**
+      * 消费速度 Count/Minute
+      */
+    Speed: number;
+}
+/**
  * 虚拟IP实体
  */
 export interface VipEntity {
@@ -5151,6 +5252,48 @@ export interface BatchCreateAclResponse {
     RequestId?: string;
 }
 /**
+ * zone信息实体
+ */
+export interface ZoneInfo {
+    /**
+      * zone的id
+      */
+    ZoneId: string;
+    /**
+      * 是否内部APP
+      */
+    IsInternalApp: number;
+    /**
+      * app id
+      */
+    AppId: number;
+    /**
+      * 标识
+      */
+    Flag: boolean;
+    /**
+      * zone名称
+      */
+    ZoneName: string;
+    /**
+      * zone状态
+      */
+    ZoneStatus: number;
+    /**
+      * 额外标识
+      */
+    Exflag: string;
+    /**
+      * json对象，key为机型，value true为售罄，false为未售罄
+      */
+    SoldOut: string;
+    /**
+      * 标准版售罄信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SalesInfo: Array<SaleInfo>;
+}
+/**
  * ModifyInstancePre返回参数结构体
  */
 export interface ModifyInstancePreResponse {
@@ -5464,6 +5607,24 @@ export interface SubstrParam {
       * 截取截止位置
       */
     End: number;
+}
+/**
+ * topic 生产消息数据，消费者数据
+ */
+export interface TopicFlowRankingResult {
+    /**
+      * Topic 流量数组
+      */
+    TopicFlow: Array<TopicFlowRanking>;
+    /**
+      * 消费者组消费速度排行速度
+      */
+    ConsumeSpeed: Array<ConsumerGroupSpeed>;
+    /**
+      * Topic 消息堆积/占用磁盘排行
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicMessageHeap: Array<TopicMessageHeapRanking>;
 }
 /**
  * FetchMessageByOffset返回参数结构体
@@ -6289,49 +6450,17 @@ export interface ModifyDatahubTopicResponse {
     RequestId?: string;
 }
 /**
- * Es修改连接源参数
+ * DescribeTopicFlowRanking返回参数结构体
  */
-export interface EsModifyConnectParam {
+export interface DescribeTopicFlowRankingResponse {
     /**
-      * Es连接源的实例资源【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+      * 流量排行
       */
-    Resource: string;
+    Result: TopicFlowRankingResult;
     /**
-      * Es的连接port【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Port?: number;
-    /**
-      * Es连接源的实例vip【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceVip?: string;
-    /**
-      * Es连接源的vpcId【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UniqVpcId?: string;
-    /**
-      * Es连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserName?: string;
-    /**
-      * Es连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Password?: string;
-    /**
-      * Es连接源是否为自建集群【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SelfBuilt?: boolean;
-    /**
-      * 是否更新到关联的Datahub任务
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsUpdate?: boolean;
+    RequestId?: string;
 }
 /**
  * ModifyConnectResource返回参数结构体

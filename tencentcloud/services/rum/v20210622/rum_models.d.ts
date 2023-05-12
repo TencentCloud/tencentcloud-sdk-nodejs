@@ -3688,6 +3688,11 @@ export interface RumProject {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProjectStatus: number;
+    /**
+      * 日志接入点，用户忽略。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessPoint?: string;
 }
 /**
  * DescribeDataSetUrlStatistics返回参数结构体

@@ -71,7 +71,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotificationConfigurations", req, cb);
     }
     /**
-     * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无实例且当前未在执行伸缩活动。
+     * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无运行中（IN_SERVICE）状态的实例且当前未在执行伸缩活动。删除伸缩组后，创建失败（CREATION_FAILED）、中止失败（TERMINATION_FAILED）、解绑失败（DETACH_FAILED）等非运行中状态的实例不会被销毁。
      */
     async DeleteAutoScalingGroup(req, cb) {
         return this.request("DeleteAutoScalingGroup", req, cb);

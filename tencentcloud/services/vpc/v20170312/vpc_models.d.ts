@@ -103,6 +103,18 @@ export interface SecurityGroupLimitSet {
       * 实例关联安全组数
       */
     InstanceSecurityGroupLimit: number;
+    /**
+      * 安全组展开后的规则数限制
+      */
+    SecurityGroupExtendedPolicyLimit?: number;
+    /**
+      * 被引用的安全组关联CVM、ENI的实例配额
+      */
+    SecurityGroupReferedCvmAndEniLimit?: number;
+    /**
+      * 被引用的安全组关联数据库、LB等服务实例配额
+      */
+    SecurityGroupReferedSvcLimit?: number;
 }
 /**
  * LockCcns请求参数结构体
@@ -1423,14 +1435,17 @@ export interface DisassociateNetworkInterfaceSecurityGroupsRequest {
 export interface SecurityGroupPolicySet {
     /**
       * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Version?: string;
     /**
       * 出站规则。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Egress?: Array<SecurityGroupPolicy>;
     /**
       * 入站规则。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Ingress?: Array<SecurityGroupPolicy>;
 }
@@ -4275,7 +4290,7 @@ export interface SecurityGroupPolicy {
       */
     ServiceTemplate?: ServiceTemplateSpecification;
     /**
-      * 网段或IP(互斥)。
+      * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。
       */
     CidrBlock?: string;
     /**

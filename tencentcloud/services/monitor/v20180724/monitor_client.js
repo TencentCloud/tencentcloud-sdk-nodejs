@@ -937,6 +937,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePluginOverviews", req, cb);
     }
     /**
+     * 获取prom实例中集群详细的关联状态
+     */
+    async DescribeClusterAgentCreatingProgress(req, cb) {
+        return this.request("DescribeClusterAgentCreatingProgress", req, cb);
+    }
+    /**
      * 根据条件查询 Prometheus 预聚合规则
      */
     async DescribeRecordingRules(req, cb) {

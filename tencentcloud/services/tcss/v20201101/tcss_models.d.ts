@@ -18582,6 +18582,11 @@ export interface NetworkAuditRecord {
       * 操作人uin
       */
     Uin: string;
+    /**
+      * 策略id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyId?: number;
 }
 /**
  * UpdateAssetImageRegistryRegistryDetail请求参数结构体

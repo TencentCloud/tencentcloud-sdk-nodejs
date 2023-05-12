@@ -80,6 +80,7 @@ import {
   CreateFlowSignUrlResponse,
   DescribeFileUrlsRequest,
   FormField,
+  CreateChannelSubOrganizationModifyQrCodeRequest,
   UserInfo,
   CreateFlowApproversRequest,
   Staff,
@@ -88,7 +89,7 @@ import {
   GroupOrganization,
   DeleteIntegrationRoleUsersResponse,
   CreateDocumentRequest,
-  RemindFlowRecords,
+  FlowDetailInfo,
   CreatePreparedPersonalEsignResponse,
   DescribeOrganizationSealsResponse,
   DeleteIntegrationEmployeesRequest,
@@ -100,7 +101,7 @@ import {
   CreateFlowSignUrlRequest,
   CreateReleaseFlowRequest,
   CreateIntegrationUserRolesRequest,
-  FlowDetailInfo,
+  CreateChannelSubOrganizationModifyQrCodeResponse,
   SuccessUpdateStaffData,
   CreateFlowByFilesResponse,
   UploadFilesResponse,
@@ -114,6 +115,7 @@ import {
   CreateStaffResult,
   CreateUserAutoSignEnableUrlRequest,
   DescribeIntegrationMainOrganizationUserResponse,
+  RemindFlowRecords,
   FailedCreateStaffData,
   ApproverRestriction,
   DeleteSealPoliciesRequest,
@@ -442,6 +444,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: DescribeUserAutoSignStatusResponse) => void
   ): Promise<DescribeUserAutoSignStatusResponse> {
     return this.request("DescribeUserAutoSignStatus", req, cb)
+  }
+
+  /**
+   * 生成子客编辑企业信息二维码
+   */
+  async CreateChannelSubOrganizationModifyQrCode(
+    req: CreateChannelSubOrganizationModifyQrCodeRequest,
+    cb?: (error: string, rep: CreateChannelSubOrganizationModifyQrCodeResponse) => void
+  ): Promise<CreateChannelSubOrganizationModifyQrCodeResponse> {
+    return this.request("CreateChannelSubOrganizationModifyQrCode", req, cb)
   }
 
   /**

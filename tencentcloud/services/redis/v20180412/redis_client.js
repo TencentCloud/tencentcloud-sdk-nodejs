@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CleanUpInstance", req, cb);
     }
     /**
-     * 查看实例子账号信息
+     * 本接口（DescribeInstanceAccount）用于查看实例子账号信息。
      */
     async DescribeInstanceAccount(req, cb) {
         return this.request("DescribeInstanceAccount", req, cb);
@@ -106,7 +106,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceAccount", req, cb);
     }
     /**
-     * 查询实例安全组信息
+     * 本接口（DescribeInstanceSecurityGroup）用于查询实例安全组信息。
      */
     async DescribeInstanceSecurityGroup(req, cb) {
         return this.request("DescribeInstanceSecurityGroup", req, cb);
@@ -268,7 +268,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
-     * 查询实例参数列表
+     * 本接口（DescribeInstanceParams）用于查询实例参数列表。
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
@@ -292,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 手动备份Redis实例
+     * 本接口（ManualBackupInstance）用于手动备份Redis实例。
      */
     async ManualBackupInstance(req, cb) {
         return this.request("ManualBackupInstance", req, cb);
@@ -442,7 +442,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadRestriction", req, cb);
     }
     /**
-     * 查询Redis节点详细信息
+     * 本接口（DescribeInstanceZoneInfo）用于查询 Redis 节点详细信息。
      */
     async DescribeInstanceZoneInfo(req, cb) {
         return this.request("DescribeInstanceZoneInfo", req, cb);
@@ -544,7 +544,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeInstance", req, cb);
     }
     /**
-     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * 本接口（DescribeDBSecurityGroups）用于查询实例的安全组详情。
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);

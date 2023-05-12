@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RetryRunsResponse,
   RunApplicationResponse,
   ExecutionTime,
   RunStatusCount,
@@ -25,11 +26,16 @@ import {
   DescribeRunsResponse,
   ImportTableFileResponse,
   DeleteEnvironmentResponse,
+  Environment,
   GetRunCallsRequest,
   DescribeRunsRequest,
   Run,
+  TableColumn,
+  DescribeTablesRowsRequest,
   DescribeEnvironmentsResponse,
+  DescribeTablesResponse,
   VPCOption,
+  RetryRunsRequest,
   ImportTableFileRequest,
   ClusterOption,
   RunApplicationRequest,
@@ -41,13 +47,16 @@ import {
   ResourceIds,
   DescribeRunGroupsResponse,
   EnvironmentConfig,
-  Environment,
+  DescribeTablesRowsResponse,
   CreateEnvironmentResponse,
+  TableRow,
   DescribeRunGroupsRequest,
   GetRunStatusResponse,
   StorageOption,
+  DescribeTablesRequest,
   DescribeEnvironmentsRequest,
   RunOption,
+  Table,
   CVMOption,
   RunMetadata,
   CreateEnvironmentRequest,
@@ -63,13 +72,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询作业详情。
+   * 查询表格行数据。
    */
-  async GetRunCalls(
-    req: GetRunCallsRequest,
-    cb?: (error: string, rep: GetRunCallsResponse) => void
-  ): Promise<GetRunCallsResponse> {
-    return this.request("GetRunCalls", req, cb)
+  async DescribeTablesRows(
+    req: DescribeTablesRowsRequest,
+    cb?: (error: string, rep: DescribeTablesRowsResponse) => void
+  ): Promise<DescribeTablesRowsResponse> {
+    return this.request("DescribeTablesRows", req, cb)
   }
 
   /**
@@ -93,13 +102,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建组学平台计算环境。
+   * 查询任务详情。
    */
-  async CreateEnvironment(
-    req: CreateEnvironmentRequest,
-    cb?: (error: string, rep: CreateEnvironmentResponse) => void
-  ): Promise<CreateEnvironmentResponse> {
-    return this.request("CreateEnvironment", req, cb)
+  async GetRunStatus(
+    req: GetRunStatusRequest,
+    cb?: (error: string, rep: GetRunStatusResponse) => void
+  ): Promise<GetRunStatusResponse> {
+    return this.request("GetRunStatus", req, cb)
   }
 
   /**
@@ -110,6 +119,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunApplicationResponse) => void
   ): Promise<RunApplicationResponse> {
     return this.request("RunApplication", req, cb)
+  }
+
+  /**
+   * 创建组学平台计算环境。
+   */
+  async CreateEnvironment(
+    req: CreateEnvironmentRequest,
+    cb?: (error: string, rep: CreateEnvironmentResponse) => void
+  ): Promise<CreateEnvironmentResponse> {
+    return this.request("CreateEnvironment", req, cb)
+  }
+
+  /**
+   * 重试任务。
+   */
+  async RetryRuns(
+    req: RetryRunsRequest,
+    cb?: (error: string, rep: RetryRunsResponse) => void
+  ): Promise<RetryRunsResponse> {
+    return this.request("RetryRuns", req, cb)
   }
 
   /**
@@ -143,12 +172,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务详情。
+   * 查询表格。
    */
-  async GetRunStatus(
-    req: GetRunStatusRequest,
-    cb?: (error: string, rep: GetRunStatusResponse) => void
-  ): Promise<GetRunStatusResponse> {
-    return this.request("GetRunStatus", req, cb)
+  async DescribeTables(
+    req: DescribeTablesRequest,
+    cb?: (error: string, rep: DescribeTablesResponse) => void
+  ): Promise<DescribeTablesResponse> {
+    return this.request("DescribeTables", req, cb)
+  }
+
+  /**
+   * 查询作业详情。
+   */
+  async GetRunCalls(
+    req: GetRunCallsRequest,
+    cb?: (error: string, rep: GetRunCallsResponse) => void
+  ): Promise<GetRunCallsResponse> {
+    return this.request("GetRunCalls", req, cb)
   }
 }

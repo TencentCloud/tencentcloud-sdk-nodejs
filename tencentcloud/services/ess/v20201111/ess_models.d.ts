@@ -1619,6 +1619,19 @@ DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo�
     ComponentName?: string;
 }
 /**
+ * CreateChannelSubOrganizationModifyQrCode请求参数结构体
+ */
+export interface CreateChannelSubOrganizationModifyQrCodeRequest {
+    /**
+      * 操作人
+      */
+    Operator: UserInfo;
+    /**
+      * 应用编号
+      */
+    ApplicationId: string;
+}
+/**
  * 用户信息
  */
 export interface UserInfo {
@@ -1891,21 +1904,64 @@ export interface CreateDocumentRequest {
     ClientToken?: string;
 }
 /**
- * 催办接口返回详细信息
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
-export interface RemindFlowRecords {
+export interface FlowDetailInfo {
     /**
-      * 是否能够催办
-      */
-    CanRemind: boolean;
-    /**
-      * 合同id
+      * 合同(流程)的Id
       */
     FlowId: string;
     /**
-      * 催办详情
+      * 合同(流程)的名字
       */
-    RemindMessage: string;
+    FlowName: string;
+    /**
+      * 合同(流程)的类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowType: string;
+    /**
+      * 流程状态
+- 0 还没有发起
+- 1 未签署
+- 2 部分签署
+- 3 已退回
+- 4 完成签署
+- 5 已过期
+- 6 已取消
+- 7 还没有预发起
+- 8 等待填写
+- 9 部分填写
+- 10 拒填
+      */
+    FlowStatus: number;
+    /**
+      * 合同(流程)的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowMessage: string;
+    /**
+      * 流程的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowDescription: string;
+    /**
+      * 合同(流程)的创建时间戳
+      */
+    CreatedOn: number;
+    /**
+      * 合同(流程)的签署人数组
+      */
+    FlowApproverInfos: Array<FlowApproverDetail>;
+    /**
+      * 合同(流程)的关注方信息列表
+      */
+    CcInfos?: Array<FlowApproverDetail>;
+    /**
+      * 合同发起人UserId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Creator?: string;
 }
 /**
  * CreatePreparedPersonalEsign返回参数结构体
@@ -2117,64 +2173,21 @@ export interface CreateIntegrationUserRolesRequest {
     Agent?: Agent;
 }
 /**
- * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ * CreateChannelSubOrganizationModifyQrCode返回参数结构体
  */
-export interface FlowDetailInfo {
+export interface CreateChannelSubOrganizationModifyQrCodeResponse {
     /**
-      * 合同(流程)的Id
+      * 二维码下载链接
       */
-    FlowId: string;
+    QrCodeUrl?: string;
     /**
-      * 合同(流程)的名字
+      * 二维码失效时间 unix 时间戳 精确到秒
       */
-    FlowName: string;
+    ExpiredTime?: number;
     /**
-      * 合同(流程)的类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    FlowType: string;
-    /**
-      * 流程状态
-- 0 还没有发起
-- 1 未签署
-- 2 部分签署
-- 3 已退回
-- 4 完成签署
-- 5 已过期
-- 6 已取消
-- 7 还没有预发起
-- 8 等待填写
-- 9 部分填写
-- 10 拒填
-      */
-    FlowStatus: number;
-    /**
-      * 合同(流程)的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowMessage: string;
-    /**
-      * 流程的描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowDescription: string;
-    /**
-      * 合同(流程)的创建时间戳
-      */
-    CreatedOn: number;
-    /**
-      * 合同(流程)的签署人数组
-      */
-    FlowApproverInfos: Array<FlowApproverDetail>;
-    /**
-      * 合同(流程)的关注方信息列表
-      */
-    CcInfos?: Array<FlowApproverDetail>;
-    /**
-      * 合同发起人UserId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Creator?: string;
+    RequestId?: string;
 }
 /**
  * 更新员工信息成功返回的数据信息
@@ -2503,6 +2516,23 @@ export interface DescribeIntegrationMainOrganizationUserResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 催办接口返回详细信息
+ */
+export interface RemindFlowRecords {
+    /**
+      * 是否能够催办
+      */
+    CanRemind: boolean;
+    /**
+      * 合同id
+      */
+    FlowId: string;
+    /**
+      * 催办详情
+      */
+    RemindMessage: string;
 }
 /**
  * 创建员工的失败数据

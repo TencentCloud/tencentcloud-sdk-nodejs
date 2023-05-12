@@ -3011,6 +3011,10 @@ export interface CreateServiceDiscoveryResponse {
     RequestId?: string;
 }
 /**
+ * DescribeClusterAgentCreatingProgress请求参数结构体
+ */
+export declare type DescribeClusterAgentCreatingProgressRequest = null;
+/**
  * EnableSSOCamCheck返回参数结构体
  */
 export interface EnableSSOCamCheckResponse {
@@ -5829,33 +5833,13 @@ export interface MetricSet {
     MetricEName: string;
 }
 /**
- * 实例的授权信息
+ * DescribePrometheusRecordRuleYaml返回参数结构体
  */
-export interface PrometheusInstanceGrantInfo {
+export interface DescribePrometheusRecordRuleYamlResponse {
     /**
-      * 是否有计费操作权限(1=有，2=无)
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    HasChargeOperation: number;
-    /**
-      * 是否显示VPC信息的权限(1=有，2=无)
-      */
-    HasVpcDisplay: number;
-    /**
-      * 是否可修改Grafana的状态(1=有，2=无)
-      */
-    HasGrafanaStatusChange: number;
-    /**
-      * 是否有管理agent的权限(1=有，2=无)
-      */
-    HasAgentManage: number;
-    /**
-      * 是否有管理TKE集成的权限(1=有，2=无)
-      */
-    HasTkeManage: number;
-    /**
-      * 是否显示API等信息(1=有, 2=无)
-      */
-    HasApiOperation: number;
+    RequestId?: string;
 }
 /**
  * 模板列表
@@ -6340,13 +6324,33 @@ export interface DescribeAlarmHistoriesRequest {
     PolicyIds?: Array<string>;
 }
 /**
- * DescribePrometheusRecordRuleYaml返回参数结构体
+ * 实例的授权信息
  */
-export interface DescribePrometheusRecordRuleYamlResponse {
+export interface PrometheusInstanceGrantInfo {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 是否有计费操作权限(1=有，2=无)
       */
-    RequestId?: string;
+    HasChargeOperation: number;
+    /**
+      * 是否显示VPC信息的权限(1=有，2=无)
+      */
+    HasVpcDisplay: number;
+    /**
+      * 是否可修改Grafana的状态(1=有，2=无)
+      */
+    HasGrafanaStatusChange: number;
+    /**
+      * 是否有管理agent的权限(1=有，2=无)
+      */
+    HasAgentManage: number;
+    /**
+      * 是否有管理TKE集成的权限(1=有，2=无)
+      */
+    HasTkeManage: number;
+    /**
+      * 是否显示API等信息(1=有, 2=无)
+      */
+    HasApiOperation: number;
 }
 /**
  * DeletePolicyGroup请求参数结构体
@@ -7834,13 +7838,25 @@ export interface UpdatePrometheusAgentStatusRequest {
     Status: number;
 }
 /**
- * DescribeAlarmNoticeCallbacks请求参数结构体
+ * DescribeGrafanaInstances返回参数结构体
  */
-export interface DescribeAlarmNoticeCallbacksRequest {
+export interface DescribeGrafanaInstancesResponse {
     /**
-      * 模块名，这里填“monitor”
+      * 已废弃，请使用 Instances
       */
-    Module: string;
+    InstanceSet: Array<GrafanaInstanceInfo>;
+    /**
+      * 符合查询条件的实例总数
+      */
+    TotalCount: number;
+    /**
+      * 实例列表
+      */
+    Instances: Array<GrafanaInstanceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CheckIsPrometheusNewUser返回参数结构体
@@ -7985,6 +8001,15 @@ export interface EventCondition {
       * 规则ID
       */
     RuleID: string;
+}
+/**
+ * DescribeClusterAgentCreatingProgress返回参数结构体
+ */
+export interface DescribeClusterAgentCreatingProgressResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateAlertRule返回参数结构体
@@ -9529,6 +9554,15 @@ export interface DeletePrometheusRecordRuleYamlRequest {
     Names: Array<string>;
 }
 /**
+ * DescribeAlarmNoticeCallbacks请求参数结构体
+ */
+export interface DescribeAlarmNoticeCallbacksRequest {
+    /**
+      * 模块名，这里填“monitor”
+      */
+    Module: string;
+}
+/**
  * 指标名称和值的封装
  */
 export interface MetricDatum {
@@ -9695,27 +9729,6 @@ export interface TerminatePrometheusInstancesResponse {
  * UpdateSSOAccount返回参数结构体
  */
 export interface UpdateSSOAccountResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeGrafanaInstances返回参数结构体
- */
-export interface DescribeGrafanaInstancesResponse {
-    /**
-      * 已废弃，请使用 Instances
-      */
-    InstanceSet: Array<GrafanaInstanceInfo>;
-    /**
-      * 符合查询条件的实例总数
-      */
-    TotalCount: number;
-    /**
-      * 实例列表
-      */
-    Instances: Array<GrafanaInstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

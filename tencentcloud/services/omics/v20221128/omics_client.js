@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("omics.tencentcloudapi.com", "2022-11-28", clientConfig);
     }
     /**
-     * 查询作业详情。
+     * 查询表格行数据。
      */
-    async GetRunCalls(req, cb) {
-        return this.request("GetRunCalls", req, cb);
+    async DescribeTablesRows(req, cb) {
+        return this.request("DescribeTablesRows", req, cb);
     }
     /**
      * 查询环境列表。
@@ -46,16 +46,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportTableFile", req, cb);
     }
     /**
-     * 创建组学平台计算环境。
+     * 查询任务详情。
      */
-    async CreateEnvironment(req, cb) {
-        return this.request("CreateEnvironment", req, cb);
+    async GetRunStatus(req, cb) {
+        return this.request("GetRunStatus", req, cb);
     }
     /**
      * 运行应用。
      */
     async RunApplication(req, cb) {
         return this.request("RunApplication", req, cb);
+    }
+    /**
+     * 创建组学平台计算环境。
+     */
+    async CreateEnvironment(req, cb) {
+        return this.request("CreateEnvironment", req, cb);
+    }
+    /**
+     * 重试任务。
+     */
+    async RetryRuns(req, cb) {
+        return this.request("RetryRuns", req, cb);
     }
     /**
      * 查询任务列表。
@@ -76,10 +88,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEnvironment", req, cb);
     }
     /**
-     * 查询任务详情。
+     * 查询表格。
      */
-    async GetRunStatus(req, cb) {
-        return this.request("GetRunStatus", req, cb);
+    async DescribeTables(req, cb) {
+        return this.request("DescribeTables", req, cb);
+    }
+    /**
+     * 查询作业详情。
+     */
+    async GetRunCalls(req, cb) {
+        return this.request("GetRunCalls", req, cb);
     }
 }
 exports.Client = Client;

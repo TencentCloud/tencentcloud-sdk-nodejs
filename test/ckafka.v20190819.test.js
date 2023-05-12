@@ -428,6 +428,16 @@ it("ckafka.v20190819.CheckCdcCluster", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeTopicFlowRanking", async function () {
+    try {
+       const data = await client.DescribeTopicFlowRanking({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyAclRule", async function () {
     try {
        const data = await client.ModifyAclRule({})

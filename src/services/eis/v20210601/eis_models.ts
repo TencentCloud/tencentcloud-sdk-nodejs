@@ -284,7 +284,7 @@ export interface ListDeployableRuntimesMCResponse {
   /**
    * 运行时列表
    */
-  Runtimes: Array<AbstractRuntimeMC>
+  Runtimes?: Array<AbstractRuntimeMC>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -310,7 +310,22 @@ export interface GetRuntimeMCResponse {
 /**
  * ListDeployableRuntimesMC请求参数结构体
  */
-export type ListDeployableRuntimesMCRequest = null
+export interface ListDeployableRuntimesMCRequest {
+  /**
+   * 应用id
+   */
+  ProjectId?: number
+
+  /**
+   * 实例id
+   */
+  InstanceId?: number
+
+  /**
+   * 版本类型 0-pro 1-lite
+   */
+  PlanType?: number
+}
 
 /**
  * ListRuntimesMC请求参数结构体

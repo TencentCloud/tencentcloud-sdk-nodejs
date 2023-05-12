@@ -2830,6 +2830,24 @@ export interface EmergencyVul {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DefenseAttackCount: number
+
+  /**
+      * 检测规则 0 - 版本比对, 1 - POC验证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Method?: number
+
+  /**
+      * 攻击热度级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackLevel?: number
+
+  /**
+      * 是否有漏洞主机开启漏洞防御
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefenseState?: boolean
 }
 
 /**
@@ -8948,19 +8966,19 @@ export interface DescribeEmergencyVulListResponse {
       * 漏洞列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  List: Array<EmergencyVul>
+  List?: Array<EmergencyVul>
 
   /**
       * 漏洞总条数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 是否存在风险
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ExistsRisk: boolean
+  ExistsRisk?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12442,6 +12460,11 @@ export interface DescribeEmergencyVulListRequest {
    * 排序字段 PublishDate  LastScanTime HostCount
    */
   By?: string
+
+  /**
+   * 是否热点漏洞
+   */
+  HotspotAttack?: boolean
 }
 
 /**

@@ -32,6 +32,7 @@ import {
   PartitionOffset,
   SQLServerConnectParam,
   CreateConnectResourceResponse,
+  EsModifyConnectParam,
   TopicRetentionTimeConfigRsp,
   BatchModifyTopicResultDTO,
   SubscribedInfo,
@@ -81,9 +82,11 @@ import {
   CheckCdcClusterResponse,
   CtsdbModifyConnectParam,
   CreateTokenResponse,
+  DescribeTopicFlowRankingRequest,
   DynamicDiskConfig,
+  TopicMessageHeapRanking,
   DorisConnectParam,
-  ZoneInfo,
+  TopicFlowRanking,
   DescribeTopicSubscribeGroupResponse,
   DeleteAclRuleRequest,
   DescribeConnectResourcesRequest,
@@ -201,6 +204,7 @@ import {
   DeleteDatahubTopicRequest,
   DescribeRegionResponse,
   CreateTopicResponse,
+  ConsumerGroupSpeed,
   VipEntity,
   KafkaConnectParam,
   DescribeTopicProduceConnectionResponse,
@@ -226,6 +230,7 @@ import {
   Filter,
   Connection,
   BatchCreateAclResponse,
+  ZoneInfo,
   ModifyInstancePreResponse,
   CreateUserRequest,
   RouteResponse,
@@ -241,6 +246,7 @@ import {
   DescribeInstancesDetailRequest,
   JsonPathReplaceParam,
   SubstrParam,
+  TopicFlowRankingResult,
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
   InquireCkafkaPriceResponse,
@@ -275,7 +281,7 @@ import {
   BatchModifyTopicInfo,
   DescribeRouteResponse,
   ModifyDatahubTopicResponse,
-  EsModifyConnectParam,
+  DescribeTopicFlowRankingResponse,
   ModifyConnectResourceResponse,
   InstanceChargeParam,
   DescribeDatahubTopicsRequest,
@@ -745,6 +751,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckCdcClusterResponse) => void
   ): Promise<CheckCdcClusterResponse> {
     return this.request("CheckCdcCluster", req, cb)
+  }
+
+  /**
+     * 获取Topic流量排行，消费者流量排行
+
+     */
+  async DescribeTopicFlowRanking(
+    req: DescribeTopicFlowRankingRequest,
+    cb?: (error: string, rep: DescribeTopicFlowRankingResponse) => void
+  ): Promise<DescribeTopicFlowRankingResponse> {
+    return this.request("DescribeTopicFlowRanking", req, cb)
   }
 
   /**

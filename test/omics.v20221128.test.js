@@ -18,9 +18,9 @@ const client = new tencentcloud.omics.v20221128.Client({
 })
 describe("omics.v20221128.test.js", function () {
 
-it("omics.v20221128.GetRunCalls", async function () {
+it("omics.v20221128.DescribeTablesRows", async function () {
     try {
-       const data = await client.GetRunCalls({})
+       const data = await client.DescribeTablesRows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("omics.v20221128.ImportTableFile", async function () {
     }
 })
 
-it("omics.v20221128.CreateEnvironment", async function () {
+it("omics.v20221128.GetRunStatus", async function () {
     try {
-       const data = await client.CreateEnvironment({})
+       const data = await client.GetRunStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,26 @@ it("omics.v20221128.CreateEnvironment", async function () {
 it("omics.v20221128.RunApplication", async function () {
     try {
        const data = await client.RunApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.CreateEnvironment", async function () {
+    try {
+       const data = await client.CreateEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.RetryRuns", async function () {
+    try {
+       const data = await client.RetryRuns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +118,19 @@ it("omics.v20221128.DeleteEnvironment", async function () {
     }
 })
 
-it("omics.v20221128.GetRunStatus", async function () {
+it("omics.v20221128.DescribeTables", async function () {
     try {
-       const data = await client.GetRunStatus({})
+       const data = await client.DescribeTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.GetRunCalls", async function () {
+    try {
+       const data = await client.GetRunCalls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

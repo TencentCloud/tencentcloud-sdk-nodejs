@@ -992,6 +992,10 @@ export interface CreateAclRequest {
       */
     CmdTemplateIdSet?: Array<number>;
     /**
+      * 关联高危DB模版ID
+      */
+    ACTemplateIdSet?: Array<string>;
+    /**
       * 是否开启rdp磁盘映射文件上传
       */
     AllowDiskFileUp?: boolean;
@@ -1076,7 +1080,7 @@ export interface CreateAclResponse {
     /**
       * 新建成功的访问权限ID
       */
-    Id: number;
+    Id?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1264,6 +1268,10 @@ export interface ModifyAclRequest {
       * 关联的高危命令模板ID
       */
     CmdTemplateIdSet?: Array<number>;
+    /**
+      * 关联高危DB模版ID
+      */
+    ACTemplateIdSet?: Array<string>;
     /**
       * 是否开启 RDP 磁盘映射文件上传
       */

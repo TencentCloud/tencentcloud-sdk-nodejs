@@ -143,6 +143,7 @@ import {
   DescribePolicyConditionListMetric,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
+  DescribeClusterAgentCreatingProgressRequest,
   EnableSSOCamCheckResponse,
   DescribeAccidentEventListRequest,
   CreatePrometheusScrapeJobResponse,
@@ -272,7 +273,7 @@ import {
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
-  PrometheusInstanceGrantInfo,
+  DescribePrometheusRecordRuleYamlResponse,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   UpdateGrafanaIntegrationResponse,
@@ -291,7 +292,7 @@ import {
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
-  DescribePrometheusRecordRuleYamlResponse,
+  PrometheusInstanceGrantInfo,
   DeletePolicyGroupRequest,
   EnableSSOCamCheckRequest,
   DeleteGrafanaIntegrationResponse,
@@ -353,7 +354,7 @@ import {
   DeleteRecordingRulesResponse,
   UpdateGrafanaWhiteListRequest,
   UpdatePrometheusAgentStatusRequest,
-  DescribeAlarmNoticeCallbacksRequest,
+  DescribeGrafanaInstancesResponse,
   CheckIsPrometheusNewUserResponse,
   PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
@@ -364,6 +365,7 @@ import {
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   EventCondition,
+  DescribeClusterAgentCreatingProgressResponse,
   CreateAlertRuleResponse,
   DescribePolicyConditionListConfigManualContinueTime,
   ModifyAlarmPolicyTasksResponse,
@@ -427,6 +429,7 @@ import {
   UninstallGrafanaDashboardRequest,
   UpdateGrafanaIntegrationRequest,
   DeletePrometheusRecordRuleYamlRequest,
+  DescribeAlarmNoticeCallbacksRequest,
   MetricDatum,
   DescribeStatisticDataRequest,
   GrafanaNotificationChannel,
@@ -435,7 +438,6 @@ import {
   LogAlarmReq,
   TerminatePrometheusInstancesResponse,
   UpdateSSOAccountResponse,
-  DescribeGrafanaInstancesResponse,
   RunPrometheusInstanceRequest,
   UpdateAlertRuleStateRequest,
   SetDefaultAlarmPolicyResponse,
@@ -1942,6 +1944,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePluginOverviewsResponse) => void
   ): Promise<DescribePluginOverviewsResponse> {
     return this.request("DescribePluginOverviews", req, cb)
+  }
+
+  /**
+   * 获取prom实例中集群详细的关联状态
+   */
+  async DescribeClusterAgentCreatingProgress(
+    req?: DescribeClusterAgentCreatingProgressRequest,
+    cb?: (error: string, rep: DescribeClusterAgentCreatingProgressResponse) => void
+  ): Promise<DescribeClusterAgentCreatingProgressResponse> {
+    return this.request("DescribeClusterAgentCreatingProgress", req, cb)
   }
 
   /**
