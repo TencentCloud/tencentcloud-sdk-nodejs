@@ -526,6 +526,16 @@ export interface DescribeRollbackRangeTimeRequest {
    * 实例 ID 列表，单个实例 ID 的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceIds: Array<string>
+
+  /**
+   * 克隆实例与源实例是否在同一可用区，是:"false"，否:"true"
+   */
+  IsRemoteZone?: string
+
+  /**
+   * 克隆实例与源实例不在同一地域时需填写克隆实例所在地域，例："ap-guangzhou"
+   */
+  BackupRegion?: string
 }
 
 /**
@@ -2462,12 +2472,12 @@ export interface DescribeRollbackRangeTimeResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 返回的参数信息。
    */
-  Items?: Array<InstanceRollbackRangeTime>
+  Items: Array<InstanceRollbackRangeTime>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

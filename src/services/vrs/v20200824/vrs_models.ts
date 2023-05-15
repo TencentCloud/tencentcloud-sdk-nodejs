@@ -125,7 +125,7 @@ export interface DetectEnvAndSoundQualityRequest {
   TextId: string
 
   /**
-   * 语音数据 要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。
+   * 语音数据 要使用base64编码(采用python语言时注意读取文件时需要转成base64字符串编码，例如：str(base64.b64encode(open("input.aac", mode="rb").read()), encoding='utf-8') )。
    */
   AudioData: string
 
@@ -284,7 +284,7 @@ export interface CreateVRSTaskRequest {
   /**
       * 音频采样率：
 
-16000：16k（默认）
+16000：16k
       */
   SampleRate: number
 
@@ -300,7 +300,7 @@ export interface CreateVRSTaskRequest {
   /**
       * 语言类型：
 
-1-中文（默认）
+1-中文
       */
   VoiceLanguage: number
 

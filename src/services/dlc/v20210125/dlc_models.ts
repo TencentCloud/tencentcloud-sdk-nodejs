@@ -1424,6 +1424,11 @@ export interface GenerateCreateMangedTableSqlRequest {
    * 表属性信息
    */
   Properties?: Array<Property>
+
+  /**
+   * V2 upsert表 upsert键
+   */
+  UpsertKeys?: Array<string>
 }
 
 /**
@@ -1688,7 +1693,7 @@ export interface GenerateCreateMangedTableSqlResponse {
   /**
    * 创建托管存储内表sql语句描述
    */
-  Execution: Execution
+  Execution?: Execution
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1985,6 +1990,12 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GovernPolicy?: DataGovernPolicy
+
+  /**
+      * 库数据治理是否关闭，关闭：true，开启：false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbGovernPolicyIsDisable?: string
 }
 
 /**
@@ -4662,7 +4673,19 @@ export interface CancelTaskResponse {
 /**
  * 数据治理规则
  */
-export type DataGovernPolicy = null
+export interface DataGovernPolicy {
+  /**
+      * 治理规则类型，Customize: 自定义；Intelligence: 智能治理
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleType?: string
+
+  /**
+      * 治理引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GovernEngine?: string
+}
 
 /**
  * UnlockMetaData返回参数结构体

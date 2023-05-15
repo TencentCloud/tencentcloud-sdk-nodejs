@@ -158,7 +158,7 @@ export declare class Client extends AbstractClient {
      */
     AssociateDirectConnectGatewayNatGateway(req: AssociateDirectConnectGatewayNatGatewayRequest, cb?: (error: string, rep: AssociateDirectConnectGatewayNatGatewayResponse) => void): Promise<AssociateDirectConnectGatewayNatGatewayResponse>;
     /**
-     * 本接口(DeleteVpnConnection)用于删除VPN通道。
+     * 本接口（DeleteVpnConnection）用于删除VPN通道。
      */
     DeleteVpnConnection(req: DeleteVpnConnectionRequest, cb?: (error: string, rep: DeleteVpnConnectionResponse) => void): Promise<DeleteVpnConnectionResponse>;
     /**
@@ -685,7 +685,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyLocalGateway(req: ModifyLocalGatewayRequest, cb?: (error: string, rep: ModifyLocalGatewayResponse) => void): Promise<ModifyLocalGatewayResponse>;
     /**
-     *  本接口（DescribeVpnConnections）查询VPN通道列表。
+     * 本接口（DescribeVpnConnections）用于查询VPN通道列表。
      */
     DescribeVpnConnections(req: DescribeVpnConnectionsRequest, cb?: (error: string, rep: DescribeVpnConnectionsResponse) => void): Promise<DescribeVpnConnectionsResponse>;
     /**
@@ -903,7 +903,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeVpcEndPointServiceWhiteList(req: DescribeVpcEndPointServiceWhiteListRequest, cb?: (error: string, rep: DescribeVpcEndPointServiceWhiteListResponse) => void): Promise<DescribeVpcEndPointServiceWhiteListResponse>;
     /**
-     * 本接口(ResetVpnConnection)用于重置VPN通道。
+     * 本接口（ResetVpnConnection）用于重置VPN通道。
      */
     ResetVpnConnection(req: ResetVpnConnectionRequest, cb?: (error: string, rep: ResetVpnConnectionResponse) => void): Promise<ResetVpnConnectionResponse>;
     /**
@@ -1165,7 +1165,7 @@ LimitTypes取值范围：
      */
     ModifyVpnGatewayAttribute(req: ModifyVpnGatewayAttributeRequest, cb?: (error: string, rep: ModifyVpnGatewayAttributeResponse) => void): Promise<ModifyVpnGatewayAttributeResponse>;
     /**
-     * 本接口（ResetVpnGatewayInternetMaxBandwidth）调整VPN网关带宽上限。目前支持升级配置，如果是包年包月VPN网关需要在有效期内。
+     * 本接口（ResetVpnGatewayInternetMaxBandwidth）用于调整VPN网关带宽上限。VPN网关带宽目前仅支持部分带宽范围内升降配，如【5,100】Mbps和【200,1000】Mbps，在各自带宽范围内可提升配额，跨范围提升配额和降配暂不支持，如果是包年包月VPN网关需要在有效期内。
      */
     ResetVpnGatewayInternetMaxBandwidth(req: ResetVpnGatewayInternetMaxBandwidthRequest, cb?: (error: string, rep: ResetVpnGatewayInternetMaxBandwidthResponse) => void): Promise<ResetVpnGatewayInternetMaxBandwidthResponse>;
     /**

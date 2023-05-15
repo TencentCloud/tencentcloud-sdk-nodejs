@@ -128,6 +128,11 @@ export interface Trigger {
    * 触发器绑定的别名或版本
    */
   Qualifier: string
+
+  /**
+   * 触发器描述
+   */
+  Description?: string
 }
 
 /**
@@ -1518,6 +1523,11 @@ export interface CreateTriggerRequest {
    * 用户自定义参数，仅支持timer触发器
    */
   CustomArgument?: string
+
+  /**
+   * 触发器描述
+   */
+  Description?: string
 }
 
 /**
@@ -2296,7 +2306,7 @@ export interface CreateTriggerResponse {
   /**
    * 触发器信息
    */
-  TriggerInfo: Trigger
+  TriggerInfo?: Trigger
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

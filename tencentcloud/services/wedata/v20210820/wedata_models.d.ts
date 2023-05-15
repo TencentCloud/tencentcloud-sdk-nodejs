@@ -8681,6 +8681,11 @@ export interface DatasourceBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterId: string;
+    /**
+      * 数据源版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version?: string;
 }
 /**
  * DescribeRuleTemplates请求参数结构体

@@ -4101,6 +4101,11 @@ export interface DescribeVulListRequest {
 <li>VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
 <li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
 <li>Labels- string- 是否必填：否 - 标签搜索</li>
+<li>IsSupportAutoFix- string- 是否必填：否 - 是否支持自动修复 0:不支持 1:支持</li>
+<li>CvssScore- string- 是否必填：否 - CvssScore大于多少</li>
+<li>AttackLevel- string- 是否必填：否 - 攻击热度大于多少</li>
+
+
       */
     Filters?: Array<Filters>;
     /**
@@ -6705,17 +6710,17 @@ export interface DescribeVulListResponse {
       * 漏洞列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VulInfoList: Array<VulInfoList>;
+    VulInfoList?: Array<VulInfoList>;
     /**
       * 漏洞总条数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 重点关注漏洞总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FollowVulCount: number;
+    FollowVulCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15588,6 +15593,21 @@ export interface VulInfoList {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VulCategory: number;
+    /**
+      * 攻击热度级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackLevel?: number;
+    /**
+      * 漏洞修复后是否需要重启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FixNoNeedRestart?: boolean;
+    /**
+      * 检测方式0 - 版本比对, 1 - POC验证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method?: number;
 }
 /**
  * ExportIgnoreRuleEffectHostList请求参数结构体

@@ -335,13 +335,13 @@ export interface BatchTaskDetail {
   ChargeType: string
 
   /**
-      * 预付费专用资源组id
+      * 包年包月资源组id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceGroupId: string
 
   /**
-      * 预付费专用资源组名称
+      * 包年包月资源组名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceGroupName: string
@@ -482,6 +482,12 @@ export interface BatchTaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PodList?: Array<string>
+
+  /**
+      * 模型推理代码信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelInferenceCodeInfo?: CosPathInfo
 }
 
 /**
@@ -1334,7 +1340,7 @@ export interface CreateBatchTaskRequest {
   BatchTaskName: string
 
   /**
-   * 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费
+   * 计费模式，eg：PREPAID 包年包月；POSTPAID_BY_HOUR 按量计费
    */
   ChargeType: string
 
@@ -1364,7 +1370,7 @@ export interface CreateBatchTaskRequest {
   CronInfo?: CronInfo
 
   /**
-   * 预付费专用资源组
+   * 包年包月资源组ID
    */
   ResourceGroupId?: string
 
@@ -2751,13 +2757,13 @@ export interface DescribeBatchTasksResponse {
   /**
    * 数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 任务集
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BatchTaskSet: Array<BatchTaskSetItem>
+  BatchTaskSet?: Array<BatchTaskSetItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3151,7 +3157,7 @@ export interface BatchTaskSetItem {
   ChargeStatus: string
 
   /**
-      * 预付费专用资源组
+      * 包年包月资源组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceGroupId: string
@@ -3207,7 +3213,7 @@ export interface BatchTaskSetItem {
   Outputs: Array<DataConfig>
 
   /**
-      * 预付费专用资源组名称
+      * 包年包月资源组名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceGroupName: string
@@ -3218,7 +3224,7 @@ export interface BatchTaskSetItem {
   FailureReason: string
 
   /**
-   * 计费金额信息，eg：2.00元/小时 (for后付费)
+   * 计费金额信息，eg：2.00元/小时 (for 按量计费)
    */
   BillingInfo: string
 }
@@ -3891,7 +3897,7 @@ export interface CreateBatchTaskResponse {
   /**
    * 跑批任务ID
    */
-  BatchTaskId: string
+  BatchTaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4531,7 +4537,7 @@ export interface DescribeBatchTasksRequest {
 Name（名称）：task1
 Id（task ID）：train-23091792777383936
 Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILED
-ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）
+ChargeType（计费类型）：PREPAID 包年包月 / POSTPAID_BY_HOUR 按量计费
 CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止）
       */
   Filters?: Array<Filter>

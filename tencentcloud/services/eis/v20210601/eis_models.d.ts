@@ -5,7 +5,7 @@ export interface ListRuntimesMCResponse {
     /**
       * 运行时列表
       */
-    Runtimes: Array<RuntimeMC>;
+    Runtimes?: Array<RuntimeMC>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -266,6 +266,10 @@ export interface ListRuntimesMCRequest {
       * 环境运行类型：0:运行时类型、1:api类型
       */
     RuntimeClass?: number;
+    /**
+      * 计划类型：0-pro 1-lite
+      */
+    PlanType?: number;
 }
 /**
  * GetRuntimeMC请求参数结构体
