@@ -3262,6 +3262,41 @@ export interface DeleteRocketMQTopicResponse {
 }
 
 /**
+ * DescribeRocketMQMsg请求参数结构体
+ */
+export interface DescribeRocketMQMsgRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 命名空间
+   */
+  EnvironmentId: string
+
+  /**
+   * 主题，查询死信时传groupId
+   */
+  TopicName: string
+
+  /**
+   * 消息id
+   */
+  MsgId: string
+
+  /**
+   * pulsar消息id
+   */
+  PulsarMsgId: string
+
+  /**
+   * 查询死信时该值为true，只对Rocketmq有效
+   */
+  QueryDlqMsg?: boolean
+}
+
+/**
  * ModifyCmqTopicAttribute请求参数结构体
  */
 export interface ModifyCmqTopicAttributeRequest {
@@ -3389,6 +3424,32 @@ export interface DescribeSubscriptionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Rocketmq消息消费track信息
+ */
+export interface RocketMQMessageTrack {
+  /**
+   * 消费者组
+   */
+  Group: string
+
+  /**
+   * 消费状态
+   */
+  ConsumeStatus: string
+
+  /**
+   * 消息track类型
+   */
+  TrackType: string
+
+  /**
+      * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExceptionDesc: string
 }
 
 /**
@@ -6456,6 +6517,53 @@ export interface DescribeCmqQueueDetailRequest {
    * 精确匹配QueueName
    */
   QueueName: string
+}
+
+/**
+ * DescribeRocketMQMsg返回参数结构体
+ */
+export interface DescribeRocketMQMsgResponse {
+  /**
+   * 消息体
+   */
+  Body?: string
+
+  /**
+   * 详情参数
+   */
+  Properties?: string
+
+  /**
+   * 生产时间
+   */
+  ProduceTime?: string
+
+  /**
+   * 消息id
+   */
+  MsgId?: string
+
+  /**
+   * 生产者地址
+   */
+  ProducerAddr?: string
+
+  /**
+      * 消费组消费情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MessageTracks?: Array<RocketMQMessageTrack>
+
+  /**
+      * 详情页展示的topic名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShowTopicName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

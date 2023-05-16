@@ -50,6 +50,7 @@ import {
   PrometheusTempModify,
   EnableClusterAuditResponse,
   CreateBackupStorageLocationResponse,
+  KubeJarvisStateDiagnostic,
   EnvironmentVariable,
   UpdateImageCacheRequest,
   ManuallyAdded,
@@ -92,6 +93,7 @@ import {
   UpdateEKSContainerInstanceRequest,
   CUDNN,
   GetMostSuitableImageCacheResponse,
+  KubeJarvisStateCatalogue,
   Event,
   Exec,
   DescribeEdgeAvailableExtraArgsResponse,
@@ -99,7 +101,7 @@ import {
   DescribeEnableVpcCniProgressRequest,
   Instance,
   ModifyClusterAttributeResponse,
-  RunAutomationServiceEnabled,
+  KubeJarvisStateInspectionResult,
   CreateClusterResponse,
   PrometheusClusterAgentPodConfig,
   RunSecurityServiceEnabled,
@@ -139,6 +141,7 @@ import {
   DescribeClusterNodePoolDetailRequest,
   DescribePrometheusTempSyncRequest,
   DescribePrometheusGlobalConfigResponse,
+  KubeJarvisStateInspectionResultsItem,
   DescribeClusterReleaseHistoryResponse,
   DescribeImagesRequest,
   UninstallEdgeLogAgentResponse,
@@ -149,6 +152,7 @@ import {
   CreateTKEEdgeClusterResponse,
   DescribeEdgeClusterExtraArgsResponse,
   ResourceDeleteOption,
+  ListClusterInspectionResultsResponse,
   InstallEdgeLogAgentRequest,
   CheckEdgeClusterCIDRRequest,
   CreateImageCacheRequest,
@@ -173,8 +177,9 @@ import {
   VolumeMount,
   DeleteClusterRequest,
   DescribeTKEEdgeClustersResponse,
+  KubeJarvisStateResultObjInfo,
   DescribeAvailableTKEEdgeVersionRequest,
-  DeleteClusterAsGroupsRequest,
+  DescribeClusterInspectionResultsOverviewRequest,
   ModifyPrometheusAlertPolicyRequest,
   ForwardApplicationRequestV3Request,
   PrometheusAlertHistoryItem,
@@ -202,6 +207,7 @@ import {
   DriverVersion,
   CreateClusterInstancesRequest,
   DeleteBackupStorageLocationRequest,
+  UninstallClusterReleaseResponse,
   ClusterCIDRSettings,
   Taint,
   ModifyNodePoolInstanceTypesRequest,
@@ -240,6 +246,7 @@ import {
   DescribePrometheusTempSyncResponse,
   CreatePrometheusConfigResponse,
   DescribeClusterEndpointStatusResponse,
+  RunAutomationServiceEnabled,
   DescribeExternalClusterSpecResponse,
   AddExistedInstancesResponse,
   RestartEKSContainerInstancesResponse,
@@ -333,6 +340,7 @@ import {
   DrainClusterVirtualNodeRequest,
   DescribeClusterLevelAttributeRequest,
   DescribeClusterReleaseDetailsRequest,
+  KubeJarvisStateResultsItem,
   CreateECMInstancesRequest,
   DescribeClusterReleasesRequest,
   ClusterCredential,
@@ -354,10 +362,11 @@ import {
   UninstallLogAgentRequest,
   TcpSocket,
   TagSpecification,
-  PrometheusNotificationItem,
+  KubeJarvisStateDiagnosticOverview,
   DeleteEdgeClusterInstancesResponse,
   DeleteTKEEdgeClusterRequest,
   CreatePrometheusGlobalNotificationResponse,
+  ListClusterInspectionResultsItemsRequest,
   DescribeClusterAuthenticationOptionsResponse,
   CreateClusterReleaseRequest,
   DescribePrometheusAgentsRequest,
@@ -379,6 +388,7 @@ import {
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
   DisableClusterDeletionProtectionRequest,
+  ListClusterInspectionResultsItemsResponse,
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
@@ -394,7 +404,7 @@ import {
   ModifyClusterEndpointSPResponse,
   ECMRunSecurityServiceEnabled,
   SyncPrometheusTemplateResponse,
-  UninstallClusterReleaseResponse,
+  DeleteClusterAsGroupsRequest,
   ClusterAsGroupAttribute,
   ForwardTKEEdgeApplicationRequestV3Request,
   DisableEventPersistenceRequest,
@@ -477,6 +487,7 @@ import {
   DeleteBackupStorageLocationResponse,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DeleteClusterRouteResponse,
+  PrometheusNotificationItem,
   DeletePrometheusConfigRequest,
   DescribeEdgeClusterUpgradeInfoResponse,
   ModifyClusterNodePoolResponse,
@@ -497,6 +508,7 @@ import {
   DescribeClusterEndpointsRequest,
   InstanceExtraArgs,
   AcquireClusterAdminRoleRequest,
+  ListClusterInspectionResultsRequest,
   DeletePrometheusTemplateResponse,
   DescribeECMInstancesResponse,
   DescribePrometheusInstanceRequest,
@@ -527,8 +539,11 @@ import {
   ModifyPrometheusRecordRuleYamlResponse,
   DescribeTKEEdgeScriptRequest,
   AddVpcCniSubnetsResponse,
+  KubeJarvisStateStatistic,
   ExistedInstancesForNode,
+  KubeJarvisStateInspectionOverview,
   DescribePrometheusOverviewsResponse,
+  DescribeClusterInspectionResultsOverviewResponse,
   DeletePrometheusRecordRuleYamlRequest,
   InstanceUpgradePreCheckResult,
   ScaleInClusterMasterResponse,
@@ -1528,6 +1543,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询集群巡检结果历史列表
+   */
+  async ListClusterInspectionResultsItems(
+    req: ListClusterInspectionResultsItemsRequest,
+    cb?: (error: string, rep: ListClusterInspectionResultsItemsResponse) => void
+  ): Promise<ListClusterInspectionResultsItemsResponse> {
+    return this.request("ListClusterInspectionResultsItems", req, cb)
+  }
+
+  /**
    * 获取模板同步信息
    */
   async DescribePrometheusTemplateSync(
@@ -1715,6 +1740,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointResponse) => void
   ): Promise<CreateClusterEndpointResponse> {
     return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 查询指定集群的巡检结果信息
+   */
+  async ListClusterInspectionResults(
+    req: ListClusterInspectionResultsRequest,
+    cb?: (error: string, rep: ListClusterInspectionResultsResponse) => void
+  ): Promise<ListClusterInspectionResultsResponse> {
+    return this.request("ListClusterInspectionResults", req, cb)
   }
 
   /**
@@ -2265,6 +2300,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEdgeLogConfigResponse) => void
   ): Promise<CreateEdgeLogConfigResponse> {
     return this.request("CreateEdgeLogConfig", req, cb)
+  }
+
+  /**
+   * 查询用户单个Region下的所有集群巡检结果概览信息
+   */
+  async DescribeClusterInspectionResultsOverview(
+    req: DescribeClusterInspectionResultsOverviewRequest,
+    cb?: (error: string, rep: DescribeClusterInspectionResultsOverviewResponse) => void
+  ): Promise<DescribeClusterInspectionResultsOverviewResponse> {
+    return this.request("DescribeClusterInspectionResultsOverview", req, cb)
   }
 
   /**

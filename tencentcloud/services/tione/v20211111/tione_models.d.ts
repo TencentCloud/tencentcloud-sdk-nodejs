@@ -266,7 +266,7 @@ export interface BatchTaskDetail {
       */
     ChargeType: string;
     /**
-      * 包年包月资源组id
+      * 包年包月资源组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceGroupId: string;
@@ -379,7 +379,7 @@ export interface BatchTaskDetail {
       */
     FailureReason: string;
     /**
-      * 计费金额信息，eg：2.00元/小时 (for后付费)
+      * 计费金额信息，eg：2.00元/小时 (for 按量计费)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BillingInfo: string;
@@ -875,6 +875,11 @@ export interface HyperParameter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MinBlockSizeTf?: string;
+    /**
+      * Stable Diffusion 模型优化参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PipelineArgs?: string;
 }
 /**
  * ModifyServiceGroupWeights请求参数结构体

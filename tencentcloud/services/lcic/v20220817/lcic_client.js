@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAppCustomContent", req, cb);
     }
     /**
+     * 从房间里面踢出用户
+     */
+    async KickUserFromRoom(req, cb) {
+        return this.request("KickUserFromRoom", req, cb);
+    }
+    /**
      * 设置水印
      */
     async SetWatermark(req, cb) {

@@ -785,6 +785,59 @@ export interface CreateBackupStorageLocationResponse {
 }
 
 /**
+ * 集群巡检诊断结果
+ */
+export interface KubeJarvisStateDiagnostic {
+  /**
+      * 诊断开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 诊断结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 诊断目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Catalogues?: Array<KubeJarvisStateCatalogue>
+
+  /**
+      * 诊断类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 诊断名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 诊断描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc?: string
+
+  /**
+      * 诊断结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results?: Array<KubeJarvisStateResultsItem>
+
+  /**
+      * 诊断结果统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics?: Array<KubeJarvisStateStatistic>
+}
+
+/**
  * EnvironmentVariable
  */
 export interface EnvironmentVariable {
@@ -1886,6 +1939,25 @@ export interface GetMostSuitableImageCacheResponse {
 }
 
 /**
+ * 集群巡检诊断的默认目录类型
+ */
+export interface KubeJarvisStateCatalogue {
+  /**
+      * 目录级别，支持参数：
+first：一级目录
+second：二级目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CatalogueLevel?: string
+
+  /**
+      * 目录名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CatalogueName?: string
+}
+
+/**
  * 服务事件
  */
 export interface Event {
@@ -2090,13 +2162,44 @@ export interface ModifyClusterAttributeResponse {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
+ * 集群巡检检查结果
  */
-export interface RunAutomationServiceEnabled {
+export interface KubeJarvisStateInspectionResult {
   /**
-   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
-   */
-  Enabled?: boolean
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * 诊断开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 诊断结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 诊断结果统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics?: Array<KubeJarvisStateStatistic>
+
+  /**
+      * 诊断结果详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Diagnostics?: Array<KubeJarvisStateDiagnostic>
+
+  /**
+      * 查询巡检报告相关报错
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Error?: string
 }
 
 /**
@@ -2948,6 +3051,23 @@ export interface DescribePrometheusGlobalConfigResponse {
 }
 
 /**
+ * 集群巡检结果历史列表
+ */
+export interface KubeJarvisStateInspectionResultsItem {
+  /**
+      * 巡检结果名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 诊断结果统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics?: Array<KubeJarvisStateStatistic>
+}
+
+/**
  * DescribeClusterReleaseHistory返回参数结构体
  */
 export interface DescribeClusterReleaseHistoryResponse {
@@ -3124,6 +3244,22 @@ export interface ResourceDeleteOption {
    * 集群删除时资源的删除模式：terminate（销毁），retain （保留）
    */
   DeleteMode: string
+}
+
+/**
+ * ListClusterInspectionResults返回参数结构体
+ */
+export interface ListClusterInspectionResultsResponse {
+  /**
+      * 集群诊断结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectionResults?: Array<KubeJarvisStateInspectionResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3953,6 +4089,23 @@ export interface DescribeTKEEdgeClustersResponse {
 }
 
 /**
+ * 集群巡检诊断对象信息
+ */
+export interface KubeJarvisStateResultObjInfo {
+  /**
+      * 对象属性名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PropertyName?: string
+
+  /**
+      * 对象属性值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PropertyValue?: string
+}
+
+/**
  * DescribeAvailableTKEEdgeVersion请求参数结构体
  */
 export interface DescribeAvailableTKEEdgeVersionRequest {
@@ -3963,23 +4116,21 @@ export interface DescribeAvailableTKEEdgeVersionRequest {
 }
 
 /**
- * DeleteClusterAsGroups请求参数结构体
+ * DescribeClusterInspectionResultsOverview请求参数结构体
  */
-export interface DeleteClusterAsGroupsRequest {
+export interface DescribeClusterInspectionResultsOverviewRequest {
   /**
-   * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
-   */
-  ClusterId: string
+      * Array of String	目标集群列表，为空查询用户所有集群
+
+      */
+  ClusterIds?: Array<string>
 
   /**
-   * 集群伸缩组ID的列表
-   */
-  AutoScalingGroupIds: Array<string>
-
-  /**
-   * 是否保留伸缩组中的节点(默认值： false(不保留))
-   */
-  KeepInstance?: boolean
+      * 聚合字段信息，概览结果按照 GroupBy 信息聚合后返回，可选参数：
+catalogue.first：按一级分类聚合
+catalogue.second：按二级分类聚合
+      */
+  GroupBy?: Array<string>
 }
 
 /**
@@ -4622,6 +4773,22 @@ export interface DeleteBackupStorageLocationRequest {
    * 备份仓库名称
    */
   Name: string
+}
+
+/**
+ * UninstallClusterRelease返回参数结构体
+ */
+export interface UninstallClusterReleaseResponse {
+  /**
+      * 应用详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Release: PendingRelease
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5433,6 +5600,16 @@ export interface DescribeClusterEndpointStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了 “云自动化助手” 服务相关的信息
+ */
+export interface RunAutomationServiceEnabled {
+  /**
+   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -7698,6 +7875,59 @@ export interface DescribeClusterReleaseDetailsRequest {
 }
 
 /**
+ * 集群巡检诊断结果详情信息
+ */
+export interface KubeJarvisStateResultsItem {
+  /**
+      * 诊断结果级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level?: string
+
+  /**
+      * 诊断对象名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ObjName?: string
+
+  /**
+      * 诊断对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ObjInfo?: Array<KubeJarvisStateResultObjInfo>
+
+  /**
+      * 诊断项标题
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Title?: string
+
+  /**
+      * 诊断项描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc?: string
+
+  /**
+      * 诊断建议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Proposal?: string
+
+  /**
+      * 诊断建议文档链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProposalDocUrl?: string
+
+  /**
+      * 诊断建议文档名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProposalDocName?: string
+}
+
+/**
  * CreateECMInstances请求参数结构体
  */
 export interface CreateECMInstancesRequest {
@@ -8152,95 +8382,20 @@ export interface TagSpecification {
 }
 
 /**
- * 告警通知渠道配置
+ * 集群巡检诊断概览
  */
-export interface PrometheusNotificationItem {
+export interface KubeJarvisStateDiagnosticOverview {
   /**
-   * 是否启用
-   */
-  Enabled: boolean
-
-  /**
-      * 通道类型，默认为amp，支持以下
-amp
-webhook
-alertmanager
-      */
-  Type: string
-
-  /**
-      * 如果Type为webhook, 则该字段为必填项
+      * 诊断目录
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WebHook?: string
+  Catalogues?: Array<KubeJarvisStateCatalogue>
 
   /**
-      * 如果Type为alertmanager, 则该字段为必填项
+      * 诊断结果统计
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AlertManager?: PrometheusAlertManagerConfig
-
-  /**
-   * 收敛时间
-   */
-  RepeatInterval?: string
-
-  /**
-   * 生效起始时间
-   */
-  TimeRangeStart?: string
-
-  /**
-   * 生效结束时间
-   */
-  TimeRangeEnd?: string
-
-  /**
-      * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NotifyWay?: Array<string>
-
-  /**
-      * 告警接收组（用户组）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReceiverGroups?: Array<string>
-
-  /**
-      * 电话告警顺序。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneNotifyOrder?: Array<number>
-
-  /**
-      * 电话告警次数。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneCircleTimes?: number
-
-  /**
-      * 电话告警轮内间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneInnerInterval?: number
-
-  /**
-      * 电话告警轮外间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneCircleInterval?: number
-
-  /**
-      * 电话告警触达通知
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneArriveNotice?: boolean
+  Statistics?: Array<KubeJarvisStateStatistic>
 }
 
 /**
@@ -8277,6 +8432,26 @@ export interface CreatePrometheusGlobalNotificationResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListClusterInspectionResultsItems请求参数结构体
+ */
+export interface ListClusterInspectionResultsItemsRequest {
+  /**
+   * 目标集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 查询历史结果的开始时间，Unix时间戳
+   */
+  StartTime?: string
+
+  /**
+   * 查询历史结果的结束时间，默认当前距离开始时间3天，Unix时间戳
+   */
+  EndTime?: string
 }
 
 /**
@@ -8829,6 +9004,22 @@ export interface DisableClusterDeletionProtectionRequest {
 }
 
 /**
+ * ListClusterInspectionResultsItems返回参数结构体
+ */
+export interface ListClusterInspectionResultsItemsResponse {
+  /**
+      * 巡检结果历史列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectionResultsItems?: Array<KubeJarvisStateInspectionResultsItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * prometheus一个job的targets
  */
 export interface PrometheusJobTargets {
@@ -9076,19 +9267,23 @@ export interface SyncPrometheusTemplateResponse {
 }
 
 /**
- * UninstallClusterRelease返回参数结构体
+ * DeleteClusterAsGroups请求参数结构体
  */
-export interface UninstallClusterReleaseResponse {
+export interface DeleteClusterAsGroupsRequest {
   /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Release: PendingRelease
+   * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
+   */
+  ClusterId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群伸缩组ID的列表
    */
-  RequestId?: string
+  AutoScalingGroupIds: Array<string>
+
+  /**
+   * 是否保留伸缩组中的节点(默认值： false(不保留))
+   */
+  KeepInstance?: boolean
 }
 
 /**
@@ -11178,6 +11373,98 @@ export interface DeleteClusterRouteResponse {
 }
 
 /**
+ * 告警通知渠道配置
+ */
+export interface PrometheusNotificationItem {
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
+
+  /**
+      * 通道类型，默认为amp，支持以下
+amp
+webhook
+alertmanager
+      */
+  Type: string
+
+  /**
+      * 如果Type为webhook, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebHook?: string
+
+  /**
+      * 如果Type为alertmanager, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertManager?: PrometheusAlertManagerConfig
+
+  /**
+   * 收敛时间
+   */
+  RepeatInterval?: string
+
+  /**
+   * 生效起始时间
+   */
+  TimeRangeStart?: string
+
+  /**
+   * 生效结束时间
+   */
+  TimeRangeEnd?: string
+
+  /**
+      * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotifyWay?: Array<string>
+
+  /**
+      * 告警接收组（用户组）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverGroups?: Array<string>
+
+  /**
+      * 电话告警顺序。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneNotifyOrder?: Array<number>
+
+  /**
+      * 电话告警次数。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleTimes?: number
+
+  /**
+      * 电话告警轮内间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneInnerInterval?: number
+
+  /**
+      * 电话告警轮外间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleInterval?: number
+
+  /**
+      * 电话告警触达通知
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneArriveNotice?: boolean
+}
+
+/**
  * DeletePrometheusConfig请求参数结构体
  */
 export interface DeletePrometheusConfigRequest {
@@ -11595,6 +11882,28 @@ export interface AcquireClusterAdminRoleRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * ListClusterInspectionResults请求参数结构体
+ */
+export interface ListClusterInspectionResultsRequest {
+  /**
+      * 目标集群列表，为空查询用户所有集群
+
+      */
+  ClusterIds?: Array<string>
+
+  /**
+      * 隐藏的字段信息，为了减少无效的字段返回，隐藏字段不会在返回值中返回。可选值：results
+
+      */
+  Hide?: Array<string>
+
+  /**
+   * 指定查询结果的报告名称，默认查询最新的每个集群只查询最新的一条
+   */
+  Name?: string
 }
 
 /**
@@ -12342,6 +12651,23 @@ export interface AddVpcCniSubnetsResponse {
 }
 
 /**
+ * 集群巡检统计结果
+ */
+export interface KubeJarvisStateStatistic {
+  /**
+      * 诊断结果的健康水平
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthyLevel?: string
+
+  /**
+      * 诊断结果的统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count?: number
+}
+
+/**
  * 不同角色的已存在节点配置参数
  */
 export interface ExistedInstancesForNode {
@@ -12367,6 +12693,29 @@ export interface ExistedInstancesForNode {
 }
 
 /**
+ * 集群巡检检查结果概览
+ */
+export interface KubeJarvisStateInspectionOverview {
+  /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * 诊断结果统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics?: Array<KubeJarvisStateStatistic>
+
+  /**
+      * 诊断结果详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Diagnostics?: Array<KubeJarvisStateDiagnosticOverview>
+}
+
+/**
  * DescribePrometheusOverviews返回参数结构体
  */
 export interface DescribePrometheusOverviewsResponse {
@@ -12380,6 +12729,34 @@ export interface DescribePrometheusOverviewsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Total?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterInspectionResultsOverview返回参数结构体
+ */
+export interface DescribeClusterInspectionResultsOverviewResponse {
+  /**
+      * 诊断结果统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics?: Array<KubeJarvisStateStatistic>
+
+  /**
+      * 诊断结果概览
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Diagnostics?: Array<KubeJarvisStateDiagnosticOverview>
+
+  /**
+      * 集群诊断结果概览
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectionOverview?: Array<KubeJarvisStateInspectionOverview>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -418,6 +418,16 @@ it("vpc.v20170312.DescribeAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.EnableVpnGatewaySslClientCert", async function () {
+    try {
+       const data = await client.EnableVpnGatewaySslClientCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpcTaskResult", async function () {
     try {
        const data = await client.DescribeVpcTaskResult({})
@@ -1568,9 +1578,9 @@ it("vpc.v20170312.DeleteAddressTemplateGroup", async function () {
     }
 })
 
-it("vpc.v20170312.EnableVpnGatewaySslClientCert", async function () {
+it("vpc.v20170312.DescribeUsedIpAddress", async function () {
     try {
-       const data = await client.EnableVpnGatewaySslClientCert({})
+       const data = await client.DescribeUsedIpAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

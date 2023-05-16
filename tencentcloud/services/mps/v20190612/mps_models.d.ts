@@ -687,7 +687,9 @@ export interface AwsS3FileUploadTrigger {
       */
     S3Bucket: string;
     /**
-      * 绑定的桶所在 AWS 区域。
+      * 绑定的桶所在 AWS 区域，目前支持：
+us-east-1
+eu-west-3
       */
     S3Region: string;
     /**
@@ -3593,7 +3595,10 @@ export interface S3InputInfo {
       */
     S3Bucket: string;
     /**
-      * S3 bucket 对应的区域。
+      * S3 bucket 对应的区域，目前支持：
+us-east-1
+eu-west-3
+
       */
     S3Region: string;
     /**

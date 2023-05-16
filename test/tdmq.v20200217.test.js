@@ -1008,6 +1008,16 @@ it("tdmq.v20200217.CreateRocketMQCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQMsg", async function () {
+    try {
+       const data = await client.DescribeRocketMQMsg({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribePulsarProInstances", async function () {
     try {
        const data = await client.DescribePulsarProInstances({})

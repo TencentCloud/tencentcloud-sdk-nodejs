@@ -1901,6 +1901,31 @@ export interface SecurityGroupListData {
       * 是否使用端口协议模板，0：否，1：是
       */
     ProtocolPortType?: number;
+    /**
+      * Uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid?: string;
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
+    /**
+      * 资产分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetGroupNameIn?: string;
+    /**
+      * 资产分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetGroupNameOut?: string;
+    /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParameterName?: string;
 }
 /**
  * RemoveNatAcRule返回参数结构体

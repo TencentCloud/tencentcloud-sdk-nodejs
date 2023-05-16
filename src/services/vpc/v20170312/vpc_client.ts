@@ -211,6 +211,7 @@ import {
   DeleteDirectConnectGatewayCcnRoutesResponse,
   DescribeAssistantCidrResponse,
   BackupPolicy,
+  IpAddressStates,
   InstanceStatistic,
   CreateVpnConnectionRequest,
   CcnRoute,
@@ -473,6 +474,7 @@ import {
   PrivateIpAddressSpecification,
   AlgType,
   MigratePrivateIpAddressResponse,
+  DescribeUsedIpAddressRequest,
   DeleteRouteTableResponse,
   DescribeVpcInstancesResponse,
   AccountAttribute,
@@ -743,6 +745,7 @@ import {
   AddTemplateMemberRequest,
   DescribeVpcEndPointServiceWhiteListResponse,
   AcceptAttachCcnInstancesResponse,
+  DescribeUsedIpAddressResponse,
   AddressInfo,
   AuditCrossBorderComplianceRequest,
   DescribeNetDetectsResponse,
@@ -1173,6 +1176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAddressesResponse) => void
   ): Promise<DescribeAddressesResponse> {
     return this.request("DescribeAddresses", req, cb)
+  }
+
+  /**
+   * 启用SSL-VPN-CLIENT 证书
+   */
+  async EnableVpnGatewaySslClientCert(
+    req: EnableVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: EnableVpnGatewaySslClientCertResponse) => void
+  ): Promise<EnableVpnGatewaySslClientCertResponse> {
+    return this.request("EnableVpnGatewaySslClientCert", req, cb)
   }
 
   /**
@@ -2439,13 +2452,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用SSL-VPN-CLIENT 证书
-   */
-  async EnableVpnGatewaySslClientCert(
-    req: EnableVpnGatewaySslClientCertRequest,
-    cb?: (error: string, rep: EnableVpnGatewaySslClientCertResponse) => void
-  ): Promise<EnableVpnGatewaySslClientCertResponse> {
-    return this.request("EnableVpnGatewaySslClientCert", req, cb)
+     * 本接口(DescribeUsedIpAddress)用于查询Subnet或者Vpc内的ip的使用情况，
+如被ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
+     */
+  async DescribeUsedIpAddress(
+    req: DescribeUsedIpAddressRequest,
+    cb?: (error: string, rep: DescribeUsedIpAddressResponse) => void
+  ): Promise<DescribeUsedIpAddressResponse> {
+    return this.request("DescribeUsedIpAddress", req, cb)
   }
 
   /**
@@ -3701,7 +3715,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口(CreateRoutes)用于创建路由策略。
+   * 本接口（CreateRoutes）用于创建路由策略。
    * 向指定路由表批量新增路由策略。
    */
   async CreateRoutes(

@@ -24,6 +24,7 @@ import {
   DescribeAppDetailResponse,
   DeleteSupervisorRequest,
   DescribeSupervisorsResponse,
+  KickUserFromRoomResponse,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
   BatchRegisterRequest,
@@ -125,6 +126,7 @@ import {
   DescribeQuestionListResponse,
   GetRoomsResponse,
   QuestionInfo,
+  KickUserFromRoomRequest,
   GetRoomsRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
@@ -217,6 +219,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAppCustomContentResponse) => void
   ): Promise<DeleteAppCustomContentResponse> {
     return this.request("DeleteAppCustomContent", req, cb)
+  }
+
+  /**
+   * 从房间里面踢出用户
+   */
+  async KickUserFromRoom(
+    req: KickUserFromRoomRequest,
+    cb?: (error: string, rep: KickUserFromRoomResponse) => void
+  ): Promise<KickUserFromRoomResponse> {
+    return this.request("KickUserFromRoom", req, cb)
   }
 
   /**

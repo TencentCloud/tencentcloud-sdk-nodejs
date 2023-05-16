@@ -680,6 +680,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("CreateRocketMQCluster", req, cb);
     }
     /**
+     * rocketmq消息详情
+     */
+    async DescribeRocketMQMsg(req, cb) {
+        return this.request("DescribeRocketMQMsg", req, cb);
+    }
+    /**
      * 查询用户已购的Pulsar专业版实例列表
      */
     async DescribePulsarProInstances(req, cb) {

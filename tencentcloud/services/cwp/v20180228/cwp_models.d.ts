@@ -6128,6 +6128,15 @@ export interface LicenseBindTaskDetail {
       * 0 执行中, 1 成功,2失败
       */
     Status: number;
+    /**
+      * 修复建议
+      */
+    FixMessage?: string;
+    /**
+      * 机器额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineExtraInfo?: MachineExtraInfo;
 }
 /**
  * ExportMaliciousRequests返回参数结构体

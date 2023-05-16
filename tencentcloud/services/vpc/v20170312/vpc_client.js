@@ -283,6 +283,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddresses", req, cb);
     }
     /**
+     * 启用SSL-VPN-CLIENT 证书
+     */
+    async EnableVpnGatewaySslClientCert(req, cb) {
+        return this.request("EnableVpnGatewaySslClientCert", req, cb);
+    }
+    /**
      * 本接口（DescribeVpcTaskResult）用于查询VPC任务执行结果。
      */
     async DescribeVpcTaskResult(req, cb) {
@@ -1086,10 +1092,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAddressTemplateGroup", req, cb);
     }
     /**
-     * 启用SSL-VPN-CLIENT 证书
+     * 本接口(DescribeUsedIpAddress)用于查询Subnet或者Vpc内的ip的使用情况，
+如被ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
      */
-    async EnableVpnGatewaySslClientCert(req, cb) {
-        return this.request("EnableVpnGatewaySslClientCert", req, cb);
+    async DescribeUsedIpAddress(req, cb) {
+        return this.request("DescribeUsedIpAddress", req, cb);
     }
     /**
      * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由。
@@ -1884,7 +1891,7 @@ LimitTypes取值范围：
         return this.request("CreateTrafficPackages", req, cb);
     }
     /**
-     * 本接口(CreateRoutes)用于创建路由策略。
+     * 本接口（CreateRoutes）用于创建路由策略。
 * 向指定路由表批量新增路由策略。
      */
     async CreateRoutes(req, cb) {

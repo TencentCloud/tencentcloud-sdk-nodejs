@@ -610,6 +610,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusTemp", req, cb);
     }
     /**
+     * 查询集群巡检结果历史列表
+     */
+    async ListClusterInspectionResultsItems(req, cb) {
+        return this.request("ListClusterInspectionResultsItems", req, cb);
+    }
+    /**
      * 获取模板同步信息
      */
     async DescribePrometheusTemplateSync(req, cb) {
@@ -722,6 +728,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
+    }
+    /**
+     * 查询指定集群的巡检结果信息
+     */
+    async ListClusterInspectionResults(req, cb) {
+        return this.request("ListClusterInspectionResults", req, cb);
     }
     /**
      * 修改全局告警通知渠道
@@ -1052,6 +1064,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateEdgeLogConfig(req, cb) {
         return this.request("CreateEdgeLogConfig", req, cb);
+    }
+    /**
+     * 查询用户单个Region下的所有集群巡检结果概览信息
+     */
+    async DescribeClusterInspectionResultsOverview(req, cb) {
+        return this.request("DescribeClusterInspectionResultsOverview", req, cb);
     }
     /**
      * 删除一个云原生Prometheus配置模板

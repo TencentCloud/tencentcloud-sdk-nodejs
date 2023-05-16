@@ -4133,6 +4133,36 @@ export interface BackupPolicy {
 }
 
 /**
+ * 占用ip的资源信息
+ */
+export interface IpAddressStates {
+  /**
+   * VPC实例ID。
+   */
+  VpcId: string
+
+  /**
+   * 子网实例ID。
+   */
+  SubnetId: string
+
+  /**
+   * IP地址。
+   */
+  IpAddress: string
+
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+}
+
+/**
  * 用于描述实例的统计信息
  */
 export interface InstanceStatistic {
@@ -7848,7 +7878,7 @@ export interface Price {
   InstancePrice?: ItemPrice
 
   /**
-   * 网络价格。
+   * 带宽价格。
    */
   BandwidthPrice?: ItemPrice
 }
@@ -10480,6 +10510,36 @@ export interface MigratePrivateIpAddressResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUsedIpAddress请求参数结构体
+ */
+export interface DescribeUsedIpAddressRequest {
+  /**
+   * VPC实例ID。
+   */
+  VpcId: string
+
+  /**
+   * 子网实例ID。
+   */
+  SubnetId?: string
+
+  /**
+   * 查询是否占用的ip列表
+   */
+  IpAddresses?: Array<string>
+
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+
+  /**
+   * 请求对象个数。
+   */
+  Limit?: number
 }
 
 /**
@@ -13687,12 +13747,12 @@ export interface ReplaceRoutesResponse {
   /**
    * 原路由策略信息。
    */
-  OldRouteSet: Array<Route>
+  OldRouteSet?: Array<Route>
 
   /**
    * 修改后的路由策略信息。
    */
-  NewRouteSet: Array<Route>
+  NewRouteSet?: Array<Route>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13870,12 +13930,12 @@ export interface CreateRoutesResponse {
   /**
    * 新增的实例个数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 路由表对象。
    */
-  RouteTableSet: Array<RouteTable>
+  RouteTableSet?: Array<RouteTable>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14436,7 +14496,7 @@ export interface DeleteRoutesRequest {
   /**
    * 路由策略对象，删除路由策略时，仅需使用Route的RouteId字段。
    */
-  Routes: Array<Route>
+  Routes?: Array<Route>
 }
 
 /**
@@ -15728,6 +15788,28 @@ export interface DescribeVpcEndPointServiceWhiteListResponse {
  * AcceptAttachCcnInstances返回参数结构体
  */
 export interface AcceptAttachCcnInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUsedIpAddress返回参数结构体
+ */
+export interface DescribeUsedIpAddressResponse {
+  /**
+      * 占用ip地址的资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpAddressStates?: Array<IpAddressStates>
+
+  /**
+      * 返回占用资源的个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

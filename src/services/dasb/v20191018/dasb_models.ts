@@ -1203,7 +1203,7 @@ export interface CreateAclRequest {
   CmdTemplateIdSet?: Array<number>
 
   /**
-   * 关联高危DB模版ID
+   * 关联高危DB模板ID
    */
   ACTemplateIdSet?: Array<string>
 
@@ -1536,7 +1536,7 @@ export interface ModifyAclRequest {
   CmdTemplateIdSet?: Array<number>
 
   /**
-   * 关联高危DB模版ID
+   * 关联高危DB模板ID
    */
   ACTemplateIdSet?: Array<string>
 

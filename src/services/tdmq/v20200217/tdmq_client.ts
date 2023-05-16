@@ -126,6 +126,7 @@ import {
   DeleteCmqQueueResponse,
   DescribeRocketMQClusterRequest,
   DeleteRocketMQTopicResponse,
+  DescribeRocketMQMsgRequest,
   ModifyCmqTopicAttributeRequest,
   DescribeRabbitMQVipInstancesResponse,
   DeleteRolesRequest,
@@ -133,6 +134,7 @@ import {
   CreateCmqSubscribeResponse,
   DescribeCmqDeadLetterSourceQueuesRequest,
   DescribeSubscriptionsResponse,
+  RocketMQMessageTrack,
   ModifyRoleRequest,
   DescribeRabbitMQNodeListResponse,
   SendMessagesResponse,
@@ -240,6 +242,7 @@ import {
   SendMsgRequest,
   ResetRocketMQConsumerOffSetRequest,
   DescribeCmqQueueDetailRequest,
+  DescribeRocketMQMsgResponse,
   DescribeAMQPQueuesResponse,
   CreateRocketMQTopicRequest,
   QueueQuota,
@@ -1357,6 +1360,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: CreateRocketMQClusterResponse) => void
   ): Promise<CreateRocketMQClusterResponse> {
     return this.request("CreateRocketMQCluster", req, cb)
+  }
+
+  /**
+   * rocketmq消息详情
+   */
+  async DescribeRocketMQMsg(
+    req: DescribeRocketMQMsgRequest,
+    cb?: (error: string, rep: DescribeRocketMQMsgResponse) => void
+  ): Promise<DescribeRocketMQMsgResponse> {
+    return this.request("DescribeRocketMQMsg", req, cb)
   }
 
   /**

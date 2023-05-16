@@ -227,6 +227,16 @@ export interface DescribeSupervisorsResponse {
 }
 
 /**
+ * KickUserFromRoom返回参数结构体
+ */
+export interface KickUserFromRoomResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchDeleteRecord请求参数结构体
  */
 export interface BatchDeleteRecordRequest {
@@ -1578,6 +1588,14 @@ export interface EventInfo {
   /**
       * 事件类型,有以下值:
 RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束
+Camera0n: 摄像头打开
+Camera0ff: 摄像头关闭
+MicOn: 麦克风打开
+MicOff: 麦克风关闭
+ScreenOn: 屏幕共享打开
+ScreenOff: 屏幕共享关闭
+VisibleOn: 页面可见
+VisibleOff: 页面不可见
       */
   EventType?: string
 
@@ -2809,6 +2827,38 @@ export interface QuestionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AnswerStats?: Array<AnswerStat>
+}
+
+/**
+ * KickUserFromRoom请求参数结构体
+ */
+export interface KickUserFromRoomRequest {
+  /**
+   * 房间Id。
+   */
+  RoomId: number
+
+  /**
+   * 低代码平台的SdkAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 需要踢出成员Id
+   */
+  UserId: string
+
+  /**
+      * 踢出类型：
+1：临时踢出，可以使用Duration参数指定污点时间，污点时间间隔内用户无法进入房间。
+2：永久踢出
+      */
+  KickType: number
+
+  /**
+   * 污点时间(单位秒)，KickType = 1时生效，默认为0
+   */
+  Duration: number
 }
 
 /**

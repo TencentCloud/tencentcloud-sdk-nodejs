@@ -1047,6 +1047,11 @@ export interface EnvInfo {
       * 客户端带宽
       */
     ClientBandWidth?: number;
+    /**
+      * 客户端内网开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableConfigIntranet?: boolean;
 }
 /**
  * 多环境网络信息

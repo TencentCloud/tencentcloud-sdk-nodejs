@@ -78,6 +78,16 @@ it("lcic.v20220817.DeleteAppCustomContent", async function () {
     }
 })
 
+it("lcic.v20220817.KickUserFromRoom", async function () {
+    try {
+       const data = await client.KickUserFromRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SetWatermark", async function () {
     try {
        const data = await client.SetWatermark({})
