@@ -227,7 +227,7 @@ export declare class Client extends AbstractClient {
      */
     AddDelayLiveStream(req: AddDelayLiveStreamRequest, cb?: (error: string, rep: AddDelayLiveStreamResponse) => void): Promise<AddDelayLiveStreamResponse>;
     /**
-     * 直播上行路数查询
+     * 直播上行路数查询。
      */
     DescribeUploadStreamNums(req: DescribeUploadStreamNumsRequest, cb?: (error: string, rep: DescribeUploadStreamNumsResponse) => void): Promise<DescribeUploadStreamNumsResponse>;
     /**

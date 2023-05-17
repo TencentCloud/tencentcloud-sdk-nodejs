@@ -1307,22 +1307,22 @@ export interface DescribeEnterpriseSecurityGroupRuleResponse {
   /**
    * 分页查询时，显示的当前页的页码。
    */
-  PageNo: string
+  PageNo?: string
 
   /**
    * 分页查询时，显示的每页数据的最大条数。
    */
-  PageSize: string
+  PageSize?: string
 
   /**
    * 访问控制策略列表
    */
-  Rules: Array<SecurityGroupRule>
+  Rules?: Array<SecurityGroupRule>
 
   /**
    * 访问控制策略的总数量。
    */
-  TotalCount: string
+  TotalCount?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1453,6 +1453,11 @@ true为启用，false为不启用
    * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
    */
   ServiceTemplateId?: string
+
+  /**
+   * 规则的uuid
+   */
+  RuleUuid?: number
 }
 
 /**
@@ -1883,15 +1888,13 @@ export interface CommonFilter {
   Name: string
 
   /**
-   * 检索的值
+   * 检索的值，各检索值间为OR关系
    */
   Values: Array<string>
 
   /**
-      * 枚举类型，代表name与values之间的匹配关系
+      * 枚举类型，代表Name与Values之间的匹配关系
 enum FilterOperatorType {
-    //INVALID
-    FILTER_OPERATOR_TYPE_INVALID = 0;
     //等于
     FILTER_OPERATOR_TYPE_EQUAL = 1;
     //大于
@@ -1904,18 +1907,10 @@ enum FilterOperatorType {
     FILTER_OPERATOR_TYPE_LESS_EQ = 5;
     //不等于
     FILTER_OPERATOR_TYPE_NO_EQ = 6;
-    //in，数组中包含
-    FILTER_OPERATOR_TYPE_IN = 7;
     //not in
     FILTER_OPERATOR_TYPE_NOT_IN = 8;
     //模糊匹配
     FILTER_OPERATOR_TYPE_FUZZINESS = 9;
-    //存在
-    FILTER_OPERATOR_TYPE_EXIST = 10;
-    //不存在
-    FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
-    //正则
-    FILTER_OPERATOR_TYPE_REGULAR = 12;
 }
       */
   OperatorType: number
@@ -2777,7 +2772,13 @@ export interface AddEnterpriseSecurityGroupRulesResponse {
   /**
    * 状态值，0：添加成功，非0：添加失败
    */
-  Status: number
+  Status?: number
+
+  /**
+      * 规则uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules?: Array<SecurityGroupSimplifyRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3032,6 +3033,59 @@ export interface DeleteAcRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安全组规则
+ */
+export interface SecurityGroupSimplifyRule {
+  /**
+      * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceContent: string
+
+  /**
+      * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DestContent: string
+
+  /**
+      * 协议；TCP/UDP/ICMP/ANY
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 规则对应的唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleUuid?: number
+
+  /**
+      * 规则序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sequence?: number
 }
 
 /**

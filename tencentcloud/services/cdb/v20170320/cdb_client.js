@@ -520,6 +520,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditLogFiles", req, cb);
     }
     /**
+     * 本接口(DescribeBackupDecryptionKey)用于查询备份文件解密密钥。
+     */
+    async DescribeBackupDecryptionKey(req, cb) {
+        return this.request("DescribeBackupDecryptionKey", req, cb);
+    }
+    /**
      * 该接口（DescribeInstanceParamRecords）用于查询实例参数修改历史。
      */
     async DescribeInstanceParamRecords(req, cb) {

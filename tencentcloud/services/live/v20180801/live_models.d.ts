@@ -25,7 +25,10 @@ export interface CreateLiveSnapshotRuleRequest {
  */
 export interface BillDataInfo {
     /**
-      * 时间点，格式: yyyy-mm-dd HH:MM:SS。
+      * 时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     Time: string;
     /**
@@ -37,7 +40,11 @@ export interface BillDataInfo {
       */
     Flux: number;
     /**
-      * 峰值时间点，格式: yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
+      * 峰值时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
       */
     PeakTime: string;
 }
@@ -57,7 +64,7 @@ export interface DescribeUploadStreamNumsResponse {
     /**
       * 明细数据信息
       */
-    DataInfoList: Array<ConcurrentRecordStreamNum>;
+    DataInfoList?: Array<ConcurrentRecordStreamNum>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -91,8 +98,10 @@ export interface HlsSpecialParam {
  */
 export interface TranscodeTotalInfo {
     /**
-      * 时间点，北京时间，
-示例：2019-03-01 00:00:00。
+      * 时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     Time: string;
     /**
@@ -130,7 +139,7 @@ export interface DescribeDeliverBandwidthListResponse {
     /**
       * 转推计费带宽数据
       */
-    DataInfoList: Array<BandwidthInfo>;
+    DataInfoList?: Array<BandwidthInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -196,29 +205,33 @@ export interface FlvSpecialParam {
  */
 export interface DescribeBillBandwidthAndFluxListResponse {
     /**
-      * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+      * 峰值带宽所在时间点，接口返回支持两种时间格式(与接口请求传递的时间格式一致)：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
-    PeakBandwidthTime: string;
+    PeakBandwidthTime?: string;
     /**
       * 峰值带宽，单位是Mbps。
       */
-    PeakBandwidth: number;
+    PeakBandwidth?: number;
     /**
-      * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+      * 95峰值带宽所在时间点，接口返回支持两种时间格式(与接口请求传递的时间格式一致)：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
-    P95PeakBandwidthTime: string;
+    P95PeakBandwidthTime?: string;
     /**
       * 95峰值带宽，单位是Mbps。
       */
-    P95PeakBandwidth: number;
+    P95PeakBandwidth?: number;
     /**
       * 总流量，单位是MB。
       */
-    SumFlux: number;
+    SumFlux?: number;
     /**
       * 明细数据信息。
       */
-    DataInfoList: Array<BillDataInfo>;
+    DataInfoList?: Array<BillDataInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -869,7 +882,7 @@ export interface DescribeScreenShotSheetNumListResponse {
     /**
       * 数据信息列表。
       */
-    DataInfoList: Array<TimeValue>;
+    DataInfoList?: Array<TimeValue>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1232,11 +1245,16 @@ export interface DescribePushBandwidthAndFluxListResponse {
  */
 export interface DescribeUploadStreamNumsRequest {
     /**
-      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
     StartTime: string;
     /**
-      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近31天的数据查询
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+起始和结束时间跨度不支持超过31天。支持最近31天的数据查询
       */
     EndTime: string;
     /**
@@ -1649,11 +1667,16 @@ export interface DescribeTimeShiftStreamListRequest {
  */
 export interface DescribeDeliverBandwidthListRequest {
     /**
-      * 起始时间，格式为%Y-%m-%d %H:%M:%S。
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
     StartTime: string;
     /**
-      * 结束时间，格式为%Y-%m-%d %H:%M:%S，支持最近三个月的数据查询，时间跨度最大是1个月。
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+支持最近三个月的数据查询，时间跨度最大是1个月。
       */
     EndTime: string;
 }
@@ -2069,11 +2092,16 @@ export interface DeleteLiveRecordResponse {
  */
 export interface DescribeScreenShotSheetNumListRequest {
     /**
-      * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
     StartTime: string;
     /**
-      * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+支持查询最近1年的数据。
       */
     EndTime: string;
     /**
@@ -2672,7 +2700,7 @@ export interface DescribeConcurrentRecordStreamNumResponse {
     /**
       * 统计信息列表。
       */
-    DataInfoList: Array<ConcurrentRecordStreamNum>;
+    DataInfoList?: Array<ConcurrentRecordStreamNum>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3939,7 +3967,10 @@ export interface ModifyLivePlayDomainResponse {
  */
 export interface CdnPlayStatData {
     /**
-      * 时间点，格式: yyyy-mm-dd HH:MM:SS。
+      * 时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     Time: string;
     /**
@@ -5128,7 +5159,9 @@ export interface DescribeLiveTimeShiftBillInfoListResponse {
 export interface BandwidthInfo {
     /**
       * 返回格式：
-yyyy-mm-dd HH:MM:SS
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 根据粒度会有不同程度的缩减。
       */
     Time: string;
@@ -5390,12 +5423,16 @@ NormalLive：普通直播。
       */
     LiveType: string;
     /**
-      * 起始时间，格式：yyyy-mm-dd HH:MM:SS。
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
 可以查询最近180天的数据。
       */
     StartTime: string;
     /**
-      * 结束时间，格式：yyyy-mm-dd HH:MM:SS。
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
 时间跨度最大支持31天。
       */
     EndTime: string;
@@ -6335,7 +6372,7 @@ export interface DescribeLiveTranscodeTotalInfoResponse {
       * 统计数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DataInfoList: Array<TranscodeTotalInfo>;
+    DataInfoList?: Array<TranscodeTotalInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6533,11 +6570,16 @@ export declare type DescribeLiveTranscodeTemplatesRequest = null;
  */
 export interface DescribeBillBandwidthAndFluxListRequest {
     /**
-      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
     StartTime: string;
     /**
-      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
       */
     EndTime: string;
     /**
@@ -7557,13 +7599,16 @@ export interface DescribeLiveCallbackRulesResponse {
  */
 export interface DescribeLiveTranscodeTotalInfoRequest {
     /**
-      * 开始时间，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
       */
     StartTime: string;
     /**
-      * 结束时间，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
+      * 结束时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     EndTime: string;
     /**

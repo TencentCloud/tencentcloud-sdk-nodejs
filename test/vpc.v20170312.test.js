@@ -678,6 +678,16 @@ it("vpc.v20170312.GenerateVpnConnectionDefaultHealthCheckIp", async function () 
     }
 })
 
+it("vpc.v20170312.DeleteTrafficPackages", async function () {
+    try {
+       const data = await client.DeleteTrafficPackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeTemplateLimits", async function () {
     try {
        const data = await client.DescribeTemplateLimits({})
@@ -1421,6 +1431,16 @@ it("vpc.v20170312.DeleteNetworkInterface", async function () {
 it("vpc.v20170312.ModifyLocalGateway", async function () {
     try {
        const data = await client.ModifyLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeSubnetResourceDashboard", async function () {
+    try {
+       const data = await client.DescribeSubnetResourceDashboard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

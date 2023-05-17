@@ -130,6 +130,7 @@ import {
   DescribeResourceGroupNewRequest,
   ModifyBlockTopRequest,
   DeleteAcRuleResponse,
+  SecurityGroupSimplifyRule,
   IocListData,
   InstanceInfo,
   DescribeIPStatusListRequest,
@@ -889,7 +890,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加nat访问控制规则
+   * 添加nat访问控制规则(地域必填)
    */
   async AddNatAcRule(
     req: AddNatAcRuleRequest,

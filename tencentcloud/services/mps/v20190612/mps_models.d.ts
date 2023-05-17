@@ -2666,6 +2666,16 @@ export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AdaptiveDynamicStreamingInfoItem;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * 文本关键词识别控制参数。
@@ -2944,6 +2954,16 @@ export interface ScheduleRecognitionTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: Array<AiRecognitionResult>;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * WithdrawsWatermark请求参数结构体
@@ -3073,6 +3093,16 @@ export interface MediaProcessTaskAnimatedGraphicResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaAnimatedGraphicsItem;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * ProcessMedia返回参数结构体
@@ -3643,6 +3673,16 @@ export interface MediaProcessTaskImageSpriteResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaImageSpriteItem;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * 转推的RTP目标地址信息。
@@ -4727,6 +4767,16 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSnapshotByTimeOffsetItem;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * 查询输出的HLS拉流配置信息。
@@ -5631,6 +5681,16 @@ export interface ScheduleAnalysisTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: Array<AiAnalysisResult>;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * 质检任务结果类型
@@ -7794,6 +7854,16 @@ export interface MediaProcessTaskSampleSnapshotResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: MediaSampleSnapshotItem;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * 用户自定义审核任务控制参数。
@@ -7913,7 +7983,8 @@ export interface FlowRealtimeStatusSRT {
 export interface TEHDConfigForUpdate {
     /**
       * 极速高清类型，可选值：
-<li>TEHD-100：极速高清-100。</li>
+<li>TEHD-100：极速高清-100（视频极速高清）。</li>
+<li>TEHD-200：极速高清-200（音频极速高清）。</li>
 不填代表不修改。
       */
     Type?: string;
@@ -8597,6 +8668,16 @@ export interface ScheduleReviewTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: Array<AiContentReviewResult>;
+    /**
+      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginProcessTime?: string;
+    /**
+      * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime?: string;
 }
 /**
  * ModifyTranscodeTemplate返回参数结构体
@@ -9011,67 +9092,67 @@ export interface DescribeTaskDetailResponse {
 <li>LiveStreamProcessTask：直播流处理任务。</li>
 <li>ScheduleTask：编排处理任务。</li>
       */
-    TaskType: string;
+    TaskType?: string;
     /**
       * 任务状态，取值：
 <li>WAITING：等待中；</li>
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
       */
-    Status: string;
+    Status?: string;
     /**
       * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    CreateTime: string;
+    CreateTime?: string;
     /**
       * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    BeginProcessTime: string;
+    BeginProcessTime?: string;
     /**
       * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
       */
-    FinishTime: string;
+    FinishTime?: string;
     /**
       * 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EditMediaTask: EditMediaTask;
+    EditMediaTask?: EditMediaTask;
     /**
       * 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WorkflowTask: WorkflowTask;
+    WorkflowTask?: WorkflowTask;
     /**
       * 直播流处理任务信息，仅当 TaskType 为 LiveStreamProcessTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LiveStreamProcessTask: LiveStreamProcessTask;
+    LiveStreamProcessTask?: LiveStreamProcessTask;
     /**
       * 任务的事件通知信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskNotifyConfig: TaskNotifyConfig;
+    TaskNotifyConfig?: TaskNotifyConfig;
     /**
       * 任务流的优先级，取值范围为 [-10, 10]。
       */
-    TasksPriority: number;
+    TasksPriority?: number;
     /**
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
       */
-    SessionId: string;
+    SessionId?: string;
     /**
       * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。
       */
-    SessionContext: string;
+    SessionContext?: string;
     /**
       * 扩展信息字段，仅用于特定场景。
       */
-    ExtInfo: string;
+    ExtInfo?: string;
     /**
       * 编排处理任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ScheduleTask: ScheduleTask;
+    ScheduleTask?: ScheduleTask;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9517,7 +9598,8 @@ export interface LiveStreamAiReviewResultItem {
 export interface TEHDConfig {
     /**
       * 极速高清类型，可选值：
-<li>TEHD-100：极速高清-100。</li>
+<li>TEHD-100：极速高清-100（视频极速高清）。</li>
+<li>TEHD-200：极速高清-200（音频极速高清）。</li>
 不填代表不启用极速高清。
       */
     Type: string;
@@ -9633,6 +9715,11 @@ export interface MediaVideoStreamItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HdrType: string;
+    /**
+      * 视频Codecs。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Codecs?: string;
 }
 /**
  * 时间点截图模板详情
@@ -9967,6 +10054,16 @@ export interface MediaAudioStreamItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Channel: number;
+    /**
+      * 音频Codecs。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Codecs?: string;
+    /**
+      * 音频响度。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Loudness?: number;
 }
 /**
  * 直播 AI 内容审核图片涉敏结果
@@ -11849,6 +11946,11 @@ export interface EditMediaTaskOutput {
       * 编辑后的视频文件路径。
       */
     Path: string;
+    /**
+      * 编辑后的视频文件元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetaData?: MediaMetaData;
 }
 /**
  * 智能精彩集锦片段列表。
@@ -12059,7 +12161,8 @@ export interface AiRecognitionResult {
     OcrFullTextTask: AiRecognitionTaskOcrFullTextResult;
     /**
       * 翻译结果，当 Type 为
- TransTextRecognition 时有效。
+
+TransTextRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TransTextTask: AiRecognitionTaskTransTextResult;

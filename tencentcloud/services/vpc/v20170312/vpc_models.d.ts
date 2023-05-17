@@ -683,6 +683,23 @@ export interface DescribeVpcEndPointRequest {
     EndPointId?: Array<string>;
 }
 /**
+ * 资源统计项。
+ */
+export interface ResourceStatisticsItem {
+    /**
+      * 资源类型。比如，CVM，ENI等。
+      */
+    ResourceType: string;
+    /**
+      * 资源名称。
+      */
+    ResourceName: string;
+    /**
+      * 资源个数。
+      */
+    ResourceCount: number;
+}
+/**
  * DetachClassicLinkVpc请求参数结构体
  */
 export interface DetachClassicLinkVpcRequest {
@@ -3407,21 +3424,17 @@ export interface DescribeNetDetectStatesRequest {
     Limit?: number;
 }
 /**
- * DescribeNatGateways返回参数结构体
+ * DescribeRouteConflicts请求参数结构体
  */
-export interface DescribeNatGatewaysResponse {
+export interface DescribeRouteConflictsRequest {
     /**
-      * NAT网关对象数组。
+      * 路由表实例ID，例如：rtb-azd4dt1c。
       */
-    NatGatewaySet: Array<NatGateway>;
+    RouteTableId: string;
     /**
-      * 符合条件的NAT网关对象个数。
+      * 要检查的与之冲突的目的端列表。
       */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DestinationCidrBlocks: Array<string>;
 }
 /**
  * DescribeFlowLog返回参数结构体
@@ -4367,6 +4380,15 @@ export interface DescribeSnapshotPoliciesRequest {
     Limit?: number;
 }
 /**
+ * DeleteTrafficPackages请求参数结构体
+ */
+export interface DeleteTrafficPackagesRequest {
+    /**
+      * 待删除的流量包唯一ID数组
+      */
+    TrafficPackageIds: Array<string>;
+}
+/**
  * NotifyRoutes请求参数结构体
  */
 export interface NotifyRoutesRequest {
@@ -4683,6 +4705,15 @@ export interface WithdrawNotifyRoutesRequest {
       * 路由策略唯一ID。
       */
     RouteItemIds: Array<string>;
+}
+/**
+ * DescribeSubnetResourceDashboard请求参数结构体
+ */
+export interface DescribeSubnetResourceDashboardRequest {
+    /**
+      * Subnet实例ID，例如：subnet-f1xjkw1b。
+      */
+    SubnetIds: Array<string>;
 }
 /**
  * Vpc任务结果详细信息。
@@ -9860,6 +9891,27 @@ export interface ModifyCcnAttributeRequest {
     CcnDescription?: string;
 }
 /**
+ * 资源统计信息
+ */
+export interface ResourceStatistics {
+    /**
+      * Vpc实例ID，例如：vpc-f1xjkw1b。
+      */
+    VpcId: string;
+    /**
+      * 子网实例ID，例如：subnet-bthucmmy。
+      */
+    SubnetId: string;
+    /**
+      * 当前已使用的IP总数。
+      */
+    Ip: number;
+    /**
+      * 资源统计信息。
+      */
+    ResourceStatisticsItemSet: Array<ResourceStatisticsItem>;
+}
+/**
  * DeleteSecurityGroupPolicies返回参数结构体
  */
 export interface DeleteSecurityGroupPoliciesResponse {
@@ -10261,6 +10313,23 @@ export interface AllocateAddressesResponse {
       * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
       */
     TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeVpnConnections返回参数结构体
+ */
+export interface DescribeVpnConnectionsResponse {
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount?: number;
+    /**
+      * VPN通道实例。
+      */
+    VpnConnectionSet?: Array<VpnConnection>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11664,6 +11733,15 @@ export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest {
     InternetMaxBandwidthOut: number;
 }
 /**
+ * DisableFlowLogs请求参数结构体
+ */
+export interface DisableFlowLogsRequest {
+    /**
+      * 流日志Id。
+      */
+    FlowLogIds: Array<string>;
+}
+/**
  * ReplaceSecurityGroupPolicy返回参数结构体
  */
 export interface ReplaceSecurityGroupPolicyResponse {
@@ -12118,17 +12196,21 @@ export interface CreateAddressTemplateRequest {
     AddressesExtra?: Array<AddressInfo>;
 }
 /**
- * DescribeRouteConflicts请求参数结构体
+ * DescribeNatGateways返回参数结构体
  */
-export interface DescribeRouteConflictsRequest {
+export interface DescribeNatGatewaysResponse {
     /**
-      * 路由表实例ID，例如：rtb-azd4dt1c。
+      * NAT网关对象数组。
       */
-    RouteTableId: string;
+    NatGatewaySet: Array<NatGateway>;
     /**
-      * 要检查的与之冲突的目的端列表。
+      * 符合条件的NAT网关对象个数。
       */
-    DestinationCidrBlocks: Array<string>;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询nat路由的返回路由对象
@@ -13058,17 +13140,9 @@ export interface CreateDhcpIpRequest {
     SecondaryPrivateIpAddressCount?: number;
 }
 /**
- * DescribeVpnConnections返回参数结构体
+ * DeleteTrafficPackages返回参数结构体
  */
-export interface DescribeVpnConnectionsResponse {
-    /**
-      * 符合条件的实例数量。
-      */
-    TotalCount?: number;
-    /**
-      * VPN通道实例。
-      */
-    VpnConnectionSet?: Array<VpnConnection>;
+export interface DeleteTrafficPackagesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -13231,13 +13305,17 @@ export interface CreateVpcRequest {
     Tags?: Array<Tag>;
 }
 /**
- * DisableFlowLogs请求参数结构体
+ * DescribeSubnetResourceDashboard返回参数结构体
  */
-export interface DisableFlowLogsRequest {
+export interface DescribeSubnetResourceDashboardResponse {
     /**
-      * 流日志Id。
+      * 资源统计结果。
       */
-    FlowLogIds: Array<string>;
+    ResourceStatisticsSet?: Array<ResourceStatistics>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteServiceTemplate请求参数结构体

@@ -384,7 +384,9 @@ path 时填充绝对路径，如 /xxx/test.html
  */
 export interface UserAgentFilter {
   /**
-      * 开关，on或off
+      * UserAgent黑白名单配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -703,6 +705,7 @@ export interface Origin {
 domain：域名类型
 domainv6：域名解析V6类型
 cos：对象存储源站
+third_party: 第三方存储源站
 ip：IP 列表作为源站
 ipv6：源站列表为一个单独的 IPv6 地址
 ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址
@@ -801,7 +804,12 @@ ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名
   AdvanceHttps?: AdvanceHttps
 
   /**
-      * 对象存储回源厂商
+      * 对象存储回源厂商，当源站类型为第三方存储源站(third_party)时必填，可选值包括以下:
+aws_s3: AWS S3
+ali_oss: 阿里云 OSS
+hw_obs: 华为 OBS
+qiniu_kodo: 七牛云 kodo
+others: 其它厂商对象存储,仅支持兼容以AWS签名算法的对象存储，如腾讯云金融专区COS
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginCompany?: string
@@ -2264,8 +2272,10 @@ global：全球
  */
 export interface SecurityConfig {
   /**
-   * on|off
-   */
+      * scdn 安全配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 }
 
@@ -2274,7 +2284,9 @@ export interface SecurityConfig {
  */
 export interface QueryStringKey {
   /**
-      * on | off CacheKey是否由QueryString组成
+      * CacheKey是否由QueryString组成配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -2286,7 +2298,11 @@ export interface QueryStringKey {
   Reorder?: string
 
   /**
-      * includeAll | excludeAll | includeCustom | excludeCustom 使用/排除部分url参数
+      * 使用/排除部分url参数，取值有：
+includeAll：包含所有
+excludeAll：排除所有
+includeCustom：自定义包含
+excludeCustom：自定义排除
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Action?: string
@@ -2439,7 +2455,7 @@ export interface AwsPrivateAccess {
  */
 export interface VideoSeek {
   /**
-      * 视频拖拽开关
+      * 视频拖拽配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -2522,8 +2538,10 @@ export interface DescribeScdnBotDataRequest {
  */
 export interface ScdnConfig {
   /**
-   * on | off
-   */
+      * scdn cc配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -3471,7 +3489,9 @@ export interface AdvancedCCRules {
   Configure?: Array<ScdnSevenLayerRules>
 
   /**
-      * 是否开启改规则 on 开启，off关闭
+      * 自定义cc规则配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -3739,7 +3759,7 @@ export interface CreateScdnFailedLogTaskResponse {
  */
 export interface StatusCodeCache {
   /**
-      * 状态码缓存过期配置开关
+      * 状态码缓存过期配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3790,7 +3810,9 @@ index：首页
   FrequencyLimit?: number
 
   /**
-      * IP 惩罚开关，可选on|off
+      * IP 惩罚配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PunishmentSwitch?: string
@@ -4917,12 +4939,14 @@ PEM 格式，需要进行 Base 64 编码
 
 /**
  * ShareCname配置
+ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白.
  */
 export interface ShareCname {
   /**
-      * ShareCname 配置开关, 开关为off时，域名使用默认CNAME，若需要使用共享CNAME，将开关置为on.
+      * ShareCname 配置开关, 取值有：
+on：开启，使用共享CNAME
+off：关闭，使用默认CNAME
 
-* ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白.
       */
   Switch: string
 
@@ -4948,7 +4972,7 @@ export interface ListClsLogTopicsRequest {
  */
 export interface Seo {
   /**
-      * SEO 配置开关
+      * SEO 搜索引擎优化配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6833,7 +6857,9 @@ export interface DisableClsLogTopicResponse {
  */
 export interface TpgAdapter {
   /**
-      * 开关，"on/off"
+      * 图片优化-TpgAdapter配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -7633,7 +7659,9 @@ export interface StatisticItem {
   AlertPercentage?: number
 
   /**
-      * 提醒开关 on/off
+      * 累计用量封顶告警配置，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AlertSwitch?: string
@@ -7651,7 +7679,9 @@ export interface StatisticItem {
   Cycle?: number
 
   /**
-      * 是否开启该选项，on/off
+      * 累计用量封顶配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -8273,7 +8303,7 @@ export interface ListScdnLogTasksResponse {
  */
 export interface UrlRedirect {
   /**
-      * 访问URL重写配置开关
+      * 访问URL重写配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -9088,8 +9118,10 @@ export interface ScdnAclGroup {
  */
 export interface WafSubRuleStatus {
   /**
-   * 子规则状态，on|off
-   */
+      * Waf子规则开关状态配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -9190,7 +9222,9 @@ delete：刷新全部资源
  */
 export interface SchemeKey {
   /**
-      * on | off 是否使用scheme作为cache key的一部分
+      * scheme作为cache key配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -10027,7 +10061,9 @@ export interface ListTopDDoSDataResponse {
  */
 export interface WebpAdapter {
   /**
-      * 开关，"on/off"
+      * 图片优化-WebpAdapter配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -10035,12 +10071,14 @@ export interface WebpAdapter {
 
 /**
  * WebSocket配置
+WebSocket 为ECDN产品功能，如需使用请通过ECDN域名配置.
  */
 export interface WebSocket {
   /**
-      * WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.
+      * WebSocket 超时配置开关，取值有：
+on：开启，可以调整超时时间
+off：关闭，平台仍支持WebSocket连接，此时超时时间默认为15秒
 
-* WebSocket 为ECDN产品功能，如需使用请通过ECDN域名配置.
       */
   Switch: string
 
@@ -10403,8 +10441,10 @@ export interface ListDiagnoseReportRequest {
  */
 export interface ScdnWafConfig {
   /**
-   * on|off
-   */
+      * Scdn waf配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -10420,7 +10460,9 @@ export interface ScdnWafConfig {
   ErrorPage?: ScdnErrorPage
 
   /**
-      * webshell拦截开关，on|off，默认off
+      * webshell拦截配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WebShellSwitch?: string
@@ -10438,7 +10480,9 @@ export interface ScdnWafConfig {
   Level?: number
 
   /**
-      * waf子规则开关
+      * waf子规则配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubRuleSwitch?: Array<WafSubRuleStatus>
@@ -11349,8 +11393,10 @@ export interface DescribePurgeTasksResponse {
  */
 export interface ScdnDdosConfig {
   /**
-   * on|off
-   */
+      * Scdn ddos配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 }
 

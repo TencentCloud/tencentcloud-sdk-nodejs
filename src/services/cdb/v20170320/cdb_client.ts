@@ -49,6 +49,7 @@ import {
   TableName,
   CdbRegionSellConf,
   DescribeRoGroupsRequest,
+  DescribeBackupDecryptionKeyRequest,
   CreateCdbProxyAddressResponse,
   RollbackTableName,
   CloseWanServiceRequest,
@@ -373,6 +374,7 @@ import {
   ModifyAccountMaxUserConnectionsResponse,
   Outbound,
   ParamInfo,
+  DescribeBackupDecryptionKeyResponse,
   SecurityGroup,
   DescribeProxyConnectionPoolConfResponse,
   OfflineIsolatedInstancesRequest,
@@ -1217,6 +1219,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
   ): Promise<DescribeAuditLogFilesResponse> {
     return this.request("DescribeAuditLogFiles", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBackupDecryptionKey)用于查询备份文件解密密钥。
+   */
+  async DescribeBackupDecryptionKey(
+    req: DescribeBackupDecryptionKeyRequest,
+    cb?: (error: string, rep: DescribeBackupDecryptionKeyResponse) => void
+  ): Promise<DescribeBackupDecryptionKeyResponse> {
+    return this.request("DescribeBackupDecryptionKey", req, cb)
   }
 
   /**

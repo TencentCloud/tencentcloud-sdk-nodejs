@@ -79,6 +79,7 @@ import {
   ReverseShellRule,
   DescribeBashRulesResponse,
   DescribeAvailableExpertServiceDetailResponse,
+  BashEventsInfoNew,
   ChangeRuleEventsIgnoreStatusRequest,
   DescribeWebPageEventListRequest,
   ExportAssetCoreModuleListRequest,
@@ -186,6 +187,7 @@ import {
   DescribeReverseShellEventsRequest,
   BaselineCategory,
   DescribeEventByTableResponse,
+  ModifyLogStorageConfigRequest,
   DescribeAttackVulTypeListRequest,
   DescribeLogStorageStatisticRequest,
   DeleteBaselinePolicyRequest,
@@ -199,7 +201,7 @@ import {
   BruteAttackRuleList,
   DescribeBanStatusResponse,
   DescribeVulListRequest,
-  DescribeLicenseBindListResponse,
+  DescribeLogStorageRecordRequest,
   BaselineInfo,
   AssetAppBaseInfo,
   DescribePrivilegeRulesRequest,
@@ -234,6 +236,7 @@ import {
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
   ScanVulRequest,
+  LogStorageRecord,
   ExportBaselineRuleDetectListRequest,
   AssetUserBaseInfo,
   RecoverMalwaresRequest,
@@ -268,6 +271,7 @@ import {
   DescribeIndexListResponse,
   DescribeIgnoreHostAndItemConfigResponse,
   ModifyWebPageProtectDirRequest,
+  VulDetailInfo,
   DescribeWebPageGeneralizeResponse,
   DescribeReverseShellEventInfoResponse,
   DescribeBanWhiteListResponse,
@@ -427,6 +431,7 @@ import {
   ExportIgnoreRuleEffectHostListResponse,
   DescribeAssetRecentMachineInfoRequest,
   DescribeAssetWebAppPluginListRequest,
+  DescribeLogStorageRecordResponse,
   DeletePrivilegeEventsResponse,
   DescribeMachineInfoResponse,
   VulHostTopInfo,
@@ -472,7 +477,7 @@ import {
   UpdateMachineTagsResponse,
   LoginWhiteCombinedInfo,
   DescribeMalwareInfoResponse,
-  VulDetailInfo,
+  DescribeLicenseBindListResponse,
   ExportBaselineHostDetectListResponse,
   DescribeAssetJarInfoRequest,
   DescribePrivilegeEventsRequest,
@@ -480,7 +485,7 @@ import {
   DescribeVulHostCountScanTimeRequest,
   ExportScanTaskDetailsResponse,
   ExportBashEventsResponse,
-  BashEventsInfoNew,
+  DescribeLogStorageConfigRequest,
   EventStat,
   DeleteWebPageEventLogResponse,
   DescribeLicenseBindScheduleRequest,
@@ -575,6 +580,7 @@ import {
   VertexInfo,
   DescribeHistoryAccountsResponse,
   BaselineCustomRuleIdName,
+  DescribeLogStorageConfigResponse,
   BaselineRuleDetect,
   DescribeLoginWhiteListRequest,
   OpenPortStatistics,
@@ -665,6 +671,7 @@ import {
   AccountStatistics,
   AssetUserKeyInfo,
   DescribeMachinesResponse,
+  ModifyLogStorageConfigResponse,
   DescribeAssetWebLocationListRequest,
   DescribeAssetHostTotalCountRequest,
   DescribeVulLevelCountRequest,
@@ -999,6 +1006,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivilegeEventsResponse) => void
   ): Promise<DeletePrivilegeEventsResponse> {
     return this.request("DeletePrivilegeEvents", req, cb)
+  }
+
+  /**
+   * 获取日志存储量记录
+   */
+  async DescribeLogStorageRecord(
+    req?: DescribeLogStorageRecordRequest,
+    cb?: (error: string, rep: DescribeLogStorageRecordResponse) => void
+  ): Promise<DescribeLogStorageRecordResponse> {
+    return this.request("DescribeLogStorageRecord", req, cb)
   }
 
   /**
@@ -1989,6 +2006,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServerRelatedDirInfoResponse) => void
   ): Promise<DescribeServerRelatedDirInfoResponse> {
     return this.request("DescribeServerRelatedDirInfo", req, cb)
+  }
+
+  /**
+   * 获取日志存储配置
+   */
+  async DescribeLogStorageConfig(
+    req?: DescribeLogStorageConfigRequest,
+    cb?: (error: string, rep: DescribeLogStorageConfigResponse) => void
+  ): Promise<DescribeLogStorageConfigResponse> {
+    return this.request("DescribeLogStorageConfig", req, cb)
   }
 
   /**
@@ -3072,6 +3099,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportVulDetectionExcelResponse) => void
   ): Promise<ExportVulDetectionExcelResponse> {
     return this.request("ExportVulDetectionExcel", req, cb)
+  }
+
+  /**
+   * 修改日志存储配置
+   */
+  async ModifyLogStorageConfig(
+    req: ModifyLogStorageConfigRequest,
+    cb?: (error: string, rep: ModifyLogStorageConfigResponse) => void
+  ): Promise<ModifyLogStorageConfigResponse> {
+    return this.request("ModifyLogStorageConfig", req, cb)
   }
 
   /**

@@ -520,11 +520,11 @@ export interface DescribeTaskListResponse {
     /**
       * 无
       */
-    TaskList: Array<TaskListItem>;
+    TaskList?: Array<TaskListItem>;
     /**
       * 列表数量
       */
-    Total: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -834,7 +834,7 @@ export interface DescribeTaskListRequest {
       */
     TaskTag?: Array<string>;
     /**
-      * 状态
+      * 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束)
       */
     TaskStatus?: number;
     /**

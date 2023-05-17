@@ -106,6 +106,7 @@ import {
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
+  CalleeAttribute,
   StaffStatusExtra,
   CreateStaffRequest,
   DescribeChatMessagesResponse,

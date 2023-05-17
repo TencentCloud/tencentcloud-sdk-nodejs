@@ -1859,6 +1859,14 @@ export interface CreateAutoCalloutTaskRequest {
       * 自定义变量（仅高级版支持）
       */
     Variables?: Array<Variable>;
+    /**
+      * UUI
+      */
+    UUI?: string;
+    /**
+      * 被叫属性
+      */
+    CalleeAttributes?: Array<CalleeAttribute>;
 }
 /**
  * 筛选条件
@@ -2212,6 +2220,23 @@ export interface DeleteStaffResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 被叫属性
+ */
+export interface CalleeAttribute {
+    /**
+      * 被叫号码
+      */
+    Callee: string;
+    /**
+      * 随路数据
+      */
+    UUI?: string;
+    /**
+      * 参数
+      */
+    Variables?: Array<Variable>;
 }
 /**
  * 坐席状态补充信息

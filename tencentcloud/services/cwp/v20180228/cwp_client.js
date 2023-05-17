@@ -198,6 +198,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeEvents", req, cb);
     }
     /**
+     * 获取日志存储量记录
+     */
+    async DescribeLogStorageRecord(req, cb) {
+        return this.request("DescribeLogStorageRecord", req, cb);
+    }
+    /**
      * 入侵检测，获取恶意请求列表
      */
     async DescribeRiskDnsList(req, cb) {
@@ -790,6 +796,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeServerRelatedDirInfo(req, cb) {
         return this.request("DescribeServerRelatedDirInfo", req, cb);
+    }
+    /**
+     * 获取日志存储配置
+     */
+    async DescribeLogStorageConfig(req, cb) {
+        return this.request("DescribeLogStorageConfig", req, cb);
     }
     /**
      * 修改爆破阻断模式
@@ -1441,6 +1453,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportVulDetectionExcel(req, cb) {
         return this.request("ExportVulDetectionExcel", req, cb);
+    }
+    /**
+     * 修改日志存储配置
+     */
+    async ModifyLogStorageConfig(req, cb) {
+        return this.request("ModifyLogStorageConfig", req, cb);
     }
     /**
      * 查询资产管理启动服务列表

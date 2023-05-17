@@ -298,6 +298,16 @@ it("cwp.v20180228.DeletePrivilegeEvents", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeLogStorageRecord", async function () {
+    try {
+       const data = await client.DescribeLogStorageRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeRiskDnsList", async function () {
     try {
        const data = await client.DescribeRiskDnsList({})
@@ -1281,6 +1291,16 @@ it("cwp.v20180228.ExportBaselineRuleDetectList", async function () {
 it("cwp.v20180228.DescribeServerRelatedDirInfo", async function () {
     try {
        const data = await client.DescribeServerRelatedDirInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeLogStorageConfig", async function () {
+    try {
+       const data = await client.DescribeLogStorageConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2361,6 +2381,16 @@ it("cwp.v20180228.DescribeScanVulSetting", async function () {
 it("cwp.v20180228.ExportVulDetectionExcel", async function () {
     try {
        const data = await client.ExportVulDetectionExcel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyLogStorageConfig", async function () {
+    try {
+       const data = await client.ModifyLogStorageConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

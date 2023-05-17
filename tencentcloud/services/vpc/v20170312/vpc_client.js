@@ -462,6 +462,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, cb);
     }
     /**
+     * 删除共享带宽包（仅非活动状态的流量包可删除）。
+     */
+    async DeleteTrafficPackages(req, cb) {
+        return this.request("DeleteTrafficPackages", req, cb);
+    }
+    /**
      * 本接口（DescribeTemplateLimits）用于查询参数模板配额列表。
      */
     async DescribeTemplateLimits(req, cb) {
@@ -989,6 +995,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyLocalGateway(req, cb) {
         return this.request("ModifyLocalGateway", req, cb);
+    }
+    /**
+     * 本接口(DescribeSubnetResourceDashboard)用于查看Subnet资源信息。
+     */
+    async DescribeSubnetResourceDashboard(req, cb) {
+        return this.request("DescribeSubnetResourceDashboard", req, cb);
     }
     /**
      * 本接口（DescribeVpnConnections）用于查询VPN通道列表。

@@ -56,6 +56,7 @@ import {
   CreateSnapshotPoliciesResponse,
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
+  ResourceStatisticsItem,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
@@ -204,7 +205,7 @@ import {
   DeleteVpnGatewaySslServerRequest,
   AllocateIp6AddressesBandwidthResponse,
   DescribeNetDetectStatesRequest,
-  DescribeNatGatewaysResponse,
+  DescribeRouteConflictsRequest,
   DescribeFlowLogResponse,
   DownloadCustomerGatewayConfigurationResponse,
   DescribeBandwidthPackagesRequest,
@@ -246,6 +247,7 @@ import {
   RenewVpnGatewayRequest,
   SecurityGroupPolicy,
   DescribeSnapshotPoliciesRequest,
+  DeleteTrafficPackagesRequest,
   NotifyRoutesRequest,
   DeleteVpcRequest,
   ModifyServiceTemplateAttributeResponse,
@@ -261,6 +263,7 @@ import {
   CreateCustomerGatewayResponse,
   TrafficPackage,
   WithdrawNotifyRoutesRequest,
+  DescribeSubnetResourceDashboardRequest,
   VpcTaskResultDetailInfo,
   DeleteServiceTemplateGroupResponse,
   DisassociateAddressRequest,
@@ -530,6 +533,7 @@ import {
   CreateTrafficPackagesRequest,
   CreateAndAttachNetworkInterfaceResponse,
   ModifyCcnAttributeRequest,
+  ResourceStatistics,
   DeleteSecurityGroupPoliciesResponse,
   DisassociateDhcpIpWithAddressIpResponse,
   CreateVpcEndPointServiceResponse,
@@ -546,6 +550,7 @@ import {
   Resource,
   DeleteDhcpIpRequest,
   AllocateAddressesResponse,
+  DescribeVpnConnectionsResponse,
   BandwidthPackage,
   ModifyVpcAttributeRequest,
   DescribeIp6TranslatorsResponse,
@@ -626,6 +631,7 @@ import {
   ReleaseAddressesResponse,
   AuditCrossBorderComplianceResponse,
   InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
+  DisableFlowLogsRequest,
   ReplaceSecurityGroupPolicyResponse,
   EnableGatewayFlowMonitorRequest,
   ModifyPrivateIpAddressesAttributeResponse,
@@ -655,7 +661,7 @@ import {
   AttachClassicLinkVpcResponse,
   DownloadVpnGatewaySslClientCertRequest,
   CreateAddressTemplateRequest,
-  DescribeRouteConflictsRequest,
+  DescribeNatGatewaysResponse,
   NatDirectConnectGatewayRoute,
   NetworkAclQuintupleEntries,
   AttachNetworkInterfaceRequest,
@@ -718,7 +724,7 @@ import {
   DescribeAddressTemplatesRequest,
   ConflictSource,
   CreateDhcpIpRequest,
-  DescribeVpnConnectionsResponse,
+  DeleteTrafficPackagesResponse,
   DeleteCustomerGatewayRequest,
   DescribeAddressTemplatesResponse,
   Quota,
@@ -729,7 +735,7 @@ import {
   DescribeServiceTemplateGroupsRequest,
   CreateSecurityGroupWithPoliciesRequest,
   CreateVpcRequest,
-  DisableFlowLogsRequest,
+  DescribeSubnetResourceDashboardResponse,
   DeleteServiceTemplateRequest,
   DescribeSecurityGroupAssociationStatisticsRequest,
   NotifyRoutesResponse,
@@ -1459,6 +1465,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateVpnConnectionDefaultHealthCheckIpResponse) => void
   ): Promise<GenerateVpnConnectionDefaultHealthCheckIpResponse> {
     return this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, cb)
+  }
+
+  /**
+   * 删除共享带宽包（仅非活动状态的流量包可删除）。
+   */
+  async DeleteTrafficPackages(
+    req: DeleteTrafficPackagesRequest,
+    cb?: (error: string, rep: DeleteTrafficPackagesResponse) => void
+  ): Promise<DeleteTrafficPackagesResponse> {
+    return this.request("DeleteTrafficPackages", req, cb)
   }
 
   /**
@@ -2288,6 +2304,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLocalGatewayResponse) => void
   ): Promise<ModifyLocalGatewayResponse> {
     return this.request("ModifyLocalGateway", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeSubnetResourceDashboard)用于查看Subnet资源信息。
+   */
+  async DescribeSubnetResourceDashboard(
+    req: DescribeSubnetResourceDashboardRequest,
+    cb?: (error: string, rep: DescribeSubnetResourceDashboardResponse) => void
+  ): Promise<DescribeSubnetResourceDashboardResponse> {
+    return this.request("DescribeSubnetResourceDashboard", req, cb)
   }
 
   /**

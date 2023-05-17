@@ -1059,6 +1059,21 @@ export interface DescribeRoGroupsRequest {
 }
 
 /**
+ * DescribeBackupDecryptionKey请求参数结构体
+ */
+export interface DescribeBackupDecryptionKeyRequest {
+  /**
+   * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 实例的备份ID，可通过DescribeBackups接口查询备份的ID。
+   */
+  BackupId: number
+}
+
+/**
  * CreateCdbProxyAddress返回参数结构体
  */
 export interface CreateCdbProxyAddressResponse {
@@ -3651,6 +3666,12 @@ export interface ParamTemplateInfo {
    * 参数模板类型
    */
   TemplateType: string
+
+  /**
+      * 参数模板引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EngineType?: string
 }
 
 /**
@@ -9652,6 +9673,21 @@ export interface ParamInfo {
    * 参数值
    */
   Value: string
+}
+
+/**
+ * DescribeBackupDecryptionKey返回参数结构体
+ */
+export interface DescribeBackupDecryptionKeyResponse {
+  /**
+   * 备份文件解密密钥。
+   */
+  DecryptionKey: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

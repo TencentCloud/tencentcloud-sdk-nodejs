@@ -285,7 +285,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeNatAcRule(req: DescribeNatAcRuleRequest, cb?: (error: string, rep: DescribeNatAcRuleResponse) => void): Promise<DescribeNatAcRuleResponse>;
     /**
-     * 添加nat访问控制规则
+     * 添加nat访问控制规则(地域必填)
      */
     AddNatAcRule(req: AddNatAcRuleRequest, cb?: (error: string, rep: AddNatAcRuleResponse) => void): Promise<AddNatAcRuleResponse>;
     /**

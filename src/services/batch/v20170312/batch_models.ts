@@ -341,8 +341,9 @@ export interface SystemDisk {
   DiskSize?: number
 
   /**
-   * 所属的独享集群ID。
-   */
+      * 所属的独享集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   CdcId?: string
 }
 

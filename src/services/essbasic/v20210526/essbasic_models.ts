@@ -3754,7 +3754,7 @@ export interface ChannelBatchCancelFlowsRequest {
   FlowIds: Array<string>
 
   /**
-   * 撤销理由
+   * 撤销理由,不超过200个字符
    */
   CancelMessage?: string
 

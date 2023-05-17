@@ -439,7 +439,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatAcRule", req, cb);
     }
     /**
-     * 添加nat访问控制规则
+     * 添加nat访问控制规则(地域必填)
      */
     async AddNatAcRule(req, cb) {
         return this.request("AddNatAcRule", req, cb);

@@ -335,7 +335,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDelayLiveStream", req, cb);
     }
     /**
-     * 直播上行路数查询
+     * 直播上行路数查询。
      */
     async DescribeUploadStreamNums(req, cb) {
         return this.request("DescribeUploadStreamNums", req, cb);

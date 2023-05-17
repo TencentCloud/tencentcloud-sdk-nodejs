@@ -1585,6 +1585,134 @@ export interface DescribeAvailableExpertServiceDetailResponse {
     RequestId?: string;
 }
 /**
+ * 高危命令数据详情(新)
+ */
+export interface BashEventsInfoNew {
+    /**
+      * 数据ID
+      */
+    Id?: number;
+    /**
+      * 主机安全ID
+      */
+    Uuid?: string;
+    /**
+      * 主机ID
+      */
+    Quuid?: string;
+    /**
+      * 主机内网IP
+      */
+    HostIp?: string;
+    /**
+      * 平台类型
+      */
+    Platform?: number;
+    /**
+      * 执行命令
+      */
+    BashCmd?: string;
+    /**
+      * 规则ID,等于0表示已规则已被删除或生效范围已修改
+      */
+    RuleId?: number;
+    /**
+      * 规则名称
+      */
+    RuleName?: string;
+    /**
+      * 规则等级：1-高 2-中 3-低
+      */
+    RuleLevel?: number;
+    /**
+      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
+      */
+    Status?: number;
+    /**
+      * 发生时间
+      */
+    CreateTime?: string;
+    /**
+      * 主机名
+      */
+    MachineName?: string;
+    /**
+      * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Exe?: string;
+    /**
+      * 处理时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifyTime?: string;
+    /**
+      * 规则类别  0=系统规则，1=用户规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleCategory?: number;
+    /**
+      * 自动生成的正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegexBashCmd?: string;
+    /**
+      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PsTree?: string;
+    /**
+      * 建议方案
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuggestScheme?: string;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HarmDescribe?: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<string>;
+    /**
+      * 参考链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    References?: Array<string>;
+    /**
+      * 主机外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineWanIp?: string;
+    /**
+      * 主机在线状态 OFFLINE  ONLINE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineStatus?: string;
+    /**
+      * 登录用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    User?: string;
+    /**
+      * 进程号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pid?: string;
+    /**
+      * 0:普通 1:专业版 2:旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineType?: number;
+    /**
+      * 检测来源 0:bash日志 1:实时监控
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DetectBy?: number;
+}
+/**
  * ChangeRuleEventsIgnoreStatus请求参数结构体
  */
 export interface ChangeRuleEventsIgnoreStatusRequest {
@@ -3910,6 +4038,23 @@ export interface DescribeEventByTableResponse {
     RequestId?: string;
 }
 /**
+ * ModifyLogStorageConfig请求参数结构体
+ */
+export interface ModifyLogStorageConfigRequest {
+    /**
+      * 是否修改有效期
+      */
+    IsModifyPeriod: boolean;
+    /**
+      * 存储类型，string数组
+      */
+    Type?: Array<string>;
+    /**
+      * 日志存储天数，3640表示不限
+      */
+    Period?: number;
+}
+/**
  * DescribeAttackVulTypeList请求参数结构体
  */
 export declare type DescribeAttackVulTypeListRequest = null;
@@ -4118,22 +4263,9 @@ export interface DescribeVulListRequest {
     Order?: string;
 }
 /**
- * DescribeLicenseBindList返回参数结构体
+ * DescribeLogStorageRecord请求参数结构体
  */
-export interface DescribeLicenseBindListResponse {
-    /**
-      * 总条数
-      */
-    TotalCount: number;
-    /**
-      * 绑定机器列表信息
-      */
-    List: Array<LicenseBindDetail>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeLogStorageRecordRequest = null;
 /**
  * 基线信息
  */
@@ -4822,6 +4954,26 @@ export interface ScanVulRequest {
       * 需要扫描的漏洞id
       */
     VulIds?: Array<number>;
+}
+/**
+ * 日志存储量记录
+ */
+export interface LogStorageRecord {
+    /**
+      * 年月份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Month?: string;
+    /**
+      * 存储量，字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsedSize?: number;
+    /**
+      * 总量，字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InquireSize?: number;
 }
 /**
  * ExportBaselineRuleDetectList请求参数结构体
@@ -5862,6 +6014,55 @@ export interface ModifyWebPageProtectDirRequest {
       * 防护机器列表信息
       */
     HostConfig: Array<ProtectHostConfig>;
+}
+/**
+ * 漏洞详细信息
+ */
+export interface VulDetailInfo {
+    /**
+      * 漏洞ID
+      */
+    VulId: number;
+    /**
+      * 漏洞级别
+      */
+    Level: number;
+    /**
+      * 漏洞名称
+      */
+    Name: string;
+    /**
+      * cve编号
+      */
+    CveId: string;
+    /**
+      * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
+      */
+    VulCategory: number;
+    /**
+      * 漏洞描述
+      */
+    Descript: string;
+    /**
+      * 修复建议
+      */
+    Fix: string;
+    /**
+      * 参考链接
+      */
+    Reference: string;
+    /**
+      * CVSS评分
+      */
+    CvssScore: number;
+    /**
+      * CVSS详情
+      */
+    Cvss: string;
+    /**
+      * 发布时间
+      */
+    PublishTime: string;
 }
 /**
  * DescribeWebPageGeneralize返回参数结构体
@@ -9719,6 +9920,20 @@ export interface DescribeAssetWebAppPluginListRequest {
     Limit?: number;
 }
 /**
+ * DescribeLogStorageRecord返回参数结构体
+ */
+export interface DescribeLogStorageRecordResponse {
+    /**
+      * 存储量记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Records?: Array<LogStorageRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeletePrivilegeEvents返回参数结构体
  */
 export interface DeletePrivilegeEventsResponse {
@@ -11057,53 +11272,21 @@ export interface DescribeMalwareInfoResponse {
     RequestId?: string;
 }
 /**
- * 漏洞详细信息
+ * DescribeLicenseBindList返回参数结构体
  */
-export interface VulDetailInfo {
+export interface DescribeLicenseBindListResponse {
     /**
-      * 漏洞ID
+      * 总条数
       */
-    VulId: number;
+    TotalCount: number;
     /**
-      * 漏洞级别
+      * 绑定机器列表信息
       */
-    Level: number;
+    List: Array<LicenseBindDetail>;
     /**
-      * 漏洞名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Name: string;
-    /**
-      * cve编号
-      */
-    CveId: string;
-    /**
-      * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
-      */
-    VulCategory: number;
-    /**
-      * 漏洞描述
-      */
-    Descript: string;
-    /**
-      * 修复建议
-      */
-    Fix: string;
-    /**
-      * 参考链接
-      */
-    Reference: string;
-    /**
-      * CVSS评分
-      */
-    CvssScore: number;
-    /**
-      * CVSS详情
-      */
-    Cvss: string;
-    /**
-      * 发布时间
-      */
-    PublishTime: string;
+    RequestId?: string;
 }
 /**
  * ExportBaselineHostDetectList返回参数结构体
@@ -11210,133 +11393,9 @@ export interface ExportBashEventsResponse {
     RequestId?: string;
 }
 /**
- * 高危命令数据详情(新)
+ * DescribeLogStorageConfig请求参数结构体
  */
-export interface BashEventsInfoNew {
-    /**
-      * 数据ID
-      */
-    Id?: number;
-    /**
-      * 主机安全ID
-      */
-    Uuid?: string;
-    /**
-      * 主机ID
-      */
-    Quuid?: string;
-    /**
-      * 主机内网IP
-      */
-    HostIp?: string;
-    /**
-      * 平台类型
-      */
-    Platform?: number;
-    /**
-      * 执行命令
-      */
-    BashCmd?: string;
-    /**
-      * 规则ID,等于0表示已规则已被删除或生效范围已修改
-      */
-    RuleId?: number;
-    /**
-      * 规则名称
-      */
-    RuleName?: string;
-    /**
-      * 规则等级：1-高 2-中 3-低
-      */
-    RuleLevel?: number;
-    /**
-      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
-      */
-    Status?: number;
-    /**
-      * 发生时间
-      */
-    CreateTime?: string;
-    /**
-      * 主机名
-      */
-    MachineName?: string;
-    /**
-      * 进程名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Exe?: string;
-    /**
-      * 处理时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifyTime?: string;
-    /**
-      * 规则类别  0=系统规则，1=用户规则
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RuleCategory?: number;
-    /**
-      * 自动生成的正则表达式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RegexBashCmd?: string;
-    /**
-      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PsTree?: string;
-    /**
-      * 建议方案
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SuggestScheme?: string;
-    /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HarmDescribe?: string;
-    /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags?: Array<string>;
-    /**
-      * 参考链接
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    References?: Array<string>;
-    /**
-      * 主机外网ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MachineWanIp?: string;
-    /**
-      * 主机在线状态 OFFLINE  ONLINE
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MachineStatus?: string;
-    /**
-      * 登录用户
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    User?: string;
-    /**
-      * 进程号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Pid?: string;
-    /**
-      * 0:普通 1:专业版 2:旗舰版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MachineType?: number;
-    /**
-      * 检测来源 0:bash日志 1:实时监控
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DetectBy?: number;
-}
+export declare type DescribeLogStorageConfigRequest = null;
 /**
  * 未处理的安全事件统计信息
  */
@@ -13768,6 +13827,30 @@ export interface BaselineCustomRuleIdName {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleName: string;
+}
+/**
+ * DescribeLogStorageConfig返回参数结构体
+ */
+export interface DescribeLogStorageConfigResponse {
+    /**
+      * 存储类型，string数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: Array<string>;
+    /**
+      * 日志存储天数，3640表示不限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Period?: number;
+    /**
+      * 本月Period的修改次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PeriodModifyCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 基线规则检测
@@ -16233,6 +16316,15 @@ export interface DescribeMachinesResponse {
       * 主机数量
       */
     TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyLogStorageConfig返回参数结构体
+ */
+export interface ModifyLogStorageConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

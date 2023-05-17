@@ -768,6 +768,16 @@ it("cdb.v20170320.DescribeAuditLogFiles", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeBackupDecryptionKey", async function () {
+    try {
+       const data = await client.DescribeBackupDecryptionKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeInstanceParamRecords", async function () {
     try {
        const data = await client.DescribeInstanceParamRecords({})

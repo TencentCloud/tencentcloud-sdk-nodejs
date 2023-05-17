@@ -847,7 +847,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 直播上行路数查询
+   * 直播上行路数查询。
    */
   async DescribeUploadStreamNums(
     req: DescribeUploadStreamNumsRequest,
