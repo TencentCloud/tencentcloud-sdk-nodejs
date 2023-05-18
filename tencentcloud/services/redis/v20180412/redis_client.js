@@ -502,7 +502,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenSSL", req, cb);
     }
     /**
-     * 获取备份配置
+     * 本接口（DescribeAutoBackupConfig）用于获取自动备份配置规则。
      */
     async DescribeAutoBackupConfig(req, cb) {
         return this.request("DescribeAutoBackupConfig", req, cb);

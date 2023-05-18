@@ -314,7 +314,7 @@ export declare class Client extends AbstractClient {
      */
     ApplyInstanceSnapshot(req: ApplyInstanceSnapshotRequest, cb?: (error: string, rep: ApplyInstanceSnapshotResponse) => void): Promise<ApplyInstanceSnapshotResponse>;
     /**
-     * 本接口 (AttachCcn) 用于解除与云联网的关联。
+     * 本接口 (DetachCcn) 用于解除与云联网的关联。
      */
     DetachCcn(req: DetachCcnRequest, cb?: (error: string, rep: DetachCcnResponse) => void): Promise<DetachCcnResponse>;
     /**

@@ -444,7 +444,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyInstanceSnapshot", req, cb);
     }
     /**
-     * 本接口 (AttachCcn) 用于解除与云联网的关联。
+     * 本接口 (DetachCcn) 用于解除与云联网的关联。
      */
     async DetachCcn(req, cb) {
         return this.request("DetachCcn", req, cb);

@@ -550,7 +550,9 @@ ip表示查询BOT客户端IP的Top信息
  */
 export interface RedirectConfig {
     /**
-      * 配置开关
+      * 自定义回源302 follow请求host配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -1697,7 +1699,7 @@ export interface StartScdnDomainResponse {
  */
 export interface ResponseHeader {
     /**
-      * 自定义响应头开关
+      * 自定义响应头配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -1891,7 +1893,7 @@ export interface DDoSAttackBandwidthData {
  */
 export interface OriginPullOptimization {
     /**
-      * 跨国回源优化配置开关
+      * 跨国回源优化配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -1992,7 +1994,7 @@ excludeCustom：自定义排除
  */
 export interface MaxAge {
     /**
-      * 浏览器缓存配置开关
+      * 浏览器缓存配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2257,7 +2259,9 @@ export interface ExtraLogset {
  */
 export interface OfflineCache {
     /**
-      * on | off, 离线缓存是否开启
+      * 离线缓存配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
 }
@@ -2684,7 +2688,7 @@ failed: 失败
  */
 export interface Referer {
     /**
-      * referer 黑白名单配置开关
+      * referer 黑白名单配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -3184,7 +3188,9 @@ disabled：未启用
  */
 export interface BotCookie {
     /**
-      * on|off
+      * Bot cookie策略配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -3553,7 +3559,9 @@ export interface DescribeHttpsPackagesResponse {
  */
 export interface QnPrivateAccess {
     /**
-      * 开关 on/off
+      * 七牛元对象存储回源鉴权配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -3603,7 +3611,9 @@ export interface DescribeCertDomainsResponse {
  */
 export interface ScdnBotConfig {
     /**
-      * on|off
+      * Scdn bot配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -3740,7 +3750,7 @@ export interface DescribeCdnOriginIpResponse {
  */
 export interface RangeOriginPull {
     /**
-      * 分片回源配置开关
+      * 分片回源配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -3956,7 +3966,7 @@ export interface DescribeScdnIpStrategyRequest {
  */
 export interface IpFreqLimit {
     /**
-      * IP 限频配置开关
+      * IP 限频配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -4098,7 +4108,9 @@ export interface BotStatisticsCount {
  */
 export interface RangeOriginPullRule {
     /**
-      * 分片回源配置开关
+      * 分片回源配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -4899,7 +4911,9 @@ export interface UrlRecord {
  */
 export interface OthersPrivateAccess {
     /**
-      * 开关， on/off。
+      * 其他厂商对象存储回源鉴权配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -5318,7 +5332,9 @@ export interface GuetzliAdapter {
  */
 export interface OriginCombine {
     /**
-      * on|off 是否开启合并回源
+      * 合并回源配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
 }
@@ -5493,11 +5509,13 @@ export interface ListClsTopicDomainsResponse {
     RequestId?: string;
 }
 /**
- * Ipv6启用配置，不可更改
+ * Ipv6源站启用配置，不可更改
  */
 export interface Ipv6 {
     /**
-      * 域名是否开启ipv6功能，on或off。
+      * 域名开启源站ipv6配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
@@ -6282,7 +6300,9 @@ export interface GetDisableRecordsResponse {
  */
 export interface Ipv6Access {
     /**
-      * 域名是否开启ipv6访问功能，on或off。
+      * 域名开启ipv6访问配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
@@ -6606,7 +6626,7 @@ off：关闭
  */
 export interface RequestHeader {
     /**
-      * 自定义请求头配置开关
+      * 自定义请求头配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -7114,7 +7134,9 @@ export interface ScdnTopData {
  */
 export interface OssPrivateAccess {
     /**
-      * 开关， on/off。
+      * oss回源鉴权配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -7862,7 +7884,9 @@ off：关闭
  */
 export interface ScdnAclConfig {
     /**
-      * 是否开启，on | off
+      * SCDN访问控制配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -7886,7 +7910,10 @@ export interface ScdnAclConfig {
  */
 export interface OriginAuthentication {
     /**
-      * 鉴权开关，on或off
+      * 回源鉴权高级配置开关，取值有：
+on：开启
+off：关闭
+
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
@@ -8465,7 +8492,7 @@ export interface DescribeDistrictIspDataResponse {
  */
 export interface RuleEngine {
     /**
-      * 规则引擎配置开关
+      * 规则引擎配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -9379,7 +9406,9 @@ ip表示查询BOT客户端IP的Top信息
  */
 export interface BotJavaScript {
     /**
-      * on|off
+      * Bot js策略配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
     /**
@@ -9431,7 +9460,7 @@ day：天粒度
  */
 export interface ResponseHeaderCache {
     /**
-      * 源站头部缓存开关
+      * 源站头部缓存配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -9480,9 +9509,9 @@ RemoteAuthenticationRules和Server 互斥，只需要配置其中一个。
  */
 export interface RemoteAuthentication {
     /**
-      * 远程鉴权开关；
-on : 开启;
-off: 关闭；
+      * 远程鉴权配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
@@ -9572,7 +9601,9 @@ path 时填充绝对路径，如 /xxx/test.html
  */
 export interface Quic {
     /**
-      * 是否启动Quic配置
+      * Quic功能配置开关，取值有：
+on：开启
+off：关闭
       */
     Switch: string;
 }

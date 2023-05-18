@@ -1942,31 +1942,36 @@ export interface DescribeParamTemplateInfoResponse {
     /**
       * 参数模板 ID。
       */
-    TemplateId: number;
+    TemplateId?: number;
     /**
       * 参数模板名称。
       */
-    Name: string;
+    Name?: string;
     /**
       * 参数模板对应实例版本
       */
-    EngineVersion: string;
+    EngineVersion?: string;
     /**
       * 参数模板中的参数数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 参数详情
       */
-    Items: Array<ParameterDetail>;
+    Items?: Array<ParameterDetail>;
     /**
       * 参数模板描述
       */
-    Description: string;
+    Description?: string;
     /**
       * 参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
       */
-    TemplateType: string;
+    TemplateType?: string;
+    /**
+      * 参数模板引擎。支持值包括："InnoDB"，"RocksDB"。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EngineType?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

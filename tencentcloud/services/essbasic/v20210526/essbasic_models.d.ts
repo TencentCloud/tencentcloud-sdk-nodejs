@@ -675,7 +675,7 @@ export interface ChannelCreateFlowByFilesRequest {
       */
     CustomShowMap?: string;
     /**
-      * 业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      * 业务信息，最大长度1000个字符。
       */
     CustomerData?: string;
     /**
@@ -705,6 +705,10 @@ MobileCheck：手机号验证
       * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
       */
     CcNotifyType?: number;
+    /**
+      * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    AutoSignScene?: string;
 }
 /**
  * 渠道角色信息
@@ -1751,7 +1755,7 @@ export interface FlowInfo {
       */
     FlowDescription?: string;
     /**
-      *  第三方应用平台的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      *  第三方应用平台的业务信息，最大长度1000个字符。
       */
     CustomerData?: string;
     /**
@@ -1773,6 +1777,10 @@ export interface FlowInfo {
       * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
       */
     CcNotifyType?: number;
+    /**
+      * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    AutoSignScene?: string;
 }
 /**
  * 接口调用者信息

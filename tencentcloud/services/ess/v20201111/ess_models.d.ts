@@ -861,6 +861,10 @@ false：有序签
 注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。
       */
     CcInfos?: Array<CcInfo>;
+    /**
+      * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    AutoSignScene?: string;
 }
 /**
  * CreateSchemeUrl请求参数结构体
@@ -2691,6 +2695,10 @@ MobileCheck：手机号验证
       * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
       */
     CcNotifyType?: number;
+    /**
+      * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+      */
+    AutoSignScene?: string;
 }
 /**
  * 企业角色数据信息

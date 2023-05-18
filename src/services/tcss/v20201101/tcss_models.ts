@@ -6730,40 +6730,46 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
       * 定时扫描开关
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Enable: boolean
+  Enable?: boolean
 
   /**
    * 定时任务扫描时间
    */
-  ScanTime: string
+  ScanTime?: string
 
   /**
    * 定时扫描间隔
    */
-  ScanPeriod: number
+  ScanPeriod?: number
 
   /**
       * 扫描类型数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScanType: Array<string>
+  ScanType?: Array<string>
 
   /**
    * 扫描全部镜像
    */
-  All: boolean
+  All?: boolean
 
   /**
       * 自定义扫描镜像
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Images: Array<ImageInfo>
+  Images?: Array<ImageInfo>
 
   /**
       * 自动以扫描镜像Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Id: Array<number>
+  Id?: Array<number>
+
+  /**
+      * 是否扫描最新版本镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Latest?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10953,6 +10959,11 @@ export interface UpdateImageRegistryTimingScanTaskRequest {
    * 扫描镜像Id
    */
   Id?: Array<number>
+
+  /**
+   * 是否扫描最新版本
+   */
+  Latest?: boolean
 }
 
 /**

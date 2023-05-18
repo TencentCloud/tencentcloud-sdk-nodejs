@@ -8236,6 +8236,22 @@ export interface DescribeContainerGroupsResponse {
 }
 
 /**
+ * CreateUnitNamespaces返回参数结构体
+ */
+export interface CreateUnitNamespacesResponse {
+  /**
+      * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateApiGroup返回参数结构体
  */
 export interface UpdateApiGroupResponse {
@@ -9249,6 +9265,21 @@ export interface CreateUnitRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUnitNamespaces请求参数结构体
+ */
+export interface CreateUnitNamespacesRequest {
+  /**
+   * 网关实体ID
+   */
+  GatewayInstanceId: string
+
+  /**
+   * 单元化命名空间对象列表
+   */
+  UnitNamespaceList?: Array<UnitNamespace>
 }
 
 /**

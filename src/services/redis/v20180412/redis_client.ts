@@ -1053,7 +1053,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取备份配置
+   * 本接口（DescribeAutoBackupConfig）用于获取自动备份配置规则。
    */
   async DescribeAutoBackupConfig(
     req: DescribeAutoBackupConfigRequest,

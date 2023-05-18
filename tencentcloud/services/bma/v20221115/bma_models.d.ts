@@ -97,6 +97,10 @@ export interface CreateBPBrandRequest {
       * 保护小程序
       */
     ProtectMiniPrograms?: Array<string>;
+    /**
+      * 请求来源：0-反钓鱼 2-反假冒
+      */
+    APISource?: number;
 }
 /**
  * DescribeBPFakeURLs请求参数结构体

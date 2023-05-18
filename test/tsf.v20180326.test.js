@@ -608,9 +608,9 @@ it("tsf.v20180326.UpdateApiTimeouts", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeFlowLastBatchState", async function () {
+it("tsf.v20180326.CreateUnitNamespaces", async function () {
     try {
-       const data = await client.DescribeFlowLastBatchState({})
+       const data = await client.CreateUnitNamespaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1711,6 +1711,16 @@ it("tsf.v20180326.RedoTaskExecute", async function () {
 it("tsf.v20180326.DescribeJvmMonitor", async function () {
     try {
        const data = await client.DescribeJvmMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeFlowLastBatchState", async function () {
+    try {
+       const data = await client.DescribeFlowLastBatchState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

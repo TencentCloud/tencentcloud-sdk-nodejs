@@ -324,7 +324,7 @@ export declare class Client extends AbstractClient {
      */
     OpenSSL(req: OpenSSLRequest, cb?: (error: string, rep: OpenSSLResponse) => void): Promise<OpenSSLResponse>;
     /**
-     * 获取备份配置
+     * 本接口（DescribeAutoBackupConfig）用于获取自动备份配置规则。
      */
     DescribeAutoBackupConfig(req: DescribeAutoBackupConfigRequest, cb?: (error: string, rep: DescribeAutoBackupConfigResponse) => void): Promise<DescribeAutoBackupConfigResponse>;
     /**

@@ -6852,6 +6852,11 @@ export interface ApplicationProxy {
    * 规则列表。
    */
   ApplicationProxyRules: Array<ApplicationProxyRule>
+
+  /**
+   * 中国大陆加速优化配置。
+   */
+  AccelerateMainland?: AccelerateMainland
 }
 
 /**

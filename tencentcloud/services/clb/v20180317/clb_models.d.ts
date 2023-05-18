@@ -4847,7 +4847,7 @@ export interface TargetHealth {
       */
     HealthStatusDetail: string;
     /**
-      * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。(该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情)
+      * (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
       */
     HealthStatusDetial: string;
 }

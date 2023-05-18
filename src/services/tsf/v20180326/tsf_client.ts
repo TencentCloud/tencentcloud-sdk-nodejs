@@ -314,6 +314,7 @@ import {
   CreateLaneRuleResponse,
   CreateTaskResponse,
   DescribeContainerGroupsResponse,
+  CreateUnitNamespacesResponse,
   UpdateApiGroupResponse,
   DescribeGroupsWithPluginResponse,
   AddInstancesRequest,
@@ -354,6 +355,7 @@ import {
   DescribeBusinessLogConfigResponse,
   TerminateTaskFlowBatchRequest,
   CreateUnitRuleResponse,
+  CreateUnitNamespacesRequest,
   DescribeTaskRecordsResponse,
   VmGroup,
   DescribeApiUseDetailResponse,
@@ -1232,13 +1234,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询工作流最新一个批次的状态信息
+   * 批量创建单元化命名空间
    */
-  async DescribeFlowLastBatchState(
-    req: DescribeFlowLastBatchStateRequest,
-    cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
-  ): Promise<DescribeFlowLastBatchStateResponse> {
-    return this.request("DescribeFlowLastBatchState", req, cb)
+  async CreateUnitNamespaces(
+    req: CreateUnitNamespacesRequest,
+    cb?: (error: string, rep: CreateUnitNamespacesResponse) => void
+  ): Promise<CreateUnitNamespacesResponse> {
+    return this.request("CreateUnitNamespaces", req, cb)
   }
 
   /**
@@ -2341,6 +2343,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeJvmMonitorResponse) => void
   ): Promise<DescribeJvmMonitorResponse> {
     return this.request("DescribeJvmMonitor", req, cb)
+  }
+
+  /**
+   * 查询工作流最新一个批次的状态信息
+   */
+  async DescribeFlowLastBatchState(
+    req: DescribeFlowLastBatchStateRequest,
+    cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
+  ): Promise<DescribeFlowLastBatchStateResponse> {
+    return this.request("DescribeFlowLastBatchState", req, cb)
   }
 
   /**

@@ -383,10 +383,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UpdateApiTimeouts", req, cb);
     }
     /**
-     * 查询工作流最新一个批次的状态信息
+     * 批量创建单元化命名空间
      */
-    async DescribeFlowLastBatchState(req, cb) {
-        return this.request("DescribeFlowLastBatchState", req, cb);
+    async CreateUnitNamespaces(req, cb) {
+        return this.request("CreateUnitNamespaces", req, cb);
     }
     /**
      * 更新健康检查配置
@@ -1049,6 +1049,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeJvmMonitor(req, cb) {
         return this.request("DescribeJvmMonitor", req, cb);
+    }
+    /**
+     * 查询工作流最新一个批次的状态信息
+     */
+    async DescribeFlowLastBatchState(req, cb) {
+        return this.request("DescribeFlowLastBatchState", req, cb);
     }
     /**
      * 发布配置,并且返回配置 ID
