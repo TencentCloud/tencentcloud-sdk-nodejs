@@ -151,7 +151,7 @@ export interface Embellish {
       */
     Text?: string;
     /**
-      * 润色类型。类型列表
+      * 润色类型。类型如下：
 expansion：扩写
 rewriting：改写
 translation_m2a：从现代文改写为古文
@@ -358,7 +358,7 @@ export interface GenerateKeywordSentenceRequest {
       */
     Number: number;
     /**
-      * 指定生成句子的领域，支持领域列表
+      * 指定生成句子的领域，支持领域如下：
 general：通用领域，支持中英文
 academic：学术领域，仅支持英文
 默认为general（通用领域）。
@@ -511,7 +511,7 @@ export interface TextWritingRequest {
       */
     Text: string;
     /**
-      * 待续写文本的语言类型，支持语言列表
+      * 待续写文本的语言类型，支持语言如下：
 zh：中文
 en：英文
       */
@@ -522,14 +522,14 @@ en：英文
       */
     Number: number;
     /**
-      * 指定续写领域，支持领域列表
+      * 指定续写领域，支持领域如下：
 general：通用领域，支持中英文补全
 academic：学术领域，仅支持英文补全
 默认为general（通用领域）。
       */
     Domain?: string;
     /**
-      * 指定续写风格，支持风格列表
+      * 指定续写风格，支持风格如下：
 science_fiction：科幻
 military_history：军事
 xuanhuan_wuxia：武侠
@@ -818,7 +818,7 @@ export interface TextEmbellishRequest {
       */
     Text: string;
     /**
-      * 待润色文本的语言类型，支持语言列表
+      * 待润色文本的语言类型，支持语言如下：
 zh：中文
 en：英文
       */
@@ -829,7 +829,7 @@ en：英文
       */
     Number: number;
     /**
-      * 控制润色类型，类型列表
+      * 控制润色类型，类型如下：
 both：同时返回改写和扩写
 expansion：扩写
 rewriting：改写

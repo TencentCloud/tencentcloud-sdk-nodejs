@@ -18,6 +18,16 @@ const client = new tencentcloud.ssl.v20191205.Client({
 })
 describe("ssl.v20191205.test.js", function () {
 
+it("ssl.v20191205.DescribeHostCosInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostCosInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeCertificates", async function () {
     try {
        const data = await client.DescribeCertificates({})
@@ -28,9 +38,19 @@ it("ssl.v20191205.DescribeCertificates", async function () {
     }
 })
 
-it("ssl.v20191205.DescribePackages", async function () {
+it("ssl.v20191205.DescribeHostCdnInstanceList", async function () {
     try {
-       const data = await client.DescribePackages({})
+       const data = await client.DescribeHostCdnInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostTkeInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostTkeInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +78,19 @@ it("ssl.v20191205.DeleteManager", async function () {
     }
 })
 
-it("ssl.v20191205.UploadConfirmLetter", async function () {
+it("ssl.v20191205.DescribeHostVodInstanceList", async function () {
     try {
-       const data = await client.UploadConfirmLetter({})
+       const data = await client.DescribeHostVodInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DeployCertificateInstance", async function () {
+    try {
+       const data = await client.DeployCertificateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +108,16 @@ it("ssl.v20191205.SubmitAuditManager", async function () {
     }
 })
 
+it("ssl.v20191205.DescribePackages", async function () {
+    try {
+       const data = await client.DescribePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.SubmitCertificateInformation", async function () {
     try {
        const data = await client.SubmitCertificateInformation({})
@@ -88,9 +128,39 @@ it("ssl.v20191205.SubmitCertificateInformation", async function () {
     }
 })
 
+it("ssl.v20191205.DescribeHostDdosInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostDdosInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.VerifyManager", async function () {
     try {
        const data = await client.VerifyManager({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostClbInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostClbInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostTeoInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostTeoInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +208,16 @@ it("ssl.v20191205.CompleteCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.UpdateCertificateInstance", async function () {
+    try {
+       const data = await client.UpdateCertificateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.UploadCertificate", async function () {
     try {
        const data = await client.UploadCertificate({})
@@ -158,9 +238,9 @@ it("ssl.v20191205.CheckCertificateChain", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeCertificate", async function () {
+it("ssl.v20191205.ModifyCertificateAlias", async function () {
     try {
-       const data = await client.DescribeCertificate({})
+       const data = await client.ModifyCertificateAlias({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +268,19 @@ it("ssl.v20191205.DescribeCertificateDetail", async function () {
     }
 })
 
-it("ssl.v20191205.ModifyCertificatesExpiringNotificationSwitch", async function () {
+it("ssl.v20191205.DescribeHostLiveInstanceList", async function () {
     try {
-       const data = await client.ModifyCertificatesExpiringNotificationSwitch({})
+       const data = await client.DescribeHostLiveInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostWafInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostWafInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +298,69 @@ it("ssl.v20191205.DescribeManagerDetail", async function () {
     }
 })
 
+it("ssl.v20191205.DescribeHostDeployRecordDetail", async function () {
+    try {
+       const data = await client.DescribeHostDeployRecordDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DeployCertificateRecordRollback", async function () {
+    try {
+       const data = await client.DeployCertificateRecordRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.HostCertificate", async function () {
     try {
        const data = await client.HostCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DeployCertificateRecordRetry", async function () {
+    try {
+       const data = await client.DeployCertificateRecordRetry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostUpdateRecord", async function () {
+    try {
+       const data = await client.DescribeHostUpdateRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostDeployRecord", async function () {
+    try {
+       const data = await client.DescribeHostDeployRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.UpdateCertificateRecordRetry", async function () {
+    try {
+       const data = await client.UpdateCertificateRecordRetry({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +378,9 @@ it("ssl.v20191205.ModifyCertificateProject", async function () {
     }
 })
 
-it("ssl.v20191205.ModifyCertificateAlias", async function () {
+it("ssl.v20191205.DescribeCertificate", async function () {
     try {
-       const data = await client.ModifyCertificateAlias({})
+       const data = await client.DescribeCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +408,36 @@ it("ssl.v20191205.CreateCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.UploadConfirmLetter", async function () {
+    try {
+       const data = await client.UploadConfirmLetter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostLighthouseInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostLighthouseInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostUpdateRecordDetail", async function () {
+    try {
+       const data = await client.DescribeHostUpdateRecordDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.CommitCertificateInformation", async function () {
     try {
        const data = await client.CommitCertificateInformation({})
@@ -271,6 +451,36 @@ it("ssl.v20191205.CommitCertificateInformation", async function () {
 it("ssl.v20191205.DescribeCertificateOperateLogs", async function () {
     try {
        const data = await client.DescribeCertificateOperateLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostApiGatewayInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostApiGatewayInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.UpdateCertificateRecordRollback", async function () {
+    try {
+       const data = await client.UpdateCertificateRecordRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.ModifyCertificatesExpiringNotificationSwitch", async function () {
+    try {
+       const data = await client.ModifyCertificatesExpiringNotificationSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

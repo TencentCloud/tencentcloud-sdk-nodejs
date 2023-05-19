@@ -251,11 +251,11 @@ export interface MoveOrganizationNodeMembersRequest {
  */
 export interface ListOrganizationIdentityRequest {
     /**
-      * 偏移量。
+      * 偏移量。取值是limit的整数倍。默认值 : 0。
       */
     Offset: number;
     /**
-      * 限制数目。最大50
+      * 限制数目。取值范围：1~50。默认值：10。
       */
     Limit: number;
     /**
@@ -266,6 +266,10 @@ export interface ListOrganizationIdentityRequest {
       * 身份ID搜索。
       */
     IdentityId?: number;
+    /**
+      * 身份类型。取值范围 1-预设, 2-自定义
+      */
+    IdentityType?: number;
 }
 /**
  * 互信主体主要信息
@@ -367,12 +371,12 @@ export interface ListOrganizationIdentityResponse {
       * 总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total: number;
+    Total?: number;
     /**
       * 条目详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items: Array<OrgIdentity>;
+    Items?: Array<OrgIdentity>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

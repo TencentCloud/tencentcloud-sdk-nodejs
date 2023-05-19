@@ -398,9 +398,9 @@ it("cfw.v20190904.DescribeEnterpriseSecurityGroupRule", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
+it("cfw.v20190904.DescribeLogs", async function () {
     try {
-       const data = await client.ModifyBlockIgnoreList({})
+       const data = await client.DescribeLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +531,16 @@ it("cfw.v20190904.ModifyBlockTop", async function () {
 it("cfw.v20190904.DescribeTableStatus", async function () {
     try {
        const data = await client.DescribeTableStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
+    try {
+       const data = await client.ModifyBlockIgnoreList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

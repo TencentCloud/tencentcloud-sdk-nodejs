@@ -1185,7 +1185,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用SSL-VPN-CLIENT 证书
+   * 本接口（EnableVpnGatewaySslClientCert）用于启用SSL-VPN-CLIENT 证书。
    */
   async EnableVpnGatewaySslClientCert(
     req: EnableVpnGatewaySslClientCertRequest,
@@ -1498,7 +1498,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除SSL-VPN-CLIENT
+   * 本接口（DeleteVpnGatewaySslClient）用于删除SSL-VPN-CLIENT。
    */
   async DeleteVpnGatewaySslClient(
     req: DeleteVpnGatewaySslClientRequest,
@@ -2956,7 +2956,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下载SSL-VPN-CLIENT 客户端证书
+   * 本接口（DownloadVpnGatewaySslClientCert）用于下载SSL-VPN-CLIENT 客户端证书。
    */
   async DownloadVpnGatewaySslClientCert(
     req: DownloadVpnGatewaySslClientCertRequest,

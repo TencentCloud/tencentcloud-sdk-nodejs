@@ -1025,13 +1025,13 @@ export interface DescribeAccessControlEventsExportResponse {
       * execle下载地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DownloadUrl: string
+  DownloadUrl?: string
 
   /**
       * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  JobId: string
+  JobId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1473,12 +1473,12 @@ export interface DescribeVulDefencePluginResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 漏洞防御插件列表
    */
-  List: Array<VulDefencePlugin>
+  List?: Array<VulDefencePlugin>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2040,12 +2040,12 @@ export interface DescribeAccessControlEventsResponse {
   /**
    * 事件总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 访问控制事件数组
    */
-  EventSet: Array<AccessControlEventInfo>
+  EventSet?: Array<AccessControlEventInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2223,12 +2223,12 @@ export interface DescribeRiskSyscallEventsResponse {
   /**
    * 事件总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 高危系统调用数组
    */
-  EventSet: Array<RiskSyscallEventInfo>
+  EventSet?: Array<RiskSyscallEventInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2265,10 +2265,26 @@ CSR_DEL:已经删除
 
   /**
       * 集群类型:
-CT_TKE: TKE集群
-CT_USER_CREATE: 用户自建集群
+CT_TKE:TKE集群;
+CT_USER_CREATE:用户自建集群;
+CT_TKE_SERVERLESS:TKE Serverless集群;
       */
   ClusterType: string
+
+  /**
+   * 集群版本
+   */
+  ClusterVersion?: string
+
+  /**
+   * 内存量
+   */
+  MemLimit?: number
+
+  /**
+   * cpu
+   */
+  CpuLimit?: number
 }
 
 /**
@@ -2626,12 +2642,12 @@ export interface DescribeAssetAppServiceListResponse {
   /**
    * db服务列表
    */
-  List: Array<ServiceInfo>
+  List?: Array<ServiceInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3243,6 +3259,31 @@ export interface ProcessInfo {
    * 外网ip
    */
   PublicIp: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * podip
+   */
+  PodIP?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
 }
 
 /**
@@ -3430,7 +3471,11 @@ export interface DescribeVulDefenceHostRequest {
   /**
       * 过滤条件。
 <li>Status- String - 是否必填：否 - 插件状态，正常：SUCCESS，异常：FAIL， NO_DEFENCE:未防御</li>
-<li>KeyWords- string - 是否必填：否 - 主机名称/IP。</li>
+<li>HostName- String - 是否必填：否 - 主机名称/超级节点名称</li>
+<li>HostIP- String - 是否必填：否 - 主机IP</li>
+<li>NodeType- String - 是否必填：否 - 节点类型</li>
+<li>HostName- String - 是否必填：否 - 超级节点名称</li>
+<li>NodeSubNetCIDR- String - 是否必填：否 - 超级节点CIDR</li>
       */
   Filters?: Array<RunTimeFilters>
 
@@ -3762,9 +3807,14 @@ export interface K8sApiAbnormalEventListItem {
  */
 export interface SecLogJoinInfo {
   /**
-   * 已接入数量
+   * 已接入普通主机数量
    */
   Count: number
+
+  /**
+   * 已接入超级节点数量
+   */
+  SuperNodeCount?: number
 
   /**
    * 是否已接入(true:已接入 false:未接入)
@@ -4040,12 +4090,12 @@ export interface DescribeSecLogJoinObjectListResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 接入对象列表
    */
-  List: Array<SecLogJoinObjectInfo>
+  List?: Array<SecLogJoinObjectInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4282,7 +4332,7 @@ export interface DescribeSecLogJoinTypeListResponse {
   /**
    * 接入日志列表
    */
-  List: Array<SecLogJoinInfo>
+  List?: Array<SecLogJoinInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4445,14 +4495,24 @@ export interface ModifyVulDefenceSettingRequest {
   IsEnabled: number
 
   /**
-   * 漏洞防御主机范围:0：自选 1: 全部主机。IsEnabled为1时必填
+   * 漏洞防御主机范围:0：自选 1: 全部主机
    */
   Scope?: number
 
   /**
-   * 自选漏洞防御主机,Scope为0时必填
+   * 自选漏洞防御主机
    */
   HostIDs?: Array<string>
+
+  /**
+   * 漏洞防御超级节点范围:0：自选 1: 全部
+   */
+  SuperScope?: number
+
+  /**
+   * 超级节点Id列表
+   */
+  NodeIds?: Array<string>
 }
 
 /**
@@ -4462,102 +4522,112 @@ export interface DescribeAssetSummaryResponse {
   /**
    * 应用个数
    */
-  AppCnt: number
+  AppCnt?: number
 
   /**
    * 容器个数
    */
-  ContainerCnt: number
+  ContainerCnt?: number
 
   /**
    * 暂停的容器个数
    */
-  ContainerPause: number
+  ContainerPause?: number
 
   /**
    * 运行的容器个数
    */
-  ContainerRunning: number
+  ContainerRunning?: number
 
   /**
    * 停止运行的容器个数
    */
-  ContainerStop: number
+  ContainerStop?: number
 
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 数据库个数
    */
-  DbCnt: number
+  DbCnt?: number
 
   /**
    * 镜像个数
    */
-  ImageCnt: number
+  ImageCnt?: number
 
   /**
    * 主机在线个数
    */
-  HostOnline: number
+  HostOnline?: number
 
   /**
    * 主机个数
    */
-  HostCnt: number
+  HostCnt?: number
 
   /**
    * 有风险的镜像个数
    */
-  ImageHasRiskInfoCnt: number
+  ImageHasRiskInfoCnt?: number
 
   /**
    * 有病毒的镜像个数
    */
-  ImageHasVirusCnt: number
+  ImageHasVirusCnt?: number
 
   /**
    * 有漏洞的镜像个数
    */
-  ImageHasVulsCnt: number
+  ImageHasVulsCnt?: number
 
   /**
    * 不受信任的镜像个数
    */
-  ImageUntrustCnt: number
+  ImageUntrustCnt?: number
 
   /**
    * 监听的端口个数
    */
-  ListenPortCnt: number
+  ListenPortCnt?: number
 
   /**
    * 进程个数
    */
-  ProcessCnt: number
+  ProcessCnt?: number
 
   /**
    * web服务个数
    */
-  WebServiceCnt: number
+  WebServiceCnt?: number
 
   /**
    * 最近镜像扫描时间
    */
-  LatestImageScanTime: string
+  LatestImageScanTime?: string
 
   /**
    * 风险镜像个数
    */
-  ImageUnsafeCnt: number
+  ImageUnsafeCnt?: number
 
   /**
    * 主机未安装agent数量
    */
-  HostUnInstallCnt: number
+  HostUnInstallCnt?: number
+
+  /**
+   * 超级节点个数
+   */
+  SuperNodeCnt?: number
+
+  /**
+   * 超级节点运行个数
+   */
+  SuperNodeRunningCnt?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4831,7 +4901,7 @@ export interface VulDefenceEvent {
   ContainerIsolateOperationSrc: string
 
   /**
-      * 主机QUUID
+      * 主机QUUID/超级节点ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QUUID: string
@@ -4843,10 +4913,40 @@ export interface VulDefenceEvent {
   HostIP: string
 
   /**
-      * 主机名称
+      * 主机名称/超级节点名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostName: string
+
+  /**
+   * 节点类型[NORMAL:普通节点|SUPER:超级节点]
+   */
+  NodeType?: string
+
+  /**
+   * 外网IP
+   */
+  PublicIP?: string
+
+  /**
+   * 超级节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 超级节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -5167,6 +5267,11 @@ export interface DescribeAssetContainerListRequest {
 <li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
 <li>OrderBy - String 是否必填：否 -排序字段，支持：cpu_usage, mem_usage的动态排序 ["cpu_usage","+"]  '+'升序、'-'降序</li>
 <li>NetStatus - String -是否必填: 否 -  容器网络状态筛选 normal isolated isolating isolate_failed restoring restore_failed</li>
+<li>PodID - String -是否必填: 否 - PodID筛选</li>
+<li>NodeUniqueID - String -是否必填: 否 - SuperNode筛选</li>
+<li>PodUid - String -是否必填: 否 - Pod筛选</li>
+<li>PodIP - String -是否必填: 否 - PodIP筛选</li>
+<li>NodeType - String -是否必填: 否 - 节点类型筛选:NORMAL:普通节点;SUPER:超级节点</li>
       */
   Filters?: Array<AssetFilters>
 
@@ -5697,6 +5802,61 @@ VALIDATION: 参数非法
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CheckPlatform: Array<string>
+
+  /**
+   * 节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * pod(实例)的名字
+   */
+  PodName?: string
+
+  /**
+   * 节点所属集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 节点外网IP
+   */
+  PublicIP?: string
+
+  /**
+   * 节点内网IP
+   */
+  InnerIP?: string
+
+  /**
+   * 节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 普通节点ID
+   */
+  HostID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -6083,12 +6243,12 @@ export interface DescribeAssetContainerListResponse {
   /**
    * 容器列表
    */
-  List: Array<ContainerInfo>
+  List?: Array<ContainerInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6679,12 +6839,12 @@ export interface DescribeEscapeEventInfoResponse {
   /**
    * 逃逸事件数组
    */
-  EventSet: Array<EscapeEventInfo>
+  EventSet?: Array<EscapeEventInfo>
 
   /**
    * 事件总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7133,6 +7293,61 @@ RULE_MODE_HOLDUP 拦截
 迁移中: REMOVING
       */
   ContainerStatus: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * pod 名称
+   */
+  PodName?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * 集群id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 节点公网ip
+   */
+  PublicIP?: string
+
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * uuid
+   */
+  HostID?: string
+
+  /**
+   * 节点内网ip
+   */
+  HostIP?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -7442,6 +7657,61 @@ RULE_MODE_HOLDUP 拦截
 迁移中: REMOVING
       */
   ContainerStatus: string
+
+  /**
+   * 节点名称：如果是超级节点，展示的实质上是它的node_id
+   */
+  NodeName?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 集群id
+   */
+  ClusterID?: string
+
+  /**
+   * 节点的唯一id，主要是超级节点使用
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 节点公网IP
+   */
+  PublicIP?: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * uuid
+   */
+  HostID?: string
+
+  /**
+   * 节点内网ip
+   */
+  HostIP?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -7502,6 +7772,11 @@ export interface DescribeClusterSummaryResponse {
    * 未导入的集群数量
    */
   NotImportedClusterCount?: number
+
+  /**
+   * eks集群数量
+   */
+  ServerlessClusterCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8020,7 +8295,7 @@ Name 可取值：RiskLevel风险等级, RiskTarget检查对象，风险对象,Ri
  */
 export interface VulDefenceHost {
   /**
-   * 主机名称
+   * 主机名称/超级节点名称
    */
   HostName: string
 
@@ -8030,7 +8305,7 @@ export interface VulDefenceHost {
   HostIP: string
 
   /**
-   * 主机QUUID
+   * 主机QUUID/超级节点ID
    */
   HostID: string
 
@@ -8053,6 +8328,46 @@ export interface VulDefenceHost {
    * 更新时间
    */
   ModifyTime: string
+
+  /**
+   * 节点类型[NORMAL:普通节点|SUPER:超级节点]
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点子网名称
+   */
+  NodeSubNetName?: string
+
+  /**
+   * 超级节点子网网段
+   */
+  NodeSubNetCIDR?: string
+
+  /**
+   * 超级节点子网ID
+   */
+  NodeSubNetID?: string
+
+  /**
+   * 超级节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 超级节点ID
+   */
+  NodeID?: string
+
+  /**
+   * Pod Ip
+   */
+  PodIP?: string
+
+  /**
+   * Pod 名称
+   */
+  PodName?: string
 }
 
 /**
@@ -9642,6 +9957,31 @@ export interface PortInfo {
    * 外网ip
    */
   PublicIp: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * podip
+   */
+  PodIP?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
 }
 
 /**
@@ -10118,28 +10458,28 @@ export interface DescribeRiskSyscallDetailResponse {
   /**
    * 事件基本信息
    */
-  EventBaseInfo: RunTimeEventBaseInfo
+  EventBaseInfo?: RunTimeEventBaseInfo
 
   /**
    * 进程信息
    */
-  ProcessInfo: ProcessDetailInfo
+  ProcessInfo?: ProcessDetailInfo
 
   /**
    * 父进程信息
    */
-  ParentProcessInfo: ProcessDetailBaseInfo
+  ParentProcessInfo?: ProcessDetailBaseInfo
 
   /**
    * 事件描述
    */
-  EventDetail: RiskSyscallEventDescription
+  EventDetail?: RiskSyscallEventDescription
 
   /**
       * 祖先进程信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessInfo: ProcessBaseInfo
+  AncestorProcessInfo?: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10298,12 +10638,12 @@ export interface DescribeAbnormalProcessEventsResponse {
   /**
    * 事件总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 异常进程数组
    */
-  EventSet: Array<AbnormalProcessEventInfo>
+  EventSet?: Array<AbnormalProcessEventInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10455,12 +10795,12 @@ export interface DescribeVirusTaskListResponse {
   /**
    * 文件查杀列表
    */
-  List: Array<VirusTaskInfo>
+  List?: Array<VirusTaskInfo>
 
   /**
    * 总数量(容器任务数量)
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10731,28 +11071,28 @@ export interface DescribeEscapeEventDetailResponse {
   /**
    * 事件基本信息
    */
-  EventBaseInfo: RunTimeEventBaseInfo
+  EventBaseInfo?: RunTimeEventBaseInfo
 
   /**
    * 进程信息
    */
-  ProcessInfo: ProcessDetailInfo
+  ProcessInfo?: ProcessDetailInfo
 
   /**
    * 事件描述
    */
-  EventDetail: EscapeEventDescription
+  EventDetail?: EscapeEventDescription
 
   /**
    * 父进程信息
    */
-  ParentProcessInfo: ProcessBaseInfo
+  ParentProcessInfo?: ProcessBaseInfo
 
   /**
       * 祖先进程信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessInfo: ProcessBaseInfo
+  AncestorProcessInfo?: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11364,6 +11704,51 @@ export interface RiskSyscallEventInfo {
 迁移中: REMOVING
       */
   ContainerStatus: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 集群I'D
+   */
+  ClusterID?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 节点公网ip
+   */
+  PublicIP?: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * uuid
+   */
+  HostID?: string
+
+  /**
+   * 节点内网ip
+   */
+  HostIP?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -12581,12 +12966,12 @@ export interface DescribeAssetProcessListResponse {
   /**
    * 端口列表
    */
-  List: Array<ProcessInfo>
+  List?: Array<ProcessInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12600,12 +12985,13 @@ export interface DescribeAssetProcessListResponse {
 export interface EscapeEventInfo {
   /**
       * 事件类型
-   ESCAPE_HOST_ACESS_FILE:宿主机文件访问逃逸
-   ESCAPE_MOUNT_NAMESPACE:MountNamespace逃逸
-   ESCAPE_PRIVILEDGE:程序提权逃逸
-   ESCAPE_PRIVILEDGE_CONTAINER_START:特权容器启动逃逸
-   ESCAPE_MOUNT_SENSITIVE_PTAH:敏感路径挂载
-   ESCAPE_SYSCALL:Syscall逃逸
+   ESCAPE_CGROUPS：利用cgroup机制逃逸
+   ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+   ESCAPE_DOCKER_API：访问Docker API接口逃逸
+   ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+   MOUNT_SENSITIVE_PTAH：敏感路径挂载
+   PRIVILEGE_CONTAINER_START：特权容器
+   PRIVILEGE：程序提权逃逸
       */
   EventType: string
 
@@ -12739,6 +13125,46 @@ MountNamespace逃逸、
 迁移中: REMOVING
       */
   ContainerStatus: string
+
+  /**
+   * 节点所属集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 节点公网ip
+   */
+  PublicIP?: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * 节点内网ip
+   */
+  HostIP?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -12985,6 +13411,36 @@ export interface VulAffectedContainerInfo {
    * 外网IP
    */
   PublicIP: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 节点类型[NORMAL:普通节点|SUPER:超级节点]
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 超级节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 超级节点名称
+   */
+  NodeName?: string
 }
 
 /**
@@ -13024,117 +13480,117 @@ export interface DescribeAssetContainerDetailResponse {
   /**
    * 主机id
    */
-  HostID: string
+  HostID?: string
 
   /**
    * 主机ip
    */
-  HostIP: string
+  HostIP?: string
 
   /**
    * 容器名称
    */
-  ContainerName: string
+  ContainerName?: string
 
   /**
    * 运行状态
    */
-  Status: string
+  Status?: string
 
   /**
    * 运行账户
    */
-  RunAs: string
+  RunAs?: string
 
   /**
    * 命令行
    */
-  Cmd: string
+  Cmd?: string
 
   /**
    * CPU使用率 * 1000
    */
-  CPUUsage: number
+  CPUUsage?: number
 
   /**
    * 内存使用 KB
    */
-  RamUsage: number
+  RamUsage?: number
 
   /**
    * 镜像名
    */
-  ImageName: string
+  ImageName?: string
 
   /**
    * 镜像ID
    */
-  ImageID: string
+  ImageID?: string
 
   /**
    * 归属POD
    */
-  POD: string
+  POD?: string
 
   /**
    * k8s 主节点
    */
-  K8sMaster: string
+  K8sMaster?: string
 
   /**
    * 容器内进程数
    */
-  ProcessCnt: number
+  ProcessCnt?: number
 
   /**
    * 容器内端口数
    */
-  PortCnt: number
+  PortCnt?: number
 
   /**
    * 组件数
    */
-  ComponentCnt: number
+  ComponentCnt?: number
 
   /**
    * app数
    */
-  AppCnt: number
+  AppCnt?: number
 
   /**
    * websvc数
    */
-  WebServiceCnt: number
+  WebServiceCnt?: number
 
   /**
    * 挂载
    */
-  Mounts: Array<ContainerMount>
+  Mounts?: Array<ContainerMount>
 
   /**
    * 容器网络信息
    */
-  Network: ContainerNetwork
+  Network?: ContainerNetwork
 
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 
   /**
    * 镜像创建时间
    */
-  ImageCreateTime: string
+  ImageCreateTime?: string
 
   /**
    * 镜像大小
    */
-  ImageSize: number
+  ImageSize?: number
 
   /**
    * 主机状态 offline,online,pause
    */
-  HostStatus: string
+  HostStatus?: string
 
   /**
       * 网络状态
@@ -13145,24 +13601,89 @@ export interface DescribeAssetContainerDetailResponse {
 解除隔离中  RESTORING
 解除隔离失败 RESTORE_FAILED
       */
-  NetStatus: string
+  NetStatus?: string
 
   /**
    * 网络子状态
    */
-  NetSubStatus: string
+  NetSubStatus?: string
 
   /**
       * 隔离来源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsolateSource: string
+  IsolateSource?: string
 
   /**
       * 隔离时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsolateTime: string
+  IsolateTime?: string
+
+  /**
+   * 节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+
+  /**
+   * 节点子网ID
+   */
+  NodeSubNetID?: string
+
+  /**
+   * 节点子网名称
+   */
+  NodeSubNetName?: string
+
+  /**
+   * 节点子网网段
+   */
+  NodeSubNetCIDR?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * pod状态
+   */
+  PodStatus?: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 节点类型:NORMAL: 普通节点(默认值) SUPER: 超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 外网ip
+   */
+  PublicIP?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13177,40 +13698,65 @@ export interface DescribeVulDefenceSettingResponse {
   /**
    * 是否开启:0: 关闭 1:开启
    */
-  IsEnabled: number
+  IsEnabled?: number
 
   /**
    * 漏洞防御主机范围: 0:自选主机节点，1:全部
    */
-  Scope: number
+  Scope?: number
 
   /**
    * 漏洞防御主机数量
    */
-  HostCount: number
+  HostCount?: number
 
   /**
    * 开启漏洞防御异常主机数量
    */
-  ExceptionHostCount: number
+  ExceptionHostCount?: number
 
   /**
       * 自选漏洞防御主机
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIDs: Array<string>
+  HostIDs?: Array<string>
 
   /**
       * 开通容器安全的主机总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostTotalCount: number
+  HostTotalCount?: number
 
   /**
       * 支持防御的漏洞数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SupportDefenseVulCount: number
+  SupportDefenseVulCount?: number
+
+  /**
+   * 普通节点个数
+   */
+  HostNodeCount?: number
+
+  /**
+   * 超级节点范围
+   */
+  SuperScope?: number
+
+  /**
+   * 超级节点个数
+   */
+  SuperNodeCount?: number
+
+  /**
+   * 超级节点Id列表
+   */
+  SuperNodeIds?: Array<string>
+
+  /**
+   * 开通容器安全的超级结点总数
+   */
+  NodeTotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13551,12 +14097,12 @@ export interface DescribeAssetPortListResponse {
   /**
    * 端口列表
    */
-  List: Array<PortInfo>
+  List?: Array<PortInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14059,12 +14605,12 @@ export interface DescribeVulDefenceHostResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 漏洞防御的主机列表
    */
-  List: Array<VulDefenceHost>
+  List?: Array<VulDefenceHost>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14404,12 +14950,12 @@ export interface DescribeVirusListResponse {
   /**
    * 木马列表
    */
-  List: Array<VirusInfo>
+  List?: Array<VirusInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14600,28 +15146,28 @@ export interface DescribeAbnormalProcessDetailResponse {
   /**
    * 事件基本信息
    */
-  EventBaseInfo: RunTimeEventBaseInfo
+  EventBaseInfo?: RunTimeEventBaseInfo
 
   /**
    * 进程信息
    */
-  ProcessInfo: ProcessDetailInfo
+  ProcessInfo?: ProcessDetailInfo
 
   /**
    * 父进程信息
    */
-  ParentProcessInfo: ProcessDetailBaseInfo
+  ParentProcessInfo?: ProcessDetailBaseInfo
 
   /**
    * 事件描述
    */
-  EventDetail: AbnormalProcessEventDescription
+  EventDetail?: AbnormalProcessEventDescription
 
   /**
       * 祖先进程信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessInfo: ProcessBaseInfo
+  AncestorProcessInfo?: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14753,7 +15299,7 @@ export interface VulDefenceEventDetail {
   EventID: number
 
   /**
-   * 主机名称
+   * 主机名称/超级节点名称
    */
   HostName: string
 
@@ -14830,7 +15376,7 @@ export interface VulDefenceEventDetail {
   ServerArg: string
 
   /**
-      * 主机QUUID
+      * 主机QUUID/超级节点ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QUUID: string
@@ -14890,6 +15436,51 @@ export interface VulDefenceEventDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RaspDetail: Array<RaspInfo>
+
+  /**
+   * 超级节点子网名称
+   */
+  NodeSubNetName?: string
+
+  /**
+   * 超级节点子网网段
+   */
+  NodeSubNetCIDR?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * 节点类型[NORMAL:普通节点|SUPER:超级节点]
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 超级节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 超级节点子网ID
+   */
+  NodeSubNetID?: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -14934,49 +15525,44 @@ export interface RunTimeEventBaseInfo {
   /**
    * 事件唯一ID
    */
-  EventId: string
+  EventId?: string
 
   /**
    * 事件发现时间
    */
-  FoundTime: string
+  FoundTime?: string
 
   /**
    * 容器id
    */
-  ContainerId: string
+  ContainerId?: string
 
   /**
    * 容器名称
    */
-  ContainerName: string
+  ContainerName?: string
 
   /**
    * 镜像id
    */
-  ImageId: string
+  ImageId?: string
 
   /**
    * 镜像名称
    */
-  ImageName: string
+  ImageName?: string
 
   /**
    * 节点名称
    */
-  NodeName: string
-
-  /**
-   * Pod名称
-   */
-  PodName: string
+  NodeName?: string
 
   /**
       * 状态， “EVENT_UNDEAL”:事件未处理
     "EVENT_DEALED":事件已经处理
     "EVENT_INGNORE"：事件已经忽略
       */
-  Status: string
+  Status?: string
 
   /**
       * 事件名称：
@@ -14989,7 +15575,7 @@ MountNamespace逃逸、
 恶意进程启动
 文件篡改
       */
-  EventName: string
+  EventName?: string
 
   /**
       * 事件类型
@@ -15000,29 +15586,29 @@ MountNamespace逃逸、
    ESCAPE_MOUNT_SENSITIVE_PTAH:敏感路径挂载
    ESCAPE_SYSCALL:Syscall逃逸
       */
-  EventType: string
+  EventType?: string
 
   /**
    * 事件数量
    */
-  EventCount: number
+  EventCount?: number
 
   /**
    * 最近生成时间
    */
-  LatestFoundTime: string
+  LatestFoundTime?: string
 
   /**
       * 内网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HostIP: string
+  HostIP?: string
 
   /**
       * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClientIP: string
+  ClientIP?: string
 
   /**
       * 网络状态
@@ -15034,7 +15620,7 @@ MountNamespace逃逸、
 解除隔离失败 RESTORE_FAILED
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerNetStatus: string
+  ContainerNetStatus?: string
 
   /**
       * 容器子状态
@@ -15047,13 +15633,73 @@ MountNamespace逃逸、
 "UNKNOW"              // 原因未知
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerNetSubStatus: string
+  ContainerNetSubStatus?: string
 
   /**
       * 容器隔离操作来源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContainerIsolateOperationSrc: string
+  ContainerIsolateOperationSrc?: string
+
+  /**
+   * 节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 节点类型:NORMAL:普通节点;SUPER:超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 节点子网ID
+   */
+  NodeSubNetID?: string
+
+  /**
+   * 节点子网名称
+   */
+  NodeSubNetName?: string
+
+  /**
+   * 节点子网网段
+   */
+  NodeSubNetCIDR?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * podIP
+   */
+  PodIP?: string
+
+  /**
+   * pod状态
+   */
+  PodStatus?: string
+
+  /**
+   * 集群id
+   */
+  ClusterID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * uuid
+   */
+  HostID?: string
 }
 
 /**
@@ -15157,12 +15803,12 @@ export interface DescribeAssetDBServiceListResponse {
   /**
    * db服务列表
    */
-  List: Array<ServiceInfo>
+  List?: Array<ServiceInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15255,12 +15901,12 @@ export interface DescribeAssetWebServiceListResponse {
   /**
    * 主机列表
    */
-  List: Array<ServiceInfo>
+  List?: Array<ServiceInfo>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15699,12 +16345,12 @@ export interface DescribeVulDefenceEventResponse {
   /**
    * 漏洞防御事件列表
    */
-  List: Array<VulDefenceEvent>
+  List?: Array<VulDefenceEvent>
 
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -16566,6 +17212,14 @@ k8sApi: k8s_api
    * 待解绑主机quuid列表
    */
   UnBindList?: Array<string>
+
+  /**
+      * 节点类型:
+NORMAL: 普通节点(默认值)
+SUPER: 超级节点
+
+      */
+  NodeType?: string
 }
 
 /**
@@ -16609,33 +17263,33 @@ export interface DescribeAccessControlDetailResponse {
   /**
    * 事件基本信息
    */
-  EventBaseInfo: RunTimeEventBaseInfo
+  EventBaseInfo?: RunTimeEventBaseInfo
 
   /**
    * 进程信息
    */
-  ProcessInfo: ProcessDetailInfo
+  ProcessInfo?: ProcessDetailInfo
 
   /**
    * 被篡改信息
    */
-  TamperedFileInfo: FileAttributeInfo
+  TamperedFileInfo?: FileAttributeInfo
 
   /**
    * 事件描述
    */
-  EventDetail: AccessControlEventDescription
+  EventDetail?: AccessControlEventDescription
 
   /**
    * 父进程信息
    */
-  ParentProcessInfo: ProcessBaseInfo
+  ParentProcessInfo?: ProcessBaseInfo
 
   /**
       * 祖先进程信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AncestorProcessInfo: ProcessBaseInfo
+  AncestorProcessInfo?: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -18663,57 +19317,62 @@ export interface DescribeContainerAssetSummaryResponse {
   /**
    * 容器总数
    */
-  ContainerTotalCnt: number
+  ContainerTotalCnt?: number
 
   /**
    * 正在运行容器数量
    */
-  ContainerRunningCnt: number
+  ContainerRunningCnt?: number
 
   /**
    * 暂停运行容器数量
    */
-  ContainerPauseCnt: number
+  ContainerPauseCnt?: number
 
   /**
    * 停止运行容器数量
    */
-  ContainerStopped: number
+  ContainerStopped?: number
 
   /**
    * 本地镜像数量
    */
-  ImageCnt: number
+  ImageCnt?: number
 
   /**
    * 主机节点数量
    */
-  HostCnt: number
+  HostCnt?: number
 
   /**
    * 主机正在运行节点数量
    */
-  HostRunningCnt: number
+  HostRunningCnt?: number
 
   /**
    * 主机离线节点数量
    */
-  HostOfflineCnt: number
+  HostOfflineCnt?: number
 
   /**
    * 镜像仓库数量
    */
-  ImageRegistryCnt: number
+  ImageRegistryCnt?: number
 
   /**
    * 镜像总数
    */
-  ImageTotalCnt: number
+  ImageTotalCnt?: number
 
   /**
    * 主机未安装agent数量
    */
-  HostUnInstallCnt: number
+  HostUnInstallCnt?: number
+
+  /**
+   * 超级节点个数
+   */
+  HostSuperNodeCnt?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -18879,6 +19538,11 @@ export interface AffectedNodeItem {
    * 检查结果的验证信息
    */
   VerifyInfo: string
+
+  /**
+   * 节点名称
+   */
+  NodeName?: string
 }
 
 /**
@@ -19627,7 +20291,7 @@ export interface DescribeVulDefenceEventDetailResponse {
   /**
    * 漏洞防御事件详细
    */
-  EventDetail: VulDefenceEventDetail
+  EventDetail?: VulDefenceEventDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -19923,12 +20587,12 @@ export interface VirusTaskInfo {
   ImageId: string
 
   /**
-   * 主机名称
+   * 节点名
    */
   HostName: string
 
   /**
-   * 主机ip
+   * 节点内网ip
    */
   HostIp: string
 
@@ -19981,6 +20645,21 @@ UNAUTH: 所在镜像未授权
 SEND_CANCEL_SUCCESSED:下发成功
       */
   ErrorMsg: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 节点外网IP
+   */
+  PublicIP?: string
+
+  /**
+   * 节点ID
+   */
+  NodeID?: string
 }
 
 /**
@@ -20868,12 +21547,6 @@ export interface DescribeVirusDetailResponse {
   SourceType?: number
 
   /**
-      * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodName?: string
-
-  /**
       * 标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -20914,6 +21587,12 @@ export interface DescribeVirusDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EventType?: string
+
+  /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodName?: string
 
   /**
       * DEAL_NONE:文件待处理
@@ -21047,6 +21726,56 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileModifyTime?: string
+
+  /**
+   * 节点子网ID
+   */
+  NodeSubNetID?: string
+
+  /**
+   * 节点子网名称
+   */
+  NodeSubNetName?: string
+
+  /**
+   * 节点子网网段
+   */
+  NodeSubNetCIDR?: string
+
+  /**
+   * 集群id
+   */
+  ClusterID?: string
+
+  /**
+   * pod ip
+   */
+  PodIP?: string
+
+  /**
+   * pod状态
+   */
+  PodStatus?: string
+
+  /**
+   * 节点唯一ID
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 节点ID
+   */
+  NodeID?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -21706,7 +22435,7 @@ export interface DescribeRiskSyscallWhiteListsRequest {
  */
 export interface DescribeVulDefencePluginRequest {
   /**
-   * 主机HostID即quuid
+   * 主机HostID或超级节点UniqueId
    */
   HostID?: string
 
@@ -21722,7 +22451,9 @@ export interface DescribeVulDefencePluginRequest {
 
   /**
       * 过滤条件。
-<li>Status- String - 是否必填：否 -插件运行状态：注入中:INJECTING，注入成功：SUCCESS，注入失败：FAIL，插件超时：TIMEOUT，插件退出：QUIT</li>
+<li>
+Status- String - 是否必填：否 -插件运行状态：注入中:INJECTING，注入成功：SUCCESS，注入失败：FAIL，插件超时：TIMEOUT，插件退出：QUIT
+</li>
       */
   Filters?: Array<RunTimeFilters>
 }
@@ -21838,6 +22569,41 @@ export interface ContainerInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsolateTime: string
+
+  /**
+   * 超级节点id
+   */
+  NodeID?: string
+
+  /**
+   * podip
+   */
+  PodIP?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * 节点类型:节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
+
+  /**
+   * 所属Pod的CPU
+   */
+  PodCpu?: number
+
+  /**
+   * 所属Pod的内存
+   */
+  PodMem?: number
 }
 
 /**
@@ -22149,6 +22915,31 @@ export interface ServiceInfo {
    * 外网ip
    */
   PublicIp: string
+
+  /**
+   * 节点id
+   */
+  NodeID?: string
+
+  /**
+   * podip
+   */
+  PodIP?: string
+
+  /**
+   * pod名称
+   */
+  PodName?: string
+
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
 }
 
 /**

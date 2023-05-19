@@ -259,13 +259,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnterpriseSecurityGroupRule", req, cb);
     }
     /**
-     * 支持对封禁列表、放通列表如下操作：
-批量增加封禁IP、放通IP/域名
-批量删除封禁IP、放通IP/域名
-批量修改封禁IP、放通IP/域名生效事件
+     * 日志审计日志查询
      */
-    async ModifyBlockIgnoreList(req, cb) {
-        return this.request("ModifyBlockIgnoreList", req, cb);
+    async DescribeLogs(req, cb) {
+        return this.request("DescribeLogs", req, cb);
     }
     /**
      * 删除防火墙实例
@@ -346,6 +343,15 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTableStatus(req, cb) {
         return this.request("DescribeTableStatus", req, cb);
+    }
+    /**
+     * 支持对封禁列表、放通列表如下操作：
+批量增加封禁IP、放通IP/域名
+批量删除封禁IP、放通IP/域名
+批量修改封禁IP、放通IP/域名生效事件
+     */
+    async ModifyBlockIgnoreList(req, cb) {
+        return this.request("ModifyBlockIgnoreList", req, cb);
     }
     /**
      * GetNatInstance 获取租户所有NAT实例及实例卡片信息

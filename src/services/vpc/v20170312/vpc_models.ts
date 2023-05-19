@@ -1119,7 +1119,7 @@ export interface DeleteVpnGatewaySslClientResponse {
   /**
    * 异步任务ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2284,9 +2284,14 @@ export interface DescribeDirectConnectGatewaysRequest {
  */
 export interface DisableVpnGatewaySslClientCertRequest {
   /**
-   * SSL-VPN-CLIENT 实例ID。
+   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
+
+  /**
+   * SSL-VPN-CLIENT 实例ID列表。批量禁用时使用。不可和SslVpnClientId同时使用。
+   */
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -3306,7 +3311,7 @@ export interface DisableVpnGatewaySslClientCertResponse {
   /**
    * 异步任务实例ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6779,12 +6784,12 @@ export interface CreateVpnGatewaySslClientResponse {
   /**
    * 异步任务ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * SSL-VPN client 唯一ID
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8170,9 +8175,14 @@ export interface DescribeClassicLinkInstancesResponse {
  */
 export interface EnableVpnGatewaySslClientCertRequest {
   /**
-   * SSL-VPN-CLIENT 实例ID。
+   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
+
+  /**
+   * SSL-VPN-CLIENT 实例ID列表。批量启用时使用。不可和SslVpnClientId同时使用。
+   */
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -9312,19 +9322,19 @@ export interface SslVpnSever {
  */
 export interface DownloadVpnGatewaySslClientCertResponse {
   /**
-   * 无
+   * SSL-VPN 客户端配置。
    */
-  SslClientConfigsSet: string
+  SslClientConfigsSet?: string
 
   /**
-   * SSL-VPN client配置
+   * SSL-VPN 客户端配置。
    */
-  SslClientConfig: Array<SslClientConfig>
+  SslClientConfig?: Array<SslClientConfig>
 
   /**
-   * 是否鉴权成功 只有传入SamlToken 才生效
+   * 是否鉴权成功 只有传入SamlToken 才生效，1为成功，0为失败。
    */
-  Authenticated: number
+  Authenticated?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9731,9 +9741,14 @@ export interface CreateVpnGatewaySslClientRequest {
   SslVpnServerId: string
 
   /**
-   * name
+   * SSL-VPN-CLIENT实例Name。不可和SslVpnClientNames同时使用。
    */
-  SslVpnClientName: string
+  SslVpnClientName?: string
+
+  /**
+   * SSL-VPN-CLIENT实例Name数字。批量创建时使用。不可和SslVpnClientName同时使用。
+   */
+  SslVpnClientNames?: Array<string>
 }
 
 /**
@@ -10517,7 +10532,7 @@ AVAILABLE：可用的
   State?: string
 
   /**
-   * IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+   * IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel?: string
 }
@@ -11300,9 +11315,14 @@ export interface ModifyTemplateMemberResponse {
  */
 export interface DeleteVpnGatewaySslClientRequest {
   /**
-   * SSL-VPN-CLIENT 实例ID。
+   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
+
+  /**
+   * SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。
+   */
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -12375,6 +12395,11 @@ export interface SslClientConfig {
    * 客户端证书
    */
   SslVpnCert: string
+
+  /**
+   * SSL-VPN-CLIENT 实例ID。
+   */
+  SslVpnClientId?: string
 }
 
 /**
@@ -14290,19 +14315,24 @@ export interface AttachClassicLinkVpcResponse {
  */
 export interface DownloadVpnGatewaySslClientCertRequest {
   /**
-   * SSL-VPN-CLIENT 实例ID。
+   * SSL-VPN-CLIENT 实例ID。不可以和SslVpnClientIds同时使用。
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
 
   /**
-   * SAML-TOKEN
+   * SAML Token（SAML令牌）。
    */
   SamlToken?: string
 
   /**
-   * VPN门户网站使用。默认Flase
+   * VPN门户网站使用。默认False
    */
   IsVpnPortal?: boolean
+
+  /**
+   * SSL-VPN-CLIENT 实例ID列表。批量下载时使用。不可以和SslVpnClientId同时使用。
+   */
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -15750,7 +15780,7 @@ export interface EnableVpnGatewaySslClientCertResponse {
   /**
    * 异步任务实例ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

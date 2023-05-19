@@ -365,6 +365,11 @@ export interface CreateBoundIPRequest {
    * 已弃用，不填
    */
   CopyPolicy?: string
+
+  /**
+   * 如果该资源实例为域名化资产则，该参数必填
+   */
+  FilterRegion?: string
 }
 
 /**
@@ -1368,17 +1373,17 @@ export interface DescribeNewL7RulesResponse {
   /**
    * 转发规则列表
    */
-  Rules: Array<NewL7RuleEntry>
+  Rules?: Array<NewL7RuleEntry>
 
   /**
    * 健康检查配置列表
    */
-  Healths: Array<L7RuleHealth>
+  Healths?: Array<L7RuleHealth>
 
   /**
    * 总规则数
    */
-  Total: number
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1566,6 +1571,12 @@ export interface BoundIpInfo {
    * 运营商，绑定操作为必填项，解绑操作可不填。0：电信；1：联通；2：移动；5：BGP
    */
   IspCode?: number
+
+  /**
+      * 域名化资产对应的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
 }
 
 /**
@@ -2080,6 +2091,11 @@ export interface DescribeNewL7RulesRequest {
    * 高防IP实例的Cname
    */
   Cname?: string
+
+  /**
+   * 默认为false，当为true时，将不对各个规则做策略检查，直接导出所有规则
+   */
+  Export?: boolean
 }
 
 /**
@@ -2394,7 +2410,17 @@ export interface DescribeBasicDeviceStatusRequest {
   /**
    * IP 资源列表
    */
-  IpList: Array<string>
+  IpList?: Array<string>
+
+  /**
+   * 域名化资源传id
+   */
+  IdList?: Array<string>
+
+  /**
+   * 地域名称
+   */
+  FilterRegion?: number
 }
 
 /**
@@ -2682,7 +2708,13 @@ export interface DescribeBasicDeviceStatusResponse {
 2 - 正常状态
 3 - 攻击状态
       */
-  Data: Array<KeyValue>
+  Data?: Array<KeyValue>
+
+  /**
+      * 域名化资产的名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CLBData?: Array<KeyValue>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5117,7 +5149,7 @@ export interface CreateBoundIPResponse {
   /**
    * 成功码
    */
-  Success: SuccessCode
+  Success?: SuccessCode
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

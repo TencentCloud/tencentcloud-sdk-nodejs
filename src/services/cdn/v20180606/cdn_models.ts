@@ -142,7 +142,7 @@ export interface ScdnTopUrlData {
  */
 export interface Compression {
   /**
-      * 智能压缩配置开关
+      * 智能压缩配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -498,7 +498,7 @@ export interface ScdnDomain {
  */
 export interface CacheConfigNoCache {
   /**
-      * 不缓存配置开关
+      * 路径缓存不缓存配置配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1660,8 +1660,9 @@ export interface DescribeEdgePackTaskStatusResponse {
  */
 export interface HeuristicCache {
   /**
-      * on 代表开启启发式缓存
-off 代表关闭启发式缓存
+      * 启发式缓存配置开关，取值有：
+on：开启
+off：关闭
       */
   Switch: string
 
@@ -1775,7 +1776,7 @@ export interface PostSize {
  */
 export interface ForceRedirect {
   /**
-      * 访问强制跳转配置开关
+      * 访问强制跳转配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1880,7 +1881,7 @@ overseas：中国境外
  */
 export interface DownstreamCapping {
   /**
-      * 下行速度配置开关
+      * 下行速度配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -2423,8 +2424,10 @@ off：不支持
  */
 export interface AwsPrivateAccess {
   /**
-   * 开关，on/off。
-   */
+      * s3源站回源鉴权配置项开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -2851,7 +2854,9 @@ export interface DescribePurgeQuotaResponse {
  */
 export interface AvifAdapter {
   /**
-      * 开关，"on/off"
+      * 图片优化AvifAdapter配置项开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -3506,7 +3511,7 @@ off：关闭
  */
 export interface CacheConfigCache {
   /**
-      * 缓存配置开关
+      * 路径缓存配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4062,7 +4067,7 @@ global：全球加速
  */
 export interface CacheConfigFollowOrigin {
   /**
-      * 遵循源站配置开关
+      * 路径缓存遵循源站配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -5166,8 +5171,9 @@ export interface CreateDiagnoseUrlRequest {
  */
 export interface CacheConfig {
   /**
-      * on 代表开启自定义启发式缓存时间
-off 代表关闭自定义启发式缓存时间
+      * 启发式自定义时间缓存配置开关，取值有：
+on：开启
+off：关闭
       */
   HeuristicCacheTimeSwitch: string
 
@@ -5222,7 +5228,9 @@ export interface ListDiagnoseReportResponse {
  */
 export interface HeaderKey {
   /**
-      * 是否组成Cachekey
+      * 组成Cachekey配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -5269,7 +5277,7 @@ export interface DescribeHttpsPackagesRequest {
  */
 export interface IpFilter {
   /**
-      * IP 黑白名单配置开关
+      * IP 黑白名单配置开关，取值有
 on：开启
 off：关闭
       */
@@ -5621,8 +5629,11 @@ export interface StopScdnDomainRequest {
  */
 export interface AdvancedAuthentication {
   /**
-   * 防盗链配置开关，on或off，开启时必须且只能配置一种模式，其余模式为null。
-   */
+      * 防盗链配置开关，取值有：
+on：开启
+off：关闭
+开启时必须且只配置一种模式，其余模式需要设置为 null
+      */
   Switch: string
 
   /**
@@ -5667,7 +5678,10 @@ export interface AdvancedAuthentication {
  */
 export interface Revalidate {
   /**
-      * on | off 是否总是回源校验
+      * 总是回源校验配置开关，取值有：
+on：开启
+off：关闭
+
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -5764,7 +5778,7 @@ export interface DescribePushQuotaResponse {
  */
 export interface Authentication {
   /**
-      * 防盗链配置开关
+      * 防盗链配置开关，取值有：
 on：开启
 off：关闭
 开启时必须且只配置一种模式，其余模式需要设置为 null
@@ -6183,7 +6197,9 @@ contentType 时填充 text/html
  */
 export interface GuetzliAdapter {
   /**
-      * 开关，"on/off"
+      * 图片优化-GuetzliAdapter配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
@@ -7730,8 +7746,10 @@ off：关闭
  */
 export interface Hsts {
   /**
-   * 是否开启，on或off。
-   */
+      * HSTS 配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -7852,7 +7870,10 @@ district：省份（中国境内）、国家/地区（中国境外）映射查�
  */
 export interface RuleQueryString {
   /**
-      * on | off CacheKey是否由QueryString组成
+      * 路径保留参数配置开关，取值有：
+on：开启，CacheKey由QueryString组成
+off：关闭，CacheKey不由QueryString组成
+
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -8343,7 +8364,9 @@ off：关闭
  */
 export interface CookieKey {
   /**
-      * on | off 是否使用Cookie作为Cache的一部分
+      * 使用Cookie作为Cache的一部分配置开关，取值有：
+on：开启，使用Cookie作为Cache的一部分
+off：关闭，不使用Cookie作为Cache的一部分
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -8360,7 +8383,7 @@ export interface CookieKey {
  */
 export interface BandwidthAlert {
   /**
-      * 用量封顶配置开关
+      * 用量封顶配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -8386,7 +8409,7 @@ RETURN_404：全部请求返回 404
   LastTriggerTime?: string
 
   /**
-      * 用量封顶提醒开关
+      * 用量封顶提醒配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9314,7 +9337,9 @@ ecdn表示ECDN数据
  */
 export interface CacheTagKey {
   /**
-      * 是否使用CacheTag作为CacheKey的一部分
+      * 使用CacheTag作为CacheKey的一部分配置开关，取值有
+on：开启，使用CacheTag作为CacheKey的一部分
+off：关闭，不使用CacheTag作为CacheKey的一部分
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch: string
@@ -9436,7 +9461,7 @@ head：自定义请求头，填写具体value值，512字符以内；内容为�
  */
 export interface Https {
   /**
-      * https 配置开关
+      * https 配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9538,7 +9563,7 @@ export interface ScdnEventLogConditions {
  */
 export interface FollowRedirect {
   /**
-      * 回源跟随开关
+      * 回源跟随配置开关，取值有：
 on：开启
 off：关闭
       */
@@ -9893,8 +9918,11 @@ export interface DescribeDomainsConfigResponse {
  */
 export interface HttpsBilling {
   /**
-   * HTTPS服务，缺省时默认开启【会产生计费】
-   */
+      * HTTPS服务配置开关，取值有：
+on：开启，缺省时默认开启【会产生计费】
+off：关闭，拦截https请求
+
+      */
   Switch: string
 }
 
@@ -9966,7 +9994,7 @@ path: 根据完整访问路径生效
  */
 export interface ErrorPage {
   /**
-      * 状态码重定向配置开关
+      * 状态码重定向配置开关，取值有：
 on：开启
 off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
@@ -11000,8 +11028,10 @@ export interface EnableClsLogTopicRequest {
  */
 export interface AccessControl {
   /**
-   * on | off 是否启用请求头部及请求url访问控制
-   */
+      * 启用请求头部及请求url访问控制开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**
@@ -11284,12 +11314,14 @@ export interface ErrorPageRule {
 }
 
 /**
- *  华为云对象存储回源鉴权
+ * 华为云对象存储回源鉴权
  */
 export interface HwPrivateAccess {
   /**
-   * 开关 on/off
-   */
+      *  华为云对象存储回源鉴权配置开关，取值有：
+on：开启
+off：关闭
+      */
   Switch: string
 
   /**

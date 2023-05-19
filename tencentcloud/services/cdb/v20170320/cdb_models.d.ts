@@ -3523,7 +3523,7 @@ export interface DescribeDBPriceRequest {
       */
     ProtectMode?: number;
     /**
-      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - 单节点云盘版实例。 不指定则默认为通用型实例。
       */
     DeviceType?: string;
     /**
@@ -4716,15 +4716,15 @@ export interface DescribeDBPriceResponse {
     /**
       * 实例价格，单位：分。
       */
-    Price: number;
+    Price?: number;
     /**
       * 实例原价，单位：分。
       */
-    OriginalPrice: number;
+    OriginalPrice?: number;
     /**
       * 货币单位。CNY-人民币，USD-美元。
       */
-    Currency: string;
+    Currency?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

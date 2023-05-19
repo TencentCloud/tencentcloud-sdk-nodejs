@@ -283,7 +283,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddresses", req, cb);
     }
     /**
-     * 启用SSL-VPN-CLIENT 证书
+     * 本接口（EnableVpnGatewaySslClientCert）用于启用SSL-VPN-CLIENT 证书。
      */
     async EnableVpnGatewaySslClientCert(req, cb) {
         return this.request("EnableVpnGatewaySslClientCert", req, cb);
@@ -480,7 +480,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckNetDetectState", req, cb);
     }
     /**
-     * 删除SSL-VPN-CLIENT
+     * 本接口（DeleteVpnGatewaySslClient）用于删除SSL-VPN-CLIENT。
      */
     async DeleteVpnGatewaySslClient(req, cb) {
         return this.request("DeleteVpnGatewaySslClient", req, cb);
@@ -1402,7 +1402,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcInstances", req, cb);
     }
     /**
-     * 下载SSL-VPN-CLIENT 客户端证书
+     * 本接口（DownloadVpnGatewaySslClientCert）用于下载SSL-VPN-CLIENT 客户端证书。
      */
     async DownloadVpnGatewaySslClientCert(req, cb) {
         return this.request("DownloadVpnGatewaySslClientCert", req, cb);

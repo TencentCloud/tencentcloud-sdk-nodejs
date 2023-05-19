@@ -28,16 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("ssl.tencentcloudapi.com", "2019-12-05", clientConfig);
     }
     /**
+     * 查询证书cos云资源部署实例列表
+     */
+    async DescribeHostCosInstanceList(req, cb) {
+        return this.request("DescribeHostCosInstanceList", req, cb);
+    }
+    /**
      * 本接口（DescribeCertificates）用于获取证书列表。
      */
     async DescribeCertificates(req, cb) {
         return this.request("DescribeCertificates", req, cb);
     }
     /**
-     * 获得权益包列表
+     * 查询证书cdn云资源部署实例列表
      */
-    async DescribePackages(req, cb) {
-        return this.request("DescribePackages", req, cb);
+    async DescribeHostCdnInstanceList(req, cb) {
+        return this.request("DescribeHostCdnInstanceList", req, cb);
+    }
+    /**
+     * 查询证书tke云资源部署实例列表
+     */
+    async DescribeHostTkeInstanceList(req, cb) {
+        return this.request("DescribeHostTkeInstanceList", req, cb);
     }
     /**
      * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
@@ -52,10 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteManager", req, cb);
     }
     /**
-     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     * 查询证书Vod云资源部署实例列表
      */
-    async UploadConfirmLetter(req, cb) {
-        return this.request("UploadConfirmLetter", req, cb);
+    async DescribeHostVodInstanceList(req, cb) {
+        return this.request("DescribeHostVodInstanceList", req, cb);
+    }
+    /**
+     * 证书部署到云资源实例列表
+     */
+    async DeployCertificateInstance(req, cb) {
+        return this.request("DeployCertificateInstance", req, cb);
     }
     /**
      * 重新提交审核管理人
@@ -64,16 +82,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitAuditManager", req, cb);
     }
     /**
+     * 获得权益包列表
+     */
+    async DescribePackages(req, cb) {
+        return this.request("DescribePackages", req, cb);
+    }
+    /**
      * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
      */
     async SubmitCertificateInformation(req, cb) {
         return this.request("SubmitCertificateInformation", req, cb);
     }
     /**
+     * 查询证书ddos云资源部署实例列表
+     */
+    async DescribeHostDdosInstanceList(req, cb) {
+        return this.request("DescribeHostDdosInstanceList", req, cb);
+    }
+    /**
      * 重新核验管理人
      */
     async VerifyManager(req, cb) {
         return this.request("VerifyManager", req, cb);
+    }
+    /**
+     * 查询证书clb云资源部署实例列表
+     */
+    async DescribeHostClbInstanceList(req, cb) {
+        return this.request("DescribeHostClbInstanceList", req, cb);
+    }
+    /**
+     * 查询证书EdgeOne云资源部署实例列表
+     */
+    async DescribeHostTeoInstanceList(req, cb) {
+        return this.request("DescribeHostTeoInstanceList", req, cb);
     }
     /**
      * 取消证书订单。
@@ -100,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CompleteCertificate", req, cb);
     }
     /**
+     * 一键更新旧证书资源
+     */
+    async UpdateCertificateInstance(req, cb) {
+        return this.request("UpdateCertificateInstance", req, cb);
+    }
+    /**
      * 本接口（UploadCertificate）用于上传证书。
      */
     async UploadCertificate(req, cb) {
@@ -112,10 +160,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckCertificateChain", req, cb);
     }
     /**
-     * 本接口（DescribeCertificate）用于获取证书信息。
+     * 用户传入证书id和备注来修改证书备注。
      */
-    async DescribeCertificate(req, cb) {
-        return this.request("DescribeCertificate", req, cb);
+    async ModifyCertificateAlias(req, cb) {
+        return this.request("ModifyCertificateAlias", req, cb);
     }
     /**
      * 查询公司列表
@@ -130,10 +178,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificateDetail", req, cb);
     }
     /**
-     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     * 查询证书live云资源部署实例列表
      */
-    async ModifyCertificatesExpiringNotificationSwitch(req, cb) {
-        return this.request("ModifyCertificatesExpiringNotificationSwitch", req, cb);
+    async DescribeHostLiveInstanceList(req, cb) {
+        return this.request("DescribeHostLiveInstanceList", req, cb);
+    }
+    /**
+     * 查询证书waf云资源部署实例列表
+     */
+    async DescribeHostWafInstanceList(req, cb) {
+        return this.request("DescribeHostWafInstanceList", req, cb);
     }
     /**
      * 查询管理人详情
@@ -142,10 +196,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeManagerDetail", req, cb);
     }
     /**
+     * 查询证书云资源部署记录详情列表
+     */
+    async DescribeHostDeployRecordDetail(req, cb) {
+        return this.request("DescribeHostDeployRecordDetail", req, cb);
+    }
+    /**
+     * 云资源部署一键回滚
+     */
+    async DeployCertificateRecordRollback(req, cb) {
+        return this.request("DeployCertificateRecordRollback", req, cb);
+    }
+    /**
      * 云资源托管
      */
     async HostCertificate(req, cb) {
         return this.request("HostCertificate", req, cb);
+    }
+    /**
+     * 云资源部署重试部署记录
+     */
+    async DeployCertificateRecordRetry(req, cb) {
+        return this.request("DeployCertificateRecordRetry", req, cb);
+    }
+    /**
+     * 查询证书云资源更新记录列表
+     */
+    async DescribeHostUpdateRecord(req, cb) {
+        return this.request("DescribeHostUpdateRecord", req, cb);
+    }
+    /**
+     * 查询证书云资源部署记录列表
+     */
+    async DescribeHostDeployRecord(req, cb) {
+        return this.request("DescribeHostDeployRecord", req, cb);
+    }
+    /**
+     * 云资源更新重试部署记录
+     */
+    async UpdateCertificateRecordRetry(req, cb) {
+        return this.request("UpdateCertificateRecordRetry", req, cb);
     }
     /**
      * 批量修改证书所属项目。
@@ -154,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCertificateProject", req, cb);
     }
     /**
-     * 用户传入证书id和备注来修改证书备注。
+     * 本接口（DescribeCertificate）用于获取证书信息。
      */
-    async ModifyCertificateAlias(req, cb) {
-        return this.request("ModifyCertificateAlias", req, cb);
+    async DescribeCertificate(req, cb) {
+        return this.request("DescribeCertificate", req, cb);
     }
     /**
      * 证书查询关联资源
@@ -172,6 +262,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCertificate", req, cb);
     }
     /**
+     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     */
+    async UploadConfirmLetter(req, cb) {
+        return this.request("UploadConfirmLetter", req, cb);
+    }
+    /**
+     * 查询证书Lighthouse云资源部署实例列表
+     */
+    async DescribeHostLighthouseInstanceList(req, cb) {
+        return this.request("DescribeHostLighthouseInstanceList", req, cb);
+    }
+    /**
+     * 查询证书云资源更新记录详情列表
+     */
+    async DescribeHostUpdateRecordDetail(req, cb) {
+        return this.request("DescribeHostUpdateRecordDetail", req, cb);
+    }
+    /**
      * 提交证书订单。
      */
     async CommitCertificateInformation(req, cb) {
@@ -182,6 +290,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCertificateOperateLogs(req, cb) {
         return this.request("DescribeCertificateOperateLogs", req, cb);
+    }
+    /**
+     * 查询证书apiGateway云资源部署实例列表
+     */
+    async DescribeHostApiGatewayInstanceList(req, cb) {
+        return this.request("DescribeHostApiGatewayInstanceList", req, cb);
+    }
+    /**
+     * 云资源更新一键回滚
+     */
+    async UpdateCertificateRecordRollback(req, cb) {
+        return this.request("UpdateCertificateRecordRollback", req, cb);
+    }
+    /**
+     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     */
+    async ModifyCertificatesExpiringNotificationSwitch(req, cb) {
+        return this.request("ModifyCertificatesExpiringNotificationSwitch", req, cb);
     }
     /**
      * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。

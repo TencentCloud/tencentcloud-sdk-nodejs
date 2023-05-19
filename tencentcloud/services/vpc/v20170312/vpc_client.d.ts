@@ -183,7 +183,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAddresses(req: DescribeAddressesRequest, cb?: (error: string, rep: DescribeAddressesResponse) => void): Promise<DescribeAddressesResponse>;
     /**
-     * 启用SSL-VPN-CLIENT 证书
+     * 本接口（EnableVpnGatewaySslClientCert）用于启用SSL-VPN-CLIENT 证书。
      */
     EnableVpnGatewaySslClientCert(req: EnableVpnGatewaySslClientCertRequest, cb?: (error: string, rep: EnableVpnGatewaySslClientCertResponse) => void): Promise<EnableVpnGatewaySslClientCertResponse>;
     /**
@@ -322,7 +322,7 @@ export declare class Client extends AbstractClient {
      */
     CheckNetDetectState(req: CheckNetDetectStateRequest, cb?: (error: string, rep: CheckNetDetectStateResponse) => void): Promise<CheckNetDetectStateResponse>;
     /**
-     * 删除SSL-VPN-CLIENT
+     * 本接口（DeleteVpnGatewaySslClient）用于删除SSL-VPN-CLIENT。
      */
     DeleteVpnGatewaySslClient(req: DeleteVpnGatewaySslClientRequest, cb?: (error: string, rep: DeleteVpnGatewaySslClientResponse) => void): Promise<DeleteVpnGatewaySslClientResponse>;
     /**
@@ -976,7 +976,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeVpcInstances(req: DescribeVpcInstancesRequest, cb?: (error: string, rep: DescribeVpcInstancesResponse) => void): Promise<DescribeVpcInstancesResponse>;
     /**
-     * 下载SSL-VPN-CLIENT 客户端证书
+     * 本接口（DownloadVpnGatewaySslClientCert）用于下载SSL-VPN-CLIENT 客户端证书。
      */
     DownloadVpnGatewaySslClientCert(req: DownloadVpnGatewaySslClientCertRequest, cb?: (error: string, rep: DownloadVpnGatewaySslClientCertResponse) => void): Promise<DownloadVpnGatewaySslClientCertResponse>;
     /**

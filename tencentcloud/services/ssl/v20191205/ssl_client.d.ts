@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyCertificateResponse, CompleteCertificateRequest, UploadCertificateRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, ModifyCertificateAliasRequest, ModifyCertificatesExpiringNotificationSwitchResponse, CommitCertificateInformationRequest, DownloadCertificateResponse, ReplaceCertificateResponse, SubmitAuditManagerResponse, DownloadCertificateRequest, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, DescribeManagersResponse, DescribeCertificateResponse, HostCertificateResponse, UploadCertificateResponse, VerifyManagerResponse, DescribeCertificateDetailRequest, SubmitAuditManagerRequest, DeleteManagerRequest, ApplyCertificateRequest, ReplaceCertificateRequest, UploadRevokeLetterResponse, DescribeDeployedResourcesRequest, CreateCertificateResponse, UploadRevokeLetterRequest, DeleteCertificateResponse, RevokeCertificateResponse, DescribeCertificateDetailResponse, CheckCertificateChainResponse, ModifyCertificateProjectRequest, HostCertificateRequest, DescribeCertificateRequest, DescribeManagerDetailRequest, DescribeCompaniesResponse, ModifyCertificatesExpiringNotificationSwitchRequest, DescribeDeployedResourcesResponse, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, CreateCertificateRequest, DescribeCertificatesResponse, CommitCertificateInformationResponse, UploadConfirmLetterResponse, DeleteManagerResponse, VerifyManagerRequest, RevokeCertificateRequest, DescribePackagesRequest, CheckCertificateChainRequest, ModifyCertificateAliasResponse, UploadConfirmLetterRequest, DescribeCompaniesRequest, SubmitCertificateInformationRequest, DescribeCertificatesRequest, DescribePackagesResponse, DescribeManagersRequest, CompleteCertificateResponse, SubmitCertificateInformationResponse, DescribeManagerDetailResponse } from "./ssl_models";
+import { DescribeHostDdosInstanceListRequest, CompleteCertificateRequest, DownloadCertificateResponse, DescribeHostDeployRecordDetailResponse, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, VerifyManagerRequest, VerifyManagerResponse, DescribeCertificateDetailRequest, DescribeDeployedResourcesRequest, UploadRevokeLetterRequest, DescribeManagersResponse, DescribeCompaniesResponse, CheckCertificateChainResponse, DescribeHostCosInstanceListResponse, ModifyCertificateAliasRequest, DescribeManagerDetailRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, ModifyCertificatesExpiringNotificationSwitchResponse, DescribeHostLiveInstanceListRequest, DescribeHostDdosInstanceListResponse, DescribeCertificateDetailResponse, DescribeHostDeployRecordDetailRequest, DescribeHostTkeInstanceListResponse, ApplyCertificateResponse, DescribeHostDeployRecordRequest, UploadConfirmLetterResponse, DescribeHostUpdateRecordDetailRequest, ReplaceCertificateResponse, DescribeCertificateResponse, DeleteManagerRequest, DescribeHostUpdateRecordResponse, UpdateCertificateRecordRollbackResponse, DescribeHostVodInstanceListRequest, DeployCertificateRecordRetryResponse, UpdateCertificateRecordRetryRequest, DescribeHostWafInstanceListResponse, DescribeDeployedResourcesResponse, CreateCertificateRequest, DescribeCertificatesResponse, CommitCertificateInformationResponse, DeleteManagerResponse, UploadCertificateResponse, DeployCertificateInstanceResponse, SubmitCertificateInformationRequest, DescribeCertificatesRequest, UpdateCertificateRecordRollbackRequest, DescribeHostClbInstanceListResponse, RevokeCertificateRequest, DescribeManagerDetailResponse, HostCertificateResponse, CommitCertificateInformationRequest, SubmitAuditManagerResponse, DownloadCertificateRequest, UpdateCertificateInstanceRequest, ReplaceCertificateRequest, DescribeHostDeployRecordResponse, SubmitAuditManagerRequest, DescribeHostTkeInstanceListRequest, DeployCertificateRecordRollbackRequest, DeleteCertificateResponse, RevokeCertificateResponse, ModifyCertificateProjectRequest, DescribeCertificateRequest, DescribeHostVodInstanceListResponse, ModifyCertificatesExpiringNotificationSwitchRequest, DescribeHostUpdateRecordDetailResponse, DescribeHostUpdateRecordRequest, DescribeHostClbInstanceListRequest, DescribeHostLiveInstanceListResponse, DescribeHostApiGatewayInstanceListRequest, DescribeCompaniesRequest, DescribeHostCosInstanceListRequest, DescribeHostCdnInstanceListResponse, HostCertificateRequest, DeployCertificateInstanceRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, DescribeHostLighthouseInstanceListRequest, DescribeHostCdnInstanceListRequest, DescribeHostTeoInstanceListResponse, DescribeHostWafInstanceListRequest, UploadRevokeLetterResponse, UpdateCertificateInstanceResponse, UploadCertificateRequest, ModifyCertificateAliasResponse, ApplyCertificateRequest, CreateCertificateResponse, DescribeHostApiGatewayInstanceListResponse, DeployCertificateRecordRetryRequest, DescribeHostTeoInstanceListRequest, UploadConfirmLetterRequest, SubmitCertificateInformationResponse, UpdateCertificateRecordRetryResponse, DescribePackagesRequest, CheckCertificateChainRequest, DeployCertificateRecordRollbackResponse, DescribePackagesResponse, DescribeManagersRequest, DescribeHostLighthouseInstanceListResponse, CompleteCertificateResponse } from "./ssl_models";
 /**
  * ssl client
  * @class
@@ -8,13 +8,21 @@ import { ApplyCertificateResponse, CompleteCertificateRequest, UploadCertificate
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 查询证书cos云资源部署实例列表
+     */
+    DescribeHostCosInstanceList(req: DescribeHostCosInstanceListRequest, cb?: (error: string, rep: DescribeHostCosInstanceListResponse) => void): Promise<DescribeHostCosInstanceListResponse>;
+    /**
      * 本接口（DescribeCertificates）用于获取证书列表。
      */
     DescribeCertificates(req: DescribeCertificatesRequest, cb?: (error: string, rep: DescribeCertificatesResponse) => void): Promise<DescribeCertificatesResponse>;
     /**
-     * 获得权益包列表
+     * 查询证书cdn云资源部署实例列表
      */
-    DescribePackages(req: DescribePackagesRequest, cb?: (error: string, rep: DescribePackagesResponse) => void): Promise<DescribePackagesResponse>;
+    DescribeHostCdnInstanceList(req: DescribeHostCdnInstanceListRequest, cb?: (error: string, rep: DescribeHostCdnInstanceListResponse) => void): Promise<DescribeHostCdnInstanceListResponse>;
+    /**
+     * 查询证书tke云资源部署实例列表
+     */
+    DescribeHostTkeInstanceList(req: DescribeHostTkeInstanceListRequest, cb?: (error: string, rep: DescribeHostTkeInstanceListResponse) => void): Promise<DescribeHostTkeInstanceListResponse>;
     /**
      * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
      */
@@ -24,21 +32,41 @@ export declare class Client extends AbstractClient {
      */
     DeleteManager(req: DeleteManagerRequest, cb?: (error: string, rep: DeleteManagerResponse) => void): Promise<DeleteManagerResponse>;
     /**
-     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     * 查询证书Vod云资源部署实例列表
      */
-    UploadConfirmLetter(req: UploadConfirmLetterRequest, cb?: (error: string, rep: UploadConfirmLetterResponse) => void): Promise<UploadConfirmLetterResponse>;
+    DescribeHostVodInstanceList(req: DescribeHostVodInstanceListRequest, cb?: (error: string, rep: DescribeHostVodInstanceListResponse) => void): Promise<DescribeHostVodInstanceListResponse>;
+    /**
+     * 证书部署到云资源实例列表
+     */
+    DeployCertificateInstance(req: DeployCertificateInstanceRequest, cb?: (error: string, rep: DeployCertificateInstanceResponse) => void): Promise<DeployCertificateInstanceResponse>;
     /**
      * 重新提交审核管理人
      */
     SubmitAuditManager(req: SubmitAuditManagerRequest, cb?: (error: string, rep: SubmitAuditManagerResponse) => void): Promise<SubmitAuditManagerResponse>;
     /**
+     * 获得权益包列表
+     */
+    DescribePackages(req: DescribePackagesRequest, cb?: (error: string, rep: DescribePackagesResponse) => void): Promise<DescribePackagesResponse>;
+    /**
      * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
      */
     SubmitCertificateInformation(req: SubmitCertificateInformationRequest, cb?: (error: string, rep: SubmitCertificateInformationResponse) => void): Promise<SubmitCertificateInformationResponse>;
     /**
+     * 查询证书ddos云资源部署实例列表
+     */
+    DescribeHostDdosInstanceList(req: DescribeHostDdosInstanceListRequest, cb?: (error: string, rep: DescribeHostDdosInstanceListResponse) => void): Promise<DescribeHostDdosInstanceListResponse>;
+    /**
      * 重新核验管理人
      */
     VerifyManager(req: VerifyManagerRequest, cb?: (error: string, rep: VerifyManagerResponse) => void): Promise<VerifyManagerResponse>;
+    /**
+     * 查询证书clb云资源部署实例列表
+     */
+    DescribeHostClbInstanceList(req: DescribeHostClbInstanceListRequest, cb?: (error: string, rep: DescribeHostClbInstanceListResponse) => void): Promise<DescribeHostClbInstanceListResponse>;
+    /**
+     * 查询证书EdgeOne云资源部署实例列表
+     */
+    DescribeHostTeoInstanceList(req: DescribeHostTeoInstanceListRequest, cb?: (error: string, rep: DescribeHostTeoInstanceListResponse) => void): Promise<DescribeHostTeoInstanceListResponse>;
     /**
      * 取消证书订单。
      */
@@ -56,6 +84,10 @@ export declare class Client extends AbstractClient {
      */
     CompleteCertificate(req: CompleteCertificateRequest, cb?: (error: string, rep: CompleteCertificateResponse) => void): Promise<CompleteCertificateResponse>;
     /**
+     * 一键更新旧证书资源
+     */
+    UpdateCertificateInstance(req: UpdateCertificateInstanceRequest, cb?: (error: string, rep: UpdateCertificateInstanceResponse) => void): Promise<UpdateCertificateInstanceResponse>;
+    /**
      * 本接口（UploadCertificate）用于上传证书。
      */
     UploadCertificate(req: UploadCertificateRequest, cb?: (error: string, rep: UploadCertificateResponse) => void): Promise<UploadCertificateResponse>;
@@ -64,9 +96,9 @@ export declare class Client extends AbstractClient {
      */
     CheckCertificateChain(req: CheckCertificateChainRequest, cb?: (error: string, rep: CheckCertificateChainResponse) => void): Promise<CheckCertificateChainResponse>;
     /**
-     * 本接口（DescribeCertificate）用于获取证书信息。
+     * 用户传入证书id和备注来修改证书备注。
      */
-    DescribeCertificate(req: DescribeCertificateRequest, cb?: (error: string, rep: DescribeCertificateResponse) => void): Promise<DescribeCertificateResponse>;
+    ModifyCertificateAlias(req: ModifyCertificateAliasRequest, cb?: (error: string, rep: ModifyCertificateAliasResponse) => void): Promise<ModifyCertificateAliasResponse>;
     /**
      * 查询公司列表
      */
@@ -76,25 +108,53 @@ export declare class Client extends AbstractClient {
      */
     DescribeCertificateDetail(req: DescribeCertificateDetailRequest, cb?: (error: string, rep: DescribeCertificateDetailResponse) => void): Promise<DescribeCertificateDetailResponse>;
     /**
-     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     * 查询证书live云资源部署实例列表
      */
-    ModifyCertificatesExpiringNotificationSwitch(req: ModifyCertificatesExpiringNotificationSwitchRequest, cb?: (error: string, rep: ModifyCertificatesExpiringNotificationSwitchResponse) => void): Promise<ModifyCertificatesExpiringNotificationSwitchResponse>;
+    DescribeHostLiveInstanceList(req: DescribeHostLiveInstanceListRequest, cb?: (error: string, rep: DescribeHostLiveInstanceListResponse) => void): Promise<DescribeHostLiveInstanceListResponse>;
+    /**
+     * 查询证书waf云资源部署实例列表
+     */
+    DescribeHostWafInstanceList(req: DescribeHostWafInstanceListRequest, cb?: (error: string, rep: DescribeHostWafInstanceListResponse) => void): Promise<DescribeHostWafInstanceListResponse>;
     /**
      * 查询管理人详情
      */
     DescribeManagerDetail(req: DescribeManagerDetailRequest, cb?: (error: string, rep: DescribeManagerDetailResponse) => void): Promise<DescribeManagerDetailResponse>;
     /**
+     * 查询证书云资源部署记录详情列表
+     */
+    DescribeHostDeployRecordDetail(req: DescribeHostDeployRecordDetailRequest, cb?: (error: string, rep: DescribeHostDeployRecordDetailResponse) => void): Promise<DescribeHostDeployRecordDetailResponse>;
+    /**
+     * 云资源部署一键回滚
+     */
+    DeployCertificateRecordRollback(req: DeployCertificateRecordRollbackRequest, cb?: (error: string, rep: DeployCertificateRecordRollbackResponse) => void): Promise<DeployCertificateRecordRollbackResponse>;
+    /**
      * 云资源托管
      */
     HostCertificate(req: HostCertificateRequest, cb?: (error: string, rep: HostCertificateResponse) => void): Promise<HostCertificateResponse>;
+    /**
+     * 云资源部署重试部署记录
+     */
+    DeployCertificateRecordRetry(req: DeployCertificateRecordRetryRequest, cb?: (error: string, rep: DeployCertificateRecordRetryResponse) => void): Promise<DeployCertificateRecordRetryResponse>;
+    /**
+     * 查询证书云资源更新记录列表
+     */
+    DescribeHostUpdateRecord(req: DescribeHostUpdateRecordRequest, cb?: (error: string, rep: DescribeHostUpdateRecordResponse) => void): Promise<DescribeHostUpdateRecordResponse>;
+    /**
+     * 查询证书云资源部署记录列表
+     */
+    DescribeHostDeployRecord(req: DescribeHostDeployRecordRequest, cb?: (error: string, rep: DescribeHostDeployRecordResponse) => void): Promise<DescribeHostDeployRecordResponse>;
+    /**
+     * 云资源更新重试部署记录
+     */
+    UpdateCertificateRecordRetry(req: UpdateCertificateRecordRetryRequest, cb?: (error: string, rep: UpdateCertificateRecordRetryResponse) => void): Promise<UpdateCertificateRecordRetryResponse>;
     /**
      * 批量修改证书所属项目。
      */
     ModifyCertificateProject(req: ModifyCertificateProjectRequest, cb?: (error: string, rep: ModifyCertificateProjectResponse) => void): Promise<ModifyCertificateProjectResponse>;
     /**
-     * 用户传入证书id和备注来修改证书备注。
+     * 本接口（DescribeCertificate）用于获取证书信息。
      */
-    ModifyCertificateAlias(req: ModifyCertificateAliasRequest, cb?: (error: string, rep: ModifyCertificateAliasResponse) => void): Promise<ModifyCertificateAliasResponse>;
+    DescribeCertificate(req: DescribeCertificateRequest, cb?: (error: string, rep: DescribeCertificateResponse) => void): Promise<DescribeCertificateResponse>;
     /**
      * 证书查询关联资源
      */
@@ -104,6 +164,18 @@ export declare class Client extends AbstractClient {
      */
     CreateCertificate(req: CreateCertificateRequest, cb?: (error: string, rep: CreateCertificateResponse) => void): Promise<CreateCertificateResponse>;
     /**
+     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     */
+    UploadConfirmLetter(req: UploadConfirmLetterRequest, cb?: (error: string, rep: UploadConfirmLetterResponse) => void): Promise<UploadConfirmLetterResponse>;
+    /**
+     * 查询证书Lighthouse云资源部署实例列表
+     */
+    DescribeHostLighthouseInstanceList(req: DescribeHostLighthouseInstanceListRequest, cb?: (error: string, rep: DescribeHostLighthouseInstanceListResponse) => void): Promise<DescribeHostLighthouseInstanceListResponse>;
+    /**
+     * 查询证书云资源更新记录详情列表
+     */
+    DescribeHostUpdateRecordDetail(req: DescribeHostUpdateRecordDetailRequest, cb?: (error: string, rep: DescribeHostUpdateRecordDetailResponse) => void): Promise<DescribeHostUpdateRecordDetailResponse>;
+    /**
      * 提交证书订单。
      */
     CommitCertificateInformation(req: CommitCertificateInformationRequest, cb?: (error: string, rep: CommitCertificateInformationResponse) => void): Promise<CommitCertificateInformationResponse>;
@@ -111,6 +183,18 @@ export declare class Client extends AbstractClient {
      * 获取用户账号下有关证书的操作日志。
      */
     DescribeCertificateOperateLogs(req: DescribeCertificateOperateLogsRequest, cb?: (error: string, rep: DescribeCertificateOperateLogsResponse) => void): Promise<DescribeCertificateOperateLogsResponse>;
+    /**
+     * 查询证书apiGateway云资源部署实例列表
+     */
+    DescribeHostApiGatewayInstanceList(req: DescribeHostApiGatewayInstanceListRequest, cb?: (error: string, rep: DescribeHostApiGatewayInstanceListResponse) => void): Promise<DescribeHostApiGatewayInstanceListResponse>;
+    /**
+     * 云资源更新一键回滚
+     */
+    UpdateCertificateRecordRollback(req: UpdateCertificateRecordRollbackRequest, cb?: (error: string, rep: UpdateCertificateRecordRollbackResponse) => void): Promise<UpdateCertificateRecordRollbackResponse>;
+    /**
+     * 修改忽略证书到期通知。打开或关闭证书到期通知。
+     */
+    ModifyCertificatesExpiringNotificationSwitch(req: ModifyCertificatesExpiringNotificationSwitchRequest, cb?: (error: string, rep: ModifyCertificatesExpiringNotificationSwitchResponse) => void): Promise<ModifyCertificatesExpiringNotificationSwitchResponse>;
     /**
      * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。
      */

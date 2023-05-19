@@ -16,13 +16,75 @@
  */
 
 /**
- * ApplyCertificate返回参数结构体
+ * 云资源地域列表
  */
-export interface ApplyCertificateResponse {
+export interface ResourceTypeRegions {
   /**
-   * 证书 ID。
+   * 云资源类型
+   */
+  ResourceType?: string
+
+  /**
+   * 地域列表
+   */
+  Regions?: Array<string>
+}
+
+/**
+ * DescribeHostDdosInstanceList请求参数结构体
+ */
+export interface DescribeHostDdosInstanceListRequest {
+  /**
+   * 待部署的证书ID
    */
   CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * CompleteCertificate请求参数结构体
+ */
+export interface CompleteCertificateRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+}
+
+/**
+ * DownloadCertificate返回参数结构体
+ */
+export interface DownloadCertificateResponse {
+  /**
+      * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content?: string
+
+  /**
+      * MIME 类型：application/zip = ZIP 压缩文件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContentType?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -116,84 +178,38 @@ export interface ManagerInfo {
 }
 
 /**
- * CompleteCertificate请求参数结构体
+ * DescribeHostDeployRecordDetail返回参数结构体
  */
-export interface CompleteCertificateRequest {
+export interface DescribeHostDeployRecordDetailResponse {
   /**
-   * 证书ID
-   */
-  CertificateId: string
-}
-
-/**
- * UploadCertificate请求参数结构体
- */
-export interface UploadCertificateRequest {
-  /**
-   * 证书内容。
-   */
-  CertificatePublicKey: string
-
-  /**
-   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
-   */
-  CertificatePrivateKey?: string
-
-  /**
-   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
-   */
-  CertificateType?: string
-
-  /**
-   * 备注名称。
-   */
-  Alias?: string
-
-  /**
-   * 项目 ID。
-   */
-  ProjectId?: number
-
-  /**
-   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
-   */
-  CertificateUse?: string
-
-  /**
-   * 相同的证书是否允许重复上传
-   */
-  Repeatable?: boolean
-}
-
-/**
- * DeleteCertificate请求参数结构体
- */
-export interface DeleteCertificateRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-}
-
-/**
- * DescribeCertificateOperateLogs返回参数结构体
- */
-export interface DescribeCertificateOperateLogsResponse {
-  /**
-   * 当前查询条件日志总数。
-   */
-  AllTotal?: number
-
-  /**
-   * 本次请求返回的日志数量。
-   */
-  TotalCount?: number
-
-  /**
-      * 证书操作日志列表。
+      * 总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OperateLogs?: Array<OperationLog>
+  TotalCount: number
+
+  /**
+      * 证书部署记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployRecordDetailList: Array<DeployRecordDetail>
+
+  /**
+      * 成功总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessTotalCount: number
+
+  /**
+      * 失败总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedTotalCount: number
+
+  /**
+      * 部署中总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunningTotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -202,167 +218,106 @@ export interface DescribeCertificateOperateLogsResponse {
 }
 
 /**
- * ModifyCertificateAlias请求参数结构体
+ * 部署记录详情
  */
-export interface ModifyCertificateAliasRequest {
+export interface DeployRecordDetail {
   /**
-   * 证书 ID。
+   * 部署记录详情ID
    */
-  CertificateId: string
+  Id: number
 
   /**
-   * 备注名称。
+   * 部署证书ID
    */
-  Alias?: string
-}
-
-/**
- * ModifyCertificatesExpiringNotificationSwitch返回参数结构体
- */
-export interface ModifyCertificatesExpiringNotificationSwitchResponse {
-  /**
-   * 证书ID列表
-   */
-  CertificateIds?: Array<string>
+  CertId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CommitCertificateInformation请求参数结构体
- */
-export interface CommitCertificateInformationRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-}
-
-/**
- * DownloadCertificate返回参数结构体
- */
-export interface DownloadCertificateResponse {
-  /**
-      * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
+      * 原绑定证书ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Content?: string
+  OldCertId: string
 
   /**
-      * MIME 类型：application/zip = ZIP 压缩文件。
+   * 部署实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 部署实例名称
+   */
+  InstanceName: string
+
+  /**
+      * 部署监听器ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ContentType?: string
+  ListenerId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 部署域名列表
    */
-  RequestId?: string
-}
-
-/**
- * ReplaceCertificate返回参数结构体
- */
-export interface ReplaceCertificateResponse {
-  /**
-   * 证书 ID。
-   */
-  CertificateId?: string
+  Domains: Array<string>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 权益包基本信息
- */
-export interface PackageInfo {
-  /**
-   * 权益包ID。
-   */
-  PackageId: string
-
-  /**
-   * 权益包内权益点总量。
-   */
-  Total: number
-
-  /**
-   * 权益包内权益点余量。
-   */
-  Balance: number
-
-  /**
-   * 权益包名称。
-   */
-  Type: string
-
-  /**
-      * 权益点是转入时，来源信息。
+      * 部署监听器协议
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SourceUin: number
+  Protocol: string
 
   /**
-   * 权益点状态。
+   * 部署状态
    */
-  Status: string
+  Status: number
 
   /**
-   * 过期时间。
-   */
-  ExpireTime: string
+      * 部署错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
 
   /**
-   * 更新时间。
-   */
-  UpdateTime: string
-
-  /**
-   * 生成时间。
+   * 部署记录详情创建时间
    */
   CreateTime: string
 
   /**
-   * 来源类型。
+   * 部署记录详情最后一次更新时间
    */
-  SourceType: string
+  UpdateTime: string
 
   /**
-      * 转移信息。
+   * 部署监听器名称
+   */
+  ListenerName: string
+
+  /**
+   * 是否开启SNI
+   */
+  SniSwitch: number
+
+  /**
+      * COS存储桶名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TransferOutInfos: Array<PackageTransferOutInfo>
-}
-
-/**
- * SubmitAuditManager返回参数结构体
- */
-export interface SubmitAuditManagerResponse {
-  /**
-   * 管理人ID
-   */
-  ManagerId: number
+  Bucket: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+      * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
 
-/**
- * DownloadCertificate请求参数结构体
- */
-export interface DownloadCertificateRequest {
   /**
-   * 证书 ID。
-   */
-  CertificateId: string
+      * secret名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecretName: string
+
+  /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port?: number
 }
 
 /**
@@ -674,78 +629,6 @@ export interface CertificateExtra {
 }
 
 /**
- * 公司信息
- */
-export interface CompanyInfo {
-  /**
-   * 公司名称
-   */
-  CompanyName: string
-
-  /**
-   * 公司ID
-   */
-  CompanyId: number
-
-  /**
-   * 公司所在国家
-   */
-  CompanyCountry: string
-
-  /**
-   * 公司所在省份
-   */
-  CompanyProvince: string
-
-  /**
-   * 公司所在城市
-   */
-  CompanyCity: string
-
-  /**
-   * 公司所在详细地址
-   */
-  CompanyAddress: string
-
-  /**
-   * 公司电话
-   */
-  CompanyPhone: string
-
-  /**
-      * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdType?: string
-
-  /**
-      * ID号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdNumber?: string
-}
-
-/**
- * DescribeManagers返回参数结构体
- */
-export interface DescribeManagersResponse {
-  /**
-   * 公司管理人列表
-   */
-  Managers: Array<ManagerInfo>
-
-  /**
-   * 公司管理人总数
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 根证书
  */
 export interface RootCertificates {
@@ -769,332 +652,33 @@ export interface RootCertificates {
 }
 
 /**
- * DescribeCertificate返回参数结构体
+ * CDN实例详情
  */
-export interface DescribeCertificateResponse {
+export interface CdnInstanceDetail {
   /**
-      * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OwnerUin?: string
-
-  /**
-      * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectId?: string
-
-  /**
-      * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  From?: string
-
-  /**
-      * 证书类型：CA = 客户端证书，SVR = 服务器证书。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertificateType?: string
-
-  /**
-      * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PackageType?: string
-
-  /**
-      * 证书颁发者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProductZhName?: string
-
-  /**
-      * 域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Domain?: string
-
-  /**
-      * 备注名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alias?: string
-
-  /**
-      * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status?: number
-
-  /**
-      * 状态信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StatusMsg?: string
-
-  /**
-      * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VerifyType?: string
-
-  /**
-      * 漏洞扫描状态。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulnerabilityStatus?: string
-
-  /**
-      * 证书生效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertBeginTime?: string
-
-  /**
-      * 证书失效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertEndTime?: string
-
-  /**
-      * 证书有效期：单位(月)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ValidityPeriod?: string
-
-  /**
-      * 申请时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InsertTime?: string
-
-  /**
-      * 订单 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrderId?: string
-
-  /**
-      * 证书扩展信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertificateExtra?: CertificateExtra
-
-  /**
-      * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthDetail?: DvAuthDetail
-
-  /**
-      * 漏洞扫描评估报告。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulnerabilityReport?: string
-
-  /**
-      * 证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertificateId?: string
-
-  /**
-      * 证书类型名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PackageTypeName?: string
-
-  /**
-      * 状态描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StatusName?: string
-
-  /**
-      * 证书包含的多个域名（包含主域名）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubjectAltName?: Array<string>
-
-  /**
-      * 是否为 VIP 客户。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsVip?: boolean
-
-  /**
-      * 是否为泛域名证书。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsWildcard?: boolean
-
-  /**
-      * 是否为 DV 版证书。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsDv?: boolean
-
-  /**
-      * 是否启用了漏洞扫描功能。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsVulnerability?: boolean
-
-  /**
-      * 是否可重颁发证书。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RenewAble?: boolean
-
-  /**
-      * 提交的资料信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubmittedData?: SubmittedData
-
-  /**
-      * 是否可部署。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Deployable?: boolean
-
-  /**
-      * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags?: Array<Tags>
-
-  /**
-      * CA证书的所有加密方式	
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CAEncryptAlgorithms?: Array<string>
-
-  /**
-      * CA证书的所有通用名称	
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CACommonNames?: Array<string>
-
-  /**
-      * CA证书所有的到期时间	
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CAEndTimes?: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain: string
+
+  /**
+   * 已部署证书ID
+   */
+  CertId: string
+
+  /**
+   * 域名状态
+   */
+  Status: string
 }
 
 /**
- * HostCertificate返回参数结构体
+ * VerifyManager请求参数结构体
  */
-export interface HostCertificateResponse {
+export interface VerifyManagerRequest {
   /**
-   * 云资源配置详情
+   * 管理人ID
    */
-  CertHostingInfo: CertHostingInfo
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UploadCertificate返回参数结构体
- */
-export interface UploadCertificateResponse {
-  /**
-   * 证书 ID。
-   */
-  CertificateId?: string
-
-  /**
-      * 重复证书的ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RepeatCertId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 权益包转出详情
- */
-export interface PackageTransferOutInfo {
-  /**
-   * 权益包ID。
-   */
-  PackageId: string
-
-  /**
-   * 转移码。
-   */
-  TransferCode: string
-
-  /**
-   * 本次转移点数。
-   */
-  TransferCount: number
-
-  /**
-      * 转入的PackageID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReceivePackageId: string
-
-  /**
-   * 本次转移过期时间。
-   */
-  ExpireTime: string
-
-  /**
-   * 本次转移生成时间。
-   */
-  CreateTime: string
-
-  /**
-   * 本次转移更新时间。
-   */
-  UpdateTime: string
-
-  /**
-   * 转移状态。
-   */
-  TransferStatus: string
-
-  /**
-      * 接收者uin。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReceiverUin: number
-
-  /**
-      * 接收时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReceiveTime: string
-}
-
-/**
- * 证书操作日志。
- */
-export interface OperationLog {
-  /**
-   * 操作证书动作。
-   */
-  Action: string
-
-  /**
-   * 操作时间。
-   */
-  CreatedOn: string
+  ManagerId: number
 }
 
 /**
@@ -1123,168 +707,18 @@ export interface DescribeCertificateDetailRequest {
 }
 
 /**
- * 标签
+ * tke namespace详情
  */
-export interface Tags {
+export interface TkeNameSpaceDetail {
   /**
-   * 标签键
+   * namespace名称
    */
-  TagKey: string
+  Name: string
 
   /**
-   * 标签值
+   * secret列表
    */
-  TagValue: string
-}
-
-/**
- * SubmitAuditManager请求参数结构体
- */
-export interface SubmitAuditManagerRequest {
-  /**
-   * 管理人ID
-   */
-  ManagerId: number
-}
-
-/**
- * DeleteManager请求参数结构体
- */
-export interface DeleteManagerRequest {
-  /**
-   * 管理人ID
-   */
-  ManagerId: number
-}
-
-/**
- * ApplyCertificate请求参数结构体
- */
-export interface ApplyCertificateRequest {
-  /**
-   * 验证方式：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证。
-   */
-  DvAuthMethod: string
-
-  /**
-   * 域名。
-   */
-  DomainName: string
-
-  /**
-   * 项目 ID。
-   */
-  ProjectId?: number
-
-  /**
-   * 证书类型，目前仅支持类型2。2 = TrustAsia TLS RSA CA。
-   */
-  PackageType?: string
-
-  /**
-   * 邮箱。
-   */
-  ContactEmail?: string
-
-  /**
-   * 手机。
-   */
-  ContactPhone?: string
-
-  /**
-   * 有效期，默认12个月，目前仅支持12个月。
-   */
-  ValidityPeriod?: string
-
-  /**
-   * 加密算法，仅支持 RSA。
-   */
-  CsrEncryptAlgo?: string
-
-  /**
-   * 密钥对参数，仅支持2048。
-   */
-  CsrKeyParameter?: string
-
-  /**
-   * CSR 的加密密码。
-   */
-  CsrKeyPassword?: string
-
-  /**
-   * 备注名称。
-   */
-  Alias?: string
-
-  /**
-   * 原证书 ID，用于重新申请。
-   */
-  OldCertificateId?: string
-
-  /**
-   * 权益包ID，用于免费证书扩容包使用
-   */
-  PackageId?: string
-
-  /**
-   * 签发后是否删除自动域名验证记录， 默认为否；仅域名为DNS_AUTO验证类型支持传参
-   */
-  DeleteDnsAutoRecord?: boolean
-}
-
-/**
- * ReplaceCertificate请求参数结构体
- */
-export interface ReplaceCertificateRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-
-  /**
-   * 验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
-   */
-  ValidType: string
-
-  /**
-   * 类型，默认 Original。可选项：Original = 原证书 CSR，Upload = 手动上传，Online = 在线生成。
-   */
-  CsrType?: string
-
-  /**
-   * CSR 内容。
-   */
-  CsrContent?: string
-
-  /**
-   * KEY 密码。
-   */
-  CsrkeyPassword?: string
-
-  /**
-   * 重颁发原因。
-   */
-  Reason?: string
-}
-
-/**
- * UploadRevokeLetter返回参数结构体
- */
-export interface UploadRevokeLetterResponse {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-
-  /**
-   * 是否成功。
-   */
-  IsSuccess: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SecretList: Array<TkeSecretDetail>
 }
 
 /**
@@ -1303,26 +737,6 @@ export interface DescribeDeployedResourcesRequest {
 }
 
 /**
- * CreateCertificate返回参数结构体
- */
-export interface CreateCertificateResponse {
-  /**
-   * 证书ID列表
-   */
-  CertificateIds: Array<string>
-
-  /**
-   * 订单号列表
-   */
-  DealIds: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UploadRevokeLetter请求参数结构体
  */
 export interface UploadRevokeLetterRequest {
@@ -1338,13 +752,18 @@ export interface UploadRevokeLetterRequest {
 }
 
 /**
- * DeleteCertificate返回参数结构体
+ * DescribeManagers返回参数结构体
  */
-export interface DeleteCertificateResponse {
+export interface DescribeManagersResponse {
   /**
-   * 删除结果（true：删除成功，false：删除失败）
+   * 公司管理人列表
    */
-  DeleteResult?: boolean
+  Managers: Array<ManagerInfo>
+
+  /**
+   * 公司管理人总数
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1353,14 +772,77 @@ export interface DeleteCertificateResponse {
 }
 
 /**
- * RevokeCertificate返回参数结构体
+ * DescribeCompanies返回参数结构体
  */
-export interface RevokeCertificateResponse {
+export interface DescribeCompaniesResponse {
   /**
-      * 吊销证书域名验证信息。
+   * 公司列表
+   */
+  Companies: Array<CompanyInfo>
+
+  /**
+   * 公司总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckCertificateChain返回参数结构体
+ */
+export interface CheckCertificateChainResponse {
+  /**
+   * true为通过检查，false为未通过检查。
+   */
+  IsValid?: boolean
+
+  /**
+   * true为可信CA，false为不可信CA。
+   */
+  IsTrustedCA?: boolean
+
+  /**
+   * 包含证书链中每一段证书的通用名称。
+   */
+  Chains?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostCosInstanceList返回参数结构体
+ */
+export interface DescribeHostCosInstanceListResponse {
+  /**
+      * COS实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RevokeDomainValidateAuths?: Array<RevokeDomainValidateAuths>
+  InstanceList: Array<CosInstanceDetail>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 异步刷新总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncTotalNum: number
+
+  /**
+      * 异步刷新当前执行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncOffset: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1369,35 +851,342 @@ export interface RevokeCertificateResponse {
 }
 
 /**
- * 资源详情
+ * 云资源配置详情
  */
-export interface DeployedResources {
+export interface CertHostingInfo {
   /**
    * 证书ID
+   */
+  CertId: string
+
+  /**
+      * 已替换的新证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewCertId: string
+
+  /**
+      * 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+}
+
+/**
+ * 返回参数键为 DvAuths 的内容。
+ */
+export interface DvAuths {
+  /**
+      * DV 认证密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthKey: string
+
+  /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthValue: string
+
+  /**
+      * DV 认证值域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthDomain: string
+
+  /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthPath: string
+
+  /**
+      * DV 认证子域名，
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthSubDomain: string
+
+  /**
+      * DV 认证类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthVerifyType: string
+}
+
+/**
+ * ModifyCertificateAlias请求参数结构体
+ */
+export interface ModifyCertificateAliasRequest {
+  /**
+   * 证书 ID。
    */
   CertificateId: string
 
   /**
-   * 数量
+   * 备注名称。
    */
-  Count: number
+  Alias?: string
+}
+
+/**
+ * DescribeManagerDetail请求参数结构体
+ */
+export interface DescribeManagerDetailRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
 
   /**
-   * 资源标识:clb,cdn,live,waf,antiddos
+   * 分页每页数量
+   */
+  Limit?: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+}
+
+/**
+ * CLB监听器规则
+ */
+export interface ClbListenerRule {
+  /**
+   * 规则ID
+   */
+  LocationId: string
+
+  /**
+   * 规则绑定的域名
+   */
+  Domain: string
+
+  /**
+   * 规则是否匹配待绑定证书的域名
+   */
+  IsMatch: boolean
+
+  /**
+      * 规则已绑定的证书数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Certificate: Certificate
+
+  /**
+      * 不匹配域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoMatchDomains?: Array<string>
+}
+
+/**
+ * Lighthouse实例
+ */
+export interface LighthouseInstanceDetail {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * IP地址
+   */
+  IP: Array<string>
+
+  /**
+   * 可选择域名
+   */
+  Domain: Array<string>
+}
+
+/**
+ * DescribeCertificateOperateLogs请求参数结构体
+ */
+export interface DescribeCertificateOperateLogsRequest {
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 请求日志数量，默认为20。
+   */
+  Limit?: number
+
+  /**
+   * 开始时间，默认15天前。
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间，默认现在时间。
+   */
+  EndTime?: string
+}
+
+/**
+ * CancelCertificateOrder返回参数结构体
+ */
+export interface CancelCertificateOrderResponse {
+  /**
+   * 取消订单成功的证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCertificatesExpiringNotificationSwitch返回参数结构体
+ */
+export interface ModifyCertificatesExpiringNotificationSwitchResponse {
+  /**
+   * 证书ID列表
+   */
+  CertificateIds?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 权益包基本信息
+ */
+export interface PackageInfo {
+  /**
+   * 权益包ID。
+   */
+  PackageId: string
+
+  /**
+   * 权益包内权益点总量。
+   */
+  Total: number
+
+  /**
+   * 权益包内权益点余量。
+   */
+  Balance: number
+
+  /**
+   * 权益包名称。
    */
   Type: string
 
   /**
-      * 不建议使用。字段返回和Resources相同。本字段后续只返回null
+      * 权益点是转入时，来源信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResourceIds: Array<string>
+  SourceUin: number
 
   /**
-      * 关联资源ID或关联域名。
+   * 权益点状态。
+   */
+  Status: string
+
+  /**
+   * 过期时间。
+   */
+  ExpireTime: string
+
+  /**
+   * 更新时间。
+   */
+  UpdateTime: string
+
+  /**
+   * 生成时间。
+   */
+  CreateTime: string
+
+  /**
+   * 来源类型。
+   */
+  SourceType: string
+
+  /**
+      * 转移信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Resources: Array<string>
+  TransferOutInfos: Array<PackageTransferOutInfo>
+}
+
+/**
+ * DescribeHostLiveInstanceList请求参数结构体
+ */
+export interface DescribeHostLiveInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * DescribeHostDdosInstanceList返回参数结构体
+ */
+export interface DescribeHostDdosInstanceListResponse {
+  /**
+      * DDOS实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<DdosInstanceDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 更新记录详情列表
+ */
+export interface UpdateRecordDetails {
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 部署资源详情列表
+   */
+  List: Array<UpdateRecordDetail>
 }
 
 /**
@@ -1651,23 +1440,52 @@ export interface DescribeCertificateDetailResponse {
 }
 
 /**
- * CheckCertificateChain返回参数结构体
+ * DescribeHostDeployRecordDetail请求参数结构体
  */
-export interface CheckCertificateChainResponse {
+export interface DescribeHostDeployRecordDetailRequest {
   /**
-   * true为通过检查，false为未通过检查。
+   * 待部署的证书ID
    */
-  IsValid?: boolean
+  DeployRecordId: string
 
   /**
-   * true为可信CA，false为不可信CA。
+   * 分页偏移量，从0开始。
    */
-  IsTrustedCA?: boolean
+  Offset?: number
 
   /**
-   * 包含证书链中每一段证书的通用名称。
+   * 每页数量，默认10。
    */
-  Chains?: Array<string>
+  Limit?: number
+}
+
+/**
+ * DescribeHostTkeInstanceList返回参数结构体
+ */
+export interface DescribeHostTkeInstanceListResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+      * CLB实例监听器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<TkeInstanceDetail>
+
+  /**
+      * 异步刷新总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncTotalNum?: number
+
+  /**
+      * 异步刷新当前执行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncOffset?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1676,148 +1494,634 @@ export interface CheckCertificateChainResponse {
 }
 
 /**
- * ModifyCertificateProject请求参数结构体
+ * 更新记录详情
  */
-export interface ModifyCertificateProjectRequest {
+export interface UpdateRecordDetail {
   /**
-   * 需要修改所属项目的证书 ID 集合，最多100个证书。
+   * 详情记录id
    */
-  CertificateIdList: Array<string>
+  Id: number
 
   /**
-   * 项目 ID。
-   */
-  ProjectId: number
-}
-
-/**
- * 云资源配置详情
- */
-export interface CertHostingInfo {
-  /**
-   * 证书ID
+   * 新证书ID
    */
   CertId: string
 
   /**
-      * 已替换的新证书ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RenewCertId: string
+   * 旧证书ID
+   */
+  OldCertId: string
 
   /**
-      * 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管
+      * 部署域名列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
+  Domains: Array<string>
+
+  /**
+   * 部署资源类型
+   */
   ResourceType: string
 
   /**
-      * 创建时间
+      * 部署地域
 注意：此字段可能返回 null，表示取不到有效值。
       */
+  Region: string
+
+  /**
+   * 部署状态
+   */
+  Status: number
+
+  /**
+      * 部署错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg: string
+
+  /**
+   * 部署时间
+   */
   CreateTime: string
-}
-
-/**
- * 返回参数键为 DvAuths 的内容。
- */
-export interface DvAuths {
-  /**
-      * DV 认证密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthKey: string
 
   /**
-      * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthValue: string
-
-  /**
-      * DV 认证值域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthDomain: string
-
-  /**
-      * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthPath: string
-
-  /**
-      * DV 认证子域名，
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthSubDomain: string
-
-  /**
-      * DV 认证类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthVerifyType: string
-}
-
-/**
- * HostCertificate请求参数结构体
- */
-export interface HostCertificateRequest {
-  /**
-   * 证书ID
+   * 最后一次更新时间
    */
-  CertificateId: string
+  UpdateTime: string
 
   /**
-   * 资源类型：目前仅限于CLB,CDN
-   */
-  ResourceType?: Array<string>
+      * 部署实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 部署实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 部署监听器ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListenerId: string
+
+  /**
+      * 部署监听器名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListenerName: string
+
+  /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 是否开启SNI
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SniSwitch: number
+
+  /**
+      * bucket名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket: string
 }
 
 /**
- * DescribeCertificate请求参数结构体
+ * ApplyCertificate返回参数结构体
  */
-export interface DescribeCertificateRequest {
+export interface ApplyCertificateResponse {
   /**
    * 证书 ID。
    */
   CertificateId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * DescribeManagerDetail请求参数结构体
+ * DescribeHostDeployRecord请求参数结构体
  */
-export interface DescribeManagerDetailRequest {
+export interface DescribeHostDeployRecordRequest {
   /**
-   * 管理人ID
+   * 待部署的证书ID
    */
-  ManagerId: number
+  CertificateId: string
 
   /**
-   * 分页每页数量
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 每页数量，默认10。
    */
   Limit?: number
 
   /**
-   * 分页偏移量
+   * 资源类型
    */
-  Offset?: number
+  ResourceType?: string
 }
 
 /**
- * DescribeCompanies返回参数结构体
+ * COS实例详情
  */
-export interface DescribeCompaniesResponse {
+export interface CosInstanceDetail {
   /**
-   * 公司列表
+   * 域名
    */
-  Companies: Array<CompanyInfo>
+  Domain: string
 
   /**
-   * 公司总数
+      * 已绑定的证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertId: string
+
+  /**
+      * ENABLED: 域名上线状态
+DISABLED:域名下线状态
+      */
+  Status: string
+
+  /**
+      * 存储桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket: string
+
+  /**
+      * 存储桶地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+}
+
+/**
+ * UploadConfirmLetter返回参数结构体
+ */
+export interface UploadConfirmLetterResponse {
+  /**
+   * 证书ID
    */
+  CertificateId?: string
+
+  /**
+   * 是否成功
+   */
+  IsSuccess?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostUpdateRecordDetail请求参数结构体
+ */
+export interface DescribeHostUpdateRecordDetailRequest {
+  /**
+   * 待部署的证书ID
+   */
+  DeployRecordId: string
+}
+
+/**
+ * ReplaceCertificate返回参数结构体
+ */
+export interface ReplaceCertificateResponse {
+  /**
+   * 证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * clb实例详情
+ */
+export interface ClbInstanceDetail {
+  /**
+   * CLB实例ID
+   */
+  LoadBalancerId: string
+
+  /**
+   * CLB实例名称
+   */
+  LoadBalancerName: string
+
+  /**
+      * CLB监听器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Listeners: Array<ClbListener>
+}
+
+/**
+ * 证书操作日志。
+ */
+export interface OperationLog {
+  /**
+   * 操作证书动作。
+   */
+  Action: string
+
+  /**
+   * 操作时间。
+   */
+  CreatedOn: string
+}
+
+/**
+ * Vod实例
+ */
+export interface VodInstanceDetail {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 证书ID
+   */
+  CertId: string
+}
+
+/**
+ * DescribeCertificate返回参数结构体
+ */
+export interface DescribeCertificateResponse {
+  /**
+      * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerUin?: string
+
+  /**
+      * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId?: string
+
+  /**
+      * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  From?: string
+
+  /**
+      * 证书类型：CA = 客户端证书，SVR = 服务器证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertificateType?: string
+
+  /**
+      * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageType?: string
+
+  /**
+      * 证书颁发者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductZhName?: string
+
+  /**
+      * 域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain?: string
+
+  /**
+      * 备注名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alias?: string
+
+  /**
+      * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 状态信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatusMsg?: string
+
+  /**
+      * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyType?: string
+
+  /**
+      * 漏洞扫描状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulnerabilityStatus?: string
+
+  /**
+      * 证书生效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertBeginTime?: string
+
+  /**
+      * 证书失效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertEndTime?: string
+
+  /**
+      * 证书有效期：单位(月)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidityPeriod?: string
+
+  /**
+      * 申请时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InsertTime?: string
+
+  /**
+      * 订单 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrderId?: string
+
+  /**
+      * 证书扩展信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertificateExtra?: CertificateExtra
+
+  /**
+      * DV 认证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthDetail?: DvAuthDetail
+
+  /**
+      * 漏洞扫描评估报告。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulnerabilityReport?: string
+
+  /**
+      * 证书 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertificateId?: string
+
+  /**
+      * 证书类型名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageTypeName?: string
+
+  /**
+      * 状态描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatusName?: string
+
+  /**
+      * 证书包含的多个域名（包含主域名）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubjectAltName?: Array<string>
+
+  /**
+      * 是否为 VIP 客户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsVip?: boolean
+
+  /**
+      * 是否为泛域名证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsWildcard?: boolean
+
+  /**
+      * 是否为 DV 版证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDv?: boolean
+
+  /**
+      * 是否启用了漏洞扫描功能。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsVulnerability?: boolean
+
+  /**
+      * 是否可重颁发证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewAble?: boolean
+
+  /**
+      * 提交的资料信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubmittedData?: SubmittedData
+
+  /**
+      * 是否可部署。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Deployable?: boolean
+
+  /**
+      * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<Tags>
+
+  /**
+      * CA证书的所有加密方式	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CAEncryptAlgorithms?: Array<string>
+
+  /**
+      * CA证书的所有通用名称	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CACommonNames?: Array<string>
+
+  /**
+      * CA证书所有的到期时间	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CAEndTimes?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 权益包转出详情
+ */
+export interface PackageTransferOutInfo {
+  /**
+   * 权益包ID。
+   */
+  PackageId: string
+
+  /**
+   * 转移码。
+   */
+  TransferCode: string
+
+  /**
+   * 本次转移点数。
+   */
+  TransferCount: number
+
+  /**
+      * 转入的PackageID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceivePackageId: string
+
+  /**
+   * 本次转移过期时间。
+   */
+  ExpireTime: string
+
+  /**
+   * 本次转移生成时间。
+   */
+  CreateTime: string
+
+  /**
+   * 本次转移更新时间。
+   */
+  UpdateTime: string
+
+  /**
+   * 转移状态。
+   */
+  TransferStatus: string
+
+  /**
+      * 接收者uin。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverUin: number
+
+  /**
+      * 接收时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiveTime: string
+}
+
+/**
+ * DeleteManager请求参数结构体
+ */
+export interface DeleteManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+}
+
+/**
+ * DescribeHostUpdateRecord返回参数结构体
+ */
+export interface DescribeHostUpdateRecordResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   TotalCount: number
 
+  /**
+      * 证书部署记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployRecordList: Array<UpdateRecordInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCertificateRecordRollback返回参数结构体
+ */
+export interface UpdateCertificateRecordRollbackResponse {
+  /**
+   * 回滚部署记录ID
+   */
+  DeployRecordId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostVodInstanceList请求参数结构体
+ */
+export interface DescribeHostVodInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型 vod
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * DeployCertificateRecordRetry返回参数结构体
+ */
+export interface DeployCertificateRecordRetryResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1866,59 +2170,65 @@ export interface DvAuthDetail {
 }
 
 /**
- * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
+ * UpdateCertificateRecordRetry请求参数结构体
  */
-export interface ProjectInfo {
+export interface UpdateCertificateRecordRetryRequest {
   /**
-      * 项目名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectName: string
+   * 待重试部署记录ID
+   */
+  DeployRecordId?: number
 
   /**
-      * 项目创建用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectCreatorUin: number
-
-  /**
-      * 项目创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectCreateTime: string
-
-  /**
-      * 项目信息简述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectResume: string
-
-  /**
-      * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OwnerUin: number
-
-  /**
-      * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectId: string
+   * 待重试部署记录详情ID
+   */
+  DeployRecordDetailId?: number
 }
 
 /**
- * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
+ * ddos复杂类型
  */
-export interface ModifyCertificatesExpiringNotificationSwitchRequest {
+export interface DdosInstanceDetail {
   /**
-   * 证书ID列表。最多50个
+   * 域名
    */
-  CertificateIds: Array<string>
+  Domain: string
 
   /**
-   * 0:不忽略通知。1:忽略通知
+   * 实例ID
    */
-  SwitchStatus: number
+  InstanceId: string
+
+  /**
+   * 协议类型
+   */
+  Protocol: string
+
+  /**
+      * 证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertId: string
+
+  /**
+   * 转发端口
+   */
+  VirtualPort: string
+}
+
+/**
+ * DescribeHostWafInstanceList返回参数结构体
+ */
+export interface DescribeHostWafInstanceListResponse {
+  /**
+      * WAF实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<LiveInstanceDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1929,46 +2239,6 @@ export interface DescribeDeployedResourcesResponse {
    * 资源详情
    */
   DeployedResources?: Array<DeployedResources>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCertificateOperateLogs请求参数结构体
- */
-export interface DescribeCertificateOperateLogsRequest {
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
-   * 请求日志数量，默认为20。
-   */
-  Limit?: number
-
-  /**
-   * 开始时间，默认15天前。
-   */
-  StartTime?: string
-
-  /**
-   * 结束时间，默认现在时间。
-   */
-  EndTime?: string
-}
-
-/**
- * CancelCertificateOrder返回参数结构体
- */
-export interface CancelCertificateOrderResponse {
-  /**
-   * 取消订单成功的证书 ID。
-   */
-  CertificateId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2039,26 +2309,6 @@ export interface CommitCertificateInformationResponse {
 }
 
 /**
- * UploadConfirmLetter返回参数结构体
- */
-export interface UploadConfirmLetterResponse {
-  /**
-   * 证书ID
-   */
-  CertificateId?: string
-
-  /**
-   * 是否成功
-   */
-  IsSuccess?: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteManager返回参数结构体
  */
 export interface DeleteManagerResponse {
@@ -2074,117 +2324,19 @@ export interface DeleteManagerResponse {
 }
 
 /**
- * VerifyManager请求参数结构体
+ * UploadCertificate返回参数结构体
  */
-export interface VerifyManagerRequest {
-  /**
-   * 管理人ID
-   */
-  ManagerId: number
-}
-
-/**
- * RevokeCertificate请求参数结构体
- */
-export interface RevokeCertificateRequest {
+export interface UploadCertificateResponse {
   /**
    * 证书 ID。
    */
-  CertificateId: string
+  CertificateId?: string
 
   /**
-   * 吊销证书原因。
-   */
-  Reason?: string
-}
-
-/**
- * 返回参数键为 RevokeDomainValidateAuths 的内容。
- */
-export interface RevokeDomainValidateAuths {
-  /**
-      * DV 认证值路径。
+      * 重复证书的ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DomainValidateAuthPath: string
-
-  /**
-      * DV 认证 KEY。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthKey: string
-
-  /**
-      * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthValue: string
-
-  /**
-      * DV 认证域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthDomain: string
-}
-
-/**
- * DescribePackages请求参数结构体
- */
-export interface DescribePackagesRequest {
-  /**
-   * 偏移量，默认0。
-   */
-  Offset?: number
-
-  /**
-   * 限制数目，默认20。
-   */
-  Limit?: number
-
-  /**
-   * 按状态筛选。
-   */
-  Status?: string
-
-  /**
-   * 按过期时间升序或降序排列。
-   */
-  ExpireTime?: string
-
-  /**
-   * 按权益包ID搜索。
-   */
-  PackageId?: string
-
-  /**
-   * 按权益包类型搜索。
-   */
-  Type?: string
-
-  /**
-   * 子产品编号
-   */
-  Pid?: number
-}
-
-/**
- * CheckCertificateChain请求参数结构体
- */
-export interface CheckCertificateChainRequest {
-  /**
-   * 待检查的证书链
-   */
-  CertificateChain: string
-}
-
-/**
- * ModifyCertificateAlias返回参数结构体
- */
-export interface ModifyCertificateAliasResponse {
-  /**
-   * 修改成功的证书 ID。
-   */
-  CertificateId: string
+  RepeatCertId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2193,44 +2345,48 @@ export interface ModifyCertificateAliasResponse {
 }
 
 /**
- * UploadConfirmLetter请求参数结构体
+ * DeployCertificateInstance返回参数结构体
  */
-export interface UploadConfirmLetterRequest {
+export interface DeployCertificateInstanceResponse {
   /**
-   * 证书ID
-   */
-  CertificateId: string
+      * 云资源部署任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployRecordId: number
 
   /**
-   * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+   * 部署状态，1表示部署成功，0表示部署失败
    */
-  ConfirmLetter: string
+  DeployStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * DescribeCompanies请求参数结构体
+ * live实例详情
  */
-export interface DescribeCompaniesRequest {
+export interface LiveInstanceDetail {
   /**
-   * 分页偏移量
+   * 域名
    */
-  Offset?: number
+  Domain: string
 
   /**
-   * 分页每页限制数
-   */
-  Limit?: number
+      * 已绑定的证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertId: string
 
   /**
-   * 公司ID
-   */
-  CompanyId?: number
+      * -1：域名未关联证书。
+1： 域名https已开启。
+0： 域名https已关闭。
+      */
+  Status: number
 }
-
-/**
- * 管理人的四种审核状态
- */
-export type ManagerStatusInfo = null
 
 /**
  * SubmitCertificateInformation请求参数结构体
@@ -2438,85 +2594,57 @@ export interface DescribeCertificatesRequest {
 }
 
 /**
- * DescribePackages返回参数结构体
+ * UpdateCertificateRecordRollback请求参数结构体
  */
-export interface DescribePackagesResponse {
+export interface UpdateCertificateRecordRollbackRequest {
   /**
-   * 权益包列表。
+   * 待重试部署记录ID
    */
-  Packages: Array<PackageInfo>
-
-  /**
-   * 总条数。
-   */
-  TotalCount: number
-
-  /**
-   * 权益点总余额。
-   */
-  TotalBalance: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeployRecordId?: number
 }
 
 /**
- * DescribeManagers请求参数结构体
+ * teo实例详情
  */
-export interface DescribeManagersRequest {
+export interface TeoInstanceDetail {
   /**
-   * 公司ID
+   * 域名
    */
-  CompanyId: number
+  Host: string
 
-  /**
-   * 分页偏移量
-   */
-  Offset?: number
-
-  /**
-   * 分页每页数量
-   */
-  Limit?: number
-
-  /**
-   * 管理人姓名（将废弃），请使用SearchKey
-   */
-  ManagerName?: string
-
-  /**
-   * 模糊查询管理人邮箱（将废弃），请使用SearchKey
-   */
-  ManagerMail?: string
-
-  /**
-      * 根据管理人状态进行筛选，取值有
-'none' 未提交审核
-'audit', 亚信审核中
-'CAaudit' CA审核中
-'ok' 已审核
-'invalid'  审核失败
-'expiring'  即将过期
-'expired' 已过期
-      */
-  Status?: string
-
-  /**
-   * 管理人姓/管理人名/邮箱/部门精准匹配
-   */
-  SearchKey?: string
-}
-
-/**
- * CompleteCertificate返回参数结构体
- */
-export interface CompleteCertificateResponse {
   /**
    * 证书ID
    */
-  CertificateId?: string
+  CertId: string
+}
+
+/**
+ * DescribeHostClbInstanceList返回参数结构体
+ */
+export interface DescribeHostClbInstanceListResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+      * CLB实例监听器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<ClbInstanceDetail>
+
+  /**
+      * 异步刷新总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncTotalNum?: number
+
+  /**
+      * 异步刷新当前执行数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsyncOffset?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2525,18 +2653,41 @@ export interface CompleteCertificateResponse {
 }
 
 /**
- * SubmitCertificateInformation返回参数结构体
+ * RevokeCertificate请求参数结构体
  */
-export interface SubmitCertificateInformationResponse {
+export interface RevokeCertificateRequest {
   /**
    * 证书 ID。
    */
-  CertificateId?: string
+  CertificateId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 吊销证书原因。
    */
-  RequestId?: string
+  Reason?: string
+}
+
+/**
+ * 预审核信息列表
+ */
+export interface PreAuditInfo {
+  /**
+      * 证书总年限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalPeriod: number
+
+  /**
+      * 证书当前年限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NowPeriod: number
+
+  /**
+      * 证书预审核管理人ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ManagerId: string
 }
 
 /**
@@ -2647,26 +2798,671 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
- * 预审核信息列表
+ * HostCertificate返回参数结构体
  */
-export interface PreAuditInfo {
+export interface HostCertificateResponse {
   /**
-      * 证书总年限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalPeriod: number
+   * 云资源配置详情
+   */
+  CertHostingInfo: CertHostingInfo
 
   /**
-      * 证书当前年限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NowPeriod: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CLB证书详情
+ */
+export interface Certificate {
+  /**
+   * 证书ID
+   */
+  CertId: string
 
   /**
-      * 证书预审核管理人ID
+   * 证书绑定的域名
+   */
+  DnsNames: Array<string>
+}
+
+/**
+ * CommitCertificateInformation请求参数结构体
+ */
+export interface CommitCertificateInformationRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+}
+
+/**
+ * SubmitAuditManager返回参数结构体
+ */
+export interface SubmitAuditManagerResponse {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DownloadCertificate请求参数结构体
+ */
+export interface DownloadCertificateRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+}
+
+/**
+ * UpdateCertificateInstance请求参数结构体
+ */
+export interface UpdateCertificateInstanceRequest {
+  /**
+   * 一键更新新证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 一键更新原证书ID
+   */
+  OldCertificateId: string
+
+  /**
+   * 需要部署的资源类型
+   */
+  ResourceTypes: Array<string>
+
+  /**
+   * 需要部署的地域列表（废弃）
+   */
+  Regions?: Array<string>
+
+  /**
+   * 云资源需要部署的地域列表
+   */
+  ResourceTypesRegions?: Array<ResourceTypeRegions>
+}
+
+/**
+ * ReplaceCertificate请求参数结构体
+ */
+export interface ReplaceCertificateRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * 验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
+   */
+  ValidType: string
+
+  /**
+   * 类型，默认 Original。可选项：Original = 原证书 CSR，Upload = 手动上传，Online = 在线生成。
+   */
+  CsrType?: string
+
+  /**
+   * CSR 内容。
+   */
+  CsrContent?: string
+
+  /**
+   * KEY 密码。
+   */
+  CsrkeyPassword?: string
+
+  /**
+   * 重颁发原因。
+   */
+  Reason?: string
+}
+
+/**
+ * 公司信息
+ */
+export interface CompanyInfo {
+  /**
+   * 公司名称
+   */
+  CompanyName: string
+
+  /**
+   * 公司ID
+   */
+  CompanyId: number
+
+  /**
+   * 公司所在国家
+   */
+  CompanyCountry: string
+
+  /**
+   * 公司所在省份
+   */
+  CompanyProvince: string
+
+  /**
+   * 公司所在城市
+   */
+  CompanyCity: string
+
+  /**
+   * 公司所在详细地址
+   */
+  CompanyAddress: string
+
+  /**
+   * 公司电话
+   */
+  CompanyPhone: string
+
+  /**
+      * 类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ManagerId: string
+  IdType?: string
+
+  /**
+      * ID号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdNumber?: string
+}
+
+/**
+ * tke secret详情
+ */
+export interface TkeSecretDetail {
+  /**
+   * secret名称
+   */
+  Name: string
+
+  /**
+   * 证书ID
+   */
+  CertId: string
+
+  /**
+   * ingress列表
+   */
+  IngressList: Array<TkeIngressDetail>
+
+  /**
+      * 和新证书不匹配的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoMatchDomains: Array<string>
+}
+
+/**
+ * DescribeHostDeployRecord返回参数结构体
+ */
+export interface DescribeHostDeployRecordResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 证书部署记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployRecordList: Array<DeployRecordInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tags {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
+ * SubmitAuditManager请求参数结构体
+ */
+export interface SubmitAuditManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+}
+
+/**
+ * DescribeHostTkeInstanceList请求参数结构体
+ */
+export interface DescribeHostTkeInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 是否异步缓存
+   */
+  AsyncCache?: number
+
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * DeployCertificateRecordRollback请求参数结构体
+ */
+export interface DeployCertificateRecordRollbackRequest {
+  /**
+   * 待重试部署记录ID
+   */
+  DeployRecordId?: number
+}
+
+/**
+ * DeleteCertificate返回参数结构体
+ */
+export interface DeleteCertificateResponse {
+  /**
+   * 删除结果（true：删除成功，false：删除失败）
+   */
+  DeleteResult?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RevokeCertificate返回参数结构体
+ */
+export interface RevokeCertificateResponse {
+  /**
+      * 吊销证书域名验证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RevokeDomainValidateAuths?: Array<RevokeDomainValidateAuths>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源详情
+ */
+export interface DeployedResources {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 数量
+   */
+  Count: number
+
+  /**
+   * 资源标识:clb,cdn,live,waf,antiddos
+   */
+  Type: string
+
+  /**
+      * 不建议使用。字段返回和Resources相同。本字段后续只返回null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceIds: Array<string>
+
+  /**
+      * 关联资源ID或关联域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Resources: Array<string>
+}
+
+/**
+ * ModifyCertificateProject请求参数结构体
+ */
+export interface ModifyCertificateProjectRequest {
+  /**
+   * 需要修改所属项目的证书 ID 集合，最多100个证书。
+   */
+  CertificateIdList: Array<string>
+
+  /**
+   * 项目 ID。
+   */
+  ProjectId: number
+}
+
+/**
+ * DescribeCertificate请求参数结构体
+ */
+export interface DescribeCertificateRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+}
+
+/**
+ * DescribeHostVodInstanceList返回参数结构体
+ */
+export interface DescribeHostVodInstanceListResponse {
+  /**
+      * Vod实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<VodInstanceDetail>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
+ */
+export interface ModifyCertificatesExpiringNotificationSwitchRequest {
+  /**
+   * 证书ID列表。最多50个
+   */
+  CertificateIds: Array<string>
+
+  /**
+   * 0:不忽略通知。1:忽略通知
+   */
+  SwitchStatus: number
+}
+
+/**
+ * 过滤参数列表
+ */
+export interface Filter {
+  /**
+   * 过滤参数key
+   */
+  FilterKey: string
+
+  /**
+   * 过滤参数值
+   */
+  FilterValue: string
+}
+
+/**
+ * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ */
+export interface RevokeDomainValidateAuths {
+  /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthPath: string
+
+  /**
+      * DV 认证 KEY。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthKey: string
+
+  /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthValue: string
+
+  /**
+      * DV 认证域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthDomain: string
+}
+
+/**
+ * DescribeHostUpdateRecordDetail返回参数结构体
+ */
+export interface DescribeHostUpdateRecordDetailResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 证书部署记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordDetailList: Array<UpdateRecordDetails>
+
+  /**
+      * 成功总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessTotalCount: number
+
+  /**
+      * 失败总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedTotalCount: number
+
+  /**
+      * 部署中总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunningTotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostUpdateRecord请求参数结构体
+ */
+export interface DescribeHostUpdateRecordRequest {
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+
+  /**
+   * 新证书ID
+   */
+  CertificateId?: string
+
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * DescribeHostClbInstanceList请求参数结构体
+ */
+export interface DescribeHostClbInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 是否异步缓存
+   */
+  AsyncCache?: number
+
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * CLB实例监听器
+ */
+export interface ClbListener {
+  /**
+   * 监听器ID
+   */
+  ListenerId: string
+
+  /**
+   * 监听器名称
+   */
+  ListenerName: string
+
+  /**
+   * 是否开启SNI，1为开启，0为关闭
+   */
+  SniSwitch: number
+
+  /**
+   * 监听器协议类型， HTTPS|TCP_SSL
+   */
+  Protocol: string
+
+  /**
+      * 监听器绑定的证书数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Certificate: Certificate
+
+  /**
+      * 监听器规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules: Array<ClbListenerRule>
+
+  /**
+      * 不匹配域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoMatchDomains?: Array<string>
+}
+
+/**
+ * DescribeHostLiveInstanceList返回参数结构体
+ */
+export interface DescribeHostLiveInstanceListResponse {
+  /**
+      * live实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<LiveInstanceDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostApiGatewayInstanceList请求参数结构体
+ */
+export interface DescribeHostApiGatewayInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
 }
 
 /**
@@ -2822,4 +3618,941 @@ export interface SubmittedData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VerifyType?: string
+}
+
+/**
+ * DescribeCompanies请求参数结构体
+ */
+export interface DescribeCompaniesRequest {
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+
+  /**
+   * 分页每页限制数
+   */
+  Limit?: number
+
+  /**
+   * 公司ID
+   */
+  CompanyId?: number
+}
+
+/**
+ * DescribeHostCosInstanceList请求参数结构体
+ */
+export interface DescribeHostCosInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型 cos
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeHostCdnInstanceList返回参数结构体
+ */
+export interface DescribeHostCdnInstanceListResponse {
+  /**
+      * CDN实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<CdnInstanceDetail>
+
+  /**
+      * CDN域名总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HostCertificate请求参数结构体
+ */
+export interface HostCertificateRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 资源类型：目前仅限于CLB,CDN
+   */
+  ResourceType?: Array<string>
+}
+
+/**
+ * tke ingress实例详情
+ */
+export interface TkeIngressDetail {
+  /**
+   * ingress名称
+   */
+  IngressName: string
+
+  /**
+   * tls域名列表
+   */
+  TlsDomains: Array<string>
+
+  /**
+   * ingress域名列表
+   */
+  Domains: Array<string>
+}
+
+/**
+ * DeployCertificateInstance请求参数结构体
+ */
+export interface DeployCertificateInstanceRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 需要部署实例列表
+   */
+  InstanceIdList: Array<string>
+
+  /**
+   * 部署的云资源类型
+   */
+  ResourceType?: string
+
+  /**
+      * 部署云资源状态：
+云直播：
+-1：域名未关联证书。
+1： 域名https已开启。
+0： 域名https已关闭。
+      */
+  Status?: number
+}
+
+/**
+ * apiGateway实例详情
+ */
+export interface ApiGatewayInstanceDetail {
+  /**
+   * 实例ID
+   */
+  ServiceId: string
+
+  /**
+   * 实例名称
+   */
+  ServiceName: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+      * 证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertId: string
+
+  /**
+   * 使用协议
+   */
+  Protocol: string
+}
+
+/**
+ * DeleteCertificate请求参数结构体
+ */
+export interface DeleteCertificateRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+}
+
+/**
+ * DescribeCertificateOperateLogs返回参数结构体
+ */
+export interface DescribeCertificateOperateLogsResponse {
+  /**
+   * 当前查询条件日志总数。
+   */
+  AllTotal?: number
+
+  /**
+   * 本次请求返回的日志数量。
+   */
+  TotalCount?: number
+
+  /**
+      * 证书操作日志列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperateLogs?: Array<OperationLog>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostLighthouseInstanceList请求参数结构体
+ */
+export interface DescribeHostLighthouseInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型 lighthouse
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeHostCdnInstanceList请求参数结构体
+ */
+export interface DescribeHostCdnInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
+
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeHostTeoInstanceList返回参数结构体
+ */
+export interface DescribeHostTeoInstanceListResponse {
+  /**
+      * teo实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<TeoInstanceDetail>
+
+  /**
+   * 总数
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHostWafInstanceList请求参数结构体
+ */
+export interface DescribeHostWafInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * UploadRevokeLetter返回参数结构体
+ */
+export interface UploadRevokeLetterResponse {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * 是否成功。
+   */
+  IsSuccess: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCertificateInstance返回参数结构体
+ */
+export interface UpdateCertificateInstanceResponse {
+  /**
+      * 云资源部署任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployRecordId?: number
+
+  /**
+   * 部署状态，1表示部署成功，0表示部署失败
+   */
+  DeployStatus?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UploadCertificate请求参数结构体
+ */
+export interface UploadCertificateRequest {
+  /**
+   * 证书内容。
+   */
+  CertificatePublicKey: string
+
+  /**
+   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+   */
+  CertificatePrivateKey?: string
+
+  /**
+   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
+   */
+  CertificateType?: string
+
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+
+  /**
+   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+   */
+  CertificateUse?: string
+
+  /**
+   * 相同的证书是否允许重复上传
+   */
+  Repeatable?: boolean
+}
+
+/**
+ * ModifyCertificateAlias返回参数结构体
+ */
+export interface ModifyCertificateAliasResponse {
+  /**
+   * 修改成功的证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ApplyCertificate请求参数结构体
+ */
+export interface ApplyCertificateRequest {
+  /**
+   * 验证方式：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证。
+   */
+  DvAuthMethod: string
+
+  /**
+   * 域名。
+   */
+  DomainName: string
+
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+
+  /**
+   * 证书类型，目前仅支持类型2。2 = TrustAsia TLS RSA CA。
+   */
+  PackageType?: string
+
+  /**
+   * 邮箱。
+   */
+  ContactEmail?: string
+
+  /**
+   * 手机。
+   */
+  ContactPhone?: string
+
+  /**
+   * 有效期，默认12个月，目前仅支持12个月。
+   */
+  ValidityPeriod?: string
+
+  /**
+   * 加密算法，仅支持 RSA。
+   */
+  CsrEncryptAlgo?: string
+
+  /**
+   * 密钥对参数，仅支持2048。
+   */
+  CsrKeyParameter?: string
+
+  /**
+   * CSR 的加密密码。
+   */
+  CsrKeyPassword?: string
+
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+
+  /**
+   * 原证书 ID，用于重新申请。
+   */
+  OldCertificateId?: string
+
+  /**
+   * 权益包ID，用于免费证书扩容包使用
+   */
+  PackageId?: string
+
+  /**
+   * 签发后是否删除自动域名验证记录， 默认为否；仅域名为DNS_AUTO验证类型支持传参
+   */
+  DeleteDnsAutoRecord?: boolean
+}
+
+/**
+ * CreateCertificate返回参数结构体
+ */
+export interface CreateCertificateResponse {
+  /**
+   * 证书ID列表
+   */
+  CertificateIds: Array<string>
+
+  /**
+   * 订单号列表
+   */
+  DealIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 部署记录信息
+ */
+export interface UpdateRecordInfo {
+  /**
+   * 记录ID
+   */
+  Id: number
+
+  /**
+   * 新证书ID
+   */
+  CertId: string
+
+  /**
+   * 原证书ID
+   */
+  OldCertId: string
+
+  /**
+   * 部署资源类型列表
+   */
+  ResourceTypes: Array<string>
+
+  /**
+      * 部署地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Regions: Array<string>
+
+  /**
+   * 部署状态
+   */
+  Status: number
+
+  /**
+   * 部署时间
+   */
+  CreateTime: string
+
+  /**
+   * 最后一次更新时间
+   */
+  UpdateTime: string
+}
+
+/**
+ * DescribeHostApiGatewayInstanceList返回参数结构体
+ */
+export interface DescribeHostApiGatewayInstanceListResponse {
+  /**
+      * apiGateway实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<ApiGatewayInstanceDetail>
+
+  /**
+   * 总数
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeployCertificateRecordRetry请求参数结构体
+ */
+export interface DeployCertificateRecordRetryRequest {
+  /**
+   * 待重试部署记录ID
+   */
+  DeployRecordId?: number
+
+  /**
+   * 待重试部署记录详情ID
+   */
+  DeployRecordDetailId?: number
+}
+
+/**
+ * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
+ */
+export interface ProjectInfo {
+  /**
+      * 项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName: string
+
+  /**
+      * 项目创建用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectCreatorUin: number
+
+  /**
+      * 项目创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectCreateTime: string
+
+  /**
+      * 项目信息简述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectResume: string
+
+  /**
+      * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerUin: number
+
+  /**
+      * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: string
+}
+
+/**
+ * DescribeHostTeoInstanceList请求参数结构体
+ */
+export interface DescribeHostTeoInstanceListRequest {
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+   */
+  IsCache?: number
+
+  /**
+   * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 已部署的证书ID
+   */
+  OldCertificateId?: string
+}
+
+/**
+ * tke实例详情
+ */
+export interface TkeInstanceDetail {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 集群命名空间列表
+   */
+  NamespaceList: Array<TkeNameSpaceDetail>
+}
+
+/**
+ * UploadConfirmLetter请求参数结构体
+ */
+export interface UploadConfirmLetterRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+
+  /**
+   * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+   */
+  ConfirmLetter: string
+}
+
+/**
+ * SubmitCertificateInformation返回参数结构体
+ */
+export interface SubmitCertificateInformationResponse {
+  /**
+   * 证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCertificateRecordRetry返回参数结构体
+ */
+export interface UpdateCertificateRecordRetryResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePackages请求参数结构体
+ */
+export interface DescribePackagesRequest {
+  /**
+   * 偏移量，默认0。
+   */
+  Offset?: number
+
+  /**
+   * 限制数目，默认20。
+   */
+  Limit?: number
+
+  /**
+   * 按状态筛选。
+   */
+  Status?: string
+
+  /**
+   * 按过期时间升序或降序排列。
+   */
+  ExpireTime?: string
+
+  /**
+   * 按权益包ID搜索。
+   */
+  PackageId?: string
+
+  /**
+   * 按权益包类型搜索。
+   */
+  Type?: string
+
+  /**
+   * 子产品编号
+   */
+  Pid?: number
+}
+
+/**
+ * CheckCertificateChain请求参数结构体
+ */
+export interface CheckCertificateChainRequest {
+  /**
+   * 待检查的证书链
+   */
+  CertificateChain: string
+}
+
+/**
+ * DeployCertificateRecordRollback返回参数结构体
+ */
+export interface DeployCertificateRecordRollbackResponse {
+  /**
+   * 回滚部署记录ID
+   */
+  DeployRecordId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 管理人的四种审核状态
+ */
+export type ManagerStatusInfo = null
+
+/**
+ * 部署记录信息
+ */
+export interface DeployRecordInfo {
+  /**
+   * 部署记录ID
+   */
+  Id: number
+
+  /**
+   * 部署证书ID
+   */
+  CertId: string
+
+  /**
+   * 部署资源类型
+   */
+  ResourceType: string
+
+  /**
+   * 部署地域
+   */
+  Region: string
+
+  /**
+   * 部署状态
+   */
+  Status: number
+
+  /**
+   * 部署时间
+   */
+  CreateTime: string
+
+  /**
+   * 最近一次更新时间
+   */
+  UpdateTime: string
+}
+
+/**
+ * DescribePackages返回参数结构体
+ */
+export interface DescribePackagesResponse {
+  /**
+   * 权益包列表。
+   */
+  Packages: Array<PackageInfo>
+
+  /**
+   * 总条数。
+   */
+  TotalCount: number
+
+  /**
+   * 权益点总余额。
+   */
+  TotalBalance: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeManagers请求参数结构体
+ */
+export interface DescribeManagersRequest {
+  /**
+   * 公司ID
+   */
+  CompanyId: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+
+  /**
+   * 分页每页数量
+   */
+  Limit?: number
+
+  /**
+   * 管理人姓名（将废弃），请使用SearchKey
+   */
+  ManagerName?: string
+
+  /**
+   * 模糊查询管理人邮箱（将废弃），请使用SearchKey
+   */
+  ManagerMail?: string
+
+  /**
+      * 根据管理人状态进行筛选，取值有
+'none' 未提交审核
+'audit', 亚信审核中
+'CAaudit' CA审核中
+'ok' 已审核
+'invalid'  审核失败
+'expiring'  即将过期
+'expired' 已过期
+      */
+  Status?: string
+
+  /**
+   * 管理人姓/管理人名/邮箱/部门精准匹配
+   */
+  SearchKey?: string
+}
+
+/**
+ * DescribeHostLighthouseInstanceList返回参数结构体
+ */
+export interface DescribeHostLighthouseInstanceListResponse {
+  /**
+      * Lighthouse实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList: Array<LighthouseInstanceDetail>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CompleteCertificate返回参数结构体
+ */
+export interface CompleteCertificateResponse {
+  /**
+   * 证书ID
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

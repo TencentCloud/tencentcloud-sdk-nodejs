@@ -434,6 +434,12 @@ export interface CVMAssetVO {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Os?: string
+
+  /**
+      * 风险服务暴露
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskExposure?: number
 }
 
 /**
@@ -925,12 +931,12 @@ export interface Filter {
   Offset?: number
 
   /**
-   * 需排序的字段
+   * 排序采用升序还是降序 升:asc 降 desc
    */
   Order?: string
 
   /**
-   * 排序采用升序还是降序 升:asc 降 desc
+   * 需排序的字段
    */
   By?: string
 
@@ -1273,6 +1279,12 @@ export interface DescribeCVMAssetsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ZoneList?: Array<FilterDataObject>
+
+  /**
+      * os列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsList?: Array<FilterDataObject>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

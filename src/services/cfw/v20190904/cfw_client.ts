@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeNatFwInstanceRequest,
+  DescribeLogsRequest,
   ModifyNatFwVpcDnsSwitchResponse,
   DescribeNatFwInstanceWithRegionRequest,
   ModifyNatAcRuleResponse,
@@ -171,6 +172,7 @@ import {
   ExpandCfwVerticalResponse,
   DescribeNatAcRuleRequest,
   TLogInfo,
+  DescribeLogsResponse,
   CreateSecurityGroupRulesRequest,
   DeleteVpcInstanceRequest,
   SwitchListsData,
@@ -594,16 +596,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 支持对封禁列表、放通列表如下操作：
-批量增加封禁IP、放通IP/域名
-批量删除封禁IP、放通IP/域名
-批量修改封禁IP、放通IP/域名生效事件
-     */
-  async ModifyBlockIgnoreList(
-    req: ModifyBlockIgnoreListRequest,
-    cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void
-  ): Promise<ModifyBlockIgnoreListResponse> {
-    return this.request("ModifyBlockIgnoreList", req, cb)
+   * 日志审计日志查询
+   */
+  async DescribeLogs(
+    req: DescribeLogsRequest,
+    cb?: (error: string, rep: DescribeLogsResponse) => void
+  ): Promise<DescribeLogsResponse> {
+    return this.request("DescribeLogs", req, cb)
   }
 
   /**
@@ -736,6 +735,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableStatusResponse) => void
   ): Promise<DescribeTableStatusResponse> {
     return this.request("DescribeTableStatus", req, cb)
+  }
+
+  /**
+     * 支持对封禁列表、放通列表如下操作：
+批量增加封禁IP、放通IP/域名
+批量删除封禁IP、放通IP/域名
+批量修改封禁IP、放通IP/域名生效事件
+     */
+  async ModifyBlockIgnoreList(
+    req: ModifyBlockIgnoreListRequest,
+    cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void
+  ): Promise<ModifyBlockIgnoreListResponse> {
+    return this.request("ModifyBlockIgnoreList", req, cb)
   }
 
   /**
