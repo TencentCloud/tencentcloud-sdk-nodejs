@@ -35,7 +35,7 @@ import {
   DeleteBackupMigrationRequest,
   DatabaseTuple,
   RegionInfo,
-  ModifyBackupNameResponse,
+  CreateCloudDBInstancesResponse,
   DeleteBusinessIntelligenceFileRequest,
   DeletePublishSubscribeRequest,
   ModifyMaintenanceSpanRequest,
@@ -48,7 +48,7 @@ import {
   SlaveZones,
   ModifyIncrementalMigrationRequest,
   DescribeDBSecurityGroupsResponse,
-  StartInstanceXEventResponse,
+  RestoreInstanceResponse,
   MigrateDetail,
   CreateIncrementalMigrationRequest,
   RunMigrationRequest,
@@ -107,7 +107,7 @@ import {
   DescribeZonesResponse,
   DescribeDBsResponse,
   DescribeDBInstancesRequest,
-  DescribeDBSecurityGroupsRequest,
+  CreateCloudReadOnlyDBInstancesRequest,
   MigrationStep,
   ModifyAccountRemarkResponse,
   Events,
@@ -124,6 +124,7 @@ import {
   CompleteExpansionResponse,
   MigrateSource,
   ModifyDatabaseCTRequest,
+  ModifyBackupNameResponse,
   ModifyBackupMigrationResponse,
   ReadOnlyGroup,
   DescribeFlowStatusResponse,
@@ -185,12 +186,13 @@ import {
   TerminateDBInstanceResponse,
   InterInstanceFlow,
   DbRollbackTimeInfo,
+  CreateCloudReadOnlyDBInstancesResponse,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
   AccountDetail,
   ModifyDatabaseMdfResponse,
   CreateBackupResponse,
-  DescribeBackupMigrationResponse,
+  DBInstance,
   DescribeProductConfigResponse,
   DescribeRollbackTimeRequest,
   DescribeUploadBackupInfoResponse,
@@ -198,6 +200,7 @@ import {
   DescribeDBInstanceInterRequest,
   StartMigrationCheckRequest,
   InterInstance,
+  StartInstanceXEventResponse,
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   CosUploadBackupFile,
@@ -214,7 +217,7 @@ import {
   MigrationAction,
   RunMigrationResponse,
   AccountPrivilegeModifyInfo,
-  DBInstance,
+  DescribeBackupMigrationResponse,
   AccountCreateInfo,
   RenewDBInstanceResponse,
   StartInstanceXEventRequest,
@@ -274,11 +277,12 @@ import {
   DescribeAccountsResponse,
   DeleteDBInstanceResponse,
   DescribeDBInstancesAttributeRequest,
-  RestoreInstanceResponse,
+  DescribeDBSecurityGroupsRequest,
   DescribeBackupCommandResponse,
   InquiryPriceRenewDBInstanceResponse,
   StartBackupMigrationRequest,
   DescribePublishSubscribeResponse,
+  CreateCloudDBInstancesRequest,
   DescribeReadOnlyGroupListRequest,
   SlowlogInfo,
   DescribeIncrementalMigrationResponse,
@@ -761,13 +765,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（StartBackupMigration）用于启动备份导入任务。
+   * 本接口（CreateCloudDBInstances）用于创建高可用实例(虚拟机版本)。
    */
-  async StartBackupMigration(
-    req: StartBackupMigrationRequest,
-    cb?: (error: string, rep: StartBackupMigrationResponse) => void
-  ): Promise<StartBackupMigrationResponse> {
-    return this.request("StartBackupMigration", req, cb)
+  async CreateCloudDBInstances(
+    req: CreateCloudDBInstancesRequest,
+    cb?: (error: string, rep: CreateCloudDBInstancesResponse) => void
+  ): Promise<CreateCloudDBInstancesResponse> {
+    return this.request("CreateCloudDBInstances", req, cb)
   }
 
   /**
@@ -963,6 +967,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（StartBackupMigration）用于启动备份导入任务。
+   */
+  async StartBackupMigration(
+    req: StartBackupMigrationRequest,
+    cb?: (error: string, rep: StartBackupMigrationResponse) => void
+  ): Promise<StartBackupMigrationResponse> {
+    return this.request("StartBackupMigration", req, cb)
+  }
+
+  /**
    * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
    */
   async AssociateSecurityGroups(
@@ -1090,6 +1104,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReadOnlyDBInstancesResponse) => void
   ): Promise<CreateReadOnlyDBInstancesResponse> {
     return this.request("CreateReadOnlyDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+   */
+  async CreateCloudReadOnlyDBInstances(
+    req: CreateCloudReadOnlyDBInstancesRequest,
+    cb?: (error: string, rep: CreateCloudReadOnlyDBInstancesResponse) => void
+  ): Promise<CreateCloudReadOnlyDBInstancesResponse> {
+    return this.request("CreateCloudReadOnlyDBInstances", req, cb)
   }
 
   /**

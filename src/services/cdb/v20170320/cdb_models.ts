@@ -1009,16 +1009,6 @@ export interface ModifyCdbProxyAddressDescRequest {
 }
 
 /**
- * 表名
- */
-export interface TableName {
-  /**
-   * 表名
-   */
-  TableName: string
-}
-
-/**
  * 地域售卖配置
  */
 export interface CdbRegionSellConf {
@@ -1746,41 +1736,6 @@ export interface AuditPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceName: string
-}
-
-/**
- * DescribeBackupTables请求参数结构体
- */
-export interface DescribeBackupTablesRequest {
-  /**
-   * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
-   */
-  InstanceId: string
-
-  /**
-   * 开始时间，格式为：2017-07-12 10:29:20。
-   */
-  StartTime: string
-
-  /**
-   * 指定的数据库名。
-   */
-  DatabaseName: string
-
-  /**
-   * 要查询的数据表名前缀。
-   */
-  SearchTable?: string
-
-  /**
-   * 分页偏移。
-   */
-  Offset?: number
-
-  /**
-   * 分页大小，最小值为1，最大值为2000。
-   */
-  Limit?: number
 }
 
 /**
@@ -6707,26 +6662,6 @@ export interface DescribeRollbackTaskDetailRequest {
    * 分页偏移量。默认为 0。
    */
   Offset?: number
-}
-
-/**
- * DescribeBackupTables返回参数结构体
- */
-export interface DescribeBackupTablesResponse {
-  /**
-   * 返回的数据个数。
-   */
-  TotalCount: number
-
-  /**
-   * 符合条件的数据表数组。
-   */
-  Items: Array<TableName>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

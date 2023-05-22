@@ -1689,12 +1689,12 @@ export interface DescribeAlarmNoticesResponse {
   /**
    * 告警通知模板总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 告警通知模板列表
    */
-  Notices: Array<AlarmNotice>
+  Notices?: Array<AlarmNotice>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3987,12 +3987,12 @@ export interface DescribeAlarmPoliciesResponse {
   /**
    * 策略总数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 策略数组
    */
-  Policies: Array<AlarmPolicy>
+  Policies?: Array<AlarmPolicy>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5977,6 +5977,12 @@ export interface UserNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Weekday?: Array<number>
+
+  /**
+      * 值班表id列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OnCallFormIDs?: Array<string>
 }
 
 /**
@@ -8683,6 +8689,11 @@ export interface DescribeAlarmNoticesRequest {
    * 模板根据标签过滤
    */
   Tags?: Array<Tag>
+
+  /**
+   * 值班列表
+   */
+  OnCallFormIDs?: Array<string>
 }
 
 /**
@@ -9632,11 +9643,11 @@ export interface ModifyAlarmPolicyStatusRequest {
 }
 
 /**
- * 告警条件模版
+ * 告警条件模板
  */
 export interface ConditionsTemp {
   /**
-      * 模版名称
+      * 模板名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TemplateName: string
@@ -10932,7 +10943,7 @@ export interface DescribeAlarmPoliciesRequest {
   ProjectIds?: Array<number>
 
   /**
-      * 通知模版的id列表，可查询通知模版列表获取。
+      * 通知模板的id列表，可查询通知模板列表获取。
 可使用 [查询通知模板列表](https://cloud.tencent.com/document/product/248/51280) 接口查询。
       */
   NoticeIds?: Array<string>
@@ -10973,12 +10984,12 @@ export interface DescribeAlarmPoliciesRequest {
   OneClickPolicyType?: Array<string>
 
   /**
-   * 根据全部对象过滤，1代表需要过滤掉全部对象，0则无需过滤
+   * 返回结果过滤掉绑定全部对象的策略，1代表需要过滤，0则无需过滤
    */
   NotBindAll?: number
 
   /**
-   * 根据实例对象过滤，1代表需要过滤掉有实例对象，0则无需过滤
+   * 返回结果过滤掉关联实例为实例分组的策略，1代表需要过滤，0则无需过滤
    */
   NotInstanceGroup?: number
 
@@ -10986,6 +10997,16 @@ export interface DescribeAlarmPoliciesRequest {
    * 策略根据标签过滤
    */
   Tags?: Array<Tag>
+
+  /**
+   * prom实例id，自定义指标策略时会用到
+   */
+  PromInsId?: string
+
+  /**
+   * 根据排班表搜索
+   */
+  ReceiverOnCallFormIDs?: Array<string>
 }
 
 /**

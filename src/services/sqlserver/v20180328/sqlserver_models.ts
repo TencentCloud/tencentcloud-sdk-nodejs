@@ -521,9 +521,14 @@ export interface RegionInfo {
 }
 
 /**
- * ModifyBackupName返回参数结构体
+ * CreateCloudDBInstances返回参数结构体
  */
-export interface ModifyBackupNameResponse {
+export interface CreateCloudDBInstancesResponse {
+  /**
+   * 订单名称
+   */
+  DealName?: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -746,9 +751,14 @@ export interface DescribeDBSecurityGroupsResponse {
 }
 
 /**
- * StartInstanceXEvent返回参数结构体
+ * RestoreInstance返回参数结构体
  */
-export interface StartInstanceXEventResponse {
+export interface RestoreInstanceResponse {
+  /**
+   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
+   */
+  FlowId?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2383,13 +2393,128 @@ export interface DescribeDBInstancesRequest {
 }
 
 /**
- * DescribeDBSecurityGroups请求参数结构体
+ * CreateCloudReadOnlyDBInstances请求参数结构体
  */
-export interface DescribeDBSecurityGroupsRequest {
+export interface CreateCloudReadOnlyDBInstancesRequest {
   /**
-   * 实例ID，格式如：mssql-c1nl9rpv或者mssqlro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   * 主实例ID，格式如：mssql-3l3fgqn7
    */
   InstanceId: string
+
+  /**
+   * 实例可用区，类似ap-guangzhou-1（广州一区）；实例可售卖区域可以通过接口DescribeZones获取
+   */
+  Zone: string
+
+  /**
+   * 只读组类型选项，1-按照一个实例一个只读组的方式发货，2-新建只读组后发货，所有实例都在这个只读组下面， 3-发货的所有实例都在已有的只读组下面
+   */
+  ReadOnlyGroupType: number
+
+  /**
+   * 实例内存大小，单位GB
+   */
+  Memory: number
+
+  /**
+   * 实例磁盘大小，单位GB
+   */
+  Storage: number
+
+  /**
+   * 实例核心数
+   */
+  Cpu: number
+
+  /**
+   * 购买实例的宿主机磁盘类型,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘
+   */
+  MachineType: string
+
+  /**
+   * 0-默认不升级主实例，1-强制升级主实例完成ro部署；主实例为非集群版时需要填1，强制升级为集群版。填1 说明您已同意将主实例升级到集群版实例。
+   */
+  ReadOnlyGroupForcedUpgrade?: number
+
+  /**
+   * ReadOnlyGroupType=3时必填,已存在的只读组ID
+   */
+  ReadOnlyGroupId?: string
+
+  /**
+   * ReadOnlyGroupType=2时必填，新建的只读组名称
+   */
+  ReadOnlyGroupName?: string
+
+  /**
+   * ReadOnlyGroupType=2时必填，新建的只读组是否开启延迟剔除功能，1-开启，0-关闭。当只读副本与主实例延迟大于阈值后，自动剔除。
+   */
+  ReadOnlyGroupIsOfflineDelay?: number
+
+  /**
+   * ReadOnlyGroupType=2 且 ReadOnlyGroupIsOfflineDelay=1时必填，新建的只读组延迟剔除的阈值。
+   */
+  ReadOnlyGroupMaxDelayTime?: number
+
+  /**
+   * ReadOnlyGroupType=2 且 ReadOnlyGroupIsOfflineDelay=1时必填，新建的只读组延迟剔除后至少保留只读副本的个数。
+   */
+  ReadOnlyGroupMinInGroup?: number
+
+  /**
+   * 付费模式，取值支持 PREPAID（预付费），POSTPAID（后付费）。
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 本次购买几个只读实例，默认值为1。
+   */
+  GoodsNum?: number
+
+  /**
+   * VPC子网ID，形如subnet-bdoe83fa；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  SubnetId?: string
+
+  /**
+   * VPC网络ID，形如vpc-dsp338hz；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  VpcId?: string
+
+  /**
+   * 购买实例周期，默认取值为1，表示一个月。取值不超过48
+   */
+  Period?: number
+
+  /**
+   * 安全组列表，填写形如sg-xxx的安全组ID
+   */
+  SecurityGroupList?: Array<string>
+
+  /**
+   * 是否自动使用代金券；1 - 是，0 - 否，默认不使用
+   */
+  AutoVoucher?: number
+
+  /**
+   * 代金券ID数组，目前单个订单只能使用一张
+   */
+  VoucherIds?: Array<string>
+
+  /**
+   * 新建实例绑定的标签集合
+   */
+  ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation?: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone?: string
 }
 
 /**
@@ -2751,6 +2876,16 @@ export interface ModifyDatabaseCTRequest {
    * 启用CT时额外保留天数，默认保留3天，最小3天，最大30天
    */
   ChangeRetentionDay?: number
+}
+
+/**
+ * ModifyBackupName返回参数结构体
+ */
+export interface ModifyBackupNameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4154,6 +4289,21 @@ export interface DbRollbackTimeInfo {
 }
 
 /**
+ * CreateCloudReadOnlyDBInstances返回参数结构体
+ */
+export interface CreateCloudReadOnlyDBInstancesResponse {
+  /**
+   * 订单名称数组
+   */
+  DealNames?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDBInstanceNetwork返回参数结构体
  */
 export interface ModifyDBInstanceNetworkResponse {
@@ -4274,23 +4424,288 @@ export interface CreateBackupResponse {
 }
 
 /**
- * DescribeBackupMigration返回参数结构体
+ * 实例详细信息
  */
-export interface DescribeBackupMigrationResponse {
+export interface DBInstance {
   /**
-   * 迁移任务总数
+   * 实例ID
    */
-  TotalCount: number
+  InstanceId: string
 
   /**
-   * 迁移任务集合
+   * 实例名称
    */
-  BackupMigrationSet: Array<Migration>
+  Name: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例所在项目ID
    */
-  RequestId?: string
+  ProjectId: number
+
+  /**
+   * 实例所在地域ID
+   */
+  RegionId: number
+
+  /**
+   * 实例所在可用区ID
+   */
+  ZoneId: number
+
+  /**
+   * 实例所在私有网络ID，基础网络时为 0
+   */
+  VpcId: number
+
+  /**
+   * 实例所在私有网络子网ID，基础网络时为 0
+   */
+  SubnetId: number
+
+  /**
+   * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>  <li>13：实例修改中且待切换</li> <li>14：订阅发布创建中</li> <li>15：订阅发布修改中</li> <li>16：实例修改中且切换中</li> <li>17：创建RO副本中</li>
+   */
+  Status: number
+
+  /**
+   * 实例访问IP
+   */
+  Vip: string
+
+  /**
+   * 实例访问端口
+   */
+  Vport: number
+
+  /**
+   * 实例创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 实例更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 实例计费开始时间
+   */
+  StartTime: string
+
+  /**
+   * 实例计费结束时间
+   */
+  EndTime: string
+
+  /**
+   * 实例隔离时间
+   */
+  IsolateTime: string
+
+  /**
+   * 实例内存大小，单位G
+   */
+  Memory: number
+
+  /**
+   * 实例已经使用存储空间大小，单位G
+   */
+  UsedStorage: number
+
+  /**
+   * 实例存储空间大小，单位G
+   */
+  Storage: number
+
+  /**
+   * 实例版本
+   */
+  VersionName: string
+
+  /**
+   * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
+   */
+  RenewFlag: number
+
+  /**
+   * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
+   */
+  Model: number
+
+  /**
+   * 实例所在地域名称，如 ap-guangzhou
+   */
+  Region: string
+
+  /**
+   * 实例所在可用区名称，如 ap-guangzhou-1
+   */
+  Zone: string
+
+  /**
+   * 备份时间点
+   */
+  BackupTime: string
+
+  /**
+   * 实例付费模式， 0-按量计费，1-包年包月
+   */
+  PayMode: number
+
+  /**
+   * 实例唯一UID
+   */
+  Uid: string
+
+  /**
+   * 实例cpu核心数
+   */
+  Cpu: number
+
+  /**
+   * 实例版本代号
+   */
+  Version: string
+
+  /**
+   * 物理机代号
+   */
+  Type: string
+
+  /**
+   * 计费ID
+   */
+  Pid: number
+
+  /**
+   * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
+   */
+  UniqVpcId: string
+
+  /**
+   * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
+   */
+  UniqSubnetId: string
+
+  /**
+      * 实例隔离操作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateOperator: string
+
+  /**
+      * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubFlag: string
+
+  /**
+      * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ROFlag: string
+
+  /**
+      * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HAFlag: string
+
+  /**
+      * 实例绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceTags: Array<ResourceTag>
+
+  /**
+      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupModel: string
+
+  /**
+      * 实例备份信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceNote: string
+
+  /**
+   * 备份周期
+   */
+  BackupCycle: Array<number>
+
+  /**
+   * 备份周期类型，[daily、weekly、monthly]
+   */
+  BackupCycleType: string
+
+  /**
+   * 数据(日志)备份保留时间
+   */
+  BackupSaveDays: number
+
+  /**
+   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+   */
+  InstanceType: string
+
+  /**
+   * 跨地域备份目的地域，如果为空，则表示未开启跨地域备份
+   */
+  CrossRegions: Array<string>
+
+  /**
+   * 跨地域备份状态 enable-开启，disable-关闭
+   */
+  CrossBackupEnabled: string
+
+  /**
+   * 跨地域备份保留天数，则默认7天
+   */
+  CrossBackupSaveDays: number
+
+  /**
+   * 外网地址域名
+   */
+  DnsPodDomain: string
+
+  /**
+   * 外网端口号
+   */
+  TgwWanVPort: number
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone: string
+
+  /**
+   * 是否跨AZ
+   */
+  IsDrZone: boolean
+
+  /**
+      * 备可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveZones: SlaveZones
+
+  /**
+      * 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Architecture?: string
+
+  /**
+      * 类型标识，EXCLUSIVE-独享型，SHARED-共享型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Style?: string
 }
 
 /**
@@ -4521,6 +4936,16 @@ export interface InterInstance {
    * 实例访问端口
    */
   Vport: number
+}
+
+/**
+ * StartInstanceXEvent返回参数结构体
+ */
+export interface StartInstanceXEventResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5104,288 +5529,23 @@ export interface AccountPrivilegeModifyInfo {
 }
 
 /**
- * 实例详细信息
+ * DescribeBackupMigration返回参数结构体
  */
-export interface DBInstance {
+export interface DescribeBackupMigrationResponse {
   /**
-   * 实例ID
+   * 迁移任务总数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 实例名称
+   * 迁移任务集合
    */
-  Name: string
+  BackupMigrationSet: Array<Migration>
 
   /**
-   * 实例所在项目ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectId: number
-
-  /**
-   * 实例所在地域ID
-   */
-  RegionId: number
-
-  /**
-   * 实例所在可用区ID
-   */
-  ZoneId: number
-
-  /**
-   * 实例所在私有网络ID，基础网络时为 0
-   */
-  VpcId: number
-
-  /**
-   * 实例所在私有网络子网ID，基础网络时为 0
-   */
-  SubnetId: number
-
-  /**
-   * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>  <li>13：实例修改中且待切换</li> <li>14：订阅发布创建中</li> <li>15：订阅发布修改中</li> <li>16：实例修改中且切换中</li> <li>17：创建RO副本中</li>
-   */
-  Status: number
-
-  /**
-   * 实例访问IP
-   */
-  Vip: string
-
-  /**
-   * 实例访问端口
-   */
-  Vport: number
-
-  /**
-   * 实例创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 实例更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 实例计费开始时间
-   */
-  StartTime: string
-
-  /**
-   * 实例计费结束时间
-   */
-  EndTime: string
-
-  /**
-   * 实例隔离时间
-   */
-  IsolateTime: string
-
-  /**
-   * 实例内存大小，单位G
-   */
-  Memory: number
-
-  /**
-   * 实例已经使用存储空间大小，单位G
-   */
-  UsedStorage: number
-
-  /**
-   * 实例存储空间大小，单位G
-   */
-  Storage: number
-
-  /**
-   * 实例版本
-   */
-  VersionName: string
-
-  /**
-   * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
-   */
-  RenewFlag: number
-
-  /**
-   * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
-   */
-  Model: number
-
-  /**
-   * 实例所在地域名称，如 ap-guangzhou
-   */
-  Region: string
-
-  /**
-   * 实例所在可用区名称，如 ap-guangzhou-1
-   */
-  Zone: string
-
-  /**
-   * 备份时间点
-   */
-  BackupTime: string
-
-  /**
-   * 实例付费模式， 0-按量计费，1-包年包月
-   */
-  PayMode: number
-
-  /**
-   * 实例唯一UID
-   */
-  Uid: string
-
-  /**
-   * 实例cpu核心数
-   */
-  Cpu: number
-
-  /**
-   * 实例版本代号
-   */
-  Version: string
-
-  /**
-   * 物理机代号
-   */
-  Type: string
-
-  /**
-   * 计费ID
-   */
-  Pid: number
-
-  /**
-   * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
-   */
-  UniqVpcId: string
-
-  /**
-   * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
-   */
-  UniqSubnetId: string
-
-  /**
-      * 实例隔离操作
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsolateOperator: string
-
-  /**
-      * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubFlag: string
-
-  /**
-      * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ROFlag: string
-
-  /**
-      * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  HAFlag: string
-
-  /**
-      * 实例绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ResourceTags: Array<ResourceTag>
-
-  /**
-      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupModel: string
-
-  /**
-      * 实例备份信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceNote: string
-
-  /**
-   * 备份周期
-   */
-  BackupCycle: Array<number>
-
-  /**
-   * 备份周期类型，[daily、weekly、monthly]
-   */
-  BackupCycleType: string
-
-  /**
-   * 数据(日志)备份保留时间
-   */
-  BackupSaveDays: number
-
-  /**
-   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
-   */
-  InstanceType: string
-
-  /**
-   * 跨地域备份目的地域，如果为空，则表示未开启跨地域备份
-   */
-  CrossRegions: Array<string>
-
-  /**
-   * 跨地域备份状态 enable-开启，disable-关闭
-   */
-  CrossBackupEnabled: string
-
-  /**
-   * 跨地域备份保留天数，则默认7天
-   */
-  CrossBackupSaveDays: number
-
-  /**
-   * 外网地址域名
-   */
-  DnsPodDomain: string
-
-  /**
-   * 外网端口号
-   */
-  TgwWanVPort: number
-
-  /**
-   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
-   */
-  Collation: string
-
-  /**
-   * 系统时区，默认：China Standard Time
-   */
-  TimeZone: string
-
-  /**
-   * 是否跨AZ
-   */
-  IsDrZone: boolean
-
-  /**
-      * 备可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SlaveZones: SlaveZones
-
-  /**
-      * 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Architecture?: string
-
-  /**
-      * 类型标识，EXCLUSIVE-独享型，SHARED-共享型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Style?: string
+  RequestId?: string
 }
 
 /**
@@ -6720,18 +6880,13 @@ export interface DescribeDBInstancesAttributeRequest {
 }
 
 /**
- * RestoreInstance返回参数结构体
+ * DescribeDBSecurityGroups请求参数结构体
  */
-export interface RestoreInstanceResponse {
+export interface DescribeDBSecurityGroupsRequest {
   /**
-   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
+   * 实例ID，格式如：mssql-c1nl9rpv或者mssqlro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
    */
-  FlowId?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -6802,6 +6957,126 @@ export interface DescribePublishSubscribeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCloudDBInstances请求参数结构体
+ */
+export interface CreateCloudDBInstancesRequest {
+  /**
+   * 实例可用区，类似ap-guangzhou-1（广州一区）；实例可售卖区域可以通过接口DescribeZones获取
+   */
+  Zone: string
+
+  /**
+   * 实例内存大小，单位GB
+   */
+  Memory: number
+
+  /**
+   * 实例磁盘大小，单位GB
+   */
+  Storage: number
+
+  /**
+   * 实例核心数
+   */
+  Cpu: number
+
+  /**
+   * 购买实例的宿主机磁盘类型,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘
+   */
+  MachineType: string
+
+  /**
+   * 付费模式，取值支持 PREPAID（预付费），POSTPAID（后付费）。
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId?: number
+
+  /**
+   * 本次购买几个实例，默认值为1。取值不超过10
+   */
+  GoodsNum?: number
+
+  /**
+   * VPC子网ID，形如subnet-bdoe83fa；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  SubnetId?: string
+
+  /**
+   * VPC网络ID，形如vpc-dsp338hz；SubnetId和VpcId需同时设置或者同时不设置
+   */
+  VpcId?: string
+
+  /**
+   * 购买实例周期，默认取值为1，表示一个月。取值不超过48
+   */
+  Period?: number
+
+  /**
+   * 是否自动使用代金券；1 - 是，0 - 否，默认不使用
+   */
+  AutoVoucher?: number
+
+  /**
+   * 代金券ID数组，目前单个订单只能使用一张
+   */
+  VoucherIds?: Array<string>
+
+  /**
+   * sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。
+   */
+  DBVersion?: string
+
+  /**
+   * 自动续费标志：0-正常续费  1-自动续费，默认为1自动续费。只在购买预付费实例时有效。
+   */
+  AutoRenewFlag?: number
+
+  /**
+   * 安全组列表，填写形如sg-xxx的安全组ID
+   */
+  SecurityGroupList?: Array<string>
+
+  /**
+   * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
+   */
+  Weekly?: Array<number>
+
+  /**
+   * 可维护时间窗配置，每天可维护的开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 可维护时间窗配置，持续时间，单位：小时
+   */
+  Span?: number
+
+  /**
+   * 是否跨可用区部署，默认值为false
+   */
+  MultiZones?: boolean
+
+  /**
+   * 新建实例绑定的标签集合
+   */
+  ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
+   */
+  Collation?: string
+
+  /**
+   * 系统时区，默认：China Standard Time
+   */
+  TimeZone?: string
 }
 
 /**

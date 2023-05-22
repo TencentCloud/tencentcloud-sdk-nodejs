@@ -64,6 +64,7 @@ export { cms } from "./cms";
 export { cpdp } from "./cpdp";
 export { cr } from "./cr";
 export { csip } from "./csip";
+export { csxg } from "./csxg";
 export { cvm } from "./cvm";
 export { cwp } from "./cwp";
 export { cws } from "./cws";

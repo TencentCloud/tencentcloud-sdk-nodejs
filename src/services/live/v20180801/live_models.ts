@@ -4783,6 +4783,11 @@ export interface ModifyLiveCallbackTemplateRequest {
    * 推流异常回调 URL。
    */
   PushExceptionNotifyUrl?: string
+
+  /**
+   * 音频审核回调 URL。
+   */
+  AudioAuditNotifyUrl?: string
 }
 
 /**

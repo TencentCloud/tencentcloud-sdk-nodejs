@@ -387,16 +387,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceConfig", req, cb);
     }
     /**
-     * 该接口已废弃，需要下线
-
-本接口(DescribeBackupTables)用于查询指定的数据库的备份数据表名 (已废弃)。
-旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
-新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
-     */
-    async DescribeBackupTables(req, cb) {
-        return this.request("DescribeBackupTables", req, cb);
-    }
-    /**
      * 数据库代理增加代理地址
      */
     async CreateCdbProxyAddress(req, cb) {

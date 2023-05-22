@@ -478,9 +478,9 @@ it("sqlserver.v20180328.CreateDB", async function () {
     }
 })
 
-it("sqlserver.v20180328.StartBackupMigration", async function () {
+it("sqlserver.v20180328.CreateCloudDBInstances", async function () {
     try {
-       const data = await client.StartBackupMigration({})
+       const data = await client.CreateCloudDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,6 +678,16 @@ it("sqlserver.v20180328.DescribeBusinessIntelligenceFile", async function () {
     }
 })
 
+it("sqlserver.v20180328.StartBackupMigration", async function () {
+    try {
+       const data = await client.StartBackupMigration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})
@@ -801,6 +811,16 @@ it("sqlserver.v20180328.DescribeDBInstanceInter", async function () {
 it("sqlserver.v20180328.CreateReadOnlyDBInstances", async function () {
     try {
        const data = await client.CreateReadOnlyDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.CreateCloudReadOnlyDBInstances", async function () {
+    try {
+       const data = await client.CreateCloudReadOnlyDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

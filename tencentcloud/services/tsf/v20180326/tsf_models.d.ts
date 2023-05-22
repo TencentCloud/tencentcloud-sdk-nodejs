@@ -6379,6 +6379,21 @@ export interface UnitRuleItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitRuleTagList?: Array<UnitRuleTag>;
+    /**
+      * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ItemIndex?: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime?: string;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedTime?: string;
 }
 /**
  * UpdateConfigTemplate返回参数结构体

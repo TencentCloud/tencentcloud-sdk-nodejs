@@ -304,10 +304,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDB", req, cb);
     }
     /**
-     * 本接口（StartBackupMigration）用于启动备份导入任务。
+     * 本接口（CreateCloudDBInstances）用于创建高可用实例(虚拟机版本)。
      */
-    async StartBackupMigration(req, cb) {
-        return this.request("StartBackupMigration", req, cb);
+    async CreateCloudDBInstances(req, cb) {
+        return this.request("CreateCloudDBInstances", req, cb);
     }
     /**
      * 本接口（RestoreInstance）用于按照备份集回档数据库。
@@ -426,6 +426,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBusinessIntelligenceFile", req, cb);
     }
     /**
+     * 本接口（StartBackupMigration）用于启动备份导入任务。
+     */
+    async StartBackupMigration(req, cb) {
+        return this.request("StartBackupMigration", req, cb);
+    }
+    /**
      * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
      */
     async AssociateSecurityGroups(req, cb) {
@@ -502,6 +508,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateReadOnlyDBInstances(req, cb) {
         return this.request("CreateReadOnlyDBInstances", req, cb);
+    }
+    /**
+     * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+     */
+    async CreateCloudReadOnlyDBInstances(req, cb) {
+        return this.request("CreateCloudReadOnlyDBInstances", req, cb);
     }
     /**
      * 本接口（CloseInterCommunication）用于关闭实例互通。

@@ -8549,7 +8549,7 @@ export interface CreateNetworkInterfaceRequest {
   SecondaryPrivateIpAddressCount?: number
 
   /**
-   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel?: string
 
@@ -9163,7 +9163,7 @@ export interface CreateAndAttachNetworkInterfaceRequest {
   SecondaryPrivateIpAddressCount?: number
 
   /**
-   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel?: string
 
@@ -13383,7 +13383,7 @@ export interface ModifyNetworkInterfaceQosRequest {
   NetworkInterfaceIds: Array<string>
 
   /**
-   * 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+   * 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel: string
 
@@ -13529,7 +13529,7 @@ export interface AssignPrivateIpAddressesRequest {
   SecondaryPrivateIpAddressCount?: number
 
   /**
-   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
+   * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel?: string
 }

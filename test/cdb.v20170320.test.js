@@ -568,16 +568,6 @@ it("cdb.v20170320.DescribeDBInstanceConfig", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeBackupTables", async function () {
-    try {
-       const data = await client.DescribeBackupTables({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.CreateCdbProxyAddress", async function () {
     try {
        const data = await client.CreateCdbProxyAddress({})
