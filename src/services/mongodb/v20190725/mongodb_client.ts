@@ -190,7 +190,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本就口（DescribeSecurityGroup）用于查询实例绑定的安全组。
+   * 本接口（DescribeSecurityGroup）用于查询实例绑定的安全组。
    */
   async DescribeSecurityGroup(
     req: DescribeSecurityGroupRequest,

@@ -8102,11 +8102,11 @@ export interface DescribeAssetHostListResponse {
     /**
       * 主机列表
       */
-    List: Array<HostInfo>;
+    List?: Array<HostInfo>;
     /**
       * 总数量
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8568,6 +8568,10 @@ export interface HostInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<TagInfo>;
+    /**
+      * 集群id
+      */
+    ClusterID?: string;
 }
 /**
  * DescribeVirusScanTimeoutSetting请求参数结构体

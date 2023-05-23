@@ -398,6 +398,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceVport", req, cb);
     }
     /**
+     * 本接口(UpgradeDedicatedDBInstance)用于扩容独享云数据库实例。
+     */
+    async UpgradeDedicatedDBInstance(req, cb) {
+        return this.request("UpgradeDedicatedDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
     async DescribeDBSecurityGroups(req, cb) {

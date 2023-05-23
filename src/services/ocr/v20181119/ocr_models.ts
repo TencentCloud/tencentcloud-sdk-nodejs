@@ -3606,6 +3606,12 @@ export interface Key {
    * 自动识别的字段名称
    */
   AutoName?: string
+
+  /**
+      * 定义的字段名称（传key的名称）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConfigName?: string
 }
 
 /**
@@ -6087,15 +6093,16 @@ export interface EnglishOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+
       */
   ImageBase64?: string
 
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -9105,12 +9112,12 @@ export interface EnglishOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  TextDetections: Array<TextDetectionEn>
+  TextDetections?: Array<TextDetectionEn>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel: number
+  Angel?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

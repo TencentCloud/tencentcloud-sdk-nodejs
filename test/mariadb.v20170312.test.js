@@ -608,6 +608,16 @@ it("mariadb.v20170312.ModifyInstanceVport", async function () {
     }
 })
 
+it("mariadb.v20170312.UpgradeDedicatedDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDedicatedDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})

@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     ResetDBInstancePassword(req: ResetDBInstancePasswordRequest, cb?: (error: string, rep: ResetDBInstancePasswordResponse) => void): Promise<ResetDBInstancePasswordResponse>;
     /**
-     * 本就口（DescribeSecurityGroup）用于查询实例绑定的安全组。
+     * 本接口（DescribeSecurityGroup）用于查询实例绑定的安全组。
      */
     DescribeSecurityGroup(req: DescribeSecurityGroupRequest, cb?: (error: string, rep: DescribeSecurityGroupResponse) => void): Promise<DescribeSecurityGroupResponse>;
     /**

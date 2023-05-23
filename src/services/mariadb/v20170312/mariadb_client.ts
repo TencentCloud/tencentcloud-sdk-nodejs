@@ -63,6 +63,7 @@ import {
   ModifyBackupTimeRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
+  UpgradeDedicatedDBInstanceResponse,
   NodeInfo,
   DescribeOrdersResponse,
   ModifySyncTaskAttributeResponse,
@@ -94,6 +95,7 @@ import {
   DescribeSaleInfoResponse,
   ModifyDBEncryptAttributesResponse,
   DescribeDBEncryptAttributesResponse,
+  UpgradeDedicatedDBInstanceRequest,
   DestroyDBInstanceRequest,
   DatabaseTable,
   DescribeDBInstanceDetailRequest,
@@ -810,6 +812,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceVportResponse) => void
   ): Promise<ModifyInstanceVportResponse> {
     return this.request("ModifyInstanceVport", req, cb)
+  }
+
+  /**
+   * 本接口(UpgradeDedicatedDBInstance)用于扩容独享云数据库实例。
+   */
+  async UpgradeDedicatedDBInstance(
+    req: UpgradeDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDedicatedDBInstanceResponse) => void
+  ): Promise<UpgradeDedicatedDBInstanceResponse> {
+    return this.request("UpgradeDedicatedDBInstance", req, cb)
   }
 
   /**

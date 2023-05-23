@@ -590,6 +590,21 @@ export interface CreateAccountRequest {
 }
 
 /**
+ * UpgradeDedicatedDCDBInstance返回参数结构体
+ */
+export interface UpgradeDedicatedDCDBInstanceResponse {
+  /**
+   * 异步任务流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBParameters返回参数结构体
  */
 export interface DescribeDBParametersResponse {
@@ -610,23 +625,53 @@ export interface DescribeDBParametersResponse {
 }
 
 /**
- * DescribeDatabaseTable请求参数结构体
+ * DescribeBackupFiles请求参数结构体
  */
-export interface DescribeDatabaseTableRequest {
+export interface DescribeBackupFilesRequest {
   /**
-   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   * 按实例ID查询
    */
-  InstanceId: string
+  InstanceId?: string
 
   /**
-   * 数据库名称，通过 DescribeDatabases 接口获取。
+   * 按分片ID查询
    */
-  DbName: string
+  ShardId?: string
 
   /**
-   * 表名称，通过 DescribeDatabaseObjects 接口获取。
+   * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
    */
-  Table: string
+  BackupType?: string
+
+  /**
+   * 按开始时间查询
+   */
+  StartTime?: string
+
+  /**
+   * 按结束时间查询
+   */
+  EndTime?: string
+
+  /**
+   * 分页参数
+   */
+  Limit?: number
+
+  /**
+   * 分页参数
+   */
+  Offset?: number
+
+  /**
+   * 排序参数，可选值：Time,Size
+   */
+  OrderBy?: string
+
+  /**
+   * 排序参数，可选值：DESC,ASC
+   */
+  OrderType?: string
 }
 
 /**
@@ -930,92 +975,93 @@ export interface DescribeOrdersResponse {
 }
 
 /**
- * CreateHourDCDBInstance请求参数结构体
+ * CreateDedicatedClusterDCDBInstance请求参数结构体
  */
-export interface CreateHourDCDBInstanceRequest {
+export interface CreateDedicatedClusterDCDBInstanceRequest {
   /**
-      * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
- 查询实例规格获得。
-      */
+   * 分配实例个数
+   */
+  GoodsNum: number
+
+  /**
+   * 分片数量
+   */
+  ShardNum: number
+
+  /**
+   * 分片內存大小, 单位GB
+   */
   ShardMemory: number
 
   /**
-      * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
- 查询实例规格获得。
-      */
+   * 分片磁盘大小, 单位GB
+   */
   ShardStorage: number
 
   /**
-      * 单个分片节点个数，可以通过 DescribeShardSpec
- 查询实例规格获得。
-      */
-  ShardNodeCount: number
-
-  /**
-   * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
+   * 独享集群集群uuid
    */
-  ShardCount: number
+  ClusterId: string
 
   /**
-   * 欲购买实例的数量
+   * （废弃）可用区
    */
-  Count?: number
+  Zone?: string
 
   /**
-   * 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目
+   * 项目ID
    */
   ProjectId?: number
 
   /**
-   * 虚拟私有网络 ID，不传或传空表示创建为基础网络
+   * （废弃）cpu大小，单位：核
+   */
+  Cpu?: number
+
+  /**
+   * 网络ID
    */
   VpcId?: string
 
   /**
-   * 虚拟私有网络子网 ID，VpcId不为空时必填
+   * 子网ID
    */
   SubnetId?: string
 
   /**
-      * 分片cpu大小，单位：核，可以通过 DescribeShardSpec
- 查询实例规格获得。
-      */
-  ShardCpu?: number
+   * （废弃）分片机型
+   */
+  ShardMachine?: string
 
   /**
-   * 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。
+   * 分片的节点个数
+   */
+  ShardNodeNum?: number
+
+  /**
+   * （废弃）节点cpu核数，单位：1/100核
+   */
+  ShardNodeCpu?: number
+
+  /**
+   * （废弃）节点內存大小，单位：GB
+   */
+  ShardNodeMemory?: number
+
+  /**
+   * （废弃）节点磁盘大小，单位：GB
+   */
+  ShardNodeStorage?: number
+
+  /**
+   * db版本
    */
   DbVersionId?: string
 
   /**
-   * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
-   */
-  Zones?: Array<string>
-
-  /**
-   * 安全组id
+   * 安全组ID
    */
   SecurityGroupId?: string
-
-  /**
-   * 实例名称， 可以通过该字段自主的设置实例的名字
-   */
-  InstanceName?: string
-
-  /**
-   * 是否支持IPv6
-   */
-  Ipv6Flag?: number
-
-  /**
-   * 标签键值对数组
-   */
-  ResourceTags?: Array<ResourceTag>
-
-  /**
-   * DCN源地域
-   */
-  DcnRegion?: string
 
   /**
    * DCN源实例ID
@@ -1023,9 +1069,44 @@ export interface CreateHourDCDBInstanceRequest {
   DcnInstanceId?: string
 
   /**
+   * DCN源实例地域名
+   */
+  DcnRegion?: string
+
+  /**
+   * 自定义实例名称
+   */
+  InstanceName?: string
+
+  /**
+   * 标签
+   */
+  ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 支持IPv6标志：1 支持， 0 不支持
+   */
+  Ipv6Flag?: number
+
+  /**
+   * （废弃）Pid，可通过获取独享集群售卖配置接口得到
+   */
+  Pid?: number
+
+  /**
    * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
    */
   InitParams?: Array<DBParamValue>
+
+  /**
+   * 指定主节点uuid，不填随机分配
+   */
+  MasterHostId?: string
+
+  /**
+   * 指定从节点uuid，不填随机分配
+   */
+  SlaveHostIds?: Array<string>
 
   /**
    * 需要回档的源实例ID
@@ -1036,11 +1117,106 @@ export interface CreateHourDCDBInstanceRequest {
    * 回档时间
    */
   RollbackTime?: string
+}
+
+/**
+ * DCN详情条目
+ */
+export interface DcnDetailItem {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 
   /**
-   * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+   * 实例名称
    */
-  SecurityGroupIds?: Array<string>
+  InstanceName: string
+
+  /**
+   * 实例地域
+   */
+  Region: string
+
+  /**
+   * 实例可用区
+   */
+  Zone: string
+
+  /**
+   * 实例IP地址
+   */
+  Vip: string
+
+  /**
+   * 实例IPv6地址
+   */
+  Vipv6: string
+
+  /**
+   * 实例端口
+   */
+  Vport: number
+
+  /**
+   * 实例状态
+   */
+  Status: number
+
+  /**
+   * 实例状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 实例DCN标志，1-主，2-备
+   */
+  DcnFlag: number
+
+  /**
+   * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   */
+  DcnStatus: number
+
+  /**
+   * 实例CPU核数
+   */
+  Cpu: number
+
+  /**
+   * 实例内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 实例存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 付费模式
+   */
+  PayMode: number
+
+  /**
+   * 实例创建时间，格式为 2006-01-02 15:04:05
+   */
+  CreateTime: string
+
+  /**
+   * 实例到期时间，格式为 2006-01-02 15:04:05
+   */
+  PeriodEndTime: string
+
+  /**
+   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   */
+  InstanceType: number
+
+  /**
+   * 是否开启了 kms
+   */
+  EncryptStatus: number
 }
 
 /**
@@ -1421,16 +1597,6 @@ export interface DescribeDBSecurityGroupsRequest {
 }
 
 /**
- * 数据库存储过程信息
- */
-export interface DatabaseProcedure {
-  /**
-   * 存储过程名称
-   */
-  Proc: string
-}
-
-/**
  * DescribeDCDBPrice请求参数结构体
  */
 export interface DescribeDCDBPriceRequest {
@@ -1727,6 +1893,31 @@ export interface ShardZoneChooseInfo {
 }
 
 /**
+ * DescribeDBEncryptAttributes返回参数结构体
+ */
+export interface DescribeDBEncryptAttributesResponse {
+  /**
+   * 是否启用加密，1-已开启；0-未开启。
+   */
+  EncryptStatus: number
+
+  /**
+   * DEK密钥
+   */
+  CipherText: string
+
+  /**
+   * DEK密钥过期日期。
+   */
+  ExpireDate: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库表信息
  */
 export interface DatabaseTable {
@@ -1734,6 +1925,16 @@ export interface DatabaseTable {
    * 表名
    */
   Table: string
+}
+
+/**
+ * DescribeDBEncryptAttributes请求参数结构体
+ */
+export interface DescribeDBEncryptAttributesRequest {
+  /**
+   * 实例Id，形如：tdsqlshard-ow728lmc。
+   */
+  InstanceId: string
 }
 
 /**
@@ -2496,53 +2697,23 @@ export interface SecurityGroup {
 }
 
 /**
- * DescribeBackupFiles请求参数结构体
+ * DescribeDatabaseTable请求参数结构体
  */
-export interface DescribeBackupFilesRequest {
+export interface DescribeDatabaseTableRequest {
   /**
-   * 按实例ID查询
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
    */
-  InstanceId?: string
+  InstanceId: string
 
   /**
-   * 按分片ID查询
+   * 数据库名称，通过 DescribeDatabases 接口获取。
    */
-  ShardId?: string
+  DbName: string
 
   /**
-   * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
+   * 表名称，通过 DescribeDatabaseObjects 接口获取。
    */
-  BackupType?: string
-
-  /**
-   * 按开始时间查询
-   */
-  StartTime?: string
-
-  /**
-   * 按结束时间查询
-   */
-  EndTime?: string
-
-  /**
-   * 分页参数
-   */
-  Limit?: number
-
-  /**
-   * 分页参数
-   */
-  Offset?: number
-
-  /**
-   * 排序参数，可选值：Time,Size
-   */
-  OrderBy?: string
-
-  /**
-   * 排序参数，可选值：DESC,ASC
-   */
-  OrderType?: string
+  Table: string
 }
 
 /**
@@ -2798,6 +2969,51 @@ export interface DescribeDCDBRenewalPriceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradeDedicatedDCDBInstance请求参数结构体
+ */
+export interface UpgradeDedicatedDCDBInstanceRequest {
+  /**
+   * 升级类型，取值为ADD，SPLIT和EXPAND。ADD-添加分片；SPLIT-切分某个分片；EXPAND-垂直扩容某个分片
+   */
+  UpgradeType: string
+
+  /**
+   * 实例ID，形如 dcdbt-mlfjm74h
+   */
+  InstanceId: string
+
+  /**
+   * 当UpgradeType取值为ADD时，添加分片的配置参数
+   */
+  AddShardConfig?: AddShardConfig
+
+  /**
+   * 当UpgradeType取值为EXPAND时，垂直扩容分片的配置参数
+   */
+  ExpandShardConfig?: ExpandShardConfig
+
+  /**
+   * 当UpgradeType取值为SPLIT时，切分分片的配置参数
+   */
+  SplitShardConfig?: SplitShardConfig
+
+  /**
+   * 错过切换时间窗口时，是否自动重试一次，0-否，1-是
+   */
+  SwitchAutoRetry?: number
+
+  /**
+   * 切换时间窗口开始时间
+   */
+  SwitchStartTime?: string
+
+  /**
+   * 切换时间窗口结束时间
+   */
+  SwitchEndTime?: string
 }
 
 /**
@@ -3234,103 +3450,117 @@ export interface ModifyDBInstancesProjectRequest {
 }
 
 /**
- * DCN详情条目
+ * CreateHourDCDBInstance请求参数结构体
  */
-export interface DcnDetailItem {
+export interface CreateHourDCDBInstanceRequest {
   /**
-   * 实例ID
-   */
-  InstanceId: string
+      * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardMemory: number
 
   /**
-   * 实例名称
-   */
-  InstanceName: string
+      * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardStorage: number
 
   /**
-   * 实例地域
-   */
-  Region: string
+      * 单个分片节点个数，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardNodeCount: number
 
   /**
-   * 实例可用区
+   * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
    */
-  Zone: string
+  ShardCount: number
 
   /**
-   * 实例IP地址
+   * 欲购买实例的数量
    */
-  Vip: string
+  Count?: number
 
   /**
-   * 实例IPv6地址
+   * 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目
    */
-  Vipv6: string
+  ProjectId?: number
 
   /**
-   * 实例端口
+   * 虚拟私有网络 ID，不传或传空表示创建为基础网络
    */
-  Vport: number
+  VpcId?: string
 
   /**
-   * 实例状态
+   * 虚拟私有网络子网 ID，VpcId不为空时必填
    */
-  Status: number
+  SubnetId?: string
 
   /**
-   * 实例状态描述
-   */
-  StatusDesc: string
+      * 分片cpu大小，单位：核，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardCpu?: number
 
   /**
-   * 实例DCN标志，1-主，2-备
+   * 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。
    */
-  DcnFlag: number
+  DbVersionId?: string
 
   /**
-   * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
    */
-  DcnStatus: number
+  Zones?: Array<string>
 
   /**
-   * 实例CPU核数
+   * 安全组id
    */
-  Cpu: number
+  SecurityGroupId?: string
 
   /**
-   * 实例内存大小，单位 GB
+   * 实例名称， 可以通过该字段自主的设置实例的名字
    */
-  Memory: number
+  InstanceName?: string
 
   /**
-   * 实例存储大小，单位 GB
+   * 是否支持IPv6
    */
-  Storage: number
+  Ipv6Flag?: number
 
   /**
-   * 付费模式
+   * 标签键值对数组
    */
-  PayMode: number
+  ResourceTags?: Array<ResourceTag>
 
   /**
-   * 实例创建时间，格式为 2006-01-02 15:04:05
+   * DCN源地域
    */
-  CreateTime: string
+  DcnRegion?: string
 
   /**
-   * 实例到期时间，格式为 2006-01-02 15:04:05
+   * DCN源实例ID
    */
-  PeriodEndTime: string
+  DcnInstanceId?: string
 
   /**
-   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
    */
-  InstanceType: number
+  InitParams?: Array<DBParamValue>
 
   /**
-   * 是否开启了 kms
+   * 需要回档的源实例ID
    */
-  EncryptStatus: number
+  RollbackInstanceId?: string
+
+  /**
+   * 回档时间
+   */
+  RollbackTime?: string
+
+  /**
+   * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -3397,6 +3627,11 @@ export interface KillSessionResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeProjects请求参数结构体
+ */
+export type DescribeProjectsRequest = null
 
 /**
  * 慢查询条目信息
@@ -3965,6 +4200,16 @@ export interface DescribeDCDBUpgradePriceRequest {
 }
 
 /**
+ * CreateDedicatedClusterDCDBInstance返回参数结构体
+ */
+export interface CreateDedicatedClusterDCDBInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用户任务信息
  */
 export interface UserTaskInfo {
@@ -4025,9 +4270,14 @@ export interface UserTaskInfo {
 }
 
 /**
- * DescribeProjects请求参数结构体
+ * 数据库存储过程信息
  */
-export type DescribeProjectsRequest = null
+export interface DatabaseProcedure {
+  /**
+   * 存储过程名称
+   */
+  Proc: string
+}
 
 /**
  * 升级实例 -- 新增分片类型

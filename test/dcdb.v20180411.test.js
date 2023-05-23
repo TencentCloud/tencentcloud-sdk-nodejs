@@ -28,6 +28,16 @@ it("dcdb.v20180411.DescribeAccountPrivileges", async function () {
     }
 })
 
+it("dcdb.v20180411.UpgradeDedicatedDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDedicatedDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.ActiveHourDCDBInstance", async function () {
     try {
        const data = await client.ActiveHourDCDBInstance({})
@@ -78,6 +88,16 @@ it("dcdb.v20180411.ResetAccountPassword", async function () {
     }
 })
 
+it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDCDBInstances", async function () {
     try {
        const data = await client.DescribeDCDBInstances({})
@@ -111,6 +131,16 @@ it("dcdb.v20180411.DescribeFileDownloadUrl", async function () {
 it("dcdb.v20180411.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.DescribeOrders", async function () {
+    try {
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +238,9 @@ it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeOrders", async function () {
+it("dcdb.v20180411.CreateDedicatedClusterDCDBInstance", async function () {
     try {
-       const data = await client.DescribeOrders({})
+       const data = await client.CreateDedicatedClusterDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +678,9 @@ it("dcdb.v20180411.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeDBEncryptAttributes", async function () {
     try {
-       const data = await client.UpgradeDCDBInstance({})
+       const data = await client.DescribeDBEncryptAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

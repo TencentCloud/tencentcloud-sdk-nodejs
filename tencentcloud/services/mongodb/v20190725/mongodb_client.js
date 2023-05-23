@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetDBInstancePassword", req, cb);
     }
     /**
-     * 本就口（DescribeSecurityGroup）用于查询实例绑定的安全组。
+     * 本接口（DescribeSecurityGroup）用于查询实例绑定的安全组。
      */
     async DescribeSecurityGroup(req, cb) {
         return this.request("DescribeSecurityGroup", req, cb);

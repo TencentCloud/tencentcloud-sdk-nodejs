@@ -46,8 +46,9 @@ import {
   DescribeDCDBUpgradePriceResponse,
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
+  UpgradeDedicatedDCDBInstanceResponse,
   DescribeDBParametersResponse,
-  DescribeDatabaseTableRequest,
+  DescribeBackupFilesRequest,
   IsolateHourDCDBInstanceRequest,
   ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
@@ -66,14 +67,14 @@ import {
   DescribeDBLogFilesRequest,
   NodeInfo,
   DescribeOrdersResponse,
-  CreateHourDCDBInstanceRequest,
+  CreateDedicatedClusterDCDBInstanceRequest,
+  DcnDetailItem,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
   DescribeDCDBInstanceDetailResponse,
   ModifyInstanceNetworkResponse,
   DescribeDBSecurityGroupsRequest,
-  DatabaseProcedure,
   DescribeDCDBPriceRequest,
   SwitchDBInstanceHAResponse,
   DescribeBackupFilesResponse,
@@ -89,7 +90,9 @@ import {
   ExpandShardConfig,
   RenewDCDBInstanceRequest,
   ShardZoneChooseInfo,
+  DescribeDBEncryptAttributesResponse,
   DatabaseTable,
+  DescribeDBEncryptAttributesRequest,
   Deal,
   GrantAccountPrivilegesRequest,
   DescribeShardSpecRequest,
@@ -106,7 +109,7 @@ import {
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
-  DescribeBackupFilesRequest,
+  DescribeDatabaseTableRequest,
   DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   TerminateDedicatedDBInstanceRequest,
@@ -119,6 +122,7 @@ import {
   SplitShardConfig,
   RenewDCDBInstanceResponse,
   DescribeDCDBRenewalPriceResponse,
+  UpgradeDedicatedDCDBInstanceRequest,
   AssociateSecurityGroupsResponse,
   DescribeShardSpecResponse,
   DescribeDCDBShardsResponse,
@@ -136,11 +140,12 @@ import {
   DatabasePrivilege,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
-  DcnDetailItem,
+  CreateHourDCDBInstanceRequest,
   DescribeDBSyncModeRequest,
   CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
+  DescribeProjectsRequest,
   SlowLogData,
   DescribeDatabasesResponse,
   ViewPrivileges,
@@ -158,8 +163,9 @@ import {
   Account,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
+  CreateDedicatedClusterDCDBInstanceResponse,
   UserTaskInfo,
-  DescribeProjectsRequest,
+  DatabaseProcedure,
   AddShardConfig,
   ModifyDBSyncModeRequest,
   DescribeProjectsResponse,
@@ -215,6 +221,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpgradeDedicatedDCDBInstance）用于升级独享DCDB实例
+   */
+  async UpgradeDedicatedDCDBInstance(
+    req: UpgradeDedicatedDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDedicatedDCDBInstanceResponse) => void
+  ): Promise<UpgradeDedicatedDCDBInstanceResponse> {
+    return this.request("UpgradeDedicatedDCDBInstance", req, cb)
+  }
+
+  /**
    * 解隔离DCDB后付费实例
    */
   async ActiveHourDCDBInstance(
@@ -266,6 +282,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   */
+  async UpgradeDCDBInstance(
+    req: UpgradeDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
+  ): Promise<UpgradeDCDBInstanceResponse> {
+    return this.request("UpgradeDCDBInstance", req, cb)
+  }
+
+  /**
      * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
 如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
      */
@@ -310,6 +336,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
   ): Promise<ModifyAccountDescriptionResponse> {
     return this.request("ModifyAccountDescription", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+   */
+  async DescribeOrders(
+    req: DescribeOrdersRequest,
+    cb?: (error: string, rep: DescribeOrdersResponse) => void
+  ): Promise<DescribeOrdersResponse> {
+    return this.request("DescribeOrders", req, cb)
   }
 
   /**
@@ -403,13 +439,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+   * 创建独享集群DCDB实例
    */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
+  async CreateDedicatedClusterDCDBInstance(
+    req: CreateDedicatedClusterDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateDedicatedClusterDCDBInstanceResponse) => void
+  ): Promise<CreateDedicatedClusterDCDBInstanceResponse> {
+    return this.request("CreateDedicatedClusterDCDBInstance", req, cb)
   }
 
   /**
@@ -463,8 +499,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
-   */
+     * 已废弃接口
+
+本接口（DescribeSqlLogs）用于获取实例SQL日志。
+     */
   async DescribeSqlLogs(
     req: DescribeSqlLogsRequest,
     cb?: (error: string, rep: DescribeSqlLogsResponse) => void
@@ -850,13 +888,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   * 本接口(DescribeDBEncryptAttributes)用于查询实例数据加密状态。
    */
-  async UpgradeDCDBInstance(
-    req: UpgradeDCDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
-  ): Promise<UpgradeDCDBInstanceResponse> {
-    return this.request("UpgradeDCDBInstance", req, cb)
+  async DescribeDBEncryptAttributes(
+    req: DescribeDBEncryptAttributesRequest,
+    cb?: (error: string, rep: DescribeDBEncryptAttributesResponse) => void
+  ): Promise<DescribeDBEncryptAttributesResponse> {
+    return this.request("DescribeDBEncryptAttributes", req, cb)
   }
 
   /**

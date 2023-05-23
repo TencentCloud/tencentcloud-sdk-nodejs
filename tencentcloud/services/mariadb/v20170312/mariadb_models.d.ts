@@ -792,6 +792,19 @@ export interface DescribeDBLogFilesRequest {
     Type: number;
 }
 /**
+ * UpgradeDedicatedDBInstance返回参数结构体
+ */
+export interface UpgradeDedicatedDBInstanceResponse {
+    /**
+      * 异步流程Id
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述实例的各个DB节点信息
  */
 export interface NodeInfo {
@@ -1702,6 +1715,37 @@ export interface DescribeDBEncryptAttributesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpgradeDedicatedDBInstance请求参数结构体
+ */
+export interface UpgradeDedicatedDBInstanceRequest {
+    /**
+      * 待升级的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例获得。
+      */
+    InstanceId: string;
+    /**
+      * 内存大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs
+ 查询实例规格获得。
+      */
+    Memory: number;
+    /**
+      * 存储空间大小，单位：GB，可以通过 DescribeFenceDBInstanceSpecs
+ 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+      */
+    Storage: number;
+    /**
+      * 错过切换时间窗口时，是否自动重试一次，0-否，1-是
+      */
+    SwitchAutoRetry?: number;
+    /**
+      * 切换时间窗口开始时间
+      */
+    SwitchStartTime?: string;
+    /**
+      * 切换时间窗口结束时间
+      */
+    SwitchEndTime?: string;
 }
 /**
  * DestroyDBInstance请求参数结构体
