@@ -187,6 +187,41 @@ export interface DescribeLifeCycleRulesRequest {
     FileSystemId: string;
 }
 /**
+ * 生命周期规则当前路径具体存储量信息
+ */
+export interface Summary {
+    /**
+      * 总存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CapacityUsed: number;
+    /**
+      * 标准存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StandardCapacityUsed: number;
+    /**
+      * 低频存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DegradeCapacityUsed?: number;
+    /**
+      * 归档存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ArchiveCapacityUsed?: number;
+    /**
+      * 深度归档存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeepArchiveCapacityUsed?: number;
+    /**
+      * 智能分层存储量（单位byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntelligentCapacityUsed?: number;
+}
+/**
  * AssociateAccessGroups请求参数结构体
  */
 export interface AssociateAccessGroupsRequest {
@@ -683,7 +718,7 @@ export interface DescribeLifeCycleRulesResponse {
     /**
       * 生命周期规则列表
       */
-    LifeCycleRules: Array<LifeCycleRule>;
+    LifeCycleRules?: Array<LifeCycleRule>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -779,6 +814,14 @@ export interface LifeCycleRule {
       * 创建时间
       */
     CreateTime?: string;
+    /**
+      * 生命周期规则当前路径具体存储量
+      */
+    Summary?: Summary;
+    /**
+      * Summary更新时间
+      */
+    LastSummaryTime?: string;
 }
 /**
  * CreateAccessRules请求参数结构体

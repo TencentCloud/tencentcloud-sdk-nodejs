@@ -628,6 +628,8 @@ export declare class Client extends AbstractClient {
     BankCardOCR(req: BankCardOCRRequest, cb?: (error: string, rep: BankCardOCRResponse) => void): Promise<BankCardOCRResponse>;
     /**
      * 本接口支持机动车销售统一发票和二手车销售统一发票的识别，包括发票号码、发票代码、合计金额、合计税额等二十多个字段。
+
+默认接口请求频率限制：5次/秒。
      */
     CarInvoiceOCR(req: CarInvoiceOCRRequest, cb?: (error: string, rep: CarInvoiceOCRResponse) => void): Promise<CarInvoiceOCRResponse>;
     /**
@@ -725,7 +727,7 @@ export declare class Client extends AbstractClient {
      */
     RecognizePhilippinesTinIDOCR(req: RecognizePhilippinesTinIDOCRRequest, cb?: (error: string, rep: RecognizePhilippinesTinIDOCRResponse) => void): Promise<RecognizePhilippinesTinIDOCRResponse>;
     /**
-     * 本接口支持 PDF多页（最多30页）、一页中单张、多张、类型票据的混合识别，同时支持单选识别某类票据，已支持票种包括：增值税发票（专票、普票、卷票、区块链发票、通行费发票）、全电发票（专票、普票）、非税发票（通用票据、统一缴纳书）、定额发票、通用机打发票、购车发票（机动车销售发票、二手车发票）、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持非上述类型的其他发票的智能识别。
+     * 本接口支持 PDF多页（最多30页）、一页中单张、多张、类型票据的混合识别，同时支持单选识别某类票据，已支持票种包括：增值税发票（专票、普票、卷票、区块链发票、通行费发票）、全电发票（专票、普票）、非税发票（通用票据、统一缴纳书）、定额发票、通用机打发票、购车发票（机动车销售发票、二手车发票）、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持非上述类型的其他发票的智能识别，点击[立即试用](https://cloud.tencent.com/product/ocr)。
 
 默认接口请求频率限制：5次/秒。
 
@@ -766,7 +768,7 @@ export declare class Client extends AbstractClient {
           <td> 3 </td>
         </tr>
         <tr>
-          <td> VatElectronicSpecialInvoiceFull</td>
+          <td> VatElectronicInvoiceToll</td>
           <td> 增值税电子普通发票(通行费)</td>
           <td> 3 </td>
         </tr>

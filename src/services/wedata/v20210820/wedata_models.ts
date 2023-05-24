@@ -753,7 +753,7 @@ export interface DescribeRulesResponse {
       * 规则列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: Array<Rule>
+  Data?: Array<Rule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1111,6 +1111,12 @@ export interface RuleGroupExecResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExecDetail?: string
+
+  /**
+      * 实际执行引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EngineType?: string
 }
 
 /**
@@ -2105,6 +2111,18 @@ export interface RuleGroupExecStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskAction: string
+
+  /**
+      * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecEngineType?: string
+
+  /**
+      * 执行计划
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecPlan?: string
 }
 
 /**
@@ -2747,6 +2765,12 @@ export interface Rule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TargetObjectValue?: string
+
+  /**
+      * 源端对应的引擎类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceEngineTypes?: Array<number>
 }
 
 /**
@@ -4834,6 +4858,11 @@ export interface ModifyRuleRequest {
    * 目标字段名称  CITY
    */
   TargetObjectValue?: string
+
+  /**
+   * 该规则适配的执行引擎
+   */
+  SourceEngineTypes?: Array<number>
 }
 
 /**
@@ -5195,7 +5224,7 @@ export interface ModifyRuleResponse {
       * 是否更新成功
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: boolean
+  Data?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7558,6 +7587,12 @@ export interface RuleExecConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExecutorGroupId?: string
+
+  /**
+      * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EngineType?: string
 }
 
 /**
@@ -8362,7 +8397,7 @@ export interface CreateRuleResponse {
       * 规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: Rule
+  Data?: Rule
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9531,6 +9566,11 @@ export interface CreateRuleRequest {
    * 目标字段名称  CITY
    */
   TargetObjectValue?: string
+
+  /**
+   * 该规则支持的执行引擎列表
+   */
+  SourceEngineTypes?: Array<number>
 }
 
 /**
@@ -9561,6 +9601,11 @@ export interface CommitRuleGroupTaskRequest {
    * 项目ID
    */
   ProjectId?: string
+
+  /**
+   * 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   */
+  EngineType?: string
 }
 
 /**
@@ -12311,6 +12356,11 @@ MONTH_CYCLE:M
    * 数据表Id
    */
   TableId?: string
+
+  /**
+   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   */
+  ExecEngineType?: string
 }
 
 /**
@@ -12425,7 +12475,7 @@ export interface CommitRuleGroupTaskResponse {
       * 规则组执行id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: RuleGroupExecResult
+  Data?: RuleGroupExecResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12558,7 +12608,7 @@ export interface ModifyExecStrategyResponse {
       * 规则组ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: number
+  Data?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13010,6 +13060,11 @@ export interface DescribeRulesRequest {
    * 规则组id
    */
   RuleGroupId?: number
+
+  /**
+   * 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   */
+  EngineType?: string
 }
 
 /**

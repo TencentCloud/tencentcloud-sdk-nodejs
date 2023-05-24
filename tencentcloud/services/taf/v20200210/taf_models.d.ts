@@ -44,6 +44,16 @@ export interface OutputRecognizeTargetAudienceValue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Score: number;
+    /**
+      * 模型类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModelType: number;
+    /**
+      * 入参Uid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uid: string;
 }
 /**
  * 流量反欺诈-验准返回值

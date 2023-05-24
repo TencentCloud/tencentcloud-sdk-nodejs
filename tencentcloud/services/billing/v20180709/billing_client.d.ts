@@ -47,7 +47,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCostSummaryByProject(req: DescribeCostSummaryByProjectRequest, cb?: (error: string, rep: DescribeCostSummaryByProjectResponse) => void): Promise<DescribeCostSummaryByProjectResponse>;
     /**
-     * 获取按付费模式汇总费用分布
+     * 获取按计费模式汇总费用分布
      */
     DescribeBillSummaryByPayMode(req: DescribeBillSummaryByPayModeRequest, cb?: (error: string, rep: DescribeBillSummaryByPayModeResponse) => void): Promise<DescribeBillSummaryByPayModeResponse>;
     /**

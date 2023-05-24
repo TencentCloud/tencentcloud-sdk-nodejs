@@ -27,6 +27,7 @@ import {
   ModifyFileSystemResponse,
   ModifyFileSystemRequest,
   DescribeLifeCycleRulesRequest,
+  Summary,
   AssociateAccessGroupsRequest,
   ModifyAccessGroupRequest,
   DescribeFileSystemsResponse,

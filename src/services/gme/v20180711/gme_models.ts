@@ -832,7 +832,7 @@ export interface DescribeRoomInfoResponse {
 }
 
 /**
- * 房间内录制信息信息
+ * 房间内录制信息。
 注意：此字段可能返回 null，表示取不到有效值。
  */
 export interface RecordInfo {

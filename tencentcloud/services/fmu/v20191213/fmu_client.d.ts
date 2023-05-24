@@ -35,7 +35,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteModel(req: DeleteModelRequest, cb?: (error: string, rep: DeleteModelResponse) => void): Promise<DeleteModelResponse>;
     /**
-     * 用户上传一张人脸图片，精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
+     * 用户上传一张人脸图片（最多能处理一张图片中最大的五张人脸信息），精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
      */
     BeautifyPic(req: BeautifyPicRequest, cb?: (error: string, rep: BeautifyPicResponse) => void): Promise<BeautifyPicResponse>;
     /**

@@ -85,7 +85,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCostSummaryByProject", req, cb);
     }
     /**
-     * 获取按付费模式汇总费用分布
+     * 获取按计费模式汇总费用分布
      */
     async DescribeBillSummaryByPayMode(req, cb) {
         return this.request("DescribeBillSummaryByPayMode", req, cb);

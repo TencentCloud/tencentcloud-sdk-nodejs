@@ -200,7 +200,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取按付费模式汇总费用分布
+   * 获取按计费模式汇总费用分布
    */
   async DescribeBillSummaryByPayMode(
     req: DescribeBillSummaryByPayModeRequest,

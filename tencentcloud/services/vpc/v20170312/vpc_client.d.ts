@@ -1170,7 +1170,7 @@ LimitTypes取值范围：
      */
     CreateAddressTemplate(req: CreateAddressTemplateRequest, cb?: (error: string, rep: CreateAddressTemplateResponse) => void): Promise<CreateAddressTemplateResponse>;
     /**
-     * 创建 Server端
+     * 本接口（CreateVpnGatewaySslServer）用于创建SSL-VPN Server端。
      */
     CreateVpnGatewaySslServer(req: CreateVpnGatewaySslServerRequest, cb?: (error: string, rep: CreateVpnGatewaySslServerResponse) => void): Promise<CreateVpnGatewaySslServerResponse>;
     /**

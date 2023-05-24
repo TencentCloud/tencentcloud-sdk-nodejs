@@ -276,14 +276,9 @@ export interface ProjectSummaryOverviewItem {
   ProjectId: string
 
   /**
-   * 项目名称
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
    */
   ProjectName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
 
   /**
    * 费用所占百分比，两位小数
@@ -291,19 +286,29 @@ export interface ProjectSummaryOverviewItem {
   RealTotalCostRatio: string
 
   /**
-   * 现金金额
+   * 优惠后总价
+   */
+  RealTotalCost: string
+
+  /**
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
+
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
 
   /**
    * 账单月份，格式2019-08
@@ -314,11 +319,6 @@ export interface ProjectSummaryOverviewItem {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost: string
-
-  /**
-   * 分成金金额
-   */
-  TransferPayAmount: string
 }
 
 /**
@@ -497,15 +497,16 @@ export interface CostDetail {
  */
 export interface DescribeBillSummaryByPayModeResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
-   */
-  Ready: number
+      * 数据是否准备好，0未准备好，1准备好。
+Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+      */
+  Ready?: number
 
   /**
       * 各付费模式花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryOverview: Array<PayModeSummaryOverviewItem>
+  SummaryOverview?: Array<PayModeSummaryOverviewItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -518,94 +519,93 @@ export interface DescribeBillSummaryByPayModeResponse {
  */
 export interface BillResourceSummary {
   /**
-   * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
+   * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
    */
   BusinessCodeName: string
 
   /**
-   * 子产品名称：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
+   * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
    */
   ProductCodeName: string
 
   /**
-   * 计费模式：包年包月和按量计费
+   * 计费模式：资源的计费模式，区分为包年包月和按量计费
    */
   PayModeName: string
 
   /**
-   * 项目
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
    */
   ProjectName: string
 
   /**
-   * 地域
+   * 地域：资源所属地域，如华南地区（广州）
    */
   RegionName: string
 
   /**
-   * 可用区
+   * 可用区：资源所属可用区，如广州三区
    */
   ZoneName: string
 
   /**
-   * 资源实例ID
+   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
    */
   ResourceId: string
 
   /**
-   * 资源实例名称
+   * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
    */
   ResourceName: string
 
   /**
-   * 交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型
+   * 交易类型：如包年包月新购、包年包月续费、按量计费扣费等类型
    */
   ActionTypeName: string
 
   /**
-   * 订单ID
+   * 订单ID：包年包月计费模式下订购的订单号
    */
   OrderId: string
 
   /**
-   * 扣费时间
+   * 扣费时间：结算扣费时间
    */
   PayTime: string
 
   /**
-   * 开始使用时间
+   * 开始使用时间：产品服务开始使用时间
    */
   FeeBeginTime: string
 
   /**
-   * 结束使用时间
+   * 结束使用时间：产品服务结束使用时间
    */
   FeeEndTime: string
 
   /**
-   * 配置描述
+   * 配置描述：该资源下的计费项名称和用量合并展示，仅在资源账单体现
    */
   ConfigDesc: string
 
   /**
-   * 扩展字段1
+   * 扩展字段1：产品对应的扩展属性信息，仅在资源账单体现
    */
   ExtendField1: string
 
   /**
-   * 扩展字段2
+   * 扩展字段2：产品对应的扩展属性信息，仅在资源账单体现
    */
   ExtendField2: string
 
   /**
-   * 原价，单位为元
+   * 原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
    */
   TotalCost: string
 
   /**
-      * 折扣率
-当聚合之后折扣不唯一或者合同价的情况下，返回“-”
-      */
+   * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
+   */
   Discount: string
 
   /**
@@ -614,101 +614,99 @@ export interface BillResourceSummary {
   ReduceType: string
 
   /**
-   * 优惠后总价，单位为元
+   * 优惠后总价
    */
   RealTotalCost: string
 
   /**
-   * 代金券支付金额，单位为元
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
 
   /**
-   * 现金账户支付金额，单位为元
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送账户支付金额，单位为元
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 扩展字段3
+      * 分成金账户支出：通过分成金账户支付的金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransferPayAmount?: string
+
+  /**
+   * 扩展字段3：产品对应的扩展属性信息，仅在资源账单体现
    */
   ExtendField3: string
 
   /**
-   * 扩展字段4
+   * 扩展字段4：产品对应的扩展属性信息，仅在资源账单体现
    */
   ExtendField4: string
 
   /**
-   * 扩展字段5
+   * 扩展字段5：产品对应的扩展属性信息，仅在资源账单体现
    */
   ExtendField5: string
 
   /**
-      * Tag 信息
+      * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<BillTagInfo>
 
   /**
-   * 付款方uin
+   * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
    */
   PayerUin: string
 
   /**
-   * 资源所有者uin,无值则返回"-"
+   * 使用者UIN：实际使用资源的账号 ID
    */
   OwnerUin: string
 
   /**
-   * 操作者uin,无值则返回"-"
+   * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
    */
   OperateUin: string
 
   /**
-   * 产品名称代码
+   * 产品编码
    */
   BusinessCode: string
 
   /**
-   * 子产品名称代码
+   * 子产品编码
    */
   ProductCode: string
 
   /**
-   * 区域ID
+   * 地域ID
    */
   RegionId: number
 
   /**
-      * 资源包、预留实例、节省计划、竞价实例这四类特殊实例本身的扣费行为，此字段体现对应的实例类型。枚举值如下：
-
-ri=Standard RI
-
-svp=Savings Plan
-
-si=Spot Instances
-
-rp=Resource Pack
-      */
+   * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
+   */
   InstanceType: string
 
   /**
-   * 按组件原价的口径换算的预留实例抵扣金额
+   * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
    */
   OriginalCostWithRI: string
 
   /**
-   * 节省计划抵扣的SP包面值
+   * 节省计划抵扣金额（已废弃）
    */
-  SPDeduction: string
+  SPDeduction?: string
 
   /**
-   * 按组件原价的口径换算的节省计划抵扣金额
+   * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
    */
   OriginalCostWithSP: string
 }
@@ -848,21 +846,22 @@ export interface Conditions {
  */
 export interface DescribeBillSummaryByProductResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
-   */
-  Ready: number
+      * 数据是否准备好，0未准备好，1准备好。
+Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+      */
+  Ready?: number
 
   /**
       * 总花费详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryTotal: BusinessSummaryTotal
+  SummaryTotal?: BusinessSummaryTotal
 
   /**
       * 各产品花费分布
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryOverview: Array<BusinessSummaryOverviewItem>
+  SummaryOverview?: Array<BusinessSummaryOverviewItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -890,15 +889,16 @@ export interface BillTagInfo {
  */
 export interface DescribeBillSummaryByRegionResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
-   */
-  Ready: number
+      * 数据是否准备好，0未准备好，1准备好
+Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+      */
+  Ready?: number
 
   /**
       * 各地域花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryOverview: Array<RegionSummaryOverviewItem>
+  SummaryOverview?: Array<RegionSummaryOverviewItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1232,14 +1232,9 @@ export interface RegionSummaryOverviewItem {
   RegionId: string
 
   /**
-   * 地域名称
+   * 地域名称：资源所属地域，例如华南地区（广州）
    */
   RegionName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
 
   /**
    * 费用所占百分比，两位小数
@@ -1247,19 +1242,29 @@ export interface RegionSummaryOverviewItem {
   RealTotalCostRatio: string
 
   /**
-   * 现金金额
+   * 优惠后总价
+   */
+  RealTotalCost: string
+
+  /**
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
+
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
 
   /**
    * 账单月份，格式2019-08
@@ -1270,11 +1275,6 @@ export interface RegionSummaryOverviewItem {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost: string
-
-  /**
-   * 分成金金额
-   */
-  TransferPayAmount: string
 }
 
 /**
@@ -1543,20 +1543,15 @@ export interface DescribeCostSummaryByRegionRequest {
  */
 export interface BusinessSummaryOverviewItem {
   /**
-      * 产品名称代码
+      * 产品编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BusinessCode: string
 
   /**
-   * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
+   * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
    */
   BusinessCodeName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
 
   /**
    * 费用所占百分比，两位小数
@@ -1564,19 +1559,29 @@ export interface BusinessSummaryOverviewItem {
   RealTotalCostRatio: string
 
   /**
-   * 现金金额
+   * 优惠后总价
+   */
+  RealTotalCost: string
+
+  /**
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
+
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
 
   /**
    * 账单月份，格式2019-08
@@ -1587,11 +1592,6 @@ export interface BusinessSummaryOverviewItem {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost: string
-
-  /**
-   * 分成金金额
-   */
-  TransferPayAmount: string
 }
 
 /**
@@ -1599,57 +1599,57 @@ export interface BusinessSummaryOverviewItem {
  */
 export interface BillDetailComponent {
   /**
-   * 组件类型:资源组件类型的名称，如内存、硬盘等
+   * 组件类型：用户购买的产品或服务对应的组件大类，例如：云服务器 CVM 的组件：CPU、内存等
    */
   ComponentCodeName: string
 
   /**
-   * 组件名称:资源组件的名称，如云数据库MySQL-内存等
+   * 组件名称：用户购买的产品或服务，所包含的具体组件
    */
   ItemCodeName: string
 
   /**
-   * 组件刊例价:资源组件的原始价格，保持原始粒度
+   * 组件刊例价：组件的官网原始单价（如果客户享受一口价/合同价则默认不展示）
    */
   SinglePrice: string
 
   /**
-   * 组件指定价
+   * 组件指定价（已废弃）
    */
-  SpecifiedPrice: string
+  SpecifiedPrice?: string
 
   /**
-   * 价格单位
+   * 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位
    */
   PriceUnit: string
 
   /**
-   * 组件用量
+   * 组件用量：该组件实际结算用量，组件用量 = 组件原始用量 - 抵扣用量（含资源包
    */
   UsedAmount: string
 
   /**
-   * 组件用量单位
+   * 组件用量单位：组件用量对应的单位
    */
   UsedAmountUnit: string
 
   /**
-   * 使用时长
+   * 使用时长：资源使用的时长
    */
   TimeSpan: string
 
   /**
-   * 时长单位
+   * 时长单位：资源使用时长的单位
    */
   TimeUnitName: string
 
   /**
-   * 组件原价
+   * 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
    */
   Cost: string
 
   /**
-   * 折扣率，本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
+   * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
    */
   Discount: string
 
@@ -1659,81 +1659,87 @@ export interface BillDetailComponent {
   ReduceType: string
 
   /**
-   * 优惠后总价
+   * 优惠后总价：优惠后总价=（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
    */
   RealCost: string
 
   /**
-   * 代金券支付金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
 
   /**
-   * 现金支付金额
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送账户支付金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-      * 组件类型代码
+      * 分成金账户支出：通过分成金账户支付的金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransferPayAmount?: string
+
+  /**
+      * 组件类型编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ItemCode: string
 
   /**
-      * 组件名称代码
+      * 组件名称编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ComponentCode: string
 
   /**
-      * 组件单价
+      * 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContractPrice: string
 
   /**
-      * 资源包、预留实例、节省计划、竞价实例这四类特殊实例本身的扣费行为，此字段体现对应的实例类型。枚举值如下：
+      * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: string
 
   /**
-      * 预留实例抵扣的使用时长，时长单位与被抵扣的时长单位保持一致
+      * 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RiTimeSpan: string
 
   /**
-      * 预留实例抵扣组件原价，本产品或服务使用预留实例抵扣的组件原价金额
+      * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalCostWithRI: string
 
   /**
-      * 节省计划抵扣率，节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
+      * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SPDeductionRate: string
 
   /**
-      * 节省计划抵扣金额，节省计划抵扣的SP包面值
+      * 节省计划抵扣金额（已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SPDeduction: string
+  SPDeduction?: string
 
   /**
-      * 节省计划抵扣组件原价，节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
+      * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginalCostWithSP: string
 
   /**
-      * 混合折扣率，综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
+      * 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BlendedDiscount: string
@@ -1923,7 +1929,7 @@ export interface DescribeBillResourceSummaryResponse {
   ResourceSummarySet?: Array<BillResourceSummary>
 
   /**
-      * 资源汇总列表总数
+      * 资源汇总列表总数，入参NeedRecordNum为0时不返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Total?: number
@@ -1939,19 +1945,14 @@ export interface DescribeBillResourceSummaryResponse {
  */
 export interface ActionSummaryOverviewItem {
   /**
-   * 交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型
+   * 交易类型编码
    */
   ActionType: string
 
   /**
-   * 交易类型名称
+   * 交易类型：如包年包月新购、包年包月续费、按量计费扣费等类型
    */
   ActionTypeName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
 
   /**
    * 费用所占百分比，两位小数
@@ -1959,19 +1960,30 @@ export interface ActionSummaryOverviewItem {
   RealTotalCostRatio: string
 
   /**
-   * 现金金额
+   * 优惠后总价
+   */
+  RealTotalCost: string
+
+  /**
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
+
+  /**
+      * 分成金账户支出：通过分成金账户支付的金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransferPayAmount?: string
 
   /**
    * 账单月份，格式2019-08
@@ -1982,12 +1994,6 @@ export interface ActionSummaryOverviewItem {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost: string
-
-  /**
-      * 分成金金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TransferPayAmount?: string
 }
 
 /**
@@ -2187,7 +2193,7 @@ export interface DescribeDealsByCondRequest {
  */
 export interface DescribeBillResourceSummaryRequest {
   /**
-   * 偏移量
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
    */
   Offset: number
 
@@ -2197,7 +2203,7 @@ export interface DescribeBillResourceSummaryRequest {
   Limit: number
 
   /**
-   * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
+   * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份
    */
   Month: string
 
@@ -2213,33 +2219,35 @@ export interface DescribeBillResourceSummaryRequest {
   NeedRecordNum?: number
 
   /**
-      * 查询交易类型，如下：
+      * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
 包年包月新购
 包年包月续费
 包年包月配置变更
-包年包月退款
-按量计费扣费
-按量计费小时结
-按量计费日结
-按量计费月结
-线下项目扣费
-线下产品扣费
-调账扣费
-调账补偿
-竞价实例小时结
-线下项目调账补偿
-线下产品调账补偿
-优惠扣费
-优惠补偿
-按量计费迁入资源
-按量计费迁出资源
-包年包月迁入资源
-包年包月迁出资源
-预付费用
-小时费用
-预留实例退款
-按量计费冲正
-包年包月转按量
+包年包月退款 
+按量计费扣费 
+线下项目扣费 
+线下产品扣费 
+调账扣费 
+调账补偿 
+按量计费小时结 
+按量计费日结 
+按量计费月结 
+竞价实例小时结 
+线下项目调账补偿 
+线下产品调账补偿 
+优惠扣费 
+优惠补偿 
+按量计费迁入资源 
+按量计费迁出资源 
+包年包月迁入资源 
+包年包月迁出资源 
+预付费用 
+小时费用 
+预留实例退款 
+按量计费冲正 
+包年包月转按量 
+保底扣款 
+节省计划小时费用
       */
   ActionType?: string
 
@@ -2378,7 +2386,7 @@ export interface PayDealsResponse {
  */
 export interface SummaryTotal {
   /**
-      * 总数
+      * 优惠后总价
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RealTotalCost: string
@@ -2395,27 +2403,27 @@ export interface SummaryTotal {
  */
 export interface BillDetail {
   /**
-   * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
+   * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
    */
   BusinessCodeName: string
 
   /**
-   * 子产品名称：云产品子类，如云服务器CVM-标准型S1
+   * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
    */
   ProductCodeName: string
 
   /**
-   * 计费模式：包年包月和按量计费
+   * 计费模式：资源的计费模式，区分为包年包月和按量计费
    */
   PayModeName: string
 
   /**
-   * 项目:资源所属项目
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
    */
   ProjectName: string
 
   /**
-   * 区域：资源所属地域，如华南地区（广州）
+   * 地域：资源所属地域，如华南地区（广州）
    */
   RegionName: string
 
@@ -2425,42 +2433,42 @@ export interface BillDetail {
   ZoneName: string
 
   /**
-   * 资源实例ID
+   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
    */
   ResourceId: string
 
   /**
-   * 实例名称
+   * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
    */
   ResourceName: string
 
   /**
-   * 交易类型
+   * 交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型
    */
   ActionTypeName: string
 
   /**
-   * 订单ID
+   * 订单ID：包年包月计费模式下订购的订单号
    */
   OrderId: string
 
   /**
-   * 交易ID
+   * 交易ID：结算扣费单号
    */
   BillId: string
 
   /**
-   * 扣费时间
+   * 扣费时间：结算扣费时间
    */
   PayTime: string
 
   /**
-   * 开始使用时间
+   * 开始使用时间：产品服务开始使用时间
    */
   FeeBeginTime: string
 
   /**
-   * 结束使用时间
+   * 结束使用时间：产品服务结束使用时间
    */
   FeeEndTime: string
 
@@ -2470,52 +2478,52 @@ export interface BillDetail {
   ComponentSet: Array<BillDetailComponent>
 
   /**
-   * 支付者UIN
+   * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
    */
   PayerUin: string
 
   /**
-   * 使用者UIN
+   * 使用者UIN：实际使用资源的账号 ID
    */
   OwnerUin: string
 
   /**
-   * 操作者UIN
+   * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
    */
   OperateUin: string
 
   /**
-      * Tag 信息
+      * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<BillTagInfo>
 
   /**
-      * 产品名称代码
+      * 产品编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BusinessCode: string
 
   /**
-      * 子产品名称代码
+      * 子产品编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProductCode: string
 
   /**
-      * 交易类型代码
+      * 交易类型编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ActionType: string
 
   /**
-      * 区域ID
+      * 地域ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RegionId: string
 
   /**
-   * 项目ID:资源所属项目ID
+   * 项目ID
    */
   ProjectId: number
 
@@ -2531,8 +2539,9 @@ export interface BillDetail {
  */
 export interface DescribeBillSummaryByTagResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
-   */
+      * 数据是否准备好，0未准备好，1准备好
+Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+      */
   Ready?: number
 
   /**
@@ -2564,46 +2573,46 @@ export interface TagSummaryOverviewItem {
   TagValue: string
 
   /**
-      * 实际花费
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RealTotalCost: string
-
-  /**
       * 费用所占百分比，两位小数
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RealTotalCostRatio: string
 
   /**
-      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      * 优惠后总价
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCost: string
+  RealTotalCost: string
 
   /**
-      * 现金金额
+      * 现金账户支出：通过现金账户支付的金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CashPayAmount: string
 
   /**
-      * 赠送金金额
+      * 赠送账户支出：使用赠送金支付的金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IncentivePayAmount: string
 
   /**
-      * 代金券金额
+      * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VoucherPayAmount: string
 
   /**
-      * 分成金金额
+      * 分成金账户支出：通过分成金账户支付的金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TransferPayAmount: string
+
+  /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCost: string
 }
 
 /**
@@ -3028,15 +3037,16 @@ export interface DescribeBillSummaryByProjectRequest {
  */
 export interface DescribeBillSummaryByProjectResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
-   */
-  Ready: number
+      * 数据是否准备好，0未准备好，1准备好
+Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+      */
+  Ready?: number
 
   /**
       * 各项目花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SummaryOverview: Array<ProjectSummaryOverviewItem>
+  SummaryOverview?: Array<ProjectSummaryOverviewItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3162,23 +3172,18 @@ export interface ExcludedProducts {
 }
 
 /**
- * 按付费模式汇总消费详情
+ * 按计费模式汇总消费详情
  */
 export interface PayModeSummaryOverviewItem {
   /**
-   * 付费模式
+   * 计费模式编码
    */
   PayMode: string
 
   /**
-   * 付费模式名称
+   * 计费模式：区分为包年包月和按量计费
    */
   PayModeName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
 
   /**
    * 费用所占百分比，两位小数
@@ -3186,24 +3191,29 @@ export interface PayModeSummaryOverviewItem {
   RealTotalCostRatio: string
 
   /**
-   * 按交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型汇总消费详情
+   * 优惠后总价
    */
-  Detail: Array<ActionSummaryOverviewItem>
+  RealTotalCost: string
 
   /**
-   * 现金金额
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
+
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
 
   /**
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
@@ -3211,9 +3221,9 @@ export interface PayModeSummaryOverviewItem {
   TotalCost: string
 
   /**
-   * 分成金金额
+   * 按交易类型汇总消费详情
    */
-  TransferPayAmount: string
+  Detail: Array<ActionSummaryOverviewItem>
 }
 
 /**
@@ -3221,34 +3231,35 @@ export interface PayModeSummaryOverviewItem {
  */
 export interface BusinessSummaryTotal {
   /**
-   * 总花费
-   */
+      * 优惠后总价
+
+      */
   RealTotalCost: string
 
   /**
-   * 代金券金额
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
   VoucherPayAmount: string
 
   /**
-   * 赠送金金额
+   * 赠送账户支出：使用赠送金支付的金额
    */
   IncentivePayAmount: string
 
   /**
-   * 现金金额
+   * 现金账户支出：通过现金账户支付的金额
    */
   CashPayAmount: string
+
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
 
   /**
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost: string
-
-  /**
-   * 分成金金额
-   */
-  TransferPayAmount: string
 }
 
 /**

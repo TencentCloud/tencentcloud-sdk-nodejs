@@ -1666,7 +1666,7 @@ LimitTypes取值范围：
         return this.request("CreateAddressTemplate", req, cb);
     }
     /**
-     * 创建 Server端
+     * 本接口（CreateVpnGatewaySslServer）用于创建SSL-VPN Server端。
      */
     async CreateVpnGatewaySslServer(req, cb) {
         return this.request("CreateVpnGatewaySslServer", req, cb);

@@ -8692,6 +8692,13 @@ export interface EditMediaVideoStream {
 默认值：0。
       */
   Height?: number
+
+  /**
+      * 视频帧率，取值范围：[0, 100]，单位：Hz。
+当取值为0，将自动为视频设置帧率。
+默认值为 0。
+      */
+  Fps?: number
 }
 
 /**

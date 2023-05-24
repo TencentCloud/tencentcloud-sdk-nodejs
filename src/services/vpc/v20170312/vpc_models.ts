@@ -706,7 +706,7 @@ export interface DeleteVpnGatewaySslServerResponse {
   /**
    * 异步任务ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1573,62 +1573,62 @@ export interface CreateDirectConnectGatewayRequest {
  */
 export interface CreateVpnGatewaySslServerRequest {
   /**
-   * VPN实例ID
+   * VPN网关实例ID。
    */
   VpnGatewayId: string
 
   /**
-   * SSL_VPN_SERVER 实例名
+   * SSL-VPN-SERVER 实例名称，长度不超过60个字节。
    */
   SslVpnServerName: string
 
   /**
-   * 本端地址网段
+   * 云端地址（CIDR）列表。
    */
   LocalAddress: Array<string>
 
   /**
-   * 客户端地址网段
+   * 客户端地址网段。
    */
   RemoteAddress: string
 
   /**
-   * SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP
+   * SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。
    */
   SslVpnProtocol?: string
 
   /**
-   * SSL VPN服务端监听协议端口。默认1194。
+   * SSL VPN服务端监听协议端口，默认1194。
    */
   SslVpnPort?: number
 
   /**
-   * 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE
+   * 认证算法。可选 'SHA1', 'MD5', 'NONE'，默认NONE。
    */
   IntegrityAlgorithm?: string
 
   /**
-   * 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE
+   * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 'NONE'，默认NONE。
    */
   EncryptAlgorithm?: string
 
   /**
-   * 是否支持压缩。当前仅支持不支持压缩。默认False
+   * 是否支持压缩。当前仅支持不支持压缩，默认False。
    */
   Compress?: boolean
 
   /**
-   * 是否开启SSO认证
+   * 是否开启SSO认证。默认为False
    */
   SsoEnabled?: boolean
 
   /**
-   * 是否开启策略访问控制
+   * 是否开启策略访问控制。默认为False
    */
   AccessPolicyEnabled?: boolean
 
   /**
-   * SAML-DATA
+   * SAML-DATA，开启SSO时传。
    */
   SamlData?: string
 }
@@ -5936,14 +5936,14 @@ export interface ModifyBandwidthPackageAttributeResponse {
  */
 export interface CreateVpnGatewaySslServerResponse {
   /**
-   * 创建SSL-VPN server 异步任务ID
+   * 创建SSL-VPN server 异步任务ID。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
-   * SSL-VPN server 唯一ID
+   * SSL-VPN-SERVER 唯一ID。
    */
-  SslVpnServerId: string
+  SslVpnServerId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10377,7 +10377,7 @@ export interface DescribeCrossBorderFlowMonitorRequest {
   CcnUin: string
 
   /**
-   * 时间粒度。
+   * 时间粒度。单位为:秒，如60为60s的时间粒度
    */
   Period: number
 

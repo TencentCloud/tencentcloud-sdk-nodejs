@@ -3360,7 +3360,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 创建 Server端
+   * 本接口（CreateVpnGatewaySslServer）用于创建SSL-VPN Server端。
    */
   async CreateVpnGatewaySslServer(
     req: CreateVpnGatewaySslServerRequest,
