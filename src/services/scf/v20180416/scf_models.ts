@@ -2014,42 +2014,43 @@ export interface PublishVersionResponse {
   /**
    * 函数的版本
    */
-  FunctionVersion: string
+  FunctionVersion?: string
 
   /**
    * 代码大小
    */
-  CodeSize: number
+  CodeSize?: number
 
   /**
    * 最大可用内存
    */
-  MemorySize: number
+  MemorySize?: number
 
   /**
    * 函数的描述
    */
-  Description: string
+  Description?: string
 
   /**
    * 函数的入口
    */
-  Handler: string
+  Handler?: string
 
   /**
    * 函数的超时时间
    */
-  Timeout: number
+  Timeout?: number
 
   /**
-   * 函数的运行环境
-   */
-  Runtime: string
+      * 函数的运行环境
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Runtime?: string
 
   /**
    * 函数的命名空间
    */
-  Namespace: string
+  Namespace?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2489,8 +2490,9 @@ export interface GetFunctionResponse {
   MemorySize?: number
 
   /**
-   * 函数的运行环境
-   */
+      * 函数的运行环境
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Runtime?: string
 
   /**
@@ -3504,8 +3506,9 @@ export interface Function {
   AddTime: string
 
   /**
-   * 运行时
-   */
+      * 运行时
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Runtime: string
 
   /**

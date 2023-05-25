@@ -2722,7 +2722,7 @@ export interface StartSyncJobResponse {
  */
 export interface Objects {
     /**
-      * 迁移对象类型 Partial(部分对象)
+      * 同步对象类型 Partial(部分对象)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mode?: string;

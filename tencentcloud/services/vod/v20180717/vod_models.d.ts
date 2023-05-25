@@ -1548,6 +1548,24 @@ export interface RoundPlayInfo {
       * 轮播播单描述信息，长度限制：256 个字符。
       */
     Desc: string;
+    /**
+      * 播放状态，可选值：
+<li>Enabled：启动状态；</li>
+<li>Disabled：停止状态。</li>
+默认值：Enabled。
+      */
+    Status?: string;
+    /**
+      * 播放模式，可选值：
+<li>Loop：循环播放播单；</li>
+<li>Linear：单次播放，播单播放完停止播放。</li>
+默认值：Loop。
+      */
+    PlayBackMode?: string;
+    /**
+      * 轮播播放地址。
+      */
+    Url?: string;
 }
 /**
  * DescribeLicenseUsageData返回参数结构体
@@ -5353,6 +5371,18 @@ export interface ModifyRoundPlayRequest {
       * 轮播播单描述信息，长度限制：256 个字符。
       */
     Desc?: string;
+    /**
+      * 播放状态，可选值：
+<li>Disabled：结束播放，结束后轮播任务不能再次启动。</li>
+
+      */
+    Status?: string;
+    /**
+      * 播放模式，可选值：
+<li>Loop：循环播放播单；</li>
+<li>Linear：单次播放，播单播放完停止播放。</li>
+      */
+    PlayBackMode?: string;
 }
 /**
  * 图片水印模板输入参数
@@ -10937,6 +10967,13 @@ export interface CreateRoundPlayRequest {
       * 轮播播单描述信息，长度限制：256 个字符。
       */
     Desc?: string;
+    /**
+      * 播放模式，可选值：
+<li>Loop：循环播放播单；</li>
+<li>Linear：单次播放，播单播放完停止播放。</li>
+默认值：Loop。
+      */
+    PlayBackMode?: string;
 }
 /**
  * 音视频审核涉及令人反感的信息的任务结果类型

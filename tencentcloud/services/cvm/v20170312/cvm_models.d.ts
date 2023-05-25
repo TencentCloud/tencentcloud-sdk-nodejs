@@ -808,6 +808,10 @@ export interface InstanceTypeConfig {
       * FPGA核数，单位：核。
       */
     FPGA: number;
+    /**
+      * 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。
+      */
+    GpuCount: number;
 }
 /**
  * RepairTaskControl请求参数结构体
@@ -1352,7 +1356,7 @@ export interface ModifyImageAttributeRequest {
       */
     ImageId: string;
     /**
-      * 设置新的镜像名称；必须满足下列限制：<br> <li> 不得超过20个字符。<br> <li> 镜像名称不能与已有镜像重复。
+      * 设置新的镜像名称；必须满足下列限制：<br> <li> 不得超过60个字符。<br> <li> 镜像名称不能与已有镜像重复。
       */
     ImageName?: string;
     /**
@@ -2335,11 +2339,11 @@ export interface DescribeReservedInstancesResponse {
     /**
       * 符合条件的预留实例计费数量。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 符合条件的预留实例计费列表。
       */
-    ReservedInstancesSet: Array<ReservedInstances>;
+    ReservedInstancesSet?: Array<ReservedInstances>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

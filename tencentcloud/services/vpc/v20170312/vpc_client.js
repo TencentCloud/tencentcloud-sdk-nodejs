@@ -1163,7 +1163,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachNetworkInterface", req, cb);
     }
     /**
-     * 查询SSL-VPN-CLIENT 列表
+     * 本接口（DescribeVpnGatewaySslClients）用于查询SSL-VPN-CLIENT 列表。
      */
     async DescribeVpnGatewaySslClients(req, cb) {
         return this.request("DescribeVpnGatewaySslClients", req, cb);

@@ -813,7 +813,7 @@ export declare class Client extends AbstractClient {
      */
     AttachNetworkInterface(req: AttachNetworkInterfaceRequest, cb?: (error: string, rep: AttachNetworkInterfaceResponse) => void): Promise<AttachNetworkInterfaceResponse>;
     /**
-     * 查询SSL-VPN-CLIENT 列表
+     * 本接口（DescribeVpnGatewaySslClients）用于查询SSL-VPN-CLIENT 列表。
      */
     DescribeVpnGatewaySslClients(req: DescribeVpnGatewaySslClientsRequest, cb?: (error: string, rep: DescribeVpnGatewaySslClientsResponse) => void): Promise<DescribeVpnGatewaySslClientsResponse>;
     /**

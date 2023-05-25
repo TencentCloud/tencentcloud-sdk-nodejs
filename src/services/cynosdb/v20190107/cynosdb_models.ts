@@ -76,6 +76,21 @@ export interface InquirePriceRenewRequest {
 }
 
 /**
+ * DescribeAccountPrivileges返回参数结构体
+ */
+export interface DescribeAccountPrivilegesResponse {
+  /**
+   * 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
+   */
+  Privileges: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。
  */
 export interface InstanceAuditRule {
@@ -290,6 +305,21 @@ export interface BillingResourceInfo {
 }
 
 /**
+ * ModifyClusterPasswordComplexity返回参数结构体
+ */
+export interface ModifyClusterPasswordComplexityResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyBackupName返回参数结构体
  */
 export interface ModifyBackupNameResponse {
@@ -405,24 +435,13 @@ export interface SwitchClusterZoneResponse {
 }
 
 /**
- * 修改的实例参数信息
+ * DescribeClusterPasswordComplexity请求参数结构体
  */
-export interface ModifyParamItem {
+export interface DescribeClusterPasswordComplexityRequest {
   /**
-   * 参数名
+   * 集群ID
    */
-  ParamName: string
-
-  /**
-   * 参数当前值
-   */
-  CurrentValue: string
-
-  /**
-      * 参数旧值（只在出参时有用）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OldValue?: string
+  ClusterId: string
 }
 
 /**
@@ -486,6 +505,31 @@ export interface ModifyInstanceNameRequest {
 }
 
 /**
+ * ModifyClusterDatabase返回参数结构体
+ */
+export interface ModifyClusterDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradeClusterVersion返回参数结构体
+ */
+export interface UpgradeClusterVersionResponse {
+  /**
+   * 异步任务id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -501,13 +545,18 @@ export interface DescribeDBSecurityGroupsResponse {
 }
 
 /**
- * DescribeMaintainPeriod请求参数结构体
+ * CloseWan返回参数结构体
  */
-export interface DescribeMaintainPeriodRequest {
+export interface CloseWanResponse {
   /**
-   * 实例ID
+   * 任务流ID
    */
-  InstanceId: string
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -540,6 +589,16 @@ export interface DescribeBinlogsResponse {
       */
   Binlogs: Array<BinlogItem>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteParamTemplate返回参数结构体
+ */
+export interface DeleteParamTemplateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -680,6 +739,66 @@ export interface ModifyClusterNameResponse {
 }
 
 /**
+ * 实例慢查询信息
+ */
+export interface SlowQueriesItem {
+  /**
+   * 执行时间戳
+   */
+  Timestamp: number
+
+  /**
+   * 执行时长，单位秒
+   */
+  QueryTime: number
+
+  /**
+   * sql语句
+   */
+  SqlText: string
+
+  /**
+   * 客户端host
+   */
+  UserHost: string
+
+  /**
+   * 用户名
+   */
+  UserName: string
+
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 锁时长，单位秒
+   */
+  LockTime: number
+
+  /**
+   * 扫描行数
+   */
+  RowsExamined: number
+
+  /**
+   * 返回行数
+   */
+  RowsSent: number
+
+  /**
+   * sql模版
+   */
+  SqlTemplate: string
+
+  /**
+   * sql语句md5
+   */
+  SqlMd5: string
+}
+
+/**
  * DescribeClusterParams返回参数结构体
  */
 export interface DescribeClusterParamsResponse {
@@ -698,6 +817,16 @@ export interface DescribeClusterParamsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CloseWan请求参数结构体
+ */
+export interface CloseWanRequest {
+  /**
+   * 实例组id
+   */
+  InstanceGrpId: string
 }
 
 /**
@@ -852,6 +981,36 @@ export interface DescribeParamTemplatesRequest {
 }
 
 /**
+ * CopyClusterPasswordComplexity返回参数结构体
+ */
+export interface CopyClusterPasswordComplexityResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey: string
+
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * DescribeAuditLogs返回参数结构体
  */
 export interface DescribeAuditLogsResponse {
@@ -870,6 +1029,26 @@ export interface DescribeAuditLogsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInstanceParams请求参数结构体
+ */
+export interface DescribeInstanceParamsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 实例ID，支持批量查询
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 参数名搜索条件，支持模糊匹配
+   */
+  ParamKeyword?: string
 }
 
 /**
@@ -901,24 +1080,39 @@ all：返回 view 和表
 }
 
 /**
- * PauseServerless请求参数结构体
+ * DeleteParamTemplate请求参数结构体
  */
-export interface PauseServerlessRequest {
+export interface DeleteParamTemplateRequest {
+  /**
+   * 参数模版ID
+   */
+  TemplateId: number
+}
+
+/**
+ * DescribeClusterDetailDatabases请求参数结构体
+ */
+export interface DescribeClusterDetailDatabasesRequest {
   /**
    * 集群ID
    */
   ClusterId: string
 
   /**
-   * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
+   * 偏移量，默认0
    */
-  ForcePause?: number
-}
+  Offset?: number
 
-/**
- * 参数是否可修改的详细信息
- */
-export type ModifiableInfo = null
+  /**
+   * 返回数量，默认20,最大100
+   */
+  Limit?: number
+
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+}
 
 /**
  * DescribeFlow返回参数结构体
@@ -1071,6 +1265,37 @@ export interface SetRenewFlagRequest {
 }
 
 /**
+ * OfflineCluster请求参数结构体
+ */
+export interface OfflineClusterRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
+
+/**
+ * DescribeClusterDetailDatabases返回参数结构体
+ */
+export interface DescribeClusterDetailDatabasesResponse {
+  /**
+      * 数据库信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbInfos: Array<DbInfo>
+
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例组信息
  */
 export interface CynosdbInstanceGrp {
@@ -1184,63 +1409,18 @@ export interface CynosdbInstanceGrp {
 }
 
 /**
- * 实例慢查询信息
+ * CreateParamTemplate返回参数结构体
  */
-export interface SlowQueriesItem {
+export interface CreateParamTemplateResponse {
   /**
-   * 执行时间戳
+   * 模版ID
    */
-  Timestamp: number
+  TemplateId: number
 
   /**
-   * 执行时长，单位秒
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  QueryTime: number
-
-  /**
-   * sql语句
-   */
-  SqlText: string
-
-  /**
-   * 客户端host
-   */
-  UserHost: string
-
-  /**
-   * 用户名
-   */
-  UserName: string
-
-  /**
-   * 数据库名
-   */
-  Database: string
-
-  /**
-   * 锁时长，单位秒
-   */
-  LockTime: number
-
-  /**
-   * 扫描行数
-   */
-  RowsExamined: number
-
-  /**
-   * 返回行数
-   */
-  RowsSent: number
-
-  /**
-   * sql模版
-   */
-  SqlTemplate: string
-
-  /**
-   * sql语句md5
-   */
-  SqlMd5: string
+  RequestId?: string
 }
 
 /**
@@ -1481,18 +1661,13 @@ export interface ModifyClusterStorageResponse {
 }
 
 /**
- * DescribeInstanceDetail返回参数结构体
+ * CloseClusterPasswordComplexity请求参数结构体
  */
-export interface DescribeInstanceDetailResponse {
+export interface CloseClusterPasswordComplexityRequest {
   /**
-   * 实例详情
+   * 集群ID数组
    */
-  Detail: CynosdbInstanceDetail
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ClusterIds: Array<string>
 }
 
 /**
@@ -1704,11 +1879,26 @@ export interface SwitchClusterZoneRequest {
 }
 
 /**
- * RestartInstance请求参数结构体
+ * 实例参数信息
  */
-export interface RestartInstanceRequest {
+export interface InstanceParamItem {
   /**
-   * 实例id
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例参数列表
+   */
+  ParamsItems: Array<ParamItemDetail>
+}
+
+/**
+ * DescribeInstanceDetail请求参数结构体
+ */
+export interface DescribeInstanceDetailRequest {
+  /**
+   * 实例ID
    */
   InstanceId: string
 }
@@ -1816,18 +2006,13 @@ export interface UpgradeInstanceRequest {
 }
 
 /**
- * 回档数据库及表
+ * ModifyMaintainPeriodConfig返回参数结构体
  */
-export interface RollbackTable {
+export interface ModifyMaintainPeriodConfigResponse {
   /**
-   * 数据库名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Database: string
-
-  /**
-   * 数据库表
-   */
-  Tables: Array<RollbackTableInfo>
+  RequestId?: string
 }
 
 /**
@@ -1886,18 +2071,33 @@ export interface DeleteBackupResponse {
 }
 
 /**
- * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ * ModifyInstanceParam请求参数结构体
  */
-export interface Tag {
+export interface ModifyInstanceParamRequest {
   /**
-   * 标签键
+   * 集群ID
    */
-  TagKey: string
+  ClusterId: string
 
   /**
-   * 标签值
+   * 实例ID
    */
-  TagValue: string
+  InstanceIds?: Array<string>
+
+  /**
+   * 集群参数列表
+   */
+  ClusterParamList?: Array<ModifyParamItem>
+
+  /**
+   * 实例参数列表
+   */
+  InstanceParamList?: Array<ModifyParamItem>
+
+  /**
+   * yes：在运维时间窗内修改，no：立即执行（默认值）
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -1951,6 +2151,21 @@ export interface CreateAuditLogFileResponse {
 }
 
 /**
+ * OpenWan返回参数结构体
+ */
+export interface OpenWanResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PauseServerless返回参数结构体
  */
 export interface PauseServerlessResponse {
@@ -1966,13 +2181,113 @@ export interface PauseServerlessResponse {
 }
 
 /**
- * OfflineCluster请求参数结构体
+ * 实例参数详细描述
  */
-export interface OfflineClusterRequest {
+export interface ParamDetail {
   /**
-   * 集群ID
+   * 参数名称
    */
-  ClusterId: string
+  ParamName: string
+
+  /**
+   * 参数类型：integer，enum，float，string，func
+   */
+  ParamType: string
+
+  /**
+   * true-支持"func"，false-不支持公式
+   */
+  SupportFunc: boolean
+
+  /**
+   * 默认值
+   */
+  Default: string
+
+  /**
+   * 参数描述
+   */
+  Description: string
+
+  /**
+   * 参数当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
+   */
+  NeedReboot: number
+
+  /**
+   * 参数容许的最大值
+   */
+  Max: string
+
+  /**
+   * 参数容许的最小值
+   */
+  Min: string
+
+  /**
+      * 参数的可选枚举值。如果为非枚举值，则为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnumValue: Array<string>
+
+  /**
+   * 1：全局参数，0：非全局参数
+   */
+  IsGlobal: number
+
+  /**
+   * 匹配类型，multiVal
+   */
+  MatchType: string
+
+  /**
+   * 匹配目标值，当multiVal时，各个key用，分割
+   */
+  MatchValue: string
+
+  /**
+      * true-为公式，false-非公式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsFunc: boolean
+
+  /**
+      * 参数设置为公式时，Func返回设置的公式内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Func: string
+
+  /**
+      * 参数是否可修改
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifiableInfo: ModifiableInfo
+}
+
+/**
+ * DescribeAuditRuleWithInstanceIds返回参数结构体
+ */
+export interface DescribeAuditRuleWithInstanceIdsResponse {
+  /**
+   * 无
+   */
+  TotalCount: number
+
+  /**
+      * 实例审计规则信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items: Array<InstanceAuditRule>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2119,20 +2434,29 @@ export interface DescribeBinlogDownloadUrlResponse {
 }
 
 /**
- * DescribeAuditRuleWithInstanceIds返回参数结构体
+ * ModifyClusterParam请求参数结构体
  */
-export interface DescribeAuditRuleWithInstanceIdsResponse {
+export interface ModifyClusterParamRequest {
   /**
-   * 无
+   * 集群ID
    */
-  TotalCount: number
+  ClusterId: string
 
   /**
-      * 实例审计规则信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Items: Array<InstanceAuditRule>
+   * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值且不做校验
+   */
+  ParamList: Array<ParamItem>
 
+  /**
+   * 维护期间执行-yes,立即执行-no
+   */
+  IsInMaintainPeriod?: string
+}
+
+/**
+ * DeleteAccounts返回参数结构体
+ */
+export interface DeleteAccountsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2550,6 +2874,52 @@ pause
 }
 
 /**
+ * DescribeClusterPasswordComplexity返回参数结构体
+ */
+export interface DescribeClusterPasswordComplexityResponse {
+  /**
+      * 数据字典参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordDictionary: ParamInfo
+
+  /**
+      * 密码长度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordLength: ParamInfo
+
+  /**
+      * 大小写敏感字符个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordMixedCaseCount: ParamInfo
+
+  /**
+      * 数字个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordNumberCount: ParamInfo
+
+  /**
+      * 密码等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordPolicy: ParamInfo
+
+  /**
+      * 特殊字符个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidatePasswordSpecialCharCount: ParamInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAuditRuleWithInstanceIds请求参数结构体
  */
 export interface DescribeAuditRuleWithInstanceIdsRequest {
@@ -2606,6 +2976,73 @@ export interface ModifyClusterSlaveZoneResponse {
 }
 
 /**
+ * 实例参数信息
+ */
+export interface ParamItemDetail {
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 默认值
+   */
+  Default: string
+
+  /**
+   * 参数的可选枚举值。如果为非枚举值，则为空
+   */
+  EnumValue: Array<string>
+
+  /**
+   * 1：全局参数，0：非全局参数
+   */
+  IsGlobal: number
+
+  /**
+   * 最大值
+   */
+  Max: string
+
+  /**
+   * 最小值
+   */
+  Min: string
+
+  /**
+   * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
+   */
+  NeedReboot: number
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * 参数类型：integer，enum，float，string，func
+   */
+  ParamType: string
+
+  /**
+   * 参数描述
+   */
+  Description: string
+
+  /**
+      * 类型是否为公式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsFunc: boolean
+
+  /**
+      * 参数配置公式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Func: string
+}
+
+/**
  * GrantAccountPrivileges请求参数结构体
  */
 export interface GrantAccountPrivilegesRequest {
@@ -2658,6 +3095,27 @@ export interface BinlogItem {
    * Binlog文件ID
    */
   BinlogId: number
+}
+
+/**
+ * 修改的实例参数信息
+ */
+export interface ModifyParamItem {
+  /**
+   * 参数名
+   */
+  ParamName: string
+
+  /**
+   * 参数当前值
+   */
+  CurrentValue: string
+
+  /**
+      * 参数旧值（只在出参时有用）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldValue?: string
 }
 
 /**
@@ -2962,6 +3420,36 @@ export interface DescribeClustersResponse {
 }
 
 /**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+
+  /**
+   * 日志保留时长。
+   */
+  LogExpireDay: number
+
+  /**
+   * 高频日志保留时长。
+   */
+  HighLogExpireDay?: number
+
+  /**
+   * 审计规则。同RuleTemplateIds都不填是全审计。
+   */
+  AuditRuleFilters?: Array<AuditRuleFilters>
+
+  /**
+   * 规则模版ID。同AuditRuleFilters都不填是全审计。
+   */
+  RuleTemplateIds?: Array<string>
+}
+
+/**
  * 查询过滤器
  */
 export interface QueryFilter {
@@ -3029,11 +3517,26 @@ export interface DescribeBackupConfigResponse {
 }
 
 /**
- * ModifyVipVport返回参数结构体
+ * ModifyBinlogSaveDays请求参数结构体
  */
-export interface ModifyVipVportResponse {
+export interface ModifyBinlogSaveDaysRequest {
   /**
-   * 异步任务id
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * Binlog保留天数
+   */
+  BinlogSaveDays: number
+}
+
+/**
+ * ResumeServerless返回参数结构体
+ */
+export interface ResumeServerlessResponse {
+  /**
+   * 异步流程ID
    */
   FlowId: number
 
@@ -3143,39 +3646,28 @@ export interface Addr {
 }
 
 /**
- * 参数模板信息
+ * PauseServerless请求参数结构体
  */
-export interface ParamTemplateListInfo {
+export interface PauseServerlessRequest {
   /**
-   * 参数模板ID
+   * 集群ID
    */
-  Id: number
+  ClusterId: string
 
   /**
-   * 参数模板名称
+   * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
    */
-  TemplateName: string
+  ForcePause?: number
+}
 
+/**
+ * ModifyParamTemplate返回参数结构体
+ */
+export interface ModifyParamTemplateResponse {
   /**
-   * 参数模板描述
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TemplateDescription: string
-
-  /**
-   * 引擎版本
-   */
-  EngineVersion: string
-
-  /**
-   * 数据库类型，可选值：NORMAL，SERVERLESS
-   */
-  DbMode: string
-
-  /**
-      * 参数模板详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ParamInfoSet: Array<TemplateParamInfo>
+  RequestId?: string
 }
 
 /**
@@ -3344,6 +3836,79 @@ export interface SecurityGroup {
 }
 
 /**
+ * 数据库详细信息
+ */
+export interface DbInfo {
+  /**
+   * 数据库名称
+   */
+  DbName: string
+
+  /**
+   * 字符集类型
+   */
+  CharacterSet: string
+
+  /**
+   * 数据库状态
+   */
+  Status: string
+
+  /**
+   * 拍讯规则
+   */
+  CollateRule: string
+
+  /**
+      * 数据库备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 用户权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserHostPrivileges: Array<UserHostPrivilege>
+
+  /**
+      * 数据库ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbId: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
+
+  /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 集群Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+}
+
+/**
  * DescribeBackupDownloadUrl请求参数结构体
  */
 export interface DescribeBackupDownloadUrlRequest {
@@ -3405,33 +3970,138 @@ export interface OfflineInstanceRequest {
 }
 
 /**
- * OpenAuditService请求参数结构体
+ * ModifyClusterPasswordComplexity请求参数结构体
  */
-export interface OpenAuditServiceRequest {
+export interface ModifyClusterPasswordComplexityRequest {
   /**
-   * 实例ID。
+   * 集群id
    */
-  InstanceId: string
+  ClusterId: string
 
   /**
-   * 日志保留时长。
+   * 密码长度
    */
-  LogExpireDay: number
+  ValidatePasswordLength: number
 
   /**
-   * 高频日志保留时长。
+   * 大小写字符个数
    */
-  HighLogExpireDay?: number
+  ValidatePasswordMixedCaseCount: number
 
   /**
-   * 审计规则。同RuleTemplateIds都不填是全审计。
+   * 特殊字符个数
    */
-  AuditRuleFilters?: Array<AuditRuleFilters>
+  ValidatePasswordSpecialCharCount: number
 
   /**
-   * 规则模版ID。同AuditRuleFilters都不填是全审计。
+   * 数字个数
    */
-  RuleTemplateIds?: Array<string>
+  ValidatePasswordNumberCount: number
+
+  /**
+   * 密码强度（"MEDIUM", "STRONG"）
+   */
+  ValidatePasswordPolicy: string
+
+  /**
+   * 数据字典
+   */
+  ValidatePasswordDictionary?: Array<string>
+}
+
+/**
+ * RevokeAccountPrivileges请求参数结构体
+ */
+export interface RevokeAccountPrivilegesRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 账号信息
+   */
+  Account: InputAccount
+
+  /**
+   * 数据库表权限数组
+   */
+  DbTablePrivileges: Array<string>
+
+  /**
+   * 数据库表信息
+   */
+  DbTables: Array<DbTable>
+}
+
+/**
+ * OpenWan请求参数结构体
+ */
+export interface OpenWanRequest {
+  /**
+   * 实例组id
+   */
+  InstanceGrpId: string
+}
+
+/**
+ * OpenClusterPasswordComplexity返回参数结构体
+ */
+export interface OpenClusterPasswordComplexityResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceDetail返回参数结构体
+ */
+export interface DescribeInstanceDetailResponse {
+  /**
+   * 实例详情
+   */
+  Detail: CynosdbInstanceDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OfflineInstance返回参数结构体
+ */
+export interface OfflineInstanceResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceParam返回参数结构体
+ */
+export interface ModifyInstanceParamResponse {
+  /**
+   * 任务ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3551,6 +4221,21 @@ export interface NetAddr {
 }
 
 /**
+ * CopyClusterPasswordComplexity请求参数结构体
+ */
+export interface CopyClusterPasswordComplexityRequest {
+  /**
+   * 复制集群ID数组
+   */
+  ClusterIds: Array<string>
+
+  /**
+   * 集群id
+   */
+  SourceClusterId: string
+}
+
+/**
  * 参数模板详情
  */
 export interface TemplateParamInfo {
@@ -3654,6 +4339,38 @@ export interface CreateBackupResponse {
 }
 
 /**
+ * 用户主机权限
+ */
+export interface UserHostPrivilege {
+  /**
+   * 授权用户
+   */
+  DbUserName: string
+
+  /**
+      * 客户端ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbHost: string
+
+  /**
+      * 用户权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbPrivilege: string
+}
+
+/**
+ * ModifyAccountPrivileges返回参数结构体
+ */
+export interface ModifyAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRollbackTimeValidity返回参数结构体
  */
 export interface DescribeRollbackTimeValidityResponse {
@@ -3735,6 +4452,16 @@ export interface DescribeInstanceSlowQueriesResponse {
 }
 
 /**
+ * ModifyAccountHost返回参数结构体
+ */
+export interface ModifyAccountHostResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -3788,6 +4515,66 @@ offlined 已下线
    * 实例id列表
    */
   InstanceIds?: Array<string>
+}
+
+/**
+ * OpenReadOnlyInstanceExclusiveAccess请求参数结构体
+ */
+export interface OpenReadOnlyInstanceExclusiveAccessRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 需要开通独有访问的只读实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 指定的vpc ID
+   */
+  VpcId: string
+
+  /**
+   * 指定的子网ID
+   */
+  SubnetId: string
+
+  /**
+   * 端口
+   */
+  Port: number
+
+  /**
+   * 安全组
+   */
+  SecurityGroupIds?: Array<string>
+}
+
+/**
+ * CloseClusterPasswordComplexity返回参数结构体
+ */
+export interface CloseClusterPasswordComplexityResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMaintainPeriod请求参数结构体
+ */
+export interface DescribeMaintainPeriodRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -3868,6 +4655,46 @@ export interface InquirePriceCreateRequest {
    * 时长单位，可选值为：m,d。PREPAID购买类型必传
    */
   TimeUnit?: string
+}
+
+/**
+ * OpenClusterPasswordComplexity请求参数结构体
+ */
+export interface OpenClusterPasswordComplexityRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 密码长度
+   */
+  ValidatePasswordLength: number
+
+  /**
+   * 大小写字符个数
+   */
+  ValidatePasswordMixedCaseCount: number
+
+  /**
+   * 特殊字符个数
+   */
+  ValidatePasswordSpecialCharCount: number
+
+  /**
+   * 数字个数
+   */
+  ValidatePasswordNumberCount: number
+
+  /**
+   * 密码强度（"MEDIUM", "STRONG"）
+   */
+  ValidatePasswordPolicy: string
+
+  /**
+   * 数据字典
+   */
+  ValidatePasswordDictionary?: Array<string>
 }
 
 /**
@@ -3974,6 +4801,31 @@ export interface ExportInstanceSlowQueriesRequest {
    * 文件类型，可选值：csv, original
    */
   FileType?: string
+}
+
+/**
+ * ModifyAccountDescription请求参数结构体
+ */
+export interface ModifyAccountDescriptionRequest {
+  /**
+   * 数据库账号名
+   */
+  AccountName: string
+
+  /**
+   * 数据库账号描述信息
+   */
+  Description: string
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 主机，默认为"%"
+   */
+  Host?: string
 }
 
 /**
@@ -4380,6 +5232,31 @@ export interface SaleZone {
 }
 
 /**
+ * ModifyParamTemplate请求参数结构体
+ */
+export interface ModifyParamTemplateRequest {
+  /**
+   * 模版ID
+   */
+  TemplateId: number
+
+  /**
+   * 模版名
+   */
+  TemplateName?: string
+
+  /**
+   * 模版描述
+   */
+  TemplateDescription?: string
+
+  /**
+   * 参数列表
+   */
+  ParamList?: Array<ModifyParamItem>
+}
+
+/**
  * 任务信息
  */
 export interface ObjectTask {
@@ -4455,43 +5332,68 @@ export interface SwitchProxyVpcResponse {
 }
 
 /**
- * RevokeAccountPrivileges请求参数结构体
+ * DescribeParamTemplateDetail请求参数结构体
  */
-export interface RevokeAccountPrivilegesRequest {
+export interface DescribeParamTemplateDetailRequest {
+  /**
+   * 参数模版ID
+   */
+  TemplateId: number
+}
+
+/**
+ * ModifyAccountHost请求参数结构体
+ */
+export interface ModifyAccountHostRequest {
   /**
    * 集群id
    */
   ClusterId: string
 
   /**
+   * 新主机
+   */
+  NewHost: string
+
+  /**
    * 账号信息
    */
   Account: InputAccount
-
-  /**
-   * 数据库表权限数组
-   */
-  DbTablePrivileges: Array<string>
-
-  /**
-   * 数据库表信息
-   */
-  DbTables: Array<DbTable>
 }
 
 /**
- * ResumeServerless返回参数结构体
+ * CreateParamTemplate请求参数结构体
  */
-export interface ResumeServerlessResponse {
+export interface CreateParamTemplateRequest {
   /**
-   * 异步流程ID
+   * 模版名称
    */
-  FlowId: number
+  TemplateName: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * mysql版本号
    */
-  RequestId?: string
+  EngineVersion: string
+
+  /**
+   * 模版描述
+   */
+  TemplateDescription?: string
+
+  /**
+   * 可选参数，需要复制的模版ID
+   */
+  TemplateId?: number
+
+  /**
+   * 数据库类型，可选值：NORMAL（默认值），SERVERLESS
+   */
+  DbMode?: string
+
+  /**
+   * 参数列表
+   */
+  ParamList?: Array<ParamItem>
 }
 
 /**
@@ -4587,6 +5489,16 @@ export interface DescribeFlowRequest {
 }
 
 /**
+ * RestartInstance请求参数结构体
+ */
+export interface RestartInstanceRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
+
+/**
  * 审计日志文件
  */
 export interface AuditLogFile {
@@ -4628,38 +5540,33 @@ export interface AuditLogFile {
 }
 
 /**
- * OpenReadOnlyInstanceExclusiveAccess请求参数结构体
+ * ModifyAccountPrivileges请求参数结构体
  */
-export interface OpenReadOnlyInstanceExclusiveAccessRequest {
+export interface ModifyAccountPrivilegesRequest {
   /**
-   * 集群ID
+   * 集群id
    */
   ClusterId: string
 
   /**
-   * 需要开通独有访问的只读实例ID
+   * 账号信息
    */
-  InstanceId: string
+  Account: InputAccount
 
   /**
-   * 指定的vpc ID
+   * 全局权限数组
    */
-  VpcId: string
+  GlobalPrivileges?: Array<string>
 
   /**
-   * 指定的子网ID
+   * 数据库权限数组
    */
-  SubnetId: string
+  DatabasePrivileges?: Array<DatabasePrivileges>
 
   /**
-   * 端口
+   * 表权限数组
    */
-  Port: number
-
-  /**
-   * 安全组
-   */
-  SecurityGroupIds?: Array<string>
+  TablePrivileges?: Array<TablePrivileges>
 }
 
 /**
@@ -4728,6 +5635,16 @@ export interface CreateBackupRequest {
 }
 
 /**
+ * CreateClusterDatabase返回参数结构体
+ */
+export interface CreateClusterDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterParamLogs请求参数结构体
  */
 export interface DescribeClusterParamLogsRequest {
@@ -4791,6 +5708,21 @@ export interface Module {
    * 模块名
    */
   ModuleName: string
+}
+
+/**
+ * 回档数据库及表
+ */
+export interface RollbackTable {
+  /**
+   * 数据库名称
+   */
+  Database: string
+
+  /**
+   * 数据库表
+   */
+  Tables: Array<RollbackTableInfo>
 }
 
 /**
@@ -4994,6 +5926,16 @@ export interface ActivateInstanceResponse {
 }
 
 /**
+ * ModifyAccountDescription返回参数结构体
+ */
+export interface ModifyAccountDescriptionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRollbackTimeValidity请求参数结构体
  */
 export interface DescribeRollbackTimeValidityRequest {
@@ -5150,6 +6092,36 @@ export interface AddInstancesRequest {
    * 安全组ID，新建只读实例时可以指定安全组。
    */
   SecurityGroupIds?: Array<string>
+}
+
+/**
+ * ModifyClusterDatabase请求参数结构体
+ */
+export interface ModifyClusterDatabaseRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 数据库名
+   */
+  DbName: string
+
+  /**
+   * 新授权用户主机权限
+   */
+  NewUserHostPrivileges?: Array<UserHostPrivilege>
+
+  /**
+   * 备注
+   */
+  Description?: string
+
+  /**
+   * 历史授权用户主机权限
+   */
+  OldUserHostPrivileges?: Array<UserHostPrivilege>
 }
 
 /**
@@ -5512,6 +6484,26 @@ export interface RuleFilters {
 }
 
 /**
+ * UpgradeClusterVersion请求参数结构体
+ */
+export interface UpgradeClusterVersionRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 内核版本
+   */
+  CynosVersion: string
+
+  /**
+   * 升级时间类型，可选：upgradeImmediate,upgradeInMaintain
+   */
+  UpgradeType: string
+}
+
+/**
  * ExportInstanceSlowQueries返回参数结构体
  */
 export interface ExportInstanceSlowQueriesResponse {
@@ -5520,6 +6512,16 @@ export interface ExportInstanceSlowQueriesResponse {
    */
   FileContent: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteClusterDatabase返回参数结构体
+ */
+export interface DeleteClusterDatabaseResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5863,19 +6865,34 @@ export interface DescribeInstanceErrorLogsRequest {
 }
 
 /**
- * DescribeInstanceDetail请求参数结构体
+ * DeleteClusterDatabase请求参数结构体
  */
-export interface DescribeInstanceDetailRequest {
+export interface DeleteClusterDatabaseRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
-  InstanceId: string
+  ClusterId: string
+
+  /**
+   * 数据库名
+   */
+  DbNames: Array<string>
 }
 
 /**
- * ModifyMaintainPeriodConfig返回参数结构体
+ * 参数是否可修改的详细信息
  */
-export interface ModifyMaintainPeriodConfigResponse {
+export type ModifiableInfo = null
+
+/**
+ * DescribeInstanceParams返回参数结构体
+ */
+export interface DescribeInstanceParamsResponse {
+  /**
+   * 实例参数列表
+   */
+  Items: Array<InstanceParamItem>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5938,6 +6955,21 @@ export interface ModifyBackupNameRequest {
 }
 
 /**
+ * DeleteAccounts请求参数结构体
+ */
+export interface DeleteAccountsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 账号数组，包含account和host
+   */
+  Accounts?: Array<InputAccount>
+}
+
+/**
  * ModifyInstanceName返回参数结构体
  */
 export interface ModifyInstanceNameResponse {
@@ -5973,23 +7005,74 @@ export interface DescribeBinlogSaveDaysResponse {
 }
 
 /**
- * ModifyClusterParam请求参数结构体
+ * DescribeAccountPrivileges请求参数结构体
  */
-export interface ModifyClusterParamRequest {
+export interface DescribeAccountPrivilegesRequest {
   /**
-   * 集群ID
+   * 集群id
    */
   ClusterId: string
 
   /**
-   * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值且不做校验
+   * 账户名
    */
-  ParamList: Array<ParamItem>
+  AccountName: string
 
   /**
-   * 维护期间执行-yes,立即执行-no
+   * 主机
    */
-  IsInMaintainPeriod?: string
+  Host: string
+
+  /**
+   * 数据库名，为*时，忽略Type/TableName, 表示修改用户全局权限；
+   */
+  Db: string
+
+  /**
+   * 指定数据库下的对象类型，可选"table"，"*"
+   */
+  Type: string
+
+  /**
+   * 当Type="table"时，用来指定表名
+   */
+  TableName?: string
+}
+
+/**
+ * 参数模板信息
+ */
+export interface ParamTemplateListInfo {
+  /**
+   * 参数模板ID
+   */
+  Id: number
+
+  /**
+   * 参数模板名称
+   */
+  TemplateName: string
+
+  /**
+   * 参数模板描述
+   */
+  TemplateDescription: string
+
+  /**
+   * 引擎版本
+   */
+  EngineVersion: string
+
+  /**
+   * 数据库类型，可选值：NORMAL，SERVERLESS
+   */
+  DbMode: string
+
+  /**
+      * 参数模板详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamInfoSet: Array<TemplateParamInfo>
 }
 
 /**
@@ -6021,6 +7104,41 @@ export interface ModifyAccountParamsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateClusterDatabase请求参数结构体
+ */
+export interface CreateClusterDatabaseRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 数据库名
+   */
+  DbName: string
+
+  /**
+   * 字符集类型
+   */
+  CharacterSet: string
+
+  /**
+   * 排序规则
+   */
+  CollateRule: string
+
+  /**
+   * 授权用户主机权限
+   */
+  UserHostPrivileges?: Array<UserHostPrivilege>
+
+  /**
+   * 备注
+   */
+  Description?: string
 }
 
 /**
@@ -6236,14 +7354,54 @@ export interface DescribeAccountAllGrantPrivilegesRequest {
 }
 
 /**
- * OfflineInstance返回参数结构体
+ * DescribeParamTemplateDetail返回参数结构体
  */
-export interface OfflineInstanceResponse {
+export interface DescribeParamTemplateDetailResponse {
   /**
-   * 任务流ID
+   * 参数模版ID
    */
-  FlowId: number
+  TemplateId: number
 
+  /**
+   * 参数模版名称
+   */
+  TemplateName: string
+
+  /**
+   * 参数模版描述
+   */
+  TemplateDescription: string
+
+  /**
+   * 引擎版本
+   */
+  EngineVersion: string
+
+  /**
+   * 参数总条数
+   */
+  TotalCount: number
+
+  /**
+   * 参数列表
+   */
+  Items: Array<ParamDetail>
+
+  /**
+   * 数据库类型，可选值：NORMAL，SERVERLESS
+   */
+  DbMode: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBinlogSaveDays返回参数结构体
+ */
+export interface ModifyBinlogSaveDaysResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6308,6 +7466,21 @@ export interface DescribeAuditLogFilesRequest {
    * 审计日志文件名。
    */
   FileName?: string
+}
+
+/**
+ * ModifyVipVport返回参数结构体
+ */
+export interface ModifyVipVportResponse {
+  /**
+   * 异步任务id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

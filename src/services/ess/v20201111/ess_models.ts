@@ -2594,7 +2594,7 @@ export interface CreateChannelSubOrganizationModifyQrCodeResponse {
   QrCodeUrl?: string
 
   /**
-   * 二维码失效时间 unix 时间戳 精确到秒
+   * 二维码失效时间 UNIX 时间戳 精确到秒
    */
   ExpiredTime?: number
 
@@ -2974,6 +2974,11 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
    * 若上方填写为 SMS，则此处为手机号
    */
   NotifyAddress?: string
+
+  /**
+   * 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。
+   */
+  ExpiredTime?: number
 }
 
 /**

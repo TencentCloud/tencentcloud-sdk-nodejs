@@ -387,6 +387,10 @@ export interface BaseFlowInfo {
       * 抄送人信息
       */
     CcInfos?: Array<CcInfo>;
+    /**
+      * 是否需要发起前审核，当指定NeedCreateReview=true，则发起后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同
+      */
+    NeedCreateReview?: boolean;
 }
 /**
  * CreateConsoleLoginUrl返回参数结构体
@@ -433,7 +437,7 @@ export interface ChannelDeleteRoleUsersRequest {
     /**
       * 操作人信息
       */
-    Operator: UserInfo;
+    Operator?: UserInfo;
 }
 /**
  * ChannelCreateUserRoles返回参数结构体
@@ -913,15 +917,15 @@ export interface ChannelDescribeRolesRequest {
       */
     Limit: string;
     /**
-      * 操作人信息
-      */
-    Operator: UserInfo;
-    /**
       * 查询的关键字段:
-Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色
+Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
 Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
       */
     Filters?: Array<Filter>;
+    /**
+      * 操作人信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * PrepareFlows返回参数结构体
@@ -2290,6 +2294,10 @@ RELIEVED 解除
       * 合同(流程)关注方信息列表
       */
     CcInfos?: Array<FlowApproverDetail>;
+    /**
+      * 是否需要发起前审批，当NeedCreateReview为true，表明当前流程是需要发起前审核的合同，可能无法进行查看，签署操作，需要等审核完成后，才可以继续后续流程
+      */
+    NeedCreateReview?: boolean;
 }
 /**
  * CreateFlowsByTemplates返回参数结构体
@@ -2850,7 +2858,7 @@ export interface ChannelCreateUserRolesRequest {
     /**
       * 操作者信息
       */
-    Operator: UserInfo;
+    Operator?: UserInfo;
 }
 /**
  * ChannelGetTaskResultApi返回参数结构体

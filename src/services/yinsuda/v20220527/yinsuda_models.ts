@@ -650,6 +650,16 @@ export interface BatchDescribeKTVMusicDetailsRequest {
 <li>Live：直播</li><li>Chat：语聊</li>
       */
   PlayScene?: string
+
+  /**
+   * 玩家用户标识
+   */
+  GuestUserId?: string
+
+  /**
+   * 房间Id
+   */
+  RoomId?: string
 }
 
 /**
@@ -942,6 +952,17 @@ export interface RechargeLiveVipRequest {
 <li>372</li>
       */
   VipDays: number
+
+  /**
+   * 充值分类。取值有：room_card-包月房卡; 其他-保留。
+   */
+  GiveType?: string
+
+  /**
+      * 播放场景。默认为Live
+<li>Live：直播</li><li>Chat：语聊</li>
+      */
+  PlayScene?: string
 }
 
 /**

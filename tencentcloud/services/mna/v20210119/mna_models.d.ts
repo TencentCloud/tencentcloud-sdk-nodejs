@@ -50,15 +50,15 @@ export interface GetFlowStatisticResponse {
       */
     NetDetails?: Array<NetDetails>;
     /**
-      * 查找时间段流量使用最大值（单位：bit）
+      * 查找时间段流量使用最大值（单位：byte）
       */
     MaxValue?: number;
     /**
-      * 查找时间段流量使用平均值（单位：bit）
+      * 查找时间段流量使用平均值（单位：byte）
       */
     AvgValue?: number;
     /**
-      * 查找时间段流量使用总量（单位：bit）
+      * 查找时间段流量使用总量（单位：byte）
       */
     TotalValue?: number;
     /**
