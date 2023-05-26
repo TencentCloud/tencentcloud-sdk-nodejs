@@ -233,7 +233,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 判断是否开启的转发的权限
+   * 判断是否开启转发的权限
    */
   async CheckForwardAuth(
     req: CheckForwardAuthRequest,

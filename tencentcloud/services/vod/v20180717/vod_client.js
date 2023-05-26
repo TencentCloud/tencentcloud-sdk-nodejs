@@ -201,10 +201,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAdaptiveDynamicStreamingTemplate", req, cb);
     }
     /**
-     * 查询采样截图模板，支持根据条件，分页查询。
+     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中 [DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643) 的升级版本。
+
+如果您是新接入点播加密的用户，不要使用该 API，请参考 [视频加密综述](https://cloud.tencent.com/document/product/266/45552) 使用推荐的加密方式。
      */
-    async DescribeSampleSnapshotTemplates(req, cb) {
-        return this.request("DescribeSampleSnapshotTemplates", req, cb);
+    async DescribeDrmDataKey(req, cb) {
+        return this.request("DescribeDrmDataKey", req, cb);
     }
     /**
      * 删除用户自定义指定时间点截图模板。
@@ -403,10 +405,21 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAIAnalysisTemplate", req, cb);
     }
     /**
-     * 查询 DRM 密钥提供商信息。
+     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
+    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
+    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
+    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
+    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
+    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
+    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
+    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
+    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
+    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
+    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
+2. 可以指定回包只返回部分信息。
      */
-    async DescribeDrmKeyProviderInfo(req, cb) {
-        return this.request("DescribeDrmKeyProviderInfo", req, cb);
+    async DescribeMediaInfos(req, cb) {
+        return this.request("DescribeMediaInfos", req, cb);
     }
     /**
      * 删除音画质重生模板。
@@ -568,12 +581,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageReviewUsageData", req, cb);
     }
     /**
+     * 使用模板发起音画质重生。
+     */
+    async EnhanceMediaByTemplate(req, cb) {
+        return this.request("EnhanceMediaByTemplate", req, cb);
+    }
+    /**
      * 该接口用于开通某地域的存储。
   1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
   2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
      */
     async CreateStorageRegion(req, cb) {
         return this.request("CreateStorageRegion", req, cb);
+    }
+    /**
+     * 创建音画质重生模板。
+     */
+    async CreateEnhanceMediaTemplate(req, cb) {
+        return this.request("CreateEnhanceMediaTemplate", req, cb);
     }
     /**
      * 创建音画质重生模板。
@@ -864,18 +889,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb);
     }
     /**
-     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中 [DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643) 的升级版本。
-
-如果您是新接入点播加密的用户，不要使用该 API，请参考 [视频加密综述](https://cloud.tencent.com/document/product/266/45552) 使用推荐的加密方式。
+     * 查询采样截图模板，支持根据条件，分页查询。
      */
-    async DescribeDrmDataKey(req, cb) {
-        return this.request("DescribeDrmDataKey", req, cb);
+    async DescribeSampleSnapshotTemplates(req, cb) {
+        return this.request("DescribeSampleSnapshotTemplates", req, cb);
     }
     /**
      * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。
      */
     async ModifyWordSample(req, cb) {
         return this.request("ModifyWordSample", req, cb);
+    }
+    /**
+     * 修改音画质重生模板。
+     */
+    async ModifyEnhanceMediaTemplate(req, cb) {
+        return this.request("ModifyEnhanceMediaTemplate", req, cb);
     }
     /**
      * 查询雪碧图模板，支持根据条件，分页查询。
@@ -1025,6 +1054,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePersonSample", req, cb);
     }
     /**
+     * 获取音画质重生模板列表。
+     */
+    async DescribeEnhanceMediaTemplates(req, cb) {
+        return this.request("DescribeEnhanceMediaTemplates", req, cb);
+    }
+    /**
      * 创建用户自定义转动图模板，数量上限：16。
      */
     async CreateAnimatedGraphicsTemplate(req, cb) {
@@ -1111,21 +1146,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SimpleHlsClip", req, cb);
     }
     /**
-     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
-    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
-    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
-    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
-    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
-    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
-    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
-    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
-    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
-    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
-    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
-2. 可以指定回包只返回部分信息。
+     * 查询 DRM 密钥提供商信息。
      */
-    async DescribeMediaInfos(req, cb) {
-        return this.request("DescribeMediaInfos", req, cb);
+    async DescribeDrmKeyProviderInfo(req, cb) {
+        return this.request("DescribeDrmKeyProviderInfo", req, cb);
     }
     /**
      * 删除片头片尾模板。
@@ -1170,6 +1194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAIRecognitionTemplate(req, cb) {
         return this.request("CreateAIRecognitionTemplate", req, cb);
+    }
+    /**
+     * 删除音画质重生模板。
+     */
+    async DeleteEnhanceMediaTemplate(req, cb) {
+        return this.request("DeleteEnhanceMediaTemplate", req, cb);
     }
     /**
      * 获取音画质重生模板列表。

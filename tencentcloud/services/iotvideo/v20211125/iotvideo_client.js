@@ -328,7 +328,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallDeviceActionAsync", req, cb);
     }
     /**
-     * 判断是否开启的转发的权限
+     * 判断是否开启转发的权限
      */
     async CheckForwardAuth(req, cb) {
         return this.request("CheckForwardAuth", req, cb);

@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeErrorSummary(req: DescribeErrorSummaryRequest, cb?: (error: string, rep: DescribeErrorSummaryResponse) => void): Promise<DescribeErrorSummaryResponse>;
     /**
-     * 压测过程日志日志包括引擎输出日志及用户输出日志
+     * 压测过程日志包括引擎输出日志及用户输出日志
      */
     DescribeNormalLogs(req: DescribeNormalLogsRequest, cb?: (error: string, rep: DescribeNormalLogsResponse) => void): Promise<DescribeNormalLogsResponse>;
     /**

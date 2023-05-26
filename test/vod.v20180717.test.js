@@ -248,9 +248,9 @@ it("vod.v20180717.CreateAdaptiveDynamicStreamingTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeSampleSnapshotTemplates", async function () {
+it("vod.v20180717.DescribeDrmDataKey", async function () {
     try {
-       const data = await client.DescribeSampleSnapshotTemplates({})
+       const data = await client.DescribeDrmDataKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +518,9 @@ it("vod.v20180717.DeleteAIAnalysisTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
+it("vod.v20180717.DescribeMediaInfos", async function () {
     try {
-       const data = await client.DescribeDrmKeyProviderInfo({})
+       const data = await client.DescribeMediaInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +688,29 @@ it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     }
 })
 
+it("vod.v20180717.EnhanceMediaByTemplate", async function () {
+    try {
+       const data = await client.EnhanceMediaByTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateStorageRegion", async function () {
     try {
        const data = await client.CreateStorageRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateEnhanceMediaTemplate", async function () {
+    try {
+       const data = await client.CreateEnhanceMediaTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1098,9 +1118,9 @@ it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () 
     }
 })
 
-it("vod.v20180717.DescribeDrmDataKey", async function () {
+it("vod.v20180717.DescribeSampleSnapshotTemplates", async function () {
     try {
-       const data = await client.DescribeDrmDataKey({})
+       const data = await client.DescribeSampleSnapshotTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1111,6 +1131,16 @@ it("vod.v20180717.DescribeDrmDataKey", async function () {
 it("vod.v20180717.ModifyWordSample", async function () {
     try {
        const data = await client.ModifyWordSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyEnhanceMediaTemplate", async function () {
+    try {
+       const data = await client.ModifyEnhanceMediaTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,6 +1328,16 @@ it("vod.v20180717.DeletePersonSample", async function () {
     }
 })
 
+it("vod.v20180717.DescribeEnhanceMediaTemplates", async function () {
+    try {
+       const data = await client.DescribeEnhanceMediaTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.CreateAnimatedGraphicsTemplate({})
@@ -1388,9 +1428,9 @@ it("vod.v20180717.SimpleHlsClip", async function () {
     }
 })
 
-it("vod.v20180717.DescribeMediaInfos", async function () {
+it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
     try {
-       const data = await client.DescribeMediaInfos({})
+       const data = await client.DescribeDrmKeyProviderInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1461,6 +1501,16 @@ it("vod.v20180717.DeleteVodDomain", async function () {
 it("vod.v20180717.CreateAIRecognitionTemplate", async function () {
     try {
        const data = await client.CreateAIRecognitionTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteEnhanceMediaTemplate", async function () {
+    try {
+       const data = await client.DeleteEnhanceMediaTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

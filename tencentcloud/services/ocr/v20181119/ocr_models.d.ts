@@ -8593,6 +8593,14 @@ WARN_COPY_CARD 黑白复印件告警
       */
     RecognizeWarnMsg?: Array<string>;
     /**
+      * 是否为副本。1为是，-1为不是。
+      */
+    IsDuplication?: number;
+    /**
+      * 登记日期
+      */
+    RegistrationDate?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

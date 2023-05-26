@@ -1408,7 +1408,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadVpnGatewaySslClientCert", req, cb);
     }
     /**
-     * 查询SSL-VPN SERVER 列表信息
+     * 本接口（DescribeVpnGatewaySslServers）用于查询SSL-VPN SERVER 列表信息。
      */
     async DescribeVpnGatewaySslServers(req, cb) {
         return this.request("DescribeVpnGatewaySslServers", req, cb);

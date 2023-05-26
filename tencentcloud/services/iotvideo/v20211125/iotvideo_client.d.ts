@@ -208,7 +208,7 @@ export declare class Client extends AbstractClient {
      */
     CallDeviceActionAsync(req: CallDeviceActionAsyncRequest, cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void): Promise<CallDeviceActionAsyncResponse>;
     /**
-     * 判断是否开启的转发的权限
+     * 判断是否开启转发的权限
      */
     CheckForwardAuth(req: CheckForwardAuthRequest, cb?: (error: string, rep: CheckForwardAuthResponse) => void): Promise<CheckForwardAuthResponse>;
     /**

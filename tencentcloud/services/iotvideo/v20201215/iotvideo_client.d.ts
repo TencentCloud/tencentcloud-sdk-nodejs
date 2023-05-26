@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceCommLog(req: DescribeDeviceCommLogRequest, cb?: (error: string, rep: DescribeDeviceCommLogResponse) => void): Promise<DescribeDeviceCommLogResponse>;
     /**
-     * 判断是否开启的转发的权限
+     * 判断是否开启转发的权限
      */
     CheckForwardAuth(req: CheckForwardAuthRequest, cb?: (error: string, rep: CheckForwardAuthResponse) => void): Promise<CheckForwardAuthResponse>;
     /**

@@ -3825,12 +3825,12 @@ export interface ModifySecurityGroupAttributeRequest {
  */
 export interface DescribeVpnGatewaySslServersRequest {
   /**
-   * 偏移量
+   * 偏移量。
    */
   Offset?: number
 
   /**
-   * 请求对象个数
+   * 请求对象个数。
    */
   Limit?: number
 
@@ -3841,11 +3841,11 @@ export interface DescribeVpnGatewaySslServersRequest {
 
   /**
       * 过滤条件，参数不支持同时指定SslVpnServerIds和Filters。
-<li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
-<li>vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。</li>
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+<li>vpn-gateway-id - String - （过滤条件）VPN实例ID，形如：vpngw-5aluhh9t。</li>
 <li>vpn-gateway-name - String - （过滤条件）VPN实例名称。</li>
 <li>ssl-vpn-server-name - String - （过滤条件）SSL-VPN-SERVER实例名称。</li>
-<li>ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。</li>
+<li>ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID，形如：vpns-xxx。</li>
       */
   Filters?: Array<FilterObject>
 
@@ -7112,6 +7112,12 @@ export interface AccessPolicy {
    * 更新时间
    */
   UpdateTime: string
+
+  /**
+      * Remark
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark?: string
 }
 
 /**
@@ -9764,12 +9770,12 @@ export interface DescribeVpnGatewaySslServersResponse {
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * SSL-VPN-SERVER 实例详细信息列表。
    */
-  SslVpnSeverSet: Array<SslVpnSever>
+  SslVpnSeverSet?: Array<SslVpnSever>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

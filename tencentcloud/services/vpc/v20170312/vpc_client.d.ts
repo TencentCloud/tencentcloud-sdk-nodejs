@@ -980,7 +980,7 @@ export declare class Client extends AbstractClient {
      */
     DownloadVpnGatewaySslClientCert(req: DownloadVpnGatewaySslClientCertRequest, cb?: (error: string, rep: DownloadVpnGatewaySslClientCertResponse) => void): Promise<DownloadVpnGatewaySslClientCertResponse>;
     /**
-     * 查询SSL-VPN SERVER 列表信息
+     * 本接口（DescribeVpnGatewaySslServers）用于查询SSL-VPN SERVER 列表信息。
      */
     DescribeVpnGatewaySslServers(req: DescribeVpnGatewaySslServersRequest, cb?: (error: string, rep: DescribeVpnGatewaySslServersResponse) => void): Promise<DescribeVpnGatewaySslServersResponse>;
     /**

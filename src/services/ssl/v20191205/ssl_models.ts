@@ -2616,6 +2616,17 @@ export interface TeoInstanceDetail {
    * 证书ID
    */
   CertId: string
+
+  /**
+      * 区域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId?: string
+
+  /**
+   * 域名状态
+   */
+  Status?: string
 }
 
 /**

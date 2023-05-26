@@ -97,12 +97,12 @@ export interface DescribeInstancesResponse {
   /**
    * 实例详细信息列表
    */
-  InstanceList: Array<InstanceListInfo>
+  InstanceList?: Array<InstanceListInfo>
 
   /**
    * 实例数量
    */
-  TotalNum: number
+  TotalNum?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -145,8 +145,9 @@ export interface InstanceListInfo {
   CmemId?: number
 
   /**
-   * 实例关联的标签信息
-   */
+      * 实例关联的标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Tags?: Array<TagInfo>
 
   /**

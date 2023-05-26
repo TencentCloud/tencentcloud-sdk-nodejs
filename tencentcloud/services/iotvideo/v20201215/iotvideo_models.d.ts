@@ -3342,23 +3342,23 @@ export interface CheckForwardAuthResponse {
     /**
       * 腾讯云账号
       */
-    Endpoint: string;
+    Endpoint?: string;
     /**
       * 结果
       */
-    Result: number;
+    Result?: number;
     /**
       * 产品ID
       */
-    Productid: string;
+    Productid?: string;
     /**
       * 错误消息
       */
-    ErrMsg: string;
+    ErrMsg?: string;
     /**
       * 队列类型 0.CMQ  1.Ckafka
       */
-    QueueType: number;
+    QueueType?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

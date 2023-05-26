@@ -1193,6 +1193,13 @@ export interface TRTCJoinRoomInput {
 <li>audience：观众</li>
       */
     Role?: string;
+    /**
+      * TRTC房间号的类型：
+<li>Integer：数字类型</li>
+<li> String：字符串类型</li>
+默认为：Integer 。
+      */
+    RoomIdType?: string;
 }
 /**
  * DescribePackageItems请求参数结构体
