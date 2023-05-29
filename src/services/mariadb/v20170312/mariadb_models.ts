@@ -22,12 +22,12 @@ export interface IsolateHourDBInstanceResponse {
   /**
    * 解隔离成功的实例id列表
    */
-  SuccessInstanceIds: Array<string>
+  SuccessInstanceIds?: Array<string>
 
   /**
    * 解隔离失败的实例id列表
    */
-  FailedInstanceIds: Array<string>
+  FailedInstanceIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -118,7 +118,7 @@ export interface CreateDBInstanceRequest {
   AutoRenewFlag?: number
 
   /**
-   * 是否支持IPv6
+   * 是否支持IPv6，0:不支持，1:支持
    */
   Ipv6Flag?: number
 
@@ -316,12 +316,12 @@ export interface CreateDedicatedClusterDBInstanceResponse {
   /**
    * 分配资源ID数组
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
 
   /**
    * 流程ID
    */
-  FlowId: number
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -522,12 +522,12 @@ export interface DestroyHourDBInstanceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
    */
-  FlowId: number
+  FlowId?: number
 
   /**
    * 实例 ID，与入参InstanceId一致。
    */
-  InstanceId: string
+  InstanceId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -722,12 +722,12 @@ export interface IsolateDBInstanceResponse {
   /**
    * 隔离成功实例ID列表。
    */
-  SuccessInstanceIds: Array<string>
+  SuccessInstanceIds?: Array<string>
 
   /**
    * 隔离失败实例ID列表。
    */
-  FailedInstanceIds: Array<string>
+  FailedInstanceIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1902,6 +1902,11 @@ export interface DescribeDBInstanceDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RsAccessStrategy?: number
+
+  /**
+   * 尚未回收的网络资源
+   */
+  ReservedNetResources?: Array<ReservedNetResource>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3246,7 +3251,7 @@ export interface ModifyAccountPrivilegesResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
    */
-  FlowId: number
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3337,6 +3342,36 @@ export interface OpenDBExtranetAccessRequest {
    * 是否IPv6，默认0
    */
   Ipv6Flag?: number
+}
+
+/**
+ * 保留的网络资源信息
+ */
+export interface ReservedNetResource {
+  /**
+   * 私有网络
+   */
+  VpcId?: string
+
+  /**
+   * 子网
+   */
+  SubnetId?: string
+
+  /**
+   * VpcId,SubnetId下保留的内网ip
+   */
+  Vip?: string
+
+  /**
+   * Vip下的端口
+   */
+  Vports?: Array<number>
+
+  /**
+   * vip的回收时间
+   */
+  RecycleTime?: string
 }
 
 /**
@@ -3669,7 +3704,7 @@ export interface DescribeDcnDetailResponse {
   /**
    * DCN同步详情
    */
-  DcnDetails: Array<DcnDetailItem>
+  DcnDetails?: Array<DcnDetailItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3830,12 +3865,12 @@ export interface ActivateHourDBInstanceResponse {
   /**
    * 隔离成功的实例id列表
    */
-  SuccessInstanceIds: Array<string>
+  SuccessInstanceIds?: Array<string>
 
   /**
    * 隔离失败的实例id列表
    */
-  FailedInstanceIds: Array<string>
+  FailedInstanceIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4222,6 +4257,11 @@ export interface DBAccount {
    * 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。
    */
   SlaveConst: number
+
+  /**
+   * 用户最大连接数，0代表无限制
+   */
+  MaxUserConnections?: number
 }
 
 /**
@@ -4284,7 +4324,7 @@ export interface CreateHourDBInstanceRequest {
   SecurityGroupIds?: Array<string>
 
   /**
-   * 是否支持IPv6
+   * 是否支持IPv6，0:不支持，1:支持
    */
   Ipv6Flag?: number
 
@@ -4311,7 +4351,7 @@ innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0
   InitParams?: Array<DBParamValue>
 
   /**
-   * 回档源实例ID
+   * 回档源实例ID，例如“2021-11-22 00:00:00”
    */
   RollbackInstanceId?: string
 

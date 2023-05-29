@@ -35,13 +35,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
     /**
-     * 本接口（UpgradeDedicatedDCDBInstance）用于升级独享DCDB实例
+     * 本接口（UpgradeDedicatedDCDBInstance）用于升级TDSQL独享集群实例
      */
     async UpgradeDedicatedDCDBInstance(req, cb) {
         return this.request("UpgradeDedicatedDCDBInstance", req, cb);
     }
     /**
-     * 解隔离DCDB后付费实例
+     * 解隔离TDSQL按量计费实例
      */
     async ActiveHourDCDBInstance(req, cb) {
         return this.request("ActiveHourDCDBInstance", req, cb);
@@ -169,7 +169,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateDedicatedDBInstance", req, cb);
     }
     /**
-     * 创建独享集群DCDB实例
+     * 创建TDSQL独享集群实例
      */
     async CreateDedicatedClusterDCDBInstance(req, cb) {
         return this.request("CreateDedicatedClusterDCDBInstance", req, cb);
@@ -199,10 +199,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     * 回档TDSQL实例
      */
-    async ModifyInstanceVip(req, cb) {
-        return this.request("ModifyInstanceVip", req, cb);
+    async CreateTmpDCDBInstance(req, cb) {
+        return this.request("CreateTmpDCDBInstance", req, cb);
     }
     /**
      * 已废弃接口
@@ -219,13 +219,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBLogFiles", req, cb);
     }
     /**
-     * 隔离DCDB后付费实例
+     * 隔离TDSQL按量计费实例
      */
     async IsolateHourDCDBInstance(req, cb) {
         return this.request("IsolateHourDCDBInstance", req, cb);
     }
     /**
-     * 本接口（UpgradeHourDCDBInstance）用于升级后付费分布式数据库实例。
+     * 本接口（UpgradeHourDCDBInstance）用于升级分布式数据库TDSQL按量计费实例。
      */
     async UpgradeHourDCDBInstance(req, cb) {
         return this.request("UpgradeHourDCDBInstance", req, cb);
@@ -284,7 +284,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountPrivileges", req, cb);
     }
     /**
-     * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+     * 本接口(DestroyDCDBInstance)用于销毁已隔离的TDSQL包年包月实例。
      */
     async DestroyDCDBInstance(req, cb) {
         return this.request("DestroyDCDBInstance", req, cb);
@@ -370,13 +370,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
+     * 本接口（CreateDCDBInstance）用于创建包年包月的TDSQL实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
      */
     async CreateDCDBInstance(req, cb) {
         return this.request("CreateDCDBInstance", req, cb);
     }
     /**
-     * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+     * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
      */
     async DestroyHourDCDBInstance(req, cb) {
         return this.request("DestroyHourDCDBInstance", req, cb);
@@ -392,6 +392,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     */
+    async ModifyInstanceVip(req, cb) {
+        return this.request("ModifyInstanceVip", req, cb);
     }
     /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。
@@ -418,7 +424,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
-     * 本接口（DescribeDCDBInstanceDetail）用于获取DCDB实例详情
+     * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
      */
     async DescribeDCDBInstanceDetail(req, cb) {
         return this.request("DescribeDCDBInstanceDetail", req, cb);
@@ -430,7 +436,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 创建DCDB后付费实例
+     * 创建TDSQL按量计费实例
      */
     async CreateHourDCDBInstance(req, cb) {
         return this.request("CreateHourDCDBInstance", req, cb);

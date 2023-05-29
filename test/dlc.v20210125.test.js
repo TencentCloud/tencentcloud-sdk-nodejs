@@ -118,6 +118,16 @@ it("dlc.v20210125.CreateNotebookSessionStatementSupportBatchSQL", async function
     }
 })
 
+it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
+    try {
+       const data = await client.DescribeSparkSessionBatchSqlLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.SwitchDataEngine", async function () {
     try {
        const data = await client.SwitchDataEngine({})
@@ -388,6 +398,16 @@ it("dlc.v20210125.CreateDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.CreateSparkSessionBatchSQL", async function () {
+    try {
+       const data = await client.CreateSparkSessionBatchSQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionStatements", async function () {
     try {
        const data = await client.DescribeNotebookSessionStatements({})
@@ -561,6 +581,16 @@ it("dlc.v20210125.DropDMSPartitions", async function () {
 it("dlc.v20210125.CreateWorkGroup", async function () {
     try {
        const data = await client.CreateWorkGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
+    try {
+       const data = await client.CancelSparkSessionBatchSQL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

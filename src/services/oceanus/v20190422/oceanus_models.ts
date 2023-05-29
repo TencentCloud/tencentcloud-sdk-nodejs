@@ -192,6 +192,11 @@ export interface CreateJobRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+
+  /**
+   * 作业标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -246,7 +251,7 @@ export interface CreateJobResponse {
   /**
    * 作业Id
    */
-  JobId: string
+  JobId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1092,6 +1097,12 @@ export interface TreeResourceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FolderId: string
+
+  /**
+      * 分状态统计关联作业数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefJobStatusCountSet?: Array<RefJobStatusCountItem>
 }
 
 /**
@@ -2338,6 +2349,12 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WorkSpaceName: string
+
+  /**
+      * 作业标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<Tag>
 }
 
 /**

@@ -2082,20 +2082,20 @@ export interface CreateFlowEvidenceReportResponse {
       * 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReportId: string
+  ReportId?: string
 
   /**
       * 执行中：EvidenceStatusExecuting
 成功：EvidenceStatusSuccess
 失败：EvidenceStatusFailed
       */
-  Status: string
+  Status?: string
 
   /**
       * 废除，字段无效
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReportUrl: string
+  ReportUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

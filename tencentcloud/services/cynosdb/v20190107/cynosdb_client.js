@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuditRuleTemplates", req, cb);
     }
     /**
-     * 本接口（CreateParamTemplate）用于创建参数模版
+     * 本接口（CreateParamTemplate）用于创建参数模板
      */
     async CreateParamTemplate(req, cb) {
         return this.request("CreateParamTemplate", req, cb);
@@ -262,7 +262,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterDatabase", req, cb);
     }
     /**
-     * 本接口（ModifyParamTemplate）用于修改用户参数模版。
+     * 本接口（ModifyParamTemplate）用于修改用户参数模板。
      */
     async ModifyParamTemplate(req, cb) {
         return this.request("ModifyParamTemplate", req, cb);
@@ -610,7 +610,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterPasswordComplexity", req, cb);
     }
     /**
-     * 本接口（DeleteParamTemplate）用于删除用户创建的参数模版。
+     * 本接口（DeleteParamTemplate）用于删除用户创建的参数模板。
      */
     async DeleteParamTemplate(req, cb) {
         return this.request("DeleteParamTemplate", req, cb);
@@ -658,7 +658,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveClusterSlaveZone", req, cb);
     }
     /**
-     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模版详情
+     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情
      */
     async DescribeParamTemplateDetail(req, cb) {
         return this.request("DescribeParamTemplateDetail", req, cb);

@@ -17,7 +17,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRenewalPrice(req: DescribeRenewalPriceRequest, cb?: (error: string, rep: DescribeRenewalPriceResponse) => void): Promise<DescribeRenewalPriceResponse>;
     /**
-     * 创建后付费实例
+     * 创建MariaDB按量计费实例
      */
     CreateHourDBInstance(req: CreateHourDBInstanceRequest, cb?: (error: string, rep: CreateHourDBInstanceResponse) => void): Promise<CreateHourDBInstanceResponse>;
     /**
@@ -58,7 +58,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupTime(req: DescribeBackupTimeRequest, cb?: (error: string, rep: DescribeBackupTimeResponse) => void): Promise<DescribeBackupTimeResponse>;
     /**
-     * 解隔离后付费实例
+     * 解隔离MariaDB按量计费实例
      */
     ActivateHourDBInstance(req: ActivateHourDBInstanceRequest, cb?: (error: string, rep: ActivateHourDBInstanceResponse) => void): Promise<ActivateHourDBInstanceResponse>;
     /**
@@ -83,7 +83,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlow(req: DescribeFlowRequest, cb?: (error: string, rep: DescribeFlowResponse) => void): Promise<DescribeFlowResponse>;
     /**
-     * 创建独享集群Mariadb实例
+     * 创建Mariadb独享集群实例
      */
     CreateDedicatedClusterDBInstance(req: CreateDedicatedClusterDBInstanceRequest, cb?: (error: string, rep: CreateDedicatedClusterDBInstanceResponse) => void): Promise<CreateDedicatedClusterDBInstanceResponse>;
     /**
@@ -123,7 +123,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceVip(req: ModifyInstanceVipRequest, cb?: (error: string, rep: ModifyInstanceVipResponse) => void): Promise<ModifyInstanceVipResponse>;
     /**
-     * 本接口(IsolateDBInstance)用于隔离云数据库实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
+     * 本接口(IsolateDBInstance)用于隔离云数据库MariaDB实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
      */
     IsolateDBInstance(req: IsolateDBInstanceRequest, cb?: (error: string, rep: IsolateDBInstanceResponse) => void): Promise<IsolateDBInstanceResponse>;
     /**
@@ -144,7 +144,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceNetwork(req: ModifyInstanceNetworkRequest, cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void): Promise<ModifyInstanceNetworkResponse>;
     /**
-     * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
+     * 本接口（DestroyHourDBInstance）用于销毁MariaDB按量计费实例。
      */
     DestroyHourDBInstance(req: DestroyHourDBInstanceRequest, cb?: (error: string, rep: DestroyHourDBInstanceResponse) => void): Promise<DestroyHourDBInstanceResponse>;
     /**
@@ -185,7 +185,7 @@ export declare class Client extends AbstractClient {
      */
     InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
     /**
-     * 本接口（CreateDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长和数量等信息创建云数据库实例。
+     * 本接口（CreateDBInstance）用于创建包年包月的MariaDB云数据库实例，可通过传入实例规格、数据库版本号、购买时长和数量等信息创建云数据库实例。
      */
     CreateDBInstance(req: CreateDBInstanceRequest, cb?: (error: string, rep: CreateDBInstanceResponse) => void): Promise<CreateDBInstanceResponse>;
     /**
@@ -244,7 +244,7 @@ export declare class Client extends AbstractClient {
      */
     CopyAccountPrivileges(req: CopyAccountPrivilegesRequest, cb?: (error: string, rep: CopyAccountPrivilegesResponse) => void): Promise<CopyAccountPrivilegesResponse>;
     /**
-     * 隔离后付费实例
+     * 隔离MariaDB按量计费实例
      */
     IsolateHourDBInstance(req: IsolateHourDBInstanceRequest, cb?: (error: string, rep: IsolateHourDBInstanceResponse) => void): Promise<IsolateHourDBInstanceResponse>;
     /**

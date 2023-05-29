@@ -122,11 +122,11 @@ export interface DestroyDCDBInstanceResponse {
     /**
       * 实例 ID，与入参InstanceId一致。
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -188,11 +188,11 @@ export interface ActiveHourDCDBInstanceResponse {
     /**
       * 解隔离成功的实例id列表
       */
-    SuccessInstanceIds: Array<string>;
+    SuccessInstanceIds?: Array<string>;
     /**
       * 解隔离失败的实例id列表
       */
-    FailedInstanceIds: Array<string>;
+    FailedInstanceIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -266,6 +266,72 @@ export interface AssociateSecurityGroupsRequest {
       * 被绑定的实例ID，类似tdsqlshard-lesecurk，支持指定多个实例。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * DCDB分片信息
+ */
+export interface ShardBriefInfo {
+    /**
+      * 分片SerialId
+      */
+    ShardSerialId: string;
+    /**
+      * 分片ID，形如shard-7vg1o339
+      */
+    ShardInstanceId: string;
+    /**
+      * 分片运行状态
+      */
+    Status: number;
+    /**
+      * 分片运行状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 分片创建时间
+      */
+    CreateTime: string;
+    /**
+      * 分片内存大小，单位GB
+      */
+    Memory: number;
+    /**
+      * 分片磁盘大小，单位GB
+      */
+    Storage: number;
+    /**
+      * 分片日志磁盘空间大小，单位GB
+      */
+    LogDisk: number;
+    /**
+      * 分片节点个数
+      */
+    NodeCount: number;
+    /**
+      * 分片磁盘空间使用率
+      */
+    StorageUsage: number;
+    /**
+      * 分片Proxy版本信息
+      */
+    ProxyVersion: string;
+    /**
+      * 分片主DB可用区
+      */
+    ShardMasterZone: string;
+    /**
+      * 分片从DB可用区
+      */
+    ShardSlaveZones: Array<string>;
+    /**
+      * 分片Cpu核数
+      */
+    Cpu: number;
+    /**
+      * DB节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodesInfo: Array<NodeInfo>;
 }
 /**
  * TerminateDedicatedDBInstance返回参数结构体
@@ -495,7 +561,7 @@ export interface UpgradeDedicatedDCDBInstanceResponse {
     /**
       * 异步任务流程ID
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -564,7 +630,7 @@ export interface DescribeBackupFilesRequest {
  */
 export interface IsolateHourDCDBInstanceRequest {
     /**
-      * 实例uuid列表
+      * 待升级的实例ID列表。形如：["dcdbt-ow728lmc"]，可以通过 DescribeDCDBInstances 查询实例详情获得。
       */
     InstanceIds: Array<string>;
 }
@@ -1297,6 +1363,10 @@ export interface DescribeDCDBInstanceDetailResponse {
       */
     RsAccessStrategy?: number;
     /**
+      * 尚未回收的网络资源
+      */
+    ReservedNetResources?: Array<ReservedNetResource>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1599,6 +1669,19 @@ export interface DescribeDBEncryptAttributesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateTmpDCDBInstance请求参数结构体
+ */
+export interface CreateTmpDCDBInstanceRequest {
+    /**
+      * 回档实例的ID
+      */
+    InstanceId: string;
+    /**
+      * 回档时间点
+      */
+    RollbackTime: string;
 }
 /**
  * 数据库表信息
@@ -2361,7 +2444,7 @@ export interface DescribeDcnDetailResponse {
     /**
       * DCN同步详情
       */
-    DcnDetails: Array<DcnDetailItem>;
+    DcnDetails?: Array<DcnDetailItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2685,11 +2768,11 @@ export interface IsolateHourDCDBInstanceResponse {
     /**
       * 隔离成功的实例id列表
       */
-    SuccessInstanceIds: Array<string>;
+    SuccessInstanceIds?: Array<string>;
     /**
       * 隔离失败的实例id列表
       */
-    FailedInstanceIds: Array<string>;
+    FailedInstanceIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2775,70 +2858,29 @@ export interface OpenDBExtranetAccessRequest {
     Ipv6Flag?: number;
 }
 /**
- * DCDB分片信息
+ * 保留的网络资源信息
  */
-export interface ShardBriefInfo {
+export interface ReservedNetResource {
     /**
-      * 分片SerialId
+      * 私有网络
       */
-    ShardSerialId: string;
+    VpcId?: string;
     /**
-      * 分片ID，形如shard-7vg1o339
+      * 子网
       */
-    ShardInstanceId: string;
+    SubnetId?: string;
     /**
-      * 分片运行状态
+      * VpcId,SubnetId下保留的内网ip
       */
-    Status: number;
+    Vip?: string;
     /**
-      * 分片运行状态描述
+      * Vip下的端口
       */
-    StatusDesc: string;
+    Vports?: Array<number>;
     /**
-      * 分片创建时间
+      * Vip的回收时间
       */
-    CreateTime: string;
-    /**
-      * 分片内存大小，单位GB
-      */
-    Memory: number;
-    /**
-      * 分片磁盘大小，单位GB
-      */
-    Storage: number;
-    /**
-      * 分片日志磁盘空间大小，单位GB
-      */
-    LogDisk: number;
-    /**
-      * 分片节点个数
-      */
-    NodeCount: number;
-    /**
-      * 分片磁盘空间使用率
-      */
-    StorageUsage: number;
-    /**
-      * 分片Proxy版本信息
-      */
-    ProxyVersion: string;
-    /**
-      * 分片主DB可用区
-      */
-    ShardMasterZone: string;
-    /**
-      * 分片从DB可用区
-      */
-    ShardSlaveZones: Array<string>;
-    /**
-      * 分片Cpu核数
-      */
-    Cpu: number;
-    /**
-      * DB节点信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NodesInfo: Array<NodeInfo>;
+    RecycleTime?: string;
 }
 /**
  * 数据库权限
@@ -2940,7 +2982,7 @@ export interface CreateHourDCDBInstanceRequest {
       */
     InstanceName?: string;
     /**
-      * 是否支持IPv6
+      * 是否支持IPv6，0:不支持，1:支持
       */
     Ipv6Flag?: number;
     /**
@@ -2964,7 +3006,7 @@ export interface CreateHourDCDBInstanceRequest {
       */
     RollbackInstanceId?: string;
     /**
-      * 回档时间
+      * 回档时间，例如“2021-11-22 00:00:00”
       */
     RollbackTime?: string;
     /**
@@ -3308,7 +3350,7 @@ export interface ModifyAccountPrivilegesResponse {
     /**
       * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3443,7 +3485,7 @@ export interface CreateDCDBInstanceRequest {
       */
     InstanceName?: string;
     /**
-      * 是否支持IPv6
+      * 是否支持IPv6，0:不支持，1:支持
       */
     Ipv6Flag?: number;
     /**
@@ -3463,7 +3505,7 @@ export interface CreateDCDBInstanceRequest {
       */
     DcnInstanceId?: string;
     /**
-      * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
+      * 自动续费标记，0:默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1:自动续费，2:明确不自动续费(用户设置)。若业务无续费概念或无需自动续费，需要设置为0
       */
     AutoRenewFlag?: number;
     /**
@@ -3573,6 +3615,19 @@ export interface DatabaseProcedure {
     Proc: string;
 }
 /**
+ * ModifyDBEncryptAttributes请求参数结构体
+ */
+export interface ModifyDBEncryptAttributesRequest {
+    /**
+      * 实例Id，形如：tdsqlshard-ow728lmc。
+      */
+    InstanceId: string;
+    /**
+      * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+      */
+    EncryptEnabled: number;
+}
+/**
  * 升级实例 -- 新增分片类型
  */
 export interface AddShardConfig {
@@ -3616,17 +3671,17 @@ export interface DescribeProjectsResponse {
     RequestId?: string;
 }
 /**
- * ModifyDBEncryptAttributes请求参数结构体
+ * CreateTmpDCDBInstance返回参数结构体
  */
-export interface ModifyDBEncryptAttributesRequest {
+export interface CreateTmpDCDBInstanceResponse {
     /**
-      * 实例Id，形如：tdsqlshard-ow728lmc。
+      * 任务流ID
       */
-    InstanceId: string;
+    FlowId?: number;
     /**
-      * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    EncryptEnabled: number;
+    RequestId?: string;
 }
 /**
  * CreateAccount返回参数结构体
@@ -3776,11 +3831,11 @@ export interface DestroyHourDCDBInstanceResponse {
     /**
       * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
       */
-    FlowId: number;
+    FlowId?: number;
     /**
       * 实例 ID，与入参InstanceId一致。
       */
-    InstanceId: string;
+    InstanceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3883,6 +3938,10 @@ export interface DBAccount {
       * 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。
       */
     SlaveConst: number;
+    /**
+      * 用户最大连接数，0代表无限制
+      */
+    MaxUserConnections?: number;
 }
 /**
  * DescribeDatabaseTable返回参数结构体

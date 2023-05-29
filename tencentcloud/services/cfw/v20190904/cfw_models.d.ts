@@ -908,7 +908,7 @@ export interface ModifyBlockIgnoreListRequest {
       */
     RuleType: number;
     /**
-      * IP、Domain二选一，不能同时为空
+      * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
       */
     IOC: Array<IocListData>;
     /**
@@ -4109,11 +4109,11 @@ export interface ModifyBlockIgnoreListResponse {
     /**
       * 接口返回信息
       */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
       * 接口返回错误码，0请求成功  非0失败
       */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

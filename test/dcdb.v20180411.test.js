@@ -288,9 +288,9 @@ it("dcdb.v20180411.ModifyDBInstancesProject", async function () {
     }
 })
 
-it("dcdb.v20180411.ModifyInstanceVip", async function () {
+it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
     try {
-       const data = await client.ModifyInstanceVip({})
+       const data = await client.CreateTmpDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +591,16 @@ it("dcdb.v20180411.ModifyInstanceVport", async function () {
 it("dcdb.v20180411.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyInstanceVip", async function () {
+    try {
+       const data = await client.ModifyInstanceVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

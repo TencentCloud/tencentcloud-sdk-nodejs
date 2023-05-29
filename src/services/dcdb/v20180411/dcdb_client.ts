@@ -36,6 +36,7 @@ import {
   DescribeDCDBInstanceDetailRequest,
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
+  ShardBriefInfo,
   TerminateDedicatedDBInstanceResponse,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
@@ -91,6 +92,7 @@ import {
   RenewDCDBInstanceRequest,
   ShardZoneChooseInfo,
   DescribeDBEncryptAttributesResponse,
+  CreateTmpDCDBInstanceRequest,
   DatabaseTable,
   DescribeDBEncryptAttributesRequest,
   Deal,
@@ -136,7 +138,7 @@ import {
   ShardInfo,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
-  ShardBriefInfo,
+  ReservedNetResource,
   DatabasePrivilege,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
@@ -166,10 +168,11 @@ import {
   CreateDedicatedClusterDCDBInstanceResponse,
   UserTaskInfo,
   DatabaseProcedure,
+  ModifyDBEncryptAttributesRequest,
   AddShardConfig,
   ModifyDBSyncModeRequest,
   DescribeProjectsResponse,
-  ModifyDBEncryptAttributesRequest,
+  CreateTmpDCDBInstanceResponse,
   CreateAccountResponse,
   IsolateDedicatedDBInstanceResponse,
   RegionInfo,
@@ -221,7 +224,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDedicatedDCDBInstance）用于升级独享DCDB实例
+   * 本接口（UpgradeDedicatedDCDBInstance）用于升级TDSQL独享集群实例
    */
   async UpgradeDedicatedDCDBInstance(
     req: UpgradeDedicatedDCDBInstanceRequest,
@@ -231,7 +234,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解隔离DCDB后付费实例
+   * 解隔离TDSQL按量计费实例
    */
   async ActiveHourDCDBInstance(
     req: ActiveHourDCDBInstanceRequest,
@@ -439,7 +442,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建独享集群DCDB实例
+   * 创建TDSQL独享集群实例
    */
   async CreateDedicatedClusterDCDBInstance(
     req: CreateDedicatedClusterDCDBInstanceRequest,
@@ -489,13 +492,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceVip）用于修改实例Vip
+   * 回档TDSQL实例
    */
-  async ModifyInstanceVip(
-    req: ModifyInstanceVipRequest,
-    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
-  ): Promise<ModifyInstanceVipResponse> {
-    return this.request("ModifyInstanceVip", req, cb)
+  async CreateTmpDCDBInstance(
+    req: CreateTmpDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void
+  ): Promise<CreateTmpDCDBInstanceResponse> {
+    return this.request("CreateTmpDCDBInstance", req, cb)
   }
 
   /**
@@ -521,7 +524,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离DCDB后付费实例
+   * 隔离TDSQL按量计费实例
    */
   async IsolateHourDCDBInstance(
     req: IsolateHourDCDBInstanceRequest,
@@ -531,7 +534,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeHourDCDBInstance）用于升级后付费分布式数据库实例。
+   * 本接口（UpgradeHourDCDBInstance）用于升级分布式数据库TDSQL按量计费实例。
    */
   async UpgradeHourDCDBInstance(
     req: UpgradeHourDCDBInstanceRequest,
@@ -626,7 +629,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+   * 本接口(DestroyDCDBInstance)用于销毁已隔离的TDSQL包年包月实例。
    */
   async DestroyDCDBInstance(
     req: DestroyDCDBInstanceRequest,
@@ -768,7 +771,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
+   * 本接口（CreateDCDBInstance）用于创建包年包月的TDSQL实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
    */
   async CreateDCDBInstance(
     req: CreateDCDBInstanceRequest,
@@ -778,7 +781,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+   * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
    */
   async DestroyHourDCDBInstance(
     req: DestroyHourDCDBInstanceRequest,
@@ -805,6 +808,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceVip）用于修改实例Vip
+   */
+  async ModifyInstanceVip(
+    req: ModifyInstanceVipRequest,
+    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
+  ): Promise<ModifyInstanceVipResponse> {
+    return this.request("ModifyInstanceVip", req, cb)
   }
 
   /**
@@ -848,7 +861,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDCDBInstanceDetail）用于获取DCDB实例详情
+   * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
    */
   async DescribeDCDBInstanceDetail(
     req: DescribeDCDBInstanceDetailRequest,
@@ -868,7 +881,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建DCDB后付费实例
+   * 创建TDSQL按量计费实例
    */
   async CreateHourDCDBInstance(
     req: CreateHourDCDBInstanceRequest,

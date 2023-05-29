@@ -303,7 +303,7 @@ export declare class Client extends AbstractClient {
      */
     SendCustomAlarmMsg(req: SendCustomAlarmMsgRequest, cb?: (error: string, rep: SendCustomAlarmMsgResponse) => void): Promise<SendCustomAlarmMsgResponse>;
     /**
-     * 告警修改告警策略绑定的告警通知模板
+     * 修改告警策略绑定的告警通知模板
      */
     ModifyAlarmPolicyNotice(req: ModifyAlarmPolicyNoticeRequest, cb?: (error: string, rep: ModifyAlarmPolicyNoticeResponse) => void): Promise<ModifyAlarmPolicyNoticeResponse>;
     /**

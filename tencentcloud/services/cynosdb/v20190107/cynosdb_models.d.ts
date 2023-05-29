@@ -1184,7 +1184,7 @@ export interface CreateParamTemplateResponse {
     /**
       * 模版ID
       */
-    TemplateId: number;
+    TemplateId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6188,31 +6188,31 @@ export interface DescribeParamTemplateDetailResponse {
     /**
       * 参数模版ID
       */
-    TemplateId: number;
+    TemplateId?: number;
     /**
       * 参数模版名称
       */
-    TemplateName: string;
+    TemplateName?: string;
     /**
       * 参数模版描述
       */
-    TemplateDescription: string;
+    TemplateDescription?: string;
     /**
       * 引擎版本
       */
-    EngineVersion: string;
+    EngineVersion?: string;
     /**
       * 参数总条数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 参数列表
       */
-    Items: Array<ParamDetail>;
+    Items?: Array<ParamDetail>;
     /**
       * 数据库类型，可选值：NORMAL，SERVERLESS
       */
-    DbMode: string;
+    DbMode?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

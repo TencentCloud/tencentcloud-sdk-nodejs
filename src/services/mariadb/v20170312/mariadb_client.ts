@@ -138,6 +138,7 @@ import {
   CancelDcnJobRequest,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
+  ReservedNetResource,
   DatabasePrivilege,
   ModifyDBInstanceSecurityGroupsResponse,
   ModifyDBInstanceNameResponse,
@@ -230,7 +231,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建后付费实例
+   * 创建MariaDB按量计费实例
    */
   async CreateHourDBInstance(
     req: CreateHourDBInstanceRequest,
@@ -331,7 +332,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解隔离后付费实例
+   * 解隔离MariaDB按量计费实例
    */
   async ActivateHourDBInstance(
     req: ActivateHourDBInstanceRequest,
@@ -392,7 +393,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建独享集群Mariadb实例
+   * 创建Mariadb独享集群实例
    */
   async CreateDedicatedClusterDBInstance(
     req: CreateDedicatedClusterDBInstanceRequest,
@@ -492,7 +493,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(IsolateDBInstance)用于隔离云数据库实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
+   * 本接口(IsolateDBInstance)用于隔离云数据库MariaDB实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
    */
   async IsolateDBInstance(
     req: IsolateDBInstanceRequest,
@@ -537,7 +538,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
+   * 本接口（DestroyHourDBInstance）用于销毁MariaDB按量计费实例。
    */
   async DestroyHourDBInstance(
     req: DestroyHourDBInstanceRequest,
@@ -638,7 +639,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长和数量等信息创建云数据库实例。
+   * 本接口（CreateDBInstance）用于创建包年包月的MariaDB云数据库实例，可通过传入实例规格、数据库版本号、购买时长和数量等信息创建云数据库实例。
    */
   async CreateDBInstance(
     req: CreateDBInstanceRequest,
@@ -775,7 +776,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离后付费实例
+   * 隔离MariaDB按量计费实例
    */
   async IsolateHourDBInstance(
     req: IsolateHourDBInstanceRequest,

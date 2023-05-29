@@ -58,8 +58,6 @@ export declare class Client extends AbstractClient {
 
 >
 - 可前往 [图像搜索](https://cloud.tencent.com/document/product/1589) 产品文档中查看更多产品信息。
-
-
      */
     CreateGroup(req: CreateGroupRequest, cb?: (error: string, rep: CreateGroupResponse) => void): Promise<CreateGroupResponse>;
     /**

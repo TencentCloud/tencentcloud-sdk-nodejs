@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAuditRuleTemplates(req: DeleteAuditRuleTemplatesRequest, cb?: (error: string, rep: DeleteAuditRuleTemplatesResponse) => void): Promise<DeleteAuditRuleTemplatesResponse>;
     /**
-     * 本接口（CreateParamTemplate）用于创建参数模版
+     * 本接口（CreateParamTemplate）用于创建参数模板
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
@@ -164,7 +164,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyClusterDatabase(req: ModifyClusterDatabaseRequest, cb?: (error: string, rep: ModifyClusterDatabaseResponse) => void): Promise<ModifyClusterDatabaseResponse>;
     /**
-     * 本接口（ModifyParamTemplate）用于修改用户参数模版。
+     * 本接口（ModifyParamTemplate）用于修改用户参数模板。
      */
     ModifyParamTemplate(req: ModifyParamTemplateRequest, cb?: (error: string, rep: ModifyParamTemplateResponse) => void): Promise<ModifyParamTemplateResponse>;
     /**
@@ -396,7 +396,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterPasswordComplexity(req: DescribeClusterPasswordComplexityRequest, cb?: (error: string, rep: DescribeClusterPasswordComplexityResponse) => void): Promise<DescribeClusterPasswordComplexityResponse>;
     /**
-     * 本接口（DeleteParamTemplate）用于删除用户创建的参数模版。
+     * 本接口（DeleteParamTemplate）用于删除用户创建的参数模板。
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
@@ -428,7 +428,7 @@ export declare class Client extends AbstractClient {
      */
     RemoveClusterSlaveZone(req: RemoveClusterSlaveZoneRequest, cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void): Promise<RemoveClusterSlaveZoneResponse>;
     /**
-     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模版详情
+     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情
      */
     DescribeParamTemplateDetail(req: DescribeParamTemplateDetailRequest, cb?: (error: string, rep: DescribeParamTemplateDetailResponse) => void): Promise<DescribeParamTemplateDetailResponse>;
     /**

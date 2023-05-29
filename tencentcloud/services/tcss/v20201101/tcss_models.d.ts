@@ -7200,6 +7200,11 @@ export interface NetworkClusterInfoItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetworkPolicyPluginError: string;
+    /**
+      * 容器网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterNetworkSettings?: string;
 }
 /**
  * AddEscapeWhiteList返回参数结构体

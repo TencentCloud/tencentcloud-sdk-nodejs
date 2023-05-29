@@ -1175,7 +1175,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警修改告警策略绑定的告警通知模板
+   * 修改告警策略绑定的告警通知模板
    */
   async ModifyAlarmPolicyNotice(
     req: ModifyAlarmPolicyNoticeRequest,

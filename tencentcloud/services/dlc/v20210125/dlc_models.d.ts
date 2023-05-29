@@ -334,6 +334,35 @@ export interface Asset {
     DatasourceId?: number;
 }
 /**
+ * SparkSQL批任务日志操作信息。
+ */
+export interface SparkSessionBatchLogOperate {
+    /**
+      * 操作提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Text?: string;
+    /**
+      * 操作类型：COPY、LOG、UI、RESULT、List、TAB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Operate?: string;
+    /**
+      * 补充信息：如：taskid、sessionid、sparkui等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Supplement?: Array<KVPair>;
+}
+/**
+ * DetachUserPolicy返回参数结构体
+ */
+export interface DetachUserPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 任务结果信息。
  */
 export interface TaskResultInfo {
@@ -1166,6 +1195,24 @@ export interface DetachWorkGroupPolicyResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSparkSessionBatchSqlLog返回参数结构体
+ */
+export interface DescribeSparkSessionBatchSqlLogResponse {
+    /**
+      * 状态：0：初始化、1：成功、2：失败、3：取消、4：异常；
+      */
+    State?: number;
+    /**
+      * 日志信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogSet?: Array<SparkSessionBatchLog>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GenerateCreateMangedTableSql请求参数结构体
  */
 export interface GenerateCreateMangedTableSqlRequest {
@@ -1865,6 +1912,31 @@ export interface DescribeNotebookSessionStatementsRequest {
     BatchId: string;
 }
 /**
+ * SparkSQL批任务运行日志
+ */
+export interface SparkSessionBatchLog {
+    /**
+      * 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Step?: string;
+    /**
+      * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Time?: string;
+    /**
+      * 日志提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message?: string;
+    /**
+      * 日志操作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Operate?: Array<SparkSessionBatchLogOperate>;
+}
+/**
  * DeleteUser返回参数结构体
  */
 export interface DeleteUserResponse {
@@ -2503,6 +2575,15 @@ export interface CreateImportTaskRequest {
       * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
       */
     OutputType?: string;
+}
+/**
+ * DescribeSparkSessionBatchSqlLog请求参数结构体
+ */
+export interface DescribeSparkSessionBatchSqlLogRequest {
+    /**
+      * SparkSQL唯一标识
+      */
+    BatchId: string;
 }
 /**
  * DescribeScripts请求参数结构体
@@ -4142,6 +4223,15 @@ export interface DropDMSTableRequest {
     EnvProps?: KVPair;
 }
 /**
+ * CancelSparkSessionBatchSQL返回参数结构体
+ */
+export interface CancelSparkSessionBatchSQLResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeNotebookSessionStatementSqlResult返回参数结构体
  */
 export interface DescribeNotebookSessionStatementSqlResultResponse {
@@ -4280,13 +4370,17 @@ export interface DeleteUsersFromWorkGroupResponse {
     RequestId?: string;
 }
 /**
- * UnbindWorkGroupsFromUser请求参数结构体
+ * CreateSparkSessionBatchSQL返回参数结构体
  */
-export interface UnbindWorkGroupsFromUserRequest {
+export interface CreateSparkSessionBatchSQLResponse {
     /**
-      * 解绑的工作组Id和用户Id的关联关系
+      * 批任务唯一标识
       */
-    AddInfo: WorkGroupIdSetOfUserId;
+    BatchId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDMSDatabase请求参数结构体
@@ -4751,13 +4845,13 @@ export interface LockMetaDataRequest {
     Hostname?: string;
 }
 /**
- * DetachUserPolicy返回参数结构体
+ * CancelSparkSessionBatchSQL请求参数结构体
  */
-export interface DetachUserPolicyResponse {
+export interface CancelSparkSessionBatchSQLRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 批任务唯一标识
       */
-    RequestId?: string;
+    BatchId: string;
 }
 /**
  * DescribeWorkGroups请求参数结构体
@@ -4808,6 +4902,15 @@ export interface TasksOverview {
       * 当前时间范围的总任务个数
       */
     TotalTaskCount: number;
+}
+/**
+ * UnbindWorkGroupsFromUser请求参数结构体
+ */
+export interface UnbindWorkGroupsFromUserRequest {
+    /**
+      * 解绑的工作组Id和用户Id的关联关系
+      */
+    AddInfo: WorkGroupIdSetOfUserId;
 }
 /**
  * UpdateRowFilter返回参数结构体
@@ -5008,6 +5111,51 @@ export interface CreateSparkAppRequest {
       * 关联dlc查询脚本id
       */
     SessionId?: string;
+}
+/**
+ * CreateSparkSessionBatchSQL请求参数结构体
+ */
+export interface CreateSparkSessionBatchSQLRequest {
+    /**
+      * DLC Spark作业引擎名称
+      */
+    DataEngineName: string;
+    /**
+      * 运行sql
+      */
+    ExecuteSQL: string;
+    /**
+      * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+      */
+    DriverSize?: string;
+    /**
+      * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+      */
+    ExecutorSize?: string;
+    /**
+      * 指定的Executor数量，默认为1
+      */
+    ExecutorNumbers?: number;
+    /**
+      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+      */
+    ExecutorMaxNumbers?: number;
+    /**
+      * 指定的Session超时时间，单位秒，默认3600秒
+      */
+    TimeoutInSecond?: number;
+    /**
+      * Session唯一标识，当指定sessionid，则使用该session运行任务。
+      */
+    SessionId?: string;
+    /**
+      * 指定要创建的session名称
+      */
+    SessionName?: string;
+    /**
+      * Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填；
+      */
+    Arguments?: Array<KVPair>;
 }
 /**
  * DescribeDataEngines请求参数结构体

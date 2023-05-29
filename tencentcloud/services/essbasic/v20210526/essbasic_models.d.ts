@@ -123,6 +123,13 @@ SIGN_REJECT:拒签(流程结束)
       * 签署节点审核时需要指定
       */
     RecipientId?: string;
+    /**
+      * 操作类型，默认：SignReview；SignReview:签署审核，CreateReview：发起审核
+注：接口通过该字段区分操作类型
+该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程
+若想使用发起审核，请指定该字段为：CreateReview
+      */
+    OperateType?: string;
 }
 /**
  * 授权出错信息
@@ -427,7 +434,7 @@ export interface ChannelDeleteRoleUsersRequest {
       */
     Agent: Agent;
     /**
-      * 角色Id
+      * 角色Id（非超管或法人角色Id）
       */
     RoleId: string;
     /**
@@ -511,7 +518,7 @@ export interface ChannelCreatePrepareFlowRequest {
       */
     FlowOption?: CreateFlowOption;
     /**
-      * 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL
+      * 通过flowid快速获得之前成功通过页面发起的合同生成链接
       */
     FlowId?: string;
     /**

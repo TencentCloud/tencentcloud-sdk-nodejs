@@ -28,6 +28,8 @@ import {
   DeleteUserRequest,
   ListTaskJobLogDetailResponse,
   Asset,
+  SparkSessionBatchLogOperate,
+  DetachUserPolicyResponse,
   TaskResultInfo,
   CreateResultDownloadResponse,
   ModifyGovernEventRuleResponse,
@@ -60,6 +62,7 @@ import {
   CreateTasksInOrderRequest,
   AddDMSPartitionsResponse,
   DetachWorkGroupPolicyResponse,
+  DescribeSparkSessionBatchSqlLogResponse,
   GenerateCreateMangedTableSqlRequest,
   SwitchDataEngineResponse,
   CSVSerde,
@@ -90,6 +93,7 @@ import {
   TagInfo,
   CreateUserResponse,
   DescribeNotebookSessionStatementsRequest,
+  SparkSessionBatchLog,
   DeleteUserResponse,
   DescribeDatabasesResponse,
   LockComponentInfo,
@@ -113,6 +117,7 @@ import {
   CreateNotebookSessionStatementRequest,
   DescribeWorkGroupsResponse,
   CreateImportTaskRequest,
+  DescribeSparkSessionBatchSqlLogRequest,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
   CreateExportTaskResponse,
@@ -183,12 +188,13 @@ import {
   AttachUserPolicyResponse,
   DescribeLakeFsInfoResponse,
   DropDMSTableRequest,
+  CancelSparkSessionBatchSQLResponse,
   DescribeNotebookSessionStatementSqlResultResponse,
   DMSPartition,
   DatabaseInfo,
   DescribeDMSPartitionsResponse,
   DeleteUsersFromWorkGroupResponse,
-  UnbindWorkGroupsFromUserRequest,
+  CreateSparkSessionBatchSQLResponse,
   DescribeDMSDatabaseRequest,
   DescribeLakeFsDirSummaryRequest,
   Policy,
@@ -210,15 +216,17 @@ import {
   TableResponseInfo,
   DescribeViewsRequest,
   LockMetaDataRequest,
-  DetachUserPolicyResponse,
+  CancelSparkSessionBatchSQLRequest,
   DescribeWorkGroupsRequest,
   TasksOverview,
+  UnbindWorkGroupsFromUserRequest,
   UpdateRowFilterResponse,
   CreateTasksResponse,
   CreateNotebookSessionResponse,
   DescribeViewsResponse,
   DescribeTasksResponse,
   CreateSparkAppRequest,
+  CreateSparkSessionBatchSQLRequest,
   DescribeDataEnginesRequest,
   DropDMSPartitionsResponse,
   AlterDMSDatabaseResponse,
@@ -355,6 +363,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void
   ): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse> {
     return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeSparkSessionBatchSqlLog）用于获取SparkSQL批任务日志
+   */
+  async DescribeSparkSessionBatchSqlLog(
+    req: DescribeSparkSessionBatchSqlLogRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void
+  ): Promise<DescribeSparkSessionBatchSqlLogResponse> {
+    return this.request("DescribeSparkSessionBatchSqlLog", req, cb)
   }
 
   /**
@@ -628,6 +646,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateSparkSessionBatchSQL）用于提交Spark SQL批任务。
+   */
+  async CreateSparkSessionBatchSQL(
+    req: CreateSparkSessionBatchSQLRequest,
+    cb?: (error: string, rep: CreateSparkSessionBatchSQLResponse) => void
+  ): Promise<CreateSparkSessionBatchSQLResponse> {
+    return this.request("CreateSparkSessionBatchSQL", req, cb)
+  }
+
+  /**
    * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
    */
   async DescribeNotebookSessionStatements(
@@ -805,6 +833,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkGroupResponse) => void
   ): Promise<CreateWorkGroupResponse> {
     return this.request("CreateWorkGroup", req, cb)
+  }
+
+  /**
+   * 本接口（CancelSparkSessionBatchSQL）用于取消Spark SQL批任务。
+   */
+  async CancelSparkSessionBatchSQL(
+    req: CancelSparkSessionBatchSQLRequest,
+    cb?: (error: string, rep: CancelSparkSessionBatchSQLResponse) => void
+  ): Promise<CancelSparkSessionBatchSQLResponse> {
+    return this.request("CancelSparkSessionBatchSQL", req, cb)
   }
 
   /**

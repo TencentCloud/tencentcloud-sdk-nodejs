@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
     }
     /**
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于获取SparkSQL批任务日志
+     */
+    async DescribeSparkSessionBatchSqlLog(req, cb) {
+        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
+    }
+    /**
      * 切换主备集群
      */
     async SwitchDataEngine(req, cb) {
@@ -250,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabase", req, cb);
     }
     /**
+     * 本接口（CreateSparkSessionBatchSQL）用于提交Spark SQL批任务。
+     */
+    async CreateSparkSessionBatchSQL(req, cb) {
+        return this.request("CreateSparkSessionBatchSQL", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
      */
     async DescribeNotebookSessionStatements(req, cb) {
@@ -356,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateWorkGroup(req, cb) {
         return this.request("CreateWorkGroup", req, cb);
+    }
+    /**
+     * 本接口（CancelSparkSessionBatchSQL）用于取消Spark SQL批任务。
+     */
+    async CancelSparkSessionBatchSQL(req, cb) {
+        return this.request("CancelSparkSessionBatchSQL", req, cb);
     }
     /**
      * 本接口（CancelTask），用于取消任务执行
