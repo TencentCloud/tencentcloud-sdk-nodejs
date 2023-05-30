@@ -1107,13 +1107,19 @@ export interface DescribeTrainingMetricsRequest {
     TaskId: string;
 }
 /**
- * DescribeTrainingTaskPods请求参数结构体
+ * 配置CFSTurbo参数
  */
-export interface DescribeTrainingTaskPodsRequest {
+export interface CFSTurbo {
     /**
-      * 训练任务ID
+      * CFSTurbo实例id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: string;
+    Id?: string;
+    /**
+      * CFSTurbo路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path?: string;
 }
 /**
  * CreateBatchTask请求参数结构体
@@ -2887,6 +2893,120 @@ HYBRID_PAID:
     ScheduledAction?: string;
 }
 /**
+ * 出参类型
+ */
+export interface TrainingTaskSetItem {
+    /**
+      * 训练任务ID
+      */
+    Id: string;
+    /**
+      * 训练任务名称
+      */
+    Name: string;
+    /**
+      * 框架名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrameworkName: string;
+    /**
+      * 训练框架版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrameworkVersion: string;
+    /**
+      * 框架运行环境
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrameworkEnvironment: string;
+    /**
+      * 计费模式
+      */
+    ChargeType: string;
+    /**
+      * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+      */
+    ChargeStatus: string;
+    /**
+      * 预付费专用资源组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceGroupId: string;
+    /**
+      * 资源配置
+      */
+    ResourceConfigInfos: Array<ResourceConfigInfo>;
+    /**
+      * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TrainingMode: string;
+    /**
+      * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
+      */
+    Status: string;
+    /**
+      * 运行时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuntimeInSeconds: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 训练开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 训练结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 训练输出
+      */
+    Output: CosPathInfo;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailureReason: string;
+    /**
+      * 更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 计费金额信息，eg：2.00元/小时 (按量计费)
+      */
+    BillingInfo: string;
+    /**
+      * 预付费专用资源组名称
+      */
+    ResourceGroupName: string;
+    /**
+      * 自定义镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageInfo: ImageInfo;
+    /**
+      * 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 标签配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 回调地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CallbackUrl: string;
+}
+/**
  * DescribeModelService请求参数结构体
  */
 export interface DescribeModelServiceRequest {
@@ -3601,12 +3721,10 @@ Gpu=100表示使用了“一张”gpu卡, 但此处的“一张”卡有可能�
       * 创建或更新时无需填写，仅展示需要关注
 后付费非整卡实例对应的实际的Gpu卡资源, 表示gpu资源对应实际的gpu卡个数.
 RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有可能代表带有1/4卡的实例4个, 或者带有1/2卡的实例2个, 或者带有1卡的实力1个.
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RealGpu?: number;
     /**
       * 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RealGpuDetailSet?: Array<GpuDetail>;
 }
@@ -3678,15 +3796,6 @@ export interface ScheduledAction {
       * 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00”
       */
     ScheduleStopTime?: string;
-}
-/**
- * DeleteModelAccelerateTask返回参数结构体
- */
-export interface DeleteModelAccelerateTaskResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DeleteTrainingTask请求参数结构体
@@ -3944,6 +4053,20 @@ export interface CreateModelServiceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeModelServiceGroup返回参数结构体
+ */
+export interface DescribeModelServiceGroupResponse {
+    /**
+      * 服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceGroup: ServiceGroup;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 在线服务一个服务组的信息
  */
 export interface ServiceGroup {
@@ -4081,14 +4204,9 @@ export interface ServiceLimit {
     InstanceRpsLimit?: number;
 }
 /**
- * DescribeModelServiceGroup返回参数结构体
+ * DeleteModelAccelerateTask返回参数结构体
  */
-export interface DescribeModelServiceGroupResponse {
-    /**
-      * 服务组信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceGroup: ServiceGroup;
+export interface DeleteModelAccelerateTaskResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4879,118 +4997,13 @@ export interface RowValue {
     Value: string;
 }
 /**
- * 出参类型
+ * DescribeTrainingTaskPods请求参数结构体
  */
-export interface TrainingTaskSetItem {
+export interface DescribeTrainingTaskPodsRequest {
     /**
       * 训练任务ID
       */
     Id: string;
-    /**
-      * 训练任务名称
-      */
-    Name: string;
-    /**
-      * 框架名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FrameworkName: string;
-    /**
-      * 训练框架版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FrameworkVersion: string;
-    /**
-      * 框架运行环境
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FrameworkEnvironment: string;
-    /**
-      * 计费模式
-      */
-    ChargeType: string;
-    /**
-      * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
-      */
-    ChargeStatus: string;
-    /**
-      * 预付费专用资源组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceGroupId: string;
-    /**
-      * 资源配置
-      */
-    ResourceConfigInfos: Array<ResourceConfigInfo>;
-    /**
-      * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TrainingMode: string;
-    /**
-      * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
-      */
-    Status: string;
-    /**
-      * 运行时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RuntimeInSeconds: number;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 训练开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-    /**
-      * 训练结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndTime: string;
-    /**
-      * 训练输出
-      */
-    Output: CosPathInfo;
-    /**
-      * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailureReason: string;
-    /**
-      * 更新时间
-      */
-    UpdateTime: string;
-    /**
-      * 计费金额信息，eg：2.00元/小时 (按量计费)
-      */
-    BillingInfo: string;
-    /**
-      * 预付费专用资源组名称
-      */
-    ResourceGroupName: string;
-    /**
-      * 自定义镜像信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageInfo: ImageInfo;
-    /**
-      * 任务信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-    /**
-      * 标签配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<Tag>;
-    /**
-      * 回调地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CallbackUrl: string;
 }
 /**
  * DescribeTrainingModelVersions返回参数结构体
@@ -5083,10 +5096,15 @@ export interface DataConfig {
       */
     HDFSSource?: HDFSConfig;
     /**
-      * 配饰GooseFS的数据
+      * 配置GooseFS的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GooseFSSource?: GooseFS;
+    /**
+      * 配置TurboFS的数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CFSTurboSource?: CFSTurbo;
 }
 /**
  * DescribeTrainingModelVersion请求参数结构体

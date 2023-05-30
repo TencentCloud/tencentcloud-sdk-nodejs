@@ -29,6 +29,7 @@ import {
   ResizeSyncJobResponse,
   ResumeMigrateJobResponse,
   DifferenceItem,
+  CreateModifyCheckSyncJobRequest,
   IsolateSyncJobRequest,
   PauseMigrateJobRequest,
   ContinueMigrateJobRequest,
@@ -43,6 +44,7 @@ import {
   DescribeMigrateDBInstancesResponse,
   KeyValuePairOption,
   CreateCheckSyncJobRequest,
+  DescribeModifyCheckSyncJobResultResponse,
   StopSyncJobRequest,
   DescribeMigrationDetailRequest,
   DestroySyncJobRequest,
@@ -54,6 +56,7 @@ import {
   StartSyncJobRequest,
   PauseSyncJobRequest,
   CreateMigrateCheckJobResponse,
+  ModifySyncJobConfigRequest,
   ContinueMigrateJobResponse,
   CreateMigrationServiceRequest,
   DetailCheckItem,
@@ -71,16 +74,18 @@ import {
   DescribeCompareTasksResponse,
   StopCompareRequest,
   SyncDBEndpointInfos,
+  StartModifySyncJobRequest,
   DescribeCheckSyncJobResultResponse,
   StopSyncJobResponse,
   SkippedDetail,
   MigrateOption,
   ModifyMigrateNameResponse,
   DescribeMigrationJobsResponse,
-  SkippedItem,
+  ModifyMigrationJobRequest,
   DestroyMigrateJobResponse,
   ProcessProgress,
   SkipSyncCheckItemRequest,
+  DescribeModifyCheckSyncJobResultRequest,
   SkipSyncCheckItemResponse,
   IsolateSyncJobResponse,
   CreateMigrateCheckJobRequest,
@@ -96,6 +101,7 @@ import {
   CreateCheckSyncJobResponse,
   CompareObjectItem,
   ConfigureSyncJobRequest,
+  StartModifySyncJobResponse,
   MigrateDBItem,
   DescribeMigrateDBInstancesRequest,
   CheckStepInfo,
@@ -103,7 +109,7 @@ import {
   ModifyCompareTaskRequest,
   RecoverSyncJobRequest,
   Database,
-  ModifyMigrationJobRequest,
+  JobItem,
   DescribeSyncJobsRequest,
   SyncDetailInfo,
   ResumeSyncJobRequest,
@@ -115,6 +121,7 @@ import {
   PauseSyncJobResponse,
   TradeInfo,
   StartCompareResponse,
+  DynamicOptions,
   CreateCompareTaskResponse,
   StopCompareResponse,
   SkipCheckItemRequest,
@@ -127,8 +134,8 @@ import {
   StartCompareRequest,
   DescribeMigrationCheckJobRequest,
   DescribeMigrationDetailResponse,
+  CreateModifyCheckSyncJobResponse,
   ModifyMigrateNameRequest,
-  JobItem,
   StartSyncJobResponse,
   Objects,
   RecoverMigrateJobResponse,
@@ -139,12 +146,14 @@ import {
   IsolateMigrateJobResponse,
   SyncJobInfo,
   CompareOptions,
+  ModifySyncJobConfigResponse,
   RoleItem,
   TagFilter,
   StepDetailInfo,
   CreateSyncJobRequest,
   ViewItem,
   DescribeCompareReportRequest,
+  SkippedItem,
   View,
   TagItem,
   RecoverMigrateJobRequest,
@@ -164,6 +173,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dts.tencentcloudapi.com", "2021-12-06", clientConfig)
+  }
+
+  /**
+   * 在修改同步任务的配置后、通过该接口校验当前任务是否支持修改对象操作
+   */
+  async CreateModifyCheckSyncJob(
+    req: CreateModifyCheckSyncJobRequest,
+    cb?: (error: string, rep: CreateModifyCheckSyncJobResponse) => void
+  ): Promise<CreateModifyCheckSyncJobResponse> {
+    return this.request("CreateModifyCheckSyncJob", req, cb)
   }
 
   /**
@@ -327,13 +346,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动一致性校验任务，启动之前需要先通过接口`CreateCompareTask` 创建一致性校验任务，启动后可通过接口`DescribeCompareTasks` 查询一致性校验任务列表来获得启动后的状态
-   */
-  async StartCompare(
-    req: StartCompareRequest,
-    cb?: (error: string, rep: StartCompareResponse) => void
-  ): Promise<StartCompareResponse> {
-    return this.request("StartCompare", req, cb)
+     * 该接口支持在同步任务启动后修改任务的配置
+修改同步配置的完整流程：修改同步任务配置->创建修改同步任务配置的校验任务->查询修改配置的校验任务的结果->启动修改配置任务
+     */
+  async ModifySyncJobConfig(
+    req: ModifySyncJobConfigRequest,
+    cb?: (error: string, rep: ModifySyncJobConfigResponse) => void
+  ): Promise<ModifySyncJobConfigResponse> {
+    return this.request("ModifySyncJobConfig", req, cb)
   }
 
   /**
@@ -368,6 +388,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+   */
+  async StartModifySyncJob(
+    req: StartModifySyncJobRequest,
+    cb?: (error: string, rep: StartModifySyncJobResponse) => void
+  ): Promise<StartModifySyncJobResponse> {
+    return this.request("StartModifySyncJob", req, cb)
+  }
+
+  /**
+   * 启动一致性校验任务，启动之前需要先通过接口`CreateCompareTask` 创建一致性校验任务，启动后可通过接口`DescribeCompareTasks` 查询一致性校验任务列表来获得启动后的状态
+   */
+  async StartCompare(
+    req: StartCompareRequest,
+    cb?: (error: string, rep: StartCompareResponse) => void
+  ): Promise<StartCompareResponse> {
+    return this.request("StartCompare", req, cb)
+  }
+
+  /**
    * 恢复处于已暂停状态的数据同步任务。
    */
   async ContinueSyncJob(
@@ -378,13 +418,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下线同步任务，任务在已隔离状态下可以通过此操作进行任务下线，即彻底删除任务。下线操作后可通过查询同步任务信息接口DescribeSyncJobs获取任务列表查看状态，此操作成功后无法看到此任务表示下线成功。
+   *  隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrationJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接销毁任务，无法进行恢复操作。
    */
-  async DestroySyncJob(
-    req: DestroySyncJobRequest,
-    cb?: (error: string, rep: DestroySyncJobResponse) => void
-  ): Promise<DestroySyncJobResponse> {
-    return this.request("DestroySyncJob", req, cb)
+  async IsolateMigrateJob(
+    req: IsolateMigrateJobRequest,
+    cb?: (error: string, rep: IsolateMigrateJobResponse) => void
+  ): Promise<IsolateMigrateJobResponse> {
+    return this.request("IsolateMigrateJob", req, cb)
   }
 
   /**
@@ -491,6 +531,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在创建修改对象的校验任务后、通过该接口查看校验任务的结果
+   */
+  async DescribeModifyCheckSyncJobResult(
+    req: DescribeModifyCheckSyncJobResultRequest,
+    cb?: (error: string, rep: DescribeModifyCheckSyncJobResultResponse) => void
+  ): Promise<DescribeModifyCheckSyncJobResultResponse> {
+    return this.request("DescribeModifyCheckSyncJobResult", req, cb)
+  }
+
+  /**
    * 下线数据迁移任务。计费任务必须先调用隔离(IsolateMigrateJob)接口，且只有是**已隔离**状态下，才能调用此接口销毁任务。对于不计费任务，调用隔离(IsolateMigrateJob)接口删除任务操作。
    */
   async DestroyMigrateJob(
@@ -553,13 +603,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrationJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接销毁任务，无法进行恢复操作。
+   * 下线同步任务，任务在已隔离状态下可以通过此操作进行任务下线，即彻底删除任务。下线操作后可通过查询同步任务信息接口DescribeSyncJobs获取任务列表查看状态，此操作成功后无法看到此任务表示下线成功。
    */
-  async IsolateMigrateJob(
-    req: IsolateMigrateJobRequest,
-    cb?: (error: string, rep: IsolateMigrateJobResponse) => void
-  ): Promise<IsolateMigrateJobResponse> {
-    return this.request("IsolateMigrateJob", req, cb)
+  async DestroySyncJob(
+    req: DestroySyncJobRequest,
+    cb?: (error: string, rep: DestroySyncJobResponse) => void
+  ): Promise<DestroySyncJobResponse> {
+    return this.request("DestroySyncJob", req, cb)
   }
 
   /**

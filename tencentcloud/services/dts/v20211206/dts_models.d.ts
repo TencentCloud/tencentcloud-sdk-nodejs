@@ -184,6 +184,15 @@ export interface DifferenceItem {
     FinishedAt: string;
 }
 /**
+ * CreateModifyCheckSyncJob请求参数结构体
+ */
+export interface CreateModifyCheckSyncJobRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
+}
+/**
  * IsolateSyncJob请求参数结构体
  */
 export interface IsolateSyncJobRequest {
@@ -360,6 +369,39 @@ export interface CreateCheckSyncJobRequest {
     JobId: string;
 }
 /**
+ * DescribeModifyCheckSyncJobResult返回参数结构体
+ */
+export interface DescribeModifyCheckSyncJobResultResponse {
+    /**
+      * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
+      */
+    Status?: string;
+    /**
+      * 校验的步骤总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepCount?: number;
+    /**
+      * 当前所在步骤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepCur?: number;
+    /**
+      * 总体进度，范围为[0,100]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Progress?: number;
+    /**
+      * 步骤详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepInfos?: Array<StepInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StopSyncJob请求参数结构体
  */
 export interface StopSyncJobRequest {
@@ -478,6 +520,23 @@ export interface CreateMigrateCheckJobResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifySyncJobConfig请求参数结构体
+ */
+export interface ModifySyncJobConfigRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
+    /**
+      * 修改后的同步对象
+      */
+    DynamicObjects?: Objects;
+    /**
+      * 修改后的同步任务选项
+      */
+    DynamicOptions?: DynamicOptions;
 }
 /**
  * ContinueMigrateJob返回参数结构体
@@ -873,6 +932,15 @@ export interface SyncDBEndpointInfos {
     Info: Array<Endpoint>;
 }
 /**
+ * StartModifySyncJob请求参数结构体
+ */
+export interface StartModifySyncJobRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
+}
+/**
  * DescribeCheckSyncJobResult返回参数结构体
  */
 export interface DescribeCheckSyncJobResultResponse {
@@ -1000,24 +1068,45 @@ export interface DescribeMigrationJobsResponse {
     RequestId?: string;
 }
 /**
- * 跳过校验的表详情
+ * ModifyMigrationJob请求参数结构体
  */
-export interface SkippedItem {
+export interface ModifyMigrationJobRequest {
     /**
-      * 数据库名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务id
       */
-    Db: string;
+    JobId: string;
     /**
-      * 表名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行)
       */
-    Table: string;
+    RunMode: string;
     /**
-      * 未发起检查的原因
-注意：此字段可能返回 null，表示取不到有效值。
+      * 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息
       */
-    Reason: string;
+    MigrateOption: MigrateOption;
+    /**
+      * 源实例信息
+      */
+    SrcInfo: DBEndpointInfo;
+    /**
+      * 目标实例信息
+      */
+    DstInfo: DBEndpointInfo;
+    /**
+      * 迁移任务名称，最大长度128
+      */
+    JobName?: string;
+    /**
+      * 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05"
+      */
+    ExpectRunTime?: string;
+    /**
+      * 标签信息
+      */
+    Tags?: Array<TagItem>;
+    /**
+      * 自动重试的时间段、可设置5至720分钟、0表示不重试
+      */
+    AutoRetryTimeRangeMinutes?: number;
 }
 /**
  * DestroyMigrateJob返回参数结构体
@@ -1075,6 +1164,15 @@ export interface SkipSyncCheckItemRequest {
       * 需要跳过校验项的步骤id，需要通过`DescribeCheckSyncJobResult`接口返回StepInfos[i].StepId字段获取，例如：["OptimizeCheck"]
       */
     StepIds: Array<string>;
+}
+/**
+ * DescribeModifyCheckSyncJobResult请求参数结构体
+ */
+export interface DescribeModifyCheckSyncJobResultRequest {
+    /**
+      * 同步任务id
+      */
+    JobId: string;
 }
 /**
  * SkipSyncCheckItem返回参数结构体
@@ -1633,6 +1731,15 @@ export interface ConfigureSyncJobRequest {
     AutoRetryTimeRangeMinutes?: number;
 }
 /**
+ * StartModifySyncJob返回参数结构体
+ */
+export interface StartModifySyncJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 查询迁移实例列表的实例对象
  */
 export interface MigrateDBItem {
@@ -1875,45 +1982,101 @@ export interface Database {
     Events?: Array<string>;
 }
 /**
- * ModifyMigrationJob请求参数结构体
+ * 迁移任务列表
  */
-export interface ModifyMigrationJobRequest {
+export interface JobItem {
     /**
-      * 任务id
+      * 数据迁移任务ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
     JobId: string;
     /**
-      * 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行)
+      * 数据迁移任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JobName: string;
+    /**
+      * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 迁移任务错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BriefMsg: string;
+    /**
+      * 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
+pausing(暂停中)、
+manualPaused(已暂停)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
+注意：此字段可能返回 null，表示取不到有效值。
       */
     RunMode: string;
     /**
-      * 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息
+      * 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MigrateOption: MigrateOption;
+    ExpectRunTime: string;
+    /**
+      * 任务操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Action: MigrateAction;
+    /**
+      * 迁移执行过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepInfo: MigrateDetailInfo;
     /**
       * 源实例信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
     SrcInfo: DBEndpointInfo;
     /**
-      * 目标实例信息
+      * 目标端信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
     DstInfo: DBEndpointInfo;
     /**
-      * 迁移任务名称，最大长度128
+      * 数据一致性校验结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobName?: string;
+    CompareTask: CompareTaskInfo;
     /**
-      * 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05"
+      * 计费状态信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExpectRunTime?: string;
+    TradeInfo: TradeInfo;
     /**
       * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<TagItem>;
+    Tags: Array<TagItem>;
     /**
-      * 自动重试的时间段、可设置5至720分钟、0表示不重试
+      * 自动重试时间段信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    AutoRetryTimeRangeMinutes?: number;
+    AutoRetryTimeRangeMinutes: number;
 }
 /**
  * DescribeSyncJobs请求参数结构体
@@ -2187,6 +2350,31 @@ export interface StartCompareResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据同步中的选项
+ */
+export interface DynamicOptions {
+    /**
+      * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpTypes: Array<string>;
+    /**
+      * DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DdlOptions: Array<DdlOption>;
+    /**
+      * 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConflictHandleType?: string;
+    /**
+      * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConflictHandleOption?: ConflictHandleOption;
 }
 /**
  * CreateCompareTask返回参数结构体
@@ -2599,6 +2787,15 @@ manualPaused(已暂停)
     RequestId?: string;
 }
 /**
+ * CreateModifyCheckSyncJob返回参数结构体
+ */
+export interface CreateModifyCheckSyncJobResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyMigrateName请求参数结构体
  */
 export interface ModifyMigrateNameRequest {
@@ -2610,103 +2807,6 @@ export interface ModifyMigrateNameRequest {
       * 修改后的迁移任务名
       */
     JobName: string;
-}
-/**
- * 迁移任务列表
- */
-export interface JobItem {
-    /**
-      * 数据迁移任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    JobId: string;
-    /**
-      * 数据迁移任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    JobName: string;
-    /**
-      * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime: string;
-    /**
-      * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-    /**
-      * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndTime: string;
-    /**
-      * 迁移任务错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BriefMsg: string;
-    /**
-      * 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
-pausing(暂停中)、
-manualPaused(已暂停)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: string;
-    /**
-      * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RunMode: string;
-    /**
-      * 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExpectRunTime: string;
-    /**
-      * 任务操作信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Action: MigrateAction;
-    /**
-      * 迁移执行过程信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StepInfo: MigrateDetailInfo;
-    /**
-      * 源实例信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SrcInfo: DBEndpointInfo;
-    /**
-      * 目标端信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DstInfo: DBEndpointInfo;
-    /**
-      * 数据一致性校验结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CompareTask: CompareTaskInfo;
-    /**
-      * 计费状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TradeInfo: TradeInfo;
-    /**
-      * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<TagItem>;
-    /**
-      * 自动重试时间段信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AutoRetryTimeRangeMinutes: number;
 }
 /**
  * StartSyncJob返回参数结构体
@@ -3093,6 +3193,15 @@ export interface CompareOptions {
     ThreadCount?: number;
 }
 /**
+ * ModifySyncJobConfig返回参数结构体
+ */
+export interface ModifySyncJobConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 角色对象，postgresql独有参数
  */
 export interface RoleItem {
@@ -3282,6 +3391,26 @@ export interface DescribeCompareReportRequest {
       * 搜索条件，未校验的表名
       */
     SkippedTable?: string;
+}
+/**
+ * 跳过校验的表详情
+ */
+export interface SkippedItem {
+    /**
+      * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Db: string;
+    /**
+      * 表名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Table: string;
+    /**
+      * 未发起检查的原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
 }
 /**
  * 数据同步view的描述

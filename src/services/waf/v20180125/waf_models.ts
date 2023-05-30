@@ -815,6 +815,11 @@ export interface SearchAttackLogRequest {
    * 默认为desc，可以取值desc和asc
    */
   Sort?: string
+
+  /**
+   * 第几页，从0开始
+   */
+  Page?: number
 }
 
 /**
@@ -1962,6 +1967,11 @@ export interface PostAttackDownloadTaskRequest {
    * 默认为desc，可以取值desc和asc
    */
   Sort?: string
+
+  /**
+   * 下载的日志条数
+   */
+  Count?: number
 }
 
 /**
@@ -2283,6 +2293,11 @@ export interface QPSPackageNew {
    * 套餐购买地域，clb-waf暂时没有用到
    */
   Region: string
+
+  /**
+   * 计费项
+   */
+  BillingItem?: string
 }
 
 /**
@@ -3957,7 +3972,7 @@ export interface BotStatPointItem {
  */
 export interface SearchAccessLogRequest {
   /**
-   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串
    */
   TopicId: string
 
@@ -3982,14 +3997,20 @@ export interface SearchAccessLogRequest {
   Limit?: number
 
   /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
-   */
+      * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。
+新版本此字段填空填
+      */
   Context?: string
 
   /**
    * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
    */
   Sort?: string
+
+  /**
+   * 第几页，从0开始。新版本接口字段
+   */
+  Page?: number
 }
 
 /**

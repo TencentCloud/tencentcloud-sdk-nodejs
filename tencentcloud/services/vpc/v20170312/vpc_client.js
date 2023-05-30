@@ -54,7 +54,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (AdjustPublicAddress) 用于更换IP地址，支持更换CVM实例的普通公网IP和包月带宽的EIP。
-
      */
     async AdjustPublicAddress(req, cb) {
         return this.request("AdjustPublicAddress", req, cb);

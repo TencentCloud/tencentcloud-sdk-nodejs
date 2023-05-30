@@ -85,6 +85,10 @@ export interface ClusterOverview {
       */
     LoginNodeCount: number;
     /**
+      * 弹性伸缩类型。<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
+      */
+    AutoScalingType: string;
+    /**
       * 集群所属私有网络ID。
       */
     VpcId: string;

@@ -18,6 +18,16 @@ const client = new tencentcloud.dts.v20211206.Client({
 })
 describe("dts.v20211206.test.js", function () {
 
+it("dts.v20211206.CreateModifyCheckSyncJob", async function () {
+    try {
+       const data = await client.CreateModifyCheckSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ModifyMigrationJob", async function () {
     try {
        const data = await client.ModifyMigrationJob({})
@@ -178,9 +188,9 @@ it("dts.v20211206.ResizeSyncJob", async function () {
     }
 })
 
-it("dts.v20211206.StartCompare", async function () {
+it("dts.v20211206.ModifySyncJobConfig", async function () {
     try {
-       const data = await client.StartCompare({})
+       const data = await client.ModifySyncJobConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +228,26 @@ it("dts.v20211206.PauseSyncJob", async function () {
     }
 })
 
+it("dts.v20211206.StartModifySyncJob", async function () {
+    try {
+       const data = await client.StartModifySyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.StartCompare", async function () {
+    try {
+       const data = await client.StartCompare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ContinueSyncJob", async function () {
     try {
        const data = await client.ContinueSyncJob({})
@@ -228,9 +258,9 @@ it("dts.v20211206.ContinueSyncJob", async function () {
     }
 })
 
-it("dts.v20211206.DestroySyncJob", async function () {
+it("dts.v20211206.IsolateMigrateJob", async function () {
     try {
-       const data = await client.DestroySyncJob({})
+       const data = await client.IsolateMigrateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +368,16 @@ it("dts.v20211206.CreateCompareTask", async function () {
     }
 })
 
+it("dts.v20211206.DescribeModifyCheckSyncJobResult", async function () {
+    try {
+       const data = await client.DescribeModifyCheckSyncJobResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DestroyMigrateJob", async function () {
     try {
        const data = await client.DestroyMigrateJob({})
@@ -398,9 +438,9 @@ it("dts.v20211206.ModifyMigrateJobSpec", async function () {
     }
 })
 
-it("dts.v20211206.IsolateMigrateJob", async function () {
+it("dts.v20211206.DestroySyncJob", async function () {
     try {
-       const data = await client.IsolateMigrateJob({})
+       const data = await client.DestroySyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

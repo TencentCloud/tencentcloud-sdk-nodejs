@@ -5050,7 +5050,7 @@ export interface AdjustPublicAddressResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7076,7 +7076,7 @@ export interface AssociateAddressResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8981,7 +8981,7 @@ export interface ModifyAddressesBandwidthResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10174,12 +10174,12 @@ export interface DescribeAddressesResponse {
   /**
    * 符合条件的 EIP 数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * EIP 详细信息列表。
    */
-  AddressSet: Array<Address>
+  AddressSet?: Array<Address>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13786,7 +13786,7 @@ export interface ReleaseAddressesResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

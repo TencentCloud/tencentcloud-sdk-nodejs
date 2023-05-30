@@ -19027,13 +19027,37 @@ export interface ComponentsInfo {
       * 组件名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Component: string
+  Component?: string
 
   /**
       * 组件版本信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Version: string
+
+  /**
+      * 可修复版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FixedVersion?: string
+
+  /**
+      * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path?: string
+
+  /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 组件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
 }
 
 /**

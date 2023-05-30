@@ -1185,6 +1185,47 @@ export interface OcrWordsConfigureInfo {
 }
 
 /**
+ * 诊断结果项。
+ */
+export interface DiagnoseResult {
+  /**
+      * 诊断出的异常类别。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Category?: string
+
+  /**
+      * 诊断出的具体异常类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 诊断出异常开始的PTS时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp?: number
+
+  /**
+      * 诊断出的异常描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 诊断到异常的北京时间，采用 ISO 日期格式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DateTime?: string
+
+  /**
+      * 诊断出的异常级别。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SeverityLevel?: string
+}
+
+/**
  * 自定义水印规格参数。
  */
 export interface RawWatermarkParameter {
@@ -1964,6 +2005,18 @@ export interface ParseLiveStreamProcessNotificationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AiRecognitionResultInfo?: LiveStreamAiRecognitionResultInfo
+
+  /**
+      * 内容分析结果，当 NotificationType 为 AiAnalysisResult 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AiAnalysisResultInfo?: LiveStreamAiAnalysisResultInfo
+
+  /**
+      * 媒体质检结果，当 NotificationType 为 AiQualityControlResult 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AiQualityControlResultInfo?: LiveStreamAiQualityControlResultInfo
 
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
@@ -4588,6 +4641,23 @@ export interface DeleteWordSamplesRequest {
    * 关键词，数组长度限制：100 个词。
    */
   Keywords: Array<string>
+}
+
+/**
+ * 直播流质检结果
+ */
+export interface LiveStreamAiQualityControlResultInfo {
+  /**
+      * 质检结果列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QualityControlResults: Array<QualityControlResult>
+
+  /**
+      * 格式诊断结果列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnoseResults?: Array<DiagnoseResult>
 }
 
 /**
@@ -8145,6 +8215,24 @@ export interface LiveStreamAsrFullTextRecognitionResult {
    * 识别片段置信度。取值：0~100。
    */
   Confidence: number
+
+  /**
+      * 识别开始UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 识别结束UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 稳态标记。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SteadyState?: boolean
 }
 
 /**
@@ -8233,6 +8321,32 @@ export interface WithdrawsWatermarkResponse {
 }
 
 /**
+ * 智能拆条片段。
+ */
+export interface SegmentRecognitionItem {
+  /**
+   * 置信度。
+   */
+  Confidence: number
+
+  /**
+   * 片段起始时间偏移。
+   */
+  StartTimeOffset: number
+
+  /**
+   * 片段结束时间偏移。
+   */
+  EndTimeOffset: number
+
+  /**
+      * 拆条片段URL。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SegmentUrl?: string
+}
+
+/**
  * 内容审核 Asr 文字敏感任务输入参数类型
  */
 export interface AiReviewPoliticalAsrTaskInput {
@@ -8240,6 +8354,17 @@ export interface AiReviewPoliticalAsrTaskInput {
    * 模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 直播流分析结果
+ */
+export interface LiveStreamAiAnalysisResultInfo {
+  /**
+      * 直播分析子任务结果，暂时只支持直播拆条。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultSet?: Array<LiveStreamAiAnalysisResultItem>
 }
 
 /**
@@ -9029,35 +9154,35 @@ export interface ParseNotificationResponse {
 <li>EditMediaTask：视频编辑任务。</li>
 <li>ScheduleTask：编排任务。</li>
       */
-  EventType: string
+  EventType?: string
 
   /**
       * 视频处理任务信息，仅当 EventType 为 WorkflowTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WorkflowTaskEvent: WorkflowTask
+  WorkflowTaskEvent?: WorkflowTask
 
   /**
       * 视频编辑任务信息，仅当 EventType 为 EditMediaTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EditMediaTaskEvent: EditMediaTask
+  EditMediaTaskEvent?: EditMediaTask
 
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
 
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。
    */
-  SessionContext: string
+  SessionContext?: string
 
   /**
       * 编排任务信息，仅当 EventType 为 ScheduleTask，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScheduleTaskEvent: ScheduleTask
+  ScheduleTaskEvent?: ScheduleTask
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9876,6 +10001,24 @@ export interface LiveStreamTransTextRecognitionResult {
    * 翻译文本。
    */
   Trans: string
+
+  /**
+      * 翻译开始UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 翻译结束UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 稳态标记。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SteadyState?: boolean
 }
 
 /**
@@ -13913,6 +14056,24 @@ export interface RegionInfo {
    * 地区名称。
    */
   Name: string
+}
+
+/**
+ * 直播流 AI 分析结果
+ */
+export interface LiveStreamAiAnalysisResultItem {
+  /**
+      * 结果的类型，取值范围：
+<li>SegmentRecognition：拆条。</li>
+      */
+  Type: string
+
+  /**
+      * 拆条结果，当 Type 为
+SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SegmentResultSet: Array<SegmentRecognitionItem>
 }
 
 /**

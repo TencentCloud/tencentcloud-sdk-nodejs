@@ -5308,36 +5308,41 @@ export interface PulsarProClusterInfo {
     /**
       * 集群Id。
       */
-    ClusterId: string;
+    ClusterId?: string;
     /**
       * 集群名称。
       */
-    ClusterName: string;
+    ClusterName?: string;
     /**
       * 说明信息。
       */
-    Remark: string;
+    Remark?: string;
     /**
       * 创建时间
       */
-    CreateTime: string;
+    CreateTime?: string;
     /**
       * 集群状态，0:创建中，1:正常，2:隔离
       */
-    Status: number;
+    Status?: number;
     /**
       * 集群版本
       */
-    Version: string;
+    Version?: string;
     /**
       * 节点分布情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodeDistribution: Array<InstanceNodeDistribution>;
+    NodeDistribution?: Array<InstanceNodeDistribution>;
     /**
       * 最大储存容量，单位：MB
       */
-    MaxStorage: number;
+    MaxStorage?: number;
+    /**
+      * 是否可以修改路由
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CanEditRoute?: boolean;
 }
 /**
  * AMQP 队列信息
