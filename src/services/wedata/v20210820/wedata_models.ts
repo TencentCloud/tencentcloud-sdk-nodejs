@@ -1492,6 +1492,31 @@ export interface DescribeOperateTasksRequest {
    * 任务所属产品类型
    */
   ProductNameList?: string
+
+  /**
+   * 数据源id或（仅针对离线同步任务）来源数据源id
+   */
+  SourceServiceId?: string
+
+  /**
+   * 数据源类型或（仅针对离线同步任务）来源数据源类型
+   */
+  SourceServiceType?: string
+
+  /**
+   * （仅针对离线同步任务）目标数据源id
+   */
+  TargetServiceId?: string
+
+  /**
+   * （仅针对离线同步任务）目标数据源类型
+   */
+  TargetServiceType?: string
+
+  /**
+   * 告警类型，多个类型以逗号分隔
+   */
+  AlarmType?: string
 }
 
 /**
@@ -3118,6 +3143,60 @@ export interface TaskCanvasInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DelayTime: number
+
+  /**
+      * 执行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecutionStartTime?: string
+
+  /**
+      * 执行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecutionEndTime?: string
+
+  /**
+      * 层级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Layer?: string
+
+  /**
+      * 来源数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceServiceId?: string
+
+  /**
+      * 来源数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceServiceType?: string
+
+  /**
+      * 目标数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetServiceId?: string
+
+  /**
+      * 目标数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetServiceType?: string
+
+  /**
+      * 任务告警类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmType?: string
+
+  /**
+      * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
 }
 
 /**
@@ -13557,6 +13636,16 @@ export interface TaskInfoPage {
    * 总页数
    */
   TotalPage: number
+
+  /**
+   * 页数
+   */
+  PageCount?: number
+
+  /**
+   * 总条数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -14734,7 +14823,7 @@ export interface DescribeOperateTasksResponse {
   /**
    * 任务列表信息
    */
-  Data: TaskInfoPage
+  Data?: TaskInfoPage
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

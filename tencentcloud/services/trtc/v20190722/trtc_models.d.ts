@@ -601,10 +601,12 @@ export interface CloudStorage {
     Bucket: string;
     /**
       * 第三方存储的access_key账号信息。
+若存储至腾讯云COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建
       */
     AccessKey: string;
     /**
       * 第三方存储的secret_key账号信息。
+若存储至腾讯云COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建
       */
     SecretKey: string;
     /**

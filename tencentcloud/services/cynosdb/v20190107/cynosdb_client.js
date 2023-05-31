@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupConfig", req, cb);
     }
     /**
+     * 给资源包绑定集群
+     */
+    async ModifyResourcePackageClusters(req, cb) {
+        return this.request("ModifyResourcePackageClusters", req, cb);
+    }
+    /**
      * 创建审计规则模版
      */
     async CreateAuditRuleTemplate(req, cb) {
@@ -298,6 +304,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccounts", req, cb);
     }
     /**
+     * 新购资源包
+     */
+    async CreateResourcePackage(req, cb) {
+        return this.request("CreateResourcePackage", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
      */
     async DescribeAuditLogFiles(req, cb) {
@@ -394,10 +406,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceParam", req, cb);
     }
     /**
+     * 为集群绑定资源包
+     */
+    async BindClusterResourcePackages(req, cb) {
+        return this.request("BindClusterResourcePackages", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
      */
     async DescribeAuditLogs(req, cb) {
         return this.request("DescribeAuditLogs", req, cb);
+    }
+    /**
+     * cynos解绑资源包
+     */
+    async UnbindClusterResourcePackages(req, cb) {
+        return this.request("UnbindClusterResourcePackages", req, cb);
     }
     /**
      * 本接口（OpenWan）用于开通外网
@@ -416,6 +440,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AssociateSecurityGroups(req, cb) {
         return this.request("AssociateSecurityGroups", req, cb);
+    }
+    /**
+     * 查询资源包规格
+     */
+    async DescribeResourcePackageSaleSpec(req, cb) {
+        return this.request("DescribeResourcePackageSaleSpec", req, cb);
     }
     /**
      * 修改账号权限
@@ -466,6 +496,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenew", req, cb);
     }
     /**
+     * 本接口(SearchClusterDatabases)搜索集群database列表
+     */
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
+    }
+    /**
      * 修改审计规则模版
      */
     async ModifyAuditRuleTemplates(req, cb) {
@@ -490,6 +526,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterDatabase", req, cb);
     }
     /**
+     * TDSQL-C for MySQL实例开通审计服务
+     */
+    async OpenAuditService(req, cb) {
+        return this.request("OpenAuditService", req, cb);
+    }
+    /**
      * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
      */
     async DeleteAuditLogFile(req, cb) {
@@ -500,6 +542,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAuditRuleTemplates(req, cb) {
         return this.request("DescribeAuditRuleTemplates", req, cb);
+    }
+    /**
+     * 查询资源包使用详情
+     */
+    async DescribeResourcePackageDetail(req, cb) {
+        return this.request("DescribeResourcePackageDetail", req, cb);
     }
     /**
      * 修改指定集群的备份配置
@@ -520,16 +568,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeClusterVersion", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 查询资源包列表
      */
-    async SearchClusterDatabases(req, cb) {
-        return this.request("SearchClusterDatabases", req, cb);
+    async DescribeResourcePackageList(req, cb) {
+        return this.request("DescribeResourcePackageList", req, cb);
     }
     /**
      * 本接口（DescribeClusterParams）用于查询集群参数
      */
     async DescribeClusterParams(req, cb) {
         return this.request("DescribeClusterParams", req, cb);
+    }
+    /**
+     * 退款资源包
+     */
+    async RefundResourcePackage(req, cb) {
+        return this.request("RefundResourcePackage", req, cb);
     }
     /**
      * 本接口(ModifyInstanceName)用于修改实例名称。
@@ -646,10 +700,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenClusterPasswordComplexity", req, cb);
     }
     /**
-     * TDSQL-C for MySQL实例开通审计服务
+     * 修改资源包名称
      */
-    async OpenAuditService(req, cb) {
-        return this.request("OpenAuditService", req, cb);
+    async ModifyResourcePackageName(req, cb) {
+        return this.request("ModifyResourcePackageName", req, cb);
     }
     /**
      * 删除从可用区

@@ -19,6 +19,8 @@ export declare class Client extends AbstractClient {
     CreateImageLifecyclePersonal(req: CreateImageLifecyclePersonalRequest, cb?: (error: string, rep: CreateImageLifecyclePersonalResponse) => void): Promise<CreateImageLifecyclePersonalResponse>;
     /**
      * 删除实例公网访问白名单策略
+
+注意：当PolicyIndex和CidrBlock同时存在时，CidrBlock优先级更高
      */
     DeleteSecurityPolicy(req: DeleteSecurityPolicyRequest, cb?: (error: string, rep: DeleteSecurityPolicyResponse) => void): Promise<DeleteSecurityPolicyResponse>;
     /**

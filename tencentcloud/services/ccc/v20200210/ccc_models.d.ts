@@ -44,15 +44,15 @@ export interface CreateSDKLoginTokenResponse {
     /**
       * SDK 登录 Token。
       */
-    Token: string;
+    Token?: string;
     /**
       * 过期时间戳，Unix 时间戳。
       */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
       * SDK 加载路径会随着 SDK 的发布而变动。
       */
-    SdkURL: string;
+    SdkURL?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -67,19 +67,19 @@ export interface ModifyStaffRequest {
       */
     SdkAppId: number;
     /**
-      * 坐席账户
+      * 座席账户
       */
     Email: string;
     /**
-      * 坐席名称
+      * 座席名称
       */
     Name?: string;
     /**
-      * 坐席手机号（带0086前缀,示例：008618011111111）
+      * 座席手机号（带0086前缀,示例：008618011111111）
       */
     Phone?: string;
     /**
-      * 坐席昵称
+      * 座席昵称
       */
     Nick?: string;
     /**
@@ -184,7 +184,7 @@ export interface CreateCallOutSessionResponse {
     /**
       * 新创建的会话 ID
       */
-    SessionId: string;
+    SessionId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -600,7 +600,7 @@ export interface CreateStaffResponse {
       * 错误坐席列表及错误信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ErrorStaffList: Array<ErrStaffItem>;
+    ErrorStaffList?: Array<ErrStaffItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -613,11 +613,11 @@ export interface DescribeSkillGroupInfoListResponse {
     /**
       * 技能组总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 技能组信息列表
       */
-    SkillGroupList: Array<SkillGroupInfoItem>;
+    SkillGroupList?: Array<SkillGroupInfoItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -647,11 +647,11 @@ export interface DescribeStaffInfoListResponse {
     /**
       * 坐席用户总数
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 坐席用户信息列表
       */
-    StaffList: Array<StaffInfo>;
+    StaffList?: Array<StaffInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -963,7 +963,7 @@ export interface CarrierPrivilegeNumberApplicant {
     UpdateTime?: number;
 }
 /**
- * 批量添加客服时，返回出错客服的像个信息
+ * 批量添加客服时，返回出错客服的信息
  */
 export interface ErrStaffItem {
     /**
@@ -2572,7 +2572,7 @@ export interface CreateSDKLoginTokenRequest {
       */
     SdkAppId: number;
     /**
-      * 坐席账号。
+      * 座席账号。
       */
     SeatUserId: string;
 }

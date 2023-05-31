@@ -191,32 +191,32 @@ export interface DescribeLifeCycleRulesRequest {
  */
 export interface Summary {
     /**
-      * 总存储量（单位byte）
+      * 已使用容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CapacityUsed: number;
     /**
-      * 标准存储量（单位byte）
+      * 已使用COS标准存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StandardCapacityUsed: number;
     /**
-      * 低频存储量（单位byte）
+      * 已使用COS低频存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DegradeCapacityUsed?: number;
     /**
-      * 归档存储量（单位byte）
+      * 已使用COS归档存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ArchiveCapacityUsed?: number;
     /**
-      * 深度归档存储量（单位byte）
+      * 已使用COS深度归档存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeepArchiveCapacityUsed?: number;
     /**
-      * 智能分层存储量（单位byte）
+      * 已使用COS智能分层存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IntelligentCapacityUsed?: number;

@@ -79,15 +79,15 @@ export interface Trigger {
     /**
       * 触发器最小资源ID
       */
-    ResourceId: string;
+    ResourceId?: string;
     /**
       * 触发器和云函数绑定状态
       */
-    BindStatus: string;
+    BindStatus?: string;
     /**
       * 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建
       */
-    TriggerAttribute: string;
+    TriggerAttribute?: string;
     /**
       * 触发器绑定的别名或版本
       */
@@ -1475,15 +1475,15 @@ export interface TriggerInfo {
     /**
       * 触发器最小资源ID
       */
-    ResourceId: string;
+    ResourceId?: string;
     /**
       * 触发器和云函数绑定状态
       */
-    BindStatus: string;
+    BindStatus?: string;
     /**
       * 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建
       */
-    TriggerAttribute: string;
+    TriggerAttribute?: string;
     /**
       * 客户自定义触发器描述
 注意：此字段可能返回 null，表示取不到有效值。

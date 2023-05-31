@@ -56,6 +56,27 @@ export interface DescribeRollbackTimeRangeRequest {
 }
 
 /**
+ * DescribeResourcePackageList返回参数结构体
+ */
+export interface DescribeResourcePackageListResponse {
+  /**
+   * 总配置数
+   */
+  Total?: number
+
+  /**
+      * 资源包明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail?: Array<Package>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InquirePriceRenew请求参数结构体
  */
 export interface InquirePriceRenewRequest {
@@ -110,6 +131,55 @@ export interface InstanceAuditRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AuditRuleFilters: Array<AuditRuleFilters>
+}
+
+/**
+ * CreateResourcePackage请求参数结构体
+ */
+export interface CreateResourcePackageRequest {
+  /**
+   * 实例类型
+   */
+  InstanceType: string
+
+  /**
+      * 资源包使用地域
+china-中国内地通用，overseas-港澳台及海外通用
+      */
+  PackageRegion: string
+
+  /**
+      * 资源包类型
+
+资源包类型：CCU-计算资源包，DISK-存储资源包
+      */
+  PackageType: string
+
+  /**
+      * 资源包版本
+base-基础版本，common-通用版本，enterprise-企业版本
+      */
+  PackageVersion: string
+
+  /**
+   * 资源包大小，计算资源单位：万个；存储资源：GB
+   */
+  PackageSpec: number
+
+  /**
+   * 资源包有效期，单位:天
+   */
+  ExpireDay: number
+
+  /**
+   * 购买资源包个数
+   */
+  PackageCount: number
+
+  /**
+   * 资源包名称
+   */
+  PackageName?: string
 }
 
 /**
@@ -427,6 +497,26 @@ export interface SwitchClusterZoneResponse {
    * 异步FlowId
    */
   FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeResourcePackageDetail返回参数结构体
+ */
+export interface DescribeResourcePackageDetailResponse {
+  /**
+   * 总使用明细数
+   */
+  Total?: number
+
+  /**
+   * 资源包明细说明
+   */
+  Detail?: Array<PackageDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -830,6 +920,21 @@ export interface CloseWanRequest {
 }
 
 /**
+ * BindClusterResourcePackages请求参数结构体
+ */
+export interface BindClusterResourcePackagesRequest {
+  /**
+   * 资源包唯一ID
+   */
+  PackageIds: Array<string>
+
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * IsolateInstance返回参数结构体
  */
 export interface IsolateInstanceResponse {
@@ -1080,6 +1185,26 @@ all：返回 view 和表
 }
 
 /**
+ * ModifyResourcePackageClusters请求参数结构体
+ */
+export interface ModifyResourcePackageClustersRequest {
+  /**
+   * 资源包唯一ID
+   */
+  PackageId: string
+
+  /**
+   * 需要建立绑定关系的集群ID
+   */
+  BindClusterIds?: Array<string>
+
+  /**
+   * 需要解除绑定关系的集群ID
+   */
+  UnbindClusterIds?: Array<string>
+}
+
+/**
  * DeleteParamTemplate请求参数结构体
  */
 export interface DeleteParamTemplateRequest {
@@ -1090,28 +1215,76 @@ export interface DeleteParamTemplateRequest {
 }
 
 /**
- * DescribeClusterDetailDatabases请求参数结构体
+ * 数据库详细信息
  */
-export interface DescribeClusterDetailDatabasesRequest {
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，默认20,最大100
-   */
-  Limit?: number
-
+export interface DbInfo {
   /**
    * 数据库名称
    */
-  DbName?: string
+  DbName: string
+
+  /**
+   * 字符集类型
+   */
+  CharacterSet: string
+
+  /**
+   * 数据库状态
+   */
+  Status: string
+
+  /**
+   * 拍讯规则
+   */
+  CollateRule: string
+
+  /**
+      * 数据库备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 用户权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserHostPrivileges: Array<UserHostPrivilege>
+
+  /**
+      * 数据库ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbId: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
+
+  /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 集群Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
 }
 
 /**
@@ -1200,9 +1373,36 @@ export interface ExportInstanceErrorLogsRequest {
 }
 
 /**
- * RevokeAccountPrivileges返回参数结构体
+ * DescribeBackupConfig返回参数结构体
  */
-export interface RevokeAccountPrivilegesResponse {
+export interface DescribeBackupConfigResponse {
+  /**
+   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeBeg: number
+
+  /**
+   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeEnd: number
+
+  /**
+   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
+   */
+  ReserveDuration: number
+
+  /**
+      * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupFreq: Array<string>
+
+  /**
+      * 备份方式，logic-逻辑备份，snapshot-快照备份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupType: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1439,6 +1639,16 @@ export interface ActivateInstanceRequest {
 }
 
 /**
+ * RevokeAccountPrivileges返回参数结构体
+ */
+export interface RevokeAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库表信息
  */
 export interface DatabaseTables {
@@ -1468,6 +1678,21 @@ export interface AddClusterSlaveZoneRequest {
    * 从可用区
    */
   SlaveZone: string
+}
+
+/**
+ * RemoveClusterSlaveZone返回参数结构体
+ */
+export interface RemoveClusterSlaveZoneResponse {
+  /**
+   * 异步FlowId
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1854,6 +2079,91 @@ export interface DescribeAuditRuleTemplatesResponse {
 }
 
 /**
+ * 资源包
+ */
+export interface Package {
+  /**
+      * AppID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId?: number
+
+  /**
+      * 资源包唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageId?: string
+
+  /**
+      * 资源包名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageName?: string
+
+  /**
+      * 资源包类型
+CCU-计算资源包，DISK-存储资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageType?: string
+
+  /**
+      * 资源包使用地域
+china-中国内地通用，overseas-港澳台及海外通用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageRegion?: string
+
+  /**
+      * 资源包状态
+creating-创建中；
+using-使用中；
+expired-已过期；
+normal_finish-使用完；
+apply_refund-申请退费中；
+refund-已退费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
+
+  /**
+      * 资源包总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageTotalSpec?: number
+
+  /**
+      * 资源包已使用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageUsedSpec?: number
+
+  /**
+      * 资源包已使用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasQuota?: boolean
+
+  /**
+      * 绑定实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BindInstanceInfos?: Array<BindInstanceInfo>
+
+  /**
+      * 生效时间：2022-07-01 00:00:00
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 失效时间：2022-08-01 00:00:00
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime?: string
+}
+
+/**
  * SwitchClusterZone请求参数结构体
  */
 export interface SwitchClusterZoneRequest {
@@ -1953,6 +2263,59 @@ export interface InstanceInitInfo {
    * 实例个数,范围[1,15]
    */
   InstanceCount: number
+}
+
+/**
+ * 资源包明细说明
+ */
+export interface PackageDetail {
+  /**
+      * AppId账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId?: number
+
+  /**
+      * 资源包唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageId?: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
+
+  /**
+      * 成功抵扣容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessDeductSpec?: number
+
+  /**
+      * 截止当前，资源包已使用的容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageTotalUsedSpec?: number
+
+  /**
+      * 抵扣开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 抵扣结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: string
+
+  /**
+      * 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtendInfo?: string
 }
 
 /**
@@ -2121,18 +2484,18 @@ export interface DescribeProjectSecurityGroupsResponse {
 }
 
 /**
- * RemoveClusterSlaveZone返回参数结构体
+ * ModifyResourcePackageName请求参数结构体
  */
-export interface RemoveClusterSlaveZoneResponse {
+export interface ModifyResourcePackageNameRequest {
   /**
-   * 异步FlowId
+   * 资源包唯一ID
    */
-  FlowId: number
+  PackageId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 自定义的资源包名称，最长支持120个字符
    */
-  RequestId?: string
+  PackageName: string
 }
 
 /**
@@ -2270,20 +2633,9 @@ export interface ParamDetail {
 }
 
 /**
- * DescribeAuditRuleWithInstanceIds返回参数结构体
+ * DeleteAccounts返回参数结构体
  */
-export interface DescribeAuditRuleWithInstanceIdsResponse {
-  /**
-   * 无
-   */
-  TotalCount: number
-
-  /**
-      * 实例审计规则信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Items: Array<InstanceAuditRule>
-
+export interface DeleteAccountsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2419,6 +2771,31 @@ export interface TablePrivileges {
 }
 
 /**
+ * DescribeClusterDetailDatabases请求参数结构体
+ */
+export interface DescribeClusterDetailDatabasesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认20,最大100
+   */
+  Limit?: number
+
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+}
+
+/**
  * DescribeBinlogDownloadUrl返回参数结构体
  */
 export interface DescribeBinlogDownloadUrlResponse {
@@ -2434,29 +2811,43 @@ export interface DescribeBinlogDownloadUrlResponse {
 }
 
 /**
- * ModifyClusterParam请求参数结构体
+ * 资源包绑定的实例信息
  */
-export interface ModifyClusterParamRequest {
+export interface BindInstanceInfo {
   /**
-   * 集群ID
-   */
-  ClusterId: string
+      * 绑定的实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
 
   /**
-   * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值且不做校验
-   */
-  ParamList: Array<ParamItem>
+      * 绑定的实例所在的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceRegion?: string
 
   /**
-   * 维护期间执行-yes,立即执行-no
-   */
-  IsInMaintainPeriod?: string
+      * 绑定的实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType?: string
 }
 
 /**
- * DeleteAccounts返回参数结构体
+ * DescribeAuditRuleWithInstanceIds返回参数结构体
  */
-export interface DeleteAccountsResponse {
+export interface DescribeAuditRuleWithInstanceIdsResponse {
+  /**
+   * 无
+   */
+  TotalCount: number
+
+  /**
+      * 实例审计规则信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items: Array<InstanceAuditRule>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2464,26 +2855,9 @@ export interface DeleteAccountsResponse {
 }
 
 /**
- * UpgradeInstance返回参数结构体
+ * ModifyResourcePackageName返回参数结构体
  */
-export interface UpgradeInstanceResponse {
-  /**
-      * 冻结流水ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TranId: string
-
-  /**
-      * 大订单号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BigDealIds: Array<string>
-
-  /**
-   * 订单号
-   */
-  DealNames: Array<string>
-
+export interface ModifyResourcePackageNameResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2609,6 +2983,26 @@ export interface SwitchClusterVpcRequest {
 }
 
 /**
+ * CreateResourcePackage返回参数结构体
+ */
+export interface CreateResourcePackageResponse {
+  /**
+   * 付费总订单号
+   */
+  BigDealIds?: Array<string>
+
+  /**
+   * 每个物品对应一个dealName，业务需要根据dealName保证发货接口幂等
+   */
+  DealNames?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例信息
  */
 export interface CynosdbInstance {
@@ -2666,6 +3060,11 @@ export interface CynosdbInstance {
    * 实例状态中文描述
    */
   StatusDesc: string
+
+  /**
+   * 实例形态，是否为serverless实例
+   */
+  DbMode?: string
 
   /**
    * 数据库类型
@@ -2871,6 +3270,12 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceNetInfo?: Array<InstanceNetInfo>
+
+  /**
+      * 实例绑定资源包信息（此处只返回计算资源包，即packageType=CCU）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourcePackages?: Array<ResourcePackage>
 }
 
 /**
@@ -2927,6 +3332,16 @@ export interface DescribeAuditRuleWithInstanceIdsRequest {
    * 实例ID。目前仅支持单个实例的查询。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * RefundResourcePackage请求参数结构体
+ */
+export interface RefundResourcePackageRequest {
+  /**
+   * 资源包唯一ID
+   */
+  PackageId: string
 }
 
 /**
@@ -3480,36 +3895,9 @@ export interface QueryFilter {
 }
 
 /**
- * DescribeBackupConfig返回参数结构体
+ * CloseAuditService返回参数结构体
  */
-export interface DescribeBackupConfigResponse {
-  /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
-   */
-  BackupTimeBeg: number
-
-  /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
-   */
-  BackupTimeEnd: number
-
-  /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
-   */
-  ReserveDuration: number
-
-  /**
-      * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupFreq: Array<string>
-
-  /**
-      * 备份方式，logic-逻辑备份，snapshot-快照备份
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupType: string
-
+export interface CloseAuditServiceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3643,6 +4031,50 @@ export interface Addr {
    * 端口
    */
   Port: number
+}
+
+/**
+ * 资源包明细说明
+ */
+export interface SalePackageSpec {
+  /**
+      * 资源包使用地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageRegion?: string
+
+  /**
+      * 资源包类型
+CCU-计算资源包
+DISK-存储资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageType?: string
+
+  /**
+      * 资源包版本
+base-基础版本，common-通用版本，enterprise-企业版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageVersion?: string
+
+  /**
+      * 当前版本资源包最小资源数，计算资源单位：个；存储资源：GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinPackageSpec?: number
+
+  /**
+      * 当前版本资源包最大资源数，计算资源单位：个；存储资源：GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxPackageSpec?: number
+
+  /**
+      * 资源包有效期，单位:天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireDay?: number
 }
 
 /**
@@ -3836,76 +4268,43 @@ export interface SecurityGroup {
 }
 
 /**
- * 数据库详细信息
+ * BindClusterResourcePackages返回参数结构体
  */
-export interface DbInfo {
+export interface BindClusterResourcePackagesResponse {
   /**
-   * 数据库名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DbName: string
+  RequestId?: string
+}
 
+/**
+ * SwitchProxyVpc请求参数结构体
+ */
+export interface SwitchProxyVpcRequest {
   /**
-   * 字符集类型
+   * 集群ID
    */
-  CharacterSet: string
-
-  /**
-   * 数据库状态
-   */
-  Status: string
-
-  /**
-   * 拍讯规则
-   */
-  CollateRule: string
-
-  /**
-      * 数据库备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Description: string
-
-  /**
-      * 用户权限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserHostPrivileges: Array<UserHostPrivilege>
-
-  /**
-      * 数据库ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DbId: number
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 用户appid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AppId: number
-
-  /**
-      * 用户Uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Uin: string
-
-  /**
-      * 集群Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
   ClusterId: string
+
+  /**
+   * 字符串vpc id
+   */
+  UniqVpcId: string
+
+  /**
+   * 字符串子网id
+   */
+  UniqSubnetId: string
+
+  /**
+   * 旧地址回收时间
+   */
+  OldIpReserveHours: number
+
+  /**
+   * 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得）
+   */
+  ProxyGroupId?: string
 }
 
 /**
@@ -4045,6 +4444,21 @@ export interface OpenWanRequest {
 }
 
 /**
+ * UnbindClusterResourcePackages请求参数结构体
+ */
+export interface UnbindClusterResourcePackagesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 资源包唯一ID,如果不传，解绑该实例绑定的所有资源包
+   */
+  PackageIds?: Array<string>
+}
+
+/**
  * OpenClusterPasswordComplexity返回参数结构体
  */
 export interface OpenClusterPasswordComplexityResponse {
@@ -4067,6 +4481,27 @@ export interface DescribeInstanceDetailResponse {
    * 实例详情
    */
   Detail: CynosdbInstanceDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeResourcePackageSaleSpec返回参数结构体
+ */
+export interface DescribeResourcePackageSaleSpecResponse {
+  /**
+   * 可售卖资源包规格总数
+   */
+  Total?: number
+
+  /**
+      * 资源包明细说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail?: Array<SalePackageSpec>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4221,6 +4656,39 @@ export interface NetAddr {
 }
 
 /**
+ * 资源包信息
+ */
+export interface ResourcePackage {
+  /**
+      * 资源包的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageId?: string
+
+  /**
+      * 资源包类型：CCU：计算资源包
+DISK：存储资源包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageType?: string
+}
+
+/**
+ * RestartInstance返回参数结构体
+ */
+export interface RestartInstanceResponse {
+  /**
+   * 异步任务id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CopyClusterPasswordComplexity请求参数结构体
  */
 export interface CopyClusterPasswordComplexityRequest {
@@ -4311,16 +4779,6 @@ export interface DescribeResourcesByDealNameRequest {
    * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
    */
   DealNames?: Array<string>
-}
-
-/**
- * CloseAuditService返回参数结构体
- */
-export interface CloseAuditServiceResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4593,6 +5051,33 @@ export interface DescribeBackupDownloadUrlResponse {
 }
 
 /**
+ * UpgradeInstance返回参数结构体
+ */
+export interface UpgradeInstanceResponse {
+  /**
+      * 冻结流水ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranId: string
+
+  /**
+      * 大订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BigDealIds: Array<string>
+
+  /**
+   * 订单号
+   */
+  DealNames: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeServerless请求参数结构体
  */
 export interface ResumeServerlessRequest {
@@ -4695,6 +5180,16 @@ export interface OpenClusterPasswordComplexityRequest {
    * 数据字典
    */
   ValidatePasswordDictionary?: Array<string>
+}
+
+/**
+ * UnbindClusterResourcePackages返回参数结构体
+ */
+export interface UnbindClusterResourcePackagesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5126,6 +5621,12 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Ability?: Ability
+
+  /**
+      * 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK）	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourcePackages?: Array<ResourcePackage>
 }
 
 /**
@@ -5179,6 +5680,66 @@ export interface IsolateClusterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeResourcePackageList请求参数结构体
+ */
+export interface DescribeResourcePackageListRequest {
+  /**
+   * 资源包唯一ID
+   */
+  PackageId?: Array<string>
+
+  /**
+   * 资源包名称
+   */
+  PackageName?: Array<string>
+
+  /**
+      * 资源包类型
+CCU-计算资源包，DISK-存储资源包
+      */
+  PackageType?: Array<string>
+
+  /**
+      * 资源包使用地域
+china-中国内地通用，overseas-港澳台及海外通用
+      */
+  PackageRegion?: Array<string>
+
+  /**
+      * 资源包状态
+creating-创建中；
+using-使用中；
+expired-已过期；
+normal_finish-使用完；
+apply_refund-申请退费中；
+refund-已退费。
+      */
+  Status?: Array<string>
+
+  /**
+      * 排序条件，支持排序条件:startTime-生效时间，
+expireTime-过期时间，packageUsedSpec-使用容量，packageTotalSpec-总存储量。
+按照数组顺序排列；
+      */
+  OrderBy?: Array<string>
+
+  /**
+   * 排序方式，DESC-降序，ASC-升序
+   */
+  OrderDirection?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 限制
+   */
+  Limit?: number
 }
 
 /**
@@ -5711,6 +6272,39 @@ export interface Module {
 }
 
 /**
+ * DescribeResourcePackageSaleSpec请求参数结构体
+ */
+export interface DescribeResourcePackageSaleSpecRequest {
+  /**
+   * 实例类型
+   */
+  InstanceType: string
+
+  /**
+      * 资源包使用地域
+china-中国内地通用，overseas-港澳台及海外通用
+      */
+  PackageRegion: string
+
+  /**
+      * 资源包类型
+CCU-计算资源包
+DISK-存储资源包
+      */
+  PackageType: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 限制
+   */
+  Limit?: number
+}
+
+/**
  * 回档数据库及表
  */
 export interface RollbackTable {
@@ -5751,33 +6345,23 @@ export interface DescribeMaintainPeriodResponse {
 }
 
 /**
- * SwitchProxyVpc请求参数结构体
+ * ModifyClusterParam请求参数结构体
  */
-export interface SwitchProxyVpcRequest {
+export interface ModifyClusterParamRequest {
   /**
    * 集群ID
    */
   ClusterId: string
 
   /**
-   * 字符串vpc id
+   * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值且不做校验
    */
-  UniqVpcId: string
+  ParamList: Array<ParamItem>
 
   /**
-   * 字符串子网id
+   * 维护期间执行-yes,立即执行-no
    */
-  UniqSubnetId: string
-
-  /**
-   * 旧地址回收时间
-   */
-  OldIpReserveHours: number
-
-  /**
-   * 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得）
-   */
-  ProxyGroupId?: string
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -5851,18 +6435,38 @@ export interface RollBackClusterResponse {
 }
 
 /**
- * RestartInstance返回参数结构体
+ * DescribeResourcePackageDetail请求参数结构体
  */
-export interface RestartInstanceResponse {
+export interface DescribeResourcePackageDetailRequest {
   /**
-   * 异步任务id
+   * 资源包唯一ID
    */
-  FlowId: number
+  PackageId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  ClusterIds?: Array<string>
+
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: string
+
+  /**
+   * 限制
+   */
+  Limit?: string
 }
 
 /**
@@ -6519,6 +7123,21 @@ export interface ExportInstanceSlowQueriesResponse {
 }
 
 /**
+ * RefundResourcePackage返回参数结构体
+ */
+export interface RefundResourcePackageResponse {
+  /**
+   * 每个物品对应一个dealName，业务需要根据dealName保证发货接口幂等
+   */
+  DealNames?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteClusterDatabase返回参数结构体
  */
 export interface DeleteClusterDatabaseResponse {
@@ -6548,6 +7167,17 @@ export interface CynosdbClusterDetail {
   Region: string
 
   /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+      * 物理可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhysicalZone: string
+
+  /**
    * 状态
    */
   Status: string
@@ -6556,6 +7186,45 @@ export interface CynosdbClusterDetail {
    * 状态描述
    */
   StatusDesc: string
+
+  /**
+      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
+resume
+resuming
+pause
+pausing
+      */
+  ServerlessStatus: string
+
+  /**
+      * 存储Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageId: string
+
+  /**
+      * 存储大小，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Storage: number
+
+  /**
+      * 最大存储规格，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxStorageSize: number
+
+  /**
+      * 最小存储规格，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinStorageSize: number
+
+  /**
+      * 存储付费类型，1为包年包月，0为按量计费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoragePayMode: number
 
   /**
    * VPC名称
@@ -6593,34 +7262,26 @@ export interface CynosdbClusterDetail {
   DbType: string
 
   /**
+      * 数据库类型，normal，serverless
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbMode: string
+
+  /**
    * 数据库版本
    */
   DbVersion: string
 
   /**
+      * 存储空间上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageLimit: number
+
+  /**
    * 使用容量
    */
   UsedStorage: number
-
-  /**
-   * 读写分离Vport
-   */
-  RoAddr: Array<Addr>
-
-  /**
-   * 实例信息
-   */
-  InstanceSet: Array<ClusterInstanceDetail>
-
-  /**
-   * 付费模式
-   */
-  PayMode: number
-
-  /**
-   * 到期时间
-   */
-  PeriodEndTime: string
 
   /**
    * vip地址
@@ -6633,88 +7294,9 @@ export interface CynosdbClusterDetail {
   Vport: number
 
   /**
-   * 项目id
+   * 读写分离Vport
    */
-  ProjectID: number
-
-  /**
-   * 可用区
-   */
-  Zone: string
-
-  /**
-   * 实例绑定的tag数组信息
-   */
-  ResourceTags: Array<Tag>
-
-  /**
-      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
-resume
-resuming
-pause
-pausing
-      */
-  ServerlessStatus: string
-
-  /**
-      * binlog开关，可选值：ON, OFF
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogBin: string
-
-  /**
-      * pitr类型，可选值：normal, redo_pitr
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PitrType: string
-
-  /**
-      * 物理可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhysicalZone: string
-
-  /**
-      * 存储Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StorageId: string
-
-  /**
-      * 存储大小，单位为G
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Storage: number
-
-  /**
-      * 最大存储规格，单位为G
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxStorageSize: number
-
-  /**
-      * 最小存储规格，单位为G
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MinStorageSize: number
-
-  /**
-      * 存储付费类型，1为包年包月，0为按量计费
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StoragePayMode: number
-
-  /**
-      * 数据库类型，normal，serverless
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DbMode: string
-
-  /**
-      * 存储空间上限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StorageLimit: number
+  RoAddr: Array<Addr>
 
   /**
       * 集群支持的功能
@@ -6765,16 +7347,53 @@ pausing
   SlaveZones: Array<string>
 
   /**
+   * 实例信息
+   */
+  InstanceSet: Array<ClusterInstanceDetail>
+
+  /**
+   * 付费模式
+   */
+  PayMode: number
+
+  /**
+   * 到期时间
+   */
+  PeriodEndTime: string
+
+  /**
+   * 项目id
+   */
+  ProjectID: number
+
+  /**
+   * 实例绑定的tag数组信息
+   */
+  ResourceTags: Array<Tag>
+
+  /**
       * Proxy状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyStatus: string
 
   /**
+      * binlog开关，可选值：ON, OFF
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogBin: string
+
+  /**
       * 是否跳过交易
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsSkipTrade: string
+
+  /**
+      * pitr类型，可选值：normal, redo_pitr
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PitrType: string
 
   /**
       * 是否打开密码复杂度
@@ -6787,6 +7406,12 @@ pausing
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetworkStatus: string
+
+  /**
+      * 集群绑定的资源包信息	
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourcePackages?: Array<ResourcePackage>
 }
 
 /**
@@ -7512,6 +8137,16 @@ export interface DescribeClusterInstanceGrpsResponse {
    */
   InstanceGrpInfoList: Array<CynosdbInstanceGrp>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyResourcePackageClusters返回参数结构体
+ */
+export interface ModifyResourcePackageClustersResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

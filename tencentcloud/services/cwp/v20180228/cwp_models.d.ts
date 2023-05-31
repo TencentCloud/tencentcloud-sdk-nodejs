@@ -4508,12 +4508,12 @@ export interface DescribeAssetSystemPackageListResponse {
     /**
       * 记录总数
       */
-    Total: number;
+    Total?: number;
     /**
       * 列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Packages: Array<AssetSystemPackageInfo>;
+    Packages?: Array<AssetSystemPackageInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10706,6 +10706,18 @@ export interface AssetSystemPackageInfo {
       * 是否新增[0:否|1:是]
       */
     IsNew: number;
+    /**
+      * 附加信息
+      */
+    MachineExtraInfo?: MachineExtraInfo;
+    /**
+      * 主机Id
+      */
+    Quuid?: string;
+    /**
+      * Agent Id
+      */
+    Uuid?: string;
 }
 /**
  * DescribeEmergencyVulList请求参数结构体
@@ -17271,11 +17283,11 @@ export interface DescribeAssetSystemPackageListRequest {
     /**
       * 主机Uuid
       */
-    Uuid: string;
+    Uuid?: string;
     /**
       * 主机Quuid
       */
-    Quuid: string;
+    Quuid?: string;
     /**
       * 过滤条件。
 <li>Name - String - 是否必填：否 - 包 名</li>

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, InquirePriceRenewRequest, DescribeAccountPrivilegesResponse, DescribeAuditLogsRequest, DescribeBackupConfigRequest, ModifyAuditRuleTemplatesRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyClusterPasswordComplexityResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, RollBackClusterRequest, DescribeAuditLogFilesResponse, SwitchClusterZoneResponse, DescribeClusterPasswordComplexityRequest, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, ModifyClusterDatabaseResponse, UpgradeClusterVersionResponse, DescribeDBSecurityGroupsResponse, CloseWanResponse, DescribeBinlogsResponse, DeleteParamTemplateResponse, DescribeInstancesResponse, DescribeZonesRequest, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, CloseWanRequest, IsolateInstanceResponse, DescribeParamTemplatesRequest, CopyClusterPasswordComplexityResponse, DescribeAuditLogsResponse, DescribeInstanceParamsRequest, SearchClusterTablesRequest, DeleteParamTemplateRequest, DescribeClusterDetailDatabasesRequest, DescribeFlowResponse, SetRenewFlagResponse, ExportInstanceErrorLogsRequest, RevokeAccountPrivilegesResponse, CreateClustersResponse, SetRenewFlagRequest, OfflineClusterRequest, DescribeClusterDetailDatabasesResponse, CreateParamTemplateResponse, ActivateInstanceRequest, AddClusterSlaveZoneRequest, DescribeAccountAllGrantPrivilegesResponse, ModifyVipVportRequest, DescribeClustersRequest, ModifyClusterStorageResponse, CloseClusterPasswordComplexityRequest, ModifyDBInstanceSecurityGroupsResponse, DeleteAuditLogFileResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, CreateAccountsRequest, DeleteAuditRuleTemplatesRequest, DescribeAuditRuleTemplatesResponse, SwitchClusterZoneRequest, DescribeInstanceDetailRequest, UpgradeInstanceRequest, ModifyMaintainPeriodConfigResponse, IsolateInstanceRequest, SwitchClusterVpcResponse, DescribeClusterDetailRequest, DeleteBackupResponse, ModifyInstanceParamRequest, DescribeProjectSecurityGroupsResponse, RemoveClusterSlaveZoneResponse, CreateAuditLogFileResponse, OpenWanResponse, PauseServerlessResponse, DescribeAuditRuleWithInstanceIdsResponse, ResetAccountPasswordResponse, DescribeBinlogDownloadUrlResponse, ModifyClusterParamRequest, DeleteAccountsResponse, UpgradeInstanceResponse, DescribeBackupListRequest, SearchClusterDatabasesRequest, SwitchClusterVpcRequest, DescribeClusterPasswordComplexityResponse, DescribeAuditRuleWithInstanceIdsRequest, ExportInstanceErrorLogsResponse, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, ModifyAuditServiceRequest, CreateClustersRequest, DescribeClustersResponse, OpenAuditServiceRequest, DescribeBackupConfigResponse, ModifyBinlogSaveDaysRequest, ResumeServerlessResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, CloseAuditServiceRequest, AddInstancesResponse, PauseServerlessRequest, ModifyParamTemplateResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, DescribeBackupDownloadUrlRequest, SearchClusterDatabasesResponse, OfflineInstanceRequest, ModifyClusterPasswordComplexityRequest, RevokeAccountPrivilegesRequest, OpenWanRequest, OpenClusterPasswordComplexityResponse, DescribeInstanceDetailResponse, OfflineInstanceResponse, ModifyInstanceParamResponse, CopyClusterPasswordComplexityRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CloseAuditServiceResponse, CreateBackupResponse, ModifyAccountPrivilegesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, ModifyAccountHostResponse, DescribeInstancesRequest, OpenReadOnlyInstanceExclusiveAccessRequest, CloseClusterPasswordComplexityResponse, DescribeMaintainPeriodRequest, DescribeBackupDownloadUrlResponse, ResumeServerlessRequest, InquirePriceCreateRequest, OpenClusterPasswordComplexityRequest, CreateAuditRuleTemplateRequest, GrantAccountPrivilegesResponse, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, ModifyAccountDescriptionRequest, ModifyAccountParamsRequest, CreateAuditRuleTemplateResponse, DescribeZonesResponse, IsolateClusterResponse, ModifyParamTemplateRequest, OpenAuditServiceResponse, OfflineClusterResponse, SwitchProxyVpcResponse, DescribeParamTemplateDetailRequest, ModifyAccountHostRequest, CreateParamTemplateRequest, DescribeAuditRuleTemplatesRequest, DescribeFlowRequest, RestartInstanceRequest, ModifyAccountPrivilegesRequest, CreateBackupRequest, CreateClusterDatabaseResponse, DescribeClusterParamLogsRequest, SearchClusterTablesResponse, DescribeMaintainPeriodResponse, SwitchProxyVpcRequest, DescribeBackupListResponse, RollBackClusterResponse, RestartInstanceResponse, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, ModifyAccountDescriptionResponse, DescribeRollbackTimeValidityRequest, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, AddInstancesRequest, ModifyClusterDatabaseRequest, InquirePriceCreateResponse, ModifyClusterSlaveZoneRequest, DescribeInstanceErrorLogsResponse, DescribeInstanceSlowQueriesRequest, UpgradeClusterVersionRequest, ExportInstanceSlowQueriesResponse, DeleteClusterDatabaseResponse, ResetAccountPasswordRequest, DescribeInstanceErrorLogsRequest, DeleteClusterDatabaseRequest, DescribeInstanceParamsResponse, OpenReadOnlyInstanceExclusiveAccessResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DeleteAccountsRequest, ModifyInstanceNameResponse, DescribeBinlogSaveDaysResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, CreateClusterDatabaseRequest, DeleteBackupRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeDBSecurityGroupsRequest, DescribeAccountAllGrantPrivilegesRequest, DescribeParamTemplateDetailResponse, ModifyBinlogSaveDaysResponse, ModifyAuditServiceResponse, IsolateClusterRequest, DeleteAuditRuleTemplatesResponse, DescribeAuditLogFilesRequest, ModifyVipVportResponse, DescribeClusterDetailResponse, DescribeClusterInstanceGrpsResponse, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse, ModifyAuditRuleTemplatesResponse } from "./cynosdb_models";
+import { RemoveClusterSlaveZoneRequest, ModifyClusterNameRequest, DescribeRollbackTimeRangeRequest, DescribeResourcePackageListResponse, InquirePriceRenewRequest, DescribeAccountPrivilegesResponse, CreateResourcePackageRequest, DescribeAuditLogsRequest, DescribeBackupConfigRequest, ModifyAuditRuleTemplatesRequest, DescribeAccountsRequest, ModifyMaintainPeriodConfigRequest, DescribeRollbackTimeRangeResponse, ModifyClusterPasswordComplexityResponse, ModifyBackupNameResponse, ModifyClusterStorageRequest, RollBackClusterRequest, DescribeAuditLogFilesResponse, SwitchClusterZoneResponse, DescribeResourcePackageDetailResponse, DescribeClusterPasswordComplexityRequest, AssociateSecurityGroupsRequest, DescribeBinlogDownloadUrlRequest, CreateAccountsResponse, ModifyInstanceNameRequest, ModifyClusterDatabaseResponse, UpgradeClusterVersionResponse, DescribeDBSecurityGroupsResponse, CloseWanResponse, DescribeBinlogsResponse, DeleteParamTemplateResponse, DescribeInstancesResponse, DescribeZonesRequest, AddClusterSlaveZoneResponse, ModifyClusterNameResponse, DescribeClusterParamsResponse, CloseWanRequest, BindClusterResourcePackagesRequest, IsolateInstanceResponse, DescribeParamTemplatesRequest, CopyClusterPasswordComplexityResponse, DescribeAuditLogsResponse, DescribeInstanceParamsRequest, SearchClusterTablesRequest, ModifyResourcePackageClustersRequest, DeleteParamTemplateRequest, DescribeFlowResponse, SetRenewFlagResponse, ExportInstanceErrorLogsRequest, DescribeBackupConfigResponse, CreateClustersResponse, SetRenewFlagRequest, OfflineClusterRequest, DescribeClusterDetailDatabasesResponse, CreateParamTemplateResponse, ActivateInstanceRequest, RevokeAccountPrivilegesResponse, AddClusterSlaveZoneRequest, RemoveClusterSlaveZoneResponse, DescribeAccountAllGrantPrivilegesResponse, ModifyVipVportRequest, DescribeClustersRequest, ModifyClusterStorageResponse, CloseClusterPasswordComplexityRequest, ModifyDBInstanceSecurityGroupsResponse, DeleteAuditLogFileResponse, DescribeClusterParamLogsResponse, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, CreateAccountsRequest, DeleteAuditRuleTemplatesRequest, DescribeAuditRuleTemplatesResponse, SwitchClusterZoneRequest, DescribeInstanceDetailRequest, UpgradeInstanceRequest, ModifyMaintainPeriodConfigResponse, IsolateInstanceRequest, SwitchClusterVpcResponse, DescribeClusterDetailRequest, DeleteBackupResponse, ModifyInstanceParamRequest, DescribeProjectSecurityGroupsResponse, ModifyResourcePackageNameRequest, CreateAuditLogFileResponse, OpenWanResponse, PauseServerlessResponse, DeleteAccountsResponse, ResetAccountPasswordResponse, DescribeClusterDetailDatabasesRequest, DescribeBinlogDownloadUrlResponse, DescribeAuditRuleWithInstanceIdsResponse, ModifyResourcePackageNameResponse, DescribeBackupListRequest, SearchClusterDatabasesRequest, SwitchClusterVpcRequest, CreateResourcePackageResponse, DescribeClusterPasswordComplexityResponse, DescribeAuditRuleWithInstanceIdsRequest, RefundResourcePackageRequest, ExportInstanceErrorLogsResponse, ModifyClusterSlaveZoneResponse, GrantAccountPrivilegesRequest, ModifyAuditServiceRequest, CreateClustersRequest, DescribeClustersResponse, OpenAuditServiceRequest, CloseAuditServiceResponse, ModifyBinlogSaveDaysRequest, ResumeServerlessResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeParamTemplatesResponse, CloseAuditServiceRequest, AddInstancesResponse, PauseServerlessRequest, ModifyParamTemplateResponse, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, BindClusterResourcePackagesResponse, SwitchProxyVpcRequest, DescribeBackupDownloadUrlRequest, SearchClusterDatabasesResponse, OfflineInstanceRequest, ModifyClusterPasswordComplexityRequest, RevokeAccountPrivilegesRequest, OpenWanRequest, UnbindClusterResourcePackagesRequest, OpenClusterPasswordComplexityResponse, DescribeInstanceDetailResponse, DescribeResourcePackageSaleSpecResponse, OfflineInstanceResponse, ModifyInstanceParamResponse, RestartInstanceResponse, CopyClusterPasswordComplexityRequest, AssociateSecurityGroupsResponse, DescribeResourcesByDealNameRequest, CreateBackupResponse, ModifyAccountPrivilegesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceSlowQueriesResponse, ModifyAccountHostResponse, DescribeInstancesRequest, OpenReadOnlyInstanceExclusiveAccessRequest, CloseClusterPasswordComplexityResponse, DescribeMaintainPeriodRequest, DescribeBackupDownloadUrlResponse, UpgradeInstanceResponse, ResumeServerlessRequest, InquirePriceCreateRequest, OpenClusterPasswordComplexityRequest, UnbindClusterResourcePackagesResponse, CreateAuditRuleTemplateRequest, GrantAccountPrivilegesResponse, ModifyBackupConfigResponse, DescribeInstanceSpecsRequest, ExportInstanceSlowQueriesRequest, ModifyAccountDescriptionRequest, ModifyAccountParamsRequest, CreateAuditRuleTemplateResponse, DescribeZonesResponse, IsolateClusterResponse, DescribeResourcePackageListRequest, ModifyParamTemplateRequest, OpenAuditServiceResponse, OfflineClusterResponse, SwitchProxyVpcResponse, DescribeParamTemplateDetailRequest, ModifyAccountHostRequest, CreateParamTemplateRequest, DescribeAuditRuleTemplatesRequest, DescribeFlowRequest, RestartInstanceRequest, ModifyAccountPrivilegesRequest, CreateBackupRequest, CreateClusterDatabaseResponse, DescribeClusterParamLogsRequest, SearchClusterTablesResponse, DescribeResourcePackageSaleSpecRequest, DescribeMaintainPeriodResponse, ModifyClusterParamRequest, DescribeBackupListResponse, RollBackClusterResponse, DescribeResourcePackageDetailRequest, DescribeBinlogSaveDaysRequest, ModifyBackupConfigRequest, ActivateInstanceResponse, ModifyAccountDescriptionResponse, DescribeRollbackTimeValidityRequest, CreateAuditLogFileRequest, DeleteAuditLogFileRequest, AddInstancesRequest, ModifyClusterDatabaseRequest, InquirePriceCreateResponse, ModifyClusterSlaveZoneRequest, DescribeInstanceErrorLogsResponse, DescribeInstanceSlowQueriesRequest, UpgradeClusterVersionRequest, ExportInstanceSlowQueriesResponse, RefundResourcePackageResponse, DeleteClusterDatabaseResponse, ResetAccountPasswordRequest, DescribeInstanceErrorLogsRequest, DeleteClusterDatabaseRequest, DescribeInstanceParamsResponse, OpenReadOnlyInstanceExclusiveAccessResponse, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, DeleteAccountsRequest, ModifyInstanceNameResponse, DescribeBinlogSaveDaysResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, ModifyAccountParamsResponse, CreateClusterDatabaseRequest, DeleteBackupRequest, DescribeClusterParamsRequest, DescribeInstanceSpecsResponse, DescribeDBSecurityGroupsRequest, DescribeAccountAllGrantPrivilegesRequest, DescribeParamTemplateDetailResponse, ModifyBinlogSaveDaysResponse, ModifyAuditServiceResponse, IsolateClusterRequest, DeleteAuditRuleTemplatesResponse, DescribeAuditLogFilesRequest, ModifyVipVportResponse, DescribeClusterDetailResponse, DescribeClusterInstanceGrpsResponse, ModifyResourcePackageClustersResponse, DescribeBinlogsRequest, DisassociateSecurityGroupsResponse, InquirePriceRenewResponse, ModifyAuditRuleTemplatesResponse } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
      */
     DescribeBackupConfig(req: DescribeBackupConfigRequest, cb?: (error: string, rep: DescribeBackupConfigResponse) => void): Promise<DescribeBackupConfigResponse>;
+    /**
+     * 给资源包绑定集群
+     */
+    ModifyResourcePackageClusters(req: ModifyResourcePackageClustersRequest, cb?: (error: string, rep: ModifyResourcePackageClustersResponse) => void): Promise<ModifyResourcePackageClustersResponse>;
     /**
      * 创建审计规则模版
      */
@@ -188,6 +192,10 @@ export declare class Client extends AbstractClient {
      */
     CreateAccounts(req: CreateAccountsRequest, cb?: (error: string, rep: CreateAccountsResponse) => void): Promise<CreateAccountsResponse>;
     /**
+     * 新购资源包
+     */
+    CreateResourcePackage(req: CreateResourcePackageRequest, cb?: (error: string, rep: CreateResourcePackageResponse) => void): Promise<CreateResourcePackageResponse>;
+    /**
      * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
      */
     DescribeAuditLogFiles(req: DescribeAuditLogFilesRequest, cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void): Promise<DescribeAuditLogFilesResponse>;
@@ -252,9 +260,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceParam(req: ModifyInstanceParamRequest, cb?: (error: string, rep: ModifyInstanceParamResponse) => void): Promise<ModifyInstanceParamResponse>;
     /**
+     * 为集群绑定资源包
+     */
+    BindClusterResourcePackages(req: BindClusterResourcePackagesRequest, cb?: (error: string, rep: BindClusterResourcePackagesResponse) => void): Promise<BindClusterResourcePackagesResponse>;
+    /**
      * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
      */
     DescribeAuditLogs(req: DescribeAuditLogsRequest, cb?: (error: string, rep: DescribeAuditLogsResponse) => void): Promise<DescribeAuditLogsResponse>;
+    /**
+     * cynos解绑资源包
+     */
+    UnbindClusterResourcePackages(req: UnbindClusterResourcePackagesRequest, cb?: (error: string, rep: UnbindClusterResourcePackagesResponse) => void): Promise<UnbindClusterResourcePackagesResponse>;
     /**
      * 本接口（OpenWan）用于开通外网
      */
@@ -267,6 +283,10 @@ export declare class Client extends AbstractClient {
      * 安全组批量绑定云资源
      */
     AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
+    /**
+     * 查询资源包规格
+     */
+    DescribeResourcePackageSaleSpec(req: DescribeResourcePackageSaleSpecRequest, cb?: (error: string, rep: DescribeResourcePackageSaleSpecResponse) => void): Promise<DescribeResourcePackageSaleSpecResponse>;
     /**
      * 修改账号权限
      */
@@ -300,6 +320,10 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceRenew(req: InquirePriceRenewRequest, cb?: (error: string, rep: InquirePriceRenewResponse) => void): Promise<InquirePriceRenewResponse>;
     /**
+     * 本接口(SearchClusterDatabases)搜索集群database列表
+     */
+    SearchClusterDatabases(req: SearchClusterDatabasesRequest, cb?: (error: string, rep: SearchClusterDatabasesResponse) => void): Promise<SearchClusterDatabasesResponse>;
+    /**
      * 修改审计规则模版
      */
     ModifyAuditRuleTemplates(req: ModifyAuditRuleTemplatesRequest, cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void): Promise<ModifyAuditRuleTemplatesResponse>;
@@ -316,6 +340,10 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterDatabase(req: CreateClusterDatabaseRequest, cb?: (error: string, rep: CreateClusterDatabaseResponse) => void): Promise<CreateClusterDatabaseResponse>;
     /**
+     * TDSQL-C for MySQL实例开通审计服务
+     */
+    OpenAuditService(req: OpenAuditServiceRequest, cb?: (error: string, rep: OpenAuditServiceResponse) => void): Promise<OpenAuditServiceResponse>;
+    /**
      * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
      */
     DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
@@ -323,6 +351,10 @@ export declare class Client extends AbstractClient {
      * 查询审计规则模版信息
      */
     DescribeAuditRuleTemplates(req: DescribeAuditRuleTemplatesRequest, cb?: (error: string, rep: DescribeAuditRuleTemplatesResponse) => void): Promise<DescribeAuditRuleTemplatesResponse>;
+    /**
+     * 查询资源包使用详情
+     */
+    DescribeResourcePackageDetail(req: DescribeResourcePackageDetailRequest, cb?: (error: string, rep: DescribeResourcePackageDetailResponse) => void): Promise<DescribeResourcePackageDetailResponse>;
     /**
      * 修改指定集群的备份配置
      */
@@ -336,13 +368,17 @@ export declare class Client extends AbstractClient {
      */
     UpgradeClusterVersion(req: UpgradeClusterVersionRequest, cb?: (error: string, rep: UpgradeClusterVersionResponse) => void): Promise<UpgradeClusterVersionResponse>;
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 查询资源包列表
      */
-    SearchClusterDatabases(req: SearchClusterDatabasesRequest, cb?: (error: string, rep: SearchClusterDatabasesResponse) => void): Promise<SearchClusterDatabasesResponse>;
+    DescribeResourcePackageList(req: DescribeResourcePackageListRequest, cb?: (error: string, rep: DescribeResourcePackageListResponse) => void): Promise<DescribeResourcePackageListResponse>;
     /**
      * 本接口（DescribeClusterParams）用于查询集群参数
      */
     DescribeClusterParams(req: DescribeClusterParamsRequest, cb?: (error: string, rep: DescribeClusterParamsResponse) => void): Promise<DescribeClusterParamsResponse>;
+    /**
+     * 退款资源包
+     */
+    RefundResourcePackage(req: RefundResourcePackageRequest, cb?: (error: string, rep: RefundResourcePackageResponse) => void): Promise<RefundResourcePackageResponse>;
     /**
      * 本接口(ModifyInstanceName)用于修改实例名称。
      */
@@ -420,9 +456,9 @@ export declare class Client extends AbstractClient {
      */
     OpenClusterPasswordComplexity(req: OpenClusterPasswordComplexityRequest, cb?: (error: string, rep: OpenClusterPasswordComplexityResponse) => void): Promise<OpenClusterPasswordComplexityResponse>;
     /**
-     * TDSQL-C for MySQL实例开通审计服务
+     * 修改资源包名称
      */
-    OpenAuditService(req: OpenAuditServiceRequest, cb?: (error: string, rep: OpenAuditServiceResponse) => void): Promise<OpenAuditServiceResponse>;
+    ModifyResourcePackageName(req: ModifyResourcePackageNameRequest, cb?: (error: string, rep: ModifyResourcePackageNameResponse) => void): Promise<ModifyResourcePackageNameResponse>;
     /**
      * 删除从可用区
      */

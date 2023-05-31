@@ -55,7 +55,7 @@ export interface Department {
  */
 export interface CreatePreparedPersonalEsignRequest {
     /**
-      * 个人用户名称
+      * 个人用户姓名
       */
     UserName: string;
     /**
@@ -63,13 +63,13 @@ export interface CreatePreparedPersonalEsignRequest {
       */
     IdCardNumber: string;
     /**
-      * 印章图片的base64
-      */
-    SealImage: string;
-    /**
       * 印章名称
       */
     SealName: string;
+    /**
+      * 印章图片的base64，最大不超过 8M
+      */
+    SealImage: string;
     /**
       * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
       */
@@ -84,6 +84,10 @@ HONGKONG_MACAO_AND_TAIWAN 中国台湾
       */
     IdCardType?: string;
     /**
+      * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
+      */
+    SealImageCompress?: boolean;
+    /**
       * 手机号码；当需要开通自动签时，该参数必传
       */
     Mobile?: string;
@@ -91,9 +95,25 @@ HONGKONG_MACAO_AND_TAIWAN 中国台湾
       * 是否开通自动签，该功能需联系运营工作人员开通后使用
       */
     EnableAutoSign?: boolean;
+    /**
+      * 印章颜色（参数ProcessSeal=true时生效）
+默认值：BLACK黑色
+取值:
+BLACK 黑色,
+RED 红色,
+BLUE 蓝色。
+      */
+    SealColor?: string;
+    /**
+      * 是否处理印章
+默认不做印章处理。
+取值：false：不做任何处理；
+true：做透明化处理和颜色增强。
+      */
+    ProcessSeal?: boolean;
 }
 /**
- * 二期接口返回的模板中文件的信息结构
+ * 模板中文件的信息结构
  */
 export interface FileInfo {
     /**
@@ -397,7 +417,7 @@ export interface FlowApproverUrlInfo {
  */
 export interface AuthorizedUser {
     /**
-      * 用户id
+      * 电子签系统中的用户id
       */
     UserId: string;
 }
@@ -713,6 +733,13 @@ export interface TemplateInfo {
       */
     Promoter?: Recipient;
     /**
+      * 模板类型
+取值：
+1  静默签,
+3  普通模板
+      */
+    TemplateType?: number;
+    /**
       * 模板可用状态，取值：1启用（默认），2停用
       */
     Available?: number;
@@ -919,19 +946,19 @@ export interface AutoSignConfig {
       */
     UserInfo: UserThreeFactor;
     /**
-      * 回调链接
+      * 接受自动签开启的回调地址。需要保证post返回200
       */
     CallbackUrl: string;
     /**
-      * 是否回调证书信息
+      * 是否回调证书信息，默认false-不需要
       */
     CertInfoCallback?: boolean;
     /**
-      * 是否支持用户自定义签名印章
+      * 是否支持用户自定义签名印章，默认false-不需要
       */
     UserDefineSeal?: boolean;
     /**
-      * 是否需要回调的时候返回印章(签名) 图片的 base64
+      * 是否需要回调的时候返回印章(签名) 图片的 base64，默认false-不需要
       */
     SealImgCallback?: boolean;
     /**
@@ -2043,7 +2070,7 @@ export interface FailedUpdateStaffData {
       */
     UserId?: string;
     /**
-      * 用户OpenId
+      * 员工在第三方平台的openId
       */
     OpenId?: string;
 }
@@ -2377,42 +2404,42 @@ export interface ApproverInfo {
       */
     ApproverType: number;
     /**
-      * 本环节需要操作人的名字
+      * 签署人的姓名
       */
     ApproverName: string;
     /**
-      * 本环节需要操作人的手机号
+      * 签署人的手机号，11位数字
       */
     ApproverMobile: string;
     /**
-      * 本环节操作人签署控件配置
+      * 签署人的签署控件列表
       */
     SignComponents: Array<Component>;
     /**
-      * 如果是企业,则为企业的名字
+      * 如果签署方是企业签署方，则为企业名
       */
     OrganizationName?: string;
     /**
-      * 身份证号
+      * 签署人的身份证号
       */
     ApproverIdCardNumber?: string;
     /**
-      * 证件类型
+      * 签署人的身份证件类型
 ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     ApproverIdCardType?: string;
     /**
-      * sms--短信，none--不通知
+      * 签署通知类型：sms--短信，none--不通知
       */
     NotifyType?: string;
     /**
-      * 1--收款人、2--开具人、3--见证人
+      * 签署人角色类型：1--收款人、2--开具人、3--见证人
       */
     ApproverRole?: number;
     /**
-      * 签署意愿确认渠道,WEIXINAPP:人脸识别
+      * 签署意愿确认渠道，默认为WEIXINAPP:人脸识别
       */
     VerifyChannel?: Array<string>;
     /**
@@ -2424,7 +2451,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       */
     UserId?: string;
     /**
-      * 签署人用户来源,企微侧用户请传入：WEWORKAPP
+      * 签署人用户来源，企微侧用户请传入：WEWORKAPP
       */
     ApproverSource?: string;
     /**
@@ -2576,15 +2603,15 @@ export interface ApproverRestriction {
       */
     Name?: string;
     /**
-      * 指定签署人手机号
+      * 指定签署人手机号，11位数字
       */
     Mobile?: string;
     /**
-      * 指定签署人证件类型
+      * 指定签署人证件类型，ID_CARD-身份证
       */
     IdCardType?: string;
     /**
-      * 指定签署人证件号码
+      * 指定签署人证件号码，字母大写
       */
     IdCardNumber?: string;
 }
@@ -3047,7 +3074,7 @@ export interface UploadFile {
  */
 export interface Component {
     /**
-      * 如果是Component控件类型，则可选的字段为：
+      * 如果是Component填写控件类型，则可选的字段为：
 TEXT - 普通文本控件，输入文本字符串；
 MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；
 CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；
@@ -3058,7 +3085,7 @@ SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；
 DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；
 DISTRICT - 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；
 
-如果是SignComponent控件类型，则可选的字段为
+如果是SignComponent签署控件类型，则可选的字段为
 SIGN_SEAL - 签署印章控件；
 SIGN_DATE - 签署日期控件；
 SIGN_SIGNATURE - 用户签名控件；
@@ -3071,7 +3098,7 @@ SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。
       */
     ComponentType: string;
     /**
-      * 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N）
+      * 控件所属文件的序号（取值为：0-N）。目前单文件的情况下，值是0
       */
     FileIndex: number;
     /**
@@ -3095,11 +3122,11 @@ SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。
       */
     ComponentPosY: number;
     /**
-      * GenerateMode==KEYWORD 指定关键字
+      * 查询时返回控件唯一Id。使用文件发起合同时用于GenerateMode==KEYWORD 指定关键字
       */
     ComponentId?: string;
     /**
-      * GenerateMode==FIELD 指定表单域名称
+      * 查询时返回控件名。使用文件发起合同时用于GenerateMode==FIELD 指定表单域名称
       */
     ComponentName?: string;
     /**
@@ -3140,7 +3167,7 @@ ComponentType为SIGN_DATE时，支持以下参数：
       */
     ComponentExtra?: string;
     /**
-      * 是否是表单域类型，默认不存在
+      * 是否是表单域类型，默认不false-不是
       */
     IsFormType?: boolean;
     /**
@@ -3233,7 +3260,7 @@ KEYWORD 关键字，使用ComponentId指定关键字
       */
     ComponentDateFontSize?: number;
     /**
-      * 平台模板控件 id 标识
+      * 第三方应用集成平台模板控件 id 标识
       */
     ChannelComponentId?: string;
     /**
@@ -3245,7 +3272,7 @@ KEYWORD 关键字，使用ComponentId指定关键字
       */
     OffsetY?: number;
     /**
-      * //子客控件来源。0-平台指定；1-用户自定义
+      * 第三方应用集成中子客企业控件来源。0-平台指定；1-用户自定义
       */
     ChannelComponentSource?: number;
     /**
@@ -3638,7 +3665,7 @@ export interface DescribeFlowInfoResponse {
  */
 export interface CcInfo {
     /**
-      * 被抄送人手机号
+      * 被抄送人手机号，11位数字
       */
     Mobile?: string;
     /**

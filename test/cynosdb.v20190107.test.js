@@ -38,6 +38,16 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyResourcePackageClusters", async function () {
+    try {
+       const data = await client.ModifyResourcePackageClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateAuditRuleTemplate", async function () {
     try {
        const data = await client.CreateAuditRuleTemplate({})
@@ -468,6 +478,16 @@ it("cynosdb.v20190107.CreateAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.CreateResourcePackage", async function () {
+    try {
+       const data = await client.CreateResourcePackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeAuditLogFiles", async function () {
     try {
        const data = await client.DescribeAuditLogFiles({})
@@ -628,9 +648,29 @@ it("cynosdb.v20190107.ModifyInstanceParam", async function () {
     }
 })
 
+it("cynosdb.v20190107.BindClusterResourcePackages", async function () {
+    try {
+       const data = await client.BindClusterResourcePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeAuditLogs", async function () {
     try {
        const data = await client.DescribeAuditLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.UnbindClusterResourcePackages", async function () {
+    try {
+       const data = await client.UnbindClusterResourcePackages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +701,16 @@ it("cynosdb.v20190107.InquirePriceCreate", async function () {
 it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeResourcePackageSaleSpec", async function () {
+    try {
+       const data = await client.DescribeResourcePackageSaleSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,6 +798,16 @@ it("cynosdb.v20190107.InquirePriceRenew", async function () {
     }
 })
 
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+    try {
+       const data = await client.SearchClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
@@ -788,6 +848,16 @@ it("cynosdb.v20190107.CreateClusterDatabase", async function () {
     }
 })
 
+it("cynosdb.v20190107.OpenAuditService", async function () {
+    try {
+       const data = await client.OpenAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DeleteAuditLogFile", async function () {
     try {
        const data = await client.DeleteAuditLogFile({})
@@ -801,6 +871,16 @@ it("cynosdb.v20190107.DeleteAuditLogFile", async function () {
 it("cynosdb.v20190107.DescribeAuditRuleTemplates", async function () {
     try {
        const data = await client.DescribeAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeResourcePackageDetail", async function () {
+    try {
+       const data = await client.DescribeResourcePackageDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +918,9 @@ it("cynosdb.v20190107.UpgradeClusterVersion", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+it("cynosdb.v20190107.DescribeResourcePackageList", async function () {
     try {
-       const data = await client.SearchClusterDatabases({})
+       const data = await client.DescribeResourcePackageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -851,6 +931,16 @@ it("cynosdb.v20190107.SearchClusterDatabases", async function () {
 it("cynosdb.v20190107.DescribeClusterParams", async function () {
     try {
        const data = await client.DescribeClusterParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RefundResourcePackage", async function () {
+    try {
+       const data = await client.RefundResourcePackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,9 +1138,9 @@ it("cynosdb.v20190107.OpenClusterPasswordComplexity", async function () {
     }
 })
 
-it("cynosdb.v20190107.OpenAuditService", async function () {
+it("cynosdb.v20190107.ModifyResourcePackageName", async function () {
     try {
-       const data = await client.OpenAuditService({})
+       const data = await client.ModifyResourcePackageName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

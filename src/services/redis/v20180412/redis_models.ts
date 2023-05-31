@@ -549,7 +549,7 @@ export interface DescribeInstanceMonitorBigKeyResponse {
   /**
    * 大Key详细信息
    */
-  Data: Array<BigKeyInfo>
+  Data?: Array<BigKeyInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2345,18 +2345,18 @@ export interface ModifyInstanceAccountResponse {
  */
 export interface DelayDistribution {
   /**
-      * 分布阶梯，延时和Ladder值的对应关系：
-[0ms,1ms]: 1；
-[1ms,5ms]: 5；
-[5ms,10ms]: 10；
-[10ms,50ms]: 50；
-[50ms,200ms]: 200；
-[200ms,∞]: -1。
+      * 指延时分布阶梯，其与延时区间的对应关系如下所示。
+- 1：[0ms,1ms]。
+- 5： [1ms,5ms]。
+- 10： [5ms,10ms]。
+- 50： [10ms,50ms]。
+- 200：[50ms,200ms]。
+- -1： [200ms,∞]。
       */
   Ladder: number
 
   /**
-   * 延时处于当前分布阶梯的命令数量，个。
+   * 延时处于当前分布阶梯的命令数量，单位：个。
    */
   Size: number
 
@@ -3971,7 +3971,7 @@ export interface DescribeInstanceMonitorBigKeyTypeDistResponse {
   /**
    * 大Key类型分布详细信息
    */
-  Data: Array<BigKeyTypeInfo>
+  Data?: Array<BigKeyTypeInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4991,12 +4991,12 @@ export interface DescribeCommonDBInstancesResponse {
   /**
    * 实例数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 实例信息
    */
-  InstanceDetails: Array<RedisCommonInstanceList>
+  InstanceDetails?: Array<RedisCommonInstanceList>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -43,6 +43,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 删除实例公网访问白名单策略
+
+注意：当PolicyIndex和CidrBlock同时存在时，CidrBlock优先级更高
      */
     async DeleteSecurityPolicy(req, cb) {
         return this.request("DeleteSecurityPolicy", req, cb);

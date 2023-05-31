@@ -271,6 +271,10 @@ export interface ExpansionNodeConfig {
       * 私有网络相关信息配置。
       */
     VirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+      */
+    ProjectId?: number;
 }
 /**
  * 节点活动信息。
@@ -720,6 +724,10 @@ export interface LoginNode {
 最多支持60个字符。
       */
     InstanceName?: string;
+    /**
+      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+      */
+    ProjectId?: number;
 }
 /**
  * 集群存储选项概览信息。
@@ -810,6 +818,10 @@ export interface ManagerNode {
 最多支持60个字符（包含模式串）。
       */
     InstanceName?: string;
+    /**
+      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+      */
+    ProjectId?: number;
 }
 /**
  * DeleteCluster请求参数结构体
@@ -1008,6 +1020,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
       */
     NodeType?: string;
+    /**
+      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+      */
+    ProjectId?: number;
 }
 /**
  * CFS存储选项概览信息。
@@ -1293,6 +1309,10 @@ export interface ComputeNode {
 最多支持60个字符。
       */
     InstanceName?: string;
+    /**
+      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+      */
+    ProjectId?: number;
 }
 /**
  * DeleteNodes请求参数结构体
