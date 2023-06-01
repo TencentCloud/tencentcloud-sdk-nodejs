@@ -35,6 +35,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
     /**
+     * 修改账号的一些配置，比如 max_user_connections
+     */
+    async ModifyAccountConfig(req, cb) {
+        return this.request("ModifyAccountConfig", req, cb);
+    }
+    /**
      * 本接口（UpgradeDedicatedDCDBInstance）用于升级TDSQL独享集群实例
      */
     async UpgradeDedicatedDCDBInstance(req, cb) {

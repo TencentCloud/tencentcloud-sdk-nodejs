@@ -303,10 +303,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuotaInvoiceOCR", req, cb);
     }
     /**
-     * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
+     * 菲律宾UMID识别
      */
-    async VinOCR(req, cb) {
-        return this.request("VinOCR", req, cb);
+    async RecognizePhilippinesUMIDOCR(req, cb) {
+        return this.request("RecognizePhilippinesUMIDOCR", req, cb);
     }
     /**
      * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
@@ -328,6 +328,8 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+默认接口请求频率限制：10次/秒
      */
     async RecognizeThaiIDCardOCR(req, cb) {
         return this.request("RecognizeThaiIDCardOCR", req, cb);
@@ -393,6 +395,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RecognizeOnlineTaxiItineraryOCR(req, cb) {
         return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb);
+    }
+    /**
+     * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
+     */
+    async VinOCR(req, cb) {
+        return this.request("VinOCR", req, cb);
     }
     /**
      * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备防伪识别、人像照片裁剪等扩展功能。

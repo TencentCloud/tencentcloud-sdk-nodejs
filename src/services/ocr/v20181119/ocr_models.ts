@@ -1283,23 +1283,20 @@ export interface LicensePlateInfo {
 }
 
 /**
- * 混贴票据中单张发票的内容
+ * RideHailingTransportLicenseOCR请求参数结构体
  */
-export interface SingleInvoiceInfo {
+export interface RideHailingTransportLicenseOCRRequest {
   /**
-   * 识别出的字段名称
-   */
-  Name: string
+      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
 
   /**
-   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
-   */
-  Value: string
-
-  /**
-   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
-   */
-  Row: number
+      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+      */
+  ImageUrl?: string
 }
 
 /**
@@ -4733,6 +4730,26 @@ export interface PropOwnerCertOCRRequest {
 }
 
 /**
+ * 混贴票据中单张发票的内容
+ */
+export interface SingleInvoiceInfo {
+  /**
+   * 识别出的字段名称
+   */
+  Name: string
+
+  /**
+   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
+   */
+  Value: string
+
+  /**
+   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
+   */
+  Row: number
+}
+
+/**
  * RecognizeContainerOCR请求参数结构体
  */
 export interface RecognizeContainerOCRRequest {
@@ -6057,6 +6074,56 @@ export interface GeneralEfficientOCRRequest {
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
   ImageUrl?: string
+}
+
+/**
+ * RecognizePhilippinesUMIDOCR返回参数结构体
+ */
+export interface RecognizePhilippinesUMIDOCRResponse {
+  /**
+   * 姓
+   */
+  Surname?: TextDetectionResult
+
+  /**
+   * 中间名
+   */
+  MiddleName?: TextDetectionResult
+
+  /**
+   * 名
+   */
+  GivenName?: TextDetectionResult
+
+  /**
+   * 地址
+   */
+  Address?: TextDetectionResult
+
+  /**
+   * 生日
+   */
+  Birthday?: TextDetectionResult
+
+  /**
+   * crn码
+   */
+  CRN?: TextDetectionResult
+
+  /**
+   * 性别
+   */
+  Sex?: TextDetectionResult
+
+  /**
+   * 人像照片Base64后的结果
+   */
+  HeadPortrait?: TextDetectionResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9902,20 +9969,23 @@ export interface VatInvoiceOCRRequest {
 }
 
 /**
- * RideHailingTransportLicenseOCR请求参数结构体
+ * RecognizePhilippinesUMIDOCR请求参数结构体
  */
-export interface RideHailingTransportLicenseOCRRequest {
+export interface RecognizePhilippinesUMIDOCRRequest {
   /**
-      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-      */
+   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
   ImageBase64?: string
 
   /**
-      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
-      */
+   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
   ImageUrl?: string
+
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
 }
 
 /**

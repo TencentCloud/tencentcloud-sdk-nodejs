@@ -28,6 +28,16 @@ it("dcdb.v20180411.DescribeAccountPrivileges", async function () {
     }
 })
 
+it("dcdb.v20180411.ModifyAccountConfig", async function () {
+    try {
+       const data = await client.ModifyAccountConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.UpgradeDedicatedDCDBInstance", async function () {
     try {
        const data = await client.UpgradeDedicatedDCDBInstance({})

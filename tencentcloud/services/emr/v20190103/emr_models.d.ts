@@ -2211,7 +2211,19 @@ export interface DeleteUserManagerUserListRequest {
     /**
       * 集群用户名列表
       */
-    UserNameList: Array<string>;
+    UserNameList?: Array<string>;
+    /**
+      * tke/eks集群id，容器集群传
+      */
+    TkeClusterId?: string;
+    /**
+      * 默认空，容器版传"native"
+      */
+    DisplayStrategy?: string;
+    /**
+      * 用户组
+      */
+    UserGroupList?: Array<UserAndGroup>;
 }
 /**
  * DescribeResourceSchedule返回参数结构体
@@ -2587,6 +2599,21 @@ export interface CreateClusterRequest {
       * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
       */
     ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>;
+}
+/**
+ * 容器集群用户组信息
+ */
+export interface UserAndGroup {
+    /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 用户组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroup: string;
 }
 /**
  * 引导脚本

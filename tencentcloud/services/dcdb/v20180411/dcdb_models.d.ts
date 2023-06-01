@@ -838,6 +838,19 @@ export interface DatabaseView {
     View: string;
 }
 /**
+ * 配置信息。包含配置项Config，配置值Value
+ */
+export interface ConfigValue {
+    /**
+      * 配置项的名称，支持填写max_user_connections
+      */
+    Config: string;
+    /**
+      * 配置值
+      */
+    Value: string;
+}
+/**
  * DescribeDBLogFiles请求参数结构体
  */
 export interface DescribeDBLogFilesRequest {
@@ -1616,6 +1629,40 @@ export interface ExpandShardConfig {
     ShardNodeCount?: number;
 }
 /**
+ * ModifyAccountConfig请求参数结构体
+ */
+export interface ModifyAccountConfigRequest {
+    /**
+      * 实例 ID，格式如：tdsqlshard-kpkvq5oj，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+    /**
+      * 账号的名称
+      */
+    UserName: string;
+    /**
+      * 账号的域名
+      */
+    Host: string;
+    /**
+      * 配置列表，每一个元素是Config和Value的组合
+      */
+    Configs: Array<ConfigValue>;
+}
+/**
+ * 分片节点可用区选择
+ */
+export interface ShardZoneChooseInfo {
+    /**
+      * 主可用区
+      */
+    MasterZone: ZonesInfo;
+    /**
+      * 可选的从可用区
+      */
+    SlaveZones: Array<ZonesInfo>;
+}
+/**
  * RenewDCDBInstance请求参数结构体
  */
 export interface RenewDCDBInstanceRequest {
@@ -1635,19 +1682,6 @@ export interface RenewDCDBInstanceRequest {
       * 代金券ID列表，目前仅支持指定一张代金券。
       */
     VoucherIds?: Array<string>;
-}
-/**
- * 分片节点可用区选择
- */
-export interface ShardZoneChooseInfo {
-    /**
-      * 主可用区
-      */
-    MasterZone: ZonesInfo;
-    /**
-      * 可选的从可用区
-      */
-    SlaveZones: Array<ZonesInfo>;
 }
 /**
  * DescribeDBEncryptAttributes返回参数结构体
@@ -3656,6 +3690,15 @@ export interface ModifyDBSyncModeRequest {
       * 同步模式：0 异步，1 强同步， 2 强同步可退化
       */
     SyncMode: number;
+}
+/**
+ * ModifyAccountConfig返回参数结构体
+ */
+export interface ModifyAccountConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProjects返回参数结构体

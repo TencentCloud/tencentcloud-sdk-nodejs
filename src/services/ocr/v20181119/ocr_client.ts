@@ -51,7 +51,7 @@ import {
   InvoiceGeneralOCRRequest,
   Rect,
   LicensePlateInfo,
-  SingleInvoiceInfo,
+  RideHailingTransportLicenseOCRRequest,
   VatRollItem,
   TextFormula,
   HmtResidentPermitOCRResponse,
@@ -138,6 +138,7 @@ import {
   TaxiInvoiceOCRRequest,
   MachinePrintedInvoice,
   PropOwnerCertOCRRequest,
+  SingleInvoiceInfo,
   RecognizeContainerOCRRequest,
   TrainTicket,
   EduPaperOCRRequest,
@@ -161,6 +162,7 @@ import {
   TextVehicleBack,
   RecognizeIndonesiaIDCardOCRResponse,
   GeneralEfficientOCRRequest,
+  RecognizePhilippinesUMIDOCRResponse,
   AdvertiseOCRRequest,
   RideHailingDriverLicenseOCRResponse,
   Detail,
@@ -270,7 +272,7 @@ import {
   WaybillOCRRequest,
   VinOCRRequest,
   VatInvoiceOCRRequest,
-  RideHailingTransportLicenseOCRRequest,
+  RecognizePhilippinesUMIDOCRRequest,
   MLIDCardOCRResponse,
   RecognizePhilippinesTinIDOCRRequest,
   RecognizeTableOCRRequest,
@@ -658,13 +660,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
+   * 菲律宾UMID识别
    */
-  async VinOCR(
-    req: VinOCRRequest,
-    cb?: (error: string, rep: VinOCRResponse) => void
-  ): Promise<VinOCRResponse> {
-    return this.request("VinOCR", req, cb)
+  async RecognizePhilippinesUMIDOCR(
+    req: RecognizePhilippinesUMIDOCRRequest,
+    cb?: (error: string, rep: RecognizePhilippinesUMIDOCRResponse) => void
+  ): Promise<RecognizePhilippinesUMIDOCRResponse> {
+    return this.request("RecognizePhilippinesUMIDOCR", req, cb)
   }
 
   /**
@@ -695,6 +697,8 @@ export class Client extends AbstractClient {
   /**
      * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+默认接口请求频率限制：10次/秒
      */
   async RecognizeThaiIDCardOCR(
     req: RecognizeThaiIDCardOCRRequest,
@@ -795,6 +799,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void
   ): Promise<RecognizeOnlineTaxiItineraryOCRResponse> {
     return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb)
+  }
+
+  /**
+   * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
+   */
+  async VinOCR(
+    req: VinOCRRequest,
+    cb?: (error: string, rep: VinOCRResponse) => void
+  ): Promise<VinOCRResponse> {
+    return this.request("VinOCR", req, cb)
   }
 
   /**

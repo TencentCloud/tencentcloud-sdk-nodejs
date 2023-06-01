@@ -18,66 +18,6 @@ const client = new tencentcloud.cms.v20190321.Client({
 })
 describe("cms.v20190321.test.js", function () {
 
-it("cms.v20190321.DeleteTextSample", async function () {
-    try {
-       const data = await client.DeleteTextSample({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cms.v20190321.CreateTextSample", async function () {
-    try {
-       const data = await client.CreateTextSample({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cms.v20190321.CreateFileSample", async function () {
-    try {
-       const data = await client.CreateFileSample({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cms.v20190321.DescribeTextSample", async function () {
-    try {
-       const data = await client.DescribeTextSample({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cms.v20190321.ManualReview", async function () {
-    try {
-       const data = await client.ManualReview({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cms.v20190321.DescribeFileSample", async function () {
-    try {
-       const data = await client.DescribeFileSample({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cms.v20190321.TextModeration", async function () {
     try {
        const data = await client.TextModeration({})
@@ -98,9 +38,39 @@ it("cms.v20190321.ImageModeration", async function () {
     }
 })
 
-it("cms.v20190321.DeleteFileSample", async function () {
+it("cms.v20190321.DescribeLibSamples", async function () {
     try {
-       const data = await client.DeleteFileSample({})
+       const data = await client.DescribeLibSamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cms.v20190321.DescribeKeywordsLibs", async function () {
+    try {
+       const data = await client.DescribeKeywordsLibs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cms.v20190321.CreateKeywordsSamples", async function () {
+    try {
+       const data = await client.CreateKeywordsSamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cms.v20190321.DeleteLibSamples", async function () {
+    try {
+       const data = await client.DeleteLibSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

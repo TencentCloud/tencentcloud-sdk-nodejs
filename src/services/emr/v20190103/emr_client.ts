@@ -91,6 +91,7 @@ import {
   SubnetInfo,
   DescribeCvmQuotaResponse,
   CreateClusterRequest,
+  UserAndGroup,
   BootstrapAction,
   DescribeCvmQuotaRequest,
   DescribeClusterNodesRequest,
@@ -295,9 +296,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除用户列表（用户管理）
-
-     */
+   * 删除用户列表（用户管理）
+   */
   async DeleteUserManagerUserList(
     req: DeleteUserManagerUserListRequest,
     cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void

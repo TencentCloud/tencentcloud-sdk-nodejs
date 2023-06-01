@@ -65,6 +65,7 @@ import {
   ModifyDBEncryptAttributesResponse,
   DescribeDCDBInstanceNodeInfoRequest,
   DatabaseView,
+  ConfigValue,
   DescribeDBLogFilesRequest,
   NodeInfo,
   DescribeOrdersResponse,
@@ -89,8 +90,9 @@ import {
   DescribeDCDBSaleInfoRequest,
   ModifyRealServerAccessStrategyRequest,
   ExpandShardConfig,
-  RenewDCDBInstanceRequest,
+  ModifyAccountConfigRequest,
   ShardZoneChooseInfo,
+  RenewDCDBInstanceRequest,
   DescribeDBEncryptAttributesResponse,
   CreateTmpDCDBInstanceRequest,
   DatabaseTable,
@@ -171,6 +173,7 @@ import {
   ModifyDBEncryptAttributesRequest,
   AddShardConfig,
   ModifyDBSyncModeRequest,
+  ModifyAccountConfigResponse,
   DescribeProjectsResponse,
   CreateTmpDCDBInstanceResponse,
   CreateAccountResponse,
@@ -221,6 +224,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void
   ): Promise<DescribeAccountPrivilegesResponse> {
     return this.request("DescribeAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 修改账号的一些配置，比如 max_user_connections
+   */
+  async ModifyAccountConfig(
+    req: ModifyAccountConfigRequest,
+    cb?: (error: string, rep: ModifyAccountConfigResponse) => void
+  ): Promise<ModifyAccountConfigResponse> {
+    return this.request("ModifyAccountConfig", req, cb)
   }
 
   /**

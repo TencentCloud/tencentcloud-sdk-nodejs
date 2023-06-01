@@ -108,7 +108,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 删除用户列表（用户管理）
-
      */
     async DeleteUserManagerUserList(req, cb) {
         return this.request("DeleteUserManagerUserList", req, cb);

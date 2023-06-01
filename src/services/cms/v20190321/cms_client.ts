@@ -18,56 +18,50 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateKeywordsSamplesResponse,
+  CreateKeywordsSamplesRequest,
   CustomResult,
   TextData,
-  TextModerationRequest,
+  DescribeKeywordsLibsRequest,
   DetailResult,
   ImageModerationResponse,
   TextModerationResponse,
   ImageModerationRequest,
-  CreateFileSampleRequest,
   ImageData,
-  ImagePornDetect,
-  DeleteTextSampleResponse,
-  TextSample,
-  CreateTextSampleResponse,
+  UserKeywordInfo,
+  DescribeLibSamplesResponse,
+  DescribeLibSamplesRequest,
+  DeleteSampleDetails,
   TextOutputID,
-  ManualReviewRequest,
   User,
-  FileSampleInfo,
-  DescribeFileSampleRequest,
+  DeleteLibSamplesResponse,
   Device,
   CodeDetect,
   ImageTerrorDetect,
-  DescribeTextSampleResponse,
   CodePosition,
-  DeleteFileSampleResponse,
-  FileSample,
-  DescribeFileSampleResponse,
+  InvalidSample,
   TextOutputRes,
   RiskDetails,
-  CreateTextSampleRequest,
-  DeleteFileSampleRequest,
-  Filter,
-  ManualReviewData,
+  TextModerationRequest,
   OCRDetect,
-  ManualReviewContent,
   Coordinate,
   Similar,
+  PhoneDetect,
   ImageHotDetect,
   TextOutputComm,
-  DescribeTextSampleRequest,
+  KeywordsLibInfo,
   CodeDetail,
+  UserKeyword,
   ImagePolityDetect,
   OCRItem,
   ImageIllegalDetect,
   RrectF,
-  CreateFileSampleResponse,
-  ManualReviewResponse,
+  DeleteLibSamplesRequest,
+  Filters,
   LogoDetail,
   Logo,
-  PhoneDetect,
-  DeleteTextSampleRequest,
+  DescribeKeywordsLibsResponse,
+  ImagePornDetect,
 } from "./cms_models"
 
 /**
@@ -77,76 +71,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cms.tencentcloudapi.com", "2019-03-21", clientConfig)
-  }
-
-  /**
-     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-<br>
-删除文本样本库，暂时只支持单个删除。
-     */
-  async DeleteTextSample(
-    req: DeleteTextSampleRequest,
-    cb?: (error: string, rep: DeleteTextSampleResponse) => void
-  ): Promise<DeleteTextSampleResponse> {
-    return this.request("DeleteTextSample", req, cb)
-  }
-
-  /**
-     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-<br>
-通过该接口可以将文本新增到样本库。
-     */
-  async CreateTextSample(
-    req: CreateTextSampleRequest,
-    cb?: (error: string, rep: CreateTextSampleResponse) => void
-  ): Promise<CreateTextSampleResponse> {
-    return this.request("CreateTextSample", req, cb)
-  }
-
-  /**
-     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-<br>
-通过该接口可以将图片新增到样本库。
-     */
-  async CreateFileSample(
-    req: CreateFileSampleRequest,
-    cb?: (error: string, rep: CreateFileSampleResponse) => void
-  ): Promise<CreateFileSampleResponse> {
-    return this.request("CreateFileSample", req, cb)
-  }
-
-  /**
-     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-<br>
-支持批量查询文本样本库。
-     */
-  async DescribeTextSample(
-    req: DescribeTextSampleRequest,
-    cb?: (error: string, rep: DescribeTextSampleResponse) => void
-  ): Promise<DescribeTextSampleResponse> {
-    return this.request("DescribeTextSample", req, cb)
-  }
-
-  /**
-   * 人工审核对外接口
-   */
-  async ManualReview(
-    req: ManualReviewRequest,
-    cb?: (error: string, rep: ManualReviewResponse) => void
-  ): Promise<ManualReviewResponse> {
-    return this.request("ManualReview", req, cb)
-  }
-
-  /**
-     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-<br>
-查询图片样本库，支持批量查询。
-     */
-  async DescribeFileSample(
-    req: DescribeFileSampleRequest,
-    cb?: (error: string, rep: DescribeFileSampleResponse) => void
-  ): Promise<DescribeFileSampleResponse> {
-    return this.request("DescribeFileSample", req, cb)
   }
 
   /**
@@ -170,14 +94,42 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-<br>
-删除图片样本库，支持批量删除，一次提交不超过20个。
-     */
-  async DeleteFileSample(
-    req: DeleteFileSampleRequest,
-    cb?: (error: string, rep: DeleteFileSampleResponse) => void
-  ): Promise<DeleteFileSampleResponse> {
-    return this.request("DeleteFileSample", req, cb)
+   * 获取关键词接口
+   */
+  async DescribeLibSamples(
+    req: DescribeLibSamplesRequest,
+    cb?: (error: string, rep: DescribeLibSamplesResponse) => void
+  ): Promise<DescribeLibSamplesResponse> {
+    return this.request("DescribeLibSamples", req, cb)
+  }
+
+  /**
+   * 获取用户词库列表
+   */
+  async DescribeKeywordsLibs(
+    req: DescribeKeywordsLibsRequest,
+    cb?: (error: string, rep: DescribeKeywordsLibsResponse) => void
+  ): Promise<DescribeKeywordsLibsResponse> {
+    return this.request("DescribeKeywordsLibs", req, cb)
+  }
+
+  /**
+   * 创建关键词接口
+   */
+  async CreateKeywordsSamples(
+    req: CreateKeywordsSamplesRequest,
+    cb?: (error: string, rep: CreateKeywordsSamplesResponse) => void
+  ): Promise<CreateKeywordsSamplesResponse> {
+    return this.request("CreateKeywordsSamples", req, cb)
+  }
+
+  /**
+   * 删除关键词接口
+   */
+  async DeleteLibSamples(
+    req: DeleteLibSamplesRequest,
+    cb?: (error: string, rep: DeleteLibSamplesResponse) => void
+  ): Promise<DeleteLibSamplesResponse> {
+    return this.request("DeleteLibSamples", req, cb)
   }
 }
