@@ -1225,6 +1225,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageRiskSummary", req, cb);
     }
     /**
+     * 查询漏洞影响的仓库镜像列表
+     */
+    async DescribeVulRegistryImageList(req, cb) {
+        return this.request("DescribeVulRegistryImageList", req, cb);
+    }
+    /**
      * 查询应急漏洞列表
      */
     async DescribeEmergencyVulList(req, cb) {

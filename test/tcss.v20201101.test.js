@@ -2008,6 +2008,16 @@ it("tcss.v20201101.DescribeImageRiskSummary", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeVulRegistryImageList", async function () {
+    try {
+       const data = await client.DescribeVulRegistryImageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeEmergencyVulList", async function () {
     try {
        const data = await client.DescribeEmergencyVulList({})

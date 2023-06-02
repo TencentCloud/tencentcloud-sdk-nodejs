@@ -9028,9 +9028,8 @@ export interface AssetWebFrameBaseInfo {
   MachineName?: string
 
   /**
-      * 数据更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 数据更新时间
+   */
   UpdateTime?: string
 
   /**
@@ -9048,6 +9047,11 @@ export interface AssetWebFrameBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MachineExtraInfo?: MachineExtraInfo
+
+  /**
+   * 应用路径
+   */
+  Path?: string
 }
 
 /**

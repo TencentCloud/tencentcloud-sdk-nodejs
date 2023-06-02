@@ -31,13 +31,12 @@ import {
   CertificateExtra,
   RootCertificates,
   CdnInstanceDetail,
-  VerifyManagerRequest,
   VerifyManagerResponse,
   DescribeCertificateDetailRequest,
   TkeNameSpaceDetail,
   DescribeDeployedResourcesRequest,
   UploadRevokeLetterRequest,
-  DescribeManagersResponse,
+  ClbListener,
   DescribeCompaniesResponse,
   CheckCertificateChainResponse,
   DescribeHostCosInstanceListResponse,
@@ -55,7 +54,7 @@ import {
   DescribeHostDdosInstanceListResponse,
   UpdateRecordDetails,
   DescribeCertificateDetailResponse,
-  DescribeHostDeployRecordDetailRequest,
+  DownloadCertificateRequest,
   DescribeHostTkeInstanceListResponse,
   UpdateRecordDetail,
   ApplyCertificateResponse,
@@ -65,7 +64,7 @@ import {
   DescribeHostUpdateRecordDetailRequest,
   ReplaceCertificateResponse,
   ClbInstanceDetail,
-  OperationLog,
+  DescribeManagersResponse,
   VodInstanceDetail,
   DescribeCertificateResponse,
   PackageTransferOutInfo,
@@ -79,6 +78,7 @@ import {
   DdosInstanceDetail,
   DescribeHostWafInstanceListResponse,
   DescribeDeployedResourcesResponse,
+  CreateCertificateByPackageResponse,
   CreateCertificateRequest,
   DescribeCertificatesResponse,
   CommitCertificateInformationResponse,
@@ -96,9 +96,10 @@ import {
   DescribeManagerDetailResponse,
   HostCertificateResponse,
   Certificate,
+  CreateCertificateByPackageRequest,
   CommitCertificateInformationRequest,
   SubmitAuditManagerResponse,
-  DownloadCertificateRequest,
+  DescribeHostDeployRecordDetailRequest,
   UpdateCertificateInstanceRequest,
   ReplaceCertificateRequest,
   CompanyInfo,
@@ -120,7 +121,7 @@ import {
   DescribeHostUpdateRecordDetailResponse,
   DescribeHostUpdateRecordRequest,
   DescribeHostClbInstanceListRequest,
-  ClbListener,
+  VerifyManagerRequest,
   DescribeHostLiveInstanceListResponse,
   DescribeHostApiGatewayInstanceListRequest,
   SubmittedData,
@@ -140,6 +141,7 @@ import {
   UploadRevokeLetterResponse,
   UpdateCertificateInstanceResponse,
   UploadCertificateRequest,
+  OperationLog,
   ModifyCertificateAliasResponse,
   ApplyCertificateRequest,
   CreateCertificateResponse,
@@ -280,6 +282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitCertificateInformationResponse) => void
   ): Promise<SubmitCertificateInformationResponse> {
     return this.request("SubmitCertificateInformation", req, cb)
+  }
+
+  /**
+   * 云资源更新一键回滚
+   */
+  async UpdateCertificateRecordRollback(
+    req: UpdateCertificateRecordRollbackRequest,
+    cb?: (error: string, rep: UpdateCertificateRecordRollbackResponse) => void
+  ): Promise<UpdateCertificateRecordRollbackResponse> {
+    return this.request("UpdateCertificateRecordRollback", req, cb)
   }
 
   /**
@@ -623,13 +635,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云资源更新一键回滚
+   * 使用权益点创建证书
    */
-  async UpdateCertificateRecordRollback(
-    req: UpdateCertificateRecordRollbackRequest,
-    cb?: (error: string, rep: UpdateCertificateRecordRollbackResponse) => void
-  ): Promise<UpdateCertificateRecordRollbackResponse> {
-    return this.request("UpdateCertificateRecordRollback", req, cb)
+  async CreateCertificateByPackage(
+    req: CreateCertificateByPackageRequest,
+    cb?: (error: string, rep: CreateCertificateByPackageResponse) => void
+  ): Promise<CreateCertificateByPackageResponse> {
+    return this.request("CreateCertificateByPackage", req, cb)
   }
 
   /**

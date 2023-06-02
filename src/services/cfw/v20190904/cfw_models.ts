@@ -889,6 +889,18 @@ export interface AssociatedInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SecurityGroupCount: number
+
+  /**
+      * 关联安全组规则数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupRuleCount?: number
+
+  /**
+      * 关联数据库代理Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdbId?: string
 }
 
 /**
@@ -3167,7 +3179,6 @@ type InstanceInfo struct {
 	ResourceGroupNum int    `json:"ResourceGroupNum"`
 	VPCName          string `json:"VPCName" gorm:"column:VPCName"`
 }
-
  */
 export interface InstanceInfo {
   /**
@@ -3241,6 +3252,12 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourcePath: Array<string>
+
+  /**
+      * 扫描结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Server?: Array<string>
 }
 
 /**

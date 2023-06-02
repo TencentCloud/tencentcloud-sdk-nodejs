@@ -455,6 +455,7 @@ import {
   ScanComplianceAssetsRequest,
   DescribeAbnormalProcessRuleDetailResponse,
   ModifyVirusFileStatusRequest,
+  VulAffectedRegistryImageInfo,
   CreateVulContainerExportJobResponse,
   DescribeAssetImageRegistryListExportRequest,
   CreateK8sApiAbnormalRuleInfoResponse,
@@ -561,6 +562,7 @@ import {
   VulDefenceEventDetail,
   UpdateNetworkFirewallPolicyYamlDetailRequest,
   DescribeK8sApiAbnormalRuleInfoRequest,
+  DescribeVulRegistryImageListRequest,
   RunTimeEventBaseInfo,
   DescribeSystemVulListResponse,
   ModifyIgnoreVul,
@@ -665,6 +667,7 @@ import {
   CreateClusterCheckTaskRequest,
   RaspInfo,
   DescribeNetworkFirewallClusterListRequest,
+  DescribeVulRegistryImageListResponse,
   CreateVulDefenceEventExportJobResponse,
   AutoAuthorizedRuleHostInfo,
   CreateExportComplianceStatusListJobRequest,
@@ -2831,6 +2834,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageRiskSummaryResponse) => void
   ): Promise<DescribeImageRiskSummaryResponse> {
     return this.request("DescribeImageRiskSummary", req, cb)
+  }
+
+  /**
+   * 查询漏洞影响的仓库镜像列表
+   */
+  async DescribeVulRegistryImageList(
+    req: DescribeVulRegistryImageListRequest,
+    cb?: (error: string, rep: DescribeVulRegistryImageListResponse) => void
+  ): Promise<DescribeVulRegistryImageListResponse> {
+    return this.request("DescribeVulRegistryImageList", req, cb)
   }
 
   /**

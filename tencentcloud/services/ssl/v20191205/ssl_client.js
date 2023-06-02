@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitCertificateInformation", req, cb);
     }
     /**
+     * 云资源更新一键回滚
+     */
+    async UpdateCertificateRecordRollback(req, cb) {
+        return this.request("UpdateCertificateRecordRollback", req, cb);
+    }
+    /**
      * 查询证书ddos云资源部署实例列表
      */
     async DescribeHostDdosInstanceList(req, cb) {
@@ -298,10 +304,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostApiGatewayInstanceList", req, cb);
     }
     /**
-     * 云资源更新一键回滚
+     * 使用权益点创建证书
      */
-    async UpdateCertificateRecordRollback(req, cb) {
-        return this.request("UpdateCertificateRecordRollback", req, cb);
+    async CreateCertificateByPackage(req, cb) {
+        return this.request("CreateCertificateByPackage", req, cb);
     }
     /**
      * 修改忽略证书到期通知。打开或关闭证书到期通知。

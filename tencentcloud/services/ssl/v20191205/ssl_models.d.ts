@@ -551,15 +551,6 @@ export interface CdnInstanceDetail {
     Status: string;
 }
 /**
- * VerifyManager请求参数结构体
- */
-export interface VerifyManagerRequest {
-    /**
-      * 管理人ID
-      */
-    ManagerId: number;
-}
-/**
  * VerifyManager返回参数结构体
  */
 export interface VerifyManagerResponse {
@@ -621,21 +612,40 @@ export interface UploadRevokeLetterRequest {
     RevokeLetter: string;
 }
 /**
- * DescribeManagers返回参数结构体
+ * CLB实例监听器
  */
-export interface DescribeManagersResponse {
+export interface ClbListener {
     /**
-      * 公司管理人列表
+      * 监听器ID
       */
-    Managers: Array<ManagerInfo>;
+    ListenerId: string;
     /**
-      * 公司管理人总数
+      * 监听器名称
       */
-    TotalCount: number;
+    ListenerName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 是否开启SNI，1为开启，0为关闭
       */
-    RequestId?: string;
+    SniSwitch: number;
+    /**
+      * 监听器协议类型， HTTPS|TCP_SSL
+      */
+    Protocol: string;
+    /**
+      * 监听器绑定的证书数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Certificate: Certificate;
+    /**
+      * 监听器规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rules: Array<ClbListenerRule>;
+    /**
+      * 不匹配域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NoMatchDomains?: Array<string>;
 }
 /**
  * DescribeCompanies返回参数结构体
@@ -1201,21 +1211,13 @@ export interface DescribeCertificateDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeHostDeployRecordDetail请求参数结构体
+ * DownloadCertificate请求参数结构体
  */
-export interface DescribeHostDeployRecordDetailRequest {
+export interface DownloadCertificateRequest {
     /**
-      * 待部署的证书ID
+      * 证书 ID。
       */
-    DeployRecordId: string;
-    /**
-      * 分页偏移量，从0开始。
-      */
-    Offset?: number;
-    /**
-      * 每页数量，默认10。
-      */
-    Limit?: number;
+    CertificateId: string;
 }
 /**
  * DescribeHostTkeInstanceList返回参数结构体
@@ -1450,17 +1452,21 @@ export interface ClbInstanceDetail {
     Listeners: Array<ClbListener>;
 }
 /**
- * 证书操作日志。
+ * DescribeManagers返回参数结构体
  */
-export interface OperationLog {
+export interface DescribeManagersResponse {
     /**
-      * 操作证书动作。
+      * 公司管理人列表
       */
-    Action: string;
+    Managers: Array<ManagerInfo>;
     /**
-      * 操作时间。
+      * 公司管理人总数
       */
-    CreatedOn: string;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * Vod实例
@@ -1878,6 +1884,23 @@ export interface DescribeDeployedResourcesResponse {
       * 资源详情
       */
     DeployedResources?: Array<DeployedResources>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCertificateByPackage返回参数结构体
+ */
+export interface CreateCertificateByPackageResponse {
+    /**
+      * 证书ID。
+      */
+    CertificateId?: string;
+    /**
+      * 批量购买证书时返回多个证书ID。
+      */
+    CertificateIds?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2378,6 +2401,79 @@ export interface Certificate {
     DnsNames: Array<string>;
 }
 /**
+ * CreateCertificateByPackage请求参数结构体
+ */
+export interface CreateCertificateByPackageRequest {
+    /**
+      * 证书产品PID。
+      */
+    ProductPid: number;
+    /**
+      * 要消耗的权益包ID。
+      */
+    PackageIds: Array<string>;
+    /**
+      * 证书域名数量。
+      */
+    DomainCount: string;
+    /**
+      * 多年期证书年限。
+      */
+    Period: number;
+    /**
+      * 要续费的原证书ID（续费时填写）。
+      */
+    OldCertificateId?: string;
+    /**
+      * 续费时CSR生成方式（original、upload、online）。
+      */
+    RenewGenCsrMethod?: string;
+    /**
+      * 续费时选择上传CSR时填写CSR。
+      */
+    RenewCsr?: string;
+    /**
+      * 续费证书CSR的算法类型。
+      */
+    RenewAlgorithmType?: string;
+    /**
+      * 续费证书CSR的算法参数。
+      */
+    RenewAlgorithmParam?: string;
+    /**
+      * 项目ID。
+      */
+    ProjectId?: number;
+    /**
+      * 标签。
+      */
+    Tags?: Array<Tags>;
+    /**
+      * 续费证书的私钥密码。
+      */
+    RenewKeyPass?: string;
+    /**
+      * 批量购买证书时预填写的域名。
+      */
+    DomainNames?: string;
+    /**
+      * 批量购买证书数量。
+      */
+    CertificateCount?: number;
+    /**
+      * 预填写的管理人ID。
+      */
+    ManagerId?: number;
+    /**
+      * 预填写的公司ID。
+      */
+    CompanyId?: number;
+    /**
+      * 验证方式
+      */
+    VerifyType?: string;
+}
+/**
  * CommitCertificateInformation请求参数结构体
  */
 export interface CommitCertificateInformationRequest {
@@ -2404,13 +2500,21 @@ export interface SubmitAuditManagerResponse {
     RequestId?: string;
 }
 /**
- * DownloadCertificate请求参数结构体
+ * DescribeHostDeployRecordDetail请求参数结构体
  */
-export interface DownloadCertificateRequest {
+export interface DescribeHostDeployRecordDetailRequest {
     /**
-      * 证书 ID。
+      * 待部署的证书ID
       */
-    CertificateId: string;
+    DeployRecordId: string;
+    /**
+      * 分页偏移量，从0开始。
+      */
+    Offset?: number;
+    /**
+      * 每页数量，默认10。
+      */
+    Limit?: number;
 }
 /**
  * UpdateCertificateInstance请求参数结构体
@@ -2849,40 +2953,13 @@ export interface DescribeHostClbInstanceListRequest {
     OldCertificateId?: string;
 }
 /**
- * CLB实例监听器
+ * VerifyManager请求参数结构体
  */
-export interface ClbListener {
+export interface VerifyManagerRequest {
     /**
-      * 监听器ID
+      * 管理人ID
       */
-    ListenerId: string;
-    /**
-      * 监听器名称
-      */
-    ListenerName: string;
-    /**
-      * 是否开启SNI，1为开启，0为关闭
-      */
-    SniSwitch: number;
-    /**
-      * 监听器协议类型， HTTPS|TCP_SSL
-      */
-    Protocol: string;
-    /**
-      * 监听器绑定的证书数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Certificate: Certificate;
-    /**
-      * 监听器规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Rules: Array<ClbListenerRule>;
-    /**
-      * 不匹配域名列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NoMatchDomains?: Array<string>;
+    ManagerId: number;
 }
 /**
  * DescribeHostLiveInstanceList返回参数结构体
@@ -3386,6 +3463,19 @@ export interface UploadCertificateRequest {
       * 相同的证书是否允许重复上传
       */
     Repeatable?: boolean;
+}
+/**
+ * 证书操作日志。
+ */
+export interface OperationLog {
+    /**
+      * 操作证书动作。
+      */
+    Action: string;
+    /**
+      * 操作时间。
+      */
+    CreatedOn: string;
 }
 /**
  * ModifyCertificateAlias返回参数结构体

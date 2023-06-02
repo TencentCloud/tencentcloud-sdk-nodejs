@@ -232,7 +232,7 @@ export interface FlowCreateApprover {
 0：企业
 1：个人
 3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
+注：类型为3（企业静默签署）时，会默认完成该签署方的签署。静默签署仅进行盖章操作，不能是手写签名。
       */
   ApproverType: number
 
@@ -264,7 +264,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
   ApproverIdCardNumber?: string
 
   /**
-   * 签署方经办人在模板中的角色ID
+   * 签署方经办人在模板中的参与方ID
    */
   RecipientId?: string
 
@@ -629,38 +629,41 @@ export interface Agent {
  */
 export interface FlowApproverDetail {
   /**
-      * 签署人信息
+      * 签署时的相关信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApproveMessage?: string
 
   /**
-   * 签署人名字
+   * 签署方姓名
    */
   ApproveName: string
 
   /**
-      * 签署人的状态
+      * 签署方的签署状态
 0：还没有发起
 1：流程中 没有开始处理
-2：待处理
-3：签署态
-4：拒绝态
-5：过期没人处理
-6：取消态
+2：待签署
+3：已签署
+4：已拒绝
+5：已过期
+6：已撤销
 7：还没有预发起
 8：待填写
 9：因为各种原因而终止
+10：填写完成
+15：已解除
+19：转他人处理
       */
   ApproveStatus: number
 
   /**
-   * 模板配置时候的签署人id,与控件绑定
+   * 模板配置中的参与方ID,与控件绑定
    */
   ReceiptId: string
 
   /**
-      * 客户自定义userId
+      * 客户自定义的用户ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CustomUserId: string
@@ -671,41 +674,41 @@ export interface FlowApproverDetail {
   Mobile: string
 
   /**
-   * 签署顺序
+   * 签署顺序，如果是有序签署，签署顺序从小到大
    */
   SignOrder: number
 
   /**
-   * 签署人签署时间
+   * 签署人签署时间，时间戳，单位秒
    */
   ApproveTime: number
 
   /**
-      * 参与者类型
+      * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApproveType: string
 
   /**
-      * 签署人侧用户来源
+      * 签署方侧用户来源，如WEWORKAPP-企业微信等
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApproverSource: string
 
   /**
-      * 客户自定义签署人标识
+      * 客户自定义签署方标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CustomApproverTag: string
 
   /**
-      * 签署人企业Id
+      * 签署方企业Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OrganizationId: string
 
   /**
-      * 签署人企业名称
+      * 签署方企业名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OrganizationName: string
@@ -1293,7 +1296,7 @@ export interface DescribeUserAutoSignStatusResponse {
  */
 export interface FillApproverInfo {
   /**
-   * 签署人签署Id
+   * 对应模板中的参与方ID
    */
   RecipientId: string
 
@@ -1304,7 +1307,7 @@ WEWORKAPP: 企业微信
   ApproverSource: string
 
   /**
-      * 企业自定义账号Id
+      * 企业自定义账号ID
 WEWORKAPP场景下指企业自有应用获取企微明文的userid
       */
   CustomUserId: string
@@ -2303,7 +2306,7 @@ export interface CreateDocumentRequest {
  */
 export interface FlowDetailInfo {
   /**
-   * 合同(流程)的Id
+   * 合同(流程)的ID
    */
   FlowId: string
 
@@ -2321,16 +2324,17 @@ export interface FlowDetailInfo {
   /**
       * 流程状态
 - 0 还没有发起
-- 1 未签署
+- 1 待签署
 - 2 部分签署
-- 3 已退回
-- 4 完成签署
+- 3 已拒签
+- 4 已签署
 - 5 已过期
-- 6 已取消
+- 6 已撤销
 - 7 还没有预发起
 - 8 等待填写
 - 9 部分填写
 - 10 拒填
+- 21 已解除
       */
   FlowStatus: number
 
@@ -2347,12 +2351,12 @@ export interface FlowDetailInfo {
   FlowDescription: string
 
   /**
-   * 合同(流程)的创建时间戳
+   * 合同(流程)的创建时间戳，单位秒
    */
   CreatedOn: number
 
   /**
-   * 合同(流程)的签署人数组
+   * 合同(流程)的签署方数组
    */
   FlowApproverInfos: Array<FlowApproverDetail>
 
@@ -3493,12 +3497,12 @@ export interface ApproverOption {
  */
 export interface FileUrl {
   /**
-   * 下载文件的URL
+   * 下载文件的URL，有效期为输入的UrlTtl，默认5分钟
    */
   Url: string
 
   /**
-      * 下载文件的附加信息
+      * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Option: string
@@ -4087,7 +4091,7 @@ export interface Caller {
   OrganizationId?: string
 
   /**
-   * 经办人的用户ID
+   * 经办人的用户ID，同UserId
    */
   OperatorId?: string
 
@@ -4402,7 +4406,7 @@ export interface ReleasedApprover {
  */
 export interface FlowBrief {
   /**
-   * 流程的编号
+   * 流程的编号ID
    */
   FlowId: string
 
@@ -4412,7 +4416,7 @@ export interface FlowBrief {
   FlowName: string
 
   /**
-      * 流程的描述
+      * 流程的描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FlowDescription: string
@@ -4424,23 +4428,24 @@ export interface FlowBrief {
 
   /**
       * 流程状态
-- `0`  还没有发起
-- `1`  未签署
-- `2`  部分签署
-- `3`  已退回
-- `4`  完成签署
-- `5`  已过期
-- `6`  已取消
-- `7`  还没有预发起
-- `8`  等待填写
-- `9`  部分填写
-- `10`  拒填
+- 0 还没有发起
+- 1 待签署
+- 2 部分签署
+- 3 已拒签
+- 4 已签署
+- 5 已过期
+- 6 已撤销
+- 7 还没有预发起
+- 8 等待填写
+- 9 部分填写
+- 10 拒填
+- 21 已解除
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FlowStatus: number
 
   /**
-      * 流程创建的时间戳
+      * 流程创建的时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreatedOn: number

@@ -10368,6 +10368,43 @@ export interface ModifyVirusFileStatusRequest {
     AutoIsolate?: boolean;
 }
 /**
+ * 漏洞影响的仓库镜像列表
+ */
+export interface VulAffectedRegistryImageInfo {
+    /**
+      * 镜像ID
+      */
+    ImageID: string;
+    /**
+      * 镜像名称
+      */
+    ImageName: string;
+    /**
+      * 镜像版本
+      */
+    ImageTag: string;
+    /**
+      * 镜像命名空间
+      */
+    Namespace: string;
+    /**
+      * 镜像地址
+      */
+    ImageRepoAddress: string;
+    /**
+      * 组件列表
+      */
+    ComponentList: Array<VulAffectedImageComponentInfo>;
+    /**
+      * 是否为镜像的最新版本
+      */
+    IsLatestImage: boolean;
+    /**
+      * 内部镜像资产ID
+      */
+    ImageAssetId: number;
+}
+/**
  * CreateVulContainerExportJob返回参数结构体
  */
 export interface CreateVulContainerExportJobResponse {
@@ -13134,6 +13171,43 @@ export interface DescribeK8sApiAbnormalRuleInfoRequest {
     RuleID: string;
 }
 /**
+ * DescribeVulRegistryImageList请求参数结构体
+ */
+export interface DescribeVulRegistryImageListRequest {
+    /**
+      * 漏洞ID
+      */
+    PocID: string;
+    /**
+      * 需要返回的数量，默认为10，最大值为100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。
+OnlyAffectedNewestImage bool 是否影响最新镜像
+ImageDigest 镜像Digest，支持模糊查询
+ImageId 镜像ID，支持模糊查询
+Namespace 命名空间，支持模糊查询
+ImageTag 镜像版本，支持模糊查询
+InstanceName 实例名称，支持模糊查询
+ImageName 镜像名，支持模糊查询
+ImageRepoAddress 镜像地址，支持模糊查询
+      */
+    Filters?: Array<AssetFilters>;
+    /**
+      * 排序方式
+      */
+    Order?: string;
+    /**
+      * 排序字段
+      */
+    By?: string;
+}
+/**
  * 运行时安全事件基本信息
  */
 export interface RunTimeEventBaseInfo {
@@ -15675,6 +15749,23 @@ Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,Clust
       * 排序方式 asc,desc
       */
     Order?: string;
+}
+/**
+ * DescribeVulRegistryImageList返回参数结构体
+ */
+export interface DescribeVulRegistryImageListResponse {
+    /**
+      * 镜像总数
+      */
+    TotalCount: number;
+    /**
+      * 仓库镜像列表
+      */
+    List: Array<VulAffectedRegistryImageInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateVulDefenceEventExportJob返回参数结构体
