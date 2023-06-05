@@ -160,6 +160,7 @@ import {
   RefererRule,
   DescribeScdnIpStrategyRequest,
   IpFreqLimit,
+  OriginSni,
   EdgePackTaskFilter,
   TopDetailDataMore,
   DescribeIpVisitRequest,

@@ -178,6 +178,7 @@ import {
   DeleteWorkGroupResponse,
   DropDMSTableResponse,
   DescribeTableRequest,
+  SessionResourceTemplate,
   CreateWorkGroupResponse,
   DescribeEngineUsageInfoResponse,
   DescribeTablesRequest,

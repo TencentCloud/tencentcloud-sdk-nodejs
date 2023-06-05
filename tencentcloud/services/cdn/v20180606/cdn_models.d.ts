@@ -684,6 +684,11 @@ ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名
       */
     PathBasedOrigin?: Array<PathBasedOriginRule>;
     /**
+      * HTTPS回源SNI配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Sni?: OriginSni;
+    /**
       * HTTPS回源高级配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -3986,6 +3991,22 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Qps?: number;
+}
+/**
+ * HTTPS回源SNI
+ */
+export interface OriginSni {
+    /**
+      * 是否开启HTTPS回源SNI。
+开启：on，
+关闭：off
+      */
+    Switch: string;
+    /**
+      * 回源域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServerName: string;
 }
 /**
  * 动态打包任务过滤器

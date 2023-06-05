@@ -802,6 +802,11 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DataEngineImageVersion?: string;
+    /**
+      * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsInherit?: number;
 }
 /**
  * SwitchDataEngine请求参数结构体
@@ -1383,6 +1388,10 @@ export interface ModifySparkAppRequest {
       * 关联dlc查询脚本
       */
     SessionId?: string;
+    /**
+      * 任务资源配置是否继承集群配置模板：0（默认）不继承、1：继承
+      */
+    IsInherit?: number;
 }
 /**
  * spark流任务统计信息
@@ -2412,6 +2421,10 @@ export interface CreateDataEngineRequest {
       * spark jar 包年包月集群弹性上限
       */
     ElasticLimit?: number;
+    /**
+      * spark作业集群session资源配置模板
+      */
+    SessionResourceTemplate?: SessionResourceTemplate;
 }
 /**
  * CreateTask请求参数结构体
@@ -3299,6 +3312,31 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CmdArgs: string;
+    /**
+      * 集群镜像大版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageVersion: string;
+    /**
+      * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DriverSize?: string;
+    /**
+      * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorSize?: string;
+    /**
+      * 指定executor数量，最小值为1，最大值小于集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorNums?: number;
+    /**
+      * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorMaxNumbers?: number;
 }
 /**
  * 文本格式
@@ -4053,6 +4091,31 @@ export interface DescribeTableRequest {
     DatasourceConnectionName?: string;
 }
 /**
+ * Spark批作业集群Session资源配置模板；
+ */
+export interface SessionResourceTemplate {
+    /**
+      * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DriverSize?: string;
+    /**
+      * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorSize?: string;
+    /**
+      * 指定executor数量，最小值为1，最大值小于集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorNums?: number;
+    /**
+      * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExecutorMaxNumbers?: number;
+}
+/**
  * CreateWorkGroup返回参数结构体
  */
 export interface CreateWorkGroupResponse {
@@ -4775,6 +4838,11 @@ export interface TableResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RecordCount: number;
+    /**
+      * xxxx
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MapMaterializedViewName?: string;
 }
 /**
  * DescribeViews请求参数结构体
@@ -5111,6 +5179,10 @@ export interface CreateSparkAppRequest {
       * 关联dlc查询脚本id
       */
     SessionId?: string;
+    /**
+      * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
+      */
+    IsInherit?: number;
 }
 /**
  * CreateSparkSessionBatchSQL请求参数结构体
@@ -5454,6 +5526,36 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ElasticLimit?: number;
+    /**
+      * 是否为默认引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultHouse?: boolean;
+    /**
+      * 单个集群任务最大并发数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxConcurrency?: number;
+    /**
+      * 任务排队上限时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TolerableQueueTime?: number;
+    /**
+      * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAppId?: number;
+    /**
+      * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserUin?: string;
+    /**
+      * SessionResourceTemplate
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionResourceTemplate?: SessionResourceTemplate;
 }
 /**
  * DescribeSparkAppTasks请求参数结构体
@@ -5799,7 +5901,7 @@ export interface DatabaseResponseInfo {
       */
     GovernPolicy: DataGovernPolicy;
     /**
-      * 数据库ID
+      * 数据库ID（无效字段）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatabaseId: string;

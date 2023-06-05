@@ -580,16 +580,6 @@ export interface DescribeMonthInspectionReportResponse {
 }
 
 /**
- * DescribeSaveOrUpdateWarnings返回参数结构体
- */
-export interface DescribeSaveOrUpdateWarningsResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeBaselineHostTop返回参数结构体
  */
 export interface DescribeBaselineHostTopResponse {
@@ -3931,6 +3921,43 @@ export interface StartBaselineDetectRequest {
 }
 
 /**
+ * DescribeVulStoreList请求参数结构体
+ */
+export interface DescribeVulStoreListRequest {
+  /**
+      * 
+<li>VulName- string - 是否必填：否 - 漏洞名称</li>
+<li>CveId- string - 是否必填：否 - cveid</li>
+<li>VulCategory- string - 是否必填：否 - 漏洞分类  1 Web-CMS漏洞 ,2 应用漏洞 ,4 Linux软件漏洞,5 Windows系统漏洞</li>
+<li>Method- string - 是否必填：否 - 检测方法 0版本对比,1 poc检测 </li>
+<li>SupportDefense- string - 是否必填：否 - 是否支持防御 0不支持,1支持</li>
+<li>FixSwitch- string - 是否必填：否 - 是否支持自动修复 0不支持,1支持</li>
+
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 限制条数,默认10,最大100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 排序方式: [ASC:升序|DESC:降序]
+   */
+  Order?: string
+
+  /**
+   * 可选排序列: [PublishDate]
+   */
+  By?: string
+}
+
+/**
  * 基线弱口令
  */
 export interface BaselineWeakPassword {
@@ -5717,6 +5744,63 @@ export interface ExportBruteAttacksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 漏洞仓库列表信息
+ */
+export interface VulStoreListInfo {
+  /**
+   * 漏洞ID
+   */
+  VulId: number
+
+  /**
+   * 漏洞级别
+   */
+  Level: number
+
+  /**
+   * 漏洞名称
+   */
+  Name: string
+
+  /**
+   * cve编号
+   */
+  CveId: string
+
+  /**
+   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
+   */
+  VulCategory: number
+
+  /**
+   * 发布时间
+   */
+  PublishDate: string
+
+  /**
+   * 漏洞检测方法 0 - 版本比对, 1 - POC验证
+   */
+  Method?: number
+
+  /**
+   * 漏洞攻击热度
+   */
+  AttackLevel?: number
+
+  /**
+      * 漏洞是否支持自动修复
+0-windows/linux均关闭; 1-windows/linux均打开; 2-仅linux; 3-仅windows
+      */
+  FixSwitch?: number
+
+  /**
+      * 漏洞是否支持防御
+0:不支持 1:支持
+      */
+  SupportDefense?: number
 }
 
 /**
@@ -10660,6 +10744,37 @@ export interface DescribeScanTaskStatusRequest {
    * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
    */
   ModuleType: string
+}
+
+/**
+ * DescribeVulStoreList返回参数结构体
+ */
+export interface DescribeVulStoreListResponse {
+  /**
+      * 漏洞信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List?: Array<VulStoreListInfo>
+
+  /**
+   * 总数
+   */
+  TotalCount?: number
+
+  /**
+   * 今日剩余搜索此时
+   */
+  Remaining?: number
+
+  /**
+   * 免费搜索次数
+   */
+  FreeSearchTimes?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -19129,16 +19244,6 @@ export interface DescribeBaselineHostDetectListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeSaveOrUpdateWarnings请求参数结构体
- */
-export interface DescribeSaveOrUpdateWarningsRequest {
-  /**
-   * 告警设置的修改内容
-   */
-  WarningObjects?: Array<WarningObject>
 }
 
 /**

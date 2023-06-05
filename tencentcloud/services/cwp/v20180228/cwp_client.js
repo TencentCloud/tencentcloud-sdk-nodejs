@@ -390,10 +390,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportAssetWebServiceInfoList", req, cb);
     }
     /**
-     * 查询网站防篡改概览信息
+     * 获取漏洞库列表
      */
-    async DescribeWebPageGeneralize(req, cb) {
-        return this.request("DescribeWebPageGeneralize", req, cb);
+    async DescribeVulStoreList(req, cb) {
+        return this.request("DescribeVulStoreList", req, cb);
     }
     /**
      * 获取爆破阻断模式
@@ -780,12 +780,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOpenPortStatistics", req, cb);
     }
     /**
-     * 下线
-
-更新或者插入用户告警设置(该接口废弃,请调用 ModifyWarningSetting )
+     * 获取漏洞管理模块指定类型的待处理漏洞数、主机数和非专业版主机数量
      */
-    async DescribeSaveOrUpdateWarnings(req, cb) {
-        return this.request("DescribeSaveOrUpdateWarnings", req, cb);
+    async DescribeUndoVulCounts(req, cb) {
+        return this.request("DescribeUndoVulCounts", req, cb);
     }
     /**
      * 导出基线检测规则
@@ -1583,6 +1581,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMonthInspectionReport", req, cb);
     }
     /**
+     * 查询网站防篡改概览信息
+     */
+    async DescribeWebPageGeneralize(req, cb) {
+        return this.request("DescribeWebPageGeneralize", req, cb);
+    }
+    /**
      * 获取资产数量： 主机数、账号数、端口数、进程数、软件数、数据库数、Web应用数、Web框架数、Web服务数、Web站点数
      */
     async DescribeAssetInfo(req, cb) {
@@ -1671,12 +1675,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMalwareFile(req, cb) {
         return this.request("DescribeMalwareFile", req, cb);
-    }
-    /**
-     * 获取漏洞管理模块指定类型的待处理漏洞数、主机数和非专业版主机数量
-     */
-    async DescribeUndoVulCounts(req, cb) {
-        return this.request("DescribeUndoVulCounts", req, cb);
     }
     /**
      * 更改基线策略状态

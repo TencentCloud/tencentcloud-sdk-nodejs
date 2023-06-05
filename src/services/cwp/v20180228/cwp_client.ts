@@ -41,7 +41,6 @@ import {
   AssetNetworkCardInfo,
   DescribeAssetWebFrameListRequest,
   DescribeMonthInspectionReportResponse,
-  DescribeSaveOrUpdateWarningsResponse,
   DescribeBaselineHostTopResponse,
   DeleteBashRulesResponse,
   DescribeSecurityEventsCntResponse,
@@ -151,6 +150,7 @@ import {
   DescribeServersAndRiskAndFirstInfoRequest,
   DescribeMalwareRiskWarningRequest,
   StartBaselineDetectRequest,
+  DescribeVulStoreListRequest,
   BaselineWeakPassword,
   DescribeAssetPlanTaskListResponse,
   DescribeBaselineRuleRequest,
@@ -231,6 +231,7 @@ import {
   DescribeBaselineItemRiskTopRequest,
   DeleteMaliciousRequestsResponse,
   ExportBruteAttacksResponse,
+  VulStoreListInfo,
   DescribeBashEventsInfoNewResponse,
   ProtectDirRelatedServer,
   ExportBruteAttacksRequest,
@@ -387,6 +388,7 @@ import {
   ScanTaskDetails,
   AssetDatabaseDetail,
   DescribeScanTaskStatusRequest,
+  DescribeVulStoreListResponse,
   DeleteBaselineRuleResponse,
   DeleteMachineTagRequest,
   AssetDiskPartitionInfo,
@@ -658,7 +660,6 @@ import {
   DescribeAccountStatisticsRequest,
   SecurityButlerInfo,
   DescribeBaselineHostDetectListResponse,
-  DescribeSaveOrUpdateWarningsRequest,
   DescribeAssetProcessInfoListResponse,
   ProcessStatistics,
   DescribeScanScheduleResponse,
@@ -1329,13 +1330,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询网站防篡改概览信息
+   * 获取漏洞库列表
    */
-  async DescribeWebPageGeneralize(
-    req?: DescribeWebPageGeneralizeRequest,
-    cb?: (error: string, rep: DescribeWebPageGeneralizeResponse) => void
-  ): Promise<DescribeWebPageGeneralizeResponse> {
-    return this.request("DescribeWebPageGeneralize", req, cb)
+  async DescribeVulStoreList(
+    req: DescribeVulStoreListRequest,
+    cb?: (error: string, rep: DescribeVulStoreListResponse) => void
+  ): Promise<DescribeVulStoreListResponse> {
+    return this.request("DescribeVulStoreList", req, cb)
   }
 
   /**
@@ -1979,15 +1980,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 下线
-
-更新或者插入用户告警设置(该接口废弃,请调用 ModifyWarningSetting )
-     */
-  async DescribeSaveOrUpdateWarnings(
-    req: DescribeSaveOrUpdateWarningsRequest,
-    cb?: (error: string, rep: DescribeSaveOrUpdateWarningsResponse) => void
-  ): Promise<DescribeSaveOrUpdateWarningsResponse> {
-    return this.request("DescribeSaveOrUpdateWarnings", req, cb)
+   * 获取漏洞管理模块指定类型的待处理漏洞数、主机数和非专业版主机数量
+   */
+  async DescribeUndoVulCounts(
+    req: DescribeUndoVulCountsRequest,
+    cb?: (error: string, rep: DescribeUndoVulCountsResponse) => void
+  ): Promise<DescribeUndoVulCountsResponse> {
+    return this.request("DescribeUndoVulCounts", req, cb)
   }
 
   /**
@@ -3314,6 +3313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询网站防篡改概览信息
+   */
+  async DescribeWebPageGeneralize(
+    req?: DescribeWebPageGeneralizeRequest,
+    cb?: (error: string, rep: DescribeWebPageGeneralizeResponse) => void
+  ): Promise<DescribeWebPageGeneralizeResponse> {
+    return this.request("DescribeWebPageGeneralize", req, cb)
+  }
+
+  /**
    * 获取资产数量： 主机数、账号数、端口数、进程数、软件数、数据库数、Web应用数、Web框架数、Web服务数、Web站点数
    */
   async DescribeAssetInfo(
@@ -3461,16 +3470,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMalwareFileResponse) => void
   ): Promise<DescribeMalwareFileResponse> {
     return this.request("DescribeMalwareFile", req, cb)
-  }
-
-  /**
-   * 获取漏洞管理模块指定类型的待处理漏洞数、主机数和非专业版主机数量
-   */
-  async DescribeUndoVulCounts(
-    req: DescribeUndoVulCountsRequest,
-    cb?: (error: string, rep: DescribeUndoVulCountsResponse) => void
-  ): Promise<DescribeUndoVulCountsResponse> {
-    return this.request("DescribeUndoVulCounts", req, cb)
   }
 
   /**
