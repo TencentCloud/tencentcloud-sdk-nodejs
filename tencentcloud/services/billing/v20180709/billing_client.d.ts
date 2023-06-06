@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCostSummaryByProductRequest, DescribeCostSummaryByProjectResponse, DescribeDosageDetailByDateRequest, DescribeBillSummaryByProductRequest, DescribeBillSummaryByPayModeResponse, DescribeBillSummaryByTagRequest, DescribeBillSummaryByProductResponse, DescribeBillSummaryByRegionResponse, DescribeVoucherInfoResponse, DescribeAccountBalanceRequest, DescribeBillDetailRequest, DescribeCostSummaryByProductResponse, DescribeDosageDetailByDateResponse, DescribeBillListResponse, DescribeAccountBalanceResponse, DescribeCostSummaryByRegionRequest, DescribeBillSummaryByRegionRequest, DescribeBillSummaryByPayModeRequest, DescribeCostSummaryByProjectRequest, DescribeDosageCosDetailByDateResponse, DescribeBillResourceSummaryResponse, DescribeVoucherInfoRequest, DescribeVoucherUsageDetailsRequest, DescribeDealsByCondRequest, DescribeBillResourceSummaryRequest, PayDealsRequest, DescribeBillListRequest, PayDealsResponse, DescribeBillSummaryByTagResponse, DescribeCostSummaryByResourceResponse, DescribeBillDetailResponse, DescribeCostDetailRequest, DescribeVoucherUsageDetailsResponse, DescribeDealsByCondResponse, DescribeBillSummaryByProjectRequest, DescribeBillSummaryByProjectResponse, DescribeCostSummaryByResourceRequest, DescribeCostDetailResponse, DescribeDosageCosDetailByDateRequest, DescribeCostSummaryByRegionResponse } from "./billing_models";
+import { DescribeBillSummaryResponse, DescribeCostSummaryByProductRequest, DescribeCostSummaryByProjectResponse, DescribeDosageDetailByDateRequest, DescribeBillSummaryByProductRequest, DescribeBillSummaryByPayModeResponse, DescribeBillSummaryByTagRequest, DescribeBillSummaryByProductResponse, DescribeBillSummaryByRegionResponse, DescribeVoucherInfoResponse, DescribeAccountBalanceRequest, DescribeBillDetailRequest, DescribeCostSummaryByProductResponse, DescribeBillSummaryByTagResponse, DescribeDosageDetailByDateResponse, DescribeBillListResponse, DescribeAccountBalanceResponse, DescribeCostSummaryByRegionRequest, DescribeBillSummaryByRegionRequest, DescribeBillSummaryByPayModeRequest, DescribeCostSummaryByProjectRequest, DescribeDosageCosDetailByDateResponse, DescribeBillSummaryRequest, DescribeBillResourceSummaryResponse, DescribeVoucherInfoRequest, DescribeVoucherUsageDetailsRequest, DescribeDealsByCondRequest, DescribeBillResourceSummaryRequest, PayDealsRequest, DescribeBillListRequest, PayDealsResponse, DescribeCostSummaryByResourceResponse, DescribeBillDetailResponse, DescribeCostDetailRequest, DescribeVoucherUsageDetailsResponse, DescribeDealsByCondResponse, DescribeBillSummaryByProjectRequest, DescribeBillSummaryByProjectResponse, DescribeCostSummaryByResourceRequest, DescribeCostDetailResponse, DescribeDosageCosDetailByDateRequest, DescribeCostSummaryByRegionResponse } from "./billing_models";
 /**
  * billing client
  * @class
@@ -38,6 +38,10 @@ export declare class Client extends AbstractClient {
 2.对于账单明细数据量级很大（例如每月账单明细量级超过20w）的客户，通过 API 调用账单数据效率较低，建议您开通账单数据存储功能，通过存储桶中获取账单文件进行分析。[账单存储至COS桶](https://cloud.tencent.com/document/product/555/61275)
      */
     DescribeBillDetail(req: DescribeBillDetailRequest, cb?: (error: string, rep: DescribeBillDetailResponse) => void): Promise<DescribeBillDetailResponse>;
+    /**
+     * 该接口支持通过传参，按照产品、项目、地域、计费模式和标签五个维度获取账单费用明细。
+     */
+    DescribeBillSummary(req: DescribeBillSummaryRequest, cb?: (error: string, rep: DescribeBillSummaryResponse) => void): Promise<DescribeBillSummaryResponse>;
     /**
      * 查询订单
      */

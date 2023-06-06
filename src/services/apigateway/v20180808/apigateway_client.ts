@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  IPStrategyApiStatus,
   UnBindSubDomainResponse,
   UpdateApiKeyRequest,
   Service,
@@ -25,6 +26,7 @@ import {
   AttachedPluginInfo,
   ApiUsagePlanSet,
   DescribeAPIDocDetailRequest,
+  CreateApiResultInfo,
   ModifyAPIDocResponse,
   AttachedApiSummary,
   DescribeUsagePlanRequest,
@@ -40,7 +42,7 @@ import {
   DescribeServiceEnvironmentListResponse,
   DescribeApiAppBindApisStatusRequest,
   ModifyApiResponse,
-  ServiceEnvironmentStrategy,
+  DescribeApiResultServiceParametersInfo,
   CreateApiRspSet,
   ApiInfo,
   TargetServicesReq,
@@ -66,6 +68,7 @@ import {
   DeleteServiceRequest,
   DescribeApiEnvironmentStrategyRequest,
   UpstreamHealthCheckerReqHeaders,
+  ServiceEnvironmentStrategy,
   DescribeServiceForApiAppResponse,
   ServiceConfig,
   DeleteApiAppResponse,
@@ -84,6 +87,7 @@ import {
   ServiceParameter,
   ModifyServiceResponse,
   DisableApiKeyRequest,
+  UsagePlanBindSecret,
   PathMapping,
   UnBindIPStrategyResponse,
   DescribeExclusiveInstanceDetailRequest,
@@ -93,7 +97,6 @@ import {
   DescribeApisStatusRequest,
   DeleteServiceSubDomainMappingRequest,
   BindApiAppRequest,
-  IPStrategyApi,
   DescribeIPStrategyResponse,
   DescribePluginRequest,
   DetachPluginRequest,
@@ -142,8 +145,9 @@ import {
   DescribePluginsRequest,
   BindSecretIdsRequest,
   ParameterInfo,
-  UsagePlanBindSecret,
+  ModifyUpstreamResultInfo,
   DeleteApiKeyRequest,
+  DescribeApisStatusResultInfo,
   DescribeIPStrategyApisStatusResponse,
   ModifyApiAppResponse,
   UpdateApiAppKeyRequest,
@@ -214,7 +218,7 @@ import {
   CreateUpstreamResponse,
   ResetAPIDocPasswordRequest,
   ApiUsagePlan,
-  BuildAPIDocRequest,
+  IPStrategyApi,
   DescribeAPIDocsResponse,
   DetachPluginResponse,
   DeletePluginResponse,
@@ -233,7 +237,7 @@ import {
   ModifyApiEnvironmentStrategyResponse,
   BindSubDomainRequest,
   ApiAppInfos,
-  IPStrategyApiStatus,
+  DescribeServiceReleaseVersionResultVersionListInfo,
   CreateIPStrategyResponse,
   UnBindEnvironmentResponse,
   DeleteApiResponse,
@@ -283,13 +287,14 @@ import {
   DescribeApiKeysStatusResponse,
   ServicesStatus,
   DescribeLogSearchRequest,
-  ApisStatus,
+  BuildAPIDocRequest,
   ApiKeysStatus,
   APIDoc,
   DescribeServiceUsagePlanResponse,
   CreateApiAppResponse,
   DescribeApiUsagePlanRequest,
   UnBindSubDomainRequest,
+  DescribeExclusiveInstancesResult,
   AttachedPluginSummary,
   DescribeIPStrategysStatusResponse,
   UpdateApiAppKeyResponse,
@@ -390,7 +395,7 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-   * 本接口（UpdateService）用于从服务发布的环境中运行版本切换到特定版本。用户在使用 API 网关创建服务并发布服务到某个环境后，多因为开发过程会产生多个版本，此时可调用本接口。
+   * 本接口（UpdateService）用于从服务发布的环境中运行版本切换到特定版本。用户在使用 API 网关创建服务并发布服务到某个环境后，多因开发过程会产生多个版本，此时可调用本接口。
    */
   async UpdateService(
     req: UpdateServiceRequest,
@@ -798,7 +803,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
-   * 本接口（DescribeExclusiveInstances）用于查询独享实例列表信息。​
+   * 本接口（DescribeExclusiveInstances）用于查询独享实例列表信息。
    */
   async DescribeExclusiveInstances(
     req: DescribeExclusiveInstancesRequest,
@@ -969,7 +974,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
-   * 用于创建创建后端通道
+   * 用于创建后端通道
    */
   async CreateUpstream(
     req: CreateUpstreamRequest,

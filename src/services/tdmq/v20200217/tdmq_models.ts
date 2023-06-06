@@ -208,6 +208,16 @@ export interface DescribeNamespaceBundlesOptRequest {
    * 查询偏移量
    */
   Offset?: number
+
+  /**
+   * 过滤的 bundle
+   */
+  Bundle?: string
+
+  /**
+   * bundle 所属的 broker ip 地址，支持模糊查询
+   */
+  OwnerBroker?: string
 }
 
 /**
@@ -1024,12 +1034,12 @@ export interface DescribeNamespaceBundlesOptResponse {
   /**
    * 记录条数
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * bundle列表
    */
-  BundleSet: Array<BundleSetOpt>
+  BundleSet?: Array<BundleSetOpt>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

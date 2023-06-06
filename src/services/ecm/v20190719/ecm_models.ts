@@ -4051,6 +4051,11 @@ DELETEFAILED：删除失败。
    * 数据盘信息。
    */
   DataDisks: Array<DataDisk>
+
+  /**
+   * 是否禁止外网ip
+   */
+  DisableWanIp?: number
 }
 
 /**
@@ -6959,6 +6964,11 @@ export interface Node {
    * 运营商数量。
    */
   ISPNum: number
+
+  /**
+   * 节点是否支持LB
+   */
+  LBSupported?: boolean
 }
 
 /**
@@ -7718,6 +7728,17 @@ export interface DiskInfo {
    * 磁盘大小（GB）
    */
   DiskSize: number
+
+  /**
+   * 是否随实例删除。
+   */
+  DeleteWithInstance: boolean
+
+  /**
+      * 快照ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SnapshotId: string
 }
 
 /**

@@ -327,7 +327,7 @@ export interface GetSendEmailStatusResponse {
   /**
    * 邮件发送状态列表
    */
-  EmailStatusList: Array<SendEmailStatus>
+  EmailStatusList?: Array<SendEmailStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -360,6 +360,16 @@ export interface SendEmailRequest {
    * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
    */
   ReplyToAddresses?: string
+
+  /**
+   * 抄送人邮箱地址，最多支持抄送20人。
+   */
+  Cc?: Array<string>
+
+  /**
+   * 密送人邮箱地址，最多支持抄送20人。
+   */
+  Bcc?: Array<string>
 
   /**
    * 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项

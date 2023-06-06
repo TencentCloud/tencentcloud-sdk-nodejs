@@ -9535,7 +9535,7 @@ export interface AccessControlRuleInfo {
   IsEnable: boolean
 
   /**
-   * 生效惊现id，空数组代表全部镜像
+   * 生效镜像id，空数组代表全部镜像
    */
   ImageIds: Array<string>
 

@@ -19,10 +19,12 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   TextProcessResponse,
+  Group,
   SlotInfo,
   TextResetRequest,
   ResetRequest,
   TextResetResponse,
+  ResponseMessage,
   CreateBotResponse,
   ResetResponse,
   CreateBotRequest,

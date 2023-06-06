@@ -38,9 +38,38 @@ export interface TextProcessResponse {
       */
     ResponseText?: string;
     /**
+      * 机器人应答。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResponseMessage?: ResponseMessage;
+    /**
+      * 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultType?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Group是消息组的具体定义，当前包含ContentType、Url、Content三个字段。其中，具体的ContentType字段定义，参考互联网MIME类型标准。
+ */
+export interface Group {
+    /**
+      * 消息类型参考互联网MIME类型标准，当前仅支持"text/plain"。
+      */
+    ContentType?: string;
+    /**
+      * 返回内容以链接形式提供。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url?: string;
+    /**
+      * 普通文本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content?: string;
 }
 /**
  * 槽位信息
@@ -138,6 +167,16 @@ export interface TextResetResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 从TBP-RTS服务v1.3版本起，机器人以消息组列表的形式响应，消息组列表GroupList包含多组消息，用户根据需要对部分或全部消息组进行组合使用。
+ */
+export interface ResponseMessage {
+    /**
+      * 消息组列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupList?: Group;
 }
 /**
  * CreateBot返回参数结构体

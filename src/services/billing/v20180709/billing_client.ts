@@ -20,8 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CostComponentSet,
   VoucherInfos,
+  DescribeBillSummaryResponse,
   DescribeCostSummaryByProductRequest,
-  ConsumptionSummaryTotal,
+  CosDetailSets,
   DescribeCostSummaryByProjectResponse,
   DescribeDosageDetailByDateRequest,
   ProjectSummaryOverviewItem,
@@ -43,10 +44,11 @@ import {
   ConsumptionResourceSummaryDataItem,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
+  ProductInfo,
   ConsumptionProjectSummaryDataItem,
   RegionSummaryOverviewItem,
   DescribeCostSummaryByProductResponse,
-  ProductInfo,
+  DescribeBillSummaryByTagResponse,
   DescribeDosageDetailByDateResponse,
   DescribeBillListResponse,
   DescribeAccountBalanceResponse,
@@ -57,10 +59,12 @@ import {
   DescribeBillSummaryByRegionRequest,
   DescribeBillSummaryByPayModeRequest,
   DescribeCostSummaryByProjectRequest,
+  SummaryDetail,
+  UsageDetails,
   UsageRecords,
   ConsumptionRegionSummaryDataItem,
   DescribeDosageCosDetailByDateResponse,
-  UsageDetails,
+  DescribeBillSummaryRequest,
   DescribeBillResourceSummaryResponse,
   ActionSummaryOverviewItem,
   DescribeVoucherInfoRequest,
@@ -74,7 +78,7 @@ import {
   PayDealsResponse,
   SummaryTotal,
   BillDetail,
-  DescribeBillSummaryByTagResponse,
+  BusinessSummaryInfo,
   TagSummaryOverviewItem,
   DescribeCostSummaryByResourceResponse,
   DescribeBillDetailResponse,
@@ -84,7 +88,7 @@ import {
   DescribeVoucherUsageDetailsResponse,
   DescribeDealsByCondResponse,
   ConditionProject,
-  CosDetailSets,
+  ConsumptionSummaryTotal,
   DescribeBillSummaryByProjectRequest,
   DescribeBillSummaryByProjectResponse,
   ConditionBusiness,
@@ -177,6 +181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillDetailResponse) => void
   ): Promise<DescribeBillDetailResponse> {
     return this.request("DescribeBillDetail", req, cb)
+  }
+
+  /**
+   * 该接口支持通过传参，按照产品、项目、地域、计费模式和标签五个维度获取账单费用明细。
+   */
+  async DescribeBillSummary(
+    req: DescribeBillSummaryRequest,
+    cb?: (error: string, rep: DescribeBillSummaryResponse) => void
+  ): Promise<DescribeBillSummaryResponse> {
+    return this.request("DescribeBillSummary", req, cb)
   }
 
   /**

@@ -2030,7 +2030,13 @@ export interface DescribeUserQuotaResponse {
 /**
  * 分层存储详细信息
  */
-export declare type TieringDetailInfo = null;
+export interface TieringDetailInfo {
+    /**
+      * 低频存储容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TieringSizeInBytes?: number;
+}
 /**
  * 权限组数组
  */

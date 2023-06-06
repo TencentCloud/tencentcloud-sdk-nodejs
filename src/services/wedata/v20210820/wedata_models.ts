@@ -395,16 +395,16 @@ export interface DescribeInstanceLogsRequest {
  */
 export interface DescribeTaskAlarmRegulationsResponse {
   /**
-      * 任务告警规则信息
+      * 告警规则信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskAlarmInfos: Array<TaskAlarmInfo>
+  TaskAlarmInfos?: Array<TaskAlarmInfo>
 
   /**
       * 总记录数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1215,6 +1215,12 @@ export interface AlarmEventInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Operator?: number
+
+  /**
+      * 告警规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegularId?: string
 }
 
 /**
@@ -4529,6 +4535,96 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Submit?: boolean
+
+  /**
+      * MYSQL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InputDatasourceType?: string
+
+  /**
+      * DLC
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutputDatasourceType?: string
+
+  /**
+      * 读取条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumRecordsIn?: number
+
+  /**
+      * 写入条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumRecordsOut?: number
+
+  /**
+      * 读取延迟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReaderDelay?: number
+
+  /**
+      * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumRestarts?: number
+
+  /**
+      * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+      * 任务更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * 任务最后一次运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastRunTime?: string
+
+  /**
+      * 任务停止时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StopTime?: string
+
+  /**
+      * 作业是否已提交
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasVersion?: boolean
+
+  /**
+      * 任务是否被锁定
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Locked?: boolean
+
+  /**
+      * 任务锁定人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Locker?: string
+
+  /**
+      * 耗费资源量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunningCu?: number
+
+  /**
+      * 该任务关联的告警规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskAlarmRegularList?: Array<string>
 }
 
 /**
@@ -4599,7 +4695,13 @@ export interface DescribeInstanceLogListResponse {
   /**
    * 日志列表
    */
-  Data: string
+  Data?: string
+
+  /**
+      * 日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceLogList?: Array<InstanceLogList>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5492,6 +5594,83 @@ export interface TaskLockStatus {
 }
 
 /**
+ * 离线运维实例列表
+ */
+export interface InstanceList {
+  /**
+      * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CostTime?: string
+
+  /**
+      * 数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurRunDate?: string
+
+  /**
+      * 周期类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CycleType?: string
+
+  /**
+      * 是否补录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DoFlag?: number
+
+  /**
+      * 责任人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InCharge?: string
+
+  /**
+      * 日志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastLog?: string
+
+  /**
+      * 调度计划
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SchedulerDesc?: string
+
+  /**
+      * 开始启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: string
+
+  /**
+      * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State?: string
+
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId?: string
+
+  /**
+      * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskName?: string
+
+  /**
+      * 尝试运行次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TryLimit?: number
+}
+
+/**
  * BatchCreateIntegrationTaskAlarms请求参数结构体
  */
 export interface BatchCreateIntegrationTaskAlarmsRequest {
@@ -5873,6 +6052,54 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WeComHook?: string
+
+  /**
+      * 最近操作时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * 最近操作人Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperatorUin?: string
+
+  /**
+      * 关联任务数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskCount?: number
+
+  /**
+      * 监控对象类型,1:所有任务,2:指定任务,3:指定责任人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonitorType?: number
+
+  /**
+      * 监控对象列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonitorObjectIds?: Array<string>
+
+  /**
+      * 最近一次告警的实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestAlarmInstanceId?: string
+
+  /**
+      * 最近一次告警时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestAlarmTime?: string
+
+  /**
+      * 告警规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
 }
 
 /**
@@ -6887,7 +7114,13 @@ export interface DescribeIntegrationTasksResponse {
       * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskInfoSet: Array<IntegrationTaskInfo>
+  TaskInfoSet?: Array<IntegrationTaskInfo>
+
+  /**
+      * 任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7827,13 +8060,13 @@ export interface DescribeDataSourceInfoListResponse {
   /**
    * 总条数。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
       * 数据源信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DatasourceSet: Array<DatasourceBaseInfo>
+  DatasourceSet?: Array<DatasourceBaseInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8834,7 +9067,13 @@ export interface DescribeInstanceLogResponse {
   /**
    * 返回结果
    */
-  Data: string
+  Data?: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceLogInfo?: IntegrationInstanceLog
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8850,6 +9089,77 @@ export interface DeleteInLongAgentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例日志信息
+ */
+export interface InstanceLogList {
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId?: string
+
+  /**
+      * 数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurRunDate?: string
+
+  /**
+      * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tries?: string
+
+  /**
+      * 最后更新事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastUpdate?: string
+
+  /**
+      * 节点ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BrokerIp?: string
+
+  /**
+      * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileSize?: string
+
+  /**
+      * 原始文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginFileName?: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+      * 实例日志类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceLogType?: string
+
+  /**
+      * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskName?: string
+
+  /**
+      * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CostTime?: string
 }
 
 /**
@@ -10711,7 +11021,7 @@ export interface CheckAlarmRegularNameExistResponse {
   /**
    * 是否重名
    */
-  Data: boolean
+  Data?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10861,19 +11171,9 @@ export interface InstanceReportReadNode {
  */
 export interface DescribeTaskAlarmRegulationsRequest {
   /**
-   * 任务ID
-   */
-  TaskId: string
-
-  /**
    * 项目ID
    */
   ProjectId: string
-
-  /**
-   * 任务类型(201代表实时任务，202代表离线任务)
-   */
-  TaskType: number
 
   /**
    * 当前页
@@ -10894,6 +11194,16 @@ export interface DescribeTaskAlarmRegulationsRequest {
    * 排序条件(RegularId)
    */
   OrderFields?: Array<OrderField>
+
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+
+  /**
+   * 任务类型(201代表实时任务，202代表离线任务)
+   */
+  TaskType?: number
 }
 
 /**
@@ -11557,6 +11867,17 @@ export interface DeleteOfflineTaskResponse {
 }
 
 /**
+ * 实例日志信息
+ */
+export interface IntegrationInstanceLog {
+  /**
+      * 任务日志信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogInfo?: string
+}
+
+/**
  * 任务执行脚本
  */
 export interface TaskScriptContent {
@@ -11695,19 +12016,24 @@ export interface CheckAlarmRegularNameExistRequest {
   ProjectId: string
 
   /**
-   * 任务ID
-   */
-  TaskId: string
-
-  /**
    * 规则名称
    */
   AlarmRegularName: string
 
   /**
+   * 任务ID
+   */
+  TaskId?: string
+
+  /**
    * 主键ID
    */
   Id?: string
+
+  /**
+   * 任务类型:201.实时,202.离线
+   */
+  TaskType?: number
 }
 
 /**
@@ -12218,7 +12544,7 @@ export interface CreateOrUpdateResourceResponse {
       * 响应数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data: Array<UserFileDTO>
+  Data?: Array<UserFileDTO>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12964,7 +13290,19 @@ export interface DescribeInstanceListResponse {
   /**
    * 结果
    */
-  Data: string
+  Data?: string
+
+  /**
+      * 实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceList?: Array<InstanceList>
+
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13825,17 +14163,17 @@ export interface ModifyRuleTemplateResponse {
  */
 export interface CreateOrUpdateResourceRequest {
   /**
-   * 项目ID
+   * 项目ID，必填项
    */
   ProjectId?: string
 
   /**
-   * 文件名
+   * 文件名，必填项
    */
   Files?: Array<string>
 
   /**
-   * 文件所属路径，资源管理根路径为 /datastudio/resouce
+   * 必填项，文件所属路径，资源管理根路径为 /datastudio/resource/项目ID/文件夹名
    */
   FilePath?: string
 
@@ -13855,7 +14193,7 @@ export interface CreateOrUpdateResourceRequest {
   NewFile?: boolean
 
   /**
-   * 文件大小
+   * 必填项，文件大小，与 Files 字段对应
    */
   FilesSize?: Array<string>
 }

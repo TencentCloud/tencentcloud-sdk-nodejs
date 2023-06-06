@@ -73,6 +73,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillDetail", req, cb);
     }
     /**
+     * 该接口支持通过传参，按照产品、项目、地域、计费模式和标签五个维度获取账单费用明细。
+     */
+    async DescribeBillSummary(req, cb) {
+        return this.request("DescribeBillSummary", req, cb);
+    }
+    /**
      * 查询订单
      */
     async DescribeDealsByCond(req, cb) {
