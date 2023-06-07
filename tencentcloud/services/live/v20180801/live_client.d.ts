@@ -333,7 +333,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     DescribeGroupProIspPlayInfoList(req: DescribeGroupProIspPlayInfoListRequest, cb?: (error: string, rep: DescribeGroupProIspPlayInfoListResponse) => void): Promise<DescribeGroupProIspPlayInfoListResponse>;
     /**
      * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
-注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。
      */
     DescribeStreamPlayInfoList(req: DescribeStreamPlayInfoListRequest, cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void): Promise<DescribeStreamPlayInfoListResponse>;
     /**

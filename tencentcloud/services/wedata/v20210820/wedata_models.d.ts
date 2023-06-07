@@ -6177,7 +6177,7 @@ export interface DeleteTaskAlarmRegularResponse {
       * 删除结果(true表示删除成功，false表示删除失败)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: boolean;
+    Data?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9931,11 +9931,11 @@ export interface DeleteTaskAlarmRegularRequest {
     /**
       * 任务ID
       */
-    TaskId: string;
+    TaskId?: string;
     /**
       * 任务类型(201表示实时任务，202表示离线任务)
       */
-    TaskType: number;
+    TaskType?: number;
 }
 /**
  * 对比规则

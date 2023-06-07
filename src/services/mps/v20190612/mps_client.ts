@@ -61,7 +61,7 @@ import {
   DiagnoseResult,
   RawWatermarkParameter,
   AiReviewTaskPoliticalOcrResult,
-  ManageTaskRequest,
+  AiSampleWord,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
   UserDefineFaceReviewTemplateInfo,
@@ -235,7 +235,7 @@ import {
   DescribeSchedulesResponse,
   ImageQualityEnhanceConfig,
   DescribeStreamLinkRegionsResponse,
-  AiSampleWord,
+  ManageTaskRequest,
   DescribeStreamLinkFlowStatisticsResponse,
   AiRecognitionTaskAsrWordsResultOutput,
   LiveStreamOcrWordsRecognitionResult,
@@ -272,6 +272,7 @@ import {
   ModifyImageSpriteTemplateResponse,
   CreateWatermarkTemplateRequest,
   ScheduleAnalysisTaskResult,
+  CreateStreamLinkInputRequest,
   ScheduleQualityControlTaskResult,
   TerrorismConfigureInfoForUpdate,
   EnableScheduleResponse,
@@ -526,6 +527,7 @@ import {
   DescribeStreamLinkFlowMediaStatisticsRequest,
   AiAnalysisTaskCoverInput,
   RegionInfo,
+  CreateStreamLinkInputResponse,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
   EditMediaTaskOutput,
@@ -1450,6 +1452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableScheduleResponse) => void
   ): Promise<DisableScheduleResponse> {
     return this.request("DisableSchedule", req, cb)
+  }
+
+  /**
+   * 创建媒体传输的输入配置。
+   */
+  async CreateStreamLinkInput(
+    req: CreateStreamLinkInputRequest,
+    cb?: (error: string, rep: CreateStreamLinkInputResponse) => void
+  ): Promise<CreateStreamLinkInputResponse> {
+    return this.request("CreateStreamLinkInput", req, cb)
   }
 
   /**

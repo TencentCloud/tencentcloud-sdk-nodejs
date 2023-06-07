@@ -80,6 +80,7 @@ import {
   CreateDatabaseResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
+  ModifySparkAppBatchResponse,
   CancelNotebookSessionStatementBatchResponse,
   KVPair,
   TableBaseInfo,
@@ -109,6 +110,7 @@ import {
   WorkGroupIdSetOfUserId,
   Partition,
   CreateDataEngineRequest,
+  ModifySparkAppBatchRequest,
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
   CSV,
@@ -504,6 +506,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTablesResponse) => void
   ): Promise<DescribeTablesResponse> {
     return this.request("DescribeTables", req, cb)
+  }
+
+  /**
+   * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+   */
+  async ModifySparkAppBatch(
+    req: ModifySparkAppBatchRequest,
+    cb?: (error: string, rep: ModifySparkAppBatchResponse) => void
+  ): Promise<ModifySparkAppBatchResponse> {
+    return this.request("ModifySparkAppBatch", req, cb)
   }
 
   /**

@@ -1645,6 +1645,15 @@ export interface CreateSparkAppTaskRequest {
     CmdArgs?: string;
 }
 /**
+ * ModifySparkAppBatch返回参数结构体
+ */
+export interface ModifySparkAppBatchResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CancelNotebookSessionStatementBatch返回参数结构体
  */
 export interface CancelNotebookSessionStatementBatchResponse {
@@ -2425,6 +2434,39 @@ export interface CreateDataEngineRequest {
       * spark作业集群session资源配置模板
       */
     SessionResourceTemplate?: SessionResourceTemplate;
+}
+/**
+ * ModifySparkAppBatch请求参数结构体
+ */
+export interface ModifySparkAppBatchRequest {
+    /**
+      * 需要批量修改的Spark作业任务ID列表
+      */
+    SparkAppId: Array<string>;
+    /**
+      * 引擎ID
+      */
+    DataEngine?: string;
+    /**
+      * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+      */
+    AppDriverSize?: string;
+    /**
+      * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+      */
+    AppExecutorSize?: string;
+    /**
+      * 指定executor数量，最小值为1，最大值小于集群规格
+      */
+    AppExecutorNums?: number;
+    /**
+      * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+      */
+    AppExecutorMaxNumbers?: number;
+    /**
+      * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
+      */
+    IsInherit?: number;
 }
 /**
  * CreateTask请求参数结构体

@@ -4149,6 +4149,16 @@ export interface CreateUnitRuleWithDetailRespRequest {
 }
 
 /**
+ * DescribeContainerGroupAttribute请求参数结构体
+ */
+export interface DescribeContainerGroupAttributeRequest {
+  /**
+   * 部署组ID
+   */
+  GroupId: string
+}
+
+/**
  * DescribeSimpleApplications请求参数结构体
  */
 export interface DescribeSimpleApplicationsRequest {
@@ -6178,6 +6188,70 @@ export interface DescribeApiRateLimitRulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 部署组列表-其它字段
+ */
+export interface ContainerGroupOther {
+  /**
+   * 实例总数
+   */
+  InstanceNum: number
+
+  /**
+   * 已启动实例总数
+   */
+  CurrentNum: number
+
+  /**
+   * 负载均衡ip
+   */
+  LbIp: string
+
+  /**
+   * Service ip
+   */
+  ClusterIp: string
+
+  /**
+   * 服务状态，请参考后面的的状态定义
+   */
+  Status: string
+
+  /**
+   * 服务状态，请参考后面的的状态定义
+   */
+  Message: string
+
+  /**
+   * 环境变量
+   */
+  Envs: Array<Env>
+
+  /**
+      * Service NodePort
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodePort: number
+
+  /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+      * 健康检查相关字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthCheckSettings: Array<HealthCheckSetting>
+
+  /**
+      * 服务配置信息是否匹配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNotEqualServiceConfig: boolean
 }
 
 /**
@@ -12725,6 +12799,21 @@ export interface ChangeApiUsableStatusResponse {
    * API 信息
    */
   Result?: ApiDetailInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeContainerGroupAttribute返回参数结构体
+ */
+export interface DescribeContainerGroupAttributeResponse {
+  /**
+   * 部署组列表-其它字段
+   */
+  Result?: ContainerGroupOther
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

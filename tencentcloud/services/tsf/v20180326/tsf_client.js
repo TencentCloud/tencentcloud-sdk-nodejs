@@ -720,6 +720,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RedoTask", req, cb);
     }
     /**
+     * 获取部署组其他字段-用于前端并发调用
+     */
+    async DescribeContainerGroupAttribute(req, cb) {
+        return this.request("DescribeContainerGroupAttribute", req, cb);
+    }
+    /**
      * 无
      */
     async DescribePkgs(req, cb) {

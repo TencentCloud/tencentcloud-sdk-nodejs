@@ -1220,7 +1220,7 @@ export interface UpgradeDBInstanceEngineVersionResponse {
     /**
       * 异步任务 ID，可使用 [查询异步任务的执行结果](https://cloud.tencent.com/document/api/236/20410) 获取其执行情况。
       */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1559,7 +1559,7 @@ export interface UpgradeDBInstanceRequest {
       */
     EngineVersion?: string;
     /**
-      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
+      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
       */
     WaitSwitch?: number;
     /**
@@ -2230,7 +2230,7 @@ export interface RuleFilters {
       */
     Compare: string;
     /**
-      * 审计规则过滤条件的匹配值。sqlType条件的Value需在一下选择"alter", "changeuser", "create", "delete", "drop", "execute", "insert", "login", "logout", "other", "replace", "select", "set", "update"。
+      * 审计规则过滤条件的匹配值。sqlType条件的Value需在以下选择"alter", "changeuser", "create", "delete", "drop", "execute", "insert", "login", "logout", "other", "replace", "select", "set", "update"。
       */
     Value: Array<string>;
 }
@@ -4505,6 +4505,10 @@ export interface Inbound {
       */
     Dir?: string;
     /**
+      * 地址模块
+      */
+    AddressModule: string;
+    /**
       * 规则描述
       */
     Desc: string;
@@ -6405,25 +6409,25 @@ export interface AccountInfo {
  */
 export interface DescribeRemoteBackupConfigResponse {
     /**
-      * 异地备份保留天时间，单位为天
+      * 异地备份保留时间，单位为天
       */
-    ExpireDays: number;
+    ExpireDays?: number;
     /**
       * 异地数据备份开关，off - 关闭异地备份，on-开启异地备份
       */
-    RemoteBackupSave: string;
+    RemoteBackupSave?: string;
     /**
       * 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on
       */
-    RemoteBinlogSave: string;
+    RemoteBinlogSave?: string;
     /**
       * 用户已设置异地备份地域列表
       */
-    RemoteRegion: Array<string>;
+    RemoteRegion?: Array<string>;
     /**
       * 用户可设置异地备份地域列表
       */
-    RegionList: Array<string>;
+    RegionList?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6618,7 +6622,7 @@ export interface UpgradeDBInstanceEngineVersionRequest {
       */
     EngineVersion: string;
     /**
-      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
+      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
       */
     WaitSwitch?: number;
     /**
@@ -6935,12 +6939,12 @@ export interface DescribeCdbProxyInfoResponse {
       * 代理组数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Count: number;
+    Count?: number;
     /**
       * 代理组信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyInfos: Array<ProxyGroupInfo>;
+    ProxyInfos?: Array<ProxyGroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7658,7 +7662,7 @@ export interface CreateDBInstanceHourRequest {
       */
     AutoRenewFlag?: number;
     /**
-      * 实例名称。一次购买多个实例命名会用后缀数字区分，例instnaceName=db，goodsNum=3，实例命名分别为db1，db2，db3。
+      * 实例名称。一次购买多个实例命名会用后缀数字区分，例instanceName=db，goodsNum=3，实例命名分别为db1，db2，db3。
       */
     InstanceName?: string;
     /**
@@ -7682,7 +7686,7 @@ export interface CreateDBInstanceHourRequest {
       */
     ParamTemplateId?: number;
     /**
-      * 告警策略id数组。云监控DescribeAlarmPolicy接口返回的OriginId。
+      * 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。
       */
     AlarmPolicyList?: Array<number>;
     /**
@@ -8079,6 +8083,10 @@ export interface Outbound {
       * 规则限定的方向，进站规则为 OUTPUT
       */
     Dir?: string;
+    /**
+      * 地址模块
+      */
+    AddressModule: string;
     /**
       * 规则描述
       */

@@ -3758,6 +3758,12 @@ export interface ReleasedApprover {
       * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
       */
     RelievedApproverReceiptId: string;
+    /**
+      * 指定签署人类型，目前仅支持
+ORGANIZATION-企业
+ENTERPRISESERVER-企业静默签
+      */
+    ApproverType?: string;
 }
 /**
  * 流程信息摘要

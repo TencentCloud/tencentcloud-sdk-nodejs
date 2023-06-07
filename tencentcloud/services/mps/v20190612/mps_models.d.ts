@@ -1095,22 +1095,29 @@ export interface AiReviewTaskPoliticalOcrResult {
     Output: AiReviewPoliticalOcrTaskOutput;
 }
 /**
- * ManageTask请求参数结构体
+ * AI 样本管理，关键词输出信息。
  */
-export interface ManageTaskRequest {
+export interface AiSampleWord {
     /**
-      * 操作类型，取值范围：
-<ul>
-<li>Abort：终止任务。使用说明：
-<ul><li>若 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）或处理中（PROCESSING）的任务；</li>
-<li>否则，对于其他 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，只支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）的任务。</li></ul>
-</li></ul>
+      * 关键词。
       */
-    OperationType: string;
+    Keyword: string;
     /**
-      * 视频处理的任务 ID。
+      * 关键词标签。
       */
-    TaskId: string;
+    TagSet: Array<string>;
+    /**
+      * 关键词应用场景。
+      */
+    UsageSet: Array<string>;
+    /**
+      * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      */
+    CreateTime: string;
+    /**
+      * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+      */
+    UpdateTime: string;
 }
 /**
  * CreateImageSpriteTemplate请求参数结构体
@@ -4909,29 +4916,22 @@ export interface DescribeStreamLinkRegionsResponse {
     RequestId?: string;
 }
 /**
- * AI 样本管理，关键词输出信息。
+ * ManageTask请求参数结构体
  */
-export interface AiSampleWord {
+export interface ManageTaskRequest {
     /**
-      * 关键词。
+      * 操作类型，取值范围：
+<ul>
+<li>Abort：终止任务。使用说明：
+<ul><li>若 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）或处理中（PROCESSING）的任务；</li>
+<li>否则，对于其他 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，只支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）的任务。</li></ul>
+</li></ul>
       */
-    Keyword: string;
+    OperationType: string;
     /**
-      * 关键词标签。
+      * 视频处理的任务 ID。
       */
-    TagSet: Array<string>;
-    /**
-      * 关键词应用场景。
-      */
-    UsageSet: Array<string>;
-    /**
-      * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-      */
-    CreateTime: string;
-    /**
-      * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-      */
-    UpdateTime: string;
+    TaskId: string;
 }
 /**
  * DescribeStreamLinkFlowStatistics返回参数结构体
@@ -5751,6 +5751,19 @@ export interface ScheduleAnalysisTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FinishTime?: string;
+}
+/**
+ * CreateStreamLinkInput请求参数结构体
+ */
+export interface CreateStreamLinkInputRequest {
+    /**
+      * 媒体传输流ID。
+      */
+    FlowId: string;
+    /**
+      * 流的输入组。
+      */
+    InputGroup?: Array<CreateInput>;
 }
 /**
  * 质检任务结果类型
@@ -10265,6 +10278,10 @@ export interface ProcessLiveStreamRequest {
       */
     AiAnalysisTask?: AiAnalysisTaskInput;
     /**
+      * 视频内容质检类型任务参数。
+      */
+    AiQualityControlTask?: AiQualityControlTaskInput;
+    /**
       * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
       */
     SessionId?: string;
@@ -12025,6 +12042,19 @@ export interface RegionInfo {
       * 地区名称。
       */
     Name: string;
+}
+/**
+ * CreateStreamLinkInput返回参数结构体
+ */
+export interface CreateStreamLinkInputResponse {
+    /**
+      * 创建的Flow信息。
+      */
+    Info: DescribeFlow;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 直播流 AI 分析结果

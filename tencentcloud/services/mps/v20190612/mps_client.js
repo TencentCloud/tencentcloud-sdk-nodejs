@@ -588,6 +588,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableSchedule", req, cb);
     }
     /**
+     * 创建媒体传输的输入配置。
+     */
+    async CreateStreamLinkInput(req, cb) {
+        return this.request("CreateStreamLinkInput", req, cb);
+    }
+    /**
      * 修改用户自定义内容审核模板。
      */
     async ModifyContentReviewTemplate(req, cb) {

@@ -406,7 +406,7 @@ export interface CreateLivePullStreamTaskRequest {
   /**
       * 拉流源的类型：
 PullLivePushLive -直播，
-PullVodPushLive -点播。
+PullVodPushLive -点播，
 PullPicPushLive -图片。
       */
   SourceType: string
@@ -1027,7 +1027,7 @@ export interface DescribeStreamPlayInfoListResponse {
   /**
    * 统计信息列表，时间粒度是1分钟。
    */
-  DataInfoList: Array<DayStreamPlayInfo>
+  DataInfoList?: Array<DayStreamPlayInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1077,7 +1077,7 @@ export interface CreateLivePullStreamTaskResponse {
   /**
    * 任务 Id 。
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3082,8 +3082,11 @@ export interface DescribeVisitTopSumInfoListRequest {
  */
 export interface DayStreamPlayInfo {
   /**
-   * 数据时间点，格式：yyyy-mm-dd HH:MM:SS。
-   */
+      * 数据时间点，接口返回支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
+接口返回的时间格式和查询请求传入的时间格式一致。
+      */
   Time: string
 
   /**
@@ -6955,13 +6958,18 @@ export interface HttpCodeInfo {
  */
 export interface DescribeStreamPlayInfoListRequest {
   /**
-   * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS
-   */
+      * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
+开始时间和结束时间的格式需要保持一致。
+      */
   StartTime: string
 
   /**
-      * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。
+      * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
+开始时间和结束时间的格式需要保持一致。结束时间和开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。
       */
   EndTime: string
 
@@ -6980,7 +6988,6 @@ export interface DescribeStreamPlayInfoListRequest {
   /**
       * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
 若不填，则为查询总体播放数据。
-注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。
       */
   AppName?: string
 
@@ -8585,6 +8592,12 @@ PullVodPushLive -点播。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VodLocalMode: number
+
+  /**
+      * 录制模板 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordTemplateId?: string
 }
 
 /**

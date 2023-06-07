@@ -38,7 +38,7 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
      */
     ModifyIPStrategy(req: ModifyIPStrategyRequest, cb?: (error: string, rep: ModifyIPStrategyResponse) => void): Promise<ModifyIPStrategyResponse>;
     /**
-     * 本接口（UpdateService）用于从服务发布的环境中运行版本切换到特定版本。用户在使用 API 网关创建服务并发布服务到某个环境后，多因开发过程会产生多个版本，此时可调用本接口。
+     * 本接口（UpdateService）用于从服务已发布的环境中将运行版本切换到特定版本。用户在使用 API 网关创建服务并发布服务到某个环境后，如在开发过程产生多个版本需要切换，此时可调用本接口。
      */
     UpdateService(req: UpdateServiceRequest, cb?: (error: string, rep: UpdateServiceResponse) => void): Promise<UpdateServiceResponse>;
     /**

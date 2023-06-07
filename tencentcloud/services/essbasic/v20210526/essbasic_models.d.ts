@@ -136,11 +136,11 @@ SIGN_REJECT:拒签(流程结束)
  */
 export interface AuthFailMessage {
     /**
-      * 合作企业Id
+      * 第三方应用平台的子客企业OpenId
       */
     ProxyOrganizationOpenId: string;
     /**
-      * 出错信息
+      * 错误信息
       */
     Message: string;
 }
@@ -215,7 +215,7 @@ export interface DescribeResourceUrlsByFlowsRequest {
  */
 export interface RemindFlowRecords {
     /**
-      * 是否能够催办
+      * 是否能够催办，true-是，false-否
       */
     CanRemind: boolean;
     /**
@@ -223,7 +223,7 @@ export interface RemindFlowRecords {
       */
     FlowId: string;
     /**
-      * 催办详情
+      * 催办详情信息
       */
     RemindMessage: string;
 }
@@ -346,7 +346,7 @@ export interface FlowFileInfo {
  */
 export interface CreateFlowOption {
     /**
-      * 是否允许修改合同信息
+      * 是否允许修改合同信息，true-是，false-否
       */
     CanEditFlow?: boolean;
 }
@@ -367,7 +367,7 @@ export interface BaseFlowInfo {
       */
     FlowDescription: string;
     /**
-      * 合同流程截止时间，unix时间戳
+      * 合同流程截止时间，unix时间戳，单位秒
       */
     Deadline: number;
     /**
@@ -375,7 +375,7 @@ export interface BaseFlowInfo {
       */
     Unordered?: boolean;
     /**
-      * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
+      * 是否打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
       */
     IntelligentStatus?: string;
     /**
@@ -383,7 +383,7 @@ export interface BaseFlowInfo {
       */
     FormFields?: Array<FormField>;
     /**
-      * 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批
+      * 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批。使用ChannelCreateFlowSignReview接口提交审批结果，才能继续完成签署
       */
     NeedSignReview?: boolean;
     /**
@@ -800,7 +800,7 @@ RELIEVED 已经解除
       */
     ApproveMessage: string;
     /**
-      * 签署人签署时间
+      * 签署人签署时间戳，单位秒
       */
     ApproveTime: number;
     /**
@@ -964,7 +964,7 @@ export interface TemplateInfo {
       */
     Description: string;
     /**
-      * 模板控件信息结构
+      * 模板的填充控件信息结构
       */
     Components: Array<Component>;
     /**
@@ -972,7 +972,7 @@ export interface TemplateInfo {
       */
     Recipients: Array<Recipient>;
     /**
-      * 签署区模板信息结构
+      * 模板中的签署控件信息结构
       */
     SignComponents: Array<Component>;
     /**
@@ -982,31 +982,31 @@ export interface TemplateInfo {
     /**
       * 是否是发起人 ,已弃用
       */
-    IsPromoter: boolean;
+    IsPromoter?: boolean;
     /**
-      * 模板的创建者信息
+      * 模板的创建者信息，电子签系统用户ID
       */
     Creator: string;
     /**
-      * 模板创建的时间戳（精确到秒）
+      * 模板创建的时间戳，单位秒
       */
     CreatedOn: number;
     /**
-      * 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
+      * 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。请求参数WithPreviewUrl=true时返回，有效期5分钟。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PreviewUrl: string;
     /**
-      * 第三方应用集成-模板PDF文件链接
+      * 第三方应用集成-模板PDF文件链接。请求参数WithPdfUrl=true时返回（此功能开放需要联系客户经理），有效期5分钟。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PdfUrl: string;
     /**
-      * 关联的平台企业模板ID
+      * 关联的第三方应用平台企业模板ID
       */
     ChannelTemplateId: string;
     /**
-      * 关联的平台企业模板名称
+      * 关联的三方应用平台平台企业模板名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ChannelTemplateName: string;
@@ -1069,7 +1069,7 @@ export interface Agent {
  */
 export interface Recipient {
     /**
-      * 签署人唯一标识
+      * 签署人唯一标识，在通过模板发起合同的时候对应签署方Id
       */
     RecipientId?: string;
     /**
@@ -1081,15 +1081,15 @@ export interface Recipient {
       */
     Description?: string;
     /**
-      * 签署方备注信息
+      * 签署方备注角色名
       */
     RoleName?: string;
     /**
-      * 是否需要校验
+      * 是否需要校验，true-是，false-否
       */
     RequireValidation?: boolean;
     /**
-      * 是否必须填写
+      * 是否必须填写，true-是，false-否
       */
     RequireSign?: boolean;
     /**
@@ -1255,14 +1255,6 @@ export interface OrganizationInfo {
       */
     OrganizationOpenId: string;
     /**
-      * 用户真实的IP
-      */
-    ClientIp: string;
-    /**
-      * 机构的代理IP
-      */
-    ProxyIp: string;
-    /**
       * 机构在平台的编号
       */
     OrganizationId?: string;
@@ -1270,6 +1262,14 @@ export interface OrganizationInfo {
       * 用户渠道
       */
     Channel?: string;
+    /**
+      * 用户真实的IP
+      */
+    ClientIp?: string;
+    /**
+      * 机构的代理IP
+      */
+    ProxyIp?: string;
 }
 /**
  * 签署链接内容
@@ -1281,7 +1281,7 @@ export interface SignUrlInfo {
       */
     SignUrl: string;
     /**
-      * 合同过期时间
+      * 合同过期时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Deadline: number;
@@ -1299,7 +1299,7 @@ export interface SignUrlInfo {
       * 自定义用户编号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CustomUserId: string;
+    CustomUserId?: string;
     /**
       * 用户姓名
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1422,7 +1422,7 @@ export interface PdfVerifyResult {
       */
     SignerName: string;
     /**
-      * 签署时间
+      * 签署时间戳，单位秒
       */
     SignTime: number;
     /**
@@ -1434,11 +1434,11 @@ export interface PdfVerifyResult {
       */
     CertSn: string;
     /**
-      * 证书起始时间
+      * 证书起始时间戳，单位秒
       */
     CertNotBefore: number;
     /**
-      * 证书过期时间
+      * 证书过期时间戳，单位秒
       */
     CertNotAfter: number;
     /**
@@ -1446,23 +1446,23 @@ export interface PdfVerifyResult {
       */
     SignType: number;
     /**
-      * 签名域横坐标
+      * 签名域横坐标，单位px
       */
     ComponentPosX: number;
     /**
-      * 签名域纵坐标
+      * 签名域纵坐标，单位px
       */
     ComponentPosY: number;
     /**
-      * 签名域宽度
+      * 签名域宽度，单位px
       */
     ComponentWidth: number;
     /**
-      * 签名域高度
+      * 签名域高度，单位px
       */
     ComponentHeight: number;
     /**
-      * 签名域所在页码
+      * 签名域所在页码，1～N
       */
     ComponentPage: number;
 }
@@ -1591,7 +1591,6 @@ export interface DescribeExtendedServiceAuthInfoRequest {
 }
 /**
  * 此结构 (FormField) 用于描述内容控件填充结构。
-
  */
 export interface FormField {
     /**
@@ -1601,7 +1600,7 @@ MULTI_LINE_TEXT - 文本内容
 CHECK_BOX - true/false
 FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
 SELECTOR - 选项值
-DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
+DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo
       */
     ComponentValue: string;
     /**
@@ -1856,7 +1855,7 @@ export interface DescribeUsageResponse {
  */
 export interface Staff {
     /**
-      * 员工在电子签平台的id
+      * 员工在电子签平台的用户ID
       */
     UserId: string;
     /**
@@ -1873,7 +1872,7 @@ export interface Staff {
       */
     Email: string;
     /**
-      * 员工在第三方平台id
+      * 员工在第三方应用平台的用户ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OpenId: string;
@@ -1892,11 +1891,11 @@ export interface Staff {
       */
     Verified: boolean;
     /**
-      * 员工创建时间戳
+      * 员工创建时间戳，单位秒
       */
     CreatedOn: number;
     /**
-      * 员工实名时间戳
+      * 员工实名时间戳，单位秒
       */
     VerifiedOn: number;
     /**
@@ -1954,7 +1953,7 @@ export interface ChannelDescribeEmployeesRequest {
  */
 export interface AuthorizedUser {
     /**
-      * 用户openid
+      * 第三方应用平台的用户openid
       */
     OpenId: string;
 }
@@ -2184,7 +2183,7 @@ ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
       */
     RecipientId?: string;
     /**
-      * 签署截止时间，默认一年
+      * 签署截止时间戳，默认一年
       */
     Deadline?: number;
     /**
@@ -2205,7 +2204,7 @@ HANDWRITE -手写签名
       */
     PreReadTime?: number;
     /**
-      * 签署完前端跳转的url，暂未使用
+      * 签署完前端跳转的url，此字段的用法场景请联系客户经理确认
       */
     JumpUrl?: string;
     /**
@@ -2282,11 +2281,11 @@ RELIEVED 解除
       */
     FlowMessage: string;
     /**
-      * 合同(流程)的创建时间戳
+      * 合同(流程)的创建时间戳，单位秒
       */
     CreateOn: number;
     /**
-      * 合同(流程)的签署截止时间戳
+      * 合同(流程)的签署截止时间戳，单位秒
       */
     DeadLine: number;
     /**
@@ -2428,7 +2427,7 @@ export interface ExtentServiceAuthInfo {
   OVERSEA_SIGN          企业与港澳台居民*签署合同
   MOBILE_CHECK_APPROVER 使用手机号验证签署方身份
   PAGING_SEAL           骑缝章
-  DOWNLOAD_FLOW         授权渠道下载合同
+  DOWNLOAD_FLOW         授权平台企业下载合同
       */
     Type?: string;
     /**
@@ -2442,12 +2441,12 @@ DISABLE 关闭
       */
     Status?: string;
     /**
-      * 最近操作人openid（经办人openid）
+      * 最近操作人第三方应用平台的用户openid
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OperatorOpenId?: string;
     /**
-      * 最近操作时间
+      * 最近操作时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OperateOn?: number;
@@ -2487,6 +2486,7 @@ export interface ReleasedApprover {
     /**
       * 签署人类型，目前仅支持
 ORGANIZATION-企业
+ENTERPRISESERVER-企业静默签
       */
     ApproverType: string;
     /**
@@ -2578,19 +2578,19 @@ export interface ChannelCreateBatchCancelFlowUrlRequest {
  */
 export interface ApproverRestriction {
     /**
-      * 指定签署人名字
+      * 指定签署人姓名
       */
     Name?: string;
     /**
-      * 指定签署人手机号
+      * 指定签署人手机号，11位数字
       */
     Mobile?: string;
     /**
-      * 指定签署人证件类型
+      * 指定签署人证件类型，ID_CARD-身份证，HONGKONG_AND_MACAO-港澳居民来往内地通行证，HONGKONG_MACAO_AND_TAIWAN-港澳台居民居住证
       */
     IdCardType?: string;
     /**
-      * 指定签署人证件号码
+      * 指定签署人证件号码，其中字母大写
       */
     IdCardNumber?: string;
 }
@@ -3421,11 +3421,11 @@ export interface OccupiedSeal {
       */
     SealName: string;
     /**
-      * 电子印章授权时间戳
+      * 电子印章授权时间戳，单位秒
       */
     CreateOn: number;
     /**
-      * 电子印章授权人
+      * 电子印章授权人，电子签的UserId
       */
     Creator: string;
     /**
@@ -3446,7 +3446,7 @@ export interface OccupiedSeal {
       */
     Url: string;
     /**
-      * 印章类型
+      * 印章类型，OFFICIAL-企业公章，CONTRACT-合同专用章，LEGAL_PERSON_SEAL-法人章
       */
     SealType: string;
     /**
@@ -3598,7 +3598,7 @@ export interface CreateChannelFlowEvidenceReportResponse {
  */
 export interface SyncFailReason {
     /**
-      * 经办人Id
+      * 对应Agent-ProxyOperator-OpenId。第三方应用平台自定义，对子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串
       */
     Id: string;
     /**

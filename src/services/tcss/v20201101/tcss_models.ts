@@ -1834,7 +1834,7 @@ export interface DescribeAgentDaemonSetCmdResponse {
   /**
    * 安装命令
    */
-  Command: string
+  Command?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2465,39 +2465,18 @@ export interface CreateVulDefenceEventExportJobRequest {
 }
 
 /**
- * DescribeNetworkFirewallPolicyList请求参数结构体
+ * 集群自定义参数
  */
-export interface DescribeNetworkFirewallPolicyListRequest {
+export interface ClusterCustomParameters {
   /**
-   * 集群id
+   * 参数名
    */
-  ClusterId: string
+  Name: string
 
   /**
-   * 偏移量
+   * 参数值
    */
-  Offset?: number
-
-  /**
-   * 每次查询的最大记录数量
-   */
-  Limit?: number
-
-  /**
-      * Name - String
-Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
-      */
-  Filters?: Array<ComplianceFilters>
-
-  /**
-   * 排序字段
-   */
-  By?: string
-
-  /**
-   * 排序方式 asc,desc
-   */
-  Order?: string
+  Values: Array<string>
 }
 
 /**
@@ -5322,6 +5301,21 @@ export interface CreateDefenceVulExportJobResponse {
 }
 
 /**
+ * StopVirusScanTask请求参数结构体
+ */
+export interface StopVirusScanTaskRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+
+  /**
+   * 需要停止的容器id 为空默认停止整个任务
+   */
+  ContainerIds?: Array<string>
+}
+
+/**
  * 运行时安全，异常进程检测策略
  */
 export interface AbnormalProcessRuleInfo {
@@ -7453,6 +7447,11 @@ export interface DescribeAgentDaemonSetCmdRequest {
    * 命令有效期，非腾讯云时必填
    */
   ExpireDate?: string
+
+  /**
+   * 集群自定义参数
+   */
+  ClusterCustomParameters?: Array<ClusterCustomParameters>
 }
 
 /**
@@ -11471,18 +11470,20 @@ export interface DescribeAssetImageRegistryVulListExportResponse {
 }
 
 /**
- * StopVirusScanTask请求参数结构体
+ * 网络集群策略自定义规则端口
  */
-export interface StopVirusScanTaskRequest {
+export interface NetworkPorts {
   /**
-   * 任务ID
-   */
-  TaskId: string
+      * 网络策略协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
 
   /**
-   * 需要停止的容器id 为空默认停止整个任务
-   */
-  ContainerIds?: Array<string>
+      * 网络策略策略端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port?: string
 }
 
 /**
@@ -18072,20 +18073,23 @@ export interface DescribeAssetImageRiskListRequest {
 export type DescribeEscapeSafeStateRequest = null
 
 /**
- * 网络集群策略自定义规则端口
+ * DescribeVirusManualScanEstimateTimeout请求参数结构体
  */
-export interface NetworkPorts {
+export interface DescribeVirusManualScanEstimateTimeoutRequest {
   /**
-      * 网络策略协议
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Protocol?: string
+   * 扫描范围0容器1主机节点
+   */
+  ScanRangeType: number
 
   /**
-      * 网络策略策略端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Port?: string
+   * true 全选，false 自选
+   */
+  ScanRangeAll: boolean
+
+  /**
+   * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
+   */
+  ScanIds?: Array<string>
 }
 
 /**
@@ -18488,23 +18492,39 @@ export interface DescribeEscapeWhiteListRequest {
 }
 
 /**
- * DescribeVirusManualScanEstimateTimeout请求参数结构体
+ * DescribeNetworkFirewallPolicyList请求参数结构体
  */
-export interface DescribeVirusManualScanEstimateTimeoutRequest {
+export interface DescribeNetworkFirewallPolicyListRequest {
   /**
-   * 扫描范围0容器1主机节点
+   * 集群id
    */
-  ScanRangeType: number
+  ClusterId: string
 
   /**
-   * true 全选，false 自选
+   * 偏移量
    */
-  ScanRangeAll: boolean
+  Offset?: number
 
   /**
-   * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
+   * 每次查询的最大记录数量
    */
-  ScanIds?: Array<string>
+  Limit?: number
+
+  /**
+      * Name - String
+Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,ClusterAutoCheck
+      */
+  Filters?: Array<ComplianceFilters>
+
+  /**
+   * 排序字段
+   */
+  By?: string
+
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
 }
 
 /**

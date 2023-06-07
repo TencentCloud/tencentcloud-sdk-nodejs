@@ -258,6 +258,16 @@ it("dlc.v20210125.DescribeTables", async function () {
     }
 })
 
+it("dlc.v20210125.ModifySparkAppBatch", async function () {
+    try {
+       const data = await client.ModifySparkAppBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.AlterDMSPartition", async function () {
     try {
        const data = await client.AlterDMSPartition({})

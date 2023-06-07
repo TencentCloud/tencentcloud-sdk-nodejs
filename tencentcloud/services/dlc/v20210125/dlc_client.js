@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTables", req, cb);
     }
     /**
+     * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+     */
+    async ModifySparkAppBatch(req, cb) {
+        return this.request("ModifySparkAppBatch", req, cb);
+    }
+    /**
      * DMS元数据更新分区
      */
     async AlterDMSPartition(req, cb) {

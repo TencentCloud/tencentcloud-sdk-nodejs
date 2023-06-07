@@ -2038,6 +2038,10 @@ export interface DescribeRouteRequest {
       * 实例唯一id
       */
     InstanceId: string;
+    /**
+      * 路由id
+      */
+    RouteId?: number;
 }
 /**
  * 返回的topic对象
@@ -6430,7 +6434,7 @@ export interface DescribeRouteResponse {
     /**
       * 返回的路由信息结果集
       */
-    Result: RouteResponse;
+    Result?: RouteResponse;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7287,15 +7291,15 @@ export interface CreateInstancePreRequest {
       */
     SpecificationsType?: string;
     /**
-      * 磁盘大小,专业版不填写默认最小磁盘,填写后根据磁盘带宽分区数弹性计算
+      * 磁盘大小，专业版不填写默认最小磁盘，如果跟控制台规格配比不相符，则无法创建成功
       */
     DiskSize?: number;
     /**
-      * 带宽,专业版不填写默认最小带宽,填写后根据磁盘带宽分区数弹性计算
+      * 带宽，专业版不填写默认最小带宽，如果跟控制台规格配比不相符，则无法创建成功
       */
     BandWidth?: number;
     /**
-      * 分区大小,专业版不填写默认最小分区数,填写后根据磁盘带宽分区数弹性计算
+      * 分区大小，专业版不填写默认最小分区数，如果跟控制台规格配比不相符，则无法创建成功
       */
     Partition?: number;
     /**

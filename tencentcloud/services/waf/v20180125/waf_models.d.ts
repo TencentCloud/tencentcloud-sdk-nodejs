@@ -2831,7 +2831,7 @@ export interface AutoDenyDetail {
  */
 export interface ResponseCode {
     /**
-      * 如果成功则返回Success，失败则返回yunapi定义的错误码
+      * 如果成功则返回Success，失败则返回云api定义的错误码
       */
     Code: string;
     /**

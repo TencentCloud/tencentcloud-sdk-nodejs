@@ -544,7 +544,7 @@ export interface PackageBuyInfo {
       */
     BuyTime: number;
     /**
-      * 截至时间戳
+      * 截止时间戳
       */
     EndTime: number;
 }
@@ -2004,7 +2004,7 @@ export interface PhoneNumBuyInfo {
       */
     BuyTime: number;
     /**
-      * 截至时间戳
+      * 截止时间戳
       */
     EndTime: number;
     /**

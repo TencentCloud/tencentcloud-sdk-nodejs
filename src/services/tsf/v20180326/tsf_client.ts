@@ -175,6 +175,7 @@ import {
   DeployContainerGroupRequest,
   CreateApiRateLimitRuleWithDetailRespRequest,
   CreateUnitRuleWithDetailRespRequest,
+  DescribeContainerGroupAttributeRequest,
   DescribeSimpleApplicationsRequest,
   DescribeDeliveryConfigByGroupIdResponse,
   ModifyContainerGroupRequest,
@@ -252,6 +253,7 @@ import {
   ShrinkInstancesResponse,
   DeleteLaneRuleResponse,
   DescribeApiRateLimitRulesResponse,
+  ContainerGroupOther,
   AddClusterInstancesRequest,
   DescribeGroupUseDetailResponse,
   ContainerGroupDeploy,
@@ -474,6 +476,7 @@ import {
   CreateFileConfigRequest,
   GroupApiUseStatistics,
   ChangeApiUsableStatusResponse,
+  DescribeContainerGroupAttributeResponse,
   CreateFileConfigResponse,
   VolumeMountInfo,
   PagedProgram,
@@ -1792,6 +1795,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: RedoTaskResponse) => void
   ): Promise<RedoTaskResponse> {
     return this.request("RedoTask", req, cb)
+  }
+
+  /**
+   * 获取部署组其他字段-用于前端并发调用
+   */
+  async DescribeContainerGroupAttribute(
+    req: DescribeContainerGroupAttributeRequest,
+    cb?: (error: string, rep: DescribeContainerGroupAttributeResponse) => void
+  ): Promise<DescribeContainerGroupAttributeResponse> {
+    return this.request("DescribeContainerGroupAttribute", req, cb)
   }
 
   /**
