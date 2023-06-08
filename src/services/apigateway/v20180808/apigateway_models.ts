@@ -390,6 +390,21 @@ export interface DescribeApiResponse {
 }
 
 /**
+ * DescribeServiceForApiApp请求参数结构体
+ */
+export interface DescribeServiceForApiAppRequest {
+  /**
+   * 待查询的服务唯一 ID。
+   */
+  ServiceId: string
+
+  /**
+   * 服务所属的地域
+   */
+  ApiRegion: string
+}
+
+/**
  * UnReleaseService请求参数结构体
  */
 export interface UnReleaseServiceRequest {
@@ -3589,6 +3604,11 @@ export interface DescribeApisStatusResultInfo {
    * 符合条件的 API 接口数量。
    */
   TotalCount: number
+
+  /**
+   * API 接口列表。
+   */
+  ApiIdStatusSet: Array<DescribeApisStatusResultApiIdStatusSetInfo>
 }
 
 /**
@@ -3642,6 +3662,11 @@ export interface UpdateApiAppKeyRequest {
    */
   ApiAppSecret?: string
 }
+
+/**
+ * key-value
+ */
+export type ApigatewayTags = null
 
 /**
  * 服务自定义域名列表
@@ -6124,18 +6149,120 @@ export interface AttachPluginRequest {
 }
 
 /**
- * DescribeServiceForApiApp请求参数结构体
+ * api状态详情
  */
-export interface DescribeServiceForApiAppRequest {
+export interface DescribeApisStatusResultApiIdStatusSetInfo {
   /**
-   * 待查询的服务唯一 ID。
+   * 服务唯一ID。
    */
   ServiceId: string
 
   /**
-   * 服务所属的地域
+   * API唯一ID。
    */
-  ApiRegion: string
+  ApiId: string
+
+  /**
+      * 用户自定义的 API 接口描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiDesc: string
+
+  /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifiedTime: string
+
+  /**
+      * API 接口的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiName: string
+
+  /**
+      * VPCID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: number
+
+  /**
+      * VPC唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqVpcId: string
+
+  /**
+      * API类型。取值为NORMAL（普通API）和TSF（微服务API）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiType: string
+
+  /**
+      * API协议。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 是否买后调试。（云市场预留字段）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDebugAfterCharge: boolean
+
+  /**
+      * API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH、EIAM。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthType: string
+
+  /**
+      * OAUTH API的类型。当AuthType 为 OAUTH时该字段有效， 取值为NORMAL（业务API）和 OAUTH（授权API）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiBusinessType: string
+
+  /**
+      * 关联的授权API 唯一 ID，当AuthType为OAUTH且ApiBusinessType为NORMAL时生效。标示业务API绑定的oauth2.0授权API唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthRelationApiId: string
+
+  /**
+      * OAUTH 配置信息。当AuthType是OAUTH时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OauthConfig: OauthConfig
+
+  /**
+      * 授权API关联的业务API列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RelationBuniessApiIds?: Array<string>
+
+  /**
+      * API关联的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<ApigatewayTags>
+
+  /**
+      * API 的路径，如 /path。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path: string
+
+  /**
+      * API 的请求方法，如 GET。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Method: string
 }
 
 /**

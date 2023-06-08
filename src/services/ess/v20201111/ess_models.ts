@@ -16,6 +16,16 @@
  */
 
 /**
+ * ModifyIntegrationDepartment返回参数结构体
+ */
+export interface ModifyIntegrationDepartmentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelFlow返回参数结构体
  */
 export interface CancelFlowResponse {
@@ -155,6 +165,21 @@ true：做透明化处理和颜色增强。
 填写的FileId通过UploadFiles接口上传文件获取。
       */
   FileId?: string
+}
+
+/**
+ * DescribeIntegrationDepartments返回参数结构体
+ */
+export interface DescribeIntegrationDepartmentsResponse {
+  /**
+   * 部门列表
+   */
+  Departments?: Array<IntegrationDepartment>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -401,38 +426,36 @@ export interface CreateIntegrationEmployeesRequest {
 }
 
 /**
- * CreateConvertTaskApi请求参数结构体
+ * DescribeIntegrationRoles请求参数结构体
  */
-export interface CreateConvertTaskApiRequest {
+export interface DescribeIntegrationRolesRequest {
   /**
-   * 资源类型 取值范围doc,docx,html,xls,xlsx之一
+   * 操作人信息
    */
-  ResourceType: string
+  Operator: UserInfo
 
   /**
-   * 资源名称，长度限制为256字符
+   * 返回最大数量，最大为200
    */
-  ResourceName: string
+  Limit: number
 
   /**
-   * 资源Id，通过UploadFiles获取
-   */
-  ResourceId: string
-
-  /**
-   * 调用方用户信息，userId 必填
-   */
-  Operator?: UserInfo
-
-  /**
-   * 应用号信息
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
 
   /**
-   * 暂未开放
+      * 查询的关键字段:
+Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
+Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
+Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0，最大为2000
    */
-  Organization?: OrganizationInfo
+  Offset?: number
 }
 
 /**
@@ -528,36 +551,38 @@ export interface AuthorizedUser {
 }
 
 /**
- * DescribeIntegrationRoles请求参数结构体
+ * CreateConvertTaskApi请求参数结构体
  */
-export interface DescribeIntegrationRolesRequest {
+export interface CreateConvertTaskApiRequest {
   /**
-   * 操作人信息
+   * 资源类型 取值范围doc,docx,html,xls,xlsx之一
    */
-  Operator: UserInfo
+  ResourceType: string
 
   /**
-   * 返回最大数量，最大为200
+   * 资源名称，长度限制为256字符
    */
-  Limit: number
+  ResourceName: string
 
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 资源Id，通过UploadFiles获取
+   */
+  ResourceId: string
+
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator?: UserInfo
+
+  /**
+   * 应用号信息
    */
   Agent?: Agent
 
   /**
-      * 查询的关键字段:
-Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
-Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
-Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色
-      */
-  Filters?: Array<Filter>
-
-  /**
-   * 偏移量，默认为0，最大为2000
+   * 暂未开放
    */
-  Offset?: number
+  Organization?: OrganizationInfo
 }
 
 /**
@@ -1162,6 +1187,16 @@ APP：第三方APP或小程序跳转电子签小程序的path。
 }
 
 /**
+ * DeleteIntegrationDepartment返回参数结构体
+ */
+export interface DeleteIntegrationDepartmentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自动签开启、签署相关配置
  */
 export interface AutoSignConfig {
@@ -1255,6 +1290,46 @@ export interface BindEmployeeUserIdWithClientOpenIdRequest {
    * 客户系统OpenId
    */
   OpenId: string
+}
+
+/**
+ * DescribeIntegrationDepartments请求参数结构体
+ */
+export interface DescribeIntegrationDepartmentsRequest {
+  /**
+   * 操作人信息，UserId必填且需拥有组织架构管理权限
+   */
+  Operator: UserInfo
+
+  /**
+   * 查询类型 0-查询单个部门节点 1-单个部门节点及一级子节点部门列表
+   */
+  QueryType: number
+
+  /**
+   * 部门ID,与DeptOpenId二选一,优先DeptId,都为空时获取根节点数据
+   */
+  DeptId?: string
+
+  /**
+   * 客户系统部门ID,与DeptId二选一,优先DeptId,都为空时获取根节点数据
+   */
+  DeptOpenId?: string
+}
+
+/**
+ * CreateIntegrationDepartment返回参数结构体
+ */
+export interface CreateIntegrationDepartmentResponse {
+  /**
+   * 电子签部门ID
+   */
+  DeptId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2190,6 +2265,41 @@ export interface DescribeFileUrlsResponse {
 }
 
 /**
+ * CreateIntegrationDepartment请求参数结构体
+ */
+export interface CreateIntegrationDepartmentRequest {
+  /**
+   * 操作人信息，UserId必填且需拥有组织架构管理权限
+   */
+  Operator: UserInfo
+
+  /**
+   * 部门名称，不超过50个字符
+   */
+  DeptName: string
+
+  /**
+   * 电子签父部门ID，与ParentDeptOpenId二选一,优先ParentDeptId,都为空时自动填充至根节点下
+   */
+  ParentDeptId?: string
+
+  /**
+   * 第三方平台中父部门ID,与ParentDeptId二选一,优先ParentDeptId,都为空时自动填充至根节点下
+   */
+  ParentDeptOpenId?: string
+
+  /**
+   * 客户系统部门ID，不超过64个字符
+   */
+  DeptOpenId?: string
+
+  /**
+   * 排序号,1~30000范围内
+   */
+  OrderNo?: number
+}
+
+/**
  * 成员企业信息
  */
 export interface GroupOrganization {
@@ -2975,6 +3085,41 @@ export interface CreateFlowSignReviewResponse {
 }
 
 /**
+ * ModifyIntegrationDepartment请求参数结构体
+ */
+export interface ModifyIntegrationDepartmentRequest {
+  /**
+   * 操作人信息，UserId必填且需拥有组织架构管理权限
+   */
+  Operator: UserInfo
+
+  /**
+   * 电子签部门ID
+   */
+  DeptId: string
+
+  /**
+   * 电子签父部门ID
+   */
+  ParentDeptId?: string
+
+  /**
+   * 部门名称，不超过50个字符
+   */
+  DeptName?: string
+
+  /**
+   * 客户系统部门ID，不超过64个字符
+   */
+  DeptOpenId?: string
+
+  /**
+   * 排序号,1~30000范围内
+   */
+  OrderNo?: number
+}
+
+/**
  * 查询过滤条件
  */
 export interface Filter {
@@ -3387,6 +3532,26 @@ export interface CancelMultiFlowSignQRCodeRequest {
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+}
+
+/**
+ * DeleteIntegrationDepartment请求参数结构体
+ */
+export interface DeleteIntegrationDepartmentRequest {
+  /**
+   * 操作人信息，UserId必填且需拥有组织架构管理权限
+   */
+  Operator: UserInfo
+
+  /**
+   * 电子签中的部门id
+   */
+  DeptId: string
+
+  /**
+   * 交接部门ID。待删除部门中的合同、印章和模版数据，交接至该部门ID下，未填写交接至公司根部门。
+   */
+  ReceiveDeptId?: string
 }
 
 /**
@@ -3911,6 +4076,41 @@ KEYWORD 关键字，使用ComponentId指定关键字
    * 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
    */
   KeywordIndexes?: Array<number>
+}
+
+/**
+ * 部门信息
+ */
+export interface IntegrationDepartment {
+  /**
+      * 部门ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeptId?: string
+
+  /**
+      * 部门名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeptName?: string
+
+  /**
+      * 父部门ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParentDeptId?: string
+
+  /**
+      * 客户系统部门ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeptOpenId?: string
+
+  /**
+      * 序列号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrderNo?: number
 }
 
 /**

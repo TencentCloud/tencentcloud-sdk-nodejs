@@ -18,11 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyIntegrationDepartmentResponse,
   CancelFlowResponse,
   DescribeFlowEvidenceReportRequest,
   UpdateIntegrationEmployeesResponse,
   Department,
   CreatePreparedPersonalEsignRequest,
+  DescribeIntegrationDepartmentsResponse,
   FileInfo,
   CreateFlowApproversResponse,
   DescribeIntegrationMainOrganizationUserRequest,
@@ -33,13 +35,13 @@ import {
   DisableUserAutoSignResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
-  CreateConvertTaskApiRequest,
+  DescribeIntegrationRolesRequest,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
   StaffRole,
   FlowApproverUrlInfo,
   AuthorizedUser,
-  DescribeIntegrationRolesRequest,
+  CreateConvertTaskApiRequest,
   CreateFlowRemindsResponse,
   DescribeOrganizationGroupOrganizationsRequest,
   Agent,
@@ -53,11 +55,14 @@ import {
   CreateIntegrationUserRolesResponse,
   CreateFlowRequest,
   CreateSchemeUrlRequest,
+  DeleteIntegrationDepartmentResponse,
   AutoSignConfig,
   DescribeThirdPartyAuthCodeRequest,
   UnbindEmployeeUserIdWithClientOpenIdResponse,
   CreateReleaseFlowResponse,
   BindEmployeeUserIdWithClientOpenIdRequest,
+  DescribeIntegrationDepartmentsRequest,
+  CreateIntegrationDepartmentResponse,
   DeleteSealPoliciesResponse,
   OrganizationInfo,
   DescribeUserAutoSignStatusResponse,
@@ -86,6 +91,7 @@ import {
   Staff,
   CreateFlowEvidenceReportResponse,
   DescribeFileUrlsResponse,
+  CreateIntegrationDepartmentRequest,
   GroupOrganization,
   DeleteIntegrationRoleUsersResponse,
   CreateDocumentRequest,
@@ -111,6 +117,7 @@ import {
   FailedCreateRoleData,
   ApproverInfo,
   CreateFlowSignReviewResponse,
+  ModifyIntegrationDepartmentRequest,
   Filter,
   CreateStaffResult,
   CreateUserAutoSignEnableUrlRequest,
@@ -124,6 +131,7 @@ import {
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
+  DeleteIntegrationDepartmentRequest,
   ModifyApplicationCallbackInfoRequest,
   IntegrationMainOrganizationUser,
   StartFlowRequest,
@@ -135,6 +143,7 @@ import {
   CancelFlowRequest,
   UploadFile,
   Component,
+  IntegrationDepartment,
   DescribeIntegrationRolesResponse,
   CreateFlowRemindsRequest,
   UpdateIntegrationEmployeesRequest,
@@ -172,13 +181,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此API接口用户查询加入集团的成员企业
-   */
-  async DescribeOrganizationGroupOrganizations(
-    req: DescribeOrganizationGroupOrganizationsRequest,
-    cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
-  ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
-    return this.request("DescribeOrganizationGroupOrganizations", req, cb)
+     * 查询合同详情
+适用场景：可用于主动查询某个合同详情信息。
+     */
+  async DescribeFlowInfo(
+    req: DescribeFlowInfoRequest,
+    cb?: (error: string, rep: DescribeFlowInfoResponse) => void
+  ): Promise<DescribeFlowInfoResponse> {
+    return this.request("DescribeFlowInfo", req, cb)
   }
 
   /**
@@ -260,14 +270,23 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
-出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
-     */
-  async CreateFlowEvidenceReport(
-    req: CreateFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void
-  ): Promise<CreateFlowEvidenceReportResponse> {
-    return this.request("CreateFlowEvidenceReport", req, cb)
+   * 对企业员工进行印章授权
+   */
+  async CreateSealPolicy(
+    req: CreateSealPolicyRequest,
+    cb?: (error: string, rep: CreateSealPolicyResponse) => void
+  ): Promise<CreateSealPolicyResponse> {
+    return this.request("CreateSealPolicy", req, cb)
+  }
+
+  /**
+   * 此API接口用户查询加入集团的成员企业
+   */
+  async DescribeOrganizationGroupOrganizations(
+    req: DescribeOrganizationGroupOrganizationsRequest,
+    cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
+  ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
+    return this.request("DescribeOrganizationGroupOrganizations", req, cb)
   }
 
   /**
@@ -300,6 +319,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateBatchCancelFlowUrlResponse) => void
   ): Promise<CreateBatchCancelFlowUrlResponse> {
     return this.request("CreateBatchCancelFlowUrl", req, cb)
+  }
+
+  /**
+   * 通过此接口，删除企业的部门。
+   */
+  async DeleteIntegrationDepartment(
+    req: DeleteIntegrationDepartmentRequest,
+    cb?: (error: string, rep: DeleteIntegrationDepartmentResponse) => void
+  ): Promise<DeleteIntegrationDepartmentResponse> {
+    return this.request("DeleteIntegrationDepartment", req, cb)
   }
 
   /**
@@ -394,24 +423,32 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-     * 查询合同详情
-适用场景：可用于主动查询某个合同详情信息。
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
+
+**本接口适用于发起方没有填写控件的 B2C或者单C模板**
+
+**若是B2C模板,还要满足以下任意一个条件**
+- 模板中配置的签署顺序是无序
+- B端企业的签署方式是静默签署
+- B端企业是非首位签署
      */
-  async DescribeFlowInfo(
-    req: DescribeFlowInfoRequest,
-    cb?: (error: string, rep: DescribeFlowInfoResponse) => void
-  ): Promise<DescribeFlowInfoResponse> {
-    return this.request("DescribeFlowInfo", req, cb)
+  async CreateMultiFlowSignQRCode(
+    req: CreateMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: CreateMultiFlowSignQRCodeResponse) => void
+  ): Promise<CreateMultiFlowSignQRCodeResponse> {
+    return this.request("CreateMultiFlowSignQRCode", req, cb)
   }
 
   /**
-   * 对企业员工进行印章授权
-   */
-  async CreateSealPolicy(
-    req: CreateSealPolicyRequest,
-    cb?: (error: string, rep: CreateSealPolicyResponse) => void
-  ): Promise<CreateSealPolicyResponse> {
-    return this.request("CreateSealPolicy", req, cb)
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     */
+  async CreateFlowEvidenceReport(
+    req: CreateFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateFlowEvidenceReportResponse) => void
+  ): Promise<CreateFlowEvidenceReportResponse> {
+    return this.request("CreateFlowEvidenceReport", req, cb)
   }
 
   /**
@@ -491,21 +528,13 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
-适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
-
-**本接口适用于发起方没有填写控件的 B2C或者单C模板**
-
-**若是B2C模板,还要满足以下任意一个条件**
-- 模板中配置的签署顺序是无序
-- B端企业的签署方式是静默签署
-- B端企业是非首位签署
-     */
-  async CreateMultiFlowSignQRCode(
-    req: CreateMultiFlowSignQRCodeRequest,
-    cb?: (error: string, rep: CreateMultiFlowSignQRCodeResponse) => void
-  ): Promise<CreateMultiFlowSignQRCodeResponse> {
-    return this.request("CreateMultiFlowSignQRCode", req, cb)
+   * 通过此接口，创建企业的部门，支持绑定客户系统部门ID。
+   */
+  async CreateIntegrationDepartment(
+    req: CreateIntegrationDepartmentRequest,
+    cb?: (error: string, rep: CreateIntegrationDepartmentResponse) => void
+  ): Promise<CreateIntegrationDepartmentResponse> {
+    return this.request("CreateIntegrationDepartment", req, cb)
   }
 
   /**
@@ -674,6 +703,26 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: CreateSchemeUrlResponse) => void
   ): Promise<CreateSchemeUrlResponse> {
     return this.request("CreateSchemeUrl", req, cb)
+  }
+
+  /**
+   * 通过此接口，查询企业的部门，支持查询单个部门节点或单个部门节点及一级子节点部门列表。
+   */
+  async DescribeIntegrationDepartments(
+    req: DescribeIntegrationDepartmentsRequest,
+    cb?: (error: string, rep: DescribeIntegrationDepartmentsResponse) => void
+  ): Promise<DescribeIntegrationDepartmentsResponse> {
+    return this.request("DescribeIntegrationDepartments", req, cb)
+  }
+
+  /**
+   * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
+   */
+  async ModifyIntegrationDepartment(
+    req: ModifyIntegrationDepartmentRequest,
+    cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void
+  ): Promise<ModifyIntegrationDepartmentResponse> {
+    return this.request("ModifyIntegrationDepartment", req, cb)
   }
 
   /**

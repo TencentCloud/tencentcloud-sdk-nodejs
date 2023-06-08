@@ -28,10 +28,11 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
-     * 此API接口用户查询加入集团的成员企业
+     * 查询合同详情
+适用场景：可用于主动查询某个合同详情信息。
      */
-    async DescribeOrganizationGroupOrganizations(req, cb) {
-        return this.request("DescribeOrganizationGroupOrganizations", req, cb);
+    async DescribeFlowInfo(req, cb) {
+        return this.request("DescribeFlowInfo", req, cb);
     }
     /**
      * 新增/删除应用callbackinfo
@@ -84,11 +85,16 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateUserAutoSignEnableUrl", req, cb);
     }
     /**
-     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
-出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
+     * 对企业员工进行印章授权
      */
-    async CreateFlowEvidenceReport(req, cb) {
-        return this.request("CreateFlowEvidenceReport", req, cb);
+    async CreateSealPolicy(req, cb) {
+        return this.request("CreateSealPolicy", req, cb);
+    }
+    /**
+     * 此API接口用户查询加入集团的成员企业
+     */
+    async DescribeOrganizationGroupOrganizations(req, cb) {
+        return this.request("DescribeOrganizationGroupOrganizations", req, cb);
     }
     /**
      * 对流程的合同文件进行验证，判断文件是否合法。
@@ -109,6 +115,12 @@ callbackinfo包含： 回调地址和签名key
      */
     async CreateBatchCancelFlowUrl(req, cb) {
         return this.request("CreateBatchCancelFlowUrl", req, cb);
+    }
+    /**
+     * 通过此接口，删除企业的部门。
+     */
+    async DeleteIntegrationDepartment(req, cb) {
+        return this.request("DeleteIntegrationDepartment", req, cb);
     }
     /**
      * 将电子签系统员工userId与客户系统员工openId进行绑定
@@ -170,17 +182,25 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateDocument", req, cb);
     }
     /**
-     * 查询合同详情
-适用场景：可用于主动查询某个合同详情信息。
+     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
+适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
+
+**本接口适用于发起方没有填写控件的 B2C或者单C模板**
+
+**若是B2C模板,还要满足以下任意一个条件**
+- 模板中配置的签署顺序是无序
+- B端企业的签署方式是静默签署
+- B端企业是非首位签署
      */
-    async DescribeFlowInfo(req, cb) {
-        return this.request("DescribeFlowInfo", req, cb);
+    async CreateMultiFlowSignQRCode(req, cb) {
+        return this.request("CreateMultiFlowSignQRCode", req, cb);
     }
     /**
-     * 对企业员工进行印章授权
+     * 创建出证报告，返回报告 ID。需要配合出证套餐才能调用。
+出证需要一定时间，建议调用创建出证24小时之后再通过DescribeFlowEvidenceReport进行查询。
      */
-    async CreateSealPolicy(req, cb) {
-        return this.request("CreateSealPolicy", req, cb);
+    async CreateFlowEvidenceReport(req, cb) {
+        return this.request("CreateFlowEvidenceReport", req, cb);
     }
     /**
      * 通过模板创建签署流程<br/>
@@ -231,18 +251,10 @@ callbackinfo包含： 回调地址和签名key
         return this.request("DescribeIntegrationRoles", req, cb);
     }
     /**
-     * 此接口（CreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
-适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
-
-**本接口适用于发起方没有填写控件的 B2C或者单C模板**
-
-**若是B2C模板,还要满足以下任意一个条件**
-- 模板中配置的签署顺序是无序
-- B端企业的签署方式是静默签署
-- B端企业是非首位签署
+     * 通过此接口，创建企业的部门，支持绑定客户系统部门ID。
      */
-    async CreateMultiFlowSignQRCode(req, cb) {
-        return this.request("CreateMultiFlowSignQRCode", req, cb);
+    async CreateIntegrationDepartment(req, cb) {
+        return this.request("CreateIntegrationDepartment", req, cb);
     }
     /**
      * 通过发起转换任务接口（CreateConvertTaskApi）返回的任务Id查询转换任务状态，通过本接口确认转换任务是否完成。<br/>
@@ -355,6 +367,18 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     async CreateSchemeUrl(req, cb) {
         return this.request("CreateSchemeUrl", req, cb);
+    }
+    /**
+     * 通过此接口，查询企业的部门，支持查询单个部门节点或单个部门节点及一级子节点部门列表。
+     */
+    async DescribeIntegrationDepartments(req, cb) {
+        return this.request("DescribeIntegrationDepartments", req, cb);
+    }
+    /**
+     * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
+     */
+    async ModifyIntegrationDepartment(req, cb) {
+        return this.request("ModifyIntegrationDepartment", req, cb);
     }
     /**
      * 创建员工,如需在此接口提醒员工实名，入参Employees的OpenId不传

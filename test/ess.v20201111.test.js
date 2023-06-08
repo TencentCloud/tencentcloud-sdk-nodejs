@@ -18,9 +18,9 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
-it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+it("ess.v20201111.DescribeFlowInfo", async function () {
     try {
-       const data = await client.DescribeOrganizationGroupOrganizations({})
+       const data = await client.DescribeFlowInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,19 @@ it("ess.v20201111.CreateUserAutoSignEnableUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowEvidenceReport", async function () {
+it("ess.v20201111.CreateSealPolicy", async function () {
     try {
-       const data = await client.CreateFlowEvidenceReport({})
+       const data = await client.CreateSealPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+    try {
+       const data = await client.DescribeOrganizationGroupOrganizations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("ess.v20201111.UnbindEmployeeUserIdWithClientOpenId", async function () {
 it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
     try {
        const data = await client.CreateBatchCancelFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DeleteIntegrationDepartment", async function () {
+    try {
+       const data = await client.DeleteIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +238,9 @@ it("ess.v20201111.CreateDocument", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowInfo", async function () {
+it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
     try {
-       const data = await client.DescribeFlowInfo({})
+       const data = await client.CreateMultiFlowSignQRCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,9 @@ it("ess.v20201111.DescribeFlowInfo", async function () {
     }
 })
 
-it("ess.v20201111.CreateSealPolicy", async function () {
+it("ess.v20201111.CreateFlowEvidenceReport", async function () {
     try {
-       const data = await client.CreateSealPolicy({})
+       const data = await client.CreateFlowEvidenceReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +328,9 @@ it("ess.v20201111.DescribeIntegrationRoles", async function () {
     }
 })
 
-it("ess.v20201111.CreateMultiFlowSignQRCode", async function () {
+it("ess.v20201111.CreateIntegrationDepartment", async function () {
     try {
-       const data = await client.CreateMultiFlowSignQRCode({})
+       const data = await client.CreateIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +471,26 @@ it("ess.v20201111.DeleteIntegrationEmployees", async function () {
 it("ess.v20201111.CreateSchemeUrl", async function () {
     try {
        const data = await client.CreateSchemeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeIntegrationDepartments", async function () {
+    try {
+       const data = await client.DescribeIntegrationDepartments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+    try {
+       const data = await client.ModifyIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -70,8 +70,9 @@ export interface ChannelDeleteSealPoliciesRequest {
   SealId: string
 
   /**
-   * 指定用户ID数组，电子签系统用户ID
-   */
+      * 指定用户ID数组，电子签系统用户ID
+可以填写OpenId，系统会通过组织+渠道+OpenId查询得到UserId进行授权取消。
+      */
   UserIds: Array<string>
 
   /**
@@ -667,8 +668,9 @@ export interface ChannelCreateFlowRemindsRequest {
  */
 export interface ChannelCreateSealPolicyResponse {
   /**
-   * 最终授权成功的电子签系统用户ID数组。其他的跳过的是已经授权了的
-   */
+      * 最终授权成功的电子签系统用户ID数组。其他的跳过的是已经授权了的。
+请求参数填写OpenId时，返回授权成功的 Openid。
+      */
   UserIds?: Array<string>
 
   /**
@@ -3999,8 +4001,9 @@ export interface ChannelCreateSealPolicyRequest {
   SealId: string
 
   /**
-   * 指定待授权的用户ID数组,电子签的用户ID
-   */
+      * 指定待授权的用户ID数组,电子签的用户ID
+可以填写OpenId，系统会通过组织+渠道+OpenId查询得到UserId进行授权。
+      */
   UserIds: Array<string>
 
   /**
@@ -4176,7 +4179,7 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
  */
 export interface OperateChannelTemplateRequest {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+   * 应用相关信息。 此接口Agent.AppId必填。
    */
   Agent: Agent
 
