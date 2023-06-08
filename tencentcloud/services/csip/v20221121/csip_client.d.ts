@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDbAssetInfoResponse, DescribeDbAssetsRequest, DescribeScanReportListRequest, DescribeScanReportListResponse, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribeVpcAssetsResponse, DescribeCVMAssetsRequest, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeVpcAssetsRequest, DescribeSubnetAssetsRequest, DescribeCVMAssetsResponse, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
+import { DescribeDbAssetInfoResponse, DescribeDbAssetsRequest, DescribeScanReportListRequest, CreateDomainAndIpRequest, DescribeScanReportListResponse, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribeVpcAssetsResponse, DescribeCVMAssetsRequest, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeVpcAssetsRequest, DescribeSubnetAssetsRequest, DescribeCVMAssetsResponse, CreateDomainAndIpResponse, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
 /**
  * csip client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 获取扫描报告列表
      */
     DescribeScanReportList(req: DescribeScanReportListRequest, cb?: (error: string, rep: DescribeScanReportListResponse) => void): Promise<DescribeScanReportListResponse>;
+    /**
+     * 创建域名、ip相关信息
+     */
+    CreateDomainAndIp(req: CreateDomainAndIpRequest, cb?: (error: string, rep: CreateDomainAndIpResponse) => void): Promise<CreateDomainAndIpResponse>;
     /**
      * 获取子网列表
      */

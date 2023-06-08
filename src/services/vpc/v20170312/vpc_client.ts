@@ -869,7 +869,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  本接口（DescribeRouteTables）用于查询路由表。
+   * 本接口（DescribeRouteTables）用于查询路由表。
    */
   async DescribeRouteTables(
     req: DescribeRouteTablesRequest,
@@ -1941,7 +1941,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteSubnet）用于用于删除子网（Subnet）。
+   * 本接口（DeleteSubnet）用于删除子网（Subnet）。
    * 删除子网前，请清理该子网下所有资源，包括云服务器、负载均衡、云数据、NoSQL、弹性网卡等资源。
    */
   async DeleteSubnet(
@@ -2478,7 +2478,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口(DescribeUsedIpAddress)用于查询Subnet或者Vpc内的ip的使用情况，
-如被ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
+如ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
      */
   async DescribeUsedIpAddress(
     req: DescribeUsedIpAddressRequest,

@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRecordGroup", req, cb);
     }
     /**
+     * 重新回滚指定解析记录快照
+     */
+    async RollbackRecordSnapshot(req, cb) {
+        return this.request("RollbackRecordSnapshot", req, cb);
+    }
+    /**
      * 修改域名状态
      */
     async ModifyDomainStatus(req, cb) {
@@ -352,10 +358,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomain", req, cb);
     }
     /**
-     * 重新回滚指定解析记录快照
+     * 获取域名筛选列表
      */
-    async RollbackRecordSnapshot(req, cb) {
-        return this.request("RollbackRecordSnapshot", req, cb);
+    async DescribeDomainFilterList(req, cb) {
+        return this.request("DescribeDomainFilterList", req, cb);
     }
     /**
      * 将记录添加到分组

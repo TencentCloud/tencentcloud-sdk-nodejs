@@ -44,6 +44,7 @@ import {
   DescribeDomainResponse,
   DescribeSnapshotListRequest,
   DescribePackageDetailResponse,
+  DescribeDomainFilterListResponse,
   DescribeRecordLineListResponse,
   SnapshotPageInfo,
   DomainInfo,
@@ -107,6 +108,7 @@ import {
   ModifyRecordBatchRequest,
   WhoisContactAddress,
   SnapshotConfig,
+  ModifyRecordFieldsResponse,
   DeleteRecordResponse,
   CreateRecordBatchRecord,
   CreateDomainResponse,
@@ -159,7 +161,7 @@ import {
   SnapshotInfo,
   ModifyDynamicDNSRequest,
   DescribeRecordGroupListRequest,
-  ModifyRecordFieldsResponse,
+  DescribeDomainFilterListRequest,
   PurviewInfo,
   ModifyRecordRemarkRequest,
   ModifySnapshotConfigResponse,
@@ -269,6 +271,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRecordGroupResponse) => void
   ): Promise<DeleteRecordGroupResponse> {
     return this.request("DeleteRecordGroup", req, cb)
+  }
+
+  /**
+   * 重新回滚指定解析记录快照
+   */
+  async RollbackRecordSnapshot(
+    req: RollbackRecordSnapshotRequest,
+    cb?: (error: string, rep: RollbackRecordSnapshotResponse) => void
+  ): Promise<RollbackRecordSnapshotResponse> {
+    return this.request("RollbackRecordSnapshot", req, cb)
   }
 
   /**
@@ -742,13 +754,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重新回滚指定解析记录快照
+   * 获取域名筛选列表
    */
-  async RollbackRecordSnapshot(
-    req: RollbackRecordSnapshotRequest,
-    cb?: (error: string, rep: RollbackRecordSnapshotResponse) => void
-  ): Promise<RollbackRecordSnapshotResponse> {
-    return this.request("RollbackRecordSnapshot", req, cb)
+  async DescribeDomainFilterList(
+    req: DescribeDomainFilterListRequest,
+    cb?: (error: string, rep: DescribeDomainFilterListResponse) => void
+  ): Promise<DescribeDomainFilterListResponse> {
+    return this.request("DescribeDomainFilterList", req, cb)
   }
 
   /**

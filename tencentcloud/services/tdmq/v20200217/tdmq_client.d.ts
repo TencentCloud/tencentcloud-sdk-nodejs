@@ -111,6 +111,7 @@ export declare class Client extends AbstractClient {
     DescribeTopics(req: DescribeTopicsRequest, cb?: (error: string, rep: DescribeTopicsResponse) => void): Promise<DescribeTopicsResponse>;
     /**
      * 发送单条消息
+不支持持久topic
      */
     SendMessages(req: SendMessagesRequest, cb?: (error: string, rep: SendMessagesResponse) => void): Promise<SendMessagesResponse>;
     /**

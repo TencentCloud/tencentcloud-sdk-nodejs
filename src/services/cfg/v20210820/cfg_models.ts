@@ -142,40 +142,26 @@ export interface TaskGroupAction {
 }
 
 /**
- * 监控指标
+ * 机器选取规则
  */
-export interface TaskMonitor {
+export interface TaskGroupInstancesExecuteRules {
   /**
-   * 监控指标ID
-   */
-  TaskMonitorId: number
-
-  /**
-   * 监控指标对象类型ID
-   */
-  TaskMonitorObjectTypeId: number
-
-  /**
-   * 指标名称
-   */
-  MetricName: string
-
-  /**
-   * 实例ID列表
-   */
-  InstancesIds: Array<string>
-
-  /**
-      * 中文指标
+      * 实例选取模式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MetricChineseName: string
+  TaskGroupInstancesExecuteMode?: number
 
   /**
-      * 单位
+      * 按比例选取模式下选取比例
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Unit: string
+  TaskGroupInstancesExecutePercent?: number
+
+  /**
+      * 按数量选取模式下选取数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskGroupInstancesExecuteNum?: number
 }
 
 /**
@@ -277,6 +263,23 @@ export interface TaskGroup {
    * 执行模式。1 --- 顺序执行，2 --- 阶段执行
    */
   TaskGroupMode: number
+
+  /**
+   * 不参演的实例列表
+   */
+  TaskGroupDiscardInstanceList?: Array<string>
+
+  /**
+      * 参演实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskGroupSelectedInstanceList?: Array<string>
+
+  /**
+      * 机器选取规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskGroupInstancesExecuteRule?: Array<TaskGroupInstancesExecuteRules>
 }
 
 /**
@@ -751,6 +754,43 @@ export interface DescribeTemplateListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 监控指标
+ */
+export interface TaskMonitor {
+  /**
+   * 监控指标ID
+   */
+  TaskMonitorId: number
+
+  /**
+   * 监控指标对象类型ID
+   */
+  TaskMonitorObjectTypeId: number
+
+  /**
+   * 指标名称
+   */
+  MetricName: string
+
+  /**
+   * 实例ID列表
+   */
+  InstancesIds: Array<string>
+
+  /**
+      * 中文指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricChineseName: string
+
+  /**
+      * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
 }
 
 /**

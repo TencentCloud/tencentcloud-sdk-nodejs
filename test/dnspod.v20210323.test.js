@@ -88,6 +88,16 @@ it("dnspod.v20210323.DeleteRecordGroup", async function () {
     }
 })
 
+it("dnspod.v20210323.RollbackRecordSnapshot", async function () {
+    try {
+       const data = await client.RollbackRecordSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.ModifyDomainStatus", async function () {
     try {
        const data = await client.ModifyDomainStatus({})
@@ -558,9 +568,9 @@ it("dnspod.v20210323.CreateDomain", async function () {
     }
 })
 
-it("dnspod.v20210323.RollbackRecordSnapshot", async function () {
+it("dnspod.v20210323.DescribeDomainFilterList", async function () {
     try {
-       const data = await client.RollbackRecordSnapshot({})
+       const data = await client.DescribeDomainFilterList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

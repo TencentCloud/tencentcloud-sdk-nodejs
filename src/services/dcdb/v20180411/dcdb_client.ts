@@ -55,6 +55,7 @@ import {
   DescribeFlowResponse,
   UpgradeHourDCDBInstanceRequest,
   CloneAccountResponse,
+  IsolateDCDBInstanceRequest,
   IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
   DestroyDCDBInstanceRequest,
@@ -174,6 +175,7 @@ import {
   AddShardConfig,
   ModifyDBSyncModeRequest,
   ModifyAccountConfigResponse,
+  IsolateDCDBInstanceResponse,
   DescribeProjectsResponse,
   CreateTmpDCDBInstanceResponse,
   CreateAccountResponse,
@@ -801,6 +803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void
   ): Promise<DestroyHourDCDBInstanceResponse> {
     return this.request("DestroyHourDCDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口(IsolateDCDBInstance)用于隔离分布式数据库TDSQL实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
+   */
+  async IsolateDCDBInstance(
+    req: IsolateDCDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDCDBInstanceResponse) => void
+  ): Promise<IsolateDCDBInstanceResponse> {
+    return this.request("IsolateDCDBInstance", req, cb)
   }
 
   /**

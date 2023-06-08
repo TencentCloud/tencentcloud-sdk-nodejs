@@ -397,6 +397,11 @@ export interface ModifyEnvironmentAttributesRequest {
    * 消息保留策略
    */
   RetentionPolicy?: RetentionPolicy
+
+  /**
+   * 是否开启自动创建订阅
+   */
+  AutoSubscriptionCreation?: boolean
 }
 
 /**
@@ -1817,6 +1822,12 @@ export interface Environment {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RetentionPolicy: RetentionPolicy
+
+  /**
+      * 是否自动创建订阅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoSubscriptionCreation?: boolean
 }
 
 /**
@@ -2014,23 +2025,23 @@ export interface CreateEnvironmentResponse {
   /**
    * 环境（命名空间）名称。
    */
-  EnvironmentId: string
+  EnvironmentId?: string
 
   /**
    * 未消费消息过期时间，单位：秒。
    */
-  MsgTTL: number
+  MsgTTL?: number
 
   /**
       * 说明，128个字符以内。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
    * 命名空间ID
    */
-  NamespaceId: string
+  NamespaceId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2441,6 +2452,11 @@ export interface CreateEnvironmentRequest {
    * 消息保留策略
    */
   RetentionPolicy?: RetentionPolicy
+
+  /**
+   * 是否开启自动创建订阅
+   */
+  AutoSubscriptionCreation?: boolean
 }
 
 /**
@@ -2500,24 +2516,24 @@ export interface ModifyEnvironmentAttributesResponse {
   /**
    * 命名空间名称。
    */
-  EnvironmentId: string
+  EnvironmentId?: string
 
   /**
    * 未消费消息过期时间，单位：秒。
    */
-  MsgTTL: number
+  MsgTTL?: number
 
   /**
       * 备注，字符串最长不超过128。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
+  Remark?: string
 
   /**
       * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NamespaceId: string
+  NamespaceId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3511,13 +3527,13 @@ export interface SendMessagesResponse {
       * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MessageId: string
+  MessageId?: string
 
   /**
       * 返回的错误消息，如果返回为 “”，说明没有错误
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrorMsg: string
+  ErrorMsg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

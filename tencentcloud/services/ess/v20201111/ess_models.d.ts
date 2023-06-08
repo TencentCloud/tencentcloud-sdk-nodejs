@@ -267,6 +267,12 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 签署完前端跳转的url，暂未使用
       */
     JumpUrl?: string;
+    /**
+      * 签署ID
+- 发起流程时系统自动补充
+- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
+      */
+    SignId?: string;
 }
 /**
  * DescribeThirdPartyAuthCode返回参数结构体

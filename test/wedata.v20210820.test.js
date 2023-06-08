@@ -1188,6 +1188,16 @@ it("wedata.v20210820.BatchMakeUpIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.UploadContent", async function () {
+    try {
+       const data = await client.UploadContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRuleExecLog", async function () {
     try {
        const data = await client.DescribeRuleExecLog({})

@@ -760,6 +760,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchMakeUpIntegrationTasks", req, cb);
     }
     /**
+     * 保存任务信息
+     */
+    async UploadContent(req, cb) {
+        return this.request("UploadContent", req, cb);
+    }
+    /**
      * 规则执行日志查询
      */
     async DescribeRuleExecLog(req, cb) {

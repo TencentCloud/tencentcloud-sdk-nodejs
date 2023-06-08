@@ -388,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyHourDCDBInstance", req, cb);
     }
     /**
+     * 本接口(IsolateDCDBInstance)用于隔离分布式数据库TDSQL实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。
+     */
+    async IsolateDCDBInstance(req, cb) {
+        return this.request("IsolateDCDBInstance", req, cb);
+    }
+    /**
      * 本接口（ModifyInstanceVport）用于修改实例VPORT
      */
     async ModifyInstanceVport(req, cb) {

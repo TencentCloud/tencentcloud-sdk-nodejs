@@ -50,7 +50,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeServiceTemplateGroups(req: DescribeServiceTemplateGroupsRequest, cb?: (error: string, rep: DescribeServiceTemplateGroupsResponse) => void): Promise<DescribeServiceTemplateGroupsResponse>;
     /**
-     *  本接口（DescribeRouteTables）用于查询路由表。
+     * 本接口（DescribeRouteTables）用于查询路由表。
      */
     DescribeRouteTables(req: DescribeRouteTablesRequest, cb?: (error: string, rep: DescribeRouteTablesResponse) => void): Promise<DescribeRouteTablesResponse>;
     /**
@@ -519,7 +519,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCustomerGateway(req: DeleteCustomerGatewayRequest, cb?: (error: string, rep: DeleteCustomerGatewayResponse) => void): Promise<DeleteCustomerGatewayResponse>;
     /**
-     * 本接口（DeleteSubnet）用于用于删除子网（Subnet）。
+     * 本接口（DeleteSubnet）用于删除子网（Subnet）。
 * 删除子网前，请清理该子网下所有资源，包括云服务器、负载均衡、云数据、NoSQL、弹性网卡等资源。
      */
     DeleteSubnet(req: DeleteSubnetRequest, cb?: (error: string, rep: DeleteSubnetResponse) => void): Promise<DeleteSubnetResponse>;
@@ -768,7 +768,7 @@ export declare class Client extends AbstractClient {
     DeleteAddressTemplateGroup(req: DeleteAddressTemplateGroupRequest, cb?: (error: string, rep: DeleteAddressTemplateGroupResponse) => void): Promise<DeleteAddressTemplateGroupResponse>;
     /**
      * 本接口(DescribeUsedIpAddress)用于查询Subnet或者Vpc内的ip的使用情况，
-如被ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
+如ip被占用，返回占用ip的资源类别与id；如未被占用，返回空值
      */
     DescribeUsedIpAddress(req: DescribeUsedIpAddressRequest, cb?: (error: string, rep: DescribeUsedIpAddressResponse) => void): Promise<DescribeUsedIpAddressResponse>;
     /**

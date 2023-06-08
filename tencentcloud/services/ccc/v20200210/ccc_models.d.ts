@@ -1924,9 +1924,13 @@ export interface CreateCallOutSessionRequest {
       */
     Callee: string;
     /**
-      * 主叫号码，须带 0086 前缀
+      * 主叫号码（废弃，使用Callers），须带 0086 前缀
       */
     Caller?: string;
+    /**
+      * 指定主叫号码列表，如果前面的号码失败了会自动换成下一个号码，须带 0086 前缀
+      */
+    Callers?: Array<string>;
     /**
       * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
       */

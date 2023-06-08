@@ -1927,6 +1927,20 @@ export interface RegisterEventRequest {
     Description?: string;
 }
 /**
+ * UploadContent返回参数结构体
+ */
+export interface UploadContentResponse {
+    /**
+      * 脚本信息响应
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScriptInfo?: ScriptInfoResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 规则模版
  */
 export interface RuleTemplate {
@@ -3887,6 +3901,19 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskAlarmRegularList?: Array<string>;
+}
+/**
+ * SubmitWorkflow返回参数结构体
+ */
+export interface SubmitWorkflowResponse {
+    /**
+      * 执行结果
+      */
+    Data: SubmitWorkflow;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SubmitTask返回参数结构体
@@ -6887,17 +6914,41 @@ export interface DescribeDimensionScoreResponse {
     RequestId?: string;
 }
 /**
- * SubmitWorkflow返回参数结构体
+ * 开发空间-上传脚本请求
  */
-export interface SubmitWorkflowResponse {
+export interface ScriptRequestInfo {
     /**
-      * 执行结果
+      * 脚本路径
       */
-    Data: SubmitWorkflow;
+    FilePath?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 项目id
       */
-    RequestId?: string;
+    ProjectId?: string;
+    /**
+      * 脚本版本
+      */
+    Version?: string;
+    /**
+      * 操作类型
+      */
+    Operation?: string;
+    /**
+      * 额外信息
+      */
+    ExtraInfo?: string;
+    /**
+      * 桶名称
+      */
+    BucketName?: string;
+    /**
+      * 所属地区
+      */
+    Region?: string;
+    /**
+      * 文件扩展类型
+      */
+    FileExtensionType?: string;
 }
 /**
  * DescribeOrganizationalFunctions返回参数结构体
@@ -11228,6 +11279,15 @@ export interface DescribeInstanceListResponse {
     RequestId?: string;
 }
 /**
+ * UploadContent请求参数结构体
+ */
+export interface UploadContentRequest {
+    /**
+      * 脚本上传信息
+      */
+    ScriptRequestInfo: ScriptRequestInfo;
+}
+/**
  * DescribeTaskReportDetailList请求参数结构体
  */
 export interface DescribeTaskReportDetailListRequest {
@@ -11885,6 +11945,106 @@ export interface DescribeExecStrategyRequest {
       * 项目Id
       */
     ProjectId?: string;
+}
+/**
+ * 开发空间-脚本相关响应
+ */
+export interface ScriptInfoResponse {
+    /**
+      * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId?: string;
+    /**
+      * 脚本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileName?: string;
+    /**
+      * 文件扩展名类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileExtensionType?: string;
+    /**
+      * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+    /**
+      * md5值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Md5Value?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime?: string;
+    /**
+      * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size?: number;
+    /**
+      * 本地路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalPath?: string;
+    /**
+      * 远程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemotePath?: string;
+    /**
+      * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OwnerName?: string;
+    /**
+      * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Owner?: string;
+    /**
+      * 路径深度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathDepth?: number;
+    /**
+      * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId?: string;
+    /**
+      * 附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtraInfo?: string;
+    /**
+      * 本地临时文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalTempPath?: string;
+    /**
+      * 本地压缩文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZipPath?: string;
+    /**
+      * cos桶名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Bucket?: string;
+    /**
+      * cos地区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
 }
 /**
  * CreateHiveTable请求参数结构体

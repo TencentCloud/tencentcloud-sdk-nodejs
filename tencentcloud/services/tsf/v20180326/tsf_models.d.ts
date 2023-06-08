@@ -5302,7 +5302,7 @@ export interface ContainerGroupOther {
       * 健康检查相关字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HealthCheckSettings: Array<HealthCheckSetting>;
+    HealthCheckSettings: HealthCheckSettings;
     /**
       * 服务配置信息是否匹配
 注意：此字段可能返回 null，表示取不到有效值。

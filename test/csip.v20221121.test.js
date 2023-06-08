@@ -68,6 +68,16 @@ it("csip.v20221121.DescribeScanReportList", async function () {
     }
 })
 
+it("csip.v20221121.CreateDomainAndIp", async function () {
+    try {
+       const data = await client.CreateDomainAndIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeSubnetAssets", async function () {
     try {
        const data = await client.DescribeSubnetAssets({})

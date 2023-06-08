@@ -561,8 +561,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发送单条消息
-   */
+     * 发送单条消息
+不支持持久topic
+     */
   async SendMessages(
     req: SendMessagesRequest,
     cb?: (error: string, rep: SendMessagesResponse) => void

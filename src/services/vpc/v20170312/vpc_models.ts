@@ -372,6 +372,7 @@ export interface DescribeNetworkInterfacesRequest {
 <li>eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。</li>
 <li>eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量为云铜，“AU”-服务质量为云银。</li>
 <li>address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。</li>
+<li>public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。</li>
       */
   Filters?: Array<Filter>
 
@@ -1345,7 +1346,7 @@ export interface CreateIp6TranslatorsResponse {
   /**
    * 转换实例的唯一ID数组，形如"ip6-xxxxxxxx"
    */
-  Ip6TranslatorSet: Array<string>
+  Ip6TranslatorSet?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1696,12 +1697,12 @@ export interface TransformAddressResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId: number
+  TaskId?: number
 
   /**
    * 转为弹性公网IP后的唯一ID
    */
-  AddressId: string
+  AddressId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2003,12 +2004,12 @@ export interface DescribeRouteTablesResponse {
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
 
   /**
    * 路由表对象。
    */
-  RouteTableSet: Array<RouteTable>
+  RouteTableSet?: Array<RouteTable>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3893,7 +3894,7 @@ NONEXTHOP：无下一跳；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
 下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination?: string
@@ -6285,7 +6286,7 @@ NONEXTHOP：无下一跳；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
 下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination: string
@@ -6732,7 +6733,7 @@ NONEXTHOP：无下一跳；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
-下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；
+下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
 下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
       */
   NextHopDestination?: string
@@ -6972,7 +6973,7 @@ export interface ModifyIp6AddressesBandwidthResponse {
   /**
    * 任务ID
    */
-  TaskId: string
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

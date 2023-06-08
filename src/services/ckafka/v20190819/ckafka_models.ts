@@ -298,6 +298,17 @@ export interface RowParam {
 }
 
 /**
+ * RouteDTO
+ */
+export interface RouteDTO {
+  /**
+      * RouteId11
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteId?: number
+}
+
+/**
  * Es连接源参数
  */
 export interface EsConnectParam {
@@ -3012,6 +3023,12 @@ export interface OperateResponseData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FlowId: number
+
+  /**
+      * RouteIdDto
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteDTO?: RouteDTO
 }
 
 /**
@@ -6086,34 +6103,89 @@ export interface CreateInstancePostRequest {
   InstanceName: string
 
   /**
-   * 实例带宽
+   * 实例内网峰值带宽。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格。
    */
   BandWidth: number
 
   /**
-   * vpcId，不填默认基础网络
+   * 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
    */
   VpcId?: string
 
   /**
-   * 子网id，vpc网络需要传该参数，基础网络可以不传
+   * 子网id。创建实例默认接入点所在的子网对应的子网 id
    */
   SubnetId?: string
 
   /**
-   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+   * 实例规格。当创建标准版实例时必填，创建专业版实例时不需要填写。1：入门型；2：标准型；3：进阶型；4：容量型；5：高阶型1；6：高阶性2；7：高阶型3；8：高阶型4；9 ：独占型
+   */
+  InstanceType?: number
+
+  /**
+   * 实例日志的默认最长保留时间，单位分钟。不传入该参数时默认为 1440 分钟（1天），最大30天。当 topic 显式设置消息保留时间时，以 topic 保留时间为准
    */
   MsgRetentionTime?: number
 
   /**
-   * 可用区
+   * 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数
+   */
+  ClusterId?: number
+
+  /**
+   * 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1"
+   */
+  KafkaVersion?: string
+
+  /**
+   * 实例类型。"standard"：标准版，"profession"：专业版
+   */
+  SpecificationsType?: string
+
+  /**
+   * 实例硬盘类型，"CLOUD_BASIC"：云硬盘，"CLOUD_SSD"：高速云硬盘。不传默认为 "CLOUD_BASIC"
+   */
+  DiskType?: string
+
+  /**
+   * 实例硬盘大小，需要满足当前实例的计费规格
+   */
+  DiskSize?: number
+
+  /**
+   * 实例最大分区数量，需要满足当前实例的计费规格
+   */
+  Partition?: number
+
+  /**
+   * 实例最大 topic 数量，需要满足当前实例的计费规格
+   */
+  TopicNum?: number
+
+  /**
+   * 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在的子网
    */
   ZoneId?: number
 
   /**
-   * 创建实例时可以选择集群Id, 该入参表示集群Id
+   * 当前实例是否为多可用区实例。
    */
-  ClusterId?: number
+  MultiZoneFlag?: boolean
+
+  /**
+   * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中
+   */
+  ZoneIds?: Array<number>
+
+  /**
+   * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
+   */
+  InstanceNum?: number
+
+  /**
+   * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1
+   */
+  PublicNetworkMonthly?: number
 }
 
 /**

@@ -864,6 +864,16 @@ export interface CloneAccountResponse {
 }
 
 /**
+ * IsolateDCDBInstance请求参数结构体
+ */
+export interface IsolateDCDBInstanceRequest {
+  /**
+   * 实例 ID，格式如：tdsqlshard-avw0207d，与云数据库控制台页面中显示的实例 ID 相同，可使用 查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * IsolateDedicatedDBInstance请求参数结构体
  */
 export interface IsolateDedicatedDBInstanceRequest {
@@ -4433,6 +4443,26 @@ export interface ModifyDBSyncModeRequest {
  * ModifyAccountConfig返回参数结构体
  */
 export interface ModifyAccountConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IsolateDCDBInstance返回参数结构体
+ */
+export interface IsolateDCDBInstanceResponse {
+  /**
+   * 隔离成功实例ID列表。
+   */
+  SuccessInstanceIds?: Array<string>
+
+  /**
+   * 隔离失败实例ID列表。
+   */
+  FailedInstanceIds?: Array<string>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

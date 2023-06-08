@@ -21,6 +21,7 @@ import {
   DescribeDbAssetInfoResponse,
   DescribeDbAssetsRequest,
   DescribeScanReportListRequest,
+  CreateDomainAndIpRequest,
   ScanTaskInfo,
   FilterDataObject,
   CVMAssetVO,
@@ -41,6 +42,7 @@ import {
   DescribeSubnetAssetsRequest,
   AssetBaseInfoResponse,
   DescribeCVMAssetsResponse,
+  CreateDomainAndIpResponse,
   DescribeDbAssetsResponse,
   AddNewBindRoleUserResponse,
   DescribeCVMAssetInfoRequest,
@@ -104,6 +106,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanReportListResponse) => void
   ): Promise<DescribeScanReportListResponse> {
     return this.request("DescribeScanReportList", req, cb)
+  }
+
+  /**
+   * 创建域名、ip相关信息
+   */
+  async CreateDomainAndIp(
+    req: CreateDomainAndIpRequest,
+    cb?: (error: string, rep: CreateDomainAndIpResponse) => void
+  ): Promise<CreateDomainAndIpResponse> {
+    return this.request("CreateDomainAndIp", req, cb)
   }
 
   /**

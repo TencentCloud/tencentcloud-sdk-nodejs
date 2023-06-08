@@ -4627,6 +4627,23 @@ export interface ModifyModelServiceResponse {
 }
 
 /**
+ * 任务建模Pod信息
+ */
+export interface PodInfo {
+  /**
+      * pod名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * pod的IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IP?: string
+}
+
+/**
  * DeleteBatchTask返回参数结构体
  */
 export interface DeleteBatchTaskResponse {
@@ -6167,12 +6184,17 @@ export interface DescribeTrainingTaskPodsResponse {
   /**
    * pod名称列表
    */
-  PodNames: Array<string>
+  PodNames?: Array<string>
 
   /**
    * 数量
    */
-  TotalCount: number
+  TotalCount?: number
+
+  /**
+   * pod详细信息
+   */
+  PodInfoList?: PodInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

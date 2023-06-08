@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyTaskRunStatusResponse,
   TaskGroupAction,
-  TaskMonitor,
+  TaskGroupInstancesExecuteRules,
   TaskConfig,
   DeleteTaskRequest,
   TaskGroup,
@@ -39,6 +39,7 @@ import {
   DescribeTaskListResponse,
   TemplateGroupAction,
   DescribeTemplateListResponse,
+  TaskMonitor,
   TagWithDescribe,
   CreateTaskFromTemplateResponse,
   DeleteTaskResponse,

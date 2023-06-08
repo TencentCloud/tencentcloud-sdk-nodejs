@@ -179,6 +179,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 发送单条消息
+不支持持久topic
      */
     async SendMessages(req, cb) {
         return this.request("SendMessages", req, cb);

@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanReportList", req, cb);
     }
     /**
+     * 创建域名、ip相关信息
+     */
+    async CreateDomainAndIp(req, cb) {
+        return this.request("CreateDomainAndIp", req, cb);
+    }
+    /**
      * 获取子网列表
      */
     async DescribeSubnetAssets(req, cb) {

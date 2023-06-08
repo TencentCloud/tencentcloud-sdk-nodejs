@@ -92,6 +92,7 @@ import {
   ModifyWorkflowScheduleRequest,
   DescribeRuleDataSourcesResponse,
   RegisterEventRequest,
+  UploadContentResponse,
   RuleTemplate,
   DescribeRuleGroupsByPageRequest,
   DescribeDataBasesRequest,
@@ -148,6 +149,7 @@ import {
   CommitIntegrationTaskResponse,
   TaskReportDetail,
   IntegrationTaskInfo,
+  SubmitWorkflowResponse,
   SubmitTaskResponse,
   ModifyFolderRequest,
   DescribeAlarmEventsResponse,
@@ -264,7 +266,7 @@ import {
   CheckIntegrationNodeNameExistsRequest,
   MakeUpTasksNewRequest,
   DescribeDimensionScoreResponse,
-  SubmitWorkflowResponse,
+  ScriptRequestInfo,
   DescribeOrganizationalFunctionsResponse,
   DescribeDataTypesResponse,
   SubmitCustomFunctionRequest,
@@ -450,6 +452,7 @@ import {
   FunctionTypeOrKind,
   DescribeTableSchemaInfoResponse,
   DescribeInstanceListResponse,
+  UploadContentRequest,
   DescribeTaskReportDetailListRequest,
   DescribeProjectResponse,
   StopIntegrationTaskRequest,
@@ -488,6 +491,7 @@ import {
   DescribeMonitorsByPageResponse,
   DescribeInstanceLastLogResponse,
   DescribeExecStrategyRequest,
+  ScriptInfoResponse,
   CreateHiveTableRequest,
   BatchKillIntegrationTaskInstancesResponse,
   ModifyRuleTemplateResponse,
@@ -1765,6 +1769,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchMakeUpIntegrationTasksResponse) => void
   ): Promise<BatchMakeUpIntegrationTasksResponse> {
     return this.request("BatchMakeUpIntegrationTasks", req, cb)
+  }
+
+  /**
+   * 保存任务信息
+   */
+  async UploadContent(
+    req: UploadContentRequest,
+    cb?: (error: string, rep: UploadContentResponse) => void
+  ): Promise<UploadContentResponse> {
+    return this.request("UploadContent", req, cb)
   }
 
   /**

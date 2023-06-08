@@ -143,6 +143,7 @@ import {
   BatchModelAccTask,
   Filter,
   ModifyModelServiceResponse,
+  PodInfo,
   DeleteBatchTaskResponse,
   EngineVersion,
   DescribeBatchTasksRequest,

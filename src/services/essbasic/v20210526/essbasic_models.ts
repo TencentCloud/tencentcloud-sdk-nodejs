@@ -70,7 +70,7 @@ export interface ChannelDeleteSealPoliciesRequest {
   SealId: string
 
   /**
-   * 指定用户ID数组
+   * 指定用户ID数组，电子签系统用户ID
    */
   UserIds: Array<string>
 
@@ -501,7 +501,7 @@ export interface CreateConsoleLoginUrlResponse {
   ConsoleUrl?: string
 
   /**
-   * 子客企业是否已开通腾讯电子签
+   * 子客企业是否已开通腾讯电子签，true-是，false-否
    */
   IsActivated?: boolean
 
@@ -531,7 +531,7 @@ export interface ChannelDeleteRoleUsersRequest {
   RoleId: string
 
   /**
-   * 用户列表
+   * 用户列表，电子签系统的UserId
    */
   UserIds: Array<string>
 
@@ -667,7 +667,7 @@ export interface ChannelCreateFlowRemindsRequest {
  */
 export interface ChannelCreateSealPolicyResponse {
   /**
-   * 最终授权成功的用户ID数组。其他的跳过的是已经授权了的
+   * 最终授权成功的电子签系统用户ID数组。其他的跳过的是已经授权了的
    */
   UserIds?: Array<string>
 
@@ -851,11 +851,6 @@ MobileCheck：手机号验证
   SignBeanTag?: number
 
   /**
-   * 操作者的信息，不用传
-   */
-  Operator?: UserInfo
-
-  /**
    * 被抄送人信息列表
    */
   CcInfos?: Array<CcInfo>
@@ -869,6 +864,11 @@ MobileCheck：手机号验证
    * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
   AutoSignScene?: string
+
+  /**
+   * 操作者的信息，不用传
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -1629,7 +1629,7 @@ export interface CommonFlowApprover {
   OrganizationId?: string
 
   /**
-   * 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同毕传
+   * 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同必传
    */
   OrganizationOpenId?: string
 
@@ -2638,6 +2638,13 @@ HANDWRITE -手写签名
 1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
       */
   ApproverSignTypes?: Array<number>
+
+  /**
+      * 签署ID
+- 发起流程时系统自动补充
+- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
+      */
+  SignId?: string
 }
 
 /**
@@ -3375,7 +3382,7 @@ export interface ChannelCreateUserRolesRequest {
   Agent: Agent
 
   /**
-   * 绑定角色的员工id列表
+   * 绑定角色的员工id列表，电子签的UserId
    */
   UserIds: Array<string>
 
@@ -3823,14 +3830,14 @@ export interface ChannelUpdateSealStatusRequest {
   SealId: string
 
   /**
-   * 操作者的信息
-   */
-  Operator?: UserInfo
-
-  /**
    * 更新印章状态原因说明
    */
   Reason?: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -3927,11 +3934,6 @@ export interface DescribeTemplatesRequest {
   TemplateName?: string
 
   /**
-   * 操作者的信息
-   */
-  Operator?: UserInfo
-
-  /**
    * 是否获取模板预览链接
    */
   WithPreviewUrl?: boolean
@@ -3942,9 +3944,14 @@ export interface DescribeTemplatesRequest {
   WithPdfUrl?: boolean
 
   /**
-   * 模板ID
+   * 对应第三方应用平台企业的模板ID
    */
   ChannelTemplateId?: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -3992,19 +3999,19 @@ export interface ChannelCreateSealPolicyRequest {
   SealId: string
 
   /**
-   * 指定待授权的用户ID数组
+   * 指定待授权的用户ID数组,电子签的用户ID
    */
   UserIds: Array<string>
-
-  /**
-   * 企业机构信息，不用传
-   */
-  Organization?: OrganizationInfo
 
   /**
    * 操作人（用户）信息，不用传
    */
   Operator?: UserInfo
+
+  /**
+   * 企业机构信息，不用传
+   */
+  Organization?: OrganizationInfo
 }
 
 /**
@@ -4401,19 +4408,14 @@ export interface DescribeExtendedServiceAuthInfoResponse {
  */
 export interface ChannelCreateEmbedWebUrlRequest {
   /**
-   * WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程
-   */
-  EmbedType: string
-
-  /**
    * 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
    */
   Agent: Agent
 
   /**
-   * 渠道操作者信息
+   * WEB嵌入资源类型，取值范围：CREATE_SEAL创建印章，CREATE_TEMPLATE创建模板，MODIFY_TEMPLATE修改模板，PREVIEW_TEMPLATE预览模板，PREVIEW_FLOW预览流程
    */
-  Operator?: UserInfo
+  EmbedType: string
 
   /**
    * WEB嵌入的业务资源ID，EmbedType取值MODIFY_TEMPLATE或PREVIEW_TEMPLATE或 PREVIEW_FLOW时BusinessId必填
@@ -4424,6 +4426,11 @@ export interface ChannelCreateEmbedWebUrlRequest {
    * 是否隐藏控件，只有预览模板时生效
    */
   HiddenComponents?: boolean
+
+  /**
+   * 渠道操作者信息
+   */
+  Operator?: UserInfo
 }
 
 /**
