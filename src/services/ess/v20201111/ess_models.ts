@@ -391,6 +391,16 @@ export interface DisableUserAutoSignResponse {
 }
 
 /**
+ * CancelUserAutoSignEnableUrl返回参数结构体
+ */
+export interface CancelUserAutoSignEnableUrlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindEmployeeUserIdWithClientOpenId返回参数结构体
  */
 export interface BindEmployeeUserIdWithClientOpenIdResponse {
@@ -555,7 +565,7 @@ export interface AuthorizedUser {
  */
 export interface CreateConvertTaskApiRequest {
   /**
-   * 资源类型 取值范围doc,docx,html,xls,xlsx之一
+   * 资源类型 支持doc,docx,html,xls,xlsx,jpg,jpeg,png,bmp文件类型
    */
   ResourceType: string
 
@@ -3229,6 +3239,27 @@ export interface RemindFlowRecords {
 }
 
 /**
+ * CancelUserAutoSignEnableUrl请求参数结构体
+ */
+export interface CancelUserAutoSignEnableUrlRequest {
+  /**
+   * 操作人信息，UseId必填
+   */
+  Operator: UserInfo
+
+  /**
+   * 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方
+   */
+  SceneKey: string
+
+  /**
+      * 指定撤销链接的用户指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
+
+      */
+  UserInfo: UserThreeFactor
+}
+
+/**
  * 创建员工的失败数据
  */
 export interface FailedCreateStaffData {
@@ -4546,32 +4577,13 @@ export interface DescribeFlowInfoResponse {
 }
 
 /**
- * 抄送信息
+ * CancelMultiFlowSignQRCode返回参数结构体
  */
-export interface CcInfo {
+export interface CancelMultiFlowSignQRCodeResponse {
   /**
-   * 被抄送人手机号，11位数字
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Mobile?: string
-
-  /**
-   * 被抄送人姓名
-   */
-  Name?: string
-
-  /**
-      * 被抄送人类型,
-0--个人
-1--员工
-      */
-  CcType?: number
-
-  /**
-      * 被抄送人权限
-0--可查看
-1--可查看也可下载
-      */
-  CcPermission?: number
+  RequestId?: string
 }
 
 /**
@@ -4748,11 +4760,30 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
 }
 
 /**
- * CancelMultiFlowSignQRCode返回参数结构体
+ * 抄送信息
  */
-export interface CancelMultiFlowSignQRCodeResponse {
+export interface CcInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 被抄送人手机号，11位数字
    */
-  RequestId?: string
+  Mobile?: string
+
+  /**
+   * 被抄送人姓名
+   */
+  Name?: string
+
+  /**
+      * 被抄送人类型,
+0--个人
+1--员工
+      */
+  CcType?: number
+
+  /**
+      * 被抄送人权限
+0--可查看
+1--可查看也可下载
+      */
+  CcPermission?: number
 }

@@ -1309,7 +1309,7 @@ export interface FilterMapParam {
     Type?: string;
 }
 /**
- * 创建预付费实例返回结构
+ * 预付费实例相关接口返回结构
  */
 export interface CreateInstancePreResp {
     /**
@@ -1326,10 +1326,10 @@ export interface CreateInstancePreResp {
       */
     Data: CreateInstancePreData;
     /**
-      * 删除是时间
+      * 删除时间。目前该参数字段已废弃，将会在未来被删除
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeleteRouteTimestamp: string;
+    DeleteRouteTimestamp?: string;
 }
 /**
  * ModifyDatahubTask返回参数结构体
@@ -1641,10 +1641,15 @@ export interface CreateInstancePreData {
       */
     DealNames: Array<string>;
     /**
-      * 实例Id
+      * 实例Id，当购买多个实例时，默认返回购买的第一个实例 id
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceId: string;
+    /**
+      * 订单和购买实例对应映射列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealNameInstanceIdMapping?: Array<DealInstanceDTO>;
 }
 /**
  * DescribeAppInfo请求参数结构体
@@ -3026,6 +3031,27 @@ export interface DescribeTopicSyncReplicaResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUser请求参数结构体
+ */
+export interface DescribeUserRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * 按照名称过滤
+      */
+    SearchWord?: string;
+    /**
+      * 偏移
+      */
+    Offset?: number;
+    /**
+      * 本次返回个数
+      */
+    Limit?: number;
+}
+/**
  * CreateConnectResource请求参数结构体
  */
 export interface CreateConnectResourceRequest {
@@ -4094,17 +4120,19 @@ export interface DescribeTopicRequest {
     AclRuleName?: string;
 }
 /**
- * CreateToken请求参数结构体
+ * 预付费/后付费接口中，订单和 CKafka 实例映射数据结构
  */
-export interface CreateTokenRequest {
+export interface DealInstanceDTO {
     /**
-      * 实例ID
+      * 订单流水
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    DealName?: string;
     /**
-      * 用户名
+      * 订单流水对应购买的 CKafka 实例 id 列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    User: string;
+    InstanceIdList?: Array<string>;
 }
 /**
  * CreatePartition请求参数结构体
@@ -7377,6 +7405,10 @@ export interface CreateInstancePreRequest {
       * 可用区列表，购买多可用区实例时为必填项
       */
     ZoneIds?: Array<number>;
+    /**
+      * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1。默认值为 0
+      */
+    PublicNetworkMonthly?: number;
 }
 /**
  * DeleteTopicIpWhiteList请求参数结构体
@@ -7543,25 +7575,17 @@ export interface DescribeTaskStatusRequest {
     FlowId: number;
 }
 /**
- * DescribeUser请求参数结构体
+ * CreateToken请求参数结构体
  */
-export interface DescribeUserRequest {
+export interface CreateTokenRequest {
     /**
-      * 实例Id
+      * 实例ID
       */
     InstanceId: string;
     /**
-      * 按照名称过滤
+      * 用户名
       */
-    SearchWord?: string;
-    /**
-      * 偏移
-      */
-    Offset?: number;
-    /**
-      * 本次返回个数
-      */
-    Limit?: number;
+    User: string;
 }
 /**
  * Datahub主题列表

@@ -1548,6 +1548,11 @@ export interface SlowLogTopSqlItem {
    * 平均扫描行数
    */
   RowsExaminedAvg: number
+
+  /**
+   * SOL模板的MD5值
+   */
+  Md5?: string
 }
 
 /**

@@ -1169,7 +1169,7 @@ export interface CompleteMigrateJobResponse {
     RequestId?: string;
 }
 /**
- * 数据数据订阅的对象
+ * 数据订阅的对象
  */
 export interface SubscribeObject {
     /**

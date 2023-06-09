@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackUpSchedule", req, cb);
     }
     /**
+     * 销毁集群 open api
+     */
+    async DestroyInstance(req, cb) {
+        return this.request("DestroyInstance", req, cb);
+    }
+    /**
      * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
      */
     async ScaleUpInstance(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterConfigs", req, cb);
     }
     /**
-     * 销毁集群 open api
+     * 获取实例列表，供外部sdk使用
      */
-    async DestroyInstance(req, cb) {
-        return this.request("DestroyInstance", req, cb);
+    async DescribeInstancesNew(req, cb) {
+        return this.request("DescribeInstancesNew", req, cb);
     }
     /**
      * 根据实例ID查询某个实例的具体信息

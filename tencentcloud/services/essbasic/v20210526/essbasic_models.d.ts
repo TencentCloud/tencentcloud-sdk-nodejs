@@ -439,13 +439,17 @@ export interface ChannelDeleteRoleUsersRequest {
       */
     RoleId: string;
     /**
-      * 用户列表，电子签系统的UserId
+      * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数
       */
-    UserIds: Array<string>;
+    UserIds?: Array<string>;
     /**
       * 操作人信息
       */
     Operator?: UserInfo;
+    /**
+      * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数
+      */
+    OpenIds?: Array<string>;
 }
 /**
  * ChannelCreateUserRoles返回参数结构体
@@ -2863,13 +2867,17 @@ export interface ChannelCreateUserRolesRequest {
       */
     Agent: Agent;
     /**
-      * 绑定角色的员工id列表，电子签的UserId
-      */
-    UserIds: Array<string>;
-    /**
       * 绑定角色的角色id列表
       */
     RoleIds: Array<string>;
+    /**
+      * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数
+      */
+    UserIds?: Array<string>;
+    /**
+      * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数
+      */
+    OpenIds?: Array<string>;
     /**
       * 操作者信息
       */

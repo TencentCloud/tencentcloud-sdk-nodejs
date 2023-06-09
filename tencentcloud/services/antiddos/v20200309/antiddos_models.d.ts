@@ -1740,7 +1740,7 @@ export interface DescribeNewL7RulesRequest {
       */
     Ip?: string;
     /**
-      * 一页条数，填0表示不分页
+      * 一页条数，默认值100，最大值100，超过100最大返回100条
       */
     Limit?: number;
     /**

@@ -3108,7 +3108,7 @@ export interface StaffBuyInfo {
   BuyTime: number
 
   /**
-   * 截至时间戳
+   * 截止时间戳
    */
   EndTime: number
 }

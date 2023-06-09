@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, DeleteOrganizationMembersResponse, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, MoveOrganizationNodeMembersResponse, DeleteOrganizationMembersRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeResponse, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationNodesResponse, DescribeOrganizationMemberAuthAccountsResponse, CreateOrganizationMemberRequest, DescribeOrganizationMembersRequest, UpdateOrganizationNodeRequest } from "./organization_models";
+import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersResponse, MoveOrganizationNodeMembersResponse, DescribeOrganizationMemberAuthIdentitiesRequest, AddOrganizationMemberEmailResponse, UpdateOrganizationNodeResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationMembersRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, AddOrganizationMemberEmailRequest, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationNodesResponse, DescribeOrganizationMemberEmailBindRequest, DescribeOrganizationMemberAuthAccountsResponse, CreateOrganizationMemberRequest, DescribeOrganizationMembersRequest, UpdateOrganizationMemberEmailBindRequest } from "./organization_models";
 /**
  * organization client
  * @class
@@ -53,6 +53,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationNodes(req: DescribeOrganizationNodesRequest, cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void): Promise<DescribeOrganizationNodesResponse>;
     /**
+     * 修改绑定成员邮箱
+     */
+    UpdateOrganizationMemberEmailBind(req: UpdateOrganizationMemberEmailBindRequest, cb?: (error: string, rep: UpdateOrganizationMemberEmailBindResponse) => void): Promise<UpdateOrganizationMemberEmailBindResponse>;
+    /**
      * 添加企业组织节点
      */
     AddOrganizationNode(req: AddOrganizationNodeRequest, cb?: (error: string, rep: AddOrganizationNodeResponse) => void): Promise<AddOrganizationNodeResponse>;
@@ -76,4 +80,12 @@ export declare class Client extends AbstractClient {
      * 获取组织成员访问身份列表
      */
     ListOrganizationIdentity(req: ListOrganizationIdentityRequest, cb?: (error: string, rep: ListOrganizationIdentityResponse) => void): Promise<ListOrganizationIdentityResponse>;
+    /**
+     * 添加组织成员邮箱
+     */
+    AddOrganizationMemberEmail(req: AddOrganizationMemberEmailRequest, cb?: (error: string, rep: AddOrganizationMemberEmailResponse) => void): Promise<AddOrganizationMemberEmailResponse>;
+    /**
+     * 查询成员邮箱绑定详细信息
+     */
+    DescribeOrganizationMemberEmailBind(req: DescribeOrganizationMemberEmailBindRequest, cb?: (error: string, rep: DescribeOrganizationMemberEmailBindResponse) => void): Promise<DescribeOrganizationMemberEmailBindResponse>;
 }

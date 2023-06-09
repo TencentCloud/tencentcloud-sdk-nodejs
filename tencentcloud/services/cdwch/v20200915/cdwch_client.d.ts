@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DestroyInstanceResponse, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, ModifyInstanceKeyValConfigsResponse, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeCkSqlApisRequest, DescribeInstanceClustersRequest, OpenBackUpRequest, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, DescribeClusterConfigsRequest, ModifyInstanceKeyValConfigsRequest, ScaleOutInstanceRequest, CreateBackUpScheduleResponse, DescribeInstanceResponse, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, CreateBackUpScheduleRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DestroyInstanceResponse, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, ModifyInstanceKeyValConfigsResponse, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeCkSqlApisRequest, DescribeInstanceClustersRequest, OpenBackUpRequest, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, DescribeInstancesNewRequest, DescribeClusterConfigsRequest, ModifyInstanceKeyValConfigsRequest, DescribeInstancesNewResponse, ScaleOutInstanceRequest, CreateBackUpScheduleResponse, DescribeInstanceResponse, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, CreateBackUpScheduleRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 创建或者修改备份策略
      */
     CreateBackUpSchedule(req: CreateBackUpScheduleRequest, cb?: (error: string, rep: CreateBackUpScheduleResponse) => void): Promise<CreateBackUpScheduleResponse>;
+    /**
+     * 销毁集群 open api
+     */
+    DestroyInstance(req: DestroyInstanceRequest, cb?: (error: string, rep: DestroyInstanceResponse) => void): Promise<DestroyInstanceResponse>;
     /**
      * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
      */
@@ -52,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterConfigs(req: DescribeClusterConfigsRequest, cb?: (error: string, rep: DescribeClusterConfigsResponse) => void): Promise<DescribeClusterConfigsResponse>;
     /**
-     * 销毁集群 open api
+     * 获取实例列表，供外部sdk使用
      */
-    DestroyInstance(req: DestroyInstanceRequest, cb?: (error: string, rep: DestroyInstanceResponse) => void): Promise<DestroyInstanceResponse>;
+    DescribeInstancesNew(req: DescribeInstancesNewRequest, cb?: (error: string, rep: DescribeInstancesNewResponse) => void): Promise<DescribeInstancesNewResponse>;
     /**
      * 根据实例ID查询某个实例的具体信息
      */

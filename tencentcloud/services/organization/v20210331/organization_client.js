@@ -95,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationNodes", req, cb);
     }
     /**
+     * 修改绑定成员邮箱
+     */
+    async UpdateOrganizationMemberEmailBind(req, cb) {
+        return this.request("UpdateOrganizationMemberEmailBind", req, cb);
+    }
+    /**
      * 添加企业组织节点
      */
     async AddOrganizationNode(req, cb) {
@@ -129,6 +135,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListOrganizationIdentity(req, cb) {
         return this.request("ListOrganizationIdentity", req, cb);
+    }
+    /**
+     * 添加组织成员邮箱
+     */
+    async AddOrganizationMemberEmail(req, cb) {
+        return this.request("AddOrganizationMemberEmail", req, cb);
+    }
+    /**
+     * 查询成员邮箱绑定详细信息
+     */
+    async DescribeOrganizationMemberEmailBind(req, cb) {
+        return this.request("DescribeOrganizationMemberEmailBind", req, cb);
     }
 }
 exports.Client = Client;

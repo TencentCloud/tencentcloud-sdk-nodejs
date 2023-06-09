@@ -833,6 +833,48 @@ export interface DomainInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OwnerNick: string
+
+  /**
+      * 是否在付费套餐宽限期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsGracePeriod?: string
+
+  /**
+      * 是否在付费套餐缓冲期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipBuffered?: string
+
+  /**
+      * VIP套餐有效期开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipStartAt?: string
+
+  /**
+      * VIP套餐有效期结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipEndAt?: string
+
+  /**
+      * VIP套餐自动续费标识。可能的值为：default-默认；no-不自动续费；yes-自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipAutoRenew?: string
+
+  /**
+      * VIP套餐资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VipResourceId?: string
+
+  /**
+      * 是否是子域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsSubDomain?: boolean
 }
 
 /**

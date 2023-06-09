@@ -3884,6 +3884,10 @@ export interface AsrFullTextConfigureInfoForUpdate {
 <li>vtt：生成 WebVTT 字幕文件。</li>
       */
     SubtitleFormat?: string;
+    /**
+      * 视频源语言。
+      */
+    SourceLanguage?: string;
 }
 /**
  * CreatePersonSample返回参数结构体
@@ -6147,7 +6151,7 @@ export interface CreateAIRecognitionTemplateResponse {
     /**
       * 视频内容识别模板唯一标识。
       */
-    Definition: number;
+    Definition?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7839,6 +7843,10 @@ export interface ModifyAIRecognitionTemplateRequest {
       * 语音关键词识别控制参数。
       */
     AsrWordsConfigure?: AsrWordsConfigureInfoForUpdate;
+    /**
+      * 语音翻译控制参数。
+      */
+    TranslateConfigure?: TranslateConfigureInfoForUpdate;
 }
 /**
  * ParseNotification返回参数结构体
@@ -8173,6 +8181,10 @@ export interface AsrFullTextConfigureInfo {
 <li>vtt：生成 WebVTT 字幕文件。</li>
       */
     SubtitleFormat?: string;
+    /**
+      * 视频源语言。
+      */
+    SourceLanguage?: string;
 }
 /**
  * 去伪影（毛刺）配置
@@ -8226,6 +8238,10 @@ export interface CreateAIRecognitionTemplateRequest {
       * 语音关键词识别控制参数。
       */
     AsrWordsConfigure?: AsrWordsConfigureInfo;
+    /**
+      * 语音翻译控制参数。
+      */
+    TranslateConfigure?: TranslateConfigureInfo;
 }
 /**
  * DescribeTaskDetail请求参数结构体
@@ -10619,6 +10635,25 @@ export interface TerrorismImgReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
+ * 语音翻译任务控制参数
+ */
+export interface TranslateConfigureInfo {
+    /**
+      * 语音翻译任务开关，可选值：
+<li>ON：开启智能语音翻译任务；</li>
+<li>OFF：关闭智能语音翻译任务。</li>
+      */
+    Switch: string;
+    /**
+      * 视频源语言。
+      */
+    SourceLanguage?: string;
+    /**
+      * 翻译目标语言。
+      */
+    DestinationLanguage?: string;
+}
+/**
  * 传输流媒体的音频数据。
  */
 export interface FlowMediaAudio {
@@ -10660,7 +10695,7 @@ export interface DescribeTranscodeTemplatesRequest {
       */
     ContainerType?: string;
     /**
-      * 极速高清过滤条件，用于过滤普通转码或极速高清转码模板，可选值：
+      * （建议使用TranscodeType代替）极速高清过滤条件，用于过滤普通转码或极速高清转码模板，可选值：
 <li>Common：普通转码模板；</li>
 <li>TEHD：极速高清模板。</li>
       */
@@ -10676,9 +10711,12 @@ export interface DescribeTranscodeTemplatesRequest {
     /**
       * 模板类型（替换旧版本 TEHDType），可选值：
 <li>Common：普通转码模板；</li>
-<li>TEHD：极速高清模板。</li>
+<li>TEHD：视频极速高清，老的类型（建议使用 TEHD-100） 。</li>
+<li>TEHD-100：视频极速高清</li>
+<li>TEHD-200：音频极速高清</li>
 <li>Enhance：音视频增强模板。</li>
 默认空，不限制类型。
+
       */
     TranscodeType?: string;
 }
@@ -11563,11 +11601,11 @@ export interface DescribeTranscodeTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount: number;
+    TotalCount?: number;
     /**
       * 转码模板详情列表。
       */
-    TranscodeTemplateSet: Array<TranscodeTemplate>;
+    TranscodeTemplateSet?: Array<TranscodeTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11752,6 +11790,25 @@ export interface CreateAnimatedGraphicsTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 语音翻译任务控制参数
+ */
+export interface TranslateConfigureInfoForUpdate {
+    /**
+      * 语音翻译任务开关，可选值：
+<li>ON：开启智能语音翻译任务；</li>
+<li>OFF：关闭智能语音翻译任务。</li>
+      */
+    Switch?: string;
+    /**
+      * 视频源语言。
+      */
+    SourceLanguage?: string;
+    /**
+      * 翻译目标语言。
+      */
+    DestinationLanguage?: string;
 }
 /**
  * 采样截图模板详情

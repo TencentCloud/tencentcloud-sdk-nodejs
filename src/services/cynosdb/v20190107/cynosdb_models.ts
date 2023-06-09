@@ -5897,7 +5897,7 @@ export interface SwitchProxyVpcResponse {
  */
 export interface DescribeParamTemplateDetailRequest {
   /**
-   * 参数模版ID
+   * 参数模板ID
    */
   TemplateId: number
 }
@@ -7412,6 +7412,12 @@ pausing
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourcePackages?: Array<ResourcePackage>
+
+  /**
+      * 自动续费标识，1为自动续费，0为到期不续
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewFlag?: number
 }
 
 /**
@@ -7983,17 +7989,17 @@ export interface DescribeAccountAllGrantPrivilegesRequest {
  */
 export interface DescribeParamTemplateDetailResponse {
   /**
-   * 参数模版ID
+   * 参数模板ID
    */
   TemplateId?: number
 
   /**
-   * 参数模版名称
+   * 参数模板名称
    */
   TemplateName?: string
 
   /**
-   * 参数模版描述
+   * 参数模板描述
    */
   TemplateDescription?: string
 

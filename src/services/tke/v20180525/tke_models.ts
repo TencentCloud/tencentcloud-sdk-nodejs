@@ -612,6 +612,11 @@ export interface ClusterLevelChangeRecord {
   TriggerType: string
 
   /**
+   * 创建时间
+   */
+  CreatedAt?: string
+
+  /**
    * 开始时间
    */
   StartedAt: string

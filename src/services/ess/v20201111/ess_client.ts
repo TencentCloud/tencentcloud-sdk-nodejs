@@ -33,6 +33,7 @@ import {
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
   DisableUserAutoSignResponse,
+  CancelUserAutoSignEnableUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
   DescribeIntegrationRolesRequest,
@@ -123,6 +124,7 @@ import {
   CreateUserAutoSignEnableUrlRequest,
   DescribeIntegrationMainOrganizationUserResponse,
   RemindFlowRecords,
+  CancelUserAutoSignEnableUrlRequest,
   FailedCreateStaffData,
   ApproverRestriction,
   DeleteSealPoliciesRequest,
@@ -162,13 +164,13 @@ import {
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoRequest,
   DescribeFlowInfoResponse,
-  CcInfo,
+  CancelMultiFlowSignQRCodeResponse,
   CreateFlowResponse,
   DescribeUserAutoSignStatusRequest,
   ReleasedApprover,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
-  CancelMultiFlowSignQRCodeResponse,
+  CcInfo,
 } from "./ess_models"
 
 /**
@@ -583,7 +585,7 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-   * 上传了word、excel文件后，通过该接口发起文件转换任务，将word、excel文件转换为pdf文件。
+   * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
    */
   async CreateConvertTaskApi(
     req: CreateConvertTaskApiRequest,
@@ -703,6 +705,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: CreateSchemeUrlResponse) => void
   ): Promise<CreateSchemeUrlResponse> {
     return this.request("CreateSchemeUrl", req, cb)
+  }
+
+  /**
+   * 此接口（CancelUserAutoSignEnableUrl）用来撤销发送给个人用户的自动签开通链接，撤销后对应的个人用户开通链接失效。若个人用户已经完成开通，将无法撤销。（处方单场景专用，使用此接口请与客户经理确认）
+   */
+  async CancelUserAutoSignEnableUrl(
+    req: CancelUserAutoSignEnableUrlRequest,
+    cb?: (error: string, rep: CancelUserAutoSignEnableUrlResponse) => void
+  ): Promise<CancelUserAutoSignEnableUrlResponse> {
+    return this.request("CancelUserAutoSignEnableUrl", req, cb)
   }
 
   /**

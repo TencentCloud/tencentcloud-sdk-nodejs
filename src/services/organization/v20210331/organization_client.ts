@@ -21,9 +21,13 @@ import {
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
   BindOrganizationMemberAuthAccountRequest,
+  UpdateOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersResponse,
   OrgMember,
+  MoveOrganizationNodeMembersResponse,
   DescribeOrganizationMemberAuthIdentitiesRequest,
+  AddOrganizationMemberEmailResponse,
+  UpdateOrganizationNodeResponse,
   CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
   DescribeOrganizationNodesRequest,
@@ -32,12 +36,13 @@ import {
   MoveOrganizationNodeMembersRequest,
   ListOrganizationIdentityRequest,
   AuthNode,
-  MoveOrganizationNodeMembersResponse,
+  DescribeOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersRequest,
   DescribeOrganizationMemberPoliciesResponse,
   DeleteOrganizationNodesRequest,
   AddOrganizationNodeResponse,
   IdentityPolicy,
+  AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DescribeOrganizationMembersResponse,
@@ -49,10 +54,11 @@ import {
   DescribeOrganizationMemberAuthIdentitiesResponse,
   OrgMemberPolicy,
   DescribeOrganizationAuthNodeRequest,
-  UpdateOrganizationNodeResponse,
+  UpdateOrganizationNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
   CancelOrganizationMemberAuthAccountRequest,
   DeleteOrganizationNodesResponse,
+  DescribeOrganizationMemberEmailBindRequest,
   DescribeOrganizationMemberAuthAccountsResponse,
   OrgMemberAuthAccount,
   OrgMemberAuthIdentity,
@@ -61,7 +67,7 @@ import {
   OrgIdentity,
   DescribeOrganizationMembersRequest,
   MemberIdentity,
-  UpdateOrganizationNodeRequest,
+  UpdateOrganizationMemberEmailBindRequest,
   OrgNode,
 } from "./organization_models"
 
@@ -186,6 +192,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改绑定成员邮箱
+   */
+  async UpdateOrganizationMemberEmailBind(
+    req: UpdateOrganizationMemberEmailBindRequest,
+    cb?: (error: string, rep: UpdateOrganizationMemberEmailBindResponse) => void
+  ): Promise<UpdateOrganizationMemberEmailBindResponse> {
+    return this.request("UpdateOrganizationMemberEmailBind", req, cb)
+  }
+
+  /**
    * 添加企业组织节点
    */
   async AddOrganizationNode(
@@ -243,5 +259,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
   ): Promise<ListOrganizationIdentityResponse> {
     return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 添加组织成员邮箱
+   */
+  async AddOrganizationMemberEmail(
+    req: AddOrganizationMemberEmailRequest,
+    cb?: (error: string, rep: AddOrganizationMemberEmailResponse) => void
+  ): Promise<AddOrganizationMemberEmailResponse> {
+    return this.request("AddOrganizationMemberEmail", req, cb)
+  }
+
+  /**
+   * 查询成员邮箱绑定详细信息
+   */
+  async DescribeOrganizationMemberEmailBind(
+    req: DescribeOrganizationMemberEmailBindRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberEmailBindResponse) => void
+  ): Promise<DescribeOrganizationMemberEmailBindResponse> {
+    return this.request("DescribeOrganizationMemberEmailBind", req, cb)
   }
 }

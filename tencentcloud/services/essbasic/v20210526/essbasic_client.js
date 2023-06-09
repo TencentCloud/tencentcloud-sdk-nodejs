@@ -122,7 +122,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDescribeOrganizationSeals", req, cb);
     }
     /**
-     * 删除员工绑定角色
+     * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
      */
     async ChannelDeleteRoleUsers(req, cb) {
         return this.request("ChannelDeleteRoleUsers", req, cb);
@@ -297,7 +297,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
     /**
-     * 绑定员工角色
+     * 通过此接口，绑定员工角色，支持以电子签userId、客户系统userId两种方式调用。
      */
     async ChannelCreateUserRoles(req, cb) {
         return this.request("ChannelCreateUserRoles", req, cb);

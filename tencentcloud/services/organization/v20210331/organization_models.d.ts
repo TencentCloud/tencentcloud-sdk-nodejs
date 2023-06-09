@@ -48,6 +48,15 @@ export interface BindOrganizationMemberAuthAccountRequest {
     OrgSubAccountUins: Array<number>;
 }
 /**
+ * UpdateOrganizationMemberEmailBind返回参数结构体
+ */
+export interface UpdateOrganizationMemberEmailBindResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteOrganizationMembers返回参数结构体
  */
 export interface DeleteOrganizationMembersResponse {
@@ -147,6 +156,15 @@ export interface OrgMember {
     PermissionStatus: string;
 }
 /**
+ * MoveOrganizationNodeMembers返回参数结构体
+ */
+export interface MoveOrganizationNodeMembersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeOrganizationMemberAuthIdentities请求参数结构体
  */
 export interface DescribeOrganizationMemberAuthIdentitiesRequest {
@@ -162,6 +180,24 @@ export interface DescribeOrganizationMemberAuthIdentitiesRequest {
       * 组织成员Uin。
       */
     MemberUin: number;
+}
+/**
+ * AddOrganizationMemberEmail返回参数结构体
+ */
+export interface AddOrganizationMemberEmailResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateOrganizationNode返回参数结构体
+ */
+export interface UpdateOrganizationNodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateOrganizationMemberPolicy请求参数结构体
@@ -292,9 +328,54 @@ export interface AuthNode {
     Manager: MemberMainInfo;
 }
 /**
- * MoveOrganizationNodeMembers返回参数结构体
+ * DescribeOrganizationMemberEmailBind返回参数结构体
  */
-export interface MoveOrganizationNodeMembersResponse {
+export interface DescribeOrganizationMemberEmailBindResponse {
+    /**
+      * 绑定ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindId: number;
+    /**
+      * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyTime: string;
+    /**
+      * 邮箱地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Email: string;
+    /**
+      * 手机号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
+    /**
+      * 绑定状态    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindStatus: string;
+    /**
+      * 绑定时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindTime: string;
+    /**
+      * 失败说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 安全手机绑定状态  未绑定：0，已绑定：1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhoneBind: number;
+    /**
+      * 国际区号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CountryCode: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -362,6 +443,27 @@ export interface IdentityPolicy {
       * 策略名称
       */
     PolicyName: string;
+}
+/**
+ * AddOrganizationMemberEmail请求参数结构体
+ */
+export interface AddOrganizationMemberEmailRequest {
+    /**
+      * 成员Uin
+      */
+    MemberUin: number;
+    /**
+      * 邮箱地址
+      */
+    Email: string;
+    /**
+      * 国际区号
+      */
+    CountryCode: string;
+    /**
+      * 手机号
+      */
+    Phone: string;
 }
 /**
  * ListOrganizationIdentity返回参数结构体
@@ -650,13 +752,21 @@ export interface DescribeOrganizationAuthNodeRequest {
     AuthName?: string;
 }
 /**
- * UpdateOrganizationNode返回参数结构体
+ * UpdateOrganizationNode请求参数结构体
  */
-export interface UpdateOrganizationNodeResponse {
+export interface UpdateOrganizationNodeRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 节点ID。
       */
-    RequestId?: string;
+    NodeId: number;
+    /**
+      * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+      */
+    Name?: string;
+    /**
+      * 备注。
+      */
+    Remark?: string;
 }
 /**
  * DescribeOrganizationMemberAuthAccounts请求参数结构体
@@ -704,6 +814,15 @@ export interface DeleteOrganizationNodesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeOrganizationMemberEmailBind请求参数结构体
+ */
+export interface DescribeOrganizationMemberEmailBindRequest {
+    /**
+      * 成员Uin
+      */
+    MemberUin: number;
 }
 /**
  * DescribeOrganizationMemberAuthAccounts返回参数结构体
@@ -954,21 +1073,29 @@ export interface MemberIdentity {
     IdentityAliasName: string;
 }
 /**
- * UpdateOrganizationNode请求参数结构体
+ * UpdateOrganizationMemberEmailBind请求参数结构体
  */
-export interface UpdateOrganizationNodeRequest {
+export interface UpdateOrganizationMemberEmailBindRequest {
     /**
-      * 节点ID。
+      * 成员Uin
       */
-    NodeId: number;
+    MemberUin: number;
     /**
-      * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+      * 绑定ID
       */
-    Name?: string;
+    BindId: number;
     /**
-      * 备注。
+      * 邮箱
       */
-    Remark?: string;
+    Email: string;
+    /**
+      * 国际区号
+      */
+    CountryCode: string;
+    /**
+      * 手机号
+      */
+    Phone: string;
 }
 /**
  * 企业组织单元

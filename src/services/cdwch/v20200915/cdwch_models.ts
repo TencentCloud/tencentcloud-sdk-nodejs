@@ -977,67 +977,18 @@ export interface ServiceInfo {
 }
 
 /**
- * 资源规格描述信息
+ * kv配置，多层级item
  */
-export interface ResourceSpec {
+export interface MapConfigItem {
   /**
-   * 规格名称，例如“SCH1"
+   * key
    */
-  Name: string
+  ConfKey: string
 
   /**
-   * cpu核数
+   * 列表
    */
-  Cpu: number
-
-  /**
-   * 内存大小，单位G
-   */
-  Mem: number
-
-  /**
-   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
-   */
-  Type: string
-
-  /**
-   * 系统盘描述信息
-   */
-  SystemDisk: DiskSpec
-
-  /**
-   * 数据盘描述信息
-   */
-  DataDisk: DiskSpec
-
-  /**
-   * 最大节点数目限制
-   */
-  MaxNodeSize: number
-
-  /**
-      * 是否可用，false代表售罄
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Available: boolean
-
-  /**
-      * 规格描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ComputeSpecDesc: string
-
-  /**
-      * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DisplayName: string
-
-  /**
-      * 库存数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceQuota: number
+  Items: Array<InstanceConfigInfo>
 }
 
 /**
@@ -1091,6 +1042,36 @@ export interface DiskSpec {
 }
 
 /**
+ * DescribeInstancesNew请求参数结构体
+ */
+export interface DescribeInstancesNewRequest {
+  /**
+   * 搜索的集群id名称
+   */
+  SearchInstanceId?: string
+
+  /**
+   * 搜索的集群name
+   */
+  SearchInstanceName?: string
+
+  /**
+   * 分页参数，第一页为0，第二页为10
+   */
+  Offset?: number
+
+  /**
+   * 分页参数，分页步长，默认为10
+   */
+  Limit?: number
+
+  /**
+   * 搜索标签列表
+   */
+  SearchTags?: Array<SearchTags>
+}
+
+/**
  * DescribeClusterConfigs请求参数结构体
  */
 export interface DescribeClusterConfigsRequest {
@@ -1136,18 +1117,23 @@ export interface ModifyInstanceKeyValConfigsRequest {
 }
 
 /**
- * kv配置，多层级item
+ * DescribeInstancesNew返回参数结构体
  */
-export interface MapConfigItem {
+export interface DescribeInstancesNewResponse {
   /**
-   * key
+   * 实例总数
    */
-  ConfKey: string
+  TotalCount?: number
 
   /**
-   * 列表
+   * 实例数组
    */
-  Items: Array<InstanceConfigInfo>
+  InstancesList?: Array<InstanceInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1214,6 +1200,90 @@ export interface ScaleOutInstanceRequest {
    * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔，缩容的时候必填
    */
   ReduceShardInfo?: Array<string>
+}
+
+/**
+ * 资源规格描述信息
+ */
+export interface ResourceSpec {
+  /**
+   * 规格名称，例如“SCH1"
+   */
+  Name: string
+
+  /**
+   * cpu核数
+   */
+  Cpu: number
+
+  /**
+   * 内存大小，单位G
+   */
+  Mem: number
+
+  /**
+   * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
+   */
+  Type: string
+
+  /**
+   * 系统盘描述信息
+   */
+  SystemDisk: DiskSpec
+
+  /**
+   * 数据盘描述信息
+   */
+  DataDisk: DiskSpec
+
+  /**
+   * 最大节点数目限制
+   */
+  MaxNodeSize: number
+
+  /**
+      * 是否可用，false代表售罄
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Available: boolean
+
+  /**
+      * 规格描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComputeSpecDesc: string
+
+  /**
+      * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisplayName: string
+
+  /**
+      * 库存数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceQuota: number
+}
+
+/**
+ * 列表页搜索的标记列表
+ */
+export interface SearchTags {
+  /**
+   * 标签的键
+   */
+  TagKey?: string
+
+  /**
+   * 标签的值
+   */
+  TagValue?: string
+
+  /**
+   * 1表示只输入标签的键，没有输入值；0表示输入键时且输入值
+   */
+  AllValue?: number
 }
 
 /**

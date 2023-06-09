@@ -49,14 +49,17 @@ import {
   ScaleUpInstanceRequest,
   DescribeInstanceKeyValConfigsResponse,
   ServiceInfo,
-  ResourceSpec,
+  MapConfigItem,
   ModifyClusterConfigsResponse,
   DiskSpec,
+  DescribeInstancesNewRequest,
   DescribeClusterConfigsRequest,
   ModifyInstanceKeyValConfigsRequest,
-  MapConfigItem,
+  DescribeInstancesNewResponse,
   AttachCBSSpec,
   ScaleOutInstanceRequest,
+  ResourceSpec,
+  SearchTags,
   CreateBackUpScheduleResponse,
   InstanceConfigItem,
   DescribeInstanceResponse,
@@ -106,6 +109,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBackUpScheduleResponse) => void
   ): Promise<CreateBackUpScheduleResponse> {
     return this.request("CreateBackUpSchedule", req, cb)
+  }
+
+  /**
+   * 销毁集群 open api
+   */
+  async DestroyInstance(
+    req: DestroyInstanceRequest,
+    cb?: (error: string, rep: DestroyInstanceResponse) => void
+  ): Promise<DestroyInstanceResponse> {
+    return this.request("DestroyInstance", req, cb)
   }
 
   /**
@@ -199,13 +212,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁集群 open api
+   * 获取实例列表，供外部sdk使用
    */
-  async DestroyInstance(
-    req: DestroyInstanceRequest,
-    cb?: (error: string, rep: DestroyInstanceResponse) => void
-  ): Promise<DestroyInstanceResponse> {
-    return this.request("DestroyInstance", req, cb)
+  async DescribeInstancesNew(
+    req: DescribeInstancesNewRequest,
+    cb?: (error: string, rep: DescribeInstancesNewResponse) => void
+  ): Promise<DescribeInstancesNewResponse> {
+    return this.request("DescribeInstancesNew", req, cb)
   }
 
   /**

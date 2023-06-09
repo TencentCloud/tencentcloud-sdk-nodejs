@@ -2418,6 +2418,10 @@ export interface BizLicenseOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否返回黑白复印件告警码，默认为false
+      */
+    EnableCopyWarn?: boolean;
 }
 /**
  * MixedInvoiceDetect返回参数结构体
@@ -8638,16 +8642,12 @@ export interface BizLicenseOCRResponse {
     SetDate?: string;
     /**
       * Code 告警码列表和释义：
--20001 非营业执照
 -9102 黑白复印件告警
-注：告警码可以同时存在多个
       */
     RecognizeWarnCode?: Array<number>;
     /**
       * 告警码说明：
-OCR_WARNING_TYPE_NOT_MATCH 非营业执照
 WARN_COPY_CARD 黑白复印件告警
-注：告警信息可以同时存在多个
       */
     RecognizeWarnMsg?: Array<string>;
     /**

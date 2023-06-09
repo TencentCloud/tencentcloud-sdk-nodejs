@@ -5814,6 +5814,15 @@ off：关闭
   Switch: string
 
   /**
+      * 鉴权算法，取值有：
+md5：按MD5算法取hash值
+sha256：按SHA-256算法取hash值
+默认为 md5
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthAlgorithm?: string
+
+  /**
       * 时间戳防盗链模式 A 配置
 注意：此字段可能返回 null，表示取不到有效值。
       */

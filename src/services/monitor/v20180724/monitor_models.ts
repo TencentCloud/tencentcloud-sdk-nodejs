@@ -1966,6 +1966,16 @@ export interface BindingPolicyTagRequest {
    * 批量绑定标签
    */
   BatchTag?: Array<PolicyTag>
+
+  /**
+   * 是否同步eb
+   */
+  EbEventFlag?: number
+
+  /**
+   * 事件配置的告警
+   */
+  EbSubject?: string
 }
 
 /**

@@ -45,7 +45,7 @@ export interface BatchSendEmailRequest {
       */
     TimedParam?: TimedEmailParam;
     /**
-      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语
+      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
       */
     Unsubscribe?: string;
     /**
@@ -312,7 +312,7 @@ export interface SendEmailRequest {
       */
     Attachments?: Array<Attachment>;
     /**
-      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语
+      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
       */
     Unsubscribe?: string;
     /**

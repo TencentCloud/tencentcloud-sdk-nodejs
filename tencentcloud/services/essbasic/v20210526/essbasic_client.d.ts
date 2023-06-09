@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
     /**
-     * 删除员工绑定角色
+     * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
      */
     ChannelDeleteRoleUsers(req: ChannelDeleteRoleUsersRequest, cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void): Promise<ChannelDeleteRoleUsersResponse>;
     /**
@@ -211,7 +211,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
-     * 绑定员工角色
+     * 通过此接口，绑定员工角色，支持以电子签userId、客户系统userId两种方式调用。
      */
     ChannelCreateUserRoles(req: ChannelCreateUserRolesRequest, cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void): Promise<ChannelCreateUserRolesResponse>;
     /**
