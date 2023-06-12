@@ -3,54 +3,54 @@
  */
 export interface BatchSendEmailRequest {
     /**
-      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照
-发信人 &lt;邮件地址&gt; 的方式填写，例如：
-腾讯云团队 &lt;noreply@mail.qcloud.com&gt;
-      */
+     * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照
+  发信人 &lt;邮件地址&gt; 的方式填写，例如：
+  腾讯云团队 &lt;noreply@mail.qcloud.com&gt;
+     */
     FromEmailAddress: string;
     /**
-      * 收件人列表ID
-      */
+     * 收件人列表ID
+     */
     ReceiverId: number;
     /**
-      * 邮件主题
-      */
+     * 邮件主题
+     */
     Subject: string;
     /**
-      * 任务类型 1: 立即发送 2: 定时发送 3: 周期（频率）发送
-      */
+     * 任务类型 1: 立即发送 2: 定时发送 3: 周期（频率）发送
+     */
     TaskType: number;
     /**
-      * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
-      */
+     * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
+     */
     ReplyToAddresses?: string;
     /**
-      * 使用模板发送时，填写的模板相关参数
-      */
+     * 使用模板发送时，填写的模板相关参数
+     */
     Template?: Template;
     /**
-      * 已废弃
-      */
+     * 已废弃
+     */
     Simple?: Simple;
     /**
-      * 需要发送附件时，填写附件相关参数（暂未支持）
-      */
+     * 需要发送附件时，填写附件相关参数（暂未支持）
+     */
     Attachments?: Array<Attachment>;
     /**
-      * 周期发送任务的必要参数
-      */
+     * 周期发送任务的必要参数
+     */
     CycleParam?: CycleEmailParam;
     /**
-      * 定时发送任务的必要参数
-      */
+     * 定时发送任务的必要参数
+     */
     TimedParam?: TimedEmailParam;
     /**
-      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
-      */
+     * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
+     */
     Unsubscribe?: string;
     /**
-      * 是否添加广告标识 0:不添加 1:添加到subject前面，2:添加到subject后面
-      */
+     * 是否添加广告标识 0:不添加 1:添加到subject前面，2:添加到subject后面
+     */
     ADLocation?: number;
 }
 /**
@@ -58,8 +58,8 @@ export interface BatchSendEmailRequest {
  */
 export interface GetEmailTemplateRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateID: number;
 }
 /**
@@ -67,16 +67,16 @@ export interface GetEmailTemplateRequest {
  */
 export interface ListSendTasksResponse {
     /**
-      * 总数
-      */
+     * 总数
+     */
     TotalCount: number;
     /**
-      * 数据记录
-      */
+     * 数据记录
+     */
     Data: Array<SendTaskData>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -84,12 +84,12 @@ export interface ListSendTasksResponse {
  */
 export interface CreateReceiverResponse {
     /**
-      * 收件人列表id，后续根据收件人列表id上传收件人地址
-      */
+     * 收件人列表id，后续根据收件人列表id上传收件人地址
+     */
     ReceiverId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -97,12 +97,12 @@ export interface CreateReceiverResponse {
  */
 export interface CreateEmailTemplateRequest {
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     TemplateName: string;
     /**
-      * 模板内容
-      */
+     * 模板内容
+     */
     TemplateContent: TemplateContent;
 }
 /**
@@ -110,13 +110,13 @@ export interface CreateEmailTemplateRequest {
  */
 export interface ListEmailAddressResponse {
     /**
-      * 发信地址列表详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 发信地址列表详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EmailSenders?: Array<EmailSender>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -128,8 +128,8 @@ export declare type ListEmailAddressRequest = null;
  */
 export interface UpdateEmailSmtpPassWordResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -137,20 +137,20 @@ export interface UpdateEmailSmtpPassWordResponse {
  */
 export interface ListReceiversRequest {
     /**
-      * 偏移量，整型，从0开始
-      */
+     * 偏移量，整型，从0开始
+     */
     Offset: number;
     /**
-      * 限制数目，整型，不超过100
-      */
+     * 限制数目，整型，不超过100
+     */
     Limit: number;
     /**
-      * 列表状态(1 待上传 2 上传中  3传完成)，若查询所有就不传这个字段
-      */
+     * 列表状态(1 待上传 2 上传中  3传完成)，若查询所有就不传这个字段
+     */
     Status?: number;
     /**
-      * 列表名称的关键字，模糊查询
-      */
+     * 列表名称的关键字，模糊查询
+     */
     KeyWord?: string;
 }
 /**
@@ -158,20 +158,20 @@ export interface ListReceiversRequest {
  */
 export interface GetEmailIdentityResponse {
     /**
-      * 验证类型。固定值：DOMAIN
-      */
+     * 验证类型。固定值：DOMAIN
+     */
     IdentityType?: string;
     /**
-      * 是否已通过验证
-      */
+     * 是否已通过验证
+     */
     VerifiedForSendingStatus?: boolean;
     /**
-      * DNS配置详情
-      */
+     * DNS配置详情
+     */
     Attributes?: Array<DNSAttributes>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -179,28 +179,28 @@ export interface GetEmailIdentityResponse {
  */
 export interface ListBlackEmailAddressRequest {
     /**
-      * 开始日期，格式为YYYY-MM-DD
-      */
+     * 开始日期，格式为YYYY-MM-DD
+     */
     StartDate: string;
     /**
-      * 结束日期，格式为YYYY-MM-DD
-      */
+     * 结束日期，格式为YYYY-MM-DD
+     */
     EndDate: string;
     /**
-      * 规范，配合Offset使用
-      */
+     * 规范，配合Offset使用
+     */
     Limit: number;
     /**
-      * 规范，配合Limit使用，Limit最大取值为100
-      */
+     * 规范，配合Limit使用，Limit最大取值为100
+     */
     Offset: number;
     /**
-      * 可以指定邮箱进行查询
-      */
+     * 可以指定邮箱进行查询
+     */
     EmailAddress?: string;
     /**
-      * 可以指定任务ID进行查询
-      */
+     * 可以指定任务ID进行查询
+     */
     TaskID?: string;
 }
 /**
@@ -208,12 +208,12 @@ export interface ListBlackEmailAddressRequest {
  */
 export interface Attachment {
     /**
-      * 附件名称，最大支持255个字符长度，不支持部分附件类型，详情请参考[附件类型](https://cloud.tencent.com/document/product/1288/51951)。
-      */
+     * 附件名称，最大支持255个字符长度，不支持部分附件类型，详情请参考[附件类型](https://cloud.tencent.com/document/product/1288/51951)。
+     */
     FileName: string;
     /**
-      * Base64之后的附件内容，你可以发送的附件大小上限为4M。注意：腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍。应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 接口会返回错误。
-      */
+     * Base64之后的附件内容，你可以发送的附件大小上限为4M。注意：腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍。应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 接口会返回错误。
+     */
     Content: string;
 }
 /**
@@ -221,14 +221,14 @@ export interface Attachment {
  */
 export interface Template {
     /**
-      * 模板ID。如果没有模板，请先新建一个
-      */
+     * 模板ID。如果没有模板，请先新建一个
+     */
     TemplateID: number;
     /**
-      * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
-注意：参数值不能是html等复杂类型的数据。
-示例：{"name":"xxx","age":"xx"}
-      */
+     * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
+  注意：参数值不能是html等复杂类型的数据。
+  示例：{"name":"xxx","age":"xx"}
+     */
     TemplateData: string;
 }
 /**
@@ -236,24 +236,24 @@ export interface Template {
  */
 export interface ListSendTasksRequest {
     /**
-      * 偏移量，整型，从0开始，0代表跳过0行
-      */
+     * 偏移量，整型，从0开始，0代表跳过0行
+     */
     Offset: number;
     /**
-      * 限制数目，整型,不超过100
-      */
+     * 限制数目，整型,不超过100
+     */
     Limit: number;
     /**
-      * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成。查询所有状态，则不传这个字段
-      */
+     * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成。查询所有状态，则不传这个字段
+     */
     Status?: number;
     /**
-      * 收件人列表ID
-      */
+     * 收件人列表ID
+     */
     ReceiverId?: number;
     /**
-      * 任务类型 1即时 2定时 3周期，查询所有类型则不传这个字段
-      */
+     * 任务类型 1即时 2定时 3周期，查询所有类型则不传这个字段
+     */
     TaskType?: number;
 }
 /**
@@ -261,12 +261,12 @@ export interface ListSendTasksRequest {
  */
 export interface GetSendEmailStatusResponse {
     /**
-      * 邮件发送状态列表
-      */
+     * 邮件发送状态列表
+     */
     EmailStatusList?: Array<SendEmailStatus>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -274,50 +274,50 @@ export interface GetSendEmailStatusResponse {
  */
 export interface SendEmailRequest {
     /**
-      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com
-如需填写发件人说明，请按照如下方式：
-别名 <邮箱地址>
-      */
+     * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com
+  如需填写发件人说明，请按照如下方式：
+  别名 <邮箱地址>
+     */
     FromEmailAddress: string;
     /**
-      * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
-      */
+     * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
+     */
     Destination: Array<string>;
     /**
-      * 邮件主题
-      */
+     * 邮件主题
+     */
     Subject: string;
     /**
-      * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
-      */
+     * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
+     */
     ReplyToAddresses?: string;
     /**
-      * 抄送人邮箱地址，最多支持抄送20人。
-      */
+     * 抄送人邮箱地址，最多支持抄送20人。
+     */
     Cc?: Array<string>;
     /**
-      * 密送人邮箱地址，最多支持抄送20人。
-      */
+     * 密送人邮箱地址，最多支持抄送20人。
+     */
     Bcc?: Array<string>;
     /**
-      * 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项
-      */
+     * 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项
+     */
     Template?: Template;
     /**
-      * 已废弃
-      */
+     * 已废弃
+     */
     Simple?: Simple;
     /**
-      * 需要发送附件时，填写附件相关参数。腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍，应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 时接口会返回错误
-      */
+     * 需要发送附件时，填写附件相关参数。腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍，应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 时接口会返回错误
+     */
     Attachments?: Array<Attachment>;
     /**
-      * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
-      */
+     * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
+     */
     Unsubscribe?: string;
     /**
-      * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
-      */
+     * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
+     */
     TriggerType?: number;
 }
 /**
@@ -325,8 +325,8 @@ export interface SendEmailRequest {
  */
 export interface DeleteBlackListRequest {
     /**
-      * 需要清除的黑名单邮箱列表，数组长度至少为1
-      */
+     * 需要清除的黑名单邮箱列表，数组长度至少为1
+     */
     EmailAddressList: Array<string>;
 }
 /**
@@ -334,18 +334,18 @@ export interface DeleteBlackListRequest {
  */
 export interface EmailSender {
     /**
-      * 发信地址
-      */
+     * 发信地址
+     */
     EmailAddress: string;
     /**
-      * 发信人别名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 发信人别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EmailSenderName: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreatedTimestamp: number;
 }
 /**
@@ -353,12 +353,12 @@ export interface EmailSender {
  */
 export interface BatchSendEmailResponse {
     /**
-      * 发送任务ID
-      */
+     * 发送任务ID
+     */
     TaskId?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -366,8 +366,8 @@ export interface BatchSendEmailResponse {
  */
 export interface DeleteEmailIdentityRequest {
     /**
-      * 发信域名
-      */
+     * 发信域名
+     */
     EmailIdentity: string;
 }
 /**
@@ -375,8 +375,8 @@ export interface DeleteEmailIdentityRequest {
  */
 export interface UpdateEmailIdentityRequest {
     /**
-      * 请求验证的域名
-      */
+     * 请求验证的域名
+     */
     EmailIdentity: string;
 }
 /**
@@ -384,8 +384,8 @@ export interface UpdateEmailIdentityRequest {
  */
 export interface GetEmailIdentityRequest {
     /**
-      * 发信域名
-      */
+     * 发信域名
+     */
     EmailIdentity: string;
 }
 /**
@@ -393,8 +393,8 @@ export interface GetEmailIdentityRequest {
  */
 export interface DeleteEmailIdentityResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -402,20 +402,20 @@ export interface DeleteEmailIdentityResponse {
  */
 export interface GetStatisticsReportRequest {
     /**
-      * 开始日期
-      */
+     * 开始日期
+     */
     StartDate: string;
     /**
-      * 结束日期
-      */
+     * 结束日期
+     */
     EndDate: string;
     /**
-      * 发信域名
-      */
+     * 发信域名
+     */
     Domain?: string;
     /**
-      * 收件方邮箱类型，例如gmail.com
-      */
+     * 收件方邮箱类型，例如gmail.com
+     */
     ReceivingMailboxType?: string;
 }
 /**
@@ -423,12 +423,12 @@ export interface GetStatisticsReportRequest {
  */
 export interface CreateReceiverRequest {
     /**
-      * 收件人列表名称
-      */
+     * 收件人列表名称
+     */
     ReceiversName: string;
     /**
-      * 收件人列表描述
-      */
+     * 收件人列表描述
+     */
     Desc?: string;
 }
 /**
@@ -436,72 +436,72 @@ export interface CreateReceiverRequest {
  */
 export interface SendTaskData {
     /**
-      * 任务id
-      */
+     * 任务id
+     */
     TaskId: number;
     /**
-      * 发信地址
-      */
+     * 发信地址
+     */
     FromEmailAddress: string;
     /**
-      * 收件人列表Id
-      */
+     * 收件人列表Id
+     */
     ReceiverId: number;
     /**
-      * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成
-      */
+     * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成
+     */
     TaskStatus: number;
     /**
-      * 任务类型 1 即时 2 定时 3 周期
-      */
+     * 任务类型 1 即时 2 定时 3 周期
+     */
     TaskType: number;
     /**
-      * 任务请求发信数量
-      */
+     * 任务请求发信数量
+     */
     RequestCount: number;
     /**
-      * 已经发送数量
-      */
+     * 已经发送数量
+     */
     SendCount: number;
     /**
-      * 缓存数量
-      */
+     * 缓存数量
+     */
     CacheCount: number;
     /**
-      * 任务创建时间
-      */
+     * 任务创建时间
+     */
     CreateTime: string;
     /**
-      * 任务更新时间
-      */
+     * 任务更新时间
+     */
     UpdateTime: string;
     /**
-      * 邮件主题
-      */
+     * 邮件主题
+     */
     Subject: string;
     /**
-      * 模板和模板数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模板和模板数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Template: Template;
     /**
-      * 周期任务参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 周期任务参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CycleParam: CycleEmailParam;
     /**
-      * 定时任务参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 定时任务参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TimedParam: TimedEmailParam;
     /**
-      * 任务异常信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务异常信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ErrMsg: string;
     /**
-      * 收件人列表名称
-      */
+     * 收件人列表名称
+     */
     ReceiversName: string;
 }
 /**
@@ -509,24 +509,24 @@ export interface SendTaskData {
  */
 export interface TemplatesMetadata {
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreatedTimestamp: number;
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     TemplateName: string;
     /**
-      * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
-      */
+     * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
+     */
     TemplateStatus: number;
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateID: number;
     /**
-      * 审核原因
-      */
+     * 审核原因
+     */
     ReviewReason: string;
 }
 /**
@@ -534,8 +534,8 @@ export interface TemplatesMetadata {
  */
 export interface DeleteEmailTemplateResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -543,38 +543,38 @@ export interface DeleteEmailTemplateResponse {
  */
 export interface Volume {
     /**
-      * 日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SendDate: string;
     /**
-      * 邮件请求数量
-      */
+     * 邮件请求数量
+     */
     RequestCount: number;
     /**
-      * 腾讯云通过数量
-      */
+     * 腾讯云通过数量
+     */
     AcceptedCount: number;
     /**
-      * 送达数量
-      */
+     * 送达数量
+     */
     DeliveredCount: number;
     /**
-      * 打开邮件的用户数量，根据收件人去重
-      */
+     * 打开邮件的用户数量，根据收件人去重
+     */
     OpenedCount: number;
     /**
-      * 点击了邮件中的链接数量用户数量
-      */
+     * 点击了邮件中的链接数量用户数量
+     */
     ClickedCount: number;
     /**
-      * 退信数量
-      */
+     * 退信数量
+     */
     BounceCount: number;
     /**
-      * 取消订阅的用户数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 取消订阅的用户数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UnsubscribeCount: number;
 }
 /**
@@ -582,8 +582,8 @@ export interface Volume {
  */
 export interface CreateEmailIdentityRequest {
     /**
-      * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
-      */
+     * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
+     */
     EmailIdentity: string;
 }
 /**
@@ -591,12 +591,12 @@ export interface CreateEmailIdentityRequest {
  */
 export interface UpdateEmailSmtpPassWordRequest {
     /**
-      * smtp密码，长度限制64
-      */
+     * smtp密码，长度限制64
+     */
     Password: string;
     /**
-      * 发信邮箱,长度限制128
-      */
+     * 发信邮箱,长度限制128
+     */
     EmailAddress: string;
 }
 /**
@@ -604,30 +604,30 @@ export interface UpdateEmailSmtpPassWordRequest {
  */
 export interface ReceiverData {
     /**
-      * 收件人列表ID
-      */
+     * 收件人列表ID
+     */
     ReceiverId: number;
     /**
-      * 收件人列表名称
-      */
+     * 收件人列表名称
+     */
     ReceiversName: string;
     /**
-      * 收件人地址总数
-      */
+     * 收件人地址总数
+     */
     Count: number;
     /**
-      * 收件人列表描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 收件人列表描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Desc: string;
     /**
-      * 列表状态(1 待上传 2 上传中 3 上传完成)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 列表状态(1 待上传 2 上传中 3 上传完成)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReceiversStatus: number;
     /**
-      * 创建时间,如:2021-09-28 16:40:35
-      */
+     * 创建时间,如:2021-09-28 16:40:35
+     */
     CreateTime: string;
 }
 /**
@@ -635,20 +635,20 @@ export interface ReceiverData {
  */
 export interface UpdateEmailIdentityResponse {
     /**
-      * 验证类型。固定值：DOMAIN
-      */
+     * 验证类型。固定值：DOMAIN
+     */
     IdentityType?: string;
     /**
-      * 是否已通过验证
-      */
+     * 是否已通过验证
+     */
     VerifiedForSendingStatus?: boolean;
     /**
-      * 需要配置的DNS信息
-      */
+     * 需要配置的DNS信息
+     */
     Attributes?: Array<DNSAttributes>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -656,8 +656,8 @@ export interface UpdateEmailIdentityResponse {
  */
 export interface DeleteEmailTemplateRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateID: number;
 }
 /**
@@ -665,8 +665,8 @@ export interface DeleteEmailTemplateRequest {
  */
 export interface DeleteBlackListResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -674,16 +674,16 @@ export interface DeleteBlackListResponse {
  */
 export interface UpdateEmailTemplateRequest {
     /**
-      * 模板内容
-      */
+     * 模板内容
+     */
     TemplateContent: TemplateContent;
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateID: number;
     /**
-      * 模板名字
-      */
+     * 模板名字
+     */
     TemplateName: string;
 }
 /**
@@ -691,81 +691,81 @@ export interface UpdateEmailTemplateRequest {
  */
 export interface SendEmailStatus {
     /**
-      * SendEmail返回的MessageId
-      */
+     * SendEmail返回的MessageId
+     */
     MessageId: string;
     /**
-      * 收件人邮箱
-      */
+     * 收件人邮箱
+     */
     ToEmailAddress: string;
     /**
-      * 发件人邮箱
-      */
+     * 发件人邮箱
+     */
     FromEmailAddress: string;
     /**
-      * 腾讯云处理状态
-0: 处理成功
-1001: 内部系统异常
-1002: 内部系统异常
-1003: 内部系统异常
-1003: 内部系统异常
-1004: 发信超时
-1005: 内部系统异常
-1006: 触发频率控制，短时间内对同一地址发送过多邮件
-1007: 邮件地址在黑名单中
-1008: 域名被收件人拒收
-1009: 内部系统异常
-1010: 超出了每日发送限制
-1011: 无发送自定义内容权限，必须使用模板
-1013: 域名被收件人取消订阅
-2001: 找不到相关记录
-3007: 模板ID无效或者不可用
-3008: 被收信域名临时封禁
-3009: 无权限使用该模板
-3010: TemplateData字段格式不正确
-3014: 发件域名没有经过认证，无法发送
-3020: 收件方邮箱类型在黑名单
-3024: 邮箱地址格式预检查失败
-3030: 退信率过高，临时限制发送
-3033: 余额不足，账号欠费等
-      */
+     * 腾讯云处理状态
+  0: 处理成功
+  1001: 内部系统异常
+  1002: 内部系统异常
+  1003: 内部系统异常
+  1003: 内部系统异常
+  1004: 发信超时
+  1005: 内部系统异常
+  1006: 触发频率控制，短时间内对同一地址发送过多邮件
+  1007: 邮件地址在黑名单中
+  1008: 域名被收件人拒收
+  1009: 内部系统异常
+  1010: 超出了每日发送限制
+  1011: 无发送自定义内容权限，必须使用模板
+  1013: 域名被收件人取消订阅
+  2001: 找不到相关记录
+  3007: 模板ID无效或者不可用
+  3008: 被收信域名临时封禁
+  3009: 无权限使用该模板
+  3010: TemplateData字段格式不正确
+  3014: 发件域名没有经过认证，无法发送
+  3020: 收件方邮箱类型在黑名单
+  3024: 邮箱地址格式预检查失败
+  3030: 退信率过高，临时限制发送
+  3033: 余额不足，账号欠费等
+     */
     SendStatus: number;
     /**
-      * 收件方处理状态
-0: 请求成功被腾讯云接受，进入发送队列
-1: 邮件递送成功，DeliverTime表示递送成功的时间
-2: 邮件因某种原因被丢弃，DeliverMessage表示丢弃原因
-3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因
-8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因
-      */
+     * 收件方处理状态
+  0: 请求成功被腾讯云接受，进入发送队列
+  1: 邮件递送成功，DeliverTime表示递送成功的时间
+  2: 邮件因某种原因被丢弃，DeliverMessage表示丢弃原因
+  3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因
+  8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因
+     */
     DeliverStatus: number;
     /**
-      * 收件方处理状态描述
-      */
+     * 收件方处理状态描述
+     */
     DeliverMessage: string;
     /**
-      * 请求到达腾讯云时间戳
-      */
+     * 请求到达腾讯云时间戳
+     */
     RequestTime: number;
     /**
-      * 腾讯云执行递送时间戳
-      */
+     * 腾讯云执行递送时间戳
+     */
     DeliverTime: number;
     /**
-      * 用户是否打开该邮件
-      */
+     * 用户是否打开该邮件
+     */
     UserOpened: boolean;
     /**
-      * 用户是否点击该邮件中的链接
-      */
+     * 用户是否点击该邮件中的链接
+     */
     UserClicked: boolean;
     /**
-      * 用户是否取消该发送者的订阅
-      */
+     * 用户是否取消该发送者的订阅
+     */
     UserUnsubscribed: boolean;
     /**
-      * 用户是否举报该发送者
-      */
+     * 用户是否举报该发送者
+     */
     UserComplainted: boolean;
 }
 /**
@@ -773,12 +773,12 @@ export interface SendEmailStatus {
  */
 export interface ListEmailTemplatesRequest {
     /**
-      * 获取模板数据量，用于分页
-      */
+     * 获取模板数据量，用于分页
+     */
     Limit: number;
     /**
-      * 获取模板偏移值，用于分页
-      */
+     * 获取模板偏移值，用于分页
+     */
     Offset: number;
 }
 /**
@@ -786,8 +786,8 @@ export interface ListEmailTemplatesRequest {
  */
 export interface CreateReceiverDetailWithDataResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -795,13 +795,13 @@ export interface CreateReceiverDetailWithDataResponse {
  */
 export interface ReceiverInputData {
     /**
-      * 收件人邮箱
-      */
+     * 收件人邮箱
+     */
     Email: string;
     /**
-      * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
-注意：参数值不能是html等复杂类型的数据。TemplateData (整个 JSON 结构) 总长度限制为 800 bytes。
-      */
+     * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
+  注意：参数值不能是html等复杂类型的数据。TemplateData (整个 JSON 结构) 总长度限制为 800 bytes。
+     */
     TemplateData: string;
 }
 /**
@@ -809,8 +809,8 @@ export interface ReceiverInputData {
  */
 export interface CreateReceiverDetailResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -818,16 +818,16 @@ export interface CreateReceiverDetailResponse {
  */
 export interface ListEmailTemplatesResponse {
     /**
-      * 邮件模板列表
-      */
+     * 邮件模板列表
+     */
     TemplatesMetadata: Array<TemplatesMetadata>;
     /**
-      * 模板总数量
-      */
+     * 模板总数量
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -835,12 +835,12 @@ export interface ListEmailTemplatesResponse {
  */
 export interface SendEmailResponse {
     /**
-      * 接受消息生成的唯一消息标识符。
-      */
+     * 接受消息生成的唯一消息标识符。
+     */
     MessageId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -848,16 +848,16 @@ export interface SendEmailResponse {
  */
 export interface ListBlackEmailAddressResponse {
     /**
-      * 黑名单列表
-      */
+     * 黑名单列表
+     */
     BlackList?: Array<BlackEmailAddress>;
     /**
-      * 黑名单总数
-      */
+     * 黑名单总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -865,24 +865,24 @@ export interface ListBlackEmailAddressResponse {
  */
 export interface GetSendEmailStatusRequest {
     /**
-      * 发送的日期，必填。仅支持查询某个日期，不支持范围查询。
-      */
+     * 发送的日期，必填。仅支持查询某个日期，不支持范围查询。
+     */
     RequestDate: string;
     /**
-      * 偏移量。默认为0
-      */
+     * 偏移量。默认为0
+     */
     Offset: number;
     /**
-      * 拉取最大条数，最多 100。
-      */
+     * 拉取最大条数，最多 100。
+     */
     Limit: number;
     /**
-      * SendMail接口返回的MessageId字段。
-      */
+     * SendMail接口返回的MessageId字段。
+     */
     MessageId?: string;
     /**
-      * 收件人邮箱。
-      */
+     * 收件人邮箱。
+     */
     ToEmailAddress?: string;
 }
 /**
@@ -890,12 +890,12 @@ export interface GetSendEmailStatusRequest {
  */
 export interface Simple {
     /**
-      * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
-      */
+     * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
+     */
     Html?: string;
     /**
-      * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
-      */
+     * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
+     */
     Text?: string;
 }
 /**
@@ -903,8 +903,8 @@ export interface Simple {
  */
 export interface DeleteReceiverRequest {
     /**
-      * 收件人列表id，创建收件人列表时会返回
-      */
+     * 收件人列表id，创建收件人列表时会返回
+     */
     ReceiverId: number;
 }
 /**
@@ -912,20 +912,20 @@ export interface DeleteReceiverRequest {
  */
 export interface ListEmailIdentitiesResponse {
     /**
-      * 发信域名列表
-      */
+     * 发信域名列表
+     */
     EmailIdentities: Array<EmailIdentity>;
     /**
-      * 最大信誉等级
-      */
+     * 最大信誉等级
+     */
     MaxReputationLevel: number;
     /**
-      * 单域名最高日发送量
-      */
+     * 单域名最高日发送量
+     */
     MaxDailyQuota: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -933,8 +933,8 @@ export interface ListEmailIdentitiesResponse {
  */
 export interface DeleteReceiverResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -942,12 +942,12 @@ export interface DeleteReceiverResponse {
  */
 export interface TemplateContent {
     /**
-      * base64之后的Html代码
-      */
+     * base64之后的Html代码
+     */
     Html?: string;
     /**
-      * base64之后的文本内容
-      */
+     * base64之后的文本内容
+     */
     Text?: string;
 }
 /**
@@ -955,16 +955,16 @@ export interface TemplateContent {
  */
 export interface GetStatisticsReportResponse {
     /**
-      * 发信统计报告，按天
-      */
+     * 发信统计报告，按天
+     */
     DailyVolumes: Array<Volume>;
     /**
-      * 发信统计报告，总览
-      */
+     * 发信统计报告，总览
+     */
     OverallVolume: Volume;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -972,8 +972,8 @@ export interface GetStatisticsReportResponse {
  */
 export interface DeleteEmailAddressRequest {
     /**
-      * 发信地址
-      */
+     * 发信地址
+     */
     EmailAddress: string;
 }
 /**
@@ -981,24 +981,24 @@ export interface DeleteEmailAddressRequest {
  */
 export interface EmailIdentity {
     /**
-      * 发信域名
-      */
+     * 发信域名
+     */
     IdentityName: string;
     /**
-      * 验证类型，固定为DOMAIN
-      */
+     * 验证类型，固定为DOMAIN
+     */
     IdentityType: string;
     /**
-      * 是否已通过验证
-      */
+     * 是否已通过验证
+     */
     SendingEnabled: boolean;
     /**
-      * 当前信誉等级
-      */
+     * 当前信誉等级
+     */
     CurrentReputationLevel: number;
     /**
-      * 当日最高发信量
-      */
+     * 当日最高发信量
+     */
     DailyQuota: number;
 }
 /**
@@ -1006,12 +1006,12 @@ export interface EmailIdentity {
  */
 export interface BlackEmailAddress {
     /**
-      * 邮箱被拉黑时间
-      */
+     * 邮箱被拉黑时间
+     */
     BounceTime: string;
     /**
-      * 被拉黑的邮箱地址
-      */
+     * 被拉黑的邮箱地址
+     */
     EmailAddress: string;
 }
 /**
@@ -1019,16 +1019,16 @@ export interface BlackEmailAddress {
  */
 export interface CycleEmailParam {
     /**
-      * 任务开始时间
-      */
+     * 任务开始时间
+     */
     BeginTime: string;
     /**
-      * 任务周期 小时维度
-      */
+     * 任务周期 小时维度
+     */
     IntervalTime: number;
     /**
-      * 是否终止周期，用于任务更新 0否1是
-      */
+     * 是否终止周期，用于任务更新 0否1是
+     */
     TermCycle?: number;
 }
 /**
@@ -1036,8 +1036,8 @@ export interface CycleEmailParam {
  */
 export interface DeleteEmailAddressResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1045,20 +1045,20 @@ export interface DeleteEmailAddressResponse {
  */
 export interface CreateEmailIdentityResponse {
     /**
-      * 验证类型。固定值：DOMAIN
-      */
+     * 验证类型。固定值：DOMAIN
+     */
     IdentityType?: string;
     /**
-      * 是否已通过验证
-      */
+     * 是否已通过验证
+     */
     VerifiedForSendingStatus?: boolean;
     /**
-      * 需要配置的DNS信息
-      */
+     * 需要配置的DNS信息
+     */
     Attributes?: Array<DNSAttributes>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1066,12 +1066,12 @@ export interface CreateEmailIdentityResponse {
  */
 export interface CreateEmailAddressRequest {
     /**
-      * 您的发信地址（发信地址总数上限为10个）
-      */
+     * 您的发信地址（发信地址总数上限为10个）
+     */
     EmailAddress: string;
     /**
-      * 发件人别名
-      */
+     * 发件人别名
+     */
     EmailSenderName?: string;
 }
 /**
@@ -1079,12 +1079,12 @@ export interface CreateEmailAddressRequest {
  */
 export interface CreateReceiverDetailRequest {
     /**
-      * 收件人列表ID
-      */
+     * 收件人列表ID
+     */
     ReceiverId: number;
     /**
-      * 邮箱
-      */
+     * 邮箱
+     */
     Emails: Array<string>;
 }
 /**
@@ -1092,12 +1092,12 @@ export interface CreateReceiverDetailRequest {
  */
 export interface CreateEmailTemplateResponse {
     /**
-      * 模板id
-      */
+     * 模板id
+     */
     TemplateID: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1105,16 +1105,16 @@ export interface CreateEmailTemplateResponse {
  */
 export interface ListReceiversResponse {
     /**
-      * 总数
-      */
+     * 总数
+     */
     TotalCount: number;
     /**
-      * 数据记录
-      */
+     * 数据记录
+     */
     Data: Array<ReceiverData>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1122,8 +1122,8 @@ export interface ListReceiversResponse {
  */
 export interface CreateEmailAddressResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1131,8 +1131,8 @@ export interface CreateEmailAddressResponse {
  */
 export interface UpdateEmailTemplateResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1140,12 +1140,12 @@ export interface UpdateEmailTemplateResponse {
  */
 export interface CreateReceiverDetailWithDataRequest {
     /**
-      * 收件人列表ID
-      */
+     * 收件人列表ID
+     */
     ReceiverId: number;
     /**
-      * 收信人邮箱以及模板参数，数组形式。收件人个数限制20000个以内。
-      */
+     * 收信人邮箱以及模板参数，数组形式。收件人个数限制20000个以内。
+     */
     Datas: Array<ReceiverInputData>;
 }
 /**
@@ -1153,8 +1153,8 @@ export interface CreateReceiverDetailWithDataRequest {
  */
 export interface TimedEmailParam {
     /**
-      * 定时发送邮件的开始时间
-      */
+     * 定时发送邮件的开始时间
+     */
     BeginTime: string;
 }
 /**
@@ -1162,24 +1162,24 @@ export interface TimedEmailParam {
  */
 export interface DNSAttributes {
     /**
-      * 记录类型 CNAME | A | TXT | MX
-      */
+     * 记录类型 CNAME | A | TXT | MX
+     */
     Type: string;
     /**
-      * 域名
-      */
+     * 域名
+     */
     SendDomain: string;
     /**
-      * 需要配置的值
-      */
+     * 需要配置的值
+     */
     ExpectedValue: string;
     /**
-      * 腾讯云目前检测到的值
-      */
+     * 腾讯云目前检测到的值
+     */
     CurrentValue: string;
     /**
-      * 检测是否通过，创建时默认为false
-      */
+     * 检测是否通过，创建时默认为false
+     */
     Status: boolean;
 }
 /**
@@ -1187,20 +1187,20 @@ export interface DNSAttributes {
  */
 export interface GetEmailTemplateResponse {
     /**
-      * 模板内容数据
-      */
+     * 模板内容数据
+     */
     TemplateContent: TemplateContent;
     /**
-      * 模板状态 0-审核通过 1-待审核 2-审核拒绝
-      */
+     * 模板状态 0-审核通过 1-待审核 2-审核拒绝
+     */
     TemplateStatus: number;
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     TemplateName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**

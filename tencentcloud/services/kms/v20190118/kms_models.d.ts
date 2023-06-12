@@ -3,12 +3,12 @@
  */
 export interface UpdateAliasRequest {
     /**
-      * 新的别名，1-60个字符或数字的组合
-      */
+     * 新的别名，1-60个字符或数字的组合
+     */
     Alias: string;
     /**
-      * CMK的全局唯一标识符
-      */
+     * CMK的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -16,8 +16,8 @@ export interface UpdateAliasRequest {
  */
 export interface EnableWhiteBoxKeyRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -25,16 +25,16 @@ export interface EnableWhiteBoxKeyRequest {
  */
 export interface AsymmetricRsaDecryptRequest {
     /**
-      * CMK的唯一标识
-      */
+     * CMK的唯一标识
+     */
     KeyId: string;
     /**
-      * 使用PublicKey加密的密文，Base64编码
-      */
+     * 使用PublicKey加密的密文，Base64编码
+     */
     Ciphertext: string;
     /**
-      * 在使用公钥加密时对应的算法：当前支持RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256
-      */
+     * 在使用公钥加密时对应的算法：当前支持RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256
+     */
     Algorithm: string;
 }
 /**
@@ -42,12 +42,12 @@ export interface AsymmetricRsaDecryptRequest {
  */
 export interface EnableKeyRotationRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
     /**
-      * 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。
-      */
+     * 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。
+     */
     RotateDays?: number;
 }
 /**
@@ -55,17 +55,17 @@ export interface EnableKeyRotationRequest {
  */
 export interface DescribeWhiteBoxKeyDetailsResponse {
     /**
-      * 白盒密钥信息列表。
-      */
+     * 白盒密钥信息列表。
+     */
     KeyInfos: Array<WhiteboxKeyInfo>;
     /**
-      * 白盒密钥总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 白盒密钥总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -73,28 +73,28 @@ export interface DescribeWhiteBoxKeyDetailsResponse {
  */
 export interface CreateKeyRequest {
     /**
-      * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。以 kms- 作为前缀的用于云产品使用，Alias 不可重复。
-      */
+     * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。以 kms- 作为前缀的用于云产品使用，Alias 不可重复。
+     */
     Alias: string;
     /**
-      * CMK 的描述，最大1024字节
-      */
+     * CMK 的描述，最大1024字节
+     */
     Description?: string;
     /**
-      * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称秘钥。完整的秘钥用途与算法支持列表可通过 ListAlgorithms 接口获取。
-      */
+     * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称秘钥。完整的秘钥用途与算法支持列表可通过 ListAlgorithms 接口获取。
+     */
     KeyUsage?: string;
     /**
-      * 指定key类型，默认为1，1表示默认类型，由KMS创建CMK密钥，2 表示EXTERNAL 类型，该类型需要用户导入密钥材料，参考 GetParametersForImport 和 ImportKeyMaterial 接口
-      */
+     * 指定key类型，默认为1，1表示默认类型，由KMS创建CMK密钥，2 表示EXTERNAL 类型，该类型需要用户导入密钥材料，参考 GetParametersForImport 和 ImportKeyMaterial 接口
+     */
     Type?: number;
     /**
-      * 标签列表
-      */
+     * 标签列表
+     */
     Tags?: Array<Tag>;
     /**
-      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
-      */
+     * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+     */
     HsmClusterId?: string;
 }
 /**
@@ -102,8 +102,8 @@ export interface CreateKeyRequest {
  */
 export interface DisableWhiteBoxKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -111,8 +111,8 @@ export interface DisableWhiteBoxKeyResponse {
  */
 export interface DisableKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -124,24 +124,24 @@ export declare type DescribeWhiteBoxServiceStatusRequest = null;
  */
 export interface VerifyByAsymmetricKeyRequest {
     /**
-      * 密钥的唯一标识
-      */
+     * 密钥的唯一标识
+     */
     KeyId: string;
     /**
-      * 签名值，通过调用KMS签名接口生成
-      */
+     * 签名值，通过调用KMS签名接口生成
+     */
     SignatureValue: string;
     /**
-      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
-      */
+     * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
+     */
     Message: string;
     /**
-      * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
-      */
+     * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+     */
     Algorithm: string;
     /**
-      * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
-      */
+     * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+     */
     MessageType?: string;
 }
 /**
@@ -149,8 +149,8 @@ export interface VerifyByAsymmetricKeyRequest {
  */
 export interface DescribeKeyRequest {
     /**
-      * CMK全局唯一标识符
-      */
+     * CMK全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -158,53 +158,53 @@ export interface DescribeKeyRequest {
  */
 export interface WhiteboxKeyInfo {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字. 不可重复
-      */
+     * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字. 不可重复
+     */
     Alias: string;
     /**
-      * 创建者
-      */
+     * 创建者
+     */
     CreatorUin: number;
     /**
-      * 密钥的描述信息
-      */
+     * 密钥的描述信息
+     */
     Description: string;
     /**
-      * 密钥创建时间，Unix时间戳
-      */
+     * 密钥创建时间，Unix时间戳
+     */
     CreateTime: number;
     /**
-      * 白盒密钥的状态， 取值为：Enabled | Disabled
-      */
+     * 白盒密钥的状态， 取值为：Enabled | Disabled
+     */
     Status: string;
     /**
-      * 创建者
-      */
+     * 创建者
+     */
     OwnerUin: number;
     /**
-      * 密钥所用的算法类型
-      */
+     * 密钥所用的算法类型
+     */
     Algorithm: string;
     /**
-      * 白盒加密密钥，base64编码
-      */
+     * 白盒加密密钥，base64编码
+     */
     EncryptKey: string;
     /**
-      * 白盒解密密钥，base64编码
-      */
+     * 白盒解密密钥，base64编码
+     */
     DecryptKey: string;
     /**
-      * 资源ID，格式：creatorUin/$creatorUin/$keyId
-      */
+     * 资源ID，格式：creatorUin/$creatorUin/$keyId
+     */
     ResourceId: string;
     /**
-      * 是否有设备指纹与当前密钥绑定
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否有设备指纹与当前密钥绑定
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeviceFingerprintBind: boolean;
 }
 /**
@@ -212,20 +212,20 @@ export interface WhiteboxKeyInfo {
  */
 export interface ListAlgorithmsResponse {
     /**
-      * 本地区支持的对称加密算法
-      */
+     * 本地区支持的对称加密算法
+     */
     SymmetricAlgorithms: Array<AlgorithmInfo>;
     /**
-      * 本地区支持的非对称加密算法
-      */
+     * 本地区支持的非对称加密算法
+     */
     AsymmetricAlgorithms: Array<AlgorithmInfo>;
     /**
-      * 本地区支持的非对称签名验签算法
-      */
+     * 本地区支持的非对称签名验签算法
+     */
     AsymmetricSignVerifyAlgorithms: Array<AlgorithmInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -233,8 +233,8 @@ export interface ListAlgorithmsResponse {
  */
 export interface DisableKeysResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -242,12 +242,12 @@ export interface DisableKeysResponse {
  */
 export interface DescribeWhiteBoxKeyResponse {
     /**
-      * 白盒密钥信息
-      */
+     * 白盒密钥信息
+     */
     KeyInfo: WhiteboxKeyInfo;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -255,8 +255,8 @@ export interface DescribeWhiteBoxKeyResponse {
  */
 export interface UpdateKeyDescriptionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -264,12 +264,12 @@ export interface UpdateKeyDescriptionResponse {
  */
 export interface DescribeWhiteBoxServiceStatusResponse {
     /**
-      * 用户的白盒密钥服务是否可用
-      */
+     * 用户的白盒密钥服务是否可用
+     */
     ServiceEnabled: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -277,20 +277,20 @@ export interface DescribeWhiteBoxServiceStatusResponse {
  */
 export interface ImportKeyMaterialRequest {
     /**
-      * 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。
-      */
+     * 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。
+     */
     EncryptedKeyMaterial: string;
     /**
-      * 通过调用GetParametersForImport获得的导入令牌。
-      */
+     * 通过调用GetParametersForImport获得的导入令牌。
+     */
     ImportToken: string;
     /**
-      * 指定导入密钥材料的CMK，需要和GetParametersForImport 指定的CMK相同。
-      */
+     * 指定导入密钥材料的CMK，需要和GetParametersForImport 指定的CMK相同。
+     */
     KeyId: string;
     /**
-      * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点，最大支持 2147443200。
-      */
+     * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点，最大支持 2147443200。
+     */
     ValidTo?: number;
 }
 /**
@@ -298,8 +298,8 @@ export interface ImportKeyMaterialRequest {
  */
 export interface EnableKeyRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -307,8 +307,8 @@ export interface EnableKeyRequest {
  */
 export interface GetKeyRotationStatusRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -320,12 +320,12 @@ export declare type ListAlgorithmsRequest = null;
  */
 export interface Tag {
     /**
-      * 标签键
-      */
+     * 标签键
+     */
     TagKey: string;
     /**
-      * 标签值
-      */
+     * 标签值
+     */
     TagValue: string;
 }
 /**
@@ -333,17 +333,17 @@ export interface Tag {
  */
 export interface ListKeyDetailResponse {
     /**
-      * CMK的总数量
-      */
+     * CMK的总数量
+     */
     TotalCount: number;
     /**
-      * 返回的属性信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回的属性信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KeyMetadatas: Array<KeyMetadata>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -351,28 +351,28 @@ export interface ListKeyDetailResponse {
  */
 export interface GenerateDataKeyRequest {
     /**
-      * CMK全局唯一标识符
-      */
+     * CMK全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。KeySpec 和 NumberOfBytes 必须指定一个
-      */
+     * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。KeySpec 和 NumberOfBytes 必须指定一个
+     */
     KeySpec?: string;
     /**
-      * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024。KeySpec 和 NumberOfBytes 必须指定一个
-      */
+     * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024。KeySpec 和 NumberOfBytes 必须指定一个
+     */
     NumberOfBytes?: number;
     /**
-      * key/value对的json字符串，如果使用该字段，则返回的DataKey在解密时需要填入相同的字符串
-      */
+     * key/value对的json字符串，如果使用该字段，则返回的DataKey在解密时需要填入相同的字符串
+     */
     EncryptionContext?: string;
     /**
-      * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
-      */
+     * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+     */
     EncryptionPublicKey?: string;
     /**
-      * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
-      */
+     * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+     */
     EncryptionAlgorithm?: string;
 }
 /**
@@ -380,8 +380,8 @@ export interface GenerateDataKeyRequest {
  */
 export interface UpdateAliasResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -389,16 +389,16 @@ export interface UpdateAliasResponse {
  */
 export interface ScheduleKeyDeletionResponse {
     /**
-      * 计划删除执行时间
-      */
+     * 计划删除执行时间
+     */
     DeletionDate: number;
     /**
-      * 唯一标志被计划删除的CMK
-      */
+     * 唯一标志被计划删除的CMK
+     */
     KeyId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -406,16 +406,16 @@ export interface ScheduleKeyDeletionResponse {
  */
 export interface PostQuantumCryptoVerifyRequest {
     /**
-      * 密钥的唯一标识
-      */
+     * 密钥的唯一标识
+     */
     KeyId: string;
     /**
-      * 签名值，通过调用KMS PostQuantumCryptoSign签名接口生成
-      */
+     * 签名值，通过调用KMS PostQuantumCryptoSign签名接口生成
+     */
     SignatureValue: string;
     /**
-      * Base64 编码的消息原文，消息原文的长度（Base64编码前的长度）不超过4096字节。
-      */
+     * Base64 编码的消息原文，消息原文的长度（Base64编码前的长度）不超过4096字节。
+     */
     Message: string;
 }
 /**
@@ -423,12 +423,12 @@ export interface PostQuantumCryptoVerifyRequest {
  */
 export interface GenerateRandomResponse {
     /**
-      * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
-      */
+     * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
+     */
     Plaintext: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -436,8 +436,8 @@ export interface GenerateRandomResponse {
  */
 export interface DescribeKeysRequest {
     /**
-      * 查询CMK的ID列表，批量查询一次最多支持100个KeyId
-      */
+     * 查询CMK的ID列表，批量查询一次最多支持100个KeyId
+     */
     KeyIds: Array<string>;
 }
 /**
@@ -445,8 +445,8 @@ export interface DescribeKeysRequest {
  */
 export interface GetPublicKeyRequest {
     /**
-      * CMK的唯一标识。
-      */
+     * CMK的唯一标识。
+     */
     KeyId: string;
 }
 /**
@@ -458,8 +458,8 @@ export declare type GetServiceStatusRequest = null;
  */
 export interface EnableWhiteBoxKeysResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -467,8 +467,8 @@ export interface EnableWhiteBoxKeysResponse {
  */
 export interface ArchiveKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -476,12 +476,12 @@ export interface ArchiveKeyResponse {
  */
 export interface VerifyByAsymmetricKeyResponse {
     /**
-      * 签名是否有效。true：签名有效，false：签名无效。
-      */
+     * 签名是否有效。true：签名有效，false：签名无效。
+     */
     SignatureValid: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -489,8 +489,8 @@ export interface VerifyByAsymmetricKeyResponse {
  */
 export interface DescribeWhiteBoxKeyRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -498,24 +498,24 @@ export interface DescribeWhiteBoxKeyRequest {
  */
 export interface GetParametersForImportResponse {
     /**
-      * CMK的唯一标识，用于指定目标导入密钥材料的CMK。
-      */
+     * CMK的唯一标识，用于指定目标导入密钥材料的CMK。
+     */
     KeyId: string;
     /**
-      * 导入密钥材料需要的token，用于作为 ImportKeyMaterial 的参数。
-      */
+     * 导入密钥材料需要的token，用于作为 ImportKeyMaterial 的参数。
+     */
     ImportToken: string;
     /**
-      * 用于加密密钥材料的RSA公钥，base64编码。使用PublicKey base64解码后的公钥将导入密钥进行加密后作为 ImportKeyMaterial 的参数。
-      */
+     * 用于加密密钥材料的RSA公钥，base64编码。使用PublicKey base64解码后的公钥将导入密钥进行加密后作为 ImportKeyMaterial 的参数。
+     */
     PublicKey: string;
     /**
-      * 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。
-      */
+     * 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。
+     */
     ParametersValidTo: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -523,17 +523,17 @@ export interface GetParametersForImportResponse {
  */
 export interface DecryptResponse {
     /**
-      * CMK的全局唯一标识
-      */
+     * CMK的全局唯一标识
+     */
     KeyId: string;
     /**
-      * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
-若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
-      */
+     * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
+  若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
+     */
     Plaintext: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -541,30 +541,30 @@ export interface DecryptResponse {
  */
 export interface CreateWhiteBoxKeyResponse {
     /**
-      * 用于加密的密钥，base64编码
-      */
+     * 用于加密的密钥，base64编码
+     */
     EncryptKey: string;
     /**
-      * 用于解密的密钥，base64编码
-      */
+     * 用于解密的密钥，base64编码
+     */
     DecryptKey: string;
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagCode: number;
     /**
-      * 标签操作的返回信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签操作的返回信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagMsg: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -572,8 +572,8 @@ export interface CreateWhiteBoxKeyResponse {
  */
 export interface Key {
     /**
-      * CMK的全局唯一标识。
-      */
+     * CMK的全局唯一标识。
+     */
     KeyId: string;
 }
 /**
@@ -581,8 +581,8 @@ export interface Key {
  */
 export interface DeleteImportedKeyMaterialResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -590,8 +590,8 @@ export interface DeleteImportedKeyMaterialResponse {
  */
 export interface EnableKeysRequest {
     /**
-      * 需要批量启用的CMK Id 列表， CMK数量最大支持100
-      */
+     * 需要批量启用的CMK Id 列表， CMK数量最大支持100
+     */
     KeyIds: Array<string>;
 }
 /**
@@ -599,8 +599,8 @@ export interface EnableKeysRequest {
  */
 export interface EnableWhiteBoxKeysRequest {
     /**
-      * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
-      */
+     * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
+     */
     KeyIds: Array<string>;
 }
 /**
@@ -608,16 +608,16 @@ export interface EnableWhiteBoxKeysRequest {
  */
 export interface EncryptByWhiteBoxResponse {
     /**
-      * 初始化向量，加密算法会使用到, base64编码。如果由调用方在入参中传入，则原样返回。如果调用方没有传入，则后端服务随机生成，并返回
-      */
+     * 初始化向量，加密算法会使用到, base64编码。如果由调用方在入参中传入，则原样返回。如果调用方没有传入，则后端服务随机生成，并返回
+     */
     InitializationVector: string;
     /**
-      * 加密后的密文，base64编码
-      */
+     * 加密后的密文，base64编码
+     */
     CipherText: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -625,13 +625,13 @@ export interface EncryptByWhiteBoxResponse {
  */
 export interface DescribeKeysResponse {
     /**
-      * 返回的属性信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回的属性信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KeyMetadatas: Array<KeyMetadata>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -639,8 +639,8 @@ export interface DescribeKeysResponse {
  */
 export interface EnableWhiteBoxKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -648,20 +648,20 @@ export interface EnableWhiteBoxKeyResponse {
  */
 export interface ReEncryptRequest {
     /**
-      * 需要重新加密的密文
-      */
+     * 需要重新加密的密文
+     */
     CiphertextBlob: string;
     /**
-      * 重新加密使用的CMK，如果为空，则使用密文原有的CMK重新加密（若密钥没有轮换则密文不会刷新）
-      */
+     * 重新加密使用的CMK，如果为空，则使用密文原有的CMK重新加密（若密钥没有轮换则密文不会刷新）
+     */
     DestinationKeyId?: string;
     /**
-      * CiphertextBlob 密文加密时使用的key/value对的json字符串。如果加密时未使用，则为空
-      */
+     * CiphertextBlob 密文加密时使用的key/value对的json字符串。如果加密时未使用，则为空
+     */
     SourceEncryptionContext?: string;
     /**
-      * 重新加密使用的key/value对的json字符串，如果使用该字段，则返回的新密文在解密时需要填入相同的字符串
-      */
+     * 重新加密使用的key/value对的json字符串，如果使用该字段，则返回的新密文在解密时需要填入相同的字符串
+     */
     DestinationEncryptionContext?: string;
 }
 /**
@@ -669,17 +669,17 @@ export interface ReEncryptRequest {
  */
 export interface ListKeysResponse {
     /**
-      * CMK列表数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CMK列表数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Keys: Array<Key>;
     /**
-      * CMK的总数量
-      */
+     * CMK的总数量
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -687,16 +687,16 @@ export interface ListKeysResponse {
  */
 export interface AsymmetricSm2DecryptResponse {
     /**
-      * CMK的唯一标识
-      */
+     * CMK的唯一标识
+     */
     KeyId: string;
     /**
-      * 解密后的明文，base64编码
-      */
+     * 解密后的明文，base64编码
+     */
     Plaintext: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -704,8 +704,8 @@ export interface AsymmetricSm2DecryptResponse {
  */
 export interface DisableKeyRotationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -713,8 +713,8 @@ export interface DisableKeyRotationResponse {
  */
 export interface DisableWhiteBoxKeysRequest {
     /**
-      * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
-      */
+     * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
+     */
     KeyIds: Array<string>;
 }
 /**
@@ -722,44 +722,44 @@ export interface DisableWhiteBoxKeysRequest {
  */
 export interface ListKeyDetailRequest {
     /**
-      * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
-      */
+     * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+     */
     Offset?: number;
     /**
-      * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
-      */
+     * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
+     */
     Limit?: number;
     /**
-      * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
-      */
+     * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
+     */
     Role?: number;
     /**
-      * 根据CMK创建时间排序， 0 表示按照降序排序，1表示按照升序排序
-      */
+     * 根据CMK创建时间排序， 0 表示按照降序排序，1表示按照升序排序
+     */
     OrderType?: number;
     /**
-      * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3 表示查询PendingDelete 状态的CMK(处于计划删除状态的Key)，4 表示查询 PendingImport 状态的CMK，5 表示查询 Archived 状态的 CMK
-      */
+     * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3 表示查询PendingDelete 状态的CMK(处于计划删除状态的Key)，4 表示查询 PendingImport 状态的CMK，5 表示查询 Archived 状态的 CMK
+     */
     KeyState?: number;
     /**
-      * 根据KeyId或者Alias进行模糊匹配查询
-      */
+     * 根据KeyId或者Alias进行模糊匹配查询
+     */
     SearchKeyAlias?: string;
     /**
-      * 根据CMK类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的CMK， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型CMK，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
-      */
+     * 根据CMK类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的CMK， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型CMK，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
+     */
     Origin?: string;
     /**
-      * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2 或 ASYMMETRIC_SIGN_VERIFY_RSA_2048 或 ASYMMETRIC_SIGN_VERIFY_ECC，为空则默认筛选ENCRYPT_DECRYPT类型
-      */
+     * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2 或 ASYMMETRIC_SIGN_VERIFY_RSA_2048 或 ASYMMETRIC_SIGN_VERIFY_ECC，为空则默认筛选ENCRYPT_DECRYPT类型
+     */
     KeyUsage?: string;
     /**
-      * 标签过滤条件
-      */
+     * 标签过滤条件
+     */
     TagFilters?: Array<TagFilter>;
     /**
-      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
-      */
+     * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+     */
     HsmClusterId?: string;
 }
 /**
@@ -767,8 +767,8 @@ export interface ListKeyDetailRequest {
  */
 export interface DeleteWhiteBoxKeyRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -776,12 +776,12 @@ export interface DeleteWhiteBoxKeyRequest {
  */
 export interface AlgorithmInfo {
     /**
-      * 算法的标识
-      */
+     * 算法的标识
+     */
     KeyUsage: string;
     /**
-      * 算法的名称
-      */
+     * 算法的名称
+     */
     Algorithm: string;
 }
 /**
@@ -789,13 +789,13 @@ export interface AlgorithmInfo {
  */
 export interface GetRegionsResponse {
     /**
-      * 可用region列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可用region列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Regions: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -803,21 +803,21 @@ export interface GetRegionsResponse {
  */
 export interface GenerateDataKeyResponse {
     /**
-      * CMK的全局唯一标识
-      */
+     * CMK的全局唯一标识
+     */
     KeyId: string;
     /**
-      * 若调用时未提供 EncryptionPublicKey，该字段值为生成的数据密钥 DataKey 的 Base64 编码的明文，需进行 Base64 解码以获取 DataKey 明文。
-若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取 DataKey 明文。
-      */
+     * 若调用时未提供 EncryptionPublicKey，该字段值为生成的数据密钥 DataKey 的 Base64 编码的明文，需进行 Base64 解码以获取 DataKey 明文。
+  若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取 DataKey 明文。
+     */
     Plaintext: string;
     /**
-      * 数据密钥DataKey加密后的密文，用户需要自行保存该密文，KMS不托管用户的数据密钥。可以通过Decrypt接口从CiphertextBlob中获取数据密钥DataKey明文
-      */
+     * 数据密钥DataKey加密后的密文，用户需要自行保存该密文，KMS不托管用户的数据密钥。可以通过Decrypt接口从CiphertextBlob中获取数据密钥DataKey明文
+     */
     CiphertextBlob: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -825,20 +825,20 @@ export interface GenerateDataKeyResponse {
  */
 export interface CreateWhiteBoxKeyRequest {
     /**
-      * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。Alias不可重复。
-      */
+     * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。Alias不可重复。
+     */
     Alias: string;
     /**
-      * 创建密钥所有的算法类型，支持的取值：AES_256,SM4
-      */
+     * 创建密钥所有的算法类型，支持的取值：AES_256,SM4
+     */
     Algorithm: string;
     /**
-      * 密钥的描述，最大1024字节
-      */
+     * 密钥的描述，最大1024字节
+     */
     Description?: string;
     /**
-      * 标签列表
-      */
+     * 标签列表
+     */
     Tags?: Array<Tag>;
 }
 /**
@@ -846,8 +846,8 @@ export interface CreateWhiteBoxKeyRequest {
  */
 export interface OverwriteWhiteBoxDeviceFingerprintsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -855,8 +855,8 @@ export interface OverwriteWhiteBoxDeviceFingerprintsResponse {
  */
 export interface DisableWhiteBoxKeysResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -864,8 +864,8 @@ export interface DisableWhiteBoxKeysResponse {
  */
 export interface ArchiveKeyRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -873,16 +873,16 @@ export interface ArchiveKeyRequest {
  */
 export interface GetParametersForImportRequest {
     /**
-      * CMK的唯一标识，获取密钥参数的CMK必须是EXTERNAL类型，即在CreateKey时指定Type=2 类型的CMK。
-      */
+     * CMK的唯一标识，获取密钥参数的CMK必须是EXTERNAL类型，即在CreateKey时指定Type=2 类型的CMK。
+     */
     KeyId: string;
     /**
-      * 指定加密密钥材料的算法，目前支持RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256
-      */
+     * 指定加密密钥材料的算法，目前支持RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256
+     */
     WrappingAlgorithm: string;
     /**
-      * 指定加密密钥材料的类型，目前只支持RSA_2048
-      */
+     * 指定加密密钥材料的类型，目前只支持RSA_2048
+     */
     WrappingKeySpec: string;
 }
 /**
@@ -890,48 +890,48 @@ export interface GetParametersForImportRequest {
  */
 export interface CreateKeyResponse {
     /**
-      * CMK的全局唯一标识符
-      */
+     * CMK的全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 作为密钥更容易辨识，更容易被人看懂的别名
-      */
+     * 作为密钥更容易辨识，更容易被人看懂的别名
+     */
     Alias: string;
     /**
-      * 密钥创建时间，unix时间戳
-      */
+     * 密钥创建时间，unix时间戳
+     */
     CreateTime: number;
     /**
-      * CMK的描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CMK的描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * CMK的状态
-      */
+     * CMK的状态
+     */
     KeyState: string;
     /**
-      * CMK的用途
-      */
+     * CMK的用途
+     */
     KeyUsage: string;
     /**
-      * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagCode: number;
     /**
-      * 标签操作的返回信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签操作的返回信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagMsg: string;
     /**
-      * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HsmClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -939,24 +939,24 @@ export interface CreateKeyResponse {
  */
 export interface ReEncryptResponse {
     /**
-      * 重新加密后的密文
-      */
+     * 重新加密后的密文
+     */
     CiphertextBlob: string;
     /**
-      * 重新加密使用的CMK
-      */
+     * 重新加密使用的CMK
+     */
     KeyId: string;
     /**
-      * 重新加密前密文使用的CMK
-      */
+     * 重新加密前密文使用的CMK
+     */
     SourceKeyId: string;
     /**
-      * true表示密文已经重新加密。同一个CMK进行重加密，在密钥没有发生轮换的情况下不会进行实际重新加密操作，返回原密文
-      */
+     * true表示密文已经重新加密。同一个CMK进行重加密，在密钥没有发生轮换的情况下不会进行实际重新加密操作，返回原密文
+     */
     ReEncrypted: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -964,16 +964,16 @@ export interface ReEncryptResponse {
  */
 export interface EncryptResponse {
     /**
-      * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为Decrypt接口的输入参数，才可以解密出原文。
-      */
+     * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为Decrypt接口的输入参数，才可以解密出原文。
+     */
     CiphertextBlob: string;
     /**
-      * 加密使用的CMK的全局唯一标识
-      */
+     * 加密使用的CMK的全局唯一标识
+     */
     KeyId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -981,8 +981,8 @@ export interface EncryptResponse {
  */
 export interface CancelKeyDeletionRequest {
     /**
-      * 需要被取消删除的CMK的唯一标志
-      */
+     * 需要被取消删除的CMK的唯一标志
+     */
     KeyId: string;
 }
 /**
@@ -990,8 +990,8 @@ export interface CancelKeyDeletionRequest {
  */
 export interface DeleteImportedKeyMaterialRequest {
     /**
-      * 指定需要删除密钥材料的EXTERNAL CMK。
-      */
+     * 指定需要删除密钥材料的EXTERNAL CMK。
+     */
     KeyId: string;
 }
 /**
@@ -999,8 +999,8 @@ export interface DeleteImportedKeyMaterialRequest {
  */
 export interface EnableKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1008,51 +1008,51 @@ export interface EnableKeyResponse {
  */
 export interface GetServiceStatusResponse {
     /**
-      * KMS服务是否开通， true 表示已开通
-      */
+     * KMS服务是否开通， true 表示已开通
+     */
     ServiceEnabled?: boolean;
     /**
-      * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InvalidType?: number;
     /**
-      * 0-普通版，1-旗舰版
-      */
+     * 0-普通版，1-旗舰版
+     */
     UserLevel?: number;
     /**
-      * 旗舰版到期时间（Epoch Unix Timestamp）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 旗舰版到期时间（Epoch Unix Timestamp）。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProExpireTime?: number;
     /**
-      * 旗舰版是否自动续费：0-不自动续费，1-自动续费
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 旗舰版是否自动续费：0-不自动续费，1-自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProRenewFlag?: number;
     /**
-      * 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProResourceId?: string;
     /**
-      * 是否开通 KMS 托管版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开通 KMS 托管版
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExclusiveVSMEnabled?: boolean;
     /**
-      * 是否开通 KMS 独享版
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开通 KMS 独享版
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExclusiveHSMEnabled?: boolean;
     /**
-      * KMS 订阅信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * KMS 订阅信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubscriptionInfo?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1060,13 +1060,13 @@ export interface GetServiceStatusResponse {
  */
 export interface DeviceFingerprint {
     /**
-      * 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
-      */
+     * 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
+     */
     Identity: string;
     /**
-      * 描述信息，如：IP，设备名称等，最大1024字节
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述信息，如：IP，设备名称等，最大1024字节
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description?: string;
 }
 /**
@@ -1074,12 +1074,12 @@ export interface DeviceFingerprint {
  */
 export interface GetKeyRotationStatusResponse {
     /**
-      * 密钥轮换是否开启
-      */
+     * 密钥轮换是否开启
+     */
     KeyRotationEnabled: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1087,16 +1087,16 @@ export interface GetKeyRotationStatusResponse {
  */
 export interface EncryptRequest {
     /**
-      * 调用CreateKey生成的CMK全局唯一标识符
-      */
+     * 调用CreateKey生成的CMK全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
-      */
+     * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
+     */
     Plaintext: string;
     /**
-      * key/value对的json字符串，如果指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024个字符
-      */
+     * key/value对的json字符串，如果指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024个字符
+     */
     EncryptionContext?: string;
 }
 /**
@@ -1104,12 +1104,12 @@ export interface EncryptRequest {
  */
 export interface AsymmetricSm2DecryptRequest {
     /**
-      * CMK的唯一标识
-      */
+     * CMK的唯一标识
+     */
     KeyId: string;
     /**
-      * 使用PublicKey加密的密文，Base64编码。密文长度不能超过256字节。
-      */
+     * 使用PublicKey加密的密文，Base64编码。密文长度不能超过256字节。
+     */
     Ciphertext: string;
 }
 /**
@@ -1117,8 +1117,8 @@ export interface AsymmetricSm2DecryptRequest {
  */
 export interface DeleteWhiteBoxKeyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1126,20 +1126,20 @@ export interface DeleteWhiteBoxKeyResponse {
  */
 export interface ListKeysRequest {
     /**
-      * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
-      */
+     * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+     */
     Offset?: number;
     /**
-      * 含义跟 SQL 查询的 Limit 一致，表示本次获最多获取 Limit 个元素。缺省值为10，最大值为200
-      */
+     * 含义跟 SQL 查询的 Limit 一致，表示本次获最多获取 Limit 个元素。缺省值为10，最大值为200
+     */
     Limit?: number;
     /**
-      * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
-      */
+     * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
+     */
     Role?: number;
     /**
-      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
-      */
+     * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+     */
     HsmClusterId?: string;
 }
 /**
@@ -1147,8 +1147,8 @@ export interface ListKeysRequest {
  */
 export interface DescribeWhiteBoxDecryptKeyRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -1156,72 +1156,72 @@ export interface DescribeWhiteBoxDecryptKeyRequest {
  */
 export interface KeyMetadata {
     /**
-      * CMK的全局唯一标识
-      */
+     * CMK的全局唯一标识
+     */
     KeyId: string;
     /**
-      * 作为密钥更容易辨识，更容易被人看懂的别名
-      */
+     * 作为密钥更容易辨识，更容易被人看懂的别名
+     */
     Alias: string;
     /**
-      * 密钥创建时间
-      */
+     * 密钥创建时间
+     */
     CreateTime: number;
     /**
-      * CMK的描述
-      */
+     * CMK的描述
+     */
     Description: string;
     /**
-      * CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport | Archived
-      */
+     * CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport | Archived
+     */
     KeyState: string;
     /**
-      * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC
-      */
+     * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC
+     */
     KeyUsage: string;
     /**
-      * CMK类型，2 表示符合FIPS标准，4表示符合国密标准
-      */
+     * CMK类型，2 表示符合FIPS标准，4表示符合国密标准
+     */
     Type: number;
     /**
-      * 创建者
-      */
+     * 创建者
+     */
     CreatorUin: number;
     /**
-      * 是否开启了密钥轮换功能
-      */
+     * 是否开启了密钥轮换功能
+     */
     KeyRotationEnabled: boolean;
     /**
-      * CMK的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名
-      */
+     * CMK的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名
+     */
     Owner: string;
     /**
-      * 在密钥轮换开启状态下，下次轮换的时间
-      */
+     * 在密钥轮换开启状态下，下次轮换的时间
+     */
     NextRotateTime: number;
     /**
-      * 计划删除的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计划删除的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeletionDate: number;
     /**
-      * CMK 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CMK 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Origin: string;
     /**
-      * 在Origin为  EXTERNAL 时有效，表示密钥材料的有效日期， 0 表示不过期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 在Origin为  EXTERNAL 时有效，表示密钥材料的有效日期， 0 表示不过期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ValidTo: number;
     /**
-      * 资源ID，格式：creatorUin/$creatorUin/$keyId
-      */
+     * 资源ID，格式：creatorUin/$creatorUin/$keyId
+     */
     ResourceId: string;
     /**
-      * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HsmClusterId: string;
 }
 /**
@@ -1229,8 +1229,8 @@ export interface KeyMetadata {
  */
 export interface CancelKeyArchiveResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1238,20 +1238,20 @@ export interface CancelKeyArchiveResponse {
  */
 export interface DecryptRequest {
     /**
-      * 待解密的密文数据
-      */
+     * 待解密的密文数据
+     */
     CiphertextBlob: string;
     /**
-      * key/value对的json字符串，如果Encrypt指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024字符
-      */
+     * key/value对的json字符串，如果Encrypt指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024字符
+     */
     EncryptionContext?: string;
     /**
-      * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
-      */
+     * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+     */
     EncryptionPublicKey?: string;
     /**
-      * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
-      */
+     * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+     */
     EncryptionAlgorithm?: string;
 }
 /**
@@ -1259,20 +1259,20 @@ export interface DecryptRequest {
  */
 export interface DescribeWhiteBoxKeyDetailsRequest {
     /**
-      * 过滤条件：密钥的状态，0：disabled，1：enabled
-      */
+     * 过滤条件：密钥的状态，0：disabled，1：enabled
+     */
     KeyStatus?: number;
     /**
-      * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
-      */
+     * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+     */
     Offset?: number;
     /**
-      * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为0, 表示不分页
-      */
+     * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为0, 表示不分页
+     */
     Limit?: number;
     /**
-      * 标签过滤条件
-      */
+     * 标签过滤条件
+     */
     TagFilters?: Array<TagFilter>;
 }
 /**
@@ -1280,12 +1280,12 @@ export interface DescribeWhiteBoxKeyDetailsRequest {
  */
 export interface PostQuantumCryptoSignRequest {
     /**
-      * Base64 编码的消息原文。消息原文的长度（Base64编码前的长度）不超过4096字节。
-      */
+     * Base64 编码的消息原文。消息原文的长度（Base64编码前的长度）不超过4096字节。
+     */
     Message: string;
     /**
-      * 密钥的唯一标识
-      */
+     * 密钥的唯一标识
+     */
     KeyId: string;
 }
 /**
@@ -1293,16 +1293,16 @@ export interface PostQuantumCryptoSignRequest {
  */
 export interface PostQuantumCryptoDecryptRequest {
     /**
-      * 待解密的密文数据
-      */
+     * 待解密的密文数据
+     */
     CiphertextBlob: string;
     /**
-      * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
-      */
+     * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+     */
     EncryptionPublicKey?: string;
     /**
-      * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
-      */
+     * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+     */
     EncryptionAlgorithm?: string;
 }
 /**
@@ -1310,16 +1310,16 @@ export interface PostQuantumCryptoDecryptRequest {
  */
 export interface AsymmetricRsaDecryptResponse {
     /**
-      * CMK的唯一标识
-      */
+     * CMK的唯一标识
+     */
     KeyId: string;
     /**
-      * 解密后的明文，base64编码
-      */
+     * 解密后的明文，base64编码
+     */
     Plaintext: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1327,12 +1327,12 @@ export interface AsymmetricRsaDecryptResponse {
  */
 export interface CancelKeyDeletionResponse {
     /**
-      * 唯一标志被取消删除的CMK。
-      */
+     * 唯一标志被取消删除的CMK。
+     */
     KeyId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1340,8 +1340,8 @@ export interface CancelKeyDeletionResponse {
  */
 export interface DisableKeysRequest {
     /**
-      * 需要批量禁用的CMK Id 列表，CMK数量最大支持100
-      */
+     * 需要批量禁用的CMK Id 列表，CMK数量最大支持100
+     */
     KeyIds: Array<string>;
 }
 /**
@@ -1349,8 +1349,8 @@ export interface DisableKeysRequest {
  */
 export interface DisableWhiteBoxKeyRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -1358,16 +1358,16 @@ export interface DisableWhiteBoxKeyRequest {
  */
 export interface UnbindCloudResourceRequest {
     /**
-      * cmk的ID
-      */
+     * cmk的ID
+     */
     KeyId: string;
     /**
-      * 云产品的唯一性标识符
-      */
+     * 云产品的唯一性标识符
+     */
     ProductId: string;
     /**
-      * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
-      */
+     * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
+     */
     ResourceId: string;
 }
 /**
@@ -1375,12 +1375,12 @@ export interface UnbindCloudResourceRequest {
  */
 export interface OverwriteWhiteBoxDeviceFingerprintsRequest {
     /**
-      * 白盒密钥ID
-      */
+     * 白盒密钥ID
+     */
     KeyId: string;
     /**
-      * 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
-      */
+     * 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
+     */
     DeviceFingerprints?: Array<DeviceFingerprint>;
 }
 /**
@@ -1388,8 +1388,8 @@ export interface OverwriteWhiteBoxDeviceFingerprintsRequest {
  */
 export interface EnableKeyRotationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1397,8 +1397,8 @@ export interface EnableKeyRotationResponse {
  */
 export interface BindCloudResourceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1406,8 +1406,8 @@ export interface BindCloudResourceResponse {
  */
 export interface EnableKeysResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1415,20 +1415,20 @@ export interface EnableKeysResponse {
  */
 export interface SignByAsymmetricKeyRequest {
     /**
-      * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
-      */
+     * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+     */
     Algorithm: string;
     /**
-      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节
-      */
+     * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节
+     */
     Message: string;
     /**
-      * 密钥的唯一标识
-      */
+     * 密钥的唯一标识
+     */
     KeyId: string;
     /**
-      * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
-      */
+     * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+     */
     MessageType?: string;
 }
 /**
@@ -1436,8 +1436,8 @@ export interface SignByAsymmetricKeyRequest {
  */
 export interface DescribeWhiteBoxDeviceFingerprintsRequest {
     /**
-      * 白盒密钥ID
-      */
+     * 白盒密钥ID
+     */
     KeyId: string;
 }
 /**
@@ -1449,16 +1449,16 @@ export declare type GetRegionsRequest = null;
  */
 export interface PostQuantumCryptoEncryptResponse {
     /**
-      * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为PostQuantumCryptoDecrypt接口的输入参数，才可以解密出原文。
-      */
+     * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为PostQuantumCryptoDecrypt接口的输入参数，才可以解密出原文。
+     */
     CiphertextBlob?: string;
     /**
-      * 加密使用的CMK的全局唯一标识
-      */
+     * 加密使用的CMK的全局唯一标识
+     */
     KeyId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1466,16 +1466,16 @@ export interface PostQuantumCryptoEncryptResponse {
  */
 export interface EncryptByWhiteBoxRequest {
     /**
-      * 白盒密钥的全局唯一标识符
-      */
+     * 白盒密钥的全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 待加密的文本， base64编码，文本的原始长度最大不超过4KB
-      */
+     * 待加密的文本， base64编码，文本的原始长度最大不超过4KB
+     */
     PlainText: string;
     /**
-      * 初始化向量，大小为 16 Bytes，加密算法会使用到, base64编码；如果不传，则由后端服务随机生成。用户需要自行保存该值，作为解密的参数。
-      */
+     * 初始化向量，大小为 16 Bytes，加密算法会使用到, base64编码；如果不传，则由后端服务随机生成。用户需要自行保存该值，作为解密的参数。
+     */
     InitializationVector?: string;
 }
 /**
@@ -1483,8 +1483,8 @@ export interface EncryptByWhiteBoxRequest {
  */
 export interface GenerateRandomRequest {
     /**
-      * 生成的随机数的长度。最小值为1， 最大值为1024。
-      */
+     * 生成的随机数的长度。最小值为1， 最大值为1024。
+     */
     NumberOfBytes: number;
 }
 /**
@@ -1492,12 +1492,12 @@ export interface GenerateRandomRequest {
  */
 export interface ScheduleKeyDeletionRequest {
     /**
-      * CMK的唯一标志
-      */
+     * CMK的唯一标志
+     */
     KeyId: string;
     /**
-      * 计划删除时间区间[7,30]
-      */
+     * 计划删除时间区间[7,30]
+     */
     PendingWindowInDays: number;
 }
 /**
@@ -1505,12 +1505,12 @@ export interface ScheduleKeyDeletionRequest {
  */
 export interface PostQuantumCryptoEncryptRequest {
     /**
-      * 调用CreateKey生成的CMK全局唯一标识符
-      */
+     * 调用CreateKey生成的CMK全局唯一标识符
+     */
     KeyId: string;
     /**
-      * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
-      */
+     * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
+     */
     PlainText: string;
 }
 /**
@@ -1518,8 +1518,8 @@ export interface PostQuantumCryptoEncryptRequest {
  */
 export interface DisableKeyRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -1527,8 +1527,8 @@ export interface DisableKeyRequest {
  */
 export interface ImportKeyMaterialResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1536,20 +1536,20 @@ export interface ImportKeyMaterialResponse {
  */
 export interface GetPublicKeyResponse {
     /**
-      * CMK的唯一标识。
-      */
+     * CMK的唯一标识。
+     */
     KeyId: string;
     /**
-      * 经过base64编码的公钥内容。
-      */
+     * 经过base64编码的公钥内容。
+     */
     PublicKey: string;
     /**
-      * PEM格式的公钥内容。
-      */
+     * PEM格式的公钥内容。
+     */
     PublicKeyPem: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1557,16 +1557,16 @@ export interface GetPublicKeyResponse {
  */
 export interface BindCloudResourceRequest {
     /**
-      * cmk的ID
-      */
+     * cmk的ID
+     */
     KeyId: string;
     /**
-      * 云产品的唯一性标识符
-      */
+     * 云产品的唯一性标识符
+     */
     ProductId: string;
     /**
-      * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
-      */
+     * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
+     */
     ResourceId: string;
 }
 /**
@@ -1574,12 +1574,12 @@ export interface BindCloudResourceRequest {
  */
 export interface TagFilter {
     /**
-      * 标签键
-      */
+     * 标签键
+     */
     TagKey: string;
     /**
-      * 标签值
-      */
+     * 标签值
+     */
     TagValue?: Array<string>;
 }
 /**
@@ -1587,12 +1587,12 @@ export interface TagFilter {
  */
 export interface PostQuantumCryptoSignResponse {
     /**
-      * 签名值，Base64编码。可使用 PostQuantumCryptoVerify接口对签名值进行验证。
-      */
+     * 签名值，Base64编码。可使用 PostQuantumCryptoVerify接口对签名值进行验证。
+     */
     Signature?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1600,12 +1600,12 @@ export interface PostQuantumCryptoSignResponse {
  */
 export interface SignByAsymmetricKeyResponse {
     /**
-      * 签名，Base64编码
-      */
+     * 签名，Base64编码
+     */
     Signature: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1613,12 +1613,12 @@ export interface SignByAsymmetricKeyResponse {
  */
 export interface PostQuantumCryptoVerifyResponse {
     /**
-      * 签名是否有效。true：签名有效，false：签名无效。
-      */
+     * 签名是否有效。true：签名有效，false：签名无效。
+     */
     SignatureValid?: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1626,12 +1626,12 @@ export interface PostQuantumCryptoVerifyResponse {
  */
 export interface DescribeWhiteBoxDecryptKeyResponse {
     /**
-      * 白盒解密密钥，base64编码
-      */
+     * 白盒解密密钥，base64编码
+     */
     DecryptKey: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1639,12 +1639,12 @@ export interface DescribeWhiteBoxDecryptKeyResponse {
  */
 export interface DescribeWhiteBoxDeviceFingerprintsResponse {
     /**
-      * 设备指纹列表
-      */
+     * 设备指纹列表
+     */
     DeviceFingerprints: Array<DeviceFingerprint>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1652,17 +1652,17 @@ export interface DescribeWhiteBoxDeviceFingerprintsResponse {
  */
 export interface PostQuantumCryptoDecryptResponse {
     /**
-      * CMK的全局唯一标识
-      */
+     * CMK的全局唯一标识
+     */
     KeyId?: string;
     /**
-      * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
-若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
-      */
+     * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
+  若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
+     */
     PlainText?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1670,12 +1670,12 @@ export interface PostQuantumCryptoDecryptResponse {
  */
 export interface UpdateKeyDescriptionRequest {
     /**
-      * 新的描述信息，最大支持1024字节
-      */
+     * 新的描述信息，最大支持1024字节
+     */
     Description: string;
     /**
-      * 需要修改描述信息的CMK ID
-      */
+     * 需要修改描述信息的CMK ID
+     */
     KeyId: string;
 }
 /**
@@ -1683,8 +1683,8 @@ export interface UpdateKeyDescriptionRequest {
  */
 export interface UnbindCloudResourceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1692,13 +1692,13 @@ export interface UnbindCloudResourceResponse {
  */
 export interface DescribeKeyResponse {
     /**
-      * 密钥属性信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 密钥属性信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KeyMetadata: KeyMetadata;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1706,8 +1706,8 @@ export interface DescribeKeyResponse {
  */
 export interface CancelKeyArchiveRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }
 /**
@@ -1715,7 +1715,7 @@ export interface CancelKeyArchiveRequest {
  */
 export interface DisableKeyRotationRequest {
     /**
-      * CMK唯一标识符
-      */
+     * CMK唯一标识符
+     */
     KeyId: string;
 }

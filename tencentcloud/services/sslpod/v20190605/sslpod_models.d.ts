@@ -3,8 +3,8 @@
  */
 export interface RefreshDomainResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -12,8 +12,8 @@ export interface RefreshDomainResponse {
  */
 export interface DeleteDomainRequest {
     /**
-      * 域名ID，可通过<a href="https://cloud.tencent.com/document/api/1084/49339">搜索域名</a>接口获得
-      */
+     * 域名ID，可通过<a href="https://cloud.tencent.com/document/api/1084/49339">搜索域名</a>接口获得
+     */
     DomainId: number;
 }
 /**
@@ -25,8 +25,8 @@ export declare type DescribeNoticeInfoRequest = null;
  */
 export interface ModifyDomainTagsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -34,8 +34,8 @@ export interface ModifyDomainTagsResponse {
  */
 export interface DescribeDomainCertsRequest {
     /**
-      * 域名ID，可通过搜索域名接口获得
-      */
+     * 域名ID，可通过搜索域名接口获得
+     */
     DomainId: number;
 }
 /**
@@ -43,8 +43,8 @@ export interface DescribeDomainCertsRequest {
  */
 export interface RefreshDomainRequest {
     /**
-      * 域名列表中的ID，可通过搜索域名接口获得
-      */
+     * 域名列表中的ID，可通过搜索域名接口获得
+     */
     DomainId: number;
 }
 /**
@@ -52,8 +52,8 @@ export interface RefreshDomainRequest {
  */
 export interface ResolveDomainRequest {
     /**
-      * 域名
-      */
+     * 域名
+     */
     Domain: string;
 }
 /**
@@ -61,29 +61,29 @@ export interface ResolveDomainRequest {
  */
 export interface DescribeDomains {
     /**
-      * 列表数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 列表数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Result: Array<DomainSiteInfo>;
     /**
-      * 搜索出来的数量
-      */
+     * 搜索出来的数量
+     */
     SearchTotal: number;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total: number;
     /**
-      * 允许的监控数量
-      */
+     * 允许的监控数量
+     */
     AllowMonitoringCount: number;
     /**
-      * 当前监控的数量
-      */
+     * 当前监控的数量
+     */
     CurrentMonitoringCount: number;
     /**
-      * 允许添加域名总数
-      */
+     * 允许添加域名总数
+     */
     AllowMaxAddDomain: number;
 }
 /**
@@ -91,28 +91,28 @@ export interface DescribeDomains {
  */
 export interface DashboardResult {
     /**
-      * 安全等级图表
-      */
+     * 安全等级图表
+     */
     SecurityLevelPie: Array<ChartNameValue>;
     /**
-      * 证书品牌图表
-      */
+     * 证书品牌图表
+     */
     CertBrandsPie: Array<ChartNameValue>;
     /**
-      * 证书有效时间图表
-      */
+     * 证书有效时间图表
+     */
     CertValidTimePie: Array<ChartNameValue>;
     /**
-      * 证书类型图表
-      */
+     * 证书类型图表
+     */
     CertTypePie: Array<ChartNameValue>;
     /**
-      * ssl bugs图表
-      */
+     * ssl bugs图表
+     */
     SSLBugsLoopholeHistogram: Array<ChartHistogram>;
     /**
-      * 合规图表
-      */
+     * 合规图表
+     */
     ComplianceHistogram: Array<ChartHistogram>;
 }
 /**
@@ -120,12 +120,12 @@ export interface DashboardResult {
  */
 export interface DescribeNoticeInfoResponse {
     /**
-      * 通知信息结果
-      */
+     * 通知信息结果
+     */
     Data?: NoticeInfoResult;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -133,12 +133,12 @@ export interface DescribeNoticeInfoResponse {
  */
 export interface ChartNameValue {
     /**
-      * 图表项名称
-      */
+     * 图表项名称
+     */
     Name: string;
     /**
-      * 图表项值
-      */
+     * 图表项值
+     */
     Value: number;
 }
 /**
@@ -146,28 +146,28 @@ export interface ChartNameValue {
  */
 export interface CreateDomainRequest {
     /**
-      * 监控的服务器类型（0：web，1：smtp，2：imap，3：pops）
-      */
+     * 监控的服务器类型（0：web，1：smtp，2：imap，3：pops）
+     */
     ServerType: number;
     /**
-      * 添加的域名
-      */
+     * 添加的域名
+     */
     Domain: string;
     /**
-      * 添加的端口
-      */
+     * 添加的端口
+     */
     Port: string;
     /**
-      * 指定域名的IP
-      */
+     * 指定域名的IP
+     */
     IP?: string;
     /**
-      * 是否开启通知告警；true：开启通知告警，false：关闭通知告警
-      */
+     * 是否开启通知告警；true：开启通知告警，false：关闭通知告警
+     */
     Notice?: boolean;
     /**
-      * 给域名添加标签，多个以逗号隔开
-      */
+     * 给域名添加标签，多个以逗号隔开
+     */
     Tags?: string;
 }
 /**
@@ -175,12 +175,12 @@ export interface CreateDomainRequest {
  */
 export interface ResolveDomainResponse {
     /**
-      * 响应数据
-      */
+     * 响应数据
+     */
     Data?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -188,12 +188,12 @@ export interface ResolveDomainResponse {
  */
 export interface ModifyDomainTagsRequest {
     /**
-      * 账号下域名ID
-      */
+     * 账号下域名ID
+     */
     AccountDomainId: number;
     /**
-      * 更新后的tag，多个以逗号隔开
-      */
+     * 更新后的tag，多个以逗号隔开
+     */
     Tags: string;
 }
 /**
@@ -201,49 +201,49 @@ export interface ModifyDomainTagsRequest {
  */
 export interface CertInfo {
     /**
-      * 证书sha1
-      */
+     * 证书sha1
+     */
     Hash: string;
     /**
-      * 证书通用名称
-      */
+     * 证书通用名称
+     */
     CN: string;
     /**
-      * 备用名称
-      */
+     * 备用名称
+     */
     SANs: string;
     /**
-      * 公钥算法
-      */
+     * 公钥算法
+     */
     KeyAlgo: string;
     /**
-      * 颁发者
-      */
+     * 颁发者
+     */
     Issuer: string;
     /**
-      * 有效期开始
-      */
+     * 有效期开始
+     */
     BeginTime: string;
     /**
-      * 有效期结束
-      */
+     * 有效期结束
+     */
     EndTime: string;
     /**
-      * 剩余天数
-      */
+     * 剩余天数
+     */
     Days: number;
     /**
-      * 品牌
-      */
+     * 品牌
+     */
     Brand: string;
     /**
-      * 信任状态
-      */
+     * 信任状态
+     */
     TrustStatus: string;
     /**
-      * 证书类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 证书类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CertType: string;
 }
 /**
@@ -251,13 +251,13 @@ export interface CertInfo {
  */
 export interface DescribeDashboardResponse {
     /**
-      * dashboard面板数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * dashboard面板数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: DashboardResult;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -265,12 +265,12 @@ export interface DescribeDashboardResponse {
  */
 export interface DescribeDomainTagsResponse {
     /**
-      * Tag数组
-      */
+     * Tag数组
+     */
     Data?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -278,12 +278,12 @@ export interface DescribeDomainTagsResponse {
  */
 export interface ChartHistogram {
     /**
-      * 项目名
-      */
+     * 项目名
+     */
     Name: string;
     /**
-      * 项目值
-      */
+     * 项目值
+     */
     Children: Array<ChartNameValue>;
 }
 /**
@@ -291,19 +291,19 @@ export interface ChartHistogram {
  */
 export interface LimitInfo {
     /**
-      * 通知类型：
-limit_emai：邮件
-limit_wechat：微信
-limit_phone：手机
-      */
+     * 通知类型：
+  limit_emai：邮件
+  limit_wechat：微信
+  limit_phone：手机
+     */
     Type: string;
     /**
-      * 总量
-      */
+     * 总量
+     */
     Total: number;
     /**
-      * 已发送
-      */
+     * 已发送
+     */
     Sent: number;
 }
 /**
@@ -315,12 +315,12 @@ export declare type DescribeDashboardRequest = null;
  */
 export interface DescribeDomainsResponse {
     /**
-      * 列表数据
-      */
+     * 列表数据
+     */
     Data: DescribeDomains;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -328,16 +328,16 @@ export interface DescribeDomainsResponse {
  */
 export interface NoticeInfoResult {
     /**
-      * 通知ID
-      */
+     * 通知ID
+     */
     Id: number;
     /**
-      * 通知开关信息；0：关闭；15开启
-      */
+     * 通知开关信息；0：关闭；15开启
+     */
     NoticeType: number;
     /**
-      * 额度信息
-      */
+     * 额度信息
+     */
     LimitInfos: Array<LimitInfo>;
 }
 /**
@@ -345,12 +345,12 @@ export interface NoticeInfoResult {
  */
 export interface DescribeDomainCertsResponse {
     /**
-      * 证书信息
-      */
+     * 证书信息
+     */
     Data?: Array<CertInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -358,91 +358,91 @@ export interface DescribeDomainCertsResponse {
  */
 export interface DomainSiteInfo {
     /**
-      * ID标识
-      */
+     * ID标识
+     */
     Id: number;
     /**
-      * 域名
-      */
+     * 域名
+     */
     Domain: string;
     /**
-      * IP地址
-      */
+     * IP地址
+     */
     Ip: string;
     /**
-      * 是否自动获取IP：true：是，false:否
-      */
+     * 是否自动获取IP：true：是，false:否
+     */
     AutoIP: boolean;
     /**
-      * 评级
-"A+"，
- "A"，
-"A-"，
-"B"，
-"C"，
-"D"，
- "E"，
- "F"，
-"T"，
-      */
+     * 评级
+  "A+"，
+   "A"，
+  "A-"，
+  "B"，
+  "C"，
+  "D"，
+   "E"，
+   "F"，
+  "T"，
+     */
     Grade: string;
     /**
-      * 证书品牌
-      */
+     * 证书品牌
+     */
     Brand: string;
     /**
-      * 监控服务类型
-0 :Web
-1: SMTP
-2: IMAP
-3: POP3
-      */
+     * 监控服务类型
+  0 :Web
+  1: SMTP
+  2: IMAP
+  3: POP3
+     */
     ServerType: number;
     /**
-      * 评级Code
-0："unknown"，
-1："A+"，
-2： "A"，
-3："A-"，
-4："B"，
-5："C"，
-6："D"，
-7： "E"，
-8： "F"，
-9："T"，
-      */
+     * 评级Code
+  0："unknown"，
+  1："A+"，
+  2： "A"，
+  3："A-"，
+  4："B"，
+  5："C"，
+  6："D"，
+  7： "E"，
+  8： "F"，
+  9："T"，
+     */
     GradeCode: number;
     /**
-      * 是否监控告警；true：是，false:否
-      */
+     * 是否监控告警；true：是，false:否
+     */
     Notice: boolean;
     /**
-      * 账号域名关系ID
-      */
+     * 账号域名关系ID
+     */
     AccountDomainId: number;
     /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tags: Array<string>;
     /**
-      * 域名状态:
-连接异常，
-证书已过期，
-证书已吊销，
-证书黑名单，
-证书域名不匹配，
-证书不可信，
-证书密钥弱，
-证书即将过期，少于7天，
-证书即将过期，少于30天，
-正常，
-部分异常
-      */
+     * 域名状态:
+  连接异常，
+  证书已过期，
+  证书已吊销，
+  证书黑名单，
+  证书域名不匹配，
+  证书不可信，
+  证书密钥弱，
+  证书即将过期，少于7天，
+  证书即将过期，少于30天，
+  正常，
+  部分异常
+     */
     Status: string;
     /**
-      * 域名端口
-      */
+     * 域名端口
+     */
     Port: string;
 }
 /**
@@ -450,8 +450,8 @@ export interface DomainSiteInfo {
  */
 export interface DeleteDomainResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -459,8 +459,8 @@ export interface DeleteDomainResponse {
  */
 export interface CreateDomainResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -472,54 +472,54 @@ export declare type DescribeDomainTagsRequest = null;
  */
 export interface DescribeDomainsRequest {
     /**
-      * 偏移量
-      */
+     * 偏移量
+     */
     Offset: number;
     /**
-      * 获取数量
-      */
+     * 获取数量
+     */
     Limit: number;
     /**
-      * 搜索的类型有：none，tags，grade，brand，code，hash，limit，domain。
-选tags，入参请填Tag，
-选grade，入参请填Grade，
-选brand，入参请填Brand，
-选code，入参请填Code，
-选hash，入参请填Hash
-选limit，标识只返回数量信息
-选domain，入参请填Domain
-      */
+     * 搜索的类型有：none，tags，grade，brand，code，hash，limit，domain。
+  选tags，入参请填Tag，
+  选grade，入参请填Grade，
+  选brand，入参请填Brand，
+  选code，入参请填Code，
+  选hash，入参请填Hash
+  选limit，标识只返回数量信息
+  选domain，入参请填Domain
+     */
     SearchType: string;
     /**
-      * 标签，多个标签用逗号分隔
-      */
+     * 标签，多个标签用逗号分隔
+     */
     Tag?: string;
     /**
-      * 等级
-      */
+     * 等级
+     */
     Grade?: string;
     /**
-      * 品牌
-      */
+     * 品牌
+     */
     Brand?: string;
     /**
-      * 混合搜索
-      */
+     * 混合搜索
+     */
     Code?: string;
     /**
-      * 证书指纹
-      */
+     * 证书指纹
+     */
     Hash?: string;
     /**
-      * 搜索图标类型
-      */
+     * 搜索图标类型
+     */
     Item?: string;
     /**
-      * 搜索图标值
-      */
+     * 搜索图标值
+     */
     Status?: string;
     /**
-      * 搜索域名
-      */
+     * 搜索域名
+     */
     Domain?: string;
 }

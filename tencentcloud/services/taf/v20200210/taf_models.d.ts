@@ -7,8 +7,8 @@ export declare type InputBusinessEncryptData = null;
  */
 export interface RecognizeCustomizedAudienceRequest {
     /**
-      * 业务入参
-      */
+     * 业务入参
+     */
     BspData: InputRecognizeTargetAudience;
 }
 /**
@@ -16,13 +16,13 @@ export interface RecognizeCustomizedAudienceRequest {
  */
 export interface RecognizeTargetAudienceResponse {
     /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 回包数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data: OutputRecognizeTargetAudience;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -30,29 +30,29 @@ export interface RecognizeTargetAudienceResponse {
  */
 export interface OutputRecognizeTargetAudienceValue {
     /**
-      * 模型ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模型ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ModelId: number;
     /**
-      * 是否正常返回结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否正常返回结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsFound: number;
     /**
-      * 返回分值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回分值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Score: number;
     /**
-      * 模型类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模型类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ModelType: number;
     /**
-      * 入参Uid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 入参Uid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Uid: string;
 }
 /**
@@ -60,18 +60,18 @@ export interface OutputRecognizeTargetAudienceValue {
  */
 export interface OutputRecognizeTargetAudience {
     /**
-      * 返回码（0，成功，其他失败）
-      */
+     * 返回码（0，成功，其他失败）
+     */
     Code: number;
     /**
-      * 返回码对应的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回码对应的信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
     /**
-      * 返回模型结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回模型结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Value: Array<OutputRecognizeTargetAudienceValue>;
 }
 /**
@@ -79,13 +79,13 @@ export interface OutputRecognizeTargetAudience {
  */
 export interface RecognizeCustomizedAudienceResponse {
     /**
-      * 业务出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: OutputRecognizeTargetAudience;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -93,164 +93,164 @@ export interface RecognizeCustomizedAudienceResponse {
  */
 export interface InputRecognizeTargetAudience {
     /**
-      * 模型ID列表
-      */
+     * 模型ID列表
+     */
     ModelIdList: Array<number>;
     /**
-      * 设备ID，AccountType指定的类型
-      */
+     * 设备ID，AccountType指定的类型
+     */
     Uid?: string;
     /**
-      * 设备号类型，1.imei 2.imeiMd5（小写后转MD5转小写）3.idfa， 4.idfaMd5（大写后转MD5转小写），5.手机号,256.其它
-      */
+     * 设备号类型，1.imei 2.imeiMd5（小写后转MD5转小写）3.idfa， 4.idfaMd5（大写后转MD5转小写），5.手机号,256.其它
+     */
     AccountType?: number;
     /**
-      * 用户IP
-      */
+     * 用户IP
+     */
     Ip?: string;
     /**
-      * 操作系统类型(unknown，android，ios，windows)
-      */
+     * 操作系统类型(unknown，android，ios，windows)
+     */
     Os?: string;
     /**
-      * 操作系统版本
-      */
+     * 操作系统版本
+     */
     Osv?: string;
     /**
-      * 纬度
-      */
+     * 纬度
+     */
     Lat?: string;
     /**
-      * 经度
-      */
+     * 经度
+     */
     Lon?: string;
     /**
-      * 设备型号(MI 6)
-      */
+     * 设备型号(MI 6)
+     */
     DeviceModel?: string;
     /**
-      * 竞价底价
-      */
+     * 竞价底价
+     */
     BidFloor?: number;
     /**
-      * 年龄
-      */
+     * 年龄
+     */
     Age?: number;
     /**
-      * 性别(1.MALE 2.FEMALE)
-      */
+     * 性别(1.MALE 2.FEMALE)
+     */
     Gender?: number;
     /**
-      * 用户地址
-      */
+     * 用户地址
+     */
     Location?: string;
     /**
-      * 投放模式（0=PDB，1=PD，2=RTB，10=其他）
-      */
+     * 投放模式（0=PDB，1=PD，2=RTB，10=其他）
+     */
     DeliveryMode?: number;
     /**
-      * 广告位类型<br />（0=前贴片，1=开屏广告，2=网页头部广告、3=网页中部广告、4=网页底部广告、5=悬浮广告、10=其它）
-      */
+     * 广告位类型<br />（0=前贴片，1=开屏广告，2=网页头部广告、3=网页中部广告、4=网页底部广告、5=悬浮广告、10=其它）
+     */
     AdvertisingType?: number;
     /**
-      * mac地址，建议提供
-      */
+     * mac地址，建议提供
+     */
     Mac?: string;
     /**
-      * 电话号码
-      */
+     * 电话号码
+     */
     Phone?: string;
     /**
-      * 浏览器类型
-      */
+     * 浏览器类型
+     */
     Ua?: string;
     /**
-      * 客户端应用
-      */
+     * 客户端应用
+     */
     App?: string;
     /**
-      * 应用包名
-      */
+     * 应用包名
+     */
     Package?: string;
     /**
-      * 设备制造商
-      */
+     * 设备制造商
+     */
     Maker?: string;
     /**
-      * 设备类型（PHONE,TABLET）
-      */
+     * 设备类型（PHONE,TABLET）
+     */
     DeviceType?: string;
     /**
-      * 入网方式(wifi,4g,3g,2g)
-      */
+     * 入网方式(wifi,4g,3g,2g)
+     */
     AccessMode?: string;
     /**
-      * 运营商(1.移动 2.联通 3.电信等)
-      */
+     * 运营商(1.移动 2.联通 3.电信等)
+     */
     Sp?: number;
     /**
-      * 设备屏幕分辨率宽度像素数
-      */
+     * 设备屏幕分辨率宽度像素数
+     */
     DeviceW?: number;
     /**
-      * 设备屏幕分辨率高度像素数
-      */
+     * 设备屏幕分辨率高度像素数
+     */
     DeviceH?: number;
     /**
-      * 是否全屏插广告(0-否，1-是)
-      */
+     * 是否全屏插广告(0-否，1-是)
+     */
     FullScreen?: number;
     /**
-      * 广告位宽度
-      */
+     * 广告位宽度
+     */
     ImpBannerW?: number;
     /**
-      * 广告位高度
-      */
+     * 广告位高度
+     */
     ImpBannerH?: number;
     /**
-      * 网址
-      */
+     * 网址
+     */
     Url?: string;
     /**
-      * 上下文信息
-      */
+     * 上下文信息
+     */
     Context?: string;
     /**
-      * 渠道
-      */
+     * 渠道
+     */
     Channel?: string;
     /**
-      * 请求ID
-      */
+     * 请求ID
+     */
     ReqId?: string;
     /**
-      * 请求ID的md5值
-      */
+     * 请求ID的md5值
+     */
     ReqMd5?: string;
     /**
-      * ad_type
-      */
+     * ad_type
+     */
     AdType?: number;
     /**
-      * app名称
-      */
+     * app名称
+     */
     AppName?: string;
     /**
-      * app版本描述
-      */
+     * app版本描述
+     */
     AppVer?: string;
     /**
-      * 竞价模式1：rtb 2:pd
-      */
+     * 竞价模式1：rtb 2:pd
+     */
     ReqType?: number;
     /**
-      * 用户是否授权,1为授权，0为未授权
-      */
+     * 用户是否授权,1为授权，0为未授权
+     */
     IsAuthorized?: number;
     /**
-      * 设备信息
-      */
+     * 设备信息
+     */
     DeviceList?: Array<Device>;
 }
 /**
@@ -258,12 +258,12 @@ export interface InputRecognizeTargetAudience {
  */
 export interface Device {
     /**
-      * 业务入参id
-      */
+     * 业务入参id
+     */
     DeviceId: string;
     /**
-      * 业务入参类型
-      */
+     * 业务入参类型
+     */
     DeviceType: number;
 }
 /**
@@ -271,8 +271,8 @@ export interface Device {
  */
 export interface RecognizePreciseTargetAudienceRequest {
     /**
-      * 业务数据
-      */
+     * 业务数据
+     */
     BspData: InputRecognizeTargetAudience;
 }
 /**
@@ -280,12 +280,12 @@ export interface RecognizePreciseTargetAudienceRequest {
  */
 export interface RecognizeTargetAudienceRequest {
     /**
-      * 业务数据
-      */
+     * 业务数据
+     */
     BspData: InputRecognizeTargetAudience;
     /**
-      * 业务加密数据
-      */
+     * 业务加密数据
+     */
     BusinessEncryptData?: InputBusinessEncryptData;
 }
 /**
@@ -293,12 +293,12 @@ export interface RecognizeTargetAudienceRequest {
  */
 export interface RecognizePreciseTargetAudienceResponse {
     /**
-      * 回包数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 回包数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: OutputRecognizeTargetAudience;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }

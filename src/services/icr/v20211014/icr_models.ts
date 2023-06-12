@@ -23,7 +23,6 @@ export interface ReqMetadataVagrant {
    * 无
    */
   Key?: string
-
   /**
    * 无
    */
@@ -35,15 +34,14 @@ export interface ReqMetadataVagrant {
  */
 export interface GetIndustryV1HomeMembersRespIndustry {
   /**
-      * 行业ID
+   * 行业ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ID: string
-
   /**
-      * 行业名称
+   * 行业名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IndustryName: string
 }
 
@@ -55,27 +53,22 @@ export interface ReqMetadata {
    * 渠道
    */
   ChannelID?: string
-
   /**
    * 无
    */
   BusinessName?: string
-
   /**
    * 无
    */
   GUID?: string
-
   /**
    * 无
    */
   AppKey?: string
-
   /**
    * 位置定位服务
    */
   LBS?: ReqMetadataLBS
-
   /**
    * 透传字段
    */
@@ -87,63 +80,54 @@ export interface ReqMetadata {
  */
 export interface GetIndustryV1HomeMembersRespData {
   /**
-      * 修改时间
+   * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EditTime: number
-
   /**
-      * 功能列表
+   * 功能列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FeatureList: GetIndustryV1HomeMembersRespFeature
-
   /**
-      * 用户ID
+   * 用户ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ID: string
-
   /**
-      * 用户行业分类
+   * 用户行业分类
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IndustryType: string
-
   /**
-      * 子用户数量
+   * 子用户数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MemberNum: number
-
   /**
-      * 机器人列表
+   * 机器人列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProductList: GetIndustryV1HomeMembersRespProduct
-
   /**
-      * 备注
+   * 备注
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Remark: string
-
   /**
-      * 是否有效
+   * 是否有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: number
-
   /**
-      * 功能列表
+   * 功能列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TypeList: GetIndustryV1HomeMembersRespType
-
   /**
-      * 用户账号
+   * 用户账号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserAccount: string
 }
 
@@ -155,7 +139,6 @@ export interface GetIndustryV1HomeMembersRequest {
    * 无
    */
   Payload: GetIndustryV1HomeMembersReqPayload
-
   /**
    * 无
    */
@@ -167,15 +150,14 @@ export interface GetIndustryV1HomeMembersRequest {
  */
 export interface GetIndustryV1HomeMembersRespFeature {
   /**
-      * 功能名称
+   * 功能名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FeatureName: string
-
   /**
-      * 功能ID
+   * 功能ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ID: string
 }
 
@@ -194,57 +176,49 @@ export interface GetIndustryV1HomeMembersReqPayload {
  */
 export interface GetIndustryV1HomeMembersRespProduct {
   /**
-      * 创建时间
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime: string
-
   /**
-      * 编辑时间
+   * 编辑时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EditTime: string
-
   /**
-      * 机器人ID（AppKey信息）
+   * 机器人ID（AppKey信息）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppKey: string
-
   /**
-      * 机器人图标
+   * 机器人图标
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Image: string
-
   /**
-      * 行业信息
+   * 行业信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Industry: Array<GetIndustryV1HomeMembersRespIndustry>
-
   /**
-      * 操作员列表
+   * 操作员列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OperatorList: string
-
   /**
-      * 机器人名字
+   * 机器人名字
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProductName: string
-
   /**
-      * 备注
+   * 备注
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Remark: string
-
   /**
-      * 模板列表
+   * 模板列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TemplateList: string
 }
 
@@ -256,17 +230,14 @@ export interface RspMetadata {
    * 无
    */
   Code: number
-
   /**
    * 无
    */
   Message: string
-
   /**
    * 无
    */
   SessionID: string
-
   /**
    * 无
    */
@@ -278,33 +249,29 @@ export interface RspMetadata {
  */
 export interface GetIndustryV1HomeMembersRespPayload {
   /**
-      * 用户级别
+   * 用户级别
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountLevel: string
-
   /**
-      * 用户列表
+   * 用户列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DataList: Array<GetIndustryV1HomeMembersRespData>
-
   /**
-      * 每页数量
+   * 每页数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Limit: number
-
   /**
-      * 分页偏移量，从0开始
+   * 分页偏移量，从0开始
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Offset: number
-
   /**
-      * 用户总数
+   * 用户总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Total: number
 }
 
@@ -313,17 +280,15 @@ export interface GetIndustryV1HomeMembersRespPayload {
  */
 export interface GetIndustryV1HomeMembersResponse {
   /**
-      * 无
+   * 无
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metadata: RspMetadata
-
   /**
-      * 无
+   * 无
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Payload: GetIndustryV1HomeMembersRespPayload
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -338,7 +303,6 @@ export interface ReqMetadataLBS {
    * 纬度
    */
   Latitude?: number
-
   /**
    * 经度
    */
@@ -350,14 +314,13 @@ export interface ReqMetadataLBS {
  */
 export interface GetIndustryV1HomeMembersRespType {
   /**
-      * 类型ID
+   * 类型ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Type: string
-
   /**
-      * 类型名称
+   * 类型名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TypeName: string
 }

@@ -3,16 +3,16 @@
  */
 export interface GetDepositFileResponse {
     /**
-      * 存证编号
-      */
+     * 存证编号
+     */
     EvidenceId: string;
     /**
-      * 存证文件临时链接
-      */
+     * 存证文件临时链接
+     */
     EvidenceFile: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -20,32 +20,32 @@ export interface GetDepositFileResponse {
  */
 export interface CreateImageDepositRequest {
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 数据Base64编码，大小不超过5M
-      */
+     * 数据Base64编码，大小不超过5M
+     */
     FileContent: string;
     /**
-      * 带后缀的文件名称，如 test.png
-      */
+     * 带后缀的文件名称，如 test.png
+     */
     FileName: string;
     /**
-      * 文件hash
-      */
+     * 文件hash
+     */
     EvidenceHash: string;
     /**
-      * 业务ID 透传 长度最大不超过64
-      */
+     * 业务ID 透传 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
-      */
+     * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
+     */
     HashType?: number;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -53,32 +53,32 @@ export interface CreateImageDepositRequest {
  */
 export interface CreateVideoDepositRequest {
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 数据Base64编码，大小不超过5M
-      */
+     * 数据Base64编码，大小不超过5M
+     */
     FileContent: string;
     /**
-      * 带后缀的文件名称，如music.mkv
-      */
+     * 带后缀的文件名称，如music.mkv
+     */
     FileName: string;
     /**
-      * 文件hash
-      */
+     * 文件hash
+     */
     EvidenceHash: string;
     /**
-      * 业务ID 透传 长度最大不超过64
-      */
+     * 业务ID 透传 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
-      */
+     * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
+     */
     HashType?: number;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -86,32 +86,32 @@ export interface CreateVideoDepositRequest {
  */
 export interface CreateDocDepositRequest {
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 数据Base64编码，大小不超过5M
-      */
+     * 数据Base64编码，大小不超过5M
+     */
     FileContent: string;
     /**
-      * 带后缀的文件名称，如 test.doc
-      */
+     * 带后缀的文件名称，如 test.doc
+     */
     FileName: string;
     /**
-      * 文件hash
-      */
+     * 文件hash
+     */
     EvidenceHash: string;
     /**
-      * 业务ID 透传 长度最大不超过64
-      */
+     * 业务ID 透传 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
-      */
+     * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
+     */
     HashType?: number;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -119,16 +119,16 @@ export interface CreateDocDepositRequest {
  */
 export interface CreateHashDepositNoSealRequest {
     /**
-      * 数据hash
-      */
+     * 数据hash
+     */
     EvidenceHash: string;
     /**
-      * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
-      */
+     * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 业务扩展信息
-      */
+     * 业务扩展信息
+     */
     EvidenceInfo?: string;
 }
 /**
@@ -136,20 +136,20 @@ export interface CreateHashDepositNoSealRequest {
  */
 export interface CreateHashDepositRequest {
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 数据hash
-      */
+     * 数据hash
+     */
     EvidenceHash: string;
     /**
-      * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
-      */
+     * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -157,12 +157,12 @@ export interface CreateHashDepositRequest {
  */
 export interface VerifyEvidenceHashResponse {
     /**
-      * 核验结果，true为核验成功，false为核验失败
-      */
+     * 核验结果，true为核验成功，false为核验失败
+     */
     Result: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -170,17 +170,17 @@ export interface VerifyEvidenceHashResponse {
  */
 export interface CreateDataDepositResponse {
     /**
-      * 业务ID 透传 长度最大不超过64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务ID 透传 长度最大不超过64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 请求成功，返回存证编码,用于查询存证后续业务数据
-      */
+     * 请求成功，返回存证编码,用于查询存证后续业务数据
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -188,8 +188,8 @@ export interface CreateDataDepositResponse {
  */
 export interface GetDepositCertRequest {
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
 }
 /**
@@ -197,32 +197,32 @@ export interface GetDepositCertRequest {
  */
 export interface CreateAudioDepositRequest {
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 数据Base64编码，大小不超过5M
-      */
+     * 数据Base64编码，大小不超过5M
+     */
     FileContent: string;
     /**
-      * 带后缀的文件名称，如music.mp3
-      */
+     * 带后缀的文件名称，如music.mp3
+     */
     FileName: string;
     /**
-      * 文件hash
-      */
+     * 文件hash
+     */
     EvidenceHash: string;
     /**
-      * 业务ID 透传 长度最大不超过64
-      */
+     * 业务ID 透传 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
-      */
+     * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
+     */
     HashType?: number;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -230,8 +230,8 @@ export interface CreateAudioDepositRequest {
  */
 export interface GetDepositFileRequest {
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
 }
 /**
@@ -239,8 +239,8 @@ export interface GetDepositFileRequest {
  */
 export interface VerifyEvidenceBlockChainTxHashRequest {
     /**
-      * 区块链交易 hash，在“存证基本信息查询（GetDepositInfo）”接口中可以获取。
-      */
+     * 区块链交易 hash，在“存证基本信息查询（GetDepositInfo）”接口中可以获取。
+     */
     EvidenceTxHash: string;
 }
 /**
@@ -248,8 +248,8 @@ export interface VerifyEvidenceBlockChainTxHashRequest {
  */
 export interface VerifyEvidenceHashRequest {
     /**
-      * 存证内容hash，hash类型即为用户在存证时所用或所选的hash类型
-      */
+     * 存证内容hash，hash类型即为用户在存证时所用或所选的hash类型
+     */
     EvidenceHash: string;
 }
 /**
@@ -257,17 +257,17 @@ export interface VerifyEvidenceHashRequest {
  */
 export interface CreateHashDepositNoCertResponse {
     /**
-      * 透传字段
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 透传字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -275,22 +275,22 @@ export interface CreateHashDepositNoCertResponse {
  */
 export interface VerifyEvidenceBlockChainTxHashResponse {
     /**
-      * 核验结果，true为核验成功，fals为核验失败
-      */
+     * 核验结果，true为核验成功，fals为核验失败
+     */
     Result: boolean;
     /**
-      * 存证时间，仅当核验结果为true时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存证时间，仅当核验结果为true时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EvidenceTime: string;
     /**
-      * 存证编码，仅当核验结果为true时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存证编码，仅当核验结果为true时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -298,17 +298,17 @@ export interface VerifyEvidenceBlockChainTxHashResponse {
  */
 export interface CreateAudioDepositResponse {
     /**
-      * 业务ID 透传 长度最大不超过64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务ID 透传 长度最大不超过64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 请求成功，返回存证编码,用于查询存证后续业务数据
-      */
+     * 请求成功，返回存证编码,用于查询存证后续业务数据
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -316,20 +316,20 @@ export interface CreateAudioDepositResponse {
  */
 export interface GetDepositInfoResponse {
     /**
-      * 存证编号
-      */
+     * 存证编号
+     */
     EvidenceId: string;
     /**
-      * 上链时间
-      */
+     * 上链时间
+     */
     EvidenceTime: string;
     /**
-      * 区块链交易哈希
-      */
+     * 区块链交易哈希
+     */
     EvidenceTxHash: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -337,16 +337,16 @@ export interface GetDepositInfoResponse {
  */
 export interface CreateHashDepositNoCertRequest {
     /**
-      * 数据hash
-      */
+     * 数据hash
+     */
     EvidenceHash: string;
     /**
-      * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
-      */
+     * 该字段为透传字段，方便调用方做业务处理， 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 业务扩展信息
-      */
+     * 业务扩展信息
+     */
     EvidenceInfo?: string;
 }
 /**
@@ -354,17 +354,17 @@ export interface CreateHashDepositNoCertRequest {
  */
 export interface CreateHashDepositNoSealResponse {
     /**
-      * 透传字段
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 透传字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -372,17 +372,17 @@ export interface CreateHashDepositNoSealResponse {
  */
 export interface CreateDocDepositResponse {
     /**
-      * 业务ID 透传 长度最大不超过64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务ID 透传 长度最大不超过64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 请求成功，返回存证编码,用于查询存证后续业务数据
-      */
+     * 请求成功，返回存证编码,用于查询存证后续业务数据
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -390,8 +390,8 @@ export interface CreateDocDepositResponse {
  */
 export interface GetDepositInfoRequest {
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
 }
 /**
@@ -399,17 +399,17 @@ export interface GetDepositInfoRequest {
  */
 export interface CreateVideoDepositResponse {
     /**
-      * 业务ID 透传 长度最大不超过64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务ID 透传 长度最大不超过64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId?: string;
     /**
-      * 请求成功，返回存证编码,用于查询存证后续业务数据
-      */
+     * 请求成功，返回存证编码,用于查询存证后续业务数据
+     */
     EvidenceId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -417,24 +417,24 @@ export interface CreateVideoDepositResponse {
  */
 export interface CreateDataDepositRequest {
     /**
-      * 业务数据明文(json格式字符串)，最大256kb
-      */
+     * 业务数据明文(json格式字符串)，最大256kb
+     */
     EvidenceInfo: string;
     /**
-      * 存证名称(长度最大30)
-      */
+     * 存证名称(长度最大30)
+     */
     EvidenceName: string;
     /**
-      * 业务ID 透传 长度最大不超过64
-      */
+     * 业务ID 透传 长度最大不超过64
+     */
     BusinessId?: string;
     /**
-      * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
-      */
+     * 算法类型 0 SM3, 1 SHA256, 2 SHA384 默认0
+     */
     HashType?: number;
     /**
-      * 存证描述
-      */
+     * 存证描述
+     */
     EvidenceDescription?: string;
 }
 /**
@@ -442,16 +442,16 @@ export interface CreateDataDepositRequest {
  */
 export interface GetDepositCertResponse {
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
     /**
-      * 存证证书文件临时链接
-      */
+     * 存证证书文件临时链接
+     */
     EvidenceCert: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -459,17 +459,17 @@ export interface GetDepositCertResponse {
  */
 export interface CreateImageDepositResponse {
     /**
-      * 业务ID 透传 长度最大不超过64
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 业务ID 透传 长度最大不超过64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 请求成功，返回存证编码,用于查询存证后续业务数据
-      */
+     * 请求成功，返回存证编码,用于查询存证后续业务数据
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -477,16 +477,16 @@ export interface CreateImageDepositResponse {
  */
 export interface CreateHashDepositResponse {
     /**
-      * 透传字段
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 透传字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BusinessId: string;
     /**
-      * 存证编码
-      */
+     * 存证编码
+     */
     EvidenceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }

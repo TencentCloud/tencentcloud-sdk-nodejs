@@ -3,8 +3,8 @@
  */
 export interface DescribeTokenRequest {
     /**
-      * 命名空间
-      */
+     * 命名空间
+     */
     Namespace: string;
 }
 /**
@@ -12,8 +12,8 @@ export interface DescribeTokenRequest {
  */
 export interface DescribeServiceAlertObjectResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -21,8 +21,8 @@ export interface DescribeServiceAlertObjectResponse {
  */
 export interface DescribeComponentAlertObjectResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -38,11 +38,11 @@ export declare type DescribeComponentAlertObjectRequest = null;
  */
 export interface DescribeTokenResponse {
     /**
-      * token
-      */
+     * token
+     */
     Result: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }

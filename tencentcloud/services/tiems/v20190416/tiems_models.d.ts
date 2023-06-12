@@ -3,8 +3,8 @@
  */
 export interface DisableRsgAsGroupRequest {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
 }
 /**
@@ -12,12 +12,12 @@ export interface DisableRsgAsGroupRequest {
  */
 export interface ExposeServiceResponse {
     /**
-      * 暴露方式
-      */
+     * 暴露方式
+     */
     Expose?: ExposeInfo;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -25,12 +25,12 @@ export interface ExposeServiceResponse {
  */
 export interface RsgAsActivityRelatedInstance {
     /**
-      * 节点 ID
-      */
+     * 节点 ID
+     */
     InstanceId: string;
     /**
-      * 节点状态
-      */
+     * 节点状态
+     */
     InstanceStatus: string;
 }
 /**
@@ -38,8 +38,8 @@ export interface RsgAsActivityRelatedInstance {
  */
 export interface DeleteJobResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -47,8 +47,8 @@ export interface DeleteJobResponse {
  */
 export interface DeleteRuntimeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -56,60 +56,60 @@ export interface DeleteRuntimeResponse {
  */
 export interface CreateJobRequest {
     /**
-      * 任务名称
-      */
+     * 任务名称
+     */
     Name: string;
     /**
-      * 使用的资源组 Id，默认使用共享资源组
-      */
+     * 使用的资源组 Id，默认使用共享资源组
+     */
     ResourceGroupId: string;
     /**
-      * 处理器配置, 单位为1/1000核；范围[100, 256000]
-      */
+     * 处理器配置, 单位为1/1000核；范围[100, 256000]
+     */
     Cpu: number;
     /**
-      * 内存配置, 单位为1M；范围[100, 256000]
-      */
+     * 内存配置, 单位为1M；范围[100, 256000]
+     */
     Memory: number;
     /**
-      * 运行集群
-      */
+     * 运行集群
+     */
     Cluster?: string;
     /**
-      * 预测输入
-      */
+     * 预测输入
+     */
     PredictInput?: PredictInput;
     /**
-      * 任务描述
-      */
+     * 任务描述
+     */
     Description?: string;
     /**
-      * 同时处理任务的 Worker 个数
-      */
+     * 同时处理任务的 Worker 个数
+     */
     WorkerCount?: number;
     /**
-      * 使用的配置 Id
-      */
+     * 使用的配置 Id
+     */
     ConfigId?: string;
     /**
-      * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
-      */
+     * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
+     */
     Gpu?: number;
     /**
-      * 显存配置, 单位为1M，范围 [0, 256000]
-      */
+     * 显存配置, 单位为1M，范围 [0, 256000]
+     */
     GpuMemory?: number;
     /**
-      * GPU类型
-      */
+     * GPU类型
+     */
     GpuType?: string;
     /**
-      * 量化输入
-      */
+     * 量化输入
+     */
     QuantizationInput?: QuantizationInput;
     /**
-      * Cls日志主题ID
-      */
+     * Cls日志主题ID
+     */
     LogTopicId?: string;
 }
 /**
@@ -117,20 +117,20 @@ export interface CreateJobRequest {
  */
 export interface ExposeServiceRequest {
     /**
-      * 服务Id
-      */
+     * 服务Id
+     */
     ServiceId: string;
     /**
-      * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
-      */
+     * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
+     */
     ExposeType: string;
     /**
-      * 暴露方式为 VPC 时，填写需要打通的私有网络Id
-      */
+     * 暴露方式为 VPC 时，填写需要打通的私有网络Id
+     */
     VpcId?: string;
     /**
-      * 暴露方式为 VPC 时，填写需要打通的子网Id
-      */
+     * 暴露方式为 VPC 时，填写需要打通的子网Id
+     */
     SubnetId?: string;
 }
 /**
@@ -138,16 +138,16 @@ export interface ExposeServiceRequest {
  */
 export interface DescribeServiceConfigsResponse {
     /**
-      * 服务配置
-      */
+     * 服务配置
+     */
     ServiceConfigs?: Array<Config>;
     /**
-      * 服务配置总数
-      */
+     * 服务配置总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -155,20 +155,20 @@ export interface DescribeServiceConfigsResponse {
  */
 export interface Scaler {
     /**
-      * 最大副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
-      */
+     * 最大副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
+     */
     MaxReplicas: number;
     /**
-      * 最小副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
-      */
+     * 最小副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
+     */
     MinReplicas: number;
     /**
-      * 起始副本数
-      */
+     * 起始副本数
+     */
     StartReplicas: number;
     /**
-      * 扩缩容指标，选择自动扩缩容时至少需要选择一个指标，支持CPU-UTIL、MEMORY-UTIL
-      */
+     * 扩缩容指标，选择自动扩缩容时至少需要选择一个指标，支持CPU-UTIL、MEMORY-UTIL
+     */
     HpaMetrics?: Array<Option>;
 }
 /**
@@ -176,12 +176,12 @@ export interface Scaler {
  */
 export interface CreateJobResponse {
     /**
-      * 任务
-      */
+     * 任务
+     */
     Job?: Job;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -189,8 +189,8 @@ export interface CreateJobResponse {
  */
 export interface DeleteServiceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -198,16 +198,16 @@ export interface DeleteServiceResponse {
  */
 export interface DescribeRsgAsGroupsResponse {
     /**
-      * 所查询的伸缩组数组
-      */
+     * 所查询的伸缩组数组
+     */
     RsgAsGroupSet?: Array<RsgAsGroup>;
     /**
-      * 伸缩组数组总数目
-      */
+     * 伸缩组数组总数目
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -215,12 +215,12 @@ export interface DescribeRsgAsGroupsResponse {
  */
 export interface UpdateServiceResponse {
     /**
-      * 服务
-      */
+     * 服务
+     */
     Service?: ModelService;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -228,80 +228,80 @@ export interface UpdateServiceResponse {
  */
 export interface Instance {
     /**
-      * 节点 ID
-      */
+     * 节点 ID
+     */
     Id: string;
     /**
-      * 节点所在地区
-      */
+     * 节点所在地区
+     */
     Zone: string;
     /**
-      * 节点类型
-      */
+     * 节点类型
+     */
     InstanceType: string;
     /**
-      * 节点充值类型
-      */
+     * 节点充值类型
+     */
     InstanceChargeType: string;
     /**
-      * Cpu 核数
-      */
+     * Cpu 核数
+     */
     Cpu: number;
     /**
-      * 内存
-      */
+     * 内存
+     */
     Memory: number;
     /**
-      * Gpu 核数
-      */
+     * Gpu 核数
+     */
     Gpu: number;
     /**
-      * 节点状态
-      */
+     * 节点状态
+     */
     State: string;
     /**
-      * 节点故障信息
-      */
+     * 节点故障信息
+     */
     AbnormalReason: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     Created: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     Updated: string;
     /**
-      * 到期时间
-      */
+     * 到期时间
+     */
     DeadlineTime: string;
     /**
-      * 所属资源组 ID
-      */
+     * 所属资源组 ID
+     */
     ResourceGroupId: string;
     /**
-      * 自动续费标签
-      */
+     * 自动续费标签
+     */
     RenewFlag: string;
     /**
-      * 节点所在地域
-      */
+     * 节点所在地域
+     */
     Region: string;
     /**
-      * 当前 Cpu 申请使用量
-      */
+     * 当前 Cpu 申请使用量
+     */
     CpuRequested: number;
     /**
-      * 当前 Memory 申请使用量
-      */
+     * 当前 Memory 申请使用量
+     */
     MemoryRequested: number;
     /**
-      * 当前 Gpu 申请使用量
-      */
+     * 当前 Gpu 申请使用量
+     */
     GpuRequested: number;
     /**
-      * 节点所在伸缩组 ID
-      */
+     * 节点所在伸缩组 ID
+     */
     RsgAsGroupId: string;
 }
 /**
@@ -309,12 +309,12 @@ export interface Instance {
  */
 export interface UpdateRsgAsGroupResponse {
     /**
-      * 资源组的伸缩组
-      */
+     * 资源组的伸缩组
+     */
     RsgAsGroup?: RsgAsGroup;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -322,16 +322,16 @@ export interface UpdateRsgAsGroupResponse {
  */
 export interface DescribeServicesResponse {
     /**
-      * 服务列表
-      */
+     * 服务列表
+     */
     Services?: Array<ModelService>;
     /**
-      * 服务总数
-      */
+     * 服务总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -339,17 +339,17 @@ export interface DescribeServicesResponse {
  */
 export interface DescribeResourceGroupsResponse {
     /**
-      * 资源组总数
-      */
+     * 资源组总数
+     */
     TotalCount?: number;
     /**
-      * 资源组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceGroups?: Array<ResourceGroup>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -357,24 +357,24 @@ export interface DescribeResourceGroupsResponse {
  */
 export interface DescribeRsgAsGroupsRequest {
     /**
-      * 筛选选项
-      */
+     * 筛选选项
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为 0
-      */
+     * 偏移量，默认为 0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为 20，最大值为 200
-      */
+     * 返回数量，默认为 20，最大值为 200
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围："ASC", "DESC"
-      */
+     * 输出列表的排列顺序。取值范围："ASC", "DESC"
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+     */
     OrderField?: string;
 }
 /**
@@ -382,8 +382,8 @@ export interface DescribeRsgAsGroupsRequest {
  */
 export interface DeleteResourceGroupRequest {
     /**
-      * 要删除的资源组 ID
-      */
+     * 要删除的资源组 ID
+     */
     ResourceGroupId: string;
 }
 /**
@@ -391,12 +391,12 @@ export interface DeleteResourceGroupRequest {
  */
 export interface Conditions {
     /**
-      * 原因
-      */
+     * 原因
+     */
     Reason: string;
     /**
-      * 具有相同原因的副本个数
-      */
+     * 具有相同原因的副本个数
+     */
     Count: number;
 }
 /**
@@ -404,28 +404,28 @@ export interface Conditions {
  */
 export interface DescribeServiceConfigsRequest {
     /**
-      * 筛选选项，支持按照name等进行筛选
-      */
+     * 筛选选项，支持按照name等进行筛选
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为0
-      */
+     * 偏移量，默认为0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为1000
-      */
+     * 返回数量，默认为20，最大值为1000
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
-      */
+     * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+     */
     OrderField?: string;
     /**
-      * 是否按照配置名分页
-      */
+     * 是否按照配置名分页
+     */
     PageByName?: boolean;
 }
 /**
@@ -433,8 +433,8 @@ export interface DescribeServiceConfigsRequest {
  */
 export interface DeleteRsgAsGroupRequest {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
 }
 /**
@@ -442,36 +442,36 @@ export interface DeleteRsgAsGroupRequest {
  */
 export interface ReplicaInfo {
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     Name: string;
     /**
-      * 弹性网卡模式时，弹性网卡Ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 弹性网卡模式时，弹性网卡Ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EniIp: string;
     /**
-      * Normal: 正常运行中; Abnormal: 异常；Waiting：等待中
-      */
+     * Normal: 正常运行中; Abnormal: 异常；Waiting：等待中
+     */
     Status: string;
     /**
-      * 当 status为 Abnormal 的时候，一些额外的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当 status为 Abnormal 的时候，一些额外的信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
     /**
-      * 启动时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 启动时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 重启次数
-      */
+     * 重启次数
+     */
     Restarted: number;
 }
 /**
@@ -479,8 +479,8 @@ export interface ReplicaInfo {
  */
 export interface DeleteServiceConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -488,24 +488,24 @@ export interface DeleteServiceConfigResponse {
  */
 export interface UpdateRsgAsGroupRequest {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
     /**
-      * 重命名名称
-      */
+     * 重命名名称
+     */
     Name?: string;
     /**
-      * 伸缩组最大节点数
-      */
+     * 伸缩组最大节点数
+     */
     MaxSize?: number;
     /**
-      * 伸缩组最小节点数
-      */
+     * 伸缩组最小节点数
+     */
     MinSize?: number;
     /**
-      * 伸缩组期望的节点数
-      */
+     * 伸缩组期望的节点数
+     */
     DesiredSize?: number;
 }
 /**
@@ -513,8 +513,8 @@ export interface UpdateRsgAsGroupRequest {
  */
 export interface DeleteRsgAsGroupResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -522,37 +522,37 @@ export interface DeleteRsgAsGroupResponse {
  */
 export interface Config {
     /**
-      * Id
-      */
+     * Id
+     */
     Id: string;
     /**
-      * 配置名
-      */
+     * 配置名
+     */
     Name: string;
     /**
-      * 模型地址
-      */
+     * 模型地址
+     */
     ModelUri: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 运行环境
-      */
+     * 运行环境
+     */
     Runtime: string;
     /**
-      * 配置版本
-      */
+     * 配置版本
+     */
     Version: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
     /**
-      * 配置描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
 }
 /**
@@ -560,12 +560,12 @@ export interface Config {
  */
 export interface Option {
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 取值
-      */
+     * 取值
+     */
     Value: number;
 }
 /**
@@ -573,29 +573,29 @@ export interface Option {
  */
 export interface PredictInput {
     /**
-      * 输入路径，支持 cos 格式路径文件夹或文件
-      */
+     * 输入路径，支持 cos 格式路径文件夹或文件
+     */
     InputPath: string;
     /**
-      * 输出路径，支持 cos 格式路径
-      */
+     * 输出路径，支持 cos 格式路径
+     */
     OutputPath: string;
     /**
-      * 输入数据格式，目前支持：JSON
-      */
+     * 输入数据格式，目前支持：JSON
+     */
     InputDataFormat?: string;
     /**
-      * 输出数据格式，目前支持：JSON
-      */
+     * 输出数据格式，目前支持：JSON
+     */
     OutputDataFormat?: string;
     /**
-      * 预测批大小，默认为 64
-      */
+     * 预测批大小，默认为 64
+     */
     BatchSize?: number;
     /**
-      * 模型签名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模型签名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SignatureName?: string;
 }
 /**
@@ -603,12 +603,12 @@ export interface PredictInput {
  */
 export interface CreateRuntimeResponse {
     /**
-      * 运行环境
-      */
+     * 运行环境
+     */
     Runtime?: Runtime;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -616,124 +616,124 @@ export interface CreateRuntimeResponse {
  */
 export interface Job {
     /**
-      * 任务 Id
-      */
+     * 任务 Id
+     */
     Id: string;
     /**
-      * 集群名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cluster: string;
     /**
-      * Region 名
-      */
+     * Region 名
+     */
     Region: string;
     /**
-      * 任务名称
-      */
+     * 任务名称
+     */
     Name: string;
     /**
-      * Worker 使用的运行环境
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Worker 使用的运行环境
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Runtime: string;
     /**
-      * 任务描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 配置 Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置 Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ConfigId: string;
     /**
-      * 预测输入
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 预测输入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PredictInput: PredictInput;
     /**
-      * 任务状态
-      */
+     * 任务状态
+     */
     Status: JobStatus;
     /**
-      * 任务创建时间
-      */
+     * 任务创建时间
+     */
     CreateTime: string;
     /**
-      * 任务开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime: string;
     /**
-      * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndTime: string;
     /**
-      * 任务取消时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务取消时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CancelTime: string;
     /**
-      * 任务使用资源组 Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务使用资源组 Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceGroupId: string;
     /**
-      * 处理器配置, 单位为1/1000核；范围[100, 256000]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 处理器配置, 单位为1/1000核；范围[100, 256000]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cpu: number;
     /**
-      * 内存配置, 单位为1M；范围[100, 256000]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 内存配置, 单位为1M；范围[100, 256000]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Memory: number;
     /**
-      * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Gpu: number;
     /**
-      * 显存配置, 单位为1M，范围 [0, 256000]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 显存配置, 单位为1M，范围 [0, 256000]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuMemory: number;
     /**
-      * 任务使用资源组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务使用资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceGroupName: string;
     /**
-      * GPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuType: string;
     /**
-      * 配置名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ConfigName: string;
     /**
-      * 配置版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ConfigVersion: string;
     /**
-      * Job类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Job类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     JobType: string;
     /**
-      * 量化输入
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 量化输入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     QuantizationInput: QuantizationInput;
     /**
-      * Cls日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Cls日志主题ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LogTopicId: string;
 }
 /**
@@ -741,16 +741,16 @@ export interface Job {
  */
 export interface UpdateJobRequest {
     /**
-      * 任务 Id
-      */
+     * 任务 Id
+     */
     JobId: string;
     /**
-      * 任务更新动作，支持：Cancel
-      */
+     * 任务更新动作，支持：Cancel
+     */
     JobAction?: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Description?: string;
 }
 /**
@@ -758,24 +758,24 @@ export interface UpdateJobRequest {
  */
 export interface DescribeResourceGroupsRequest {
     /**
-      * 筛选选项
-      */
+     * 筛选选项
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为0
-      */
+     * 偏移量，默认为0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为200
-      */
+     * 返回数量，默认为20，最大值为200
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
-      */
+     * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+     */
     OrderField?: string;
 }
 /**
@@ -783,17 +783,17 @@ export interface DescribeResourceGroupsRequest {
  */
 export interface DescribeRuntimesResponse {
     /**
-      * TIEMS支持的运行环境列表
-      */
+     * TIEMS支持的运行环境列表
+     */
     Runtimes?: Array<Runtime>;
     /**
-      * 用户对runtime对权限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用户对runtime对权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UserAccess?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -801,8 +801,8 @@ export interface DescribeRuntimesResponse {
  */
 export interface DeleteInstanceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -810,16 +810,16 @@ export interface DeleteInstanceResponse {
  */
 export interface DescribeInstancesResponse {
     /**
-      * 资源组下节点总数
-      */
+     * 资源组下节点总数
+     */
     TotalCount?: number;
     /**
-      * 资源组下节点列表
-      */
+     * 资源组下节点列表
+     */
     Instances?: Array<Instance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -827,8 +827,8 @@ export interface DescribeInstancesResponse {
  */
 export interface DeleteResourceGroupResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -836,8 +836,8 @@ export interface DeleteResourceGroupResponse {
  */
 export interface DisableRsgAsGroupResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -845,28 +845,28 @@ export interface DisableRsgAsGroupResponse {
  */
 export interface DescribeInstancesRequest {
     /**
-      * 筛选选项
-      */
+     * 筛选选项
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为0
-      */
+     * 偏移量，默认为0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为200
-      */
+     * 返回数量，默认为20，最大值为200
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
-      */
+     * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+     */
     OrderField?: string;
     /**
-      * 要查询的资源组 ID
-      */
+     * 要查询的资源组 ID
+     */
     ResourceGroupId?: string;
 }
 /**
@@ -874,12 +874,12 @@ export interface DescribeInstancesRequest {
  */
 export interface CreateServiceResponse {
     /**
-      * 服务
-      */
+     * 服务
+     */
     Service?: ModelService;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -887,60 +887,60 @@ export interface CreateServiceResponse {
  */
 export interface CreateServiceRequest {
     /**
-      * 扩缩容配置
-      */
+     * 扩缩容配置
+     */
     Scaler: Scaler;
     /**
-      * 服务配置Id
-      */
+     * 服务配置Id
+     */
     ServiceConfigId: string;
     /**
-      * 服务名称
-      */
+     * 服务名称
+     */
     Name: string;
     /**
-      * 扩缩容方式，支持AUTO, MANUAL，分别表示自动扩缩容和手动扩缩容
-      */
+     * 扩缩容方式，支持AUTO, MANUAL，分别表示自动扩缩容和手动扩缩容
+     */
     ScaleMode: string;
     /**
-      * 部署要使用的资源组Id，默认为共享资源组
-      */
+     * 部署要使用的资源组Id，默认为共享资源组
+     */
     ResourceGroupId: string;
     /**
-      * 处理器配置, 单位为1/1000核；范围[100, 256000]
-      */
+     * 处理器配置, 单位为1/1000核；范围[100, 256000]
+     */
     Cpu: number;
     /**
-      * 内存配置, 单位为1M；范围[100, 256000]
-      */
+     * 内存配置, 单位为1M；范围[100, 256000]
+     */
     Memory: number;
     /**
-      * 集群，不填则使用默认集群
-      */
+     * 集群，不填则使用默认集群
+     */
     Cluster?: string;
     /**
-      * 默认为空，表示不需要鉴权，TOKEN 表示选择 Token 鉴权方式
-      */
+     * 默认为空，表示不需要鉴权，TOKEN 表示选择 Token 鉴权方式
+     */
     Authentication?: string;
     /**
-      * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
-      */
+     * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
+     */
     Gpu?: number;
     /**
-      * 显存配置, 单位为1M，范围 [0, 256000]
-      */
+     * 显存配置, 单位为1M，范围 [0, 256000]
+     */
     GpuMemory?: number;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Description?: string;
     /**
-      * GPU类型
-      */
+     * GPU类型
+     */
     GpuType?: string;
     /**
-      * Cls日志主题ID
-      */
+     * Cls日志主题ID
+     */
     LogTopicId?: string;
 }
 /**
@@ -948,8 +948,8 @@ export interface CreateServiceRequest {
  */
 export interface EnableRsgAsGroupResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -957,33 +957,33 @@ export interface EnableRsgAsGroupResponse {
  */
 export interface JobStatus {
     /**
-      * 任务状态
-      */
+     * 任务状态
+     */
     Status: string;
     /**
-      * 错误时为错误描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 错误时为错误描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
     /**
-      * 预期Worker数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 预期Worker数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DesiredWorkers: number;
     /**
-      * 当前Worker数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前Worker数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CurrentWorkers: number;
     /**
-      * 副本名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 副本名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Replicas: Array<string>;
     /**
-      * 副本实例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 副本实例
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReplicaInfos: Array<ReplicaInfo>;
 }
 /**
@@ -991,48 +991,48 @@ export interface JobStatus {
  */
 export interface UpdateServiceRequest {
     /**
-      * 服务Id
-      */
+     * 服务Id
+     */
     ServiceId: string;
     /**
-      * 扩缩容配置
-      */
+     * 扩缩容配置
+     */
     Scaler?: Scaler;
     /**
-      * 服务配置Id
-      */
+     * 服务配置Id
+     */
     ServiceConfigId?: string;
     /**
-      * 支持AUTO, MANUAL，分别表示自动扩缩容，手动扩缩容
-      */
+     * 支持AUTO, MANUAL，分别表示自动扩缩容，手动扩缩容
+     */
     ScaleMode?: string;
     /**
-      * 支持STOP(停止) RESUME(重启)
-      */
+     * 支持STOP(停止) RESUME(重启)
+     */
     ServiceAction?: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Description?: string;
     /**
-      * GPU卡类型
-      */
+     * GPU卡类型
+     */
     GpuType?: string;
     /**
-      * 处理器配置，单位为 1/1000 核
-      */
+     * 处理器配置，单位为 1/1000 核
+     */
     Cpu?: number;
     /**
-      * 内存配置，单位为1M
-      */
+     * 内存配置，单位为1M
+     */
     Memory?: number;
     /**
-      * 显卡配置，单位为 1/1000 卡
-      */
+     * 显卡配置，单位为 1/1000 卡
+     */
     Gpu?: number;
     /**
-      * Cls日志主题ID
-      */
+     * Cls日志主题ID
+     */
     LogTopicId?: string;
 }
 /**
@@ -1040,12 +1040,12 @@ export interface UpdateServiceRequest {
  */
 export interface Filter {
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 取值
-      */
+     * 取值
+     */
     Values: Array<string>;
 }
 /**
@@ -1053,12 +1053,12 @@ export interface Filter {
  */
 export interface CreateServiceConfigResponse {
     /**
-      * 服务配置
-      */
+     * 服务配置
+     */
     ServiceConfig?: Config;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1066,37 +1066,37 @@ export interface CreateServiceConfigResponse {
  */
 export interface ExposeInfo {
     /**
-      * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
-      */
+     * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
+     */
     ExposeType: string;
     /**
-      * 暴露Ip。暴露方式为 EXTERNAL 为外网 Ip，暴露方式为 VPC 时为指定 Vpc 下的Vip
-      */
+     * 暴露Ip。暴露方式为 EXTERNAL 为外网 Ip，暴露方式为 VPC 时为指定 Vpc 下的Vip
+     */
     Ip: string;
     /**
-      * 暴露方式为 VPC 时，打通的私有网络Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 暴露方式为 VPC 时，打通的私有网络Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VpcId: string;
     /**
-      * 暴露方式为 VPC 时，打通的子网Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 暴露方式为 VPC 时，打通的子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubnetId: string;
     /**
-      * GATEWAY 服务id，ExposeType = GATEWAY 时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GATEWAY 服务id，ExposeType = GATEWAY 时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GateWayServiceId: string;
     /**
-      * GATEWAY api id，ExposeType = GATEWAY 时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GATEWAY api id，ExposeType = GATEWAY 时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GateWayAPIId: string;
     /**
-      * GATEWAY domain，ExposeType = GATEWAY 时返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GATEWAY domain，ExposeType = GATEWAY 时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GateWayDomain: string;
 }
 /**
@@ -1104,60 +1104,60 @@ export interface ExposeInfo {
  */
 export interface RsgAsGroup {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
     /**
-      * 伸缩组所在地域
-      */
+     * 伸缩组所在地域
+     */
     Region: string;
     /**
-      * 伸缩组所在可用区
-      */
+     * 伸缩组所在可用区
+     */
     Zone: string;
     /**
-      * 伸缩组所在集群
-      */
+     * 伸缩组所在集群
+     */
     Cluster: string;
     /**
-      * 伸缩组所在资源组 ID
-      */
+     * 伸缩组所在资源组 ID
+     */
     RsgId: string;
     /**
-      * 伸缩组名称
-      */
+     * 伸缩组名称
+     */
     Name: string;
     /**
-      * 伸缩组允许的最大节点个数
-      */
+     * 伸缩组允许的最大节点个数
+     */
     MaxSize: number;
     /**
-      * 伸缩组允许的最小节点个数
-      */
+     * 伸缩组允许的最小节点个数
+     */
     MinSize: number;
     /**
-      * 伸缩组创建时间
-      */
+     * 伸缩组创建时间
+     */
     CreateTime: string;
     /**
-      * 伸缩组更新时间
-      */
+     * 伸缩组更新时间
+     */
     UpdateTime: string;
     /**
-      * 伸缩组状态
-      */
+     * 伸缩组状态
+     */
     Status: string;
     /**
-      * 伸缩组节点类型
-      */
+     * 伸缩组节点类型
+     */
     InstanceType: string;
     /**
-      * 伸缩组内节点个数
-      */
+     * 伸缩组内节点个数
+     */
     InstanceCount: number;
     /**
-      * 伸缩组起始节点数
-      */
+     * 伸缩组起始节点数
+     */
     DesiredSize: number;
 }
 /**
@@ -1165,8 +1165,8 @@ export interface RsgAsGroup {
  */
 export interface DeleteServiceRequest {
     /**
-      * 服务Id
-      */
+     * 服务Id
+     */
     ServiceId: string;
 }
 /**
@@ -1174,36 +1174,36 @@ export interface DeleteServiceRequest {
  */
 export interface Runtime {
     /**
-      * 运行环境名称
-      */
+     * 运行环境名称
+     */
     Name: string;
     /**
-      * 运行环境框架
-      */
+     * 运行环境框架
+     */
     Framework: string;
     /**
-      * 运行环境描述
-      */
+     * 运行环境描述
+     */
     Description: string;
     /**
-      * 是否为公开运行环境
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否为公开运行环境
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Public: boolean;
     /**
-      * 是否打开健康检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否打开健康检查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HealthCheckOn: boolean;
     /**
-      * 镜像地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Image: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
 }
 /**
@@ -1211,12 +1211,12 @@ export interface Runtime {
  */
 export interface CreateRsgAsGroupResponse {
     /**
-      * 所创建的资源组的伸缩组
-      */
+     * 所创建的资源组的伸缩组
+     */
     RsgAsGroup?: RsgAsGroup;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1224,36 +1224,36 @@ export interface CreateRsgAsGroupResponse {
  */
 export interface ServiceStatus {
     /**
-      * 预期副本数
-      */
+     * 预期副本数
+     */
     DesiredReplicas: number;
     /**
-      * 当前副本数
-      */
+     * 当前副本数
+     */
     CurrentReplicas: number;
     /**
-      * Normal：正常运行中；Abnormal：服务异常，例如容器启动失败等；Waiting：服务等待中，例如容器下载镜像过程等；Stopped：已停止 Stopping 停止中；Resuming：重启中；Updating：服务更新中
-      */
+     * Normal：正常运行中；Abnormal：服务异常，例如容器启动失败等；Waiting：服务等待中，例如容器下载镜像过程等；Stopped：已停止 Stopping 停止中；Resuming：重启中；Updating：服务更新中
+     */
     Status: string;
     /**
-      * 服务处于当前状态的原因集合
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 服务处于当前状态的原因集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Conditions: Array<Conditions>;
     /**
-      * 副本名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 副本名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Replicas: Array<string>;
     /**
-      * 运行状态对额外信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 运行状态对额外信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
     /**
-      * 副本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 副本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReplicaInfos: Array<ReplicaInfo>;
 }
 /**
@@ -1261,52 +1261,52 @@ export interface ServiceStatus {
  */
 export interface RsgAsGroupActivity {
     /**
-      * 伸缩组活动 ID
-      */
+     * 伸缩组活动 ID
+     */
     Id: string;
     /**
-      * 关联的伸缩组 ID
-      */
+     * 关联的伸缩组 ID
+     */
     RsgAsGroupId: string;
     /**
-      * 活动类型
-      */
+     * 活动类型
+     */
     ActivityType: string;
     /**
-      * 状态的编码
-      */
+     * 状态的编码
+     */
     StatusCode: string;
     /**
-      * 状态的消息
-      */
+     * 状态的消息
+     */
     StatusMessage: string;
     /**
-      * 活动原因
-      */
+     * 活动原因
+     */
     Cause: string;
     /**
-      * 活动描述
-      */
+     * 活动描述
+     */
     Description: string;
     /**
-      * 活动开始时间
-      */
+     * 活动开始时间
+     */
     StartTime: string;
     /**
-      * 活动结束时间
-      */
+     * 活动结束时间
+     */
     EndTime: string;
     /**
-      * 活动创建时间
-      */
+     * 活动创建时间
+     */
     CreateTime: string;
     /**
-      * 活动相关联的节点
-      */
+     * 活动相关联的节点
+     */
     RsgAsActivityRelatedInstance: Array<RsgAsActivityRelatedInstance>;
     /**
-      * 简略的状态消息
-      */
+     * 简略的状态消息
+     */
     StatusMessageSimplified: string;
 }
 /**
@@ -1314,36 +1314,36 @@ export interface RsgAsGroupActivity {
  */
 export interface DescribeRsgAsGroupActivitiesRequest {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
     /**
-      * 查询活动的开始时间
-      */
+     * 查询活动的开始时间
+     */
     StartTime?: string;
     /**
-      * 查询互动的结束时间
-      */
+     * 查询互动的结束时间
+     */
     EndTime?: string;
     /**
-      * 筛选选项
-      */
+     * 筛选选项
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为 0
-      */
+     * 偏移量，默认为 0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为 20，最大值为 200
-      */
+     * 返回数量，默认为 20，最大值为 200
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围："ASC", "DESC"
-      */
+     * 输出列表的排列顺序。取值范围："ASC", "DESC"
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+     */
     OrderField?: string;
 }
 /**
@@ -1351,99 +1351,99 @@ export interface DescribeRsgAsGroupActivitiesRequest {
  */
 export interface ResourceGroup {
     /**
-      * 资源组 Id
-      */
+     * 资源组 Id
+     */
     Id: string;
     /**
-      * 地域
-      */
+     * 地域
+     */
     Region: string;
     /**
-      * 集群
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cluster: string;
     /**
-      * 资源组名称
-      */
+     * 资源组名称
+     */
     Name: string;
     /**
-      * 资源组描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     Created: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     Updated: string;
     /**
-      * 资源组主机数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组主机数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceCount: number;
     /**
-      * 使用资源组的服务数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 使用资源组的服务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceCount: number;
     /**
-      * 使用资源组的任务数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 使用资源组的任务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     JobCount: number;
     /**
-      * 资源组是否为公共资源组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组是否为公共资源组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Public: boolean;
     /**
-      * 机器类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机器类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceType: string;
     /**
-      * 资源组状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 显卡总张数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 显卡总张数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Gpu: number;
     /**
-      * 处理器总核数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 处理器总核数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cpu: number;
     /**
-      * 内存总量，单位为G
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 内存总量，单位为G
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Memory: number;
     /**
-      * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Zone: string;
     /**
-      * Gpu类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Gpu类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuType: Array<string>;
     /**
-      * 该资源组下是否有预付费资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 该资源组下是否有预付费资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HasPrepaid: boolean;
     /**
-      * 资源组是否允许预付费或后付费模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源组是否允许预付费或后付费模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayMode: string;
 }
 /**
@@ -1451,8 +1451,8 @@ export interface ResourceGroup {
  */
 export interface DeleteJobRequest {
     /**
-      * 任务 Id
-      */
+     * 任务 Id
+     */
     JobId: string;
 }
 /**
@@ -1460,8 +1460,8 @@ export interface DeleteJobRequest {
  */
 export interface DeleteInstanceRequest {
     /**
-      * 要删除的节点 ID
-      */
+     * 要删除的节点 ID
+     */
     InstanceId: string;
 }
 /**
@@ -1469,32 +1469,32 @@ export interface DeleteInstanceRequest {
  */
 export interface CreateRsgAsGroupRequest {
     /**
-      * 资源组 ID
-      */
+     * 资源组 ID
+     */
     RsgId: string;
     /**
-      * 伸缩组允许的最大节点数
-      */
+     * 伸缩组允许的最大节点数
+     */
     MaxSize: number;
     /**
-      * 伸缩组允许的最小节点数
-      */
+     * 伸缩组允许的最小节点数
+     */
     MinSize: number;
     /**
-      * 伸缩组的节点规格
-      */
+     * 伸缩组的节点规格
+     */
     InstanceType: string;
     /**
-      * 资源组所在的集群名
-      */
+     * 资源组所在的集群名
+     */
     Cluster?: string;
     /**
-      * 伸缩组名称
-      */
+     * 伸缩组名称
+     */
     Name?: string;
     /**
-      * 伸缩组期望的节点数
-      */
+     * 伸缩组期望的节点数
+     */
     DesiredSize?: number;
 }
 /**
@@ -1506,8 +1506,8 @@ export declare type DescribeRuntimesRequest = null;
  */
 export interface EnableRsgAsGroupRequest {
     /**
-      * 伸缩组 ID
-      */
+     * 伸缩组 ID
+     */
     Id: string;
 }
 /**
@@ -1515,20 +1515,20 @@ export interface EnableRsgAsGroupRequest {
  */
 export interface CreateServiceConfigRequest {
     /**
-      * 配置名称
-      */
+     * 配置名称
+     */
     Name: string;
     /**
-      * 运行环境
-      */
+     * 运行环境
+     */
     Runtime: string;
     /**
-      * 模型地址，支持cos路径，格式为 cos://bucket名-appid.cos.region名.myqcloud.com/模型文件夹路径。为模型文件的上一层文件夹地址。
-      */
+     * 模型地址，支持cos路径，格式为 cos://bucket名-appid.cos.region名.myqcloud.com/模型文件夹路径。为模型文件的上一层文件夹地址。
+     */
     ModelUri: string;
     /**
-      * 配置描述
-      */
+     * 配置描述
+     */
     Description?: string;
 }
 /**
@@ -1536,24 +1536,24 @@ export interface CreateServiceConfigRequest {
  */
 export interface QuantizationInput {
     /**
-      * 量化输入路径
-      */
+     * 量化输入路径
+     */
     InputPath: string;
     /**
-      * 量化输出路径
-      */
+     * 量化输出路径
+     */
     OutputPath: string;
     /**
-      * 量化批大小
-      */
+     * 量化批大小
+     */
     BatchSize?: number;
     /**
-      * 量化精度，支持：FP32，FP16，INT8
-      */
+     * 量化精度，支持：FP32，FP16，INT8
+     */
     Precision?: string;
     /**
-      * 转换类型
-      */
+     * 转换类型
+     */
     ConvertType?: string;
 }
 /**
@@ -1561,13 +1561,13 @@ export interface QuantizationInput {
  */
 export interface UpdateJobResponse {
     /**
-      * 任务
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Job?: Job;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1575,24 +1575,24 @@ export interface UpdateJobResponse {
  */
 export interface CreateRuntimeRequest {
     /**
-      * 全局唯一的运行环境名称
-      */
+     * 全局唯一的运行环境名称
+     */
     Name: string;
     /**
-      * 运行环境镜像地址
-      */
+     * 运行环境镜像地址
+     */
     Image: string;
     /**
-      * 运行环境框架
-      */
+     * 运行环境框架
+     */
     Framework?: string;
     /**
-      * 运行环境描述
-      */
+     * 运行环境描述
+     */
     Description?: string;
     /**
-      * 是否支持健康检查，默认为False
-      */
+     * 是否支持健康检查，默认为False
+     */
     HealthCheckOn?: boolean;
 }
 /**
@@ -1600,118 +1600,118 @@ export interface CreateRuntimeRequest {
  */
 export interface ModelService {
     /**
-      * 服务ID
-      */
+     * 服务ID
+     */
     Id: string;
     /**
-      * 运行集群
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 运行集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cluster: string;
     /**
-      * 服务名称
-      */
+     * 服务名称
+     */
     Name: string;
     /**
-      * 运行环境
-      */
+     * 运行环境
+     */
     Runtime: string;
     /**
-      * 模型地址
-      */
+     * 模型地址
+     */
     ModelUri: string;
     /**
-      * 处理器配置, 单位为1/1000核
-      */
+     * 处理器配置, 单位为1/1000核
+     */
     Cpu: number;
     /**
-      * 内存配置, 单位为1M
-      */
+     * 内存配置, 单位为1M
+     */
     Memory: number;
     /**
-      * GPU 配置, 单位为1/1000 卡
-      */
+     * GPU 配置, 单位为1/1000 卡
+     */
     Gpu: number;
     /**
-      * 显存配置, 单位为1M
-      */
+     * 显存配置, 单位为1M
+     */
     GpuMemory: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
     /**
-      * 支持AUTO, MANUAL
-      */
+     * 支持AUTO, MANUAL
+     */
     ScaleMode: string;
     /**
-      * 弹性伸缩配置
-      */
+     * 弹性伸缩配置
+     */
     Scaler: Scaler;
     /**
-      * 服务状态
-      */
+     * 服务状态
+     */
     Status: ServiceStatus;
     /**
-      * 访问密钥
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 访问密钥
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AccessToken: string;
     /**
-      * 服务配置Id
-      */
+     * 服务配置Id
+     */
     ConfigId: string;
     /**
-      * 服务配置名
-      */
+     * 服务配置名
+     */
     ConfigName: string;
     /**
-      * 服务运行时长
-      */
+     * 服务运行时长
+     */
     ServeSeconds: number;
     /**
-      * 配置版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ConfigVersion: string;
     /**
-      * 服务使用资源组 Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 服务使用资源组 Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceGroupId: string;
     /**
-      * 暴露方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 暴露方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Exposes: Array<ExposeInfo>;
     /**
-      * Region 名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Region 名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Region: string;
     /**
-      * 服务使用资源组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 服务使用资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceGroupName: string;
     /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * GPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuType: string;
     /**
-      * Cls日志主题Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Cls日志主题Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LogTopicId: string;
 }
 /**
@@ -1719,12 +1719,12 @@ export interface ModelService {
  */
 export interface DeleteServiceConfigRequest {
     /**
-      * 服务配置Id
-      */
+     * 服务配置Id
+     */
     ServiceConfigId?: string;
     /**
-      * 服务配置名称
-      */
+     * 服务配置名称
+     */
     ServiceConfigName?: string;
 }
 /**
@@ -1732,8 +1732,8 @@ export interface DeleteServiceConfigRequest {
  */
 export interface DeleteRuntimeRequest {
     /**
-      * 要删除的Runtime名
-      */
+     * 要删除的Runtime名
+     */
     Runtime: string;
 }
 /**
@@ -1741,17 +1741,17 @@ export interface DeleteRuntimeRequest {
  */
 export interface DescribeRsgAsGroupActivitiesResponse {
     /**
-      * 伸缩组活动数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 伸缩组活动数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RsgAsGroupActivitySet?: Array<RsgAsGroupActivity>;
     /**
-      * 所查询的伸缩组活动总数目
-      */
+     * 所查询的伸缩组活动总数目
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1759,23 +1759,23 @@ export interface DescribeRsgAsGroupActivitiesResponse {
  */
 export interface DescribeServicesRequest {
     /**
-      * 筛选选项，支持筛选的字段：id, region, zone, cluster, status, runtime, rsg_id
-      */
+     * 筛选选项，支持筛选的字段：id, region, zone, cluster, status, runtime, rsg_id
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为0
-      */
+     * 偏移量，默认为0
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100
-      */
+     * 返回数量，默认为20，最大值为100
+     */
     Limit?: number;
     /**
-      * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
-      */
+     * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+     */
     Order?: string;
     /**
-      * 排序的依据字段， 取值范围 "CREATE_TIME" "UPDATE_TIME"
-      */
+     * 排序的依据字段， 取值范围 "CREATE_TIME" "UPDATE_TIME"
+     */
     OrderField?: string;
 }

@@ -23,106 +23,89 @@ export interface CreateRoomRequest {
    * 房间名称。
    */
   Name: string
-
   /**
    * 预定的房间开始时间，unix时间戳。
    */
   StartTime: number
-
   /**
    * 预定的房间结束时间，unix时间戳。
    */
   EndTime: number
-
   /**
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
-      * 分辨率。可以有如下取值：
+   * 分辨率。可以有如下取值：
 1 标清
 2 高清
 3 全高清
-      */
+   */
   Resolution: number
-
   /**
    * 最大连麦人数（不包括老师）。取值范围[0, 16]
    */
   MaxMicNumber: number
-
   /**
-      * 房间子类型，可以有以下取值：
+   * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
-      */
+   */
   SubType: string
-
   /**
    * 老师ID。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有老师权限。
    */
   TeacherId?: string
-
   /**
-      * 进入课堂时是否自动连麦。可以有以下取值：
+   * 进入课堂时是否自动连麦。可以有以下取值：
 0 不自动连麦（需要手动申请上麦，默认值）
 1 自动连麦
-      */
+   */
   AutoMic?: number
-
   /**
-      * 释放音视频权限后是否自动取消连麦。可以有以下取值：
+   * 释放音视频权限后是否自动取消连麦。可以有以下取值：
 0 自动取消连麦（默认值）
 1 保持连麦状态
-      */
+   */
   TurnOffMic?: number
-
   /**
-      * 声音音质。可以有以下取值：
+   * 声音音质。可以有以下取值：
 0：流畅模式（默认值），占用更小的带宽、拥有更好的降噪效果，适用于1对1、小班教学、多人音视频会议等场景。
 1：高音质模式，适合需要高保真传输音乐的场景，但降噪效果会被削弱，适用于音乐教学场景。
-      */
+   */
   AudioQuality?: number
-
   /**
-      * 上课后是否禁止自动录制。可以有以下取值：
+   * 上课后是否禁止自动录制。可以有以下取值：
 0 不禁止录制（自动开启录制，默认值）
 1 禁止录制
 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。
-      */
+   */
   DisableRecord?: number
-
   /**
    * 助教Id列表。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有助教权限。
    */
   Assistants?: Array<string>
-
   /**
    * rtc人数。
    */
   RTCAudienceNumber?: number
-
   /**
    * 观看类型，互动直播（默认）。
    */
   AudienceType?: number
-
   /**
    * 录制布局。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
    */
   RecordLayout?: number
-
   /**
    * 房间绑定的群组ID,非空时限制组成员进入
    */
   GroupId?: string
-
   /**
-      * 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：
+   * 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：
 0 不允许直接控制（需同意，默认值）
 1 允许直接控制（无需同意）
-      */
+   */
   EnableDirectControl?: number
 }
 
@@ -134,12 +117,10 @@ export interface DescribeQuestionListRequest {
    * 房间ID
    */
   RoomId: number
-
   /**
    * 分页查询当前页数，从1开始递增，默认值为1
    */
   Page?: number
-
   /**
    * 分页查询当前页数，从1开始递增，默认值为1
    */
@@ -164,17 +145,14 @@ export interface DescribeAppDetailResponse {
    * SDK 对应的AppId
    */
   SdkAppId?: string
-
   /**
    * 应用配置
    */
   AppConfig?: AppConfig
-
   /**
    * 场景配置
    */
   SceneConfig?: Array<SceneItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -189,7 +167,6 @@ export interface DeleteSupervisorRequest {
    * 应用ID
    */
   SdkAppId: number
-
   /**
    * 用户ID列表
    */
@@ -204,22 +181,18 @@ export interface DescribeSupervisorsResponse {
    * 数据总量
    */
   Total?: number
-
   /**
    * 分页查询当前页数
    */
   Page?: number
-
   /**
    * 当前页数据量
    */
   Limit?: number
-
   /**
    * 巡课列表
    */
   UserIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -244,7 +217,6 @@ export interface BatchDeleteRecordRequest {
    * 房间ID列表
    */
   RoomIds: Array<number>
-
   /**
    * 低代码互动课堂的SdkAppId。
    */
@@ -289,12 +261,10 @@ export interface ModifyUserProfileRequest {
    * 待修改用户ID
    */
   UserId: string
-
   /**
    * 待修改的用户名
    */
   Nickname?: string
-
   /**
    * 待修改头像url
    */
@@ -309,17 +279,14 @@ export interface CreateGroupWithMembersRequest {
    * 待创建群组名称
    */
   GroupName: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 默认绑定主讲老师ID
    */
   TeacherId?: string
-
   /**
    * 群组成员列表,一次性最多200个
    */
@@ -334,32 +301,27 @@ export interface DescribeDocumentsByRoomRequest {
    * 房间ID。
    */
   RoomId: number
-
   /**
    * 低代码互动课堂的SdkAppId
    */
   SdkAppId: number
-
   /**
    * 分页查询当前页数，从1开始递增，默认值为1
    */
   Page?: number
-
   /**
    * 每页数据量，最大1000，默认值为100
    */
   Limit?: number
-
   /**
-      * 课件权限。
+   * 课件权限。
 [0]：获取owner的私有课件；
 [1]：获取owner的公开课件;
 [0,1]：则获取owner的私有课件和公开课件；
 [2]：获取owner的私有课件和所有人(包括owner)的公开课件。
 默认值为[2]
-      */
+   */
   Permission?: Array<number>
-
   /**
    * 文档所有者的user_id，不填默认获取SdkAppId下所有课件
    */
@@ -374,7 +336,6 @@ export interface BatchCreateGroupWithMembersResponse {
    * 新创建群组ID列表，与输入创建参数顺序一致
    */
   GroupIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -389,13 +350,11 @@ export interface GetRoomEventResponse {
    * 该房间的事件总数，keyword搜索不影响该值。
    */
   Total?: number
-
   /**
-      * 详细事件内容。包含相应的类型、发生的时间戳。
+   * 详细事件内容。包含相应的类型、发生的时间戳。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Events?: Array<EventInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -410,7 +369,6 @@ export interface BatchCreateRoomResponse {
    * 创建成功课堂ID，与传入课堂信息顺序一致
    */
   RoomIds?: Array<number>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -425,103 +383,84 @@ export interface MemberRecord {
    * 用户ID。
    */
   UserId: string
-
   /**
    * 用户名称。
    */
   UserName: string
-
   /**
    * 在线时长，单位秒。
    */
   PresentTime: number
-
   /**
    * 是否开启摄像头。
    */
   Camera: number
-
   /**
    * 是否开启麦克风。
    */
   Mic: number
-
   /**
    * 是否禁言。
    */
   Silence: number
-
   /**
    * 回答问题数量。
    */
   AnswerQuestions: number
-
   /**
    * 举手数量。
    */
   HandUps: number
-
   /**
    * 首次进入房间的unix时间戳。
    */
   FirstJoinTimestamp: number
-
   /**
    * 最后一次退出房间的unix时间戳。
    */
   LastQuitTimestamp: number
-
   /**
    * 奖励次数。
    */
   Rewords: number
-
   /**
    * 用户IP。
    */
   IPAddress?: string
-
   /**
    * 用户位置信息。
    */
   Location?: string
-
   /**
    * 用户设备平台信息。0:unknown  1:windows  2:mac  3:android  4:ios  5:web   6:h5   7:miniprogram （小程序）
    */
   Device?: number
-
   /**
    * 每个成员上麦次数。
    */
   PerMemberMicCount?: number
-
   /**
-      * 每个成员发送消息数量。
+   * 每个成员发送消息数量。
 
-      */
+   */
   PerMemberMessageCount?: number
-
   /**
    * 用户角色。0代表学生；1代表老师； 2助教；3巡课。
    */
   Role?: number
-
   /**
    * 上课班号
    */
   GroupId?: string
-
   /**
-      * 子上课班号
+   * 子上课班号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubGroupId?: Array<string>
-
   /**
-      * 用户的上台状态
+   * 用户的上台状态
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Stage?: number
 }
 
@@ -533,7 +472,6 @@ export interface DeleteAppCustomContentRequest {
    * 应用ID。
    */
   SdkAppId: number
-
   /**
    * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
    */
@@ -565,29 +503,25 @@ export interface ModifyUserProfileResponse {
  */
 export interface GetWatermarkResponse {
   /**
-      * 老师视频区域的水印参数配置
+   * 老师视频区域的水印参数配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TeacherLogo?: WatermarkConfig
-
   /**
-      * 白板区域的水印参数配置
+   * 白板区域的水印参数配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BoardLogo?: WatermarkConfig
-
   /**
-      * 背景图片配置
+   * 背景图片配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BackgroundPicture?: BackgroundPictureConfig
-
   /**
-      * 文字水印配置
+   * 文字水印配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Text?: TextMarkConfig
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -602,7 +536,6 @@ export interface LoginOriginIdRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 用户在客户系统的Id，需要在同一应用下唯一。
    */
@@ -614,11 +547,10 @@ export interface LoginOriginIdRequest {
  */
 export interface BatchRegisterResponse {
   /**
-      * 注册成功的用户列表
+   * 注册成功的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Users?: Array<BatchUserInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -643,17 +575,14 @@ export interface CreateGroupWithSubGroupRequest {
    * 待创建的新群组名
    */
   GroupName: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 子群组ID列表，子群组ID不能重复，最多40个
    */
   SubGroupIds: Array<string>
-
   /**
    * 群组默认主讲老师ID
    */
@@ -665,83 +594,71 @@ export interface CreateGroupWithSubGroupRequest {
  */
 export interface RoomItem {
   /**
-      * 名称
+   * 名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name?: string
-
   /**
-      * 房间ID
+   * 房间ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoomId?: number
-
   /**
-      * 房间状态。0 未开始 ；1进行中  ；2 已结束
+   * 房间状态。0 未开始 ；1进行中  ；2 已结束
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: number
-
   /**
-      * 开始时间
+   * 开始时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime?: number
-
   /**
-      * 结束时间
+   * 结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime?: number
-
   /**
-      * 实际开始时间
+   * 实际开始时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RealStartTime?: number
-
   /**
-      * 实际结束时间
+   * 实际结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RealEndTime?: number
-
   /**
-      * 分辨率。1 标清
+   * 分辨率。1 标清
 2 高清
 3 全高清
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Resolution?: number
-
   /**
-      * 最大允许连麦人数
+   * 最大允许连麦人数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MaxRTCMember?: number
-
   /**
-      * 房间录制地址。已废弃，使用新字段 RecordUrl
+   * 房间录制地址。已废弃，使用新字段 RecordUrl
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReplayUrl?: string
-
   /**
-      * 录制地址（协议为https)。仅在房间结束后存在。
+   * 录制地址（协议为https)。仅在房间结束后存在。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RecordUrl?: string
-
   /**
-      * 最高房间内人数（包括老师），0表示不限制，默认为0
+   * 最高房间内人数（包括老师），0表示不限制，默认为0
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MaxMicNumber?: number
-
   /**
-      * 打开学生麦克风/摄像头的授权开关 
+   * 打开学生麦克风/摄像头的授权开关 
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EnableDirectControl?: number
 }
 
@@ -750,71 +667,58 @@ export interface RoomItem {
  */
 export interface SetWatermarkRequest {
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId: number
-
   /**
    * 老师视频区域的水印参数地址，设置为空字符串表示删除
    */
   TeacherUrl?: string
-
   /**
    * 白板视频区域的水印参数地址，设置为空字符串表示删除
    */
   BoardUrl?: string
-
   /**
    * 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除
    */
   VideoUrl?: string
-
   /**
    * 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
    */
   BoardW?: number
-
   /**
    * 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
    */
   BoardH?: number
-
   /**
    * 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
    */
   BoardX?: number
-
   /**
    * 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
    */
   BoardY?: number
-
   /**
    * 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
    */
   TeacherW?: number
-
   /**
    * 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
    */
   TeacherH?: number
-
   /**
    * 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
    */
   TeacherX?: number
-
   /**
    * 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
    */
   TeacherY?: number
-
   /**
    * 文字水印内容，设置为空字符串表示删除
    */
   Text?: string
-
   /**
    * 文字水印颜色
    */
@@ -839,32 +743,26 @@ export interface BatchDescribeDocumentRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 分页查询当前页数，从1开始递增
    */
   Page: number
-
   /**
    * 每页数据量，最大1000
    */
   Limit: number
-
   /**
    * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
    */
   Permission: Array<number>
-
   /**
    * 课件所有者的user_id，不填默认获取SdkAppId下所有课件
    */
   Owner?: string
-
   /**
    * 课件名称搜索词
    */
   Keyword?: string
-
   /**
    * 课件id列表，从列表中查询，忽略错误的id
    */
@@ -899,7 +797,6 @@ export interface CreateDocumentResponse {
    * 文档ID。
    */
   DocumentId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -914,31 +811,26 @@ export interface DescribeGroupResponse {
    * 群组ID
    */
   GroupId?: string
-
   /**
    * 群组名称
    */
   GroupName?: string
-
   /**
-      * 群主主讲人ID
+   * 群主主讲人ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TeacherId?: string
-
   /**
-      * 群组类型
+   * 群组类型
 0-基础群组
 1-组合群组，若为1时会返回子群组ID
-      */
+   */
   GroupType?: number
-
   /**
-      * 子群组ID列表
+   * 子群组ID列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubGroupIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -960,27 +852,24 @@ export interface SetAppCustomContentResponse {
  */
 export interface BatchUserRequest {
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId: number
-
   /**
-      * 用户名称。
+   * 用户名称。
 
-      */
+   */
   Name?: string
-
   /**
-      * 用户在客户系统的Id，需要在同一应用下唯一。
+   * 用户在客户系统的Id，需要在同一应用下唯一。
 
-      */
+   */
   OriginId?: string
-
   /**
-      * 用户头像。
+   * 用户头像。
 
-      */
+   */
   Avatar?: string
 }
 
@@ -992,12 +881,10 @@ export interface LoginUserResponse {
    * 用户Id。
    */
   UserId: string
-
   /**
    * 登录/注册成功后返回登录态token。有效期7天。
    */
   Token: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1012,17 +899,14 @@ export interface ModifyGroupRequest {
    * 需要修改的群组ID
    */
   GroupId: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 默认绑定主讲老师ID
    */
   TeacherId?: string
-
   /**
    * 待修改的群组名称
    */
@@ -1034,11 +918,10 @@ export interface ModifyGroupRequest {
  */
 export interface DescribeAppDetailRequest {
   /**
-      * 应用ID。低代码互动课堂的SdkAppId。
+   * 应用ID。低代码互动课堂的SdkAppId。
 
-      */
+   */
   ApplicationId: string
-
   /**
    * 开发商ID
    */
@@ -1053,7 +936,6 @@ export interface DeleteGroupRequest {
    * 待删除群组ID列表
    */
   GroupIds: Array<string>
-
   /**
    * 低代码平台应用ID
    */
@@ -1078,12 +960,10 @@ export interface AddGroupMemberRequest {
    * 群组ID
    */
   GroupId: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 成员列表，最大值200
    */
@@ -1098,22 +978,18 @@ export interface DescribeGroupListRequest {
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 分页查询当前页数，默认从1开始递增。
    */
   Page?: number
-
   /**
    * 每页数据量，默认20，最大1000。
    */
   Limit?: number
-
   /**
    * 主讲人ID筛选群组，与MemberId有且只有一个,都传时以此字段获取
    */
   TeacherId?: string
-
   /**
    * 成员ID刷选群组，与TeacherId有且只有一个
    */
@@ -1128,17 +1004,14 @@ export interface GetRoomMessageRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 房间Id。
    */
   RoomId: number
-
   /**
    * 消息序列。获取该序列以前的消息(不包含该seq消息)
    */
   Seq?: number
-
   /**
    * 消息拉取的条数。最大数量不能超过套餐包限制。
    */
@@ -1153,13 +1026,11 @@ export interface DescribeDocumentsResponse {
    * 符合查询条件文档总数
    */
   Total?: number
-
   /**
-      * 文档信息列表
+   * 文档信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Documents?: Array<DocumentInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1171,111 +1042,94 @@ export interface DescribeDocumentsResponse {
  */
 export interface DocumentInfo {
   /**
-      * 文档Id
+   * 文档Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DocumentId?: string
-
   /**
-      * 文档原址url
+   * 文档原址url
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DocumentUrl?: string
-
   /**
-      * 文档名称
+   * 文档名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DocumentName?: string
-
   /**
-      * 文档所有者UserId
+   * 文档所有者UserId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Owner?: string
-
   /**
-      * 应用Id
+   * 应用Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SdkAppId?: number
-
   /**
-      * 文档权限，0：私有课件 1：公共课件
+   * 文档权限，0：私有课件 1：公共课件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Permission?: number
-
   /**
-      * 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码
+   * 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TranscodeResult?: string
-
   /**
-      * 转码类型
+   * 转码类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TranscodeType?: number
-
   /**
-      * 转码进度， 0 - 100 表示（0% - 100%）
+   * 转码进度， 0 - 100 表示（0% - 100%）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TranscodeProgress?: number
-
   /**
-      * 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功
+   * 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TranscodeState?: number
-
   /**
-      * 转码失败后的错误信息
+   * 转码失败后的错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TranscodeInfo?: string
-
   /**
-      * 文档类型
+   * 文档类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DocumentType?: string
-
   /**
-      * 文档大小，单位：字节
+   * 文档大小，单位：字节
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DocumentSize?: number
-
   /**
-      * 更新的UNIX时间戳
+   * 更新的UNIX时间戳
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: number
-
   /**
-      * 课件页数
+   * 课件页数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pages?: number
-
   /**
-      * 宽，仅在静态转码的课件有效
+   * 宽，仅在静态转码的课件有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Width?: number
-
   /**
-      * 高，仅在静态转码的课件有效
+   * 高，仅在静态转码的课件有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Height?: number
-
   /**
-      * 封面，仅转码的课件会生成封面
+   * 封面，仅转码的课件会生成封面
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Cover?: string
 }
 
@@ -1297,11 +1151,10 @@ export interface DeleteRecordRequest {
    * 房间Id。
    */
   RoomId: number
-
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId: number
 }
 
@@ -1323,7 +1176,6 @@ export interface CreateGroupWithSubGroupResponse {
    * 新创建群组ID
    */
   GroupId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1338,32 +1190,26 @@ export interface DescribeDocumentsRequest {
    * 学校id
    */
   SchoolId: number
-
   /**
    * 分页查询当前页数，从1开始递增
    */
   Page: number
-
   /**
    * 每页数据量，最大1000
    */
   Limit: number
-
   /**
    * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
    */
   Permission: Array<number>
-
   /**
    * 课件所有者的user_id，不填默认获取school_id下所有课件
    */
   Owner?: string
-
   /**
    * 课件名称搜索词
    */
   Keyword?: string
-
   /**
    * 课件id列表，从列表中查询，忽略错误的id
    */
@@ -1375,21 +1221,19 @@ export interface DescribeDocumentsRequest {
  */
 export interface MessageItem {
   /**
-      * 消息类型。0表示文本消息，1表示图片消息
+   * 消息类型。0表示文本消息，1表示图片消息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MessageType?: number
-
   /**
-      * 文本消息内容。message type为0时有效。
+   * 文本消息内容。message type为0时有效。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextMessage?: string
-
   /**
-      * 图片消息URL。 message type为1时有效。
+   * 图片消息URL。 message type为1时有效。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ImageMessage?: string
 }
 
@@ -1398,35 +1242,31 @@ export interface MessageItem {
  */
 export interface GroupInfo {
   /**
-      * 群组ID
+   * 群组ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   GroupId?: string
-
   /**
-      * 群组名称
+   * 群组名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   GroupName?: string
-
   /**
-      * 群组主讲人ID
+   * 群组主讲人ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TeacherId?: string
-
   /**
-      * 群组类型 
+   * 群组类型 
 0-基础群组 
 1-组合群组，若为1时会返回子群组ID列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   GroupType?: number
-
   /**
-      * 子群组ID列表，如有。
+   * 子群组ID列表，如有。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubGroupIds?: string
 }
 
@@ -1438,30 +1278,26 @@ export interface GetRoomEventRequest {
    * 房间Id。
    */
   RoomId: number
-
   /**
    * 应用Id。
    */
   SdkAppId: number
-
   /**
    * 起始页，1开始。keyword为空时有效。
    */
   Page: number
-
   /**
    * 每页个数。keyword为空时有效。一次性最多200条。
    */
   Limit: number
-
   /**
-      * 搜索事件类型。有以下事件类型:
+   * 搜索事件类型。有以下事件类型:
 RoomStart:房间开始
 RoomEnd:房间结束
 MemberJoin:成员加入
 MemberQuit:成员退出
 RecordFinish:录制结束
-      */
+   */
   Keyword?: string
 }
 
@@ -1473,72 +1309,58 @@ export interface DescribeDocumentResponse {
    * 文档Id
    */
   DocumentId: string
-
   /**
    * 文档原址url
    */
   DocumentUrl: string
-
   /**
    * 文档名称
    */
   DocumentName: string
-
   /**
    * 文档所有者UserId
    */
   Owner: string
-
   /**
    * 应用Id
    */
   SdkAppId: number
-
   /**
    * 文档权限
    */
   Permission: number
-
   /**
    * 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码
    */
   TranscodeResult: string
-
   /**
    * 转码类型
    */
   TranscodeType: number
-
   /**
    * 转码进度， 0 - 100 表示（0% - 100%）
    */
   TranscodeProgress: number
-
   /**
    * 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功
    */
   TranscodeState: number
-
   /**
    * 转码失败后的错误信息
    */
   TranscodeInfo: string
-
   /**
    * 文档类型
    */
   DocumentType: string
-
   /**
    * 文档大小，单位：字节
    */
   DocumentSize: number
-
   /**
    * 更新的UNIX时间戳
    */
   UpdateTime: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1563,13 +1385,11 @@ export interface DescribeGroupMemberListResponse {
    * 符合查询条件总条数
    */
   Total?: number
-
   /**
-      * 查询成员列表
+   * 查询成员列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MemberIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1584,9 +1404,8 @@ export interface EventInfo {
    * 事件发生的秒级unix时间戳。
    */
   Timestamp?: number
-
   /**
-      * 事件类型,有以下值:
+   * 事件类型,有以下值:
 RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束
 Camera0n: 摄像头打开
 Camera0ff: 摄像头关闭
@@ -1596,13 +1415,12 @@ ScreenOn: 屏幕共享打开
 ScreenOff: 屏幕共享关闭
 VisibleOn: 页面可见
 VisibleOff: 页面不可见
-      */
+   */
   EventType?: string
-
   /**
-      * 事件详细内容，包含房间号,成员类型事件包含用户Id。
+   * 事件详细内容，包含房间号,成员类型事件包含用户Id。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventData?: EventDataInfo
 }
 
@@ -1629,12 +1447,10 @@ export interface DescribeAnswerListRequest {
    * 问题ID
    */
   QuestionId: string
-
   /**
    * 1
    */
   Page?: number
-
   /**
    * 100
    */
@@ -1649,7 +1465,6 @@ export interface BatchCreateRoomRequest {
    * 低代码平台的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 创建房间ID列表
    */
@@ -1664,17 +1479,14 @@ export interface DescribeGroupMemberListRequest {
    * 群组ID
    */
   GroupId: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 分页值，默认1
    */
   Page?: number
-
   /**
    * 每页数据量，默认20，最大1000
    */
@@ -1686,27 +1498,24 @@ export interface DescribeGroupMemberListRequest {
  */
 export interface UserInfo {
   /**
-      * 应用Id。
+   * 应用Id。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SdkAppId?: number
-
   /**
-      * 用户Id。
+   * 用户Id。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserId?: string
-
   /**
-      * 用户昵称。
+   * 用户昵称。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name?: string
-
   /**
-      * 用户头像Url。
+   * 用户头像Url。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Avatar?: string
 }
 
@@ -1718,22 +1527,18 @@ export interface DescribeUserResponse {
    * 应用Id。
    */
   SdkAppId: number
-
   /**
    * 用户Id。
    */
   UserId: string
-
   /**
    * 用户昵称。
    */
   Name: string
-
   /**
    * 用户头像Url。
    */
   Avatar: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1755,11 +1560,10 @@ export interface DescribeDocumentRequest {
  */
 export interface BatchDeleteRecordResponse {
   /**
-      * 本次操作删除成功的房间ID列表。如果入参列表中某个房间ID的录制文件已经删除，则出参列表中无对应的房间ID。
+   * 本次操作删除成功的房间ID列表。如果入参列表中某个房间ID的录制文件已经删除，则出参列表中无对应的房间ID。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoomIds?: Array<number>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1771,33 +1575,29 @@ export interface BatchDeleteRecordResponse {
  */
 export interface WatermarkConfig {
   /**
-      * 水印图片的url
+   * 水印图片的url
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Url?: string
-
   /**
-      * 水印宽。为比例值
+   * 水印宽。为比例值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Width?: number
-
   /**
-      * 水印高。为比例值
+   * 水印高。为比例值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Height?: number
-
   /**
-      * 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。
+   * 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LocationX?: number
-
   /**
-      * 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。
+   * 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LocationY?: number
 }
 
@@ -1809,7 +1609,6 @@ export interface SetAppCustomContentRequest {
    * 自定义内容。
    */
   CustomContent: Array<AppCustomContent>
-
   /**
    * 应用ID。
    */
@@ -1834,12 +1633,10 @@ export interface RegisterUserResponse {
    * 用户Id。
    */
   UserId: string
-
   /**
    * 登录/注册成功后返回登录态token。有效期7天。
    */
   Token: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1864,12 +1661,10 @@ export interface BindDocumentToRoomRequest {
    * 房间ID。
    */
   RoomId: number
-
   /**
    * 文档ID。
    */
   DocumentId: string
-
   /**
    * 绑定类型。后台可透传到客户端，默认为0。客户端可以根据这个字段实现业务逻辑。
    */
@@ -1884,43 +1679,36 @@ export interface CreateDocumentRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 文档地址。
    */
   DocumentUrl: string
-
   /**
    * 文档名称。
    */
   DocumentName: string
-
   /**
    * 文档所有者的Id
    */
   Owner: string
-
   /**
-      * 转码类型，可以有如下取值：
+   * 转码类型，可以有如下取值：
 0 无需转码（默认）
 1 需要转码的文档，ppt，pptx，pdf，doc，docx
 2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等
 2 需要转码的音频，mp3，wav，wma，aac，flac，opus
-      */
+   */
   TranscodeType?: number
-
   /**
-      * 权限，可以有如下取值：
+   * 权限，可以有如下取值：
 0 私有文档（默认）
 1 公共文档
-      */
+   */
   Permission?: number
-
   /**
    * 文档后缀名。
    */
   DocumentType?: string
-
   /**
    * 文档大小，单位 字节
    */
@@ -1935,7 +1723,6 @@ export interface GetRoomMessageResponse {
    * 消息列表
    */
   Messages?: Array<MessageList>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1947,21 +1734,19 @@ export interface GetRoomMessageResponse {
  */
 export interface BatchUserInfo {
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId?: number
-
   /**
-      * 用户ID。
+   * 用户ID。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserId?: string
-
   /**
-      * 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。
+   * 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OriginId?: string
 }
 
@@ -1973,12 +1758,10 @@ export interface BatchAddGroupMemberRequest {
    * 待添加群组ID列表，最大值100
    */
   GroupIds: Array<string>
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 待添加成员列表，最大值200
    */
@@ -1993,98 +1776,82 @@ export interface DescribeRoomResponse {
    * 房间名称。
    */
   Name?: string
-
   /**
    * 预定的房间开始时间，unix时间戳。
    */
   StartTime?: number
-
   /**
    * 预定的房间结束时间，unix时间戳。
    */
   EndTime?: number
-
   /**
    * 老师的UserId。
    */
   TeacherId?: string
-
   /**
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId?: number
-
   /**
-      * 分辨率。可以有如下取值：
+   * 分辨率。可以有如下取值：
 1 标清
 2 高清
 3 全高清
-      */
+   */
   Resolution?: number
-
   /**
    * 最大连麦人数（不包括老师）。取值范围[0, 16]
    */
   MaxMicNumber?: number
-
   /**
-      * 进入课堂时是否自动连麦。可以有以下取值：
+   * 进入课堂时是否自动连麦。可以有以下取值：
 0 不自动连麦（需要手动申请上麦，默认值）
 1 自动连麦
-      */
+   */
   AutoMic?: number
-
   /**
-      * 高音质模式。可以有以下取值：
+   * 高音质模式。可以有以下取值：
 0 不开启高音质（默认值）
 1 开启高音质
-      */
+   */
   AudioQuality?: number
-
   /**
-      * 房间子类型，可以有以下取值：
+   * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
-      */
+   */
   SubType?: string
-
   /**
-      * 上课后是否禁止自动录制。可以有以下取值：
+   * 上课后是否禁止自动录制。可以有以下取值：
 0 不禁止录制（自动开启录制，默认值）
 1 禁止录制
 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。
-      */
+   */
   DisableRecord?: number
-
   /**
-      * 助教UserId列表。
+   * 助教UserId列表。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Assistants?: Array<string>
-
   /**
-      * 录制地址（协议为https)。仅在房间结束后存在。
+   * 录制地址（协议为https)。仅在房间结束后存在。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RecordUrl?: string
-
   /**
-      * 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。
+   * 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: number
-
   /**
-      * 房间绑定的群组ID
+   * 房间绑定的群组ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   GroupId?: string
-
   /**
    * 打开学生麦克风/摄像头的授权开关
    */
   EnableDirectControl?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2099,12 +1866,10 @@ export interface DescribeCurrentMemberListRequest {
    * 房间Id。
    */
   RoomId: number
-
   /**
    * 分页查询当前页数，从1开始递增。
    */
   Page: number
-
   /**
    * 每页数据量，最大1000。
    */
@@ -2119,13 +1884,11 @@ export interface DescribeSdkAppIdUsersResponse {
    * 用户总数
    */
   Total?: number
-
   /**
-      * 当前获取用户信息数组列表
+   * 当前获取用户信息数组列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Users?: Array<UserInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2137,15 +1900,14 @@ export interface DescribeSdkAppIdUsersResponse {
  */
 export interface EventDataInfo {
   /**
-      * 事件发生的房间号。
+   * 事件发生的房间号。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoomId?: number
-
   /**
-      * 事件发生的用户。
+   * 事件发生的用户。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserId?: string
 }
 
@@ -2157,13 +1919,11 @@ export interface DescribeAnswerListResponse {
    * 符合查询条件的房间答案总数
    */
   Total?: number
-
   /**
-      * 房间提问答案列表
+   * 房间提问答案列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AnswerInfo?: Array<AnswerInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2178,44 +1938,36 @@ export interface DescribeRoomStatisticsResponse {
    * 峰值在线成员人数。
    */
   PeakMemberNumber?: number
-
   /**
    * 累计在线人数。
    */
   MemberNumber?: number
-
   /**
    * 记录总数。包含进入房间或者应到未到的。
    */
   Total?: number
-
   /**
    * 成员记录列表。
    */
   MemberRecords?: Array<MemberRecord>
-
   /**
-      * 秒级unix时间戳，实际房间开始时间。
+   * 秒级unix时间戳，实际房间开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RealStartTime?: number
-
   /**
-      * 秒级unix时间戳，实际房间结束时间。
+   * 秒级unix时间戳，实际房间结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RealEndTime?: number
-
   /**
    * 房间消息总数。
    */
   MessageCount?: number
-
   /**
    * 房间连麦总数。
    */
   MicCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2237,16 +1989,14 @@ export interface DeleteDocumentRequest {
  */
 export interface DescribeSupervisorsRequest {
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId: number
-
   /**
    * 每页数据量，最大100。 不填默认20.
    */
   Limit?: number
-
   /**
    * 分页查询当前页数，从1开始递增，不填默认为1。
    */
@@ -2258,27 +2008,24 @@ export interface DescribeSupervisorsRequest {
  */
 export interface MessageList {
   /**
-      * 消息时间戳
+   * 消息时间戳
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Timestamp?: number
-
   /**
-      * 消息发送者
+   * 消息发送者
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FromAccount?: string
-
   /**
-      * 消息序列号，当前课堂内唯一且单调递增
+   * 消息序列号，当前课堂内唯一且单调递增
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Seq?: number
-
   /**
-      * 历史消息列表
+   * 历史消息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MessageBody?: Array<MessageItem>
 }
 
@@ -2290,12 +2037,10 @@ export interface DeleteGroupMemberRequest {
    * 群组ID，联合群组无法删除群组成员
    */
   GroupId: string
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 成员列表，最大值200
    */
@@ -2317,9 +2062,9 @@ export interface EndRoomResponse {
  */
 export interface GetWatermarkRequest {
   /**
-      * 低代码互动课堂的SdkAppId。
+   * 低代码互动课堂的SdkAppId。
 
-      */
+   */
   SdkAppId: number
 }
 
@@ -2331,7 +2076,6 @@ export interface CreateGroupWithMembersResponse {
    * 创建成功群组ID
    */
   GroupId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2346,12 +2090,10 @@ export interface BatchDeleteGroupMemberRequest {
    * 待添加群组ID列表，最大值100
    */
   GroupIds: Array<string>
-
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 待添加成员列表，最大值256
    */
@@ -2366,12 +2108,10 @@ export interface ModifyAppRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 回调地址。
    */
   Callback?: string
-
   /**
    * 回调key。
    */
@@ -2386,7 +2126,6 @@ export interface UnbindDocumentFromRoomRequest {
    * 房间ID。
    */
   RoomId: number
-
   /**
    * 文档ID。
    */
@@ -2401,17 +2140,14 @@ export interface RegisterUserRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 用户名称。
    */
   Name?: string
-
   /**
    * 用户在客户系统的Id，需要在同一应用下唯一。
    */
   OriginId?: string
-
   /**
    * 用户头像。
    */
@@ -2426,7 +2162,6 @@ export interface GroupBaseInfo {
    * 待创建群组名
    */
   GroupName: string
-
   /**
    * 群组主讲人ID
    */
@@ -2451,7 +2186,6 @@ export interface AnswerStat {
    * 选项（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
    */
   Answer?: number
-
   /**
    * 答题人数
    */
@@ -2486,82 +2220,66 @@ export interface RoomInfo {
    * 房间名称。
    */
   Name: string
-
   /**
    * 预定的房间开始时间，unix时间戳。
    */
   StartTime: number
-
   /**
    * 预定的房间结束时间，unix时间戳。
    */
   EndTime: number
-
   /**
    * 分辨率。可以有如下取值： 1 标清 2 高清 3 全高清
    */
   Resolution: number
-
   /**
    * 最大连麦人数（不包括老师）。取值范围[0, 16]
    */
   MaxMicNumber: number
-
   /**
    * 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频
    */
   SubType: string
-
   /**
    * 老师ID。通过[注册用户]接口获取的UserId。
    */
   TeacherId?: string
-
   /**
    * 进入课堂时是否自动连麦。可以有以下取值： 0 不自动连麦（需要手动申请上麦，默认值） 1 自动连麦
    */
   AutoMic?: number
-
   /**
    * 释放音视频权限后是否自动取消连麦。可以有以下取值： 0 自动取消连麦（默认值） 1 保持连麦状态
    */
   TurnOffMic?: number
-
   /**
    * 高音质模式。可以有以下取值： 0 不开启高音质（默认值） 1 开启高音质
    */
   AudioQuality?: number
-
   /**
    * 上课后是否禁止自动录制。可以有以下取值： 0 不禁止录制（自动开启录制，默认值） 1 禁止录制 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。
    */
   DisableRecord?: number
-
   /**
    * 助教Id列表。通过[注册用户]接口获取的UserId。
    */
   Assistants?: Array<string>
-
   /**
    * rtc人数。
    */
   RTCAudienceNumber?: number
-
   /**
    * 观看类型。
    */
   AudienceType?: number
-
   /**
    * 录制布局。
    */
   RecordLayout?: number
-
   /**
    * 房间绑定的群组ID
    */
   GroupId?: string
-
   /**
    * 打开学生麦克风/摄像头的授权开关
    */
@@ -2576,90 +2294,76 @@ export interface ModifyRoomRequest {
    * 房间ID。
    */
   RoomId: number
-
   /**
    * 低代码互动课堂的SdkAppId
    */
   SdkAppId: number
-
   /**
    * 预定的房间开始时间，unix时间戳。直播开始后不允许修改。
    */
   StartTime?: number
-
   /**
    * 预定的房间结束时间，unix时间戳。直播开始后不允许修改。
    */
   EndTime?: number
-
   /**
    * 老师ID。直播开始后不允许修改。
    */
   TeacherId?: string
-
   /**
    * 房间名称。
    */
   Name?: string
-
   /**
-      * 分辨率。可以有如下取值：
+   * 分辨率。可以有如下取值：
 1 标清
 2 高清
 3 全高清
 直播开始后不允许修改。
-      */
+   */
   Resolution?: number
-
   /**
-      * 最大连麦人数（不包括老师）。取值范围[0, 17)
+   * 最大连麦人数（不包括老师）。取值范围[0, 17)
 直播开始后不允许修改。
-      */
+   */
   MaxMicNumber?: number
-
   /**
-      * 进入房间时是否自动连麦。可以有以下取值：
+   * 进入房间时是否自动连麦。可以有以下取值：
 0 不自动连麦（默认值）
 1 自动连麦
 直播开始后不允许修改。
-      */
+   */
   AutoMic?: number
-
   /**
-      * 高音质模式。可以有以下取值：
+   * 高音质模式。可以有以下取值：
 0 不开启高音质（默认值）
 1 开启高音质
 直播开始后不允许修改。
-      */
+   */
   AudioQuality?: number
-
   /**
-      * 房间子类型，可以有以下取值：
+   * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
 coteaching 双师
 直播开始后不允许修改。
-      */
+   */
   SubType?: string
-
   /**
-      * 禁止录制。可以有以下取值：
+   * 禁止录制。可以有以下取值：
 0 不禁止录制（默认值）
 1 禁止录制
 直播开始后不允许修改。
-      */
+   */
   DisableRecord?: number
-
   /**
    * 助教Id列表。直播开始后不允许修改。
    */
   Assistants?: Array<string>
-
   /**
    * 房间绑定的群组ID
    */
   GroupId?: string
-
   /**
    * 打开学生麦克风/摄像头的授权开关
    */
@@ -2674,22 +2378,18 @@ export interface AnswerInfo {
    * 用户名
    */
   Name?: string
-
   /**
    * 答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
    */
   Answer?: number
-
   /**
    * 答题用时
    */
   CostTime?: number
-
   /**
    * 用户ID
    */
   UserId?: string
-
   /**
    * 答案是否正确（1正确0错误）
    */
@@ -2704,12 +2404,10 @@ export interface DescribeRoomStatisticsRequest {
    * 房间Id。
    */
   RoomId: number
-
   /**
    * 分页查询当前页数，从1开始递增。
    */
   Page: number
-
   /**
    * 每页数据量，最大1000。
    */
@@ -2721,16 +2419,14 @@ export interface DescribeRoomStatisticsRequest {
  */
 export interface DescribeDocumentsByRoomResponse {
   /**
-      * 文档信息列表
+   * 文档信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Documents?: Array<DocumentInfo>
-
   /**
    * 符合查询条件文档总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2745,12 +2441,10 @@ export interface LoginOriginIdResponse {
    * 用户Id。
    */
   UserId: string
-
   /**
    * 登录/注册成功后返回登录态token。有效期7天。
    */
   Token: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2765,13 +2459,11 @@ export interface DescribeQuestionListResponse {
    * 符合查询条件的房间问答问题总数
    */
   Total?: number
-
   /**
-      * 房间问答问题列表
+   * 房间问答问题列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   QuestionInfo?: Array<QuestionInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2786,12 +2478,10 @@ export interface GetRoomsResponse {
    * 总数
    */
   Total?: number
-
   /**
    * 房间列表
    */
   Rooms?: Array<RoomItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2806,26 +2496,22 @@ export interface QuestionInfo {
    * 问题ID
    */
   QuestionId?: string
-
   /**
    * 问题内容
    */
   QuestionContent?: string
-
   /**
    * 倒计时答题设置的秒数（0 表示不计时）
    */
   Duration?: number
-
   /**
    * 正确答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB）
    */
   CorrectAnswer?: number
-
   /**
-      * 每个选项答题人数统计
+   * 每个选项答题人数统计
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AnswerStats?: Array<AnswerStat>
 }
 
@@ -2837,24 +2523,20 @@ export interface KickUserFromRoomRequest {
    * 房间Id。
    */
   RoomId: number
-
   /**
    * 低代码平台的SdkAppId。
    */
   SdkAppId: number
-
   /**
    * 需要踢出成员Id
    */
   UserId: string
-
   /**
-      * 踢出类型：
+   * 踢出类型：
 1：临时踢出，可以使用Duration参数指定污点时间，污点时间间隔内用户无法进入房间。
 2：永久踢出
-      */
+   */
   KickType: number
-
   /**
    * 污点时间(单位秒)，KickType = 1时生效，默认为0
    */
@@ -2866,26 +2548,22 @@ export interface KickUserFromRoomRequest {
  */
 export interface GetRoomsRequest {
   /**
-      * 低代码平台的SdkAppId。
+   * 低代码平台的SdkAppId。
 
-      */
+   */
   SdkAppId: number
-
   /**
    * 开始时间。默认以当前时间减去半小时作为开始时间。
    */
   StartTime?: number
-
   /**
    * 结束时间。默认以当前时间加上半小时作为结束时间。
    */
   EndTime?: number
-
   /**
    * 分页查询当前页数，从1开始递增
    */
   Page?: number
-
   /**
    * 默认是10条
    */
@@ -2905,22 +2583,18 @@ export interface AppCustomContent {
    * 场景参数，一个应用下可以设置多个不同场景。
    */
   Scene: string
-
   /**
    * logo地址，用于上课时展示的课堂或平台图标，支持开发商自定义业务品牌展示。
    */
   LogoUrl?: string
-
   /**
    * HomeUrl：主页地址，用于上课结束后课堂跳转，支持跳转到自己的业务系统。如果配置为空则下课后关闭课堂页面。
    */
   HomeUrl?: string
-
   /**
    * JsUrl ：自定义js。针对应用用于开发上自定义课堂界面、模块功能、监控操作，支持数据请求与响应处理。
    */
   JsUrl?: string
-
   /**
    * Css : 自定义的css。针对应用用于支持课堂界面的、模块的UI渲染修改、皮肤配色修改、功能模块的隐藏和展示。
    */
@@ -2935,13 +2609,11 @@ export interface BatchDescribeDocumentResponse {
    * 符合查询条件文档总数
    */
   Total?: number
-
   /**
-      * 文档信息列表
+   * 文档信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Documents?: Array<DocumentInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2966,12 +2638,10 @@ export interface DescribeSdkAppIdUsersRequest {
    * 应用ID
    */
   SdkAppId: number
-
   /**
    * 分页，默认值为1
    */
   Page?: number
-
   /**
    * 分页数据限制，默认值为20
    */
@@ -3021,12 +2691,10 @@ export interface BatchCreateGroupWithMembersRequest {
    * 低代码平台应用ID
    */
   SdkAppId: number
-
   /**
    * 批量创建群组基础信息，最大长度限制256
    */
   GroupBaseInfos: Array<GroupBaseInfo>
-
   /**
    * 群组绑定的成员列表，一次性最多200个
    */
@@ -3041,7 +2709,6 @@ export interface DescribeGroupRequest {
    * 群组ID
    */
   GroupId: string
-
   /**
    * 低代码平台应用ID
    */
@@ -3056,7 +2723,6 @@ export interface CreateSupervisorRequest {
    * 应用ID。
    */
   SdkAppId: number
-
   /**
    * 用户ID列表。
    */
@@ -3068,9 +2734,9 @@ export interface CreateSupervisorRequest {
  */
 export interface BackgroundPictureConfig {
   /**
-      * 背景图片的url
+   * 背景图片的url
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Url: string
 }
 
@@ -3092,12 +2758,10 @@ export interface DescribeCurrentMemberListResponse {
    * 记录总数。当前房间的总人数。
    */
   Total?: number
-
   /**
    * 成员记录列表。
    */
   MemberRecords?: Array<MemberRecord>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3122,13 +2786,11 @@ export interface DescribeGroupListResponse {
    * 记录总数。当前匹配群组总数。
    */
   Total?: number
-
   /**
-      * 群组信息列表。
+   * 群组信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   GroupInfos?: Array<GroupInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3143,7 +2805,6 @@ export interface CreateRoomResponse {
    * 房间ID。
    */
   RoomId?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3158,7 +2819,6 @@ export interface DescribeDeveloperResponse {
    * 开发商ID
    */
   DeveloperId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3170,14 +2830,13 @@ export interface DescribeDeveloperResponse {
  */
 export interface TextMarkConfig {
   /**
-      * 文字水印内容
+   * 文字水印内容
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Text?: string
-
   /**
-      * 文字水印颜色
+   * 文字水印颜色
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Color?: string
 }

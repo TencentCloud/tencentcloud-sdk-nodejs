@@ -23,7 +23,6 @@ export interface DescribeBRIRequest {
    * 业务风险情报请求体
    */
   RequestData: BRIRequest
-
   /**
    * 客户用于计费的资源ID
    */
@@ -38,68 +37,55 @@ export interface BRIRequest {
    * 业务名, 必须是以下六个业务名之一(bri_num,bri_dev,bri_ip_bri_apk,bri_url,bri_social)
    */
   Service: string
-
   /**
    * QQ号 (业务名为bri_social时必填, 除非已填Wechat)
    */
   QQ?: string
-
   /**
    * QQ号的可疑标签
    */
   QQTag?: string
-
   /**
    * 网址 (业务名为bri_url时必填)
    */
   Url?: string
-
   /**
    * Apk证书Md5  (业务名为bri_apk时必填，除非已填FileMd5)
    */
   CertMd5?: string
-
   /**
    * Apk安装包名 (业务名为bri_apk时必填，除非已填FileMd5)
    */
   PackageName?: string
-
   /**
    * Apk文件Md5 (业务名为bri_apk时必填，除非已填PackageName,CertMd5,FileSize)
    */
   FileMd5?: string
-
   /**
    * 业务场景 (1-注册, 2-登录, 3-发消息)
    */
   Scene?: string
-
   /**
-      * 电话号码 (业务名为bri_num时必填)
+   * 电话号码 (业务名为bri_num时必填)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PhoneNumber?: string
-
   /**
    * Apk文件大小  (业务名为bri_apk时必填，除非已填FileMd5)
    */
   FileSize?: number
-
   /**
    * 点分格式的IP (业务名为bri_ip时必填)
    */
   Ip?: string
-
   /**
    * 安卓设备的Imei (业务名为bri_dev时必填)
    */
   Imei?: string
-
   /**
    * 微信号 (业务名为bri_social时必填, 除非已填QQ)
    */
   Wechat?: string
-
   /**
    * 微信号的可疑标签
    */
@@ -114,7 +100,6 @@ export interface DescribeBRIResponse {
    * 业务风险情报响应体
    */
   ResponseData?: BRIResponse
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -129,9 +114,8 @@ export interface BRIResponse {
    * 风险分值，取值[0,100], 分值越高风险越高
    */
   Score?: number
-
   /**
-      * 当Service为bri_num时,返回的风险标签有:
+   * 当Service为bri_num时,返回的风险标签有:
 1) 疑似垃圾流量     说明: 结合号码的历史数据表现，判断该号码历史用互联网业务作恶行为，其产生的互联网行为对于其他业务来说属于作弊或垃圾流量。 
 2) 疑似新客户       说明: 通过号码互联网行为（社交，浏览等）是否异常判断为小号或接码平台帐号。 
 
@@ -156,6 +140,6 @@ export interface BRIResponse {
 2) 一般   说明: APK为未发现问题的正常应用
 3) 风险   说明: APK为外挂或色情等风险应用
 4) 病毒   说明: APK为包含恶意代码的恶意软件,可能破坏系统或者其他app正常使用
-      */
+   */
   Tags?: Array<string>
 }

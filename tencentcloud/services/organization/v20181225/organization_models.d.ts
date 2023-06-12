@@ -3,12 +3,12 @@
  */
 export interface MoveOrganizationMembersToNodeRequest {
     /**
-      * 组织单元ID
-      */
+     * 组织单元ID
+     */
     NodeId: number;
     /**
-      * 成员UIN列表
-      */
+     * 成员UIN列表
+     */
     Uins: Array<number>;
 }
 /**
@@ -20,12 +20,12 @@ export declare type GetOrganizationRequest = null;
  */
 export interface ListOrganizationMembersRequest {
     /**
-      * 偏移量
-      */
+     * 偏移量
+     */
     Offset?: number;
     /**
-      * 限制数目
-      */
+     * 限制数目
+     */
     Limit?: number;
 }
 /**
@@ -33,12 +33,12 @@ export interface ListOrganizationMembersRequest {
  */
 export interface DeleteOrganizationMemberFromNodeRequest {
     /**
-      * 被删除成员UIN
-      */
+     * 被删除成员UIN
+     */
     MemberUin: number;
     /**
-      * 组织单元ID
-      */
+     * 组织单元ID
+     */
     NodeId: number;
 }
 /**
@@ -46,20 +46,20 @@ export interface DeleteOrganizationMemberFromNodeRequest {
  */
 export interface OrgMember {
     /**
-      * UIN
-      */
+     * UIN
+     */
     Uin: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
     /**
-      * 加入时间
-      */
+     * 加入时间
+     */
     JoinTime: string;
 }
 /**
@@ -67,8 +67,8 @@ export interface OrgMember {
  */
 export interface UpdateOrganizationNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -76,36 +76,36 @@ export interface UpdateOrganizationNodeResponse {
  */
 export interface GetOrganizationMemberResponse {
     /**
-      * 组织成员UIN
-      */
+     * 组织成员UIN
+     */
     Uin?: number;
     /**
-      * 组织成员名称
-      */
+     * 组织成员名称
+     */
     Name?: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark?: string;
     /**
-      * 加入时间
-      */
+     * 加入时间
+     */
     JoinTime?: string;
     /**
-      * 组织单元ID
-      */
+     * 组织单元ID
+     */
     NodeId?: number;
     /**
-      * 组织单元名称
-      */
+     * 组织单元名称
+     */
     NodeName?: string;
     /**
-      * 父组织单元ID
-      */
+     * 父组织单元ID
+     */
     ParentNodeId?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -113,8 +113,8 @@ export interface GetOrganizationMemberResponse {
  */
 export interface CreateOrganizationRequest {
     /**
-      * 组织类型（目前固定为1）
-      */
+     * 组织类型（目前固定为1）
+     */
     OrgType: number;
 }
 /**
@@ -126,8 +126,8 @@ export declare type DeleteOrganizationRequest = null;
  */
 export interface QuitOrganizationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -135,8 +135,8 @@ export interface QuitOrganizationResponse {
  */
 export interface UpdateOrganizationMemberResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -144,8 +144,8 @@ export interface UpdateOrganizationMemberResponse {
  */
 export interface DeleteOrganizationMembersRequest {
     /**
-      * 被删除成员的UIN列表
-      */
+     * 被删除成员的UIN列表
+     */
     Uins: Array<number>;
 }
 /**
@@ -153,24 +153,24 @@ export interface DeleteOrganizationMembersRequest {
  */
 export interface CreateOrganizationResponse {
     /**
-      * 企业组织ID
-      */
+     * 企业组织ID
+     */
     OrgId?: number;
     /**
-      * 创建者昵称
-      */
+     * 创建者昵称
+     */
     Nickname?: string;
     /**
-      * 创建者邮箱
-      */
+     * 创建者邮箱
+     */
     Mail?: string;
     /**
-      * 组织类型
-      */
+     * 组织类型
+     */
     OrgType?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -178,8 +178,8 @@ export interface CreateOrganizationResponse {
  */
 export interface DeleteOrganizationNodesRequest {
     /**
-      * 组织单元ID列表
-      */
+     * 组织单元ID列表
+     */
     NodeIds: Array<number>;
 }
 /**
@@ -187,12 +187,12 @@ export interface DeleteOrganizationNodesRequest {
  */
 export interface AddOrganizationNodeResponse {
     /**
-      * 组织单元ID
-      */
+     * 组织单元ID
+     */
     NodeId?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -200,16 +200,16 @@ export interface AddOrganizationNodeResponse {
  */
 export interface ListOrganizationInvitationsResponse {
     /**
-      * 邀请信息列表
-      */
+     * 邀请信息列表
+     */
     Invitations?: Array<OrgInvitation>;
     /**
-      * 总数目
-      */
+     * 总数目
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -217,8 +217,8 @@ export interface ListOrganizationInvitationsResponse {
  */
 export interface AcceptOrganizationInvitationRequest {
     /**
-      * 邀请ID
-      */
+     * 邀请ID
+     */
     Id: number;
 }
 /**
@@ -226,16 +226,16 @@ export interface AcceptOrganizationInvitationRequest {
  */
 export interface ListOrganizationNodeMembersResponse {
     /**
-      * 总数目
-      */
+     * 总数目
+     */
     TotalCount?: number;
     /**
-      * 成员列表
-      */
+     * 成员列表
+     */
     Members?: Array<OrgMember>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -243,8 +243,8 @@ export interface ListOrganizationNodeMembersResponse {
  */
 export interface GetOrganizationMemberRequest {
     /**
-      * 组织成员UIN
-      */
+     * 组织成员UIN
+     */
     MemberUin: number;
 }
 /**
@@ -252,8 +252,8 @@ export interface GetOrganizationMemberRequest {
  */
 export interface DenyOrganizationInvitationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -261,8 +261,8 @@ export interface DenyOrganizationInvitationResponse {
  */
 export interface SendOrganizationInvitationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -270,48 +270,48 @@ export interface SendOrganizationInvitationResponse {
  */
 export interface OrgInvitation {
     /**
-      * 邀请ID
-      */
+     * 邀请ID
+     */
     Id: number;
     /**
-      * 被邀请UIN
-      */
+     * 被邀请UIN
+     */
     Uin: number;
     /**
-      * 创建者UIN
-      */
+     * 创建者UIN
+     */
     HostUin: number;
     /**
-      * 创建者名称
-      */
+     * 创建者名称
+     */
     HostName: string;
     /**
-      * 创建者邮箱
-      */
+     * 创建者邮箱
+     */
     HostMail: string;
     /**
-      * 邀请状态。-1：已过期，0：正常，1：已接受，2：已失效，3：已取消
-      */
+     * 邀请状态。-1：已过期，0：正常，1：已接受，2：已失效，3：已取消
+     */
     Status: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
     /**
-      * 企业组织类型
-      */
+     * 企业组织类型
+     */
     OrgType: number;
     /**
-      * 邀请时间
-      */
+     * 邀请时间
+     */
     InviteTime: string;
     /**
-      * 过期时间
-      */
+     * 过期时间
+     */
     ExpireTime: string;
 }
 /**
@@ -319,16 +319,16 @@ export interface OrgInvitation {
  */
 export interface UpdateOrganizationMemberRequest {
     /**
-      * 成员UIN
-      */
+     * 成员UIN
+     */
     MemberUin: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name?: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark?: string;
 }
 /**
@@ -336,8 +336,8 @@ export interface UpdateOrganizationMemberRequest {
  */
 export interface QuitOrganizationRequest {
     /**
-      * 企业组织ID
-      */
+     * 企业组织ID
+     */
     OrgId: number;
 }
 /**
@@ -345,16 +345,16 @@ export interface QuitOrganizationRequest {
  */
 export interface ListOrganizationInvitationsRequest {
     /**
-      * 是否被邀请。1：被邀请，0：发出的邀请
-      */
+     * 是否被邀请。1：被邀请，0：发出的邀请
+     */
     Invited: number;
     /**
-      * 偏移量
-      */
+     * 偏移量
+     */
     Offset?: number;
     /**
-      * 限制数目
-      */
+     * 限制数目
+     */
     Limit?: number;
 }
 /**
@@ -362,12 +362,12 @@ export interface ListOrganizationInvitationsRequest {
  */
 export interface AddOrganizationNodeRequest {
     /**
-      * 父组织单元ID
-      */
+     * 父组织单元ID
+     */
     ParentNodeId: number;
     /**
-      * 组织单元名字
-      */
+     * 组织单元名字
+     */
     Name: string;
 }
 /**
@@ -375,16 +375,16 @@ export interface AddOrganizationNodeRequest {
  */
 export interface ListOrganizationNodeMembersRequest {
     /**
-      * 企业组织单元ID
-      */
+     * 企业组织单元ID
+     */
     NodeId: number;
     /**
-      * 偏移量
-      */
+     * 偏移量
+     */
     Offset?: number;
     /**
-      * 限制数目
-      */
+     * 限制数目
+     */
     Limit?: number;
 }
 /**
@@ -392,16 +392,16 @@ export interface ListOrganizationNodeMembersRequest {
  */
 export interface UpdateOrganizationNodeRequest {
     /**
-      * 企业组织单元ID
-      */
+     * 企业组织单元ID
+     */
     NodeId: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name?: string;
     /**
-      * 父单元ID
-      */
+     * 父单元ID
+     */
     ParentNodeId?: number;
 }
 /**
@@ -409,8 +409,8 @@ export interface UpdateOrganizationNodeRequest {
  */
 export interface CancelOrganizationInvitationRequest {
     /**
-      * 邀请ID
-      */
+     * 邀请ID
+     */
     Id: number;
 }
 /**
@@ -418,8 +418,8 @@ export interface CancelOrganizationInvitationRequest {
  */
 export interface DeleteOrganizationMemberFromNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -427,8 +427,8 @@ export interface DeleteOrganizationMemberFromNodeResponse {
  */
 export interface DenyOrganizationInvitationRequest {
     /**
-      * 邀请ID
-      */
+     * 邀请ID
+     */
     Id: number;
 }
 /**
@@ -436,8 +436,8 @@ export interface DenyOrganizationInvitationRequest {
  */
 export interface DeleteOrganizationNodesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -445,8 +445,8 @@ export interface DeleteOrganizationNodesResponse {
  */
 export interface DeleteOrganizationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -454,8 +454,8 @@ export interface DeleteOrganizationResponse {
  */
 export interface CancelOrganizationInvitationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -463,8 +463,8 @@ export interface CancelOrganizationInvitationResponse {
  */
 export interface AcceptOrganizationInvitationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -476,16 +476,16 @@ export declare type ListOrganizationNodesRequest = null;
  */
 export interface SendOrganizationInvitationRequest {
     /**
-      * 被邀请账户UIN
-      */
+     * 被邀请账户UIN
+     */
     InviteUin: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
 }
 /**
@@ -493,8 +493,8 @@ export interface SendOrganizationInvitationRequest {
  */
 export interface DeleteOrganizationMembersResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -502,32 +502,32 @@ export interface DeleteOrganizationMembersResponse {
  */
 export interface GetOrganizationResponse {
     /**
-      * 企业组织ID
-      */
+     * 企业组织ID
+     */
     OrgId?: number;
     /**
-      * 创建者UIN
-      */
+     * 创建者UIN
+     */
     HostUin?: number;
     /**
-      * 创建者昵称
-      */
+     * 创建者昵称
+     */
     Nickname?: string;
     /**
-      * 创建者邮箱
-      */
+     * 创建者邮箱
+     */
     Mail?: string;
     /**
-      * 企业组织类型
-      */
+     * 企业组织类型
+     */
     OrgType?: number;
     /**
-      * 是否为空
-      */
+     * 是否为空
+     */
     IsEmpty?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -535,16 +535,16 @@ export interface GetOrganizationResponse {
  */
 export interface ListOrganizationMembersResponse {
     /**
-      * 成员列表
-      */
+     * 成员列表
+     */
     Members?: Array<OrgMember>;
     /**
-      * 总数目
-      */
+     * 总数目
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -552,12 +552,12 @@ export interface ListOrganizationMembersResponse {
  */
 export interface ListOrganizationNodesResponse {
     /**
-      * 企业组织单元列表
-      */
+     * 企业组织单元列表
+     */
     Nodes: Array<OrgNode>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -565,8 +565,8 @@ export interface ListOrganizationNodesResponse {
  */
 export interface MoveOrganizationMembersToNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -574,19 +574,19 @@ export interface MoveOrganizationMembersToNodeResponse {
  */
 export interface OrgNode {
     /**
-      * 组织单元ID
-      */
+     * 组织单元ID
+     */
     NodeId: number;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 父单元ID
-      */
+     * 父单元ID
+     */
     ParentNodeId: number;
     /**
-      * 成员数量
-      */
+     * 成员数量
+     */
     MemberCount: number;
 }

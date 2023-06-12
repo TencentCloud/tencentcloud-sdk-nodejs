@@ -3,24 +3,24 @@
  */
 export interface DescribeAutoScalingConfigurationResponse {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId?: string;
     /**
-      * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。
-      */
+     * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。
+     */
     ExpansionBusyTime?: number;
     /**
-      * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。
-      */
+     * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。
+     */
     ShrinkIdleTime?: number;
     /**
-      * 扩容队列配置概览列表。
-      */
+     * 扩容队列配置概览列表。
+     */
     QueueConfigs?: Array<QueueConfigOverview>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -28,8 +28,8 @@ export interface DescribeAutoScalingConfigurationResponse {
  */
 export interface DescribeClusterStorageOptionRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
 }
 /**
@@ -37,60 +37,60 @@ export interface DescribeClusterStorageOptionRequest {
  */
 export interface ClusterOverview {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 集群状态。取值范围：<br><li>PENDING：创建中<br><li>INITING：初始化中<br><li>INIT_FAILED：初始化失败<br><li>RUNNING：运行中<br><li>TERMINATING：销毁中
-      */
+     * 集群状态。取值范围：<br><li>PENDING：创建中<br><li>INITING：初始化中<br><li>INIT_FAILED：初始化失败<br><li>RUNNING：运行中<br><li>TERMINATING：销毁中
+     */
     ClusterStatus: string;
     /**
-      * 集群名称。
-      */
+     * 集群名称。
+     */
     ClusterName: string;
     /**
-      * 集群位置信息。
-      */
+     * 集群位置信息。
+     */
     Placement: Placement;
     /**
-      * 集群创建时间。
-      */
+     * 集群创建时间。
+     */
     CreateTime: string;
     /**
-      * 集群调度器。
-      */
+     * 集群调度器。
+     */
     SchedulerType: string;
     /**
-      * 计算节点数量。
-      */
+     * 计算节点数量。
+     */
     ComputeNodeCount: number;
     /**
-      * 计算节点概览。
-      */
+     * 计算节点概览。
+     */
     ComputeNodeSet: Array<ComputeNodeOverview>;
     /**
-      * 管控节点数量。
-      */
+     * 管控节点数量。
+     */
     ManagerNodeCount: number;
     /**
-      * 管控节点概览。
-      */
+     * 管控节点概览。
+     */
     ManagerNodeSet: Array<ManagerNodeOverview>;
     /**
-      * 登录节点概览。
-      */
+     * 登录节点概览。
+     */
     LoginNodeSet: Array<LoginNodeOverview>;
     /**
-      * 登录节点数量。
-      */
+     * 登录节点数量。
+     */
     LoginNodeCount: number;
     /**
-      * 弹性伸缩类型。<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
-      */
+     * 弹性伸缩类型。<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
+     */
     AutoScalingType: string;
     /**
-      * 集群所属私有网络ID。
-      */
+     * 集群所属私有网络ID。
+     */
     VpcId: string;
 }
 /**
@@ -98,9 +98,9 @@ export interface ClusterOverview {
  */
 export interface QueueOverview {
     /**
-      * 队列名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 队列名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     QueueName?: string;
 }
 /**
@@ -108,16 +108,16 @@ export interface QueueOverview {
  */
 export interface DescribeClustersRequest {
     /**
-      * 集群ID列表。通过该参数可以指定需要查询信息的集群列表。<br>如果您不指定该参数，则返回Limit数量以内的集群信息。
-      */
+     * 集群ID列表。通过该参数可以指定需要查询信息的集群列表。<br>如果您不指定该参数，则返回Limit数量以内的集群信息。
+     */
     ClusterIds?: Array<string>;
     /**
-      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
 }
 /**
@@ -125,28 +125,28 @@ export interface DescribeClustersRequest {
  */
 export interface SetAutoScalingConfigurationRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。
-      */
+     * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。
+     */
     ExpansionBusyTime?: number;
     /**
-      * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。单位秒。默认值300。
-      */
+     * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。单位秒。默认值300。
+     */
     ShrinkIdleTime?: number;
     /**
-      * 扩容队列配置列表。
-      */
+     * 扩容队列配置列表。
+     */
     QueueConfigs?: Array<QueueConfig>;
     /**
-      * 是否只预检此次请求。
-true：发送检查请求，不会绑定弹性伸缩组。检查项包括是否填写了必需参数，请求格式，业务限制。
-如果检查不通过，则返回对应错误码；
-如果检查通过，则返回RequestId。
-false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩组。
-      */
+     * 是否只预检此次请求。
+  true：发送检查请求，不会绑定弹性伸缩组。检查项包括是否填写了必需参数，请求格式，业务限制。
+  如果检查不通过，则返回对应错误码；
+  如果检查通过，则返回RequestId。
+  false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩组。
+     */
     DryRun?: boolean;
 }
 /**
@@ -154,39 +154,39 @@ false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩
  */
 export interface NodeOverview {
     /**
-      * 节点实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点实例ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceId?: string;
     /**
-      * 节点所在可用区信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点所在可用区信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Zone?: string;
     /**
-      * 节点状态。<br><li>SUBMITTED：已完成提交。<br><li>CREATING：创建中。<br><li>CREATED：完成创建。<br><li>INITING：初始化中。<br><li>INIT_FAILED：初始化失败。<br><li>RUNNING：运行中。<br><li>DELETING：销毁中。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点状态。<br><li>SUBMITTED：已完成提交。<br><li>CREATING：创建中。<br><li>CREATED：完成创建。<br><li>INITING：初始化中。<br><li>INIT_FAILED：初始化失败。<br><li>RUNNING：运行中。<br><li>DELETING：销毁中。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeState?: string;
     /**
-      * 镜像ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageId?: string;
     /**
-      * 节点所属队列名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点所属队列名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     QueueName?: string;
     /**
-      * 节点角色。<br><li>Manager：管控节点。<br><li>Compute：计算节点。<br><li>Login：登录节点。<br><li>ManagerBackup：备用管控节点。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点角色。<br><li>Manager：管控节点。<br><li>Compute：计算节点。<br><li>Login：登录节点。<br><li>ManagerBackup：备用管控节点。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeRole?: string;
     /**
-      * 节点类型。<br><li>STATIC：静态节点。<br><li>DYNAMIC：弹性节点。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点类型。<br><li>STATIC：静态节点。<br><li>DYNAMIC：弹性节点。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeType?: string;
 }
 /**
@@ -194,20 +194,20 @@ export interface NodeOverview {
  */
 export interface DescribeNodesRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * <li><strong>queue-name</strong></li> <p style="padding-left: 30px;">按照【<strong>队列名称</strong>】进行过滤。队列名称形如：compute。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-role</strong></li> <p style="padding-left: 30px;">按照【<strong>节点角色</strong>】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-type</strong></li> <p style="padding-left: 30px;">按照【<strong>节点类型</strong>】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
-      */
+     * <li><strong>queue-name</strong></li> <p style="padding-left: 30px;">按照【<strong>队列名称</strong>】进行过滤。队列名称形如：compute。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-role</strong></li> <p style="padding-left: 30px;">按照【<strong>节点角色</strong>】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-type</strong></li> <p style="padding-left: 30px;">按照【<strong>节点类型</strong>】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+     */
     Filters?: Array<Filter>;
     /**
-      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
 }
 /**
@@ -215,8 +215,8 @@ export interface DescribeNodesRequest {
  */
 export interface DeleteNodesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -224,8 +224,8 @@ export interface DeleteNodesResponse {
  */
 export interface AddClusterStorageOptionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -233,8 +233,8 @@ export interface AddClusterStorageOptionResponse {
  */
 export interface DescribeInitNodeScriptsRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
 }
 /**
@@ -242,8 +242,8 @@ export interface DescribeInitNodeScriptsRequest {
  */
 export interface DeleteClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -251,29 +251,29 @@ export interface DeleteClusterResponse {
  */
 export interface ExpansionNodeConfig {
     /**
-      * 扩容实例所在的位置。
-      */
+     * 扩容实例所在的位置。
+     */
     Placement: Placement;
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 节点机型。不同实例机型指定了不同的资源规格。
-<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
+     * 节点机型。不同实例机型指定了不同的资源规格。
+  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     */
     InstanceType?: string;
     /**
-      * 私有网络相关信息配置。
-      */
+     * 私有网络相关信息配置。
+     */
     VirtualPrivateCloud?: VirtualPrivateCloud;
     /**
-      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-      */
+     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     */
     ProjectId?: number;
 }
 /**
@@ -281,23 +281,23 @@ export interface ExpansionNodeConfig {
  */
 export interface NodeActivity {
     /**
-      * 节点活动所在的实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点活动所在的实例ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeInstanceId: string;
     /**
-      * 节点活动状态。取值范围：<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>FAILED：活动失败
-      */
+     * 节点活动状态。取值范围：<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>FAILED：活动失败
+     */
     NodeActivityStatus: string;
     /**
-      * 节点活动状态码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点活动状态码。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeActivityStatusCode: string;
     /**
-      * 节点活动状态原因。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点活动状态原因。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeActivityStatusReason: string;
 }
 /**
@@ -305,9 +305,9 @@ export interface NodeActivity {
  */
 export interface Placement {
     /**
-      * 实例所属的可用区名称。该参数可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例所属的可用区名称。该参数可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Zone: string;
 }
 /**
@@ -315,12 +315,12 @@ export interface Placement {
  */
 export interface AddQueueRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 队列名称。<br><li>最多支持32个字符。
-      */
+     * 队列名称。<br><li>最多支持32个字符。
+     */
     QueueName: string;
 }
 /**
@@ -328,8 +328,8 @@ export interface AddQueueRequest {
  */
 export interface LoginNodeOverview {
     /**
-      * 登录节点ID。
-      */
+     * 登录节点ID。
+     */
     NodeId: string;
 }
 /**
@@ -337,23 +337,23 @@ export interface LoginNodeOverview {
  */
 export interface CFSOption {
     /**
-      * 文件系统本地挂载路径。
-      */
+     * 文件系统本地挂载路径。
+     */
     LocalPath: string;
     /**
-      * 文件系统远程挂载ip及路径。
-      */
+     * 文件系统远程挂载ip及路径。
+     */
     RemotePath: string;
     /**
-      * 文件系统协议类型，默认值NFS 3.0。
-<li>NFS 3.0。
-<li>NFS 4.0。
-<li>TURBO。
-      */
+     * 文件系统协议类型，默认值NFS 3.0。
+  <li>NFS 3.0。
+  <li>NFS 4.0。
+  <li>TURBO。
+     */
     Protocol?: string;
     /**
-      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-      */
+     * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+     */
     StorageType?: string;
 }
 /**
@@ -361,53 +361,53 @@ export interface CFSOption {
  */
 export interface ClusterActivity {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 集群活动ID。
-      */
+     * 集群活动ID。
+     */
     ActivityId: string;
     /**
-      * 集群活动类型。取值范围：<br><li>CreateAndAddNodes：创建实例并添加进集群<br><li>RemoveNodesFromCluster：从集群移除实例<br><li>TerminateNodes：销毁实例<br><li>MountStorageOption：增加挂载选项并进行挂载<br><li>UmountStorageOption：删除集群挂载存储选项并解挂载
-
-      */
+     * 集群活动类型。取值范围：<br><li>CreateAndAddNodes：创建实例并添加进集群<br><li>RemoveNodesFromCluster：从集群移除实例<br><li>TerminateNodes：销毁实例<br><li>MountStorageOption：增加挂载选项并进行挂载<br><li>UmountStorageOption：删除集群挂载存储选项并解挂载
+  
+     */
     ActivityType: string;
     /**
-      * 集群活动状态。取值范围：<br><li>PENDING：等待运行<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>PARTIALLY_SUCCESSFUL：活动部分成功<br><li>FAILED：活动失败
-      */
+     * 集群活动状态。取值范围：<br><li>PENDING：等待运行<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>PARTIALLY_SUCCESSFUL：活动部分成功<br><li>FAILED：活动失败
+     */
     ActivityStatus: string;
     /**
-      * 集群活动状态码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群活动状态码。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ActivityStatusCode: string;
     /**
-      * 集群活动结果详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群活动结果详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResultDetail: string;
     /**
-      * 集群活动起因。
-      */
+     * 集群活动起因。
+     */
     Cause: string;
     /**
-      * 集群活动描述。
-      */
+     * 集群活动描述。
+     */
     Description: string;
     /**
-      * 集群活动相关节点活动集合。
-      */
+     * 集群活动相关节点活动集合。
+     */
     RelatedNodeActivitySet: Array<NodeActivity>;
     /**
-      * 集群活动开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群活动开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime: string;
     /**
-      * 集群活动结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群活动结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndTime: string;
 }
 /**
@@ -415,13 +415,13 @@ export interface ClusterActivity {
  */
 export interface CreateClusterResponse {
     /**
-      * 集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -429,16 +429,16 @@ export interface CreateClusterResponse {
  */
 export interface DescribeQueuesRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
 }
 /**
@@ -446,8 +446,8 @@ export interface DescribeQueuesRequest {
  */
 export interface SetAutoScalingConfigurationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -455,89 +455,89 @@ export interface SetAutoScalingConfigurationResponse {
  */
 export interface CreateClusterRequest {
     /**
-      * 集群中实例所在的位置。
-      */
+     * 集群中实例所在的位置。
+     */
     Placement: Placement;
     /**
-      * 指定管理节点。
-      */
+     * 指定管理节点。
+     */
     ManagerNode?: ManagerNode;
     /**
-      * 指定管理节点的数量。默认取值：1。取值范围：1～2。
-      */
+     * 指定管理节点的数量。默认取值：1。取值范围：1～2。
+     */
     ManagerNodeCount?: number;
     /**
-      * 指定计算节点。
-      */
+     * 指定计算节点。
+     */
     ComputeNode?: ComputeNode;
     /**
-      * 指定计算节点的数量。默认取值：0。
-      */
+     * 指定计算节点的数量。默认取值：0。
+     */
     ComputeNodeCount?: number;
     /**
-      * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
-      */
+     * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
+     */
     SchedulerType?: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。
-      */
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。
+     */
     ImageId?: string;
     /**
-      * 私有网络相关信息配置。
-      */
+     * 私有网络相关信息配置。
+     */
     VirtualPrivateCloud?: VirtualPrivateCloud;
     /**
-      * 集群登录设置。
-      */
+     * 集群登录设置。
+     */
     LoginSettings?: LoginSettings;
     /**
-      * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
-      */
+     * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-      */
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
     ClientToken?: string;
     /**
-      * 是否只预检此次请求。
-true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
-如果检查不通过，则返回对应错误码；
-如果检查通过，则返回RequestId.
-false（默认）：发送正常请求，通过检查后直接创建实例
-      */
+     * 是否只预检此次请求。
+  true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+  如果检查不通过，则返回对应错误码；
+  如果检查通过，则返回RequestId.
+  false（默认）：发送正常请求，通过检查后直接创建实例
+     */
     DryRun?: boolean;
     /**
-      * 域名字服务类型。默认取值：NIS。
-<li>NIS：NIS域名字服务。
-      */
+     * 域名字服务类型。默认取值：NIS。
+  <li>NIS：NIS域名字服务。
+     */
     AccountType?: string;
     /**
-      * 集群显示名称。
-      */
+     * 集群显示名称。
+     */
     ClusterName?: string;
     /**
-      * 集群存储选项
-      */
+     * 集群存储选项
+     */
     StorageOption?: StorageOption;
     /**
-      * 指定登录节点。
-      */
+     * 指定登录节点。
+     */
     LoginNode?: LoginNode;
     /**
-      * 指定登录节点的数量。默认取值：0。取值范围：0～10。
-      */
+     * 指定登录节点的数量。默认取值：0。取值范围：0～10。
+     */
     LoginNodeCount?: number;
     /**
-      * 创建集群时同时绑定的标签对说明。
-      */
+     * 创建集群时同时绑定的标签对说明。
+     */
     Tags?: Array<Tag>;
     /**
-      * 弹性伸缩类型。默认值：THPC_AS<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
-      */
+     * 弹性伸缩类型。默认值：THPC_AS<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。
+     */
     AutoScalingType?: string;
     /**
-      * 节点初始化脚本信息列表。
-      */
+     * 节点初始化脚本信息列表。
+     */
     InitNodeScripts?: Array<NodeScript>;
 }
 /**
@@ -545,8 +545,8 @@ false（默认）：发送正常请求，通过检查后直接创建实例
  */
 export interface AddQueueResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -554,12 +554,12 @@ export interface AddQueueResponse {
  */
 export interface DescribeClusterStorageOptionResponse {
     /**
-      * 集群存储选项信息概览。
-      */
+     * 集群存储选项信息概览。
+     */
     StorageOption?: StorageOptionOverview;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -567,16 +567,16 @@ export interface DescribeClusterStorageOptionResponse {
  */
 export interface DescribeQueuesResponse {
     /**
-      * 队列概览信息列表。
-      */
+     * 队列概览信息列表。
+     */
     QueueSet?: Array<QueueOverview>;
     /**
-      * 符合条件的节点数量。
-      */
+     * 符合条件的节点数量。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -584,16 +584,16 @@ export interface DescribeQueuesResponse {
  */
 export interface GooseFSOptionOverview {
     /**
-      * 文件系统本地挂载路径。
-      */
+     * 文件系统本地挂载路径。
+     */
     LocalPath: string;
     /**
-      * 文件系统远程挂载路径。
-      */
+     * 文件系统远程挂载路径。
+     */
     RemotePath: string;
     /**
-      * 文件系统master的ip和端口。
-      */
+     * 文件系统master的ip和端口。
+     */
     Masters: Array<string>;
 }
 /**
@@ -601,79 +601,83 @@ export interface GooseFSOptionOverview {
  */
 export interface QueueConfig {
     /**
-      * 队列名称。
-      */
+     * 队列名称。
+     */
     QueueName: string;
     /**
-      * 队列中弹性节点数量最小值。默认值：0。取值范围：0～200。
-      */
+     * 队列中弹性节点数量最小值。默认值：0。取值范围：0～200。
+     */
     MinSize?: number;
     /**
-      * 队列中弹性节点数量最大值。默认值：10。取值范围：0～200。
-      */
+     * 队列中弹性节点数量最大值。默认值：10。取值范围：0～200。
+     */
     MaxSize?: number;
     /**
-      * 是否开启自动扩容。
-      */
+     * 是否开启自动扩容。
+     */
     EnableAutoExpansion?: boolean;
     /**
-      * 是否开启自动缩容。
-      */
+     * 是否开启自动缩容。
+     */
     EnableAutoShrink?: boolean;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
-      */
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
+     */
     ImageId?: string;
     /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 扩容节点配置信息。
-      */
+     * 扩容节点配置信息。
+     */
     ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
     /**
-      * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
-      */
+     * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
+     */
     DesiredIdleNodeCapacity?: number;
     /**
-      * 扩容比例。默认值：100。取值范围：1～100。
-如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
-      */
+     * 扩容比例。默认值：100。取值范围：1～100。
+  如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
+     */
     ScaleOutRatio?: number;
     /**
-      * 比例扩容阈值。默认值：0。取值范围：0～200。
-当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
-此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
-      */
+     * 比例扩容阈值。默认值：0。取值范围：0～200。
+  当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
+  此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
+     */
     ScaleOutNodeThreshold?: number;
+    /**
+     * 每轮扩容最大节点个数。默认值：100。取值范围：1～100。
+     */
+    MaxNodesPerCycle?: number;
 }
 /**
  * 描述了实例的计费模式
  */
 export interface InstanceChargePrepaid {
     /**
-      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Period: number;
     /**
-      * 自动续费标识。取值范围：
-NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
-NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
-DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
-
-默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动续费标识。取值范围：
+  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+  
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RenewFlag?: string;
 }
 /**
@@ -681,12 +685,12 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
  */
 export interface Tag {
     /**
-      * 标签键
-      */
+     * 标签键
+     */
     Key: string;
     /**
-      * 标签值
-      */
+     * 标签值
+     */
     Value: string;
 }
 /**
@@ -694,39 +698,39 @@ export interface Tag {
  */
 export interface LoginNode {
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 节点机型。不同实例机型指定了不同的资源规格。
-<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
+     * 节点机型。不同实例机型指定了不同的资源规格。
+  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     */
     InstanceType?: string;
     /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 节点显示名称。<br><li>
-不指定节点显示名称则默认显示‘未命名’。
-最多支持60个字符。
-      */
+     * 节点显示名称。<br><li>
+  不指定节点显示名称则默认显示‘未命名’。
+  最多支持60个字符。
+     */
     InstanceName?: string;
     /**
-      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-      */
+     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     */
     ProjectId?: number;
 }
 /**
@@ -734,16 +738,16 @@ export interface LoginNode {
  */
 export interface StorageOptionOverview {
     /**
-      * CFS存储选项概览信息列表。
-      */
+     * CFS存储选项概览信息列表。
+     */
     CFSOptions: Array<CFSOptionOverview>;
     /**
-      * GooseFS存储选项概览信息列表。
-      */
+     * GooseFS存储选项概览信息列表。
+     */
     GooseFSOptions: Array<GooseFSOptionOverview>;
     /**
-      * GooseFSx存储选项概览信息列表。
-      */
+     * GooseFSx存储选项概览信息列表。
+     */
     GooseFSxOptions?: Array<GooseFSxOptionOverview>;
 }
 /**
@@ -751,15 +755,15 @@ export interface StorageOptionOverview {
  */
 export interface NodeScript {
     /**
-      * 节点执行脚本获取地址。
-目前仅支持cos地址。地址最大长度：255。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点执行脚本获取地址。
+  目前仅支持cos地址。地址最大长度：255。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScriptPath: string;
     /**
-      * 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Timeout?: number;
 }
 /**
@@ -767,8 +771,8 @@ export interface NodeScript {
  */
 export interface ModifyInitNodeScriptsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -776,9 +780,9 @@ export interface ModifyInitNodeScriptsResponse {
  */
 export interface ManagerNodeOverview {
     /**
-      * 管控节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 管控节点ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeId: string;
 }
 /**
@@ -786,41 +790,41 @@ export interface ManagerNodeOverview {
  */
 export interface ManagerNode {
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 节点机型。不同实例机型指定了不同的资源规格。
-<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
+     * 节点机型。不同实例机型指定了不同的资源规格。
+  <br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     */
     InstanceType?: string;
     /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 节点显示名称。<br><li>
-不指定节点显示名称则默认显示‘未命名’。
-</li><li>购买多个节点，如果指定模式串`{R:x}`，表示生成数字[`[x, x+n-1]`，其中`n`表示购买节点的数量，例如`server_{R:3}`，购买1个时，节点显示名称为`server_3`；购买2个时，节点显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。
-购买多个节点，如果不指定模式串，则在节点显示名称添加后缀`1、2...n`，其中`n`表示购买节点的数量，例如`server_`，购买2个时，节点显示名称分别为`server_1`，`server_2`。</li><li>
-最多支持60个字符（包含模式串）。
-      */
+     * 节点显示名称。<br><li>
+  不指定节点显示名称则默认显示‘未命名’。
+  </li><li>购买多个节点，如果指定模式串`{R:x}`，表示生成数字[`[x, x+n-1]`，其中`n`表示购买节点的数量，例如`server_{R:3}`，购买1个时，节点显示名称为`server_3`；购买2个时，节点显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。
+  购买多个节点，如果不指定模式串，则在节点显示名称添加后缀`1、2...n`，其中`n`表示购买节点的数量，例如`server_`，购买2个时，节点显示名称分别为`server_1`，`server_2`。</li><li>
+  最多支持60个字符（包含模式串）。
+     */
     InstanceName?: string;
     /**
-      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-      */
+     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     */
     ProjectId?: number;
 }
 /**
@@ -828,8 +832,8 @@ export interface ManagerNode {
  */
 export interface DeleteClusterRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
 }
 /**
@@ -837,9 +841,9 @@ export interface DeleteClusterRequest {
  */
 export interface ComputeNodeOverview {
     /**
-      * 计算节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计算节点ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeId: string;
 }
 /**
@@ -847,19 +851,19 @@ export interface ComputeNodeOverview {
  */
 export interface SystemDisk {
     /**
-      * 系统盘类型。系统盘类型限制详见存储概述。取值范围：
-CLOUD_BASIC：普通云硬盘
-CLOUD_SSD：SSD云硬盘
-CLOUD_PREMIUM：高性能云硬盘
-
-默认取值：当前有库存的硬盘类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 系统盘类型。系统盘类型限制详见存储概述。取值范围：
+  CLOUD_BASIC：普通云硬盘
+  CLOUD_SSD：SSD云硬盘
+  CLOUD_PREMIUM：高性能云硬盘
+  
+  默认取值：当前有库存的硬盘类型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskType?: string;
     /**
-      * 系统盘大小，单位：GB。默认值为 50
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 系统盘大小，单位：GB。默认值为 50
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskSize?: number;
 }
 /**
@@ -867,8 +871,8 @@ CLOUD_PREMIUM：高性能云硬盘
  */
 export interface LoginSettings {
     /**
-      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-      */
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+     */
     Password?: string;
 }
 /**
@@ -876,16 +880,16 @@ export interface LoginSettings {
  */
 export interface GooseFSOption {
     /**
-      * 文件系统本地挂载路径。
-      */
+     * 文件系统本地挂载路径。
+     */
     LocalPath: string;
     /**
-      * 文件系统远程挂载路径。
-      */
+     * 文件系统远程挂载路径。
+     */
     RemotePath: string;
     /**
-      * 文件系统master的ip和端口。
-      */
+     * 文件系统master的ip和端口。
+     */
     Masters: Array<string>;
 }
 /**
@@ -893,16 +897,16 @@ export interface GooseFSOption {
  */
 export interface DescribeClusterActivitiesRequest {
     /**
-      * 集群ID。通过该参数指定需要查询活动历史记录的集群。
-      */
+     * 集群ID。通过该参数指定需要查询活动历史记录的集群。
+     */
     ClusterId: string;
     /**
-      * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
 }
 /**
@@ -910,12 +914,12 @@ export interface DescribeClusterActivitiesRequest {
  */
 export interface DeleteQueueRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 队列名称。<br><li>最多支持32个字符。
-      */
+     * 队列名称。<br><li>最多支持32个字符。
+     */
     QueueName: string;
 }
 /**
@@ -925,12 +929,12 @@ export interface DeleteQueueRequest {
  */
 export interface Filter {
     /**
-      * 需要过滤的字段。
-      */
+     * 需要过滤的字段。
+     */
     Name: string;
     /**
-      * 字段的过滤值。
-      */
+     * 字段的过滤值。
+     */
     Values: Array<string>;
 }
 /**
@@ -938,91 +942,91 @@ export interface Filter {
  */
 export interface AddNodesRequest {
     /**
-      * 集群中实例所在的位置。
-      */
+     * 集群中实例所在的位置。
+     */
     Placement: Placement;
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 私有网络相关信息配置。
-      */
+     * 私有网络相关信息配置。
+     */
     VirtualPrivateCloud: VirtualPrivateCloud;
     /**
-      * 添加节点数量。
-      */
+     * 添加节点数量。
+     */
     Count: number;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。
-      */
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。
+     */
     ImageId?: string;
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
+     * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     */
     InstanceType?: string;
     /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 节点显示名称。
-不指定节点显示名称则默认显示‘未命名’。
-最多支持60个字符。
-      */
+     * 节点显示名称。
+  不指定节点显示名称则默认显示‘未命名’。
+  最多支持60个字符。
+     */
     InstanceName?: string;
     /**
-      * 集群登录设置。
-      */
+     * 集群登录设置。
+     */
     LoginSettings?: LoginSettings;
     /**
-      * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
-      */
+     * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-      */
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
     ClientToken?: string;
     /**
-      * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。<li>SGE默认队列为：all.q。
-
-      */
+     * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。<li>SGE默认队列为：all.q。
+  
+     */
     QueueName?: string;
     /**
-      * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
-      */
+     * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
+     */
     NodeRole?: string;
     /**
-      * 是否只预检此次请求。
-true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
-如果检查不通过，则返回对应错误码；
-如果检查通过，则返回RequestId.
-false（默认）：发送正常请求，通过检查后直接创建实例
-      */
+     * 是否只预检此次请求。
+  true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+  如果检查不通过，则返回对应错误码；
+  如果检查通过，则返回RequestId.
+  false（默认）：发送正常请求，通过检查后直接创建实例
+     */
     DryRun?: boolean;
     /**
-      * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
-      */
+     * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
+     */
     NodeType?: string;
     /**
-      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-      */
+     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     */
     ProjectId?: number;
 }
 /**
@@ -1030,23 +1034,23 @@ false（默认）：发送正常请求，通过检查后直接创建实例
  */
 export interface CFSOptionOverview {
     /**
-      * 文件系统本地挂载路径。
-      */
+     * 文件系统本地挂载路径。
+     */
     LocalPath: string;
     /**
-      * 文件系统远程挂载ip及路径。
-      */
+     * 文件系统远程挂载ip及路径。
+     */
     RemotePath: string;
     /**
-      * 文件系统协议类型。
-<li>NFS 3.0。
-<li>NFS 4.0。
-<li>TURBO。
-      */
+     * 文件系统协议类型。
+  <li>NFS 3.0。
+  <li>NFS 4.0。
+  <li>TURBO。
+     */
     Protocol: string;
     /**
-      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-      */
+     * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+     */
     StorageType: string;
 }
 /**
@@ -1054,12 +1058,12 @@ export interface CFSOptionOverview {
  */
 export interface DeleteClusterStorageOptionRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 本地挂载路径。
-      */
+     * 本地挂载路径。
+     */
     LocalPath: string;
 }
 /**
@@ -1067,12 +1071,12 @@ export interface DeleteClusterStorageOptionRequest {
  */
 export interface AddClusterStorageOptionRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 集群存储选项。
-      */
+     * 集群存储选项。
+     */
     StorageOption: StorageOption;
 }
 /**
@@ -1080,12 +1084,12 @@ export interface AddClusterStorageOptionRequest {
  */
 export interface GooseFSxOption {
     /**
-      * 文件系统master的ip和端口列表。
-      */
+     * 文件系统master的ip和端口列表。
+     */
     Masters: Array<string>;
     /**
-      * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
-      */
+     * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
+     */
     LocalPath: string;
 }
 /**
@@ -1093,61 +1097,66 @@ export interface GooseFSxOption {
  */
 export interface QueueConfigOverview {
     /**
-      * 队列名称。
-      */
+     * 队列名称。
+     */
     QueueName?: string;
     /**
-      * 队列中弹性节点数量最小值。取值范围0～200。
-      */
+     * 队列中弹性节点数量最小值。取值范围0～200。
+     */
     MinSize?: number;
     /**
-      * 队列中弹性节点数量最大值。取值范围0～200。
-      */
+     * 队列中弹性节点数量最大值。取值范围0～200。
+     */
     MaxSize?: number;
     /**
-      * 是否开启自动扩容。
-      */
+     * 是否开启自动扩容。
+     */
     EnableAutoExpansion?: boolean;
     /**
-      * 是否开启自动缩容。
-      */
+     * 是否开启自动缩容。
+     */
     EnableAutoShrink?: boolean;
     /**
-      * 扩容节点配置信息。
-      */
+     * 扩容节点配置信息。
+     */
     ExpansionNodeConfigs?: Array<ExpansionNodeConfigOverview>;
     /**
-      * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DesiredIdleNodeCapacity?: number;
     /**
-      * 扩容比例。默认值：100。取值范围：1～100。
-如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 扩容比例。默认值：100。取值范围：1～100。
+  如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleOutRatio?: number;
     /**
-      * 比例扩容阈值。默认值：0。取值范围：0～200。
-当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
-此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 比例扩容阈值。默认值：0。取值范围：0～200。
+  当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
+  此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleOutNodeThreshold?: number;
+    /**
+     * 每轮扩容最大节点个数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxNodesPerCycle?: number;
 }
 /**
  * 描述了VPC相关信息
  */
 export interface VirtualPrivateCloud {
     /**
-      * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VpcId: string;
     /**
-      * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubnetId: string;
 }
 /**
@@ -1155,49 +1164,49 @@ export interface VirtualPrivateCloud {
  */
 export interface ExpansionNodeConfigOverview {
     /**
-      * 节点机型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点机型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceType?: string;
     /**
-      * 扩容实例所在的位置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 扩容实例所在的位置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Placement?: Placement;
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 私有网络相关信息配置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 私有网络相关信息配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VirtualPrivateCloud?: VirtualPrivateCloud;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageId?: string;
     /**
-      * 公网带宽相关信息设置。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 公网带宽相关信息设置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 节点系统盘配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点系统盘配置信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点数据盘配置信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DataDisks?: Array<DataDisk>;
 }
 /**
@@ -1205,12 +1214,12 @@ export interface ExpansionNodeConfigOverview {
  */
 export interface ModifyInitNodeScriptsRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 节点初始化脚本信息列表。
-      */
+     * 节点初始化脚本信息列表。
+     */
     InitNodeScripts?: Array<NodeScript>;
 }
 /**
@@ -1218,14 +1227,14 @@ export interface ModifyInitNodeScriptsRequest {
  */
 export interface GooseFSxOptionOverview {
     /**
-      * 文件系统master的ip和端口列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 文件系统master的ip和端口列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Masters?: Array<string>;
     /**
-      * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LocalPath?: string;
 }
 /**
@@ -1233,8 +1242,8 @@ export interface GooseFSxOptionOverview {
  */
 export interface DescribeAutoScalingConfigurationRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
 }
 /**
@@ -1242,16 +1251,16 @@ export interface DescribeAutoScalingConfigurationRequest {
  */
 export interface StorageOption {
     /**
-      * 集群挂载CFS文件系统选项。
-      */
+     * 集群挂载CFS文件系统选项。
+     */
     CFSOptions?: Array<CFSOption>;
     /**
-      * 集群挂载GooseFS文件系统选项。
-      */
+     * 集群挂载GooseFS文件系统选项。
+     */
     GooseFSOptions?: Array<GooseFSOption>;
     /**
-      * 集群挂载GooseFSx文件系统选项。
-      */
+     * 集群挂载GooseFSx文件系统选项。
+     */
     GooseFSxOptions?: Array<GooseFSxOption>;
 }
 /**
@@ -1259,19 +1268,19 @@ export interface StorageOption {
  */
 export interface InternetAccessible {
     /**
-      * 网络计费类型。取值范围：
-BANDWIDTH_PREPAID：预付费按带宽结算
-TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
-BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
-BANDWIDTH_PACKAGE：带宽包用户
-默认取值：非带宽包用户默认与子机付费类型保持一致。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 网络计费类型。取值范围：
+  BANDWIDTH_PREPAID：预付费按带宽结算
+  TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+  BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
+  BANDWIDTH_PACKAGE：带宽包用户
+  默认取值：非带宽包用户默认与子机付费类型保持一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InternetChargeType?: string;
     /**
-      * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InternetMaxBandwidthOut?: number;
 }
 /**
@@ -1279,39 +1288,39 @@ BANDWIDTH_PACKAGE：带宽包用户
  */
 export interface ComputeNode {
     /**
-      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
-      */
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     */
     InstanceChargeType?: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-      */
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+     */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-      * 节点机型。不同实例机型指定了不同的资源规格。
-<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
-      */
+     * 节点机型。不同实例机型指定了不同的资源规格。
+  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     */
     InstanceType?: string;
     /**
-      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
     SystemDisk?: SystemDisk;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
     InternetAccessible?: InternetAccessible;
     /**
-      * 节点显示名称。<br><li>
-不指定节点显示名称则默认显示‘未命名’。
-最多支持60个字符。
-      */
+     * 节点显示名称。<br><li>
+  不指定节点显示名称则默认显示‘未命名’。
+  最多支持60个字符。
+     */
     InstanceName?: string;
     /**
-      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-      */
+     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     */
     ProjectId?: number;
 }
 /**
@@ -1319,12 +1328,12 @@ export interface ComputeNode {
  */
 export interface DeleteNodesRequest {
     /**
-      * 集群ID。
-      */
+     * 集群ID。
+     */
     ClusterId: string;
     /**
-      * 节点ID。
-      */
+     * 节点ID。
+     */
     NodeIds: Array<string>;
 }
 /**
@@ -1332,16 +1341,16 @@ export interface DeleteNodesRequest {
  */
 export interface DescribeClustersResponse {
     /**
-      * 集群概览信息列表。
-      */
+     * 集群概览信息列表。
+     */
     ClusterSet?: Array<ClusterOverview>;
     /**
-      * 集群数量。
-      */
+     * 集群数量。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1349,8 +1358,8 @@ export interface DescribeClustersResponse {
  */
 export interface DeleteClusterStorageOptionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1358,16 +1367,16 @@ export interface DeleteClusterStorageOptionResponse {
  */
 export interface DescribeNodesResponse {
     /**
-      * 节点概览信息列表。
-      */
+     * 节点概览信息列表。
+     */
     NodeSet?: Array<NodeOverview>;
     /**
-      * 符合条件的节点数量。
-      */
+     * 符合条件的节点数量。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1375,16 +1384,16 @@ export interface DescribeNodesResponse {
  */
 export interface DescribeClusterActivitiesResponse {
     /**
-      * 集群活动历史记录列表。
-      */
+     * 集群活动历史记录列表。
+     */
     ClusterActivitySet?: Array<ClusterActivity>;
     /**
-      * 集群活动历史记录数量。
-      */
+     * 集群活动历史记录数量。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1392,13 +1401,13 @@ export interface DescribeClusterActivitiesResponse {
  */
 export interface DescribeInitNodeScriptsResponse {
     /**
-      * 节点初始化脚本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点初始化脚本列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InitNodeScriptSet?: Array<NodeScript>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1406,14 +1415,14 @@ export interface DescribeInitNodeScriptsResponse {
  */
 export interface DataDisk {
     /**
-      * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskSize: number;
     /**
-      * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><li>CLOUD_BSSD：通用型SSD云硬盘
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><li>CLOUD_BSSD：通用型SSD云硬盘
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskType?: string;
 }
 /**
@@ -1421,8 +1430,8 @@ export interface DataDisk {
  */
 export interface DeleteQueueResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1430,7 +1439,7 @@ export interface DeleteQueueResponse {
  */
 export interface AddNodesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }

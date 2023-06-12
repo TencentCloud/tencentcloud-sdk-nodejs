@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyExtendedService", req, cb);
     }
     /**
-     * 上传了word、excel文件后，通过该接口发起文件转换任务，将word、excel文件转换为pdf文件。
+     * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
      */
     async ChannelCreateConvertTaskApi(req, cb) {
         return this.request("ChannelCreateConvertTaskApi", req, cb);

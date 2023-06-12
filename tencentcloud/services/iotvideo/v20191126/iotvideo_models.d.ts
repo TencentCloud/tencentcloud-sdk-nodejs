@@ -3,18 +3,18 @@
  */
 export interface DescribeRechargeRecordsResponse {
     /**
-      * 账户类型 1:设备接入 2:云存
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 账户类型 1:设备接入 2:云存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AccountType?: number;
     /**
-      * 充值记录列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 充值记录列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Records?: Array<RechargeRecord>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -22,8 +22,8 @@ export interface DescribeRechargeRecordsResponse {
  */
 export interface UploadOtaVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -31,13 +31,13 @@ export interface UploadOtaVersionResponse {
  */
 export interface CreateGencodeResponse {
     /**
-      * 生成的源代码(zip压缩后的base64编码)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 生成的源代码(zip压缩后的base64编码)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ZipCode?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -45,32 +45,32 @@ export interface CreateGencodeResponse {
  */
 export interface DescribeLogsRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 当前分页的最大条数,0<取值范围<=100
-      */
+     * 当前分页的最大条数,0<取值范围<=100
+     */
     Limit: number;
     /**
-      * 分页偏移量,取值范围>0
-      */
+     * 分页偏移量,取值范围>0
+     */
     Offset: number;
     /**
-      * 日志类型 1.在线状态变更 2.ProConst变更 3.ProWritable变更 4.Action控制 5.ProReadonly变更 6.Event事件
-      */
+     * 日志类型 1.在线状态变更 2.ProConst变更 3.ProWritable变更 4.Action控制 5.ProReadonly变更 6.Event事件
+     */
     LogType?: number;
     /**
-      * 查询的起始时间 UNIX时间戳，单位秒
-      */
+     * 查询的起始时间 UNIX时间戳，单位秒
+     */
     StartTime?: number;
     /**
-      * 物模型对象索引，用于模糊查询，字符长度<=255，每层节点的字符长度<=16
-      */
+     * 物模型对象索引，用于模糊查询，字符长度<=255，每层节点的字符长度<=16
+     */
     DataObject?: string;
     /**
-      * 查询的结束时间 UNIX时间戳，单位秒
-      */
+     * 查询的结束时间 UNIX时间戳，单位秒
+     */
     EndTime?: number;
 }
 /**
@@ -78,8 +78,8 @@ export interface DescribeLogsRequest {
  */
 export interface CreateIotDataTypeRequest {
     /**
-      * 用户自定义数据类型，json格式的字符串
-      */
+     * 用户自定义数据类型，json格式的字符串
+     */
     IotDataType: string;
 }
 /**
@@ -87,8 +87,8 @@ export interface CreateIotDataTypeRequest {
  */
 export interface DescribePubVersionsRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -96,48 +96,48 @@ export interface DescribePubVersionsRequest {
  */
 export interface RefundStorageServiceResponse {
     /**
-      * 云存服务ID
-      */
+     * 云存服务ID
+     */
     ServiceId: string;
     /**
-      * 云存服务所在的区域
-      */
+     * 云存服务所在的区域
+     */
     StorageRegion: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum: number;
     /**
-      * 终端用户在IoT Video平台的注册ID
-      */
+     * 终端用户在IoT Video平台的注册ID
+     */
     AccessId: string;
     /**
-      * 服务开始时间
-      */
+     * 服务开始时间
+     */
     StartTime: number;
     /**
-      * 服务失效时间
-      */
+     * 服务失效时间
+     */
     EndTime: number;
     /**
-      * 服务状态
-1：正常使用中
-2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
-3：已过期。查询不到设备保存在云端的数据。
-4：等待服务生效。
-      */
+     * 服务状态
+  1：正常使用中
+  2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+  3：已过期。查询不到设备保存在云端的数据。
+  4：等待服务生效。
+     */
     Status: number;
     /**
-      * 有效云存定单列表
-      */
+     * 有效云存定单列表
+     */
     Data: Array<StorageOrder>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -145,13 +145,13 @@ export interface RefundStorageServiceResponse {
  */
 export interface DescribeIotModelResponse {
     /**
-      * 物模型定义，json格式的字符串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型定义，json格式的字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -159,8 +159,8 @@ export interface DescribeIotModelResponse {
  */
 export interface DisableDeviceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -168,8 +168,8 @@ export interface DisableDeviceResponse {
  */
 export interface DescribeRunLogRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
 }
 /**
@@ -177,24 +177,24 @@ export interface DescribeRunLogRequest {
  */
 export interface DescribeProductsRequest {
     /**
-      * 分页大小，当前页面中显示的最大数量，值范围 1-100
-      */
+     * 分页大小，当前页面中显示的最大数量，值范围 1-100
+     */
     Limit: number;
     /**
-      * 分页偏移，Offset从0开始
-      */
+     * 分页偏移，Offset从0开始
+     */
     Offset: number;
     /**
-      * 产器型号(APP产品,为APP包名)
-      */
+     * 产器型号(APP产品,为APP包名)
+     */
     ProductModel?: string;
     /**
-      * 开始时间 ，UNIX 时间戳，单位秒
-      */
+     * 开始时间 ，UNIX 时间戳，单位秒
+     */
     StartTime?: number;
     /**
-      * 结束时间 ，UNIX 时间戳，单位秒
-      */
+     * 结束时间 ，UNIX 时间戳，单位秒
+     */
     EndTime?: number;
 }
 /**
@@ -202,8 +202,8 @@ export interface DescribeProductsRequest {
  */
 export interface DeleteTraceIdsRequest {
     /**
-      * 设备TID列表
-      */
+     * 设备TID列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -211,12 +211,12 @@ export interface DeleteTraceIdsRequest {
  */
 export interface IotModelData {
     /**
-      * 版本号
-      */
+     * 版本号
+     */
     Revision: number;
     /**
-      * 发布时间
-      */
+     * 发布时间
+     */
     ReleaseTime: number;
 }
 /**
@@ -224,46 +224,46 @@ export interface IotModelData {
  */
 export interface CreateStorageServiceRequest {
     /**
-      * 云存套餐ID：
-yc1m3d ： 全时3天存储月套餐。
-yc1m7d ： 全时7天存储月套餐。
-yc1m30d ：全时30天存储月套餐。
-yc1y3d ：全时3天存储年套餐。
-yc1y7d ：全时7天存储年套餐。
-yc1y30d ：全时30天存储年套餐。
-ye1m3d ：事件3天存储月套餐。
-ye1m7d ：事件7天存储月套餐。
-ye1m30d ：事件30天存储月套餐 。
-ye1y3d ：事件3天存储年套餐。
-ye1y7d ：事件7天存储年套餐。
-ye1y30d ：事件30天存储年套餐。
-yc1w7d : 全时7天存储周套餐。
-ye1w7d : 事件7天存储周套餐。
-      */
+     * 云存套餐ID：
+  yc1m3d ： 全时3天存储月套餐。
+  yc1m7d ： 全时7天存储月套餐。
+  yc1m30d ：全时30天存储月套餐。
+  yc1y3d ：全时3天存储年套餐。
+  yc1y7d ：全时7天存储年套餐。
+  yc1y30d ：全时30天存储年套餐。
+  ye1m3d ：事件3天存储月套餐。
+  ye1m7d ：事件7天存储月套餐。
+  ye1m30d ：事件30天存储月套餐 。
+  ye1y3d ：事件3天存储年套餐。
+  ye1y7d ：事件7天存储年套餐。
+  ye1y30d ：事件30天存储年套餐。
+  yc1w7d : 全时7天存储周套餐。
+  ye1w7d : 事件7天存储周套餐。
+     */
     PkgId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 订单数量,可一次性创建多个订单
-      */
+     * 订单数量,可一次性创建多个订单
+     */
     OrderCount: number;
     /**
-      * 云存服务所在的区域,如ap-guangzhou,ap-singapore, na-siliconvalley, eu-frankfurt
-      */
+     * 云存服务所在的区域,如ap-guangzhou,ap-singapore, na-siliconvalley, eu-frankfurt
+     */
     StorageRegion: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum?: number;
     /**
-      * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
-      */
+     * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+     */
     AccessId?: string;
     /**
-      * 服务生效时间,若不指定此参数，服务立即生效
-      */
+     * 服务生效时间,若不指定此参数，服务立即生效
+     */
     EnableTime?: number;
 }
 /**
@@ -271,13 +271,13 @@ ye1w7d : 事件7天存储周套餐。
  */
 export interface DescribeOsListResponse {
     /**
-      * 系统类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 系统类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: SystemType;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -285,8 +285,8 @@ export interface DescribeOsListResponse {
  */
 export interface ModifyProductResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -294,24 +294,24 @@ export interface ModifyProductResponse {
  */
 export interface ModifyProductRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 产品名称
-      */
+     * 产品名称
+     */
     ProductName: string;
     /**
-      * 产品描述
-      */
+     * 产品描述
+     */
     ProductDescription: string;
     /**
-      * 主芯片产商ID
-      */
+     * 主芯片产商ID
+     */
     ChipManufactureId?: string;
     /**
-      * 主芯片ID
-      */
+     * 主芯片ID
+     */
     ChipId?: string;
 }
 /**
@@ -319,8 +319,8 @@ export interface ModifyProductRequest {
  */
 export interface DisableDeviceStreamRequest {
     /**
-      * 设备TID列表
-      */
+     * 设备TID列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -328,12 +328,12 @@ export interface DisableDeviceStreamRequest {
  */
 export interface CreateIotModelRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 物模型json串
-      */
+     * 物模型json串
+     */
     IotModel: string;
 }
 /**
@@ -341,13 +341,13 @@ export interface CreateIotModelRequest {
  */
 export interface DescribeTraceStatusResponse {
     /**
-      * 设备追踪状态列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备追踪状态列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<TraceStatus>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -355,12 +355,12 @@ export interface DescribeTraceStatusResponse {
  */
 export interface CreateUploadPathRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件文件名
-      */
+     * 固件文件名
+     */
     FileName: string;
 }
 /**
@@ -368,16 +368,16 @@ export interface CreateUploadPathRequest {
  */
 export interface CreateDevTokenRequest {
     /**
-      * 客户的终端用户在IoT Video上的唯一标识ID
-      */
+     * 客户的终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
     /**
-      * 设备TID列表,0<元素数量<=100
-      */
+     * 设备TID列表,0<元素数量<=100
+     */
     Tids: Array<string>;
     /**
-      * Token的TTL(time to alive)分钟数
-      */
+     * Token的TTL(time to alive)分钟数
+     */
     TtlMinutes: number;
 }
 /**
@@ -385,48 +385,48 @@ export interface CreateDevTokenRequest {
  */
 export interface DescribeStorageServiceResponse {
     /**
-      * 云存服务ID
-      */
+     * 云存服务ID
+     */
     ServiceId: string;
     /**
-      * 云存服务所在的区域
-      */
+     * 云存服务所在的区域
+     */
     StorageRegion: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum: number;
     /**
-      * 终端用户在IoT Video平台的注册ID
-      */
+     * 终端用户在IoT Video平台的注册ID
+     */
     AccessId: string;
     /**
-      * 服务开始时间
-      */
+     * 服务开始时间
+     */
     StartTime: number;
     /**
-      * 服务失效时间
-      */
+     * 服务失效时间
+     */
     EndTime: number;
     /**
-      * 服务状态
-1：正常使用中
-2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
-3：已过期。查询不到设备保存在云端的数据。
-4：等待服务生效。
-      */
+     * 服务状态
+  1：正常使用中
+  2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+  3：已过期。查询不到设备保存在云端的数据。
+  4：等待服务生效。
+     */
     Status: number;
     /**
-      * 云存定单列表
-      */
+     * 云存定单列表
+     */
     Data: Array<StorageOrder>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -434,8 +434,8 @@ export interface DescribeStorageServiceResponse {
  */
 export interface DeleteIotDataTypeRequest {
     /**
-      * 自定义数据类型的标识符
-      */
+     * 自定义数据类型的标识符
+     */
     TypeId: string;
 }
 /**
@@ -443,16 +443,16 @@ export interface DeleteIotDataTypeRequest {
  */
 export interface DescribeRechargeRecordsRequest {
     /**
-      * 账户类型 1:设备接入 2:云存。
-      */
+     * 账户类型 1:设备接入 2:云存。
+     */
     AccountType: number;
     /**
-      * 从第几条记录开始显示, 默认值为0。
-      */
+     * 从第几条记录开始显示, 默认值为0。
+     */
     Offset?: number;
     /**
-      * 总共查询多少条记录，默认为值50。
-      */
+     * 总共查询多少条记录，默认为值50。
+     */
     Limit?: number;
 }
 /**
@@ -460,8 +460,8 @@ export interface DescribeRechargeRecordsRequest {
  */
 export interface ModifyVerContentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -469,8 +469,8 @@ export interface ModifyVerContentResponse {
  */
 export interface DescribeMessageQueueRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -478,8 +478,8 @@ export interface DescribeMessageQueueRequest {
  */
 export interface DeleteAppUsrResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -487,12 +487,12 @@ export interface DeleteAppUsrResponse {
  */
 export interface DescribeRegistrationStatusResponse {
     /**
-      * 终端用户注册状态列表
-      */
+     * 终端用户注册状态列表
+     */
     Data?: Array<RegisteredStatus>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -500,8 +500,8 @@ export interface DescribeRegistrationStatusResponse {
  */
 export interface DescribeProductRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -509,17 +509,17 @@ export interface DescribeProductRequest {
  */
 export interface DescribeProductsResponse {
     /**
-      * 产品详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品详细信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<ProductData>;
     /**
-      * 产品总数
-      */
+     * 产品总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -527,14 +527,14 @@ export interface DescribeProductsResponse {
  */
 export interface OsData {
     /**
-      * 芯片型号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 芯片型号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChipId: string;
     /**
-      * 芯片厂商
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 芯片厂商
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChipManufacture: string;
 }
 /**
@@ -542,16 +542,16 @@ export interface OsData {
  */
 export interface DeviceCertificate {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 设备初始证书信息，base64编码
-      */
+     * 设备初始证书信息，base64编码
+     */
     Certificate: string;
     /**
-      * 设备私钥下载地址
-      */
+     * 设备私钥下载地址
+     */
     WhiteBoxSoUrl: string;
 }
 /**
@@ -559,16 +559,16 @@ export interface DeviceCertificate {
  */
 export interface UpgradeDeviceRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 固件版本号
-      */
+     * 固件版本号
+     */
     OtaVersion: string;
     /**
-      * 是否立即升级
-      */
+     * 是否立即升级
+     */
     UpgradeNow: boolean;
 }
 /**
@@ -576,27 +576,27 @@ export interface UpgradeDeviceRequest {
  */
 export interface LogData {
     /**
-      * 发生时间 UNIX时间戳，单位秒
-      */
+     * 发生时间 UNIX时间戳，单位秒
+     */
     Occurtime: number;
     /**
-      * 日志类型 1在线状态变更 2FP变更 3SP变更 4CO控制 5ST变更 6EV事件
-      */
+     * 日志类型 1在线状态变更 2FP变更 3SP变更 4CO控制 5ST变更 6EV事件
+     */
     LogType: number;
     /**
-      * 物模型对象索引
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型对象索引
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DataObject: string;
     /**
-      * 物模型旧值  json串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型旧值  json串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OldValue: string;
     /**
-      * 物模型新值  json串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型新值  json串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NewValue: string;
 }
 /**
@@ -604,13 +604,13 @@ export interface LogData {
  */
 export interface DescribeModelDataRetResponse {
     /**
-      * 设备响应结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备响应结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -618,13 +618,13 @@ export interface DescribeModelDataRetResponse {
  */
 export interface CreateDevTokenResponse {
     /**
-      * 返回的用户token列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回的用户token列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<DevTokenInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -632,8 +632,8 @@ export interface CreateDevTokenResponse {
  */
 export interface RunIotModelResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -641,12 +641,12 @@ export interface RunIotModelResponse {
  */
 export interface RunIotModelRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 物模型定义，json格式的字符串
-      */
+     * 物模型定义，json格式的字符串
+     */
     IotModel: string;
 }
 /**
@@ -654,12 +654,12 @@ export interface RunIotModelRequest {
  */
 export interface OtaPubHistory {
     /**
-      * 版本名称
-      */
+     * 版本名称
+     */
     OtaVersion: string;
     /**
-      * 发布时间，unix时间戳，单位：秒
-      */
+     * 发布时间，unix时间戳，单位：秒
+     */
     PublishTime: number;
 }
 /**
@@ -667,8 +667,8 @@ export interface OtaPubHistory {
  */
 export interface DeleteProductRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -676,13 +676,13 @@ export interface DeleteProductRequest {
  */
 export interface DescribeBindUsrResponse {
     /**
-      * 具有绑定关系的终端用户信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 具有绑定关系的终端用户信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<BindUsrInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -690,64 +690,64 @@ export interface DescribeBindUsrResponse {
  */
 export interface DeviceData {
     /**
-      * 设备TID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备TID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tid: string;
     /**
-      * 激活时间 0代表未激活
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 激活时间 0代表未激活
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ActiveTime: number;
     /**
-      * 设备是否被禁用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备是否被禁用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Disabled: boolean;
     /**
-      * 固件版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 固件版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OtaVersion: string;
     /**
-      * 设备在线状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备在线状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Online: number;
     /**
-      * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastOnlineTime: number;
     /**
-      * 物模型json数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型json数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IotModel: string;
     /**
-      * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeviceName: string;
     /**
-      * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductId: string;
     /**
-      * 设备初始证书信息，base64编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备初始证书信息，base64编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Certificate: string;
     /**
-      * 设备私钥下载地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备私钥下载地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     WhiteBoxSoUrl: string;
     /**
-      * 设备推流状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备推流状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StreamStatus: boolean;
 }
 /**
@@ -755,24 +755,24 @@ export interface DeviceData {
  */
 export interface DescribeStreamRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid?: string;
     /**
-      * 终端用户ID
-      */
+     * 终端用户ID
+     */
     AccessId?: string;
     /**
-      * 直播协议, 可选值：RTSP、RTMP、HLS、HLS-fmp4
-      */
+     * 直播协议, 可选值：RTSP、RTMP、HLS、HLS-fmp4
+     */
     Protocol?: string;
     /**
-      * 音视频流地址
-      */
+     * 音视频流地址
+     */
     Address?: string;
     /**
-      * 设备访问token，访问用户未绑定的设备时，需提供该参数
-      */
+     * 设备访问token，访问用户未绑定的设备时，需提供该参数
+     */
     AccessToken?: string;
 }
 /**
@@ -780,12 +780,12 @@ export interface DescribeStreamRequest {
  */
 export interface BindUsrInfo {
     /**
-      * IotVideo平台分配给终端用户的用户id
-      */
+     * IotVideo平台分配给终端用户的用户id
+     */
     AccessId: string;
     /**
-      * 用户角色，owner：主人，guest：访客
-      */
+     * 用户角色，owner：主人，guest：访客
+     */
     Role: string;
 }
 /**
@@ -793,16 +793,16 @@ export interface BindUsrInfo {
  */
 export interface DeleteOtaVersionRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
-      */
+     * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
+     */
     OtaVersion: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
 }
 /**
@@ -810,13 +810,13 @@ export interface DeleteOtaVersionRequest {
  */
 export interface DescribeIotDataTypeResponse {
     /**
-      * 自定义数据类型，json格式的字符串
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自定义数据类型，json格式的字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -824,80 +824,80 @@ export interface DescribeIotDataTypeResponse {
  */
 export interface ProductData {
     /**
-      * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductId: string;
     /**
-      * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductName: string;
     /**
-      * 产品描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductDescription: string;
     /**
-      * 创建时间，UNIX 时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间，UNIX 时间戳，单位秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: number;
     /**
-      * 物模型发布版本号,0代表物模型尚未发布
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型发布版本号,0代表物模型尚未发布
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IotModelRevision: number;
     /**
-      * 产品密钥
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品密钥
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SecretKey: string;
     /**
-      * 设备功能码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备功能码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Features: Array<string>;
     /**
-      * 产器型号(APP产品,为APP包名)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产器型号(APP产品,为APP包名)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductModel: string;
     /**
-      * 主芯片厂商id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 主芯片厂商id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChipManufactureId: string;
     /**
-      * 主芯片型号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 主芯片型号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChipId: string;
     /**
-      * 产品类别，0：普通视频设备；1：NVR设备
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品类别，0：普通视频设备；1：NVR设备
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductCate: number;
     /**
-      * 产品地区
-China-Mainland（中国大陆）
-China-Hong Kong, Macao and Taiwan（港澳台地区）
-America（美国）
-Europe（欧洲）
-India（印度）
-Other-Overseas（其他境外地区）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品地区
+  China-Mainland（中国大陆）
+  China-Hong Kong, Macao and Taiwan（港澳台地区）
+  America（美国）
+  Europe（欧洲）
+  India（印度）
+  Other-Overseas（其他境外地区）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductRegion: string;
     /**
-      * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AccessMode: number;
     /**
-      * linux,android,liteos
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * linux,android,liteos
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Os: string;
 }
 /**
@@ -905,28 +905,28 @@ Other-Overseas（其他境外地区）
  */
 export interface CreateBindingRequest {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 用户角色，owner：主人，guest：访客
-      */
+     * 用户角色，owner：主人，guest：访客
+     */
     Role: string;
     /**
-      * 是否踢掉之前的主人，true：踢掉；false：不踢掉。当role为guest时，可以不填
-      */
+     * 是否踢掉之前的主人，true：踢掉；false：不踢掉。当role为guest时，可以不填
+     */
     ForceBind?: boolean;
     /**
-      * 设备昵称，最多不超过64个字符
-      */
+     * 设备昵称，最多不超过64个字符
+     */
     Nick?: string;
     /**
-      * 绑定过程中的会话token，由设备通过SDK接口确认是否允许绑定的token，用于增加设备被绑定的安全性
-      */
+     * 绑定过程中的会话token，由设备通过SDK接口确认是否允许绑定的token，用于增加设备被绑定的安全性
+     */
     BindToken?: string;
 }
 /**
@@ -934,8 +934,8 @@ export interface CreateBindingRequest {
  */
 export interface DeleteDeviceRequest {
     /**
-      * 设备TID列表
-      */
+     * 设备TID列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -943,12 +943,12 @@ export interface DeleteDeviceRequest {
  */
 export interface TraceStatus {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 设备追踪状态
-      */
+     * 设备追踪状态
+     */
     IsExist: boolean;
 }
 /**
@@ -956,12 +956,12 @@ export interface TraceStatus {
  */
 export interface CreateAppUsrRequest {
     /**
-      * 标识用户的唯一ID，防止同一个用户多次注册
-      */
+     * 标识用户的唯一ID，防止同一个用户多次注册
+     */
     CunionId: string;
     /**
-      * 用于小程序关联手机号
-      */
+     * 用于小程序关联手机号
+     */
     Mobile?: string;
 }
 /**
@@ -969,24 +969,24 @@ export interface CreateAppUsrRequest {
  */
 export interface ModifyDevicePropertyRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 如果设备处于休眠状态，是否唤醒设备
-      */
+     * 如果设备处于休眠状态，是否唤醒设备
+     */
     Wakeup: boolean;
     /**
-      * 物模型的分支路径
-      */
+     * 物模型的分支路径
+     */
     Branch: string;
     /**
-      * 写入的物模型数据，如果是json需要转义成字符串
-      */
+     * 写入的物模型数据，如果是json需要转义成字符串
+     */
     Value: string;
     /**
-      * Value字段是否为数值（float、int）
-      */
+     * Value字段是否为数值（float、int）
+     */
     IsNum?: boolean;
 }
 /**
@@ -994,8 +994,8 @@ export interface ModifyDevicePropertyRequest {
  */
 export interface RunDeviceStreamRequest {
     /**
-      * 设备TID 列表
-      */
+     * 设备TID 列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -1003,8 +1003,8 @@ export interface RunDeviceStreamRequest {
  */
 export interface RunDeviceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1012,8 +1012,8 @@ export interface RunDeviceResponse {
  */
 export interface DeleteIotDataTypeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1021,8 +1021,8 @@ export interface DeleteIotDataTypeResponse {
  */
 export interface DescribeTraceStatusRequest {
     /**
-      * 设备TID列表
-      */
+     * 设备TID列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -1030,24 +1030,24 @@ export interface DescribeTraceStatusRequest {
  */
 export interface CreateUsrTokenResponse {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
     /**
-      * IoT Video平台的AccessToken
-      */
+     * IoT Video平台的AccessToken
+     */
     AccessToken: string;
     /**
-      * Token的过期时间，单位秒(UTC时间)
-      */
+     * Token的过期时间，单位秒(UTC时间)
+     */
     ExpireTime: number;
     /**
-      * 终端ID
-      */
+     * 终端ID
+     */
     TerminalId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1055,20 +1055,20 @@ export interface CreateUsrTokenResponse {
  */
 export interface DevTokenInfo {
     /**
-      * 客户的终端用户在IotVideo上的唯一标识id
-      */
+     * 客户的终端用户在IotVideo上的唯一标识id
+     */
     AccessId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * IotVideo平台的accessToken
-      */
+     * IotVideo平台的accessToken
+     */
     AccessToken: string;
     /**
-      * Token的过期时间，单位秒(UTC时间)
-      */
+     * Token的过期时间，单位秒(UTC时间)
+     */
     ExpireTime: number;
 }
 /**
@@ -1076,8 +1076,8 @@ export interface DevTokenInfo {
  */
 export interface CreateTraceIdsRequest {
     /**
-      * 设备TID列表
-      */
+     * 设备TID列表
+     */
     Tids: Array<string>;
 }
 /**
@@ -1085,8 +1085,8 @@ export interface CreateTraceIdsRequest {
  */
 export interface DeleteMessageQueueResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1094,24 +1094,24 @@ export interface DeleteMessageQueueResponse {
  */
 export interface DescribeOtaVersionsRequest {
     /**
-      * 分页偏移量
-      */
+     * 分页偏移量
+     */
     Offset: number;
     /**
-      * 每页数量，0<取值范围<=100
-      */
+     * 每页数量，0<取值范围<=100
+     */
     Limit: number;
     /**
-      * 产品ID，为空时查询客户所有产品的版本信息
-      */
+     * 产品ID，为空时查询客户所有产品的版本信息
+     */
     ProductId?: string;
     /**
-      * 版本号，支持模糊匹配
-      */
+     * 版本号，支持模糊匹配
+     */
     OtaVersion?: string;
     /**
-      * 版本类型 1未发布 2测试发布 3正式发布 4禁用
-      */
+     * 版本类型 1未发布 2测试发布 3正式发布 4禁用
+     */
     PubStatus?: number;
 }
 /**
@@ -1119,13 +1119,13 @@ export interface DescribeOtaVersionsRequest {
  */
 export interface DescribeTraceIdsResponse {
     /**
-      * 设备TID列表，列表元素之间以“,”分隔
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备TID列表，列表元素之间以“,”分隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1133,8 +1133,8 @@ export interface DescribeTraceIdsResponse {
  */
 export interface ClearDeviceActiveCodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1142,12 +1142,12 @@ export interface ClearDeviceActiveCodeResponse {
  */
 export interface CreateProductResponse {
     /**
-      * 产品详细信息
-      */
+     * 产品详细信息
+     */
     Data?: ProductBase;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1155,8 +1155,8 @@ export interface CreateProductResponse {
  */
 export interface DescribeRegistrationStatusRequest {
     /**
-      * 终端用户的唯一ID列表，0<元素数量<=100
-      */
+     * 终端用户的唯一ID列表，0<元素数量<=100
+     */
     CunionIds: Array<string>;
 }
 /**
@@ -1164,16 +1164,16 @@ export interface DescribeRegistrationStatusRequest {
  */
 export interface CreateStorageRequest {
     /**
-      * 云存套餐ID
-      */
+     * 云存套餐ID
+     */
     PkgId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 用户唯一标识，由厂商保证内部唯一性
-      */
+     * 用户唯一标识，由厂商保证内部唯一性
+     */
     UserTag: string;
 }
 /**
@@ -1181,13 +1181,13 @@ export interface CreateStorageRequest {
  */
 export interface UpgradeDeviceResponse {
     /**
-      * 设备端返回的数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备端返回的数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1195,8 +1195,8 @@ export interface UpgradeDeviceResponse {
  */
 export interface DisableOtaVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1204,13 +1204,13 @@ export interface DisableOtaVersionResponse {
  */
 export interface DescribeBindDevResponse {
     /**
-      * 绑定的设备列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 绑定的设备列表信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<BindDevInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1218,56 +1218,56 @@ export interface DescribeBindDevResponse {
  */
 export interface CreateProductRequest {
     /**
-      * 产器型号(APP产品,为APP包名)
-      */
+     * 产器型号(APP产品,为APP包名)
+     */
     ProductModel: string;
     /**
-      * 产品名称
-仅支持中文、英文、数字、下划线，不超过32个字符
-      */
+     * 产品名称
+  仅支持中文、英文、数字、下划线，不超过32个字符
+     */
     ProductName: string;
     /**
-      * 产品描述信息
-不支持单引号、双引号、退格符、回车符、换行符、制表符、反斜杠、下划线、“%”、“#”、“$”，不超过128字符
-      */
+     * 产品描述信息
+  不支持单引号、双引号、退格符、回车符、换行符、制表符、反斜杠、下划线、“%”、“#”、“$”，不超过128字符
+     */
     ProductDescription: string;
     /**
-      * 设备功能码（ypsxth:音频双向通话 ，spdxth:视频单向通话）
-      */
+     * 设备功能码（ypsxth:音频双向通话 ，spdxth:视频单向通话）
+     */
     Features?: Array<string>;
     /**
-      * 主芯片产商ID
-      */
+     * 主芯片产商ID
+     */
     ChipManufactureId?: string;
     /**
-      * 主芯片ID
-      */
+     * 主芯片ID
+     */
     ChipId?: string;
     /**
-      * 地域：
-China-Mainland（中国大陆）
-China-Hong Kong, Macao and Taiwan（港澳台地区）
-America（美国）
-Europe（欧洲）
-India（印度）
-Other-Overseas（其他境外地区）
-      */
+     * 地域：
+  China-Mainland（中国大陆）
+  China-Hong Kong, Macao and Taiwan（港澳台地区）
+  America（美国）
+  Europe（欧洲）
+  India（印度）
+  Other-Overseas（其他境外地区）
+     */
     ProductRegion?: string;
     /**
-      * 设备类型, 0-普通视频设备，1-NVR设备
-      */
+     * 设备类型, 0-普通视频设备，1-NVR设备
+     */
     ProductCate?: number;
     /**
-      * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
-      */
+     * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+     */
     AccessMode?: number;
     /**
-      * Linux,Android,Liteos等系统
-      */
+     * Linux,Android,Liteos等系统
+     */
     Os?: string;
     /**
-      * 芯片架构，只是针对操作系统为android的
-      */
+     * 芯片架构，只是针对操作系统为android的
+     */
     ChipArch?: string;
 }
 /**
@@ -1275,19 +1275,19 @@ Other-Overseas（其他境外地区）
  */
 export interface SystemType {
     /**
-      * 安卓系统
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 安卓系统
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Android: Array<OsData>;
     /**
-      * linux系统
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * linux系统
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Linux: Array<OsData>;
     /**
-      * LiteOs系统
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * LiteOs系统
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LiteOs: Array<OsData>;
 }
 /**
@@ -1295,8 +1295,8 @@ export interface SystemType {
  */
 export interface RunTestOtaVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1304,24 +1304,24 @@ export interface RunTestOtaVersionResponse {
  */
 export interface RunTestOtaVersionRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
-      */
+     * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
+     */
     OtaVersion: string;
     /**
-      * 指定可升级的设备TID
-      */
+     * 指定可升级的设备TID
+     */
     Tids: Array<string>;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
     /**
-      * 备注信息
-      */
+     * 备注信息
+     */
     Remark?: string;
 }
 /**
@@ -1329,13 +1329,13 @@ export interface RunTestOtaVersionRequest {
  */
 export interface DescribeDeviceResponse {
     /**
-      * 设备信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: DeviceData;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1343,8 +1343,8 @@ export interface DescribeDeviceResponse {
  */
 export interface SetMessageQueueResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1352,24 +1352,24 @@ export interface SetMessageQueueResponse {
  */
 export interface Contents {
     /**
-      * 英文，长度不超过300个字符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 英文，长度不超过300个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     En?: string;
     /**
-      * 中文简体，长度不超过300个字符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 中文简体，长度不超过300个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Cn?: string;
     /**
-      * 中文繁体(Traditional Chinese)，长度不超过300个字符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 中文繁体(Traditional Chinese)，长度不超过300个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tc?: string;
     /**
-      * 默认语言，最多不超过300个字符
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 默认语言，最多不超过300个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Default?: string;
 }
 /**
@@ -1377,8 +1377,8 @@ export interface Contents {
  */
 export interface DeleteOtaVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1386,36 +1386,36 @@ export interface DeleteOtaVersionResponse {
  */
 export interface UploadOtaVersionRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
-      */
+     * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
+     */
     OtaVersion: string;
     /**
-      * 固件版本URL
-      */
+     * 固件版本URL
+     */
     VersionUrl: string;
     /**
-      * 文件大小，单位：byte
-      */
+     * 文件大小，单位：byte
+     */
     FileSize?: number;
     /**
-      * 文件md5校验码（32字符）
-      */
+     * 文件md5校验码（32字符）
+     */
     Md5?: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
     /**
-      * 备注信息
-      */
+     * 备注信息
+     */
     Remark?: string;
     /**
-      * 版本发布的描述信息，需要国际化，可以为空
-      */
+     * 版本发布的描述信息，需要国际化，可以为空
+     */
     Contents?: Contents;
 }
 /**
@@ -1423,8 +1423,8 @@ export interface UploadOtaVersionRequest {
  */
 export interface DescribeIotModelsRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -1432,8 +1432,8 @@ export interface DescribeIotModelsRequest {
  */
 export interface DescribeModelDataRetRequest {
     /**
-      * 任务ID
-      */
+     * 任务ID
+     */
     TaskId: string;
 }
 /**
@@ -1441,8 +1441,8 @@ export interface DescribeModelDataRetRequest {
  */
 export interface CreateTraceIdsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1450,17 +1450,17 @@ export interface CreateTraceIdsResponse {
  */
 export interface DescribeDevicesResponse {
     /**
-      * 设备信息 列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备信息 列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<DevicesData>;
     /**
-      * 设备总数
-      */
+     * 设备总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1468,24 +1468,24 @@ export interface DescribeDevicesResponse {
  */
 export interface ModifyVerContentRequest {
     /**
-      * 产品id
-      */
+     * 产品id
+     */
     ProductId: string;
     /**
-      * 需要修改的版本号
-      */
+     * 需要修改的版本号
+     */
     OtaVersion: string;
     /**
-      * 操作人,字符长度<=64
-      */
+     * 操作人,字符长度<=64
+     */
     Operator?: string;
     /**
-      * 备注信息
-      */
+     * 备注信息
+     */
     Remark?: string;
     /**
-      * 版本发布的描述信息，需要国际化，可以为空
-      */
+     * 版本发布的描述信息，需要国际化，可以为空
+     */
     Contents?: Contents;
 }
 /**
@@ -1493,16 +1493,16 @@ export interface ModifyVerContentRequest {
  */
 export interface DeleteBindingRequest {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 用户角色，owner：主人，guest：访客
-      */
+     * 用户角色，owner：主人，guest：访客
+     */
     Role: string;
 }
 /**
@@ -1510,17 +1510,17 @@ export interface DeleteBindingRequest {
  */
 export interface DescribeOtaVersionsResponse {
     /**
-      * 版本数量
-      */
+     * 版本数量
+     */
     TotalCount?: number;
     /**
-      * 版本详细信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<VersionData>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1528,8 +1528,8 @@ export interface DescribeOtaVersionsResponse {
  */
 export interface DeleteProductResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1537,32 +1537,32 @@ export interface DeleteProductResponse {
  */
 export interface RunOtaVersionRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
-      */
+     * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
+     */
     OtaVersion: string;
     /**
-      * 灰度值,取值范围0-100，为0时相当于暂停发布
-      */
+     * 灰度值,取值范围0-100，为0时相当于暂停发布
+     */
     GrayValue: number;
     /**
-      * 指定的旧版本
-      */
+     * 指定的旧版本
+     */
     OldVersions?: Array<string>;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
     /**
-      * 备注信息
-      */
+     * 备注信息
+     */
     Remark?: string;
     /**
-      * 版本发布的描述信息，需要国际化，可以为空
-      */
+     * 版本发布的描述信息，需要国际化，可以为空
+     */
     Contents?: Contents;
 }
 /**
@@ -1570,12 +1570,12 @@ export interface RunOtaVersionRequest {
  */
 export interface CreateDevicesResponse {
     /**
-      * 新创建设备的认证信息
-      */
+     * 新创建设备的认证信息
+     */
     Data?: Array<DeviceCertificate>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1583,18 +1583,18 @@ export interface CreateDevicesResponse {
  */
 export interface DeviceModelData {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 物模型分支路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型分支路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Branch: string;
     /**
-      * 物模型数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 物模型数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IotModel: string;
 }
 /**
@@ -1602,35 +1602,35 @@ export interface DeviceModelData {
  */
 export interface SetMessageQueueRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 消息队列类型 1-CMQ; 2-Ckafka
-      */
+     * 消息队列类型 1-CMQ; 2-Ckafka
+     */
     MsgQueueType: number;
     /**
-      * 消息类型,整型值（0-31）之间以“,”分隔
-0.设备在线状态变更
-1.常亮属性(ProConst)变更
-2.可写属性(ProWritable)变更
-3.只读属性(ProReadonly)变更
-4.设备控制(Action)
-5.设备事件(Event)
-6.系统事件(System)
-      */
+     * 消息类型,整型值（0-31）之间以“,”分隔
+  0.设备在线状态变更
+  1.常亮属性(ProConst)变更
+  2.可写属性(ProWritable)变更
+  3.只读属性(ProReadonly)变更
+  4.设备控制(Action)
+  5.设备事件(Event)
+  6.系统事件(System)
+     */
     MsgType: string;
     /**
-      * 消息队列主题，不超过32字符
-      */
+     * 消息队列主题，不超过32字符
+     */
     Topic: string;
     /**
-      * kafka消息队列的实例名，不超过64字符
-      */
+     * kafka消息队列的实例名，不超过64字符
+     */
     Instance: string;
     /**
-      * 消息地域，不超过32字符
-      */
+     * 消息地域，不超过32字符
+     */
     MsgRegion: string;
 }
 /**
@@ -1638,52 +1638,52 @@ export interface SetMessageQueueRequest {
  */
 export interface CreateStorageServiceResponse {
     /**
-      * 标志是否为续订
-      */
+     * 标志是否为续订
+     */
     IsRenew: boolean;
     /**
-      * 云存服务ID
-      */
+     * 云存服务ID
+     */
     ServiceId: string;
     /**
-      * 云存服务所在的区域
-      */
+     * 云存服务所在的区域
+     */
     StorageRegion: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum: number;
     /**
-      * 终端用户在IoT Video平台的注册ID
-      */
+     * 终端用户在IoT Video平台的注册ID
+     */
     AccessId: string;
     /**
-      * 服务开始时间
-      */
+     * 服务开始时间
+     */
     StartTime: number;
     /**
-      * 服务失效时间
-      */
+     * 服务失效时间
+     */
     EndTime: number;
     /**
-      * 服务状态
-1：正常使用中
-2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
-3：已过期。查询不到设备保存在云端的数据。
-4：等待服务生效。
-      */
+     * 服务状态
+  1：正常使用中
+  2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+  3：已过期。查询不到设备保存在云端的数据。
+  4：等待服务生效。
+     */
     Status: number;
     /**
-      * 新增的云存定单列表
-      */
+     * 新增的云存定单列表
+     */
     Data: Array<StorageOrder>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1691,8 +1691,8 @@ export interface CreateStorageServiceResponse {
  */
 export interface DescribeIotDataTypeRequest {
     /**
-      * 自定义数据类型的标识符，为空则返回全量自定义类型的列表
-      */
+     * 自定义数据类型的标识符，为空则返回全量自定义类型的列表
+     */
     TypeId?: string;
 }
 /**
@@ -1700,27 +1700,27 @@ export interface DescribeIotDataTypeRequest {
  */
 export interface SendOnlineMsgRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 如果设备处于休眠状态，是否唤醒设备
-      */
+     * 如果设备处于休眠状态，是否唤醒设备
+     */
     Wakeup: boolean;
     /**
-      * 等待回应类型
-0：不等待设备回应直接响应请求;
-1：要求设备确认消息已接收,或等待超时后返回;
-2：要求设备进行响应处理,收到设备的响应数据后,将设备响应数据回应给请求方;
-      */
+     * 等待回应类型
+  0：不等待设备回应直接响应请求;
+  1：要求设备确认消息已接收,或等待超时后返回;
+  2：要求设备进行响应处理,收到设备的响应数据后,将设备响应数据回应给请求方;
+     */
     WaitResp: number;
     /**
-      * 消息主题
-      */
+     * 消息主题
+     */
     MsgTopic: string;
     /**
-      * 消息内容，最大长度不超过8k字节
-      */
+     * 消息内容，最大长度不超过8k字节
+     */
     MsgContent: string;
 }
 /**
@@ -1728,29 +1728,29 @@ export interface SendOnlineMsgRequest {
  */
 export interface Data {
     /**
-      * 直播协议
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 直播协议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Protocol: string;
     /**
-      * 流媒体播放地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 流媒体播放地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     URI: string;
     /**
-      * 流媒体地址过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 流媒体地址过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExpireTime: number;
     /**
-      * 视频编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 视频编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VideoCodec: string;
     /**
-      * 音频编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 音频编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AudioCodec: string;
 }
 /**
@@ -1758,8 +1758,8 @@ export interface Data {
  */
 export interface DescribeDeviceRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
 }
 /**
@@ -1767,13 +1767,13 @@ export interface DescribeDeviceRequest {
  */
 export interface DescribeRunLogResponse {
     /**
-      * 设备运行日志文本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备运行日志文本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1781,52 +1781,52 @@ export interface DescribeRunLogResponse {
  */
 export interface DeliverStorageServiceResponse {
     /**
-      * 被转出的云存服务ID
-      */
+     * 被转出的云存服务ID
+     */
     SrcServiceId: string;
     /**
-      * 被转入的云存服务ID
-      */
+     * 被转入的云存服务ID
+     */
     ServiceId: string;
     /**
-      * 云存服务所在的区域
-      */
+     * 云存服务所在的区域
+     */
     StorageRegion: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum: number;
     /**
-      * 终端用户在IoT Video平台的注册ID
-      */
+     * 终端用户在IoT Video平台的注册ID
+     */
     AccessId: string;
     /**
-      * 服务开始时间
-      */
+     * 服务开始时间
+     */
     StartTime: number;
     /**
-      * 服务失效时间
-      */
+     * 服务失效时间
+     */
     EndTime: number;
     /**
-      * 服务状态
-1：正常使用中
-2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
-3：已过期。查询不到设备保存在云端的数据。
-4：等待服务生效。
-      */
+     * 服务状态
+  1：正常使用中
+  2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+  3：已过期。查询不到设备保存在云端的数据。
+  4：等待服务生效。
+     */
     Status: number;
     /**
-      * 新增的云存定单列表
-      */
+     * 新增的云存定单列表
+     */
     Data: Array<StorageOrder>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1834,12 +1834,12 @@ export interface DeliverStorageServiceResponse {
  */
 export interface DescribeIotModelRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 物模型版本号， -1表示最新编辑的（未发布）
-      */
+     * 物模型版本号， -1表示最新编辑的（未发布）
+     */
     Revision: number;
 }
 /**
@@ -1851,20 +1851,20 @@ export declare type DescribeTraceIdsRequest = null;
  */
 export interface CreateAppUsrResponse {
     /**
-      * 厂商云标识用户的唯一ID
-      */
+     * 厂商云标识用户的唯一ID
+     */
     CunionId?: string;
     /**
-      * 客户的终端用户在IoT Video上的唯一标识ID
-      */
+     * 客户的终端用户在IoT Video上的唯一标识ID
+     */
     AccessId?: string;
     /**
-      * 用户是否为新创建
-      */
+     * 用户是否为新创建
+     */
     NewRegist?: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1872,8 +1872,8 @@ export interface CreateAppUsrResponse {
  */
 export interface DeleteTraceIdsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1881,8 +1881,8 @@ export interface DeleteTraceIdsResponse {
  */
 export interface DeleteMessageQueueRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
 }
 /**
@@ -1890,20 +1890,20 @@ export interface DeleteMessageQueueRequest {
  */
 export interface CreateUsrTokenRequest {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
     /**
-      * 终端唯一ID，用于区分同一个用户的多个终端
-      */
+     * 终端唯一ID，用于区分同一个用户的多个终端
+     */
     UniqueId: string;
     /**
-      * Token的TTL(time to alive)分钟数
-      */
+     * Token的TTL(time to alive)分钟数
+     */
     TtlMinutes: number;
     /**
-      * 旧的AccessToken。续期Token时，此参数为必须。
-      */
+     * 旧的AccessToken。续期Token时，此参数为必须。
+     */
     OldAccessToken?: string;
 }
 /**
@@ -1911,8 +1911,8 @@ export interface CreateUsrTokenRequest {
  */
 export interface RunDeviceRequest {
     /**
-      * TID列表 ≤100
-      */
+     * TID列表 ≤100
+     */
     Tids: Array<string>;
 }
 /**
@@ -1920,8 +1920,8 @@ export interface RunDeviceRequest {
  */
 export interface RunOtaVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1929,16 +1929,16 @@ export interface RunOtaVersionResponse {
  */
 export interface ModifyDeviceRequest {
     /**
-      * 设备ID
-      */
+     * 设备ID
+     */
     Tid: string;
     /**
-      * 用户ID
-      */
+     * 用户ID
+     */
     AccessId: string;
     /**
-      * 设备昵称，最多不超过64个字符
-      */
+     * 设备昵称，最多不超过64个字符
+     */
     Nick: string;
 }
 /**
@@ -1946,13 +1946,13 @@ export interface ModifyDeviceRequest {
  */
 export interface DescribeDeviceModelResponse {
     /**
-      * 设备物模型信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备物模型信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: DeviceModelData;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1960,12 +1960,12 @@ export interface DescribeDeviceModelResponse {
  */
 export interface DescribeStorageServiceRequest {
     /**
-      * 云存服务ID
-      */
+     * 云存服务ID
+     */
     ServiceId: string;
     /**
-      * 是否返回已结束的订单信息(已过期/已退订/已转移)
-      */
+     * 是否返回已结束的订单信息(已过期/已退订/已转移)
+     */
     GetFinishedOrder?: boolean;
 }
 /**
@@ -1973,59 +1973,59 @@ export interface DescribeStorageServiceRequest {
  */
 export interface ProductBase {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 产器型号(APP产品,为APP包名)
-      */
+     * 产器型号(APP产品,为APP包名)
+     */
     ProductModel: string;
     /**
-      * 产品名称
-      */
+     * 产品名称
+     */
     ProductName: string;
     /**
-      * 产品描述信息
-      */
+     * 产品描述信息
+     */
     ProductDescription: string;
     /**
-      * 创建时间，UNIX 时间戳，单位秒
-      */
+     * 创建时间，UNIX 时间戳，单位秒
+     */
     CreateTime: number;
     /**
-      * 物模型发布版本号,0代表物模型尚未发布
-      */
+     * 物模型发布版本号,0代表物模型尚未发布
+     */
     IotModelRevision: number;
     /**
-      * 产品密钥
-      */
+     * 产品密钥
+     */
     SecretKey: string;
     /**
-      * 设备功能码
-ypsxth : 音频双向通话;
-spdxth : 视频单向通话(监控);
-NVR0824 : NVR设备,大于8路，小于等于24路;
-WifiKeepalive : Wifi保活(低功耗产品);
-Alexa : Alexa接入;
-Google : Google接入;
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备功能码
+  ypsxth : 音频双向通话;
+  spdxth : 视频单向通话(监控);
+  NVR0824 : NVR设备,大于8路，小于等于24路;
+  WifiKeepalive : Wifi保活(低功耗产品);
+  Alexa : Alexa接入;
+  Google : Google接入;
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FuncCode: Array<string>;
     /**
-      * 产品类别，0 : 普通视频设备；1 : NVR设备
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品类别，0 : 普通视频设备；1 : NVR设备
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductCate: number;
     /**
-      * 产品地域
-China-Mainland（中国大陆）
-China-Hong Kong, Macao and Taiwan（港澳台地区）
-America（美国）
-Europe（欧洲）
-India（印度）
-Other-Overseas（其他境外地区）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品地域
+  China-Mainland（中国大陆）
+  China-Hong Kong, Macao and Taiwan（港澳台地区）
+  America（美国）
+  Europe（欧洲）
+  India（印度）
+  Other-Overseas（其他境外地区）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductRegion: string;
 }
 /**
@@ -2033,12 +2033,12 @@ Other-Overseas（其他境外地区）
  */
 export interface CreateGencodeRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 物模型发布版本号,-1代表未发布的，保存的是草稿箱的版本。1代表已发布的物模型。
-      */
+     * 物模型发布版本号,-1代表未发布的，保存的是草稿箱的版本。1代表已发布的物模型。
+     */
     Revision: number;
 }
 /**
@@ -2046,13 +2046,13 @@ export interface CreateGencodeRequest {
  */
 export interface DescribePubVersionsResponse {
     /**
-      * 历史发布的版本列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 历史发布的版本列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<OtaPubHistory>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2060,8 +2060,8 @@ export interface DescribePubVersionsResponse {
  */
 export interface ClearDeviceActiveCodeRequest {
     /**
-      * 设备TID列表，0<元素数量<=100
-      */
+     * 设备TID列表，0<元素数量<=100
+     */
     Tids: Array<string>;
 }
 /**
@@ -2069,24 +2069,24 @@ export interface ClearDeviceActiveCodeRequest {
  */
 export interface ModifyDeviceActionRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 如果设备处于休眠状态，是否唤醒设备
-      */
+     * 如果设备处于休眠状态，是否唤醒设备
+     */
     Wakeup: boolean;
     /**
-      * 物模型的分支路径
-      */
+     * 物模型的分支路径
+     */
     Branch: string;
     /**
-      * 写入的物模型数据，如果是json需要转义成字符串
-      */
+     * 写入的物模型数据，如果是json需要转义成字符串
+     */
     Value: string;
     /**
-      * Value字段的类型是否为数值（float、int）
-      */
+     * Value字段的类型是否为数值（float、int）
+     */
     IsNum?: boolean;
 }
 /**
@@ -2094,8 +2094,8 @@ export interface ModifyDeviceActionRequest {
  */
 export interface CreateIotModelResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2103,21 +2103,21 @@ export interface CreateIotModelResponse {
  */
 export interface BindDevInfo {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 设备名称
-      */
+     * 设备名称
+     */
     DeviceName: string;
     /**
-      * 设备型号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备型号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeviceModel: string;
     /**
-      * 用户角色，owner：主人，guest：访客
-      */
+     * 用户角色，owner：主人，guest：访客
+     */
     Role: string;
 }
 /**
@@ -2125,8 +2125,8 @@ export interface BindDevInfo {
  */
 export interface DescribeBindDevRequest {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
 }
 /**
@@ -2134,30 +2134,30 @@ export interface DescribeBindDevRequest {
  */
 export interface StorageOrder {
     /**
-      * 定单唯一性ID
-      */
+     * 定单唯一性ID
+     */
     OrderId: string;
     /**
-      * 云存套餐ID
-      */
+     * 云存套餐ID
+     */
     PkgId: string;
     /**
-      * 定单服务状态
-1;订单正在使用。
-2:订单未开始。
-3:订单已经使用过，现在暂时未开始使用(该订单从其他服务转移而来)。
-4:订单已过期。
-5:订单已被退订。
-6:定单已被转移到其他云存服务。
-      */
+     * 定单服务状态
+  1;订单正在使用。
+  2:订单未开始。
+  3:订单已经使用过，现在暂时未开始使用(该订单从其他服务转移而来)。
+  4:订单已过期。
+  5:订单已被退订。
+  6:定单已被转移到其他云存服务。
+     */
     Status: number;
     /**
-      * 定单服务生效时间
-      */
+     * 定单服务生效时间
+     */
     StartTime: number;
     /**
-      * 定单服务失效时间
-      */
+     * 定单服务失效时间
+     */
     EndTime: number;
 }
 /**
@@ -2165,24 +2165,24 @@ export interface StorageOrder {
  */
 export interface MsgQueueData {
     /**
-      * 消息队列类型 1：CMQ 2：kafka
-      */
+     * 消息队列类型 1：CMQ 2：kafka
+     */
     MsgQueueType: number;
     /**
-      * 消息类型列表，整型值（0-31）之间以“,”分隔
-      */
+     * 消息类型列表，整型值（0-31）之间以“,”分隔
+     */
     MsgType: string;
     /**
-      * 主题名称
-      */
+     * 主题名称
+     */
     Topic: string;
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     Instance: string;
     /**
-      * 消息地域
-      */
+     * 消息地域
+     */
     MsgRegion: string;
 }
 /**
@@ -2190,12 +2190,12 @@ export interface MsgQueueData {
  */
 export interface RegisteredStatus {
     /**
-      * 终端用户的唯一ID
-      */
+     * 终端用户的唯一ID
+     */
     CunionId: string;
     /**
-      * 注册状态
-      */
+     * 注册状态
+     */
     IsRegisted: boolean;
 }
 /**
@@ -2203,16 +2203,16 @@ export interface RegisteredStatus {
  */
 export interface CreateAnonymousAccessTokenRequest {
     /**
-      * Token的TTL(time to alive)分钟数,最大值1440(即24小时)
-      */
+     * Token的TTL(time to alive)分钟数,最大值1440(即24小时)
+     */
     TtlMinutes: number;
     /**
-      * 设备ID。创建Token时, 此参数为必须项
-      */
+     * 设备ID。创建Token时, 此参数为必须项
+     */
     Tid?: string;
     /**
-      * 旧的AccessToken。续期Token时，此参数为必须
-      */
+     * 旧的AccessToken。续期Token时，此参数为必须
+     */
     OldAccessToken?: string;
 }
 /**
@@ -2220,20 +2220,20 @@ export interface CreateAnonymousAccessTokenRequest {
  */
 export interface DeliverStorageServiceRequest {
     /**
-      * 待转移的源云存服务ID
-      */
+     * 待转移的源云存服务ID
+     */
     SrcServiceId: string;
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
-      */
+     * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+     */
     ChnNum?: number;
     /**
-      * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
-      */
+     * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+     */
     AccessId?: string;
 }
 /**
@@ -2241,8 +2241,8 @@ export interface DeliverStorageServiceRequest {
  */
 export interface RunDeviceStreamResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2250,8 +2250,8 @@ export interface RunDeviceStreamResponse {
  */
 export interface ModifyDeviceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2259,12 +2259,12 @@ export interface ModifyDeviceResponse {
  */
 export interface DescribeDeviceModelRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 物模型的分支路径
-      */
+     * 物模型的分支路径
+     */
     Branch?: string;
 }
 /**
@@ -2272,17 +2272,17 @@ export interface DescribeDeviceModelRequest {
  */
 export interface DescribeLogsResponse {
     /**
-      * 设备日志信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备日志信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<LogData>;
     /**
-      * Data数组所包含的信息条数
-      */
+     * Data数组所包含的信息条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2290,19 +2290,19 @@ export interface DescribeLogsResponse {
  */
 export interface ModifyDeviceActionResponse {
     /**
-      * 设备端的响应结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设备端的响应结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 任务ID
-若设备端未能及时响应时，会返回此字段，用户可以通过DescribeModelDataRet获取设备的最终响应结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 任务ID
+  若设备端未能及时响应时，会返回此字段，用户可以通过DescribeModelDataRet获取设备的最终响应结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TaskId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2310,12 +2310,12 @@ export interface ModifyDeviceActionResponse {
  */
 export interface CreateBindingResponse {
     /**
-      * 访问设备的AccessToken
-      */
+     * 访问设备的AccessToken
+     */
     AccessToken: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2323,8 +2323,8 @@ export interface CreateBindingResponse {
  */
 export interface DescribeAccountBalanceRequest {
     /**
-      * 账户类型 1:设备接入 2:云存
-      */
+     * 账户类型 1:设备接入 2:云存
+     */
     AccountType: number;
 }
 /**
@@ -2332,20 +2332,20 @@ export interface DescribeAccountBalanceRequest {
  */
 export interface CreateDevicesRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 创建设备的数量，数量范围1-100
-      */
+     * 创建设备的数量，数量范围1-100
+     */
     Number: number;
     /**
-      * 设备名称前缀，支持英文、数字，不超过10字符
-      */
+     * 设备名称前缀，支持英文、数字，不超过10字符
+     */
     NamePrefix?: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
 }
 /**
@@ -2353,8 +2353,8 @@ export interface CreateDevicesRequest {
  */
 export interface DisableDeviceRequest {
     /**
-      * 设备TID ≤100
-      */
+     * 设备TID ≤100
+     */
     Tids: Array<string>;
 }
 /**
@@ -2362,13 +2362,13 @@ export interface DisableDeviceRequest {
  */
 export interface DescribeStreamResponse {
     /**
-      * 返回参数结构
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回参数结构
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data: Data;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2376,28 +2376,28 @@ export interface DescribeStreamResponse {
  */
 export interface DescribeAccountBalanceResponse {
     /**
-      * 账户类型 1=设备接入;2=云存。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 账户类型 1=设备接入;2=云存。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AccountType?: number;
     /**
-      * 余额, 单位 : 分(人民币)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 余额, 单位 : 分(人民币)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Balance?: number;
     /**
-      * 账户状态，1=正常；8=冻结；9=销户。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 账户状态，1=正常；8=冻结；9=销户。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     State?: number;
     /**
-      * 最后修改时间，UTC值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后修改时间，UTC值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastUpdateTime?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2405,16 +2405,16 @@ export interface DescribeAccountBalanceResponse {
  */
 export interface DisableOtaVersionRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
-      */
+     * 固件版本号，格式为x.y.z， x，y 范围0-63，z范围1~524288
+     */
     OtaVersion: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator?: string;
 }
 /**
@@ -2422,13 +2422,13 @@ export interface DisableOtaVersionRequest {
  */
 export interface DescribeProductResponse {
     /**
-      * 产品详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: ProductData;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2436,20 +2436,20 @@ export interface DescribeProductResponse {
  */
 export interface CreateAnonymousAccessTokenResponse {
     /**
-      * 终端用户在IoT Video上的唯一标识ID
-      */
+     * 终端用户在IoT Video上的唯一标识ID
+     */
     AccessId?: string;
     /**
-      * IoT Video平台的AccessToken
-      */
+     * IoT Video平台的AccessToken
+     */
     AccessToken?: string;
     /**
-      * Token的过期时间，单位秒(UTC时间)
-      */
+     * Token的过期时间，单位秒(UTC时间)
+     */
     ExpireTime?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2457,12 +2457,12 @@ export interface CreateAnonymousAccessTokenResponse {
  */
 export interface DescribeBindUsrRequest {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 设备主人的AccessId
-      */
+     * 设备主人的AccessId
+     */
     AccessId?: string;
 }
 /**
@@ -2470,16 +2470,16 @@ export interface DescribeBindUsrRequest {
  */
 export interface SendOnlineMsgResponse {
     /**
-      * 若返回此项则表明需要用户用此taskID进行查询请求是否成功(只有waitresp不等于0的情况下才可能会返回该taskID项)
-      */
+     * 若返回此项则表明需要用户用此taskID进行查询请求是否成功(只有waitresp不等于0的情况下才可能会返回该taskID项)
+     */
     TaskId?: string;
     /**
-      * 设备响应信息
-      */
+     * 设备响应信息
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2487,8 +2487,8 @@ export interface SendOnlineMsgResponse {
  */
 export interface DeleteAppUsrRequest {
     /**
-      * 客户的终端用户在IoT Video上的唯一标识ID
-      */
+     * 客户的终端用户在IoT Video上的唯一标识ID
+     */
     AccessId: string;
 }
 /**
@@ -2496,13 +2496,13 @@ export interface DeleteAppUsrRequest {
  */
 export interface DescribeIotModelsResponse {
     /**
-      * 历史版本列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 历史版本列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: Array<IotModelData>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2510,13 +2510,13 @@ export interface DescribeIotModelsResponse {
  */
 export interface DescribeMessageQueueResponse {
     /**
-      * 消息队列配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 消息队列配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: MsgQueueData;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2528,29 +2528,29 @@ export declare type DescribeOsListRequest = null;
  */
 export interface DescribeDevicesRequest {
     /**
-      * 产品ID
-      */
+     * 产品ID
+     */
     ProductId: string;
     /**
-      * 是否返回全量数据
-当该值为false时，返回值中的设备物模型、固件版本、在线状态、最后在线时间字段等字段，都将返回数据类型的零值。
-      */
+     * 是否返回全量数据
+  当该值为false时，返回值中的设备物模型、固件版本、在线状态、最后在线时间字段等字段，都将返回数据类型的零值。
+     */
     ReturnModel: boolean;
     /**
-      * 分页数量,0<取值范围<=100
-      */
+     * 分页数量,0<取值范围<=100
+     */
     Limit: number;
     /**
-      * 分页偏移，取值＞0
-      */
+     * 分页偏移，取值＞0
+     */
     Offset: number;
     /**
-      * 指定固件版本号，为空查询此产品下所有设备
-      */
+     * 指定固件版本号，为空查询此产品下所有设备
+     */
     OtaVersion?: string;
     /**
-      * 设备名称，支持左前缀模糊匹配
-      */
+     * 设备名称，支持左前缀模糊匹配
+     */
     DeviceName?: string;
 }
 /**
@@ -2558,8 +2558,8 @@ export interface DescribeDevicesRequest {
  */
 export interface CreateIotDataTypeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2567,8 +2567,8 @@ export interface CreateIotDataTypeResponse {
  */
 export interface ModifyDevicePropertyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2576,8 +2576,8 @@ export interface ModifyDevicePropertyResponse {
  */
 export interface DeleteBindingResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2585,12 +2585,12 @@ export interface DeleteBindingResponse {
  */
 export interface RefundStorageServiceRequest {
     /**
-      * 云存服务ID
-      */
+     * 云存服务ID
+     */
     ServiceId: string;
     /**
-      * 云存子订单ID。如果指定子订单ID,则仅退订该子订单，如果未指定子定单ID，则退订所有子订单
-      */
+     * 云存子订单ID。如果指定子订单ID,则仅退订该子订单，如果未指定子定单ID，则退订所有子订单
+     */
     OrderId?: string;
 }
 /**
@@ -2598,8 +2598,8 @@ export interface RefundStorageServiceRequest {
  */
 export interface CreateStorageResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2607,8 +2607,8 @@ export interface CreateStorageResponse {
  */
 export interface DisableDeviceStreamResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2616,8 +2616,8 @@ export interface DisableDeviceStreamResponse {
  */
 export interface DeleteDeviceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2625,13 +2625,13 @@ export interface DeleteDeviceResponse {
  */
 export interface CreateUploadPathResponse {
     /**
-      * 固件上传地址URL，用户可将本地的固件文件通过该URL以PUT的请求方式上传。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 固件上传地址URL，用户可将本地的固件文件通过该URL以PUT的请求方式上传。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Data?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2639,24 +2639,24 @@ export interface CreateUploadPathResponse {
  */
 export interface RechargeRecord {
     /**
-      * 流水记录号。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 流水记录号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     WaterId: number;
     /**
-      * 充值前的余额，单位0.01元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 充值前的余额，单位0.01元。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BalanceBeforeRecharge: number;
     /**
-      * 充值金额，单位0.01元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 充值金额，单位0.01元。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Money: number;
     /**
-      * 充值时间, UTC值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 充值时间, UTC值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OperateTime: number;
 }
 /**
@@ -2664,94 +2664,94 @@ export interface RechargeRecord {
  */
 export interface VersionData {
     /**
-      * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProductId: string;
     /**
-      * 固件版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 固件版本号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OtaVersion: string;
     /**
-      * 版本类型 1未发布 2测试发布 3正式发布 4禁用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本类型 1未发布 2测试发布 3正式发布 4禁用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PubStatus: number;
     /**
-      * 固件版本存储路径URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 固件版本存储路径URL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VersionUrl: string;
     /**
-      * 文件大小，byte
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 文件大小，byte
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FileSize: number;
     /**
-      * 文件校验码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 文件校验码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Md5: string;
     /**
-      * 指定的允许升级的旧版本，PubStatus=3时有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 指定的允许升级的旧版本，PubStatus=3时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OldVersions: string;
     /**
-      * 指定的允许升级的旧设备id，PubStatus=2时有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 指定的允许升级的旧设备id，PubStatus=2时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tids: string;
     /**
-      * 灰度值（0-100）,PubStatus=3时有效，表示n%的升级总量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 灰度值（0-100）,PubStatus=3时有效，表示n%的升级总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GrayValue: number;
     /**
-      * 最近一次发布时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最近一次发布时间，UNIX时间戳，单位秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PublishTime: number;
     /**
-      * 此版本激活的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 此版本激活的设备总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ActiveCount: number;
     /**
-      * 此版本在线的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 此版本在线的设备总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OnlineCount: number;
     /**
-      * 上传固件文件的时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 上传固件文件的时间，UNIX时间戳，单位秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: number;
     /**
-      * 发布记录的最后变更时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 发布记录的最后变更时间，UNIX时间戳，单位秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UploadTime: number;
     /**
-      * 该固件版本发布的变更次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 该固件版本发布的变更次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ModifyTimes: number;
     /**
-      * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Remark: string;
     /**
-      * 版本发布的描述信息，需要国际化，可以为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本发布的描述信息，需要国际化，可以为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Contents: Contents;
     /**
-      * 月活设备数，当月第一天开始有上线的设备数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 月活设备数，当月第一天开始有上线的设备数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AliveInMonthCnt: number;
 }
 /**
@@ -2759,43 +2759,43 @@ export interface VersionData {
  */
 export interface DevicesData {
     /**
-      * 设备TID
-      */
+     * 设备TID
+     */
     Tid: string;
     /**
-      * 设备名称
-      */
+     * 设备名称
+     */
     DeviceName: string;
     /**
-      * 激活时间 0代表未激活
-      */
+     * 激活时间 0代表未激活
+     */
     ActiveTime: number;
     /**
-      * 设备是否被禁用
-      */
+     * 设备是否被禁用
+     */
     Disabled: boolean;
     /**
-      * 设备推流状态
-      */
+     * 设备推流状态
+     */
     StreamStatus: boolean;
     /**
-      * 固件版本
-      */
+     * 固件版本
+     */
     OtaVersion: string;
     /**
-      * 设备在线状态
-      */
+     * 设备在线状态
+     */
     Online: number;
     /**
-      * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
-      */
+     * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
+     */
     LastOnlineTime: number;
     /**
-      * 物模型json数据
-      */
+     * 物模型json数据
+     */
     IotModel: string;
     /**
-      * 设备固件最新更新时间，UNIX时间戳，单位秒
-      */
+     * 设备固件最新更新时间，UNIX时间戳，单位秒
+     */
     LastUpdateTime: number;
 }

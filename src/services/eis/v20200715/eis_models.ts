@@ -23,12 +23,10 @@ export interface EisConnectionOperation {
    * 连接器操作名称
    */
   OperationName: string
-
   /**
    * 连接器展示名称
    */
   DisplayName: string
-
   /**
    * 操作是否为触发器
    */
@@ -43,12 +41,10 @@ export interface ListEisConnectorsRequest {
    * 连接器名称,非必输，如输入则按照输入值模糊匹配
    */
   ConnectorName?: string
-
   /**
    * 分页参数,数据偏移量
    */
   Offset?: number
-
   /**
    * 分页参数,每页显示的条数
    */
@@ -63,27 +59,22 @@ export interface EisConnectorSummary {
    * 连接器名称
    */
   ConnectorName: string
-
   /**
    * 连接器展示名称
    */
   DisplayName: string
-
   /**
    * 连接器对应企业
    */
   Company: string
-
   /**
    * 连接器对应产品
    */
   Product: string
-
   /**
    * 连接器版本
    */
   ConnectorVersion: string
-
   /**
    * 连接器创建时间
    */
@@ -98,7 +89,6 @@ export interface ListEisConnectorOperationsResponse {
    * 连接器列表
    */
   Operations: Array<EisConnectionOperation>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -110,7 +100,7 @@ export interface ListEisConnectorOperationsResponse {
  */
 export interface DescribeEisConnectorConfigResponse {
   /**
-      * 连接器配置参数描述（json结构），示例如下：
+   * 连接器配置参数描述（json结构），示例如下：
 {
     "attributes":{
         "description":"测试", // 连接器的描述
@@ -285,9 +275,8 @@ export interface DescribeEisConnectorConfigResponse {
         }
     ]
 }
-      */
+   */
   ConnectorParameter: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -302,7 +291,6 @@ export interface ListEisConnectorOperationsRequest {
    * 连接器名称
    */
   ConnectorName: string
-
   /**
    * 连接器版本
    */
@@ -317,7 +305,6 @@ export interface DescribeEisConnectorConfigRequest {
    * 连接器名称
    */
   ConnectorName: string
-
   /**
    * 连接器版本
    */
@@ -332,12 +319,10 @@ export interface ListEisConnectorsResponse {
    * 连接器总数
    */
   TotalCount: number
-
   /**
    * 连接器列表
    */
   Connectors: Array<EisConnectorSummary>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -30,17 +30,15 @@ export interface ModifyCompareTaskResponse {
  */
 export interface DescribeSyncJobsResponse {
   /**
-      * 任务数目
+   * 任务数目
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount?: number
-
   /**
-      * 任务详情数组
+   * 任务详情数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobList?: Array<SyncJobInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -65,7 +63,6 @@ export interface ModifyMigrateJobSpecRequest {
    * 任务id
    */
   JobId: string
-
   /**
    * 新实例规格大小，包括：micro、small、medium、large、xlarge、2xlarge
    */
@@ -87,33 +84,29 @@ export interface StartMigrateJobRequest {
  */
 export interface StepTip {
   /**
-      * 错误码
+   * 错误码
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Code?: string
-
   /**
-      * 错误信息
+   * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message?: string
-
   /**
-      * 解决方式
+   * 解决方式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Solution?: string
-
   /**
-      * 帮助文档
+   * 帮助文档
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HelpDoc?: string
-
   /**
-      * 当前步骤跳过信息
+   * 当前步骤跳过信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SkipInfo?: string
 }
 
@@ -132,11 +125,10 @@ export interface DestroyMigrateJobRequest {
  */
 export interface SkipCheckItemResponse {
   /**
-      * 跳过的提示信息
+   * 跳过的提示信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -168,63 +160,54 @@ export interface ResumeMigrateJobResponse {
  */
 export interface DifferenceItem {
   /**
-      * 数据库名
+   * 数据库名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Db: string
-
   /**
-      * 表名
+   * 表名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Table: string
-
   /**
-      * 分块号
+   * 分块号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Chunk: number
-
   /**
-      * 源库数值
+   * 源库数值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcItem: string
-
   /**
-      * 目标库数值
+   * 目标库数值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstItem: string
-
   /**
-      * 索引名称
+   * 索引名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IndexName: string
-
   /**
-      * 索引下边界
+   * 索引下边界
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LowerBoundary: string
-
   /**
-      * 索引上边界
+   * 索引上边界
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpperBoundary: string
-
   /**
-      * 对比消耗时间,单位为 ms
+   * 对比消耗时间,单位为 ms
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CostTime: number
-
   /**
-      * 完成时间
+   * 完成时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FinishedAt: string
 }
 
@@ -293,17 +276,15 @@ export interface DestroySyncJobResponse {
  */
 export interface DescribeCompareReportResponse {
   /**
-      * 一致性校验摘要信息
+   * 一致性校验摘要信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Abstract: CompareAbstractInfo
-
   /**
-      * 一致性校验详细信息
+   * 一致性校验详细信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Detail: CompareDetailInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -335,27 +316,24 @@ export interface StopMigrateJobResponse {
  */
 export interface TableItem {
   /**
-      * 迁移的表名，大小写敏感
+   * 迁移的表名，大小写敏感
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableName?: string
-
   /**
-      * 迁移后的表名，当TableEditMode为rename时此项必填，注意此配置与TmpTables互斥，只能使用其中一种
+   * 迁移后的表名，当TableEditMode为rename时此项必填，注意此配置与TmpTables互斥，只能使用其中一种
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewTableName?: string
-
   /**
-      * 迁移临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在迁移过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。
+   * 迁移临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在迁移过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpTables?: Array<string>
-
   /**
-      * 编辑表类型，rename(表映射)，pt(同步附加表)
+   * 编辑表类型，rename(表映射)，pt(同步附加表)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableEditMode?: string
 }
 
@@ -367,12 +345,10 @@ export interface ModifyCompareTaskNameRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
    */
   CompareTaskId: string
-
   /**
    * 一致性校验任务名称
    */
@@ -394,17 +370,15 @@ export interface CompleteMigrateJobResponse {
  */
 export interface DescribeMigrateDBInstancesResponse {
   /**
-      * 符合筛选条件的数量
+   * 符合筛选条件的数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 实例列表
+   * 实例列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Instances: Array<MigrateDBItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -416,15 +390,14 @@ export interface DescribeMigrateDBInstancesResponse {
  */
 export interface KeyValuePairOption {
   /**
-      * 选项key
+   * 选项key
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Key?: string
-
   /**
-      * 选项value
+   * 选项value
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Value?: string
 }
 
@@ -446,31 +419,26 @@ export interface DescribeModifyCheckSyncJobResultResponse {
    * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
    */
   Status?: string
-
   /**
-      * 校验的步骤总数
+   * 校验的步骤总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepCount?: number
-
   /**
-      * 当前所在步骤
+   * 当前所在步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepCur?: number
-
   /**
-      * 总体进度，范围为[0,100]	
+   * 总体进度，范围为[0,100]	
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress?: number
-
   /**
-      * 步骤详细信息
+   * 步骤详细信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfos?: Array<StepInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -515,7 +483,6 @@ export interface ResizeSyncJobRequest {
    * 同步任务id
    */
   JobId: string
-
   /**
    * 任务规格
    */
@@ -527,15 +494,14 @@ export interface ResizeSyncJobRequest {
  */
 export interface DdlOption {
   /**
-      * ddl类型，如Database,Table,View,Index等
+   * ddl类型，如Database,Table,View,Index等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DdlObject?: string
-
   /**
-      * ddl具体值，对于Database可取值[Create,Drop,Alter]<br>对于Table可取值[Create,Drop,Alter,Truncate,Rename]<br/>对于View可取值[Create,Drop]<br/>对于Index可取值[Create,Drop]
+   * ddl具体值，对于Database可取值[Create,Drop,Alter]<br>对于Table可取值[Create,Drop,Alter,Truncate,Rename]<br/>对于View可取值[Create,Drop]<br/>对于Index可取值[Create,Drop]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DdlValue?: Array<string>
 }
 
@@ -544,21 +510,19 @@ export interface DdlOption {
  */
 export interface ConflictHandleOption {
   /**
-      * 条件覆盖的列
+   * 条件覆盖的列
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConditionColumn?: string
-
   /**
-      * 条件覆盖操作
+   * 条件覆盖操作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConditionOperator?: string
-
   /**
-      * 条件覆盖优先级处理
+   * 条件覆盖优先级处理
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConditionOrderInSrcAndDst?: string
 }
 
@@ -620,12 +584,10 @@ export interface ModifySyncJobConfigRequest {
    * 同步任务id
    */
   JobId: string
-
   /**
    * 修改后的同步对象
    */
   DynamicObjects?: Objects
-
   /**
    * 修改后的同步任务选项
    */
@@ -650,37 +612,30 @@ export interface CreateMigrationServiceRequest {
    * 源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql
    */
   SrcDatabaseType: string
-
   /**
    * 目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql
    */
   DstDatabaseType: string
-
   /**
    * 源实例地域，如：ap-guangzhou
    */
   SrcRegion: string
-
   /**
    * 目标实例地域，如：ap-guangzhou。注意，目标地域必须和API请求地域保持一致。
    */
   DstRegion: string
-
   /**
    * 实例规格，包括：small、medium、large、xlarge、2xlarge
    */
   InstanceClass: string
-
   /**
    * 购买数量，范围为[1,15]，默认为1
    */
   Count?: number
-
   /**
    * 迁移服务名称，最大长度128
    */
   JobName?: string
-
   /**
    * 标签信息
    */
@@ -692,51 +647,44 @@ export interface CreateMigrationServiceRequest {
  */
 export interface DetailCheckItem {
   /**
-      * 检查项的名称，如：源实例权限检查
+   * 检查项的名称，如：源实例权限检查
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckItemName: string
-
   /**
-      * 检查项详细内容
+   * 检查项详细内容
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description: string
-
   /**
-      * pass(通过)，failed(失败), warning(校验有警告，但仍通过)
+   * pass(通过)，failed(失败), warning(校验有警告，但仍通过)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckResult: string
-
   /**
-      * 检查项失败原因
+   * 检查项失败原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailureReason: string
-
   /**
-      * 解决方案
+   * 解决方案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Solution: string
-
   /**
-      * 运行报错日志
+   * 运行报错日志
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ErrorLog: Array<string>
-
   /**
-      * 详细帮助的文档链接
+   * 详细帮助的文档链接
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HelpDoc: Array<string>
-
   /**
-      * 跳过风险文案
+   * 跳过风险文案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SkipInfo: string
 }
 
@@ -748,22 +696,18 @@ export interface DescribeCompareTasksRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 分页设置，表示每页显示多少条任务，默认为 20
    */
   Limit?: number
-
   /**
    * 分页偏移量
    */
   Offset?: number
-
   /**
    * 校验任务 ID
    */
   CompareTaskId?: string
-
   /**
    * 任务状态过滤，可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
    */
@@ -775,21 +719,19 @@ export interface DescribeCompareTasksRequest {
  */
 export interface CompareObject {
   /**
-      * 对象模式 整实例-all,部分对象-partial
+   * 对象模式 整实例-all,部分对象-partial
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ObjectMode: string
-
   /**
-      * 对象列表
+   * 对象列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ObjectItems?: Array<CompareObjectItem>
-
   /**
-      * 高级对象类型，如account(账号),index(索引),shardkey(片建，后面可能会调整),schema(库表结构)
+   * 高级对象类型，如account(账号),index(索引),shardkey(片建，后面可能会调整),schema(库表结构)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AdvancedObjects?: Array<string>
 }
 
@@ -798,27 +740,24 @@ export interface CompareObject {
  */
 export interface ErrorInfoItem {
   /**
-      * 错误码
+   * 错误码
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Code: string
-
   /**
-      * 解决方案
+   * 解决方案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Solution: string
-
   /**
-      * 错误日志信息
+   * 错误日志信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ErrorLog: string
-
   /**
-      * 文档提示
+   * 文档提示
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HelpDoc: string
 }
 
@@ -837,15 +776,14 @@ export interface RecoverSyncJobResponse {
  */
 export interface MigrateAction {
   /**
-      * 任务的所有操作列表
+   * 任务的所有操作列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AllAction: Array<string>
-
   /**
-      * 任务在当前状态下允许的操作列表
+   * 任务在当前状态下允许的操作列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AllowedAction: Array<string>
 }
 
@@ -864,52 +802,45 @@ export interface DeleteCompareTaskResponse {
  */
 export interface DBEndpointInfo {
   /**
-      * 实例所在地域
+   * 实例所在地域
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Region: string
-
   /**
-      * 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路
+   * 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccessType: string
-
   /**
-      * 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等
+   * 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DatabaseType: string
-
   /**
-      * 节点类型，为空或者"simple":表示普通节点，"cluster": 集群节点
+   * 节点类型，为空或者"simple":表示普通节点，"cluster": 集群节点
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NodeType: string
-
   /**
-      * 数据库信息
+   * 数据库信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Info: Array<DBInfo>
-
   /**
-      * 实例服务提供商，如:"aliyun","others"
+   * 实例服务提供商，如:"aliyun","others"
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Supplier?: string
-
   /**
-      * MongoDB可定义如下的参数: 	['AuthDatabase':'admin', 
+   * MongoDB可定义如下的参数: 	['AuthDatabase':'admin', 
 'AuthFlag': "1",	'AuthMechanism':"SCRAM-SHA-1"]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExtraAttr?: Array<KeyValuePairOption>
-
   /**
-      * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+   * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DatabaseNetEnv?: string
 }
 
@@ -921,27 +852,22 @@ export interface TopicRule {
    * topic名
    */
   TopicName?: string
-
   /**
    * topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)
    */
   PartitionType?: string
-
   /**
    * 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’
    */
   DbMatchMode?: string
-
   /**
    * 库名，仅“自定义topic”时，DbMatchMode=Regular生效
    */
   DbName?: string
-
   /**
    * 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’
    */
   TableMatchMode?: string
-
   /**
    * 表名，仅“自定义topic”时，TableMatchMode=Regular生效
    */
@@ -963,51 +889,44 @@ export interface ContinueSyncJobResponse {
  */
 export interface Options {
   /**
-      * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)
+   * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InitType?: string
-
   /**
-      * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、InitializeAfterDelete(删除并重新初始化)、ExecuteAfterIgnore(忽略并继续执行)
+   * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、InitializeAfterDelete(删除并重新初始化)、ExecuteAfterIgnore(忽略并继续执行)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DealOfExistSameTable?: string
-
   /**
-      * 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)
+   * 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConflictHandleType?: string
-
   /**
-      * 是否添加附加列
+   * 是否添加附加列
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AddAdditionalColumn?: boolean
-
   /**
-      * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， 不填（不选），PartialDDL(自定义,和DdlOptions一起起作用 )
+   * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， 不填（不选），PartialDDL(自定义,和DdlOptions一起起作用 )
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OpTypes?: Array<string>
-
   /**
-      * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作
+   * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConflictHandleOption?: ConflictHandleOption
-
   /**
-      * DDL同步选项，具体描述要同步那些DDL
+   * DDL同步选项，具体描述要同步那些DDL
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DdlOptions?: Array<DdlOption>
-
   /**
-      * kafka同步选项
+   * kafka同步选项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   KafkaOption?: KafkaOption
 }
 
@@ -1019,7 +938,6 @@ export interface CompleteMigrateJobRequest {
    * 数据迁移任务ID
    */
   JobId: string
-
   /**
    * 完成任务的方式,仅支持旧版MySQL迁移任务。waitForSync-等待主从差距为0才停止,immediately-立即完成，不会等待主从差距一致。默认为waitForSync
    */
@@ -1031,17 +949,15 @@ export interface CompleteMigrateJobRequest {
  */
 export interface DescribeCompareTasksResponse {
   /**
-      * 数量
+   * 数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
+   */
+  TotalCount?: number
   /**
-      * 一致性校验列表
+   * 一致性校验列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Items: Array<CompareTaskItem>
-
+   */
+  Items?: Array<CompareTaskItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1056,7 +972,6 @@ export interface StopCompareRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
    */
@@ -1068,27 +983,24 @@ export interface StopCompareRequest {
  */
 export interface SyncDBEndpointInfos {
   /**
-      * 数据库所在地域
+   * 数据库所在地域
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Region: string
-
   /**
-      * 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路
+   * 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccessType: string
-
   /**
-      * 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等
+   * 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DatabaseType: string
-
   /**
-      * 数据库信息
+   * 数据库信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Info: Array<Endpoint>
 }
 
@@ -1107,35 +1019,30 @@ export interface StartModifySyncJobRequest {
  */
 export interface DescribeCheckSyncJobResultResponse {
   /**
-      * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
+   * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: string
-
   /**
-      * 步骤总数
+   * 步骤总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepCount?: number
-
   /**
-      * 当前所在步骤
+   * 当前所在步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepCur?: number
-
   /**
-      * 总体进度，范围为[0,100]
+   * 总体进度，范围为[0,100]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress?: number
-
   /**
-      * 步骤信息
+   * 步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfos?: Array<StepInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1157,15 +1064,14 @@ export interface StopSyncJobResponse {
  */
 export interface SkippedDetail {
   /**
-      * 跳过的表数量
+   * 跳过的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 跳过校验的表详情
+   * 跳过校验的表详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Items: Array<SkippedItem>
 }
 
@@ -1174,46 +1080,40 @@ export interface SkippedDetail {
  */
 export interface MigrateOption {
   /**
-      * 迁移对象选项，需要告知迁移服务迁移哪些库表对象
+   * 迁移对象选项，需要告知迁移服务迁移哪些库表对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DatabaseTable: DatabaseTableObject
-
   /**
-      * 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement
+   * 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MigrateType?: string
-
   /**
-      * 数据一致性校验选项， 默认为不开启一致性校验
+   * 数据一致性校验选项， 默认为不开启一致性校验
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Consistency?: ConsistencyOption
-
   /**
-      * 是否迁移账号，yes(迁移账号)，no(不迁移账号)
+   * 是否迁移账号，yes(迁移账号)，no(不迁移账号)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsMigrateAccount?: boolean
-
   /**
-      * 是否用源库Root账户覆盖目标库，值包括：false-不覆盖，true-覆盖，选择库表或者结构迁移时应该为false，注意只对旧版迁移有效
+   * 是否用源库Root账户覆盖目标库，值包括：false-不覆盖，true-覆盖，选择库表或者结构迁移时应该为false，注意只对旧版迁移有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsOverrideRoot?: boolean
-
   /**
-      * 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值)
+   * 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsDstReadOnly?: boolean
-
   /**
-      * 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: 
+   * 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: 
 ["ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒) ]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExtraAttr?: Array<KeyValuePairOption>
 }
 
@@ -1232,17 +1132,15 @@ export interface ModifyMigrateNameResponse {
  */
 export interface DescribeMigrationJobsResponse {
   /**
-      * 迁移任务数量
+   * 迁移任务数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 迁移任务列表
+   * 迁移任务列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobList: Array<JobItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1257,42 +1155,34 @@ export interface ModifyMigrationJobRequest {
    * 任务id
    */
   JobId: string
-
   /**
    * 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行)
    */
   RunMode: string
-
   /**
    * 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息
    */
   MigrateOption: MigrateOption
-
   /**
    * 源实例信息
    */
   SrcInfo: DBEndpointInfo
-
   /**
    * 目标实例信息
    */
   DstInfo: DBEndpointInfo
-
   /**
    * 迁移任务名称，最大长度128
    */
   JobName?: string
-
   /**
    * 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05"
    */
   ExpectRunTime?: string
-
   /**
    * 标签信息
    */
   Tags?: Array<TagItem>
-
   /**
    * 自动重试的时间段、可设置5至720分钟、0表示不重试
    */
@@ -1314,39 +1204,34 @@ export interface DestroyMigrateJobResponse {
  */
 export interface ProcessProgress {
   /**
-      * 步骤的状态， 包括：notStarted(未开始)、running(运行中)、success(成功)、failed(失败)等
+   * 步骤的状态， 包括：notStarted(未开始)、running(运行中)、success(成功)、failed(失败)等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 进度信息
+   * 进度信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Percent: number
-
   /**
-      * 总的步骤数
+   * 总的步骤数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepAll: number
-
   /**
-      * 当前进行的步骤
+   * 当前进行的步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNow: number
-
   /**
-      * 当前步骤输出提示信息
+   * 当前步骤输出提示信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message: string
-
   /**
-      * 步骤信息
+   * 步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Steps: Array<StepDetailInfo>
 }
 
@@ -1358,7 +1243,6 @@ export interface SkipSyncCheckItemRequest {
    * 任务id，如：sync-4ddgid2
    */
   JobId: string
-
   /**
    * 需要跳过校验项的步骤id，需要通过`DescribeCheckSyncJobResult`接口返回StepInfos[i].StepId字段获取，例如：["OptimizeCheck"]
    */
@@ -1413,77 +1297,62 @@ export interface DescribeMigrationJobsRequest {
    * 数据迁移任务ID，如：dts-amm1jw5q
    */
   JobId?: string
-
   /**
    * 数据迁移任务名称
    */
   JobName?: string
-
   /**
    * 数据迁移任务状态，可取值包括：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)
    */
   Status?: Array<string>
-
   /**
    * 源实例ID，格式如：cdb-c1nl9rpv
    */
   SrcInstanceId?: string
-
   /**
    * 源实例地域，如：ap-guangzhou
    */
   SrcRegion?: string
-
   /**
    * 源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql
    */
   SrcDatabaseType?: Array<string>
-
   /**
    * 源实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)
    */
   SrcAccessType?: Array<string>
-
   /**
    * 目标实例ID，格式如：cdb-c1nl9rpv
    */
   DstInstanceId?: string
-
   /**
    * 目标实例地域，如：ap-guangzhou
    */
   DstRegion?: string
-
   /**
    * 目标源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql
    */
   DstDatabaseType?: Array<string>
-
   /**
    * 目标实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)
    */
   DstAccessType?: Array<string>
-
   /**
    * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
    */
   RunMode?: string
-
   /**
    * 排序方式，可能取值为asc、desc，默认按照创建时间倒序
    */
   OrderSeq?: string
-
   /**
    * 返回实例数量，默认20，有效区间[1,100]
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 标签过滤
    */
@@ -1495,15 +1364,14 @@ export interface DescribeMigrationJobsRequest {
  */
 export interface CompareTaskInfo {
   /**
-      * 一致性校验任务Id
+   * 一致性校验任务Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareTaskId: string
-
   /**
-      * 一致性校验结果，包括：unstart(未启动)、running(校验中)、canceled(已终止)、failed(校验任务失败)、inconsistent(不一致)、consistent(一致)、notexist(不存在校验任务)
+   * 一致性校验结果，包括：unstart(未启动)、running(校验中)、canceled(已终止)、failed(校验任务失败)、inconsistent(不一致)、consistent(一致)、notexist(不存在校验任务)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
 }
 
@@ -1522,11 +1390,10 @@ export interface ContinueSyncJobRequest {
  */
 export interface CreateMigrationServiceResponse {
   /**
-      * 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21
+   * 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1541,17 +1408,14 @@ export interface KafkaOption {
    * 投递到kafka的数据类型，如Avro,Json
    */
   DataType?: string
-
   /**
    * 同步topic策略，如Single（集中投递到单topic）,Multi (自定义topic名称)
    */
   TopicType?: string
-
   /**
    * 用于存储ddl的topic
    */
   DDLTopicName?: string
-
   /**
    * 单topic和自定义topic的描述
    */
@@ -1563,28 +1427,24 @@ export interface KafkaOption {
  */
 export interface DescribeMigrationCheckJobResponse {
   /**
-      * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
+   * 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 校验任务结果输出简要信息
+   * 校验任务结果输出简要信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BriefMsg: string
-
   /**
-      * 检查步骤
+   * 检查步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfo: Array<CheckStep>
-
   /**
    * 校验结果，如：checkPass(校验通过)、checkNotPass(校验未通过)
    */
   CheckFlag: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1596,123 +1456,104 @@ export interface DescribeMigrationCheckJobResponse {
  */
 export interface DBInfo {
   /**
-      * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
+   * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Role?: string
-
   /**
-      * 内核版本，针对mariadb的不同内核版本等
+   * 内核版本，针对mariadb的不同内核版本等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbKernel?: string
-
   /**
-      * 实例的IP地址，对于公网、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
+   * 实例的IP地址，对于公网、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Host?: string
-
   /**
-      * 实例的端口，对于公网、云主机自建、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
+   * 实例的端口，对于公网、云主机自建、专线、VPN、云联网、自研上云、VPC等接入方式此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Port?: number
-
   /**
-      * 实例的用户名
+   * 实例的用户名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   User?: string
-
   /**
-      * 实例的密码
+   * 实例的密码
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Password?: string
-
   /**
-      * CVM实例短ID，格式如：ins-olgl39y8；与云服务器控制台页面显示的实例ID相同；如果接入类型为云主机自建的方式，此项必填
+   * CVM实例短ID，格式如：ins-olgl39y8；与云服务器控制台页面显示的实例ID相同；如果接入类型为云主机自建的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvmInstanceId?: string
-
   /**
-      * VPN网关ID，格式如：vpngw-9ghexg7q；如果接入类型为vpncloud的方式，此项必填
+   * VPN网关ID，格式如：vpngw-9ghexg7q；如果接入类型为vpncloud的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UniqVpnGwId?: string
-
   /**
-      * 专线网关ID，格式如：dcg-0rxtqqxb；如果接入类型为专线接入的方式，此项必填
+   * 专线网关ID，格式如：dcg-0rxtqqxb；如果接入类型为专线接入的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UniqDcgId?: string
-
   /**
-      * 数据库实例ID，格式如：cdb-powiqx8q；如果接入类型为云数据库的方式，此项必填
+   * 数据库实例ID，格式如：cdb-powiqx8q；如果接入类型为云数据库的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceId?: string
-
   /**
-      * 云联网ID，如：ccn-afp6kltc 注意：此字段可能返回 null，表示取不到有效值。
+   * 云联网ID，如：ccn-afp6kltc 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CcnGwId?: string
-
   /**
-      * 私有网络ID，格式如：vpc-92jblxto；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
+   * 私有网络ID，格式如：vpc-92jblxto；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VpcId?: string
-
   /**
-      * 私有网络下的子网ID，格式如：subnet-3paxmkdz；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
+   * 私有网络下的子网ID，格式如：subnet-3paxmkdz；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubnetId?: string
-
   /**
-      * 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6
+   * 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EngineVersion?: string
-
   /**
-      * 实例所属账号
+   * 实例所属账号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Account?: string
-
   /**
-      * 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+
+   * 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountRole?: string
-
   /**
-      * 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源)
+   * 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountMode?: string
-
   /**
-      * 临时密钥Id
+   * 临时密钥Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpSecretId?: string
-
   /**
-      * 临时密钥Key
+   * 临时密钥Key
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpSecretKey?: string
-
   /**
-      * 临时Token
+   * 临时Token
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpToken?: string
 }
 
@@ -1721,159 +1562,134 @@ export interface DBInfo {
  */
 export interface Endpoint {
   /**
-      * 地域英文名，如：ap-guangzhou
+   * 地域英文名，如：ap-guangzhou
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Region?: string
-
   /**
-      * tdsql mysql版的节点类型，枚举值为proxy、set
+   * tdsql mysql版的节点类型，枚举值为proxy、set
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Role?: string
-
   /**
-      * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
+   * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbKernel?: string
-
   /**
-      * 数据库实例ID，格式如：cdb-powiqx8q
+   * 数据库实例ID，格式如：cdb-powiqx8q
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceId?: string
-
   /**
-      * 实例的IP地址，接入类型为非cdb时此项必填
+   * 实例的IP地址，接入类型为非cdb时此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Ip?: string
-
   /**
-      * 实例端口，接入类型为非cdb时此项必填
+   * 实例端口，接入类型为非cdb时此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Port?: number
-
   /**
-      * 用户名，对于访问需要用户名密码认证的实例必填
+   * 用户名，对于访问需要用户名密码认证的实例必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   User?: string
-
   /**
-      * 密码，对于访问需要用户名密码认证的实例必填
+   * 密码，对于访问需要用户名密码认证的实例必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Password?: string
-
   /**
-      * 数据库名，数据库为cdwpg时，需要提供
+   * 数据库名，数据库为cdwpg时，需要提供
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbName?: string
-
   /**
-      * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
+   * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VpcId?: string
-
   /**
-      * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
+   * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubnetId?: string
-
   /**
-      * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
+   * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvmInstanceId?: string
-
   /**
-      * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
+   * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UniqDcgId?: string
-
   /**
-      * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
+   * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UniqVpnGwId?: string
-
   /**
-      * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
+   * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CcnId?: string
-
   /**
-      * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
+   * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Supplier?: string
-
   /**
-      * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
+   * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EngineVersion?: string
-
   /**
-      * 实例所属账号，如果为跨账号实例此项必填
+   * 实例所属账号，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Account?: string
-
   /**
-      * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
+   * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountMode?: string
-
   /**
-      * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
+   * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountRole?: string
-
   /**
-      * 外部角色id
+   * 外部角色id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleExternalId?: string
-
   /**
-      * 临时密钥Id，如果为跨账号实例此项必填
+   * 临时密钥Id，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpSecretId?: string
-
   /**
-      * 临时密钥Key，如果为跨账号实例此项必填
+   * 临时密钥Key，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpSecretKey?: string
-
   /**
-      * 临时Token，如果为跨账号实例此项必填
+   * 临时Token，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpToken?: string
-
   /**
-      * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
+   * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EncryptConn?: string
-
   /**
-      * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+   * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DatabaseNetEnv?: string
 }
 
@@ -1882,15 +1698,14 @@ export interface Endpoint {
  */
 export interface DifferenceDetail {
   /**
-      * 数据不一致的表数量
+   * 数据不一致的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 校验不一致的表详情
+   * 校验不一致的表详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Items: Array<DifferenceItem>
 }
 
@@ -1909,45 +1724,39 @@ export interface CreateCheckSyncJobResponse {
  */
 export interface CompareObjectItem {
   /**
-      * 数据库名
+   * 数据库名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbName: string
-
   /**
-      * 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象
+   * 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbMode: string
-
   /**
-      * schema名称
+   * schema名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SchemaName?: string
-
   /**
-      * 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象
+   * 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableMode?: string
-
   /**
-      * 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写
+   * 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tables?: Array<CompareTableItem>
-
   /**
-      * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
+   * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewMode?: string
-
   /**
-      * 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写
+   * 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Views?: Array<CompareViewItem>
 }
 
@@ -1959,77 +1768,62 @@ export interface ConfigureSyncJobRequest {
    * 同步实例id（即标识一个同步作业），形如sync-werwfs23
    */
   JobId: string
-
   /**
    * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路
    */
   SrcAccessType: string
-
   /**
    * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路
    */
   DstAccessType: string
-
   /**
    * 同步库表对象信息
    */
   Objects: Objects
-
   /**
    * 同步任务名称
    */
   JobName?: string
-
   /**
    * 枚举值是 liteMode 和 fullMode ，分别对应精简模式或正常模式
    */
   JobMode?: string
-
   /**
    * 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
    */
   RunMode?: string
-
   /**
    * 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05"
    */
   ExpectRunTime?: string
-
   /**
    * 源端信息，单节点数据库使用，且SrcNodeType传single
    */
   SrcInfo?: Endpoint
-
   /**
    * 源端信息，多节点数据库使用，且SrcNodeType传cluster
    */
   SrcInfos?: SyncDBEndpointInfos
-
   /**
    * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
    */
   SrcNodeType?: string
-
   /**
    * 目标端信息，单节点数据库使用
    */
   DstInfo?: Endpoint
-
   /**
    * 目标端信息，多节点数据库使用，且DstNodeType传cluster
    */
   DstInfos?: SyncDBEndpointInfos
-
   /**
    * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
    */
   DstNodeType?: string
-
   /**
    * 同步任务选项
    */
   Options?: Options
-
   /**
    * 自动重试的时间段、可设置5至720分钟、0表示不重试
    */
@@ -2054,27 +1848,22 @@ export interface MigrateDBItem {
    * 实例ID
    */
   InstanceId: string
-
   /**
    * 实例名称
    */
   InstanceName: string
-
   /**
    * 实例Vip
    */
   Vip: string
-
   /**
    * 实例Vport
    */
   Vport: number
-
   /**
    * 是否可以作为迁移对象，1-可以，0-不可以
    */
   Usable: number
-
   /**
    * 不可以作为迁移对象的原因
    */
@@ -2089,47 +1878,38 @@ export interface DescribeMigrateDBInstancesRequest {
    * 数据库类型，如mysql
    */
   DatabaseType: string
-
   /**
    * 实例作为迁移的源还是目标,src(表示源)，dst(表示目标)
    */
   MigrateRole?: string
-
   /**
    * 云数据库实例ID
    */
   InstanceId?: string
-
   /**
    * 云数据库名称
    */
   InstanceName?: string
-
   /**
    * 返回数量限制
    */
   Limit?: number
-
   /**
    * 偏移量
    */
   Offset?: number
-
   /**
    * 资源所属账号 为空值或self(表示本账号内资源)、other(表示其他账户资源)
    */
   AccountMode?: string
-
   /**
    * 临时密钥Id，若为跨账号资源此项必填
    */
   TmpSecretId?: string
-
   /**
    * 临时密钥Key，若为跨账号资源此项必填
    */
   TmpSecretKey?: string
-
   /**
    * 临时密钥Token，若为跨账号资源此项必填
    */
@@ -2141,21 +1921,19 @@ export interface DescribeMigrateDBInstancesRequest {
  */
 export interface CheckStepInfo {
   /**
-      * 任务开始时间
+   * 任务开始时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartAt: string
-
   /**
-      * 任务结束时间
+   * 任务结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndAt: string
-
   /**
-      * 任务步骤信息
+   * 任务步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress: ProcessProgress
 }
 
@@ -2164,21 +1942,19 @@ export interface CheckStepInfo {
  */
 export interface ProcessStepTip {
   /**
-      * 提示信息
+   * 提示信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message: string
-
   /**
-      * 解决方案
+   * 解决方案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Solution: string
-
   /**
-      * 文档提示
+   * 文档提示
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HelpDoc: string
 }
 
@@ -2190,27 +1966,22 @@ export interface ModifyCompareTaskRequest {
    * 任务 Id
    */
   JobId: string
-
   /**
    * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
    */
   CompareTaskId: string
-
   /**
    * 任务名称
    */
   TaskName?: string
-
   /**
    * 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)、custom(自定义)，注意自定义对比对象必须是迁移对象的子集
    */
   ObjectMode?: string
-
   /**
    * 对比对象，若CompareObjectMode取值为custom，则此项必填
    */
   Objects?: CompareObject
-
   /**
    * 一致性校验选项
    */
@@ -2232,105 +2003,89 @@ export interface RecoverSyncJobRequest {
  */
 export interface Database {
   /**
-      * 需要迁移或同步的库名，当ObjectMode为Partial时，此项必填
+   * 需要迁移或同步的库名，当ObjectMode为Partial时，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbName?: string
-
   /**
-      * 迁移或同步后的库名，默认与源库相同
+   * 迁移或同步后的库名，默认与源库相同
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewDbName?: string
-
   /**
-      * DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。
+   * DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbMode?: string
-
   /**
-      * 迁移或同步的 schema
+   * 迁移或同步的 schema
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SchemaName?: string
-
   /**
-      * 迁移或同步后的 schema name
+   * 迁移或同步后的 schema name
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewSchemaName?: string
-
   /**
-      * 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。
+   * 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableMode?: string
-
   /**
-      * 表图对象集合，当 TableMode 为 Partial 时，此项需要填写
+   * 表图对象集合，当 TableMode 为 Partial 时，此项需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tables?: Array<Table>
-
   /**
-      * 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。
+   * 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewMode?: string
-
   /**
-      * 视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写
+   * 视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Views?: Array<View>
-
   /**
-      * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
+   * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FunctionMode?: string
-
   /**
-      * FunctionMode取值为Partial时需要填写
+   * FunctionMode取值为Partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Functions?: Array<string>
-
   /**
-      * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
+   * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcedureMode?: string
-
   /**
-      * ProcedureMode取值为Partial时需要填写
+   * ProcedureMode取值为Partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Procedures?: Array<string>
-
   /**
-      * 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
+   * 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TriggerMode?: string
-
   /**
-      * 当TriggerMode为partial，指定要迁移的触发器名称
+   * 当TriggerMode为partial，指定要迁移的触发器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Triggers?: Array<string>
-
   /**
-      * 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
+   * 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventMode?: string
-
   /**
-      * 当EventMode为partial，指定要迁移的事件名称
+   * 当EventMode为partial，指定要迁移的事件名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Events?: Array<string>
 }
 
@@ -2339,113 +2094,96 @@ export interface Database {
  */
 export interface JobItem {
   /**
-      * 数据迁移任务ID
+   * 数据迁移任务ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobId: string
-
   /**
-      * 数据迁移任务名称
+   * 数据迁移任务名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobName: string
-
   /**
-      * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime: string
-
   /**
-      * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
-
   /**
-      * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime: string
-
   /**
-      * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime: string
-
   /**
-      * 迁移任务错误信息
+   * 迁移任务错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BriefMsg: string
-
   /**
-      * 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
+   * 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
 pausing(暂停中)、
 manualPaused(已暂停)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
+   * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RunMode: string
-
   /**
-      * 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49
+   * 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpectRunTime: string
-
   /**
-      * 任务操作信息
+   * 任务操作信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Action: MigrateAction
-
   /**
-      * 迁移执行过程信息
+   * 迁移执行过程信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfo: MigrateDetailInfo
-
   /**
-      * 源实例信息
+   * 源实例信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcInfo: DBEndpointInfo
-
   /**
-      * 目标端信息
+   * 目标端信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstInfo: DBEndpointInfo
-
   /**
-      * 数据一致性校验结果
+   * 数据一致性校验结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareTask: CompareTaskInfo
-
   /**
-      * 计费状态信息
+   * 计费状态信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TradeInfo: TradeInfo
-
   /**
-      * 标签信息
+   * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags: Array<TagItem>
-
   /**
-      * 自动重试时间段信息
+   * 自动重试时间段信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AutoRetryTimeRangeMinutes: number
 }
 
@@ -2457,52 +2195,42 @@ export interface DescribeSyncJobsRequest {
    * 同步任务id，如sync-werwfs23
    */
   JobId?: string
-
   /**
    * 同步任务名
    */
   JobName?: string
-
   /**
    * 排序字段，可以取值为CreateTime
    */
   Order?: string
-
   /**
    * 排序方式，升序为ASC，降序为DESC，默认为CreateTime降序
    */
   OrderSeq?: string
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回同步任务实例数量，默认20，有效区间[1,100]
    */
   Limit?: number
-
   /**
    * 状态集合，如Initialized,CheckPass,Running,ResumableErr,Stopped
    */
   Status?: Array<string>
-
   /**
    * 运行模式，如Immediate:立即运行，Timed:定时运行
    */
   RunMode?: string
-
   /**
    * 任务类型，如mysql2mysql：msyql同步到mysql
    */
   JobType?: string
-
   /**
    * 付费类型，PrePay：预付费，PostPay：后付费
    */
   PayMode?: string
-
   /**
    * tag
    */
@@ -2514,57 +2242,49 @@ export interface DescribeSyncJobsRequest {
  */
 export interface SyncDetailInfo {
   /**
-      * 总步骤数
+   * 总步骤数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepAll: number
-
   /**
-      * 当前步骤
+   * 当前步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNow: number
-
   /**
-      * 总体进度
+   * 总体进度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress: number
-
   /**
-      * 当前步骤进度
+   * 当前步骤进度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CurrentStepProgress: number
-
   /**
-      * 同步两端数据量差距
+   * 同步两端数据量差距
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MasterSlaveDistance: number
-
   /**
-      * 同步两端时间差距
+   * 同步两端时间差距
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SecondsBehindMaster: number
-
   /**
-      * 总体描述信息
+   * 总体描述信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message: string
-
   /**
-      * 详细步骤信息
+   * 详细步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfos: Array<StepInfo>
-
   /**
-      * 不能发起一致性校验的原因
+   * 不能发起一致性校验的原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CauseOfCompareDisable?: string
 }
 
@@ -2583,9 +2303,9 @@ export interface ResumeSyncJobRequest {
  */
 export interface CompareTableItem {
   /**
-      * 表名称
+   * 表名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableName?: string
 }
 
@@ -2604,9 +2324,9 @@ export interface ConfigureSyncJobResponse {
  */
 export interface CompareViewItem {
   /**
-      * 视图名
+   * 视图名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewName?: string
 }
 
@@ -2615,51 +2335,44 @@ export interface CompareViewItem {
  */
 export interface StepInfo {
   /**
-      * 步骤编号
+   * 步骤编号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNo?: number
-
   /**
-      * 步骤名
+   * 步骤名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepName?: string
-
   /**
-      * 步骤标号
+   * 步骤标号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepId?: string
-
   /**
-      * 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停)
+   * 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: string
-
   /**
-      * 步骤开始时间，可能为空
+   * 步骤开始时间，可能为空
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime?: string
-
   /**
-      * 错误信息
+   * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Errors?: Array<StepTip>
-
   /**
-      * 警告信息
+   * 警告信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Warnings?: Array<StepTip>
-
   /**
-      * 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度
+   * 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress?: number
 }
 
@@ -2671,7 +2384,6 @@ export interface ResumeMigrateJobRequest {
    * 数据迁移任务ID
    */
   JobId: string
-
   /**
    * 恢复任务的模式，目前的取值有：clearData 清空目标实例数据，overwrite 以覆盖写的方式执行任务，normal 跟正常流程一样，不做额外动作；注意，clearData、overwrite仅对redis生效，normal仅针对非redis链路生效
    */
@@ -2693,69 +2405,59 @@ export interface PauseSyncJobResponse {
  */
 export interface TradeInfo {
   /**
-      * 交易订单号
+   * 交易订单号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DealName: string
-
   /**
-      * 上一次交易订单号
+   * 上一次交易订单号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastDealName: string
-
   /**
-      * 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等
+   * 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceClass: string
-
   /**
-      * 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费)
+   * 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TradeStatus: string
-
   /**
-      * 到期时间，格式为"yyyy-mm-dd hh:mm:ss"
+   * 到期时间，格式为"yyyy-mm-dd hh:mm:ss"
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpireTime: string
-
   /**
-      * 下线时间，格式为"yyyy-mm-dd hh:mm:ss"
+   * 下线时间，格式为"yyyy-mm-dd hh:mm:ss"
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineTime: string
-
   /**
-      * 隔离时间，格式为"yyyy-mm-dd hh:mm:ss"
+   * 隔离时间，格式为"yyyy-mm-dd hh:mm:ss"
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsolateTime: string
-
   /**
-      * 下线原因
+   * 下线原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineReason: string
-
   /**
-      * 隔离原因
+   * 隔离原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsolateReason: string
-
   /**
-      * 付费类型，包括：postpay(后付费)、prepay(预付费)
+   * 付费类型，包括：postpay(后付费)、prepay(预付费)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PayType: string
-
   /**
-      * 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中)
+   * 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BillingType: string
 }
 
@@ -2774,27 +2476,24 @@ export interface StartCompareResponse {
  */
 export interface DynamicOptions {
   /**
-      * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值
+   * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OpTypes: Array<string>
-
   /**
-      * DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值
+   * DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DdlOptions: Array<DdlOption>
-
   /**
-      * 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置
+   * 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConflictHandleType?: string
-
   /**
-      * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段
+   * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ConflictHandleOption?: ConflictHandleOption
 }
 
@@ -2803,11 +2502,10 @@ export interface DynamicOptions {
  */
 export interface CreateCompareTaskResponse {
   /**
-      * 数据对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
+   * 数据对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareTaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2832,12 +2530,10 @@ export interface SkipCheckItemRequest {
    * 数据迁移任务ID
    */
   JobId: string
-
   /**
    * 需要跳过校验项的步骤id，需要通过DescribeMigrationCheckJob接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"]
    */
   StepIds: Array<string>
-
   /**
    * 当出现外键依赖检查导致校验不通过时、可以通过该字段选择是否迁移外键依赖，当StepIds包含ConstraintCheck且该字段值为shield时表示不迁移外键依赖、当StepIds包含ConstraintCheck且值为migrate时表示迁移外键依赖
    */
@@ -2849,87 +2545,74 @@ export interface SkipCheckItemRequest {
  */
 export interface CompareAbstractInfo {
   /**
-      * 校验配置参数
+   * 校验配置参数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Options: CompareOptions
-
   /**
-      * 一致性校验对比对象
+   * 一致性校验对比对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Objects: CompareObject
-
   /**
-      * 对比结论: same,different
+   * 对比结论: same,different
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Conclusion: string
-
   /**
-      * 任务状态: success,failed
+   * 任务状态: success,failed
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 总的表数量
+   * 总的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalTables: number
-
   /**
-      * 已校验的表数量
+   * 已校验的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckedTables: number
-
   /**
-      * 不一致的表数量
+   * 不一致的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DifferentTables: number
-
   /**
-      * 跳过校验的表数量
+   * 跳过校验的表数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SkippedTables: number
-
   /**
-      * 预估表总数
+   * 预估表总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NearlyTableCount: number
-
   /**
-      * 不一致的数据行数量
+   * 不一致的数据行数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DifferentRows: number
-
   /**
-      * 源库行数，当对比类型为**行数对比**时此项有意义
+   * 源库行数，当对比类型为**行数对比**时此项有意义
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcSampleRows: number
-
   /**
-      * 目标库行数，当对比类型为**行数对比**时此项有意义
+   * 目标库行数，当对比类型为**行数对比**时此项有意义
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstSampleRows: number
-
   /**
-      * 开始时间
+   * 开始时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartedAt: string
-
   /**
-      * 结束时间
+   * 结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FinishedAt: string
 }
 
@@ -2938,45 +2621,39 @@ export interface CompareAbstractInfo {
  */
 export interface CheckStep {
   /**
-      * 步骤编号
+   * 步骤编号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNo: number
-
   /**
-      * 步骤Id， 如：ConnectDBCheck、VersionCheck、SrcPrivilegeCheck等，具体校验项和源目标实例相关
+   * 步骤Id， 如：ConnectDBCheck、VersionCheck、SrcPrivilegeCheck等，具体校验项和源目标实例相关
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepId: string
-
   /**
-      * 步骤名称
+   * 步骤名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepName: string
-
   /**
-      * 此检查步骤的结果，pass(校验通过)、failed(校验失败)、notStarted(校验还未开始进行)、blocked(检验阻塞)、warning(校验有告警，但仍通过)
+   * 此检查步骤的结果，pass(校验通过)、failed(校验失败)、notStarted(校验还未开始进行)、blocked(检验阻塞)、warning(校验有告警，但仍通过)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepStatus: string
-
   /**
-      * 此检查步骤的错误消息
+   * 此检查步骤的错误消息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepMessage: string
-
   /**
-      * 每个检查步骤里的具体检查项
+   * 每个检查步骤里的具体检查项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetailCheckItems: Array<DetailCheckItem>
-
   /**
-      * 是否已跳过
+   * 是否已跳过
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HasSkipped: boolean
 }
 
@@ -2985,87 +2662,74 @@ export interface CheckStep {
  */
 export interface CompareTaskItem {
   /**
-      * 任务id
+   * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobId: string
-
   /**
-      * 对比任务 Id
+   * 对比任务 Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareTaskId: string
-
   /**
-      * 对比任务名称
+   * 对比任务名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskName: string
-
   /**
-      * 对比任务状态, 可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
+   * 对比任务状态, 可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 对比任务配置
+   * 对比任务配置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Config: CompareObject
-
   /**
-      * 对比任务校验详情
+   * 对比任务校验详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckProcess: ProcessProgress
-
   /**
-      * 对比任务运行详情
+   * 对比任务运行详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareProcess: ProcessProgress
-
   /**
-      * 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过
+   * 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Conclusion: string
-
   /**
-      * 任务创建时间
+   * 任务创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreatedAt: string
-
   /**
-      * 任务启动时间
+   * 任务启动时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartedAt: string
-
   /**
-      * 对比结束时间
+   * 对比结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FinishedAt: string
-
   /**
-      * 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+   * 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Method: string
-
   /**
-      * 对比配置信息
+   * 对比配置信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Options: CompareOptions
-
   /**
-      * 一致性校验提示信息
+   * 一致性校验提示信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Message: string
 }
 
@@ -3087,7 +2751,6 @@ export interface CreateSyncJobResponse {
    * 同步任务ids
    */
   JobIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3102,22 +2765,18 @@ export interface CreateCompareTaskRequest {
    * 任务 Id
    */
   JobId: string
-
   /**
    * 数据对比任务名称，若为空则默认给CompareTaskId相同值
    */
   TaskName?: string
-
   /**
    * 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)，custom(自定义模式)
    */
   ObjectMode?: string
-
   /**
    * 一致性对比对象配置
    */
   Objects?: CompareObject
-
   /**
    * 一致性校验选项
    */
@@ -3132,7 +2791,6 @@ export interface StartCompareRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
    */
@@ -3154,127 +2812,107 @@ export interface DescribeMigrationCheckJobRequest {
  */
 export interface DescribeMigrationDetailResponse {
   /**
-      * 数据迁移任务ID
+   * 数据迁移任务ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobId?: string
-
   /**
-      * 数据迁移任务名称
+   * 数据迁移任务名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobName?: string
-
   /**
-      * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime?: string
-
   /**
-      * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
-      * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime?: string
-
   /**
-      * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime?: string
-
   /**
-      * 迁移任务简要错误信息
+   * 迁移任务简要错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BriefMsg?: string
-
   /**
-      * 任务状态，取值为：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
+   * 任务状态，取值为：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
 pausing(暂停中)、
 manualPaused(已暂停)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: string
-
   /**
-      * 任务操作信息
+   * 任务操作信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Action?: MigrateAction
-
   /**
-      * 迁移执行过程信息，在校验阶段显示校验过程步骤信息，在迁移阶段会显示迁移步骤信息
+   * 迁移执行过程信息，在校验阶段显示校验过程步骤信息，在迁移阶段会显示迁移步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfo?: MigrateDetailInfo
-
   /**
-      * 源实例信息
+   * 源实例信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcInfo?: DBEndpointInfo
-
   /**
-      * 目标端信息
+   * 目标端信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstInfo?: DBEndpointInfo
-
   /**
-      * 数据一致性校验结果
+   * 数据一致性校验结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompareTask?: CompareTaskInfo
-
   /**
-      * 标签信息
+   * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags?: Array<TagItem>
-
   /**
-      * 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行)
+   * 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RunMode?: string
-
   /**
-      * 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05"
+   * 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05"
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpectRunTime?: string
-
   /**
-      * 迁移选项，描述任务如何执行迁移等一系列配置信息
+   * 迁移选项，描述任务如何执行迁移等一系列配置信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MigrateOption?: MigrateOption
-
   /**
-      * 校验任务运行详情
+   * 校验任务运行详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckStepInfo?: CheckStepInfo
-
   /**
-      * 描述计费相关的信息
+   * 描述计费相关的信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TradeInfo?: TradeInfo
-
   /**
-      * 任务错误信息
+   * 任务错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ErrorInfo?: Array<ErrorInfoItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3299,7 +2937,6 @@ export interface ModifyMigrateNameRequest {
    * 迁移任务id
    */
   JobId: string
-
   /**
    * 修改后的迁移任务名
    */
@@ -3321,27 +2958,24 @@ export interface StartSyncJobResponse {
  */
 export interface Objects {
   /**
-      * 同步对象类型 Partial(部分对象)
+   * 同步对象类型 Partial(部分对象)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Mode?: string
-
   /**
-      * 同步对象，当 Mode 为 Partial 时，不为空
+   * 同步对象，当 Mode 为 Partial 时，不为空
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Databases?: Array<Database>
-
   /**
-      * 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full
+   * 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AdvancedObjects?: Array<string>
-
   /**
-      * OnlineDDL类型，冗余字段不做配置用途
+   * OnlineDDL类型，冗余字段不做配置用途
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OnlineDDL?: OnlineDDL
 }
 
@@ -3360,123 +2994,104 @@ export interface RecoverMigrateJobResponse {
  */
 export interface DBItem {
   /**
-      * 需要迁移或同步的库名，当ObjectMode为partial时，此项必填
+   * 需要迁移或同步的库名，当ObjectMode为partial时，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DbName?: string
-
   /**
-      * 迁移或同步后的库名，默认与源库相同
+   * 迁移或同步后的库名，默认与源库相同
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewDbName?: string
-
   /**
-      * 迁移或同步的 schema
+   * 迁移或同步的 schema
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SchemaName?: string
-
   /**
-      * 迁移或同步后的 schema name
+   * 迁移或同步后的 schema name
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewSchemaName?: string
-
   /**
-      * DB选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当ObjectMode为partial时，此项必填
+   * DB选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当ObjectMode为partial时，此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DBMode?: string
-
   /**
-      * schema选择模式: all(为当前对象下的所有对象)，partial(部分对象)
+   * schema选择模式: all(为当前对象下的所有对象)，partial(部分对象)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SchemaMode?: string
-
   /**
-      * 表选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当DBMode为partial时此项必填
+   * 表选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当DBMode为partial时此项必填
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableMode?: string
-
   /**
-      * 表图对象集合，当 TableMode 为 partial 时，此项需要填写
+   * 表图对象集合，当 TableMode 为 partial 时，此项需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tables?: Array<TableItem>
-
   /**
-      * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
+   * 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewMode?: string
-
   /**
-      * 视图对象集合，当 ViewMode 为 partial 时， 此项需要填写
+   * 视图对象集合，当 ViewMode 为 partial 时， 此项需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Views?: Array<ViewItem>
-
   /**
-      * postgresql独有参数，角色选择模式: all 为当前对象下的所有角色对象,partial 为部分角色对象
+   * postgresql独有参数，角色选择模式: all 为当前对象下的所有角色对象,partial 为部分角色对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleMode?: string
-
   /**
-      * postgresql独有参数，当 RoleMode 为 partial 时， 此项需要填写
+   * postgresql独有参数，当 RoleMode 为 partial 时， 此项需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Roles?: Array<RoleItem>
-
   /**
-      * 选择要同步的模式，partial为部分，all为整选
+   * 选择要同步的模式，partial为部分，all为整选
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FunctionMode?: string
-
   /**
-      * 选择要同步的模式，partial为部分，all为整选
+   * 选择要同步的模式，partial为部分，all为整选
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TriggerMode?: string
-
   /**
-      * 选择要同步的模式，partial为部分，all为整选
+   * 选择要同步的模式，partial为部分，all为整选
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventMode?: string
-
   /**
-      * 选择要同步的模式，partial为部分，all为整选
+   * 选择要同步的模式，partial为部分，all为整选
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcedureMode?: string
-
   /**
-      * FunctionMode取值为partial时需要填写
+   * FunctionMode取值为partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Functions?: Array<string>
-
   /**
-      * ProcedureMode取值为partial时需要填写
+   * ProcedureMode取值为partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Procedures?: Array<string>
-
   /**
-      * EventMode取值为partial时需要填写
+   * EventMode取值为partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Events?: Array<string>
-
   /**
-      * TriggerMode取值为partial时需要填写
+   * TriggerMode取值为partial时需要填写
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Triggers?: Array<string>
 }
 
@@ -3488,7 +3103,6 @@ export interface DeleteCompareTaskRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
    */
@@ -3500,33 +3114,29 @@ export interface DeleteCompareTaskRequest {
  */
 export interface MigrateDetailInfo {
   /**
-      * 总步骤数
+   * 总步骤数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepAll: number
-
   /**
-      * 当前步骤
+   * 当前步骤
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNow: number
-
   /**
-      * 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
+   * 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MasterSlaveDistance: number
-
   /**
-      * 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
+   * 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SecondsBehindMaster: number
-
   /**
-      * 步骤信息
+   * 步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepInfo: Array<StepDetailInfo>
 }
 
@@ -3555,183 +3165,154 @@ export interface IsolateMigrateJobResponse {
  */
 export interface SyncJobInfo {
   /**
-      * 同步任务id，如：sync-btso140
+   * 同步任务id，如：sync-btso140
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobId: string
-
   /**
-      * 同步任务名
+   * 同步任务名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JobName: string
-
   /**
-      * 付款方式，PostPay(按量付费)、PrePay(包年包月)
+   * 付款方式，PostPay(按量付费)、PrePay(包年包月)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PayMode: string
-
   /**
-      * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
+   * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RunMode: string
-
   /**
-      * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpectRunTime: string
-
   /**
-      * 支持的所有操作
+   * 支持的所有操作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AllActions: Array<string>
-
   /**
-      * 当前状态能进行的操作
+   * 当前状态能进行的操作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Actions: Array<string>
-
   /**
-      * 同步选项
+   * 同步选项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Options: Options
-
   /**
-      * 同步库表对象
+   * 同步库表对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Objects: Objects
-
   /**
-      * 任务规格
+   * 任务规格
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Specification: string
-
   /**
-      * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpireTime: string
-
   /**
-      * 源端地域，如：ap-guangzhou等
+   * 源端地域，如：ap-guangzhou等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcRegion: string
-
   /**
-      * 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+   * 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcDatabaseType: string
-
   /**
-      * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
+   * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcAccessType: string
-
   /**
-      * 源端信息，单节点数据库使用
+   * 源端信息，单节点数据库使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcInfo: Endpoint
-
   /**
-      * 目标端地域，如：ap-guangzhou等
+   * 目标端地域，如：ap-guangzhou等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstRegion: string
-
   /**
-      * 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+   * 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstDatabaseType: string
-
   /**
-      * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
+   * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstAccessType: string
-
   /**
-      * 目标端信息，单节点数据库使用
+   * 目标端信息，单节点数据库使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstInfo: Endpoint
-
   /**
-      * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime: string
-
   /**
-      * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime: string
-
   /**
-      * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
+   * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime: string
-
   /**
-      * 标签相关信息
+   * 标签相关信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags: Array<TagItem>
-
   /**
-      * 同步任务运行步骤信息
+   * 同步任务运行步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Detail: SyncDetailInfo
-
   /**
-      * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
+   * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TradeStatus: string
-
   /**
-      * 同步链路规格，如micro,small,medium,large
+   * 同步链路规格，如micro,small,medium,large
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceClass: string
-
   /**
-      * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
+   * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AutoRenew: number
-
   /**
-      * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
+   * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineTime: string
-
   /**
-      * 自动重试时间段设置
+   * 自动重试时间段设置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AutoRetryTimeRangeMinutes: number
 }
 
@@ -3740,21 +3321,19 @@ export interface SyncJobInfo {
  */
 export interface CompareOptions {
   /**
-      * 对比类型：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+   * 对比类型：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Method?: string
-
   /**
-      * 抽样比例;范围0,100
+   * 抽样比例;范围0,100
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SampleRate?: number
-
   /**
-      * 线程数，取值1-5，默认为1
+   * 线程数，取值1-5，默认为1
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ThreadCount?: number
 }
 
@@ -3773,15 +3352,14 @@ export interface ModifySyncJobConfigResponse {
  */
 export interface RoleItem {
   /**
-      * 角色名称
+   * 角色名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleName?: string
-
   /**
-      * 迁移后的角色名称
+   * 迁移后的角色名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewRoleName?: string
 }
 
@@ -3793,7 +3371,6 @@ export interface TagFilter {
    * 标签键值
    */
   TagKey: string
-
   /**
    * 标签值
    */
@@ -3805,57 +3382,49 @@ export interface TagFilter {
  */
 export interface StepDetailInfo {
   /**
-      * 步骤序列
+   * 步骤序列
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepNo: number
-
   /**
-      * 步骤展现名称
+   * 步骤展现名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepName: string
-
   /**
-      * 步骤英文标识
+   * 步骤英文标识
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepId: string
-
   /**
-      * 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted
+   * 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 注意：此字段可能返回 null，表示取不到有效值。
+   * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime: string
-
   /**
-      * 步骤错误信息
+   * 步骤错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StepMessage: string
-
   /**
-      * 执行进度
+   * 执行进度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Percent: number
-
   /**
-      * 错误信息
+   * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Errors: Array<ProcessStepTip>
-
   /**
-      * 告警提示
+   * 告警提示
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Warnings: Array<ProcessStepTip>
 }
 
@@ -3867,57 +3436,46 @@ export interface CreateSyncJobRequest {
    * 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量)
    */
   PayMode: string
-
   /**
    * 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
    */
   SrcDatabaseType: string
-
   /**
    * 源端数据库所在地域,如ap-guangzhou
    */
   SrcRegion: string
-
   /**
    * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka等
    */
   DstDatabaseType: string
-
   /**
    * 目标端数据库所在地域,如ap-guangzhou
    */
   DstRegion: string
-
   /**
    * 同步任务规格，Standard:标准版
    */
   Specification?: string
-
   /**
    * 标签信息
    */
   Tags?: Array<TagItem>
-
   /**
    * 一次购买的同步任务数量，取值范围为[1, 10]，默认为1
    */
   Count?: number
-
   /**
    * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费，默认为此值）
    */
   AutoRenew?: number
-
   /**
    * 同步链路规格，如micro,small,medium,large，默认为medium
    */
   InstanceClass?: string
-
   /**
    * 同步任务名称
    */
   JobName?: string
-
   /**
    * 创建类似任务的现有任务Id
    */
@@ -3929,15 +3487,14 @@ export interface CreateSyncJobRequest {
  */
 export interface ViewItem {
   /**
-      * 视图名称
+   * 视图名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewName?: string
-
   /**
-      * 迁移后的视图名称
+   * 迁移后的视图名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewViewName?: string
 }
 
@@ -3949,47 +3506,38 @@ export interface DescribeCompareReportRequest {
    * 迁移任务 Id
    */
   JobId: string
-
   /**
    * 校验任务 Id
    */
   CompareTaskId: string
-
   /**
    * 校验不一致结果的 limit
    */
   DifferenceLimit?: number
-
   /**
    * 不一致的 Offset
    */
   DifferenceOffset?: number
-
   /**
    * 搜索条件，不一致的库名
    */
   DifferenceDB?: string
-
   /**
    * 搜索条件，不一致的表名
    */
   DifferenceTable?: string
-
   /**
    * 未校验的 Limit
    */
   SkippedLimit?: number
-
   /**
    * 未校验的 Offset
    */
   SkippedOffset?: number
-
   /**
    * 搜索条件，未校验的库名
    */
   SkippedDB?: string
-
   /**
    * 搜索条件，未校验的表名
    */
@@ -4001,21 +3549,19 @@ export interface DescribeCompareReportRequest {
  */
 export interface SkippedItem {
   /**
-      * 数据库名
+   * 数据库名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Db: string
-
   /**
-      * 表名
+   * 表名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Table: string
-
   /**
-      * 未发起检查的原因
+   * 未发起检查的原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Reason: string
 }
 
@@ -4024,15 +3570,14 @@ export interface SkippedItem {
  */
 export interface View {
   /**
-      * view名
+   * view名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ViewName?: string
-
   /**
-      * 预留字段、目前暂时不支持view的重命名
+   * 预留字段、目前暂时不支持view的重命名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewViewName?: string
 }
 
@@ -4041,15 +3586,14 @@ export interface View {
  */
 export interface TagItem {
   /**
-      * 标签键
+   * 标签键
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagKey?: string
-
   /**
-      * 标签值
+   * 标签值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagValue?: string
 }
 
@@ -4068,9 +3612,9 @@ export interface RecoverMigrateJobRequest {
  */
 export interface OnlineDDL {
   /**
-      * 状态
+   * 状态
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
 }
 
@@ -4079,21 +3623,19 @@ export interface OnlineDDL {
  */
 export interface DatabaseTableObject {
   /**
-      * 迁移对象类型 all(全实例)，partial(部分对象)
+   * 迁移对象类型 all(全实例)，partial(部分对象)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ObjectMode: string
-
   /**
-      * 迁移对象，当 ObjectMode 为 partial 时，不为空
+   * 迁移对象，当 ObjectMode 为 partial 时，不为空
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Databases?: Array<DBItem>
-
   /**
-      * 高级对象类型，如trigger、function、procedure、event
+   * 高级对象类型，如trigger、function、procedure、event
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AdvancedObjects?: Array<string>
 }
 
@@ -4112,33 +3654,29 @@ export interface PauseMigrateJobResponse {
  */
 export interface Table {
   /**
-      * 表名
+   * 表名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableName?: string
-
   /**
-      * 新表名
+   * 新表名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewTableName?: string
-
   /**
-      * 过滤条件
+   * 过滤条件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FilterCondition?: string
-
   /**
-      * 同步临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在同步过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。
+   * 同步临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在同步过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TmpTables?: Array<string>
-
   /**
-      * 编辑表类型，rename(表映射)，pt(同步附加表)
+   * 编辑表类型，rename(表映射)，pt(同步附加表)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableEditMode?: string
 }
 
@@ -4147,15 +3685,14 @@ export interface Table {
  */
 export interface CompareDetailInfo {
   /**
-      * 数据不一致的表详情
+   * 数据不一致的表详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Difference: DifferenceDetail
-
   /**
-      * 跳过校验的表详情
+   * 跳过校验的表详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Skipped: SkippedDetail
 }
 
@@ -4174,8 +3711,8 @@ export interface StartMigrateJobResponse {
  */
 export interface ConsistencyOption {
   /**
-      * 一致性检测类型: full(全量检测迁移对象)、noCheck(不检测)、notConfigured(未配置)
+   * 一致性检测类型: full(全量检测迁移对象)、noCheck(不检测)、notConfigured(未配置)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Mode?: string
 }

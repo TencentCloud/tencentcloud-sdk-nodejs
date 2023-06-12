@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyExtendedService(req: ModifyExtendedServiceRequest, cb?: (error: string, rep: ModifyExtendedServiceResponse) => void): Promise<ModifyExtendedServiceResponse>;
     /**
-     * 上传了word、excel文件后，通过该接口发起文件转换任务，将word、excel文件转换为pdf文件。
+     * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
      */
     ChannelCreateConvertTaskApi(req: ChannelCreateConvertTaskApiRequest, cb?: (error: string, rep: ChannelCreateConvertTaskApiResponse) => void): Promise<ChannelCreateConvertTaskApiResponse>;
     /**

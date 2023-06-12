@@ -3,18 +3,18 @@
  */
 export interface DescribeOrganizationAuthNodeResponse {
     /**
-      * 总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 条目详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 条目详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items?: Array<AuthNode>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -22,12 +22,12 @@ export interface DescribeOrganizationAuthNodeResponse {
  */
 export interface OrgPermission {
     /**
-      * 权限Id
-      */
+     * 权限Id
+     */
     Id: number;
     /**
-      * 权限名
-      */
+     * 权限名
+     */
     Name: string;
 }
 /**
@@ -35,16 +35,16 @@ export interface OrgPermission {
  */
 export interface BindOrganizationMemberAuthAccountRequest {
     /**
-      * 成员Uin。
-      */
+     * 成员Uin。
+     */
     MemberUin: number;
     /**
-      * 策略ID。可以调用DescribeOrganizationMemberPolicies获取
-      */
+     * 策略ID。可以调用DescribeOrganizationMemberPolicies获取
+     */
     PolicyId: number;
     /**
-      * 组织管理员子账号Uin列表。最大5个
-      */
+     * 组织管理员子账号Uin列表。最大5个
+     */
     OrgSubAccountUins: Array<number>;
 }
 /**
@@ -52,8 +52,8 @@ export interface BindOrganizationMemberAuthAccountRequest {
  */
 export interface UpdateOrganizationMemberEmailBindResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -61,8 +61,8 @@ export interface UpdateOrganizationMemberEmailBindResponse {
  */
 export interface DeleteOrganizationMembersResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -70,89 +70,89 @@ export interface DeleteOrganizationMembersResponse {
  */
 export interface OrgMember {
     /**
-      * 成员Uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MemberUin: number;
     /**
-      * 成员名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 成员类型，邀请：Invite， 创建：Create
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员类型，邀请：Invite， 创建：Create
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MemberType: string;
     /**
-      * 关系策略类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关系策略类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPolicyType: string;
     /**
-      * 关系策略名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关系策略名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPolicyName: string;
     /**
-      * 关系策略权限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关系策略权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPermission: Array<OrgPermission>;
     /**
-      * 所属节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 所属节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeId: number;
     /**
-      * 所属节点名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 所属节点名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeName: string;
     /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Remark: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
     /**
-      * 是否允许成员退出。允许：Allow，不允许：Denied。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否允许成员退出。允许：Allow，不允许：Denied。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsAllowQuit: string;
     /**
-      * 代付者Uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 代付者Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayUin: string;
     /**
-      * 代付者名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 代付者名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayName: string;
     /**
-      * 管理身份
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 管理身份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgIdentity: Array<MemberIdentity>;
     /**
-      * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BindStatus: string;
     /**
-      * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PermissionStatus: string;
 }
 /**
@@ -160,8 +160,8 @@ export interface OrgMember {
  */
 export interface MoveOrganizationNodeMembersResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -169,16 +169,16 @@ export interface MoveOrganizationNodeMembersResponse {
  */
 export interface DescribeOrganizationMemberAuthIdentitiesRequest {
     /**
-      * 偏移量。取值是limit的整数倍，默认值 : 0
-      */
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
     Offset: number;
     /**
-      * 限制数目。取值范围：1~50，默认值：10
-      */
+     * 限制数目。取值范围：1~50，默认值：10
+     */
     Limit: number;
     /**
-      * 组织成员Uin。
-      */
+     * 组织成员Uin。
+     */
     MemberUin: number;
 }
 /**
@@ -186,8 +186,8 @@ export interface DescribeOrganizationMemberAuthIdentitiesRequest {
  */
 export interface AddOrganizationMemberEmailResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -195,8 +195,8 @@ export interface AddOrganizationMemberEmailResponse {
  */
 export interface UpdateOrganizationNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -204,20 +204,20 @@ export interface UpdateOrganizationNodeResponse {
  */
 export interface CreateOrganizationMemberPolicyRequest {
     /**
-      * 成员Uin。
-      */
+     * 成员Uin。
+     */
     MemberUin: number;
     /**
-      * 策略名。最大长度为128个字符，支持英文字母、数字、符号+=,.@_-
-      */
+     * 策略名。最大长度为128个字符，支持英文字母、数字、符号+=,.@_-
+     */
     PolicyName: string;
     /**
-      * 成员访问身份ID。可以调用DescribeOrganizationMemberAuthIdentities获取
-      */
+     * 成员访问身份ID。可以调用DescribeOrganizationMemberAuthIdentities获取
+     */
     IdentityId: number;
     /**
-      * 描述。
-      */
+     * 描述。
+     */
     Description?: string;
 }
 /**
@@ -225,12 +225,12 @@ export interface CreateOrganizationMemberPolicyRequest {
  */
 export interface DescribeOrganizationRequest {
     /**
-      * 国际站：en，国内站：zh
-      */
+     * 国际站：en，国内站：zh
+     */
     Lang?: string;
     /**
-      * 可信服务产品简称。查询是否该可信服务管理员时必须指定
-      */
+     * 可信服务产品简称。查询是否该可信服务管理员时必须指定
+     */
     Product?: string;
 }
 /**
@@ -238,12 +238,12 @@ export interface DescribeOrganizationRequest {
  */
 export interface DescribeOrganizationNodesRequest {
     /**
-      * 限制数目。最大50
-      */
+     * 限制数目。最大50
+     */
     Limit: number;
     /**
-      * 偏移量。
-      */
+     * 偏移量。
+     */
     Offset: number;
 }
 /**
@@ -251,8 +251,8 @@ export interface DescribeOrganizationNodesRequest {
  */
 export interface BindOrganizationMemberAuthAccountResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -260,13 +260,13 @@ export interface BindOrganizationMemberAuthAccountResponse {
  */
 export interface CreateOrganizationMemberResponse {
     /**
-      * 成员Uin。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Uin: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -274,12 +274,12 @@ export interface CreateOrganizationMemberResponse {
  */
 export interface MoveOrganizationNodeMembersRequest {
     /**
-      * 组织节点ID。
-      */
+     * 组织节点ID。
+     */
     NodeId: number;
     /**
-      * 成员UIN列表。
-      */
+     * 成员UIN列表。
+     */
     MemberUin: Array<number>;
 }
 /**
@@ -287,24 +287,24 @@ export interface MoveOrganizationNodeMembersRequest {
  */
 export interface ListOrganizationIdentityRequest {
     /**
-      * 偏移量。取值是limit的整数倍。默认值 : 0。
-      */
+     * 偏移量。取值是limit的整数倍。默认值 : 0。
+     */
     Offset: number;
     /**
-      * 限制数目。取值范围：1~50。默认值：10。
-      */
+     * 限制数目。取值范围：1~50。默认值：10。
+     */
     Limit: number;
     /**
-      * 名称搜索关键字。
-      */
+     * 名称搜索关键字。
+     */
     SearchKey?: string;
     /**
-      * 身份ID搜索。
-      */
+     * 身份ID搜索。
+     */
     IdentityId?: number;
     /**
-      * 身份类型。取值范围 1-预设, 2-自定义
-      */
+     * 身份类型。取值范围 1-预设, 2-自定义
+     */
     IdentityType?: number;
 }
 /**
@@ -312,19 +312,19 @@ export interface ListOrganizationIdentityRequest {
  */
 export interface AuthNode {
     /**
-      * 互信主体关系ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 互信主体关系ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RelationId: number;
     /**
-      * 互信主体名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 互信主体名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AuthName: string;
     /**
-      * 主体管理员
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 主体管理员
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Manager: MemberMainInfo;
 }
 /**
@@ -332,53 +332,53 @@ export interface AuthNode {
  */
 export interface DescribeOrganizationMemberEmailBindResponse {
     /**
-      * 绑定ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 绑定ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BindId: number;
     /**
-      * 申请时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 申请时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ApplyTime: string;
     /**
-      * 邮箱地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 邮箱地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Email: string;
     /**
-      * 手机号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 手机号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Phone: string;
     /**
-      * 绑定状态    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 绑定状态    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BindStatus: string;
     /**
-      * 绑定时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 绑定时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BindTime: string;
     /**
-      * 失败说明
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 失败说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 安全手机绑定状态  未绑定：0，已绑定：1
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 安全手机绑定状态  未绑定：0，已绑定：1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneBind: number;
     /**
-      * 国际区号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 国际区号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CountryCode: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -386,8 +386,8 @@ export interface DescribeOrganizationMemberEmailBindResponse {
  */
 export interface DeleteOrganizationMembersRequest {
     /**
-      * 被删除成员的UIN列表。
-      */
+     * 被删除成员的UIN列表。
+     */
     MemberUin: Array<number>;
 }
 /**
@@ -395,18 +395,18 @@ export interface DeleteOrganizationMembersRequest {
  */
 export interface DescribeOrganizationMemberPoliciesResponse {
     /**
-      * 列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items: Array<OrgMemberPolicy>;
     /**
-      * 总数目。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数目。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -414,8 +414,8 @@ export interface DescribeOrganizationMemberPoliciesResponse {
  */
 export interface DeleteOrganizationNodesRequest {
     /**
-      * 节点ID列表。
-      */
+     * 节点ID列表。
+     */
     NodeId: Array<number>;
 }
 /**
@@ -423,12 +423,12 @@ export interface DeleteOrganizationNodesRequest {
  */
 export interface AddOrganizationNodeResponse {
     /**
-      * 节点ID。
-      */
+     * 节点ID。
+     */
     NodeId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -436,12 +436,12 @@ export interface AddOrganizationNodeResponse {
  */
 export interface IdentityPolicy {
     /**
-      * 策略ID
-      */
+     * 策略ID
+     */
     PolicyId: number;
     /**
-      * 策略名称
-      */
+     * 策略名称
+     */
     PolicyName: string;
 }
 /**
@@ -449,20 +449,20 @@ export interface IdentityPolicy {
  */
 export interface AddOrganizationMemberEmailRequest {
     /**
-      * 成员Uin
-      */
+     * 成员Uin
+     */
     MemberUin: number;
     /**
-      * 邮箱地址
-      */
+     * 邮箱地址
+     */
     Email: string;
     /**
-      * 国际区号
-      */
+     * 国际区号
+     */
     CountryCode: string;
     /**
-      * 手机号
-      */
+     * 手机号
+     */
     Phone: string;
 }
 /**
@@ -470,18 +470,18 @@ export interface AddOrganizationMemberEmailRequest {
  */
 export interface ListOrganizationIdentityResponse {
     /**
-      * 总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 条目详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 条目详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items?: Array<OrgIdentity>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -489,18 +489,18 @@ export interface ListOrganizationIdentityResponse {
  */
 export interface DescribeOrganizationNodesResponse {
     /**
-      * 总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 列表详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 列表详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items: Array<OrgNode>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -508,16 +508,16 @@ export interface DescribeOrganizationNodesResponse {
  */
 export interface DescribeOrganizationMembersResponse {
     /**
-      * 成员列表。
-      */
+     * 成员列表。
+     */
     Items?: Array<OrgMember>;
     /**
-      * 总数目。
-      */
+     * 总数目。
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -525,13 +525,13 @@ export interface DescribeOrganizationMembersResponse {
  */
 export interface CreateOrganizationMemberPolicyResponse {
     /**
-      * 策略ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PolicyId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -539,8 +539,8 @@ export interface CreateOrganizationMemberPolicyResponse {
  */
 export interface CancelOrganizationMemberAuthAccountResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -548,88 +548,88 @@ export interface CancelOrganizationMemberAuthAccountResponse {
  */
 export interface DescribeOrganizationResponse {
     /**
-      * 企业组织ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 企业组织ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgId: number;
     /**
-      * 创建者UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建者UIN。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HostUin: number;
     /**
-      * 创建者昵称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建者昵称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NickName: string;
     /**
-      * 企业组织类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 企业组织类型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgType: number;
     /**
-      * 是否组织管理员。是：true ，否：false
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否组织管理员。是：true ，否：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsManager: boolean;
     /**
-      * 策略类型。财务管理：Financial
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略类型。财务管理：Financial
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPolicyType: string;
     /**
-      * 策略名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPolicyName: string;
     /**
-      * 成员财务权限列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员财务权限列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgPermission: Array<OrgPermission>;
     /**
-      * 组织根节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 组织根节点ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RootNodeId: number;
     /**
-      * 组织创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 组织创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 成员加入时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员加入时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     JoinTime: string;
     /**
-      * 成员是否允许退出。允许：Allow，不允许：Denied
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员是否允许退出。允许：Allow，不允许：Denied
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsAllowQuit: string;
     /**
-      * 代付者Uin。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 代付者Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayUin: string;
     /**
-      * 代付者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 代付者名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayName: string;
     /**
-      * 是否可信服务管理员。是：true，否：false
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否可信服务管理员。是：true，否：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsAssignManager: boolean;
     /**
-      * 是否实名主体管理员。是：true，否：false
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否实名主体管理员。是：true，否：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsAuthManager: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -637,20 +637,20 @@ export interface DescribeOrganizationResponse {
  */
 export interface DescribeOrganizationMemberPoliciesRequest {
     /**
-      * 偏移量。
-      */
+     * 偏移量。
+     */
     Offset: number;
     /**
-      * 限制数目。最大50
-      */
+     * 限制数目。最大50
+     */
     Limit: number;
     /**
-      * 成员Uin。
-      */
+     * 成员Uin。
+     */
     MemberUin: number;
     /**
-      * 搜索关键字。可用于策略名或描述搜索
-      */
+     * 搜索关键字。可用于策略名或描述搜索
+     */
     SearchKey?: string;
 }
 /**
@@ -658,16 +658,16 @@ export interface DescribeOrganizationMemberPoliciesRequest {
  */
 export interface AddOrganizationNodeRequest {
     /**
-      * 父节点ID。可以调用DescribeOrganizationNodes获取
-      */
+     * 父节点ID。可以调用DescribeOrganizationNodes获取
+     */
     ParentNodeId: number;
     /**
-      * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
-      */
+     * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+     */
     Name: string;
     /**
-      * 备注。
-      */
+     * 备注。
+     */
     Remark?: string;
 }
 /**
@@ -675,18 +675,18 @@ export interface AddOrganizationNodeRequest {
  */
 export interface DescribeOrganizationMemberAuthIdentitiesResponse {
     /**
-      * 授权身份列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 授权身份列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items?: Array<OrgMemberAuthIdentity>;
     /**
-      * 总数目。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数目。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -694,44 +694,44 @@ export interface DescribeOrganizationMemberAuthIdentitiesResponse {
  */
 export interface OrgMemberPolicy {
     /**
-      * 策略ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PolicyId: number;
     /**
-      * 策略名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PolicyName: string;
     /**
-      * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityId: number;
     /**
-      * 身份角色名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleName: string;
     /**
-      * 身份角色别名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleAliasName: string;
     /**
-      * 描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
 }
 /**
@@ -739,16 +739,16 @@ export interface OrgMemberPolicy {
  */
 export interface DescribeOrganizationAuthNodeRequest {
     /**
-      * 偏移量。
-      */
+     * 偏移量。
+     */
     Offset: number;
     /**
-      * 限制数目。最大50
-      */
+     * 限制数目。最大50
+     */
     Limit: number;
     /**
-      * 互信主体名称。
-      */
+     * 互信主体名称。
+     */
     AuthName?: string;
 }
 /**
@@ -756,16 +756,16 @@ export interface DescribeOrganizationAuthNodeRequest {
  */
 export interface UpdateOrganizationNodeRequest {
     /**
-      * 节点ID。
-      */
+     * 节点ID。
+     */
     NodeId: number;
     /**
-      * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
-      */
+     * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+     */
     Name?: string;
     /**
-      * 备注。
-      */
+     * 备注。
+     */
     Remark?: string;
 }
 /**
@@ -773,20 +773,20 @@ export interface UpdateOrganizationNodeRequest {
  */
 export interface DescribeOrganizationMemberAuthAccountsRequest {
     /**
-      * 偏移量。
-      */
+     * 偏移量。
+     */
     Offset: number;
     /**
-      * 限制数目。
-      */
+     * 限制数目。
+     */
     Limit: number;
     /**
-      * 成员Uin。
-      */
+     * 成员Uin。
+     */
     MemberUin: number;
     /**
-      * 策略ID。
-      */
+     * 策略ID。
+     */
     PolicyId: number;
 }
 /**
@@ -794,16 +794,16 @@ export interface DescribeOrganizationMemberAuthAccountsRequest {
  */
 export interface CancelOrganizationMemberAuthAccountRequest {
     /**
-      * 成员Uin。
-      */
+     * 成员Uin。
+     */
     MemberUin: number;
     /**
-      * 策略ID。
-      */
+     * 策略ID。
+     */
     PolicyId: number;
     /**
-      * 组织子账号Uin。
-      */
+     * 组织子账号Uin。
+     */
     OrgSubAccountUin: number;
 }
 /**
@@ -811,8 +811,8 @@ export interface CancelOrganizationMemberAuthAccountRequest {
  */
 export interface DeleteOrganizationNodesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -820,8 +820,8 @@ export interface DeleteOrganizationNodesResponse {
  */
 export interface DescribeOrganizationMemberEmailBindRequest {
     /**
-      * 成员Uin
-      */
+     * 成员Uin
+     */
     MemberUin: number;
 }
 /**
@@ -829,18 +829,18 @@ export interface DescribeOrganizationMemberEmailBindRequest {
  */
 export interface DescribeOrganizationMemberAuthAccountsResponse {
     /**
-      * 列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Items: Array<OrgMemberAuthAccount>;
     /**
-      * 总数目
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -848,49 +848,49 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
  */
 export interface OrgMemberAuthAccount {
     /**
-      * 组织子账号Uin。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 组织子账号Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgSubAccountUin: number;
     /**
-      * 策略ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PolicyId: number;
     /**
-      * 策略名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PolicyName: string;
     /**
-      * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityId: number;
     /**
-      * 身份角色名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleName: string;
     /**
-      * 身份角色别名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleAliasName: string;
     /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
     /**
-      * 子账号名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 子账号名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OrgSubAccountName: string;
 }
 /**
@@ -898,39 +898,39 @@ export interface OrgMemberAuthAccount {
  */
 export interface OrgMemberAuthIdentity {
     /**
-      * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityId: number;
     /**
-      * 身份的角色名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份的角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleName: string;
     /**
-      * 身份的角色别名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份的角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityRoleAliasName: string;
     /**
-      * 描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
     /**
-      * 身份类型。取值： 1-预设  2-自定义
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份类型。取值： 1-预设  2-自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityType?: number;
 }
 /**
@@ -938,14 +938,14 @@ export interface OrgMemberAuthIdentity {
  */
 export interface MemberMainInfo {
     /**
-      * 成员uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MemberUin: number;
     /**
-      * 成员名称j
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成员名称j
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MemberName: string;
 }
 /**
@@ -953,44 +953,44 @@ export interface MemberMainInfo {
  */
 export interface CreateOrganizationMemberRequest {
     /**
-      * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
-      */
+     * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+     */
     Name: string;
     /**
-      * 关系策略。取值：Financial
-      */
+     * 关系策略。取值：Financial
+     */
     PolicyType: string;
     /**
-      * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
-      */
+     * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
+     */
     PermissionIds: Array<number>;
     /**
-      * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
-      */
+     * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
+     */
     NodeId: number;
     /**
-      * 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
-      */
+     * 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+     */
     AccountName: string;
     /**
-      * 备注。
-      */
+     * 备注。
+     */
     Remark?: string;
     /**
-      * 成员创建记录ID。创建异常重试时需要
-      */
+     * 成员创建记录ID。创建异常重试时需要
+     */
     RecordId?: number;
     /**
-      * 代付者Uin。成员代付费时需要
-      */
+     * 代付者Uin。成员代付费时需要
+     */
     PayUin?: string;
     /**
-      * 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持
-      */
+     * 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持
+     */
     IdentityRoleID?: Array<number>;
     /**
-      * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
-      */
+     * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
+     */
     AuthRelationId?: number;
 }
 /**
@@ -998,34 +998,34 @@ export interface CreateOrganizationMemberRequest {
  */
 export interface OrgIdentity {
     /**
-      * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityId: number;
     /**
-      * 身份名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityAliasName: string;
     /**
-      * 描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 身份策略。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份策略。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityPolicy: Array<IdentityPolicy>;
     /**
-      * 身份类型。 1-预设、 2-自定义
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份类型。 1-预设、 2-自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityType: number;
     /**
-      * 更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
 }
 /**
@@ -1033,28 +1033,28 @@ export interface OrgIdentity {
  */
 export interface DescribeOrganizationMembersRequest {
     /**
-      * 偏移量。取值是limit的整数倍，默认值 : 0
-      */
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
     Offset: number;
     /**
-      * 限制数目。取值范围：1~50，默认值：10
-      */
+     * 限制数目。取值范围：1~50，默认值：10
+     */
     Limit: number;
     /**
-      * 国际站：en，国内站：zh
-      */
+     * 国际站：en，国内站：zh
+     */
     Lang?: string;
     /**
-      * 成员名称或者成员ID搜索。
-      */
+     * 成员名称或者成员ID搜索。
+     */
     SearchKey?: string;
     /**
-      * 主体名称搜索。
-      */
+     * 主体名称搜索。
+     */
     AuthName?: string;
     /**
-      * 可信服务产品简称。可信服务管理员查询时必须指定
-      */
+     * 可信服务产品简称。可信服务管理员查询时必须指定
+     */
     Product?: string;
 }
 /**
@@ -1062,14 +1062,14 @@ export interface DescribeOrganizationMembersRequest {
  */
 export interface MemberIdentity {
     /**
-      * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityId: number;
     /**
-      * 身份名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 身份名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IdentityAliasName: string;
 }
 /**
@@ -1077,24 +1077,24 @@ export interface MemberIdentity {
  */
 export interface UpdateOrganizationMemberEmailBindRequest {
     /**
-      * 成员Uin
-      */
+     * 成员Uin
+     */
     MemberUin: number;
     /**
-      * 绑定ID
-      */
+     * 绑定ID
+     */
     BindId: number;
     /**
-      * 邮箱
-      */
+     * 邮箱
+     */
     Email: string;
     /**
-      * 国际区号
-      */
+     * 国际区号
+     */
     CountryCode: string;
     /**
-      * 手机号
-      */
+     * 手机号
+     */
     Phone: string;
 }
 /**
@@ -1102,33 +1102,33 @@ export interface UpdateOrganizationMemberEmailBindRequest {
  */
 export interface OrgNode {
     /**
-      * 组织节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 组织节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodeId: number;
     /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 父节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 父节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ParentNodeId: number;
     /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Remark: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
 }

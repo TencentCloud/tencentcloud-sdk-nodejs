@@ -3,31 +3,31 @@
  */
 export interface CredentialStatus {
     /**
-      * 凭证唯一id
-      */
+     * 凭证唯一id
+     */
     CredentialId: string;
     /**
-      * 凭证状态（0：吊销；1：有效）
-      */
+     * 凭证状态（0：吊销；1：有效）
+     */
     Status: number;
     /**
-      * 凭证颁发者Did
-      */
+     * 凭证颁发者Did
+     */
     Issuer: string;
     /**
-      * 凭证摘要
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 凭证摘要
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Digest: string;
     /**
-      * 凭证签名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 凭证签名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Signature: string;
     /**
-      * 更新时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TimeStamp: number;
 }
 /**
@@ -35,8 +35,8 @@ export interface CredentialStatus {
  */
 export interface QueryPolicyRequest {
     /**
-      * policy索引
-      */
+     * policy索引
+     */
     PolicyIndex: number;
 }
 /**
@@ -44,12 +44,12 @@ export interface QueryPolicyRequest {
  */
 export interface RegisterClaimPolicyRequest {
     /**
-      * Cpt索引
-      */
+     * Cpt索引
+     */
     CptIndex: number;
     /**
-      * 披露策略
-      */
+     * 披露策略
+     */
     Policy: string;
 }
 /**
@@ -57,12 +57,12 @@ export interface RegisterClaimPolicyRequest {
  */
 export interface GetDidServiceDetailResponse {
     /**
-      * did服务信息
-      */
+     * did服务信息
+     */
     DidService: DidServiceInfo;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -70,12 +70,12 @@ export interface GetDidServiceDetailResponse {
  */
 export interface CreateCredentialResponse {
     /**
-      * Credential的具体信息
-      */
+     * Credential的具体信息
+     */
     CredentialData: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -87,8 +87,8 @@ export declare type GetConsortiumListRequest = null;
  */
 export interface DownCptResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -96,12 +96,12 @@ export interface DownCptResponse {
  */
 export interface GetCredentialIssueTrendResponse {
     /**
-      * Trend集合
-      */
+     * Trend集合
+     */
     Trend: Array<Trend>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -109,20 +109,20 @@ export interface GetCredentialIssueTrendResponse {
  */
 export interface CreateCredentialRequest {
     /**
-      * 参数集合，详见示例
-      */
+     * 参数集合，详见示例
+     */
     FunctionArg: FunctionArg;
     /**
-      * 参数集合，详见示例
-      */
+     * 参数集合，详见示例
+     */
     TransactionArg: TransactionArg;
     /**
-      * 版本
-      */
+     * 版本
+     */
     VersionCredential: string;
     /**
-      * 是否未签名
-      */
+     * 是否未签名
+     */
     UnSigned?: boolean;
 }
 /**
@@ -130,12 +130,12 @@ export interface CreateCredentialRequest {
  */
 export interface CreateDidServiceResponse {
     /**
-      * 服务信息
-      */
+     * 服务信息
+     */
     Task: Task;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -143,12 +143,12 @@ export interface CreateDidServiceResponse {
  */
 export interface GetConsortiumListResponse {
     /**
-      * 联盟列表
-      */
+     * 联盟列表
+     */
     ConsortiumList: Array<ConsortiumItem>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -156,16 +156,16 @@ export interface GetConsortiumListResponse {
  */
 export interface GetCredentialCptRankRequest {
     /**
-      * 开始时间（支持到天 2021-4-23）
-      */
+     * 开始时间（支持到天 2021-4-23）
+     */
     StartTime: string;
     /**
-      * 结束时间（支持到天 2021-4-23）
-      */
+     * 结束时间（支持到天 2021-4-23）
+     */
     EndTime: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
 }
 /**
@@ -173,12 +173,12 @@ export interface GetCredentialCptRankRequest {
  */
 export interface GetPolicyListRequest {
     /**
-      * 起始位置
-      */
+     * 起始位置
+     */
     DisplayStart: number;
     /**
-      * 长度
-      */
+     * 长度
+     */
     DisplayLength: number;
 }
 /**
@@ -186,12 +186,12 @@ export interface GetPolicyListRequest {
  */
 export interface GetConsortiumClusterListResponse {
     /**
-      * 网络列表
-      */
+     * 网络列表
+     */
     ClusterList: Array<BcosClusterItem>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -199,44 +199,44 @@ export interface GetConsortiumClusterListResponse {
  */
 export interface Task {
     /**
-      * 任务ID
-      */
+     * 任务ID
+     */
     Id: number;
     /**
-      * 应用ID
-      */
+     * 应用ID
+     */
     AppId: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 服务ID
-      */
+     * 服务ID
+     */
     ServiceId: number;
     /**
-      * 0: 部署中，1:部署成功，其他失败
-      */
+     * 0: 部署中，1:部署成功，其他失败
+     */
     Status: number;
     /**
-      * 错误码
-      */
+     * 错误码
+     */
     ErrorCode: string;
     /**
-      * 错误提示
-      */
+     * 错误提示
+     */
     ErrorMsg: string;
     /**
-      * 生成时间
-      */
+     * 生成时间
+     */
     CreateTime: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
 }
 /**
@@ -244,16 +244,16 @@ export interface Task {
  */
 export interface GetCptListRequest {
     /**
-      * 起始位置
-      */
+     * 起始位置
+     */
     DisplayStart: number;
     /**
-      * 长度
-      */
+     * 长度
+     */
     DisplayLength: number;
     /**
-      * 模板类型，0: 所有模板，1: 系统模板，2: 用户模板，3:普通模板
-      */
+     * 模板类型，0: 所有模板，1: 系统模板，2: 用户模板，3:普通模板
+     */
     CptType?: number;
 }
 /**
@@ -261,20 +261,20 @@ export interface GetCptListRequest {
  */
 export interface GetAuthoritiesListRequest {
     /**
-      * 页码，从1开始
-      */
+     * 页码，从1开始
+     */
     PageNumber: number;
     /**
-      * 每页大小
-      */
+     * 每页大小
+     */
     PageSize: number;
     /**
-      * Did信息
-      */
+     * Did信息
+     */
     Did?: string;
     /**
-      * 权威认证 1:已认证，2:未认证
-      */
+     * 权威认证 1:已认证，2:未认证
+     */
     Status?: number;
 }
 /**
@@ -282,8 +282,8 @@ export interface GetAuthoritiesListRequest {
  */
 export interface GetAgencyTDidRequest {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
 }
 /**
@@ -291,8 +291,8 @@ export interface GetAgencyTDidRequest {
  */
 export interface RemoveHashRequest {
     /**
-      * 合约CNS地址
-      */
+     * 合约CNS地址
+     */
     Hash: string;
 }
 /**
@@ -300,12 +300,12 @@ export interface RemoveHashRequest {
  */
 export interface GetGroupListRequest {
     /**
-      * 0为未部署DID服务的群组，1为已部署DID服务的群组
-      */
+     * 0为未部署DID服务的群组，1为已部署DID服务的群组
+     */
     Status: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
 }
 /**
@@ -313,24 +313,24 @@ export interface GetGroupListRequest {
  */
 export interface Proof {
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     Created: number;
     /**
-      * 创建着did
-      */
+     * 创建着did
+     */
     Creator: string;
     /**
-      * salt值
-      */
+     * salt值
+     */
     SaltJson: string;
     /**
-      * 签名
-      */
+     * 签名
+     */
     SignatureValue: string;
     /**
-      * type类型
-      */
+     * type类型
+     */
     Type: string;
 }
 /**
@@ -338,8 +338,8 @@ export interface Proof {
  */
 export interface GetDeployInfoRequest {
     /**
-      * 合约CNS地址
-      */
+     * 合约CNS地址
+     */
     Hash: string;
 }
 /**
@@ -347,72 +347,72 @@ export interface GetDeployInfoRequest {
  */
 export interface Authority {
     /**
-      * 权威机构ID
-      */
+     * 权威机构ID
+     */
     Id: number;
     /**
-      * Did的ID
-      */
+     * Did的ID
+     */
     DidId: number;
     /**
-      * DID具体信息
-      */
+     * DID具体信息
+     */
     Did: string;
     /**
-      * 机构名称
-      */
+     * 机构名称
+     */
     Name: string;
     /**
-      * 权威认证 1:已认证，2:未认证
-      */
+     * 权威认证 1:已认证，2:未认证
+     */
     Status: number;
     /**
-      * DID服务ID
-      */
+     * DID服务ID
+     */
     DidServiceId: number;
     /**
-      * 应用ID
-      */
+     * 应用ID
+     */
     ContractAppId: number;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
     /**
-      * 注册时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 注册时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RegisterTime: string;
     /**
-      * 认证时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 认证时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RecognizeTime: string;
     /**
-      * 生成时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 生成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreateTime: string;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 合约名称
-      */
+     * 合约名称
+     */
     AppName: string;
     /**
-      * 链上标签
-      */
+     * 链上标签
+     */
     LabelName: string;
 }
 /**
@@ -420,8 +420,8 @@ export interface Authority {
  */
 export interface CreateLabelResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -429,8 +429,8 @@ export interface CreateLabelResponse {
  */
 export interface GetPublicKeyRequest {
     /**
-      * did的具体号码
-      */
+     * did的具体号码
+     */
     Did: string;
 }
 /**
@@ -438,32 +438,32 @@ export interface GetPublicKeyRequest {
  */
 export interface Label {
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     LabelId: number;
     /**
-      * 标签名称
-      */
+     * 标签名称
+     */
     LabelName: string;
     /**
-      * did数量
-      */
+     * did数量
+     */
     DidCount: number;
     /**
-      * 创建者did
-      */
+     * 创建者did
+     */
     Did: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
 }
 /**
@@ -471,12 +471,12 @@ export interface Label {
  */
 export interface GetDidServiceListResponse {
     /**
-      * DID服务列表
-      */
+     * DID服务列表
+     */
     DidServiceList: Array<DidServiceInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -484,12 +484,12 @@ export interface GetDidServiceListResponse {
  */
 export interface DeployByNameResponse {
     /**
-      * 哈希值
-      */
+     * 哈希值
+     */
     Hash: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -497,16 +497,16 @@ export interface DeployByNameResponse {
  */
 export interface CreateLabelRequest {
     /**
-      * 标签名称
-      */
+     * 标签名称
+     */
     LabelName: string;
     /**
-      * 网络Id
-      */
+     * 网络Id
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
 }
 /**
@@ -514,32 +514,32 @@ export interface CreateLabelRequest {
  */
 export interface CreateDidServiceRequest {
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     ConsortiumName: string;
     /**
-      * 联盟ID
-      */
+     * 联盟ID
+     */
     ConsortiumId: number;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 机构名称
-      */
+     * 机构名称
+     */
     AgencyName: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     AppName: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组名称
-      */
+     * 群组名称
+     */
     GroupName: string;
 }
 /**
@@ -547,20 +547,20 @@ export interface CreateDidServiceRequest {
  */
 export interface GetDidClusterDetailResponse {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 组织名称
-      */
+     * 组织名称
+     */
     ConsortiumName: string;
     /**
-      * 区块链组织名称
-      */
+     * 区块链组织名称
+     */
     ChainAgency: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -568,8 +568,8 @@ export interface GetDidClusterDetailResponse {
  */
 export interface RecognizeAuthorityIssuerResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -577,8 +577,8 @@ export interface RecognizeAuthorityIssuerResponse {
  */
 export interface EnableHashResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -586,16 +586,16 @@ export interface EnableHashResponse {
  */
 export interface GetCredentialIssueTrendRequest {
     /**
-      * 开始时间（支持到天 2021-4-23）
-      */
+     * 开始时间（支持到天 2021-4-23）
+     */
     StartTime: string;
     /**
-      * 结束时间（支持到天 2021-4-23）
-      */
+     * 结束时间（支持到天 2021-4-23）
+     */
     EndTime: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
 }
 /**
@@ -603,8 +603,8 @@ export interface GetCredentialIssueTrendRequest {
  */
 export interface EnableHashRequest {
     /**
-      * 合约CNS地址
-      */
+     * 合约CNS地址
+     */
     Hash: string;
 }
 /**
@@ -616,8 +616,8 @@ export declare type GetDidClusterListRequest = null;
  */
 export interface GetCptInfoRequest {
     /**
-      * Cpt索引
-      */
+     * Cpt索引
+     */
     CptIndex: number;
 }
 /**
@@ -625,8 +625,8 @@ export interface GetCptInfoRequest {
  */
 export interface DownCptRequest {
     /**
-      * Cpt索引
-      */
+     * Cpt索引
+     */
     CptIndex: number;
 }
 /**
@@ -634,16 +634,16 @@ export interface DownCptRequest {
  */
 export interface GetCptListResponse {
     /**
-      * cpt数据集合
-      */
+     * cpt数据集合
+     */
     CptDataList: Array<CptListData>;
     /**
-      * 凭证模板总数
-      */
+     * 凭证模板总数
+     */
     AllCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -651,12 +651,12 @@ export interface GetCptListResponse {
  */
 export interface GetCptInfoResponse {
     /**
-      * CptJsonData的具体信息
-      */
+     * CptJsonData的具体信息
+     */
     CptJsonData: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -664,16 +664,16 @@ export interface GetCptInfoResponse {
  */
 export interface GetDidRegisterTrendRequest {
     /**
-      * 开始时间（支持到天 2021-4-23）
-      */
+     * 开始时间（支持到天 2021-4-23）
+     */
     StartTime: string;
     /**
-      * 结束时间（支持到天 2021-4-23）
-      */
+     * 结束时间（支持到天 2021-4-23）
+     */
     EndTime: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
 }
 /**
@@ -681,12 +681,12 @@ export interface GetDidRegisterTrendRequest {
  */
 export interface AddLabelRequest {
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     LabelId: number;
     /**
-      * tdid
-      */
+     * tdid
+     */
     Did: string;
 }
 /**
@@ -694,36 +694,36 @@ export interface AddLabelRequest {
  */
 export interface GetAuthorityIssuerResponse {
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 区块链网络id
-      */
+     * 区块链网络id
+     */
     ClusterId: string;
     /**
-      * 区块链群组id
-      */
+     * 区块链群组id
+     */
     GroupId: number;
     /**
-      * 权威机构did
-      */
+     * 权威机构did
+     */
     Did: string;
     /**
-      * 机构备注信息
-      */
+     * 机构备注信息
+     */
     Remark: string;
     /**
-      * 注册时间
-      */
+     * 注册时间
+     */
     RegisterTime: string;
     /**
-      * 认证时间
-      */
+     * 认证时间
+     */
     RecognizeTime: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -731,12 +731,12 @@ export interface GetAuthorityIssuerResponse {
  */
 export interface CreateSelectiveCredentialResponse {
     /**
-      * 凭证字符串
-      */
+     * 凭证字符串
+     */
     CredentialData: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -744,20 +744,20 @@ export interface CreateSelectiveCredentialResponse {
  */
 export interface VerifyCredentialResponse {
     /**
-      * 是否验证成功
-      */
+     * 是否验证成功
+     */
     Result: boolean;
     /**
-      * 验证返回码
-      */
+     * 验证返回码
+     */
     VerifyCode: number;
     /**
-      * 验证消息
-      */
+     * 验证消息
+     */
     VerifyMessage: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -765,60 +765,60 @@ export interface VerifyCredentialResponse {
  */
 export interface CptListData {
     /**
-      * ID信息
-      */
+     * ID信息
+     */
     Id: number;
     /**
-      * 模版名称
-      */
+     * 模版名称
+     */
     Name: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 服务ID
-      */
+     * 服务ID
+     */
     ServiceId: number;
     /**
-      * 合约应用ID
-      */
+     * 合约应用ID
+     */
     ContractAppId: number;
     /**
-      * 凭证模板ID
-      */
+     * 凭证模板ID
+     */
     CptId: number;
     /**
-      * 模板类型，1: 系统模板，2: 用户模板，3:普通模板
-      */
+     * 模板类型，1: 系统模板，2: 用户模板，3:普通模板
+     */
     CptType: number;
     /**
-      * 凭证模版描述
-      */
+     * 凭证模版描述
+     */
     Description: string;
     /**
-      * 凭证模板Json
-      */
+     * 凭证模板Json
+     */
     CptJson: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
     /**
-      * 创建者DID
-      */
+     * 创建者DID
+     */
     CreatorDid: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     AppName: string;
 }
 /**
@@ -826,20 +826,20 @@ export interface CptListData {
  */
 export interface FunctionArg {
     /**
-      * CPT ID
-      */
+     * CPT ID
+     */
     CptId: number;
     /**
-      * 签发者 did
-      */
+     * 签发者 did
+     */
     Issuer: string;
     /**
-      * 过期时间
-      */
+     * 过期时间
+     */
     ExpirationDate: string;
     /**
-      * 声明
-      */
+     * 声明
+     */
     ClaimJson: string;
 }
 /**
@@ -847,16 +847,16 @@ export interface FunctionArg {
  */
 export interface CreateTDidByPrivateKeyRequest {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 私钥
-      */
+     * 私钥
+     */
     PrivateKey: string;
 }
 /**
@@ -864,16 +864,16 @@ export interface CreateTDidByPrivateKeyRequest {
  */
 export interface RegisterCptResponse {
     /**
-      * 凭证模板索引
-      */
+     * 凭证模板索引
+     */
     Id: number;
     /**
-      * 凭证模板id
-      */
+     * 凭证模板id
+     */
     CptId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -881,8 +881,8 @@ export interface RegisterCptResponse {
  */
 export interface SetCredentialStatusRequest {
     /**
-      * 凭证状态
-      */
+     * 凭证状态
+     */
     CredentialStatus: CredentialStatus;
 }
 /**
@@ -890,8 +890,8 @@ export interface SetCredentialStatusRequest {
  */
 export interface RemoveHashResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -899,8 +899,8 @@ export interface RemoveHashResponse {
  */
 export interface CheckDidDeployRequest {
     /**
-      * 任务ID
-      */
+     * 任务ID
+     */
     TaskId: number;
 }
 /**
@@ -908,16 +908,16 @@ export interface CheckDidDeployRequest {
  */
 export interface GetDidDocumentResponse {
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * DID文档
-      */
+     * DID文档
+     */
     Document: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -925,8 +925,8 @@ export interface GetDidDocumentResponse {
  */
 export interface RegisterIssuerResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -934,8 +934,8 @@ export interface RegisterIssuerResponse {
  */
 export interface CancelAuthorityIssuerRequest {
     /**
-      * did具体信息
-      */
+     * did具体信息
+     */
     Did: string;
 }
 /**
@@ -943,8 +943,8 @@ export interface CancelAuthorityIssuerRequest {
  */
 export interface CancelAuthorityIssuerResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -952,16 +952,16 @@ export interface CancelAuthorityIssuerResponse {
  */
 export interface CreateTDidRequest {
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 部署机构为1，否则为0
-      */
+     * 部署机构为1，否则为0
+     */
     Relegation: number;
 }
 /**
@@ -969,16 +969,16 @@ export interface CreateTDidRequest {
  */
 export interface GetAuthoritiesListResponse {
     /**
-      * 数据集合
-      */
+     * 数据集合
+     */
     ResultList: Array<Authority>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     AllCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -986,12 +986,12 @@ export interface GetAuthoritiesListResponse {
  */
 export interface CreateSelectiveCredentialRequest {
     /**
-      * 参数集合
-      */
+     * 参数集合
+     */
     FunctionArg: VerifyFunctionArg;
     /**
-      * 批露策略id
-      */
+     * 批露策略id
+     */
     PolicyId: number;
 }
 /**
@@ -999,12 +999,12 @@ export interface CreateSelectiveCredentialRequest {
  */
 export interface CreateTDidByPrivateKeyResponse {
     /**
-      * did的具体信息
-      */
+     * did的具体信息
+     */
     Did: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1012,16 +1012,16 @@ export interface CreateTDidByPrivateKeyResponse {
  */
 export interface DeployByNameRequest {
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     ApplicationName: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
 }
 /**
@@ -1029,8 +1029,8 @@ export interface DeployByNameRequest {
  */
 export interface GetDidServiceListRequest {
     /**
-      * 1: 以网络维度输出, 0: 以服务维度输出
-      */
+     * 1: 以网络维度输出, 0: 以服务维度输出
+     */
     Type: number;
 }
 /**
@@ -1038,8 +1038,8 @@ export interface GetDidServiceListRequest {
  */
 export interface GetAuthorityIssuerRequest {
     /**
-      * tdid
-      */
+     * tdid
+     */
     Did: string;
 }
 /**
@@ -1047,12 +1047,12 @@ export interface GetAuthorityIssuerRequest {
  */
 export interface GetDidClusterListResponse {
     /**
-      * DID网络列表
-      */
+     * DID网络列表
+     */
     DidClusterList: Array<DidCluster>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1060,8 +1060,8 @@ export interface GetDidClusterListResponse {
  */
 export interface RecognizeAuthorityIssuerRequest {
     /**
-      * did具体信息
-      */
+     * did具体信息
+     */
     Did: string;
 }
 /**
@@ -1069,8 +1069,8 @@ export interface RecognizeAuthorityIssuerRequest {
  */
 export interface GetCredentialStatusRequest {
     /**
-      * 凭证id
-      */
+     * 凭证id
+     */
     CredentialId: string;
 }
 /**
@@ -1078,16 +1078,16 @@ export interface GetCredentialStatusRequest {
  */
 export interface GetAgencyTDidResponse {
     /**
-      * 固定前缀
-      */
+     * 固定前缀
+     */
     Prefix: string;
     /**
-      * did详情
-      */
+     * did详情
+     */
     Identity: Array<Identity>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1095,64 +1095,64 @@ export interface GetAgencyTDidResponse {
  */
 export interface DidServiceInfo {
     /**
-      * DID服务索引
-      */
+     * DID服务索引
+     */
     Id: number;
     /**
-      * 应用ID
-      */
+     * 应用ID
+     */
     Appid: number;
     /**
-      * 账号唯一标识
-      */
+     * 账号唯一标识
+     */
     Uin: string;
     /**
-      * 联盟id
-      */
+     * 联盟id
+     */
     ConsortiumId: number;
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     ConsortiumName: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 链ID
-      */
+     * 链ID
+     */
     ChainId: string;
     /**
-      * 1为盟主，0为非盟主
-      */
+     * 1为盟主，0为非盟主
+     */
     RoleType: number;
     /**
-      * 机构DID
-      */
+     * 机构DID
+     */
     AgencyDid: string;
     /**
-      * 机构名称
-      */
+     * 机构名称
+     */
     CreateOrg: string;
     /**
-      * 端点
-      */
+     * 端点
+     */
     Endpoint: string;
     /**
-      * 生成时间
-      */
+     * 生成时间
+     */
     CreateTime: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
     /**
-      * 群组名称
-      */
+     * 群组名称
+     */
     GroupName: string;
 }
 /**
@@ -1160,8 +1160,8 @@ export interface DidServiceInfo {
  */
 export interface SetCredentialStatusResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1169,24 +1169,24 @@ export interface SetCredentialStatusResponse {
  */
 export interface CptIssueRank {
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     CptName: string;
     /**
-      * 名次
-      */
+     * 名次
+     */
     Rank: number;
     /**
-      * 颁发量
-      */
+     * 颁发量
+     */
     Count: number;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     ApplyName: string;
     /**
-      * 应用ID
-      */
+     * 应用ID
+     */
     ApplyId: number;
 }
 /**
@@ -1194,12 +1194,12 @@ export interface CptIssueRank {
  */
 export interface GetCredentialCptRankResponse {
     /**
-      * Rank集合
-      */
+     * Rank集合
+     */
     RankIssueResult: Array<CptIssueRank>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1207,8 +1207,8 @@ export interface GetCredentialCptRankResponse {
  */
 export interface TransactionArg {
     /**
-      * 凭证did
-      */
+     * 凭证did
+     */
     InvokerTDid: string;
 }
 /**
@@ -1216,16 +1216,16 @@ export interface TransactionArg {
  */
 export interface RegisterIssuerRequest {
     /**
-      * tdid
-      */
+     * tdid
+     */
     Did: string;
     /**
-      * 权威机构名称
-      */
+     * 权威机构名称
+     */
     Name: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Description: string;
 }
 /**
@@ -1233,16 +1233,16 @@ export interface RegisterIssuerRequest {
  */
 export interface GetDidListResponse {
     /**
-      * 数据列表
-      */
+     * 数据列表
+     */
     DataList: Array<DidData>;
     /**
-      * 数据总条数
-      */
+     * 数据总条数
+     */
     AllCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1250,60 +1250,60 @@ export interface GetDidListResponse {
  */
 export interface GetDeployInfoResponse {
     /**
-      * 合约CNS地址
-      */
+     * 合约CNS地址
+     */
     Hash: string;
     /**
-      * 合约主群组ID
-      */
+     * 合约主群组ID
+     */
     GroupId: string;
     /**
-      * 部署机构DID
-      */
+     * 部署机构DID
+     */
     DeployDid: string;
     /**
-      * TDID SDK版本
-      */
+     * TDID SDK版本
+     */
     SdkVersion: string;
     /**
-      * TDID 合约版本
-      */
+     * TDID 合约版本
+     */
     ContractVersion: string;
     /**
-      * 区块链节点版本
-      */
+     * 区块链节点版本
+     */
     BlockVersion: string;
     /**
-      * 区块链节点IP
-      */
+     * 区块链节点IP
+     */
     BlockIp: string;
     /**
-      * DID合约地址
-      */
+     * DID合约地址
+     */
     DidAddress: string;
     /**
-      * CPT合约地址
-      */
+     * CPT合约地址
+     */
     CptAddress: string;
     /**
-      * Authority Issuer地址
-      */
+     * Authority Issuer地址
+     */
     AuthorityAddress: string;
     /**
-      * Evidence合约地址
-      */
+     * Evidence合约地址
+     */
     EvidenceAddress: string;
     /**
-      * Specific Issuer合约地址
-      */
+     * Specific Issuer合约地址
+     */
     SpecificAddress: string;
     /**
-      * 链ID
-      */
+     * 链ID
+     */
     ChainId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1311,36 +1311,36 @@ export interface GetDeployInfoResponse {
  */
 export interface Contract {
     /**
-      * 应用名
-      */
+     * 应用名
+     */
     ApplyName: string;
     /**
-      * 合约状态 true:已启用 false:未启用
-      */
+     * 合约状态 true:已启用 false:未启用
+     */
     Enable: boolean;
     /**
-      * 合约CNS地址
-      */
+     * 合约CNS地址
+     */
     Hash: string;
     /**
-      * 合约CNS地址脱敏
-      */
+     * 合约CNS地址脱敏
+     */
     HashShow: string;
     /**
-      * 部署机构DID
-      */
+     * 部署机构DID
+     */
     WeId: string;
     /**
-      * 部署机构名称
-      */
+     * 部署机构名称
+     */
     DeployName: string;
     /**
-      * 部署群组
-      */
+     * 部署群组
+     */
     GroupId: string;
     /**
-      * 部署时间
-      */
+     * 部署时间
+     */
     CreateTime: string;
 }
 /**
@@ -1348,12 +1348,12 @@ export interface Contract {
  */
 export interface CreateTDidByPublicKeyResponse {
     /**
-      * did具体信息
-      */
+     * did具体信息
+     */
     Did: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1361,12 +1361,12 @@ export interface CreateTDidByPublicKeyResponse {
  */
 export interface CheckDidDeployResponse {
     /**
-      * 服务信息
-      */
+     * 服务信息
+     */
     Task: Task;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1374,8 +1374,8 @@ export interface CheckDidDeployResponse {
  */
 export interface GetDidClusterDetailRequest {
     /**
-      * DID网络ID
-      */
+     * DID网络ID
+     */
     ClusterId: string;
 }
 /**
@@ -1383,8 +1383,8 @@ export interface GetDidClusterDetailRequest {
  */
 export interface GetConsortiumClusterListRequest {
     /**
-      * 联盟id
-      */
+     * 联盟id
+     */
     ConsortiumId: number;
 }
 /**
@@ -1392,48 +1392,48 @@ export interface GetConsortiumClusterListRequest {
  */
 export interface GetDidDetailResponse {
     /**
-      * DID名称
-      */
+     * DID名称
+     */
     Did: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
     /**
-      * 公钥
-      */
+     * 公钥
+     */
     PublicKey: string;
     /**
-      * 权威认证
-      */
+     * 权威认证
+     */
     AuthorityState: number;
     /**
-      * 联盟ID
-      */
+     * 联盟ID
+     */
     ConsortiumId: number;
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     ConsortiumName: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * bcos资源ID
-      */
+     * bcos资源ID
+     */
     ResChainId: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1441,12 +1441,12 @@ export interface GetDidDetailResponse {
  */
 export interface Trend {
     /**
-      * 时间点
-      */
+     * 时间点
+     */
     Time: string;
     /**
-      * 数量
-      */
+     * 数量
+     */
     Count: number;
 }
 /**
@@ -1454,64 +1454,64 @@ export interface Trend {
  */
 export interface BcosClusterItem {
     /**
-      * 网络索引id
-      */
+     * 网络索引id
+     */
     ChainId: number;
     /**
-      * 网络名称
-      */
+     * 网络名称
+     */
     ChainName: string;
     /**
-      * 机构数量
-      */
+     * 机构数量
+     */
     AgencyCount: number;
     /**
-      * 联盟id
-      */
+     * 联盟id
+     */
     ConsortiumId: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 过期时间
-      */
+     * 过期时间
+     */
     ExpireTime: string;
     /**
-      * 网络状态
-      */
+     * 网络状态
+     */
     ChainStatus: number;
     /**
-      * 资源 id
-      */
+     * 资源 id
+     */
     ResourceId: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 组织名称
-      */
+     * 组织名称
+     */
     ConsortiumName: string;
     /**
-      * 机构id
-      */
+     * 机构id
+     */
     AgencyId: number;
     /**
-      * 续费状态
-      */
+     * 续费状态
+     */
     AutoRenewFlag: number;
     /**
-      * 网络模式
-      */
+     * 网络模式
+     */
     TotalNetworkNode: number;
     /**
-      * 创建节点数
-      */
+     * 创建节点数
+     */
     TotalCreateNode: number;
     /**
-      * 总群组数量
-      */
+     * 总群组数量
+     */
     TotalGroups: number;
 }
 /**
@@ -1519,20 +1519,20 @@ export interface BcosClusterItem {
  */
 export interface GetLabelListRequest {
     /**
-      * 每页大小
-      */
+     * 每页大小
+     */
     PageSize: number;
     /**
-      * 页码，从1开始
-      */
+     * 页码，从1开始
+     */
     PageNumber: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId?: number;
 }
 /**
@@ -1540,68 +1540,68 @@ export interface GetLabelListRequest {
  */
 export interface DidCluster {
     /**
-      * 链ID
-      */
+     * 链ID
+     */
     ChainId: number;
     /**
-      * 链名称
-      */
+     * 链名称
+     */
     ChainName: string;
     /**
-      * 组织数量
-      */
+     * 组织数量
+     */
     AgencyCount: number;
     /**
-      * 联盟ID
-      */
+     * 联盟ID
+     */
     ConsortiumId: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 过期时间
-      */
+     * 过期时间
+     */
     ExpireTime: string;
     /**
-      * 网络状态
-      */
+     * 网络状态
+     */
     ChainStatus: number;
     /**
-      * 资源ID
-      */
+     * 资源ID
+     */
     ResourceId: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     ConsortiumName: string;
     /**
-      * 组织ID
-      */
+     * 组织ID
+     */
     AgencyId: number;
     /**
-      * 自动续费
-      */
+     * 自动续费
+     */
     AutoRenewFlag: number;
     /**
-      * 网络节点总数
-      */
+     * 网络节点总数
+     */
     TotalNetworkNode: number;
     /**
-      * 本机构节点数
-      */
+     * 本机构节点数
+     */
     TotalCreateNode: number;
     /**
-      * 总群组数
-      */
+     * 总群组数
+     */
     TotalGroups: number;
     /**
-      * DID总数
-      */
+     * DID总数
+     */
     DidCount: number;
 }
 /**
@@ -1609,56 +1609,56 @@ export interface DidCluster {
  */
 export interface GetDataPanelResponse {
     /**
-      * 区块链网络数量
-      */
+     * 区块链网络数量
+     */
     BlockNetworkCount: number;
     /**
-      * 区块链网络名称
-      */
+     * 区块链网络名称
+     */
     BlockNetworkName: string;
     /**
-      * 当前区块高度
-      */
+     * 当前区块高度
+     */
     BlockHeight: number;
     /**
-      * 区块链网络类型
-      */
+     * 区块链网络类型
+     */
     BlockNetworkType: number;
     /**
-      * did数量
-      */
+     * did数量
+     */
     DidCount: number;
     /**
-      * 凭证模版数量
-      */
+     * 凭证模版数量
+     */
     CptCount: number;
     /**
-      * 已认证权威机构数量
-      */
+     * 已认证权威机构数量
+     */
     CertificatedAuthCount: number;
     /**
-      * 颁发凭证数量
-      */
+     * 颁发凭证数量
+     */
     IssueCptCount: number;
     /**
-      * 本周新增DID数量
-      */
+     * 本周新增DID数量
+     */
     NewDidCount: number;
     /**
-      * BCOS网络类型数量
-      */
+     * BCOS网络类型数量
+     */
     BcosCount: number;
     /**
-      * Fabric网络类型数量
-      */
+     * Fabric网络类型数量
+     */
     FabricCount: number;
     /**
-      * 长安链网络类型数量
-      */
+     * 长安链网络类型数量
+     */
     ChainMakerCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1666,24 +1666,24 @@ export interface GetDataPanelResponse {
  */
 export interface Identity {
     /**
-      * 账户标识符
-      */
+     * 账户标识符
+     */
     AccountIdentifier: string;
     /**
-      * 链ID
-      */
+     * 链ID
+     */
     ChainID: string;
     /**
-      * 完整tdid
-      */
+     * 完整tdid
+     */
     Did: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 群组名称
-      */
+     * 群组名称
+     */
     GroupName: string;
 }
 /**
@@ -1691,24 +1691,24 @@ export interface Identity {
  */
 export interface QueryPolicyResponse {
     /**
-      * 披露策略索引
-      */
+     * 披露策略索引
+     */
     Id: number;
     /**
-      * 披露策略ID
-      */
+     * 披露策略ID
+     */
     PolicyId: number;
     /**
-      * 凭证模板ID
-      */
+     * 凭证模板ID
+     */
     CptId: number;
     /**
-      * 披露策略的具体信息
-      */
+     * 披露策略的具体信息
+     */
     PolicyData: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1716,24 +1716,24 @@ export interface QueryPolicyResponse {
  */
 export interface GetDidListRequest {
     /**
-      * 每页大小
-      */
+     * 每页大小
+     */
     PageSize: number;
     /**
-      * 页码，从1开始
-      */
+     * 页码，从1开始
+     */
     PageNumber: number;
     /**
-      * Did信息
-      */
+     * Did信息
+     */
     Did?: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId?: number;
 }
 /**
@@ -1741,28 +1741,28 @@ export interface GetDidListRequest {
  */
 export interface Group {
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 节点数量
-      */
+     * 节点数量
+     */
     NodeCount: number;
     /**
-      * 所属机构节点数量
-      */
+     * 所属机构节点数量
+     */
     NodeCountOfAgency: number;
     /**
-      * 群组描述
-      */
+     * 群组描述
+     */
     Description: string;
     /**
-      * 参与角色，盟主或非盟主
-      */
+     * 参与角色，盟主或非盟主
+     */
     RoleType: number;
     /**
-      * 链id
-      */
+     * 链id
+     */
     ChainId: string;
 }
 /**
@@ -1770,20 +1770,20 @@ export interface Group {
  */
 export interface CheckChainResponse {
     /**
-      * 1为盟主，0为非盟主
-      */
+     * 1为盟主，0为非盟主
+     */
     RoleType: number;
     /**
-      * 链ID
-      */
+     * 链ID
+     */
     ChainId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     AppName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1791,20 +1791,20 @@ export interface CheckChainResponse {
  */
 export interface CreateTDidByPublicKeyRequest {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 身份公钥
-      */
+     * 身份公钥
+     */
     PublicKey: string;
     /**
-      * 加密公钥
-      */
+     * 加密公钥
+     */
     EncryptPubKey?: string;
 }
 /**
@@ -1812,60 +1812,60 @@ export interface CreateTDidByPublicKeyRequest {
  */
 export interface Policy {
     /**
-      * 披露策略索引
-      */
+     * 披露策略索引
+     */
     Id: number;
     /**
-      * 披露策略名称
-      */
+     * 披露策略名称
+     */
     Name: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 服务ID
-      */
+     * 服务ID
+     */
     ServiceId: number;
     /**
-      * 合约应用ID
-      */
+     * 合约应用ID
+     */
     ContractAppId: number;
     /**
-      * 披露策略ID
-      */
+     * 披露策略ID
+     */
     PolicyId: number;
     /**
-      * 凭证模板ID
-      */
+     * 凭证模板ID
+     */
     CptId: number;
     /**
-      * 策略Json
-      */
+     * 策略Json
+     */
     PolicyJson: string;
     /**
-      * 生成时间
-      */
+     * 生成时间
+     */
     CreateTime: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     UpdateTime: string;
     /**
-      * 创建者DID
-      */
+     * 创建者DID
+     */
     CreatorDid: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     AppName: string;
     /**
-      * 模板索引
-      */
+     * 模板索引
+     */
     CptIndex: number;
 }
 /**
@@ -1873,8 +1873,8 @@ export interface Policy {
  */
 export interface GetDataPanelRequest {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
 }
 /**
@@ -1882,12 +1882,12 @@ export interface GetDataPanelRequest {
  */
 export interface GetGroupListResponse {
     /**
-      * 群组数据集合
-      */
+     * 群组数据集合
+     */
     Result: Array<Group>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1895,16 +1895,16 @@ export interface GetGroupListResponse {
  */
 export interface RegisterClaimPolicyResponse {
     /**
-      * 披露策略索引
-      */
+     * 披露策略索引
+     */
     Id: number;
     /**
-      * 披露策略ID
-      */
+     * 披露策略ID
+     */
     PolicyId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1912,8 +1912,8 @@ export interface RegisterClaimPolicyResponse {
  */
 export interface GetDidDetailRequest {
     /**
-      * DID号码的具体信息
-      */
+     * DID号码的具体信息
+     */
     Did: string;
 }
 /**
@@ -1921,8 +1921,8 @@ export interface GetDidDetailRequest {
  */
 export interface GetDidServiceDetailRequest {
     /**
-      * DID服务ID
-      */
+     * DID服务ID
+     */
     ServiceId: number;
 }
 /**
@@ -1930,8 +1930,8 @@ export interface GetDidServiceDetailRequest {
  */
 export interface GetDidDocumentRequest {
     /**
-      * tdid
-      */
+     * tdid
+     */
     Did: string;
 }
 /**
@@ -1939,12 +1939,12 @@ export interface GetDidDocumentRequest {
  */
 export interface ConsortiumItem {
     /**
-      * 联盟id
-      */
+     * 联盟id
+     */
     Id: number;
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     Name: string;
 }
 /**
@@ -1952,12 +1952,12 @@ export interface ConsortiumItem {
  */
 export interface GetCredentialIssueRankResponse {
     /**
-      * Rank集合
-      */
+     * Rank集合
+     */
     RankIssueResult: Array<CptIssueRank>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1965,8 +1965,8 @@ export interface GetCredentialIssueRankResponse {
  */
 export interface AddLabelResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1974,16 +1974,16 @@ export interface AddLabelResponse {
  */
 export interface GetDeployListResponse {
     /**
-      * 合约总数
-      */
+     * 合约总数
+     */
     AllCount: number;
     /**
-      * 合约部署列表
-      */
+     * 合约部署列表
+     */
     Result: Array<Contract>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1991,16 +1991,16 @@ export interface GetDeployListResponse {
  */
 export interface CheckChainRequest {
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * did服务机构名称
-      */
+     * did服务机构名称
+     */
     AgencyName: string;
 }
 /**
@@ -2008,16 +2008,16 @@ export interface CheckChainRequest {
  */
 export interface GetPublicKeyResponse {
     /**
-      * DID的具体信息
-      */
+     * DID的具体信息
+     */
     Did: string;
     /**
-      * 公钥
-      */
+     * 公钥
+     */
     PublicKey: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2025,12 +2025,12 @@ export interface GetPublicKeyResponse {
  */
 export interface GetDidRegisterTrendResponse {
     /**
-      * Trend集合
-      */
+     * Trend集合
+     */
     Trend: Array<Trend>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2038,12 +2038,12 @@ export interface GetDidRegisterTrendResponse {
  */
 export interface GetCredentialStatusResponse {
     /**
-      * 凭证状态信息
-      */
+     * 凭证状态信息
+     */
     CredentialStatus: CredentialStatus;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2051,12 +2051,12 @@ export interface GetCredentialStatusResponse {
  */
 export interface CreateTDidResponse {
     /**
-      * TDID
-      */
+     * TDID
+     */
     Did: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2064,8 +2064,8 @@ export interface CreateTDidResponse {
  */
 export interface VerifyCredentialRequest {
     /**
-      * 参数集合
-      */
+     * 参数集合
+     */
     FunctionArg: VerifyFunctionArg;
 }
 /**
@@ -2073,20 +2073,20 @@ export interface VerifyCredentialRequest {
  */
 export interface RegisterCptRequest {
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * CptJson的具体信息
-      */
+     * CptJson的具体信息
+     */
     CptJson: string;
     /**
-      * cptId 不填默认自增
-      */
+     * cptId 不填默认自增
+     */
     CptId?: number;
 }
 /**
@@ -2094,16 +2094,16 @@ export interface RegisterCptRequest {
  */
 export interface GetLabelListResponse {
     /**
-      * 数据集合
-      */
+     * 数据集合
+     */
     Result: Array<Label>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2111,40 +2111,40 @@ export interface GetLabelListResponse {
  */
 export interface VerifyFunctionArg {
     /**
-      * CPT ID
-      */
+     * CPT ID
+     */
     CptId: number;
     /**
-      * issuer did
-      */
+     * issuer did
+     */
     Issuer: string;
     /**
-      * 过期时间
-      */
+     * 过期时间
+     */
     ExpirationDate: number;
     /**
-      * 声明
-      */
+     * 声明
+     */
     ClaimJson: string;
     /**
-      * 颁发时间
-      */
+     * 颁发时间
+     */
     IssuanceDate: number;
     /**
-      * context值
-      */
+     * context值
+     */
     Context: string;
     /**
-      * id值
-      */
+     * id值
+     */
     Id: string;
     /**
-      * 签名值
-      */
+     * 签名值
+     */
     Proof: Proof;
     /**
-      * type值
-      */
+     * type值
+     */
     Type: Array<string>;
 }
 /**
@@ -2152,16 +2152,16 @@ export interface VerifyFunctionArg {
  */
 export interface GetPolicyListResponse {
     /**
-      * 策略Policy管理列表
-      */
+     * 策略Policy管理列表
+     */
     PolicyDataList: Array<Policy>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     AllCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2169,48 +2169,48 @@ export interface GetPolicyListResponse {
  */
 export interface DidData {
     /**
-      * 服务ID
-      */
+     * 服务ID
+     */
     ServiceId: number;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     AppName: string;
     /**
-      * did号码
-      */
+     * did号码
+     */
     Did: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Remark: string;
     /**
-      * 权威机构认证状态 1未注册 2 未认证 3 已认证
-      */
+     * 权威机构认证状态 1未注册 2 未认证 3 已认证
+     */
     AuthorityState: number;
     /**
-      * DID标签名称
-      */
+     * DID标签名称
+     */
     LabelName: string;
     /**
-      * DID创建时间
-      */
+     * DID创建时间
+     */
     CreatedAt: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 联盟名称
-      */
+     * 联盟名称
+     */
     AllianceName: string;
     /**
-      * DID标签id
-      */
+     * DID标签id
+     */
     LabelId: number;
 }
 /**
@@ -2218,16 +2218,16 @@ export interface DidData {
  */
 export interface GetCredentialIssueRankRequest {
     /**
-      * 开始时间（支持到天 2021-4-23）
-      */
+     * 开始时间（支持到天 2021-4-23）
+     */
     StartTime: string;
     /**
-      * 结束时间（支持到天 2021-4-23）
-      */
+     * 结束时间（支持到天 2021-4-23）
+     */
     EndTime: string;
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId?: string;
 }
 /**
@@ -2235,19 +2235,19 @@ export interface GetCredentialIssueRankRequest {
  */
 export interface GetDeployListRequest {
     /**
-      * 网络ID
-      */
+     * 网络ID
+     */
     ClusterId: string;
     /**
-      * 群组ID
-      */
+     * 群组ID
+     */
     GroupId: number;
     /**
-      * 起始位置
-      */
+     * 起始位置
+     */
     DisplayStart: number;
     /**
-      * 长度
-      */
+     * 长度
+     */
     DisplayLength: number;
 }

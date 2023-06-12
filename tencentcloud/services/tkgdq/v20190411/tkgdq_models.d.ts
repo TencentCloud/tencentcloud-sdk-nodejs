@@ -3,20 +3,20 @@
  */
 export interface TripleContent {
     /**
-      * 实体id
-      */
+     * 实体id
+     */
     Id?: string;
     /**
-      * 实体名称
-      */
+     * 实体名称
+     */
     Name?: string;
     /**
-      * 实体order
-      */
+     * 实体order
+     */
     Order?: number;
     /**
-      * 实体流行度
-      */
+     * 实体流行度
+     */
     Popular?: number;
 }
 /**
@@ -24,8 +24,8 @@ export interface TripleContent {
  */
 export interface DescribeEntityRequest {
     /**
-      * 实体名称
-      */
+     * 实体名称
+     */
     EntityName: string;
 }
 /**
@@ -33,8 +33,8 @@ export interface DescribeEntityRequest {
  */
 export interface DescribeTripleRequest {
     /**
-      * 三元组查询条件
-      */
+     * 三元组查询条件
+     */
     TripleCondition: string;
 }
 /**
@@ -42,12 +42,12 @@ export interface DescribeTripleRequest {
  */
 export interface DescribeTripleResponse {
     /**
-      * 返回三元组信息
-      */
+     * 返回三元组信息
+     */
     Content?: Array<TripleContent>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -55,12 +55,12 @@ export interface DescribeTripleResponse {
  */
 export interface DescribeRelationResponse {
     /**
-      * 返回查询实体间的关系
-      */
+     * 返回查询实体间的关系
+     */
     Content?: Array<EntityRelationContent>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -68,16 +68,16 @@ export interface DescribeRelationResponse {
  */
 export interface EntityRelationContent {
     /**
-      * 实体关系查询返回关系的object
-      */
+     * 实体关系查询返回关系的object
+     */
     Object?: Array<EntityRelationObject>;
     /**
-      * 实体关系查询返回关系的subject
-      */
+     * 实体关系查询返回关系的subject
+     */
     Subject?: Array<EntityRelationSubject>;
     /**
-      * 实体关系查询返回的关系名称
-      */
+     * 实体关系查询返回的关系名称
+     */
     Relation?: string;
 }
 /**
@@ -85,12 +85,12 @@ export interface EntityRelationContent {
  */
 export interface DescribeRelationRequest {
     /**
-      * 输入第一个实体
-      */
+     * 输入第一个实体
+     */
     LeftEntityName: string;
     /**
-      * 输入第二个实体
-      */
+     * 输入第二个实体
+     */
     RightEntityName: string;
 }
 /**
@@ -98,16 +98,16 @@ export interface DescribeRelationRequest {
  */
 export interface EntityRelationObject {
     /**
-      * object对应id
-      */
+     * object对应id
+     */
     Id?: Array<string>;
     /**
-      * object对应name
-      */
+     * object对应name
+     */
     Name?: Array<string>;
     /**
-      * object对应popular值
-      */
+     * object对应popular值
+     */
     Popular?: Array<number>;
 }
 /**
@@ -115,12 +115,12 @@ export interface EntityRelationObject {
  */
 export interface DescribeEntityResponse {
     /**
-      * 返回查询实体相关信息
-      */
+     * 返回查询实体相关信息
+     */
     Content?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -128,15 +128,15 @@ export interface DescribeEntityResponse {
  */
 export interface EntityRelationSubject {
     /**
-      * Subject对应id
-      */
+     * Subject对应id
+     */
     Id?: Array<string>;
     /**
-      * Subject对应name
-      */
+     * Subject对应name
+     */
     Name?: Array<string>;
     /**
-      * Subject对应popular
-      */
+     * Subject对应popular
+     */
     Popular?: Array<number>;
 }

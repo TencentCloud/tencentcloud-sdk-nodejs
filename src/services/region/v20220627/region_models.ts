@@ -33,7 +33,6 @@ export interface DescribeProductsRequest {
    * 返回数量，默认为 20，最大值为 100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为 0。
    */
@@ -48,12 +47,10 @@ export interface DescribeProductsResponse {
    * 产品详细信息列表。
    */
   Products: Array<RegionProduct>
-
   /**
    * 产品总数量。
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -65,7 +62,7 @@ export interface DescribeProductsResponse {
  */
 export interface ZoneInfo {
   /**
-      * 可用区名称，例如，ap-guangzhou-3
+   * 可用区名称，例如，ap-guangzhou-3
 全网可用区名称如下：
 <li> ap-chongqing-1 </li>
 <li> ap-seoul-1 </li>
@@ -110,58 +107,49 @@ export interface ZoneInfo {
 <li> na-ashburn-2 </li>
 <li> ap-nanjing-1 </li>
 <li> ap-nanjing-2 </li>
-      */
+   */
   Zone: string
-
   /**
    * 可用区描述，例如，广州三区
    */
   ZoneName: string
-
   /**
    * 可用区ID
    */
   ZoneId: string
-
   /**
    * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
    */
   ZoneState: string
-
   /**
-      * 父级zone
+   * 父级zone
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentZone: string
-
   /**
-      * 父级可用区ID
+   * 父级可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentZoneId: string
-
   /**
-      * 父级可用区描述
+   * 父级可用区描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentZoneName: string
-
   /**
-      * zone类型
+   * zone类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ZoneType: string
-
   /**
-      * 控制台类型
+   * 控制台类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineRoomTypeMC: string
-
   /**
-      * 和ZoneId一样，适用于控制台调用。
+   * 和ZoneId一样，适用于控制台调用。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ZoneIdMC: string
 }
 
@@ -173,7 +161,6 @@ export interface DescribeZonesRequest {
    * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
    */
   Product: string
-
   /**
    * 不传或者0表示不查询【可选业务白名单】，1表示查询【可选业务白名单】，该参数设置了1，只有在业务白名单查不到情况下，才会查该白名单
    */
@@ -188,12 +175,10 @@ export interface DescribeZonesResponse {
    * 可用区数量。
    */
   TotalCount?: number
-
   /**
    * 可用区列表信息。
    */
   ZoneSet?: Array<ZoneInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -208,39 +193,33 @@ export interface RegionInfo {
    * 地域名称，例如，ap-guangzhou
    */
   Region: string
-
   /**
    * 地域描述，例如，华南地区(广州)
    */
   RegionName: string
-
   /**
    * 地域是否可用状态
    */
   RegionState: string
-
   /**
-      * 控制台类型，api调用时默认null
+   * 控制台类型，api调用时默认null
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegionTypeMC: number
-
   /**
-      * 不同语言的地区
+   * 不同语言的地区
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LocationMC: string
-
   /**
-      * 控制台展示的地域描述
+   * 控制台展示的地域描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegionNameMC: string
-
   /**
-      * 1
+   * 1
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegionIdMC: string
 }
 
@@ -252,12 +231,10 @@ export interface DescribeRegionsResponse {
    * 地域数量
    */
   TotalCount?: number
-
   /**
    * 地域列表信息
    */
   RegionSet?: Array<RegionInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -272,7 +249,6 @@ export interface DescribeRegionsRequest {
    * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
    */
   Product: string
-
   /**
    * 不传或者0表示不查询【可选业务白名单】，1表示查询【可选业务白名单】，该参数设置了1，只有在业务白名单查不到情况下，才会查该白名单
    */

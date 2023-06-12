@@ -43,7 +43,6 @@ export interface ManageExternalEndpointRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 操作（Create/Delete）
    */
@@ -58,7 +57,6 @@ export interface DescribeImagePersonalResponse {
    * 镜像tag信息
    */
   Data?: TagInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -78,7 +76,6 @@ export interface WebhookTarget {
    * 目标地址
    */
   Address: string
-
   /**
    * 自定义 Headers
    */
@@ -103,12 +100,10 @@ export interface DescribeReplicationInstanceCreateTasksResponse {
    * 任务详情
    */
   TaskDetail: Array<TaskDetail>
-
   /**
    * 整体任务状态
    */
   Status: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -123,37 +118,30 @@ export interface WebhookTriggerLog {
    * 日志 Id
    */
   Id: number
-
   /**
    * 触发器 Id
    */
   TriggerId: number
-
   /**
    * 事件类型
    */
   EventType: string
-
   /**
    * 通知类型
    */
   NotifyType: string
-
   /**
    * 详情
    */
   Detail: string
-
   /**
    * 创建时间
    */
   CreationTime: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 状态
    */
@@ -168,17 +156,14 @@ export interface AccessVpc {
    * Vpc的Id
    */
   VpcId: string
-
   /**
    * 子网Id
    */
   SubnetId: string
-
   /**
    * 内网接入状态
    */
   Status: string
-
   /**
    * 内网接入Ip
    */
@@ -193,27 +178,22 @@ export interface ModifyTagRetentionRuleRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 命名空间的Id，必须填写原有的命名空间id
    */
   NamespaceId: number
-
   /**
    * 保留策略
    */
   RetentionRule: RetentionRule
-
   /**
    * 执行周期，必须填写为原来的设置
    */
   CronSetting: string
-
   /**
    * 规则Id
    */
   RetentionId: number
-
   /**
    * 是否禁用规则
    */
@@ -235,39 +215,34 @@ export interface ModifyRepositoryResponse {
  */
 export interface TriggerInvokePara {
   /**
-      * AppId
+   * AppId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppId: string
-
   /**
-      * TKE集群ID
+   * TKE集群ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ClusterId: string
-
   /**
-      * TKE集群命名空间
+   * TKE集群命名空间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Namespace: string
-
   /**
-      * TKE集群工作负载名称
+   * TKE集群工作负载名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ServiceName: string
-
   /**
-      * TKE集群工作负载中容器名称
+   * TKE集群工作负载中容器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ContainerName: string
-
   /**
-      * TKE集群地域数字ID
+   * TKE集群地域数字ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ClusterRegion: number
 }
 
@@ -279,12 +254,10 @@ export interface DescribeNamespacesResponse {
    * 命名空间列表信息
    */
   NamespaceList?: Array<TcrNamespaceInfo>
-
   /**
    * 总个数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -296,57 +269,49 @@ export interface DescribeNamespacesResponse {
  */
 export interface TriggerLogResp {
   /**
-      * 仓库名称
+   * 仓库名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RepoName: string
-
   /**
-      * Tag名称
+   * Tag名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagName: string
-
   /**
-      * 触发器名称
+   * 触发器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TriggerName: string
-
   /**
-      * 触发方式
+   * 触发方式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeSource: string
-
   /**
-      * 触发动作
+   * 触发动作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeAction: string
-
   /**
-      * 触发时间
+   * 触发时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeTime: string
-
   /**
-      * 触发条件
+   * 触发条件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeCondition: TriggerInvokeCondition
-
   /**
-      * 触发参数
+   * 触发参数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokePara: TriggerInvokePara
-
   /**
-      * 触发结果
+   * 触发结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeResult: TriggerInvokeResult
 }
 
@@ -358,17 +323,14 @@ export interface DownloadHelmChartRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * Helm chart名称
    */
   ChartName: string
-
   /**
    * Helm chart版本
    */
@@ -383,7 +345,6 @@ export interface DuplicateImagePersonalRequest {
    * 源镜像名称，不包含domain。例如： tencentyun/foo:v1
    */
   SrcImage: string
-
   /**
    * 目的镜像名称，不包含domain。例如： tencentyun/foo:latest
    */
@@ -398,7 +359,6 @@ export interface RetentionRule {
    * 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送）
    */
   Key: string
-
   /**
    * 规则设置下的对应值
    */
@@ -413,7 +373,6 @@ export interface CreateInstanceResponse {
    * 企业版实例Id
    */
   RegistryId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -428,7 +387,6 @@ export interface DeleteInstanceTokenRequest {
    * 实例 ID
    */
   RegistryId: string
-
   /**
    * 访问凭证 ID
    */
@@ -443,17 +401,14 @@ export interface TagInfoResp {
    * Tag的总数
    */
   TagCount: number
-
   /**
    * TagInfo列表
    */
   TagInfo: Array<TagInfo>
-
   /**
    * Server
    */
   Server: string
-
   /**
    * 仓库名称
    */
@@ -468,22 +423,18 @@ export interface ModifyRepositoryRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 镜像仓库名称
    */
   RepositoryName: string
-
   /**
    * 仓库简短描述
    */
   BriefDescription: string
-
   /**
    * 仓库详细描述
    */
@@ -498,16 +449,14 @@ export interface RegistryCondition {
    * 实例创建过程类型
    */
   Type: string
-
   /**
    * 实例创建过程状态
    */
   Status: string
-
   /**
-      * 转换到该过程的简明原因
+   * 转换到该过程的简明原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Reason: string
 }
 
@@ -529,47 +478,38 @@ export interface CreateApplicationTriggerPersonalRequest {
    * 触发器关联的镜像仓库，library/test格式
    */
   RepoName: string
-
   /**
    * 触发器名称
    */
   TriggerName: string
-
   /**
    * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
    */
   InvokeMethod: string
-
   /**
    * 应用所在TKE集群ID
    */
   ClusterId: string
-
   /**
    * 应用所在TKE集群命名空间
    */
   Namespace: string
-
   /**
    * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
    */
   WorkloadType: string
-
   /**
    * 应用所在TKE集群工作负载名称
    */
   WorkloadName: string
-
   /**
    * 应用所在TKE集群工作负载下容器名称
    */
   ContainerName: string
-
   /**
    * 应用所在TKE集群地域
    */
   ClusterRegion: number
-
   /**
    * 触发方式对应的表达式
    */
@@ -584,27 +524,22 @@ export interface AutoDelStrategyInfo {
    * 用户名
    */
   Username: string
-
   /**
    * 仓库名
    */
   RepoName: string
-
   /**
    * 类型
    */
   Type: string
-
   /**
    * 策略值
    */
   Value: number
-
   /**
    * Valid
    */
   Valid: number
-
   /**
    * 创建时间
    */
@@ -619,23 +554,19 @@ export interface DeleteInternalEndpointDnsRequest {
    * tcr实例id
    */
   InstanceId: string
-
   /**
    * 私有网络id
    */
   VpcId: string
-
   /**
    * tcr内网访问链路ip
    */
   EniLBIp: string
-
   /**
-      * true：使用默认域名
+   * true：使用默认域名
 false:  使用带有vpc的域名
-      */
+   */
   UsePublicDomain?: boolean
-
   /**
    * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
    */
@@ -660,7 +591,6 @@ export interface ModifyInstanceRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 实例的规格
    */
@@ -675,7 +605,6 @@ export interface RenewInstanceResponse {
    * 企业版实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -690,27 +619,22 @@ export interface ManageInternalEndpointRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * Create/Delete
    */
   Operation: string
-
   /**
    * 需要接入的用户vpcid
    */
   VpcId: string
-
   /**
    * 需要接入的用户子网id
    */
   SubnetId: string
-
   /**
    * 请求的地域ID，用于实例复制地域
    */
   RegionId?: number
-
   /**
    * 请求的地域名称，用于实例复制地域
    */
@@ -725,12 +649,10 @@ export interface CreateImmutableTagRulesRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   NamespaceName: string
-
   /**
    * 规则
    */
@@ -745,12 +667,10 @@ export interface DescribeRepositoriesResponse {
    * 仓库信息列表
    */
   RepositoryList?: Array<TcrRepositoryInfo>
-
   /**
    * 总个数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -765,23 +685,19 @@ export interface VpcAndDomainInfo {
    * tcr实例id
    */
   InstanceId: string
-
   /**
    * 私有网络id
    */
   VpcId: string
-
   /**
    * tcr内网访问链路ip
    */
   EniLBIp: string
-
   /**
-      * true：use instance name as subdomain
+   * true：use instance name as subdomain
 false: use instancename+"-vpc" as subdomain
-      */
+   */
   UsePublicDomain?: boolean
-
   /**
    * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
    */
@@ -806,13 +722,11 @@ export interface DescribeInstancesResponse {
    * 总实例个数
    */
   TotalCount?: number
-
   /**
-      * 实例信息列表
+   * 实例信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Registries?: Array<Registry>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -827,17 +741,14 @@ export interface CreateReplicationInstanceRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 复制实例地域ID
    */
   ReplicationRegionId?: number
-
   /**
    * 复制实例地域名称
    */
   ReplicationRegionName?: string
-
   /**
    * 是否同步TCR云标签至生成的COS Bucket
    */
@@ -862,7 +773,6 @@ export interface DescribeApplicationTriggerLogPersonalResponse {
    * 触发日志返回值
    */
   Data?: DescribeApplicationTriggerLogPersonalResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -877,11 +787,10 @@ export interface FavorResp {
    * 收藏仓库的总数
    */
   TotalCount: number
-
   /**
-      * 仓库信息数组
+   * 仓库信息数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RepoInfo: Array<Favors>
 }
 
@@ -913,37 +822,30 @@ export interface Region {
    * gz
    */
   Alias: string
-
   /**
    * 1
    */
   RegionId: number
-
   /**
    * ap-guangzhou
    */
   RegionName: string
-
   /**
    * alluser
    */
   Status: string
-
   /**
    * remark
    */
   Remark: string
-
   /**
    * 创建时间
    */
   CreatedAt: string
-
   /**
    * 更新时间
    */
   UpdatedAt: string
-
   /**
    * id
    */
@@ -958,12 +860,10 @@ export interface NamespaceInfo {
    * 命名空间
    */
   Namespace: string
-
   /**
    * 创建时间
    */
   CreationTime: string
-
   /**
    * 命名空间下仓库数量
    */
@@ -978,7 +878,6 @@ export interface CreateImageAccelerationServiceResponse {
    * 实例Id
    */
   RegistryId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -993,7 +892,6 @@ export interface CreateMultipleSecurityPolicyResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1005,45 +903,39 @@ export interface CreateMultipleSecurityPolicyResponse {
  */
 export interface TriggerResp {
   /**
-      * 触发器名称
+   * 触发器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TriggerName: string
-
   /**
-      * 触发来源
+   * 触发来源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeSource: string
-
   /**
-      * 触发动作
+   * 触发动作
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeAction: string
-
   /**
-      * 创建时间
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime: string
-
   /**
-      * 更新时间
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
-
   /**
-      * 触发条件
+   * 触发条件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeCondition: TriggerInvokeCondition
-
   /**
-      * 触发器参数
+   * 触发器参数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokePara: TriggerInvokePara
 }
 
@@ -1065,12 +957,10 @@ export interface DescribeRegionsResponse {
    * 返回的总数
    */
   TotalCount?: number
-
   /**
    * 地域信息列表
    */
   Regions?: Array<Region>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1085,7 +975,6 @@ export interface DescribeChartDownloadInfoResponse {
    * 用于下载的url的预签名地址
    */
   PreSignedDownloadURL: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1130,12 +1019,10 @@ export interface DescribeWebhookTriggerLogResponse {
    * 总数
    */
   TotalCount?: number
-
   /**
    * 日志列表
    */
   Logs?: Array<WebhookTriggerLog>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1150,42 +1037,34 @@ export interface DownloadHelmChartResponse {
    * 临时token
    */
   TmpToken: string
-
   /**
    * 临时的secretId
    */
   TmpSecretId: string
-
   /**
    * 临时的secretKey
    */
   TmpSecretKey: string
-
   /**
    * 存储桶信息
    */
   Bucket: string
-
   /**
    * 实例ID
    */
   Region: string
-
   /**
    * chart信息
    */
   Path: string
-
   /**
    * 开始时间时间戳
    */
   StartTime: number
-
   /**
    * token过期时间时间戳
    */
   ExpiredTime: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1200,27 +1079,22 @@ export interface ManageReplicationRequest {
    * 复制源实例ID
    */
   SourceRegistryId: string
-
   /**
    * 复制目标实例ID
    */
   DestinationRegistryId: string
-
   /**
    * 同步规则
    */
   Rule: ReplicationRule
-
   /**
    * 规则描述
    */
   Description?: string
-
   /**
    * 目标实例的地域ID，如广州是1
    */
   DestinationRegionId?: number
-
   /**
    * 开启跨主账号实例同步配置项
    */
@@ -1255,17 +1129,14 @@ export interface ModifySecurityPolicyRequest {
    * 实例的Id
    */
   RegistryId: string
-
   /**
    * PolicyId
    */
   PolicyIndex: number
-
   /**
    * 192.168.0.0/24 白名单Ip
    */
   CidrBlock: string
-
   /**
    * 备注
    */
@@ -1280,18 +1151,15 @@ export interface DescribeReplicationInstanceSyncStatusResponse {
    * 同步状态
    */
   ReplicationStatus: string
-
   /**
    * 同步完成时间
    */
   ReplicationTime: string
-
   /**
-      * 同步日志
+   * 同步日志
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReplicationLog: ReplicationLog
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1306,12 +1174,10 @@ export interface DeleteInstanceCustomizedDomainRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 自定义域名
    */
   DomainName: string
-
   /**
    * 证书ID
    */
@@ -1326,7 +1192,6 @@ export interface Tag {
    * 云标签的key
    */
   Key: string
-
   /**
    * 云标签的值
    */
@@ -1381,22 +1246,18 @@ export interface DescribeRepositoryFilterPersonalRequest {
    * 搜索镜像名
    */
   RepoName?: string
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回最大数量，默认 20，最大100
    */
   Limit?: number
-
   /**
    * 筛选条件：1表示public，0表示private
    */
   Public?: number
-
   /**
    * 命名空间
    */
@@ -1411,12 +1272,10 @@ export interface DescribeTagRetentionExecutionTaskResponse {
    * 版本保留执行任务列表
    */
   RetentionTaskList: Array<RetentionTask>
-
   /**
    * 版本保留执行任务总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1428,16 +1287,14 @@ export interface DescribeTagRetentionExecutionTaskResponse {
  */
 export interface DescribeInternalEndpointsResponse {
   /**
-      * 内网接入信息的列表
+   * 内网接入信息的列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccessVpcSet: Array<AccessVpc>
-
   /**
    * 内网接入总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1472,11 +1329,10 @@ export interface AutoDelStrategyInfoResp {
    * 总数目
    */
   TotalCount: number
-
   /**
-      * 自动删除策略列表
+   * 自动删除策略列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrategyInfo: Array<AutoDelStrategyInfo>
 }
 
@@ -1508,17 +1364,14 @@ export interface SearchUserRepositoryResp {
    * 总个数
    */
   TotalCount: number
-
   /**
    * 仓库列表
    */
   RepoInfo: Array<RepoInfo>
-
   /**
    * Server
    */
   Server: string
-
   /**
    * PrivilegeFiltered
    */
@@ -1533,22 +1386,18 @@ export interface CreateTagRetentionRuleRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 命名空间的Id
    */
   NamespaceId: number
-
   /**
    * 保留策略
    */
   RetentionRule: RetentionRule
-
   /**
    * 执行周期，当前只能选择： manual;daily;weekly;monthly
    */
   CronSetting: string
-
   /**
    * 是否禁用规则，默认值为false
    */
@@ -1563,7 +1412,6 @@ export interface DuplicateImagePersonalResponse {
    * 复制镜像返回值
    */
   Data: DupImageTagResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1578,7 +1426,6 @@ export interface DescribeImageLifecyclePersonalResponse {
    * 自动删除策略信息
    */
   Data?: AutoDelStrategyInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1590,11 +1437,10 @@ export interface DescribeImageLifecyclePersonalResponse {
  */
 export interface DescribeInstanceStatusResponse {
   /**
-      * 实例的状态列表
+   * 实例的状态列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegistryStatusSet?: Array<RegistryStatus>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1609,32 +1455,26 @@ export interface CreateImageAccelerationServiceRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 创建CFS的归属的VPCID
    */
   VpcId: string
-
   /**
    * 创建CFS的归属的子网ID
    */
   SubnetId: string
-
   /**
    * 创建CFS的存储类型，其中 SD 为标准型存储， HP为性能存储。
    */
   StorageType: string
-
   /**
    * 权限组 ID
    */
   PGroupId: string
-
   /**
    * 可用区名称，例如ap-beijing-1，请参考 概览 文档中的地域与可用区列表
    */
   Zone: string
-
   /**
    * 云标签描述
    */
@@ -1649,12 +1489,10 @@ export interface DescribeWebhookTriggerResponse {
    * 触发器总数
    */
   TotalCount: number
-
   /**
    * 触发器列表
    */
   Triggers: Array<WebhookTrigger>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1669,22 +1507,18 @@ export interface ModifyInstanceTokenRequest {
    * 实例长期访问凭证 ID
    */
   TokenId: string
-
   /**
    * 实例 ID
    */
   RegistryId: string
-
   /**
    * 启用或禁用实例长期访问凭证
    */
   Enable?: boolean
-
   /**
    * 访问凭证描述
    */
   Desc?: string
-
   /**
    * 1为修改描述 2为操作启动禁用，默认值为2
    */
@@ -1719,17 +1553,14 @@ export interface ModifyImmutableTagRulesRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   NamespaceName: string
-
   /**
    * 规则 Id
    */
   RuleId: number
-
   /**
    * 规则
    */
@@ -1744,7 +1575,6 @@ export interface DescribeRepositoryOwnerPersonalResponse {
    * 仓库信息
    */
   Data?: RepoInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1756,21 +1586,19 @@ export interface DescribeRepositoryOwnerPersonalResponse {
  */
 export interface VpcPrivateDomainStatus {
   /**
-      * 地域
+   * 地域
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Region: string
-
   /**
-      * unique vpc id
+   * unique vpc id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VpcId: string
-
   /**
-      * ENABLE代表已经开启，DISABLE代表未开启，ERROR代表查询出错
+   * ENABLE代表已经开启，DISABLE代表未开启，ERROR代表查询出错
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
 }
 
@@ -1779,11 +1607,10 @@ export interface VpcPrivateDomainStatus {
  */
 export interface DescribeSecurityPoliciesResponse {
   /**
-      * 实例安全策略组
+   * 实例安全策略组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SecurityPolicySet: Array<SecurityPolicy>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1798,12 +1625,10 @@ export interface DescribeReplicationInstancesRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 最大输出条数，默认20，最大为100
    */
@@ -1828,17 +1653,14 @@ export interface DeleteRepositoryTagsRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 仓库名称
    */
   RepositoryName: string
-
   /**
    * Tag列表，单次请求Tag数量最大为20
    */
@@ -1863,32 +1685,27 @@ export interface TcrImageInfo {
    * 哈希值
    */
   Digest: string
-
   /**
    * 镜像体积（单位：字节）
    */
   Size: number
-
   /**
    * Tag名称
    */
   ImageVersion: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
-      * 制品类型
+   * 制品类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Kind: string
-
   /**
-      * KMS 签名信息
+   * KMS 签名信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   KmsSignature: string
 }
 
@@ -1900,27 +1717,22 @@ export interface RetentionPolicy {
    * 版本保留策略Id
    */
   RetentionId: number
-
   /**
    * 命名空间的名称
    */
   NamespaceName: string
-
   /**
    * 规则列表
    */
   RetentionRuleList: Array<RetentionRule>
-
   /**
    * 定期执行方式
    */
   CronSetting: string
-
   /**
    * 是否启用规则
    */
   Disabled: boolean
-
   /**
    * 基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用
    */
@@ -1935,7 +1747,6 @@ export interface DescribeImageLifecycleGlobalPersonalResponse {
    * 全局自动删除策略信息
    */
   Data?: AutoDelStrategyInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1960,27 +1771,22 @@ export interface DescribeReplicationInstanceSyncStatusRequest {
    * 主实例Id
    */
   RegistryId: string
-
   /**
    * 复制实例Id
    */
   ReplicationRegistryId: string
-
   /**
    * 复制实例的地域Id
    */
   ReplicationRegionId?: number
-
   /**
    * 是否显示同步日志
    */
   ShowReplicationLog?: boolean
-
   /**
    * 日志页号, 默认0
    */
   Offset?: number
-
   /**
    * 最大输出条数，默认5，最大为20
    */
@@ -2020,12 +1826,10 @@ export interface ModifyWebhookTriggerRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 触发器参数
    */
   Trigger: WebhookTrigger
-
   /**
    * 命名空间
    */
@@ -2040,12 +1844,10 @@ export interface DeleteReplicationInstanceRequest {
    * 实例id
    */
   RegistryId: string
-
   /**
    * 复制实例ID
    */
   ReplicationRegistryId: string
-
   /**
    * 复制实例地域Id
    */
@@ -2080,53 +1882,44 @@ export interface Favors {
    * 仓库名字
    */
   RepoName: string
-
   /**
    * 仓库类型
    */
   RepoType: string
-
   /**
-      * Pull总共的次数
+   * Pull总共的次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PullCount: number
-
   /**
-      * 仓库收藏次数
+   * 仓库收藏次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FavorCount: number
-
   /**
-      * 仓库是否公开
+   * 仓库是否公开
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Public: number
-
   /**
-      * 是否为官方所有
+   * 是否为官方所有
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsQcloudOfficial: boolean
-
   /**
-      * 仓库Tag的数量
+   * 仓库Tag的数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagCount: number
-
   /**
-      * Logo
+   * Logo
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Logo: string
-
   /**
    * 地域
    */
   Region: string
-
   /**
    * 地域的Id
    */
@@ -2141,17 +1934,14 @@ export interface CreateSignatureRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 仓库名称
    */
   RepositoryName: string
-
   /**
    * Tag名称
    */
@@ -2166,7 +1956,6 @@ export interface DescribeRepositoryPersonalResponse {
    * 仓库信息
    */
   Data?: RepositoryInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2181,7 +1970,6 @@ export interface CreateSecurityPolicyResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2196,27 +1984,22 @@ export interface DescribeRepositoriesRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 指定命名空间，不填写默认为查询所有命名空间下镜像仓库
    */
   NamespaceName?: string
-
   /**
    * 指定镜像仓库，不填写默认查询指定命名空间下所有镜像仓库
    */
   RepositoryName?: string
-
   /**
    * 页数，用于分页
    */
   Offset?: number
-
   /**
    * 每页个数，用于分页
    */
   Limit?: number
-
   /**
    * 基于字段排序，支持的值有-creation_time,-name, -update_time
    */
@@ -2271,49 +2054,40 @@ export interface TcrNamespaceInfo {
    * 命名空间名称
    */
   Name: string
-
   /**
    * 创建时间
    */
   CreationTime: string
-
   /**
    * 访问级别
    */
   Public: boolean
-
   /**
    * 命名空间的Id
    */
   NamespaceId: number
-
   /**
-      * 实例云标签
+   * 实例云标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagSpecification: TagSpecification
-
   /**
-      * 命名空间元数据
+   * 命名空间元数据
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metadata: Array<KeyValueString>
-
   /**
    * 漏洞白名单列表
    */
   CVEWhitelistItems?: Array<CVEWhitelistItem>
-
   /**
    * 扫描级别，true为自动，false为手动
    */
   AutoScan?: boolean
-
   /**
    * 安全阻断级别，true为开启，false为关闭
    */
   PreventVUL?: boolean
-
   /**
    * 阻断漏洞等级，目前仅支持low、medium、high, 为""时表示没有设置
    */
@@ -2328,12 +2102,10 @@ export interface DescribeImagesResponse {
    * 容器镜像信息列表
    */
   ImageInfoList: Array<TcrImageInfo>
-
   /**
    * 容器镜像总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2358,22 +2130,18 @@ export interface DescribeWebhookTriggerLogRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   Namespace: string
-
   /**
    * 触发器 Id
    */
   Id?: number
-
   /**
    * 分页单页数量
    */
   Limit?: number
-
   /**
    * 分页偏移量
    */
@@ -2388,12 +2156,10 @@ export interface RenewInstanceRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 预付费自动续费标识和购买时长,0：手动续费，1：自动续费，2：不续费并且不通知;单位为月
    */
   RegistryChargePrepaid: RegistryChargePrepaid
-
   /**
    * 0 续费， 1按量转包年包月
    */
@@ -2408,7 +2174,6 @@ export interface DescribeImageFilterPersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * Tag名
    */
@@ -2423,22 +2188,18 @@ export interface DescribeTagRetentionExecutionTaskRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 规则Id
    */
   RetentionId: number
-
   /**
    * 规则执行Id
    */
   ExecutionId: number
-
   /**
    * 分页Page
    */
   Offset?: number
-
   /**
    * 分页PageSize
    */
@@ -2453,17 +2214,14 @@ export interface ReplicationRule {
    * 同步规则名称
    */
   Name: string
-
   /**
    * 目标命名空间
    */
   DestNamespace: string
-
   /**
    * 是否覆盖
    */
   Override: boolean
-
   /**
    * 同步过滤条件
    */
@@ -2478,12 +2236,10 @@ export interface RepoInfoResp {
    * 仓库总数
    */
   TotalCount: number
-
   /**
    * 仓库信息列表
    */
   RepoInfo: Array<RepoInfo>
-
   /**
    * Server信息
    */
@@ -2508,7 +2264,6 @@ export interface DeleteMultipleSecurityPolicyRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 安全组策略
    */
@@ -2523,7 +2278,6 @@ export interface DeleteSecurityPolicyResponse {
    * 实例Id
    */
   RegistryId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2545,11 +2299,10 @@ export interface CreateSignaturePolicyResponse {
  */
 export interface DescribeInternalEndpointDnsStatusResponse {
   /**
-      * vpc私有域名解析状态列表
+   * vpc私有域名解析状态列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VpcSet: Array<VpcPrivateDomainStatus>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2564,37 +2317,30 @@ export interface WebhookTrigger {
    * 触发器名称
    */
   Name: string
-
   /**
    * 触发器目标
    */
   Targets: Array<WebhookTarget>
-
   /**
    * 触发动作
    */
   EventTypes: Array<string>
-
   /**
    * 触发规则
    */
   Condition: string
-
   /**
    * 启用触发器
    */
   Enabled: boolean
-
   /**
    * 触发器Id
    */
   Id?: number
-
   /**
    * 触发器描述
    */
   Description?: string
-
   /**
    * 触发器所属命名空间 Id
    */
@@ -2609,16 +2355,14 @@ export interface RegistryStatus {
    * 实例的Id
    */
   RegistryId: string
-
   /**
    * 实例的状态
    */
   Status: string
-
   /**
-      * 附加状态
+   * 附加状态
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Conditions: Array<RegistryCondition>
 }
 
@@ -2630,17 +2374,14 @@ export interface SecurityPolicy {
    * 策略索引
    */
   PolicyIndex?: number
-
   /**
    * 备注
    */
   Description?: string
-
   /**
    * 运行访问的公网IP地址端
    */
   CidrBlock?: string
-
   /**
    * 安全策略的版本
    */
@@ -2655,12 +2396,10 @@ export interface DescribeNamespacePersonalRequest {
    * 命名空间，支持模糊查询
    */
   Namespace: string
-
   /**
    * 单页数量
    */
   Limit: number
-
   /**
    * 偏移量
    */
@@ -2682,27 +2421,23 @@ export interface DeleteRepositoryPersonalResponse {
  */
 export interface CreateInstanceTokenResponse {
   /**
-      * 用户名
+   * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Username: string
-
   /**
    * 访问凭证
    */
   Token: string
-
   /**
    * 访问凭证过期时间戳，是一个时间戳数字，无单位
    */
   ExpTime: number
-
   /**
-      * 长期凭证的TokenId，短期凭证没有TokenId
+   * 长期凭证的TokenId，短期凭证没有TokenId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TokenId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2717,11 +2452,10 @@ export interface DescribeApplicationTriggerLogPersonalResp {
    * 返回总数
    */
   TotalCount: number
-
   /**
-      * 触发日志列表
+   * 触发日志列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LogInfo: Array<TriggerLogResp>
 }
 
@@ -2733,7 +2467,6 @@ export interface DeleteImagePersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * Tag名
    */
@@ -2748,7 +2481,6 @@ export interface DescribeApplicationTriggerPersonalResponse {
    * 触发器列表返回值
    */
   Data?: DescribeApplicationTriggerPersonalResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2763,37 +2495,30 @@ export interface RetentionTask {
    * 任务Id
    */
   TaskId: number
-
   /**
    * 所属的规则执行Id
    */
   ExecutionId: number
-
   /**
    * 任务开始时间
    */
   StartTime: string
-
   /**
    * 任务结束时间
    */
   EndTime: string
-
   /**
    * 任务的执行状态，Failed, Succeed, Stopped, InProgress
    */
   Status: string
-
   /**
    * 总tag数
    */
   Total: number
-
   /**
    * 保留tag数
    */
   Retained: number
-
   /**
    * 应用的仓库
    */
@@ -2808,17 +2533,14 @@ export interface DescribeImageAccelerateServiceResponse {
    * 镜像加速状态
    */
   Status?: string
-
   /**
    * CFS的VIP
    */
   CFSVIP?: string
-
   /**
    * 是否开通
    */
   IsEnable?: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2833,7 +2555,6 @@ export interface NamespaceInfoResp {
    * 命名空间数量
    */
   NamespaceCount: number
-
   /**
    * 命名空间信息
    */
@@ -2848,12 +2569,10 @@ export interface CreateRepositoryPersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 是否公共,1:公共,0:私有
    */
   Public?: number
-
   /**
    * 仓库描述
    */
@@ -2868,7 +2587,6 @@ export interface DescribeImageFilterPersonalResponse {
    * 返回tag镜像内容相同的tag列表
    */
   Data: SameImagesResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2883,12 +2601,10 @@ export interface CreateImageLifecyclePersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * keep_last_days:保留最近几天的数据;keep_last_nums:保留最近多少个
    */
   Type: string
-
   /**
    * 策略值
    */
@@ -2903,12 +2619,10 @@ export interface DeleteWebhookTriggerRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   Namespace: string
-
   /**
    * 触发器 Id
    */
@@ -2930,15 +2644,14 @@ export interface DeleteSignaturePolicyResponse {
  */
 export interface TriggerInvokeResult {
   /**
-      * 请求TKE返回值
+   * 请求TKE返回值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReturnCode: number
-
   /**
-      * 请求TKE返回信息
+   * 请求TKE返回信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReturnMsg: string
 }
 
@@ -2960,17 +2673,14 @@ export interface CustomizedDomainInfo {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 证书ID
    */
   CertId: string
-
   /**
    * 域名名称
    */
   DomainName: string
-
   /**
    * 域名创建状态（SUCCESS, FAILURE, CREATING, DELETING）
    */
@@ -2982,16 +2692,14 @@ export interface CustomizedDomainInfo {
  */
 export interface DescribeInstanceCustomizedDomainResponse {
   /**
-      * 域名信息列表
+   * 域名信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DomainInfoList: Array<CustomizedDomainInfo>
-
   /**
    * 总个数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3006,17 +2714,14 @@ export interface DescribeImageManifestsRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 镜像仓库名称
    */
   RepositoryName: string
-
   /**
    * 镜像版本
    */
@@ -3031,7 +2736,6 @@ export interface RegistryChargePrepaid {
    * 购买实例的时长，单位：月
    */
   Period: number
-
   /**
    * 自动续费标识，0：手动续费，1：自动续费，2：不续费并且不通知
    */
@@ -3046,32 +2750,26 @@ export interface ModifyNamespaceRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 访问级别，True为公开，False为私有
    */
   IsPublic?: boolean
-
   /**
    * 扫描级别，True为自动，False为手动
    */
   IsAutoScan?: boolean
-
   /**
    * 阻断开关，True为开放，False为关闭
    */
   IsPreventVUL?: boolean
-
   /**
    * 阻断漏洞等级，目前仅支持 low、medium、high
    */
   Severity?: string
-
   /**
    * 漏洞白名单列表
    */
@@ -3086,17 +2784,14 @@ export interface DeleteImageRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 镜像仓库名称
    */
   RepositoryName: string
-
   /**
    * 镜像版本
    */
   ImageVersion: string
-
   /**
    * 命名空间名称
    */
@@ -3111,7 +2806,6 @@ export interface ModifyRepositoryAccessPersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 默认值为0, 1公共，0私有
    */
@@ -3123,15 +2817,14 @@ export interface ModifyRepositoryAccessPersonalRequest {
  */
 export interface TagSpecification {
   /**
-      * 默认值为instance
+   * 默认值为instance
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ResourceType: string
-
   /**
-      * 云标签数组
+   * 云标签数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags: Array<Tag>
 }
 
@@ -3143,7 +2836,6 @@ export interface CreateMultipleSecurityPolicyRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 安全组策略
    */
@@ -3158,7 +2850,6 @@ export interface KeyValueString {
    * 键
    */
   Key: string
-
   /**
    * 值
    */
@@ -3173,32 +2864,26 @@ export interface DescribeNamespacesRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 指定命名空间，不填写默认查询所有命名空间
    */
   NamespaceName?: string
-
   /**
    * 每页个数
    */
   Limit?: number
-
   /**
    * 页面偏移（第几页）
    */
   Offset?: number
-
   /**
    * 列出所有命名空间
    */
   All?: boolean
-
   /**
    * 过滤条件
    */
   Filters?: Array<Filter>
-
   /**
    * 仅查询启用了 KMS 镜像签名的空间
    */
@@ -3238,17 +2923,14 @@ export interface DeleteSecurityPolicyRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 白名单Id
    */
   PolicyIndex?: number
-
   /**
    * 白名单版本
    */
   PolicyVersion?: string
-
   /**
    * 网段或IP(互斥)
    */
@@ -3263,48 +2945,39 @@ export interface RepositoryInfoResp {
    * 镜像仓库名字
    */
   RepoName: string
-
   /**
    * 镜像仓库类型
    */
   RepoType: string
-
   /**
    * 镜像仓库服务地址
    */
   Server: string
-
   /**
    * 创建时间
    */
   CreationTime: string
-
   /**
-      * 镜像仓库描述
+   * 镜像仓库描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description: string
-
   /**
    * 是否为公有镜像
    */
   Public: number
-
   /**
    * 下载次数
    */
   PullCount: number
-
   /**
    * 收藏次数
    */
   FavorCount: number
-
   /**
    * 是否为用户收藏
    */
   IsUserFavor: boolean
-
   /**
    * 是否为腾讯云官方镜像
    */
@@ -3319,32 +2992,26 @@ export interface CreateInstanceRequest {
    * 企业版实例名称
    */
   RegistryName: string
-
   /**
    * 企业版实例类型（basic 基础版；standard 标准版；premium 高级版）
    */
   RegistryType: string
-
   /**
    * 云标签描述
    */
   TagSpecification?: TagSpecification
-
   /**
    * 实例计费类型，0表示按量计费，1表示预付费，默认为按量计费
    */
   RegistryChargeType?: number
-
   /**
    * 预付费自动续费标识和购买时长
    */
   RegistryChargePrepaid?: RegistryChargePrepaid
-
   /**
    * 是否同步TCR云标签至生成的COS Bucket
    */
   SyncTag?: boolean
-
   /**
    * 是否开启Cos桶多AZ特性
    */
@@ -3359,12 +3026,10 @@ export interface DescribeInstanceTokenRequest {
    * 实例 ID
    */
   RegistryId: string
-
   /**
    * 分页单页数量
    */
   Limit?: number
-
   /**
    * 分页偏移量
    */
@@ -3389,37 +3054,30 @@ export interface CreateNamespaceRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间的名称（长度2-30个字符，只能包含小写字母、数字及分隔符("."、"_"、"-")，且不能以分隔符开头、结尾或连续）
    */
   NamespaceName: string
-
   /**
    * 是否公开，true为公开，fale为私有
    */
   IsPublic: boolean
-
   /**
    * 云标签描述
    */
   TagSpecification?: TagSpecification
-
   /**
    * 自动扫描级别，true为自动，false为手动
    */
   IsAutoScan?: boolean
-
   /**
    * 安全阻断级别，true为自动，false为手动
    */
   IsPreventVUL?: boolean
-
   /**
    * 阻断漏洞等级，目前仅支持low、medium、high
    */
   Severity?: string
-
   /**
    * 漏洞白名单列表
    */
@@ -3444,22 +3102,18 @@ export interface GCJobInfo {
    * 作业 ID
    */
   ID: number
-
   /**
    * 作业状态
    */
   JobStatus: string
-
   /**
    * 创建时间
    */
   CreationTime: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 调度信息
    */
@@ -3474,79 +3128,65 @@ export interface Registry {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 实例名称
    */
   RegistryName: string
-
   /**
    * 实例规格
    */
   RegistryType: string
-
   /**
    * 实例状态
    */
   Status: string
-
   /**
    * 实例的公共访问地址
    */
   PublicDomain: string
-
   /**
    * 实例创建时间
    */
   CreatedAt: string
-
   /**
    * 地域名称
    */
   RegionName: string
-
   /**
    * 地域Id
    */
   RegionId: number
-
   /**
    * 是否支持匿名
    */
   EnableAnonymous: boolean
-
   /**
    * Token有效时间
    */
   TokenValidTime: number
-
   /**
    * 实例内部访问地址
    */
   InternalEndpoint: string
-
   /**
-      * 实例云标签
+   * 实例云标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagSpecification: TagSpecification
-
   /**
-      * 实例过期时间（预付费）
+   * 实例过期时间（预付费）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpiredAt: string
-
   /**
-      * 实例付费类型，0表示后付费，1表示预付费
+   * 实例付费类型，0表示后付费，1表示预付费
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PayMod: number
-
   /**
-      * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
+   * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RenewFlag: number
 }
 
@@ -3558,17 +3198,14 @@ export interface DescribeChartDownloadInfoRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   NamespaceName: string
-
   /**
    * Chart包的名称
    */
   ChartName: string
-
   /**
    * Chart包的版本
    */
@@ -3583,7 +3220,6 @@ export interface ValidateRepositoryExistPersonalResponse {
    * 验证个人版仓库是否存在返回信息
    */
   Data: RepoIsExistResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3608,12 +3244,10 @@ export interface CheckInstanceResponse {
    * 检查结果，true为合法，false为非法
    */
   IsValidated: boolean
-
   /**
    * 实例所在的RegionId
    */
   RegionId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3628,7 +3262,6 @@ export interface NamespaceIsExistsResp {
    * 命名空间是否存在
    */
   IsExist: boolean
-
   /**
    * 是否为保留命名空间
    */
@@ -3640,26 +3273,22 @@ export interface NamespaceIsExistsResp {
  */
 export interface DescribeInstancesRequest {
   /**
-      * 实例ID列表(为空时，
+   * 实例ID列表(为空时，
 表示获取账号下所有实例)
-      */
+   */
   Registryids?: Array<string>
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 最大输出条数，默认20，最大为100
    */
   Limit?: number
-
   /**
    * 过滤条件
    */
   Filters?: Array<Filter>
-
   /**
    * 获取所有地域的实例，默认为False
    */
@@ -3674,29 +3303,24 @@ export interface CreateInternalEndpointDnsRequest {
    * tcr实例id
    */
   InstanceId: string
-
   /**
    * 私有网络id
    */
   VpcId: string
-
   /**
    * tcr内网访问链路ip
    */
   EniLBIp: string
-
   /**
-      * true：为默认域名，公网域名一致
+   * true：为默认域名，公网域名一致
 false: 使用vpc域名
 默认为vpc域名
-      */
+   */
   UsePublicDomain?: boolean
-
   /**
    * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
    */
   RegionName?: string
-
   /**
    * 请求的地域ID，用于实例复制地域
    */
@@ -3711,11 +3335,10 @@ export interface TriggerInvokeCondition {
    * 触发方式
    */
   InvokeMethod: string
-
   /**
-      * 触发表达式
+   * 触发表达式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvokeExpr: string
 }
 
@@ -3737,7 +3360,6 @@ export interface Filter {
    * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
    */
   Name: string
-
   /**
    * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
    */
@@ -3752,22 +3374,18 @@ export interface RetentionExecution {
    * 执行Id
    */
   ExecutionId: number
-
   /**
    * 所属规则id
    */
   RetentionId: number
-
   /**
    * 执行的开始时间
    */
   StartTime: string
-
   /**
    * 执行的结束时间
    */
   EndTime: string
-
   /**
    * 执行的状态，Failed, Succeed, Stopped, InProgress
    */
@@ -3792,7 +3410,6 @@ export interface DescribeReplicationInstanceCreateTasksRequest {
    * 同步实例Id，见实例返回列表中的同步实例ID
    */
   ReplicationRegistryId: string
-
   /**
    * 同步实例的地域ID，见实例返回列表中地域ID
    */
@@ -3817,52 +3434,42 @@ export interface RepoInfo {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 仓库类型
    */
   RepoType: string
-
   /**
    * Tag数量
    */
   TagCount: number
-
   /**
    * 是否为公开
    */
   Public: number
-
   /**
    * 是否为用户收藏
    */
   IsUserFavor: boolean
-
   /**
    * 是否为腾讯云官方仓库
    */
   IsQcloudOfficial: boolean
-
   /**
    * 被收藏的个数
    */
   FavorCount: number
-
   /**
    * 拉取的数量
    */
   PullCount: number
-
   /**
    * 描述
    */
   Description: string
-
   /**
    * 仓库创建时间
    */
   CreationTime: string
-
   /**
    * 仓库更新时间
    */
@@ -3877,7 +3484,6 @@ export interface ManageImageLifecycleGlobalPersonalRequest {
    * global_keep_last_days:全局保留最近几天的数据;global_keep_last_nums:全局保留最近多少个
    */
   Type: string
-
   /**
    * 策略值
    */
@@ -3892,7 +3498,6 @@ export interface DescribeUserQuotaPersonalResponse {
    * 配额返回信息
    */
   Data?: RespLimit
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3907,32 +3512,27 @@ export interface TaskDetail {
    * 任务
    */
   TaskName: string
-
   /**
    * 任务UUID
    */
   TaskUUID: string
-
   /**
    * 任务状态
    */
   TaskStatus: string
-
   /**
-      * 任务的状态信息
+   * 任务的状态信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskMessage: string
-
   /**
    * 任务开始时间
    */
   CreatedTime: string
-
   /**
-      * 任务结束时间
+   * 任务结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FinishedTime: string
 }
 
@@ -3944,17 +3544,14 @@ export interface DescribeImagePersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回最大数量，默认 20, 最大值 100
    */
   Limit?: number
-
   /**
    * tag名称，可根据输入搜索
    */
@@ -3969,7 +3566,6 @@ export interface DeleteSignaturePolicyRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间的名称
    */
@@ -3984,7 +3580,6 @@ export interface DescribeRepositoryFilterPersonalResponse {
    * 仓库信息
    */
   Data?: SearchUserRepositoryResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3999,7 +3594,6 @@ export interface ModifySecurityPolicyResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4034,12 +3628,10 @@ export interface DeleteInstanceRequest {
    * 实例id
    */
   RegistryId: string
-
   /**
    * 是否删除存储桶，默认为false
    */
   DeleteBucket?: boolean
-
   /**
    * 是否dryRun模式，缺省值：false
    */
@@ -4054,12 +3646,10 @@ export interface DescribeImageManifestsResponse {
    * 镜像的Manifest信息
    */
   Manifest?: string
-
   /**
    * 镜像的配置信息
    */
   Config?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4074,7 +3664,6 @@ export interface DescribeNamespacePersonalResponse {
    * 用户命名空间返回信息
    */
   Data?: NamespaceInfoResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4099,17 +3688,14 @@ export interface DescribeWebhookTriggerRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 分页单页数量
    */
   Limit?: number
-
   /**
    * 分页偏移量
    */
   Offset?: number
-
   /**
    * 命名空间
    */
@@ -4124,32 +3710,26 @@ export interface ImmutableTagRule {
    * 仓库匹配规则
    */
   RepositoryPattern: string
-
   /**
    * Tag 匹配规则
    */
   TagPattern: string
-
   /**
    * repoMatches或repoExcludes
    */
   RepositoryDecoration: string
-
   /**
    * matches或excludes
    */
   TagDecoration: string
-
   /**
    * 禁用规则
    */
   Disabled?: boolean
-
   /**
    * 规则 Id
    */
   RuleId?: number
-
   /**
    * 命名空间
    */
@@ -4164,7 +3744,6 @@ export interface Header {
    * Header Key
    */
   Key: string
-
   /**
    * Header Values
    */
@@ -4179,13 +3758,11 @@ export interface DescribeReplicationInstancesResponse {
    * 总实例个数
    */
   TotalCount: number
-
   /**
-      * 同步实例列表
+   * 同步实例列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReplicationRegistries: Array<ReplicationRegistry>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4200,12 +3777,10 @@ export interface CreateSecurityPolicyRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 192.168.0.0/24
    */
   CidrBlock: string
-
   /**
    * 备注
    */
@@ -4220,12 +3795,10 @@ export interface CreateWebhookTriggerRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 触发器参数
    */
   Trigger: WebhookTrigger
-
   /**
    * 命名空间
    */
@@ -4247,9 +3820,9 @@ export interface DeleteImageAccelerateServiceResponse {
  */
 export interface CVEWhitelistItem {
   /**
-      * 漏洞白名单 ID
+   * 漏洞白名单 ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CVEID?: string
 }
 
@@ -4261,7 +3834,6 @@ export interface ModifyRepositoryInfoPersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 仓库描述
    */
@@ -4276,22 +3848,18 @@ export interface DescribeApplicationTriggerLogPersonalRequest {
    * 仓库名称
    */
   RepoName?: string
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回最大数量，默认 20, 最大值 100
    */
   Limit?: number
-
   /**
    * 升序或降序
    */
   Order?: string
-
   /**
    * 按某列排序
    */
@@ -4306,7 +3874,6 @@ export interface DescribeGCJobsResponse {
    * GC Job 列表
    */
   Jobs: Array<GCJobInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4321,12 +3888,10 @@ export interface DescribeFavorRepositoryPersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * 分页Limit
    */
   Limit: number
-
   /**
    * Offset用于分页
    */
@@ -4341,17 +3906,14 @@ export interface DescribeApplicationTriggerPersonalRequest {
    * 仓库名称
    */
   RepoName?: string
-
   /**
    * 触发器名称
    */
   TriggerName?: string
-
   /**
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回最大数量，默认 20, 最大值 100
    */
@@ -4366,7 +3928,6 @@ export interface DeleteMultipleSecurityPolicyResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4381,7 +3942,6 @@ export interface ManageInternalEndpointResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4406,12 +3966,10 @@ export interface CreateInstanceCustomizedDomainRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 自定义域名
    */
   DomainName: string
-
   /**
    * 证书ID
    */
@@ -4436,7 +3994,6 @@ export interface DescribeFavorRepositoryPersonalResponse {
    * 个人收藏仓库列表返回信息
    */
   Data?: FavorResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4451,7 +4008,6 @@ export interface CheckInstanceNameResponse {
    * 检查结果，true为合法，false为非法
    */
   IsValidated?: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4476,12 +4032,10 @@ export interface DescribeRepositoryOwnerPersonalRequest {
    * 偏移量，默认为0
    */
   Offset?: number
-
   /**
    * 返回最大数量，默认 20, 最大值 100
    */
   Limit?: number
-
   /**
    * 仓库名称
    */
@@ -4496,13 +4050,11 @@ export interface DescribeExternalEndpointStatusResponse {
    * 开启公网访问状态，开启中（Opening）、已开启（Opened）、关闭（Closed）
    */
   Status: string
-
   /**
-      * 原因
+   * 原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Reason: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4517,12 +4069,10 @@ export interface DescribeTagRetentionRulesResponse {
    * 版本保留策略列表
    */
   RetentionPolicyList: Array<RetentionPolicy>
-
   /**
    * 版本保留策略总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4542,7 +4092,6 @@ export interface ManageExternalEndpointResponse {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4554,22 +4103,19 @@ export interface ManageExternalEndpointResponse {
  */
 export interface DescribeImmutableTagRulesResponse {
   /**
-      * 规则列表
+   * 规则列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Rules: Array<ImmutableTagRule>
-
   /**
-      * 未创建规则的命名空间
+   * 未创建规则的命名空间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EmptyNs: Array<string>
-
   /**
    * 规则总量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4584,52 +4130,42 @@ export interface ModifyApplicationTriggerPersonalRequest {
    * 触发器关联的镜像仓库，library/test格式
    */
   RepoName?: string
-
   /**
    * 触发器名称，必填参数
    */
   TriggerName?: string
-
   /**
    * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
    */
   InvokeMethod?: string
-
   /**
    * 触发方式对应的表达式
    */
   InvokeExpr?: string
-
   /**
    * 应用所在TKE集群ID
    */
   ClusterId?: string
-
   /**
    * 应用所在TKE集群命名空间
    */
   Namespace?: string
-
   /**
    * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
    */
   WorkloadType?: string
-
   /**
    * 应用所在TKE集群工作负载名称
    */
   WorkloadName?: string
-
   /**
    * 应用所在TKE集群工作负载下容器名称
    */
   ContainerName?: string
-
   /**
    * 应用所在TKE集群地域数字ID，如1（广州）、16（成都）
    */
   ClusterRegion?: number
-
   /**
    * 新触发器名称
    */
@@ -4644,7 +4180,6 @@ export interface CreateReplicationInstanceResponse {
    * 企业版复制实例Id
    */
   ReplicationRegistryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4659,12 +4194,10 @@ export interface CreateInstanceTokenRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 访问凭证类型，longterm 为长期访问凭证，temp 为临时访问凭证，默认是临时访问凭证，有效期1小时
    */
   TokenType?: string
-
   /**
    * 长期访问凭证描述信息
    */
@@ -4699,12 +4232,10 @@ export interface PeerReplicationOption {
    * 待同步实例的uin
    */
   PeerRegistryUin: string
-
   /**
    * 待同步实例的访问永久Token
    */
   PeerRegistryToken: string
-
   /**
    * 是否开启跨主账号实例同步
    */
@@ -4739,27 +4270,22 @@ export interface ReplicationRegistry {
    * 主实例ID
    */
   RegistryId: string
-
   /**
    * 复制实例ID
    */
   ReplicationRegistryId: string
-
   /**
    * 复制实例的地域ID
    */
   ReplicationRegionId: number
-
   /**
    * 复制实例的地域名称
    */
   ReplicationRegionName: string
-
   /**
    * 复制实例的状态
    */
   Status: string
-
   /**
    * 创建时间
    */
@@ -4784,7 +4310,6 @@ export interface ValidateNamespaceExistPersonalResponse {
    * 验证命名空间是否存在返回信息
    */
   Data: NamespaceIsExistsResp
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4809,7 +4334,6 @@ export interface DescribeApplicationTriggerPersonalResp {
    * 返回条目总数
    */
   TotalCount: number
-
   /**
    * 触发器列表
    */
@@ -4824,73 +4348,59 @@ export interface TagInfo {
    * Tag名称
    */
   TagName: string
-
   /**
    * 制品的 ID
    */
   TagId: string
-
   /**
    * docker image 可以看到的id
    */
   ImageId: string
-
   /**
    * 大小
    */
   Size: string
-
   /**
    * 制品的创建时间
    */
   CreationTime: string
-
   /**
-      * 制品创建至今时间长度
+   * 制品创建至今时间长度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DurationDays: string
-
   /**
    * 标注的制品作者
    */
   Author: string
-
   /**
    * 标注的制品平台
    */
   Architecture: string
-
   /**
    * 创建制品的 Docker 版本
    */
   DockerVersion: string
-
   /**
    * 标注的制品操作系统
    */
   OS: string
-
   /**
    * 制品大小
    */
   SizeByte: number
-
   /**
    * 序号
    */
   Id: number
-
   /**
    * 数据更新时间
    */
   UpdateTime: string
-
   /**
    * 制品更新时间
    */
   PushTime: string
-
   /**
    * 制品类型
    */
@@ -4905,22 +4415,18 @@ export interface CreateRepositoryRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 仓库名称
    */
   RepositoryName: string
-
   /**
    * 仓库简短描述
    */
   BriefDescription?: string
-
   /**
    * 仓库详细描述
    */
@@ -4955,7 +4461,6 @@ export interface DeleteNamespaceRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间的名称
    */
@@ -4970,7 +4475,6 @@ export interface BatchDeleteImagePersonalRequest {
    * 仓库名称
    */
   RepoName: string
-
   /**
    * Tag列表
    */
@@ -4985,37 +4489,30 @@ export interface DescribeImagesRequest {
    * 实例ID
    */
   RegistryId: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * 镜像仓库名称
    */
   RepositoryName: string
-
   /**
    * 指定镜像版本进行查找，当前为模糊搜索
    */
   ImageVersion?: string
-
   /**
    * 每页个数，用于分页，默认20
    */
   Limit?: number
-
   /**
    * 页数，默认值为1
    */
   Offset?: number
-
   /**
    * 指定镜像 Digest 进行查找
    */
   Digest?: string
-
   /**
    * 指定是否为精准匹配，true为精准匹配，不填为模糊匹配
    */
@@ -5040,17 +4537,14 @@ export interface DescribeTagRetentionExecutionRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 规则Id
    */
   RetentionId: number
-
   /**
    * 分页PageSize
    */
   Limit?: number
-
   /**
    * 分页Page
    */
@@ -5075,17 +4569,14 @@ export interface DescribeTagRetentionRulesRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 命名空间的名称
    */
   NamespaceName?: string
-
   /**
    * 分页PageSize
    */
   Limit?: number
-
   /**
    * 分页Page
    */
@@ -5120,7 +4611,6 @@ export interface DescribeInstanceAllNamespacesRequest {
    * 每页个数
    */
   Limit?: number
-
   /**
    * 起始偏移位置
    */
@@ -5135,12 +4625,10 @@ export interface DescribeInstanceTokenResponse {
    * 长期访问凭证总数
    */
   TotalCount?: number
-
   /**
    * 长期访问凭证列表
    */
   Tokens?: Array<TcrInstanceToken>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5155,12 +4643,10 @@ export interface DescribeInstanceCustomizedDomainRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 分页Limit
    */
   Limit?: number
-
   /**
    * 分页Offset
    */
@@ -5172,9 +4658,9 @@ export interface DescribeInstanceCustomizedDomainRequest {
  */
 export interface SameImagesResp {
   /**
-      * tag列表
+   * tag列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SameImages: Array<string>
 }
 
@@ -5186,12 +4672,10 @@ export interface DescribeTagRetentionExecutionResponse {
    * 版本保留执行记录列表
    */
   RetentionExecutionList: Array<RetentionExecution>
-
   /**
    * 版本保留执行记录总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5216,12 +4700,10 @@ export interface DeleteImmutableTagRulesRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 命名空间
    */
   NamespaceName: string
-
   /**
    * 规则 Id
    */
@@ -5236,7 +4718,6 @@ export interface CreateWebhookTriggerResponse {
    * 新建的触发器
    */
   Trigger?: WebhookTrigger
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5251,32 +4732,26 @@ export interface CreateSignaturePolicyRequest {
    * 实例 Id
    */
   RegistryId: string
-
   /**
    * 策略名称
    */
   Name: string
-
   /**
    * 命名空间名称
    */
   NamespaceName: string
-
   /**
    * KMS 密钥
    */
   KmsId: string
-
   /**
    * KMS 密钥所属地域
    */
   KmsRegion: string
-
   /**
    * 用户自定义域名，为空时使用 TCR 实例默认域名生成签名
    */
   Domain?: string
-
   /**
    * 禁用加签策略，默认为 false
    */
@@ -5291,7 +4766,6 @@ export interface DeleteTagRetentionRuleRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 版本保留规则的Id
    */
@@ -5306,7 +4780,6 @@ export interface ReplicationFilter {
    * 类型（name、tag和resource）
    */
   Type: string
-
   /**
    * 默认为空
    */
@@ -5321,34 +4794,28 @@ export interface TcrRepositoryInfo {
    * 仓库名称
    */
   Name: string
-
   /**
    * 命名空间名称
    */
   Namespace: string
-
   /**
    * 创建时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
    */
   CreationTime: string
-
   /**
    * 是否公开
    */
   Public: boolean
-
   /**
-      * 仓库详细描述
+   * 仓库详细描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description: string
-
   /**
-      * 简单描述
+   * 简单描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BriefDescription: string
-
   /**
    * 更新时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
    */
@@ -5363,27 +4830,22 @@ export interface TcrInstanceToken {
    * 令牌ID
    */
   Id: string
-
   /**
    * 令牌描述
    */
   Desc: string
-
   /**
    * 令牌所属实例ID
    */
   RegistryId: string
-
   /**
    * 令牌启用状态
    */
   Enabled: boolean
-
   /**
    * 令牌创建时间
    */
   CreatedAt: string
-
   /**
    * 令牌过期时间戳
    */
@@ -5398,12 +4860,10 @@ export interface DeleteRepositoryRequest {
    * 实例Id
    */
   RegistryId: string
-
   /**
    * 命名空间的名称
    */
   NamespaceName: string
-
   /**
    * 镜像仓库的名称
    */
@@ -5428,12 +4888,10 @@ export interface CreateTagRetentionExecutionRequest {
    * 主实例iD
    */
   RegistryId: string
-
   /**
    * 版本保留规则Id
    */
   RetentionId: number
-
   /**
    * 是否模拟执行，默认值为false，即非模拟执行
    */
@@ -5445,39 +4903,34 @@ export interface CreateTagRetentionExecutionRequest {
  */
 export interface ReplicationLog {
   /**
-      * 资源类型
+   * 资源类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ResourceType: string
-
   /**
-      * 源资源
+   * 源资源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Source: string
-
   /**
-      * 目的资源
+   * 目的资源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Destination: string
-
   /**
-      * 同步状态
+   * 同步状态
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: string
-
   /**
-      * 开始时间
+   * 开始时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime: string
-
   /**
-      * 结束时间
+   * 结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime: string
 }
 
@@ -5509,12 +4962,10 @@ export interface Limit {
    * 用户名
    */
   Username: string
-
   /**
    * 配额的类型
    */
   Type: string
-
   /**
    * 配置的值
    */

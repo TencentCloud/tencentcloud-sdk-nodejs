@@ -372,6 +372,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceGroup", req, cb);
     }
     /**
+     * 查询新版安全组下发进度
+     */
+    async DescribeEnterpriseSGRuleProgress(req, cb) {
+        return this.request("DescribeEnterpriseSGRuleProgress", req, cb);
+    }
+    /**
      * 查询防火墙弹性公网IP
      */
     async DescribeCfwEips(req, cb) {

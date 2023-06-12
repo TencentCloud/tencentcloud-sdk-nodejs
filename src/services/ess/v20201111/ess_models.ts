@@ -43,7 +43,6 @@ export interface DescribeFlowEvidenceReportRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 出证报告编号
    */
@@ -58,12 +57,10 @@ export interface UpdateIntegrationEmployeesResponse {
    * 更新成功的用户列表
    */
   SuccessEmployeeData?: Array<SuccessUpdateStaffData>
-
   /**
    * 更新失败的用户列表
    */
   FailedEmployeeData?: Array<FailedUpdateStaffData>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -78,7 +75,6 @@ export interface Department {
    * 部门id
    */
   DepartmentId: string
-
   /**
    * 部门名称
    */
@@ -93,77 +89,66 @@ export interface CreatePreparedPersonalEsignRequest {
    * 个人用户姓名
    */
   UserName: string
-
   /**
    * 身份证件号码
    */
   IdCardNumber: string
-
   /**
    * 印章名称
    */
   SealName: string
-
   /**
    * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
    */
   Operator?: UserInfo
-
   /**
-      * 身份证件类型:
+   * 身份证件类型:
 ID_CARD 身份证
 PASSPORT 护照
 HONGKONG_AND_MACAO 中国香港
 FOREIGN_ID_CARD 境外身份
 HONGKONG_MACAO_AND_TAIWAN 中国台湾
-      */
+   */
   IdCardType?: string
-
   /**
-      * 印章图片的base64
+   * 印章图片的base64
 注：已废弃
 请先通过UploadFiles接口上传文件，获取 FileId
-      */
+   */
   SealImage?: string
-
   /**
    * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
    */
   SealImageCompress?: boolean
-
   /**
    * 手机号码；当需要开通自动签时，该参数必传
    */
   Mobile?: string
-
   /**
    * 是否开通自动签，该功能需联系运营工作人员开通后使用
    */
   EnableAutoSign?: boolean
-
   /**
-      * 印章颜色（参数ProcessSeal=true时生效）
+   * 印章颜色（参数ProcessSeal=true时生效）
 默认值：BLACK黑色
 取值: 
 BLACK 黑色,
 RED 红色,
 BLUE 蓝色。
-      */
+   */
   SealColor?: string
-
   /**
-      * 是否处理印章
+   * 是否处理印章
 默认不做印章处理。
 取值：false：不做任何处理；
 true：做透明化处理和颜色增强。
-      */
+   */
   ProcessSeal?: boolean
-
   /**
-      * 印章图片文件 id
+   * 印章图片文件 id
 取值：
 填写的FileId通过UploadFiles接口上传文件获取。
-      */
+   */
   FileId?: string
 }
 
@@ -175,7 +160,6 @@ export interface DescribeIntegrationDepartmentsResponse {
    * 部门列表
    */
   Departments?: Array<IntegrationDepartment>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -190,17 +174,14 @@ export interface FileInfo {
    * 文件Id
    */
   FileId?: string
-
   /**
    * 文件名
    */
   FileName?: string
-
   /**
    * 文件大小，单位为Byte
    */
   FileSize?: number
-
   /**
    * 文件上传时间，10位时间戳（精确到秒）
    */
@@ -245,12 +226,10 @@ export interface CreateMultiFlowSignQRCodeResponse {
    * 签署二维码对象
    */
   QrCode?: SignQrCode
-
   /**
    * 签署链接对象
    */
   SignUrls?: SignUrl
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -262,106 +241,89 @@ export interface CreateMultiFlowSignQRCodeResponse {
  */
 export interface FlowCreateApprover {
   /**
-      * 参与者类型：
+   * 参与者类型：
 0：企业
 1：个人
 3：企业静默签署
 注：类型为3（企业静默签署）时，会默认完成该签署方的签署。静默签署仅进行盖章操作，不能是手写签名。
-      */
+   */
   ApproverType: number
-
   /**
    * 如果签署方为企业，需要填入企业全称
    */
   OrganizationName?: string
-
   /**
    * 签署方经办人姓名
    */
   ApproverName?: string
-
   /**
    * 签署方经办人手机号码
    */
   ApproverMobile?: string
-
   /**
-      * 签署方经办人证件类型ID_CARD 身份证
+   * 签署方经办人证件类型ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-      */
+   */
   ApproverIdCardType?: string
-
   /**
    * 签署方经办人证件号码
    */
   ApproverIdCardNumber?: string
-
   /**
    * 签署方经办人在模板中的参与方ID
    */
   RecipientId?: string
-
   /**
    * 签署意愿确认渠道,WEIXINAPP:人脸识别
    */
   VerifyChannel?: Array<string>
-
   /**
    * 是否发送短信，sms--短信通知，none--不通知，默认为sms；发起方=签署方时不发送短信
    */
   NotifyType?: string
-
   /**
    * 合同强制需要阅读全文，无需传此参数
    */
   IsFullText?: boolean
-
   /**
    * 合同的强制预览时间：3~300s，未指定则按合同页数计算
    */
   PreReadTime?: number
-
   /**
    * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。
    */
   UserId?: string
-
   /**
    * 当前只支持true，默认为true
    */
   Required?: boolean
-
   /**
    * 签署人用户来源,企微侧用户请传入：WEWORKAPP
    */
   ApproverSource?: string
-
   /**
    * 客户自定义签署人标识，64位长度，保证唯一。非企微场景不使用此字段
    */
   CustomApproverTag?: string
-
   /**
    * 快速注册相关信息，目前暂未开放！
    */
   RegisterInfo?: RegisterInfo
-
   /**
    * 签署人个性化能力值
    */
   ApproverOption?: ApproverOption
-
   /**
    * 签署完前端跳转的url，暂未使用
+   * @deprecated
    */
   JumpUrl?: string
-
   /**
-      * 签署ID
+   * 签署ID
 - 发起流程时系统自动补充
 - 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
-      */
+   */
   SignId?: string
 }
 
@@ -373,7 +335,6 @@ export interface DescribeThirdPartyAuthCodeResponse {
    * 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名
    */
   VerifyStatus: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -408,7 +369,6 @@ export interface BindEmployeeUserIdWithClientOpenIdResponse {
    * 绑定是否成功，1表示成功，0表示失败
    */
   Status?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -423,12 +383,10 @@ export interface CreateIntegrationEmployeesRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 待创建员工的信息，Mobile和DisplayName必填
    */
   Employees: Array<Staff>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -443,25 +401,21 @@ export interface DescribeIntegrationRolesRequest {
    * 操作人信息
    */
   Operator: UserInfo
-
   /**
    * 返回最大数量，最大为200
    */
   Limit: number
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
-      * 查询的关键字段:
+   * 查询的关键字段:
 Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
 Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
 Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0，最大为2000
    */
@@ -476,7 +430,6 @@ export interface CreateFlowEvidenceReportRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 签署流程编号
    */
@@ -491,7 +444,6 @@ export interface StartFlowResponse {
    * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
    */
   Status?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -503,15 +455,14 @@ export interface StartFlowResponse {
  */
 export interface StaffRole {
   /**
-      * 角色id
+   * 角色id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleId: string
-
   /**
-      * 角色名称
+   * 角色名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleName: string
 }
 
@@ -520,33 +471,29 @@ export interface StaffRole {
  */
 export interface FlowApproverUrlInfo {
   /**
-      * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+   * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SignUrl?: string
-
   /**
-      * 签署人类型 1-个人
+   * 签署人类型 1-个人
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproverType?: number
-
   /**
-      * 签署人姓名
+   * 签署人姓名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproverName?: string
-
   /**
-      * 签署人手机号
+   * 签署人手机号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproverMobile?: string
-
   /**
-      * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+   * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LongUrl?: string
 }
 
@@ -568,29 +515,26 @@ export interface CreateConvertTaskApiRequest {
    * 资源类型 支持doc,docx,html,xls,xlsx,jpg,jpeg,png,bmp文件类型
    */
   ResourceType: string
-
   /**
    * 资源名称，长度限制为256字符
    */
   ResourceName: string
-
   /**
    * 资源Id，通过UploadFiles获取
    */
   ResourceId: string
-
   /**
    * 调用方用户信息，userId 必填
    */
   Operator?: UserInfo
-
   /**
    * 应用号信息
+   * @deprecated
    */
   Agent?: Agent
-
   /**
    * 暂未开放
+   * @deprecated
    */
   Organization?: OrganizationInfo
 }
@@ -603,7 +547,6 @@ export interface CreateFlowRemindsResponse {
    * 催办合同详情列表
    */
   RemindFlowRecords?: Array<RemindFlowRecords>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -618,32 +561,26 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 单次查询成员企业最大返回数量
    */
   Limit: number
-
   /**
    * 页面偏移量
    */
   Offset: number
-
   /**
    * 查询成员企业的企业名，模糊匹配
    */
   Name?: string
-
   /**
    * 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入
    */
   Status?: number
-
   /**
    * 是否导出当前成员企业数据
    */
   Export?: boolean
-
   /**
    * 成员企业id
    */
@@ -656,21 +593,21 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
 export interface Agent {
   /**
    * 代理机构的应用编号,32位字符串，一般不用传
+   * @deprecated
    */
   AppId?: string
-
   /**
    * 被代理机构的应用号，一般不用传
+   * @deprecated
    */
   ProxyAppId?: string
-
   /**
    * 被代理机构在电子签平台的机构编号，集团代理下场景必传
    */
   ProxyOrganizationId?: string
-
   /**
    * 被代理机构的经办人，一般不用传
+   * @deprecated
    */
   ProxyOperator?: string
 }
@@ -680,18 +617,16 @@ export interface Agent {
  */
 export interface FlowApproverDetail {
   /**
-      * 签署时的相关信息
+   * 签署时的相关信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproveMessage?: string
-
   /**
    * 签署方姓名
    */
   ApproveName: string
-
   /**
-      * 签署方的签署状态
+   * 签署方的签署状态
 0：还没有发起
 1：流程中 没有开始处理
 2：待签署
@@ -705,63 +640,53 @@ export interface FlowApproverDetail {
 10：填写完成
 15：已解除
 19：转他人处理
-      */
+   */
   ApproveStatus: number
-
   /**
    * 模板配置中的参与方ID,与控件绑定
    */
   ReceiptId: string
-
   /**
-      * 客户自定义的用户ID
+   * 客户自定义的用户ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CustomUserId: string
-
   /**
    * 签署人手机号
    */
   Mobile: string
-
   /**
    * 签署顺序，如果是有序签署，签署顺序从小到大
    */
   SignOrder: number
-
   /**
    * 签署人签署时间，时间戳，单位秒
    */
   ApproveTime: number
-
   /**
-      * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
+   * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproveType: string
-
   /**
-      * 签署方侧用户来源，如WEWORKAPP-企业微信等
+   * 签署方侧用户来源，如WEWORKAPP-企业微信等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ApproverSource: string
-
   /**
-      * 客户自定义签署方标识
+   * 客户自定义签署方标识
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CustomApproverTag: string
-
   /**
-      * 签署方企业Id
+   * 签署方企业Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OrganizationId: string
-
   /**
-      * 签署方企业名称
+   * 签署方企业名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OrganizationName: string
 }
 
@@ -773,53 +698,46 @@ export interface DescribeFlowTemplatesRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
    * 查询内容：0-模板列表及详情（默认），1-仅模板列表
    */
   ContentType?: number
-
   /**
    * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
    */
   Filters?: Array<Filter>
-
   /**
    * 查询偏移位置，默认0
    */
   Offset?: number
-
   /**
    * 查询个数，默认20，最大200
    */
   Limit?: number
-
   /**
-      * 这个参数跟下面的IsChannel参数配合使用。
+   * 这个参数跟下面的IsChannel参数配合使用。
 IsChannel=false时，ApplicationId参数不起任何作用。
 IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表
 ApplicationId为空，查询所有应用下的模板列表
-      */
+   */
   ApplicationId?: string
-
   /**
-      * 默认为false，查询SaaS模板库列表；
+   * 默认为false，查询SaaS模板库列表；
 为true，查询第三方应用集成平台企业模板库管理列表
-      */
+   */
   IsChannel?: boolean
-
   /**
    * 暂未开放
+   * @deprecated
    */
   Organization?: OrganizationInfo
-
   /**
    * 暂未开放
+   * @deprecated
    */
   GenerateSource?: number
 }
@@ -829,18 +747,16 @@ ApplicationId为空，查询所有应用下的模板列表
  */
 export interface DescribeFlowEvidenceReportResponse {
   /**
-      * 报告 URL
+   * 报告 URL
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReportUrl: string
-
   /**
-      * 执行中：EvidenceStatusExecuting
+   * 执行中：EvidenceStatusExecuting
 成功：EvidenceStatusSuccess
 失败：EvidenceStatusFailed
-      */
+   */
   Status: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -855,17 +771,15 @@ export interface CallbackInfo {
    * 回调url
    */
   CallbackUrl: string
-
   /**
    * 回调加密key，已废弃
+   * @deprecated
    */
   Token?: string
-
   /**
    * 回调加密key
    */
   CallbackKey?: string
-
   /**
    * 回调验签token
    */
@@ -880,106 +794,87 @@ export interface TemplateInfo {
    * 模板ID
    */
   TemplateId?: string
-
   /**
    * 模板名字
    */
   TemplateName?: string
-
   /**
    * 模板描述信息
    */
   Description?: string
-
   /**
    * 模板关联的资源ID列表
    */
   DocumentResourceIds?: Array<string>
-
   /**
    * 返回的文件信息结构
    */
   FileInfos?: Array<FileInfo>
-
   /**
    * 附件关联的资源ID
    */
   AttachmentResourceIds?: Array<string>
-
   /**
    * 签署顺序
    */
   SignOrder?: Array<number>
-
   /**
    * 签署参与者的信息
    */
   Recipients?: Array<Recipient>
-
   /**
    * 模板信息结构
    */
   Components?: Array<Component>
-
   /**
    * 签署区模板信息结构
    */
   SignComponents?: Array<Component>
-
   /**
    * 模板状态(-1:不可用；0:草稿态；1:正式态)
    */
   Status?: number
-
   /**
    * 模板的创建人UserId
    */
   Creator?: string
-
   /**
    * 模板创建的时间戳，单位秒
    */
   CreatedOn?: number
-
   /**
    * 发起人角色信息
    */
   Promoter?: Recipient
-
   /**
-      * 模板类型
+   * 模板类型
 取值：
 1  静默签,
 3  普通模板
-      */
+   */
   TemplateType?: number
-
   /**
    * 模板可用状态，取值：1启用（默认），2停用
    */
   Available?: number
-
   /**
    * 创建模板的机构id
    */
   OrganizationId?: string
-
   /**
-      * 模板预览链接，有效时间5分钟
+   * 模板预览链接，有效时间5分钟
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PreviewUrl?: string
-
   /**
-      * 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。
+   * 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TemplateVersion?: string
-
   /**
-      * 模板是否已发布。true-已发布；false-未发布
+   * 模板是否已发布。true-已发布；false-未发布
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Published?: boolean
 }
 
@@ -991,13 +886,11 @@ export interface CreateDocumentResponse {
    * 签署流程电子文档ID
    */
   DocumentId?: string
-
   /**
-      * 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回
+   * 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PreviewFileUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1012,23 +905,19 @@ export interface DescribeIntegrationEmployeesRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 返回最大数量，最大为20
    */
   Limit: number
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
-      * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
+   * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
 根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0，最大为20000
    */
@@ -1043,7 +932,6 @@ export interface CreateIntegrationUserRolesResponse {
    * 绑定角色失败列表信息
    */
   FailedCreateRoleData?: Array<FailedCreateRoleData>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1058,85 +946,72 @@ export interface CreateFlowRequest {
    * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
    */
   Operator: UserInfo
-
   /**
    * 签署流程名称,最大长度200个字符
    */
   FlowName: string
-
   /**
    * 签署流程参与者信息，最大限制50方
    */
   Approvers: Array<FlowCreateApprover>
-
   /**
    * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
    */
   FlowType?: string
-
   /**
    * 客户端Token，保持接口幂等性,最大长度64个字符
    */
   ClientToken?: string
-
   /**
    * 暂未开放
+   * @deprecated
    */
   RelatedFlowId?: string
-
   /**
-      * 签署流程的签署截止时间。
+   * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
-      */
+   */
   DeadLine?: number
-
   /**
    * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
    */
   UserData?: string
-
   /**
    * 签署流程描述,最大长度1000个字符
    */
   FlowDescription?: string
-
   /**
-      * 发送类型：
+   * 发送类型：
 true：无序签
 false：有序签
 注：默认为false（有序签），请和模板中的配置保持一致
-      */
+   */
   Unordered?: boolean
-
   /**
    * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
    */
   CustomShowMap?: string
-
   /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+   * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
 若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
 
 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-      */
+   */
   NeedSignReview?: boolean
-
   /**
    * 暂未开放
+   * @deprecated
    */
   CallbackUrl?: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
-      * 被抄送人的信息列表。
+   * 被抄送人的信息列表。
 注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。
-      */
+   */
   CcInfos?: Array<CcInfo>
-
   /**
    * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
@@ -1151,45 +1026,37 @@ export interface CreateSchemeUrlRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 企业名称
    */
   OrganizationName?: string
-
   /**
    * 姓名,最大长度50个字符
    */
   Name?: string
-
   /**
    * 手机号，大陆手机号11位
    */
   Mobile?: string
-
   /**
-      * 链接类型
+   * 链接类型
 HTTP：跳转电子签小程序的http_url，
 APP：第三方APP或小程序跳转电子签小程序的path。
 默认为HTTP类型
-      */
+   */
   EndPoint?: string
-
   /**
    * 签署流程编号 (PathType=1时必传)
    */
   FlowId?: string
-
   /**
    * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
    */
   PathType?: number
-
   /**
    * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
    */
   AutoJumpBack?: boolean
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -1214,27 +1081,22 @@ export interface AutoSignConfig {
    * 自动签开通个人用户的三要素
    */
   UserInfo: UserThreeFactor
-
   /**
    * 接受自动签开启的回调地址。需要保证post返回200
    */
   CallbackUrl: string
-
   /**
    * 是否回调证书信息，默认false-不需要
    */
   CertInfoCallback?: boolean
-
   /**
    * 是否支持用户自定义签名印章，默认false-不需要
    */
   UserDefineSeal?: boolean
-
   /**
    * 是否需要回调的时候返回印章(签名) 图片的 base64，默认false-不需要
    */
   SealImgCallback?: boolean
-
   /**
    * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
    */
@@ -1259,7 +1121,6 @@ export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
    * 解绑是否成功，1表示成功，0表示失败
    */
   Status?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1271,11 +1132,10 @@ export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
  */
 export interface CreateReleaseFlowResponse {
   /**
-      * 解除协议流程编号
+   * 解除协议流程编号
 
-      */
+   */
   FlowId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1290,12 +1150,10 @@ export interface BindEmployeeUserIdWithClientOpenIdRequest {
    * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定。（参数参考示例）
    */
   Operator: UserInfo
-
   /**
    * 电子签系统员工UserId
    */
   UserId: string
-
   /**
    * 客户系统OpenId
    */
@@ -1310,17 +1168,14 @@ export interface DescribeIntegrationDepartmentsRequest {
    * 操作人信息，UserId必填且需拥有组织架构管理权限
    */
   Operator: UserInfo
-
   /**
    * 查询类型 0-查询单个部门节点 1-单个部门节点及一级子节点部门列表
    */
   QueryType: number
-
   /**
    * 部门ID,与DeptOpenId二选一,优先DeptId,都为空时获取根节点数据
    */
   DeptId?: string
-
   /**
    * 客户系统部门ID,与DeptId二选一,优先DeptId,都为空时获取根节点数据
    */
@@ -1335,7 +1190,6 @@ export interface CreateIntegrationDepartmentResponse {
    * 电子签部门ID
    */
   DeptId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1358,26 +1212,27 @@ export interface DeleteSealPoliciesResponse {
 export interface OrganizationInfo {
   /**
    * 机构在平台的编号，内部字段，暂未开放
+   * @deprecated
    */
   OrganizationId?: string
-
   /**
    * 用户渠道，内部字段，暂未开放
+   * @deprecated
    */
   Channel?: string
-
   /**
    * 用户在渠道的机构编号，内部字段，暂未开放
+   * @deprecated
    */
   OrganizationOpenId?: string
-
   /**
    * 用户真实的IP，内部字段，暂未开放
+   * @deprecated
    */
   ClientIp?: string
-
   /**
    * 机构的代理IP，内部字段，暂未开放
+   * @deprecated
    */
   ProxyIp?: string
 }
@@ -1390,17 +1245,14 @@ export interface DescribeUserAutoSignStatusResponse {
    * 是否已开通自动签
    */
   IsOpen?: boolean
-
   /**
    * 自动签许可生效时间。当且仅当已开通自动签时有值。
    */
   LicenseFrom?: number
-
   /**
    * 自动签许可到期时间。当且仅当已开通自动签时有值。
    */
   LicenseTo?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1415,17 +1267,15 @@ export interface FillApproverInfo {
    * 对应模板中的参与方ID
    */
   RecipientId: string
-
   /**
-      * 签署人来源
+   * 签署人来源
 WEWORKAPP: 企业微信
-      */
+   */
   ApproverSource: string
-
   /**
-      * 企业自定义账号ID
+   * 企业自定义账号ID
 WEWORKAPP场景下指企业自有应用获取企微明文的userid
-      */
+   */
   CustomUserId: string
 }
 
@@ -1437,57 +1287,47 @@ export interface OccupiedSeal {
    * 电子印章编号
    */
   SealId: string
-
   /**
    * 电子印章名称
    */
   SealName: string
-
   /**
    * 电子印章授权时间戳，单位秒
    */
   CreateOn: number
-
   /**
    * 电子印章授权人的UserId
    */
   Creator: string
-
   /**
    * 电子印章策略Id
    */
   SealPolicyId: string
-
   /**
    * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
    */
   SealStatus: string
-
   /**
-      * 审核失败原因
+   * 审核失败原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailReason: string
-
   /**
    * 印章图片url，5分钟内有效
    */
   Url: string
-
   /**
    * 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章
    */
   SealType: string
-
   /**
    * 用印申请是否为永久授权，true-是，false-否
    */
   IsAllTime: boolean
-
   /**
-      * 授权人列表
+   * 授权人列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AuthorizedUsers: Array<AuthorizedUser>
 }
 
@@ -1496,17 +1336,15 @@ export interface OccupiedSeal {
  */
 export interface FailedDeleteStaffData {
   /**
-      * 员工在电子签的userId
+   * 员工在电子签的userId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserId: string
-
   /**
-      * 员工在第三方平台的openId
+   * 员工在第三方平台的openId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OpenId: string
-
   /**
    * 失败原因
    */
@@ -1521,62 +1359,50 @@ export interface PdfVerifyResult {
    * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
    */
   VerifyResult: number
-
   /**
    * 签署平台，如果文件是在腾讯电子签平台签署，则返回腾讯电子签，如果文件不在腾讯电子签平台签署，则返回其他平台。
    */
   SignPlatform: string
-
   /**
    * 签署人名称
    */
   SignerName: string
-
   /**
    * 签署时间戳，单位秒
    */
   SignTime: number
-
   /**
    * 签名算法
    */
   SignAlgorithm: string
-
   /**
    * 签名证书序列号
    */
   CertSn: string
-
   /**
    * 证书起始时间戳，单位秒
    */
   CertNotBefore: number
-
   /**
    * 证书过期时间戳，单位秒
    */
   CertNotAfter: number
-
   /**
    * 签名域横坐标，单位pt
    */
   ComponentPosX: number
-
   /**
    * 签名域纵坐标，单位pt
    */
   ComponentPosY: number
-
   /**
    * 签名域宽度，单位pt
    */
   ComponentWidth: number
-
   /**
    * 签名域高度，单位pt
    */
   ComponentHeight: number
-
   /**
    * 签名域所在页码，1～N
    */
@@ -1591,17 +1417,14 @@ export interface CreateBatchCancelFlowUrlResponse {
    * 批量撤回签署流程链接
    */
   BatchCancelFlowUrl?: string
-
   /**
    * 签署流程撤回失败信息
    */
   FailMessages?: Array<string>
-
   /**
    * 签署连接过期时间字符串：年月日-时分秒
    */
   UrlExpireOn?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1616,15 +1439,13 @@ export interface UserThreeFactor {
    * 姓名
    */
   Name: string
-
   /**
-      * 证件类型: 
+   * 证件类型: 
 ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-      */
+   */
   IdCardType: string
-
   /**
    * 证件号，如果有 X 请大写
    */
@@ -1639,12 +1460,10 @@ export interface SignQrCode {
    * 二维码id
    */
   QrCodeId: string
-
   /**
    * 二维码url
    */
   QrCodeUrl: string
-
   /**
    * 二维码过期时间戳，单位秒
    */
@@ -1659,7 +1478,6 @@ export interface CreateSealPolicyResponse {
    * 最终授权成功的。其他的跳过的是已经授权了的
    */
   UserIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1674,13 +1492,11 @@ export interface DisableUserAutoSignRequest {
    * 操作人信息,UserId必填
    */
   Operator: UserInfo
-
   /**
-      * 自动签场景:
+   * 自动签场景:
 E_PRESCRIPTION_AUTO_SIGN 电子处方
-      */
+   */
   SceneKey: string
-
   /**
    * 关闭自动签的个人的三要素
    */
@@ -1692,27 +1508,23 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
  */
 export interface DescribeIntegrationEmployeesResponse {
   /**
-      * 员工数据列表
+   * 员工数据列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Employees?: Array<Staff>
-
   /**
-      * 偏移量，默认为0，最大为20000
+   * 偏移量，默认为0，最大为20000
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Offset?: number
-
   /**
    * 返回最大数量，最大为20
    */
   Limit?: number
-
   /**
    * 符合条件的员工数量
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1727,12 +1539,10 @@ export interface SuccessDeleteStaffData {
    * 员工名
    */
   DisplayName: string
-
   /**
    * 员工手机号
    */
   Mobile: string
-
   /**
    * 员工在电子签平台的id
    */
@@ -1747,7 +1557,6 @@ export interface CreateConvertTaskApiResponse {
    * 转换任务Id
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1762,25 +1571,21 @@ export interface CreateFlowSignReviewRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 签署流程编号
    */
   FlowId: string
-
   /**
-      * 企业内部审核结果
+   * 企业内部审核结果
 PASS: 通过 
 REJECT: 拒绝
-      */
+   */
   ReviewType: string
-
   /**
-      * 审核原因 
+   * 审核原因 
 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200
-      */
+   */
   ReviewMessage?: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -1795,12 +1600,10 @@ export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
    * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定
    */
   Operator: UserInfo
-
   /**
    * 电子签系统员工UserId
    */
   UserId: string
-
   /**
    * 客户系统OpenId
    */
@@ -1815,7 +1618,6 @@ export interface CreateSchemeUrlResponse {
    * 小程序链接地址，有效期5分钟
    */
   SchemeUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1830,32 +1632,26 @@ export interface CreateUserAutoSignEnableUrlResponse {
    * 跳转短链
    */
   Url?: string
-
   /**
    * 小程序AppId
    */
   AppId?: string
-
   /**
    * 小程序 原始 Id
    */
   AppOriginalId?: string
-
   /**
    * 跳转路径
    */
   Path?: string
-
   /**
    * base64格式跳转二维码
    */
   QrCode?: string
-
   /**
    * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
    */
   UrlType?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1870,7 +1666,6 @@ export interface CreateFlowSignUrlResponse {
    * 签署人签署链接信息
    */
   FlowApproverUrlInfos?: Array<FlowApproverUrlInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1885,59 +1680,52 @@ export interface DescribeFileUrlsRequest {
    * 调用方用户信息，UserId 必填
    */
   Operator: UserInfo
-
   /**
-      * 文件对应的业务类型，目前支持：
+   * 文件对应的业务类型，目前支持：
 - 流程 "FLOW"，如需下载合同文件请选择此项
 - 模板 "TEMPLATE"
 - 文档 "DOCUMENT"
 - 印章  “SEAL”
-      */
+   */
   BusinessType: string
-
   /**
-      * 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId
+   * 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId
 最大支持20个资源
-      */
+   */
   BusinessIds: Array<string>
-
   /**
    * 下载后的文件命名，只有FileType为zip的时候生效
    */
   FileName?: string
-
   /**
    * 文件类型，"JPG", "PDF","ZIP"等
    */
   FileType?: string
-
   /**
    * 指定资源起始偏移量，默认0
    */
   Offset?: number
-
   /**
    * 指定资源数量，查询全部资源则传入-1
    */
   Limit?: number
-
   /**
    * 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24x60x60s(1天)
    */
   UrlTtl?: number
-
   /**
    * 暂不开放
+   * @deprecated
    */
   CcToken?: string
-
   /**
    * 暂不开放
+   * @deprecated
    */
   Scene?: string
-
   /**
    * 应用相关信息
+   * @deprecated
    */
   Agent?: Agent
 }
@@ -2057,21 +1845,19 @@ content String 表头单元格内容，字数不超过100
  */
 export interface FormField {
   /**
-      * 控件填充vaule，ComponentType和传入值类型对应关系：
+   * 控件填充vaule，ComponentType和传入值类型对应关系：
 TEXT - 文本内容
 MULTI_LINE_TEXT - 文本内容
 CHECK_BOX - true/false
 FILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取
 SELECTOR - 选项值
 DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525#FlowInfo
-      */
+   */
   ComponentValue: string
-
   /**
    * 控件id，和ComponentName选择一项传入即可
    */
   ComponentId?: string
-
   /**
    * 控件名字，最大长度不超过30字符，和ComponentId选择一项传入即可
    */
@@ -2086,7 +1872,6 @@ export interface CreateChannelSubOrganizationModifyQrCodeRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 应用编号
    */
@@ -2101,24 +1886,24 @@ export interface UserInfo {
    * 用户在平台的编号
    */
   UserId?: string
-
   /**
    * 用户的来源渠道，一般不用传，特定场景根据接口说明传值
+   * @deprecated
    */
   Channel?: string
-
   /**
    * 用户在渠道的编号，一般不用传，特定场景根据接口说明传值
+   * @deprecated
    */
   OpenId?: string
-
   /**
    * 用户真实IP，内部字段，暂未开放
+   * @deprecated
    */
   ClientIp?: string
-
   /**
    * 用户代理IP，内部字段，暂未开放
+   * @deprecated
    */
   ProxyIp?: string
 }
@@ -2131,17 +1916,14 @@ export interface CreateFlowApproversRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 签署流程编号
    */
   FlowId: string
-
   /**
    * 补充签署人信息
    */
   Approvers: Array<FillApproverInfo>
-
   /**
    * 企微消息中的发起人
    */
@@ -2156,68 +1938,56 @@ export interface Staff {
    * 用户在电子签平台的id
    */
   UserId?: string
-
   /**
    * 显示的用户名/昵称
    */
   DisplayName?: string
-
   /**
    * 用户手机号
    */
   Mobile?: string
-
   /**
-      * 用户邮箱
+   * 用户邮箱
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Email?: string
-
   /**
-      * 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传
+   * 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OpenId?: string
-
   /**
-      * 员工角色
+   * 员工角色
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Roles?: Array<StaffRole>
-
   /**
-      * 员工部门
+   * 员工部门
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Department?: Department
-
   /**
    * 员工是否实名
    */
   Verified?: boolean
-
   /**
    * 员工创建时间戳，单位秒
    */
   CreatedOn?: number
-
   /**
-      * 员工实名时间戳，单位秒
+   * 员工实名时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VerifiedOn?: number
-
   /**
-      * 员工是否离职：0-未离职，1-离职
+   * 员工是否离职：0-未离职，1-离职
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   QuiteJob?: number
-
   /**
    * 员工离职交接人用户id
    */
   ReceiveUserId?: string
-
   /**
    * 员工离职交接人用户OpenId
    */
@@ -2229,24 +1999,21 @@ export interface Staff {
  */
 export interface CreateFlowEvidenceReportResponse {
   /**
-      * 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到
+   * 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReportId?: string
-
   /**
-      * 执行中：EvidenceStatusExecuting
+   * 执行中：EvidenceStatusExecuting
 成功：EvidenceStatusSuccess
 失败：EvidenceStatusFailed
-      */
+   */
   Status?: string
-
   /**
-      * 废除，字段无效
+   * 废除，字段无效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReportUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2258,16 +2025,14 @@ export interface CreateFlowEvidenceReportResponse {
  */
 export interface DescribeFileUrlsResponse {
   /**
-      * 文件URL信息；
+   * 文件URL信息；
 链接不是永久链接，有效期5分钟后链接失效。
-      */
+   */
   FileUrls?: Array<FileUrl>
-
   /**
    * URL数量
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2282,27 +2047,22 @@ export interface CreateIntegrationDepartmentRequest {
    * 操作人信息，UserId必填且需拥有组织架构管理权限
    */
   Operator: UserInfo
-
   /**
    * 部门名称，不超过50个字符
    */
   DeptName: string
-
   /**
    * 电子签父部门ID，与ParentDeptOpenId二选一,优先ParentDeptId,都为空时自动填充至根节点下
    */
   ParentDeptId?: string
-
   /**
    * 第三方平台中父部门ID,与ParentDeptId二选一,优先ParentDeptId,都为空时自动填充至根节点下
    */
   ParentDeptOpenId?: string
-
   /**
    * 客户系统部门ID，不超过64个字符
    */
   DeptOpenId?: string
-
   /**
    * 排序号,1~30000范围内
    */
@@ -2314,75 +2074,64 @@ export interface CreateIntegrationDepartmentRequest {
  */
 export interface GroupOrganization {
   /**
-      * 成员企业名
+   * 成员企业名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name?: string
-
   /**
-      * 成员企业别名
+   * 成员企业别名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Alias?: string
-
   /**
-      * 成员企业id
+   * 成员企业id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OrganizationId?: string
-
   /**
-      * 更新时间，时间戳，单位秒
+   * 更新时间，时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: number
-
   /**
-      * 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入
+   * 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: number
-
   /**
-      * 是否为集团主企业
+   * 是否为集团主企业
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsMainOrganization?: boolean
-
   /**
-      * 企业社会信用代码
+   * 企业社会信用代码
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IdCardNumber?: string
-
   /**
-      * 企业超管信息
+   * 企业超管信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AdminInfo?: Admin
-
   /**
-      * 企业许可证
+   * 企业许可证
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   License?: string
-
   /**
-      * 企业许可证过期时间，时间戳，单位秒
+   * 企业许可证过期时间，时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LicenseExpireTime?: number
-
   /**
-      * 成员企业加入集团时间，时间戳，单位秒
+   * 成员企业加入集团时间，时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JoinTime?: number
-
   /**
-      * 是否使用审批流引擎，true-是，false-否
+   * 是否使用审批流引擎，true-是，false-否
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowEngineEnable?: boolean
 }
 
@@ -2394,7 +2143,6 @@ export interface DeleteIntegrationRoleUsersResponse {
    * 角色id
    */
   RoleId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2409,43 +2157,35 @@ export interface CreateDocumentRequest {
    * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
    */
   Operator: UserInfo
-
   /**
    * 签署流程编号,由CreateFlow接口返回
    */
   FlowId: string
-
   /**
    * 用户上传的模板ID
    */
   TemplateId: string
-
   /**
    * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。
    */
   FileNames?: Array<string>
-
   /**
    * 内容控件信息数组
    */
   FormFields?: Array<FormField>
-
   /**
-      * 是否需要生成预览文件 默认不生成；
+   * 是否需要生成预览文件 默认不生成；
 预览链接有效期300秒；
-      */
+   */
   NeedPreview?: boolean
-
   /**
    * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
    */
   PreviewType?: number
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
    * 客户端Token，保持接口幂等性,最大长度64个字符
    */
@@ -2460,20 +2200,17 @@ export interface FlowDetailInfo {
    * 合同(流程)的ID
    */
   FlowId: string
-
   /**
    * 合同(流程)的名字
    */
   FlowName: string
-
   /**
-      * 合同(流程)的类型
+   * 合同(流程)的类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowType: string
-
   /**
-      * 流程状态
+   * 流程状态
 - 0 还没有发起
 - 1 待签署
 - 2 部分签署
@@ -2486,40 +2223,34 @@ export interface FlowDetailInfo {
 - 9 部分填写
 - 10 拒填
 - 21 已解除
-      */
+   */
   FlowStatus: number
-
   /**
-      * 合同(流程)的信息
+   * 合同(流程)的信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowMessage: string
-
   /**
-      * 流程的描述
+   * 流程的描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowDescription: string
-
   /**
    * 合同(流程)的创建时间戳，单位秒
    */
   CreatedOn: number
-
   /**
    * 合同(流程)的签署方数组
    */
   FlowApproverInfos: Array<FlowApproverDetail>
-
   /**
    * 合同(流程)的关注方信息列表
    */
   CcInfos?: Array<FlowApproverDetail>
-
   /**
-      * 合同发起人UserId
+   * 合同发起人UserId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Creator?: string
 }
 
@@ -2531,7 +2262,6 @@ export interface CreatePreparedPersonalEsignResponse {
    * 导入生成的印章ID
    */
   SealId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2546,12 +2276,10 @@ export interface DescribeOrganizationSealsResponse {
    * 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多
    */
   TotalCount?: number
-
   /**
    * 查询到的印章结果数组
    */
   Seals?: Array<OccupiedSeal>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2566,12 +2294,10 @@ export interface DeleteIntegrationEmployeesRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 待移除员工的信息，userId和openId二选一，必填一个
    */
   Employees: Array<Staff>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id
    */
@@ -2586,22 +2312,18 @@ export interface FailedUpdateStaffData {
    * 用户传入的名称
    */
   DisplayName?: string
-
   /**
    * 用户传入的手机号
    */
   Mobile?: string
-
   /**
    * 失败原因
    */
   Reason?: string
-
   /**
    * 用户Id
    */
   UserId?: string
-
   /**
    * 员工在第三方平台的openId
    */
@@ -2616,19 +2338,18 @@ export interface GetTaskResultApiRequest {
    * 任务Id，通过CreateConvertTaskApi得到
    */
   TaskId: string
-
   /**
    * 操作人信息,UserId必填
    */
   Operator?: UserInfo
-
   /**
    * 应用号信息
+   * @deprecated
    */
   Agent?: Agent
-
   /**
    * 暂未开放
+   * @deprecated
    */
   Organization?: OrganizationInfo
 }
@@ -2641,7 +2362,6 @@ export interface RegisterInfo {
    * 法人姓名
    */
   LegalName: string
-
   /**
    * 社会统一信用代码
    */
@@ -2656,7 +2376,6 @@ export interface CreateIntegrationEmployeesResponse {
    * 创建员工的结果
    */
   CreateEmployeeResult?: CreateStaffResult
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2671,17 +2390,14 @@ export interface DeleteIntegrationRoleUsersRequest {
    * 操作人信息，userId必填
    */
   Operator: UserInfo
-
   /**
    * 角色id
    */
   RoleId: string
-
   /**
    * 用户信息
    */
   Users: Array<UserInfo>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -2696,24 +2412,21 @@ export interface CreateFlowSignUrlRequest {
    * 流程编号
    */
   FlowId: string
-
   /**
    * 流程签署人，其中ApproverName，ApproverMobile和ApproverType必传，其他可不传，ApproverType目前只支持个人类型的签署人。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
    */
   FlowApproverInfos: Array<FlowCreateApprover>
-
   /**
    * 用户信息，此结构体UserId必填
    */
   Operator?: UserInfo
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
    * 机构信息，暂未开放
+   * @deprecated
    */
   Organization?: OrganizationInfo
 }
@@ -2726,22 +2439,19 @@ export interface CreateReleaseFlowRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 待解除的签署流程编号（即原签署流程的编号）
    */
   NeedRelievedFlowId: string
-
   /**
    * 解除协议内容
    */
   ReliveInfo: RelieveInfo
-
   /**
-      * 非必须，解除协议的本企业签署人列表，
+   * 非必须，解除协议的本企业签署人列表，
 默认使用原流程的签署人列表,当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业其他已实名员工来替换原流程中的原签署人，注意需要指明原签署人的编号(ReceiptId,通过DescribeFlowInfo接口获取)来代表需要替换哪一个签署人
 解除协议的签署人数量不能多于原流程的签署人数量
-      */
+   */
   ReleasedApprovers?: Array<ReleasedApprover>
 }
 
@@ -2753,17 +2463,14 @@ export interface CreateIntegrationUserRolesRequest {
    * 操作人信息，UserId必填
    */
   Operator: UserInfo
-
   /**
    * 绑定角色的用户id列表
    */
   UserIds: Array<string>
-
   /**
    * 绑定角色的角色id列表
    */
   RoleIds: Array<string>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -2778,12 +2485,10 @@ export interface CreateChannelSubOrganizationModifyQrCodeResponse {
    * 二维码下载链接
    */
   QrCodeUrl?: string
-
   /**
    * 二维码失效时间 UNIX 时间戳 精确到秒
    */
   ExpiredTime?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2798,12 +2503,10 @@ export interface SuccessUpdateStaffData {
    * 传入的用户名称
    */
   DisplayName?: string
-
   /**
    * 传入的手机号
    */
   Mobile?: string
-
   /**
    * 用户Id
    */
@@ -2815,20 +2518,18 @@ export interface SuccessUpdateStaffData {
  */
 export interface CreateFlowByFilesResponse {
   /**
-      * 签署流程编号。
+   * 签署流程编号。
 
 注：如入参 是否需要预览 NeedPreview 设置为 true，不会正式发起合同，此处不会有值返回；如入参 是否需要预览 NeedPreview 设置为 false，此处会正常返回签署流程编号 FlowId。
-      */
+   */
   FlowId?: string
-
   /**
-      * 合同预览链接。
+   * 合同预览链接。
 
 注：如入参 是否需要预览 NeedPreview 设置为 true，会开启“预览模式”，此处会返回预览链接；如入参 是否需要预览 NeedPreview 设置为 false，此处不会有值返回。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PreviewUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2843,12 +2544,10 @@ export interface UploadFilesResponse {
    * 文件id数组
    */
   FileIds?: Array<string>
-
   /**
    * 上传成功文件数量
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2863,21 +2562,18 @@ export interface SuccessCreateStaffData {
    * 员工名
    */
   DisplayName: string
-
   /**
    * 员工手机号
    */
   Mobile: string
-
   /**
    * 员工在电子签平台的id
    */
   UserId: string
-
   /**
-      * 提示，当创建已存在未实名用户时，改字段有值
+   * 提示，当创建已存在未实名用户时，改字段有值
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Note?: string
 }
 
@@ -2889,62 +2585,50 @@ export interface Recipient {
    * 签署参与者ID
    */
   RecipientId?: string
-
   /**
    * 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方
    */
   RecipientType?: string
-
   /**
    * 描述信息
    */
   Description?: string
-
   /**
    * 角色名称
    */
   RoleName?: string
-
   /**
    * 是否需要验证，默认为false
    */
   RequireValidation?: boolean
-
   /**
    * 是否需要签署，默认为true
    */
   RequireSign?: boolean
-
   /**
    * 添加序列，0～N
    */
   RoutingOrder?: number
-
   /**
    * 是否需要发送，默认为true
    */
   RequireDelivery?: boolean
-
   /**
    * 邮箱地址
    */
   Email?: string
-
   /**
    * 电话号码
    */
   Mobile?: string
-
   /**
    * 关联的用户ID
    */
   UserId?: string
-
   /**
    * 发送方式。默认为EMAIL。EMAIL-邮件；MOBILE-手机短信；WECHAT-微信通知
    */
   DeliveryMethod?: string
-
   /**
    * 附属信息
    */
@@ -2959,7 +2643,6 @@ export interface VerifyPdfRequest {
    * 流程ID
    */
   FlowId: string
-
   /**
    * 调用方用户信息，userId 必填
    */
@@ -2971,15 +2654,14 @@ export interface VerifyPdfRequest {
  */
 export interface FailedCreateRoleData {
   /**
-      * 用户userId
+   * 用户userId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserId?: string
-
   /**
-      * 角色id列表
+   * 角色id列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleIds?: Array<string>
 }
 
@@ -2988,99 +2670,83 @@ export interface FailedCreateRoleData {
  */
 export interface ApproverInfo {
   /**
-      * 参与者类型：
+   * 参与者类型：
 0：企业
 1：个人
 3：企业静默签署
 注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
-      */
+   */
   ApproverType: number
-
   /**
    * 签署人的姓名
    */
   ApproverName: string
-
   /**
    * 签署人的手机号，11位数字
    */
   ApproverMobile: string
-
   /**
    * 签署人的签署控件列表
    */
   SignComponents: Array<Component>
-
   /**
    * 如果签署方是企业签署方，则为企业名
    */
   OrganizationName?: string
-
   /**
    * 签署人的身份证号
    */
   ApproverIdCardNumber?: string
-
   /**
-      * 签署人的身份证件类型 
+   * 签署人的身份证件类型 
 ID_CARD 身份证
 HONGKONG_AND_MACAO 港澳居民来往内地通行证
 HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-      */
+   */
   ApproverIdCardType?: string
-
   /**
    * 签署通知类型：sms--短信，none--不通知
    */
   NotifyType?: string
-
   /**
    * 签署人角色类型：1--收款人、2--开具人、3--见证人
    */
   ApproverRole?: number
-
   /**
    * 签署意愿确认渠道，默认为WEIXINAPP:人脸识别
    */
   VerifyChannel?: Array<string>
-
   /**
    * 合同的强制预览时间：3~300s，未指定则按合同页数计算
    */
   PreReadTime?: number
-
   /**
    * 签署人userId，传此字段则不用传姓名、手机号
    */
   UserId?: string
-
   /**
    * 签署人用户来源，企微侧用户请传入：WEWORKAPP
    */
   ApproverSource?: string
-
   /**
    * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
    */
   CustomApproverTag?: string
-
   /**
    * 签署人个性化能力值
    */
   ApproverOption?: ApproverOption
-
   /**
-      * 签署人查看合同时认证方式, 
+   * 签署人查看合同时认证方式, 
 1-实名查看 2-短信验证码查看(企业签署方不支持该方式)
 如果不传默认为1
-      */
+   */
   ApproverVerifyTypes?: Array<number>
-
   /**
-      * 签署人签署合同时的认证方式
+   * 签署人签署合同时的认证方式
 1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
 合同签署认证方式的优先级 verifyChannel>approverSignTypes
-      */
+   */
   ApproverSignTypes?: Array<number>
 }
 
@@ -3102,27 +2768,22 @@ export interface ModifyIntegrationDepartmentRequest {
    * 操作人信息，UserId必填且需拥有组织架构管理权限
    */
   Operator: UserInfo
-
   /**
    * 电子签部门ID
    */
   DeptId: string
-
   /**
    * 电子签父部门ID
    */
   ParentDeptId?: string
-
   /**
    * 部门名称，不超过50个字符
    */
   DeptName?: string
-
   /**
    * 客户系统部门ID，不超过64个字符
    */
   DeptOpenId?: string
-
   /**
    * 排序号,1~30000范围内
    */
@@ -3137,7 +2798,6 @@ export interface Filter {
    * 查询过滤条件的Key
    */
   Key: string
-
   /**
    * 查询过滤条件的Value列表
    */
@@ -3149,15 +2809,14 @@ export interface Filter {
  */
 export interface CreateStaffResult {
   /**
-      * 创建员工的成功列表
+   * 创建员工的成功列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SuccessEmployeeData: Array<SuccessCreateStaffData>
-
   /**
-      * 创建员工的失败列表
+   * 创建员工的失败列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailedEmployeeData: Array<FailedCreateStaffData>
 }
 
@@ -3169,33 +2828,27 @@ export interface CreateUserAutoSignEnableUrlRequest {
    * 操作人信息,UserId必填
    */
   Operator: UserInfo
-
   /**
-      * 自动签场景:
+   * 自动签场景:
 E_PRESCRIPTION_AUTO_SIGN 电子处方
-      */
+   */
   SceneKey: string
-
   /**
    * 自动签开通，签署相关配置
    */
   AutoSignConfig: AutoSignConfig
-
   /**
    * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
    */
   UrlType?: string
-
   /**
    * 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。
    */
   NotifyType?: string
-
   /**
    * 若上方填写为 SMS，则此处为手机号
    */
   NotifyAddress?: string
-
   /**
    * 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。
    */
@@ -3207,11 +2860,10 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
  */
 export interface DescribeIntegrationMainOrganizationUserResponse {
   /**
-      * 主企业员工账号信息
+   * 主企业员工账号信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IntegrationMainOrganizationUser?: IntegrationMainOrganizationUser
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3226,12 +2878,10 @@ export interface RemindFlowRecords {
    * 是否能够催办，true-是，false-否
    */
   CanRemind: boolean
-
   /**
    * 合同id
    */
   FlowId: string
-
   /**
    * 催办详情信息
    */
@@ -3246,16 +2896,14 @@ export interface CancelUserAutoSignEnableUrlRequest {
    * 操作人信息，UseId必填
    */
   Operator: UserInfo
-
   /**
    * 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方
    */
   SceneKey: string
-
   /**
-      * 指定撤销链接的用户指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
+   * 指定撤销链接的用户指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
 
-      */
+   */
   UserInfo: UserThreeFactor
 }
 
@@ -3267,12 +2915,10 @@ export interface FailedCreateStaffData {
    * 员工名
    */
   DisplayName: string
-
   /**
    * 员工手机号
    */
   Mobile: string
-
   /**
    * 失败原因
    */
@@ -3287,17 +2933,14 @@ export interface ApproverRestriction {
    * 指定签署人名字
    */
   Name?: string
-
   /**
    * 指定签署人手机号，11位数字
    */
   Mobile?: string
-
   /**
    * 指定签署人证件类型，ID_CARD-身份证
    */
   IdCardType?: string
-
   /**
    * 指定签署人证件号码，字母大写
    */
@@ -3312,22 +2955,18 @@ export interface DeleteSealPoliciesRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填
    */
   PolicyIds?: Array<string>
-
   /**
    * 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填
    */
   SealId?: string
-
   /**
    * 待授权的员工ID
    */
   UserIds?: Array<string>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -3342,111 +2981,92 @@ export interface CreateFlowByFilesRequest {
    * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
    */
   Operator: UserInfo
-
   /**
    * 签署流程名称,最大长度200个字符
    */
   FlowName: string
-
   /**
    * 签署参与者信息，最大限制50方
    */
   Approvers: Array<ApproverInfo>
-
   /**
    * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
    */
   FileIds: Array<string>
-
   /**
    * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
    */
   FlowType?: string
-
   /**
    * 经办人内容控件配置
    */
   Components?: Array<Component>
-
   /**
-      * 被抄送人的信息列表。
+   * 被抄送人的信息列表。
 注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
-      */
+   */
   CcInfos?: Array<CcInfo>
-
   /**
-      * 是否需要预览，true：预览模式，false：非预览（默认）；
+   * 是否需要预览，true：预览模式，false：非预览（默认）；
 预览链接有效期300秒；
 
 注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
-      */
+   */
   NeedPreview?: boolean
-
   /**
    * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
    */
   PreviewType?: number
-
   /**
-      * 签署流程的签署截止时间。
+   * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
-      */
+   */
   Deadline?: number
-
   /**
-      * 发送类型：
+   * 发送类型：
 true：无序签
 false：有序签
 注：默认为false（有序签）
-      */
+   */
   Unordered?: boolean
-
   /**
    * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
    */
   CustomShowMap?: string
-
   /**
-      * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+   * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
 若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
 
 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-      */
+   */
   NeedSignReview?: boolean
-
   /**
    * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
    */
   UserData?: string
-
   /**
-      * 签署人校验方式
+   * 签署人校验方式
 VerifyCheck: 人脸识别（默认）
 MobileCheck：手机号验证
 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
-      */
+   */
   ApproverVerifyType?: string
-
   /**
    * 签署流程描述,最大长度1000个字符
    */
   FlowDescription?: string
-
   /**
    * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
    */
   SignBeanTag?: number
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
    * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
    */
   CcNotifyType?: number
-
   /**
    * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
@@ -3458,33 +3078,29 @@ MobileCheck：手机号验证
  */
 export interface IntegrateRole {
   /**
-      * 角色id
+   * 角色id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleId?: string
-
   /**
-      * 角色名
+   * 角色名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleName?: string
-
   /**
-      * 角色状态，1-启用，2-禁用
+   * 角色状态，1-启用，2-禁用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RoleStatus?: number
-
   /**
-      * 是否是集团角色，true-是，false-否
+   * 是否是集团角色，true-是，false-否
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsGroupRole?: boolean
-
   /**
-      * 管辖的子企业列表
+   * 管辖的子企业列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SubOrgIdList?: Array<string>
 }
 
@@ -3496,7 +3112,6 @@ export interface CreatePrepareFlowResponse {
    * 快速发起预览链接，有效期5分钟
    */
   Url?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3511,34 +3126,30 @@ export interface GetTaskResultApiResponse {
    * 任务Id
    */
   TaskId?: string
-
   /**
-      * 任务状态，需要关注的状态
+   * 任务状态，需要关注的状态
 0  :NeedTranform   - 任务已提交
 4  :Processing     - 文档转换中
 8  :TaskEnd        - 任务处理完成
 -2 :DownloadFailed - 下载失败
 -6 :ProcessFailed  - 转换失败
 -13:ProcessTimeout - 转换文件超时
-      */
+   */
   TaskStatus?: number
-
   /**
-      * 状态描述，需要关注的状态
+   * 状态描述，需要关注的状态
 NeedTranform   - 任务已提交
 Processing     - 文档转换中
 TaskEnd        - 任务处理完成
 DownloadFailed - 下载失败
 ProcessFailed  - 转换失败
 ProcessTimeout - 转换文件超时
-      */
+   */
   TaskMessage?: string
-
   /**
    * 资源Id，也是FileId，用于文件发起使用
    */
   ResourceId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3553,12 +3164,10 @@ export interface CancelMultiFlowSignQRCodeRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 二维码id
    */
   QrCodeId: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -3573,12 +3182,10 @@ export interface DeleteIntegrationDepartmentRequest {
    * 操作人信息，UserId必填且需拥有组织架构管理权限
    */
   Operator: UserInfo
-
   /**
    * 电子签中的部门id
    */
   DeptId: string
-
   /**
    * 交接部门ID。待删除部门中的合同、印章和模版数据，交接至该部门ID下，未填写交接至公司根部门。
    */
@@ -3593,12 +3200,10 @@ export interface ModifyApplicationCallbackInfoRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 操作类型：1-新增，2-删除
    */
   OperateType: number
-
   /**
    * 回调信息
    */
@@ -3610,21 +3215,19 @@ export interface ModifyApplicationCallbackInfoRequest {
  */
 export interface IntegrationMainOrganizationUser {
   /**
-      * 主企业id
+   * 主企业id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MainOrganizationId?: string
-
   /**
-      * 主企业员工UserId
+   * 主企业员工UserId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MainUserId?: string
-
   /**
-      * 主企业员工名
+   * 主企业员工名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserName?: string
 }
 
@@ -3636,22 +3239,18 @@ export interface StartFlowRequest {
    * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
    */
   Operator: UserInfo
-
   /**
    * 签署流程编号，由CreateFlow接口返回
    */
   FlowId: string
-
   /**
    * 客户端Token，保持接口幂等性,最大长度64个字符
    */
   ClientToken?: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
-
   /**
    * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
    */
@@ -3666,38 +3265,31 @@ export interface CreatePrepareFlowRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 资源Id，通过多文件上传（UploadFiles）接口获得
    */
   ResourceId: string
-
   /**
    * 合同名称
    */
   FlowName: string
-
   /**
    * 是否顺序签署(true:无序签,false:顺序签)
    */
   Unordered?: boolean
-
   /**
-      * 签署流程的签署截止时间。
+   * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
-      */
+   */
   Deadline?: number
-
   /**
    * 用户自定义合同类型
    */
   UserFlowTypeId?: string
-
   /**
    * 签署流程参与者信息，最大限制50方
    */
   Approvers?: Array<FlowCreateApprover>
-
   /**
    * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
    */
@@ -3712,7 +3304,6 @@ export interface ApproverOption {
    * 是否可以拒签 false-可以拒签,默认 true-不可以拒签
    */
   NoRefuse?: boolean
-
   /**
    * 是否可以转发 false-可以转发,默认 true-不可以转发
    */
@@ -3727,11 +3318,10 @@ export interface FileUrl {
    * 下载文件的URL，有效期为输入的UrlTtl，默认5分钟
    */
   Url: string
-
   /**
-      * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
+   * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Option: string
 }
 
@@ -3743,32 +3333,26 @@ export interface CreateSealPolicyRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用
    */
   Users: Array<UserInfo>
-
   /**
    * 印章ID
    */
   SealId: string
-
   /**
    * 授权有效期。时间戳秒级
    */
   Expired: number
-
   /**
    * 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用
    */
   UserIds?: Array<string>
-
   /**
    * 印章授权内容
    */
   Policy?: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -3783,38 +3367,32 @@ export interface DescribeOrganizationSealsRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 返回最大数量，最大为100
    */
   Limit: number
-
   /**
    * 偏移量，默认为0，最大为20000
    */
   Offset?: number
-
   /**
    * 查询信息类型，为0时不返回授权用户，为1时返回
    */
   InfoType?: number
-
   /**
    * 印章id（没有输入返回所有）
    */
   SealId?: string
-
   /**
-      * 印章类型列表（都是组织机构印章）。
+   * 印章类型列表（都是组织机构印章）。
 为空时查询所有类型的印章。
 目前支持以下类型：
 OFFICIAL：企业公章；
 CONTRACT：合同专用章；
 ORGANIZATION_SEAL：企业印章(图片上传创建)；
 LEGAL_PERSON_SEAL：法定代表人章
-      */
+   */
   SealTypes?: Array<string>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -3829,17 +3407,14 @@ export interface CancelFlowRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 签署流程id
    */
   FlowId: string
-
   /**
    * 撤销原因，最长200个字符；
    */
   CancelMessage: string
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -3854,7 +3429,6 @@ export interface UploadFile {
    * Base64编码后的文件内容
    */
   FileBody: string
-
   /**
    * 文件名，最大长度不超过200字符
    */
@@ -3866,7 +3440,7 @@ export interface UploadFile {
  */
 export interface Component {
   /**
-      * 如果是Component填写控件类型，则可选的字段为：
+   * 如果是Component填写控件类型，则可选的字段为：
 TEXT - 普通文本控件，输入文本字符串；
 MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；
 CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；
@@ -3887,61 +3461,50 @@ SIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内�
 SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。
 
 表单域的控件不能作为印章和签名控件
-      */
+   */
   ComponentType: string
-
   /**
    * 控件所属文件的序号（取值为：0-N）。目前单文件的情况下，值是0
    */
   FileIndex: number
-
   /**
    * 参数控件高度，单位pt
    */
   ComponentHeight: number
-
   /**
    * 参数控件宽度，单位pt
    */
   ComponentWidth: number
-
   /**
    * 参数控件所在页码，取值为：1-N
    */
   ComponentPage: number
-
   /**
    * 参数控件X位置，单位pt
    */
   ComponentPosX: number
-
   /**
    * 参数控件Y位置，单位pt
    */
   ComponentPosY: number
-
   /**
    * 查询时返回控件唯一Id。使用文件发起合同时用于GenerateMode==KEYWORD 指定关键字
    */
   ComponentId?: string
-
   /**
    * 查询时返回控件名。使用文件发起合同时用于GenerateMode==FIELD 指定表单域名称
    */
   ComponentName?: string
-
   /**
    * 是否必选，默认为false
    */
   ComponentRequired?: boolean
-
   /**
    * 控件关联的签署人ID
    */
   ComponentRecipientId?: string
-
   /**
-      * 扩展参数：
+   * 扩展参数：
 为JSON格式。
 
 ComponentType为FILL_IMAGE时，支持以下参数：
@@ -3967,16 +3530,14 @@ ComponentType为SIGN_DATE时，支持以下参数：
 如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期
 特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）
 参数样例：    "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}",
-      */
+   */
   ComponentExtra?: string
-
   /**
    * 是否是表单域类型，默认不false-不是
    */
   IsFormType?: boolean
-
   /**
-      * 控件填充vaule，ComponentType和传入值类型对应关系：
+   * 控件填充vaule，ComponentType和传入值类型对应关系：
 TEXT - 文本内容
 MULTI_LINE_TEXT - 文本内容
 CHECK_BOX - true/false
@@ -4052,57 +3613,47 @@ SIGN_PAGING_SEAL - 可以指定印章ID，于控制台查询获取
 
 学历控件：
   同单行文本控件约束，填写选择值中的字符串
-      */
+   */
   ComponentValue?: string
-
   /**
-      * NORMAL 正常模式，使用坐标制定签署控件位置
+   * NORMAL 正常模式，使用坐标制定签署控件位置
 FIELD 表单域，需使用ComponentName指定表单域名称
 KEYWORD 关键字，使用ComponentId指定关键字
-      */
+   */
   GenerateMode?: string
-
   /**
    * 日期签署控件的字号，默认为 12
    */
   ComponentDateFontSize?: number
-
   /**
    * 第三方应用集成平台模板控件 id 标识
    */
   ChannelComponentId?: string
-
   /**
    * 指定关键字时横坐标偏移量，单位pt
    */
   OffsetX?: number
-
   /**
    * 指定关键字时纵坐标偏移量，单位pt
    */
   OffsetY?: number
-
   /**
    * 第三方应用集成中子客企业控件来源。0-平台指定；1-用户自定义
    */
   ChannelComponentSource?: number
-
   /**
-      * 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。
+   * 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。
 传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。
-      */
+   */
   KeywordOrder?: string
-
   /**
    * 指定关键字页码，可选参数，指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来
    */
   KeywordPage?: number
-
   /**
    * 关键字位置模式，Middle-居中，Below-正下方，Right-正右方，LowerRight-右上角，UpperRight-右下角。示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方
    */
   RelativeLocation?: string
-
   /**
    * 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
    */
@@ -4114,33 +3665,29 @@ KEYWORD 关键字，使用ComponentId指定关键字
  */
 export interface IntegrationDepartment {
   /**
-      * 部门ID
+   * 部门ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DeptId?: string
-
   /**
-      * 部门名
+   * 部门名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DeptName?: string
-
   /**
-      * 父部门ID
+   * 父部门ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentDeptId?: string
-
   /**
-      * 客户系统部门ID
+   * 客户系统部门ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DeptOpenId?: string
-
   /**
-      * 序列号
+   * 序列号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OrderNo?: number
 }
 
@@ -4152,22 +3699,18 @@ export interface DescribeIntegrationRolesResponse {
    * 偏移量，默认为0，最大为2000
    */
   Offset?: number
-
   /**
    * 返回最大数量，最大为200
    */
   Limit?: number
-
   /**
    * 符合查询条件的总的角色数
    */
   TotalCount?: number
-
   /**
    * 企业角色信息列表
    */
   IntegrateRoles?: Array<IntegrateRole>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4182,7 +3725,6 @@ export interface CreateFlowRemindsRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 需要执行催办的签署流程id数组，最多100个
    */
@@ -4197,12 +3739,10 @@ export interface UpdateIntegrationEmployeesRequest {
    * 操作人信息
    */
   Operator: UserInfo
-
   /**
    * 员工信息
    */
   Employees: Array<Staff>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId需填充子企业Id
    */
@@ -4217,12 +3757,10 @@ export interface DescribeFlowBriefsRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 需要查询的流程ID列表，限制最大100个
    */
   FlowIds: Array<string>
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -4237,7 +3775,6 @@ export interface DeleteIntegrationEmployeesResponse {
    * 员工删除数据
    */
   DeleteEmployeeResult?: DeleteStaffsResult
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4252,12 +3789,10 @@ export interface SignUrl {
    * 小程序签署链接
    */
   AppSignUrl: string
-
   /**
    * 签署链接有效时间
    */
   EffectiveTime: string
-
   /**
    * 移动端签署链接
    */
@@ -4272,17 +3807,14 @@ export interface VerifyPdfResponse {
    * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
    */
   VerifyResult?: number
-
   /**
    * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
    */
   PdfVerifyResults?: Array<PdfVerifyResult>
-
   /**
    * 验签序列号
    */
   VerifySerialNo?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4294,15 +3826,14 @@ export interface VerifyPdfResponse {
  */
 export interface DeleteStaffsResult {
   /**
-      * 删除员工的成功数据
+   * 删除员工的成功数据
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SuccessEmployeeData: Array<SuccessDeleteStaffData>
-
   /**
-      * 删除员工的失败数据
+   * 删除员工的失败数据
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailedEmployeeData: Array<FailedDeleteStaffData>
 }
 
@@ -4314,7 +3845,6 @@ export interface DescribeFlowBriefsResponse {
    * 流程列表
    */
   FlowBriefs?: Array<FlowBrief>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4326,15 +3856,14 @@ export interface DescribeFlowBriefsResponse {
  */
 export interface Admin {
   /**
-      * 超管名
+   * 超管名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name?: string
-
   /**
-      * 超管手机号
+   * 超管手机号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Mobile?: string
 }
 
@@ -4344,21 +3873,21 @@ export interface Admin {
 export interface Caller {
   /**
    * 应用号
+   * @deprecated
    */
   ApplicationId?: string
-
   /**
    * 主机构ID
+   * @deprecated
    */
   OrganizationId?: string
-
   /**
    * 经办人的用户ID，同UserId
    */
   OperatorId?: string
-
   /**
    * 下属机构ID
+   * @deprecated
    */
   SubOrganizationId?: string
 }
@@ -4371,12 +3900,10 @@ export interface DescribeFlowTemplatesResponse {
    * 模板详情列表
    */
   Templates?: Array<TemplateInfo>
-
   /**
    * 查询到的总数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4388,43 +3915,38 @@ export interface DescribeFlowTemplatesResponse {
  */
 export interface UploadFilesRequest {
   /**
-      * 文件对应业务类型
+   * 文件对应业务类型
 1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
 2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
 3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
-      */
+   */
   BusinessType: string
-
   /**
    * 调用方信息，其中OperatorId为必填字段，即用户的UserId
    */
   Caller?: Caller
-
   /**
    * 上传文件内容数组，最多支持20个文件
    */
   FileInfos?: Array<UploadFile>
-
   /**
-      * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
+   * 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。
 如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF
-      */
+   */
   FileType?: string
-
   /**
-      * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
+   * 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白
 true--是，处理置白
 默认为false--否，不处理
-      */
+   */
   CoverRect?: boolean
-
   /**
    * 用户自定义ID数组，与上传文件一一对应
    */
   CustomIds?: Array<string>
-
   /**
    * 不再使用，上传文件链接数组，最多支持20个URL
+   * @deprecated
    */
   FileUrls?: string
 }
@@ -4437,29 +3959,25 @@ export interface RelieveInfo {
    * 解除理由，最大支持200个字
    */
   Reason: string
-
   /**
-      * 解除后仍然有效的条款，保留条款，最大支持200个字
+   * 解除后仍然有效的条款，保留条款，最大支持200个字
 
-      */
+   */
   RemainInForceItem?: string
-
   /**
-      * 原合同事项处理-费用结算，最大支持200个字
+   * 原合同事项处理-费用结算，最大支持200个字
 
-      */
+   */
   OriginalExpenseSettlement?: string
-
   /**
-      * 原合同事项处理-其他事项，最大支持200个字
+   * 原合同事项处理-其他事项，最大支持200个字
 
-      */
+   */
   OriginalOtherSettlement?: string
-
   /**
-      * 其他约定，最大支持200个字
+   * 其他约定，最大支持200个字
 
-      */
+   */
   OtherDeals?: string
 }
 
@@ -4471,7 +3989,6 @@ export interface CreateBatchCancelFlowUrlRequest {
    * 调用方用户信息，userId 必填
    */
   Operator: UserInfo
-
   /**
    * 需要执行撤回的签署流程id数组，最多100个
    */
@@ -4486,57 +4003,49 @@ export interface CreateMultiFlowSignQRCodeRequest {
    * 用户信息，其中UserId为必填参数
    */
   Operator: UserInfo
-
   /**
    * 模板ID
    */
   TemplateId: string
-
   /**
    * 签署流程名称，最大长度不超过200字符
    */
   FlowName: string
-
   /**
-      * 最大可发起签署流程份数，默认5份 
+   * 最大可发起签署流程份数，默认5份 
 发起流程数量超过此上限后二维码自动失效
-      */
+   */
   MaxFlowNum?: number
-
   /**
    * 签署流程有效天数 默认7天 最高设置不超过30天
    */
   FlowEffectiveDay?: number
-
   /**
    * 二维码有效天数 默认7天 最高设置不超过90天
    */
   QrEffectiveDay?: number
-
   /**
    * 限制二维码用户条件
    */
   Restrictions?: Array<ApproverRestriction>
-
   /**
    * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
    */
   UserData?: string
-
   /**
-      * 回调地址,最大长度1000字符串
+   * 回调地址,最大长度1000字符串
 回调时机：
 用户通过签署二维码发起签署流程时，企业额度不足导致失败
-      */
+   */
   CallbackUrl?: string
-
   /**
    * 应用信息
+   * @deprecated
    */
   Agent?: Agent
-
   /**
    * 限制二维码用户条件（已弃用）
+   * @deprecated
    */
   ApproverRestrictions?: ApproverRestriction
 }
@@ -4549,12 +4058,10 @@ export interface DescribeFlowInfoRequest {
    * 需要查询的流程ID列表，限制最大100个
    */
   FlowIds: Array<string>
-
   /**
    * 调用方用户信息，userId 必填
    */
   Operator?: UserInfo
-
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
@@ -4569,7 +4076,6 @@ export interface DescribeFlowInfoResponse {
    * 签署流程信息
    */
   FlowDetailInfos?: Array<FlowDetailInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4594,7 +4100,6 @@ export interface CreateFlowResponse {
    * 签署流程编号
    */
   FlowId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4609,13 +4114,11 @@ export interface DescribeUserAutoSignStatusRequest {
    * 操作人信息，UserId必填
    */
   Operator: UserInfo
-
   /**
-      * 自动签场景:
+   * 自动签场景:
 E_PRESCRIPTION_AUTO_SIGN 电子处方
-      */
+   */
   SceneKey: string
-
   /**
    * 查询开启状态的用户信息
    */
@@ -4628,26 +4131,23 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
  */
 export interface ReleasedApprover {
   /**
-      * 签署人姓名，最大长度50个字符
+   * 签署人姓名，最大长度50个字符
 
-      */
+   */
   Name: string
-
   /**
    * 签署人手机号
    */
   Mobile: string
-
   /**
    * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
    */
   RelievedApproverReceiptId: string
-
   /**
-      * 指定签署人类型，目前仅支持
+   * 指定签署人类型，目前仅支持
 ORGANIZATION-企业
 ENTERPRISESERVER-企业静默签
-      */
+   */
   ApproverType?: string
 }
 
@@ -4659,25 +4159,21 @@ export interface FlowBrief {
    * 流程的编号ID
    */
   FlowId: string
-
   /**
    * 流程的名称
    */
   FlowName: string
-
   /**
-      * 流程的描述信息
+   * 流程的描述信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowDescription: string
-
   /**
    * 流程的类型
    */
   FlowType: string
-
   /**
-      * 流程状态
+   * 流程状态
 - 0 还没有发起
 - 1 待签署
 - 2 部分签署
@@ -4691,31 +4187,27 @@ export interface FlowBrief {
 - 10 拒填
 - 21 已解除
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowStatus: number
-
   /**
-      * 流程创建的时间戳，单位秒
+   * 流程创建的时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreatedOn: number
-
   /**
-      * 拒签或者取消的原因描述
+   * 拒签或者取消的原因描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlowMessage: string
-
   /**
-      *  合同发起人userId
+   *  合同发起人userId
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Creator?: string
-
   /**
-      * 合同过期时间，时间戳，单位秒
+   * 合同过期时间，时间戳，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Deadline?: number
 }
 
@@ -4724,35 +4216,30 @@ export interface FlowBrief {
  */
 export interface DescribeOrganizationGroupOrganizationsResponse {
   /**
-      * 查询到的符合条件的成员企业总数量
+   * 查询到的符合条件的成员企业总数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Total?: number
-
   /**
-      * 已授权待激活的企业数量
+   * 已授权待激活的企业数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   JoinedTotal?: number
-
   /**
-      * 已加入的企业数量
+   * 已加入的企业数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ActivedTotal?: number
-
   /**
-      * 导出文件的url
+   * 导出文件的url
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExportUrl?: string
-
   /**
-      * 成员企业信息列表
+   * 成员企业信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List?: Array<GroupOrganization>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4767,23 +4254,20 @@ export interface CcInfo {
    * 被抄送人手机号，11位数字
    */
   Mobile?: string
-
   /**
    * 被抄送人姓名
    */
   Name?: string
-
   /**
-      * 被抄送人类型,
+   * 被抄送人类型,
 0--个人
 1--员工
-      */
+   */
   CcType?: number
-
   /**
-      * 被抄送人权限
+   * 被抄送人权限
 0--可查看
 1--可查看也可下载
-      */
+   */
   CcPermission?: number
 }

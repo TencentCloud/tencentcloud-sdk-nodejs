@@ -33,12 +33,10 @@ export interface DescribeSearchTemplatesResponse {
    * 总数
    */
   TotalCount: number
-
   /**
    * 模板列表
    */
   List: Array<SearchTemplate>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -53,12 +51,10 @@ export interface ExportReverseShellEventsResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -73,34 +69,28 @@ export interface DescribeBaselineDetectOverviewResponse {
    * 检测服务器数
    */
   HostCount: number
-
   /**
    * 检测项
    */
   ItemCount: number
-
   /**
    * 检测策略项
    */
   PolicyCount: number
-
   /**
    * 通过率*100%
    */
   PassRate: number
-
   /**
-      * 最近一次检测通过个数
+   * 最近一次检测通过个数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LatestPassCount: number
-
   /**
-      * 最近一次检测未通过个数
+   * 最近一次检测未通过个数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LatestNotPassCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -115,7 +105,6 @@ export interface AlarmInfo {
    * 该节点关联的告警，告警的table_name+id（t1:id1,t2:id2,...)
    */
   AlarmId: string
-
   /**
    * 告警事件表状态，当该节点为告警点时生效
    */
@@ -127,16 +116,14 @@ export interface AlarmInfo {
  */
 export interface DescribeAssetWebServiceInfoListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebServices: Array<AssetWebServiceBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -148,16 +135,14 @@ export interface DescribeAssetWebServiceInfoListResponse {
  */
 export interface DescribeAssetAppProcessListResponse {
   /**
-      * 进程列表
+   * 进程列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Process: Array<AssetAppProcessInfo>
-
   /**
    * 分区总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -172,51 +157,42 @@ export interface BaselinePolicyDetect {
    * 策略Id
    */
   PolicyId: number
-
   /**
    * 检测任务Id
    */
   TaskId: number
-
   /**
    * 关联主机数
    */
   HostCount: number
-
   /**
    * 开始时间
    */
   StartTime: string
-
   /**
    * 结束时间
    */
   FinishTime: string
-
   /**
    * 策略名称
    */
   PolicyName: string
-
   /**
    * 成功主机数
    */
   SuccessCount: number
-
   /**
    * 失败主技数
    */
   FailedCount: number
-
   /**
    * 失败主机数
    */
   TimeoutCount: number
-
   /**
-      * 1:检测中 2:检测完成
+   * 1:检测中 2:检测完成
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PolicyDetectStatus: number
 }
 
@@ -228,7 +204,6 @@ export interface ScanVulAgainRequest {
    * 漏洞事件id串，多个用英文逗号分隔
    */
   EventIds: string
-
   /**
    * 重新检查的机器uuid,多个逗号分隔
    */
@@ -243,7 +218,6 @@ export interface ExportBaselineFixListRequest {
    * <li>ItemName - String - 是否必填：否 - 项名称</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -255,11 +229,10 @@ export interface ExportBaselineFixListRequest {
  */
 export interface DescribeBaselineTopResponse {
   /**
-      * 检测项Top列表
+   * 检测项Top列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleTopList: Array<BaselineRuleTopInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -284,7 +257,6 @@ export interface ExportWebPageEventListResponse {
    * 任务id 可通过 ExportTasks接口下载
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -296,23 +268,20 @@ export interface ExportWebPageEventListResponse {
  */
 export interface DescribeUndoVulCountsResponse {
   /**
-      * 未处理的漏洞数
+   * 未处理的漏洞数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UndoVulCount: number
-
   /**
-      * 未处理的主机数
+   * 未处理的主机数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UndoHostCount: number
-
   /**
-      * 普通版主机数
+   * 普通版主机数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NotProfessionCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -324,11 +293,10 @@ export interface DescribeUndoVulCountsResponse {
  */
 export interface DescribeBaselineScanScheduleResponse {
   /**
-      * 检测进度(百分比)
+   * 检测进度(百分比)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Schedule: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -343,22 +311,18 @@ export interface MaliciousRequestWhiteListInfo {
    * 白名单id
    */
   Id: number
-
   /**
    * 域名
    */
   Domain: string
-
   /**
    * 备注
    */
   Mark: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
@@ -383,9 +347,8 @@ export interface DescribeAssetProcessInfoListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name - String - 是否必填：否 - 进程名</li>
 <li>User - String - 是否必填：否 - 进程用户</li>
@@ -404,24 +367,20 @@ export interface DescribeAssetProcessInfoListRequest {
 <li>RunTimeEnd - String - 是否必填：否 - 运行结束时间</li>
 <li>InstallByPackage - uint64 - 是否必填：否 - 是否包安装：0否，1是</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime|StartTime]
    */
@@ -436,12 +395,10 @@ export interface ModifyBaselineRuleRequest {
    * 无
    */
   Data: BaselineRule
-
   /**
    * 是否过滤全选
    */
   SelectAll?: number
-
   /**
    * <li>ItemName - string - 是否必填：否 - 项名称</li>
    */
@@ -453,18 +410,16 @@ export interface ModifyBaselineRuleRequest {
  */
 export interface ExportWebPageEventListRequest {
   /**
-      * 过滤条件
+   * 过滤条件
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>EventType - String - 是否必填：否 - 事件类型</li>
 <li>EventStatus - String - 是否必填：否 - 事件状态</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 排序方式：CreateTime 或 RestoreTime，默认为CreateTime
    */
   By?: string
-
   /**
    * 排序方式，0降序，1升序，默认为0
    */
@@ -479,27 +434,22 @@ export interface AssetNetworkCardInfo {
    * 网卡名称
    */
   Name: string
-
   /**
    * Ipv4对应IP
    */
   Ip: string
-
   /**
    * 网关
    */
   GateWay: string
-
   /**
    * MAC地址
    */
   Mac: string
-
   /**
    * Ipv6对应IP
    */
   Ipv6: string
-
   /**
    * DNS服务器
    */
@@ -514,9 +464,8 @@ export interface DescribeAssetWebFrameListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name - String - 是否必填：否 - 框架名</li>
 <li>NameStrict - String - 是否必填：否 - 框架名（严格匹配）</li>
@@ -535,24 +484,20 @@ export interface DescribeAssetWebFrameListRequest {
 10:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序：[FirstTime|JarCount]
    */
@@ -567,12 +512,10 @@ export interface DescribeMonthInspectionReportResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 巡检报告列表
    */
   List: Array<MonthInspectionReport>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -584,11 +527,10 @@ export interface DescribeMonthInspectionReportResponse {
  */
 export interface DescribeBaselineHostTopResponse {
   /**
-      * 主机基线策略事件Top
+   * 主机基线策略事件Top
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineHostTopList: Array<BaselineHostTopList>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -613,84 +555,68 @@ export interface DescribeSecurityEventsCntResponse {
    * 木马文件相关风险事件
    */
   Malware: SecurityEventInfo
-
   /**
    * 登录审计相关风险事件
    */
   HostLogin: SecurityEventInfo
-
   /**
    * 密码破解相关风险事件
    */
   BruteAttack: SecurityEventInfo
-
   /**
    * 恶意请求相关风险事件
    */
   RiskDns: SecurityEventInfo
-
   /**
    * 高危命令相关风险事件
    */
   Bash: SecurityEventInfo
-
   /**
    * 本地提权相关风险事件
    */
   PrivilegeRules: SecurityEventInfo
-
   /**
    * 反弹Shell相关风险事件
    */
   ReverseShell: SecurityEventInfo
-
   /**
    * 应用漏洞风险事件
    */
   SysVul: SecurityEventInfo
-
   /**
    * Web应用漏洞相关风险事件
    */
   WebVul: SecurityEventInfo
-
   /**
    * 应急漏洞相关风险事件
    */
   EmergencyVul: SecurityEventInfo
-
   /**
    * 安全基线相关风险事件
    */
   BaseLine: SecurityEventInfo
-
   /**
    * 攻击检测相关风险事件
    */
   AttackLogs: SecurityEventInfo
-
   /**
    * 受影响机器数
    */
   EffectMachineCount: number
-
   /**
    * 所有事件总数
    */
   EventsCount: number
-
   /**
-      * window 系统漏洞事件总数
+   * window 系统漏洞事件总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WindowVul: SecurityEventInfo
-
   /**
-      * linux系统漏洞事件总数
+   * linux系统漏洞事件总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LinuxVul: SecurityEventInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -702,16 +628,14 @@ export interface DescribeSecurityEventsCntResponse {
  */
 export interface ExportVulListResponse {
   /**
-      * 导出的文件下载url（已弃用！）
+   * 导出的文件下载url（已弃用！）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadUrl: string
-
   /**
    * 导出文件Id 可通过ExportTasks接口下载
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -726,103 +650,84 @@ export interface AssetMachineBaseInfo {
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
    * 服务器uuid
    */
   Uuid?: string
-
   /**
    * 服务器内网IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统名称
    */
   OsInfo?: string
-
   /**
    * CPU信息
    */
   Cpu?: string
-
   /**
    * 内存容量：单位G
    */
   MemSize?: number
-
   /**
    * 内存使用率百分比
    */
   MemLoad?: string
-
   /**
    * 硬盘容量：单位G
    */
   DiskSize?: number
-
   /**
    * 硬盘使用率百分比
    */
   DiskLoad?: string
-
   /**
    * 分区数
    */
   PartitionCount?: number
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 业务组ID
    */
   ProjectId?: number
-
   /**
    * Cpu数量
    */
   CpuSize?: number
-
   /**
    * Cpu使用率百分比
    */
   CpuLoad?: string
-
   /**
-      * 标签
+   * 标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -834,37 +739,30 @@ export interface DescribeHistoryServiceResponse {
    * 1 可购买 2 只能升降配 3 只能跳到续费管理页
    */
   BuyStatus: number
-
   /**
    * 用户已购容量 单位 G
    */
   InquireNum: number
-
   /**
    * 到期时间
    */
   EndTime: string
-
   /**
    * 是否自动续费,0 初始值, 1 开通 2 没开通
    */
   IsAutoOpenRenew: number
-
   /**
    * 资源ID
    */
   ResourceId: string
-
   /**
    * 0 没开通 1 正常 2隔离 3销毁
    */
   Status: number
-
   /**
    * 开始时间
    */
   StartTime: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -876,63 +774,54 @@ export interface DescribeHistoryServiceResponse {
  */
 export interface BaselineEffectHost {
   /**
-      * 通过项
+   * 通过项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PassCount: number
-
   /**
-      * 风险项
+   * 风险项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailCount: number
-
   /**
-      * 首次检测事件
+   * 首次检测事件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstScanTime: string
-
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastScanTime: string
-
   /**
-      * 风险项处理状态状态：0-未通过，1-通过
+   * 风险项处理状态状态：0-未通过，1-通过
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: number
-
   /**
-      * 主机Quuid
+   * 主机Quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid: string
-
   /**
-      * 主机IP
+   * 主机IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIp: string
-
   /**
-      * 主机别名
+   * 主机别名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AliasName: string
-
   /**
-      * 主机Uuid
+   * 主机Uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid: string
-
   /**
-      * 检测中状态
+   * 检测中状态
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MaxStatus: number
 }
 
@@ -971,107 +860,90 @@ export interface ModifyAutoOpenProVersionConfigResponse {
  */
 export interface DescribeVulInfoCvssResponse {
   /**
-      * 漏洞id
+   * 漏洞id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulId: number
-
   /**
-      * 漏洞名称
+   * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulName: string
-
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
+   * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulLevel: number
-
   /**
-      * 漏洞分类 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
+   * 漏洞分类 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulType: number
-
   /**
-      * 漏洞描述信息
+   * 漏洞描述信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description: string
-
   /**
-      * 修复方案
+   * 修复方案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RepairPlan: string
-
   /**
-      * 漏洞CVEID
+   * 漏洞CVEID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CveId: string
-
   /**
-      * 参考链接
+   * 参考链接
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Reference: string
-
   /**
-      * CVSS信息
+   * CVSS信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CVSS: string
-
   /**
-      * 发布时间
+   * 发布时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PublicDate: string
-
   /**
-      * Cvss分数
+   * Cvss分数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvssScore: number
-
   /**
-      * cvss详情
+   * cvss详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CveInfo: string
-
   /**
-      * cvss 分数 浮点型
+   * cvss 分数 浮点型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvssScoreFloat: number
-
   /**
-      * 漏洞标签 多个逗号分割
+   * 漏洞标签 多个逗号分割
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Labels: string
-
   /**
-      * 已防御的攻击次数
+   * 已防御的攻击次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DefenseAttackCount: number
-
   /**
-      * 全网修复成功次数, 不支持自动修复的漏洞默认返回0
+   * 全网修复成功次数, 不支持自动修复的漏洞默认返回0
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SuccessFixCount: number
-
   /**
-      * 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复
+   * 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FixSwitch: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1096,17 +968,14 @@ export interface ModifyLicenseBindsRequest {
    * 资源ID
    */
   ResourceId: string
-
   /**
    * 授权类型
    */
   LicenseType: number
-
   /**
    * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
    */
   IsAll?: boolean
-
   /**
    * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数. 最大长度=2000
    */
@@ -1121,100 +990,82 @@ export interface MalWareList {
    * 服务器ip
    */
   HostIp?: string
-
   /**
    * 唯一UUID
    */
   Uuid?: string
-
   /**
    * 路径
    */
   FilePath?: string
-
   /**
    * 描述
    */
   VirusName?: string
-
   /**
    * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理
    */
   Status?: number
-
   /**
-      * 唯一ID
+   * 唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Id?: number
-
   /**
    * 主机别名
    */
   Alias?: string
-
   /**
-      * 特性标签，已废弃字段，不会再返回标签，详情中才会返回标签信息
+   * 特性标签，已废弃字段，不会再返回标签，详情中才会返回标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags?: Array<string>
-
   /**
-      * 首次运行时间
+   * 首次运行时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileCreateTime?: string
-
   /**
-      * 最近运行时间
+   * 最近运行时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileModifierTime?: string
-
   /**
    * 创建时间
    */
   CreateTime?: string
-
   /**
    * 最近扫描时间
    */
   LatestScanTime?: string
-
   /**
    * 风险等级 0未知、1低、2中、3高、4严重
    */
   Level?: number
-
   /**
    * '木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
    */
   CheckPlatform?: string
-
   /**
    * 木马进程是否存在 0:不存在，1:存在
    */
   ProcessExists?: number
-
   /**
    * 木马文件是否存在 0:不存在，1:存在
    */
   FileExists?: number
-
   /**
    * cvm quuid
    */
   Quuid?: string
-
   /**
    * 木马样本md5
    */
   MD5?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -1226,7 +1077,6 @@ export interface DescribeAssetUserInfoResponse {
    * 用户详细信息
    */
   User: AssetUserDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1241,12 +1091,10 @@ export interface Tag {
    * 标签ID
    */
   Id: number
-
   /**
    * 标签名
    */
   Name: string
-
   /**
    * 服务器数
    */
@@ -1261,27 +1109,22 @@ export interface DescribeServersAndRiskAndFirstInfoResponse {
    * 风险文件数
    */
   RiskFileCount: number
-
   /**
    * 今日新增风险文件数
    */
   AddRiskFileCount: number
-
   /**
    * 受影响服务器台数
    */
   ServersCount: number
-
   /**
    * 是否试用：true-是，false-否
    */
   IsFirstCheck: boolean
-
   /**
    * 木马最近检测时间
    */
   ScanTime: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1296,12 +1139,10 @@ export interface ExportAttackLogsResponse {
    * 已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1313,17 +1154,15 @@ export interface ExportAttackLogsResponse {
  */
 export interface DescribeBaselineEffectHostListResponse {
   /**
-      * 记录总数
+   * 记录总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 影响服务器列表
+   * 影响服务器列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EffectHostList: Array<BaselineEffectHost>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1348,22 +1187,18 @@ export interface LicenseOrder {
    * 授权ID
    */
   LicenseId: number
-
   /**
    * 授权类型
    */
   LicenseType: number
-
   /**
    * 授权订单资源状态
    */
   Status: number
-
   /**
    * 订单类型
    */
   SourceType: number
-
   /**
    * 资源ID
    */
@@ -1378,11 +1213,10 @@ export interface ExportVulEffectHostListRequest {
    * 漏洞id
    */
   VulId: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>AliasName - String - 主机名筛选</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -1409,12 +1243,10 @@ export interface DescribeVulCountByDatesRequest {
    * 需要查询最近几天的数据，需要都 -1后传入
    */
   LastDays?: Array<number>
-
   /**
    * 漏洞的分类: 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategory?: number
-
   /**
    * 是否为应急漏洞筛选  是: yes
    */
@@ -1429,17 +1261,14 @@ export interface CreateLicenseOrderResponse {
    * 订单号列表
    */
   DealNames: Array<string>
-
   /**
    * 资源ID列表,预付费订单该字段空值
    */
   ResourceIds: Array<string>
-
   /**
    * 大订单号 , 后付费该字段空值
    */
   BigDealId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1451,17 +1280,15 @@ export interface CreateLicenseOrderResponse {
  */
 export interface DescribeBaselineStrategyListResponse {
   /**
-      * 分页查询记录的总数
+   * 分页查询记录的总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
-      * 用户策略信息列表
+   * 用户策略信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrategyList: Array<Strategy>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1476,76 +1303,62 @@ export interface DefendAttackLog {
    * 日志ID
    */
   Id?: number
-
   /**
    * 客户端ID
    */
   Uuid?: string
-
   /**
    * 来源IP
    */
   SrcIp?: string
-
   /**
    * 来源端口
    */
   SrcPort?: number
-
   /**
    * 攻击方式
    */
   HttpMethod?: string
-
   /**
    * 攻击描述
    */
   HttpCgi?: string
-
   /**
    * 攻击参数
    */
   HttpParam?: string
-
   /**
    * 威胁类型
    */
   VulType?: string
-
   /**
    * 攻击时间
    */
   CreatedAt?: string
-
   /**
    * 目标服务器IP
    */
   MachineIp?: string
-
   /**
    * 目标服务器名称
    */
   MachineName?: string
-
   /**
    * 目标IP
    */
   DstIp?: string
-
   /**
    * 目标端口
    */
   DstPort?: number
-
   /**
    * 攻击内容
    */
   HttpContent?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -1554,27 +1367,24 @@ export interface DefendAttackLog {
  */
 export interface BaselineRuleTopInfo {
   /**
-      * 基线检测项名
+   * 基线检测项名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleName: string
-
   /**
-      * 检测项危害等级
+   * 检测项危害等级
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level: number
-
   /**
-      * 事件总数
+   * 事件总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventCount: number
-
   /**
-      * 检测项id
+   * 检测项id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleId: number
 }
 
@@ -1586,82 +1396,66 @@ export interface DescribeAttackLogInfoResponse {
    * 日志ID
    */
   Id: number
-
   /**
    * 主机ID
    */
   Quuid: string
-
   /**
    * 攻击来源端口
    */
   SrcPort: number
-
   /**
    * 攻击来源IP
    */
   SrcIp: string
-
   /**
    * 攻击目标端口
    */
   DstPort: number
-
   /**
    * 攻击目标IP
    */
   DstIp: string
-
   /**
    * 攻击方法
    */
   HttpMethod: string
-
   /**
    * 攻击目标主机
    */
   HttpHost: string
-
   /**
    * 攻击头信息
    */
   HttpHead: string
-
   /**
    * 攻击者浏览器标识
    */
   HttpUserAgent: string
-
   /**
    * 请求源
    */
   HttpReferer: string
-
   /**
    * 威胁类型
    */
   VulType: string
-
   /**
    * 攻击路径
    */
   HttpCgi: string
-
   /**
    * 攻击参数
    */
   HttpParam: string
-
   /**
    * 攻击时间
    */
   CreatedAt: string
-
   /**
    * 攻击内容
    */
   HttpContent: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1676,12 +1470,10 @@ export interface DescribePrivilegeEventsResponse {
    * 数据列表
    */
   List: Array<PrivilegeEscalationProcess>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1696,37 +1488,30 @@ export interface DescribeOverviewStatisticsResponse {
    * 服务器在线数。
    */
   OnlineMachineNum: number
-
   /**
    * 专业服务器数。
    */
   ProVersionMachineNum: number
-
   /**
    * 木马文件数。
    */
   MalwareNum: number
-
   /**
    * 异地登录数。
    */
   NonlocalLoginNum: number
-
   /**
    * 暴力破解成功数。
    */
   BruteAttackSuccessNum: number
-
   /**
    * 漏洞数。
    */
   VulNum: number
-
   /**
    * 安全基线数。
    */
   BaseLineNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1741,7 +1526,6 @@ export interface DescribeMonthInspectionReportRequest {
    * 分页大小
    */
   Limit: number
-
   /**
    * 分页步长
    */
@@ -1756,12 +1540,10 @@ export interface DescribeBaselineDetectListResponse {
    * 无
    */
   List: Array<BaselinePolicyDetect>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1776,52 +1558,42 @@ export interface ReverseShellRule {
    * 规则ID
    */
   Id: number
-
   /**
    * 客户端ID
    */
   Uuid: string
-
   /**
    * 进程名称
    */
   ProcessName: string
-
   /**
    * 目标IP
    */
   DestIp: string
-
   /**
    * 目标端口
    */
   DestPort: string
-
   /**
    * 操作人
    */
   Operator: string
-
   /**
    * 是否全局规则
    */
   IsGlobal: number
-
   /**
    * 状态 (0: 有效 1: 无效)
    */
   Status: number
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 修改时间
    */
   ModifyTime: string
-
   /**
    * 主机IP
    */
@@ -1836,12 +1608,10 @@ export interface DescribeBashRulesResponse {
    * 列表内容
    */
   List: Array<BashRule>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1856,32 +1626,26 @@ export interface DescribeAvailableExpertServiceDetailResponse {
    * 安全管家订单
    */
   ExpertService: Array<ExpertServiceOrderInfo>
-
   /**
    * 应急响应可用次数
    */
   EmergencyResponse: number
-
   /**
    * 旗舰护网可用次数
    */
   ProtectNet: number
-
   /**
    * 是否购买过安全管家
    */
   ExpertServiceBuy: boolean
-
   /**
    * 是否购买过应急响应
    */
   EmergencyResponseBuy: boolean
-
   /**
    * 是否购买过旗舰护网
    */
   ProtectNetBuy: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1896,150 +1660,124 @@ export interface BashEventsInfoNew {
    * 数据ID
    */
   Id?: number
-
   /**
    * 主机安全ID
    */
   Uuid?: string
-
   /**
    * 主机ID
    */
   Quuid?: string
-
   /**
    * 主机内网IP
    */
   HostIp?: string
-
   /**
    * 平台类型
    */
   Platform?: number
-
   /**
    * 执行命令
    */
   BashCmd?: string
-
   /**
    * 规则ID,等于0表示已规则已被删除或生效范围已修改
    */
   RuleId?: number
-
   /**
    * 规则名称
    */
   RuleName?: string
-
   /**
    * 规则等级：1-高 2-中 3-低
    */
   RuleLevel?: number
-
   /**
    * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
    */
   Status?: number
-
   /**
    * 发生时间
    */
   CreateTime?: string
-
   /**
    * 主机名
    */
   MachineName?: string
-
   /**
-      * 进程名称
+   * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Exe?: string
-
   /**
-      * 处理时间
+   * 处理时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime?: string
-
   /**
-      * 规则类别  0=系统规则，1=用户规则
+   * 规则类别  0=系统规则，1=用户规则
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleCategory?: number
-
   /**
-      * 自动生成的正则表达式
+   * 自动生成的正则表达式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegexBashCmd?: string
-
   /**
-      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+   * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PsTree?: string
-
   /**
-      * 建议方案
+   * 建议方案
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SuggestScheme?: string
-
   /**
-      * 描述
+   * 描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HarmDescribe?: string
-
   /**
-      * 标签
+   * 标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags?: Array<string>
-
   /**
-      * 参考链接
+   * 参考链接
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   References?: Array<string>
-
   /**
-      * 主机外网ip
+   * 主机外网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineWanIp?: string
-
   /**
-      * 主机在线状态 OFFLINE  ONLINE
+   * 主机在线状态 OFFLINE  ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineStatus?: string
-
   /**
-      * 登录用户
+   * 登录用户
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   User?: string
-
   /**
-      * 进程号
+   * 进程号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid?: string
-
   /**
-      * 0:普通 1:专业版 2:旗舰版
+   * 0:普通 1:专业版 2:旗舰版
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineType?: number
-
   /**
-      * 检测来源 0:bash日志 1:实时监控
+   * 检测来源 0:bash日志 1:实时监控
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectBy?: number
 }
 
@@ -2051,12 +1789,10 @@ export interface ChangeRuleEventsIgnoreStatusRequest {
    * 忽略状态 0:取消忽略 ； 1:忽略
    */
   IgnoreStatus: number
-
   /**
    * 检测项id数组
    */
   RuleIdList?: Array<number>
-
   /**
    * 事件id数组
    */
@@ -2068,28 +1804,24 @@ export interface ChangeRuleEventsIgnoreStatusRequest {
  */
 export interface DescribeWebPageEventListRequest {
   /**
-      * 过滤条件
+   * 过滤条件
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>EventType - String - 是否必填：否 - 事件类型</li>
 <li>EventStatus - String - 是否必填：否 - 事件状态</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 排序方式：CreateTime 或 RestoreTime，默认为CreateTime
    */
   By?: string
-
   /**
    * 排序方式，0降序，1升序，默认为0
    */
@@ -2104,24 +1836,20 @@ export interface ExportAssetCoreModuleListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>User- string - 是否必填：否 - 用户</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序依据[FirstTime|Size|ProcessCount|ModuleCount]
    */
@@ -2136,12 +1864,10 @@ export interface DescribeComponentStatisticsResponse {
    * 组件统计列表记录总数。
    */
   TotalCount: number
-
   /**
    * 组件统计列表数据数组。
    */
   ComponentStatistics: Array<ComponentStatistics>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2161,12 +1887,10 @@ export interface DescribeSearchExportListResponse {
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: number
-
   /**
    * 该参数作废
    */
   DownloadUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2181,14 +1905,12 @@ export interface DescribeAttackLogsRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
 <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
 <li>VulType - String 威胁类型 - 是否必填: 否</li>
@@ -2196,14 +1918,12 @@ export interface DescribeAttackLogsRequest {
 <li>DstIp - String 攻击目标IP - 是否必填: 否</li>
 <li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
 <li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 主机安全客户端ID
    */
   Uuid?: string
-
   /**
    * 云主机机器ID
    */
@@ -2215,11 +1935,10 @@ export interface DescribeAttackLogsRequest {
  */
 export interface DescribeVulLevelCountResponse {
   /**
-      * 统计结果
+   * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulLevelList: Array<VulLevelInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2231,13 +1950,12 @@ export interface DescribeVulLevelCountResponse {
  */
 export interface ExportBaselineItemDetectListRequest {
   /**
-      * <li>HostId - string - 是否必填：否 - 主机Id</i>
+   * <li>HostId - string - 是否必填：否 - 主机Id</i>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</i>
 <li>IsPassed - int - 是否必填：否 - 是否通过</li>
 <li>RiskTier - int - 是否必填：否 - 风险等级</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -2257,32 +1975,26 @@ export interface DescribeServerRelatedDirInfoResponse {
    * 服务器名称
    */
   HostName: string
-
   /**
    * 服务器IP
    */
   HostIp: string
-
   /**
    * 防护目录数量
    */
   ProtectDirNum: number
-
   /**
    * 防护文件数量
    */
   ProtectFileNum: number
-
   /**
    * 防篡改数量
    */
   ProtectTamperNum: number
-
   /**
    * 防护软链数量
    */
   ProtectLinkNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2297,7 +2009,6 @@ export interface DescribeUsualLoginPlacesResponse {
    * 常用登录地数组
    */
   UsualLoginPlaces?: Array<UsualPlace>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2309,33 +2020,29 @@ export interface DescribeUsualLoginPlacesResponse {
  */
 export interface IgnoreBaselineRule {
   /**
-      * 基线检测项名称
+   * 基线检测项名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleName: string
-
   /**
-      * 基线检测项id
+   * 基线检测项id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleId: number
-
   /**
-      * 更新时间
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime: string
-
   /**
-      * 修复建议
+   * 修复建议
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Fix: string
-
   /**
-      * 影响主机数
+   * 影响主机数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EffectHostCount: number
 }
 
@@ -2344,11 +2051,10 @@ export interface IgnoreBaselineRule {
  */
 export interface DescribeBaselineBasicInfoResponse {
   /**
-      * 基线基础信息列表
+   * 基线基础信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineBasicInfoList: Array<BaselineBasicInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2383,57 +2089,46 @@ export interface LoginWhiteLists {
    * 记录ID
    */
   Id: number
-
   /**
    * 云镜客户端ID
    */
   Uuid: string
-
   /**
    * 白名单地域
    */
   Places: Array<Place>
-
   /**
    * 白名单用户（多个用户逗号隔开）
    */
   UserName: string
-
   /**
    * 白名单IP（多个IP逗号隔开）
    */
   SrcIp: string
-
   /**
    * 是否为全局规则
    */
   IsGlobal: boolean
-
   /**
    * 创建白名单时间
    */
   CreateTime: string
-
   /**
    * 修改白名单时间
    */
   ModifyTime: string
-
   /**
    * 机器名
    */
   MachineName: string
-
   /**
    * 机器IP
    */
   HostIp: string
-
   /**
    * 起始时间
    */
   StartTime: string
-
   /**
    * 结束时间
    */
@@ -2445,11 +2140,10 @@ export interface LoginWhiteLists {
  */
 export interface ScanVulResponse {
   /**
-      * 任务id
+   * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2469,12 +2163,10 @@ export interface DeleteScanTaskRequest {
    * 任务Id
    */
   TaskId: number
-
   /**
    * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
    */
   ModuleType: string
-
   /**
    * 自选服务器时生效，主机quuid的string数组
    */
@@ -2489,17 +2181,14 @@ export interface DescribeAlarmIncidentNodesRequest {
    * 机器uuid
    */
   Uuid: string
-
   /**
    * 告警vid
    */
   AlarmVid: string
-
   /**
    * 告警时间
    */
   AlarmTime: number
-
   /**
    * 告警来源表ID
    */
@@ -2524,22 +2213,19 @@ export interface AssetKeyVal {
    * 标签
    */
   Key: string
-
   /**
    * 数量
    */
   Value: number
-
   /**
-      * 描述信息
+   * 描述信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Desc: string
-
   /**
-      * 今日新增数量
+   * 今日新增数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NewCount: number
 }
 
@@ -2551,12 +2237,10 @@ export interface DescribeLicenseListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 授权数列表信息
    */
   List: Array<LicenseDetail>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2568,16 +2252,14 @@ export interface DescribeLicenseListResponse {
  */
 export interface DescribeJavaMemShellListResponse {
   /**
-      * 事件列表
+   * 事件列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List: Array<JavaMemShellInfo>
-
   /**
    * 总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2592,7 +2274,6 @@ export interface LicenseUnBindRsp {
    * QUUID 云服务器uuid,轻量服务器uuid,边缘计算 uuid
    */
   Quuid: string
-
   /**
    * 失败原因
    */
@@ -2604,27 +2285,23 @@ export interface LicenseUnBindRsp {
  */
 export interface DescribeBaselineRuleListRequest {
   /**
-      * <li>RuleName - String - 是否必填：否 - 规则名称</li>
+   * <li>RuleName - String - 是否必填：否 - 规则名称</li>
 <li>CategoryId - int64 - 是否必填：否 自定义筛选为-1 - 规则分类</li>
 <li>RuleType - int - 是否必填：否 0:系统 1:自定义 - 规则类型</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列
    */
@@ -2636,17 +2313,15 @@ export interface DescribeBaselineRuleListRequest {
  */
 export interface ModifyAutoOpenProVersionConfigRequest {
   /**
-      * 设置自动开通状态。
+   * 设置自动开通状态。
 <li>CLOSE：关闭</li>
 <li>OPEN：打开</li>
-      */
+   */
   Status: string
-
   /**
    * 自动加购/扩容授权开关,默认 1, 0关闭, 1开启
    */
   AutoRepurchaseSwitch?: number
-
   /**
    * 自动加购的订单是否自动续费,默认0 ,0关闭, 1开启
    */
@@ -2668,7 +2343,7 @@ export interface DeletePrivilegeEventsRequest {
  */
 export interface ExportAttackLogsRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
 <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
 <li>VulType - String 威胁类型 - 是否必填: 否</li>
@@ -2676,14 +2351,12 @@ export interface ExportAttackLogsRequest {
 <li>DstIp - String 攻击目标IP - 是否必填: 否</li>
 <li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
 <li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 主机安全客户端ID
    */
   Uuid?: string
-
   /**
    * 云主机机器ID
    */
@@ -2695,45 +2368,39 @@ export interface ExportAttackLogsRequest {
  */
 export interface IgnoreRuleEffectHostInfo {
   /**
-      * 主机名称
+   * 主机名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName: string
-
   /**
-      * 危害等级：1-低位，2-中危，3-高危，4-严重
+   * 危害等级：1-低位，2-中危，3-高危，4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level: number
-
   /**
-      * 主机标签数组
+   * 主机标签数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagList: Array<string>
-
   /**
-      * 状态：0-未通过，1-忽略，3-已通过，5-检测中
+   * 状态：0-未通过，1-忽略，3-已通过，5-检测中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: number
-
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastScanTime: string
-
   /**
-      * 事件id
+   * 事件id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventId: number
-
   /**
-      * 主机quuid
+   * 主机quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid: string
 }
 
@@ -2745,28 +2412,23 @@ export interface HostRiskLevelCount {
    * 主机ID
    */
   HostId: string
-
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName: string
-
   /**
    * 严重个数
    */
   SeriousCount: number
-
   /**
    * 高危个数
    */
   HighCount: number
-
   /**
    * 中危个数
    */
   MediumCount: number
-
   /**
    * 低危个数
    */
@@ -2778,30 +2440,26 @@ export interface HostRiskLevelCount {
  */
 export interface DescribeFileTamperEventsRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Status - String - 是否必填：否 - 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略</li>
 <li>ModifyTime - String - 是否必填：否 - 最近发生时间</li>
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则</li>
 <li>FileAction- string - 是否必填：否 - 威胁行为 read 读取文件 write 写文件</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式 ASC,DESC
    */
   Order?: string
-
   /**
    * 排序字段 CreateTime、ModifyTime
    */
@@ -2816,58 +2474,48 @@ export interface AssetJarDetail {
    * 名称
    */
   Name: string
-
   /**
    * 类型：1应用程序，2系统类库，3Web服务自带库，8:其他，
    */
   Type: number
-
   /**
    * 是否可执行：0未知，1是，2否
    */
   Status: number
-
   /**
    * 版本
    */
   Version: string
-
   /**
    * 路径
    */
   Path: string
-
   /**
    * 服务器IP
    */
   MachineIp: string
-
   /**
    * 服务器名称
    */
   MachineName: string
-
   /**
    * 操作系统
    */
   OsInfo: string
-
   /**
-      * 引用进程列表
+   * 引用进程列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Process: Array<AssetAppProcessInfo>
-
   /**
-      * Jar包Md5
+   * Jar包Md5
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Md5: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
 }
 
@@ -2904,94 +2552,78 @@ export interface EmergencyVul {
    * 漏洞id
    */
   VulId: number
-
   /**
    * 漏洞级别
    */
   Level: number
-
   /**
    * 漏洞名称
    */
   VulName: string
-
   /**
    * 发布日期
    */
   PublishDate: string
-
   /**
    * 漏洞分类
    */
   Category: number
-
   /**
    * 漏洞状态 0未检测 1有风险 ，2无风险 ，3 检查中展示progress
    */
   Status: number
-
   /**
    * 最后扫描时间
    */
   LastScanTime: string
-
   /**
    * 扫描进度
    */
   Progress: number
-
   /**
-      * cve编号
+   * cve编号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CveId: string
-
   /**
-      * CVSS评分
+   * CVSS评分
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvssScore: number
-
   /**
-      * 漏洞标签 多个逗号分割
+   * 漏洞标签 多个逗号分割
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Labels: string
-
   /**
-      * 影响机器数
+   * 影响机器数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostCount: number
-
   /**
-      * 是否支持防御， 0:不支持 1:支持
+   * 是否支持防御， 0:不支持 1:支持
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsSupportDefense: number
-
   /**
-      * 已防御的攻击次数
+   * 已防御的攻击次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DefenseAttackCount: number
-
   /**
-      * 检测规则 0 - 版本比对, 1 - POC验证
+   * 检测规则 0 - 版本比对, 1 - POC验证
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Method?: number
-
   /**
-      * 攻击热度级别
+   * 攻击热度级别
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AttackLevel?: number
-
   /**
-      * 是否有漏洞主机开启漏洞防御
+   * 是否有漏洞主机开启漏洞防御
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DefenseState?: boolean
 }
 
@@ -3013,113 +2645,93 @@ export interface BashEventNew {
    * 数据ID
    */
   Id?: number
-
   /**
    * 主机安全ID
    */
   Uuid?: string
-
   /**
    * 主机ID
    */
   Quuid?: string
-
   /**
    * 主机内网IP
    */
   HostIp?: string
-
   /**
    * 执行用户名
    */
   User?: string
-
   /**
    * 平台类型
    */
   Platform?: number
-
   /**
    * 执行命令
    */
   BashCmd?: string
-
   /**
    * 规则ID
    */
   RuleId?: number
-
   /**
    * 规则名称
    */
   RuleName?: string
-
   /**
    * 规则等级：1-高 2-中 3-低
    */
   RuleLevel?: number
-
   /**
    * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
    */
   Status?: number
-
   /**
    * 发生时间
    */
   CreateTime?: string
-
   /**
    * 主机名
    */
   MachineName?: string
-
   /**
-      * 0: bash日志 1: 实时监控(雷霆版)
+   * 0: bash日志 1: 实时监控(雷霆版)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectBy?: number
-
   /**
-      * 进程id
+   * 进程id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid?: string
-
   /**
-      * 进程名称
+   * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Exe?: string
-
   /**
-      * 处理时间
+   * 处理时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime?: string
-
   /**
-      * 规则类别  0=系统规则，1=用户规则
+   * 规则类别  0=系统规则，1=用户规则
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleCategory?: number
-
   /**
-      * 自动生成的正则表达式
+   * 自动生成的正则表达式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegexBashCmd?: string
-
   /**
-      * 0:普通 1:专业版 2:旗舰版
+   * 0:普通 1:专业版 2:旗舰版
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineType?: number
-
   /**
-      * 机器额外信息
+   * 机器额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -3138,11 +2750,10 @@ export interface DeleteLoginWhiteListResponse {
  */
 export interface DescribeVertexDetailResponse {
   /**
-      * 指定点列表的属性信息
+   * 指定点列表的属性信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VertexDetails?: Array<VertexDetail>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3154,16 +2765,14 @@ export interface DescribeVertexDetailResponse {
  */
 export interface DescribeAttackLogsResponse {
   /**
-      * 日志列表
+   * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AttackLogs: Array<DefendAttackLog>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3178,12 +2787,10 @@ export interface DescribeBaselineHostIgnoreListResponse {
    * 总数
    */
   Total: number
-
   /**
    * 无
    */
   List: Array<BaselineHost>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3208,14 +2815,12 @@ export interface DescribeAssetInitServiceListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>User- string - 是否必填：否 - 用户</li>
@@ -3235,24 +2840,20 @@ export interface DescribeAssetInitServiceListRequest {
 12:资源管理器
 13:驱动服务
 14:登录</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime]
    */
@@ -3274,27 +2875,24 @@ export interface ScanVulAgainResponse {
  */
 export interface VulTopInfo {
   /**
-      * 漏洞 名
+   * 漏洞 名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulName: string
-
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
+   * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulLevel: number
-
   /**
-      * 漏洞数量
+   * 漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulCount: number
-
   /**
-      * 漏洞id
+   * 漏洞id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulId: number
 }
 
@@ -3306,12 +2904,10 @@ export interface SeparateMalwaresResponse {
    * 隔离成功的id数组，若无则返回空数组
    */
   SuccessIds: Array<number>
-
   /**
    * 隔离失败的id数组，若无则返回空数组
    */
   FailedIds: Array<number>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3323,29 +2919,27 @@ export interface SeparateMalwaresResponse {
  */
 export interface DescribeTagsRequest {
   /**
-      * 云主机类型。
+   * 云主机类型。
 <li>CVM：表示云服务器</li>
 <li>BM:  表示黑石物理机</li>
 <li>ECM:  表示边缘计算服务器</li>
 <li>LH:  表示轻量应用服务器</li>
 <li>Other:  表示混合云服务器</li>
-      */
+   */
   MachineType?: string
-
   /**
    * 机器所属地域。如：ap-guangzhou
    */
   MachineRegion?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字(机器名称/机器IP </li>
 <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装 | SHUTDOWN 已关机）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
 <li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -3357,27 +2951,23 @@ export interface DescribeRiskDnsListRequest {
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Url - String - 是否必填：否 - Url筛选</li>
 <li>Status - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
 <li>MergeBeginTime - String - 是否必填：否 - 最近访问开始时间</li>
 <li>MergeEndTime - String - 是否必填：否 - 最近访问结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：AccessCount-请求次数。MergeTime-最近请求时间
    */
@@ -3402,7 +2992,6 @@ export interface DescribeSecurityDynamicsRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
@@ -3417,22 +3006,18 @@ export interface CheckBashRuleParamsRequest {
    * 校验内容 Name或Rule ，两个都要校验时逗号分割
    */
   CheckField: string
-
   /**
    * 在事件列表中新增白名时需要提交事件ID
    */
   EventId?: number
-
   /**
    * 填入的规则名称
    */
   Name?: string
-
   /**
    * 用户填入的正则表达式："正则表达式" 需与 "提交EventId对应的命令内容" 相匹配
    */
   Rule?: string
-
   /**
    * 编辑时传的规则id
    */
@@ -3457,12 +3042,10 @@ export interface DescribeIgnoreBaselineRuleRequest {
    * 分页参数 最大100条
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
    * 检测项名称
    */
@@ -3477,12 +3060,10 @@ export interface ExportNonlocalLoginPlacesResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3494,16 +3075,14 @@ export interface ExportNonlocalLoginPlacesResponse {
  */
 export interface DescribeAssetJarListResponse {
   /**
-      * 应用列表
+   * 应用列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Jars: Array<AssetJarBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3538,134 +3117,113 @@ export interface HostLoginList {
    * 记录Id
    */
   Id?: number
-
   /**
-      * Uuid串
+   * Uuid串
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 主机ip
+   * 主机ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineIp?: string
-
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineName?: string
-
   /**
-      * 用户名
+   * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserName?: string
-
   /**
-      * 来源ip
+   * 来源ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcIp?: string
-
   /**
    * 1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。
    */
   Status?: number
-
   /**
-      * 国家id
+   * 国家id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Country?: number
-
   /**
-      * 城市id
+   * 城市id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   City?: number
-
   /**
-      * 省份id
+   * 省份id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Province?: number
-
   /**
-      * 登录时间
+   * 登录时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LoginTime?: string
-
   /**
-      * 修改时间
+   * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime?: string
-
   /**
-      * 是否命中异地登录异常  1表示命中此类异常, 0表示未命中
+   * 是否命中异地登录异常  1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsRiskArea?: number
-
   /**
-      * 是否命中异常用户异常 1表示命中此类异常, 0表示未命中
+   * 是否命中异常用户异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsRiskUser?: number
-
   /**
-      * 是否命中异常时间异常 1表示命中此类异常, 0表示未命中
+   * 是否命中异常时间异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsRiskTime?: number
-
   /**
-      * 是否命中异常IP异常 1表示命中此类异常, 0表示未命中
+   * 是否命中异常IP异常 1表示命中此类异常, 0表示未命中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsRiskSrcIp?: number
-
   /**
-      * 危险等级：
+   * 危险等级：
 0 高危
 1 可疑
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RiskLevel?: number
-
   /**
-      * 位置名称
+   * 位置名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Location?: string
-
   /**
-      * 主机quuid
+   * 主机quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid?: string
-
   /**
-      * 高危信息说明：
+   * 高危信息说明：
 ABROAD - 海外IP；
 XTI - 威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Desc?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 请求目的端口
+   * 请求目的端口
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Port?: number
 }
 
@@ -3682,12 +3240,10 @@ export interface DescribeBaselineItemInfoResponse {
    * 结果列表
    */
   List: Array<BaselineItemInfo>
-
   /**
    * 总条目数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3702,7 +3258,6 @@ export interface DescribeBaselineRuleCategoryListResponse {
    * 无
    */
   List: Array<BaselineCategory>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3717,133 +3272,107 @@ export interface ReverseShellEventInfo {
    * ID 主键
    */
   Id: number
-
   /**
    * 云镜UUID
    */
   Uuid: string
-
   /**
    * 主机ID
    */
   Quuid: string
-
   /**
    * 主机内网IP
    */
   HostIp: string
-
   /**
    * 目标IP
    */
   DstIp: string
-
   /**
    * 目标端口
    */
   DstPort: number
-
   /**
    * 进程名
    */
   ProcessName: string
-
   /**
    * 进程路径
    */
   FullPath: string
-
   /**
    * 命令详情
    */
   CmdLine: string
-
   /**
    * 执行用户
    */
   UserName: string
-
   /**
    * 执行用户组
    */
   UserGroup: string
-
   /**
    * 父进程名
    */
   ParentProcName: string
-
   /**
    * 父进程用户
    */
   ParentProcUser: string
-
   /**
    * 父进程用户组
    */
   ParentProcGroup: string
-
   /**
    * 父进程路径
    */
   ParentProcPath: string
-
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
   Status: number
-
   /**
    * 产生时间
    */
   CreateTime: string
-
   /**
    * 主机名
    */
   MachineName: string
-
   /**
    * 检测方法
    */
   DetectBy: number
-
   /**
-      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+   * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PsTree: string
-
   /**
    * 建议方案
    */
   SuggestScheme: string
-
   /**
    * 描述
    */
   HarmDescribe: string
-
   /**
    * 标签
    */
   Tags: Array<string>
-
   /**
    * 参考链接
    */
   References: Array<string>
-
   /**
    * 主机外网ip
    */
   MachineWanIp: string
-
   /**
    * 主机在线状态 OFFLINE  ONLINE
    */
   MachineStatus: string
-
   /**
    * 处理时间
    */
@@ -3858,17 +3387,14 @@ export interface ExportVulDetectionReportRequest {
    * 漏洞扫描任务id（不同于出参的导出检测报告的任务Id）
    */
   TaskId: number
-
   /**
    * 过滤参数
    */
   Filters?: Array<Filters>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
@@ -3883,12 +3409,10 @@ export interface ExportMalwaresResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3925,7 +3449,7 @@ export interface StartBaselineDetectRequest {
  */
 export interface DescribeVulStoreListRequest {
   /**
-      * 
+   * 
 <li>VulName- string - 是否必填：否 - 漏洞名称</li>
 <li>CveId- string - 是否必填：否 - cveid</li>
 <li>VulCategory- string - 是否必填：否 - 漏洞分类  1 Web-CMS漏洞 ,2 应用漏洞 ,4 Linux软件漏洞,5 Windows系统漏洞</li>
@@ -3933,24 +3457,20 @@ export interface DescribeVulStoreListRequest {
 <li>SupportDefense- string - 是否必填：否 - 是否支持防御 0不支持,1支持</li>
 <li>FixSwitch- string - 是否必填：否 - 是否支持自动修复 0不支持,1支持</li>
 
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [PublishDate]
    */
@@ -3965,17 +3485,14 @@ export interface BaselineWeakPassword {
    * 密码Id
    */
   PasswordId: number
-
   /**
    * 密码
    */
   WeakPassword: string
-
   /**
    * 创建时间
    */
   CreateTime?: string
-
   /**
    * 修改时间
    */
@@ -3987,16 +3504,14 @@ export interface BaselineWeakPassword {
  */
 export interface DescribeAssetPlanTaskListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tasks: Array<AssetPlanTask>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4011,32 +3526,26 @@ export interface DescribeBaselineRuleRequest {
    * 基线id
    */
   BaselineId: number
-
   /**
    * 分页参数 最大100条
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
    * 危害等级
    */
   Level?: Array<number>
-
   /**
    * 状态
    */
   Status?: number
-
   /**
    * 主机quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
@@ -4051,21 +3560,18 @@ export interface DescribeHistoryAccountsRequest {
    * 云镜客户端唯一Uuid。
    */
   Uuid: string
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Username - String - 是否必填：否 - 帐号名</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -4077,7 +3583,6 @@ export interface DescribeAssetMachineDetailRequest {
    * 服务器Quuid
    */
   Quuid: string
-
   /**
    * 服务器Uuid
    */
@@ -4102,12 +3607,10 @@ export interface FixBaselineDetectRequest {
    * 主机Id
    */
   HostId: string
-
   /**
    * 项Id
    */
   ItemId: number
-
   /**
    * 修复内容
    */
@@ -4129,26 +3632,22 @@ export interface IgnoreImpactedHostsResponse {
  */
 export interface DescribeBaselineRuleIgnoreListRequest {
   /**
-      * <li>RuleName - String - 是否必填：否 - 规则名称</li>
+   * <li>RuleName - String - 是否必填：否 - 规则名称</li>
 <li>ItemId- int - 是否必填：否 - 检测项Id</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [HostCount]
    */
@@ -4163,7 +3662,6 @@ export interface DescribeAssetMachineDetailResponse {
    * 主机详情
    */
   MachineDetail: AssetMachineDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4175,28 +3673,24 @@ export interface DescribeAssetMachineDetailResponse {
  */
 export interface DescribeBaselineDownloadListRequest {
   /**
-      * <li>Status - int - 是否必填：否 - 0:导出中 1:已完成</li>
+   * <li>Status - int - 是否必填：否 - 0:导出中 1:已完成</li>
 <li>StartTime - string - 是否必填：否 - 开始时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
 <li>TaskName - string - 是否必填：否 - 任务名称</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [StartTime|EndTime]
    */
@@ -4208,11 +3702,10 @@ export interface DescribeBaselineDownloadListRequest {
  */
 export interface DescribeStrategyExistResponse {
   /**
-      * 策略是否存在, 1是 0否
+   * 策略是否存在, 1是 0否
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IfExist: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4237,7 +3730,6 @@ export interface DescribeSearchLogsResponse {
    * 历史搜索记录 保留最新的10条
    */
   Data: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4254,16 +3746,14 @@ export type DescribeBaselineRuleCategoryListRequest = null
  */
 export interface DescribeAssetWebServiceProcessListResponse {
   /**
-      * 进程列表
+   * 进程列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Process: Array<AssetAppProcessInfo>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4288,22 +3778,18 @@ export interface DescribeBaselineWeakPasswordListRequest {
    * <li>WeakPassword - string - 是否必填：否 - 弱口令</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式 [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列 [CreateTime|ModifyTime]
    */
@@ -4318,147 +3804,119 @@ export interface AssetUserDetail {
    * 主机内网IP
    */
   MachineIp: string
-
   /**
    * 主机名称
    */
   MachineName: string
-
   /**
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 账号UID
    */
   Uid: string
-
   /**
    * 账号GID
    */
   Gid: string
-
   /**
    * 账号状态：0-禁用；1-启用
    */
   Status: number
-
   /**
    * 是否有root权限：0-否；1是，999为空: 仅linux
    */
   IsRoot: number
-
   /**
    * 上次登录时间
    */
   LastLoginTime: string
-
   /**
    * 账号名称
    */
   Name: string
-
   /**
    * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows
    */
   UserType: number
-
   /**
    * 是否域账号：0否， 1是, 999为空  仅windows
    */
   IsDomain: number
-
   /**
    * 是否允许ssh登录，1是，0否, 999为空, 仅linux
    */
   IsSshLogin: number
-
   /**
    * Home目录
    */
   HomePath: string
-
   /**
    * Shell路径  仅linux
    */
   Shell: string
-
   /**
    * 是否shell登录性，0不是；1是 仅linux
    */
   ShellLoginStatus: number
-
   /**
    * 密码修改时间
    */
   PasswordChangeTime: string
-
   /**
    * 密码过期时间  仅linux
    */
   PasswordDueTime: string
-
   /**
    * 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux
    */
   PasswordLockDays: number
-
   /**
    * 备注
    */
   Remark: string
-
   /**
    * 用户组名
    */
   GroupName: string
-
   /**
    * 账号到期时间
    */
   DisableTime: string
-
   /**
    * 最近登录终端
    */
   LastLoginTerminal: string
-
   /**
    * 最近登录位置
    */
   LastLoginLoc: string
-
   /**
    * 最近登录IP
    */
   LastLoginIp: string
-
   /**
    * 密码过期提醒：单位天
    */
   PasswordWarnDays: number
-
   /**
    * 密码修改设置：0-不可修改，1-可修改
    */
   PasswordChangeType: number
-
   /**
-      * 用户公钥列表
+   * 用户公钥列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Keys: Array<AssetUserKeyInfo>
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
 }
 
@@ -4477,16 +3935,14 @@ export interface ModifyOrderAttributeResponse {
  */
 export interface DescribeFileTamperEventsResponse {
   /**
-      * 核心文件事件列表
+   * 核心文件事件列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List?: Array<FileTamperEvent>
-
   /**
    * 数据总条数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4498,32 +3954,28 @@ export interface DescribeFileTamperEventsResponse {
  */
 export interface DescribeMachinesRequest {
   /**
-      * 机器所属专区类型 
+   * 机器所属专区类型 
 CVM 云服务器
 BM 黑石
 ECM 边缘计算
 LH 轻量应用服务器
 Other 混合云专区
-      */
+   */
   MachineType: string
-
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
   MachineRegion: string
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Ips - String - 是否必填：否 - 通过ip查询 </li>
 <li>Names - String - 是否必填：否 - 通过实例名查询 </li>
 <li>InstanceIds - String - 是否必填：否 - 通过实例id查询 </li>
@@ -4534,9 +3986,8 @@ Other 混合云专区
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
 <li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
 <li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 机器所属业务ID列表
    */
@@ -4551,26 +4002,23 @@ export interface DescribeVulEffectHostListRequest {
    * 分页limit 最大100
    */
   Limit: number
-
   /**
    * 分页Offset
    */
   Offset: number
-
   /**
    * 漏洞id
    */
   VulId: number
-
   /**
-      * 过滤条件：
+   * 过滤条件：
 <li>AliasName - String - 主机名筛选</li>
 <li>TagIds - String - 主机标签id串，多个用英文用逗号分隔</li>
 <li>Status - String - 状态：0-待处理 1-忽略  3-已修复  5-检测中  6-修复中  8-修复失败</li>
 <li>Uuid - String数组 - Uuid串数组</li>
 <li>Version - String数组 - 付费版本数组："Flagship"-旗舰版 "PRO_VERSION"-专业版 "BASIC_VERSION"-基础版</li>
 <li>InstanceState - String数组 - 实例状态数组："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景） </li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -4579,22 +4027,19 @@ export interface DescribeVulEffectHostListRequest {
  */
 export interface ExportLicenseDetailRequest {
   /**
-      * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+   * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
 <li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
 <li>ResourceId 资源ID</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 是否导出全部授权详情
    */
   IsHistory?: boolean
-
   /**
    * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
    */
   Tags?: Array<Tags>
-
   /**
    * 导出月份, 该参数仅在IsHistory 时可选.
    */
@@ -4609,17 +4054,14 @@ export interface AssetWebAppPluginInfo {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 版本
    */
   Version: string
-
   /**
    * 链接
    */
@@ -4644,7 +4086,6 @@ export interface ModifyBaselinePolicyStateRequest {
    * 策略Id
    */
   PolicyId: number
-
   /**
    * 开启状态[1:开启|0:未开启]
    */
@@ -4659,17 +4100,14 @@ export interface DescribeLicenseBindScheduleResponse {
    * 进度
    */
   Schedule: number
-
   /**
    * 绑定任务详情
    */
   List: Array<LicenseBindTaskDetail>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4699,12 +4137,10 @@ export interface ExportPrivilegeEventsResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4719,22 +4155,18 @@ export interface UsualPlace {
    * ID。
    */
   Id: number
-
   /**
    * 主机安全客户端唯一标识UUID。
    */
   Uuid: string
-
   /**
    * 国家 ID。
    */
   CountryId: number
-
   /**
    * 省份 ID。
    */
   ProvinceId: number
-
   /**
    * 城市 ID。
    */
@@ -4759,23 +4191,19 @@ export interface DescribeReverseShellEventsRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 关键字(主机内网IP|进程名)</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：CreateTime-发生时间
    */
@@ -4790,12 +4218,10 @@ export interface BaselineCategory {
    * 分类Id
    */
   CategoryId: number
-
   /**
    * 分类名称
    */
   CategoryName: string
-
   /**
    * 父分类ID,如果为0则没有父分类
    */
@@ -4810,12 +4236,10 @@ export interface DescribeEventByTableResponse {
    * 告警类型，爆破bruteattack，高危命令bash，恶意文件malware，恶意请求risk_dns，本地提权privilege_escalation，反弹shell reverse_shell，内存马java_shell
    */
   Type?: string
-
   /**
    * 事件内容的json编码字符串，字段结构对齐事件表
    */
   Value?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4830,12 +4254,10 @@ export interface ModifyLogStorageConfigRequest {
    * 是否修改有效期
    */
   IsModifyPeriod: boolean
-
   /**
    * 存储类型，string数组
    */
   Type?: Array<string>
-
   /**
    * 日志存储天数，3640表示不限
    */
@@ -4870,12 +4292,10 @@ export interface DescribeBaselinePolicyListResponse {
    * 无
    */
   List: Array<BaselinePolicy>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4890,12 +4310,10 @@ export interface CheckBashRuleParamsResponse {
    * 0=校验通过  1=规则名称校验不通过 2=正则表达式校验不通过
    */
   ErrCode: number
-
   /**
    * 校验信息
    */
   ErrMsg: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4910,12 +4328,10 @@ export interface DeleteLicenseRecordRequest {
    * 授权ID ,可以用授权订单列表获取.
    */
   LicenseId: number
-
   /**
    * 授权类型
    */
   LicenseType: number
-
   /**
    * 资源ID
    */
@@ -4927,15 +4343,14 @@ export interface DeleteLicenseRecordRequest {
  */
 export interface ExportBaselineListRequest {
   /**
-      * 过滤条件：
+   * 过滤条件：
 <li>StrategyId- Uint64 - 基线策略id</li>
 <li>Status - Uint64 - 事件状态：0-未通过，1-忽略，3-通过，5-检测中</li>
 <li>BaselineName  - String - 基线名称</li>
 <li>AliasName- String - 服务器名称/服务器ip</li>
 <li>Uuid- String - 主机uuid</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 已废弃
    */
@@ -4960,12 +4375,10 @@ export interface ExportIgnoreBaselineRuleResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4980,12 +4393,10 @@ export interface DescribeBaselineRuleListResponse {
    * 无
    */
   List: Array<BaselineRule>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5000,22 +4411,18 @@ export interface BruteAttackRuleList {
    * 爆破事件发生的时间范围，单位：秒
    */
   TimeRange: number
-
   /**
    * 爆破事件失败次数
    */
   LoginFailTimes: number
-
   /**
    * 规则是否为空，为空则填充默认规则
    */
   Enable: boolean
-
   /**
    * 爆破事件发生的时间范围，单位：秒（默认规则）
    */
   TimeRangeDefault: number
-
   /**
    * 爆破事件失败次数（默认规则）
    */
@@ -5030,12 +4437,10 @@ export interface DescribeBanStatusResponse {
    * 阻断开关状态 0:关闭 1:开启
    */
   Status: number
-
   /**
    * 是否弹窗提示信息 false: 关闭，true: 开启
    */
   ShowTips: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5050,14 +4455,12 @@ export interface DescribeVulListRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Status - String - 是否必填：否 - 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略</li>
 <li>ModifyTime - String - 是否必填：否 - 最近发生时间</li>
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
@@ -5070,14 +4473,12 @@ export interface DescribeVulListRequest {
 <li>AttackLevel- string- 是否必填：否 - 攻击热度大于多少</li>
 
 
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 可选排序字段 Level，LastTime，HostCount
    */
   By?: string
-
   /**
    * 排序顺序：desc  默认asc
    */
@@ -5094,57 +4495,49 @@ export type DescribeLogStorageRecordRequest = null
  */
 export interface BaselineInfo {
   /**
-      * 基线名
+   * 基线名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name: string
-
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
+   * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level: number
-
   /**
-      * 检测项数量
+   * 检测项数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleCount: number
-
   /**
-      * 影响服务器数量
+   * 影响服务器数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostCount: number
-
   /**
-      * 通过状态:0:未通过,1:已通过
+   * 通过状态:0:未通过,1:已通过
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: number
-
   /**
-      * 基线id
+   * 基线id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CategoryId: number
-
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastScanTime: string
-
   /**
-      * 检测中状态: 5
+   * 检测中状态: 5
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MaxStatus: number
-
   /**
-      * 基线风险项
+   * 基线风险项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineFailCount: number
 }
 
@@ -5156,45 +4549,37 @@ export interface AssetAppBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 应用名称
    */
   Name?: string
-
   /**
-      * 应用类型	
+   * 应用类型	
 1: 运维
 2 : 数据库
 3 : 安全
@@ -5203,60 +4588,50 @@ export interface AssetAppBaseInfo {
 6 : 系统应用
 7 : WEB服务
 99: 其他
-      */
+   */
   Type?: number
-
   /**
    * 二进制路径
    */
   BinPath?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 关联进程数
    */
   ProcessCount?: number
-
   /**
    * 应用描述
    */
   Desc?: string
-
   /**
    * 版本号
    */
   Version?: string
-
   /**
    * 配置文件路径
    */
   ConfigPath?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
-      * 是否新增[0:否|1:是]
+   * 是否新增[0:否|1:是]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsNew?: number
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -5268,16 +4643,14 @@ export interface DescribePrivilegeRulesRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -5289,17 +4662,14 @@ export interface ModifyOrderAttributeRequest {
    * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
    */
   LicenseType: number
-
   /**
    * 资源ID
    */
   ResourceId: string
-
   /**
    * 可编辑的属性名称 ,当前支持的有: alias 资源别名
    */
   AttrName: string
-
   /**
    * 属性值
    */
@@ -5314,59 +4684,49 @@ export interface JavaMemShellInfo {
    * 事件ID
    */
   Id?: number
-
   /**
-      * 服务器名称
+   * 服务器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Alias?: string
-
   /**
-      * 服务器IP
+   * 服务器IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIp?: string
-
   /**
    * 内存马类型  0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他
    */
   Type?: number
-
   /**
    * 说明
    */
   Description?: string
-
   /**
    * 首次发现时间
    */
   CreateTime?: string
-
   /**
    * 最近检测时间
    */
   RecentFoundTime?: string
-
   /**
    * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略  4 - 已手动处理
    */
   Status?: number
-
   /**
    * 服务器quuid
    */
   Quuid?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 服务器uuid
+   * 服务器uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
 }
 
@@ -5378,13 +4738,11 @@ export interface DescribeAssetSystemPackageListResponse {
    * 记录总数
    */
   Total?: number
-
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Packages?: Array<AssetSystemPackageInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5399,12 +4757,10 @@ export interface DescribeClientExceptionResponse {
    * 事件总数量
    */
   TotalCount: number
-
   /**
    * 事件详情
    */
   Records: Array<RecordInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5419,13 +4775,11 @@ export interface DescribeAssetMachineListResponse {
    * 总数
    */
   Total: number
-
   /**
-      * 记录列表
+   * 记录列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Machines: Array<AssetMachineBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5462,17 +4816,15 @@ export interface ModifyWarningSettingRequest {
  */
 export interface DescribeBruteAttackListResponse {
   /**
-      * 总数
+   * 总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount?: number
-
   /**
-      * 密码破解列表
+   * 密码破解列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BruteAttackList?: Array<BruteAttackInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5489,11 +4841,10 @@ export type DescribeAssetInfoRequest = null
  */
 export interface DescribeVulTopResponse {
   /**
-      * 漏洞top列表
+   * 漏洞top列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulTopList: Array<VulTopInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5518,9 +4869,8 @@ export interface DescribeAssetAppListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>AppName- string - 是否必填：否 - 应用名搜索</li>
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Type - int - 是否必填：否 - 类型	: 仅linux
@@ -5535,24 +4885,20 @@ export interface DescribeAssetAppListRequest {
 99:其他</li>
 <li>OsType - uint64 - 是否必填：否 - windows/linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime|ProcessCount]
    */
@@ -5587,12 +4933,10 @@ export interface DescribeExpertServiceListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 安全管家数据
    */
   List: Array<SecurityButlerInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5607,12 +4951,10 @@ export interface DescribeAccountStatisticsResponse {
    * 帐号统计列表记录总数。
    */
   TotalCount: number
-
   /**
    * 帐号统计列表。
    */
   AccountStatistics: Array<AccountStatistics>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5647,7 +4989,6 @@ export interface ScanAssetRequest {
    * 资产指纹类型id列表
    */
   AssetTypeIds?: Array<number>
-
   /**
    * Quuid列表
    */
@@ -5662,19 +5003,16 @@ export interface DescribeBaselineRuleResponse {
    * 分页查询记录总数
    */
   TotalCount: number
-
   /**
-      * 基线检测项列表
+   * 基线检测项列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineRuleList: Array<BaselineRuleInfo>
-
   /**
-      * 是否显示说明列：true-是，false-否
+   * 是否显示说明列：true-是，false-否
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ShowRuleRemark: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5689,7 +5027,6 @@ export interface ModifyMachineRemarkRequest {
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 备注信息
    */
@@ -5734,12 +5071,10 @@ export interface ExportBruteAttacksResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5754,52 +5089,43 @@ export interface VulStoreListInfo {
    * 漏洞ID
    */
   VulId: number
-
   /**
    * 漏洞级别
    */
   Level: number
-
   /**
    * 漏洞名称
    */
   Name: string
-
   /**
    * cve编号
    */
   CveId: string
-
   /**
    * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
    */
   VulCategory: number
-
   /**
    * 发布时间
    */
   PublishDate: string
-
   /**
    * 漏洞检测方法 0 - 版本比对, 1 - POC验证
    */
   Method?: number
-
   /**
    * 漏洞攻击热度
    */
   AttackLevel?: number
-
   /**
-      * 漏洞是否支持自动修复
+   * 漏洞是否支持自动修复
 0-windows/linux均关闭; 1-windows/linux均打开; 2-仅linux; 3-仅windows
-      */
+   */
   FixSwitch?: number
-
   /**
-      * 漏洞是否支持防御
+   * 漏洞是否支持防御
 0:不支持 1:支持
-      */
+   */
   SupportDefense?: number
 }
 
@@ -5808,11 +5134,10 @@ export interface VulStoreListInfo {
  */
 export interface DescribeBashEventsInfoNewResponse {
   /**
-      * 事件详情
+   * 事件详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BashEventsInfo: BashEventsInfoNew
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5827,71 +5152,58 @@ export interface ProtectDirRelatedServer {
    * 唯一ID
    */
   Id?: string
-
   /**
    * 服务器名称
    */
   HostName?: string
-
   /**
    * 服务器IP
    */
   HostIp?: string
-
   /**
    * 服务器系统
    */
   MachineOs?: string
-
   /**
    * 关联目录数
    */
   RelateDirNum?: number
-
   /**
    * 防护状态
    */
   ProtectStatus?: number
-
   /**
    * 防护开关
    */
   ProtectSwitch?: number
-
   /**
    * 自动恢复开关
    */
   AutoRestoreSwitchStatus?: number
-
   /**
    * 服务器唯一ID
    */
   Quuid?: string
-
   /**
    * 是否已经授权
    */
   Authorization?: boolean
-
   /**
    * 异常状态
    */
   Exception?: number
-
   /**
    * 过渡进度
    */
   Progress?: number
-
   /**
    * 异常信息
    */
   ExceptionMessage?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -5923,32 +5235,26 @@ export interface ScanVulRequest {
    * 危害等级：1-低危；2-中危；3-高危；4-严重 (多选英文;分隔)
    */
   VulLevels: string
-
   /**
    * 服务器分类：1:专业版服务器；2:自选服务器
    */
   HostType: number
-
   /**
    * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 (多选英文;分隔)
    */
   VulCategories?: string
-
   /**
    * 自选服务器时生效，主机quuid的string数组
    */
   QuuidList?: Array<string>
-
   /**
    * 是否是应急漏洞 0 否 1 是
    */
   VulEmergency?: number
-
   /**
    * 超时时长 单位秒 默认 3600 秒
    */
   TimeoutPeriod?: number
-
   /**
    * 需要扫描的漏洞id
    */
@@ -5960,21 +5266,19 @@ export interface ScanVulRequest {
  */
 export interface LogStorageRecord {
   /**
-      * 年月份
+   * 年月份
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Month?: string
-
   /**
-      * 存储量，字节
+   * 存储量，字节
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UsedSize?: number
-
   /**
-      * 总量，字节
+   * 总量，字节
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InquireSize?: number
 }
 
@@ -5983,12 +5287,11 @@ export interface LogStorageRecord {
  */
 export interface ExportBaselineRuleDetectListRequest {
   /**
-      * <li>RuleName - string - 是否必填：否 - 规则名称</i>
+   * <li>RuleName - string - 是否必填：否 - 规则名称</i>
 <li>IsPassed - int - 是否必填：否 - 是否通过</li>
 <li>RiskTier - int - 是否必填：否 - 风险等级</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -6003,148 +5306,120 @@ export interface AssetUserBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 账号UID
    */
   Uid?: string
-
   /**
    * 账号GID
    */
   Gid?: string
-
   /**
    * 账号状态：0-禁用；1-启用
    */
   Status?: number
-
   /**
    * 是否有root权限：0-否；1是，999为空: 仅linux
    */
   IsRoot?: number
-
   /**
    * 登录方式：0-不可登录；1-只允许key登录；2只允许密码登录；3-允许key和密码，999为空，仅linux
    */
   LoginType?: number
-
   /**
    * 上次登录时间
    */
   LastLoginTime?: string
-
   /**
    * 账号名称
    */
   Name?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
    * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows
    */
   UserType?: number
-
   /**
    * 是否域账号：0否， 1是，2否, 999为空  仅windows
    */
   IsDomain?: number
-
   /**
    * 是否有sudo权限，1是，0否, 999为空, 仅linux
    */
   IsSudo?: number
-
   /**
    * 是否允许ssh登录，1是，0否, 999为空, 仅linux
    */
   IsSshLogin?: number
-
   /**
    * Home目录
    */
   HomePath?: string
-
   /**
    * Shell路径  仅linux
    */
   Shell?: string
-
   /**
    * 是否shell登录性，0不是；1是 仅linux
    */
   ShellLoginStatus?: number
-
   /**
    * 密码修改时间
    */
   PasswordChangeTime?: string
-
   /**
    * 密码过期时间  仅linux
    */
   PasswordDueTime?: string
-
   /**
    * 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux
    */
   PasswordLockDays?: number
-
   /**
    * 密码状态：1正常 2即将过期 3已过期 4已锁定 999为空 仅linux
    */
   PasswordStatus?: number
-
   /**
-      * 更新时间
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      * 
+   * 
  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -6163,27 +5438,23 @@ export interface RecoverMalwaresRequest {
  */
 export interface DescribeProtectNetListRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keyword- String - 是否必填：否 - 关键词过滤，</li>
 <li>Uuids - String - 是否必填：否 - 主机id过滤</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 排序步长
    */
   Offset?: number
-
   /**
    * 排序方法
    */
   Order?: string
-
   /**
    * 排序字段 StartTime，EndTime
    */
@@ -6198,32 +5469,26 @@ export interface TagMachine {
    * ID
    */
   Id: string
-
   /**
    * 主机ID
    */
   Quuid: string
-
   /**
    * 主机名称
    */
   MachineName: string
-
   /**
    * 主机内网IP
    */
   MachineIp: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp: string
-
   /**
    * 主机区域
    */
   MachineRegion: string
-
   /**
    * 主机区域类型
    */
@@ -6238,7 +5503,6 @@ export interface DescribeAssetCoreModuleInfoResponse {
    * 内核模块详情
    */
   Module: AssetCoreModuleDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6253,40 +5517,33 @@ export interface DescribeAssetEnvListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
    * 该字段已废弃，由Filters代替
    */
   Type?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name- string - 是否必填：否 - 环境变量名</li>
 <li>Type- int - 是否必填：否 - 类型：0用户变量，1系统变量</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime]
    */
@@ -6311,17 +5568,14 @@ export interface BaselineDetectParam {
    * 检测的策略集合
    */
   PolicyIds?: Array<number>
-
   /**
    * 检测的规则集合
    */
   RuleIds?: Array<number>
-
   /**
    * 检测项集合
    */
   ItemIds?: Array<number>
-
   /**
    * 检测的主机ID集合
    */
@@ -6336,12 +5590,10 @@ export interface DescribeBashEventsResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 高危命令事件列表
    */
   List: Array<BashEvent>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6356,7 +5608,6 @@ export interface DescribeEventByTableRequest {
    * 事件表名
    */
   TableName: string
-
   /**
    * 事件表id号
    */
@@ -6371,9 +5622,8 @@ export interface DescribeBashEventsRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>HostName - String - 是否必填：否 - 主机名</li>
 <li>Hostip - String - 是否必填：否 - 主机内网IP</li>
 <li>RuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)</li>
@@ -6383,19 +5633,16 @@ export interface DescribeBashEventsRequest {
 <li>DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)</li>
 <li>StartTime - String - 是否必填：否 - 开始时间</li>
 <li>EndTime - String - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
    */
@@ -6420,13 +5667,11 @@ export interface DescribeAssetWebLocationListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 站点列表
+   * 站点列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Locations: Array<AssetWebLocationBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6441,27 +5686,22 @@ export interface RecordInfo {
    * 主机ip
    */
   HostIP: string
-
   /**
    * 主机实例id
    */
   InstanceID: string
-
   /**
    * 客户端离线时间
    */
   OfflineTime: string
-
   /**
    * 客户端卸载时间
    */
   UninstallTime: string
-
   /**
    * 客户端卸载调用链
    */
   UninstallCmd: string
-
   /**
    * 客户端uuid
    */
@@ -6473,7 +5713,7 @@ export interface RecordInfo {
  */
 export interface DescribeAssetHostTotalCountResponse {
   /**
-      * 各项资源数量
+   * 各项资源数量
 system : 资源监控
 account: 账号
 port: 端口
@@ -6489,9 +5729,8 @@ jar: jar包
 initservice:启动服务
 env: 环境变量
 coremodule: 内核模块
-      */
+   */
   Types: Array<AssetKeyVal>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6506,7 +5745,6 @@ export interface BruteAttackRule {
    * 爆破事件发生的时间范围，单位：秒
    */
   TimeRange: number
-
   /**
    * 爆破事件失败次数
    */
@@ -6521,102 +5759,83 @@ export interface PrivilegeEscalationProcess {
    * 数据ID
    */
   Id?: number
-
   /**
    * 主机安全ID
    */
   Uuid?: string
-
   /**
    * 主机ID
    */
   Quuid?: string
-
   /**
    * 主机内网IP
    */
   Hostip?: string
-
   /**
    * 进程名
    */
   ProcessName?: string
-
   /**
    * 进程路径
    */
   FullPath?: string
-
   /**
    * 执行命令
    */
   CmdLine?: string
-
   /**
    * 用户名
    */
   UserName?: string
-
   /**
    * 用户组
    */
   UserGroup?: string
-
   /**
    * 进程文件权限
    */
   ProcFilePrivilege?: string
-
   /**
    * 父进程名
    */
   ParentProcName?: string
-
   /**
    * 父进程用户名
    */
   ParentProcUser?: string
-
   /**
    * 父进程用户组
    */
   ParentProcGroup?: string
-
   /**
    * 父进程路径
    */
   ParentProcPath?: string
-
   /**
    * 进程树
    */
   ProcTree?: string
-
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
   Status?: number
-
   /**
    * 发生时间
    */
   CreateTime?: string
-
   /**
    * 机器名
    */
   MachineName?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 进程id
+   * 进程id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid?: number
 }
 
@@ -6628,12 +5847,10 @@ export interface DescribeProtectNetListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 安全管家数据
    */
   List: Array<ProtectNetInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6648,7 +5865,6 @@ export interface DescribeESAggregationsResponse {
    * ES聚合结果JSON
    */
   Data: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6663,51 +5879,42 @@ export interface AssetWebLocationInfo {
    * 域名
    */
   Name: string
-
   /**
    * 站点端口
    */
   Port: string
-
   /**
    * 站点协议
    */
   Proto: string
-
   /**
    * 服务类型
    */
   ServiceType: string
-
   /**
    * 安全模块状态：0未启用，1启用，999空，仅nginx
    */
   SafeStatus: number
-
   /**
    * 运行用户
    */
   User: string
-
   /**
    * 主目录
    */
   MainPath: string
-
   /**
    * 启动命令
    */
   Command: string
-
   /**
    * 绑定IP
    */
   Ip: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
 }
 
@@ -6729,184 +5936,149 @@ export interface AssetMachineDetail {
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
    * 服务器uuid
    */
   Uuid?: string
-
   /**
    * 服务器内网IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统名称
    */
   OsInfo?: string
-
   /**
    * CPU信息
    */
   Cpu?: string
-
   /**
    * 内存容量：单位G
    */
   MemSize?: number
-
   /**
    * 内存使用率百分比
    */
   MemLoad?: string
-
   /**
    * 硬盘容量：单位G
    */
   DiskSize?: number
-
   /**
    * 硬盘使用率百分比
    */
   DiskLoad?: string
-
   /**
    * 分区数
    */
   PartitionCount?: number
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * Cpu数量
    */
   CpuSize?: number
-
   /**
    * Cpu使用率百分比
    */
   CpuLoad?: string
-
   /**
    * 防护级别：0基础版，1专业版，2旗舰版，3普惠版
    */
   ProtectLevel?: number
-
   /**
    * 风险状态：UNKNOW-未知，RISK-风险，SAFT-安全
    */
   RiskStatus?: string
-
   /**
    * 已防护天数
    */
   ProtectDays?: number
-
   /**
    * 专业版开通时间
    */
   BuyTime?: string
-
   /**
    * 专业版到期时间
    */
   EndTime?: string
-
   /**
    * 内核版本
    */
   CoreVersion?: string
-
   /**
    * linux/windows
    */
   OsType?: string
-
   /**
    * agent版本
    */
   AgentVersion?: string
-
   /**
    * 安装时间
    */
   InstallTime?: string
-
   /**
    * 系统启动时间
    */
   BootTime?: string
-
   /**
    * 最后上线时间
    */
   LastLiveTime?: string
-
   /**
    * 生产商
    */
   Producer?: string
-
   /**
    * 序列号
    */
   SerialNumber?: string
-
   /**
    * 网卡
    */
   NetCards?: Array<AssetNetworkCardInfo>
-
   /**
    * 分区
    */
   Disks?: Array<AssetDiskPartitionInfo>
-
   /**
    * 0在线，1已离线
    */
   Status?: number
-
   /**
    * 业务组ID
    */
   ProjectId?: number
-
   /**
    * 设备型号
    */
   DeviceVersion?: string
-
   /**
-      * 离线时间
+   * 离线时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineTime?: string
-
   /**
-      * 主机ID
+   * 主机ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceId?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
-      * 主机二外信息
+   * 主机二外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -6918,138 +6090,112 @@ export interface AssetDatabaseBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 数据库名
    */
   Name?: string
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 监听端口
    */
   Port?: string
-
   /**
    * 协议
    */
   Proto?: string
-
   /**
    * 运行用户
    */
   User?: string
-
   /**
    * 绑定IP
    */
   Ip?: string
-
   /**
    * 配置文件路径
    */
   ConfigPath?: string
-
   /**
    * 日志文件路径
    */
   LogPath?: string
-
   /**
    * 数据路径
    */
   DataPath?: string
-
   /**
    * 运行权限
    */
   Permission?: string
-
   /**
    * 错误日志路径
    */
   ErrorLogPath?: string
-
   /**
    * 插件路径
    */
   PlugInPath?: string
-
   /**
    * 二进制路径
    */
   BinPath?: string
-
   /**
    * 启动参数
    */
   Param?: string
-
   /**
    * 数据库ID
    */
   Id?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -7071,7 +6217,6 @@ export interface CreateProtectServerRequest {
    * 防护目录地址
    */
   ProtectDir: string
-
   /**
    * 防护机器 信息
    */
@@ -7083,37 +6228,33 @@ export interface CreateProtectServerRequest {
  */
 export interface DescribeMachineListRequest {
   /**
-      * 云主机类型。
+   * 云主机类型。
 <li>CVM：表示虚拟主机</li>
 <li>BM:  表示黑石物理机</li>
 <li>ECM:  表示边缘计算服务器</li>
 <li>LH:  表示轻量应用服务器</li>
 <li>Other:  表示混合云机器</li>
-      */
+   */
   MachineType: string
-
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
   MachineRegion: string
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
 <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
-      */
+   */
   Filters?: Array<AssetFilters>
 }
 
@@ -7135,7 +6276,6 @@ export interface DescribeTagMachinesResponse {
    * 列表数据
    */
   List: Array<TagMachine>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7150,12 +6290,10 @@ export interface DescribeAssetCoreModuleInfoRequest {
    * 服务器Quuid
    */
   Quuid: string
-
   /**
    * 服务器Uuid
    */
   Uuid: string
-
   /**
    * 内核模块ID
    */
@@ -7170,7 +6308,6 @@ export interface DescribeIndexListResponse {
    * ES 索引信息
    */
   Data: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7182,17 +6319,15 @@ export interface DescribeIndexListResponse {
  */
 export interface DescribeIgnoreHostAndItemConfigResponse {
   /**
-      * 受影响检测项
+   * 受影响检测项
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemSet: Array<BaselineItemInfo>
-
   /**
-      * 受影响主机
+   * 受影响主机
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostSet: Array<BaselineHost>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7207,17 +6342,14 @@ export interface ModifyWebPageProtectDirRequest {
    * 网站防护目录地址
    */
   ProtectDirAddr: string
-
   /**
    * 网站防护目录名称
    */
   ProtectDirName: string
-
   /**
    * 防护文件类型,分号分割 ;
    */
   ProtectFileType: string
-
   /**
    * 防护机器列表信息
    */
@@ -7232,52 +6364,42 @@ export interface VulDetailInfo {
    * 漏洞ID
    */
   VulId: number
-
   /**
    * 漏洞级别
    */
   Level: number
-
   /**
    * 漏洞名称
    */
   Name: string
-
   /**
    * cve编号
    */
   CveId: string
-
   /**
    * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
    */
   VulCategory: number
-
   /**
    * 漏洞描述
    */
   Descript: string
-
   /**
    * 修复建议
    */
   Fix: string
-
   /**
    * 参考链接
    */
   Reference: string
-
   /**
    * CVSS评分
    */
   CvssScore: number
-
   /**
    * CVSS详情
    */
   Cvss: string
-
   /**
    * 发布时间
    */
@@ -7292,37 +6414,30 @@ export interface DescribeWebPageGeneralizeResponse {
    * 防护监测 0 未开启 1 已开启 2 异常
    */
   ProtectMonitor: number
-
   /**
    * 防护目录数
    */
   ProtectDirNum: number
-
   /**
    * 防护文件数
    */
   ProtectFileNum: number
-
   /**
    * 篡改文件数
    */
   TamperFileNum: number
-
   /**
    * 篡改数
    */
   TamperNum: number
-
   /**
    * 今日防护数
    */
   ProtectToday: number
-
   /**
    * 防护主机数
    */
   ProtectHostNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7334,11 +6449,10 @@ export interface DescribeWebPageGeneralizeResponse {
  */
 export interface DescribeReverseShellEventInfoResponse {
   /**
-      * 反弹shell详情信息
+   * 反弹shell详情信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ReverseShellEventInfo: ReverseShellEventInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7353,12 +6467,10 @@ export interface DescribeBanWhiteListResponse {
    * 总记录数
    */
   TotalCount: number
-
   /**
    * 白名单列表
    */
   WhiteList: Array<BanWhiteListDetail>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7383,27 +6495,22 @@ export interface EmergencyResponseInfo {
    * 任务id
    */
   TaskId: string
-
   /**
    * 主机个数
    */
   HostNum: number
-
   /**
    * 服务状态 0未启动，·响应中，2响应完成
    */
   Status: number
-
   /**
    * 服务开始时间
    */
   StartTime: string
-
   /**
    * 服务结束时间
    */
   EndTime: string
-
   /**
    * 报告下载地址
    */
@@ -7418,12 +6525,10 @@ export interface DescribeOpenPortStatisticsResponse {
    * 端口统计列表总数
    */
   TotalCount: number
-
   /**
    * 端口统计数据列表
    */
   OpenPortStatistics: Array<OpenPortStatistics>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7448,35 +6553,31 @@ export interface SecurityDynamic {
    * 主机安全客户端UUID。
    */
   Uuid: string
-
   /**
    * 安全事件发生时间。
    */
   EventTime: string
-
   /**
-      * 安全事件类型。
+   * 安全事件类型。
 <li>MALWARE：木马事件</li>
 <li>NON_LOCAL_LOGIN：异地登录</li>
 <li>BRUTEATTACK_SUCCESS：密码破解成功</li>
 <li>VUL：漏洞</li>
 <li>BASELINE：安全基线</li>
-      */
+   */
   EventType: string
-
   /**
    * 安全事件消息。
    */
   Message: string
-
   /**
-      * 安全事件等级。
+   * 安全事件等级。
 <li>RISK: 严重</li>
 <li>HIGH: 高危</li>
 <li>NORMAL: 中危</li>
 <li>LOW: 低危</li>
 <li>UNKNOWNED: 可疑</li>
-      */
+   */
   SecurityLevel: string
 }
 
@@ -7488,28 +6589,24 @@ export interface DescribeMalWareListRequest {
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>FilePath - String - 是否必填：否 - 路径筛选</li>
 <li>VirusName - String - 是否必填：否 - 描述筛选</li>
 <li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
 <li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
 <li>Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 检测排序 CreateTime
    */
   By?: string
-
   /**
    * 排序方式 ASC,DESC
    */
@@ -7524,17 +6621,14 @@ export interface DescribeProVersionInfoResponse {
    * 后付费昨日扣费
    */
   PostPayCost: number
-
   /**
    * 新增主机是否自动开通专业版
    */
   IsAutoOpenProVersion: boolean
-
   /**
    * 开通专业版主机数
    */
   ProVersionNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7564,12 +6658,10 @@ export interface DescribeBaselineDownloadListResponse {
    * 无
    */
   List?: Array<BaselineDownload>
-
   /**
    * 总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7584,26 +6676,22 @@ export interface LicenseBindTaskDetail {
    * 云服务器UUID
    */
   Quuid: string
-
   /**
    * 错误信息
    */
   ErrMsg: string
-
   /**
    * 0 执行中, 1 成功,2失败
    */
   Status: number
-
   /**
    * 修复建议
    */
   FixMessage?: string
-
   /**
-      * 机器额外信息
+   * 机器额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -7615,12 +6703,10 @@ export interface ExportMaliciousRequestsResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7632,75 +6718,64 @@ export interface ExportMaliciousRequestsResponse {
  */
 export interface EffectiveMachineInfo {
   /**
-      * 机器名称
+   * 机器名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineName?: string
-
   /**
-      * 机器公网ip
+   * 机器公网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachinePublicIp?: string
-
   /**
-      * 机器内网ip
+   * 机器内网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachinePrivateIp?: string
-
   /**
-      * 机器标签
+   * 机器标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineTag?: Array<MachineTag>
-
   /**
-      * 机器Quuid
+   * 机器Quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid?: string
-
   /**
-      * 云镜Uuid
+   * 云镜Uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 内核版本号
+   * 内核版本号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   KernelVersion?: string
-
   /**
-      * 在线状态 OFFLINE，ONLINE
+   * 在线状态 OFFLINE，ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineStatus?: string
-
   /**
-      * 授权订单对象
+   * 授权订单对象
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LicenseOrder?: LicenseOrder
-
   /**
-      * 漏洞数量
+   * 漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulNum?: number
-
   /**
-      * 云标签信息
+   * 云标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CloudTags?: Array<Tags>
-
   /**
-      * 机器instance ID
+   * 机器instance ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceID?: string
 }
 
@@ -7709,16 +6784,14 @@ export interface EffectiveMachineInfo {
  */
 export interface DescribeVulCountByDatesResponse {
   /**
-      * 批量获得对应天数的漏洞数量
+   * 批量获得对应天数的漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulCount: Array<number>
-
   /**
    * 批量获得对应天数的主机数量
    */
   HostCount: Array<number>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7733,7 +6806,6 @@ export interface DescribeMachineOsListResponse {
    * 操作系统列表
    */
   List: Array<OsName>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7760,7 +6832,7 @@ export type DescribeIndexListRequest = null
  */
 export interface DescribeRiskDnsEventListRequest {
   /**
-      * <li>IpOrName - String - 是否必填：否 - 主机Ip或别名筛选</li>
+   * <li>IpOrName - String - 是否必填：否 - 主机Ip或别名筛选</li>
 <li>HostId - String - 是否必填：否 - 主机Id</li>
 <li>AgentId - String - 是否必填：否 - 客户端Id</li>
 <li>PolicyType - String - 是否必填：否 - 策略类型,0:系统策略1:用户自定义策略</li>
@@ -7768,24 +6840,20 @@ export interface DescribeRiskDnsEventListRequest {
 <li>HandleStatus - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
 <li>BeginTime - String - 是否必填：否 - 最近访问开始时间</li>
 <li>EndTime - String - 是否必填：否 - 最近访问结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式：根据请求次数排序：[asc:升序|desc:降序]
    */
   Order?: string
-
   /**
    * 排序字段：[AccessCount:请求次数|LastTime:最近请求时间]
    */
@@ -7800,69 +6868,57 @@ export interface ProtectDirInfo {
    * 网站名称
    */
   DirName: string
-
   /**
    * 网站防护目录地址
    */
   DirPath: string
-
   /**
    * 关联服务器数
    */
   RelatedServerNum: number
-
   /**
    * 防护服务器数
    */
   ProtectServerNum: number
-
   /**
    * 未防护服务器数
    */
   NoProtectServerNum: number
-
   /**
    * 唯一ID
    */
   Id: string
-
   /**
    * 防护状态
    */
   ProtectStatus: number
-
   /**
    * 防护异常
    */
   ProtectException: number
-
   /**
    * 自动恢复开关 (Filters 过滤Quuid 时 返回) 默认0
    */
   AutoRestoreSwitchStatus: number
-
   /**
-      * 首次开启防护时间
+   * 首次开启防护时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstProtectTime?: string
-
   /**
-      * 最近开启防护时间
+   * 最近开启防护时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LatestProtectTime?: string
-
   /**
-      * 防护文件类型
+   * 防护文件类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProtectFileType?: string
-
   /**
-      * 防护文件总数
+   * 防护文件总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProtectFilesCount?: number
 }
 
@@ -7891,29 +6947,25 @@ export interface CreateProtectServerResponse {
  */
 export interface DescribeBaselineItemInfoRequest {
   /**
-      * <li>ItemId - int64 - 是否必填：否 - 项Id</i>
+   * <li>ItemId - int64 - 是否必填：否 - 项Id</i>
 <li>PolicyId - int64 - 是否必填：否 - 项Id</i>
 <li>Level - int - 是否必填：否 - 风险等级</li>
 <li>ItemName - string - 是否必填：否 - 检测项名字</li>
 <li>RuleId - int - 是否必填：否 - 规则Id</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列
    */
@@ -7935,27 +6987,23 @@ export interface DescribeBaselineHostRiskTopRequest {
  */
 export interface DescribeExpertServiceListRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keyword- String - 是否必填：否 - 关键词过滤，</li>
 <li>Uuids - String - 是否必填：否 - 主机id过滤</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 排序步长
    */
   Offset?: number
-
   /**
    * 排序方法
    */
   Order?: string
-
   /**
    * 排序字段 StartTime，EndTime
    */
@@ -7970,7 +7018,6 @@ export interface DescribeBaselineHostTopRequest {
    * 动态top值
    */
   Top: number
-
   /**
    * 策略id
    */
@@ -7982,16 +7029,14 @@ export interface DescribeBaselineHostTopRequest {
  */
 export interface ExportBaselineEffectHostListResponse {
   /**
-      * 该参数已废弃
+   * 该参数已废弃
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8003,11 +7048,10 @@ export interface ExportBaselineEffectHostListResponse {
  */
 export interface DescribeVulHostTopResponse {
   /**
-      * 服务器风险top列表
+   * 服务器风险top列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulHostTopList: Array<VulHostTopInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8049,111 +7093,94 @@ export interface SyncAssetScanRequest {
  */
 export interface VulEffectHostList {
   /**
-      * 事件id
+   * 事件id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventId?: number
-
   /**
-      * 状态：0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中 7: 回滚中 8:修复失败
+   * 状态：0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中 7: 回滚中 8:修复失败
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: number
-
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastTime?: string
-
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
+   * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level?: number
-
   /**
-      * 主机Quuid
+   * 主机Quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid?: string
-
   /**
-      * 主机Uuid
+   * 主机Uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 主机HostIp
+   * 主机HostIp
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIp?: string
-
   /**
-      * 主机别名
+   * 主机别名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AliasName?: string
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags?: Array<string>
-
   /**
-      * 说明
+   * 说明
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description?: string
-
   /**
-      * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostVersion?: number
-
   /**
-      * 是否能自动修复 0 :漏洞不可自动修复，  1：可自动修复， 2：客户端已离线， 3：主机不是旗舰版只能手动修复， 4：机型不允许 ，5：修复中 ，6：已修复， 7：检测中  9:修复失败，10:已忽略 11:漏洞只支持linux不支持Windows 12：漏洞只支持Windows不支持linux，13:修复失败但此时主机已离线，14:修复失败但此时主机不是旗舰版， 15:已手动修复
+   * 是否能自动修复 0 :漏洞不可自动修复，  1：可自动修复， 2：客户端已离线， 3：主机不是旗舰版只能手动修复， 4：机型不允许 ，5：修复中 ，6：已修复， 7：检测中  9:修复失败，10:已忽略 11:漏洞只支持linux不支持Windows 12：漏洞只支持Windows不支持linux，13:修复失败但此时主机已离线，14:修复失败但此时主机不是旗舰版， 15:已手动修复
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsSupportAutoFix?: number
-
   /**
-      * 失败原因
+   * 失败原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FixStatusMsg?: string
-
   /**
-      * 首次发现时间
+   * 首次发现时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstDiscoveryTime?: string
-
   /**
-      * 实例状态："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 "
+   * 实例状态："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 "
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceState?: string
-
   /**
-      * 外网ip
+   * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PublicIpAddresses?: string
-
   /**
-      * 云标签信息
+   * 云标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CloudTags?: Array<Tags>
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -8182,27 +7209,24 @@ export interface DescribeESAggregationsRequest {
  */
 export interface BaselineHostTopList {
   /**
-      * 事件等级与次数列表
+   * 事件等级与次数列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventLevelList: Array<BaselineEventLevelInfo>
-
   /**
-      * 主机名称
+   * 主机名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName: string
-
   /**
-      * 主机Quuid
+   * 主机Quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid: string
-
   /**
-      * 计算权重的分数
+   * 计算权重的分数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Score: number
 }
 
@@ -8214,12 +7238,10 @@ export interface DescribeReverseShellRulesResponse {
    * 列表内容
    */
   List: Array<ReverseShellRule>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8234,14 +7256,12 @@ export interface DescribeBruteAttackListRequest {
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Uuid - String - 是否必填：否 - 主机安全唯一Uuid</li>
 <li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
@@ -8253,14 +7273,12 @@ export interface DescribeBruteAttackListRequest {
 <li>ModifyBeginTime - String - 是否必填：否 - 最近攻击时间筛选，开始时间</li>
 <li>ModifyEndTime - String - 是否必填：否 - 最近攻击时间筛选，结束时间</li>
 <li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：CreateTime-首次攻击时间
    */
@@ -8282,23 +7300,20 @@ export interface ModifyMachineRemarkResponse {
  */
 export interface DescribeVulListResponse {
   /**
-      * 漏洞列表
+   * 漏洞列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulInfoList?: Array<VulInfoList>
-
   /**
-      * 漏洞总条数
+   * 漏洞总条数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount?: number
-
   /**
-      * 重点关注漏洞总数
+   * 重点关注漏洞总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FollowVulCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8313,35 +7328,30 @@ export interface BaselineHost {
    * 主机Id
    */
   HostId?: string
-
   /**
-      * 主机名称
+   * 主机名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName?: string
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostTag?: string
-
   /**
-      * 内网Ip
+   * 内网Ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIp?: string
-
   /**
-      * 外网Ip
+   * 外网Ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WanIp?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -8353,7 +7363,6 @@ export interface DescribeUndoVulCountsRequest {
    * 漏洞分类，1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategory?: number
-
   /**
    * 是否应急漏洞筛选, 是 : yes
    */
@@ -8365,11 +7374,10 @@ export interface DescribeUndoVulCountsRequest {
  */
 export interface ScanAssetResponse {
   /**
-      * 任务id
+   * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8384,172 +7392,142 @@ export interface Machine {
    * 主机名称。
    */
   MachineName?: string
-
   /**
    * 主机系统。
    */
   MachineOs?: string
-
   /**
-      * 主机状态。
+   * 主机状态。
 <li>OFFLINE: 离线  </li>
 <li>ONLINE: 在线</li>
 <li>SHUTDOWN: 已关机</li>
 <li>UNINSTALLED: 未防护</li>
-      */
+   */
   MachineStatus?: string
-
   /**
    * 云镜客户端唯一Uuid，若客户端长时间不在线将返回空字符。
    */
   Uuid?: string
-
   /**
    * CVM或BM机器唯一Uuid。
    */
   Quuid?: string
-
   /**
    * 漏洞数。
    */
   VulNum?: number
-
   /**
    * 主机IP。
    */
   MachineIp?: string
-
   /**
-      * 是否是专业版。
+   * 是否是专业版。
 <li>true： 是</li>
 <li>false：否</li>
-      */
+   */
   IsProVersion?: boolean
-
   /**
    * 主机外网IP。
    */
   MachineWanIp?: string
-
   /**
-      * 主机状态。
+   * 主机状态。
 <li>POSTPAY: 表示后付费，即按量计费  </li>
 <li>PREPAY: 表示预付费，即包年包月</li>
-      */
+   */
   PayMode?: string
-
   /**
    * 木马数。
    */
   MalwareNum?: number
-
   /**
    * 标签信息
    */
   Tag?: Array<MachineTag>
-
   /**
    * 基线风险数。
    */
   BaselineNum?: number
-
   /**
    * 网络风险数。
    */
   CyberAttackNum?: number
-
   /**
-      * 风险状态。
+   * 风险状态。
 <li>SAFE：安全</li>
 <li>RISK：风险</li>
 <li>UNKNOWN：未知</li>
-      */
+   */
   SecurityStatus?: string
-
   /**
    * 入侵事件数
    */
   InvasionNum?: number
-
   /**
    * 地域信息
    */
   RegionInfo?: RegionInfo
-
   /**
    * 实例状态 TERMINATED_PRO_VERSION 已销毁
    */
   InstanceState?: string
-
   /**
    * 防篡改 授权状态 1 授权 0 未授权
    */
   LicenseStatus?: number
-
   /**
    * 项目ID
    */
   ProjectId?: number
-
   /**
    * 是否有资产扫描接口，0无，1有
    */
   HasAssetScan?: number
-
   /**
    * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
    */
   MachineType?: string
-
   /**
    * 内核版本
    */
   KernelVersion?: string
-
   /**
    * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
    */
   ProtectType?: string
-
   /**
-      * 云标签信息
+   * 云标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CloudTags?: Array<Tags>
-
   /**
-      * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
+   * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsAddedOnTheFifteen?: number
-
   /**
-      * 主机ip列表
+   * 主机ip列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IpList?: string
-
   /**
-      * 所属网络
+   * 所属网络
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VpcId?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
    * 实例ID
    */
   InstanceId?: string
-
   /**
-      * 备注信息
+   * 备注信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Remark: string
 }
 
@@ -8561,17 +7539,14 @@ export interface ProtectMachineInfo {
    * 机器名称
    */
   HostName: string
-
   /**
    * 机器IP
    */
   HostIp: string
-
   /**
    * 开通时间
    */
   CreateTime: string
-
   /**
    * 到期时间
    */
@@ -8586,12 +7561,10 @@ export interface DescribeBaselineFixListResponse {
    * 无
    */
   List?: Array<BaselineFix>
-
   /**
    * 总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8613,7 +7586,7 @@ export interface DeleteLoginWhiteListRequest {
  */
 export interface DescribeLicenseListRequest {
   /**
-      * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+   * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
 <li> LicenseStatus 授权状态信息,0 未使用,1 部分使用, 2 已用完, 3 不可用  4 可使用</li>
 <li> BuyTime 购买时间</li>
 <li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
@@ -8622,19 +7595,16 @@ export interface DescribeLicenseListRequest {
 <li>Keywords IP筛选</li>
 <li>PayMode 付费模式 0 按量计费 , 1 包年包月</li>
 <li>OrderStatus 订单状态 1 正常 2 隔离 3 销毁</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 限制条数,默认10.
    */
   Limit?: number
-
   /**
    * 偏移量,默认0.
    */
   Offset?: number
-
   /**
    * 标签筛选,平台标签能力,这里传入 标签键,标签值作为一个对象
    */
@@ -8649,21 +7619,18 @@ export interface ModifyLicenseUnBindsRequest {
    * 资源ID
    */
   ResourceId: string
-
   /**
    * 授权类型
    */
   LicenseType: number
-
   /**
    * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
    */
   IsAll?: boolean
-
   /**
-      * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.
+   * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.
 最大长度=100
-      */
+   */
   QuuidList?: Array<string>
 }
 
@@ -8672,30 +7639,26 @@ export interface ModifyLicenseUnBindsRequest {
  */
 export interface DescribeBaselineRuleDetectListRequest {
   /**
-      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+   * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
 <li>ItemId - int64 - 是否必填：否 - 策略Id</li>
 <li>RuleName - string - 是否必填：否 - 规则名称</li>
 <li>DetectStatus - int - 是否必填：否 - 检测状态</li>
 <li>StartTime - string - 是否必填：否 - 开时时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [HostCount|FirstTime|LastTime]
    */
@@ -8720,16 +7683,14 @@ export interface DescribeBanWhiteListRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -8741,47 +7702,38 @@ export interface DescribeWebPageServiceInfoResponse {
    * 是否已购服务：true-是，false-否
    */
   Status: boolean
-
   /**
    * 已使用授权数
    */
   UsedNum: number
-
   /**
    * 剩余授权数
    */
   ResidueNum: number
-
   /**
    * 已购授权数
    */
   BuyNum: number
-
   /**
    * 临近到期数量
    */
   ExpireNum: number
-
   /**
    * 所有授权机器信息
    */
   AllAuthorizedMachines: Array<ProtectMachineInfo>
-
   /**
    * 临近到期授权机器信息
    */
   ExpireAuthorizedMachines: Array<ProtectMachine>
-
   /**
    * 已过期授权数
    */
   ExpiredNum: number
-
   /**
    * 防护目录数
    */
   ProtectDirNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8806,57 +7758,47 @@ export interface ProtectEventLists {
    * 服务器名称
    */
   HostName?: string
-
   /**
    * 服务器ip
    */
   HostIp?: string
-
   /**
    * 事件地址
    */
   EventDir?: string
-
   /**
    * 事件类型 0-内容被修改恢复；1-权限被修改恢复；2-归属被修改恢复；3-被删除恢复；4-新增删除
    */
   EventType?: number
-
   /**
    * 事件状态 1 已恢复 0 未恢复
    */
   EventStatus?: number
-
   /**
    * 发现时间
    */
   CreateTime?: string
-
   /**
    * 恢复时间
    */
   RestoreTime?: string
-
   /**
    * 唯一ID
    */
   Id?: number
-
   /**
    * 文件类型 0-常规文件；1-目录；2-软链
    */
   FileType?: number
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 机器实例uuid
+   * 机器实例uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid?: string
 }
 
@@ -8868,62 +7810,50 @@ export interface BaselinePolicy {
    * 策略名称,长度不超过128英文字符
    */
   PolicyName: string
-
   /**
    * 检测间隔[1:1天|3:3天|5:5天|7:7天]
    */
   DetectInterval: number
-
   /**
    * 检测时间
    */
   DetectTime: string
-
   /**
    * 是否开启[0:未开启|1:开启]
    */
   IsEnabled: number
-
   /**
    * 资产类型[0:所有专业版旗舰版|1:id|2:ip]
    */
   AssetType: number
-
   /**
    * 策略Id
    */
   PolicyId?: number
-
   /**
    * 关联基线项数目
    */
   RuleCount?: number
-
   /**
    * 关联基线项数目
    */
   ItemCount?: number
-
   /**
    * 关联基线主机数目
    */
   HostCount?: number
-
   /**
    * 规则Id
    */
   RuleIds?: Array<number>
-
   /**
    * 主机Id
    */
   HostIds?: Array<string>
-
   /**
    * 主机Ip
    */
   HostIps?: Array<string>
-
   /**
    * 是否是系统默认
    */
@@ -8938,12 +7868,10 @@ export interface DescribeJavaMemShellListRequest {
    * 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
    */
   Filters?: Array<Filters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -8958,7 +7886,6 @@ export interface SwitchBashRulesRequest {
    * 规则ID
    */
   Id: number
-
   /**
    * 是否禁用
    */
@@ -8973,16 +7900,14 @@ export interface DescribeProcessStatisticsRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>ProcessName - String - 是否必填：否 - 进程名</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -9014,17 +7939,14 @@ export interface MalwareRisk {
    * 机器IP
    */
   MachineIp: string
-
   /**
    * 病毒名
    */
   VirusName: string
-
   /**
    * 发现时间
    */
   CreateTime: string
-
   /**
    * 唯一ID
    */
@@ -9039,7 +7961,6 @@ export interface ExportProtectDirListResponse {
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9054,84 +7975,68 @@ export interface AssetWebFrameBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 数据库名
    */
   Name?: string
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 语言
    */
   Lang?: string
-
   /**
    * 服务类型
    */
   ServiceType?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
    * 数据更新时间
    */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
    * 应用路径
    */
@@ -9156,37 +8061,30 @@ export interface ModifyBaselineRuleIgnoreRequest {
    * 规则名称
    */
   RuleName: string
-
   /**
    * 资产类型[0:所有专业版旗舰版|1:id|2:ip]
    */
   AssetType: number
-
   /**
    * 规则Id
    */
   RuleId?: number
-
   /**
    * 关联项
    */
   ItemIds?: Array<number>
-
   /**
    * 主机Id
    */
   HostIds?: Array<string>
-
   /**
    * 主机Ip
    */
   HostIps?: Array<string>
-
   /**
    * 是否全选过滤
    */
   SelectAll?: number
-
   /**
    * <li>ItemName - string - 是否必填：否 - 项名称</li>
    */
@@ -9198,11 +8096,10 @@ export interface ModifyBaselineRuleIgnoreRequest {
  */
 export interface DescribeAssetWebLocationInfoResponse {
   /**
-      * 站点信息
+   * 站点信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebLocation: AssetWebLocationInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9224,15 +8121,14 @@ export interface ModifyBruteAttackRulesRequest {
  */
 export interface ExportVulListRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>VulCategory - int - 是否必填：否 - 漏洞分类筛选1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
 <li>IfEmergency - String - 是否必填：否 - 是否为应急漏洞，查询应急漏洞传:yes</li>
 <li>Status - String - 是否必填：是 - 漏洞状态筛选，0: 待处理 1:忽略  3:已修复  5:检测中， 控制台仅处理0,1,3,5四种状态</li>
 <li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
 <li>VulName- String - 是否必填：否 - 漏洞名称搜索</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 是否导出详情,1是 0不是
    */
@@ -9247,48 +8143,40 @@ export interface CreateLicenseOrderRequest {
    * 标签数组, 空则表示不需要绑定标签
    */
   Tags?: Array<Tags>
-
   /**
-      * 授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
+   * 授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
 默认为0
-      */
+   */
   LicenseType?: number
-
   /**
-      * 授权数量 , 需要购买的数量.
+   * 授权数量 , 需要购买的数量.
 默认为1
-      */
+   */
   LicenseNum?: number
-
   /**
-      * 购买订单地域,这里仅支持 1 广州,9 新加坡. 推荐选择广州. 新加坡地域为白名单用户购买.
+   * 购买订单地域,这里仅支持 1 广州,9 新加坡. 推荐选择广州. 新加坡地域为白名单用户购买.
 默认为1
-      */
+   */
   RegionId?: number
-
   /**
-      * 项目ID .
+   * 项目ID .
 默认为0
-      */
+   */
   ProjectId?: number
-
   /**
-      * 购买时间长度,默认1 , 可选值为1,2,3,4,5,6,7,8,9,10,11,12,24,36
+   * 购买时间长度,默认1 , 可选值为1,2,3,4,5,6,7,8,9,10,11,12,24,36
 该参数仅包年包月生效
-      */
+   */
   TimeSpan?: number
-
   /**
-      * 是否自动续费, 默认不自动续费.
+   * 是否自动续费, 默认不自动续费.
 该参数仅包年包月生效
-      */
+   */
   AutoRenewFlag?: boolean
-
   /**
    * 该字段作废
    */
   AutoProtectOpenConfig?: string
-
   /**
    * 变配参数
    */
@@ -9310,23 +8198,20 @@ export interface DescribeBaselineScanScheduleRequest {
  */
 export interface DescribeEmergencyVulListResponse {
   /**
-      * 漏洞列表
+   * 漏洞列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List?: Array<EmergencyVul>
-
   /**
-      * 漏洞总条数
+   * 漏洞总条数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount?: number
-
   /**
-      * 是否存在风险
+   * 是否存在风险
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExistsRisk?: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9351,13 +8236,11 @@ export interface DescribeAssetUserListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 账号列表
+   * 账号列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Users: Array<AssetUserBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9382,101 +8265,83 @@ export interface BashEvent {
    * 数据ID
    */
   Id: number
-
   /**
    * 主机安全ID
    */
   Uuid: string
-
   /**
    * 主机ID
    */
   Quuid: string
-
   /**
    * 主机内网IP
    */
   Hostip: string
-
   /**
    * 执行用户名
    */
   User: string
-
   /**
    * 平台类型
    */
   Platform: number
-
   /**
    * 执行命令
    */
   BashCmd: string
-
   /**
    * 规则ID
    */
   RuleId: number
-
   /**
    * 规则名称
    */
   RuleName: string
-
   /**
    * 规则等级：1-高 2-中 3-低
    */
   RuleLevel: number
-
   /**
    * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
    */
   Status: number
-
   /**
    * 发生时间
    */
   CreateTime: string
-
   /**
    * 主机名
    */
   MachineName: string
-
   /**
-      * 0: bash日志 1: 实时监控(雷霆版)
+   * 0: bash日志 1: 实时监控(雷霆版)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectBy: number
-
   /**
-      * 进程id
+   * 进程id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid: string
-
   /**
-      * 进程名称
+   * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Exe: string
-
   /**
-      * 处理时间
+   * 处理时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime: string
-
   /**
-      * 规则类别  0=系统规则，1=用户规则
+   * 规则类别  0=系统规则，1=用户规则
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleCategory: number
-
   /**
-      * 自动生成的正则表达式
+   * 自动生成的正则表达式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RegexBashCmd: string
 }
 
@@ -9498,12 +8363,10 @@ export interface RecoverMalwaresResponse {
    * 恢复成功id数组，若无则返回空数组
    */
   SuccessIds: Array<number>
-
   /**
    * 恢复失败id数组，若无则返回空数组
    */
   FailedIds: Array<number>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9528,7 +8391,6 @@ export interface RegionSet {
    * 地域名称
    */
   RegionName: string
-
   /**
    * 可用区信息
    */
@@ -9540,10 +8402,10 @@ export interface RegionSet {
  */
 export interface DescribeIgnoreHostAndItemConfigRequest {
   /**
-      * <li>ItemId - int64 - 是否必填：否 - 项Id</i>
+   * <li>ItemId - int64 - 是否必填：否 - 项Id</i>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
 <li>HostId - string - 是否必填：否 - 主机Id</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -9555,16 +8417,14 @@ export interface DescribeReverseShellRulesRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -9576,52 +8436,42 @@ export interface DescribeScanVulSettingResponse {
    * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategories?: string
-
   /**
    * 危害等级：1-低危；2-中危；3-高危；4-严重 (多选英文逗号分隔)
    */
   VulLevels?: string
-
   /**
    * 定期检测间隔时间（天）
    */
   TimerInterval?: number
-
   /**
    * 定期检测时间，如：00:00
    */
   TimerTime?: string
-
   /**
    * 是否紧急漏洞：0-否 1-是
    */
   VulEmergency?: number
-
   /**
    * 开始时间
    */
   StartTime?: string
-
   /**
    * 是否开启
    */
   EnableScan?: number
-
   /**
    * 结束时间
    */
   EndTime?: string
-
   /**
    * 一键扫描超时时长，如：1800秒（s）
    */
   ClickTimeout?: number
-
   /**
    * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
    */
   Uuids?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9640,12 +8490,10 @@ export interface AssetFilters {
    * 过滤键的名称。
    */
   Name: string
-
   /**
    * 一个或者多个过滤值。
    */
   Values: Array<string>
-
   /**
    * 是否模糊查询
    */
@@ -9660,7 +8508,6 @@ export interface DescribeAssetDatabaseInfoResponse {
    * 数据库详情
    */
   Database: AssetDatabaseDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9675,12 +8522,10 @@ export interface MonthInspectionReport {
    * 巡检报告名称
    */
   ReportName: string
-
   /**
    * 巡检报告下载地址
    */
   ReportPath: string
-
   /**
    * 巡检报告更新时间
    */
@@ -9695,7 +8540,6 @@ export interface SetBashEventsStatusRequest {
    * ID数组，最大100条。
    */
   Ids: Array<number>
-
   /**
    * 新状态(0-待处理 1-高危 2-正常)
    */
@@ -9710,112 +8554,91 @@ export interface ReverseShell {
    * ID 主键
    */
   Id?: number
-
   /**
    * 主机安全UUID
    */
   Uuid?: string
-
   /**
    * 主机ID
    */
   Quuid?: string
-
   /**
    * 主机内网IP
    */
   Hostip?: string
-
   /**
    * 目标IP
    */
   DstIp?: string
-
   /**
    * 目标端口
    */
   DstPort?: number
-
   /**
    * 进程名
    */
   ProcessName?: string
-
   /**
    * 进程路径
    */
   FullPath?: string
-
   /**
    * 命令详情
    */
   CmdLine?: string
-
   /**
    * 执行用户
    */
   UserName?: string
-
   /**
    * 执行用户组
    */
   UserGroup?: string
-
   /**
    * 父进程名
    */
   ParentProcName?: string
-
   /**
    * 父进程用户
    */
   ParentProcUser?: string
-
   /**
    * 父进程用户组
    */
   ParentProcGroup?: string
-
   /**
    * 父进程路径
    */
   ParentProcPath?: string
-
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
   Status?: number
-
   /**
    * 产生时间
    */
   CreateTime?: string
-
   /**
    * 主机名
    */
   MachineName?: string
-
   /**
    * 进程树
    */
   ProcTree?: string
-
   /**
    * 检测方法
    */
   DetectBy?: number
-
   /**
-      *  主机额外信息
+   *  主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 进程id
+   * 进程id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid?: number
 }
 
@@ -9827,27 +8650,22 @@ export interface AssetAppProcessInfo {
    * 名称
    */
   Name: string
-
   /**
    * 进程状态
    */
   Status: string
-
   /**
    * 进程版本
    */
   Version: string
-
   /**
    * 路径
    */
   Path: string
-
   /**
    * 用户
    */
   User: string
-
   /**
    * 启动时间
    */
@@ -9862,12 +8680,10 @@ export interface DescribeBaselineStrategyListRequest {
    * 分页参数 最大100
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
    * 规则开关，1：打开 0：关闭  2:全部
    */
@@ -9882,12 +8698,10 @@ export interface DescribeBaselineRuleIgnoreListResponse {
    * 总数
    */
   Total: number
-
   /**
    * 列表
    */
   List: Array<BaselineRule>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9902,22 +8716,18 @@ export interface RegionInfo {
    * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
    */
   Region: string
-
   /**
    * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
    */
   RegionName: string
-
   /**
    * 地域ID
    */
   RegionId: number
-
   /**
    * 地域代码，如 gz，sh，bj
    */
   RegionCode: string
-
   /**
    * 地域英文名
    */
@@ -9932,27 +8742,22 @@ export interface ProtectNetInfo {
    * 任务id
    */
   TaskId: string
-
   /**
    * 护网天数
    */
   ProtectDays: number
-
   /**
    * 护网状态 0未启动，1护网中，2已完成
    */
   Status: number
-
   /**
    * 护网启动时间
    */
   StartTime: string
-
   /**
    * 护网完成时间
    */
   EndTime: string
-
   /**
    * 报告下载地址
    */
@@ -9967,48 +8772,40 @@ export interface BaselineItemInfo {
    * 基线检测项ID
    */
   ItemId: number
-
   /**
    * 检测项名字
    */
   ItemName: string
-
   /**
-      * 检测项所属规则的ID
+   * 检测项所属规则的ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleId: number
-
   /**
    * 检测项描述
    */
   ItemDesc: string
-
   /**
    * 检测项的修复方法
    */
   FixMethod: string
-
   /**
    * 检测项所属规则名字
    */
   RuleName: string
-
   /**
    * 危险等级
    */
   Level: number
-
   /**
-      * 系统规则ID
+   * 系统规则ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SysRuleId: number
-
   /**
-      * 被引自定义规则信息
+   * 被引自定义规则信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RelatedCustomRuleInfo: Array<BaselineCustomRuleIdName>
 }
 
@@ -10020,12 +8817,10 @@ export interface DescribeVertexDetailRequest {
    * 点id列表
    */
   VertexIds: Array<string>
-
   /**
    * 事件id
    */
   IncidentId: string
-
   /**
    * 事件所在表名
    */
@@ -10040,24 +8835,20 @@ export interface ComponentStatistics {
    * 组件ID。
    */
   Id: number
-
   /**
    * 主机数量。
    */
   MachineNum: number
-
   /**
    * 组件名称。
    */
   ComponentName: string
-
   /**
-      * 组件类型。
+   * 组件类型。
 <li>WEB：Web组件</li>
 <li>SYSTEM：系统组件</li>
-      */
+   */
   ComponentType: string
-
   /**
    * 组件描述。
    */
@@ -10072,9 +8863,8 @@ export interface ExportAssetWebServiceInfoListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>User- string - 是否必填：否 - 运行用户</li>
 <li>Name- string - 是否必填：否 - Web服务名：
 1:Tomcat
@@ -10088,14 +8878,12 @@ export interface ExportAssetWebServiceInfoListRequest {
 9:IHS
 10:Tengine</li>
 <li>OsType- string - 是否必填：否 - Windows/linux</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序：[FirstTime|ProcessCount]
    */
@@ -10120,12 +8908,10 @@ export interface ProtectMachine {
    * 机器名称
    */
   HostName: string
-
   /**
    * 机器IP
    */
   HostIp: string
-
   /**
    * 防护目录数
    */
@@ -10140,12 +8926,10 @@ export interface DescribeAssetUserInfoRequest {
    * 云服务器UUID
    */
   Quuid: string
-
   /**
    * 主机安全UUID
    */
   Uuid: string
-
   /**
    * 账户名
    */
@@ -10157,7 +8941,7 @@ export interface DescribeAssetUserInfoRequest {
  */
 export interface ExportBaselineItemListRequest {
   /**
-      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+   * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
 <li>HostId - string - 是否必填：否 - 主机Id</li>
 <li>HostName - string - 是否必填：否 - 主机名</li>
@@ -10168,9 +8952,8 @@ export interface ExportBaselineItemListRequest {
 <li>Level - int - 是否必填：否 - 风险等级</li>
 <li>StartTime - string - 是否必填：否 - 开时时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -10185,23 +8968,19 @@ export interface DescribeProtectDirListRequest {
    * 分页条数 最大100条
    */
   Limit: number
-
   /**
    * 偏移量
    */
   Offset: number
-
   /**
-      * DirName 网站名称
+   * DirName 网站名称
 DirPath 网站防护目录地址
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * asc：升序/desc：降序
    */
   Order?: string
-
   /**
    * 排序字段
    */
@@ -10223,39 +9002,34 @@ export interface ExportPrivilegeEventsRequest {
  */
 export interface MachineExtraInfo {
   /**
-      * 公网IP
+   * 公网IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WanIP?: string
-
   /**
-      * 内网IP
+   * 内网IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PrivateIP?: string
-
   /**
-      * 网络类型，1:vpc网络 2:基础网络 3:非腾讯云网络
+   * 网络类型，1:vpc网络 2:基础网络 3:非腾讯云网络
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NetworkType?: number
-
   /**
-      * 网络名，vpc网络情况下会返回vpc_id
+   * 网络名，vpc网络情况下会返回vpc_id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NetworkName?: string
-
   /**
-      * 实例ID
+   * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceID?: string
-
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName?: string
 }
 
@@ -10267,197 +9041,160 @@ export interface FileTamperEvent {
    * 机器名称
    */
   HostName?: string
-
   /**
    * 机器IP
    */
   HostIp?: string
-
   /**
    * 发生时间
    */
   CreateTime?: string
-
   /**
    * 最近发生时间
    */
   ModifyTime?: string
-
   /**
    * 事件id
    */
   Id?: number
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
    * cvm id
    */
   Quuid?: string
-
   /**
    * 事件类型/动作  0 -- 告警
    */
   Type?: number
-
   /**
    * 进程路径
    */
   ProcessExe?: string
-
   /**
    * 进程参数
    */
   ProcessArgv?: string
-
   /**
    * 目标文件路径
    */
   Target?: string
-
   /**
    * 处理状态  0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4-已手动处理
    */
   Status?: number
-
   /**
    * 事件产生次数
    */
   EventCount?: number
-
   /**
    * 规则id
    */
   RuleId?: number
-
   /**
    * 规则名称
    */
   RuleName?: string
-
   /**
    * 事件详情: json格式
    */
   Pstree?: string
-
   /**
    * 规则类型 0系统规则 1自定义规则
    */
   RuleCategory?: number
-
   /**
    * 主机在线信息 ONLINE、OFFLINE
    */
   MachineStatus?: string
-
   /**
    * 危害描述
    */
   Description?: string
-
   /**
    * 修护建议
    */
   Suggestion?: string
-
   /**
    * 内网ip
    */
   PrivateIp?: string
-
   /**
    * 进程权限
    */
   ExePermission?: string
-
   /**
    * 用户名
    */
   UserName?: string
-
   /**
    * 用户组
    */
   UserGroup?: string
-
   /**
    * 进程名
    */
   ExeMd5?: string
-
   /**
    * 进程文件大小
    */
   ExeSize?: number
-
   /**
    * 进程执行时长
    */
   ExeTime?: number
-
   /**
    * 目标文件大小
    */
   TargetSize?: number
-
   /**
    * 目标文件权限
    */
   TargetPermission?: string
-
   /**
-      * 目标文件更新时间
+   * 目标文件更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TargetModifyTime?: string
-
   /**
-      * 目标文件创建时间
+   * 目标文件创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TargetCreatTime?: string
-
   /**
    * 进程pid
    */
   ExePid?: number
-
   /**
    * 文件名称
    */
   TargetName?: string
-
   /**
    * 参考链接
    */
   Reference?: string
-
   /**
    * 风险等级 0：无， 1: 高危， 2:中危， 3: 低危
    */
   Level?: number
-
   /**
-      * 进程名称
+   * 进程名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExeName?: string
-
   /**
-      *  主机额外信息
+   *  主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 文件威胁行为
+   * 文件威胁行为
 <li>read 读取文件</li>
 <li>write 修改文件</li>
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileAction?: string
 }
 
@@ -10469,7 +9206,6 @@ export interface DescribeMalwareFileResponse {
    * 木马文件下载地址
    */
   FileUrl: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10494,21 +9230,18 @@ export interface TaskStatus {
    * 扫描中（包含初始化）
    */
   Scanning: string
-
   /**
    * 扫描终止（包含终止中）
    */
   Ok: string
-
   /**
    * 扫描失败
    */
   Fail: string
-
   /**
-      * 扫描失败（提示具体原因：扫描超时、客户端版本低、客户端离线）
+   * 扫描失败（提示具体原因：扫描超时、客户端版本低、客户端离线）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Stop: string
 }
 
@@ -10517,16 +9250,14 @@ export interface TaskStatus {
  */
 export interface DescribeRiskDnsListResponse {
   /**
-      * 恶意请求列表数组
+   * 恶意请求列表数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RiskDnsList: Array<RiskDnsList>
-
   /**
    * 总数量
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10541,13 +9272,11 @@ export interface DescribeAssetWebAppListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebApps: Array<AssetWebAppBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10562,71 +9291,58 @@ export interface ScanTaskDetails {
    * 服务器IP
    */
   HostIp?: string
-
   /**
    * 服务器名称
    */
   HostName?: string
-
   /**
    * 操作系统
    */
   OsName?: string
-
   /**
    * 风险数量
    */
   RiskNum?: number
-
   /**
    * 扫描开始时间
    */
   ScanBeginTime?: string
-
   /**
    * 扫描结束时间
    */
   ScanEndTime?: string
-
   /**
    * 唯一Uuid
    */
   Uuid?: string
-
   /**
    * 唯一Quuid
    */
   Quuid?: string
-
   /**
    * 状态码
    */
   Status?: string
-
   /**
    * 描述
    */
   Description?: string
-
   /**
    * id唯一
    */
   Id?: number
-
   /**
    * 失败详情
    */
   FailType?: number
-
   /**
    * 外网ip
    */
   MachineWanIp?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -10638,101 +9354,82 @@ export interface AssetDatabaseDetail {
    * 主机内网IP
    */
   MachineIp: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp: string
-
   /**
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * 操作系统信息
    */
   OsInfo: string
-
   /**
    * 数据库名
    */
   Name: string
-
   /**
    * 版本
    */
   Version: string
-
   /**
    * 监听端口
    */
   Port: string
-
   /**
    * 协议
    */
   Proto: string
-
   /**
    * 运行用户
    */
   User: string
-
   /**
    * 绑定IP
    */
   Ip: string
-
   /**
    * 配置文件路径
    */
   ConfigPath: string
-
   /**
    * 日志文件路径
    */
   LogPath: string
-
   /**
    * 数据路径
    */
   DataPath: string
-
   /**
    * 运行权限
    */
   Permission: string
-
   /**
    * 错误日志路径
    */
   ErrorLogPath: string
-
   /**
    * 插件路径
    */
   PlugInPath: string
-
   /**
    * 二进制路径
    */
   BinPath: string
-
   /**
    * 启动参数
    */
   Param: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
 }
 
@@ -10751,26 +9448,22 @@ export interface DescribeScanTaskStatusRequest {
  */
 export interface DescribeVulStoreListResponse {
   /**
-      * 漏洞信息
+   * 漏洞信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List?: Array<VulStoreListInfo>
-
   /**
    * 总数
    */
   TotalCount?: number
-
   /**
    * 今日剩余搜索此时
    */
   Remaining?: number
-
   /**
    * 免费搜索次数
    */
   FreeSearchTimes?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10805,27 +9498,22 @@ export interface AssetDiskPartitionInfo {
    * 分区名
    */
   Name: string
-
   /**
    * 分区大小：单位G
    */
   Size: number
-
   /**
    * 分区使用率
    */
   Percent: number
-
   /**
    * 文件系统类型
    */
   Type: string
-
   /**
    * 挂载目录
    */
   Path: string
-
   /**
    * 已使用空间：单位G
    */
@@ -10840,126 +9528,102 @@ export interface RiskDnsEvent {
    * 事件Id
    */
   Id?: number
-
   /**
    * 策略ID
    */
   PolicyId?: number
-
   /**
    * 命中策略类型[-1:未知|0系统|1:用户]
    */
   PolicyType?: number
-
   /**
    * 命中策略名称
    */
   PolicyName?: string
-
   /**
    * 保护级别[0:基础版|1:专业版|2:旗舰版]
    */
   ProtectLevel?: number
-
   /**
    * 主机ID
    */
   HostId?: string
-
   /**
    * 主机名称
    */
   HostName?: string
-
   /**
    * 主机IP
    */
   HostIp?: string
-
   /**
    * 外网IP
    */
   WanIp?: string
-
   /**
    * 客户端ID
    */
   AgentId?: string
-
   /**
    * 访问域名
    */
   Domain?: string
-
   /**
    * 标签特性
    */
   Tags?: Array<string>
-
   /**
    * 访问次数
    */
   AccessCount?: number
-
   /**
    * 威胁描述
    */
   ThreatDesc?: string
-
   /**
    * 修复方案
    */
   SuggestSolution?: string
-
   /**
    * 参考链接
    */
   ReferenceLink?: string
-
   /**
    * 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略]
    */
   HandleStatus?: number
-
   /**
    * 进程ID
    */
   Pid?: number
-
   /**
    * 进程名
    */
   ProcessName?: string
-
   /**
    * 进程MD5
    */
   ProcessMd5?: string
-
   /**
    * 命令行
    */
   CmdLine?: string
-
   /**
    * 首次访问时间
    */
   FirstTime?: string
-
   /**
    * 最近访问时间
    */
   LastTime?: string
-
   /**
    * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
    */
   HostStatus?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -10971,47 +9635,38 @@ export interface BaselineRuleInfo {
    * 检测项名称
    */
   RuleName: string
-
   /**
    * 检测项描述
    */
   Description: string
-
   /**
    * 修复建议
    */
   FixMessage: string
-
   /**
    * 危害等级
    */
   Level: number
-
   /**
    * 状态
    */
   Status: number
-
   /**
    * 检测项id
    */
   RuleId: number
-
   /**
    * 最后检测时间
    */
   LastScanAt: string
-
   /**
    * 具体原因说明
    */
   RuleRemark: string
-
   /**
    * 唯一Uuid
    */
   Uuid: string
-
   /**
    * 唯一事件ID
    */
@@ -11026,7 +9681,6 @@ export interface DescribeExportMachinesResponse {
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11041,7 +9695,6 @@ export interface DescribeScanTaskStatusResponse {
    * 任务扫描状态列表
    */
   State: TaskStatus
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11056,7 +9709,6 @@ export interface DescribeBaselineItemRiskTopResponse {
    * 结果数组
    */
   RiskItemTop5: Array<BaselineRiskItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11068,27 +9720,24 @@ export interface DescribeBaselineItemRiskTopResponse {
  */
 export interface IncidentVertexInfo {
   /**
-      * 事件id
+   * 事件id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IncidentId?: string
-
   /**
-      * 事件所在表名
+   * 事件所在表名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TableName?: string
-
   /**
-      * 节点信息列表，数组项中包含节点详细信息
+   * 节点信息列表，数组项中包含节点详细信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Vertex?: Array<VertexInfo>
-
   /**
-      * 节点总个数
+   * 节点总个数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VertexCount?: number
 }
 
@@ -11100,12 +9749,10 @@ export interface DescribeWebPageEventListResponse {
    * 防护事件列表信息
    */
   List: Array<ProtectEventLists>
-
   /**
    * 总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11120,12 +9767,10 @@ export interface DescribeBashEventsNewResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 高危命令事件列表
    */
   List: Array<BashEventNew>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11160,7 +9805,6 @@ export interface OsName {
    * 系统名称
    */
   Name: string
-
   /**
    * 操作系统类型枚举值
    */
@@ -11200,12 +9844,10 @@ export interface DescribeLogStorageStatisticResponse {
    * 总容量（单位：GB）
    */
   TotalSize: number
-
   /**
    * 已使用容量（单位：GB）
    */
   UsedSize: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11227,87 +9869,74 @@ export interface ModifyBaselinePolicyStateResponse {
  */
 export interface BaselineItemDetect {
   /**
-      * 项Id
+   * 项Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemId: number
-
   /**
-      * 项名称
+   * 项名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemName: string
-
   /**
-      * 项描述
+   * 项描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemDesc: string
-
   /**
-      * 修复方法
+   * 修复方法
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FixMethod: string
-
   /**
-      * 所属规则
+   * 所属规则
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleName: string
-
   /**
-      * 0:未通过 1:忽略 3:通过 5:检测中
+   * 0:未通过 1:忽略 3:通过 5:检测中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectStatus: number
-
   /**
-      * 风险等级
+   * 风险等级
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level: number
-
   /**
-      * 影响服务器数
+   * 影响服务器数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostCount: number
-
   /**
-      * 首次检测时间
+   * 首次检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstTime: string
-
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastTime: string
-
   /**
-      * 检测结果,Json字符串
+   * 检测结果,Json字符串
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectResult: string
-
   /**
-      * 所属规则ID
+   * 所属规则ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleId: number
-
   /**
-      * 通过的服务器数
+   * 通过的服务器数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PassedHostCount: number
-
   /**
-      * 未通过的服务器数
+   * 未通过的服务器数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NotPassedHostCount: number
 }
 
@@ -11319,22 +9948,18 @@ export interface DescribeBaselineFixListRequest {
    * <li>ItemName- string - 是否必填：否 - 项名称</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [CreateTime|MoifyTime|FixTime]
    */
@@ -11346,27 +9971,23 @@ export interface DescribeBaselineFixListRequest {
  */
 export interface DescribeEmergencyResponseListRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keyword- String - 是否必填：否 - 关键词过滤，</li>
 <li>Uuids - String - 是否必填：否 - 主机id过滤</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 排序步长
    */
   Offset?: number
-
   /**
    * 排序方法
    */
   Order?: string
-
   /**
    * 排序字段 StartTime，EndTime
    */
@@ -11381,45 +10002,37 @@ export interface DescribeScanStateResponse {
    * 0 从未扫描过、 1 扫描中、 2扫描完成、 3停止中、 4停止完成
    */
   ScanState: number
-
   /**
    * 扫描进度
    */
   Schedule: number
-
   /**
    * 任务Id
    */
   TaskId: number
-
   /**
    * 任务扫描的漏洞id
    */
   VulId: Array<number>
-
   /**
    * 0一键检测 1定时检测
    */
   Type: number
-
   /**
-      * 开始扫描时间
+   * 开始扫描时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanBeginTime: string
-
   /**
-      * 扫描漏洞数
+   * 扫描漏洞数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RiskEventCount: number
-
   /**
-      * 扫描结束时间
+   * 扫描结束时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanEndTime: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11434,62 +10047,51 @@ export interface BaselineHostDetect {
    * 主机Id
    */
   HostId?: string
-
   /**
    * 内网Ip
    */
   HostIp?: string
-
   /**
    * 主机名称
    */
   HostName?: string
-
   /**
    * 外网Ip
    */
   WanIp?: string
-
   /**
    * 0:未通过 1:忽略 3:通过 5:检测中
    */
   DetectStatus?: number
-
   /**
    * 检测通过数
    */
   PassedItemCount?: number
-
   /**
    * 关联检测项数
    */
   ItemCount?: number
-
   /**
    * 检测未通过数
    */
   NotPassedItemCount?: number
-
   /**
    * 首次检测时间
    */
   FirstTime?: string
-
   /**
    * 最后检测时间
    */
   LastTime?: string
-
   /**
-      * 主机安全UUID
+   * 主机安全UUID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -11501,12 +10103,10 @@ export interface EditTagsRequest {
    * 标签名
    */
   Name: string
-
   /**
    * 标签ID
    */
   Id?: number
-
   /**
    * Quuid
    */
@@ -11531,29 +10131,24 @@ export interface DescribeBaselineEffectHostListRequest {
    * 分页参数 最大100条
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
    * 基线id
    */
   BaselineId: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>AliasName- String- 主机别名</li>
 <li>Status- Uint- 1已通过  0未通过 5检测中</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 策略id
    */
   StrategyId?: number
-
   /**
    * 主机uuid数组
    */
@@ -11568,7 +10163,6 @@ export interface ExportSecurityTrendsRequest {
    * 开始时间。
    */
   BeginDate: string
-
   /**
    * 结束时间。
    */
@@ -11580,14 +10174,13 @@ export interface ExportSecurityTrendsRequest {
  */
 export interface ExportBaselineHostDetectListRequest {
   /**
-      * <li>HostTag - string - 是否必填：否 - 主机标签</i>
+   * <li>HostTag - string - 是否必填：否 - 主机标签</i>
 <li>ItemId - int64 - 是否必填：否 - 项Id</i>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
 <li>IsPassed - int - 是否必填：否 - 是否通过</li>
 <li>RiskTier - int - 是否必填：否 - 风险等级</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -11602,12 +10195,10 @@ export interface DescribeAssetDatabaseInfoRequest {
    * 服务器Quuid
    */
   Quuid: string
-
   /**
    * 服务器Uuid
    */
   Uuid: string
-
   /**
    * 数据库ID
    */
@@ -11622,16 +10213,14 @@ export interface DescribeOpenPortStatisticsRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Port - Uint64 - 是否必填：否 - 端口号</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -11643,7 +10232,6 @@ export interface ExportAssetWebServiceInfoListResponse {
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11658,7 +10246,6 @@ export interface ExportSecurityTrendsResponse {
    * 导出文件下载链接地址。
    */
   DownloadUrl: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11693,12 +10280,10 @@ export interface DescribeBaselineWeakPasswordListResponse {
    * 总数
    */
   Total: number
-
   /**
    * 无
    */
   List: Array<BaselineWeakPassword>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11723,12 +10308,10 @@ export interface ModifyWebPageProtectSettingRequest {
    * 需要操作的类型1 目录名称 2 防护文件类型
    */
   ModifyType: number
-
   /**
    * 提交值
    */
   Value: string
-
   /**
    * 配置对应的protect_path
    */
@@ -11753,53 +10336,44 @@ export interface BaselineRule {
    * 规则名称,长度不超过128英文字符
    */
   RuleName: string
-
   /**
    * 规则Id
    */
   RuleId?: number
-
   /**
    * 规则类型 [0:系统|1:自定义]
    */
   RuleType?: number
-
   /**
    * 规则分类
    */
   CategoryId?: number
-
   /**
    * 规则描述
    */
   RuleDesc?: string
-
   /**
    * 主机数
    */
   HostCount?: number
-
   /**
    * 适配项ID列表
    */
   Items?: Array<Item>
-
   /**
-      * [0:所有专业版旗舰版|1:hostID|2:ip]
+   * [0:所有专业版旗舰版|1:hostID|2:ip]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AssetType?: number
-
   /**
-      * 主机Id集合
+   * 主机Id集合
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIds?: Array<string>
-
   /**
-      * 主机IP
+   * 主机IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIps?: Array<string>
 }
 
@@ -11808,11 +10382,10 @@ export interface BaselineRule {
  */
 export interface DescribeBaselineDetailResponse {
   /**
-      * 基线详情
+   * 基线详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineDetail: BaselineDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11827,12 +10400,10 @@ export interface ExportIgnoreRuleEffectHostListResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11847,7 +10418,6 @@ export interface DescribeAssetRecentMachineInfoRequest {
    * 开始时间，如：2020-09-22
    */
   BeginDate: string
-
   /**
    * 结束时间，如：2020-09-22
    */
@@ -11862,22 +10432,18 @@ export interface DescribeAssetWebAppPluginListRequest {
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * Web应用ID
    */
   Id: string
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -11889,11 +10455,10 @@ export interface DescribeAssetWebAppPluginListRequest {
  */
 export interface DescribeLogStorageRecordResponse {
   /**
-      * 存储量记录
+   * 存储量记录
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Records?: Array<LogStorageRecord>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11918,113 +10483,93 @@ export interface DescribeMachineInfoResponse {
    * 机器ip。
    */
   MachineIp?: string
-
   /**
    * 受主机安全保护天数。
    */
   ProtectDays?: number
-
   /**
    * 操作系统。
    */
   MachineOs?: string
-
   /**
    * 主机名称。
    */
   MachineName?: string
-
   /**
-      * 在线状态。
+   * 在线状态。
 <li>ONLINE： 在线</li>
 <li>OFFLINE：离线</li>
-      */
+   */
   MachineStatus?: string
-
   /**
    * CVM或BM主机唯一标识。
    */
   InstanceId?: string
-
   /**
    * 主机外网IP。
    */
   MachineWanIp?: string
-
   /**
    * CVM或BM主机唯一Uuid。
    */
   Quuid?: string
-
   /**
    * 主机安全客户端唯一Uuid。
    */
   Uuid?: string
-
   /**
-      * 是否开通专业版。
+   * 是否开通专业版。
 <li>true：是</li>
 <li>false：否</li>
-      */
+   */
   IsProVersion?: boolean
-
   /**
    * 专业版开通时间。
    */
   ProVersionOpenDate?: string
-
   /**
-      * 云服务器类型。
+   * 云服务器类型。
 <li>CVM: 腾讯云服务器</li>
 <li>BM: 黑石物理机</li>
 <li>ECM: 边缘计算服务器</li>
 <li>LH: 轻量应用服务器</li>
 <li>Other: 混合云机器</li>
-      */
+   */
   MachineType?: string
-
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
   MachineRegion?: string
-
   /**
-      * 主机状态。
+   * 主机状态。
 <li>POSTPAY: 表示后付费，即按量计费  </li>
 <li>PREPAY: 表示预付费，即包年包月</li>
-      */
+   */
   PayMode?: string
-
   /**
    * 免费木马剩余检测数量。
    */
   FreeMalwaresLeft?: number
-
   /**
    * 免费漏洞剩余检测数量。
    */
   FreeVulsLeft?: number
-
   /**
    * agent版本号
    */
   AgentVersion?: string
-
   /**
    * 专业版到期时间(仅预付费)
    */
   ProVersionDeadline?: string
-
   /**
    * 是否有资产扫描记录，0无，1有
    */
   HasAssetScan?: number
-
   /**
    * 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
    */
   ProtectType?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12036,27 +10581,24 @@ export interface DescribeMachineInfoResponse {
  */
 export interface VulHostTopInfo {
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName: string
-
   /**
-      * 漏洞等级与数量统计列表
+   * 漏洞等级与数量统计列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulLevelList: Array<VulLevelCountInfo>
-
   /**
-      * 主机Quuid
+   * 主机Quuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid: string
-
   /**
-      * top评分
+   * top评分
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Score: number
 }
 
@@ -12068,21 +10610,18 @@ export interface DescribeImportMachineInfoRequest {
    * 服务器内网IP（默认）/ 服务器名称 / 服务器ID 数组 (最大 1000条)
    */
   MachineList: Array<string>
-
   /**
    * 批量导入的数据类型：Ip、Name、Id 三选一
    */
   ImportType: string
-
   /**
    * 该参数已作废.
    */
   IsQueryProMachine?: boolean
-
   /**
-      * 过滤条件：
+   * 过滤条件：
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：普惠版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+普惠版</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -12091,117 +10630,99 @@ export interface DescribeImportMachineInfoRequest {
  */
 export interface VertexDetail {
   /**
-      * 该节点类型，进程:1；网络:2；文件:3；ssh:4
+   * 该节点类型，进程:1；网络:2；文件:3；ssh:4
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Type?: number
-
   /**
-      * 各节点类型用到的时间，2022-11-29 00:00:00 格式
+   * 各节点类型用到的时间，2022-11-29 00:00:00 格式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Time?: string
-
   /**
-      * 告警信息
+   * 告警信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AlarmInfo?: Array<AlarmInfo>
-
   /**
-      * 进程名，当该节点为进程时生效
+   * 进程名，当该节点为进程时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcName?: string
-
   /**
-      * 命令行，当该节点为进程时生效
+   * 命令行，当该节点为进程时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CmdLine?: string
-
   /**
-      * 进程id，当该节点为进程时生效
+   * 进程id，当该节点为进程时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Pid?: string
-
   /**
-      * 文件md5，当该节点为文件时生效
+   * 文件md5，当该节点为文件时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileMd5?: string
-
   /**
-      * 文件写入内容，当该节点为文件时生效
+   * 文件写入内容，当该节点为文件时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileContent?: string
-
   /**
-      * 文件路径，当该节点为文件时生效
+   * 文件路径，当该节点为文件时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FilePath?: string
-
   /**
-      * 文件创建时间，当该节点为文件时生效
+   * 文件创建时间，当该节点为文件时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileCreateTime?: string
-
   /**
-      * 请求目的地址，当该节点为网络时生效
+   * 请求目的地址，当该节点为网络时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Address?: string
-
   /**
-      * 目标端口，当该节点为网络时生效
+   * 目标端口，当该节点为网络时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DstPort?: number
-
   /**
-      * 登录源ip，当该节点为ssh时生效
+   * 登录源ip，当该节点为ssh时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcIP?: string
-
   /**
-      * 登录用户名用户组，当该节点为ssh时生效
+   * 登录用户名用户组，当该节点为ssh时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   User?: string
-
   /**
-      * 漏洞名称，当该节点为漏洞时生效
+   * 漏洞名称，当该节点为漏洞时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulName?: string
-
   /**
-      * 漏洞利用时间，当该节点为漏洞时生效
+   * 漏洞利用时间，当该节点为漏洞时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulTime?: string
-
   /**
-      * http请求内容，当该节点为漏洞时生效
+   * http请求内容，当该节点为漏洞时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HttpContent?: string
-
   /**
-      * 漏洞利用者来源ip，当该节点为漏洞时生效
+   * 漏洞利用者来源ip，当该节点为漏洞时生效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulSrcIP?: string
-
   /**
-      * 点id
+   * 点id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VertexId?: string
 }
 
@@ -12213,7 +10734,6 @@ export interface StartBaselineDetectResponse {
    * 扫描任务ID
    */
   TaskId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12228,7 +10748,6 @@ export interface ProtectStat {
    * 名称
    */
   Name: string
-
   /**
    * 数量
    */
@@ -12243,13 +10762,11 @@ export interface DescribeVulEffectHostListResponse {
    * 列表总数量
    */
   TotalCount: number
-
   /**
-      * 影响主机列表
+   * 影响主机列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulEffectHostList: Array<VulEffectHostList>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12299,7 +10816,6 @@ export interface DescribeAssetJarInfoResponse {
    * Jar包详情
    */
   Jar: AssetJarDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12324,16 +10840,14 @@ export interface DescribeComponentStatisticsRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 ComponentName - String - 是否必填：否 - 组件名称
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -12345,17 +10859,15 @@ export interface DescribeMaliciousRequestWhiteListRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 
 <li>Domain  - String - 基线名称</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -12377,12 +10889,10 @@ export interface DescribeLoginWhiteListResponse {
    * 记录总数
    */
   TotalCount: number
-
   /**
    * 异地登录白名单数组
    */
   LoginWhiteLists: Array<LoginWhiteLists>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12407,22 +10917,18 @@ export interface DescribeScanMalwareScheduleResponse {
    * 扫描进度（单位：%）
    */
   Schedule: number
-
   /**
    * 风险文件数,当进度满了以后才有该值
    */
   RiskFileNumber: number
-
   /**
    * 是否正在扫描中
    */
   IsSchedule: boolean
-
   /**
    * 0 从未扫描过、 1 扫描中、 2扫描完成、 3停止中、 4停止完成
    */
   ScanStatus: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12437,113 +10943,92 @@ export interface AssetWebLocationBaseInfo {
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 内网IP
    */
   MachineIp?: string
-
   /**
    * 外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * 域名
    */
   Name?: string
-
   /**
    * 站点端口
    */
   Port?: string
-
   /**
    * 站点协议
    */
   Proto?: string
-
   /**
    * 服务类型
    */
   ServiceType?: string
-
   /**
    * 站点路经数
    */
   PathCount?: number
-
   /**
    * 运行用户
    */
   User?: string
-
   /**
    * 主目录
    */
   MainPath?: string
-
   /**
    * 主目录所有者
    */
   MainPathOwner?: string
-
   /**
    * 拥有者权限
    */
   Permission?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
    * 主机标签
    */
   Tag?: Array<MachineTag>
-
   /**
    * Web站点Id
    */
   Id?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
-      * 是否新增[0:否|1:是]
+   * 是否新增[0:否|1:是]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsNew?: number
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -12552,7 +11037,7 @@ export interface AssetWebLocationBaseInfo {
  */
 export interface DescribeBaselineItemListRequest {
   /**
-      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+   * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
 <li>HostId - string - 是否必填：否 - 主机Id</li>
 <li>HostName - string - 是否必填：否 - 主机名</li>
@@ -12563,24 +11048,20 @@ export interface DescribeBaselineItemListRequest {
 <li>Level - int - 是否必填：否 - 风险等级</li>
 <li>StartTime - string - 是否必填：否 - 开始时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列
    */
@@ -12595,78 +11076,64 @@ export interface BashRule {
    * 规则ID
    */
   Id: number
-
   /**
    * 客户端ID
    */
   Uuid: string
-
   /**
    * 规则名称
    */
   Name: string
-
   /**
    * 危险等级(0 ：无 1: 高危 2:中危 3: 低危)
    */
   Level: number
-
   /**
    * 正则表达式
    */
   Rule: string
-
   /**
    * 规则描述
    */
   Decription: string
-
   /**
    * 操作人
    */
   Operator: string
-
   /**
    * 是否全局规则
    */
   IsGlobal: number
-
   /**
    * 状态 (0: 有效 1: 无效)
    */
   Status: number
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 修改时间
    */
   ModifyTime: string
-
   /**
    * 主机IP
    */
   Hostip: string
-
   /**
-      * 生效服务器的uuid数组
+   * 生效服务器的uuid数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuids: Array<string>
-
   /**
-      * 0=黑名单 1=白名单
+   * 0=黑名单 1=白名单
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   White: number
-
   /**
-      * 是否处理之前的事件 0: 不处理 1:处理
+   * 是否处理之前的事件 0: 不处理 1:处理
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DealOldEvents: number
 }
 
@@ -12678,7 +11145,6 @@ export interface Tags {
    * 标签键
    */
   TagKey: string
-
   /**
    * 标签值
    */
@@ -12693,7 +11159,6 @@ export interface CreateSearchLogResponse {
    * 0：成功，非0：失败
    */
   Status: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12708,52 +11173,42 @@ export interface DescribeSecurityTrendsResponse {
    * 木马事件统计数据数组。
    */
   Malwares: Array<SecurityTrend>
-
   /**
    * 异地登录事件统计数据数组。
    */
   NonLocalLoginPlaces: Array<SecurityTrend>
-
   /**
    * 密码破解事件统计数据数组。
    */
   BruteAttacks: Array<SecurityTrend>
-
   /**
    * 漏洞统计数据数组。
    */
   Vuls: Array<SecurityTrend>
-
   /**
    * 基线统计数据数组。
    */
   BaseLines: Array<SecurityTrend>
-
   /**
    * 恶意请求统计数据数组。
    */
   MaliciousRequests: Array<SecurityTrend>
-
   /**
    * 高危命令统计数据数组。
    */
   HighRiskBashs: Array<SecurityTrend>
-
   /**
    * 反弹shell统计数据数组。
    */
   ReverseShells: Array<SecurityTrend>
-
   /**
    * 本地提权统计数据数组。
    */
   PrivilegeEscalations: Array<SecurityTrend>
-
   /**
    * 网络攻击统计数据数组。
    */
   CyberAttacks: Array<SecurityTrend>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12768,68 +11223,55 @@ export interface AssetSystemPackageInfo {
    * 数据库名
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 版本
    */
   Version: string
-
   /**
    * 安装时间
    */
   InstallTime: string
-
   /**
    * 类型
    */
   Type: string
-
   /**
    * 主机名称
    */
   MachineName: string
-
   /**
    * 主机IP
    */
   MachineIp: string
-
   /**
    * 操作系统
    */
   OsInfo: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
-
   /**
    * 首次采集时间
    */
   FirstTime: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew: number
-
   /**
    * 附加信息
    */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
    * 主机Id
    */
   Quuid?: string
-
   /**
    * Agent Id
    */
@@ -12844,32 +11286,27 @@ export interface DescribeEmergencyVulListRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Status - String - 是否必填：是 - 漏洞状态筛选，0//未检测 1有风险 ，2无风险 ，3 检查中展示progress</li>
 <li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
 <li>VulName- String - 是否必填：否 - 漏洞名称搜索</li>
 <li>Uuids- String - 是否必填：否 - 主机uuid</li>
 <li>IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 排序方式 desc , asc
    */
   Order?: string
-
   /**
    * 排序字段 PublishDate  LastScanTime HostCount
    */
   By?: string
-
   /**
    * 是否热点漏洞
    */
@@ -12884,12 +11321,10 @@ export interface DescribeSecurityDynamicsResponse {
    * 安全事件消息数组。
    */
   SecurityDynamics: Array<SecurityDynamic>
-
   /**
    * 记录总数。
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12914,51 +11349,42 @@ export interface LicenseBindDetail {
    * 机器别名
    */
   MachineName?: string
-
   /**
    * 机器公网IP
    */
   MachineWanIp?: string
-
   /**
    * 机器内网IP
    */
   MachineIp?: string
-
   /**
    * 云服务器UUID
    */
   Quuid?: string
-
   /**
    * 主机安全客户端UUID
    */
   Uuid?: string
-
   /**
    * 标签信息
    */
   Tags?: Array<string>
-
   /**
    * 主机安全客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装
    */
   AgentStatus?: string
-
   /**
    * 是否允许解绑,false 不允许解绑
    */
   IsUnBind?: boolean
-
   /**
    * 是否允许换绑,false 不允许换绑
    */
   IsSwitchBind?: boolean
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -12967,21 +11393,18 @@ export interface LicenseBindDetail {
  */
 export interface BaselineRiskItem {
   /**
-      * 检测项Id
+   * 检测项Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemId: number
-
   /**
    * 检测项名字
    */
   ItemName: string
-
   /**
    * 风险等级
    */
   Level: number
-
   /**
    * 影响服务器数
    */
@@ -13006,108 +11429,88 @@ export interface AssetWebServiceBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 数据库名
    */
   Name?: string
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 二进制路径
    */
   BinPath?: string
-
   /**
    * 启动用户
    */
   User?: string
-
   /**
    * 安装路径
    */
   InstallPath?: string
-
   /**
    * 配置路径
    */
   ConfigPath?: string
-
   /**
    * 关联进程数
    */
   ProcessCount?: number
-
   /**
    * Web服务ID
    */
   Id?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
    * 描述
    */
   Desc?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -13119,7 +11522,6 @@ export interface DescribeMachineInfoRequest {
    * 主机安全客户端唯一Uuid。
    */
   Uuid?: string
-
   /**
    * Quuid , Uuid 必填一项
    */
@@ -13134,82 +11536,67 @@ export interface DescribeScanTaskDetailsResponse {
    * 扫描任务信息列表
    */
   ScanTaskDetailList: Array<ScanTaskDetails>
-
   /**
    * 总数
    */
   TotalCount: number
-
   /**
    * 扫描机器总数
    */
   ScanMachineCount: number
-
   /**
    * 发现风险机器数
    */
   RiskMachineCount: number
-
   /**
    * 扫描开始时间
    */
   ScanBeginTime: string
-
   /**
    * 扫描结束时间
    */
   ScanEndTime: string
-
   /**
    * 检测时间
    */
   ScanTime: number
-
   /**
    * 扫描进度
    */
   ScanProgress: number
-
   /**
    * 扫描剩余时间
    */
   ScanLeftTime: number
-
   /**
    * 扫描内容
    */
   ScanContent: Array<string>
-
   /**
-      * 漏洞信息
+   * 漏洞信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulInfo: Array<VulDetailInfo>
-
   /**
-      * 风险事件个数
+   * 风险事件个数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RiskEventCount: number
-
   /**
-      * 0一键检测 1定时检测
+   * 0一键检测 1定时检测
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Type: number
-
   /**
-      * 任务是否全部正在被停止 ture是
+   * 任务是否全部正在被停止 ture是
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StoppingAll: boolean
-
   /**
-      * 扫描出漏洞个数
+   * 扫描出漏洞个数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13221,15 +11608,14 @@ export interface DescribeScanTaskDetailsResponse {
  */
 export interface DescribeGeneralStatRequest {
   /**
-      * 云主机类型。
+   * 云主机类型。
 <li>CVM：表示腾讯云服务器</li>
 <li>BM:  表示黑石物理机</li>
 <li>ECM:  表示边缘计算服务器</li>
 <li>LH:  表示轻量应用服务器</li>
 <li>Other:  表示混合云机器</li>
-      */
+   */
   MachineType?: string
-
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
@@ -13254,9 +11640,8 @@ export interface AssetInitServiceBaseInfo {
    * 名称
    */
   Name?: string
-
   /**
-      * 类型：
+   * 类型：
 1:编码器
 2:IE插件
 3:网络提供者
@@ -13271,74 +11656,61 @@ export interface AssetInitServiceBaseInfo {
 12:资源管理器
 13:驱动服务
 14:登录
-      */
+   */
   Type?: number
-
   /**
    * 默认启用状态：0未启用，1启用
    */
   Status?: number
-
   /**
    * 启动用户
    */
   User?: string
-
   /**
    * 路径
    */
   Path?: string
-
   /**
    * 服务器IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
    * 数据更新时间
    */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 服务器外网IP
    */
   MachineWanIp?: string
-
   /**
-      *  附加信息
+   *  附加信息
 
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -13350,12 +11722,10 @@ export interface DescribeVulHostTopRequest {
    * 获取top值，1-100
    */
   Top: number
-
   /**
    * 1:web-cms 漏洞，2.应用漏洞   4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
    */
   VulCategory?: number
-
   /**
    * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
    */
@@ -13370,23 +11740,19 @@ export interface DescribeIgnoreRuleEffectHostListRequest {
    * 分页参数 最大100条
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
    * 检测项id
    */
   RuleId: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>AliasName- String- 主机别名</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 主机标签名
    */
@@ -13418,76 +11784,62 @@ export interface UpdateMachineTagsResponse {
  */
 export interface LoginWhiteCombinedInfo {
   /**
-      * 白名单地域
+   * 白名单地域
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Places?: Array<Place>
-
   /**
    * 白名单用户（多个用户逗号隔开）
    */
   UserName?: string
-
   /**
    * 白名单IP（多个IP逗号隔开）
    */
   SrcIp?: string
-
   /**
    * 地域字符串
    */
   Locale?: string
-
   /**
    * 备注
    */
   Remark?: string
-
   /**
    * 开始时间
    */
   StartTime?: string
-
   /**
    * 结束时间
    */
   EndTime?: string
-
   /**
    * 是否对全局生效, 1：全局有效 0: 对指定主机列表生效'
    */
   IsGlobal?: number
-
   /**
    * 白名单名字：IsLocal=1时固定为：全部服务器；单台机器时为机器内网IP，多台服务器时为服务器数量，如：11台
    */
   Name?: string
-
   /**
    * 仅在单台服务器时，返回服务器名称
    */
   Desc?: string
-
   /**
    * 白名单ID
    */
   Id?: number
-
   /**
    * 创建时间
    */
   CreateTime?: string
-
   /**
    * 最近修改时间
    */
   ModifyTime?: string
-
   /**
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 登陆地
    */
@@ -13502,7 +11854,6 @@ export interface DescribeMalwareInfoResponse {
    * 恶意文件详情信息
    */
   MalwareInfo: MalwareInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13517,12 +11868,10 @@ export interface DescribeLicenseBindListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 绑定机器列表信息
    */
   List: Array<LicenseBindDetail>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13547,12 +11896,10 @@ export interface DescribeAssetJarInfoRequest {
    * 服务器Quuid
    */
   Quuid: string
-
   /**
    * 服务器Uuid
    */
   Uuid: string
-
   /**
    * Jar包ID
    */
@@ -13567,23 +11914,19 @@ export interface DescribePrivilegeEventsRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：CreateTime-发现时间
    */
@@ -13595,16 +11938,14 @@ export interface DescribePrivilegeEventsRequest {
  */
 export interface DescribeAssetEnvListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Envs: Array<AssetEnvBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13624,7 +11965,6 @@ export interface ExportScanTaskDetailsResponse {
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址(不同于入参的本次检测任务id)
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13639,12 +11979,10 @@ export interface ExportBashEventsResponse {
    * 导出文件下载链接地址。
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13664,7 +12002,6 @@ export interface EventStat {
    * 事件数
    */
   EventsNum: number
-
   /**
    * 受影响的主机数
    */
@@ -13689,21 +12026,18 @@ export interface DescribeLicenseBindScheduleRequest {
    * 任务ID
    */
   TaskId: number
-
   /**
    * 限制条数,默认10.
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
-      * 过滤参数
+   * 过滤参数
 Status 绑定进度状态 0 进行中 1 已完成 2 失败
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -13715,22 +12049,18 @@ export interface DescribeVersionStatisticsResponse {
    * 基础版数量
    */
   BasicVersionNum?: number
-
   /**
    * 专业版数量
    */
   ProVersionNum?: number
-
   /**
    * 旗舰版数量
    */
   UltimateVersionNum?: number
-
   /**
    * 普惠版数量
    */
   GeneralVersionNum?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13750,12 +12080,10 @@ export interface DescribeProcessStatisticsResponse {
    * 进程统计列表记录总数。
    */
   TotalCount: number
-
   /**
    * 进程统计列表数据数组。
    */
   ProcessStatistics: Array<ProcessStatistics>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13780,17 +12108,14 @@ export interface DeleteNonlocalLoginPlacesRequest {
    * 删除异地登录事件的方式，可选值："Ids"、"Ip"、"All"，默认为Ids
    */
   DelType?: string
-
   /**
    * 异地登录事件ID数组。DelType为Ids或DelType未填时此项必填
    */
   Ids?: Array<number>
-
   /**
    * 异地登录事件的Ip。DelType为Ip时必填
    */
   Ip?: Array<string>
-
   /**
    * 主机Uuid
    */
@@ -13802,16 +12127,14 @@ export interface DeleteNonlocalLoginPlacesRequest {
  */
 export interface DescribeAssetWebAppPluginListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Plugins: Array<AssetWebAppPluginInfo>
-
   /**
    * 分区总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13826,7 +12149,6 @@ export interface DescribeTagsResponse {
    * 列表信息
    */
   List: Array<Tag>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13838,15 +12160,14 @@ export interface DescribeTagsResponse {
  */
 export interface BaselineEventLevelInfo {
   /**
-      * 危害等级：1-低危；2-中危；3-高危；4-严重
+   * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventLevel: number
-
   /**
-      * 漏洞数量
+   * 漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventCount: number
 }
 
@@ -13868,19 +12189,17 @@ export interface DescribeLoginWhiteCombinedListRequest {
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>UserName - String - 是否必填：否 - 用户名筛选</li>
 <li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li>
 <li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -13889,63 +12208,54 @@ export interface DescribeLoginWhiteCombinedListRequest {
  */
 export interface Strategy {
   /**
-      * 策略名
+   * 策略名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrategyName: string
-
   /**
-      * 策略id
+   * 策略id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrategyId: number
-
   /**
-      * 基线检测项总数
+   * 基线检测项总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleCount: number
-
   /**
-      * 主机数量
+   * 主机数量
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostCount: number
-
   /**
-      * 扫描周期
+   * 扫描周期
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanCycle: number
-
   /**
-      * 扫描时间
+   * 扫描时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanAt: string
-
   /**
-      * 是否可用
+   * 是否可用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Enabled: number
-
   /**
-      * 通过率
+   * 通过率
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PassRate: number
-
   /**
-      * 基线id
+   * 基线id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CategoryIds: string
-
   /**
-      * 是否默认策略
+   * 是否默认策略
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsDefault: number
 }
 
@@ -13957,7 +12267,6 @@ export interface DeleteSearchTemplateResponse {
    * 0：成功，非0：失败
    */
   Status: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13972,7 +12281,6 @@ export interface DescribeBanRegionsResponse {
    * 地域信息列表
    */
   RegionSet: Array<RegionSet>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13987,12 +12295,10 @@ export interface DescribeEmergencyResponseListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 应急响应列表
    */
   List: Array<EmergencyResponseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14007,12 +12313,10 @@ export interface ProtectHostConfig {
    * 机器唯一ID
    */
   Quuid: string
-
   /**
    * 防护开关 0  关闭 1开启
    */
   ProtectSwitch: number
-
   /**
    * 自动恢复开关 0 关闭 1开启
    */
@@ -14027,77 +12331,63 @@ export interface AssetPlanTask {
    * 默认启用状态：1启用，2未启用
    */
   Status?: number
-
   /**
    * 执行周期
    */
   Cycle?: string
-
   /**
    * 执行命令或脚本
    */
   Command?: string
-
   /**
    * 启动用户
    */
   User?: string
-
   /**
    * 配置文件路径
    */
   ConfigPath?: string
-
   /**
    * 服务器IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 服务器外网IP
    */
   MachineWanIp?: string
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -14119,35 +12409,29 @@ export interface HistoryAccount {
    * 唯一ID。
    */
   Id: number
-
   /**
    * 主机安全客户端唯一Uuid。
    */
   Uuid: string
-
   /**
    * 主机内网IP。
    */
   MachineIp: string
-
   /**
    * 主机名。
    */
   MachineName: string
-
   /**
    * 帐号名。
    */
   Username: string
-
   /**
-      * 帐号变更类型。
+   * 帐号变更类型。
 <li>CREATE：表示新增帐号</li>
 <li>MODIFY：表示修改帐号</li>
 <li>DELETE：表示删除帐号</li>
-      */
+   */
   ModifyType: string
-
   /**
    * 变更时间。
    */
@@ -14159,16 +12443,14 @@ export interface HistoryAccount {
  */
 export interface DescribeAssetAppListResponse {
   /**
-      * 应用列表
+   * 应用列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Apps: Array<AssetAppBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14183,36 +12465,30 @@ export interface BaselineFix {
    * 修复项名称
    */
   ItemName?: string
-
   /**
    * 主机Ip
    */
   HostIp?: string
-
   /**
    * 首次检测时间
    */
   CreateTime?: string
-
   /**
    * 最后检测时间
    */
   ModifyTime?: string
-
   /**
    * 修复时间
    */
   FixTime?: string
-
   /**
    * 基线检测项结果ID
    */
   Id?: number
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -14224,12 +12500,10 @@ export interface ModifyWebPageProtectSwitchRequest {
    * 开关类型 1 防护开关  2 自动恢复开关 3 移除防护目录
    */
   SwitchType: number
-
   /**
    * 需要操作开关的网站 最大100条
    */
   Ids: Array<string>
-
   /**
    * 1 开启 0 关闭 SwitchType 为 1 | 2 必填;
    */
@@ -14244,27 +12518,22 @@ export interface CreateScanMalwareSettingRequest {
    * 扫描模式 0 全盘扫描, 1 快速扫描
    */
   ScanPattern: number
-
   /**
    * 服务器分类：1:专业版服务器；2:自选服务器
    */
   HostType: number
-
   /**
    * 自选服务器时生效，主机quuid的string数组
    */
   QuuidList?: Array<string>
-
   /**
    * 超时时间单位 秒 默认3600 秒
    */
   TimeoutPeriod?: number
-
   /**
    * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
    */
   EngineType?: number
-
   /**
    * 是否开启恶意进程查杀[0:未开启,1:开启]
    */
@@ -14279,83 +12548,67 @@ export interface DescribeMalwareTimingScanSettingResponse {
    * 检测模式 0 全盘检测  1快速检测
    */
   CheckPattern: number
-
   /**
    * 检测周期 开始时间
    */
   StartTime: string
-
   /**
    * 检测周期 超时结束时间
    */
   EndTime: string
-
   /**
    * 是否全部服务器 1 全部 2 自选
    */
   IsGlobal: number
-
   /**
-      * 自选服务器时必须 主机quuid的string数组
+   * 自选服务器时必须 主机quuid的string数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   QuuidList: Array<string>
-
   /**
    * 监控模式 0 标准 1深度
    */
   MonitoringPattern: number
-
   /**
    * 周期 1每天
    */
   Cycle: number
-
   /**
    * 定时检测开关 0 关闭1 开启
    */
   EnableScan: number
-
   /**
    * 唯一ID
    */
   Id: number
-
   /**
    * 实时监控0 关闭 1开启
    */
   RealTimeMonitoring: number
-
   /**
    * 是否自动隔离：1-是，0-否
    */
   AutoIsolation: number
-
   /**
    * 一键扫描超时时长，如：1800秒（s）
    */
   ClickTimeout: number
-
   /**
    * 是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效
    */
   KillProcess: number
-
   /**
    * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
    */
   EngineType: number
-
   /**
    * 启发引擎 0 关闭 1开启
    */
   EnableInspiredEngine: number
-
   /**
    * 是否开启恶意进程查杀[0:未开启,1:开启]
    */
   EnableMemShellScan: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14370,14 +12623,12 @@ export interface DescribeHostLoginListRequest {
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Uuid - String - 是否必填：否 - 主机安全唯一Uuid</li>
 <li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
@@ -14387,14 +12638,12 @@ export interface DescribeHostLoginListRequest {
 <li>SrcIp - String - 是否必填：否 - 来源ip筛选</li>
 <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略</li>
 <li>RiskLevel - int - 是否必填：否 - 状态筛选0:高危；1：可疑</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：LoginTime-发生时间
    */
@@ -14409,12 +12658,10 @@ export interface OrderModifyObject {
    * 资源ID
    */
   ResourceId?: string
-
   /**
    * 新产品标识,这里支持PRO_VERSION 专业版,FLAGSHIP 旗舰版
    */
   NewSubProductCode?: string
-
   /**
    * 扩容/缩容数,变配子产品忽略该参数
    */
@@ -14429,7 +12676,6 @@ export interface SecurityTrend {
    * 事件时间。
    */
   Date: string
-
   /**
    * 事件数量。
    */
@@ -14444,22 +12690,18 @@ export interface DescribeAssetWebServiceProcessListRequest {
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * Web服务ID
    */
   Id: string
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -14474,77 +12716,63 @@ export interface LicenseDetail {
    * 授权ID
    */
   LicenseId: number
-
   /**
    * 授权类型,0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
    */
   LicenseType: number
-
   /**
-      * 授权状态 0 未使用,1 部分使用, 2 已用完, 3 不可用
+   * 授权状态 0 未使用,1 部分使用, 2 已用完, 3 不可用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LicenseStatus: number
-
   /**
    * 总授权数
    */
   LicenseCnt: number
-
   /**
    * 已使用授权数
    */
   UsedLicenseCnt: number
-
   /**
    * 订单状态 1 正常 2隔离, 3销毁
    */
   OrderStatus: number
-
   /**
    * 截止日期
    */
   Deadline: string
-
   /**
    * 订单资源ID
    */
   ResourceId: string
-
   /**
    * 0 初始化,1 自动续费,2 不自动续费
    */
   AutoRenewFlag: number
-
   /**
    * 项目ID
    */
   ProjectId: number
-
   /**
    * 任务ID ,默认0 ,查询绑定进度用
    */
   TaskId: number
-
   /**
    * 购买时间
    */
   BuyTime: string
-
   /**
    * 是否试用订单.
    */
   SourceType: number
-
   /**
    * 资源别名
    */
   Alias: string
-
   /**
-      * 平台标签
+   * 平台标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tags: Array<Tags>
 }
 
@@ -14556,47 +12784,38 @@ export interface PrivilegeRule {
    * 规则ID
    */
   Id: number
-
   /**
    * 客户端ID
    */
   Uuid: string
-
   /**
    * 进程名
    */
   ProcessName: string
-
   /**
    * 是否S权限
    */
   SMode: number
-
   /**
    * 操作人
    */
   Operator: string
-
   /**
    * 是否全局规则
    */
   IsGlobal: number
-
   /**
    * 状态(0: 有效 1: 无效)
    */
   Status: number
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 修改时间
    */
   ModifyTime: string
-
   /**
    * 主机IP
    */
@@ -14611,7 +12830,6 @@ export interface Item {
    * Id
    */
   ItemId: number
-
   /**
    * 名称
    */
@@ -14636,12 +12854,10 @@ export interface CreateEmergencyVulScanRequest {
    * 漏洞id
    */
   VulId: number
-
   /**
    * 自选服务器时生效，主机uuid的string数组
    */
   Uuids?: Array<string>
-
   /**
    * 扫描超时时长 ，单位秒
    */
@@ -14656,17 +12872,14 @@ export interface DescribeProtectDirRelatedServerResponse {
    * 网站关联服务器列表信息
    */
   List: Array<ProtectDirRelatedServer>
-
   /**
    * 总数
    */
   TotalCount: number
-
   /**
    * 已开启防护总数
    */
   ProtectServerCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14681,7 +12894,6 @@ export interface VulLevelInfo {
    * // 危害等级：1-低危；2-中危；3-高危；4-严重
    */
   VulLevel: number
-
   /**
    * 数量
    */
@@ -14696,27 +12908,22 @@ export interface DescribeBaselineItemIgnoreListRequest {
    * 忽略规则ID
    */
   RuleID: number
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 请求偏移默认0
    */
   Offset?: number
-
   /**
    * <li>CatgoryId - int64 - 是否必填：否 - 规则Id</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 排序方式 [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列 [ID]
    */
@@ -14731,23 +12938,19 @@ export interface ExportBaselineEffectHostListRequest {
    * 基线id
    */
   BaselineId: number
-
   /**
-      * 筛选条件
+   * 筛选条件
 <li>AliasName- String- 主机别名</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 策略id
    */
   StrategyId?: number
-
   /**
    * 主机uuid数组
    */
   UuidList?: Array<string>
-
   /**
    * 基线名称
    */
@@ -14762,47 +12965,39 @@ export interface AssetCoreModuleDetail {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 路径
    */
   Path: string
-
   /**
    * 版本
    */
   Version: string
-
   /**
    * 大小
    */
   Size: number
-
   /**
    * 依赖进程
    */
   Processes: string
-
   /**
    * 被依赖模块
    */
   Modules: string
-
   /**
-      * 参数信息
+   * 参数信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Params: Array<AssetCoreModuleParam>
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime: string
 }
 
@@ -14811,7 +13006,7 @@ export interface AssetCoreModuleDetail {
  */
 export interface DescribeBaselineItemDetectListRequest {
   /**
-      * <li>HostId - string - 是否必填：否 - 主机Id</li>
+   * <li>HostId - string - 是否必填：否 - 主机Id</li>
 <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
 <li>PolicyId - int64 - 是否必填：否 - 规则Id</li>
 <li>ItemName - string - 是否必填：否 - 项名称</li>
@@ -14819,24 +13014,20 @@ export interface DescribeBaselineItemDetectListRequest {
 <li>Level - int - 是否必填：否 - 风险等级</li>
 <li>StartTime - string - 是否必填：否 - 开始时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [HostCount|FirstTime|LastTime]
    */
@@ -14853,29 +13044,25 @@ export type DescribeBanStatusRequest = null
  */
 export interface DescribeAssetRecentMachineInfoResponse {
   /**
-      * 总数量列表
+   * 总数量列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalList: Array<AssetKeyVal>
-
   /**
-      * 在线数量列表
+   * 在线数量列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LiveList: Array<AssetKeyVal>
-
   /**
-      * 离线数量列表
+   * 离线数量列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineList: Array<AssetKeyVal>
-
   /**
-      * 风险数量列表
+   * 风险数量列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RiskList: Array<AssetKeyVal>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14890,102 +13077,85 @@ export interface BaselineItem {
    * 项Id
    */
   ItemId?: number
-
   /**
    * 项名称
    */
   ItemName?: string
-
   /**
    * 检测项分类
    */
   CategoryId?: number
-
   /**
    * 项描述
    */
   ItemDesc?: string
-
   /**
    * 修复方法
    */
   FixMethod?: string
-
   /**
    * 所属规则
    */
   RuleName?: string
-
   /**
-      * 检测结果描述
+   * 检测结果描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectResultDesc?: string
-
   /**
-      * 危险等级
+   * 危险等级
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level?: number
-
   /**
-      * 检测状态：0 未通过，1：忽略，3：通过，5：检测中
+   * 检测状态：0 未通过，1：忽略，3：通过，5：检测中
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DetectStatus?: number
-
   /**
-      * 主机ID
+   * 主机ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostId?: string
-
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostName?: string
-
   /**
-      * 主机IP
+   * 主机IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostIp?: string
-
   /**
-      * 外网IP
+   * 外网IP
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WanIp?: string
-
   /**
-      * 第一次出现时间
+   * 第一次出现时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstTime?: string
-
   /**
-      * 最近出现时间
+   * 最近出现时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastTime?: string
-
   /**
-      * 是否可以修复
+   * 是否可以修复
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CanBeFixed?: number
-
   /**
-      * 主机安全uuid
+   * 主机安全uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 主机额外信息
+   * 主机额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -14994,16 +13164,14 @@ export interface BaselineItem {
  */
 export interface DescribeMalWareListResponse {
   /**
-      * 木马列表
+   * 木马列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MalWareList: Array<MalWareList>
-
   /**
    * 总数量
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15015,11 +13183,10 @@ export interface DescribeMalWareListResponse {
  */
 export interface ModifyLicenseUnBindsResponse {
   /**
-      * 只有解绑失败的才有该值.
+   * 只有解绑失败的才有该值.
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ErrMsg: Array<LicenseUnBindRsp>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15034,13 +13201,11 @@ export interface DescribeAssetPortInfoListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Ports: Array<AssetPortBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15055,12 +13220,10 @@ export interface DescribeProtectDirListResponse {
    * 总数
    */
   TotalCount?: number
-
   /**
    * 防护目录列表信息
    */
   List?: Array<ProtectDirInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15072,17 +13235,15 @@ export interface DescribeProtectDirListResponse {
  */
 export interface DescribeMaliciousRequestWhiteListResponse {
   /**
-      * 白名单信息列表
+   * 白名单信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List: Array<MaliciousRequestWhiteListInfo>
-
   /**
-      * 分页查询记录总数
+   * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15097,22 +13258,18 @@ export interface DescribeBaselinePolicyListRequest {
    * <li>PolicyName - String - 是否必填：否 - 策略名称</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [RuleCount|ItemCount|HostCount]
    */
@@ -15137,12 +13294,10 @@ export interface ExportTasksResponse {
    * PENDING：正在生成下载链接，FINISHED：下载链接已生成，ERROR：网络异常等异常情况
    */
   Status: string
-
   /**
    * 下载链接
    */
   DownloadUrl: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15154,17 +13309,15 @@ export interface ExportTasksResponse {
  */
 export interface DescribeIgnoreBaselineRuleResponse {
   /**
-      * 忽略基线检测项列表信息
+   * 忽略基线检测项列表信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IgnoreBaselineRuleList: Array<IgnoreBaselineRule>
-
   /**
-      * 分页查询记录总数
+   * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15184,24 +13337,20 @@ export interface DescribeMalwareRiskWarningResponse {
    * 是否开启自动扫描：true-开启，false-未开启
    */
   IsCheckRisk: boolean
-
   /**
-      * 风险文件列表信息
+   * 风险文件列表信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List: Array<MalwareRisk>
-
   /**
    * 是否弹出提示 true 弹出, false不弹
    */
   IsPop: boolean
-
   /**
-      * 异常进程列表信息
+   * 异常进程列表信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcessList: Array<MalwareRisk>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15216,21 +13365,18 @@ export interface DescribeBashRulesRequest {
    * 0-系统规则; 1-用户规则
    */
   Type: number
-
   /**
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 关键字(规则名称)</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -15242,12 +13388,10 @@ export interface ExportLicenseDetailResponse {
    * 下载地址,该字段废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15259,21 +13403,19 @@ export interface ExportLicenseDetailResponse {
  */
 export interface BaselineBasicInfo {
   /**
-      * 基线名称
+   * 基线名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name: string
-
   /**
-      * 基线id
+   * 基线id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineId: number
-
   /**
-      * 父级id
+   * 父级id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentId: number
 }
 
@@ -15285,12 +13427,10 @@ export interface DescribeBanModeResponse {
    * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
    */
   Mode: string
-
   /**
    * 标准阻断模式的配置
    */
   StandardModeConfig: StandardModeConfig
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15302,17 +13442,15 @@ export interface DescribeBanModeResponse {
  */
 export interface DescribeImportMachineInfoResponse {
   /**
-      * 有效的机器信息列表：机器名称、机器公网/内网ip、机器标签
+   * 有效的机器信息列表：机器名称、机器公网/内网ip、机器标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EffectiveMachineInfoList: Array<EffectiveMachineInfo>
-
   /**
-      * 用户批量导入失败的机器列表（例如机器不存在等...）
+   * 用户批量导入失败的机器列表（例如机器不存在等...）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InvalidMachineList: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15324,11 +13462,10 @@ export interface DescribeImportMachineInfoResponse {
  */
 export interface DescribeRiskDnsEventInfoResponse {
   /**
-      * 恶意请求事件详情
+   * 恶意请求事件详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Info: RiskDnsEvent
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15343,117 +13480,94 @@ export interface DescribeSecurityEventStatResponse {
    * 木马事件统计
    */
   MalwareStat: EventStat
-
   /**
    * 异地事件统计
    */
   HostLoginStat: EventStat
-
   /**
    * 爆破事件统计
    */
   BruteAttackStat: EventStat
-
   /**
    * 恶意请求事件统计
    */
   MaliciousRequestStat: EventStat
-
   /**
    * 本地提权事件统计
    */
   PrivilegeStat: EventStat
-
   /**
    * 反弹Shell事件统计
    */
   ReverseShellStat: EventStat
-
   /**
    * 高危命令事件统计
    */
   HighRiskBashStat: EventStat
-
   /**
    * 网络攻击事件统计
    */
   AttackLogsStat: EventStat
-
   /**
    * 高危漏洞事件统计
    */
   VulHighStat: EventStat
-
   /**
    * 中危漏洞事件统计
    */
   VulNormalStat: EventStat
-
   /**
    * 低危漏洞事件统计
    */
   VulLowStat: EventStat
-
   /**
    * 高危基线漏洞事件统计
    */
   BaselineHighStat: EventStat
-
   /**
    * 中危基线漏事件统计
    */
   BaselineNormalStat: EventStat
-
   /**
    * 低危基线漏事件统计
    */
   BaselineLowStat: EventStat
-
   /**
    * 有未处理安全事件的机器总数
    */
   MachineTotalAffectNum: number
-
   /**
    * 有未处理入侵安全事件的机器总数
    */
   InvasionTotalAffectNum: number
-
   /**
    * 有未处理漏洞安全事件的机器总数
    */
   VulTotalAffectNum: number
-
   /**
    * 有未处理基线安全事件的机器总数
    */
   BaseLineTotalAffectNum: number
-
   /**
    * 有未处理网络攻击安全事件的机器总数
    */
   CyberAttackTotalAffectNum: number
-
   /**
    * 严重漏洞事件统计
    */
   VulRiskStat: EventStat
-
   /**
    * 严重基线漏洞事件统计
    */
   BaselineRiskStat: EventStat
-
   /**
    * 漏洞数统计
    */
   VulStat: EventStat
-
   /**
    * 安全得分
    */
   Score: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15468,9 +13582,8 @@ export interface DescribeAssetDatabaseListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>User- string - 是否必填：否 - 运行用户</li>
 <li>Ip - String - 是否必填：否 - 绑定IP</li>
@@ -15490,24 +13603,20 @@ export interface DescribeAssetDatabaseListRequest {
 <li>Proto - String - 是否必填：否 - 协议：1:TCP, 2:UDP, 3:未知</li>
 <li>OsType - String - 是否必填：否 - 操作系统: linux/windows</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime]
    */
@@ -15529,7 +13638,7 @@ export interface ModifyWebPageProtectSwitchResponse {
  */
 export interface DescribeAssetMachineListRequest {
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>OsType - String - 是否必填：否 - windows或linux</li>
 <li>CpuLoad - Int - 是否必填：否 - 
@@ -15545,24 +13654,20 @@ export interface DescribeAssetMachineListRequest {
 4: 80%～100%</li>
 <li>Quuid：主机Quuid</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序[FirstTime|PartitionCount]
    */
@@ -15587,7 +13692,6 @@ export interface CreateSearchTemplateResponse {
    * 0：成功，非0：失败
    */
   Status: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15602,7 +13706,6 @@ export interface ExportBaselineWeakPasswordListRequest {
    * <li>WeakPassword - string - 是否必填：否 - 弱口令</li>
    */
   Filters?: Array<Filter>
-
   /**
    * 0:过滤的结果导出；1:全部导出
    */
@@ -15614,16 +13717,14 @@ export interface ExportBaselineWeakPasswordListRequest {
  */
 export interface DescribeAssetDatabaseListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Databases: Array<AssetDatabaseBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15638,28 +13739,24 @@ export interface ExportMalwaresRequest {
    * 限制条数,默认10
    */
   Limit?: number
-
   /**
    * 偏移量 默认0
    */
   Offset?: number
-
   /**
-      * 过滤参数。
+   * 过滤参数。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>FilePath - String - 是否必填：否 - 路径筛选</li>
 <li>VirusName - String - 是否必填：否 - 描述筛选</li>
 <li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
 <li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
 <li>Status - String - 是否必填：否 - 状态筛选</li>
-      */
+   */
   Filters?: Array<Filters>
-
   /**
    * 排序值 CreateTime
    */
   By?: string
-
   /**
    * 排序 方式 ，ASC，DESC
    */
@@ -15684,23 +13781,19 @@ export interface SyncAssetScanResponse {
    * 枚举值有(大写)：NOTASK（没有同步任务），SYNCING（同步中），FINISHED（同步完成）
    */
   State: string
-
   /**
    * 最新开始同步时间
    */
   LatestStartTime: string
-
   /**
    * 最新结束同步时间
    */
   LatestEndTime: string
-
   /**
-      * 任务ID
+   * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15715,92 +13808,75 @@ export interface AssetCoreModuleBaseInfo {
    * 名称
    */
   Name?: string
-
   /**
    * 描述
    */
   Desc?: string
-
   /**
    * 路径
    */
   Path?: string
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 服务器IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * 模块大小
    */
   Size?: number
-
   /**
    * 依赖进程数
    */
   ProcessCount?: number
-
   /**
    * 依赖模块数
    */
   ModuleCount?: number
-
   /**
    * 模块ID
    */
   Id?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 服务器外网IP
    */
   MachineWanIp?: string
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -15812,42 +13888,35 @@ export interface CreateBaselineStrategyRequest {
    * 策略名称
    */
   StrategyName: string
-
   /**
    * 检测周期, 表示每隔多少天进行检测.示例: 2, 表示每2天进行检测一次.
    */
   ScanCycle: number
-
   /**
    * 定期检测时间，该时间下发扫描. 示例:“22:00”, 表示在22:00下发检测
    */
   ScanAt: string
-
   /**
    * 该策略下选择的基线id数组. 示例: [1,3,5,7]
    */
   CategoryIds: Array<number>
-
   /**
    * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
    */
   IsGlobal: number
-
   /**
-      * 云主机类型：
+   * 云主机类型：
 CVM：虚拟主机
 BM：裸金属
 ECM：边缘计算主机
 LH：轻量应用服务器
 Other：混合云机器
-      */
+   */
   MachineType: string
-
   /**
    * 主机地域. 示例: "ap-guangzhou"
    */
   RegionCode: string
-
   /**
    * 主机id数组. 示例: ["quuid1","quuid2"]
    */
@@ -15862,7 +13931,6 @@ export interface DescribeSecurityTrendsRequest {
    * 开始时间，如：2021-07-10
    */
   BeginDate: string
-
   /**
    * 结束时间，如：2021-07-10
    */
@@ -15877,7 +13945,6 @@ export interface DescribeAttackVulTypeListResponse {
    * 威胁类型列表
    */
   List: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15892,12 +13959,10 @@ export interface DescribePrivilegeRulesResponse {
    * 列表内容
    */
   List: Array<PrivilegeRule>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15912,12 +13977,10 @@ export interface DescribeReverseShellEventsResponse {
    * 列表内容
    */
   List: Array<ReverseShell>
-
   /**
    * 总条数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15932,9 +13995,8 @@ export interface DescribeBashEventsNewRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>HostName - String - 是否必填：否 - 主机名</li>
 <li>Hostip - String - 是否必填：否 - 主机内网IP</li>
 <li>HostIp - String - 是否必填：否 - 主机内网IP</li>
@@ -15945,19 +14007,16 @@ export interface DescribeBashEventsNewRequest {
 <li>DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)</li>
 <li>StartTime - String - 是否必填：否 - 开始时间</li>
 <li>EndTime - String - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
-
   /**
    * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
    */
@@ -15972,12 +14031,10 @@ export interface DescribeWebPageProtectStatResponse {
    * 文件篡改信息
    */
   FileTamperNum: Array<ProtectStat>
-
   /**
    * 防护文件分类信息
    */
   ProtectFileType: Array<ProtectStat>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15992,9 +14049,8 @@ export interface DescribeAssetPortInfoListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Port - uint64 - 是否必填：否 - 端口</li>
 <li>Ip - String - 是否必填：否 - 绑定IP</li>
 <li>ProcessName - String - 是否必填：否 - 监听进程</li>
@@ -16007,24 +14063,20 @@ export interface DescribeAssetPortInfoListRequest {
 <li>RunTimeStart - String - 是否必填：否 - 运行开始时间</li>
 <li>RunTimeEnd - String - 是否必填：否 - 运行结束时间</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime|StartTime]
    */
@@ -16039,7 +14091,6 @@ export interface VulLevelCountInfo {
    * 漏洞等级
    */
   VulLevel: number
-
   /**
    * 漏洞数量
    */
@@ -16051,36 +14102,31 @@ export interface VulLevelCountInfo {
  */
 export interface DescribeExportMachinesRequest {
   /**
-      * 云主机类型。
+   * 云主机类型。
 <li>CVM：表示虚拟主机</li>
 <li>BM:  表示黑石物理机</li>
-      */
+   */
   MachineType: string
-
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
   MachineRegion: string
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
 <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 机器所属业务ID列表
    */
@@ -16095,102 +14141,82 @@ export interface DescribeAssetInfoResponse {
    * 主机数
    */
   MachineCount: number
-
   /**
    * 账号数
    */
   AccountCount: number
-
   /**
    * 端口数
    */
   PortCount: number
-
   /**
    * 进程数
    */
   ProcessCount: number
-
   /**
    * 软件数
    */
   SoftwareCount: number
-
   /**
    * 数据库数
    */
   DatabaseCount: number
-
   /**
    * Web应用数
    */
   WebAppCount: number
-
   /**
    * Web框架数
    */
   WebFrameCount: number
-
   /**
    * Web服务数
    */
   WebServiceCount: number
-
   /**
    * Web站点数
    */
   WebLocationCount: number
-
   /**
    * 账号今日新增
    */
   AccountNewCount: number
-
   /**
    * 端口今日新增
    */
   PortNewCount: number
-
   /**
    * 进程今日新增
    */
   ProcessNewCount: number
-
   /**
    * 软件今日新增
    */
   SoftwareNewCount: number
-
   /**
    * 数据库今日新增
    */
   DatabaseNewCount: number
-
   /**
    * Web应用今日新增
    */
   WebAppNewCount: number
-
   /**
    * Web框架今日新增
    */
   WebFrameNewCount: number
-
   /**
    * Web服务今日新增
    */
   WebServiceNewCount: number
-
   /**
    * Web站点今日新增
    */
   WebLocationNewCount: number
-
   /**
    * 主机今日新增
    */
   MachineNewCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16205,27 +14231,22 @@ export interface WarningObject {
    * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线，14：恶意请求，15: 网络攻击，16：Windows系统漏洞，17：Linux软件漏洞
    */
   Type?: number
-
   /**
    * 1: 关闭告警 0: 开启告警
    */
   DisablePhoneWarning?: number
-
   /**
    * 开始时间，格式: HH:mm
    */
   BeginTime?: string
-
   /**
    * 结束时间，格式: HH:mm
    */
   EndTime?: string
-
   /**
    * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高；01→(登录审计)疑似不告警，高危告警
    */
   ControlBits?: string
-
   /**
    * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
    */
@@ -16240,112 +14261,91 @@ export interface RiskDnsList {
    * 对外访问域名
    */
   Url: string
-
   /**
    * 访问次数
    */
   AccessCount: number
-
   /**
    * 进程名
    */
   ProcessName: string
-
   /**
    * 进程MD5
    */
   ProcessMd5: string
-
   /**
    * 是否为全局规则，0否，1是
    */
   GlobalRuleId: number
-
   /**
    * 用户规则id
    */
   UserRuleId: number
-
   /**
    * 状态；0-待处理，2-已加白，3-非信任状态，4-已处理，5-已忽略
    */
   Status: number
-
   /**
    * 首次访问时间
    */
   CreateTime: string
-
   /**
    * 最近访问时间
    */
   MergeTime: string
-
   /**
    * 唯一 Quuid
    */
   Quuid: string
-
   /**
    * 主机ip
    */
   HostIp: string
-
   /**
    * 别名
    */
   Alias: string
-
   /**
    * 描述
    */
   Description: string
-
   /**
    * 唯一ID
    */
   Id: number
-
   /**
    * 参考
    */
   Reference: string
-
   /**
    * 命令行
    */
   CmdLine: string
-
   /**
    * 进程号
    */
   Pid: number
-
   /**
    * 唯一UUID
    */
   Uuid: string
-
   /**
    * 建议方案
    */
   SuggestScheme: string
-
   /**
    * 标签特性
    */
   Tags: Array<string>
-
   /**
-      * 外网ip
+   * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineWanIp: string
-
   /**
-      * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
+   * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineStatus: string
 }
 
@@ -16359,16 +14359,14 @@ export type DeleteMalwareScanTaskRequest = null
  */
 export interface DescribeIgnoreRuleEffectHostListResponse {
   /**
-      * 忽略检测项影响主机列表
+   * 忽略检测项影响主机列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IgnoreRuleEffectHostList: Array<IgnoreRuleEffectHostInfo>
-
   /**
    * 分页查询记录总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16380,16 +14378,14 @@ export interface DescribeIgnoreRuleEffectHostListResponse {
  */
 export interface ExportProtectDirListRequest {
   /**
-      * DirName 网站名称
+   * DirName 网站名称
 DirPath 网站防护目录地址
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * asc：升序/desc：降序
    */
   Order?: string
-
   /**
    * 排序字段
    */
@@ -16414,7 +14410,6 @@ export interface ExportAssetCoreModuleListResponse {
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16429,78 +14424,65 @@ export interface VertexInfo {
    * 该结点类型，进程:1；网络:2；文件:3；ssh:4；
    */
   Type: number
-
   /**
    * 该节点包含的vid
    */
   Vid: string
-
   /**
    * 该节点的父节点vid
    */
   ParentVid: string
-
   /**
    * 是否叶子
    */
   IsLeaf: boolean
-
   /**
-      * 进程名，当Type=1时使用
+   * 进程名，当Type=1时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcNamePrefix: string
-
   /**
-      * 进程名md5，当Type=1时使用
+   * 进程名md5，当Type=1时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProcNameMd5: string
-
   /**
-      * 命令行，当Type=1时使用
+   * 命令行，当Type=1时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CmdLinePrefix: string
-
   /**
-      * 命令行md5，当Type=1时使用
+   * 命令行md5，当Type=1时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CmdLineMd5: string
-
   /**
-      * 文件路径，当Type=3时使用
+   * 文件路径，当Type=3时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FilePathPrefix: string
-
   /**
-      * 请求目的地址，当Type=2时使用
+   * 请求目的地址，当Type=2时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AddressPrefix: string
-
   /**
    * 是否漏洞节点
    */
   IsWeDetect: boolean
-
   /**
    * 是否告警节点
    */
   IsAlarm: boolean
-
   /**
-      * 文件路径md5，当Type=3时使用
+   * 文件路径md5，当Type=3时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FilePathMd5: string
-
   /**
-      * 请求目的地址md5，当Type=2时使用
+   * 请求目的地址md5，当Type=2时使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AddressMd5: string
 }
 
@@ -16512,12 +14494,10 @@ export interface DescribeHistoryAccountsResponse {
    * 帐号变更历史列表记录总数。
    */
   TotalCount: number
-
   /**
    * 帐号变更历史数据数组。
    */
   HistoryAccounts: Array<HistoryAccount>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16529,15 +14509,14 @@ export interface DescribeHistoryAccountsResponse {
  */
 export interface BaselineCustomRuleIdName {
   /**
-      * 自定义规则ID　
+   * 自定义规则ID　
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleId: number
-
   /**
-      * 自定义规则名字
+   * 自定义规则名字
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RuleName: string
 }
 
@@ -16546,23 +14525,20 @@ export interface BaselineCustomRuleIdName {
  */
 export interface DescribeLogStorageConfigResponse {
   /**
-      * 存储类型，string数组
+   * 存储类型，string数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Type?: Array<string>
-
   /**
-      * 日志存储天数，3640表示不限
+   * 日志存储天数，3640表示不限
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Period?: number
-
   /**
-      * 本月Period的修改次数
+   * 本月Period的修改次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PeriodModifyCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16577,46 +14553,38 @@ export interface BaselineRuleDetect {
    * 规则Id
    */
   RuleId: number
-
   /**
    * 规则名称
    */
   RuleName: string
-
   /**
    * 规则描述
    */
   RuleDesc: string
-
   /**
    * 关联项数
    */
   ItemCount: number
-
   /**
    * 关联主机数
    */
   HostCount: number
-
   /**
    * 首次检测时间
    */
   FirstTime: string
-
   /**
    * string
    */
   LastTime: string
-
   /**
    * 0:未通过 1:忽略 3:通过 5:检测中
    */
   DetectStatus: number
-
   /**
-      * ItemID集合
+   * ItemID集合
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ItemIds: Array<number>
 }
 
@@ -16628,19 +14596,17 @@ export interface DescribeLoginWhiteListRequest {
    * 返回数量，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 查询关键字 </li>
 <li>UserName - String - 是否必填：否 - 用户名筛选 </li>
 <li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间 </li>
 <li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间 </li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -16652,7 +14618,6 @@ export interface OpenPortStatistics {
    * 端口号
    */
   Port: number
-
   /**
    * 主机数量
    */
@@ -16667,12 +14632,10 @@ export interface ExportVulDetectionReportResponse {
    * 导出文件下载链接地址
    */
   DownloadUrl: string
-
   /**
    * 导出检测报告的任务Id（不同于入参的漏洞扫描任务id）
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16697,47 +14660,38 @@ export interface EditBashRulesRequest {
    * 规则ID（新增时不填）
    */
   Id?: number
-
   /**
    * 客户端ID数组
    */
   Uuids?: Array<string>
-
   /**
    * 主机IP
    */
   HostIp?: string
-
   /**
    * 规则名称，编辑时不可修改规则名称
    */
   Name?: string
-
   /**
    * 危险等级(0:无，1: 高危 2:中危 3: 低危)
    */
   Level?: number
-
   /**
    * 正则表达式 ，编辑时不可修改正则表达式，需要对内容QueryEscape后再base64
    */
   Rule?: string
-
   /**
    * 是否全局规则(默认否)：1-全局，0-非全局
    */
   IsGlobal?: number
-
   /**
    * 0=黑名单， 1=白名单
    */
   White?: number
-
   /**
    * 事件列表点击“加入白名单”时,需要传EventId 事件的id
    */
   EventId?: number
-
   /**
    * 是否处理旧事件为白名单 0=不处理 1=处理
    */
@@ -16752,92 +14706,74 @@ export interface DescribeLicenseGeneralResponse {
    * 总授权数 (包含隔离,过期等不可用状态)
    */
   LicenseCnt: number
-
   /**
    * 可用授权数
    */
   AvailableLicenseCnt: number
-
   /**
    * 可用专业版授权数(包含后付费).
    */
   AvailableProVersionLicenseCnt: number
-
   /**
    * 可用旗舰版授权数
    */
   AvailableFlagshipVersionLicenseCnt: number
-
   /**
    * 即将到期授权数 (15天内到期的)
    */
   NearExpiryLicenseCnt: number
-
   /**
    * 已到期授权数(不包含已删除的记录)
    */
   ExpireLicenseCnt: number
-
   /**
    * 自动升级开关状态,默认 false,  true 开启, false 关闭
    */
   AutoOpenStatus: boolean
-
   /**
    * PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费
    */
   ProtectType: string
-
   /**
    * 历史是否开通过自动升级开关
    */
   IsOpenStatusHistory: boolean
-
   /**
    * 已使用授权数
    */
   UsedLicenseCnt: number
-
   /**
    * 未到期授权数
    */
   NotExpiredLicenseCnt: number
-
   /**
    * 旗舰版总授权数(有效订单)
    */
   FlagshipVersionLicenseCnt: number
-
   /**
    * 专业版总授权数(有效订单)
    */
   ProVersionLicenseCnt: number
-
   /**
    * 普惠版总授权数(有效订单的授权数)
    */
   CwpVersionLicenseCnt: number
-
   /**
    * 可用惠普版授权数
    */
   AvailableLHLicenseCnt: number
-
   /**
    * 自动加购开关, true 开启, false 关闭
    */
   AutoRepurchaseSwitch: boolean
-
   /**
    * 自动加购订单是否自动续费 ,true 开启, false 关闭
    */
   AutoRepurchaseRenewSwitch: boolean
-
   /**
    * 已销毁订单数
    */
   DestroyOrderNum: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16862,42 +14798,34 @@ export interface ScanVulSettingRequest {
    * 定期检测间隔时间（天）
    */
   TimerInterval: number
-
   /**
    * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞, 以数组方式传参[1,2]
    */
   VulCategories?: Array<number>
-
   /**
    * 危害等级：1-低危；2-中危；3-高危；4-严重,以数组方式传参[1,2,3]
    */
   VulLevels?: Array<number>
-
   /**
    * 定期检测时间，如：02:10:50
    */
   TimerTime?: string
-
   /**
    * 是否是应急漏洞 0 否 1 是
    */
   VulEmergency?: number
-
   /**
    * 扫描开始时间，如：00:00
    */
   StartTime?: string
-
   /**
    * 扫描结束时间，如：08:00
    */
   EndTime?: string
-
   /**
    * 是否开启扫描 1开启 0不开启
    */
   EnableScan?: number
-
   /**
    * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
    */
@@ -16912,12 +14840,10 @@ export interface ExportScanTaskDetailsRequest {
    * 本次检测的任务id（不同于出参的导出本次检测Excel的任务Id）
    */
   TaskId: number
-
   /**
    * 模块类型，当前提供：Malware 木马 , Vul 漏洞 , Baseline 基线
    */
   ModuleType: string
-
   /**
    * 过滤参数：ipOrAlias（服务器名/ip）
    */
@@ -16929,16 +14855,14 @@ export interface ExportScanTaskDetailsRequest {
  */
 export interface ExportBaselineListResponse {
   /**
-      * 导出文件下载地址（已弃用）
+   * 导出文件下载地址（已弃用）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16953,7 +14877,6 @@ export interface DescribeBruteAttackRulesResponse {
    * 爆破阻断规则列表
    */
   Rules: Array<BruteAttackRuleList>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16988,150 +14911,122 @@ export interface AssetProcessBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 进程名称
    */
   Name?: string
-
   /**
    * 进程说明
    */
   Desc?: string
-
   /**
    * 进程路径
    */
   Path?: string
-
   /**
    * 进程ID
    */
   Pid?: string
-
   /**
    * 运行用户
    */
   User?: string
-
   /**
    * 启动时间
    */
   StartTime?: string
-
   /**
    * 启动参数
    */
   Param?: string
-
   /**
    * 进程TTY
    */
   Tty?: string
-
   /**
    * 进程版本
    */
   Version?: string
-
   /**
    * 进程用户组
    */
   GroupName?: string
-
   /**
    * 进程MD5
    */
   Md5?: string
-
   /**
    * 父进程ID
    */
   Ppid?: string
-
   /**
    * 父进程名称
    */
   ParentProcessName?: string
-
   /**
    * 进程状态
    */
   Status?: string
-
   /**
    * 数字签名:0无，1有， 999 空，仅windows
    */
   HasSign?: number
-
   /**
    * 是否通过安装包安装：:0否，1是， 999 空，仅linux
    */
   InstallByPackage?: number
-
   /**
    * 软件包名
    */
   PackageName?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      * 
+   * 
  附加信息
 
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -17140,16 +15035,14 @@ export interface AssetProcessBaseInfo {
  */
 export interface DescribeRiskDnsEventListResponse {
   /**
-      * 恶意请求事件列表
+   * 恶意请求事件列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   List: Array<RiskDnsEvent>
-
   /**
    * 总数
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17171,16 +15064,14 @@ export interface DeleteBruteAttacksRequest {
  */
 export interface DescribeAssetCoreModuleListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Modules: Array<AssetCoreModuleBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17200,13 +15091,11 @@ export interface DescribeLoginWhiteCombinedListResponse {
    * 总数量
    */
   TotalCount: number
-
   /**
-      * 合并后的白名单列表
+   * 合并后的白名单列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LoginWhiteCombinedInfos: Array<LoginWhiteCombinedInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17221,12 +15110,10 @@ export interface ExportVulDetectionExcelResponse {
    * 该参数已废弃
    */
   DownloadUrl?: string
-
   /**
    * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址（不同于入参的本次漏洞检测任务id）
    */
   TaskId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17238,11 +15125,10 @@ export interface ExportVulDetectionExcelResponse {
  */
 export interface DescribeAlarmVertexIdResponse {
   /**
-      * 告警点id列表
+   * 告警点id列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AlarmVertexIds?: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17257,14 +15143,12 @@ export interface DescribeAssetJarListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>Type- uint - 是否必填：否 - 类型	
@@ -17273,24 +15157,20 @@ export interface DescribeAssetJarListRequest {
 3 : Web服务自带库
 4 : 其他依赖包</li>
 <li>Status- string - 是否必填：否 - 是否可执行：0否，1是</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime]
    */
@@ -17325,11 +15205,10 @@ export interface DescribeScanStateRequest {
    * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
    */
   ModuleType: string
-
   /**
-      * 过滤参数;
+   * 过滤参数;
 <li>StrategyId 基线策略ID ,仅ModuleType 为 Baseline 时需要</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -17341,42 +15220,34 @@ export interface SyncBaselineDetectSummaryResponse {
    * 处理进度
    */
   ProgressRate: number
-
   /**
    * 未通过策略总数
    */
   NotPassPolicyCount: number
-
   /**
    * 主机总数
    */
   HostCount: number
-
   /**
    * 开始时间
    */
   StartTime: string
-
   /**
    * 结束时间
    */
   EndTime: string
-
   /**
    * 1:即将进行首次扫描   0:已经扫描过了
    */
   WillFirstScan: number
-
   /**
    * 正在检测的任务ID
    */
   DetectingTaskIds: Array<number>
-
   /**
    * 扫描中剩余时间(分钟)
    */
   LeftMins: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17391,67 +15262,54 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    * 检测模式 0 全盘检测  1快速检测
    */
   CheckPattern: number
-
   /**
    * 检测周期 开始时间，如：02:00:00
    */
   StartTime: string
-
   /**
    * 检测周期 超时结束时间，如：04:00:00
    */
   EndTime: string
-
   /**
    * 是否全部服务器 1 全部 2 自选
    */
   IsGlobal: number
-
   /**
    * 定时检测开关 0 关闭 1开启
    */
   EnableScan: number
-
   /**
    * 监控模式 0 标准 1深度
    */
   MonitoringPattern: number
-
   /**
    * 扫描周期 默认每天 1
    */
   Cycle: number
-
   /**
    * 实时监控 0 关闭 1开启
    */
   RealTimeMonitoring: number
-
   /**
    * 自选服务器时必须 主机quuid的string数组
    */
   QuuidList?: Array<string>
-
   /**
    * 是否自动隔离 1隔离 0 不隔离
    */
   AutoIsolation?: number
-
   /**
    * 是否杀掉进程 1杀掉 0不杀掉
    */
   KillProcess?: number
-
   /**
    * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
    */
   EngineType?: number
-
   /**
    * 启发引擎开关 0 关闭 1开启
    */
   EnableInspiredEngine?: number
-
   /**
    * 是否开启恶意进程查杀[0:未开启,1:开启]
    */
@@ -17466,75 +15324,62 @@ export interface AssetEnvBaseInfo {
    * 名称
    */
   Name?: string
-
   /**
-      * 类型：
+   * 类型：
 0:用户变量
 1:系统变量
-      */
+   */
   Type?: number
-
   /**
    * 启动用户
    */
   User?: string
-
   /**
    * 环境变量值
    */
   Value?: string
-
   /**
    * 服务器IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 服务器外网IP
    */
   MachineWanIp?: string
-
   /**
-      *  附加信息
+   *  附加信息
 
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -17546,12 +15391,10 @@ export interface DescribeMachineListResponse {
    * 主机列表
    */
   Machines: Array<Machine>
-
   /**
    * 主机数量
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17566,162 +15409,133 @@ export interface MalwareInfo {
    * 病毒名称
    */
   VirusName?: string
-
   /**
    * 文件大小
    */
   FileSize?: number
-
   /**
    * 文件MD5
    */
   MD5?: string
-
   /**
    * 文件地址
    */
   FilePath?: string
-
   /**
    * 首次运行时间
    */
   FileCreateTime?: string
-
   /**
    * 最近一次运行时间
    */
   FileModifierTime?: string
-
   /**
    * 危害描述
    */
   HarmDescribe?: string
-
   /**
    * 建议方案
    */
   SuggestScheme?: string
-
   /**
    * 服务器名称
    */
   ServersName?: string
-
   /**
    * 服务器IP
    */
   HostIp?: string
-
   /**
    * 进程名称
    */
   ProcessName?: string
-
   /**
    * 进程ID
    */
   ProcessID?: string
-
   /**
    * 标签特性
    */
   Tags?: Array<string>
-
   /**
-      * 影响广度 // 暂时不提供
+   * 影响广度 // 暂时不提供
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Breadth?: string
-
   /**
-      * 查询热度 // 暂时不提供
+   * 查询热度 // 暂时不提供
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Heat?: string
-
   /**
    * 唯一ID
    */
   Id?: number
-
   /**
    * 文件名称
    */
   FileName?: string
-
   /**
    * 首次发现时间
    */
   CreateTime?: string
-
   /**
    * 最近扫描时间
    */
   LatestScanTime?: string
-
   /**
    * 参考链接
    */
   Reference?: string
-
   /**
-      * 外网ip
+   * 外网ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineWanIp?: string
-
   /**
-      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+   * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PsTree?: string
-
   /**
-      * 主机在线状态 OFFLINE  ONLINE
+   * 主机在线状态 OFFLINE  ONLINE
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineStatus?: string
-
   /**
-      * 状态；4-:待处理，5-已信任，6-已隔离
+   * 状态；4-:待处理，5-已信任，6-已隔离
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: number
-
   /**
-      * 风险等级 0提示、1低、2中、3高、4严重
+   * 风险等级 0提示、1低、2中、3高、4严重
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level?: number
-
   /**
-      * 木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
+   * 木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CheckPlatform?: string
-
   /**
-      * 主机uuid
+   * 主机uuid
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 最近修改时间
+   * 最近修改时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime?: string
-
   /**
-      * 最近访问时间
+   * 最近访问时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrFileAccessTime?: string
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -17733,17 +15547,14 @@ export interface Place {
    * 城市 ID。
    */
   CityId: number
-
   /**
    * 省份 ID。
    */
   ProvinceId: number
-
   /**
    * 国家ID，暂只支持国内：1。
    */
   CountryId: number
-
   /**
    * 位置名称
    */
@@ -17763,12 +15574,10 @@ export interface DescribeExpertServiceOrderListResponse {
    * 总条数
    */
   TotalCount: number
-
   /**
    * 订单列表
    */
   List: Array<ExpertServiceOrderInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17793,27 +15602,22 @@ export interface BaselineDownload {
    * 任务Id
    */
   TaskId: number
-
   /**
    * 任务名称
    */
   TaskName: string
-
   /**
    * 状态0:未完成 1:完成
    */
   Status: number
-
   /**
    * 开始时间
    */
   StartTime: string
-
   /**
    * 完成时间
    */
   EndTime: string
-
   /**
    * 下载地址
    */
@@ -17828,35 +15632,29 @@ export interface DescribeAssetPlanTaskListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>User- string - 是否必填：否 - 用户</li>
 <li>Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 </li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序方式：[FirstTime]
    */
@@ -17868,11 +15666,10 @@ export interface DescribeAssetPlanTaskListRequest {
  */
 export interface DescribePrivilegeEventInfoResponse {
   /**
-      * 本地提权详情
+   * 本地提权详情
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PrivilegeEventInfo: PrivilegeEventInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17887,22 +15684,18 @@ export interface DescribeScanTaskDetailsRequest {
    * 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线
    */
   ModuleType: string
-
   /**
    * 任务ID
    */
   TaskId: number
-
   /**
    * 过滤参数
    */
   Filters?: Array<Filters>
-
   /**
    * 需要返回的数量，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
@@ -17917,27 +15710,22 @@ export interface DescribeProtectDirRelatedServerRequest {
    * 唯一ID
    */
   Id: string
-
   /**
    * 分页条数 最大100条
    */
   Limit: number
-
   /**
    * 偏移量
    */
   Offset: number
-
   /**
    * 过滤参数 ProtectStatus
    */
   Filters?: Array<Filter>
-
   /**
    * 排序方式
    */
   Order?: string
-
   /**
    * 排序值
    */
@@ -17952,12 +15740,10 @@ export interface DescribeBaselineItemListResponse {
    * 无
    */
   List: Array<BaselineItem>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17972,22 +15758,18 @@ export interface DescribeClientExceptionRequest {
    * 客户端异常类型 1:客户端离线，2:客户端卸载
    */
   ExceptionType: number
-
   /**
    * 分页的偏移量
    */
   Offset: number
-
   /**
    * 分页单页限制数目，不为0，最大值100
    */
   Limit: number
-
   /**
    * 起始时间 `2006-01-02 15:04:05` 格式
    */
   StartTime?: string
-
   /**
    * 结束时间 `2006-01-02 15:04:05` 格式
    */
@@ -18012,7 +15794,6 @@ export interface SecurityEventInfo {
    * 安全事件数
    */
   EventCnt: number
-
   /**
    * 受影响机器数
    */
@@ -18024,35 +15805,30 @@ export interface SecurityEventInfo {
  */
 export interface DescribeBaselineAnalysisDataResponse {
   /**
-      * 最后检测时间
+   * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LatestScanTime: string
-
   /**
-      * 是否全部服务器：1-是 0-否
+   * 是否全部服务器：1-是 0-否
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsGlobal: number
-
   /**
-      * 服务器总数
+   * 服务器总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanHostCount: number
-
   /**
-      * 检测项总数
+   * 检测项总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanRuleCount: number
-
   /**
-      * 是否是第一次检测  1是 0不是
+   * 是否是第一次检测  1是 0不是
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IfFirstScan: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18067,127 +15843,102 @@ export interface PrivilegeEventInfo {
    * 数据ID
    */
   Id: number
-
   /**
    * 云镜ID
    */
   Uuid: string
-
   /**
    * 主机ID
    */
   Quuid: string
-
   /**
    * 主机内网IP
    */
   HostIp: string
-
   /**
    * 进程名
    */
   ProcessName: string
-
   /**
    * 进程路径
    */
   FullPath: string
-
   /**
    * 执行命令
    */
   CmdLine: string
-
   /**
    * 用户名
    */
   UserName: string
-
   /**
    * 用户组
    */
   UserGroup: string
-
   /**
    * 进程文件权限
    */
   ProcFilePrivilege: string
-
   /**
    * 父进程名
    */
   ParentProcName: string
-
   /**
    * 父进程用户名
    */
   ParentProcUser: string
-
   /**
    * 父进程用户组
    */
   ParentProcGroup: string
-
   /**
    * 父进程路径
    */
   ParentProcPath: string
-
   /**
    * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
    */
   PsTree: string
-
   /**
    * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
    */
   Status: number
-
   /**
    * 发生时间
    */
   CreateTime: string
-
   /**
    * 机器名
    */
   MachineName: string
-
   /**
    * 建议方案
    */
   SuggestScheme: string
-
   /**
    * 危害描述信息
    */
   HarmDescribe: string
-
   /**
    * 标签
    */
   Tags: Array<string>
-
   /**
    * 参考链接
    */
   References: Array<string>
-
   /**
    * 主机外网ip
    */
   MachineWanIp: string
-
   /**
    * 权限列表|隔开
    */
   NewCaps: string
-
   /**
    * 主机在线状态 OFFLINE  ONLINE
    */
   MachineStatus: string
-
   /**
    * 处理时间
    */
@@ -18202,7 +15953,6 @@ export interface ModifyBanModeRequest {
    * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
    */
   Mode: string
-
   /**
    * 阻断时间，用于标准阻断模式
    */
@@ -18217,12 +15967,10 @@ export interface DescribeBaselineHostIgnoreListRequest {
    * 请求的规则
    */
   RuleID: number
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
@@ -18237,47 +15985,38 @@ export interface BanWhiteListDetail {
    * 白名单ID
    */
   Id: string
-
   /**
    * 白名单别名
    */
   Remark: string
-
   /**
    * 阻断来源IP
    */
   SrcIp: string
-
   /**
    * 修改白名单时间
    */
   ModifyTime: string
-
   /**
    * 创建白名单时间
    */
   CreateTime: string
-
   /**
    * 白名单是否全局
    */
   IsGlobal: boolean
-
   /**
    * 机器的UUID
    */
   Quuid: string
-
   /**
    * 主机安全程序的UUID
    */
   Uuid: string
-
   /**
    * 机器IP
    */
   MachineIp: string
-
   /**
    * 机器名称
    */
@@ -18312,32 +16051,26 @@ export interface DescribeMachineRegionsResponse {
    * CVM 云服务器地域列表
    */
   CVM: Array<RegionInfo>
-
   /**
    * BM 黑石机器地域列表
    */
   BM: Array<RegionInfo>
-
   /**
    * LH 轻量应用服务器地域列表
    */
   LH: Array<RegionInfo>
-
   /**
    * ECM 边缘计算服务器地域列表
    */
   ECM: Array<RegionInfo>
-
   /**
    * Other 混合云地域列表
    */
   Other: Array<RegionInfo>
-
   /**
    * 所有地域列表(包含以上所有地域)
    */
   ALL: Array<RegionInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18362,7 +16095,6 @@ export interface DestroyOrderRequest {
    * 资源ID
    */
   ResourceId: string
-
   /**
    * 授权类型 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
    */
@@ -18377,108 +16109,88 @@ export interface AssetWebAppBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 应用名
    */
   Name?: string
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 根路径
    */
   RootPath?: string
-
   /**
    * 服务类型
    */
   ServiceType?: string
-
   /**
    * 站点域名
    */
   Domain?: string
-
   /**
    * 虚拟路径
    */
   VirtualPath?: string
-
   /**
    * 插件数
    */
   PluginCount?: number
-
   /**
    * 应用ID
    */
   Id?: string
-
   /**
    * 应用描述
    */
   Desc?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -18490,12 +16202,10 @@ export interface DescribeBaselineRuleDetectListResponse {
    * 无
    */
   List: Array<BaselineRuleDetect>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18510,7 +16220,6 @@ export interface AssetCoreModuleParam {
    * 名称
    */
   Name: string
-
   /**
    * 数据
    */
@@ -18535,88 +16244,72 @@ export interface AssetJarBaseInfo {
    * 名称
    */
   Name?: string
-
   /**
    * 类型：1应用程序，2系统类库，3Web服务自带库，8:其他，
    */
   Type?: number
-
   /**
    * 是否可执行：0未知，1是，2否
    */
   Status?: number
-
   /**
    * 版本
    */
   Version?: string
-
   /**
    * 路径
    */
   Path?: string
-
   /**
    * 服务器IP
    */
   MachineIp?: string
-
   /**
    * 服务器名称
    */
   MachineName?: string
-
   /**
    * 操作系统
    */
   OsInfo?: string
-
   /**
    * Jar包ID
    */
   Id?: string
-
   /**
    * Jar包Md5
    */
   Md5?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机uuid
    */
   Uuid?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
    * 服务器外网IP
    */
   MachineWanIp?: string
-
   /**
-      *  附加信息
+   *  附加信息
 
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -18628,7 +16321,6 @@ export interface SeparateMalwaresRequest {
    * 木马事件ID数组。(最大100条)
    */
   Ids: Array<number>
-
   /**
    * 是否杀掉进程
    */
@@ -18643,148 +16335,123 @@ export interface VulInfoList {
    * 漏洞包含的事件id串，多个用“,”分割
    */
   Ids: string
-
   /**
    * 漏洞名
    */
   Name: string
-
   /**
    * 0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中  8:修复失败
    */
   Status: number
-
   /**
    * 漏洞id
    */
   VulId: number
-
   /**
    * 漏洞披露事件
    */
   PublishTime: string
-
   /**
    * 最后检测时间
    */
   LastTime: string
-
   /**
    * 影响主机数
    */
   HostCount: number
-
   /**
    * 漏洞等级 1:低 2:中 3:高 4:严重
    */
   Level: number
-
   /**
-      * 废弃字段
+   * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   From: number
-
   /**
-      * 描述
+   * 描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Descript: string
-
   /**
-      * 废弃字段
+   * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PublishTimeWisteria: string
-
   /**
-      * 废弃字段
+   * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NameWisteria: string
-
   /**
-      * 废弃字段
+   * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DescriptWisteria: string
-
   /**
-      * 聚合后事件状态串
+   * 聚合后事件状态串
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StatusStr: string
-
   /**
-      * cve编号
+   * cve编号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CveId: string
-
   /**
-      * CVSS评分
+   * CVSS评分
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CvssScore: number
-
   /**
-      * 漏洞标签 多个逗号分割
+   * 漏洞标签 多个逗号分割
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Labels: string
-
   /**
-      * 是否能自动修复且包含能自动修复的主机， 0=否  1=是
+   * 是否能自动修复且包含能自动修复的主机， 0=否  1=是
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FixSwitch: number
-
   /**
-      * 最后扫描任务的id
+   * 最后扫描任务的id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskId: number
-
   /**
-      * 是否支持防御， 0:不支持 1:支持
+   * 是否支持防御， 0:不支持 1:支持
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsSupportDefense: number
-
   /**
-      * 已防御的攻击次数
+   * 已防御的攻击次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DefenseAttackCount: number
-
   /**
-      * 首次出现时间
+   * 首次出现时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstAppearTime: string
-
   /**
-      * 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
+   * 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VulCategory: number
-
   /**
-      * 攻击热度级别
+   * 攻击热度级别
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AttackLevel?: number
-
   /**
-      * 漏洞修复后是否需要重启
+   * 漏洞修复后是否需要重启
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FixNoNeedRestart?: boolean
-
   /**
-      * 检测方式0 - 版本比对, 1 - POC验证
+   * 检测方式0 - 版本比对, 1 - POC验证
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Method?: number
 }
 
@@ -18796,11 +16463,10 @@ export interface ExportIgnoreRuleEffectHostListRequest {
    * 检测项id
    */
   RuleId: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>AliasName- String- 主机别名</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -18812,37 +16478,30 @@ export interface DescribeVulHostCountScanTimeResponse {
    * 总漏洞数
    */
   TotalVulCount: number
-
   /**
    * 漏洞影响主机数
    */
   VulHostCount: number
-
   /**
    * 扫描时间
    */
   ScanTime: string
-
   /**
    * 是否第一次检测
    */
   IfFirstScan: boolean
-
   /**
    * 运行中的任务号, 没有任务则为0
    */
   TaskId: number
-
   /**
    * 最后一次修复漏洞的时间
    */
   LastFixTime: string
-
   /**
    * 是否有支持自动修复的漏洞事件
    */
   hadAutoFixVul: boolean
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18857,35 +16516,29 @@ export interface DescribeAssetCoreModuleListRequest {
    * 服务器Uuid
    */
   Uuid?: string
-
   /**
    * 服务器Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name- string - 是否必填：否 - 包名</li>
 <li>User- string - 是否必填：否 - 用户</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 排序依据[Size|FirstTime|ProcessCount|ModuleCount]
    */
@@ -18900,7 +16553,6 @@ export interface DeleteAttackLogsRequest {
    * 日志ID数组，最大100条。
    */
   Ids?: Array<number>
-
   /**
    * 是否全部删除
    */
@@ -18912,70 +16564,60 @@ export interface DeleteAttackLogsRequest {
  */
 export interface DescribeBaselineStrategyDetailResponse {
   /**
-      * 策略扫描通过率
+   * 策略扫描通过率
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PassRate: number
-
   /**
-      * 策略名
+   * 策略名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StrategyName: string
-
   /**
-      * 策略扫描周期(天)
+   * 策略扫描周期(天)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanCycle: string
-
   /**
-      * 定期检测时间, 该时间下发扫描
+   * 定期检测时间, 该时间下发扫描
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScanAt: string
-
   /**
-      * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+   * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsGlobal: number
-
   /**
-      * 云服务器类型：
+   * 云服务器类型：
 cvm：腾讯云服务器
 bm：裸金属
 ecm：边缘计算主机
 lh: 轻量应用服务器
 ohter: 混合云机器
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineType: string
-
   /**
-      * 主机地域
+   * 主机地域
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Region: string
-
   /**
-      * 用户该策略下的所有主机id
+   * 用户该策略下的所有主机id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuids: Array<string>
-
   /**
-      * 用户该策略下所有的基线id
+   * 用户该策略下所有的基线id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CategoryIds: Array<string>
-
   /**
-      * 1 表示扫描过, 0没扫描过
+   * 1 表示扫描过, 0没扫描过
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IfScanned: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18990,21 +16632,19 @@ export interface DescribeBaselineListRequest {
    * 分页参数 最大100条
    */
   Limit: number
-
   /**
    * 分页参数
    */
   Offset: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>StrategyId- Uint64 - 基线策略id</li>
 <li>Status - Uint64 - 处理状态1已通过 0未通过</li>
 <li>Level - Uint64[] - 处理状态1已通过 0未通过</li>BaselineName 
 <li>BaselineName  - String - 基线名称</li>
 <li>Quuid- String - 主机quuid</li>
 <li>Uuid- String - 主机uuid</li>
-      */
+   */
   Filters?: Array<Filters>
 }
 
@@ -19016,7 +16656,6 @@ export interface ModifyLicenseBindsResponse {
    * 任务ID
    */
   TaskId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19051,7 +16690,6 @@ export interface DescribeBaselineTopRequest {
    * 动态top值
    */
   Top: number
-
   /**
    * 策略id
    */
@@ -19066,22 +16704,18 @@ export interface DescribeAssetAppProcessListRequest {
    * 主机Quuid
    */
   Quuid: string
-
   /**
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * App名
    */
   Name: string
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -19096,27 +16730,22 @@ export interface DescribeLicenseBindListRequest {
    * 授权ID
    */
   LicenseId: number
-
   /**
    * 授权类型
    */
   LicenseType: number
-
   /**
    * 资源ID
    */
   ResourceId: string
-
   /**
    * <li>Keywords 机器别名/公私IP 模糊查询</li>
    */
   Filters?: Array<Filters>
-
   /**
    * 限制条数,默认10.
    */
   Limit?: number
-
   /**
    * 偏移量,默认0.
    */
@@ -19138,12 +16767,10 @@ export interface Filter {
    * 过滤键的名称。
    */
   Name: string
-
   /**
    * 一个或者多个过滤值。
    */
   Values: Array<string>
-
   /**
    * 模糊搜索
    */
@@ -19158,16 +16785,14 @@ export interface DescribeAccountStatisticsRequest {
    * 返回数量，默认为10，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Username - String - 是否必填：否 - 帐号用户名</li>
-      */
+   */
   Filters?: Array<Filter>
 }
 
@@ -19179,47 +16804,38 @@ export interface SecurityButlerInfo {
    * 数据id
    */
   Id: number
-
   /**
    * 订单id
    */
   OrderId: number
-
   /**
    * cvm id
    */
   Quuid: string
-
   /**
    * 服务状态 0-服务中,1-已到期 2已销毁
    */
   Status: number
-
   /**
    * 服务开始时间
    */
   StartTime: string
-
   /**
    * 服务结束时间
    */
   EndTime: string
-
   /**
    * 主机名称
    */
   HostName: string
-
   /**
    * 主机Ip
    */
   HostIp: string
-
   /**
    * 主机 uuid
    */
   Uuid: string
-
   /**
    * 主机风险数
    */
@@ -19234,12 +16850,10 @@ export interface DescribeBaselineHostDetectListResponse {
    * 无
    */
   List: Array<BaselineHostDetect>
-
   /**
    * 总数
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19254,13 +16868,11 @@ export interface DescribeAssetProcessInfoListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Process: Array<AssetProcessBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19275,7 +16887,6 @@ export interface ProcessStatistics {
    * 进程名。
    */
   ProcessName: string
-
   /**
    * 主机数量。
    */
@@ -19287,11 +16898,10 @@ export interface ProcessStatistics {
  */
 export interface DescribeScanScheduleResponse {
   /**
-      * 检测进度
+   * 检测进度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Schedule: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19303,33 +16913,29 @@ export interface DescribeScanScheduleResponse {
  */
 export interface BaselineDetail {
   /**
-      * 基线描述
+   * 基线描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Description: string
-
   /**
-      * 危害等级
+   * 危害等级
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Level: number
-
   /**
-      * package名
+   * package名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PackageName: string
-
   /**
-      * 父级id
+   * 父级id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ParentId: number
-
   /**
-      * 基线名
+   * 基线名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name: string
 }
 
@@ -19351,9 +16957,8 @@ export interface DescribeAssetWebAppListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name - String - 是否必填：否 - 应用名</li>
 <li>Domain - String - 是否必填：否 - 站点域名</li>
@@ -19370,24 +16975,20 @@ export interface DescribeAssetWebAppListRequest {
 9:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序：[FirstTime|PluginCount]
    */
@@ -19402,32 +17003,26 @@ export interface ExpertServiceOrderInfo {
    * 订单id
    */
   OrderId: number
-
   /**
    * 订单类型 1应急 2 旗舰重保 3 安全管家
    */
   InquireType: number
-
   /**
    * 服务数量
    */
   InquireNum: number
-
   /**
    * 服务开始时间
    */
   BeginTime: string
-
   /**
    * 服务结束时间
    */
   EndTime: string
-
   /**
    * 服务时长几个月
    */
   ServiceTime: number
-
   /**
    * 订单状态 0 未启动 1 服务中 2已过期 3完成，4退费销毁
    */
@@ -19457,7 +17052,6 @@ export interface AccountStatistics {
    * 用户名。
    */
   Username: string
-
   /**
    * 主机数量。
    */
@@ -19472,12 +17066,10 @@ export interface AssetUserKeyInfo {
    * 公钥值
    */
   Value: string
-
   /**
    * 公钥备注
    */
   Comment: string
-
   /**
    * 加密方式
    */
@@ -19492,12 +17084,10 @@ export interface DescribeMachinesResponse {
    * 主机列表
    */
   Machines: Array<Machine>
-
   /**
    * 主机数量
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19522,9 +17112,8 @@ export interface DescribeAssetWebLocationListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name - String - 是否必填：否 - 域名</li>
 <li>User - String - 是否必填：否 - 运行用户</li>
@@ -19543,24 +17132,20 @@ export interface DescribeAssetWebLocationListRequest {
 10:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序：[FirstTime|PathCount]
    */
@@ -19575,7 +17160,6 @@ export interface DescribeAssetHostTotalCountRequest {
    * 主机Uuid
    */
   Uuid: string
-
   /**
    * 主机Quuid
    */
@@ -19590,7 +17174,6 @@ export interface DescribeVulLevelCountRequest {
    * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
    */
   VulCategory?: number
-
   /**
    * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
    */
@@ -19627,17 +17210,15 @@ export interface DescribeProVersionStatusRequest {
  */
 export interface DescribeBaselineListResponse {
   /**
-      * 基线信息列表
+   * 基线信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BaselineList: Array<BaselineInfo>
-
   /**
-      * 分页查询记录总数
+   * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19652,7 +17233,6 @@ export interface DescribeBaselineHostRiskTopResponse {
    * 风险主机top5
    */
   HostRiskTop5: Array<HostRiskLevelCount>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19664,11 +17244,10 @@ export interface DescribeBaselineHostRiskTopResponse {
  */
 export interface DescribeAlarmIncidentNodesResponse {
   /**
-      * 告警点所在事件的所有节点信息,可能包含多事件
+   * 告警点所在事件的所有节点信息,可能包含多事件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IncidentNodes?: Array<IncidentVertexInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19683,12 +17262,10 @@ export interface DescribeExpertServiceOrderListRequest {
    * <li>InquireType- String - 是否必填：否 - 订单类型过滤，</li>
    */
   Filters?: Array<Filters>
-
   /**
    * 分页条数 最大100条
    */
   Limit?: number
-
   /**
    * 分页步长
    */
@@ -19700,16 +17277,14 @@ export interface DescribeExpertServiceOrderListRequest {
  */
 export interface ExportVulEffectHostListResponse {
   /**
-      * 已废弃
+   * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadUrl: string
-
   /**
    * 导出任务Id , 可通过ExportTasks 接口下载
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19724,12 +17299,10 @@ export interface DescribeVulTopRequest {
    * 漏洞风险服务器top，1-100
    */
   Top: number
-
   /**
    * 1:web-cms 漏洞，2.应用漏洞 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞，不填或者填0时返回 1，2，4，5 的总统计数据
    */
   VulCategory?: number
-
   /**
    * 是否仅统计重点关注漏洞 1=仅统计重点关注漏洞, 0=统计全部漏洞
    */
@@ -19754,37 +17327,30 @@ export interface SearchTemplate {
    * 检索名称
    */
   Name: string
-
   /**
    * 检索索引类型
    */
   LogType: string
-
   /**
    * 检索语句
    */
   Condition: string
-
   /**
    * 时间范围
    */
   TimeRange: string
-
   /**
    * 转换的检索语句内容
    */
   Query: string
-
   /**
    * 检索方式。输入框检索：standard,过滤，检索：simple
    */
   Flag: string
-
   /**
    * 展示数据
    */
   DisplayData: string
-
   /**
    * 规则ID
    */
@@ -19799,75 +17365,61 @@ export interface DescribeGeneralStatResponse {
    * 云主机总数
    */
   MachinesAll: number
-
   /**
    * 云主机没有安装主机安全客户端的总数
    */
   MachinesUninstalled: number
-
   /**
    * 主机安全客户端总数的总数
    */
   AgentsAll: number
-
   /**
    * 主机安全客户端在线的总数
    */
   AgentsOnline: number
-
   /**
    * 主机安全客户端 离线+关机 的总数
    */
   AgentsOffline: number
-
   /**
    * 主机安全客户端专业版的总数
    */
   AgentsPro: number
-
   /**
    * 主机安全客户端基础版的总数
    */
   AgentsBasic: number
-
   /**
    * 7天内到期的预付费专业版总数
    */
   AgentsProExpireWithInSevenDays: number
-
   /**
    * 风险主机总数
    */
   RiskMachine: number
-
   /**
    * 已关机总数
    */
   Shutdown: number
-
   /**
    * 已离线总数
    */
   Offline: number
-
   /**
-      * 旗舰版主机数
+   * 旗舰版主机数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FlagshipMachineCnt: number
-
   /**
-      * 保护天数
+   * 保护天数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProtectDays: number
-
   /**
-      * 15天内新增的主机数
+   * 15天内新增的主机数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AddedOnTheFifteen: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19902,137 +17454,115 @@ export interface BruteAttackInfo {
    * 唯一Id
    */
   Id?: number
-
   /**
-      * 主机安全客户端唯一标识UUID
+   * 主机安全客户端唯一标识UUID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Uuid?: string
-
   /**
-      * 主机ip
+   * 主机ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineIp?: string
-
   /**
-      * 主机名
+   * 主机名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineName?: string
-
   /**
-      * 用户名
+   * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserName?: string
-
   /**
-      * 来源ip
+   * 来源ip
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SrcIp?: string
-
   /**
-      * SUCCESS：破解成功；FAILED：破解失败
+   * SUCCESS：破解成功；FAILED：破解失败
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: string
-
   /**
-      * 国家id
+   * 国家id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Country?: number
-
   /**
-      * 城市id
+   * 城市id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   City?: number
-
   /**
-      * 省份id
+   * 省份id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Province?: number
-
   /**
-      * 创建时间
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime?: string
-
   /**
-      * 阻断状态：1-阻断成功；非1-阻断失败
+   * 阻断状态：1-阻断成功；非1-阻断失败
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BanStatus?: number
-
   /**
-      * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
+   * 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EventType?: number
-
   /**
-      * 发生次数
+   * 发生次数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Count?: number
-
   /**
-      * 机器UUID
+   * 机器UUID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Quuid?: string
-
   /**
-      * 是否为专业版（true/false）
+   * 是否为专业版（true/false）
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IsProVersion?: boolean
-
   /**
-      * 被攻击的服务的用户名
+   * 被攻击的服务的用户名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Protocol?: string
-
   /**
-      * 端口
+   * 端口
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Port?: number
-
   /**
-      * 最近攻击时间
+   * 最近攻击时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ModifyTime?: string
-
   /**
-      * 实例ID
+   * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InstanceId?: string
-
   /**
-      * 0：待处理，1：忽略，5：已处理，6：加入白名单
+   * 0：待处理，1：忽略，5：已处理，6：加入白名单
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DataStatus?: number
-
   /**
-      * 附加信息
+   * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
-
   /**
-      * 地理位置中文名
+   * 地理位置中文名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Location?: string
 }
 
@@ -20044,47 +17574,39 @@ export interface WarningInfoObj {
    * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高危命令，7：反弹sell，8：本地提权，9：应用漏洞，10：web-cms漏洞，11：应急漏洞，12：安全基线 ,13: 防篡改，14：恶意请求，15: 网络攻击，16：Windows系统漏洞，17：Linux软件漏洞，18：核心文件监控告警，19：客户端卸载告警。20：客户端离线告警
    */
   Type: number
-
   /**
    * 1: 关闭告警 0: 开启告警
    */
   DisablePhoneWarning: number
-
   /**
    * 开始时间，格式: HH:mm
    */
   BeginTime: string
-
   /**
    * 结束时间，格式: HH:mm
    */
   EndTime: string
-
   /**
    * 时区信息
    */
   TimeZone: string
-
   /**
    * 漏洞等级控制位（对应DB的十进制存储）
    */
   ControlBit: number
-
   /**
    * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高
    */
   ControlBits: string
-
   /**
-      * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
+   * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostRange?: number
-
   /**
-      * 配置的告警范围主机个数，前端用此判断展示提示信息
+   * 配置的告警范围主机个数，前端用此判断展示提示信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Count: number
 }
 
@@ -20096,17 +17618,14 @@ export interface UpdateMachineTagsRequest {
    * 机器 Quuid
    */
   Quuid: string
-
   /**
    * 标签ID，该操作会覆盖原有的标签列表
    */
   TagIds?: Array<number>
-
   /**
    * 服务器地区 如: ap-guangzhou
    */
   MachineRegion?: string
-
   /**
    * 服务器类型(CVM|BM|ECM|LH|Other)
    */
@@ -20121,12 +17640,10 @@ export interface DescribeBaselineItemDetectListResponse {
    * 总数
    */
   Total: number
-
   /**
    * 无
    */
   List: Array<BaselineItemDetect>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20141,47 +17658,39 @@ export interface UpdateBaselineStrategyRequest {
    * 策略id
    */
   StrategyId: number
-
   /**
    * 策略名称
    */
   StrategyName: string
-
   /**
    * 检测周期
    */
   ScanCycle: number
-
   /**
    * 定期检测时间，该时间下发扫描
    */
   ScanAt: string
-
   /**
    * 该策略下选择的基线id数组
    */
   CategoryIds: Array<string>
-
   /**
    * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
    */
   IsGlobal: number
-
   /**
-      * 云主机类型：
+   * 云主机类型：
 cvm：腾讯云服务器
 bm：裸金属
 ecm：边缘计算主机
 lh:轻量应用服务器
 other:混合云机器
-      */
+   */
   MachineType: string
-
   /**
    * 主机地域 ap-guangzhou
    */
   RegionCode: string
-
   /**
    * 主机id数组
    */
@@ -20196,13 +17705,11 @@ export interface DescribeHostLoginListResponse {
    * 总数
    */
   TotalCount?: number
-
   /**
-      * 登录审计列表
+   * 登录审计列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   HostLoginList?: Array<HostLoginList>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20224,28 +17731,24 @@ export interface DescribeBaselineAnalysisDataRequest {
  */
 export interface DescribeBaselineDetectListRequest {
   /**
-      * <li>PolicyName - string - 是否必填：否 - 策略名称</li>
+   * <li>PolicyName - string - 是否必填：否 - 策略名称</li>
 <li>PolicyDetectStatus - int - 是否必填：否 - 1:检测中 2:检测完成</li>
 <li>FirstTime - string - 是否必填：否 - 开始时间</li>
 <li>LastTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [HostCount|StartTime|StopTime]
    */
@@ -20260,138 +17763,112 @@ export interface AssetPortBaseInfo {
    * 主机内网IP
    */
   MachineIp?: string
-
   /**
    * 主机外网IP
    */
   MachineWanIp?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 操作系统信息
    */
   OsInfo?: string
-
   /**
    * 主机业务组ID
    */
   ProjectId?: number
-
   /**
-      * 主机标签
+   * 主机标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Tag?: Array<MachineTag>
-
   /**
    * 进程名称
    */
   ProcessName?: string
-
   /**
    * 进程版本
    */
   ProcessVersion?: string
-
   /**
    * 进程路径
    */
   ProcessPath?: string
-
   /**
    * 进程ID
    */
   Pid?: string
-
   /**
    * 运行用户
    */
   User?: string
-
   /**
    * 启动时间
    */
   StartTime?: string
-
   /**
    * 启动参数
    */
   Param?: string
-
   /**
    * 进程TTY
    */
   Teletype?: string
-
   /**
    * 端口
    */
   Port?: string
-
   /**
    * 所属用户组
    */
   GroupName?: string
-
   /**
    * 进程MD5
    */
   Md5?: string
-
   /**
    * 父进程ID
    */
   Ppid?: string
-
   /**
    * 父进程名称
    */
   ParentProcessName?: string
-
   /**
    * 端口协议
    */
   Proto?: string
-
   /**
    * 绑定IP
    */
   BindIp?: string
-
   /**
    * 主机名称
    */
   MachineName?: string
-
   /**
-      * 数据更新时间
+   * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdateTime?: string
-
   /**
    * 首次采集时间
    */
   FirstTime?: string
-
   /**
    * 是否新增[0:否|1:是]
    */
   IsNew?: number
-
   /**
-      *  附加信息
+   *  附加信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MachineExtraInfo?: MachineExtraInfo
 }
 
@@ -20403,12 +17880,10 @@ export interface DescribeAssetWebLocationInfoRequest {
    * 服务器Quuid
    */
   Quuid: string
-
   /**
    * 服务器Uuid
    */
   Uuid: string
-
   /**
    * 站点Id
    */
@@ -20423,12 +17898,10 @@ export interface DescribeAlarmVertexIdRequest {
    * 机器uuid
    */
   Uuid: string
-
   /**
    * 开始时间戳
    */
   StartTime: number
-
   /**
    * 结束时间戳
    */
@@ -20440,16 +17913,14 @@ export interface DescribeAlarmVertexIdRequest {
  */
 export interface DescribeAssetInitServiceListResponse {
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Services: Array<AssetInitServiceBaseInfo>
-
   /**
    * 总数量
    */
   Total: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20464,14 +17935,12 @@ export interface ModifyBaselinePolicyRequest {
    * 无
    */
   Data: BaselinePolicy
-
   /**
-      * <li>RuleName - String - 是否必填：否 - 规则名称</li>
+   * <li>RuleName - String - 是否必填：否 - 规则名称</li>
 <li>CategoryId - int64 - 是否必填：否 自定义筛选为-1 - 规则分类</li>
 <li>RuleType - int - 是否必填：否 0:系统 1:自定义 - 规则类型</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 是否按照过滤的全选
    */
@@ -20483,7 +17952,7 @@ export interface ModifyBaselinePolicyRequest {
  */
 export interface DescribeBaselineHostDetectListRequest {
   /**
-      * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
+   * <li>PolicyId - int64 - 是否必填：否 - 策略Id</li>
 <li>HostName - string - 是否必填：否 - 主机名称</i>
 <li>HostIp - string - 是否必填：否 - 主机Ip</i>
 <li>ItemId - int64 - 是否必填：否 - 项Id</i>
@@ -20492,24 +17961,20 @@ export interface DescribeBaselineHostDetectListRequest {
 <li>Level - int - 是否必填：否 - 风险等级</li>
 <li>StartTime - string - 是否必填：否 - 开时时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 限制条数,默认10,最大100
    */
   Limit?: number
-
   /**
    * 偏移量,默认0
    */
   Offset?: number
-
   /**
    * 排序方式: [ASC:升序|DESC:降序]
    */
   Order?: string
-
   /**
    * 可选排序列: [LastTime|ItemCount|PassedItemCount|NotPassedItemCount|FirstTime]
    */
@@ -20524,13 +17989,11 @@ export interface DescribeAssetWebFrameListResponse {
    * 记录总数
    */
   Total: number
-
   /**
-      * 列表
+   * 列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebFrames: Array<AssetWebFrameBaseInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20545,7 +18008,6 @@ export interface DescribeWarningListResponse {
    * 获取告警列表
    */
   WarningInfoList: Array<WarningInfoObj>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20560,9 +18022,8 @@ export interface DescribeAssetUserListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Name - String - 是否必填：否 - 账户名（模糊匹配）</li>
 <li>NameStrict - String - 是否必填：否 - 账户名（严格匹配）</li>
@@ -20581,28 +18042,24 @@ export interface DescribeAssetUserListRequest {
 <li>ShellLoginStatus - uint64 - 是否必填：否 - 是否shell登录性，0不是；1是 仅linux</li>
 <li>PasswordStatus - uint64 - 是否必填：否 - 密码状态：1正常 2即将过期 3已过期 4已锁定 仅linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
-      * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]
+   * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]
 PasswordLockDays
-      */
+   */
   By?: string
 }
 
@@ -20624,14 +18081,12 @@ export interface DescribeAssetSystemPackageListRequest {
    * 主机Uuid
    */
   Uuid?: string
-
   /**
    * 主机Quuid
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>Name - String - 是否必填：否 - 包 名</li>
 <li>StartTime - String - 是否必填：否 - 安装开始时间</li>
 <li>EndTime - String - 是否必填：否 - 安装开始时间</li>
@@ -20640,24 +18095,20 @@ export interface DescribeAssetSystemPackageListRequest {
 2:dpkg
 3:java
 4:system</li>
-      */
+   */
   Filters?: Array<Filter>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc-升序 或 desc-降序。默认：desc-降序
    */
   Order?: string
-
   /**
    * 排序方式可选：[FistTime|InstallTime:安装时间]
    */
@@ -20672,12 +18123,10 @@ export interface MachineTag {
    * 关联标签ID
    */
   Rid: number
-
   /**
    * 标签名
    */
   Name: string
-
   /**
    * 标签ID
    */
@@ -20705,12 +18154,10 @@ export interface Filters {
    * 过滤键的名称。
    */
   Name: string
-
   /**
    * 一个或者多个过滤值。
    */
   Values: Array<string>
-
   /**
    * 是否模糊匹配，前端框架会带上，可以不管
    */
@@ -20725,9 +18172,8 @@ export interface DescribeAssetWebServiceInfoListRequest {
    * 查询指定Quuid主机的信息
    */
   Quuid?: string
-
   /**
-      * 过滤条件。
+   * 过滤条件。
 <li>User- string - 是否必填：否 - 运行用户</li>
 <li>Name- string - 是否必填：否 - Web服务名：
 1:Tomcat
@@ -20742,25 +18188,21 @@ export interface DescribeAssetWebServiceInfoListRequest {
 10:Tengine</li>
 <li>OsType- string - 是否必填：否 - Windows/linux</li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
-      */
+   */
   Filters?: Array<AssetFilters>
-
   /**
-      * 偏移量，默认为0。
+   * 偏移量，默认为0。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-      */
+   */
   Offset?: number
-
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
-
   /**
    * 排序方式，asc升序 或 desc降序
    */
   Order?: string
-
   /**
    * 可选排序：[FirstTime|ProcessCount]
    */
@@ -20785,7 +18227,6 @@ export interface DescribeSearchTemplatesRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认为10，最大值为100。
    */
@@ -20800,12 +18241,10 @@ export interface DescribeBaselineItemIgnoreListResponse {
    * 无
    */
   List?: Array<BaselineItemInfo>
-
   /**
    * 总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

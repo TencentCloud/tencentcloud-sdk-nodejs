@@ -7,10 +7,10 @@ export declare type ExportBashEventsRequest = null;
  */
 export interface ModifyAutoOpenProVersionConfigRequest {
     /**
-      * 设置自动开通状态。
-<li>CLOSE：关闭</li>
-<li>OPEN：打开</li>
-      */
+     * 设置自动开通状态。
+  <li>CLOSE：关闭</li>
+  <li>OPEN：打开</li>
+     */
     Status: string;
 }
 /**
@@ -18,16 +18,16 @@ export interface ModifyAutoOpenProVersionConfigRequest {
  */
 export interface DescribeProcessTaskStatusResponse {
     /**
-      * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：进程获取中</li>
-<li>FAILED：进程获取失败</li>
-      */
+     * 任务状态。
+  <li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
+  <li>AGENT_OFFLINE：云镜客户端离线</li>
+  <li>COLLECTING：进程获取中</li>
+  <li>FAILED：进程获取失败</li>
+     */
     Status?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -35,12 +35,12 @@ export interface DescribeProcessTaskStatusResponse {
  */
 export interface ExportReverseShellEventsResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -48,21 +48,21 @@ export interface ExportReverseShellEventsResponse {
  */
 export interface DescribeBashRulesRequest {
     /**
-      * 0-系统规则; 1-用户规则
-      */
+     * 0-系统规则; 1-用户规则
+     */
     Type: number;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(规则名称)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键字(规则名称)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -70,12 +70,12 @@ export interface DescribeBashRulesRequest {
  */
 export interface ExportPrivilegeEventsResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -83,32 +83,32 @@ export interface ExportPrivilegeEventsResponse {
  */
 export interface DescribeAlarmAttributeResponse {
     /**
-      * 防护软件离线告警状态：
-<li>OPEN：告警已开启</li>
-<li>CLOSE： 告警已关闭</li>
-      */
+     * 防护软件离线告警状态：
+  <li>OPEN：告警已开启</li>
+  <li>CLOSE： 告警已关闭</li>
+     */
     Offline?: string;
     /**
-      * 发现木马告警状态：
-<li>OPEN：告警已开启</li>
-<li>CLOSE： 告警已关闭</li>
-      */
+     * 发现木马告警状态：
+  <li>OPEN：告警已开启</li>
+  <li>CLOSE： 告警已关闭</li>
+     */
     Malware?: string;
     /**
-      * 发现异地登录告警状态：
-<li>OPEN：告警已开启</li>
-<li>CLOSE： 告警已关闭</li>
-      */
+     * 发现异地登录告警状态：
+  <li>OPEN：告警已开启</li>
+  <li>CLOSE： 告警已关闭</li>
+     */
     NonlocalLogin?: string;
     /**
-      * 被暴力破解成功告警状态：
-<li>OPEN：告警已开启</li>
-<li>CLOSE： 告警已关闭</li>
-      */
+     * 被暴力破解成功告警状态：
+  <li>OPEN：告警已开启</li>
+  <li>CLOSE： 告警已关闭</li>
+     */
     CrackSuccess?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -116,16 +116,16 @@ export interface DescribeAlarmAttributeResponse {
  */
 export interface DescribeWeeklyReportBruteAttacksResponse {
     /**
-      * 专业周报密码破解数组。
-      */
+     * 专业周报密码破解数组。
+     */
     WeeklyReportBruteAttacks?: Array<WeeklyReportBruteAttack>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -133,28 +133,28 @@ export interface DescribeWeeklyReportBruteAttacksResponse {
  */
 export interface DescribeAgentVulsRequest {
     /**
-      * 漏洞类型。
-<li>WEB: Web应用漏洞</li>
-<li>SYSTEM：系统组件漏洞</li>
-<li>BASELINE：安全基线</li>
-      */
+     * 漏洞类型。
+  <li>WEB: Web应用漏洞</li>
+  <li>SYSTEM：系统组件漏洞</li>
+  <li>BASELINE：安全基线</li>
+     */
     VulType: string;
     /**
-      * 客户端UUID。
-      */
+     * 客户端UUID。
+     */
     Uuid: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
-      */
+     * 过滤条件。
+  <li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -162,14 +162,14 @@ export interface DescribeAgentVulsRequest {
  */
 export interface DescribeTagsRequest {
     /**
-      * 云主机类型。
-<li>CVM：表示虚拟主机</li>
-<li>BM:  表示黑石物理机</li>
-      */
+     * 云主机类型。
+  <li>CVM：表示虚拟主机</li>
+  <li>BM:  表示黑石物理机</li>
+     */
     MachineType?: string;
     /**
-      * 机器所属地域。如：ap-guangzhou，ap-shanghai
-      */
+     * 机器所属地域。如：ap-guangzhou，ap-shanghai
+     */
     MachineRegion?: string;
 }
 /**
@@ -177,8 +177,8 @@ export interface DescribeTagsRequest {
  */
 export interface AddMachineTagResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -186,24 +186,24 @@ export interface AddMachineTagResponse {
  */
 export interface UsualPlace {
     /**
-      * ID。
-      */
+     * ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一标识UUID。
-      */
+     * 云镜客户端唯一标识UUID。
+     */
     Uuid: string;
     /**
-      * 国家 ID。
-      */
+     * 国家 ID。
+     */
     CountryId: number;
     /**
-      * 省份 ID。
-      */
+     * 省份 ID。
+     */
     ProvinceId: number;
     /**
-      * 城市 ID。
-      */
+     * 城市 ID。
+     */
     CityId: number;
 }
 /**
@@ -211,17 +211,17 @@ export interface UsualPlace {
  */
 export interface DescribeReverseShellRulesRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -229,12 +229,12 @@ export interface DescribeReverseShellRulesRequest {
  */
 export interface SetBashEventsStatusRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
     /**
-      * 新状态(0-待处理 1-高危 2-正常)
-      */
+     * 新状态(0-待处理 1-高危 2-正常)
+     */
     Status: number;
 }
 /**
@@ -242,27 +242,27 @@ export interface SetBashEventsStatusRequest {
  */
 export interface DescribeAccountsRequest {
     /**
-      * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Uuid表示，查询该主机下列表信息。
-      */
+     * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Uuid表示，查询该主机下列表信息。
+     */
     Uuid?: string;
     /**
-      * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Username表示，查询该用户名下列表信息。
-      */
+     * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Username表示，查询该用户名下列表信息。
+     */
     Username?: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Username - String - 是否必填：否 - 帐号名</li>
-<li>Privilege - String - 是否必填：否 - 帐号类型（ORDINARY: 普通帐号 | SUPPER: 超级管理员帐号）</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
+     * 过滤条件。
+  <li>Username - String - 是否必填：否 - 帐号名</li>
+  <li>Privilege - String - 是否必填：否 - 帐号类型（ORDINARY: 普通帐号 | SUPPER: 超级管理员帐号）</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -270,17 +270,17 @@ export interface DescribeAccountsRequest {
  */
 export interface DescribeReverseShellEventsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(主机内网IP|进程名)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键字(主机内网IP|进程名)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -288,34 +288,34 @@ export interface DescribeReverseShellEventsRequest {
  */
 export interface WeeklyReportVul {
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 漏洞名称。
-      */
+     * 漏洞名称。
+     */
     VulName: string;
     /**
-      * 漏洞类型。
-<li> WEB : Web漏洞</li>
-<li> SYSTEM :系统组件漏洞</li>
-<li> BASELINE : 安全基线</li>
-      */
+     * 漏洞类型。
+  <li> WEB : Web漏洞</li>
+  <li> SYSTEM :系统组件漏洞</li>
+  <li> BASELINE : 安全基线</li>
+     */
     VulType: string;
     /**
-      * 漏洞描述。
-      */
+     * 漏洞描述。
+     */
     Description: string;
     /**
-      * 漏洞状态。
-<li> UN_OPERATED : 待处理</li>
-<li> SCANING : 扫描中</li>
-<li> FIXED : 已修复</li>
-      */
+     * 漏洞状态。
+  <li> UN_OPERATED : 待处理</li>
+  <li> SCANING : 扫描中</li>
+  <li> FIXED : 已修复</li>
+     */
     VulStatus: string;
     /**
-      * 最后扫描时间。
-      */
+     * 最后扫描时间。
+     */
     LastScanTime: string;
 }
 /**
@@ -323,16 +323,16 @@ export interface WeeklyReportVul {
  */
 export interface DescribeWeeklyReportBruteAttacksRequest {
     /**
-      * 专业周报开始时间。
-      */
+     * 专业周报开始时间。
+     */
     BeginDate: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -340,12 +340,12 @@ export interface DescribeWeeklyReportBruteAttacksRequest {
  */
 export interface CreateUsualLoginPlacesRequest {
     /**
-      * 云镜客户端UUID数组。
-      */
+     * 云镜客户端UUID数组。
+     */
     Uuids: Array<string>;
     /**
-      * 登录地域信息数组。
-      */
+     * 登录地域信息数组。
+     */
     Places: Array<Place>;
 }
 /**
@@ -353,8 +353,8 @@ export interface CreateUsualLoginPlacesRequest {
  */
 export interface DescribeProcessTaskStatusRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -362,20 +362,20 @@ export interface DescribeProcessTaskStatusRequest {
  */
 export interface RegionInfo {
     /**
-      * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
-      */
+     * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
+     */
     Region: string;
     /**
-      * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
-      */
+     * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
+     */
     RegionName: string;
     /**
-      * 地域ID
-      */
+     * 地域ID
+     */
     RegionId: number;
     /**
-      * 地域代码，如 gz，sh，bj
-      */
+     * 地域代码，如 gz，sh，bj
+     */
     RegionCode: string;
 }
 /**
@@ -383,28 +383,28 @@ export interface RegionInfo {
  */
 export interface DescribeVulScanResultResponse {
     /**
-      * 漏洞数量。
-      */
+     * 漏洞数量。
+     */
     VulNum?: number;
     /**
-      * 专业版机器数。
-      */
+     * 专业版机器数。
+     */
     ProVersionNum?: number;
     /**
-      * 受影响的专业版主机数。
-      */
+     * 受影响的专业版主机数。
+     */
     ImpactedHostNum?: number;
     /**
-      * 主机总数。
-      */
+     * 主机总数。
+     */
     HostNum?: number;
     /**
-      * 基础版机器数。
-      */
+     * 基础版机器数。
+     */
     BasicVersionNum?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -412,18 +412,18 @@ export interface DescribeVulScanResultResponse {
  */
 export interface ModifyAlarmAttributeRequest {
     /**
-      * 告警项目。
-<li>Offline：防护软件离线</li>
-<li>Malware：发现木马文件</li>
-<li>NonlocalLogin：发现异地登录行为</li>
-<li>CrackSuccess：被暴力破解成功</li>
-      */
+     * 告警项目。
+  <li>Offline：防护软件离线</li>
+  <li>Malware：发现木马文件</li>
+  <li>NonlocalLogin：发现异地登录行为</li>
+  <li>CrackSuccess：被暴力破解成功</li>
+     */
     Attribute: string;
     /**
-      * 告警项目属性。
-<li>CLOSE：关闭</li>
-<li>OPEN：打开</li>
-      */
+     * 告警项目属性。
+  <li>CLOSE：关闭</li>
+  <li>OPEN：打开</li>
+     */
     Value: string;
 }
 /**
@@ -431,27 +431,27 @@ export interface ModifyAlarmAttributeRequest {
  */
 export interface DescribeAttackLogsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
-      */
+     * 过滤条件。
+  <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+  <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+     */
     Filters?: Array<Filter>;
     /**
-      * 主机安全客户端ID
-      */
+     * 主机安全客户端ID
+     */
     Uuid?: string;
     /**
-      * 云主机机器ID
-      */
+     * 云主机机器ID
+     */
     Quuid?: string;
 }
 /**
@@ -459,26 +459,26 @@ export interface DescribeAttackLogsRequest {
  */
 export interface ComponentStatistics {
     /**
-      * 组件ID。
-      */
+     * 组件ID。
+     */
     Id: number;
     /**
-      * 主机数量。
-      */
+     * 主机数量。
+     */
     MachineNum: number;
     /**
-      * 组件名称。
-      */
+     * 组件名称。
+     */
     ComponentName: string;
     /**
-      * 组件类型。
-<li>WEB：Web组件</li>
-<li>SYSTEM：系统组件</li>
-      */
+     * 组件类型。
+  <li>WEB：Web组件</li>
+  <li>SYSTEM：系统组件</li>
+     */
     ComponentType: string;
     /**
-      * 组件描述。
-      */
+     * 组件描述。
+     */
     Description: string;
 }
 /**
@@ -486,12 +486,12 @@ export interface ComponentStatistics {
  */
 export interface InquiryPriceOpenProVersionPrepaidRequest {
     /**
-      * 预付费模式(包年包月)参数设置。
-      */
+     * 预付费模式(包年包月)参数设置。
+     */
     ChargePrepaid: ChargePrepaid;
     /**
-      * 需要开通专业版机器列表数组。
-      */
+     * 需要开通专业版机器列表数组。
+     */
     Machines: Array<ProVersionMachine>;
 }
 /**
@@ -503,16 +503,16 @@ export declare type ExportMalwaresRequest = null;
  */
 export interface DescribeProcessesResponse {
     /**
-      * 进程列表记录总数。
-      */
+     * 进程列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 进程列表数据数组。
-      */
+     * 进程列表数据数组。
+     */
     Processes?: Array<Process>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -520,8 +520,8 @@ export interface DescribeProcessesResponse {
  */
 export interface DeleteBashEventsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -533,29 +533,29 @@ export declare type ExportPrivilegeEventsRequest = null;
  */
 export interface WeeklyReportMalware {
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 木马文件路径。
-      */
+     * 木马文件路径。
+     */
     FilePath: string;
     /**
-      * 木马文件MD5值。
-      */
+     * 木马文件MD5值。
+     */
     Md5: string;
     /**
-      * 木马发现时间。
-      */
+     * 木马发现时间。
+     */
     FindTime: string;
     /**
-      * 当前木马状态。
-<li>UN_OPERATED：未处理</li>
-<li>SEGREGATED：已隔离</li>
-<li>TRUSTED：已信任</li>
-<li>SEPARATING：隔离中</li>
-<li>RECOVERING：恢复中</li>
-      */
+     * 当前木马状态。
+  <li>UN_OPERATED：未处理</li>
+  <li>SEGREGATED：已隔离</li>
+  <li>TRUSTED：已信任</li>
+  <li>SEPARATING：隔离中</li>
+  <li>RECOVERING：恢复中</li>
+     */
     Status: string;
 }
 /**
@@ -563,36 +563,36 @@ export interface WeeklyReportMalware {
  */
 export interface CreateBaselineStrategyRequest {
     /**
-      * 策略名称
-      */
+     * 策略名称
+     */
     StrategyName: string;
     /**
-      * 检测周期, 表示每隔多少天进行检测.示例: 2, 表示每2天进行检测一次.
-      */
+     * 检测周期, 表示每隔多少天进行检测.示例: 2, 表示每2天进行检测一次.
+     */
     ScanCycle: number;
     /**
-      * 定期检测时间，该时间下发扫描. 示例:“22:00”, 表示在22:00下发检测
-      */
+     * 定期检测时间，该时间下发扫描. 示例:“22:00”, 表示在22:00下发检测
+     */
     ScanAt: string;
     /**
-      * 该策略下选择的基线id数组. 示例: [1,3,5,7]
-      */
+     * 该策略下选择的基线id数组. 示例: [1,3,5,7]
+     */
     CategoryIds: Array<number>;
     /**
-      * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
-      */
+     * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+     */
     IsGlobal: number;
     /**
-      * 云主机类型：“CVM”：虚拟主机，"BMS"：裸金属，"ECM"：边缘计算主机
-      */
+     * 云主机类型：“CVM”：虚拟主机，"BMS"：裸金属，"ECM"：边缘计算主机
+     */
     MachineType: string;
     /**
-      * 主机地域. 示例: "ap-bj"
-      */
+     * 主机地域. 示例: "ap-bj"
+     */
     RegionCode: string;
     /**
-      * 主机id数组. 示例: ["quuid1","quuid2"]
-      */
+     * 主机id数组. 示例: ["quuid1","quuid2"]
+     */
     Quuids?: Array<string>;
 }
 /**
@@ -600,12 +600,12 @@ export interface CreateBaselineStrategyRequest {
  */
 export interface DescribeSecurityTrendsRequest {
     /**
-      * 开始时间。
-      */
+     * 开始时间。
+     */
     BeginDate: string;
     /**
-      * 结束时间。
-      */
+     * 结束时间。
+     */
     EndDate: string;
 }
 /**
@@ -613,42 +613,42 @@ export interface DescribeSecurityTrendsRequest {
  */
 export interface Account {
     /**
-      * 唯一ID。
-      */
+     * 唯一ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一Uuid
-      */
+     * 云镜客户端唯一Uuid
+     */
     Uuid: string;
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName: string;
     /**
-      * 帐号名。
-      */
+     * 帐号名。
+     */
     Username: string;
     /**
-      * 帐号所属组。
-      */
+     * 帐号所属组。
+     */
     Groups: string;
     /**
-      * 帐号类型。
-<li>ORDINARY：普通帐号</li>
-<li>SUPPER：超级管理员帐号</li>
-      */
+     * 帐号类型。
+  <li>ORDINARY：普通帐号</li>
+  <li>SUPPER：超级管理员帐号</li>
+     */
     Privilege: string;
     /**
-      * 帐号创建时间。
-      */
+     * 帐号创建时间。
+     */
     AccountCreateTime: string;
     /**
-      * 帐号最后登录时间。
-      */
+     * 帐号最后登录时间。
+     */
     LastLoginTime: string;
 }
 /**
@@ -656,16 +656,16 @@ export interface Account {
  */
 export interface DescribeReverseShellEventsResponse {
     /**
-      * 列表内容
-      */
+     * 列表内容
+     */
     List?: Array<ReverseShell>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -673,17 +673,17 @@ export interface DescribeReverseShellEventsResponse {
  */
 export interface DescribePrivilegeRulesRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -691,67 +691,67 @@ export interface DescribePrivilegeRulesRequest {
  */
 export interface BruteAttack {
     /**
-      * 事件ID。
-      */
+     * 事件ID。
+     */
     Id: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 破解事件状态
-<li>BRUTEATTACK_FAIL_ACCOUNT： 暴力破解事件-失败(存在帐号)  </li>
-<li>BRUTEATTACK_FAIL_NOACCOUNT：暴力破解事件-失败(帐号不存在)</li>
-<li>BRUTEATTACK_SUCCESS：暴力破解事件-成功</li>
-      */
+     * 破解事件状态
+  <li>BRUTEATTACK_FAIL_ACCOUNT： 暴力破解事件-失败(存在帐号)  </li>
+  <li>BRUTEATTACK_FAIL_NOACCOUNT：暴力破解事件-失败(帐号不存在)</li>
+  <li>BRUTEATTACK_SUCCESS：暴力破解事件-成功</li>
+     */
     Status: string;
     /**
-      * 用户名称。
-      */
+     * 用户名称。
+     */
     UserName: string;
     /**
-      * 城市ID。
-      */
+     * 城市ID。
+     */
     City: number;
     /**
-      * 国家ID。
-      */
+     * 国家ID。
+     */
     Country: number;
     /**
-      * 省份ID。
-      */
+     * 省份ID。
+     */
     Province: number;
     /**
-      * 来源IP。
-      */
+     * 来源IP。
+     */
     SrcIp: string;
     /**
-      * 尝试破解次数。
-      */
+     * 尝试破解次数。
+     */
     Count: number;
     /**
-      * 发生时间。
-      */
+     * 发生时间。
+     */
     CreateTime: string;
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName: string;
     /**
-      * 云镜客户端唯一标识UUID。
-      */
+     * 云镜客户端唯一标识UUID。
+     */
     Uuid: string;
     /**
-      * 是否专业版。
-      */
+     * 是否专业版。
+     */
     IsProVersion: boolean;
     /**
-      * 阻断状态。
-      */
+     * 阻断状态。
+     */
     BanStatus: string;
     /**
-      * 机器UUID
-      */
+     * 机器UUID
+     */
     Quuid: string;
 }
 /**
@@ -759,27 +759,27 @@ export interface BruteAttack {
  */
 export interface DescribeOpenPortsRequest {
     /**
-      * 云镜客户端唯一Uuid。Port和Uuid必填其一，使用Uuid表示，查询该主机列表信息。
-      */
+     * 云镜客户端唯一Uuid。Port和Uuid必填其一，使用Uuid表示，查询该主机列表信息。
+     */
     Uuid?: string;
     /**
-      * 开放端口号。Port和Uuid必填其一，使用Port表示查询该端口的列表信息。
-      */
+     * 开放端口号。Port和Uuid必填其一，使用Port表示查询该端口的列表信息。
+     */
     Port?: number;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Port - Uint64 - 是否必填：否 - 端口号</li>
-<li>ProcessName - String - 是否必填：否 - 进程名</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
+     * 过滤条件。
+  <li>Port - Uint64 - 是否必填：否 - 端口号</li>
+  <li>ProcessName - String - 是否必填：否 - 进程名</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -787,21 +787,21 @@ export interface DescribeOpenPortsRequest {
  */
 export interface DescribeImpactedHostsRequest {
     /**
-      * 漏洞种类ID。
-      */
+     * 漏洞种类ID。
+     */
     VulId: number;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
-      */
+     * 过滤条件。
+  <li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -809,16 +809,16 @@ export interface DescribeImpactedHostsRequest {
  */
 export interface DescribeMaliciousRequestsResponse {
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 恶意请求记录数组。
-      */
+     * 恶意请求记录数组。
+     */
     MaliciousRequests?: Array<MaliciousRequest>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -826,50 +826,50 @@ export interface DescribeMaliciousRequestsResponse {
  */
 export interface NonLocalLoginPlace {
     /**
-      * 事件ID。
-      */
+     * 事件ID。
+     */
     Id: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 登录状态
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>NORMAL_LOGIN：正常登录</li>
-      */
+     * 登录状态
+  <li>NON_LOCAL_LOGIN：异地登录</li>
+  <li>NORMAL_LOGIN：正常登录</li>
+     */
     Status: string;
     /**
-      * 用户名。
-      */
+     * 用户名。
+     */
     UserName: string;
     /**
-      * 城市ID。
-      */
+     * 城市ID。
+     */
     City: number;
     /**
-      * 国家ID。
-      */
+     * 国家ID。
+     */
     Country: number;
     /**
-      * 省份ID。
-      */
+     * 省份ID。
+     */
     Province: number;
     /**
-      * 登录IP。
-      */
+     * 登录IP。
+     */
     SrcIp: string;
     /**
-      * 机器名称。
-      */
+     * 机器名称。
+     */
     MachineName: string;
     /**
-      * 登录时间。
-      */
+     * 登录时间。
+     */
     LoginTime: string;
     /**
-      * 云镜客户端唯一标识Uuid。
-      */
+     * 云镜客户端唯一标识Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -877,8 +877,8 @@ export interface NonLocalLoginPlace {
  */
 export interface CreateProcessTaskResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -886,33 +886,33 @@ export interface CreateProcessTaskResponse {
  */
 export interface SecurityDynamic {
     /**
-      * 云镜客户端UUID。
-      */
+     * 云镜客户端UUID。
+     */
     Uuid: string;
     /**
-      * 安全事件发生事件。
-      */
+     * 安全事件发生事件。
+     */
     EventTime: string;
     /**
-      * 安全事件类型。
-<li>MALWARE：木马事件</li>
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
-<li>VUL：漏洞</li>
-<li>BASELINE：安全基线</li>
-      */
+     * 安全事件类型。
+  <li>MALWARE：木马事件</li>
+  <li>NON_LOCAL_LOGIN：异地登录</li>
+  <li>BRUTEATTACK_SUCCESS：密码破解成功</li>
+  <li>VUL：漏洞</li>
+  <li>BASELINE：安全基线</li>
+     */
     EventType: string;
     /**
-      * 安全事件消息。
-      */
+     * 安全事件消息。
+     */
     Message: string;
     /**
-      * 安全事件等级。
-<li>RISK: 严重</li>
-<li>HIGH: 高危</li>
-<li>NORMAL: 中危</li>
-<li>LOW: 低危</li>
-      */
+     * 安全事件等级。
+  <li>RISK: 严重</li>
+  <li>HIGH: 高危</li>
+  <li>NORMAL: 中危</li>
+  <li>LOW: 低危</li>
+     */
     SecurityLevel: string;
 }
 /**
@@ -920,12 +920,12 @@ export interface SecurityDynamic {
  */
 export interface RenewProVersionRequest {
     /**
-      * 购买相关参数。
-      */
+     * 购买相关参数。
+     */
     ChargePrepaid: ChargePrepaid;
     /**
-      * 主机唯一ID，对应CVM的uuid、BM的InstanceId。
-      */
+     * 主机唯一ID，对应CVM的uuid、BM的InstanceId。
+     */
     Quuid: string;
 }
 /**
@@ -933,26 +933,26 @@ export interface RenewProVersionRequest {
  */
 export interface DescribeComponentsRequest {
     /**
-      * 云镜客户端唯一Uuid。Uuid和ComponentId必填其一，使用Uuid表示，查询该主机列表信息。
-      */
+     * 云镜客户端唯一Uuid。Uuid和ComponentId必填其一，使用Uuid表示，查询该主机列表信息。
+     */
     Uuid?: string;
     /**
-      * 组件ID。Uuid和ComponentId必填其一，使用ComponentId表示，查询该组件列表信息。
-      */
+     * 组件ID。Uuid和ComponentId必填其一，使用ComponentId表示，查询该组件列表信息。
+     */
     ComponentId?: number;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>ComponentVersion - String - 是否必填：否 - 组件版本号</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
+     * 过滤条件。
+  <li>ComponentVersion - String - 是否必填：否 - 组件版本号</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -960,22 +960,22 @@ export interface DescribeComponentsRequest {
  */
 export interface DescribeNonlocalLoginPlacesRequest {
     /**
-      * 客户端唯一Uuid。
-      */
+     * 客户端唯一Uuid。
+     */
     Uuid?: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 -  查询关键字</li>
-<li>Status - String - 是否必填：否 -  登录状态（NON_LOCAL_LOGIN: 异地登录 | NORMAL_LOGIN : 正常登录）</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 -  查询关键字</li>
+  <li>Status - String - 是否必填：否 -  登录状态（NON_LOCAL_LOGIN: 异地登录 | NORMAL_LOGIN : 正常登录）</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -983,8 +983,8 @@ export interface DescribeNonlocalLoginPlacesRequest {
  */
 export interface DeleteMachineTagRequest {
     /**
-      * 关联的标签ID
-      */
+     * 关联的标签ID
+     */
     Rid: number;
 }
 /**
@@ -992,8 +992,8 @@ export interface DeleteMachineTagRequest {
  */
 export interface CreateBaselineStrategyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1001,48 +1001,48 @@ export interface CreateBaselineStrategyResponse {
  */
 export interface ReverseShellRule {
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     Id: number;
     /**
-      * 客户端ID
-      */
+     * 客户端ID
+     */
     Uuid: string;
     /**
-      * 进程名称
-      */
+     * 进程名称
+     */
     ProcessName: string;
     /**
-      * 目标IP
-      */
+     * 目标IP
+     */
     DestIp: string;
     /**
-      * 目标端口
-      */
+     * 目标端口
+     */
     DestPort: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator: string;
     /**
-      * 是否全局规则
-      */
+     * 是否全局规则
+     */
     IsGlobal: number;
     /**
-      * 状态 (0: 有效 1: 无效)
-      */
+     * 状态 (0: 有效 1: 无效)
+     */
     Status: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 修改时间
-      */
+     * 修改时间
+     */
     ModifyTime: string;
     /**
-      * 主机IP
-      */
+     * 主机IP
+     */
     Hostip: string;
 }
 /**
@@ -1050,12 +1050,12 @@ export interface ReverseShellRule {
  */
 export interface OpenPortStatistics {
     /**
-      * 端口号
-      */
+     * 端口号
+     */
     Port: number;
     /**
-      * 主机数量
-      */
+     * 主机数量
+     */
     MachineNum: number;
 }
 /**
@@ -1063,8 +1063,8 @@ export interface OpenPortStatistics {
  */
 export interface EditPrivilegeRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1072,16 +1072,16 @@ export interface EditPrivilegeRuleResponse {
  */
 export interface DescribeHistoryAccountsResponse {
     /**
-      * 帐号变更历史列表记录总数。
-      */
+     * 帐号变更历史列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 帐号变更历史数据数组。
-      */
+     * 帐号变更历史数据数组。
+     */
     HistoryAccounts?: Array<HistoryAccount>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1089,42 +1089,42 @@ export interface DescribeHistoryAccountsResponse {
  */
 export interface AgentVul {
     /**
-      * 漏洞ID。
-      */
+     * 漏洞ID。
+     */
     Id: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 漏洞名称。
-      */
+     * 漏洞名称。
+     */
     VulName: string;
     /**
-      * 漏洞危害等级。
-<li>HIGH：高危</li>
-<li>MIDDLE：中危</li>
-<li>LOW：低危</li>
-<li>NOTICE：提示</li>
-      */
+     * 漏洞危害等级。
+  <li>HIGH：高危</li>
+  <li>MIDDLE：中危</li>
+  <li>LOW：低危</li>
+  <li>NOTICE：提示</li>
+     */
     VulLevel: string;
     /**
-      * 最后扫描时间。
-      */
+     * 最后扫描时间。
+     */
     LastScanTime: string;
     /**
-      * 漏洞描述。
-      */
+     * 漏洞描述。
+     */
     Description: string;
     /**
-      * 漏洞种类ID。
-      */
+     * 漏洞种类ID。
+     */
     VulId: number;
     /**
-      * 漏洞状态。
-<li>UN_OPERATED : 待处理</li>
-<li>FIXED : 已修复</li>
-      */
+     * 漏洞状态。
+  <li>UN_OPERATED : 待处理</li>
+  <li>FIXED : 已修复</li>
+     */
     VulStatus: string;
 }
 /**
@@ -1132,8 +1132,8 @@ export interface AgentVul {
  */
 export interface UntrustMalwaresRequest {
     /**
-      * 木马ID数组，单次最大处理不能超过200条。
-      */
+     * 木马ID数组，单次最大处理不能超过200条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -1141,16 +1141,16 @@ export interface UntrustMalwaresRequest {
  */
 export interface ExportAttackLogsResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 导出任务ID
-      */
+     * 导出任务ID
+     */
     TaskId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1158,16 +1158,16 @@ export interface ExportAttackLogsResponse {
  */
 export interface DescribeAccountsResponse {
     /**
-      * 帐号列表记录总数。
-      */
+     * 帐号列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 帐号数据列表。
-      */
+     * 帐号数据列表。
+     */
     Accounts?: Array<Account>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1175,17 +1175,17 @@ export interface DescribeAccountsResponse {
  */
 export interface DescribeLoginWhiteListRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -1193,80 +1193,80 @@ export interface DescribeLoginWhiteListRequest {
  */
 export interface ReverseShell {
     /**
-      * ID
-      */
+     * ID
+     */
     Id: number;
     /**
-      * 云镜UUID
-      */
+     * 云镜UUID
+     */
     Uuid: string;
     /**
-      * 主机ID
-      */
+     * 主机ID
+     */
     Quuid: string;
     /**
-      * 主机内网IP
-      */
+     * 主机内网IP
+     */
     Hostip: string;
     /**
-      * 目标IP
-      */
+     * 目标IP
+     */
     DstIp: string;
     /**
-      * 目标端口
-      */
+     * 目标端口
+     */
     DstPort: number;
     /**
-      * 进程名
-      */
+     * 进程名
+     */
     ProcessName: string;
     /**
-      * 进程路径
-      */
+     * 进程路径
+     */
     FullPath: string;
     /**
-      * 命令详情
-      */
+     * 命令详情
+     */
     CmdLine: string;
     /**
-      * 执行用户
-      */
+     * 执行用户
+     */
     UserName: string;
     /**
-      * 执行用户组
-      */
+     * 执行用户组
+     */
     UserGroup: string;
     /**
-      * 父进程名
-      */
+     * 父进程名
+     */
     ParentProcName: string;
     /**
-      * 父进程用户
-      */
+     * 父进程用户
+     */
     ParentProcUser: string;
     /**
-      * 父进程用户组
-      */
+     * 父进程用户组
+     */
     ParentProcGroup: string;
     /**
-      * 父进程路径
-      */
+     * 父进程路径
+     */
     ParentProcPath: string;
     /**
-      * 处理状态
-      */
+     * 处理状态
+     */
     Status: number;
     /**
-      * 产生时间
-      */
+     * 产生时间
+     */
     CreateTime: string;
     /**
-      * 主机名
-      */
+     * 主机名
+     */
     MachineName: string;
     /**
-      * 进程树
-      */
+     * 进程树
+     */
     ProcTree: string;
 }
 /**
@@ -1274,8 +1274,8 @@ export interface ReverseShell {
  */
 export interface UntrustMaliciousRequestRequest {
     /**
-      * 受信任记录ID。
-      */
+     * 受信任记录ID。
+     */
     Id: number;
 }
 /**
@@ -1287,30 +1287,30 @@ export declare type ExportNonlocalLoginPlacesRequest = null;
  */
 export interface DescribeComponentInfoResponse {
     /**
-      * 组件ID。
-      */
+     * 组件ID。
+     */
     Id?: number;
     /**
-      * 组件名称。
-      */
+     * 组件名称。
+     */
     ComponentName?: string;
     /**
-      * 组件类型。
-<li>WEB：web组件</li>
-<li>SYSTEM：系统组件</li>
-      */
+     * 组件类型。
+  <li>WEB：web组件</li>
+  <li>SYSTEM：系统组件</li>
+     */
     ComponentType?: string;
     /**
-      * 组件官网。
-      */
+     * 组件官网。
+     */
     Homepage?: string;
     /**
-      * 组件描述。
-      */
+     * 组件描述。
+     */
     Description?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1318,16 +1318,16 @@ export interface DescribeComponentInfoResponse {
  */
 export interface DescribeAccountStatisticsResponse {
     /**
-      * 帐号统计列表记录总数。
-      */
+     * 帐号统计列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 帐号统计列表。
-      */
+     * 帐号统计列表。
+     */
     AccountStatistics?: Array<AccountStatistics>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1335,12 +1335,12 @@ export interface DescribeAccountStatisticsResponse {
  */
 export interface OpenProVersionPrepaidRequest {
     /**
-      * 购买相关参数。
-      */
+     * 购买相关参数。
+     */
     ChargePrepaid: ChargePrepaid;
     /**
-      * 需要开通专业版主机信息数组。
-      */
+     * 需要开通专业版主机信息数组。
+     */
     Machines: Array<ProVersionMachine>;
 }
 /**
@@ -1348,8 +1348,8 @@ export interface OpenProVersionPrepaidRequest {
  */
 export interface ModifyLoginWhiteListResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1357,12 +1357,12 @@ export interface ModifyLoginWhiteListResponse {
  */
 export interface DescribeTagsResponse {
     /**
-      * 列表信息
-      */
+     * 列表信息
+     */
     List?: Array<Tag>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1370,40 +1370,40 @@ export interface DescribeTagsResponse {
  */
 export interface OpenPort {
     /**
-      * 唯一ID。
-      */
+     * 唯一ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一UUID。
-      */
+     * 云镜客户端唯一UUID。
+     */
     Uuid: string;
     /**
-      * 开放端口号。
-      */
+     * 开放端口号。
+     */
     Port: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 主机名。
-      */
+     * 主机名。
+     */
     MachineName: string;
     /**
-      * 端口对应进程名。
-      */
+     * 端口对应进程名。
+     */
     ProcessName: string;
     /**
-      * 端口对应进程Pid。
-      */
+     * 端口对应进程Pid。
+     */
     Pid: number;
     /**
-      * 记录创建时间。
-      */
+     * 记录创建时间。
+     */
     CreateTime: string;
     /**
-      * 记录更新时间。
-      */
+     * 记录更新时间。
+     */
     ModifyTime: string;
 }
 /**
@@ -1415,8 +1415,8 @@ export declare type DescribeProVersionInfoRequest = null;
  */
 export interface CreateProcessTaskRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -1424,8 +1424,8 @@ export interface CreateProcessTaskRequest {
  */
 export interface DeleteMaliciousRequestsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1433,12 +1433,12 @@ export interface DeleteMaliciousRequestsResponse {
  */
 export interface ExportBruteAttacksResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1446,8 +1446,8 @@ export interface ExportBruteAttacksResponse {
  */
 export interface EditReverseShellRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1459,8 +1459,8 @@ export declare type ExportBruteAttacksRequest = null;
  */
 export interface DeleteMachineResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1468,8 +1468,8 @@ export interface DeleteMachineResponse {
  */
 export interface DeleteLoginWhiteListRequest {
     /**
-      * 白名单ID
-      */
+     * 白名单ID
+     */
     Ids: Array<number>;
 }
 /**
@@ -1477,16 +1477,16 @@ export interface DeleteLoginWhiteListRequest {
  */
 export interface MachineTag {
     /**
-      * 关联标签ID
-      */
+     * 关联标签ID
+     */
     Rid: number;
     /**
-      * 标签名
-      */
+     * 标签名
+     */
     Name: string;
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     TagId: number;
 }
 /**
@@ -1494,72 +1494,72 @@ export interface MachineTag {
  */
 export interface DescribeAttackLogInfoResponse {
     /**
-      * 日志ID
-      */
+     * 日志ID
+     */
     Id?: number;
     /**
-      * 主机ID
-      */
+     * 主机ID
+     */
     Quuid?: string;
     /**
-      * 攻击来源端口
-      */
+     * 攻击来源端口
+     */
     SrcPort?: number;
     /**
-      * 攻击来源IP
-      */
+     * 攻击来源IP
+     */
     SrcIp?: string;
     /**
-      * 攻击目标端口
-      */
+     * 攻击目标端口
+     */
     DstPort?: number;
     /**
-      * 攻击目标IP
-      */
+     * 攻击目标IP
+     */
     DstIp?: string;
     /**
-      * 攻击方法
-      */
+     * 攻击方法
+     */
     HttpMethod?: string;
     /**
-      * 攻击目标主机
-      */
+     * 攻击目标主机
+     */
     HttpHost?: string;
     /**
-      * 攻击头信息
-      */
+     * 攻击头信息
+     */
     HttpHead?: string;
     /**
-      * 攻击者浏览器标识
-      */
+     * 攻击者浏览器标识
+     */
     HttpUserAgent?: string;
     /**
-      * 请求源
-      */
+     * 请求源
+     */
     HttpReferer?: string;
     /**
-      * 威胁类型
-      */
+     * 威胁类型
+     */
     VulType?: string;
     /**
-      * 攻击路径
-      */
+     * 攻击路径
+     */
     HttpCgi?: string;
     /**
-      * 攻击参数
-      */
+     * 攻击参数
+     */
     HttpParam?: string;
     /**
-      * 攻击时间
-      */
+     * 攻击时间
+     */
     CreatedAt?: string;
     /**
-      * 攻击内容
-      */
+     * 攻击内容
+     */
     HttpContent?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1567,16 +1567,16 @@ export interface DescribeAttackLogInfoResponse {
  */
 export interface DescribePrivilegeEventsResponse {
     /**
-      * 数据列表
-      */
+     * 数据列表
+     */
     List?: Array<PrivilegeEscalationProcess>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1584,32 +1584,32 @@ export interface DescribePrivilegeEventsResponse {
  */
 export interface WeeklyReportNonlocalLoginPlace {
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 用户名。
-      */
+     * 用户名。
+     */
     Username: string;
     /**
-      * 源IP。
-      */
+     * 源IP。
+     */
     SrcIp: string;
     /**
-      * 国家ID。
-      */
+     * 国家ID。
+     */
     Country: number;
     /**
-      * 省份ID。
-      */
+     * 省份ID。
+     */
     Province: number;
     /**
-      * 城市ID。
-      */
+     * 城市ID。
+     */
     City: number;
     /**
-      * 登录时间。
-      */
+     * 登录时间。
+     */
     LoginTime: string;
 }
 /**
@@ -1617,36 +1617,36 @@ export interface WeeklyReportNonlocalLoginPlace {
  */
 export interface DescribeOverviewStatisticsResponse {
     /**
-      * 服务器在线数。
-      */
+     * 服务器在线数。
+     */
     OnlineMachineNum?: number;
     /**
-      * 专业服务器数。
-      */
+     * 专业服务器数。
+     */
     ProVersionMachineNum?: number;
     /**
-      * 木马文件数。
-      */
+     * 木马文件数。
+     */
     MalwareNum?: number;
     /**
-      * 异地登录数。
-      */
+     * 异地登录数。
+     */
     NonlocalLoginNum?: number;
     /**
-      * 暴力破解成功数。
-      */
+     * 暴力破解成功数。
+     */
     BruteAttackSuccessNum?: number;
     /**
-      * 漏洞数。
-      */
+     * 漏洞数。
+     */
     VulNum?: number;
     /**
-      * 安全基线数。
-      */
+     * 安全基线数。
+     */
     BaseLineNum?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1654,8 +1654,8 @@ export interface DescribeOverviewStatisticsResponse {
  */
 export interface RecoverMalwaresRequest {
     /**
-      * 木马Id数组,单次最大删除不能超过200条
-      */
+     * 木马Id数组,单次最大删除不能超过200条
+     */
     Ids: Array<number>;
 }
 /**
@@ -1663,68 +1663,68 @@ export interface RecoverMalwaresRequest {
  */
 export interface MaliciousRequest {
     /**
-      * 记录ID。
-      */
+     * 记录ID。
+     */
     Id: number;
     /**
-      * 云镜客户端UUID。
-      */
+     * 云镜客户端UUID。
+     */
     Uuid: string;
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 主机名。
-      */
+     * 主机名。
+     */
     MachineName: string;
     /**
-      * 恶意请求域名。
-      */
+     * 恶意请求域名。
+     */
     Domain: string;
     /**
-      * 恶意请求数。
-      */
+     * 恶意请求数。
+     */
     Count: number;
     /**
-      * 进程名。
-      */
+     * 进程名。
+     */
     ProcessName: string;
     /**
-      * 记录状态。
-<li>UN_OPERATED：待处理</li>
-<li>TRUSTED：已信任</li>
-<li>UN_TRUSTED：已取消信任</li>
-      */
+     * 记录状态。
+  <li>UN_OPERATED：待处理</li>
+  <li>TRUSTED：已信任</li>
+  <li>UN_TRUSTED：已取消信任</li>
+     */
     Status: string;
     /**
-      * 恶意请求域名描述。
-      */
+     * 恶意请求域名描述。
+     */
     Description: string;
     /**
-      * 参考地址。
-      */
+     * 参考地址。
+     */
     Reference: string;
     /**
-      * 发现时间。
-      */
+     * 发现时间。
+     */
     CreateTime: string;
     /**
-      * 记录合并时间。
-      */
+     * 记录合并时间。
+     */
     MergeTime: string;
     /**
-      * 进程MD5
-值。
-      */
+     * 进程MD5
+  值。
+     */
     ProcessMd5: string;
     /**
-      * 执行命令行。
-      */
+     * 执行命令行。
+     */
     CmdLine: string;
     /**
-      * 进程PID。
-      */
+     * 进程PID。
+     */
     Pid: number;
 }
 /**
@@ -1732,8 +1732,8 @@ export interface MaliciousRequest {
  */
 export interface TrustMalwaresResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1741,32 +1741,32 @@ export interface TrustMalwaresResponse {
  */
 export interface TagMachine {
     /**
-      * ID
-      */
+     * ID
+     */
     Id: string;
     /**
-      * 主机ID
-      */
+     * 主机ID
+     */
     Quuid: string;
     /**
-      * 主机名称
-      */
+     * 主机名称
+     */
     MachineName: string;
     /**
-      * 主机内网IP
-      */
+     * 主机内网IP
+     */
     MachineIp: string;
     /**
-      * 主机外网IP
-      */
+     * 主机外网IP
+     */
     MachineWanIp: string;
     /**
-      * 主机区域
-      */
+     * 主机区域
+     */
     MachineRegion: string;
     /**
-      * 主机区域类型
-      */
+     * 主机区域类型
+     */
     MachineType: string;
 }
 /**
@@ -1774,8 +1774,8 @@ export interface TagMachine {
  */
 export interface DescribeWeeklyReportInfoRequest {
     /**
-      * 专业周报开始时间。
-      */
+     * 专业周报开始时间。
+     */
     BeginDate: string;
 }
 /**
@@ -1783,16 +1783,16 @@ export interface DescribeWeeklyReportInfoRequest {
  */
 export interface EditTagsRequest {
     /**
-      * 标签名
-      */
+     * 标签名
+     */
     Name: string;
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     Id?: number;
     /**
-      * CVM主机ID
-      */
+     * CVM主机ID
+     */
     Quuids?: Array<string>;
 }
 /**
@@ -1800,8 +1800,8 @@ export interface EditTagsRequest {
  */
 export interface AddLoginWhiteListRequest {
     /**
-      * 白名单规则
-      */
+     * 白名单规则
+     */
     Rules: LoginWhiteListsRule;
 }
 /**
@@ -1809,8 +1809,8 @@ export interface AddLoginWhiteListRequest {
  */
 export interface DeleteReverseShellRulesRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -1818,12 +1818,12 @@ export interface DeleteReverseShellRulesRequest {
  */
 export interface DescribeWeeklyReportsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -1831,16 +1831,16 @@ export interface DescribeWeeklyReportsRequest {
  */
 export interface DescribeBashRulesResponse {
     /**
-      * 列表内容
-      */
+     * 列表内容
+     */
     List?: Array<BashRule>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1848,16 +1848,16 @@ export interface DescribeBashRulesResponse {
  */
 export interface DescribeImpactedHostsResponse {
     /**
-      * 记录总数
-      */
+     * 记录总数
+     */
     TotalCount?: number;
     /**
-      * 漏洞影响机器列表数组
-      */
+     * 漏洞影响机器列表数组
+     */
     ImpactedHosts?: Array<ImpactedHost>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1865,8 +1865,8 @@ export interface DescribeImpactedHostsResponse {
  */
 export interface RescanImpactedHostRequest {
     /**
-      * 漏洞ID。
-      */
+     * 漏洞ID。
+     */
     Id: number;
 }
 /**
@@ -1874,16 +1874,16 @@ export interface RescanImpactedHostRequest {
  */
 export interface DescribeBashEventsResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 高危命令事件列表
-      */
+     * 高危命令事件列表
+     */
     List?: Array<BashEvent>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1891,8 +1891,8 @@ export interface DescribeBashEventsResponse {
  */
 export interface ModifyLoginWhiteListRequest {
     /**
-      * 白名单规则
-      */
+     * 白名单规则
+     */
     Rules: LoginWhiteListsRule;
 }
 /**
@@ -1900,17 +1900,17 @@ export interface ModifyLoginWhiteListRequest {
  */
 export interface DescribeBashEventsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机内网IP)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键词(主机内网IP)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -1918,8 +1918,8 @@ export interface DescribeBashEventsRequest {
  */
 export interface DeleteTagsRequest {
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     Ids: Array<number>;
 }
 /**
@@ -1927,17 +1927,17 @@ export interface DeleteTagsRequest {
  */
 export interface DescribeOpenPortStatisticsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Port - Uint64 - 是否必填：否 - 端口号</li>
-      */
+     * 过滤条件。
+  <li>Port - Uint64 - 是否必填：否 - 端口号</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -1949,8 +1949,8 @@ export declare type ExportAttackLogsRequest = null;
  */
 export interface DeleteMachineRequest {
     /**
-      * 云镜客户端Uuid。
-      */
+     * 云镜客户端Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -1958,8 +1958,8 @@ export interface DeleteMachineRequest {
  */
 export interface DescribeVulInfoRequest {
     /**
-      * 漏洞种类ID。
-      */
+     * 漏洞种类ID。
+     */
     VulId: number;
 }
 /**
@@ -1967,8 +1967,8 @@ export interface DescribeVulInfoRequest {
  */
 export interface UntrustMaliciousRequestResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1976,16 +1976,16 @@ export interface UntrustMaliciousRequestResponse {
  */
 export interface DescribeComponentStatisticsResponse {
     /**
-      * 组件统计列表记录总数。
-      */
+     * 组件统计列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 组件统计列表数据数组。
-      */
+     * 组件统计列表数据数组。
+     */
     ComponentStatistics?: Array<ComponentStatistics>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1993,76 +1993,76 @@ export interface DescribeComponentStatisticsResponse {
  */
 export interface PrivilegeEscalationProcess {
     /**
-      * 数据ID
-      */
+     * 数据ID
+     */
     Id: number;
     /**
-      * 云镜ID
-      */
+     * 云镜ID
+     */
     Uuid: string;
     /**
-      * 主机ID
-      */
+     * 主机ID
+     */
     Quuid: string;
     /**
-      * 主机内网IP
-      */
+     * 主机内网IP
+     */
     Hostip: string;
     /**
-      * 进程名
-      */
+     * 进程名
+     */
     ProcessName: string;
     /**
-      * 进程路径
-      */
+     * 进程路径
+     */
     FullPath: string;
     /**
-      * 执行命令
-      */
+     * 执行命令
+     */
     CmdLine: string;
     /**
-      * 用户名
-      */
+     * 用户名
+     */
     UserName: string;
     /**
-      * 用户组
-      */
+     * 用户组
+     */
     UserGroup: string;
     /**
-      * 进程文件权限
-      */
+     * 进程文件权限
+     */
     ProcFilePrivilege: string;
     /**
-      * 父进程名
-      */
+     * 父进程名
+     */
     ParentProcName: string;
     /**
-      * 父进程用户名
-      */
+     * 父进程用户名
+     */
     ParentProcUser: string;
     /**
-      * 父进程用户组
-      */
+     * 父进程用户组
+     */
     ParentProcGroup: string;
     /**
-      * 父进程路径
-      */
+     * 父进程路径
+     */
     ParentProcPath: string;
     /**
-      * 进程树
-      */
+     * 进程树
+     */
     ProcTree: string;
     /**
-      * 处理状态
-      */
+     * 处理状态
+     */
     Status: number;
     /**
-      * 发生时间
-      */
+     * 发生时间
+     */
     CreateTime: string;
     /**
-      * 机器名
-      */
+     * 机器名
+     */
     MachineName: string;
 }
 /**
@@ -2070,16 +2070,16 @@ export interface PrivilegeEscalationProcess {
  */
 export interface Place {
     /**
-      * 城市 ID。
-      */
+     * 城市 ID。
+     */
     CityId: number;
     /**
-      * 省份 ID。
-      */
+     * 省份 ID。
+     */
     ProvinceId: number;
     /**
-      * 国家ID，暂只支持国内：1。
-      */
+     * 国家ID，暂只支持国内：1。
+     */
     CountryId: number;
 }
 /**
@@ -2087,8 +2087,8 @@ export interface Place {
  */
 export interface SwitchBashRulesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2096,52 +2096,52 @@ export interface SwitchBashRulesResponse {
  */
 export interface LoginWhiteLists {
     /**
-      * 记录ID
-      */
+     * 记录ID
+     */
     Id: number;
     /**
-      * 云镜客户端ID
-      */
+     * 云镜客户端ID
+     */
     Uuid: string;
     /**
-      * 白名单地域
-      */
+     * 白名单地域
+     */
     Places: Array<Place>;
     /**
-      * 白名单用户（多个用户逗号隔开）
-      */
+     * 白名单用户（多个用户逗号隔开）
+     */
     UserName: string;
     /**
-      * 白名单IP（多个IP逗号隔开）
-      */
+     * 白名单IP（多个IP逗号隔开）
+     */
     SrcIp: string;
     /**
-      * 是否为全局规则
-      */
+     * 是否为全局规则
+     */
     IsGlobal: boolean;
     /**
-      * 创建白名单时间
-      */
+     * 创建白名单时间
+     */
     CreateTime: string;
     /**
-      * 修改白名单时间
-      */
+     * 修改白名单时间
+     */
     ModifyTime: string;
     /**
-      * 机器名
-      */
+     * 机器名
+     */
     MachineName: string;
     /**
-      * 机器IP
-      */
+     * 机器IP
+     */
     HostIp: string;
     /**
-      * 起始时间
-      */
+     * 起始时间
+     */
     StartTime: string;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndTime: string;
 }
 /**
@@ -2149,8 +2149,8 @@ export interface LoginWhiteLists {
  */
 export interface DeleteUsualLoginPlacesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2158,8 +2158,8 @@ export interface DeleteUsualLoginPlacesResponse {
  */
 export interface DeleteNonlocalLoginPlacesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2167,16 +2167,16 @@ export interface DeleteNonlocalLoginPlacesResponse {
  */
 export interface DescribeNonlocalLoginPlacesResponse {
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 异地登录信息数组。
-      */
+     * 异地登录信息数组。
+     */
     NonLocalLoginPlaces?: Array<NonLocalLoginPlace>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2184,8 +2184,8 @@ export interface DescribeNonlocalLoginPlacesResponse {
  */
 export interface DeleteReverseShellRulesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2193,12 +2193,12 @@ export interface DeleteReverseShellRulesResponse {
  */
 export interface ExportMalwaresResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2206,8 +2206,8 @@ export interface ExportMalwaresResponse {
  */
 export interface UntrustMalwaresResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2215,8 +2215,8 @@ export interface UntrustMalwaresResponse {
  */
 export interface DeletePrivilegeRulesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2224,8 +2224,8 @@ export interface DeletePrivilegeRulesResponse {
  */
 export interface CreateOpenPortTaskResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2233,32 +2233,32 @@ export interface CreateOpenPortTaskResponse {
  */
 export interface EditBashRuleRequest {
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     Name: string;
     /**
-      * 危险等级(1: 高危 2:中危 3: 低危)
-      */
+     * 危险等级(1: 高危 2:中危 3: 低危)
+     */
     Level: number;
     /**
-      * 正则表达式
-      */
+     * 正则表达式
+     */
     Rule: string;
     /**
-      * 规则ID(新增时不填)
-      */
+     * 规则ID(新增时不填)
+     */
     Id?: number;
     /**
-      * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Uuid?: string;
     /**
-      * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Hostip?: string;
     /**
-      * 是否全局规则(默认否)
-      */
+     * 是否全局规则(默认否)
+     */
     IsGlobal?: number;
 }
 /**
@@ -2266,8 +2266,8 @@ export interface EditBashRuleRequest {
  */
 export interface DeletePrivilegeEventsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2275,16 +2275,16 @@ export interface DeletePrivilegeEventsResponse {
  */
 export interface InquiryPriceOpenProVersionPrepaidResponse {
     /**
-      * 预支费用的原价，单位：元。
-      */
+     * 预支费用的原价，单位：元。
+     */
     OriginalPrice?: number;
     /**
-      * 预支费用的折扣价，单位：元。
-      */
+     * 预支费用的折扣价，单位：元。
+     */
     DiscountPrice?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2292,9 +2292,9 @@ export interface InquiryPriceOpenProVersionPrepaidResponse {
  */
 export interface CloseProVersionRequest {
     /**
-      * 主机唯一标识Uuid。
-黑石的InstanceId，CVM的Uuid
-      */
+     * 主机唯一标识Uuid。
+  黑石的InstanceId，CVM的Uuid
+     */
     Quuid?: string;
 }
 /**
@@ -2302,8 +2302,8 @@ export interface CloseProVersionRequest {
  */
 export interface SetBashEventsStatusResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2311,12 +2311,12 @@ export interface SetBashEventsStatusResponse {
  */
 export interface DescribeUsualLoginPlacesResponse {
     /**
-      * 常用登录地数组
-      */
+     * 常用登录地数组
+     */
     UsualLoginPlaces?: Array<UsualPlace>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2324,16 +2324,16 @@ export interface DescribeUsualLoginPlacesResponse {
  */
 export interface DescribeProcessStatisticsResponse {
     /**
-      * 进程统计列表记录总数。
-      */
+     * 进程统计列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 进程统计列表数据数组。
-      */
+     * 进程统计列表数据数组。
+     */
     ProcessStatistics?: Array<ProcessStatistics>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2341,8 +2341,8 @@ export interface DescribeProcessStatisticsResponse {
  */
 export interface MisAlarmNonlocalLoginPlacesRequest {
     /**
-      * 异地登录事件Id数组。
-      */
+     * 异地登录事件Id数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -2350,8 +2350,8 @@ export interface MisAlarmNonlocalLoginPlacesRequest {
  */
 export interface TrustMaliciousRequestRequest {
     /**
-      * 恶意请求记录ID。
-      */
+     * 恶意请求记录ID。
+     */
     Id: number;
 }
 /**
@@ -2359,12 +2359,12 @@ export interface TrustMaliciousRequestRequest {
  */
 export interface ExportMaliciousRequestsResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2372,8 +2372,8 @@ export interface ExportMaliciousRequestsResponse {
  */
 export interface DescribeAttackLogInfoRequest {
     /**
-      * 日志ID
-      */
+     * 日志ID
+     */
     Id: number;
 }
 /**
@@ -2381,16 +2381,16 @@ export interface DescribeAttackLogInfoRequest {
  */
 export interface DescribeWeeklyReportMalwaresRequest {
     /**
-      * 专业周报开始时间。
-      */
+     * 专业周报开始时间。
+     */
     BeginDate: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -2398,16 +2398,16 @@ export interface DescribeWeeklyReportMalwaresRequest {
  */
 export interface DescribeBruteAttacksResponse {
     /**
-      * 事件数量
-      */
+     * 事件数量
+     */
     TotalCount?: number;
     /**
-      * 暴力破解事件列表
-      */
+     * 暴力破解事件列表
+     */
     BruteAttacks?: Array<BruteAttack>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2415,16 +2415,16 @@ export interface DescribeBruteAttacksResponse {
  */
 export interface ExportNonlocalLoginPlacesResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 导出任务ID
-      */
+     * 导出任务ID
+     */
     TaskId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2432,17 +2432,17 @@ export interface ExportNonlocalLoginPlacesResponse {
  */
 export interface DescribeComponentStatisticsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-ComponentName - String - 是否必填：否 - 组件名称
-      */
+     * 过滤条件。
+  ComponentName - String - 是否必填：否 - 组件名称
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -2454,16 +2454,16 @@ export declare type DescribeOverviewStatisticsRequest = null;
  */
 export interface DescribeOpenPortStatisticsResponse {
     /**
-      * 端口统计列表总数
-      */
+     * 端口统计列表总数
+     */
     TotalCount?: number;
     /**
-      * 端口统计数据列表
-      */
+     * 端口统计数据列表
+     */
     OpenPortStatistics?: Array<OpenPortStatistics>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2471,8 +2471,8 @@ export interface DescribeOpenPortStatisticsResponse {
  */
 export interface DeleteAttackLogsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2480,16 +2480,16 @@ export interface DeleteAttackLogsResponse {
  */
 export interface DescribeLoginWhiteListResponse {
     /**
-      * 记录总数
-      */
+     * 记录总数
+     */
     TotalCount?: number;
     /**
-      * 异地登录白名单数组
-      */
+     * 异地登录白名单数组
+     */
     LoginWhiteLists?: Array<LoginWhiteLists>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2497,40 +2497,40 @@ export interface DescribeLoginWhiteListResponse {
  */
 export interface DescribeVulInfoResponse {
     /**
-      * 漏洞种类ID。
-      */
+     * 漏洞种类ID。
+     */
     VulId?: number;
     /**
-      * 漏洞名称。
-      */
+     * 漏洞名称。
+     */
     VulName?: string;
     /**
-      * 漏洞等级。
-      */
+     * 漏洞等级。
+     */
     VulLevel?: string;
     /**
-      * 漏洞类型。
-      */
+     * 漏洞类型。
+     */
     VulType?: string;
     /**
-      * 漏洞描述。
-      */
+     * 漏洞描述。
+     */
     Description?: string;
     /**
-      * 修复方案。
-      */
+     * 修复方案。
+     */
     RepairPlan?: string;
     /**
-      * 漏洞CVE。
-      */
+     * 漏洞CVE。
+     */
     CveId?: string;
     /**
-      * 参考链接。
-      */
+     * 参考链接。
+     */
     Reference?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2538,8 +2538,8 @@ export interface DescribeVulInfoResponse {
  */
 export interface DescribeTagMachinesRequest {
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     Id: number;
 }
 /**
@@ -2547,32 +2547,32 @@ export interface DescribeTagMachinesRequest {
  */
 export interface EditReverseShellRuleRequest {
     /**
-      * 规则ID(新增时请留空)
-      */
+     * 规则ID(新增时请留空)
+     */
     Id?: number;
     /**
-      * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Uuid?: string;
     /**
-      * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Hostip?: string;
     /**
-      * 目标IP
-      */
+     * 目标IP
+     */
     DestIp?: string;
     /**
-      * 目标端口
-      */
+     * 目标端口
+     */
     DestPort?: string;
     /**
-      * 进程名
-      */
+     * 进程名
+     */
     ProcessName?: string;
     /**
-      * 是否全局规则(默认否)
-      */
+     * 是否全局规则(默认否)
+     */
     IsGlobal?: number;
 }
 /**
@@ -2580,20 +2580,20 @@ export interface EditReverseShellRuleRequest {
  */
 export interface DescribeProVersionInfoResponse {
     /**
-      * 后付费昨日扣费
-      */
+     * 后付费昨日扣费
+     */
     PostPayCost?: number;
     /**
-      * 新增主机是否自动开通专业版
-      */
+     * 新增主机是否自动开通专业版
+     */
     IsAutoOpenProVersion?: boolean;
     /**
-      * 开通专业版主机数
-      */
+     * 开通专业版主机数
+     */
     ProVersionNum?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2601,8 +2601,8 @@ export interface DescribeProVersionInfoResponse {
  */
 export interface DeleteTagsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2610,8 +2610,8 @@ export interface DeleteTagsResponse {
  */
 export interface DeleteBruteAttacksRequest {
     /**
-      * 暴力破解事件Id数组。
-      */
+     * 暴力破解事件Id数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -2619,16 +2619,16 @@ export interface DeleteBruteAttacksRequest {
  */
 export interface DescribeWeeklyReportVulsRequest {
     /**
-      * 专业版周报开始时间。
-      */
+     * 专业版周报开始时间。
+     */
     BeginDate: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -2636,8 +2636,8 @@ export interface DescribeWeeklyReportVulsRequest {
  */
 export interface AddLoginWhiteListResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2645,52 +2645,52 @@ export interface AddLoginWhiteListResponse {
  */
 export interface BashRule {
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     Id: number;
     /**
-      * 客户端ID
-      */
+     * 客户端ID
+     */
     Uuid: string;
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     Name: string;
     /**
-      * 危险等级(1: 高危 2:中危 3: 低危)
-      */
+     * 危险等级(1: 高危 2:中危 3: 低危)
+     */
     Level: number;
     /**
-      * 正则表达式
-      */
+     * 正则表达式
+     */
     Rule: string;
     /**
-      * 规则描述
-      */
+     * 规则描述
+     */
     Decription: string;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator: string;
     /**
-      * 是否全局规则
-      */
+     * 是否全局规则
+     */
     IsGlobal: number;
     /**
-      * 状态 (0: 有效 1: 无效)
-      */
+     * 状态 (0: 有效 1: 无效)
+     */
     Status: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 修改时间
-      */
+     * 修改时间
+     */
     ModifyTime: string;
     /**
-      * 主机IP
-      */
+     * 主机IP
+     */
     Hostip: string;
 }
 /**
@@ -2698,16 +2698,16 @@ export interface BashRule {
  */
 export interface DescribeOpenPortTaskStatusResponse {
     /**
-      * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：端口获取中</li>
-<li>FAILED：进程获取失败</li>
-      */
+     * 任务状态。
+  <li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
+  <li>AGENT_OFFLINE：云镜客户端离线</li>
+  <li>COLLECTING：端口获取中</li>
+  <li>FAILED：进程获取失败</li>
+     */
     Status?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2715,16 +2715,16 @@ export interface DescribeOpenPortTaskStatusResponse {
  */
 export interface DescribeWeeklyReportNonlocalLoginPlacesResponse {
     /**
-      * 专业周报异地登录数据。
-      */
+     * 专业周报异地登录数据。
+     */
     WeeklyReportNonlocalLoginPlaces?: Array<WeeklyReportNonlocalLoginPlace>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2732,8 +2732,8 @@ export interface DescribeWeeklyReportNonlocalLoginPlacesResponse {
  */
 export interface SeparateMalwaresRequest {
     /**
-      * 木马事件ID数组。
-      */
+     * 木马事件ID数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -2741,8 +2741,8 @@ export interface SeparateMalwaresRequest {
  */
 export interface RenewProVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2750,36 +2750,36 @@ export interface RenewProVersionResponse {
  */
 export interface LoginWhiteListsRule {
     /**
-      * 加白地域
-      */
+     * 加白地域
+     */
     Places: Array<Place>;
     /**
-      * 加白源IP，支持网段，多个IP以逗号隔开
-      */
+     * 加白源IP，支持网段，多个IP以逗号隔开
+     */
     SrcIp: string;
     /**
-      * 加白用户名，多个用户名以逗号隔开
-      */
+     * 加白用户名，多个用户名以逗号隔开
+     */
     UserName: string;
     /**
-      * 是否对全局生效
-      */
+     * 是否对全局生效
+     */
     IsGlobal: boolean;
     /**
-      * 白名单生效的机器
-      */
+     * 白名单生效的机器
+     */
     HostIp: string;
     /**
-      * 规则ID，用于更新规则
-      */
+     * 规则ID，用于更新规则
+     */
     Id?: number;
     /**
-      * 起始时间
-      */
+     * 起始时间
+     */
     StartTime?: string;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndTime?: string;
 }
 /**
@@ -2787,12 +2787,12 @@ export interface LoginWhiteListsRule {
  */
 export interface DescribeTagMachinesResponse {
     /**
-      * 列表数据
-      */
+     * 列表数据
+     */
     List?: Array<TagMachine>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2800,48 +2800,48 @@ export interface DescribeTagMachinesResponse {
  */
 export interface DescribeSecurityTrendsResponse {
     /**
-      * 木马事件统计数据数组。
-      */
+     * 木马事件统计数据数组。
+     */
     Malwares?: Array<SecurityTrend>;
     /**
-      * 异地登录事件统计数据数组。
-      */
+     * 异地登录事件统计数据数组。
+     */
     NonLocalLoginPlaces?: Array<SecurityTrend>;
     /**
-      * 密码破解事件统计数据数组。
-      */
+     * 密码破解事件统计数据数组。
+     */
     BruteAttacks?: Array<SecurityTrend>;
     /**
-      * 漏洞统计数据数组。
-      */
+     * 漏洞统计数据数组。
+     */
     Vuls?: Array<SecurityTrend>;
     /**
-      * 基线统计数据数组。
-      */
+     * 基线统计数据数组。
+     */
     BaseLines?: Array<SecurityTrend>;
     /**
-      * 恶意请求统计数据数组。
-      */
+     * 恶意请求统计数据数组。
+     */
     MaliciousRequests?: Array<SecurityTrend>;
     /**
-      * 高危命令统计数据数组。
-      */
+     * 高危命令统计数据数组。
+     */
     HighRiskBashs?: Array<SecurityTrend>;
     /**
-      * 反弹shell统计数据数组。
-      */
+     * 反弹shell统计数据数组。
+     */
     ReverseShells?: Array<SecurityTrend>;
     /**
-      * 本地提权统计数据数组。
-      */
+     * 本地提权统计数据数组。
+     */
     PrivilegeEscalations?: Array<SecurityTrend>;
     /**
-      * 网络攻击统计数据数组。
-      */
+     * 网络攻击统计数据数组。
+     */
     CyberAttacks?: Array<SecurityTrend>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2849,20 +2849,20 @@ export interface DescribeSecurityTrendsResponse {
  */
 export interface ProVersionMachine {
     /**
-      * 主机类型。
-<li>CVM: 虚拟主机</li>
-<li>BM: 黑石物理机</li>
-      */
+     * 主机类型。
+  <li>CVM: 虚拟主机</li>
+  <li>BM: 黑石物理机</li>
+     */
     MachineType: string;
     /**
-      * 主机所在地域。
-如：ap-guangzhou、ap-beijing
-      */
+     * 主机所在地域。
+  如：ap-guangzhou、ap-beijing
+     */
     MachineRegion: string;
     /**
-      * 主机唯一标识Uuid。
-黑石的InstanceId，CVM的Uuid
-      */
+     * 主机唯一标识Uuid。
+  黑石的InstanceId，CVM的Uuid
+     */
     Quuid: string;
 }
 /**
@@ -2870,8 +2870,8 @@ export interface ProVersionMachine {
  */
 export interface CreateOpenPortTaskRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -2879,63 +2879,63 @@ export interface CreateOpenPortTaskRequest {
  */
 export interface DescribeWeeklyReportInfoResponse {
     /**
-      * 账号所属公司或个人名称。
-      */
+     * 账号所属公司或个人名称。
+     */
     CompanyName?: string;
     /**
-      * 机器总数。
-      */
+     * 机器总数。
+     */
     MachineNum?: number;
     /**
-      * 云镜客户端在线数。
-      */
+     * 云镜客户端在线数。
+     */
     OnlineMachineNum?: number;
     /**
-      * 云镜客户端离线数。
-      */
+     * 云镜客户端离线数。
+     */
     OfflineMachineNum?: number;
     /**
-      * 开通云镜专业版数量。
-      */
+     * 开通云镜专业版数量。
+     */
     ProVersionMachineNum?: number;
     /**
-      * 周报开始时间。
-      */
+     * 周报开始时间。
+     */
     BeginDate?: string;
     /**
-      * 周报结束时间。
-      */
+     * 周报结束时间。
+     */
     EndDate?: string;
     /**
-      * 安全等级。
-<li>HIGH：高</li>
-<li>MIDDLE：中</li>
-<li>LOW：低</li>
-      */
+     * 安全等级。
+  <li>HIGH：高</li>
+  <li>MIDDLE：中</li>
+  <li>LOW：低</li>
+     */
     Level?: string;
     /**
-      * 木马记录数。
-      */
+     * 木马记录数。
+     */
     MalwareNum?: number;
     /**
-      * 异地登录数。
-      */
+     * 异地登录数。
+     */
     NonlocalLoginNum?: number;
     /**
-      * 密码破解成功数。
-      */
+     * 密码破解成功数。
+     */
     BruteAttackSuccessNum?: number;
     /**
-      * 漏洞数。
-      */
+     * 漏洞数。
+     */
     VulNum?: number;
     /**
-      * 导出文件下载地址。
-      */
+     * 导出文件下载地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2943,16 +2943,16 @@ export interface DescribeWeeklyReportInfoResponse {
  */
 export interface DescribeSecurityDynamicsResponse {
     /**
-      * 安全事件消息数组。
-      */
+     * 安全事件消息数组。
+     */
     SecurityDynamics?: Array<SecurityDynamic>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2960,8 +2960,8 @@ export interface DescribeSecurityDynamicsResponse {
  */
 export interface DeleteReverseShellEventsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2969,8 +2969,8 @@ export interface DeleteReverseShellEventsResponse {
  */
 export interface DeletePrivilegeEventsRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -2978,8 +2978,8 @@ export interface DeletePrivilegeEventsRequest {
  */
 export interface DeleteBashRulesRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -2987,8 +2987,8 @@ export interface DeleteBashRulesRequest {
  */
 export interface CloseProVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2996,8 +2996,8 @@ export interface CloseProVersionResponse {
  */
 export interface DeleteAttackLogsRequest {
     /**
-      * 日志ID数组，最大100条。
-      */
+     * 日志ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -3005,16 +3005,16 @@ export interface DeleteAttackLogsRequest {
  */
 export interface DescribeOpenPortsResponse {
     /**
-      * 端口列表记录总数。
-      */
+     * 端口列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 端口列表。
-      */
+     * 端口列表。
+     */
     OpenPorts?: Array<OpenPort>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3022,8 +3022,8 @@ export interface DescribeOpenPortsResponse {
  */
 export interface EditBashRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3031,8 +3031,8 @@ export interface EditBashRuleResponse {
  */
 export interface OpenProVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3040,8 +3040,8 @@ export interface OpenProVersionResponse {
  */
 export interface DescribeMachineInfoRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid?: string;
 }
 /**
@@ -3049,23 +3049,23 @@ export interface DescribeMachineInfoRequest {
  */
 export interface DescribeMaliciousRequestsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | TRUSTED：已信任 | UN_TRUSTED：已取消信任）</li>
-<li>Domain - String - 是否必填：否 - 恶意请求的域名</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
+     * 过滤条件。
+  <li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | TRUSTED：已信任 | UN_TRUSTED：已取消信任）</li>
+  <li>Domain - String - 是否必填：否 - 恶意请求的域名</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+     */
     Filters?: Array<Filter>;
     /**
-      * 云镜客户端唯一UUID。
-      */
+     * 云镜客户端唯一UUID。
+     */
     Uuid?: string;
 }
 /**
@@ -3073,26 +3073,26 @@ export interface DescribeMaliciousRequestsRequest {
  */
 export interface DescribeProcessesRequest {
     /**
-      * 云镜客户端唯一Uuid。Uuid和ProcessName必填其一，使用Uuid表示，查询该主机列表信息。
-      */
+     * 云镜客户端唯一Uuid。Uuid和ProcessName必填其一，使用Uuid表示，查询该主机列表信息。
+     */
     Uuid?: string;
     /**
-      * 进程名。Uuid和ProcessName必填其一，使用ProcessName表示，查询该进程列表信息。
-      */
+     * 进程名。Uuid和ProcessName必填其一，使用ProcessName表示，查询该进程列表信息。
+     */
     ProcessName?: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>ProcessName - String - 是否必填：否 - 进程名</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
+     * 过滤条件。
+  <li>ProcessName - String - 是否必填：否 - 进程名</li>
+  <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -3100,12 +3100,12 @@ export interface DescribeProcessesRequest {
  */
 export interface DeleteUsualLoginPlacesRequest {
     /**
-      * 云镜客户端Uuid
-      */
+     * 云镜客户端Uuid
+     */
     Uuid: string;
     /**
-      * 已添加常用登录地城市ID数组
-      */
+     * 已添加常用登录地城市ID数组
+     */
     CityIds: Array<number>;
 }
 /**
@@ -3113,12 +3113,12 @@ export interface DeleteUsualLoginPlacesRequest {
  */
 export interface WeeklyReport {
     /**
-      * 周报开始时间。
-      */
+     * 周报开始时间。
+     */
     BeginDate: string;
     /**
-      * 周报结束时间。
-      */
+     * 周报结束时间。
+     */
     EndDate: string;
 }
 /**
@@ -3126,8 +3126,8 @@ export interface WeeklyReport {
  */
 export interface DescribeOpenPortTaskStatusRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
 }
 /**
@@ -3142,12 +3142,12 @@ export interface DescribeOpenPortTaskStatusRequest {
  */
 export interface Filter {
     /**
-      * 过滤键的名称。
-      */
+     * 过滤键的名称。
+     */
     Name: string;
     /**
-      * 一个或者多个过滤值。
-      */
+     * 一个或者多个过滤值。
+     */
     Values: Array<string>;
 }
 /**
@@ -3155,8 +3155,8 @@ export interface Filter {
  */
 export interface DeleteLoginWhiteListResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3164,17 +3164,17 @@ export interface DeleteLoginWhiteListResponse {
  */
 export interface DescribeAccountStatisticsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Username - String - 是否必填：否 - 帐号用户名</li>
-      */
+     * 过滤条件。
+  <li>Username - String - 是否必填：否 - 帐号用户名</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -3182,17 +3182,17 @@ export interface DescribeAccountStatisticsRequest {
  */
 export interface DescribeAttackLogsResponse {
     /**
-      * 日志列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 日志列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AttackLogs?: Array<DefendAttackLog>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3200,12 +3200,12 @@ export interface DescribeAttackLogsResponse {
  */
 export interface OpenProVersionPrepaidResponse {
     /**
-      * 订单ID列表。
-      */
+     * 订单ID列表。
+     */
     DealIds?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3213,8 +3213,8 @@ export interface OpenProVersionPrepaidResponse {
  */
 export interface MisAlarmNonlocalLoginPlacesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3222,8 +3222,8 @@ export interface MisAlarmNonlocalLoginPlacesResponse {
  */
 export interface DeleteMalwaresResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3231,17 +3231,17 @@ export interface DeleteMalwaresResponse {
  */
 export interface ChargePrepaid {
     /**
-      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
-      */
+     * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+     */
     Period: number;
     /**
-      * 自动续费标识。取值范围：
-<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
-<li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
-<li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
-
-默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-      */
+     * 自动续费标识。取值范围：
+  <li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+  <li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
+  <li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+  
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+     */
     RenewFlag?: string;
 }
 /**
@@ -3249,16 +3249,16 @@ export interface ChargePrepaid {
  */
 export interface DescribeWeeklyReportNonlocalLoginPlacesRequest {
     /**
-      * 专业周报开始时间。
-      */
+     * 专业周报开始时间。
+     */
     BeginDate: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -3266,16 +3266,16 @@ export interface DescribeWeeklyReportNonlocalLoginPlacesRequest {
  */
 export interface SeparateMalwaresResponse {
     /**
-      * 隔离成功的id数组。
-      */
+     * 隔离成功的id数组。
+     */
     SuccessIds?: Array<number>;
     /**
-      * 隔离失败的id数组。
-      */
+     * 隔离失败的id数组。
+     */
     FailedIds?: Array<number>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3283,12 +3283,12 @@ export interface SeparateMalwaresResponse {
  */
 export interface ProcessStatistics {
     /**
-      * 进程名。
-      */
+     * 进程名。
+     */
     ProcessName: string;
     /**
-      * 主机数量。
-      */
+     * 主机数量。
+     */
     MachineNum: number;
 }
 /**
@@ -3296,52 +3296,52 @@ export interface ProcessStatistics {
  */
 export interface Process {
     /**
-      * 唯一ID。
-      */
+     * 唯一ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一UUID。
-      */
+     * 云镜客户端唯一UUID。
+     */
     Uuid: string;
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 主机名。
-      */
+     * 主机名。
+     */
     MachineName: string;
     /**
-      * 进程Pid。
-      */
+     * 进程Pid。
+     */
     Pid: number;
     /**
-      * 进程Ppid。
-      */
+     * 进程Ppid。
+     */
     Ppid: number;
     /**
-      * 进程名。
-      */
+     * 进程名。
+     */
     ProcessName: string;
     /**
-      * 进程用户名。
-      */
+     * 进程用户名。
+     */
     Username: string;
     /**
-      * 所属平台。
-<li>WIN32：windows32位</li>
-<li>WIN64：windows64位</li>
-<li>LINUX32：Linux32位</li>
-<li>LINUX64：Linux64位</li>
-      */
+     * 所属平台。
+  <li>WIN32：windows32位</li>
+  <li>WIN64：windows64位</li>
+  <li>LINUX32：Linux32位</li>
+  <li>LINUX64：Linux64位</li>
+     */
     Platform: string;
     /**
-      * 进程路径。
-      */
+     * 进程路径。
+     */
     FullPath: string;
     /**
-      * 创建时间。
-      */
+     * 创建时间。
+     */
     CreateTime: string;
 }
 /**
@@ -3349,22 +3349,22 @@ export interface Process {
  */
 export interface DescribeBruteAttacksRequest {
     /**
-      * 客户端唯一Uuid。
-      */
+     * 客户端唯一Uuid。
+     */
     Uuid?: string;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 -  查询关键字</li>
-<li>Status - String - 是否必填：否 -  查询状态（FAILED：破解失败 |SUCCESS：破解成功）</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 -  查询关键字</li>
+  <li>Status - String - 是否必填：否 -  查询状态（FAILED：破解失败 |SUCCESS：破解成功）</li>
+     */
     Filters?: Array<Filter>;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
 }
 /**
@@ -3376,17 +3376,17 @@ export declare type DescribeVulScanResultRequest = null;
  */
 export interface DescribePrivilegeEventsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -3394,16 +3394,16 @@ export interface DescribePrivilegeEventsRequest {
  */
 export interface DescribeWeeklyReportMalwaresResponse {
     /**
-      * 专业周报木马数据。
-      */
+     * 专业周报木马数据。
+     */
     WeeklyReportMalwares?: Array<WeeklyReportMalware>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3411,12 +3411,12 @@ export interface DescribeWeeklyReportMalwaresResponse {
  */
 export interface DescribeSecurityDynamicsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -3424,12 +3424,12 @@ export interface DescribeSecurityDynamicsRequest {
  */
 export interface ExportBashEventsResponse {
     /**
-      * 导出文件下载链接地址。
-      */
+     * 导出文件下载链接地址。
+     */
     DownloadUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3437,43 +3437,43 @@ export interface ExportBashEventsResponse {
  */
 export interface ImpactedHost {
     /**
-      * 漏洞ID。
-      */
+     * 漏洞ID。
+     */
     Id: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName: string;
     /**
-      * 最后检测时间。
-      */
+     * 最后检测时间。
+     */
     LastScanTime: string;
     /**
-      * 漏洞状态。
-<li>UN_OPERATED ：待处理</li>
-<li>SCANING : 扫描中</li>
-<li>FIXED : 已修复</li>
-      */
+     * 漏洞状态。
+  <li>UN_OPERATED ：待处理</li>
+  <li>SCANING : 扫描中</li>
+  <li>FIXED : 已修复</li>
+     */
     VulStatus: string;
     /**
-      * 云镜客户端唯一标识UUID。
-      */
+     * 云镜客户端唯一标识UUID。
+     */
     Uuid: string;
     /**
-      * 漏洞描述。
-      */
+     * 漏洞描述。
+     */
     Description: string;
     /**
-      * 漏洞种类ID。
-      */
+     * 漏洞种类ID。
+     */
     VulId: number;
     /**
-      * 是否为专业版。
-      */
+     * 是否为专业版。
+     */
     IsProVersion: boolean;
 }
 /**
@@ -3481,16 +3481,16 @@ export interface ImpactedHost {
  */
 export interface DescribeReverseShellRulesResponse {
     /**
-      * 列表内容
-      */
+     * 列表内容
+     */
     List?: Array<ReverseShellRule>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3498,8 +3498,8 @@ export interface DescribeReverseShellRulesResponse {
  */
 export interface DescribeComponentInfoRequest {
     /**
-      * 组件ID。
-      */
+     * 组件ID。
+     */
     ComponentId: number;
 }
 /**
@@ -3507,8 +3507,8 @@ export interface DescribeComponentInfoRequest {
  */
 export interface DeleteNonlocalLoginPlacesRequest {
     /**
-      * 异地登录事件ID数组。
-      */
+     * 异地登录事件ID数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -3516,28 +3516,28 @@ export interface DeleteNonlocalLoginPlacesRequest {
  */
 export interface EditPrivilegeRuleRequest {
     /**
-      * 规则ID(新增时请留空)
-      */
+     * 规则ID(新增时请留空)
+     */
     Id?: number;
     /**
-      * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Uuid?: string;
     /**
-      * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
-      */
+     * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
+     */
     Hostip?: string;
     /**
-      * 进程名
-      */
+     * 进程名
+     */
     ProcessName?: string;
     /**
-      * 是否S权限进程
-      */
+     * 是否S权限进程
+     */
     SMode?: number;
     /**
-      * 是否全局规则(默认否)
-      */
+     * 是否全局规则(默认否)
+     */
     IsGlobal?: number;
 }
 /**
@@ -3549,12 +3549,12 @@ export declare type ExportMaliciousRequestsRequest = null;
  */
 export interface AccountStatistics {
     /**
-      * 用户名。
-      */
+     * 用户名。
+     */
     Username: string;
     /**
-      * 主机数量。
-      */
+     * 主机数量。
+     */
     MachineNum: number;
 }
 /**
@@ -3562,16 +3562,16 @@ export interface AccountStatistics {
  */
 export interface DescribeMachinesResponse {
     /**
-      * 主机列表
-      */
+     * 主机列表
+     */
     Machines?: Array<Machine>;
     /**
-      * 主机数量
-      */
+     * 主机数量
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3579,8 +3579,8 @@ export interface DescribeMachinesResponse {
  */
 export interface CreateUsualLoginPlacesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3588,16 +3588,16 @@ export interface CreateUsualLoginPlacesResponse {
  */
 export interface DescribePrivilegeRulesResponse {
     /**
-      * 列表内容
-      */
+     * 列表内容
+     */
     List?: Array<PrivilegeRule>;
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3605,8 +3605,8 @@ export interface DescribePrivilegeRulesResponse {
  */
 export interface ModifyProVersionRenewFlagResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3614,82 +3614,82 @@ export interface ModifyProVersionRenewFlagResponse {
  */
 export interface Machine {
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName: string;
     /**
-      * 主机系统。
-      */
+     * 主机系统。
+     */
     MachineOs: string;
     /**
-      * 主机状态。
-<li>OFFLINE: 离线  </li>
-<li>ONLINE: 在线</li>
-<li>MACHINE_STOPPED: 已关机</li>
-      */
+     * 主机状态。
+  <li>OFFLINE: 离线  </li>
+  <li>ONLINE: 在线</li>
+  <li>MACHINE_STOPPED: 已关机</li>
+     */
     MachineStatus: string;
     /**
-      * 云镜客户端唯一Uuid，若客户端长时间不在线将返回空字符。
-      */
+     * 云镜客户端唯一Uuid，若客户端长时间不在线将返回空字符。
+     */
     Uuid: string;
     /**
-      * CVM或BM机器唯一Uuid。
-      */
+     * CVM或BM机器唯一Uuid。
+     */
     Quuid: string;
     /**
-      * 漏洞数。
-      */
+     * 漏洞数。
+     */
     VulNum: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 是否是专业版。
-<li>true： 是</li>
-<li>false：否</li>
-      */
+     * 是否是专业版。
+  <li>true： 是</li>
+  <li>false：否</li>
+     */
     IsProVersion: boolean;
     /**
-      * 主机外网IP。
-      */
+     * 主机外网IP。
+     */
     MachineWanIp: string;
     /**
-      * 主机状态。
-<li>POSTPAY: 表示后付费，即按量计费  </li>
-<li>PREPAY: 表示预付费，即包年包月</li>
-      */
+     * 主机状态。
+  <li>POSTPAY: 表示后付费，即按量计费  </li>
+  <li>PREPAY: 表示预付费，即包年包月</li>
+     */
     PayMode: string;
     /**
-      * 木马数。
-      */
+     * 木马数。
+     */
     MalwareNum: number;
     /**
-      * 标签信息
-      */
+     * 标签信息
+     */
     Tag: Array<MachineTag>;
     /**
-      * 基线风险数。
-      */
+     * 基线风险数。
+     */
     BaselineNum: number;
     /**
-      * 网络风险数。
-      */
+     * 网络风险数。
+     */
     CyberAttackNum: number;
     /**
-      * 风险状态。
-<li>SAFE：安全</li>
-<li>RISK：风险</li>
-<li>UNKNOWN：未知</li>
-      */
+     * 风险状态。
+  <li>SAFE：安全</li>
+  <li>RISK：风险</li>
+  <li>UNKNOWN：未知</li>
+     */
     SecurityStatus: string;
     /**
-      * 入侵事件数
-      */
+     * 入侵事件数
+     */
     InvasionNum: number;
     /**
-      * 地域信息
-      */
+     * 地域信息
+     */
     RegionInfo: RegionInfo;
 }
 /**
@@ -3697,8 +3697,8 @@ export interface Machine {
  */
 export interface TrustMalwaresRequest {
     /**
-      * 木马ID数组。
-      */
+     * 木马ID数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -3706,42 +3706,42 @@ export interface TrustMalwaresRequest {
  */
 export interface Malware {
     /**
-      * 事件ID。
-      */
+     * 事件ID。
+     */
     Id: number;
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 当前木马状态。
-<li>UN_OPERATED：未处理</li><li>SEGREGATED：已隔离</li><li>TRUSTED：已信任</li>
-<li>SEPARATING：隔离中</li><li>RECOVERING：恢复中</li>
-      */
+     * 当前木马状态。
+  <li>UN_OPERATED：未处理</li><li>SEGREGATED：已隔离</li><li>TRUSTED：已信任</li>
+  <li>SEPARATING：隔离中</li><li>RECOVERING：恢复中</li>
+     */
     Status: string;
     /**
-      * 木马所在的路径。
-      */
+     * 木马所在的路径。
+     */
     FilePath: string;
     /**
-      * 木马描述。
-      */
+     * 木马描述。
+     */
     Description: string;
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName: string;
     /**
-      * 木马文件创建时间。
-      */
+     * 木马文件创建时间。
+     */
     FileCreateTime: string;
     /**
-      * 木马文件修改时间。
-      */
+     * 木马文件修改时间。
+     */
     ModifyTime: string;
     /**
-      * 云镜客户端唯一标识UUID。
-      */
+     * 云镜客户端唯一标识UUID。
+     */
     Uuid: string;
 }
 /**
@@ -3749,16 +3749,16 @@ export interface Malware {
  */
 export interface DescribeWeeklyReportVulsResponse {
     /**
-      * 专业周报漏洞数据数组。
-      */
+     * 专业周报漏洞数据数组。
+     */
     WeeklyReportVuls?: Array<WeeklyReportVul>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3766,24 +3766,24 @@ export interface DescribeWeeklyReportVulsResponse {
  */
 export interface WeeklyReportBruteAttack {
     /**
-      * 主机IP。
-      */
+     * 主机IP。
+     */
     MachineIp: string;
     /**
-      * 被破解用户名。
-      */
+     * 被破解用户名。
+     */
     Username: string;
     /**
-      * 源IP。
-      */
+     * 源IP。
+     */
     SrcIp: string;
     /**
-      * 尝试次数。
-      */
+     * 尝试次数。
+     */
     Count: number;
     /**
-      * 攻击时间。
-      */
+     * 攻击时间。
+     */
     AttackTime: string;
 }
 /**
@@ -3791,60 +3791,60 @@ export interface WeeklyReportBruteAttack {
  */
 export interface DefendAttackLog {
     /**
-      * 日志ID
-      */
+     * 日志ID
+     */
     Id: number;
     /**
-      * 客户端ID
-      */
+     * 客户端ID
+     */
     Uuid: string;
     /**
-      * 来源IP
-      */
+     * 来源IP
+     */
     SrcIp: string;
     /**
-      * 来源端口
-      */
+     * 来源端口
+     */
     SrcPort: number;
     /**
-      * 攻击方式
-      */
+     * 攻击方式
+     */
     HttpMethod: string;
     /**
-      * 攻击描述
-      */
+     * 攻击描述
+     */
     HttpCgi: string;
     /**
-      * 攻击参数
-      */
+     * 攻击参数
+     */
     HttpParam: string;
     /**
-      * 威胁类型
-      */
+     * 威胁类型
+     */
     VulType: string;
     /**
-      * 攻击时间
-      */
+     * 攻击时间
+     */
     CreatedAt: string;
     /**
-      * 目标服务器IP
-      */
+     * 目标服务器IP
+     */
     MachineIp: string;
     /**
-      * 目标服务器名称
-      */
+     * 目标服务器名称
+     */
     MachineName: string;
     /**
-      * 目标IP
-      */
+     * 目标IP
+     */
     DstIp: string;
     /**
-      * 目标端口
-      */
+     * 目标端口
+     */
     DstPort: number;
     /**
-      * 攻击内容
-      */
+     * 攻击内容
+     */
     HttpContent: string;
 }
 /**
@@ -3852,44 +3852,44 @@ export interface DefendAttackLog {
  */
 export interface PrivilegeRule {
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     Id: number;
     /**
-      * 客户端ID
-      */
+     * 客户端ID
+     */
     Uuid: string;
     /**
-      * 进程名
-      */
+     * 进程名
+     */
     ProcessName: string;
     /**
-      * 是否S权限
-      */
+     * 是否S权限
+     */
     SMode: number;
     /**
-      * 操作人
-      */
+     * 操作人
+     */
     Operator: string;
     /**
-      * 是否全局规则
-      */
+     * 是否全局规则
+     */
     IsGlobal: number;
     /**
-      * 状态(0: 有效 1: 无效)
-      */
+     * 状态(0: 有效 1: 无效)
+     */
     Status: number;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreateTime: string;
     /**
-      * 修改时间
-      */
+     * 修改时间
+     */
     ModifyTime: string;
     /**
-      * 主机IP
-      */
+     * 主机IP
+     */
     Hostip: string;
 }
 /**
@@ -3897,35 +3897,35 @@ export interface PrivilegeRule {
  */
 export interface HistoryAccount {
     /**
-      * 唯一ID。
-      */
+     * 唯一ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 主机名。
-      */
+     * 主机名。
+     */
     MachineName: string;
     /**
-      * 帐号名。
-      */
+     * 帐号名。
+     */
     Username: string;
     /**
-      * 帐号变更类型。
-<li>CREATE：表示新增帐号</li>
-<li>MODIFY：表示修改帐号</li>
-<li>DELETE：表示删除帐号</li>
-      */
+     * 帐号变更类型。
+  <li>CREATE：表示新增帐号</li>
+  <li>MODIFY：表示修改帐号</li>
+  <li>DELETE：表示删除帐号</li>
+     */
     ModifyType: string;
     /**
-      * 变更时间。
-      */
+     * 变更时间。
+     */
     ModifyTime: string;
 }
 /**
@@ -3933,15 +3933,15 @@ export interface HistoryAccount {
  */
 export interface ModifyProVersionRenewFlagRequest {
     /**
-      * 自动续费标识。取值范围：
-<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
-<li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
-<li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
-      */
+     * 自动续费标识。取值范围：
+  <li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+  <li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
+  <li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+     */
     RenewFlag: string;
     /**
-      * 主机唯一ID，对应CVM的uuid、BM的instanceId。
-      */
+     * 主机唯一ID，对应CVM的uuid、BM的instanceId。
+     */
     Quuid: string;
 }
 /**
@@ -3949,8 +3949,8 @@ export interface ModifyProVersionRenewFlagRequest {
  */
 export interface TrustMaliciousRequestResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3958,8 +3958,8 @@ export interface TrustMaliciousRequestResponse {
  */
 export interface DescribeUsualLoginPlacesRequest {
     /**
-      * 云镜客户端UUID
-      */
+     * 云镜客户端UUID
+     */
     Uuid: string;
 }
 /**
@@ -3967,38 +3967,38 @@ export interface DescribeUsualLoginPlacesRequest {
  */
 export interface Component {
     /**
-      * 唯一ID。
-      */
+     * 唯一ID。
+     */
     Id: number;
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
     /**
-      * 主机内网IP。
-      */
+     * 主机内网IP。
+     */
     MachineIp: string;
     /**
-      * 主机名。
-      */
+     * 主机名。
+     */
     MachineName: string;
     /**
-      * 组件版本号。
-      */
+     * 组件版本号。
+     */
     ComponentVersion: string;
     /**
-      * 组件类型。
-<li>SYSTEM：系统组件</li>
-<li>WEB：Web组件</li>
-      */
+     * 组件类型。
+  <li>SYSTEM：系统组件</li>
+  <li>WEB：Web组件</li>
+     */
     ComponentType: string;
     /**
-      * 组件名称。
-      */
+     * 组件名称。
+     */
     ComponentName: string;
     /**
-      * 组件检测更新时间。
-      */
+     * 组件检测更新时间。
+     */
     ModifyTime: string;
 }
 /**
@@ -4006,26 +4006,26 @@ export interface Component {
  */
 export interface DescribeVulsRequest {
     /**
-      * 漏洞类型。
-<li>WEB：Web应用漏洞</li>
-<li>SYSTEM：系统组件漏洞</li>
-<li>BASELINE：安全基线</li>
-      */
+     * 漏洞类型。
+  <li>WEB：Web应用漏洞</li>
+  <li>SYSTEM：系统组件漏洞</li>
+  <li>BASELINE：安全基线</li>
+     */
     VulType: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
-
-Status过滤条件值只能取其一，不能是“或”逻辑。
-      */
+     * 过滤条件。
+  <li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
+  
+  Status过滤条件值只能取其一，不能是“或”逻辑。
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4033,16 +4033,16 @@ Status过滤条件值只能取其一，不能是“或”逻辑。
  */
 export interface DescribeAgentVulsResponse {
     /**
-      * 记录总数
-      */
+     * 记录总数
+     */
     TotalCount?: number;
     /**
-      * 主机漏洞信息
-      */
+     * 主机漏洞信息
+     */
     AgentVuls?: Array<AgentVul>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4050,12 +4050,12 @@ export interface DescribeAgentVulsResponse {
  */
 export interface SwitchBashRulesRequest {
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     Id: number;
     /**
-      * 是否禁用
-      */
+     * 是否禁用
+     */
     Disabled: number;
 }
 /**
@@ -4063,17 +4063,17 @@ export interface SwitchBashRulesRequest {
  */
 export interface DescribeProcessStatisticsRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>ProcessName - String - 是否必填：否 - 进程名</li>
-      */
+     * 过滤条件。
+  <li>ProcessName - String - 是否必填：否 - 进程名</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4081,8 +4081,8 @@ export interface DescribeProcessStatisticsRequest {
  */
 export interface DeleteMachineTagResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4090,21 +4090,21 @@ export interface DeleteMachineTagResponse {
  */
 export interface DescribeHistoryAccountsRequest {
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Username - String - 是否必填：否 - 帐号名</li>
-      */
+     * 过滤条件。
+  <li>Username - String - 是否必填：否 - 帐号名</li>
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4112,80 +4112,80 @@ export interface DescribeHistoryAccountsRequest {
  */
 export interface DescribeMachineInfoResponse {
     /**
-      * 机器ip。
-      */
+     * 机器ip。
+     */
     MachineIp?: string;
     /**
-      * 受云镜保护天数。
-      */
+     * 受云镜保护天数。
+     */
     ProtectDays?: number;
     /**
-      * 操作系统。
-      */
+     * 操作系统。
+     */
     MachineOs?: string;
     /**
-      * 主机名称。
-      */
+     * 主机名称。
+     */
     MachineName?: string;
     /**
-      * 在线状态。
-<li>ONLINE： 在线</li>
-<li>OFFLINE：离线</li>
-      */
+     * 在线状态。
+  <li>ONLINE： 在线</li>
+  <li>OFFLINE：离线</li>
+     */
     MachineStatus?: string;
     /**
-      * CVM或BM主机唯一标识。
-      */
+     * CVM或BM主机唯一标识。
+     */
     InstanceId?: string;
     /**
-      * 主机外网IP。
-      */
+     * 主机外网IP。
+     */
     MachineWanIp?: string;
     /**
-      * CVM或BM主机唯一Uuid。
-      */
+     * CVM或BM主机唯一Uuid。
+     */
     Quuid?: string;
     /**
-      * 云镜客户端唯一Uuid。
-      */
+     * 云镜客户端唯一Uuid。
+     */
     Uuid?: string;
     /**
-      * 是否开通专业版。
-<li>true：是</li>
-<li>false：否</li>
-      */
+     * 是否开通专业版。
+  <li>true：是</li>
+  <li>false：否</li>
+     */
     IsProVersion?: boolean;
     /**
-      * 专业版开通时间。
-      */
+     * 专业版开通时间。
+     */
     ProVersionOpenDate?: string;
     /**
-      * 云主机类型。
-<li>CVM: 虚拟主机</li>
-<li>BM: 黑石物理机</li>
-      */
+     * 云主机类型。
+  <li>CVM: 虚拟主机</li>
+  <li>BM: 黑石物理机</li>
+     */
     MachineType?: string;
     /**
-      * 机器所属地域。如：ap-guangzhou，ap-shanghai
-      */
+     * 机器所属地域。如：ap-guangzhou，ap-shanghai
+     */
     MachineRegion?: string;
     /**
-      * 主机状态。
-<li>POSTPAY: 表示后付费，即按量计费  </li>
-<li>PREPAY: 表示预付费，即包年包月</li>
-      */
+     * 主机状态。
+  <li>POSTPAY: 表示后付费，即按量计费  </li>
+  <li>PREPAY: 表示预付费，即包年包月</li>
+     */
     PayMode?: string;
     /**
-      * 免费木马剩余检测数量。
-      */
+     * 免费木马剩余检测数量。
+     */
     FreeMalwaresLeft?: number;
     /**
-      * 免费漏洞剩余检测数量。
-      */
+     * 免费漏洞剩余检测数量。
+     */
     FreeVulsLeft?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4193,24 +4193,24 @@ export interface DescribeMachineInfoResponse {
  */
 export interface OpenProVersionRequest {
     /**
-      * 云主机类型。
-<li>CVM：表示虚拟主机</li>
-<li>BM:  表示黑石物理机</li>
-      */
+     * 云主机类型。
+  <li>CVM：表示虚拟主机</li>
+  <li>BM:  表示黑石物理机</li>
+     */
     MachineType: string;
     /**
-      * 机器所属地域。
-如：ap-guangzhou，ap-shanghai
-      */
+     * 机器所属地域。
+  如：ap-guangzhou，ap-shanghai
+     */
     MachineRegion: string;
     /**
-      * 主机唯一标识Uuid数组。
-黑石的InstanceId，CVM的Uuid
-      */
+     * 主机唯一标识Uuid数组。
+  黑石的InstanceId，CVM的Uuid
+     */
     Quuids: Array<string>;
     /**
-      * 活动ID。
-      */
+     * 活动ID。
+     */
     ActivityId?: number;
 }
 /**
@@ -4218,8 +4218,8 @@ export interface OpenProVersionRequest {
  */
 export interface DeleteBashRulesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4227,8 +4227,8 @@ export interface DeleteBashRulesResponse {
  */
 export interface IgnoreImpactedHostsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4236,8 +4236,8 @@ export interface IgnoreImpactedHostsResponse {
  */
 export interface DeleteBashEventsRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -4245,16 +4245,16 @@ export interface DeleteBashEventsRequest {
  */
 export interface DescribeComponentsResponse {
     /**
-      * 组件列表记录总数。
-      */
+     * 组件列表记录总数。
+     */
     TotalCount?: number;
     /**
-      * 组件列表数据。
-      */
+     * 组件列表数据。
+     */
     Components?: Array<Component>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4262,16 +4262,16 @@ export interface DescribeComponentsResponse {
  */
 export interface Tag {
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     Id: number;
     /**
-      * 标签名
-      */
+     * 标签名
+     */
     Name: string;
     /**
-      * 服务器数
-      */
+     * 服务器数
+     */
     Count: number;
 }
 /**
@@ -4279,8 +4279,8 @@ export interface Tag {
  */
 export interface RescanImpactedHostResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4288,12 +4288,12 @@ export interface RescanImpactedHostResponse {
  */
 export interface SecurityTrend {
     /**
-      * 事件时间。
-      */
+     * 事件时间。
+     */
     Date: string;
     /**
-      * 事件数量。
-      */
+     * 事件数量。
+     */
     EventNum: number;
 }
 /**
@@ -4301,34 +4301,34 @@ export interface SecurityTrend {
  */
 export interface Vul {
     /**
-      * 漏洞种类ID
-      */
+     * 漏洞种类ID
+     */
     VulId: number;
     /**
-      * 漏洞名称
-      */
+     * 漏洞名称
+     */
     VulName: string;
     /**
-      * 漏洞危害等级:
-HIGH：高危
-MIDDLE：中危
-LOW：低危
-NOTICE：提示
-      */
+     * 漏洞危害等级:
+  HIGH：高危
+  MIDDLE：中危
+  LOW：低危
+  NOTICE：提示
+     */
     VulLevel: string;
     /**
-      * 最后扫描时间
-      */
+     * 最后扫描时间
+     */
     LastScanTime: string;
     /**
-      * 受影响机器数量
-      */
+     * 受影响机器数量
+     */
     ImpactedHostNum: number;
     /**
-      * 漏洞状态
-* UN_OPERATED : 待处理
-* FIXED : 已修复
-      */
+     * 漏洞状态
+  * UN_OPERATED : 待处理
+  * FIXED : 已修复
+     */
     VulStatus: string;
 }
 /**
@@ -4336,20 +4336,20 @@ NOTICE：提示
  */
 export interface AddMachineTagRequest {
     /**
-      * 云服务器ID
-      */
+     * 云服务器ID
+     */
     Quuid: string;
     /**
-      * 标签ID
-      */
+     * 标签ID
+     */
     TagId: number;
     /**
-      * 云服务器地区
-      */
+     * 云服务器地区
+     */
     MRegion: string;
     /**
-      * 云服务器类型(CVM|BM)
-      */
+     * 云服务器类型(CVM|BM)
+     */
     MArea: string;
 }
 /**
@@ -4357,16 +4357,16 @@ export interface AddMachineTagRequest {
  */
 export interface DescribeWeeklyReportsResponse {
     /**
-      * 专业周报列表数组。
-      */
+     * 专业周报列表数组。
+     */
     WeeklyReports?: Array<WeeklyReport>;
     /**
-      * 记录总数。
-      */
+     * 记录总数。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4374,8 +4374,8 @@ export interface DescribeWeeklyReportsResponse {
  */
 export interface DeleteReverseShellEventsRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -4383,8 +4383,8 @@ export interface DeleteReverseShellEventsRequest {
  */
 export interface ModifyAutoOpenProVersionConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4396,16 +4396,16 @@ export declare type ExportReverseShellEventsRequest = null;
  */
 export interface DescribeVulsResponse {
     /**
-      * 漏洞数量。
-      */
+     * 漏洞数量。
+     */
     TotalCount?: number;
     /**
-      * 漏洞列表数组。
-      */
+     * 漏洞列表数组。
+     */
     Vuls?: Array<Vul>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4413,16 +4413,16 @@ export interface DescribeVulsResponse {
  */
 export interface RecoverMalwaresResponse {
     /**
-      * 恢复成功id数组
-      */
+     * 恢复成功id数组
+     */
     SuccessIds?: Array<number>;
     /**
-      * 恢复失败id数组
-      */
+     * 恢复失败id数组
+     */
     FailedIds?: Array<number>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4430,8 +4430,8 @@ export interface RecoverMalwaresResponse {
  */
 export interface EditTagsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4439,8 +4439,8 @@ export interface EditTagsResponse {
  */
 export interface IgnoreImpactedHostsRequest {
     /**
-      * 漏洞ID数组。
-      */
+     * 漏洞ID数组。
+     */
     Ids: Array<number>;
 }
 /**
@@ -4452,23 +4452,23 @@ export declare type DescribeAlarmAttributeRequest = null;
  */
 export interface DescribeMalwaresRequest {
     /**
-      * 客户端唯一Uuid。
-      */
+     * 客户端唯一Uuid。
+     */
     Uuid?: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 木马状态（UN_OPERATED: 未处理 | SEGREGATED: 已隔离|TRUSTED：信任）</li>
-每个过滤条件只支持一个值，暂不支持多个值“或”关系查询。
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+  <li>Status - String - 是否必填：否 - 木马状态（UN_OPERATED: 未处理 | SEGREGATED: 已隔离|TRUSTED：信任）</li>
+  每个过滤条件只支持一个值，暂不支持多个值“或”关系查询。
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4476,8 +4476,8 @@ export interface DescribeMalwaresRequest {
  */
 export interface DeleteBruteAttacksResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4485,8 +4485,8 @@ export interface DeleteBruteAttacksResponse {
  */
 export interface DeleteMaliciousRequestsRequest {
     /**
-      * 恶意请求记录ID数组，最大100条。
-      */
+     * 恶意请求记录ID数组，最大100条。
+     */
     Ids: Array<number>;
 }
 /**
@@ -4494,30 +4494,30 @@ export interface DeleteMaliciousRequestsRequest {
  */
 export interface DescribeMachinesRequest {
     /**
-      * 云主机类型。
-<li>CVM：表示虚拟主机</li>
-<li>BM:  表示黑石物理机</li>
-      */
+     * 云主机类型。
+  <li>CVM：表示虚拟主机</li>
+  <li>BM:  表示黑石物理机</li>
+     */
     MachineType: string;
     /**
-      * 机器所属地域。如：ap-guangzhou，ap-shanghai
-      */
+     * 机器所属地域。如：ap-guangzhou，ap-shanghai
+     */
     MachineRegion: string;
     /**
-      * 返回数量，默认为10，最大值为100。
-      */
+     * 返回数量，默认为10，最大值为100。
+     */
     Limit?: number;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
-每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
-      */
+     * 过滤条件。
+  <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+  <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+  <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+  每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4525,8 +4525,8 @@ export interface DescribeMachinesRequest {
  */
 export interface ModifyAlarmAttributeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4534,56 +4534,56 @@ export interface ModifyAlarmAttributeResponse {
  */
 export interface BashEvent {
     /**
-      * ID
-      */
+     * ID
+     */
     Id: number;
     /**
-      * 云镜ID
-      */
+     * 云镜ID
+     */
     Uuid: string;
     /**
-      * 主机ID
-      */
+     * 主机ID
+     */
     Quuid: string;
     /**
-      * 主机内网IP
-      */
+     * 主机内网IP
+     */
     Hostip: string;
     /**
-      * 执行用户名
-      */
+     * 执行用户名
+     */
     User: string;
     /**
-      * 平台类型
-      */
+     * 平台类型
+     */
     Platform: number;
     /**
-      * 执行命令
-      */
+     * 执行命令
+     */
     BashCmd: string;
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     RuleId: number;
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     RuleName: string;
     /**
-      * 规则等级
-      */
+     * 规则等级
+     */
     RuleLevel: number;
     /**
-      * 处理状态
-      */
+     * 处理状态
+     */
     Status: number;
     /**
-      * 发生时间
-      */
+     * 发生时间
+     */
     CreateTime: string;
     /**
-      * 主机名
-      */
+     * 主机名
+     */
     MachineName: string;
 }
 /**
@@ -4591,8 +4591,8 @@ export interface BashEvent {
  */
 export interface DeleteMalwaresRequest {
     /**
-      * 木马记录ID数组
-      */
+     * 木马记录ID数组
+     */
     Ids: Array<number>;
 }
 /**
@@ -4600,16 +4600,16 @@ export interface DeleteMalwaresRequest {
  */
 export interface DescribeMalwaresResponse {
     /**
-      * 木马总数。
-      */
+     * 木马总数。
+     */
     TotalCount?: number;
     /**
-      * Malware数组。
-      */
+     * Malware数组。
+     */
     Malwares?: Array<Malware>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4617,7 +4617,7 @@ export interface DescribeMalwaresResponse {
  */
 export interface DeletePrivilegeRulesRequest {
     /**
-      * ID数组，最大100条。
-      */
+     * ID数组，最大100条。
+     */
     Ids: Array<number>;
 }

@@ -23,11 +23,28 @@ export interface SchemaSpaceTimeSeries {
    * 库名
    */
   TableSchema: string
-
   /**
    * 单位时间间隔内的空间指标数据。
    */
   SeriesData: MonitorMetricSeriesData
+}
+
+/**
+ * 慢日志来源用户详情。
+ */
+export interface SlowLogUser {
+  /**
+   * 来源用户名。
+   */
+  UserName?: string
+  /**
+   * 该来源用户名的慢日志数目占总数目的比例，单位%。
+   */
+  Ratio?: number
+  /**
+   * 该来源用户名的慢日志数目。
+   */
+  Count?: number
 }
 
 /**
@@ -38,36 +55,38 @@ export interface RedisKeySpaceData {
    * key名。
    */
   Key: string
-
   /**
    * key类型。
    */
   Type: string
-
   /**
    * key编码方式。
    */
   Encoding: string
-
   /**
    * key过期时间戳（毫秒），0代表未设置过期时间。
    */
   ExpireTime: number
-
   /**
    * key内存大小，单位Byte。
    */
   Length: number
-
   /**
    * 元素个数。
    */
   ItemCount: number
-
   /**
    * 最大元素长度。
    */
   MaxElementSize: number
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize?: number
+  /**
+   * 所属分片序号。
+   */
+  ShardId?: string
 }
 
 /**
@@ -78,37 +97,30 @@ export interface HealthReportTask {
    * 异步任务请求 ID。
    */
   AsyncRequestId: number
-
   /**
    * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
    */
   Source: string
-
   /**
    * 任务完成进度，单位%。
    */
   Progress: number
-
   /**
    * 任务创建时间。
    */
   CreateTime: string
-
   /**
    * 任务开始执行时间。
    */
   StartTime: string
-
   /**
    * 任务完成执行时间。
    */
   EndTime: string
-
   /**
    * 任务所属实例的基础信息。
    */
   InstanceInfo: InstanceBasicInfo
-
   /**
    * 健康报告中的健康信息。
    */
@@ -123,32 +135,26 @@ export interface CreateDBDiagReportTaskRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 开始时间，如“2020-11-08T14:00:00+08:00”。
    */
   StartTime: string
-
   /**
    * 结束时间，如“2020-11-09T14:00:00+08:00”。
    */
   EndTime: string
-
   /**
    * 是否发送邮件: 0 - 否，1 - 是。
    */
   SendMailFlag: number
-
   /**
    * 接收邮件的联系人ID数组。
    */
   ContactPerson?: Array<number>
-
   /**
    * 接收邮件的联系组ID数组。
    */
   ContactGroup?: Array<number>
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
    */
@@ -163,17 +169,14 @@ export interface TableSpaceTimeSeries {
    * 表名。
    */
   TableName: string
-
   /**
    * 库名。
    */
   TableSchema: string
-
   /**
    * 库表的存储引擎。
    */
   Engine: string
-
   /**
    * 单位时间间隔内的空间指标数据。
    */
@@ -185,17 +188,15 @@ export interface TableSpaceTimeSeries {
  */
 export interface DescribeAuditLogFilesResponse {
   /**
-      * 符合条件的审计日志文件个数。
+   * 符合条件的审计日志文件个数。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount?: number
-
   /**
-      * 审计日志文件详情。
+   * 审计日志文件详情。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Items?: Array<AuditLogFile>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -210,57 +211,46 @@ export interface DescribeSlowLogsRequest {
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。
    */
   Product: string
-
   /**
    * 实例id。
    */
   InstanceId: string
-
   /**
    * sql模板的md5值
    */
   Md5: string
-
   /**
    * 开始时间，如“2019-09-10 12:13:14”。
    */
   StartTime: string
-
   /**
    * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
    */
   EndTime: string
-
   /**
    * 偏移量，默认为0。
    */
   Offset: number
-
   /**
    * 查询数目，默认为20，最大为100。
    */
   Limit: number
-
   /**
    * 数据库列表
    */
   DB?: Array<string>
-
   /**
    * 关键字
    */
   Key?: Array<string>
-
   /**
    * 用户
    */
   User?: Array<string>
-
   /**
    * IP
    */
   Ip?: Array<string>
-
   /**
    * 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素
    */
@@ -275,17 +265,14 @@ export interface DescribeTopSpaceTablesRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 返回的Top表数量，最大值为100，默认为20。
    */
   Limit?: number
-
   /**
    * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
    */
   SortBy?: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -300,22 +287,18 @@ export interface ScoreItem {
    * 异常诊断项名称。
    */
   DiagItem: string
-
   /**
    * 诊断项分类，取值包括：可用性、可维护性、性能及可靠性。
    */
   IssueType: string
-
   /**
    * 健康等级，取值包括：信息、提示、告警、严重、致命。
    */
   TopSeverity: string
-
   /**
    * 该异常诊断项出现次数。
    */
   Count: number
-
   /**
    * 扣分分数。
    */
@@ -330,16 +313,14 @@ export interface InstanceConfs {
    * 数据库巡检开关, Yes/No。
    */
   DailyInspection?: string
-
   /**
    * 实例概览开关，Yes/No。
    */
   OverviewDisplay?: string
-
   /**
-      * redis大key分析的自定义分割符，仅redis使用
+   * redis大key分析的自定义分割符，仅redis使用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   KeyDelimiters?: Array<string>
 }
 
@@ -351,22 +332,18 @@ export interface CreateSecurityAuditLogExportTaskRequest {
    * 安全审计组Id。
    */
   SecAuditGroupId: string
-
   /**
    * 导出日志开始时间，例如2020-12-28 00:00:00。
    */
   StartTime: string
-
   /**
    * 导出日志结束时间，例如2020-12-28 01:00:00。
    */
   EndTime: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
    */
   Product: string
-
   /**
    * 日志风险等级列表，支持值包括：0 无风险；1 低风险；2 中风险；3 高风险。
    */
@@ -381,58 +358,47 @@ export interface DescribeDBDiagEventResponse {
    * 诊断项。
    */
   DiagItem: string
-
   /**
    * 诊断类型。
    */
   DiagType: string
-
   /**
    * 事件 ID 。
    */
   EventId: number
-
   /**
    * 诊断事件详情，若无附加解释信息则输出为空。
    */
   Explanation: string
-
   /**
    * 诊断概要。
    */
   Outline: string
-
   /**
    * 诊断出的问题。
    */
   Problem: string
-
   /**
    * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
    */
   Severity: number
-
   /**
    * 开始时间
    */
   StartTime: string
-
   /**
    * 诊断建议，若无建议则输出为空。
    */
   Suggestions: string
-
   /**
-      * 保留字段。
+   * 保留字段。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metric: string
-
   /**
    * 结束时间。
    */
   EndTime: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -447,12 +413,10 @@ export interface DescribeDBDiagEventsResponse {
    * 诊断事件的总数目。
    */
   TotalCount: number
-
   /**
    * 诊断事件的列表。
    */
   Items: Array<DiagHistoryEventItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -467,12 +431,10 @@ export interface DescribeDBDiagReportTasksResponse {
    * 任务总数目。
    */
   TotalCount: number
-
   /**
    * 任务列表。
    */
   Tasks: Array<HealthReportTask>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -487,7 +449,6 @@ export interface AddUserContactResponse {
    * 添加成功的联系人id。
    */
   Id: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -502,7 +463,6 @@ export interface CancelKillTaskResponse {
    * kill会话任务终止成功返回1。
    */
   Status: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -517,12 +477,10 @@ export interface DescribeRedisTopBigKeysResponse {
    * top key列表。
    */
   TopKeys: Array<RedisKeySpaceData>
-
   /**
    * 采集时间戳（秒）。
    */
   Timestamp: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -537,17 +495,14 @@ export interface DescribeSqlTemplateRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 数据库名。
    */
   Schema: string
-
   /**
    * SQL语句。
    */
   SqlText: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -562,7 +517,6 @@ export interface DescribeTopSpaceSchemaTimeSeriesResponse {
    * 返回的Top库空间统计信息的时序数据列表。
    */
   TopSpaceSchemaTimeSeries: Array<SchemaSpaceTimeSeries>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -577,27 +531,22 @@ export interface AuditLogFilter {
    * 客户端地址。
    */
   Host?: Array<string>
-
   /**
    * 数据库名称。
    */
   DBName?: Array<string>
-
   /**
    * 用户名。
    */
   User?: Array<string>
-
   /**
    * 返回行数。表示筛选返回行数大于该值的审计日志。
    */
   SentRows?: number
-
   /**
    * 影响行数。表示筛选影响行数大于该值的审计日志。
    */
   AffectRows?: number
-
   /**
    * 执行时间。单位为：µs。表示筛选执行时间大于该值的审计日志。
    */
@@ -612,122 +561,98 @@ export interface SlowLogTopSqlItem {
    * sql总锁等待时间，单位秒
    */
   LockTime: number
-
   /**
    * 最大锁等待时间，单位秒
    */
   LockTimeMax: number
-
   /**
    * 最小锁等待时间，单位秒
    */
   LockTimeMin: number
-
   /**
    * 总扫描行数
    */
   RowsExamined: number
-
   /**
    * 最大扫描行数
    */
   RowsExaminedMax: number
-
   /**
    * 最小扫描行数
    */
   RowsExaminedMin: number
-
   /**
    * 总耗时，单位秒
    */
   QueryTime: number
-
   /**
    * 最大执行时间，单位秒
    */
   QueryTimeMax: number
-
   /**
    * 最小执行时间，单位秒
    */
   QueryTimeMin: number
-
   /**
    * 总返回行数
    */
   RowsSent: number
-
   /**
    * 最大返回行数
    */
   RowsSentMax: number
-
   /**
    * 最小返回行数
    */
   RowsSentMin: number
-
   /**
    * 执行次数
    */
   ExecTimes: number
-
   /**
    * sql模板
    */
   SqlTemplate: string
-
   /**
    * 带参数SQL（随机）
    */
   SqlText: string
-
   /**
    * 数据库名
    */
   Schema: string
-
   /**
    * 总耗时占比，单位%
    */
   QueryTimeRatio: number
-
   /**
    * sql总锁等待时间占比，单位%
    */
   LockTimeRatio: number
-
   /**
    * 总扫描行数占比，单位%
    */
   RowsExaminedRatio: number
-
   /**
    * 总返回行数占比，单位%
    */
   RowsSentRatio: number
-
   /**
    * 平均执行时间，单位秒
    */
   QueryTimeAvg: number
-
   /**
    * 平均返回行数
    */
   RowsSentAvg: number
-
   /**
    * 平均锁等待时间，单位秒
    */
   LockTimeAvg: number
-
   /**
    * 平均扫描行数
    */
   RowsExaminedAvg: number
-
   /**
    * SOL模板的MD5值
    */
@@ -742,7 +667,6 @@ export interface CreateKillTaskResponse {
    * kill会话任务创建成功返回1
    */
   Status: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -757,48 +681,39 @@ export interface DiagHistoryEventItem {
    * 诊断类型。
    */
   DiagType: string
-
   /**
    * 结束时间。
    */
   EndTime: string
-
   /**
    * 开始时间。
    */
   StartTime: string
-
   /**
    * 事件唯一ID 。
    */
   EventId: number
-
   /**
    * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
    */
   Severity: number
-
   /**
    * 诊断概要。
    */
   Outline: string
-
   /**
    * 诊断项说明。
    */
   DiagItem: string
-
   /**
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
-      * 保留字段。
+   * 保留字段。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metric: string
-
   /**
    * 地域。
    */
@@ -813,12 +728,10 @@ export interface DescribeProxySessionKillTasksRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * kill 会话异步任务 ID,  接口 CreateProxySessionKillTask 调用成功后获取。
    */
   AsyncRequestIds: Array<number>
-
   /**
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
@@ -833,7 +746,6 @@ export interface DescribeMySqlProcessListResponse {
    * 实时线程列表。
    */
   ProcessList: Array<MySqlProcess>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -848,12 +760,10 @@ export interface SessionItem {
    * 访问来源。
    */
   Ip: string
-
   /**
    * 当前访问来源活跃连接数
    */
   ActiveConn: string
-
   /**
    * 当前访问来源总连接数
    */
@@ -868,21 +778,18 @@ export interface HealthStatus {
    * 健康分数，满分100。
    */
   HealthScore: number
-
   /**
    * 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。
    */
   HealthLevel: string
-
   /**
    * 总扣分分数。
    */
   ScoreLost: number
-
   /**
-      * 扣分详情。
+   * 扣分详情。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ScoreDetails: Array<ScoreDetail>
 }
 
@@ -894,12 +801,10 @@ export interface DescribeTopSpaceTablesResponse {
    * 返回的Top表空间统计信息列表。
    */
   TopSpaceTables: Array<TableSpaceData>
-
   /**
    * 采集表空间数据的时间戳（秒）。
    */
   Timestamp: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -914,52 +819,42 @@ export interface TaskInfo {
    * 异步任务 ID。
    */
   AsyncRequestId: number
-
   /**
    * 当前实例所有 proxy 列表。
    */
   InstProxyList: Array<string>
-
   /**
    * 当前实例所有 proxy 数量。
    */
   InstProxyCount: number
-
   /**
    * 任务创建时间。
    */
   CreateTime: string
-
   /**
    * 任务启动时间。
    */
   StartTime: string
-
   /**
    * 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。
    */
   TaskStatus: string
-
   /**
    * 完成 kill 任务的 proxyId。
    */
   FinishedProxyList: Array<string>
-
   /**
    * kill 任务实行失败的 proxyId。
    */
   FailedProxyList: Array<string>
-
   /**
    * 任务结束时间。
    */
   EndTime: string
-
   /**
    * 任务执行进度。
    */
   Progress: number
-
   /**
    * 实例 ID。
    */
@@ -984,13 +879,11 @@ export interface KillMySqlThreadsResponse {
    * kill完成的sql会话ID列表。
    */
   Threads?: Array<number>
-
   /**
-      * 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。
+   * 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SqlExecId?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1005,22 +898,18 @@ export interface CreateSchedulerMailProfileRequest {
    * 取值范围1-7，分别代表周一至周日。
    */
   WeekConfiguration: Array<number>
-
   /**
    * 邮件配置内容。
    */
   ProfileInfo: ProfileInfo
-
   /**
    * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
    */
   ProfileName: string
-
   /**
    * 配置订阅的实例ID。
    */
   BindInstanceId: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -1035,12 +924,10 @@ export interface ContactItem {
    * 联系人id。
    */
   Id: number
-
   /**
    * 联系人姓名。
    */
   Name: string
-
   /**
    * 联系人绑定的邮箱。
    */
@@ -1065,12 +952,10 @@ export interface DescribeDBSpaceStatusRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 时间段天数，截止日期为当日，默认为7天。
    */
   RangeDays?: number
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -1085,7 +970,6 @@ export interface TimeSlice {
    * 总数
    */
   Count: number
-
   /**
    * 统计开始时间
    */
@@ -1100,12 +984,10 @@ export interface DeleteDBDiagReportTasksRequest {
    * 需要删除的任务id列表
    */
   AsyncRequestIds: Array<number>
-
   /**
    * 实例ID
    */
   InstanceId: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -1120,17 +1002,14 @@ export interface ModifyDiagDBInstanceConfRequest {
    * 实例配置，包括巡检、概览开关等。
    */
   InstanceConfs: InstanceConfs
-
   /**
    * 生效实例地域，取值为"All"，代表全地域。
    */
   Regions: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
    */
   Product: string
-
   /**
    * 指定更改巡检状态的实例ID。
    */
@@ -1145,12 +1024,10 @@ export interface DescribeSlowLogsResponse {
    * 符合条件的记录总数。
    */
   TotalCount?: number
-
   /**
    * 慢日志明细
    */
   Rows?: Array<SlowLogInfoItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1165,12 +1042,10 @@ export interface DescribeSecurityAuditLogDownloadUrlsRequest {
    * 安全审计组Id。
    */
   SecAuditGroupId: string
-
   /**
    * 异步任务Id。
    */
   AsyncRequestId: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
    */
@@ -1182,11 +1057,10 @@ export interface DescribeSecurityAuditLogDownloadUrlsRequest {
  */
 export interface CreateDBDiagReportTaskResponse {
   /**
-      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AsyncRequestId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1201,12 +1075,10 @@ export interface ProcessStatistic {
    * 会话详情数组。
    */
   Items: Array<SessionItem>
-
   /**
    * 总连接数。
    */
   AllConnSum: number
-
   /**
    * 总活跃连接数。
    */
@@ -1231,17 +1103,14 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 开始时间，如“2019-09-10 12:13:14”。
    */
   StartTime: string
-
   /**
    * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
    */
   EndTime: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -1256,7 +1125,6 @@ export interface CancelKillTaskRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -1271,37 +1139,30 @@ export interface MySqlProcess {
    * 线程ID。
    */
   ID: string
-
   /**
    * 线程的操作账号名。
    */
   User: string
-
   /**
    * 线程的操作主机地址。
    */
   Host: string
-
   /**
    * 线程的操作数据库。
    */
   DB: string
-
   /**
    * 线程的操作状态。
    */
   State: string
-
   /**
    * 线程的执行类型。
    */
   Command: string
-
   /**
    * 线程的操作时长，单位秒。
    */
   Time: string
-
   /**
    * 线程的操作语句。
    */
@@ -1316,17 +1177,14 @@ export interface DescribeDBDiagHistoryRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 开始时间，如“2019-09-10 12:13:14”。
    */
   StartTime: string
-
   /**
    * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
    */
   EndTime: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -1341,7 +1199,6 @@ export interface CreateAuditLogFileResponse {
    * 审计日志文件下载的任务ID
    */
   AsyncRequestId?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1366,27 +1223,22 @@ export interface DescribeDBDiagEventsRequest {
    * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
    */
   StartTime: string
-
   /**
    * 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。
    */
   EndTime: string
-
   /**
    * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
    */
   Severities?: Array<number>
-
   /**
    * 实例ID列表。
    */
   InstanceIds?: Array<string>
-
   /**
    * 偏移量，默认0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认20，最大值为50。
    */
@@ -1401,12 +1253,10 @@ export interface CreateDBDiagReportUrlResponse {
    * 健康报告浏览地址。
    */
   ReportUrl: string
-
   /**
    * 健康报告浏览地址到期时间戳（秒）。
    */
   ExpireTime: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1421,7 +1271,6 @@ export interface CreateProxySessionKillTaskRequest {
    * 实例 ID。
    */
   InstanceId: string
-
   /**
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
@@ -1436,7 +1285,6 @@ export interface DeleteDBDiagReportTasksResponse {
    * 任务删除状态, 0-删除成功
    */
   Status?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1451,7 +1299,6 @@ export interface DescribeProxyProcessStatisticsResponse {
    * 实时会话统计详情。
    */
   ProcessStatistics?: ProcessStatistic
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1466,12 +1313,10 @@ export interface SlowLogHost {
    * 来源地址。
    */
   UserHost: string
-
   /**
    * 该来源地址的慢日志数目占总数目的比例，单位%。
    */
   Ratio: number
-
   /**
    * 该来源地址的慢日志数目。
    */
@@ -1486,27 +1331,22 @@ export interface CreateMailProfileRequest {
    * 邮件配置内容。
    */
   ProfileInfo: ProfileInfo
-
   /**
    * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
    */
   ProfileLevel: string
-
   /**
    * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
    */
   ProfileName: string
-
   /**
    * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
    */
   ProfileType: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
    */
   Product: string
-
   /**
    * 配置绑定的实例ID，当配置级别为"Instance"时需要传入且只能为一个实例；当配置级别为“User”时，此参数不填。
    */
@@ -1521,7 +1361,6 @@ export interface MonitorFloatMetricSeriesData {
    * 监控指标。
    */
   Series: Array<MonitorFloatMetric>
-
   /**
    * 监控指标对应的时间戳。
    */
@@ -1536,22 +1375,18 @@ export interface MailConfiguration {
    * 是否开启邮件发送: 0, 否; 1, 是。
    */
   SendMail: number
-
   /**
    * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模板，配置需要发送巡检邮件的地域；订阅的邮件发送模板，配置当前订阅实例的所属地域。
    */
   Region: Array<string>
-
   /**
    * 发送指定的健康等级的报告, 如["HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"]。
    */
   HealthStatus: Array<string>
-
   /**
    * 联系人id, 联系人/联系组不能都为空。
    */
   ContactPerson?: Array<number>
-
   /**
    * 联系组id, 联系人/联系组不能都为空。
    */
@@ -1566,17 +1401,14 @@ export interface VerifyUserAccountRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 数据库账号名。
    */
   User: string
-
   /**
    * 数据库账号密码。
    */
   Password: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -1590,13 +1422,19 @@ export interface DescribeSlowLogUserHostStatsResponse {
   /**
    * 来源地址数目。
    */
-  TotalCount: number
-
+  TotalCount?: number
   /**
    * 各来源地址的慢日志占比详情列表。
    */
-  Items: Array<SlowLogHost>
-
+  Items?: Array<SlowLogHost>
+  /**
+   * 各来源用户名的慢日志占比详情列表。
+   */
+  UserNameItems?: Array<SlowLogUser>
+  /**
+   * 来源用户数目。
+   */
+  UserTotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1611,47 +1449,38 @@ export interface TableSpaceData {
    * 表名。
    */
   TableName: string
-
   /**
    * 库名。
    */
   TableSchema: string
-
   /**
    * 库表的存储引擎。
    */
   Engine: string
-
   /**
    * 数据空间（MB）。
    */
   DataLength: number
-
   /**
    * 索引空间（MB）。
    */
   IndexLength: number
-
   /**
    * 碎片空间（MB）。
    */
   DataFree: number
-
   /**
    * 总使用空间（MB）。
    */
   TotalLength: number
-
   /**
    * 碎片率（%）。
    */
   FragRatio: number
-
   /**
    * 行数。
    */
   TableRows: number
-
   /**
    * 表对应的独立物理文件大小（MB）。
    */
@@ -1666,42 +1495,34 @@ export interface EventInfo {
    * 事件 ID 。
    */
   EventId: number
-
   /**
    * 诊断类型。
    */
   DiagType: string
-
   /**
    * 开始时间。
    */
   StartTime: string
-
   /**
    * 结束时间。
    */
   EndTime: string
-
   /**
    * 概要。
    */
   Outline: string
-
   /**
    * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
    */
   Severity: number
-
   /**
    * 扣分。
    */
   ScoreLost: number
-
   /**
    * 保留字段。
    */
   Metric: string
-
   /**
    * 告警数目。
    */
@@ -1716,22 +1537,18 @@ export interface DescribeMailProfileRequest {
    * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
    */
   ProfileType: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
   Product: string
-
   /**
    * 分页偏移量。
    */
   Offset: number
-
   /**
    * 分页单位，最大支持50。
    */
   Limit: number
-
   /**
    * 根据邮件配置名称查询，定期发送的邮件配置名称遵循："scheduler_"+{instanceId}的规则。
    */
@@ -1756,27 +1573,22 @@ export interface KillMySqlThreadsRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * kill会话任务的阶段，取值包括："Prepare"-准备阶段，"Commit"-提交阶段。
    */
   Stage: string
-
   /**
    * 需要kill的sql会话ID列表，此参数用于Prepare阶段。
    */
   Threads?: Array<number>
-
   /**
    * 执行ID，此参数用于Commit阶段。
    */
   SqlExecId?: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
   Product?: string
-
   /**
    * 默认是ture, 记录下kill的记录，为了加快kill，可设置为false。
    */
@@ -1791,12 +1603,10 @@ export interface DescribeSqlFiltersResponse {
    * 限流任务总数目。
    */
   TotalCount?: number
-
   /**
    * 限流任务列表。
    */
   Items?: Array<SQLFilter>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1811,12 +1621,10 @@ export interface CreateDBDiagReportUrlRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 健康报告相应的任务ID，可通过DescribeDBDiagReportTasks查询。
    */
   AsyncRequestId: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -1831,12 +1639,10 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
    * 安全审计日志导出任务列表。
    */
   Tasks: Array<SecLogExportTaskInfo>
-
   /**
    * 安全审计日志导出任务总数。
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1851,17 +1657,14 @@ export interface DescribeRedisTopKeyPrefixListRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 查询日期，如2021-05-27，最早可为前30天的日期。
    */
   Date: string
-
   /**
    * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
    */
   Product: string
-
   /**
    * 查询数目，默认为20，最大值为100。
    */
@@ -1876,27 +1679,22 @@ export interface DescribeSqlTemplateResponse {
    * 数据库名。
    */
   Schema: string
-
   /**
    * SQL语句。
    */
   SqlText: string
-
   /**
    * SQL类型。
    */
   SqlType: string
-
   /**
    * SQL模版内容。
    */
   SqlTemplate: string
-
   /**
    * SQL模版ID。
    */
   SqlId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1911,17 +1709,14 @@ export interface HealthScoreInfo {
    * 异常详情。
    */
   IssueTypes: Array<IssueTypeInfo>
-
   /**
    * 异常事件总数。
    */
   EventsTotalCount: number
-
   /**
    * 健康得分。
    */
   HealthScore: number
-
   /**
    * 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。
    */
@@ -1936,7 +1731,6 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
    * 返回的Top表空间统计信息的时序数据列表。
    */
   TopSpaceTableTimeSeries: Array<TableSpaceTimeSeries>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1951,7 +1745,6 @@ export interface DescribeDBDiagHistoryResponse {
    * 事件描述。
    */
   Events: Array<DiagHistoryEventItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1966,12 +1759,10 @@ export interface DescribeDBDiagEventRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
    */
   EventId?: number
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -1986,22 +1777,18 @@ export interface ModifySqlFiltersRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken: string
-
   /**
    * SQL限流任务ID列表。
    */
   FilterIds: Array<number>
-
   /**
    * 限流任务状态，取值支持TERMINATED - 终止。
    */
   Status: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -2016,13 +1803,11 @@ export interface DescribeAllUserContactResponse {
    * 联系人的总数量。
    */
   TotalCount: number
-
   /**
-      * 联系人的信息。
+   * 联系人的信息。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Contacts: Array<ContactItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2037,16 +1822,14 @@ export interface MonitorMetric {
    * 指标名称。
    */
   Metric: string
-
   /**
    * 指标单位。
    */
   Unit: string
-
   /**
-      * 指标值。
+   * 指标值。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Values: Array<number>
 }
 
@@ -2058,7 +1841,6 @@ export interface ProfileInfo {
    * 语言, 如"zh"。
    */
   Language: string
-
   /**
    * 邮件模板的内容。
    */
@@ -2070,29 +1852,25 @@ export interface ProfileInfo {
  */
 export interface UserProfile {
   /**
-      * 配置的id。
+   * 配置的id。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProfileId: string
-
   /**
-      * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
+   * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProfileType: string
-
   /**
-      * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
+   * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProfileLevel: string
-
   /**
-      * 配置名称。
+   * 配置名称。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProfileName: string
-
   /**
    * 配置详情。
    */
@@ -2107,12 +1885,10 @@ export interface AddUserContactRequest {
    * 联系人姓名，由中英文、数字、空格、!@#$%^&*()_+-=（）组成，不能以下划线开头，长度在20以内。
    */
   Name: string
-
   /**
    * 邮箱地址，支持大小写字母、数字、下划线及@字符， 不能以下划线开头，邮箱地址不可重复。
    */
   ContactInfo: string
-
   /**
    * 服务产品类型，固定值："mysql"。
    */
@@ -2127,32 +1903,26 @@ export interface CreateSqlFilterRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken: string
-
   /**
    * SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
    */
   SqlType: string
-
   /**
    * 关键字，用于筛选SQL语句，多个关键字用英文逗号分隔，逗号不能作为关键词，多个关键词之间的关系为“逻辑与”。
    */
   FilterKey: string
-
   /**
    * 最大并发度，取值不能小于0，如果该值设为 0，则表示限制所有匹配的SQL执行。
    */
   MaxConcurrency: number
-
   /**
    * 限流时长，单位秒，支持-1和小于2147483647的正整数，-1表示永不过期。
    */
   Duration: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -2167,27 +1937,22 @@ export interface InstanceBasicInfo {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 实例名称。
    */
   InstanceName: string
-
   /**
    * 实例内网IP。
    */
   Vip: string
-
   /**
    * 实例内网Port。
    */
   Vport: number
-
   /**
    * 实例产品。
    */
   Product: string
-
   /**
    * 实例引擎版本。
    */
@@ -2202,41 +1967,34 @@ export interface SchemaSpaceData {
    * 库名。
    */
   TableSchema: string
-
   /**
    * 数据空间（MB）。
    */
   DataLength: number
-
   /**
    * 索引空间（MB）。
    */
   IndexLength: number
-
   /**
    * 碎片空间（MB）。
    */
   DataFree: number
-
   /**
    * 总使用空间（MB）。
    */
   TotalLength: number
-
   /**
    * 碎片率（%）。
    */
   FragRatio: number
-
   /**
    * 行数。
    */
   TableRows: number
-
   /**
-      * 库中所有表对应的独立物理文件大小加和（MB）。
+   * 库中所有表对应的独立物理文件大小加和（MB）。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PhysicalFileSize: number
 }
 
@@ -2248,7 +2006,6 @@ export interface DescribeAllUserContactRequest {
    * 服务产品类型，固定值：mysql。
    */
   Product: string
-
   /**
    * 联系人名数组，支持模糊搜索。
    */
@@ -2263,32 +2020,26 @@ export interface DescribeDiagDBInstancesRequest {
    * 是否是DBbrain支持的实例，固定传 true。
    */
   IsSupported: boolean
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
   Product: string
-
   /**
    * 分页参数，偏移量。
    */
   Offset: number
-
   /**
    * 分页参数，分页值，最大值为100。
    */
   Limit: number
-
   /**
    * 根据实例名称条件查询。
    */
   InstanceNames?: Array<string>
-
   /**
    * 根据实例ID条件查询。
    */
   InstanceIds?: Array<string>
-
   /**
    * 根据地域条件查询。
    */
@@ -2303,22 +2054,18 @@ export interface DescribeNoPrimaryKeyTablesRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 查询日期，如2021-05-27，最早为30天前的日期。
    */
   Date: string
-
   /**
    * 查询数目，默认为20，最大为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL，默认为"mysql"。
    */
@@ -2333,158 +2080,138 @@ export interface InstanceInfo {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 实例名称。
    */
   InstanceName: string
-
   /**
    * 实例所属地域。
    */
   Region: string
-
   /**
    * 健康得分。
    */
   HealthScore: number
-
   /**
    * 所属产品。
    */
   Product: string
-
   /**
    * 异常事件数量。
    */
   EventCount: number
-
   /**
    * 实例类型：1:MASTER；2:DR，3：RO，4:SDR。
    */
   InstanceType: number
-
   /**
    * 核心数。
    */
   Cpu: number
-
   /**
    * 内存，单位MB。
    */
   Memory: number
-
   /**
    * 硬盘存储，单位GB。
    */
   Volume: number
-
   /**
    * 数据库版本。
    */
   EngineVersion: string
-
   /**
    * 内网地址。
    */
   Vip: string
-
   /**
    * 内网端口。
    */
   Vport: number
-
   /**
    * 接入来源。
    */
   Source: string
-
   /**
    * 分组ID。
    */
   GroupId: string
-
   /**
    * 分组组名。
    */
   GroupName: string
-
   /**
    * 实例状态：0：发货中；1：运行正常；4：销毁中；5：隔离中。
    */
   Status: number
-
   /**
    * 子网统一ID。
    */
   UniqSubnetId: string
-
   /**
    * cdb类型。
    */
   DeployMode: string
-
   /**
    * cdb实例初始化标志：0：未初始化；1：已初始化。
    */
   InitFlag: number
-
   /**
    * 任务状态。
    */
   TaskStatus: number
-
   /**
    * 私有网络统一ID。
    */
   UniqVpcId: string
-
   /**
    * 实例巡检/概览的状态。
    */
   InstanceConf: InstanceConfs
-
   /**
    * 资源到期时间。
    */
   DeadlineTime: string
-
   /**
    * 是否是DBbrain支持的实例。
    */
   IsSupported: boolean
-
   /**
    * 实例安全审计日志开启状态：ON： 安全审计开启；OFF： 未开启安全审计。
    */
   SecAuditStatus: string
-
   /**
    * 实例审计日志开启状态，ALL_AUDIT： 开启全审计；RULE_AUDIT： 开启规则审计；UNBOUND： 未开启审计。
    */
   AuditPolicyStatus: string
-
   /**
    * 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。
    */
   AuditRunningStatus: string
-
   /**
-      * 内网vip
+   * 内网vip。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InternalVip?: string
-
   /**
-      * 内网port
+   * 内网port。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InternalVport?: number
-
   /**
-   * 创建时间
+   * 创建时间。
    */
   CreateTime?: string
+  /**
+   * 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
 }
 
 /**
@@ -2495,7 +2222,6 @@ export interface CreateSqlFilterResponse {
    * 限流任务ID。
    */
   FilterId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2510,7 +2236,6 @@ export interface VerifyUserAccountResponse {
    * 会话token，有效期为5分钟。
    */
   SessionToken: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2525,27 +2250,22 @@ export interface DescribeSqlFiltersRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 任务ID列表，用于筛选任务列表。
    */
   FilterIds?: Array<number>
-
   /**
    * 任务状态列表，用于筛选任务列表，取值包括RUNNING - 运行中, FINISHED - 已完成, TERMINATED - 已终止。
    */
   Statuses?: Array<string>
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -2560,22 +2280,18 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
    * 安全审计组Id。
    */
   SecAuditGroupId: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
    */
   Product: string
-
   /**
    * 日志导出任务Id列表。
    */
   AsyncRequestIds?: Array<number>
-
   /**
    * 偏移量，默认0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认20，最大值为100。
    */
@@ -2590,12 +2306,10 @@ export interface DeleteSecurityAuditLogExportTasksRequest {
    * 安全审计组Id。
    */
   SecAuditGroupId: string
-
   /**
    * 日志导出任务Id列表，接口会忽略不存在或已删除的任务Id。
    */
   AsyncRequestIds: Array<number>
-
   /**
    * 服务产品类型，支持值： "mysql" - 云数据库 MySQL。
    */
@@ -2620,27 +2334,22 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 返回的Top库数量，最大值为100，默认为20。
    */
   Limit?: number
-
   /**
    * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
    */
   SortBy?: string
-
   /**
    * 开始日期，如“2021-01-01”，最早为当日的前第29天，默认为截止日期的前第6天。
    */
   StartDate?: string
-
   /**
    * 截止日期，如“2021-01-01”，最早为当日的前第29天，默认为当日。
    */
   EndDate?: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -2655,42 +2364,34 @@ export interface DescribeSlowLogTopSqlsRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 开始时间，如“2019-09-10 12:13:14”。
    */
   StartTime: string
-
   /**
    * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
    */
   EndTime: string
-
   /**
    * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。
    */
   SortBy?: string
-
   /**
    * 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。
    */
   OrderBy?: string
-
   /**
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 数据库名称数组。
    */
   SchemaList?: Array<SchemaItem>
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -2702,17 +2403,15 @@ export interface DescribeSlowLogTopSqlsRequest {
  */
 export interface DescribeMailProfileResponse {
   /**
-      * 邮件配置详情。
+   * 邮件配置详情。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProfileList: Array<UserProfile>
-
   /**
-      * 邮件配置总数。
+   * 邮件配置总数。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2727,27 +2426,22 @@ export interface DescribeRedisTopBigKeysRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 查询日期，如2021-05-27，最早可为前30天的日期。
    */
   Date: string
-
   /**
    * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
    */
   Product: string
-
   /**
    * 排序字段，取值包括Capacity - 内存，ItemCount - 元素数量，默认为Capacity。
    */
   SortBy?: string
-
   /**
    * key类型筛选条件，默认为不进行筛选，取值包括string, list, set, hash, sortedset, stream。
    */
   KeyType?: string
-
   /**
    * 查询数目，默认为20，最大值为100。
    */
@@ -2762,12 +2456,10 @@ export interface DescribeHealthScoreRequest {
    * 需要获取健康得分的实例ID。
    */
   InstanceId: string
-
   /**
    * 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。
    */
   Time: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -2782,12 +2474,10 @@ export interface IssueTypeInfo {
    * 指标分类：AVAILABILITY：可用性，MAINTAINABILITY：可维护性，PERFORMANCE，性能，RELIABILITY可靠性。
    */
   IssueType: string
-
   /**
    * 异常事件。
    */
   Events: Array<EventInfo>
-
   /**
    * 异常事件总数。
    */
@@ -2802,17 +2492,14 @@ export interface DescribeDiagDBInstancesResponse {
    * 实例总数。
    */
   TotalCount: number
-
   /**
    * 全实例巡检状态：0：开启全实例巡检；1：未开启全实例巡检。
    */
   DbScanStatus: number
-
   /**
    * 实例相关信息。
    */
   Items: Array<InstanceInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2827,7 +2514,6 @@ export interface DescribeAllUserGroupRequest {
    * 服务产品类型，固定值：mysql。
    */
   Product: string
-
   /**
    * 联系组名称数组，支持模糊搜索。
    */
@@ -2842,42 +2528,34 @@ export interface CreateKillTaskRequest {
    * kill会话任务的关联实例ID。
    */
   InstanceId: string
-
   /**
    * 任务持续时间，单位秒，手动关闭任务传-1。
    */
   Duration: number
-
   /**
    * 任务过滤条件，客户端IP。
    */
   Host?: string
-
   /**
    * 任务过滤条件，数据库库名,多个","隔开。
    */
   DB?: string
-
   /**
    * 任务过滤条件，相关命令，多个","隔开。
    */
   Command?: string
-
   /**
    * 任务过滤条件，支持单条件前缀匹配。
    */
   Info?: string
-
   /**
    * 任务过滤条件，用户类型。
    */
   User?: string
-
   /**
    * 任务过滤条件，会话持续时长，单位秒。
    */
   Time?: number
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -2892,7 +2570,6 @@ export interface CreateSecurityAuditLogExportTaskResponse {
    * 日志导出任务Id。
    */
   AsyncRequestId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2917,22 +2594,18 @@ export interface DescribeSlowLogUserHostStatsRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 查询范围的开始时间，时间格式如：2019-09-10 12:13:14。
    */
   StartTime: string
-
   /**
    * 查询范围的结束时间，时间格式如：2019-09-10 12:13:14。
    */
   EndTime: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
   Product?: string
-
   /**
    * SOL模板的MD5值
    */
@@ -2947,12 +2620,10 @@ export interface DescribeTopSpaceSchemasResponse {
    * 返回的Top库空间统计信息列表。
    */
   TopSpaceSchemas: Array<SchemaSpaceData>
-
   /**
    * 采集库空间数据的时间戳（秒）。
    */
   Timestamp: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2967,7 +2638,6 @@ export interface CreateProxySessionKillTaskResponse {
    * 创建 kill 会话任务返回的异步任务 id
    */
   AsyncRequestId: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2979,51 +2649,43 @@ export interface CreateProxySessionKillTaskResponse {
  */
 export interface AuditLogFile {
   /**
-      * 审计日志文件生成异步任务ID。
+   * 审计日志文件生成异步任务ID。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AsyncRequestId?: number
-
   /**
    * 审计日志文件名称。
    */
   FileName?: string
-
   /**
-      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
+   * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreateTime?: string
-
   /**
-      * 文件状态值。可能返回的值为：
+   * 文件状态值。可能返回的值为：
 "creating" - 生成中;
 "failed" - 创建失败;
 "success" - 已生成;
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status?: string
-
   /**
    * 文件大小，单位为 KB。
    */
   FileSize?: number
-
   /**
    * 审计日志下载地址。
    */
   DownloadUrl?: string
-
   /**
    * 错误信息。
    */
   ErrMsg?: string
-
   /**
    * 文件生成进度。
    */
   Progress?: number
-
   /**
    * 文件生成成功时间。
    */
@@ -3038,17 +2700,14 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
    * 柱间单位时间间隔，单位为秒。
    */
   Period: number
-
   /**
    * 单位时间间隔内慢日志数量统计。
    */
   TimeSeries: Array<TimeSlice>
-
   /**
    * 单位时间间隔内的实例 cpu 利用率监控数据。
    */
   SeriesData: MonitorMetricSeriesData
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3063,32 +2722,26 @@ export interface DescribeProxyProcessStatisticsRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 该实例下需要查询的某一个 ProxyID 。
    */
   InstanceProxyId: string
-
   /**
    * 返回数量。
    */
   Limit: number
-
   /**
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
   Product: string
-
   /**
    * 偏移量，默认0。
    */
   Offset?: number
-
   /**
    * 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
    */
   SortBy?: string
-
   /**
    * 排序方向。支持值包括："DESC"，"ASC"。
    */
@@ -3103,16 +2756,14 @@ export interface MonitorFloatMetric {
    * 指标名称。
    */
   Metric: string
-
   /**
    * 指标单位。
    */
   Unit: string
-
   /**
-      * 指标值。
+   * 指标值。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Values: Array<number>
 }
 
@@ -3124,12 +2775,10 @@ export interface DescribeRedisTopKeyPrefixListResponse {
    * top key前缀列表。
    */
   Items: Array<RedisPreKeySpaceData>
-
   /**
    * 采集时间戳（秒）。
    */
   Timestamp: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3144,13 +2793,11 @@ export interface DescribeAllUserGroupResponse {
    * 组总数。
    */
   TotalCount: number
-
   /**
-      * 组信息。
+   * 组信息。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Groups: Array<GroupItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3165,27 +2812,22 @@ export interface CreateAuditLogFileRequest {
    * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
    */
   Product: string
-
   /**
    * 与Product保持一致。如："dcdb" ,"mariadb"
    */
   NodeRequestType: string
-
   /**
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 开始时间，如“2019-09-10 12:13:14”。
    */
   StartTime: string
-
   /**
    * 截止时间，如“2019-09-11 10:13:14”。
    */
   EndTime: string
-
   /**
    * 过滤条件。可按设置的过滤条件过滤日志。
    */
@@ -3200,17 +2842,14 @@ export interface DeleteAuditLogFileRequest {
    * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
    */
   Product: string
-
   /**
    * 与Product保持一致。如："dcdb" ,"mariadb"
    */
   NodeRequestType: string
-
   /**
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 审计日志文件生成异步任务ID。
    */
@@ -3235,37 +2874,30 @@ export interface DescribeUserSqlAdviceResponse {
    * SQL优化建议，可解析为JSON数组，无需优化时输出为空。
    */
   Advices: string
-
   /**
    * SQL优化建议备注，可解析为String数组，无需优化时输出为空。
    */
   Comments: string
-
   /**
    * SQL语句。
    */
   SqlText: string
-
   /**
    * 库名。
    */
   Schema: string
-
   /**
    * 相关表的DDL信息，可解析为JSON数组。
    */
   Tables: string
-
   /**
    * SQL执行计划，可解析为JSON，无需优化时输出为空。
    */
   SqlPlan: string
-
   /**
    * SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。
    */
   Cost: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3280,22 +2912,18 @@ export interface DescribeDBSpaceStatusResponse {
    * 磁盘增长量(MB)。
    */
   Growth: number
-
   /**
    * 磁盘剩余(MB)。
    */
   Remain: number
-
   /**
    * 磁盘总量(MB)。
    */
   Total: number
-
   /**
    * 预计可用天数。
    */
   AvailableDays: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3310,52 +2938,42 @@ export interface SQLFilter {
    * 任务ID。
    */
   Id: number
-
   /**
    * 任务状态，取值包括RUNNING - 运行中, FINISHED - 已完成, TERMINATED - 已终止。
    */
   Status: string
-
   /**
    * SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
    */
   SqlType: string
-
   /**
    * 筛选SQL的关键词，多个关键词用英文逗号拼接。
    */
   OriginKeys: string
-
   /**
    * 筛选SQL的规则。
    */
   OriginRule: string
-
   /**
    * 已拒绝SQL数目。
    */
   RejectedSqlCount: number
-
   /**
    * 当前并发数。
    */
   CurrentConcurrency: number
-
   /**
    * 最大并发数。
    */
   MaxConcurrency: number
-
   /**
    * 任务创建时间。
    */
   CreateTime: string
-
   /**
    * 当前时间。
    */
   CurrentTime: string
-
   /**
    * 限流过期时间。
    */
@@ -3370,12 +2988,10 @@ export interface GroupItem {
    * 组id。
    */
   Id: number
-
   /**
    * 组名称。
    */
   Name: string
-
   /**
    * 组成员数量。
    */
@@ -3390,27 +3006,22 @@ export interface RedisPreKeySpaceData {
    * 平均元素长度。
    */
   AveElementSize: number
-
   /**
    * 总占用内存（Byte）。
    */
   Length: number
-
   /**
    * key前缀。
    */
   KeyPreIndex: string
-
   /**
    * 元素数量。
    */
   ItemCount: number
-
   /**
    * key个数。
    */
   Count: number
-
   /**
    * 最大元素长度。
    */
@@ -3425,27 +3036,22 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 返回的Top表数量，最大值为100，默认为20。
    */
   Limit?: number
-
   /**
    * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
    */
   SortBy?: string
-
   /**
    * 开始日期，如“2021-01-01”，最早为当日的前第29天，默认为截止日期的前第6天。
    */
   StartDate?: string
-
   /**
    * 截止日期，如“2021-01-01”，最早为当日的前第29天，默认为当日。
    */
   EndDate?: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -3460,42 +3066,34 @@ export interface DescribeDBDiagReportTasksRequest {
    * 第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
    */
   StartTime?: string
-
   /**
    * 最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
    */
   EndTime?: string
-
   /**
    * 实例ID数组，用于筛选指定实例的任务列表。
    */
   InstanceIds?: Array<string>
-
   /**
    * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
    */
   Sources?: Array<string>
-
   /**
    * 报告的健康等级，支持的取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK" - 危险；"HIGH_RISK" - 高危。
    */
   HealthLevels?: string
-
   /**
    * 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。
    */
   TaskStatuses?: string
-
   /**
    * 偏移量，默认0。
    */
   Offset?: number
-
   /**
    * 返回数量，默认20，最大值为100。
    */
   Limit?: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -3510,7 +3108,6 @@ export interface MonitorMetricSeriesData {
    * 监控指标。
    */
   Series: Array<MonitorMetric>
-
   /**
    * 监控指标对应的时间戳。
    */
@@ -3525,50 +3122,42 @@ export interface SlowLogInfoItem {
    * 慢日志开始时间
    */
   Timestamp?: string
-
   /**
    * sql语句
    */
   SqlText?: string
-
   /**
    * 数据库
    */
   Database?: string
-
   /**
-      * User来源
+   * User来源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserName?: string
-
   /**
-      * IP来源
+   * IP来源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UserHost?: string
-
   /**
    * 执行时间,单位秒
    */
   QueryTime?: number
-
   /**
-      * 锁时间,单位秒
+   * 锁时间,单位秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LockTime?: number
-
   /**
-      * 扫描行数
+   * 扫描行数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RowsExamined?: number
-
   /**
-      * 返回行数
+   * 返回行数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   RowsSent?: number
 }
 
@@ -3580,56 +3169,47 @@ export interface SecLogExportTaskInfo {
    * 异步任务Id。
    */
   AsyncRequestId: number
-
   /**
-      * 任务开始时间。
+   * 任务开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   StartTime: string
-
   /**
-      * 任务结束时间。
+   * 任务结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   EndTime: string
-
   /**
    * 任务创建时间。
    */
   CreateTime: string
-
   /**
    * 任务状态。
    */
   Status: string
-
   /**
    * 任务执行进度。
    */
   Progress: number
-
   /**
-      * 导出日志开始时间。
+   * 导出日志开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LogStartTime: string
-
   /**
-      * 导出日志结束时间。
+   * 导出日志结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LogEndTime: string
-
   /**
-      * 日志文件总大小，单位KB。
+   * 日志文件总大小，单位KB。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TotalSize: number
-
   /**
-      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
+   * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DangerLevels: Array<number>
 }
 
@@ -3641,7 +3221,6 @@ export interface DescribeHealthScoreResponse {
    * 健康得分以及异常扣分项。
    */
   Data: HealthScoreInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3656,21 +3235,18 @@ export interface ScoreDetail {
    * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
    */
   IssueType: string
-
   /**
    * 扣分总分。
    */
   ScoreLost: number
-
   /**
    * 扣分总分上限。
    */
   ScoreLostMax: number
-
   /**
-      * 扣分项列表。
+   * 扣分项列表。
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Items: Array<ScoreItem>
 }
 
@@ -3682,17 +3258,14 @@ export interface DescribeTopSpaceSchemasRequest {
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 返回的Top库数量，最大值为100，默认为20。
    */
   Limit?: number
-
   /**
    * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
    */
   SortBy?: string
-
   /**
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
@@ -3707,12 +3280,10 @@ export interface DescribeSlowLogTopSqlsResponse {
    * 符合条件的记录总数。
    */
   TotalCount?: number
-
   /**
    * 慢日志 top sql 列表
    */
   Rows?: Array<SlowLogTopSqlItem>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3727,27 +3298,22 @@ export interface DescribeNoPrimaryKeyTablesResponse {
    * 无主键表总数。
    */
   NoPrimaryKeyTableCount?: number
-
   /**
    * 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。
    */
   NoPrimaryKeyTableCountDiff?: number
-
   /**
    * 记录的无主键表总数（不超过无主键表总数），可用于分页查询。
    */
   NoPrimaryKeyTableRecordCount?: number
-
   /**
    * 无主键表列表。
    */
   NoPrimaryKeyTables?: Array<Table>
-
   /**
    * 采集时间戳（秒）。
    */
   Timestamp?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3762,22 +3328,18 @@ export interface DescribeAuditLogFilesRequest {
    * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
    */
   Product: string
-
   /**
    * 与Product保持一致。如："dcdb" ,"mariadb"
    */
   NodeRequestType: string
-
   /**
    * 实例 ID 。
    */
   InstanceId: string
-
   /**
    * 偏移量，默认为0。
    */
   Offset?: number
-
   /**
    * 查询数目，默认为20，最大为100。
    */
@@ -3792,17 +3354,14 @@ export interface DeleteSqlFiltersRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken: string
-
   /**
    * 限流任务ID列表。
    */
   FilterIds: Array<number>
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -3817,17 +3376,14 @@ export interface DescribeUserSqlAdviceRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * SQL语句。
    */
   SqlText: string
-
   /**
    * 库名。
    */
   Schema?: string
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
    */
@@ -3842,22 +3398,18 @@ export interface Table {
    * 库名。
    */
   TableSchema: string
-
   /**
    * 表名。
    */
   TableName: string
-
   /**
    * 库表的存储引擎。
    */
   Engine: string
-
   /**
    * 行数。
    */
   TableRows: number
-
   /**
    * 总使用空间（MB）。
    */
@@ -3872,52 +3424,42 @@ export interface DescribeMySqlProcessListRequest {
    * 实例ID。
    */
   InstanceId: string
-
   /**
    * 线程的ID，用于筛选线程列表。
    */
   ID?: number
-
   /**
    * 线程的操作账号名，用于筛选线程列表。
    */
   User?: string
-
   /**
    * 线程的操作主机地址，用于筛选线程列表。
    */
   Host?: string
-
   /**
    * 线程的操作数据库，用于筛选线程列表。
    */
   DB?: string
-
   /**
    * 线程的操作状态，用于筛选线程列表。
    */
   State?: string
-
   /**
    * 线程的执行类型，用于筛选线程列表。
    */
   Command?: string
-
   /**
    * 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。
    */
   Time?: number
-
   /**
    * 线程的操作语句，用于筛选线程列表。
    */
   Info?: string
-
   /**
    * 返回数量，默认20。
    */
   Limit?: number
-
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -3932,7 +3474,6 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
    * 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。
    */
   Urls: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3947,12 +3488,10 @@ export interface DescribeProxySessionKillTasksResponse {
    * kill 任务的详情。
    */
   Tasks: Array<TaskInfo>
-
   /**
    * 任务总数。
    */
   TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

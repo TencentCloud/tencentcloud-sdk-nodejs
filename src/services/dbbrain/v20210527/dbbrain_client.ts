@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SchemaSpaceTimeSeries,
+  SlowLogUser,
   RedisKeySpaceData,
   HealthReportTask,
   CreateDBDiagReportTaskRequest,

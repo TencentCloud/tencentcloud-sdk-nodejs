@@ -4,8 +4,8 @@
  */
 export interface Transform {
     /**
-      * 描述如何数据转换
-      */
+     * 描述如何数据转换
+     */
     OutputStructs: Array<OutputStructParam>;
 }
 /**
@@ -13,16 +13,16 @@ export interface Transform {
  */
 export interface ListConnectionsResponse {
     /**
-      * 连接器信息
-      */
+     * 连接器信息
+     */
     Connections: Array<Connection>;
     /**
-      * 连接器总数
-      */
+     * 连接器总数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -30,28 +30,28 @@ export interface ListConnectionsResponse {
  */
 export interface ESTargetParams {
     /**
-      * 网络连接类型
-      */
+     * 网络连接类型
+     */
     NetMode: string;
     /**
-      * 索引前缀
-      */
+     * 索引前缀
+     */
     IndexPrefix: string;
     /**
-      * es日志轮换粒度
-      */
+     * es日志轮换粒度
+     */
     RotationInterval: string;
     /**
-      * DTS事件配置
-      */
+     * DTS事件配置
+     */
     OutputMode: string;
     /**
-      * DTS索引配置
-      */
+     * DTS索引配置
+     */
     IndexSuffixMode: string;
     /**
-      * es模版类型
-      */
+     * es模版类型
+     */
     IndexTemplateType?: string;
 }
 /**
@@ -59,64 +59,64 @@ export interface ESTargetParams {
  */
 export interface GetEventBusResponse {
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     ModTime?: string;
     /**
-      * 事件集描述
-      */
+     * 事件集描述
+     */
     Description?: string;
     /**
-      * 日志主题ID
-      */
+     * 日志主题ID
+     */
     ClsTopicId?: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     AddTime?: string;
     /**
-      * 日志集ID
-      */
+     * 日志集ID
+     */
     ClsLogsetId?: string;
     /**
-      * 事件集名称
-      */
+     * 事件集名称
+     */
     EventBusName?: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId?: string;
     /**
-      * （已废弃）事件集类型
-      */
+     * （已废弃）事件集类型
+     */
     Type?: string;
     /**
-      * 计费模式
-      */
+     * 计费模式
+     */
     PayMode?: string;
     /**
-      * EB日志存储时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * EB日志存储时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SaveDays?: number;
     /**
-      * EB日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * EB日志主题ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LogTopicId?: string;
     /**
-      * 是否开启存储
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启存储
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EnableStore?: boolean;
     /**
-      * 消息序列，是否有序
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 消息序列，是否有序
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LinkMode?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -124,12 +124,12 @@ export interface GetEventBusResponse {
  */
 export interface RetryPolicy {
     /**
-      * 重试间隔 单位:秒
-      */
+     * 重试间隔 单位:秒
+     */
     RetryInterval: number;
     /**
-      * 最大重试次数
-      */
+     * 最大重试次数
+     */
     MaxRetryAttempts: number;
 }
 /**
@@ -137,12 +137,12 @@ export interface RetryPolicy {
  */
 export interface CkafkaTargetParams {
     /**
-      * 要投递到的ckafka topic
-      */
+     * 要投递到的ckafka topic
+     */
     TopicName: string;
     /**
-      * 重试策略
-      */
+     * 重试策略
+     */
     RetryPolicy: RetryPolicy;
 }
 /**
@@ -150,24 +150,24 @@ export interface CkafkaTargetParams {
  */
 export interface ListConnectionsRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 根据哪个字段进行返回结果排序，目前支持如下以下字段：AddTime, ModTime
-      */
+     * 根据哪个字段进行返回结果排序，目前支持如下以下字段：AddTime, ModTime
+     */
     OrderBy?: string;
     /**
-      * 返回数量，默认为20，最大值为100。
-      */
+     * 返回数量，默认为20，最大值为100。
+     */
     Limit?: number;
     /**
-      * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
-      */
+     * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
+     */
     Order?: string;
     /**
-      * 偏移量，默认为0。
-      */
+     * 偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -175,12 +175,12 @@ export interface ListConnectionsRequest {
  */
 export interface DeleteRuleRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
 }
 /**
@@ -188,8 +188,8 @@ export interface DeleteRuleRequest {
  */
 export interface UpdateRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -197,20 +197,20 @@ export interface UpdateRuleResponse {
  */
 export interface CreateTargetRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 目标类型
-      */
+     * 目标类型
+     */
     Type: string;
     /**
-      * 目标描述
-      */
+     * 目标描述
+     */
     TargetDescription: TargetDescription;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
 }
 /**
@@ -218,8 +218,8 @@ export interface CreateTargetRequest {
  */
 export interface DeleteTargetResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -227,28 +227,28 @@ export interface DeleteTargetResponse {
  */
 export interface UpdateRuleRequest {
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 使能开关。
-      */
+     * 使能开关。
+     */
     Enable?: boolean;
     /**
-      * 规则描述，不限字符类型，200字符描述以内。
-      */
+     * 规则描述，不限字符类型，200字符描述以内。
+     */
     Description?: string;
     /**
-      * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
-      */
+     * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+     */
     EventPattern?: string;
     /**
-      * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
+     * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+     */
     RuleName?: string;
 }
 /**
@@ -256,32 +256,32 @@ export interface UpdateRuleRequest {
  */
 export interface DescribeLogTagValueRequest {
     /**
-      * 起始时间
-      */
+     * 起始时间
+     */
     StartTime: number;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndTime: number;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 聚合字段
-      */
+     * 聚合字段
+     */
     GroupField: string;
     /**
-      * 页数
-      */
+     * 页数
+     */
     Page: number;
     /**
-      * 每页数据大小
-      */
+     * 每页数据大小
+     */
     Limit: number;
     /**
-      * 筛选条件
-      */
+     * 筛选条件
+     */
     Filter?: Array<LogFilter>;
 }
 /**
@@ -289,12 +289,12 @@ export interface DescribeLogTagValueRequest {
  */
 export interface TargetBrief {
     /**
-      * 目标ID
-      */
+     * 目标ID
+     */
     TargetId: string;
     /**
-      * 目标类型
-      */
+     * 目标类型
+     */
     Type: string;
 }
 /**
@@ -306,16 +306,16 @@ export declare type DTSParams = null;
  */
 export interface ListRulesResponse {
     /**
-      * 事件规则信息
-      */
+     * 事件规则信息
+     */
     Rules: Array<Rule>;
     /**
-      * 事件规则总数
-      */
+     * 事件规则总数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -323,12 +323,12 @@ export interface ListRulesResponse {
  */
 export interface CreateTargetResponse {
     /**
-      * 目标ID
-      */
+     * 目标ID
+     */
     TargetId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -340,44 +340,44 @@ export declare type CheckRuleRequest = null;
  */
 export interface GetRuleResponse {
     /**
-      * 事件集id
-      */
+     * 事件集id
+     */
     EventBusId?: string;
     /**
-      * 事件规则id
-      */
+     * 事件规则id
+     */
     RuleId?: string;
     /**
-      * 事件规则名称
-      */
+     * 事件规则名称
+     */
     RuleName?: string;
     /**
-      * 事件规则状态
-      */
+     * 事件规则状态
+     */
     Status?: string;
     /**
-      * 使能开关
-      */
+     * 使能开关
+     */
     Enable?: boolean;
     /**
-      * 事件规则描述
-      */
+     * 事件规则描述
+     */
     Description?: string;
     /**
-      * 事件模式
-      */
+     * 事件模式
+     */
     EventPattern?: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     AddTime?: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     ModTime?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -385,12 +385,12 @@ export interface GetRuleResponse {
  */
 export interface CreateConnectionResponse {
     /**
-      * 连接器ID
-      */
+     * 连接器ID
+     */
     ConnectionId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -398,43 +398,43 @@ export interface CreateConnectionResponse {
  */
 export interface EventBus {
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     ModTime: string;
     /**
-      * 事件集描述，不限字符类型，200字符描述以内
-      */
+     * 事件集描述，不限字符类型，200字符描述以内
+     */
     Description: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     AddTime: string;
     /**
-      * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
+     * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+     */
     EventBusName: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件集类型
-      */
+     * 事件集类型
+     */
     Type: string;
     /**
-      * 计费模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计费模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PayMode?: string;
     /**
-      * 连接器基础信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 连接器基础信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ConnectionBriefs?: Array<ConnectionBrief>;
     /**
-      * 目标简要信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 目标简要信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TargetBriefs?: Array<TargetBrief>;
 }
 /**
@@ -442,28 +442,28 @@ export interface EventBus {
  */
 export interface ListTargetsRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
-      */
+     * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+     */
     OrderBy?: string;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId?: string;
     /**
-      * 返回数量，默认为20，最大值为100。
-      */
+     * 返回数量，默认为20，最大值为100。
+     */
     Limit?: number;
     /**
-      * 分页偏移量，默认为0。
-      */
+     * 分页偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
-      */
+     * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+     */
     Order?: string;
 }
 /**
@@ -471,19 +471,19 @@ export interface ListTargetsRequest {
  */
 export interface Transformation {
     /**
-      * 描述如何提取数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述如何提取数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Extraction?: Extraction;
     /**
-      * 描述如何过滤数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述如何过滤数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EtlFilter?: EtlFilter;
     /**
-      * 描述如何数据转换
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 描述如何数据转换
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Transform?: Transform;
 }
 /**
@@ -491,39 +491,39 @@ export interface Transformation {
  */
 export interface Target {
     /**
-      * 目标类型
-      */
+     * 目标类型
+     */
     Type: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 目标ID
-      */
+     * 目标ID
+     */
     TargetId: string;
     /**
-      * 目标描述
-      */
+     * 目标描述
+     */
     TargetDescription: TargetDescription;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
     /**
-      * 开启批量投递使能
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 开启批量投递使能
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EnableBatchDelivery: boolean;
     /**
-      * 批量投递最长等待时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 批量投递最长等待时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BatchTimeout: number;
     /**
-      * 批量投递最大事件条数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 批量投递最大事件条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BatchEventCount: number;
 }
 /**
@@ -531,24 +531,24 @@ export interface Target {
  */
 export interface ListRulesRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
-      */
+     * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+     */
     OrderBy?: string;
     /**
-      * 返回数量，默认为20，最大值为100。
-      */
+     * 返回数量，默认为20，最大值为100。
+     */
     Limit?: number;
     /**
-      * 分页偏移量，默认为0。
-      */
+     * 分页偏移量，默认为0。
+     */
     Offset?: number;
     /**
-      * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
-      */
+     * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+     */
     Order?: string;
 }
 /**
@@ -556,16 +556,16 @@ export interface ListRulesRequest {
  */
 export interface SCFParams {
     /**
-      * 批量投递最长等待时间
-      */
+     * 批量投递最长等待时间
+     */
     BatchTimeout?: number;
     /**
-      * 批量投递最大事件条数
-      */
+     * 批量投递最大事件条数
+     */
     BatchEventCount?: number;
     /**
-      * 开启批量投递使能
-      */
+     * 开启批量投递使能
+     */
     EnableBatchDelivery?: boolean;
 }
 /**
@@ -573,13 +573,13 @@ export interface SCFParams {
  */
 export interface DeadLetterConfig {
     /**
-      * 支持dlq、丢弃、忽略错误继续传递三种模式, 分别对应: DLQ,DROP,IGNORE_ERROR
-      */
+     * 支持dlq、丢弃、忽略错误继续传递三种模式, 分别对应: DLQ,DROP,IGNORE_ERROR
+     */
     DisposeMethod: string;
     /**
-      * 设置了DLQ方式后,此选项必填. 错误消息会被投递到对应的kafka topic中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 设置了DLQ方式后,此选项必填. 错误消息会被投递到对应的kafka topic中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CkafkaDeliveryParams?: CkafkaDeliveryParams;
 }
 /**
@@ -587,17 +587,17 @@ export interface DeadLetterConfig {
  */
 export interface LogFilters {
     /**
-      * 过滤字段名称
-      */
+     * 过滤字段名称
+     */
     Key: string;
     /**
-      * 运算符, 全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
-      */
+     * 运算符, 全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
+     */
     Operator: string;
     /**
-      * 过滤值，范围运算需要同时输入两个值，以英文逗号分隔
-
-      */
+     * 过滤值，范围运算需要同时输入两个值，以英文逗号分隔
+  
+     */
     Value: string;
 }
 /**
@@ -605,28 +605,28 @@ export interface LogFilters {
  */
 export interface UpdateEventBusRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件集描述，不限字符类型，200字符描述以内
-      */
+     * 事件集描述，不限字符类型，200字符描述以内
+     */
     Description?: string;
     /**
-      * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
+     * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+     */
     EventBusName?: string;
     /**
-      * EB日志存储时长
-      */
+     * EB日志存储时长
+     */
     SaveDays?: number;
     /**
-      * EB日志主题ID
-      */
+     * EB日志主题ID
+     */
     LogTopicId?: string;
     /**
-      * 是否开启存储
-      */
+     * 是否开启存储
+     */
     EnableStore?: boolean;
 }
 /**
@@ -634,20 +634,20 @@ export interface UpdateEventBusRequest {
  */
 export interface CreateEventBusRequest {
     /**
-      * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
+     * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+     */
     EventBusName: string;
     /**
-      * 事件集描述，不限字符类型，200字符描述以内
-      */
+     * 事件集描述，不限字符类型，200字符描述以内
+     */
     Description?: string;
     /**
-      * EB存储时长
-      */
+     * EB存储时长
+     */
     SaveDays?: number;
     /**
-      * EB是否开启存储
-      */
+     * EB是否开启存储
+     */
     EnableStore?: boolean;
 }
 /**
@@ -655,8 +655,8 @@ export interface CreateEventBusRequest {
  */
 export interface PutEventsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -664,24 +664,24 @@ export interface PutEventsResponse {
  */
 export interface CreateRuleRequest {
     /**
-      * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
-      */
+     * 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084)
+     */
     EventPattern: string;
     /**
-      * 事件集ID。
-      */
+     * 事件集ID。
+     */
     EventBusId: string;
     /**
-      * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
+     * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+     */
     RuleName: string;
     /**
-      * 使能开关。
-      */
+     * 使能开关。
+     */
     Enable?: boolean;
     /**
-      * 事件集描述，不限字符类型，200字符描述以内
-      */
+     * 事件集描述，不限字符类型，200字符描述以内
+     */
     Description?: string;
 }
 /**
@@ -689,14 +689,14 @@ export interface CreateRuleRequest {
  */
 export interface TextParams {
     /**
-      * 逗号、| 、制表符、空格、换行符、%、#，限制长度为 1。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 逗号、| 、制表符、空格、换行符、%、#，限制长度为 1。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Separator?: string;
     /**
-      * 填写正则表达式：长度128
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 填写正则表达式：长度128
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Regex?: string;
 }
 /**
@@ -704,8 +704,8 @@ export interface TextParams {
  */
 export interface DeleteConnectionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -713,8 +713,8 @@ export interface DeleteConnectionResponse {
  */
 export interface DeleteRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -722,12 +722,12 @@ export interface DeleteRuleResponse {
  */
 export interface GetTransformationResponse {
     /**
-      * 转换规则列表
-      */
+     * 转换规则列表
+     */
     Transformations: Array<Transformation>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -735,46 +735,46 @@ export interface GetTransformationResponse {
  */
 export interface Rule {
     /**
-      * 状态
-      */
+     * 状态
+     */
     Status: string;
     /**
-      * 修改时间
-      */
+     * 修改时间
+     */
     ModTime: string;
     /**
-      * 使能开关
-      */
+     * 使能开关
+     */
     Enable: boolean;
     /**
-      * 描述
-      */
+     * 描述
+     */
     Description: string;
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     RuleId: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     AddTime: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     RuleName: string;
     /**
-      * Target 简要信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Target 简要信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Targets: Array<TargetBrief>;
     /**
-      * rule设置的dlq规则. 可能为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * rule设置的dlq规则. 可能为null
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeadLetterConfig: DeadLetterConfig;
 }
 /**
@@ -782,16 +782,16 @@ export interface Rule {
  */
 export interface CreateTransformationRequest {
     /**
-      * 事件总线 id
-      */
+     * 事件总线 id
+     */
     EventBusId: string;
     /**
-      * 规则id
-      */
+     * 规则id
+     */
     RuleId: string;
     /**
-      * 一个转换规则列表，当前仅限定一个
-      */
+     * 一个转换规则列表，当前仅限定一个
+     */
     Transformations: Array<Transformation>;
 }
 /**
@@ -799,12 +799,12 @@ export interface CreateTransformationRequest {
  */
 export interface PublishEventRequest {
     /**
-      * 事件列表
-      */
+     * 事件列表
+     */
     EventList: Array<Event>;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
 }
 /**
@@ -812,8 +812,8 @@ export interface PublishEventRequest {
  */
 export interface EtlFilter {
     /**
-      * 语法Rule规则保持一致
-      */
+     * 语法Rule规则保持一致
+     */
     Filter: string;
 }
 /**
@@ -821,28 +821,28 @@ export interface EtlFilter {
  */
 export interface SearchLogResponse {
     /**
-      * 日志总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 日志总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 每页日志条数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 每页日志条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Limit?: number;
     /**
-      * 页码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 页码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Page?: number;
     /**
-      * 日志检索结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 日志检索结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Results?: Array<SearchLogResult>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -850,12 +850,12 @@ export interface SearchLogResponse {
  */
 export interface CheckTransformationResponse {
     /**
-      * 经过Transformations处理之后的数据
-      */
+     * 经过Transformations处理之后的数据
+     */
     Output: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -863,16 +863,16 @@ export interface CheckTransformationResponse {
  */
 export interface ListTargetsResponse {
     /**
-      * 目标总数
-      */
+     * 目标总数
+     */
     TotalCount: number;
     /**
-      * 目标信息
-      */
+     * 目标信息
+     */
     Targets: Array<Target>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -880,16 +880,16 @@ export interface ListTargetsResponse {
  */
 export interface ListEventBusesResponse {
     /**
-      * 事件集信息
-      */
+     * 事件集信息
+     */
     EventBuses?: Array<EventBus>;
     /**
-      * 事件集总数
-      */
+     * 事件集总数
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -897,8 +897,8 @@ export interface ListEventBusesResponse {
  */
 export interface CheckRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -906,23 +906,23 @@ export interface CheckRuleResponse {
  */
 export interface ConnectionDescription {
     /**
-      * 资源qcs六段式，更多参考 [资源六段式](https://cloud.tencent.com/document/product/598/10606)
-      */
+     * 资源qcs六段式，更多参考 [资源六段式](https://cloud.tencent.com/document/product/598/10606)
+     */
     ResourceDescription: string;
     /**
-      * apigw参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * apigw参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     APIGWParams?: APIGWParams;
     /**
-      * ckafka参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * ckafka参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CkafkaParams?: CkafkaParams;
     /**
-      * data transfer service (DTS)参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * data transfer service (DTS)参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DTSParams?: DTSParams;
 }
 /**
@@ -930,44 +930,44 @@ export interface ConnectionDescription {
  */
 export interface SearchLogResult {
     /**
-      * 单条日志上报时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 单条日志上报时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Timestamp?: string;
     /**
-      * 日志内容详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 日志内容详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message?: string;
     /**
-      * 事件来源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 事件来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Source?: string;
     /**
-      * 事件类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 事件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Type?: string;
     /**
-      * 事件匹配规则
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 事件匹配规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RuleIds?: string;
     /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Subject?: string;
     /**
-      * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Region?: string;
     /**
-      * 事件状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 事件状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status?: string;
 }
 /**
@@ -975,12 +975,12 @@ export interface SearchLogResult {
  */
 export interface CkafkaDeliveryParams {
     /**
-      * ckafka topic name
-      */
+     * ckafka topic name
+     */
     TopicName: string;
     /**
-      * ckafka资源qcs六段式
-      */
+     * ckafka资源qcs六段式
+     */
     ResourceDescription: string;
 }
 /**
@@ -988,8 +988,8 @@ export interface CkafkaDeliveryParams {
  */
 export interface UpdateTargetResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -997,28 +997,28 @@ export interface UpdateTargetResponse {
  */
 export interface CreateConnectionRequest {
     /**
-      * 连接器描述
-      */
+     * 连接器描述
+     */
     ConnectionDescription: ConnectionDescription;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 连接器名称
-      */
+     * 连接器名称
+     */
     ConnectionName: string;
     /**
-      * 描述
-      */
+     * 描述
+     */
     Description?: string;
     /**
-      * 使能开关
-      */
+     * 使能开关
+     */
     Enable?: boolean;
     /**
-      * 类型
-      */
+     * 类型
+     */
     Type?: string;
 }
 /**
@@ -1026,8 +1026,8 @@ export interface CreateConnectionRequest {
  */
 export interface DeleteEventBusRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
 }
 /**
@@ -1035,24 +1035,24 @@ export interface DeleteEventBusRequest {
  */
 export interface ListEventBusesRequest {
     /**
-      * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
-      */
+     * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+     */
     OrderBy?: string;
     /**
-      * 返回数量，默认为20，最大值为100。
-      */
+     * 返回数量，默认为20，最大值为100。
+     */
     Limit?: number;
     /**
-      * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
-      */
+     * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+     */
     Order?: string;
     /**
-      * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。
-      */
+     * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。
+     */
     Filters?: Array<Filter>;
     /**
-      * 分页偏移量，默认为0。
-      */
+     * 分页偏移量，默认为0。
+     */
     Offset?: number;
 }
 /**
@@ -1060,8 +1060,8 @@ export interface ListEventBusesRequest {
  */
 export interface PublishEventResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1069,12 +1069,12 @@ export interface PublishEventResponse {
  */
 export interface CreateTransformationResponse {
     /**
-      * 生成的转换器id
-      */
+     * 生成的转换器id
+     */
     TransformationId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1082,14 +1082,14 @@ export interface CreateTransformationResponse {
  */
 export interface ConnectionBrief {
     /**
-      * 连接器类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 连接器类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Type?: string;
     /**
-      * 连接器状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 连接器状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status?: string;
 }
 /**
@@ -1099,12 +1099,12 @@ export interface ConnectionBrief {
  */
 export interface Filter {
     /**
-      * 一个或者多个过滤值。
-      */
+     * 一个或者多个过滤值。
+     */
     Values: Array<string>;
     /**
-      * 过滤键的名称。
-      */
+     * 过滤键的名称。
+     */
     Name: string;
 }
 /**
@@ -1112,44 +1112,44 @@ export interface Filter {
  */
 export interface Connection {
     /**
-      * 状态
-      */
+     * 状态
+     */
     Status: string;
     /**
-      * 更新时间
-      */
+     * 更新时间
+     */
     ModTime: string;
     /**
-      * 使能开关
-      */
+     * 使能开关
+     */
     Enable: boolean;
     /**
-      * 描述
-      */
+     * 描述
+     */
     Description: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     AddTime: string;
     /**
-      * 连接器ID
-      */
+     * 连接器ID
+     */
     ConnectionId: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 连接器描述
-      */
+     * 连接器描述
+     */
     ConnectionDescription: ConnectionDescription;
     /**
-      * 连接器名称
-      */
+     * 连接器名称
+     */
     ConnectionName: string;
     /**
-      * 类型
-      */
+     * 类型
+     */
     Type: string;
 }
 /**
@@ -1157,12 +1157,12 @@ export interface Connection {
  */
 export interface PutEventsRequest {
     /**
-      * 事件列表
-      */
+     * 事件列表
+     */
     EventList: Array<Event>;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
 }
 /**
@@ -1170,8 +1170,8 @@ export interface PutEventsRequest {
  */
 export interface DeleteEventBusResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1179,16 +1179,16 @@ export interface DeleteEventBusResponse {
  */
 export interface GetTransformationRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     RuleId: string;
     /**
-      * 转换器id
-      */
+     * 转换器id
+     */
     TransformationId: string;
 }
 /**
@@ -1196,12 +1196,12 @@ export interface GetTransformationRequest {
  */
 export interface CreateEventBusResponse {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1209,12 +1209,12 @@ export interface CreateEventBusResponse {
  */
 export interface DeleteConnectionRequest {
     /**
-      * 连接器ID
-      */
+     * 连接器ID
+     */
     ConnectionId: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
 }
 /**
@@ -1222,20 +1222,20 @@ export interface DeleteConnectionRequest {
  */
 export interface UpdateTransformationRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     RuleId: string;
     /**
-      * 转换器id
-      */
+     * 转换器id
+     */
     TransformationId: string;
     /**
-      * 一个转换规则列表，当前仅限定一个
-      */
+     * 一个转换规则列表，当前仅限定一个
+     */
     Transformations: Array<Transformation>;
 }
 /**
@@ -1243,12 +1243,12 @@ export interface UpdateTransformationRequest {
  */
 export interface CreateRuleResponse {
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1256,20 +1256,20 @@ export interface CreateRuleResponse {
  */
 export interface TargetDescription {
     /**
-      * QCS资源六段式，更多参考 [资源六段式](https://cloud.tencent.com/document/product/598/10606)
-      */
+     * QCS资源六段式，更多参考 [资源六段式](https://cloud.tencent.com/document/product/598/10606)
+     */
     ResourceDescription: string;
     /**
-      * 云函数参数
-      */
+     * 云函数参数
+     */
     SCFParams?: SCFParams;
     /**
-      * Ckafka参数
-      */
+     * Ckafka参数
+     */
     CkafkaTargetParams?: CkafkaTargetParams;
     /**
-      * ElasticSearch参数
-      */
+     * ElasticSearch参数
+     */
     ESTargetParams?: ESTargetParams;
 }
 /**
@@ -1277,8 +1277,8 @@ export interface TargetDescription {
  */
 export interface DeleteTransformationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1286,16 +1286,16 @@ export interface DeleteTransformationResponse {
  */
 export interface DeleteTransformationRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 规则ID
-      */
+     * 规则ID
+     */
     RuleId: string;
     /**
-      * 转换器id
-      */
+     * 转换器id
+     */
     TransformationId: string;
 }
 /**
@@ -1303,17 +1303,17 @@ export interface DeleteTransformationRequest {
  */
 export interface Extraction {
     /**
-      * JsonPath, 不指定则使用默认值$.
-      */
+     * JsonPath, 不指定则使用默认值$.
+     */
     ExtractionInputPath: string;
     /**
-      * 取值: TEXT/JSON
-      */
+     * 取值: TEXT/JSON
+     */
     Format: string;
     /**
-      * 仅在Text需要传递
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 仅在Text需要传递
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TextParams?: TextParams;
 }
 /**
@@ -1321,24 +1321,24 @@ export interface Extraction {
  */
 export interface UpdateConnectionRequest {
     /**
-      * 连接器ID
-      */
+     * 连接器ID
+     */
     ConnectionId: string;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 使能开关
-      */
+     * 使能开关
+     */
     Enable?: boolean;
     /**
-      * 描述
-      */
+     * 描述
+     */
     Description?: string;
     /**
-      * 连接器名称
-      */
+     * 连接器名称
+     */
     ConnectionName?: string;
 }
 /**
@@ -1346,8 +1346,8 @@ export interface UpdateConnectionRequest {
  */
 export interface GetEventBusRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
 }
 /**
@@ -1355,16 +1355,16 @@ export interface GetEventBusRequest {
  */
 export interface DeleteTargetRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件目标ID
-      */
+     * 事件目标ID
+     */
     TargetId: string;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
 }
 /**
@@ -1372,12 +1372,12 @@ export interface DeleteTargetRequest {
  */
 export interface CkafkaParams {
     /**
-      * kafka offset
-      */
+     * kafka offset
+     */
     Offset: string;
     /**
-      * ckafka  topic
-      */
+     * ckafka  topic
+     */
     TopicName: string;
 }
 /**
@@ -1385,13 +1385,13 @@ export interface CkafkaParams {
  */
 export interface DescribeLogTagValueResponse {
     /**
-      * 索引检索维度值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 索引检索维度值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Results?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1399,25 +1399,25 @@ export interface DescribeLogTagValueResponse {
  */
 export interface LogFilter {
     /**
-      * 过滤字段名称
-      */
+     * 过滤字段名称
+     */
     Key?: string;
     /**
-      * 运算符，全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
-      */
+     * 运算符，全等 eq，不等 neq，相似 like，排除相似 not like,  小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange
+     */
     Operator?: string;
     /**
-      * 过滤值,范围运算需要同时输入两个值，以英文逗号分隔
-
-      */
+     * 过滤值,范围运算需要同时输入两个值，以英文逗号分隔
+  
+     */
     Value?: string;
     /**
-      * 该层级filters逻辑关系，取值 "AND" 或 "OR"
-      */
+     * 该层级filters逻辑关系，取值 "AND" 或 "OR"
+     */
     Type?: string;
     /**
-      * LogFilters数组
-      */
+     * LogFilters数组
+     */
     Filters?: Array<LogFilters>;
 }
 /**
@@ -1425,8 +1425,8 @@ export interface LogFilter {
  */
 export interface UpdateTransformationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1434,16 +1434,16 @@ export interface UpdateTransformationResponse {
  */
 export interface OutputStructParam {
     /**
-      * 对应输出json中的key
-      */
+     * 对应输出json中的key
+     */
     Key: string;
     /**
-      * 可以填json-path也可以支持常量或者内置关键字date类型
-      */
+     * 可以填json-path也可以支持常量或者内置关键字date类型
+     */
     Value: string;
     /**
-      * value的数据类型, 可选值: STRING, NUMBER,BOOLEAN,NULL,SYS_VARIABLE,JSONPATH
-      */
+     * value的数据类型, 可选值: STRING, NUMBER,BOOLEAN,NULL,SYS_VARIABLE,JSONPATH
+     */
     ValueType: string;
 }
 /**
@@ -1451,36 +1451,36 @@ export interface OutputStructParam {
  */
 export interface SearchLogRequest {
     /**
-      * 起始时间unix 毫秒时间戳
-      */
+     * 起始时间unix 毫秒时间戳
+     */
     StartTime: number;
     /**
-      * 结束时间unix 毫秒时间戳
-      */
+     * 结束时间unix 毫秒时间戳
+     */
     EndTime: number;
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 页码
-      */
+     * 页码
+     */
     Page: number;
     /**
-      * 每页数据大小
-      */
+     * 每页数据大小
+     */
     Limit: number;
     /**
-      * 筛选条件
-      */
+     * 筛选条件
+     */
     Filter?: Array<LogFilter>;
     /**
-      * 排序数组
-      */
+     * 排序数组
+     */
     OrderFields?: Array<string>;
     /**
-      * 排序方式，asc 从旧到新，desc 从新到旧
-      */
+     * 排序方式，asc 从旧到新，desc 从新到旧
+     */
     OrderBy?: string;
 }
 /**
@@ -1488,12 +1488,12 @@ export interface SearchLogRequest {
  */
 export interface CheckTransformationRequest {
     /**
-      * 待处理的json字符串
-      */
+     * 待处理的json字符串
+     */
     Input: string;
     /**
-      * 一个转换规则列表
-      */
+     * 一个转换规则列表
+     */
     Transformations: Array<Transformation>;
 }
 /**
@@ -1501,8 +1501,8 @@ export interface CheckTransformationRequest {
  */
 export interface UpdateConnectionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1510,12 +1510,12 @@ export interface UpdateConnectionResponse {
  */
 export interface GetRuleRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
 }
 /**
@@ -1523,28 +1523,28 @@ export interface GetRuleRequest {
  */
 export interface UpdateTargetRequest {
     /**
-      * 事件集ID
-      */
+     * 事件集ID
+     */
     EventBusId: string;
     /**
-      * 事件规则ID
-      */
+     * 事件规则ID
+     */
     RuleId: string;
     /**
-      * 事件目标ID
-      */
+     * 事件目标ID
+     */
     TargetId: string;
     /**
-      * 开启批量投递使能
-      */
+     * 开启批量投递使能
+     */
     EnableBatchDelivery?: boolean;
     /**
-      * 批量投递最长等待时间
-      */
+     * 批量投递最长等待时间
+     */
     BatchTimeout?: number;
     /**
-      * 批量投递最大事件条数
-      */
+     * 批量投递最大事件条数
+     */
     BatchEventCount?: number;
 }
 /**
@@ -1552,25 +1552,25 @@ export interface UpdateTargetRequest {
  */
 export interface Event {
     /**
-      * 事件源的信息,新产品上报必须符合EB的规范
-      */
+     * 事件源的信息,新产品上报必须符合EB的规范
+     */
     Source: string;
     /**
-      * 事件数据，内容由创建事件的系统来控制，当前datacontenttype仅支持application/json;charset=utf-8，所以该字段是json字符串
-      */
+     * 事件数据，内容由创建事件的系统来控制，当前datacontenttype仅支持application/json;charset=utf-8，所以该字段是json字符串
+     */
     Data: string;
     /**
-      * 事件类型，可自定义，选填。云服务默认写 COS:Created:PostObject，用“：”分割类型字段
-      */
+     * 事件类型，可自定义，选填。云服务默认写 COS:Created:PostObject，用“：”分割类型字段
+     */
     Type: string;
     /**
-      * 事件来源详细描述，可自定义，选填。云服务默认为标准qcs资源表示语法：qcs::dts:ap-guangzhou:appid/uin:xxx
-      */
+     * 事件来源详细描述，可自定义，选填。云服务默认为标准qcs资源表示语法：qcs::dts:ap-guangzhou:appid/uin:xxx
+     */
     Subject: string;
     /**
-      * 事件发生的毫秒时间戳，
-time.Now().UnixNano()/1e6
-      */
+     * 事件发生的毫秒时间戳，
+  time.Now().UnixNano()/1e6
+     */
     Time?: number;
 }
 /**
@@ -1578,8 +1578,8 @@ time.Now().UnixNano()/1e6
  */
 export interface UpdateEventBusResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1587,11 +1587,11 @@ export interface UpdateEventBusResponse {
  */
 export interface APIGWParams {
     /**
-      * HTTPS
-      */
+     * HTTPS
+     */
     Protocol: string;
     /**
-      * POST
-      */
+     * POST
+     */
     Method: string;
 }

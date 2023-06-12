@@ -39,6 +39,7 @@ import {
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteNatFwInstanceResponse,
   DeleteAllAccessControlRuleRequest,
+  DescribeEnterpriseSGRuleProgressRequest,
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
@@ -63,13 +64,13 @@ import {
   DeleteSecurityGroupRuleResponse,
   ModifySequenceRulesRequest,
   SequenceData,
-  CreateNatFwInstanceRequest,
+  DescribeEnterpriseSGRuleProgressResponse,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
   VpcDnsInfo,
   DescribeEnterpriseSecurityGroupRuleRequest,
   ModifyNatFwReSelectResponse,
-  DeleteSecurityGroupRuleRequest,
+  DescribeSwitchListsRequest,
   SetNatFwEipRequest,
   SetNatFwEipResponse,
   AcListsData,
@@ -101,6 +102,7 @@ import {
   RemoveAcRuleRequest,
   BetaInfoByACL,
   RemoveNatAcRuleRequest,
+  ModifyAssetScanResponse,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
@@ -122,6 +124,7 @@ import {
   UnHandleEventDetail,
   RemoveEnterpriseSecurityGroupRuleRequest,
   DeleteResourceGroupRequest,
+  CreateNatFwInstanceRequest,
   DescribeBlockByIpTimesListRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
   ModifyEnterpriseSecurityGroupRuleRequest,
@@ -151,7 +154,6 @@ import {
   CreateDatabaseWhiteListRulesRequest,
   NatInstanceInfo,
   NatFwEipsInfo,
-  DescribeResourceGroupResponse,
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
@@ -177,16 +179,16 @@ import {
   DeleteVpcInstanceRequest,
   SwitchListsData,
   CreateNatFwInstanceWithDomainRequest,
-  DescribeSwitchListsResponse,
+  DescribeResourceGroupResponse,
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   DeleteResourceGroupResponse,
-  DescribeSwitchListsRequest,
+  DeleteSecurityGroupRuleRequest,
   DescribeBlockStaticListRequest,
   FwVpcCidr,
   ModifyRunSyncAssetRequest,
   CreateAcRulesResponse,
-  ModifyAssetScanResponse,
+  DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
   DescribeNatFwInstancesInfoResponse,
   AddNatAcRuleResponse,
@@ -778,6 +780,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceGroupResponse) => void
   ): Promise<DescribeResourceGroupResponse> {
     return this.request("DescribeResourceGroup", req, cb)
+  }
+
+  /**
+   * 查询新版安全组下发进度
+   */
+  async DescribeEnterpriseSGRuleProgress(
+    req?: DescribeEnterpriseSGRuleProgressRequest,
+    cb?: (error: string, rep: DescribeEnterpriseSGRuleProgressResponse) => void
+  ): Promise<DescribeEnterpriseSGRuleProgressResponse> {
+    return this.request("DescribeEnterpriseSGRuleProgress", req, cb)
   }
 
   /**

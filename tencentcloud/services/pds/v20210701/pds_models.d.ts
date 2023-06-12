@@ -3,12 +3,12 @@
  */
 export interface DescribeStockEstimationResponse {
     /**
-      * 用户信誉分，1-5从低到高
-      */
+     * 用户信誉分，1-5从低到高
+     */
     ServiceRsp: Score;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -16,8 +16,8 @@ export interface DescribeStockEstimationResponse {
  */
 export interface DescribeNewUserAcquisitionRequest {
     /**
-      * 用户信息
-      */
+     * 用户信息
+     */
     ServiceParams: UserInfos;
 }
 /**
@@ -25,8 +25,8 @@ export interface DescribeNewUserAcquisitionRequest {
  */
 export interface Score {
     /**
-      * 信誉分，1-5从低到高
-      */
+     * 信誉分，1-5从低到高
+     */
     Star: number;
 }
 /**
@@ -34,32 +34,32 @@ export interface Score {
  */
 export interface UserInfos {
     /**
-      * 用户的手机号
-      */
+     * 用户的手机号
+     */
     PhoneNum: string;
     /**
-      * 用户的微信OpenID
-      */
+     * 用户的微信OpenID
+     */
     Openid: string;
     /**
-      * 用户移动设备的客户端IP
-      */
+     * 用户移动设备的客户端IP
+     */
     IP?: string;
     /**
-      * 用户WiFi的BSSID
-      */
+     * 用户WiFi的BSSID
+     */
     WiFiBssid?: string;
     /**
-      * 用户Android设备的IMEI
-      */
+     * 用户Android设备的IMEI
+     */
     IMEI?: string;
     /**
-      * 用户Android设备的OAID
-      */
+     * 用户Android设备的OAID
+     */
     OAID?: string;
     /**
-      * 用户iOS设备的IDFA
-      */
+     * 用户iOS设备的IDFA
+     */
     IDFA?: string;
 }
 /**
@@ -67,8 +67,8 @@ export interface UserInfos {
  */
 export interface DescribeStockEstimationRequest {
     /**
-      * 用户信息
-      */
+     * 用户信息
+     */
     ServiceParams: UserInfos;
 }
 /**
@@ -76,11 +76,11 @@ export interface DescribeStockEstimationRequest {
  */
 export interface DescribeNewUserAcquisitionResponse {
     /**
-      * 用户信誉分，1-5从低到高
-      */
+     * 用户信誉分，1-5从低到高
+     */
     ServiceRsp: Score;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }

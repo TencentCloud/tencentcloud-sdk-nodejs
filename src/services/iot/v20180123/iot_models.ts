@@ -23,17 +23,14 @@ export interface AppUpdateDeviceRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备别名
    */
@@ -48,7 +45,6 @@ export interface GetDeviceResponse {
    * 设备信息
    */
   Device?: Device
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -63,7 +59,6 @@ export interface GetDeviceDataResponse {
    * 设备数据
    */
   DeviceData?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -108,27 +103,22 @@ export interface UpdateRuleRequest {
    * 规则Id
    */
   RuleId: string
-
   /**
    * 名称
    */
   Name?: string
-
   /**
    * 描述
    */
   Description?: string
-
   /**
    * 查询
    */
   Query?: RuleQuery
-
   /**
    * 转发动作列表
    */
   Actions?: Array<Action>
-
   /**
    * 数据类型（0：文本，1：二进制）
    */
@@ -143,7 +133,6 @@ export interface DeviceSignature {
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备签名
    */
@@ -168,7 +157,6 @@ export interface AppGetDeviceDataResponse {
    * 设备数据。
    */
   DeviceData?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -183,7 +171,6 @@ export interface GetTopicResponse {
    * Topic信息
    */
   Topic?: Topic
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -208,17 +195,14 @@ export interface IssueDeviceControlRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 控制数据（json）
    */
   ControlData: string
-
   /**
    * 是否发送metadata字段
    */
@@ -233,12 +217,10 @@ export interface GetDeviceStatisticsRequest {
    * 产品Id列表
    */
   Products?: Array<string>
-
   /**
    * 开始日期
    */
   StartDate?: string
-
   /**
    * 结束日期
    */
@@ -253,7 +235,6 @@ export interface ResetDeviceResponse {
    * 设备信息
    */
   Device?: Device
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -268,17 +249,14 @@ export interface GetDeviceLogResponse {
    * 设备日志
    */
   DeviceLog?: Array<DeviceLogEntry>
-
   /**
    * 查询游标
    */
   ScrollId?: string
-
   /**
    * 游标超时
    */
   ScrollTimeout?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -293,22 +271,18 @@ export interface AddRuleRequest {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Description: string
-
   /**
    * 查询
    */
   Query?: RuleQuery
-
   /**
    * 转发动作列表
    */
   Actions?: Array<Action>
-
   /**
    * 数据类型（0：文本，1：二进制）
    */
@@ -323,7 +297,6 @@ export interface ResetDeviceRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -345,27 +318,24 @@ export interface ServiceAction {
  */
 export interface DataTemplate {
   /**
-      * 数字类型
+   * 数字类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Number?: NumberData
-
   /**
-      * 字符串类型
+   * 字符串类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   String?: StringData
-
   /**
-      * 枚举类型
+   * 枚举类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Enum?: EnumData
-
   /**
-      * 布尔类型
+   * 布尔类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Bool?: BoolData
 }
 
@@ -377,7 +347,6 @@ export interface DeleteTopicRequest {
    * TopicId
    */
   TopicId: string
-
   /**
    * 产品Id
    */
@@ -392,7 +361,6 @@ export interface AddProductResponse {
    * 产品信息
    */
   Product?: Product
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -407,7 +375,6 @@ export interface UpdateProductResponse {
    * 更新后的产品信息
    */
   Product?: Product
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -422,17 +389,14 @@ export interface DataHistoryEntry {
    * 日志id
    */
   Id: string
-
   /**
    * 时间戳
    */
   Timestamp: number
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 数据
    */
@@ -447,7 +411,6 @@ export interface AppGetDeviceResponse {
    * 绑定设备详情
    */
   AppDevice?: AppDeviceDetail
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -462,7 +425,6 @@ export interface UpdateRuleResponse {
    * 规则
    */
   Rule?: Rule
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -477,42 +439,34 @@ export interface AppDeviceDetail {
    * 设备Id
    */
   DeviceId: string
-
   /**
    * 所属产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 别名
    */
   AliasName: string
-
   /**
    * 地区
    */
   Region: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 设备信息（json）
    */
   DeviceInfo: string
-
   /**
    * 数据模板
    */
@@ -527,7 +481,6 @@ export interface GetDeviceStatisticsResponse {
    * 统计数据
    */
   DeviceStatistics?: Array<DeviceStatData>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -552,47 +505,38 @@ export interface Topic {
    * TopicId
    */
   TopicId: string
-
   /**
    * Topic名称
    */
   TopicName: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 消息最大生命周期
    */
   MsgLife: number
-
   /**
    * 消息最大大小
    */
   MsgSize: number
-
   /**
    * 消息最大数量
    */
   MsgCount: number
-
   /**
    * 已删除
    */
   Deleted: number
-
   /**
    * Topic完整路径
    */
   Path: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
@@ -627,12 +571,10 @@ export interface AppGetTokenRequest {
    * 用户名
    */
   UserName: string
-
   /**
    * 密码
    */
   Password: string
-
   /**
    * TTL
    */
@@ -677,12 +619,10 @@ export interface GetProductsResponse {
    * Product列表
    */
   Products?: Array<ProductEntry>
-
   /**
    * Product总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -697,12 +637,10 @@ export interface AppGetDeviceRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -717,32 +655,26 @@ export interface GetDataHistoryRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称列表，允许最多一次100台
    */
   DeviceNames: Array<string>
-
   /**
    * 查询开始时间
    */
   StartTime: string
-
   /**
    * 查询结束时间
    */
   EndTime: string
-
   /**
    * 查询数据量
    */
   Size?: number
-
   /**
    * 时间排序（desc/asc）
    */
   Order?: string
-
   /**
    * 查询游标
    */
@@ -757,7 +689,6 @@ export interface AddTopicResponse {
    * Topic信息
    */
   Topic?: Topic
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -772,32 +703,26 @@ export interface AddProductRequest {
    * 产品名称，同一区域产品名称需唯一，支持中文、英文字母、中划线和下划线，长度不超过31个字符，中文占两个字符
    */
   Name: string
-
   /**
    * 产品描述
    */
   Description: string
-
   /**
    * 数据模版
    */
   DataTemplate?: Array<DataTemplate>
-
   /**
    * 产品版本（native表示基础版，template表示高级版，默认值为template）
    */
   DataProtocol?: string
-
   /**
    * 设备认证方式（1：动态令牌，2：签名直连鉴权）
    */
   AuthType?: number
-
   /**
    * 通信方式（other/wifi/cellular/nb-iot）
    */
   CommProtocol?: string
-
   /**
    * 产品的设备类型（device: 直连设备；sub_device：子设备；gateway：网关设备）
    */
@@ -812,67 +737,54 @@ export interface ProductEntry {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 产品Key
    */
   ProductKey: string
-
   /**
    * AppId
    */
   AppId: number
-
   /**
    * 产品名称
    */
   Name: string
-
   /**
    * 产品描述
    */
   Description: string
-
   /**
    * 连接域名
    */
   Domain: string
-
   /**
    * 鉴权类型（0：直连，1：Token）
    */
   AuthType: number
-
   /**
    * 数据协议（native/template）
    */
   DataProtocol: string
-
   /**
    * 删除（0未删除）
    */
   Deleted: number
-
   /**
    * 备注
    */
   Message: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 通信方式
    */
   CommProtocol: string
-
   /**
    * 地域
    */
   Region: string
-
   /**
    * 设备类型
    */
@@ -887,12 +799,10 @@ export interface GetRulesResponse {
    * 规则列表
    */
   Rules?: Array<Rule>
-
   /**
    * 规则总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -907,7 +817,6 @@ export interface DeleteDeviceRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -922,7 +831,6 @@ export interface AssociateSubDeviceToGatewayProductRequest {
    * 子设备产品Id
    */
   SubDeviceProductId: string
-
   /**
    * 网关产品Id
    */
@@ -937,7 +845,6 @@ export interface GetDeviceSignaturesResponse {
    * 设备绑定签名列表
    */
   DeviceSignatures?: Array<DeviceSignature>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -952,22 +859,19 @@ export interface RuleQuery {
    * 字段
    */
   Field: string
-
   /**
    * 过滤规则
    */
   Condition: string
-
   /**
-      * Topic
+   * Topic
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Topic?: string
-
   /**
-      * 产品Id
+   * 产品Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProductId?: string
 }
 
@@ -979,22 +883,18 @@ export interface AppUser {
    * 应用Id
    */
   ApplicationId: string
-
   /**
    * 用户名
    */
   UserName: string
-
   /**
    * 昵称
    */
   NickName: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 修改时间
    */
@@ -1009,17 +909,14 @@ export interface BoolData {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 读写模式
    */
   Mode: string
-
   /**
    * 取值列表
    */
@@ -1034,12 +931,10 @@ export interface PublishMsgRequest {
    * Topic
    */
   Topic: string
-
   /**
    * 消息内容
    */
   Message: string
-
   /**
    * Qos(目前QoS支持0与1)
    */
@@ -1054,7 +949,6 @@ export interface GetProductsRequest {
    * 偏移
    */
   Offset?: number
-
   /**
    * 长度
    */
@@ -1069,7 +963,6 @@ export interface AddTopicRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * Topic名称
    */
@@ -1084,7 +977,6 @@ export interface AppGetDeviceStatusesRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 设备Id列表（单次限制1000个设备）
    */
@@ -1099,27 +991,22 @@ export interface DeviceLogEntry {
    * 日志id
    */
   Id: string
-
   /**
    * 日志内容
    */
   Msg: string
-
   /**
    * 状态码
    */
   Code: string
-
   /**
    * 时间戳
    */
   Timestamp: number
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备动作
    */
@@ -1134,37 +1021,30 @@ export interface GetDebugLogRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称列表，最大支持100台
    */
   DeviceNames: Array<string>
-
   /**
    * 查询开始时间
    */
   StartTime: string
-
   /**
    * 查询结束时间
    */
   EndTime: string
-
   /**
    * 查询数据量
    */
   Size?: number
-
   /**
    * 时间排序（desc/asc）
    */
   Order?: string
-
   /**
    * 查询游标
    */
   ScrollId?: string
-
   /**
    * 日志类型（shadow/action/mqtt）
    */
@@ -1179,7 +1059,6 @@ export interface GetDeviceRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -1194,7 +1073,6 @@ export interface GetDeviceDataRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -1219,7 +1097,6 @@ export interface GetTopicRequest {
    * TopicId
    */
   TopicId: string
-
   /**
    * 产品Id
    */
@@ -1234,12 +1111,10 @@ export interface GetDevicesResponse {
    * 设备列表
    */
   Devices?: Array<DeviceEntry>
-
   /**
    * 设备总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1254,17 +1129,14 @@ export interface NumberData {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 读写模式
    */
   Mode: string
-
   /**
    * 取值范围
    */
@@ -1279,17 +1151,14 @@ export interface GetDevicesRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 偏移
    */
   Offset?: number
-
   /**
    * 长度
    */
   Length?: number
-
   /**
    * 关键字查询
    */
@@ -1304,7 +1173,6 @@ export interface AppGetTokenResponse {
    * 访问Token
    */
   AccessToken?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1319,7 +1187,6 @@ export interface GetProductResponse {
    * 产品信息
    */
   Product?: Product
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1334,7 +1201,6 @@ export interface AppAddUserRequest {
    * 用户名
    */
   UserName: string
-
   /**
    * 密码
    */
@@ -1349,7 +1215,6 @@ export interface AddRuleResponse {
    * 规则
    */
   Rule?: Rule
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1374,22 +1239,18 @@ export interface AppIssueDeviceControlRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 控制数据（json）
    */
   ControlData: string
-
   /**
    * 是否发送metadata字段
    */
@@ -1404,24 +1265,20 @@ export interface DeviceStatus {
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备状态（inactive, online, offline）
    */
   Status: string
-
   /**
-      * 首次上线时间
+   * 首次上线时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstOnline: string
-
   /**
-      * 最后上线时间
+   * 最后上线时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   LastOnline: string
-
   /**
    * 上线次数
    */
@@ -1446,7 +1303,6 @@ export interface AppGetUserResponse {
    * 用户信息
    */
   AppUser?: AppUser
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1461,7 +1317,6 @@ export interface AppUpdateUserRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 昵称
    */
@@ -1476,17 +1331,14 @@ export interface GetDebugLogResponse {
    * 调试日志
    */
   DebugLog?: Array<DebugLogEntry>
-
   /**
    * 查询游标
    */
   ScrollId?: string
-
   /**
    * 游标超时
    */
   ScrollTimeout?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1501,7 +1353,6 @@ export interface AppUpdateUserResponse {
    * 应用用户
    */
   AppUser?: AppUser
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1516,27 +1367,22 @@ export interface Device {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备密钥
    */
   DeviceSecret: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 设备信息（json）
    */
@@ -1551,7 +1397,6 @@ export interface GetRulesRequest {
    * 偏移
    */
   Offset?: number
-
   /**
    * 长度
    */
@@ -1566,57 +1411,46 @@ export interface Rule {
    * 规则Id
    */
   RuleId: string
-
   /**
    * AppId
    */
   AppId: number
-
   /**
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Description: string
-
   /**
    * 查询
    */
   Query: RuleQuery
-
   /**
    * 转发
    */
   Actions: Array<Action>
-
   /**
    * 已启动
    */
   Active: number
-
   /**
    * 已删除
    */
   Deleted: number
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 消息顺序
    */
   MsgOrder: number
-
   /**
    * 数据类型（0：文本，1：二进制）
    */
@@ -1641,17 +1475,14 @@ export interface GetDataHistoryResponse {
    * 数据历史
    */
   DataHistory?: Array<DataHistoryEntry>
-
   /**
    * 查询游标
    */
   ScrollId?: string
-
   /**
    * 查询游标超时
    */
   ScrollTimeout?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1663,21 +1494,19 @@ export interface GetDataHistoryResponse {
  */
 export interface Action {
   /**
-      * 转发至topic
+   * 转发至topic
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Topic?: TopicAction
-
   /**
-      * 转发至第三发
+   * 转发至第三发
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Service?: ServiceAction
-
   /**
-      * 转发至第三发Ckafka
+   * 转发至第三发Ckafka
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Ckafka?: CkafkaAction
 }
 
@@ -1699,7 +1528,6 @@ export interface AppGetDevicesResponse {
    * 绑定设备列表
    */
   Devices?: Array<AppDevice>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1714,12 +1542,10 @@ export interface CkafkaAction {
    * 实例Id
    */
   InstanceId: string
-
   /**
    * topic名称
    */
   TopicName: string
-
   /**
    * 地域
    */
@@ -1734,7 +1560,6 @@ export interface AddDeviceRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称，唯一标识某产品下的一个设备
    */
@@ -1749,17 +1574,14 @@ export interface UpdateProductRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 产品名称
    */
   Name?: string
-
   /**
    * 产品描述
    */
   Description?: string
-
   /**
    * 数据模版
    */
@@ -1784,12 +1606,10 @@ export interface GetDeviceSignaturesRequest {
    * 产品ID
    */
   ProductId: string
-
   /**
    * 设备名称列表（单次限制1000个设备）
    */
   DeviceNames: Array<string>
-
   /**
    * 过期时间
    */
@@ -1804,7 +1624,6 @@ export interface GetRuleResponse {
    * 规则
    */
   Rule?: Rule
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1819,7 +1638,6 @@ export interface AppUpdateDeviceResponse {
    * 设备信息
    */
   AppDevice?: AppDevice
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1834,102 +1652,82 @@ export interface Product {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 产品Key
    */
   ProductKey: string
-
   /**
    * AppId
    */
   AppId: number
-
   /**
    * 产品名称
    */
   Name: string
-
   /**
    * 产品描述
    */
   Description: string
-
   /**
    * 连接域名
    */
   Domain: string
-
   /**
    * 产品规格
    */
   Standard: number
-
   /**
    * 鉴权类型（0：直连，1：Token）
    */
   AuthType: number
-
   /**
    * 删除（0未删除）
    */
   Deleted: number
-
   /**
    * 备注
    */
   Message: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
   UpdateTime: string
-
   /**
    * 数据模版
    */
   DataTemplate: Array<DataTemplate>
-
   /**
    * 数据协议（native/template）
    */
   DataProtocol: string
-
   /**
    * 直连用户名
    */
   Username: string
-
   /**
    * 直连密码
    */
   Password: string
-
   /**
    * 通信方式
    */
   CommProtocol: string
-
   /**
    * qps
    */
   Qps: number
-
   /**
    * 地域
    */
   Region: string
-
   /**
    * 产品的设备类型
    */
   DeviceType: string
-
   /**
    * 关联的产品列表
    */
@@ -1944,37 +1742,30 @@ export interface DebugLogEntry {
    * 日志id
    */
   Id: string
-
   /**
    * 行为（事件）
    */
   Event: string
-
   /**
    * shadow/action/mqtt, 分别表示：影子/规则引擎/上下线日志
    */
   LogType: string
-
   /**
    * 时间戳
    */
   Timestamp: number
-
   /**
    * success/fail
    */
   Result: string
-
   /**
    * 日志详细内容
    */
   Data: string
-
   /**
    * 数据来源topic
    */
   Topic: string
-
   /**
    * 设备名称
    */
@@ -1989,7 +1780,6 @@ export interface GetDeviceStatusesRequest {
    * 产品ID
    */
   ProductId: string
-
   /**
    * 设备名称列表（单次限制1000个设备）
    */
@@ -2004,7 +1794,6 @@ export interface GetDeviceStatusesResponse {
    * 设备状态列表
    */
   DeviceStatuses?: Array<DeviceStatus>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2019,7 +1808,6 @@ export interface UnassociateSubDeviceFromGatewayProductRequest {
    * 子设备产品Id
    */
   SubDeviceProductId: string
-
   /**
    * 网关设备产品Id
    */
@@ -2034,12 +1822,10 @@ export interface AppDeleteDeviceRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -2054,17 +1840,14 @@ export interface StringData {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 读写模式
    */
   Mode: string
-
   /**
    * 长度范围
    */
@@ -2079,7 +1862,6 @@ export interface AppGetDeviceStatusesResponse {
    * 设备状态
    */
   DeviceStatuses?: Array<DeviceStatus>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2094,12 +1876,10 @@ export interface GetTopicsResponse {
    * Topic列表
    */
   Topics?: Array<Topic>
-
   /**
    * Topic总数
    */
   Total?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2114,12 +1894,10 @@ export interface AppGetDeviceDataRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
@@ -2134,7 +1912,6 @@ export interface AppAddUserResponse {
    * 应用用户
    */
   AppUser?: AppUser
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2149,17 +1926,14 @@ export interface DeviceEntry {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 设备密钥
    */
   DeviceSecret: string
-
   /**
    * 创建时间
    */
@@ -2174,37 +1948,30 @@ export interface GetDeviceLogRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 设备名称列表，最大支持100台
    */
   DeviceNames: Array<string>
-
   /**
    * 查询开始时间
    */
   StartTime: string
-
   /**
    * 查询结束时间
    */
   EndTime: string
-
   /**
    * 查询数据量
    */
   Size?: number
-
   /**
    * 时间排序（desc/asc）
    */
   Order?: string
-
   /**
    * 查询游标
    */
   ScrollId?: string
-
   /**
    * 日志类型（comm/status）
    */
@@ -2219,7 +1986,6 @@ export interface AddDeviceResponse {
    * 设备信息
    */
   Device?: Device
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2244,12 +2010,10 @@ export interface AppResetPasswordRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 旧密码
    */
   OldPassword: string
-
   /**
    * 新密码
    */
@@ -2274,32 +2038,26 @@ export interface AppDevice {
    * 设备Id
    */
   DeviceId: string
-
   /**
    * 所属产品Id
    */
   ProductId: string
-
   /**
    * 设备名称
    */
   DeviceName: string
-
   /**
    * 别名
    */
   AliasName: string
-
   /**
    * 地区
    */
   Region: string
-
   /**
    * 创建时间
    */
   CreateTime: string
-
   /**
    * 更新时间
    */
@@ -2314,12 +2072,10 @@ export interface GetTopicsRequest {
    * 产品Id
    */
   ProductId: string
-
   /**
    * 偏移
    */
   Offset?: number
-
   /**
    * 长度
    */
@@ -2334,17 +2090,14 @@ export interface DeviceStatData {
    * 时间点
    */
   Datetime: string
-
   /**
    * 在线设备数
    */
   DeviceOnline: number
-
   /**
    * 激活设备数
    */
   DeviceActive: number
-
   /**
    * 设备总数
    */
@@ -2359,17 +2112,14 @@ export interface EnumData {
    * 名称
    */
   Name: string
-
   /**
    * 描述
    */
   Desc: string
-
   /**
    * 读写模式
    */
   Mode: string
-
   /**
    * 取值列表
    */
@@ -2394,7 +2144,6 @@ export interface AppSecureAddDeviceResponse {
    * 绑定设备信息
    */
   AppDevice?: AppDevice
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2409,7 +2158,6 @@ export interface AppSecureAddDeviceRequest {
    * 访问Token
    */
   AccessToken: string
-
   /**
    * 设备签名
    */

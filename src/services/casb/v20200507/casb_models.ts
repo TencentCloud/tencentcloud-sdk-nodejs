@@ -23,27 +23,22 @@ export interface CopyCryptoColumnPolicyRequest {
    * 实例Id
    */
   CasbId: string
-
   /**
    * 元数据id
    */
   MetaDataId: string
-
   /**
    * 目标实例Id 如果和实例Id相同则为同CasbId下的策略复制
    */
   DstCasbId: string
-
   /**
    * 目标实例Id 如果和[元数据id]相同则为同元数据下的策略复制
    */
   DstMetaDataId: string
-
   /**
    * 筛选来源数据库的表
    */
   SrcTableFilter?: Array<CryptoCopyColumnPolicyTableFilter>
-
   /**
    * 复制同元数据下的策略，需要填写目标数据库名
    */
@@ -58,7 +53,6 @@ export interface CryptoCopyColumnPolicyTableFilter {
    * 数据库名称
    */
   DatabaseName: string
-
   /**
    * 表名称
    */

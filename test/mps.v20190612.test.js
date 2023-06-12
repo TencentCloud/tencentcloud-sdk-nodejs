@@ -38,9 +38,9 @@ it("mps.v20190612.DescribeStreamLinkFlowRealtimeStatus", async function () {
     }
 })
 
-it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+it("mps.v20190612.EditMedia", async function () {
     try {
-       const data = await client.CreateAnimatedGraphicsTemplate({})
+       const data = await client.EditMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
     }
 })
 
-it("mps.v20190612.EditMedia", async function () {
+it("mps.v20190612.DescribeStreamLinkEvent", async function () {
     try {
-       const data = await client.EditMedia({})
+       const data = await client.DescribeStreamLinkEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +71,16 @@ it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
 it("mps.v20190612.DescribeAIAnalysisTemplates", async function () {
     try {
        const data = await client.DescribeAIAnalysisTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ParseLiveStreamProcessNotification", async function () {
+    try {
+       const data = await client.ParseLiveStreamProcessNotification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +188,16 @@ it("mps.v20190612.DescribeStreamLinkFlowStatistics", async function () {
     }
 })
 
+it("mps.v20190612.BatchDeleteStreamLinkFlow", async function () {
+    try {
+       const data = await client.BatchDeleteStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
     try {
        const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
@@ -221,6 +241,16 @@ it("mps.v20190612.ModifyStreamLinkFlow", async function () {
 it("mps.v20190612.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.BatchStartStreamLinkFlow", async function () {
+    try {
+       const data = await client.BatchStartStreamLinkFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +508,26 @@ it("mps.v20190612.StopStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.DescribeStreamLinkEventAttachedFlows", async function () {
+    try {
+       const data = await client.DescribeStreamLinkEventAttachedFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+    try {
+       const data = await client.ModifyStreamLinkOutputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeSnapshotByTimeOffsetTemplates", async function () {
     try {
        const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
@@ -501,6 +551,16 @@ it("mps.v20190612.ModifyTranscodeTemplate", async function () {
 it("mps.v20190612.DescribeContentReviewTemplates", async function () {
     try {
        const data = await client.DescribeContentReviewTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamLinkEvents", async function () {
+    try {
+       const data = await client.DescribeStreamLinkEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +778,9 @@ it("mps.v20190612.CreateImageSpriteTemplate", async function () {
     }
 })
 
-it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+it("mps.v20190612.ModifyStreamLinkEvent", async function () {
     try {
-       const data = await client.ModifyStreamLinkOutputInfo({})
+       const data = await client.ModifyStreamLinkEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,9 +858,9 @@ it("mps.v20190612.DeletePersonSample", async function () {
     }
 })
 
-it("mps.v20190612.ParseLiveStreamProcessNotification", async function () {
+it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
     try {
-       const data = await client.ParseLiveStreamProcessNotification({})
+       const data = await client.CreateAnimatedGraphicsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +901,16 @@ it("mps.v20190612.DeleteSampleSnapshotTemplate", async function () {
 it("mps.v20190612.DescribeStreamLinkFlowMediaStatistics", async function () {
     try {
        const data = await client.DescribeStreamLinkFlowMediaStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateStreamLinkEvent", async function () {
+    try {
+       const data = await client.CreateStreamLinkEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +968,29 @@ it("mps.v20190612.CreateAIRecognitionTemplate", async function () {
     }
 })
 
+it("mps.v20190612.BatchStopStreamLinkFlow", async function () {
+    try {
+       const data = await client.BatchStopStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyAIRecognitionTemplate", async function () {
     try {
        const data = await client.ModifyAIRecognitionTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteStreamLinkEvent", async function () {
+    try {
+       const data = await client.DeleteStreamLinkEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

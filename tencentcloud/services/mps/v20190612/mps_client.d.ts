@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifySnapshotByTimeOffsetTemplateResponse, ModifySampleSnapshotTemplateResponse, ModifyWatermarkTemplateRequest, DeleteStreamLinkFlowRequest, CreateTranscodeTemplateRequest, ProcessLiveStreamResponse, ModifyStreamLinkOutputInfoResponse, DescribeAnimatedGraphicsTemplatesRequest, DeleteAnimatedGraphicsTemplateResponse, DeleteScheduleResponse, ManageTaskResponse, DeleteWorkflowRequest, ModifySampleSnapshotTemplateRequest, CreateWorkflowRequest, CreateImageSpriteTemplateRequest, ModifyStreamLinkFlowResponse, DeleteAIRecognitionTemplateResponse, DeleteContentReviewTemplateRequest, StartStreamLinkFlowResponse, ModifyScheduleRequest, ModifyWordSampleResponse, DeletePersonSampleRequest, DescribeStreamLinkFlowsResponse, ParseLiveStreamProcessNotificationResponse, ExecuteFunctionResponse, CreateAdaptiveDynamicStreamingTemplateRequest, ModifyTranscodeTemplateRequest, ModifyStreamLinkFlowRequest, DeleteAIAnalysisTemplateResponse, DeleteWorkflowResponse, CreatePersonSampleRequest, DescribeStreamLinkFlowSRTStatisticsRequest, CreateScheduleResponse, DescribeWordSamplesResponse, DeleteAIRecognitionTemplateRequest, EnableWorkflowRequest, CreateStreamLinkFlowResponse, CreateStreamLinkFlowRequest, RecognizeMediaForZhiXueRequest, ModifyAIAnalysisTemplateResponse, DescribeAIRecognitionTemplatesResponse, EditMediaResponse, DescribeSnapshotByTimeOffsetTemplatesRequest, WithdrawsWatermarkRequest, DisableScheduleRequest, ProcessMediaResponse, CreateWordSamplesResponse, CreateScheduleRequest, CreateAnimatedGraphicsTemplateRequest, ParseNotificationRequest, CreateWordSamplesRequest, DescribeStreamLinkFlowStatisticsRequest, DisableScheduleResponse, ModifyAnimatedGraphicsTemplateResponse, DeleteAdaptiveDynamicStreamingTemplateRequest, DeleteAIAnalysisTemplateRequest, EditMediaRequest, CreateStreamLinkOutputInfoResponse, DescribeAdaptiveDynamicStreamingTemplatesResponse, StopStreamLinkFlowRequest, DescribeAdaptiveDynamicStreamingTemplatesRequest, CreatePersonSampleResponse, CreateContentReviewTemplateResponse, DeleteWordSamplesRequest, EnableScheduleRequest, ModifyContentReviewTemplateResponse, DescribeWatermarkTemplatesRequest, ModifyAIAnalysisTemplateRequest, DeleteStreamLinkOutputResponse, ModifyAdaptiveDynamicStreamingTemplateRequest, ModifyWordSampleRequest, ProcessMediaRequest, DescribeSchedulesResponse, DescribeStreamLinkRegionsResponse, ManageTaskRequest, DescribeStreamLinkFlowStatisticsResponse, ModifyAdaptiveDynamicStreamingTemplateResponse, DeleteContentReviewTemplateResponse, ModifyStreamLinkOutputInfoRequest, RecognizeMediaForZhiXueResponse, DescribeWorkflowsResponse, DeleteImageSpriteTemplateResponse, DescribeContentReviewTemplatesResponse, DescribeStreamLinkActivateStateResponse, DescribeStreamLinkFlowRequest, ModifyImageSpriteTemplateResponse, CreateWatermarkTemplateRequest, CreateStreamLinkInputRequest, EnableScheduleResponse, DeleteAdaptiveDynamicStreamingTemplateResponse, DescribeStreamLinkActivateStateRequest, DescribeImageSpriteTemplatesRequest, CreateAIRecognitionTemplateResponse, DeleteTranscodeTemplateRequest, DescribeStreamLinkFlowSRTStatisticsResponse, DescribeAIAnalysisTemplatesRequest, DeleteSampleSnapshotTemplateResponse, ResetWorkflowRequest, DeletePersonSampleResponse, StartStreamLinkFlowRequest, CreateSnapshotByTimeOffsetTemplateResponse, ModifyContentReviewTemplateRequest, StopStreamLinkFlowResponse, DeleteScheduleRequest, CreateAdaptiveDynamicStreamingTemplateResponse, DeleteSampleSnapshotTemplateRequest, DeleteStreamLinkFlowResponse, CreateSampleSnapshotTemplateResponse, WithdrawsWatermarkResponse, DescribeStreamLinkFlowMediaStatisticsResponse, DescribeMediaMetaDataResponse, DescribeStreamLinkFlowRealtimeStatusRequest, DisableWorkflowResponse, ModifyAIRecognitionTemplateRequest, ParseNotificationResponse, ResetWorkflowResponse, DescribeStreamLinkFlowsRequest, CreateAIAnalysisTemplateResponse, DeleteStreamLinkOutputRequest, ModifyPersonSampleRequest, CreateAIRecognitionTemplateRequest, DescribeTaskDetailRequest, DescribeStreamLinkFlowResponse, CreateWorkflowResponse, ModifyAIRecognitionTemplateResponse, ModifyAnimatedGraphicsTemplateRequest, DeleteWordSamplesResponse, EnableWorkflowResponse, CreateStreamLinkOutputInfoRequest, ModifyStreamLinkInputRequest, ModifyTranscodeTemplateResponse, CreateContentReviewTemplateRequest, DescribeContentReviewTemplatesRequest, DescribeImageSpriteTemplatesResponse, DescribeStreamLinkRegionsRequest, ModifyStreamLinkInputResponse, DescribeTaskDetailResponse, DeleteImageSpriteTemplateRequest, DescribeTasksResponse, ModifySnapshotByTimeOffsetTemplateRequest, DescribeSnapshotByTimeOffsetTemplatesResponse, DeleteSnapshotByTimeOffsetTemplateResponse, DescribeTasksRequest, CreateTranscodeTemplateResponse, CreateAIAnalysisTemplateRequest, DescribeWorkflowsRequest, DescribeSchedulesRequest, ProcessLiveStreamRequest, ModifyImageSpriteTemplateRequest, DeleteWatermarkTemplateRequest, DescribeWordSamplesRequest, CreateWatermarkTemplateResponse, DescribeSampleSnapshotTemplatesResponse, DescribeStreamLinkFlowRealtimeStatusResponse, DescribeTranscodeTemplatesRequest, DisableWorkflowRequest, DescribeWatermarkTemplatesResponse, DescribeStreamLinkFlowLogsRequest, ExecuteFunctionRequest, DescribeStreamLinkFlowLogsResponse, ModifyPersonSampleResponse, DeleteTranscodeTemplateResponse, DescribePersonSamplesResponse, ModifyScheduleResponse, DescribeAIAnalysisTemplatesResponse, CreateSnapshotByTimeOffsetTemplateRequest, ParseLiveStreamProcessNotificationRequest, CreateSampleSnapshotTemplateRequest, DescribeTranscodeTemplatesResponse, DeleteAnimatedGraphicsTemplateRequest, DeleteSnapshotByTimeOffsetTemplateRequest, DescribeAnimatedGraphicsTemplatesResponse, DescribeSampleSnapshotTemplatesRequest, CreateAnimatedGraphicsTemplateResponse, DescribePersonSamplesRequest, DescribeStreamLinkFlowMediaStatisticsRequest, CreateStreamLinkInputResponse, DeleteWatermarkTemplateResponse, DescribeMediaMetaDataRequest, CreateImageSpriteTemplateResponse, DescribeAIRecognitionTemplatesRequest, ModifyWatermarkTemplateResponse } from "./mps_models";
+import { ModifySnapshotByTimeOffsetTemplateResponse, ModifySampleSnapshotTemplateResponse, ModifyWatermarkTemplateRequest, DeleteStreamLinkFlowRequest, CreateTranscodeTemplateRequest, ProcessLiveStreamResponse, ModifyStreamLinkOutputInfoResponse, DescribeAnimatedGraphicsTemplatesRequest, DeleteAnimatedGraphicsTemplateResponse, DeleteScheduleResponse, ManageTaskResponse, BatchDeleteStreamLinkFlowRequest, DeleteWorkflowRequest, ModifySampleSnapshotTemplateRequest, CreateWorkflowRequest, ModifyStreamLinkEventRequest, DescribeStreamLinkEventRequest, CreateImageSpriteTemplateRequest, ModifyStreamLinkFlowResponse, DeleteAIRecognitionTemplateResponse, DeleteContentReviewTemplateRequest, StartStreamLinkFlowResponse, ModifyScheduleRequest, ModifyWordSampleResponse, DeletePersonSampleRequest, DescribeStreamLinkFlowsResponse, ParseLiveStreamProcessNotificationResponse, ExecuteFunctionResponse, CreateAdaptiveDynamicStreamingTemplateRequest, ModifyTranscodeTemplateRequest, ModifyStreamLinkFlowRequest, DeleteAIAnalysisTemplateResponse, DeleteWorkflowResponse, CreateStreamLinkEventRequest, CreatePersonSampleRequest, DescribeStreamLinkFlowSRTStatisticsRequest, CreateScheduleResponse, DescribeWordSamplesResponse, DeleteAIRecognitionTemplateRequest, DescribeStreamLinkEventResponse, EnableWorkflowRequest, CreateStreamLinkFlowResponse, CreateStreamLinkFlowRequest, RecognizeMediaForZhiXueRequest, ModifyAIAnalysisTemplateResponse, DescribeAIRecognitionTemplatesResponse, EditMediaResponse, DescribeSnapshotByTimeOffsetTemplatesRequest, ModifyStreamLinkEventResponse, WithdrawsWatermarkRequest, DisableScheduleRequest, ProcessMediaResponse, CreateWordSamplesResponse, CreateScheduleRequest, CreateAnimatedGraphicsTemplateRequest, ParseNotificationRequest, CreateWordSamplesRequest, DescribeStreamLinkEventsResponse, DescribeStreamLinkFlowStatisticsRequest, DisableScheduleResponse, ModifyAnimatedGraphicsTemplateResponse, DeleteAdaptiveDynamicStreamingTemplateRequest, DeleteAIAnalysisTemplateRequest, EditMediaRequest, CreateStreamLinkOutputInfoResponse, DescribeStreamLinkEventAttachedFlowsRequest, DescribeAdaptiveDynamicStreamingTemplatesResponse, StopStreamLinkFlowRequest, DescribeAdaptiveDynamicStreamingTemplatesRequest, CreatePersonSampleResponse, CreateContentReviewTemplateResponse, DeleteWordSamplesRequest, EnableScheduleRequest, ModifyContentReviewTemplateResponse, DescribeWatermarkTemplatesRequest, ModifyAIAnalysisTemplateRequest, ModifyAdaptiveDynamicStreamingTemplateRequest, ModifyWordSampleRequest, BatchStopStreamLinkFlowRequest, CreateStreamLinkEventResponse, ProcessMediaRequest, DescribeSchedulesResponse, DescribeStreamLinkRegionsResponse, ManageTaskRequest, DescribeStreamLinkFlowStatisticsResponse, ModifyAdaptiveDynamicStreamingTemplateResponse, DeleteContentReviewTemplateResponse, ModifyStreamLinkOutputInfoRequest, RecognizeMediaForZhiXueResponse, DescribeWorkflowsResponse, DeleteImageSpriteTemplateResponse, DescribeContentReviewTemplatesResponse, DescribeStreamLinkActivateStateResponse, DescribeStreamLinkFlowRequest, ModifyImageSpriteTemplateResponse, CreateWatermarkTemplateRequest, CreateStreamLinkInputRequest, EnableScheduleResponse, DeleteAdaptiveDynamicStreamingTemplateResponse, DescribeStreamLinkActivateStateRequest, DescribeImageSpriteTemplatesRequest, CreateAIRecognitionTemplateResponse, DeleteTranscodeTemplateRequest, BatchStartStreamLinkFlowResponse, DescribeStreamLinkFlowSRTStatisticsResponse, DescribeAIAnalysisTemplatesRequest, DeleteSampleSnapshotTemplateResponse, ResetWorkflowRequest, DeletePersonSampleResponse, StartStreamLinkFlowRequest, CreateSnapshotByTimeOffsetTemplateResponse, ModifyContentReviewTemplateRequest, StopStreamLinkFlowResponse, DeleteScheduleRequest, CreateAdaptiveDynamicStreamingTemplateResponse, DeleteSampleSnapshotTemplateRequest, DeleteStreamLinkFlowResponse, CreateSampleSnapshotTemplateResponse, WithdrawsWatermarkResponse, DescribeStreamLinkFlowMediaStatisticsResponse, DescribeMediaMetaDataResponse, DescribeStreamLinkFlowRealtimeStatusRequest, DisableWorkflowResponse, DescribeStreamLinkEventsRequest, ModifyAIRecognitionTemplateRequest, ParseNotificationResponse, ResetWorkflowResponse, DescribeStreamLinkFlowsRequest, CreateAIAnalysisTemplateResponse, DeleteStreamLinkOutputRequest, ModifyPersonSampleRequest, CreateAIRecognitionTemplateRequest, DescribeTaskDetailRequest, DescribeStreamLinkFlowResponse, CreateWorkflowResponse, ModifyAIRecognitionTemplateResponse, ModifyAnimatedGraphicsTemplateRequest, DeleteWordSamplesResponse, DeleteStreamLinkOutputResponse, EnableWorkflowResponse, DeleteStreamLinkEventRequest, CreateStreamLinkOutputInfoRequest, ModifyStreamLinkInputRequest, DescribeStreamLinkEventAttachedFlowsResponse, ModifyTranscodeTemplateResponse, CreateContentReviewTemplateRequest, DescribeContentReviewTemplatesRequest, DescribeImageSpriteTemplatesResponse, DescribeStreamLinkRegionsRequest, ModifyStreamLinkInputResponse, DescribeTaskDetailResponse, DeleteImageSpriteTemplateRequest, DeleteStreamLinkEventResponse, DescribeTasksResponse, ModifySnapshotByTimeOffsetTemplateRequest, DescribeSnapshotByTimeOffsetTemplatesResponse, DeleteSnapshotByTimeOffsetTemplateResponse, DescribeTasksRequest, CreateTranscodeTemplateResponse, CreateAIAnalysisTemplateRequest, DescribeWorkflowsRequest, DescribeSchedulesRequest, ProcessLiveStreamRequest, ModifyImageSpriteTemplateRequest, DeleteWatermarkTemplateRequest, DescribeWordSamplesRequest, DescribeSampleSnapshotTemplatesResponse, DescribeStreamLinkFlowRealtimeStatusResponse, DescribeTranscodeTemplatesRequest, BatchDeleteStreamLinkFlowResponse, DisableWorkflowRequest, DescribeWatermarkTemplatesResponse, DescribeStreamLinkFlowLogsRequest, ExecuteFunctionRequest, DescribeStreamLinkFlowLogsResponse, ModifyPersonSampleResponse, DeleteTranscodeTemplateResponse, DescribePersonSamplesResponse, ModifyScheduleResponse, DescribeAIAnalysisTemplatesResponse, CreateSnapshotByTimeOffsetTemplateRequest, ParseLiveStreamProcessNotificationRequest, CreateSampleSnapshotTemplateRequest, BatchStartStreamLinkFlowRequest, CreateWatermarkTemplateResponse, DescribeTranscodeTemplatesResponse, DeleteAnimatedGraphicsTemplateRequest, DeleteSnapshotByTimeOffsetTemplateRequest, DescribeAnimatedGraphicsTemplatesResponse, DescribeSampleSnapshotTemplatesRequest, CreateAnimatedGraphicsTemplateResponse, DescribePersonSamplesRequest, DescribeStreamLinkFlowMediaStatisticsRequest, CreateStreamLinkInputResponse, BatchStopStreamLinkFlowResponse, DeleteWatermarkTemplateResponse, DescribeMediaMetaDataRequest, CreateImageSpriteTemplateResponse, DescribeAIRecognitionTemplatesRequest, ModifyWatermarkTemplateResponse } from "./mps_models";
 /**
  * mps client
  * @class
@@ -16,10 +16,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeStreamLinkFlowRealtimeStatus(req: DescribeStreamLinkFlowRealtimeStatusRequest, cb?: (error: string, rep: DescribeStreamLinkFlowRealtimeStatusResponse) => void): Promise<DescribeStreamLinkFlowRealtimeStatusResponse>;
     /**
-     * 创建用户自定义转动图模板，数量上限：16。
-     */
-    CreateAnimatedGraphicsTemplate(req: CreateAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void): Promise<CreateAnimatedGraphicsTemplateResponse>;
-    /**
      * 对视频进行编辑（剪辑、拼接等），生成一个新的点播视频。编辑的功能包括：
 
 1. 对一个文件进行剪辑，生成一个新的视频；
@@ -28,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     EditMedia(req: EditMediaRequest, cb?: (error: string, rep: EditMediaResponse) => void): Promise<EditMediaResponse>;
     /**
+     * 查询媒体传输事件的配置信息。
+     */
+    DescribeStreamLinkEvent(req: DescribeStreamLinkEventRequest, cb?: (error: string, rep: DescribeStreamLinkEventResponse) => void): Promise<DescribeStreamLinkEventResponse>;
+    /**
      * 删除用户自定义转动图模板。
      */
     DeleteAnimatedGraphicsTemplate(req: DeleteAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void): Promise<DeleteAnimatedGraphicsTemplateResponse>;
@@ -35,6 +35,11 @@ export declare class Client extends AbstractClient {
      * 根据内容分析模板唯一标识，获取内容分析模板详情列表。返回结果包含符合条件的所有用户自定义内容分析模板及系统预置视频内容分析模板
      */
     DescribeAIAnalysisTemplates(req: DescribeAIAnalysisTemplatesRequest, cb?: (error: string, rep: DescribeAIAnalysisTemplatesResponse) => void): Promise<DescribeAIAnalysisTemplatesResponse>;
+    /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 中的解析实现事件通知的解析。
+     */
+    ParseLiveStreamProcessNotification(req: ParseLiveStreamProcessNotificationRequest, cb?: (error: string, rep: ParseLiveStreamProcessNotificationResponse) => void): Promise<ParseLiveStreamProcessNotificationResponse>;
     /**
      * 删除用户自定义转码模板。
      */
@@ -88,6 +93,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeStreamLinkFlowStatistics(req: DescribeStreamLinkFlowStatisticsRequest, cb?: (error: string, rep: DescribeStreamLinkFlowStatisticsResponse) => void): Promise<DescribeStreamLinkFlowStatisticsResponse>;
     /**
+     * 批量删除媒体传输流。
+     */
+    BatchDeleteStreamLinkFlow(req: BatchDeleteStreamLinkFlowRequest, cb?: (error: string, rep: BatchDeleteStreamLinkFlowResponse) => void): Promise<BatchDeleteStreamLinkFlowResponse>;
+    /**
      * 删除用户自定义指定时间点截图模板。
      */
     DeleteSnapshotByTimeOffsetTemplate(req: DeleteSnapshotByTimeOffsetTemplateRequest, cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void): Promise<DeleteSnapshotByTimeOffsetTemplateResponse>;
@@ -109,6 +118,10 @@ export declare class Client extends AbstractClient {
 * 只能查询到最近七天（168小时）内的任务。
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
+    /**
+     * 批量启动媒体传输流。
+     */
+    BatchStartStreamLinkFlow(req: BatchStartStreamLinkFlowRequest, cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void): Promise<BatchStartStreamLinkFlowResponse>;
     /**
      * 创建用户自定义转码模板，数量上限：1000。
      */
@@ -212,6 +225,14 @@ export declare class Client extends AbstractClient {
      */
     StopStreamLinkFlow(req: StopStreamLinkFlowRequest, cb?: (error: string, rep: StopStreamLinkFlowResponse) => void): Promise<StopStreamLinkFlowResponse>;
     /**
+     * 查询媒体传输事件关联的所有媒体输入流的配置信息。
+     */
+    DescribeStreamLinkEventAttachedFlows(req: DescribeStreamLinkEventAttachedFlowsRequest, cb?: (error: string, rep: DescribeStreamLinkEventAttachedFlowsResponse) => void): Promise<DescribeStreamLinkEventAttachedFlowsResponse>;
+    /**
+     * 修改媒体传输流的输出配置。
+     */
+    ModifyStreamLinkOutputInfo(req: ModifyStreamLinkOutputInfoRequest, cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void): Promise<ModifyStreamLinkOutputInfoResponse>;
+    /**
      * 查询指定时间点截图模板，支持根据条件，分页查询。
      */
     DescribeSnapshotByTimeOffsetTemplates(req: DescribeSnapshotByTimeOffsetTemplatesRequest, cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
@@ -223,6 +244,10 @@ export declare class Client extends AbstractClient {
      * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
      */
     DescribeContentReviewTemplates(req: DescribeContentReviewTemplatesRequest, cb?: (error: string, rep: DescribeContentReviewTemplatesResponse) => void): Promise<DescribeContentReviewTemplatesResponse>;
+    /**
+     * 批量查询媒体传输事件的配置信息。
+     */
+    DescribeStreamLinkEvents(req: DescribeStreamLinkEventsRequest, cb?: (error: string, rep: DescribeStreamLinkEventsResponse) => void): Promise<DescribeStreamLinkEventsResponse>;
     /**
      * 查询媒体传输流的SRT质量数据。
      */
@@ -331,9 +356,9 @@ export declare class Client extends AbstractClient {
      */
     CreateImageSpriteTemplate(req: CreateImageSpriteTemplateRequest, cb?: (error: string, rep: CreateImageSpriteTemplateResponse) => void): Promise<CreateImageSpriteTemplateResponse>;
     /**
-     * 修改媒体传输流的输出配置。
+     * 修改媒体传输的事件配置信息。
      */
-    ModifyStreamLinkOutputInfo(req: ModifyStreamLinkOutputInfoRequest, cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void): Promise<ModifyStreamLinkOutputInfoResponse>;
+    ModifyStreamLinkEvent(req: ModifyStreamLinkEventRequest, cb?: (error: string, rep: ModifyStreamLinkEventResponse) => void): Promise<ModifyStreamLinkEventResponse>;
     /**
      * 根据内容识别模板唯一标识，获取内容识别模板详情列表。返回结果包含符合条件的所有用户自定义内容识别模板及系统预置视频内容识别模板
      */
@@ -363,10 +388,9 @@ export declare class Client extends AbstractClient {
      */
     DeletePersonSample(req: DeletePersonSampleRequest, cb?: (error: string, rep: DeletePersonSampleResponse) => void): Promise<DeletePersonSampleResponse>;
     /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 中的解析实现事件通知的解析。
+     * 创建用户自定义转动图模板，数量上限：16。
      */
-    ParseLiveStreamProcessNotification(req: ParseLiveStreamProcessNotificationRequest, cb?: (error: string, rep: ParseLiveStreamProcessNotificationResponse) => void): Promise<ParseLiveStreamProcessNotificationResponse>;
+    CreateAnimatedGraphicsTemplate(req: CreateAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void): Promise<CreateAnimatedGraphicsTemplateResponse>;
     /**
      * 启用自动化触发编排任务。
      */
@@ -390,6 +414,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeStreamLinkFlowMediaStatistics(req: DescribeStreamLinkFlowMediaStatisticsRequest, cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void): Promise<DescribeStreamLinkFlowMediaStatisticsResponse>;
     /**
+     * 创建媒体传输的事件Event。
+     */
+    CreateStreamLinkEvent(req: CreateStreamLinkEventRequest, cb?: (error: string, rep: CreateStreamLinkEventResponse) => void): Promise<CreateStreamLinkEventResponse>;
+    /**
      * 该接口用于创建素材样本，用于通过五官定位等技术，进行内容识别、内容不适宜等视频处理。
      */
     CreatePersonSample(req: CreatePersonSampleRequest, cb?: (error: string, rep: CreatePersonSampleResponse) => void): Promise<CreatePersonSampleResponse>;
@@ -410,9 +438,17 @@ export declare class Client extends AbstractClient {
      */
     CreateAIRecognitionTemplate(req: CreateAIRecognitionTemplateRequest, cb?: (error: string, rep: CreateAIRecognitionTemplateResponse) => void): Promise<CreateAIRecognitionTemplateResponse>;
     /**
+     * 批量停止媒体传输流。
+     */
+    BatchStopStreamLinkFlow(req: BatchStopStreamLinkFlowRequest, cb?: (error: string, rep: BatchStopStreamLinkFlowResponse) => void): Promise<BatchStopStreamLinkFlowResponse>;
+    /**
      * 修改用户自定义内容识别模板。
      */
     ModifyAIRecognitionTemplate(req: ModifyAIRecognitionTemplateRequest, cb?: (error: string, rep: ModifyAIRecognitionTemplateResponse) => void): Promise<ModifyAIRecognitionTemplateResponse>;
+    /**
+     * 删除媒体传输的事件配置。
+     */
+    DeleteStreamLinkEvent(req: DeleteStreamLinkEventRequest, cb?: (error: string, rep: DeleteStreamLinkEventResponse) => void): Promise<DeleteStreamLinkEventResponse>;
     /**
      * 查询媒体传输流的日志信息。
      */

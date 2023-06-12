@@ -43,12 +43,10 @@ export interface DescribeBPBrandsResponse {
    * 品牌信息
    */
   Brands?: Array<BrandData>
-
   /**
    * 品牌审核通知栏状态：0 不显示 1 显示
    */
   NoticeStatus?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -68,72 +66,58 @@ export interface CreateBPBrandRequest {
    * 品牌名称
    */
   BrandName: string
-
   /**
    * 企业名称
    */
   CompanyName?: string
-
   /**
    * 品牌logo
    */
   BrandLogo?: string
-
   /**
    * 联系电话
    */
   Phone?: string
-
   /**
    * 营业执照
    */
   License?: string
-
   /**
    * 授权书
    */
   Authorization?: string
-
   /**
    * 商标名称
    */
   TrademarkNames?: Array<string>
-
   /**
    * 商标证明
    */
   Trademarks?: Array<string>
-
   /**
    * 是否涉及转让: 0-不转让 1-转让
    */
   IsTransfers?: Array<string>
-
   /**
    * 转让证明
    */
   Transfers?: Array<string>
-
   /**
    * 保护网址
    */
   ProtectURLs?: Array<string>
-
   /**
    * 保护应用
    */
   ProtectAPPs?: Array<string>
-
   /**
    * 保护公众号
    */
   ProtectOfficialAccounts?: Array<string>
-
   /**
    * 保护小程序
    */
   ProtectMiniPrograms?: Array<string>
-
   /**
    * 请求来源：0-反钓鱼 2-反假冒
    */
@@ -148,12 +132,10 @@ export interface DescribeBPFakeURLsRequest {
    * 过滤参数
    */
   Filters?: Array<Filter>
-
   /**
    * 页数
    */
   PageSize?: number
-
   /**
    * 页码
    */
@@ -165,99 +147,84 @@ export interface DescribeBPFakeURLsRequest {
  */
 export interface FakeAPPData {
   /**
-      * 仿冒应用id
+   * 仿冒应用id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeAPPId?: number
-
   /**
-      * 品牌名称
+   * 品牌名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BrandName?: string
-
   /**
-      * 仿冒来源：0-系统检测 1-人工举报
+   * 仿冒来源：0-系统检测 1-人工举报
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Origin?: number
-
   /**
-      * 仿冒应用名称
+   * 仿冒应用名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeAPPName?: string
-
   /**
-      * 仿冒应用包名
+   * 仿冒应用包名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeAPPPackageName?: string
-
   /**
-      * 仿冒应用证书
+   * 仿冒应用证书
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeAPPCert?: string
-
   /**
-      * 仿冒应用大小
+   * 仿冒应用大小
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeAPPSize?: string
-
   /**
-      * 热度
+   * 热度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Heat?: number
-
   /**
-      * 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
+   * 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BlockStatus?: number
-
   /**
-      * 协助处置状态说明
+   * 协助处置状态说明
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BlockNote?: string
-
   /**
-      * 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架
+   * 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineStatus?: number
-
   /**
-      * 关停状态说明
+   * 关停状态说明
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineNote?: string
-
   /**
-      * app来源
+   * app来源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadWay?: string
-
   /**
-      * 新增时间
+   * 新增时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InsertTime?: string
-
   /**
-      * App下载链接
+   * App下载链接
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownloadCosURL?: string
-
   /**
-      * 资质证明状态:0-不可用 1-可用
+   * 资质证明状态:0-不可用 1-可用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CertificationStatus?: number
 }
 
@@ -266,39 +233,34 @@ export interface FakeAPPData {
  */
 export interface WhiteListData {
   /**
-      * 白名单id
+   * 白名单id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WhiteListId?: number
-
   /**
-      * 企业id
+   * 企业id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CompanyId?: number
-
   /**
-      * 品牌名称
+   * 品牌名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BrandName?: string
-
   /**
-      * 资产类型：0-网站 1-app 2-公众号 3-小程序
+   * 资产类型：0-网站 1-app 2-公众号 3-小程序
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AssetsType?: number
-
   /**
-      * 白名单
+   * 白名单
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WhiteList?: string
-
   /**
-      * 新增时间
+   * 新增时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InsertTime?: string
 }
 
@@ -310,37 +272,30 @@ export interface TrademarkData {
    * 商标证明
    */
   Trademark?: string
-
   /**
    * 商标审核状态
    */
   TrademarkStatus?: number
-
   /**
    * 商标审核状态说明
    */
   TrademarkNote?: string
-
   /**
    * 商标id
    */
   TrademarkId?: number
-
   /**
    * 商标转让书
    */
   Transfer?: string
-
   /**
    * 商标转让书审核状态
    */
   TransferStatus?: number
-
   /**
    * 商标转让书审核状态说明
    */
   TransferNote?: string
-
   /**
    * 商标名称
    */
@@ -355,12 +310,10 @@ export interface DescribeBPFakeURLsResponse {
    * 仿冒网址列表
    */
   FakeURLs?: Array<FakeURLData>
-
   /**
    * 仿冒网址总数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -375,17 +328,14 @@ export interface CreateBPFakeURLRequest {
    * 企业id
    */
   CompanyId: number
-
   /**
    * 仿冒网址
    */
   FakeURL: string
-
   /**
    * 仿冒网址截图
    */
   FakeURLSnapshots?: Array<string>
-
   /**
    * 备注
    */
@@ -410,12 +360,10 @@ export interface DescribeBPWhiteListsResponse {
    * 白名单列表
    */
   WhiteLists?: Array<WhiteListData>
-
   /**
    * 白名单总数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -440,7 +388,6 @@ export interface Filter {
    * 过滤参数键
    */
   Name: string
-
   /**
    * 过滤参数值
    */
@@ -465,42 +412,34 @@ export interface ServiceData {
    * 网站保护关联资产数
    */
   ProtectURLCount?: number
-
   /**
    * 网站保护服务到期时间
    */
   ProtectURLExpireTime?: string
-
   /**
    * 应用保护关联资产数
    */
   ProtectAPPCount?: number
-
   /**
    * 应用保护服务到期时间
    */
   ProtectAPPExpireTime?: string
-
   /**
    * 公众号保护关联资产数
    */
   ProtectOfficialAccountCount?: number
-
   /**
    * 公众号保护服务到期时间
    */
   ProtectOfficialAccountExpireTime?: string
-
   /**
    * 小程序保护关联资产数
    */
   ProtectMiniProgramCount?: number
-
   /**
    * 小程序保护服务到期时间
    */
   ProtectMiniProgramExpireTime?: string
-
   /**
    * 关停下架使用次数
    */
@@ -512,135 +451,114 @@ export interface ServiceData {
  */
 export interface FakeURLData {
   /**
-      * 仿冒网址id
+   * 仿冒网址id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeURLId?: number
-
   /**
-      * 品牌名称
+   * 品牌名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BrandName?: string
-
   /**
-      * 仿冒来源：0-系统检测 1-人工举报
+   * 仿冒来源：0-系统检测 1-人工举报
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Origin?: number
-
   /**
-      * 仿冒网址
+   * 仿冒网址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeURL?: string
-
   /**
-      * 仿冒域名
+   * 仿冒域名
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FakeDomain?: string
-
   /**
-      * 热度
+   * 热度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Heat?: number
-
   /**
-      * 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
+   * 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BlockStatus?: number
-
   /**
-      * 协助处置状态说明
+   * 协助处置状态说明
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BlockNote?: string
-
   /**
-      * 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架
+   * 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineStatus?: number
-
   /**
-      * 关停状态说明
+   * 关停状态说明
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OfflineNote?: string
-
   /**
-      * ip地址
+   * ip地址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IP?: string
-
   /**
-      * ip地理位置
+   * ip地理位置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   IPLocation?: string
-
   /**
-      * 网站所属单位
+   * 网站所属单位
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebCompany?: string
-
   /**
-      * 网站性质
+   * 网站性质
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebAttribute?: string
-
   /**
-      * 网站名称
+   * 网站名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebName?: string
-
   /**
-      * 备案号
+   * 备案号
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebICP?: string
-
   /**
-      * 网站创建时间
+   * 网站创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebCreateTime?: string
-
   /**
-      * 网站过期时间
+   * 网站过期时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebExpireTime?: string
-
   /**
-      * 新增时间
+   * 新增时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   InsertTime?: string
-
   /**
-      * 资质证明状态：0-不可用 1-可用
+   * 资质证明状态：0-不可用 1-可用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CertificationStatus?: number
-
   /**
-      * 网址截图
+   * 网址截图
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Snapshot?: string
-
   /**
-      * 账户资源状态：0-不可用 1-可用
+   * 账户资源状态：0-不可用 1-可用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AccountStatus?: number
 }
 
@@ -662,12 +580,10 @@ export interface DescribeBPWhiteListsRequest {
    * 过滤参数
    */
   Filters?: Array<Filter>
-
   /**
    * 页数
    */
   PageSize?: number
-
   /**
    * 页码
    */
@@ -692,12 +608,10 @@ export interface DescribeBPFakeAPPListRequest {
    * 过滤参数
    */
   Filters?: Array<Filter>
-
   /**
    * 页数
    */
   PageSize?: number
-
   /**
    * 页码
    */
@@ -712,37 +626,30 @@ export interface CreateBPFakeAPPRequest {
    * 企业id
    */
   CompanyId: number
-
   /**
    * 仿冒应用名称
    */
   FakeAPPName: string
-
   /**
    * 仿冒来源
    */
   APPChan?: string
-
   /**
    * 仿冒应用包名
    */
   FakeAPPPackageName?: string
-
   /**
    * 仿冒应用证书
    */
   FakeAPPCert?: string
-
   /**
    * 仿冒应用大小
    */
   FakeAPPSize?: string
-
   /**
    * 仿冒截图
    */
   FakeAPPSnapshots?: Array<string>
-
   /**
    * 备注
    */
@@ -757,67 +664,54 @@ export interface BrandData {
    * 品牌Id
    */
   CompanyId?: number
-
   /**
    * 企业名称
    */
   CompanyName?: string
-
   /**
    * 品牌名称
    */
   BrandName?: string
-
   /**
    * 联系电话
    */
   Phone?: string
-
   /**
    * 营业执照
    */
   License?: string
-
   /**
    * 营业执照审核状态
    */
   LicenseStatus?: number
-
   /**
    * 营业执照审核状态说明
    */
   LicenseNote?: string
-
   /**
    * 授权书
    */
   Authorization?: string
-
   /**
    * 授权书审核状态
    */
   AuthorizationStatus?: number
-
   /**
    * 授权书审核状态说明
    */
   AuthorizationNote?: string
-
   /**
    * 商标信息
    */
   Trademarks?: Array<TrademarkData>
-
   /**
    * 新增时间
    */
   InsertTime?: string
-
   /**
    * 服务信息
    */
   Services?: ServiceData
-
   /**
    * 账号id
    */
@@ -832,7 +726,6 @@ export interface CreateBPBrandResponse {
    * 企业id
    */
   CompanyId?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -857,12 +750,10 @@ export interface CreateBPWhiteListRequest {
    * 企业Id
    */
   CompanyId: number
-
   /**
    * 白名单类型：0-网站 1-应用 2-公众号 3-小程
    */
   WhiteListType: number
-
   /**
    * 白名单名称
    */
@@ -887,12 +778,10 @@ export interface DescribeBPFakeAPPListResponse {
    * 仿冒应用列表
    */
   FakeAPPList?: Array<FakeAPPData>
-
   /**
    * 仿冒应用总数
    */
   TotalCount?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

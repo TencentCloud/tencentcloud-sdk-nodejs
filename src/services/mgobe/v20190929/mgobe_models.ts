@@ -23,7 +23,6 @@ export interface DismissRoomRequest {
    * 表示游戏资源唯一 ID, 由后台自动分配, 无法修改。
    */
   GameId: string
-
   /**
    * 表示游戏房间唯一ID。
    */

@@ -3,8 +3,8 @@
  */
 export interface ResetAccountPasswordResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -12,12 +12,12 @@ export interface ResetAccountPasswordResponse {
  */
 export interface ModifyClusterNameRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."
-      */
+     * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."
+     */
     ClusterName: string;
 }
 /**
@@ -25,8 +25,8 @@ export interface ModifyClusterNameRequest {
  */
 export interface ModifyClustersAutoRenewFlagResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -34,33 +34,33 @@ export interface ModifyClustersAutoRenewFlagResponse {
  */
 export interface DescribeClustersRequest {
     /**
-      * 页码，取值范围为[1,INF)，默认值为1
-      */
+     * 页码，取值范围为[1,INF)，默认值为1
+     */
     PageNumber?: number;
     /**
-      * 每页条数，取值范围为默认为[1,100]，默认值为20
-      */
+     * 每页条数，取值范围为默认为[1,100]，默认值为20
+     */
     PageSize?: number;
     /**
-      * 目前支持查询条件包括：
- - ClusterId : 集群ID
- - ClusterName : 集群名
- - ProjectId : 项目ID
- - Status : 集群状态
- - PayMode : 付费模式
-      */
+     * 目前支持查询条件包括：
+   - ClusterId : 集群ID
+   - ClusterName : 集群名
+   - ProjectId : 项目ID
+   - Status : 集群状态
+   - PayMode : 付费模式
+     */
     Filters?: Array<Filter>;
     /**
-      * 排序字段，可选字段：
- - CreateTime : 集群创建时间(默认值)
- - PayPeriodEndTime : 集群过期时间
-      */
+     * 排序字段，可选字段：
+   - CreateTime : 集群创建时间(默认值)
+   - PayPeriodEndTime : 集群过期时间
+     */
     OrderBy?: string;
     /**
-      * 排序方式，可选字段：
- - DESC : 降序(默认值)
- - ASC : 升序
-      */
+     * 排序方式，可选字段：
+   - DESC : 降序(默认值)
+   - ASC : 升序
+     */
     OrderByType?: string;
 }
 /**
@@ -68,8 +68,8 @@ export interface DescribeClustersRequest {
  */
 export interface DeleteClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -77,26 +77,26 @@ export interface DeleteClusterInstancesResponse {
  */
 export interface ModifyClusterInstancesSpecRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表，目前只支持单个实例修改
-      */
+     * 实例ID列表，目前只支持单个实例修改
+     */
     InstanceIdSet: Array<string>;
     /**
-      * 修改后的CPU核数。取值参考文档【购买指南】
-      */
+     * 修改后的CPU核数。取值参考文档【购买指南】
+     */
     CPU: number;
     /**
-      * 修改后的内存大小，单位GiB。取值参考文档【购买指南】
-      */
+     * 修改后的内存大小，单位GiB。取值参考文档【购买指南】
+     */
     Memory: number;
     /**
-      * 操作时机
- - IMMEDIATE：立即执行
- - MAINTAIN_PERIOD：维护窗口期执行
-      */
+     * 操作时机
+   - IMMEDIATE：立即执行
+   - MAINTAIN_PERIOD：维护窗口期执行
+     */
     OperationTiming: string;
 }
 /**
@@ -104,16 +104,16 @@ export interface ModifyClusterInstancesSpecRequest {
  */
 export interface DescribeClusterBackupsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 页码，取值范围为[1,INF)，默认值为1
-      */
+     * 页码，取值范围为[1,INF)，默认值为1
+     */
     PageNumber?: number;
     /**
-      * 每页个数，取值范围为默认为[1,100]，默认值为20
-      */
+     * 每页个数，取值范围为默认为[1,100]，默认值为20
+     */
     PageSize?: number;
 }
 /**
@@ -121,12 +121,12 @@ export interface DescribeClusterBackupsRequest {
  */
 export interface AvailableRecoveryTimeRange {
     /**
-      * 可回档起始时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 可回档起始时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     AvailableBeginTime: string;
     /**
-      * 可回档结束时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 可回档结束时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     AvailableEndTime: string;
 }
 /**
@@ -134,16 +134,16 @@ export interface AvailableRecoveryTimeRange {
  */
 export interface ResetAccountPasswordRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 账号名字
-      */
+     * 账号名字
+     */
     AccountName: string;
     /**
-      * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|(){}[]:;'<>,.?/中的任意三种
-      */
+     * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|(){}[]:;'<>,.?/中的任意三种
+     */
     AccountPassword: string;
 }
 /**
@@ -151,16 +151,16 @@ export interface ResetAccountPasswordRequest {
  */
 export interface DescribeClusterInstancesResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 实例列表信息
-      */
+     * 实例列表信息
+     */
     InstanceSet: Array<Instance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -168,8 +168,8 @@ export interface DescribeClusterInstancesResponse {
  */
 export interface DeleteClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -177,12 +177,12 @@ export interface DeleteClusterResponse {
  */
 export interface CreateClusterInstancesResponse {
     /**
-      * 订单号
-      */
+     * 订单号
+     */
     DealNameSet: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -190,12 +190,12 @@ export interface CreateClusterInstancesResponse {
  */
 export interface RestartClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表，目前只支持单个实例重启
-      */
+     * 实例ID列表，目前只支持单个实例重启
+     */
     InstanceIdSet: Array<string>;
 }
 /**
@@ -203,12 +203,12 @@ export interface RestartClusterInstancesRequest {
  */
 export interface CreateClusterResponse {
     /**
-      * 订单号
-      */
+     * 订单号
+     */
     DealNameSet: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -216,17 +216,17 @@ export interface CreateClusterResponse {
  */
 export interface RecoverClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表
-      */
+     * 实例ID列表
+     */
     InstanceIdSet: Array<string>;
     /**
-      * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
-只有当PayMode为PREPAID时生效。
-      */
+     * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
+  只有当PayMode为PREPAID时生效。
+     */
     Period?: number;
 }
 /**
@@ -234,12 +234,12 @@ export interface RecoverClusterInstancesRequest {
  */
 export interface CloneClusterToPointInTimeResponse {
     /**
-      * 订单号
-      */
+     * 订单号
+     */
     DealNameSet: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -247,88 +247,88 @@ export interface CloneClusterToPointInTimeResponse {
  */
 export interface CreateClusterRequest {
     /**
-      * 可用区
-      */
+     * 可用区
+     */
     Zone: string;
     /**
-      * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种
-      */
+     * 数据库用户密码，必须满足 8-64个字符，至少包含 大写字母、小写字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种
+     */
     MasterUserPassword: string;
     /**
-      * CPU核数。取值参考文档【购买指南】
-      */
+     * CPU核数。取值参考文档【购买指南】
+     */
     CPU: number;
     /**
-      * 内存大小，单位GiB。取值参考文档【购买指南】
-      */
+     * 内存大小，单位GiB。取值参考文档【购买指南】
+     */
     Memory: number;
     /**
-      * 私有网络ID
-      */
+     * 私有网络ID
+     */
     VpcId: string;
     /**
-      * 已配置的私有网络中的子网ID
-      */
+     * 已配置的私有网络中的子网ID
+     */
     SubnetId: string;
     /**
-      * 实例付费模式
- - PREPAID：预付费，即包年包月
- - POSTPAID_BY_HOUR：按小时后付费
-      */
+     * 实例付费模式
+   - PREPAID：预付费，即包年包月
+   - POSTPAID_BY_HOUR：按小时后付费
+     */
     PayMode: string;
     /**
-      * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与ClusterId保持一致
-      */
+     * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与ClusterId保持一致
+     */
     ClusterName?: string;
     /**
-      * TDSQL-C PostgreSQL 合入的社区版本号。
-支持入参值为：10.17。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
-注：该参数与DBMajorVersion、DBKernelVersion只能传递一个，且需要传递一个。
-      */
+     * TDSQL-C PostgreSQL 合入的社区版本号。
+  支持入参值为：10.17。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+  注：该参数与DBMajorVersion、DBKernelVersion只能传递一个，且需要传递一个。
+     */
     DBVersion?: string;
     /**
-      * 项目Id，默认为0表示默认项目
-      */
+     * 项目Id，默认为0表示默认项目
+     */
     ProjectId?: number;
     /**
-      * 连接数据库时，Endpoint使用的端口。取值范围为[1,65534]，默认值为5432
-      */
+     * 连接数据库时，Endpoint使用的端口。取值范围为[1,65534]，默认值为5432
+     */
     Port?: number;
     /**
-      * 集群下实例数量。取值范围为[1,4]，默认值为1
-      */
+     * 集群下实例数量。取值范围为[1,4]，默认值为1
+     */
     InstanceCount?: number;
     /**
-      * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
-只有当PayMode为PREPAID时生效。
-      */
+     * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
+  只有当PayMode为PREPAID时生效。
+     */
     Period?: number;
     /**
-      * 是否自动续费，0-不 1-是。默认值为0，只有当PayMode为PREPAID时生效。
-      */
+     * 是否自动续费，0-不 1-是。默认值为0，只有当PayMode为PREPAID时生效。
+     */
     AutoRenewFlag?: number;
     /**
-      * TDSQL-C PostgreSQL 合入的社区主要版本号。
-支持入参值为：10。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
-注：该参数和DBVersion、DBKernelVersion只能传递一个，且需要传递一个。
-      */
+     * TDSQL-C PostgreSQL 合入的社区主要版本号。
+  支持入参值为：10。当输入该参数时，会基于此版本号创建对应的最新DBKernelVersion数据库内核。
+  注：该参数和DBVersion、DBKernelVersion只能传递一个，且需要传递一个。
+     */
     DBMajorVersion?: string;
     /**
-      * TDSQL-C PostgreSQL 内核版本号。
-支持入参值为：v10.17_r1.4。当输入该参数时，会创建此版本号对应的数据库内核。
-注：该参数和DBVersion、DBMajorVersion只能传递一个，且需要传递一个。
-      */
+     * TDSQL-C PostgreSQL 内核版本号。
+  支持入参值为：v10.17_r1.4。当输入该参数时，会创建此版本号对应的数据库内核。
+  注：该参数和DBVersion、DBMajorVersion只能传递一个，且需要传递一个。
+     */
     DBKernelVersion?: string;
     /**
-      * 存储付费模式
- - PREPAID：预付费，即包年包月
- - POSTPAID_BY_HOUR：按小时后付费
-默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
-      */
+     * 存储付费模式
+   - PREPAID：预付费，即包年包月
+   - POSTPAID_BY_HOUR：按小时后付费
+  默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+     */
     StoragePayMode?: string;
     /**
-      * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
-      */
+     * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+     */
     Storage?: number;
 }
 /**
@@ -336,12 +336,12 @@ export interface CreateClusterRequest {
  */
 export interface DeleteClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表
-      */
+     * 实例ID列表
+     */
     InstanceIdSet: Array<string>;
 }
 /**
@@ -349,8 +349,8 @@ export interface DeleteClusterInstancesRequest {
  */
 export interface RestartClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -358,8 +358,8 @@ export interface RestartClusterInstancesResponse {
  */
 export interface ModifyClusterInstancesSpecResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -367,24 +367,24 @@ export interface ModifyClusterInstancesSpecResponse {
  */
 export interface CreateClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * CPU核数。取值参考文档【购买指南】
-      */
+     * CPU核数。取值参考文档【购买指南】
+     */
     CPU: number;
     /**
-      * 内存大小，单位GiB。取值参考文档【购买指南】
-      */
+     * 内存大小，单位GiB。取值参考文档【购买指南】
+     */
     Memory: number;
     /**
-      * 实例名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与InstanceId一致。
-      */
+     * 实例名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与InstanceId一致。
+     */
     InstanceName?: string;
     /**
-      * 新建实例的数量，默认为1。单集群下实例数量目前不能超过4个。
-      */
+     * 新建实例的数量，默认为1。单集群下实例数量目前不能超过4个。
+     */
     InstanceCount?: number;
 }
 /**
@@ -392,12 +392,12 @@ export interface CreateClusterInstancesRequest {
  */
 export interface DescribeClusterRecoveryTimeRangeResponse {
     /**
-      * 可回档时间范围列表
-      */
+     * 可回档时间范围列表
+     */
     AvailableRecoveryTimeRangeSet: Array<AvailableRecoveryTimeRange>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -405,16 +405,16 @@ export interface DescribeClusterRecoveryTimeRangeResponse {
  */
 export interface DescribeClusterEndpointsResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 接入点列表
-      */
+     * 接入点列表
+     */
     EndpointSet: Array<Endpoint>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -422,8 +422,8 @@ export interface DescribeClusterEndpointsResponse {
  */
 export interface DescribeResourcesByDealNameRequest {
     /**
-      * 计费订单id（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
-      */
+     * 计费订单id（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
+     */
     DealName: string;
 }
 /**
@@ -431,8 +431,8 @@ export interface DescribeResourcesByDealNameRequest {
  */
 export interface ModifyClusterEndpointWanStatusResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -440,18 +440,18 @@ export interface ModifyClusterEndpointWanStatusResponse {
  */
 export interface ModifyClusterEndpointWanStatusRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 接入点ID
-      */
+     * 接入点ID
+     */
     EndpointId: string;
     /**
-      * 取值为：
- - OPEN：开启外网
- - CLOSE：关闭外网
-      */
+     * 取值为：
+   - OPEN：开启外网
+   - CLOSE：关闭外网
+     */
     WanStatus: string;
 }
 /**
@@ -459,13 +459,13 @@ export interface ModifyClusterEndpointWanStatusRequest {
  */
 export interface RecoverClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
-只有当PayMode为PREPAID时生效。
-      */
+     * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
+  只有当PayMode为PREPAID时生效。
+     */
     Period?: number;
 }
 /**
@@ -473,37 +473,37 @@ export interface RecoverClusterRequest {
  */
 export interface DescribeClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 页码，取值范围为[1,INF)，默认值为1
-      */
+     * 页码，取值范围为[1,INF)，默认值为1
+     */
     PageNumber?: number;
     /**
-      * 每页个数，取值范围为默认为[1,100]，默认值为20
-      */
+     * 每页个数，取值范围为默认为[1,100]，默认值为20
+     */
     PageSize?: number;
     /**
-      * 目前支持查询条件包括：
- - InstanceId : 实例ID
- - InstanceName : 实例名
- - EndpointId : 接入点ID
- - Status : 实例状态
- - InstanceType : 实例类型
-      */
+     * 目前支持查询条件包括：
+   - InstanceId : 实例ID
+   - InstanceName : 实例名
+   - EndpointId : 接入点ID
+   - Status : 实例状态
+   - InstanceType : 实例类型
+     */
     Filters?: Array<Filter>;
     /**
-      * 排序字段，可选字段：
-- CreateTime : 实例创建时间(默认值)
-- PayPeriodEndTime : 实例过期时间
-      */
+     * 排序字段，可选字段：
+  - CreateTime : 实例创建时间(默认值)
+  - PayPeriodEndTime : 实例过期时间
+     */
     OrderBy?: string;
     /**
-      * 排序方式，可选字段：
-- DESC : 降序(默认值)
-- ASC : 升序
-      */
+     * 排序方式，可选字段：
+  - DESC : 降序(默认值)
+  - ASC : 升序
+     */
     OrderByType?: string;
 }
 /**
@@ -511,8 +511,8 @@ export interface DescribeClusterInstancesRequest {
  */
 export interface DeleteClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -520,24 +520,24 @@ export interface DeleteClusterRequest {
  */
 export interface Account {
     /**
-      * 数据库账号名
-      */
+     * 数据库账号名
+     */
     AccountName: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 数据库账号描述
-      */
+     * 数据库账号描述
+     */
     AccountDescription: string;
     /**
-      * 数据库账号创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 数据库账号创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     CreateTime: string;
     /**
-      * 数据库账号信息更新时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 数据库账号信息更新时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     UpdateTime: string;
 }
 /**
@@ -545,50 +545,50 @@ export interface Account {
  */
 export interface Endpoint {
     /**
-      * 连接点ID，集群内唯一
-      */
+     * 连接点ID，集群内唯一
+     */
     EndpointId: string;
     /**
-      * 连接点所属的集群ID
-      */
+     * 连接点所属的集群ID
+     */
     ClusterId: string;
     /**
-      * 连接点名字，默认和连接点ID一致
-      */
+     * 连接点名字，默认和连接点ID一致
+     */
     EndpointName: string;
     /**
-      * 连接点类型
- - RW : 读写
- - RO : 只读
-      */
+     * 连接点类型
+   - RW : 读写
+   - RO : 只读
+     */
     EndpointType: string;
     /**
-      * 私有网络VPC实例ID
-      */
+     * 私有网络VPC实例ID
+     */
     VpcId: string;
     /**
-      * 私有网络VPC下子网实例ID
-      */
+     * 私有网络VPC下子网实例ID
+     */
     SubnetId: string;
     /**
-      * 私有网络VPC下用于访问数据库的IP
-      */
+     * 私有网络VPC下用于访问数据库的IP
+     */
     PrivateIp: string;
     /**
-      * 私有网络VPC下用于访问数据库的端口
-      */
+     * 私有网络VPC下用于访问数据库的端口
+     */
     PrivatePort: number;
     /**
-      * 公共网络用户访问数据库的IP
-      */
+     * 公共网络用户访问数据库的IP
+     */
     WanIp: string;
     /**
-      * 公共网络用户访问数据库的端口
-      */
+     * 公共网络用户访问数据库的端口
+     */
     WanPort: number;
     /**
-      * 公共网络用户访问数据库的域名
-      */
+     * 公共网络用户访问数据库的域名
+     */
     WanDomain: string;
 }
 /**
@@ -596,8 +596,8 @@ export interface Endpoint {
  */
 export interface RecoverClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -605,12 +605,12 @@ export interface RecoverClusterInstancesResponse {
  */
 export interface ResourceIdInfo {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表
-      */
+     * 实例ID列表
+     */
     InstanceIdSet: Array<string>;
 }
 /**
@@ -618,8 +618,8 @@ export interface ResourceIdInfo {
  */
 export interface RecoverClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -627,16 +627,16 @@ export interface RecoverClusterResponse {
  */
 export interface Filter {
     /**
-      * 过滤条件名
-      */
+     * 过滤条件名
+     */
     Name: string;
     /**
-      * 过滤条件值数组
-      */
+     * 过滤条件值数组
+     */
     Values: Array<string>;
     /**
-      * true:精确匹配(默认值) false:(模糊匹配)
-      */
+     * true:精确匹配(默认值) false:(模糊匹配)
+     */
     ExactMatch: boolean;
 }
 /**
@@ -644,16 +644,16 @@ export interface Filter {
  */
 export interface DescribeClusterBackupsResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 备份列表信息
-      */
+     * 备份列表信息
+     */
     BackupSet: Array<Backup>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -661,16 +661,16 @@ export interface DescribeClusterBackupsResponse {
  */
 export interface DescribeAccountsResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 账号信息列表
-      */
+     * 账号信息列表
+     */
     AccountSet: Array<Account>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -678,20 +678,20 @@ export interface DescribeAccountsResponse {
  */
 export interface TransformClusterPayModeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 当前付费模式，目前只支持：POSTPAID_BY_HOUR(按小时后付费)
-      */
+     * 当前付费模式，目前只支持：POSTPAID_BY_HOUR(按小时后付费)
+     */
     CurrentPayMode: string;
     /**
-      * 目标付费模式，目前只支持：PREPAID(预付费)
-      */
+     * 目标付费模式，目前只支持：PREPAID(预付费)
+     */
     TargetPayMode: string;
     /**
-      * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
-      */
+     * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
+     */
     Period?: number;
 }
 /**
@@ -699,36 +699,36 @@ export interface TransformClusterPayModeRequest {
  */
 export interface Backup {
     /**
-      * 备份集ID，集群内唯一
-      */
+     * 备份集ID，集群内唯一
+     */
     BackupId: number;
     /**
-      * 备份集类型，目前只支持 SNAPSHOT：快照
-      */
+     * 备份集类型，目前只支持 SNAPSHOT：快照
+     */
     BackupType: string;
     /**
-      * 备份集产生的方案，目前只支持 AUTO：自动
-      */
+     * 备份集产生的方案，目前只支持 AUTO：自动
+     */
     BackupMethod: string;
     /**
-      * 备份集对应的数据时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 备份集对应的数据时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     BackupDataTime: string;
     /**
-      * 备份集数据大小，单位GiB
-      */
+     * 备份集数据大小，单位GiB
+     */
     BackupDataSize: number;
     /**
-      * 备份集对应的任务开始时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 备份集对应的任务开始时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     BackupTaskStartTime: string;
     /**
-      * 备份集对应的任务结束时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 备份集对应的任务结束时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     BackupTaskEndTime: string;
     /**
-      * 备份集对应的任务状态  SUCCESS：成功
-      */
+     * 备份集对应的任务状态  SUCCESS：成功
+     */
     BackupTaskStatus: string;
 }
 /**
@@ -736,12 +736,12 @@ export interface Backup {
  */
 export interface RenewClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 续费时间，单位：月。取值范围为[1,60]，默认值为1。
-      */
+     * 续费时间，单位：月。取值范围为[1,60]，默认值为1。
+     */
     Period?: number;
 }
 /**
@@ -749,8 +749,8 @@ export interface RenewClusterRequest {
  */
 export interface DescribeClusterEndpointsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -758,8 +758,8 @@ export interface DescribeClusterEndpointsRequest {
  */
 export interface ModifyClusterNameResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -767,8 +767,8 @@ export interface ModifyClusterNameResponse {
  */
 export interface IsolateClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -776,8 +776,8 @@ export interface IsolateClusterInstancesResponse {
  */
 export interface RenewClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -785,12 +785,12 @@ export interface RenewClusterResponse {
  */
 export interface IsolateClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例ID列表
-      */
+     * 实例ID列表
+     */
     InstanceIdSet: Array<string>;
 }
 /**
@@ -798,78 +798,78 @@ export interface IsolateClusterInstancesRequest {
  */
 export interface Instance {
     /**
-      * 实例ID，集群下唯一
-      */
+     * 实例ID，集群下唯一
+     */
     InstanceId: string;
     /**
-      * 实例名字，默认和实例ID一致
-      */
+     * 实例名字，默认和实例ID一致
+     */
     InstanceName: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例所在的访问点ID
-      */
+     * 实例所在的访问点ID
+     */
     EndpointId: string;
     /**
-      * 地域
-      */
+     * 地域
+     */
     Region: string;
     /**
-      * 可用区
-      */
+     * 可用区
+     */
     Zone: string;
     /**
-      * 数据库版本
-      */
+     * 数据库版本
+     */
     DBVersion: string;
     /**
-      * 实例状态
-      */
+     * 实例状态
+     */
     Status: string;
     /**
-      * 实例状态中文含义
-      */
+     * 实例状态中文含义
+     */
     StatusDesc: string;
     /**
-      * 实例创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 实例创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     CreateTime: string;
     /**
-      * 付费模式：
-- PREPAID : 预付费
-- POSTPAID_BY_HOUR : 按小时结算后付费
-
-同一集群下付费模式需要保持一致。
-      */
+     * 付费模式：
+  - PREPAID : 预付费
+  - POSTPAID_BY_HOUR : 按小时结算后付费
+  
+  同一集群下付费模式需要保持一致。
+     */
     PayMode: string;
     /**
-      * 实例到期时间。同一集群下到期时间需要保持一致。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 实例到期时间。同一集群下到期时间需要保持一致。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     PayPeriodEndTime: string;
     /**
-      * CPU核数
-      */
+     * CPU核数
+     */
     CPU: number;
     /**
-      * 内存大小，单位GiB
-      */
+     * 内存大小，单位GiB
+     */
     Memory: number;
     /**
-      * 实例类型
- - RW：读写实例
- - RO：只读实例
-      */
+     * 实例类型
+   - RW：读写实例
+   - RO：只读实例
+     */
     InstanceType: string;
     /**
-      * TDSQL-C PostgreSQL 合入的社区主要版本号
-      */
+     * TDSQL-C PostgreSQL 合入的社区主要版本号
+     */
     DBMajorVersion: string;
     /**
-      * TDSQL-C PostgreSQL 内核版本号
-      */
+     * TDSQL-C PostgreSQL 内核版本号
+     */
     DBKernelVersion: string;
 }
 /**
@@ -877,8 +877,8 @@ export interface Instance {
  */
 export interface IsolateClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -886,16 +886,16 @@ export interface IsolateClusterResponse {
  */
 export interface ModifyAccountDescriptionRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 账号名字
-      */
+     * 账号名字
+     */
     AccountName: string;
     /**
-      * 账号描述，0-256个字符
-      */
+     * 账号描述，0-256个字符
+     */
     AccountDescription: string;
 }
 /**
@@ -903,8 +903,8 @@ export interface ModifyAccountDescriptionRequest {
  */
 export interface ModifyAccountDescriptionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -912,8 +912,8 @@ export interface ModifyAccountDescriptionResponse {
  */
 export interface IsolateClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -921,12 +921,12 @@ export interface IsolateClusterRequest {
  */
 export interface ModifyClustersAutoRenewFlagRequest {
     /**
-      * 集群ID列表
-      */
+     * 集群ID列表
+     */
     ClusterIdSet: Array<string>;
     /**
-      * 是否自动续费，0-不 1-是。默认为0，只有当集群的PayMode为PREPAID时生效。
-      */
+     * 是否自动续费，0-不 1-是。默认为0，只有当集群的PayMode为PREPAID时生效。
+     */
     AutoRenewFlag: number;
 }
 /**
@@ -934,8 +934,8 @@ export interface ModifyClustersAutoRenewFlagRequest {
  */
 export interface TransformClusterPayModeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -943,98 +943,98 @@ export interface TransformClusterPayModeResponse {
  */
 export interface Cluster {
     /**
-      * 集群ID，集群的唯一标识
-      */
+     * 集群ID，集群的唯一标识
+     */
     ClusterId: string;
     /**
-      * 集群名字，不修改时默认和集群ID相同
-      */
+     * 集群名字，不修改时默认和集群ID相同
+     */
     ClusterName: string;
     /**
-      * 地域
-      */
+     * 地域
+     */
     Region: string;
     /**
-      * 可用区
-      */
+     * 可用区
+     */
     Zone: string;
     /**
-      * TDSQL-C PostgreSQL 合入的社区版本号
-      */
+     * TDSQL-C PostgreSQL 合入的社区版本号
+     */
     DBVersion: string;
     /**
-      * 项目ID
-      */
+     * 项目ID
+     */
     ProjectId: number;
     /**
-      * 集群状态。目前包括
- - creating ：创建中
- - running : 运行中
- - isolating : 隔离中
- - isolated : 已隔离
- - recovering : 恢复中
- - deleting : 删除中
- - deleted : 已删除
-      */
+     * 集群状态。目前包括
+   - creating ：创建中
+   - running : 运行中
+   - isolating : 隔离中
+   - isolated : 已隔离
+   - recovering : 恢复中
+   - deleting : 删除中
+   - deleted : 已删除
+     */
     Status: string;
     /**
-      * 集群状态中文含义
-      */
+     * 集群状态中文含义
+     */
     StatusDesc: string;
     /**
-      * 集群创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 集群创建时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     CreateTime: string;
     /**
-      * 存储当前使用量，单位GiB
-      */
+     * 存储当前使用量，单位GiB
+     */
     StorageUsed: number;
     /**
-      * 存储最大使用量，单位GiB
-      */
+     * 存储最大使用量，单位GiB
+     */
     StorageLimit: number;
     /**
-      * 付费模式：
- - PREPAID : 预付费，即包年包月
- - POSTPAID_BY_HOUR : 按小时结算后付费
-      */
+     * 付费模式：
+   - PREPAID : 预付费，即包年包月
+   - POSTPAID_BY_HOUR : 按小时结算后付费
+     */
     PayMode: string;
     /**
-      * 预付费集群到期时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 预付费集群到期时间。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     PayPeriodEndTime: string;
     /**
-      * 预付费集群自动续费标签
- - 0 : 到期不自动续费
- - 1 : 到期自动续费
-      */
+     * 预付费集群自动续费标签
+   - 0 : 到期不自动续费
+   - 1 : 到期自动续费
+     */
     AutoRenewFlag: number;
     /**
-      * 数据库字符集
-      */
+     * 数据库字符集
+     */
     DBCharset: string;
     /**
-      * 集群内实例的数量
-      */
+     * 集群内实例的数量
+     */
     InstanceCount: number;
     /**
-      * 集群内访问点信息
-      */
+     * 集群内访问点信息
+     */
     EndpointSet: Array<Endpoint>;
     /**
-      * TDSQL-C PostgreSQL 合入的社区主要版本号
-      */
+     * TDSQL-C PostgreSQL 合入的社区主要版本号
+     */
     DBMajorVersion: string;
     /**
-      * TDSQL-C PostgreSQL 内核版本号
-      */
+     * TDSQL-C PostgreSQL 内核版本号
+     */
     DBKernelVersion: string;
     /**
-      * 存储付费模式
- - PREPAID：预付费，即包年包月
- - POSTPAID_BY_HOUR：按小时后付费
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存储付费模式
+   - PREPAID：预付费，即包年包月
+   - POSTPAID_BY_HOUR：按小时后付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StoragePayMode: string;
 }
 /**
@@ -1042,16 +1042,16 @@ export interface Cluster {
  */
 export interface DescribeClustersResponse {
     /**
-      * 总条数
-      */
+     * 总条数
+     */
     TotalCount: number;
     /**
-      * 集群列表信息
-      */
+     * 集群列表信息
+     */
     ClusterSet: Array<Cluster>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1059,12 +1059,12 @@ export interface DescribeClustersResponse {
  */
 export interface DescribeResourcesByDealNameResponse {
     /**
-      * 资源ID信息列表
-      */
+     * 资源ID信息列表
+     */
     ResourceIdInfoSet: Array<ResourceIdInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1072,78 +1072,78 @@ export interface DescribeResourcesByDealNameResponse {
  */
 export interface CloneClusterToPointInTimeRequest {
     /**
-      * 可用区
-      */
+     * 可用区
+     */
     Zone: string;
     /**
-      * 数据库版本，目前仅支持 10.17
-      */
+     * 数据库版本，目前仅支持 10.17
+     */
     DBVersion: string;
     /**
-      * CPU核数。取值参考文档【购买指南】
-      */
+     * CPU核数。取值参考文档【购买指南】
+     */
     CPU: number;
     /**
-      * 内存大小，单位GiB。取值参考文档【购买指南】
-      */
+     * 内存大小，单位GiB。取值参考文档【购买指南】
+     */
     Memory: number;
     /**
-      * 私有网络ID
-      */
+     * 私有网络ID
+     */
     VpcId: string;
     /**
-      * 已配置的私有网络中的子网ID
-      */
+     * 已配置的私有网络中的子网ID
+     */
     SubnetId: string;
     /**
-      * 集群付费模式
-- PREPAID：预付费，即包年包月
-- POSTPAID_BY_HOUR：按小时后付费
-      */
+     * 集群付费模式
+  - PREPAID：预付费，即包年包月
+  - POSTPAID_BY_HOUR：按小时后付费
+     */
     PayMode: string;
     /**
-      * 对应的备份数据来源集群ID
-      */
+     * 对应的备份数据来源集群ID
+     */
     SourceClusterId: string;
     /**
-      * 对应的备份数据时间点。按照RFC3339标准表示，并且使用东八区时区时间。格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 对应的备份数据时间点。按照RFC3339标准表示，并且使用东八区时区时间。格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     SourceDataPoint: string;
     /**
-      * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与ClusterId保持一致。
-      */
+     * 集群名，1-60个字符，可以包含中文、英文、数字和符号"-"、"_"、"."。不输入此参数时默认与ClusterId保持一致。
+     */
     ClusterName?: string;
     /**
-      * 项目Id，默认为0表示默认项目
-      */
+     * 项目Id，默认为0表示默认项目
+     */
     ProjectId?: number;
     /**
-      * 连接数据库时，Endpoint使用的端口。取值范围为[1,65534]，默认值为5432
-      */
+     * 连接数据库时，Endpoint使用的端口。取值范围为[1,65534]，默认值为5432
+     */
     Port?: number;
     /**
-      * 集群下实例数量。取值范围为[1,4]，默认值为1
-      */
+     * 集群下实例数量。取值范围为[1,4]，默认值为1
+     */
     InstanceCount?: number;
     /**
-      * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
-只有当PayMode为PREPAID时生效。
-      */
+     * 购买时长，单位：月。取值范围为[1,60]，默认值为1。
+  只有当PayMode为PREPAID时生效。
+     */
     Period?: number;
     /**
-      * 是否自动续费，0-不 1-是。默认为0，只有当PayMode为PREPAID时生效。
-      */
+     * 是否自动续费，0-不 1-是。默认为0，只有当PayMode为PREPAID时生效。
+     */
     AutoRenewFlag?: number;
     /**
-      * 存储付费模式
- - PREPAID：预付费，即包年包月
- - POSTPAID_BY_HOUR：按小时后付费
-默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
-      */
+     * 存储付费模式
+   - PREPAID：预付费，即包年包月
+   - POSTPAID_BY_HOUR：按小时后付费
+  默认为POSTPAID_BY_HOUR，实例付费模式为按小时付费时，存储付费模式不支持包年包月
+     */
     StoragePayMode?: string;
     /**
-      * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
-      */
+     * 存储最大使用量，单位GB。取值参考文档【购买指南】。存储使用预付费模式时必须设置，存储使用按小时后付费时不可设置
+     */
     Storage?: number;
 }
 /**
@@ -1151,12 +1151,12 @@ export interface CloneClusterToPointInTimeRequest {
  */
 export interface DescribeClusterRecoveryTimeRangeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 期望的回档时间点，传入从集群创建时间到当前时间之间的时间点。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
-      */
+     * 期望的回档时间点，传入从集群创建时间到当前时间之间的时间点。按照RFC3339标准表示，并且使用东八区时区时间，格式为：YYYY-MM-DDThh:mm:ss+08:00。
+     */
     DataPoint: string;
 }
 /**
@@ -1164,7 +1164,7 @@ export interface DescribeClusterRecoveryTimeRangeRequest {
  */
 export interface DescribeAccountsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }

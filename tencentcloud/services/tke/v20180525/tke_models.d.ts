@@ -3,8 +3,8 @@
  */
 export interface DescribeClusterEndpointVipStatusRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -12,8 +12,8 @@ export interface DescribeClusterEndpointVipStatusRequest {
  */
 export interface DescribeClusterSecurityRequest {
     /**
-      * 集群 ID，请填写 查询集群列表 接口中返回的 clusterId 字段
-      */
+     * 集群 ID，请填写 查询集群列表 接口中返回的 clusterId 字段
+     */
     ClusterId: string;
 }
 /**
@@ -21,14 +21,14 @@ export interface DescribeClusterSecurityRequest {
  */
 export interface EksCiVolume {
     /**
-      * Cbs Volume
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Cbs Volume
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CbsVolumes?: Array<CbsVolume>;
     /**
-      * Nfs Volume
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Nfs Volume
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NfsVolumes?: Array<NfsVolume>;
 }
 /**
@@ -36,16 +36,16 @@ export interface EksCiVolume {
  */
 export interface GetTkeAppChartListRequest {
     /**
-      * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
-      */
+     * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+     */
     Kind?: string;
     /**
-      * app支持的操作系统，取值arm32、arm64、amd64
-      */
+     * app支持的操作系统，取值arm32、arm64、amd64
+     */
     Arch?: string;
     /**
-      * 集群类型，取值tke、eks
-      */
+     * 集群类型，取值tke、eks
+     */
     ClusterType?: string;
 }
 /**
@@ -53,13 +53,13 @@ export interface GetTkeAppChartListRequest {
  */
 export interface DescribeEdgeCVMInstancesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterID: string;
     /**
-      * 过滤条件
-仅支持cvm-id过滤
-      */
+     * 过滤条件
+  仅支持cvm-id过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -67,12 +67,12 @@ export interface DescribeEdgeCVMInstancesRequest {
  */
 export interface InstallLogAgentRequest {
     /**
-      * TKE集群ID
-      */
+     * TKE集群ID
+     */
     ClusterId: string;
     /**
-      * kubelet根目录
-      */
+     * kubelet根目录
+     */
     KubeletRootDir?: string;
 }
 /**
@@ -80,17 +80,17 @@ export interface InstallLogAgentRequest {
  */
 export interface DescribeClusterEndpointVipStatusResponse {
     /**
-      * 端口操作状态 (Creating 创建中  CreateFailed 创建失败 Created 创建完成 Deleting 删除中 DeletedFailed 删除失败 Deleted 已删除 NotFound 未发现操作 )
-      */
+     * 端口操作状态 (Creating 创建中  CreateFailed 创建失败 Created 创建完成 Deleting 删除中 DeletedFailed 删除失败 Deleted 已删除 NotFound 未发现操作 )
+     */
     Status?: string;
     /**
-      * 操作失败的原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 操作失败的原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ErrorMsg?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -98,8 +98,8 @@ export interface DescribeClusterEndpointVipStatusResponse {
  */
 export interface DeleteClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -107,38 +107,38 @@ export interface DeleteClusterResponse {
  */
 export interface ContainerState {
     /**
-      * 容器运行开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器运行开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime: string;
     /**
-      * 容器状态：created, running, exited, unknown
-      */
+     * 容器状态：created, running, exited, unknown
+     */
     State: string;
     /**
-      * 容器运行结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器运行结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FinishTime: string;
     /**
-      * 容器运行退出码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器运行退出码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExitCode: number;
     /**
-      * 容器状态 Reason
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器状态 Reason
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Reason: string;
     /**
-      * 容器状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器状态信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
     /**
-      * 容器重启次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器重启次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RestartCount: number;
 }
 /**
@@ -146,8 +146,8 @@ export interface ContainerState {
  */
 export interface CreateClusterRouteTableResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -155,24 +155,24 @@ export interface CreateClusterRouteTableResponse {
  */
 export interface SubnetInfos {
     /**
-      * 子网id
-      */
+     * 子网id
+     */
     SubnetId: string;
     /**
-      * 子网节点名称
-      */
+     * 子网节点名称
+     */
     Name: string;
     /**
-      * 安全组id
-      */
+     * 安全组id
+     */
     SecurityGroups?: Array<string>;
     /**
-      * 系统
-      */
+     * 系统
+     */
     Os?: string;
     /**
-      * 硬件架构
-      */
+     * 硬件架构
+     */
     Arch?: string;
 }
 /**
@@ -180,12 +180,12 @@ export interface SubnetInfos {
  */
 export interface CbsVolume {
     /**
-      * cbs volume 数据卷名称
-      */
+     * cbs volume 数据卷名称
+     */
     Name: string;
     /**
-      * 腾讯云cbs盘Id
-      */
+     * 腾讯云cbs盘Id
+     */
     CbsDiskId: string;
 }
 /**
@@ -193,21 +193,21 @@ export interface CbsVolume {
  */
 export interface DescribeEKSClustersRequest {
     /**
-      * 集群ID列表(为空时，
-表示获取账号下所有集群)
-      */
+     * 集群ID列表(为空时，
+  表示获取账号下所有集群)
+     */
     ClusterIds?: Array<string>;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 最大输出条数，默认20
-      */
+     * 最大输出条数，默认20
+     */
     Limit?: number;
     /**
-      * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
-      */
+     * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -215,18 +215,18 @@ export interface DescribeEKSClustersRequest {
  */
 export interface DescribePrometheusInstancesOverviewRequest {
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Offset?: number;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Limit?: number;
     /**
-      * 过滤实例，目前支持：
-ID: 通过实例ID来过滤
-Name: 通过实例名称来过滤
-      */
+     * 过滤实例，目前支持：
+  ID: 通过实例ID来过滤
+  Name: 通过实例名称来过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -234,24 +234,24 @@ Name: 通过实例名称来过滤
  */
 export interface ServiceAccountAuthenticationOptions {
     /**
-      * 使用TKE默认issuer和jwksuri
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 使用TKE默认issuer和jwksuri
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UseTKEDefault?: boolean;
     /**
-      * service-account-issuer
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * service-account-issuer
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Issuer?: string;
     /**
-      * service-account-jwks-uri
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * service-account-jwks-uri
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     JWKSURI?: string;
     /**
-      * 如果为true，则会自动创建允许匿名用户访问'/.well-known/openid-configuration'和/openid/v1/jwks的rbac规则
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果为true，则会自动创建允许匿名用户访问'/.well-known/openid-configuration'和/openid/v1/jwks的rbac规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoCreateDiscoveryAnonymousAuth?: boolean;
 }
 /**
@@ -259,60 +259,60 @@ export interface ServiceAccountAuthenticationOptions {
  */
 export interface CreateClusterNodePoolRequest {
     /**
-      * cluster id
-      */
+     * cluster id
+     */
     ClusterId: string;
     /**
-      * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
-      */
+     * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
+     */
     AutoScalingGroupPara: string;
     /**
-      * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
-      */
+     * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
+     */
     LaunchConfigurePara: string;
     /**
-      * InstanceAdvancedSettings 示例参数
-      */
+     * InstanceAdvancedSettings 示例参数
+     */
     InstanceAdvancedSettings: InstanceAdvancedSettings;
     /**
-      * 是否启用自动伸缩
-      */
+     * 是否启用自动伸缩
+     */
     EnableAutoscale: boolean;
     /**
-      * 节点池名称
-      */
+     * 节点池名称
+     */
     Name?: string;
     /**
-      * Labels标签
-      */
+     * Labels标签
+     */
     Labels?: Array<Label>;
     /**
-      * Taints互斥
-      */
+     * Taints互斥
+     */
     Taints?: Array<Taint>;
     /**
-      * 节点池纬度运行时类型及版本
-      */
+     * 节点池纬度运行时类型及版本
+     */
     ContainerRuntime?: string;
     /**
-      * 运行时版本
-      */
+     * 运行时版本
+     */
     RuntimeVersion?: string;
     /**
-      * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
-      */
+     * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
+     */
     NodePoolOs?: string;
     /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-      */
+     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+     */
     OsCustomizeType?: string;
     /**
-      * 资源标签
-      */
+     * 资源标签
+     */
     Tags?: Array<Tag>;
     /**
-      * 删除保护开关
-      */
+     * 删除保护开关
+     */
     DeletionProtection?: boolean;
 }
 /**
@@ -320,52 +320,52 @@ export interface CreateClusterNodePoolRequest {
  */
 export interface UpgradeClusterReleaseRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 自定义的应用名称
-      */
+     * 自定义的应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
-      */
+     * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
+     */
     Chart: string;
     /**
-      * 自定义参数，覆盖chart 中values.yaml 中的参数
-      */
+     * 自定义参数，覆盖chart 中values.yaml 中的参数
+     */
     Values?: ReleaseValues;
     /**
-      * 制品来源，范围：tke-market 或 other
-      */
+     * 制品来源，范围：tke-market 或 other
+     */
     ChartFrom?: string;
     /**
-      * 制品版本( 从第三安装时，不传这个参数）
-      */
+     * 制品版本( 从第三安装时，不传这个参数）
+     */
     ChartVersion?: string;
     /**
-      * 制品仓库URL地址
-      */
+     * 制品仓库URL地址
+     */
     ChartRepoURL?: string;
     /**
-      * 制品访问用户名
-      */
+     * 制品访问用户名
+     */
     Username?: string;
     /**
-      * 制品访问密码
-      */
+     * 制品访问密码
+     */
     Password?: string;
     /**
-      * 制品命名空间
-      */
+     * 制品命名空间
+     */
     ChartNamespace?: string;
     /**
-      * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
-      */
+     * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+     */
     ClusterType?: string;
 }
 /**
@@ -373,12 +373,12 @@ export interface UpgradeClusterReleaseRequest {
  */
 export interface DescribeEdgeClusterUpgradeInfoRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 要升级到的TKEEdge版本
-      */
+     * 要升级到的TKEEdge版本
+     */
     EdgeVersion: string;
 }
 /**
@@ -386,16 +386,16 @@ export interface DescribeEdgeClusterUpgradeInfoRequest {
  */
 export interface RunInstancesForNode {
     /**
-      * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
-      */
+     * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
+     */
     NodeRole: string;
     /**
-      * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
-      */
+     * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
+     */
     RunInstancesPara: Array<string>;
     /**
-      * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
-      */
+     * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
+     */
     InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>;
 }
 /**
@@ -403,8 +403,8 @@ export interface RunInstancesForNode {
  */
 export interface DisableVpcCniNetworkTypeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -412,12 +412,12 @@ export interface DisableVpcCniNetworkTypeResponse {
  */
 export interface DescribeClusterControllersResponse {
     /**
-      * 描述集群中各个控制器的状态
-      */
+     * 描述集群中各个控制器的状态
+     */
     ControllerStatusSet?: Array<ControllerStatus>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -425,36 +425,36 @@ export interface DescribeClusterControllersResponse {
  */
 export interface DescribeExistedInstancesRequest {
     /**
-      * 集群 ID，请填写查询集群列表 接口中返回的 ClusterId 字段（仅通过ClusterId获取需要过滤条件中的VPCID。节点状态比较时会使用该地域下所有集群中的节点进行比较。参数不支持同时指定InstanceIds和ClusterId。
-      */
+     * 集群 ID，请填写查询集群列表 接口中返回的 ClusterId 字段（仅通过ClusterId获取需要过滤条件中的VPCID。节点状态比较时会使用该地域下所有集群中的节点进行比较。参数不支持同时指定InstanceIds和ClusterId。
+     */
     ClusterId?: string;
     /**
-      * 按照一个或者多个实例ID查询。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API简介的id.N一节）。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。
-      */
+     * 按照一个或者多个实例ID查询。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API简介的id.N一节）。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。
+     */
     InstanceIds?: Array<string>;
     /**
-      * 过滤条件,字段和详见[CVM查询实例](https://cloud.tencent.com/document/api/213/15728)如果设置了ClusterId，会附加集群的VPCID作为查询字段，在此情况下如果在Filter中指定了"vpc-id"作为过滤字段，指定的VPCID必须与集群的VPCID相同。
-      */
+     * 过滤条件,字段和详见[CVM查询实例](https://cloud.tencent.com/document/api/213/15728)如果设置了ClusterId，会附加集群的VPCID作为查询字段，在此情况下如果在Filter中指定了"vpc-id"作为过滤字段，指定的VPCID必须与集群的VPCID相同。
+     */
     Filters?: Array<Filter>;
     /**
-      * 实例IP进行过滤(同时支持内网IP和外网IP)
-      */
+     * 实例IP进行过滤(同时支持内网IP和外网IP)
+     */
     VagueIpAddress?: string;
     /**
-      * 实例名称进行过滤
-      */
+     * 实例名称进行过滤
+     */
     VagueInstanceName?: string;
     /**
-      * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
     /**
-      * 根据多个实例IP进行过滤
-      */
+     * 根据多个实例IP进行过滤
+     */
     IpAddresses?: Array<string>;
 }
 /**
@@ -462,12 +462,12 @@ export interface DescribeExistedInstancesRequest {
  */
 export interface DeletePrometheusClusterAgentRequest {
     /**
-      * agent列表
-      */
+     * agent列表
+     */
     Agents: Array<PrometheusAgentInfo>;
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
 }
 /**
@@ -475,44 +475,44 @@ export interface DeletePrometheusClusterAgentRequest {
  */
 export interface ClusterLevelChangeRecord {
     /**
-      * 记录ID
-      */
+     * 记录ID
+     */
     ID: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterID: string;
     /**
-      * 变配状态：trading 发货中,upgrading 变配中,success 变配成功,failed 变配失败。
-      */
+     * 变配状态：trading 发货中,upgrading 变配中,success 变配成功,failed 变配失败。
+     */
     Status: string;
     /**
-      * 状态描述
-      */
+     * 状态描述
+     */
     Message: string;
     /**
-      * 变配前规模
-      */
+     * 变配前规模
+     */
     OldLevel: string;
     /**
-      * 变配后规模
-      */
+     * 变配后规模
+     */
     NewLevel: string;
     /**
-      * 变配触发类型：manual 手动,auto 自动
-      */
+     * 变配触发类型：manual 手动,auto 自动
+     */
     TriggerType: string;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreatedAt?: string;
     /**
-      * 开始时间
-      */
+     * 开始时间
+     */
     StartedAt: string;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndedAt: string;
 }
 /**
@@ -520,8 +520,8 @@ export interface ClusterLevelChangeRecord {
  */
 export interface ModifyPrometheusAlertRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -529,16 +529,16 @@ export interface ModifyPrometheusAlertRuleResponse {
  */
 export interface DescribeEKSContainerInstanceEventResponse {
     /**
-      * 事件集合
-      */
+     * 事件集合
+     */
     Events: Array<Event>;
     /**
-      * 容器实例id
-      */
+     * 容器实例id
+     */
     EksCiId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -546,16 +546,16 @@ export interface DescribeEKSContainerInstanceEventResponse {
  */
 export interface RouteTableInfo {
     /**
-      * 路由表名称。
-      */
+     * 路由表名称。
+     */
     RouteTableName: string;
     /**
-      * 路由表CIDR。
-      */
+     * 路由表CIDR。
+     */
     RouteTableCidrBlock: string;
     /**
-      * VPC实例ID。
-      */
+     * VPC实例ID。
+     */
     VpcId: string;
 }
 /**
@@ -563,8 +563,8 @@ export interface RouteTableInfo {
  */
 export interface EnableClusterDeletionProtectionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -572,26 +572,26 @@ export interface EnableClusterDeletionProtectionResponse {
  */
 export interface ClusterAsGroup {
     /**
-      * 伸缩组ID
-      */
+     * 伸缩组ID
+     */
     AutoScalingGroupId: string;
     /**
-      * 伸缩组状态(开启 enabled 开启中 enabling 关闭 disabled 关闭中 disabling 更新中 updating 删除中 deleting 开启缩容中 scaleDownEnabling 关闭缩容中 scaleDownDisabling)
-      */
+     * 伸缩组状态(开启 enabled 开启中 enabling 关闭 disabled 关闭中 disabling 更新中 updating 删除中 deleting 开启缩容中 scaleDownEnabling 关闭缩容中 scaleDownDisabling)
+     */
     Status: string;
     /**
-      * 节点是否设置成不可调度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点是否设置成不可调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsUnschedulable: boolean;
     /**
-      * 伸缩组的label列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 伸缩组的label列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Labels: Array<Label>;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreatedTime: string;
 }
 /**
@@ -599,42 +599,42 @@ export interface ClusterAsGroup {
  */
 export interface PrometheusTempModify {
     /**
-      * 修改名称
-      */
+     * 修改名称
+     */
     Name?: string;
     /**
-      * 修改描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 修改描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Describe?: string;
     /**
-      * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的ServiceMonitor规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的PodMonitors规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的RawJobs规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的RawJobs规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RawJobs?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为instance时有效，
-模板中的聚合规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的聚合规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RecordRules?: Array<PrometheusConfigItem>;
     /**
-      * 修改内容，只有当模板类型是Alert时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 修改内容，只有当模板类型是Alert时生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertDetailRules?: Array<PrometheusAlertPolicyItem>;
 }
 /**
@@ -642,8 +642,8 @@ export interface PrometheusTempModify {
  */
 export interface EnableClusterAuditResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -651,8 +651,8 @@ export interface EnableClusterAuditResponse {
  */
 export interface CreateBackupStorageLocationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -660,44 +660,44 @@ export interface CreateBackupStorageLocationResponse {
  */
 export interface KubeJarvisStateDiagnostic {
     /**
-      * 诊断开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime?: string;
     /**
-      * 诊断结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndTime?: string;
     /**
-      * 诊断目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Catalogues?: Array<KubeJarvisStateCatalogue>;
     /**
-      * 诊断类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Type?: string;
     /**
-      * 诊断名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name?: string;
     /**
-      * 诊断描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Desc?: string;
     /**
-      * 诊断结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Results?: Array<KubeJarvisStateResultsItem>;
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
 }
 /**
@@ -705,12 +705,12 @@ export interface KubeJarvisStateDiagnostic {
  */
 export interface EnvironmentVariable {
     /**
-      * key
-      */
+     * key
+     */
     Name?: string;
     /**
-      * val
-      */
+     * val
+     */
     Value?: string;
 }
 /**
@@ -718,32 +718,32 @@ export interface EnvironmentVariable {
  */
 export interface UpdateImageCacheRequest {
     /**
-      * 镜像缓存Id
-      */
+     * 镜像缓存Id
+     */
     ImageCacheId: string;
     /**
-      * 镜像缓存名称
-      */
+     * 镜像缓存名称
+     */
     ImageCacheName?: string;
     /**
-      * 镜像仓库凭证数组
-      */
+     * 镜像仓库凭证数组
+     */
     ImageRegistryCredentials?: Array<ImageRegistryCredential>;
     /**
-      * 用于制作镜像缓存的容器镜像列表
-      */
+     * 用于制作镜像缓存的容器镜像列表
+     */
     Images?: Array<string>;
     /**
-      * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
-      */
+     * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
+     */
     ImageCacheSize?: number;
     /**
-      * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
-      */
+     * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
+     */
     RetentionDays?: number;
     /**
-      * 安全组Id
-      */
+     * 安全组Id
+     */
     SecurityGroupIds?: Array<string>;
 }
 /**
@@ -751,20 +751,20 @@ export interface UpdateImageCacheRequest {
  */
 export interface ManuallyAdded {
     /**
-      * 加入中的节点数量
-      */
+     * 加入中的节点数量
+     */
     Joining: number;
     /**
-      * 初始化中的节点数量
-      */
+     * 初始化中的节点数量
+     */
     Initializing: number;
     /**
-      * 正常的节点数量
-      */
+     * 正常的节点数量
+     */
     Normal: number;
     /**
-      * 节点总数
-      */
+     * 节点总数
+     */
     Total: number;
 }
 /**
@@ -772,12 +772,12 @@ export interface ManuallyAdded {
  */
 export interface Tag {
     /**
-      * 标签键
-      */
+     * 标签键
+     */
     Key?: string;
     /**
-      * 标签值
-      */
+     * 标签值
+     */
     Value?: string;
 }
 /**
@@ -785,9 +785,9 @@ export interface Tag {
  */
 export interface DescribePrometheusAgentInstancesRequest {
     /**
-      * 集群id
-可以是tke, eks, edge的集群id
-      */
+     * 集群id
+  可以是tke, eks, edge的集群id
+     */
     ClusterId: string;
 }
 /**
@@ -795,32 +795,32 @@ export interface DescribePrometheusAgentInstancesRequest {
  */
 export interface ModifyClusterAttributeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群所属项目
-      */
+     * 集群所属项目
+     */
     ProjectId?: number;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName?: string;
     /**
-      * 集群描述
-      */
+     * 集群描述
+     */
     ClusterDesc?: string;
     /**
-      * 集群等级
-      */
+     * 集群等级
+     */
     ClusterLevel?: string;
     /**
-      * 自动变配集群等级
-      */
+     * 自动变配集群等级
+     */
     AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
     /**
-      * 是否开启QGPU共享
-      */
+     * 是否开启QGPU共享
+     */
     QGPUShareEnable?: boolean;
 }
 /**
@@ -828,20 +828,20 @@ export interface ModifyClusterAttributeRequest {
  */
 export interface AutoscalingAdded {
     /**
-      * 正在加入中的节点数量
-      */
+     * 正在加入中的节点数量
+     */
     Joining: number;
     /**
-      * 初始化中的节点数量
-      */
+     * 初始化中的节点数量
+     */
     Initializing: number;
     /**
-      * 正常的节点数量
-      */
+     * 正常的节点数量
+     */
     Normal: number;
     /**
-      * 节点总数
-      */
+     * 节点总数
+     */
     Total: number;
 }
 /**
@@ -849,63 +849,63 @@ export interface AutoscalingAdded {
  */
 export interface DescribeClustersRequest {
     /**
-      * 集群ID列表(为空时，
-表示获取账号下所有集群)
-      */
+     * 集群ID列表(为空时，
+  表示获取账号下所有集群)
+     */
     ClusterIds?: Array<string>;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 最大输出条数，默认20，最大为100
-      */
+     * 最大输出条数，默认20，最大为100
+     */
     Limit?: number;
     /**
-      * ·  ClusterName
-    按照【集群名】进行过滤。
-    类型：String
-    必选：否
-
-·  ClusterType
-    按照【集群类型】进行过滤。
-    类型：String
-    必选：否
-
-·  ClusterStatus
-    按照【集群状态】进行过滤。
-    类型：String
-    必选：否
-
-·  Tags
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-
-·  vpc-id
-    按照【VPC】进行过滤。
-    类型：String
-    必选：否
-
-·  tag-key
-    按照【标签键】进行过滤。
-    类型：String
-    必选：否
-
-·  tag-value
-    按照【标签值】进行过滤。
-    类型：String
-    必选：否
-
-·  tag:tag-key
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-      */
+     * ·  ClusterName
+      按照【集群名】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  ClusterType
+      按照【集群类型】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  ClusterStatus
+      按照【集群状态】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  Tags
+      按照【标签键值对】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  vpc-id
+      按照【VPC】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  tag-key
+      按照【标签键】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  tag-value
+      按照【标签值】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  tag:tag-key
+      按照【标签键值对】进行过滤。
+      类型：String
+      必选：否
+     */
     Filters?: Array<Filter>;
     /**
-      * 集群类型，例如：MANAGED_CLUSTER
-      */
+     * 集群类型，例如：MANAGED_CLUSTER
+     */
     ClusterType?: string;
 }
 /**
@@ -913,42 +913,42 @@ export interface DescribeClustersRequest {
  */
 export interface UpgradeClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * create 表示开始一次升级任务
-pause 表示停止任务
-resume表示继续任务
-abort表示终止任务
-      */
+     * create 表示开始一次升级任务
+  pause 表示停止任务
+  resume表示继续任务
+  abort表示终止任务
+     */
     Operation: string;
     /**
-      * 升级类型，只有Operation是create需要设置
-reset 大版本重装升级
-hot 小版本热升级
-major 大版本原地升级
-      */
+     * 升级类型，只有Operation是create需要设置
+  reset 大版本重装升级
+  hot 小版本热升级
+  major 大版本原地升级
+     */
     UpgradeType?: string;
     /**
-      * 需要升级的节点列表
-      */
+     * 需要升级的节点列表
+     */
     InstanceIds?: Array<string>;
     /**
-      * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
-      */
+     * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+     */
     ResetParam?: UpgradeNodeResetParam;
     /**
-      * 是否忽略节点升级前检查
-      */
+     * 是否忽略节点升级前检查
+     */
     SkipPreCheck?: boolean;
     /**
-      * 最大可容忍的不可用Pod比例
-      */
+     * 最大可容忍的不可用Pod比例
+     */
     MaxNotReadyPercent?: number;
     /**
-      * 是否升级节点运行时，默认false不升级
-      */
+     * 是否升级节点运行时，默认false不升级
+     */
     UpgradeRunTime?: boolean;
 }
 /**
@@ -956,12 +956,12 @@ major 大版本原地升级
  */
 export interface ExtensionAddon {
     /**
-      * 扩展组件名称
-      */
+     * 扩展组件名称
+     */
     AddonName: string;
     /**
-      * 扩展组件信息(扩展组件资源对象的json字符串描述)
-      */
+     * 扩展组件信息(扩展组件资源对象的json字符串描述)
+     */
     AddonParam: string;
 }
 /**
@@ -969,8 +969,8 @@ export interface ExtensionAddon {
  */
 export interface DescribeResourceUsageRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -978,26 +978,26 @@ export interface DescribeResourceUsageRequest {
  */
 export interface PrometheusRecordRuleYamlItem {
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     Name: string;
     /**
-      * 最近更新时间
-      */
+     * 最近更新时间
+     */
     UpdateTime: string;
     /**
-      * Yaml内容
-      */
+     * Yaml内容
+     */
     TemplateId: string;
     /**
-      * 如果该聚合规则来至模板，则TemplateId为模板id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果该聚合规则来至模板，则TemplateId为模板id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Content: string;
     /**
-      * 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId: string;
 }
 /**
@@ -1005,12 +1005,12 @@ export interface PrometheusRecordRuleYamlItem {
  */
 export interface Label {
     /**
-      * map表中的Name
-      */
+     * map表中的Name
+     */
     Name: string;
     /**
-      * map表中的Value
-      */
+     * map表中的Value
+     */
     Value: string;
 }
 /**
@@ -1018,19 +1018,19 @@ export interface Label {
  */
 export interface PodLimitsByType {
     /**
-      * TKE共享网卡非固定IP模式可支持的Pod数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * TKE共享网卡非固定IP模式可支持的Pod数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TKERouteENINonStaticIP: number;
     /**
-      * TKE共享网卡固定IP模式可支持的Pod数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * TKE共享网卡固定IP模式可支持的Pod数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TKERouteENIStaticIP: number;
     /**
-      * TKE独立网卡模式可支持的Pod数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * TKE独立网卡模式可支持的Pod数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TKEDirectENI: number;
 }
 /**
@@ -1038,12 +1038,12 @@ export interface PodLimitsByType {
  */
 export interface DeletePrometheusTemplateSyncRequest {
     /**
-      * 模板id
-      */
+     * 模板id
+     */
     TemplateId: string;
     /**
-      * 取消同步的对象列表
-      */
+     * 取消同步的对象列表
+     */
     Targets: Array<PrometheusTemplateSyncTarget>;
 }
 /**
@@ -1051,8 +1051,8 @@ export interface DeletePrometheusTemplateSyncRequest {
  */
 export interface DisableVpcCniNetworkTypeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -1060,13 +1060,13 @@ export interface DisableVpcCniNetworkTypeRequest {
  */
 export interface DescribeClusterReleaseDetailsResponse {
     /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release?: ReleaseDetails;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1074,8 +1074,8 @@ export interface DescribeClusterReleaseDetailsResponse {
  */
 export interface SyncPrometheusTempResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1083,16 +1083,16 @@ export interface SyncPrometheusTempResponse {
  */
 export interface CreateEdgeLogConfigRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 日志采集配置的json表达
-      */
+     * 日志采集配置的json表达
+     */
     LogConfig: string;
     /**
-      * CLS日志集ID
-      */
+     * CLS日志集ID
+     */
     LogsetId?: string;
 }
 /**
@@ -1100,8 +1100,8 @@ export interface CreateEdgeLogConfigRequest {
  */
 export interface CreatePrometheusDashboardResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1109,16 +1109,16 @@ export interface CreatePrometheusDashboardResponse {
  */
 export interface CancelClusterReleaseRequest {
     /**
-      * 应用ID
-      */
+     * 应用ID
+     */
     ID: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId?: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -1126,16 +1126,16 @@ export interface CancelClusterReleaseRequest {
  */
 export interface DescribeTKEEdgeClusterStatusResponse {
     /**
-      * 集群当前状态
-      */
+     * 集群当前状态
+     */
     Phase: string;
     /**
-      * 集群过程数组
-      */
+     * 集群过程数组
+     */
     Conditions: Array<ClusterCondition>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1143,12 +1143,12 @@ export interface DescribeTKEEdgeClusterStatusResponse {
  */
 export interface ModifyClusterAsGroupOptionAttributeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群弹性伸缩属性
-      */
+     * 集群弹性伸缩属性
+     */
     ClusterAsGroupOption: ClusterAsGroupOption;
 }
 /**
@@ -1156,8 +1156,8 @@ export interface ModifyClusterAsGroupOptionAttributeRequest {
  */
 export interface DescribeClusterStatusRequest {
     /**
-      * 集群ID列表，不传默认拉取所有集群
-      */
+     * 集群ID列表，不传默认拉取所有集群
+     */
     ClusterIds?: Array<string>;
 }
 /**
@@ -1165,24 +1165,24 @@ export interface DescribeClusterStatusRequest {
  */
 export interface CreateBackupStorageLocationRequest {
     /**
-      * 存储仓库所属地域，比如COS广州(ap-guangzhou)
-      */
+     * 存储仓库所属地域，比如COS广州(ap-guangzhou)
+     */
     StorageRegion: string;
     /**
-      * 对象存储桶名称，如果是COS必须是tke-backup前缀开头
-      */
+     * 对象存储桶名称，如果是COS必须是tke-backup前缀开头
+     */
     Bucket: string;
     /**
-      * 备份仓库名称
-      */
+     * 备份仓库名称
+     */
     Name: string;
     /**
-      * 存储服务提供方，默认腾讯云
-      */
+     * 存储服务提供方，默认腾讯云
+     */
     Provider?: string;
     /**
-      * 对象存储桶路径
-      */
+     * 对象存储桶路径
+     */
     Path?: string;
 }
 /**
@@ -1190,17 +1190,17 @@ export interface CreateBackupStorageLocationRequest {
  */
 export interface PrometheusConfigItem {
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name: string;
     /**
-      * 配置内容
-      */
+     * 配置内容
+     */
     Config: string;
     /**
-      * 用于出参，如果该配置来至模板，则为模板id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用于出参，如果该配置来至模板，则为模板id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TemplateId?: string;
 }
 /**
@@ -1208,16 +1208,16 @@ export interface PrometheusConfigItem {
  */
 export interface DeleteClusterNodePoolRequest {
     /**
-      * 节点池对应的 ClusterId
-      */
+     * 节点池对应的 ClusterId
+     */
     ClusterId: string;
     /**
-      * 需要删除的节点池 Id 列表
-      */
+     * 需要删除的节点池 Id 列表
+     */
     NodePoolIds: Array<string>;
     /**
-      * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
-      */
+     * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
+     */
     KeepInstance: boolean;
 }
 /**
@@ -1225,32 +1225,32 @@ export interface DeleteClusterNodePoolRequest {
  */
 export interface DescribeEKSClusterCredentialResponse {
     /**
-      * 集群的接入地址信息
-      */
+     * 集群的接入地址信息
+     */
     Addresses: Array<IPAddress>;
     /**
-      * 集群的认证信息（token只有请求是主账号才返回，子账户请使用返回的kubeconfig）
-      */
+     * 集群的认证信息（token只有请求是主账号才返回，子账户请使用返回的kubeconfig）
+     */
     Credential: ClusterCredential;
     /**
-      * 集群的公网访问信息
-      */
+     * 集群的公网访问信息
+     */
     PublicLB: ClusterPublicLB;
     /**
-      * 集群的内网访问信息
-      */
+     * 集群的内网访问信息
+     */
     InternalLB: ClusterInternalLB;
     /**
-      * 标记是否新的内外网功能
-      */
+     * 标记是否新的内外网功能
+     */
     ProxyLB: boolean;
     /**
-      * 连接用户集群k8s 的Config
-      */
+     * 连接用户集群k8s 的Config
+     */
     Kubeconfig: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1258,28 +1258,28 @@ export interface DescribeEKSClusterCredentialResponse {
  */
 export interface CheckInstancesUpgradeAbleRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 节点列表，空为全部节点
-      */
+     * 节点列表，空为全部节点
+     */
     InstanceIds?: Array<string>;
     /**
-      * 升级类型
-      */
+     * 升级类型
+     */
     UpgradeType?: string;
     /**
-      * 分页Offset
-      */
+     * 分页Offset
+     */
     Offset?: number;
     /**
-      * 分页Limit
-      */
+     * 分页Limit
+     */
     Limit?: number;
     /**
-      * 过滤
-      */
+     * 过滤
+     */
     Filter?: Array<Filter>;
 }
 /**
@@ -1287,12 +1287,12 @@ export interface CheckInstancesUpgradeAbleRequest {
  */
 export interface ModifyPrometheusTemplateRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateId: string;
     /**
-      * 修改内容
-      */
+     * 修改内容
+     */
     Template: PrometheusTemplateModify;
 }
 /**
@@ -1300,16 +1300,16 @@ export interface ModifyPrometheusTemplateRequest {
  */
 export interface DeleteClusterVirtualNodePoolRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 虚拟节点池ID列表
-      */
+     * 虚拟节点池ID列表
+     */
     NodePoolIds: Array<string>;
     /**
-      * 是否强制删除，在虚拟节点上有pod的情况下，如果选择非强制删除，则删除会失败
-      */
+     * 是否强制删除，在虚拟节点上有pod的情况下，如果选择非强制删除，则删除会失败
+     */
     Force?: boolean;
 }
 /**
@@ -1317,27 +1317,27 @@ export interface DeleteClusterVirtualNodePoolRequest {
  */
 export interface DescribeImageCachesRequest {
     /**
-      * 镜像缓存Id数组
-      */
+     * 镜像缓存Id数组
+     */
     ImageCacheIds?: Array<string>;
     /**
-      * 镜像缓存名称数组
-      */
+     * 镜像缓存名称数组
+     */
     ImageCacheNames?: Array<string>;
     /**
-      * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
-      */
+     * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
+     */
     Limit?: number;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 过滤条件，可选条件：
-(1)实例名称
-KeyName: image-cache-name
-类型：String
-      */
+     * 过滤条件，可选条件：
+  (1)实例名称
+  KeyName: image-cache-name
+  类型：String
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -1345,21 +1345,21 @@ KeyName: image-cache-name
  */
 export interface DescribePrometheusAlertRuleRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Offset?: number;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Limit?: number;
     /**
-      * 过滤
-支持ID，Name
-      */
+     * 过滤
+  支持ID，Name
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -1367,8 +1367,8 @@ export interface DescribePrometheusAlertRuleRequest {
  */
 export interface DescribeEdgeAvailableExtraArgsRequest {
     /**
-      * 集群版本
-      */
+     * 集群版本
+     */
     ClusterVersion?: string;
 }
 /**
@@ -1376,80 +1376,80 @@ export interface DescribeEdgeAvailableExtraArgsRequest {
  */
 export interface ExistedInstance {
     /**
-      * 实例是否支持加入集群(TRUE 可以加入 FALSE 不能加入)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例是否支持加入集群(TRUE 可以加入 FALSE 不能加入)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Usable: boolean;
     /**
-      * 实例不支持加入的原因。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例不支持加入的原因。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UnusableReason: string;
     /**
-      * 实例已经所在的集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例已经所在的集群ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlreadyInCluster: string;
     /**
-      * 实例ID形如：ins-xxxxxxxx。
-      */
+     * 实例ID形如：ins-xxxxxxxx。
+     */
     InstanceId: string;
     /**
-      * 实例名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceName: string;
     /**
-      * 实例主网卡的内网IP列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例主网卡的内网IP列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PrivateIpAddresses: Array<string>;
     /**
-      * 实例主网卡的公网IP列表。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例主网卡的公网IP列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PublicIpAddresses: Array<string>;
     /**
-      * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreatedTime: string;
     /**
-      * 实例的CPU核数，单位：核。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例的CPU核数，单位：核。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CPU: number;
     /**
-      * 实例内存容量，单位：GB。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例内存容量，单位：GB。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Memory: number;
     /**
-      * 操作系统名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 操作系统名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OsName: string;
     /**
-      * 实例机型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例机型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceType: string;
     /**
-      * 伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 伸缩组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoscalingGroupId: string;
     /**
-      * 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceChargeType: string;
     /**
-      * 实例的IPv6地址。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例的IPv6地址。
+  注意：此字段可能返回 null，表示取不到有效值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IPv6Addresses: Array<string>;
 }
 /**
@@ -1457,8 +1457,8 @@ export interface ExistedInstance {
  */
 export interface AddNodeToNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1466,70 +1466,70 @@ export interface AddNodeToNodePoolResponse {
  */
 export interface PrometheusInstancesOverview {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 实例名
-      */
+     * 实例名
+     */
     InstanceName: string;
     /**
-      * VPC ID
-      */
+     * VPC ID
+     */
     VpcId: string;
     /**
-      * 子网ID
-      */
+     * 子网ID
+     */
     SubnetId: string;
     /**
-      * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
-      */
+     * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
+     */
     InstanceStatus: number;
     /**
-      * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChargeStatus: number;
     /**
-      * 是否开启 Grafana（0:不开启，1:开启）
-      */
+     * 是否开启 Grafana（0:不开启，1:开启）
+     */
     EnableGrafana: number;
     /**
-      * Grafana 面板 URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Grafana 面板 URL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GrafanaURL: string;
     /**
-      * 实例付费类型（1:试用版；2:预付费）
-      */
+     * 实例付费类型（1:试用版；2:预付费）
+     */
     InstanceChargeType: number;
     /**
-      * 规格名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 规格名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SpecName: string;
     /**
-      * 存储周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存储周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DataRetentionTime: number;
     /**
-      * 购买的实例过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 购买的实例过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExpireTime: string;
     /**
-      * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoRenewFlag: number;
     /**
-      * 绑定集群总数
-      */
+     * 绑定集群总数
+     */
     BoundTotal: number;
     /**
-      * 绑定集群正常状态总数
-      */
+     * 绑定集群正常状态总数
+     */
     BoundNormal: number;
 }
 /**
@@ -1537,26 +1537,26 @@ export interface PrometheusInstancesOverview {
  */
 export interface DescribePrometheusInstanceInitStatusResponse {
     /**
-      * 实例初始化状态，取值：
-uninitialized 未初始化
-initializing 初始化中
-running 初始化完成，运行中
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例初始化状态，取值：
+  uninitialized 未初始化
+  initializing 初始化中
+  running 初始化完成，运行中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 初始化任务步骤
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 初始化任务步骤
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Steps: Array<TaskStepInfo>;
     /**
-      * 实例eks集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例eks集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EksClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1564,8 +1564,8 @@ running 初始化完成，运行中
  */
 export interface DisableEventPersistenceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1573,32 +1573,32 @@ export interface DisableEventPersistenceResponse {
  */
 export interface UpdateEKSContainerInstanceRequest {
     /**
-      * 容器实例 ID
-      */
+     * 容器实例 ID
+     */
     EksCiId: string;
     /**
-      * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)
-      */
+     * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)
+     */
     RestartPolicy?: string;
     /**
-      * 数据卷，包含NfsVolume数组和CbsVolume数组
-      */
+     * 数据卷，包含NfsVolume数组和CbsVolume数组
+     */
     EksCiVolume?: EksCiVolume;
     /**
-      * 容器组
-      */
+     * 容器组
+     */
     Containers?: Array<Container>;
     /**
-      * Init 容器组
-      */
+     * Init 容器组
+     */
     InitContainers?: Array<Container>;
     /**
-      * 容器实例名称
-      */
+     * 容器实例名称
+     */
     Name?: string;
     /**
-      * 镜像仓库凭证数组
-      */
+     * 镜像仓库凭证数组
+     */
     ImageRegistryCredentials?: Array<ImageRegistryCredential>;
 }
 /**
@@ -1606,20 +1606,20 @@ export interface UpdateEKSContainerInstanceRequest {
  */
 export interface CUDNN {
     /**
-      * cuDNN的版本
-      */
+     * cuDNN的版本
+     */
     Version: string;
     /**
-      * cuDNN的名字
-      */
+     * cuDNN的名字
+     */
     Name: string;
     /**
-      * cuDNN的Doc名字
-      */
+     * cuDNN的Doc名字
+     */
     DocName?: string;
     /**
-      * cuDNN的Dev名字
-      */
+     * cuDNN的Dev名字
+     */
     DevName?: string;
 }
 /**
@@ -1627,17 +1627,17 @@ export interface CUDNN {
  */
 export interface GetMostSuitableImageCacheResponse {
     /**
-      * 是否有匹配的镜像缓存
-      */
+     * 是否有匹配的镜像缓存
+     */
     Found: boolean;
     /**
-      * 匹配的镜像缓存
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 匹配的镜像缓存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageCache: ImageCache;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1645,16 +1645,16 @@ export interface GetMostSuitableImageCacheResponse {
  */
 export interface KubeJarvisStateCatalogue {
     /**
-      * 目录级别，支持参数：
-first：一级目录
-second：二级目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 目录级别，支持参数：
+  first：一级目录
+  second：二级目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CatalogueLevel?: string;
     /**
-      * 目录名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 目录名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CatalogueName?: string;
 }
 /**
@@ -1662,32 +1662,32 @@ second：二级目录
  */
 export interface Event {
     /**
-      * pod名称
-      */
+     * pod名称
+     */
     PodName: string;
     /**
-      * 事件原因内容
-      */
+     * 事件原因内容
+     */
     Reason: string;
     /**
-      * 事件类型
-      */
+     * 事件类型
+     */
     Type: string;
     /**
-      * 事件出现次数
-      */
+     * 事件出现次数
+     */
     Count: number;
     /**
-      * 事件第一次出现时间
-      */
+     * 事件第一次出现时间
+     */
     FirstTimestamp: string;
     /**
-      * 事件最后一次出现时间
-      */
+     * 事件最后一次出现时间
+     */
     LastTimestamp: string;
     /**
-      * 事件内容
-      */
+     * 事件内容
+     */
     Message: string;
 }
 /**
@@ -1695,9 +1695,9 @@ export interface Event {
  */
 export interface Exec {
     /**
-      * 容器内检测的命令
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器内检测的命令
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Commands?: Array<string>;
 }
 /**
@@ -1705,18 +1705,18 @@ export interface Exec {
  */
 export interface DescribeEdgeAvailableExtraArgsResponse {
     /**
-      * 集群版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterVersion?: string;
     /**
-      * 可用的自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可用的自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AvailableExtraArgs?: EdgeAvailableExtraArgs;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1724,12 +1724,12 @@ export interface DescribeEdgeAvailableExtraArgsResponse {
  */
 export interface CreatePrometheusRecordRuleYamlRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * yaml的内容
-      */
+     * yaml的内容
+     */
     Content: string;
 }
 /**
@@ -1737,8 +1737,8 @@ export interface CreatePrometheusRecordRuleYamlRequest {
  */
 export interface DescribeEnableVpcCniProgressRequest {
     /**
-      * 开启vpc-cni的集群ID
-      */
+     * 开启vpc-cni的集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -1746,49 +1746,49 @@ export interface DescribeEnableVpcCniProgressRequest {
  */
 export interface Instance {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
-      */
+     * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+     */
     InstanceRole: string;
     /**
-      * 实例异常(或者处于初始化中)的原因
-      */
+     * 实例异常(或者处于初始化中)的原因
+     */
     FailedReason: string;
     /**
-      * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
-      */
+     * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+     */
     InstanceState: string;
     /**
-      * 实例是否封锁状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例是否封锁状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DrainStatus: string;
     /**
-      * 节点配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceAdvancedSettings: InstanceAdvancedSettings;
     /**
-      * 添加时间
-      */
+     * 添加时间
+     */
     CreatedTime: string;
     /**
-      * 节点内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点内网IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LanIP: string;
     /**
-      * 资源池ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源池ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodePoolId: string;
     /**
-      * 自动伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动伸缩组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoscalingGroupId: string;
 }
 /**
@@ -1796,38 +1796,38 @@ export interface Instance {
  */
 export interface ModifyClusterAttributeResponse {
     /**
-      * 集群所属项目
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群所属项目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProjectId: number;
     /**
-      * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterName: string;
     /**
-      * 集群描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterDesc: string;
     /**
-      * 集群等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群等级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterLevel: string;
     /**
-      * 自动变配集群等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动变配集群等级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoUpgradeClusterLevel: AutoUpgradeClusterLevel;
     /**
-      * 是否开启QGPU共享
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启QGPU共享
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     QGPUShareEnable: boolean;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1835,34 +1835,34 @@ export interface ModifyClusterAttributeResponse {
  */
 export interface KubeJarvisStateInspectionResult {
     /**
-      * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
     /**
-      * 诊断开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartTime?: string;
     /**
-      * 诊断结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndTime?: string;
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
     /**
-      * 诊断结果详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Diagnostics?: Array<KubeJarvisStateDiagnostic>;
     /**
-      * 查询巡检报告相关报错
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 查询巡检报告相关报错
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Error?: string;
 }
 /**
@@ -1870,12 +1870,12 @@ export interface KubeJarvisStateInspectionResult {
  */
 export interface CreateClusterResponse {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1883,16 +1883,16 @@ export interface CreateClusterResponse {
  */
 export interface PrometheusClusterAgentPodConfig {
     /**
-      * 是否使用HostNetWork
-      */
+     * 是否使用HostNetWork
+     */
     HostNet?: boolean;
     /**
-      * 指定pod运行节点
-      */
+     * 指定pod运行节点
+     */
     NodeSelector?: Array<Label>;
     /**
-      * 容忍污点
-      */
+     * 容忍污点
+     */
     Tolerations?: Array<Toleration>;
 }
 /**
@@ -1900,8 +1900,8 @@ export interface PrometheusClusterAgentPodConfig {
  */
 export interface RunSecurityServiceEnabled {
     /**
-      * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
-      */
+     * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+     */
     Enabled?: boolean;
 }
 /**
@@ -1909,50 +1909,50 @@ export interface RunSecurityServiceEnabled {
  */
 export interface ImageCache {
     /**
-      * 镜像缓存Id
-      */
+     * 镜像缓存Id
+     */
     ImageCacheId: string;
     /**
-      * 镜像缓存名称
-      */
+     * 镜像缓存名称
+     */
     ImageCacheName: string;
     /**
-      * 镜像缓存大小。单位：GiB
-      */
+     * 镜像缓存大小。单位：GiB
+     */
     ImageCacheSize: number;
     /**
-      * 镜像缓存包含的镜像列表
-      */
+     * 镜像缓存包含的镜像列表
+     */
     Images: Array<string>;
     /**
-      * 创建时间
-      */
+     * 创建时间
+     */
     CreationTime: string;
     /**
-      * 到期时间
-      */
+     * 到期时间
+     */
     ExpireDateTime: string;
     /**
-      * 镜像缓存事件信息
-      */
+     * 镜像缓存事件信息
+     */
     Events: Array<ImageCacheEvent>;
     /**
-      * 最新一次匹配到镜像缓存的时间
-      */
+     * 最新一次匹配到镜像缓存的时间
+     */
     LastMatchedTime: string;
     /**
-      * 镜像缓存对应的快照Id
-      */
+     * 镜像缓存对应的快照Id
+     */
     SnapshotId: string;
     /**
-      * 镜像缓存状态，可能取值：
-Pending：创建中
-Ready：创建完成
-Failed：创建失败
-Updating：更新中
-UpdateFailed：更新失败
-只有状态为Ready时，才能正常使用镜像缓存
-      */
+     * 镜像缓存状态，可能取值：
+  Pending：创建中
+  Ready：创建完成
+  Failed：创建失败
+  Updating：更新中
+  UpdateFailed：更新失败
+  只有状态为Ready时，才能正常使用镜像缓存
+     */
     Status: string;
 }
 /**
@@ -1960,8 +1960,8 @@ UpdateFailed：更新失败
  */
 export interface DeletePrometheusAlertRuleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1969,20 +1969,20 @@ export interface DeletePrometheusAlertRuleResponse {
  */
 export interface DescribeClusterPendingReleasesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 返回数量限制，默认20，最大100
-      */
+     * 返回数量限制，默认20，最大100
+     */
     Limit?: number;
     /**
-      * 偏移量，默认0
-      */
+     * 偏移量，默认0
+     */
     Offset?: number;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -1990,8 +1990,8 @@ export interface DescribeClusterPendingReleasesRequest {
  */
 export interface DeletePrometheusConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -1999,32 +1999,32 @@ export interface DeletePrometheusConfigResponse {
  */
 export interface DescribeEksContainerInstanceLogRequest {
     /**
-      * Eks Container Instance Id，即容器实例Id
-      */
+     * Eks Container Instance Id，即容器实例Id
+     */
     EksCiId: string;
     /**
-      * 容器名称，单容器的实例可选填。如果为多容器实例，请指定容器名称。
-      */
+     * 容器名称，单容器的实例可选填。如果为多容器实例，请指定容器名称。
+     */
     ContainerName?: string;
     /**
-      * 返回最新日志行数，默认500，最大2000。日志内容最大返回 1M 数据。
-      */
+     * 返回最新日志行数，默认500，最大2000。日志内容最大返回 1M 数据。
+     */
     Tail?: number;
     /**
-      * UTC时间，RFC3339标准
-      */
+     * UTC时间，RFC3339标准
+     */
     StartTime?: string;
     /**
-      * 是否是查上一个容器（如果容器退出重启了）
-      */
+     * 是否是查上一个容器（如果容器退出重启了）
+     */
     Previous?: boolean;
     /**
-      * 查询最近多少秒内的日志
-      */
+     * 查询最近多少秒内的日志
+     */
     SinceSeconds?: number;
     /**
-      * 日志总大小限制
-      */
+     * 日志总大小限制
+     */
     LimitBytes?: number;
 }
 /**
@@ -2032,8 +2032,8 @@ export interface DescribeEksContainerInstanceLogRequest {
  */
 export interface CreatePrometheusRecordRuleYamlResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2041,28 +2041,28 @@ export interface CreatePrometheusRecordRuleYamlResponse {
  */
 export interface DescribeClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
     /**
-      * 需要获取的节点实例Id列表。如果为空，表示拉取集群下所有节点实例。
-      */
+     * 需要获取的节点实例Id列表。如果为空，表示拉取集群下所有节点实例。
+     */
     InstanceIds?: Array<string>;
     /**
-      * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER。默认为WORKER类型。
-      */
+     * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER。默认为WORKER类型。
+     */
     InstanceRole?: string;
     /**
-      * 过滤条件列表；Name的可选值为nodepool-id、nodepool-instance-type；Name为nodepool-id表示根据节点池id过滤机器，Value的值为具体的节点池id，Name为nodepool-instance-type表示节点加入节点池的方式，Value的值为MANUALLY_ADDED（手动加入节点池）、AUTOSCALING_ADDED（伸缩组扩容方式加入节点池）、ALL（手动加入节点池 和 伸缩组扩容方式加入节点池）
-      */
+     * 过滤条件列表；Name的可选值为nodepool-id、nodepool-instance-type；Name为nodepool-id表示根据节点池id过滤机器，Value的值为具体的节点池id，Name为nodepool-instance-type表示节点加入节点池的方式，Value的值为MANUALLY_ADDED（手动加入节点池）、AUTOSCALING_ADDED（伸缩组扩容方式加入节点池）、ALL（手动加入节点池 和 伸缩组扩容方式加入节点池）
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -2070,24 +2070,24 @@ export interface DescribeClusterInstancesRequest {
  */
 export interface PodLimitsInstance {
     /**
-      * 机型所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机型所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Zone: string;
     /**
-      * 机型所属机型族
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机型所属机型族
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceFamily: string;
     /**
-      * 实例机型名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例机型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceType: string;
     /**
-      * 机型可支持的最大VPC-CNI模式Pod数量信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机型可支持的最大VPC-CNI模式Pod数量信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodLimits: PodLimitsByType;
 }
 /**
@@ -2095,12 +2095,12 @@ export interface PodLimitsInstance {
  */
 export interface ModifyPrometheusTempRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateId: string;
     /**
-      * 修改内容
-      */
+     * 修改内容
+     */
     Template: PrometheusTempModify;
 }
 /**
@@ -2108,12 +2108,12 @@ export interface ModifyPrometheusTempRequest {
  */
 export interface ControllerStatus {
     /**
-      * 控制器的名字
-      */
+     * 控制器的名字
+     */
     Name: string;
     /**
-      * 控制器是否开启
-      */
+     * 控制器是否开启
+     */
     Enabled: boolean;
 }
 /**
@@ -2121,8 +2121,8 @@ export interface ControllerStatus {
  */
 export interface DeletePrometheusTempSyncResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2130,20 +2130,20 @@ export interface DeletePrometheusTempSyncResponse {
  */
 export interface DescribePrometheusRecordRulesRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Offset?: number;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Limit?: number;
     /**
-      * 过滤
-      */
+     * 过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -2151,31 +2151,31 @@ export interface DescribePrometheusRecordRulesRequest {
  */
 export interface VirtualNodePool {
     /**
-      * 节点池ID
-      */
+     * 节点池ID
+     */
     NodePoolId: string;
     /**
-      * 子网列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 子网列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubnetIds: Array<string>;
     /**
-      * 节点池名称
-      */
+     * 节点池名称
+     */
     Name: string;
     /**
-      * 节点池生命周期
-      */
+     * 节点池生命周期
+     */
     LifeState: string;
     /**
-      * 虚拟节点label
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 虚拟节点label
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Labels: Array<Label>;
     /**
-      * 虚拟节点taint
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 虚拟节点taint
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Taints: Array<Taint>;
 }
 /**
@@ -2183,8 +2183,8 @@ export interface VirtualNodePool {
  */
 export interface DescribeTKEEdgeClusterStatusRequest {
     /**
-      * 边缘计算容器集群Id
-      */
+     * 边缘计算容器集群Id
+     */
     ClusterId: string;
 }
 /**
@@ -2192,8 +2192,8 @@ export interface DescribeTKEEdgeClusterStatusRequest {
  */
 export interface AcquireClusterAdminRoleResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2201,16 +2201,16 @@ export interface AcquireClusterAdminRoleResponse {
  */
 export interface DescribeEdgeClusterInstancesResponse {
     /**
-      * 该集群总数
-      */
+     * 该集群总数
+     */
     TotalCount?: number;
     /**
-      * 节点信息集合
-      */
+     * 节点信息集合
+     */
     InstanceInfoSet?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2218,20 +2218,20 @@ export interface DescribeEdgeClusterInstancesResponse {
  */
 export interface UpdateEdgeClusterVersionRequest {
     /**
-      * 集群 Id
-      */
+     * 集群 Id
+     */
     ClusterId: string;
     /**
-      * 需要升级到的版本
-      */
+     * 需要升级到的版本
+     */
     EdgeVersion: string;
     /**
-      * 自定义边缘组件镜像仓库前缀
-      */
+     * 自定义边缘组件镜像仓库前缀
+     */
     RegistryPrefix?: string;
     /**
-      * 是否跳过预检查阶段
-      */
+     * 是否跳过预检查阶段
+     */
     SkipPreCheck?: boolean;
 }
 /**
@@ -2239,13 +2239,13 @@ export interface UpdateEdgeClusterVersionRequest {
  */
 export interface GetTkeAppChartListResponse {
     /**
-      * 所支持的chart列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 所支持的chart列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AppCharts?: Array<AppChart>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2253,8 +2253,8 @@ export interface GetTkeAppChartListResponse {
  */
 export interface DescribePrometheusTemplateSyncRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateId: string;
 }
 /**
@@ -2262,25 +2262,25 @@ export interface DescribePrometheusTemplateSyncRequest {
  */
 export interface UpgradeAbleInstancesItem {
     /**
-      * 节点Id
-      */
+     * 节点Id
+     */
     InstanceId: string;
     /**
-      * 节点的当前版本
-      */
+     * 节点的当前版本
+     */
     Version: string;
     /**
-      * 当前版本的最新小版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前版本的最新小版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LatestVersion: string;
     /**
-      * RuntimeVersion
-      */
+     * RuntimeVersion
+     */
     RuntimeVersion?: string;
     /**
-      * RuntimeLatestVersion
-      */
+     * RuntimeLatestVersion
+     */
     RuntimeLatestVersion?: string;
 }
 /**
@@ -2288,8 +2288,8 @@ export interface UpgradeAbleInstancesItem {
  */
 export interface UpgradeClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2297,9 +2297,9 @@ export interface UpgradeClusterInstancesResponse {
  */
 export interface CustomDriver {
     /**
-      * 自定义GPU驱动地址链接
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自定义GPU驱动地址链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Address?: string;
 }
 /**
@@ -2307,8 +2307,8 @@ export interface CustomDriver {
  */
 export interface DescribeClusterAsGroupOptionRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -2316,13 +2316,13 @@ export interface DescribeClusterAsGroupOptionRequest {
  */
 export interface DescribePrometheusAgentInstancesResponse {
     /**
-      * 关联该集群的实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关联该集群的实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Instances?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2330,50 +2330,50 @@ export interface DescribePrometheusAgentInstancesResponse {
  */
 export interface AddExistedInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 实例列表，不支持竞价实例
-      */
+     * 实例列表，不支持竞价实例
+     */
     InstanceIds: Array<string>;
     /**
-      * 实例额外需要设置参数信息(默认值)
-      */
+     * 实例额外需要设置参数信息(默认值)
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
-      */
+     * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+     */
     EnhancedService?: EnhancedService;
     /**
-      * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
-      */
+     * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
+     */
     LoginSettings?: LoginSettings;
     /**
-      * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
-      */
+     * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
+     */
     HostName?: string;
     /**
-      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
-      */
+     * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 节点池选项
-      */
+     * 节点池选项
+     */
     NodePool?: NodePoolOption;
     /**
-      * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
-      */
+     * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+     */
     SkipValidateOptions?: Array<string>;
     /**
-      * 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。
-
-参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。
-      */
+     * 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。
+  
+  参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。
+     */
     InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>;
     /**
-      * 节点镜像
-      */
+     * 节点镜像
+     */
     ImageId?: string;
 }
 /**
@@ -2381,69 +2381,69 @@ export interface AddExistedInstancesRequest {
  */
 export interface ClusterAsGroupOption {
     /**
-      * 是否开启缩容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启缩容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsScaleDownEnabled?: boolean;
     /**
-      * 多伸缩组情况下扩容选择算法(random 随机选择，most-pods 最多类型的Pod least-waste 最少的资源浪费，默认为random)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 多伸缩组情况下扩容选择算法(random 随机选择，most-pods 最多类型的Pod least-waste 最少的资源浪费，默认为random)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Expander?: string;
     /**
-      * 最大并发缩容数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最大并发缩容数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MaxEmptyBulkDelete?: number;
     /**
-      * 集群扩容后多少分钟开始判断缩容（默认为10分钟）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群扩容后多少分钟开始判断缩容（默认为10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleDownDelay?: number;
     /**
-      * 节点连续空闲多少分钟后被缩容（默认为 10分钟）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点连续空闲多少分钟后被缩容（默认为 10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleDownUnneededTime?: number;
     /**
-      * 节点资源使用量低于多少(百分比)时认为空闲(默认: 50(百分比))
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点资源使用量低于多少(百分比)时认为空闲(默认: 50(百分比))
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleDownUtilizationThreshold?: number;
     /**
-      * 含有本地存储Pod的节点是否不缩容(默认： FALSE)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 含有本地存储Pod的节点是否不缩容(默认： FALSE)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SkipNodesWithLocalStorage?: boolean;
     /**
-      * 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： FALSE)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： FALSE)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SkipNodesWithSystemPods?: boolean;
     /**
-      * 计算资源使用量时是否默认忽略DaemonSet的实例(默认值: False，不忽略)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计算资源使用量时是否默认忽略DaemonSet的实例(默认值: False，不忽略)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IgnoreDaemonSetsUtilization?: boolean;
     /**
-      * CA做健康性判断的个数，默认3，即超过OkTotalUnreadyCount个数后，CA会进行健康性判断。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CA做健康性判断的个数，默认3，即超过OkTotalUnreadyCount个数后，CA会进行健康性判断。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OkTotalUnreadyCount: number;
     /**
-      * 未就绪节点的最大百分比，此后CA会停止操作
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 未就绪节点的最大百分比，此后CA会停止操作
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MaxTotalUnreadyPercentage: number;
     /**
-      * 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScaleDownUnreadyTime: number;
     /**
-      * CA删除未在Kubernetes中注册的节点之前等待的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CA删除未在Kubernetes中注册的节点之前等待的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UnregisteredNodeRemovalTime: number;
 }
 /**
@@ -2451,8 +2451,8 @@ export interface ClusterAsGroupOption {
  */
 export interface DeletePrometheusTempResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2460,30 +2460,30 @@ export interface DeletePrometheusTempResponse {
  */
 export interface DescribeClusterNodePoolsRequest {
     /**
-      * ClusterId（集群id）
-      */
+     * ClusterId（集群id）
+     */
     ClusterId: string;
     /**
-      * ·  NodePoolsName
-    按照【节点池名】进行过滤。
-    类型：String
-    必选：否
-
-·  NodePoolsId
-    按照【节点池id】进行过滤。
-    类型：String
-    必选：否
-
-·  tags
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-
-·  tag:tag-key
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-      */
+     * ·  NodePoolsName
+      按照【节点池名】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  NodePoolsId
+      按照【节点池id】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  tags
+      按照【标签键值对】进行过滤。
+      类型：String
+      必选：否
+  
+  ·  tag:tag-key
+      按照【标签键值对】进行过滤。
+      类型：String
+      必选：否
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -2499,16 +2499,16 @@ export declare type DescribeRegionsRequest = null;
  */
 export interface DeleteClusterRouteRequest {
     /**
-      * 路由表名称。
-      */
+     * 路由表名称。
+     */
     RouteTableName: string;
     /**
-      * 下一跳地址。
-      */
+     * 下一跳地址。
+     */
     GatewayIp: string;
     /**
-      * 目的端CIDR。
-      */
+     * 目的端CIDR。
+     */
     DestinationCidrBlock: string;
 }
 /**
@@ -2516,12 +2516,12 @@ export interface DeleteClusterRouteRequest {
  */
 export interface DeleteClusterEndpointRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
-      */
+     * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+     */
     IsExtranet?: boolean;
 }
 /**
@@ -2529,16 +2529,16 @@ export interface DeleteClusterEndpointRequest {
  */
 export interface DeleteClusterVirtualNodeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 虚拟节点列表
-      */
+     * 虚拟节点列表
+     */
     NodeNames: Array<string>;
     /**
-      * 是否强制删除：如果虚拟节点上有运行中Pod，则非强制删除状态下不会进行删除
-      */
+     * 是否强制删除：如果虚拟节点上有运行中Pod，则非强制删除状态下不会进行删除
+     */
     Force?: boolean;
 }
 /**
@@ -2546,12 +2546,12 @@ export interface DeleteClusterVirtualNodeRequest {
  */
 export interface DescribeClusterNodePoolDetailRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
 }
 /**
@@ -2559,8 +2559,8 @@ export interface DescribeClusterNodePoolDetailRequest {
  */
 export interface DescribePrometheusTempSyncRequest {
     /**
-      * 模板ID
-      */
+     * 模板ID
+     */
     TemplateId: string;
 }
 /**
@@ -2568,27 +2568,27 @@ export interface DescribePrometheusTempSyncRequest {
  */
 export interface DescribePrometheusGlobalConfigResponse {
     /**
-      * 配置内容
-      */
+     * 配置内容
+     */
     Config: string;
     /**
-      * ServiceMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * ServiceMonitors列表以及对应targets信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceMonitors: Array<PrometheusConfigItem>;
     /**
-      * PodMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * PodMonitors列表以及对应targets信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodMonitors: Array<PrometheusConfigItem>;
     /**
-      * RawJobs列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * RawJobs列表以及对应targets信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RawJobs: Array<PrometheusConfigItem>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2596,14 +2596,14 @@ export interface DescribePrometheusGlobalConfigResponse {
  */
 export interface KubeJarvisStateInspectionResultsItem {
     /**
-      * 巡检结果名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 巡检结果名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name?: string;
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
 }
 /**
@@ -2611,18 +2611,18 @@ export interface KubeJarvisStateInspectionResultsItem {
  */
 export interface DescribeClusterReleaseHistoryResponse {
     /**
-      * 已安装应用版本历史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 已安装应用版本历史
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReleaseHistorySet: Array<ReleaseHistory>;
     /**
-      * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2634,8 +2634,8 @@ export declare type DescribeImagesRequest = null;
  */
 export interface UninstallEdgeLogAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2643,20 +2643,20 @@ export interface UninstallEdgeLogAgentResponse {
  */
 export interface AddVpcCniSubnetsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 为集群容器网络增加的子网列表
-      */
+     * 为集群容器网络增加的子网列表
+     */
     SubnetIds: Array<string>;
     /**
-      * 集群所属的VPC的ID
-      */
+     * 集群所属的VPC的ID
+     */
     VpcId: string;
     /**
-      * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
-      */
+     * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
+     */
     SkipAddingNonMasqueradeCIDRs?: boolean;
 }
 /**
@@ -2664,16 +2664,16 @@ export interface AddVpcCniSubnetsRequest {
  */
 export interface DescribePrometheusAlertHistoryResponse {
     /**
-      * 告警历史
-      */
+     * 告警历史
+     */
     Items?: Array<PrometheusAlertHistoryItem>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2681,28 +2681,28 @@ export interface DescribePrometheusAlertHistoryResponse {
  */
 export interface ExistedInstancesPara {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     InstanceIds: Array<string>;
     /**
-      * 实例额外需要设置参数信息
-      */
+     * 实例额外需要设置参数信息
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
-      */
+     * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+     */
     EnhancedService?: EnhancedService;
     /**
-      * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
-      */
+     * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
+     */
     LoginSettings?: LoginSettings;
     /**
-      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
-      */
+     * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
-      */
+     * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
+     */
     HostName?: string;
 }
 /**
@@ -2710,13 +2710,13 @@ export interface ExistedInstancesPara {
  */
 export interface DescribeClusterAsGroupOptionResponse {
     /**
-      * 集群弹性伸缩属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群弹性伸缩属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterAsGroupOption?: ClusterAsGroupOption;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2724,12 +2724,12 @@ export interface DescribeClusterAsGroupOptionResponse {
  */
 export interface CreateTKEEdgeClusterResponse {
     /**
-      * 边缘计算集群Id
-      */
+     * 边缘计算集群Id
+     */
     ClusterId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2737,13 +2737,13 @@ export interface CreateTKEEdgeClusterResponse {
  */
 export interface DescribeEdgeClusterExtraArgsResponse {
     /**
-      * 集群自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterExtraArgs: EdgeClusterExtraArgs;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2751,12 +2751,12 @@ export interface DescribeEdgeClusterExtraArgsResponse {
  */
 export interface ResourceDeleteOption {
     /**
-      * 资源类型，例如CBS
-      */
+     * 资源类型，例如CBS
+     */
     ResourceType: string;
     /**
-      * 集群删除时资源的删除模式：terminate（销毁），retain （保留）
-      */
+     * 集群删除时资源的删除模式：terminate（销毁），retain （保留）
+     */
     DeleteMode: string;
 }
 /**
@@ -2764,13 +2764,13 @@ export interface ResourceDeleteOption {
  */
 export interface ListClusterInspectionResultsResponse {
     /**
-      * 集群诊断结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群诊断结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InspectionResults?: Array<KubeJarvisStateInspectionResult>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -2778,8 +2778,8 @@ export interface ListClusterInspectionResultsResponse {
  */
 export interface InstallEdgeLogAgentRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -2787,16 +2787,16 @@ export interface InstallEdgeLogAgentRequest {
  */
 export interface CheckEdgeClusterCIDRRequest {
     /**
-      * 集群的vpc-id
-      */
+     * 集群的vpc-id
+     */
     VpcId: string;
     /**
-      * 集群的pod CIDR
-      */
+     * 集群的pod CIDR
+     */
     PodCIDR: string;
     /**
-      * 集群的service CIDR
-      */
+     * 集群的service CIDR
+     */
     ServiceCIDR: string;
 }
 /**
@@ -2804,62 +2804,62 @@ export interface CheckEdgeClusterCIDRRequest {
  */
 export interface CreateImageCacheRequest {
     /**
-      * 用于制作镜像缓存的容器镜像列表
-      */
+     * 用于制作镜像缓存的容器镜像列表
+     */
     Images: Array<string>;
     /**
-      * 实例所属子网Id
-      */
+     * 实例所属子网Id
+     */
     SubnetId: string;
     /**
-      * 实例所属VPC Id
-      */
+     * 实例所属VPC Id
+     */
     VpcId: string;
     /**
-      * 镜像缓存名称
-      */
+     * 镜像缓存名称
+     */
     ImageCacheName?: string;
     /**
-      * 安全组Id
-      */
+     * 安全组Id
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 镜像仓库凭证数组
-      */
+     * 镜像仓库凭证数组
+     */
     ImageRegistryCredentials?: Array<ImageRegistryCredential>;
     /**
-      * 用来绑定容器实例的已有EIP
-      */
+     * 用来绑定容器实例的已有EIP
+     */
     ExistedEipId?: string;
     /**
-      * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
-      */
+     * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
+     */
     AutoCreateEip?: boolean;
     /**
-      * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
-另外此参数和ExistedEipIds互斥
-      */
+     * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
+  另外此参数和ExistedEipIds互斥
+     */
     AutoCreateEipAttribute?: EipAttribute;
     /**
-      * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
-      */
+     * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
+     */
     ImageCacheSize?: number;
     /**
-      * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
-      */
+     * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
+     */
     RetentionDays?: number;
     /**
-      * 指定拉取镜像仓库的镜像时不校验证书。如["harbor.example.com"]。
-      */
+     * 指定拉取镜像仓库的镜像时不校验证书。如["harbor.example.com"]。
+     */
     RegistrySkipVerifyList?: Array<string>;
     /**
-      * 指定拉取镜像仓库的镜像时使用 HTTP 协议。如["harbor.example.com"]。
-      */
+     * 指定拉取镜像仓库的镜像时使用 HTTP 协议。如["harbor.example.com"]。
+     */
     RegistryHttpEndPointList?: Array<string>;
     /**
-      * 自定义制作镜像缓存过程中容器实例的宿主机上的 DNS。如：
-"nameserver 4.4.4.4\nnameserver 8.8.8.8"
-      */
+     * 自定义制作镜像缓存过程中容器实例的宿主机上的 DNS。如：
+  "nameserver 4.4.4.4\nnameserver 8.8.8.8"
+     */
     ResolveConfig?: string;
 }
 /**
@@ -2867,24 +2867,24 @@ export interface CreateImageCacheRequest {
  */
 export interface UpdateClusterVersionRequest {
     /**
-      * 集群 Id
-      */
+     * 集群 Id
+     */
     ClusterId: string;
     /**
-      * 需要升级到的版本
-      */
+     * 需要升级到的版本
+     */
     DstVersion: string;
     /**
-      * 集群自定义参数
-      */
+     * 集群自定义参数
+     */
     ExtraArgs?: ClusterExtraArgs;
     /**
-      * 可容忍的最大不可用pod数目
-      */
+     * 可容忍的最大不可用pod数目
+     */
     MaxNotReadyPercent?: number;
     /**
-      * 是否跳过预检查阶段
-      */
+     * 是否跳过预检查阶段
+     */
     SkipPreCheck?: boolean;
 }
 /**
@@ -2892,30 +2892,30 @@ export interface UpdateClusterVersionRequest {
  */
 export interface Probe {
     /**
-      * Number of seconds after the container has started before liveness probes are initiated.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Number of seconds after the container has started before liveness probes are initiated.
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InitialDelaySeconds?: number;
     /**
-      * Number of seconds after which the probe times out.
-Defaults to 1 second. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Number of seconds after which the probe times out.
+  Defaults to 1 second. Minimum value is 1.
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TimeoutSeconds?: number;
     /**
-      * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PeriodSeconds?: number;
     /**
-      * Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1.
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SuccessThreshold?: number;
     /**
-      * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailureThreshold?: number;
 }
 /**
@@ -2923,14 +2923,14 @@ Defaults to 1 second. Minimum value is 1.
  */
 export interface NodeCountSummary {
     /**
-      * 手动管理的节点
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 手动管理的节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ManuallyAdded: ManuallyAdded;
     /**
-      * 自动管理的节点
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动管理的节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoscalingAdded: AutoscalingAdded;
 }
 /**
@@ -2938,79 +2938,79 @@ export interface NodeCountSummary {
  */
 export interface EdgeCluster {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * Vpc Id
-      */
+     * Vpc Id
+     */
     VpcId: string;
     /**
-      * 集群pod cidr
-      */
+     * 集群pod cidr
+     */
     PodCIDR: string;
     /**
-      * 集群 service cidr
-      */
+     * 集群 service cidr
+     */
     ServiceCIDR: string;
     /**
-      * k8s 版本号
-      */
+     * k8s 版本号
+     */
     K8SVersion: string;
     /**
-      * 集群状态
-      */
+     * 集群状态
+     */
     Status?: string;
     /**
-      * 集群描述信息
-      */
+     * 集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * 集群创建时间
-      */
+     * 集群创建时间
+     */
     CreatedTime?: string;
     /**
-      * 边缘集群版本
-      */
+     * 边缘集群版本
+     */
     EdgeClusterVersion?: string;
     /**
-      * 节点最大Pod数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点最大Pod数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MaxNodePodNum?: number;
     /**
-      * 集群高级设置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群高级设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterAdvancedSettings?: EdgeClusterAdvancedSettings;
     /**
-      * 边缘容器集群级别
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘容器集群级别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Level?: string;
     /**
-      * 是否支持自动提升集群配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否支持自动提升集群配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoUpgradeClusterLevel?: boolean;
     /**
-      * 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChargeType?: string;
     /**
-      * 边缘集群组件的版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘集群组件的版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EdgeVersion?: string;
     /**
-      * 集群绑定的云标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群绑定的云标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagSpecification?: TagSpecification;
 }
 /**
@@ -3018,12 +3018,12 @@ export interface EdgeCluster {
  */
 export interface DescribeClusterNodePoolDetailResponse {
     /**
-      * 节点池详情
-      */
+     * 节点池详情
+     */
     NodePool?: NodePool;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3031,12 +3031,12 @@ export interface DescribeClusterNodePoolDetailResponse {
  */
 export interface DescribeEKSContainerInstanceEventRequest {
     /**
-      * 容器实例id
-      */
+     * 容器实例id
+     */
     EksCiId: string;
     /**
-      * 最大事件数量。默认为50，最大取值100。
-      */
+     * 最大事件数量。默认为50，最大取值100。
+     */
     Limit?: number;
 }
 /**
@@ -3044,8 +3044,8 @@ export interface DescribeEKSContainerInstanceEventRequest {
  */
 export interface ScaleOutClusterMasterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3053,16 +3053,16 @@ export interface ScaleOutClusterMasterResponse {
  */
 export interface Toleration {
     /**
-      * 容忍应用到的 taint key
-      */
+     * 容忍应用到的 taint key
+     */
     Key?: string;
     /**
-      * 键与值的关系
-      */
+     * 键与值的关系
+     */
     Operator?: string;
     /**
-      * 要匹配的污点效果
-      */
+     * 要匹配的污点效果
+     */
     Effect?: string;
 }
 /**
@@ -3070,12 +3070,12 @@ export interface Toleration {
  */
 export interface CreateEKSContainerInstancesResponse {
     /**
-      * EKS Container Instance Id集合，格式为eksci-xxx，是容器实例的唯一标识。
-      */
+     * EKS Container Instance Id集合，格式为eksci-xxx，是容器实例的唯一标识。
+     */
     EksCiIds: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3083,8 +3083,8 @@ export interface CreateEKSContainerInstancesResponse {
  */
 export interface DeleteEdgeCVMInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3092,12 +3092,12 @@ export interface DeleteEdgeCVMInstancesResponse {
  */
 export interface DescribeClusterKubeconfigResponse {
     /**
-      * 子账户kubeconfig文件，可用于直接访问集群kube-apiserver
-      */
+     * 子账户kubeconfig文件，可用于直接访问集群kube-apiserver
+     */
     Kubeconfig?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3105,16 +3105,16 @@ export interface DescribeClusterKubeconfigResponse {
  */
 export interface DescribeClusterCommonNamesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 子账户列表，不可超出最大值50
-      */
+     * 子账户列表，不可超出最大值50
+     */
     SubaccountUins?: Array<string>;
     /**
-      * 角色ID列表，不可超出最大值50
-      */
+     * 角色ID列表，不可超出最大值50
+     */
     RoleIds?: Array<string>;
 }
 /**
@@ -3122,20 +3122,20 @@ export interface DescribeClusterCommonNamesRequest {
  */
 export interface NfsVolume {
     /**
-      * nfs volume 数据卷名称
-      */
+     * nfs volume 数据卷名称
+     */
     Name: string;
     /**
-      * NFS 服务器地址
-      */
+     * NFS 服务器地址
+     */
     Server: string;
     /**
-      * NFS 数据卷路径
-      */
+     * NFS 数据卷路径
+     */
     Path: string;
     /**
-      * 默认为 False
-      */
+     * 默认为 False
+     */
     ReadOnly?: boolean;
 }
 /**
@@ -3143,73 +3143,73 @@ export interface NfsVolume {
  */
 export interface PrometheusNotification {
     /**
-      * 是否启用
-      */
+     * 是否启用
+     */
     Enabled: boolean;
     /**
-      * 收敛时间
-      */
+     * 收敛时间
+     */
     RepeatInterval: string;
     /**
-      * 生效起始时间
-      */
+     * 生效起始时间
+     */
     TimeRangeStart: string;
     /**
-      * 生效结束时间
-      */
+     * 生效结束时间
+     */
     TimeRangeEnd: string;
     /**
-      * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
-分别代表：短信、邮件、电话、微信
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+  分别代表：短信、邮件、电话、微信
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NotifyWay?: Array<string>;
     /**
-      * 告警接收组（用户组）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警接收组（用户组）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReceiverGroups?: Array<number>;
     /**
-      * 电话告警顺序。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警顺序。
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneNotifyOrder?: Array<number>;
     /**
-      * 电话告警次数。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警次数。
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneCircleTimes?: number;
     /**
-      * 电话告警轮内间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警轮内间隔。单位：秒
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneInnerInterval?: number;
     /**
-      * 电话告警轮外间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警轮外间隔。单位：秒
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneCircleInterval?: number;
     /**
-      * 电话告警触达通知
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警触达通知
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneArriveNotice?: boolean;
     /**
-      * 通道类型，默认为amp，支持以下
-amp
-webhook
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 通道类型，默认为amp，支持以下
+  amp
+  webhook
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Type?: string;
     /**
-      * 如果Type为webhook, 则该字段为必填项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果Type为webhook, 则该字段为必填项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     WebHook?: string;
 }
 /**
@@ -3217,32 +3217,32 @@ webhook
  */
 export interface ClusterCondition {
     /**
-      * 集群创建过程类型
-      */
+     * 集群创建过程类型
+     */
     Type: string;
     /**
-      * 集群创建过程状态
-      */
+     * 集群创建过程状态
+     */
     Status: string;
     /**
-      * 最后一次探测到该状态的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后一次探测到该状态的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastProbeTime: string;
     /**
-      * 最后一次转换到该过程的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后一次转换到该过程的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastTransitionTime: string;
     /**
-      * 转换到该过程的简明原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 转换到该过程的简明原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Reason: string;
     /**
-      * 转换到该过程的更多信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 转换到该过程的更多信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message: string;
 }
 /**
@@ -3250,42 +3250,42 @@ export interface ClusterCondition {
  */
 export interface BackupStorageLocation {
     /**
-      * 备份仓库名称
-      */
+     * 备份仓库名称
+     */
     Name?: string;
     /**
-      * 存储仓库所属地域，比如COS广州(ap-guangzhou)
-      */
+     * 存储仓库所属地域，比如COS广州(ap-guangzhou)
+     */
     StorageRegion?: string;
     /**
-      * 存储服务提供方，默认腾讯云
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存储服务提供方，默认腾讯云
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Provider?: string;
     /**
-      * 对象存储桶名称，如果是COS必须是tke-backup-前缀开头
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 对象存储桶名称，如果是COS必须是tke-backup-前缀开头
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Bucket?: string;
     /**
-      * 对象存储桶路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 对象存储桶路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Path?: string;
     /**
-      * 存储仓库状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存储仓库状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     State?: string;
     /**
-      * 详细状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 详细状态信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Message?: string;
     /**
-      * 最后一次检查时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后一次检查时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastValidationTime?: string;
 }
 /**
@@ -3293,95 +3293,95 @@ export interface BackupStorageLocation {
  */
 export interface NodePool {
     /**
-      * NodePoolId 资源池id
-      */
+     * NodePoolId 资源池id
+     */
     NodePoolId: string;
     /**
-      * Name 资源池名称
-      */
+     * Name 资源池名称
+     */
     Name: string;
     /**
-      * ClusterInstanceId 集群实例id
-      */
+     * ClusterInstanceId 集群实例id
+     */
     ClusterInstanceId: string;
     /**
-      * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
-      */
+     * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
+     */
     LifeState: string;
     /**
-      * LaunchConfigurationId 配置
-      */
+     * LaunchConfigurationId 配置
+     */
     LaunchConfigurationId: string;
     /**
-      * AutoscalingGroupId 分组id
-      */
+     * AutoscalingGroupId 分组id
+     */
     AutoscalingGroupId: string;
     /**
-      * Labels 标签
-      */
+     * Labels 标签
+     */
     Labels: Array<Label>;
     /**
-      * Taints 污点标记
-      */
+     * Taints 污点标记
+     */
     Taints: Array<Taint>;
     /**
-      * NodeCountSummary 节点列表
-      */
+     * NodeCountSummary 节点列表
+     */
     NodeCountSummary: NodeCountSummary;
     /**
-      * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 状态信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoscalingGroupStatus: string;
     /**
-      * 最大节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最大节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MaxNodesNum: number;
     /**
-      * 最小节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最小节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MinNodesNum: number;
     /**
-      * 期望的节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 期望的节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DesiredNodesNum: number;
     /**
-      * 节点池osName
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点池osName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodePoolOs: string;
     /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OsCustomizeType: string;
     /**
-      * 镜像id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageId: string;
     /**
-      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DesiredPodNum: number;
     /**
-      * 用户自定义脚本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用户自定义脚本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UserScript: string;
     /**
-      * 资源标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 资源标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tags: Array<Tag>;
     /**
-      * 删除保护开关
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 删除保护开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeletionProtection: boolean;
 }
 /**
@@ -3389,16 +3389,16 @@ export interface NodePool {
  */
 export interface DescribeEKSClustersResponse {
     /**
-      * 集群总个数
-      */
+     * 集群总个数
+     */
     TotalCount?: number;
     /**
-      * 集群信息列表
-      */
+     * 集群信息列表
+     */
     Clusters?: Array<EksCluster>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3406,34 +3406,34 @@ export interface DescribeEKSClustersResponse {
  */
 export interface VolumeMount {
     /**
-      * volume名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * volume名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 挂载路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 挂载路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MountPath: string;
     /**
-      * 是否只读
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否只读
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReadOnly?: boolean;
     /**
-      * 子路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 子路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubPath?: string;
     /**
-      * 传播挂载方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 传播挂载方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MountPropagation?: string;
     /**
-      * 子路径表达式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 子路径表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubPathExpr?: string;
 }
 /**
@@ -3441,16 +3441,16 @@ export interface VolumeMount {
  */
 export interface DeleteClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
-      */
+     * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
+     */
     InstanceDeleteMode: string;
     /**
-      * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
-      */
+     * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
+     */
     ResourceDeleteOptions?: Array<ResourceDeleteOption>;
 }
 /**
@@ -3458,16 +3458,16 @@ export interface DeleteClusterRequest {
  */
 export interface DescribeTKEEdgeClustersResponse {
     /**
-      * 集群总个数
-      */
+     * 集群总个数
+     */
     TotalCount?: number;
     /**
-      * 集群信息列表
-      */
+     * 集群信息列表
+     */
     Clusters?: Array<EdgeCluster>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3475,14 +3475,14 @@ export interface DescribeTKEEdgeClustersResponse {
  */
 export interface KubeJarvisStateResultObjInfo {
     /**
-      * 对象属性名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 对象属性名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PropertyName?: string;
     /**
-      * 对象属性值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 对象属性值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PropertyValue?: string;
 }
 /**
@@ -3490,8 +3490,8 @@ export interface KubeJarvisStateResultObjInfo {
  */
 export interface DescribeAvailableTKEEdgeVersionRequest {
     /**
-      * 填写ClusterId获取当前集群各个组件版本和最新版本
-      */
+     * 填写ClusterId获取当前集群各个组件版本和最新版本
+     */
     ClusterId?: string;
 }
 /**
@@ -3499,15 +3499,15 @@ export interface DescribeAvailableTKEEdgeVersionRequest {
  */
 export interface DescribeClusterInspectionResultsOverviewRequest {
     /**
-      * Array of String	目标集群列表，为空查询用户所有集群
-
-      */
+     * Array of String	目标集群列表，为空查询用户所有集群
+  
+     */
     ClusterIds?: Array<string>;
     /**
-      * 聚合字段信息，概览结果按照 GroupBy 信息聚合后返回，可选参数：
-catalogue.first：按一级分类聚合
-catalogue.second：按二级分类聚合
-      */
+     * 聚合字段信息，概览结果按照 GroupBy 信息聚合后返回，可选参数：
+  catalogue.first：按一级分类聚合
+  catalogue.second：按二级分类聚合
+     */
     GroupBy?: Array<string>;
 }
 /**
@@ -3515,12 +3515,12 @@ catalogue.second：按二级分类聚合
  */
 export interface ModifyPrometheusAlertPolicyRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警配置
-      */
+     * 告警配置
+     */
     AlertRule: PrometheusAlertPolicyItem;
 }
 /**
@@ -3528,32 +3528,32 @@ export interface ModifyPrometheusAlertPolicyRequest {
  */
 export interface ForwardApplicationRequestV3Request {
     /**
-      * 请求集群addon的访问
-      */
+     * 请求集群addon的访问
+     */
     Method: string;
     /**
-      * 请求集群addon的路径
-      */
+     * 请求集群addon的路径
+     */
     Path: string;
     /**
-      * 请求集群addon后允许接收的数据格式
-      */
+     * 请求集群addon后允许接收的数据格式
+     */
     Accept?: string;
     /**
-      * 请求集群addon的数据格式
-      */
+     * 请求集群addon的数据格式
+     */
     ContentType?: string;
     /**
-      * 请求集群addon的数据
-      */
+     * 请求集群addon的数据
+     */
     RequestBody?: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName?: string;
     /**
-      * 是否编码请求内容
-      */
+     * 是否编码请求内容
+     */
     EncodedBody?: string;
 }
 /**
@@ -3561,36 +3561,36 @@ export interface ForwardApplicationRequestV3Request {
  */
 export interface PrometheusAlertHistoryItem {
     /**
-      * 告警名称
-      */
+     * 告警名称
+     */
     RuleName: string;
     /**
-      * 告警开始时间
-      */
+     * 告警开始时间
+     */
     StartTime: string;
     /**
-      * 告警内容
-      */
+     * 告警内容
+     */
     Content: string;
     /**
-      * 告警状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     State?: string;
     /**
-      * 触发的规则名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 触发的规则名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RuleItem?: string;
     /**
-      * 告警渠道的id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警渠道的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TopicId?: string;
     /**
-      * 告警渠道的名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警渠道的名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TopicName?: string;
 }
 /**
@@ -3598,42 +3598,42 @@ export interface PrometheusAlertHistoryItem {
  */
 export interface PrometheusTemplateSyncTarget {
     /**
-      * 目标所在地域
-      */
+     * 目标所在地域
+     */
     Region: string;
     /**
-      * 目标实例
-      */
+     * 目标实例
+     */
     InstanceId: string;
     /**
-      * 集群id，只有当采集模板的Level为cluster的时候需要
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群id，只有当采集模板的Level为cluster的时候需要
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
     /**
-      * 最后一次同步时间， 用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后一次同步时间， 用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SyncTime?: string;
     /**
-      * 当前使用的模板版本，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前使用的模板版本，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Version?: string;
     /**
-      * 集群类型，只有当采集模板的Level为cluster的时候需要
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群类型，只有当采集模板的Level为cluster的时候需要
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterType?: string;
     /**
-      * 用于出参，实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用于出参，实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceName?: string;
     /**
-      * 用于出参，集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用于出参，集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterName?: string;
 }
 /**
@@ -3641,20 +3641,20 @@ export interface PrometheusTemplateSyncTarget {
  */
 export interface DescribePrometheusTemplatesRequest {
     /**
-      * 模糊过滤条件，支持
-Level 按模板级别过滤
-Name 按名称过滤
-Describe 按描述过滤
-ID 按templateId过滤
-      */
+     * 模糊过滤条件，支持
+  Level 按模板级别过滤
+  Name 按名称过滤
+  Describe 按描述过滤
+  ID 按templateId过滤
+     */
     Filters?: Array<Filter>;
     /**
-      * 分页偏移
-      */
+     * 分页偏移
+     */
     Offset?: number;
     /**
-      * 总数限制
-      */
+     * 总数限制
+     */
     Limit?: number;
 }
 /**
@@ -3662,17 +3662,17 @@ ID 按templateId过滤
  */
 export interface DescribePrometheusAlertPolicyResponse {
     /**
-      * 告警详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertRules: Array<PrometheusAlertPolicyItem>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3680,8 +3680,8 @@ export interface DescribePrometheusAlertPolicyResponse {
  */
 export interface EnableVpcCniNetworkTypeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3689,16 +3689,16 @@ export interface EnableVpcCniNetworkTypeResponse {
  */
 export interface DescribePrometheusAlertRuleResponse {
     /**
-      * 告警详情
-      */
+     * 告警详情
+     */
     AlertRules?: Array<PrometheusAlertRuleDetail>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3706,16 +3706,16 @@ export interface DescribePrometheusAlertRuleResponse {
  */
 export interface EksCiRegionInfo {
     /**
-      * 地域别名，形如gz
-      */
+     * 地域别名，形如gz
+     */
     Alias: string;
     /**
-      * 地域名，形如ap-guangzhou
-      */
+     * 地域名，形如ap-guangzhou
+     */
     RegionName: string;
     /**
-      * 地域ID
-      */
+     * 地域ID
+     */
     RegionId: number;
 }
 /**
@@ -3723,20 +3723,20 @@ export interface EksCiRegionInfo {
  */
 export interface DescribeEdgeClusterInstancesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterID: string;
     /**
-      * 查询总数
-      */
+     * 查询总数
+     */
     Limit: number;
     /**
-      * 偏移量
-      */
+     * 偏移量
+     */
     Offset: number;
     /**
-      * 过滤条件，仅支持NodeName过滤
-      */
+     * 过滤条件，仅支持NodeName过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -3744,12 +3744,12 @@ export interface DescribeEdgeClusterInstancesRequest {
  */
 export interface DisableClusterAuditRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
-      */
+     * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+     */
     DeleteLogSetAndTopic?: boolean;
 }
 /**
@@ -3757,16 +3757,16 @@ export interface DisableClusterAuditRequest {
  */
 export interface DescribePrometheusRecordRulesResponse {
     /**
-      * 聚合规则
-      */
+     * 聚合规则
+     */
     Records: Array<PrometheusRecordRuleYamlItem>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3774,13 +3774,13 @@ export interface DescribePrometheusRecordRulesResponse {
  */
 export interface DescribePrometheusGlobalNotificationResponse {
     /**
-      * 全局告警通知渠道
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 全局告警通知渠道
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Notification: PrometheusNotificationItem;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3788,19 +3788,19 @@ export interface DescribePrometheusGlobalNotificationResponse {
  */
 export interface HttpGet {
     /**
-      * HttpGet检测的路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HttpGet检测的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Path: string;
     /**
-      * HttpGet检测的端口号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HttpGet检测的端口号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Port: number;
     /**
-      * HTTP or HTTPS
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HTTP or HTTPS
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Scheme: string;
 }
 /**
@@ -3808,16 +3808,16 @@ export interface HttpGet {
  */
 export interface ResourceUsage {
     /**
-      * 资源类型
-      */
+     * 资源类型
+     */
     Name: string;
     /**
-      * 资源使用量
-      */
+     * 资源使用量
+     */
     Usage: number;
     /**
-      * 资源使用详情
-      */
+     * 资源使用详情
+     */
     Details: Array<ResourceUsageDetail>;
 }
 /**
@@ -3825,24 +3825,24 @@ export interface ResourceUsage {
  */
 export interface CreateClusterVirtualNodeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 虚拟节点所属节点池
-      */
+     * 虚拟节点所属节点池
+     */
     NodePoolId: string;
     /**
-      * 虚拟节点所属子网
-      */
+     * 虚拟节点所属子网
+     */
     SubnetId?: string;
     /**
-      * 虚拟节点子网ID列表，和参数SubnetId互斥
-      */
+     * 虚拟节点子网ID列表，和参数SubnetId互斥
+     */
     SubnetIds?: Array<string>;
     /**
-      * 虚拟节点列表
-      */
+     * 虚拟节点列表
+     */
     VirtualNodes?: Array<VirtualNodeSpec>;
 }
 /**
@@ -3850,21 +3850,21 @@ export interface CreateClusterVirtualNodeRequest {
  */
 export interface DescribeTKEEdgeClustersRequest {
     /**
-      * 集群ID列表(为空时，
-表示获取账号下所有集群)
-      */
+     * 集群ID列表(为空时，
+  表示获取账号下所有集群)
+     */
     ClusterIds?: Array<string>;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 最大输出条数，默认20
-      */
+     * 最大输出条数，默认20
+     */
     Limit?: number;
     /**
-      * 过滤条件,当前只支持按照ClusterName和云标签进行过滤,云标签过滤格式Tags:["key1:value1","key2:value2"]
-      */
+     * 过滤条件,当前只支持按照ClusterName和云标签进行过滤,云标签过滤格式Tags:["key1:value1","key2:value2"]
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -3872,32 +3872,32 @@ export interface DescribeTKEEdgeClustersRequest {
  */
 export interface DescribePrometheusAlertHistoryRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警名称
-      */
+     * 告警名称
+     */
     RuleName?: string;
     /**
-      * 开始时间
-      */
+     * 开始时间
+     */
     StartTime?: string;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndTime?: string;
     /**
-      * label集合
-      */
+     * label集合
+     */
     Labels?: string;
     /**
-      * 分片
-      */
+     * 分片
+     */
     Offset?: number;
     /**
-      * 分片
-      */
+     * 分片
+     */
     Limit?: number;
 }
 /**
@@ -3905,18 +3905,18 @@ export interface DescribePrometheusAlertHistoryRequest {
  */
 export interface SetNodePoolNodeProtectionResponse {
     /**
-      * 成功设置的节点id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成功设置的节点id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SucceedInstanceIds: Array<string>;
     /**
-      * 没有成功设置的节点id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 没有成功设置的节点id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedInstanceIds: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3924,16 +3924,16 @@ export interface SetNodePoolNodeProtectionResponse {
  */
 export interface DeletePrometheusAlertPolicyRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警策略id列表
-      */
+     * 告警策略id列表
+     */
     AlertIds: Array<string>;
     /**
-      * 告警策略名称
-      */
+     * 告警策略名称
+     */
     Names?: Array<string>;
 }
 /**
@@ -3941,8 +3941,8 @@ export interface DeletePrometheusAlertPolicyRequest {
  */
 export interface ModifyPrometheusAgentExternalLabelsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -3950,24 +3950,24 @@ export interface ModifyPrometheusAgentExternalLabelsResponse {
  */
 export interface RollbackClusterReleaseRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 回滚版本号
-      */
+     * 回滚版本号
+     */
     Revision: number;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -3975,20 +3975,20 @@ export interface RollbackClusterReleaseRequest {
  */
 export interface DeleteClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 主机InstanceId列表
-      */
+     * 主机InstanceId列表
+     */
     InstanceIds: Array<string>;
     /**
-      * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
-      */
+     * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
+     */
     InstanceDeleteMode?: string;
     /**
-      * 是否强制删除(当节点在初始化时，可以指定参数为TRUE)
-      */
+     * 是否强制删除(当节点在初始化时，可以指定参数为TRUE)
+     */
     ForceDelete?: boolean;
 }
 /**
@@ -3996,20 +3996,20 @@ export interface DeleteClusterInstancesRequest {
  */
 export interface UpgradeNodeResetParam {
     /**
-      * 实例额外需要设置参数信息
-      */
+     * 实例额外需要设置参数信息
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
-      */
+     * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+     */
     EnhancedService?: EnhancedService;
     /**
-      * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
-      */
+     * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
+     */
     LoginSettings?: LoginSettings;
     /**
-      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
-      */
+     * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+     */
     SecurityGroupIds?: Array<string>;
 }
 /**
@@ -4017,12 +4017,12 @@ export interface UpgradeNodeResetParam {
  */
 export interface DriverVersion {
     /**
-      * GPU驱动或者CUDA的版本
-      */
+     * GPU驱动或者CUDA的版本
+     */
     Version: string;
     /**
-      * GPU驱动或者CUDA的名字
-      */
+     * GPU驱动或者CUDA的名字
+     */
     Name: string;
 }
 /**
@@ -4030,20 +4030,20 @@ export interface DriverVersion {
  */
 export interface CreateClusterInstancesRequest {
     /**
-      * 集群 ID，请填写 查询集群列表 接口中返回的 clusterId 字段
-      */
+     * 集群 ID，请填写 查询集群列表 接口中返回的 clusterId 字段
+     */
     ClusterId: string;
     /**
-      * CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
-      */
+     * CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
+     */
     RunInstancePara: string;
     /**
-      * 实例额外需要设置参数信息
-      */
+     * 实例额外需要设置参数信息
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
-      */
+     * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+     */
     SkipValidateOptions?: Array<string>;
 }
 /**
@@ -4051,8 +4051,8 @@ export interface CreateClusterInstancesRequest {
  */
 export interface DeleteBackupStorageLocationRequest {
     /**
-      * 备份仓库名称
-      */
+     * 备份仓库名称
+     */
     Name: string;
 }
 /**
@@ -4060,13 +4060,13 @@ export interface DeleteBackupStorageLocationRequest {
  */
 export interface UninstallClusterReleaseResponse {
     /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release: PendingRelease;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4074,36 +4074,36 @@ export interface UninstallClusterReleaseResponse {
  */
 export interface ClusterCIDRSettings {
     /**
-      * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
-      */
+     * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
+     */
     ClusterCIDR?: string;
     /**
-      * 是否忽略 ClusterCIDR 冲突错误, 默认不忽略
-      */
+     * 是否忽略 ClusterCIDR 冲突错误, 默认不忽略
+     */
     IgnoreClusterCIDRConflict?: boolean;
     /**
-      * 集群中每个Node上最大的Pod数量。取值范围16～256。不为2的幂值时会向上取最接近的2的幂值。
-      */
+     * 集群中每个Node上最大的Pod数量。取值范围16～256。不为2的幂值时会向上取最接近的2的幂值。
+     */
     MaxNodePodNum?: number;
     /**
-      * 集群最大的service数量。取值范围32～32768，不为2的幂值时会向上取最接近的2的幂值。默认值256
-      */
+     * 集群最大的service数量。取值范围32～32768，不为2的幂值时会向上取最接近的2的幂值。默认值256
+     */
     MaxClusterServiceNum?: number;
     /**
-      * 用于分配集群服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
-      */
+     * 用于分配集群服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
+     */
     ServiceCIDR?: string;
     /**
-      * VPC-CNI网络模式下，弹性网卡的子网Id。
-      */
+     * VPC-CNI网络模式下，弹性网卡的子网Id。
+     */
     EniSubnetIds?: Array<string>;
     /**
-      * VPC-CNI网络模式下，弹性网卡IP的回收时间，取值范围[300,15768000)
-      */
+     * VPC-CNI网络模式下，弹性网卡IP的回收时间，取值范围[300,15768000)
+     */
     ClaimExpiredSeconds?: number;
     /**
-      * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
-      */
+     * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
+     */
     IgnoreServiceCIDRConflict?: boolean;
 }
 /**
@@ -4111,16 +4111,16 @@ export interface ClusterCIDRSettings {
  */
 export interface Taint {
     /**
-      * Key
-      */
+     * Key
+     */
     Key?: string;
     /**
-      * Value
-      */
+     * Value
+     */
     Value?: string;
     /**
-      * Effect
-      */
+     * Effect
+     */
     Effect?: string;
 }
 /**
@@ -4128,16 +4128,16 @@ export interface Taint {
  */
 export interface ModifyNodePoolInstanceTypesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 机型列表
-      */
+     * 机型列表
+     */
     InstanceTypes: Array<string>;
 }
 /**
@@ -4145,16 +4145,16 @@ export interface ModifyNodePoolInstanceTypesRequest {
  */
 export interface AddClusterCIDRRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 增加的ClusterCIDR
-      */
+     * 增加的ClusterCIDR
+     */
     ClusterCIDRs: Array<string>;
     /**
-      * 是否忽略ClusterCIDR与VPC路由表的冲突
-      */
+     * 是否忽略ClusterCIDR与VPC路由表的冲突
+     */
     IgnoreClusterCIDRConflict?: boolean;
 }
 /**
@@ -4162,19 +4162,19 @@ export interface AddClusterCIDRRequest {
  */
 export interface OIDCConfigAuthenticationOptions {
     /**
-      * 创建身份提供商
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建身份提供商
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoCreateOIDCConfig?: boolean;
     /**
-      * 创建身份提供商的ClientId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建身份提供商的ClientId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoCreateClientId?: Array<string>;
     /**
-      * 创建PodIdentityWebhook组件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建PodIdentityWebhook组件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoInstallPodIdentityWebhookAddon?: boolean;
 }
 /**
@@ -4182,40 +4182,40 @@ export interface OIDCConfigAuthenticationOptions {
  */
 export interface CreateClusterRequest {
     /**
-      * 集群容器网络配置信息
-      */
+     * 集群容器网络配置信息
+     */
     ClusterCIDRSettings: ClusterCIDRSettings;
     /**
-      * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
-      */
+     * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+     */
     ClusterType: string;
     /**
-      * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。
-      */
+     * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。
+     */
     RunInstancesForNode?: Array<RunInstancesForNode>;
     /**
-      * 集群的基本配置信息
-      */
+     * 集群的基本配置信息
+     */
     ClusterBasicSettings?: ClusterBasicSettings;
     /**
-      * 集群高级配置信息
-      */
+     * 集群高级配置信息
+     */
     ClusterAdvancedSettings?: ClusterAdvancedSettings;
     /**
-      * 节点高级配置信息
-      */
+     * 节点高级配置信息
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100，不支持添加竞价实例。
-      */
+     * 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100，不支持添加竞价实例。
+     */
     ExistedInstancesForNode?: Array<ExistedInstancesForNode>;
     /**
-      * CVM类型和其对应的数据盘挂载配置信息
-      */
+     * CVM类型和其对应的数据盘挂载配置信息
+     */
     InstanceDataDiskMountSettings?: Array<InstanceDataDiskMountSetting>;
     /**
-      * 需要安装的扩展组件信息
-      */
+     * 需要安装的扩展组件信息
+     */
     ExtensionAddons?: Array<ExtensionAddon>;
 }
 /**
@@ -4223,32 +4223,32 @@ export interface CreateClusterRequest {
  */
 export interface CreateEdgeCVMInstancesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterID: string;
     /**
-      * CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
-      */
+     * CVM创建透传参数，json化字符串格式，如需要保证扩展集群节点请求幂等性需要在此参数添加ClientToken字段，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
+     */
     RunInstancePara: string;
     /**
-      * CVM所属Region
-      */
+     * CVM所属Region
+     */
     CvmRegion: string;
     /**
-      * CVM数量
-      */
+     * CVM数量
+     */
     CvmCount: number;
     /**
-      * 实例扩展信息
-      */
+     * 实例扩展信息
+     */
     External?: string;
     /**
-      * 用户自定义脚本
-      */
+     * 用户自定义脚本
+     */
     UserScript?: string;
     /**
-      * 是否开启弹性网卡功能
-      */
+     * 是否开启弹性网卡功能
+     */
     EnableEni?: boolean;
 }
 /**
@@ -4256,20 +4256,20 @@ export interface CreateEdgeCVMInstancesRequest {
  */
 export interface DescribeClusterReleaseHistoryRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用所在命名空间
-      */
+     * 应用所在命名空间
+     */
     Namespace: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -4277,16 +4277,16 @@ export interface DescribeClusterReleaseHistoryRequest {
  */
 export interface NodePoolOption {
     /**
-      * 是否加入节点池
-      */
+     * 是否加入节点池
+     */
     AddToNodePool?: boolean;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId?: string;
     /**
-      * 是否继承节点池相关配置
-      */
+     * 是否继承节点池相关配置
+     */
     InheritConfigurationFromNodePool?: boolean;
 }
 /**
@@ -4294,8 +4294,8 @@ export interface NodePoolOption {
  */
 export interface DescribeEdgeClusterExtraArgsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -4303,16 +4303,16 @@ export interface DescribeEdgeClusterExtraArgsRequest {
  */
 export interface DescribeClustersResponse {
     /**
-      * 集群总个数
-      */
+     * 集群总个数
+     */
     TotalCount: number;
     /**
-      * 集群信息列表
-      */
+     * 集群信息列表
+     */
     Clusters: Array<Cluster>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4320,8 +4320,8 @@ export interface DescribeClustersResponse {
  */
 export interface DeleteClusterVirtualNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4329,16 +4329,16 @@ export interface DeleteClusterVirtualNodeResponse {
  */
 export interface PrometheusAgentInfo {
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 备注
-      */
+     * 备注
+     */
     Describe?: string;
 }
 /**
@@ -4346,12 +4346,12 @@ export interface PrometheusAgentInfo {
  */
 export interface CreateEdgeCVMInstancesResponse {
     /**
-      * cvm id 列表
-      */
+     * cvm id 列表
+     */
     CvmIdSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4359,13 +4359,13 @@ export interface CreateEdgeCVMInstancesResponse {
  */
 export interface DescribeEdgeLogSwitchesResponse {
     /**
-      * 集群日志开关集合
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群日志开关集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SwitchSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4373,8 +4373,8 @@ export interface DescribeEdgeLogSwitchesResponse {
  */
 export interface CreatePrometheusClusterAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4382,16 +4382,16 @@ export interface CreatePrometheusClusterAgentResponse {
  */
 export interface DescribePrometheusTemplatesResponse {
     /**
-      * 模板列表
-      */
+     * 模板列表
+     */
     Templates?: Array<PrometheusTemplate>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4399,13 +4399,13 @@ export interface DescribePrometheusTemplatesResponse {
  */
 export interface UpdateEKSContainerInstanceResponse {
     /**
-      * 容器实例 ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器实例 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EksCiId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4413,12 +4413,12 @@ export interface UpdateEKSContainerInstanceResponse {
  */
 export interface DnsServerConf {
     /**
-      * 域名。空字符串表示所有域名。
-      */
+     * 域名。空字符串表示所有域名。
+     */
     Domain: string;
     /**
-      * dns 服务器地址列表。地址格式 ip:port
-      */
+     * dns 服务器地址列表。地址格式 ip:port
+     */
     DnsServers: Array<string>;
 }
 /**
@@ -4426,57 +4426,57 @@ export interface DnsServerConf {
  */
 export interface EksCluster {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * Vpc Id
-      */
+     * Vpc Id
+     */
     VpcId: string;
     /**
-      * 子网列表
-      */
+     * 子网列表
+     */
     SubnetIds: Array<string>;
     /**
-      * k8s 版本号
-      */
+     * k8s 版本号
+     */
     K8SVersion: string;
     /**
-      * 集群状态(running运行中，initializing 初始化中，failed异常)
-      */
+     * 集群状态(running运行中，initializing 初始化中，failed异常)
+     */
     Status?: string;
     /**
-      * 集群描述信息
-      */
+     * 集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * 集群创建时间
-      */
+     * 集群创建时间
+     */
     CreatedTime?: string;
     /**
-      * Service 子网Id
-      */
+     * Service 子网Id
+     */
     ServiceSubnetId?: string;
     /**
-      * 集群的自定义dns 服务器信息
-      */
+     * 集群的自定义dns 服务器信息
+     */
     DnsServers?: Array<DnsServerConf>;
     /**
-      * 将来删除集群时是否要删除cbs。默认为 FALSE
-      */
+     * 将来删除集群时是否要删除cbs。默认为 FALSE
+     */
     NeedDeleteCbs?: boolean;
     /**
-      * 是否在用户集群内开启Dns。默认为TRUE
-      */
+     * 是否在用户集群内开启Dns。默认为TRUE
+     */
     EnableVpcCoreDNS?: boolean;
     /**
-      * 标签描述列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签描述列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagSpecification?: Array<TagSpecification>;
 }
 /**
@@ -4484,8 +4484,8 @@ export interface EksCluster {
  */
 export interface ModifyNodePoolInstanceTypesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4493,18 +4493,18 @@ export interface ModifyNodePoolInstanceTypesResponse {
  */
 export interface PrometheusAlertManagerConfig {
     /**
-      * alertmanager url
-      */
+     * alertmanager url
+     */
     Url: string;
     /**
-      * alertmanager部署所在集群类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * alertmanager部署所在集群类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterType?: string;
     /**
-      * alertmanager部署所在集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * alertmanager部署所在集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
 }
 /**
@@ -4512,16 +4512,16 @@ export interface PrometheusAlertManagerConfig {
  */
 export interface GetClusterLevelPriceResponse {
     /**
-      * 询价结果，单位：分，打折后
-      */
+     * 询价结果，单位：分，打折后
+     */
     Cost: number;
     /**
-      * 询价结果，单位：分，折扣前
-      */
+     * 询价结果，单位：分，折扣前
+     */
     TotalCost: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4529,24 +4529,24 @@ export interface GetClusterLevelPriceResponse {
  */
 export interface DescribeResourceUsageResponse {
     /**
-      * CRD使用量
-      */
+     * CRD使用量
+     */
     CRDUsage: ResourceUsage;
     /**
-      * Pod使用量
-      */
+     * Pod使用量
+     */
     PodUsage: number;
     /**
-      * ConfigMap使用量
-      */
+     * ConfigMap使用量
+     */
     ConfigMapUsage: number;
     /**
-      * 其他资源使用量
-      */
+     * 其他资源使用量
+     */
     OtherUsage: ResourceUsage;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4554,14 +4554,14 @@ export interface DescribeResourceUsageResponse {
  */
 export interface EdgeClusterInternalLB {
     /**
-      * 是否开启内网访问LB
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启内网访问LB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Enabled: boolean;
     /**
-      * 内网访问LB关联的子网Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 内网访问LB关联的子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubnetId?: Array<string>;
 }
 /**
@@ -4569,16 +4569,16 @@ export interface EdgeClusterInternalLB {
  */
 export interface DescribeClusterRoutesResponse {
     /**
-      * 符合条件的实例数量。
-      */
+     * 符合条件的实例数量。
+     */
     TotalCount?: number;
     /**
-      * 集群路由对象。
-      */
+     * 集群路由对象。
+     */
     RouteSet?: Array<RouteInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4586,12 +4586,12 @@ export interface DescribeClusterRoutesResponse {
  */
 export interface DescribeAvailableClusterVersionRequest {
     /**
-      * 集群 Id
-      */
+     * 集群 Id
+     */
     ClusterId?: string;
     /**
-      * 集群 Id 列表
-      */
+     * 集群 Id 列表
+     */
     ClusterIds?: Array<string>;
 }
 /**
@@ -4599,13 +4599,13 @@ export interface DescribeAvailableClusterVersionRequest {
  */
 export interface UpgradeClusterReleaseResponse {
     /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release?: PendingRelease;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4613,21 +4613,21 @@ export interface UpgradeClusterReleaseResponse {
  */
 export interface DescribePrometheusAlertPolicyRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Offset?: number;
     /**
-      * 分页
-      */
+     * 分页
+     */
     Limit?: number;
     /**
-      * 过滤
-支持ID，Name
-      */
+     * 过滤
+  支持ID，Name
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -4635,8 +4635,8 @@ export interface DescribePrometheusAlertPolicyRequest {
  */
 export interface DeleteClusterAsGroupsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4644,34 +4644,34 @@ export interface DeleteClusterAsGroupsResponse {
  */
 export interface RegionInstance {
     /**
-      * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RegionName: string;
     /**
-      * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RegionId: number;
     /**
-      * 地域状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 地域特性开关(按照JSON的形式返回所有属性)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域特性开关(按照JSON的形式返回所有属性)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FeatureGates: string;
     /**
-      * 地域简称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域简称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Alias: string;
     /**
-      * 地域白名单
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域白名单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Remark: string;
 }
 /**
@@ -4679,16 +4679,16 @@ export interface RegionInstance {
  */
 export interface DescribePrometheusConfigRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
 }
 /**
@@ -4696,8 +4696,8 @@ export interface DescribePrometheusConfigRequest {
  */
 export interface DescribeEdgeLogSwitchesRequest {
     /**
-      * 集群ID列表
-      */
+     * 集群ID列表
+     */
     ClusterIds: Array<string>;
 }
 /**
@@ -4705,8 +4705,8 @@ export interface DescribeEdgeLogSwitchesRequest {
  */
 export interface DeletePrometheusTemplateRequest {
     /**
-      * 模板id
-      */
+     * 模板id
+     */
     TemplateId: string;
 }
 /**
@@ -4714,8 +4714,8 @@ export interface DeletePrometheusTemplateRequest {
  */
 export interface DeletePrometheusRecordRuleYamlResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4723,13 +4723,13 @@ export interface DeletePrometheusRecordRuleYamlResponse {
  */
 export interface DescribePrometheusTempSyncResponse {
     /**
-      * 同步目标详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 同步目标详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Targets: Array<PrometheusTemplateSyncTarget>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4737,8 +4737,8 @@ export interface DescribePrometheusTempSyncResponse {
  */
 export interface CreatePrometheusConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4746,18 +4746,18 @@ export interface CreatePrometheusConfigResponse {
  */
 export interface DescribeClusterEndpointStatusResponse {
     /**
-      * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status?: string;
     /**
-      * 开启访问入口失败信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 开启访问入口失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ErrorMsg?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4765,8 +4765,8 @@ export interface DescribeClusterEndpointStatusResponse {
  */
 export interface RunAutomationServiceEnabled {
     /**
-      * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
-      */
+     * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+     */
     Enabled?: boolean;
 }
 /**
@@ -4774,16 +4774,16 @@ export interface RunAutomationServiceEnabled {
  */
 export interface DescribeExternalClusterSpecResponse {
     /**
-      * 导入第三方集群YAML定义
-      */
+     * 导入第三方集群YAML定义
+     */
     Spec: string;
     /**
-      * agent.yaml文件过期时间字符串，时区UTC
-      */
+     * agent.yaml文件过期时间字符串，时区UTC
+     */
     Expiration: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4791,28 +4791,28 @@ export interface DescribeExternalClusterSpecResponse {
  */
 export interface AddExistedInstancesResponse {
     /**
-      * 失败的节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 失败的节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedInstanceIds?: Array<string>;
     /**
-      * 成功的节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 成功的节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SuccInstanceIds?: Array<string>;
     /**
-      * 超时未返回出来节点的ID(可能失败，也可能成功)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 超时未返回出来节点的ID(可能失败，也可能成功)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TimeoutInstanceIds?: Array<string>;
     /**
-      * 失败的节点的失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 失败的节点的失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedReasons?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4820,8 +4820,8 @@ export interface AddExistedInstancesResponse {
  */
 export interface RestartEKSContainerInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4829,8 +4829,8 @@ export interface RestartEKSContainerInstancesResponse {
  */
 export interface DisableClusterDeletionProtectionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4838,28 +4838,28 @@ export interface DisableClusterDeletionProtectionResponse {
  */
 export interface EnableVpcCniNetworkTypeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 开启vpc-cni的模式，tke-route-eni开启的是策略路由模式，tke-direct-eni开启的是独立网卡模式
-      */
+     * 开启vpc-cni的模式，tke-route-eni开启的是策略路由模式，tke-direct-eni开启的是独立网卡模式
+     */
     VpcCniType: string;
     /**
-      * 是否开启固定IP模式
-      */
+     * 是否开启固定IP模式
+     */
     EnableStaticIp: boolean;
     /**
-      * 使用的容器子网
-      */
+     * 使用的容器子网
+     */
     Subnets: Array<string>;
     /**
-      * 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。
-      */
+     * 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。
+     */
     ExpiredSeconds?: number;
     /**
-      * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
-      */
+     * 是否同步添加 vpc 网段到 ip-masq-agent-config 的 NonMasqueradeCIDRs 字段，默认 false 会同步添加
+     */
     SkipAddingNonMasqueradeCIDRs?: boolean;
 }
 /**
@@ -4867,72 +4867,72 @@ export interface EnableVpcCniNetworkTypeRequest {
  */
 export interface Container {
     /**
-      * 镜像
-      */
+     * 镜像
+     */
     Image: string;
     /**
-      * 容器名
-      */
+     * 容器名
+     */
     Name: string;
     /**
-      * 容器启动命令
-      */
+     * 容器启动命令
+     */
     Commands?: Array<string>;
     /**
-      * 容器启动参数
-      */
+     * 容器启动参数
+     */
     Args?: Array<string>;
     /**
-      * 容器内操作系统的环境变量
-      */
+     * 容器内操作系统的环境变量
+     */
     EnvironmentVars?: Array<EnvironmentVariable>;
     /**
-      * CPU，制改容器最多可使用的核数，该值不可超过容器实例的总核数。单位：核。
-      */
+     * CPU，制改容器最多可使用的核数，该值不可超过容器实例的总核数。单位：核。
+     */
     Cpu?: number;
     /**
-      * 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB
-      */
+     * 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB
+     */
     Memory?: number;
     /**
-      * 数据卷挂载信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数据卷挂载信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VolumeMounts?: Array<VolumeMount>;
     /**
-      * 当前状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CurrentState?: ContainerState;
     /**
-      * 重启次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 重启次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RestartCount?: number;
     /**
-      * 容器工作目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器工作目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     WorkingDir?: string;
     /**
-      * 存活探针
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 存活探针
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LivenessProbe?: LivenessOrReadinessProbe;
     /**
-      * 就绪探针
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 就绪探针
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReadinessProbe?: LivenessOrReadinessProbe;
     /**
-      * Gpu限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Gpu限制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuLimit?: number;
     /**
-      * 容器的安全上下文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器的安全上下文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SecurityContext?: SecurityContext;
 }
 /**
@@ -4940,33 +4940,33 @@ export interface Container {
  */
 export interface CreateClusterEndpointRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群端口所在的子网ID  (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)
-      */
+     * 集群端口所在的子网ID  (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)
+     */
     SubnetId?: string;
     /**
-      * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
-      */
+     * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+     */
     IsExtranet?: boolean;
     /**
-      * 设置域名
-      */
+     * 设置域名
+     */
     Domain?: string;
     /**
-      * 使用的安全组，只有外网访问需要传递（开启外网访问时必传）
-      */
+     * 使用的安全组，只有外网访问需要传递（开启外网访问时必传）
+     */
     SecurityGroup?: string;
     /**
-      * 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}。
-各个参数意义：
-InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。
-InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。
-VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
-BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE。
-      */
+     * 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}。
+  各个参数意义：
+  InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。
+  InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。
+  VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
+  BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE。
+     */
     ExtensiveParameters?: string;
 }
 /**
@@ -4974,8 +4974,8 @@ BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式
  */
 export interface DeletePrometheusClusterAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -4983,42 +4983,42 @@ export interface DeletePrometheusClusterAgentResponse {
  */
 export interface DescribePrometheusInstanceResponse {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId?: string;
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     Name?: string;
     /**
-      * 私有网络id
-      */
+     * 私有网络id
+     */
     VpcId?: string;
     /**
-      * 子网id
-      */
+     * 子网id
+     */
     SubnetId?: string;
     /**
-      * cos桶名称
-      */
+     * cos桶名称
+     */
     COSBucket?: string;
     /**
-      * 数据查询地址
-      */
+     * 数据查询地址
+     */
     QueryAddress?: string;
     /**
-      * 实例中grafana相关的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例中grafana相关的信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Grafana?: PrometheusGrafanaInfo;
     /**
-      * 用户自定义alertmanager
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用户自定义alertmanager
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertManagerUrl?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5026,14 +5026,14 @@ export interface DescribePrometheusInstanceResponse {
  */
 export interface Capabilities {
     /**
-      * 启用安全能力项列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 启用安全能力项列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Add?: Array<string>;
     /**
-      * 禁用安全能力向列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 禁用安全能力向列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Drop?: Array<string>;
 }
 /**
@@ -5041,56 +5041,56 @@ export interface Capabilities {
  */
 export interface UpdateTKEEdgeClusterRequest {
     /**
-      * 边缘计算集群ID
-      */
+     * 边缘计算集群ID
+     */
     ClusterId: string;
     /**
-      * 边缘计算集群名称
-      */
+     * 边缘计算集群名称
+     */
     ClusterName?: string;
     /**
-      * 边缘计算集群描述信息
-      */
+     * 边缘计算集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * 边缘计算集群的pod cidr
-      */
+     * 边缘计算集群的pod cidr
+     */
     PodCIDR?: string;
     /**
-      * 边缘计算集群的service cidr
-      */
+     * 边缘计算集群的service cidr
+     */
     ServiceCIDR?: string;
     /**
-      * 边缘计算集群公网访问LB信息
-      */
+     * 边缘计算集群公网访问LB信息
+     */
     PublicLB?: EdgeClusterPublicLB;
     /**
-      * 边缘计算集群内网访问LB信息
-      */
+     * 边缘计算集群内网访问LB信息
+     */
     InternalLB?: EdgeClusterInternalLB;
     /**
-      * 边缘计算集群的CoreDns部署信息
-      */
+     * 边缘计算集群的CoreDns部署信息
+     */
     CoreDns?: string;
     /**
-      * 边缘计算集群的健康检查多地域部署信息
-      */
+     * 边缘计算集群的健康检查多地域部署信息
+     */
     HealthRegion?: string;
     /**
-      * 边缘计算集群的健康检查部署信息
-      */
+     * 边缘计算集群的健康检查部署信息
+     */
     Health?: string;
     /**
-      * 边缘计算集群的GridDaemon部署信息
-      */
+     * 边缘计算集群的GridDaemon部署信息
+     */
     GridDaemon?: string;
     /**
-      * 边缘集群开启自动升配
-      */
+     * 边缘集群开启自动升配
+     */
     AutoUpgradeClusterLevel?: boolean;
     /**
-      * 边缘集群的集群规模
-      */
+     * 边缘集群的集群规模
+     */
     ClusterLevel?: string;
 }
 /**
@@ -5098,12 +5098,12 @@ export interface UpdateTKEEdgeClusterRequest {
  */
 export interface DescribeTKEEdgeExternalKubeconfigResponse {
     /**
-      * kubeconfig文件内容
-      */
+     * kubeconfig文件内容
+     */
     Kubeconfig?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5111,12 +5111,12 @@ export interface DescribeTKEEdgeExternalKubeconfigResponse {
  */
 export interface CreateClusterInstancesResponse {
     /**
-      * 节点实例ID
-      */
+     * 节点实例ID
+     */
     InstanceIdSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5124,8 +5124,8 @@ export interface CreateClusterInstancesResponse {
  */
 export interface ModifyClusterVirtualNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5133,12 +5133,12 @@ export interface ModifyClusterVirtualNodePoolResponse {
  */
 export interface InstanceUpgradeClusterStatus {
     /**
-      * pod总数
-      */
+     * pod总数
+     */
     PodTotal: number;
     /**
-      * NotReady pod总数
-      */
+     * NotReady pod总数
+     */
     NotReadyPod: number;
 }
 /**
@@ -5146,12 +5146,12 @@ export interface InstanceUpgradeClusterStatus {
  */
 export interface DescribeClusterRoutesRequest {
     /**
-      * 路由表名称。
-      */
+     * 路由表名称。
+     */
     RouteTableName: string;
     /**
-      * 过滤条件,当前只支持按照单个条件GatewayIP进行过滤（可选）
-      */
+     * 过滤条件,当前只支持按照单个条件GatewayIP进行过滤（可选）
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -5159,12 +5159,12 @@ export interface DescribeClusterRoutesRequest {
  */
 export interface DeleteECMInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterID: string;
     /**
-      * ecm id集合
-      */
+     * ecm id集合
+     */
     EcmIdSet: Array<string>;
 }
 /**
@@ -5172,37 +5172,37 @@ export interface DeleteECMInstancesRequest {
  */
 export interface ClusterLevelAttribute {
     /**
-      * 集群等级
-      */
+     * 集群等级
+     */
     Name: string;
     /**
-      * 等级名称
-      */
+     * 等级名称
+     */
     Alias: string;
     /**
-      * 节点数量
-      */
+     * 节点数量
+     */
     NodeCount: number;
     /**
-      * Pod数量
-      */
+     * Pod数量
+     */
     PodCount: number;
     /**
-      * Configmap数量
-      */
+     * Configmap数量
+     */
     ConfigMapCount: number;
     /**
-      * CRD数量
-      */
+     * CRD数量
+     */
     CRDCount: number;
     /**
-      * 是否启用
-      */
+     * 是否启用
+     */
     Enable: boolean;
     /**
-      * 其他资源数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 其他资源数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OtherCount: number;
 }
 /**
@@ -5210,8 +5210,8 @@ export interface ClusterLevelAttribute {
  */
 export interface RemoveNodeFromNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5219,20 +5219,20 @@ export interface RemoveNodeFromNodePoolResponse {
  */
 export interface SetNodePoolNodeProtectionRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 节点id
-      */
+     * 节点id
+     */
     InstanceIds: Array<string>;
     /**
-      * 节点是否需要移出保护
-      */
+     * 节点是否需要移出保护
+     */
     ProtectedFromScaleIn: boolean;
 }
 /**
@@ -5240,20 +5240,20 @@ export interface SetNodePoolNodeProtectionRequest {
  */
 export interface EnableClusterAuditRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * CLS日志集ID
-      */
+     * CLS日志集ID
+     */
     LogsetId?: string;
     /**
-      * CLS日志主题ID
-      */
+     * CLS日志主题ID
+     */
     TopicId?: string;
     /**
-      * topic所在region，默认为集群当前region
-      */
+     * topic所在region，默认为集群当前region
+     */
     TopicRegion?: string;
 }
 /**
@@ -5261,20 +5261,20 @@ export interface EnableClusterAuditRequest {
  */
 export interface CreateClusterRouteTableRequest {
     /**
-      * 路由表名称
-      */
+     * 路由表名称
+     */
     RouteTableName: string;
     /**
-      * 路由表CIDR
-      */
+     * 路由表CIDR
+     */
     RouteTableCidrBlock: string;
     /**
-      * 路由表绑定的VPC
-      */
+     * 路由表绑定的VPC
+     */
     VpcId: string;
     /**
-      * 是否忽略CIDR冲突
-      */
+     * 是否忽略CIDR冲突
+     */
     IgnoreClusterCidrConflict?: number;
 }
 /**
@@ -5282,8 +5282,8 @@ export interface CreateClusterRouteTableRequest {
  */
 export interface DisableClusterAuditResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5291,45 +5291,45 @@ export interface DisableClusterAuditResponse {
  */
 export interface DescribeClusterEndpointsResponse {
     /**
-      * 集群APIServer的CA证书
-      */
+     * 集群APIServer的CA证书
+     */
     CertificationAuthority?: string;
     /**
-      * 集群APIServer的外网访问地址
-      */
+     * 集群APIServer的外网访问地址
+     */
     ClusterExternalEndpoint?: string;
     /**
-      * 集群APIServer的内网访问地址
-      */
+     * 集群APIServer的内网访问地址
+     */
     ClusterIntranetEndpoint?: string;
     /**
-      * 集群APIServer的域名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群APIServer的域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterDomain?: string;
     /**
-      * 集群APIServer的外网访问ACL列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群APIServer的外网访问ACL列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterExternalACL?: Array<string>;
     /**
-      * 外网域名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 外网域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterExternalDomain?: string;
     /**
-      * 内网域名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 内网域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterIntranetDomain?: string;
     /**
-      * 外网安全组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 外网安全组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SecurityGroup?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5337,16 +5337,16 @@ export interface DescribeClusterEndpointsResponse {
  */
 export interface RemoveNodeFromNodePoolRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 节点id列表，一次最多支持100台
-      */
+     * 节点id列表，一次最多支持100台
+     */
     InstanceIds: Array<string>;
 }
 /**
@@ -5354,8 +5354,8 @@ export interface RemoveNodeFromNodePoolRequest {
  */
 export interface UninstallEdgeLogAgentRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -5363,24 +5363,24 @@ export interface UninstallEdgeLogAgentRequest {
  */
 export interface DescribeClusterLevelChangeRecordsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterID: string;
     /**
-      * 开始时间
-      */
+     * 开始时间
+     */
     StartAt?: string;
     /**
-      * 结束时间
-      */
+     * 结束时间
+     */
     EndAt?: string;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 最大输出条数，默认20
-      */
+     * 最大输出条数，默认20
+     */
     Limit?: number;
 }
 /**
@@ -5388,8 +5388,8 @@ export interface DescribeClusterLevelChangeRecordsRequest {
  */
 export interface UpdateClusterVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5397,28 +5397,28 @@ export interface UpdateClusterVersionResponse {
  */
 export interface InstanceUpgradePreCheckResultItem {
     /**
-      * 工作负载的命名空间
-      */
+     * 工作负载的命名空间
+     */
     Namespace: string;
     /**
-      * 工作负载类型
-      */
+     * 工作负载类型
+     */
     WorkLoadKind: string;
     /**
-      * 工作负载名称
-      */
+     * 工作负载名称
+     */
     WorkLoadName: string;
     /**
-      * 驱逐节点前工作负载running的pod数目
-      */
+     * 驱逐节点前工作负载running的pod数目
+     */
     Before: number;
     /**
-      * 驱逐节点后工作负载running的pod数目
-      */
+     * 驱逐节点后工作负载running的pod数目
+     */
     After: number;
     /**
-      * 工作负载在本节点上的pod列表
-      */
+     * 工作负载在本节点上的pod列表
+     */
     Pods: Array<string>;
 }
 /**
@@ -5426,8 +5426,8 @@ export interface InstanceUpgradePreCheckResultItem {
  */
 export interface DeleteClusterNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5435,8 +5435,8 @@ export interface DeleteClusterNodePoolResponse {
  */
 export interface DeleteImageCachesRequest {
     /**
-      * 镜像缓存Id数组
-      */
+     * 镜像缓存Id数组
+     */
     ImageCacheIds: Array<string>;
 }
 /**
@@ -5444,12 +5444,12 @@ export interface DeleteImageCachesRequest {
  */
 export interface ReleaseValues {
     /**
-      * 自定义参数原始值
-      */
+     * 自定义参数原始值
+     */
     RawOriginal: string;
     /**
-      * 自定义参数值类型
-      */
+     * 自定义参数值类型
+     */
     ValuesType: string;
 }
 /**
@@ -5457,12 +5457,12 @@ export interface ReleaseValues {
  */
 export interface CreateClusterNodePoolResponse {
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5470,12 +5470,12 @@ export interface CreateClusterNodePoolResponse {
  */
 export interface Filter {
     /**
-      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-      */
+     * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+     */
     Name: string;
     /**
-      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
-      */
+     * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+     */
     Values: Array<string>;
 }
 /**
@@ -5483,8 +5483,8 @@ export interface Filter {
  */
 export interface UpdateTKEEdgeClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5492,24 +5492,24 @@ export interface UpdateTKEEdgeClusterResponse {
  */
 export interface EipAttribute {
     /**
-      * 容器实例删除后，EIP是否释放。
-Never表示不释放，其他任意值（包括空字符串）表示释放。
-      */
+     * 容器实例删除后，EIP是否释放。
+  Never表示不释放，其他任意值（包括空字符串）表示释放。
+     */
     DeletePolicy: string;
     /**
-      * EIP线路类型。默认值：BGP。
-已开通静态单线IP白名单的用户，可选值：
-CMCC：中国移动
-CTCC：中国电信
-CUCC：中国联通
-注意：仅部分地域支持静态单线IP。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * EIP线路类型。默认值：BGP。
+  已开通静态单线IP白名单的用户，可选值：
+  CMCC：中国移动
+  CTCC：中国电信
+  CUCC：中国联通
+  注意：仅部分地域支持静态单线IP。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InternetServiceProvider?: string;
     /**
-      * EIP出带宽上限，单位：Mbps。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * EIP出带宽上限，单位：Mbps。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InternetMaxBandwidthOut?: number;
 }
 /**
@@ -5517,40 +5517,40 @@ CUCC：中国联通
  */
 export interface DescribeEKSContainerInstancesRequest {
     /**
-      * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过100
-      */
+     * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过100
+     */
     Limit?: number;
     /**
-      * 偏移量,默认0
-      */
+     * 偏移量,默认0
+     */
     Offset?: number;
     /**
-      * 过滤条件，可条件：
-(1)实例名称
-KeyName: eks-ci-name
-类型：String
-
-(2)实例状态
-KeyName: status
-类型：String
-可选值："Pending", "Running", "Succeeded", "Failed"
-
-(3)内网ip
-KeyName: private-ip
-类型：String
-
-(4)EIP地址
-KeyName: eip-address
-类型：String
-
-(5)VpcId
-KeyName: vpc-id
-类型：String
-      */
+     * 过滤条件，可条件：
+  (1)实例名称
+  KeyName: eks-ci-name
+  类型：String
+  
+  (2)实例状态
+  KeyName: status
+  类型：String
+  可选值："Pending", "Running", "Succeeded", "Failed"
+  
+  (3)内网ip
+  KeyName: private-ip
+  类型：String
+  
+  (4)EIP地址
+  KeyName: eip-address
+  类型：String
+  
+  (5)VpcId
+  KeyName: vpc-id
+  类型：String
+     */
     Filters?: Array<Filter>;
     /**
-      * 容器实例 ID 数组
-      */
+     * 容器实例 ID 数组
+     */
     EksCiIds?: Array<string>;
 }
 /**
@@ -5558,8 +5558,8 @@ KeyName: vpc-id
  */
 export interface DescribeClusterControllersRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -5567,12 +5567,12 @@ export interface DescribeClusterControllersRequest {
  */
 export interface ModifyPrometheusAlertRuleRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警配置
-      */
+     * 告警配置
+     */
     AlertRule: PrometheusAlertRuleDetail;
 }
 /**
@@ -5580,47 +5580,47 @@ export interface ModifyPrometheusAlertRuleRequest {
  */
 export interface DescribeClusterSecurityResponse {
     /**
-      * 集群的账号名称
-      */
+     * 集群的账号名称
+     */
     UserName?: string;
     /**
-      * 集群的访问密码
-      */
+     * 集群的访问密码
+     */
     Password?: string;
     /**
-      * 集群访问CA证书
-      */
+     * 集群访问CA证书
+     */
     CertificationAuthority?: string;
     /**
-      * 集群访问的地址
-      */
+     * 集群访问的地址
+     */
     ClusterExternalEndpoint?: string;
     /**
-      * 集群访问的域名
-      */
+     * 集群访问的域名
+     */
     Domain?: string;
     /**
-      * 集群Endpoint地址
-      */
+     * 集群Endpoint地址
+     */
     PgwEndpoint?: string;
     /**
-      * 集群访问策略组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群访问策略组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SecurityPolicy?: Array<string>;
     /**
-      * 集群Kubeconfig文件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群Kubeconfig文件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Kubeconfig?: string;
     /**
-      * 集群JnsGw的访问地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群JnsGw的访问地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     JnsGwEndpoint?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5628,16 +5628,16 @@ export interface DescribeClusterSecurityResponse {
  */
 export interface RouteInfo {
     /**
-      * 路由表名称。
-      */
+     * 路由表名称。
+     */
     RouteTableName: string;
     /**
-      * 目的端CIDR。
-      */
+     * 目的端CIDR。
+     */
     DestinationCidrBlock: string;
     /**
-      * 下一跳地址。
-      */
+     * 下一跳地址。
+     */
     GatewayIp: string;
 }
 /**
@@ -5645,8 +5645,8 @@ export interface RouteInfo {
  */
 export interface ModifyNodePoolDesiredCapacityAboutAsgResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5654,16 +5654,16 @@ export interface ModifyNodePoolDesiredCapacityAboutAsgResponse {
  */
 export interface CreateClusterRouteRequest {
     /**
-      * 路由表名称。
-      */
+     * 路由表名称。
+     */
     RouteTableName: string;
     /**
-      * 目的端CIDR。
-      */
+     * 目的端CIDR。
+     */
     DestinationCidrBlock: string;
     /**
-      * 下一跳地址。
-      */
+     * 下一跳地址。
+     */
     GatewayIp: string;
 }
 /**
@@ -5671,16 +5671,16 @@ export interface CreateClusterRouteRequest {
  */
 export interface ModifyClusterEndpointSPRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
-      */
+     * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+     */
     SecurityPolicies?: Array<string>;
     /**
-      * 修改外网访问安全组
-      */
+     * 修改外网访问安全组
+     */
     SecurityGroup?: string;
 }
 /**
@@ -5688,8 +5688,8 @@ export interface ModifyClusterEndpointSPRequest {
  */
 export interface DeleteClusterEndpointResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5697,47 +5697,47 @@ export interface DeleteClusterEndpointResponse {
  */
 export interface PrometheusTemplateModify {
     /**
-      * 修改名称
-      */
+     * 修改名称
+     */
     Name?: string;
     /**
-      * 修改描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 修改描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Describe?: string;
     /**
-      * 修改内容，只有当模板类型是Alert时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 修改内容，只有当模板类型是Alert时生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertRules?: Array<PrometheusAlertRule>;
     /**
-      * 当Level为instance时有效，
-模板中的聚合规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的聚合规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RecordRules?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的ServiceMonitor规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的PodMonitors规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的RawJobs规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的RawJobs规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RawJobs?: Array<PrometheusConfigItem>;
     /**
-      * 修改内容，只有当模板类型是Alert时生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 修改内容，只有当模板类型是Alert时生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertDetailRules?: Array<PrometheusAlertRuleDetail>;
 }
 /**
@@ -5745,13 +5745,13 @@ export interface PrometheusTemplateModify {
  */
 export interface RollbackClusterReleaseResponse {
     /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release: PendingRelease;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5759,12 +5759,12 @@ export interface RollbackClusterReleaseResponse {
  */
 export interface ClusterVersion {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群主版本号列表，例如1.18.4
-      */
+     * 集群主版本号列表，例如1.18.4
+     */
     Versions: Array<string>;
 }
 /**
@@ -5772,37 +5772,37 @@ export interface ClusterVersion {
  */
 export interface InstanceUpgradeProgressItem {
     /**
-      * 节点instanceID
-      */
+     * 节点instanceID
+     */
     InstanceID: string;
     /**
-      * 任务生命周期
-process 运行中
-paused 已停止
-pauing 正在停止
-done  已完成
-timeout 已超时
-aborted 已取消
-pending 还未开始
-      */
+     * 任务生命周期
+  process 运行中
+  paused 已停止
+  pauing 正在停止
+  done  已完成
+  timeout 已超时
+  aborted 已取消
+  pending 还未开始
+     */
     LifeState: string;
     /**
-      * 升级开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 升级开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartAt: string;
     /**
-      * 升级结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 升级结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndAt: string;
     /**
-      * 升级前检查结果
-      */
+     * 升级前检查结果
+     */
     CheckResult: InstanceUpgradePreCheckResult;
     /**
-      * 升级步骤详情
-      */
+     * 升级步骤详情
+     */
     Detail: Array<TaskStepInfo>;
 }
 /**
@@ -5810,8 +5810,8 @@ pending 还未开始
  */
 export interface DescribeClusterVirtualNodePoolsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -5819,8 +5819,8 @@ export interface DescribeClusterVirtualNodePoolsRequest {
  */
 export interface GetMostSuitableImageCacheRequest {
     /**
-      * 容器镜像列表
-      */
+     * 容器镜像列表
+     */
     Images: Array<string>;
 }
 /**
@@ -5828,9 +5828,9 @@ export interface GetMostSuitableImageCacheRequest {
  */
 export interface SecurityContext {
     /**
-      * 安全能力清单
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 安全能力清单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Capabilities?: Capabilities;
 }
 /**
@@ -5838,19 +5838,19 @@ export interface SecurityContext {
  */
 export interface DNSConfig {
     /**
-      * DNS 服务器IP地址列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * DNS 服务器IP地址列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Nameservers?: Array<string>;
     /**
-      * DNS搜索域列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * DNS搜索域列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Searches?: Array<string>;
     /**
-      * 对象选项列表，每个对象由name和value（可选）构成
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 对象选项列表，每个对象由name和value（可选）构成
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Options?: Array<DNSConfigOption>;
 }
 /**
@@ -5858,8 +5858,8 @@ export interface DNSConfig {
  */
 export interface ModifyPrometheusConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5867,8 +5867,8 @@ export interface ModifyPrometheusConfigResponse {
  */
 export interface DescribeTKEEdgeExternalKubeconfigRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
 }
 /**
@@ -5876,12 +5876,12 @@ export interface DescribeTKEEdgeExternalKubeconfigRequest {
  */
 export interface CreatePrometheusAlertPolicyResponse {
     /**
-      * 告警id
-      */
+     * 告警id
+     */
     Id: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5889,14 +5889,14 @@ export interface CreatePrometheusAlertPolicyResponse {
  */
 export interface DNSConfigOption {
     /**
-      * 配置项名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 配置项名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 项值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 项值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Value: string;
 }
 /**
@@ -5904,16 +5904,16 @@ export interface DNSConfigOption {
  */
 export interface DescribeClusterVirtualNodeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 节点池ID
-      */
+     * 节点池ID
+     */
     NodePoolId?: string;
     /**
-      * 节点名称
-      */
+     * 节点名称
+     */
     NodeNames?: Array<string>;
 }
 /**
@@ -5921,28 +5921,28 @@ export interface DescribeClusterVirtualNodeRequest {
  */
 export interface DescribeClusterReleasesResponse {
     /**
-      * 数量限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数量限制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Limit?: number;
     /**
-      * 偏移量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 偏移量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Offset?: number;
     /**
-      * 已安装应用列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 已安装应用列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReleaseSet?: Array<Release>;
     /**
-      * 已安装应用总数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 已安装应用总数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5950,16 +5950,16 @@ export interface DescribeClusterReleasesResponse {
  */
 export interface AddNodeToNodePoolRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 节点id
-      */
+     * 节点id
+     */
     InstanceIds: Array<string>;
 }
 /**
@@ -5967,16 +5967,16 @@ export interface AddNodeToNodePoolRequest {
  */
 export interface DescribeExternalClusterSpecRequest {
     /**
-      * 注册集群ID
-      */
+     * 注册集群ID
+     */
     ClusterId: string;
     /**
-      * 默认false 获取内网，是否获取外网版注册命令
-      */
+     * 默认false 获取内网，是否获取外网版注册命令
+     */
     IsExtranet?: boolean;
     /**
-      * 默认false 不刷新有效时间 ，true刷新有效时间
-      */
+     * 默认false 不刷新有效时间 ，true刷新有效时间
+     */
     IsRefreshExpirationTime?: boolean;
 }
 /**
@@ -5984,8 +5984,8 @@ export interface DescribeExternalClusterSpecRequest {
  */
 export interface ModifyPrometheusGlobalNotificationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -5993,20 +5993,20 @@ export interface ModifyPrometheusGlobalNotificationResponse {
  */
 export interface UninstallClusterReleaseRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -6014,21 +6014,21 @@ export interface UninstallClusterReleaseRequest {
  */
 export interface VirtualNode {
     /**
-      * 虚拟节点名称
-      */
+     * 虚拟节点名称
+     */
     Name: string;
     /**
-      * 虚拟节点所属子网
-      */
+     * 虚拟节点所属子网
+     */
     SubnetId: string;
     /**
-      * 虚拟节点状态
-      */
+     * 虚拟节点状态
+     */
     Phase: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreatedTime: string;
 }
 /**
@@ -6036,12 +6036,12 @@ export interface VirtualNode {
  */
 export interface ForwardTKEEdgeApplicationRequestV3Response {
     /**
-      * 请求集群addon后返回的数据
-      */
+     * 请求集群addon后返回的数据
+     */
     ResponseBody: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6049,42 +6049,42 @@ export interface ForwardTKEEdgeApplicationRequestV3Response {
  */
 export interface CreateClusterVirtualNodePoolRequest {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
     /**
-      * 节点池名称
-      */
+     * 节点池名称
+     */
     Name: string;
     /**
-      * 子网ID列表
-      */
+     * 子网ID列表
+     */
     SubnetIds?: Array<string>;
     /**
-      * 安全组ID列表
-      */
+     * 安全组ID列表
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 虚拟节点label
-      */
+     * 虚拟节点label
+     */
     Labels?: Array<Label>;
     /**
-      * 虚拟节点taint
-      */
+     * 虚拟节点taint
+     */
     Taints?: Array<Taint>;
     /**
-      * 节点列表
-      */
+     * 节点列表
+     */
     VirtualNodes?: Array<VirtualNodeSpec>;
     /**
-      * 删除保护开关
-      */
+     * 删除保护开关
+     */
     DeletionProtection?: boolean;
     /**
-      * 节点池操作系统：
-- linux（默认）
-- windows
-      */
+     * 节点池操作系统：
+  - linux（默认）
+  - windows
+     */
     OS?: string;
 }
 /**
@@ -6092,28 +6092,28 @@ export interface CreateClusterVirtualNodePoolRequest {
  */
 export interface ModifyPrometheusConfigRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * ServiceMonitors配置
-      */
+     * ServiceMonitors配置
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * PodMonitors配置
-      */
+     * PodMonitors配置
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * prometheus原生Job配置
-      */
+     * prometheus原生Job配置
+     */
     RawJobs?: Array<PrometheusConfigItem>;
 }
 /**
@@ -6121,12 +6121,12 @@ export interface ModifyPrometheusConfigRequest {
  */
 export interface AutoScalingGroupRange {
     /**
-      * 伸缩组最小实例数
-      */
+     * 伸缩组最小实例数
+     */
     MinSize?: number;
     /**
-      * 伸缩组最大实例数
-      */
+     * 伸缩组最大实例数
+     */
     MaxSize?: number;
 }
 /**
@@ -6134,8 +6134,8 @@ export interface AutoScalingGroupRange {
  */
 export interface DescribePrometheusGlobalNotificationRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
 }
 /**
@@ -6143,24 +6143,24 @@ export interface DescribePrometheusGlobalNotificationRequest {
  */
 export interface ClusterPublicLB {
     /**
-      * 是否开启公网访问LB
-      */
+     * 是否开启公网访问LB
+     */
     Enabled: boolean;
     /**
-      * 允许访问的来源CIDR列表
-      */
+     * 允许访问的来源CIDR列表
+     */
     AllowFromCidrs?: Array<string>;
     /**
-      * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
-      */
+     * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+     */
     SecurityPolicies?: Array<string>;
     /**
-      * 外网访问相关的扩展参数，格式为json
-      */
+     * 外网访问相关的扩展参数，格式为json
+     */
     ExtraParam?: string;
     /**
-      * 新内外网功能，需要传递安全组
-      */
+     * 新内外网功能，需要传递安全组
+     */
     SecurityGroup?: string;
 }
 /**
@@ -6168,12 +6168,12 @@ export interface ClusterPublicLB {
  */
 export interface DescribePrometheusTemplateSyncResponse {
     /**
-      * 同步目标详情
-      */
+     * 同步目标详情
+     */
     Targets?: Array<PrometheusTemplateSyncTarget>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6181,8 +6181,8 @@ export interface DescribePrometheusTemplateSyncResponse {
  */
 export interface ModifyPrometheusTemplateResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6190,8 +6190,8 @@ export interface ModifyPrometheusTemplateResponse {
  */
 export interface ModifyPrometheusAlertPolicyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6199,16 +6199,16 @@ export interface ModifyPrometheusAlertPolicyResponse {
  */
 export interface DescribePrometheusClusterAgentsResponse {
     /**
-      * 被关联集群信息
-      */
+     * 被关联集群信息
+     */
     Agents: Array<PrometheusAgentOverview>;
     /**
-      * 被关联集群总量
-      */
+     * 被关联集群总量
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6216,113 +6216,113 @@ export interface DescribePrometheusClusterAgentsResponse {
  */
 export interface Cluster {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * 集群描述
-      */
+     * 集群描述
+     */
     ClusterDescription: string;
     /**
-      * 集群版本（默认值为1.10.5）
-      */
+     * 集群版本（默认值为1.10.5）
+     */
     ClusterVersion: string;
     /**
-      * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
-      */
+     * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
+     */
     ClusterOs: string;
     /**
-      * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
-      */
+     * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+     */
     ClusterType: string;
     /**
-      * 集群网络相关参数
-      */
+     * 集群网络相关参数
+     */
     ClusterNetworkSettings: ClusterNetworkSettings;
     /**
-      * 集群当前node数量
-      */
+     * 集群当前node数量
+     */
     ClusterNodeNum: number;
     /**
-      * 集群所属的项目ID
-      */
+     * 集群所属的项目ID
+     */
     ProjectId: number;
     /**
-      * 标签描述列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签描述列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TagSpecification: Array<TagSpecification>;
     /**
-      * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
-      */
+     * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
+     */
     ClusterStatus: string;
     /**
-      * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Property: string;
     /**
-      * 集群当前master数量
-      */
+     * 集群当前master数量
+     */
     ClusterMaterNodeNum: number;
     /**
-      * 集群使用镜像id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群使用镜像id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageId: string;
     /**
-      * OsCustomizeType 系统定制类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * OsCustomizeType 系统定制类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OsCustomizeType: string;
     /**
-      * 集群运行环境docker或container
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群运行环境docker或container
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ContainerRuntime: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreatedTime: string;
     /**
-      * 删除保护开关
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 删除保护开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DeletionProtection: boolean;
     /**
-      * 集群是否开启第三方节点支持
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群是否开启第三方节点支持
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EnableExternalNode: boolean;
     /**
-      * 集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群等级，针对托管集群生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterLevel: string;
     /**
-      * 自动变配集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动变配集群等级，针对托管集群生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoUpgradeClusterLevel: boolean;
     /**
-      * 是否开启QGPU共享
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启QGPU共享
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     QGPUShareEnable: boolean;
     /**
-      * 运行时版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 运行时版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RuntimeVersion: string;
     /**
-      * 集群当前etcd数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群当前etcd数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterEtcdNodeNum: number;
 }
 /**
@@ -6330,8 +6330,8 @@ export interface Cluster {
  */
 export interface DescribeClusterAuthenticationOptionsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -6339,16 +6339,16 @@ export interface DescribeClusterAuthenticationOptionsRequest {
  */
 export interface DescribeEksContainerInstanceLogResponse {
     /**
-      * 容器名称
-      */
+     * 容器名称
+     */
     ContainerName?: string;
     /**
-      * 日志内容
-      */
+     * 日志内容
+     */
     LogContent?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6356,8 +6356,8 @@ export interface DescribeEksContainerInstanceLogResponse {
  */
 export interface DeleteEKSClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6365,19 +6365,19 @@ export interface DeleteEKSClusterResponse {
  */
 export interface VersionInstance {
     /**
-      * 版本名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 版本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Version: string;
     /**
-      * Remark
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * Remark
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Remark: string;
 }
 /**
@@ -6385,118 +6385,118 @@ export interface VersionInstance {
  */
 export interface EksCi {
     /**
-      * EKS Cotainer Instance Id
-      */
+     * EKS Cotainer Instance Id
+     */
     EksCiId?: string;
     /**
-      * EKS Cotainer Instance Name
-      */
+     * EKS Cotainer Instance Name
+     */
     EksCiName?: string;
     /**
-      * 内存大小
-      */
+     * 内存大小
+     */
     Memory?: number;
     /**
-      * CPU大小
-      */
+     * CPU大小
+     */
     Cpu?: number;
     /**
-      * 安全组ID
-      */
+     * 安全组ID
+     */
     SecurityGroupIds?: Array<string>;
     /**
-      * 容器组的重启策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器组的重启策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RestartPolicy?: string;
     /**
-      * 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：
-Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；
-Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；
-Failed和Succeeded这两种状态都会停止运行，停止计费。
-Pending是创建中，Running是 运行中。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：
+  Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；
+  Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；
+  Failed和Succeeded这两种状态都会停止运行，停止计费。
+  Pending是创建中，Running是 运行中。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status?: string;
     /**
-      * 接到请求后的系统创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 接到请求后的系统创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreationTime?: string;
     /**
-      * 容器全部成功退出后的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器全部成功退出后的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SucceededTime?: string;
     /**
-      * 容器列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Containers?: Array<Container>;
     /**
-      * 数据卷信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数据卷信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EksCiVolume?: EksCiVolume;
     /**
-      * 容器组运行的安全上下文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器组运行的安全上下文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SecurityContext?: SecurityContext;
     /**
-      * 内网ip地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 内网ip地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PrivateIp?: string;
     /**
-      * 容器实例绑定的Eip地址，注意可能为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器实例绑定的Eip地址，注意可能为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EipAddress?: string;
     /**
-      * GPU类型。如无使用GPU则不返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU类型。如无使用GPU则不返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuType?: string;
     /**
-      * CPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CPU类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CpuType?: string;
     /**
-      * GPU卡数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU卡数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GpuCount?: number;
     /**
-      * 实例所属VPC的Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例所属VPC的Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VpcId?: string;
     /**
-      * 实例所属子网Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例所属子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SubnetId?: string;
     /**
-      * 初始化容器列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 初始化容器列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InitContainers?: Array<Container>;
     /**
-      * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CamRoleName?: string;
     /**
-      * 自动为用户创建的EipId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自动为用户创建的EipId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoCreatedEipId?: string;
     /**
-      * 容器状态是否持久化
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器状态是否持久化
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PersistStatus?: boolean;
 }
 /**
@@ -6504,8 +6504,8 @@ Pending是创建中，Running是 运行中。
  */
 export interface UpdateImageCacheResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6513,28 +6513,28 @@ export interface UpdateImageCacheResponse {
  */
 export interface CreatePrometheusConfigRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * ServiceMonitors配置
-      */
+     * ServiceMonitors配置
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * PodMonitors配置
-      */
+     * PodMonitors配置
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * prometheus原生Job配置
-      */
+     * prometheus原生Job配置
+     */
     RawJobs?: Array<PrometheusConfigItem>;
 }
 /**
@@ -6542,12 +6542,12 @@ export interface CreatePrometheusConfigRequest {
  */
 export interface CreateClusterVirtualNodeResponse {
     /**
-      * 虚拟节点名称
-      */
+     * 虚拟节点名称
+     */
     NodeName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6555,28 +6555,28 @@ export interface CreateClusterVirtualNodeResponse {
  */
 export interface ImageCacheEvent {
     /**
-      * 镜像缓存Id
-      */
+     * 镜像缓存Id
+     */
     ImageCacheId: string;
     /**
-      * 事件类型, Normal或者Warning
-      */
+     * 事件类型, Normal或者Warning
+     */
     Type: string;
     /**
-      * 事件原因简述
-      */
+     * 事件原因简述
+     */
     Reason: string;
     /**
-      * 事件原因详述
-      */
+     * 事件原因详述
+     */
     Message: string;
     /**
-      * 事件第一次出现时间
-      */
+     * 事件第一次出现时间
+     */
     FirstTimestamp: string;
     /**
-      * 事件最后一次出现时间
-      */
+     * 事件最后一次出现时间
+     */
     LastTimestamp: string;
 }
 /**
@@ -6584,12 +6584,12 @@ export interface ImageCacheEvent {
  */
 export interface CreatePrometheusClusterAgentRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * agent列表
-      */
+     * agent列表
+     */
     Agents: Array<PrometheusClusterAgentBasic>;
 }
 /**
@@ -6597,17 +6597,17 @@ export interface CreatePrometheusClusterAgentRequest {
  */
 export interface DescribeClusterNodePoolsResponse {
     /**
-      * NodePools（节点池列表）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * NodePools（节点池列表）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodePoolSet: Array<NodePool>;
     /**
-      * 资源总数
-      */
+     * 资源总数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6615,17 +6615,17 @@ export interface DescribeClusterNodePoolsResponse {
  */
 export interface DescribePrometheusInstancesOverviewResponse {
     /**
-      * 实例列表
-      */
+     * 实例列表
+     */
     Instances: Array<PrometheusInstancesOverview>;
     /**
-      * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6633,8 +6633,8 @@ export interface DescribePrometheusInstancesOverviewResponse {
  */
 export interface DescribeEKSClusterCredentialRequest {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
 }
 /**
@@ -6642,8 +6642,8 @@ export interface DescribeEKSClusterCredentialRequest {
  */
 export interface EnableClusterDeletionProtectionRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -6651,8 +6651,8 @@ export interface EnableClusterDeletionProtectionRequest {
  */
 export interface RestartEKSContainerInstancesRequest {
     /**
-      * EKS instance ids
-      */
+     * EKS instance ids
+     */
     EksCiIds: Array<string>;
 }
 /**
@@ -6660,12 +6660,12 @@ export interface RestartEKSContainerInstancesRequest {
  */
 export interface DrainClusterVirtualNodeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 节点名
-      */
+     * 节点名
+     */
     NodeName: string;
 }
 /**
@@ -6673,8 +6673,8 @@ export interface DrainClusterVirtualNodeRequest {
  */
 export interface DescribeClusterLevelAttributeRequest {
     /**
-      * 集群ID，变配时使用
-      */
+     * 集群ID，变配时使用
+     */
     ClusterID?: string;
 }
 /**
@@ -6682,20 +6682,20 @@ export interface DescribeClusterLevelAttributeRequest {
  */
 export interface DescribeClusterReleaseDetailsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用所在命名空间
-      */
+     * 应用所在命名空间
+     */
     Namespace: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType?: string;
 }
 /**
@@ -6703,44 +6703,44 @@ export interface DescribeClusterReleaseDetailsRequest {
  */
 export interface KubeJarvisStateResultsItem {
     /**
-      * 诊断结果级别
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果级别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Level?: string;
     /**
-      * 诊断对象名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断对象名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ObjName?: string;
     /**
-      * 诊断对象信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断对象信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ObjInfo?: Array<KubeJarvisStateResultObjInfo>;
     /**
-      * 诊断项标题
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断项标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Title?: string;
     /**
-      * 诊断项描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断项描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Desc?: string;
     /**
-      * 诊断建议
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断建议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Proposal?: string;
     /**
-      * 诊断建议文档链接
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断建议文档链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProposalDocUrl?: string;
     /**
-      * 诊断建议文档名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断建议文档名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProposalDocName?: string;
 }
 /**
@@ -6748,52 +6748,52 @@ export interface KubeJarvisStateResultsItem {
  */
 export interface CreateECMInstancesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterID: string;
     /**
-      * 模块id
-      */
+     * 模块id
+     */
     ModuleId: string;
     /**
-      * 需要创建实例的可用区及创建数目及运营商的列表
-      */
+     * 需要创建实例的可用区及创建数目及运营商的列表
+     */
     ZoneInstanceCountISPSet: Array<ECMZoneInstanceCountISP>;
     /**
-      * 密码
-      */
+     * 密码
+     */
     Password?: string;
     /**
-      * 公网带宽
-      */
+     * 公网带宽
+     */
     InternetMaxBandwidthOut?: number;
     /**
-      * 镜像id
-      */
+     * 镜像id
+     */
     ImageId?: string;
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     InstanceName?: string;
     /**
-      * 主机名称
-      */
+     * 主机名称
+     */
     HostName?: string;
     /**
-      * 增强服务，包括云镜和云监控
-      */
+     * 增强服务，包括云镜和云监控
+     */
     EnhancedService?: ECMEnhancedService;
     /**
-      * 用户自定义脚本
-      */
+     * 用户自定义脚本
+     */
     UserData?: string;
     /**
-      * 实例扩展信息
-      */
+     * 实例扩展信息
+     */
     External?: string;
     /**
-      * 实例所属安全组
-      */
+     * 实例所属安全组
+     */
     SecurityGroupIds?: Array<string>;
 }
 /**
@@ -6801,32 +6801,32 @@ export interface CreateECMInstancesRequest {
  */
 export interface DescribeClusterReleasesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 每页数量限制
-      */
+     * 每页数量限制
+     */
     Limit?: number;
     /**
-      * 页偏移量
-      */
+     * 页偏移量
+     */
     Offset?: number;
     /**
-      * 集群类型, 目前支持传入 tke, eks, tkeedge, external
-      */
+     * 集群类型, 目前支持传入 tke, eks, tkeedge, external
+     */
     ClusterType?: string;
     /**
-      * helm Release 安装的namespace
-      */
+     * helm Release 安装的namespace
+     */
     Namespace?: string;
     /**
-      * helm Release 的名字
-      */
+     * helm Release 的名字
+     */
     ReleaseName?: string;
     /**
-      * helm Chart 的名字
-      */
+     * helm Chart 的名字
+     */
     ChartName?: string;
 }
 /**
@@ -6834,12 +6834,12 @@ export interface DescribeClusterReleasesRequest {
  */
 export interface ClusterCredential {
     /**
-      * CA 根证书
-      */
+     * CA 根证书
+     */
     CACert: string;
     /**
-      * 认证用的Token
-      */
+     * 认证用的Token
+     */
     Token?: string;
 }
 /**
@@ -6847,18 +6847,18 @@ export interface ClusterCredential {
  */
 export interface DescribePrometheusOverviewsRequest {
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Offset?: number;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Limit?: number;
     /**
-      * 过滤实例，目前支持：
-ID: 通过实例ID来过滤
-Name: 通过实例名称来过滤
-      */
+     * 过滤实例，目前支持：
+  ID: 通过实例ID来过滤
+  Name: 通过实例名称来过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -6866,28 +6866,28 @@ Name: 通过实例名称来过滤
  */
 export interface DescribeClusterPendingReleasesResponse {
     /**
-      * 正在安装中应用列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 正在安装中应用列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReleaseSet: Array<PendingRelease>;
     /**
-      * 每页返回数量限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 每页返回数量限制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Limit: number;
     /**
-      * 页偏移量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 页偏移量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Offset: number;
     /**
-      * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6895,34 +6895,34 @@ export interface DescribeClusterPendingReleasesResponse {
  */
 export interface DataDisk {
     /**
-      * 云盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 云盘类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskType: string;
     /**
-      * 文件系统(ext3/ext4/xfs)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 文件系统(ext3/ext4/xfs)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FileSystem: string;
     /**
-      * 云盘大小(G）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 云盘大小(G）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskSize: number;
     /**
-      * 是否自动化格式盘并挂载
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否自动化格式盘并挂载
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AutoFormatAndMount: boolean;
     /**
-      * 挂载目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 挂载目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MountTarget?: string;
     /**
-      * 挂载设备名或分区名，当且仅当添加已有节点时需要
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 挂载设备名或分区名，当且仅当添加已有节点时需要
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DiskPartition: string;
 }
 /**
@@ -6930,8 +6930,8 @@ export interface DataDisk {
  */
 export interface DeleteEKSClusterRequest {
     /**
-      * 弹性集群Id
-      */
+     * 弹性集群Id
+     */
     ClusterId: string;
 }
 /**
@@ -6939,34 +6939,34 @@ export interface DeleteEKSClusterRequest {
  */
 export interface GetUpgradeInstanceProgressResponse {
     /**
-      * 升级节点总数
-      */
+     * 升级节点总数
+     */
     Total?: number;
     /**
-      * 已升级节点总数
-      */
+     * 已升级节点总数
+     */
     Done?: number;
     /**
-      * 升级任务生命周期
-process 运行中
-paused 已停止
-pauing 正在停止
-done  已完成
-timeout 已超时
-aborted 已取消
-      */
+     * 升级任务生命周期
+  process 运行中
+  paused 已停止
+  pauing 正在停止
+  done  已完成
+  timeout 已超时
+  aborted 已取消
+     */
     LifeState?: string;
     /**
-      * 各节点升级进度详情
-      */
+     * 各节点升级进度详情
+     */
     Instances?: Array<InstanceUpgradeProgressItem>;
     /**
-      * 集群当前状态
-      */
+     * 集群当前状态
+     */
     ClusterStatus?: InstanceUpgradeClusterStatus;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6974,17 +6974,17 @@ aborted 已取消
  */
 export interface DescribeExistedInstancesResponse {
     /**
-      * 已经存在的实例信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 已经存在的实例信息数组。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExistedInstanceSet: Array<ExistedInstance>;
     /**
-      * 符合条件的实例数量。
-      */
+     * 符合条件的实例数量。
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -6992,8 +6992,8 @@ export interface DescribeExistedInstancesResponse {
  */
 export interface CreatePrometheusTemplateRequest {
     /**
-      * 模板设置
-      */
+     * 模板设置
+     */
     Template: PrometheusTemplate;
 }
 /**
@@ -7001,16 +7001,16 @@ export interface CreatePrometheusTemplateRequest {
  */
 export interface DescribeEKSContainerInstancesResponse {
     /**
-      * 容器组总数
-      */
+     * 容器组总数
+     */
     TotalCount: number;
     /**
-      * 容器组列表
-      */
+     * 容器组列表
+     */
     EksCis: Array<EksCi>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7018,12 +7018,12 @@ export interface DescribeEKSContainerInstancesResponse {
  */
 export interface CreatePrometheusAlertRuleResponse {
     /**
-      * 告警id
-      */
+     * 告警id
+     */
     Id?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7031,12 +7031,12 @@ export interface CreatePrometheusAlertRuleResponse {
  */
 export interface ECMEnhancedService {
     /**
-      * 是否开启云监控服务
-      */
+     * 是否开启云监控服务
+     */
     SecurityService?: ECMRunMonitorServiceEnabled;
     /**
-      * 是否开启云镜服务
-      */
+     * 是否开启云镜服务
+     */
     MonitorService?: ECMRunSecurityServiceEnabled;
 }
 /**
@@ -7044,8 +7044,8 @@ export interface ECMEnhancedService {
  */
 export interface ModifyClusterAuthenticationOptionsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7053,14 +7053,14 @@ export interface ModifyClusterAuthenticationOptionsResponse {
  */
 export interface EdgeClusterPublicLB {
     /**
-      * 是否开启公网访问LB
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否开启公网访问LB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Enabled: boolean;
     /**
-      * 允许访问的公网cidr
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 允许访问的公网cidr
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AllowFromCidrs?: Array<string>;
 }
 /**
@@ -7068,8 +7068,8 @@ export interface EdgeClusterPublicLB {
  */
 export interface EnableEventPersistenceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7077,16 +7077,16 @@ export interface EnableEventPersistenceResponse {
  */
 export interface EnhancedService {
     /**
-      * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
-      */
+     * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
+     */
     SecurityService?: RunSecurityServiceEnabled;
     /**
-      * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
-      */
+     * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
+     */
     MonitorService?: RunMonitorServiceEnabled;
     /**
-      * 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，则公共镜像默认开启云自动化助手服务，其他镜像默认不开启云自动化助手服务。
-      */
+     * 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，则公共镜像默认开启云自动化助手服务，其他镜像默认不开启云自动化助手服务。
+     */
     AutomationService?: RunAutomationServiceEnabled;
 }
 /**
@@ -7094,8 +7094,8 @@ export interface EnhancedService {
  */
 export interface DeleteEKSContainerInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7103,8 +7103,8 @@ export interface DeleteEKSContainerInstancesResponse {
  */
 export interface UninstallLogAgentRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -7112,9 +7112,9 @@ export interface UninstallLogAgentRequest {
  */
 export interface TcpSocket {
     /**
-      * TcpSocket检测的端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * TcpSocket检测的端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Port?: number;
 }
 /**
@@ -7122,14 +7122,14 @@ export interface TcpSocket {
  */
 export interface TagSpecification {
     /**
-      * 标签绑定的资源类型，当前支持类型："cluster"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签绑定的资源类型，当前支持类型："cluster"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ResourceType?: string;
     /**
-      * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 标签对列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Tags?: Array<Tag>;
 }
 /**
@@ -7137,14 +7137,14 @@ export interface TagSpecification {
  */
 export interface KubeJarvisStateDiagnosticOverview {
     /**
-      * 诊断目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Catalogues?: Array<KubeJarvisStateCatalogue>;
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
 }
 /**
@@ -7152,8 +7152,8 @@ export interface KubeJarvisStateDiagnosticOverview {
  */
 export interface DeleteEdgeClusterInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7161,8 +7161,8 @@ export interface DeleteEdgeClusterInstancesResponse {
  */
 export interface DeleteTKEEdgeClusterRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -7170,13 +7170,13 @@ export interface DeleteTKEEdgeClusterRequest {
  */
 export interface CreatePrometheusGlobalNotificationResponse {
     /**
-      * 全局告警通知渠道ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 全局告警通知渠道ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Id: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7184,16 +7184,16 @@ export interface CreatePrometheusGlobalNotificationResponse {
  */
 export interface ListClusterInspectionResultsItemsRequest {
     /**
-      * 目标集群ID
-      */
+     * 目标集群ID
+     */
     ClusterId: string;
     /**
-      * 查询历史结果的开始时间，Unix时间戳
-      */
+     * 查询历史结果的开始时间，Unix时间戳
+     */
     StartTime?: string;
     /**
-      * 查询历史结果的结束时间，默认当前距离开始时间3天，Unix时间戳
-      */
+     * 查询历史结果的结束时间，默认当前距离开始时间3天，Unix时间戳
+     */
     EndTime?: string;
 }
 /**
@@ -7201,23 +7201,23 @@ export interface ListClusterInspectionResultsItemsRequest {
  */
 export interface DescribeClusterAuthenticationOptionsResponse {
     /**
-      * ServiceAccount认证配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * ServiceAccount认证配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceAccounts?: ServiceAccountAuthenticationOptions;
     /**
-      * 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LatestOperationState?: string;
     /**
-      * OIDC认证配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * OIDC认证配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OIDCConfig?: OIDCConfigAuthenticationOptions;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7225,52 +7225,52 @@ export interface DescribeClusterAuthenticationOptionsResponse {
  */
 export interface CreateClusterReleaseRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
-      */
+     * 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz
+     */
     Chart: string;
     /**
-      * 自定义参数
-      */
+     * 自定义参数
+     */
     Values?: ReleaseValues;
     /**
-      * 制品来源，范围：tke-market 或 other
-      */
+     * 制品来源，范围：tke-market 或 other
+     */
     ChartFrom?: string;
     /**
-      * 制品版本
-      */
+     * 制品版本
+     */
     ChartVersion?: string;
     /**
-      * 制品仓库URL地址
-      */
+     * 制品仓库URL地址
+     */
     ChartRepoURL?: string;
     /**
-      * 制品访问用户名
-      */
+     * 制品访问用户名
+     */
     Username?: string;
     /**
-      * 制品访问密码
-      */
+     * 制品访问密码
+     */
     Password?: string;
     /**
-      * 制品命名空间
-      */
+     * 制品命名空间
+     */
     ChartNamespace?: string;
     /**
-      * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
-      */
+     * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+     */
     ClusterType?: string;
 }
 /**
@@ -7278,16 +7278,16 @@ export interface CreateClusterReleaseRequest {
  */
 export interface DescribePrometheusAgentsRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Offset?: number;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Limit?: number;
 }
 /**
@@ -7295,8 +7295,8 @@ export interface DescribePrometheusAgentsRequest {
  */
 export interface AddClusterCIDRResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7304,77 +7304,77 @@ export interface AddClusterCIDRResponse {
  */
 export interface ReleaseDetails {
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用所在命名空间
-      */
+     * 应用所在命名空间
+     */
     Namespace: string;
     /**
-      * 应用当前版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用当前版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Version: number;
     /**
-      * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
     /**
-      * 应用提示
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Notes: string;
     /**
-      * 用户自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用户自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Config: string;
     /**
-      * 应用资源详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Manifest: string;
     /**
-      * 应用制品版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChartVersion: string;
     /**
-      * 应用制品名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChartName: string;
     /**
-      * 应用制品描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChartDescription: string;
     /**
-      * 应用制品app版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品app版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AppVersion: string;
     /**
-      * 应用首次部署时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用首次部署时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FirstDeployedTime: string;
     /**
-      * 应用最近部署时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用最近部署时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     LastDeployedTime: string;
     /**
-      * 应用参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ComputedValues: string;
 }
 /**
@@ -7382,8 +7382,8 @@ export interface ReleaseDetails {
  */
 export interface DescribePrometheusInstanceInitStatusRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
 }
 /**
@@ -7391,16 +7391,16 @@ export interface DescribePrometheusInstanceInitStatusRequest {
  */
 export interface DescribeClusterLevelAttributeResponse {
     /**
-      * 总数
-      */
+     * 总数
+     */
     TotalCount: number;
     /**
-      * 集群规模
-      */
+     * 集群规模
+     */
     Items: Array<ClusterLevelAttribute>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7408,27 +7408,27 @@ export interface DescribeClusterLevelAttributeResponse {
  */
 export interface PrometheusGrafanaInfo {
     /**
-      * 是否启用
-      */
+     * 是否启用
+     */
     Enabled: boolean;
     /**
-      * 域名，只有开启外网访问才有效果
-      */
+     * 域名，只有开启外网访问才有效果
+     */
     Domain: string;
     /**
-      * 内网地址，或者外网地址
-      */
+     * 内网地址，或者外网地址
+     */
     Address: string;
     /**
-      * 是否开启了外网访问
-close = 未开启外网访问
-opening = 正在开启外网访问
-open  = 已开启外网访问
-      */
+     * 是否开启了外网访问
+  close = 未开启外网访问
+  opening = 正在开启外网访问
+  open  = 已开启外网访问
+     */
     Internet: string;
     /**
-      * grafana管理员用户名
-      */
+     * grafana管理员用户名
+     */
     AdminUser: string;
 }
 /**
@@ -7436,24 +7436,24 @@ open  = 已开启外网访问
  */
 export interface ImageInstance {
     /**
-      * 镜像别名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Alias: string;
     /**
-      * 操作系统名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 操作系统名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OsName: string;
     /**
-      * 镜像ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageId: string;
     /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     OsCustomizeType: string;
 }
 /**
@@ -7461,12 +7461,12 @@ export interface ImageInstance {
  */
 export interface CreatePrometheusAlertPolicyRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警配置
-      */
+     * 告警配置
+     */
     AlertRule: PrometheusAlertPolicyItem;
 }
 /**
@@ -7474,16 +7474,16 @@ export interface CreatePrometheusAlertPolicyRequest {
  */
 export interface DescribeImageCachesResponse {
     /**
-      * 镜像缓存总数
-      */
+     * 镜像缓存总数
+     */
     TotalCount: number;
     /**
-      * 镜像缓存信息列表
-      */
+     * 镜像缓存信息列表
+     */
     ImageCaches: Array<ImageCache>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7491,12 +7491,12 @@ export interface DescribeImageCachesResponse {
  */
 export interface ResourceUsageDetail {
     /**
-      * 资源名称
-      */
+     * 资源名称
+     */
     Name: string;
     /**
-      * 资源使用量
-      */
+     * 资源使用量
+     */
     Usage: number;
 }
 /**
@@ -7504,18 +7504,18 @@ export interface ResourceUsageDetail {
  */
 export interface DescribeClusterVirtualNodePoolsResponse {
     /**
-      * 节点池总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点池总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount: number;
     /**
-      * 虚拟节点池列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 虚拟节点池列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NodePoolSet: Array<VirtualNodePool>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7523,21 +7523,21 @@ export interface DescribeClusterVirtualNodePoolsResponse {
  */
 export interface CheckEdgeClusterCIDRResponse {
     /**
-      * 返回码，具体如下
--1 内部错误
-0 没冲突
-1 vpc 和 serviceCIDR 冲突
-2 vpc 和 podCIDR 冲突
-3 serviceCIDR  和 podCIDR 冲突
-      */
+     * 返回码，具体如下
+  -1 内部错误
+  0 没冲突
+  1 vpc 和 serviceCIDR 冲突
+  2 vpc 和 podCIDR 冲突
+  3 serviceCIDR  和 podCIDR 冲突
+     */
     ConflictCode: number;
     /**
-      * CIDR冲突描述信息。
-      */
+     * CIDR冲突描述信息。
+     */
     ConflictMsg: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7545,16 +7545,16 @@ export interface CheckEdgeClusterCIDRResponse {
  */
 export interface DescribePrometheusClusterAgentsRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Offset?: number;
     /**
-      * 用于分页
-      */
+     * 用于分页
+     */
     Limit?: number;
 }
 /**
@@ -7562,29 +7562,29 @@ export interface DescribePrometheusClusterAgentsRequest {
  */
 export interface EdgeArgsFlag {
     /**
-      * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参数名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name?: string;
     /**
-      * 参数类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参数类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Type?: string;
     /**
-      * 参数描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参数描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Usage?: string;
     /**
-      * 参数默认值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参数默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Default?: string;
     /**
-      * 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Constraint?: string;
 }
 /**
@@ -7592,31 +7592,31 @@ export interface EdgeArgsFlag {
  */
 export interface CheckInstancesUpgradeAbleResponse {
     /**
-      * 集群master当前小版本
-      */
+     * 集群master当前小版本
+     */
     ClusterVersion?: string;
     /**
-      * 集群master对应的大版本目前最新小版本
-      */
+     * 集群master对应的大版本目前最新小版本
+     */
     LatestVersion?: string;
     /**
-      * 可升级节点列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可升级节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpgradeAbleInstances?: Array<UpgradeAbleInstancesItem>;
     /**
-      * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 不可升级原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 不可升级原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UnavailableVersionReason?: Array<UnavailableReason>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7624,8 +7624,8 @@ export interface CheckInstancesUpgradeAbleResponse {
  */
 export interface CreatePrometheusTempRequest {
     /**
-      * 模板设置
-      */
+     * 模板设置
+     */
     Template: PrometheusTemp;
 }
 /**
@@ -7633,17 +7633,17 @@ export interface CreatePrometheusTempRequest {
  */
 export interface CreatePrometheusDashboardRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 面板组名称
-      */
+     * 面板组名称
+     */
     DashboardName: string;
     /**
-      * 面板列表
-每一项是一个grafana dashboard的json定义
-      */
+     * 面板列表
+  每一项是一个grafana dashboard的json定义
+     */
     Contents: Array<string>;
 }
 /**
@@ -7651,8 +7651,8 @@ export interface CreatePrometheusDashboardRequest {
  */
 export interface DeleteClusterRouteTableResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7660,8 +7660,8 @@ export interface DeleteClusterRouteTableResponse {
  */
 export interface DisableClusterDeletionProtectionRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -7669,13 +7669,13 @@ export interface DisableClusterDeletionProtectionRequest {
  */
 export interface ListClusterInspectionResultsItemsResponse {
     /**
-      * 巡检结果历史列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 巡检结果历史列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InspectionResultsItems?: Array<KubeJarvisStateInspectionResultsItem>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7683,20 +7683,20 @@ export interface ListClusterInspectionResultsItemsResponse {
  */
 export interface PrometheusJobTargets {
     /**
-      * 该Job的targets列表
-      */
+     * 该Job的targets列表
+     */
     Targets: Array<PrometheusTarget>;
     /**
-      * job的名称
-      */
+     * job的名称
+     */
     JobName: string;
     /**
-      * targets总数
-      */
+     * targets总数
+     */
     Total: number;
     /**
-      * 健康的target总数
-      */
+     * 健康的target总数
+     */
     Up: number;
 }
 /**
@@ -7704,8 +7704,8 @@ export interface PrometheusJobTargets {
  */
 export interface ModifyClusterAsGroupOptionAttributeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7713,8 +7713,8 @@ export interface ModifyClusterAsGroupOptionAttributeResponse {
  */
 export interface UninstallLogAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7722,36 +7722,36 @@ export interface UninstallLogAgentResponse {
  */
 export interface PrometheusClusterAgentBasic {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     Region: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 是否开启公网CLB
-      */
+     * 是否开启公网CLB
+     */
     EnableExternal: boolean;
     /**
-      * 集群内部署组件的pod配置
-      */
+     * 集群内部署组件的pod配置
+     */
     InClusterPodConfig?: PrometheusClusterAgentPodConfig;
     /**
-      * 该集群采集的所有指标都会带上这些labels
-      */
+     * 该集群采集的所有指标都会带上这些labels
+     */
     ExternalLabels?: Array<Label>;
     /**
-      * 是否安装默认采集配置
-      */
+     * 是否安装默认采集配置
+     */
     NotInstallBasicScrape?: boolean;
     /**
-      * 是否采集指标，true代表drop所有指标，false代表采集默认指标
-      */
+     * 是否采集指标，true代表drop所有指标，false代表采集默认指标
+     */
     NotScrape?: boolean;
 }
 /**
@@ -7759,8 +7759,8 @@ export interface PrometheusClusterAgentBasic {
  */
 export interface DeleteTKEEdgeClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7768,12 +7768,12 @@ export interface DeleteTKEEdgeClusterResponse {
  */
 export interface CreatePrometheusTempResponse {
     /**
-      * 模板Id
-      */
+     * 模板Id
+     */
     TemplateId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7781,22 +7781,22 @@ export interface CreatePrometheusTempResponse {
  */
 export interface DescribePrometheusTargetsRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 过滤条件，当前支持
-Name=state
-Value=up, down, unknown
-      */
+     * 过滤条件，当前支持
+  Name=state
+  Value=up, down, unknown
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -7804,8 +7804,8 @@ Value=up, down, unknown
  */
 export interface RunPrometheusInstanceResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7813,8 +7813,8 @@ export interface RunPrometheusInstanceResponse {
  */
 export interface DeletePrometheusTemplateSyncResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7822,20 +7822,20 @@ export interface DeletePrometheusTemplateSyncResponse {
  */
 export interface DescribeClusterAsGroupsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 伸缩组ID列表，如果为空，表示拉取集群关联的所有伸缩组。
-      */
+     * 伸缩组ID列表，如果为空，表示拉取集群关联的所有伸缩组。
+     */
     AutoScalingGroupIds?: Array<string>;
     /**
-      * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-      */
+     * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
     Limit?: number;
 }
 /**
@@ -7843,8 +7843,8 @@ export interface DescribeClusterAsGroupsRequest {
  */
 export interface ECMRunMonitorServiceEnabled {
     /**
-      * 是否开启
-      */
+     * 是否开启
+     */
     Enabled?: boolean;
 }
 /**
@@ -7852,12 +7852,12 @@ export interface ECMRunMonitorServiceEnabled {
  */
 export interface SyncPrometheusTempRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     TemplateId: string;
     /**
-      * 同步目标
-      */
+     * 同步目标
+     */
     Targets: Array<PrometheusTemplateSyncTarget>;
 }
 /**
@@ -7865,8 +7865,8 @@ export interface SyncPrometheusTempRequest {
  */
 export interface ModifyClusterEndpointSPResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7874,12 +7874,12 @@ export interface ModifyClusterEndpointSPResponse {
  */
 export interface ECMRunSecurityServiceEnabled {
     /**
-      * 是否开启
-      */
+     * 是否开启
+     */
     Enabled?: boolean;
     /**
-      * 云镜版本：0 基础版，1 专业版
-      */
+     * 云镜版本：0 基础版，1 专业版
+     */
     Version?: number;
 }
 /**
@@ -7887,8 +7887,8 @@ export interface ECMRunSecurityServiceEnabled {
  */
 export interface SyncPrometheusTemplateResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -7896,16 +7896,16 @@ export interface SyncPrometheusTemplateResponse {
  */
 export interface DeleteClusterAsGroupsRequest {
     /**
-      * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
-      */
+     * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
+     */
     ClusterId: string;
     /**
-      * 集群伸缩组ID的列表
-      */
+     * 集群伸缩组ID的列表
+     */
     AutoScalingGroupIds: Array<string>;
     /**
-      * 是否保留伸缩组中的节点(默认值： false(不保留))
-      */
+     * 是否保留伸缩组中的节点(默认值： false(不保留))
+     */
     KeepInstance?: boolean;
 }
 /**
@@ -7913,16 +7913,16 @@ export interface DeleteClusterAsGroupsRequest {
  */
 export interface ClusterAsGroupAttribute {
     /**
-      * 伸缩组ID
-      */
+     * 伸缩组ID
+     */
     AutoScalingGroupId?: string;
     /**
-      * 是否开启
-      */
+     * 是否开启
+     */
     AutoScalingGroupEnabled?: boolean;
     /**
-      * 伸缩组最大最小实例数
-      */
+     * 伸缩组最大最小实例数
+     */
     AutoScalingGroupRange?: AutoScalingGroupRange;
 }
 /**
@@ -7930,32 +7930,32 @@ export interface ClusterAsGroupAttribute {
  */
 export interface ForwardTKEEdgeApplicationRequestV3Request {
     /**
-      * 请求集群addon的访问
-      */
+     * 请求集群addon的访问
+     */
     Method: string;
     /**
-      * 请求集群addon的路径
-      */
+     * 请求集群addon的路径
+     */
     Path: string;
     /**
-      * 请求集群addon后允许接收的数据格式
-      */
+     * 请求集群addon后允许接收的数据格式
+     */
     Accept?: string;
     /**
-      * 请求集群addon的数据格式
-      */
+     * 请求集群addon的数据格式
+     */
     ContentType?: string;
     /**
-      * 请求集群addon的数据
-      */
+     * 请求集群addon的数据
+     */
     RequestBody?: string;
     /**
-      * 集群名称，例如cls-1234abcd
-      */
+     * 集群名称，例如cls-1234abcd
+     */
     ClusterName?: string;
     /**
-      * 是否编码请求内容
-      */
+     * 是否编码请求内容
+     */
     EncodedBody?: string;
 }
 /**
@@ -7963,12 +7963,12 @@ export interface ForwardTKEEdgeApplicationRequestV3Request {
  */
 export interface DisableEventPersistenceRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
-      */
+     * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+     */
     DeleteLogSetAndTopic?: boolean;
 }
 /**
@@ -7976,8 +7976,8 @@ export interface DisableEventPersistenceRequest {
  */
 export interface RunMonitorServiceEnabled {
     /**
-      * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
-      */
+     * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
+     */
     Enabled?: boolean;
 }
 /**
@@ -7985,95 +7985,95 @@ export interface RunMonitorServiceEnabled {
  */
 export interface CreateEKSContainerInstancesRequest {
     /**
-      * 容器组
-      */
+     * 容器组
+     */
     Containers: Array<Container>;
     /**
-      * EKS Container Instance容器实例名称
-      */
+     * EKS Container Instance容器实例名称
+     */
     EksCiName: string;
     /**
-      * 指定新创建实例所属于的安全组Id
-      */
+     * 指定新创建实例所属于的安全组Id
+     */
     SecurityGroupIds: Array<string>;
     /**
-      * 实例所属子网Id
-      */
+     * 实例所属子网Id
+     */
     SubnetId: string;
     /**
-      * 实例所属VPC的Id
-      */
+     * 实例所属VPC的Id
+     */
     VpcId: string;
     /**
-      * 内存，单位：GiB。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
-      */
+     * 内存，单位：GiB。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
+     */
     Memory: number;
     /**
-      * CPU，单位：核。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
-      */
+     * CPU，单位：核。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
+     */
     Cpu: number;
     /**
-      * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)，默认：Always。
-      */
+     * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)，默认：Always。
+     */
     RestartPolicy?: string;
     /**
-      * 镜像仓库凭证数组
-      */
+     * 镜像仓库凭证数组
+     */
     ImageRegistryCredentials?: Array<ImageRegistryCredential>;
     /**
-      * 数据卷，包含NfsVolume数组和CbsVolume数组
-      */
+     * 数据卷，包含NfsVolume数组和CbsVolume数组
+     */
     EksCiVolume?: EksCiVolume;
     /**
-      * 实例副本数，默认为1
-      */
+     * 实例副本数，默认为1
+     */
     Replicas?: number;
     /**
-      * Init 容器
-      */
+     * Init 容器
+     */
     InitContainers?: Array<Container>;
     /**
-      * 自定义DNS配置
-      */
+     * 自定义DNS配置
+     */
     DnsConfig?: DNSConfig;
     /**
-      * 用来绑定容器实例的已有EIP的列表。如传值，需要保证数值和Replicas相等。
-另外此参数和AutoCreateEipAttribute互斥。
-      */
+     * 用来绑定容器实例的已有EIP的列表。如传值，需要保证数值和Replicas相等。
+  另外此参数和AutoCreateEipAttribute互斥。
+     */
     ExistedEipIds?: Array<string>;
     /**
-      * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
-另外此参数和ExistedEipIds互斥
-      */
+     * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
+  另外此参数和ExistedEipIds互斥
+     */
     AutoCreateEipAttribute?: EipAttribute;
     /**
-      * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
-      */
+     * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
+     */
     AutoCreateEip?: boolean;
     /**
-      * Pod 所需的 CPU 资源型号，如果不填写则默认不强制指定 CPU 类型。目前支持型号如下：
-intel
-amd
-- 支持优先级顺序写法，如 “amd,intel” 表示优先创建 amd 资源 Pod，如果所选地域可用区 amd 资源不足，则会创建 intel 资源 Pod。
-      */
+     * Pod 所需的 CPU 资源型号，如果不填写则默认不强制指定 CPU 类型。目前支持型号如下：
+  intel
+  amd
+  - 支持优先级顺序写法，如 “amd,intel” 表示优先创建 amd 资源 Pod，如果所选地域可用区 amd 资源不足，则会创建 intel 资源 Pod。
+     */
     CpuType?: string;
     /**
-      * 容器实例所需的 GPU 资源型号，目前支持型号如下：
-1/4\*V100
-1/2\*V100
-V100
-1/4\*T4
-1/2\*T4
-T4
-      */
+     * 容器实例所需的 GPU 资源型号，目前支持型号如下：
+  1/4\*V100
+  1/2\*V100
+  V100
+  1/4\*T4
+  1/2\*T4
+  T4
+     */
     GpuType?: string;
     /**
-      * Pod 所需的 GPU 数量，如填写，请确保为支持的规格。默认单位为卡，无需再次注明。
-      */
+     * Pod 所需的 GPU 数量，如填写，请确保为支持的规格。默认单位为卡，无需再次注明。
+     */
     GpuCount?: number;
     /**
-      * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
-      */
+     * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
+     */
     CamRoleName?: string;
 }
 /**
@@ -8081,45 +8081,45 @@ T4
  */
 export interface DescribeTKEEdgeClusterCredentialResponse {
     /**
-      * 集群的接入地址信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群的接入地址信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Addresses?: Array<IPAddress>;
     /**
-      * 集群的认证信息
-      */
+     * 集群的认证信息
+     */
     Credential?: ClusterCredential;
     /**
-      * 集群的公网访问信息
-      */
+     * 集群的公网访问信息
+     */
     PublicLB?: EdgeClusterPublicLB;
     /**
-      * 集群的内网访问信息
-      */
+     * 集群的内网访问信息
+     */
     InternalLB?: EdgeClusterInternalLB;
     /**
-      * 集群的CoreDns部署信息
-      */
+     * 集群的CoreDns部署信息
+     */
     CoreDns?: string;
     /**
-      * 集群的健康检查多地域部署信息
-      */
+     * 集群的健康检查多地域部署信息
+     */
     HealthRegion?: string;
     /**
-      * 集群的健康检查部署信息
-      */
+     * 集群的健康检查部署信息
+     */
     Health?: string;
     /**
-      * 是否部署GridDaemon以支持headless service
-      */
+     * 是否部署GridDaemon以支持headless service
+     */
     GridDaemon?: string;
     /**
-      * 公网访问kins集群
-      */
+     * 公网访问kins集群
+     */
     UnitCluster?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8127,59 +8127,59 @@ export interface DescribeTKEEdgeClusterCredentialResponse {
  */
 export interface InstanceAdvancedSettings {
     /**
-      * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DesiredPodNumber: number;
     /**
-      * GPU驱动相关参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * GPU驱动相关参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GPUArgs: GPUArgs;
     /**
-      * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PreStartUserScript: string;
     /**
-      * 节点污点
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点污点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Taints: Array<Taint>;
     /**
-      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
-注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+  注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MountTarget?: string;
     /**
-      * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * dockerd --graph 指定值, 默认为 /var/lib/docker
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DockerGraphPath?: string;
     /**
-      * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UserScript?: string;
     /**
-      * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
-      */
+     * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+     */
     Unschedulable?: number;
     /**
-      * 节点Label数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点Label数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Labels?: Array<Label>;
     /**
-      * 多盘数据盘挂载信息：新建节点时请确保购买CVM的参数传递了购买多个数据盘的信息，如CreateClusterInstances API的RunInstancesPara下的DataDisks也需要设置购买多个数据盘, 具体可以参考CreateClusterInstances接口的添加集群节点(多块数据盘)样例；添加已有节点时，请确保填写的分区信息在节点上真实存在
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 多盘数据盘挂载信息：新建节点时请确保购买CVM的参数传递了购买多个数据盘的信息，如CreateClusterInstances API的RunInstancesPara下的DataDisks也需要设置购买多个数据盘, 具体可以参考CreateClusterInstances接口的添加集群节点(多块数据盘)样例；添加已有节点时，请确保填写的分区信息在节点上真实存在
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     DataDisks?: Array<DataDisk>;
     /**
-      * 节点相关的自定义参数信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点相关的自定义参数信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExtraArgs?: InstanceExtraArgs;
 }
 /**
@@ -8187,13 +8187,13 @@ export interface InstanceAdvancedSettings {
  */
 export interface CancelClusterReleaseResponse {
     /**
-      * 应用信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release: PendingRelease;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8201,8 +8201,8 @@ export interface CancelClusterReleaseResponse {
  */
 export interface UpdateEdgeClusterVersionResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8210,12 +8210,12 @@ export interface UpdateEdgeClusterVersionResponse {
  */
 export interface ModifyClusterAsGroupAttributeRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 集群关联的伸缩组属性
-      */
+     * 集群关联的伸缩组属性
+     */
     ClusterAsGroupAttribute?: ClusterAsGroupAttribute;
 }
 /**
@@ -8223,16 +8223,16 @@ export interface ModifyClusterAsGroupAttributeRequest {
  */
 export interface DescribeClusterAsGroupsResponse {
     /**
-      * 集群关联的伸缩组总数
-      */
+     * 集群关联的伸缩组总数
+     */
     TotalCount: number;
     /**
-      * 集群关联的伸缩组列表
-      */
+     * 集群关联的伸缩组列表
+     */
     ClusterAsGroupSet: Array<ClusterAsGroup>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8240,24 +8240,24 @@ export interface DescribeClusterAsGroupsResponse {
  */
 export interface DescribePrometheusConfigResponse {
     /**
-      * 全局配置
-      */
+     * 全局配置
+     */
     Config?: string;
     /**
-      * ServiceMonitor配置
-      */
+     * ServiceMonitor配置
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * PodMonitor配置
-      */
+     * PodMonitor配置
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 原生Job
-      */
+     * 原生Job
+     */
     RawJobs?: Array<PrometheusConfigItem>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8265,24 +8265,24 @@ export interface DescribePrometheusConfigResponse {
  */
 export interface ScaleOutClusterMasterRequest {
     /**
-      * 集群实例ID
-      */
+     * 集群实例ID
+     */
     ClusterId: string;
     /**
-      * 新建节点参数
-      */
+     * 新建节点参数
+     */
     RunInstancesForNode?: Array<RunInstancesForNode>;
     /**
-      * 添加已有节点相关参数
-      */
+     * 添加已有节点相关参数
+     */
     ExistedInstancesForNode?: Array<ExistedInstancesForNode>;
     /**
-      * 实例高级设置
-      */
+     * 实例高级设置
+     */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
-      * 集群master组件自定义参数
-      */
+     * 集群master组件自定义参数
+     */
     ExtraArgs?: ClusterExtraArgs;
 }
 /**
@@ -8290,23 +8290,23 @@ export interface ScaleOutClusterMasterRequest {
  */
 export interface DeleteClusterInstancesResponse {
     /**
-      * 删除成功的实例ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 删除成功的实例ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     SuccInstanceIds?: Array<string>;
     /**
-      * 删除失败的实例ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 删除失败的实例ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedInstanceIds?: Array<string>;
     /**
-      * 未匹配到的实例ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 未匹配到的实例ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NotFoundInstanceIds?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8314,12 +8314,12 @@ export interface DeleteClusterInstancesResponse {
  */
 export interface CreatePrometheusGlobalNotificationRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 告警通知渠道
-      */
+     * 告警通知渠道
+     */
     Notification: PrometheusNotificationItem;
 }
 /**
@@ -8327,8 +8327,8 @@ export interface CreatePrometheusGlobalNotificationRequest {
  */
 export interface ModifyPrometheusTempResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8336,34 +8336,34 @@ export interface ModifyPrometheusTempResponse {
  */
 export interface PrometheusAlertRuleDetail {
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     Name: string;
     /**
-      * 规则列表
-      */
+     * 规则列表
+     */
     Rules: Array<PrometheusAlertRule>;
     /**
-      * 最后修改时间
-      */
+     * 最后修改时间
+     */
     UpdatedAt?: string;
     /**
-      * 告警渠道
-      */
+     * 告警渠道
+     */
     Notification?: PrometheusNotification;
     /**
-      * 告警 id
-      */
+     * 告警 id
+     */
     Id?: string;
     /**
-      * 如果该告警来至模板下发，则TemplateId为模板id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果该告警来至模板下发，则TemplateId为模板id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TemplateId?: string;
     /**
-      * 计算周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 计算周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Interval?: string;
 }
 /**
@@ -8371,42 +8371,42 @@ export interface PrometheusAlertRuleDetail {
  */
 export interface ReleaseHistory {
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 应用版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Revision: number;
     /**
-      * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 应用制品名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Chart: string;
     /**
-      * 应用制品版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用制品版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AppVersion: string;
     /**
-      * 应用更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdatedTime: string;
     /**
-      * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
 }
 /**
@@ -8414,16 +8414,16 @@ export interface ReleaseHistory {
  */
 export interface DescribeClusterInstancesResponse {
     /**
-      * 集群中实例总数
-      */
+     * 集群中实例总数
+     */
     TotalCount?: number;
     /**
-      * 集群中实例列表
-      */
+     * 集群中实例列表
+     */
     InstanceSet?: Array<Instance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8431,12 +8431,12 @@ export interface DescribeClusterInstancesResponse {
  */
 export interface CreatePrometheusAlertRuleRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警配置
-      */
+     * 告警配置
+     */
     AlertRule: PrometheusAlertRuleDetail;
 }
 /**
@@ -8444,52 +8444,52 @@ export interface CreatePrometheusAlertRuleRequest {
  */
 export interface UpdateEKSClusterRequest {
     /**
-      * 弹性集群Id
-      */
+     * 弹性集群Id
+     */
     ClusterId: string;
     /**
-      * 弹性集群名称
-      */
+     * 弹性集群名称
+     */
     ClusterName?: string;
     /**
-      * 弹性集群描述信息
-      */
+     * 弹性集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * 子网Id 列表
-      */
+     * 子网Id 列表
+     */
     SubnetIds?: Array<string>;
     /**
-      * 弹性容器集群公网访问LB信息
-      */
+     * 弹性容器集群公网访问LB信息
+     */
     PublicLB?: ClusterPublicLB;
     /**
-      * 弹性容器集群内网访问LB信息
-      */
+     * 弹性容器集群内网访问LB信息
+     */
     InternalLB?: ClusterInternalLB;
     /**
-      * Service 子网Id
-      */
+     * Service 子网Id
+     */
     ServiceSubnetId?: string;
     /**
-      * 集群自定义的dns 服务器信息
-      */
+     * 集群自定义的dns 服务器信息
+     */
     DnsServers?: Array<DnsServerConf>;
     /**
-      * 是否清空自定义dns 服务器设置。为1 表示 是。其他表示 否。
-      */
+     * 是否清空自定义dns 服务器设置。为1 表示 是。其他表示 否。
+     */
     ClearDnsServer?: string;
     /**
-      * 将来删除集群时是否要删除cbs。默认为 FALSE
-      */
+     * 将来删除集群时是否要删除cbs。默认为 FALSE
+     */
     NeedDeleteCbs?: boolean;
     /**
-      * 标记是否是新的内外网。默认为false
-      */
+     * 标记是否是新的内外网。默认为false
+     */
     ProxyLB?: boolean;
     /**
-      * 扩展参数。须是map[string]string 的json 格式。
-      */
+     * 扩展参数。须是map[string]string 的json 格式。
+     */
     ExtraParam?: string;
 }
 /**
@@ -8497,64 +8497,64 @@ export interface UpdateEKSClusterRequest {
  */
 export interface CreateTKEEdgeClusterRequest {
     /**
-      * k8s版本号
-      */
+     * k8s版本号
+     */
     K8SVersion: string;
     /**
-      * vpc 的Id
-      */
+     * vpc 的Id
+     */
     VpcId: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * 集群pod cidr
-      */
+     * 集群pod cidr
+     */
     PodCIDR: string;
     /**
-      * 集群service cidr
-      */
+     * 集群service cidr
+     */
     ServiceCIDR: string;
     /**
-      * 集群描述信息
-      */
+     * 集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * 集群高级设置
-      */
+     * 集群高级设置
+     */
     ClusterAdvancedSettings?: EdgeClusterAdvancedSettings;
     /**
-      * 节点上最大Pod数量
-      */
+     * 节点上最大Pod数量
+     */
     MaxNodePodNum?: number;
     /**
-      * 边缘计算集群公网访问LB信息
-      */
+     * 边缘计算集群公网访问LB信息
+     */
     PublicLB?: EdgeClusterPublicLB;
     /**
-      * 集群的级别
-      */
+     * 集群的级别
+     */
     ClusterLevel?: string;
     /**
-      * 集群是否支持自动升配
-      */
+     * 集群是否支持自动升配
+     */
     AutoUpgradeClusterLevel?: boolean;
     /**
-      * 集群计费方式
-      */
+     * 集群计费方式
+     */
     ChargeType?: string;
     /**
-      * 边缘集群版本，此版本区别于k8s版本，是整个集群各组件版本集合
-      */
+     * 边缘集群版本，此版本区别于k8s版本，是整个集群各组件版本集合
+     */
     EdgeVersion?: string;
     /**
-      * 边缘组件镜像仓库前缀
-      */
+     * 边缘组件镜像仓库前缀
+     */
     RegistryPrefix?: string;
     /**
-      * 集群绑定的云标签
-      */
+     * 集群绑定的云标签
+     */
     TagSpecification?: TagSpecification;
 }
 /**
@@ -8562,12 +8562,12 @@ export interface CreateTKEEdgeClusterRequest {
  */
 export interface CreateClusterVirtualNodePoolResponse {
     /**
-      * 节点池ID
-      */
+     * 节点池ID
+     */
     NodePoolId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8575,12 +8575,12 @@ export interface CreateClusterVirtualNodePoolResponse {
  */
 export interface CreateEKSClusterResponse {
     /**
-      * 弹性集群Id
-      */
+     * 弹性集群Id
+     */
     ClusterId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8588,12 +8588,12 @@ export interface CreateEKSClusterResponse {
  */
 export interface CreateImageCacheResponse {
     /**
-      * 镜像缓存Id
-      */
+     * 镜像缓存Id
+     */
     ImageCacheId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8601,8 +8601,8 @@ export interface CreateImageCacheResponse {
  */
 export interface CreateEdgeLogConfigResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8610,22 +8610,22 @@ export interface CreateEdgeLogConfigResponse {
  */
 export interface DescribeAvailableTKEEdgeVersionResponse {
     /**
-      * 版本列表
-      */
+     * 版本列表
+     */
     Versions: Array<string>;
     /**
-      * 边缘集群最新版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘集群最新版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EdgeVersionLatest: string;
     /**
-      * 边缘集群当前版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘集群当前版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EdgeVersionCurrent: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8633,16 +8633,16 @@ export interface DescribeAvailableTKEEdgeVersionResponse {
  */
 export interface ModifyPrometheusRecordRuleYamlRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 聚合实例名称
-      */
+     * 聚合实例名称
+     */
     Name: string;
     /**
-      * 新的内容
-      */
+     * 新的内容
+     */
     Content: string;
 }
 /**
@@ -8650,8 +8650,8 @@ export interface ModifyPrometheusRecordRuleYamlRequest {
  */
 export interface DeletePrometheusAlertPolicyResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8659,8 +8659,8 @@ export interface DeletePrometheusAlertPolicyResponse {
  */
 export interface InstallEdgeLogAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8668,24 +8668,24 @@ export interface InstallEdgeLogAgentResponse {
  */
 export interface EdgeAvailableExtraArgs {
     /**
-      * kube-apiserver可用的自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-apiserver可用的自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeAPIServer?: Array<EdgeArgsFlag>;
     /**
-      * kube-controller-manager可用的自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-controller-manager可用的自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeControllerManager?: Array<EdgeArgsFlag>;
     /**
-      * kube-scheduler可用的自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-scheduler可用的自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeScheduler?: Array<EdgeArgsFlag>;
     /**
-      * kubelet可用的自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kubelet可用的自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Kubelet?: Array<EdgeArgsFlag>;
 }
 /**
@@ -8693,16 +8693,16 @@ export interface EdgeAvailableExtraArgs {
  */
 export interface IPAddress {
     /**
-      * Ip 地址的类型。可为 advertise, public 等
-      */
+     * Ip 地址的类型。可为 advertise, public 等
+     */
     Type: string;
     /**
-      * Ip 地址
-      */
+     * Ip 地址
+     */
     Ip: string;
     /**
-      * 网络端口
-      */
+     * 网络端口
+     */
     Port: number;
 }
 /**
@@ -8710,8 +8710,8 @@ export interface IPAddress {
  */
 export interface DescribeTKEEdgeClusterCredentialRequest {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
 }
 /**
@@ -8719,8 +8719,8 @@ export interface DescribeTKEEdgeClusterCredentialRequest {
  */
 export interface AutoUpgradeClusterLevel {
     /**
-      * 是否开启自动变配集群等级
-      */
+     * 是否开启自动变配集群等级
+     */
     IsAutoUpgrade: boolean;
 }
 /**
@@ -8728,48 +8728,48 @@ export interface AutoUpgradeClusterLevel {
  */
 export interface CreateEKSClusterRequest {
     /**
-      * k8s版本号。可为1.18.4 1.20.6。
-      */
+     * k8s版本号。可为1.18.4 1.20.6。
+     */
     K8SVersion: string;
     /**
-      * vpc 的Id
-      */
+     * vpc 的Id
+     */
     VpcId: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * 子网Id 列表
-      */
+     * 子网Id 列表
+     */
     SubnetIds: Array<string>;
     /**
-      * 集群描述信息
-      */
+     * 集群描述信息
+     */
     ClusterDesc?: string;
     /**
-      * Service CIDR 或 Serivce 所在子网Id
-      */
+     * Service CIDR 或 Serivce 所在子网Id
+     */
     ServiceSubnetId?: string;
     /**
-      * 集群自定义的Dns服务器信息
-      */
+     * 集群自定义的Dns服务器信息
+     */
     DnsServers?: Array<DnsServerConf>;
     /**
-      * 扩展参数。须是map[string]string 的json 格式。
-      */
+     * 扩展参数。须是map[string]string 的json 格式。
+     */
     ExtraParam?: string;
     /**
-      * 是否在用户集群内开启Dns。默认为true
-      */
+     * 是否在用户集群内开启Dns。默认为true
+     */
     EnableVpcCoreDNS?: boolean;
     /**
-      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
-      */
+     * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
+     */
     TagSpecification?: Array<TagSpecification>;
     /**
-      * 子网信息列表
-      */
+     * 子网信息列表
+     */
     SubnetInfos?: Array<SubnetInfos>;
 }
 /**
@@ -8777,12 +8777,12 @@ export interface CreateEKSClusterRequest {
  */
 export interface CommonName {
     /**
-      * 子账户UIN
-      */
+     * 子账户UIN
+     */
     SubaccountUin: string;
     /**
-      * 子账户客户端证书中的CommonName字段
-      */
+     * 子账户客户端证书中的CommonName字段
+     */
     CN: string;
 }
 /**
@@ -8790,20 +8790,20 @@ export interface CommonName {
  */
 export interface EnableEventPersistenceRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * cls服务的logsetID
-      */
+     * cls服务的logsetID
+     */
     LogsetId?: string;
     /**
-      * cls服务的topicID
-      */
+     * cls服务的topicID
+     */
     TopicId?: string;
     /**
-      * topic所在地域，默认为集群所在地域
-      */
+     * topic所在地域，默认为集群所在地域
+     */
     TopicRegion?: string;
 }
 /**
@@ -8811,28 +8811,28 @@ export interface EnableEventPersistenceRequest {
  */
 export interface ModifyClusterVirtualNodePoolRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 节点池ID
-      */
+     * 节点池ID
+     */
     NodePoolId: string;
     /**
-      * 节点池名称
-      */
+     * 节点池名称
+     */
     Name?: string;
     /**
-      * 虚拟节点label
-      */
+     * 虚拟节点label
+     */
     Labels?: Array<Label>;
     /**
-      * 虚拟节点taint
-      */
+     * 虚拟节点taint
+     */
     Taints?: Array<Taint>;
     /**
-      * 删除保护开关
-      */
+     * 删除保护开关
+     */
     DeletionProtection?: boolean;
 }
 /**
@@ -8840,18 +8840,18 @@ export interface ModifyClusterVirtualNodePoolRequest {
  */
 export interface DescribeRegionsResponse {
     /**
-      * 地域的数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域的数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount?: number;
     /**
-      * 地域列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 地域列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RegionInstanceSet?: Array<RegionInstance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8859,8 +8859,8 @@ export interface DescribeRegionsResponse {
  */
 export interface CreateClusterRouteResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8868,47 +8868,47 @@ export interface CreateClusterRouteResponse {
  */
 export interface Release {
     /**
-      * 应用名称
-      */
+     * 应用名称
+     */
     Name: string;
     /**
-      * 应用命名空间
-      */
+     * 应用命名空间
+     */
     Namespace: string;
     /**
-      * 应用当前版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用当前版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Revision: string;
     /**
-      * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 制品名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 制品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChartName: string;
     /**
-      * 制品版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 制品版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ChartVersion: string;
     /**
-      * 制品应用版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 制品应用版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AppVersion: string;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdatedTime: string;
     /**
-      * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Description: string;
 }
 /**
@@ -8920,13 +8920,13 @@ export declare type DescribeEKSContainerInstanceRegionsRequest = null;
  */
 export interface DescribeECMInstancesRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterID: string;
     /**
-      * 过滤条件
-仅支持ecm-id过滤
-      */
+     * 过滤条件
+  仅支持ecm-id过滤
+     */
     Filters?: Array<Filter>;
 }
 /**
@@ -8934,8 +8934,8 @@ export interface DescribeECMInstancesRequest {
  */
 export interface DrainClusterVirtualNodeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8943,18 +8943,18 @@ export interface DrainClusterVirtualNodeResponse {
  */
 export interface DescribeVpcCniPodLimitsResponse {
     /**
-      * 机型数据数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机型数据数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount: number;
     /**
-      * 机型信息及其可支持的最大VPC-CNI模式Pod数量信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 机型信息及其可支持的最大VPC-CNI模式Pod数量信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodLimitsInstanceSet: Array<PodLimitsInstance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8962,18 +8962,18 @@ export interface DescribeVpcCniPodLimitsResponse {
  */
 export interface DescribeVersionsResponse {
     /**
-      * 版本数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount: number;
     /**
-      * 版本列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 版本列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VersionInstanceSet: Array<VersionInstance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -8981,12 +8981,12 @@ export interface DescribeVersionsResponse {
  */
 export interface ScaleInClusterMasterRequest {
     /**
-      * 集群实例ID
-      */
+     * 集群实例ID
+     */
     ClusterId: string;
     /**
-      * master缩容选项
-      */
+     * master缩容选项
+     */
     ScaleInMasters: Array<ScaleInMaster>;
 }
 /**
@@ -8994,12 +8994,12 @@ export interface ScaleInClusterMasterRequest {
  */
 export interface DeleteEdgeClusterInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 待删除实例ID数组
-      */
+     * 待删除实例ID数组
+     */
     InstanceIds: Array<string>;
 }
 /**
@@ -9007,39 +9007,39 @@ export interface DeleteEdgeClusterInstancesRequest {
  */
 export interface PrometheusAlertRule {
     /**
-      * 规则名称
-      */
+     * 规则名称
+     */
     Name: string;
     /**
-      * prometheus语句
-      */
+     * prometheus语句
+     */
     Rule: string;
     /**
-      * 额外标签
-      */
+     * 额外标签
+     */
     Labels: Array<Label>;
     /**
-      * 告警发送模板
-      */
+     * 告警发送模板
+     */
     Template: string;
     /**
-      * 持续时间
-      */
+     * 持续时间
+     */
     For: string;
     /**
-      * 该条规则的描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 该条规则的描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Describe?: string;
     /**
-      * 参考prometheus rule中的annotations
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 参考prometheus rule中的annotations
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Annotations?: Array<Label>;
     /**
-      * 告警规则状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警规则状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RuleState?: number;
 }
 /**
@@ -9047,16 +9047,16 @@ export interface PrometheusAlertRule {
  */
 export interface VirtualNodeSpec {
     /**
-      * 节点展示名称
-      */
+     * 节点展示名称
+     */
     DisplayName: string;
     /**
-      * 子网ID
-      */
+     * 子网ID
+     */
     SubnetId: string;
     /**
-      * 腾讯云标签
-      */
+     * 腾讯云标签
+     */
     Tags?: Array<Tag>;
 }
 /**
@@ -9064,68 +9064,68 @@ export interface VirtualNodeSpec {
  */
 export interface ClusterNetworkSettings {
     /**
-      * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
-      */
+     * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
+     */
     ClusterCIDR: string;
     /**
-      * 是否忽略 ClusterCIDR 冲突错误, 默认不忽略
-      */
+     * 是否忽略 ClusterCIDR 冲突错误, 默认不忽略
+     */
     IgnoreClusterCIDRConflict?: boolean;
     /**
-      * 集群中每个Node上最大的Pod数量(默认为256)
-      */
+     * 集群中每个Node上最大的Pod数量(默认为256)
+     */
     MaxNodePodNum?: number;
     /**
-      * 集群最大的service数量(默认为256)
-      */
+     * 集群最大的service数量(默认为256)
+     */
     MaxClusterServiceNum?: number;
     /**
-      * 是否启用IPVS(默认不开启)
-      */
+     * 是否启用IPVS(默认不开启)
+     */
     Ipvs?: boolean;
     /**
-      * 集群的VPCID（如果创建空集群，为必传值，否则自动设置为和集群的节点保持一致）
-      */
+     * 集群的VPCID（如果创建空集群，为必传值，否则自动设置为和集群的节点保持一致）
+     */
     VpcId?: string;
     /**
-      * 网络插件是否启用CNI(默认开启)
-      */
+     * 网络插件是否启用CNI(默认开启)
+     */
     Cni?: boolean;
     /**
-      * service的网络模式，当前参数只适用于ipvs+bpf模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * service的网络模式，当前参数只适用于ipvs+bpf模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeProxyMode: string;
     /**
-      * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceCIDR: string;
     /**
-      * 集群关联的容器子网
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群关联的容器子网
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Subnets: Array<string>;
     /**
-      * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IgnoreServiceCIDRConflict: boolean;
     /**
-      * 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsDualStack: boolean;
     /**
-      * 用于分配service的IP range，由系统自动分配
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 用于分配service的IP range，由系统自动分配
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Ipv6ServiceCIDR: string;
     /**
-      * 集群Cilium Mode配置
-- clusterIP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群Cilium Mode配置
+  - clusterIP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CiliumMode: string;
 }
 /**
@@ -9133,18 +9133,18 @@ export interface ClusterNetworkSettings {
  */
 export interface DescribeImagesResponse {
     /**
-      * 镜像数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount?: number;
     /**
-      * 镜像信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 镜像信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ImageInstanceSet?: Array<ImageInstance>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9152,24 +9152,24 @@ export interface DescribeImagesResponse {
  */
 export interface ClusterExtraArgs {
     /**
-      * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeAPIServer?: Array<string>;
     /**
-      * kube-controller-manager自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-controller-manager自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeControllerManager?: Array<string>;
     /**
-      * kube-scheduler自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-scheduler自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeScheduler?: Array<string>;
     /**
-      * etcd自定义参数，只支持独立集群
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * etcd自定义参数，只支持独立集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Etcd?: Array<string>;
 }
 /**
@@ -9177,8 +9177,8 @@ export interface ClusterExtraArgs {
  */
 export interface DeleteClusterVirtualNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9186,12 +9186,12 @@ export interface DeleteClusterVirtualNodePoolResponse {
  */
 export interface CreateClusterEndpointVipResponse {
     /**
-      * 请求任务的FlowId
-      */
+     * 请求任务的FlowId
+     */
     RequestFlowId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9199,31 +9199,31 @@ export interface CreateClusterEndpointVipResponse {
  */
 export interface TaskStepInfo {
     /**
-      * 步骤名称
-      */
+     * 步骤名称
+     */
     Step: string;
     /**
-      * 生命周期
-pending : 步骤未开始
-running: 步骤执行中
-success: 步骤成功完成
-failed: 步骤失败
-      */
+     * 生命周期
+  pending : 步骤未开始
+  running: 步骤执行中
+  success: 步骤成功完成
+  failed: 步骤失败
+     */
     LifeState: string;
     /**
-      * 步骤开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 步骤开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     StartAt: string;
     /**
-      * 步骤结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 步骤结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EndAt: string;
     /**
-      * 若步骤生命周期为failed,则此字段显示错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 若步骤生命周期为failed,则此字段显示错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedMsg: string;
 }
 /**
@@ -9231,16 +9231,16 @@ failed: 步骤失败
  */
 export interface ECMZoneInstanceCountISP {
     /**
-      * 创建实例的可用区
-      */
+     * 创建实例的可用区
+     */
     Zone: string;
     /**
-      * 在当前可用区欲创建的实例数目
-      */
+     * 在当前可用区欲创建的实例数目
+     */
     InstanceCount: number;
     /**
-      * 运营商
-      */
+     * 运营商
+     */
     ISP: string;
 }
 /**
@@ -9248,12 +9248,12 @@ export interface ECMZoneInstanceCountISP {
  */
 export interface DescribeRouteTableConflictsRequest {
     /**
-      * 路由表CIDR
-      */
+     * 路由表CIDR
+     */
     RouteTableCidrBlock: string;
     /**
-      * 路由表绑定的VPC
-      */
+     * 路由表绑定的VPC
+     */
     VpcId: string;
 }
 /**
@@ -9261,8 +9261,8 @@ export interface DescribeRouteTableConflictsRequest {
  */
 export interface DeleteClusterEndpointVipResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9270,52 +9270,52 @@ export interface DeleteClusterEndpointVipResponse {
  */
 export interface ClusterBasicSettings {
     /**
-      * 集群操作系统，支持设置公共镜像(字段传相应镜像Name)和自定义镜像(字段传相应镜像ID)，详情参考：https://cloud.tencent.com/document/product/457/68289
-      */
+     * 集群操作系统，支持设置公共镜像(字段传相应镜像Name)和自定义镜像(字段传相应镜像ID)，详情参考：https://cloud.tencent.com/document/product/457/68289
+     */
     ClusterOs?: string;
     /**
-      * 集群版本,默认值为1.10.5
-      */
+     * 集群版本,默认值为1.10.5
+     */
     ClusterVersion?: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName?: string;
     /**
-      * 集群描述
-      */
+     * 集群描述
+     */
     ClusterDescription?: string;
     /**
-      * 私有网络ID，形如vpc-xxx。创建托管空集群时必传。
-      */
+     * 私有网络ID，形如vpc-xxx。创建托管空集群时必传。
+     */
     VpcId?: string;
     /**
-      * 集群内新增资源所属项目ID。
-      */
+     * 集群内新增资源所属项目ID。
+     */
     ProjectId?: number;
     /**
-      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
-      */
+     * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
+     */
     TagSpecification?: Array<TagSpecification>;
     /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-      */
+     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+     */
     OsCustomizeType?: string;
     /**
-      * 是否开启节点的默认安全组(默认: 否，Alpha特性)
-      */
+     * 是否开启节点的默认安全组(默认: 否，Alpha特性)
+     */
     NeedWorkSecurityGroup?: boolean;
     /**
-      * 当选择Cilium Overlay网络插件时，TKE会从该子网获取2个IP用来创建内网负载均衡
-      */
+     * 当选择Cilium Overlay网络插件时，TKE会从该子网获取2个IP用来创建内网负载均衡
+     */
     SubnetId?: string;
     /**
-      * 集群等级，针对托管集群生效
-      */
+     * 集群等级，针对托管集群生效
+     */
     ClusterLevel?: string;
     /**
-      * 自动变配集群等级，针对托管集群生效
-      */
+     * 自动变配集群等级，针对托管集群生效
+     */
     AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
 }
 /**
@@ -9323,74 +9323,74 @@ export interface ClusterBasicSettings {
  */
 export interface PrometheusTemp {
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     Name: string;
     /**
-      * 模板维度，支持以下类型
-instance 实例级别
-cluster 集群级别
-      */
+     * 模板维度，支持以下类型
+  instance 实例级别
+  cluster 集群级别
+     */
     Level: string;
     /**
-      * 模板描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模板描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Describe?: string;
     /**
-      * 当Level为instance时有效，
-模板中的聚合规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的聚合规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RecordRules?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的ServiceMonitor规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的PodMonitors规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的RawJobs规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的RawJobs规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RawJobs?: Array<PrometheusConfigItem>;
     /**
-      * 模板的ID, 用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模板的ID, 用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TemplateId?: string;
     /**
-      * 最近更新时间，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最近更新时间，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime?: string;
     /**
-      * 当前版本，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前版本，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Version?: string;
     /**
-      * 是否系统提供的默认模板，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否系统提供的默认模板，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsDefault?: boolean;
     /**
-      * 当Level为instance时有效，
-模板中的告警配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的告警配置列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertDetailRules?: Array<PrometheusAlertPolicyItem>;
     /**
-      * 关联实例数目
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关联实例数目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TargetsTotal?: number;
 }
 /**
@@ -9398,13 +9398,13 @@ cluster 集群级别
  */
 export interface DescribeBackupStorageLocationsResponse {
     /**
-      * 详细备份仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 详细备份仓库信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BackupStorageLocationSet?: Array<BackupStorageLocation>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9412,8 +9412,8 @@ export interface DescribeBackupStorageLocationsResponse {
  */
 export interface ModifyClusterAsGroupAttributeResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9421,8 +9421,8 @@ export interface ModifyClusterAsGroupAttributeResponse {
  */
 export interface DeletePrometheusTempRequest {
     /**
-      * 模板id
-      */
+     * 模板id
+     */
     TemplateId: string;
 }
 /**
@@ -9430,25 +9430,25 @@ export interface DeletePrometheusTempRequest {
  */
 export interface DescribeTKEEdgeScriptResponse {
     /**
-      * 下载链接
-      */
+     * 下载链接
+     */
     Link?: string;
     /**
-      * 下载需要的token
-      */
+     * 下载需要的token
+     */
     Token?: string;
     /**
-      * 下载命令
-      */
+     * 下载命令
+     */
     Command?: string;
     /**
-      * edgectl脚本版本，默认拉取最新版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * edgectl脚本版本，默认拉取最新版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ScriptVersion?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9456,16 +9456,16 @@ export interface DescribeTKEEdgeScriptResponse {
  */
 export interface DescribeClusterRouteTablesResponse {
     /**
-      * 符合条件的实例数量。
-      */
+     * 符合条件的实例数量。
+     */
     TotalCount?: number;
     /**
-      * 集群路由表对象。
-      */
+     * 集群路由表对象。
+     */
     RouteTableSet?: Array<RouteTableInfo>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9473,12 +9473,12 @@ export interface DescribeClusterRouteTablesResponse {
  */
 export interface DescribeClusterKubeconfigRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 默认false 获取内网，是否获取外网访问的kubeconfig
-      */
+     * 默认false 获取内网，是否获取外网访问的kubeconfig
+     */
     IsExtranet?: boolean;
 }
 /**
@@ -9486,12 +9486,12 @@ export interface DescribeClusterKubeconfigRequest {
  */
 export interface DeletePrometheusTempSyncRequest {
     /**
-      * 模板id
-      */
+     * 模板id
+     */
     TemplateId: string;
     /**
-      * 取消同步的对象列表
-      */
+     * 取消同步的对象列表
+     */
     Targets: Array<PrometheusTemplateSyncTarget>;
 }
 /**
@@ -9499,12 +9499,12 @@ export interface DeletePrometheusTempSyncRequest {
  */
 export interface CreatePrometheusTemplateResponse {
     /**
-      * 模板Id
-      */
+     * 模板Id
+     */
     TemplateId?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9512,12 +9512,12 @@ export interface CreatePrometheusTemplateResponse {
  */
 export interface CreateClusterEndpointVipRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
-      */
+     * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+     */
     SecurityPolicies?: Array<string>;
 }
 /**
@@ -9525,12 +9525,12 @@ export interface CreateClusterEndpointVipRequest {
  */
 export interface ClusterInternalLB {
     /**
-      * 是否开启内网访问LB
-      */
+     * 是否开启内网访问LB
+     */
     Enabled: boolean;
     /**
-      * 内网访问LB关联的子网Id
-      */
+     * 内网访问LB关联的子网Id
+     */
     SubnetId?: string;
 }
 /**
@@ -9538,12 +9538,12 @@ export interface ClusterInternalLB {
  */
 export interface UpdateClusterKubeconfigRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 子账户Uin列表，传空默认为调用此接口的SubUin
-      */
+     * 子账户Uin列表，传空默认为调用此接口的SubUin
+     */
     SubAccounts?: Array<string>;
 }
 /**
@@ -9551,12 +9551,12 @@ export interface UpdateClusterKubeconfigRequest {
  */
 export interface DescribePrometheusGlobalConfigRequest {
     /**
-      * 实例级别抓取配置
-      */
+     * 实例级别抓取配置
+     */
     InstanceId: string;
     /**
-      * 是否禁用统计
-      */
+     * 是否禁用统计
+     */
     DisableStatistics?: boolean;
 }
 /**
@@ -9564,12 +9564,12 @@ export interface DescribePrometheusGlobalConfigRequest {
  */
 export interface CreateECMInstancesResponse {
     /**
-      * ecm id 列表
-      */
+     * ecm id 列表
+     */
     EcmIdSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9577,12 +9577,12 @@ export interface CreateECMInstancesResponse {
  */
 export interface ModifyPrometheusGlobalNotificationRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 告警通知渠道
-      */
+     * 告警通知渠道
+     */
     Notification: PrometheusNotificationItem;
 }
 /**
@@ -9590,14 +9590,14 @@ export interface ModifyPrometheusGlobalNotificationRequest {
  */
 export interface UnavailableReason {
     /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InstanceId: string;
     /**
-      * 原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Reason: string;
 }
 /**
@@ -9605,16 +9605,16 @@ export interface UnavailableReason {
  */
 export interface GetUpgradeInstanceProgressRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 最多获取多少个节点的进度
-      */
+     * 最多获取多少个节点的进度
+     */
     Limit?: number;
     /**
-      * 从第几个节点开始获取进度
-      */
+     * 从第几个节点开始获取进度
+     */
     Offset?: number;
 }
 /**
@@ -9622,8 +9622,8 @@ export interface GetUpgradeInstanceProgressRequest {
  */
 export interface UpdateEKSClusterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9631,16 +9631,16 @@ export interface UpdateEKSClusterResponse {
  */
 export interface DescribeEdgeCVMInstancesResponse {
     /**
-      * 返回的实例相关信息列表的长度
-      */
+     * 返回的实例相关信息列表的长度
+     */
     TotalCount?: number;
     /**
-      * 返回的实例相关信息列表
-      */
+     * 返回的实例相关信息列表
+     */
     InstanceInfoSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9648,8 +9648,8 @@ export interface DescribeEdgeCVMInstancesResponse {
  */
 export interface DeleteBackupStorageLocationResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9657,16 +9657,16 @@ export interface DeleteBackupStorageLocationResponse {
  */
 export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 节点池id
-      */
+     * 节点池id
+     */
     NodePoolId: string;
     /**
-      * 节点池所关联的伸缩组的期望实例数
-      */
+     * 节点池所关联的伸缩组的期望实例数
+     */
     DesiredCapacity: number;
 }
 /**
@@ -9674,8 +9674,8 @@ export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
  */
 export interface DeleteClusterRouteResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9683,77 +9683,77 @@ export interface DeleteClusterRouteResponse {
  */
 export interface PrometheusNotificationItem {
     /**
-      * 是否启用
-      */
+     * 是否启用
+     */
     Enabled: boolean;
     /**
-      * 通道类型，默认为amp，支持以下
-amp
-webhook
-alertmanager
-      */
+     * 通道类型，默认为amp，支持以下
+  amp
+  webhook
+  alertmanager
+     */
     Type: string;
     /**
-      * 如果Type为webhook, 则该字段为必填项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果Type为webhook, 则该字段为必填项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     WebHook?: string;
     /**
-      * 如果Type为alertmanager, 则该字段为必填项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果Type为alertmanager, 则该字段为必填项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertManager?: PrometheusAlertManagerConfig;
     /**
-      * 收敛时间
-      */
+     * 收敛时间
+     */
     RepeatInterval?: string;
     /**
-      * 生效起始时间
-      */
+     * 生效起始时间
+     */
     TimeRangeStart?: string;
     /**
-      * 生效结束时间
-      */
+     * 生效结束时间
+     */
     TimeRangeEnd?: string;
     /**
-      * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     NotifyWay?: Array<string>;
     /**
-      * 告警接收组（用户组）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警接收组（用户组）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ReceiverGroups?: Array<string>;
     /**
-      * 电话告警顺序。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警顺序。
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneNotifyOrder?: Array<number>;
     /**
-      * 电话告警次数。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警次数。
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneCircleTimes?: number;
     /**
-      * 电话告警轮内间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警轮内间隔。单位：秒
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneInnerInterval?: number;
     /**
-      * 电话告警轮外间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警轮外间隔。单位：秒
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneCircleInterval?: number;
     /**
-      * 电话告警触达通知
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 电话告警触达通知
+  注：NotifyWay选择CALL，采用该参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PhoneArriveNotice?: boolean;
 }
 /**
@@ -9761,28 +9761,28 @@ alertmanager
  */
 export interface DeletePrometheusConfigRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 要删除的ServiceMonitor名字列表
-      */
+     * 要删除的ServiceMonitor名字列表
+     */
     ServiceMonitors?: Array<string>;
     /**
-      * 要删除的PodMonitor名字列表
-      */
+     * 要删除的PodMonitor名字列表
+     */
     PodMonitors?: Array<string>;
     /**
-      * 要删除的RawJobs名字列表
-      */
+     * 要删除的RawJobs名字列表
+     */
     RawJobs?: Array<string>;
 }
 /**
@@ -9790,33 +9790,33 @@ export interface DeletePrometheusConfigRequest {
  */
 export interface DescribeEdgeClusterUpgradeInfoResponse {
     /**
-      * 可升级的集群组件和
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可升级的集群组件和
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ComponentVersion: string;
     /**
-      * 边缘集群当前版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘集群当前版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     EdgeVersionCurrent: string;
     /**
-      * 边缘组件镜像仓库地址前缀，包含域名和命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 边缘组件镜像仓库地址前缀，包含域名和命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RegistryPrefix: string;
     /**
-      * 集群升级状态，可能值：running、updating、failed
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群升级状态，可能值：running、updating、failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterUpgradeStatus: string;
     /**
-      * 集群升级中状态或者失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群升级中状态或者失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterUpgradeStatusReason: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9824,8 +9824,8 @@ export interface DescribeEdgeClusterUpgradeInfoResponse {
  */
 export interface ModifyClusterNodePoolResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9833,37 +9833,37 @@ export interface ModifyClusterNodePoolResponse {
  */
 export interface PrometheusAlertPolicyItem {
     /**
-      * 策略名称
-      */
+     * 策略名称
+     */
     Name: string;
     /**
-      * 规则列表
-      */
+     * 规则列表
+     */
     Rules: Array<PrometheusAlertRule>;
     /**
-      * 告警策略 id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警策略 id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Id?: string;
     /**
-      * 如果该告警来自模板下发，则TemplateId为模板id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果该告警来自模板下发，则TemplateId为模板id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TemplateId?: string;
     /**
-      * 告警渠道，模板中使用可能返回null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 告警渠道，模板中使用可能返回null
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Notification?: PrometheusNotificationItem;
     /**
-      * 最后修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最后修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdatedAt?: string;
     /**
-      * 如果告警策略来源于用户集群CRD资源定义，则ClusterId为所属集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 如果告警策略来源于用户集群CRD资源定义，则ClusterId为所属集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
 }
 /**
@@ -9871,16 +9871,16 @@ export interface PrometheusAlertPolicyItem {
  */
 export interface ModifyPrometheusAgentExternalLabelsRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 新的external_labels
-      */
+     * 新的external_labels
+     */
     ExternalLabels: Array<Label>;
 }
 /**
@@ -9888,19 +9888,19 @@ export interface ModifyPrometheusAgentExternalLabelsRequest {
  */
 export interface EdgeClusterAdvancedSettings {
     /**
-      * 集群自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExtraArgs?: EdgeClusterExtraArgs;
     /**
-      * 运行时类型，支持"docker"和"containerd"，默认为docker
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 运行时类型，支持"docker"和"containerd"，默认为docker
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Runtime?: string;
     /**
-      * 集群kube-proxy转发模式，支持"iptables"和"ipvs"，默认为iptables
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群kube-proxy转发模式，支持"iptables"和"ipvs"，默认为iptables
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ProxyMode?: string;
 }
 /**
@@ -9908,31 +9908,31 @@ export interface EdgeClusterAdvancedSettings {
  */
 export interface PrometheusTarget {
     /**
-      * 抓取目标的URL
-      */
+     * 抓取目标的URL
+     */
     Url: string;
     /**
-      * target当前状态,当前支持
-up = 健康
-down = 不健康
-unknown = 未知
-      */
+     * target当前状态,当前支持
+  up = 健康
+  down = 不健康
+  unknown = 未知
+     */
     State: string;
     /**
-      * target的元label
-      */
+     * target的元label
+     */
     Labels: Array<Label>;
     /**
-      * 上一次抓取的时间
-      */
+     * 上一次抓取的时间
+     */
     LastScrape: string;
     /**
-      * 上一次抓取的耗时，单位是s
-      */
+     * 上一次抓取的耗时，单位是s
+     */
     ScrapeDuration: number;
     /**
-      * 上一次抓取如果错误，该字段存储错误信息
-      */
+     * 上一次抓取如果错误，该字段存储错误信息
+     */
     Error: string;
 }
 /**
@@ -9940,19 +9940,19 @@ unknown = 未知
  */
 export interface LoginSettings {
     /**
-      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Password?: string;
     /**
-      * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KeyIds?: Array<string>;
     /**
-      * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KeepImageLogin?: string;
 }
 /**
@@ -9960,16 +9960,16 @@ export interface LoginSettings {
  */
 export interface DescribePrometheusTempResponse {
     /**
-      * 模板列表
-      */
+     * 模板列表
+     */
     Templates: Array<PrometheusTemp>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     Total: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -9977,12 +9977,12 @@ export interface DescribePrometheusTempResponse {
  */
 export interface SyncPrometheusTemplateRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     TemplateId: string;
     /**
-      * 同步目标
-      */
+     * 同步目标
+     */
     Targets: Array<PrometheusTemplateSyncTarget>;
 }
 /**
@@ -9990,12 +9990,12 @@ export interface SyncPrometheusTemplateRequest {
  */
 export interface DescribeClusterEndpointStatusRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
-      */
+     * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+     */
     IsExtranet?: boolean;
 }
 /**
@@ -10003,16 +10003,16 @@ export interface DescribeClusterEndpointStatusRequest {
  */
 export interface DescribeClusterStatusResponse {
     /**
-      * 集群状态列表
-      */
+     * 集群状态列表
+     */
     ClusterStatusSet: Array<ClusterStatus>;
     /**
-      * 集群个数
-      */
+     * 集群个数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10020,20 +10020,20 @@ export interface DescribeClusterStatusResponse {
  */
 export interface ImageRegistryCredential {
     /**
-      * 镜像仓库地址
-      */
+     * 镜像仓库地址
+     */
     Server?: string;
     /**
-      * 用户名
-      */
+     * 用户名
+     */
     Username?: string;
     /**
-      * 密码
-      */
+     * 密码
+     */
     Password?: string;
     /**
-      * ImageRegistryCredential的名字
-      */
+     * ImageRegistryCredential的名字
+     */
     Name?: string;
 }
 /**
@@ -10041,17 +10041,17 @@ export interface ImageRegistryCredential {
  */
 export interface DescribeRouteTableConflictsResponse {
     /**
-      * 路由表是否冲突。
-      */
+     * 路由表是否冲突。
+     */
     HasConflict: boolean;
     /**
-      * 路由表冲突列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 路由表冲突列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RouteTableConflictSet: Array<RouteTableConflict>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10063,20 +10063,20 @@ export declare type DescribeVersionsRequest = null;
  */
 export interface DescribePrometheusTempRequest {
     /**
-      * 模糊过滤条件，支持
-Level 按模板级别过滤
-Name 按名称过滤
-Describe 按描述过滤
-ID 按templateId过滤
-      */
+     * 模糊过滤条件，支持
+  Level 按模板级别过滤
+  Name 按名称过滤
+  Describe 按描述过滤
+  ID 按templateId过滤
+     */
     Filters?: Array<Filter>;
     /**
-      * 分页偏移
-      */
+     * 分页偏移
+     */
     Offset?: number;
     /**
-      * 总数限制
-      */
+     * 总数限制
+     */
     Limit?: number;
 }
 /**
@@ -10084,8 +10084,8 @@ ID 按templateId过滤
  */
 export interface DeleteClusterRouteTableRequest {
     /**
-      * 路由表名称
-      */
+     * 路由表名称
+     */
     RouteTableName: string;
 }
 /**
@@ -10093,8 +10093,8 @@ export interface DeleteClusterRouteTableRequest {
  */
 export interface DescribeClusterEndpointsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -10102,9 +10102,9 @@ export interface DescribeClusterEndpointsRequest {
  */
 export interface InstanceExtraArgs {
     /**
-      * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Kubelet?: Array<string>;
 }
 /**
@@ -10112,8 +10112,8 @@ export interface InstanceExtraArgs {
  */
 export interface AcquireClusterAdminRoleRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -10121,18 +10121,18 @@ export interface AcquireClusterAdminRoleRequest {
  */
 export interface ListClusterInspectionResultsRequest {
     /**
-      * 目标集群列表，为空查询用户所有集群
-
-      */
+     * 目标集群列表，为空查询用户所有集群
+  
+     */
     ClusterIds?: Array<string>;
     /**
-      * 隐藏的字段信息，为了减少无效的字段返回，隐藏字段不会在返回值中返回。可选值：results
-
-      */
+     * 隐藏的字段信息，为了减少无效的字段返回，隐藏字段不会在返回值中返回。可选值：results
+  
+     */
     Hide?: Array<string>;
     /**
-      * 指定查询结果的报告名称，默认查询最新的每个集群只查询最新的一条
-      */
+     * 指定查询结果的报告名称，默认查询最新的每个集群只查询最新的一条
+     */
     Name?: string;
 }
 /**
@@ -10140,8 +10140,8 @@ export interface ListClusterInspectionResultsRequest {
  */
 export interface DeletePrometheusTemplateResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10149,16 +10149,16 @@ export interface DeletePrometheusTemplateResponse {
  */
 export interface DescribeECMInstancesResponse {
     /**
-      * 返回的实例相关信息列表的长度
-      */
+     * 返回的实例相关信息列表的长度
+     */
     TotalCount?: number;
     /**
-      * 返回的实例相关信息列表
-      */
+     * 返回的实例相关信息列表
+     */
     InstanceInfoSet?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10166,8 +10166,8 @@ export interface DescribeECMInstancesResponse {
  */
 export interface DescribePrometheusInstanceRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
 }
 /**
@@ -10175,12 +10175,12 @@ export interface DescribePrometheusInstanceRequest {
  */
 export interface DeletePrometheusAlertRuleRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 告警规则id列表
-      */
+     * 告警规则id列表
+     */
     AlertIds: Array<string>;
 }
 /**
@@ -10188,13 +10188,13 @@ export interface DeletePrometheusAlertRuleRequest {
  */
 export interface CreateClusterReleaseResponse {
     /**
-      * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Release?: PendingRelease;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10202,19 +10202,19 @@ export interface CreateClusterReleaseResponse {
  */
 export interface EdgeClusterExtraArgs {
     /**
-      * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeAPIServer?: Array<string>;
     /**
-      * kube-controller-manager自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-controller-manager自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeControllerManager?: Array<string>;
     /**
-      * kube-scheduler自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * kube-scheduler自定义参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     KubeScheduler?: Array<string>;
 }
 /**
@@ -10222,12 +10222,12 @@ export interface EdgeClusterExtraArgs {
  */
 export interface DescribePrometheusTargetsResponse {
     /**
-      * 所有Job的targets信息
-      */
+     * 所有Job的targets信息
+     */
     Jobs?: Array<PrometheusJobTargets>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10235,17 +10235,17 @@ export interface DescribePrometheusTargetsResponse {
  */
 export interface DescribeEnableVpcCniProgressResponse {
     /**
-      * 任务进度的描述：Running/Succeed/Failed
-      */
+     * 任务进度的描述：Running/Succeed/Failed
+     */
     Status: string;
     /**
-      * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ErrorMessage: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10253,43 +10253,43 @@ export interface DescribeEnableVpcCniProgressResponse {
  */
 export interface PrometheusAgentOverview {
     /**
-      * 集群类型
-      */
+     * 集群类型
+     */
     ClusterType: string;
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * agent状态
-normal = 正常
-abnormal = 异常
-      */
+     * agent状态
+  normal = 正常
+  abnormal = 异常
+     */
     Status: string;
     /**
-      * 集群名称
-      */
+     * 集群名称
+     */
     ClusterName: string;
     /**
-      * 额外labels
-本集群的所有指标都会带上这几个label
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 额外labels
+  本集群的所有指标都会带上这几个label
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ExternalLabels: Array<Label>;
     /**
-      * 集群所在地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Region: string;
     /**
-      * 集群所在VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群所在VPC ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     VpcId: string;
     /**
-      * 记录关联等操作的失败信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 记录关联等操作的失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     FailedReason: string;
 }
 /**
@@ -10297,17 +10297,17 @@ abnormal = 异常
  */
 export interface AppChart {
     /**
-      * chart名称
-      */
+     * chart名称
+     */
     Name: string;
     /**
-      * chart的标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * chart的标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Label: string;
     /**
-      * chart的版本
-      */
+     * chart的版本
+     */
     LatestVersion: string;
 }
 /**
@@ -10315,12 +10315,12 @@ export interface AppChart {
  */
 export interface DeleteEdgeCVMInstancesRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterID: string;
     /**
-      * cvm id集合
-      */
+     * cvm id集合
+     */
     CvmIdSet: Array<string>;
 }
 /**
@@ -10328,76 +10328,76 @@ export interface DeleteEdgeCVMInstancesRequest {
  */
 export interface ModifyClusterNodePoolRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * 节点池ID
-      */
+     * 节点池ID
+     */
     NodePoolId: string;
     /**
-      * 名称
-      */
+     * 名称
+     */
     Name?: string;
     /**
-      * 最大节点数
-      */
+     * 最大节点数
+     */
     MaxNodesNum?: number;
     /**
-      * 最小节点数
-      */
+     * 最小节点数
+     */
     MinNodesNum?: number;
     /**
-      * 标签
-      */
+     * 标签
+     */
     Labels?: Array<Label>;
     /**
-      * 污点
-      */
+     * 污点
+     */
     Taints?: Array<Taint>;
     /**
-      * 是否开启伸缩
-      */
+     * 是否开启伸缩
+     */
     EnableAutoscale?: boolean;
     /**
-      * 操作系统名称
-      */
+     * 操作系统名称
+     */
     OsName?: string;
     /**
-      * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-      */
+     * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+     */
     OsCustomizeType?: string;
     /**
-      * GPU驱动版本，CUDA版本，cuDNN版本以及是否启用MIG特性
-      */
+     * GPU驱动版本，CUDA版本，cuDNN版本以及是否启用MIG特性
+     */
     GPUArgs?: GPUArgs;
     /**
-      * base64编码后的自定义脚本
-      */
+     * base64编码后的自定义脚本
+     */
     UserScript?: string;
     /**
-      * 更新label和taint时忽略存量节点
-      */
+     * 更新label和taint时忽略存量节点
+     */
     IgnoreExistedNode?: boolean;
     /**
-      * 节点自定义参数
-      */
+     * 节点自定义参数
+     */
     ExtraArgs?: InstanceExtraArgs;
     /**
-      * 资源标签
-      */
+     * 资源标签
+     */
     Tags?: Array<Tag>;
     /**
-      * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
-      */
+     * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+     */
     Unschedulable?: number;
     /**
-      * 删除保护开关
-      */
+     * 删除保护开关
+     */
     DeletionProtection?: boolean;
     /**
-      * dockerd --graph 指定值, 默认为 /var/lib/docker
-      */
+     * dockerd --graph 指定值, 默认为 /var/lib/docker
+     */
     DockerGraphPath?: string;
 }
 /**
@@ -10405,8 +10405,8 @@ export interface ModifyClusterNodePoolRequest {
  */
 export interface InstallLogAgentResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10414,8 +10414,8 @@ export interface InstallLogAgentResponse {
  */
 export interface GetClusterLevelPriceRequest {
     /**
-      * 集群规格，托管集群询价
-      */
+     * 集群规格，托管集群询价
+     */
     ClusterLevel: string;
 }
 /**
@@ -10423,8 +10423,8 @@ export interface GetClusterLevelPriceRequest {
  */
 export interface CreateClusterEndpointResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10432,86 +10432,86 @@ export interface CreateClusterEndpointResponse {
  */
 export interface ClusterAdvancedSettings {
     /**
-      * 是否启用IPVS
-      */
+     * 是否启用IPVS
+     */
     IPVS?: boolean;
     /**
-      * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
-      */
+     * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
+     */
     AsEnabled?: boolean;
     /**
-      * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
-      */
+     * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
+     */
     ContainerRuntime?: string;
     /**
-      * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
-      */
+     * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
+     */
     NodeNameType?: string;
     /**
-      * 集群自定义参数
-      */
+     * 集群自定义参数
+     */
     ExtraArgs?: ClusterExtraArgs;
     /**
-      * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
-      */
+     * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
+     */
     NetworkType?: string;
     /**
-      * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
-      */
+     * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
+     */
     IsNonStaticIpMode?: boolean;
     /**
-      * 是否启用集群删除保护
-      */
+     * 是否启用集群删除保护
+     */
     DeletionProtection?: boolean;
     /**
-      * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
-iptables模式：IPVS和KubeProxyMode都不设置
-ipvs模式: 设置IPVS为true, KubeProxyMode不设置
-ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
-使用ipvs-bpf的网络模式需要满足以下条件：
-1. 集群版本必须为1.14及以上；
-2. 系统镜像必须是: Tencent Linux 2.4；
-      */
+     * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
+  iptables模式：IPVS和KubeProxyMode都不设置
+  ipvs模式: 设置IPVS为true, KubeProxyMode不设置
+  ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
+  使用ipvs-bpf的网络模式需要满足以下条件：
+  1. 集群版本必须为1.14及以上；
+  2. 系统镜像必须是: Tencent Linux 2.4；
+     */
     KubeProxyMode?: string;
     /**
-      * 是否开启审计开关
-      */
+     * 是否开启审计开关
+     */
     AuditEnabled?: boolean;
     /**
-      * 审计日志上传到的logset日志集
-      */
+     * 审计日志上传到的logset日志集
+     */
     AuditLogsetId?: string;
     /**
-      * 审计日志上传到的topic
-      */
+     * 审计日志上传到的topic
+     */
     AuditLogTopicId?: string;
     /**
-      * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
-      */
+     * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
+     */
     VpcCniType?: string;
     /**
-      * 运行时版本
-      */
+     * 运行时版本
+     */
     RuntimeVersion?: string;
     /**
-      * 是否开节点podCIDR大小的自定义模式
-      */
+     * 是否开节点podCIDR大小的自定义模式
+     */
     EnableCustomizedPodCIDR?: boolean;
     /**
-      * 自定义模式下的基础pod数量
-      */
+     * 自定义模式下的基础pod数量
+     */
     BasePodNumber?: number;
     /**
-      * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
-      */
+     * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
+     */
     CiliumMode?: string;
     /**
-      * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
-      */
+     * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
+     */
     IsDualStack?: boolean;
     /**
-      * 是否开启QGPU共享
-      */
+     * 是否开启QGPU共享
+     */
     QGPUShareEnable?: boolean;
 }
 /**
@@ -10519,13 +10519,13 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
  */
 export interface UpdateClusterKubeconfigResponse {
     /**
-      * 已更新的子账户Uin列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 已更新的子账户Uin列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdatedSubAccounts?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10533,12 +10533,12 @@ export interface UpdateClusterKubeconfigResponse {
  */
 export interface ForwardApplicationRequestV3Response {
     /**
-      * 请求集群addon后返回的数据
-      */
+     * 请求集群addon后返回的数据
+     */
     ResponseBody: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10546,16 +10546,16 @@ export interface ForwardApplicationRequestV3Response {
  */
 export interface ModifyClusterAuthenticationOptionsRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
     /**
-      * ServiceAccount认证配置
-      */
+     * ServiceAccount认证配置
+     */
     ServiceAccounts?: ServiceAccountAuthenticationOptions;
     /**
-      * OIDC认证配置
-      */
+     * OIDC认证配置
+     */
     OIDCConfig?: OIDCConfigAuthenticationOptions;
 }
 /**
@@ -10563,8 +10563,8 @@ export interface ModifyClusterAuthenticationOptionsRequest {
  */
 export interface DeleteClusterEndpointVipRequest {
     /**
-      * 集群ID
-      */
+     * 集群ID
+     */
     ClusterId: string;
 }
 /**
@@ -10572,24 +10572,24 @@ export interface DeleteClusterEndpointVipRequest {
  */
 export interface LivenessOrReadinessProbe {
     /**
-      * 探针参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 探针参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Probe: Probe;
     /**
-      * HttpGet检测参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * HttpGet检测参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HttpGet?: HttpGet;
     /**
-      * 容器内检测命令参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 容器内检测命令参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Exec?: Exec;
     /**
-      * TcpSocket检测的端口参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * TcpSocket检测的端口参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TcpSocket?: TcpSocket;
 }
 /**
@@ -10597,16 +10597,16 @@ export interface LivenessOrReadinessProbe {
  */
 export interface DescribeClusterLevelChangeRecordsResponse {
     /**
-      * 总数
-      */
+     * 总数
+     */
     TotalCount?: number;
     /**
-      * 集群规模
-      */
+     * 集群规模
+     */
     Items?: Array<ClusterLevelChangeRecord>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10614,52 +10614,52 @@ export interface DescribeClusterLevelChangeRecordsResponse {
  */
 export interface ClusterStatus {
     /**
-      * 集群Id
-      */
+     * 集群Id
+     */
     ClusterId: string;
     /**
-      * 集群状态
-      */
+     * 集群状态
+     */
     ClusterState: string;
     /**
-      * 集群下机器实例的状态
-      */
+     * 集群下机器实例的状态
+     */
     ClusterInstanceState: string;
     /**
-      * 集群是否开启监控
-      */
+     * 集群是否开启监控
+     */
     ClusterBMonitor: boolean;
     /**
-      * 集群创建中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-      */
+     * 集群创建中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+     */
     ClusterInitNodeNum: number;
     /**
-      * 集群运行中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-      */
+     * 集群运行中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+     */
     ClusterRunningNodeNum: number;
     /**
-      * 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-      */
+     * 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+     */
     ClusterFailedNodeNum: number;
     /**
-      * 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterClosedNodeNum: number;
     /**
-      * 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterClosingNodeNum: number;
     /**
-      * 集群是否开启删除保护
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群是否开启删除保护
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterDeletionProtection: boolean;
     /**
-      * 集群是否可审计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群是否可审计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterAuditEnabled: boolean;
 }
 /**
@@ -10667,16 +10667,16 @@ export interface ClusterStatus {
  */
 export interface DescribePrometheusAgentsResponse {
     /**
-      * 被关联集群信息
-      */
+     * 被关联集群信息
+     */
     Agents?: Array<PrometheusAgentOverview>;
     /**
-      * 被关联集群总量
-      */
+     * 被关联集群总量
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10684,16 +10684,16 @@ export interface DescribePrometheusAgentsResponse {
  */
 export interface DescribeVpcCniPodLimitsRequest {
     /**
-      * 查询的机型所在可用区，如：ap-guangzhou-3，默认为空，即不按可用区过滤信息
-      */
+     * 查询的机型所在可用区，如：ap-guangzhou-3，默认为空，即不按可用区过滤信息
+     */
     Zone?: string;
     /**
-      * 查询的实例机型系列信息，如：S5，默认为空，即不按机型系列过滤信息
-      */
+     * 查询的实例机型系列信息，如：S5，默认为空，即不按机型系列过滤信息
+     */
     InstanceFamily?: string;
     /**
-      * 查询的实例机型信息，如：S5.LARGE8，默认为空，即不按机型过滤信息
-      */
+     * 查询的实例机型信息，如：S5.LARGE8，默认为空，即不按机型过滤信息
+     */
     InstanceType?: string;
 }
 /**
@@ -10701,8 +10701,8 @@ export interface DescribeVpcCniPodLimitsRequest {
  */
 export interface DeleteImageCachesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10710,17 +10710,17 @@ export interface DeleteImageCachesResponse {
  */
 export interface DescribeEKSContainerInstanceRegionsResponse {
     /**
-      * EKS Container Instance支持的地域信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * EKS Container Instance支持的地域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Regions: Array<EksCiRegionInfo>;
     /**
-      * 总数
-      */
+     * 总数
+     */
     TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10728,8 +10728,8 @@ export interface DescribeEKSContainerInstanceRegionsResponse {
  */
 export interface ModifyPrometheusRecordRuleYamlResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10737,24 +10737,24 @@ export interface ModifyPrometheusRecordRuleYamlResponse {
  */
 export interface DescribeTKEEdgeScriptRequest {
     /**
-      * 集群id
-      */
+     * 集群id
+     */
     ClusterId: string;
     /**
-      * 网卡名
-      */
+     * 网卡名
+     */
     Interface: string;
     /**
-      * 节点名字
-      */
+     * 节点名字
+     */
     NodeName?: string;
     /**
-      * json格式的节点配置
-      */
+     * json格式的节点配置
+     */
     Config?: string;
     /**
-      * 可以下载某个历史版本的edgectl脚本，默认下载最新版本，edgectl版本信息可以在脚本里查看
-      */
+     * 可以下载某个历史版本的edgectl脚本，默认下载最新版本，edgectl版本信息可以在脚本里查看
+     */
     ScriptVersion?: string;
 }
 /**
@@ -10762,8 +10762,8 @@ export interface DescribeTKEEdgeScriptRequest {
  */
 export interface AddVpcCniSubnetsResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10771,14 +10771,14 @@ export interface AddVpcCniSubnetsResponse {
  */
 export interface KubeJarvisStateStatistic {
     /**
-      * 诊断结果的健康水平
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果的健康水平
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     HealthyLevel?: string;
     /**
-      * 诊断结果的统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果的统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Count?: number;
 }
 /**
@@ -10786,20 +10786,20 @@ export interface KubeJarvisStateStatistic {
  */
 export interface ExistedInstancesForNode {
     /**
-      * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD最小配置为4C8G。
-      */
+     * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD最小配置为4C8G。
+     */
     NodeRole: string;
     /**
-      * 已存在实例的重装参数
-      */
+     * 已存在实例的重装参数
+     */
     ExistedInstancesPara: ExistedInstancesPara;
     /**
-      * 节点高级设置，会覆盖集群级别设置的InstanceAdvancedSettings（当前只对节点自定义参数ExtraArgs生效）
-      */
+     * 节点高级设置，会覆盖集群级别设置的InstanceAdvancedSettings（当前只对节点自定义参数ExtraArgs生效）
+     */
     InstanceAdvancedSettingsOverride?: InstanceAdvancedSettings;
     /**
-      * 自定义模式集群，可指定每个节点的pod数量
-      */
+     * 自定义模式集群，可指定每个节点的pod数量
+     */
     DesiredPodNumbers?: Array<number>;
 }
 /**
@@ -10807,19 +10807,19 @@ export interface ExistedInstancesForNode {
  */
 export interface KubeJarvisStateInspectionOverview {
     /**
-      * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ClusterId?: string;
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
     /**
-      * 诊断结果详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Diagnostics?: Array<KubeJarvisStateDiagnosticOverview>;
 }
 /**
@@ -10827,17 +10827,17 @@ export interface KubeJarvisStateInspectionOverview {
  */
 export interface DescribePrometheusOverviewsResponse {
     /**
-      * 实例列表
-      */
+     * 实例列表
+     */
     Instances?: Array<PrometheusInstanceOverview>;
     /**
-      * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 实例总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Total?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10845,23 +10845,23 @@ export interface DescribePrometheusOverviewsResponse {
  */
 export interface DescribeClusterInspectionResultsOverviewResponse {
     /**
-      * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果统计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Statistics?: Array<KubeJarvisStateStatistic>;
     /**
-      * 诊断结果概览
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 诊断结果概览
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Diagnostics?: Array<KubeJarvisStateDiagnosticOverview>;
     /**
-      * 集群诊断结果概览
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群诊断结果概览
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     InspectionOverview?: Array<KubeJarvisStateInspectionOverview>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10869,12 +10869,12 @@ export interface DescribeClusterInspectionResultsOverviewResponse {
  */
 export interface DeletePrometheusRecordRuleYamlRequest {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 聚合规则列表
-      */
+     * 聚合规则列表
+     */
     Names: Array<string>;
 }
 /**
@@ -10882,16 +10882,16 @@ export interface DeletePrometheusRecordRuleYamlRequest {
  */
 export interface InstanceUpgradePreCheckResult {
     /**
-      * 检查是否通过
-      */
+     * 检查是否通过
+     */
     CheckPass: boolean;
     /**
-      * 检查项数组
-      */
+     * 检查项数组
+     */
     Items: Array<InstanceUpgradePreCheckResultItem>;
     /**
-      * 本节点独立pod列表
-      */
+     * 本节点独立pod列表
+     */
     SinglePods: Array<string>;
 }
 /**
@@ -10899,8 +10899,8 @@ export interface InstanceUpgradePreCheckResult {
  */
 export interface ScaleInClusterMasterResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10908,18 +10908,18 @@ export interface ScaleInClusterMasterResponse {
  */
 export interface DescribeAvailableClusterVersionResponse {
     /**
-      * 可升级的集群版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 可升级的集群版本号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Versions?: Array<string>;
     /**
-      * 集群信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 集群信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Clusters?: Array<ClusterVersion>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10927,12 +10927,12 @@ export interface DescribeAvailableClusterVersionResponse {
  */
 export interface DeleteEKSContainerInstancesRequest {
     /**
-      * 需要删除的EksCi的Id。 最大数量不超过20
-      */
+     * 需要删除的EksCi的Id。 最大数量不超过20
+     */
     EksCiIds: Array<string>;
     /**
-      * 是否释放为EksCi自动创建的Eip
-      */
+     * 是否释放为EksCi自动创建的Eip
+     */
     ReleaseAutoCreatedEip?: boolean;
 }
 /**
@@ -10940,12 +10940,12 @@ export interface DeleteEKSContainerInstancesRequest {
  */
 export interface DescribeClusterCommonNamesResponse {
     /**
-      * 子账户Uin与其客户端证书的CN字段映射
-      */
+     * 子账户Uin与其客户端证书的CN字段映射
+     */
     CommonNames: Array<CommonName>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10953,8 +10953,8 @@ export interface DescribeClusterCommonNamesResponse {
  */
 export interface DeleteECMInstancesResponse {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -10962,75 +10962,75 @@ export interface DeleteECMInstancesResponse {
  */
 export interface PrometheusTemplate {
     /**
-      * 模板名称
-      */
+     * 模板名称
+     */
     Name: string;
     /**
-      * 模板维度，支持以下类型
-instance 实例级别
-cluster 集群级别
-      */
+     * 模板维度，支持以下类型
+  instance 实例级别
+  cluster 集群级别
+     */
     Level: string;
     /**
-      * 模板描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模板描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Describe?: string;
     /**
-      * 当Level为instance时有效，
-模板中的告警配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的告警配置列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertRules?: Array<PrometheusAlertRule>;
     /**
-      * 当Level为instance时有效，
-模板中的聚合规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的聚合规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RecordRules?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的ServiceMonitor规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ServiceMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的PodMonitors规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     PodMonitors?: Array<PrometheusConfigItem>;
     /**
-      * 当Level为cluster时有效，
-模板中的RawJobs规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为cluster时有效，
+  模板中的RawJobs规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RawJobs?: Array<PrometheusConfigItem>;
     /**
-      * 模板的ID, 用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 模板的ID, 用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TemplateId?: string;
     /**
-      * 最近更新时间，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 最近更新时间，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdateTime?: string;
     /**
-      * 当前版本，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当前版本，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Version?: string;
     /**
-      * 是否系统提供的默认模板，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否系统提供的默认模板，用于出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     IsDefault?: boolean;
     /**
-      * 当Level为instance时有效，
-模板中的告警配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 当Level为instance时有效，
+  模板中的告警配置列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     AlertDetailRules?: Array<PrometheusAlertRuleDetail>;
 }
 /**
@@ -11038,28 +11038,28 @@ cluster 集群级别
  */
 export interface GPUArgs {
     /**
-      * 是否启用MIG特性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 是否启用MIG特性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     MIGEnable?: boolean;
     /**
-      * GPU驱动版本信息
-      */
+     * GPU驱动版本信息
+     */
     Driver?: DriverVersion;
     /**
-      * CUDA版本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * CUDA版本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CUDA?: DriverVersion;
     /**
-      * cuDNN版本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * cuDNN版本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CUDNN?: CUDNN;
     /**
-      * 自定义GPU驱动信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 自定义GPU驱动信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CustomDriver?: CustomDriver;
 }
 /**
@@ -11067,23 +11067,23 @@ export interface GPUArgs {
  */
 export interface RouteTableConflict {
     /**
-      * 路由表类型。
-      */
+     * 路由表类型。
+     */
     RouteTableType: string;
     /**
-      * 路由表CIDR。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 路由表CIDR。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RouteTableCidrBlock: string;
     /**
-      * 路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 路由表名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RouteTableName: string;
     /**
-      * 路由表ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 路由表ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     RouteTableId: string;
 }
 /**
@@ -11091,16 +11091,16 @@ export interface RouteTableConflict {
  */
 export interface InstanceDataDiskMountSetting {
     /**
-      * CVM实例类型
-      */
+     * CVM实例类型
+     */
     InstanceType: string;
     /**
-      * 数据盘挂载信息
-      */
+     * 数据盘挂载信息
+     */
     DataDisks: Array<DataDisk>;
     /**
-      * CVM实例所属可用区
-      */
+     * CVM实例所属可用区
+     */
     Zone: string;
 }
 /**
@@ -11108,46 +11108,46 @@ export interface InstanceDataDiskMountSetting {
  */
 export interface PrometheusInstanceOverview {
     /**
-      * 实例id
-      */
+     * 实例id
+     */
     InstanceId: string;
     /**
-      * 实例名称
-      */
+     * 实例名称
+     */
     Name: string;
     /**
-      * 实例vpcId
-      */
+     * 实例vpcId
+     */
     VpcId: string;
     /**
-      * 实例子网Id
-      */
+     * 实例子网Id
+     */
     SubnetId: string;
     /**
-      * 实例当前的状态
-prepare_env = 初始化环境
-install_suit = 安装组件
-running = 运行中
-      */
+     * 实例当前的状态
+  prepare_env = 初始化环境
+  install_suit = 安装组件
+  running = 运行中
+     */
     Status: string;
     /**
-      * COS桶存储
-      */
+     * COS桶存储
+     */
     COSBucket: string;
     /**
-      * grafana默认地址，如果开启外网访问得为域名，否则为内网地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * grafana默认地址，如果开启外网访问得为域名，否则为内网地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     GrafanaURL: string;
     /**
-      * 关联集群总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 关联集群总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BoundTotal: number;
     /**
-      * 运行正常的集群数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 运行正常的集群数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     BoundNormal: number;
 }
 /**
@@ -11155,18 +11155,18 @@ running = 运行中
  */
 export interface DescribeClusterVirtualNodeResponse {
     /**
-      * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Nodes?: Array<VirtualNode>;
     /**
-      * 节点总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 节点总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     TotalCount?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
     RequestId?: string;
 }
 /**
@@ -11174,16 +11174,16 @@ export interface DescribeClusterVirtualNodeResponse {
  */
 export interface ScaleInMaster {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 缩容的实例角色：MASTER,ETCD,MASTER_ETCD
-      */
+     * 缩容的实例角色：MASTER,ETCD,MASTER_ETCD
+     */
     NodeRole: string;
     /**
-      * 实例的保留模式
-      */
+     * 实例的保留模式
+     */
     InstanceDeleteMode: string;
 }
 /**
@@ -11191,12 +11191,12 @@ export interface ScaleInMaster {
  */
 export interface RunPrometheusInstanceRequest {
     /**
-      * 实例ID
-      */
+     * 实例ID
+     */
     InstanceId: string;
     /**
-      * 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化
-      */
+     * 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化
+     */
     SubnetId?: string;
 }
 /**
@@ -11204,39 +11204,39 @@ export interface RunPrometheusInstanceRequest {
  */
 export interface PendingRelease {
     /**
-      * 应用状态详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用状态详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Condition: string;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     CreatedTime: string;
     /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     ID: string;
     /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Name: string;
     /**
-      * 应用命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Namespace: string;
     /**
-      * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 应用状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     Status: string;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
     UpdatedTime: string;
 }
 /**
@@ -11244,7 +11244,7 @@ export interface PendingRelease {
  */
 export interface DescribeBackupStorageLocationsRequest {
     /**
-      * 多个备份仓库名称，如果不填写，默认返回当前地域所有存储仓库名称
-      */
+     * 多个备份仓库名称，如果不填写，默认返回当前地域所有存储仓库名称
+     */
     Names?: Array<string>;
 }

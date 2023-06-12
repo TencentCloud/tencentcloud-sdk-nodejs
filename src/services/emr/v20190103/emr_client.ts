@@ -143,6 +143,7 @@ import {
   InquiryPriceScaleOutInstanceResponse,
   ModifyResourceSchedulerResponse,
   VirtualPrivateCloud,
+  StrategyConfig,
   SceneSoftwareConfig,
   ShortNodeInfo,
   EmrPrice,

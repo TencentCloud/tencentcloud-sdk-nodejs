@@ -20,23 +20,20 @@
  */
 export interface CreateEmbedTokenResponse {
   /**
-      * 额外信息
+   * 额外信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Extra: string
-
   /**
-      * 数据
+   * 数据
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Data: EmbedTokenInfo
-
   /**
-      * 结果描述
+   * 结果描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Msg: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -51,22 +48,18 @@ export interface ApplyEmbedIntervalRequest {
    * 分享项目id，必选
    */
   ProjectId?: number
-
   /**
    * 分享页面id，嵌出看板时此为空值0
    */
   PageId?: number
-
   /**
    * 需要申请延期的Token
    */
   BIToken?: string
-
   /**
    * 备用字段
    */
   ExtraParam?: string
-
   /**
    * panel,看板；page，页面
    */
@@ -78,9 +71,9 @@ export interface ApplyEmbedIntervalRequest {
  */
 export interface ApplyEmbedTokenInfo {
   /**
-      * 申请结果
+   * 申请结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Result: boolean
 }
 
@@ -89,23 +82,20 @@ export interface ApplyEmbedTokenInfo {
  */
 export interface ApplyEmbedIntervalResponse {
   /**
-      * 额外参数
+   * 额外参数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Extra: string
-
   /**
-      * 结果数据
+   * 结果数据
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Data: ApplyEmbedTokenInfo
-
   /**
-      * 结果描述
+   * 结果描述
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Msg: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -120,22 +110,18 @@ export interface CreateEmbedTokenRequest {
    * 分享项目id，必选
    */
   ProjectId?: number
-
   /**
    * 分享页面id，嵌出看板时此为空值0
    */
   PageId?: number
-
   /**
    * page表示嵌出页面，panel表嵌出整个看板
    */
   Scope?: string
-
   /**
    * 过期时间。 单位：分钟 最大值：240。即，4小时 默认值：240
    */
   ExpireTime?: string
-
   /**
    * 备用字段
    */
@@ -147,68 +133,58 @@ export interface CreateEmbedTokenRequest {
  */
 export interface EmbedTokenInfo {
   /**
-      * 信息标识
+   * 信息标识
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Id?: number
-
   /**
-      * 令牌
+   * 令牌
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BIToken?: string
-
   /**
-      * 项目Id
+   * 项目Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ProjectId?: string
-
   /**
-      * 创建人
+   * 创建人
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreatedUser?: string
-
   /**
-      * 创建时间
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CreatedAt?: string
-
   /**
-      * 更新人
+   * 更新人
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdatedUser?: string
-
   /**
-      * 更新时间
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UpdatedAt?: string
-
   /**
-      * 页面Id
+   * 页面Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PageId?: string
-
   /**
-      * 备用
+   * 备用
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExtraParam?: string
-
   /**
-      * 嵌出类型
+   * 嵌出类型
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Scope: string
-
   /**
-      * 过期时间，分钟为单位，最大240
+   * 过期时间，分钟为单位，最大240
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ExpireTime: number
 }

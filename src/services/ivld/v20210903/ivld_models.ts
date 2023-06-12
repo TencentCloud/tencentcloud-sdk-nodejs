@@ -22,15 +22,14 @@
  */
 export interface MultiLevelTag {
   /**
-      * 树状标签信息
+   * 树状标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TagSet: Array<L1Tag>
-
   /**
-      * 标签在识别结果中的定位信息
+   * 标签在识别结果中的定位信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearInfo: AppearInfo
 }
 
@@ -42,12 +41,10 @@ export interface AddCustomPersonImageRequest {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 自定义人物图片地址
    */
   ImageURL?: string
-
   /**
    * 图片数据base64之后的结果
    */
@@ -65,23 +62,20 @@ export interface L2Tag {
    * 二级标签名
    */
   Name: string
-
   /**
-      * 从属于此二级标签的三级标签数组
+   * 从属于此二级标签的三级标签数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   L3TagSet: Array<L3Tag>
-
   /**
-      * 二级标签出现信息
+   * 二级标签出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearIndexPairSet: Array<AppearIndexPair>
-
   /**
-      * 二级标签首次出现信息
+   * 二级标签首次出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstAppear: number
 }
 
@@ -90,35 +84,30 @@ export interface L2Tag {
  */
 export interface DescribeTaskDetailResponse {
   /**
-      * 任务信息，不包含任务结果
+   * 任务信息，不包含任务结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskInfo: TaskInfo
-
   /**
-      * 视频任务结果数据，只在视频任务结束时返回
+   * 视频任务结果数据，只在视频任务结束时返回
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskData: Data
-
   /**
-      * 图片任务结果数据，只在图片任务结束时返回
+   * 图片任务结果数据，只在图片任务结束时返回
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ImageTaskData: ImageData
-
   /**
-      * 音频任务结果数据，只在音频任务结束时返回
+   * 音频任务结果数据，只在音频任务结束时返回
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioTaskData: AudioData
-
   /**
-      * 文本任务结果数据，只在文本任务结束时返回
+   * 文本任务结果数据，只在文本任务结束时返回
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextTaskData: TextData
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -145,22 +134,18 @@ export interface MediaFilter {
    * 媒资名称过滤条件
    */
   MediaNameSet?: Array<string>
-
   /**
    * 媒资状态数组，媒资状态可选值参见MediaInfo
    */
   StatusSet?: Array<number>
-
   /**
    * 媒资ID数组
    */
   MediaIdSet?: Array<string>
-
   /**
    * 媒资自定义标签数组
    */
   LabelSet?: Array<string>
-
   /**
    * 媒资文件类型，定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
    */
@@ -175,12 +160,10 @@ export interface CustomCategory {
    * 自定义分类ID
    */
   CategoryId: string
-
   /**
    * 一级自定义类型
    */
   L1Category: string
-
   /**
    * 二级自定义类型
    */
@@ -200,13 +183,11 @@ export interface DescribeTasksResponse {
    * 满足过滤条件的任务总数量
    */
   TotalCount: number
-
   /**
-      * 满足过滤条件的任务数组
+   * 满足过滤条件的任务数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskInfoSet: Array<TaskInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -221,17 +202,14 @@ export interface CustomPersonFilter {
    * 待查询的人物姓名
    */
   Name: string
-
   /**
    * 待过滤的自定义类型Id数组
    */
   CategoryIdSet: Array<string>
-
   /**
    * 待过滤的自定义人物Id数组
    */
   PersonIdSet: Array<string>
-
   /**
    * 一级自定义人物类型数组
    */
@@ -246,12 +224,10 @@ export interface CreateCustomPersonResponse {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 自定义人脸信息
    */
   ImageInfo: PersonImageInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -266,7 +242,6 @@ export interface ImportMediaResponse {
    * 媒资文件在系统中的ID
    */
   MediaId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -311,97 +286,81 @@ export interface TaskInfo {
    * 任务ID
    */
   TaskId: string
-
   /**
-      * 描述任务名称，指定后可根据名称筛选
+   * 描述任务名称，指定后可根据名称筛选
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskName: string
-
   /**
    * 媒资文件ID
    */
   MediaId: string
-
   /**
    * 任务执行状态
    */
   TaskStatus: number
-
   /**
-      * 任务进度，范围为[0，100]
+   * 任务进度，范围为[0，100]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskProgress: number
-
   /**
-      * 任务执行时间
+   * 任务执行时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskTimeCost: number
-
   /**
    * 任务创建时间
    */
   TaskCreateTime: string
-
   /**
-      * 任务开始执行时间
+   * 任务开始执行时间
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskStartTime: string
-
   /**
-      * 任务失败原因
+   * 任务失败原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailedReason: string
-
   /**
    * 任务执行时指定的先验知识
    */
   MediaPreknownInfo: MediaPreknownInfo
-
   /**
-      * 媒资文件名称
+   * 媒资文件名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaName: string
-
   /**
-      * 媒资自定义标签
+   * 媒资自定义标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Label: string
-
   /**
-      * 任务分析完成后的后调地址
+   * 任务分析完成后的后调地址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CallbackURL: string
-
   /**
-      * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
+   * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioMetadata: AudioMetadata
-
   /**
-      * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
+   * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ImageMetadata: ImageMetadata
-
   /**
-      * 任务对应的媒资文件元信息，仅在MediaType为Text时有效
+   * 任务对应的媒资文件元信息，仅在MediaType为Text时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextMetadata: TextMetadata
-
   /**
-      * 任务对应的媒资文件元信息，仅在MediaType为Video时有效
+   * 任务对应的媒资文件元信息，仅在MediaType为Video时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metadata: MediaMetadata
 }
 
@@ -410,105 +369,89 @@ export interface TaskInfo {
  */
 export interface ShowInfo {
   /**
-      * 节目日期(只在新闻有效)
+   * 节目日期(只在新闻有效)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Date: string
-
   /**
-      * 台标
+   * 台标
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Logo: string
-
   /**
-      * 节目名称
+   * 节目名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Column: string
-
   /**
-      * 来源信息
+   * 来源信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Source: string
-
   /**
-      * 节目封面
+   * 节目封面
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CoverImageURL: string
-
   /**
-      * 节目内容概要列表
+   * 节目内容概要列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SummarySet: Array<string>
-
   /**
-      * 节目片段标题列表
+   * 节目片段标题列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TitleSet: Array<string>
-
   /**
-      * 音频识别结果列表
+   * 音频识别结果列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioInfoSet: Array<AudioInfo>
-
   /**
-      * 可视文字识别结果列表
+   * 可视文字识别结果列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextInfoSet: Array<TextInfo>
-
   /**
-      * 已分类人物信息列表
+   * 已分类人物信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ClassifiedPersonInfoSet: Array<ClassifiedPersonInfo>
-
   /**
-      * 文本标签列表，包含标签内容和出现信息
+   * 文本标签列表，包含标签内容和出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextTagSet: MultiLevelTag
-
   /**
-      * 帧标签列表，包括人物信息，场景信息等
+   * 帧标签列表，包括人物信息，场景信息等
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FrameTagSet: MultiLevelTag
-
   /**
-      * 视频下载地址
+   * 视频下载地址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   WebMediaURL: string
-
   /**
-      * 媒资分类信息
+   * 媒资分类信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaClassifierSet: Array<string>
-
   /**
-      * 概要标签信息
+   * 概要标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SummaryTagSet: Array<string>
-
   /**
-      * 未知人物信息
+   * 未知人物信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   UnknownPersonSet: Array<UnknownPerson>
-
   /**
-      * 树状已分类人物信息
+   * 树状已分类人物信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MultiLevelPersonInfoSet: Array<MultiLevelPersonInfo>
 }
 
@@ -520,17 +463,14 @@ export interface DescribeTasksRequest {
    * 分页序号，从1开始
    */
   PageNumber?: number
-
   /**
    * 每个分页所包含的元素数量，最大为50
    */
   PageSize?: number
-
   /**
    * 任务过滤条件，相关限制参见TaskFilter
    */
   TaskFilter?: TaskFilter
-
   /**
    * 返回结果排序信息，By字段只支持CreateTimeStamp
    */
@@ -545,12 +485,10 @@ export interface DescribeCustomPersonsResponse {
    * 满足过滤条件的自定义人物数量
    */
   TotalCount: number
-
   /**
    * 自定义人物信息
    */
   PersonInfoSet: Array<CustomPersonInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -562,21 +500,19 @@ export interface DescribeCustomPersonsResponse {
  */
 export interface TextData {
   /**
-      * 文本内容信息
+   * 文本内容信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Content: string
-
   /**
-      * 文本概要信息
+   * 文本概要信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Summary: string
-
   /**
-      * 文本标签信息
+   * 文本标签信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextTagSet: MultiLevelTag
 }
 
@@ -585,33 +521,29 @@ export interface TextData {
  */
 export interface ImageMetadata {
   /**
-      * 媒资图片文件大小，单位为Byte
+   * 媒资图片文件大小，单位为Byte
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileSize: number
-
   /**
-      * 媒资图片文件MD5
+   * 媒资图片文件MD5
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MD5: string
-
   /**
-      * 媒资图片文件宽度
+   * 媒资图片文件宽度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Width: number
-
   /**
-      * 媒资图片文件高度
+   * 媒资图片文件高度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Height: number
-
   /**
-      * 媒资图片文件格式
+   * 媒资图片文件格式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Format: string
 }
 
@@ -630,27 +562,24 @@ export interface CreateCustomGroupRequest {
  */
 export interface TextMetadata {
   /**
-      * 媒资文本文件大小，单位为字节
+   * 媒资文本文件大小，单位为字节
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileSize: number
-
   /**
-      * 媒资文本文件MD5
+   * 媒资文本文件MD5
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MD5: string
-
   /**
-      * 媒资文本文件字符数
+   * 媒资文本文件字符数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Length: number
-
   /**
-      * 媒资文本文件格式
+   * 媒资文本文件格式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Format: string
 }
 
@@ -662,12 +591,10 @@ export interface AddCustomPersonImageResponse {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 自定义人脸图片信息
    */
   ImageInfo: PersonImageInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -687,37 +614,30 @@ export interface TaskFilter {
    * 媒资文件类型
    */
   MediaTypeSet?: Array<number>
-
   /**
    * 待筛选的任务状态列表
    */
   TaskStatusSet?: Array<number>
-
   /**
    * 待筛选的任务名称数组
    */
   TaskNameSet?: Array<string>
-
   /**
    * TaskId数组
    */
   TaskIdSet?: Array<string>
-
   /**
    * 媒资文件名数组
    */
   MediaNameSet?: Array<string>
-
   /**
    * 媒资语言类型
    */
   MediaLangSet?: Array<number>
-
   /**
    * 媒资素材一级类型
    */
   MediaLabelSet?: Array<number>
-
   /**
    * 媒资自定义标签数组
    */
@@ -734,12 +654,10 @@ export interface TextAppearInfo {
    * 文本结果数组中的下标
    */
   Index: number
-
   /**
    * 关键词在文本中出现的起始偏移量(包含)
    */
   StartPosition: number
-
   /**
    * 关键词在文本中出现的结束偏移量(不包含)
    */
@@ -795,22 +713,19 @@ export interface MediaPreknownInfo {
    * 媒资文件类型，参见MediaPreknownInfo结构体定义
    */
   MediaType: number
-
   /**
    * 媒资素材一级类型，参见MediaPreknownInfo结构体定义
    */
   MediaLabel: number
-
   /**
-      * 媒资素材二级类型，参见MediaPreknownInfo结构体定义
+   * 媒资素材二级类型，参见MediaPreknownInfo结构体定义
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaSecondLabel: number
-
   /**
-      * 媒资音频类型，参见MediaPreknownInfo结构体定义
+   * 媒资音频类型，参见MediaPreknownInfo结构体定义
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaLang?: number
 }
 
@@ -822,32 +737,26 @@ export interface CustomPersonInfo {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 自定义人物姓名
    */
   Name: string
-
   /**
    * 自定义人物简介信息
    */
   BasicInfo: string
-
   /**
    * 一级自定义人物类型
    */
   L1Category: string
-
   /**
    * 二级自定义人物类型
    */
   L2Category: string
-
   /**
    * 自定义人物图片信息
    */
   ImageInfoSet: Array<PersonImageInfo>
-
   /**
    * 自定义人物创建时间
    */
@@ -862,7 +771,6 @@ export interface UpdateCustomPersonResponse {
    * 成功更新的自定义人物Id
    */
   PersonId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -877,12 +785,10 @@ export interface UpdateCustomCategoryRequest {
    * 自定义人物类型Id
    */
   CategoryId: string
-
   /**
    * 一级自定义人物类型
    */
   L1Category: string
-
   /**
    * 二级自定义人物类型
    */
@@ -897,27 +803,22 @@ export interface CreateTaskRequest {
    * 媒资文件ID，最长32B
    */
   MediaId: string
-
   /**
    * 媒资素材先验知识，相关限制参考MediaPreknownInfo
    */
   MediaPreknownInfo: MediaPreknownInfo
-
   /**
    * 任务名称，最长100个中文字符
    */
   TaskName?: string
-
   /**
    * 是否上传转码后的视频，仅设置true时上传，默认为false
    */
   UploadVideo?: boolean
-
   /**
    * 自定义标签，可用于查询
    */
   Label?: string
-
   /**
    * 任务分析完成的回调地址，该设置优先级高于控制台全局的设置；
    */
@@ -932,7 +833,6 @@ export interface DescribeCustomCategoriesResponse {
    * 自定义人物类型数组
    */
   CategorySet: Array<CustomCategory>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -947,12 +847,10 @@ export interface DescribeCustomGroupResponse {
    * 自定义人物库所包含的人物个数
    */
   GroupSize: number
-
   /**
    * 自定义人物库图片后续所在的存储桶
    */
   Bucket: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -967,17 +865,14 @@ export interface PersonImageInfo {
    * 人脸图片ID
    */
   ImageId: string
-
   /**
    * 自定义人脸图片的URL，存储在IVLDCustomPreson存储桶内
    */
   ImageURL: string
-
   /**
    * 自定义人脸图片处理错误码
    */
   ErrorCode: string
-
   /**
    * 自定义人脸图片处理错误信息
    */
@@ -992,7 +887,6 @@ export interface SortBy {
    * 排序字段，默认为CreateTime
    */
   By?: string
-
   /**
    * true表示降序，false表示升序
    */
@@ -1007,7 +901,6 @@ export interface DeleteCustomPersonImageRequest {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 自定义人脸图片Id
    */
@@ -1029,27 +922,24 @@ export interface DeleteMediaResponse {
  */
 export interface Rectf {
   /**
-      * 矩形框左上角水平座标
+   * 矩形框左上角水平座标
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   X: number
-
   /**
-      * 矩形框左上角竖直座标
+   * 矩形框左上角竖直座标
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Y: number
-
   /**
-      * 矩形框宽度
+   * 矩形框宽度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Width: number
-
   /**
-      * 矩形框长度
+   * 矩形框长度
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Height: number
 }
 
@@ -1061,7 +951,6 @@ export interface ModifyCallbackRequest {
    * 任务分析完成后回调地址
    */
   TaskFinishNotifyURL: string
-
   /**
    * 媒体导入完成后回调地址
    */
@@ -1076,7 +965,6 @@ export interface DeleteCustomPersonResponse {
    * 已删除的自定义人物Id
    */
   PersonId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1101,37 +989,31 @@ export interface ImportMediaRequest {
    * 待分析视频的URL，目前只支持*不带签名的*COS地址，长度最长1KB
    */
   URL: string
-
   /**
    * 待分析视频的MD5，为空时不做校验，否则会做MD5校验，长度必须为32B
    */
   MD5?: string
-
   /**
    * 待分析视频的名称，指定后可支持筛选，最多64B
    */
   Name?: string
-
   /**
-      * 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/  (注意，cos路径需要以/分隔符结尾)。
+   * 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/  (注意，cos路径需要以/分隔符结尾)。
 推荐采用本主帐号COS桶，如果使用其他帐号COS桶，请确保COS桶可写，否则可导致分析失败
-      */
+   */
   WriteBackCosPath?: string
-
   /**
    * 自定义标签，可用于查询
    */
   Label?: string
-
   /**
    * 媒资导入完成的回调地址，该设置优先级高于控制台全局的设置；
    */
   CallbackURL?: string
-
   /**
-      * 媒资文件类型，详细定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
+   * 媒资文件类型，详细定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
 默认为2(视频)
-      */
+   */
   MediaType?: number
 }
 
@@ -1143,17 +1025,14 @@ export interface DescribeMediasRequest {
    * 分页序号，从1开始
    */
   PageNumber: number
-
   /**
    * 每个分页所包含的元素数量，最大为50
    */
   PageSize: number
-
   /**
    * 列举过滤条件，相关限制相见MediaFilter
    */
   MediaFilter?: MediaFilter
-
   /**
    * 返回结果排序信息，By字段只支持CreateTime
    */
@@ -1175,15 +1054,14 @@ export interface CreateDefaultCategoriesResponse {
  */
 export interface ClassifiedPersonInfo {
   /**
-      * 人物分类名称
+   * 人物分类名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ClassifyName: string
-
   /**
-      * 符合特定分类的人物信息数组
+   * 符合特定分类的人物信息数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PersonInfoSet: Array<PersonInfo>
 }
 
@@ -1195,17 +1073,14 @@ export interface DescribeCustomPersonsRequest {
    * 分页序号，从1开始
    */
   PageNumber: number
-
   /**
    * 分页数据行数，最多50
    */
   PageSize: number
-
   /**
    * 排序信息，默认倒序
    */
   SortBy?: SortBy
-
   /**
    * 自定义人物过滤条件
    */
@@ -1217,11 +1092,10 @@ export interface DescribeCustomPersonsRequest {
  */
 export interface DescribeMediaResponse {
   /**
-      * 媒资信息
+   * 媒资信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaInfo: MediaInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1233,9 +1107,9 @@ export interface DescribeMediaResponse {
  */
 export interface Data {
   /**
-      * 节目粒度结构化结果
+   * 节目粒度结构化结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ShowInfo: ShowInfo
 }
 
@@ -1247,21 +1121,19 @@ export interface Data {
  */
 export interface AppearInfo {
   /**
-      * 关键词在音频文本结果中的出现位置数组
+   * 关键词在音频文本结果中的出现位置数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioAppearSet: Array<TextAppearInfo>
-
   /**
-      * 关键词在可视文本结果中的出现位置数组
+   * 关键词在可视文本结果中的出现位置数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextAppearSet: Array<TextAppearInfo>
-
   /**
-      * 关键词在视频信息中的出现位置数组
+   * 关键词在视频信息中的出现位置数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VideoAppearSet: Array<VideoAppearInfo>
 }
 
@@ -1273,26 +1145,22 @@ export interface PersonInfo {
    * 公众人物姓名
    */
   Name: string
-
   /**
    * 公众人物职务
    */
   Job: string
-
   /**
    * 首次出现模态，可选值为[1,3]，详细参见AppearIndex定义
    */
   FirstAppear: number
-
   /**
    * 人物出现信息
    */
   AppearInfo: AppearInfo
-
   /**
-      * 人脸在图片中的位置，仅在图片标签任务有效
+   * 人脸在图片中的位置，仅在图片标签任务有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearRect: Rectf
 }
 
@@ -1304,17 +1172,14 @@ export interface AudioInfo {
    * ASR提取的文字信息
    */
   Content: string
-
   /**
    * ASR起始时间戳，从0开始
    */
   StartTimeStamp: number
-
   /**
    * ASR结束时间戳，从0开始
    */
   EndTimeStamp: number
-
   /**
    * ASR提取的音频标签
    */
@@ -1326,15 +1191,14 @@ export interface AudioInfo {
  */
 export interface ImageOcr {
   /**
-      * 图片中可视文本识别结果
+   * 图片中可视文本识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Content: string
-
   /**
-      * 可视文本在图片中的位置信息
+   * 可视文本在图片中的位置信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearRect: Rectf
 }
 
@@ -1346,12 +1210,10 @@ export interface DeleteCustomPersonImageResponse {
    * 自定义人物Id
    */
   PersonId: string
-
   /**
    * 已删除的人物图片Id
    */
   ImageId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1366,17 +1228,14 @@ export interface TextInfo {
    * OCR提取的内容
    */
   Content: string
-
   /**
    * OCR起始时间戳，从0开始
    */
   StartTimeStamp: number
-
   /**
    * OCR结束时间戳，从0开始
    */
   EndTimeStamp: number
-
   /**
    * OCR标签信息
    */
@@ -1391,7 +1250,6 @@ export interface CreateCustomCategoryResponse {
    * 自定义分类信息ID
    */
   CategoryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1406,12 +1264,10 @@ export interface QueryCallbackResponse {
    * 任务分析完成后回调地址
    */
   TaskFinishNotifyURL: string
-
   /**
    * 媒体导入完成后回调地址
    */
   MediaFinishNotifyURL: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1423,21 +1279,19 @@ export interface QueryCallbackResponse {
  */
 export interface MultiLevelPersonInfo {
   /**
-      * 一级分类名称(分类信息参见自定义人物类型)
+   * 一级分类名称(分类信息参见自定义人物类型)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   L1ClassifyName: string
-
   /**
-      * 已分类人物信息数组(所有分类类型为二级分类)
+   * 已分类人物信息数组(所有分类类型为二级分类)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   L2ClassifiedPersonInfoSet: Array<ClassifiedPersonInfo>
-
   /**
-      * 检测结果来源
+   * 检测结果来源
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Source: number
 }
 
@@ -1459,7 +1313,6 @@ export interface UpdateCustomCategoryResponse {
    * 成功更新的自定义人物类型Id
    */
   CategoryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1474,13 +1327,11 @@ export interface DescribeMediasResponse {
    * 满足过滤条件的媒资视频总数量
    */
   TotalCount: number
-
   /**
-      * 满足过滤条件的媒资信息
+   * 满足过滤条件的媒资信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaInfoSet: Array<MediaInfo>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1492,15 +1343,14 @@ export interface DescribeMediasResponse {
  */
 export interface UnknownPerson {
   /**
-      * 视觉出现信息
+   * 视觉出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   VideoAppearSet: Array<VideoAppearInfo>
-
   /**
-      * 未知人物是否可以入库(只有当未知人物人脸小图质量分符合要求时才可入库)
+   * 未知人物是否可以入库(只有当未知人物人脸小图质量分符合要求时才可入库)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   PutLibraryAllowed: boolean
 }
 
@@ -1512,46 +1362,39 @@ export interface MediaMetadata {
    * 媒资视频文件大小，单位为字节
    */
   FileSize: number
-
   /**
    * 媒资视频文件MD5
    */
   MD5: string
-
   /**
-      * 媒资视频时长，单位为秒
+   * 媒资视频时长，单位为秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Duration: number
-
   /**
-      * 媒资视频总帧数
+   * 媒资视频总帧数
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   NumFrames: number
-
   /**
-      * 媒资视频宽度，单位为像素
+   * 媒资视频宽度，单位为像素
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Width: number
-
   /**
-      * 媒资视频高度，单位为像素
+   * 媒资视频高度，单位为像素
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Height: number
-
   /**
-      * 媒资视频帧率，单位为Hz
+   * 媒资视频帧率，单位为Hz
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FPS: number
-
   /**
-      * 媒资视频比特率，单位为kbps
+   * 媒资视频比特率，单位为kbps
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BitRate: number
 }
 
@@ -1570,39 +1413,34 @@ export interface DeleteCustomPersonRequest {
  */
 export interface AudioMetadata {
   /**
-      * 媒资音频文件大小，单位为Byte
+   * 媒资音频文件大小，单位为Byte
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FileSize: number
-
   /**
-      * 媒资音频文件MD5
+   * 媒资音频文件MD5
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MD5: string
-
   /**
-      * 媒资音频时长，单位为秒
+   * 媒资音频时长，单位为秒
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Duration: number
-
   /**
-      * 媒资音频采样率，单位为khz
+   * 媒资音频采样率，单位为khz
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SampleRate: number
-
   /**
-      * 媒资音频码率，单位为kbps
+   * 媒资音频码率，单位为kbps
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   BitRate: number
-
   /**
-      * 媒资音频文件格式
+   * 媒资音频文件格式
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Format: string
 }
 
@@ -1614,13 +1452,11 @@ export interface DescribeCustomPersonDetailResponse {
    * 自定义人物信息
    */
   PersonInfo: CustomPersonInfo
-
   /**
-      * 出现该自定义人物的所有分析人物Id
+   * 出现该自定义人物的所有分析人物Id
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskIdSet: Array<string>
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1645,7 +1481,6 @@ export interface CreateCustomCategoryRequest {
    * 自定义一级类型
    */
   L1Category: string
-
   /**
    * 自定义二级类型
    */
@@ -1660,13 +1495,11 @@ export interface VideoAppearInfo {
    * 视觉信息起始时间戳，从0开始
    */
   StartTimeStamp: number
-
   /**
-      * 视觉信息终止时间戳，从0开始
+   * 视觉信息终止时间戳，从0开始
 关键词在视觉信息中的区间为[StartTimeStamp, EndTimeStamp)
-      */
+   */
   EndTimeStamp: number
-
   /**
    * 关键词在视觉信息中的封面图片
    */
@@ -1678,11 +1511,10 @@ export interface VideoAppearInfo {
  */
 export interface DescribeTaskResponse {
   /**
-      * 任务信息，详情参见TaskInfo的定义
+   * 任务信息，详情参见TaskInfo的定义
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TaskInfo: TaskInfo
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1708,7 +1540,6 @@ export interface AppearIndexPair {
    * 出现信息，取值范围为[1，3]
    */
   AppearIndex: number
-
   /**
    * AppearInfo中AppearIndex对应元素的第Index元素，从0开始技术
    */
@@ -1723,7 +1554,6 @@ export interface CreateTaskResponse {
    * 智能标签视频分析任务ID
    */
   TaskId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1745,33 +1575,29 @@ export interface DescribeCustomPersonDetailRequest {
  */
 export interface ImageData {
   /**
-      * 图片中出现的可视文本识别结果
+   * 图片中出现的可视文本识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   OcrSet: Array<ImageOcr>
-
   /**
-      * 图片中出现的帧标签识别结果
+   * 图片中出现的帧标签识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FrameTagSet: MultiLevelTag
-
   /**
-      * 图片中出现的层级人物识别结果
+   * 图片中出现的层级人物识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MultiLevelPersonInfoSet: Array<MultiLevelPersonInfo>
-
   /**
-      * 图片中出现的台标识别结果
+   * 图片中出现的台标识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TvLogo: ImageLogo
-
   /**
-      * 图片中出现的来源信息识别结果
+   * 图片中出现的来源信息识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   SourceLogo: ImageLogo
 }
 
@@ -1813,17 +1639,14 @@ export interface UpdateCustomPersonRequest {
    * 待更新的自定义人物Id
    */
   PersonId: string
-
   /**
    * 更新后的自定义人物名称，如为空则不更新
    */
   Name?: string
-
   /**
    * 更新后的自定义人物简介，如为空则不更新
    */
   BasicInfo?: string
-
   /**
    * 更新后的分类信息，如为空则不更新
    */
@@ -1840,23 +1663,20 @@ export interface L1Tag {
    * 一级标签名
    */
   Name: string
-
   /**
-      * 二级标签数组
+   * 二级标签数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   L2TagSet: Array<L2Tag>
-
   /**
-      * 一级标签出现信息
+   * 一级标签出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearIndexPairSet: Array<AppearIndexPair>
-
   /**
-      * 一级标签首次出现信息
+   * 一级标签首次出现信息
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstAppear: number
 }
 
@@ -1875,15 +1695,14 @@ export interface ModifyCallbackResponse {
  */
 export interface ImageLogo {
   /**
-      * 图片中出现的Logo识别结果
+   * 图片中出现的Logo识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Logo: string
-
   /**
-      * Logo在图片中出现的位置
+   * Logo在图片中出现的位置
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearRect: Rectf
 }
 
@@ -1897,17 +1716,15 @@ export interface L3Tag {
    * 三级标签名
    */
   Name: string
-
   /**
-      * 三级标签出现信息索引数组
+   * 三级标签出现信息索引数组
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AppearIndexPairSet: Array<AppearIndexPair>
-
   /**
-      * 三级标签首次出现信息，可选值为[1,3]
+   * 三级标签首次出现信息，可选值为[1,3]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FirstAppear: number
 }
 
@@ -1916,11 +1733,10 @@ export interface L3Tag {
  */
 export interface AudioData {
   /**
-      * 音频识别文本结果
+   * 音频识别文本结果
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioInfoSet: Array<AudioInfo>
-
   /**
    * 音频识别标签数据
    */
@@ -1935,22 +1751,18 @@ export interface CreateCustomPersonRequest {
    * 自定义人物姓名
    */
   Name: string
-
   /**
    * 自定义人物简要信息(仅用于标记，不支持检索)
    */
   BasicInfo: string
-
   /**
    * 自定义分类ID，如不存在接口会报错
    */
   CategoryId: string
-
   /**
    * 自定义人物图片URL，可支持任意地址，推荐使用COS
    */
   ImageURL?: string
-
   /**
    * 原始图片base64编码后的数据
    */
@@ -1981,77 +1793,65 @@ export interface MediaInfo {
    * 媒资ID
    */
   MediaId: string
-
   /**
-      * 媒资名称
+   * 媒资名称
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Name: string
-
   /**
-      * 媒资下载地址
+   * 媒资下载地址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   DownLoadURL: string
-
   /**
-      * 媒资状态，取值参看上方表格
+   * 媒资状态，取值参看上方表格
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Status: number
-
   /**
-      * 若状态为失败，表示失败原因
+   * 若状态为失败，表示失败原因
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   FailedReason: string
-
   /**
-      * 媒资视频元信息，仅在MediaType=VIDEO时有效
+   * 媒资视频元信息，仅在MediaType=VIDEO时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Metadata: MediaMetadata
-
   /**
-      * 导入视频进度，取值范围为[0,100]
+   * 导入视频进度，取值范围为[0,100]
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Progress: number
-
   /**
-      * 媒资自定义标签
+   * 媒资自定义标签
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   Label: string
-
   /**
-      * 媒资导入完成后的回调地址
+   * 媒资导入完成后的回调地址
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   CallbackURL: string
-
   /**
-      * 媒资文件类型，具体参看[MediaPreknownInfo](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
+   * 媒资文件类型，具体参看[MediaPreknownInfo](https://cloud.tencent.com/document/product/1509/65063#MediaPreknownInfo)
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   MediaType: number
-
   /**
-      * 媒资音频元信息，仅在MediaType=Audio时有效
+   * 媒资音频元信息，仅在MediaType=Audio时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   AudioMetadata: AudioMetadata
-
   /**
-      * 媒资图片文件元信息，仅在MediaType=Image时有效
+   * 媒资图片文件元信息，仅在MediaType=Image时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   ImageMetadata: ImageMetadata
-
   /**
-      * 媒资文本文件元信息，仅在MediaType=Text时有效
+   * 媒资文本文件元信息，仅在MediaType=Text时有效
 注意：此字段可能返回 null，表示取不到有效值。
-      */
+   */
   TextMetadata: TextMetadata
 }
 
@@ -2063,7 +1863,6 @@ export interface DeleteCustomCategoryResponse {
    * 123
    */
   CategoryId: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
