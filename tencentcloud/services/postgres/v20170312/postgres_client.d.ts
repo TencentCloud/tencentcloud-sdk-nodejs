@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDefaultParameters(req: DescribeDefaultParametersRequest, cb?: (error: string, rep: DescribeDefaultParametersResponse) => void): Promise<DescribeDefaultParametersResponse>;
     /**
-     * 本接口（DescribeDBErrlogs）用于获取错误日志。
+     * 本接口（DescribeDBErrlogs）用于查询错误日志。
      */
     DescribeDBErrlogs(req: DescribeDBErrlogsRequest, cb?: (error: string, rep: DescribeDBErrlogsResponse) => void): Promise<DescribeDBErrlogsResponse>;
     /**
@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteServerlessDBInstance(req: DeleteServerlessDBInstanceRequest, cb?: (error: string, rep: DeleteServerlessDBInstanceResponse) => void): Promise<DeleteServerlessDBInstanceResponse>;
     /**
-     * 可对实例进行网络的添加操作。
+     * 本接口（CreateDBInstanceNetworkAccess）用于创建实例网络。
      */
     CreateDBInstanceNetworkAccess(req: CreateDBInstanceNetworkAccessRequest, cb?: (error: string, rep: CreateDBInstanceNetworkAccessResponse) => void): Promise<CreateDBInstanceNetworkAccessResponse>;
     /**
@@ -72,11 +72,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeParameterTemplates(req: DescribeParameterTemplatesRequest, cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void): Promise<DescribeParameterTemplatesResponse>;
     /**
-     * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。
+     * 本接口（DescribeProductConfig）用于查询售卖规格配置。本接口已废弃，推荐使用新接口[DescribeClasses](https://cloud.tencent.com/document/api/409/89019)。
      */
     DescribeProductConfig(req: DescribeProductConfigRequest, cb?: (error: string, rep: DescribeProductConfigResponse) => void): Promise<DescribeProductConfigResponse>;
     /**
-     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
+     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。本接口已于2021.09.01日废弃，后续此接口将不再返回任何数据，推荐使用接口[DescribeSlowQueryList](https://cloud.tencent.com/document/api/409/60540)替代。
      */
     DescribeDBSlowlogs(req: DescribeDBSlowlogsRequest, cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void): Promise<DescribeDBSlowlogsResponse>;
     /**
@@ -92,7 +92,7 @@ export declare class Client extends AbstractClient {
      */
     DestroyDBInstance(req: DestroyDBInstanceRequest, cb?: (error: string, rep: DestroyDBInstanceResponse) => void): Promise<DestroyDBInstanceResponse>;
     /**
-     * 本接口（DescribeDBBackups）用于查询实例备份列表。
+     * 本接口（DescribeDBBackups）用于查询实例备份列表。本接口已废弃，推荐使用接口[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)替代。
      */
     DescribeDBBackups(req: DescribeDBBackupsRequest, cb?: (error: string, rep: DescribeDBBackupsResponse) => void): Promise<DescribeDBBackupsResponse>;
     /**
@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceParameters(req: ModifyDBInstanceParametersRequest, cb?: (error: string, rep: ModifyDBInstanceParametersResponse) => void): Promise<ModifyDBInstanceParametersResponse>;
     /**
-     * 本接口 (DescribeBaseBackups) 用于查询基础备份列表。
+     * 本接口（DescribeBaseBackups）用于查询基础备份列表。
      */
     DescribeBaseBackups(req: DescribeBaseBackupsRequest, cb?: (error: string, rep: DescribeBaseBackupsResponse) => void): Promise<DescribeBaseBackupsResponse>;
     /**
@@ -188,7 +188,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupOverview(req?: DescribeBackupOverviewRequest, cb?: (error: string, rep: DescribeBackupOverviewResponse) => void): Promise<DescribeBackupOverviewResponse>;
     /**
-     * 可对RO组进行网络的添加操作。
+     * 本接口（CreateReadOnlyGroupNetworkAccess）用于创建RO组的网络。
      */
     CreateReadOnlyGroupNetworkAccess(req: CreateReadOnlyGroupNetworkAccessRequest, cb?: (error: string, rep: CreateReadOnlyGroupNetworkAccessResponse) => void): Promise<CreateReadOnlyGroupNetworkAccessResponse>;
     /**
@@ -220,7 +220,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstancesProject(req: ModifyDBInstancesProjectRequest, cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void): Promise<ModifyDBInstancesProjectResponse>;
     /**
-     * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。
+     * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。本接口已废弃，推荐使用接口[DescribeLogBackups](https://cloud.tencent.com/document/api/409/89021)替代。
      */
     DescribeDBXlogs(req: DescribeDBXlogsRequest, cb?: (error: string, rep: DescribeDBXlogsResponse) => void): Promise<DescribeDBXlogsResponse>;
     /**
@@ -228,7 +228,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceAttribute(req: DescribeDBInstanceAttributeRequest, cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void): Promise<DescribeDBInstanceAttributeResponse>;
     /**
-     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
+     * 本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     CreateDBInstances(req: CreateDBInstancesRequest, cb?: (error: string, rep: CreateDBInstancesResponse) => void): Promise<CreateDBInstancesResponse>;
     /**
@@ -240,7 +240,7 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstances(req: IsolateDBInstancesRequest, cb?: (error: string, rep: IsolateDBInstancesResponse) => void): Promise<IsolateDBInstancesResponse>;
     /**
-     * 本接口（DeleteBaseBackup）用于修改实例指定全量备份的过期时间。
+     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定全量备份的过期时间。
      */
     ModifyBaseBackupExpireTime(req: ModifyBaseBackupExpireTimeRequest, cb?: (error: string, rep: ModifyBaseBackupExpireTimeResponse) => void): Promise<ModifyBaseBackupExpireTimeResponse>;
     /**
@@ -252,7 +252,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSlowQueryList(req: DescribeSlowQueryListRequest, cb?: (error: string, rep: DescribeSlowQueryListResponse) => void): Promise<DescribeSlowQueryListResponse>;
     /**
-     * 本接口 (DescribeLogBackups) 用于查询日志备份列表。
+     * 本接口（DescribeLogBackups）用于查询日志备份列表。
      */
     DescribeLogBackups(req: DescribeLogBackupsRequest, cb?: (error: string, rep: DescribeLogBackupsResponse) => void): Promise<DescribeLogBackupsResponse>;
     /**
@@ -288,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     RemoveDBInstanceFromReadOnlyGroup(req: RemoveDBInstanceFromReadOnlyGroupRequest, cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void): Promise<RemoveDBInstanceFromReadOnlyGroupResponse>;
     /**
-     * 获取参数修改事件详情
+     * 本接口 (DescribeParamsEvent) 用于查询参数修改事件详情。
      */
     DescribeParamsEvent(req: DescribeParamsEventRequest, cb?: (error: string, rep: DescribeParamsEventResponse) => void): Promise<DescribeParamsEventResponse>;
     /**
@@ -296,7 +296,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClasses(req: DescribeClassesRequest, cb?: (error: string, rep: DescribeClassesResponse) => void): Promise<DescribeClassesResponse>;
     /**
-     * 本接口（DescribeOrders）用于获取订单信息。
+     * 本接口（DescribeOrders）用于查询订单信息。
      */
     DescribeOrders(req: DescribeOrdersRequest, cb?: (error: string, rep: DescribeOrdersResponse) => void): Promise<DescribeOrdersResponse>;
     /**
@@ -316,7 +316,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupPlan(req: ModifyBackupPlanRequest, cb?: (error: string, rep: ModifyBackupPlanResponse) => void): Promise<ModifyBackupPlanResponse>;
     /**
-     * 本接口 (InitDBInstances) 用于初始化云数据库PostgreSQL实例。
+     * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
     /**
@@ -344,7 +344,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeReadOnlyGroups(req: DescribeReadOnlyGroupsRequest, cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void): Promise<DescribeReadOnlyGroupsResponse>;
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例配置。
+     * 本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
      */
     UpgradeDBInstance(req: UpgradeDBInstanceRequest, cb?: (error: string, rep: UpgradeDBInstanceResponse) => void): Promise<UpgradeDBInstanceResponse>;
     /**

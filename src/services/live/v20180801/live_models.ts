@@ -413,7 +413,7 @@ SourceType 为点播（PullVodPushLive）可以填多个，上限30个。
    * 开始时间。
 使用 UTC 格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+注意：北京时间值为 UTC 时间值 + 8 小时。
    */
   StartTime: string
   /**
@@ -423,7 +423,7 @@ SourceType 为点播（PullVodPushLive）可以填多个，上限30个。
 3. 结束时间 和 开始时间 间隔必须小于七天。
 使用 UTC 格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+注意：北京时间值为 UTC 时间值 + 8 小时。
    */
   EndTime: string
   /**
@@ -520,6 +520,10 @@ PullVodPushLive -点播。
 注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。
    */
   VodLocalMode?: number
+  /**
+   * 录制模板 ID。
+   */
+  RecordTemplateId?: string
 }
 
 /**

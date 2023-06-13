@@ -88,6 +88,16 @@ it("ssa.v20180608.DescribeComplianceAssetList", async function () {
     }
 })
 
+it("ssa.v20180608.DescribeDomainList", async function () {
+    try {
+       const data = await client.DescribeDomainList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeSocCheckItemList", async function () {
     try {
        const data = await client.DescribeSocCheckItemList({})

@@ -3,7 +3,7 @@
  */
 export interface CreateDBInstancesRequest {
     /**
-     * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+     * 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。
      */
     SpecCode: string;
     /**
@@ -31,7 +31,7 @@ export interface CreateDBInstancesRequest {
      */
     DBVersion?: string;
     /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。
      */
     InstanceChargeType?: string;
     /**
@@ -212,7 +212,7 @@ export interface OpenDBExtranetAccessRequest {
  */
 export interface CreateInstancesRequest {
     /**
-     * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+     * 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。
      */
     SpecCode: string;
     /**
@@ -252,7 +252,7 @@ export interface CreateInstancesRequest {
      */
     DBVersion?: string;
     /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。
      */
     InstanceChargeType?: string;
     /**
@@ -433,7 +433,7 @@ export interface CreateDBInstanceNetworkAccessResponse {
      * 流程ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -716,7 +716,7 @@ export interface InitDBInstancesResponse {
     /**
      * 实例ID集合。
      */
-    DBInstanceIdSet: Array<string>;
+    DBInstanceIdSet?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1276,11 +1276,11 @@ export interface DescribeOrdersResponse {
     /**
      * 订单数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 订单数组
      */
-    Deals: Array<PgDeal>;
+    Deals?: Array<PgDeal>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1340,15 +1340,15 @@ export interface InquiryPriceCreateDBInstancesResponse {
     /**
      * 刊例价，单位：分
      */
-    OriginalPrice: number;
+    OriginalPrice?: number;
     /**
      * 折后实际付款金额，单位：分
      */
-    Price: number;
+    Price?: number;
     /**
      * 币种。例如，CNY：人民币。
      */
-    Currency: string;
+    Currency?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1435,7 +1435,7 @@ export interface InquiryPriceCreateDBInstancesRequest {
      */
     Zone: string;
     /**
-     * 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。
+     * 规格ID。该参数可以通过调用DescribeClasses接口的返回值中的SpecCode字段来获取。
      */
     SpecCode: string;
     /**
@@ -2063,31 +2063,31 @@ export interface DescribeBackupSummariesResponse {
  */
 export interface DescribeDBErrlogsRequest {
     /**
-     * 实例ID，形如postgres-5bq3wfjd
+     * 实例ID。
      */
     DBInstanceId: string;
     /**
-     * 查询起始时间，形如2018-01-01 00:00:00，起始时间不得小于7天以前
+     * 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。
      */
     StartTime: string;
     /**
-     * 查询结束时间，形如2018-01-01 00:00:00
+     * 查询结束时间，形如2018-01-01 00:00:00。
      */
     EndTime: string;
     /**
-     * 数据库名字
+     * 数据库名字。
      */
     DatabaseName?: string;
     /**
-     * 搜索关键字
+     * 搜索关键字。
      */
     SearchKeys?: Array<string>;
     /**
-     * 分页返回，每页返回的最大数量。取值为1-100
+     * 每页显示数量，取值范围为1-100。默认值为50。
      */
     Limit?: number;
     /**
-     * 分页返回，返回第几页的数据，从第0页开始计数
+     * 数据偏移量，从0开始。默认值为0。
      */
     Offset?: number;
 }
@@ -2331,15 +2331,15 @@ export interface CreateInstancesResponse {
     /**
      * 订单号列表。每个实例对应一个订单号。
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 冻结流水号。
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 创建成功的实例ID集合，只在后付费情景下有返回值。
      */
-    DBInstanceIdSet: Array<string>;
+    DBInstanceIdSet?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2463,11 +2463,11 @@ export interface DescribeDBBackupsResponse {
     /**
      * 返回备份列表中备份文件的个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 备份列表
      */
-    BackupList: Array<DBBackup>;
+    BackupList?: Array<DBBackup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2646,11 +2646,11 @@ export interface DescribeParamsEventResponse {
     /**
      * 参数修改事件总数，以参数为统计粒度
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例参数修改事件详情
      */
-    EventItems: Array<EventItem>;
+    EventItems?: Array<EventItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2852,11 +2852,11 @@ export interface DescribeLogBackupsResponse {
     /**
      * 查询到的日志备份数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 日志备份详细信息列表。
      */
-    LogBackupSet: Array<LogBackup>;
+    LogBackupSet?: Array<LogBackup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3812,7 +3812,7 @@ export interface DescribeProductConfigResponse {
     /**
      * 售卖规格列表。
      */
-    SpecInfoList: Array<SpecInfo>;
+    SpecInfoList?: Array<SpecInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4094,13 +4094,13 @@ export interface DescribeParameterTemplateAttributesRequest {
  */
 export interface DescribeDBErrlogsResponse {
     /**
-     * 本次调用返回了多少条数据
+     * 查询到的日志数量，最大值为10000条。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
-     * 错误日志列表
+     * 错误日志详细信息集合。
      */
-    Details: Array<ErrLogDetail>;
+    Details?: Array<ErrLogDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4484,7 +4484,7 @@ export interface CreateReadOnlyGroupNetworkAccessResponse {
      * 流程ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4583,11 +4583,11 @@ export interface UpgradeDBInstanceResponse {
     /**
      * 交易名字。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 冻结流水号
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4723,11 +4723,11 @@ export interface ModifyDBInstanceSpecResponse {
     /**
      * 订单号。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 冻结流水号。
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4757,11 +4757,11 @@ export interface DescribeDBXlogsResponse {
     /**
      * 表示此次返回结果有多少条数据。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * Xlog列表
      */
-    XlogList: Array<Xlog>;
+    XlogList?: Array<Xlog>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4859,11 +4859,11 @@ export interface DescribeDBSlowlogsResponse {
     /**
      * 本次返回多少条数据
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 慢查询日志详情
      */
-    Detail: SlowlogDetail;
+    Detail?: SlowlogDetail;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4876,15 +4876,15 @@ export interface CreateDBInstancesResponse {
     /**
      * 订单号列表。每个实例对应一个订单号。
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 冻结流水号
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 创建成功的实例ID集合，只在后付费情景下有返回值
      */
-    DBInstanceIdSet: Array<string>;
+    DBInstanceIdSet?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

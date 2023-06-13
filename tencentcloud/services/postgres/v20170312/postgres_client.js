@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDefaultParameters", req, cb);
     }
     /**
-     * 本接口（DescribeDBErrlogs）用于获取错误日志。
+     * 本接口（DescribeDBErrlogs）用于查询错误日志。
      */
     async DescribeDBErrlogs(req, cb) {
         return this.request("DescribeDBErrlogs", req, cb);
@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteServerlessDBInstance", req, cb);
     }
     /**
-     * 可对实例进行网络的添加操作。
+     * 本接口（CreateDBInstanceNetworkAccess）用于创建实例网络。
      */
     async CreateDBInstanceNetworkAccess(req, cb) {
         return this.request("CreateDBInstanceNetworkAccess", req, cb);
@@ -124,13 +124,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParameterTemplates", req, cb);
     }
     /**
-     * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。
+     * 本接口（DescribeProductConfig）用于查询售卖规格配置。本接口已废弃，推荐使用新接口[DescribeClasses](https://cloud.tencent.com/document/api/409/89019)。
      */
     async DescribeProductConfig(req, cb) {
         return this.request("DescribeProductConfig", req, cb);
     }
     /**
-     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
+     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。本接口已于2021.09.01日废弃，后续此接口将不再返回任何数据，推荐使用接口[DescribeSlowQueryList](https://cloud.tencent.com/document/api/409/60540)替代。
      */
     async DescribeDBSlowlogs(req, cb) {
         return this.request("DescribeDBSlowlogs", req, cb);
@@ -154,7 +154,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyDBInstance", req, cb);
     }
     /**
-     * 本接口（DescribeDBBackups）用于查询实例备份列表。
+     * 本接口（DescribeDBBackups）用于查询实例备份列表。本接口已废弃，推荐使用接口[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)替代。
      */
     async DescribeDBBackups(req, cb) {
         return this.request("DescribeDBBackups", req, cb);
@@ -214,7 +214,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceParameters", req, cb);
     }
     /**
-     * 本接口 (DescribeBaseBackups) 用于查询基础备份列表。
+     * 本接口（DescribeBaseBackups）用于查询基础备份列表。
      */
     async DescribeBaseBackups(req, cb) {
         return this.request("DescribeBaseBackups", req, cb);
@@ -298,7 +298,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupOverview", req, cb);
     }
     /**
-     * 可对RO组进行网络的添加操作。
+     * 本接口（CreateReadOnlyGroupNetworkAccess）用于创建RO组的网络。
      */
     async CreateReadOnlyGroupNetworkAccess(req, cb) {
         return this.request("CreateReadOnlyGroupNetworkAccess", req, cb);
@@ -346,7 +346,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。
+     * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。本接口已废弃，推荐使用接口[DescribeLogBackups](https://cloud.tencent.com/document/api/409/89021)替代。
      */
     async DescribeDBXlogs(req, cb) {
         return this.request("DescribeDBXlogs", req, cb);
@@ -358,7 +358,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceAttribute", req, cb);
     }
     /**
-     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
+     * 本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     async CreateDBInstances(req, cb) {
         return this.request("CreateDBInstances", req, cb);
@@ -376,7 +376,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateDBInstances", req, cb);
     }
     /**
-     * 本接口（DeleteBaseBackup）用于修改实例指定全量备份的过期时间。
+     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定全量备份的过期时间。
      */
     async ModifyBaseBackupExpireTime(req, cb) {
         return this.request("ModifyBaseBackupExpireTime", req, cb);
@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowQueryList", req, cb);
     }
     /**
-     * 本接口 (DescribeLogBackups) 用于查询日志备份列表。
+     * 本接口（DescribeLogBackups）用于查询日志备份列表。
      */
     async DescribeLogBackups(req, cb) {
         return this.request("DescribeLogBackups", req, cb);
@@ -448,7 +448,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
-     * 获取参数修改事件详情
+     * 本接口 (DescribeParamsEvent) 用于查询参数修改事件详情。
      */
     async DescribeParamsEvent(req, cb) {
         return this.request("DescribeParamsEvent", req, cb);
@@ -460,7 +460,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClasses", req, cb);
     }
     /**
-     * 本接口（DescribeOrders）用于获取订单信息。
+     * 本接口（DescribeOrders）用于查询订单信息。
      */
     async DescribeOrders(req, cb) {
         return this.request("DescribeOrders", req, cb);
@@ -490,7 +490,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupPlan", req, cb);
     }
     /**
-     * 本接口 (InitDBInstances) 用于初始化云数据库PostgreSQL实例。
+     * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     async InitDBInstances(req, cb) {
         return this.request("InitDBInstances", req, cb);
@@ -532,7 +532,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReadOnlyGroups", req, cb);
     }
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例配置。
+     * 本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
      */
     async UpgradeDBInstance(req, cb) {
         return this.request("UpgradeDBInstance", req, cb);

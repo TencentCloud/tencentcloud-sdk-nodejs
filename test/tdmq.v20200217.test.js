@@ -88,6 +88,16 @@ it("tdmq.v20200217.DeleteCmqQueue", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyRabbitMQVirtualHost", async function () {
+    try {
+       const data = await client.ModifyRabbitMQVirtualHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeCmqTopics", async function () {
     try {
        const data = await client.DescribeCmqTopics({})
@@ -398,6 +408,16 @@ it("tdmq.v20200217.DescribeCmqSubscriptionDetail", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
+    try {
+       const data = await client.DescribeRabbitMQVirtualHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateAMQPCluster", async function () {
     try {
        const data = await client.CreateAMQPCluster({})
@@ -501,6 +521,16 @@ it("tdmq.v20200217.DescribeCmqTopicDetail", async function () {
 it("tdmq.v20200217.DescribeRocketMQVipInstanceDetail", async function () {
     try {
        const data = await client.DescribeRocketMQVipInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRabbitMQUser", async function () {
+    try {
+       const data = await client.DescribeRabbitMQUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +798,16 @@ it("tdmq.v20200217.ModifyRocketMQCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteRabbitMQUser", async function () {
+    try {
+       const data = await client.DeleteRabbitMQUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DeleteRoles", async function () {
     try {
        const data = await client.DeleteRoles({})
@@ -808,6 +848,16 @@ it("tdmq.v20200217.ModifyAMQPExchange", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteRabbitMQVirtualHost", async function () {
+    try {
+       const data = await client.DeleteRabbitMQVirtualHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.SendCmqMsg", async function () {
     try {
        const data = await client.SendCmqMsg({})
@@ -841,6 +891,16 @@ it("tdmq.v20200217.DescribeRoles", async function () {
 it("tdmq.v20200217.UnbindCmqDeadLetter", async function () {
     try {
        const data = await client.UnbindCmqDeadLetter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyRabbitMQUser", async function () {
+    try {
+       const data = await client.ModifyRabbitMQUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1091,6 +1151,16 @@ it("tdmq.v20200217.DeleteCmqSubscribe", async function () {
 it("tdmq.v20200217.ModifyRole", async function () {
     try {
        const data = await client.ModifyRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRabbitMQVirtualHostList", async function () {
+    try {
+       const data = await client.DescribeRabbitMQVirtualHostList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

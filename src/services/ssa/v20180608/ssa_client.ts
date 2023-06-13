@@ -29,15 +29,17 @@ import {
   DescribeAssetListResponse,
   DescribeCheckConfigAssetListResponse,
   QueryFilter,
+  QueryFilterV3,
   SocComplianceItem,
   SaEventPubResponse,
   DescribeVulListRequest,
   DescribeLeakDetectionListRequest,
   DescribeSocAlertListRequest,
+  DomainInfo,
   DescribeConfigListRequest,
   DescribeComplianceDetailResponse,
   SocCheckItem,
-  Tag,
+  DescribeComplianceAssetListRequest,
   DescribeAssetDetailListRequest,
   AlertDetail,
   DescribeMappingResultsResponse,
@@ -46,7 +48,7 @@ import {
   DescribeSocCheckResultListResponse,
   DescribeCheckConfigDetailRequest,
   DescribeAssetListRequest,
-  DescribeComplianceAssetListRequest,
+  Tag,
   DescribeEventDetailResponse,
   SaDivulgeDataQueryPubList,
   AssetQueryFilter,
@@ -56,6 +58,7 @@ import {
   AssetList,
   VulList,
   DescribeSocCheckItemListRspRsp,
+  DescribeDomainListResponse,
   DataCompliance,
   DescribeSocCspmComplianceRequest,
   QuerySort,
@@ -85,6 +88,7 @@ import {
   DescribeComplianceAssetListResponse,
   DataCheck,
   SaDivulgeDataQueryPub,
+  DescribeDomainListRequest,
   CheckConfigDetail,
   DescribeAssetsMappingListResponse,
   DescribeComplianceListRequest,
@@ -183,6 +187,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeComplianceAssetListResponse) => void
   ): Promise<DescribeComplianceAssetListResponse> {
     return this.request("DescribeComplianceAssetList", req, cb)
+  }
+
+  /**
+   * 域名列表信息啊
+   */
+  async DescribeDomainList(
+    req: DescribeDomainListRequest,
+    cb?: (error: string, rep: DescribeDomainListResponse) => void
+  ): Promise<DescribeDomainListResponse> {
+    return this.request("DescribeDomainList", req, cb)
   }
 
   /**

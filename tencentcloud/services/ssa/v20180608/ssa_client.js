@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeComplianceAssetList", req, cb);
     }
     /**
+     * 域名列表信息啊
+     */
+    async DescribeDomainList(req, cb) {
+        return this.request("DescribeDomainList", req, cb);
+    }
+    /**
      * 云安全配置检查项列表
      */
     async DescribeSocCheckItemList(req, cb) {

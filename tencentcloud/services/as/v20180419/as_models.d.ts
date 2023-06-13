@@ -547,6 +547,12 @@ export interface Advice {
      * 建议解决方案。
      */
     Solution: string;
+    /**
+     * 伸缩建议警告级别。取值范围：<br>
+  <li>WARNING：警告级别<br>
+  <li>CRITICAL：严重级别<br>
+     */
+    Level?: string;
 }
 /**
  * CreateLifecycleHook返回参数结构体
@@ -1763,7 +1769,7 @@ export interface DescribeAutoScalingAdvicesResponse {
     /**
      * 伸缩组配置建议集合。
      */
-    AutoScalingAdviceSet: Array<AutoScalingAdvice>;
+    AutoScalingAdviceSet?: Array<AutoScalingAdvice>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2558,7 +2564,7 @@ export interface ScaleOutInstancesResponse {
     /**
      * 伸缩活动ID。
      */
-    ActivityId: string;
+    ActivityId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

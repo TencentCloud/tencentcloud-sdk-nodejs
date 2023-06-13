@@ -1778,10 +1778,6 @@ export interface ModifySqlFiltersRequest {
    */
   InstanceId: string
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
-   */
-  SessionToken: string
-  /**
    * SQL限流任务ID列表。
    */
   FilterIds: Array<number>
@@ -1789,6 +1785,10 @@ export interface ModifySqlFiltersRequest {
    * 限流任务状态，取值支持TERMINATED - 终止。
    */
   Status: string
+  /**
+   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   */
+  SessionToken?: string
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -1904,10 +1904,6 @@ export interface CreateSqlFilterRequest {
    */
   InstanceId: string
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
-   */
-  SessionToken: string
-  /**
    * SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
    */
   SqlType: string
@@ -1923,6 +1919,10 @@ export interface CreateSqlFilterRequest {
    * 限流时长，单位秒，支持-1和小于2147483647的正整数，-1表示永不过期。
    */
   Duration: number
+  /**
+   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   */
+  SessionToken?: string
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
@@ -2221,7 +2221,7 @@ export interface CreateSqlFilterResponse {
   /**
    * 限流任务ID。
    */
-  FilterId: number
+  FilterId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3355,13 +3355,13 @@ export interface DeleteSqlFiltersRequest {
    */
   InstanceId: string
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
-   */
-  SessionToken: string
-  /**
    * 限流任务ID列表。
    */
   FilterIds: Array<number>
+  /**
+   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   */
+  SessionToken?: string
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */

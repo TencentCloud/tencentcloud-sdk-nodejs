@@ -238,6 +238,7 @@ import {
   ShipInvoiceOCRRequest,
   SealOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
+  MedicalInvoice,
   TextTable,
   RecognizeTableAccurateOCRResponse,
   ResidenceBookletOCRRequest,
@@ -1577,7 +1578,7 @@ export class Client extends AbstractClient {
           <td> 16 </td>
         </tr>
         <tr>
-          <td> VatElectronicSpecialInvoiceFull</td>
+          <td> VatElectronicInvoiceFull</td>
           <td> 电子发票(普通发票) </td>
           <td> 16 </td>
         </tr>
@@ -1645,6 +1646,16 @@ export class Client extends AbstractClient {
           <td> TollInvoice </td>
           <td> 过路过桥费发票 </td>
           <td> 13 </td>
+        </tr>
+        <tr>
+          <td> MedicalOutpatientInvoice </td>
+          <td> 医疗门诊收费票据（电子） </td>
+          <td> 17 </td>
+        </tr>
+        <tr>
+          <td> MedicalHospitalizedInvoice </td>
+          <td> 医疗住院收费票据（电子） </td>
+          <td> 17 </td>
         </tr>
         <tr>
           <td> OtherInvoice </td>

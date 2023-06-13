@@ -1005,6 +1005,10 @@ export interface UpdateRecordDetails {
      * 部署资源详情列表
      */
     List: Array<UpdateRecordDetail>;
+    /**
+     * 该部署资源总数
+     */
+    TotalCount?: number;
 }
 /**
  * DescribeCertificateDetail返回参数结构体
@@ -1316,12 +1320,12 @@ export interface UpdateRecordDetail {
      */
     InstanceName: string;
     /**
-     * 部署监听器ID
+     * 部署监听器ID（CLB专用）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ListenerId: string;
     /**
-     * 部署监听器名称
+     * 部署监听器名称（CLB专用）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ListenerName: string;
@@ -1331,15 +1335,30 @@ export interface UpdateRecordDetail {
      */
     Protocol: string;
     /**
-     * 是否开启SNI
+     * 是否开启SNI（CLB专用）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SniSwitch: number;
     /**
-     * bucket名称
+     * bucket名称（COS专用）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket: string;
+    /**
+     * 端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 命名空间（TKE专用）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * secret名称（TKE专用）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecretName?: string;
 }
 /**
  * ApplyCertificate返回参数结构体
@@ -1348,7 +1367,7 @@ export interface ApplyCertificateResponse {
     /**
      * 证书 ID。
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1429,6 +1448,14 @@ export interface DescribeHostUpdateRecordDetailRequest {
      * 待部署的证书ID
      */
     DeployRecordId: string;
+    /**
+     * 每页数量，默认10。
+     */
+    Limit?: string;
+    /**
+     * 分页偏移量，从0开始。
+     */
+    Offset?: string;
 }
 /**
  * ReplaceCertificate返回参数结构体
@@ -2887,27 +2914,27 @@ export interface DescribeHostUpdateRecordDetailResponse {
      * 总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 证书部署记录列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordDetailList: Array<UpdateRecordDetails>;
+    RecordDetailList?: Array<UpdateRecordDetails>;
     /**
      * 成功总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuccessTotalCount: number;
+    SuccessTotalCount?: number;
     /**
      * 失败总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedTotalCount: number;
+    FailedTotalCount?: number;
     /**
      * 部署中总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunningTotalCount: number;
+    RunningTotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3557,11 +3584,11 @@ export interface ApplyCertificateRequest {
      */
     ValidityPeriod?: string;
     /**
-     * 加密算法，仅支持 RSA。
+     * 加密算法，支持 RSA及ECC。
      */
     CsrEncryptAlgo?: string;
     /**
-     * 密钥对参数，仅支持2048。
+     * 密钥对参数，RSA仅支持2048。ECC仅支持prime256v1
      */
     CsrKeyParameter?: string;
     /**

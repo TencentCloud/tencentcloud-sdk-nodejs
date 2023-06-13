@@ -4088,7 +4088,7 @@ export interface DescribeStreamLinkEventAttachedFlowsRequest {
    */
   PageNum?: number
   /**
-   * 每页大小，默认10。
+   * 每页大小，默认1000。
    */
   PageSize?: number
 }
@@ -9525,11 +9525,11 @@ export interface DescribeStreamLinkEventAttachedFlowsResponse {
   /**
    * 流的配置信息列表。
    */
-  Infos: Array<DescribeFlow>
+  Infos?: Array<DescribeFlow>
   /**
    * 总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12924,7 +12924,7 @@ export interface CreateStreamLinkInputResponse {
   /**
    * 创建的Flow信息。
    */
-  Info: DescribeFlow
+  Info?: DescribeFlow
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

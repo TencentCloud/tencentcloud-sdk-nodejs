@@ -2800,6 +2800,10 @@ export interface CreateConfigRequest {
    * 用户自定义采集规则，Json格式序列化的字符串
    */
   UserDefineRule?: string
+  /**
+   * 高级采集配置
+   */
+  AdvancedConfig?: string
 }
 
 /**
@@ -3512,7 +3516,7 @@ export interface CreateConfigResponse {
   /**
    * 采集配置ID
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

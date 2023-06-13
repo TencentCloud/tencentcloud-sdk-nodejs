@@ -358,6 +358,27 @@ export interface QueryFilter {
     FilterValue?: string;
 }
 /**
+ * 过滤
+ */
+export interface QueryFilterV3 {
+    /**
+     * 过滤条件
+     */
+    Filter?: QueryFilter;
+    /**
+     * 有无子条件
+     */
+    HasSub?: boolean;
+    /**
+     * 查询条件
+     */
+    SubFilters?: Array<QueryFilter>;
+    /**
+     * 逻辑操作(只支持32位)
+     */
+    Logic?: number;
+}
+/**
  * soc合规信息
  */
 export interface SocComplianceItem {
@@ -479,6 +500,75 @@ export interface DescribeSocAlertListRequest {
     ExportFlag?: boolean;
 }
 /**
+ * 域名列表
+ */
+export interface DomainInfo {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain: string;
+    /**
+     * 解析地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResolveAddr: Array<string>;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: Array<string>;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType: Array<string>;
+    /**
+     * 漏洞风险
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskVulCount: number;
+    /**
+     * 敏感内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SensitiveCount: number;
+    /**
+     * 挂马暗链
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HorseLinkCount: number;
+    /**
+     * 网页篡改
+     */
+    WebModifyCount: number;
+    /**
+     * 上次扫描时间
+     */
+    ScanTime: string;
+    /**
+     * 最近发现时间
+     */
+    DiscoverTime: string;
+    /**
+     * 扫描次数
+     */
+    ScanTaskCount: number;
+    /**
+     * 端口
+     */
+    PortRisk: number;
+    /**
+     * 弱口令
+     */
+    WeekPwdCount: number;
+    /**
+     * -
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetLocation: string;
+}
+/**
  * DescribeConfigList请求参数结构体
  */
 export interface DescribeConfigListRequest {
@@ -526,17 +616,29 @@ export interface SocCheckItem {
     FailCount: number;
 }
 /**
- * 标签
+ * DescribeComplianceAssetList请求参数结构体
  */
-export interface Tag {
+export interface DescribeComplianceAssetListRequest {
     /**
-     * 数据库标识
+     * 页码
      */
-    Fid?: number;
+    Offset: number;
     /**
-     * 标签名称字段
+     * 每页数量
      */
-    Fname?: string;
+    Limit: number;
+    /**
+     * 检查项uuid
+     */
+    Id: string;
+    /**
+     * 过滤条件
+     */
+    Filter?: Array<Filter>;
+    /**
+     * 查询条件
+     */
+    Search?: Array<Filter>;
 }
 /**
  * DescribeAssetDetailList请求参数结构体
@@ -809,29 +911,17 @@ export interface DescribeAssetListRequest {
     Params: string;
 }
 /**
- * DescribeComplianceAssetList请求参数结构体
+ * 标签
  */
-export interface DescribeComplianceAssetListRequest {
+export interface Tag {
     /**
-     * 页码
+     * 数据库标识
      */
-    Offset: number;
+    Fid?: number;
     /**
-     * 每页数量
+     * 标签名称字段
      */
-    Limit: number;
-    /**
-     * 检查项uuid
-     */
-    Id: string;
-    /**
-     * 过滤条件
-     */
-    Filter?: Array<Filter>;
-    /**
-     * 查询条件
-     */
-    Search?: Array<Filter>;
+    Fname?: string;
 }
 /**
  * DescribeEventDetail返回参数结构体
@@ -1050,6 +1140,23 @@ export interface DescribeSocCheckItemListRspRsp {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Total: number;
+}
+/**
+ * DescribeDomainList返回参数结构体
+ */
+export interface DescribeDomainListResponse {
+    /**
+     * 无
+     */
+    Total: number;
+    /**
+     * 无
+     */
+    DomainInfoCollection: Array<DomainInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 合规检查项详情对象
@@ -2284,6 +2391,59 @@ export interface SaDivulgeDataQueryPub {
      * 事件更新时间
      */
     UpdateTime: string;
+}
+/**
+ * DescribeDomainList请求参数结构体
+ */
+export interface DescribeDomainListRequest {
+    /**
+     * -
+     */
+    Offset?: number;
+    /**
+     * -
+     */
+    Limit?: number;
+    /**
+     * -
+     */
+    AssetBasicType?: number;
+    /**
+     * -
+     */
+    Filter?: Array<QueryFilterV3>;
+    /**
+     * -
+     */
+    Order?: string;
+    /**
+     * -
+     */
+    By?: string;
+    /**
+     * -
+     */
+    Field?: Array<string>;
+    /**
+     * -
+     */
+    TimeRange?: number;
+    /**
+     * -
+     */
+    Logic?: number;
+    /**
+     * -
+     */
+    GroupByField?: string;
+    /**
+     * -
+     */
+    Task?: string;
+    /**
+     * -
+     */
+    RequestFrom?: number;
 }
 /**
  * 云安全配置检查项详情

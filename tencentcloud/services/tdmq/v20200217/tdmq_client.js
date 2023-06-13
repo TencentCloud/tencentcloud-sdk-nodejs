@@ -72,6 +72,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqQueue", req, cb);
     }
     /**
+     * 修改RabbitMQ的vhost
+     */
+    async ModifyRabbitMQVirtualHost(req, cb) {
+        return this.request("ModifyRabbitMQVirtualHost", req, cb);
+    }
+    /**
      * 枚举cmq全量主题
      */
     async DescribeCmqTopics(req, cb) {
@@ -263,6 +269,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
+     * 查询RabbitMQ vhost列表
+     */
+    async DescribeRabbitMQVirtualHost(req, cb) {
+        return this.request("DescribeRabbitMQVirtualHost", req, cb);
+    }
+    /**
      * 产品下线了，对应的接口也要下线。
 
 创建AMQP集群
@@ -333,6 +345,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRocketMQVipInstanceDetail(req, cb) {
         return this.request("DescribeRocketMQVipInstanceDetail", req, cb);
+    }
+    /**
+     * 查询RabbitMQ用户列表
+     */
+    async DescribeRabbitMQUser(req, cb) {
+        return this.request("DescribeRabbitMQUser", req, cb);
     }
     /**
      * 产品下线了，对应的接口也要下线。
@@ -509,6 +527,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRocketMQCluster", req, cb);
     }
     /**
+     * 删除RabbitMQ的用户
+     */
+    async DeleteRabbitMQUser(req, cb) {
+        return this.request("DeleteRabbitMQUser", req, cb);
+    }
+    /**
      * 删除角色，支持批量。
      */
     async DeleteRoles(req, cb) {
@@ -557,6 +581,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyAMQPExchange", req, cb);
     }
     /**
+     * 删除RabbitMQ的vhost
+     */
+    async DeleteRabbitMQVirtualHost(req, cb) {
+        return this.request("DeleteRabbitMQVirtualHost", req, cb);
+    }
+    /**
      * 发送cmq消息
      */
     async SendCmqMsg(req, cb) {
@@ -579,6 +609,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async UnbindCmqDeadLetter(req, cb) {
         return this.request("UnbindCmqDeadLetter", req, cb);
+    }
+    /**
+     * 修改RabbitMQ的用户
+     */
+    async ModifyRabbitMQUser(req, cb) {
+        return this.request("ModifyRabbitMQUser", req, cb);
     }
     /**
      * 创建RocketMQ命名空间
@@ -735,6 +771,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async ModifyRole(req, cb) {
         return this.request("ModifyRole", req, cb);
+    }
+    /**
+     * RabbitMQ专享版查询虚拟主机列表
+     */
+    async DescribeRabbitMQVirtualHostList(req, cb) {
+        return this.request("DescribeRabbitMQVirtualHostList", req, cb);
     }
     /**
      * 获取某个租户的虚拟集群列表

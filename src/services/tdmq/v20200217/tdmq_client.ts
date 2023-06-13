@@ -21,12 +21,15 @@ import {
   DescribeRolesResponse,
   RabbitMQClusterAccessInfo,
   DescribeAMQPRouteRelationsRequest,
+  DescribeRabbitMQVirtualHostResponse,
   CmqDeadLetterPolicy,
   DescribeNamespaceBundlesOptRequest,
+  DeleteRabbitMQUserRequest,
   RocketMQNamespace,
   DescribeSubscriptionsRequest,
-  InstanceNodeDistribution,
+  DescribeRocketMQGroupsRequest,
   CreateRocketMQGroupRequest,
+  ModifyRabbitMQVirtualHostRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
   SendBatchMessagesResponse,
@@ -42,7 +45,7 @@ import {
   Sort,
   ModifyClusterResponse,
   VpcConfig,
-  RocketMQClusterRecentStats,
+  RabbitMQPrivateVirtualHost,
   RocketMQVipInstance,
   RabbitMQVipInstance,
   DescribeCmqQueuesResponse,
@@ -69,12 +72,15 @@ import {
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
   Topic,
-  SendCmqMsgResponse,
+  RabbitMQVirtualHostInfo,
+  InstanceNodeDistribution,
   ExchangeQuota,
   DescribeCmqTopicDetailResponse,
+  ModifyRabbitMQVirtualHostResponse,
   Environment,
   CmqQueue,
   CreateEnvironmentResponse,
+  RabbitMQVirtualHostStatistics,
   CreateSubscriptionResponse,
   DeleteAMQPQueueResponse,
   ModifyCmqTopicAttributeResponse,
@@ -120,6 +126,7 @@ import {
   ModifyCmqQueueAttributeResponse,
   DeleteEnvironmentRolesResponse,
   DescribeClusterDetailRequest,
+  DescribeRabbitMQUserResponse,
   ModifyRoleResponse,
   ModifyAMQPQueueRequest,
   Tag,
@@ -166,10 +173,14 @@ import {
   CreateRocketMQGroupResponse,
   CreateEnvironmentRoleRequest,
   DescribeEnvironmentRolesRequest,
+  DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
   SendMsgResponse,
+  RocketMQClusterRecentStats,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
+  DescribeRabbitMQUserRequest,
+  RabbitMQUser,
   DescribeRocketMQTopicsResponse,
   CreateAMQPVHostRequest,
   RocketMQClusterDetail,
@@ -185,6 +196,7 @@ import {
   DescribeRolesRequest,
   CreateAMQPQueueResponse,
   CreateClusterRequest,
+  DescribeRabbitMQVirtualHostListRequest,
   DescribeAMQPClustersRequest,
   CreateAMQPRouteRelationResponse,
   CreateTopicResponse,
@@ -200,9 +212,11 @@ import {
   CreateAMQPClusterResponse,
   DescribeRocketMQVipInstancesRequest,
   DeleteAMQPExchangeRequest,
+  DeleteRabbitMQVirtualHostRequest,
   DeleteRocketMQClusterResponse,
   RabbitMQClusterInfo,
   CreateCmqTopicResponse,
+  SendCmqMsgResponse,
   CmqDeadLetterSource,
   ModifyRabbitMQVipInstanceResponse,
   ClearCmqSubscriptionFilterTagsResponse,
@@ -252,9 +266,10 @@ import {
   DescribeEnvironmentAttributesRequest,
   DeleteEnvironmentRolesRequest,
   ClearCmqQueueResponse,
+  ModifyRabbitMQUserResponse,
   CreateAMQPExchangeResponse,
   DescribeNodeHealthOptRequest,
-  DescribeBindClustersRequest,
+  DeleteRabbitMQVirtualHostResponse,
   CreateRocketMQTopicResponse,
   CreateRabbitMQVirtualHostRequest,
   EnvironmentRole,
@@ -262,8 +277,9 @@ import {
   CreateCmqQueueRequest,
   ModifyEnvironmentRoleResponse,
   DeleteCmqQueueRequest,
-  DescribeRocketMQGroupsRequest,
-  DescribeRocketMQClustersResponse,
+  DeleteRabbitMQUserResponse,
+  DescribeRabbitMQVirtualHostListResponse,
+  DescribeBindClustersRequest,
   DescribePulsarProInstanceDetailRequest,
   CreateRabbitMQUserRequest,
   CreateRoleRequest,
@@ -292,6 +308,7 @@ import {
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
   SendCmqMsgRequest,
+  ModifyRabbitMQUserRequest,
   ModifyCmqQueueAttributeRequest,
   ModifyRocketMQGroupResponse,
   DescribeRocketMQVipInstancesResponse,
@@ -303,6 +320,7 @@ import {
   DeleteAMQPVHostResponse,
   DeleteAMQPVHostRequest,
   DescribeAllTenantsRequest,
+  DescribeRabbitMQVirtualHostRequest,
 } from "./tdmq_models"
 
 /**
@@ -384,6 +402,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCmqQueueResponse) => void
   ): Promise<DeleteCmqQueueResponse> {
     return this.request("DeleteCmqQueue", req, cb)
+  }
+
+  /**
+   * 修改RabbitMQ的vhost
+   */
+  async ModifyRabbitMQVirtualHost(
+    req: ModifyRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: ModifyRabbitMQVirtualHostResponse) => void
+  ): Promise<ModifyRabbitMQVirtualHostResponse> {
+    return this.request("ModifyRabbitMQVirtualHost", req, cb)
   }
 
   /**
@@ -702,6 +730,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询RabbitMQ vhost列表
+   */
+  async DescribeRabbitMQVirtualHost(
+    req: DescribeRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void
+  ): Promise<DescribeRabbitMQVirtualHostResponse> {
+    return this.request("DescribeRabbitMQVirtualHost", req, cb)
+  }
+
+  /**
      * 产品下线了，对应的接口也要下线。
 
 创建AMQP集群
@@ -815,6 +853,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQVipInstanceDetailResponse) => void
   ): Promise<DescribeRocketMQVipInstanceDetailResponse> {
     return this.request("DescribeRocketMQVipInstanceDetail", req, cb)
+  }
+
+  /**
+   * 查询RabbitMQ用户列表
+   */
+  async DescribeRabbitMQUser(
+    req: DescribeRabbitMQUserRequest,
+    cb?: (error: string, rep: DescribeRabbitMQUserResponse) => void
+  ): Promise<DescribeRabbitMQUserResponse> {
+    return this.request("DescribeRabbitMQUser", req, cb)
   }
 
   /**
@@ -1096,6 +1144,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除RabbitMQ的用户
+   */
+  async DeleteRabbitMQUser(
+    req: DeleteRabbitMQUserRequest,
+    cb?: (error: string, rep: DeleteRabbitMQUserResponse) => void
+  ): Promise<DeleteRabbitMQUserResponse> {
+    return this.request("DeleteRabbitMQUser", req, cb)
+  }
+
+  /**
    * 删除角色，支持批量。
    */
   async DeleteRoles(
@@ -1160,6 +1218,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * 删除RabbitMQ的vhost
+   */
+  async DeleteRabbitMQVirtualHost(
+    req: DeleteRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: DeleteRabbitMQVirtualHostResponse) => void
+  ): Promise<DeleteRabbitMQVirtualHostResponse> {
+    return this.request("DeleteRabbitMQVirtualHost", req, cb)
+  }
+
+  /**
    * 发送cmq消息
    */
   async SendCmqMsg(
@@ -1197,6 +1265,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: UnbindCmqDeadLetterResponse) => void
   ): Promise<UnbindCmqDeadLetterResponse> {
     return this.request("UnbindCmqDeadLetter", req, cb)
+  }
+
+  /**
+   * 修改RabbitMQ的用户
+   */
+  async ModifyRabbitMQUser(
+    req: ModifyRabbitMQUserRequest,
+    cb?: (error: string, rep: ModifyRabbitMQUserResponse) => void
+  ): Promise<ModifyRabbitMQUserResponse> {
+    return this.request("ModifyRabbitMQUser", req, cb)
   }
 
   /**
@@ -1453,6 +1531,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: ModifyRoleResponse) => void
   ): Promise<ModifyRoleResponse> {
     return this.request("ModifyRole", req, cb)
+  }
+
+  /**
+   * RabbitMQ专享版查询虚拟主机列表
+   */
+  async DescribeRabbitMQVirtualHostList(
+    req: DescribeRabbitMQVirtualHostListRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVirtualHostListResponse) => void
+  ): Promise<DescribeRabbitMQVirtualHostListResponse> {
+    return this.request("DescribeRabbitMQVirtualHostList", req, cb)
   }
 
   /**
